@@ -77,7 +77,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAimeos()
 	{
-		$this->assertInstanceOf( '\Aimeos\Aimeos', $this->object->getAimeosPublic() );
+		$this->assertInstanceOf( '\Aimeos\Bootstrap', $this->object->getAimeosPublic() );
 	}
 
 

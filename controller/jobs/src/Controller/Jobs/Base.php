@@ -27,9 +27,9 @@ abstract class Base
 	 * Initializes the object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos main object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap main object
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos )
 	{
 		$this->context = $context;
 		$this->aimeos = $aimeos;
@@ -48,9 +48,9 @@ abstract class Base
 
 
 	/**
-	 * Returns the \Aimeos\Aimeos object.
+	 * Returns the \Aimeos\Bootstrap object.
 	 *
-	 * @return \Aimeos\Aimeos \Aimeos\Aimeos object
+	 * @return \Aimeos\Bootstrap \Aimeos\Bootstrap object
 	 */
 	protected function getAimeos()
 	{

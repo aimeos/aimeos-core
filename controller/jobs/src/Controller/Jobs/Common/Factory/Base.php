@@ -40,12 +40,12 @@ abstract class Base
 	 * Adds the decorators to the controller object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
 	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Controller\Jobs\Attribute\Decorator\"
 	 * @return \Aimeos\Controller\Jobs\Common\Iface Controller object
 	 */
-	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		\Aimeos\Controller\Jobs\Iface $controller, array $decorators, $classprefix )
 	{
 		$iface = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\Iface';
@@ -79,12 +79,12 @@ abstract class Base
 	 * Adds the decorators to the controller object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
 	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
 	 * @param string $domain Domain name in lower case, e.g. "product"
 	 * @return \Aimeos\Controller\Jobs\Common\Iface Controller object
 	 */
-	protected static function addControllerDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+	protected static function addControllerDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		\Aimeos\Controller\Jobs\Iface $controller, $domain )
 	{
 		if( !is_string( $domain ) || $domain === '' ) {
@@ -145,12 +145,12 @@ abstract class Base
 	 * Creates a controller object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
 	 * @param string $classname Name of the controller class
 	 * @param string $interface Name of the controller interface
 	 * @return \Aimeos\Controller\Jobs\Common\Iface Controller object
 	 */
-	protected static function createControllerBase( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+	protected static function createControllerBase( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		$classname, $interface )
 	{
 		if( isset( self::$objects[$classname] ) ) {

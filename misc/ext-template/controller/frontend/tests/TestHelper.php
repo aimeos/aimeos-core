@@ -39,11 +39,11 @@ class TestHelper
 	{
 		if( !isset( self::$aimeos ) )
 		{
-			require_once 'Aimeos.php';
+			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos::autoload' );
 
 			$extdir = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
-			self::$aimeos = new \Aimeos\Aimeos( array( $extdir ), false );
+			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );
 		}
 
 		return self::$aimeos;

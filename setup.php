@@ -94,7 +94,7 @@ try
 
 	require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-	$aimeos = new \Aimeos\Aimeos( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
+	$aimeos = new \Aimeos\Bootstrap( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
 
 
 	$taskPaths = $aimeos->getSetupPaths( $parent );

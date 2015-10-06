@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright \Aimeos\Aimeos (aimeos.org), 2015
+ * @copyright \Aimeos\Bootstrap (aimeos.org), 2015
  * @package Controller
  * @subpackage Jobs
  */
@@ -25,11 +25,11 @@ class Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
 	 * @param string|null $name Name of the controller or "Default" if null
 	 * @return \Aimeos\Controller\Jobs\Iface New controller object
 	 */
-	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos, $name = null )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $name = null )
 	{
 		/** classes/controller/jobs/product/export/sitemap/name
 		 * Class name of the used product suggestions scheduler controller implementation

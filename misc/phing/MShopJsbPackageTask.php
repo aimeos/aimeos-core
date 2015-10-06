@@ -27,10 +27,10 @@ class MShopJsbPackageTask extends Task
 		$ds = DIRECTORY_SEPARATOR;
 		$this->projectPath = realpath( dirname( __FILE__ ) . $ds . '..' . $ds . '..' );
 
-		require_once $this->projectPath . $ds . 'Aimeos.php';
+		require_once $this->projectPath . $ds . 'Bootstrap.php';
 		spl_autoload_register( 'Aimeos::autoload' );
 
-		$this->aimeos = new \Aimeos\Aimeos();
+		$this->aimeos = new \Aimeos\Bootstrap();
 
 		$incPath = $this->aimeos->getIncludePaths();
 		$incPath[] = get_include_path();

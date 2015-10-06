@@ -31,7 +31,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		\Aimeos\Controller\Jobs\Iface $controller )
 	{
 		$this->context = $context;
@@ -103,9 +103,9 @@ abstract class Base
 
 
 	/**
-	 * Returns the \Aimeos\Aimeos object.
+	 * Returns the \Aimeos\Bootstrap object.
 	 *
-	 * @return \Aimeos\Aimeos \Aimeos\Aimeos object
+	 * @return \Aimeos\Bootstrap \Aimeos\Bootstrap object
 	 */
 	protected function getAimeos()
 	{

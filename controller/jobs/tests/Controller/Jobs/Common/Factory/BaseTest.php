@@ -114,13 +114,13 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 class TestAbstract
 	extends \Aimeos\Controller\Jobs\Common\Factory\Base
 {
-	public static function addDecoratorsPublic( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+	public static function addDecoratorsPublic( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		\Aimeos\Controller\Jobs\Iface $controller, array $decorators, $classprefix )
 	{
 		self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 	}
 
-	public static function addControllerDecoratorsPublic( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+	public static function addControllerDecoratorsPublic( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		\Aimeos\Controller\Jobs\Iface $controller, $domain )
 	{
 		self::addControllerDecorators( $context, $aimeos, $controller, $domain );

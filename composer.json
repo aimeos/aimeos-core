@@ -61,7 +61,7 @@
 			"controller/frontend/src",
 			"controller/extjs/src",
 			"controller/jobs/src",
-			"Aimeos.php"
+			"Bootstrap.php"
 		]
 	}
 }

@@ -12,7 +12,7 @@ namespace Aimeos;
 /**
  * Global starting point for applicatons.
  */
-class Aimeos
+class Bootstrap
 {
 	private $manifests = array();
 	private $extensions = array();

@@ -32,11 +32,11 @@ class Factory
 	 * controller to hand over specifc implementation names.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
 	 * @param string $path Name of the domain
 	 * @throws \Aimeos\Controller\Jobs\Exception If the given path is invalid or the controllers wasn't found
 	 */
-	static public function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos, $path )
+	static public function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $path )
 	{
 		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
 
@@ -75,12 +75,12 @@ class Factory
 	 * Returns all available controller instances.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
 	 * @param array $cntlPaths Associative list of the base path as key and all
 	 * 	relative job controller paths (core and extensions)
 	 * @return array Associative list of controller names as key and the class instance as value
 	 */
-	static public function getControllers( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos, array $cntlPaths )
+	static public function getControllers( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, array $cntlPaths )
 	{
 		$cntlList = array();
 		$subFolder = trim( str_replace( '\\', DIRECTORY_SEPARATOR, self::$prefix ), '/' );
@@ -116,12 +116,12 @@ class Factory
 	 *
 	 * @param \DirectoryIterator $dir Iterator over the (sub-)directory which might contain a factory
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
 	 * @param string $prefix Part of the class name between "\Aimeos\Controller\Jobs" and "Factory"
 	 * @throws \Aimeos\Controller\Jobs\Exception If factory name is invalid or if the controller couldn't be instantiated
 	 */
 	static protected function createControllers( \DirectoryIterator $dir, \Aimeos\MShop\Context\Item\Iface $context,
-		\Aimeos\Aimeos $aimeos, $prefix = '' )
+		\Aimeos\Bootstrap $aimeos, $prefix = '' )
 	{
 		$list = array();
 

@@ -31,9 +31,9 @@ class TestHelper
 	{
 		if( !isset( self::$aimeos ) )
 		{
-			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Aimeos.php';
+			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-			self::$aimeos = new \Aimeos\Aimeos( array(), false );
+			self::$aimeos = new \Aimeos\Bootstrap( array(), false );
 		}
 
 		return self::$aimeos;

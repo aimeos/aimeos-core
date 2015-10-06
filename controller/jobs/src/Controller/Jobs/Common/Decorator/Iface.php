@@ -24,10 +24,10 @@ interface Iface
 	 * Initializes a new controller decorator object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
-	 * @param \Aimeos\Aimeos $aimeos \Aimeos\Aimeos object
+	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
 	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
 	 * @return void
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Aimeos $aimeos,
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		\Aimeos\Controller\Jobs\Iface $controller );
 }
