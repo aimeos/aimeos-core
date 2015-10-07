@@ -64,8 +64,12 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
 <?php	foreach( $product->getAttributes() as $attribute ) : ?>
 <?php		switch( $attribute->getType() ) : case 'hidden': ?>
+<?php				if( $attribute->getCode() === 'download' ) : ?>
+- <?php 				echo strip_tags( $attribute->getName()); ?>: <?php echo $this->content( $attribute->getValue() ); ?>
+
+<?php				endif; ?>
 <?php			break; default: ?>
-- <?php echo strip_tags( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?>: <?php echo strip_tags( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?>
+- <?php 			echo strip_tags( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?>: <?php echo strip_tags( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?>
 
 <?php		endswitch; ?>
 <?php	endforeach; ?>
