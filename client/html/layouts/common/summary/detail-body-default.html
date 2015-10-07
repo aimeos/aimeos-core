@@ -87,6 +87,7 @@ catch( Exception $e )
 /// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 
+$unhide = $this->get( 'summaryShowHiddenAttributes', false );
 $modify = $this->get( 'summaryEnableModify', false );
 $errors = $this->get( 'summaryErrorCodes', array() );
 $backParams = $this->get( 'summaryParams', array() );
@@ -159,6 +160,18 @@ $backParams = $this->get( 'summaryParams', array() );
 								<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
 								<span class="value"><?php echo $enc->html( $attribute->getValue() ); ?></span>
 							</li>
+<?php			endforeach; ?>
+						</ul>
+<?php		endif; ?>
+<?php		if( $unhide && ( $attributes = $product->getAttributes( 'hidden' ) ) !== array() ) : ?>
+						<ul class="attr-list attr-list-hidden">
+<?php			foreach( $attributes as $attribute ) : ?>
+<?php				if( $attribute->getCode() === 'download' ) : ?>
+							<li class="attr-item">
+								<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+								<span class="value"><a class="" href="<?php echo $enc->attr( $this->content( $attribute->getValue() ) ); ?>" ><?php echo $enc->html( $attribute->getName() ); ?></a></span>
+							</li>
+<?php				endif; ?>
 <?php			endforeach; ?>
 						</ul>
 <?php		endif; ?>
