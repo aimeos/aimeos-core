@@ -29,7 +29,7 @@ $disablenew = $this->config( 'client/html/common/address/billing/disable-new', f
 
 
 try {
-	$addrArray = $this->standardBasket->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT )->toArray();
+	$addrArray = $this->standardBasket->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT )->toArray();
 } catch( Exception $e ) {
 	$addrArray = array();
 }

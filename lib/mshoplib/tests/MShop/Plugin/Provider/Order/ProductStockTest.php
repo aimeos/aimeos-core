@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_TestCase
+class ProductStockTest extends \PHPUnit_Framework_TestCase
 {
 	private $order;
 	private $plugin;
@@ -20,14 +22,14 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 
-		$pluginManager = MShop_Factory::createManager( $this->context, 'plugin' );
+		$pluginManager = \Aimeos\MShop\Factory::createManager( $this->context, 'plugin' );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'ProductCode' );
 		$this->plugin->setStatus( 1 );
 
-		$orderBaseManager = MShop_Factory::createManager( $this->context, 'order/base' );
+		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' );
 		$this->order = $orderBaseManager->createItem();
 	}
 
@@ -46,23 +48,23 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 
 	public function testRegister()
 	{
-		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 		$object->register( $this->order );
 	}
 
 
 	public function testUpdateNone()
 	{
-		// MShop_Order_Item_Base_Abstract::PARTS_PRODUCT not set, so update shall not be executed
-		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
+		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT not set, so update shall not be executed
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after' ) );
 	}
 
 
 	public function testUpdateOk()
 	{
-		$constant = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
-		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
+		$constant = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after', $constant ) );
 	}
 
@@ -70,14 +72,14 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 	public function testUpdateOutOfStock()
 	{
 		$this->order->addProduct( $this->getOrderProduct( 'EFGH' ) );
-		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 
 		try
 		{
-			$object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
-			throw new Exception( 'Expected exception not thrown' );
+			$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
+			throw new \Exception( 'Expected exception not thrown' );
 		}
-		catch( MShop_Plugin_Provider_Exception $e )
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
 			$ref = array( 'product' => array( '0' => 'stock.notenough' ) );
 			$this->assertEquals( $ref, $e->getErrorCodes() );
@@ -87,8 +89,8 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 
 	public function testUpdateNoStockItem()
 	{
-		$const = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
-		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
+		$const = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 
 		$this->order->addProduct( $this->getOrderProduct( 'QRST' ) );
 
@@ -98,8 +100,8 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 
 	public function testUpdateStockUnlimited()
 	{
-		$const = MShop_Order_Item_Base_Abstract::PARTS_PRODUCT;
-		$object = new MShop_Plugin_Provider_Order_ProductStock( $this->context, $this->plugin );
+		$const = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 
 		$this->order->addProduct( $this->getOrderProduct( 'MNOP' ) );
 
@@ -112,17 +114,17 @@ class MShop_Plugin_Provider_Order_ProductStockTest extends PHPUnit_Framework_Tes
 	 */
 	protected function getOrderProduct( $code )
 	{
-		$productManager = MShop_Factory::createManager( $this->context, 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $code ) );
 		$productItems = $productManager->searchItems( $search );
 
 		if( ( $productItem = reset( $productItems ) ) == false ) {
-			throw new Exception( 'No product item found' );
+			throw new \Exception( 'No product item found' );
 		}
 
-		$orderProductManager = MShop_Factory::createManager( $this->context, 'order/base/product' );
+		$orderProductManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );
 		$orderProductItem = $orderProductManager->createItem();
 		$orderProductItem->copyFrom( $productItem );
 

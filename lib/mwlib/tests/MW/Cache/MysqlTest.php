@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Cache;
+
+
 /**
- * Test class for MW_Cache_Mysql.
+ * Test class for \Aimeos\MW\Cache\Mysql.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
+class MysqlTest extends \PHPUnit_Framework_TestCase
 {
 	private $dbm;
 	private $config;
@@ -21,7 +24,7 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$adapter = TestHelper::getConfig()->get( 'resource/db/adapter', false );
+		$adapter = \TestHelper::getConfig()->get( 'resource/db/adapter', false );
 
 		if( $adapter === false || $adapter !== 'mysql' ) {
 			$this->markTestSkipped( 'No MySQL database configured' );
@@ -31,11 +34,11 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 		$this->config = array( 'siteid' => 1 );
 
 		$this->config['search'] = array(
-			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'cache.siteid' => array( 'label' => 'Cache site ID', 'code' => 'cache.siteid', 'internalcode' => 'siteid', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
-			'cache.value' => array( 'label' => 'Cached value', 'code' => 'cache.value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'cache.expire' => array( 'label' => 'Cache expiration date', 'code' => 'cache.expire', 'internalcode' => 'expire', 'type' => 'datetime', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'cache.tag.name' => array( 'label' => 'Cache tag name', 'code' => 'cache.tag.name', 'internalcode' => 'tname', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
+			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
+			'cache.siteid' => array( 'label' => 'Cache site ID', 'code' => 'cache.siteid', 'internalcode' => 'siteid', 'type' => 'integer', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
+			'cache.value' => array( 'label' => 'Cached value', 'code' => 'cache.value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
+			'cache.expire' => array( 'label' => 'Cache expiration date', 'code' => 'cache.expire', 'internalcode' => 'expire', 'type' => 'datetime', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
+			'cache.tag.name' => array( 'label' => 'Cache tag name', 'code' => 'cache.tag.name', 'internalcode' => 'tname', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
 		);
 
 		$this->config['sql'] = array(
@@ -64,7 +67,7 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 		);
 
 
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 		$conn = $this->dbm->acquire();
 
 
@@ -108,7 +111,7 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 		$this->dbm->release( $conn );
 
 
-		$this->object = new MW_Cache_Mysql( $this->config, $this->dbm );
+		$this->object = new \Aimeos\MW\Cache\Mysql( $this->config, $this->dbm );
 	}
 
 
@@ -120,7 +123,7 @@ class MW_Cache_MysqlTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 		$conn = $this->dbm->acquire();
 
 		$conn->create( 'DROP TABLE "mw_cache_tag_test"' )->execute()->finish();

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes foreign key constraints to locale tables from order tables.
  */
-class MW_Setup_Task_OrderDropForeignKeyOfLocale extends MW_Setup_Task_Abstract
+class OrderDropForeignKeyOfLocale extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base' => array(

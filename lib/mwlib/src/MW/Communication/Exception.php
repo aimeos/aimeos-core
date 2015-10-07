@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Communication;
+
+
 /**
- * Exception thrown by communication classes
+ * \Exception thrown by communication classes
  *
  * @package MW
  * @subpackage Communication
  */
-class MW_Communication_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

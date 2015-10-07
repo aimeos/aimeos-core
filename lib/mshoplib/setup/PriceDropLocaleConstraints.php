@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from price tables.
  */
-class MW_Setup_Task_PriceDropLocaleConstraints extends MW_Setup_Task_Abstract
+class PriceDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_price_list_type' => array(

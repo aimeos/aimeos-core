@@ -5,11 +5,14 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/**
-* Adds label column to plugin table.
-*/
 
-class MW_Setup_Task_PluginMigrateConfigComplete extends MW_Setup_Task_Abstract
+namespace Aimeos\MW\Setup\Task;
+
+
+/**
+ * Adds label column to plugin table.
+ */
+class PluginMigrateConfigComplete extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'select' => 'SELECT COUNT(*) AS "cnt" FROM "mshop_plugin" WHERE "config" LIKE \'%minorder%\'',

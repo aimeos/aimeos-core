@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Logger;
+
+
 /**
- * Exception thrown by MW logger objects.
+ * \Exception thrown by MW logger objects.
  *
  * @package MW
  * @subpackage Logger
  */
-class MW_Logger_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

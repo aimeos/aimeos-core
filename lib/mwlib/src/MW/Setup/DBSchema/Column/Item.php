@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Setup\DBSchema\Column;
+
+
 /**
  * Default class representing table columns and their details.
  *
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interface
+class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 {
 	private $tablename = '';
 	private $name = '';
@@ -52,7 +55,7 @@ class MW_Setup_DBSchema_Column_Item implements MW_Setup_DBSchema_Column_Interfac
 			case 'NO':
 				$this->nullable = false; break;
 			default:
-				throw new MW_Setup_Exception( sprintf( 'Invalid value for allowing null: "%1$s', $nullable ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Invalid value for allowing null: "%1$s', $nullable ) );
 		}
 	}
 

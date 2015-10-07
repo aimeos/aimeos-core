@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Translation;
+
+
 /**
  * Translation without an implementation; dummy class
  *
  * @package MW
  * @subpackage Translation
  */
-class MW_Translation_None
-	extends MW_Translation_Abstract
-	implements MW_Translation_Interface
+class None
+	extends \Aimeos\MW\Translation\Base
+	implements \Aimeos\MW\Translation\Iface
 {
 	/**
 	 * Returns the given string for the given domain.
@@ -24,7 +27,7 @@ class MW_Translation_None
 	 * @param string $domain Translation domain
 	 * @param string $string String to be translated
 	 * @return string The translated string
-	 * @throws MW_Translation_Exception Throws exception on initialization of the translation
+	 * @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
 	public function dt( $domain, $string )
 	{
@@ -40,7 +43,7 @@ class MW_Translation_None
 	 * @param string $plural String in plural form
 	 * @param integer $number Quantity to choose the correct plural form for languages with plural forms
 	 * @return string Returns the translated singular or plural form of the string depending on the given number
-	 * @throws MW_Translation_Exception If the initialization of the translation
+	 * @throws \Aimeos\MW\Translation\Exception If the initialization of the translation
 	 */
 	public function dn( $domain, $singular, $plural, $number )
 	{

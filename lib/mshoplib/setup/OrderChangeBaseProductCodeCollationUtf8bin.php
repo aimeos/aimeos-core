@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes collation of mshop_order_base_product.
  */
-class MW_Setup_Task_OrderChangeBaseProductCodeCollationUtf8bin extends MW_Setup_Task_Abstract
+class OrderChangeBaseProductCodeCollationUtf8bin extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'prodcode' => 'ALTER TABLE "mshop_order_base_product" MODIFY "prodcode" VARCHAR(32) NOT NULL COLLATE utf8_bin',

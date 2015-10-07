@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes countryid/langid columns in supplier address table.
  */
-class MW_Setup_Task_SupplierChangeAddressLangidCountryidNull extends MW_Setup_Task_Abstract
+class SupplierChangeAddressLangidCountryidNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'langid' => 'ALTER TABLE "mshop_supplier_address" MODIFY "langid" VARCHAR(5) NULL',

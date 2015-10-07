@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds langid column in order base address table.
  */
-class MW_Setup_Task_OrderAddAddressLangid extends MW_Setup_Task_Abstract
+class OrderAddAddressLangid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base_address.langid' => array(

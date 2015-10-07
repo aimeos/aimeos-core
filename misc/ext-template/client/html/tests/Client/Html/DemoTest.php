@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Client_Html_DemoTest extends PHPUnit_Framework_TestCase
+class DemoTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;
@@ -19,11 +21,11 @@ class Client_Html_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$paths = TestHelper::getHtmlTemplatePaths();
+		$this->context = \TestHelper::getContext();
+		$paths = \TestHelper::getHtmlTemplatePaths();
 
-		// $this->object = new Client_Html_..._Default( $this->context, $paths );
-		// $this->object->setView( TestHelper::getView() );
+		// $this->object = new \Aimeos\Client\Html\..._Standard( $this->context, $paths );
+		// $this->object->setView( \TestHelper::getView() );
 	}
 
 
@@ -37,8 +39,8 @@ class Client_Html_DemoTest extends PHPUnit_Framework_TestCase
 	{
 		unset( $this->object );
 
-		Controller_Frontend_Factory::clear();
-		MShop_Factory::clear();
+		\Aimeos\Controller\Frontend\Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 

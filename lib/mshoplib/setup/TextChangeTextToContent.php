@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames column "text" to "content".
  */
-class MW_Setup_Task_TextChangeTextToContent extends MW_Setup_Task_Abstract
+class TextChangeTextToContent extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_text" CHANGE "text" "content" TEXT NOT NULL DEFAULT \'\'',

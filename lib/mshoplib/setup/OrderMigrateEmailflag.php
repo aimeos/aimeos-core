@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Migrates the emailflag values in order table to the order status table.
  */
-class MW_Setup_Task_OrderMigrateEmailflag extends MW_Setup_Task_Abstract
+class OrderMigrateEmailflag extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'migrate' => '

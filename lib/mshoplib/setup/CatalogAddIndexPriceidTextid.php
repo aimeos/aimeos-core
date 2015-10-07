@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds priceid/textid column to catalog index price/text table.
  */
-class MW_Setup_Task_CatalogAddIndexPriceidTextid extends MW_Setup_Task_Abstract
+class CatalogAddIndexPriceidTextid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_catalog_index_price.priceid' => array(

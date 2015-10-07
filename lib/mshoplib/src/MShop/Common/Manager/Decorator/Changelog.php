@@ -8,28 +8,31 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Decorator;
+
+
 /**
  * Provides a changelog decorator for managers.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Manager_Decorator_Changelog
-	extends MShop_Common_Manager_Decorator_Abstract
+class Changelog
+	extends \Aimeos\MShop\Common\Manager\Decorator\Base
 {
 	/**
 	 * Adds or updates an item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item object whose data should be saved
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
 		$manager = $this->getManager();
 
 		$manager->saveItem( $item, $fetch );
 		$new = $manager->getItem( $item->getId() );
 
-		$this->getContext()->getLogger()->log( json_encode( $new->toArray() ), MW_Logger_Abstract::NOTICE, 'changelog' );
+		$this->getContext()->getLogger()->log( json_encode( $new->toArray() ), \Aimeos\MW\Logger\Base::NOTICE, 'changelog' );
 	}
 }

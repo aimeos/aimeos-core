@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Modifies indexes in the text tables.
  */
-class MW_Setup_Task_TextModifyIndexes extends MW_Setup_Task_Abstract
+class TextModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'add' => array(

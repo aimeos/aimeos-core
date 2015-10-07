@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Perf;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Perf_ProductTest extends PHPUnit_Framework_TestCase
+class ProductTest extends \PHPUnit_Framework_TestCase
 {
 	private $item;
 	private $context;
@@ -13,15 +15,15 @@ class Perf_ProductTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext( 'unitperf' );
+		$this->context = \TestHelper::getContext( 'unitperf' );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $productManager->createSearch();
 		$search->setSlice( 0, 1 );
 		$result = $productManager->searchItems( $search, array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
 		if( ( $this->item = reset( $result ) ) === false ) {
-			throw new Exception( 'No product item found' );
+			throw new \Exception( 'No product item found' );
 		}
 	}
 
@@ -30,7 +32,7 @@ class Perf_ProductTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$product = $productManager->getItem( $this->item->getId(), array( 'text', 'media', 'price', 'product', 'attribute' ) );
 
 		$ids = array();

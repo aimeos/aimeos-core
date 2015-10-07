@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Config\Decorator;
+
+
 /**
- * Test class for MW_Config_Decorator_Memory.
+ * Test class for \Aimeos\MW\Config\Decorator\Memory.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Config_Decorator_MemoryTest extends PHPUnit_Framework_TestCase
+class MemoryTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,8 +21,8 @@ class MW_Config_Decorator_MemoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$conf = new MW_Config_Array( array() );
-		$this->object = new MW_Config_Decorator_Memory( $conf );
+		$conf = new \Aimeos\MW\Config\PHPArray( array() );
+		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 	}
 
 	/**
@@ -40,9 +43,9 @@ class MW_Config_Decorator_MemoryTest extends PHPUnit_Framework_TestCase
 
 	public function testGetCached()
 	{
-		$conf = new MW_Config_Array( array() );
+		$conf = new \Aimeos\MW\Config\PHPArray( array() );
 		$cached = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
-		$this->object = new MW_Config_Decorator_Memory( $conf, $cached );
+		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $cached );
 
 		$this->assertEquals( '127.0.0.1', $this->object->get( 'resource/db/host', '127.0.0.2' ) );
 	}

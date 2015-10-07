@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Moves data from subject tables to customer and supplier tables.
  */
-class MW_Setup_Task_SubjectToCustomerSupplier extends MW_Setup_Task_Abstract
+class SubjectToCustomerSupplier extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_subject_customer' => array(

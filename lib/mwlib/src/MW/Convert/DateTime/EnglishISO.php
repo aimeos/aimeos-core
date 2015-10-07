@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Convert\DateTime;
+
+
 /**
  * Converts English dates into ISO format
  *
  * @package MW
  * @subpackage Convert
  */
-class MW_Convert_DateTime_EnglishISO implements MW_Convert_Interface
+class EnglishISO implements \Aimeos\MW\Convert\Iface
 {
 	/**
 	 * Translates a value to another one.

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes collation of code columns for coupon tables.
  */
-class MW_Setup_Task_OrderCouponColumnCodeCollateToUtf8Bin extends MW_Setup_Task_Abstract
+class OrderCouponColumnCodeCollateToUtf8Bin extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_coupon_code' => 'ALTER TABLE "mshop_coupon_code" CHANGE "code" "code" VARCHAR(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL',

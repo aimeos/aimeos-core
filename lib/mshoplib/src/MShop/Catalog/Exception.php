@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Catalog;
+
+
 /**
- * Exception thrown by catalog classes.
+ * \Exception thrown by catalog classes.
  *
  * @package MShop
  * @subpackage Catalog
  */
-class MShop_Catalog_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

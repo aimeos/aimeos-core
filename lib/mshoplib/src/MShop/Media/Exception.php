@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Media;
+
+
 /**
- * Exception thrown by media classes.
+ * \Exception thrown by media classes.
  *
  * @package MShop
  * @subpackage Media
  */
-class MShop_Media_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

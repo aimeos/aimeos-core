@@ -8,14 +8,17 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Decorator;
+
+
 /**
  * Decorator for service providers checking the orders of a customer.
  *
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Provider_Decorator_OrderCheck
-extends MShop_Service_Provider_Decorator_Abstract
+class OrderCheck
+extends \Aimeos\MShop\Service\Provider\Decorator\Base
 {
 	private $beConfig = array(
 		'ordercheck.total-number-min' => array(
@@ -59,14 +62,14 @@ extends MShop_Service_Provider_Decorator_Abstract
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
 	public function getConfigBE()
 	{
 		$list = $this->getProvider()->getConfigBE();
 
 		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
+			$list[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $config );
 		}
 
 		return $list;
@@ -77,10 +80,10 @@ extends MShop_Service_Provider_Decorator_Abstract
 	 * Checks if payment provider can be used based on the basket content.
 	 * Checks for country, currency, address, scoring, etc. should be implemented in separate decorators
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return boolean True if payment provider can be used, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $basket )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$context = $this->getContext();
 		$config = $this->getServiceItem()->getConfig();
@@ -89,14 +92,14 @@ extends MShop_Service_Provider_Decorator_Abstract
 			return false;
 		}
 
-		$manager = MShop_Factory::createManager( $context, 'order' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
 
 		if( isset( $config['ordercheck.total-number-min'] ) )
 		{
 			$search = $manager->createSearch( true );
 			$expr = array(
 				$search->compare( '==', 'order.base.customerid', $customerId ),
-				$search->compare( '>=', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED ),
+				$search->compare( '>=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
@@ -117,7 +120,7 @@ extends MShop_Service_Provider_Decorator_Abstract
 			$expr = array(
 				$search->compare( '==', 'order.base.customerid', $customerId ),
 				$search->compare( '==', 'order.datepayment', date( 'Y-m-d H:i:s', $time ) ),
-				$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_PENDING ),
+				$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );

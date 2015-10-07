@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes status columns to SMALLINT values.
  */
-class MW_Setup_Task_StatusToSmallInt extends MW_Setup_Task_Abstract
+class StatusToSmallInt extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_attribute' => 'ALTER TABLE "mshop_attribute" CHANGE "status" "status" SMALLINT NOT NULL DEFAULT 0',

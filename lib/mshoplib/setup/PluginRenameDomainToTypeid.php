@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames domain column to typeid in plugin table and migriates data.
  */
-class MW_Setup_Task_PluginRenameDomainToTypeid extends MW_Setup_Task_Abstract
+class PluginRenameDomainToTypeid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_plugin' => array(

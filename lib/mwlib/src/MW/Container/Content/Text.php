@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * Implementation of the text content object.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Content_Text
-	extends MW_Container_Content_Abstract
-	implements MW_Container_Content_Interface
+class Text
+	extends \Aimeos\MW\Container\Content\Base
+	implements \Aimeos\MW\Container\Content\Iface
 {
 	private $fh;
 	private $data;
@@ -49,7 +52,7 @@ class MW_Container_Content_Text
 		if( ( $this->fh = @fopen( $resource, 'a+' ) ) === false
 			&& ( $this->fh = fopen( $resource, 'r' ) ) === false
 		) {
-			throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
 
 		parent::__construct( $resource, $name, $options );
@@ -63,16 +66,16 @@ class MW_Container_Content_Text
 	/**
 	 * Closes the text file so it's written to disk.
 	 *
-	 * @throws MW_Container_Exception If the file handle couldn't be flushed or closed
+	 * @throws \Aimeos\MW\Container\Exception If the file handle couldn't be flushed or closed
 	 */
 	public function close()
 	{
 		if( fflush( $this->fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
 		}
 
 		if( fclose( $this->fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
 	}
 
@@ -85,7 +88,7 @@ class MW_Container_Content_Text
 	public function add( $data )
 	{
 		if( fwrite( $this->fh, $data . $this->lineend ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
 
@@ -132,7 +135,7 @@ class MW_Container_Content_Text
 	function rewind()
 	{
 		if( rewind( $this->fh ) === 0 ) {
-			throw new MW_Container_Exception( sprintf( 'Rewind file handle for %1$s failed', $this->getResource() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Rewind file handle for %1$s failed', $this->getResource() ) );
 		}
 
 		$this->position = 0;

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product stock test data.
  */
-class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
+class MShopAddWarehouseData extends \Aimeos\MW\Setup\Task\Base
 {
 
 	/**
@@ -49,9 +52,9 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding warehouse data', 0 );
@@ -60,10 +63,10 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 		$path = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'warehouse.php';
 
 		if( ( $data = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product stock domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product stock domain', $path ) );
 		}
 
-		$manager = MShop_Product_Manager_Factory::createManager( $this->additional );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional );
 		$warehouseManager = $manager->getSubManager( 'stock' )->getSubManager( 'warehouse' );
 
 		$num = $total = 0;
@@ -81,7 +84,7 @@ class MW_Setup_Task_MShopAddWarehouseData extends MW_Setup_Task_Abstract
 			try {
 				$warehouseManager->saveItem( $item );
 				$num++;
-			} catch( MW_DB_Exception $e ) { ; } // if warehouse was already available
+			} catch( \Aimeos\MW\DB\Exception $e ) { ; } // if warehouse was already available
 		}
 
 		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );

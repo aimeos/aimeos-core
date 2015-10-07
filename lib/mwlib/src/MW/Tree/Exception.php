@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Tree;
+
+
 /**
- * Exception thrown by tree classes.
+ * \Exception thrown by tree classes.
  *
  * @package MW
  * @subpackage Tree
  */
-class MW_Tree_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

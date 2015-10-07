@@ -17,7 +17,7 @@ $checkoutConfig = $this->config( 'client/html/checkout/standard/url/config', arr
 
 $checkout = true;
 try {
-	$this->standardBasket->check( MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+	$this->standardBasket->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 } catch( Exception $e ) {
 	$checkout = false;
 }

@@ -8,6 +8,9 @@
 
 require_once 'phing/Task.php';
 
+namespace Aimeos;
+
+
 /**
  * Generating Mediawiki pages for the configuration documentation.
  */

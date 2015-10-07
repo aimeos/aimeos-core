@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Password;
+
+
 /**
  * Bcrypt implementation of the password helper item.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Helper_Password_Bcrypt implements MShop_Common_Item_Helper_Password_Interface
+class Bcrypt implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
 {
 	private $options = array();
 	
@@ -27,7 +30,7 @@ class MShop_Common_Item_Helper_Password_Bcrypt implements MShop_Common_Item_Help
 	public function __construct( array $options )
 	{
 		if( !function_exists( 'password_hash' ) ) {
-			throw new MShop_Exception( 'To use the BCrypt encoder, you need to upgrade to PHP 5.5 or install the "ircmaxell/password-compat" via Composer' );
+			throw new \Aimeos\MShop\Exception( 'To use the BCrypt encoder, you need to upgrade to PHP 5.5 or install the "ircmaxell/password-compat" via Composer' );
 		}
 
 		$this->options = $options;

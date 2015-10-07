@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
- * Exception thrown by cache classes
+ * \Exception thrown by cache classes
  *
  * @package MW
  * @subpackage Cache
  */
-class MW_Cache_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

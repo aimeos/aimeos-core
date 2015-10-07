@@ -6,16 +6,19 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds records to tables.
  */
-class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
+class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 {
-	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
+	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		parent::__construct( $schema, $conn, $additional );
@@ -63,8 +66,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	protected function addAttributes( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $attrManager->createItem();
@@ -87,7 +90,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$attrManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'attribute', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'attribute', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -127,8 +130,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	protected function addMedia( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$mediaManager = MShop_Factory::createManager( $context, 'media' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$mediaManager = \Aimeos\MShop\Factory::createManager( $context, 'media' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $mediaManager->createItem();
@@ -153,7 +156,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$mediaManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'media', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'media', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -193,8 +196,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	protected function addPrices( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$mediaManager = MShop_Factory::createManager( $context, 'price' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$mediaManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $mediaManager->createItem();
@@ -221,7 +224,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$mediaManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'price', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'price', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -261,8 +264,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	protected function addTexts( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$textManager = MShop_Factory::createManager( $context, 'text' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$textManager = \Aimeos\MShop\Factory::createManager( $context, 'text' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$item = $textManager->createItem();
@@ -285,7 +288,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 			$textManager->saveItem( $item );
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'text', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'text', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -325,8 +328,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	protected function addProducts( $parentid, array $data, $domain )
 	{
 		$context = $this->getContext();
-		$productManager = MShop_Factory::createManager( $context, 'product' );
-		$listManager = MShop_Factory::createManager( $context, $domain . '/list' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
 
 		$listItem = $listManager->createItem();
@@ -352,11 +355,11 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		foreach( $data as $entry )
 		{
 			if( !isset( $codes[$entry['code']] ) ) {
-				throw new Exception( sprintf( 'No product for code "%1$s" found', $entry['code'] ) );
+				throw new \Exception( sprintf( 'No product for code "%1$s" found', $entry['code'] ) );
 			}
 
 			$listItem->setId( null );
-			$listItem->setTypeId( $this->getTypeId( $domain . '/list/type', 'product', $entry['list-type'] ) );
+			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'product', $entry['list-type'] ) );
 			$listItem->setDateStart( $entry['list-start'] );
 			$listItem->setDateEnd( $entry['list-end'] );
 			$listItem->setConfig( $entry['list-config'] );
@@ -377,14 +380,14 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 */
 	protected function addProductStock( $productid, array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
 
 		$warehouses = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
 			$warehouses[$item->getCode()] = $id;
 		}
 
-		$manager = MShop_Factory::createManager( $this->getContext(), 'product/stock' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
 
 		$item = $manager->createItem();
 		$item->setProductId( $productid );
@@ -404,7 +407,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the context.
 	 *
-	 * @return MShop_Context_Item_Interface Context item
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item
 	 */
 	protected function getContext()
 	{
@@ -415,14 +418,14 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	/**
 	 * Returns the type ID for the given type and domain found by the manager
 	 *
-	 * @param string $name Manager name like 'catalog/list/type'
+	 * @param string $name Manager name like 'catalog/lists/type'
 	 * @param string $domain Domain of the type item we are looking for, e.g. 'text'
 	 * @param string $type Type code of the item we are looking for, e.g. 'default'
 	 */
 	protected function getTypeId( $name, $domain, $type )
 	{
 		$key = str_replace( '/', '.', $name );
-		$manager = MShop_Factory::createManager( $this->getContext(), $name );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $name );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -434,7 +437,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new Exception( sprintf( 'No type item found for "%1$s/%2$s" using "%3$s"', $domain, $type, $name ) );
+			throw new \Exception( sprintf( 'No type item found for "%1$s/%2$s" using "%3$s"', $domain, $type, $name ) );
 		}
 
 		return $item->getId();
@@ -445,7 +448,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * Deletes the demo items from the given parent ID in the database.
 	 *
 	 * @param string $parentid ID of the parent item where the associated items should be removed from
-	 * @param string $name Name of the list manager, e.g. 'catalog/list'
+	 * @param string $name Name of the list manager, e.g. 'catalog/lists'
 	 * @param string $domain Name of the domain the items are associated to, e.g. 'catalog'
 	 * @param string $refdomain Name of the domain to remove the items from, e.g. 'text'
 	 */
@@ -454,8 +457,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		$context = $this->getContext();
 		$key = str_replace( '/', '.', $name );
 
-		$manager = MShop_Factory::createManager( $context, $refdomain );
-		$listManager = MShop_Factory::createManager( $context, $name );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, $refdomain );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $name );
 
 
 		$search = $manager->createSearch();
@@ -486,7 +489,7 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 	 * Deletes the references to non-existent or demo items in the database.
 	 *
 	 * @param string $parentid ID of the parent item where the associated items should be removed from
-	 * @param string $name Name of the list manager, e.g. 'catalog/list'
+	 * @param string $name Name of the list manager, e.g. 'catalog/lists'
 	 * @param string $refdomain Name of the domain to remove the items from, e.g. 'product'
 	 */
 	protected function removeListItems( $parentid, $name, $refdomain )
@@ -495,8 +498,8 @@ class MW_Setup_Task_MShopAddDataAbstract extends MW_Setup_Task_Abstract
 		$context = $this->getContext();
 		$key = str_replace( '/', '.', $name );
 
-		$manager = MShop_Factory::createManager( $context, $refdomain );
-		$listManager = MShop_Factory::createManager( $context, $name );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, $refdomain );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $name );
 
 
 		$search = $listManager->createSearch();

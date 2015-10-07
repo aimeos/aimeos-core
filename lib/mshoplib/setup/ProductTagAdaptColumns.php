@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Moves domain to separate type table and references tags via product list table.
  */
-class MW_Setup_Task_ProductTagAdaptColumns extends MW_Setup_Task_Abstract
+class ProductTagAdaptColumns extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_product_tag' => array(

@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * Updates service items on basket change.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_ServicesUpdate
-	extends MShop_Plugin_Provider_Factory_Abstract
-	implements MShop_Plugin_Provider_Factory_Interface
+class ServicesUpdate
+	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
+	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this, 'setAddress.after' );
 		$p->addListener( $this, 'deleteAddress.after' );
@@ -37,17 +40,17 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws MShop_Plugin_Provider_Exception if checks fail
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
 	 * @return bool true if checks succeed
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Interface';
+		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$ids = array();
@@ -57,7 +60,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 
 		if( count( $order->getProducts() ) === 0 )
 		{
-			$priceManager = MShop_Factory::createManager( $context, 'price' );
+			$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 
 			foreach( $services as $type => $service ) {
 				$service->setPrice( $priceManager->createItem() );
@@ -71,7 +74,7 @@ class MShop_Plugin_Provider_Order_ServicesUpdate
 			$ids[$type] = $service->getServiceId();
 		}
 
-		$serviceManager = MShop_Factory::createManager( $context, 'service' );
+		$serviceManager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
 
 		$search = $serviceManager->createSearch( true );
 		$expr = array(

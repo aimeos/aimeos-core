@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider;
+
+
 /**
- * MShop_Plugin_Provider_Exception
+ * \Aimeos\MShop\Plugin\Provider\Exception
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Exception extends MShop_Plugin_Exception
+class Exception extends \Aimeos\MShop\Plugin\Exception
 {
 
 	private $errorCodes;
@@ -25,10 +28,10 @@ class MShop_Plugin_Provider_Exception extends MShop_Plugin_Exception
 	 *
 	 * @param string $message Custom error message to describe the error
 	 * @param integer $code Custom error code to identify or classify the error
-	 * @param Exception $previous Previously thrown exception
+	 * @param \Exception $previous Previously thrown exception
 	 * @param array $errorCodes List of error codes for error handling
 	 */
-	public function __construct( $message = '', $code = 0, Exception $previous = null, $errorCodes = array() )
+	public function __construct( $message = '', $code = 0, \Exception $previous = null, $errorCodes = array() )
 	{
 		parent::__construct( $message, $code, $previous );
 

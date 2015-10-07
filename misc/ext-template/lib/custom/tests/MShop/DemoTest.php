@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MShop;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MShop_DemoTest extends PHPUnit_Framework_TestCase
+class DemoTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,7 +20,7 @@ class MShop_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new MShop_Demo_Manager_Default( TestHelper::getContext() );
+		// $this->object = new \Aimeos\MShop\Demo\Manager\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -31,7 +33,7 @@ class MShop_DemoTest extends PHPUnit_Framework_TestCase
 	protected function tearDown()
 	{
 		unset( $this->object );
-		MShop_Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 

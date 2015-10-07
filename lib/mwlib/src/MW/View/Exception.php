@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\View;
+
+
 /**
- * Exception thrown by view objects.
+ * \Exception thrown by view objects.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

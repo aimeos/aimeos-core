@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Config\Decorator;
+
+
 /**
- * Test class for MW_Config_Decorator_APC.
+ * Test class for \Aimeos\MW\Config\Decorator\APC.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Config_Decorator_APCTest extends PHPUnit_Framework_TestCase
+class APCTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -23,8 +26,8 @@ class MW_Config_Decorator_APCTest extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'APC not installed' );
 		}
 
-		$conf = new MW_Config_Array( array() );
-		$this->object = new MW_Config_Decorator_APC( $conf, 'test:' );
+		$conf = new \Aimeos\MW\Config\PHPArray( array() );
+		$this->object = new \Aimeos\MW\Config\Decorator\APC( $conf, 'test:' );
 	}
 
 	/**

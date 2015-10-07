@@ -5,20 +5,20 @@
  */
 
 return array(
-	'product/list/type' => array(
-		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
-		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+	'product/lists/type' => array(
+		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'attribute/default' => array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'attribute/config' => array( 'domain' => 'attribute', 'code' => 'config', 'label' => 'Configurable', 'status' => 1 ),
 		'attribute/variant' => array( 'domain' => 'attribute', 'code' => 'variant', 'label' => 'Variant', 'status' => 1 ),
 		'attribute/hidden' => array( 'domain' => 'attribute', 'code' => 'hidden', 'label' => 'Hidden', 'status' => 1 ),
 		'attribute/custom' => array( 'domain' => 'attribute', 'code' => 'custom', 'label' => 'Custom value', 'status' => 1 ),
-		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
-		'media/default' => array( 'domain' => 'media', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		'catalog/default' => array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'media/default' => array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'media/download' => array( 'domain' => 'media', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
-		'price/default' => array( 'domain' => 'price', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
-		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
-		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
-		'product/tag/default' => array( 'domain' => 'product/tag', 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		'price/default' => array( 'domain' => 'price', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'product/tag/default' => array( 'domain' => 'product/tag', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'product/suggestion' => array( 'domain' => 'product', 'code' => 'suggestion', 'label' => 'Suggestion', 'status' => 1 ),
 		'product/bought' => array( 'domain' => 'product', 'code' => 'bought-together', 'label' => 'Bought together', 'status' => 1 ),
 		//pictures
@@ -56,7 +56,7 @@ return array(
 	),
 
 
-	'product/list' => array(
+	'product/lists' => array(
 		array( 'parentid' => 'product/CNC', 'typeid' => 'product/bought', 'domain' => 'product', 'refid' => 'product/CNE', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'product/bought', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'product/suggestion', 'domain' => 'product', 'refid' => 'product/CNC', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),

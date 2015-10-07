@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames index in the attribute tables.
  */
-class MW_Setup_Task_AttributeModifyIndex extends MW_Setup_Task_Abstract
+class AttributeModifyIndex extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_attribute' => array(

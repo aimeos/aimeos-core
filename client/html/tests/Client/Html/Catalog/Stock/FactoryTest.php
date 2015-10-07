@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Client\Html\Catalog\Stock;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Client_Html_Catalog_Stock_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $templatePaths;
@@ -20,8 +21,8 @@ class Client_Html_Catalog_Stock_FactoryTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->templatePaths = TestHelper::getHtmlTemplatePaths();
+		$this->context = \TestHelper::getContext();
+		$this->templatePaths = \TestHelper::getHtmlTemplatePaths();
 	}
 
 
@@ -39,29 +40,29 @@ class Client_Html_Catalog_Stock_FactoryTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateClient()
 	{
-		$client = Client_Html_Catalog_Stock_Factory::createClient( $this->context, $this->templatePaths );
-		$this->assertInstanceOf( 'Client_Html_Interface', $client );
+		$client = \Aimeos\Client\Html\Catalog\Stock\Factory::createClient( $this->context, $this->templatePaths );
+		$this->assertInstanceOf( '\\Aimeos\\Client\\Html\\Iface', $client );
 	}
 
 
 	public function testCreateClientName()
 	{
-		$client = Client_Html_Catalog_Stock_Factory::createClient( $this->context, $this->templatePaths, 'Default' );
-		$this->assertInstanceOf( 'Client_Html_Interface', $client );
+		$client = \Aimeos\Client\Html\Catalog\Stock\Factory::createClient( $this->context, $this->templatePaths, 'Standard' );
+		$this->assertInstanceOf( '\\Aimeos\\Client\\Html\\Iface', $client );
 	}
 
 
 	public function testCreateClientNameInvalid()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Catalog_Stock_Factory::createClient( $this->context, $this->templatePaths, '$$$' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
+		\Aimeos\Client\Html\Catalog\Stock\Factory::createClient( $this->context, $this->templatePaths, '$$$' );
 	}
 
 
 	public function testCreateClientNameNotFound()
 	{
-		$this->setExpectedException( 'Client_Html_Exception' );
-		Client_Html_Catalog_Stock_Factory::createClient( $this->context, $this->templatePaths, 'notfound' );
+		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
+		\Aimeos\Client\Html\Catalog\Stock\Factory::createClient( $this->context, $this->templatePaths, 'notfound' );
 	}
 
 }

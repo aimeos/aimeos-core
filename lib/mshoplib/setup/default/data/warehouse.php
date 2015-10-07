@@ -6,6 +6,6 @@
 
 return array(
 	'warehouse' => array(
-		'default' => array( 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		'default' => array( 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 );

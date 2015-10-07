@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds label column to price table.
  */
-class MW_Setup_Task_PriceAddLabel extends MW_Setup_Task_Abstract
+class PriceAddLabel extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_price" ADD "label" VARCHAR(255) NOT NULL AFTER "domain"',

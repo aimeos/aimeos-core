@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Creates all required tables.
  */
-class MW_Setup_Task_TablesCreateMAdmin extends MW_Setup_Task_Abstract
+class TablesCreateMAdmin extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -63,7 +66,7 @@ class MW_Setup_Task_TablesCreateMAdmin extends MW_Setup_Task_Abstract
 			$this->msg( 'Using tables from ' . basename( $filepath ), 1 ); $this->status( '' );
 
 			if( ( $content = file_get_contents( $filepath ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
 			}
 
 			$schema = $this->getSchema( $rname );

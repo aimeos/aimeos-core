@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds mediaurl column to order base service table.
  */
-class MW_Setup_Task_OrderAddBaseServiceColumnMediaUrl extends MW_Setup_Task_Abstract
+class OrderAddBaseServiceColumnMediaUrl extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mediaurl' => 'ALTER TABLE "mshop_order_base_service" ADD "mediaurl" VARCHAR(255) NOT NULL AFTER "name"',

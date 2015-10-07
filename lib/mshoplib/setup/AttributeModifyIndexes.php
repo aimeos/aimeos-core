@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Modifies indexes in the attribute tables.
  */
-class MW_Setup_Task_AttributeModifyIndexes extends MW_Setup_Task_Abstract
+class AttributeModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'add' => array(

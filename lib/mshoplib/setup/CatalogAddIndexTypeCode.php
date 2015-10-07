@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds type/code column to catalog index attribute table.
  */
-class MW_Setup_Task_CatalogAddIndexTypeCode extends MW_Setup_Task_Abstract
+class CatalogAddIndexTypeCode extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'type' => array(

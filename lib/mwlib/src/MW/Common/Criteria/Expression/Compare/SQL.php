@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression\Compare;
+
+
 /**
  * SQL implementation for comparing objects.
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expression_Compare_Abstract
+class SQL extends \Aimeos\MW\Common\Criteria\Expression\Compare\Base
 {
 	private static $operators = array( '==' => '=', '!=' => '<>', '~=' => 'LIKE', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<', '&' => '&', '|' => '|', '=~' => 'LIKE' );
 	private $conn = null;
@@ -23,15 +26,15 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection object
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
 	 * @param string $operator Operator used for the expression
 	 * @param string $name Name of variable or column that should be compared.
 	 * @param mixed $value Value that the variable or column should be compared to
 	 */
-	public function __construct( MW_DB_Connection_Interface $conn, $operator, $name, $value )
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $operator, $name, $value )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
 		parent::__construct( $operator, $name, $value );
@@ -79,7 +82,7 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 			case '!=':
 				return $name . ' IS NOT NULL';
 			default:
-				throw new MW_Common_Exception( sprintf( 'NULL value not allowed for operator "%1$s"', $this->getOperator() ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'NULL value not allowed for operator "%1$s"', $this->getOperator() ) );
 		}
 	}
 
@@ -148,13 +151,13 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 
 		switch( $type )
 		{
-			case MW_DB_Statement_Abstract::PARAM_BOOL:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
 				$value = (int) (bool) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_INT:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
 				$value = (int) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_FLOAT:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$value = (float) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_STR:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
 				if( $operator == '~=' ) {
 					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;
 				}
@@ -174,27 +177,27 @@ class MW_Common_Criteria_Expression_Compare_SQL extends MW_Common_Criteria_Expre
 	 *
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
 	 * @return integer Internal parameter type
-	 * @throws MW_Common_Exception If an error occurs
+	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
 	protected function getParamType( &$item )
 	{
 		if( $item[0] == '"' )
 		{
 			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
-				throw new MW_Common_Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
 			}
 
-			return MW_DB_Statement_Abstract::PARAM_STR;
+			return \Aimeos\MW\DB\Statement\Base::PARAM_STR;
 		}
 		else if( strpos( $item, '.' ) !== false )
 		{
-			return MW_DB_Statement_Abstract::PARAM_FLOAT;
+			return \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT;
 		}
 		else if( ctype_digit( $item ) !== false )
 		{
-			return MW_DB_Statement_Abstract::PARAM_INT;
+			return \Aimeos\MW\DB\Statement\Base::PARAM_INT;
 		}
 
-		return MW_DB_Statement_Abstract::PARAM_STR;
+		return \Aimeos\MW\DB\Statement\Base::PARAM_STR;
 	}
 }

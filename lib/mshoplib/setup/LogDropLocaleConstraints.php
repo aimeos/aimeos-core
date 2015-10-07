@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes locale constraints from log tables.
  */
-class MW_Setup_Task_LogDropLocaleConstraints extends MW_Setup_Task_Abstract
+class LogDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_log' => array(

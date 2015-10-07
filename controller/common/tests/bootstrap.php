@@ -28,4 +28,4 @@ setlocale( LC_TIME, 'POSIX' );
 define( 'PATH_TESTS', dirname( __FILE__ ) );
 
 require_once 'TestHelper.php';
-TestHelper::bootstrap();
+\TestHelper::bootstrap();

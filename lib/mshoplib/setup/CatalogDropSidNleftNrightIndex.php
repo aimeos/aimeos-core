@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Drops the old idx_mscat_sid_nleft_nright index in the catalog tables.
  */
-class MW_Setup_Task_CatalogDropSidNleftNrightIndex extends MW_Setup_Task_Abstract
+class CatalogDropSidNleftNrightIndex extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'idx_mscat_sid_nleft_nright' => 'ALTER TABLE "mshop_catalog" DROP INDEX "idx_mscat_sid_nleft_nright"',

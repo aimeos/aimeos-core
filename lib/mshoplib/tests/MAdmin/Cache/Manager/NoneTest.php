@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\MAdmin\Cache\Manager;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class MAdmin_Cache_Manager_NoneTest extends PHPUnit_Framework_TestCase
+class NoneTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
@@ -19,8 +21,8 @@ class MAdmin_Cache_Manager_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$this->object = new MAdmin_Cache_Manager_None( $this->context );
+		$this->context = \TestHelper::getContext();
+		$this->object = new \Aimeos\MAdmin\Cache\Manager\None( $this->context );
 	}
 
 
@@ -38,21 +40,21 @@ class MAdmin_Cache_Manager_NoneTest extends PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( 'MAdmin_Cache_Item_Interface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MAdmin\\Cache\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf( 'MW_Common_Criteria_Attribute_Interface', $attr );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( 'MAdmin_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -69,7 +71,7 @@ class MAdmin_Cache_Manager_NoneTest extends PHPUnit_Framework_TestCase
 
 	public function testGetItem()
 	{
-		$this->setExpectedException( 'MAdmin_Cache_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Cache\\Exception' );
 		$this->object->getItem( 'unittest' );
 	}
 

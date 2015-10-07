@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\View\Helper\Url;
+
+
 /**
  * View helper class for building URLs.
  *
  * @package MW
  * @subpackage View
  */
-class MW_View_Helper_Url_None
-	extends MW_View_Helper_Abstract
-	implements MW_View_Helper_Interface
+class None
+	extends \Aimeos\MW\View\Helper\Base
+	implements \Aimeos\MW\View\Helper\Iface
 {
 	/**
 	 * Returns an empty string as URL.

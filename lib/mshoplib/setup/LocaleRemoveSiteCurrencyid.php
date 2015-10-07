@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Removes currencyid column from locale site table.
  */
-class MW_Setup_Task_LocaleRemoveSiteCurrencyid extends MW_Setup_Task_Abstract
+class LocaleRemoveSiteCurrencyid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_locale_site" DROP "currencyid"',

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds demo records to product tables.
  */
-class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstract
+class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -50,7 +53,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 		$this->msg( 'Processing product demo data', 0 );
 
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
@@ -59,11 +62,11 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 
 		foreach( $products as $item )
 		{
-			$this->removeItems( $item->getId(), 'product/list', 'product', 'attribute' );
-			$this->removeItems( $item->getId(), 'product/list', 'product', 'media' );
-			$this->removeItems( $item->getId(), 'product/list', 'product', 'price' );
-			$this->removeItems( $item->getId(), 'product/list', 'product', 'text' );
-			$this->removeListItems( $item->getId(), 'product/list', 'product' );
+			$this->removeItems( $item->getId(), 'product/lists', 'product', 'attribute' );
+			$this->removeItems( $item->getId(), 'product/lists', 'product', 'media' );
+			$this->removeItems( $item->getId(), 'product/lists', 'product', 'price' );
+			$this->removeItems( $item->getId(), 'product/lists', 'product', 'text' );
+			$this->removeListItems( $item->getId(), 'product/lists', 'product' );
 		}
 
 		$manager->deleteItems( array_keys( $products ) );
@@ -84,7 +87,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 	/**
 	 * Adds the demo data to the database.
 	 *
-	 * @throws MShop_Exception If the file isn't found
+	 * @throws \Aimeos\MShop\Exception If the file isn't found
 	 */
 	protected function addDemoData()
 	{
@@ -92,11 +95,11 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 		$path = __DIR__ . $ds . 'data' . $ds . 'demo-product.php';
 
 		if( ( $data = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		foreach( $data as $entry )
 		{
@@ -128,7 +131,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 		if( isset( $entry['property'] ) )
 		{
 			$context = $this->getContext();
-			$manager = MShop_Factory::createManager( $context, 'product/property' );
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/property' );
 
 			foreach( (array) $entry['property'] as $values )
 			{

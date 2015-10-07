@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Catalog\Manager\Index;
+
+
 /**
  * Base class for all database based catalog index managers
  *
  * @package MShop
  * @subpackage Catalog
  */
-abstract class MShop_Catalog_Manager_Index_DBBase
-	extends MShop_Common_Manager_Abstract
-	implements MShop_Catalog_Manager_Index_Interface
+abstract class DBBase
+	extends \Aimeos\MShop\Common\Manager\Base
+	implements \Aimeos\MShop\Catalog\Manager\Index\Iface
 {
 	/**
 	 * Initializes the manager object
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 */
-	public function __construct( MShop_Context_Item_Interface $context )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
 
@@ -47,11 +50,11 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	/**
 	 * Creates new product item
 	 *
-	 * @return MShop_Product_Item_Interface Product item object
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item object
 	 */
 	public function createItem()
 	{
-		return MShop_Factory::createManager( $this->getContext(), 'product' )->createItem();
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->createItem();
 	}
 
 
@@ -59,11 +62,11 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * Creates a search object and optionally sets its base criteria
 	 *
 	 * @param boolean $default True to add the default criteria
-	 * @return MW_Common_Criteria_Interface Criteria object
+	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
-		return MShop_Factory::createManager( $this->getContext(), 'product' )->createSearch( $default );
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->createSearch( $default );
 	}
 
 
@@ -71,11 +74,11 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * Returns the product item for the given ID
 	 *
 	 * @param integer $id Id of item
-	 * @return MShop_Product_Item_Interface Product item object
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item object
 	 */
 	public function getItem( $id, array $ref = array() )
 	{
-		return MShop_Factory::createManager( $this->getContext(), 'product' )->getItem( $id, $ref );
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->getItem( $id, $ref );
 	}
 
 
@@ -83,18 +86,18 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	 * Returns a list of attribute objects describing the available criteria for searching
 	 *
 	 * @param boolean $withsub True to return attributes of sub-managers too
-	 * @return array List of items implementing MW_Common_Criteria_Attribute_Interface
+	 * @return array List of items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		return MShop_Factory::createManager( $this->getContext(), 'product' )->getSearchAttributes( $withsub );
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->getSearchAttributes( $withsub );
 	}
 
 
 	/**
 	 * Rebuilds the customer catalog index
 	 *
-	 * @param MShop_Common_Item_Interface[] $items Associative list of product IDs and items implementing MShop_Product_Item_Interface
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -107,10 +110,10 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	/**
 	 * Stores a new item into the index
 	 *
-	 * @param MShop_Common_Item_Interface $item Product item
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Product item
 	 * @param boolean $fetch True if the new ID should be set in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
 		$this->rebuildIndex( array( $item->getId() => $item ) );
 	}
@@ -139,13 +142,13 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $timestamp ); // ctime
-			$stmt->bind( 2, $siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			$stmt->execute()->finish();
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			$this->rollback();
@@ -202,7 +205,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
@@ -217,14 +220,14 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param MW_Common_Criteria_Interface $search Search criteria
+	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
 	 * @param string $cfgPathSearch Configuration path to the search SQL statement
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
-	 * @return array List of items implementing MShop_Product_Item_Interface with ids as keys
+	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	protected function doSearchItems( MW_Common_Criteria_Interface $search,
+	protected function doSearchItems( \Aimeos\MW\Common\Criteria\Iface $search,
 		array $ref, &$total, $cfgPathSearch, $cfgPathCount )
 	{
 		$list = $ids = array();
@@ -236,7 +239,7 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 
 		try
 		{
-			$level = MShop_Locale_Manager_Abstract::SITE_ALL;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$required = array( 'product' );
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
@@ -247,13 +250,13 @@ abstract class MShop_Catalog_Manager_Index_DBBase
 
 			$dbm->release( $conn, $dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
 
-		$manager = MShop_Factory::createManager( $context, 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$prodSearch = $manager->createSearch();
 		$prodSearch->setConditions( $prodSearch->compare( '==', 'product.id', $ids ) );
 		$prodSearch->setSlice( 0, $search->getSliceSize() );

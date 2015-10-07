@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider;
+
+
 /**
  * Gift/present coupon model.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_Present
-	extends MShop_Coupon_Provider_Factory_Abstract
-	implements MShop_Coupon_Provider_Factory_Interface
+class Present
+	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
+	implements \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 */
-	public function addCoupon( MShop_Order_Item_Base_Interface $base )
+	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		if( $this->getObject()->isAvailable( $base ) === false ) {
 			return;
@@ -33,7 +36,7 @@ class MShop_Coupon_Provider_Present
 
 		if( !isset( $config['present.productcode'] ) || !isset( $config['present.quantity'] ) )
 		{
-			throw new MShop_Coupon_Exception( sprintf(
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf(
 				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
 				$this->getItemBase()->getProvider(), 'present.productcode, present.quantity'
 			) );

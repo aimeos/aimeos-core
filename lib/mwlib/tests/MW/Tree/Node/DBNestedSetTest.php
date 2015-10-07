@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Tree\Node;
+
+
 /**
- * Test class for MW_Tree_Node_DBNestedSet.
+ * Test class for \Aimeos\MW\Tree\Node\DBNestedSet.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Tree_Node_DBNestedSetTest extends PHPUnit_Framework_TestCase
+class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,10 +21,10 @@ class MW_Tree_Node_DBNestedSetTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$child1 = new MW_Tree_Node_DBNestedSet( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'left' => 2, 'right' => 3 ) );
-		$child2 = new MW_Tree_Node_DBNestedSet( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'left' => 4, 'right' => 5 ) );
+		$child1 = new \Aimeos\MW\Tree\Node\DBNestedSet( array( 'id' => null, 'label' => 'child1', 'status' => '0', 'left' => 2, 'right' => 3 ) );
+		$child2 = new \Aimeos\MW\Tree\Node\DBNestedSet( array( 'id' => null, 'label' => 'child2', 'status' => '1', 'left' => 4, 'right' => 5 ) );
 
-		$this->object = new MW_Tree_Node_DBNestedSet( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'left' => 1, 'right' => 6 ), array( $child1, $child2 ) );
+		$this->object = new \Aimeos\MW\Tree\Node\DBNestedSet( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'left' => 1, 'right' => 6 ), array( $child1, $child2 ) );
 	}
 
 	/**
@@ -42,7 +45,7 @@ class MW_Tree_Node_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 	public function testHasNoChildren()
 	{
-		$tree = new MW_Tree_Node_DBNestedSet( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'left' => 1, 'right' => 2 ) );
+		$tree = new \Aimeos\MW\Tree\Node\DBNestedSet( array( 'id' => 1, 'label' => 'parent', 'status' => '1', 'left' => 1, 'right' => 2 ) );
 		$this->assertEquals( false, $tree->hasChildren() );
 	}
 
@@ -54,13 +57,13 @@ class MW_Tree_Node_DBNestedSetTest extends PHPUnit_Framework_TestCase
 
 	public function testGetChild()
 	{
-		$this->setExpectedException('MW_Tree_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Tree\\Exception');
 		$this->object->getChild(null);
 	}
 
 	public function testMagicGet()
 	{
-		$this->setExpectedException('MW_Tree_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Tree\\Exception');
 		$this->object->notDefined;
 	}
 

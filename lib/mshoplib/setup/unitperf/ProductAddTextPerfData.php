@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds performance records to product table.
  */
-class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class ProductAddTextPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -69,9 +72,9 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 
 		$context = $this->getContext();
-		$textManager = MShop_Factory::createManager( $context, 'text' );
-		$attrManager = MShop_Factory::createManager( $context, 'attribute' );
-		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+		$textManager = \Aimeos\MShop\Factory::createManager( $context, 'text' );
+		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$productListManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
 
 		$attrSearch = $attrManager->createSearch();
@@ -92,11 +95,11 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 		$search = $productListManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.list.domain', 'attribute' ),
-			$search->compare( '==', 'product.list.type.code', 'variant' ),
+			$search->compare( '==', 'product.lists.domain', 'attribute' ),
+			$search->compare( '==', 'product.lists.type.code', 'variant' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'product.list.id' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'product.lists.id' ) ) );
 
 
 		$this->txBegin();
@@ -186,7 +189,7 @@ class MW_Setup_Task_ProductAddTextPerfData extends MW_Setup_Task_ProductAddBaseP
 
 	protected function getTextTypeIds()
 	{
-		$textTypeManager = MShop_Factory::createManager( $this->getContext(), 'text/type' );
+		$textTypeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'text/type' );
 
 		$search = $textTypeManager->createSearch();
 		$expr = array(

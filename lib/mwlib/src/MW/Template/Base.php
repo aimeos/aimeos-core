@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Template;
+
+
 /**
  * Generic text template processing object.
  *
  * @package MW
  * @subpackage Template
  */
-class MW_Template_Base implements MW_Template_Interface
+class Base implements \Aimeos\MW\Template\Iface
 {
 	private $begin;
 	private $end;
@@ -40,7 +43,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 * Removes the maker and enables content in template.
 	 *
 	 * @param array|string $name Marker name or list thereof
-	 * @return MW_Template_Interface Own Instance for method chaining
+	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function enable( $name )
 	{
@@ -62,7 +65,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 * Removes the content between the marker.
 	 *
 	 * @param array|string $name Marker name or list thereof
-	 * @return MW_Template_Interface Own Instance for method chaining
+	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function disable( $name )
 	{
@@ -82,7 +85,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 * Returns a new template object containing the requested part from the template.
 	 *
 	 * @param string $name Marker whose content should be returned
-	 * @return MW_Template_Interface Subtemplate object containing the template between the given marker name
+	 * @return \Aimeos\MW\Template\Iface Subtemplate object containing the template between the given marker name
 	 */
 	public function get( $name )
 	{
@@ -91,14 +94,14 @@ class MW_Template_Base implements MW_Template_Interface
 
 		if( ( $begin = strpos( $this->text, $mbegin ) ) === false )
 		{
-			throw new MW_Template_Exception( sprintf( 'Error finding begin of marker "%1$s" in template', $name ) );
+			throw new \Aimeos\MW\Template\Exception( sprintf( 'Error finding begin of marker "%1$s" in template', $name ) );
 		}
 
 		$begin += strlen( $mbegin );
 
 		if( ( $end = strpos( $this->text, $mend, $begin ) ) === false )
 		{
-			throw new MW_Template_Exception( sprintf( 'Error finding end of marker "%1$s" in template', $name ) );
+			throw new \Aimeos\MW\Template\Exception( sprintf( 'Error finding end of marker "%1$s" in template', $name ) );
 		}
 
 		return new self( substr( $this->text, $begin, $end - $begin ), $this->begin, $this->end );
@@ -111,7 +114,7 @@ class MW_Template_Base implements MW_Template_Interface
 		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->begin, '/' ) ) . '/U';
 
 		if( preg_match_all( $regex, $this->text, $matches ) === false ) {
-			throw new MW_Template_Exception( sprintf( 'Invalid regular expression: %1$s', $regex ) );
+			throw new \Aimeos\MW\Template\Exception( sprintf( 'Invalid regular expression: %1$s', $regex ) );
 		}
 
 		return array_unique( $matches[1] );
@@ -123,7 +126,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 *
 	 * @param string|array $old String or list of strings to remove
 	 * @param string|array $new String or list of strings to insert instead
-	 * @return MW_Template_Interface Own Instance for method chaining
+	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function replace( $old, $new )
 	{
@@ -137,7 +140,7 @@ class MW_Template_Base implements MW_Template_Interface
 	 * Substitutes the marker by given text.
 	 *
 	 * @param array $substitute Array of marker names (keys) and text to substitute (values)
-	 * @return MW_Template_Interface Own Instance for method chaining
+	 * @return \Aimeos\MW\Template\Iface Own Instance for method chaining
 	 */
 	public function substitute( array $substitute )
 	{
@@ -151,7 +154,7 @@ class MW_Template_Base implements MW_Template_Interface
 			{
 				if( ( $end = strpos( $this->text, $mend, $begin + strlen( $mbegin ) ) ) === false )
 				{
-					throw new MW_Template_Exception( sprintf( 'Error finding end of marker "%1$s" in template', $marker ) );
+					throw new \Aimeos\MW\Template\Exception( sprintf( 'Error finding end of marker "%1$s" in template', $marker ) );
 				}
 
 				$this->text = substr_replace( $this->text, $value, $begin, $end + strlen( $mend ) - $begin );
@@ -179,7 +182,7 @@ class MW_Template_Base implements MW_Template_Interface
 
 		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->begin, '/' ) ) . '/U';
 		if( preg_match_all( $regex, $text, $matches ) === false ) {
-			throw new MW_Template_Exception( sprintf( 'Invalid regular expression: %1$s', $regex ) );
+			throw new \Aimeos\MW\Template\Exception( sprintf( 'Invalid regular expression: %1$s', $regex ) );
 		}
 
 		$matches = array_unique( $matches[1] );
@@ -190,7 +193,7 @@ class MW_Template_Base implements MW_Template_Interface
 
 			$regex = '/' . $begin . '.*' . $end . '/smU';
 			if( ( $text = preg_replace( $regex, '', $text ) ) === null ) {
-				throw new MW_Template_Exception( sprintf( 'Invalid regular expression: %1$s', $regex ) );
+				throw new \Aimeos\MW\Template\Exception( sprintf( 'Invalid regular expression: %1$s', $regex ) );
 			}
 		}
 

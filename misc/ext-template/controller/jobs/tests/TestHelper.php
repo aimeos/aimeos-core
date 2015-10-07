@@ -1,11 +1,12 @@
 <?php
 
+namespace Aimeos;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
 class TestHelper
 {
 	private static $aimeos;
@@ -38,11 +39,11 @@ class TestHelper
 	{
 		if( !isset( self::$aimeos ) )
 		{
-			require_once 'Aimeos.php';
+			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos::autoload' );
 
 			$extdir = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
-			self::$aimeos = new Aimeos( array( $extdir ), false );
+			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );
 		}
 
 		return self::$aimeos;
@@ -57,39 +58,39 @@ class TestHelper
 
 	private static function createContext( $site )
 	{
-		$ctx = new MShop_Context_Item_Default();
+		$ctx = new \Aimeos\MShop\Context\Item\Standard();
 		$aimeos = self::getAimeos();
 
 
 		$paths = $aimeos->getConfigPaths( 'mysql' );
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 
-		$conf = new MW_Config_Array( array(), $paths );
-		$conf = new MW_Config_Decorator_Memory( $conf );
+		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
+		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 		$ctx->setConfig( $conf );
 
 
-		$dbm = new MW_DB_Manager_PDO( $conf );
+		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$logger = new MW_Logger_File( $site . '.log', MW_Logger_Abstract::DEBUG );
+		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
 		$ctx->setLogger( $logger );
 
 
-		$cache = new MW_Cache_None();
+		$cache = new \Aimeos\MW\Cache\None();
 		$ctx->setCache( $cache );
 
 
-		$i18n = new MW_Translation_None( 'de' );
+		$i18n = new \Aimeos\MW\Translation\None( 'de' );
 		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
-		$session = new MW_Session_None();
+		$session = new \Aimeos\MW\Session\None();
 		$ctx->setSession( $session );
 
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $ctx );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
 		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
 
@@ -104,19 +105,19 @@ class TestHelper
 	}
 
 
-	protected static function createView( MW_Config_Interface $config )
+	protected static function createView( \Aimeos\MW\Config\Iface $config )
 	{
-		$view = new MW_View_Default();
+		$view = new \Aimeos\MW\View\Standard();
 
-		$helper = new MW_View_Helper_Config_Default( $view, $config );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
 		$sepDec = $config->get( 'client/html/common/format/seperatorDecimal', '.' );
 		$sep1000 = $config->get( 'client/html/common/format/seperator1000', ' ' );
-		$helper = new MW_View_Helper_Number_Default( $view, $sepDec, $sep1000 );
+		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, $sepDec, $sep1000 );
 		$view->addHelper( 'number', $helper );
 
-		$helper = new MW_View_Helper_Encoder_Default( $view );
+		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
 		return $view;

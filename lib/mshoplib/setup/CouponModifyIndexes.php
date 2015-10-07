@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Modifies indexes in the coupon tables.
  */
-class MW_Setup_Task_CouponModifyIndexes extends MW_Setup_Task_Abstract
+class CouponModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'add' => array(

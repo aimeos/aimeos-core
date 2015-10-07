@@ -6,62 +6,65 @@
  */
 
 
+namespace Aimeos\Controller\Jobs;
+
+
 /**
- * Test class for Controller_Jobs_Factory.
+ * Test class for \Aimeos\Controller\Jobs\Factory.
  */
-class Controller_Jobs_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$controller = Controller_Jobs_Factory::createController( $context, $aimeos, 'admin/job' );
-		$this->assertInstanceOf( 'Controller_Jobs_Interface', $controller );
+		$controller = \Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, 'admin/job' );
+		$this->assertInstanceOf( '\\Aimeos\\Controller\\Jobs\\Iface', $controller );
 	}
 
 
 	public function testCreateControllerEmpty()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( $context, $aimeos, "\t\n" );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, "\t\n" );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( $context, $aimeos, '%^' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$this->setExpectedException( 'Controller_Jobs_Exception' );
-		Controller_Jobs_Factory::createController( $context, $aimeos, 'notexist' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, 'notexist' );
 	}
 
 
 	public function testGetControllers()
 	{
-		$context = TestHelper::getContext();
-		$aimeos = TestHelper::getAimeos();
+		$context = \TestHelper::getContext();
+		$aimeos = \TestHelper::getAimeos();
 
-		$list = Controller_Jobs_Factory::getControllers( $context, $aimeos, TestHelper::getControllerPaths() );
+		$list = \Aimeos\Controller\Jobs\Factory::getControllers( $context, $aimeos, \TestHelper::getControllerPaths() );
 
 		$this->assertGreaterThan( 0, count( $list ) );
 
 		foreach( $list as $key => $object ) {
-			$this->assertInstanceOf( 'Controller_Jobs_Interface', $object );
+			$this->assertInstanceOf( '\\Aimeos\\Controller\\Jobs\\Iface', $object );
 		}
 	}
 }

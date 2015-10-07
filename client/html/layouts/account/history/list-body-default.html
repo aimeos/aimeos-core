@@ -76,7 +76,7 @@ $accountAction = $this->config( 'client/html/account/history/url/action', 'histo
  */
 $accountConfig = $this->config( 'client/html/account/history/url/config', array() );
 
-$orderItems = $this->get( 'listOrderItems', array() );
+$orderItems = $this->get( 'listsOrderItems', array() );
 
 $dateformat = $this->translate( 'client/html', 'Y-m-d' );
 $attrformat = $this->translate( 'client/html', '%1$s at %2$s' );
@@ -119,4 +119,4 @@ $enc = $this->encoder();
 <?php	endif; ?>
 </div>
 <?php endif; ?>
-<?php echo $this->get( 'listBody' ); ?>
+<?php echo $this->get( 'listsBody' ); ?>

@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Media;
+
+
 /**
- * Exception thrown by media objects.
+ * \Exception thrown by media objects.
  *
  * @package MW
  * @subpackage Media
  */
-class MW_Media_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Setup;
+
+
 /**
- * Exception thrown by setup domain.
+ * \Exception thrown by setup domain.
  *
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

@@ -8,17 +8,20 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Coupon;
+
+
 /**
  * ExtJS coupon controller factory.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Coupon_Factory
-	extends Controller_ExtJS_Common_Factory_Abstract
-	implements Controller_ExtJS_Common_Factory_Interface
+class Factory
+	extends \Aimeos\Controller\ExtJS\Common\Factory\Base
+	implements \Aimeos\Controller\ExtJS\Common\Factory\Iface
 {
-	public static function createController( MShop_Context_Item_Interface $context, $name = null )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/controller/extjs/coupon/name
 		 * Class name of the used ExtJS coupon controller implementation
@@ -30,11 +33,11 @@ class Controller_ExtJS_Coupon_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_ExtJS_Coupon_Default
+		 *  \Aimeos\Controller\ExtJS\Coupon\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Controller_ExtJS_Coupon_Mycoupon
+		 *  \Aimeos\Controller\ExtJS\Coupon\Mycoupon
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -54,17 +57,17 @@ class Controller_ExtJS_Coupon_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/coupon/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/coupon/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'Controller_ExtJS_Coupon_' . $name : '<not a string>';
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\ExtJS\\Coupon\\' . $name : '<not a string>';
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_ExtJS_Common_Interface';
-		$classname = 'Controller_ExtJS_Coupon_' . $name;
+		$iface = '\\Aimeos\\Controller\\ExtJS\\Common\\Iface';
+		$classname = '\\Aimeos\\Controller\\ExtJS\\Coupon\\' . $name;
 
 		$controller = self::createControllerBase( $context, $classname, $iface );
 
@@ -83,7 +86,7 @@ class Controller_ExtJS_Coupon_Factory
 		 *  controller/extjs/coupon/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Controller_ExtJS_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Controller\ExtJS\Common\Decorator\*") added via
 		 * "controller/extjs/common/decorators/default" for the coupon ExtJS controller.
 		 *
 		 * @param array List of decorator names
@@ -103,12 +106,12 @@ class Controller_ExtJS_Coupon_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Controller_ExtJS_Common_Decorator_*") around the ExtJS controller.
+		 * ("\Aimeos\Controller\ExtJS\Common\Decorator\*") around the ExtJS controller.
 		 *
 		 *  controller/extjs/coupon/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_ExtJS_Common_Decorator_Decorator1" only to the ExtJS controller.
+		 * "\Aimeos\Controller\ExtJS\Common\Decorator\Decorator1" only to the ExtJS controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -127,12 +130,12 @@ class Controller_ExtJS_Coupon_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Controller_ExtJS_Coupon_Decorator_*") around the ExtJS controller.
+		 * ("\Aimeos\Controller\ExtJS\Coupon\Decorator\*") around the ExtJS controller.
 		 *
 		 *  controller/extjs/coupon/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_ExtJS_Coupon_Decorator_Decorator2" only to the ExtJS
+		 * "\Aimeos\Controller\ExtJS\Coupon\Decorator\Decorator2" only to the ExtJS
 		 * controller.
 		 *
 		 * @param array List of decorator names

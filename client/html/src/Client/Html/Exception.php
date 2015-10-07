@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\Client\Html;
+
+
 /**
  * Generic exception thrown by Client Html objects if no specialized exception is available.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Exception extends Exception
+class Exception extends \Exception
 {
 }

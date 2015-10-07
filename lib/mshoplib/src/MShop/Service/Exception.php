@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Service;
+
+
 /**
- * Exception thrown by service objects.
+ * \Exception thrown by service objects.
  *
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 	private $errorCodes = array();
 
@@ -24,7 +27,7 @@ class MShop_Service_Exception extends MShop_Exception
 	 *
 	 * @param string $message The exception message to throw
 	 * @param integer $code The exception code
-	 * @param Exception $previous The previous exception used for the exception chaining
+	 * @param \Exception $previous The previous exception used for the exception chaining
 	 * @param array $errorCodes Associative list of error codes
 	 */
 	public function __construct( $message = '', $code = 0, $previous = null, array $errorCodes = array() )

@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Perf;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Perf_CatalogTest extends PHPUnit_Framework_TestCase
+class CatalogTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $root;
@@ -13,12 +15,12 @@ class Perf_CatalogTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext( 'unitperf' );
+		$this->context = \TestHelper::getContext( 'unitperf' );
 
 		// parser warm up so files are already parsed (same as APC is used)
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
-		$this->root = $catalogManager->getTree( null, array( 'text', 'media' ), MW_Tree_Manager_Abstract::LEVEL_ONE );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$this->root = $catalogManager->getTree( null, array( 'text', 'media' ), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 	}
 
 
@@ -26,7 +28,7 @@ class Perf_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$catalogManager->getTree( null, array( 'text', 'media' ) );
 
 		$stop = microtime( true );
@@ -38,7 +40,7 @@ class Perf_CatalogTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$catalogManager->getTree( $this->root->getId(), array( 'text', 'media' ) );
 
 		$stop = microtime( true );

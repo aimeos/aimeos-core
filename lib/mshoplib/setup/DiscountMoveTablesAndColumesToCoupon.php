@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Creates all required tables.
  */
-class MW_Setup_Task_DiscountMoveTablesAndColumesToCoupon extends MW_Setup_Task_Abstract
+class DiscountMoveTablesAndColumesToCoupon extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_discount' => array(

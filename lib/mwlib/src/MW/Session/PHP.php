@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Session;
+
+
 /**
  * Implementation using PHP session.
  *
  * @package MW
  * @subpackage Session
  */
-class MW_Session_PHP implements MW_Session_Interface
+class PHP implements \Aimeos\MW\Session\Iface
 {
 	public function __construct()
 	{

@@ -6,37 +6,40 @@
  */
 
 
+namespace Aimeos\MShop\Customer\Manager;
+
+
 /**
- * Test class for MShop_Customer_Manager_Factory.
+ * Test class for \Aimeos\MShop\Customer\Manager\Factory.
  */
-class MShop_Customer_Manager_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 
 	}
 
 
 	public function testCreateManagerName()
 	{
-		$manager = MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'Standard' );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Customer_Exception' );
-		MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), '%$@' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Customer\\Exception' );
+		\Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), '%$@' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Customer_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'unknown' );
 	}
 
 }

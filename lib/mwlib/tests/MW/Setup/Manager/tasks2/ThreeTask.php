@@ -1,8 +1,9 @@
 <?php
 
+namespace Aimeos\MW\Setup\Task;
 
 
-class MW_Setup_Task_ThreeTask extends MW_Setup_Task_Abstract
+class ThreeTask extends Base
 {
 	public function getPreDependencies()
 	{

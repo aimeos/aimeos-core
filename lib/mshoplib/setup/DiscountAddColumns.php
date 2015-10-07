@@ -5,10 +5,14 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/*
+
+namespace Aimeos\MW\Setup\Task;
+
+
+/**
  * Creates all required columns
  */
-class MW_Setup_Task_DiscountAddColumns extends MW_Setup_Task_Abstract
+class DiscountAddColumns extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_discount' => array(

@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Basket;
+
+
 /**
- * Exception for basket frontend controller classes.
+ * \Exception for basket frontend controller classes.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Basket_Exception extends Controller_Frontend_Exception
+class Exception extends \Aimeos\Controller\Frontend\Exception
 {
 }

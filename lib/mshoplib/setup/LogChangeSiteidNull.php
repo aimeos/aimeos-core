@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes madmin log table to allow site id to be null.
  */
-class MW_Setup_Task_LogChangeSiteidNull extends MW_Setup_Task_Abstract
+class LogChangeSiteidNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = 'ALTER TABLE "madmin_log" CHANGE COLUMN "siteid" "siteid" INTEGER';
 

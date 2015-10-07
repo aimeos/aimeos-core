@@ -8,23 +8,26 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider\Decorator;
+
+
 /**
  * Required decorator for coupon provider.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_Decorator_Required
-	extends MShop_Coupon_Provider_Decorator_Abstract
-	implements MShop_Coupon_Provider_Decorator_Interface
+class Required
+	extends \Aimeos\MShop\Coupon\Provider\Decorator\Base
+	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {
 	/**
 	 * Checks for requirements.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return boolean True if the requirements are met, false if not
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		if( ( $prodcode = $this->getConfigValue( 'required.productcode' ) ) !== null )
 		{

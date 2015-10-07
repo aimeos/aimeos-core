@@ -1,44 +1,46 @@
 <?php
 
+namespace Aimeos\MW\Convert;
 
-class MW_Convert_FactoryTest extends PHPUnit_Framework_TestCase
+
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateConverter()
 	{
-		$object = MW_Convert_Factory::createConverter( 'Text/LatinUTF8' );
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$object = \Aimeos\MW\Convert\Factory::createConverter( 'Text/LatinUTF8' );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
 	}
 
 
 	public function testCreateConverterCompose()
 	{
-		$object = MW_Convert_Factory::createConverter( array( 'Text/LatinUTF8', 'DateTime/EnglishISO' ) );
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$object = \Aimeos\MW\Convert\Factory::createConverter( array( 'Text/LatinUTF8', 'DateTime/EnglishISO' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
 	}
 
 
 	public function testCreateConverterInvalidName()
 	{
-		$this->setExpectedException( 'MW_Convert_Exception' );
-		MW_Convert_Factory::createConverter( '$' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Convert\\Exception' );
+		\Aimeos\MW\Convert\Factory::createConverter( '$' );
 	}
 
 
 	public function testCreateConverterInvalidClass()
 	{
-		$this->setExpectedException( 'MW_Convert_Exception' );
-		MW_Convert_Factory::createConverter( 'Test/Invalid' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Convert\\Exception' );
+		\Aimeos\MW\Convert\Factory::createConverter( 'Test/Invalid' );
 	}
 
 
 	public function testCreateConverterInvalidInterface()
 	{
-		$this->setExpectedException( 'MW_Convert_Exception' );
-		MW_Convert_Factory::createConverter( 'Test/Test' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Convert\\Exception' );
+		\Aimeos\MW\Convert\Factory::createConverter( 'TestConvert' );
 	}
 }
 
 
-class MW_Convert_Test_Test
+class TestConvert
 {
 }

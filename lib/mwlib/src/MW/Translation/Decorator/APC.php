@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Translation\Decorator;
+
+
 /**
  * APC caching decorator for translation classes.
  *
  * @package MW
  * @subpackage Translation
  */
-class MW_Translation_Decorator_APC
-	extends MW_Translation_Decorator_Abstract
-	implements MW_Translation_Decorator_Interface
+class APC
+	extends \Aimeos\MW\Translation\Decorator\Base
+	implements \Aimeos\MW\Translation\Decorator\Iface
 {
 	private $prefix;
 
@@ -24,13 +27,13 @@ class MW_Translation_Decorator_APC
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Translation_Interface $object Translation object or decorator
+	 * @param \Aimeos\MW\Translation\Iface $object Translation object or decorator
 	 * @param string $prefix Prefix for keys to distinguish several instances
 	 */
-	public function __construct( MW_Translation_Interface $object, $prefix = '' )
+	public function __construct( \Aimeos\MW\Translation\Iface $object, $prefix = '' )
 	{
 		if( function_exists( 'apc_store' ) === false ) {
-			throw new MW_Translation_Exception( 'APC not available' );
+			throw new \Aimeos\MW\Translation\Exception( 'APC not available' );
 		}
 
 		parent::__construct( $object );

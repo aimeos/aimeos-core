@@ -6,16 +6,19 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Rebuilds the catalog index.
  */
-class MW_Setup_Task_DemoRebuildIndex extends MW_Setup_Task_Abstract
+class DemoRebuildIndex extends \Aimeos\MW\Setup\Task\Base
 {
-	public function __construct( MW_Setup_DBSchema_Interface $schema, MW_DB_Connection_Interface $conn, $additional = null )
+	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		parent::__construct( $schema, $conn, $additional );
@@ -60,7 +63,7 @@ class MW_Setup_Task_DemoRebuildIndex extends MW_Setup_Task_Abstract
 	{
 		$this->msg( 'Rebuilding catalog index for demo data', 0 );
 
-		MShop_Factory::createManager( $this->additional, 'catalog/index' )->rebuildIndex();
+		\Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/index' )->rebuildIndex();
 
 		$this->status( 'done' );
 	}

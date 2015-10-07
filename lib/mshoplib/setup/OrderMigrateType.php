@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Migrates type values in order table.
  */
-class MW_Setup_Task_OrderMigrateType extends MW_Setup_Task_Abstract
+class OrderMigrateType extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_order" SET "type" = \'repeat\' WHERE "type" = \'0\'',

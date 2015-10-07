@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Common\Criteria\Expression\Combine;
+
+
 /**
- * Test class for MW_Common_Criteria_Expression_Combine_PHP.
+ * Test class for \Aimeos\MW\Common\Criteria\Expression\Combine\PHP.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Common_Criteria_Expression_Combine_PHPTest extends PHPUnit_Framework_TestCase
+class PHPTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -31,19 +34,19 @@ class MW_Common_Criteria_Expression_Combine_PHPTest extends PHPUnit_Framework_Te
 	public function testGetOperators()
 	{
 		$expected = array( '&&', '||', '!' );
-		$actual = MW_Common_Criteria_Expression_Combine_PHP::getOperators();
+		$actual = \Aimeos\MW\Common\Criteria\Expression\Combine\PHP::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
 
 	public function testGetOperator()
 	{
-		$expr = new MW_Common_Criteria_Expression_Combine_PHP( '||', array() );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Combine\PHP( '||', array() );
 		$this->assertEquals( '||', $expr->getOperator() );
 	}
 
 	public function testGetExpressions()
 	{
-		$expr = new MW_Common_Criteria_Expression_Combine_PHP( '||', array() );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Combine\PHP( '||', array() );
 		$this->assertEquals( array(), $expr->getExpressions() );
 	}
 
@@ -68,20 +71,20 @@ class MW_Common_Criteria_Expression_Combine_PHPTest extends PHPUnit_Framework_Te
 		);
 
 		$expr1 = array();
-		$expr1[] = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'listitem', array('a', 'b', 'c') );
-		$expr1[] = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'stringvar', 'value' );
+		$expr1[] = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'listitem', array('a', 'b', 'c') );
+		$expr1[] = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'stringvar', 'value' );
 
 
 		$expr2 = array();
-		$expr2[] = new MW_Common_Criteria_Expression_Compare_PHP( '<', 'floatvar', 0.1 );
-		$expr2[] = new MW_Common_Criteria_Expression_Compare_PHP( '>', 'intvar', 10 );
+		$expr2[] = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '<', 'floatvar', 0.1 );
+		$expr2[] = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '>', 'intvar', 10 );
 
 		$objects = array();
-		$objects[] = new MW_Common_Criteria_Expression_Combine_PHP( '&&', $expr1 );
-		$objects[] = new MW_Common_Criteria_Expression_Combine_PHP( '&&', $expr2 );
+		$objects[] = new \Aimeos\MW\Common\Criteria\Expression\Combine\PHP( '&&', $expr1 );
+		$objects[] = new \Aimeos\MW\Common\Criteria\Expression\Combine\PHP( '&&', $expr2 );
 
-		$object = new MW_Common_Criteria_Expression_Combine_PHP( '||', $objects );
-		$test = new MW_Common_Criteria_Expression_Combine_PHP( '!', array( $object ) );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Combine\PHP( '||', $objects );
+		$test = new \Aimeos\MW\Common\Criteria\Expression\Combine\PHP( '!', array( $object ) );
 
 		$expected = " ! ( ( ( \$listitem == 'a' || \$listitem == 'b' || \$listitem == 'c' ) && \$stringvar == 'value' ) || ( \$floatvar < 0.1 && \$intvar > 10 ) )";
 		$this->assertEquals( $expected, $test->toString( $types, $translations ) );

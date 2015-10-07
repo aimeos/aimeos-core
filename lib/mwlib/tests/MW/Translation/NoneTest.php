@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Translation;
+
+
 /**
- * Test class for MW_Translation_NoneTest.
+ * Test class for \Aimeos\MW\Translation\NoneTest.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
+class NoneTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,7 +22,7 @@ class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_Translation_None( 'ru_XX' );
+		$this->object = new \Aimeos\MW\Translation\None( 'ru_XX' );
 	}
 
 
@@ -37,34 +40,34 @@ class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 
 	public function testConstructTwoLetterLocale()
 	{
-		new MW_Translation_None( 'de' );
+		new \Aimeos\MW\Translation\None( 'de' );
 	}
 
 
 	public function testConstructFiveLetterLocale()
 	{
-		new MW_Translation_None( 'de_DE' );
+		new \Aimeos\MW\Translation\None( 'de_DE' );
 	}
 
 
 	public function testConstructInvalidUnderscoreLocale()
 	{
-		$this->setExpectedException( 'MW_Translation_Exception' );
-		new MW_Translation_None( 'de_' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Translation\\Exception' );
+		new \Aimeos\MW\Translation\None( 'de_' );
 	}
 
 
 	public function testConstructInvalidCaseLocale()
 	{
-		$this->setExpectedException( 'MW_Translation_Exception' );
-		new MW_Translation_None( 'de_de' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Translation\\Exception' );
+		new \Aimeos\MW\Translation\None( 'de_de' );
 	}
 
 
 	public function testConstructInvalidCharLocale()
 	{
-		$this->setExpectedException( 'MW_Translation_Exception' );
-		new MW_Translation_None( 'd' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Translation\\Exception' );
+		new \Aimeos\MW\Translation\None( 'd' );
 	}
 
 
@@ -122,7 +125,7 @@ class MW_Translation_NoneTest extends PHPUnit_Framework_TestCase
 		{
 			foreach( $lcs as $lc )
 			{
-				$object = new MW_Translation_None( $lc );
+				$object = new \Aimeos\MW\Translation\None( $lc );
 				$this->assertEquals( 'test', $object->dn( 'testDomain', 'test', 'tests', $index ) );
 			}
 		}

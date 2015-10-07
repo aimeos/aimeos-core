@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Template;
+
+
 /**
- * Exception thrown by template objects.
+ * \Exception thrown by template objects.
  *
  * @package MW
  * @subpackage Template
  */
-class MW_Template_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

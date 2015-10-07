@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes product typeid column to NOT NULL.
  */
-class MW_Setup_Task_ProductChangeTypeidNotNull extends MW_Setup_Task_Abstract
+class ProductChangeTypeidNotNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_product"

@@ -1,22 +1,24 @@
 <?php
 
+namespace Aimeos\MW\Convert\Text;
 
-class MW_Convert_Text_LatinUTF8Test extends PHPUnit_Framework_TestCase
+
+class LatinUTF8Test extends \PHPUnit_Framework_TestCase
 {
 	public function testTranslate()
 	{
-		$object = new MW_Convert_Text_LatinUTF8();
+		$object = new \Aimeos\MW\Convert\Text\LatinUTF8();
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
 		$this->assertEquals( 'abc', $object->translate( 'abc' ) );
 	}
 
 
 	public function testReverse()
 	{
-		$object = new MW_Convert_Text_LatinUTF8();
+		$object = new \Aimeos\MW\Convert\Text\LatinUTF8();
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
 		$this->assertEquals( 'abc', $object->reverse( 'abc' ) );
 	}
 }

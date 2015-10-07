@@ -7,17 +7,20 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Price\Type;
+
+
 /**
  * Product type controller factory.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Price_Type_Factory
-	extends Controller_ExtJS_Common_Factory_Abstract
-	implements Controller_ExtJS_Common_Factory_Interface
+class Factory
+	extends \Aimeos\Controller\ExtJS\Common\Factory\Base
+	implements \Aimeos\Controller\ExtJS\Common\Factory\Iface
 {
-	public static function createController( MShop_Context_Item_Interface $context, $name = null )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/controller/extjs/price/type/name
 		 * Class name of the used ExtJS price type controller implementation
@@ -29,11 +32,11 @@ class Controller_ExtJS_Price_Type_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_ExtJS_Price_Type_Default
+		 *  \Aimeos\Controller\ExtJS\Price\Type\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Controller_ExtJS_Price_Type_Mytype
+		 *  \Aimeos\Controller\ExtJS\Price\Type\Mytype
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -53,17 +56,17 @@ class Controller_ExtJS_Price_Type_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/price/type/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/price/type/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'Controller_ExtJS_Price_Type_' . $name : '<not a string>';
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\ExtJS\\Price\\Type\\' . $name : '<not a string>';
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_ExtJS_Common_Interface';
-		$classname = 'Controller_ExtJS_Price_Type_' . $name;
+		$iface = '\\Aimeos\\Controller\\ExtJS\\Common\\Iface';
+		$classname = '\\Aimeos\\Controller\\ExtJS\\Price\\Type\\' . $name;
 
 		$controller = self::createControllerBase( $context, $classname, $iface );
 
@@ -82,7 +85,7 @@ class Controller_ExtJS_Price_Type_Factory
 		 *  controller/extjs/price/type/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("Controller_ExtJS_Common_Decorator_*") added via
+		 * common decorators ("\Aimeos\Controller\ExtJS\Common\Decorator\*") added via
 		 * "controller/extjs/common/decorators/default" for the admin ExtJS controller.
 		 *
 		 * @param array List of decorator names
@@ -102,12 +105,12 @@ class Controller_ExtJS_Price_Type_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("Controller_ExtJS_Common_Decorator_*") around the ExtJS controller.
+		 * ("\Aimeos\Controller\ExtJS\Common\Decorator\*") around the ExtJS controller.
 		 *
 		 *  controller/extjs/price/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "Controller_ExtJS_Common_Decorator_Decorator1" only to the ExtJS controller.
+		 * "\Aimeos\Controller\ExtJS\Common\Decorator\Decorator1" only to the ExtJS controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.09
@@ -126,12 +129,12 @@ class Controller_ExtJS_Price_Type_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("Controller_ExtJS_Price_Type_Decorator_*") around the ExtJS controller.
+		 * ("\Aimeos\Controller\ExtJS\Price\Type\Decorator\*") around the ExtJS controller.
 		 *
 		 *  controller/extjs/price/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "Controller_ExtJS_Price_Type_Decorator_Decorator2" only to the ExtJS
+		 * "\Aimeos\Controller\ExtJS\Price\Type\Decorator\Decorator2" only to the ExtJS
 		 * controller.
 		 *
 		 * @param array List of decorator names

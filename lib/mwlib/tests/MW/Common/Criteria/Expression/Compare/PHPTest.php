@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Common\Criteria\Expression\Compare;
+
+
 /**
- * Test class for MW_Common_Criteria_Expression_Compare_SQL.
+ * Test class for \Aimeos\MW\Common\Criteria\Expression\Compare\SQL.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Common_Criteria_Expression_Compare_PHPTest extends PHPUnit_Framework_TestCase
+class PHPTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -31,25 +34,25 @@ class MW_Common_Criteria_Expression_Compare_PHPTest extends PHPUnit_Framework_Te
 	public function testGetOperators()
 	{
 		$expected = array( '==', '!=', '>=', '<=', '>', '<' );
-		$actual = MW_Common_Criteria_Expression_Compare_PHP::getOperators();
+		$actual = \Aimeos\MW\Common\Criteria\Expression\Compare\PHP::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
 
 	public function testGetOperator()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'name', 'value' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'name', 'value' );
 		$this->assertEquals( '==', $expr->getOperator() );
 	}
 
 	public function testGetName()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'name', 'value' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'name', 'value' );
 		$this->assertEquals( 'name', $expr->getName() );
 	}
 
 	public function testGetValue()
 	{
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'name', 'value' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'name', 'value' );
 		$this->assertEquals( 'value', $expr->getValue() );
 	}
 
@@ -73,28 +76,28 @@ class MW_Common_Criteria_Expression_Compare_PHPTest extends PHPUnit_Framework_Te
 			'undefined' => '$undefined',
 		);
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'listitem', array('a', 'b', 'c') );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'listitem', array('a', 'b', 'c') );
 		$this->assertEquals( "( \$listitem == 'a' || \$listitem == 'b' || \$listitem == 'c' )", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '!=', 'listitem', array('a', 'b') );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '!=', 'listitem', array('a', 'b') );
 		$this->assertEquals( "( \$listitem != 'a' && \$listitem != 'b' )", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'stringvar', 'value' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'stringvar', 'value' );
 		$this->assertEquals( "\$stringvar == 'value'", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '<', 'floatvar', 0.1 );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '<', 'floatvar', 0.1 );
 		$this->assertEquals( '$floatvar < 0.1', $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_PHP( '>', 'intvar', 10 );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '>', 'intvar', 10 );
 		$this->assertEquals( '$intvar > 10', $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_PHP( '==', 'boolvar', true );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'boolvar', true );
 		$this->assertEquals( '$boolvar == 1', $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_PHP( '!=', 'undefined', null );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '!=', 'undefined', null );
 		$this->assertEquals( '$undefined !== null', $expr->toString( $types, $translations ) );
 
-		$expr= new MW_Common_Criteria_Expression_Compare_PHP( '==', 'undefined', null );
+		$expr= new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'undefined', null );
 		$this->assertEquals( '$undefined === null', $expr->toString( $types, $translations ) );
 
 
@@ -120,8 +123,8 @@ class MW_Common_Criteria_Expression_Compare_PHPTest extends PHPUnit_Framework_Te
 			'undefined' => '$undefined',
 		);
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '>=', 'listitem', array('a', 'b') );
-		$this->setExpectedException('MW_Common_Exception');
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '>=', 'listitem', array('a', 'b') );
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$expr->toString( $types, $translations );
 	}
 
@@ -145,15 +148,15 @@ class MW_Common_Criteria_Expression_Compare_PHPTest extends PHPUnit_Framework_Te
 			'undefined' => '$undefined',
 		);
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '>=', 'undefined', null );
-		$this->setExpectedException('MW_Common_Exception');
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '>=', 'undefined', null );
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$expr->toString( $types, $translations );
 	}
 
 	public function testToStringExcept3()
 	{
-		$this->setExpectedException('MW_Common_Exception');
-		new MW_Common_Criteria_Expression_Compare_PHP('=', 'undefined', null);
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP('=', 'undefined', null);
 	}
 
 	public function testToStringFunction()
@@ -170,13 +173,13 @@ class MW_Common_Criteria_Expression_Compare_PHPTest extends PHPUnit_Framework_Te
 			'substring()' => 'substr($1,$2,$3)',
 		);
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'length("string")', 6 );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'length("string")', 6 );
 		$this->assertEquals( "strlen('string') == 6", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'position("abcde", "c")', 2 );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'position("abcde", "c")', 2 );
 		$this->assertEquals( "strpos('abcde','c') == 2", $expr->toString( $types, $translations ) );
 
-		$expr = new MW_Common_Criteria_Expression_Compare_PHP( '==', 'substring("hello world", 0, 5)', 'hello' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Compare\PHP( '==', 'substring("hello world", 0, 5)', 'hello' );
 		$this->assertEquals( "substr('hello world',0,5) == 'hello'", $expr->toString( $types, $translations ) );
 	}
 

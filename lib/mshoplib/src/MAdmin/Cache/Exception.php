@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MAdmin\Cache;
+
+
 /**
- * Exception thrown by cache classes.
+ * \Exception thrown by cache classes.
  *
  * @package MAdmin
  * @subpackage Cache
  */
-class MAdmin_Cache_Exception extends MAdmin_Exception
+class Exception extends \Aimeos\MAdmin\Exception
 {
 }

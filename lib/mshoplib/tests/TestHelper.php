@@ -4,8 +4,6 @@
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
 class TestHelper
 {
 	private static $aimeos;
@@ -15,7 +13,7 @@ class TestHelper
 	public static function bootstrap()
 	{
 		self::getAimeos();
-		MShop_Factory::setCache( false );
+		\Aimeos\MShop\Factory::setCache( false );
 	}
 
 
@@ -33,9 +31,9 @@ class TestHelper
 	{
 		if( !isset( self::$aimeos ) )
 		{
-			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Aimeos.php';
+			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-			self::$aimeos = new Aimeos( array(), false );
+			self::$aimeos = new \Aimeos\Bootstrap( array(), false );
 		}
 
 		return self::$aimeos;
@@ -47,7 +45,7 @@ class TestHelper
 	 */
 	private static function createContext( $site )
 	{
-		$ctx = new MShop_Context_Item_Default();
+		$ctx = new \Aimeos\MShop\Context\Item\Standard();
 		$aimeos = self::getAimeos();
 
 
@@ -55,33 +53,33 @@ class TestHelper
 		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
-		$conf = new MW_Config_Array( array(), $paths );
-		$conf = new MW_Config_Decorator_Memory( $conf );
-		$conf = new MW_Config_Decorator_Documentor( $conf, $file );
+		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
+		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
+		$conf = new \Aimeos\MW\Config\Decorator\Documentor( $conf, $file );
 		$ctx->setConfig( $conf );
 
 
-		$dbm = new MW_DB_Manager_PDO( $conf );
+		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$logger = new MW_Logger_File( $site . '.log', MW_Logger_Abstract::DEBUG );
+		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
 		$ctx->setLogger( $logger );
 
 
-		$cache = new MW_Cache_None();
+		$cache = new \Aimeos\MW\Cache\None();
 		$ctx->setCache( $cache );
 
 
-		$i18n = new MW_Translation_None( 'de' );
+		$i18n = new \Aimeos\MW\Translation\None( 'de' );
 		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
-		$session = new MW_Session_None();
+		$session = new \Aimeos\MW\Session\None();
 		$ctx->setSession( $session );
 
 
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $ctx );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
 		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
 

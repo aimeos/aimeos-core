@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Translation;
+
+
 /**
  * Translation using a serialized array
  *
  * @package MW
  * @subpackage Translation
  */
-class MW_Translation_SerializedArray
-	extends MW_Translation_Abstract
-	implements MW_Translation_Interface
+class SerializedArray
+	extends \Aimeos\MW\Translation\Base
+	implements \Aimeos\MW\Translation\Iface
 {
 	private $translations = array();
 	private $translationSources = array();
@@ -54,7 +57,7 @@ class MW_Translation_SerializedArray
 	 * @param string $domain Translation domain
 	 * @param string $string String to be translated
 	 * @return string The translated string
-	 * @throws MW_Translation_Exception Throws exception on initialization of the translation
+	 * @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
 	public function dt( $domain, $string )
 	{
@@ -71,7 +74,7 @@ class MW_Translation_SerializedArray
 				}
 			}
 		}
-		catch( Exception $e ) { ; } // no translation found
+		catch( \Exception $e ) { ; } // no translation found
 
 		return (string) $string;
 	}
@@ -85,7 +88,7 @@ class MW_Translation_SerializedArray
 	 * @param string $plural String in plural form
 	 * @param integer $number Quantity to choose the correct plural form for languages with plural forms
 	 * @return string Returns the translated singular or plural form of the string depending on the given number
-	 * @throws MW_Translation_Exception If the initialization of the translation
+	 * @throws \Aimeos\MW\Translation\Exception If the initialization of the translation
 	 */
 	public function dn( $domain, $singular, $plural, $number )
 	{
@@ -100,7 +103,7 @@ class MW_Translation_SerializedArray
 				}
 			}
 		}
-		catch( Exception $e ) { ; } // no translation found
+		catch( \Exception $e ) { ; } // no translation found
 
 		if( $index > 0 ) {
 			return (string) $plural;
@@ -135,7 +138,7 @@ class MW_Translation_SerializedArray
 	 *
 	 * @param string $domain Translation domain
 	 * @return array Returns a list with key value pairs for each domain.
-	 * @throws MW_Translation_Exception Throws exception on initialization of the translation
+	 * @throws \Aimeos\MW\Translation\Exception Throws exception on initialization of the translation
 	 */
 	private function getTranslations( $domain )
 	{
@@ -144,7 +147,7 @@ class MW_Translation_SerializedArray
 			if( !isset( $this->translationSources[$domain] ) )
 			{
 				$msg = sprintf( 'No translation directory for domain "%1$s" available', $domain );
-				throw new MW_Translation_Exception( $msg );
+				throw new \Aimeos\MW\Translation\Exception( $msg );
 			}
 
 			// Reverse locations so the former gets not overwritten by the later
@@ -153,11 +156,11 @@ class MW_Translation_SerializedArray
 			foreach( $locations as $location )
 			{
 				if( ( $content = file_get_contents( $location ) ) === false ) {
-					throw new MW_Translation_Exception( 'No translation file "%1$s" available', $location );
+					throw new \Aimeos\MW\Translation\Exception( 'No translation file "%1$s" available', $location );
 				}
 
 				if( ( $content = unserialize( $content ) ) === false ) {
-					throw new MW_Translation_Exception( 'Invalid content in translation file "%1$s"', $location );
+					throw new \Aimeos\MW\Translation\Exception( 'Invalid content in translation file "%1$s"', $location );
 				}
 
 				$this->translations[$domain][] = $content;

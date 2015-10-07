@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Order;
+
+
 /**
- * Exception thrown by the order frontend controller classes.
+ * \Exception thrown by the order frontend controller classes.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Order_Exception extends Controller_Frontend_Exception
+class Exception extends \Aimeos\Controller\Frontend\Exception
 {
 }

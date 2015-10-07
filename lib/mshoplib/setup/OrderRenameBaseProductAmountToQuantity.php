@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames column amount to quantity in order base product table.
  */
-class MW_Setup_Task_OrderRenameBaseProductAmountToQuantity extends MW_Setup_Task_Abstract
+class OrderRenameBaseProductAmountToQuantity extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base_product' => 

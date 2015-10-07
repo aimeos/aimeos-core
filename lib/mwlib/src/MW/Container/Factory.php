@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Container;
+
+
 /**
  * Factory for manageing containers like Zip or Excel.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Factory
+class Factory
 {
 	/**
 	 * Opens an existing container or creates a new one.
@@ -27,21 +30,21 @@ class MW_Container_Factory
 	{
 		if( ctype_alnum( $type ) === false )
 		{
-			$classname = is_string( $type ) ? 'MW_Container_' . $type : '<not a string>';
-			throw new MW_Container_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $type ) ? '\\Aimeos\\MW\\Container\\' . $type : '<not a string>';
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MW_Container_Interface';
-		$classname = 'MW_Container_' . $type;
+		$iface = '\\Aimeos\\MW\\Container\\Iface';
+		$classname = '\\Aimeos\\MW\\Container\\' . $type;
 
 		if( class_exists( $classname ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 		}
 
 		$object = new $classname( $resourcepath, $format, $options );
 
 		if( !( $object instanceof $iface ) ) {
-			throw new MW_Container_Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
 		}
 
 		return $object;

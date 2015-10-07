@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Modifies indexes in the service tables.
  */
-class MW_Setup_Task_ServiceModifyIndexes extends MW_Setup_Task_Abstract
+class ServiceModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'add' => array(

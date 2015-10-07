@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\DB;
+
+
 /**
- * Exception for database related operations.
+ * \Exception for database related operations.
  *
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 	protected $info;
 	protected $state;

@@ -8,17 +8,20 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Attribute\Export\Text;
+
+
 /**
  * ExtJS attribute text export controller factory.
  *
  * @package Controller
  * @subpackage ExtJS
  */
-class Controller_ExtJS_Attribute_Export_Text_Factory
-	extends Controller_ExtJS_Common_Factory_Abstract
-	implements Controller_ExtJS_Common_Factory_Interface
+class Factory
+	extends \Aimeos\Controller\ExtJS\Common\Factory\Base
+	implements \Aimeos\Controller\ExtJS\Common\Factory\Iface
 {
-	public static function createController( MShop_Context_Item_Interface $context, $name = null )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/controller/extjs/attribute/export/text/name
 		 * Class name of the used ExtJS attribute export text controller implementation
@@ -30,11 +33,11 @@ class Controller_ExtJS_Attribute_Export_Text_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Controller_ExtJS_Attribute_Export_Text_Default
+		 *  \Aimeos\Controller\ExtJS\Attribute\Export\Text\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Controller_ExtJS_Attribute_Export_Text_Mytext
+		 *  \Aimeos\Controller\ExtJS\Attribute\Export\Text\Mytext
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -54,17 +57,17 @@ class Controller_ExtJS_Attribute_Export_Text_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/attribute/export/text/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/extjs/attribute/export/text/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'Controller_ExtJS_Attribute_Export_Text_' . $name : '<not a string>';
-			throw new Controller_ExtJS_Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\ExtJS\\Attribute\\Export\\Text\\' . $name : '<not a string>';
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Invalid class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Controller_ExtJS_Common_Load_Text_Interface';
-		$classname = 'Controller_ExtJS_Attribute_Export_Text_' . $name;
+		$iface = '\\Aimeos\\Controller\\ExtJS\\Common\\Load\\Text\\Iface';
+		$classname = '\\Aimeos\\Controller\\ExtJS\\Attribute\\Export\\Text\\' . $name;
 
 		return self::createControllerBase( $context, $classname, $iface );
 	}

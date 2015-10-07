@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider\Decorator;
+
+
 /**
- * Test class for MShop_Coupon_Provider_Decorator_Required.
+ * Test class for \Aimeos\MShop\Coupon\Provider\Decorator\Required.
  */
-class MShop_Coupon_Provider_Decorator_RequiredTest extends PHPUnit_Framework_TestCase
+class RequiredTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $orderBase;
@@ -25,23 +28,23 @@ class MShop_Coupon_Provider_Decorator_RequiredTest extends PHPUnit_Framework_Tes
 	protected function setUp()
 	{
 		$orderProducts = array();
-		$context = TestHelper::getContext();
-		$this->couponItem = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
+		$context = \TestHelper::getContext();
+		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
 
-		$provider = new MShop_Coupon_Provider_Example( $context, $this->couponItem, 'abcd' );
-		$this->object = new MShop_Coupon_Provider_Decorator_Required( $context, $this->couponItem, 'abcd', $provider );
+		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $this->couponItem, 'abcd' );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Required( $context, $this->couponItem, 'abcd', $provider );
 		$this->object->setObject( $this->object );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC' ) ) );
 		$products = $productManager->searchItems( $search );
 
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
 		$price = $priceManager->createItem();
 		$price->setValue( 321 );
 
@@ -54,7 +57,7 @@ class MShop_Coupon_Provider_Decorator_RequiredTest extends PHPUnit_Framework_Tes
 
 		$orderProducts['CNC']->setPrice( $price );
 
-		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
 		$this->orderBase->addProduct( $orderProducts['CNC'] );
 	}
 

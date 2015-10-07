@@ -8,30 +8,33 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Service;
+
+
 /**
  * Frontend service test factory.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Service_Factorylocal
-	extends Controller_Frontend_Common_Factory_Abstract
+class Factorylocal
+	extends \Aimeos\Controller\Frontend\Common\Factory\Base
 {
 	/**
 	 * @param string $name
 	 */
-	public static function createController( MShop_Context_Item_Interface $context, $name = null, $domainToTest = 'service' )
+	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null, $domainToTest = 'service' )
 	{
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/frontend/service/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/controller/frontend/service/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false ) {
-			throw new Controller_Frontend_Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
+			throw new \Aimeos\Controller\Frontend\Exception( sprintf( 'Invalid characters in class name "%1$s"', $name ) );
 		}
 
-		$iface = 'Controller_Frontend_Service_Interface';
-		$classname = 'Controller_Frontend_Service_' . $name;
+		$iface = '\\Aimeos\\Controller\\Frontend\\Service\\Iface';
+		$classname = '\\Aimeos\\Controller\\Frontend\\Service\\' . $name;
 
 		$manager = self::createControllerBase( $context, $classname, $iface );
 		return self::addControllerDecorators( $context, $manager, $domainToTest );

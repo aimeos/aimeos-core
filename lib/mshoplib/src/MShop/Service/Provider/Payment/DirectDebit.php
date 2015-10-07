@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Payment;
+
+
 /**
  * Payment provider for direct debit orders.
  *
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Provider_Payment_DirectDebit
-	extends MShop_Service_Provider_Payment_Abstract
-	implements MShop_Service_Provider_Payment_Interface
+class DirectDebit
+	extends \Aimeos\MShop\Service\Provider\Payment\Base
+	implements \Aimeos\MShop\Service\Provider\Payment\Iface
 {
 	private $feConfig = array(
 		'directdebit.accountowner' => array(
@@ -62,10 +65,10 @@ class MShop_Service_Provider_Payment_DirectDebit
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the frontend.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket Basket object
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
-	public function getConfigFE( MShop_Order_Item_Base_Interface $basket )
+	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$list = array();
 		$feconfig = $this->feConfig;
@@ -78,10 +81,10 @@ class MShop_Service_Provider_Payment_DirectDebit
 				$feconfig['directdebit.accountowner']['default'] = $fn . ' ' . $ln;
 			}
 		}
-		catch( MShop_Order_Exception $e ) { ; } // If address isn't available
+		catch( \Aimeos\MShop\Order\Exception $e ) { ; } // If address isn't available
 
 		foreach( $feconfig as $key => $config ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
+			$list[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $config );
 		}
 
 		return $list;
@@ -103,10 +106,10 @@ class MShop_Service_Provider_Payment_DirectDebit
 	/**
 	 * Sets the payment attributes in the given service.
 	 *
-	 * @param MShop_Order_Item_Base_Service_Interface $orderServiceItem Order service item that will be added to the basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
 	 */
-	public function setConfigFE( MShop_Order_Item_Base_Service_Interface $orderServiceItem, array $attributes )
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes )
 	{
 		$this->setAttributes( $orderServiceItem, $attributes, 'payment' );
 
@@ -129,14 +132,14 @@ class MShop_Service_Provider_Payment_DirectDebit
 	 * Tries to get an authorization or captures the money immediately for the given order if capturing the money
 	 * separately isn't supported or not configured by the shop owner.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 * @param array $params Request parameter if available
-	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( MShop_Order_Item_Interface $order, array $params = array() )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() )
 	{
-		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
+		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
 		$this->saveOrder( $order );
 
 		return parent::process( $order, $params );

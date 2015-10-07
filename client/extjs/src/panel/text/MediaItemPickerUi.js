@@ -9,7 +9,7 @@ Ext.ns('MShop.panel.text');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.text.ItemUi', 'MShop.panel.text.MediaItemPickerUi', {
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
-        recordName : 'Text_List',
+        recordName : 'Text_Lists',
         idProperty : 'text.list.id',
         siteidProperty : 'text.list.siteid',
         listNamePrefix : 'text.list.',

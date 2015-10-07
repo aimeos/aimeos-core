@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames column customercode to customerid in order base table.
  */
-class MW_Setup_Task_OrderRenameBaseCustomerCodeToId extends MW_Setup_Task_Abstract
+class OrderRenameBaseCustomerCodeToId extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base' => 

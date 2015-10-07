@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds catalog list test data and all items from other domains.
  */
-class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
+class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding catalog-list test data', 0 );
@@ -59,11 +62,11 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'catalog-list.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for catalog list domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for catalog list domain', $path ) );
 		}
 
 		$refKeys = array();
-		foreach( $testdata['catalog/list'] as $dataset ) {
+		foreach( $testdata['catalog/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
@@ -82,17 +85,17 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 	 * Gets required text item ids.
 	 *
 	 * @param array $keys List of keys for search
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	private function getTextData( array $keys )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$labels = array();
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref text are set wrong "%1$s"', $dataset ) );
 			}
 
 			$labels[] = $str;
@@ -114,17 +117,17 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 	 * Gets required media item ids.
 	 *
 	 * @param array $keys List of keys for search
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	private function getMediaData( array $keys )
 	{
-		$mediaManager = MShop_Media_Manager_Factory::createManager( $this->additional, 'Default' );
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$urls = array();
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref media are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref media are set wrong "%1$s"', $dataset ) );
 			}
 
 			$urls[] = $str;
@@ -146,17 +149,17 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 	 * Gets required product item ids.
 	 *
 	 * @param array $keys List of keys for search
-	 * @throws MW_Setup_Exception If no product is found
+	 * @throws \Aimeos\MW\Setup\Exception If no product is found
 	 */
 	private function getProductData( array $keys )
 	{
-		$productManager = MShop_Product_Manager_Factory::createManager( $this->additional, 'Default' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$codes = array();
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for ref product are set wrong "%1$s"', $dataset ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref product are set wrong "%1$s"', $dataset ) );
 			}
 
 			$codes[] = $str;
@@ -179,19 +182,19 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 	 *
 	 * @param array $testdata Associative list of key/list pairs
 	 * @param array $refIds Associative list of domains and the keys/IDs of the inserted items
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addCatalogListData( array $testdata, array $refIds )
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->additional, 'Default' );
-		$catalogListManager = $catalogManager->getSubManager( 'list', 'Default' );
-		$catalogListTypeManager = $catalogListManager->getSubManager( 'type', 'Default' );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$catalogListManager = $catalogManager->getSubManager( 'lists', 'Standard' );
+		$catalogListTypeManager = $catalogListManager->getSubManager( 'type', 'Standard' );
 
 		$itemCode = array();
-		foreach( $testdata['catalog/list'] as $dataset )
+		foreach( $testdata['catalog/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
-				throw new MW_Setup_Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$itemCode[] = $str;
@@ -210,7 +213,7 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 
 		$this->conn->begin();
 
-		foreach( $testdata['catalog/list/type'] as $key => $dataset )
+		foreach( $testdata['catalog/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
 			$listItemType->setCode( $dataset['code'] );
@@ -223,18 +226,18 @@ class MW_Setup_Task_CatalogListAddTestData extends MW_Setup_Task_Abstract
 		}
 
 		$listItem = $catalogListManager->createItem();
-		foreach( $testdata['catalog/list'] as $dataset )
+		foreach( $testdata['catalog/lists'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No catalog ID found for "%1$s"', $dataset['parentid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No catalog ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			if( !isset( $refIds[$dataset['domain']][$dataset['refid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No "%1$s" ref ID found for "%2$s"', $dataset['refid'], $dataset['domain'] ) );
 			}
 
 			if( !isset( $listItemTypeIds[$dataset['typeid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No catalog list type ID found for "%1$s"', $dataset['typeid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No catalog list type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$listItem->setId( null );

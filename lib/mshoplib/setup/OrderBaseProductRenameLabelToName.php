@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames column label to name in order base product table.
  */
-class MW_Setup_Task_OrderBaseProductRenameLabelToName extends MW_Setup_Task_Abstract
+class OrderBaseProductRenameLabelToName extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base_product' => array(

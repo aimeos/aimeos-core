@@ -11,7 +11,7 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 
 	xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
-        recordName : 'Supplier_List',
+        recordName : 'Supplier_Lists',
         idProperty : 'supplier.list.id',
         siteidProperty : 'supplier.list.siteid',
         listDomain : 'supplier',

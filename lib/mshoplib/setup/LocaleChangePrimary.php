@@ -5,10 +5,14 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/*
+
+namespace Aimeos\MW\Setup\Task;
+
+
+/**
  * Removing siteid from PRIMARY KEY on locale tables.
  */
-class MW_Setup_Task_LocaleChangePrimary extends MW_Setup_Task_Abstract
+class LocaleChangePrimary extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_locale_currency' => '

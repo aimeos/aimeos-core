@@ -5,36 +5,39 @@
  */
 
 
+namespace Aimeos\MAdmin\Job\Manager;
+
+
 /**
- * Test class for MAdmin_Job_Manager_Factory.
+ * Test class for \Aimeos\MAdmin\Job\Manager\Factory.
  */
-class MAdmin_Job_Manager_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = MAdmin_Job_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$manager = \Aimeos\MAdmin\Job\Manager\Factory::createManager( \TestHelper::getContext() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerName()
 	{
-		$manager = MAdmin_Job_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$manager = \Aimeos\MAdmin\Job\Manager\Factory::createManager( \TestHelper::getContext(), 'Standard' );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( 'MAdmin_Job_Exception' );
-		MAdmin_Job_Manager_Factory::createManager( TestHelper::getContext(), '%^' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Job\\Exception' );
+		\Aimeos\MAdmin\Job\Manager\Factory::createManager( \TestHelper::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MAdmin_Job_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MAdmin\Job\Manager\Factory::createManager( \TestHelper::getContext(), 'unknown' );
 	}
 
 }

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Renames domain column to type in order tables.
  */
-class MW_Setup_Task_OrderRenameDomainToType extends MW_Setup_Task_Abstract
+class OrderRenameDomainToType extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order' => array(

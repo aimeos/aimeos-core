@@ -11,7 +11,7 @@ return array(
 		'unit_warehouse3' => array( 'code' => 'unit_warehouse3', 'label' => 'warehouse label 3', 'status' => 1 ),
 		'unit_warehouse4' => array( 'code' => 'unit_warehouse4', 'label' => 'warehouse label 4', 'status' => 1 ),
 		'unit_warehouse5' => array( 'code' => 'unit_warehouse5', 'label' => 'warehouse label 5', 'status' => 1 ),
-		'default' => array( 'code' => 'default', 'label' => 'Default', 'status' => 1 ),
+		'default' => array( 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
 	'product/stock' => array(

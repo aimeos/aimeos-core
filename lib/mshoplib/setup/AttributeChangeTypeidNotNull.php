@@ -7,10 +7,13 @@
 
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes typeid column in attribute table to allow no NULL values any more.
  */
-class MW_Setup_Task_AttributeChangeTypeidNotNull extends MW_Setup_Task_Abstract
+class AttributeChangeTypeidNotNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_attribute" SET "typeid" = ( SELECT type."id" FROM "mshop_attribute_type" type WHERE type."code" = \'default\' AND type."domain" = \'attribute\' ) WHERE "domain" = \'attribute\'',

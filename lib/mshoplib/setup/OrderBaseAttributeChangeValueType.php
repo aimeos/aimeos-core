@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes the column type of mshop_order_base_*_attr.value from VARCHAR to TEXT.
  */
-class MW_Setup_Task_OrderBaseAttributeChangeValueType extends MW_Setup_Task_Abstract
+class OrderBaseAttributeChangeValueType extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order_base_product_attr' => array(

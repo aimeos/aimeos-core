@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_Container_Content_TextTest extends PHPUnit_Framework_TestCase
+class TextTest extends \PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
@@ -19,7 +20,7 @@ class MW_Container_Content_TextTest extends PHPUnit_Framework_TestCase
 	public function testNewFile()
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
-		$file = new MW_Container_Content_Text( $filename, 'temp' );
+		$file = new \Aimeos\MW\Container\Content\Text( $filename, 'temp' );
 
 		$check = file_exists( $file->getResource() );
 		unlink( $file->getResource() );
@@ -32,7 +33,7 @@ class MW_Container_Content_TextTest extends PHPUnit_Framework_TestCase
 	public function testExistingFile()
 	{
 		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'testfile';
-		$file = new MW_Container_Content_Text( $filename, 'testfile' );
+		$file = new \Aimeos\MW\Container\Content\Text( $filename, 'testfile' );
 
 		$this->assertEquals( true, file_exists( $file->getResource() ) );
 	}
@@ -46,7 +47,7 @@ class MW_Container_Content_TextTest extends PHPUnit_Framework_TestCase
 
 		$path = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile';
 
-		$file = new MW_Container_Content_Text( $path, 'temp', $options );
+		$file = new \Aimeos\MW\Container\Content\Text( $path, 'temp', $options );
 		$file->add( 'test text' );
 		$file->close();
 
@@ -63,7 +64,7 @@ class MW_Container_Content_TextTest extends PHPUnit_Framework_TestCase
 	public function testIterator()
 	{
 		$path = __DIR__ . DIRECTORY_SEPARATOR . 'testfile.txt';
-		$file = new MW_Container_Content_Text( $path, 'test' );
+		$file = new \Aimeos\MW\Container\Content\Text( $path, 'test' );
 
 		$expected = array( 'test text' );
 

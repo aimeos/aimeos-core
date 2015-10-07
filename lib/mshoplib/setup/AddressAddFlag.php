@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds flag column to address tables.
  */
-class MW_Setup_Task_AddressAddFlag extends MW_Setup_Task_Abstract
+class AddressAddFlag extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_customer_address' => 'ALTER TABLE "mshop_customer_address" ADD "flag" INTEGER NOT NULL AFTER "website"',

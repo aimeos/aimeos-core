@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Payment;
+
+
 /**
- * Test class for MShop_Service_Provider_Payment_PostPay.
+ * Test class for \Aimeos\MShop\Service\Provider\Payment\PostPay.
  */
-class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestCase
+class PostPayTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,13 +25,13 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+		$context = \TestHelper::getContext();
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
 
 		$serviceItem = $serviceManager->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PostPay' )
+		$this->object = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\PostPay' )
 			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
@@ -65,7 +68,7 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 	public function testProcess()
 	{
 		// Currently does nothing.
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$this->object->process( $manager->createItem() );
 	}
@@ -73,8 +76,8 @@ class MShop_Service_Provider_Payment_PostPayTest extends PHPUnit_Framework_TestC
 
 	public function testIsImplemented()
 	{
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL ) );
 	}
 }

@@ -1,5 +1,8 @@
 <?php
 
-class Controller_Frontend_Order_Invalid
+namespace Aimeos\Controller\Frontend\Order;
+
+
+class Invalid
 {
 }

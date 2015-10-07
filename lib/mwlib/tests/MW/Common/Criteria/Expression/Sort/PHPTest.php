@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Common\Criteria\Expression\Sort;
+
+
 /**
- * Test class for MW_Common_Criteria_Expression_Sort_PHP.
+ * Test class for \Aimeos\MW\Common\Criteria\Expression\Sort\PHP.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Common_Criteria_Expression_Sort_PHPTest extends PHPUnit_Framework_TestCase
+class PHPTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -31,19 +34,19 @@ class MW_Common_Criteria_Expression_Sort_PHPTest extends PHPUnit_Framework_TestC
 	public function testGetOperators()
 	{
 		$expected = array( '+', '-' );
-		$actual = MW_Common_Criteria_Expression_Sort_PHP::getOperators();
+		$actual = \Aimeos\MW\Common\Criteria\Expression\Sort\PHP::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
 
 	public function testGetOperator()
 	{
-		$expr = new MW_Common_Criteria_Expression_Sort_PHP( '+', 'test' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '+', 'test' );
 		$this->assertEquals( '+', $expr->getOperator() );
 	}
 
 	public function testGetName()
 	{
-		$expr = new MW_Common_Criteria_Expression_Sort_PHP( '-', 'test' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '-', 'test' );
 		$this->assertEquals( 'test', $expr->getName() );
 	}
 
@@ -51,25 +54,25 @@ class MW_Common_Criteria_Expression_Sort_PHPTest extends PHPUnit_Framework_TestC
 	{
 		$types = array(
 			'test' => 'array',
-			'test()' => MW_DB_Statement_Abstract::PARAM_STR,
+			'test()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		);
 		$translations = array(
 			'test()' => 'testfunc($1,$2)',
 		);
 
-		$object = new MW_Common_Criteria_Expression_Sort_PHP( '-', 'test' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '-', 'test' );
 		$this->assertEquals( 'arsort(test);', $object->toString( $types ) );
 
-		$object = new MW_Common_Criteria_Expression_Sort_PHP( '+', 'test' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '+', 'test' );
 		$this->assertEquals( 'asort(test);', $object->toString( $types ) );
 
-		$object = new MW_Common_Criteria_Expression_Sort_PHP( '+', 'test(1,2)' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '+', 'test(1,2)' );
 		$this->assertEquals( 'asort(testfunc(1,2));', $object->toString( $types, $translations ) );
 
-		$object = new MW_Common_Criteria_Expression_Sort_PHP( '+', 'test(1.2,2.1)' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '+', 'test(1.2,2.1)' );
 		$this->assertEquals( 'asort(testfunc(1.2,2.1));', $object->toString( $types, $translations ) );
 
-		$object = new MW_Common_Criteria_Expression_Sort_PHP( '+', 'test("1","2")' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '+', 'test("1","2")' );
 		$this->assertEquals( 'asort(testfunc(1,2));', $object->toString( $types, $translations ) );
 
 
@@ -77,24 +80,24 @@ class MW_Common_Criteria_Expression_Sort_PHPTest extends PHPUnit_Framework_TestC
 
 	public function testException1()
 	{
-		$this->setExpectedException('MW_Common_Exception');
-		new MW_Common_Criteria_Expression_Sort_PHP( '/', 'test(1,2)' );
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '/', 'test(1,2)' );
 	}
 
 	public function testException2()
 	{
 		$types = array(
 			'test' => 'array',
-			'test()' => MW_DB_Statement_Abstract::PARAM_STR,
+			'test()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		);
 
 		$translations = array(
 			'test()' => 'testfunc($1,$2)',
 		);
 
-		$object = new MW_Common_Criteria_Expression_Sort_PHP( '+', 'wrongType' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\PHP( '+', 'wrongType' );
 
-		$this->setExpectedException('MW_Common_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$object->toString( $types, $translations );
 	}
 

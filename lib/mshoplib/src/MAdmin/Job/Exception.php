@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MAdmin\Job;
+
+
 /**
- * Exception thrown by job classes.
+ * \Exception thrown by job classes.
  *
  * @package MAdmin
  * @subpackage Job
  */
-class MAdmin_Job_Exception extends MAdmin_Exception
+class Exception extends \Aimeos\MAdmin\Exception
 {
 }

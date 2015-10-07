@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MShop\Common\Item\Helper\Password;
+
+
 /**
  * Generic hash implementation of the password helper item.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Item_Helper_Password_Hash implements MShop_Common_Item_Helper_Password_Interface
+class Hash implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
 {
 	private $options = array();
 	
@@ -27,11 +30,11 @@ class MShop_Common_Item_Helper_Password_Hash implements MShop_Common_Item_Helper
 	public function __construct( array $options )
 	{
 		if( !function_exists( 'hash' ) ) {
-			throw new MShop_Exception( 'The PHP "hash" extension is not available. Please install it before you can use the hash() function' );
+			throw new \Aimeos\MShop\Exception( 'The PHP "hash" extension is not available. Please install it before you can use the hash() function' );
 		}
 
 		if( !isset( $options['algorithm'] ) || !in_array( $options['algorithm'], hash_algos(), true ) ) {
-			throw new MShop_Exception( sprintf( 'The algorithm "%1$s" is not supported', $options['algorithm'] ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'The algorithm "%1$s" is not supported', $options['algorithm'] ) );
 		}
 		
 		$this->options = $options;

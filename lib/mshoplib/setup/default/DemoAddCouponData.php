@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds demo records to coupon tables.
  */
-class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
+class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -50,7 +53,7 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 		$this->msg( 'Processing coupon demo data', 0 );
 
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'coupon' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'coupon' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'coupon.label', 'demo-' ) );
@@ -65,7 +68,7 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-coupon.php';
 
 			if( ( $data = include( $path ) ) == false ) {
-				throw new MShop_Exception( sprintf( 'No file "%1$s" found for coupon domain', $path ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for coupon domain', $path ) );
 			}
 
 
@@ -101,7 +104,7 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 	 */
 	protected function addCodes( $couponId, array $data )
 	{
-		$manager = MShop_Factory::createManager( $this->getContext(), 'coupon/code' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon/code' );
 
 		foreach( $data as $entry )
 		{

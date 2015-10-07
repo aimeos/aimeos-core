@@ -6,36 +6,13 @@
  */
 
 
-/**
- * Test plugin class
- */
-class Criteria_Plugin_PHPTest implements MW_Common_Criteria_Plugin_Interface
-{
-	public function translate( $value )
-	{
-		switch( $value )
-		{
-			case 'a': return 10;
-			default: return $value;
-		}
-	}
-
-	public function reverse( $value )
-	{
-		switch( $value )
-		{
-			case 10: return 'a';
-			default: return $value;
-		}
-	}
-}
-
+namespace Aimeos\MW\Common\Criteria;
 
 
 /**
- * Test class for MW_Common_Criteria_PHP.
+ * Test class for \Aimeos\MW\Common\Criteria\PHP.
  */
-class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
+class PHPTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -48,7 +25,7 @@ class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new MW_Common_Criteria_PHP();
+		$this->object = new \Aimeos\MW\Common\Criteria\PHP();
 	}
 
 
@@ -66,19 +43,19 @@ class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
 
 	public function testCombine()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Combine_PHP', $this->object->combine( '||', array() ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Expression\\Combine\\PHP', $this->object->combine( '||', array() ) );
 	}
 
 
 	public function testCompare()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_PHP', $this->object->compare( '!=', 'name', 'value' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Expression\\Compare\\PHP', $this->object->compare( '!=', 'name', 'value' ) );
 	}
 
 
 	public function testSort()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Sort_PHP', $this->object->sort( '+', 'name' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Expression\\Sort\\PHP', $this->object->sort( '+', 'name' ) );
 	}
 
 
@@ -101,7 +78,7 @@ class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
 
 		$types = array( 'int_value' => 'int', 'str_value' => 'string' );
 		$translations = array( 'int_value' => '$intval', 'str_value' => '$strval' );
-		$plugins = array( 'int_value' => new Criteria_Plugin_PHPTest() );
+		$plugins = array( 'int_value' => new TestPlugin() );
 
 		$result = $this->object->getConditionString( $types, $translations );
 		$this->assertEquals( "1 == 1", $result );
@@ -157,31 +134,31 @@ class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
 
 		$this->object->setConditions( $this->object->compare( '>', 'str_value', null ) );
 
-		$this->setExpectedException('MW_Common_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->getConditionString( $types );
 	}
 
 
 	public function testGetConditionStringInvalidName()
 	{
-		$types = array( 'int_value' => MW_DB_Statement_Abstract::PARAM_INT );
+		$types = array( 'int_value' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'ival', 10 ) );
-		$this->setExpectedException('MW_Common_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->getConditionString( $types );
 	}
 
 
 	public function testGetConditionStringInvalidOperator()
 	{
-		$this->setExpectedException('MW_Common_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->setConditions( $this->object->compare( '?', 'int_value', 10 ) );
 	}
 
 
 	public function testGetConditions()
 	{
-		$this->assertInstanceOf( 'MW_Common_Criteria_Expression_Compare_PHP', $this->object->getConditions() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Expression\\Compare\\PHP', $this->object->getConditions() );
 
 		$conditions = $this->object->compare( '==', 'int_value', 10 );
 		$this->object->setConditions( $conditions );
@@ -215,14 +192,14 @@ class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
 		$translations = array( 'asc_array' => 'asc_int_list' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
-		$this->setExpectedException('MW_Common_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->getSortationString( $types, $translations );
 	}
 
 
 	public function testGetSortationStringInvalidDirection()
 	{
-		$this->setExpectedException('MW_Common_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->setSortations( array( $this->object->sort( '/', 'asc_array' ) ) );
 	}
 
@@ -259,5 +236,30 @@ class MW_Common_Criteria_PHPTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals( 10, $this->object->getSliceStart() );
 		$this->assertEquals( 20, $this->object->getSliceSize() );
+	}
+}
+
+
+/**
+ * Test plugin class
+ */
+class TestPlugin implements \Aimeos\MW\Common\Criteria\Plugin\Iface
+{
+	public function translate( $value )
+	{
+		switch( $value )
+		{
+			case 'a': return 10;
+			default: return $value;
+		}
+	}
+
+	public function reverse( $value )
+	{
+		switch( $value )
+		{
+			case 10: return 'a';
+			default: return $value;
+		}
 	}
 }

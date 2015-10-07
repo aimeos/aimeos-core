@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds addrid column in order base address table.
  */
-class MW_Setup_Task_OrderAddBaseAddressAddrId extends MW_Setup_Task_Abstract
+class OrderAddBaseAddressAddrId extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = 'ALTER TABLE "mshop_order_base_address" ADD "addrid" VARCHAR(32) NOT NULL AFTER "siteid"';
 

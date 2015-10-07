@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes site ID to NOT NULL in all tables.
  */
-class MW_Setup_Task_TablesChangeSiteidNotNull extends MW_Setup_Task_Abstract
+class TablesChangeSiteidNotNull extends \Aimeos\MW\Setup\Task\Base
 {
 	private $site = '
 		INSERT INTO "mshop_locale_site" ("code", "label", "config", "status", "level", "nleft", "nright", "mtime", "ctime", "editor")

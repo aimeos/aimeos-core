@@ -8,26 +8,29 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Manager;
+
+
 /**
  * Factory for coupon manager.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Manager_Factory
-	extends MShop_Common_Factory_Abstract
-	implements MShop_Common_Factory_Interface
+class Factory
+	extends \Aimeos\MShop\Common\Factory\Base
+	implements \Aimeos\MShop\Common\Factory\Iface
 {
 	/**
 	 * Creates an coupon manager DAO object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Interface Manager object
-	 * @throws MShop_Coupon_Exception|MShop_Exception If requested manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 * @throws \Aimeos\MShop\Coupon\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
+	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/coupon/manager/name
 		 * Class name of the used coupon manager implementation
@@ -39,11 +42,11 @@ class MShop_Coupon_Manager_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Coupon_Manager_Default
+		 *  \Aimeos\MShop\Coupon\Manager\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Coupon_Manager_Mymanager
+		 *  \Aimeos\MShop\Coupon\Manager\Mymanager
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -63,17 +66,17 @@ class MShop_Coupon_Manager_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/coupon/manager/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/coupon/manager/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'MShop_Customer_Manager_' . $name : '<not a string>';
-			throw new MShop_Coupon_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\MShop\\Customer\\Manager\\' . $name : '<not a string>';
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MShop_Coupon_Manager_Interface';
-		$classname = 'MShop_Coupon_Manager_' . $name;
+		$iface = '\\Aimeos\\MShop\\Coupon\\Manager\\Iface';
+		$classname = '\\Aimeos\\MShop\\Coupon\\Manager\\' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );
 
@@ -92,7 +95,7 @@ class MShop_Coupon_Manager_Factory
 		 *  mshop/coupon/manager/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the coupon manager.
 		 *
 		 * @param array List of decorator names
@@ -112,12 +115,12 @@ class MShop_Coupon_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the coupon manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the coupon manager.
 		 *
 		 *  mshop/coupon/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the coupon controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the coupon controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -136,12 +139,12 @@ class MShop_Coupon_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the coupon manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the coupon manager.
 		 *
 		 *  mshop/coupon/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the coupon
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the coupon
 		 * controller.
 		 *
 		 * @param array List of decorator names

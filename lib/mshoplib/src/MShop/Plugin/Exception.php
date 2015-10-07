@@ -8,11 +8,14 @@
  */
 
 
+namespace Aimeos\MShop\Plugin;
+
+
 /**
- * MShop_Plugin_Exception
+ * \Aimeos\MShop\Plugin\Exception
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

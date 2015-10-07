@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Setup\Manager;
+
+
 /**
  * Manager for setup and upgrade process using multiple connections.
  *
  * @package MW
  * @subpackage Setup
  */
-class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
+class Multiple extends \Aimeos\MW\Setup\Manager\Base
 {
 	private $dbm;
 	private $additional;
@@ -26,16 +29,16 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 	/**
 	 * Initializes the setup manager.
 	 *
-	 * @param MW_DB_Manager_Interface $dbm Database manager
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
 	 * @param array $dbconfig Associative list of database configurations, each with the db resource
 	 * 	name as key and an associative list of "adapter", "host", "database", "username" and "password" keys
 	 * @param array|string $taskpath Filesystem paths to the directory which contains the task classes
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
 	 */
-	public function __construct( MW_DB_Manager_Interface $dbm, array $dbconfig, $taskpath, $additional = null )
+	public function __construct( \Aimeos\MW\DB\Manager\Iface $dbm, array $dbconfig, $taskpath, $additional = null )
 	{
 		if( empty( $dbconfig ) ) {
-			throw new MW_Setup_Exception( 'No databases configured in resource config file' );
+			throw new \Aimeos\MW\Setup\Exception( 'No databases configured in resource config file' );
 		}
 
 		$this->dbm = $dbm;
@@ -47,11 +50,11 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 		foreach( $dbconfig as $rname => $dbconf )
 		{
 			if( !isset( $dbconf['adapter'] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'Configuration parameter "%1$s" missing in "%2$s"', 'adapter', $rname ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Configuration parameter "%1$s" missing in "%2$s"', 'adapter', $rname ) );
 			}
 
 			if( !isset( $dbconf['database'] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'Configuration parameter "%1$s" missing in "%2$s"', 'database', $rname ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Configuration parameter "%1$s" missing in "%2$s"', 'database', $rname ) );
 			}
 
 			$conns[$rname] = $dbm->acquire( $rname );
@@ -91,7 +94,7 @@ class MW_Setup_Manager_Multiple extends MW_Setup_Manager_Abstract
 
 			if( in_array( $taskname, $stack ) ) {
 				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
-				throw new MW_Setup_Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
 			}
 
 			$stack[] = $taskname;

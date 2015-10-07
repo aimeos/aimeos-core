@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds performance records to product table.
  */
-class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBasePerfData
+class ProductAddPricePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -44,7 +47,7 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$context = $this->getContext();
 
 
-		$priceTypeManager = MShop_Factory::createManager( $context, 'price/type' );
+		$priceTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'price/type' );
 
 		$expr = array();
 		$search = $priceTypeManager->createSearch();
@@ -54,11 +57,11 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$types = $priceTypeManager->searchItems( $search );
 
 		if( ( $priceTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Price type item not found' );
+			throw new \Exception( 'Price type item not found' );
 		}
 
 
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 
 		$priceItem = $priceManager->createItem();
 		$priceItem->setTypeId( $priceTypeItem->getId() );
@@ -70,21 +73,21 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$priceItem->setStatus( 1 );
 
 
-		$productListTypeManager = MShop_Factory::createManager( $context, 'product/list/type' );
+		$productListTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'price' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'price' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $listTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product list type item not found' );
+			throw new \Exception( 'Product list type item not found' );
 		}
 
 
-		$productListManager = MShop_Factory::createManager( $context, 'product/list' );
+		$productListManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
@@ -92,7 +95,7 @@ class MW_Setup_Task_ProductAddPricePerfData extends MW_Setup_Task_ProductAddBase
 		$listItem->setPosition( 0 );
 
 
-		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );

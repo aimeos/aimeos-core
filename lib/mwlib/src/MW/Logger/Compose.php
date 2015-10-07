@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Logger;
+
+
 /**
  * Send log messages to several target loggers
  *
  * @package MW
  * @subpackage Logger
  */
-class MW_Logger_Compose extends MW_Logger_Abstract implements MW_Logger_Interface
+class Compose extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 {
 	private $loggers;
 
@@ -36,10 +39,10 @@ class MW_Logger_Compose extends MW_Logger_Abstract implements MW_Logger_Interfac
 	 * @param string|array|object $message Message text that should be written to the log facility
 	 * @param integer $priority Priority of the message for filtering
 	 * @param string $facility Facility for logging different types of messages (e.g. message, auth, user, changelog)
-	 * @throws MW_Logger_Exception If the priority is invalid
-	 * @see MW_Logger_Abstract for available log level constants
+	 * @throws \Aimeos\MW\Logger\Exception If the priority is invalid
+	 * @see \Aimeos\MW\Logger\Base for available log level constants
 	 */
-	public function log( $message, $priority = MW_Logger_Abstract::ERR, $facility = 'message' )
+	public function log( $message, $priority = \Aimeos\MW\Logger\Base::ERR, $facility = 'message' )
 	{
 		foreach( $this->loggers as $logger ) {
 			$logger->log( $message, $priority, $facility );

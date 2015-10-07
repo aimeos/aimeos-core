@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Migrates salutation values in order base address.
  */
-class MW_Setup_Task_OrderAddressMigrateSalutation extends MW_Setup_Task_Abstract
+class OrderAddressMigrateSalutation extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'UPDATE "mshop_order_base_address" SET "salutation" = \'unknown\' WHERE "salutation" = \'0\'',

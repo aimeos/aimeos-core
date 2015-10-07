@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria;
+
+
 /**
  * MySQL search criteria class.
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_MySQL extends MW_Common_Criteria_SQL
+class MySQL extends \Aimeos\MW\Common\Criteria\SQL
 {
 	/**
 	 * Creates a function signature for expressions.
@@ -51,6 +54,6 @@ class MW_Common_Criteria_MySQL extends MW_Common_Criteria_SQL
 				break;
 		}
 
-		return MW_Common_Criteria_Expression_Abstract::createFunction( $name, $params );
+		return \Aimeos\MW\Common\Criteria\Expression\Base::createFunction( $name, $params );
 	}
 }

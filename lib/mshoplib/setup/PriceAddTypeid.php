@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds typeid column to price table.
  */
-class MW_Setup_Task_PriceAddTypeid extends MW_Setup_Task_Abstract
+class PriceAddTypeid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_price" ADD "typeid" INTEGER NULL AFTER "siteid"',

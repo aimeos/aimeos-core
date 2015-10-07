@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product promotion performance records to catalog list table.
  */
-class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class CatalogAddPromoPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -43,21 +46,21 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 
 		$context = $this->getContext();
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
-		$catalogListManager = $catalogManager->getSubManager( 'list' );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
+		$catalogListManager = $catalogManager->getSubManager( 'lists' );
 		$catalogListTypeManager = $catalogListManager->getSubManager( 'type' );
 
 
 		$search = $catalogListTypeManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'catalog.list.type.domain', 'product' ),
-			$search->compare( '==', 'catalog.list.type.code', 'promotion' ),
+			$search->compare( '==', 'catalog.lists.type.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.type.code', 'promotion' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $catalogListTypeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Catalog list type item not found' );
+			throw new \Exception( 'Catalog list type item not found' );
 		}
 
 
@@ -84,10 +87,10 @@ class MW_Setup_Task_CatalogAddPromoPerfData extends MW_Setup_Task_ProductAddBase
 
 				$search = $catalogListManager->createSearch();
 				$expr = array(
-					$search->compare( '==', 'catalog.list.parentid', $catId ),
-					$search->compare( '==', 'catalog.list.position', array( 20, 40, 60, 80 ) ),
-					$search->compare( '==', 'catalog.list.domain', 'product' ),
-					$search->compare( '==', 'catalog.list.type.code', 'default' ),
+					$search->compare( '==', 'catalog.lists.parentid', $catId ),
+					$search->compare( '==', 'catalog.lists.position', array( 20, 40, 60, 80 ) ),
+					$search->compare( '==', 'catalog.lists.domain', 'product' ),
+					$search->compare( '==', 'catalog.lists.type.code', 'default' ),
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Moves product text and media references to product list table.
  */
-class MW_Setup_Task_ProductTextMediaToList extends MW_Setup_Task_Abstract
+class ProductTextMediaToList extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_product_text' => array(

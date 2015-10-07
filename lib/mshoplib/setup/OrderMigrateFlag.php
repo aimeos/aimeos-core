@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Migrates the flag values in order table to the order status table.
  */
-class MW_Setup_Task_OrderMigrateFlag extends MW_Setup_Task_Abstract
+class OrderMigrateFlag extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'migrate' => '

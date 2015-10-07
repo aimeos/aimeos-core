@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * Checks the products in a basket for changed prices.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_ProductPrice
-	extends MShop_Plugin_Provider_Factory_Abstract
-	implements MShop_Plugin_Provider_Factory_Interface
+class ProductPrice
+	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
+	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this, 'check.after' );
 	}
@@ -32,20 +35,20 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws MShop_Plugin_Provider_Exception if checks fail
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
 	 * @return bool true if checks succeed
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Interface';
+		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Order_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new \Aimeos\MShop\Plugin\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) {
+		if( !( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) {
 			return true;
 		}
 
@@ -55,7 +58,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 
 		foreach( $orderProducts as $pos => $item )
 		{
-			if( $item->getFlags() & MShop_Order_Item_Base_Product_Abstract::FLAG_IMMUTABLE ) {
+			if( $item->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) {
 				unset( $orderProducts[$pos] );
 			}
 
@@ -101,7 +104,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 		{
 			$code = array( 'product' => $changedProducts );
 			$msg = sprintf( 'Please have a look at the prices of the products in your basket' );
-			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $code );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
 		return true;
@@ -112,7 +115,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	 * Returns the attribute items for the given IDs.
 	 *
 	 * @param array $ids List of attribute IDs
-	 * @return MShop_Attribute_Item_Interface[] List of attribute items
+	 * @return \Aimeos\MShop\Attribute\Item\Iface[] List of attribute items
 	 */
 	protected function getAttributes( array $ids )
 	{
@@ -120,7 +123,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			return array();
 		}
 
-		$attrManager = MShop_Factory::createManager( $this->getContext(), 'attribute' );
+		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
 
 		$search = $attrManager->createSearch( true );
 		$expr = array(
@@ -144,7 +147,7 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			return array();
 		}
 
-		$productManager = MShop_Factory::createManager( $this->getContext(), 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 
 		$search = $productManager->createSearch( true );
 		$expr = array(
@@ -168,20 +171,20 @@ class MShop_Plugin_Provider_Order_ProductPrice
 	/**
 	 * Returns the actual price for the given order product.
 	 *
-	 * @param MShop_Order_Item_Base_Product_Interface $orderProduct Ordered product
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct Ordered product
 	 * @param array $refPrices Prices associated to the original product
-	 * @param MShop_Attribute_Item_Interface[] $attributes Attribute items with prices
+	 * @param \Aimeos\MShop\Attribute\Item\Iface[] $attributes Attribute items with prices
 	 * @param integer $pos Position of the product in the basket
-	 * @return MShop_Price_Item_Interface Price item including the calculated price
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item including the calculated price
 	 */
-	private function getPrice( MShop_Order_Item_Base_Product_Interface $orderProduct, array $refPrices, array $attributes, $pos )
+	private function getPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderProduct, array $refPrices, array $attributes, $pos )
 	{
 		$context = $this->getContext();
 
 		// fetch prices of selection/parent products
 		if( empty( $refPrices ) )
 		{
-			$productManager = MShop_Factory::createManager( $context, 'product' );
+			$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 			$product = $productManager->getItem( $orderProduct->getProductId(), array( 'price' ) );
 			$refPrices = $product->getRefItems( 'price', 'default', 'default' );
 		}
@@ -193,10 +196,10 @@ class MShop_Plugin_Provider_Order_ProductPrice
 			$codes = array( 'product' => array( $pos => 'product.price' ) );
 			$msg = sprintf( 'No price for product ID "%1$s" or product code "%2$s" available', $pid, $pcode );
 
-			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $codes );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
 		}
 
-		$priceManager = MShop_Factory::createManager( $context, 'price' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 		$price = $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
 
 		// add prices of product attributes to compute the end price for comparison

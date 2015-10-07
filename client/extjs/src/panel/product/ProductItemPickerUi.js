@@ -9,7 +9,7 @@ Ext.ns('MShop.panel.product');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.ProductItemPickerUi', {
     xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
-        recordName : 'Product_List',
+        recordName : 'Product_Lists',
         idProperty : 'product.list.id',
         siteidProperty : 'product.list.siteid',
         listNamePrefix : 'product.list.',

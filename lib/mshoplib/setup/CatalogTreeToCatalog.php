@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Moves catalog tree table to catalog.
  */
-class MW_Setup_Task_CatalogTreeToCatalog extends MW_Setup_Task_Abstract
+class CatalogTreeToCatalog extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_catalog_tree' => array(

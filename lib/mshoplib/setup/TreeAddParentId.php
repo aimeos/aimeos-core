@@ -4,10 +4,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds parentid column to catalog and locale site table.
  */
-class MW_Setup_Task_TreeAddParentId extends MW_Setup_Task_Abstract
+class TreeAddParentId extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_catalog' => array(

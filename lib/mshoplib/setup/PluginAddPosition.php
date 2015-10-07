@@ -5,11 +5,14 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/**
-* Adds position column to plugin table.
-*/
 
-class MW_Setup_Task_PluginAddPosition extends MW_Setup_Task_Abstract
+namespace Aimeos\MW\Setup\Task;
+
+
+/**
+ * Adds position column to plugin table.
+ */
+class PluginAddPosition extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = 'ALTER TABLE "mshop_plugin" ADD "pos" INTEGER NOT NULL AFTER "config"';
 

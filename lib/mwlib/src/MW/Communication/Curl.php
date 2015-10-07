@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Communication;
+
+
 /**
  * Common class for communication with delivery and payment providers.
  *
  * @package MW
  * @subpackage Communication
  */
-class MW_Communication_Curl implements MW_Communication_Interface
+class Curl implements \Aimeos\MW\Communication\Iface
 {
 
 	/**
@@ -30,7 +33,7 @@ class MW_Communication_Curl implements MW_Communication_Interface
 		$response = '';
 
 		if( ( $curl = curl_init() )=== false ) {
-			throw new MW_Communication_Exception( 'Could not initialize curl' );
+			throw new \Aimeos\MW\Communication\Exception( 'Could not initialize curl' );
 		}
 
 		try
@@ -45,16 +48,16 @@ class MW_Communication_Curl implements MW_Communication_Interface
 			curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
 
 			if ( ( $response = curl_exec( $curl ) ) === false ) {
-				throw new MW_Communication_Exception( sprintf( 'Sending order failed: "%1$s"', curl_error( $curl ) ) );
+				throw new \Aimeos\MW\Communication\Exception( sprintf( 'Sending order failed: "%1$s"', curl_error( $curl ) ) );
 			}
 
 			if ( curl_errno($curl) ) {
-				throw new MW_Communication_Exception( sprintf( 'Error with nr."%1$s" - "%2$s"', curl_errno($curl), curl_error($curl) ) );
+				throw new \Aimeos\MW\Communication\Exception( sprintf( 'Error with nr."%1$s" - "%2$s"', curl_errno($curl), curl_error($curl) ) );
 			}
 
 			curl_close( $curl );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			curl_close( $curl );
 			throw $e;

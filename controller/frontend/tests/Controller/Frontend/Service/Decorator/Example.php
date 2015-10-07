@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\Controller\Frontend\Service\Decorator;
+
+
 /**
  * Example decorator for plugin controller.
  *
  * @package Controller
  * @subpackage Frontend
  */
-class Controller_Frontend_Service_Decorator_Example
-	extends Controller_Frontend_Common_Decorator_Abstract
-	implements Controller_Frontend_Common_Decorator_Interface
+class Example
+	extends \Aimeos\Controller\Frontend\Common\Decorator\Base
+	implements \Aimeos\Controller\Frontend\Common\Decorator\Iface
 {
 
 }

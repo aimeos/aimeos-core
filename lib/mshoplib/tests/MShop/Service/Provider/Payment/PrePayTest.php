@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Payment;
+
+
 /**
- * Test class for MShop_Service_Provider_Payment_PrePay.
+ * Test class for \Aimeos\MShop\Service\Provider\Payment\PrePay.
  */
-class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCase
+class PrePayTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -22,13 +25,13 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $context );
+		$context = \TestHelper::getContext();
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
 
 		$serviceItem = $serviceManager->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->object = $this->getMockBuilder( 'MShop_Service_Provider_Payment_PrePay' )
+		$this->object = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\PrePay' )
 			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
@@ -69,7 +72,7 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 	public function testProcess()
 	{
 		// Currently does nothing.
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 
 		$this->object->process( $manager->createItem() );
 	}
@@ -77,24 +80,24 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 
 	public function testIsImplemented()
 	{
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
-		$this->assertFalse( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
+		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL ) );
+		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE ) );
 	}
 
 
 	public function testCancel()
 	{
-		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderItem = $manager->createItem();
 		$this->object->cancel( $orderItem );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_CANCELED, $orderItem->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $orderItem->getPaymentStatus() );
 	}
 
 
 	public function testSetConfigFE()
 	{
-		$item = MShop_Factory::createManager( TestHelper::getContext(), 'order/base/service' )->createItem();
+		$item = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'order/base/service' )->createItem();
 		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributes() ) );

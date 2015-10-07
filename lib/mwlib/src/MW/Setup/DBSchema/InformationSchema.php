@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Setup\DBSchema;
+
+
 /**
  * Implements querying the information_schema tables.
  *
  * @package MW
  * @subpackage Setup
  */
-abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_Interface
+abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 {
 	private $conn;
 	private $dbname = '';
@@ -23,10 +26,10 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	/**
 	 * Initializes the database schema object.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param string $dbname Database name
 	 */
-	public function __construct( MW_DB_Connection_Interface $conn, $dbname )
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname )
 	{
 		$this->conn = $conn;
 		$this->dbname = $dbname;
@@ -129,7 +132,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	 *
 	 * @param string $tablename Name of the database table
 	 * @param string $columnname Name of the table column
-	 * @return MW_Setup_DBSchema_Column_Interface Object which contains the details
+	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Object which contains the details
 	 */
 	public function getColumnDetails( $tablename, $columnname )
 	{
@@ -148,7 +151,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 		$result = $stmt->execute();
 
 		if( ( $record = $result->fetch() ) === false ) {
-			throw new MW_Setup_Exception( sprintf( 'Unknown column "%1$s" in table "%2$s"', $tablename, $columnname ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unknown column "%1$s" in table "%2$s"', $tablename, $columnname ) );
 		}
 
 		return $this->createColumnItem( $record );
@@ -170,12 +173,12 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	 *
 	 * @param array $record Associative array with TABLE_NAME, COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,
 	 * 	NUMERIC_PRECISION, COLUMN_DEFAULT, IS_NULLABLE
-	 * @return MW_Setup_DBSchema_Column_Interface Column item
+	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
 	protected function createColumnItem( array $record = array() )
 	{
 		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
-		return new MW_Setup_DBSchema_Column_Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,
+		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,
 			$record['COLUMN_DEFAULT'], $record['IS_NULLABLE'], $record['COLLATION_NAME'] );
 	}
 
@@ -183,7 +186,7 @@ abstract class MW_Setup_DBSchema_InformationSchema implements MW_Setup_DBSchema_
 	/**
 	 * Returns the database connection.
 	 *
-	 * @return MW_DB_Connection_Interface Database connection
+	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
 	 */
 	protected function getConnection()
 	{

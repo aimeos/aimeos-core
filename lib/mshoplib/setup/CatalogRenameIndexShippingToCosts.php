@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds priceid/textid column to catalog index price/text table.
  */
-class MW_Setup_Task_CatalogRenameIndexShippingToCosts extends MW_Setup_Task_Abstract
+class CatalogRenameIndexShippingToCosts extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = 'ALTER TABLE "mshop_catalog_index_price" CHANGE "shipping" "costs" DECIMAL(12,2) NOT NULL';
 

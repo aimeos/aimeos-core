@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Template;
+
+
 /**
- * Test class for MW_Session_CMSLite.
+ * Test class for \Aimeos\MW\Session\CMSLite.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Template_BaseTest extends PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -35,7 +38,7 @@ test template
 </html>
     	';
 
-		$this->object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
+		$this->object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 	}
 
 	/**
@@ -70,7 +73,7 @@ test template
 	public function testGet()
 	{
 		$template = $this->object->get('TEMPLATE');
-		$this->assertInstanceOf( 'MW_Template_Interface', $template );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Template\\Iface', $template );
 
 		$this->assertEquals('
 test template
@@ -85,7 +88,7 @@ test template
 
 	public function testGetBeginIsNotDefined()
 	{
-		$this->setExpectedException('MW_Template_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
 		$this->object->get('NOTDEFINED');
 	}
 
@@ -107,9 +110,9 @@ test template
 			</html>
     	';
 
-		$object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
+		$object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 
-		$this->setExpectedException('MW_Template_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
 		$object->get('ITEM');
 	}
 
@@ -162,16 +165,16 @@ test template
 			</html>
     	';
 
-		$object = new MW_Template_Base( $template, '<!--###$-->', '<!--$###-->' );
+		$object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 
-		$this->setExpectedException('MW_Template_Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
 		$object->substitute( array('ITEM'=>'Title' ) );
 	}
 
 	public function testStr()
 	{
 		$template = $this->object->get('TEMPLATE');
-		$this->assertInstanceOf( 'MW_Template_Interface', $template );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Template\\Iface', $template );
 
 		$this->assertEquals('
 test template

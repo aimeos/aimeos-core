@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Cache;
+
+
 /**
  * Database cache class.
  *
  * @package MW
  * @subpackage Cache
  */
-class MW_Cache_DB
-	extends MW_Cache_Abstract
-	implements MW_Cache_Interface
+class DB
+	extends \Aimeos\MW\Cache\Base
+	implements \Aimeos\MW\Cache\Iface
 {
 	private $sql;
 	private $dbm;
@@ -28,7 +31,7 @@ class MW_Cache_DB
 	/**
 	 * Initializes the object instance.
 	 *
-	 * The config['search] array must contain these key/array pairs suitable for MW_Common_Criteria_Attribute_Default:
+	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\MW\Common\Criteria\Attribute\Standard:
 	 *	[cache.id] => Array containing the codes/types/labels for the unique ID
 	 *	[cache.siteid] => Array containing the codes/types/labels for the site ID
 	 *	[cache.value] => Array containing the codes/types/labels for the cached value
@@ -63,16 +66,16 @@ class MW_Cache_DB
 	 *  config['siteid'] = 123
 	 *
 	 * @param array $config Associative list with SQL statements, search attribute definitions and database name
-	 * @param MW_DB_Manager_Interface $dbm Database manager
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
 	 */
-	public function __construct( array $config, MW_DB_Manager_Interface $dbm )
+	public function __construct( array $config, \Aimeos\MW\DB\Manager\Iface $dbm )
 	{
 		if( !isset( $config['search'] ) ) {
-			throw new MW_Cache_Exception( 'Search config is missing' );
+			throw new \Aimeos\MW\Cache\Exception( 'Search config is missing' );
 		}
 
 		if( !isset( $config['sql'] ) ) {
-			throw new MW_Cache_Exception( 'SQL config is missing' );
+			throw new \Aimeos\MW\Cache\Exception( 'SQL config is missing' );
 		}
 
 		$this->checkSearchConfig( $config['search'] );
@@ -91,7 +94,7 @@ class MW_Cache_DB
 	 *
 	 * @inheritDoc
 	 *
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function cleanup()
 	{
@@ -100,7 +103,7 @@ class MW_Cache_DB
 		try
 		{
 			$date = date( 'Y-m-d H:i:00' );
-			$search = new MW_Common_Criteria_SQL( $conn );
+			$search = new \Aimeos\MW\Common\Criteria\SQL( $conn );
 			$search->setConditions( $search->compare( '<', $this->searchConfig['cache.expire']['code'], $date ) );
 
 			$types = $this->getSearchTypes( $this->searchConfig );
@@ -108,12 +111,12 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
@@ -128,7 +131,7 @@ class MW_Cache_DB
 	 *
 	 * @param array $keys List of key strings that identify the cache entries
 	 * 	that should be removed
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteList( array $keys )
 	{
@@ -136,7 +139,7 @@ class MW_Cache_DB
 
 		try
 		{
-			$search = new MW_Common_Criteria_SQL( $conn );
+			$search = new \Aimeos\MW\Common\Criteria\SQL( $conn );
 			$search->setConditions( $search->compare( '==', $this->searchConfig['cache.id']['code'], $keys ) );
 
 			$types = $this->getSearchTypes( $this->searchConfig );
@@ -144,12 +147,12 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
@@ -164,7 +167,7 @@ class MW_Cache_DB
 	 *
 	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteByTags( array $tags )
 	{
@@ -172,7 +175,7 @@ class MW_Cache_DB
 
 		try
 		{
-			$search = new MW_Common_Criteria_SQL( $conn );
+			$search = new \Aimeos\MW\Common\Criteria\SQL( $conn );
 			$search->setConditions( $search->compare( '==', $this->searchConfig['cache.tag.name']['code'], $tags ) );
 
 			$types = $this->getSearchTypes( $this->searchConfig );
@@ -180,13 +183,13 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['deletebytag'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
@@ -199,7 +202,7 @@ class MW_Cache_DB
 	 *
 	 * @inheritDoc
 	 *
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function flush()
 	{
@@ -208,12 +211,12 @@ class MW_Cache_DB
 		try
 		{
 			$stmt = $conn->create( str_replace( ':cond', '1', $this->sql['delete'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->execute()->finish();
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
@@ -230,7 +233,7 @@ class MW_Cache_DB
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function getList( array $keys )
 	{
@@ -239,7 +242,7 @@ class MW_Cache_DB
 
 		try
 		{
-			$search = new MW_Common_Criteria_SQL( $conn );
+			$search = new \Aimeos\MW\Common\Criteria\SQL( $conn );
 			$expires = array(
 				$search->compare( '>', 'cache.expire', date( 'Y-m-d H:i:00' ) ),
 				$search->compare( '==', 'cache.expire', null ),
@@ -255,7 +258,7 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
@@ -264,7 +267,7 @@ class MW_Cache_DB
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
@@ -283,7 +286,7 @@ class MW_Cache_DB
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
 	 * 	for that tag
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function getListByTags( array $tags )
 	{
@@ -292,7 +295,7 @@ class MW_Cache_DB
 
 		try
 		{
-			$search = new MW_Common_Criteria_SQL( $conn );
+			$search = new \Aimeos\MW\Common\Criteria\SQL( $conn );
 			$expires = array(
 				$search->compare( '>', 'cache.expire', date( 'Y-m-d H:i:00' ) ),
 				$search->compare( '==', 'cache.expire', null ),
@@ -308,8 +311,8 @@ class MW_Cache_DB
 			$conditions = $search->getConditionString( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['getbytag'] ) );
-			$stmt->bind( 1, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
-			$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$result = $stmt->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
@@ -318,7 +321,7 @@ class MW_Cache_DB
 
 			$this->dbm->release( $conn, $this->dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$this->dbm->release( $conn, $this->dbname );
 			throw $e;
@@ -340,28 +343,28 @@ class MW_Cache_DB
 	 * 	associated to the values identified by their key. The value associated
 	 * 	to the key can either be a tag string or an array of tag strings
 	 * @param array $expires Associative list of key/datetime pairs.
-	 * @throws MW_Cache_Exception If the cache server doesn't respond
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() )
 	{
 		// Remove existing entries first to avoid duplicate key conflicts
 		$this->deleteList( array_keys( $pairs ) );
 
-		$type = ( count( $pairs ) > 1 ? MW_DB_Connection_Abstract::TYPE_PREP : MW_DB_Connection_Abstract::TYPE_SIMPLE );
+		$type = ( count( $pairs ) > 1 ? \Aimeos\MW\DB\Connection\Base::TYPE_PREP : \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE );
 		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
 		{
 			$conn->begin();
 			$stmt = $conn->create( $this->sql['set'], $type );
-			$stmtTag = $conn->create( $this->sql['settag'], MW_DB_Connection_Abstract::TYPE_PREP );
+			$stmtTag = $conn->create( $this->sql['settag'], \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
 
 			foreach( $pairs as $key => $value )
 			{
 				$date = ( isset( $expires[$key] ) ? $expires[$key] : null );
 
 				$stmt->bind( 1, $key );
-				$stmt->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+				$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 3, $date );
 				$stmt->bind( 4, $value );
 				$stmt->execute()->finish();
@@ -371,7 +374,7 @@ class MW_Cache_DB
 					foreach( (array) $tags[$key] as $name )
 					{
 						$stmtTag->bind( 1, $key );
-						$stmtTag->bind( 2, $this->siteid, MW_DB_Statement_Abstract::PARAM_INT );
+						$stmtTag->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 						$stmtTag->bind( 3, $name );
 						$stmtTag->execute()->finish();
 					}
@@ -381,7 +384,7 @@ class MW_Cache_DB
 			$conn->commit();
 			$this->dbm->release( $conn, $this->dbname );
 		}
-		catch( Exception $e )
+		catch( \Exception $e )
 		{
 			$conn->rollback();
 			$this->dbm->release( $conn, $this->dbname );
@@ -394,7 +397,7 @@ class MW_Cache_DB
 	 * Checks if all required search configurations are available.
 	 *
 	 * @param array $config Associative list of search configurations
-	 * @throws MW_Tree_Exception If one ore more search configurations are missing
+	 * @throws \Aimeos\MW\Tree\Exception If one ore more search configurations are missing
 	 */
 	protected function checkSearchConfig( array $config )
 	{
@@ -410,7 +413,7 @@ class MW_Cache_DB
 		if( count( $required ) > 0 )
 		{
 			$msg = 'Search config in given configuration are missing: "%1$s"';
-			throw new MW_Cache_Exception( sprintf( $msg, implode( ', ', $required ) ) );
+			throw new \Aimeos\MW\Cache\Exception( sprintf( $msg, implode( ', ', $required ) ) );
 		}
 	}
 
@@ -419,7 +422,7 @@ class MW_Cache_DB
 	 * Checks if all required SQL statements are available.
 	 *
 	 * @param array $config Associative list of SQL statements
-	 * @throws MW_Tree_Exception If one ore more SQL statements are missing
+	 * @throws \Aimeos\MW\Tree\Exception If one ore more SQL statements are missing
 	 */
 	protected function checkSqlConfig( array $config )
 	{
@@ -435,7 +438,7 @@ class MW_Cache_DB
 		if( count( $required ) > 0 )
 		{
 			$msg = 'SQL statements in given configuration are missing: "%1$s"';
-			throw new MW_Cache_Exception( sprintf( $msg, implode( ', ', $required ) ) );
+			throw new \Aimeos\MW\Cache\Exception( sprintf( $msg, implode( ', ', $required ) ) );
 		}
 	}
 }

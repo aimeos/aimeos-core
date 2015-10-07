@@ -1,18 +1,20 @@
 <?php
 
+namespace Aimeos\MW\Convert;
 
-class MW_Convert_ComposeTest extends PHPUnit_Framework_TestCase
+
+class ComposeTest extends \PHPUnit_Framework_TestCase
 {
 	public function testTranslate()
 	{
 		$list = array(
-			MW_Convert_Factory::createConverter( 'Text/LatinUTF8' ),
-			MW_Convert_Factory::createConverter( 'DateTime/EnglishISO' ),
+			\Aimeos\MW\Convert\Factory::createConverter( 'Text/LatinUTF8' ),
+			\Aimeos\MW\Convert\Factory::createConverter( 'DateTime/EnglishISO' ),
 		);
 
-		$object = new MW_Convert_Compose( $list );
+		$object = new \Aimeos\MW\Convert\Compose( $list );
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
 		$this->assertEquals( '2000-01-02 00:00:00', $object->translate( '01/02/2000' ) );
 	}
 
@@ -20,13 +22,13 @@ class MW_Convert_ComposeTest extends PHPUnit_Framework_TestCase
 	public function testReverse()
 	{
 		$list = array(
-			MW_Convert_Factory::createConverter( 'DateTime/EnglishISO' ),
-			MW_Convert_Factory::createConverter( 'Text/LatinUTF8' ),
+			\Aimeos\MW\Convert\Factory::createConverter( 'DateTime/EnglishISO' ),
+			\Aimeos\MW\Convert\Factory::createConverter( 'Text/LatinUTF8' ),
 		);
 
-		$object = new MW_Convert_Compose( $list );
+		$object = new \Aimeos\MW\Convert\Compose( $list );
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
 		$this->assertEquals( '01/02/2000 00:00:00 AM', $object->reverse( '2000-01-02 00:00:00' ) );
 	}
 }

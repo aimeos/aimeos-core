@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Converts job table to InnoDB.
  */
-class MW_Setup_Task_JobTableConvertToInnoDB extends MW_Setup_Task_Abstract
+class JobTableConvertToInnoDB extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'convert' => 'ALTER TABLE "madmin_job" ENGINE=InnoDB',

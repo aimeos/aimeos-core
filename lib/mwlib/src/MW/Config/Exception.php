@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Config;
+
+
 /**
- * Exception thrown by configuration setting classes
+ * \Exception thrown by configuration setting classes
  *
  * @package MW
  * @subpackage Config
  */
-class MW_Config_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

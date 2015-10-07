@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * Update percent rebate value on change.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_Coupon
-	extends MShop_Plugin_Provider_Factory_Abstract
-	implements MShop_Plugin_Provider_Factory_Interface
+class Coupon
+	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
+	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	protected static $lock = false;
 
@@ -24,9 +27,9 @@ class MShop_Plugin_Provider_Order_Coupon
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this, 'addProduct.after' );
 		$p->addListener( $this, 'deleteProduct.after' );
@@ -39,15 +42,15 @@ class MShop_Plugin_Provider_Order_Coupon
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Interface';
+		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
 		$notAvailable = array();
@@ -56,7 +59,7 @@ class MShop_Plugin_Provider_Order_Coupon
 		{
 			self::$lock = true;
 
-			$couponManager = MShop_Factory::createManager( $this->getContext(), 'coupon' );
+			$couponManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon' );
 
 			foreach( $order->getCoupons() as $code => $products )
 			{
@@ -88,7 +91,7 @@ class MShop_Plugin_Provider_Order_Coupon
 		{
 			$codes = array( 'coupon' => $notAvailable );
 			$msg = sprintf( 'Coupon in basket is not available any more' );
-			throw new MShop_Plugin_Provider_Exception( $msg, -1, null, $codes );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
 		}
 
 		return true;

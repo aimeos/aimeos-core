@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * Checks if ordered product sum and count of products is above a certain value.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_BasketLimits
-	extends MShop_Plugin_Provider_Factory_Abstract
-	implements MShop_Plugin_Provider_Factory_Interface
+class BasketLimits
+	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
+	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this, 'check.after' );
 	}
@@ -32,20 +35,20 @@ class MShop_Plugin_Provider_Order_BasketLimits
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
-	 * @throws MShop_Plugin_Provider_Exception if checks fail
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception if checks fail
 	 * @return bool true if checks succeed
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = 'MShop_Order_Item_Base_Interface';
+		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
 		if( !( $order instanceof $class ) ) {
-			throw new MShop_Plugin_Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
 		}
 
-		if( !( $value & MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) ) {
+		if( !( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) {
 			return true;
 		}
 
@@ -73,7 +76,7 @@ class MShop_Plugin_Provider_Order_BasketLimits
 
 
 		$count = 0;
-		$sum = MShop_Factory::createManager( $context, 'price' )->createItem();
+		$sum = \Aimeos\MShop\Factory::createManager( $context, 'price' )->createItem();
 
 		foreach( $order->getProducts() as $product )
 		{
@@ -90,11 +93,11 @@ class MShop_Plugin_Provider_Order_BasketLimits
 	/**
 	 * Checks for the configured basket limits.
 	 *
-	 * @param MShop_Price_Item_Interface $sum Total sum of all product price items
+	 * @param \Aimeos\MShop\Price\Item\Iface $sum Total sum of all product price items
 	 * @param integer $count Total number of products in the basket
-	 * @throws MShop_Plugin_Provider_Exception If one of the minimum or maximum limits is exceeded
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one of the minimum or maximum limits is exceeded
 	 */
-	protected function checkLimits( MShop_Price_Item_Interface $sum, $count )
+	protected function checkLimits( \Aimeos\MShop\Price\Item\Iface $sum, $count )
 	{
 		$currencyId = $sum->getCurrencyId();
 		$config = $this->getItemBase()->getConfig();
@@ -102,25 +105,25 @@ class MShop_Plugin_Provider_Order_BasketLimits
 		if( ( isset( $config['min-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] ) )
 		{
 			$msg = sprintf( 'The minimum basket value of %1$s isn\'t reached', $config['min-value'][$currencyId] );
-			throw new MShop_Plugin_Provider_Exception( $msg );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
 		}
 
 		if( ( isset( $config['max-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] ) )
 		{
 			$msg = sprintf( 'The maximum basket value of %1$s is exceeded', $config['max-value'][$currencyId] );
-			throw new MShop_Plugin_Provider_Exception( $msg );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
 		}
 
 		if( ( isset( $config['min-products'] ) ) && ( $count < $config['min-products'] ) )
 		{
 			$msg = sprintf( 'The minimum product quantity of %1$d isn\'t reached', $config['min-products'] );
-			throw new MShop_Plugin_Provider_Exception( $msg );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
 		}
 
 		if( ( isset( $config['max-products'] ) ) && ( $count > $config['max-products'] ) )
 		{
 			$msg = sprintf( 'The maximum product quantity of %1$d is exceeded', $config['max-products'] );
-			throw new MShop_Plugin_Provider_Exception( $msg );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
 		}
 	}
 }

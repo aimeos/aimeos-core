@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds demo records to catalog tables.
  */
-class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstract
+class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -51,18 +54,18 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 
 		$item = null;
 		$context = $this->getContext();
-		$manager = MShop_Factory::createManager( $context, 'catalog' );
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'catalog' );
 
 		try
 		{
 			// Don't delete the catalog node because users are likely use it for production
-			$item = $manager->getTree( null, array(), MW_Tree_Manager_Abstract::LEVEL_ONE );
+			$item = $manager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
-			$this->removeItems( $item->getId(), 'catalog/list', 'catalog', 'media' );
-			$this->removeItems( $item->getId(), 'catalog/list', 'catalog', 'text' );
-			$this->removeListItems( $item->getId(), 'catalog/list', 'product' );
+			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'media' );
+			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'text' );
+			$this->removeListItems( $item->getId(), 'catalog/lists', 'product' );
 		}
-		catch( Exception $e ) {; } // If no root node was already inserted into the database
+		catch( \Exception $e ) {; } // If no root node was already inserted into the database
 
 
 		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
@@ -71,7 +74,7 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-catalog.php';
 
 			if( ( $data = include( $path ) ) == false ) {
-				throw new MShop_Exception( sprintf( 'No file "%1$s" found for catalog domain', $path ) );
+				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for catalog domain', $path ) );
 			}
 
 			if( $item === null )

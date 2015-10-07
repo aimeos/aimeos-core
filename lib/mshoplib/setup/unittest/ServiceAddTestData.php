@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds service test data.
  */
-class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
+class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding service test data', 0 );
@@ -59,7 +62,7 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'service.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
 		}
 
 		$this->addServiceData( $testdata );
@@ -72,12 +75,12 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 	 * Adds the service test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addServiceData( array $testdata )
 	{
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->additional, 'Default' );
-		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Default' );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
 
 		$typeIds = array();
 		$type = $serviceTypeManager->createItem();
@@ -101,7 +104,7 @@ class MW_Setup_Task_ServiceAddTestData extends MW_Setup_Task_Abstract
 		foreach( $testdata['service'] as $key => $dataset )
 		{
 			if( !isset( $typeIds[$dataset['typeid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No service type ID found for "%1$s"', $dataset['typeid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No service type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$parent->setId( null );

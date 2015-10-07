@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Translation\Decorator;
+
+
 /**
- * Test class for MW_Translation_Decorator_APC.
+ * Test class for \Aimeos\MW\Translation\Decorator\APC.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Translation_Decorator_APCTest extends PHPUnit_Framework_TestCase
+class APCTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -23,8 +26,8 @@ class MW_Translation_Decorator_APCTest extends PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'APC not installed' );
 		}
 
-		$trans = new MW_Translation_None( 'en_GB' );
-		$this->object = new MW_Translation_Decorator_APC( $trans, 'i18n' );
+		$trans = new \Aimeos\MW\Translation\None( 'en_GB' );
+		$this->object = new \Aimeos\MW\Translation\Decorator\APC( $trans, 'i18n' );
 	}
 
 	/**

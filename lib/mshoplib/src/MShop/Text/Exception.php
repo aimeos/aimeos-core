@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Text;
+
+
 /**
  * Generic exception thrown by Aimeos objects if no specialized exception is available
  *
  * @package MShop
  * @subpackage Text
  */
-class MShop_Text_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

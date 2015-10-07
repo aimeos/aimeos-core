@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Common\Manager\Decorator;
+
+
 /**
  * Provides a site check decorator for managers.
  *
  * @package MShop
  * @subpackage Common
  */
-class MShop_Common_Manager_Decorator_Sitecheck
-	extends MShop_Common_Manager_Decorator_Abstract
+class Sitecheck
+	extends \Aimeos\MShop\Common\Manager\Decorator\Base
 {
 	/**
 	 * Adds or updates an item object.
 	 *
-	 * @param MShop_Common_Item_Interface $item Item object whose data should be saved
+	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
 	 */
-	public function saveItem( MShop_Common_Item_Interface $item, $fetch = true )
+	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
 		if( $item->getId() !== null )
 		{
@@ -50,7 +53,7 @@ class MShop_Common_Manager_Decorator_Sitecheck
 		$siteId = $this->getContext()->getLocale()->getSiteId();
 
 		if( $actual !== null && $actual != $siteId ) {
-			throw new MShop_Exception( sprintf( 'Item can not be deleted. Site ID of item differs from present site ID.' ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'Item can not be deleted. Site ID of item differs from present site ID.' ) );
 		}
 
 		parent::deleteItem( $id );

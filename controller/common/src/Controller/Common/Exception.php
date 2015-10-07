@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\Controller\Common;
+
+
 /**
- * Exception thrown by the common controller classes.
+ * \Exception thrown by the common controller classes.
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Exception extends Exception
+class Exception extends \Exception
 {
 }

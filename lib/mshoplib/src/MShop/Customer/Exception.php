@@ -8,11 +8,14 @@
  */
 
 
+namespace Aimeos\MShop\Customer;
+
+
 /**
- * MShop_Customer_Exception.
+ * \Aimeos\MShop\Customer\Exception.
  * @package MShop
  * @subpackage Customer
  */
-class MShop_Customer_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

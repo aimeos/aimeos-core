@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Product;
+
+
 /**
- * Exception thrown by product classes.
+ * \Exception thrown by product classes.
  *
  * @package MShop
  * @subpackage Product
  */
-class MShop_Product_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

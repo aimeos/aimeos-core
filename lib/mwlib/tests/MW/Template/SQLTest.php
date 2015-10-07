@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Template;
+
+
 /**
- * Test class for MW_Session_CMSLite.
+ * Test class for \Aimeos\MW\Session\CMSLite.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Template_SQLTest extends PHPUnit_Framework_TestCase
+class SQLTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -15,7 +18,7 @@ class MW_Template_SQLTest extends PHPUnit_Framework_TestCase
 	{
 		$template = 'SELECT * FROM /*-FROM*/table/*FROM-*/';
 
-		$this->object = new MW_Template_SQL( $template );
+		$this->object = new \Aimeos\MW\Template\SQL( $template );
 	}
 
 
@@ -32,7 +35,7 @@ class MW_Template_SQLTest extends PHPUnit_Framework_TestCase
 	public function testToString()
 	{
 		$template = $this->object->get('FROM');
-		$this->assertInstanceOf( 'MW_Template_Interface', $template );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Template\\Iface', $template );
 
 		$this->assertEquals( 'table', $template->str() );
 	}

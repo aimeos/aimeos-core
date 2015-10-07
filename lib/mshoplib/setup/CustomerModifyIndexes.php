@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Modifies indexes in the customer tables.
  */
-class MW_Setup_Task_CustomerModifyIndexes extends MW_Setup_Task_Abstract
+class CustomerModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'add' => array(

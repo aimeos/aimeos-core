@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
  * Implementation of the csv content object.
  *
  * @package MW
  * @subpackage Container
  */
-class MW_Container_Content_CSV
-	extends MW_Container_Content_Abstract
-	implements MW_Container_Content_Interface
+class CSV
+	extends \Aimeos\MW\Container\Content\Base
+	implements \Aimeos\MW\Container\Content\Iface
 {
 	private $separator;
 	private $enclosure;
@@ -55,7 +58,7 @@ class MW_Container_Content_CSV
 		if( ( $this->fh = @fopen( $resource, 'a+' ) ) === false
 			&& ( $this->fh = fopen( $resource, 'r' ) ) === false
 		) {
-			throw new MW_Container_Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
 
 		parent::__construct( $resource, $name, $options );
@@ -72,16 +75,16 @@ class MW_Container_Content_CSV
 	/**
 	 * Closes the CSV file so it's written to disk.
 	 *
-	 * @throws MW_Container_Exception If the file handle couldn't be flushed or closed
+	 * @throws \Aimeos\MW\Container\Exception If the file handle couldn't be flushed or closed
 	 */
 	public function close()
 	{
 		if( fflush( $this->fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to flush file "%1$s"', $this->getResource() ) );
 		}
 
 		if( fclose( $this->fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close file "%1$s"', $this->getResource() ) );
 		}
 	}
 
@@ -102,7 +105,7 @@ class MW_Container_Content_CSV
 		}
 
 		if( fwrite( $this->fh, implode( $this->separator, $data ) . $this->lineend ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
 
@@ -151,11 +154,11 @@ class MW_Container_Content_CSV
 		$filename = $this->getResource();
 
 		if( fclose( $this->fh ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to close file handle for %1$s', $filename ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to close file handle for %1$s', $filename ) );
 		}
 
 		if( ( $this->fh = fopen( $filename, 'r' ) ) === false ) {
-			throw new MW_Container_Exception( sprintf( 'Unable to open file %1$s', $filename ) );
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to open file %1$s', $filename ) );
 		}
 
 		$this->position = 0;

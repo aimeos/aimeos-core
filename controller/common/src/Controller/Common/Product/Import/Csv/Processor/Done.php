@@ -8,24 +8,27 @@
  */
 
 
+namespace Aimeos\Controller\Common\Product\Import\Csv\Processor;
+
+
 /**
  * End point for the CSV import processors
  *
  * @package Controller
  * @subpackage Common
  */
-class Controller_Common_Product_Import_Csv_Processor_Done
-	implements Controller_Common_Product_Import_Csv_Processor_Interface
+class Done
+	implements \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface
 {
 	/**
 	 * Initializes the object
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 * @param array $mapping Associative list of field position in CSV as key and domain item key as value
-	 * @param Controller_Common_Product_Import_Csv_Processor_Interface $processor Decorated processor
+	 * @param \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $processor Decorated processor
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, array $mapping,
-		Controller_Common_Product_Import_Csv_Processor_Interface $processor = null )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $mapping,
+		\Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface $processor = null )
 	{
 	}
 
@@ -33,11 +36,11 @@ class Controller_Common_Product_Import_Csv_Processor_Done
 	/**
 	 * Saves the product related data to the storage
 	 *
-	 * @param MShop_Product_Item_Interface $product Product item with associated items
+	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item with associated items
 	 * @param array $data List of CSV fields with position as key and data as value
 	 * @return array List of data which hasn't been imported
 	 */
-	public function process( MShop_Product_Item_Interface $product, array $data )
+	public function process( \Aimeos\MShop\Product\Item\Iface $product, array $data )
 	{
 		return $data;
 	}

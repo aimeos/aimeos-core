@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Payment;
+
+
 /**
- * Test class for MShop_Service_Provider_Payment_PostPay.
+ * Test class for \Aimeos\MShop\Service\Provider\Payment\PostPay.
  */
-class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework_TestCase
+class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;
@@ -25,8 +28,8 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext();
-		$serviceManager = MShop_Service_Manager_Factory::createManager( $this->context );
+		$this->context = \TestHelper::getContext();
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', 'paypalexpress' ) );
@@ -34,30 +37,30 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$serviceItems = $serviceManager->searchItems( $search );
 
 		if( ( $this->serviceItem = reset( $serviceItems ) ) === false ) {
-			throw new Exception( 'No paypalexpress service item available' );
+			throw new \Exception( 'No paypalexpress service item available' );
 		}
 
-		$this->object = new MShop_Service_Provider_Payment_PayPalExpress( $this->context, $this->serviceItem );
+		$this->object = new \Aimeos\MShop\Service\Provider\Payment\PayPalExpress( $this->context, $this->serviceItem );
 
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 
 		$search = $orderManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'order.type', MShop_Order_Item_Abstract::TYPE_WEB ),
-			$search->compare( '==', 'order.statuspayment', MShop_Order_Item_Abstract::PAY_AUTHORIZED )
+			$search->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
+			$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$orderItems = $orderManager->searchItems( $search );
 
 		if( ( $this->order = reset( $orderItems ) ) === false ) {
-			throw new Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', MShop_Order_Item_Abstract::PAY_AUTHORIZED, MShop_Order_Item_Abstract::TYPE_WEB ) );
+			throw new \Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
 		}
 
 
 		$this->context->getConfig()->set( 'classes/order/manager/name', 'MockPayPal' );
-		$orderMock = $this->getMock( 'MShop_Order_Manager_Default', array( 'saveItem' ), array( $this->context ) );
-		MShop_Order_Manager_Factory::injectManager( 'MShop_Order_Manager_MockPayPal', $orderMock );
+		$orderMock = $this->getMock( '\\Aimeos\\MShop\\Order\\Manager\\Standard', array( 'saveItem' ), array( $this->context ) );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\MockPayPal', $orderMock );
 	}
 
 
@@ -99,10 +102,10 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 
 	public function testIsImplemented()
 	{
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL ) );
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE ) );
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_QUERY ) );
-		$this->assertTrue( $this->object->isImplemented( MShop_Service_Provider_Payment_Abstract::FEAT_REFUND ) );
+		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL ) );
+		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE ) );
+		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY ) );
+		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_REFUND ) );
 	}
 
 
@@ -112,13 +115,13 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=process method error';
 		$success = '&ACK=Success&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&TOKEN=UT-99999999';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
 		$helperForm = $this->object->process( $this->order );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
@@ -130,7 +133,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
-		$this->assertInstanceOf( 'MShop_Common_Item_Helper_Form_Interface', $helperForm );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Helper\\Form\\Iface', $helperForm );
 		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'POST', $helperForm->getMethod() );
 		$this->assertEquals( array(), $helperForm->getValues() );
@@ -154,11 +157,11 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=updatesync method error';
 		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=' . $this->order->getId();
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$response = array(
@@ -167,7 +170,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			'orderid' => $this->order->getId()
 		);
 
-		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $this->object->updateSync( $response ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $this->object->updateSync( $response ) );
 
 		//IPN Call
 		$price = $orderBaseManager->getItem( $this->order->getBaseId() )->getPrice();
@@ -185,7 +188,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = 'INVALID';
 		$success = 'VERIFIED';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
@@ -208,9 +211,9 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		);
 
 		$orderItem = $this->object->updateSync( $response );
-		$this->assertInstanceOf( 'MShop_Order_Item_Interface', $orderItem );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $orderItem );
 
-		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
+		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 		$attrManager = $orderBaseManager->getSubManager( 'service' )->getSubManager( 'attribute' );
 
@@ -228,7 +231,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $orderItem->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $orderItem->getPaymentStatus() );
 	}
 
 
@@ -244,7 +247,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=refund method error';
 		$success = 'REFUNDTRANSACTIONID=88888888&FEEREFUNDAMT=2.00&TOTALREFUNDAMT=24.00&CURRENCYCODE=EUR&REFUNDSTATUS=delayed&PENDINGREASON=echeck&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
@@ -256,7 +259,7 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			'REFUNDTRANSACTIONID' => '88888888'
 		);
 
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
@@ -271,13 +274,13 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_REFUND, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUND, $this->order->getPaymentStatus() );
 	}
 
 
 	public function testCapture()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( $this->context );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$baseItem = $orderBaseManager->getItem( $this->order->getBaseId() );
 
@@ -292,13 +295,13 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=capture method error';
 		$success = 'AUTHORIZATIONID=112233&TRANSACTIONID=111111111&PARENTTRANSACTIONID=12212AD&TRANSACTIONTYPE=express-checkout&AMT=22.30&FEEAMT=3.33&PAYMENTSTATUS=Completed&PENDINGREASON=None&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
 		$this->object->capture( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getPaymentStatus() );
 	}
 
 	public function testQueryPaymentReceived()
@@ -310,13 +313,13 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=query payment received test method error';
 		$success = 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Completed&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_RECEIVED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getPaymentStatus() );
 	}
 
 
@@ -329,13 +332,13 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=query payment refused test method error';
 		$success = 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Expired&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_REFUSED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUSED, $this->order->getPaymentStatus() );
 	}
 
 
@@ -348,13 +351,13 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=cancel test method error';
 		$success = 'CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
 		$this->object->cancel( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_CANCELED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $this->order->getPaymentStatus() );
 	}
 
 
@@ -367,13 +370,13 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=query payment authorized test method error';
 		$success = 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=34&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
 		$this->object->query( $this->order );
 
-		$this->assertEquals( MShop_Order_Item_Abstract::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
 	}
 
 
@@ -388,11 +391,79 @@ class MShop_Service_Provider_Payment_PayPalExpressTest extends PHPUnit_Framework
 		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=wrong authorization test method error';
 		$success = 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=34&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
 
-		$com = new MW_Communication_TestPayPalExpress();
+		$com = new TestPayPalExpress();
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
-		$this->setExpectedException( 'MShop_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->process( $this->order );
+	}
+}
+
+
+class TestPayPalExpress implements \Aimeos\MW\Communication\Iface
+{
+	private $rules = array();
+
+
+	/**
+	 * Adds rules to the communication object.
+	 *
+	 * @param array $what List of rules for the unit tests.
+	 * @param string $error Error message if some of the tests fails.
+	 * @param string $success Success message if all tests were passed.
+	*/
+	public function addRule( array $what, $error, $success )
+	{
+		$this->rules['set'] = $what;
+		$this->rules['error'] = $error;
+		$this->rules['success'] = $success;
+	}
+
+
+	/**
+	 * Get rules of the communication object.
+	 *
+	 * @return array rules for internal check
+	 */
+	public function getRules()
+	{
+		return $this->rules;
+	}
+
+
+	/**
+	 * Sends request parameters to the providers interface.
+	 *
+	 * @param string $target Receivers address e.g. url.
+	 * @param string $method Initial method (e.g. post or get)
+	 * @param mixed $payload Update information whose format depends on the payment provider
+	 * @return string response body of a http request
+	 */
+	public function transmit( $target, $method, $payload )
+	{
+		if( !isset( $this->rules['set'] ) ) {
+			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No rules for unit tests was set' ) );
+		}
+
+		if( !isset( $this->rules['error'] ) ) {
+			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No error message for unit tests was set' ) );
+		}
+
+		if( !isset( $this->rules['success'] ) ) {
+			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No success message for unit tests was set' ) );
+		}
+
+		$params = array();
+		parse_str( $payload, $params );
+
+		foreach( $this->rules['set'] as $key => $value )
+		{
+			if( $params[$key] != $value ) {
+				return $this->rules['error'];
+			}
+		}
+
+		return $this->rules['success'];
 	}
 }

@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Perf\Config;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Perf_Config_ArrayTest extends PHPUnit_Framework_TestCase
+class ArrayTest extends \PHPUnit_Framework_TestCase
 {
 	public function testArray()
 	{
@@ -18,7 +20,7 @@ class Perf_Config_ArrayTest extends PHPUnit_Framework_TestCase
 
 		for( $i = 0; $i < 1000; $i++ )
 		{
-			$conf = new MW_Config_Array( $paths );
+			$conf = new \Aimeos\MW\Config\PHPArray( $paths );
 
 			$conf->get( 'test/db/host' );
 			$conf->get( 'test/db/username' );

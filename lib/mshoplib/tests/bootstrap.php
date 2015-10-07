@@ -24,4 +24,4 @@ setlocale( LC_TIME, 'POSIX' );
 
 
 require_once 'TestHelper.php';
-TestHelper::bootstrap();
+\TestHelper::bootstrap();

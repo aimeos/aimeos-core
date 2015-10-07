@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Media;
+
+
 /**
  * Creates a new media object.
  *
  * @package MW
  * @subpackage Media
  */
-class MW_Media_Factory
+class Factory
 {
 	/**
 	 * Creates a new media object.
@@ -26,7 +29,7 @@ class MW_Media_Factory
 	 *
 	 * @param string|null $filename Path to media file or null for new files
 	 * @param array $options Associative list of options for configuring the media class
-	 * @return MW_Media_Interface Media object
+	 * @return \Aimeos\MW\Media\Iface Media object
 	 */
 	public static function get( $filename, array $options = array() )
 	{
@@ -34,12 +37,12 @@ class MW_Media_Factory
 		{
 			try
 			{
-				$finfo = new finfo( FILEINFO_MIME_TYPE );
+				$finfo = new \finfo( FILEINFO_MIME_TYPE );
 				$mimetype = $finfo->file( $filename );
 			}
-			catch( Exception $e )
+			catch( \Exception $e )
 			{
-				throw new MW_Media_Exception( $e->getMessage() );
+				throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 			}
 		}
 		else if( function_exists( 'mime_content_type' ) )
@@ -49,7 +52,7 @@ class MW_Media_Factory
 		else
 		{
 			$msg = sprintf( 'No method for retrieving the mime type available: %1$s', 'finfo, mime_content_type' );
-			throw new MW_Media_Exception( $msg );
+			throw new \Aimeos\MW\Media\Exception( $msg );
 		}
 
 		$mimeparts = explode( '/', $mimetype );
@@ -57,9 +60,9 @@ class MW_Media_Factory
 		switch( $mimeparts[0] )
 		{
 			case 'image':
-				return new MW_Media_Image_Default( $filename, $mimetype, $options );
+				return new \Aimeos\MW\Media\Image\Standard( $filename, $mimetype, $options );
 		}
 
-		return new MW_Media_Application_Default( $filename, $mimetype, $options );
+		return new \Aimeos\MW\Media\Application\Standard( $filename, $mimetype, $options );
 	}
 }

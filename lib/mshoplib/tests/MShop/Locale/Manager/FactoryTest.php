@@ -6,36 +6,39 @@
  */
 
 
+namespace Aimeos\MShop\Locale\Manager;
+
+
 /**
- * Test class for MShop_Locale_Manager_Factory.
+ * Test class for \Aimeos\MShop\Locale\Manager\Factory.
  */
-class MShop_Locale_Manager_FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext() );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$manager = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerName()
 	{
-		$manager = MShop_Locale_Manager_Factory::createManager( TestHelper::getContext(), 'Default' );
-		$this->assertInstanceOf( 'MShop_Common_Manager_Interface', $manager );
+		$manager = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext(), 'Standard' );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( 'MShop_Locale_Exception' );
-		MShop_Locale_Manager_Factory::createManager( TestHelper::getContext(), '%^&' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		\Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext(), '%^&' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( 'MShop_Exception' );
-		MShop_Locale_Manager_Factory::createManager( TestHelper::getContext(), 'unknown' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		\Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext(), 'unknown' );
 	}
 
 }

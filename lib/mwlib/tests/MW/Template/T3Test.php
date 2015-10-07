@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Template;
+
+
 /**
- * Test class for MW_Session_CMSLite.
+ * Test class for \Aimeos\MW\Session\CMSLite.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Template_T3Test extends PHPUnit_Framework_TestCase
+class T3Test extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -21,7 +24,7 @@ class MW_Template_T3Test extends PHPUnit_Framework_TestCase
 	{
 		$template = 'TYPO3 Template <!--###NAME-->Name<!--NAME###-->';
 
-		$this->object = new MW_Template_T3( $template );
+		$this->object = new \Aimeos\MW\Template\T3( $template );
 	}
 
 
@@ -39,7 +42,7 @@ class MW_Template_T3Test extends PHPUnit_Framework_TestCase
 	public function testToString()
 	{
 		$template = $this->object->get('NAME');
-		$this->assertInstanceOf( 'MW_Template_Interface', $template );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Template\\Iface', $template );
 
 		$this->assertEquals( 'Name', $template->str() );
 	}

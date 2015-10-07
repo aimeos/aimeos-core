@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds domain column to price table.
  */
-class MW_Setup_Task_PriceAddDomain extends MW_Setup_Task_Abstract
+class PriceAddDomain extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_price" ADD "domain" VARCHAR(8) NOT NULL AFTER "currencyid"',

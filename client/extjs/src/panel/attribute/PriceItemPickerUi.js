@@ -10,7 +10,7 @@ Ext.ns('MShop.panel.attribute');
 Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.attribute.PriceItemPickerUi', {
     xtype : 'MShop.panel.price.itempickerui',
     itemConfig : {
-        recordName : 'Attribute_List',
+        recordName : 'Attribute_Lists',
         idProperty : 'attribute.list.id',
         siteidProperty : 'attribute.list.siteid',
         listNamePrefix : 'attribute.list.',

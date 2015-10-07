@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Perf;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
+class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $catItem;
@@ -14,17 +16,17 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = TestHelper::getContext( 'unitperf' );
+		$this->context = \TestHelper::getContext( 'unitperf' );
 
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'home' ) );
 		$result = $catalogManager->searchItems( $search );
 
 		if( ( $this->catItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
 
@@ -46,7 +48,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
@@ -78,7 +80,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
@@ -110,7 +112,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
@@ -137,14 +139,14 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	public function testSearchByCategories()
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.label', 'cat-1' ) );
 		$result = $catalogManager->searchItems( $search );
 
 		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
 		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );
@@ -152,7 +154,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
@@ -181,7 +183,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
@@ -210,7 +212,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
@@ -238,7 +240,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
@@ -269,7 +271,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
@@ -297,14 +299,14 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 	public function testSearchByCategoriesPriceText()
 	{
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 
 		$search = $catalogManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.label', 'cat-1' ) );
 		$result = $catalogManager->searchItems( $search );
 
 		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No catalog item found' );
+			throw new \Exception( 'No catalog item found' );
 		}
 
 		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );
@@ -312,7 +314,7 @@ class Perf_CatalogIndexTest extends PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$indexManager = $catalogManager->getSubManager( 'index' );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );

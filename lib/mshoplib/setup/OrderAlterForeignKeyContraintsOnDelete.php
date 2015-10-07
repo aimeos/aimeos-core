@@ -6,15 +6,18 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes action on delete on mshop_locale_site FOREIGN KEY CONSTRAINTS for mshop_order tables.
  *
  * 2012-08-08
  * At this time "columne", "drop", "adding" the constrain... adding is removed
- * because of future dependency. see: MW_Setup_Task_OrderDropForeignKeyOfLocale
+ * because of future dependency. see: \Aimeos\MW\Setup\Task\OrderDropForeignKeyOfLocale
  * -> Order domain table can be used on a differend database/ server
  */
-class MW_Setup_Task_OrderAlterForeignKeyContraintsOnDelete extends MW_Setup_Task_Abstract
+class OrderAlterForeignKeyContraintsOnDelete extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_order' => array(

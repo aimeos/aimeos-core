@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product variant attribute performance records.
  */
-class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -53,7 +56,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 
 		$context = $this->getContext();
 
-		$attrManager = MShop_Attribute_Manager_Factory::createManager( $context );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
 		$attrTypeManager = $attrManager->getSubManager( 'type' );
 
 		$search = $attrTypeManager->createSearch();
@@ -61,7 +64,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		$result = $attrTypeManager->searchItems( $search );
 
 		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute type "size" found' );
+			throw new \Exception( 'No attribute type "size" found' );
 		}
 
 
@@ -94,7 +97,7 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		$result = $attrTypeManager->searchItems( $search );
 
 		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No attribute type "size" found' );
+			throw new \Exception( 'No attribute type "size" found' );
 		}
 
 		$attrItem = $attrManager->createItem();
@@ -120,19 +123,19 @@ class MW_Setup_Task_ProductAddAttributeVariantPerfData extends MW_Setup_Task_Pro
 		$this->txCommit();
 
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
-		$productListManager = $productManager->getSubManager( 'list' );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
 		$expr = array();
 		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.list.type.domain', 'attribute' );
-		$expr[] = $search->compare( '==', 'product.list.type.code', 'variant' );
+		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'attribute' );
+		$expr[] = $search->compare( '==', 'product.lists.type.code', 'variant' );
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $productListTypeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Product list type item not found' );
+			throw new \Exception( 'Product list type item not found' );
 		}
 
 

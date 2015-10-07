@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Convert\Text;
+
+
 /**
  * Converts latin text into UTF-8
  *
  * @package MW
  * @subpackage Convert
  */
-class MW_Convert_Text_LatinUTF8 implements MW_Convert_Interface
+class LatinUTF8 implements \Aimeos\MW\Convert\Iface
 {
 	/**
 	 * Translates a value to another one.

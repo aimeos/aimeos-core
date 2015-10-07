@@ -8,27 +8,30 @@
  */
 
 
+namespace Aimeos\MW\DB;
+
+
 /**
  * Creates new database manager instances.
  *
  * @package MW
  * @subpackage DB
  */
-class MW_DB_Factory
+class Factory
 {
 	/**
 	 * Creates and returns a database manager.
 	 *
-	 * @param MW_Config_Interface $config Configuration class instance
+	 * @param \Aimeos\MW\Config\Iface $config Configuration class instance
 	 * @param string $type Name of the manager
-	 * @return MW_DB_Manager_Interface Instance of a database manager
-	 * @throws MW_DB_Exception if database manager class isn't found
+	 * @return \Aimeos\MW\DB\Manager\Iface Instance of a database manager
+	 * @throws \Aimeos\MW\DB\Exception if database manager class isn't found
 	 */
-	static public function createManager( MW_Config_Interface $config, $type = 'Default' )
+	static public function createManager( \Aimeos\MW\Config\Iface $config, $type = 'PDO' )
 	{
-		$classname = 'MW_DB_Manager_' . $type;
-		$filename = str_replace( '_', '/', $classname ) . '.php';
-		
+		$classname = '\\Aimeos\\MW\\DB\\Manager\\' . $type;
+		$filename = 'MW/DB/Manager/' . $type . '.php';
+
 		$paths = explode( PATH_SEPARATOR, get_include_path() );
 
 		foreach( $paths as $path )
@@ -39,6 +42,6 @@ class MW_DB_Factory
 			}
 		}
 
-		throw new MW_DB_Exception( sprintf( 'Database manager "%1$s" not found', $type ) );
+		throw new \Aimeos\MW\DB\Exception( sprintf( 'Database manager "%1$s" not found', $type ) );
 	}
 }

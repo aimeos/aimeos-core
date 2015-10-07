@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product performance records to catalog list table.
  */
-class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class CatalogAddProductPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -43,21 +46,21 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 
 		$context = $this->getContext();
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
-		$catalogListManager = $catalogManager->getSubManager( 'list' );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
+		$catalogListManager = $catalogManager->getSubManager( 'lists' );
 		$catalogListTypeManager = $catalogListManager->getSubManager( 'type' );
 
 
 		$search = $catalogListTypeManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'catalog.list.type.domain', 'product' ),
-			$search->compare( '==', 'catalog.list.type.code', 'default' ),
+			$search->compare( '==', 'catalog.lists.type.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$types = $catalogListTypeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $types ) ) === false ) {
-			throw new Exception( 'Catalog list type item not found' );
+			throw new \Exception( 'Catalog list type item not found' );
 		}
 
 
@@ -75,7 +78,7 @@ class MW_Setup_Task_CatalogAddProductPerfData extends MW_Setup_Task_ProductAddBa
 
 		$this->txBegin();
 
-		$productManager = MShop_Product_Manager_Factory::createManager( $context );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 

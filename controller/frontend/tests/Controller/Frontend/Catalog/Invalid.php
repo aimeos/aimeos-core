@@ -1,5 +1,8 @@
 <?php
 
-class Controller_Frontend_Catalog_Invalid
+namespace Aimeos\Controller\Frontend\Catalog;
+
+
+class Invalid
 {
 }

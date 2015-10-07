@@ -8,26 +8,29 @@
  */
 
 
+namespace Aimeos\Client\Html\Catalog\Count;
+
+
 /**
  * Factory for catalog/product count HTML client.
  *
  * @package Client
  * @subpackage Html
  */
-class Client_Html_Catalog_Count_Factory
-	extends Client_Html_Common_Factory_Abstract
-	implements Client_Html_Common_Factory_Interface
+class Factory
+	extends \Aimeos\Client\Html\Common\Factory\Base
+	implements \Aimeos\Client\Html\Common\Factory\Iface
 {
 	/**
 	 * Creates a catalog count client object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string|null $name Client name (default: "Default")
-	 * @return Client_Html_Interface Count part implementing Client_Html_Interface
-	 * @throws Client_Html_Exception If requested client implementation couldn't be found or initialisation fails
+	 * @return \Aimeos\Client\Html\Iface Count part implementing \Aimeos\Client\Html\Iface
+	 * @throws \Aimeos\Client\Html\Exception If requested client implementation couldn't be found or initialisation fails
 	 */
-	public static function createClient( MShop_Context_Item_Interface $context, array $templatePaths, $name = null )
+	public static function createClient( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $name = null )
 	{
 		/** classes/client/html/catalog/count/name
 		 * Class name of the used catalog count client implementation
@@ -39,11 +42,11 @@ class Client_Html_Catalog_Count_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  Client_Html_Catalog_Count_Default
+		 *  \Aimeos\Client\Html\Catalog\Count\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  Client_Html_Catalog_Count_Mycount
+		 *  \Aimeos\Client\Html\Catalog\Count\Mycount
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -63,17 +66,17 @@ class Client_Html_Catalog_Count_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/client/html/catalog/count/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/client/html/catalog/count/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'Client_Html_Catalog_Count_' . $name : '<not a string>';
-			throw new Client_Html_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\Client\\Html\\Catalog\\Count\\' . $name : '<not a string>';
+			throw new \Aimeos\Client\Html\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'Client_Html_Interface';
-		$classname = 'Client_Html_Catalog_Count_' . $name;
+		$iface = '\\Aimeos\\Client\\Html\\Iface';
+		$classname = '\\Aimeos\\Client\\Html\\Catalog\\Count\\' . $name;
 
 		$client = self::createClientBase( $context, $classname, $iface, $templatePaths );
 

@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\Controller\Jobs;
+
+
 /**
- * Exception for Job controller classes.
+ * \Exception for Job controller classes.
  *
  * @package Controller
  * @subpackage Jobs
  */
-class Controller_Jobs_Exception extends Exception
+class Exception extends \Exception
 {
 }

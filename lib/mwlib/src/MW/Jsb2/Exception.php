@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Jsb2;
+
+
 /**
- * Exception thrown by jsb2 classes.
+ * \Exception thrown by jsb2 classes.
  *
  * @package MW
  * @subpackage Jsb2
  */
-class MW_Jsb2_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

@@ -6,12 +6,15 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds flag and emailflag columns in order table.
  *
  * 2013-08-01: flag column was removed in favour of entries in mshop_order_status
  */
-class MW_Setup_Task_OrderAddFlags extends MW_Setup_Task_Abstract
+class OrderAddFlags extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.

@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Translation\Decorator;
+
+
 /**
  * Memory caching decorator for translation classes.
  *
  * @package MW
  * @subpackage Translation
  */
-class MW_Translation_Decorator_Memory
-	extends MW_Translation_Decorator_Abstract
-	implements MW_Translation_Decorator_Interface
+class Memory
+	extends \Aimeos\MW\Translation\Decorator\Base
+	implements \Aimeos\MW\Translation\Decorator\Iface
 {
 	private $translations;
 
@@ -24,12 +27,12 @@ class MW_Translation_Decorator_Memory
 	/**
 	 * Initializes the decorator.
 	 *
-	 * @param MW_Translation_Interface $object Translation object or decorator
+	 * @param \Aimeos\MW\Translation\Iface $object Translation object or decorator
 	 * @param array $translations Associative list of domains and singular
 	 * 	strings as key and list of translation number and translations as value:
 	 * 	array( <domain> => array( <singular> => array( <index> => <translations> ) ) )
 	 */
-	public function __construct( MW_Translation_Interface $object, array $translations = array() )
+	public function __construct( \Aimeos\MW\Translation\Iface $object, array $translations = array() )
 	{
 		parent::__construct( $object );
 		$this->translations = $translations;

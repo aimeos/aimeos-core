@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds type column to unique index in order base service attribute table.
  */
-class MW_Setup_Task_OrderServiceAttributeChangeUnique extends MW_Setup_Task_Abstract
+class OrderServiceAttributeChangeUnique extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'unq_msordbaseat_ordservid_code' => 'DROP INDEX "unq_msordbaseat_ordservid_code" ON "mshop_order_base_service_attr"',

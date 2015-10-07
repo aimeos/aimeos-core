@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds supplier test data and all items from other domains.
  */
-class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
+class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding supplier test data', 0 );
@@ -64,18 +67,18 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 	/**
 	 * Adds the supplier test data.
 	 *
-	 * @throws MW_Setup_Exception If a required ID is not available
+	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
 	private function addSupplierData()
 	{
-		$supplierManager = MShop_Supplier_Manager_Factory::createManager( $this->additional, 'Default' );
-		$supplierAddressManager = $supplierManager->getSubManager( 'address', 'Default' );
+		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$supplierAddressManager = $supplierManager->getSubManager( 'address', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'supplier.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for supplier domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier domain', $path ) );
 		}
 
 		$supIds = array();
@@ -98,7 +101,7 @@ class MW_Setup_Task_SupplierAddTestData extends MW_Setup_Task_Abstract
 		foreach( $testdata['supplier/address'] as $dataset )
 		{
 			if( !isset( $supIds[$dataset['refid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No supplier ID found for "%1$s"', $dataset['refid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No supplier ID found for "%1$s"', $dataset['refid'] ) );
 			}
 
 			$supAdr->setId( null );

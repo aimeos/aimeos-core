@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes length of domain columns.
  */
-class MW_Setup_Task_ColumnDomainChangeLength extends MW_Setup_Task_Abstract
+class ColumnDomainChangeLength extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_attribute' => array(

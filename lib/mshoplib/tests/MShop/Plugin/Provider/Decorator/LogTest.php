@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Decorator;
+
+
 /**
- * Test class for MShop_Plugin_Provider_Decorator_Log.
+ * Test class for \Aimeos\MShop\Plugin\Provider\Decorator\Log.
  */
-class MShop_Plugin_Provider_Decorator_LogTest extends PHPUnit_Framework_TestCase
+class LogTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $order;
@@ -23,17 +26,17 @@ class MShop_Plugin_Provider_Decorator_LogTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$item = $pluginManager->createItem();
 
-		$provider = new MShop_Plugin_Provider_Order_Example( $context, $item );
+		$provider = new \Aimeos\MShop\Plugin\Provider\Order\Example( $context, $item );
 
-		$priceItem = MShop_Price_Manager_Factory::createManager( $context )->createItem();
-		$this->order = new MShop_Order_Item_Base_Default( $priceItem, $context->getLocale() );
+		$priceItem = \Aimeos\MShop\Price\Manager\Factory::createManager( $context )->createItem();
+		$this->order = new \Aimeos\MShop\Order\Item\Base\Standard( $priceItem, $context->getLocale() );
 
-		$this->object = new MShop_Plugin_Provider_Decorator_Log( $context, $item, $provider );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Decorator\Log( $context, $item, $provider );
 	}
 
 
@@ -76,6 +79,6 @@ class MShop_Plugin_Provider_Decorator_LogTest extends PHPUnit_Framework_TestCase
 
 	public function testUpdateObject()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'test', new stdClass() ) );
+		$this->assertTrue( $this->object->update( $this->order, 'test', new \stdClass() ) );
 	}
 }

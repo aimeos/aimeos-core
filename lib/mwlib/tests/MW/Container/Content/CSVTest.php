@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Container\Content;
+
+
 /**
- * Test class for MW_Container_Content_CSV.
+ * Test class for \Aimeos\MW\Container\Content\CSV.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Container_Content_CSVTest extends PHPUnit_Framework_TestCase
+class CSVTest extends \PHPUnit_Framework_TestCase
 {
 	protected function setUp()
 	{
@@ -18,7 +21,7 @@ class MW_Container_Content_CSVTest extends PHPUnit_Framework_TestCase
 
 	public function testNewFile()
 	{
-		$csv = new MW_Container_Content_CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile', 'temp' );
+		$csv = new \Aimeos\MW\Container\Content\CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile', 'temp' );
 
 		$check = file_exists( $csv->getResource() );
 		unlink( $csv->getResource() );
@@ -30,7 +33,7 @@ class MW_Container_Content_CSVTest extends PHPUnit_Framework_TestCase
 
 	public function testExistingFile()
 	{
-		$csv = new MW_Container_Content_CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv', 'test' );
+		$csv = new \Aimeos\MW\Container\Content\CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv', 'test' );
 
 		$this->assertEquals( true, file_exists( $csv->getResource() ) );
 	}
@@ -48,7 +51,7 @@ class MW_Container_Content_CSVTest extends PHPUnit_Framework_TestCase
 
 		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
 
-		$csv = new MW_Container_Content_CSV( $path, 'temp', $options );
+		$csv = new \Aimeos\MW\Container\Content\CSV( $path, 'temp', $options );
 
 		$data = array(
 			array( 'test', 'file', 'data' ),
@@ -63,7 +66,7 @@ class MW_Container_Content_CSVTest extends PHPUnit_Framework_TestCase
 		$expected = ":test:;:file:;:data:\r\n:\\: :;:\0:;:\\:\r\n";
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {
-			throw new Exception( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );
+			throw new \Exception( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );
 		}
 
 		unlink( $csv->getResource() );
@@ -75,7 +78,7 @@ class MW_Container_Content_CSVTest extends PHPUnit_Framework_TestCase
 	public function testIterator()
 	{
 		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv';
-		$csv = new MW_Container_Content_CSV( $filename, 'test' );
+		$csv = new \Aimeos\MW\Container\Content\CSV( $filename, 'test' );
 
 		$expected = array(
 			array( 'test', 'file', 'data' ),

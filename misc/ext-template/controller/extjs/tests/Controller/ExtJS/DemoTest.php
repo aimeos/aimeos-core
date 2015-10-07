@@ -1,11 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\ExtJS;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-class Controller_ExtJS_DemoTest extends PHPUnit_Framework_TestCase
+class DemoTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -18,7 +20,7 @@ class Controller_ExtJS_DemoTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new Controller_ExtJS_Demo_Default( TestHelper::getContext() );
+		// $this->object = new \Aimeos\Controller\ExtJS\Demo\Standard( \TestHelper::getContext() );
 	}
 
 
@@ -32,8 +34,8 @@ class Controller_ExtJS_DemoTest extends PHPUnit_Framework_TestCase
 	{
 		unset( $this->object );
 
-		Controller_ExtJS_Factory::clear();
-		MShop_Factory::clear();
+		\Aimeos\Controller\ExtJS\Factory::clear();
+		\Aimeos\MShop\Factory::clear();
 	}
 
 

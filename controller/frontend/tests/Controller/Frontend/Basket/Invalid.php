@@ -1,5 +1,8 @@
 <?php
 
-class Controller_Frontend_Basket_Invalid
+namespace Aimeos\Controller\Frontend\Basket;
+
+
+class Invalid
 {
 }

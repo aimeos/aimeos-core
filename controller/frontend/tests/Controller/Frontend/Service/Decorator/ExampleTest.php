@@ -1,12 +1,13 @@
 <?php
 
+namespace Aimeos\Controller\Frontend\Plugin\Decorator;
+
+
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
-
-class Controller_Frontend_Plugin_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
+class ExampleTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -19,9 +20,9 @@ class Controller_Frontend_Plugin_Decorator_ExampleTest extends PHPUnit_Framework
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$controller = Controller_Frontend_Service_Factory::createController( $context, 'Default' );
-		$this->object = new Controller_Frontend_Service_Decorator_Example( $context, $controller );
+		$context = \TestHelper::getContext();
+		$controller = \Aimeos\Controller\Frontend\Service\Factory::createController( $context, 'Standard' );
+		$this->object = new \Aimeos\Controller\Frontend\Service\Decorator\Example( $context, $controller );
 	}
 
 
@@ -39,7 +40,7 @@ class Controller_Frontend_Plugin_Decorator_ExampleTest extends PHPUnit_Framework
 
 	public function testCall()
 	{
-		$this->setExpectedException( 'Controller_Frontend_Service_Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Service\\Exception' );
 		$this->object->checkServiceAttributes( 'delivery', -1, array() );
 	}
 

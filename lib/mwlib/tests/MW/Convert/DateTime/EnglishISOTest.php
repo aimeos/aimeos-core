@@ -1,22 +1,24 @@
 <?php
 
+namespace Aimeos\MW\Convert\DateTime;
 
-class MW_Convert_DateTime_EnglishISOTest extends PHPUnit_Framework_TestCase
+
+class EnglishISOTest extends \PHPUnit_Framework_TestCase
 {
 	public function testTranslate()
 	{
-		$object = new MW_Convert_DateTime_EnglishISO();
+		$object = new \Aimeos\MW\Convert\DateTime\EnglishISO();
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
 		$this->assertEquals( '2000-01-02 00:00:00', $object->translate( '01/02/2000' ) );
 	}
 
 
 	public function testReverse()
 	{
-		$object = new MW_Convert_DateTime_EnglishISO();
+		$object = new \Aimeos\MW\Convert\DateTime\EnglishISO();
 
-		$this->assertInstanceOf( 'MW_Convert_Interface', $object );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
 		$this->assertEquals( '01/02/2000 00:00:00 AM', $object->reverse( '2000-01-02 00:00:00' ) );
 	}
 }

@@ -6,20 +6,23 @@
  */
 
 
+namespace Aimeos\Controller\ExtJS\Common\Decorator;
+
+
 /**
- * Test class for Controller_ExtJS_Common_Decorator_ExampleTest.
+ * Test class for \Aimeos\Controller\ExtJS\Common\Decorator\ExampleTest.
  */
-class Controller_ExtJS_Common_Decorator_ExampleTest extends PHPUnit_Framework_TestCase
+class ExampleTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$context = \TestHelper::getContext();
 
-		$controller = Controller_ExtJS_Admin_Job_Factory::createController( $context );
-		$this->object = new Controller_ExtJS_Common_Decorator_Example( $context, $controller );
+		$controller = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $context );
+		$this->object = new \Aimeos\Controller\ExtJS\Common\Decorator\Example( $context, $controller );
 	}
 
 
@@ -37,22 +40,22 @@ class Controller_ExtJS_Common_Decorator_ExampleTest extends PHPUnit_Framework_Te
 
 	public function testDeleteItems()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->object->deleteItems( new stdClass() );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		$this->object->deleteItems( new \stdClass() );
 	}
 
 
 	public function testSaveItems()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->object->saveItems( new stdClass() );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		$this->object->saveItems( new \stdClass() );
 	}
 
 
 	public function testSearchItems()
 	{
-		$this->setExpectedException( 'Controller_ExtJS_Exception' );
-		$this->object->searchItems( new stdClass() );
+		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		$this->object->searchItems( new \stdClass() );
 	}
 
 

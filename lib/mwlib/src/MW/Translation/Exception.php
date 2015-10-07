@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Translation;
+
+
 /**
- * Exception thrown by MW translation objects.
+ * \Exception thrown by MW translation objects.
  *
  * @package MW
  * @subpackage Translation
  */
-class MW_Translation_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

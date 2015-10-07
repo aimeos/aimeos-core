@@ -8,13 +8,16 @@
  */
 
 
+namespace Aimeos\MW\Template;
+
+
 /**
  * Typo3-like template processing
  *
  * @package MW
  * @subpackage Template
  */
-class MW_Template_T3 extends MW_Template_Base
+class T3 extends \Aimeos\MW\Template\Base
 {
 	/**
 	 * Builds the template object with string and markers
@@ -22,7 +25,7 @@ class MW_Template_T3 extends MW_Template_Base
 	 * @param string $text Template as text with Typo3-like markers
 	 * @param string $begin Marker for start sequence with '*' as wildcard
 	 * @param string $end Marker for stop sequence with '*' as wildcard
-	 * @return MW_Template_Interface
+	 * @return \Aimeos\MW\Template\Iface
 	 */
 	public function __construct( $text, $begin = '<!--###$-->', $end = '<!--$###-->' )
 	{

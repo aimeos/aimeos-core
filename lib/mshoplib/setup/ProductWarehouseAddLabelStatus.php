@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds label and status to warehouse table.
  */
-class MW_Setup_Task_ProductWarehouseAddLabelStatus extends MW_Setup_Task_Abstract
+class ProductWarehouseAddLabelStatus extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_product_warehouse' => array(

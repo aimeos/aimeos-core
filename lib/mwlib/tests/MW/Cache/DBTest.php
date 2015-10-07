@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Cache;
+
+
 /**
- * Test class for MW_Cache_DB.
+ * Test class for \Aimeos\MW\Cache\DB.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
+class DBTest extends \PHPUnit_Framework_TestCase
 {
 	private $dbm;
 	private $config;
@@ -21,7 +24,7 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
@@ -29,11 +32,11 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 		$this->config = array( 'siteid' => 1 );
 
 		$this->config['search'] = array(
-			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'cache.siteid' => array( 'label' => 'Cache site ID', 'code' => 'cache.siteid', 'internalcode' => 'siteid', 'type' => 'integer', 'internaltype' => MW_DB_Statement_Abstract::PARAM_INT ),
-			'cache.value' => array( 'label' => 'Cached value', 'code' => 'cache.value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'cache.expire' => array( 'label' => 'Cache expiration date', 'code' => 'cache.expire', 'internalcode' => 'expire', 'type' => 'datetime', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
-			'cache.tag.name' => array( 'label' => 'Cache tag name', 'code' => 'cache.tag.name', 'internalcode' => 'tname', 'type' => 'string', 'internaltype' => MW_DB_Statement_Abstract::PARAM_STR ),
+			'cache.id' => array( 'label' => 'Cache ID', 'code' => 'cache.id', 'internalcode' => 'id', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
+			'cache.siteid' => array( 'label' => 'Cache site ID', 'code' => 'cache.siteid', 'internalcode' => 'siteid', 'type' => 'integer', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
+			'cache.value' => array( 'label' => 'Cached value', 'code' => 'cache.value', 'internalcode' => 'value', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
+			'cache.expire' => array( 'label' => 'Cache expiration date', 'code' => 'cache.expire', 'internalcode' => 'expire', 'type' => 'datetime', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
+			'cache.tag.name' => array( 'label' => 'Cache tag name', 'code' => 'cache.tag.name', 'internalcode' => 'tname', 'type' => 'string', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR ),
 		);
 
 		$this->config['sql'] = array(
@@ -62,7 +65,7 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 		);
 
 
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 		$conn = $this->dbm->acquire();
 
 
@@ -109,7 +112,7 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 		$this->dbm->release( $conn );
 
 
-		$this->object = new MW_Cache_DB( $this->config, $this->dbm );
+		$this->object = new \Aimeos\MW\Cache\DB( $this->config, $this->dbm );
 	}
 
 
@@ -121,7 +124,7 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbm = TestHelper::getDBManager();
+		$this->dbm = \TestHelper::getDBManager();
 		$conn = $this->dbm->acquire();
 
 		$conn->create( 'DROP TABLE "mw_cache_tag_test"' )->execute()->finish();
@@ -133,8 +136,8 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 
 	public function testConstructorNoConfig()
 	{
-		$this->setExpectedException( 'MW_Cache_Exception' );
-		new MW_Cache_DB( array(), $this->dbm );
+		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		new \Aimeos\MW\Cache\DB( array(), $this->dbm );
 	}
 
 
@@ -143,8 +146,8 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 		$config = $this->config;
 		unset( $config['sql'] );
 
-		$this->setExpectedException( 'MW_Cache_Exception' );
-		new MW_Cache_DB( $config, $this->dbm );
+		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		new \Aimeos\MW\Cache\DB( $config, $this->dbm );
 	}
 
 
@@ -153,8 +156,8 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 		$config = $this->config;
 		unset( $config['search'] );
 
-		$this->setExpectedException( 'MW_Cache_Exception' );
-		new MW_Cache_DB( $config, $this->dbm );
+		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		new \Aimeos\MW\Cache\DB( $config, $this->dbm );
 	}
 
 
@@ -163,8 +166,8 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 		$config = $this->config;
 		unset( $config['sql']['delete'] );
 
-		$this->setExpectedException( 'MW_Cache_Exception' );
-		new MW_Cache_DB( $config, $this->dbm );
+		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		new \Aimeos\MW\Cache\DB( $config, $this->dbm );
 	}
 
 
@@ -173,8 +176,8 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 		$config = $this->config;
 		unset( $config['search']['cache.id'] );
 
-		$this->setExpectedException( 'MW_Cache_Exception' );
-		new MW_Cache_DB( $config, $this->dbm );
+		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		new \Aimeos\MW\Cache\DB( $config, $this->dbm );
 	}
 
 
@@ -373,7 +376,7 @@ class MW_Cache_DBTest extends PHPUnit_Framework_TestCase
 
 	public function testSetException()
 	{
-		$this->setExpectedException( 'MW_Cache_Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
 		$this->object->set( array(), '' );
 	}
 

@@ -8,16 +8,18 @@
  */
 
 
+namespace Aimeos\MShop\Service\Provider\Payment;
+
+
 /**
  * Payment provider for paypal express orders.
  *
  * @package MShop
  * @subpackage Service
  */
-
-class MShop_Service_Provider_Payment_PayPalExpress
-	extends MShop_Service_Provider_Payment_Abstract
-	implements MShop_Service_Provider_Payment_Interface
+class PayPalExpress
+	extends \Aimeos\MShop\Service\Provider\Payment\Base
+	implements \Aimeos\MShop\Service\Provider\Payment\Iface
 {
 	private $apiendpoint;
 
@@ -100,11 +102,11 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Initializes the provider object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Context object
-	 * @param MShop_Service_Item_Interface $serviceItem Service item with configuration
-	 * @throws MShop_Service_Exception If one of the required configuration values isn't available
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MShop\Service\Item\Iface $serviceItem Service item with configuration
+	 * @throws \Aimeos\MShop\Service\Exception If one of the required configuration values isn't available
 	 */
-	public function __construct( MShop_Context_Item_Interface $context, MShop_Service_Item_Interface $serviceItem )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Service\Item\Iface $serviceItem )
 	{
 		parent::__construct( $context, $serviceItem );
 
@@ -120,7 +122,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		foreach( $configParameters as $param )
 		{
 			if( !isset( $config[$param] ) ) {
-				throw new MShop_Service_Exception( sprintf( 'Configuration for "%1$s" is missing', $param ) );
+				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Configuration for "%1$s" is missing', $param ) );
 			}
 		}
 
@@ -133,14 +135,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
 	 * rules for the value of each field in the administration interface.
 	 *
-	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
 	 */
 	public function getConfigBE()
 	{
 		$list = parent::getConfigBE();
 
 		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new MW_Common_Criteria_Attribute_Default( $config );
+			$list[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $config );
 		}
 
 		return $list;
@@ -166,15 +168,15 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Tries to get an authorization or captures the money immediately for the given order if capturing the money
 	 * separately isn't supported or not configured by the shop owner.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 * @param array $params Request parameter if available
-	 * @return MShop_Common_Item_Helper_Form_Default Form object with URL, action and parameters to redirect to
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( MShop_Order_Item_Interface $order, array $params = array() )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() )
 	{
 		$orderid = $order->getId();
-		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), MShop_Order_Manager_Base_Abstract::PARTS_ALL );
+		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 
 		$values = $this->getOrderDetails( $orderBaseItem );
 		$values['METHOD'] = 'SetExpressCheckout';
@@ -189,25 +191,25 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$default = 'https://www.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s';
 		$paypalUrl = sprintf( $this->getConfigValue( array( 'paypalexpress.PaypalUrl' ), $default ), $rvals['TOKEN'] );
 
-		$type = MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT;
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
 		$this->setAttributes( $orderBaseItem->getService( $type ), array( 'TOKEN' => $rvals['TOKEN'] ), 'payment/paypal' );
 		$this->saveOrderBase( $orderBaseItem );
 
-		return new MShop_Common_Item_Helper_Form_Default( $paypalUrl, 'POST', array() );
+		return new \Aimeos\MShop\Common\Item\Helper\Form\Standard( $paypalUrl, 'POST', array() );
 	}
 
 
 	/**
 	 * Queries for status updates for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 */
-	public function query( MShop_Order_Item_Interface $order )
+	public function query( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		if( ( $tid = $this->getOrderServiceItem( $order->getBaseId() )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$values = $this->getAuthParameter();
@@ -226,18 +228,18 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Captures the money later on request for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 */
-	public function capture( MShop_Order_Item_Interface $order )
+	public function capture( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		$baseid = $order->getBaseId();
 		$baseItem = $this->getOrderBase( $baseid );
-		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 
 		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$values = $this->getAuthParameter();
@@ -271,17 +273,17 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Refunds the money for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 */
-	public function refund( MShop_Order_Item_Interface $order )
+	public function refund( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		$baseItem = $this->getOrderBase( $order->getBaseId() );
-		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 
 		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$values = $this->getAuthParameter();
@@ -299,7 +301,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$this->setAttributes( $serviceItem, $attributes, 'payment/paypal' );
 		$this->saveOrderBase( $baseItem );
 
-		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUND );
+		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
 		$this->saveOrder( $order );
 	}
 
@@ -307,14 +309,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Cancels the authorization for the given order if supported.
 	 *
-	 * @param MShop_Order_Item_Interface $order Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
 	 */
-	public function cancel( MShop_Order_Item_Interface $order )
+	public function cancel( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		if( ( $tid = $this->getOrderServiceItem( $order->getBaseId() )->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
 			$msg = sprintf( 'PayPal Express: Payment transaction ID for order ID "%1$s" not available', $order->getId() );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$values = $this->getAuthParameter();
@@ -325,7 +327,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
 		$this->checkResponse( $order->getId(), $response, __METHOD__ );
 
-		$order->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
+		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 		$this->saveOrder( $order );
 	}
 
@@ -337,8 +339,8 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * @param string|null $body Information sent within the body of the request
 	 * @param string|null &$response Response body for notification requests
 	 * @param array &$header Response headers for notification requests
-	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
-	 * @throws MShop_Service_Exception If updating one of the orders failed
+	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
 	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
 	{
@@ -360,13 +362,13 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		if( $response !== 'VERIFIED' )
 		{
 			$msg = sprintf( 'PayPal Express: Invalid request "%1$s"', $urlQuery );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 
 		$order = $this->getOrder( $params['invoice'] );
 		$baseItem = $this->getOrderBase( $order->getBaseId() );
-		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 
 		$this->checkIPN( $baseItem, $params );
 
@@ -397,10 +399,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	{
 		switch( $what )
 		{
-			case MShop_Service_Provider_Payment_Abstract::FEAT_CAPTURE:
-			case MShop_Service_Provider_Payment_Abstract::FEAT_QUERY:
-			case MShop_Service_Provider_Payment_Abstract::FEAT_CANCEL:
-			case MShop_Service_Provider_Payment_Abstract::FEAT_REFUND:
+			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE:
+			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY:
+			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL:
+			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_REFUND:
 				return true;
 		}
 
@@ -411,14 +413,14 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Begins paypalexpress transaction and saves transaction id.
 	 *
 	 * @param mixed $params Update information whose format depends on the payment provider
-	 * @return MShop_Order_Item_Interface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 */
 	protected function doExpressCheckoutPayment( $params )
 	{
 		$order = $this->getOrder( $params['orderid'] );
 		$baseid = $order->getBaseId();
 		$baseItem = $this->getOrderBase( $baseid );
-		$serviceItem = $baseItem->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 
 		$values = $this->getAuthParameter();
 		$values['METHOD'] = 'DoExpressCheckoutPayment';
@@ -458,7 +460,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * @param string $response Response from the payment provider
 	 * @param string $method Name of the calling method
 	 * @return array Associative list of key/value pairs containing the response parameters
-	 * @throws MShop_Service_Exception If request was not successful and an error was returned
+	 * @throws \Aimeos\MShop\Service\Exception If request was not successful and an error was returned
 	 */
 	protected function checkResponse( $orderid, $response, $method )
 	{
@@ -468,13 +470,13 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		if( $rvals['ACK'] !== 'Success' )
 		{
 			$msg = 'PayPal Express: method = ' . $method . ', order ID = ' . $orderid . ', response = ' . print_r( $rvals, true );
-			$this->getContext()->getLogger()->log( $msg, MW_Logger_Abstract::INFO );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::INFO );
 
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
 				$short = ( isset( $rvals['L_SHORTMESSAGE0'] ) ? $rvals['L_SHORTMESSAGE0'] : '<none>' );
 				$msg = sprintf( 'PayPal Express: Request for order ID "%1$s" failed with "%2$s"', $orderid, $short );
-				throw new MShop_Service_Exception( $msg );
+				throw new \Aimeos\MShop\Service\Exception( $msg );
 			}
 		}
 
@@ -485,17 +487,17 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Checks if IPN message from paypal is valid.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $basket
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket
 	 * @param array $params
 	 */
 	protected function checkIPN( $basket, $params )
 	{
-		$attrManager = MShop_Factory::createManager( $this->getContext(), 'order/base/service/attribute' );
+		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/service/attribute' );
 
 		if( $this->getConfigValue( array( 'paypalexpress.AccountEmail' ) ) !== $params['receiver_email'] )
 		{
 			$msg = sprintf( 'PayPal Express: Wrong receiver email "%1$s"', $params['receiver_email'] );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$price = $basket->getPrice();
@@ -503,7 +505,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		if( $amount != $params['payment_amount'] )
 		{
 			$msg = sprintf( 'PayPal Express: Wrong payment amount "%1$s" for order ID "%2$s"', $params['payment_amount'], $params['invoice'] );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$search = $attrManager->createSearch();
@@ -518,7 +520,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 		if( ( $attr = reset( $results ) ) !== false )
 		{
 			$msg = sprintf( 'PayPal Express: Duplicate transaction with ID "%1$s" and status "%2$s" ', $params['txn_id'], $params['txn_status'] );
-			throw new MShop_Service_Exception( $msg );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 	}
 
@@ -526,10 +528,10 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Maps the PayPal status to the appropriate payment status and sets it in the order object.
 	 *
-	 * @param MShop_Order_Item_Interface $invoice Order invoice object
+	 * @param \Aimeos\MShop\Order\Item\Iface $invoice Order invoice object
 	 * @param array $response Associative list of key/value pairs containing the PayPal response
 	 */
-	protected function setPaymentStatus( MShop_Order_Item_Interface $invoice, array $response )
+	protected function setPaymentStatus( \Aimeos\MShop\Order\Item\Iface $invoice, array $response )
 	{
 		if( !isset( $response['PAYMENTSTATUS'] ) ) {
 			return;
@@ -542,46 +544,46 @@ class MShop_Service_Provider_Payment_PayPalExpress
 				{
 					if( $response['PENDINGREASON'] === 'authorization' )
 					{
-						$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_AUTHORIZED );
+						$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
 						break;
 					}
 
 					$str = 'PayPal Express: order ID = ' . $invoice->getId() . ', PENDINGREASON = ' . $response['PENDINGREASON'];
-					$this->getContext()->getLogger()->log( $str, MW_Logger_Abstract::INFO );
+					$this->getContext()->getLogger()->log( $str, \Aimeos\MW\Logger\Base::INFO );
 				}
 
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_PENDING );
+				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 				break;
 
 			case 'In-Progress':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_PENDING );
+				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 				break;
 
 			case 'Completed':
 			case 'Processed':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_RECEIVED );
+				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 				break;
 
 			case 'Failed':
 			case 'Denied':
 			case 'Expired':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUSED );
+				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_REFUSED );
 				break;
 
 			case 'Refunded':
 			case 'Partially-Refunded':
 			case 'Reversed':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_REFUND );
+				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_REFUND );
 				break;
 
 			case 'Canceled-Reversal':
 			case 'Voided':
-				$invoice->setPaymentStatus( MShop_Order_Item_Abstract::PAY_CANCELED );
+				$invoice->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 				break;
 
 			default:
 				$str = 'PayPal Express: order ID = ' . $invoice->getId() . ', response = ' . print_r( $response, true );
-				$this->getContext()->getLogger()->log( $str, MW_Logger_Abstract::INFO );
+				$this->getContext()->getLogger()->log( $str, \Aimeos\MW\Logger\Base::INFO );
 		}
 	}
 
@@ -589,16 +591,16 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	/**
 	 * Returns an list of order data required by PayPal.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $orderBase Order base item
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $orderBase Order base item
 	 * @return array Associative list of key/value pairs with order data required by PayPal
 	 */
-	protected function getOrderDetails( MShop_Order_Item_Base_Interface $orderBase )
+	protected function getOrderDetails( \Aimeos\MShop\Order\Item\Base\Iface $orderBase )
 	{
 		$values = $this->getAuthParameter();
 
 		try
 		{
-			$orderAddressDelivery = $orderBase->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_DELIVERY );
+			$orderAddressDelivery = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 
 			/* setting up the shipping address details (ReviewOrder) */
 			$values['ADDROVERRIDE'] = 1;
@@ -609,7 +611,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $orderAddressDelivery->getCountryId();
 			$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $orderAddressDelivery->getPostal();
 		}
-		catch( Exception $e ) {; } // If no address is available
+		catch( \Exception $e ) {; } // If no address is available
 
 		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
@@ -664,7 +666,7 @@ class MShop_Service_Provider_Payment_PayPalExpress
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 		}
-		catch( Exception $e ) {; } // If no delivery service is available
+		catch( \Exception $e ) {; } // If no delivery service is available
 
 
 		return $values;
@@ -691,11 +693,11 @@ class MShop_Service_Provider_Payment_PayPalExpress
 	 * Returns order service item for specified base ID.
 	 *
 	 * @param integer $baseid Base ID of the order
-	 * @return MShop_Order_Item_Base_Service_Interface Order service item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item
 	 */
 	protected function getOrderServiceItem( $baseid )
 	{
-		$basket = $this->getOrderBase( $baseid, MShop_Order_Manager_Base_Abstract::PARTS_SERVICE );
-		return $basket->getService( MShop_Order_Item_Base_Service_Abstract::TYPE_PAYMENT );
+		$basket = $this->getOrderBase( $baseid, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
+		return $basket->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 	}
 }

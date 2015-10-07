@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds attribute test data and all items from other domains.
  */
-class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
+class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$this->msg( 'Adding text test data', 0 );
@@ -59,7 +62,7 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
 		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'text.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new MShop_Exception( sprintf( 'No file "%1$s" found for text domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for text domain', $path ) );
 		}
 
 		$this->addTextData( $testdata );
@@ -72,12 +75,12 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
 	 * Adds the required text test data for text.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
-	 * @throws MW_Setup_Exception If no type ID is found
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	private function addTextData( array $testdata )
 	{
-		$textManager = MShop_Text_Manager_Factory::createManager( $this->additional, 'Default' );
-		$textTypeManager = $textManager->getSubManager( 'type', 'Default' );
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$textTypeManager = $textManager->getSubManager( 'type', 'Standard' );
 
 		$ttypeIds = array();
 		$ttype = $textTypeManager->createItem();
@@ -100,7 +103,7 @@ class MW_Setup_Task_TextAddTestData extends MW_Setup_Task_Abstract
 		foreach( $testdata['text'] as $key => $dataset )
 		{
 			if( !isset( $ttypeIds[$dataset['typeid']] ) ) {
-				throw new MW_Setup_Exception( sprintf( 'No text type ID found for "%1$s"', $dataset['typeid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No text type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$text->setId( null );

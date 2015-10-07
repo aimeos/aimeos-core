@@ -8,15 +8,18 @@
  */
 
 
+namespace Aimeos\MW\Common\Criteria\Expression\Sort;
+
+
 /**
  * SQL implementation for sorting objects.
  *
  * @package MW
  * @subpackage Common
  */
-class MW_Common_Criteria_Expression_Sort_SQL
-	extends MW_Common_Criteria_Expression_Abstract
-	implements MW_Common_Criteria_Expression_Sort_Interface
+class SQL
+	extends \Aimeos\MW\Common\Criteria\Expression\Base
+	implements \Aimeos\MW\Common\Criteria\Expression\Sort\Iface
 {
 	private static $operators = array( '+' => 'ASC', '-' => 'DESC' );
 	private $operator;
@@ -27,14 +30,14 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	/**
 	 * Initializes the object.
 	 *
-	 * @param MW_DB_Connection_Interface $conn Database connection object
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
 	 * @param string $operator Sorting operator ("+": ascending, "-": descending)
 	 * @param string $name Name of the variable or column to sort
 	 */
-	public function __construct( MW_DB_Connection_Interface $conn, $operator, $name )
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $operator, $name )
 	{
 		if( !isset( self::$operators[$operator] ) ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
 		$this->operator = $operator;
@@ -81,7 +84,7 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
-	 * @param array $plugins Associative list of item names and plugins implementing MW_Common_Criteria_Plugin_Interface
+	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Common\Criteria\Plugin\Iface
 	 * @return string Expression that evaluates to a boolean result
 	 */
 	public function toString( array $types, array $translations = array(), array $plugins = array() )
@@ -95,7 +98,7 @@ class MW_Common_Criteria_Expression_Sort_SQL
 		}
 
 		if( !isset( $types[$name] ) ) {
-			throw new MW_Common_Exception( sprintf( 'Invalid name "%1$s"', $name ) );
+			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
 		return $transname . ' ' . self::$operators[$this->operator];
@@ -116,13 +119,13 @@ class MW_Common_Criteria_Expression_Sort_SQL
 
 		switch( $type )
 		{
-			case MW_DB_Statement_Abstract::PARAM_BOOL:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
 				$value = (bool) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_INT:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
 				$value = (int) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_FLOAT:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$value = (float) $value; break;
-			case MW_DB_Statement_Abstract::PARAM_STR:
+			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
 				if( $operator == '~=' ) {
 					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;
 				}
@@ -139,27 +142,27 @@ class MW_Common_Criteria_Expression_Sort_SQL
 	 *
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
 	 * @return integer Internal parameter type
-	 * @throws MW_Common_Exception If an error occurs
+	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
 	protected function getParamType( &$item )
 	{
 		if( $item[0] == '"' )
 		{
 			if( ( $item = substr( $item, 1, strlen( $item ) - 2 ) ) === false ) {
-				throw new MW_Common_Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Unable to extract string parameter from >%1$s<', $item ) );
 			}
 
-			return MW_DB_Statement_Abstract::PARAM_STR;
+			return \Aimeos\MW\DB\Statement\Base::PARAM_STR;
 		}
 		else if( strpos( $item, '.' ) !== false )
 		{
-			return MW_DB_Statement_Abstract::PARAM_FLOAT;
+			return \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT;
 		}
 		else if( ctype_digit( $item ) !== false )
 		{
-			return MW_DB_Statement_Abstract::PARAM_INT;
+			return \Aimeos\MW\DB\Statement\Base::PARAM_INT;
 		}
 
-		return MW_DB_Statement_Abstract::PARAM_STR;
+		return \Aimeos\MW\DB\Statement\Base::PARAM_STR;
 	}
 }

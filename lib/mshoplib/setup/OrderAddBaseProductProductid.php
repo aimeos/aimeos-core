@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds product ID column to order base product tables.
  */
-class MW_Setup_Task_OrderAddBaseProductProductid extends MW_Setup_Task_Abstract
+class OrderAddBaseProductProductid extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'ALTER TABLE "mshop_order_base_product" ADD "prodid" VARCHAR(32) NOT NULL COLLATE utf8_bin AFTER "siteid"',

@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Adds performance records to product table.
  */
-class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBasePerfData
+class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -43,7 +46,7 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 
 		$context = $this->getContext();
 
-		$productManager = MShop_Factory::createManager( $context, 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$productStockManager = $productManager->getSubManager( 'stock' );
 		$productWarehouseManager = $productStockManager->getSubManager( 'warehouse' );
 
@@ -53,7 +56,7 @@ class MW_Setup_Task_ProductAddStockPerfData extends MW_Setup_Task_ProductAddBase
 		$result = $productWarehouseManager->searchItems( $search );
 
 		if( ( $whItem = reset( $result ) ) === false ) {
-			throw new Exception( 'No warehouse with code "default" found' );
+			throw new \Exception( 'No warehouse with code "default" found' );
 		}
 
 

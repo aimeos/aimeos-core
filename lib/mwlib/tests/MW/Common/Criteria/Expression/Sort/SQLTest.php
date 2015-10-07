@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Common\Criteria\Expression\Sort;
+
+
 /**
- * Test class for MW_Common_Criteria_Expression_Sort_SQL.
+ * Test class for \Aimeos\MW\Common\Criteria\Expression\Sort\SQL.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Common_Criteria_Expression_Sort_SQLTest extends PHPUnit_Framework_TestCase
+class SQLTest extends \PHPUnit_Framework_TestCase
 {
 	private $conn = null;
 
@@ -19,12 +22,12 @@ class MW_Common_Criteria_Expression_Sort_SQLTest extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		if( TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$dbm = TestHelper::getDBManager();
+		$dbm = \TestHelper::getDBManager();
 		$this->conn = $dbm->acquire();
 	}
 
@@ -36,47 +39,47 @@ class MW_Common_Criteria_Expression_Sort_SQLTest extends PHPUnit_Framework_TestC
 	 */
 	protected function tearDown()
 	{
-		$dbm = TestHelper::getDBManager();
+		$dbm = \TestHelper::getDBManager();
 		$dbm->release( $this->conn );
 	}
 
 	public function testGetOperators()
 	{
 		$expected = array( '+', '-' );
-		$actual = MW_Common_Criteria_Expression_Sort_SQL::getOperators();
+		$actual = \Aimeos\MW\Common\Criteria\Expression\Sort\SQL::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
 
 	public function testGetOperator()
 	{
-		$expr = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '+', 'test' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Sort\SQL( $this->conn, '+', 'test' );
 		$this->assertEquals( '+', $expr->getOperator() );
 	}
 
 	public function testGetName()
 	{
-		$expr = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '-', 'test' );
+		$expr = new \Aimeos\MW\Common\Criteria\Expression\Sort\SQL( $this->conn, '-', 'test' );
 		$this->assertEquals( 'test', $expr->getName() );
 	}
 
 	public function testToString()
 	{
 		$types = array(
-			'test' => MW_DB_Statement_Abstract::PARAM_STR,
-			'test()' => MW_DB_Statement_Abstract::PARAM_STR,
+			'test' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'test()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		);
 
 		$translations = array(
 			'test()' => 'testfunc($1,$2)',
 		);
 
-		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '-', 'test' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\SQL( $this->conn, '-', 'test' );
 		$this->assertEquals( 'test DESC', $object->toString( $types ) );
 
-		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '+', 'test(1,2.1)' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\SQL( $this->conn, '+', 'test(1,2.1)' );
 		$this->assertEquals( 'testfunc(1,2.1) ASC', $object->toString( $types, $translations ) );
 
-		$object = new MW_Common_Criteria_Expression_Sort_SQL( $this->conn, '-', 'test("a",2)' );
+		$object = new \Aimeos\MW\Common\Criteria\Expression\Sort\SQL( $this->conn, '-', 'test("a",2)' );
 		$this->assertEquals( 'testfunc(\'a\',2) DESC', $object->toString( $types, $translations ) );
 	}
 }

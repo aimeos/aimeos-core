@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
  * Simple example implementation of an order plugin.
  *
  * @package MShop
  * @subpackage Plugin
  */
-class MShop_Plugin_Provider_Order_Example
-	extends MShop_Plugin_Provider_Factory_Abstract
-	implements MShop_Plugin_Provider_Factory_Interface
+class Example
+	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
+	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	/**
 	 * Subscribes itself to a publisher
 	 *
-	 * @param MW_Observer_Publisher_Interface $p Object implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-	public function register( MW_Observer_Publisher_Interface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 	}
 
@@ -31,11 +34,11 @@ class MShop_Plugin_Provider_Order_Example
 	/**
 	 * Receives a notification from a publisher object
 	 *
-	 * @param MW_Observer_Publisher_Interface $order Shop basket instance implementing publisher interface
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket instance implementing publisher interface
 	 * @param string $action Name of the action to listen for
 	 * @param mixed $value Object or value changed in publisher
 	 */
-	public function update( MW_Observer_Publisher_Interface $order, $action, $value = null )
+	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
 		return true;
 	}

@@ -1,18 +1,19 @@
 <?php
 
+namespace Aimeos\MW\Container;
+
+
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-
-
-class MW_Container_DirectoryTest extends PHPUnit_Framework_TestCase
+class DirectoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testNewFile()
 	{
 		$dirname = 'tmp' . DIRECTORY_SEPARATOR . 'testdir';
 
-		$dir = new MW_Container_Directory( $dirname, 'CSV' );
+		$dir = new \Aimeos\MW\Container\Directory( $dirname, 'CSV' );
 		$dir->add( $dir->create( 'test' ) );
 		$dir->close();
 
@@ -30,7 +31,7 @@ class MW_Container_DirectoryTest extends PHPUnit_Framework_TestCase
 
 	public function testAdd()
 	{
-		$dir = new MW_Container_Directory( 'tmp' . DIRECTORY_SEPARATOR . 'testdir', 'CSV' );
+		$dir = new \Aimeos\MW\Container\Directory( 'tmp' . DIRECTORY_SEPARATOR . 'testdir', 'CSV' );
 
 		$content = $dir->create( 'test' );
 		$content->add( array( 'test', 'file', 'data' ) );
@@ -52,15 +53,15 @@ class MW_Container_DirectoryTest extends PHPUnit_Framework_TestCase
 
 	public function testGet()
 	{
-		$dir = new MW_Container_Directory( __DIR__ . DIRECTORY_SEPARATOR . '_testdir', 'CSV' );
+		$dir = new \Aimeos\MW\Container\Directory( __DIR__ . DIRECTORY_SEPARATOR . '_testdir', 'CSV' );
 
-		$this->assertInstanceOf( 'MW_Container_Content_Interface', $dir->get( 'testfile.csv' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Container\\Content\\Iface', $dir->get( 'testfile.csv' ) );
 	}
 
 
 	public function testIterator()
 	{
-		$dir = new MW_Container_Directory( __DIR__ . DIRECTORY_SEPARATOR . '_testdir', 'CSV' );
+		$dir = new \Aimeos\MW\Container\Directory( __DIR__ . DIRECTORY_SEPARATOR . '_testdir', 'CSV' );
 
 		$expected = array(
 			'testfile.csv' => 1,

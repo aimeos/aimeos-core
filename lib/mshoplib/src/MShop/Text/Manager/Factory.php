@@ -8,26 +8,29 @@
  */
 
 
+namespace Aimeos\MShop\Text\Manager;
+
+
 /**
  * Factory for the text domain manager
  *
  * @package MShop
  * @subpackage Text
  */
-class MShop_Text_Manager_Factory
-	extends MShop_Common_Factory_Abstract
-	implements MShop_Common_Factory_Interface
+class Factory
+	extends \Aimeos\MShop\Common\Factory\Base
+	implements \Aimeos\MShop\Common\Factory\Iface
 {
 	/**
 	 *	Creates a text manager DAO object.
 	 *
-	 * @param MShop_Context_Item_Interface $context Shop context instance with necessary objects
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return MShop_Common_Manager_Interface Manager object implementing the manager interface
-	 * @throws MShop_Text_Exception|MShop_Exception If requested manager
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object implementing the manager interface
+	 * @throws \Aimeos\MShop\Text\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails
 	 */
-	public static function createManager( MShop_Context_Item_Interface $context, $name = null )
+	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** classes/text/manager/name
 		 * Class name of the used text manager implementation
@@ -39,11 +42,11 @@ class MShop_Text_Manager_Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  MShop_Text_Manager_Default
+		 *  \Aimeos\MShop\Text\Manager\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  MShop_Text_Manager_Mymanager
+		 *  \Aimeos\MShop\Text\Manager\Mymanager
 		 *
 		 * then you have to set the this configuration option:
 		 *
@@ -63,17 +66,17 @@ class MShop_Text_Manager_Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/text/manager/name', 'Default' );
+			$name = $context->getConfig()->get( 'classes/text/manager/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? 'MShop_Text_Manager_' . $name : '<not a string>';
-			throw new MShop_Text_Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			$classname = is_string( $name ) ? '\\Aimeos\\MShop\\Text\\Manager\\' . $name : '<not a string>';
+			throw new \Aimeos\MShop\Text\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = 'MShop_Text_Manager_Interface';
-		$classname = 'MShop_Text_Manager_' . $name;
+		$iface = '\\Aimeos\\MShop\\Text\\Manager\\Iface';
+		$classname = '\\Aimeos\\MShop\\Text\\Manager\\' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );
 
@@ -92,7 +95,7 @@ class MShop_Text_Manager_Factory
 		 *  mshop/text/manager/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("MShop_Common_Manager_Decorator_*") added via
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
 		 * "mshop/common/manager/decorators/default" for the text manager.
 		 *
 		 * @param array List of decorator names
@@ -112,12 +115,12 @@ class MShop_Text_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the text manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the text manager.
 		 *
 		 *  mshop/text/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator1" only to the text controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the text controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -136,12 +139,12 @@ class MShop_Text_Manager_Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("MShop_Common_Manager_Decorator_*") around the text manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the text manager.
 		 *
 		 *  mshop/text/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "MShop_Common_Manager_Decorator_Decorator2" only to the text
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the text
 		 * controller.
 		 *
 		 * @param array List of decorator names

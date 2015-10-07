@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Changes type of supplier_address_id from BIGINT to INT.
  */
-class MW_Setup_Task_SupplierChangeAddressIdToInteger extends MW_Setup_Task_Abstract
+class SupplierChangeAddressIdToInteger extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'mshop_supplier_address' => '

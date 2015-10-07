@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider;
+
+
 /**
- * Test class for MShop_Coupon_Provider_Example.
+ * Test class for \Aimeos\MShop\Coupon\Provider\Example.
  */
-class MShop_Coupon_Provider_ExampleTest extends PHPUnit_Framework_TestCase
+class ExampleTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $orderBase;
@@ -23,13 +26,13 @@ class MShop_Coupon_Provider_ExampleTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
-		$priceManager = MShop_Price_Manager_Factory::createManager( $context );
-		$item = MShop_Coupon_Manager_Factory::createManager( $context )->createItem();
+		$context = \TestHelper::getContext();
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
+		$item = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
 
 		// Don't create order base item by createItem() as this would already register the plugins
-		$this->orderBase = new MShop_Order_Item_Base_Default( $priceManager->createItem(), $context->getLocale() );
-		$this->object = new MShop_Coupon_Provider_Example( $context, $item, '1234' );
+		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Example( $context, $item, '1234' );
 	}
 
 

@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MShop\Attribute;
+
+
 /**
- * Exception thrown by attribute classes.
+ * \Exception thrown by attribute classes.
  *
  * @package MShop
  * @subpackage Attribute
  */
-class MShop_Attribute_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

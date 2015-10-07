@@ -8,12 +8,15 @@
  */
 
 
+namespace Aimeos\MW\Session;
+
+
 /**
- * Exception thrown by session objects.
+ * \Exception thrown by session objects.
  *
  * @package MW
  * @subpackage Session
  */
-class MW_Session_Exception extends MW_Exception
+class Exception extends \Aimeos\MW\Exception
 {
 }

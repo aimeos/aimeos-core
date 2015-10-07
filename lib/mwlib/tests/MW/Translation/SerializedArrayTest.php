@@ -1,12 +1,15 @@
 <?php
 
+namespace Aimeos\MW\Translation;
+
+
 /**
- * Test class for MW_Translation_SerialisedArrayTest.
+ * Test class for \Aimeos\MW\Translation\SerialisedArrayTest.
  *
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
  */
-class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
+class SerializedArrayTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
@@ -27,7 +30,7 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 			'thirdtestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3' ),
 		);
 
-		$this->object = new MW_Translation_SerializedArray( $translationSources, 'ru_XX' );
+		$this->object = new \Aimeos\MW\Translation\SerializedArray( $translationSources, 'ru_XX' );
 	}
 
 
@@ -84,7 +87,7 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$srcs = array( 'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ) );
-		$object = new MW_Translation_SerializedArray( $srcs, 'de_DE' );
+		$object = new \Aimeos\MW\Translation\SerializedArray( $srcs, 'de_DE' );
 
 		$this->assertEquals( 'plural 1 translation', $object->dn( 'testDomain', 'File', 'Files', 5 ) );
 		$this->assertEquals( 'plural 1 translation', $object->dn( 'testDomain', 'File', 'Files', 22 ) );
@@ -96,7 +99,7 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$srcs = array( 'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ) );
-		$object = new MW_Translation_SerializedArray( $srcs, 'de' );
+		$object = new \Aimeos\MW\Translation\SerializedArray( $srcs, 'de' );
 
 		$this->assertEquals( 'Test default return', $object->dt( 'otherTestDomain', 'Test default return' ) );
 	}
@@ -106,7 +109,7 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$srcs = array( 'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ) );
-		$object = new MW_Translation_SerializedArray( $srcs, 'xx_XX' );
+		$object = new \Aimeos\MW\Translation\SerializedArray( $srcs, 'xx_XX' );
 
 		$this->assertEquals( 'Test default return', $object->dt( 'otherTestDomain', 'Test default return' ) );
 	}
@@ -138,7 +141,7 @@ class MW_Translation_SerializedArrayTest extends PHPUnit_Framework_TestCase
 		{
 			foreach( $lcs as $lc )
 			{
-				$object = new MW_Translation_SerializedArray( $srcs, $lc );
+				$object = new \Aimeos\MW\Translation\SerializedArray( $srcs, $lc );
 				$this->assertEquals( 'test', $object->dn( 'testDomain', 'test', 'tests', $index ) );
 			}
 		}

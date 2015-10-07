@@ -8,11 +8,14 @@
  */
 
 
+namespace Aimeos\MShop\Order;
+
+
 /**
- * MShop_Order_Exception.
+ * \Aimeos\MShop\Order\Exception.
  * @package MShop
  * @subpackage Order
  */
-class MShop_Order_Exception extends MShop_Exception
+class Exception extends \Aimeos\MShop\Exception
 {
 }

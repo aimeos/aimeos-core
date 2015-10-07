@@ -8,22 +8,25 @@
  */
 
 
+namespace Aimeos\MShop\Coupon\Provider;
+
+
 /**
  * Example model for coupons.
  *
  * @package MShop
  * @subpackage Coupon
  */
-class MShop_Coupon_Provider_Example
-	extends MShop_Coupon_Provider_Factory_Abstract
-	implements MShop_Coupon_Provider_Factory_Interface
+class Example
+	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
+	implements \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 */
-	public function addCoupon( MShop_Order_Item_Base_Interface $base )
+	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 	}
 
@@ -31,9 +34,9 @@ class MShop_Coupon_Provider_Example
 	/**
 	 * Removes the result of a coupon from the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 */
-	public function deleteCoupon( MShop_Order_Item_Base_Interface $base )
+	public function deleteCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 	}
 
@@ -41,9 +44,9 @@ class MShop_Coupon_Provider_Example
 	/**
 	 * Updates the result of a coupon to the order base instance.
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base Basic order of the customer
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 */
-	public function updateCoupon( MShop_Order_Item_Base_Interface $base )
+	public function updateCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 	}
 
@@ -51,9 +54,9 @@ class MShop_Coupon_Provider_Example
 	/**
 	 * Tests if a coupon should be granted
 	 *
-	 * @param MShop_Order_Item_Base_Interface $base
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base
 	 */
-	public function isAvailable( MShop_Order_Item_Base_Interface $base )
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		return true;
 	}

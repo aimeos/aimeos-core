@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Moves product warehouse table to product stock warehouse.
  */
-class MW_Setup_Task_ProductWarehouseRenameTable extends MW_Setup_Task_Abstract
+class ProductWarehouseRenameTable extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
 		'RENAME TABLE "mshop_product_warehouse" TO "mshop_product_stock_warehouse"',

@@ -5,10 +5,13 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+namespace Aimeos\MShop\Plugin\Provider\Order;
+
+
 /**
- * Test class for MShop_Plugin_Provider_Order_Complete.
+ * Test class for \Aimeos\MShop\Plugin\Provider\Order\Complete.
  */
-class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_TestCase
+class BasketLimitsTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $products;
@@ -23,7 +26,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	 */
 	protected function setUp()
 	{
-		$orderManager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$this->order = $orderBaseManager->createItem();
@@ -38,7 +41,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$items = $orderBaseProductManager->searchItems( $search );
 
 		if( count( $items ) < 2 ) {
-			throw new Exception( 'Please fix the test data in your database.' );
+			throw new \Exception( 'Please fix the test data in your database.' );
 		}
 
 		foreach( $items as $item ) {
@@ -55,14 +58,14 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 			'max-products' => 5
 		);
 
-		$pluginManager = MShop_Plugin_Manager_Factory::createManager( TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
 		$plugin = $pluginManager->createItem();
 		$plugin->setTypeId( 2 );
 		$plugin->setProvider( 'BasketLimits' );
 		$plugin->setConfig( $config );
 		$plugin->setStatus( '1' );
 
-		$this->object = new MShop_Plugin_Provider_Order_BasketLimits( TestHelper::getContext(), $plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\BasketLimits( \TestHelper::getContext(), $plugin );
 	}
 
 
@@ -90,7 +93,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->products['CNE']->setQuantity( 4 );
 		$this->order->addProduct( $this->products['CNE'] );
 
-		$this->assertTrue( $this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
 	}
 
 
@@ -98,8 +101,8 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	{
 		$this->order->addProduct( $this->products['CNC'] );
 
-		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
 
@@ -108,8 +111,8 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->products['CNE']->setQuantity( 6 );
 		$this->order->addProduct( $this->products['CNE'] );
 
-		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
 
@@ -117,8 +120,8 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 	{
 		$this->order->addProduct( $this->products['CNE'] );
 
-		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
 
@@ -127,7 +130,7 @@ class MShop_Plugin_Provider_Order_BasketLimitsTest extends PHPUnit_Framework_Tes
 		$this->products['CNC']->setQuantity( 2 );
 		$this->order->addProduct( $this->products['CNC'] );
 
-		$this->setExpectedException( 'MShop_Plugin_Provider_Exception' );
-		$this->object->update( $this->order, 'check.after', MShop_Order_Item_Base_Abstract::PARTS_PRODUCT );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 }

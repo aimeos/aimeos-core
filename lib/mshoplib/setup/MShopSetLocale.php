@@ -6,10 +6,13 @@
  */
 
 
+namespace Aimeos\MW\Setup\Task;
+
+
 /**
  * Sets locale in context.
  */
-class MW_Setup_Task_MShopSetLocale extends MW_Setup_Task_Abstract
+class MShopSetLocale extends \Aimeos\MW\Setup\Task\Base
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -47,9 +50,9 @@ class MW_Setup_Task_MShopSetLocale extends MW_Setup_Task_Abstract
 	 */
 	protected function process()
 	{
-		$iface = 'MShop_Context_Item_Interface';
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
-			throw new MW_Setup_Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
 		}
 
 		$site = $this->additional->getConfig()->get( 'setup/site', 'default' );
@@ -58,7 +61,7 @@ class MW_Setup_Task_MShopSetLocale extends MW_Setup_Task_Abstract
 		$this->msg( sprintf( 'Setting locale to "%1$s"', $site ), 0 );
 
 		// Set locale for further tasks
-		$localeManager = MShop_Locale_Manager_Factory::createManager( $this->additional, 'Default' );
+		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$this->additional->setLocale( $localeManager->bootstrap( $site, '', '', false ) );
 
 		$this->status( 'OK' );
