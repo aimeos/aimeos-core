@@ -150,7 +150,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 			if( !isset( $this->domainManagers[$domainname] ) )
 			{
 				$iface = '\\Aimeos\\MShop\\Common\\Manager\\Iface';
-				$factory = 'MShop_' . ucwords( $domainname ) . '_Manager_Factory';
+				$factory = '\\Aimeos\\MShop\\' . ucwords( $domainname ) . '\\Manager\\Factory';
 				$manager = call_user_func_array( $factory . '::createManager', array( $this->additional ) );
 
 				if( !( $manager instanceof $iface ) ) {
