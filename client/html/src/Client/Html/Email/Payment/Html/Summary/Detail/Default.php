@@ -116,6 +116,7 @@ class Client_Html_Email_Payment_Html_Summary_Detail_Default
 	{
 		// we can't cache the calculation because the same client object is used for all e-mails
 		$view->summaryTaxRates = $this->getTaxRates( $view->extOrderBaseItem );
+		$view->summaryShowHiddenAttributes = true;
 
 		return $view;
 	}
