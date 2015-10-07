@@ -8,8 +8,6 @@
 
 require_once 'phing/Task.php';
 
-namespace Aimeos;
-
 
 /**
  * Generating jsb2 package files for core and extensions.
@@ -28,7 +26,7 @@ class MShopJsbPackageTask extends Task
 		$this->projectPath = realpath( dirname( __FILE__ ) . $ds . '..' . $ds . '..' );
 
 		require_once $this->projectPath . $ds . 'Bootstrap.php';
-		spl_autoload_register( 'Aimeos::autoload' );
+		spl_autoload_register( 'Aimeos\Bootstrap::autoload' );
 
 		$this->aimeos = new \Aimeos\Bootstrap();
 
