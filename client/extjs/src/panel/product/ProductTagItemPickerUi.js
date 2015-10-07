@@ -10,20 +10,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
     xtype : 'MShop.panel.product.tag.itempickerui',
     itemConfig : {
         recordName : 'Product_Lists',
-        idProperty : 'product.list.id',
-        siteidProperty : 'product.list.siteid',
-        listNamePrefix : 'product.list.',
-        listTypeIdProperty : 'product.list.type.id',
-        listTypeLabelProperty : 'product.list.type.label',
-        listTypeControllerName : 'Product_List_Type',
+        idProperty : 'product.lists.id',
+        siteidProperty : 'product.lists.siteid',
+        listNamePrefix : 'product.lists.',
+        listTypeIdProperty : 'product.lists.type.id',
+        listTypeLabelProperty : 'product.lists.type.label',
+        listTypeControllerName : 'Product_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'product.list.type.domain' : 'product/tag'
+                    'product.lists.type.domain' : 'product/tag'
                 }
             }]
         },
-        listTypeKey : 'product/list/type/product/tag'
+        listTypeKey : 'product/lists/type/product/tag'
     },
     listConfig : {
         prefix : 'product.tag.'

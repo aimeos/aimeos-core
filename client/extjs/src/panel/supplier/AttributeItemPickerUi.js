@@ -12,21 +12,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 	xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Supplier_Lists',
-        idProperty : 'supplier.list.id',
-        siteidProperty : 'supplier.list.siteid',
+        idProperty : 'supplier.lists.id',
+        siteidProperty : 'supplier.lists.siteid',
         listDomain : 'supplier',
-        listNamePrefix : 'supplier.list.',
-        listTypeIdProperty : 'supplier.list.type.id',
-        listTypeLabelProperty : 'supplier.list.type.label',
-        listTypeControllerName : 'Supplier_List_Type',
+        listNamePrefix : 'supplier.lists.',
+        listTypeIdProperty : 'supplier.lists.type.id',
+        listTypeLabelProperty : 'supplier.lists.type.label',
+        listTypeControllerName : 'Supplier_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'supplier.list.type.domain' : 'attribute'
+                    'supplier.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'supplier/list/type/attribute'
+        listTypeKey : 'supplier/lists/type/attribute'
     },
     listConfig : {
         domain : 'supplier',

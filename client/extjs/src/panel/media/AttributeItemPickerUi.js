@@ -11,21 +11,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', 'MShop.panel.media.
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Media_Lists',
-        idProperty : 'media.list.id',
-        siteidProperty : 'media.list.siteid',
+        idProperty : 'media.lists.id',
+        siteidProperty : 'media.lists.siteid',
         listDomain : 'media',
-        listNamePrefix : 'media.list.',
-        listTypeIdProperty : 'media.list.type.id',
-        listTypeLabelProperty : 'media.list.type.label',
-        listTypeControllerName : 'Media_List_Type',
+        listNamePrefix : 'media.lists.',
+        listTypeIdProperty : 'media.lists.type.id',
+        listTypeLabelProperty : 'media.lists.type.label',
+        listTypeControllerName : 'Media_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'media.list.type.domain' : 'attribute'
+                    'media.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'media/list/type/attribute'
+        listTypeKey : 'media/lists/type/attribute'
     },
     listConfig : {
         domain : ['media', 'product'],

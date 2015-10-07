@@ -6802,20 +6802,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.text.ItemUi', 'MShop.panel.text.Me
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
         recordName : 'Text_Lists',
-        idProperty : 'text.list.id',
-        siteidProperty : 'text.list.siteid',
-        listNamePrefix : 'text.list.',
-        listTypeIdProperty : 'text.list.type.id',
-        listTypeLabelProperty : 'text.list.type.label',
-        listTypeControllerName : 'Text_List_Type',
+        idProperty : 'text.lists.id',
+        siteidProperty : 'text.lists.siteid',
+        listNamePrefix : 'text.lists.',
+        listTypeIdProperty : 'text.lists.type.id',
+        listTypeLabelProperty : 'text.lists.type.label',
+        listTypeControllerName : 'Text_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'text.list.type.domain' : 'media'
+                    'text.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'text/list/type/media'
+        listTypeKey : 'text/lists/type/media'
     },
     listConfig : {
         domain : 'text',
@@ -6834,20 +6834,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.text.ItemUi', 'MShop.panel.text.At
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Text_Lists',
-        idProperty : 'text.list.id',
-        siteidProperty : 'text.list.siteid',
-        listNamePrefix : 'text.list.',
-        listTypeIdProperty : 'text.list.type.id',
-        listTypeLabelProperty : 'text.list.type.label',
-        listTypeControllerName : 'Text_List_Type',
+        idProperty : 'text.lists.id',
+        siteidProperty : 'text.lists.siteid',
+        listNamePrefix : 'text.lists.',
+        listTypeIdProperty : 'text.lists.type.id',
+        listTypeLabelProperty : 'text.lists.type.label',
+        listTypeControllerName : 'Text_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'text.list.type.domain' : 'attribute'
+                    'text.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'text/list/type/attribute'
+        listTypeKey : 'text/lists/type/attribute'
     },
     listConfig : {
         domain : ['text', 'product'],
@@ -7242,21 +7242,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', 'MShop.panel.media.
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Media_Lists',
-        idProperty : 'media.list.id',
-        siteidProperty : 'media.list.siteid',
+        idProperty : 'media.lists.id',
+        siteidProperty : 'media.lists.siteid',
         listDomain : 'media',
-        listNamePrefix : 'media.list.',
-        listTypeIdProperty : 'media.list.type.id',
-        listTypeLabelProperty : 'media.list.type.label',
-        listTypeControllerName : 'Media_List_Type',
+        listNamePrefix : 'media.lists.',
+        listTypeIdProperty : 'media.lists.type.id',
+        listTypeLabelProperty : 'media.lists.type.label',
+        listTypeControllerName : 'Media_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'media.list.type.domain' : 'text'
+                    'media.lists.type.domain' : 'text'
                 }
             }]
         },
-        listTypeKey : 'media/list/type/text'
+        listTypeKey : 'media/lists/type/text'
     },
     listConfig : {
         domain : 'media',
@@ -7276,21 +7276,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.media.ItemUi', 'MShop.panel.media.
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Media_Lists',
-        idProperty : 'media.list.id',
-        siteidProperty : 'media.list.siteid',
+        idProperty : 'media.lists.id',
+        siteidProperty : 'media.lists.siteid',
         listDomain : 'media',
-        listNamePrefix : 'media.list.',
-        listTypeIdProperty : 'media.list.type.id',
-        listTypeLabelProperty : 'media.list.type.label',
-        listTypeControllerName : 'Media_List_Type',
+        listNamePrefix : 'media.lists.',
+        listTypeIdProperty : 'media.lists.type.id',
+        listTypeLabelProperty : 'media.lists.type.label',
+        listTypeControllerName : 'Media_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'media.list.type.domain' : 'attribute'
+                    'media.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'media/list/type/attribute'
+        listTypeKey : 'media/lists/type/attribute'
     },
     listConfig : {
         domain : ['media', 'product'],
@@ -7976,20 +7976,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.at
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Attribute_Lists',
-        idProperty : 'attribute.list.id',
-        siteidProperty : 'attribute.list.siteid',
-        listNamePrefix : 'attribute.list.',
-        listTypeIdProperty : 'attribute.list.type.id',
-        listTypeLabelProperty : 'attribute.list.type.label',
-        listTypeControllerName : 'Attribute_List_Type',
+        idProperty : 'attribute.lists.id',
+        siteidProperty : 'attribute.lists.siteid',
+        listNamePrefix : 'attribute.lists.',
+        listTypeIdProperty : 'attribute.lists.type.id',
+        listTypeLabelProperty : 'attribute.lists.type.label',
+        listTypeControllerName : 'Attribute_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'attribute.list.type.domain' : 'text'
+                    'attribute.lists.type.domain' : 'text'
                 }
             }]
         },
-        listTypeKey : 'attribute/list/type/text'
+        listTypeKey : 'attribute/lists/type/text'
     },
     listConfig : {
         domain : 'attribute',
@@ -8009,20 +8009,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.at
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
         recordName : 'Attribute_Lists',
-        idProperty : 'attribute.list.id',
-        siteidProperty : 'attribute.list.siteid',
-        listNamePrefix : 'attribute.list.',
-        listTypeIdProperty : 'attribute.list.type.id',
-        listTypeLabelProperty : 'attribute.list.type.label',
-        listTypeControllerName : 'Attribute_List_Type',
+        idProperty : 'attribute.lists.id',
+        siteidProperty : 'attribute.lists.siteid',
+        listNamePrefix : 'attribute.lists.',
+        listTypeIdProperty : 'attribute.lists.type.id',
+        listTypeLabelProperty : 'attribute.lists.type.label',
+        listTypeControllerName : 'Attribute_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'attribute.list.type.domain' : 'media'
+                    'attribute.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'attribute/list/type/media'
+        listTypeKey : 'attribute/lists/type/media'
     },
     listConfig : {
         domain : 'attribute',
@@ -8042,20 +8042,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.attribute.ItemUi', 'MShop.panel.at
     xtype : 'MShop.panel.price.itempickerui',
     itemConfig : {
         recordName : 'Attribute_Lists',
-        idProperty : 'attribute.list.id',
-        siteidProperty : 'attribute.list.siteid',
-        listNamePrefix : 'attribute.list.',
-        listTypeIdProperty : 'attribute.list.type.id',
-        listTypeLabelProperty : 'attribute.list.type.label',
-        listTypeControllerName : 'Attribute_List_Type',
+        idProperty : 'attribute.lists.id',
+        siteidProperty : 'attribute.lists.siteid',
+        listNamePrefix : 'attribute.lists.',
+        listTypeIdProperty : 'attribute.lists.type.id',
+        listTypeLabelProperty : 'attribute.lists.type.label',
+        listTypeControllerName : 'Attribute_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'attribute.list.type.domain' : 'media'
+                    'attribute.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'attribute/list/type/media'
+        listTypeKey : 'attribute/lists/type/media'
     },
     listConfig : {
         domain : 'attribute',
@@ -8908,20 +8908,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Product_Lists',
-        idProperty : 'product.list.id',
-        siteidProperty : 'product.list.siteid',
-        listNamePrefix : 'product.list.',
-        listTypeIdProperty : 'product.list.type.id',
-        listTypeLabelProperty : 'product.list.type.label',
-        listTypeControllerName : 'Product_List_Type',
+        idProperty : 'product.lists.id',
+        siteidProperty : 'product.lists.siteid',
+        listNamePrefix : 'product.lists.',
+        listTypeIdProperty : 'product.lists.type.id',
+        listTypeLabelProperty : 'product.lists.type.label',
+        listTypeControllerName : 'Product_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'product.list.type.domain' : 'text'
+                    'product.lists.type.domain' : 'text'
                 }
             }]
         },
-        listTypeKey : 'product/list/type/text'
+        listTypeKey : 'product/lists/type/text'
     },
     listConfig : {
         domain : 'product',
@@ -8940,20 +8940,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
         recordName : 'Product_Lists',
-        idProperty : 'product.list.id',
-        siteidProperty : 'product.list.siteid',
-        listNamePrefix : 'product.list.',
-        listTypeIdProperty : 'product.list.type.id',
-        listTypeLabelProperty : 'product.list.type.label',
-        listTypeControllerName : 'Product_List_Type',
+        idProperty : 'product.lists.id',
+        siteidProperty : 'product.lists.siteid',
+        listNamePrefix : 'product.lists.',
+        listTypeIdProperty : 'product.lists.type.id',
+        listTypeLabelProperty : 'product.lists.type.label',
+        listTypeControllerName : 'Product_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'product.list.type.domain' : 'media'
+                    'product.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'product/list/type/media'
+        listTypeKey : 'product/lists/type/media'
     },
     listConfig : {
         domain : 'product',
@@ -8972,20 +8972,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
     xtype : 'MShop.panel.price.itempickerui',
     itemConfig : {
         recordName : 'Product_Lists',
-        idProperty : 'product.list.id',
-        siteidProperty : 'product.list.siteid',
-        listNamePrefix : 'product.list.',
-        listTypeIdProperty : 'product.list.type.id',
-        listTypeLabelProperty : 'product.list.type.label',
-        listTypeControllerName : 'Product_List_Type',
+        idProperty : 'product.lists.id',
+        siteidProperty : 'product.lists.siteid',
+        listNamePrefix : 'product.lists.',
+        listTypeIdProperty : 'product.lists.type.id',
+        listTypeLabelProperty : 'product.lists.type.label',
+        listTypeControllerName : 'Product_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'product.list.type.domain' : 'price'
+                    'product.lists.type.domain' : 'price'
                 }
             }]
         },
-        listTypeKey : 'product/list/type/price'
+        listTypeKey : 'product/lists/type/price'
     },
     listConfig : {
         domain : 'product',
@@ -9004,20 +9004,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
     xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
         recordName : 'Product_Lists',
-        idProperty : 'product.list.id',
-        siteidProperty : 'product.list.siteid',
-        listNamePrefix : 'product.list.',
-        listTypeIdProperty : 'product.list.type.id',
-        listTypeLabelProperty : 'product.list.type.label',
-        listTypeControllerName : 'Product_List_Type',
+        idProperty : 'product.lists.id',
+        siteidProperty : 'product.lists.siteid',
+        listNamePrefix : 'product.lists.',
+        listTypeIdProperty : 'product.lists.type.id',
+        listTypeLabelProperty : 'product.lists.type.label',
+        listTypeControllerName : 'Product_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'product.list.type.domain' : 'product'
+                    'product.lists.type.domain' : 'product'
                 }
             }]
         },
-        listTypeKey : 'product/list/type/product'
+        listTypeKey : 'product/lists/type/product'
     },
     listConfig : {
         prefix : 'product.'
@@ -9035,20 +9035,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Product_Lists',
-        idProperty : 'product.list.id',
-        siteidProperty : 'product.list.siteid',
-        listNamePrefix : 'product.list.',
-        listTypeIdProperty : 'product.list.type.id',
-        listTypeLabelProperty : 'product.list.type.label',
-        listTypeControllerName : 'Product_List_Type',
+        idProperty : 'product.lists.id',
+        siteidProperty : 'product.lists.siteid',
+        listNamePrefix : 'product.lists.',
+        listTypeIdProperty : 'product.lists.type.id',
+        listTypeLabelProperty : 'product.lists.type.label',
+        listTypeControllerName : 'Product_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'product.list.type.domain' : 'attribute'
+                    'product.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'product/list/type/attribute'
+        listTypeKey : 'product/lists/type/attribute'
     },
     listConfig : {
         domain : 'product',
@@ -9623,20 +9623,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
     xtype : 'MShop.panel.product.tag.itempickerui',
     itemConfig : {
         recordName : 'Product_Lists',
-        idProperty : 'product.list.id',
-        siteidProperty : 'product.list.siteid',
-        listNamePrefix : 'product.list.',
-        listTypeIdProperty : 'product.list.type.id',
-        listTypeLabelProperty : 'product.list.type.label',
-        listTypeControllerName : 'Product_List_Type',
+        idProperty : 'product.lists.id',
+        siteidProperty : 'product.lists.siteid',
+        listNamePrefix : 'product.lists.',
+        listTypeIdProperty : 'product.lists.type.id',
+        listTypeLabelProperty : 'product.lists.type.label',
+        listTypeControllerName : 'Product_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'product.list.type.domain' : 'product/tag'
+                    'product.lists.type.domain' : 'product/tag'
                 }
             }]
         },
-        listTypeKey : 'product/list/type/product/tag'
+        listTypeKey : 'product/lists/type/product/tag'
     },
     listConfig : {
         prefix : 'product.tag.'
@@ -10198,20 +10198,20 @@ Ext.ns('MShop.panel.product');
 MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByListUi, {
 
     recordName : 'Catalog_Lists',
-    idProperty : 'catalog.list.id',
-    siteidProperty : 'catalog.list.siteid',
+    idProperty : 'catalog.lists.id',
+    siteidProperty : 'catalog.lists.siteid',
     itemUiXType : 'MShop.panel.catalog.itemui',
 
     autoExpandColumn : 'catalog-list-autoexpand-column',
 
     sortInfo : {
-        field : 'catalog.list.type.code',
+        field : 'catalog.lists.type.code',
         direction : 'ASC'
     },
 
-    parentIdProperty : 'catalog.list.parentid',
-    parentDomainPorperty : 'catalog.list.domain',
-    parentRefIdProperty : 'catalog.list.refid',
+    parentIdProperty : 'catalog.lists.parentid',
+    parentDomainPorperty : 'catalog.lists.domain',
+    parentRefIdProperty : 'catalog.lists.refid',
 
     initComponent : function() {
         MShop.panel.product.UsedByCatalogListUi.superclass.initComponent.call(this);
@@ -10244,7 +10244,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
         return [
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.id',
+                dataIndex : 'catalog.lists.id',
                 header : MShop.I18n.dt('client/extjs', 'List ID'),
                 sortable : true,
                 width : 50,
@@ -10252,17 +10252,17 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.typeid',
+                dataIndex : 'catalog.lists.typeid',
                 header : MShop.I18n.dt('client/extjs', 'List type'),
                 sortable : true,
                 width : 100,
                 renderer : this.listTypeColumnRenderer.createDelegate(this, [
                     this.listTypeStore,
-                    "catalog.list.type.label"], true)
+                    "catalog.lists.type.label"], true)
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'catalog.list.datestart',
+                dataIndex : 'catalog.lists.datestart',
                 header : MShop.I18n.dt('client/extjs', 'List start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
@@ -10270,7 +10270,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'catalog.list.dateend',
+                dataIndex : 'catalog.lists.dateend',
                 header : MShop.I18n.dt('client/extjs', 'List end date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
@@ -10278,7 +10278,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.position',
+                dataIndex : 'catalog.lists.position',
                 header : MShop.I18n.dt('client/extjs', 'List position'),
                 sortable : true,
                 width : 70,
@@ -10286,7 +10286,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'catalog.list.ctime',
+                dataIndex : 'catalog.lists.ctime',
                 header : MShop.I18n.dt('client/extjs', 'List creation time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
@@ -10295,7 +10295,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'catalog.list.mtime',
+                dataIndex : 'catalog.lists.mtime',
                 header : MShop.I18n.dt('client/extjs', 'List modification time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
@@ -10304,7 +10304,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.editor',
+                dataIndex : 'catalog.lists.editor',
                 header : MShop.I18n.dt('client/extjs', 'List editor'),
                 sortable : true,
                 width : 120,
@@ -10312,14 +10312,14 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.parentid',
+                dataIndex : 'catalog.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'ID'),
                 sortable : true,
                 width : 100
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.parentid',
+                dataIndex : 'catalog.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Status'),
                 sortable : false,
                 width : 50,
@@ -10327,7 +10327,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.parentid',
+                dataIndex : 'catalog.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Code'),
                 sortable : false,
                 width : 100,
@@ -10335,7 +10335,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.parentid',
+                dataIndex : 'catalog.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Label'),
                 sortable : false,
                 width : 100,
@@ -10344,7 +10344,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'catalog.list.parentid',
+                dataIndex : 'catalog.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
@@ -10356,7 +10356,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'catalog.list.parentid',
+                dataIndex : 'catalog.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
@@ -10368,7 +10368,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'catalog.list.parentid',
+                dataIndex : 'catalog.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Editor'),
                 sortable : false,
                 width : 100,
@@ -10395,20 +10395,20 @@ Ext.ns('MShop.panel.product');
 MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByListUi, {
 
     recordName : 'Product_Lists',
-    idProperty : 'product.list.id',
-    siteidProperty : 'product.list.siteid',
+    idProperty : 'product.lists.id',
+    siteidProperty : 'product.lists.siteid',
     itemUiXType : 'MShop.panel.product.itemui',
 
     autoExpandColumn : 'product-list-autoexpand-column',
 
     sortInfo : {
-        field : 'product.list.parentid',
+        field : 'product.lists.parentid',
         direction : 'ASC'
     },
 
-    parentIdProperty : 'product.list.parentid',
-    parentDomainPorperty : 'product.list.domain',
-    parentRefIdProperty : 'product.list.refid',
+    parentIdProperty : 'product.lists.parentid',
+    parentDomainPorperty : 'product.lists.domain',
+    parentRefIdProperty : 'product.lists.refid',
 
     initComponent : function() {
         MShop.panel.product.UsedByProductListUi.superclass.initComponent.call(this);
@@ -10420,7 +10420,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
         return [
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.id',
+                dataIndex : 'product.lists.id',
                 header : MShop.I18n.dt('client/extjs', 'List ID'),
                 sortable : true,
                 width : 50,
@@ -10428,17 +10428,17 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.typeid',
+                dataIndex : 'product.lists.typeid',
                 header : MShop.I18n.dt('client/extjs', 'List type'),
                 sortable : true,
                 width : 100,
                 renderer : this.listTypeColumnRenderer.createDelegate(this, [
                     this.listTypeStore,
-                    "product.list.type.label"], true)
+                    "product.lists.type.label"], true)
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'product.list.datestart',
+                dataIndex : 'product.lists.datestart',
                 header : MShop.I18n.dt('client/extjs', 'List start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
@@ -10446,7 +10446,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'product.list.dateend',
+                dataIndex : 'product.lists.dateend',
                 header : MShop.I18n.dt('client/extjs', 'List end date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
@@ -10454,7 +10454,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.position',
+                dataIndex : 'product.lists.position',
                 header : MShop.I18n.dt('client/extjs', 'List position'),
                 sortable : true,
                 width : 70,
@@ -10462,7 +10462,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'product.list.mtime',
+                dataIndex : 'product.lists.mtime',
                 header : MShop.I18n.dt('client/extjs', 'List modification time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
@@ -10471,7 +10471,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'product.list.ctime',
+                dataIndex : 'product.lists.ctime',
                 header : MShop.I18n.dt('client/extjs', 'List creation time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
@@ -10480,7 +10480,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.editor',
+                dataIndex : 'product.lists.editor',
                 header : MShop.I18n.dt('client/extjs', 'List editor'),
                 sortable : true,
                 width : 120,
@@ -10488,14 +10488,14 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'ID'),
                 sortable : true,
                 width : 100
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Status'),
                 sortable : false,
                 width : 50,
@@ -10504,7 +10504,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Type'),
                 sortable : false,
                 width : 100,
@@ -10516,7 +10516,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Code'),
                 sortable : false,
                 width : 100,
@@ -10525,7 +10525,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Label'),
                 sortable : false,
                 id : 'product-list-autoexpand-column',
@@ -10535,7 +10535,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Supplier'),
                 sortable : false,
                 width : 100,
@@ -10546,7 +10546,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
@@ -10558,7 +10558,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'End date'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
@@ -10570,7 +10570,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
@@ -10582,7 +10582,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'datecolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
@@ -10594,7 +10594,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.list.parentid',
+                dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Editor'),
                 sortable : false,
                 width : 100,
@@ -10845,20 +10845,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.cata
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Catalog_Lists',
-        idProperty : 'catalog.list.id',
-        siteidProperty : 'catalog.list.siteid',
-        listNamePrefix : 'catalog.list.',
-        listTypeIdProperty : 'catalog.list.type.id',
-        listTypeLabelProperty : 'catalog.list.type.label',
-        listTypeControllerName : 'Catalog_List_Type',
+        idProperty : 'catalog.lists.id',
+        siteidProperty : 'catalog.lists.siteid',
+        listNamePrefix : 'catalog.lists.',
+        listTypeIdProperty : 'catalog.lists.type.id',
+        listTypeLabelProperty : 'catalog.lists.type.label',
+        listTypeControllerName : 'Catalog_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'catalog.list.type.domain' : 'text'
+                    'catalog.lists.type.domain' : 'text'
                 }
             }]
         },
-        listTypeKey : 'catalog/list/type/text'
+        listTypeKey : 'catalog/lists/type/text'
     },
     listConfig : {
         domain : 'catalog',
@@ -10878,20 +10878,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.cata
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
         recordName : 'Catalog_Lists',
-        idProperty : 'catalog.list.id',
-        siteidProperty : 'catalog.list.siteid',
-        listNamePrefix : 'catalog.list.',
-        listTypeIdProperty : 'catalog.list.type.id',
-        listTypeLabelProperty : 'catalog.list.type.label',
-        listTypeControllerName : 'Catalog_List_Type',
+        idProperty : 'catalog.lists.id',
+        siteidProperty : 'catalog.lists.siteid',
+        listNamePrefix : 'catalog.lists.',
+        listTypeIdProperty : 'catalog.lists.type.id',
+        listTypeLabelProperty : 'catalog.lists.type.label',
+        listTypeControllerName : 'Catalog_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'catalog.list.type.domain' : 'media'
+                    'catalog.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'catalog/list/type/media'
+        listTypeKey : 'catalog/lists/type/media'
     },
     listConfig : {
         domain : 'catalog',
@@ -10911,20 +10911,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.cata
     xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
         recordName : 'Catalog_Lists',
-        idProperty : 'catalog.list.id',
-        siteidProperty : 'catalog.list.siteid',
-        listNamePrefix : 'catalog.list.',
-        listTypeIdProperty : 'catalog.list.type.id',
-        listTypeLabelProperty : 'catalog.list.type.label',
-        listTypeControllerName : 'Catalog_List_Type',
+        idProperty : 'catalog.lists.id',
+        siteidProperty : 'catalog.lists.siteid',
+        listNamePrefix : 'catalog.lists.',
+        listTypeIdProperty : 'catalog.lists.type.id',
+        listTypeLabelProperty : 'catalog.lists.type.label',
+        listTypeControllerName : 'Catalog_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'catalog.list.type.domain' : 'product'
+                    'catalog.lists.type.domain' : 'product'
                 }
             }]
         },
-        listTypeKey : 'catalog/list/type/product'
+        listTypeKey : 'catalog/lists/type/product'
     },
     listConfig : {
         prefix : 'product.'
@@ -10943,20 +10943,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.cata
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Catalog_Lists',
-        idProperty : 'catalog.list.id',
-        siteidProperty : 'catalog.list.siteid',
-        listNamePrefix : 'catalog.list.',
-        listTypeIdProperty : 'catalog.list.type.id',
-        listTypeLabelProperty : 'catalog.list.type.label',
-        listTypeControllerName : 'Catalog_List_Type',
+        idProperty : 'catalog.lists.id',
+        siteidProperty : 'catalog.lists.siteid',
+        listNamePrefix : 'catalog.lists.',
+        listTypeIdProperty : 'catalog.lists.type.id',
+        listTypeLabelProperty : 'catalog.lists.type.label',
+        listTypeControllerName : 'Catalog_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'catalog.list.type.domain' : 'attribute'
+                    'catalog.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'catalog/list/type/attribute'
+        listTypeKey : 'catalog/lists/type/attribute'
     },
     listConfig : {
         domain : 'catalog',
@@ -11253,20 +11253,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.serv
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Service_Lists',
-        idProperty : 'service.list.id',
-        siteidProperty : 'service.list.siteid',
-        listNamePrefix : 'service.list.',
-        listTypeIdProperty : 'service.list.type.id',
-        listTypeLabelProperty : 'service.list.type.label',
-        listTypeControllerName : 'Service_List_Type',
+        idProperty : 'service.lists.id',
+        siteidProperty : 'service.lists.siteid',
+        listNamePrefix : 'service.lists.',
+        listTypeIdProperty : 'service.lists.type.id',
+        listTypeLabelProperty : 'service.lists.type.label',
+        listTypeControllerName : 'Service_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'service.list.type.domain' : 'text'
+                    'service.lists.type.domain' : 'text'
                 }
             }]
         },
-        listTypeKey : 'service/list/type/text'
+        listTypeKey : 'service/lists/type/text'
     },
     listConfig : {
         domain : 'service',
@@ -11285,20 +11285,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.serv
     xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Service_Lists',
-        idProperty : 'service.list.id',
-        siteidProperty : 'service.list.siteid',
-        listNamePrefix : 'service.list.',
-        listTypeIdProperty : 'service.list.type.id',
-        listTypeLabelProperty : 'service.list.type.label',
-        listTypeControllerName : 'Service_List_Type',
+        idProperty : 'service.lists.id',
+        siteidProperty : 'service.lists.siteid',
+        listNamePrefix : 'service.lists.',
+        listTypeIdProperty : 'service.lists.type.id',
+        listTypeLabelProperty : 'service.lists.type.label',
+        listTypeControllerName : 'Service_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'service.list.type.domain' : 'attribute'
+                    'service.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'service/list/type/attribute'
+        listTypeKey : 'service/lists/type/attribute'
     },
     listConfig : {
         domain : 'service',
@@ -11317,20 +11317,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.serv
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
         recordName : 'Service_Lists',
-        idProperty : 'service.list.id',
-        siteidProperty : 'service.list.siteid',
-        listNamePrefix : 'service.list.',
-        listTypeIdProperty : 'service.list.type.id',
-        listTypeLabelProperty : 'service.list.type.label',
-        listTypeControllerName : 'Service_List_Type',
+        idProperty : 'service.lists.id',
+        siteidProperty : 'service.lists.siteid',
+        listNamePrefix : 'service.lists.',
+        listTypeIdProperty : 'service.lists.type.id',
+        listTypeLabelProperty : 'service.lists.type.label',
+        listTypeControllerName : 'Service_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'service.list.type.domain' : 'media'
+                    'service.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'service/list/type/media'
+        listTypeKey : 'service/lists/type/media'
     },
     listConfig : {
         domain : 'service',
@@ -11349,20 +11349,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.serv
     xtype : 'MShop.panel.price.itempickerui',
     itemConfig : {
         recordName : 'Service_Lists',
-        idProperty : 'service.list.id',
-        siteidProperty : 'service.list.siteid',
-        listNamePrefix : 'service.list.',
-        listTypeIdProperty : 'service.list.type.id',
-        listTypeLabelProperty : 'service.list.type.label',
-        listTypeControllerName : 'Service_List_Type',
+        idProperty : 'service.lists.id',
+        siteidProperty : 'service.lists.siteid',
+        listNamePrefix : 'service.lists.',
+        listTypeIdProperty : 'service.lists.type.id',
+        listTypeLabelProperty : 'service.lists.type.label',
+        listTypeControllerName : 'Service_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'service.list.type.domain' : 'price'
+                    'service.lists.type.domain' : 'price'
                 }
             }]
         },
-        listTypeKey : 'service/list/type/price'
+        listTypeKey : 'service/lists/type/price'
     },
     listConfig : {
         domain : 'service',
@@ -11938,21 +11938,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 	xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Customer_Lists',
-        idProperty : 'customer.list.id',
-        siteidProperty : 'customer.list.siteid',
+        idProperty : 'customer.lists.id',
+        siteidProperty : 'customer.lists.siteid',
         listDomain : 'customer',
-        listNamePrefix : 'customer.list.',
-        listTypeIdProperty : 'customer.list.type.id',
-        listTypeLabelProperty : 'customer.list.type.label',
-        listTypeControllerName : 'Customer_List_Type',
+        listNamePrefix : 'customer.lists.',
+        listTypeIdProperty : 'customer.lists.type.id',
+        listTypeLabelProperty : 'customer.lists.type.label',
+        listTypeControllerName : 'Customer_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'customer.list.type.domain' : 'text'
+                    'customer.lists.type.domain' : 'text'
                 }
             }]
         },
-        listTypeKey : 'customer/list/type/text'
+        listTypeKey : 'customer/lists/type/text'
     },
     listConfig : {
         domain : 'customer',
@@ -11973,21 +11973,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 	xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Customer_Lists',
-        idProperty : 'customer.list.id',
-        siteidProperty : 'customer.list.siteid',
+        idProperty : 'customer.lists.id',
+        siteidProperty : 'customer.lists.siteid',
         listDomain : 'customer',
-        listNamePrefix : 'customer.list.',
-        listTypeIdProperty : 'customer.list.type.id',
-        listTypeLabelProperty : 'customer.list.type.label',
-        listTypeControllerName : 'Customer_List_Type',
+        listNamePrefix : 'customer.lists.',
+        listTypeIdProperty : 'customer.lists.type.id',
+        listTypeLabelProperty : 'customer.lists.type.label',
+        listTypeControllerName : 'Customer_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'customer.list.type.domain' : 'attribute'
+                    'customer.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'customer/list/type/attribute'
+        listTypeKey : 'customer/lists/type/attribute'
     },
     listConfig : {
         domain : 'customer',
@@ -12008,21 +12008,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 	xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
         recordName : 'Customer_Lists',
-        idProperty : 'customer.list.id',
-        siteidProperty : 'customer.list.siteid',
+        idProperty : 'customer.lists.id',
+        siteidProperty : 'customer.lists.siteid',
         listDomain : 'customer',
-        listNamePrefix : 'customer.list.',
-        listTypeIdProperty : 'customer.list.type.id',
-        listTypeLabelProperty : 'customer.list.type.label',
-        listTypeControllerName : 'Customer_List_Type',
+        listNamePrefix : 'customer.lists.',
+        listTypeIdProperty : 'customer.lists.type.id',
+        listTypeLabelProperty : 'customer.lists.type.label',
+        listTypeControllerName : 'Customer_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'customer.list.type.domain' : 'media'
+                    'customer.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'customer/list/type/media'
+        listTypeKey : 'customer/lists/type/media'
     },
     listConfig : {
         domain : 'customer',
@@ -12043,21 +12043,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 	xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
         recordName : 'Customer_Lists',
-        idProperty : 'customer.list.id',
-        siteidProperty : 'customer.list.siteid',
+        idProperty : 'customer.lists.id',
+        siteidProperty : 'customer.lists.siteid',
         listDomain : 'customer',
-        listNamePrefix : 'customer.list.',
-        listTypeIdProperty : 'customer.list.type.id',
-        listTypeLabelProperty : 'customer.list.type.label',
-        listTypeControllerName : 'Customer_List_Type',
+        listNamePrefix : 'customer.lists.',
+        listTypeIdProperty : 'customer.lists.type.id',
+        listTypeLabelProperty : 'customer.lists.type.label',
+        listTypeControllerName : 'Customer_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'customer.list.type.domain' : 'product'
+                    'customer.lists.type.domain' : 'product'
                 }
             }]
         },
-        listTypeKey : 'customer/list/type/product'
+        listTypeKey : 'customer/lists/type/product'
     },
     listConfig : {
         prefix : 'product.'
@@ -12077,21 +12077,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.customer.ItemUi', 'MShop.panel.cus
 	xtype : 'MShop.panel.customer.group.itempickerui',
     itemConfig : {
         recordName : 'Customer_Lists',
-        idProperty : 'customer.list.id',
-        siteidProperty : 'customer.list.siteid',
+        idProperty : 'customer.lists.id',
+        siteidProperty : 'customer.lists.siteid',
         listDomain : 'customer',
-        listNamePrefix : 'customer.list.',
-        listTypeIdProperty : 'customer.list.type.id',
-        listTypeLabelProperty : 'customer.list.type.label',
-        listTypeControllerName : 'Customer_List_Type',
+        listNamePrefix : 'customer.lists.',
+        listTypeIdProperty : 'customer.lists.type.id',
+        listTypeLabelProperty : 'customer.lists.type.label',
+        listTypeControllerName : 'Customer_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'customer.list.type.domain' : 'customer/group'
+                    'customer.lists.type.domain' : 'customer/group'
                 }
             }]
         },
-        listTypeKey : 'customer/list/type/customer/group'
+        listTypeKey : 'customer/lists/type/customer/group'
     },
     listConfig : {
         prefix : 'customer.group.'
@@ -12926,21 +12926,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 	xtype : 'MShop.panel.attribute.itempickerui',
     itemConfig : {
         recordName : 'Supplier_Lists',
-        idProperty : 'supplier.list.id',
-        siteidProperty : 'supplier.list.siteid',
+        idProperty : 'supplier.lists.id',
+        siteidProperty : 'supplier.lists.siteid',
         listDomain : 'supplier',
-        listNamePrefix : 'supplier.list.',
-        listTypeIdProperty : 'supplier.list.type.id',
-        listTypeLabelProperty : 'supplier.list.type.label',
-        listTypeControllerName : 'Supplier_List_Type',
+        listNamePrefix : 'supplier.lists.',
+        listTypeIdProperty : 'supplier.lists.type.id',
+        listTypeLabelProperty : 'supplier.lists.type.label',
+        listTypeControllerName : 'Supplier_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'supplier.list.type.domain' : 'attribute'
+                    'supplier.lists.type.domain' : 'attribute'
                 }
             }]
         },
-        listTypeKey : 'supplier/list/type/attribute'
+        listTypeKey : 'supplier/lists/type/attribute'
     },
     listConfig : {
         domain : 'supplier',
@@ -12961,21 +12961,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 	xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
         recordName : 'Supplier_Lists',
-        idProperty : 'supplier.list.id',
-        siteidProperty : 'supplier.list.siteid',
+        idProperty : 'supplier.lists.id',
+        siteidProperty : 'supplier.lists.siteid',
         listDomain : 'supplier',
-        listNamePrefix : 'supplier.list.',
-        listTypeIdProperty : 'supplier.list.type.id',
-        listTypeLabelProperty : 'supplier.list.type.label',
-        listTypeControllerName : 'Supplier_List_Type',
+        listNamePrefix : 'supplier.lists.',
+        listTypeIdProperty : 'supplier.lists.type.id',
+        listTypeLabelProperty : 'supplier.lists.type.label',
+        listTypeControllerName : 'Supplier_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'supplier.list.type.domain' : 'media'
+                    'supplier.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'supplier/list/type/media'
+        listTypeKey : 'supplier/lists/type/media'
     },
     listConfig : {
         domain : 'supplier',
@@ -12996,21 +12996,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 	xtype : 'MShop.panel.product.itempickerui',
     itemConfig : {
         recordName : 'Supplier_Lists',
-        idProperty : 'supplier.list.id',
-        siteidProperty : 'supplier.list.siteid',
+        idProperty : 'supplier.lists.id',
+        siteidProperty : 'supplier.lists.siteid',
         listDomain : 'supplier',
-        listNamePrefix : 'supplier.list.',
-        listTypeIdProperty : 'supplier.list.type.id',
-        listTypeLabelProperty : 'supplier.list.type.label',
-        listTypeControllerName : 'Supplier_List_Type',
+        listNamePrefix : 'supplier.lists.',
+        listTypeIdProperty : 'supplier.lists.type.id',
+        listTypeLabelProperty : 'supplier.lists.type.label',
+        listTypeControllerName : 'Supplier_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'supplier.list.type.domain' : 'product'
+                    'supplier.lists.type.domain' : 'product'
                 }
             }]
         },
-        listTypeKey : 'supplier/list/type/product'
+        listTypeKey : 'supplier/lists/type/product'
     },
     listConfig : {
         prefix : 'product.'
@@ -13030,21 +13030,21 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.supplier.ItemUi', 'MShop.panel.sup
 	xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Supplier_Lists',
-        idProperty : 'supplier.list.id',
-        siteidProperty : 'supplier.list.siteid',
+        idProperty : 'supplier.lists.id',
+        siteidProperty : 'supplier.lists.siteid',
         listDomain : 'supplier',
-        listNamePrefix : 'supplier.list.',
-        listTypeIdProperty : 'supplier.list.type.id',
-        listTypeLabelProperty : 'supplier.list.type.label',
-        listTypeControllerName : 'Supplier_List_Type',
+        listNamePrefix : 'supplier.lists.',
+        listTypeIdProperty : 'supplier.lists.type.id',
+        listTypeLabelProperty : 'supplier.lists.type.label',
+        listTypeControllerName : 'Supplier_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'supplier.list.type.domain' : 'text'
+                    'supplier.lists.type.domain' : 'text'
                 }
             }]
         },
-        listTypeKey : 'supplier/list/type/text'
+        listTypeKey : 'supplier/lists/type/text'
     },
     listConfig : {
         domain : 'supplier',

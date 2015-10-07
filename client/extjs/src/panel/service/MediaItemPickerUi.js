@@ -10,20 +10,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.service.ItemUi', 'MShop.panel.serv
     xtype : 'MShop.panel.media.itempickerui',
     itemConfig : {
         recordName : 'Service_Lists',
-        idProperty : 'service.list.id',
-        siteidProperty : 'service.list.siteid',
-        listNamePrefix : 'service.list.',
-        listTypeIdProperty : 'service.list.type.id',
-        listTypeLabelProperty : 'service.list.type.label',
-        listTypeControllerName : 'Service_List_Type',
+        idProperty : 'service.lists.id',
+        siteidProperty : 'service.lists.siteid',
+        listNamePrefix : 'service.lists.',
+        listTypeIdProperty : 'service.lists.type.id',
+        listTypeLabelProperty : 'service.lists.type.label',
+        listTypeControllerName : 'Service_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'service.list.type.domain' : 'media'
+                    'service.lists.type.domain' : 'media'
                 }
             }]
         },
-        listTypeKey : 'service/list/type/media'
+        listTypeKey : 'service/lists/type/media'
     },
     listConfig : {
         domain : 'service',

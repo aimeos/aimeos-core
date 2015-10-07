@@ -11,20 +11,20 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.cata
     xtype : 'MShop.panel.text.itempickerui',
     itemConfig : {
         recordName : 'Catalog_Lists',
-        idProperty : 'catalog.list.id',
-        siteidProperty : 'catalog.list.siteid',
-        listNamePrefix : 'catalog.list.',
-        listTypeIdProperty : 'catalog.list.type.id',
-        listTypeLabelProperty : 'catalog.list.type.label',
-        listTypeControllerName : 'Catalog_List_Type',
+        idProperty : 'catalog.lists.id',
+        siteidProperty : 'catalog.lists.siteid',
+        listNamePrefix : 'catalog.lists.',
+        listTypeIdProperty : 'catalog.lists.type.id',
+        listTypeLabelProperty : 'catalog.lists.type.label',
+        listTypeControllerName : 'Catalog_Lists_Type',
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'catalog.list.type.domain' : 'text'
+                    'catalog.lists.type.domain' : 'text'
                 }
             }]
         },
-        listTypeKey : 'catalog/list/type/text'
+        listTypeKey : 'catalog/lists/type/text'
     },
     listConfig : {
         domain : 'catalog',
