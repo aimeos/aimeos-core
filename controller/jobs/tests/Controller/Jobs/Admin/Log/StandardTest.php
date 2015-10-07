@@ -68,8 +68,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$tmppath = dirname( dirname( dirname( dirname( __DIR__ ) ) ) ) . DIRECTORY_SEPARATOR . 'tmp';
 		$name = 'ControllerJobsAdminLogDefaultRun';
 		$config->set( 'classes/log/manager/name', $name );
-		$config->set( 'controller/jobs/admin/log/default/limit-days', 0 );
-		$config->set( 'controller/jobs/admin/log/default/path', $tmppath );
+		$config->set( 'controller/jobs/admin/log/standard/limit-days', 0 );
+		$config->set( 'controller/jobs/admin/log/standard/path', $tmppath );
 
 		\Aimeos\MAdmin\Log\Manager\Factory::injectManager( '\\Aimeos\\MAdmin\\Log\\Manager\\' . $name, $mock );
 

@@ -64,8 +64,8 @@ class Standard
 		 * @since 2014.03
 		 * @category User
 		 * @category Developer
-		 * @see controller/jobs/order/email/payment/default/limit-days
-		 * @see controller/jobs/order/email/delivery/default/limit-days
+		 * @see controller/jobs/order/email/payment/standard/limit-days
+		 * @see controller/jobs/order/email/delivery/standard/limit-days
 		 */
 		$days = $context->getConfig()->get( 'controller/jobs/order/service/delivery/limit-days', 90 );
 		$date = date( 'Y-m-d 00:00:00', time() - 86400 * $days );

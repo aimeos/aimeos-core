@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->context = \TestHelper::getContext();
 
-		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/attribute/import/text/default/uploaddir', './tmp' );
+		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/attribute/import/text/standard/uploaddir', './tmp' );
 		$this->testfile = $this->testdir . DIRECTORY_SEPARATOR . 'file.txt';
 
 		if( !is_dir( $this->testdir ) && mkdir( $this->testdir, 0775, true ) === false ) {
@@ -340,8 +340,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		set_error_handler( 'TestHelper::errorHandler' );
 
-		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/default/uploaddir', '/up/' );
-		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/default/enablecheck', false );
+		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/standard/uploaddir', '/up/' );
+		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/standard/enablecheck', false );
 
 		$object = new \Aimeos\Controller\ExtJS\Attribute\Import\Text\Standard( $this->context );
 
@@ -410,7 +410,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function prepareCheckFileUpload()
 	{
-		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/default/enablecheck', true );
+		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/standard/enablecheck', true );
 		$object = new \Aimeos\Controller\ExtJS\Attribute\Import\Text\Standard( $this->context );
 
 		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;

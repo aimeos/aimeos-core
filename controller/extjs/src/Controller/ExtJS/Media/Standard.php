@@ -49,7 +49,7 @@ class Standard
 
 		$config = $this->getContext()->getConfig();
 
-		/** controller/extjs/media/default/basedir
+		/** controller/extjs/media/standard/basedir
 		 * Base directory used by all relative directory configuration options
 		 *
 		 * Usually, this is the directory of the document root of your virtual
@@ -65,9 +65,9 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$basedir = $config->get( 'controller/extjs/media/default/basedir', '.' );
+		$basedir = $config->get( 'controller/extjs/media/standard/basedir', '.' );
 
-		/** controller/extjs/media/default/upload/directory
+		/** controller/extjs/media/standard/upload/directory
 		 * Upload directory for files and preview images
 		 *
 		 * All uploaded files including the product or payment/delivery images
@@ -93,9 +93,9 @@ class Standard
 		 * @param string Path relative to the base directory
 		 * @since 2014.03
 		 * @category Developer
-		 * @see controller/extjs/media/default/basedir
+		 * @see controller/extjs/media/standard/basedir
 		 */
-		$uploaddir = $config->get( 'controller/extjs/media/default/upload/directory', 'upload' );
+		$uploaddir = $config->get( 'controller/extjs/media/standard/upload/directory', 'upload' );
 
 
 		$idList = array();
@@ -177,7 +177,7 @@ class Standard
 
 		$config = $this->getContext()->getConfig();
 
-		/** controller/extjs/media/default/options
+		/** controller/extjs/media/standard/options
 		 * Options used for processing the uploaded media files
 		 *
 		 * When uploading a file, a preview image for that file is generated if
@@ -200,9 +200,9 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$options = $config->get( 'controller/extjs/media/default/options', array() );
+		$options = $config->get( 'controller/extjs/media/standard/options', array() );
 
-		/** controller/extjs/media/default/enablecheck
+		/** controller/extjs/media/standard/enablecheck
 		 * Enables checking uploaded files if they are valid and not part of an attack
 		 *
 		 * This configuration option is for unit testing only! Please don't disable
@@ -213,7 +213,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		if( $config->get( 'controller/extjs/media/default/enablecheck', true ) ) {
+		if( $config->get( 'controller/extjs/media/standard/enablecheck', true ) ) {
 			$this->checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
 		}
 
@@ -359,11 +359,11 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		if( ( $dir = $config->get( 'controller/extjs/media/default/basedir', null ) ) === null ) {
+		if( ( $dir = $config->get( 'controller/extjs/media/standard/basedir', null ) ) === null ) {
 			throw new \Aimeos\Controller\ExtJS\Exception( 'No base directory configured' );
 		}
 
-		/** controller/extjs/media/default/upload/dirperms
+		/** controller/extjs/media/standard/upload/dirperms
 		 * Directory permissions used when creating sub-directories
 		 *
 		 * Uploaded files are stored in sub-directories of the configured upload
@@ -394,7 +394,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$perms = $config->get( 'controller/extjs/media/default/upload/dirperms', 0775 );
+		$perms = $config->get( 'controller/extjs/media/standard/upload/dirperms', 0775 );
 		$dir .= DIRECTORY_SEPARATOR . $relativeDir;
 
 		if( is_dir( $dir ) === false && @mkdir( $dir, $perms, true ) === false )
@@ -439,7 +439,7 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		/** controller/extjs/media/default/mimeicon/directory
+		/** controller/extjs/media/standard/mimeicon/directory
 		 * Directory that contains the icons for the different mime types
 		 *
 		 * If no preview image can be generated from an uploaded file, an icon
@@ -467,15 +467,15 @@ class Standard
 		 * @param string Path relative to the base directory
 		 * @since 2014.03
 		 * @category Developer
-		 * @see controller/extjs/media/default/basedir
+		 * @see controller/extjs/media/standard/basedir
 		 */
-		if( ( $mimedir = $config->get( 'controller/extjs/media/default/mimeicon/directory', null ) ) === null )
+		if( ( $mimedir = $config->get( 'controller/extjs/media/standard/mimeicon/directory', null ) ) === null )
 		{
 			$this->getContext()->getLogger()->log( 'No directory for mime type images configured' );
 			return '';
 		}
 
-		/** controller/extjs/media/default/mimeicon/extension
+		/** controller/extjs/media/standard/mimeicon/extension
 		 * File extension of the mime icon images
 		 *
 		 * If you would like to use different mime icons that are available in
@@ -488,7 +488,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$ext = $config->get( 'controller/extjs/media/default/mimeicon/extension', '.png' );
+		$ext = $config->get( 'controller/extjs/media/standard/mimeicon/extension', '.png' );
 		$abspath = $this->getAbsoluteDirectory( $mimedir ) . DIRECTORY_SEPARATOR . $mimetype . $ext;
 		$mimeicon = $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext;
 
@@ -516,7 +516,7 @@ class Standard
 		$mimetype = $mediaFile->getMimetype();
 		$config = $this->getContext()->getConfig();
 
-		/** controller/extjs/media/default/files/allowedtypes
+		/** controller/extjs/media/standard/files/allowedtypes
 		 * A list of image mime types that are allowed for uploaded image files
 		 *
 		 * The list of allowed image types must be explicitly configured for the
@@ -529,7 +529,7 @@ class Standard
 		 * @category User
 		 */
 
-		/** controller/extjs/media/default/preview/allowedtypes
+		/** controller/extjs/media/standard/preview/allowedtypes
 		 * A list of image mime types that are allowed for preview image files
 		 *
 		 * The list of allowed image types must be explicitly configured for the
@@ -543,7 +543,7 @@ class Standard
 		 * @category User
 		 */
 		$default = array( 'image/jpeg', 'image/png', 'image/gif' );
-		$allowed = $config->get( 'controller/extjs/media/default/' . $type . '/allowedtypes', $default );
+		$allowed = $config->get( 'controller/extjs/media/standard/' . $type . '/allowedtypes', $default );
 
 		if( in_array( $mimetype, $allowed ) === false )
 		{
@@ -555,7 +555,7 @@ class Standard
 		}
 
 
-		if( ( $mediadir = $config->get( 'controller/extjs/media/default/upload/directory', null ) ) === null ) {
+		if( ( $mediadir = $config->get( 'controller/extjs/media/standard/upload/directory', null ) ) === null ) {
 			throw new \Aimeos\Controller\ExtJS\Exception( 'No media directory configured' );
 		}
 
@@ -565,7 +565,7 @@ class Standard
 		$dest = $this->getAbsoluteDirectory( $filepath ) . $ds . $filename . $fileext;
 
 
-		/** controller/extjs/media/default/files/maxwidth
+		/** controller/extjs/media/standard/files/maxwidth
 		 * Maximum width of the uploaded images
 		 *
 		 * The uploaded image files are scaled down if their width exceeds the
@@ -582,7 +582,7 @@ class Standard
 		 * @category User
 		 */
 
-		/** controller/extjs/media/default/preview/maxwidth
+		/** controller/extjs/media/standard/preview/maxwidth
 		 * Maximum width of the preview images
 		 *
 		 * The preview image files are created with the configured width in
@@ -600,9 +600,9 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$maxwidth = $config->get( 'controller/extjs/media/default/' . $type . '/maxwidth', null );
+		$maxwidth = $config->get( 'controller/extjs/media/standard/' . $type . '/maxwidth', null );
 
-		/** controller/extjs/media/default/files/maxheight
+		/** controller/extjs/media/standard/files/maxheight
 		 * Maximum height of the uploaded images
 		 *
 		 * The uploaded image files are scaled down if their height exceeds the
@@ -619,7 +619,7 @@ class Standard
 		 * @category User
 		 */
 
-		/** controller/extjs/media/default/preview/maxheight
+		/** controller/extjs/media/standard/preview/maxheight
 		 * Maximum height of the preview images
 		 *
 		 * The preview image files are created with the configured width in
@@ -637,13 +637,13 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$maxheight = $config->get( 'controller/extjs/media/default/' . $type . '/maxheight', null );
+		$maxheight = $config->get( 'controller/extjs/media/standard/' . $type . '/maxheight', null );
 
 		$mediaFile->scale( $maxwidth, $maxheight );
 		$mediaFile->save( $dest, $mimetype );
 
 
-		/** controller/extjs/media/default/upload/fileperms
+		/** controller/extjs/media/standard/upload/fileperms
 		 * File permissions used when storing uploaded or created files
 		 *
 		 * The representation of the permissions is in octal notation (using 0-7)
@@ -669,7 +669,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$perms = $config->get( 'controller/extjs/media/default/upload/fileperms', 0664 );
+		$perms = $config->get( 'controller/extjs/media/standard/upload/fileperms', 0664 );
 
 		if( chmod( $dest, $perms ) === false )
 		{
@@ -693,7 +693,7 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		if( ( $mediadir = $config->get( 'controller/extjs/media/default/upload/directory', null ) ) === null ) {
+		if( ( $mediadir = $config->get( 'controller/extjs/media/standard/upload/directory', null ) ) === null ) {
 				throw new \Aimeos\Controller\ExtJS\Exception( 'No media directory configured' );
 		}
 
@@ -704,7 +704,7 @@ class Standard
 
 		$mediaFile->save( $dest, $mediaFile->getMimetype() );
 
-		$perms = $config->get( 'controller/extjs/media/default/upload/fileperms', 0664 );
+		$perms = $config->get( 'controller/extjs/media/standard/upload/fileperms', 0664 );
 
 		if( chmod( $dest, $perms ) === false )
 		{

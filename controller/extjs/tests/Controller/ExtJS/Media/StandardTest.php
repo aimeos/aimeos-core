@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelper::getContext();
 		$this->object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
-		$tempdir = $context->getConfig()->get( 'controller/extjs/media/default/upload/directory', 'tmp/media' );
+		$tempdir = $context->getConfig()->get( 'controller/extjs/media/standard/upload/directory', 'tmp/media' );
 		$this->directory = PATH_TESTS . DIRECTORY_SEPARATOR . $tempdir;
 		$testfiledir = dirname( __FILE__ ) . '/testfiles';
 
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testUploadItemExceptionWithEnableCheck()
 	{
 		$context = \TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/enablecheck', true );
+		$context->getConfig()->set( 'controller/extjs/media/standard/enablecheck', true );
 
 		$_FILES['unittest'] = array(
 			'name' => 'test-binary.bin',
@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testProtectedCreateImageExceptionByUploadItem()
 	{
 		$context = \TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/upload/directory', null );
+		$context->getConfig()->set( 'controller/extjs/media/standard/upload/directory', null );
 		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$_FILES['unittest'] = array(
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testProtectedGetMimeIconEmptyByUploadItem()
 	{
 		$context = \TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/mimeicon/directory', null );
+		$context->getConfig()->set( 'controller/extjs/media/standard/mimeicon/directory', null );
 
 		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
@@ -241,7 +241,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testProtectedGetAbsoluteDirectoryEmptyByUploadItem()
 	{
 		$context = \TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/basedir', null );
+		$context->getConfig()->set( 'controller/extjs/media/standard/basedir', null );
 		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$_FILES['unittest'] = array(
@@ -260,8 +260,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$context = \TestHelper::getContext();
 
-		$context->getConfig()->set( 'controller/extjs/media/default/basedir', '/root/' );
-		$context->getConfig()->set( 'controller/extjs/media/default/mimeicon/directory', '/2/' );
+		$context->getConfig()->set( 'controller/extjs/media/standard/basedir', '/root/' );
+		$context->getConfig()->set( 'controller/extjs/media/standard/mimeicon/directory', '/2/' );
 
 		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
@@ -296,7 +296,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testProtectedCopyFileExceptionByUploadBinary()
 	{
 		$context = \TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/default/upload/directory', null );
+		$context->getConfig()->set( 'controller/extjs/media/standard/upload/directory', null );
 
 		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 

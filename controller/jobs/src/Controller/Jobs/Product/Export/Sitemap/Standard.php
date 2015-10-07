@@ -98,7 +98,7 @@ class Standard
 		 */
 		$changefreq = $config->get( 'controller/jobs/product/export/sitemap/changefreq', 'daily' );
 
-		/** controller/jobs/product/export/sitemap/default/template-items
+		/** controller/jobs/product/export/sitemap/standard/template-items
 		 * Relative path to the XML items template of the product site map job controller.
 		 *
 		 * The template file contains the XML code and processing instructions
@@ -116,11 +116,11 @@ class Standard
 		 * @param string Relative path to the template creating XML code for the site map items
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/sitemap/default/template-header
-		 * @see controller/jobs/product/export/sitemap/default/template-footer
-		 * @see controller/jobs/product/export/sitemap/default/template-index
+		 * @see controller/jobs/product/export/sitemap/standard/template-header
+		 * @see controller/jobs/product/export/sitemap/standard/template-footer
+		 * @see controller/jobs/product/export/sitemap/standard/template-index
 		 */
-		$tplconf = 'controller/jobs/product/export/sitemap/default/template-items';
+		$tplconf = 'controller/jobs/product/export/sitemap/standard/template-items';
 		$default = 'product/export/sitemap-items-body-default.xml';
 
 		$view = $this->getContext()->getView();
@@ -211,7 +211,7 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		/** controller/jobs/product/export/sitemap/default/template-header
+		/** controller/jobs/product/export/sitemap/standard/template-header
 		 * Relative path to the XML site map header template of the product site map job controller.
 		 *
 		 * The template file contains the XML code and processing instructions
@@ -229,11 +229,11 @@ class Standard
 		 * @param string Relative path to the template creating XML code for the site map header
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/sitemap/default/template-items
-		 * @see controller/jobs/product/export/sitemap/default/template-footer
-		 * @see controller/jobs/product/export/sitemap/default/template-index
+		 * @see controller/jobs/product/export/sitemap/standard/template-items
+		 * @see controller/jobs/product/export/sitemap/standard/template-footer
+		 * @see controller/jobs/product/export/sitemap/standard/template-index
 		 */
-		$tplconf = 'controller/jobs/product/export/sitemap/default/template-header';
+		$tplconf = 'controller/jobs/product/export/sitemap/standard/template-header';
 		$default = 'product/export/sitemap-items-header-default.xml';
 
 		$view = $this->getContext()->getView();
@@ -255,7 +255,7 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		/** controller/jobs/product/export/sitemap/default/template-footer
+		/** controller/jobs/product/export/sitemap/standard/template-footer
 		 * Relative path to the XML site map footer template of the product site map job controller.
 		 *
 		 * The template file contains the XML code and processing instructions
@@ -273,11 +273,11 @@ class Standard
 		 * @param string Relative path to the template creating XML code for the site map footer
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/sitemap/default/template-header
-		 * @see controller/jobs/product/export/sitemap/default/template-items
-		 * @see controller/jobs/product/export/sitemap/default/template-index
+		 * @see controller/jobs/product/export/sitemap/standard/template-header
+		 * @see controller/jobs/product/export/sitemap/standard/template-items
+		 * @see controller/jobs/product/export/sitemap/standard/template-index
 		 */
-		$tplconf = 'controller/jobs/product/export/sitemap/default/template-footer';
+		$tplconf = 'controller/jobs/product/export/sitemap/standard/template-footer';
 		$default = 'product/export/sitemap-items-footer-default.xml';
 
 		$view = $this->getContext()->getView();
@@ -296,7 +296,7 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		/** controller/jobs/product/export/sitemap/default/template-index
+		/** controller/jobs/product/export/sitemap/standard/template-index
 		 * Relative path to the XML site map index template of the product site map job controller.
 		 *
 		 * The template file contains the XML code and processing instructions
@@ -314,11 +314,11 @@ class Standard
 		 * @param string Relative path to the template creating XML code for the site map index
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/sitemap/default/template-header
-		 * @see controller/jobs/product/export/sitemap/default/template-items
-		 * @see controller/jobs/product/export/sitemap/default/template-footer
+		 * @see controller/jobs/product/export/sitemap/standard/template-header
+		 * @see controller/jobs/product/export/sitemap/standard/template-items
+		 * @see controller/jobs/product/export/sitemap/standard/template-footer
 		 */
-		$tplconf = 'controller/jobs/product/export/sitemap/default/template-index';
+		$tplconf = 'controller/jobs/product/export/sitemap/standard/template-index';
 		$default = 'product/export/sitemap-index-default.xml';
 
 		$view = $this->getContext()->getView();

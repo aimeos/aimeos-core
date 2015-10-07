@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->context = \TestHelper::getContext();
 
-		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/attribute/import/text/default/uploaddir', './tmp' );
+		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/attribute/import/text/standard/uploaddir', './tmp' );
 
 		if( !is_dir( $this->testdir ) && mkdir( $this->testdir, 0775, true ) === false ) {
 			throw new \Exception( sprintf( 'Unable to create missing upload directory "%1$s"', $this->testdir ) );
@@ -252,8 +252,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testUploadFile()
 	{
 		$config = $this->context->getConfig();
-		$config->set( 'controller/extjs/coupon/code/default/uploaddir', './tmp' );
-		$config->set( 'controller/extjs/coupon/code/default/enablecheck', false );
+		$config->set( 'controller/extjs/coupon/code/standard/uploaddir', './tmp' );
+		$config->set( 'controller/extjs/coupon/code/standard/enablecheck', false );
 
 		$cntlMock = $this->getMockBuilder( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\Standard' )
 			->setMethods( array( 'saveItems' ) )->setConstructorArgs( array( $this->context ) )->getMock();

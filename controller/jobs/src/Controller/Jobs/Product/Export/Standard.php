@@ -66,7 +66,7 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		/** controller/jobs/product/export/default/template-items
+		/** controller/jobs/product/export/standard/template-items
 		 * Relative path to the XML items template of the product site map job controller.
 		 *
 		 * The template file contains the XML code and processing instructions
@@ -84,11 +84,11 @@ class Standard
 		 * @param string Relative path to the template creating XML code for the site map items
 		 * @since 2015.01
 		 * @category Developer
-		 * @see client/html/account/favorite/default/template-header
-		 * @see controller/jobs/product/export/default/template-footer
-		 * @see controller/jobs/product/export/default/template-index
+		 * @see client/html/account/favorite/standard/template-header
+		 * @see controller/jobs/product/export/standard/template-footer
+		 * @see controller/jobs/product/export/standard/template-index
 		 */
-		$tplconf = 'controller/jobs/product/export/default/template-items';
+		$tplconf = 'controller/jobs/product/export/standard/template-items';
 		$default = 'product/export/items-body-default.xml';
 
 		$view = $this->getContext()->getView();
@@ -120,13 +120,13 @@ class Standard
 		 * @since 2015.01
 		 * @category Developer
 		 * @category User
-		 * @see controller/jobs/product/export/default/container/options
+		 * @see controller/jobs/product/export/standard/container/options
 		 * @see controller/jobs/product/export/max-items
 		 * @see controller/jobs/product/export/max-query
 		 */
 		$location = $config->get( 'controller/jobs/product/export/location', sys_get_temp_dir() );
 
-		/** controller/jobs/product/export/default/container/type
+		/** controller/jobs/product/export/standard/container/type
 		 * List of file container options for the export files
 		 *
 		 * The generated files are stored using container/content objects from
@@ -135,15 +135,15 @@ class Standard
 		 * @param string Container name
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/default/container/content
-		 * @see controller/jobs/product/export/default/container/options
+		 * @see controller/jobs/product/export/standard/container/content
+		 * @see controller/jobs/product/export/standard/container/options
 		 * @see controller/jobs/product/export/location
 		 * @see controller/jobs/product/export/max-items
 		 * @see controller/jobs/product/export/max-query
 		*/
-		$container = $config->get( 'controller/jobs/product/export/default/container/type', 'Directory' );
+		$container = $config->get( 'controller/jobs/product/export/standard/container/type', 'Directory' );
 
-		/** controller/jobs/product/export/default/container/content
+		/** controller/jobs/product/export/standard/container/content
 		 * List of file container options for the export files
 		 *
 		 * The generated files are stored using container/content objects from
@@ -152,15 +152,15 @@ class Standard
 		 * @param array Associative list of option name/value pairs
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/default/container/type
-		 * @see controller/jobs/product/export/default/container/options
+		 * @see controller/jobs/product/export/standard/container/type
+		 * @see controller/jobs/product/export/standard/container/options
 		 * @see controller/jobs/product/export/location
 		 * @see controller/jobs/product/export/max-items
 		 * @see controller/jobs/product/export/max-query
 		 */
-		$content = $config->get( 'controller/jobs/product/export/default/container/content', 'Binary' );
+		$content = $config->get( 'controller/jobs/product/export/standard/container/content', 'Binary' );
 
-		/** controller/jobs/product/export/default/container/options
+		/** controller/jobs/product/export/standard/container/options
 		 * List of file container options for the export files
 		 *
 		 * The generated files are stored using container/content objects from
@@ -169,13 +169,13 @@ class Standard
 		 * @param array Associative list of option name/value pairs
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/default/container/type
-		 * @see controller/jobs/product/export/default/container/content
+		 * @see controller/jobs/product/export/standard/container/type
+		 * @see controller/jobs/product/export/standard/container/content
 		 * @see controller/jobs/product/export/location
 		 * @see controller/jobs/product/export/max-items
 		 * @see controller/jobs/product/export/max-query
 		 */
-		$options = $config->get( 'controller/jobs/product/export/default/container/options', array() );
+		$options = $config->get( 'controller/jobs/product/export/standard/container/options', array() );
 
 		return \Aimeos\MW\Container\Factory::getContainer( $location, $container, $content, $options );
 	}
@@ -192,7 +192,7 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		/** controller/jobs/product/export/default/template-header
+		/** controller/jobs/product/export/standard/template-header
 		 * Relative path to the XML site map header template of the product site map job controller.
 		 *
 		 * The template file contains the XML code and processing instructions
@@ -210,11 +210,11 @@ class Standard
 		 * @param string Relative path to the template creating XML code for the site map header
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/default/template-items
-		 * @see controller/jobs/product/export/default/template-footer
-		 * @see controller/jobs/product/export/default/template-index
+		 * @see controller/jobs/product/export/standard/template-items
+		 * @see controller/jobs/product/export/standard/template-footer
+		 * @see controller/jobs/product/export/standard/template-index
 		 */
-		$tplconf = 'controller/jobs/product/export/default/template-header';
+		$tplconf = 'controller/jobs/product/export/standard/template-header';
 		$default = 'product/export/items-header-default.xml';
 
 		$view = $this->getContext()->getView();
@@ -236,7 +236,7 @@ class Standard
 	{
 		$config = $this->getContext()->getConfig();
 
-		/** controller/jobs/product/export/default/template-footer
+		/** controller/jobs/product/export/standard/template-footer
 		 * Relative path to the XML site map footer template of the product site map job controller.
 		 *
 		 * The template file contains the XML code and processing instructions
@@ -254,11 +254,11 @@ class Standard
 		 * @param string Relative path to the template creating XML code for the site map footer
 		 * @since 2015.01
 		 * @category Developer
-		 * @see controller/jobs/product/export/default/template-header
-		 * @see controller/jobs/product/export/default/template-items
-		 * @see controller/jobs/product/export/default/template-index
+		 * @see controller/jobs/product/export/standard/template-header
+		 * @see controller/jobs/product/export/standard/template-items
+		 * @see controller/jobs/product/export/standard/template-index
 		 */
-		$tplconf = 'controller/jobs/product/export/default/template-footer';
+		$tplconf = 'controller/jobs/product/export/standard/template-footer';
 		$default = 'product/export/items-footer-default.xml';
 
 		$view = $this->getContext()->getView();
@@ -343,9 +343,9 @@ class Standard
 				 * @since 2015.01
 				 * @category Developer
 				 * @category User
-				 * @see controller/jobs/product/export/default/container/type
-				 * @see controller/jobs/product/export/default/container/content
-				 * @see controller/jobs/product/export/default/container/options
+				 * @see controller/jobs/product/export/standard/container/type
+				 * @see controller/jobs/product/export/standard/container/content
+				 * @see controller/jobs/product/export/standard/container/options
 				 * @see controller/jobs/product/export/location
 				 * @see controller/jobs/product/export/max-items
 				 * @see controller/jobs/product/export/max-query
@@ -365,9 +365,9 @@ class Standard
 				 * @since 2015.01
 				 * @category Developer
 				 * @category User
-				 * @see controller/jobs/product/export/default/container/type
-				 * @see controller/jobs/product/export/default/container/content
-				 * @see controller/jobs/product/export/default/container/options
+				 * @see controller/jobs/product/export/standard/container/type
+				 * @see controller/jobs/product/export/standard/container/content
+				 * @see controller/jobs/product/export/standard/container/options
 				 * @see controller/jobs/product/export/location
 				 * @see controller/jobs/product/export/max-query
 				 * @see controller/jobs/product/export/domains
@@ -387,9 +387,9 @@ class Standard
 				 * @param integer Number of products per query
 				 * @since 2015.01
 				 * @category Developer
-				 * @see controller/jobs/product/export/default/container/type
-				 * @see controller/jobs/product/export/default/container/content
-				 * @see controller/jobs/product/export/default/container/options
+				 * @see controller/jobs/product/export/standard/container/type
+				 * @see controller/jobs/product/export/standard/container/content
+				 * @see controller/jobs/product/export/standard/container/options
 				 * @see controller/jobs/product/export/location
 				 * @see controller/jobs/product/export/max-items
 				 * @see controller/jobs/product/export/domains

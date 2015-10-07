@@ -67,7 +67,7 @@ class Standard
 		$orderStatusManager = $orderManager->getSubManager( 'status' );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
-		/** controller/jobs/order/email/delivery/default/limit-days
+		/** controller/jobs/order/email/delivery/standard/limit-days
 		 * Only send delivery e-mails of orders that were created in the past within the configured number of days
 		 *
 		 * The delivery e-mails are normally send immediately after the delivery
@@ -79,11 +79,11 @@ class Standard
 		 * @since 2014.03
 		 * @category User
 		 * @category Developer
-		 * @see controller/jobs/order/email/delivery/default/status
-		 * @see controller/jobs/order/email/payment/default/limit-days
+		 * @see controller/jobs/order/email/delivery/standard/status
+		 * @see controller/jobs/order/email/payment/standard/limit-days
 		 * @see controller/jobs/service/delivery/process/limit-days
 		 */
-		$limit = $config->get( 'controller/jobs/order/email/delivery/default/limit-days', 90 );
+		$limit = $config->get( 'controller/jobs/order/email/delivery/standard/limit-days', 90 );
 		$limitDate = date( 'Y-m-d H:i:s', time() - $limit * 86400 );
 
 		$default = array(
@@ -93,7 +93,7 @@ class Standard
 			\Aimeos\MShop\Order\Item\Base::STAT_RETURNED,
 		);
 
-		/** controller/jobs/order/email/delivery/default/status
+		/** controller/jobs/order/email/delivery/standard/status
 		 * Only send order delivery notification e-mails for these delivery status values
 		 *
 		 * Notification e-mail about delivery status changes can be sent for these
@@ -114,10 +114,10 @@ class Standard
 		 * @since 2014.03
 		 * @category User
 		 * @category Developer
-		 * @see controller/jobs/order/email/payment/default/status
-		 * @see controller/jobs/order/email/delivery/default/limit-days
+		 * @see controller/jobs/order/email/payment/standard/status
+		 * @see controller/jobs/order/email/delivery/standard/limit-days
 		 */
-		foreach( (array) $config->get( 'controller/jobs/order/email/delivery/default/status', $default ) as $status )
+		foreach( (array) $config->get( 'controller/jobs/order/email/delivery/standard/status', $default ) as $status )
 		{
 			$orderSearch = $orderManager->createSearch();
 

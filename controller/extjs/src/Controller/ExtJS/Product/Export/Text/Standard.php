@@ -92,7 +92,7 @@ class Standard
 
 		$config = $context->getConfig();
 
-		/** controller/extjs/product/export/text/default/exportdir
+		/** controller/extjs/product/export/text/standard/exportdir
 		 * Directory where exported files of product texts are stored
 		 *
 		 * All exported files are stored in this file system directory directory.
@@ -116,11 +116,11 @@ class Standard
 		 * @param string Relative path in the file system
 		 * @since 2014.03
 		 * @category Developer
-		 * @see controller/extjs/media/default/basedir
+		 * @see controller/extjs/media/standard/basedir
 		 */
-		$dir = $config->get( 'controller/extjs/product/export/text/default/exportdir', 'uploads' );
+		$dir = $config->get( 'controller/extjs/product/export/text/standard/exportdir', 'uploads' );
 
-		/** controller/extjs/product/export/text/default/dirperms
+		/** controller/extjs/product/export/text/standard/dirperms
 		 * Directory permissions used when creating the directory if it doesn't exist
 		 *
 		 * The representation of the permissions is in octal notation (using 0-7)
@@ -145,9 +145,9 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$perms = $config->get( 'controller/extjs/product/export/text/default/dirperms', 0700 );
+		$perms = $config->get( 'controller/extjs/product/export/text/standard/dirperms', 0700 );
 
-		/** controller/extjs/product/export/text/default/downloaddir
+		/** controller/extjs/product/export/text/standard/downloaddir
 		 * Directory where the exported files can be found through the web
 		 *
 		 * The exported files are stored in this directory.
@@ -171,7 +171,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$downloaddir = $config->get( 'controller/extjs/product/export/text/default/downloaddir', 'uploads' );
+		$downloaddir = $config->get( 'controller/extjs/product/export/text/standard/downloaddir', 'uploads' );
 
 		$foldername = 'product-text-export_' . date( 'Y-m-d_H:i:s' ) . '_' . md5( time() . getmypid() );
 		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
@@ -233,7 +233,7 @@ class Standard
 			$search->setConditions( $search->compare( '==', 'locale.language.id', $lang ) );
 		}
 
-		/** controller/extjs/product/export/text/default/container/type
+		/** controller/extjs/product/export/text/standard/container/type
 		 * Container file type storing all language files for the exported texts
 		 *
 		 * When exporting texts, one file or content object is created per
@@ -252,7 +252,7 @@ class Standard
 		 * @category User
 		 */
 
-		/** controller/extjs/product/export/text/default/container/format
+		/** controller/extjs/product/export/text/standard/container/format
 		 * Format of the language files for the exported texts
 		 *
 		 * The exported texts are stored in one file or content object per
@@ -272,7 +272,7 @@ class Standard
 		 * @category User
 		 */
 
-		/** controller/extjs/product/export/text/default/container/options
+		/** controller/extjs/product/export/text/standard/container/options
 		 * Options changing the output format of the exported texts
 		 *
 		 * Each content format may support some configuration options to change
@@ -292,7 +292,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$containerItem = $this->createContainer( $filename, 'controller/extjs/product/export/text/default/container' );
+		$containerItem = $this->createContainer( $filename, 'controller/extjs/product/export/text/standard/container' );
 		$actualLangid = $context->getLocale()->getLanguageId();
 		$start = 0;
 

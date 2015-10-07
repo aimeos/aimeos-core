@@ -52,7 +52,7 @@ class Standard
 
 		$config = $this->getContext()->getConfig();
 
-		/** controller/extjs/coupon/code/default/uploaddir
+		/** controller/extjs/coupon/code/standard/uploaddir
 		 * Upload directory for text files that should be imported
 		 *
 		 * The upload directory must be an absolute path. Avoid a trailing slash
@@ -62,9 +62,9 @@ class Standard
 		 * @since 2014.09
 		 * @category Developer
 		 */
-		$dir = $config->get( 'controller/extjs/coupon/code/default/uploaddir', 'uploads' );
+		$dir = $config->get( 'controller/extjs/coupon/code/standard/uploaddir', 'uploads' );
 
-		/** controller/extjs/coupon/code/default/enablecheck
+		/** controller/extjs/coupon/code/standard/enablecheck
 		 * Enables checking uploaded files if they are valid and not part of an attack
 		 *
 		 * This configuration option is for unit testing only! Please don't disable
@@ -75,7 +75,7 @@ class Standard
 		 * @since 2014.09
 		 * @category Developer
 		 */
-		if( $config->get( 'controller/extjs/coupon/code/default/enablecheck', true ) ) {
+		if( $config->get( 'controller/extjs/coupon/code/standard/enablecheck', true ) ) {
 			$this->checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
 		}
 
@@ -88,7 +88,7 @@ class Standard
 			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
 		}
 
-		/** controller/extjs/coupon/code/default/fileperms
+		/** controller/extjs/coupon/code/standard/fileperms
 		 * File permissions used when storing uploaded files
 		 *
 		 * The representation of the permissions is in octal notation (using 0-7)
@@ -111,7 +111,7 @@ class Standard
 		 * @since 2014.09
 		 * @category Developer
 		 */
-		$perms = $config->get( 'controller/extjs/coupon/code/default/fileperms', 0660 );
+		$perms = $config->get( 'controller/extjs/coupon/code/standard/fileperms', 0660 );
 		if( chmod( $dest, $perms ) !== true )
 		{
 			$msg = sprintf( 'Could not set permissions "%1$s" for file "%2$s"', $perms, $dest );
@@ -154,7 +154,7 @@ class Standard
 		$this->checkParams( $params, array( 'site', 'couponid', 'items' ) );
 		$this->setLocale( $params->site );
 
-		/** controller/extjs/coupon/code/default/container/type
+		/** controller/extjs/coupon/code/standard/container/type
 		 * Container file type storing all coupon code files to import
 		 *
 		 * All coupon code files or content objects must be put into one
@@ -171,10 +171,10 @@ class Standard
 		 * @since 2014.09
 		 * @category Developer
 		 * @category User
-		 * @see controller/extjs/coupon/code/default/container/format
+		 * @see controller/extjs/coupon/code/standard/container/format
 		 */
 
-		/** controller/extjs/coupon/code/default/container/format
+		/** controller/extjs/coupon/code/standard/container/format
 		 * Format of the coupon code files to import
 		 *
 		 * The coupon codes are stored in one or more files or content
@@ -192,11 +192,11 @@ class Standard
 		 * @since 2014.09
 		 * @category Developer
 		 * @category User
-		 * @see controller/extjs/coupon/code/default/container/type
-		 * @see controller/extjs/coupon/code/default/container/options
+		 * @see controller/extjs/coupon/code/standard/container/type
+		 * @see controller/extjs/coupon/code/standard/container/options
 		 */
 
-		/** controller/extjs/coupon/code/default/container/options
+		/** controller/extjs/coupon/code/standard/container/options
 		 * Options changing the expected format of the coupon codes to import
 		 *
 		 * Each content format may support some configuration options to change
@@ -215,14 +215,14 @@ class Standard
 		 * @since 2014.09
 		 * @category Developer
 		 * @category User
-		 * @see controller/extjs/coupon/code/default/container/format
+		 * @see controller/extjs/coupon/code/standard/container/format
 		 */
 
 		$config = $this->getContext()->getConfig();
 
-		$type = $config->get( 'controller/extjs/coupon/code/default/container/type', 'Zip' );
-		$format = $config->get( 'controller/extjs/coupon/code/default/container/format', 'CSV' );
-		$options = $config->get( 'controller/extjs/coupon/code/default/container/options', array() );
+		$type = $config->get( 'controller/extjs/coupon/code/standard/container/type', 'Zip' );
+		$format = $config->get( 'controller/extjs/coupon/code/standard/container/format', 'CSV' );
+		$options = $config->get( 'controller/extjs/coupon/code/standard/container/options', array() );
 
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 

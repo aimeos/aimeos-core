@@ -48,7 +48,7 @@ class Standard
 
 		$config = $this->getContext()->getConfig();
 
-		/** controller/extjs/catalog/import/text/default/uploaddir
+		/** controller/extjs/catalog/import/text/standard/uploaddir
 		 * Upload directory for text files that should be imported
 		 *
 		 * The upload directory must be an absolute path. Avoid a trailing slash
@@ -58,9 +58,9 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$dir = $config->get( 'controller/extjs/catalog/import/text/default/uploaddir', 'uploads' );
+		$dir = $config->get( 'controller/extjs/catalog/import/text/standard/uploaddir', 'uploads' );
 
-		/** controller/extjs/catalog/import/text/default/enablecheck
+		/** controller/extjs/catalog/import/text/standard/enablecheck
 		 * Enables checking uploaded files if they are valid and not part of an attack
 		 *
 		 * This configuration option is for unit testing only! Please don't disable
@@ -71,7 +71,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		if( $config->get( 'controller/extjs/catalog/import/text/default/enablecheck', true ) ) {
+		if( $config->get( 'controller/extjs/catalog/import/text/standard/enablecheck', true ) ) {
 			$this->checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
 		}
 
@@ -84,7 +84,7 @@ class Standard
 			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
 		}
 
-		/** controller/extjs/catalog/import/text/default/fileperms
+		/** controller/extjs/catalog/import/text/standard/fileperms
 		 * File permissions used when storing uploaded files
 		 *
 		 * The representation of the permissions is in octal notation (using 0-7)
@@ -107,7 +107,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$perms = $config->get( 'controller/extjs/catalog/import/text/default/fileperms', 0660 );
+		$perms = $config->get( 'controller/extjs/catalog/import/text/standard/fileperms', 0660 );
 		if( chmod( $dest, $perms ) !== true )
 		{
 			$msg = sprintf( 'Could not set permissions "%1$s" for file "%2$s"', $perms, $dest );
@@ -153,7 +153,7 @@ class Standard
 
 		foreach( $items as $path )
 		{
-			/** controller/extjs/catalog/import/text/default/container/type
+			/** controller/extjs/catalog/import/text/standard/container/type
 			 * Container file type storing all language files of the texts to import
 			 *
 			 * When exporting texts, one file or content object is created per
@@ -170,10 +170,10 @@ class Standard
 			 * @since 2014.03
 			 * @category Developer
 			 * @category User
-			 * @see controller/extjs/catalog/import/text/default/container/format
+			 * @see controller/extjs/catalog/import/text/standard/container/format
 			 */
 
-			/** controller/extjs/catalog/import/text/default/container/format
+			/** controller/extjs/catalog/import/text/standard/container/format
 			 * Format of the language files for the texts to import
 			 *
 			 * The exported texts are stored in one file or content object per
@@ -191,11 +191,11 @@ class Standard
 			 * @since 2014.03
 			 * @category Developer
 			 * @category User
-			 * @see controller/extjs/catalog/import/text/default/container/type
-			 * @see controller/extjs/catalog/import/text/default/container/options
+			 * @see controller/extjs/catalog/import/text/standard/container/type
+			 * @see controller/extjs/catalog/import/text/standard/container/options
 			 */
 
-			/** controller/extjs/catalog/import/text/default/container/options
+			/** controller/extjs/catalog/import/text/standard/container/options
 			 * Options changing the expected format for the texts to import
 			 *
 			 * Each content format may support some configuration options to change
@@ -214,9 +214,9 @@ class Standard
 			 * @since 2014.03
 			 * @category Developer
 			 * @category User
-			 * @see controller/extjs/catalog/import/text/default/container/format
+			 * @see controller/extjs/catalog/import/text/standard/container/format
 			 */
-			$container = $this->createContainer( $path, 'controller/extjs/catalog/import/text/default/container' );
+			$container = $this->createContainer( $path, 'controller/extjs/catalog/import/text/standard/container' );
 
 			$textTypeMap = array();
 			foreach( $this->getTextTypes( 'catalog' ) as $item ) {
