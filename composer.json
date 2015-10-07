@@ -19,7 +19,7 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.2.0",
+		"php": ">=5.3.3",
 		"ext-curl": "*",
 		"ext-dom": "*",
 		"ext-json": "*",
