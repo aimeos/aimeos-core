@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\Controller\Jobs\Catalog\Index\Rebuild;
+namespace Aimeos\Controller\Jobs\Index\Rebuild;
 
 
 /**
@@ -31,7 +31,7 @@ class Factory
 	 */
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $name = null )
 	{
-		/** classes/controller/jobs/catalog/index/rebuild/name
+		/** classes/controller/jobs/index/rebuild/name
 		 * Class name of the used catalog index rebuild scheduler controller implementation
 		 *
 		 * Each default job controller can be replace by an alternative imlementation.
@@ -41,15 +41,15 @@ class Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  \Aimeos\Controller\Jobs\Catalog\Index\Rebuild\Standard
+		 *  \Aimeos\Controller\Jobs\Index\Rebuild\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  \Aimeos\Controller\Jobs\Catalog\Index\Rebuild\Myrebuild
+		 *  \Aimeos\Controller\Jobs\Index\Rebuild\Myrebuild
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/catalog/index/rebuild/name = Myrebuild
+		 *  classes/controller/index/rebuild/name = Myrebuild
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -65,21 +65,21 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/jobs/catalog/index/rebuild/name', 'Standard' );
+			$name = $context->getConfig()->get( 'classes/controller/jobs/index/rebuild/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\Jobs\\Catalog\\Index\\Rebuild\\' . $name : '<not a string>';
+			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\Jobs\\Index\\Rebuild\\' . $name : '<not a string>';
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
 		$iface = '\\Aimeos\\Controller\\Jobs\\Iface';
-		$classname = '\\Aimeos\\Controller\\Jobs\\Catalog\\Index\\Rebuild\\' . $name;
+		$classname = '\\Aimeos\\Controller\\Jobs\\Index\\Rebuild\\' . $name;
 
 		$controller = self::createControllerBase( $context, $aimeos, $classname, $iface );
 
-		/** controller/jobs/catalog/index/rebuild/decorators/excludes
+		/** controller/jobs/index/rebuild/decorators/excludes
 		 * Excludes decorators added by the "common" option from the catalog index rebuild controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -91,7 +91,7 @@ class Factory
 		 * "controller/jobs/common/decorators/default" before they are wrapped
 		 * around the job controller.
 		 *
-		 *  controller/jobs/catalog/index/rebuild/decorators/excludes = array( 'decorator1' )
+		 *  controller/jobs/index/rebuild/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("\Aimeos\Controller\Jobs\Common\Decorator\*") added via
@@ -101,11 +101,11 @@ class Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/catalog/index/rebuild/decorators/global
-		 * @see controller/jobs/catalog/index/rebuild/decorators/local
+		 * @see controller/jobs/index/rebuild/decorators/global
+		 * @see controller/jobs/index/rebuild/decorators/local
 		 */
 
-		/** controller/jobs/catalog/index/rebuild/decorators/global
+		/** controller/jobs/index/rebuild/decorators/global
 		 * Adds a list of globally available decorators only to the catalog index rebuild controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -116,7 +116,7 @@ class Factory
 		 * This option allows you to wrap global decorators
 		 * ("\Aimeos\Controller\Jobs\Common\Decorator\*") around the job controller.
 		 *
-		 *  controller/jobs/catalog/index/rebuild/decorators/global = array( 'decorator1' )
+		 *  controller/jobs/index/rebuild/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
 		 * "\Aimeos\Controller\Jobs\Common\Decorator\Decorator1" only to this job controller.
@@ -125,11 +125,11 @@ class Factory
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/catalog/index/rebuild/decorators/excludes
-		 * @see controller/jobs/catalog/index/rebuild/decorators/local
+		 * @see controller/jobs/index/rebuild/decorators/excludes
+		 * @see controller/jobs/index/rebuild/decorators/local
 		 */
 
-		/** controller/jobs/catalog/index/rebuild/decorators/local
+		/** controller/jobs/index/rebuild/decorators/local
 		 * Adds a list of local decorators only to the catalog index rebuild controllers
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
@@ -138,20 +138,20 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\Controller\Jobs\Catalog\Index\Rebuild\Decorator\*") around this job controller.
+		 * ("\Aimeos\Controller\Jobs\Index\Rebuild\Decorator\*") around this job controller.
 		 *
-		 *  controller/jobs/catalog/index/rebuild/decorators/local = array( 'decorator2' )
+		 *  controller/jobs/index/rebuild/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\Controller\Jobs\Catalog\Index\Rebuild\Decorator\Decorator2" only to this job
+		 * "\Aimeos\Controller\Jobs\Index\Rebuild\Decorator\Decorator2" only to this job
 		 * controller.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.09
 		 * @category Developer
 		 * @see controller/jobs/common/decorators/default
-		 * @see controller/jobs/catalog/index/rebuild/decorators/excludes
-		 * @see controller/jobs/catalog/index/rebuild/decorators/global
+		 * @see controller/jobs/index/rebuild/decorators/excludes
+		 * @see controller/jobs/index/rebuild/decorators/global
 		 */
 		return self::addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/rebuild' );
 	}

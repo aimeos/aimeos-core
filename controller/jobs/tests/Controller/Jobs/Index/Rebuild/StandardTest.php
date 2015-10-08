@@ -1,6 +1,6 @@
 <?php
 
-namespace Aimeos\Controller\Jobs\Catalog\Index\Optimize;
+namespace Aimeos\Controller\Jobs\Index\Rebuild;
 
 
 /**
@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelper::getContext();
 		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new \Aimeos\Controller\Jobs\Catalog\Index\Optimize\Standard( $context, $aimeos );
+		$this->object = new \Aimeos\Controller\Jobs\Index\Rebuild\Standard( $context, $aimeos );
 	}
 
 
@@ -41,13 +41,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetName()
 	{
-		$this->assertEquals( 'Catalog index optimization', $this->object->getName() );
+		$this->assertEquals( 'Catalog index rebuild', $this->object->getName() );
 	}
 
 
 	public function testGetDescription()
 	{
-		$text = 'Optimizes the catalog index for searching products';
+		$text = 'Rebuilds the catalog index for searching products';
 		$this->assertEquals( $text, $this->object->getDescription() );
 	}
 
@@ -58,22 +58,23 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$aimeos = \TestHelper::getAimeos();
 
 
-		$name = 'ControllerJobsCatalogIndexOptimizeDefaultRun';
+		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
 		$context->getConfig()->set( 'classes/index/manager/name', $name );
 
 
 		$indexManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Index\\Manager\\Standard' )
-			->setMethods( array( 'optimize' ) )
+			->setMethods( array( 'rebuildIndex', 'cleanupIndex' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
 		\Aimeos\MShop\Catalog\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Index\\Manager\\' . $name, $indexManagerStub );
 
 
-		$indexManagerStub->expects( $this->once() )->method( 'optimize' );
+		$indexManagerStub->expects( $this->once() )->method( 'rebuildIndex' );
+		$indexManagerStub->expects( $this->once() )->method( 'cleanupIndex' );
 
 
-		$object = new \Aimeos\Controller\Jobs\Catalog\Index\Optimize\Standard( $context, $aimeos );
+		$object = new \Aimeos\Controller\Jobs\Index\Rebuild\Standard( $context, $aimeos );
 		$object->run();
 	}
 }

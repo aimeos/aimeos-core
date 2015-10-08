@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\Controller\Jobs\Catalog\Index\Rebuild;
+namespace Aimeos\Controller\Jobs\Index\Rebuild;
 
 
 /**

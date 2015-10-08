@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\Controller\Jobs\Catalog\Index\Optimize;
+namespace Aimeos\Controller\Jobs\Index\Optimize;
 
 
 /**
