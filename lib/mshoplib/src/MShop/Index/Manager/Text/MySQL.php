@@ -22,8 +22,8 @@ class MySQL
 	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	private $searchConfig = array(
-		'catalog.index.text.id' => array(
-			'code'=>'catalog.index.text.id',
+		'index.text.id' => array(
+			'code'=>'index.text.id',
 			'internalcode'=>'mindte."textid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte USE INDEX ("idx_msindte_value", "idx_msindte_p_s_lt_la_ty_va") ON mindte."prodid" = mpro."id"' ),
 			'label'=>'Product index text ID',
@@ -31,16 +31,16 @@ class MySQL
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'catalog.index.text.relevance' => array(
-			'code' => 'catalog.index.text.relevance()',
+		'index.text.relevance' => array(
+			'code' => 'index.text.relevance()',
 			'internalcode' => ':site AND mindte."listtype" = $1 AND ( mindte."langid" = $2 OR mindte."langid" IS NULL ) AND MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
-		'sort:catalog.index.text.relevance' => array(
-			'code' => 'sort:catalog.index.text.relevance()',
+		'sort:index.text.relevance' => array(
+			'code' => 'sort:index.text.relevance()',
 			'internalcode' => 'MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
@@ -56,7 +56,7 @@ class MySQL
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.relevance'], 'mindte."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 
 

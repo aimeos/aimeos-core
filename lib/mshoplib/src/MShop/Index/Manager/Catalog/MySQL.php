@@ -22,8 +22,8 @@ class MySQL
 	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	private $searchConfig = array(
-		'catalog.index.catalog.id' => array(
-			'code'=>'catalog.index.catalog.id',
+		'index.catalog.id' => array(
+			'code'=>'index.catalog.id',
 			'internalcode'=>'mindca."catid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_catalog" AS mindca USE INDEX ("idx_msindca_s_ca_lt_po", "idx_msindca_p_s_ca_lt_po") ON mindca."prodid" = mpro."id"' ),
 			'label'=>'Product index category ID',

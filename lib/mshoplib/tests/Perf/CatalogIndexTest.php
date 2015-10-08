@@ -54,12 +54,12 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.catalog.position', array( 'default', $catId ) ), 0 ),
+			$search->compare( '>=', $search->createFunction( 'index.catalog.position', array( 'default', $catId ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:catalog.index.catalog.position', array( 'default', $catId ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.catalog.position', array( 'default', $catId ) ) ),
 		);
 		$search->setSortations( $sort );
 		$search->setSlice( 0, 1 );
@@ -85,13 +85,13 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'catalog.index.catalog.id', $catId ),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.text.value', array( 'default', 'en', 'name', 'product' ) ), '' ),
+			$search->compare( '==', 'index.catalog.id', $catId ),
+			$search->compare( '>=', $search->createFunction( 'index.text.value', array( 'default', 'en', 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'en', 'name', 'product' ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.text.value', array( 'default', 'en', 'name', 'product' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -116,13 +116,13 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'catalog.index.catalog.id', $catId ),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
+			$search->compare( '==', 'index.catalog.id', $catId ),
+			$search->compare( '>=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -157,13 +157,13 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'catalog.index.catalog.id', (int) $this->catItem->getId() ),
-			$search->compare( '==', $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) ), 2 ),
+			$search->compare( '==', 'index.catalog.id', (int) $this->catItem->getId() ),
+			$search->compare( '==', $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) ), 2 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:catalog.index.catalog.position', array( 'default', $catIds ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.catalog.position', array( 'default', $catIds ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -185,13 +185,13 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
-			$search->compare( '<=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 1000 ),
+			$search->compare( '>=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
+			$search->compare( '<=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 1000 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '+', $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) ) ),
+			$search->sort( '+', $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -213,12 +213,12 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'default', 'en', 'pink' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'default', 'en', 'pink' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.relevance', array( 'default', 'en', 'pink' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:index.text.relevance', array( 'default', 'en', 'pink' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -240,12 +240,12 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'default', 'en', 'blue' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'default', 'en', 'blue' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'en', 'name', 'product' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:index.text.value', array( 'default', 'en', 'name', 'product' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -270,14 +270,14 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'catalog.index.catalog.id', $catId ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'default', 'en', 'plain' ) ), 0 ),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
+			$search->compare( '==', 'index.catalog.id', $catId ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'default', 'en', 'plain' ) ), 0 ),
+			$search->compare( '>=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.relevance', array( 'default', 'en', 'plain' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:index.text.relevance', array( 'default', 'en', 'plain' ) ) ),
 		);
 		$search->setSortations( $sort );
 
@@ -312,15 +312,15 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array(
 			$search->getConditions(),
-			$search->compare( '==', 'catalog.index.catalog.id', (int) $this->catItem->getId() ),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) ), 2 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'default', 'en', 'plain' ) ), 0 ),
-			$search->compare( '>=', $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
+			$search->compare( '==', 'index.catalog.id', (int) $this->catItem->getId() ),
+			$search->compare( '>=', $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) ), 2 ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'default', 'en', 'plain' ) ), 0 ),
+			$search->compare( '>=', $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) ), 0 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$sort = array(
-			$search->sort( '-', $search->createFunction( 'sort:catalog.index.text.relevance', array( 'default', 'en', 'plain' ) ) ),
+			$search->sort( '-', $search->createFunction( 'sort:index.text.relevance', array( 'default', 'en', 'plain' ) ) ),
 		);
 		$search->setSortations( $sort );
 

@@ -29,8 +29,8 @@ class MySQL extends \Aimeos\MW\Common\Criteria\SQL
 	{
 		switch( $name )
 		{
-			case 'catalog.index.text.relevance':
-			case 'sort:catalog.index.text.relevance':
+			case 'index.text.relevance':
+			case 'sort:index.text.relevance':
 
 				if( isset( $params[2] ) )
 				{

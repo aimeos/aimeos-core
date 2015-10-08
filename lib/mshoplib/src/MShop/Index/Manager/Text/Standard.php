@@ -21,8 +21,8 @@ class Standard
 	implements \Aimeos\MShop\Index\Manager\Text\Iface
 {
 	private $searchConfig = array(
-		'catalog.index.text.id' => array(
-			'code'=>'catalog.index.text.id',
+		'index.text.id' => array(
+			'code'=>'index.text.id',
 			'internalcode'=>'mindte."textid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
 			'label'=>'Product index text ID',
@@ -30,8 +30,8 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'catalog.index.text.relevance' => array(
-			'code'=>'catalog.index.text.relevance()',
+		'index.text.relevance' => array(
+			'code'=>'index.text.relevance()',
 			'internalcode'=>'( SELECT COUNT(DISTINCT mindte2."prodid")
 				FROM "mshop_index_text" AS mindte2
 				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" = $1
@@ -41,8 +41,8 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
-		'sort:catalog.index.text.relevance' => array(
-			'code'=>'sort:catalog.index.text.relevance()',
+		'sort:index.text.relevance' => array(
+			'code'=>'sort:index.text.relevance()',
 			'internalcode'=>'( SELECT COUNT(DISTINCT mindte2."prodid")
 				FROM "mshop_index_text" AS mindte2
 				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" = $1
@@ -52,16 +52,16 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
-		'catalog.index.text.value' => array(
-			'code'=>'catalog.index.text.value()',
+		'index.text.value' => array(
+			'code'=>'index.text.value()',
 			'internalcode'=>':site AND mindte."listtype" = $1 AND ( mindte."langid" = $2 OR mindte."langid" IS NULL ) AND mindte."type" = $3 AND mindte."domain" = $4 AND mindte."value"',
 			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'sort:catalog.index.text.value' => array(
-			'code'=>'sort:catalog.index.text.value()',
+		'sort:index.text.value' => array(
+			'code'=>'sort:index.text.value()',
 			'internalcode'=>'mindte."value"',
 			'label'=>'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
@@ -85,9 +85,9 @@ class Standard
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.value'], 'mindte."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.relevance'], 'mindte2."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['sort:catalog.index.text.relevance'], 'mindte2."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.text.value'], 'mindte."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte2."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['sort:index.text.relevance'], 'mindte2."siteid"', $site );
 	}
 
 

@@ -22,8 +22,8 @@ class MySQL
 	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	private $searchConfig = array(
-		'catalog.index.attribute.id' => array(
-			'code'=>'catalog.index.attribute.id',
+		'index.attribute.id' => array(
+			'code'=>'index.attribute.id',
 			'internalcode'=>'mindat."attrid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat USE INDEX ("idx_msindat_s_at_lt", "idx_msindat_p_s_at_lt") ON mindat."prodid" = mpro."id"' ),
 			'label'=>'Product index attribute ID',

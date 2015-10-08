@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch( true );
-		$result = $this->object->aggregate( $search, 'catalog.index.attribute.id' );
+		$result = $this->object->aggregate( $search, 'index.attribute.id' );
 
 		$this->assertEquals( 12, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrItem->getId() ) );
 		$result = $this->object->searchItems( $search );
 
 
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrItem->getId() ) );
 		$result2 = $this->object->searchItems( $search );
 
 
@@ -165,26 +165,26 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrWidthItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrWidthItem->getId() ) );
 
 		$result = $this->object->searchItems( $search, array() );
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.attribute.id', $attrLengthItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrLengthItem->getId() ) );
 
 		$result = $this->object->searchItems( $search, array() );
 		$this->assertEquals( 3, count( $result ) );
 
-		$search->setConditions( $search->compare( '!=', 'catalog.index.attribute.id', null ) );
+		$search->setConditions( $search->compare( '!=', 'index.attribute.id', null ) );
 
 		$result = $this->object->searchItems( $search, array() );
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
 
 		$attrIds = array( (int) $attrLengthItem->getId(), (int) $attrWidthItem->getId() );
-		$func = $search->createFunction( 'catalog.index.attributecount', array( 'variant', $attrIds ) );
+		$func = $search->createFunction( 'index.attributecount', array( 'variant', $attrIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count attributes
 		$result = $this->object->searchItems( $search, array() );
 
@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'CNE', $product->getCode() );
 
 
-		$func = $search->createFunction( 'catalog.index.attribute.code', array( 'default', 'size' ) );
+		$func = $search->createFunction( 'index.attribute.code', array( 'default', 'size' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'x' ) );
 
 		$result = $this->object->searchItems( $search, array() );

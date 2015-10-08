@@ -88,8 +88,8 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
 			switch( $attribute->getCode() )
 			{
-				case 'catalog.index.text.relevance()':
-				case 'sort:catalog.index.text.relevance()':
+				case 'index.text.relevance()':
+				case 'sort:index.text.relevance()':
 					$this->assertGreaterThanOrEqual( 0, strpos( $attribute->getInternalCode(), 'MATCH' ) );
 			}
 		}
@@ -102,13 +102,13 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
 
-		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
+		$func = $search->createFunction( 'index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
 		$conditions = array(
 			$search->compare( '>', $func, 0 ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 		$result = $this->object->searchItems( $search, array(), $total );
 
@@ -116,13 +116,13 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype19', 'de', 'name', 'product' ) );
+		$func = $search->createFunction( 'index.text.value', array( 'unittype19', 'de', 'name', 'product' ) );
 		$conditions = array(
 			$search->compare( '~=', $func, 'Noir' ), // text value
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'de', 'name' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 		$result = $this->object->searchItems( $search, array(), $total );
 
@@ -160,8 +160,8 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
 		$search = $textMgr->createSearch();
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'unittype19', $langid, 'noir cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'noir cap' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

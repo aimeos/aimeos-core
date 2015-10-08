@@ -305,7 +305,7 @@ class Standard
 				$filter->setSortations( array() ); // it's not necessary and slows down the query
 
 				$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
-				$view->attributeCountList = $controller->aggregateIndex( $filter, 'catalog.index.attribute.id' );
+				$view->attributeCountList = $controller->aggregateIndex( $filter, 'index.attribute.id' );
 			}
 
 			$this->cache = $view;

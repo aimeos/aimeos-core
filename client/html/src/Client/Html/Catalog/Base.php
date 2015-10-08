@@ -36,7 +36,7 @@ abstract class Base
 
 		if( !empty( $attrids ) )
 		{
-			$func = $filter->createFunction( 'catalog.index.attributeaggregate', array( array_keys( $attrids ) ) );
+			$func = $filter->createFunction( 'index.attributeaggregate', array( array_keys( $attrids ) ) );
 			$expr = array(
 				$filter->getConditions(),
 				$filter->compare( '==', $func, count( $attrids ) ),

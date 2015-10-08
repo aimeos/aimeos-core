@@ -21,8 +21,8 @@ class Standard
 	implements \Aimeos\MShop\Index\Manager\Price\Iface
 {
 	private $searchConfig = array(
-		'catalog.index.price.id' => array(
-			'code'=>'catalog.index.price.id',
+		'index.price.id' => array(
+			'code'=>'index.price.id',
 			'internalcode'=>'mindpr."priceid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr ON mindpr."prodid" = mpro."id"' ),
 			'label'=>'Product index price ID',
@@ -30,72 +30,72 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.index.price.quantity' => array(
-			'code'=>'catalog.index.price.quantity',
+		'index.price.quantity' => array(
+			'code'=>'index.price.quantity',
 			'internalcode'=>'mindpr."quantity"',
 			'label'=>'Product price quantity',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.index.price.value' => array(
-			'code'=>'catalog.index.price.value()',
+		'index.price.value' => array(
+			'code'=>'index.price.value()',
 			'internalcode'=>':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."value"',
 			'label'=>'Product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'sort:catalog.index.price.value' => array(
-			'code'=>'sort:catalog.index.price.value()',
+		'sort:index.price.value' => array(
+			'code'=>'sort:index.price.value()',
 			'internalcode'=>'mindpr."value"',
 			'label'=>'Sort product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'catalog.index.price.costs' => array(
-			'code'=>'catalog.index.price.costs()',
+		'index.price.costs' => array(
+			'code'=>'index.price.costs()',
 			'internalcode'=>':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."costs"',
 			'label'=>'Product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'sort:catalog.index.price.costs' => array(
-			'code'=>'sort:catalog.index.price.costs()',
+		'sort:index.price.costs' => array(
+			'code'=>'sort:index.price.costs()',
 			'internalcode'=>'mindpr."costs"',
 			'label'=>'Sort product (shipping) costs, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'catalog.index.price.rebate' => array(
-			'code'=>'catalog.index.price.rebate()',
+		'index.price.rebate' => array(
+			'code'=>'index.price.rebate()',
 			'internalcode'=>':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."rebate"',
 			'label'=>'Product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'sort:catalog.index.price.rebate' => array(
-			'code'=>'sort:catalog.index.price.rebate()',
+		'sort:index.price.rebate' => array(
+			'code'=>'sort:index.price.rebate()',
 			'internalcode'=>'mindpr."rebate"',
 			'label'=>'Sort product price rebate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'catalog.index.price.taxrate' => array(
-			'code'=>'catalog.index.price.taxrate()',
+		'index.price.taxrate' => array(
+			'code'=>'index.price.taxrate()',
 			'internalcode'=>':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."taxrate"',
 			'label'=>'Product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'decimal',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'sort:catalog.index.price.taxrate' => array(
-			'code'=>'sort:catalog.index.price.taxrate()',
+		'sort:index.price.taxrate' => array(
+			'code'=>'sort:index.price.taxrate()',
 			'internalcode'=>'mindpr."taxrate"',
 			'label'=>'Sort product price taxrate, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type'=> 'string',
@@ -118,11 +118,11 @@ class Standard
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.price.quantity'], 'mindpr."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.price.value'], 'mindpr."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.price.costs'], 'mindpr."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.price.rebate'], 'mindpr."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.price.taxrate'], 'mindpr."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.price.quantity'], 'mindpr."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.price.value'], 'mindpr."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.price.costs'], 'mindpr."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.price.rebate'], 'mindpr."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.price.taxrate'], 'mindpr."siteid"', $site );
 	}
 
 

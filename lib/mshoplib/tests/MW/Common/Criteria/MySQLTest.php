@@ -50,11 +50,11 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 	{
 		$params = array( 'listtype', 'langid', 'test string' );
 
-		$str = $this->object->createFunction( 'catalog.index.text.relevance', $params );
-		$this->assertEquals( 'catalog.index.text.relevance("listtype","langid"," +test* +string*")', $str );
+		$str = $this->object->createFunction( 'index.text.relevance', $params );
+		$this->assertEquals( 'index.text.relevance("listtype","langid"," +test* +string*")', $str );
 
-		$str = $this->object->createFunction( 'sort:catalog.index.text.relevance', $params );
-		$this->assertEquals( 'sort:catalog.index.text.relevance("listtype","langid"," +test* +string*")', $str );
+		$str = $this->object->createFunction( 'sort:index.text.relevance', $params );
+		$this->assertEquals( 'sort:index.text.relevance("listtype","langid"," +test* +string*")', $str );
 	}
 
 }

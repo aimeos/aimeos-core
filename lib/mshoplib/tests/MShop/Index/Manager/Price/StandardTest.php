@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch( true );
-		$result = $this->object->aggregate( $search, 'catalog.index.price.id' );
+		$result = $this->object->aggregate( $search, 'index.price.id' );
 
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.price.id', $priceItem->getId() ) );
 		$result = $this->object->searchItems( $search );
 
 
@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.price.id', $priceItem->getId() ) );
 		$result2 = $this->object->searchItems( $search );
 
 
@@ -154,7 +154,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No price with type "default" available in product CNC' );
 		}
 
-		$search->setConditions( $search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.price.id', $priceItem->getId() ) );
 		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$search->setConditions( $search->compare( '!=', 'catalog.index.price.id', null ) );
+		$search->setConditions( $search->compare( '!=', 'index.price.id', null ) );
 		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$search->setConditions( $search->compare( '==', 'catalog.index.price.quantity', 1 ) );
+		$search->setConditions( $search->compare( '==', 'index.price.quantity', 1 ) );
 		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
@@ -187,14 +187,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) );
 		$expr = array(
 			$search->compare( '>=', $func, '10.00' ),
-			$search->compare( '==', 'catalog.index.price.quantity', 1 ),
+			$search->compare( '==', 'index.price.quantity', 1 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array() );
@@ -207,10 +207,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '>=', $func, '18.00' ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array() );
@@ -223,10 +223,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '>=', $func, '20.00' ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array() );
@@ -239,10 +239,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '==', $func, '1.50' ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.price.costs', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array() );
@@ -255,10 +255,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'catalog.index.price.taxrate', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price.taxrate', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '==', $func, '19.00' ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.price.taxrate', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price.taxrate', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array() );

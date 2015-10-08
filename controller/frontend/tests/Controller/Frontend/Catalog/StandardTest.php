@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testAggregateIndex()
 	{
 		$filter = $this->object->createIndexFilter();
-		$list = $this->object->aggregateIndex( $filter, 'catalog.index.attribute.id' );
+		$list = $this->object->aggregateIndex( $filter, 'index.attribute.id' );
 
 		$this->assertGreaterThan( 0, count( $list ) );
 	}
@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Common\Criteria\Expression\Compare\Iface ) ) {
 			throw new \Exception( 'Wrong expression' );
 		}
-		$this->assertEquals( 'catalog.index.catalog.id', $list[0]->getName() );
+		$this->assertEquals( 'index.catalog.id', $list[0]->getName() );
 		$this->assertEquals( 0, $list[0]->getValue() );
 
 
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Sortation not set' );
 		}
 
-		$this->assertEquals( 'sort:catalog.index.catalog.position("test",0)', $item->getName() );
+		$this->assertEquals( 'sort:index.catalog.position("test",0)', $item->getName() );
 		$this->assertEquals( '-', $item->getOperator() );
 
 		$this->assertEquals( 1, $filter->getSliceStart() );
@@ -152,7 +152,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Sortation not set' );
 		}
 
-		$this->assertEquals( 'sort:catalog.index.text.value("default","de","name")', $item->getName() );
+		$this->assertEquals( 'sort:index.text.value("default","de","name")', $item->getName() );
 	}
 
 
@@ -167,7 +167,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Sortation not set' );
 		}
 
-		$this->assertStringStartsWith( 'sort:catalog.index.price.value("default","EUR","default")', $item->getName() );
+		$this->assertStringStartsWith( 'sort:index.price.value("default","EUR","default")', $item->getName() );
 	}
 
 
@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Wrong expression' );
 		}
 
-		$this->assertEquals( 'catalog.index.catalog.id', $list[0]->getName() );
+		$this->assertEquals( 'index.catalog.id', $list[0]->getName() );
 		$this->assertEquals( 0, $list[0]->getValue() );
 		$this->assertEquals( array(), $filter->getSortations() );
 	}
@@ -209,7 +209,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Common\Criteria\Expression\Compare\Iface ) ) {
 			throw new \Exception( 'Wrong expression' );
 		}
-		$this->assertEquals( 'catalog.index.text.relevance("default","de","Espresso")', $list[0]->getName() );
+		$this->assertEquals( 'index.text.relevance("default","de","Espresso")', $list[0]->getName() );
 		$this->assertEquals( 0, $list[0]->getValue() );
 
 
@@ -256,7 +256,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Sortation not set' );
 		}
 
-		$this->assertEquals( 'sort:catalog.index.text.value("default","de","name")', $item->getName() );
+		$this->assertEquals( 'sort:index.text.value("default","de","name")', $item->getName() );
 	}
 
 
@@ -271,7 +271,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Sortation not set' );
 		}
 
-		$this->assertStringStartsWith( 'sort:catalog.index.price.value("default","EUR","default")', $item->getName() );
+		$this->assertStringStartsWith( 'sort:index.price.value("default","EUR","default")', $item->getName() );
 	}
 
 
@@ -295,7 +295,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Wrong expression' );
 		}
 
-		$this->assertEquals( 'catalog.index.text.relevance("default","de","Espresso")', $list[0]->getName() );
+		$this->assertEquals( 'index.text.relevance("default","de","Espresso")', $list[0]->getName() );
 		$this->assertEquals( 0, $list[0]->getValue() );
 		$this->assertEquals( array(), $filter->getSortations() );
 	}

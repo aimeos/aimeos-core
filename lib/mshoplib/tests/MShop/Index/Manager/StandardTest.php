@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch( true );
-		$result = $this->object->aggregate( $search, 'catalog.index.attribute.id' );
+		$result = $this->object->aggregate( $search, 'index.attribute.id' );
 
 		$this->assertEquals( 12, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
@@ -221,7 +221,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr = array(
 			$search->compare( '~=', 'product.label', 'Cafe Noire' ),
 			$search->compare( '==', 'product.editor', $this->editor ),
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
+			$search->compare( '!=', 'index.catalog.id', null ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -298,7 +298,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$conditions = array(
-			$search->compare( '==', 'catalog.index.attribute.id', $attrWidthItem->getId() ),
+			$search->compare( '==', 'index.attribute.id', $attrWidthItem->getId() ),
 			$search->compare( '==', 'product.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -309,8 +309,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$expr = array(
-			$search->compare( '!=', 'catalog.index.attribute.id', null ),
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
+			$search->compare( '!=', 'index.attribute.id', null ),
+			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 
@@ -322,7 +322,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$attrIds = array( (int) $attrWidthItem->getId(), (int) $attrLenItem->getId() );
-		$func = $search->createFunction( 'catalog.index.attributecount', array( 'variant', $attrIds ) );
+		$func = $search->createFunction( 'index.attributecount', array( 'variant', $attrIds ) );
 		$conditions = array(
 			$search->compare( '==', $func, 2 ), // count attributes
 			$search->compare( '==', 'product.editor', $this->editor )
@@ -335,9 +335,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 2, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.attribute.code', array( 'default', 'size' ) );
+		$func = $search->createFunction( 'index.attribute.code', array( 'default', 'size' ) );
 		$expr = array(
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
+			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '~=', $func, 'x' ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
@@ -381,7 +381,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
-		$sortfunc = $search->createFunction( 'sort:catalog.index.catalog.position', array( 'promotion', $catItem->getId() ) );
+		$sortfunc = $search->createFunction( 'sort:index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 		$search->setSlice( 0, 1 );
 
@@ -394,7 +394,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$conditions = array(
-			$search->compare( '==', 'catalog.index.catalog.id', $catItem->getId() ), // catalog ID
+			$search->compare( '==', 'index.catalog.id', $catItem->getId() ), // catalog ID
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -405,7 +405,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$conditions = array(
-			$search->compare( '!=', 'catalog.index.catalog.id', null ), // catalog ID
+			$search->compare( '!=', 'index.catalog.id', null ), // catalog ID
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -415,14 +415,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 7, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.catalog.position', array( 'promotion', $catItem->getId() ) );
+		$func = $search->createFunction( 'index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$conditions = array(
 			$search->compare( '>=', $func, 0 ), // position
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.catalog.position', array( 'promotion', $catItem->getId() ) );
+		$sortfunc = $search->createFunction( 'sort:index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array(), $total );
@@ -432,7 +432,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$catIds = array( (int) $catItem->getId(), (int) $catNewItem->getId() );
-		$func = $search->createFunction( 'catalog.index.catalogcount', array( 'default', $catIds ) );
+		$func = $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) );
 		$conditions = array(
 			$search->compare( '==', $func, 2 ), // count categories
 			$search->compare( '==', 'product.editor', $this->editor )
@@ -458,7 +458,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$conditions = array(
-			$search->compare( '==', 'catalog.index.price.id', $priceItem->getId() ),
+			$search->compare( '==', 'index.price.id', $priceItem->getId() ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -469,8 +469,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$expr = array(
-			$search->compare( '!=', 'catalog.index.price.id', null ),
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
+			$search->compare( '!=', 'index.price.id', null ),
+			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -480,15 +480,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 6, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) );
 		$expr = array(
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
+			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '>=', $func, '18.00' ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array(), $total );
@@ -514,7 +514,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 1 );
 
 		$conditions = array(
-			$search->compare( '==', 'catalog.index.text.id', $textItem->getId() ),
+			$search->compare( '==', 'index.text.id', $textItem->getId() ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -525,8 +525,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$expr = array(
-			$search->compare( '!=', 'catalog.index.text.id', null ),
-			$search->compare( '!=', 'catalog.index.catalog.id', null ),
+			$search->compare( '!=', 'index.text.id', null ),
+			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -537,14 +537,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 3, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$conditions = array(
 			$search->compare( '>', $func, 0 ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $object->searchItems( $search, array(), $total );
@@ -553,14 +553,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, $total );
 
 
-		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
+		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
 		$conditions = array(
 			$search->compare( '~=', $func, 'Expr' ), // text value
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'de', 'name' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $object->searchItems( $search, array(), $total );
@@ -594,8 +594,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search = $textMgr->createSearch();
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -633,10 +633,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$config->set( 'mshop/index/manager/standard/index', 'all' );
 		$this->object->rebuildIndex();
 
-		$afterInsertAttr = $this->getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
-		$afterInsertPrice = $this->getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
-		$afterInsertText = $this->getCatalogSubDomainItems( 'catalog.index.text.id', 'text' );
-		$afterInsertCat = $this->getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
+		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
+		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
+		$afterInsertText = $this->getCatalogSubDomainItems( 'index.text.id', 'text' );
+		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//restore index with categorized products only
 		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
@@ -658,10 +658,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		//delete whole catalog
 		$this->object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
-		$afterDeleteAttr = $this->getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
-		$afterDeletePrice = $this->getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
-		$afterDeleteText = $this->getCatalogSubDomainItems( 'catalog.index.text.id', 'text' );
-		$afterDeleteCat = $this->getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
+		$afterDeleteAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
+		$afterDeletePrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
+		$afterDeleteText = $this->getCatalogSubDomainItems( 'index.text.id', 'text' );
+		$afterDeleteCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//insert cne, cnc
 		$search = $manager->createSearch();
@@ -670,10 +670,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->rebuildIndex( $items );
 
-		$afterInsertAttr = $this->getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
-		$afterInsertPrice = $this->getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
-		$afterInsertText = $this->getCatalogSubDomainItems( 'catalog.index.text.id', 'text' );
-		$afterInsertCat = $this->getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
+		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
+		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
+		$afterInsertText = $this->getCatalogSubDomainItems( 'index.text.id', 'text' );
+		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//delete cne, cnc
 		foreach( $items as $item ) {
@@ -712,10 +712,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$config->set( 'mshop/index/manager/standard/index', 'categorized' );
 		$this->object->rebuildIndex();
 
-		$afterInsertAttr = $this->getCatalogSubDomainItems( 'catalog.index.attribute.id', 'attribute' );
-		$afterInsertPrice = $this->getCatalogSubDomainItems( 'catalog.index.price.id', 'price' );
-		$afterInsertText = $this->getCatalogSubDomainItems( 'catalog.index.text.id', 'text' );
-		$afterInsertCat = $this->getCatalogSubDomainItems( 'catalog.index.catalog.id', 'catalog' );
+		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
+		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
+		$afterInsertText = $this->getCatalogSubDomainItems( 'index.text.id', 'text' );
+		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//check inserted items
 		$this->assertEquals( 7, count( $afterInsertAttr ) );

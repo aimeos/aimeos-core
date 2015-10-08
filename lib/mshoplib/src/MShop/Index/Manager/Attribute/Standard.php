@@ -21,8 +21,8 @@ class Standard
 	implements \Aimeos\MShop\Index\Manager\Attribute\Iface
 {
 	private $searchConfig = array(
-		'catalog.index.attribute.id' => array(
-			'code'=>'catalog.index.attribute.id',
+		'index.attribute.id' => array(
+			'code'=>'index.attribute.id',
 			'internalcode'=>'mindat."attrid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat ON mindat."prodid" = mpro."id"' ),
 			'label'=>'Product index attribute ID',
@@ -30,16 +30,16 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.index.attribute.code' => array(
-			'code'=>'catalog.index.attribute.code()',
+		'index.attribute.code' => array(
+			'code'=>'index.attribute.code()',
 			'internalcode'=>':site AND mindat."listtype" = $1 AND mindat."type" = $2 AND mindat."code"',
 			'label'=>'Attribute code, parameter(<list type code>,<attribute type code>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'catalog.index.attributecount' => array(
-			'code'=>'catalog.index.attributecount()',
+		'index.attributecount' => array(
+			'code'=>'index.attributecount()',
 			'internalcode'=>'( SELECT COUNT(DISTINCT mindat_cnt."attrid")
 				FROM "mshop_index_attribute" AS mindat_cnt
 				WHERE mpro."id" = mindat_cnt."prodid" AND :site
@@ -49,8 +49,8 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'catalog.index.attributeaggregate' => array(
-			'code'=>'catalog.index.attributeaggregate()',
+		'index.attributeaggregate' => array(
+			'code'=>'index.attributeaggregate()',
 			'internalcode'=>'( SELECT COUNT(DISTINCT mindat_agg."attrid")
 				FROM "mshop_index_attribute" AS mindat_agg
 				WHERE mpro."id" = mindat_agg."prodid" AND :site
@@ -76,9 +76,9 @@ class Standard
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attribute.code'], 'mindat."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attributecount'], 'mindat_cnt."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attributeaggregate'], 'mindat_agg."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.attribute.code'], 'mindat."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.attributecount'], 'mindat_cnt."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['index.attributeaggregate'], 'mindat_agg."siteid"', $site );
 	}
 
 

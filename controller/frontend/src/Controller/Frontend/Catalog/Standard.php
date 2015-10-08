@@ -83,7 +83,7 @@ class Standard
 	 * Returns the aggregated count of products for the given key.
 	 *
 	 * @param \Aimeos\MW\Common\Criteria\Iface $filter Critera object which contains the filter conditions
-	 * @param string $key Search key to aggregate for, e.g. "catalog.index.attribute.id"
+	 * @param string $key Search key to aggregate for, e.g. "index.attribute.id"
 	 * @return array Associative list of key values as key and the product count for this key as value
 	 * @since 2015.08
 	 */
@@ -110,7 +110,7 @@ class Standard
 		$context = $this->getContext();
 
 		$search = \Aimeos\MShop\Factory::createManager( $context, 'index' )->createSearch( true );
-		$expr = array( $search->compare( '!=', 'catalog.index.catalog.id', null ) );
+		$expr = array( $search->compare( '!=', 'index.catalog.id', null ) );
 
 		switch( $sort )
 		{
@@ -121,20 +121,20 @@ class Standard
 			case 'name':
 				$langid = $context->getLocale()->getLanguageId();
 
-				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name', 'product' ) );
+				$cmpfunc = $search->createFunction( 'index.text.value', array( $listtype, $langid, 'name', 'product' ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, '' );
 
-				$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( $listtype, $langid, 'name' ) );
+				$sortfunc = $search->createFunction( 'sort:index.text.value', array( $listtype, $langid, 'name' ) );
 				$sortations[] = $search->sort( $direction, $sortfunc );
 				break;
 
 			case 'price':
 				$currencyid = $context->getLocale()->getCurrencyId();
 
-				$cmpfunc = $search->createFunction( 'catalog.index.price.value', array( $listtype, $currencyid, 'default' ) );
+				$cmpfunc = $search->createFunction( 'index.price.value', array( $listtype, $currencyid, 'default' ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, '0.00' );
 
-				$sortfunc = $search->createFunction( 'sort:catalog.index.price.value', array( $listtype, $currencyid, 'default' ) );
+				$sortfunc = $search->createFunction( 'sort:index.price.value', array( $listtype, $currencyid, 'default' ) );
 				$sortations[] = $search->sort( $direction, $sortfunc );
 				break;
 		}
@@ -164,14 +164,14 @@ class Standard
 	public function createIndexFilterCategory( $catid, $sort = null, $direction = '+', $start = 0, $size = 100, $listtype = 'default' )
 	{
 		$search = $this->createIndexFilter( $sort, $direction, $start, $size, $listtype );
-		$expr = array( $search->compare( '==', 'catalog.index.catalog.id', $catid ) );
+		$expr = array( $search->compare( '==', 'index.catalog.id', $catid ) );
 
 		if( $sort === 'relevance' )
 		{
-			$cmpfunc = $search->createFunction( 'catalog.index.catalog.position', array( $listtype, $catid ) );
+			$cmpfunc = $search->createFunction( 'index.catalog.position', array( $listtype, $catid ) );
 			$expr[] = $search->compare( '>=', $cmpfunc, 0 );
 
-			$sortfunc = $search->createFunction( 'sort:catalog.index.catalog.position', array( $listtype, $catid ) );
+			$sortfunc = $search->createFunction( 'sort:index.catalog.position', array( $listtype, $catid ) );
 			$search->setSortations( array( $search->sort( $direction, $sortfunc ) ) );
 		}
 
@@ -198,9 +198,9 @@ class Standard
 	{
 		$langid = $this->getContext()->getLocale()->getLanguageId();
 		$search = $this->createIndexFilter( $sort, $direction, $start, $size, $listtype );
-		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
+		$expr = array( $search->compare( '>', $search->createFunction( 'index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
 
-		// we don't need to sort by 'sort:catalog.index.text.relevance' because it's a boolean match (relevance is either 0 or 1)
+		// we don't need to sort by 'sort:index.text.relevance' because it's a boolean match (relevance is either 0 or 1)
 
 		$expr[] = $search->getConditions();
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -219,7 +219,7 @@ class Standard
 	 */
 	public function addIndexFilterCategory( \Aimeos\MW\Common\Criteria\Iface $search, $catid )
 	{
-		$expr = array( $search->compare( '==', 'catalog.index.catalog.id', $catid ) );
+		$expr = array( $search->compare( '==', 'index.catalog.id', $catid ) );
 
 		$expr[] = $search->getConditions();
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -240,7 +240,7 @@ class Standard
 	public function addIndexFilterText( \Aimeos\MW\Common\Criteria\Iface $search, $input, $listtype = 'default' )
 	{
 		$langid = $this->getContext()->getLocale()->getLanguageId();
-		$expr = array( $search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
+		$expr = array( $search->compare( '>', $search->createFunction( 'index.text.relevance', array( $listtype, $langid, $input ) ), 0 ) );
 
 		$expr[] = $search->getConditions();
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -309,8 +309,8 @@ class Standard
 		$search = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'index/text' )->createSearch( true );
 
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, $type, 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( $listtype, $langid, $input ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text.value', array( $listtype, $langid, $type, 'product' ) ), '' ),
 		);
 
 		$sortations = array();
@@ -318,15 +318,15 @@ class Standard
 		switch( $sort )
 		{
 			case 'name':
-				$cmpfunc = $search->createFunction( 'catalog.index.text.value', array( $listtype, $langid, 'name', 'product' ) );
+				$cmpfunc = $search->createFunction( 'index.text.value', array( $listtype, $langid, 'name', 'product' ) );
 				$expr[] = $search->compare( '>=', $cmpfunc, '' );
 
-				$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( $listtype, $langid, 'name' ) );
+				$sortfunc = $search->createFunction( 'sort:index.text.value', array( $listtype, $langid, 'name' ) );
 				$sortations[] = $search->sort( $direction, $sortfunc );
 				break;
 
 			case 'relevance':
-				// we don't need to sort by 'sort:catalog.index.text.relevance' because it's a boolean match (relevance is either 0 or 1)
+				// we don't need to sort by 'sort:index.text.relevance' because it's a boolean match (relevance is either 0 or 1)
 		}
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

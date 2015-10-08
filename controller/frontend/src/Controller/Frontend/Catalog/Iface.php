@@ -68,7 +68,7 @@ interface Iface
 	 * Returns the aggregated count of products from the index for the given key.
 	 *
 	 * @param \Aimeos\MW\Common\Criteria\Iface $filter Critera object which contains the filter conditions
-	 * @param string $key Search key to aggregate for, e.g. "catalog.index.attribute.id"
+	 * @param string $key Search key to aggregate for, e.g. "index.attribute.id"
 	 * @return array Associative list of key values as key and the product count for this key as value
 	 * @since 2015.08
 	 */

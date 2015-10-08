@@ -88,7 +88,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch( true );
-		$result = $this->object->aggregate( $search, 'catalog.index.text.id' );
+		$result = $this->object->aggregate( $search, 'index.text.id' );
 
 		$this->assertEquals( 18, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
 		$result = $this->object->searchItems( $search );
 
 
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
 		$result2 = $this->object->searchItems( $search );
 
 
@@ -156,32 +156,32 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No text with type "name" available in product CNC' );
 		}
 
-		$search->setConditions( $search->compare( '==', 'catalog.index.text.id', $textItem->getId() ) );
+		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
 		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 1, count( $result ) );
 
-		$search->setConditions( $search->compare( '!=', 'catalog.index.text.id', null ) );
+		$search->setConditions( $search->compare( '!=', 'index.text.id', null ) );
 
 		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
 
-		$func = $search->createFunction( 'catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$search->setConditions( $search->compare( '>', $func, 0 ) ); // text relevance
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 1, count( $result ) );
 
-		$func = $search->createFunction( 'catalog.index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
+		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value
 
-		$sortfunc = $search->createFunction( 'sort:catalog.index.text.value', array( 'default', 'de', 'name' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, array() );
@@ -212,8 +212,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'catalog.index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

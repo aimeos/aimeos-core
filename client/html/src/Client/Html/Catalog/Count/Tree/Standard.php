@@ -283,7 +283,7 @@ class Standard
 				$filter->setSortations( array() ); // it's not necessary and slows down the query
 
 				$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
-				$view->treeCountList = $controller->aggregateIndex( $filter, 'catalog.index.catalog.id' );
+				$view->treeCountList = $controller->aggregateIndex( $filter, 'index.catalog.id' );
 			}
 
 			$this->cache = $view;
