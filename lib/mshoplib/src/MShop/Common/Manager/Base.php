@@ -127,7 +127,7 @@ abstract class Base
 				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
 			}
 
-			/** @todo Required to get the joins for the catalog index managers, but there should be a better way */
+			/** @todo Required to get the joins for the index managers, but there should be a better way */
 			$expr = array( $search->getConditions(), $search->compare( '!=', $key, null ) );
 			$search->setConditions( $search->combine( '&&', $expr ) );
 

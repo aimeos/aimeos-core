@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Rebuilds the catalog index.
+ * Rebuilds the index.
  */
 class CatalogRebuildPerfIndex extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
@@ -46,14 +46,13 @@ class CatalogRebuildPerfIndex extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 
 	/**
-	 * Rebuilds the catalog index.
+	 * Rebuilds the index.
 	 */
 	protected function process()
 	{
-		$this->msg( 'Rebuilding catalog index for performance data', 0 );
+		$this->msg( 'Rebuilding index for performance data', 0 );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->getContext() );
-		$catalogManager->getSubManager( 'index' )->rebuildIndex();
+		\Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->getContext() )->rebuildIndex();
 
 		$this->status( 'done' );
 	}

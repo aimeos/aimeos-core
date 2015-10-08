@@ -89,7 +89,7 @@ class Standard
 	 */
 	public function aggregateIndex( \Aimeos\MW\Common\Criteria\Iface $filter, $key )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/index' )->aggregate( $filter, $key );
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'index' )->aggregate( $filter, $key );
 	}
 
 
@@ -109,7 +109,7 @@ class Standard
 		$sortations = array();
 		$context = $this->getContext();
 
-		$search = \Aimeos\MShop\Factory::createManager( $context, 'catalog/index' )->createSearch( true );
+		$search = \Aimeos\MShop\Factory::createManager( $context, 'index' )->createSearch( true );
 		$expr = array( $search->compare( '!=', 'catalog.index.catalog.id', null ) );
 
 		switch( $sort )
@@ -260,7 +260,7 @@ class Standard
 	 */
 	public function getIndexItems( \Aimeos\MW\Common\Criteria\Iface $filter, array $domains = array( 'media', 'price', 'text' ), &$total = null )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/index' )->searchItems( $filter, $domains, $total );
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'index' )->searchItems( $filter, $domains, $total );
 	}
 
 
@@ -306,7 +306,7 @@ class Standard
 		$locale = $this->getContext()->getLocale();
 		$langid = $locale->getLanguageId();
 
-		$search = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/index/text' )->createSearch( true );
+		$search = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'index/text' )->createSearch( true );
 
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'catalog.index.text.relevance', array( $listtype, $langid, $input ) ), 0 ),
@@ -345,6 +345,6 @@ class Standard
 	 */
 	public function getTextList( \Aimeos\MW\Common\Criteria\Iface $filter )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/index/text' )->searchTexts( $filter );
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'index/text' )->searchTexts( $filter );
 	}
 }

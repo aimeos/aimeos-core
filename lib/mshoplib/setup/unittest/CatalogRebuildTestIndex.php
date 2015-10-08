@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Rebuilds the catalog index.
+ * Rebuilds the index.
  */
 class CatalogRebuildTestIndex extends \Aimeos\MW\Setup\Task\Base
 {
@@ -46,7 +46,7 @@ class CatalogRebuildTestIndex extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Rebuilds the catalog index.
+	 * Rebuilds the index.
 	 */
 	protected function process()
 	{
@@ -56,12 +56,12 @@ class CatalogRebuildTestIndex extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
-		$this->msg( 'Rebuilding catalog index for test data', 0 );
+		$this->msg( 'Rebuilding index for test data', 0 );
 
-		$catalogIndexManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->additional )->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->additional );
 
-		$catalogIndexManager->rebuildIndex();
-		$catalogIndexManager->optimize();
+		$indexManager->rebuildIndex();
+		$indexManager->optimize();
 
 		$this->status( 'done' );
 	}

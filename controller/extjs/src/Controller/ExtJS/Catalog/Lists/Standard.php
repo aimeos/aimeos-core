@@ -183,7 +183,7 @@ class Standard
 		$search->setConditions( $search->compare( '==', 'product.id', $prodIds ) );
 		$search->setSlice( 0, count( $prodIds ) );
 
-		$indexManager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/index' );
+		$indexManager = \Aimeos\MShop\Factory::createManager( $context, 'index' );
 		$indexManager->rebuildIndex( $productManager->searchItems( $search ) );
 	}
 

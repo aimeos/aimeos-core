@@ -59,26 +59,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerJobsCatalogIndexOptimizeDefaultRun';
-		$context->getConfig()->set( 'classes/catalog/manager/name', $name );
+		$context->getConfig()->set( 'classes/index/manager/name', $name );
 
 
-		$catalogManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Catalog\\Manager\\Standard' )
-			->setMethods( array( 'getSubManager' ) )
-			->setConstructorArgs( array( $context ) )
-			->getMock();
-
-		$catalogIndexManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Catalog\\Manager\\Index\\Standard' )
+		$indexManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Index\\Manager\\Standard' )
 			->setMethods( array( 'optimize' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		\Aimeos\MShop\Catalog\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Catalog\\Manager\\' . $name, $catalogManagerStub );
+		\Aimeos\MShop\Catalog\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Index\\Manager\\' . $name, $indexManagerStub );
 
 
-		$catalogManagerStub->expects( $this->once() )->method( 'getSubManager' )
-			->will( $this->returnValue( $catalogIndexManagerStub ) );
-
-		$catalogIndexManagerStub->expects( $this->once() )->method( 'optimize' );
+		$indexManagerStub->expects( $this->once() )->method( 'optimize' );
 
 
 		$object = new \Aimeos\Controller\Jobs\Catalog\Index\Optimize\Standard( $context, $aimeos );

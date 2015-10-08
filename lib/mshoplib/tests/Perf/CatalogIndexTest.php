@@ -32,7 +32,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		// parser warm up so files are already parsed (same as APC is used)
 
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, 10 );
 
@@ -48,8 +48,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -69,7 +68,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media', 'attribute' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index list by category, sort by position (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index list by category, sort by position (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -80,8 +79,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -101,7 +99,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index list by category, sort by name (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index list by category, sort by name (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -112,8 +110,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -133,7 +130,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index list by category, sort by price (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index list by category, sort by price (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -154,8 +151,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -175,7 +171,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index search by category count, sort by position (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index search by category count, sort by position (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -183,8 +179,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -204,7 +199,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index search by price range, sort by price (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index search by price range, sort by price (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -212,8 +207,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -232,7 +226,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index search by text, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index search by text, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -240,8 +234,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 	{
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -260,7 +253,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index search by text, sort by name (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index search by text, sort by name (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -271,8 +264,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -293,7 +285,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index search by category/text/price, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index search by category/text/price, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 
@@ -314,8 +306,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 		$start = microtime( true );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
-		$indexManager = $catalogManager->getSubManager( 'index' );
+		$indexManager = \Aimeos\MShop\Index\Manager\Factory::createManager( $this->context );
 		$search = $indexManager->createSearch( true );
 		$search->setSlice( 0, $this->slizeSize );
 
@@ -337,7 +328,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $indexManager->searchItems( $search, array( 'text', 'price', 'media' ), $total );
 
 		$stop = microtime( true );
-		printf( "\n    catalog index search by category count/text/price, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
+		printf( "\n    index search by category count/text/price, sort by relevance (%1\$d/%2\$d): %3\$f msec\n", count( $result ), $total, ( $stop - $start ) * 1000 );
 	}
 
 }

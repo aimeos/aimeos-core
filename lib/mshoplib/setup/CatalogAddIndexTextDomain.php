@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds domain column to catalog index text table.
+ * Adds domain column to index text table.
  */
 class CatalogAddIndexTextDomain extends \Aimeos\MW\Setup\Task\Base
 {
@@ -56,7 +56,7 @@ class CatalogAddIndexTextDomain extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process( $stmts )
 	{
-		$this->msg( 'Adding domain column to catalog index text table', 0 );
+		$this->msg( 'Adding domain column to index text table', 0 );
 		$this->status( '' );
 
 		$table = 'mshop_catalog_index_text';

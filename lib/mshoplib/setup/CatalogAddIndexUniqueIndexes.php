@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds unique indexes to all catalog index tables.
+ * Adds unique indexes to all index tables.
  */
 class CatalogAddIndexUniqueIndexes extends \Aimeos\MW\Setup\Task\Base
 {
@@ -129,13 +129,13 @@ class CatalogAddIndexUniqueIndexes extends \Aimeos\MW\Setup\Task\Base
 	}
 
 	/**
-	 * Adds unique constraints to catalog index tables.
+	 * Adds unique constraints to index tables.
 	 *
 	 * @param array $stmts Associative list of table name / constraint name / SQL statement to execute
 	 */
 	protected function process( $stmts )
 	{
-		$this->msg( 'Adding unique constraints to catalog index tables', 0 );
+		$this->msg( 'Adding unique constraints to index tables', 0 );
 		$this->status( '' );
 
 		foreach( $stmts as $table => $list )

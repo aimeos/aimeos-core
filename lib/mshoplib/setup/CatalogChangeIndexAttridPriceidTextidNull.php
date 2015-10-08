@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Changes the attrid/priceid/textid column to allow NULL in catalog index attr/price/text table.
+ * Changes the attrid/priceid/textid column to allow NULL in index attr/price/text table.
  */
 class CatalogChangeIndexAttridPriceidTextidNull extends \Aimeos\MW\Setup\Task\Base
 {
@@ -63,7 +63,7 @@ class CatalogChangeIndexAttridPriceidTextidNull extends \Aimeos\MW\Setup\Task\Ba
 	 */
 	protected function process( $stmts )
 	{
-		$this->msg( 'Changing reference ID columns of catalog index tables to NULL', 0 );
+		$this->msg( 'Changing reference ID columns of index tables to NULL', 0 );
 		$this->status( '' );
 
 		foreach( $stmts as $table => $pairs )

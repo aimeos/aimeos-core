@@ -75,7 +75,7 @@ abstract class Base
 
 
 	/**
-	 * Rebuild the catalog index for searching products.
+	 * Rebuild the index for searching products.
 	 * This can be a long lasting operation.
 	 */
 	public function rebuildIndex()

@@ -59,27 +59,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
-		$context->getConfig()->set( 'classes/catalog/manager/name', $name );
+		$context->getConfig()->set( 'classes/index/manager/name', $name );
 
 
-		$catalogManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Catalog\\Manager\\Standard' )
-			->setMethods( array( 'getSubManager' ) )
-			->setConstructorArgs( array( $context ) )
-			->getMock();
-
-		$catalogIndexManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Catalog\\Manager\\Index\\Standard' )
+		$indexManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Index\\Manager\\Standard' )
 			->setMethods( array( 'rebuildIndex', 'cleanupIndex' ) )
 			->setConstructorArgs( array( $context ) )
 			->getMock();
 
-		\Aimeos\MShop\Catalog\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Catalog\\Manager\\' . $name, $catalogManagerStub );
+		\Aimeos\MShop\Catalog\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Index\\Manager\\' . $name, $indexManagerStub );
 
 
-		$catalogManagerStub->expects( $this->once() )->method( 'getSubManager' )
-			->will( $this->returnValue( $catalogIndexManagerStub ) );
-
-		$catalogIndexManagerStub->expects( $this->once() )->method( 'rebuildIndex' );
-		$catalogIndexManagerStub->expects( $this->once() )->method( 'cleanupIndex' );
+		$indexManagerStub->expects( $this->once() )->method( 'rebuildIndex' );
+		$indexManagerStub->expects( $this->once() )->method( 'cleanupIndex' );
 
 
 		$object = new \Aimeos\Controller\Jobs\Catalog\Index\Rebuild\Standard( $context, $aimeos );

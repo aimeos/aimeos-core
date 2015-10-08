@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds priceid/textid column to catalog index price/text table.
+ * Adds priceid/textid column to index price/text table.
  */
 class CatalogRenameIndexShippingToCosts extends \Aimeos\MW\Setup\Task\Base
 {
@@ -54,7 +54,7 @@ class CatalogRenameIndexShippingToCosts extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process( $stmts )
 	{
-		$this->msg( 'Renameing shipping to costs in catalog index price table', 0 );
+		$this->msg( 'Renameing shipping to costs in index price table', 0 );
 
 		if( $this->schema->tableExists( 'mshop_catalog_index_price' ) === true
 			&& $this->schema->columnExists( 'mshop_catalog_index_price', 'shipping' ) === true )

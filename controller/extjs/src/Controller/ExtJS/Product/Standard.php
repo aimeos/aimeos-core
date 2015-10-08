@@ -48,7 +48,7 @@ class Standard
 		$this->setLocale( $params->site );
 
 		$manager = $this->getManager();
-		$indexManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/index' );
+		$indexManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'index' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.id', $params->items ) );

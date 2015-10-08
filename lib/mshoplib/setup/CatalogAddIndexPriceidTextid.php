@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds priceid/textid column to catalog index price/text table.
+ * Adds priceid/textid column to index price/text table.
  */
 class CatalogAddIndexPriceidTextid extends \Aimeos\MW\Setup\Task\Base
 {
@@ -64,7 +64,7 @@ class CatalogAddIndexPriceidTextid extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process( $stmts )
 	{
-		$this->msg( 'Adding reference ID columns to catalog index tables', 0 );
+		$this->msg( 'Adding reference ID columns to index tables', 0 );
 		$this->status( '' );
 
 		foreach( $stmts as $id => $sql )

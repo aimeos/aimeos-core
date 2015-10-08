@@ -50,7 +50,6 @@ class Standard
 	 */
 	public function run()
 	{
-		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->getContext() );
-		$manager->getSubManager( 'index' )->optimize();
+		\Aimeos\MShop\Index\Manager\Factory::createManager( $this->getContext() )->optimize();
 	}
 }

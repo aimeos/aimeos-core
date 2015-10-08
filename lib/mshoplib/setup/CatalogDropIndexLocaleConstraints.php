@@ -10,7 +10,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Removes constraints from catalog index tables.
+ * Removes constraints from index tables.
  */
 class CatalogDropIndexLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 {
@@ -80,7 +80,7 @@ class CatalogDropIndexLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process( array $stmts )
 	{
-		$this->msg( 'Removing constraints from catalog index tables', 0 );
+		$this->msg( 'Removing constraints from index tables', 0 );
 		$this->status( '' );
 
 		$schema = $this->getSchema( 'db-product' );
