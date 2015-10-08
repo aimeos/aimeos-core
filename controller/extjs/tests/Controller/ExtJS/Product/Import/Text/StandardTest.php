@@ -146,7 +146,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context );
 
-		$testfiledir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
+		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
 
 		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
 

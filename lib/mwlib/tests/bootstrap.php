@@ -26,7 +26,7 @@ setlocale(LC_TIME, 'POSIX');
 /*
  * Set include path for tests
  */
-$testdir =  dirname( __FILE__ );
+$testdir =  __DIR__;
 $srcdir =  dirname( $testdir ) . DIRECTORY_SEPARATOR . 'src';
 $libdir =  dirname( $testdir ) . DIRECTORY_SEPARATOR . 'lib';
 

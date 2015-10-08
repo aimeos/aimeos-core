@@ -59,7 +59,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'text.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'text.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for text domain', $path ) );

@@ -42,7 +42,7 @@ class TestHelper
 			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos::autoload' );
 
-			$extdir = dirname( dirname( dirname( dirname( __FILE__ ) ) ) );
+			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
 			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );
 		}
 
@@ -57,7 +57,7 @@ class TestHelper
 
 
 		$paths = $aimeos->getConfigPaths( 'mysql' );
-		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
+		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
 		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );

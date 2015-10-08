@@ -25,8 +25,8 @@ class Test extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$this->manifestPath = dirname( __FILE__ ) . $ds . 'manifests' . $ds;
-		$this->deployPath = dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . $ds;
+		$this->manifestPath = __DIR__ . $ds . 'manifests' . $ds;
+		$this->deployPath = __DIR__ . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . $ds;
 		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest.jsb2' );
 	}
 
@@ -41,7 +41,7 @@ class Test extends \PHPUnit_Framework_TestCase
 	{
 		$ds = DIRECTORY_SEPARATOR;
 
-		$this->delTree( dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' );
+		$this->delTree( __DIR__ . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' );
 	}
 
 
@@ -162,8 +162,8 @@ class Test extends \PHPUnit_Framework_TestCase
 	public function testGetHTMLFilemtimeException()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$filename = dirname( __FILE__ ) . $ds . 'test.js';
-		$alteredFilename = dirname( __FILE__ ) . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . 'test.js';
+		$filename = __DIR__ . $ds . 'test.js';
+		$alteredFilename = __DIR__ . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . 'test.js';
 
 		copy( $filename, $alteredFilename );
 		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_filemtime_exception.jsb2' );

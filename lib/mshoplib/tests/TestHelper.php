@@ -31,7 +31,7 @@ class TestHelper
 	{
 		if( !isset( self::$aimeos ) )
 		{
-			require_once dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
+			require_once dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
 			self::$aimeos = new \Aimeos\Bootstrap( array(), false );
 		}
@@ -50,7 +50,7 @@ class TestHelper
 
 
 		$paths = $aimeos->getConfigPaths( 'mysql' );
-		$paths[] = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'config';
+		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
 		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );

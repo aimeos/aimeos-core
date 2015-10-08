@@ -23,7 +23,7 @@ class MShopJsbPackageTask extends Task
 	public function init()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$this->projectPath = realpath( dirname( __FILE__ ) . $ds . '..' . $ds . '..' );
+		$this->projectPath = realpath( __DIR__ . $ds . '..' . $ds . '..' );
 
 		require_once $this->projectPath . $ds . 'Bootstrap.php';
 		spl_autoload_register( 'Aimeos\Bootstrap::autoload' );

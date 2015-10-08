@@ -60,7 +60,7 @@ class MShopAddWarehouseData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding warehouse data', 0 );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'warehouse.php';
+		$path = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'warehouse.php';
 
 		if( ( $data = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product stock domain', $path ) );

@@ -75,7 +75,7 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$adminJobManager = \Aimeos\MAdmin\Job\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'job.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'job.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for job domain', $path ) );

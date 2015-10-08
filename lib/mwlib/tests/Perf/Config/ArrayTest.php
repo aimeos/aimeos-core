@@ -14,8 +14,8 @@ class ArrayTest extends \PHPUnit_Framework_TestCase
 		$start = microtime( true );
 
 		$paths = array(
-			dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'one',
-			dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'two',
+			__DIR__ . DIRECTORY_SEPARATOR . 'one',
+			__DIR__ . DIRECTORY_SEPARATOR . 'two',
 		);
 
 		for( $i = 0; $i < 1000; $i++ )

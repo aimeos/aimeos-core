@@ -53,7 +53,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding coupon test data', 0 );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'coupon.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'coupon.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for coupon test data', $path ) );

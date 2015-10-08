@@ -67,7 +67,7 @@ class LocaleAddPerfData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 		if( $this->additional->getConfig()->get( 'setup/site' ) === 'unitperf' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
-			$filename = dirname( __FILE__ ) . $ds . 'data' . $ds . 'locale.php';
+			$filename = __DIR__ . $ds . 'data' . $ds . 'locale.php';
 
 			if( ( $testdata = include( $filename ) ) == false ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );

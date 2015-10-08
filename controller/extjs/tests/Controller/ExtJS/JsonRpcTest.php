@@ -35,7 +35,7 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$this->testdir = dirname( __FILE__ ) . $ds . '_testfiles' . $ds . 'jsonrpc' . $ds;
+		$this->testdir = __DIR__ . $ds . '_testfiles' . $ds . 'jsonrpc' . $ds;
 	}
 
 

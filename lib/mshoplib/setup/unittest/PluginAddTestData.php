@@ -75,7 +75,7 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$pluginTypeManager = $pluginManager->getSubManager( 'type', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'plugin.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'plugin.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for plugin domain', $path ) );

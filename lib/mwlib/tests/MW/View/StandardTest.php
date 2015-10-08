@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testAssignRender()
 	{
 		$this->object->addHelper( 'translate', $this->translate );
-		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles'. DIRECTORY_SEPARATOR . 'template';
+		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles'. DIRECTORY_SEPARATOR . 'template';
 
 
 		$this->object->assign( array( 'quantity' => 1 ) );

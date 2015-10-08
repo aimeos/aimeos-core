@@ -63,7 +63,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 
-		$filename = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'plugin.php';
+		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'plugin.php';
 
 		if( ( $data = include( $filename ) ) == false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No data file "%1$s" found', $filename ) );

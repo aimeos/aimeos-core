@@ -25,9 +25,9 @@ class SerializedArrayTest extends \PHPUnit_Framework_TestCase
 		$ds = DIRECTORY_SEPARATOR;
 
 		$translationSources = array(
-			'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ),
-			'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ), // no file for ru_XX!
-			'thirdtestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case3' ),
+			'testDomain' => array( __DIR__ . $ds . 'testfiles' . $ds . 'case1' ),
+			'otherTestDomain' => array( __DIR__ . $ds . 'testfiles' . $ds . 'case2' ), // no file for ru_XX!
+			'thirdtestDomain' => array( __DIR__ . $ds . 'testfiles' . $ds . 'case3' ),
 		);
 
 		$this->object = new \Aimeos\MW\Translation\SerializedArray( $translationSources, 'ru_XX' );
@@ -86,7 +86,7 @@ class SerializedArrayTest extends \PHPUnit_Framework_TestCase
 	public function testAbstractGetTranslationFileFallback()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$srcs = array( 'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ) );
+		$srcs = array( 'testDomain' => array( __DIR__ . $ds . 'testfiles' . $ds . 'case1' ) );
 		$object = new \Aimeos\MW\Translation\SerializedArray( $srcs, 'de_DE' );
 
 		$this->assertEquals( 'plural 1 translation', $object->dn( 'testDomain', 'File', 'Files', 5 ) );
@@ -98,7 +98,7 @@ class SerializedArrayTest extends \PHPUnit_Framework_TestCase
 	public function testAbstractGetTranslationFileFallbackNoFile()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$srcs = array( 'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ) );
+		$srcs = array( 'otherTestDomain' => array( __DIR__ . $ds . 'testfiles' . $ds . 'case2' ) );
 		$object = new \Aimeos\MW\Translation\SerializedArray( $srcs, 'de' );
 
 		$this->assertEquals( 'Test default return', $object->dt( 'otherTestDomain', 'Test default return' ) );
@@ -108,7 +108,7 @@ class SerializedArrayTest extends \PHPUnit_Framework_TestCase
 	public function testAbstractGetTranslationFileFallbackInvalidLocale()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$srcs = array( 'otherTestDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case2' ) );
+		$srcs = array( 'otherTestDomain' => array( __DIR__ . $ds . 'testfiles' . $ds . 'case2' ) );
 		$object = new \Aimeos\MW\Translation\SerializedArray( $srcs, 'xx_XX' );
 
 		$this->assertEquals( 'Test default return', $object->dt( 'otherTestDomain', 'Test default return' ) );
@@ -135,7 +135,7 @@ class SerializedArrayTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$ds = DIRECTORY_SEPARATOR;
-		$srcs = array( 'testDomain' => array( dirname(__FILE__) . $ds . 'testfiles' . $ds . 'case1' ) );
+		$srcs = array( 'testDomain' => array( __DIR__ . $ds . 'testfiles' . $ds . 'case1' ) );
 
 		foreach( $lcList as $index => $lcs )
 		{

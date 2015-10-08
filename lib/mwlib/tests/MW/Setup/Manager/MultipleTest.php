@@ -51,7 +51,7 @@ Executing TwoTask                                                     OK
 
 		$conn = $this->dbm->acquire();
 
-		$taskPath = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks';
+		$taskPath = __DIR__ . DIRECTORY_SEPARATOR . 'tasks';
 		$object = new \Aimeos\MW\Setup\Manager\Standard( $conn, $this->config->get( 'resource/db', array() ), $taskPath );
 
 		$this->dbm->release( $conn );
@@ -77,8 +77,8 @@ Executing ThreeTask                                                   OK
 		$conn = $this->dbm->acquire();
 
 		$taskPath =  array(
-			dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks',
-			dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tasks2',
+			__DIR__ . DIRECTORY_SEPARATOR . 'tasks',
+			__DIR__ . DIRECTORY_SEPARATOR . 'tasks2',
 		);
 
 		$object = new \Aimeos\MW\Setup\Manager\Standard( $conn, $this->config->get( 'resource/db', array() ), $taskPath );

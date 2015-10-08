@@ -74,7 +74,7 @@ class CacheAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$manager = \Aimeos\MAdmin\Cache\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'cache.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'cache.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for cache domain', $path ) );

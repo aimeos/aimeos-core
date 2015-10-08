@@ -22,8 +22,8 @@ class PHPArrayTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$dir = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfiles';
-		$dir2 = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testowrite';
+		$dir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles';
+		$dir2 = __DIR__ . DIRECTORY_SEPARATOR . 'testowrite';
 
 		$conf = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
 		$this->object = new \Aimeos\MW\Config\PHPArray( $conf, array( $dir, $dir2 ) );

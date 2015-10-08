@@ -503,10 +503,10 @@ class Crypt_RSA {
         if ( CRYPT_RSA_MODE == CRYPT_RSA_MODE_OPENSSL && $bits >= 384 && CRYPT_RSA_EXPONENT == 65537) {
             $rsa = openssl_pkey_new(array(
                 'private_key_bits' => $bits,
-                'config' => dirname(__FILE__) . '/../openssl.cnf'
+                'config' => __DIR__ . '/../openssl.cnf'
             ));
 
-            openssl_pkey_export($rsa, $privatekey, NULL, array('config' => dirname(__FILE__) . '/../openssl.cnf'));
+            openssl_pkey_export($rsa, $privatekey, NULL, array('config' => __DIR__ . '/../openssl.cnf'));
             $publickey = openssl_pkey_get_details($rsa);
             $publickey = $publickey['key'];
 

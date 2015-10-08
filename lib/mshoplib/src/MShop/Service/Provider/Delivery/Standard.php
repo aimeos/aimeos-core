@@ -219,7 +219,7 @@ class Standard
 	 */
 	protected function checkResponse( $response, $invoiceid )
 	{
-		$responseXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-response_v1.xsd';
+		$responseXSD = __DIR__ . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-response_v1.xsd';
 
 		$dom = new \DOMDocument( '1.0', 'UTF-8' );
 		$dom->preserveWhiteSpace = false;
@@ -297,7 +297,7 @@ class Standard
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $e->getMessage() ), 0, $e );
 		}
 
-		$requestXSD = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-request_v1.xsd';
+		$requestXSD = __DIR__ . DIRECTORY_SEPARATOR . 'xsd' . DIRECTORY_SEPARATOR . 'order-request_v1.xsd';
 
 		if( $dom->schemaValidate( $requestXSD ) !== true )
 		{

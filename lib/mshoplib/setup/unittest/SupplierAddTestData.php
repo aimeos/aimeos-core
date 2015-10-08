@@ -75,7 +75,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$supplierAddressManager = $supplierManager->getSubManager( 'address', 'Standard' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'supplier.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'supplier.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier domain', $path ) );

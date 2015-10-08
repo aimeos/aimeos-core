@@ -21,7 +21,7 @@ class CSVTest extends \PHPUnit_Framework_TestCase
 
 	public function testNewFile()
 	{
-		$csv = new \Aimeos\MW\Container\Content\CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile', 'temp' );
+		$csv = new \Aimeos\MW\Container\Content\CSV( __DIR__ . DIRECTORY_SEPARATOR . 'tempfile', 'temp' );
 
 		$check = file_exists( $csv->getResource() );
 		unlink( $csv->getResource() );
@@ -33,7 +33,7 @@ class CSVTest extends \PHPUnit_Framework_TestCase
 
 	public function testExistingFile()
 	{
-		$csv = new \Aimeos\MW\Container\Content\CSV( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv', 'test' );
+		$csv = new \Aimeos\MW\Container\Content\CSV( __DIR__ . DIRECTORY_SEPARATOR . 'testfile.csv', 'test' );
 
 		$this->assertEquals( true, file_exists( $csv->getResource() ) );
 	}
@@ -49,7 +49,7 @@ class CSVTest extends \PHPUnit_Framework_TestCase
 			'csv-lineend-subst' => " ",
 		);
 
-		$path = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'tempfile';
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'tempfile';
 
 		$csv = new \Aimeos\MW\Container\Content\CSV( $path, 'temp', $options );
 
@@ -77,7 +77,7 @@ class CSVTest extends \PHPUnit_Framework_TestCase
 
 	public function testIterator()
 	{
-		$filename = dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'testfile.csv';
+		$filename = __DIR__ . DIRECTORY_SEPARATOR . 'testfile.csv';
 		$csv = new \Aimeos\MW\Container\Content\CSV( $filename, 'test' );
 
 		$expected = array(

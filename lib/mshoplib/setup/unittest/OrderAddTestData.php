@@ -71,7 +71,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = dirname( __FILE__ ) . $ds . 'data' . $ds . 'order.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'order.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for order domain', $path ) );

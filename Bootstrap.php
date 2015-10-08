@@ -27,12 +27,12 @@ class Bootstrap
 	 *
 	 * @param array $extdirs List of directories to look for manifest files (or sub-directories thereof)
 	 * @param boolean $defaultdir If default extension directory should be included automatically
-	 * @param string|null $basedir Aimeos core path (optional, dirname(__FILE__) if null)
+	 * @param string|null $basedir Aimeos core path (optional, __DIR__ if null)
 	 */
 	public function __construct( array $extdirs = array(), $defaultdir = true, $basedir = null )
 	{
 		if( $basedir === null ) {
-			$basedir = dirname( __FILE__ );
+			$basedir = __DIR__;
 		}
 
 		if( $defaultdir === true && is_dir( $basedir . DIRECTORY_SEPARATOR . 'ext' ) === true ) {

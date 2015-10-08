@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$tempdir = $context->getConfig()->get( 'controller/extjs/media/standard/upload/directory', 'tmp/media' );
 		$this->directory = PATH_TESTS . DIRECTORY_SEPARATOR . $tempdir;
-		$testfiledir = dirname( __FILE__ ) . '/testfiles';
+		$testfiledir = __DIR__ . '/testfiles';
 
 		if( !is_dir( $this->directory ) && mkdir( $this->directory, 0755, true ) === false ) {
 			throw new \Exception( sprintf( 'Unable to create directory "%1%s"', $this->directory ) );

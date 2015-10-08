@@ -66,7 +66,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 
 
 		$ds = DIRECTORY_SEPARATOR;
-		$filename = dirname( __FILE__ ) . $ds . 'default' . $ds . 'data' . $ds . 'type.php';
+		$filename = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'type.php';
 
 		if( ( $testdata = include( $filename ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No type file found in "%1$s"', $filename ) );
