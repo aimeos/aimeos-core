@@ -23,8 +23,8 @@ class Standard
 	private $searchConfig = array(
 		'catalog.index.text.id' => array(
 			'code'=>'catalog.index.text.id',
-			'internalcode'=>'mcatinte."textid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_text" AS mcatinte ON mcatinte."prodid" = mpro."id"' ),
+			'internalcode'=>'mindte."textid"',
+			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
 			'label'=>'Product index text ID',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -32,10 +32,10 @@ class Standard
 		),
 		'catalog.index.text.relevance' => array(
 			'code'=>'catalog.index.text.relevance()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinte2."prodid")
-				FROM "mshop_catalog_index_text" AS mcatinte2
-				WHERE mpro."id" = mcatinte2."prodid" AND :site AND mcatinte2."listtype" = $1
-				AND ( mcatinte2."langid" = $2 OR mcatinte2."langid" IS NULL ) AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
+			'internalcode'=>'( SELECT COUNT(DISTINCT mindte2."prodid")
+				FROM "mshop_index_text" AS mindte2
+				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" = $1
+				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -43,10 +43,10 @@ class Standard
 		),
 		'sort:catalog.index.text.relevance' => array(
 			'code'=>'sort:catalog.index.text.relevance()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinte2."prodid")
-				FROM "mshop_catalog_index_text" AS mcatinte2
-				WHERE mpro."id" = mcatinte2."prodid" AND :site AND mcatinte2."listtype" = $1
-				AND ( mcatinte2."langid" = $2 OR mcatinte2."langid" IS NULL ) AND POSITION( $3 IN mcatinte2."value" ) > 0 )',
+			'internalcode'=>'( SELECT COUNT(DISTINCT mindte2."prodid")
+				FROM "mshop_index_text" AS mindte2
+				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" = $1
+				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -54,7 +54,7 @@ class Standard
 		),
 		'catalog.index.text.value' => array(
 			'code'=>'catalog.index.text.value()',
-			'internalcode'=>':site AND mcatinte."listtype" = $1 AND ( mcatinte."langid" = $2 OR mcatinte."langid" IS NULL ) AND mcatinte."type" = $3 AND mcatinte."domain" = $4 AND mcatinte."value"',
+			'internalcode'=>':site AND mindte."listtype" = $1 AND ( mindte."langid" = $2 OR mindte."langid" IS NULL ) AND mindte."type" = $3 AND mindte."domain" = $4 AND mindte."value"',
 			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -62,7 +62,7 @@ class Standard
 		),
 		'sort:catalog.index.text.value' => array(
 			'code'=>'sort:catalog.index.text.value()',
-			'internalcode'=>'mcatinte."value"',
+			'internalcode'=>'mindte."value"',
 			'label'=>'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -85,9 +85,9 @@ class Standard
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.value'], 'mcatinte."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['sort:catalog.index.text.relevance'], 'mcatinte2."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.value'], 'mindte."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.text.relevance'], 'mindte2."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['sort:catalog.index.text.relevance'], 'mindte2."siteid"', $site );
 	}
 
 

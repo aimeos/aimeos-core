@@ -24,8 +24,8 @@ class MySQL
 	private $searchConfig = array(
 		'catalog.index.catalog.id' => array(
 			'code'=>'catalog.index.catalog.id',
-			'internalcode'=>'mcatinca."catid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_catalog" AS mcatinca USE INDEX ("idx_mscatinca_s_ca_lt_po", "idx_mscatinca_p_s_ca_lt_po") ON mcatinca."prodid" = mpro."id"' ),
+			'internalcode'=>'mindca."catid"',
+			'internaldeps'=>array( 'LEFT JOIN "mshop_index_catalog" AS mindca USE INDEX ("idx_msindca_s_ca_lt_po", "idx_msindca_p_s_ca_lt_po") ON mindca."prodid" = mpro."id"' ),
 			'label'=>'Product index category ID',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

@@ -143,10 +143,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$dbm = $context->getDatabaseManager();
 		$siteId = $context->getLocale()->getSiteId();
 
-		$sqlAttribute = 'SELECT COUNT(*) as count FROM "mshop_catalog_index_attribute" WHERE "siteid" = ? AND "prodid" = ?';
-		$sqlCatalog = 'SELECT COUNT(*) as count FROM "mshop_catalog_index_catalog" WHERE "siteid" = ? AND "prodid" = ?';
-		$sqlPrice = 'SELECT COUNT(*) as count FROM "mshop_catalog_index_price" WHERE "siteid" = ? AND "prodid" = ?';
-		$sqlText = 'SELECT COUNT(*) as count FROM "mshop_catalog_index_text" WHERE "siteid" = ? AND "prodid" = ?';
+		$sqlAttribute = 'SELECT COUNT(*) as count FROM "mshop_index_attribute" WHERE "siteid" = ? AND "prodid" = ?';
+		$sqlCatalog = 'SELECT COUNT(*) as count FROM "mshop_index_catalog" WHERE "siteid" = ? AND "prodid" = ?';
+		$sqlPrice = 'SELECT COUNT(*) as count FROM "mshop_index_price" WHERE "siteid" = ? AND "prodid" = ?';
+		$sqlText = 'SELECT COUNT(*) as count FROM "mshop_index_text" WHERE "siteid" = ? AND "prodid" = ?';
 
 		$this->object->saveItem( $item );
 
@@ -197,9 +197,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$dbm = $context->getDatabaseManager();
 		$siteId = $context->getLocale()->getSiteId();
 
-		$sqlProd = 'SELECT "value" FROM "mshop_catalog_index_text"
+		$sqlProd = 'SELECT "value" FROM "mshop_index_text"
 			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'product\'';
-		$sqlAttr = 'SELECT "value" FROM "mshop_catalog_index_text"
+		$sqlAttr = 'SELECT "value" FROM "mshop_index_text"
 			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'attribute\'';
 
 		$this->object->saveItem( $item );

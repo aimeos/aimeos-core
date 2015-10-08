@@ -8,11 +8,11 @@
 return array(
 	'item' => array(
 		'delete' => '
-			DELETE FROM "mshop_catalog_index_text"
+			DELETE FROM "mshop_index_text"
 			WHERE :cond AND "siteid" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_catalog_index_text" (
+			INSERT INTO "mshop_index_text" (
 				"prodid", "siteid", "textid", "langid", "listtype", "type",
 				"domain", "value", "mtime", "editor", "ctime"
 			) VALUES (
@@ -39,14 +39,14 @@ return array(
 		',
 	),
 	'cleanup' => '
-		DELETE FROM "mshop_catalog_index_text"
+		DELETE FROM "mshop_index_text"
 		WHERE "ctime" < ? AND "siteid" = ?
 	',
 	'text' => array(
 		'search' => '
-			SELECT DISTINCT mcatinte."prodid", mcatinte."value"
-			FROM "mshop_catalog_index_text" AS mcatinte
-			JOIN "mshop_product" AS mpro ON mpro."id" = mcatinte."prodid"
+			SELECT DISTINCT mindte."prodid", mindte."value"
+			FROM "mshop_index_text" AS mindte
+			JOIN "mshop_product" AS mpro ON mpro."id" = mindte."prodid"
 			WHERE :cond
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start

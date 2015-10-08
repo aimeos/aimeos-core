@@ -23,8 +23,8 @@ class Standard
 	private $searchConfig = array(
 		'catalog.index.catalog.id' => array(
 			'code'=>'catalog.index.catalog.id',
-			'internalcode'=>'mcatinca."catid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_catalog" AS mcatinca ON mcatinca."prodid" = mpro."id"' ),
+			'internalcode'=>'mindca."catid"',
+			'internaldeps'=>array( 'LEFT JOIN "mshop_index_catalog" AS mindca ON mindca."prodid" = mpro."id"' ),
 			'label'=>'Product index category ID',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -32,10 +32,10 @@ class Standard
 		),
 		'catalog.index.catalogaggregate' => array(
 			'code'=>'catalog.index.catalogaggregate()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinca_agg."catid")
-				FROM "mshop_catalog_index_catalog" AS mcatinca_agg
-				WHERE mpro."id" = mcatinca_agg."prodid" AND :site
-				AND mcatinca_agg."catid" IN ( $1 ) )',
+			'internalcode'=>'( SELECT COUNT(DISTINCT mindca_agg."catid")
+				FROM "mshop_index_catalog" AS mindca_agg
+				WHERE mpro."id" = mindca_agg."prodid" AND :site
+				AND mindca_agg."catid" IN ( $1 ) )',
 			'label'=>'Number of product categories, parameter(<category IDs>)',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -43,10 +43,10 @@ class Standard
 		),
 		'catalog.index.catalogcount' => array(
 			'code'=>'catalog.index.catalogcount()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinca_cnt."catid")
-				FROM "mshop_catalog_index_catalog" AS mcatinca_cnt
-				WHERE mpro."id" = mcatinca_cnt."prodid" AND :site
-				AND mcatinca_cnt."catid" IN ( $2 ) AND mcatinca_cnt."listtype" = $1 )',
+			'internalcode'=>'( SELECT COUNT(DISTINCT mindca_cnt."catid")
+				FROM "mshop_index_catalog" AS mindca_cnt
+				WHERE mpro."id" = mindca_cnt."prodid" AND :site
+				AND mindca_cnt."catid" IN ( $2 ) AND mindca_cnt."listtype" = $1 )',
 			'label'=>'Number of product categories, parameter(<list type code>,<category IDs>)',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -54,7 +54,7 @@ class Standard
 		),
 		'catalog.index.catalog.position' => array(
 			'code'=>'catalog.index.catalog.position()',
-			'internalcode'=>':site AND mcatinca."catid" = $2 AND mcatinca."listtype" = $1 AND mcatinca."pos"',
+			'internalcode'=>':site AND mindca."catid" = $2 AND mindca."listtype" = $1 AND mindca."pos"',
 			'label'=>'Product position in category, parameter(<list type code>,<category ID>)',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -62,7 +62,7 @@ class Standard
 		),
 		'sort:catalog.index.catalog.position' => array(
 			'code'=>'sort:catalog.index.catalog.position()',
-			'internalcode'=>'mcatinca."pos"',
+			'internalcode'=>'mindca."pos"',
 			'label'=>'Sort product position in category, parameter(<list type code>,<category ID>)',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -84,9 +84,9 @@ class Standard
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalog.position'], 'mcatinca."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalogaggregate'], 'mcatinca_agg."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalogcount'], 'mcatinca_cnt."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalog.position'], 'mindca."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalogaggregate'], 'mindca_agg."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.catalogcount'], 'mindca_cnt."siteid"', $site );
 	}
 
 

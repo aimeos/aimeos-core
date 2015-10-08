@@ -2,6 +2,7 @@
 -- Category database definitions
 --
 -- Copyright (c) Metaways Infosystems GmbH, 2014
+-- Copyright (c) Aimeos (aimeos.org), 2015
 -- License LGPLv3, http://opensource.org/licenses/LGPL-3.0
 --
 
@@ -15,7 +16,7 @@ SET SESSION sql_mode='ANSI';
 --
 
 
-CREATE TABLE "mshop_catalog_index_attribute" (
+CREATE TABLE "mshop_index_attribute" (
 	-- Product id
 	"prodid" INTEGER NOT NULL,
 	-- site id, references mshop_locale_site.id
@@ -34,16 +35,16 @@ CREATE TABLE "mshop_catalog_index_attribute" (
 	"ctime" DATETIME NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
-CONSTRAINT "unq_mscatinat_p_s_aid_lt"
+CONSTRAINT "unq_msindat_p_s_aid_lt"
 	UNIQUE ("prodid", "siteid", "attrid", "listtype")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX "idx_mscatinat_s_at_lt" ON "mshop_catalog_index_attribute" ("siteid", "attrid", "listtype");
+CREATE INDEX "idx_msindat_s_at_lt" ON "mshop_index_attribute" ("siteid", "attrid", "listtype");
 
-CREATE INDEX "idx_mscatinat_p_s_lt_t_c" ON "mshop_catalog_index_attribute" ("prodid", "siteid", "listtype", "type", "code");
+CREATE INDEX "idx_msindat_p_s_lt_t_c" ON "mshop_index_attribute" ("prodid", "siteid", "listtype", "type", "code");
 
 
-CREATE TABLE "mshop_catalog_index_catalog" (
+CREATE TABLE "mshop_index_catalog" (
 	-- Product id
 	"prodid" INTEGER NOT NULL,
 	-- site id, references mshop_locale_site.id
@@ -60,14 +61,14 @@ CREATE TABLE "mshop_catalog_index_catalog" (
 	"ctime" DATETIME NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
-CONSTRAINT "unq_mscatinca_p_s_cid_lt_po"
+CONSTRAINT "unq_msindca_p_s_cid_lt_po"
 	UNIQUE ("prodid", "siteid", "catid", "listtype", "pos")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX "idx_mscatinca_s_ca_lt_po" ON "mshop_catalog_index_catalog" ("siteid", "catid", "listtype", "pos");
+CREATE INDEX "idx_msindca_s_ca_lt_po" ON "mshop_index_catalog" ("siteid", "catid", "listtype", "pos");
 
 
-CREATE TABLE "mshop_catalog_index_price" (
+CREATE TABLE "mshop_index_price" (
 	-- Product id
 	"prodid" INTEGER NOT NULL,
 	-- site id, references mshop_locale_site.id
@@ -96,16 +97,16 @@ CREATE TABLE "mshop_catalog_index_price" (
 	"ctime" DATETIME NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
-CONSTRAINT "unq_mscatinpr_p_s_prid_lt"
+CONSTRAINT "unq_msindpr_p_s_prid_lt"
 	UNIQUE ("prodid", "siteid", "priceid", "listtype")
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX "idx_mscatinpr_s_lt_cu_ty_va" ON "mshop_catalog_index_price" ("siteid", "listtype", "currencyid", "type", "value");
+CREATE INDEX "idx_msindpr_s_lt_cu_ty_va" ON "mshop_index_price" ("siteid", "listtype", "currencyid", "type", "value");
 
-CREATE INDEX "idx_mscatinpr_p_s_lt_cu_ty_va" ON "mshop_catalog_index_price" ("prodid", "siteid", "listtype", "currencyid", "type", "value");
+CREATE INDEX "idx_msindpr_p_s_lt_cu_ty_va" ON "mshop_index_price" ("prodid", "siteid", "listtype", "currencyid", "type", "value");
 
 
-CREATE TABLE "mshop_catalog_index_text" (
+CREATE TABLE "mshop_index_text" (
 	-- Product id
 	"prodid" INTEGER NOT NULL,
 	-- site id, references mshop_locale_site.id
@@ -128,12 +129,12 @@ CREATE TABLE "mshop_catalog_index_text" (
 	"ctime" DATETIME NOT NULL,
 	-- Editor who modified this entry at last
 	"editor" VARCHAR(255) NOT NULL,
-CONSTRAINT "unq_mscatinte_p_s_tid_lt"
+CONSTRAINT "unq_msindte_p_s_tid_lt"
 	UNIQUE ("prodid", "siteid", "textid", "listtype")
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-CREATE FULLTEXT INDEX "idx_mscatinte_value" ON "mshop_catalog_index_text" ("value");
+CREATE FULLTEXT INDEX "idx_msindte_value" ON "mshop_index_text" ("value");
 
-CREATE INDEX "idx_mscatinte_sid" ON "mshop_catalog_index_text" ("siteid");
+CREATE INDEX "idx_msindte_sid" ON "mshop_index_text" ("siteid");
 
-CREATE INDEX "idx_mscatinte_p_s_lt_la_ty_va" ON "mshop_catalog_index_text" ("prodid", "siteid", "listtype", "langid", "type", "value"(16));
+CREATE INDEX "idx_msindte_p_s_lt_la_ty_va" ON "mshop_index_text" ("prodid", "siteid", "listtype", "langid", "type", "value"(16));

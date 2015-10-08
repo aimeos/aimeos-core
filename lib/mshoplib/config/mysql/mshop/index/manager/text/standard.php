@@ -7,6 +7,6 @@
 
 return array(
 	'optimize' => array(
-		'OPTIMIZE TABLE "mshop_catalog_index_text"',
+		'OPTIMIZE TABLE "mshop_index_text"',
 	),
 );

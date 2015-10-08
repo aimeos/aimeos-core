@@ -23,8 +23,8 @@ class Standard
 	private $searchConfig = array(
 		'catalog.index.attribute.id' => array(
 			'code'=>'catalog.index.attribute.id',
-			'internalcode'=>'mcatinat."attrid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_attribute" AS mcatinat ON mcatinat."prodid" = mpro."id"' ),
+			'internalcode'=>'mindat."attrid"',
+			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat ON mindat."prodid" = mpro."id"' ),
 			'label'=>'Product index attribute ID',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -32,7 +32,7 @@ class Standard
 		),
 		'catalog.index.attribute.code' => array(
 			'code'=>'catalog.index.attribute.code()',
-			'internalcode'=>':site AND mcatinat."listtype" = $1 AND mcatinat."type" = $2 AND mcatinat."code"',
+			'internalcode'=>':site AND mindat."listtype" = $1 AND mindat."type" = $2 AND mindat."code"',
 			'label'=>'Attribute code, parameter(<list type code>,<attribute type code>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -40,10 +40,10 @@ class Standard
 		),
 		'catalog.index.attributecount' => array(
 			'code'=>'catalog.index.attributecount()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinat_cnt."attrid")
-				FROM "mshop_catalog_index_attribute" AS mcatinat_cnt
-				WHERE mpro."id" = mcatinat_cnt."prodid" AND :site
-				AND mcatinat_cnt."attrid" IN ( $2 ) AND mcatinat_cnt."listtype" = $1 )',
+			'internalcode'=>'( SELECT COUNT(DISTINCT mindat_cnt."attrid")
+				FROM "mshop_index_attribute" AS mindat_cnt
+				WHERE mpro."id" = mindat_cnt."prodid" AND :site
+				AND mindat_cnt."attrid" IN ( $2 ) AND mindat_cnt."listtype" = $1 )',
 			'label'=>'Number of product attributes, parameter(<list type code>,<attribute IDs>)',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -51,10 +51,10 @@ class Standard
 		),
 		'catalog.index.attributeaggregate' => array(
 			'code'=>'catalog.index.attributeaggregate()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mcatinat_agg."attrid")
-				FROM "mshop_catalog_index_attribute" AS mcatinat_agg
-				WHERE mpro."id" = mcatinat_agg."prodid" AND :site
-				AND mcatinat_agg."attrid" IN ( $1 ) )',
+			'internalcode'=>'( SELECT COUNT(DISTINCT mindat_agg."attrid")
+				FROM "mshop_index_attribute" AS mindat_agg
+				WHERE mpro."id" = mindat_agg."prodid" AND :site
+				AND mindat_agg."attrid" IN ( $1 ) )',
 			'label'=>'Number of product attributes, parameter(<attribute IDs>)',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -76,9 +76,9 @@ class Standard
 
 		$site = $context->getLocale()->getSitePath();
 
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attribute.code'], 'mcatinat."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attributecount'], 'mcatinat_cnt."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attributeaggregate'], 'mcatinat_agg."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attribute.code'], 'mindat."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attributecount'], 'mindat_cnt."siteid"', $site );
+		$this->replaceSiteMarker( $this->searchConfig['catalog.index.attributeaggregate'], 'mindat_agg."siteid"', $site );
 	}
 
 

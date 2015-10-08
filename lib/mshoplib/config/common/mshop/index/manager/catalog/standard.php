@@ -8,11 +8,11 @@
 return array(
 	'item' => array(
 		'delete' => '
-			DELETE FROM "mshop_catalog_index_catalog"
+			DELETE FROM "mshop_index_catalog"
 			WHERE :cond AND "siteid" = ?
 		',
 		'insert' => '
-			INSERT INTO "mshop_catalog_index_catalog" (
+			INSERT INTO "mshop_index_catalog" (
 				"prodid", "siteid", "catid", "listtype", "pos", "mtime",
 				"editor", "ctime"
 			) VALUES (
@@ -39,7 +39,7 @@ return array(
 		',
 	),
 	'cleanup' => '
-		DELETE FROM "mshop_catalog_index_catalog"
+		DELETE FROM "mshop_index_catalog"
 		WHERE "ctime" < ? AND "siteid" = ?
 	',
 );
