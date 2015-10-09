@@ -210,7 +210,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/order/manager/base/service/submanagers';
+		$path = 'mshop/order/manager/base/service/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'attribute' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -621,7 +621,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/order/manager/base/service/submanagers
+		/** mshop/order/manager/base/service/submanagers
 		 * List of manager names that can be instantiated by the order base service manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -638,7 +638,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/order/manager/base/service/submanagers';
+		$path = 'mshop/order/manager/base/service/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'attribute' ), $withsub );
 	}
@@ -653,7 +653,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/order/manager/base/service/name
+		/** mshop/order/manager/base/service/name
 		 * Class name of the used order base service manager implementation
 		 *
 		 * Each default order base service manager can be replaced by an alternative imlementation.
@@ -671,7 +671,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/order/manager/base/service/name = Myservice
+		 *  mshop/order/manager/base/service/name = Myservice
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

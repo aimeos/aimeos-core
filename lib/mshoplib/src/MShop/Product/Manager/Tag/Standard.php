@@ -102,7 +102,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/product/manager/tag/submanagers';
+		$path = 'mshop/product/manager/tag/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -334,7 +334,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/product/manager/tag/submanagers
+		/** mshop/product/manager/tag/submanagers
 		 * List of manager names that can be instantiated by the product tag manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -351,7 +351,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/product/manager/tag/submanagers';
+		$path = 'mshop/product/manager/tag/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
@@ -528,7 +528,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/product/manager/tag/name
+		/** mshop/product/manager/tag/name
 		 * Class name of the used product tag manager implementation
 		 *
 		 * Each default product tag manager can be replaced by an alternative imlementation.
@@ -546,7 +546,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/product/manager/tag/name = Mytag
+		 *  mshop/product/manager/tag/name = Mytag
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

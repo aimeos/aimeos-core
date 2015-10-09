@@ -23,7 +23,7 @@ class Factory
 {
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
-		/** classes/controller/extjs/supplier/name
+		/** controller/extjs/supplier/name
 		 * Class name of the used ExtJS supplier controller implementation
 		 *
 		 * Each default ExtJS controller can be replace by an alternative imlementation.
@@ -41,7 +41,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/extjs/supplier/name = Mysupplier
+		 *  controller/extjs/supplier/name = Mysupplier
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -57,7 +57,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/supplier/name', 'Standard' );
+			$name = $context->getConfig()->get( 'controller/extjs/supplier/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

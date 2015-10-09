@@ -122,7 +122,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/attribute/manager/submanagers';
+		$path = 'mshop/attribute/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -139,7 +139,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/attribute/manager/submanagers
+		/** mshop/attribute/manager/submanagers
 		 * List of manager names that can be instantiated by the attribute manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -156,7 +156,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/attribute/manager/submanagers';
+		$path = 'mshop/attribute/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
 	}

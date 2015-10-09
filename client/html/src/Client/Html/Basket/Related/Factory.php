@@ -31,7 +31,7 @@ class Factory
 	 */
 	public static function createClient( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $name = null )
 	{
-		/** classes/client/html/basket/related/name
+		/** client/html/basket/related/name
 		 * Class name of the used basket related client implementation
 		 *
 		 * Each default HTML client can be replace by an alternative imlementation.
@@ -49,7 +49,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/client/html/basket/related/name = Mybasket
+		 *  client/html/basket/related/name = Mybasket
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -65,7 +65,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/client/html/basket/related/name', 'Standard' );
+			$name = $context->getConfig()->get( 'client/html/basket/related/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

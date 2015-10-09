@@ -137,7 +137,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/index/manager/name
+		/** mshop/index/manager/name
 		 * Class name of the used index manager implementation
 		 *
 		 * Each default index manager can be replaced by an alternative imlementation.
@@ -155,7 +155,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/index/manager/name = Myindex
+		 *  mshop/index/manager/name = Myindex
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

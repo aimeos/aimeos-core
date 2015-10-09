@@ -32,7 +32,7 @@ class Factory
 	 */
 	public static function createClient( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $name = null )
 	{
-		/** classes/client/html/catalog/detail/name
+		/** client/html/catalog/detail/name
 		 * Class name of the used catalog detail client implementation
 		 *
 		 * Each default HTML client can be replace by an alternative imlementation.
@@ -50,7 +50,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/client/html/catalog/detail/name = Mydetail
+		 *  client/html/catalog/detail/name = Mydetail
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -66,7 +66,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/client/html/catalog/detail/name', 'Standard' );
+			$name = $context->getConfig()->get( 'client/html/catalog/detail/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

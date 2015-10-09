@@ -98,7 +98,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		}
 
 		if( $name === null ) {
-			$name = $config->get( 'classes/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
+			$name = $config->get( 'mshop/' . $domain . '/manager/' . $manager . '/name', 'Standard' );
 		}
 
 		if( empty( $name ) || ctype_alnum( $name ) === false ) {

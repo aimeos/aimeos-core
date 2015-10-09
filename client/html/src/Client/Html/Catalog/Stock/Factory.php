@@ -32,7 +32,7 @@ class Factory
 	 */
 	public static function createClient( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $name = null )
 	{
-		/** classes/client/html/catalog/stock/name
+		/** client/html/catalog/stock/name
 		 * Class name of the used catalog stock client implementation
 		 *
 		 * Each default HTML client can be replace by an alternative imlementation.
@@ -50,7 +50,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/client/html/catalog/stock/name = Mystock
+		 *  client/html/catalog/stock/name = Mystock
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -66,7 +66,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/client/html/catalog/stock/name', 'Standard' );
+			$name = $context->getConfig()->get( 'client/html/catalog/stock/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

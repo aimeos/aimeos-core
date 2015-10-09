@@ -141,7 +141,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$orderBaseAddressStub->expects( $this->once() )->method( 'searchItems' )->will( $this->returnValue( array( $item1, $item2 ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\PluginAutofill', $orderStub );
-		$context->getConfig()->set( 'classes/order/manager/name', 'PluginAutofill' );
+		$context->getConfig()->set( 'mshop/order/manager/name', 'PluginAutofill' );
 
 
 		$context->setUserId( $customer->getId() );
@@ -194,7 +194,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$orderBaseServiceStub->expects( $this->once() )->method( 'searchItems' )->will( $this->returnValue( array( $item1, $item2 ) ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\PluginAutofill', $orderStub );
-		$context->getConfig()->set( 'classes/order/manager/name', 'PluginAutofill' );
+		$context->getConfig()->set( 'mshop/order/manager/name', 'PluginAutofill' );
 
 
 		$context->setUserId( $customer->getId() );

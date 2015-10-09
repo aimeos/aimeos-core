@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->will( $this->returnValue( $this->mock ) );
 
 		$name = 'MAdminCacheProxyDefaultTest';
-		$this->context->getConfig()->set( 'classes/cache/manager/name', $name );
+		$this->context->getConfig()->set( 'madmin/cache/manager/name', $name );
 
 		\Aimeos\MAdmin\Cache\Manager\Factory::injectManager( '\\Aimeos\\MAdmin\\Cache\\Manager\\' . $name, $manager );
 

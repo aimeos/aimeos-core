@@ -118,7 +118,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/coupon/manager/code/submanagers';
+		$path = 'mshop/coupon/manager/code/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -136,7 +136,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/coupon/manager/code/name
+		/** mshop/coupon/manager/code/name
 		 * Class name of the used coupon code manager implementation
 		 *
 		 * Each default coupon code manager can be replaced by an alternative imlementation.
@@ -154,7 +154,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/coupon/manager/code/name = Mycode
+		 *  mshop/coupon/manager/code/name = Mycode
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -257,7 +257,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/coupon/manager/code/submanagers
+		/** mshop/coupon/manager/code/submanagers
 		 * List of manager names that can be instantiated by the coupon code manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -274,7 +274,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/coupon/manager/code/submanagers';
+		$path = 'mshop/coupon/manager/code/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}

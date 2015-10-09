@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
-		$context->getConfig()->set( 'classes/service/manager/name', $name );
+		$context->getConfig()->set( 'mshop/service/manager/name', $name );
 
 
 		$serviceManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
-		$context->getConfig()->set( 'classes/service/manager/name', $name );
+		$context->getConfig()->set( 'mshop/service/manager/name', $name );
 
 
 		$serviceManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )

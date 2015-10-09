@@ -81,7 +81,7 @@ class ServicesUpdateTest
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems', 'getProvider' ) )->getMock();
 
 		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\PluginServicesUpdate', $serviceStub );
-		$context->getConfig()->set( 'classes/service/manager/name', 'PluginServicesUpdate' );
+		$context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
 
 
 		$orderStub->setService( $serviceDelivery, 'delivery' );
@@ -141,7 +141,7 @@ class ServicesUpdateTest
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems', 'getProvider' ) )->getMock();
 
 		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\PluginServicesUpdate', $serviceStub );
-		$context->getConfig()->set( 'classes/service/manager/name', 'PluginServicesUpdate' );
+		$context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
 
 
 		$orderStub->setService( $serviceDelivery, 'delivery' );

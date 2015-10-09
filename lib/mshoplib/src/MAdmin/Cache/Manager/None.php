@@ -113,7 +113,7 @@ class None
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		$path = 'classes/cache/manager/submanagers';
+		$path = 'madmin/cache/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}

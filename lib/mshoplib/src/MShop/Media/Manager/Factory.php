@@ -32,7 +32,7 @@ class Factory
 	 */
 	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
-		/** classes/media/manager/name
+		/** mshop/media/manager/name
 		 * Class name of the used media manager implementation
 		 *
 		 * Each default manager can be replace by an alternative imlementation.
@@ -50,7 +50,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/media/manager/name = Mymanager
+		 *  mshop/media/manager/name = Mymanager
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -66,7 +66,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/media/manager/name', 'Standard' );
+			$name = $context->getConfig()->get( 'mshop/media/manager/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

@@ -109,7 +109,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/catalog/manager/lists/type/submanagers';
+		$path = 'mshop/catalog/manager/lists/type/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -126,7 +126,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/catalog/manager/lists/type/submanagers
+		/** mshop/catalog/manager/lists/type/submanagers
 		 * List of manager names that can be instantiated by the catalog list type manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -143,7 +143,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/catalog/manager/lists/type/submanagers';
+		$path = 'mshop/catalog/manager/lists/type/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -158,7 +158,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/catalog/manager/lists/type/name
+		/** mshop/catalog/manager/lists/type/name
 		 * Class name of the used catalog list type manager implementation
 		 *
 		 * Each default catalog list type manager can be replaced by an alternative imlementation.
@@ -176,7 +176,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/catalog/manager/lists/type/name = Mytype
+		 *  mshop/catalog/manager/lists/type/name = Mytype
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

@@ -360,7 +360,7 @@ abstract class Base
 			}
 
 			if( $name === null ) {
-				$path = 'classes/' . $domain . '/manager/' . $manager . '/name';
+				$path = 'mshop/' . $domain . '/manager/' . $manager . '/name';
 				$name = $this->context->getConfig()->get( $path, 'Standard' );
 			}
 

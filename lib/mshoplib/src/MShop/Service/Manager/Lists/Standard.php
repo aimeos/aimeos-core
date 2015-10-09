@@ -146,7 +146,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/service/manager/lists/submanagers';
+		$path = 'mshop/service/manager/lists/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -163,7 +163,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/service/manager/lists/submanagers
+		/** mshop/service/manager/lists/submanagers
 		 * List of manager names that can be instantiated by the service list manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -180,7 +180,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/service/manager/lists/submanagers';
+		$path = 'mshop/service/manager/lists/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
@@ -195,7 +195,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/service/manager/lists/name
+		/** mshop/service/manager/lists/name
 		 * Class name of the used service list manager implementation
 		 *
 		 * Each default service list manager can be replaced by an alternative imlementation.
@@ -213,7 +213,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/service/manager/lists/name = Mylist
+		 *  mshop/service/manager/lists/name = Mylist
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

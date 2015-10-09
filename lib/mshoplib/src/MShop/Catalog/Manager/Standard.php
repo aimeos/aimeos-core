@@ -147,7 +147,7 @@ class Standard
 		$config = $context->getConfig();
 		$search = $this->createSearch();
 
-		$path = 'classes/catalog/manager/submanagers';
+		$path = 'mshop/catalog/manager/submanagers';
 		foreach( $config->get( $path, array( 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -269,7 +269,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/catalog/manager/submanagers
+		/** mshop/catalog/manager/submanagers
 		 * List of manager names that can be instantiated by the catalog manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -286,7 +286,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/catalog/manager/submanagers';
+		$path = 'mshop/catalog/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'lists' ), $withsub );
 	}

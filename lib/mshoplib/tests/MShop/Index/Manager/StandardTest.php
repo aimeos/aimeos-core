@@ -501,7 +501,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSearchItemsText()
 	{
 		$context = clone $this->context;
-		$context->getConfig()->set( 'classes/index/manager/text/name', 'Standard' );
+		$context->getConfig()->set( 'mshop/index/manager/text/name', 'Standard' );
 		$object = new \Aimeos\MShop\Index\Manager\Standard( $context );
 
 		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );

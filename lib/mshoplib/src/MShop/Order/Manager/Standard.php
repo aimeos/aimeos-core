@@ -202,7 +202,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/order/manager/submanagers';
+		$path = 'mshop/order/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'status', 'base' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -470,7 +470,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/order/manager/submanagers
+		/** mshop/order/manager/submanagers
 		 * List of manager names that can be instantiated by the order manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -487,7 +487,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/order/manager/submanagers';
+		$path = 'mshop/order/manager/submanagers';
 		$default = array( 'base', 'status' );
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );

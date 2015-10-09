@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerJobsEmailDeliveryDefaultRun';
-		$context->getConfig()->set( 'classes/order/manager/name', $name );
+		$context->getConfig()->set( 'mshop/order/manager/name', $name );
 
 		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setMethods( array( 'searchItems', 'getSubManager' ) )
@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerJobsEmailDeliveryDefaultRun';
-		$context->getConfig()->set( 'classes/order/manager/name', $name );
+		$context->getConfig()->set( 'mshop/order/manager/name', $name );
 
 
 		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )

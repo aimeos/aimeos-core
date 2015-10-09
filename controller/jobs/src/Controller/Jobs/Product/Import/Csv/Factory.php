@@ -31,7 +31,7 @@ class Factory
 	 */
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $name = null )
 	{
-		/** classes/controller/jobs/product/import/csv/name
+		/** controller/jobs/product/import/csv/name
 		 * Class name of the used product suggestions scheduler controller implementation
 		 *
 		 * Each default job controller can be replace by an alternative imlementation.
@@ -49,7 +49,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/jobs/product/import/csv/name = Mycsv
+		 *  controller/jobs/product/import/csv/name = Mycsv
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -65,7 +65,7 @@ class Factory
 		 * @category Developer
 		 */
 		if ( $name === null ) {
-			$name = $context->getConfig()->get('classes/controller/jobs/product/import/csv/name', 'Standard');
+			$name = $context->getConfig()->get('controller/jobs/product/import/csv/name', 'Standard');
 		}
 
 		if ( ctype_alnum($name) === false )

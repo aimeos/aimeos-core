@@ -13,7 +13,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$context = \TestHelper::getContext();
 		$name = 'ControllerFrontendOrderStore';
-		$context->getConfig()->set( 'classes/order/manager/name', $name );
+		$context->getConfig()->set( 'mshop/order/manager/name', $name );
 
 
 		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$context = \TestHelper::getContext();
 		$name = 'ControllerFrontendOrderBlock';
-		$context->getConfig()->set( 'classes/controller/common/order/name', $name );
+		$context->getConfig()->set( 'controller/common/order/name', $name );
 
 
 		$orderCntlStub = $this->getMockBuilder( '\\Aimeos\\Controller\\Common\\Order\\Standard' )
@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$context = \TestHelper::getContext();
 		$name = 'ControllerFrontendOrderUnblock';
-		$context->getConfig()->set( 'classes/controller/common/order/name', $name );
+		$context->getConfig()->set( 'controller/common/order/name', $name );
 
 
 		$orderCntlStub = $this->getMockBuilder( '\\Aimeos\\Controller\\Common\\Order\\Standard' )
@@ -94,7 +94,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$context = \TestHelper::getContext();
 		$name = 'ControllerFrontendOrderUpdate';
-		$context->getConfig()->set( 'classes/controller/common/order/name', $name );
+		$context->getConfig()->set( 'controller/common/order/name', $name );
 
 
 		$orderCntlStub = $this->getMockBuilder( '\\Aimeos\\Controller\\Common\\Order\\Standard' )

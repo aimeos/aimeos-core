@@ -131,7 +131,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 	public function testIsAvailableTotal()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->getConfig()->set( 'classes/order/manager/name', 'StandardMock' );
+		$this->context->getConfig()->set( 'mshop/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
 		$mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
@@ -156,7 +156,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 	public function testIsAvailableTotalNotEnough()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->getConfig()->set( 'classes/order/manager/name', 'StandardMock' );
+		$this->context->getConfig()->set( 'mshop/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.total-number-min' => 1 ) );
 
 		$mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
@@ -177,7 +177,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 	public function testIsAvailableLimit()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->getConfig()->set( 'classes/order/manager/name', 'StandardMock' );
+		$this->context->getConfig()->set( 'mshop/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
 		$mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
@@ -202,7 +202,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 	public function testIsAvailableLimitTooMuch()
 	{
 		$this->context->setUserId( 1 );
-		$this->context->getConfig()->set( 'classes/order/manager/name', 'StandardMock' );
+		$this->context->getConfig()->set( 'mshop/order/manager/name', 'StandardMock' );
 		$this->servItem->setConfig( array( 'ordercheck.limit-days-pending' => 1 ) );
 
 		$mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )

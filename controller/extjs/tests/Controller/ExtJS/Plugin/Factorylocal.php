@@ -26,7 +26,7 @@ class Factorylocal
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null, $domainToTest = 'plugin' )
 	{
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/extjs/plugin/name', 'Standard' );
+			$name = $context->getConfig()->get( 'controller/extjs/plugin/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false ) {

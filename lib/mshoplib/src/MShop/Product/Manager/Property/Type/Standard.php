@@ -109,7 +109,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/product/manager/property/type/submanagers';
+		$path = 'mshop/product/manager/property/type/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -126,7 +126,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/product/manager/property/type/submanagers
+		/** mshop/product/manager/property/type/submanagers
 		 * List of manager names that can be instantiated by the product property type manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -143,7 +143,7 @@ class Standard
 		 * @since 2015.01
 		 * @category Developer
 		 */
-		$path = 'classes/product/manager/property/type/submanagers';
+		$path = 'mshop/product/manager/property/type/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -158,7 +158,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/product/manager/property/type/name
+		/** mshop/product/manager/property/type/name
 		 * Class name of the used product property type manager implementation
 		 *
 		 * Each default product property type manager can be replaced by an alternative imlementation.
@@ -176,7 +176,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/product/manager/property/type/name = Mytype
+		 *  mshop/product/manager/property/type/name = Mytype
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

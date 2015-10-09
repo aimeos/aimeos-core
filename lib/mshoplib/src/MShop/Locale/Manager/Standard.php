@@ -418,7 +418,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/locale/manager/submanagers
+		/** mshop/locale/manager/submanagers
 		 * List of manager names that can be instantiated by the locale manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -435,7 +435,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/locale/manager/submanagers';
+		$path = 'mshop/locale/manager/submanagers';
 		$default = array( 'language', 'currency', 'site' );
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );

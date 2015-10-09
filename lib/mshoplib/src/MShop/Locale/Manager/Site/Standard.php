@@ -336,7 +336,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/locale/manager/site/submanagers
+		/** mshop/locale/manager/site/submanagers
 		 * List of manager names that can be instantiated by the locale site manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -353,7 +353,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/locale/manager/site/submanagers';
+		$path = 'mshop/locale/manager/site/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -368,7 +368,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/locale/manager/site/name
+		/** mshop/locale/manager/site/name
 		 * Class name of the used locale site manager implementation
 		 *
 		 * Each default locale site manager can be replaced by an alternative imlementation.
@@ -386,7 +386,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/locale/manager/site/name = Mysite
+		 *  mshop/locale/manager/site/name = Mysite
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

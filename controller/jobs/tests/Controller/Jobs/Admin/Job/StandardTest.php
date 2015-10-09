@@ -67,8 +67,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$aimeos = \TestHelper::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
-		$context->getConfig()->set( 'classes/job/manager/name', $name );
-		$context->getConfig()->set( 'classes/controller/extjs/admin/job/name', $name );
+		$context->getConfig()->set( 'madmin/job/manager/name', $name );
+		$context->getConfig()->set( 'controller/extjs/admin/job/name', $name );
 
 		\Aimeos\MAdmin\Job\Manager\Factory::injectManager( '\\Aimeos\\MAdmin\\Job\\Manager\\' . $name, $this->jobManagerStub );
 
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$aimeos = \TestHelper::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
-		$context->getConfig()->set( 'classes/job/manager/name', $name );
+		$context->getConfig()->set( 'madmin/job/manager/name', $name );
 
 		$object = new \Aimeos\Controller\Jobs\Admin\Job\Standard( $context, $aimeos );
 		\Aimeos\MAdmin\Job\Manager\Factory::injectManager( '\\Aimeos\\MAdmin\\Job\\Manager\\' . $name, $this->jobManagerStub );

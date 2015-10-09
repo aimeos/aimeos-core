@@ -32,7 +32,7 @@ class Factory
 	 */
 	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
-		/** classes/service/manager/name
+		/** mshop/service/manager/name
 		 * Class name of the used service manager implementation
 		 *
 		 * Each default manager can be replace by an alternative imlementation.
@@ -50,7 +50,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/service/manager/name = Mymanager
+		 *  mshop/service/manager/name = Mymanager
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -66,7 +66,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/service/manager/name', 'Standard' );
+			$name = $context->getConfig()->get( 'mshop/service/manager/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

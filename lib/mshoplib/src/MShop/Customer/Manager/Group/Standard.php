@@ -94,7 +94,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/customer/manager/group/submanagers';
+		$path = 'mshop/customer/manager/group/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -124,7 +124,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/customer/manager/group/submanagers
+		/** mshop/customer/manager/group/submanagers
 		 * List of manager names that can be instantiated by the customer group manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -141,7 +141,7 @@ class Standard
 		 * @since 2015.08
 		 * @category Developer
 		 */
-		$path = 'classes/customer/manager/group/submanagers';
+		$path = 'mshop/customer/manager/group/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -500,7 +500,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/customer/manager/group/name
+		/** mshop/customer/manager/group/name
 		 * Class name of the used customer group manager implementation
 		 *
 		 * Each default customer group manager can be replaced by an alternative
@@ -518,7 +518,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/customer/manager/group/name = Mygroup
+		 *  mshop/customer/manager/group/name = Mygroup
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

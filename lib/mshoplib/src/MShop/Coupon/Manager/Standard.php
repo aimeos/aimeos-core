@@ -122,7 +122,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/coupon/manager/submanagers';
+		$path = 'mshop/coupon/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'code' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -139,7 +139,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/coupon/manager/submanagers
+		/** mshop/coupon/manager/submanagers
 		 * List of manager names that can be instantiated by the coupon manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -156,7 +156,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/coupon/manager/submanagers';
+		$path = 'mshop/coupon/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'code' ), $withsub );
 	}

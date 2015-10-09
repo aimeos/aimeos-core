@@ -109,7 +109,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/media/manager/type/submanagers';
+		$path = 'mshop/media/manager/type/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -126,7 +126,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/media/manager/type/submanagers
+		/** mshop/media/manager/type/submanagers
 		 * List of manager names that can be instantiated by the media type manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -143,7 +143,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/media/manager/type/submanagers';
+		$path = 'mshop/media/manager/type/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -158,7 +158,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/media/manager/type/name
+		/** mshop/media/manager/type/name
 		 * Class name of the used media type manager implementation
 		 *
 		 * Each default media type manager can be replaced by an alternative imlementation.
@@ -176,7 +176,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/media/manager/type/name = Mytype
+		 *  mshop/media/manager/type/name = Mytype
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

@@ -26,7 +26,7 @@ class Factorylocal
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null, $domainToTest = 'service' )
 	{
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/frontend/service/name', 'Standard' );
+			$name = $context->getConfig()->get( 'controller/frontend/service/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false ) {

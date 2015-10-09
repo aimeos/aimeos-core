@@ -172,7 +172,7 @@ class Standard
 			$name = $config->get( 'resource/db/adapter' );
 			$name = $config->get( 'resource/db-cache/adapter', $name );
 
-			/** classes/cache/name
+			/** madmin/cache/name
 			 * Specifies the name of the cache class implementation
 			 *
 			 * There are several implementations available for integrating caches
@@ -184,7 +184,7 @@ class Standard
 			 * @since 2014.09
 			 * @category Developer
 			 */
-			$name = $config->get( 'classes/cache/name', $name );
+			$name = $config->get( 'madmin/cache/name', $name );
 			$config = array(
 				'search' => $this->searchConfig,
 				'dbname' => $this->getResourceName(),
@@ -221,7 +221,7 @@ class Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
-		$path = 'classes/cache/manager/submanagers';
+		$path = 'madmin/cache/manager/submanagers';
 		foreach( $config->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -513,7 +513,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/cache/manager/submanagers
+		/** madmin/cache/manager/submanagers
 		 * List of manager names that can be instantiated by the cache manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -530,7 +530,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/cache/manager/submanagers';
+		$path = 'madmin/cache/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}

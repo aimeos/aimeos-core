@@ -255,8 +255,8 @@ abstract class Base
 		 * @category Developer
 		 * @category User
 		 * @see client/html/common/cache/force
-		 * @see classes/cache/manager/name
-		 * @see classes/cache/name
+		 * @see madmin/cache/manager/name
+		 * @see madmin/cache/name
 		 */
 		$tagAll = $this->context->getConfig()->get( 'client/html/common/cache/tag-all', false );
 

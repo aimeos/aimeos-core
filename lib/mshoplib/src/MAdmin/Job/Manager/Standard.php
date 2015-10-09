@@ -114,7 +114,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/job/manager/submanagers';
+		$path = 'madmin/job/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -530,7 +530,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/job/manager/submanagers
+		/** madmin/job/manager/submanagers
 		 * List of manager names that can be instantiated by the job manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -547,7 +547,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/job/manager/submanagers';
+		$path = 'madmin/job/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}

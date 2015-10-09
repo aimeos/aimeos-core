@@ -161,7 +161,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/order/manager/base/coupon/submanagers';
+		$path = 'mshop/order/manager/base/coupon/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -394,7 +394,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/order/manager/base/coupon/submanagers
+		/** mshop/order/manager/base/coupon/submanagers
 		 * List of manager names that can be instantiated by the order base coupon manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -411,7 +411,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/order/manager/base/coupon/submanagers';
+		$path = 'mshop/order/manager/base/coupon/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -575,7 +575,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/order/manager/base/coupon/name
+		/** mshop/order/manager/base/coupon/name
 		 * Class name of the used order base coupon manager implementation
 		 *
 		 * Each default order base coupon manager can be replaced by an alternative imlementation.
@@ -593,7 +593,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/order/manager/base/coupon/name = Mycoupon
+		 *  mshop/order/manager/base/coupon/name = Mycoupon
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

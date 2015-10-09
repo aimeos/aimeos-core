@@ -151,7 +151,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/price/manager/submanagers';
+		$path = 'mshop/price/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -168,7 +168,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/price/manager/submanagers
+		/** mshop/price/manager/submanagers
 		 * List of manager names that can be instantiated by the price manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -185,7 +185,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/price/manager/submanagers';
+		$path = 'mshop/price/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
 	}

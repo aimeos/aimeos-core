@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerJobsCatalogIndexRebuildDefaultRun';
-		$context->getConfig()->set( 'classes/index/manager/name', $name );
+		$context->getConfig()->set( 'mshop/index/manager/name', $name );
 
 
 		$indexManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Index\\Manager\\Standard' )

@@ -13,7 +13,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$context = \TestHelper::getContext();
 		$name = 'ControllerCommonOrderBlock';
-		$context->getConfig()->set( 'classes/order/manager/name', $name );
+		$context->getConfig()->set( 'mshop/order/manager/name', $name );
 
 
 		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$context = \TestHelper::getContext();
 		$name = 'ControllerCommonOrderUnblock';
-		$context->getConfig()->set( 'classes/order/manager/name', $name );
+		$context->getConfig()->set( 'mshop/order/manager/name', $name );
 
 
 		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
@@ -89,9 +89,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$config = $context->getConfig();
 
 		$name = 'ControllerCommonOrderBlock';
-		$config->set( 'classes/order/manager/name', $name );
-		$config->set( 'classes/product/manager/name', $name );
-		$config->set( 'classes/coupon/manager/name', $name );
+		$config->set( 'mshop/order/manager/name', $name );
+		$config->set( 'mshop/product/manager/name', $name );
+		$config->set( 'mshop/coupon/manager/name', $name );
 
 
 		$orderManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
@@ -229,7 +229,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerCommonOrderUpdate';
-		$context->getConfig()->set( 'classes/product/manager/name', $name );
+		$context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$stockManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Stock\\Standard' )
 			->setMethods( array( 'saveItem', 'searchItems' ) )

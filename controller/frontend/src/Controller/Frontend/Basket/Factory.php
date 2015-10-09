@@ -23,7 +23,7 @@ class Factory
 {
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
-		/** classes/controller/frontend/basket/name
+		/** controller/frontend/basket/name
 		 * Class name of the used basket frontend controller implementation
 		 *
 		 * Each default frontend controller can be replace by an alternative imlementation.
@@ -41,7 +41,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/jobs/frontend/basket/name = Mybasket
+		 *  controller/jobs/frontend/basket/name = Mybasket
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -57,7 +57,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/frontend/basket/name', 'Standard' );
+			$name = $context->getConfig()->get( 'controller/frontend/basket/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )

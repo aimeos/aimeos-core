@@ -137,7 +137,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/media/manager/submanagers';
+		$path = 'mshop/media/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -154,7 +154,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/media/manager/submanagers
+		/** mshop/media/manager/submanagers
 		 * List of manager names that can be instantiated by the media manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -171,7 +171,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/media/manager/submanagers';
+		$path = 'mshop/media/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
 	}

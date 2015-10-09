@@ -60,7 +60,7 @@ class Base
 		$iface = '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Cache\\Iface';
 
 		if( $name === null ) {
-			$name = $config->get( 'classes/controller/common/product/import/csv/cache/' . $type . '/name', 'Standard' );
+			$name = $config->get( 'controller/common/product/import/csv/cache/' . $type . '/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $type ) === false || ctype_alnum( $name ) === false )
@@ -247,7 +247,7 @@ class Base
 
 		foreach( $mappings as $type => $mapping )
 		{
-			$name = $config->get( 'classes/controller/common/product/import/csv/processor/' . $type . '/name', 'Standard' );
+			$name = $config->get( 'controller/common/product/import/csv/processor/' . $type . '/name', 'Standard' );
 
 			if( ctype_alnum( $type ) === false )
 			{

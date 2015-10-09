@@ -109,7 +109,7 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/plugin/manager/type/submanagers';
+		$path = 'mshop/plugin/manager/type/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
@@ -126,7 +126,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/plugin/manager/type/submanagers
+		/** mshop/plugin/manager/type/submanagers
 		 * List of manager names that can be instantiated by the plugin type manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -143,7 +143,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/plugin/manager/type/submanagers';
+		$path = 'mshop/plugin/manager/type/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -158,7 +158,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/plugin/manager/type/name
+		/** mshop/plugin/manager/type/name
 		 * Class name of the used plugin type manager implementation
 		 *
 		 * Each default plugin type manager can be replaced by an alternative imlementation.
@@ -176,7 +176,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/plugin/manager/type/name = Mytype
+		 *  mshop/plugin/manager/type/name = Mytype
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

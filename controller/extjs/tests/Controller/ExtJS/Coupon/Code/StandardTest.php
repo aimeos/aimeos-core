@@ -262,7 +262,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$name = 'ControllerExtJSCouponCodeDefaultRun';
-		$this->context->getConfig()->set( 'classes/controller/extjs/admin/job/name', $name );
+		$this->context->getConfig()->set( 'controller/extjs/admin/job/name', $name );
 
 		\Aimeos\Controller\ExtJS\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\ExtJS\\Admin\\Job\\' . $name, $cntlMock );
 
@@ -320,7 +320,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->will( $this->returnValue( $codeMock ) );
 
 		$name = 'ControllerExtJSCouponCodeDefaultRun';
-		$this->context->getConfig()->set( 'classes/coupon/manager/name', $name );
+		$this->context->getConfig()->set( 'mshop/coupon/manager/name', $name );
 
 		\Aimeos\MShop\Coupon\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Coupon\\Manager\\' . $name, $mock );
 

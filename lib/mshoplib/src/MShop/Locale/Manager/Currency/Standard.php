@@ -284,7 +284,7 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/locale/manager/currency/submanagers
+		/** mshop/locale/manager/currency/submanagers
 		 * List of manager names that can be instantiated by the locale currency manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -301,7 +301,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/locale/manager/currency/submanagers';
+		$path = 'mshop/locale/manager/currency/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -489,7 +489,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/locale/manager/currency/name
+		/** mshop/locale/manager/currency/name
 		 * Class name of the used locale currency manager implementation
 		 *
 		 * Each default locale currency manager can be replaced by an alternative imlementation.
@@ -507,7 +507,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/locale/manager/currency/name = Mycurrency
+		 *  mshop/locale/manager/currency/name = Mycurrency
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

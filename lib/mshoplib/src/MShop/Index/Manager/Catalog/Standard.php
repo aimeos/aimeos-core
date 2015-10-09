@@ -196,7 +196,7 @@ class Standard
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
-		/** classes/index/manager/catalog/submanagers
+		/** mshop/index/manager/catalog/submanagers
 		 * List of manager names that can be instantiated by the index attribute manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -213,7 +213,7 @@ class Standard
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/index/manager/catalog/submanagers';
+		$path = 'mshop/index/manager/catalog/submanagers';
 
 		$list += $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 
@@ -230,7 +230,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/index/manager/catalog/name
+		/** mshop/index/manager/catalog/name
 		 * Class name of the used index catalog manager implementation
 		 *
 		 * Each default index catalog manager can be replaced by an alternative imlementation.
@@ -248,7 +248,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/index/manager/catalog/name = Mycatalog
+		 *  mshop/index/manager/catalog/name = Mycatalog
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -625,7 +625,7 @@ class Standard
 			 * @category Developer
 			 * @see mshop/index/manager/standard/submanagers
 			 */
-			$path = 'classes/index/manager/catalog/submanagers';
+			$path = 'mshop/index/manager/catalog/submanagers';
 
 			foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 				$this->subManagers[$domain] = $this->getSubManager( $domain );

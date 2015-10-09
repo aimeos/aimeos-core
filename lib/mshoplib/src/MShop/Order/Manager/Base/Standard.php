@@ -200,7 +200,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'classes/order/manager/base/submanagers';
+		$path = 'mshop/order/manager/base/submanagers';
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
@@ -289,7 +289,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** classes/order/manager/base/submanagers
+		/** mshop/order/manager/base/submanagers
 		 * List of manager names that can be instantiated by the order base manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
@@ -306,7 +306,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$path = 'classes/order/manager/base/submanagers';
+		$path = 'mshop/order/manager/base/submanagers';
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
@@ -322,7 +322,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** classes/order/manager/base/name
+		/** mshop/order/manager/base/name
 		 * Class name of the used order base manager implementation
 		 *
 		 * Each default order base manager can be replaced by an alternative imlementation.
@@ -340,7 +340,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/order/manager/base/name = Mybase
+		 *  mshop/order/manager/base/name = Mybase
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last

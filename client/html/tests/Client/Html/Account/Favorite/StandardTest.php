@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$name = 'ClientHtmlAccountFavoriteDefaultProcess';
-		$this->context->getConfig()->set( 'classes/customer/manager/name', $name );
+		$this->context->getConfig()->set( 'mshop/customer/manager/name', $name );
 
 		\Aimeos\MShop\Customer\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Customer\\Manager\\' . $name, $managerStub );
 
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$name = 'ClientHtmlAccountFavoriteDefaultProcess';
-		$this->context->getConfig()->set( 'classes/customer/manager/name', $name );
+		$this->context->getConfig()->set( 'mshop/customer/manager/name', $name );
 
 		\Aimeos\MShop\Customer\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Customer\\Manager\\' . $name, $managerStub );
 

@@ -31,7 +31,7 @@ class Factory
 	 */
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $name = null )
 	{
-		/** classes/controller/jobs/admin/cache/name
+		/** controller/jobs/admin/cache/name
 		 * Class name of the used admin cache scheduler controller implementation
 		 *
 		 * Each default cache controller can be replace by an alternative imlementation.
@@ -49,7 +49,7 @@ class Factory
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  classes/controller/jobs/admin/cache/name = Mycache
+		 *  controller/jobs/admin/cache/name = Mycache
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -65,7 +65,7 @@ class Factory
 		 * @category Developer
 		 */
 		if( $name === null ) {
-			$name = $context->getConfig()->get( 'classes/controller/jobs/admin/cache/name', 'Standard' );
+			$name = $context->getConfig()->get( 'controller/jobs/admin/cache/name', 'Standard' );
 		}
 
 		if( ctype_alnum( $name ) === false )
