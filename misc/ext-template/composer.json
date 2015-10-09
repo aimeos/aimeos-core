@@ -5,23 +5,25 @@
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"require": {
-		"php": ">=5.3.0"
+		"php": ">=5.3.3"
 	},
 	"autoload": {
-		"psr-0": {
-			"MShop": "lib/custom/src",
-			"MAdmin": "lib/custom/src",
-			"MW": "lib/custom/src",
-			"Client_Html": "client/html/src",
-			"Controller_Frontend": "controller/frontend/src",
-			"Controller_ExtJS": "controller/extjs/src",
-			"Controller_Jobs": "controller/jobs/src"
+		"psr-4": {
+			"Aimeos\\MW\\": "lib/mwlib/src/MW/",
+			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
+			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
+			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
+			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
+			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
+			"Aimeos\\Controller\\ExtJS\\": "controller/extjs/src/Controller/ExtJS/",
+			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/"
 		},
 		"classmap": [
 			"lib/custom/src",
 			"client/html/src",
-			"controller/extjs/src",
+			"controller/common/src",
 			"controller/frontend/src",
+			"controller/extjs/src",
 			"controller/jobs/src"
 		]
 	}
