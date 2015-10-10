@@ -104,7 +104,7 @@ class Standard
 	{
 		parent::cleanup( $siteids );
 
-		$this->cleanupBase( $siteids, 'mshop/index/manager/attribute/standard/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/index/manager/attribute/standard/delete' );
 	}
 
 
@@ -135,10 +135,10 @@ class Standard
 		 * @param string SQL statement for deleting the outdated attribute index records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/item/count
-		 * @see mshop/index/manager/attribute/standard/item/delete
-		 * @see mshop/index/manager/attribute/standard/item/insert
-		 * @see mshop/index/manager/attribute/standard/item/search
+		 * @see mshop/index/manager/attribute/standard/count
+		 * @see mshop/index/manager/attribute/standard/delete
+		 * @see mshop/index/manager/attribute/standard/insert
+		 * @see mshop/index/manager/attribute/standard/search
 		 */
 		$this->doCleanupIndex( $timestamp, 'mshop/index/manager/attribute/standard/cleanup' );
 	}
@@ -151,7 +151,7 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
-		/** mshop/index/manager/attribute/standard/item/delete
+		/** mshop/index/manager/attribute/standard/delete
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the index database.
@@ -169,12 +169,12 @@ class Standard
 		 * @param string SQL statement for deleting index attribute records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/item/count
-		 * @see mshop/index/manager/attribute/standard/item/cleanup
-		 * @see mshop/index/manager/attribute/standard/item/insert
-		 * @see mshop/index/manager/attribute/standard/item/search
+		 * @see mshop/index/manager/attribute/standard/count
+		 * @see mshop/index/manager/attribute/standard/cleanup
+		 * @see mshop/index/manager/attribute/standard/insert
+		 * @see mshop/index/manager/attribute/standard/search
 		 */
-		$this->doDeleteItems( $ids, 'mshop/index/manager/attribute/standard/item/delete' );
+		$this->doDeleteItems( $ids, 'mshop/index/manager/attribute/standard/delete' );
 	}
 
 
@@ -357,9 +357,9 @@ class Standard
 		 * @param string SQL statement for optimizing the stored attribute data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/item/count
-		 * @see mshop/index/manager/attribute/standard/item/search
-		 * @see mshop/index/manager/attribute/standard/item/aggregate
+		 * @see mshop/index/manager/attribute/standard/count
+		 * @see mshop/index/manager/attribute/standard/search
+		 * @see mshop/index/manager/attribute/standard/aggregate
 		 */
 		$this->doOptimize( 'mshop/index/manager/attribute/standard/optimize' );
 	}
@@ -396,7 +396,7 @@ class Standard
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
-				/** mshop/index/manager/attribute/standard/item/insert
+				/** mshop/index/manager/attribute/standard/insert
 				 * Inserts a new attribute record into the product index database
 				 *
 				 * During the product index rebuild, attributes related to a product
@@ -419,12 +419,12 @@ class Standard
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/index/manager/attribute/standard/item/cleanup
-				 * @see mshop/index/manager/attribute/standard/item/delete
-				 * @see mshop/index/manager/attribute/standard/item/search
-				 * @see mshop/index/manager/attribute/standard/item/count
+				 * @see mshop/index/manager/attribute/standard/cleanup
+				 * @see mshop/index/manager/attribute/standard/delete
+				 * @see mshop/index/manager/attribute/standard/search
+				 * @see mshop/index/manager/attribute/standard/count
 				 */
-				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/attribute/standard/item/insert' );
+				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/attribute/standard/insert' );
 
 				foreach( $item->getRefItems( 'attribute' ) as $refId => $refItem )
 				{
@@ -477,7 +477,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
-		/** mshop/index/manager/attribute/standard/item/search
+		/** mshop/index/manager/attribute/standard/search
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the product index
@@ -522,13 +522,13 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/item/count
-		 * @see mshop/index/manager/attribute/standard/item/optimize
-		 * @see mshop/index/manager/attribute/standard/item/aggregate
+		 * @see mshop/index/manager/attribute/standard/count
+		 * @see mshop/index/manager/attribute/standard/optimize
+		 * @see mshop/index/manager/attribute/standard/aggregate
 		 */
-		$cfgPathSearch = 'mshop/index/manager/attribute/standard/item/search';
+		$cfgPathSearch = 'mshop/index/manager/attribute/standard/search';
 
-		/** mshop/index/manager/attribute/standard/item/count
+		/** mshop/index/manager/attribute/standard/count
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the product index
@@ -567,11 +567,11 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/attribute/standard/item/search
-		 * @see mshop/index/manager/attribute/standard/item/optimize
-		 * @see mshop/index/manager/attribute/standard/item/aggregate
+		 * @see mshop/index/manager/attribute/standard/search
+		 * @see mshop/index/manager/attribute/standard/optimize
+		 * @see mshop/index/manager/attribute/standard/aggregate
 		 */
-		$cfgPathCount = 'mshop/index/manager/attribute/standard/item/count';
+		$cfgPathCount = 'mshop/index/manager/attribute/standard/count';
 
 		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}

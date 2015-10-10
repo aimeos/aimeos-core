@@ -190,12 +190,12 @@ class Standard
 				'dbname' => $this->getResourceName(),
 				'siteid' => $context->getLocale()->getSiteId(),
 				'sql' => array(
-					'delete' => $config->get( 'madmin/cache/manager/standard/delete' ),
-					'deletebytag' => $config->get( 'madmin/cache/manager/standard/deletebytag' ),
-					'getbytag' => $config->get( 'madmin/cache/manager/standard/getbytag' ),
-					'get' => $config->get( 'madmin/cache/manager/standard/get' ),
-					'set' => $config->get( 'madmin/cache/manager/standard/set' ),
-					'settag' => $config->get( 'madmin/cache/manager/standard/settag' ),
+					'delete' => $this->getSqlConfig( 'madmin/cache/manager/standard/delete' ),
+					'deletebytag' => $this->getSqlConfig( 'madmin/cache/manager/standard/deletebytag' ),
+					'getbytag' => $this->getSqlConfig( 'madmin/cache/manager/standard/getbytag' ),
+					'get' => $this->getSqlConfig( 'madmin/cache/manager/standard/get' ),
+					'set' => $this->getSqlConfig( 'madmin/cache/manager/standard/set' ),
+					'settag' => $this->getSqlConfig( 'madmin/cache/manager/standard/settag' ),
 				),
 			);
 			$dbm = $context->getDatabaseManager();

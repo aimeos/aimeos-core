@@ -69,9 +69,9 @@ class Standard
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/standard/item/count
-		 * @see mshop/index/manager/standard/item/optimize
-		 * @see mshop/index/manager/standard/item/search
+		 * @see mshop/index/manager/standard/count
+		 * @see mshop/index/manager/standard/optimize
+		 * @see mshop/index/manager/standard/search
 		 */
 		return $this->aggregateBase( $search, $key, 'mshop/index/manager/standard/aggregate', array( 'product' ) );
 	}
@@ -272,9 +272,9 @@ class Standard
 		 * @param string SQL statement for optimizing the stored product data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/standard/item/count
-		 * @see mshop/index/manager/standard/item/search
-		 * @see mshop/index/manager/standard/item/aggregate
+		 * @see mshop/index/manager/standard/count
+		 * @see mshop/index/manager/standard/search
+		 * @see mshop/index/manager/standard/aggregate
 		 */
 		$this->doOptimize( 'mshop/index/manager/standard/optimize' );
 	}
@@ -487,7 +487,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
-		/** mshop/index/manager/standard/item/search
+		/** mshop/index/manager/standard/search
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the order
@@ -532,13 +532,13 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/standard/item/count
-		 * @see mshop/index/manager/standard/item/optimize
-		 * @see mshop/index/manager/standard/item/aggregate
+		 * @see mshop/index/manager/standard/count
+		 * @see mshop/index/manager/standard/optimize
+		 * @see mshop/index/manager/standard/aggregate
 		 */
-		$cfgPathSearch = 'mshop/index/manager/standard/item/search';
+		$cfgPathSearch = 'mshop/index/manager/standard/search';
 
-		/** mshop/index/manager/standard/item/count
+		/** mshop/index/manager/standard/count
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the order
@@ -577,11 +577,11 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/standard/item/search
-		 * @see mshop/index/manager/standard/item/optimize
-		 * @see mshop/index/manager/standard/item/aggregate
+		 * @see mshop/index/manager/standard/search
+		 * @see mshop/index/manager/standard/optimize
+		 * @see mshop/index/manager/standard/aggregate
 		 */
-		$cfgPathCount = 'mshop/index/manager/standard/item/count';
+		$cfgPathCount = 'mshop/index/manager/standard/count';
 
 		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}

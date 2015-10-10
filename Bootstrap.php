@@ -157,20 +157,19 @@ class Bootstrap
 	/**
 	 * Returns the paths containing the required configuration files.
 	 *
-	 * @param string $dbtype Name of the database type, e.g. "mysql"
 	 * @return string[] List of configuration paths
 	 */
-	public function getConfigPaths( $dbtype )
+	public function getConfigPaths()
 	{
 		$confpaths = array();
 
 		foreach( $this->manifests as $path => $manifest )
 		{
-			if( !isset( $manifest['config'][$dbtype] ) ) {
+			if( !isset( $manifest['config'] ) ) {
 				continue;
 			}
 
-			foreach( $manifest['config'][$dbtype] as $paths ) {
+			foreach( (array) $manifest['config'] as $paths ) {
 				$confpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
 			}
 		}

@@ -22,8 +22,6 @@ abstract class Base
 	implements \Aimeos\MShop\Common\Manager\Type\Iface
 {
 	private $prefix;
-	private $context;
-	private $config;
 	private $searchConfig;
 
 
@@ -36,32 +34,9 @@ abstract class Base
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
-		$conf = $context->getConfig();
-		$confpath = $this->getConfigPath();
-		$this->config = array(
-			'insert' => $conf->get( $confpath . 'insert' ),
-			'update' => $conf->get( $confpath . 'update' ),
-			'delete' => $conf->get( $confpath . 'delete' ),
-			'search' => $conf->get( $confpath . 'search' ),
-			'count' => $conf->get( $confpath . 'count' ),
-			'newid' => $conf->get( $confpath . 'newid' ),
-		);
-
-		$this->searchConfig = $this->getSearchConfig();
-
-		$required = array( 'count', 'delete', 'insert', 'newid', 'search', 'update' );
-		$isList = array_keys( $this->config );
-
-		foreach( $required as $key )
-		{
-			if( !in_array( $key, $isList ) ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Configuration of necessary SQL statement for "%1$s" not available', $key ) );
-			}
-		}
-
 		parent::__construct( $context );
 
-		$this->context = $context;
+		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
@@ -84,7 +59,7 @@ abstract class Base
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->context->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -120,7 +95,8 @@ abstract class Base
 
 		if( $item->isModified() === false ) { return; }
 
-		$dbm = $this->context->getDatabaseManager();
+		$context = $this->getContext();
+		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -129,20 +105,20 @@ abstract class Base
 			$id = $item->getId();
 
 			if( $id === null ) {
-				$sql = $this->config['insert'];
+				$type = 'insert';
 			} else {
-				$sql = $this->config['update'];
+				$type = 'update';
 			}
 
-			$statement = $conn->create( $sql );
+			$statement = $conn->create( $this->getSqlConfig( $this->getConfigPath() . $type ) );
 
-			$statement->bind( 1, $this->context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$statement->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$statement->bind( 2, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 			$statement->bind( 3, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 			$statement->bind( 4, $item->getLabel(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 			$statement->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$statement->bind( 6, date( 'Y-m-d H:i:s', time() ) ); //mtime
-			$statement->bind( 7, $this->context->getEditor() );
+			$statement->bind( 7, $context->getEditor() );
 
 			if( $id !== null ) {
 				$statement->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -155,7 +131,7 @@ abstract class Base
 			if( $fetch === true )
 			{
 				if( $id === null ) {
-					$item->setId( $this->newId( $conn, $this->config['newid'] ) );
+					$item->setId( $this->newId( $conn, $this->getConfigPath() . 'newid' ) );
 				} else {
 					$item->setId( $id ); // modified false
 				}
@@ -178,7 +154,7 @@ abstract class Base
 	 */
 	public function deleteItems( array $ids )
 	{
-		$this->deleteItemsBase( $ids, $this->config['delete'] );
+		$this->deleteItemsBase( $ids, $this->getConfigPath() . 'delete' );
 	}
 
 
@@ -218,7 +194,7 @@ abstract class Base
 	{
 		$items = array();
 
-		$dbm = $this->context->getDatabaseManager();
+		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -231,8 +207,8 @@ abstract class Base
 			}
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$cfgPathSearch = $this->config['search'];
-			$cfgPathCount = $this->config['count'];
+			$cfgPathSearch = $this->getConfigPath() . 'search';
+			$cfgPathCount = $this->getConfigPath() . 'count';
 			$required = array( trim( $this->prefix, '.' ) );
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );

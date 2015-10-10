@@ -20,13 +20,10 @@ return array(
 		'lib/mwlib/lib',
 	),
 	'config' => array(
-		'mysql' => array(
-			'lib/mshoplib/config/common',
-			'lib/mshoplib/config/mysql',
-			'controller/frontend/config/controller',
-			'controller/extjs/config/controller',
-			'config',
-		),
+		'lib/mshoplib/config',
+		'controller/frontend/config/controller',
+		'controller/extjs/config/controller',
+		'config',
 	),
 	'i18n' => array(
 		'client/extjs' => 'client/extjs/i18n',

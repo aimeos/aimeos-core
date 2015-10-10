@@ -148,7 +148,7 @@ class Standard
 	{
 		parent::cleanup( $siteids );
 
-		$this->cleanupBase( $siteids, 'mshop/index/manager/price/standard/item/delete' );
+		$this->cleanupBase( $siteids, 'mshop/index/manager/price/standard/delete' );
 	}
 
 
@@ -179,10 +179,10 @@ class Standard
 		 * @param string SQL statement for deleting the outdated price index records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/price/standard/item/count
-		 * @see mshop/index/manager/price/standard/item/delete
-		 * @see mshop/index/manager/price/standard/item/insert
-		 * @see mshop/index/manager/price/standard/item/search
+		 * @see mshop/index/manager/price/standard/count
+		 * @see mshop/index/manager/price/standard/delete
+		 * @see mshop/index/manager/price/standard/insert
+		 * @see mshop/index/manager/price/standard/search
 		 */
 		$this->doCleanupIndex( $timestamp, 'mshop/index/manager/price/standard/cleanup' );
 	}
@@ -195,7 +195,7 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
-		/** mshop/index/manager/price/standard/item/delete
+		/** mshop/index/manager/price/standard/delete
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the index database.
@@ -213,12 +213,12 @@ class Standard
 		 * @param string SQL statement for deleting index price records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/price/standard/item/count
-		 * @see mshop/index/manager/price/standard/item/cleanup
-		 * @see mshop/index/manager/price/standard/item/insert
-		 * @see mshop/index/manager/price/standard/item/search
+		 * @see mshop/index/manager/price/standard/count
+		 * @see mshop/index/manager/price/standard/cleanup
+		 * @see mshop/index/manager/price/standard/insert
+		 * @see mshop/index/manager/price/standard/search
 		 */
-		$this->doDeleteItems( $ids, 'mshop/index/manager/price/standard/item/delete' );
+		$this->doDeleteItems( $ids, 'mshop/index/manager/price/standard/delete' );
 	}
 
 
@@ -401,9 +401,9 @@ class Standard
 		 * @param string SQL statement for optimizing the stored price data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/price/standard/item/count
-		 * @see mshop/index/manager/price/standard/item/search
-		 * @see mshop/index/manager/price/standard/item/aggregate
+		 * @see mshop/index/manager/price/standard/count
+		 * @see mshop/index/manager/price/standard/search
+		 * @see mshop/index/manager/price/standard/aggregate
 		 */
 		$this->doOptimize( 'mshop/index/manager/price/standard/optimize' );
 	}
@@ -440,7 +440,7 @@ class Standard
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
-				/** mshop/index/manager/price/standard/item/insert
+				/** mshop/index/manager/price/standard/insert
 				 * Inserts a new price record into the product index database
 				 *
 				 * During the product index rebuild, prices related to a product
@@ -463,12 +463,12 @@ class Standard
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/index/manager/price/standard/item/cleanup
-				 * @see mshop/index/manager/price/standard/item/delete
-				 * @see mshop/index/manager/price/standard/item/search
-				 * @see mshop/index/manager/price/standard/item/count
+				 * @see mshop/index/manager/price/standard/cleanup
+				 * @see mshop/index/manager/price/standard/delete
+				 * @see mshop/index/manager/price/standard/search
+				 * @see mshop/index/manager/price/standard/count
 				 */
-				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/price/standard/item/insert' );
+				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/price/standard/insert' );
 
 				foreach( $item->getRefItems( 'price' ) as $refId => $refItem )
 				{
@@ -527,7 +527,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
-		/** mshop/index/manager/price/standard/item/search
+		/** mshop/index/manager/price/standard/search
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the product index
@@ -572,13 +572,13 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/price/standard/item/count
-		 * @see mshop/index/manager/price/standard/item/optimize
-		 * @see mshop/index/manager/price/standard/item/aggregate
+		 * @see mshop/index/manager/price/standard/count
+		 * @see mshop/index/manager/price/standard/optimize
+		 * @see mshop/index/manager/price/standard/aggregate
 		 */
-		$cfgPathSearch = 'mshop/index/manager/price/standard/item/search';
+		$cfgPathSearch = 'mshop/index/manager/price/standard/search';
 
-		/** mshop/index/manager/price/standard/item/count
+		/** mshop/index/manager/price/standard/count
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the product index
@@ -617,11 +617,11 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/price/standard/item/search
-		 * @see mshop/index/manager/price/standard/item/optimize
-		 * @see mshop/index/manager/price/standard/item/aggregate
+		 * @see mshop/index/manager/price/standard/search
+		 * @see mshop/index/manager/price/standard/optimize
+		 * @see mshop/index/manager/price/standard/aggregate
 		 */
-		$cfgPathCount = 'mshop/index/manager/price/standard/item/count';
+		$cfgPathCount = 'mshop/index/manager/price/standard/count';
 
 		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}

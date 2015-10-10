@@ -177,7 +177,7 @@ abstract class DBBase
 			$submanager->deleteItems( $ids );
 		}
 
-		$sql = $this->getContext()->getConfig()->get( $path, $path );
+		$sql = $path;
 
 		$this->deleteItemsBase( $ids, $sql, true, 'prodid' );
 	}
@@ -199,7 +199,7 @@ abstract class DBBase
 
 		try
 		{
-			foreach( (array) $config->get( $path, array() ) as $sql ) {
+			foreach( (array) $this->getSqlConfig( $path ) as $sql ) {
 				$conn->create( $sql )->execute()->finish();
 			}
 

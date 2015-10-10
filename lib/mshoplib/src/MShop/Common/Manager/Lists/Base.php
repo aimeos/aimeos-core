@@ -22,7 +22,6 @@ abstract class Base
 	implements \Aimeos\MShop\Common\Manager\Lists\Iface
 {
 	private $prefix;
-	private $configPath;
 	private $searchConfig;
 
 
@@ -35,7 +34,6 @@ abstract class Base
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
-		$this->configPath = $this->getConfigPath();
 		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
@@ -64,7 +62,7 @@ abstract class Base
 	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
 	{
 		$required = array( trim( $this->prefix, '.' ) );
-		return $this->aggregateBase( $search, $key, $this->configPath . 'aggregate', $required );
+		return $this->aggregateBase( $search, $key, $this->getConfigPath() . 'aggregate', $required );
 	}
 
 
@@ -105,13 +103,13 @@ abstract class Base
 			$id = $item->getId();
 
 			if( $id === null ) {
-				$path = $this->configPath . 'insert';
+				$type = 'insert';
 			} else {
-				$path = $this->configPath . 'update';
+				$type = 'update';
 			}
 
 			$time = date( 'Y-m-d H:i:s' );
-			$statement = $this->getCachedStatement( $conn, $path );
+			$statement = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
 
 			$statement->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$statement->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -139,8 +137,8 @@ abstract class Base
 			if( $fetch === true )
 			{
 				if( $id === null ) {
-					$path = $this->configPath . 'newid';
-					$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+					$path = $this->getConfigPath() . 'newid';
+					$item->setId( $this->newId( $conn, $path ) );
 				} else {
 					$item->setId( $id ); // modified false
 				}
@@ -163,8 +161,7 @@ abstract class Base
 	 */
 	public function deleteItems( array $ids )
 	{
-		$path = $this->configPath . 'delete';
-		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getConfigPath() . 'delete' );
 	}
 
 
@@ -208,6 +205,7 @@ abstract class Base
 		$context = $this->getContext();
 		$config = $context->getConfig();
 		$siteid = $context->getLocale()->getSiteId();
+		$cfgPath = $this->getConfigPath();
 
 		$listItem = $this->getItem( $id );
 
@@ -231,7 +229,7 @@ abstract class Base
 			{
 				$newpos = $pos;
 
-				$sql = $config->get( $this->configPath . 'move' );
+				$sql = $this->getSqlConfig( $cfgPath . 'move' );
 
 				$stmt = $conn->create( $sql );
 				$stmt->bind( 1, +1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -247,7 +245,7 @@ abstract class Base
 			}
 			else
 			{
-				$sql = $config->get( $this->configPath . 'getposmax' );
+				$sql = $this->getSqlConfig( $cfgPath . 'getposmax' );
 
 				$stmt = $conn->create( $sql );
 
@@ -265,7 +263,7 @@ abstract class Base
 				}
 			}
 
-			$sql = $config->get( $this->configPath . 'updatepos' );
+			$sql = $this->getSqlConfig( $cfgPath . 'updatepos' );
 
 			$stmt = $conn->create( $sql );
 			$stmt->bind( 1, $newpos, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -279,7 +277,7 @@ abstract class Base
 				$oldpos++;
 			}
 
-			$sql = $config->get( $this->configPath . 'move' );
+			$sql = $this->getSqlConfig( $cfgPath . 'move' );
 
 			$stmt = $conn->create( $sql );
 			$stmt->bind( 1, -1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -330,8 +328,8 @@ abstract class Base
 			}
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$cfgPathSearch = $this->configPath . 'search';
-			$cfgPathCount = $this->configPath . 'count';
+			$cfgPathSearch = $this->getConfigPath() . 'search';
+			$cfgPathCount = $this->getConfigPath() . 'count';
 
 			$name = trim( $this->prefix, '.' );
 			$required = array( $name );
@@ -409,8 +407,8 @@ abstract class Base
 			}
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$cfgPathSearch = $this->configPath . 'search';
-			$cfgPathCount = $this->configPath . 'count';
+			$cfgPathSearch = $this->getConfigPath() . 'search';
+			$cfgPathCount = $this->getConfigPath() . 'count';
 
 			$name = trim( $this->prefix, '.' );
 			$required = array( $name );

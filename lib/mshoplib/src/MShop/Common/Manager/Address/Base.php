@@ -21,9 +21,8 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Common\Manager\Address\Iface
 {
-	private $context;
-	private $searchConfig;
 	private $prefix;
+	private $searchConfig;
 
 
 	/**
@@ -37,7 +36,6 @@ abstract class Base
 	{
 		parent::__construct( $context );
 
-		$this->context = $context;
 		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
@@ -61,7 +59,7 @@ abstract class Base
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->context->getLocale()->getSiteId() );
+		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -73,8 +71,7 @@ abstract class Base
 	 */
 	public function deleteItems( array $ids )
 	{
-		$path = $this->getConfigPath() . '/delete';
-		$this->deleteItemsBase( $ids, $this->context->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $this->getConfigPath() . 'delete' );
 	}
 
 
@@ -109,7 +106,9 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		$dbm = $this->context->getDatabaseManager();
+		$context = $this->getContext();
+
+		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
@@ -124,12 +123,9 @@ abstract class Base
 				$type = 'update';
 			}
 
-			$path = $this->getConfigPath() . '/' . $type;
+			$stmt = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
 
-			$sql = $this->context->getConfig()->get( $path, $path );
-			$stmt = $this->getCachedStatement( $conn, $this->prefix . $type, $sql );
-
-			$stmt->bind( 1, $this->context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getRefId() );
 			$stmt->bind( 3, $item->getCompany() );
 			$stmt->bind( 4, $item->getVatId() );
@@ -152,7 +148,7 @@ abstract class Base
 			$stmt->bind( 21, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 22, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 23, $date ); //mtime
-			$stmt->bind( 24, $this->context->getEditor() );
+			$stmt->bind( 24, $context->getEditor() );
 
 			if( $id !== null ) {
 				$stmt->bind( 25, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -165,8 +161,8 @@ abstract class Base
 
 			if( $id === null && $fetch === true )
 			{
-				$path = $this->getConfigPath() . '/newid';
-				$item->setId( $this->newId( $conn, $this->context->getConfig()->get( $path, $path ) ) );
+				$path = $this->getConfigPath() . 'newid';
+				$item->setId( $this->newId( $conn, $path ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -189,7 +185,7 @@ abstract class Base
 	 */
 	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
-		$dbm = $this->context->getDatabaseManager();
+		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = array();
@@ -204,8 +200,8 @@ abstract class Base
 
 			$required = array( trim( $this->prefix, '.' ) );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$cfgPathSearch = $this->getConfigPath() . '/search';
-			$cfgPathCount = $this->getConfigPath() . '/count';
+			$cfgPathSearch = $this->getConfigPath() . 'search';
+			$cfgPathCount = $this->getConfigPath() . 'count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 

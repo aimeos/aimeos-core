@@ -295,7 +295,7 @@ class Standard
 				 * @see madmin/job/manager/standard/count
 				 */
 				$path = 'madmin/job/manager/standard/newid';
-				$item->setId( $this->newId( $conn, $context->getConfig()->get( $path, $path ) ) );
+				$item->setId( $this->newId( $conn, $path ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -340,7 +340,7 @@ class Standard
 		 * @see madmin/job/manager/standard/count
 		 */
 		$path = 'madmin/job/manager/standard/delete';
-		$this->deleteItemsBase( $ids, $this->getContext()->getConfig()->get( $path, $path ) );
+		$this->deleteItemsBase( $ids, $path );
 	}
 
 

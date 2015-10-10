@@ -134,7 +134,7 @@ abstract class Base
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$total = null;
 
-			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $context->getConfig()->get( $cfgPath, $cfgPath ) );
+			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $this->getSqlConfig( $cfgPath ) );
 			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
@@ -157,13 +157,13 @@ abstract class Base
 	 * Returns the newly created ID for the last record which was inserted.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection used to insert the new record
-	 * @param string $sql SQL statement for retrieving the new ID of the last record which was inserted
+	 * @param string $cfgpath Configuration path to the SQL statement for retrieving the new ID of the last inserted record
 	 * @return string ID of the last record that was inserted by using the given connection
 	 * @throws \Aimeos\MShop\Common\Exception if there's no ID of the last record available
 	 */
-	protected function newId( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
+	protected function newId( \Aimeos\MW\DB\Connection\Iface $conn, $cfgpath )
 	{
-		$result = $conn->create( $sql )->execute();
+		$result = $conn->create( $this->getSqlConfig( $cfgpath ) )->execute();
 
 		if( ( $row = $result->fetch( \Aimeos\MW\DB\Result\Base::FETCH_NUM ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'ID of last inserted database record not available' ) );
@@ -188,7 +188,7 @@ abstract class Base
 
 		try
 		{
-			$sql = $this->context->getConfig()->get( $cfgpath, $cfgpath );
+			$sql = $this->getSqlConfig( $cfgpath );
 			$sql = str_replace( ':cond', '1=1', $sql );
 
 			$stmt = $conn->create( $sql );
@@ -236,22 +236,23 @@ abstract class Base
 	 * If no SQL string is given, the key is used to retrieve the SQL string from the configuration.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param string $key Unique key for the SQL
+	 * @param string $cfgkey Unique key for the SQL
 	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
 	 */
-	protected function getCachedStatement( \Aimeos\MW\DB\Connection\Iface $conn, $key, $sql = null )
+	protected function getCachedStatement( \Aimeos\MW\DB\Connection\Iface $conn, $cfgkey, $sql = null )
 	{
-		if( !isset( $this->stmts['stmt'][$key] ) || !isset( $this->stmts['conn'][$key] ) || $conn !== $this->stmts['conn'][$key] )
-		{
+		if( !isset( $this->stmts['stmt'][$cfgkey] ) || !isset( $this->stmts['conn'][$cfgkey] )
+			|| $conn !== $this->stmts['conn'][$cfgkey]
+		) {
 			if( $sql === null ) {
-				$sql = $this->context->getConfig()->get( $key, $key );
+				$sql = $this->getSqlConfig( $cfgkey );
 			}
 
-			$this->stmts['stmt'][$key] = $conn->create( $sql );
-			$this->stmts['conn'][$key] = $conn;
+			$this->stmts['stmt'][$cfgkey] = $conn->create( $sql );
+			$this->stmts['conn'][$cfgkey] = $conn;
 		}
 
-		return $this->stmts['stmt'][$key];
+		return $this->stmts['stmt'][$cfgkey];
 	}
 
 
@@ -332,6 +333,24 @@ abstract class Base
 		$siteIds = array_unique( $siteIds );
 
 		return $siteIds;
+	}
+
+
+	/**
+	 * Returns the SQL statement for the given config path
+	 *
+	 * If available, the database specific SQL statement is returned, otherwise
+	 * the ANSI SQL statement. The database type is determined via the resource
+	 * adapter.
+	 *
+	 * @param string $path Configuration path to the SQL statement
+	 * @param string|null ANSI or database specific SQL statement
+	 */
+	protected function getSqlConfig( $path )
+	{
+		$config = $this->getContext()->getConfig();
+		$adapter = $config->get( 'resource/' . $this->getResourceName() . '/adapter' );
+		return $config->get( $path . '/' . $adapter, $config->get( $path . '/ansi', $path ) );
 	}
 
 
@@ -814,7 +833,7 @@ abstract class Base
 
 		if( $total !== null )
 		{
-			$sql = new \Aimeos\MW\Template\SQL( $this->context->getConfig()->get( $cfgPathCount, $cfgPathCount ) );
+			$sql = new \Aimeos\MW\Template\SQL( $this->getSqlConfig( $cfgPathCount ) );
 			$sql->replace( $find, $replace )->enable( $keys );
 
 			$time = microtime( true );
@@ -832,7 +851,7 @@ abstract class Base
 		}
 
 
-		$sql = new \Aimeos\MW\Template\SQL( $this->context->getConfig()->get( $cfgPathSearch, $cfgPathSearch ) );
+		$sql = new \Aimeos\MW\Template\SQL( $this->getSqlConfig( $cfgPathSearch ) );
 		$sql->replace( $find, $replace )->enable( $keys );
 
 		$time = microtime( true );
@@ -848,11 +867,11 @@ abstract class Base
 	 * Deletes items specified by its IDs.
 	 *
 	 * @param array $ids List of IDs
-	 * @param string $sql SQL statement
+	 * @param string $cfgpath Configuration path to the SQL statement
 	 * @param boolean $siteidcheck If siteid should be used in the statement
 	 * @param string $name Name of the ID column
 	 */
-	protected function deleteItemsBase( array $ids, $sql, $siteidcheck = true, $name = 'id' )
+	protected function deleteItemsBase( array $ids, $cfgpath, $siteidcheck = true, $name = 'id' )
 	{
 		if( empty( $ids ) ) { return; }
 
@@ -866,7 +885,7 @@ abstract class Base
 		$translations = array( $name => '"' . $name . '"' );
 
 		$cond = $search->getConditionString( $types, $translations );
-		$sql = str_replace( ':cond', $cond, $sql );
+		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
 
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire( $dbname );
