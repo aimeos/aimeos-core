@@ -179,7 +179,7 @@ abstract class DBBase
 			$submanager->deleteItems( $ids );
 		}
 
-		$this->deleteItemsBase( $ids, $path, $siteidcheck, $name );
+		parent::deleteItemsBase( $ids, $path, $siteidcheck, $name );
 	}
 
 
