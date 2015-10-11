@@ -6,8 +6,9 @@ namespace Aimeos\MW\Common\Criteria\Expression\Sort;
 /**
  * Test class for \Aimeos\MW\Common\Criteria\Expression\Sort\SQL.
  *
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://www.gnu.org/licenses/lgpl.html
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
  */
 class SQLTest extends \PHPUnit_Framework_TestCase
 {

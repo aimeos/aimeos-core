@@ -4,8 +4,9 @@ namespace Aimeos\Controller\ExtJS\Plugin\Decorator;
 
 
 /**
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
+ * @copyright Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
  */
 class ExampleTest extends \PHPUnit_Framework_TestCase
 {

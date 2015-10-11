@@ -5,7 +5,7 @@ namespace Aimeos\Client\Html\Catalog\Detail\Additional\Property;
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2014
+ * @copyright Aimeos (aimeos.org), 2014-2015
  */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
