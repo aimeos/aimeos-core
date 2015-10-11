@@ -82,7 +82,7 @@ abstract class Base
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -129,7 +129,7 @@ abstract class Base
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -163,11 +163,11 @@ abstract class Base
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Criteria object with conditions, sortations, etc.
+	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		return $this->manager->searchItems( $search, $ref, $total );
 	}
@@ -179,13 +179,13 @@ abstract class Base
 	 * Only criteria from the list and list type can be used for searching and
 	 * sorting, but no criteria from the referenced items.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @throws \Aimeos\MShop\Exception if creating items failed
-	 * @see \Aimeos\MW\Common\Criteria\SQL
+	 * @see \Aimeos\MW\Criteria\SQL
 	 */
-	public function searchRefItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		return $this->manager->searchRefItems( $search, $ref, $total );
 	}

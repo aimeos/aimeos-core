@@ -62,7 +62,7 @@ abstract class DBBase
 	 * Creates a search object and optionally sets its base criteria
 	 *
 	 * @param boolean $default True to add the default criteria
-	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -86,7 +86,7 @@ abstract class DBBase
 	 * Returns a list of attribute objects describing the available criteria for searching
 	 *
 	 * @param boolean $withsub True to return attributes of sub-managers too
-	 * @return array List of items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -220,14 +220,14 @@ abstract class DBBase
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
 	 * @param string $cfgPathSearch Configuration path to the search SQL statement
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
 	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	protected function searchItemsIndexBase( \Aimeos\MW\Common\Criteria\Iface $search,
+	protected function searchItemsIndexBase( \Aimeos\MW\Criteria\Iface $search,
 		array $ref, &$total, $cfgPathSearch, $cfgPathCount )
 	{
 		$list = $ids = array();

@@ -31,12 +31,12 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 *
 	 * @param string $url Initial url
 	 * @param string $method Initial method (e.g. post or get)
-	 * @param array $values Form parameters implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @param array $values Form parameters implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 * @param boolean $external True if URL points to an external site, false if it stays on the same site
 	 */
 	public function __construct( $url = '', $method = '', array $values = array(), $external = true )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $values );
+		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $values );
 
 		$this->url = (string) $url;
 		$this->external = (bool) $external;
@@ -115,7 +115,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Returns the value for the given key.
 	 *
 	 * @param string $key Unique key
-	 * @return \Aimeos\MW\Common\Criteria\Attribute\Iface Attribute item for the given key
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface Attribute item for the given key
 	 */
 	public function getValue( $key )
 	{
@@ -131,9 +131,9 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Sets the value for the key.
 	 *
 	 * @param string $key Unique key
-	 * @param \Aimeos\MW\Common\Criteria\Attribute\Iface $value Attribute item for the given key
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
 	 */
-	public function setValue( $key, \Aimeos\MW\Common\Criteria\Attribute\Iface $value )
+	public function setValue( $key, \Aimeos\MW\Criteria\Attribute\Iface $value )
 	{
 		$this->values[$key] = $value;
 	}
@@ -142,7 +142,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	/**
 	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/value pairs, values implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array Key/value pairs, values implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getValues()
 	{

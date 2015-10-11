@@ -151,7 +151,7 @@ class Standard
 	 * Creates a search object and sets base criteria.
 	 *
 	 * @param boolean $default
-	 * @return \Aimeos\MW\Common\Criteria\Iface
+	 * @return \Aimeos\MW\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -180,12 +180,12 @@ class Standard
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Criteria object with conditions, sortations, etc.
+	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$locale = $this->getContext()->getLocale();
 		$siteIds = $locale->getSitePath();
@@ -415,7 +415,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -654,11 +654,11 @@ class Standard
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Criteria object with conditions, sortations, etc.
+	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	protected function search( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	protected function search( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();

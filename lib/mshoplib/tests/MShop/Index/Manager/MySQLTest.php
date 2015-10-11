@@ -85,7 +85,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
 		foreach( $list as $attribute )
 		{
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
 
 			switch( $attribute->getCode() )
 			{

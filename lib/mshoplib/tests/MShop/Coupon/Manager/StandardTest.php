@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$attribs = $this->object->getSearchAttributes();
 		foreach( $attribs as $obj ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $obj );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $obj );
 		}
 	}
 
@@ -184,7 +184,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$search = $this->object->createSearch();
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\SQL', $search );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\SQL', $search );
 	}
 
 

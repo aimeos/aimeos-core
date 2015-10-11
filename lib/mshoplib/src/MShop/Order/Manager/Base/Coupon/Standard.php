@@ -101,11 +101,11 @@ class Standard
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
 		/** mshop/order/manager/base/coupon/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -391,7 +391,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attributes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array Returns a list of attributes implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -421,13 +421,13 @@ class Standard
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array Return a list of items implementing \Aimeos\MShop\Order\Item\Base\Coupon\Iface
 	 * @throws \Aimeos\MShop\Order\Exception If creation of an item fails
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();

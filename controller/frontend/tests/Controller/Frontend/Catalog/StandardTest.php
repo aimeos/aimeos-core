@@ -35,8 +35,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createCatalogFilter( true );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Expression\\Compare\\Iface', $filter->getConditions() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\Iface', $filter->getConditions() );
 		$this->assertEquals( 'catalog.status', $filter->getConditions()->getName() );
 	}
 
@@ -79,7 +79,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilter();
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
 		$this->assertEquals( 0, $filter->getSliceStart() );
 		$this->assertEquals( 100, $filter->getSliceSize() );
@@ -90,12 +90,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0 );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$list = $filter->getConditions()->getExpressions();
 
 
-		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Common\Criteria\Expression\Compare\Iface ) ) {
+		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface ) ) {
 			throw new \Exception( 'Wrong expression' );
 		}
 		$this->assertEquals( 'index.catalog.id', $list[0]->getName() );
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'relevance', '-', 1, 2, 'test' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'code' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -146,7 +146,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'name' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'price' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 0, 'failure' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
 	}
 
@@ -188,7 +188,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$list = $filter->getConditions()->getExpressions();
 
-		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Common\Criteria\Expression\Compare\Iface ) ) {
+		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface ) ) {
 			throw new \Exception( 'Wrong expression' );
 		}
 
@@ -202,12 +202,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( 'Espresso' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$list = $filter->getConditions()->getExpressions();
 
 
-		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Common\Criteria\Expression\Compare\Iface ) ) {
+		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface ) ) {
 			throw new \Exception( 'Wrong expression' );
 		}
 		$this->assertEquals( 'index.text.relevance("default","de","Espresso")', $list[0]->getName() );
@@ -224,7 +224,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( 'Espresso', 'relevance', '-', 1, 2, 'test' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
 		$this->assertEquals( 1, $filter->getSliceStart() );
 		$this->assertEquals( 2, $filter->getSliceSize() );
@@ -235,7 +235,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( 'Espresso', 'code' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -250,7 +250,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( 'Espresso', 'name' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -265,7 +265,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterCategory( 'Espresso', 'price' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 
 		$sort = $filter->getSortations();
 		if( ( $item = reset( $sort ) ) === false ) {
@@ -280,7 +280,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createIndexFilterText( '', 'failure' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
 		$this->assertEquals( array(), $filter->getSortations() );
 	}
 
@@ -292,7 +292,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$list = $filter->getConditions()->getExpressions();
 
-		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Common\Criteria\Expression\Compare\Iface ) ) {
+		if( !isset( $list[0] ) || !( $list[0] instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface ) ) {
 			throw new \Exception( 'Wrong expression' );
 		}
 
@@ -339,8 +339,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$filter = $this->object->createTextFilter( 'Expresso', 'name', '+', 0, 1 );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $filter );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Expression\\Combine\\Iface', $filter->getConditions() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $filter );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\Iface', $filter->getConditions() );
 		$this->assertEquals( 3, count( $filter->getConditions()->getExpressions() ) );
 	}
 

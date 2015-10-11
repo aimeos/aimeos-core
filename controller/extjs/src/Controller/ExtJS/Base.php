@@ -318,14 +318,14 @@ abstract class Base
 	/**
 	 * Returns the item properties suitable for creating a JSON schema.
 	 *
-	 * @param array $attributes List of attribute object implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @param array $attributes List of attribute object implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 * @param boolean $all True if all search attributes should be returned or false for only public ones
-	 * @throws \Aimeos\Controller\ExtJS\Exception if list item doesn't implement \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @throws \Aimeos\Controller\ExtJS\Exception if list item doesn't implement \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	protected function getAttributeSchema( array $attributes, $all = true )
 	{
 		$properties = array();
-		$iface = '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface';
+		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
 
 		foreach( $attributes as $attribute )
 		{
@@ -370,11 +370,11 @@ abstract class Base
 	/**
 	 * Initializes the criteria object based on the given parameter.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $criteria Criteria object
 	 * @param \stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
-	 * @return \Aimeos\MW\Common\Criteria\Iface Initialized criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Initialized criteria object
 	 */
-	protected function initCriteria( \Aimeos\MW\Common\Criteria\Iface $criteria, \stdClass $params )
+	protected function initCriteria( \Aimeos\MW\Criteria\Iface $criteria, \stdClass $params )
 	{
 		$this->initCriteriaConditions( $criteria, $params );
 		$this->initCriteriaSortations( $criteria, $params );
@@ -387,10 +387,10 @@ abstract class Base
 	/**
 	 * Initializes the criteria object with conditions based on the given parameter.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $criteria Criteria object
 	 * @param \stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaConditions( \Aimeos\MW\Common\Criteria\Iface $criteria, \stdClass $params )
+	private function initCriteriaConditions( \Aimeos\MW\Criteria\Iface $criteria, \stdClass $params )
 	{
 		if( isset( $params->condition ) && is_object( $params->condition ) )
 		{
@@ -409,10 +409,10 @@ abstract class Base
 	/**
 	 * Initializes the criteria object with the slice based on the given parameter.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $criteria Criteria object
 	 * @param \stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaSlice( \Aimeos\MW\Common\Criteria\Iface $criteria, \stdClass $params )
+	private function initCriteriaSlice( \Aimeos\MW\Criteria\Iface $criteria, \stdClass $params )
 	{
 		if( isset( $params->start ) && isset( $params->limit ) )
 		{
@@ -427,10 +427,10 @@ abstract class Base
 	/**
 	 * Initializes the criteria object with sortations based on the given parameter.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $criteria Criteria object
 	 * @param \stdClass $params Object that may contain the properties "condition", "sort", "dir", "start" and "limit"
 	 */
-	private function initCriteriaSortations( \Aimeos\MW\Common\Criteria\Iface $criteria, \stdClass $params )
+	private function initCriteriaSortations( \Aimeos\MW\Criteria\Iface $criteria, \stdClass $params )
 	{
 		if( isset( $params->sort ) && isset( $params->dir ) )
 		{

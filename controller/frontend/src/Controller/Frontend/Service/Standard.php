@@ -86,7 +86,7 @@ class Standard
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 * @throws \Aimeos\Controller\Frontend\Service\Exception If no active service provider for this ID is available
 	 * @throws \Aimeos\MShop\Exception If service provider isn't available
 	 * @throws \Exception If an error occurs

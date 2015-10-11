@@ -356,7 +356,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -386,12 +386,12 @@ class Standard
 	/**
 	 * Searches for all text items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of text items implementing \Aimeos\MShop\Text\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -558,7 +558,7 @@ class Standard
 	 * Creates a search object.
 	 *
 	 * @param boolean $default If base criteria should be added
-	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
 	 */
 	public function createSearch( $default = false )
 	{

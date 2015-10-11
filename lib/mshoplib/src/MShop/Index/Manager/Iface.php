@@ -24,11 +24,11 @@ interface Iface
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key );
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key );
 
 
 	/**

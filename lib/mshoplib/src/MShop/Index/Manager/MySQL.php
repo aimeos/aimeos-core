@@ -26,14 +26,14 @@ class MySQL
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$conn = $dbm->acquire();
 
-		$object = new \Aimeos\MW\Common\Criteria\MySQL( $conn );
+		$object = new \Aimeos\MW\Criteria\MySQL( $conn );
 
 		$dbm->release( $conn );
 

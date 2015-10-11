@@ -116,12 +116,12 @@ interface Iface
 	 * array( 'text' => 1 ) // second result set with refid 12 counted
 	 * </code>
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
-	 * @see \Aimeos\MW\Common\Criteria\Iface
+	 * @see \Aimeos\MW\Criteria\Iface
 	 */
-	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key );
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key );
 
 
 	/**
@@ -202,12 +202,12 @@ interface Iface
 	 * list items in one slice point to the same referenced item. In this case
 	 * the referenced item is only returned once in that slice.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array Associative list of domains as keys and lists with pairs
 	 *	of IDs and items implementing \Aimeos\MShop\Common\Item\Iface
-	 * @see \Aimeos\MW\Common\Criteria\Iface
+	 * @see \Aimeos\MW\Criteria\Iface
 	 */
-	public function searchRefItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null );
+	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null );
 }

@@ -168,7 +168,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, $this->dbm );
 
 		foreach( $manager->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface', $attribute );
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
 
@@ -185,7 +185,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, $this->dbm );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Common\\Criteria\\Iface', $manager->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $manager->createSearch() );
 	}
 
 

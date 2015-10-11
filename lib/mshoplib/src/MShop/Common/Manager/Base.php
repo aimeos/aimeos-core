@@ -55,11 +55,11 @@ abstract class Base
 	 * Creates a search object.
 	 *
 	 * @param boolean $default Add default criteria; Optional
-	 * @return \Aimeos\MW\Common\Criteria\Iface
+	 * @return \Aimeos\MW\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
-		return new \Aimeos\MW\Common\Criteria\SQL( new \Aimeos\MW\DB\Connection\None() );
+		return new \Aimeos\MW\Criteria\SQL( new \Aimeos\MW\DB\Connection\None() );
 	}
 
 
@@ -104,13 +104,13 @@ abstract class Base
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	protected function aggregateBase( \Aimeos\MW\Common\Criteria\Iface $search, $key, $cfgPath, $required = array() )
+	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, $cfgPath, $required = array() )
 	{
 		$list = array();
 		$context = $this->getContext();
@@ -215,7 +215,7 @@ abstract class Base
 	 * (setConditions overwrites the base criteria)
 	 *
 	 * @param string $domain Name of the domain/sub-domain like "product" or "product.list"
-	 * @return \Aimeos\MW\Common\Criteria\Iface Search critery object
+	 * @return \Aimeos\MW\Criteria\Iface Search critery object
 	 */
 	protected function createSearchBase( $domain )
 	{
@@ -223,7 +223,7 @@ abstract class Base
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$object = new \Aimeos\MW\Common\Criteria\SQL( $conn );
+		$object = new \Aimeos\MW\Criteria\SQL( $conn );
 		$object->setConditions( $object->compare( '==', $domain . '.status', 1 ) );
 
 		$dbm->release( $conn, $dbname );
@@ -275,7 +275,7 @@ abstract class Base
 	 * @param string $path Configuration path to the sub-domains for fetching the search definitions
 	 * @param array $default List of sub-domains if no others are configured
 	 * @param boolean $withsub True to include search definitions of sub-domains, false if not
-	 * @return array Associative list of search keys and objects implementing the \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
 	 * @since 2014.09
 	 */
 	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
@@ -285,7 +285,7 @@ abstract class Base
 			$attr = array();
 
 			foreach( $list as $key => $fields ) {
-				$attr[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $fields );
+				$attr[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
 			}
 
 			$this->searchAttributes[0] = $attr;
@@ -415,10 +415,10 @@ abstract class Base
 	 * Returns a list of unique criteria names shortend by the last element after the ''
 	 *
 	 * @param string[] $prefix Required base prefixes of the search keys
-	 * @param \Aimeos\MW\Common\Criteria\Expression\Iface|null Criteria object
+	 * @param \Aimeos\MW\Criteria\Expression\Iface|null Criteria object
 	 * @return array List of shortend criteria names
 	 */
-	private function getCriteriaKeys( array $prefix, \Aimeos\MW\Common\Criteria\Expression\Iface $expr = null )
+	private function getCriteriaKeys( array $prefix, \Aimeos\MW\Criteria\Expression\Iface $expr = null )
 	{
 		if( $expr === null ) { return array(); }
 
@@ -444,11 +444,11 @@ abstract class Base
 	/**
 	 * Returns a sorted list of required criteria keys.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $criteria Search criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $criteria Search criteria object
 	 * @param string[] $required List of prefixes of required search conditions
 	 * @return string[] Sorted list of criteria keys
 	 */
-	private function getCriteriaKeyList( \Aimeos\MW\Common\Criteria\Iface $criteria, array $required )
+	private function getCriteriaKeyList( \Aimeos\MW\Criteria\Iface $criteria, array $required )
 	{
 		$keys = array_merge( $required, $this->getCriteriaKeys( $required, $criteria->getConditions() ) );
 
@@ -605,16 +605,16 @@ abstract class Base
 	/**
 	 * Returns a list of criteria names from a expression and its sub-expressions.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Expression\Iface Criteria object
+	 * @param \Aimeos\MW\Criteria\Expression\Iface Criteria object
 	 * @return array List of criteria names
 	 */
-	private function getCriteriaNames( \Aimeos\MW\Common\Criteria\Expression\Iface $expr )
+	private function getCriteriaNames( \Aimeos\MW\Criteria\Expression\Iface $expr )
 	{
-		if( $expr instanceof \Aimeos\MW\Common\Criteria\Expression\Compare\Iface ) {
+		if( $expr instanceof \Aimeos\MW\Criteria\Expression\Compare\Iface ) {
 			return array( $expr->getName() );
 		}
 
-		if( $expr instanceof \Aimeos\MW\Common\Criteria\Expression\Combine\Iface )
+		if( $expr instanceof \Aimeos\MW\Criteria\Expression\Combine\Iface )
 		{
 			$list = array();
 			foreach( $expr->getExpressions() as $item ) {
@@ -623,7 +623,7 @@ abstract class Base
 			return $list;
 		}
 
-		if( $expr instanceof \Aimeos\MW\Common\Criteria\Expression\Sort\Iface ) {
+		if( $expr instanceof \Aimeos\MW\Criteria\Expression\Sort\Iface ) {
 			return array( $expr->getName() );
 		}
 
@@ -662,7 +662,7 @@ abstract class Base
 	 */
 	private function getJoins( array $attributes, $prefix )
 	{
-		$iface = '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface';
+		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
 		$sep = $this->getKeySeparator();
 		$name = $prefix . $sep . 'id';
 
@@ -734,7 +734,7 @@ abstract class Base
 		$translations = array( 'siteid' => $column );
 		$conn = new \Aimeos\MW\DB\Connection\None();
 
-		$search = new \Aimeos\MW\Common\Criteria\SQL( $conn );
+		$search = new \Aimeos\MW\Criteria\SQL( $conn );
 
 		$expr = $search->compare( '==', 'siteid', $value );
 		$string = $expr->toString( $types, $translations );
@@ -746,14 +746,14 @@ abstract class Base
 	/**
 	 * Returns the site coditions for the search request
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string[] Sorted list of criteria keys
-	 * @param array Associative list of search keys and objects implementing the \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @param array Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
 	 * @param string[] $siteIds List of site IDs that should be used for searching
-	 * @return array List of search conditions implementing \Aimeos\MW\Common\Criteria\Expression\Iface
+	 * @return array List of search conditions implementing \Aimeos\MW\Criteria\Expression\Iface
 	 * @since 2015.01
 	 */
-	protected function getSearchSiteConditions( \Aimeos\MW\Common\Criteria\Iface $search, array $keys, array $attributes, array $siteIds )
+	protected function getSearchSiteConditions( \Aimeos\MW\Criteria\Iface $search, array $keys, array $attributes, array $siteIds )
 	{
 		$cond = array();
 		$sep = $this->getKeySeparator();
@@ -775,7 +775,7 @@ abstract class Base
 	 * Returns the search result of the statement combined with the given criteria.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
 	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
@@ -784,7 +784,7 @@ abstract class Base
 	 * @return \Aimeos\MW\DB\Result\Iface SQL result object for accessing the found records
 	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
 	 */
-	protected function searchItemsBase( \Aimeos\MW\DB\Connection\Iface $conn, \Aimeos\MW\Common\Criteria\Iface $search,
+	protected function searchItemsBase( \Aimeos\MW\DB\Connection\Iface $conn, \Aimeos\MW\Criteria\Iface $search,
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
 		$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = array() )
 	{

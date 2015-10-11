@@ -151,7 +151,7 @@ class Standard
 	 * Creates a criteria object for searching.
 	 *
 	 * @param boolean $default Prepopulate object with default criterias
-	 * @return \Aimeos\MW\Common\Criteria\Iface
+	 * @return \Aimeos\MW\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -203,7 +203,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -521,12 +521,12 @@ class Standard
 	/**
 	 * Searches for plugin items matching the given criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param integer &$total Number of items that are available in total
 	 *
 	 * @return array List of plugin items implementing \Aimeos\MShop\Plugin\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
 		$context = $this->getContext();

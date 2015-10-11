@@ -392,13 +392,13 @@ class Standard
 	/**
 	 * Search for products based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 *
 	 * @return array List of products implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$map = $typeIds = array();
 		$context = $this->getContext();
@@ -560,7 +560,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array Returns a list of attribtes implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -605,7 +605,7 @@ class Standard
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{

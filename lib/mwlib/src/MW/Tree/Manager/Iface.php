@@ -23,14 +23,14 @@ interface Iface
 	/**
 	 * Returns a list of attributes which can be used in the search method.
 	 *
-	 * @return array List of search attribute objects implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of search attribute objects implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes();
 
 	/**
 	 * Creates a new search object for storing search criterias.
 	 *
-	 * @return \Aimeos\MW\Common\Criteria\Iface Search object instance
+	 * @return \Aimeos\MW\Criteria\Iface Search object instance
 	 */
 	public function createSearch();
 
@@ -53,10 +53,10 @@ interface Iface
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param int $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
-	 * @param \Aimeos\MW\Common\Criteria\Iface|null $criteria Optional criteria object with conditions
+	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getNode( $id = null, $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Common\Criteria\Iface $criteria = null );
+	public function getNode( $id = null, $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null );
 
 	/**
 	 * Inserts a new node before the given reference node to the parent in the storage.
@@ -90,10 +90,10 @@ interface Iface
 	/**
 	 * Retrieves a list of nodes from the storage matching the given search criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria object
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @return array List of nodes implementing \Aimeos\MW\Tree\Node\Iface
 	 */
-	public function searchNodes( \Aimeos\MW\Common\Criteria\Iface $search );
+	public function searchNodes( \Aimeos\MW\Criteria\Iface $search );
 
 	/**
 	 * Checks, whether a tree is read only.

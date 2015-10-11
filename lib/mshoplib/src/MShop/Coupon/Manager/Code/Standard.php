@@ -254,7 +254,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attribute items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attribute items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -506,7 +506,7 @@ class Standard
 	/**
 	 * Searchs for coupon items based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
 	 * Possible search keys: 'coupon.code.id', 'coupon.code.couponid',
 	 * 'coupon.code.code', 'coupon.code.count'.
 	 *
@@ -516,7 +516,7 @@ class Standard
 	 * @throws \Aimeos\MW\Common\Exception
 	 * @throws \Aimeos\MW\DB\Exception
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -756,7 +756,7 @@ class Standard
 	 * creates a search object and sets base criteria
 	 *
 	 * @param boolean $default
-	 * @return \Aimeos\MW\Common\Criteria\Iface
+	 * @return \Aimeos\MW\Criteria\Iface
 	 */
 	public function createSearch( $default = false )
 	{
@@ -764,7 +764,7 @@ class Standard
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$object = new \Aimeos\MW\Common\Criteria\SQL( $conn );
+		$object = new \Aimeos\MW\Criteria\SQL( $conn );
 
 		$dbm->release( $conn, $dbname );
 

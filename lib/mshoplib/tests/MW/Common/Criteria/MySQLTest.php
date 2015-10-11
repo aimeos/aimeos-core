@@ -6,7 +6,7 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-namespace Aimeos\MW\Common\Criteria;
+namespace Aimeos\MW\Criteria;
 
 
 /**
@@ -29,7 +29,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
-		$this->object = new \Aimeos\MW\Common\Criteria\MySQL( $conn );
+		$this->object = new \Aimeos\MW\Criteria\MySQL( $conn );
 
 		$dbm->release( $conn );
 	}

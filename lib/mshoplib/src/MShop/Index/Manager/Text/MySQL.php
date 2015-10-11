@@ -65,14 +65,14 @@ class MySQL
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
 		$list = parent::getSearchAttributes( $withsub );
 
 		foreach( $this->searchConfig as $key => $fields ) {
-			$list[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $fields );
+			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
 		}
 
 		return $list;
@@ -83,11 +83,11 @@ class MySQL
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
-		$object = new \Aimeos\MW\Common\Criteria\MySQL( new \Aimeos\MW\DB\Connection\None() );
+		$object = new \Aimeos\MW\Criteria\MySQL( new \Aimeos\MW\DB\Connection\None() );
 
 		if( $default === true ) {
 			$object->setConditions( parent::createSearch( $default )->getConditions() );

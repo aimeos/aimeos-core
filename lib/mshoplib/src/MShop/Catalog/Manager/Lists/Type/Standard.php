@@ -123,7 +123,7 @@ class Standard
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also catalogs of sub-managers if true
-	 * @return array List of catalog items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of catalog items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{

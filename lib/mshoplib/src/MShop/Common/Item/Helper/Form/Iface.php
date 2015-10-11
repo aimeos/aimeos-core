@@ -58,7 +58,7 @@ interface Iface
 	 * Returns the value for the given key.
 	 *
 	 * @param string $key Unique key
-	 * @return \Aimeos\MW\Common\Criteria\Attribute\Iface Attribute item for the given key
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface Attribute item for the given key
 	 */
 	public function getValue( $key );
 
@@ -67,16 +67,16 @@ interface Iface
 	 * Sets the value for the key.
 	 *
 	 * @param string $key Unique key
-	 * @param \Aimeos\MW\Common\Criteria\Attribute\Iface $value Attribute item for the given key
+	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
 	 * @return void
 	 */
-	public function setValue( $key, \Aimeos\MW\Common\Criteria\Attribute\Iface $value );
+	public function setValue( $key, \Aimeos\MW\Criteria\Attribute\Iface $value );
 
 
 	/**
 	 * Returns the all key/value pairs.
 	 *
-	 * @return array Key/value pairs, values implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array Key/value pairs, values implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getValues();
 }

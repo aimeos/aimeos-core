@@ -39,7 +39,7 @@ interface Iface
 	 * @param string $type Service type, e.g. "delivery" (shipping related) or "payment" (payment related)
 	 * @param string $serviceId Identifier of one of the service option returned by getService()
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
-	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getServiceAttributes( $type, $serviceId, \Aimeos\MShop\Order\Item\Base\Iface $basket );
 

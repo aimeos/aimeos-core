@@ -150,11 +150,11 @@ class Standard
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
 		/** mshop/order/manager/base/service/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -449,12 +449,12 @@ class Standard
 	/**
 	 * Searches for order service items based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object containing the conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
 	 * @param array $ref Not used
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 		$context = $this->getContext();
@@ -618,7 +618,7 @@ class Standard
 	 * Returns the search attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attributes implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of attributes implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{

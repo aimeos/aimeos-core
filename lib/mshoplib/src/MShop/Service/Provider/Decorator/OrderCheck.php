@@ -70,7 +70,7 @@ extends \Aimeos\MShop\Service\Provider\Decorator\Base
 		$list = $this->getProvider()->getConfigBE();
 
 		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $config );
+			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
 		}
 
 		return $list;

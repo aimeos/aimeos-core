@@ -28,11 +28,11 @@ class Standard
 	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key (usually the ID) to aggregate products for
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
 		/** mshop/index/manager/standard/aggregate
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -97,7 +97,7 @@ class Standard
 	 * Returns a list of objects describing the available criterias for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of items implementing \Aimeos\MW\Common\Criteria\Attribute\Iface
+	 * @return array List of items implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
@@ -481,12 +481,12 @@ class Standard
 	/**
 	 * Searches for items matching the given criteria.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @param integer &$total Total number of items matched by the given criteria
 	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		/** mshop/index/manager/standard/search
 		 * Retrieves the records matched by the given criteria in the database
@@ -608,11 +608,11 @@ class Standard
 	/**
 	 * Re-writes the index entries for all products that are search result of given criteria
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param array $domains List of domains to be
 	 * @param integer $size Size of a chunk of products to handle at a time
 	 */
-	protected function writeIndex( \Aimeos\MW\Common\Criteria\Iface $search, array $domains, $size )
+	protected function writeIndex( \Aimeos\MW\Criteria\Iface $search, array $domains, $size )
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 		$submanagers = $this->getSubManagers();
@@ -735,12 +735,12 @@ class Standard
 	/**
 	 * Saves one chunk of the sub products.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criterias for retrieving the sub-products
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criterias for retrieving the sub-products
 	 * @param array $domains List of domains to fetch list items and referenced items for
 	 * @param array $list Associative list of sub-product IDs as keys and parent products IDs as values
 	 * @param integer $size Number of products per chunk
 	 */
-	protected function saveSubProductsChunk( \Aimeos\MW\Common\Criteria\Iface $search, array $domains, array $list, $size )
+	protected function saveSubProductsChunk( \Aimeos\MW\Criteria\Iface $search, array $domains, array $list, $size )
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 		$submanagers = array();

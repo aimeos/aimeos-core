@@ -31,7 +31,7 @@ class Mysql
 	/**
 	 * Initializes the object instance.
 	 *
-	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\MW\Common\Criteria\Attribute\Standard:
+	 * The config['search] array must contain these key/array pairs suitable for \Aimeos\MW\Criteria\Attribute\Standard:
 	 *	[cache.id] => Array containing the codes/types/labels for the unique ID
 	 *	[cache.siteid] => Array containing the codes/types/labels for the site ID
 	 *	[cache.value] => Array containing the codes/types/labels for the cached value

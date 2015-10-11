@@ -56,11 +56,11 @@ abstract class Base
 	/**
 	 * Counts the number items that are available for the values of the given key.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
 	 */
-	public function aggregate( \Aimeos\MW\Common\Criteria\Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
 		$required = array( trim( $this->prefix, '.' ) );
 		return $this->aggregateBase( $search, $key, $this->getConfigPath() . 'aggregate', $required );
@@ -305,14 +305,14 @@ abstract class Base
 	/**
 	 * Search for all list items based on the given critera.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @throws \Aimeos\MShop\Exception if creating items failed
-	 * @see \Aimeos\MW\Common\Criteria\SQL
+	 * @see \Aimeos\MW\Criteria\SQL
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = $typeIds = array();
 
@@ -382,15 +382,15 @@ abstract class Base
 	 * Only criteria from the list and list type can be used for searching and
 	 * sorting, but no criteria from the referenced items.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with search conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
 	 * @param array $ref List of domains to fetch referenced items for
 	 * @param integer &$total Number of items that are available in total
 	 * @return array Associative list of domains as keys and lists with pairs
 	 *	of IDs and items implementing \Aimeos\MShop\Common\Item\Iface
 	 * @throws \Aimeos\MShop\Exception If creating items failed
-	 * @see \Aimeos\MW\Common\Criteria\SQL
+	 * @see \Aimeos\MW\Criteria\SQL
 	 */
-	public function searchRefItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = $map = array();
 		$context = $this->getContext();
@@ -452,7 +452,7 @@ abstract class Base
 	 * Creates a search object including the base criteria (optionally).
 	 *
 	 * @param boolean $default Include default criteria
-	 * @return \Aimeos\MW\Common\Criteria\Iface Critera object
+	 * @return \Aimeos\MW\Criteria\Iface Critera object
 	 */
 	public function createSearch( $default = false )
 	{

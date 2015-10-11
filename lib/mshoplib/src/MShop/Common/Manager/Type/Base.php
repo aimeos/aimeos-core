@@ -69,7 +69,7 @@ abstract class Base
 	 * Creates a search object and optionally sets base criteria.
 	 *
 	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Common\Criteria\Iface Criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Criteria object
 	 */
 	public function createSearch( $default = false )
 	{
@@ -186,12 +186,12 @@ abstract class Base
 	/**
 	 * Searches for all type items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Common\Criteria\Iface $search Search object with conditions
+	 * @param \Aimeos\MW\Criteria\Iface $search Search object with conditions
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of type items implementing \Aimeos\MShop\Common\Item\Type\Iface
 	 * @throws \Aimeos\MShop\Common\Exception if creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Common\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
 		$items = array();
 

@@ -24,14 +24,14 @@ abstract class Base
 	 * Returns the attribute types for searching defined by the manager.
 	 *
 	 * @param array $attributes List of search attribute objects implementing
-	 * 	\Aimeos\MW\Common\Criteria\Attribute\Iface or associative arrays with 'code'
+	 * 	\Aimeos\MW\Criteria\Attribute\Iface or associative arrays with 'code'
 	 * 	and 'internaltype' keys
 	 * @return array Associative array of attribute code and internal attribute type
 	 */
 	protected function getSearchTypes( array $attributes )
 	{
 		$types = array();
-		$iface = '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface';
+		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
 
 		foreach( $attributes as $key => $item )
 		{
@@ -52,14 +52,14 @@ abstract class Base
 	 * Returns the attribute translations for searching defined by the manager.
 	 *
 	 * @param array $attributes List of search attribute objects implementing
-	 * 	\Aimeos\MW\Common\Criteria\Attribute\Iface or associative arrays with 'code'
+	 * 	\Aimeos\MW\Criteria\Attribute\Iface or associative arrays with 'code'
 	 * 	and 'internalcode' keys
 	 * @return array Associative array of attribute code and internal attribute code
 	 */
 	protected function getSearchTranslations( array $attributes )
 	{
 		$translations = array();
-		$iface = '\\Aimeos\\MW\\Common\\Criteria\\Attribute\\Iface';
+		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
 
 		foreach( $attributes as $key => $item )
 		{

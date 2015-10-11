@@ -29,9 +29,9 @@ abstract class Base
 	 * Adds the conditions for the selected attributes to the given search filter.
 	 *
 	 * @param array $params Associative list of parameters that should be used for filtering
-	 * @param \Aimeos\MW\Common\Criteria\Iface $filter Criteria object for searching
+	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object for searching
 	 */
-	protected function addAttributeFilterByParam( array $params, \Aimeos\MW\Common\Criteria\Iface $filter )
+	protected function addAttributeFilterByParam( array $params, \Aimeos\MW\Criteria\Iface $filter )
 	{
 		$attrids = ( isset( $params['f_attrid'] ) ? (array) $params['f_attrid'] : array() );
 
@@ -51,9 +51,9 @@ abstract class Base
 	 * Adds the conditions for the selected attributes to the given search filter.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
-	 * @param \Aimeos\MW\Common\Criteria\Iface $filter Criteria object for searching
+	 * @param \Aimeos\MW\Criteria\Iface $filter Criteria object for searching
 	 */
-	protected function addAttributeFilter( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Common\Criteria\Iface $filter )
+	protected function addAttributeFilter( \Aimeos\MW\View\Iface $view, \Aimeos\MW\Criteria\Iface $filter )
 	{
 		$this->addAttributeFilterByParam( $view->param(), $filter );
 	}
@@ -82,7 +82,7 @@ abstract class Base
 	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
 	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
-	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
 	 */
 	protected function getProductListFilterByParam( array $params, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{
@@ -141,7 +141,7 @@ abstract class Base
 	 * @param integer $size Page size
 	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
-	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
 	 */
 	private function createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter )
 	{
@@ -175,7 +175,7 @@ abstract class Base
 	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
 	 * @param boolean $textfilter True to include text criteria in product filter, false if not
 	 * @param boolean $attrfilter True to include attribute criteria in product filter, false if not
-	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
 	 */
 	protected function getProductListFilter( \Aimeos\MW\View\Iface $view, $catfilter = true, $textfilter = true, $attrfilter = true )
 	{

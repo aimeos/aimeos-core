@@ -85,7 +85,7 @@ class DirectDebit
 		catch( \Aimeos\MShop\Order\Exception $e ) { ; } // If address isn't available
 
 		foreach( $feconfig as $key => $config ) {
-			$list[$key] = new \Aimeos\MW\Common\Criteria\Attribute\Standard( $config );
+			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
 		}
 
 		return $list;

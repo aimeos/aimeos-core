@@ -73,7 +73,7 @@ abstract class Base
 	 * Creates a criteria object for searching.
 	 *
 	 * @param boolean $default Include default criteria like the status
-	 * @return \Aimeos\MW\Common\Criteria\Iface Search criteria object
+	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
 	 */
 	public function createSearch( $default = false )
 	{
