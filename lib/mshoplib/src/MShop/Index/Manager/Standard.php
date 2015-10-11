@@ -276,7 +276,7 @@ class Standard
 		 * @see mshop/index/manager/standard/search
 		 * @see mshop/index/manager/standard/aggregate
 		 */
-		$this->doOptimize( 'mshop/index/manager/standard/optimize' );
+		$this->optimizeBase( 'mshop/index/manager/standard/optimize' );
 	}
 
 
@@ -583,7 +583,7 @@ class Standard
 		 */
 		$cfgPathCount = 'mshop/index/manager/standard/count';
 
-		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
+		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
 
 

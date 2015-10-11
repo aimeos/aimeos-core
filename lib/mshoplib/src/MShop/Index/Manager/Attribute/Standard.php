@@ -140,7 +140,7 @@ class Standard
 		 * @see mshop/index/manager/attribute/standard/insert
 		 * @see mshop/index/manager/attribute/standard/search
 		 */
-		$this->doCleanupIndex( $timestamp, 'mshop/index/manager/attribute/standard/cleanup' );
+		$this->cleanupIndexBase( $timestamp, 'mshop/index/manager/attribute/standard/cleanup' );
 	}
 
 
@@ -174,7 +174,7 @@ class Standard
 		 * @see mshop/index/manager/attribute/standard/insert
 		 * @see mshop/index/manager/attribute/standard/search
 		 */
-		$this->doDeleteItems( $ids, 'mshop/index/manager/attribute/standard/delete' );
+		$this->deleteItemsBase( $ids, 'mshop/index/manager/attribute/standard/delete' );
 	}
 
 
@@ -361,7 +361,7 @@ class Standard
 		 * @see mshop/index/manager/attribute/standard/search
 		 * @see mshop/index/manager/attribute/standard/aggregate
 		 */
-		$this->doOptimize( 'mshop/index/manager/attribute/standard/optimize' );
+		$this->optimizeBase( 'mshop/index/manager/attribute/standard/optimize' );
 	}
 
 
@@ -573,7 +573,7 @@ class Standard
 		 */
 		$cfgPathCount = 'mshop/index/manager/attribute/standard/count';
 
-		return $this->doSearchItems( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
+		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
 	}
 
 

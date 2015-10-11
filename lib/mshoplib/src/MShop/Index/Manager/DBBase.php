@@ -125,7 +125,7 @@ abstract class DBBase
 	 * @param string $timestamp Timestamp in ISO format (YYYY-MM-DD HH:mm:ss)
 	 * @param string $path Configuration path to the SQL statement to execute
 	 */
-	protected function doCleanupIndex( $timestamp, $path )
+	protected function cleanupIndexBase( $timestamp, $path )
 	{
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
@@ -168,8 +168,10 @@ abstract class DBBase
 	 *
 	 * @param array $ids List of product IDs
 	 * @param string $path Configuration path to the SQL statement to execute
+	 * @param boolean $siteidcheck If siteid should be used in the statement
+	 * @param string $name Name of the ID column
 	 */
-	protected function doDeleteItems( array $ids, $path )
+	protected function deleteItemsBase( array $ids, $path, $siteidcheck = true, $name = 'prodid' )
 	{
 		if( empty( $ids ) ) { return; }
 
@@ -177,9 +179,7 @@ abstract class DBBase
 			$submanager->deleteItems( $ids );
 		}
 
-		$sql = $path;
-
-		$this->deleteItemsBase( $ids, $sql, true, 'prodid' );
+		$this->deleteItemsBase( $ids, $path, $siteidcheck, $name );
 	}
 
 
@@ -188,7 +188,7 @@ abstract class DBBase
 	 *
 	 * @param string $path Configuration path to the SQL statements to execute
 	 */
-	protected function doOptimize( $path )
+	protected function optimizeBase( $path )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -227,7 +227,7 @@ abstract class DBBase
 	 * @param string $cfgPathCount Configuration path to the count SQL statement
 	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	protected function doSearchItems( \Aimeos\MW\Common\Criteria\Iface $search,
+	protected function searchItemsIndexBase( \Aimeos\MW\Common\Criteria\Iface $search,
 		array $ref, &$total, $cfgPathSearch, $cfgPathCount )
 	{
 		$list = $ids = array();
