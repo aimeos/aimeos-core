@@ -6776,7 +6776,6 @@ MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi,
                 dataIndex : conf.listNamePrefix + 'refid',
                 header : MShop.I18n.dt('client/extjs', 'Label'),
                 id : 'reflabel',
-                hidden : true,
                 renderer : this.refColumnRenderer.createDelegate(this, ['text.label'], true)
             },
             {
@@ -6784,6 +6783,7 @@ MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi,
                 dataIndex : conf.listNamePrefix + 'refid',
                 header : MShop.I18n.dt('client/extjs', 'Content'),
                 id : 'refcontent',
+                hidden : true,
                 renderer : this.refColumnRenderer.createDelegate(this, ['text.content'], true)
             }];
     }
