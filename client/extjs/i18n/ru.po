@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-29 14:45+0200\n"
-"PO-Revision-Date: 2015-09-29 12:26+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2015-10-02 08:36+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,17 +29,17 @@ msgstr "Добавить"
 #: src/panel/supplier/address/ListUi.js:114
 #: src/panel/customer/address/ListUi.js:114
 msgid "Additional"
-msgstr ""
+msgstr "Дополнительно"
 
 #: src/panel/supplier/address/ItemUi.js:96 src/panel/customer/ItemUi.js:180
 #: src/panel/customer/address/ItemUi.js:98
 msgid "Additional information, e.g. flat number"
-msgstr ""
+msgstr "Дополнительная информация, например номер квартиры"
 
 #: src/panel/supplier/address/ListUi.js:26
 #: src/panel/customer/address/ListUi.js:26
 msgid "Address"
-msgstr ""
+msgstr "Адрес"
 
 #: src/panel/supplier/address/ItemUi.js:82 src/panel/customer/ItemUi.js:166
 #: src/panel/customer/address/ItemUi.js:84
@@ -82,11 +82,11 @@ msgstr "Связанные атрибуты"
 
 #: src/panel/customer/group/ItemPickerUi.js:16
 msgid "Associated customer groups"
-msgstr ""
+msgstr "Связанные группы пользователей"
 
 #: src/panel/customer/ItemPickerUi.js:16
 msgid "Associated customers"
-msgstr ""
+msgstr "Связанные пользователи"
 
 #: src/panel/media/ItemPickerUi.js:16
 msgid "Associated media"
@@ -138,11 +138,11 @@ msgstr "Доступные атрибуты"
 #: src/panel/customer/group/ListUiSmall.js:26
 #: src/panel/customer/group/ItemPickerUi.js:23
 msgid "Available customer groups"
-msgstr ""
+msgstr "Доступные группы пользователей"
 
 #: src/panel/customer/ListUiSmall.js:26 src/panel/customer/ItemPickerUi.js:23
 msgid "Available customers"
-msgstr ""
+msgstr "Доступные пользователи"
 
 #: src/panel/media/ItemPickerUi.js:23
 msgid "Available media"
@@ -198,7 +198,7 @@ msgstr "Платежный адрес"
 #: src/panel/customer/ItemUi.js:90 src/panel/customer/ListUiSmall.js:70
 #: src/panel/customer/ListUi.js:75
 msgid "Birthday"
-msgstr ""
+msgstr "День рождения"
 
 #: src/panel/cache/ListUiSmall.js:27
 msgid "Cache"
@@ -235,7 +235,7 @@ msgstr "Город"
 #: src/panel/supplier/address/ItemUi.js:108 src/panel/customer/ItemUi.js:192
 #: src/panel/customer/address/ItemUi.js:110
 msgid "City name (required)"
-msgstr ""
+msgstr "Город (обязательно)"
 
 #: src/panel/media/MediaField.js:64
 msgid "Click to upload"
@@ -291,7 +291,7 @@ msgstr "Компания"
 #: src/panel/supplier/address/ItemUi.js:49 src/panel/customer/ItemUi.js:133
 #: src/panel/customer/address/ItemUi.js:51
 msgid "Company name"
-msgstr ""
+msgstr "Компания"
 
 #: src/panel/service/ListUi.js:92 src/panel/ListItemListUi.js:194
 #: src/panel/coupon/ListUi.js:83 src/panel/locale/site/ListUi.js:68
@@ -338,12 +338,12 @@ msgstr "Страна"
 #: src/panel/supplier/address/ItemUi.js:120 src/panel/customer/ItemUi.js:204
 #: src/panel/customer/address/ItemUi.js:122
 msgid "Country code"
-msgstr ""
+msgstr "Код страны"
 
 #: src/panel/supplier/address/ItemUi.js:115 src/panel/customer/ItemUi.js:199
 #: src/panel/customer/address/ItemUi.js:117
 msgid "Country state, e.g. \"NY\""
-msgstr ""
+msgstr "Область страны, например \"Тверская\""
 
 #: src/panel/coupon/ListUi.js:27
 msgid "Coupon"
@@ -439,20 +439,20 @@ msgstr "Покупатель"
 #: src/panel/customer/address/ItemUi.js:183
 #, python-brace-format
 msgid "Customer address: {0} ({1})"
-msgstr ""
+msgstr "Адрес заказчика: {0} ({1})"
 
 #. : Customer group item panel title with customer name ({0}) and site code
 #. ({1)}
 #: src/panel/customer/group/ItemUi.js:89
 #, python-brace-format
 msgid "Customer group: {0} ({1})"
-msgstr ""
+msgstr "Группа заказчика: {0} ({1})"
 
 #. : Customer item panel title with customer label ({0}) and site code ({1)}
 #: src/panel/customer/ItemUi.js:251
 #, python-brace-format
 msgid "Customer: {0} ({1})"
-msgstr ""
+msgstr "Заказчик: {0} ({1})"
 
 #: src/panel/log/ListUiSmall.js:65
 msgid "Date"
@@ -530,7 +530,7 @@ msgstr "E-Mail"
 #: src/panel/supplier/address/ItemUi.js:144 src/panel/customer/ItemUi.js:228
 #: src/panel/customer/address/ItemUi.js:146
 msgid "E-Mail, e.g. me@example.com (required)"
-msgstr ""
+msgstr "E-Mail, например me@example.com (обязательно)"
 
 #: src/panel/product/ItemUi.js:87
 msgid "EAN, SKU or article number (required)"
@@ -622,7 +622,7 @@ msgstr "Категория"
 #: src/panel/supplier/address/ItemUi.js:138 src/panel/customer/ItemUi.js:222
 #: src/panel/customer/address/ItemUi.js:140
 msgid "Facsimile number, e.g. +155512345"
-msgstr ""
+msgstr "Номер факса, например +155512345"
 
 #: src/panel/media/ItemUi.js:101
 msgid "File URL"
@@ -633,7 +633,7 @@ msgstr "URL файла"
 #: src/panel/customer/ItemUi.js:154 src/panel/customer/address/ItemUi.js:71
 #: src/panel/customer/address/ItemUi.js:72
 msgid "First name"
-msgstr ""
+msgstr "Имя"
 
 #: src/panel/supplier/address/ListUi.js:93
 #: src/panel/customer/address/ListUi.js:93
@@ -653,34 +653,34 @@ msgstr "Очистить кеш?"
 #: src/panel/customer/ItemUi.js:83 src/panel/customer/ListUiSmall.js:57
 #: src/panel/customer/ItemPickerUi.js:61 src/panel/customer/ListUi.js:68
 msgid "Full name"
-msgstr ""
+msgstr "Полное имя"
 
 #: src/panel/customer/ItemUi.js:84
 msgid "Full name (required)"
-msgstr ""
+msgstr "Полное имя (обязательно)"
 
 #: src/panel/customer/group/ItemPickerUi.js:11
 msgid "Group"
-msgstr ""
+msgstr "Группа"
 
 #: src/panel/customer/group/ItemUi.js:61
 msgid "Group label (required)"
-msgstr ""
+msgstr "Метка группы (обязательно)"
 
 #: src/panel/supplier/address/ItemUi.js:64 src/panel/customer/ItemUi.js:148
 #: src/panel/customer/address/ItemUi.js:66
 msgid "Honorary title"
-msgstr ""
+msgstr "Почётный титул"
 
 #: src/panel/supplier/address/ListUi.js:108
 #: src/panel/customer/address/ListUi.js:108
 msgid "House no"
-msgstr ""
+msgstr "Номер дома"
 
 #: src/panel/supplier/address/ItemUi.js:90 src/panel/customer/ItemUi.js:174
 #: src/panel/customer/address/ItemUi.js:92
 msgid "House number"
-msgstr ""
+msgstr "Номер дома"
 
 #: src/panel/type/AbstractTypeItemUi.js:52 src/panel/service/type/ListUi.js:47
 #: src/panel/service/ItemUi.js:52 src/panel/service/ListUi.js:41
@@ -772,7 +772,7 @@ msgstr "Неверное значение ключа настройки \"{0}\""
 
 #: src/panel/order/ItemUi.js:45
 msgid "Invoice"
-msgstr ""
+msgstr "Счёт"
 
 #: src/panel/attribute/ItemUi.js:100
 msgid "Item position within the same type"
@@ -889,12 +889,12 @@ msgstr "Последнее изменение"
 #: src/panel/supplier/address/ItemUi.js:75 src/panel/customer/ItemUi.js:159
 #: src/panel/customer/address/ItemUi.js:77
 msgid "Last name"
-msgstr ""
+msgstr "Фамилия"
 
 #: src/panel/supplier/address/ItemUi.js:76 src/panel/customer/ItemUi.js:160
 #: src/panel/customer/address/ItemUi.js:78
 msgid "Last name (required)"
-msgstr ""
+msgstr "Фамилия (обязательно)"
 
 #: src/panel/supplier/address/ListUi.js:98
 #: src/panel/customer/address/ListUi.js:98
@@ -1039,15 +1039,15 @@ msgstr "Минимальное количество"
 
 #: src/elements/salutation.js:69
 msgid "Miss"
-msgstr ""
+msgstr "Мисс"
 
 #: src/elements/salutation.js:67
 msgid "Mr"
-msgstr ""
+msgstr "Мистер"
 
 #: src/elements/salutation.js:68
 msgid "Mrs"
-msgstr ""
+msgstr "Миссис"
 
 #: src/panel/order/service/ItemUi.js:75
 #: src/panel/order/service/attribute/ListUiSmall.js:82
@@ -1109,11 +1109,11 @@ msgstr "Параметр"
 #: src/panel/customer/ItemUi.js:76 src/panel/customer/ListUiSmall.js:63
 #: src/panel/customer/ListUi.js:61
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: src/panel/customer/ItemUi.js:77
 msgid "Password (required)"
-msgstr ""
+msgstr "Пароль (обязательно)"
 
 #: src/panel/order/ItemUi.js:68
 msgid "Payment date"
@@ -1476,12 +1476,12 @@ msgstr "Уровень запасов"
 #: src/panel/supplier/address/ListUi.js:103
 #: src/panel/customer/address/ListUi.js:103
 msgid "Street"
-msgstr ""
+msgstr "Улица"
 
 #: src/panel/supplier/address/ItemUi.js:83 src/panel/customer/ItemUi.js:167
 #: src/panel/customer/address/ItemUi.js:85
 msgid "Street (required)"
-msgstr ""
+msgstr "Улица (обязательно)"
 
 #: src/panel/price/ItemUi.js:105
 msgid "Substracted rebate amount"
@@ -1500,7 +1500,7 @@ msgstr "Поставщик"
 #: src/panel/supplier/address/ItemUi.js:179
 #, python-brace-format
 msgid "Supplier address: {0} ({1})"
-msgstr ""
+msgstr "Адрес поставщика: {0} ({1})"
 
 #. : Supplier item panel title with supplier label ({0}) and site code ({1)}
 #: src/panel/supplier/ItemUi.js:91
@@ -1555,7 +1555,7 @@ msgstr "Телефон"
 #: src/panel/supplier/address/ItemUi.js:132 src/panel/customer/ItemUi.js:216
 #: src/panel/customer/address/ItemUi.js:134
 msgid "Telephone number, e.g. +155512345"
-msgstr ""
+msgstr "Номер телефона, например +155512345"
 
 #: src/panel/text/ItemPickerUi.js:10 src/elements/domain.js:56
 msgid "Text"
@@ -1610,7 +1610,7 @@ msgstr "Всего"
 #: src/panel/supplier/address/ItemUi.js:121 src/panel/customer/ItemUi.js:205
 #: src/panel/customer/address/ItemUi.js:123
 msgid "Two letter country code, e.g. \"US\" (required)"
-msgstr ""
+msgstr "Двухсимвольный код страны, например \"RU\" (обязательно)"
 
 #: src/panel/service/ItemUi.js:59 src/panel/service/ListUi.js:57
 #: src/panel/media/ItemUi.js:61 src/panel/media/ListUiSmall.js:62
@@ -1665,11 +1665,11 @@ msgstr "Используется в"
 #: src/panel/customer/ItemUi.js:69 src/panel/customer/ListUiSmall.js:51
 #: src/panel/customer/ItemPickerUi.js:54 src/panel/customer/ListUi.js:54
 msgid "User name"
-msgstr ""
+msgstr "Имя пользователя"
 
 #: src/panel/customer/ItemUi.js:70
 msgid "User name, e.g. e-mail address (required)"
-msgstr ""
+msgstr "Имя пользователя, например адрес e-mail (обязательно)"
 
 #: src/panel/cache/ItemUi.js:55 src/panel/cache/ListUiSmall.js:82
 #: src/panel/product/property/ItemUi.js:83
@@ -1692,12 +1692,12 @@ msgstr "ID НДС"
 #: src/panel/supplier/address/ItemUi.js:55 src/panel/customer/ItemUi.js:139
 #: src/panel/customer/address/ItemUi.js:57
 msgid "Vat ID, e.g. \"GB999999999\""
-msgstr ""
+msgstr "ИНН ID, например \"GB999999999\""
 
 #: src/panel/customer/ItemUi.js:96 src/panel/customer/ListUiSmall.js:78
 #: src/panel/customer/ListUi.js:82
 msgid "Verification date"
-msgstr ""
+msgstr "Дата утверждения"
 
 #: src/panel/product/stock/ItemUi.js:67
 #: src/panel/product/stock/warehouse/ListUi.js:26
@@ -1715,7 +1715,7 @@ msgstr "Склад: {0} ({1})"
 #: src/panel/supplier/address/ItemUi.js:151 src/panel/customer/ItemUi.js:235
 #: src/panel/customer/address/ItemUi.js:153
 msgid "Web site, e.g. www.example.com"
-msgstr ""
+msgstr "Сайт, например www.example.com"
 
 #: src/panel/supplier/address/ItemUi.js:150 src/panel/customer/ItemUi.js:234
 #: src/panel/customer/address/ItemUi.js:152
@@ -1726,7 +1726,7 @@ msgstr "Сайт"
 
 #: src/panel/customer/ItemUi.js:91 src/panel/customer/ItemUi.js:97
 msgid "YYYY-MM-DD (optional)"
-msgstr ""
+msgstr "ГГГГ-ММ-ДД (опционально)"
 
 #: src/panel/cache/ItemUi.js:63 src/panel/product/ItemUi.js:112
 #: src/panel/product/ItemUi.js:118 src/panel/product/stock/ItemUi.js:96
@@ -1751,7 +1751,7 @@ msgstr "Вы собираетесь полностью очистить для �
 #: src/panel/supplier/address/ListUi.js:120
 #: src/panel/customer/address/ListUi.js:120
 msgid "Zip code"
-msgstr ""
+msgstr "Индекс"
 
 #: src/panel/service/type/ItemUi.js:18 src/panel/service/ItemUi.js:127
 #: src/panel/supplier/ItemUi.js:89 src/panel/supplier/address/ItemUi.js:177
@@ -1857,4 +1857,4 @@ msgstr "статус:рассмотрение"
 
 #: src/elements/salutation.js:65
 msgid "unknown"
-msgstr ""
+msgstr "неизвестно"

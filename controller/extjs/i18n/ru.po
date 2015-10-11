@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Андрей Аксёнов <aksenovaa@bk.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-29 14:45+0200\n"
-"PO-Revision-Date: 2015-09-29 12:29+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-10-02 07:43+0000\n"
+"Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,19 +21,19 @@ msgstr ""
 #: src/Controller/ExtJS/Service/Default.php:94
 #, php-format
 msgid "- %1$s : %2$s\n"
-msgstr ""
+msgstr "- %1$s : %2$s\n"
 
 #: src/Controller/ExtJS/Media/Default.php:673
 #: src/Controller/ExtJS/Media/Default.php:708
 #, php-format
 msgid "Changing file permissions for \"%1$s\" to \"%2$o\" failed"
-msgstr ""
+msgstr "Ошибка при изменении разрешений с \"%1$s\" на \"%2$o\" для файлов"
 
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:66
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:160
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr ""
+msgstr "Класс \"%1$s\" не реализует \"%2$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:295 src/Controller/ExtJS/JsonRpc.php:378
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:60
@@ -40,12 +41,12 @@ msgstr ""
 #: src/Controller/ExtJS/Factory.php:89
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден класс \"%1$s\""
 
 #: src/Controller/ExtJS/Factory.php:68
 #, php-format
 msgid "Controller path is empty"
-msgstr ""
+msgstr "Не указан путь к контроллеру"
 
 #: src/Controller/ExtJS/Product/Import/Text/Default.php:111
 #: src/Controller/ExtJS/Attribute/Import/Text/Default.php:110
@@ -53,7 +54,7 @@ msgstr ""
 #: src/Controller/ExtJS/Coupon/Code/Default.php:114
 #, php-format
 msgid "Could not set permissions \"%1$s\" for file \"%2$s\""
-msgstr ""
+msgstr "Невозможно установить разрешение \"%1$s\" для файла \"%2$s\""
 
 #: src/Controller/ExtJS/Media/Default.php:399
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:177
@@ -61,45 +62,45 @@ msgstr ""
 #: src/Controller/ExtJS/Catalog/Export/Text/Default.php:177
 #, php-format
 msgid "Couldn't create directory \"%1$s\" with permissions \"%2$o\""
-msgstr ""
+msgstr "Невозможно создать директорию \"%1$s\" с разрешениями \"%2$o\""
 
 #: src/Controller/ExtJS/Attribute/Export/Text/Default.php:182
 #, php-format
 msgid "Create export directory for attribute IDs: %1$s"
-msgstr ""
+msgstr "Создать директорию для экспорта атрибута с ID: %1$s"
 
 #: src/Controller/ExtJS/Catalog/Export/Text/Default.php:180
 #, php-format
 msgid "Create export directory for catalog IDs: %1$s"
-msgstr ""
+msgstr "Создать директорию для экспорта каталога с ID: %1$s"
 
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:180
 #, php-format
 msgid "Create export directory for product IDs: %1$s"
-msgstr ""
+msgstr "Создать директорию для экспорта товара с ID: %1$s"
 
 #: src/Controller/ExtJS/Media/Default.php:116
 #: src/Controller/ExtJS/Media/Default.php:122
 #: src/Controller/ExtJS/Media/Default.php:240
 #, php-format
 msgid "Deleting file \"%1$s\" failed"
-msgstr ""
+msgstr "Ошибка при удалении файла \"%1$s\""
 
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:186
 #: src/Controller/ExtJS/Attribute/Export/Text/Default.php:188
 #: src/Controller/ExtJS/Catalog/Export/Text/Default.php:186
 msgid "Download"
-msgstr ""
+msgstr "Скачать"
 
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:398
 #, php-format
 msgid "Error in %1$s text import: %2$s"
-msgstr ""
+msgstr "Ошибка в %1$s при импорте текста: %2$s"
 
 #: src/Controller/ExtJS/JsonRpc.php:299
 #, php-format
 msgid "Factory \"%1$s\" not found"
-msgstr ""
+msgstr "Не найдена фабрика \"%1$s\""
 
 #: src/Controller/ExtJS/Order/Factory.php:63
 #: src/Controller/ExtJS/Order/Base/Product/Attribute/Factory.php:63
@@ -170,89 +171,89 @@ msgstr ""
 #: src/Controller/ExtJS/Supplier/Factory.php:63
 #, php-format
 msgid "Invalid class name \"%1$s\""
-msgstr ""
+msgstr "Недопустимое название класса \"%1$s\""
 
 #: src/Controller/ExtJS/Factory.php:80
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Недопустимый контроллер \"%1$s\" в \"%2$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:291 src/Controller/ExtJS/JsonRpc.php:374
 #, php-format
 msgid "Invalid controller factory name \"%1$s\""
-msgstr ""
+msgstr "Недопустимое название фабрики контроллера \"%1$s\""
 
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Недопустимый домен \"%1$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:384 src/Controller/ExtJS/Factory.php:95
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Недопустимая фабрика \"%1$s\""
 
 #: src/Controller/ExtJS/Catalog/Import/Text/Default.php:320
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:194
 #, php-format
 msgid "Invalid list type \"%1$s\""
-msgstr ""
+msgstr "Недопустимый тип списка \"%1$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:282
 #, php-format
 msgid "Invalid method \"%1$s\" in request"
-msgstr ""
+msgstr "Недопустимый метод \"%1$s\"в запросе"
 
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:382
 #, php-format
 msgid "Invalid row from %1$s text import: %2$s"
-msgstr ""
+msgstr "Неверная строка из %1$s при импорте текста: %2$s"
 
 #: src/Controller/ExtJS/Abstract.php:446
 #, php-format
 msgid "Invalid sort direction \"%1$s\""
-msgstr ""
+msgstr "Недопустимое направление сортировки \"%1$s\""
 
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:391
 #, php-format
 msgid "Invalid text type \"%1$s\""
-msgstr ""
+msgstr "Недопустимый тип текста \"%1$s\""
 
 #: src/Controller/ExtJS/Abstract.php:333
 #, php-format
 msgid "List item doesn't implement \"%1$s\""
-msgstr ""
+msgstr "Элемент списка не реализует \"%1$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:303
 #, php-format
 msgid "Method \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден метод \"%1$s\""
 
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:107
 #: src/Controller/ExtJS/Abstract.php:293
 #, php-format
 msgid "Missing parameter \"%1$s\""
-msgstr ""
+msgstr "Неверный параметр \"%1$s\""
 
 #: src/Controller/ExtJS/Media/Default.php:550
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
-msgstr ""
+msgstr "Для \"%1$s\" не настроены допустимые типы изображений"
 
 #: src/Controller/ExtJS/JsonRpc.php:242
 #, php-format
 msgid "Required attribute \"%1$s\" missing in request"
-msgstr ""
+msgstr "Ошибка в обязательном атрибуте \"%1$s\" при запросе"
 
 #: src/Controller/ExtJS/Abstract.php:478
 #, php-format
 msgid "Site item for code \"%1$s\" not found"
-msgstr ""
+msgstr "Не найден элемент сайта для кода \"%1$s\""
 
 #: src/Controller/ExtJS/Common/Decorator/Abstract.php:49
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Невозможно вызвать метод \"%1$s\""
 
 #: src/Controller/ExtJS/Product/Import/Text/Default.php:81
 #: src/Controller/ExtJS/Attribute/Import/Text/Default.php:80
@@ -260,4 +261,4 @@ msgstr ""
 #: src/Controller/ExtJS/Coupon/Code/Default.php:84
 #, php-format
 msgid "Uploaded file could not be moved to upload directory \"%1$s\""
-msgstr ""
+msgstr "Загруженный файл не может быть перемещен в каталог загрузки \"%1$s\""
