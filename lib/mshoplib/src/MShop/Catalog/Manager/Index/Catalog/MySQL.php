@@ -22,7 +22,7 @@ class MShop_Catalog_Manager_Index_Catalog_MySQL
 		'catalog.index.catalog.id' => array(
 			'code'=>'catalog.index.catalog.id',
 			'internalcode'=>'mcatinca."catid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_catalog" AS mcatinca USE INDEX ("idx_mscatinca_s_ca_lt_po", "idx_mscatinca_p_s_ca_lt_po") ON mcatinca."prodid" = mpro."id"' ),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_catalog_index_catalog" AS mcatinca USE INDEX ("idx_mscatinca_s_ca_lt_po", "unq_mscatinca_p_s_cid_lt_po") ON mcatinca."prodid" = mpro."id"' ),
 			'label'=>'Product index category ID',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
