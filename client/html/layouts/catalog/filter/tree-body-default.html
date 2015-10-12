@@ -25,9 +25,28 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
  * @category Developer
  */
 
+/** client/html/catalog/filter/tree/force-search
+ * Use the current category in full text searches
+ *
+ * Normally, a full text search finds all products that match the entered string
+ * regardless of the category the user is currently in. This is also the standard
+ * behavior of other shops.
+ *
+ * If it's desired, setting this configuration option to "1" will limit the full
+ * text search to the current category only, so only products that match the text
+ * and which are in the current category are found.
+ *
+ * @param boolean True to enforce current category for search, false for full text search only
+ * @since 2015.10
+ * @category Developer
+ * @category User
+ */
+
 ?>
 <section class="catalog-filter-tree <?php echo ( $counts == true ? 'catalog-filter-count' : '' ); ?>">
+<?php if( $this->config( 'client/html/catalog/filter/tree/force-search', false ) ) : ?>
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'f_catid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'f_catid' ) ); ?>" />
+<?php endif; ?>
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Categories' ), $enc::TRUST ); ?></h2>
 <?php if( isset( $this->treeCatalogTree ) && $this->treeCatalogTree->getStatus() > 0 ) : ?>
 <?php	$values = array( 'nodes' => array( $this->treeCatalogTree ), 'path' => $this->get( 'treeCatalogPath', array() ), 'params' => $this->get( 'treeFilterParams', array() ) ); ?>

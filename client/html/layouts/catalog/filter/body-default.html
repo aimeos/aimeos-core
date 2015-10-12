@@ -96,7 +96,7 @@ $enc = $this->encoder();
 <?php endif; ?>
 	<nav>
 		<h1><?php echo $enc->html( $this->translate( 'client/html', 'Filter' ), $enc::TRUST ); ?></h1>
-		<form method="GET" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $listParams, array(), $listConfig ) ); ?>">
+		<form method="POST" action="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $listParams, array(), $listConfig ) ); ?>">
 <?php echo $this->get( 'filterBody' ); ?>
 		</form>
 	</nav>
