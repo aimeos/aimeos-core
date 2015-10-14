@@ -83,7 +83,7 @@ class Standard
 		 * The template file contains the HTML code and processing instructions
 		 * to generate the result shown in the body of the e-mail. The
 		 * configuration string is the path to the template file relative
-		 * to the layouts directory (usually in client/html/templates).
+		 * to the templates directory (usually in client/html/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be
@@ -95,7 +95,7 @@ class Standard
 		 * The legal part of the email delivery html client allows to use
 		 * a different template for each delivery status value. You can create a
 		 * template for each delivery status and store it in the "email/delivery/<status number>/"
-		 * directory below the "layouts" directory (usually in client/html/templates).
+		 * directory below the "templates" directory (usually in client/html/templates).
 		 * If no specific layout template is found, the common template in the
 		 * "email/delivery/" directory is used.
 		 *
@@ -137,7 +137,7 @@ class Standard
 		 * The template file contains the HTML code and processing instructions
 		 * to generate the HTML code that is inserted into the header
 		 * of the e-mail. The configuration string is the
-		 * path to the template file relative to the layouts directory (usually
+		 * path to the template file relative to the templates directory (usually
 		 * in client/html/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
@@ -150,7 +150,7 @@ class Standard
 		 * The email payment HTML client allows to use a different template for
 		 * each payment status value. You can create a template for each payment
 		 * status and store it in the "email/payment/<status number>/" directory
-		 * below the "layouts" directory (usually in client/html/templates). If no
+		 * below the "templates" directory (usually in client/html/templates). If no
 		 * specific layout template is found, the common template in the
 		 * "email/payment/" directory is used.
 		 *

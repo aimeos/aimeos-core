@@ -27,9 +27,9 @@ $position = $this->get( 'itemPosition', 0 );
  * reoccuring blocks filled with data from the assigned values. The price
  * partial creates an HTML block for a list of price items.
  *
- * The partial template files are usually stored in the layouts/partials/ folder
+ * The partial template files are usually stored in the templates/partials/ folder
  * of the core or the extensions. The configured path to the partial file must
- * be relative to the layouts/ folder, e.g. "partials/price-default.php". 
+ * be relative to the templates/ folder, e.g. "partials/price-default.php". 
  *
  * @param string Relative path to the template file
  * @since 2015.04

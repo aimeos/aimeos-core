@@ -16,9 +16,9 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
  * reoccuring blocks filled with data from the assigned values. The tree
  * partial creates an HTML block of nested lists for category trees.
  *
- * The partial template files are usually stored in the layouts/partials/ folder
+ * The partial template files are usually stored in the templates/partials/ folder
  * of the core or the extensions. The configured path to the partial file must
- * be relative to the layouts/ folder, e.g. "common/partials/address-default.php". 
+ * be relative to the templates/ folder, e.g. "common/partials/address-default.php". 
  *
  * @param string Relative path to the template file
  * @since 2015.08

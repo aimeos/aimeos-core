@@ -100,8 +100,10 @@ class TestHelper
 
 	protected static function createView( \Aimeos\MW\Config\Iface $config )
 	{
-		$tmplpaths = self::getAimeos()->getCustomPaths( 'client/html' );
-		$tmplpaths[dirname( __DIR__ )] = array( 'layouts' );
+		$tmplpaths = array_merge_recursive(
+			self::getAimeos()->getCustomPaths( 'client/html' ),
+			self::getAimeos()->getCustomPaths( 'controller/jobs/templates' )
+		);
 
 		$view = new \Aimeos\MW\View\Standard();
 

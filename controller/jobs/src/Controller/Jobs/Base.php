@@ -71,7 +71,7 @@ abstract class Base
 	protected function getTemplate( $confpath, $default )
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$templatePaths = $this->aimeos->getCustomPaths( 'controller/jobs/layouts' );
+		$templatePaths = $this->aimeos->getCustomPaths( 'controller/jobs/templates' );
 
 		foreach( (array) $default as $fname )
 		{

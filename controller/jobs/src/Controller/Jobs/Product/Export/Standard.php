@@ -71,8 +71,8 @@ class Standard
 		 *
 		 * The template file contains the XML code and processing instructions
 		 * to generate the site map files. The configuration string is the path
-		 * to the template file relative to the layouts directory (usually in
-		 * controller/jobs/layouts).
+		 * to the template file relative to the templates directory (usually in
+		 * controller/jobs/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be
@@ -197,8 +197,8 @@ class Standard
 		 *
 		 * The template file contains the XML code and processing instructions
 		 * to generate the site map header. The configuration string is the path
-		 * to the template file relative to the layouts directory (usually in
-		 * controller/jobs/layouts).
+		 * to the template file relative to the templates directory (usually in
+		 * controller/jobs/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be
@@ -241,8 +241,8 @@ class Standard
 		 *
 		 * The template file contains the XML code and processing instructions
 		 * to generate the site map footer. The configuration string is the path
-		 * to the template file relative to the layouts directory (usually in
-		 * controller/jobs/layouts).
+		 * to the template file relative to the templates directory (usually in
+		 * controller/jobs/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be

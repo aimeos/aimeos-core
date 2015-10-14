@@ -52,7 +52,7 @@ return array(
 		'controller/jobs' => array(
 			'controller/jobs/src',
 		),
-		'controller/jobs/layouts' => array(
+		'controller/jobs/templates' => array(
 			'controller/jobs/templates',
 		),
 	),
