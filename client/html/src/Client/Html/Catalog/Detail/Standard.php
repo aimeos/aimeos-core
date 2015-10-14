@@ -256,7 +256,7 @@ class Standard
 			 * @see client/html/catalog/detail/standard/template-header
 			 */
 			$tplconf = 'client/html/catalog/detail/standard/template-body';
-			$default = 'catalog/detail/body-default.html';
+			$default = 'catalog/detail/body-default.php';
 
 			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
@@ -320,7 +320,7 @@ class Standard
 				 * @see client/html/catalog/detail/standard/template-body
 				 */
 				$tplconf = 'client/html/catalog/detail/standard/template-header';
-				$default = 'catalog/detail/header-default.html';
+				$default = 'catalog/detail/header-default.php';
 
 				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 

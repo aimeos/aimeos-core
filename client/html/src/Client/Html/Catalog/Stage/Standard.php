@@ -180,7 +180,7 @@ class Standard
 			 * @see client/html/catalog/stage/standard/template-header
 			 */
 			$tplconf = 'client/html/catalog/stage/standard/template-body';
-			$default = 'catalog/stage/body-default.html';
+			$default = 'catalog/stage/body-default.php';
 
 			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
@@ -244,7 +244,7 @@ class Standard
 				 * @see client/html/catalog/stage/standard/template-body
 				 */
 				$tplconf = 'client/html/catalog/stage/standard/template-header';
-				$default = 'catalog/stage/header-default.html';
+				$default = 'catalog/stage/header-default.php';
 
 				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 

@@ -101,7 +101,7 @@ class Standard
 		 * @see client/html/catalog/lists/promo/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/lists/promo/standard/template-body';
-		$default = 'catalog/lists/promo-body-default.html';
+		$default = 'catalog/lists/promo-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -147,7 +147,7 @@ class Standard
 		 * @see client/html/catalog/lists/promo/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/lists/promo/standard/template-header';
-		$default = 'catalog/lists/promo-header-default.html';
+		$default = 'catalog/lists/promo-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

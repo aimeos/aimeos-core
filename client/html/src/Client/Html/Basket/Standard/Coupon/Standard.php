@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/basket/standard/coupon/standard/template-header
 		 */
 		$tplconf = 'client/html/basket/standard/coupon/standard/template-body';
-		$default = 'basket/standard/coupon-body-default.html';
+		$default = 'basket/standard/coupon-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/basket/standard/coupon/standard/template-body
 		 */
 		$tplconf = 'client/html/basket/standard/coupon/standard/template-header';
-		$default = 'basket/standard/coupon-header-default.html';
+		$default = 'basket/standard/coupon-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

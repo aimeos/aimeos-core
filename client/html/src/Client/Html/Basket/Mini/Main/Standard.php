@@ -99,7 +99,7 @@ class Standard
 		 * @see client/html/basket/mini/main/standard/template-header
 		 */
 		$tplconf = 'client/html/basket/mini/main/standard/template-body';
-		$default = 'basket/mini/main-body-default.html';
+		$default = 'basket/mini/main-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -145,7 +145,7 @@ class Standard
 		 * @see client/html/basket/mini/main/standard/template-body
 		 */
 		$tplconf = 'client/html/basket/mini/main/standard/template-header';
-		$default = 'basket/mini/main-header-default.html';
+		$default = 'basket/mini/main-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

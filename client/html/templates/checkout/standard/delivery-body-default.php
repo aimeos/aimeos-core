@@ -54,7 +54,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php	endif; ?>
 			<div class="icons">
 <?php	foreach( $service->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
-<?php		echo $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.html', array( 'item' => $mediaItem, 'boxAttributes' => array( 'class' => 'icon' ) ) ); ?> 
+<?php		echo $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.php', array( 'item' => $mediaItem, 'boxAttributes' => array( 'class' => 'icon' ) ) ); ?> 
 <?php	endforeach; ?>
 			</div>
 			<h2><?php echo $enc->html( $service->getName() ); ?></h2>

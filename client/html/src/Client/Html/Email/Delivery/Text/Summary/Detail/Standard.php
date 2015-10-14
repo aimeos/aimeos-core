@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/email/delivery/text/summary/detail/standard/template-header
 		 */
 		$tplconf = 'client/html/email/delivery/text/summary/detail/standard/template-body';
-		$default = 'email/common/text-summary-detail-body-default.html';
+		$default = 'email/common/text-summary-detail-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/email/delivery/text/summary/detail/standard/template-body
 		 */
 		$tplconf = 'client/html/email/delivery/text/summary/detail/standard/template-header';
-		$default = 'email/common/text-summary-detail-header-default.html';
+		$default = 'email/common/text-summary-detail-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

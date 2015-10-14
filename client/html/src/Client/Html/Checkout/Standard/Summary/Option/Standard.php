@@ -109,7 +109,7 @@ class Standard
 		 * @see client/html/checkout/standard/summary/option/standard/template-header
 		 */
 		$tplconf = 'client/html/checkout/standard/summary/option/standard/template-body';
-		$default = 'checkout/standard/summary-option-body-default.html';
+		$default = 'checkout/standard/summary-option-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -155,7 +155,7 @@ class Standard
 		 * @see client/html/checkout/standard/summary/option/standard/template-body
 		 */
 		$tplconf = 'client/html/checkout/standard/summary/option/standard/template-header';
-		$default = 'checkout/standard/summary-option-header-default.html';
+		$default = 'checkout/standard/summary-option-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

@@ -101,7 +101,7 @@ class Standard
 		 * @see client/html/catalog/filter/tree/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/filter/tree/standard/template-body';
-		$default = 'catalog/filter/tree-body-default.html';
+		$default = 'catalog/filter/tree-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -147,7 +147,7 @@ class Standard
 		 * @see client/html/catalog/filter/tree/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/filter/tree/standard/template-header';
-		$default = 'catalog/filter/tree-header-default.html';
+		$default = 'catalog/filter/tree-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

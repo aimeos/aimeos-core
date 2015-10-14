@@ -149,7 +149,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/account/text/standard/template-body';
 
-		$text = $view->render( $this->getTemplate( $tplconf, 'email/common/text-body-default.html' ) );
+		$text = $view->render( $this->getTemplate( $tplconf, 'email/common/text-body-default.php' ) );
 		$view->mail()->setBody( $text );
 		return $text;
 	}
@@ -203,7 +203,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/account/text/standard/template-header';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/common/text-header-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/common/text-header-default.php' ) );
 	}
 
 

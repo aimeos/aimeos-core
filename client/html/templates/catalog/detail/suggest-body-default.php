@@ -1,12 +1,13 @@
 <?php
 
 /**
+ * @copyright Copyright (c) Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
 $enc = $this->encoder();
-$productItems = $this->get( 'bundleItems', array() );
-$positionItems = $this->get( 'bundlePosItems', array() );
+$productItems = $this->get( 'suggestItems', array() );
+$positionItems = $this->get( 'suggestPosItems', array() );
 
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
@@ -19,13 +20,13 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
-<?php if( !empty( $productItems ) || $this->bundleBody != '' ) : ?>
-<section class="catalog-detail-bundle">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Bundled products' ); ?></h2>
-	<ul class="bundle-items"><!--
+<?php if( !empty( $productItems ) || $this->suggestBody != '' ) : ?>
+<section class="catalog-detail-suggest">
+	<h2 class="header"><?php echo $this->translate( 'client/html', 'Suggested products' ); ?></h2>
+	<ul class="suggest-items">
 <?php	foreach( $positionItems as $id => $item ) : ?>
 <?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; ?>
-		--><li class="bundle-item">
+		<li class="suggest-item">
 <?php			$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $productItem->getId() ); ?>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php			$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
@@ -36,13 +37,13 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php			endif; ?>
 				<h3 class="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
 				<div class="price-list">
-<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
+<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
 				</div>
 			</a>
-		</li><!--
+		</li>
 <?php		endif; ?>
 <?php	endforeach; ?>
-	--></ul>
-<?php echo $this->bundleBody; ?>
+	</ul>
+<?php echo $this->suggestBody; ?>
 </section>
 <?php endif; ?>

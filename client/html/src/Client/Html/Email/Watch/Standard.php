@@ -128,7 +128,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/watch/standard/template-body';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/watch/body-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/watch/body-default.php' ) );
 	}
 
 
@@ -317,7 +317,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/watch/standard/template-header';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/watch/header-default.html' ) ); ;
+		return $view->render( $this->getTemplate( $tplconf, 'email/watch/header-default.php' ) ); ;
 	}
 
 

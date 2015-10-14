@@ -100,7 +100,7 @@ class Standard
 		 * @see client/html/catalog/detail/bought/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/detail/bought/standard/template-body';
-		$default = 'catalog/detail/bought-body-default.html';
+		$default = 'catalog/detail/bought-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -146,7 +146,7 @@ class Standard
 		 * @see client/html/catalog/detail/bought/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/detail/bought/standard/template-header';
-		$default = 'catalog/detail/bought-header-default.html';
+		$default = 'catalog/detail/bought-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

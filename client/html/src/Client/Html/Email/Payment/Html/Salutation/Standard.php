@@ -107,7 +107,7 @@ class Standard
 		$tplconf = 'client/html/email/payment/html/salutation/standard/template-body';
 
 		$status = $view->extOrderItem->getPaymentStatus();
-		$default = array( 'email/payment/' . $status . '/html-salutation-body-default.html', 'email/common/html-salutation-body-default.html' );
+		$default = array( 'email/payment/' . $status . '/html-salutation-body-default.php', 'email/common/html-salutation-body-default.php' );
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -162,7 +162,7 @@ class Standard
 		$tplconf = 'client/html/email/payment/html/salutation/standard/template-header';
 
 		$status = $view->extOrderItem->getPaymentStatus();
-		$default = array( 'email/payment/' . $status . '/html-salutation-header-default.html', 'email/common/html-salutation-header-default.html' );
+		$default = array( 'email/payment/' . $status . '/html-salutation-header-default.php', 'email/common/html-salutation-header-default.php' );
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

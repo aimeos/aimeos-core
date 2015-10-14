@@ -107,7 +107,7 @@ class Standard
 		 * @see client/html/checkout/standard/process/standard/template-header
 		 */
 		$tplconf = 'client/html/checkout/standard/process/standard/template-body';
-		$default = 'checkout/standard/process-body-default.html';
+		$default = 'checkout/standard/process-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -159,7 +159,7 @@ class Standard
 		 * @see client/html/checkout/standard/process/standard/template-body
 		 */
 		$tplconf = 'client/html/checkout/standard/process/standard/template-header';
-		$default = 'checkout/standard/process-header-default.html';
+		$default = 'checkout/standard/process-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

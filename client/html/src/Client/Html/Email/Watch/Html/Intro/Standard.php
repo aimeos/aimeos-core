@@ -106,7 +106,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/watch/html/intro/standard/template-body';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/watch/html-intro-body-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/watch/html-intro-body-default.php' ) );
 	}
 
 
@@ -158,7 +158,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/watch/html/intro/standard/template-header';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/watch/html-intro-header-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/watch/html-intro-header-default.php' ) );
 	}
 
 

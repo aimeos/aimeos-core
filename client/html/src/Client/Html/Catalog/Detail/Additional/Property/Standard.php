@@ -100,7 +100,7 @@ class Standard
 		 * @see client/html/catalog/detail/additional/property/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/detail/additional/property/standard/template-body';
-		$default = 'catalog/detail/additional-property-body-default.html';
+		$default = 'catalog/detail/additional-property-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -146,7 +146,7 @@ class Standard
 		 * @see client/html/catalog/detail/additional/property/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/detail/additional/property/standard/template-header';
-		$default = 'catalog/detail/additional-property-header-default.html';
+		$default = 'catalog/detail/additional-property-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

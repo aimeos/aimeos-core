@@ -121,7 +121,7 @@ class Standard
 		 * @see client/html/catalog/detail/basket/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/detail/basket/standard/template-body';
-		$default = 'catalog/detail/basket-body-default.html';
+		$default = 'catalog/detail/basket-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -167,7 +167,7 @@ class Standard
 		 * @see client/html/catalog/detail/basket/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/detail/basket/standard/template-header';
-		$default = 'catalog/detail/basket-header-default.html';
+		$default = 'catalog/detail/basket-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

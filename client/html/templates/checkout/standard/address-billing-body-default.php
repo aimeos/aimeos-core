@@ -145,7 +145,7 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 		 *
 		 * The partial template files are usually stored in the layouts/partials/ folder
 		 * of the core or the extensions. The configured path to the partial file must
-		 * be relative to the layouts/ folder, e.g. "common/partials/address-default.html". 
+		 * be relative to the layouts/ folder, e.g. "common/partials/address-default.php". 
 		 *
 		 * @param string Relative path to the template file
 		 * @since 2015.04
@@ -153,7 +153,7 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 		 * @category User
 		 */
 ?>
-<?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
+<?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.php', $values ); ?> 
 	</div>
 <?php endif; ?>
 <?php if( $disablenew === false ) : ?>
@@ -187,7 +187,7 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 			'css' => $paymentCss,
 		);
 ?>
-<?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.html', $values ); ?> 
+<?php	echo $this->partial( 'client/html/common/partials/address', 'common/partials/address-default.php', $values ); ?> 
 	</div>
 <?php endif; ?>
 <?php echo $this->get( 'billingBody' ); ?>

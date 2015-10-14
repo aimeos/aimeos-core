@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/catalog/filter/search/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/filter/search/standard/template-body';
-		$default = 'catalog/filter/search-body-default.html';
+		$default = 'catalog/filter/search-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/catalog/filter/search/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/filter/search/standard/template-header';
-		$default = 'catalog/filter/search-header-default.html';
+		$default = 'catalog/filter/search-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

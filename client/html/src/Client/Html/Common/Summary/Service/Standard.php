@@ -98,7 +98,7 @@ abstract class Standard
 		 * @see client/html/common/summary/service/standard/template-header
 		 */
 		$tplconf = 'client/html/common/summary/service/standard/template-body';
-		$default = 'common/summary/service-body-default.html';
+		$default = 'common/summary/service-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ abstract class Standard
 		 * @see client/html/common/summary/service/standard/template-body
 		 */
 		$tplconf = 'client/html/common/summary/service/standard/template-header';
-		$default = 'common/summary/service-header-default.html';
+		$default = 'common/summary/service-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

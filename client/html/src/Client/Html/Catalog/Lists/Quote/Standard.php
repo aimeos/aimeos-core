@@ -99,7 +99,7 @@ class Standard
 		 * @see client/html/catalog/lists/quote/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/lists/quote/standard/template-body';
-		$default = 'catalog/lists/quote-body-default.html';
+		$default = 'catalog/lists/quote-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -145,7 +145,7 @@ class Standard
 		 * @see client/html/catalog/lists/quote/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/lists/quote/standard/template-header';
-		$default = 'catalog/lists/quote-header-default.html';
+		$default = 'catalog/lists/quote-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

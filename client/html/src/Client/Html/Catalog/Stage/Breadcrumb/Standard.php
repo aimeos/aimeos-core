@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/catalog/stage/breadcrumb/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/stage/breadcrumb/standard/template-body';
-		$default = 'catalog/stage/breadcrumb-body-default.html';
+		$default = 'catalog/stage/breadcrumb-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/catalog/stage/breadcrumb/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/stage/breadcrumb/standard/template-header';
-		$default = 'catalog/stage/breadcrumb-header-default.html';
+		$default = 'catalog/stage/breadcrumb-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

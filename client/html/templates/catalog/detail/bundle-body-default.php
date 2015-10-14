@@ -5,8 +5,8 @@
  */
 
 $enc = $this->encoder();
-$productItems = $this->get( 'boughtItems', array() );
-$positionItems = $this->get( 'boughtPosItems', array() );
+$productItems = $this->get( 'bundleItems', array() );
+$positionItems = $this->get( 'bundlePosItems', array() );
 
 $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
@@ -19,13 +19,13 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
-<?php if( !empty( $productItems ) || $this->boughtBody != '' ) : ?>
-<section class="catalog-detail-bought">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Other customers also bought' ); ?></h2>
-	<ul class="bought-items">
+<?php if( !empty( $productItems ) || $this->bundleBody != '' ) : ?>
+<section class="catalog-detail-bundle">
+	<h2 class="header"><?php echo $this->translate( 'client/html', 'Bundled products' ); ?></h2>
+	<ul class="bundle-items"><!--
 <?php	foreach( $positionItems as $id => $item ) : ?>
 <?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; ?>
-		<li class="bought-item">
+		--><li class="bundle-item">
 <?php			$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $productItem->getId() ); ?>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php			$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
@@ -36,13 +36,13 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php			endif; ?>
 				<h3 class="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
 				<div class="price-list">
-<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
+<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
 				</div>
 			</a>
-		</li>
+		</li><!--
 <?php		endif; ?>
 <?php	endforeach; ?>
-	</ul>
-<?php echo $this->boughtBody; ?>
+	--></ul>
+<?php echo $this->bundleBody; ?>
 </section>
 <?php endif; ?>

@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/catalog/detail/additional/text/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/detail/additional/text/standard/template-body';
-		$default = 'catalog/detail/additional-text-body-default.html';
+		$default = 'catalog/detail/additional-text-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/catalog/detail/additional/text/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/detail/additional/text/standard/template-header';
-		$default = 'catalog/detail/additional-text-header-default.html';
+		$default = 'catalog/detail/additional-text-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

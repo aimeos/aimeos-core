@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBodyAddressEU()
 	{
 		$config = $this->context->getConfig();
-		$config->set( 'client/html/common/partials/address', 'common/partials/address-eu.html' );
+		$config->set( 'client/html/common/partials/address', 'common/partials/address-eu.php' );
 
 		$view = \TestHelper::getView( 'unittest', $config );
 		$this->object->setView( $view );

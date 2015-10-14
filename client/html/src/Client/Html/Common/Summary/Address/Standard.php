@@ -98,7 +98,7 @@ abstract class Standard
 		 * @see client/html/common/summary/address/standard/template-header
 		 */
 		$tplconf = 'client/html/common/summary/address/standard/template-body';
-		$default = 'common/summary/address-body-default.html';
+		$default = 'common/summary/address-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ abstract class Standard
 		 * @see client/html/common/summary/address/standard/template-body
 		 */
 		$tplconf = 'client/html/common/summary/address/standard/template-header';
-		$default = 'common/summary/address-header-default.html';
+		$default = 'common/summary/address-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

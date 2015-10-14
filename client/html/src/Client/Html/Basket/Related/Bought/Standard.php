@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/basket/related/bought/standard/template-header
 		 */
 		$tplconf = 'client/html/basket/related/bought/standard/template-body';
-		$default = 'basket/related/bought-body-default.html';
+		$default = 'basket/related/bought-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/basket/related/bought/standard/template-body
 		 */
 		$tplconf = 'client/html/basket/related/bought/standard/template-header';
-		$default = 'basket/related/bought-header-default.html';
+		$default = 'basket/related/bought-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

@@ -105,7 +105,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/account/html/salutation/standard/template-body';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/common/html-salutation-body-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/common/html-salutation-body-default.php' ) );
 	}
 
 
@@ -157,7 +157,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/account/html/salutation/standard/template-header';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/common/html-salutation-header-default.html' ) );
+		return $view->render( $this->getTemplate( $tplconf, 'email/common/html-salutation-header-default.php' ) );
 	}
 
 

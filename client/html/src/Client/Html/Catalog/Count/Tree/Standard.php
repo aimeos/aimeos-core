@@ -99,7 +99,7 @@ class Standard
 		 * @see client/html/catalog/count/tree/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/count/tree/standard/template-body';
-		$default = 'catalog/count/tree-body-default.html';
+		$default = 'catalog/count/tree-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -145,7 +145,7 @@ class Standard
 		 * @see client/html/catalog/count/tree/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/count/tree/standard/template-header';
-		$default = 'catalog/count/tree-header-default.html';
+		$default = 'catalog/count/tree-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

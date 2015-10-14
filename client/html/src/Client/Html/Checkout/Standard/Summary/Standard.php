@@ -165,7 +165,7 @@ class Standard
 		 * @see client/html/checkout/standard/summary/standard/template-header
 		 */
 		$tplconf = 'client/html/checkout/standard/summary/standard/template-body';
-		$default = 'checkout/standard/summary-body-default.html';
+		$default = 'checkout/standard/summary-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -219,7 +219,7 @@ class Standard
 		 * @see client/html/checkout/standard/summary/standard/template-body
 		 */
 		$tplconf = 'client/html/checkout/standard/summary/standard/template-header';
-		$default = 'checkout/standard/summary-header-default.html';
+		$default = 'checkout/standard/summary-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

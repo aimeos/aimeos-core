@@ -133,7 +133,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php			endif; ?>
 				<h3 class="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
 				<div class="price-list">
-<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $prices ) ); ?>
+<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $prices ) ); ?>
 				</div>
 			</a>
 			<form class="watch-details" method="POST" action="<?php echo $this->url( $watchTarget, $watchController, $watchAction, $watchParams, array(), $watchConfig ); ?>">

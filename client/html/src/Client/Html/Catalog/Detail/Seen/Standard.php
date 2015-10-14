@@ -309,7 +309,7 @@ class Standard
 			 * @see client/html/catalog/detail/seen/standard/template-header
 			 */
 			$tplconf = 'client/html/catalog/detail/seen/standard/template-body';
-			$default = 'catalog/detail/seen-body-default.html';
+			$default = 'catalog/detail/seen-body-default.php';
 
 			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 

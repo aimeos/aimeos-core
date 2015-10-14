@@ -178,7 +178,7 @@ class Standard
 			 * @see client/html/catalog/filter/standard/template-header
 			 */
 			$tplconf = 'client/html/catalog/filter/standard/template-body';
-			$default = 'catalog/filter/body-default.html';
+			$default = 'catalog/filter/body-default.php';
 
 			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 
@@ -248,7 +248,7 @@ class Standard
 				 * @see client/html/catalog/filter/standard/template-body
 				 */
 				$tplconf = 'client/html/catalog/filter/standard/template-header';
-				$default = 'catalog/filter/header-default.html';
+				$default = 'catalog/filter/header-default.php';
 
 				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
 

@@ -99,7 +99,7 @@ class Standard
 		 * @see client/html/catalog/stage/image/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/stage/image/standard/template-body';
-		$default = 'catalog/stage/image-body-default.html';
+		$default = 'catalog/stage/image-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -145,7 +145,7 @@ class Standard
 		 * @see client/html/catalog/stage/image/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/stage/image/standard/template-header';
-		$default = 'catalog/stage/image-header-default.html';
+		$default = 'catalog/stage/image-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

@@ -101,7 +101,7 @@ class Standard
 		 * @see client/html/catalog/filter/attribute/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/filter/attribute/standard/template-body';
-		$default = 'catalog/filter/attribute-body-default.html';
+		$default = 'catalog/filter/attribute-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -147,7 +147,7 @@ class Standard
 		 * @see client/html/catalog/filter/attribute/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/filter/attribute/standard/template-header';
-		$default = 'catalog/filter/attribute-header-default.html';
+		$default = 'catalog/filter/attribute-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

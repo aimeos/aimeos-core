@@ -52,7 +52,7 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 <?php	$prices = $product->getRefItems( 'price', 'default', 'default' ); ?>
 <?php	if( !empty( $prices ) ) : ?>
 	<div class="price price-prodid-<?php echo $prodid; ?>">
-<?php		echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => $prices ) ); ?>
+<?php		echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $prices ) ); ?>
 	</div>
 <?php	endif; ?>
 <?php endforeach; ?>
@@ -71,7 +71,7 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 						<label class="select-label" for="option-<?php echo $enc->attr( $attrId ); ?>"><!--
 <?php				foreach( $attributes[$attrId]->getListItems( 'media', 'icon' ) as $listItem ) : ?>
 <?php					if( ( $item = $listItem->getRefItem() ) !== null ) : ?>
-<?php						echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.html', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--'; ?>
+<?php						echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.php', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--'; ?>
 <?php					endif; ?>
 <?php				endforeach; ?>
 							--><span><?php echo $enc->html( $attributes[$attrId]->getName() ); ?></span><!--

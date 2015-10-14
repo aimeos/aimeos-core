@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/catalog/detail/social/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/detail/social/standard/template-body';
-		$default = 'catalog/detail/social-body-default.html';
+		$default = 'catalog/detail/social-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/catalog/detail/social/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/detail/social/standard/template-header';
-		$default = 'catalog/detail/social-header-default.html';
+		$default = 'catalog/detail/social-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

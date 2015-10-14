@@ -105,7 +105,7 @@ class Standard
 		 * @see client/html/account/history/lists/standard/template-header
 		 */
 		$tplconf = 'client/html/account/history/lists/standard/template-body';
-		$default = 'account/history/list-body-default.html';
+		$default = 'account/history/list-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -157,7 +157,7 @@ class Standard
 		 * @see client/html/account/history/lists/standard/template-body
 		 */
 		$tplconf = 'client/html/account/history/lists/standard/template-header';
-		$default = 'account/history/list-header-default.html';
+		$default = 'account/history/list-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

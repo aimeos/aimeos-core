@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/email/delivery/text/summary/coupon/standard/template-header
 		 */
 		$tplconf = 'client/html/email/delivery/text/summary/coupon/standard/template-body';
-		$default = 'email/common/text-summary-coupon-body-default.html';
+		$default = 'email/common/text-summary-coupon-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/email/delivery/text/summary/coupon/standard/template-body
 		 */
 		$tplconf = 'client/html/email/delivery/text/summary/coupon/standard/template-header';
-		$default = 'email/common/text-summary-coupon-header-default.html';
+		$default = 'email/common/text-summary-coupon-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

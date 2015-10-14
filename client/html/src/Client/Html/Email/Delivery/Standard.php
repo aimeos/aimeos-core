@@ -129,7 +129,7 @@ class Standard
 		$tplconf = 'client/html/email/delivery/standard/template-body';
 
 		$status = $view->extOrderItem->getDeliveryStatus();
-		$default = array( 'email/delivery/' . $status . '/body-default.html', 'email/delivery/body-default.html' );
+		$default = array( 'email/delivery/' . $status . '/body-default.php', 'email/delivery/body-default.php' );
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -386,7 +386,7 @@ class Standard
 		$tplconf = 'client/html/email/delivery/standard/template-header';
 
 		$status = $view->extOrderItem->getDeliveryStatus();
-		$default = array( 'email/delivery/' . $status . '/header-default.html', 'email/delivery/header-default.html' );
+		$default = array( 'email/delivery/' . $status . '/header-default.php', 'email/delivery/header-default.php' );
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) ); ;
 	}

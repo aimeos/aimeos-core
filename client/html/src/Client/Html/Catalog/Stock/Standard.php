@@ -101,7 +101,7 @@ class Standard
 			 * @see client/html/catalog/stock/standard/template-header
 			 */
 			$tplconf = 'client/html/catalog/stock/standard/template-body';
-			$default = 'catalog/stock/body-default.html';
+			$default = 'catalog/stock/body-default.php';
 
 			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}
@@ -154,7 +154,7 @@ class Standard
 			 * @see client/html/catalog/stock/standard/template-body
 			 */
 			$tplconf = 'client/html/catalog/stock/standard/template-header';
-			$default = 'catalog/stock/header-default.html';
+			$default = 'catalog/stock/header-default.php';
 
 			return $view->render( $this->getTemplate( $tplconf, $default ) );
 		}

@@ -98,7 +98,7 @@ class Standard
 		 * @see client/html/locale/select/language/standard/template-header
 		 */
 		$tplconf = 'client/html/locale/select/language/standard/template-body';
-		$default = 'locale/select/language-body-default.html';
+		$default = 'locale/select/language-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -144,7 +144,7 @@ class Standard
 		 * @see client/html/locale/select/language/standard/template-body
 		 */
 		$tplconf = 'client/html/locale/select/language/standard/template-header';
-		$default = 'locale/select/language-header-default.html';
+		$default = 'locale/select/language-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

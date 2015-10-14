@@ -37,7 +37,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 <?php	echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 						</a>
 						<div class="price-list">
-<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.html', array( 'prices' => array( $entry['price'] ) ) ); ?>
+<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => array( $entry['price'] ) ) ); ?>
 						</div>
 					</td>
 				</tr>

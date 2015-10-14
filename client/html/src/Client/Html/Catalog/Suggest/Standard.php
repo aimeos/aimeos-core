@@ -114,7 +114,7 @@ class Standard
 		 * @see client/html/catalog/suggest/standard/template-header
 		 */
 		$tplconf = 'client/html/catalog/suggest/standard/template-body';
-		$default = 'catalog/suggest/body-default.html';
+		$default = 'catalog/suggest/body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -171,7 +171,7 @@ class Standard
 		 * @see client/html/catalog/suggest/standard/template-body
 		 */
 		$tplconf = 'client/html/catalog/suggest/standard/template-header';
-		$default = 'catalog/suggest/header-default.html';
+		$default = 'catalog/suggest/header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

@@ -18,7 +18,7 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
  *
  * The partial template files are usually stored in the layouts/partials/ folder
  * of the core or the extensions. The configured path to the partial file must
- * be relative to the layouts/ folder, e.g. "common/partials/address-default.html". 
+ * be relative to the layouts/ folder, e.g. "common/partials/address-default.php". 
  *
  * @param string Relative path to the template file
  * @since 2015.08
@@ -50,7 +50,7 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
 	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Categories' ), $enc::TRUST ); ?></h2>
 <?php if( isset( $this->treeCatalogTree ) && $this->treeCatalogTree->getStatus() > 0 ) : ?>
 <?php	$values = array( 'nodes' => array( $this->treeCatalogTree ), 'path' => $this->get( 'treeCatalogPath', array() ), 'params' => $this->get( 'treeFilterParams', array() ) ); ?>
-<?php 	echo $this->partial( 'client/html/common/partials/tree', 'common/partials/tree-default.html', $values ); ?>
+<?php 	echo $this->partial( 'client/html/common/partials/tree', 'common/partials/tree-default.php', $values ); ?>
 <?php endif; ?>
 <?php echo $this->get( 'treeBody' ); ?>
 </section>

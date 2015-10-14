@@ -97,7 +97,7 @@ class Standard
 		 * @see client/html/checkout/standard/order/account/standard/template-header
 		 */
 		$tplconf = 'client/html/checkout/standard/order/account/standard/template-body';
-		$default = 'checkout/standard/order-account-body-default.html';
+		$default = 'checkout/standard/order-account-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -143,7 +143,7 @@ class Standard
 		 * @see client/html/checkout/standard/order/account/standard/template-body
 		 */
 		$tplconf = 'client/html/checkout/standard/order/account/standard/template-header';
-		$default = 'checkout/standard/order-account-header-default.html';
+		$default = 'checkout/standard/order-account-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

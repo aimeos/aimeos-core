@@ -150,7 +150,7 @@ class Standard
 		 * @see client/html/account/history/order/standard/template-header
 		 */
 		$tplconf = 'client/html/account/history/order/standard/template-body';
-		$default = 'account/history/order-body-default.html';
+		$default = 'account/history/order-body-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
@@ -202,7 +202,7 @@ class Standard
 		 * @see client/html/account/history/order/standard/template-body
 		 */
 		$tplconf = 'client/html/account/history/order/standard/template-header';
-		$default = 'account/history/order-header-default.html';
+		$default = 'account/history/order-header-default.php';
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}

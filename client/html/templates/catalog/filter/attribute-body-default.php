@@ -84,7 +84,7 @@ $params = $this->param(); unset( $params['target'] );
 					--><div class="media-list"><!--
 <?php				foreach( $attribute->getListItems( 'media', 'icon' ) as $listItem ) : ?>
 <?php					if( ( $item = $listItem->getRefItem() ) !== null ) : ?>
-<?php						echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.html', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--'; ?>
+<?php						echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.php', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--'; ?>
 <?php					endif; ?>
 <?php				endforeach; ?>
 					--></div>
