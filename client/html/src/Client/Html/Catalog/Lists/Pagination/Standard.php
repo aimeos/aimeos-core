@@ -85,7 +85,7 @@ class Standard
 		 * The template file contains the HTML code and processing instructions
 		 * to generate the result shown in the body of the frontend. The
 		 * configuration string is the path to the template file relative
-		 * to the layouts directory (usually in client/html/layouts).
+		 * to the layouts directory (usually in client/html/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be
@@ -137,7 +137,7 @@ class Standard
 		 * to generate the HTML code that is inserted into the HTML page header
 		 * of the rendered page in the frontend. The configuration string is the
 		 * path to the template file relative to the layouts directory (usually
-		 * in client/html/layouts).
+		 * in client/html/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be

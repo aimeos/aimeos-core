@@ -137,7 +137,7 @@ class Standard
 		 * The template file contains the HTML code and processing instructions
 		 * to generate the result shown in the body of the e-mail. The
 		 * configuration string is the path to the template file relative
-		 * to the layouts directory (usually in client/html/layouts).
+		 * to the layouts directory (usually in client/html/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be
@@ -149,7 +149,7 @@ class Standard
 		 * The account creation e-mail html client allows to use a different template for
 		 * each account status value. You can create a template for each account
 		 * status and store it in the "email/account/<status number>/" directory
-		 * below the "layouts" directory (usually in client/html/layouts). If no
+		 * below the "layouts" directory (usually in client/html/templates). If no
 		 * specific layout template is found, the common template in the
 		 * "email/account/" directory is used.
 		 *
@@ -191,7 +191,7 @@ class Standard
 		 * to generate the HTML code that is inserted into the header
 		 * of the e-mail. The configuration string is the
 		 * path to the template file relative to the layouts directory (usually
-		 * in client/html/layouts).
+		 * in client/html/templates).
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be
@@ -203,7 +203,7 @@ class Standard
 		 * The account creation e-mail HTML client allows to use a different template for
 		 * each account status value. You can create a template for each account
 		 * status and store it in the "email/account/<status number>/" directory
-		 * below the "layouts" directory (usually in client/html/layouts). If no
+		 * below the "layouts" directory (usually in client/html/templates). If no
 		 * specific layout template is found, the common template in the
 		 * "email/account/" directory is used.
 		 *

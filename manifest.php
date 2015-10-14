@@ -44,7 +44,7 @@ return array(
 			'client/extjs/manifest.jsb2',
 		),
 		'client/html' => array(
-			'client/html/layouts',
+			'client/html/templates',
 		),
 		'controller/extjs' => array(
 			'controller/extjs/src',
@@ -53,7 +53,7 @@ return array(
 			'controller/jobs/src',
 		),
 		'controller/jobs/layouts' => array(
-			'controller/jobs/layouts',
+			'controller/jobs/templates',
 		),
 	),
 );

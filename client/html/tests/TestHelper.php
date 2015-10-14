@@ -62,7 +62,7 @@ class TestHelper
 		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Partial\Standard( $view, $config, array( dirname( __DIR__ ) => array( 'layouts' ) ) );
+		$helper = new \Aimeos\MW\View\Helper\Partial\Standard( $view, $config, self::getHtmlTemplatePaths() );
 		$view->addHelper( 'partial', $helper );
 
 		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1' );
