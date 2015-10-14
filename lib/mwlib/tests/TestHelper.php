@@ -55,7 +55,7 @@ class TestHelper
 
 	private static function createConfig()
 	{
-		$path = __DIR__ . DIRECTORY_SEPARATOR . 'config';
+		$path = dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
 		$object = new \Aimeos\MW\Config\PHPArray( array(), $path );
