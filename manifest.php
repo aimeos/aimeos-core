@@ -22,8 +22,6 @@ return array(
 	),
 	'config' => array(
 		'lib/mshoplib/config',
-		'controller/frontend/config/controller',
-		'controller/extjs/config/controller',
 		'config',
 	),
 	'i18n' => array(
