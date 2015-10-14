@@ -29,7 +29,7 @@ return array(
 	),
 	'custom' => array(
 		'client/html' => array(
-			'client/html/layouts',
+			'client/html/templates',
 		),
 		'client/extjs' => array(
 			'client/extjs/manifest.jsb2',
@@ -39,6 +39,9 @@ return array(
 		),
 		'controller/jobs' => array(
 			'controller/jobs/src',
+		),
+		'controller/jobs/templates' => array(
+			'controller/jobs/templates',
 		),
 	),
 	'setup' => array(

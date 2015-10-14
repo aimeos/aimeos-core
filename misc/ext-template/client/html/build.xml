@@ -34,7 +34,7 @@
 	</target>
 
 	<target name="i18n" description="Creates translation message files">
-		<exec command="find ./layouts/ ./src/ -type f | xgettext -s --no-wrap --language=PHP --from-code=UTF-8 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/<extname>-client-html.pot -f -"
+		<exec command="find ./src/ ./templates/ -type f | xgettext -s --no-wrap --language=PHP --from-code=UTF-8 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/<extname>-client-html.pot -f -"
 			checkreturn="true" logoutput="true" /> 
         <foreach param="po-fname" absparam="po-filename" target="i18n-update">
             <fileset dir="./i18n">
