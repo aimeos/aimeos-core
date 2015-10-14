@@ -1,48 +1,48 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 14:45+0200\n"
+"POT-Creation-Date: 2015-10-14 19:56+0200\n"
 "PO-Revision-Date: 2015-09-29 12:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Persian (http://www.transifex.com/aimeos/aimeos-core/language/fa/)\n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/Controller/Common/Order/Factory.php:103
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:78
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:264
+#: src/Controller/Common/Order/Factory.php:107
+#: src/Controller/Common/Product/Import/Csv/Base.php:81
+#: src/Controller/Common/Product/Import/Csv/Base.php:267
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-#: src/Controller/Common/Order/Factory.php:97
+#: src/Controller/Common/Order/Factory.php:101
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
 
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:72
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:258
+#: src/Controller/Common/Product/Import/Csv/Base.php:75
+#: src/Controller/Common/Product/Import/Csv/Base.php:261
 #, php-format
 msgid "Class \"%1$s\" not found"
 msgstr ""
 
-#: src/Controller/Common/Order/Factory.php:86
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:66
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:252
+#: src/Controller/Common/Order/Factory.php:90
+#: src/Controller/Common/Product/Import/Csv/Base.php:69
+#: src/Controller/Common/Product/Import/Csv/Base.php:255
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:320
+#: src/Controller/Common/Product/Import/Csv/Base.php:323
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr ""

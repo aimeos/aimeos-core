@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 14:45+0200\n"
+"POT-Creation-Date: 2015-10-14 20:17+0200\n"
 "PO-Revision-Date: 2015-07-16 16:01+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
@@ -19,150 +19,150 @@ msgstr ""
 "Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:499
+#: src/Controller/Frontend/Basket/Standard.php:503
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "Dodawanie produkt z ID \"%1$s\" jest nie dozwolone"
 
-#: src/Controller/Frontend/Basket/Default.php:902
+#: src/Controller/Frontend/Basket/Standard.php:906
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Dostępny atrybut o ID \"%1$s\" nie pasuje do podanego atrybutu o ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:165
+#: src/Controller/Frontend/Basket/Standard.php:169
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be changed"
 msgstr "Nie można zmienić pozycję \"%1$d\" zawartą w koszyku"
 
-#: src/Controller/Frontend/Basket/Default.php:139
+#: src/Controller/Frontend/Basket/Standard.php:143
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "Nie można usunąć ręcznie pozycji \"%1$d\" z koszyka"
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:160
+#: src/Controller/Frontend/Common/Factory/Base.php:70
+#: src/Controller/Frontend/Common/Factory/Base.php:164
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "W klasie \"%1$s\" nie zaimplementowano interfejsu \"%2$s\""
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:154
-#: src/Controller/Frontend/Factory.php:84
+#: src/Controller/Frontend/Common/Factory/Base.php:64
+#: src/Controller/Frontend/Common/Factory/Base.php:158
+#: src/Controller/Frontend/Factory.php:88
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasa \"%1$s\" jest nie dostępna"
 
-#: src/Controller/Frontend/Factory.php:63
+#: src/Controller/Frontend/Factory.php:67
 #, php-format
 msgid "Controller path is empty"
 msgstr "Ścieżka kontrolera jest pusta"
 
-#: src/Controller/Frontend/Basket/Default.php:257
+#: src/Controller/Frontend/Basket/Standard.php:261
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid"
 msgstr "Kod kuponu \"%1$s\" jest nie ważny"
 
-#: src/Controller/Frontend/Basket/Default.php:210
+#: src/Controller/Frontend/Basket/Standard.php:214
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid or not available any more"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:225
+#: src/Controller/Frontend/Basket/Standard.php:229
 #, php-format
 msgid "Coupon for code \"%1$s\" is not available any more"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:717
+#: src/Controller/Frontend/Basket/Standard.php:721
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "Niepoprawna referencja \"%1$s\" do produktu z ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:832
+#: src/Controller/Frontend/Basket/Standard.php:836
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Niepoprawne dane adresowe, proszę je sprawdzić"
 
-#: src/Controller/Frontend/Order/Factory.php:62
-#: src/Controller/Frontend/Catalog/Factory.php:63
-#: src/Controller/Frontend/Common/Factory/Abstract.php:54
-#: src/Controller/Frontend/Basket/Factory.php:63
-#: src/Controller/Frontend/Service/Factory.php:62
+#: src/Controller/Frontend/Order/Factory.php:66
+#: src/Controller/Frontend/Catalog/Factory.php:67
+#: src/Controller/Frontend/Common/Factory/Base.php:58
+#: src/Controller/Frontend/Basket/Factory.php:67
+#: src/Controller/Frontend/Service/Factory.php:66
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Niewłaściwy znak w nazwie klasy \"%1$s\""
 
-#: src/Controller/Frontend/Factory.php:75
+#: src/Controller/Frontend/Factory.php:79
 #, php-format
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
 msgstr "Niewłaściwe znaki w nazwie kontrolera \"%1$s\" w \"%2$s\""
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:86
+#: src/Controller/Frontend/Common/Factory/Base.php:90
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr "Niepoprawna domena \"%1$s\""
 
-#: src/Controller/Frontend/Factory.php:90
+#: src/Controller/Frontend/Factory.php:94
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr "Niepoprawny producent \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:294
+#: src/Controller/Frontend/Basket/Standard.php:298
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr "Niewłaściwa wartość adresu o typie \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:1008
+#: src/Controller/Frontend/Basket/Standard.php:1012
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Nie znaleziono tego typu listy w domenie \"%1$s\" i kodzie \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:1110
+#: src/Controller/Frontend/Basket/Standard.php:1114
 #, php-format
 msgid "No article found for selected attributes and product ID \"%1$s\""
 msgstr "Nie znaleziono produktu o podanym atrybucie i ID \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:975
+#: src/Controller/Frontend/Basket/Standard.php:979
 #, php-format
 msgid "No item for \"%1$s\" (%2$s) found"
 msgstr ""
 
-#: src/Controller/Frontend/Basket/Default.php:746
+#: src/Controller/Frontend/Basket/Standard.php:750
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
 msgstr "Brak produktu o ID \"%1$s\" i w magazynie \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:1082
+#: src/Controller/Frontend/Basket/Standard.php:1086
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
 msgstr "Nie znaleziono produktu z podanym atrybutem i ID \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:232
+#: src/Controller/Frontend/Basket/Standard.php:236
 #, php-format
 msgid "Requirements for coupon code \"%1$s\" aren't met"
 msgstr "Wymagania kodu kuponu \"%1$s\" nie są spełnione"
 
-#: src/Controller/Frontend/Service/Default.php:175
+#: src/Controller/Frontend/Service/Standard.php:179
 #, php-format
 msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr "Nie znaleziono usługi typu \"%1$s\" i z ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:386
-#: src/Controller/Frontend/Basket/Default.php:422
+#: src/Controller/Frontend/Basket/Standard.php:390
+#: src/Controller/Frontend/Basket/Standard.php:426
 #, php-format
 msgid "There are not enough products \"%1$s\" in stock"
 msgstr "Nie ma wystarczającej ilości produktu \"%1$s\" w magazynie"
 
-#: src/Controller/Frontend/Common/Decorator/Abstract.php:50
+#: src/Controller/Frontend/Common/Decorator/Base.php:54
 #, php-format
 msgid "Unable to call method \"%1$s::%2$s\""
 msgstr "Nie można wywołać metody \"%1$s::%2$s\""
 
-#: src/Controller/Frontend/Service/Default.php:69
+#: src/Controller/Frontend/Service/Standard.php:73
 #, php-format
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr "Nie można utworzyć providera \"%1$s\" usługi z ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:323
+#: src/Controller/Frontend/Basket/Standard.php:327
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr "Nieznany atrybut \"%1$s\""

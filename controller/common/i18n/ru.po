@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 14:45+0200\n"
+"POT-Creation-Date: 2015-10-14 20:17+0200\n"
 "PO-Revision-Date: 2015-10-02 07:27+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
@@ -18,32 +18,32 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: src/Controller/Common/Order/Factory.php:103
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:78
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:264
+#: src/Controller/Common/Order/Factory.php:107
+#: src/Controller/Common/Product/Import/Csv/Base.php:81
+#: src/Controller/Common/Product/Import/Csv/Base.php:267
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Класс \"%1$s\" не реализует интерфейс \"%2$s\""
 
-#: src/Controller/Common/Order/Factory.php:97
+#: src/Controller/Common/Order/Factory.php:101
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Недоступен класс \"%1$s\""
 
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:72
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:258
+#: src/Controller/Common/Product/Import/Csv/Base.php:75
+#: src/Controller/Common/Product/Import/Csv/Base.php:261
 #, php-format
 msgid "Class \"%1$s\" not found"
 msgstr "Не найден класс \"%1$s\""
 
-#: src/Controller/Common/Order/Factory.php:86
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:66
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:252
+#: src/Controller/Common/Order/Factory.php:90
+#: src/Controller/Common/Product/Import/Csv/Base.php:69
+#: src/Controller/Common/Product/Import/Csv/Base.php:255
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустимые символы в названии класса \"%1$s\""
 
-#: src/Controller/Common/Product/Import/Csv/Abstract.php:320
+#: src/Controller/Common/Product/Import/Csv/Base.php:323
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr "Не найдено типа элементов для \"%1$s/%2$s\" в \"%3$s\""

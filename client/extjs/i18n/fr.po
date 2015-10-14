@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 14:45+0200\n"
+"POT-Creation-Date: 2015-10-14 20:17+0200\n"
 "PO-Revision-Date: 2015-09-29 12:26+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
@@ -300,7 +300,7 @@ msgid "Configuration"
 msgstr "Configuration"
 
 #: src/panel/text/ItemUi.js:83 src/panel/text/ListUiSmall.js:81
-#: src/panel/text/ItemPickerUi.js:84
+#: src/panel/text/ItemPickerUi.js:83
 msgid "Content"
 msgstr "Contenu"
 
