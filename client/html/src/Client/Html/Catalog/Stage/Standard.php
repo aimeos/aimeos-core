@@ -362,7 +362,7 @@ class Standard
 
 		try
 		{
-			$view->stageParams = $this->getParamStage( $view );
+			$view->stageParams = $this->getClientParams( $view->param(), array( 'f' ) );
 
 			parent::process();
 		}
@@ -392,58 +392,24 @@ class Standard
 
 
 	/**
-	 * Generates an unique hash from based on the input suitable to be used as part of the cache key
+	 * Returns the parameters used by the html client.
 	 *
-	 * @param string[] $prefixes List of prefixes the parameters must start with
-	 * @param string $key Unique identifier if the content is placed more than once on the same page
-	 * @param array $config Multi-dimensional array of configuration options used by the client and sub-clients
-	 * @return string Unique hash
+	 * @param array $params Associative list of all parameters
+	 * @param array $prefixes List of prefixes the parameters must start with
+	 * @return array Associative list of parameters used by the html client
 	 */
-	protected function getParamHash( array $prefixes = array( 'f', 'l', 'd' ), $key = '', array $config = array() )
+	protected function getClientParams( array $params, array $prefixes = array( 'f', 'l', 'd', 'a' ) )
 	{
-		$locale = $this->getContext()->getLocale();
-		$params = $this->getClientParams( $this->getView()->param(), $prefixes );
+		$list = parent::getClientParams( $params, array_merge( $prefixes, array( 'd' ) ) );
 
-		if( empty( $params ) )
+		if( isset( $list['d_prodid'] ) )
 		{
 			$context = $this->getContext();
 			$site = $context->getLocale()->getSite()->getCode();
-			$params = (array) $context->getSession()->get( 'aimeos/catalog/lists/params/last/' . $site, array() );
+			$list += (array) $context->getSession()->get( 'aimeos/catalog/list/params/last/' . $site, array() );
 		}
 
-		ksort( $params );
-
-		if( ( $pstr = json_encode( $params ) ) === false || ( $cstr = json_encode( $config ) ) === false ) {
-			throw new \Aimeos\Client\Html\Exception( 'Unable to encode parameters or configuration options' );
-		}
-
-		return md5( $key . $pstr . $cstr . $locale->getLanguageId() . $locale->getCurrencyId() );
-	}
-
-
-	/**
-	 * Returns the required params for the stage clients, either from GET/POST or from the session.
-	 *
-	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
-	 * @return array List of parameters
-	 */
-	protected function getParamStage( \Aimeos\MW\View\Iface $view )
-	{
-		if( !isset( $this->params ) )
-		{
-			$params = $this->getClientParams( $view->param(), array( 'f' ) );
-
-			if( empty( $params ) )
-			{
-				$context = $this->getContext();
-				$site = $context->getLocale()->getSite()->getCode();
-				$params = $context->getSession()->get( 'aimeos/catalog/lists/params/last/' . $site, array() );
-			}
-
-			$this->params = $params;
-		}
-
-		return $this->params;
+		return $list;
 	}
 
 
@@ -470,7 +436,7 @@ class Standard
 	{
 		if( !isset( $this->cache ) )
 		{
-			$params = $this->getParamStage( $view );
+			$params = $this->getClientParams( $view->param(), array( 'f' ) );
 
 			if( isset( $params['f_catid'] ) && $params['f_catid'] != '' )
 			{
