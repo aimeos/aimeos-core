@@ -142,9 +142,9 @@ class Standard
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
+		 * named like the default one but with the string "standard" replaced by
 		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
+		 * you've implemented an alternative client class as well, "standard"
 		 * should be replaced by the name of the new class.
 		 *
 		 * The email payment html client allows to use a different template for
@@ -199,9 +199,9 @@ class Standard
 		 *
 		 * You can overwrite the template file configuration in extensions and
 		 * provide alternative templates. These alternative templates should be
-		 * named like the default one but with the string "default" replaced by
+		 * named like the default one but with the string "standard" replaced by
 		 * an unique name. You may use the name of your project for this. If
-		 * you've implemented an alternative client class as well, "default"
+		 * you've implemented an alternative client class as well, "standard"
 		 * should be replaced by the name of the new class.
 		 *
 		 * The email payment HTML client allows to use a different template for
