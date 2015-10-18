@@ -93,7 +93,6 @@ class Standard
 
 	private $tags = array();
 	private $expire;
-	private $params;
 	private $cache;
 
 
