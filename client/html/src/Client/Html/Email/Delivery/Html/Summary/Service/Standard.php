@@ -57,7 +57,6 @@ class Standard
 	 */
 	private $subPartPath = 'client/html/email/delivery/html/summary/service/standard/subparts';
 	private $subPartNames = array();
-	private $cache;
 
 
 	/**
