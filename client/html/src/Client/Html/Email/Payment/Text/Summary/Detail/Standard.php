@@ -19,7 +19,7 @@ namespace Aimeos\Client\Html\Email\Payment\Text\Summary\Detail;
  * @subpackage Html
  */
 class Standard
-	extends \Aimeos\Client\Html\Common\Summary\Detail\Standard
+	extends \Aimeos\Client\Html\Common\Summary\Detail\Base
 {
 	/** client/html/email/payment/text/summary/detail/standard/subparts
 	 * List of HTML sub-clients rendered within the email payment text summary detail section

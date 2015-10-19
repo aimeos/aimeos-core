@@ -19,7 +19,7 @@ namespace Aimeos\Client\Html\Email\Delivery\Text\Summary\Detail;
  * @subpackage Html
  */
 class Standard
-	extends \Aimeos\Client\Html\Common\Summary\Detail\Standard
+	extends \Aimeos\Client\Html\Common\Summary\Detail\Base
 	implements \Aimeos\Client\Html\Common\Client\Factory\Iface
 {
 	/** client/html/email/delivery/text/summary/detail/standard/subparts
