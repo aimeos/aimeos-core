@@ -27,7 +27,7 @@ class Factory
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param string $name Manager name
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
+	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Cache manager object
 	 */
 	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{

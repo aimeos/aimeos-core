@@ -20,7 +20,7 @@ namespace Aimeos\MAdmin\Log\Manager;
  */
 class Standard
 	extends \Aimeos\MAdmin\Common\Manager\Base
-	implements \Aimeos\MAdmin\Log\Manager\Iface, \Aimeos\MW\Logger\Iface
+	implements \Aimeos\MAdmin\Log\Manager\Iface
 {
 	private $loglevel;
 	private $requestid;
