@@ -14,7 +14,7 @@ namespace Aimeos\MShop\Common\Manager\Address;
  * Test class for \Aimeos\MShop\Customer\Manager\Address\Standard
  * @subpackage Common
  */
-class BaseTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $fixture = null;
 	private $object = null;

@@ -10,7 +10,7 @@ namespace Aimeos\MW\Jsb2\Standard;
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-class Test extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $manifestPath;
