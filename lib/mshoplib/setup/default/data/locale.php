@@ -9,7 +9,7 @@
 return array(
 
 	'locale/site' => array(
-		'default' => array( 'code' => 'default', 'label' => 'Standard', 'config' => array(), 'status' => 1 ),
+		'default' => array( 'code' => 'default', 'label' => 'Default', 'config' => array(), 'status' => 1 ),
 	),
 
 	'locale' => array(
