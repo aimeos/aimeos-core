@@ -108,9 +108,10 @@ class Base
 	 *
 	 * @param \Aimeos\MW\Container\Content\Iface $content CSV content object
 	 * @param integer $maxcnt Maximum number of rows that should be retrieved at once
+	 * @param integer $codePos Column position which contains the unique product code (starting from 0)
 	 * @return array List of arrays with product codes as keys and list of values from the CSV file
 	 */
-	protected function getData( \Aimeos\MW\Container\Content\Iface $content, $maxcnt )
+	protected function getData( \Aimeos\MW\Container\Content\Iface $content, $maxcnt, $codePos )
 	{
 		$count = 0;
 		$data = array();
@@ -118,7 +119,7 @@ class Base
 		while( $content->valid() && $count++ < $maxcnt )
 		{
 			$row = $content->current();
-			$data[ $row[0] ] = $row;
+			$data[ $row[$codePos] ] = $row;
 			$content->next();
 		}
 

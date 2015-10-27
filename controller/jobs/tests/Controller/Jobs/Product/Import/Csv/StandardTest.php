@@ -116,6 +116,28 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testRunPosition()
+	{
+		$prodcodes = array( 'job_csv_test', 'job_csv_test2' );
+		$nondelete = array( 'attribute', 'product' );
+		$delete = array( 'media', 'price', 'text' );
+
+		$config = $this->context->getConfig();
+		$mapping = $config->set( 'controller/jobs/product/import/csv/mapping', array() );
+		$mapping['item'] = array( 0 => 'product.label', 1 => 'product.code' );
+
+		$config->set( 'controller/jobs/product/import/csv/mapping', $mapping );
+		$config->set( 'controller/jobs/product/import/csv/location', __DIR__ . '/_testfiles/position' );
+
+		$this->object->run();
+
+		$result = $this->get( $prodcodes, array_merge( $delete, $nondelete ) );
+		$this->delete( $prodcodes, $delete, $nondelete );
+
+		$this->assertEquals( 2, count( $result ) );
+	}
+
+
 	public function testRunProcessorInvalidPosition()
 	{
 		$prodcodes = array( 'job_csv_test', 'job_csv_test2' );
