@@ -317,6 +317,7 @@ class Standard
 			$procMappings = $mappings;
 			unset( $procMappings['item'] );
 
+			$codePos = $this->getCodePosition( $mappings['item'] );
 			$convlist = $this->getConverterList( $converters );
 			$processor = $this->getProcessors( $procMappings );
 			$container = $this->getContainer();
@@ -333,7 +334,7 @@ class Standard
 					$content->next();
 				}
 
-				while( ( $data = $this->getData( $content, $maxcnt ) ) !== array() )
+				while( ( $data = $this->getData( $content, $maxcnt, $codePos ) ) !== array() )
 				{
 					$data = $this->convertData( $convlist, $data );
 					$products = $this->getProducts( array_keys( $data ), $domains );
@@ -371,6 +372,26 @@ class Standard
 		if( !empty( $backup ) && @rename( $path, strftime( $backup ) ) === false ) {
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Unable to move imported file' ) );
 		}
+	}
+
+
+	/**
+	 * Returns the position of the "product.code" column from the product item mapping
+	 *
+	 * @param array $mapping Mapping of the "item" columns with position as key and code as value
+	 * @return integer Position of the "product.code" column
+	 * @throws \Aimeos\Controller\Jobs\Exception If no mapping for "product.code" is found
+	 */
+	protected function getCodePosition( array $mapping )
+	{
+		foreach( $mapping as $pos => $key )
+		{
+			if( $key === 'product.code' ) {
+				return $pos;
+			}
+		}
+
+		throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'No "product.code" column in CSV mapping found' ) );
 	}
 
 
