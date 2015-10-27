@@ -123,6 +123,27 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetBodyCategoryLevels()
+	{
+		$context = clone $this->context;
+		$context->getConfig()->set( 'client/html/catalog/lists/levels', \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
+
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Standard( $context, $paths );
+		$this->object->setView( \TestHelper::getView() );
+
+		$view = $this->object->getView();
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_catid' => $this->getCatalogItem( 'root' )->getId() ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->object->getBody();
+		$this->assertRegExp( '#.*Cafe Noire Cappuccino.*#smu', $output );
+		$this->assertRegExp( '#.*Cafe Noire Expresso.*#smu', $output );
+		$this->assertRegExp( '#.*Unittest: Bundle.*#smu', $output );
+		$this->assertRegExp( '#.*Unittest: Test priced Selection.*#smu', $output );
+	}
+
+
 	public function testGetBodySearchText()
 	{
 		$view = $this->object->getView();
@@ -166,15 +187,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	protected function getCatalogItem()
+	protected function getCatalogItem( $code = 'cafe' )
 	{
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$search = $catalogManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
+		$search->setConditions( $search->compare( '==', 'catalog.code', $code ) );
 		$items = $catalogManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No catalog item with code "cafe" found' );
+			throw new \Exception( sprintf( 'No catalog item with code "%1$s" found', $code ) );
 		}
 
 		return $item;

@@ -60,6 +60,132 @@ abstract class Base
 
 
 	/**
+	 * Creates the filter from the given parameters for the product list.
+	 *
+	 * @param string $text Text to search for
+	 * @param string $catid Category ID to search for
+	 * @param string $sort Sortation string (relevance, name, price)
+	 * @param string $sortdir Sortation direction (+ or -)
+	 * @param integer $page Page number starting from 1
+	 * @param integer $size Page size
+	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
+	 * @param boolean $textfilter True to include text criteria in product filter, false if not
+	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
+	 */
+	protected function createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter )
+	{
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'catalog' );
+
+		if( $text !== '' && $textfilter === true )
+		{
+			$filter = $controller->createIndexFilterText( $text, $sort, $sortdir, ( $page - 1 ) * $size, $size );
+
+			if( $catid !== '' && $catfilter === true ) {
+				$filter = $controller->addIndexFilterCategory( $filter, $this->getCatalogIds( $catid ) );
+			}
+
+			return $filter;
+		}
+		elseif( $catid !== '' && $catfilter === true )
+		{
+			$catIds = $this->getCatalogIds( $catid );
+			return $controller->createIndexFilterCategory( $catIds, $sort, $sortdir, ( $page - 1 ) * $size, $size );
+		}
+		else
+		{
+			return $controller->createIndexFilter( $sort, $sortdir, ( $page - 1 ) * $size, $size );
+		}
+	}
+
+
+	/**
+	 * Returns the catalog controller object
+	 *
+	 * @return \Aimeos\Controller\Frontend\Catalog\Interface Catalog controller
+	 */
+	protected function getCatalogController()
+	{
+		if( !isset( $this->controller ) )
+		{
+			$context = $this->getContext();
+			$this->controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
+		}
+
+		return $this->controller;
+	}
+
+
+	/**
+	 * Returns the list of catetory IDs if subcategories should be included
+	 *
+	 * @param string $catId Category ID
+	 * @return string|array Cateogory ID or list of catetory IDs
+	 */
+	protected function getCatalogIds( $catId )
+	{
+		$config = $this->getContext()->getConfig();
+		$default = \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE;
+
+		/** client/html/catalog/lists/levels
+		 * Include products of sub-categories in the product list of the current category
+		 *
+		 * Sometimes it may be useful to show products of sub-categories in the
+		 * current category product list, e.g. if the current category contains
+		 * no products at all or if there are only a few products in all categories.
+		 *
+		 * Possible constant values for this setting are:
+		 * * 1 : Only products from the current category
+		 * * 2 : Products from the current category and the direct child categories
+		 * * 3 : Products from the current category and the whole category sub-tree
+		 *
+		 * Caution: Please keep in mind that displaying products of sub-categories
+		 * can slow down your shop, especially if it contains more than a few
+		 * products! You have no real control over the positions of the products
+		 * in the result list too because all products from different categories
+		 * with the same position value are placed randomly.
+		 *
+		 * Usually, a better way is to associate products to all categories they
+		 * should be listed in. This can be done manually if there are only a few
+		 * ones or during the product import automatically.
+		 *
+		 * @param integer Tree level constant
+		 * @since 2015.11
+		 * @category Developer
+		 * @see client/html/catalog/lists/catid-default
+		 * @see client/html/catalog/lists/domains
+		 * @see client/html/catalog/lists/size
+		 */
+		$level = $config->get( 'client/html/catalog/lists/levels', $default );
+
+		if( $level != $default )
+		{
+			$tree = $this->getCatalogController()->getCatalogTree( $catId, array(), $level );
+			$catId = $this->getCatalogIdsFromTree( $tree );
+		}
+
+		return $catId;
+	}
+
+
+	/**
+	 * Returns the list of catalog IDs for the given catalog tree
+	 *
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Catalog item with children
+	 * @return array List of catalog IDs
+	 */
+	protected function getCatalogIdsFromTree( \Aimeos\MShop\Catalog\Item\Iface $item )
+	{
+		$list = array( $item->getId() );
+
+		foreach( $item->getChildren() as $child ) {
+			$list = array_merge( $list, $this->getCatalogIdsFromTree( $child ) );
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the products found for the current parameters.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with helper for retrieving the required parameters
@@ -111,6 +237,7 @@ abstract class Base
 			 * @category Developer
 			 * @see client/html/catalog/lists/size
 			 * @see client/html/catalog/lists/domains
+			 * @see client/html/catalog/lists/levels
 			 */
 			$catid = $config->get( 'client/html/catalog/lists/catid-default', '' );
 		}
@@ -127,44 +254,6 @@ abstract class Base
 
 
 		return $filter;
-	}
-
-
-	/**
-	 * Creates the filter from the given parameters for the product list.
-	 *
-	 * @param string $text Text to search for
-	 * @param string $catid Category ID to search for
-	 * @param string $sort Sortation string (relevance, name, price)
-	 * @param string $sortdir Sortation direction (+ or -)
-	 * @param integer $page Page number starting from 1
-	 * @param integer $size Page size
-	 * @param boolean $catfilter True to include catalog criteria in product filter, false if not
-	 * @param boolean $textfilter True to include text criteria in product filter, false if not
-	 * @return \Aimeos\MW\Criteria\Iface Search criteria object
-	 */
-	private function createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter )
-	{
-		$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'catalog' );
-
-		if( $text !== '' && $textfilter === true )
-		{
-			$filter = $controller->createIndexFilterText( $text, $sort, $sortdir, ( $page - 1 ) * $size, $size );
-
-			if( $catid !== '' && $catfilter === true ) {
-				$filter = $controller->addIndexFilterCategory( $filter, $catid );
-			}
-
-			return $filter;
-		}
-		elseif( $catid !== '' && $catfilter === true )
-		{
-			return $controller->createIndexFilterCategory( $catid, $sort, $sortdir, ( $page - 1 ) * $size, $size );
-		}
-		else
-		{
-			return $controller->createIndexFilter( $sort, $sortdir, ( $page - 1 ) * $size, $size );
-		}
 	}
 
 
@@ -250,6 +339,7 @@ abstract class Base
 		 * @category Developer
 		 * @see client/html/catalog/lists/catid-default
 		 * @see client/html/catalog/lists/domains
+		 * @see client/html/catalog/lists/levels
 		 */
 		$defaultSize = $this->getContext()->getConfig()->get( 'client/html/catalog/lists/size', 48 );
 
@@ -335,6 +425,7 @@ abstract class Base
 		 * @see client/html/catalog/lists/domains
 		 * @see client/html/catalog/lists/catid-default
 		 * @see client/html/catalog/lists/size
+		 * @see client/html/catalog/lists/levels
 		 */
 		$domains = $config->get( 'client/html/catalog/domains', array( 'media', 'price', 'text' ) );
 
@@ -361,11 +452,12 @@ abstract class Base
 		 * @see client/html/catalog/stage/domains
 		 * @see client/html/catalog/lists/catid-default
 		 * @see client/html/catalog/lists/size
+		 * @see client/html/catalog/lists/levels
 		 */
 		$domains = $config->get( 'client/html/catalog/lists/domains', $domains );
 
+		$controller = $this->getCatalogController();
 		$productFilter = $this->getProductListFilter( $view );
-		$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 
 		$this->productList = $controller->getIndexItems( $productFilter, $domains, $this->productTotal );
 	}

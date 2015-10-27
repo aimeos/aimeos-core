@@ -55,7 +55,7 @@ class Standard
 		),
 		'index.catalog.position' => array(
 			'code'=>'index.catalog.position()',
-			'internalcode'=>':site AND mindca."catid" = $2 AND mindca."listtype" = $1 AND mindca."pos"',
+			'internalcode'=>':site AND mindca."catid" IN ( $2 ) AND mindca."listtype" = $1 AND mindca."pos"',
 			'label'=>'Product position in category, parameter(<list type code>,<category ID>)',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
