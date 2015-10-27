@@ -314,6 +314,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 			$procMappings = $mappings;
 			unset( $procMappings['item'] );
 
+			$codePos = $this->_getCodePosition( $mappings['item'] );
 			$convlist = $this->_getConverterList( $converters );
 			$processor = $this->_getProcessors( $procMappings );
 			$container = $this->_getContainer();
@@ -330,7 +331,7 @@ class Controller_Jobs_Product_Import_Csv_Default
 					$content->next();
 				}
 
-				while( ( $data = $this->_getData( $content, $maxcnt ) ) !== array() )
+				while( ( $data = $this->_getData( $content, $maxcnt, $codePos ) ) !== array() )
 				{
 					$data = $this->_convertData( $convlist, $data );
 					$products = $this->_getProducts( array_keys( $data ), $domains );
@@ -370,6 +371,25 @@ class Controller_Jobs_Product_Import_Csv_Default
 		}
 	}
 
+
+	/**
+	 * Returns the position of the "product.code" column from the product item mapping
+	 *
+	 * @param array $mapping Mapping of the "item" columns with position as key and code as value
+	 * @return integer Position of the "product.code" column
+	 * @throws \Aimeos\Controller\Jobs\Exception If no mapping for "product.code" is found
+	 */
+	protected function _getCodePosition( array $mapping )
+	{
+		foreach( $mapping as $pos => $key )
+		{
+			if( $key === 'product.code' ) {
+				return $pos;
+			}
+		}
+
+		throw new Controller_Jobs_Exception( sprintf( 'No "product.code" column in CSV mapping found' ) );
+	}
 
 	/**
 	 * Opens and returns the container which includes the product data

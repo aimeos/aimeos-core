@@ -105,9 +105,10 @@ class Controller_Common_Product_Import_Csv_Abstract
 	 *
 	 * @param MW_Container_Content_Interface $content CSV content object
 	 * @param integer $maxcnt Maximum number of rows that should be retrieved at once
+	 * @param integer $codePos Column position which contains the unique product code (starting from 0)
 	 * @return array List of arrays with product codes as keys and list of values from the CSV file
 	 */
-	protected function _getData( MW_Container_Content_Interface $content, $maxcnt )
+	protected function _getData( MW_Container_Content_Interface $content, $maxcnt, $codePos )
 	{
 		$count = 0;
 		$data = array();
@@ -115,7 +116,7 @@ class Controller_Common_Product_Import_Csv_Abstract
 		while( $content->valid() && $count++ < $maxcnt )
 		{
 			$row = $content->current();
-			$data[ $row[0] ] = $row;
+			$data[ $row[$codePos] ] = $row;
 			$content->next();
 		}
 
