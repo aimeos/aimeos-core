@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-10-14 20:17+0200\n"
-"PO-Revision-Date: 2015-10-14 21:51+0000\n"
+"PO-Revision-Date: 2015-10-16 15:56+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -258,7 +258,7 @@ msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
 #: src/Controller/ExtJS/Product/Import/Text/Standard.php:85
 #, php-format
 msgid "Uploaded file \"%1$s\" could not be moved to \"%2$s\" in upload directory"
-msgstr ""
+msgstr "Die hochgeladene Datei \"%1$s\" konnte nicht nach \"%2$s\" verschoben werden"
 
 #: src/Controller/ExtJS/Attribute/Import/Text/Standard.php:84
 #: src/Controller/ExtJS/Catalog/Import/Text/Standard.php:84
