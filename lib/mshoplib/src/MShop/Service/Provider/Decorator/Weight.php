@@ -78,19 +78,28 @@ class MShop_Service_Provider_Decorator_Weight extends MShop_Service_Provider_Dec
 		$basketItems  = $basket->getProducts();
 
 
-		foreach ($basketItems as $basketItem) {
-			$propertyManager = MShop_Factory::createManager($context, 'Product/Property');
+		foreach ($basketItems as $basketItem)
+		{
+		    $prodId = $basketItem->getProductId();
 
-			$search     = $propertyManager->createSearch(true);
-			$properties = $propertyManager->searchItems($search);
+		    if( !isset( $prodMap[$prodId] ) ) { // basket can contain a product several times in different basket items
+		        $prodMap[$prodId] = 0.0;
+		    }
+		    $prodMap[$prodId] += $basketItem->getQuantity();
+		}
 
-			foreach ($properties as $property) {
-				if ($property->getType() == 'package-weight') {
-					if ($property->getValue() > 0) {
-						$basketWeight += $property->getValue() * $basketItem->getQuantity();
-					}
-				}
-			}
+		$propertyManager = MShop_Factory::createManager($context, 'product/property');
+		$search = $propertyManager->createSearch(true);
+		$expr = array(
+		    $search->compare( '==', 'product.property.productid', array_keys( $prodMap ) ),
+		    $search->compare( '==', 'product.property.type.code', 'package-weight' ),
+		    $search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff ); // if more than 100 products are in the basket
+
+		foreach ($propertyManager->searchItems($search) as $property) {
+		    $basketWeight += ((float) $property->getValue()) * $prodMap[$property->getParentId()];
 		}
 
 		if ($this->_checkWeightScale($basketWeight) === false) {
