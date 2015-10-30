@@ -14,7 +14,8 @@
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Provider_Decorator_Weight extends MShop_Service_Provider_Decorator_Abstract {
+class MShop_Service_Provider_Decorator_Weight extends MShop_Service_Provider_Decorator_Abstract
+{
 	private $_beConfig = array(
 		'weight' => array(
 			'code'         => 'weight',
