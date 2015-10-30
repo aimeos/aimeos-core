@@ -14,8 +14,7 @@
  * @package MShop
  * @subpackage Service
  */
-class MShop_Service_Provider_Decorator_Weight
-	extends MShop_Service_Provider_Decorator_Abstract {
+class MShop_Service_Provider_Decorator_Weight extends MShop_Service_Provider_Decorator_Abstract {
 	private $_beConfig = array(
 		'weight' => array(
 			'code'         => 'weight',
@@ -37,7 +36,8 @@ class MShop_Service_Provider_Decorator_Weight
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 *    known by the provider but aren't valid
 	 */
-	public function checkConfigBE(array $attributes) {
+	public function checkConfigBE(array $attributes)
+	{
 		$error = $this->_getProvider()->checkConfigBE($attributes);
 		$error += $this->_checkConfig($this->_beConfig, $attributes);
 
@@ -51,7 +51,8 @@ class MShop_Service_Provider_Decorator_Weight
 	 *
 	 * @return array List of attribute definitions implementing MW_Common_Critera_Attribute_Interface
 	 */
-	public function getConfigBE() {
+	public function getConfigBE()
+	{
 		$list = $this->_getProvider()->getConfigBE();
 
 		foreach ($this->_beConfig as $key => $config) {
@@ -69,7 +70,8 @@ class MShop_Service_Provider_Decorator_Weight
 	 *
 	 * @return boolean True if payment provider can be used, false if not
 	 */
-	public function isAvailable(MShop_Order_Item_Base_Interface $basket) {
+	public function isAvailable(MShop_Order_Item_Base_Interface $basket)
+	{
 		$context      = $this->_getContext();
 		$basketWeight = 0;
 		$basketItems  = $basket->getProducts();
@@ -105,9 +107,9 @@ class MShop_Service_Provider_Decorator_Weight
 	 *
 	 * @return boolean True if the current basket weight is within the providers weight range
 	 */
-	protected function _checkWeightScale($basketWeight) {
-		if (!(float) $this->_getConfigValue(array('weight.min')) > 0 ||
-		    !(float) $this->_getConfigValue(array('weight.max')) > 0) {
+	protected function _checkWeightScale($basketWeight)
+	{
+		if (!(float) $this->_getConfigValue(array('weight.min')) > 0 || !(float) $this->_getConfigValue(array('weight.max')) > 0) {
 			return false;
 		}
 		$weightMin = (float) $this->_getConfigValue(array('weight.min'));
