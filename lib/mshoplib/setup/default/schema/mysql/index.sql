@@ -136,4 +136,4 @@ CREATE FULLTEXT INDEX "idx_mscatinte_value" ON "mshop_catalog_index_text" ("valu
 
 CREATE INDEX "idx_mscatinte_sid" ON "mshop_catalog_index_text" ("siteid");
 
-CREATE INDEX "idx_mscatinte_p_s_lt_la_ty_va" ON "mshop_catalog_index_text" ("prodid", "siteid", "listtype", "langid", "type", "value"(16));
+CREATE INDEX "idx_mscatinte_p_s_lt_la_ty_do_va" ON "mshop_catalog_index_text" ("prodid", "siteid", "listtype", "langid", "type", "domain", "value"(16));
