@@ -172,7 +172,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $items ) );
-		$this->assertEquals( 6, $total );
+		$this->assertEquals( 8, $total );
 
 		foreach($items as $itemId => $item) {
 			$this->assertEquals( $itemId, $item->getId() );

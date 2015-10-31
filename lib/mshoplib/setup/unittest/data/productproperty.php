@@ -17,8 +17,10 @@ return array (
 		'product/property/CNC/height' => array( 'parentid' => 'product/CNC', 'typeid' => 'product/property/type/packheight', 'langid' => null, 'value' => '10.0' ),
 		'product/property/CNC/length' => array( 'parentid' => 'product/CNC', 'typeid' => 'product/property/type/packlength', 'langid' => null, 'value' => '20.0' ),
 		'product/property/CNC/width' => array( 'parentid' => 'product/CNC', 'typeid' => 'product/property/type/packwidth', 'langid' => null, 'value' => '15.0' ),
+		'product/property/CNC/weight' => array( 'parentid' => 'product/CNC', 'typeid' => 'product/property/type/packweight', 'langid' => null, 'value' => '1.25' ),
 		'product/property/CNE/height' => array( 'parentid' => 'product/CNE', 'typeid' => 'product/property/type/packheight', 'langid' => null, 'value' => '10.0' ),
 		'product/property/CNE/length' => array( 'parentid' => 'product/CNE', 'typeid' => 'product/property/type/packlength', 'langid' => null, 'value' => '25.00' ),
 		'product/property/CNE/width' => array( 'parentid' => 'product/CNE', 'typeid' => 'product/property/type/packwidth', 'langid' => null, 'value' => '17.5' ),
+		'product/property/CNE/weight' => array( 'parentid' => 'product/CNE', 'typeid' => 'product/property/type/packweight', 'langid' => null, 'value' => '1' ),
 	),
 );
