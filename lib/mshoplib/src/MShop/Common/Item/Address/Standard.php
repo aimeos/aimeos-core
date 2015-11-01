@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Common\Item\Address;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Item\Address\Base
-	implements \Aimeos\MShop\Common\Item\Address\Iface
+	implements \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\Common\Item\Position\Iface
 {
 	private $prefix;
 	private $values;

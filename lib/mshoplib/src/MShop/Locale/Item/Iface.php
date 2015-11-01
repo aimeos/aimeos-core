@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Locale\Item;
  * @package MShop
  * @subpackage Locale
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface
 {
 	/**
 	 * Returns the site item object.
@@ -87,23 +87,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return void
 	 */
 	public function setCurrencyId( $currencyid );
-
-
-	/**
-	 * Returns the position of the item.
-	 *
-	 * @return integer Position of the item
-	 */
-	public function getPosition();
-
-
-	/**
-	 * Sets the position of the item.
-	 *
-	 * @param integer $pos Position of the item
-	 * @return void
-	 */
-	public function setPosition( $pos );
 
 
 	/**

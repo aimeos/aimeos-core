@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Plugin\Item;
  * @package MShop
  * @subpackage Plugin
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface
 {
 	/**
 	 * Returns the type of the plugin.
@@ -86,21 +86,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return void
 	 */
 	public function setConfig( array $config );
-
-	/**
-	 * Returns the position of the plugin item.
-	 *
-	 * @return integer Position of the item
-	 */
-	public function getPosition();
-
-	/**
-	 * Sets the new position of the plugin item.
-	 *
-	 * @param integer $position Position of the item
-	 * @return void
-	 */
-	public function setPosition( $position );
 
 	/**
 	 * Returns the status of the plugin item.

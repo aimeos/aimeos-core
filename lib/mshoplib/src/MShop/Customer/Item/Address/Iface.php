@@ -16,7 +16,7 @@ namespace Aimeos\MShop\Customer\Item\Address;
  * @package MShop
  * @subpackage Customer
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\Common\Item\Position\Iface
 {
 	/**
 	 * Returns the reference id regarding to the product suppliercode of the address.
@@ -33,23 +33,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
 	 * @return void
 	 */
 	public function setRefId( $refid );
-
-
-	/**
-	 * Returns the position of the address item.
-	 *
-	 * @return integer Position of the address item
-	 */
-	public function getPosition();
-
-
-	/**
-	 * Sets the Position of the address item.
-	 *
-	 * @param integer $position New position of the address item
-	 * @return void
-	 */
-	public function setPosition( $position );
 
 
 	/**
