@@ -353,13 +353,10 @@ class Client_Html_Catalog_Stage_Default
 	 */
 	public function process()
 	{
-		$context = $this->_getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view->stageParams = $this->_getClientParams( $view->param(), array( 'f' ) );
-
 			parent::process();
 		}
 		catch( Client_Html_Exception $e )
@@ -379,6 +376,7 @@ class Client_Html_Catalog_Stage_Default
 		}
 		catch( Exception $e )
 		{
+			$context = $this->_getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
@@ -396,9 +394,9 @@ class Client_Html_Catalog_Stage_Default
 	 */
 	protected function _getClientParams( array $params, array $prefixes = array( 'f', 'l', 'd', 'a' ) )
 	{
-		$list = parent::_getClientParams( $params, array_merge( $prefixes, array( 'd' ) ) );
+		$list = parent::_getClientParams( $params, array_merge( $prefixes, array( 'l', 'd' ) ) );
 
-		if( isset( $list['d_prodid'] ) )
+		if( isset( $list['l_pos'] ) && isset( $list['d_prodid'] ) )
 		{
 			$context = $this->_getContext();
 			$site = $context->getLocale()->getSite()->getCode();

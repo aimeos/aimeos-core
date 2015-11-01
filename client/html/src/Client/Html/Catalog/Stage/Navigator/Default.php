@@ -291,11 +291,15 @@ class Client_Html_Catalog_Stage_Navigator_Default
 					$start = $pos - 1; $size = 3;
 				}
 
-				$filter = $this->_getProductListFilterByParam( $view->get( 'stageParams', array() ) );
+				$context = $this->_getContext();
+				$site = $context->getLocale()->getSite()->getCode();
+				$params = $context->getSession()->get( 'aimeos/catalog/lists/params/last/' . $site, array() );
+
+				$filter = $this->_getProductListFilterByParam( $params );
 				$filter->setSlice( $start, $size );
 				$total = null;
 
-				$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
+				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 				$products = $controller->getIndexItems( $filter, array( 'text' ), $total );
 
 				if( ( $count = count( $products ) ) > 1 )
