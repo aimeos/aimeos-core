@@ -33,14 +33,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\C
 	 * @return void
 	 */
 	public function setRefId( $refid );
-
-
-	/**
-	 * Copies the values of the order address item into the address item.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $item Order address item
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface The address item for method chaining
-	 */
-	public function copyFrom( \Aimeos\MShop\Order\Item\Base\Address\Iface $item );
-
 }

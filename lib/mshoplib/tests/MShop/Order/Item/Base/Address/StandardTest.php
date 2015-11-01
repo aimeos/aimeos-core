@@ -394,7 +394,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$addressCopy->copyFrom( $address );
 
 		$this->assertEquals( 23, $addressCopy->getAddressId() );
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY, $addressCopy->getType() );
 		$this->assertEquals( 'unitCompany', $addressCopy->getCompany() );
 		$this->assertEquals( 'DE999999999', $addressCopy->getVatID() );
 		$this->assertEquals( \Aimeos\MShop\Order\item\Base\Address\Base::SALUTATION_MR, $addressCopy->getSalutation() );

@@ -20,6 +20,14 @@ namespace Aimeos\MShop\Common\Item\Address;
 interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
+	 * Copies the values of the address item into another one.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Address item
+	 */
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item );
+
+
+	/**
 	 * Returns the company name.
 	 *
 	 * @return string Company name

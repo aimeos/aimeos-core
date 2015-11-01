@@ -90,35 +90,6 @@ class Standard
 
 
 	/**
-	 * Copies the values of the order address item into the address item.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $item Order address item
-	 */
-	public function copyFrom( \Aimeos\MShop\Order\Item\Base\Address\Iface $item )
-	{
-		$this->setCompany( $item->getCompany() );
-		$this->setVatID( $item->getVatID() );
-		$this->setSalutation( $item->getSalutation() );
-		$this->setTitle( $item->getTitle() );
-		$this->setFirstname( $item->getFirstname() );
-		$this->setLastname( $item->getLastname() );
-		$this->setAddress1( $item->getAddress1() );
-		$this->setAddress2( $item->getAddress2() );
-		$this->setAddress3( $item->getAddress3() );
-		$this->setPostal( $item->getPostal() );
-		$this->setCity( $item->getCity() );
-		$this->setState( $item->getState() );
-		$this->setCountryId( $item->getCountryId() );
-		$this->setLanguageId( $item->getLanguageId() );
-		$this->setTelephone( $item->getTelephone() );
-		$this->setTelefax( $item->getTelefax() );
-		$this->setEmail( $item->getEmail() );
-		$this->setWebsite( $item->getWebsite() );
-		$this->setFlag( $item->getFlag() );
-	}
-
-
-	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values

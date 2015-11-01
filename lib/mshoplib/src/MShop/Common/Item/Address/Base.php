@@ -554,6 +554,37 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	/**
+	 * Copies the values of the address item into another one.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Address item
+	 */
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item )
+	{
+		$this->setCompany( $item->getCompany() );
+		$this->setVatID( $item->getVatID() );
+		$this->setSalutation( $item->getSalutation() );
+		$this->setTitle( $item->getTitle() );
+		$this->setFirstname( $item->getFirstname() );
+		$this->setLastname( $item->getLastname() );
+		$this->setAddress1( $item->getAddress1() );
+		$this->setAddress2( $item->getAddress2() );
+		$this->setAddress3( $item->getAddress3() );
+		$this->setPostal( $item->getPostal() );
+		$this->setCity( $item->getCity() );
+		$this->setState( $item->getState() );
+		$this->setCountryId( $item->getCountryId() );
+		$this->setLanguageId( $item->getLanguageId() );
+		$this->setTelephone( $item->getTelephone() );
+		$this->setTelefax( $item->getTelefax() );
+		$this->setEmail( $item->getEmail() );
+		$this->setWebsite( $item->getWebsite() );
+		$this->setFlag( $item->getFlag() );
+
+		$this->setModified();
+	}
+
+
+	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values

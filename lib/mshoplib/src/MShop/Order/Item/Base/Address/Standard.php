@@ -115,32 +115,15 @@ class Standard
 
 
 	/**
-	 * Copys all data from a given address.
+	 * Copys all data from a given address item.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address New address
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New address
 	 */
-	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $address )
+	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item )
 	{
-		$this->setAddressId( $address->getId() );
-		$this->setCompany( $address->getCompany() );
-		$this->setVatID( $address->getVatID() );
-		$this->setSalutation( $address->getSalutation() );
-		$this->setTitle( $address->getTitle() );
-		$this->setFirstname( $address->getFirstname() );
-		$this->setLastname( $address->getLastname() );
-		$this->setAddress1( $address->getAddress1() );
-		$this->setAddress2( $address->getAddress2() );
-		$this->setAddress3( $address->getAddress3() );
-		$this->setPostal( $address->getPostal() );
-		$this->setCity( $address->getCity() );
-		$this->setState( $address->getState() );
-		$this->setCountryId( $address->getCountryId() );
-		$this->setTelephone( $address->getTelephone() );
-		$this->setEmail( $address->getEmail() );
-		$this->setTelefax( $address->getTelefax() );
-		$this->setWebsite( $address->getWebsite() );
-		$this->setLanguageId( $address->getLanguageId() );
-		$this->setFlag( $address->getFlag() );
+		parent::copyFrom( $item );
+
+		$this->setAddressId( $item->getId() );
 
 		$this->setModified();
 	}
