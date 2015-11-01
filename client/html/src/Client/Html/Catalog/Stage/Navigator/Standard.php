@@ -295,11 +295,15 @@ class Standard
 					$start = $pos - 1; $size = 3;
 				}
 
-				$filter = $this->getProductListFilterByParam( $view->get( 'stageParams', array() ) );
+				$context = $this->getContext();
+				$site = $context->getLocale()->getSite()->getCode();
+				$params = $context->getSession()->get( 'aimeos/catalog/lists/params/last/' . $site, array() );
+
+				$filter = $this->getProductListFilterByParam( $params );
 				$filter->setSlice( $start, $size );
 				$total = null;
 
-				$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'catalog' );
+				$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 				$products = $controller->getIndexItems( $filter, array( 'text' ), $total );
 
 				if( ( $count = count( $products ) ) > 1 )

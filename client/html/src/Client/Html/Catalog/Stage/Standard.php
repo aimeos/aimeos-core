@@ -356,13 +356,10 @@ class Standard
 	 */
 	public function process()
 	{
-		$context = $this->getContext();
 		$view = $this->getView();
 
 		try
 		{
-			$view->stageParams = $this->getClientParams( $view->param(), array( 'f' ) );
-
 			parent::process();
 		}
 		catch( \Aimeos\Client\Html\Exception $e )
@@ -382,6 +379,7 @@ class Standard
 		}
 		catch( \Exception $e )
 		{
+			$context = $this->getContext();
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
 			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
@@ -399,9 +397,9 @@ class Standard
 	 */
 	protected function getClientParams( array $params, array $prefixes = array( 'f', 'l', 'd', 'a' ) )
 	{
-		$list = parent::getClientParams( $params, array_merge( $prefixes, array( 'd' ) ) );
+		$list = parent::getClientParams( $params, array_merge( $prefixes, array( 'l', 'd' ) ) );
 
-		if( isset( $list['d_prodid'] ) )
+		if( isset( $list['l_pos'] ) && isset( $list['d_prodid'] ) )
 		{
 			$context = $this->getContext();
 			$site = $context->getLocale()->getSite()->getCode();
