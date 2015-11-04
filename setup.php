@@ -38,7 +38,7 @@ function setup_autoload( $classname )
 
 function usage()
 {
-	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>]* [--option=key:value]* [sitecode]\n" );
+	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>]* [--option=key:value]* [sitecode] [tplsite]\n" );
 	exit ( 1 );
 }
 
@@ -81,14 +81,12 @@ try
 		}
 	}
 
-	$site = $parent = 'default';
-
 	if( ( $site = array_shift( $params ) ) === null ) {
 		$site = 'default';
 	}
 
-	if( ( $parent = array_shift( $params ) ) === null ) {
-		$parent = $site;
+	if( ( $tplsite = array_shift( $params ) ) === null ) {
+		$parent = 'default';
 	}
 
 	spl_autoload_register( 'setup_autoload' );
@@ -98,7 +96,7 @@ try
 	$aimeos = new \Aimeos\Bootstrap( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
 
 
-	$taskPaths = $aimeos->getSetupPaths( $parent );
+	$taskPaths = $aimeos->getSetupPaths( $tplsite );
 
 	$includePaths = $taskPaths;
 	$includePaths[] = get_include_path();
