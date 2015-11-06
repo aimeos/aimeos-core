@@ -27,7 +27,7 @@ class Factory
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
 	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
-	 * @param string|null $name Name of the controller or "Default" if null
+	 * @param string|null $name Name of the controller or "Standard" if null
 	 * @return \Aimeos\Controller\Jobs\Iface New controller object
 	 */
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, $name = null )

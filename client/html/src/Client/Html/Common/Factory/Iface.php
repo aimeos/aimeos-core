@@ -25,7 +25,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param array List of file system paths where the templates are stored
-	 * @param string $name Client name (from configuration or "Default" if null)
+	 * @param string $name Client name (from configuration or "Standard" if null)
 	 * @return \Aimeos\Client\Html\Iface New client object
 	 */
 	public static function createClient( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $name = null );

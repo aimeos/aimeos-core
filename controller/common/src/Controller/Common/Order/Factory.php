@@ -42,7 +42,7 @@ class Factory
 	 * Creates a new controller specified by the given name.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
-	 * @param string|null $name Name of the controller or "Default" if null
+	 * @param string|null $name Name of the controller or "Standard" if null
 	 * @return \Aimeos\Controller\Common\Order\Iface New order controller object
 	 * @throws \Aimeos\Controller\Common\Exception
 	 */

@@ -600,7 +600,7 @@ class Standard
 	 * Returns a new manager for order service extensions.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation (from configuration or "Default" if null)
+	 * @param string|null $name Name of the implementation (from configuration or "Standard" if null)
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g attribute
 	 */
 	public function getSubManager( $manager, $name = null )

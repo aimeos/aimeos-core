@@ -24,7 +24,7 @@ interface Iface
 	 *	Creates a manager object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param string $name Manager name (from configuration or "Default" if null)
+	 * @param string $name Manager name (from configuration or "Standard" if null)
 	 * @return \Aimeos\MShop\Common\Manager\Iface New manager object
 	 */
 	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null );
