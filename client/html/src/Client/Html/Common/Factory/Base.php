@@ -93,7 +93,7 @@ class Base
 			throw new \Aimeos\Client\Html\Exception( sprintf( 'Invalid domain "%1$s"', $path ) );
 		}
 
-		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $path ) ) );
+		$localClass = str_replace( ' ', '\\', ucwords( str_replace( '/', ' ', $path ) ) );
 		$config = $context->getConfig();
 
 		/** client/html/common/decorators/default
@@ -135,7 +135,7 @@ class Base
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/global', array() );
 		$client = self::addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\Client\\Html\\' . $localClass . '_Decorator_';
+		$classprefix = '\\Aimeos\\Client\\Html\\' . $localClass . '\\Decorator\\';
 		$decorators = $config->get( 'client/html/' . $path . '/decorators/local', array() );
 		$client = self::addDecorators( $context, $client, $templatePaths, $decorators, $classprefix );
 
