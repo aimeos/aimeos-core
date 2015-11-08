@@ -157,6 +157,27 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetRefItems()
 	{
+		$result = $this->object->getRefItems();
+		$expected = array(
+			'text' => array(
+				$this->textItem2->getId() => $this->textItem2,
+				$this->textItem1->getId() => $this->textItem1,
+			)
+		);
+
+		$this->assertEquals( $expected, $result );
+
+		foreach( $result as $domain => $list )
+		{
+			foreach( $list as $item ) {
+				$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Iface', $item );
+			}
+		}
+	}
+
+
+	public function testGetRefItemsWithDomain()
+	{
 		$result = $this->object->getRefItems( 'text' );
 		$expected = array(
 			$this->textItem2->getId() => $this->textItem2,
