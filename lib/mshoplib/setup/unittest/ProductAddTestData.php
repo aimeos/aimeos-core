@@ -118,6 +118,8 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 			if( isset( $dataset['config'] ) ) {
 				$product->setConfig( $dataset['config'] );
+			} else {
+				$product->setConfig( array() );
 			}
 
 			$productManager->saveItem( $product, false );
