@@ -170,8 +170,8 @@ class Bootstrap
 				continue;
 			}
 
-			foreach( (array) $manifest['config'] as $paths ) {
-				$confpaths[] = $path . DIRECTORY_SEPARATOR . $paths;
+			foreach( (array) $manifest['config'] as $relpath ) {
+				$confpaths[] = $path . DIRECTORY_SEPARATOR . $relpath;
 			}
 		}
 
