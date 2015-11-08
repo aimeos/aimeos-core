@@ -92,7 +92,7 @@ abstract class Base
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
 		}
 
-		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $domain ) ) );
+		$localClass = str_replace( ' ', '\\', ucwords( str_replace( '/', ' ', $domain ) ) );
 		$config = $context->getConfig();
 
 		/** controller/jobs/common/decorators/default
@@ -134,7 +134,7 @@ abstract class Base
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', array() );
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\Controller\\Jobs\\' . ucfirst( $localClass ) . '_Decorator_';
+		$classprefix = '\\Aimeos\\Controller\\Jobs\\' . ucfirst( $localClass ) . '\\Decorator\\';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', array() );
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 

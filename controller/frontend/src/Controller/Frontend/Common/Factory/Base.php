@@ -90,7 +90,7 @@ class Base
 			throw new \Aimeos\Controller\Frontend\Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
 		}
 
-		$localClass = str_replace( ' ', '_', ucwords( str_replace( '/', ' ', $domain ) ) );
+		$localClass = str_replace( ' ', '\\', ucwords( str_replace( '/', ' ', $domain ) ) );
 		$config = $context->getConfig();
 
 		/** controller/frontend/common/decorators/default
@@ -132,7 +132,7 @@ class Base
 		$decorators = $config->get( 'controller/frontend/' . $domain . '/decorators/global', array() );
 		$controller = self::addDecorators( $context, $controller, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\Controller\\Frontend\\' . ucfirst( $localClass ) . '_Decorator_';
+		$classprefix = '\\Aimeos\\Controller\\Frontend\\' . ucfirst( $localClass ) . '\\Decorator\\';
 		$decorators = $config->get( 'controller/frontend/' . $domain . '/decorators/local', array() );
 		$controller = self::addDecorators( $context, $controller, $decorators, $classprefix );
 
