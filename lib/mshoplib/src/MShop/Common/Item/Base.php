@@ -189,14 +189,20 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 * Tests if the date parameter represents an ISO format.
 	 *
 	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format or null
+	 * @return string|null Clean date or null for no date
 	 * @throws \Aimeos\MShop\Exception If the date is invalid
 	 */
 	protected function checkDateFormat( $date )
 	{
-		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
+		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]( |T)[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 
-		if( $date !== null && preg_match( $regex, $date ) !== 1 ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
+		if( $date !== null )
+		{
+			if( preg_match( $regex, (string) $date ) !== 1 ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
+			}
+
+			return str_replace( 'T', ' ', (string) $date );
 		}
 	}
 
@@ -205,6 +211,7 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 * Tests if the code is valid.
 	 *
 	 * @param string $code New code for an item
+	 * @return string Item code
 	 * @throws \Aimeos\MShop\Exception If the code is invalid
 	 */
 	protected function checkCode( $code )
@@ -212,6 +219,8 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 		if( strlen( $code ) > 32 ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Code must not be longer than 32 characters' ) );
 		}
+
+		return (string) $code;
 	}
 
 
@@ -220,6 +229,7 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 *
 	 * @param string|null $currencyid Three letter ISO currency format, e.g. EUR
 	 * @param boolean $null True if null is allowed, false if not
+	 * @return string|null Three letter ISO currency ID or null for no currency
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
 	protected function checkCurrencyId( $currencyid, $null = true )
@@ -231,6 +241,8 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 		if( $currencyid !== null && preg_match( '/^[A-Z]{3}$/', $currencyid ) !== 1 ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', $currencyid ) );
 		}
+
+		return $currencyid;
 	}
 
 
@@ -238,6 +250,7 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 * Tests if the language ID parameter represents an ISO language format.
 	 *
 	 * @param string|null $langid ISO language format, e.g. de or de_DE
+	 * @return string|null ISO language ID or null for no language
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	protected function checkLanguageId( $langid )
@@ -245,6 +258,8 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 		if( $langid !== null && preg_match( '/^[a-z]{2}(_[A-Z]{2})?$/', $langid ) !== 1 ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
 		}
+
+		return $langid;
 	}
 
 

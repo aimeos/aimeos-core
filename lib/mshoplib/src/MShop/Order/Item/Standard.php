@@ -127,9 +127,7 @@ class Standard
 	{
 		if( $date === $this->getDateDelivery() ) { return; }
 
-		$this->checkDateFormat( $date );
-
-		$this->values['datedelivery'] = (string) $date;
+		$this->values['datedelivery'] = (string) $this->checkDateFormat( $date );
 		$this->setModified();
 	}
 
@@ -154,9 +152,7 @@ class Standard
 	{
 		if( $date === $this->getDatePayment() ) { return; }
 
-		$this->checkDateFormat( $date );
-
-		$this->values['datepayment'] = (string) $date;
+		$this->values['datepayment'] = (string) $this->checkDateFormat( $date );
 		$this->setModified();
 	}
 

@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDateDelivery() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setDateDelivery( '2008-34-12' );
 	}
 
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDatePayment() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setDatePayment( '2008-34-12' );
 	}
 

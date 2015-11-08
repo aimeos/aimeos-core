@@ -138,13 +138,7 @@ class Standard
 	{
 		if( $backdate === $this->getDateBack() ) { return; }
 
-		$this->checkDateFormat( $backdate );
-
-		if( $backdate !== null ) {
-			$backdate = (string) $backdate;
-		}
-
-		$this->values['backdate'] = $backdate;
+		$this->values['backdate'] = $this->checkDateFormat( $backdate );;
 		$this->setModified();
 	}
 

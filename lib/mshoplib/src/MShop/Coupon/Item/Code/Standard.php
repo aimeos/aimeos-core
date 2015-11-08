@@ -134,9 +134,7 @@ class Standard
 	{
 		if( $date == $this->getDateStart() ) { return; }
 
-		$this->checkDateFormat( $date );
-
-		$this->values['start'] = ( $date !== null ? (string) $date : null );
+		$this->values['start'] = $this->checkDateFormat( $date );
 
 		$this->setModified();
 	}
@@ -162,9 +160,7 @@ class Standard
 	{
 		if( $date == $this->getDateEnd() ) { return; }
 
-		$this->checkDateFormat( $date );
-
-		$this->values['end'] = ( $date !== null ? (string) $date : null );
+		$this->values['end'] = $this->checkDateFormat( $date );
 
 		$this->setModified();
 	}

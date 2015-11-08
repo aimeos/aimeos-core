@@ -216,13 +216,7 @@ class Standard
 	{
 		if( $value === $this->getBirthday() ) { return; }
 
-		if( $value !== null )
-		{
-			$this->checkDateOnlyFormat( $value );
-			$value = (string) $value;
-		}
-
-		$this->values['birthday'] = $value;
+		$this->values['birthday'] = $this->checkDateOnlyFormat( $value );
 		$this->setModified();
 	}
 
@@ -276,9 +270,7 @@ class Standard
 	{
 		if( $value === $this->getDateVerified() ) { return; }
 
-		$this->checkDateOnlyFormat( $value );
-
-		$this->values['vdate'] = ( $value ? (string) $value : null );
+		$this->values['vdate'] = $this->checkDateOnlyFormat( $value );
 		$this->setModified();
 	}
 
@@ -404,8 +396,13 @@ class Standard
 	 */
 	protected function checkDateOnlyFormat( $date )
 	{
-		if( $date !== null && preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', $date ) !== 1 ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
+		if( $date !== null )
+		{
+			if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', (string) $date ) !== 1 ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
+			}
+
+			return (string) $date;
 		}
 	}
 }

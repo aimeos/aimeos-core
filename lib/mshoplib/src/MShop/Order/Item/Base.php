@@ -154,20 +154,6 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	/**
-	 * Tests if the date parameter represents an ISO date format.
-	 *
-	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
-	 * @throws \Aimeos\MShop\Order\Exception If validating the date string failed
-	 */
-	protected function checkDateFormat( $date )
-	{
-		if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/', $date ) !== 1 ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
-		}
-	}
-
-
-	/**
 	 * Checks if the given delivery status is a valid constant.
 	 *
 	 * @param integer $value Delivery status constant defined in \Aimeos\MShop\Order\Item\Base
