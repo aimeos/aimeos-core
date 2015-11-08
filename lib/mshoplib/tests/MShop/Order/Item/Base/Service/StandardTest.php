@@ -378,6 +378,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$this->assertEquals( 'order/base/service', $this->object->getResourceType() );
+	}
+
+
 	public function testCopyFrom()
 	{
 		$serviceCopy = new \Aimeos\MShop\Order\Item\Base\Service\Standard( $this->price );

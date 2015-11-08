@@ -637,6 +637,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$this->assertEquals( 'order/base', $this->object->getResourceType() );
+	}
+
+
 	/**
 	 * @param string $code
 	 */

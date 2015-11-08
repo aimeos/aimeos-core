@@ -52,4 +52,15 @@ abstract class Base
 	 * Stock level is already updated.
 	 */
 	const COUPON_UPDATE = 'coupon-update';
+
+
+	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return 'order/status';
+	}
 }

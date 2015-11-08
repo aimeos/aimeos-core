@@ -47,27 +47,42 @@ interface Iface
 	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getTimeCreated();
-	
+
 	/**
 	 * Returns the time of last modification.
 	 *
 	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getTimeModified();
-	
+
 	/**
 	 * Returns the user code of user who created/modified the item at last.
 	 *
 	 * @return string Usercode of user who created/modified the item at last
 	 */
 	public function getEditor();
-	
+
+	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType();
+
 	/**
 	 * Tests if the item was modified.
 	 *
 	 * @return boolean True if modified, false if not
 	 */
 	public function isModified();
+
+	/**
+	 * Sets the item values from the given array.
+	 *
+	 * @param array Associative list of item keys and their values
+	 * @return array Associative list of keys and their values that are unknown
+	 */
+	public function fromArray( array $list );
 
 	/**
 	 * Returns an associative list of item properties.

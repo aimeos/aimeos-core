@@ -187,6 +187,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$this->assertEquals( 'order/base/product/attribute', $this->object->getResourceType() );
+	}
+
+
 	public function testCopyFrom()
 	{
 		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );

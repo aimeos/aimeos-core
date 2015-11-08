@@ -55,6 +55,17 @@ abstract class Base
 
 
 	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return 'order/base';
+	}
+
+
+	/**
 	 * Checks the constants for the different parts of the basket.
 	 *
 	 * @param integer $value Part constant

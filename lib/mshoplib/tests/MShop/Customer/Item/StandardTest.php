@@ -221,6 +221,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$this->assertEquals( 'customer', $this->object->getResourceType() );
+	}
+
+
 	public function testFromArray()
 	{
 		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );

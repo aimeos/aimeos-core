@@ -366,6 +366,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
 
+
+	public function testGetResourceType()
+	{
+		$this->assertEquals( 'common/address', $this->object->getResourceType() );
+	}
+
+
 	public function testCopyFrom()
 	{
 		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );

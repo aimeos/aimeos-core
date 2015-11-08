@@ -312,6 +312,17 @@ class Standard
 
 
 	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return 'price';
+	}
+
+
+	/**
 	 * Add the given price to the current one.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added

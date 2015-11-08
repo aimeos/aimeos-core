@@ -189,6 +189,17 @@ class Standard
 
 
 	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return 'order/base/service/attribute';
+	}
+
+
+	/**
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from

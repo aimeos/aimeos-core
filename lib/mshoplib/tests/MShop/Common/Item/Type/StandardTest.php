@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Common\Item\Type\Standard( '', $this->values );
+		$this->object = new \Aimeos\MShop\Common\Item\Type\Standard( 'common.type.', $this->values );
 	}
 
 	/**
@@ -134,6 +134,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$this->assertEquals( 'common/type', $this->object->getResourceType() );
+	}
+
+
 	public function testFromArray()
 	{
 		$item = new \Aimeos\MShop\Common\Item\Type\Standard( 'common.type.' );
@@ -162,15 +168,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$arrayObject = $this->object->toArray();
 		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->object->getId(), $arrayObject['id'] );
-		$this->assertEquals( $this->object->getCode(), $arrayObject['code'] );
-		$this->assertEquals( $this->object->getDomain(), $arrayObject['domain'] );
-		$this->assertEquals( $this->object->getLabel(), $arrayObject['label'] );
-		$this->assertEquals( $this->object->getStatus(), $arrayObject['status'] );
-		$this->assertEquals( $this->object->getSiteId(), $arrayObject['siteid'] );
-		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['ctime'] );
-		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['mtime'] );
-		$this->assertEquals( $this->object->getEditor(), $arrayObject['editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['common.type.id'] );
+		$this->assertEquals( $this->object->getCode(), $arrayObject['common.type.code'] );
+		$this->assertEquals( $this->object->getDomain(), $arrayObject['common.type.domain'] );
+		$this->assertEquals( $this->object->getLabel(), $arrayObject['common.type.label'] );
+		$this->assertEquals( $this->object->getStatus(), $arrayObject['common.type.status'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.type.siteid'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['common.type.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['common.type.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['common.type.editor'] );
 	}
 
 	public function testIsModified()

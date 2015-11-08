@@ -335,4 +335,15 @@ class Standard
 	{
 		return $this->node;
 	}
+
+
+	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return 'catalog';
+	}
 }

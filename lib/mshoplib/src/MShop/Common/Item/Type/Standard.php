@@ -144,6 +144,17 @@ class Standard
 
 
 	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return str_replace( '.', '/', rtrim( $this->prefix, '.' ) );
+	}
+
+
+	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values

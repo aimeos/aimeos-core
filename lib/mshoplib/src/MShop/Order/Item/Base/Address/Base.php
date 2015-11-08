@@ -32,6 +32,17 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Address\Base
 
 
 	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return 'order/base/address';
+	}
+
+
+	/**
 	 * Checks if the given address type is valid
 	 *
 	 * @param string $value Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base

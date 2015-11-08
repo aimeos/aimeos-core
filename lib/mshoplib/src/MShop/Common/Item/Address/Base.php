@@ -554,6 +554,17 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return str_replace( '.', '/', rtrim( $this->prefix, '.' ) );
+	}
+
+
+	/**
 	 * Copies the values of the address item into another one.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Address item

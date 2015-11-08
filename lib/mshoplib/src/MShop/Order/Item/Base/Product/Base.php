@@ -35,6 +35,17 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base
 
 
 	/**
+	 * Returns the item type
+	 *
+	 * @return Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return 'order/base/product';
+	}
+
+
+	/**
 	 * Checks if the given flag constant is valid.
 	 *
 	 * @param integer $value Flag constant value
