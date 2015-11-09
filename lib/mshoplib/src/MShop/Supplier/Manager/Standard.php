@@ -121,7 +121,7 @@ class Standard
 	{
 		$path = 'mshop/supplier/manager/submanagers';
 
-		return $this->getResourceTypeBase( 'supplier', $path, array( 'type', 'lists' ), $withsub );
+		return $this->getResourceTypeBase( 'supplier', $path, array( 'address', 'lists' ), $withsub );
 	}
 
 
