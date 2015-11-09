@@ -331,6 +331,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$status = 500;
 
 		$result = json_decode( $this->object->get( '', $header, $status ), true );
+print_r( $result );
 
 		$this->assertEquals( 200, $status );
 		$this->assertEquals( 1, count( $header ) );
