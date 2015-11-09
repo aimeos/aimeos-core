@@ -331,7 +331,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$status = 500;
 
 		$result = json_decode( $this->object->get( '', $header, $status ), true );
-print_r( $result );
 
 		$this->assertEquals( 200, $status );
 		$this->assertEquals( 1, count( $header ) );
@@ -339,7 +338,7 @@ print_r( $result );
 		$this->assertEquals( 25, count( $result['data'] ) );
 		$this->assertEquals( 'product', $result['data'][0]['type'] );
 		$this->assertEquals( 2, count( $result['data'][0]['attributes'] ) );
-		$this->assertEquals( 14, count( $result['included'] ) );
+		$this->assertEquals( 12, count( $result['included'] ) );
 		$this->assertArrayNotHasKey( 'errors', $result );
 	}
 
@@ -446,9 +445,9 @@ print_r( $result );
 		$this->context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
-		->setMethods( array( 'getItem', 'saveItem' ) )
-		->setConstructorArgs( array( $this->context ) )
-		->getMock();
+			->setMethods( array( 'getItem', 'saveItem' ) )
+			->setConstructorArgs( array( $this->context ) )
+			->getMock();
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Product\\Manager\\' . $name, $productManagerStub );
 
@@ -458,7 +457,7 @@ print_r( $result );
 
 		$productManagerStub->expects( $this->once() )->method( 'saveItem' );
 		$productManagerStub->expects( $this->once() )->method( 'getItem' )
-		->will( $this->returnValue( $item ) );
+			->will( $this->returnValue( $item ) );
 
 
 		$body = '{"data": {"type": "product", "attributes": {"product.label": "test"}}}';
@@ -485,9 +484,9 @@ print_r( $result );
 		$this->context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
-		->setMethods( array( 'getItem', 'saveItem' ) )
-		->setConstructorArgs( array( $this->context ) )
-		->getMock();
+			->setMethods( array( 'getItem', 'saveItem' ) )
+			->setConstructorArgs( array( $this->context ) )
+			->getMock();
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Product\\Manager\\' . $name, $productManagerStub );
 
@@ -497,7 +496,7 @@ print_r( $result );
 
 		$productManagerStub->expects( $this->exactly( 2 ) )->method( 'saveItem' );
 		$productManagerStub->expects( $this->exactly( 2 ) )->method( 'getItem' )
-		->will( $this->returnValue( $item ) );
+			->will( $this->returnValue( $item ) );
 
 
 		$body = '{"data": [{"type": "product", "attributes": {"product.label": "test"}}, {"type": "product", "attributes": {"product.label": "test"}}]}';
@@ -547,6 +546,20 @@ print_r( $result );
 		$this->assertEquals( 501, $status );
 		$this->assertEquals( 1, count( $header ) );
 		$this->assertArrayHasKey( 'errors', $result );
+	}
+
+
+	public function testOptions()
+	{
+		$header = array();
+		$status = 500;
+
+		$result = json_decode( $this->object->options( '', $header, $status ), true );
+
+		$this->assertEquals( 200, $status );
+		$this->assertEquals( 2, count( $header ) );
+		$this->assertEquals( 59, count( $result['meta']['resources'] ) );
+		$this->assertArrayNotHasKey( 'errors', $result );
 	}
 
 
