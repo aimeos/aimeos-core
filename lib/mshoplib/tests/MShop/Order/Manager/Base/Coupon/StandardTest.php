@@ -49,16 +49,24 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.coupon.editor', 'core:unittest' ) );
 		$result = $this->object->aggregate( $search, 'order.base.coupon.code' );
-	
+
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( '5678', $result );
 		$this->assertEquals( 2, $result['5678'] );
 	}
-	
+
 
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );
+	}
+
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'order/base/coupon', $result );
 	}
 
 

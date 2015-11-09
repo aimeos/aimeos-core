@@ -52,6 +52,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'supplier/lists', $result );
+		$this->assertContains( 'supplier/lists/type', $result );
+	}
+
+
 	public function testAggregate()
 	{
 		$search = $this->object->createSearch( true );

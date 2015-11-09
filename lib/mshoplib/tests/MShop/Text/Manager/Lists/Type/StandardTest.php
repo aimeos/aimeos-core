@@ -35,12 +35,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testCleanup()
-	{
-		$this->object->cleanup( array( -1 ) );
-	}
-
-
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -50,6 +44,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function tearDown()
 	{
 		unset( $this->object );
+	}
+
+
+	public function testCleanup()
+	{
+		$this->object->cleanup( array( -1 ) );
+	}
+
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'text/lists/type', $result );
 	}
 
 

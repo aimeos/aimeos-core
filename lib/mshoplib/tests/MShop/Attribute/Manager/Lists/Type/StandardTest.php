@@ -53,6 +53,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'attribute/lists/type', $result );
+	}
+
+
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();

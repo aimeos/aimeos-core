@@ -42,6 +42,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->cleanup( array( -1 ) );
 	}
 
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'media', $result );
+		$this->assertContains( 'media/type', $result );
+		$this->assertContains( 'media/lists', $result );
+		$this->assertContains( 'media/lists/type', $result );
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {

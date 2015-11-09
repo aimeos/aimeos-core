@@ -120,6 +120,20 @@ class Standard
 
 
 	/**
+	 * Returns the available manager types
+	 *
+	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 */
+	public function getResourceType( $withsub = true )
+	{
+		$path = 'mshop/product/manager/type/submanagers';
+
+		return $this->getResourceTypeBase( 'product/type', $path, array(), $withsub );
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true
