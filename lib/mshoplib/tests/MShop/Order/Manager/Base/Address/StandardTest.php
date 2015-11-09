@@ -47,12 +47,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.address.editor', 'core:unittest' ) );
 		$result = $this->object->aggregate( $search, 'order.base.address.salutation' );
-	
+
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS, $result );
 		$this->assertEquals( 4, $result[\Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MRS] );
 	}
-	
+
 
 	public function testCleanup()
 	{
@@ -70,6 +70,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testCreateSearch()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch() );
+	}
+
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'order/base/address', $result );
 	}
 
 

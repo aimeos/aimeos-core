@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Order\Manager\Status\Standard( $this->context );
 	}
 
-	
+
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
@@ -50,25 +50,33 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.status.editor', 'core:unittest' ) );
 		$result = $this->object->aggregate( $search, 'order.status.value' );
-	
+
 		$this->assertEquals( 6, count( $result ) );
 		$this->assertArrayHasKey( 'waiting', $result );
 		$this->assertEquals( 2, $result['waiting'] );
 	}
-	
+
 
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );
 	}
 
-	
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'order/status', $result );
+	}
+
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Status\\Iface', $this->object->createItem() );
 	}
 
-	
+
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();

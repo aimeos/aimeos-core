@@ -45,16 +45,25 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:unittest' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.warehousecode' );
-	
+
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'unit_warehouse1', $result );
 		$this->assertEquals( 11, $result['unit_warehouse1'] );
 	}
-	
+
 
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );
+	}
+
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'order/base/product', $result );
+		$this->assertContains( 'order/base/product/attribute', $result );
 	}
 
 

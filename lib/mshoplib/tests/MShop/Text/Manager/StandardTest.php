@@ -58,6 +58,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'text', $result );
+		$this->assertContains( 'text/type', $result );
+		$this->assertContains( 'text/lists', $result );
+		$this->assertContains( 'text/lists/type', $result );
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {

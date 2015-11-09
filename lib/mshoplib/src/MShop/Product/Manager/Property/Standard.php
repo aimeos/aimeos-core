@@ -150,13 +150,13 @@ class Standard
 				$object->compare( '==', 'product.property.languageid', $langid ),
 			);
 			$expr[] = $object->combine( '||', $temp );
-	
+
 			$object->setConditions( $object->combine( '&&', $expr ) );
 		}
-	
+
 		return $object;
 	}
-	
+
 
 	/**
 	 * Inserts the new property items for product item
@@ -359,6 +359,20 @@ class Standard
 	public function getItem( $id, array $ref = array() )
 	{
 		return $this->getItemBase( 'product.property.id', $id, $ref );
+	}
+
+
+	/**
+	 * Returns the available manager types
+	 *
+	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 */
+	public function getResourceType( $withsub = true )
+	{
+		$path = 'mshop/product/manager/property/submanagers';
+
+		return $this->getResourceTypeBase( 'product/property', $path, array( 'type' ), $withsub );
 	}
 
 

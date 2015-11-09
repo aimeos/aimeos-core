@@ -283,6 +283,20 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 
 
 	/**
+	 * Returns the available manager types
+	 *
+	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 */
+	public function getResourceType( $withsub = true )
+	{
+		$path = 'mshop/order/manager/base/submanagers';
+
+		return $this->getResourceTypeBase( 'order/base', $path, array( 'address', 'coupon', 'product', 'service' ), $withsub );
+	}
+
+
+	/**
 	 * Returns the attributes that can be used for searching.
 	 *
 	 * @param boolean $withsub Return also attributes of sub-managers if true

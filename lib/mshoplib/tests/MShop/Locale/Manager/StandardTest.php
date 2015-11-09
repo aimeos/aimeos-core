@@ -220,6 +220,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'locale', $result );
+		$this->assertContains( 'locale/currency', $result );
+		$this->assertContains( 'locale/language', $result );
+		$this->assertContains( 'locale/site', $result );
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
