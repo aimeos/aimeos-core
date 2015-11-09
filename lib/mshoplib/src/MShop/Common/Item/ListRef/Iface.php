@@ -39,12 +39,12 @@ interface Iface
 	 * to the requested domain to get the items. Otherwise, no items will be
 	 * returned by this method.
 	 *
-	 * @param string $domain Name of the domain (e.g. product, text, etc.)
+	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function getRefItems( $domain, $type = null, $listtype = null );
+	public function getRefItems( $domain = null, $type = null, $listtype = null );
 
 	/**
 	 * Returns the localized text type of the item or the internal label if no name is available.
