@@ -45,6 +45,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'plugin/type', $result );
+	}
+
+
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );

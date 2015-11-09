@@ -64,6 +64,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'order/base', $result );
+		$this->assertContains( 'order/base/address', $result );
+		$this->assertContains( 'order/base/coupon', $result );
+		$this->assertContains( 'order/base/product', $result );
+		$this->assertContains( 'order/base/product/attribute', $result );
+		$this->assertContains( 'order/base/service', $result );
+		$this->assertContains( 'order/base/service/attribute', $result );
+	}
+
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $this->object->createItem() );

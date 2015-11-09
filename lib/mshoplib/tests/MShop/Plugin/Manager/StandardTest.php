@@ -79,6 +79,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'plugin', $result );
+		$this->assertContains( 'plugin/type', $result );
+	}
+
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Plugin\\Item\\Iface', $this->object->createItem() );

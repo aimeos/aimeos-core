@@ -689,6 +689,27 @@ abstract class Base
 
 
 	/**
+	 * Returns the available manager types
+	 *
+	 * @param string Main manager type
+	 * @param string $path Configuration path to the sub-domains
+	 * @param array $default List of sub-domains if no others are configured
+	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 */
+	protected function getResourceTypeBase( $type, $path, array $default, $withsub )
+	{
+		$list = array( $type );
+
+		foreach( $this->context->getConfig()->get( $path, $default ) as $domain ) {
+			$list = array_merge( $list, $this->getSubManager( $domain )->getResourceType( $withsub ) );
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the name of the resource or of the default resource.
 	 *
 	 * @return string Name of the resource

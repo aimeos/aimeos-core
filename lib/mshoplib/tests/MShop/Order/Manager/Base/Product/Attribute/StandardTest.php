@@ -39,16 +39,24 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.editor', 'core:unittest' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.attribute.code' );
-	
+
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertArrayHasKey( 'width', $result );
 		$this->assertEquals( 4, $result['width'] );
 	}
-	
+
 
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );
+	}
+
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'order/base/product/attribute', $result );
 	}
 
 

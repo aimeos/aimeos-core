@@ -54,6 +54,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'coupon', $result );
+		$this->assertContains( 'coupon/code', $result );
+	}
+
+
 	public function testGetSearchAttributes()
 	{
 		$attribs = $this->object->getSearchAttributes();

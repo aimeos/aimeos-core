@@ -90,6 +90,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'catalog/lists', $result );
+		$this->assertContains( 'catalog/lists/type', $result );
+	}
+
+
 	public function testGetSubManager()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );

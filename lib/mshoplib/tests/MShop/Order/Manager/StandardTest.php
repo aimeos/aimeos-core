@@ -51,16 +51,32 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
 		$result = $this->object->aggregate( $search, 'order.type' );
-	
+
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'web', $result );
 		$this->assertEquals( 3, $result['web'] );
 	}
-	
+
 
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );
+	}
+
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'order', $result );
+		$this->assertContains( 'order/status', $result );
+		$this->assertContains( 'order/base', $result );
+		$this->assertContains( 'order/base/address', $result );
+		$this->assertContains( 'order/base/coupon', $result );
+		$this->assertContains( 'order/base/product', $result );
+		$this->assertContains( 'order/base/product/attribute', $result );
+		$this->assertContains( 'order/base/service', $result );
+		$this->assertContains( 'order/base/service/attribute', $result );
 	}
 
 
