@@ -22,6 +22,7 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jsonapi" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/client/html" />
@@ -42,6 +43,7 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jsonapi" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
@@ -75,6 +77,7 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jsonapi" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="check" haltonfailure="false" dir="${coredir}/client/extjs" />
@@ -203,6 +206,7 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jsonapi" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/client/html" />
@@ -220,6 +224,7 @@
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jsonapi" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
@@ -239,6 +244,7 @@
 		<phing target="build" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jsonapi" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />

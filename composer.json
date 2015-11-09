@@ -46,6 +46,7 @@
 			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
 			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
 			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
+			"Aimeos\\Controller\\Jsonapi\\": "controller/jobs/src/Controller/Jsonapi/",
 			"Aimeos\\Controller\\ExtJS\\": "controller/extjs/src/Controller/ExtJS/",
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
 			"Aimeos\\": ".",
@@ -58,6 +59,7 @@
 			"client/html/src",
 			"controller/common/src",
 			"controller/frontend/src",
+			"controller/jsonapi/src",
 			"controller/extjs/src",
 			"controller/jobs/src",
 			"Bootstrap.php"
