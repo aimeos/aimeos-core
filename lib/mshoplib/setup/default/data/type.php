@@ -113,8 +113,9 @@ return array(
 		array( 'domain' => 'product/property', 'code' => 'package-weight', 'label' => 'Package Weight', 'status' => 1 ),
 	),
 
-	'product/tag/type' => array(
-		array( 'domain' => 'product/tag', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+	'tag/type' => array(
+		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
 	'service/type' => array(

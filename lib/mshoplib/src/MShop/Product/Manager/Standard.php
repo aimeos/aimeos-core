@@ -566,7 +566,7 @@ class Standard
 	{
 		$path = 'mshop/product/manager/submanagers';
 
-		return $this->getResourceTypeBase( 'product', $path, array( 'type', 'lists', 'property', 'stock', 'tag' ), $withsub );
+		return $this->getResourceTypeBase( 'product', $path, array( 'type', 'lists', 'property', 'stock' ), $withsub );
 	}
 
 

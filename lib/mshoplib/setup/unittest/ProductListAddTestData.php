@@ -23,7 +23,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'MediaListAddTestData', 'PriceListAddTestData', 'ProductAddTestData', 'ProductAddTagTestData' );
+		return array( 'MShopSetLocale', 'MediaListAddTestData', 'PriceListAddTestData', 'ProductAddTestData', 'TagAddTestData' );
 	}
 
 
@@ -79,7 +79,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$refIds['media'] = $this->getMediaData( $refKeys['media'] );
 		$refIds['price'] = $this->getPriceData( $refKeys['price'] );
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
-		$refIds['product/tag'] = $this->getProductTagData( $productManager, $refKeys['product/tag'] );
+		$refIds['tag'] = $this->getTagData( $refKeys['tag'] );
 
 		$this->addProductData( $testdata, $productManager, $refIds, $refKeys['product'] );
 
@@ -265,33 +265,32 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Returns the product tag test data.
 	 *
-	 * @param \Aimeos\MShop\Product\Manager\Iface $productManager Product Manager
 	 * @param array $keys List of keys for tag lookup
 	 * @return array $refIds List with referenced Ids
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	protected function getProductTagData( $productManager, array $keys )
+	protected function getTagData( array $keys )
 	{
-		$productTagManager = $productManager->getSubManager( 'tag', 'Standard' );
+		$tagManager = \Aimeos\MShop\Tag\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		$prodTag = array();
 		foreach( $keys as $key )
 		{
 			$exp = explode( '/', $key );
 
-			if( count( $exp ) != 3 ) {
+			if( count( $exp ) != 2 ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref product tag are set wrong "%1$s"', $key ) );
 			}
 
-			$prodTag[] = $exp[2];
+			$prodTag[] = $exp[1];
 		}
 
-		$search = $productTagManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.tag.label', $prodTag ) );
+		$search = $tagManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'tag.label', $prodTag ) );
 
 		$refIds = array();
-		foreach( $productTagManager->searchItems( $search ) as $item ) {
-			$refIds['product/tag/' . $item->getLabel()] = $item->getId();
+		foreach( $tagManager->searchItems( $search ) as $item ) {
+			$refIds['tag/' . $item->getLabel()] = $item->getId();
 		}
 
 		return $refIds;

@@ -556,7 +556,7 @@ class Base
 			$resources = array();
 			$default = array(
 				'attribute', 'catalog', 'coupon', 'customer', 'locale', 'media',
-				'order', 'plugin', 'price', 'product', 'service', 'supplier', 'text'
+				'order', 'plugin', 'price', 'product', 'service', 'supplier', 'tag', 'text'
 			);
 			$domains = $context->getConfig()->get( 'controller/jsonapi/domains', $default );
 

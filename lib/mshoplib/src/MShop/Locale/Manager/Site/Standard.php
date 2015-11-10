@@ -279,7 +279,7 @@ class Standard
 		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
 		$default = array(
 			'attribute', 'catalog', 'coupon', 'customer', 'index',
-			'media', 'order', 'plugin', 'price', 'product', 'product/tag',
+			'media', 'order', 'plugin', 'price', 'product', 'tag',
 			'service', 'supplier', 'text'
 		);
 

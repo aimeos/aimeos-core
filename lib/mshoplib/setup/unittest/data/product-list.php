@@ -19,7 +19,7 @@ return array(
 		'price/default' => array( 'domain' => 'price', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
-		'product/tag/default' => array( 'domain' => 'product/tag', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'tag/default' => array( 'domain' => 'tag', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'product/suggestion' => array( 'domain' => 'product', 'code' => 'suggestion', 'label' => 'Suggestion', 'status' => 1 ),
 		'product/bought' => array( 'domain' => 'product', 'code' => 'bought-together', 'label' => 'Bought together', 'status' => 1 ),
 		//pictures
@@ -162,12 +162,12 @@ return array(
 		array( 'parentid' => 'product/U:PD', 'typeid' => 'text/unittype29', 'domain' => 'text', 'refid' => 'text/gift_rebate', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/U:PD', 'typeid' => 'text/unittype30', 'domain' => 'text', 'refid' => 'text/present_rebate', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => array(), 'pos' => 1, 'status' => 1 ),
 
-		array( 'parentid' => 'product/CNE', 'typeid' => 'product/tag/default', 'domain' => 'product/tag', 'refid' => 'product/tag/Expresso', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
-		array( 'parentid' => 'product/CNE', 'typeid' => 'product/tag/default', 'domain' => 'product/tag', 'refid' => 'product/tag/Kaffee', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
-		array( 'parentid' => 'product/CNE', 'typeid' => 'product/tag/default', 'domain' => 'product/tag', 'refid' => 'product/tag/herb', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),
-		array( 'parentid' => 'product/CNC', 'typeid' => 'product/tag/default', 'domain' => 'product/tag', 'refid' => 'product/tag/Kaffee', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
-		array( 'parentid' => 'product/CNC', 'typeid' => 'product/tag/default', 'domain' => 'product/tag', 'refid' => 'product/tag/Cappuccino', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
-		array( 'parentid' => 'product/CNC', 'typeid' => 'product/tag/default', 'domain' => 'product/tag', 'refid' => 'product/tag/mild', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),
-		array( 'parentid' => 'product/CNC', 'typeid' => 'product/tag/default', 'domain' => 'product/tag', 'refid' => 'product/tag/cremig', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 3, 'status' => 1 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'tag/default', 'domain' => 'tag', 'refid' => 'tag/Expresso', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'tag/default', 'domain' => 'tag', 'refid' => 'tag/Kaffee', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'tag/default', 'domain' => 'tag', 'refid' => 'tag/herb', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),
+		array( 'parentid' => 'product/CNC', 'typeid' => 'tag/default', 'domain' => 'tag', 'refid' => 'tag/Kaffee', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'product/CNC', 'typeid' => 'tag/default', 'domain' => 'tag', 'refid' => 'tag/Cappuccino', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
+		array( 'parentid' => 'product/CNC', 'typeid' => 'tag/default', 'domain' => 'tag', 'refid' => 'tag/mild', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),
+		array( 'parentid' => 'product/CNC', 'typeid' => 'tag/default', 'domain' => 'tag', 'refid' => 'tag/cremig', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 3, 'status' => 1 ),
 	),
 );

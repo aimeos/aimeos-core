@@ -178,8 +178,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains( 'product/property/type', $result );
 		$this->assertContains( 'product/stock', $result );
 		$this->assertContains( 'product/stock/warehouse', $result );
-		$this->assertContains( 'product/tag', $result );
-		$this->assertContains( 'product/tag/type', $result );
 	}
 
 
