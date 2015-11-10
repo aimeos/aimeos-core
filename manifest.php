@@ -16,7 +16,7 @@ return array(
 		'client/html/src',
 		'controller/common/src',
 		'controller/frontend/src',
-		'controller/jsonapi/src',
+		'controller/jsonadm/src',
 		'controller/extjs/src',
 		'controller/jobs/src',
 		'lib/mwlib/lib',
@@ -34,7 +34,7 @@ return array(
 		'client/html/currency' => 'client/html/i18n/currency',
 		'client/html/language' => 'client/html/i18n/language',
 		'controller/frontend' => 'controller/frontend/i18n',
-		'controller/jsonapi' => 'controller/jsonapi/i18n',
+		'controller/jsonadm' => 'controller/jsonadm/i18n',
 		'controller/extjs' => 'controller/extjs/i18n',
 		'mshop/code' => 'lib/mshoplib/i18n/code',
 		'mshop' => 'lib/mshoplib/i18n',
@@ -58,8 +58,8 @@ return array(
 		'controller/jobs/templates' => array(
 			'controller/jobs/templates',
 		),
-		'controller/jsonapi/templates' => array(
-			'controller/jsonapi/templates',
+		'controller/jsonadm/templates' => array(
+			'controller/jsonadm/templates',
 		),
 	),
 );
