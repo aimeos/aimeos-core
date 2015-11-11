@@ -362,7 +362,7 @@ class Client_Html_Catalog_Filter_Default
 	{
 		$content = parent::modifyBody( $content, $uid );
 
-		return $this->replaceSection( $content, $this->getView()->csrf()->formfield(), 'catalog.filter.csrf' );
+		return $this->_replaceSection( $content, $this->getView()->csrf()->formfield(), 'catalog.filter.csrf' );
 	}
 
 
