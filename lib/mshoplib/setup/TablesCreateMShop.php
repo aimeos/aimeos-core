@@ -61,6 +61,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 			'db-text' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'text.sql',
 			'db-coupon' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'coupon.sql',
 			'db-catalog' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'catalog.sql',
+			'db-tag' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'tag.sql',
 		);
 
 		$this->setup( $files );

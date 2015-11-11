@@ -17,7 +17,7 @@ class TagMoveProductTag extends \Aimeos\MW\Setup\Task\Base
 	private $mysql = array(
 		'mshop_product_tag_type' => array(
 			'RENAME TABLE "mshop_product_tag_type" TO "mshop_tag_type"',
-			'ALTER TABLE "mshop_tag_type" DROP INDEX "unq_msprotaty_sid_dom_code", ADD CONSTRAINT UNIQUE "unq_mstagty_sid_dom_code" ("siteid", "domain", "code")',
+			'ALTER TABLE "mshop_tag_type" DROP INDEX "unq_msprotaty_sid_dom_code", ADD UNIQUE INDEX "unq_mstagty_sid_dom_code" ("siteid", "domain", "code")',
 			'ALTER TABLE "mshop_tag_type" DROP INDEX "idx_msprotaty_sid_status", ADD INDEX "idx_mstagty_sid_status" ("siteid", "status")',
 			'ALTER TABLE "mshop_tag_type" DROP INDEX "idx_msprotaty_sid_label", ADD INDEX "idx_mstagty_sid_label" ("siteid", "label")',
 			'ALTER TABLE "mshop_tag_type" DROP INDEX "idx_msprotaty_sid_code", ADD INDEX "idx_mstagty_sid_code" ("siteid", "code")',
@@ -25,7 +25,7 @@ class TagMoveProductTag extends \Aimeos\MW\Setup\Task\Base
 		'mshop_product_tag' => array(
 			'RENAME TABLE "mshop_product_tag" TO "mshop_tag"',
 			'ALTER TABLE "mshop_tag" DROP FOREIGN KEY "fk_msprota_typeid", ADD CONSTRAINT "fk_mstag_typeid" FOREIGN KEY ("typeid") REFERENCES "mshop_tag_type" ("id") ON UPDATE CASCADE ON DELETE CASCADE',
-			'ALTER TABLE "mshop_tag" DROP INDEX "unq_msprota_sid_tid_lid_label", ADD INDEX UNIQUE "unq_mstag_sid_tid_lid_label" ("siteid", "typeid", "langid", "label")',
+			'ALTER TABLE "mshop_tag" DROP INDEX "unq_msprota_sid_tid_lid_label", ADD UNIQUE INDEX "unq_mstag_sid_tid_lid_label" ("siteid", "typeid", "langid", "label")',
 			'ALTER TABLE "mshop_tag" DROP INDEX "idx_msprota_sid_label", ADD INDEX "idx_mstag_sid_label" ("siteid", "label")',
 			'ALTER TABLE "mshop_tag" DROP INDEX "idx_msprota_sid_langid", ADD INDEX "idx_mstag_sid_langid" ("siteid", "langid")',
 		),
