@@ -48,8 +48,8 @@ class Standard
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.base.product.attribute.productid' => array(
-			'code'=>'order.base.product.attribute.productid',
+		'order.base.product.attribute.parentid' => array(
+			'code'=>'order.base.product.attribute.parentid',
 			'internalcode'=>'mordbaprat."ordprodid"',
 			'label'=>'Order base product ID',
 			'type'=> 'integer',
@@ -313,7 +313,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getAttributeId() );
-			$stmt->bind( 3, $item->getProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
 			$stmt->bind( 5, $item->getCode() );
 			$stmt->bind( 6, $item->getValue() );

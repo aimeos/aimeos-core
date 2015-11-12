@@ -872,13 +872,13 @@ class Standard
 	{
 		$manager = $this->getSubmanager( 'attribute' );
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.productid', $ids ) );
+		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', $ids ) );
 		$search->setSortations( array( $search->sort( '+', 'order.base.product.attribute.code' ) ) );
 		$search->setSlice( 0, 0x7fffffff );
 
 		$result = array();
 		foreach( $manager->searchItems( $search ) as $item ) {
-			$result[$item->getProductId()][$item->getId()] = $item;
+			$result[$item->getParentId()][$item->getId()] = $item;
 		}
 
 		return $result;

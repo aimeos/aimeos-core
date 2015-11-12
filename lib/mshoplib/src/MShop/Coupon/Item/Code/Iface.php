@@ -18,25 +18,10 @@ namespace Aimeos\MShop\Coupon\Item\Code;
  * @package MShop
  * @subpackage Coupon
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Time\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Time\Iface,
+	\Aimeos\MShop\Common\Item\Parentid\Iface
 {
-	/**
-	 * Returns the unique ID of the coupon item the code belongs to.
-	 *
-	 * @return integer Unique ID of the coupon item
-	 */
-	public function getCouponId();
-
-
-	/**
-	 * Sets the new unique ID of the coupon item the code belongs to.
-	 *
-	 * @param integer $id Unique ID of the coupon item
-	 * @return void
-	 */
-	public function setCouponId( $id );
-
-
 	/**
 	 * Returns the code of the coupon item.
 	 *

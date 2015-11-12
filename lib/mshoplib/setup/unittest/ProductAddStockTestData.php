@@ -88,8 +88,8 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$prodcode = array();
 		foreach( $testdata['product/stock'] as $dataset )
 		{
-			if( ( $pos = strpos( $dataset['prodid'], '/' ) ) === false || ( $str = substr( $dataset['prodid'], $pos + 1 ) ) === false ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for prodid are set wrong "%1$s"', $dataset['prodid'] ) );
+			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$prodcode[] = $str;
@@ -123,8 +123,8 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$stock = $productStockManager->createItem();
 		foreach( $testdata['product/stock'] as $dataset )
 		{
-			if( !isset( $parentIds[$dataset['prodid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product ID found for "%1$s"', $dataset['prodid'] ) );
+			if( !isset( $parentIds[$dataset['parentid']] ) ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			if( !isset( $wareIds[$dataset['warehouseid']] ) ) {
@@ -132,7 +132,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$stock->setId( null );
-			$stock->setProductId( $parentIds[$dataset['prodid']] );
+			$stock->setParentId( $parentIds[$dataset['parentid']] );
 			$stock->setWarehouseId( $wareIds[$dataset['warehouseid']] );
 			$stock->setStocklevel( $dataset['stocklevel'] );
 			$stock->setDateBack( $dataset['backdate'] );

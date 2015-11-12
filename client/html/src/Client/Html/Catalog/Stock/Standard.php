@@ -321,7 +321,7 @@ class Standard
 			$stockManager = \Aimeos\MShop\Factory::createManager( $context, 'product/stock' );
 
 			$search = $stockManager->createSearch( true );
-			$expr = array( $search->compare( '==', 'product.stock.productid', $productIds ) );
+			$expr = array( $search->compare( '==', 'product.stock.parentid', $productIds ) );
 
 			if( isset( $siteConfig['warehouse'] ) ) {
 				$expr[] = $search->compare( '==', 'product.stock.warehouse.code', $siteConfig['warehouse'] );
@@ -330,7 +330,7 @@ class Standard
 			$expr[] = $search->getConditions();
 
 			$sortations = array(
-				$search->sort( '+', 'product.stock.productid' ),
+				$search->sort( '+', 'product.stock.parentid' ),
 				$search->sort( '+', $sortkey ),
 			);
 
@@ -348,7 +348,7 @@ class Standard
 				foreach( $stockItems as $item )
 				{
 					$warehouseIds[$item->getWarehouseId()] = null;
-					$stockItemsByProducts[$item->getProductId()][] = $item;
+					$stockItemsByProducts[$item->getParentId()][] = $item;
 				}
 
 				$warehouseIds = array_keys( $warehouseIds );

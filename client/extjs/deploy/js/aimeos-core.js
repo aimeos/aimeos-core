@@ -9349,278 +9349,14 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://opensource.org/licenses/LGPL-3.0
- */
-
-Ext.ns('MShop.panel.product.tag');
-
-MShop.panel.product.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
-    siteidProperty : 'product.tag.siteid',
-
-    initComponent : function() {
-
-        MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
-
-        this.items = [{
-            xtype : 'tabpanel',
-            activeTab : 0,
-            border : false,
-            itemId : 'MShop.panel.product.tag.ItemUi',
-            plugins : ['ux.itemregistry'],
-            items : [{
-                xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
-                border : false,
-                layout : 'hbox',
-                layoutConfig : {
-                    align : 'stretch'
-                },
-                itemId : 'MShop.panel.product.tag.ItemUi.BasicPanel',
-                plugins : ['ux.itemregistry'],
-                defaults : {
-                    bodyCssClass : this.readOnlyClass
-                },
-                items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
-                    xtype : 'form',
-                    border : false,
-                    flex : 1,
-                    ref : '../../mainForm',
-                    autoScroll : true,
-                    items : [{
-                        xtype : 'fieldset',
-                        style : 'padding-right: 25px;',
-                        border : false,
-                        flex : 1,
-                        labelAlign : 'top',
-                        defaults : {
-                            readOnly : this.fieldsReadOnly,
-                            anchor : '100%'
-                        },
-                        items : [{
-                            xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
-                            name : 'product.tag.id'
-                        }, {
-                            xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
-                            name : 'product.tag.typeid',
-                            mode : 'local',
-                            store : this.listUI.typeStore,
-                            displayField : 'product.tag.type.label',
-                            valueField : 'product.tag.type.id',
-                            forceSelection : true,
-                            triggerAction : 'all',
-                            allowBlank : false,
-                            typeAhead : true
-                        }, {
-                            xtype : 'MShop.elements.language.combo',
-                            name : 'product.tag.languageid'
-                        }, {
-                            xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
-                            name : 'product.tag.label',
-                            allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Tag value (required)')
-                        }, {
-                            xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
-                            name : 'product.tag.ctime'
-                        }, {
-                            xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
-                            name : 'product.tag.mtime'
-                        }, {
-                            xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
-                            name : 'product.tag.editor'
-                        }]
-                    }]
-                }]
-            }]
-        }];
-
-        MShop.panel.product.tag.ItemUi.superclass.initComponent.call(this);
-    },
-
-    afterRender : function() {
-        var label = this.record ? this.record.data['product.tag.label'] : MShop.I18n.dt('client/extjs', 'new');
-        //#: Product tag item panel title with product label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Product tag: {0} ({1})');
-        this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
-
-        MShop.panel.product.tag.ItemUi.superclass.afterRender.apply(this, arguments);
-    }
-});
-
-Ext.reg('MShop.panel.product.tag.itemui', MShop.panel.product.tag.ItemUi);
-/*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
- * LGPLv3, http://opensource.org/licenses/LGPL-3.0
- */
-
-Ext.ns('MShop.panel.product.tag');
-
-MShop.panel.product.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
-
-    recordName : 'Product_Tag',
-    idProperty : 'product.tag.id',
-    siteidProperty : 'product.tag.siteid',
-    itemUiXType : 'MShop.panel.product.tag.itemui',
-
-    autoExpandColumn : 'product-tag-label',
-
-    filterConfig : {
-        filters : [{
-            dataIndex : 'product.tag.label',
-            operator : '=~',
-            value : ''
-        }]
-    },
-
-    getColumns : function() {
-        // make sure type store gets loaded in same batch as this grid data
-        this.typeStore = MShop.GlobalStoreMgr.get('Product_Tag_Type');
-
-        return [{
-            xtype : 'gridcolumn',
-            dataIndex : 'product.tag.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
-            sortable : true,
-            width : 50,
-            hidden : true
-        }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.tag.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
-            sortable : true,
-            width : 70,
-            renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "product.tag.type.label"], true)
-        }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.tag.languageid',
-            header : MShop.I18n.dt('client/extjs', 'Language'),
-            sortable : true,
-            width : 70,
-            renderer : MShop.elements.language.renderer
-        }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.tag.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
-            sortable : true,
-            id : 'product-tag-label'
-        }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.tag.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
-            sortable : true,
-            width : 130,
-            editable : false,
-            hidden : true
-        }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.tag.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
-            sortable : true,
-            width : 130,
-            editable : false,
-            hidden : true
-        }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.tag.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
-            sortable : true,
-            width : 130,
-            editable : false,
-            hidden : true
-        }];
-    }
-});
-
-Ext.reg('MShop.panel.product.tag.listuismall', MShop.panel.product.tag.ListUiSmall);
-/*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
- * LGPLv3, http://opensource.org/licenses/LGPL-3.0
- */
-
-Ext.ns('MShop.panel.product.tag');
-
-MShop.panel.product.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
-
-    title : MShop.I18n.dt('client/extjs', 'Tags'),
-
-    initComponent : function() {
-
-        Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated tags'),
-            xtype : 'MShop.panel.listitemlistui',
-            domain : 'product/tag',
-            getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
-        });
-
-        Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available tags'),
-            xtype : 'MShop.panel.product.tag.listuismall'
-        });
-
-        MShop.panel.product.tag.ItemPickerUi.superclass.initComponent.call(this);
-    },
-
-    getAdditionalColumns : function() {
-
-        var conf = this.itemConfig;
-        this.typeStore = MShop.GlobalStoreMgr.get('Product_Tag_Type', conf.domain);
-        this.listTypeStore = MShop.GlobalStoreMgr.get(conf.listTypeControllerName, conf.domain);
-
-        return [
-            {
-                xtype : 'gridcolumn',
-                dataIndex : conf.listNamePrefix + 'typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
-                id : 'listtype',
-                width : 70,
-                renderer : this.typeColumnRenderer.createDelegate(this,
-                    [this.listTypeStore, conf.listTypeLabelProperty], true)
-            },
-            {
-                xtype : 'gridcolumn',
-                dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
-                id : 'reftype',
-                width : 70,
-                renderer : this.refTypeColumnRenderer.createDelegate(this, [
-                    this.typeStore,
-                    'product.tag.typeid',
-                    'product.tag.type.label'], true)
-            },
-            {
-                xtype : 'gridcolumn',
-                dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Language'),
-                id : 'reflang',
-                width : 70,
-                renderer : this.refLangColumnRenderer.createDelegate(this, ['product.tag.languageid'], true)
-            },
-            {
-                xtype : 'gridcolumn',
-                dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
-                id : 'refcontent',
-                renderer : this.refColumnRenderer.createDelegate(this, ['product.tag.label'], true)
-            }];
-    }
-});
-
-Ext.reg('MShop.panel.product.tag.itempickerui', MShop.panel.product.tag.ItemPickerUi);
-/*!
- * Copyright (c) Metaways Infosystems GmbH, 2011
- * LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
 Ext.ns('MShop.panel.product');
 
 // hook product tag picker into the product ItemUi
-Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.ProductTagItemPickerUi', {
-    xtype : 'MShop.panel.product.tag.itempickerui',
+Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.product.TagItemPickerUi', {
+    xtype : 'MShop.panel.tag.itempickerui',
     itemConfig : {
         recordName : 'Product_Lists',
         idProperty : 'product.lists.id',
@@ -9632,14 +9368,14 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.product.ItemUi', 'MShop.panel.prod
         listTypeCondition : {
             '&&' : [{
                 '==' : {
-                    'product.lists.type.domain' : 'product/tag'
+                    'product.lists.type.domain' : 'tag'
                 }
             }]
         },
-        listTypeKey : 'product/lists/type/product/tag'
+        listTypeKey : 'product/lists/type/tag'
     },
     listConfig : {
-        prefix : 'product.tag.'
+        prefix : 'tag.'
     }
 }, 100);
 /*!
@@ -9695,7 +9431,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'product.stock.productid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'product.stock.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };
@@ -9716,7 +9452,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.stock.productid',
+                dataIndex : 'product.stock.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Product ID'),
                 width : 50,
                 hidden : true
@@ -9841,7 +9577,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'hidden',
-                            name : 'product.stock.productid'
+                            name : 'product.stock.parentid'
                         }, {
                             xtype : 'displayfield',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
@@ -9919,7 +9655,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         }
 
         this.mainForm.getForm().updateRecord(this.record);
-        this.record.data['product.stock.productid'] = this.listUI.itemUi.record.id;
+        this.record.data['product.stock.parentid'] = this.listUI.itemUi.record.id;
 
         if(this.action == 'add' || this.action == 'copy') {
             this.store.add(this.record);
@@ -10963,6 +10699,37 @@ Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.cata
         prefix : 'attribute.'
     }
 }, 50);
+/*!
+ * LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ */
+
+Ext.ns('MShop.panel.catalog');
+
+// hook catalog tag picker into the catalog ItemUi
+Ext.ux.ItemRegistry.registerItem('MShop.panel.catalog.ItemUi', 'MShop.panel.catalog.TagItemPickerUi', {
+    xtype : 'MShop.panel.tag.itempickerui',
+    itemConfig : {
+        recordName : 'Catalog_Lists',
+        idProperty : 'catalog.lists.id',
+        siteidProperty : 'catalog.lists.siteid',
+        listNamePrefix : 'catalog.lists.',
+        listTypeIdProperty : 'catalog.lists.type.id',
+        listTypeLabelProperty : 'catalog.lists.type.label',
+        listTypeControllerName : 'Catalog_Lists_Type',
+        listTypeCondition : {
+            '&&' : [{
+                '==' : {
+                    'catalog.lists.type.domain' : 'tag'
+                }
+            }]
+        },
+        listTypeKey : 'catalog/lists/type/tag'
+    },
+    listConfig : {
+        prefix : 'tag.'
+    }
+}, 100);
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2011
  * LGPLv3, http://opensource.org/licenses/LGPL-3.0
@@ -12149,7 +11916,7 @@ MShop.panel.customer.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'customer.address.refid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'customer.address.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };
@@ -12481,7 +12248,7 @@ MShop.panel.customer.address.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi,
     onBeforeSave : function(store, data) {
 
         if(data.create && data.create[0]) {
-            data.create[0].data['customer.address.refid'] = this.listUI.ParentItemUi.record.id;
+            data.create[0].data['customer.address.parentid'] = this.listUI.ParentItemUi.record.id;
         }
     }
 
@@ -13103,7 +12870,7 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'supplier.address.refid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'supplier.address.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };
@@ -13429,7 +13196,7 @@ MShop.panel.supplier.address.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     onBeforeSave : function(store, data) {
         if(data.create && data.create[0]) {
-            data.create[0].data['supplier.address.refid'] = this.listUI.ParentItemUi.record.id;
+            data.create[0].data['supplier.address.parentid'] = this.listUI.ParentItemUi.record.id;
         }
     }
 
@@ -14092,7 +13859,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'coupon.code.couponid' : this.ParentItemUi.record.data['coupon.id']
+                    'coupon.code.parentid' : this.ParentItemUi.record.data['coupon.id']
                 }
             }]
         };
@@ -14113,7 +13880,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     onFileSelect : function(fileSelector) {
         this.actionImport.onFileSelect(fileSelector, {
-            couponid : this.ParentItemUi.record.id
+            parentid : this.ParentItemUi.record.id
         });
     }
 
@@ -14242,7 +14009,7 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onBeforeSave : function(store, data) {
 
         if(data.create && data.create[0]) {
-            data.create[0].data['coupon.code.couponid'] = this.listUI.ParentItemUi.record.id;
+            data.create[0].data['coupon.code.parentid'] = this.listUI.ParentItemUi.record.id;
         }
     }
 
@@ -15383,7 +15150,7 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend(MShop.panel.Ab
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'order.base.product.attribute.productid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'order.base.product.attribute.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };
@@ -15761,7 +15528,7 @@ MShop.panel.order.base.service.attribute.ListUiSmall = Ext.extend(MShop.panel.Ab
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'order.base.service.attribute.serviceid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'order.base.service.attribute.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };
@@ -16880,6 +16647,274 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 });
 
 Ext.reg('MShop.panel.stock.warehouse.itemui', MShop.panel.stock.warehouse.ItemUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2011
+ * LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ */
+
+Ext.ns('MShop.panel.tag');
+
+MShop.panel.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
+    siteidProperty : 'tag.siteid',
+
+    initComponent : function() {
+
+        MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
+
+        this.items = [{
+            xtype : 'tabpanel',
+            activeTab : 0,
+            border : false,
+            itemId : 'MShop.panel.tag.ItemUi',
+            plugins : ['ux.itemregistry'],
+            items : [{
+                xtype : 'panel',
+                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                border : false,
+                layout : 'hbox',
+                layoutConfig : {
+                    align : 'stretch'
+                },
+                itemId : 'MShop.panel.tag.ItemUi.BasicPanel',
+                plugins : ['ux.itemregistry'],
+                defaults : {
+                    bodyCssClass : this.readOnlyClass
+                },
+                items : [{
+                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    xtype : 'form',
+                    border : false,
+                    flex : 1,
+                    ref : '../../mainForm',
+                    autoScroll : true,
+                    items : [{
+                        xtype : 'fieldset',
+                        style : 'padding-right: 25px;',
+                        border : false,
+                        flex : 1,
+                        labelAlign : 'top',
+                        defaults : {
+                            readOnly : this.fieldsReadOnly,
+                            anchor : '100%'
+                        },
+                        items : [{
+                            xtype : 'displayfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            name : 'tag.id'
+                        }, {
+                            xtype : 'combo',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            name : 'tag.typeid',
+                            mode : 'local',
+                            store : this.listUI.typeStore,
+                            displayField : 'tag.type.label',
+                            valueField : 'tag.type.id',
+                            forceSelection : true,
+                            triggerAction : 'all',
+                            allowBlank : false,
+                            typeAhead : true
+                        }, {
+                            xtype : 'MShop.elements.language.combo',
+                            name : 'tag.languageid'
+                        }, {
+                            xtype : 'textfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            name : 'tag.label',
+                            allowBlank : false,
+                            emptyText : MShop.I18n.dt('client/extjs', 'Tag value (required)')
+                        }, {
+                            xtype : 'displayfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            name : 'tag.ctime'
+                        }, {
+                            xtype : 'displayfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            name : 'tag.mtime'
+                        }, {
+                            xtype : 'displayfield',
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            name : 'tag.editor'
+                        }]
+                    }]
+                }]
+            }]
+        }];
+
+        MShop.panel.tag.ItemUi.superclass.initComponent.call(this);
+    },
+
+    afterRender : function() {
+        var label = this.record ? this.record.data['tag.label'] : MShop.I18n.dt('client/extjs', 'new');
+        //#: Tag item panel title with tag label ({0}) and site code ({1)}
+        var string = MShop.I18n.dt('client/extjs', 'Tag: {0} ({1})');
+        this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
+
+        MShop.panel.tag.ItemUi.superclass.afterRender.apply(this, arguments);
+    }
+});
+
+Ext.reg('MShop.panel.tag.itemui', MShop.panel.tag.ItemUi);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2011
+ * LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ */
+
+Ext.ns('MShop.panel.tag');
+
+MShop.panel.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
+
+    recordName : 'Product_Tag',
+    idProperty : 'tag.id',
+    siteidProperty : 'tag.siteid',
+    itemUiXType : 'MShop.panel.tag.itemui',
+
+    autoExpandColumn : 'product-tag-label',
+
+    filterConfig : {
+        filters : [{
+            dataIndex : 'tag.label',
+            operator : '=~',
+            value : ''
+        }]
+    },
+
+    getColumns : function() {
+        // make sure type store gets loaded in same batch as this grid data
+        this.typeStore = MShop.GlobalStoreMgr.get('Tag_Type');
+
+        return [{
+            xtype : 'gridcolumn',
+            dataIndex : 'tag.id',
+            header : MShop.I18n.dt('client/extjs', 'ID'),
+            sortable : true,
+            width : 50,
+            hidden : true
+        }, {
+            xtype : 'gridcolumn',
+            dataIndex : 'tag.typeid',
+            header : MShop.I18n.dt('client/extjs', 'Type'),
+            sortable : true,
+            width : 70,
+            renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "tag.type.label"], true)
+        }, {
+            xtype : 'gridcolumn',
+            dataIndex : 'tag.languageid',
+            header : MShop.I18n.dt('client/extjs', 'Language'),
+            sortable : true,
+            width : 70,
+            renderer : MShop.elements.language.renderer
+        }, {
+            xtype : 'gridcolumn',
+            dataIndex : 'tag.label',
+            header : MShop.I18n.dt('client/extjs', 'Label'),
+            sortable : true,
+            id : 'product-tag-label'
+        }, {
+            xtype : 'gridcolumn',
+            dataIndex : 'tag.ctime',
+            header : MShop.I18n.dt('client/extjs', 'Created'),
+            sortable : true,
+            width : 130,
+            editable : false,
+            hidden : true
+        }, {
+            xtype : 'gridcolumn',
+            dataIndex : 'tag.mtime',
+            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            sortable : true,
+            width : 130,
+            editable : false,
+            hidden : true
+        }, {
+            xtype : 'gridcolumn',
+            dataIndex : 'tag.editor',
+            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            sortable : true,
+            width : 130,
+            editable : false,
+            hidden : true
+        }];
+    }
+});
+
+Ext.reg('MShop.panel.tag.listuismall', MShop.panel.tag.ListUiSmall);
+/*!
+ * Copyright (c) Metaways Infosystems GmbH, 2011
+ * LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ */
+
+Ext.ns('MShop.panel.tag');
+
+MShop.panel.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
+
+    title : MShop.I18n.dt('client/extjs', 'Tags'),
+
+    initComponent : function() {
+
+        Ext.apply(this.itemConfig, {
+            title : MShop.I18n.dt('client/extjs', 'Associated tags'),
+            xtype : 'MShop.panel.listitemlistui',
+            domain : 'tag',
+            getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
+        });
+
+        Ext.apply(this.listConfig, {
+            title : MShop.I18n.dt('client/extjs', 'Available tags'),
+            xtype : 'MShop.panel.tag.listuismall'
+        });
+
+        MShop.panel.tag.ItemPickerUi.superclass.initComponent.call(this);
+    },
+
+    getAdditionalColumns : function() {
+
+        var conf = this.itemConfig;
+        this.typeStore = MShop.GlobalStoreMgr.get('Tag_Type', conf.domain);
+        this.listTypeStore = MShop.GlobalStoreMgr.get(conf.listTypeControllerName, conf.domain);
+
+        return [
+            {
+                xtype : 'gridcolumn',
+                dataIndex : conf.listNamePrefix + 'typeid',
+                header : MShop.I18n.dt('client/extjs', 'List type'),
+                id : 'listtype',
+                width : 70,
+                renderer : this.typeColumnRenderer.createDelegate(this,
+                    [this.listTypeStore, conf.listTypeLabelProperty], true)
+            },
+            {
+                xtype : 'gridcolumn',
+                dataIndex : conf.listNamePrefix + 'refid',
+                header : MShop.I18n.dt('client/extjs', 'Type'),
+                id : 'reftype',
+                width : 70,
+                renderer : this.refTypeColumnRenderer.createDelegate(this, [
+                    this.typeStore,
+                    'tag.typeid',
+                    'tag.type.label'], true)
+            },
+            {
+                xtype : 'gridcolumn',
+                dataIndex : conf.listNamePrefix + 'refid',
+                header : MShop.I18n.dt('client/extjs', 'Language'),
+                id : 'reflang',
+                width : 70,
+                renderer : this.refLangColumnRenderer.createDelegate(this, ['tag.languageid'], true)
+            },
+            {
+                xtype : 'gridcolumn',
+                dataIndex : conf.listNamePrefix + 'refid',
+                header : MShop.I18n.dt('client/extjs', 'Label'),
+                id : 'refcontent',
+                renderer : this.refColumnRenderer.createDelegate(this, ['tag.label'], true)
+            }];
+    }
+});
+
+Ext.reg('MShop.panel.tag.itempickerui', MShop.panel.tag.ItemPickerUi);
 /*!
  * Copyright (c) Metaways Infosystems GmbH, 2014
  * LGPLv3, http://opensource.org/licenses/LGPL-3.0

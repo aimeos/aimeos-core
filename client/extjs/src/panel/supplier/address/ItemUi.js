@@ -185,7 +185,7 @@ MShop.panel.supplier.address.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     onBeforeSave : function(store, data) {
         if(data.create && data.create[0]) {
-            data.create[0].data['supplier.address.refid'] = this.listUI.ParentItemUi.record.id;
+            data.create[0].data['supplier.address.parentid'] = this.listUI.ParentItemUi.record.id;
         }
     }
 

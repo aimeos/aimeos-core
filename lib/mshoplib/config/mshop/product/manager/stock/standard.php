@@ -16,7 +16,7 @@ return array(
 	'insert' => array(
 		'ansi' => '
 			INSERT INTO "mshop_product_stock" (
-				"prodid", "siteid", "warehouseid", "stocklevel", "backdate",
+				"parentid", "siteid", "warehouseid", "stocklevel", "backdate",
 				"mtime", "editor", "ctime"
 			) VALUES (
 				?, ?, ?, ?, ?, ?, ?, ?
@@ -26,14 +26,14 @@ return array(
 	'update' => array(
 		'ansi' => '
 			UPDATE "mshop_product_stock"
-			SET "prodid" = ?, "siteid" = ?, "warehouseid" = ?,
+			SET "parentid" = ?, "siteid" = ?, "warehouseid" = ?,
 				"stocklevel" = ?, "backdate" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mprost."id", mprost."prodid", mprost."siteid",
+			SELECT DISTINCT mprost."id", mprost."parentid", mprost."siteid",
 				mprost."warehouseid", mprost."stocklevel", mprost."backdate",
 				mprost."mtime", mprost."editor", mprost."ctime"
 			FROM "mshop_product_stock" AS mprost

@@ -50,7 +50,7 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'supplier.address.refid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'supplier.address.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };

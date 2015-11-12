@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Order\Item\Base\Product\Attribute;
  * @subpackage Order
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface
 {
 	/**
 	 * Returns the original attribute ID of the ordered product attribute.
@@ -35,21 +35,6 @@ interface Iface
 	 * @return void
 	 */
 	public function setAttributeId( $id );
-
-	/**
-	 * Returns the product ID of the ordered product.
-	 *
-	 * @return string Product ID of the ordered product
-	 */
-	public function getProductId();
-
-	/**
-	 * Sets the product ID of the ordered product.
-	 *
-	 * @param string $id product ID of the ordered product
-	 * @return void
-	 */
-	public function setProductId( $id );
 
 	/**
 	 * Returns the type of the product attibute.

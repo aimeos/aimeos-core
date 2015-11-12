@@ -14,7 +14,7 @@ namespace Aimeos\MShop\Order\Manager\Base\Service\Attribute;
 
 /**
  * Interface for order base attribute manager.
- * 
+ *
  * @package MShop
  * @subpackage Order
  */

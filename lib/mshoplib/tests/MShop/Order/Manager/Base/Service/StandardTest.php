@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$expr[] = $search->compare( '!=', 'order.base.service.attribute.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.siteid', $siteid );
-		$expr[] = $search->compare( '!=', 'order.base.service.attribute.serviceid', null );
+		$expr[] = $search->compare( '!=', 'order.base.service.attribute.parentid', null );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.code', 'NAME' );
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.value', '"CreditCard"' );
 		$expr[] = $search->compare( '>=', 'order.base.service.attribute.mtime', '1970-01-01 00:00:00' );

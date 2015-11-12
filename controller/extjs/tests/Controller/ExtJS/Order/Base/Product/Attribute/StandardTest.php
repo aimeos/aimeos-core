@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'order.base.product.attribute.productid' => $expected->getId(),
+				'order.base.product.attribute.parentid' => $expected->getId(),
 				'order.base.product.attribute.code' => 'color',
 				'order.base.product.attribute.value' => 'purple',
 				'order.base.product.attribute.name' => 'Lila'

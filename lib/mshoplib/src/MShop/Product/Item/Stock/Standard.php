@@ -36,26 +36,26 @@ class Standard
 
 
 	/**
-	 * Returns the product Id.
+	 * Returns the product ID
 	 *
-	 * @return integer Product Id
+	 * @return integer Product ID
 	 */
-	public function getProductId()
+	public function getParentId()
 	{
-		return ( isset( $this->values['prodid'] ) ? (int) $this->values['prodid'] : null );
+		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
 	}
 
 
 	/**
-	 * Sets the Product Id.
+	 * Sets the new product ID
 	 *
-	 * @param integer $prodid New product Id
+	 * @param integer $parentid New product ID
 	 */
-	public function setProductId( $prodid )
+	public function setParentId( $parentid )
 	{
-		if( $prodid == $this->getProductId() ) { return; }
+		if( $parentid == $this->getParentId() ) { return; }
 
-		$this->values['prodid'] = (int) $prodid;
+		$this->values['parentid'] = (int) $parentid;
 		$this->setModified();
 	}
 
@@ -169,7 +169,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'product.stock.productid': $this->setProductId( $value ); break;
+				case 'product.stock.parentid': $this->setParentId( $value ); break;
 				case 'product.stock.warehouseid': $this->setWarehouseId( $value ); break;
 				case 'product.stock.stocklevel': $this->setStocklevel( $value ); break;
 				case 'product.stock.dateback': $this->setDateBack( $value ); break;
@@ -190,7 +190,7 @@ class Standard
 	{
 		$list = parent::toArray();
 
-		$list['product.stock.productid'] = $this->getProductId();
+		$list['product.stock.parentid'] = $this->getParentId();
 		$list['product.stock.warehouseid'] = $this->getWarehouseId();
 		$list['product.stock.stocklevel'] = $this->getStocklevel();
 		$list['product.stock.dateback'] = $this->getDateBack();

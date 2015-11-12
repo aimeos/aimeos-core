@@ -16,7 +16,7 @@ return array(
 	'insert' => array(
 		'ansi' => '
 			INSERT INTO "mshop_coupon_code" (
-				"siteid", "couponid", "code", "count", "start", "end", "mtime",
+				"siteid", "parentid", "code", "count", "start", "end", "mtime",
 				"editor", "ctime"
 			) VALUES (
 				?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -26,14 +26,14 @@ return array(
 	'update' => array(
 		'ansi' => '
 			UPDATE "mshop_coupon_code"
-			SET "siteid" = ?, "couponid" = ?, "code" = ?, "count" = ?,
+			SET "siteid" = ?, "parentid" = ?, "code" = ?, "count" = ?,
 				"start" = ?, "end" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcouco."id", mcouco."couponid", mcouco."siteid",
+			SELECT DISTINCT mcouco."id", mcouco."parentid", mcouco."siteid",
 				mcouco."code", mcouco."count", mcouco."start", mcouco."end",
 				mcouco."mtime", mcouco."editor", mcouco."ctime"
 			FROM "mshop_coupon_code" AS mcouco

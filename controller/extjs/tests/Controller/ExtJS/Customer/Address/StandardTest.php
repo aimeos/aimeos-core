@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$saveParam = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'customer.address.refid' => $resultType['items'][0]->{'customer.id'},
+				'customer.address.parentid' => $resultType['items'][0]->{'customer.id'},
 				'customer.address.salutation' => 'mrs',
 				'customer.address.company' => 'Aimeos',
 				'customer.address.vatid' => 'DE123456789',
@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'customer.address.id'} );
 		$this->assertEquals( $saved['items']->{'customer.address.id'}, $searched['items'][0]->{'customer.address.id'} );
-		$this->assertEquals( $saved['items']->{'customer.address.refid'}, $searched['items'][0]->{'customer.address.refid'} );
+		$this->assertEquals( $saved['items']->{'customer.address.parentid'}, $searched['items'][0]->{'customer.address.parentid'} );
 		$this->assertEquals( $saved['items']->{'customer.address.salutation'}, $searched['items'][0]->{'customer.address.salutation'} );
 		$this->assertEquals( $saved['items']->{'customer.address.company'}, $searched['items'][0]->{'customer.address.company'} );
 		$this->assertEquals( $saved['items']->{'customer.address.vatid'}, $searched['items'][0]->{'customer.address.vatid'} );

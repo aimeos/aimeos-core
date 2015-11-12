@@ -26,7 +26,7 @@ class Standard
 		'product.stock.id'=> array(
 			'code'=>'product.stock.id',
 			'internalcode'=>'mprost."id"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_product_stock" AS mprost ON ( mprost."prodid" = mpro."id" )' ),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_product_stock" AS mprost ON ( mprost."parentid" = mpro."id" )' ),
 			'label'=>'Product stock ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -40,9 +40,9 @@ class Standard
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.stock.productid'=> array(
-			'code'=>'product.stock.productid',
-			'internalcode'=>'mprost."prodid"',
+		'product.stock.parentid'=> array(
+			'code'=>'product.stock.parentid',
+			'internalcode'=>'mprost."parentid"',
 			'label'=>'Product stock product ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -227,7 +227,7 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $item->getProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 3, $item->getWarehouseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getStocklevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -390,7 +390,7 @@ class Standard
 	/**
 	 * Search for stock items based on the given critera.
 	 *
-	 * Possible search keys: 'product.stock.id', 'product.stock.prodid', 'product.stock.siteid',
+	 * Possible search keys: 'product.stock.id', 'product.stock.parentid', 'product.stock.siteid',
 	 * 'product.stock.warehouseid', 'product.stock.stocklevel', 'product.stock.backdate'
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
@@ -697,19 +697,19 @@ class Standard
 		$search = $this->createSearch();
 		$expr = array(
 			$search->compare( '==', 'product.stock.siteid', $context->getLocale()->getSitePath() ),
-			$search->compare( '==', 'product.stock.productid', $productIds ),
+			$search->compare( '==', 'product.stock.parentid', $productIds ),
 			$search->compare( '==', 'product.stock.warehouseid', $warehouseIds ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$types = array(
 			'product.stock.siteid' => $this->searchConfig['product.stock.siteid']['internaltype'],
-			'product.stock.productid' => $this->searchConfig['product.stock.productid']['internaltype'],
+			'product.stock.parentid' => $this->searchConfig['product.stock.parentid']['internaltype'],
 			'product.stock.warehouseid' => $this->searchConfig['product.stock.warehouseid']['internaltype'],
 		);
 		$translations = array(
 			'product.stock.siteid' => '"siteid"',
-			'product.stock.productid' => '"prodid"',
+			'product.stock.parentid' => '"parentid"',
 			'product.stock.warehouseid' => '"warehouseid"',
 		);
 
@@ -772,7 +772,7 @@ class Standard
 	 * Creates new stock item object.
 	 *
 	 * @param array $values Possible optional array keys can be given:
-	 * id, prodid, siteid, warehouseid, stocklevel, backdate
+	 * id, parentid, siteid, warehouseid, stocklevel, backdate
 	 * @return \Aimeos\MShop\Product\Item\Stock\Standard New stock item object
 	 */
 	protected function createItemBase( array $values = array() )

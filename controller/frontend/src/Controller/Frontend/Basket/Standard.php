@@ -217,7 +217,7 @@ class Standard
 
 		$search = $manager->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'coupon.id', $codeItem->getCouponId() ),
+			$search->compare( '==', 'coupon.id', $codeItem->getParentId() ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -737,7 +737,7 @@ class Standard
 
 		$search = $manager->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'product.stock.productid', $prodid ),
+			$search->compare( '==', 'product.stock.parentid', $prodid ),
 			$search->getConditions(),
 			$search->compare( '==', 'product.stock.warehouse.code', $warehouse ),
 		);

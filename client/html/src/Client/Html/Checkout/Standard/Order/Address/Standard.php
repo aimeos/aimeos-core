@@ -258,7 +258,7 @@ class Standard
 				$orderAddrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/address' );
 
 				$item = $addrManager->createItem();
-				$item->setRefId( $customerId );
+				$item->setParentId( $customerId );
 				$item->copyFrom( $addr );
 
 				$addrManager->saveItem( $item );

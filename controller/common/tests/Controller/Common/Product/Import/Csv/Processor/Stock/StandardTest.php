@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.productid', $prodid ) );
+		$search->setConditions( $search->compare( '==', 'product.stock.parentid', $prodid ) );
 
 		return $manager->searchItems( $search );
 	}

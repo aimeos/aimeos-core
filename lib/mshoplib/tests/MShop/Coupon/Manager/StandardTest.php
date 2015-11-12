@@ -216,7 +216,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$expr[] = $search->compare( '!=', 'coupon.code.id', null );
 		$expr[] = $search->compare( '!=', 'coupon.code.siteid', null );
-		$expr[] = $search->compare( '!=', 'coupon.code.couponid', null );
+		$expr[] = $search->compare( '!=', 'coupon.code.parentid', null );
 		$expr[] = $search->compare( '==', 'coupon.code.code', '5678' );
 		$expr[] = $search->compare( '>=', 'coupon.code.count', 0 );
 		$expr[] = $search->compare( '==', 'coupon.code.datestart', '2000-01-01 00:00:00' );

@@ -33,7 +33,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 		$this->plugin->setProvider( 'PropertyAdd' );
 		$this->plugin->setStatus( '1' );
 
-		$this->plugin->setConfig( array( 'product.stock.productid' => array(
+		$this->plugin->setConfig( array( 'product.stock.parentid' => array(
 			'product.stock.warehouseid',
 			'product.stock.editor',
 			'product.stock.stocklevel',
@@ -98,7 +98,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 			'product.lists.parentid' => array(
 				'product.lists.domain',
 			),
-			'product.stock.productid' => array(
+			'product.stock.parentid' => array(
 				'product.stock.stocklevel'
 			)
 		) );
@@ -132,7 +132,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 	{
 		// Non-existent property:
 
-		$this->plugin->setConfig( array( 'product.stock.productid' => array(
+		$this->plugin->setConfig( array( 'product.stock.parentid' => array(
 			'product.stock.quatsch',
 			'product.stock.editor',
 			'product.stock.stocklevel',

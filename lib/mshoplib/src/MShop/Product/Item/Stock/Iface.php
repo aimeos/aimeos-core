@@ -18,23 +18,8 @@ namespace Aimeos\MShop\Product\Item\Stock;
  * @package MShop
  * @subpackage Product
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface
 {
-	/**
-	 * Returns the product Id.
-	 *
-	 * @return integer Product Id
-	 */
-	public function getProductId();
-
-	/**
-	 * Sets the product Id.
-	 *
-	 * @param integer $prodid New product Id
-	 * @return void
-	 */
-	public function setProductId( $prodid );
-
 	/**
 	 * Returns the warehouse Id.
 	 *

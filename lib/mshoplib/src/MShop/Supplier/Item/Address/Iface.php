@@ -16,21 +16,8 @@ namespace Aimeos\MShop\Supplier\Item\Address;
  * @package MShop
  * @subpackage Supplier
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\Common\Item\Position\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
+	\Aimeos\MShop\Common\Item\Parentid\Iface
 {
-	/**
-	 * Returns the reference id regarding to the product suppliercode of the address.
-	 *
-	 * @return string Address reference id
-	 */
-	public function getRefId();
-
-
-	/**
-	 * Sets the new reference id regarding to the product suppliercode of the address.
-	 *
-	 * @param string $refid New reference id of the address
-	 * @return void
-	 */
-	public function setRefId( $refid );
 }

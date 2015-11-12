@@ -351,7 +351,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$ordProdAttr->setId( null );
-			$ordProdAttr->setProductId( $ordProds[$dataset['ordprodid']] );
+			$ordProdAttr->setParentId( $ordProds[$dataset['ordprodid']] );
 			$ordProdAttr->setCode( $dataset['code'] );
 			$ordProdAttr->setValue( $dataset['value'] );
 			$ordProdAttr->setName( $dataset['name'] );
@@ -395,7 +395,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$ordServAttr->setId( null );
-			$ordServAttr->setServiceId( $ordServices[$dataset['ordservid']] );
+			$ordServAttr->setParentId( $ordServices[$dataset['ordservid']] );
 			$ordServAttr->setCode( $dataset['code'] );
 			$ordServAttr->setValue( $dataset['value'] );
 			$ordServAttr->setName( $dataset['name'] );

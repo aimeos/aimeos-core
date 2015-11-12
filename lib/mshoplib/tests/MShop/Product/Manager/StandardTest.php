@@ -285,7 +285,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$expr[] = $search->compare( '!=', 'product.stock.id', null );
 		$expr[] = $search->compare( '!=', 'product.stock.siteid', null );
-		$expr[] = $search->compare( '!=', 'product.stock.productid', null );
+		$expr[] = $search->compare( '!=', 'product.stock.parentid', null );
 		$expr[] = $search->compare( '!=', 'product.stock.warehouseid', null );
 		$expr[] = $search->compare( '==', 'product.stock.stocklevel', 1000 );
 		$expr[] = $search->compare( '==', 'product.stock.dateback', '2010-04-01 00:00:00' );

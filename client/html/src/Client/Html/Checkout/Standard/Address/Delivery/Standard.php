@@ -271,7 +271,7 @@ class Standard
 				$customerAddressManager = \Aimeos\MShop\Factory::createManager( $context, 'customer/address' );
 				$address = $customerAddressManager->getItem( $id );
 
-				if( $address->getRefId() != $context->getUserId() ) {
+				if( $address->getParentId() != $context->getUserId() ) {
 					throw new \Aimeos\Client\Html\Exception( sprintf( 'Address with ID "%1$s" not found', $id ) );
 				}
 
@@ -325,7 +325,7 @@ class Standard
 				$customerAddressManager = \Aimeos\MShop\Factory::createManager( $context, 'customer/address' );
 				$address = $customerAddressManager->getItem( $option );
 
-				if( $address->getRefId() != $context->getUserId() ) {
+				if( $address->getParentId() != $context->getUserId() ) {
 					throw new \Aimeos\Client\Html\Exception( sprintf( 'Address with ID "%1$s" not found', $option ) );
 				}
 

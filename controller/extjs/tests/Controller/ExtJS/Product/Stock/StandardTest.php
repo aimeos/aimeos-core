@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' =>  (object) array(
-				'product.stock.productid' => $productItem->getId(),
+				'product.stock.parentid' => $productItem->getId(),
 				'product.stock.warehouseid' => $warehouseItem->getId(),
 				'product.stock.stocklevel' => 999,
 				'product.stock.dateback' => '2000-01-01 00:00:01',
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'product.stock.id'} );
 		$this->assertEquals( $saved['items']->{'product.stock.id'}, $searched['items'][0]->{'product.stock.id'} );
-		$this->assertEquals( $saved['items']->{'product.stock.productid'}, $searched['items'][0]->{'product.stock.productid'} );
+		$this->assertEquals( $saved['items']->{'product.stock.parentid'}, $searched['items'][0]->{'product.stock.parentid'} );
 		$this->assertEquals( $saved['items']->{'product.stock.warehouseid'}, $searched['items'][0]->{'product.stock.warehouseid'} );
 		$this->assertEquals( $saved['items']->{'product.stock.stocklevel'}, $searched['items'][0]->{'product.stock.stocklevel'} );
 		$this->assertEquals( $saved['items']->{'product.stock.dateback'}, $searched['items'][0]->{'product.stock.dateback'} );

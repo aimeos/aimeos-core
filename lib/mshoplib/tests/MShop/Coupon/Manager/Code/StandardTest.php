@@ -41,7 +41,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->code = $this->object->createItem();
 		$this->code->setCode( 'abcd' );
 		$this->code->setCount( '1' );
-		$this->code->setCouponId( $item->getId() );
+		$this->code->setParentId( $item->getId() );
 
 	}
 
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getCouponId(), $itemSaved->getCouponId() );
+		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getCount(), $itemSaved->getCount() );
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getCouponId(), $itemUpd->getCouponId() );
+		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getCount(), $itemUpd->getCount() );
 		$this->assertEquals( $itemExp->getDateStart(), $itemUpd->getDateStart() );
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'coupon.code.id', null );
 		$expr[] = $search->compare( '!=', 'coupon.code.siteid', null );
-		$expr[] = $search->compare( '!=', 'coupon.code.couponid', null );
+		$expr[] = $search->compare( '!=', 'coupon.code.parentid', null );
 		$expr[] = $search->compare( '==', 'coupon.code.code', 'OPQR' );
 		$expr[] = $search->compare( '==', 'coupon.code.count', 2000000 );
 		$expr[] = $search->compare( '==', 'coupon.code.datestart', null );

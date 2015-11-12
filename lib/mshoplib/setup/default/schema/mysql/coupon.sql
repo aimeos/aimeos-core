@@ -63,7 +63,7 @@ CREATE TABLE "mshop_coupon_code" (
 	-- Unique coupon code id
 	"id" INTEGER NOT NULL AUTO_INCREMENT,
 	-- Unique coupon id, references mshop_coupon.id
-	"couponid" INTEGER NOT NULL,
+	"parentid" INTEGER NOT NULL,
 	-- site id, references mshop_locale_site.id
 	"siteid" INTEGER NOT NULL,
 	-- coupon code
@@ -84,8 +84,8 @@ CONSTRAINT "pk_mscouco_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_mscouco_sid_code"
 	UNIQUE ("siteid", "code"),
-CONSTRAINT "fk_mscouco_couponid"
-	FOREIGN KEY ("couponid")
+CONSTRAINT "fk_mscouco_parentid"
+	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_coupon" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE

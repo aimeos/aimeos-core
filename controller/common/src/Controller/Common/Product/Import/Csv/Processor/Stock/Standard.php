@@ -79,7 +79,7 @@ class Standard
 					$list['product.stock.stocklevel'] = null;
 				}
 
-				$list['product.stock.productid'] = $product->getId();
+				$list['product.stock.parentid'] = $product->getId();
 
 				if( ( $item = array_pop( $items ) ) === null ) {
 					$item = $manager->createItem();
@@ -116,7 +116,7 @@ class Standard
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.productid', $prodid ) );
+		$search->setConditions( $search->compare( '==', 'product.stock.parentid', $prodid ) );
 
 		return $manager->searchItems( $search );
 	}

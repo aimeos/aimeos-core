@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$item->setId( null );
-		$item->setProductId( $product->getId() );
+		$item->setParentId( $product->getId() );
 		$this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
+		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
 		$this->assertEquals( $item->getWarehouseId(), $itemSaved->getWarehouseId() );
 		$this->assertEquals( $item->getStockLevel(), $itemSaved->getStockLevel() );
 		$this->assertEquals( $item->getDateBack(), $itemSaved->getDateBack() );
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
+		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
 		$this->assertEquals( $itemExp->getWarehouseId(), $itemUpd->getWarehouseId() );
 		$this->assertEquals( $itemExp->getStockLevel(), $itemUpd->getStockLevel() );
 		$this->assertEquals( $itemExp->getDateBack(), $itemUpd->getDateBack() );
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'product.stock.id', null );
 		$expr[] = $search->compare( '!=', 'product.stock.siteid', null );
-		$expr[] = $search->compare( '!=', 'product.stock.productid', null );
+		$expr[] = $search->compare( '!=', 'product.stock.parentid', null );
 		$expr[] = $search->compare( '!=', 'product.stock.warehouseid', null );
 		$expr[] = $search->compare( '==', 'product.stock.stocklevel', 1000 );
 		$expr[] = $search->compare( '==', 'product.stock.dateback', '2010-04-01 00:00:00' );
@@ -194,7 +194,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
-		$productCode = $productManager->getItem( $stockItem->getProductId() )->getCode();
+		$productCode = $productManager->getItem( $stockItem->getParentId() )->getCode();
 
 		$warehouseManager = $this->object->getSubManager( 'warehouse' );
 		$warehouseCode = $warehouseManager->getItem( $stockItem->getWarehouseId() )->getCode();
@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
-		$productCode = $productManager->getItem( $stockItem->getProductId() )->getCode();
+		$productCode = $productManager->getItem( $stockItem->getParentId() )->getCode();
 
 		$warehouseManager = $this->object->getSubManager( 'warehouse' );
 		$warehouseCode = $warehouseManager->getItem( $stockItem->getWarehouseId() )->getCode();

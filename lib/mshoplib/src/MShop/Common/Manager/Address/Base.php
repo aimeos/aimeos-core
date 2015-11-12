@@ -127,7 +127,7 @@ abstract class Base
 			$stmt = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getRefId() );
+			$stmt->bind( 2, $item->getParentId() );
 			$stmt->bind( 3, $item->getCompany() );
 			$stmt->bind( 4, $item->getVatId() );
 			$stmt->bind( 5, $item->getSalutation() );

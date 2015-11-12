@@ -40,26 +40,26 @@ class Standard
 
 
 	/**
-	 * Returns the reference id regarding to the product suppliercode of the address.
+	 * Returns the customer ID this address belongs to
 	 *
-	 * @return string Address reference id
+	 * @return string Customer ID of the address
 	 */
-	public function getRefId()
+	public function getParentId()
 	{
-		return ( isset( $this->values['refid'] ) ? (string) $this->values['refid'] : '' );
+		return ( isset( $this->values['parentid'] ) ? (string) $this->values['parentid'] : '' );
 	}
 
 
 	/**
-	 * Sets the new reference id regarding to the product suppliercode of the address.
+	 * Sets the new customer ID this address belongs to
 	 *
-	 * @param string $refid New reference id of the address
+	 * @param string $parentid New customer ID of the address
 	 */
-	public function setRefId( $refid )
+	public function setParentId( $parentid )
 	{
-		if( $refid == $this->getRefId() ) { return; }
+		if( $parentid == $this->getParentId() ) { return; }
 
-		$this->values['refid'] = (string) $refid;
+		$this->values['parentid'] = (string) $parentid;
 		$this->setModified();
 	}
 
@@ -104,7 +104,7 @@ class Standard
 		{
 			switch( $key )
 			{
-				case $this->prefix . 'refid': $this->setRefId( $value ); break;
+				case $this->prefix . 'parentid': $this->setParentId( $value ); break;
 				case $this->prefix . 'position': $this->setPosition( $value ); break;
 				default: $unknown[$key] = $value;
 			}
@@ -123,7 +123,7 @@ class Standard
 	{
 		$properties = parent::toArray();
 
-		$properties[$this->prefix . 'refid'] = $this->getRefId();
+		$properties[$this->prefix . 'parentid'] = $this->getParentId();
 		$properties[$this->prefix . 'position'] = $this->getPosition();
 
 		return $properties;

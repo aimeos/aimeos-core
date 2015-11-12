@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$addressValues = array(
-			'refid' => 'referenceid',
+			'parentid' => 'referenceid',
 			'pos' => 1,
 		);
 
@@ -192,7 +192,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetPaymentAddress()
 	{
 		$address = $this->object->getPaymentAddress();
-		$this->assertEquals( $address->getRefId(), 'referenceid' );
+		$this->assertEquals( $address->getParentId(), 'referenceid' );
 		$this->assertEquals( $address->getCompany(), 'unitCompany' );
 		$this->assertEquals( $address->getVatID(), 'DE999999999' );
 		$this->assertEquals( $address->getSalutation(), \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR );

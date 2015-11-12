@@ -16,7 +16,7 @@ return array(
 	'insert' => array(
 		'ansi' => '
 			INSERT INTO "mshop_supplier_address" (
-				"siteid", "refid", "company", "vatid", "salutation", "title",
+				"siteid", "parentid", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
 				"email", "telefax", "website", "flag", "pos", "mtime",
@@ -29,7 +29,7 @@ return array(
 	'update' => array(
 		'ansi' => '
 			UPDATE "mshop_supplier_address"
-			SET "siteid" = ?, "refid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+			SET "siteid" = ?, "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 				"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 				"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 				"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
@@ -40,7 +40,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT msupad."id", msupad."siteid", msupad."refid",
+			SELECT DISTINCT msupad."id", msupad."siteid", msupad."parentid",
 				msupad."company", msupad."vatid", msupad."salutation", msupad."title",
 				msupad."firstname", msupad."lastname", msupad."address1",
 				msupad."address2", msupad."address3", msupad."postal",

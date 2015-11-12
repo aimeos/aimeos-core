@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'order.base.service.attribute.serviceid' => $expected->getId(),
+				'order.base.service.attribute.parentid' => $expected->getId(),
 				'order.base.service.attribute.code' => 'FooBar',
 				'order.base.service.attribute.value' => 'ValueTest',
 				'order.base.service.attribute.name' => 'TestName'

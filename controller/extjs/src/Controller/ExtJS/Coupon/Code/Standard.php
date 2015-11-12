@@ -43,7 +43,7 @@ class Standard
 	 */
 	public function uploadFile( \stdClass $params )
 	{
-		$this->checkParams( $params, array( 'site', 'couponid' ) );
+		$this->checkParams( $params, array( 'site', 'parentid' ) );
 		$this->setLocale( $params->site );
 
 		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
@@ -126,7 +126,7 @@ class Standard
 					'job.method' => 'Coupon_Code.importFile',
 					'job.parameter' => array(
 						'site' => $params->site,
-						'couponid' => $params->couponid,
+						'parentid' => $params->parentid,
 						'items' => $dest,
 					),
 					'job.status' => 1,
@@ -151,7 +151,7 @@ class Standard
 	 */
 	public function importFile( \stdClass $params )
 	{
-		$this->checkParams( $params, array( 'site', 'couponid', 'items' ) );
+		$this->checkParams( $params, array( 'site', 'parentid', 'items' ) );
 		$this->setLocale( $params->site );
 
 		/** controller/extjs/coupon/code/standard/container/type
@@ -231,7 +231,7 @@ class Standard
 			$container = \Aimeos\MW\Container\Factory::getContainer( $path, $type, $format, $options );
 
 			foreach( $container as $content ) {
-				$this->importContent( $content, $params->couponid );
+				$this->importContent( $content, $params->parentid );
 			}
 
 			unlink( $path );
@@ -256,7 +256,7 @@ class Standard
 		$list['Coupon_Code.uploadFile'] = array(
 			"parameters" => array(
 				array( "type" => "string", "name" => "site", "optional" => false ),
-				array( "type" => "string", "name" => "couponid", "optional" => false ),
+				array( "type" => "string", "name" => "parentid", "optional" => false ),
 			),
 			"returns" => "array",
 		);
@@ -264,7 +264,7 @@ class Standard
 		$list['Coupon_Code.importFile'] = array(
 			"parameters" => array(
 				array( "type" => "string", "name" => "site", "optional" => false ),
-				array( "type" => "string", "name" => "couponid", "optional" => false ),
+				array( "type" => "string", "name" => "parentid", "optional" => false ),
 				array( "type" => "array", "name" => "items", "optional" => false ),
 			),
 			"returns" => "array",
@@ -340,7 +340,7 @@ class Standard
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'coupon/code' );
 
 		$item = $manager->createItem();
-		$item->setCouponId( $couponId );
+		$item->setParentId( $couponId );
 
 		$manager->begin();
 

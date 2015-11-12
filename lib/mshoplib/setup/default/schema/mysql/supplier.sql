@@ -142,7 +142,7 @@ CREATE TABLE "mshop_supplier_address" (
 	-- site id, references mshop_locale_site.id
 	"siteid" INTEGER NOT NULL,
 	-- reference id for supplier
-	"refid" INTEGER NOT NULL,
+	"parentid" INTEGER NOT NULL,
 	-- company name
 	"company" VARCHAR(100) NOT NULL,
 	-- vatid
@@ -191,8 +191,8 @@ CREATE TABLE "mshop_supplier_address" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mssupad_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "fk_mssupad_refid"
-	FOREIGN KEY ("refid")
+CONSTRAINT "fk_mssupad_parentid"
+	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_supplier" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE
@@ -200,4 +200,4 @@ CONSTRAINT "fk_mssupad_refid"
 
 CREATE INDEY "idx_mssupad_langid" ON "mshop_supplier_address" ("langid");
 
-CREATE INDEX "idx_mssupad_sid_rid" ON "mshop_supplier_address" ("siteid", "refid");
+CREATE INDEX "idx_mssupad_sid_rid" ON "mshop_supplier_address" ("siteid", "parentid");

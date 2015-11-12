@@ -67,10 +67,10 @@ class ProductStock
 		$stockManager = \Aimeos\MShop\Factory::createManager( $context, 'product/stock' );
 
 		$search = $stockManager->createSearch();
-		$expr = array( $search->compare( '==', 'product.stock.productid', array_keys( $productQuantities ) ) );
+		$expr = array( $search->compare( '==', 'product.stock.parentid', array_keys( $productQuantities ) ) );
 
 		if( isset( $siteConfig['repository'] ) ) {
-			$expr[] = $search->compare( '==', 'product.stock.warehouse.code', $siteConfig['repository'] );
+			$expr[] = $search->compare( '==', 'product.stock.warehouse.code', $siteConfig['warehouse'] );
 		}
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -78,10 +78,11 @@ class ProductStock
 
 		foreach( $checkItems as $checkItem )
 		{
+			$parentid = $checkItem->getParentId();
 			$stocklevel = $checkItem->getStocklevel();
 
-			if( $stocklevel !== null && $stocklevel < $productQuantities[$checkItem->getProductId()] ) {
-				$outOfStock[$positions[$checkItem->getProductId()]] = 'stock.notenough';
+			if( $stocklevel !== null && $stocklevel < $productQuantities[$parentid] ) {
+				$outOfStock[$positions[$parentid]] = 'stock.notenough';
 			}
 		}
 

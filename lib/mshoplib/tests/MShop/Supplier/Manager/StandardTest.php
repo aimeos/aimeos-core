@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$expr[] = $search->compare( '!=', 'supplier.address.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.address.siteid', null );
-		$expr[] = $search->compare( '!=', 'supplier.address.refid', '' );
+		$expr[] = $search->compare( '!=', 'supplier.address.parentid', '' );
 		$expr[] = $search->compare( '==', 'supplier.address.company', 'Example company' );
 		$expr[] = $search->compare( '==', 'supplier.address.vatid', 'DE999999999' );
 		$expr[] = $search->compare( '==', 'supplier.address.salutation', 'mrs' );

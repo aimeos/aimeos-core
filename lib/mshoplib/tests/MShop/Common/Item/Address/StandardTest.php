@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->values = array(
 			'id' => 23,
 			'siteid' => 12,
-			'refid' => 'referenceid',
+			'parentid' => 'referenceid',
 			'company' => 'unitCompany',
 			'vatid' => 'DE999999999',
 			'salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
@@ -85,16 +85,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertNull( $this->object->getId() );
 	}
 
-	public function testGetRefId()
+	public function testGetParentfId()
 	{
-		$this->assertEquals( 'referenceid', $this->object->getRefId() );
+		$this->assertEquals( 'referenceid', $this->object->getParentId() );
 	}
 
-	public function testSetRefId()
+	public function testSetParentId()
 	{
-		$this->object->setRefId( 'unitreference' );
+		$this->object->setParentId( 'unitreference' );
 		$this->assertTrue( $this->object->isModified() );
-		$this->assertEquals( 'unitreference', $this->object->getRefId() );
+		$this->assertEquals( 'unitreference', $this->object->getParentId() );
 	}
 
 	public function testGetCompany()
@@ -405,7 +405,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$list = array(
 			'common.address.id' => 1,
-			'common.address.refid' => 2,
+			'common.address.parentid' => 2,
 			'common.address.salutation' => 'mr',
 			'common.address.company' => 'mw',
 			'common.address.vatid' => 'vatnumber',
@@ -434,7 +434,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( array(), $unknown );
 
 		$this->assertEquals( $list['common.address.id'], $object->getId() );
-		$this->assertEquals( $list['common.address.refid'], $object->getRefId() );
+		$this->assertEquals( $list['common.address.parentid'], $object->getParentId() );
 		$this->assertEquals( $list['common.address.salutation'], $object->getSalutation() );
 		$this->assertEquals( $list['common.address.company'], $object->getCompany() );
 		$this->assertEquals( $list['common.address.vatid'], $object->getVatID() );
@@ -464,7 +464,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['common.address.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.address.siteid'] );
-		$this->assertEquals( $this->object->getRefID(), $arrayObject['common.address.refid'] );
+		$this->assertEquals( $this->object->getParentId(), $arrayObject['common.address.parentid'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['common.address.position'] );
 		$this->assertEquals( $this->object->getCompany(), $arrayObject['common.address.company'] );
 		$this->assertEquals( $this->object->getVatID(), $arrayObject['common.address.vatid'] );

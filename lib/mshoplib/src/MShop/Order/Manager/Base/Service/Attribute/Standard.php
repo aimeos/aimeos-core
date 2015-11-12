@@ -48,8 +48,8 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.base.service.attribute.serviceid' => array(
-			'code' => 'order.base.service.attribute.serviceid',
+		'order.base.service.attribute.parentid' => array(
+			'code' => 'order.base.service.attribute.parentid',
 			'internalcode' => 'mordbaseat."ordservid"',
 			'label' => 'Order base service ID',
 			'type' => 'integer',
@@ -312,7 +312,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getAttributeId() );
-			$stmt->bind( 3, $item->getServiceId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
 			$stmt->bind( 5, $item->getCode() );
 			$stmt->bind( 6, json_encode( $item->getValue() ) );

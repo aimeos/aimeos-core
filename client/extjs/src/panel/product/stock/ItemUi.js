@@ -57,7 +57,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'hidden',
-                            name : 'product.stock.productid'
+                            name : 'product.stock.parentid'
                         }, {
                             xtype : 'displayfield',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
@@ -135,7 +135,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         }
 
         this.mainForm.getForm().updateRecord(this.record);
-        this.record.data['product.stock.productid'] = this.listUI.itemUi.record.id;
+        this.record.data['product.stock.parentid'] = this.listUI.itemUi.record.id;
 
         if(this.action == 'add' || this.action == 'copy') {
             this.store.add(this.record);

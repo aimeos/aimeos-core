@@ -255,7 +255,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			foreach( $bundleItem->getRefItems( 'product', null, 'default' ) as $refItem )
 			{
 				$stockItem = $stockManagerStub->createItem();
-				$stockItem->setProductId( $refItem->getId() );
+				$stockItem->setParentId( $refItem->getId() );
 				$stockItem->setStockLevel( $stock );
 
 				$stockItems[] = $stockItem;
@@ -263,7 +263,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			}
 
 			$bundleStockItem = $stockManagerStub->createItem();
-			$bundleStockItem->setProductId( $bundleId );
+			$bundleStockItem->setParentId( $bundleId );
 			$bundleStockItem->setStockLevel( $stock - 5 );
 		}
 

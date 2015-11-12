@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$saveParams = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'coupon.code.couponid' => $couponItem->getId(),
+				'coupon.code.parentid' => $couponItem->getId(),
 				'coupon.code.code' => 'zzzz',
 				'coupon.code.count' => -1,
 			),
@@ -105,7 +105,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertInternalType( 'object', $saved['items'] );
 		$this->assertNotNull( $saved['items']->{'coupon.code.id'} );
-		$this->assertEquals( $saved['items']->{'coupon.code.couponid'}, $searched['items'][0]->{'coupon.code.couponid'} );
+		$this->assertEquals( $saved['items']->{'coupon.code.parentid'}, $searched['items'][0]->{'coupon.code.parentid'} );
 		$this->assertEquals( $saved['items']->{'coupon.code.code'}, $searched['items'][0]->{'coupon.code.code'} );
 		$this->assertEquals( $saved['items']->{'coupon.code.count'}, $searched['items'][0]->{'coupon.code.count'} );
 		$this->assertEquals( $saved['items']->{'coupon.code.datestart'}, $searched['items'][0]->{'coupon.code.datestart'} );
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 					'optional' => false,
 					'type' => 'integer',
 				),
-				'coupon.code.couponid' => array(
+				'coupon.code.parentid' => array(
 					'description' => 'Coupon ID',
 					'optional' => false,
 					'type' => 'integer',
@@ -280,7 +280,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$params = new \stdClass();
 		$params->items = $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip';
 		$params->site = $this->context->getLocale()->getSite()->getCode();
-		$params->couponid = '-1';
+		$params->parentid = '-1';
 
 
 		$result = $this->object->uploadFile( $params );
@@ -333,7 +333,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 		$params->items = $this->testdir . DIRECTORY_SEPARATOR . 'coupon.zip';
-		$params->couponid = '-1';
+		$params->parentid = '-1';
 
 		$this->object->importFile( $params );
 	}

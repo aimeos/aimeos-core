@@ -337,7 +337,7 @@ class Standard
 
 		$search = $stockManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.stock.productid', $prodIds ),
+			$search->compare( '==', 'product.stock.parentid', $prodIds ),
 			$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -345,9 +345,9 @@ class Standard
 
 		foreach( $stockManager->searchItems( $search ) as $stockItem )
 		{
-			if( isset( $bundleMap[$stockItem->getProductId()] ) && $stockItem->getStockLevel() !== null )
+			if( isset( $bundleMap[$stockItem->getParentId()] ) && $stockItem->getStockLevel() !== null )
 			{
-				foreach( $bundleMap[$stockItem->getProductId()] as $bundleId )
+				foreach( $bundleMap[$stockItem->getParentId()] as $bundleId )
 				{
 					if( isset( $stock[$bundleId] ) ) {
 						$stock[$bundleId] = min( $stock[$bundleId], $stockItem->getStockLevel() );
@@ -373,9 +373,9 @@ class Standard
 
 		foreach( $stockManager->searchItems( $search ) as $item )
 		{
-			if( isset( $stock[$item->getProductId()] ) )
+			if( isset( $stock[$item->getParentId()] ) )
 			{
-				$item->setStockLevel( $stock[$item->getProductId()] );
+				$item->setStockLevel( $stock[$item->getParentId()] );
 				$stockManager->saveItem( $item );
 			}
 		}

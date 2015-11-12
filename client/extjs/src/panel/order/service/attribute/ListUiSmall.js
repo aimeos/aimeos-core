@@ -56,7 +56,7 @@ MShop.panel.order.base.service.attribute.ListUiSmall = Ext.extend(MShop.panel.Ab
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'order.base.service.attribute.serviceid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'order.base.service.attribute.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };

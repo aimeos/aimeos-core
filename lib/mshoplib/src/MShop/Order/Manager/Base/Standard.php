@@ -1008,20 +1008,20 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 
 
 		$criteria = $attrManager->createSearch();
-		$expr = $criteria->compare( '==', 'order.base.product.attribute.productid', array_keys( $items ) );
+		$expr = $criteria->compare( '==', 'order.base.product.attribute.parentid', array_keys( $items ) );
 		$criteria->setConditions( $expr );
 
 		foreach( $attrManager->searchItems( $criteria ) as $id => $attribute )
 		{
 			if( $fresh == true )
 			{
-				$attributes[$attribute->getProductId()][] = $attribute;
-				$attribute->setProductId( null );
+				$attributes[$attribute->getParentId()][] = $attribute;
+				$attribute->setParentId( null );
 				$attribute->setId( null );
 			}
 			else
 			{
-				$attributes[$attribute->getProductId()][$id] = $attribute;
+				$attributes[$attribute->getParentId()][$id] = $attribute;
 			}
 		}
 
@@ -1147,7 +1147,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 				foreach( $item->getAttributes() as $attribute )
 				{
 						$attribute->setId( null );
-						$attribute->setServiceId( null );
+						$attribute->setParentId( null );
 				}
 
 				$item->setBaseId( null );
@@ -1188,7 +1188,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 
 			foreach( $item->getAttributes() as $attribute )
 			{
-				$attribute->setProductId( $productId );
+				$attribute->setParentId( $productId );
 				$attrManager->saveItem( $attribute );
 			}
 
@@ -1209,7 +1209,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 
 				foreach( $subProduct->getAttributes() as $attribute )
 				{
-					$attribute->setProductId( $subProductId );
+					$attribute->setParentId( $subProductId );
 					$attrManager->saveItem( $attribute );
 				}
 			}
@@ -1286,7 +1286,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 
 			foreach( $item->getAttributes() as $attribute )
 			{
-				$attribute->setServiceId( $item->getId() );
+				$attribute->setParentId( $item->getId() );
 				$attrManager->saveItem( $attribute );
 			}
 		}

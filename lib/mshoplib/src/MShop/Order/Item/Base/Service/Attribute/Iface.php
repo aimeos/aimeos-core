@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Order\Item\Base\Service\Attribute;
  * @subpackage Order
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface
 {
 	/**
 	 * Returns the original attribute ID of the ordered service attribute.
@@ -35,21 +35,6 @@ interface Iface
 	 * @return void
 	 */
 	public function setAttributeId( $id );
-
-	/**
-	 * Returns the order service id of the order service attribute if available.
-	 *
-	 * @return integer|null Returns the order service id of the order service attribute if available
-	 */
-	public function getServiceId();
-
-	/**
-	 * Sets the order service id.
-	 *
-	 * @param integer Order service id for the order service attribute item.
-	 * @return void
-	 */
-	public function setServiceId( $id );
 
 	/**
 	 * Returns the type of the service attribute item.

@@ -230,7 +230,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager->saveItem( $item );
 
 		$view = \TestHelper::getView();
-		$this->context->setUserId( $item->getRefId() );
+		$this->context->setUserId( $item->getParentId() );
 
 		$param = array( 'ca_delivery_delete' => $item->getId() );
 		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
@@ -296,7 +296,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$customerAddressManager = $customerManager->getSubManager( 'address' );
 		$search = $customerAddressManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.refid', $customer->getId() ) );
+		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $customer->getId() ) );
 		$result = $customerAddressManager->searchItems( $search );
 
 		if( ( $address = reset( $result ) ) === false ) {

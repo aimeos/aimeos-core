@@ -149,7 +149,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $testdata['customer/address'] as $dataset )
 		{
-			if( !isset( $parentIds[$dataset['refid']] ) ) {
+			if( !isset( $parentIds[$dataset['parentid']] ) ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No customer ID found for "%1$s"', $dataset['refid'] ) );
 			}
 
@@ -174,7 +174,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$address->setLanguageId( $dataset['langid'] );
 			$address->setFlag( $dataset['flag'] );
 			$address->setPosition( $dataset['pos'] );
-			$address->setRefId( $parentIds[$dataset['refid']] );
+			$address->setParentId( $parentIds[$dataset['parentid']] );
 
 			$customerAddressManager->saveItem( $address, false );
 		}

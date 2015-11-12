@@ -327,7 +327,7 @@ CREATE TABLE "mshop_product_stock" (
 	-- unique id
 	"id" INTEGER NOT NULL AUTO_INCREMENT,
 	-- product id
-	"prodid" INTEGER NOT NULL,
+	"parentid" INTEGER NOT NULL,
 	-- site id
 	"siteid" INTEGER NOT NULL,
 	-- warehouse id
@@ -345,9 +345,9 @@ CREATE TABLE "mshop_product_stock" (
 CONSTRAINT "pk_msprost_id"
 	PRIMARY KEY ("id"),
 CONSTRAINT "unq_msprost_sid_pid_wid"
-	UNIQUE ("siteid", "prodid", "warehouseid"),
-CONSTRAINT "fk_msprost_prodid"
-	FOREIGN KEY ("prodid")
+	UNIQUE ("siteid", "parentid", "warehouseid"),
+CONSTRAINT "fk_msprost_parentid"
+	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_product" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE,

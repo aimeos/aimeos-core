@@ -51,7 +51,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'product.stock.productid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'product.stock.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };
@@ -72,7 +72,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             },
             {
                 xtype : 'gridcolumn',
-                dataIndex : 'product.stock.productid',
+                dataIndex : 'product.stock.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Product ID'),
                 width : 50,
                 hidden : true

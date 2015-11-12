@@ -27,7 +27,7 @@ class Standard
 			'label' => 'Customer address ID',
 			'code' => 'customer.address.id',
 			'internalcode' => 'mcusad."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_customer_address" AS mcusad ON ( mcus."id" = mcusad."refid" )' ),
+			'internaldeps' => array( 'LEFT JOIN "mshop_customer_address" AS mcusad ON ( mcus."id" = mcusad."parentid" )' ),
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -40,10 +40,10 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.address.refid' => array(
-			'label' => 'Customer address reference ID',
-			'code' => 'customer.address.refid',
-			'internalcode' => 'mcusad."refid"',
+		'customer.address.parentid' => array(
+			'label' => 'Customer address parent ID',
+			'code' => 'customer.address.parentid',
+			'internalcode' => 'mcusad."parentid"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,

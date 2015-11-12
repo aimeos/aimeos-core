@@ -358,7 +358,7 @@ class Standard
 				$customerAddressManager = \Aimeos\MShop\Factory::createManager( $context, 'customer/address' );
 
 				$search = $customerAddressManager->createSearch();
-				$search->setConditions( $search->compare( '==', 'customer.address.refid', $item->getId() ) );
+				$search->setConditions( $search->compare( '==', 'customer.address.parentid', $item->getId() ) );
 
 				foreach( $customerAddressManager->searchItems( $search ) as $id => $address )
 				{

@@ -56,7 +56,7 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend(MShop.panel.Ab
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'order.base.product.attribute.productid' : this.itemUi.record ? this.itemUi.record.id : null
+                    'order.base.product.attribute.parentid' : this.itemUi.record ? this.itemUi.record.id : null
                 }
             }]
         };

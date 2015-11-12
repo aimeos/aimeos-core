@@ -64,24 +64,24 @@ class Standard
 
 
 	/**
-	 * Returns the product ID of the ordered product.
+	 * Returns the ID of the ordered product as parent
 	 *
-	 * @return string|null Product ID of the ordered product
+	 * @return string|null ID of the ordered product
 	 */
-	public function getProductId()
+	public function getParentId()
 	{
 		return ( isset( $this->values['ordprodid'] ) ? (string) $this->values['ordprodid'] : null );
 	}
 
 
 	/**
-	 * Sets the product ID of the ordered product.
+	 * Sets the ID of the ordered product as parent
 	 *
-	 * @param string $id Product ID of the ordered product
+	 * @param string $id ID of the ordered product
 	 */
-	public function setProductId( $id )
+	public function setParentId( $id )
 	{
-		if( $id == $this->getProductId() ) { return; }
+		if( $id == $this->getParentId() ) { return; }
 
 		$this->values['ordprodid'] = (string) $id;
 		$this->setModified();
@@ -233,7 +233,7 @@ class Standard
 			switch( $key )
 			{
 				case 'order.base.product.attribute.attrid': $this->setAttributeId( $value ); break;
-				case 'order.base.product.attribute.productid': $this->setProductId( $value ); break;
+				case 'order.base.product.attribute.parentid': $this->setParentId( $value ); break;
 				case 'order.base.product.attribute.type': $this->setType( $value ); break;
 				case 'order.base.product.attribute.code': $this->setCode( $value ); break;
 				case 'order.base.product.attribute.value': $this->setValue( $value ); break;
@@ -256,7 +256,7 @@ class Standard
 		$list = parent::toArray();
 
 		$list['order.base.product.attribute.attrid'] = $this->getAttributeId();
-		$list['order.base.product.attribute.productid'] = $this->getProductId();
+		$list['order.base.product.attribute.parentid'] = $this->getParentId();
 		$list['order.base.product.attribute.type'] = $this->getType();
 		$list['order.base.product.attribute.code'] = $this->getCode();
 		$list['order.base.product.attribute.value'] = $this->getValue();

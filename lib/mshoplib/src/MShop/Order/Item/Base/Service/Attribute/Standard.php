@@ -64,24 +64,24 @@ class Standard
 
 
 	/**
-	 * Returns the order service id of the order service attribute if available.
+	 * Returns the ID of the ordered service item as parent
 	 *
-	 * @return integer|null Returns the order service id of the order service attribute if available.
+	 * @return integer|null ID of the ordered service item
 	 */
-	public function getServiceId()
+	public function getParentId()
 	{
 		return ( isset( $this->values['ordservid'] ) ? (int) $this->values['ordservid'] : null );
 	}
 
 
 	/**
-	 * Sets the order service id.
+	 * Sets the ID of the ordered service item as parent
 	 *
-	 * @param integer $id Order service id for the order service attribute item.
+	 * @param integer $id ID of the ordered service item
 	 */
-	public function setServiceId( $id )
+	public function setParentId( $id )
 	{
-		if( $id == $this->getServiceId() ) { return; }
+		if( $id == $this->getParentId() ) { return; }
 
 		$this->values['ordservid'] = (int) $id;
 		$this->setModified();
@@ -231,7 +231,7 @@ class Standard
 			switch( $key )
 			{
 				case 'order.base.service.attribute.attrid': $this->setAttributeId( $value ); break;
-				case 'order.base.service.attribute.serviceid': $this->setServiceId( $value ); break;
+				case 'order.base.service.attribute.parentid': $this->setParentId( $value ); break;
 				case 'order.base.service.attribute.type': $this->setType( $value ); break;
 				case 'order.base.service.attribute.name': $this->setName( $value ); break;
 				case 'order.base.service.attribute.code': $this->setCode( $value ); break;
@@ -254,7 +254,7 @@ class Standard
 		$list = parent::toArray();
 
 		$list['order.base.service.attribute.attrid'] = $this->getAttributeId();
-		$list['order.base.service.attribute.serviceid'] = $this->getServiceId();
+		$list['order.base.service.attribute.parentid'] = $this->getParentId();
 		$list['order.base.service.attribute.type'] = $this->getType();
 		$list['order.base.service.attribute.name'] = $this->getName();
 		$list['order.base.service.attribute.code'] = $this->getCode();

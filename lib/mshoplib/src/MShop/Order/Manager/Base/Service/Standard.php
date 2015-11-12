@@ -806,13 +806,13 @@ class Standard
 	{
 		$manager = $this->getSubManager( 'attribute' );
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.serviceid', $ids ) );
+		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.parentid', $ids ) );
 		$search->setSortations( array( $search->sort( '+', 'order.base.service.attribute.code' ) ) );
 		$search->setSlice( 0, 0x7fffffff );
 
 		$result = array();
 		foreach( $manager->searchItems( $search ) as $item ) {
-			$result[$item->getServiceId()][$item->getId()] = $item;
+			$result[$item->getParentId()][$item->getId()] = $item;
 		}
 
 		return $result;

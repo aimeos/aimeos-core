@@ -21,23 +21,8 @@ namespace Aimeos\MShop\Common\Item\Lists;
 interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
 		\Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Time\Iface,
-		\Aimeos\MShop\Common\Item\Typeid\Iface
+		\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface
 {
-	/**
-	 * Returns the parent Id (DB-field parentid) of the common list item, like the unique Id of a product or a tree node.
-	 *
-	 * @return integer Parent Id of the common list item
-	 */
-	public function getParentId();
-
-	/**
-	 * Sets the parent Id (DB-field paremntid) of the common list item, like the unique Id of a product or a tree node.
-	 *
-	 * @param integer $parentid New parent Id of the common list item
-	 * @return void
-	 */
-	public function setParentId( $parentid );
-
 	/**
 	 * Returns the domain of the common list item, e.g. text or media.
 	 *

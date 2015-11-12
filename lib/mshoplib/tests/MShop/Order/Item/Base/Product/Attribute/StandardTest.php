@@ -98,16 +98,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetProductId()
+	public function testGetParentId()
 	{
-		$this->assertEquals( $this->values['ordprodid'], $this->object->getProductId() );
+		$this->assertEquals( $this->values['ordprodid'], $this->object->getParentId() );
 	}
 
 
-	public function testSetProductId()
+	public function testSetParentId()
 	{
-		$this->object->setProductId( 33 );
-		$this->assertEquals( 33, $this->object->getProductId() );
+		$this->object->setParentId( 33 );
+		$this->assertEquals( 33, $this->object->getParentId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'order.base.product.attribute.id' => 1,
 			'order.base.product.attribute.attrid' => 2,
-			'order.base.product.attribute.productid' => 3,
+			'order.base.product.attribute.parentid' => 3,
 			'order.base.product.attribute.type' => 'variant',
 			'order.base.product.attribute.code' => 'test',
 			'order.base.product.attribute.value' => 'value',
@@ -231,7 +231,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $list['order.base.product.attribute.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.product.attribute.attrid'], $item->getAttributeId() );
-		$this->assertEquals( $list['order.base.product.attribute.productid'], $item->getProductId() );
+		$this->assertEquals( $list['order.base.product.attribute.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['order.base.product.attribute.type'], $item->getType() );
 		$this->assertEquals( $list['order.base.product.attribute.code'], $item->getCode() );
 		$this->assertEquals( $list['order.base.product.attribute.value'], $item->getValue() );
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getId(), $list['order.base.product.attribute.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['order.base.product.attribute.siteid'] );
 		$this->assertEquals( $this->object->getAttributeId(), $list['order.base.product.attribute.attrid'] );
-		$this->assertEquals( $this->object->getProductId(), $list['order.base.product.attribute.productid'] );
+		$this->assertEquals( $this->object->getParentId(), $list['order.base.product.attribute.parentid'] );
 		$this->assertEquals( $this->object->getType(), $list['order.base.product.attribute.type'] );
 		$this->assertEquals( $this->object->getCode(), $list['order.base.product.attribute.code'] );
 		$this->assertEquals( $this->object->getValue(), $list['order.base.product.attribute.value'] );

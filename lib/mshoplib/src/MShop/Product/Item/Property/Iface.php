@@ -18,7 +18,8 @@ namespace Aimeos\MShop\Product\Item\Property;
  * @subpackage Product
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface,
+	\Aimeos\MShop\Common\Item\Parentid\Iface
 {
 	/**
 	 * Returns the language id of the property item
@@ -34,20 +35,6 @@ interface Iface
 	 * @return void
 	 */
 	public function setLanguageId( $id );
-	
-	/**
-	 * Returns the parent id of the product property item
-	 *
-	 * @return integer|null Parent ID of the product property item
-	 */
-	public function getParentId();
-	
-	/**
-	 * Sets the new parent ID of the product property item
-	 *
-	 * @param integer $id Parent ID of the product property item
-	 */
-	public function setParentId( $id );
 
 	/**
 	 * Returns the value of the property item.

@@ -30,7 +30,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->values = array(
 			'id' => '1',
 			'siteid' => 123,
-			'couponid' => '2',
+			'parentid' => '2',
 			'code' => 'abcd',
 			'count' => '100',
 			'start' => null,
@@ -77,15 +77,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 123, $this->object->getSiteId() );
 	}
 
-	public function testGetCouponId()
+	public function testGetParentId()
 	{
-		$this->assertEquals( 2, $this->object->getCouponId() );
+		$this->assertEquals( 2, $this->object->getParentId() );
 	}
 
-	public function testSetCouponId()
+	public function testSetParentId()
 	{
-		$this->object->setCouponId( '3' );
-		$this->assertEquals( 3, $this->object->getCouponId() );
+		$this->object->setParentId( '3' );
+		$this->assertEquals( 3, $this->object->getParentId() );
 
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$list = array(
 			'coupon.code.id' => 1,
-			'coupon.code.couponid' => 2,
+			'coupon.code.parentid' => 2,
 			'coupon.code.code' => 'test',
 			'coupon.code.count' => 100,
 		);
@@ -174,7 +174,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( array(), $unknown );
 
 		$this->assertEquals( $list['coupon.code.id'], $item->getId() );
-		$this->assertEquals( $list['coupon.code.couponid'], $item->getCouponId() );
+		$this->assertEquals( $list['coupon.code.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['coupon.code.code'], $item->getCode() );
 		$this->assertEquals( $list['coupon.code.count'], $item->getCount() );
 	}
@@ -188,7 +188,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['coupon.code.id'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['coupon.code.code'] );
 		$this->assertEquals( $this->object->getCount(), $arrayObject['coupon.code.count'] );
-		$this->assertEquals( $this->object->getCouponId(), $arrayObject['coupon.code.couponid'] );
+		$this->assertEquals( $this->object->getParentId(), $arrayObject['coupon.code.parentid'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['coupon.code.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['coupon.code.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['coupon.code.editor'] );

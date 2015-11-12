@@ -114,7 +114,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         options.params.condition = {
             '&&' : [{
                 '==' : {
-                    'coupon.code.couponid' : this.ParentItemUi.record.data['coupon.id']
+                    'coupon.code.parentid' : this.ParentItemUi.record.data['coupon.id']
                 }
             }]
         };
@@ -135,7 +135,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     onFileSelect : function(fileSelector) {
         this.actionImport.onFileSelect(fileSelector, {
-            couponid : this.ParentItemUi.record.id
+            parentid : this.ParentItemUi.record.id
         });
     }
 

@@ -26,7 +26,7 @@ class Standard
 		'coupon.code.id'=> array(
 			'code'=>'coupon.code.id',
 			'internalcode'=>'mcouco."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_coupon_code" AS mcouco ON (mcou."id"=mcouco."couponid")' ),
+			'internaldeps' => array( 'LEFT JOIN "mshop_coupon_code" AS mcouco ON (mcou."id"=mcouco."parentid")' ),
 			'label'=>'Coupon code ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -40,9 +40,9 @@ class Standard
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'coupon.code.couponid'=> array(
-			'code'=>'coupon.code.couponid',
-			'internalcode'=>'mcouco."couponid"',
+		'coupon.code.parentid'=> array(
+			'code'=>'coupon.code.parentid',
+			'internalcode'=>'mcouco."parentid"',
 			'label'=>'Coupon ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -416,7 +416,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getCouponId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 3, $item->getCode() );
 			$stmt->bind( 4, $item->getCount(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 5, $item->getDateStart() );
@@ -521,7 +521,7 @@ class Standard
 	 * Searchs for coupon items based on the given criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * Possible search keys: 'coupon.code.id', 'coupon.code.couponid',
+	 * Possible search keys: 'coupon.code.id', 'coupon.code.parentid',
 	 * 'coupon.code.code', 'coupon.code.count'.
 	 *
 	 * @param integer &$total Number of items that are available in total (not yet implemented)

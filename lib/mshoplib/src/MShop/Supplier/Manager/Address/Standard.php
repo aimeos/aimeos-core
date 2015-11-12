@@ -26,7 +26,7 @@ class Standard
 		'supplier.address.id' => array(
 			'code' => 'supplier.address.id',
 			'internalcode' => 'msupad."id"',
-			'internaldeps' => array( 'LEFT JOIN "mshop_supplier_address" AS msupad ON msupad."refid" = msup."id"' ),
+			'internaldeps' => array( 'LEFT JOIN "mshop_supplier_address" AS msupad ON msupad."parentid" = msup."id"' ),
 			'label' => 'Supplier address ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -40,10 +40,10 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'supplier.address.refid' => array(
-			'code' => 'supplier.address.refid',
-			'internalcode' => 'msupad."refid"',
-			'label' => 'Supplier address reference ID',
+		'supplier.address.parentid' => array(
+			'code' => 'supplier.address.parentid',
+			'internalcode' => 'msupad."parentid"',
+			'label' => 'Supplier address parent ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,

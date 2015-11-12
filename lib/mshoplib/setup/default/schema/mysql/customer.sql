@@ -105,8 +105,8 @@ CREATE TABLE "mshop_customer_address" (
 	"id" INTEGER NOT NULL AUTO_INCREMENT,
 	-- site id, references mshop_locale_site.id
 	"siteid" INTEGER NOT NULL,
-	-- reference id for customer
-	"refid" INTEGER NOT NULL,
+	-- parent id for customer
+	"parentid" INTEGER NOT NULL,
 	-- company name
 	"company" VARCHAR(100) NOT NULL,
 	-- vatid
@@ -155,8 +155,8 @@ CREATE TABLE "mshop_customer_address" (
 	"editor" VARCHAR(255) NOT NULL,
 CONSTRAINT "pk_mscusad_id"
 	PRIMARY KEY ("id"),
-CONSTRAINT "fk_mscusad_refid"
-	FOREIGN KEY ("refid")
+CONSTRAINT "fk_mscusad_parentid"
+	FOREIGN KEY ("parentid")
 	REFERENCES "mshop_customer" ("id")
 	ON UPDATE CASCADE
 	ON DELETE CASCADE
@@ -170,7 +170,7 @@ CREATE INDEX "idx_mscusad_sid_ad1_ad2" ON "mshop_customer_address" ("siteid", "a
 
 CREATE INDEX "idx_mscusad_sid_post_ci" ON "mshop_customer_address" ("siteid", "postal", "city");
 
-CREATE INDEX "idx_mscusad_sid_rid" ON "mshop_customer_address" ("siteid", "refid");
+CREATE INDEX "idx_mscusad_sid_pid" ON "mshop_customer_address" ("siteid", "parentid");
 
 CREATE INDEX "idx_mscusad_sid_lastname" ON "mshop_customer_address" ("siteid", "lastname");
 

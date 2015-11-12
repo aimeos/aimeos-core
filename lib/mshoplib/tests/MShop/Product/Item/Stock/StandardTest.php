@@ -30,7 +30,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->values = array(
 			'id' => 66,
 			'siteid'=>99,
-			'prodid' => 46677,
+			'parentid' => 46677,
 			'warehouseid' => 44,
 			'stocklevel' => 1000,
 			'backdate' => '2010-01-01 11:55:00',
@@ -71,17 +71,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
-	public function testGetProductId()
+	public function testGetParentId()
 	{
-		$this->assertEquals( $this->values['prodid'], $this->object->getProductId() );
+		$this->assertEquals( $this->values['parentid'], $this->object->getParentId() );
 	}
 
-	public function testSetProductId()
+	public function testSetParentId()
 	{
-		$this->object->setProductId( 10000 );
+		$this->object->setParentId( 10000 );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( 10000, $this->object->getProductId() );
+		$this->assertEquals( 10000, $this->object->getParentId() );
 	}
 
 	public function testGetWarehouseId()
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$list = array(
 			'product.stock.id' => 1,
-			'product.stock.productid' => 2,
+			'product.stock.parentid' => 2,
 			'product.stock.warehouseid' => 3,
 			'product.stock.stocklevel' => 10,
 			'product.stock.dateback' => '2000-01-01 00:00:00',
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( array(), $unknown );
 
 		$this->assertEquals( $list['product.stock.id'], $item->getId() );
-		$this->assertEquals( $list['product.stock.productid'], $item->getProductId() );
+		$this->assertEquals( $list['product.stock.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['product.stock.warehouseid'], $item->getWarehouseId() );
 		$this->assertEquals( $list['product.stock.stocklevel'], $item->getStocklevel() );
 		$this->assertEquals( $list['product.stock.dateback'], $item->getDateBack() );
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['product.stock.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['product.stock.siteid'] );
-		$this->assertEquals( $this->object->getProductId(), $arrayObject['product.stock.productid'] );
+		$this->assertEquals( $this->object->getParentId(), $arrayObject['product.stock.parentid'] );
 		$this->assertEquals( $this->object->getWarehouseId(), $arrayObject['product.stock.warehouseid'] );
 		$this->assertEquals( $this->object->getStocklevel(), $arrayObject['product.stock.stocklevel'] );
 		$this->assertEquals( $this->object->getDateBack(), $arrayObject['product.stock.dateback'] );

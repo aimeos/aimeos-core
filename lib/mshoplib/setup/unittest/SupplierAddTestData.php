@@ -101,7 +101,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$supAdr = $supplierAddressManager->createItem();
 		foreach( $testdata['supplier/address'] as $dataset )
 		{
-			if( !isset( $supIds[$dataset['refid']] ) ) {
+			if( !isset( $supIds[$dataset['parentid']] ) ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No supplier ID found for "%1$s"', $dataset['refid'] ) );
 			}
 
@@ -125,7 +125,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supAdr->setTelefax( $dataset['telefax'] );
 			$supAdr->setWebsite( $dataset['website'] );
 			$supAdr->setLanguageId( $dataset['langid'] );
-			$supAdr->setRefId( $supIds[$dataset['refid']] );
+			$supAdr->setParentId( $supIds[$dataset['parentid']] );
 
 			$supplierAddressManager->saveItem( $supAdr, false );
 		}

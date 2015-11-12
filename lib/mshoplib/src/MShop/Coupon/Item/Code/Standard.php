@@ -42,9 +42,9 @@ class Standard
 	 *
 	 * @return integer Unique ID of the coupon item
 	 */
-	public function getCouponId()
+	public function getParentId()
 	{
-		return ( isset( $this->values['couponid'] ) ? (int) $this->values['couponid'] : null );
+		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
 	}
 
 
@@ -53,11 +53,11 @@ class Standard
 	 *
 	 * @param integer $id Unique ID of the coupon item
 	 */
-	public function setCouponId( $id )
+	public function setParentId( $id )
 	{
-		if( $id == $this->getCouponId() ) { return; }
+		if( $id == $this->getParentId() ) { return; }
 
-		$this->values['couponid'] = (int) $id;
+		$this->values['parentid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -194,7 +194,7 @@ class Standard
 			{
 				case 'coupon.code.count': $this->setCount( $value ); break;
 				case 'coupon.code.code': $this->setCode( $value ); break;
-				case 'coupon.code.couponid': $this->setCouponId( $value ); break;
+				case 'coupon.code.parentid': $this->setParentId( $value ); break;
 				case 'coupon.code.datestart': $this->setDateStart( $value ); break;
 				case 'coupon.code.dateend': $this->setDateEnd( $value ); break;
 				default: $unknown[$key] = $value;
@@ -216,7 +216,7 @@ class Standard
 
 		$list['coupon.code.count'] = $this->getCount();
 		$list['coupon.code.code'] = $this->getCode();
-		$list['coupon.code.couponid'] = $this->getCouponId();
+		$list['coupon.code.parentid'] = $this->getParentId();
 		$list['coupon.code.datestart'] = $this->getDateStart();
 		$list['coupon.code.dateend'] = $this->getDateEnd();
 

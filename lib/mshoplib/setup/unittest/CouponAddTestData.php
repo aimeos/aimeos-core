@@ -98,12 +98,12 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$ccode = $couponCodeManager->createItem();
 		foreach( $testdata['coupon/code'] as $key => $dataset )
 		{
-			if( !isset( $couponIds[$dataset['couponid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No coupon ID found for "%1$s"', $dataset['couponid'] ) );
+			if( !isset( $couponIds[$dataset['parentid']] ) ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No coupon ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$ccode->setId( null );
-			$ccode->setCouponId( $couponIds[$dataset['couponid']] );
+			$ccode->setParentId( $couponIds[$dataset['parentid']] );
 			$ccode->setCount( $dataset['count'] );
 			$ccode->setDateStart( $dataset['start'] );
 			$ccode->setDateEnd( $dataset['end'] );
