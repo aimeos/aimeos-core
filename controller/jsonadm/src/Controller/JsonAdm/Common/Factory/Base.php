@@ -41,13 +41,14 @@ class Base
 	 * Adds the decorators to the JSON API controller object
 	 *
 	 * @param \Aimeos\Controller\JsonAdm\Common\Iface $controller Controller object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
 	 * @return \Aimeos\Controller\JsonAdm\Common\Iface Controller object
 	 */
 	protected static function addControllerDecorators( \Aimeos\Controller\JsonAdm\Iface $controller,
-		\Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $path )
+		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MW\View\Iface $view, array $templatePaths, $path )
 	{
 		$config = $context->getConfig();
 
@@ -76,7 +77,7 @@ class Base
 		$decorators = $config->get( 'controller/jsonadm/common/decorators/default', array() );
 
 		$classprefix = '\\Aimeos\\Controller\\JsonAdm\\Common\\Decorator\\';
-		$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $templatePaths, $path );
+		$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $view, $templatePaths, $path );
 
 		if( $path !== null && is_string( $path ) )
 		{
@@ -92,11 +93,11 @@ class Base
 
 			$classprefix = '\\Aimeos\\Controller\\JsonAdm\\Common\\Decorator\\';
 			$decorators = $config->get( 'controller/jsonadm/' . $path . '/decorators/global', array() );
-			$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $templatePaths, $path );
+			$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $view, $templatePaths, $path );
 
 			$classprefix = '\\Aimeos\\Controller\\JsonAdm\\' . ucfirst( $localClass ) . '\\Decorator\\';
 			$decorators = $config->get( 'controller/jsonadm/' . $path . '/decorators/local', array() );
-			$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $templatePaths, $path );
+			$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $view, $templatePaths, $path );
 		}
 
 		return $controller;
@@ -110,12 +111,13 @@ class Base
 	 * @param array $decorators List of decorator names
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Controller\JsonAdm\Product\Decorator\"
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
 	 * @return \Aimeos\Controller\JsonAdm\Common\Iface Controller object
 	 */
 	protected static function addDecorators( \Aimeos\Controller\JsonAdm\Iface $controller, array $decorators, $classprefix,
-			\Aimeos\MShop\Context\Item\Iface $context, $templatePaths, $path )
+			\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MW\View\Iface $view, $templatePaths, $path )
 	{
 		$iface = '\\Aimeos\\Controller\\JsonAdm\\Common\\Decorator\\Iface';
 
@@ -133,7 +135,7 @@ class Base
 				throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Class "%1$s" not found', $classname ), 404 );
 			}
 
-			$controller = new $classname( $controller, $context, $templatePaths, $path );
+			$controller = new $classname( $controller, $context, $view, $templatePaths, $path );
 
 			if( !( $controller instanceof $iface ) ) {
 				throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ), 404 );
@@ -150,11 +152,13 @@ class Base
 	 * @param string $classname Name of the controller class
 	 * @param string $interface Name of the controller interface
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
 	 * @return \Aimeos\Controller\JsonAdm\Common\Iface Controller object
 	 */
-	protected static function createControllerBase( $classname, $interface, \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $path )
+	protected static function createControllerBase( $classname, $interface, \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MW\View\Iface $view, array $templatePaths, $path )
 	{
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];
@@ -164,7 +168,7 @@ class Base
 			throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Class "%1$s" not found', $classname ), 404 );
 		}
 
-		$controller = new $classname( $context, $templatePaths, $path );
+		$controller = new $classname( $context, $view, $templatePaths, $path );
 
 		if( !( $controller instanceof $interface ) ) {
 			throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $interface ), 500 );

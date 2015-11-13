@@ -24,6 +24,7 @@ return array(
 	'config' => array(
 		'lib/mshoplib/config',
 		'config',
+		'controller/jsonadm/config',
 	),
 	'i18n' => array(
 		'client/extjs' => 'client/extjs/i18n',

@@ -5,10 +5,10 @@ if( defined( 'JSON_PRETTY_PRINT' ) ) {
 	$options = JSON_PRETTY_PRINT;
 }
 
-
-$build = function( \Aimeos\MShop\Common\Item\Iface $item, array $fields, array $childItems, array $listItems )
+$build = function( \Aimeos\MShop\Common\Item\Iface $item, array $fields, array $childItems )
 {
 	$id = $item->getId();
+	$baseId = $item->getBaseId();
 	$attributes = $item->toArray();
 	$type = $item->getResourceType();
 
@@ -25,19 +25,11 @@ $build = function( \Aimeos\MShop\Common\Item\Iface $item, array $fields, array $
 
 	foreach( $childItems as $childItem )
 	{
-		if( $childItem->getParentId() == $id )
-		{
+		if( $childItem instanceof \Aimeos\MShop\Order\Item\Status\Iface && $childItem->getParentId() == $id
+			|| $childItem instanceof \Aimeos\MShop\Order\Item\Base\Iface && $childItem->getId() == $baseId
+		) {
 			$type = $childItem->getResourceType();
 			$result['relationships'][$type][] = array( 'data' => array( 'id' => $childItem->getId(), 'type' => $type ) );
-		}
-	}
-
-	foreach( $listItems as $listItem )
-	{
-		if( $listItem->getParentId() == $id )
-		{
-			$type = $listItem->getDomain();
-			$result['relationships'][$type][] = array( 'data' => array( 'id' => $listItem->getRefId(), 'type' => $type, 'attributes' => $listItem->toArray() ) );
 		}
 	}
 
@@ -54,19 +46,18 @@ foreach( (array) $fields as $resource => $list ) {
 
 $data = $this->get( 'data', array() );
 $childItems = $this->get( 'childItems', array() );
-$listItems = $this->get( 'listItems', array() );
 
 if( is_array( $data ) )
 {
 	$response = array();
 
 	foreach( $data as $item ) {
-		$response[] = $build( $item, $fields, $childItems, $listItems );
+		$response[] = $build( $item, $fields, $childItems );
 	}
 }
 elseif( $data !== null )
 {
-	$response = $build( $data, $fields, $childItems, $listItems );
+	$response = $build( $data, $fields, $childItems );
 }
 else
 {

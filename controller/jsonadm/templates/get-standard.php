@@ -5,8 +5,10 @@ $cntl = $this->config( 'controller/jsonadm/url/controller', 'jsonadm' );
 $action = $this->config( 'controller/jsonadm/url/action', 'get' );
 $config = $this->config( 'controller/jsonadm/url/config', array() );
 
+
 $ref = array( 'id', 'resource', 'filter', 'page', 'sort', 'include', 'fields' );
 $params = array_intersect_key( $this->param(), array_flip( $ref ) );
+
 
 $total = $this->get( 'total', 0 );
 $offset = max( $this->param( 'page/offset', 0 ), 0 );
@@ -41,11 +43,10 @@ $last = ( ((int) ($total / $limit)) * $limit > $offset ? ((int) ($total / $limit
 		"self": "<?php $params['page']['offset'] = $offset; echo $this->url( $target, $cntl, $action, $params, array(), $config ); ?>"
 	},
 <?php if( isset( $this->errors ) ) : ?>
-	"errors": <?php echo $this->partial( 'controller/jsonadm/standard/template-errors', 'partials/errors-standard.php', array( 'errors' => $this->errors ) ); ?>
+	"errors": <?php echo $this->partial( $this->get( 'partial-errors', 'controller/jsonadm/partials/template-errors' ), 'partials/errors-standard.php', array( 'errors' => $this->errors ) ); ?>
 <?php elseif( isset( $this->data ) ) : ?>
-<?php	$data = array( 'data' => $this->get( 'data' ) ); ?>
-	"data": <?php echo $this->partial( 'controller/jsonadm/standard/template-data', 'partials/data-standard.php', $data ); ?>,
-	"included": <?php echo $this->partial( 'controller/jsonadm/standard/template-included', 'partials/included-standard.php', $data ); ?>
+	"data": <?php echo $this->partial( $this->get( 'partial-data', 'controller/jsonadm/partials/template-data' ), 'partials/data-standard.php', array( 'data' => $this->get( 'data' ), 'childItems' => $this->get( 'childItems', array() ), 'listItems' => $this->get( 'listItems', array() ) ) ); ?>,
+	"included": <?php echo $this->partial( $this->get( 'partial-included', 'controller/jsonadm/partials/template-included' ), 'partials/included-standard.php', array( 'childItems' => $this->get( 'childItems', array() ), 'refItems' => $this->get( 'refItems', array() ) ) ); ?>
 <?php endif; ?>
 
 }

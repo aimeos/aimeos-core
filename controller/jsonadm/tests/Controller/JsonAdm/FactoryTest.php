@@ -98,6 +98,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 		$cntlA1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
 		$cntlB1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );
+
 		\Aimeos\Controller\JsonAdm\Factory::clear( (string) $context, 'attribute' );
 
 		$cntlA2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );

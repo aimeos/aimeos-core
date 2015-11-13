@@ -64,7 +64,8 @@ class Factory
 	 * @param string|null $name Name of the controller implementation ("Standard" if null)
 	 * @throws \Aimeos\Controller\JsonAdm\Exception If the given path is invalid
 	 */
-	static public function createController( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $path, $name = null )
+	static public function createController( \Aimeos\MShop\Context\Item\Iface $context,
+		array $templatePaths, $path, $name = null )
 	{
 		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
 
@@ -90,11 +91,12 @@ class Factory
 			}
 
 
+			$view = $context->getView();
 			$factory = '\\Aimeos\\Controller\\JsonAdm\\' . join( '\\', $parts ) . '\\Factory';
 
 			if( class_exists( $factory ) === true )
 			{
-				$args = array( $context, $templatePaths, $path, $name );
+				$args = array( $context, $view, $templatePaths, $path, $name );
 
 				if( ( $controller = @call_user_func_array( array( $factory, 'createController' ), $args ) ) === false ) {
 					throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Invalid factory "%1$s"', $factory ), 400 );
@@ -102,7 +104,7 @@ class Factory
 			}
 			else
 			{
-				$controller = self::createControllerRoot( $context, $templatePaths, $path, $name );
+				$controller = self::createControllerRoot( $context, $view, $templatePaths, $path, $name );
 			}
 
 
@@ -132,11 +134,13 @@ class Factory
 	 * Creates the top level controller
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by controllers
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
 	 * @throws \Aimeos\Controller\JsonAdm\Exception If the controller couldn't be created
 	 */
-	protected static function createControllerRoot( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $path, $name = null )
+	protected static function createControllerRoot( \Aimeos\MShop\Context\Item\Iface $context,
+		\Aimeos\MW\View\Iface $view, array $templatePaths, $path, $name = null )
 	{
 		/** controller/jsonadm/name
 		 * Class name of the used JSON API controller implementation
@@ -184,7 +188,7 @@ class Factory
 		$iface = '\\Aimeos\\Controller\\JsonAdm\\Iface';
 		$classname = '\\Aimeos\\Controller\\JsonAdm\\' . $name;
 
-		$controller = self::createControllerBase( $classname, $iface, $context, $templatePaths, $path );
+		$controller = self::createControllerBase( $classname, $iface, $context, $view, $templatePaths, $path );
 
 		/** controller/jsonadm/decorators/excludes
 		 * Excludes decorators added by the "common" option from the JSON API controllers
@@ -211,6 +215,6 @@ class Factory
 		 * @see controller/jsonadm/decorators/global
 		 */
 
-		return self::addControllerDecorators( $controller, $context, $templatePaths, $path );
+		return self::addControllerDecorators( $controller, $context, $view, $templatePaths, $path );
 	}
 }

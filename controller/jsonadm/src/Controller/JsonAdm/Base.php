@@ -19,6 +19,7 @@ namespace Aimeos\Controller\JsonAdm;
  */
 class Base
 {
+	private $view;
 	private $context;
 	private $templatePaths;
 	private $path;
@@ -28,16 +29,20 @@ class Base
 	 * Initializes the controller
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
 	 * @return void
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $path )
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MW\View\Iface $view, array $templatePaths, $path )
 	{
+		$this->view = $view;
 		$this->context = $context;
 		$this->templatePaths = $templatePaths;
 		$this->path = $path;
 	}
+
+
 	/**
 	 * Deletes the resource or the resource list
 	 *
@@ -50,7 +55,7 @@ class Base
 	{
 		$header = array( 'Content-Type' => 'application/vnd.api+json; supported-ext="bulk"' );
 		$context = $this->getContext();
-		$view = $context->getView();
+		$view = $this->getView();
 
 		try
 		{
@@ -86,32 +91,32 @@ class Base
 		{
 			$status = $e->getCode();
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'controller/jsonadm', $e->getMessage() ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 		catch( \Aimeos\MAdmin\Exception $e )
 		{
 			$status = 404;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 		catch( \Aimeos\MShop\Exception $e )
 		{
 			$status = 404;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
-		catch( \Aimeos\MW\Exception $e )
+		catch( \Exception $e )
 		{
 			$status = 500;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 
@@ -158,23 +163,29 @@ class Base
 	{
 		$header = array( 'Content-Type' => 'application/vnd.api+json; supported-ext="bulk"' );
 		$context = $this->getContext();
-		$view = $context->getView();
+		$view = $this->getView();
 		$total = 1;
 
 		try
 		{
 			$manager = \Aimeos\MShop\Factory::createManager( $context, $this->getPath() );
-			$domains = ( ( $include = $view->param( 'include' ) ) !== null ? explode( ',', $include ) : array() );
+			$include = ( ( $include = $view->param( 'include' ) ) !== null ? explode( ',', $include ) : array() );
 
 			if( ( $id = $view->param( 'id' ) ) === null )
 			{
 				$search = $this->initCriteria( $manager->createSearch(), $view->param() );
-				$view->data = $manager->searchItems( $search, $domains, $total );
+				$view->data = $manager->searchItems( $search, array(), $total );
+				$view->childItems = $this->getChildItems( $view->data, $include );
+				$view->listItems = $this->getListItems( $view->data, $include );
 			}
 			else
 			{
-				$view->data = $manager->getItem( $id, $domains );
+				$view->data = $manager->getItem( $id, array() );
+				$view->childItems = $this->getChildItems( array( $id => $view->data ), $include );
+				$view->listItems = $this->getListItems( array( $id => $view->data ), $include );
 			}
+
+			$view->refItems = $this->getRefItems( $view->listItems );
 
 			$view->total = $total;
 			$status = 200;
@@ -183,24 +194,24 @@ class Base
 		{
 			$status = 404;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 		catch( \Aimeos\MShop\Exception $e )
 		{
 			$status = 404;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
-		catch( \Aimeos\MW\Exception $e )
+		catch( \Exception $e )
 		{
 			$status = 500;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 
@@ -247,7 +258,7 @@ class Base
 	{
 		$header = array( 'Content-Type' => 'application/vnd.api+json; supported-ext="bulk"' );
 		$context = $this->getContext();
-		$view = $context->getView();
+		$view = $this->getView();
 
 		try
 		{
@@ -299,32 +310,32 @@ class Base
 		{
 			$status = $e->getCode();
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'controller/jsonadm', $e->getMessage() ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 		catch( \Aimeos\MAdmin\Exception $e )
 		{
 			$status = 404;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 		catch( \Aimeos\MShop\Exception $e )
 		{
 			$status = 404;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 		catch( \Aimeos\MW\Exception $e )
 		{
 			$status = 500;
 			$view->errors = array( array(
-					'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
-					'detail' => $e->getTraceAsString(),
+				'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
+				'detail' => $e->getTraceAsString(),
 			) );
 		}
 
@@ -371,7 +382,7 @@ class Base
 	{
 		$header = array( 'Content-Type' => 'application/vnd.api+json; supported-ext="bulk"' );
 		$context = $this->getContext();
-		$view = $context->getView();
+		$view = $this->getView();
 
 		try
 		{
@@ -427,7 +438,7 @@ class Base
 		{
 			$status = $e->getCode();
 			$view->errors = array( array(
-				'title' => $context->getI18n()->dt( 'mshop', $e->getMessage() ),
+				'title' => $context->getI18n()->dt( 'controller/jsonadm', $e->getMessage() ),
 				'detail' => $e->getTraceAsString(),
 			) );
 		}
@@ -447,7 +458,7 @@ class Base
 				'detail' => $e->getTraceAsString(),
 			) );
 		}
-		catch( \Aimeos\MW\Exception $e )
+		catch( \Exception $e )
 		{
 			$status = 500;
 			$view->errors = array( array(
@@ -501,7 +512,7 @@ class Base
 		$status = 501;
 
 		$context = $this->getContext();
-		$view = $context->getView();
+		$view = $this->getView();
 
 		$view->errors = array( array(
 			'title' => $context->getI18n()->dt( 'controller/jsonadm', 'Not implemented' ),
@@ -549,7 +560,7 @@ class Base
 	public function options( $body, array &$header, &$status )
 	{
 		$context = $this->getContext();
-		$view = $context->getView();
+		$view = $this->getView();
 
 		try
 		{
@@ -590,7 +601,7 @@ class Base
 				'detail' => $e->getTraceAsString(),
 			) );
 		}
-		catch( \Aimeos\MW\Exception $e )
+		catch( \Exception $e )
 		{
 			$status = 500;
 			$view->errors = array( array(
@@ -628,6 +639,18 @@ class Base
 
 		return $view->render( $this->getTemplate( $tplconf, $default ) );
 	}
+
+
+	/**
+	 * Returns the view object
+	 *
+	 * @return \Aimeos\MW\View\Iface View object
+	 */
+	protected function getView()
+	{
+		return $this->view;
+	}
+
 
 	/**
 	 * Initializes the criteria object based on the given parameter
@@ -704,6 +727,60 @@ class Base
 		}
 
 		$criteria->setSortations( $sortation );
+	}
+
+
+	/**
+	 * Returns the items with parent/child relationships
+	 *
+	 * @param array $items List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @param array $include List of resource types that should be fetched
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	protected function getChildItems( array $items, array $include )
+	{
+		return array();
+	}
+
+
+	/**
+	 * Returns the list items for association relationships
+	 *
+	 * @param array $items List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @param array $include List of resource types that should be fetched
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 */
+	protected function getListItems( array $items, array $include )
+	{
+		return array();
+	}
+
+
+	/**
+	 * Returns the items associated via a lists table
+	 *
+	 * @param array $items List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 */
+	protected function getRefItems( array $listItems )
+	{
+		$list = $map = array();
+
+		foreach( $listItems as $listItem ) {
+			$map[$listItem->getDomain()][] = $listItem->getRefId();
+		}
+
+		foreach( $map as $domain => $ids )
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $domain );
+
+			$search = $manager->createSearch();
+			$search->setConditions( $search->compare( '==', $domain . '.id', $ids ) );
+
+			$list = array_merge( $list, $manager->searchItems( $search ) );
+		}
+
+		return $list;
 	}
 
 

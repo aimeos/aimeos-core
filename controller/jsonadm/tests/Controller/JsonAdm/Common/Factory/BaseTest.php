@@ -52,31 +52,34 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	public function testAddDecoratorsInvalidName()
 	{
 		$decorators = array( '$' );
+		$view = $this->context->getView();
 		$cntl = \Aimeos\Controller\JsonAdm\Factory::createController( $this->context, array(), 'attribute', 'Standard' );
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\JsonAdm\\Exception' );
-		\Aimeos\Controller\JsonAdm\Common\Factory\TestAbstract::addDecoratorsPublic( $cntl, $decorators, 'Test', $this->context, array(), 'attribute' );
+		\Aimeos\Controller\JsonAdm\Common\Factory\TestAbstract::addDecoratorsPublic( $cntl, $decorators, 'Test', $this->context, $view, array(), 'attribute' );
 	}
 
 
 	public function testAddDecoratorsInvalidClass()
 	{
 		$decorators = array( 'Test' );
+		$view = $this->context->getView();
 		$cntl = \Aimeos\Controller\JsonAdm\Factory::createController( $this->context, array(), 'attribute', 'Standard' );
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\JsonAdm\\Exception' );
-		\Aimeos\Controller\JsonAdm\Common\Factory\TestAbstract::addDecoratorsPublic( $cntl, $decorators, 'TestDecorator', $this->context, array(), 'attribute' );
+		\Aimeos\Controller\JsonAdm\Common\Factory\TestAbstract::addDecoratorsPublic( $cntl, $decorators, 'TestDecorator', $this->context, $view, array(), 'attribute' );
 	}
 
 
 	public function testAddDecoratorsInvalidInterface()
 	{
 		$decorators = array( 'Test' );
+		$view = $this->context->getView();
 		$cntl = \Aimeos\Controller\JsonAdm\Factory::createController( $this->context, array(), 'attribute', 'Standard' );
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\JsonAdm\\Exception' );
 		\Aimeos\Controller\JsonAdm\Common\Factory\TestAbstract::addDecoratorsPublic( $cntl, $decorators,
-			'\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\', $this->context, array(), 'attribute' );
+			'\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\', $this->context, $view, array(), 'attribute' );
 	}
 
 
@@ -95,15 +98,15 @@ class TestAbstract
 	extends \Aimeos\Controller\JsonAdm\Common\Factory\Base
 {
 	public static function addDecoratorsPublic( \Aimeos\Controller\JsonAdm\Iface $controller, array $decorators, $classprefix,
-		\Aimeos\MShop\Context\Item\Iface $context, $templatePaths, $path )
+		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MW\View\Iface $view, $templatePaths, $path )
 	{
-		self::addDecorators( $controller, $decorators, $classprefix, $context, $templatePaths, $path );
+		self::addDecorators( $controller, $decorators, $classprefix, $context, $view, $templatePaths, $path );
 	}
 
 	public static function addControllerDecoratorsPublic( \Aimeos\Controller\JsonAdm\Iface $controller,
-		\Aimeos\MShop\Context\Item\Iface $context, $templatePaths, $path )
+		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MW\View\Iface $view, $templatePaths, $path )
 	{
-		self::addControllerDecorators( $controller, $context, $templatePaths, $path );
+		self::addControllerDecorators( $controller, $view, $context, $templatePaths, $path );
 	}
 }
 

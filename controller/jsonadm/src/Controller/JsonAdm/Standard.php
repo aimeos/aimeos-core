@@ -12,7 +12,7 @@ namespace Aimeos\Controller\JsonAdm;
 
 
 /**
- * JSON API controller interface
+ * JSON API standard controller
  *
  * @package Controller
  * @subpackage JsonAdm

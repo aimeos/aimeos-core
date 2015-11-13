@@ -18,12 +18,13 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$context = \TestHelper::getContext();
+		$view = $context->getView();
 
 		$this->stub = $this->getMockBuilder( '\\Aimeos\\Controller\\JsonAdm\\Standard' )
-			->setConstructorArgs( array( $context, array(), 'attribute' ) )
+			->setConstructorArgs( array( $context, $view, array(), 'attribute' ) )
 			->getMock();
 
-		$this->object = new TestBase( $this->stub, $context, array(), 'attribute' );
+		$this->object = new TestBase( $this->stub, $context, $view, array(), 'attribute' );
 	}
 
 

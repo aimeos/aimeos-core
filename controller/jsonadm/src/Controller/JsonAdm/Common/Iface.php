@@ -24,9 +24,11 @@ interface Iface
 	 * Initializes the controller
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context MShop context object
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
 	 * @return void
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $path );
+	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MW\View\Iface $view,
+		array $templatePaths, $path );
 }

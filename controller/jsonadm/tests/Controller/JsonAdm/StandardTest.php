@@ -19,8 +19,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->context = \TestHelper::getContext();
 		$templatePaths = \TestHelper::getControllerPaths();
+		$this->view = $this->context->getView();
 
-		$this->object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $templatePaths, 'product' );
+		$this->object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'product' );
 	}
 
 
@@ -40,11 +41,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$params = array( 'id' => $this->getProductItem()->getId() );
-		$view = $this->context->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
-		$view->addHelper( 'param', $helper );
-
-		$this->context->setView( $view );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
 		$status = 500;
@@ -133,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$status = 500;
 
 		$templatePaths = \TestHelper::getControllerPaths();
-		$object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $templatePaths, 'product/stock/warehouse' );
+		$object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'product/stock/warehouse' );
 
 		$result = json_decode( $object->get( '', $header, $status ), true );
 
@@ -153,7 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$status = 500;
 
 		$templatePaths = \TestHelper::getControllerPaths();
-		$object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $templatePaths, 'invalid' );
+		$object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'invalid' );
 
 		$result = json_decode( $object->get( '', $header, $status ), true );
 
@@ -174,11 +172,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'==' => array( 'product.type.code' => 'select' )
 			)
 		);
-		$view = $this->context->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
-		$view->addHelper( 'param', $helper );
-
-		$this->context->setView( $view );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
 		$status = 500;
@@ -205,11 +200,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				)
 			)
 		);
-		$view = $this->context->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
-		$view->addHelper( 'param', $helper );
-
-		$this->context->setView( $view );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
 		$status = 500;
@@ -234,11 +226,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'limit' => 25
 			)
 		);
-		$view = $this->context->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
-		$view->addHelper( 'param', $helper );
-
-		$this->context->setView( $view );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
 		$status = 500;
@@ -263,11 +252,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$params = array(
 			'sort' => 'product.label,-product.code'
 		);
-		$view = $this->context->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
-		$view->addHelper( 'param', $helper );
-
-		$this->context->setView( $view );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
 		$status = 500;
@@ -286,32 +272,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetIdIncluded()
-	{
-		$params = array(
-			'id' => $this->getProductItem()->getId(),
-			'include' => 'text,product'
-		);
-		$view = $this->context->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
-		$view->addHelper( 'param', $helper );
-
-		$this->context->setView( $view );
-
-		$header = array();
-		$status = 500;
-
-		$result = json_decode( $this->object->get( '', $header, $status ), true );
-
-		$this->assertEquals( 200, $status );
-		$this->assertEquals( 1, count( $header ) );
-		$this->assertEquals( 1, $result['meta']['total'] );
-		$this->assertEquals( 'product', $result['data']['type'] );
-		$this->assertEquals( 7, count( $result['included'] ) );
-		$this->assertArrayNotHasKey( 'errors', $result );
-	}
-
-
 	public function testGetFields()
 	{
 		$params = array(
@@ -321,12 +281,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'sort' => 'product.id',
 			'include' => 'product'
 		);
-
-		$view = $this->context->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
-		$view->addHelper( 'param', $helper );
-
-		$this->context->setView( $view );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
 		$status = 500;
@@ -339,7 +295,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 25, count( $result['data'] ) );
 		$this->assertEquals( 'product', $result['data'][0]['type'] );
 		$this->assertEquals( 2, count( $result['data'][0]['attributes'] ) );
-		$this->assertEquals( 12, count( $result['included'] ) );
 		$this->assertArrayNotHasKey( 'errors', $result );
 	}
 
