@@ -13,6 +13,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
 	private $object;
+	private $view;
 
 
 	protected function setUp()
