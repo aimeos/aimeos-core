@@ -515,7 +515,7 @@ class Base
 		$view = $this->getView();
 
 		$view->errors = array( array(
-			'title' => $context->getI18n()->dt( 'controller/jsonadm', 'Not implemented' ),
+			'title' => $context->getI18n()->dt( 'controller/jsonadm', 'Not implemented, use PATCH instead' ),
 		) );
 
 		/** controller/jsonadm/standard/template-put
