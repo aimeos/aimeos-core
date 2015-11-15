@@ -17,9 +17,9 @@ date_default_timezone_set( 'UTC' );
 
 function setup_autoload( $classname )
 {
-	if( strncmp( $classname, '\\Aimeos\\MW\\Setup\\Task\\', 14 ) === 0 )
+	if( strncmp( $classname, 'Aimeos\\MW\\Setup\\Task\\', 21 ) === 0 )
 	{
-		$fileName = substr( $classname, 14 ) . '.php';
+		$fileName = substr( $classname, 21 ) . '.php';
 		$paths = explode( PATH_SEPARATOR, get_include_path() );
 
 		foreach( $paths as $path )
@@ -107,7 +107,7 @@ try
 
 	$ctx = new \Aimeos\MShop\Context\Item\Standard();
 
-	$confPaths = $aimeos->getConfigPaths( 'mysql' );
+	$confPaths = $aimeos->getConfigPaths();
 	if( isset( $options['config'] ) ) {
 		$confPaths = array_merge( $confPaths, (array) $options['config'] );
 	}

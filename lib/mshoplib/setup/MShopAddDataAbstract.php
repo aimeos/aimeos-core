@@ -391,7 +391,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
 
 		$item = $manager->createItem();
-		$item->setProductId( $productid );
+		$item->setParentId( $productid );
 
 		foreach( $data as $entry )
 		{

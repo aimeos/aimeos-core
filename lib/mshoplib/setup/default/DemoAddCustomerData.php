@@ -144,7 +144,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		foreach( $data as $entry )
 		{
 			$addr = $manager->createItem();
-			$addr->setRefId( $id );
+			$addr->setParentId( $id );
 			$addr->setTitle( $entry['title'] );
 			$addr->setSalutation( $entry['salutation'] );
 			$addr->setCompany( $entry['company'] );

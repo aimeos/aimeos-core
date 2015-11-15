@@ -53,7 +53,7 @@ class CatalogRebuildPerfIndex extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	{
 		$this->msg( 'Rebuilding index for performance data', 0 );
 
-		\Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->getContext() )->rebuildIndex();
+		\Aimeos\MShop\Factory::createManager( $this->getContext(), 'index' )->rebuildIndex();
 
 		$this->status( 'done' );
 	}

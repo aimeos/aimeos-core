@@ -79,7 +79,7 @@ class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 			foreach( $result as $id => $product )
 			{
 				$item->setId( null );
-				$item->setProductId( $id );
+				$item->setParentId( $id );
 				$item->setWarehouseId( $warehouseid );
 				$item->setStockLevel( current( $stocklevels ) );
 				$productStockManager->saveItem( $item );
