@@ -9,6 +9,10 @@ $config = $this->config( 'controller/jsonadm/url/config', array() );
 $ref = array( 'id', 'resource', 'filter', 'page', 'sort', 'include', 'fields' );
 $params = array_intersect_key( $this->param(), array_flip( $ref ) );
 
+if( !isset( $params['id'] ) ) {
+	$params['id'] = null;
+}
+
 
 $total = $this->get( 'total', 0 );
 $offset = max( $this->param( 'page/offset', 0 ), 0 );

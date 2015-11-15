@@ -32,7 +32,7 @@ $build = function( array $items, array $fields )
 			'links' => array(
 				'self' => $this->url( $target, $cntl, $action, array( 'resource' => $type, 'id' => $id ), array(), $config ),
 				'related' => array(
-					'href' => $this->url( $target, $cntl, $action, array( 'resource' => $type ), array(), $config )
+					'href' => $this->url( $target, $cntl, $action, array( 'resource' => $type, 'id' => null ), array(), $config )
 				)
 			)
 		);
