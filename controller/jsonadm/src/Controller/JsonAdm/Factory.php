@@ -70,7 +70,7 @@ class Factory
 		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
 
 		if( empty( $path ) ) {
-			throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Controller path is empty' ), 400 );
+			return self::createControllerRoot( $context, $context->getView(), $templatePaths, $path, $name );
 		}
 
 		$id = (string) $context;

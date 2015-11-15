@@ -115,7 +115,7 @@ class Base
 		{
 			$status = 500;
 			$view->errors = array( array(
-				'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
+				'title' => $e->getMessage(),
 				'detail' => $e->getTraceAsString(),
 			) );
 		}
@@ -210,7 +210,7 @@ class Base
 		{
 			$status = 500;
 			$view->errors = array( array(
-				'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
+				'title' => $e->getMessage(),
 				'detail' => $e->getTraceAsString(),
 			) );
 		}
@@ -334,7 +334,7 @@ class Base
 		{
 			$status = 500;
 			$view->errors = array( array(
-				'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
+				'title' => $e->getMessage(),
 				'detail' => $e->getTraceAsString(),
 			) );
 		}
@@ -462,7 +462,7 @@ class Base
 		{
 			$status = 500;
 			$view->errors = array( array(
-				'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
+				'title' => $e->getMessage(),
 				'detail' => $e->getTraceAsString(),
 			) );
 		}
@@ -570,6 +570,7 @@ class Base
 				'order', 'plugin', 'price', 'product', 'service', 'supplier', 'tag', 'text'
 			);
 			$domains = $context->getConfig()->get( 'controller/jsonadm/domains', $default );
+			$domains = (array) $view->param( 'resource', $domains );
 
 			foreach( $domains as $domain )
 			{
@@ -605,7 +606,7 @@ class Base
 		{
 			$status = 500;
 			$view->errors = array( array(
-				'title' => $context->getI18n()->dt( 'controller/jsonadm', 'A non-recoverable error occured' ),
+				'title' => $e->getMessage(),
 				'detail' => $e->getTraceAsString(),
 			) );
 		}

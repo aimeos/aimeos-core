@@ -6,9 +6,10 @@ $action = $this->config( 'controller/jsonadm/url/action', 'get' );
 $config = $this->config( 'controller/jsonadm/url/config', array() );
 
 $list = array();
+$site = $this->param( 'site', 'default' );
 
 foreach( $this->get( 'resources', array() ) as $resource ) {
-	$list[$resource] = $this->url( $target, $cntl, $action, array( 'resource' => $resource ), array(), $config );
+	$list[$resource] = $this->url( $target, $cntl, $action, array( 'site' => $site, 'resource' => $resource ), array(), $config );
 }
 
 ?>

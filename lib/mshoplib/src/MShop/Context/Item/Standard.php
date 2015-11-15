@@ -173,12 +173,16 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	{
 		$locale = ( $locale !== null ? $locale : $this->getLocale()->getLanguageId() );
 
-		if( !isset( $this->i18n[$locale] ) ) {
-			/// Locale ID %1$s
-			throw new \Aimeos\MShop\Exception( sprintf( 'Internationalization object not available for "%1$s"', $locale ) );
+		if( isset( $this->i18n[$locale] ) ) {
+			return $this->i18n[$locale];
 		}
 
-		return $this->i18n[$locale];
+		if( isset( $this->i18n['en'] ) ) {
+			return $this->i18n['en'];
+		}
+
+		/// Locale ID %1$s
+		throw new \Aimeos\MShop\Exception( sprintf( 'Internationalization object not available for "%1$s"', $locale ) );
 	}
 
 
