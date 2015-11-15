@@ -24,7 +24,8 @@ class ProductModifyIndexes extends \Aimeos\MW\Setup\Task\Base
 				'unq_msprostwa_sid_code' => 'ALTER TABLE "mshop_product_stock_warehouse" ADD UNIQUE INDEX "unq_msprostwa_sid_code" ("siteid", "code")'
 			),
 			'mshop_product_stock' => array(
-				'fk_msprost_parentid' => 'ALTER TABLE "mshop_product_stock" ADD INDEX "fk_msprost_parentid" ("parentid")',
+				// superseeded by ProductChangeStockProductidParentid
+				// 'fk_msprost_prodid' => 'ALTER TABLE "mshop_product_stock" ADD INDEX "fk_msprost_prodid" ("prodid")',
 				'unq_msprost_sid_pid_wid' => 'ALTER TABLE "mshop_product_stock" ADD UNIQUE INDEX "unq_msprost_sid_pid_wid" ("siteid", "prodid", "warehouseid")'
 			),
 			'mshop_product_site' => array(
