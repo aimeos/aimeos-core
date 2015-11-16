@@ -365,8 +365,8 @@ class Standard
 
 		$search = $stockManager->createSearch();
 		$expr = array(
-				$search->compare( '==', 'product.stock.productid', array_keys( $bundleItems ) ),
-				$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
+			$search->compare( '==', 'product.stock.parentid', array_keys( $bundleItems ) ),
+			$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
