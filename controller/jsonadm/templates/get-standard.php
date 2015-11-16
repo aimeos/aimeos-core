@@ -10,7 +10,7 @@ $ref = array( 'id', 'resource', 'filter', 'page', 'sort', 'include', 'fields' );
 $params = array_intersect_key( $this->param(), array_flip( $ref ) );
 
 if( !isset( $params['id'] ) ) {
-	$params['id'] = null;
+	$params['id'] = '';
 }
 
 

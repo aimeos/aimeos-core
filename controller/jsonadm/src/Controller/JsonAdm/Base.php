@@ -291,13 +291,17 @@ class Base
 			}
 			else
 			{
-				if( isset( $request->data->attributes ) && isset( $request->data->id ) )
+				if( ( $id = $view->param( 'id' ) ) === null ) {
+					throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'No ID given' ), 400 );
+				}
+
+				if( isset( $request->data->attributes ) )
 				{
-					$item = $manager->getItem( $request->data->id );
+					$item = $manager->getItem( $id );
 					$item->fromArray( (array) $request->data->attributes );
 
 					$manager->saveItem( $item );
-					$data = $manager->getItem( $request->data->id );
+					$data = $manager->getItem( $id );
 				}
 
 				$view->data = $data;
