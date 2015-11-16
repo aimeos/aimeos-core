@@ -6,14 +6,14 @@ if( defined( 'JSON_PRETTY_PRINT' ) ) {
 }
 
 
-$build = function( array $items, array $fields )
+$build = function( \Aimeos\MW\View\Iface $view, array $items, array $fields )
 {
 	$list = array();
 
-	$target = $this->config( 'controller/jsonadm/url/target' );
-	$cntl = $this->config( 'controller/jsonadm/url/controller', 'jsonadm' );
-	$action = $this->config( 'controller/jsonadm/url/action', 'get' );
-	$config = $this->config( 'controller/jsonadm/url/config', array() );
+	$target = $view->config( 'controller/jsonadm/url/target' );
+	$cntl = $view->config( 'controller/jsonadm/url/controller', 'jsonadm' );
+	$action = $view->config( 'controller/jsonadm/url/action', 'get' );
+	$config = $view->config( 'controller/jsonadm/url/config', array() );
 
 	foreach( (array) $items as $item )
 	{
@@ -30,9 +30,9 @@ $build = function( array $items, array $fields )
 			'type' => $type,
 			'attributes' => $attributes,
 			'links' => array(
-				'self' => $this->url( $target, $cntl, $action, array( 'resource' => $type, 'id' => $id ), array(), $config ),
+				'self' => $view->url( $target, $cntl, $action, array( 'resource' => $type, 'id' => $id ), array(), $config ),
 				'related' => array(
-					'href' => $this->url( $target, $cntl, $action, array( 'resource' => $type, 'id' => null ), array(), $config )
+					'href' => $view->url( $target, $cntl, $action, array( 'resource' => $type, 'id' => null ), array(), $config )
 				)
 			)
 		);
@@ -49,8 +49,8 @@ foreach( (array) $fields as $resource => $list ) {
 	$fields[$resource] = array_flip( explode( ',', $list ) );
 }
 
-$response = $build( $this->get( 'childItems', array() ), $fields );
-$response = array_merge( $response, $build( $this->get( 'refItems', array() ), $fields ) );
+$response = $build( $this, $this->get( 'childItems', array() ), $fields );
+$response = array_merge( $response, $build( $this, $this->get( 'refItems', array() ), $fields ) );
 
 
 echo json_encode( $response, $options );
