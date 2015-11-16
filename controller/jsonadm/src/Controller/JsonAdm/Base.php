@@ -61,7 +61,7 @@ class Base
 		{
 			$manager = \Aimeos\MShop\Factory::createManager( $context, $this->getPath() );
 
-			if( ( $id = $view->param( 'id' ) ) === null )
+			if( ( $id = $view->param( 'id' ) ) == null )
 			{
 				if( ( $request = json_decode( $body ) ) === null || !isset( $request->data ) || !is_array( $request->data ) ) {
 					throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Invalid JSON in body' ), 400 );
@@ -171,7 +171,7 @@ class Base
 			$manager = \Aimeos\MShop\Factory::createManager( $context, $this->getPath() );
 			$include = ( ( $include = $view->param( 'include' ) ) !== null ? explode( ',', $include ) : array() );
 
-			if( ( $id = $view->param( 'id' ) ) === null )
+			if( ( $id = $view->param( 'id' ) ) == null )
 			{
 				$search = $this->initCriteria( $manager->createSearch(), $view->param() );
 				$view->data = $manager->searchItems( $search, array(), $total );
@@ -291,7 +291,7 @@ class Base
 			}
 			else
 			{
-				if( ( $id = $view->param( 'id' ) ) === null ) {
+				if( ( $id = $view->param( 'id' ) ) == null ) {
 					throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'No ID given' ), 400 );
 				}
 
@@ -394,7 +394,7 @@ class Base
 				throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Invalid JSON in body' ), 400 );
 			}
 
-			if( isset( $request->data->id ) || $view->param( 'id' ) !== null ) {
+			if( isset( $request->data->id ) || $view->param( 'id' ) != null ) {
 				throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Client generated IDs are not supported' ), 403 );
 			}
 
