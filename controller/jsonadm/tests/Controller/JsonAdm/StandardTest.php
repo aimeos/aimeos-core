@@ -321,7 +321,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->will( $this->returnValue( $item ) );
 
 
-		$body = '{"data": {"id": "-1", "type": "product", "attributes": {"product.label": "test"}}}';
+		$params = array( 'id' => '-1' );
+		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$this->view->addHelper( 'param', $helper );
+
+		$body = '{"data": {"type": "product", "attributes": {"product.label": "test"}}}';
 		$header = array();
 		$status = 500;
 

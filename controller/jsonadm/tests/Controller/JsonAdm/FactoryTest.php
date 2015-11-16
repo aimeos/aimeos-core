@@ -36,8 +36,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelper::getContext();
 		$templatePaths = \TestHelper::getControllerPaths();
 
-		$this->setExpectedException( '\\Aimeos\\Controller\\JsonAdm\\Exception' );
-		\Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, "\t\n" );
+		$controller = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, '' );
+		$this->assertInstanceOf( '\\Aimeos\\Controller\\JsonAdm\\Common\\Iface', $controller );
 	}
 
 
