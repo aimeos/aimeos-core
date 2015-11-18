@@ -55,7 +55,7 @@ class MW_Setup_Task_CacheChangePrimaryUniqueKey extends MW_Setup_Task_Abstract
 		$this->_msg( 'Changing index type in madmin_cache', 0 );
 
 		if( $this->_schema->tableExists( 'madmin_cache' ) === true
-			&& $this->_schema->constraintExists( 'madmin_cache', 'PRIMARY KEY' ) === false )
+			&& $this->_schema->constraintExists( 'madmin_cache', 'PRIMARY' ) === true )
 		{
 			$this->_executeList( $stmts );
 			$this->_status( 'done' );
