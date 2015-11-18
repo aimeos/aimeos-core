@@ -293,7 +293,7 @@ class Client_Html_Catalog_Stage_Navigator_Default
 
 				$context = $this->_getContext();
 				$site = $context->getLocale()->getSite()->getCode();
-				$params = $context->getSession()->get( 'aimeos/catalog/lists/params/last/' . $site, array() );
+				$params = $context->getSession()->get( 'arcavias/catalog/list/params/last/' . $site, array() );
 
 				$filter = $this->_getProductListFilterByParam( $params );
 				$filter->setSlice( $start, $size );
