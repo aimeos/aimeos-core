@@ -23,8 +23,8 @@ CREATE TABLE "madmin_cache" (
 	"expire" DATETIME,
 	-- Cached value
 	"value" MEDIUMTEXT NOT NULL,
-CONSTRAINT "pk_macac_id_siteid"
-	PRIMARY KEY ("id", "siteid")
+CONSTRAINT "unq_macac_id_siteid"
+	UNIQUE KEY ("id", "siteid")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
 CREATE INDEX "idx_majob_expire" ON "madmin_cache" ("expire");
