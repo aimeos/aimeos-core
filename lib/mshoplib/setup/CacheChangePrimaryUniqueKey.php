@@ -58,7 +58,7 @@ class CacheChangePrimaryUniqueKey extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Changing index type in madmin_cache', 0 );
 
 		if( $this->schema->tableExists( 'madmin_cache' ) === true
-			&& $this->schema->constraintExists( 'madmin_cache', 'PRIMARY KEY' ) === false )
+			&& $this->schema->constraintExists( 'madmin_cache', 'PRIMARY' ) === true )
 		{
 			$this->executeList( $stmts );
 			$this->status( 'done' );
