@@ -23,7 +23,7 @@ CREATE TABLE "madmin_cache" (
 	"expire" DATETIME,
 	-- Cached value
 	"value" MEDIUMTEXT NOT NULL,
-CONSTRAINT "_macac_id_siteid"
+CONSTRAINT "unq_macac_id_siteid"
 	UNIQUE KEY ("id", "siteid")
 ) ENGINE=InnoDB CHARACTER SET = utf8;
 
