@@ -569,12 +569,15 @@ class Base
 		try
 		{
 			$resources = array();
-			$default = array(
-				'attribute', 'catalog', 'coupon', 'customer', 'locale', 'media',
-				'order', 'plugin', 'price', 'product', 'service', 'supplier', 'tag', 'text'
-			);
-			$domains = $context->getConfig()->get( 'controller/jsonadm/domains', $default );
-			$domains = (array) $view->param( 'resource', $domains );
+
+			if( ( $domains = $view->param( 'resource' ) ) == '' )
+			{
+				$default = array(
+					'attribute', 'catalog', 'coupon', 'customer', 'locale', 'media',
+					'order', 'plugin', 'price', 'product', 'service', 'supplier', 'tag', 'text'
+				);
+				$domains = $context->getConfig()->get( 'controller/jsonadm/domains', $default );
+			}
 
 			foreach( $domains as $domain )
 			{
