@@ -579,7 +579,7 @@ class Base
 				$domains = $context->getConfig()->get( 'controller/jsonadm/domains', $default );
 			}
 
-			foreach( $domains as $domain )
+			foreach( (array) $domains as $domain )
 			{
 				$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
 				$resources = array_merge( $resources, $manager->getResourceType( true ) );
