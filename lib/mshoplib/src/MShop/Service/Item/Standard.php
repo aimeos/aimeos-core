@@ -40,38 +40,17 @@ class Standard
 
 
 	/**
-	 * Returns the position of the service item in the list of deliveries.
-	 *
-	 * @return integer Position in item list
-	 */
-	public function getPosition()
-	{
-		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
-	}
-
-
-	/**
-	 * Sets the new position of the service item in the list of deliveries.
-	 *
-	 * @param integer $pos Position in item list
-	 */
-	public function setPosition( $pos )
-	{
-		if( $pos == $this->getPosition() ) { return; }
-
-		$this->values['pos'] = (int) $pos;
-		$this->setModified();
-	}
-
-
-	/**
 	 * Returns the code of the service item payment if available.
 	 *
 	 * @return string
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['service.code'] ) ) {
+			return (string) $this->values['service.code'];
+		}
+
+		return '';
 	}
 
 
@@ -86,8 +65,23 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
+		$this->values['service.code'] = (string) $code;
 		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the type of the service item if available.
+	 *
+	 * @return string Service item type
+	 */
+	public function getType()
+	{
+		if( isset( $this->values['service.type'] ) ) {
+			return (string) $this->values['service.type'];
+		}
+
+		return null;
 	}
 
 
@@ -98,7 +92,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['service.typeid'] ) ) {
+			return (int) $this->values['service.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -111,19 +109,8 @@ class Standard
 	{
 		if( $typeId == $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $typeId;
+		$this->values['service.typeid'] = (int) $typeId;
 		$this->setModified();
-	}
-
-
-	/**
-	 * Returns the type of the service item if available.
-	 *
-	 * @return string Service item type
-	 */
-	public function getType()
-	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 
@@ -134,7 +121,11 @@ class Standard
 	 */
 	public function getProvider()
 	{
-		return ( isset( $this->values['provider'] ) ? (string) $this->values['provider'] : '' );
+		if( isset( $this->values['service.provider'] ) ) {
+			return (string) $this->values['service.provider'];
+		}
+
+		return '';
 	}
 
 
@@ -147,7 +138,7 @@ class Standard
 	{
 		if( $provider == $this->getProvider() ) { return; }
 
-		$this->values['provider'] = (string) $provider;
+		$this->values['service.provider'] = (string) $provider;
 		$this->setModified();
 	}
 
@@ -159,7 +150,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['service.label'] ) ) {
+			return (string) $this->values['service.label'];
+		}
+
+		return '';
 	}
 
 
@@ -172,7 +167,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['service.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -184,7 +179,11 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->values['config'] ) ? $this->values['config'] : array() );
+		if( isset( $this->values['service.config'] ) ) {
+			return (array) $this->values['service.config'];
+		}
+
+		return array();
 	}
 
 
@@ -195,7 +194,36 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		$this->values['config'] = $config;
+		$this->values['service.config'] = $config;
+		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the position of the service item in the list of deliveries.
+	 *
+	 * @return integer Position in item list
+	 */
+	public function getPosition()
+	{
+		if( isset( $this->values['service.position'] ) ) {
+			return (int) $this->values['service.position'];
+		}
+
+		return 0;
+	}
+
+
+	/**
+	 * Sets the new position of the service item in the list of deliveries.
+	 *
+	 * @param integer $pos Position in item list
+	 */
+	public function setPosition( $pos )
+	{
+		if( $pos == $this->getPosition() ) { return; }
+
+		$this->values['service.position'] = (int) $pos;
 		$this->setModified();
 	}
 
@@ -207,7 +235,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['service.status'] ) ) {
+			return (int) $this->values['service.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -220,7 +252,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['service.status'] = (int) $status;
 		$this->setModified();
 	}
 

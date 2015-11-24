@@ -229,7 +229,7 @@ class Standard
 	{
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$values = array( 'siteid'=> $context->getLocale()->getSiteId() );
+		$values = array( 'order.base.service.siteid'=> $context->getLocale()->getSiteId() );
 
 		return $this->createItemBase( $priceManager->createItem(), $values );
 	}
@@ -577,11 +577,11 @@ class Standard
 				while( ( $row = $results->fetch() ) !== false )
 				{
 					$price = $priceManager->createItem();
-					$price->setValue( $row['price'] );
-					$price->setRebate( $row['rebate'] );
-					$price->setCosts( $row['costs'] );
-					$price->setTaxRate( $row['taxrate'] );
-					$items[$row['id']] = array( 'price' => $price, 'item' => $row );
+					$price->setValue( $row['order.base.service.price'] );
+					$price->setRebate( $row['order.base.service.rebate'] );
+					$price->setCosts( $row['order.base.service.costs'] );
+					$price->setTaxRate( $row['order.base.service.taxrate'] );
+					$items[$row['order.base.service.id']] = array( 'price' => $price, 'item' => $row );
 				}
 			}
 			catch( \Exception $e )

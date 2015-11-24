@@ -28,33 +28,33 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 23,
-			'siteid' => 123,
-			'baseid' => 99,
-			'addrid' => 11,
-			'type' => \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY,
-			'company' => 'unitCompany',
-			'vatid' => 'DE999999999',
-			'salutation' => \Aimeos\MShop\Order\Item\Base\Address\Base::SALUTATION_MR,
-			'title' => 'Herr',
-			'firstname' => 'firstunit',
-			'lastname' => 'lastunit',
-			'address1' => 'unit str.',
-			'address2' => ' 166',
-			'address3' => '4.OG',
-			'postal' => '22769',
-			'city' => 'Hamburg',
-			'state' => 'Hamburg',
-			'countryid' => 'DE',
-			'telephone' => '05554433221',
-			'email' => 'test@example.com',
-			'telefax' => '05554433222',
-			'website' => 'www.example.com',
-			'langid' => 'de',
-			'flag' => 2,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.base.address.id' => 23,
+			'order.base.address.siteid' => 123,
+			'order.base.address.baseid' => 99,
+			'order.base.address.addressid' => 11,
+			'order.base.address.type' => \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY,
+			'order.base.address.company' => 'unitCompany',
+			'order.base.address.vatid' => 'DE999999999',
+			'order.base.address.salutation' => \Aimeos\MShop\Order\Item\Base\Address\Base::SALUTATION_MR,
+			'order.base.address.title' => 'Herr',
+			'order.base.address.firstname' => 'firstunit',
+			'order.base.address.lastname' => 'lastunit',
+			'order.base.address.address1' => 'unit str.',
+			'order.base.address.address2' => ' 166',
+			'order.base.address.address3' => '4.OG',
+			'order.base.address.postal' => '22769',
+			'order.base.address.city' => 'Hamburg',
+			'order.base.address.state' => 'Hamburg',
+			'order.base.address.countryid' => 'DE',
+			'order.base.address.telephone' => '05554433221',
+			'order.base.address.email' => 'test@example.com',
+			'order.base.address.telefax' => '05554433222',
+			'order.base.address.website' => 'www.example.com',
+			'order.base.address.languageid' => 'de',
+			'order.base.address.flag' => 2,
+			'order.base.address.mtime' => '2011-01-01 00:00:02',
+			'order.base.address.ctime' => '2011-01-01 00:00:01',
+			'order.base.address.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Address\Standard( $this->values );
@@ -395,34 +395,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCopyFrom()
 	{
-		$address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.', $this->values );
-
-		$addressCopy = new \Aimeos\MShop\Order\Item\Base\Address\Standard();
-		$addressCopy->copyFrom( $address );
-
-		$this->assertEquals( 23, $addressCopy->getAddressId() );
-		$this->assertEquals( 'unitCompany', $addressCopy->getCompany() );
-		$this->assertEquals( 'DE999999999', $addressCopy->getVatID() );
-		$this->assertEquals( \Aimeos\MShop\Order\item\Base\Address\Base::SALUTATION_MR, $addressCopy->getSalutation() );
-		$this->assertEquals( 'Herr', $addressCopy->getTitle() );
-		$this->assertEquals( 'firstunit', $addressCopy->getFirstname() );
-		$this->assertEquals( 'lastunit', $addressCopy->getLastname() );
-		$this->assertEquals( 'unit str.', $addressCopy->getAddress1() );
-		$this->assertEquals( '166', $addressCopy->getAddress2() );
-		$this->assertEquals( '4.OG', $addressCopy->getAddress3() );
-		$this->assertEquals( '22769', $addressCopy->getPostal() );
-		$this->assertEquals( 'Hamburg', $addressCopy->getCity() );
-		$this->assertEquals( 'Hamburg', $addressCopy->getState() );
-		$this->assertEquals( 'DE', $addressCopy->getCountryId() );
-		$this->assertEquals( '05554433221', $addressCopy->getTelephone() );
-		$this->assertEquals( 'test@example.com', $addressCopy->getEmail() );
-		$this->assertEquals( '05554433222', $addressCopy->getTelefax() );
-		$this->assertEquals( 'www.example.com', $addressCopy->getWebsite() );
-		$this->assertEquals( 'de', $addressCopy->getLanguageId() );
-		$this->assertEquals( 2, $addressCopy->getFlag() );
-
-		$this->assertTrue( $addressCopy->isModified() );
+		$address = new \Aimeos\MShop\Order\Item\Base\Address\Standard();
+		$this->object->copyFrom( $address );
 	}
+
 
 	public function testFromArray()
 	{

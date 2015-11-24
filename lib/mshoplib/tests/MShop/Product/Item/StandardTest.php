@@ -28,20 +28,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 1,
-			'siteid'=>99,
-			'typeid' => 2,
-			'type' => 'test',
-			'status' => 0,
-			'code' => 'TEST',
-			'suppliercode' => 'unitSupplier',
-			'label' => 'testproduct',
-			'config' => array( 'css-class' => 'test' ),
-			'start' => null,
-			'end' => null,
-			'ctime' => '2011-01-19 17:04:32',
-			'mtime' => '2011-01-19 18:04:32',
-			'editor' => 'unitTestUser'
+			'product.id' => 1,
+			'product.siteid' => 99,
+			'product.typeid' => 2,
+			'product.type' => 'test',
+			'product.status' => 0,
+			'product.code' => 'TEST',
+			'product.suppliercode' => 'unitSupplier',
+			'product.label' => 'testproduct',
+			'product.config' => array( 'css-class' => 'test' ),
+			'product.datestart' => null,
+			'product.dateend' => null,
+			'product.ctime' => '2011-01-19 17:04:32',
+			'product.mtime' => '2011-01-19 18:04:32',
+			'product.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Product\Item\Standard( $this->values );

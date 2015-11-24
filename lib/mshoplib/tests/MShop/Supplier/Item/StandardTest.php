@@ -27,14 +27,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$values = array(
-			'id' => 541,
-			'siteid'=>99,
-			'label' => 'unitObject',
-			'code' => 'unitCode',
-			'status' => 4,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'supplier.id' => 541,
+			'supplier.siteid' => 99,
+			'supplier.label' => 'unitObject',
+			'supplier.code' => 'unitCode',
+			'supplier.status' => 4,
+			'supplier.mtime' => '2011-01-01 00:00:02',
+			'supplier.ctime' => '2011-01-01 00:00:01',
+			'supplier.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $values );

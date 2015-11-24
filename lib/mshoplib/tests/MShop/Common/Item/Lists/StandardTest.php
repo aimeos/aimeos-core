@@ -24,21 +24,21 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$values = array(
-			'id' => 8,
-			'siteid' => 99,
-			'parentid' => 2,
-			'domain' => 'testDomain',
-			'refid' => 'unitId',
-			'start' => '2005-01-01 00:00:00',
-			'end' => '2010-12-31 00:00:00',
-			'config' => array( 'cnt'=>'40' ),
-			'pos' => 7,
-			'status' => 1,
-			'typeid' => 8,
-			'type' => 'test',
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'common.lists.id' => 8,
+			'common.lists.siteid' => 99,
+			'common.lists.parentid' => 2,
+			'common.lists.domain' => 'testDomain',
+			'common.lists.refid' => 'unitId',
+			'common.lists.datestart' => '2005-01-01 00:00:00',
+			'common.lists.dateend' => '2010-12-31 00:00:00',
+			'common.lists.config' => array( 'cnt'=>'40' ),
+			'common.lists.position' => 7,
+			'common.lists.status' => 1,
+			'common.lists.typeid' => 8,
+			'common.lists.type' => 'test',
+			'common.lists.mtime' => '2011-01-01 00:00:02',
+			'common.lists.ctime' => '2011-01-01 00:00:01',
+			'common.lists.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', $values );

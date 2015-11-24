@@ -200,7 +200,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'order.base.service.attribute.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -586,10 +586,10 @@ class Standard
 			{
 				while( ( $row = $results->fetch() ) !== false )
 				{
-					if( ( $value = json_decode( $row['value'], true ) ) !== null ) {
-						$row['value'] = $value;
+					if( ( $value = json_decode( $row['order.base.service.attribute.value'], true ) ) !== null ) {
+						$row['order.base.service.attribute.value'] = $value;
 					}
-					$items[$row['id']] = $this->createItemBase( $row );
+					$items[$row['order.base.service.attribute.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

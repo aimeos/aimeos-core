@@ -71,11 +71,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcatli."id", mcatli."parentid", mcatli."siteid",
-				mcatli."typeid", mcatli."domain", mcatli."refid",
-				mcatli."start", mcatli."end", mcatli."config", mcatli."pos",
-				mcatli."status", mcatli."mtime", mcatli."editor",
-				mcatli."ctime"
+			SELECT DISTINCT mcatli."id" AS "catalog.lists.id", mcatli."parentid" AS "catalog.lists.parentid",
+				mcatli."siteid" AS "catalog.lists.siteid", mcatli."typeid" AS "catalog.lists.typeid",
+				mcatli."domain" AS "catalog.lists.domain", mcatli."refid" AS "catalog.lists.refid",
+				mcatli."start" AS "catalog.lists.datestart", mcatli."end" AS "catalog.lists.dateend",
+				mcatli."config" AS "catalog.lists.config", mcatli."pos" AS "catalog.lists.position",
+				mcatli."status" AS "catalog.lists.status", mcatli."mtime" AS "catalog.lists.mtime",
+				mcatli."editor" AS "catalog.lists.editor", mcatli."ctime" AS "catalog.lists.ctime"
 			FROM "mshop_catalog_list" AS mcatli
 			:joins
 			WHERE :cond

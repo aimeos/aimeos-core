@@ -47,7 +47,11 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
+		if( isset( $this->values['media.languageid'] ) ) {
+			return (string) $this->values['media.languageid'];
+		}
+
+		return null;
 	}
 
 
@@ -62,7 +66,7 @@ class Standard
 		if( $langid === $this->getLanguageId() ) { return; }
 
 		$this->checkLanguageId( $langid );
-		$this->values['langid'] = $langid;
+		$this->values['media.languageid'] = $langid;
 		$this->setModified();
 	}
 
@@ -74,7 +78,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['media.typeid'] ) ) {
+			return (int) $this->values['media.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -87,7 +95,7 @@ class Standard
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $typeid;
+		$this->values['media.typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -99,7 +107,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
+		if( isset( $this->values['media.type'] ) ) {
+			return (string) $this->values['media.type'];
+		}
+
+		return null;
 	}
 
 
@@ -110,7 +122,11 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
+		if( isset( $this->values['media.domain'] ) ) {
+			return (string) $this->values['media.domain'];
+		}
+
+		return '';
 	}
 
 
@@ -123,7 +139,7 @@ class Standard
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->values['domain'] = (string) $domain;
+		$this->values['media.domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -135,7 +151,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['media.label'] ) ) {
+			return (string) $this->values['media.label'];
+		}
+
+		return '';
 	}
 
 
@@ -148,7 +168,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['media.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -160,7 +180,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['media.status'] ) ) {
+			return (int) $this->values['media.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -173,7 +197,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['media.status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -185,7 +209,11 @@ class Standard
 	 */
 	public function getMimeType()
 	{
-		return ( isset( $this->values['mimetype'] ) ? (string) $this->values['mimetype'] : '' );
+		if( isset( $this->values['media.mimetype'] ) ) {
+			return (string) $this->values['media.mimetype'];
+		}
+
+		return '';
 	}
 
 
@@ -202,7 +230,7 @@ class Standard
 			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
 		}
 
-		$this->values['mimetype'] = (string) $mimetype;
+		$this->values['media.mimetype'] = (string) $mimetype;
 		$this->setModified();
 	}
 
@@ -214,7 +242,11 @@ class Standard
 	 */
 	public function getUrl()
 	{
-		return ( isset( $this->values['url'] ) ? (string) $this->values['url'] : '' );
+		if( isset( $this->values['media.url'] ) ) {
+			return (string) $this->values['media.url'];
+		}
+
+		return '';
 	}
 
 
@@ -227,7 +259,7 @@ class Standard
 	{
 		if( $url == $this->getUrl() ) { return; }
 
-		$this->values['url'] = (string) $url;
+		$this->values['media.url'] = (string) $url;
 		$this->setModified();
 	}
 
@@ -239,7 +271,11 @@ class Standard
 	 */
 	public function getPreview()
 	{
-		return ( isset( $this->values['preview'] ) ? (string) $this->values['preview'] : '' );
+		if( isset( $this->values['media.preview'] ) ) {
+			return (string) $this->values['media.preview'];
+		}
+
+		return '';
 	}
 
 
@@ -252,7 +288,7 @@ class Standard
 	{
 		if( $url == $this->getPreview() ) { return; }
 
-		$this->values['preview'] = (string) $url;
+		$this->values['media.preview'] = (string) $url;
 		$this->setModified();
 	}
 

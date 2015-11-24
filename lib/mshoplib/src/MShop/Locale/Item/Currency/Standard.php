@@ -25,6 +25,7 @@ class Standard
 	private $modified = false;
 	private $values;
 
+
 	/**
 	 * Initializes the currency object object.
 	 *
@@ -36,9 +37,24 @@ class Standard
 
 		$this->values = $values;
 
-		if( isset( $values['id'] ) ) {
-			$this->setId( $values['id'] );
+		if( isset( $values['locale.currency.id'] ) ) {
+			$this->setId( $values['locale.currency.id'] );
 		}
+	}
+
+
+	/**
+	 * Returns the ID of the currency.
+	 *
+	 * @return string|null ID of the currency
+	 */
+	public function getId()
+	{
+		if( isset( $this->values['locale.currency.id'] ) ) {
+			return (string) $this->values['locale.currency.id'];
+		}
+
+		return null;
 	}
 
 
@@ -52,25 +68,14 @@ class Standard
 		if( $key !== null )
 		{
 			$this->setCode( $key );
-			$this->values['id'] = $this->values['code'];
+			$this->values['locale.currency.id'] = $this->values['locale.currency.code'];
 			$this->modified = false;
 		}
 		else
 		{
-			$this->values['id'] = null;
+			$this->values['locale.currency.id'] = null;
 			$this->modified = true;
 		}
-	}
-
-
-	/**
-	 * Returns the ID of the currency.
-	 *
-	 * @return string|null ID of the currency
-	 */
-	public function getId()
-	{
-		return ( isset( $this->values['id'] ) ? (string) $this->values['id'] : null );
 	}
 
 
@@ -81,7 +86,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['locale.currency.code'] ) ) {
+			return (string) $this->values['locale.currency.code'];
+		}
+
+		return '';
 	}
 
 
@@ -98,7 +107,7 @@ class Standard
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $key ) );
 		}
 
-		$this->values['code'] = strtoupper( $key );
+		$this->values['locale.currency.code'] = strtoupper( $key );
 		$this->modified = true;
 	}
 
@@ -110,7 +119,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['locale.currency.label'] ) ) {
+			return (string) $this->values['locale.currency.label'];
+		}
+
+		return '';
 	}
 
 
@@ -123,7 +136,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['locale.currency.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -135,7 +148,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['locale.currency.status'] ) ) {
+			return (int) $this->values['locale.currency.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -148,7 +165,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['locale.currency.status'] = (int) $status;
 		$this->setModified();
 	}
 

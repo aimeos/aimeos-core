@@ -47,7 +47,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
+		if( isset( $this->values['price.type'] ) ) {
+			return (string) $this->values['price.type'];
+		}
+
+		return null;
 	}
 
 
@@ -58,7 +62,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['price.typeid'] ) ) {
+			return (int) $this->values['price.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -71,7 +79,7 @@ class Standard
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $typeid;
+		$this->values['price.typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -83,7 +91,11 @@ class Standard
 	 */
 	public function getCurrencyId()
 	{
-		return ( isset( $this->values['currencyid'] ) ? (string) $this->values['currencyid'] : null );
+		if( isset( $this->values['price.currencyid'] ) ) {
+			return (string) $this->values['price.currencyid'];
+		}
+
+		return null;
 	}
 
 
@@ -98,7 +110,7 @@ class Standard
 		if( $currencyid == $this->getCurrencyId() ) { return; }
 
 		$this->checkCurrencyId( $currencyid, false );
-		$this->values['currencyid'] = $currencyid;
+		$this->values['price.currencyid'] = $currencyid;
 		$this->setModified();
 	}
 
@@ -110,7 +122,11 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
+		if( isset( $this->values['price.domain'] ) ) {
+			return (string) $this->values['price.domain'];
+		}
+
+		return '';
 	}
 
 
@@ -123,7 +139,36 @@ class Standard
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->values['domain'] = (string) $domain;
+		$this->values['price.domain'] = (string) $domain;
+		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the label of the item
+	 *
+	 * @return string Label of the item
+	 */
+	public function getLabel()
+	{
+		if( isset( $this->values['price.label'] ) ) {
+			return (string) $this->values['price.label'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the label of the item
+	 *
+	 * @param string $label Label of the item
+	 */
+	public function setLabel( $label )
+	{
+		if( $label == $this->getLabel() ) { return; }
+
+		$this->values['price.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -135,7 +180,11 @@ class Standard
 	 */
 	public function getQuantity()
 	{
-		return ( isset( $this->values['quantity'] ) ? (int) $this->values['quantity'] : 1 );
+		if( isset( $this->values['price.quantity'] ) ) {
+			return (int) $this->values['price.quantity'];
+		}
+
+		return 1;
 	}
 
 
@@ -148,7 +197,7 @@ class Standard
 	{
 		if( $quantity == $this->getQuantity() ) { return; }
 
-		$this->values['quantity'] = (int) $quantity;
+		$this->values['price.quantity'] = (int) $quantity;
 		$this->setModified();
 	}
 
@@ -160,7 +209,11 @@ class Standard
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '0.00' );
+		if( isset( $this->values['price.value'] ) ) {
+			return (string) $this->values['price.value'];
+		}
+
+		return '0.00';
 	}
 
 
@@ -175,7 +228,7 @@ class Standard
 
 		$this->checkPrice( $price );
 
-		$this->values['value'] = $this->formatNumber( $price );
+		$this->values['price.value'] = $this->formatNumber( $price );
 		$this->setModified();
 	}
 
@@ -187,7 +240,11 @@ class Standard
 	 */
 	public function getCosts()
 	{
-		return ( isset( $this->values['costs'] ) ? (string) $this->values['costs'] : '0.00' );
+		if( isset( $this->values['price.costs'] ) ) {
+			return (string) $this->values['price.costs'];
+		}
+
+		return '0.00';
 	}
 
 
@@ -202,7 +259,7 @@ class Standard
 
 		$this->checkPrice( $price );
 
-		$this->values['costs'] = $this->formatNumber( $price );
+		$this->values['price.costs'] = $this->formatNumber( $price );
 		$this->setModified();
 	}
 
@@ -214,7 +271,11 @@ class Standard
 	 */
 	public function getRebate()
 	{
-		return ( isset( $this->values['rebate'] ) ? (string) $this->values['rebate'] : '0.00' );
+		if( isset( $this->values['price.rebate'] ) ) {
+			return (string) $this->values['price.rebate'];
+		}
+
+		return '0.00';
 	}
 
 
@@ -229,7 +290,7 @@ class Standard
 
 		$this->checkPrice( $price );
 
-		$this->values['rebate'] = $this->formatNumber( $price );
+		$this->values['price.rebate'] = $this->formatNumber( $price );
 		$this->setModified();
 	}
 
@@ -241,7 +302,11 @@ class Standard
 	 */
 	public function getTaxRate()
 	{
-		return ( isset( $this->values['taxrate'] ) ? (string) $this->values['taxrate'] : '0.00' );
+		if( isset( $this->values['price.taxrate'] ) ) {
+			return (string) $this->values['price.taxrate'];
+		}
+
+		return '0.00';
 	}
 
 
@@ -256,7 +321,7 @@ class Standard
 
 		$this->checkPrice( $taxrate );
 
-		$this->values['taxrate'] = $this->formatNumber( $taxrate );
+		$this->values['price.taxrate'] = $this->formatNumber( $taxrate );
 		$this->setModified();
 	}
 
@@ -268,7 +333,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['price.status'] ) ) {
+			return (int) $this->values['price.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -281,32 +350,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
-		$this->setModified();
-	}
-
-
-	/**
-	 * Returns the label of the item
-	 *
-	 * @return string Label of the item
-	 */
-	public function getLabel()
-	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
-	}
-
-
-	/**
-	 * Sets the label of the item
-	 *
-	 * @param string $label Label of the item
-	 */
-	public function setLabel( $label )
-	{
-		if( $label == $this->getLabel() ) { return; }
-
-		$this->values['label'] = (string) $label;
+		$this->values['price.status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -335,9 +379,9 @@ class Standard
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currency ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
 		}
 
-		$this->values['value'] = $this->formatNumber( $this->getValue() + $item->getValue() * $quantity );
-		$this->values['costs'] = $this->formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
-		$this->values['rebate'] = $this->formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
+		$this->values['price.value'] = $this->formatNumber( $this->getValue() + $item->getValue() * $quantity );
+		$this->values['price.costs'] = $this->formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
+		$this->values['price.rebate'] = $this->formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
 	}
 
 

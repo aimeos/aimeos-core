@@ -45,7 +45,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['coupon.label'] ) ) {
+			return (string) $this->values['coupon.label'];
+		}
+
+		return '';
 	}
 
 
@@ -58,7 +62,7 @@ class Standard
 	{
 		if( $name == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $name;
+		$this->values['coupon.label'] = (string) $name;
 		$this->setModified();
 	}
 
@@ -70,7 +74,11 @@ class Standard
 	 */
 	public function getDateStart()
 	{
-		return ( isset( $this->values['start'] ) ? (string) $this->values['start'] : null );
+		if( isset( $this->values['coupon.datestart'] ) ) {
+			return (string) $this->values['coupon.datestart'];
+		}
+
+		return null;
 	}
 
 
@@ -83,7 +91,7 @@ class Standard
 	{
 		if( $date == $this->getDateStart() ) { return; }
 
-		$this->values['start'] = $this->checkDateFormat( $date );
+		$this->values['coupon.datestart'] = $this->checkDateFormat( $date );
 
 		$this->setModified();
 	}
@@ -96,7 +104,11 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		return ( isset( $this->values['end'] ) ? (string) $this->values['end'] : null );
+		if( isset( $this->values['coupon.dateend'] ) ) {
+			return (string) $this->values['coupon.dateend'];
+		}
+
+		return null;
 	}
 
 
@@ -109,7 +121,7 @@ class Standard
 	{
 		if( $date == $this->getDateEnd() ) { return; }
 
-		$this->values['end'] = $this->checkDateFormat( $date );
+		$this->values['coupon.dateend'] = $this->checkDateFormat( $date );
 
 		$this->setModified();
 	}
@@ -122,7 +134,11 @@ class Standard
 	 */
 	public function getProvider()
 	{
-		return ( isset( $this->values['provider'] ) ? (string) $this->values['provider'] : '' );
+		if( isset( $this->values['coupon.provider'] ) ) {
+			return (string) $this->values['coupon.provider'];
+		}
+
+		return '';
 	}
 
 
@@ -135,7 +151,7 @@ class Standard
 	{
 		if( $provider == $this->getProvider() ) { return; }
 
-		$this->values['provider'] = (string) $provider;
+		$this->values['coupon.provider'] = (string) $provider;
 		$this->setModified();
 	}
 
@@ -147,7 +163,11 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->values['config'] ) && is_array( $this->values['config'] ) ? (array) $this->values['config'] : array() );
+		if( isset( $this->values['coupon.config'] ) && is_array( $this->values['coupon.config'] ) ) {
+			return (array) $this->values['coupon.config'];
+		}
+
+		return array();
 	}
 
 
@@ -160,7 +180,7 @@ class Standard
 	{
 		if( $config == $this->getConfig() ) { return; }
 
-		$this->values['config'] = $config;
+		$this->values['coupon.config'] = $config;
 		$this->setModified();
 	}
 
@@ -172,7 +192,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['coupon.status'] ) ) {
+			return (int) $this->values['coupon.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -185,7 +209,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['coupon.status'] = (int) $status;
 		$this->setModified();
 	}
 

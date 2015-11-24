@@ -21,13 +21,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 'es',
-			'label' => 'spanish',
-			'siteid' => 1,
-			'status' => 9,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'locale.language.id' => 'es',
+			'locale.language.label' => 'spanish',
+			'locale.language.siteid' => 1,
+			'locale.language.status' => 9,
+			'locale.language.mtime' => '2011-01-01 00:00:02',
+			'locale.language.ctime' => '2011-01-01 00:00:01',
+			'locale.language.editor' => 'unitTestUser'
 		);
 		$this->object = new \Aimeos\MShop\Locale\Item\Language\Standard( $this->values );
 	}

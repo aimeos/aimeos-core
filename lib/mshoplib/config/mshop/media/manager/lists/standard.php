@@ -71,11 +71,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mmedli."id", mmedli."parentid", mmedli."siteid",
-				mmedli."typeid", mmedli."domain", mmedli."refid",
-				mmedli."start", mmedli."end", mmedli."config", mmedli."pos",
-				mmedli."status", mmedli."mtime", mmedli."editor",
-				mmedli."ctime"
+			SELECT DISTINCT mmedli."id" AS "media.lists.id", mmedli."parentid" AS "media.lists.parentid",
+				mmedli."siteid" AS "media.lists.siteid", mmedli."typeid" AS "media.lists.typeid",
+				mmedli."domain" AS "media.lists.domain", mmedli."refid" AS "media.lists.refid",
+				mmedli."start" AS "media.lists.datestart", mmedli."end" AS "media.lists.dateend",
+				mmedli."config" AS "media.lists.config", mmedli."pos" AS "media.lists.position",
+				mmedli."status" AS "media.lists.status", mmedli."mtime" AS "media.lists.mtime",
+				mmedli."editor" AS "media.lists.editor", mmedli."ctime" AS "media.lists.ctime"
 			FROM "mshop_media_list" AS mmedli
 			:joins
 			WHERE :cond

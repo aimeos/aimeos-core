@@ -44,7 +44,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['customer.group.code'] ) ) {
+			return (string) $this->values['customer.group.code'];
+		}
+
+		return '';
 	}
 
 
@@ -57,7 +61,7 @@ class Standard
 	{
 		if( $value == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $value;
+		$this->values['customer.group.code'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -69,7 +73,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['customer.group.label'] ) ) {
+			return (string) $this->values['customer.group.label'];
+		}
+
+		return '';
 	}
 
 
@@ -82,7 +90,7 @@ class Standard
 	{
 		if( $value == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $value;
+		$this->values['customer.group.label'] = (string) $value;
 		$this->setModified();
 	}
 

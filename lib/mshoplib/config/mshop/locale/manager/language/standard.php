@@ -32,9 +32,10 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mlocla."id", mlocla."label", mlocla."siteid",
-				mlocla."status", mlocla."mtime", mlocla."editor",
-				mlocla."ctime"
+			SELECT DISTINCT mlocla."id" AS "locale.language.id", mlocla."label" AS "locale.language.label",
+				mlocla."siteid" AS "locale.language.siteid", mlocla."status" AS "locale.language.status",
+				mlocla."mtime" AS "locale.language.mtime", mlocla."editor" AS "locale.language.editor",
+				mlocla."ctime" AS "locale.language.ctime"
 			FROM "mshop_locale_language" AS mlocla
 			WHERE :cond
 			ORDER BY :order

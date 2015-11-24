@@ -28,14 +28,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 44,
-			'siteid'=>99,
-			'code' => 'unit_label',
-			'label' => 'label',
-			'status' => 1,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'product.stock.warehouse.id' => 44,
+			'product.stock.warehouse.siteid' => 99,
+			'product.stock.warehouse.code' => 'unitcode',
+			'product.stock.warehouse.label' => 'label',
+			'product.stock.warehouse.status' => 1,
+			'product.stock.warehouse.mtime' => '2011-01-01 00:00:02',
+			'product.stock.warehouse.ctime' => '2011-01-01 00:00:01',
+			'product.stock.warehouse.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Product\Item\Stock\Warehouse\Standard( $this->values );
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( 44, $this->object->getId() );
 	}
 
 	public function testSetId()
@@ -72,20 +72,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetCode()
 	{
-		$this->assertEquals( $this->values['code'], $this->object->getCode() );
+		$this->assertEquals( 'unitcode', $this->object->getCode() );
 	}
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'test_label' );
+		$this->object->setCode( 'testcode' );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->assertEquals( 'test_label', $this->object->getCode() );
+		$this->assertEquals( 'testcode', $this->object->getCode() );
 	}
 
 	public function testGetLabel()
 	{
-		$this->assertEquals( $this->values['label'], $this->object->getLabel() );
+		$this->assertEquals( 'label', $this->object->getLabel() );
 	}
 
 	public function testSetLabel()
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( $this->values['status'], $this->object->getStatus() );
+		$this->assertEquals( 1, $this->object->getStatus() );
 	}
 
 	public function testSetStatus()

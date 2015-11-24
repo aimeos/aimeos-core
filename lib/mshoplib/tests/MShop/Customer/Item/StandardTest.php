@@ -29,42 +29,42 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$addressValues = array(
-			'parentid' => 'referenceid',
-			'pos' => 1,
+			'common.address.parentid' => 'referenceid',
+			'common.address.position' => 1,
 		);
 
 		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.', $addressValues );
 
 		$this->values = array(
-			'id' => 541,
-			'siteid' => 123,
-			'label' => 'unitObject',
-			'code' => '12345ABCDEF',
-			'birthday' => '2010-01-01',
-			'status' => 1,
-			'password' => '',
-			'vdate' => null,
-			'company' => 'unitCompany',
-			'vatid' => 'DE999999999',
-			'salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
-			'title' => 'Dr.',
-			'firstname' => 'firstunit',
-			'lastname' => 'lastunit',
-			'address1' => 'unit str.',
-			'address2' => ' 166',
-			'address3' => '4.OG',
-			'postal' => '22769',
-			'city' => 'Hamburg',
-			'state' => 'Hamburg',
-			'countryid' => 'de',
-			'langid' => 'de',
-			'telephone' => '05554433221',
-			'email' => 'test@example.com',
-			'telefax' => '05554433222',
-			'website' => 'www.example.com',
-			'mtime'=> '2010-01-05 00:00:05',
-			'ctime'=> '2010-01-01 00:00:00',
-			'editor' => 'unitTestUser'
+			'customer.id' => 541,
+			'customer.siteid' => 123,
+			'customer.label' => 'unitObject',
+			'customer.code' => '12345ABCDEF',
+			'customer.birthday' => '2010-01-01',
+			'customer.status' => 1,
+			'customer.password' => '',
+			'customer.dateverified' => null,
+			'customer.company' => 'unitCompany',
+			'customer.vatid' => 'DE999999999',
+			'customer.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'customer.title' => 'Dr.',
+			'customer.firstname' => 'firstunit',
+			'customer.lastname' => 'lastunit',
+			'customer.address1' => 'unit str.',
+			'customer.address2' => ' 166',
+			'customer.address3' => '4.OG',
+			'customer.postal' => '22769',
+			'customer.city' => 'Hamburg',
+			'customer.state' => 'Hamburg',
+			'customer.countryid' => 'de',
+			'customer.languageid' => 'de',
+			'customer.telephone' => '05554433221',
+			'customer.email' => 'test@example.com',
+			'customer.telefax' => '05554433222',
+			'customer.website' => 'www.example.com',
+			'customer.mtime'=> '2010-01-05 00:00:05',
+			'customer.ctime'=> '2010-01-01 00:00:00',
+			'customer.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, $this->values, array(), array(), 'mshop', null );

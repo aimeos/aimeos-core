@@ -49,10 +49,12 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mord."id", mord."baseid", mord."siteid",
-				mord."type", mord."datepayment", mord."datedelivery",
-				mord."statuspayment", mord."statusdelivery", mord."relatedid",
-				mord."ctime", mord."mtime", mord."editor"
+			SELECT DISTINCT mord."id" AS "order.id", mord."baseid" AS "order.baseid",
+				mord."siteid" AS "order.siteid", mord."type" AS "order.type",
+				mord."datepayment" AS "order.datepayment", mord."datedelivery" AS "order.datedelivery",
+				mord."statuspayment" AS "order.statuspayment", mord."statusdelivery" AS "order.statusdelivery",
+				mord."relatedid" AS "order.relatedid", mord."ctime" AS "order.ctime",
+				mord."mtime" AS "order.mtime", mord."editor" AS "order.editor"
 			FROM "mshop_order" AS mord
 			:joins
 			WHERE :cond

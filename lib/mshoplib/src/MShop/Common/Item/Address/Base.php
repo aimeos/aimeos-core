@@ -74,7 +74,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getCompany()
 	{
-		return ( isset( $this->values['company'] ) ? (string) $this->values['company'] : '' );
+		if( isset( $this->values[$this->prefix . 'company'] ) ) {
+			return (string) $this->values[$this->prefix . 'company'];
+		}
+
+		return '';
 	}
 
 
@@ -87,7 +91,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $company == $this->getCompany() ) { return; }
 
-		$this->values['company'] = (string) $company;
+		$this->values[$this->prefix . 'company'] = (string) $company;
 		$this->setModified();
 	}
 
@@ -98,7 +102,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getVatID()
 	{
-		return ( isset( $this->values['vatid'] ) ? (string) $this->values['vatid'] : '' );
+		if( isset( $this->values[$this->prefix . 'vatid'] ) ) {
+			return (string) $this->values[$this->prefix . 'vatid'];
+		}
+
+		return '';
 	}
 
 
@@ -111,7 +119,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $vatid == $this->getVatID() ) { return; }
 
-		$this->values['vatid'] = (string) $vatid;
+		$this->values[$this->prefix . 'vatid'] = (string) $vatid;
 		$this->setModified();
 	}
 
@@ -123,7 +131,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getSalutation()
 	{
-		return ( isset( $this->values['salutation'] ) ? (string) $this->values['salutation'] : \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN );
+		if( isset( $this->values[$this->prefix . 'salutation'] ) ) {
+			return (string) $this->values[$this->prefix . 'salutation'];
+		}
+
+		return \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_UNKNOWN;
 	}
 
 
@@ -138,7 +150,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 		$this->checkSalutation( $salutation );
 
-		$this->values['salutation'] = (string) $salutation;
+		$this->values[$this->prefix . 'salutation'] = (string) $salutation;
 		$this->setModified();
 	}
 
@@ -150,7 +162,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getTitle()
 	{
-		return ( isset( $this->values['title'] ) ? (string) $this->values['title'] : '' );
+		if( isset( $this->values[$this->prefix . 'title'] ) ) {
+			return (string) $this->values[$this->prefix . 'title'];
+		}
+
+		return '';
 	}
 
 
@@ -163,7 +179,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $title == $this->getTitle() ) { return; }
 
-		$this->values['title'] = (string) $title;
+		$this->values[$this->prefix . 'title'] = (string) $title;
 		$this->setModified();
 	}
 
@@ -175,7 +191,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getFirstname()
 	{
-		return ( isset( $this->values['firstname'] ) ? (string) $this->values['firstname'] : '' );
+		if( isset( $this->values[$this->prefix . 'firstname'] ) ) {
+			return (string) $this->values[$this->prefix . 'firstname'];
+		}
+
+		return '';
 	}
 
 
@@ -188,7 +208,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $firstname == $this->getFirstname() ) { return; }
 
-		$this->values['firstname'] = (string) $firstname;
+		$this->values[$this->prefix . 'firstname'] = (string) $firstname;
 		$this->setModified();
 	}
 
@@ -200,7 +220,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getLastname()
 	{
-		return ( isset( $this->values['lastname'] ) ? (string) $this->values['lastname'] : '' );
+		if( isset( $this->values[$this->prefix . 'lastname'] ) ) {
+			return (string) $this->values[$this->prefix . 'lastname'];
+		}
+
+		return '';
 	}
 
 
@@ -213,7 +237,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $lastname == $this->getLastname() ) { return; }
 
-		$this->values['lastname'] = (string) $lastname;
+		$this->values[$this->prefix . 'lastname'] = (string) $lastname;
 		$this->setModified();
 	}
 
@@ -225,7 +249,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getAddress1()
 	{
-		return ( isset( $this->values['address1'] ) ? (string) $this->values['address1'] : '' );
+		if( isset( $this->values[$this->prefix . 'address1'] ) ) {
+			return (string) $this->values[$this->prefix . 'address1'];
+		}
+
+		return '';
 	}
 
 
@@ -238,7 +266,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $address1 == $this->getAddress1() ) { return; }
 
-		$this->values['address1'] = (string) $address1;
+		$this->values[$this->prefix . 'address1'] = (string) $address1;
 		$this->setModified();
 	}
 
@@ -250,7 +278,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getAddress2()
 	{
-		return ( isset( $this->values['address2'] ) ? (string) $this->values['address2'] : '' );
+		if( isset( $this->values[$this->prefix . 'address2'] ) ) {
+			return (string) $this->values[$this->prefix . 'address2'];
+		}
+
+		return '';
 	}
 
 
@@ -263,7 +295,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $address2 == $this->getAddress2() ) { return; }
 
-		$this->values['address2'] = (string) $address2;
+		$this->values[$this->prefix . 'address2'] = (string) $address2;
 		$this->setModified();
 	}
 
@@ -275,7 +307,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getAddress3()
 	{
-		return ( isset( $this->values['address3'] ) ? (string) $this->values['address3'] : '' );
+		if( isset( $this->values[$this->prefix . 'address3'] ) ) {
+			return (string) $this->values[$this->prefix . 'address3'];
+		}
+
+		return '';
 	}
 
 
@@ -288,7 +324,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $address3 == $this->getAddress3() ) { return; }
 
-		$this->values['address3'] = (string) $address3;
+		$this->values[$this->prefix . 'address3'] = (string) $address3;
 		$this->setModified();
 	}
 
@@ -300,7 +336,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getPostal()
 	{
-		return ( isset( $this->values['postal'] ) ? (string) $this->values['postal'] : '' );
+		if( isset( $this->values[$this->prefix . 'postal'] ) ) {
+			return (string) $this->values[$this->prefix . 'postal'];
+		}
+
+		return '';
 	}
 
 
@@ -313,7 +353,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $postal == $this->getPostal() ) { return; }
 
-		$this->values['postal'] = (string) $postal;
+		$this->values[$this->prefix . 'postal'] = (string) $postal;
 		$this->setModified();
 	}
 
@@ -325,7 +365,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getCity()
 	{
-		return ( isset( $this->values['city'] ) ? (string) $this->values['city'] : '' );
+		if( isset( $this->values[$this->prefix . 'city'] ) ) {
+			return (string) $this->values[$this->prefix . 'city'];
+		}
+
+		return '';
 	}
 
 
@@ -338,7 +382,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $city == $this->getCity() ) { return; }
 
-		$this->values['city'] = (string) $city;
+		$this->values[$this->prefix . 'city'] = (string) $city;
 		$this->setModified();
 	}
 
@@ -350,7 +394,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getState()
 	{
-		return ( isset( $this->values['state'] ) ? (string) $this->values['state'] : '' );
+		if( isset( $this->values[$this->prefix . 'state'] ) ) {
+			return (string) $this->values[$this->prefix . 'state'];
+		}
+
+		return '';
 	}
 
 
@@ -363,8 +411,23 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $state == $this->getState() ) { return; }
 
-		$this->values['state'] = (string) $state;
+		$this->values[$this->prefix . 'state'] = (string) $state;
 		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the unique ID of the country the address belongs to.
+	 *
+	 * @return string Unique ID of the country
+	 */
+	public function getCountryId()
+	{
+		if( isset( $this->values[$this->prefix . 'countryid'] ) ) {
+			return (string) $this->values[$this->prefix . 'countryid'];
+		}
+
+		return null;
 	}
 
 
@@ -377,19 +440,23 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $countryid === $this->getCountryId() ) { return; }
 
-		$this->values['countryid'] = strtoupper( (string) $countryid );
+		$this->values[$this->prefix . 'countryid'] = strtoupper( (string) $countryid );
 		$this->setModified();
 	}
 
 
 	/**
-	 * Returns the unique ID of the country the address belongs to.
+	 * Returns the unique ID of the language.
 	 *
-	 * @return string Unique ID of the country
+	 * @return string Unique ID of the language
 	 */
-	public function getCountryId()
+	public function getLanguageId()
 	{
-		return ( isset( $this->values['countryid'] ) ? (string) $this->values['countryid'] : null );
+		if( isset( $this->values[$this->prefix . 'languageid'] ) ) {
+			return (string) $this->values[$this->prefix . 'languageid'];
+		}
+
+		return null;
 	}
 
 
@@ -402,19 +469,8 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $langid === $this->getLanguageId() ) { return; }
 
-		$this->values['langid'] = strtolower( (string) $langid );
+		$this->values[$this->prefix . 'languageid'] = strtolower( (string) $langid );
 		$this->setModified();
-	}
-
-
-	/**
-	 * Returns the unique ID of the language.
-	 *
-	 * @return string Unique ID of the language
-	 */
-	public function getLanguageId()
-	{
-		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
 	}
 
 
@@ -425,7 +481,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getTelephone()
 	{
-		return ( isset( $this->values['telephone'] ) ? (string) $this->values['telephone'] : '' );
+		if( isset( $this->values[$this->prefix . 'telephone'] ) ) {
+			return (string) $this->values[$this->prefix . 'telephone'];
+		}
+
+		return '';
 	}
 
 
@@ -438,7 +498,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $telephone == $this->getTelephone() ) { return; }
 
-		$this->values['telephone'] = (string) $telephone;
+		$this->values[$this->prefix . 'telephone'] = (string) $telephone;
 		$this->setModified();
 	}
 
@@ -450,7 +510,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getEmail()
 	{
-		return ( isset( $this->values['email'] ) ? (string) $this->values['email'] : '' );
+		if( isset( $this->values[$this->prefix . 'email'] ) ) {
+			return (string) $this->values[$this->prefix . 'email'];
+		}
+
+		return '';
 	}
 
 
@@ -467,7 +531,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in email address: "%1$s"', $email ) );
 		}
 
-		$this->values['email'] = (string) $email;
+		$this->values[$this->prefix . 'email'] = (string) $email;
 		$this->setModified();
 	}
 
@@ -479,7 +543,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getTelefax()
 	{
-		return ( isset( $this->values['telefax'] ) ? (string) $this->values['telefax'] : '' );
+		if( isset( $this->values[$this->prefix . 'telefax'] ) ) {
+			return (string) $this->values[$this->prefix . 'telefax'];
+		}
+
+		return '';
 	}
 
 
@@ -492,7 +560,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $telefax == $this->getTelefax() ) { return; }
 
-		$this->values['telefax'] = (string) $telefax;
+		$this->values[$this->prefix . 'telefax'] = (string) $telefax;
 		$this->setModified();
 	}
 
@@ -504,7 +572,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getWebsite()
 	{
-		return ( isset( $this->values['website'] ) ? (string) $this->values['website'] : '' );
+		if( isset( $this->values[$this->prefix . 'website'] ) ) {
+			return (string) $this->values[$this->prefix . 'website'];
+		}
+
+		return '';
 	}
 
 
@@ -523,7 +595,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid web site URL "%1$s"', $website ) );
 		}
 
-		$this->values['website'] = (string) $website;
+		$this->values[$this->prefix . 'website'] = (string) $website;
 		$this->setModified();
 	}
 
@@ -535,7 +607,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getFlag()
 	{
-		return ( isset( $this->values['flag'] ) ? (int) $this->values['flag'] : 0 );
+		if( isset( $this->values[$this->prefix . 'flag'] ) ) {
+			return (string) $this->values[$this->prefix . 'flag'];
+		}
+
+		return 0;
 	}
 
 
@@ -548,7 +624,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	{
 		if( $flag == $this->getFlag() ) { return; }
 
-		$this->values['flag'] = (int) $flag;
+		$this->values[$this->prefix . 'flag'] = (int) $flag;
 		$this->setModified();
 	}
 

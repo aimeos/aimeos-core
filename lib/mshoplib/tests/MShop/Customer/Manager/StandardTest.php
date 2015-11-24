@@ -29,11 +29,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelper::getContext() );
 
 		$this->fixture = array(
-			'label' => 'unitTest',
-			'status' => 2,
+			'customer.label' => 'unitTest',
+			'customer.status' => 2,
 		);
 
-		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
+		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.' );
 	}
 
 

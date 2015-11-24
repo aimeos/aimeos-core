@@ -126,7 +126,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->getContext()->getLocale()->getSiteId());
+		$values = array( 'product.property.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -534,8 +534,8 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$map[ $row['id'] ] = $row;
-				$typeIds[ $row['typeid'] ] = null;
+				$map[ $row['product.property.id'] ] = $row;
+				$typeIds[ $row['product.property.typeid'] ] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -556,8 +556,8 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['typeid'] ] ) ) {
-					$row['type'] = $typeItems[ $row['typeid'] ]->getCode();
+				if( isset( $typeItems[ $row['product.property.typeid'] ] ) ) {
+					$row['product.property.type'] = $typeItems[ $row['product.property.typeid'] ]->getCode();
 				}
 
 				$items[$id] = $this->createItemBase( $row );

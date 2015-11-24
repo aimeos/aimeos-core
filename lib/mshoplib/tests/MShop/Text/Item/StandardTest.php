@@ -28,17 +28,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 10,
-			'siteid' => 99,
-			'langid' => 'de',
-			'typeid' => 1,
-			'label' => 'unittest label',
-			'domain' => 'product',
-			'content' => 'unittest text',
-			'status' => 2,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'text.id' => 10,
+			'text.siteid' => 99,
+			'text.languageid' => 'de',
+			'text.typeid' => 1,
+			'text.label' => 'unittest label',
+			'text.domain' => 'product',
+			'text.content' => 'unittest text',
+			'text.status' => 2,
+			'text.mtime' => '2011-01-01 00:00:02',
+			'text.ctime' => '2011-01-01 00:00:01',
+			'text.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Text\Item\Standard( $this->values );

@@ -27,22 +27,22 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 199,
-			'siteid'=>99,
-			'typeid' => 2,
-			'type' => 'default',
-			'currencyid' => 'EUR',
-			'domain' => 'product',
-			'label' => 'Price label',
-			'quantity' => 1500,
-			'value' => 195.50,
-			'costs' => 19.95,
-			'rebate' => 10.00,
-			'taxrate' => 19.00,
-			'status' => true,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'price.id' => 199,
+			'price.siteid' => 99,
+			'price.typeid' => 2,
+			'price.type' => 'default',
+			'price.currencyid' => 'EUR',
+			'price.domain' => 'product',
+			'price.label' => 'Price label',
+			'price.quantity' => 1500,
+			'price.value' => 195.50,
+			'price.costs' => 19.95,
+			'price.rebate' => 10.00,
+			'price.taxrate' => 19.00,
+			'price.status' => true,
+			'price.mtime' => '2011-01-01 00:00:02',
+			'price.ctime' => '2011-01-01 00:00:01',
+			'price.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values );
@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testAddItemWrongCurrency()
 	{
 		$values = $this->values;
-		$values['currencyid'] = 'USD';
+		$values['price.currencyid'] = 'USD';
 
 		$price = new \Aimeos\MShop\Price\Item\Standard( $values );
 
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testCompareFail()
 	{
 		$values = $this->values;
-		$values['value'] = '200.00';
+		$values['price.value'] = '200.00';
 
 		$price = new \Aimeos\MShop\Price\Item\Standard( $values );
 		$this->assertFalse( $this->object->compare( $price ) );

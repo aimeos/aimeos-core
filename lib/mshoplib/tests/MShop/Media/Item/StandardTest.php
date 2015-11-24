@@ -20,20 +20,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 1,
-			'siteid' => 123,
-			'typeid' => 2,
-			'type' => 'category',
-			'domain' => 'test_dom',
-			'label' => 'testPicture',
-			'mimetype' => 'image/jpeg',
-			'url' => 'http://www.url.com/test.jpg',
-			'preview' => '/directory/test.jpg',
-			'status' => 6,
-			'langid' => 'de',
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'media.id' => 1,
+			'media.siteid' => 123,
+			'media.typeid' => 2,
+			'media.type' => 'category',
+			'media.domain' => 'test_dom',
+			'media.label' => 'testPicture',
+			'media.mimetype' => 'image/jpeg',
+			'media.url' => 'http://www.url.com/test.jpg',
+			'media.preview' => '/directory/test.jpg',
+			'media.status' => 6,
+			'media.languageid' => 'de',
+			'media.mtime' => '2011-01-01 00:00:02',
+			'media.ctime' => '2011-01-01 00:00:01',
+			'media.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values );

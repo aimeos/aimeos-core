@@ -242,7 +242,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'product.stock.warehouse.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -622,7 +622,7 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->createItemBase( $row );
+				$items[$row['product.stock.warehouse.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

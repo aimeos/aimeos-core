@@ -38,7 +38,11 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
+		if( isset( $this->values['order.status.parentid'] ) ) {
+			return (int) $this->values['order.status.parentid'];
+		}
+
+		return null;
 	}
 
 	/**
@@ -52,8 +56,7 @@ class Standard
 			return;
 		}
 
-		$this->values['parentid'] = (int) $parentid;
-
+		$this->values['order.status.parentid'] = (int) $parentid;
 		$this->setModified();
 	}
 
@@ -65,7 +68,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : '' );
+		if( isset( $this->values['order.status.type'] ) ) {
+			return (string) $this->values['order.status.type'];
+		}
+
+		return '';
 	}
 
 	/**
@@ -79,8 +86,7 @@ class Standard
 			return;
 		}
 
-		$this->values['type'] = (string) $type;
-
+		$this->values['order.status.type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -91,7 +97,11 @@ class Standard
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '' );
+		if( isset( $this->values['order.status.value'] ) ) {
+			return (string) $this->values['order.status.value'];
+		}
+
+		return '';
 	}
 
 	/**
@@ -105,8 +115,7 @@ class Standard
 			return;
 		}
 
-		$this->values['value'] = (string) $value;
-
+		$this->values['order.status.value'] = (string) $value;
 		$this->setModified();
 	}
 

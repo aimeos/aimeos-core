@@ -27,32 +27,32 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 23,
-			'siteid' => 12,
-			'parentid' => 'referenceid',
-			'company' => 'unitCompany',
-			'vatid' => 'DE999999999',
-			'salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
-			'title' => 'Herr',
-			'firstname' => 'firstunit',
-			'lastname' => 'lastunit',
-			'address1' => 'unit str.',
-			'address2' => ' 166',
-			'address3' => '4.OG',
-			'postal' => '22769',
-			'city' => 'Hamburg',
-			'state' => 'Hamburg',
-			'countryid' => 'DE',
-			'langid' => 'de',
-			'telephone' => '05554433221',
-			'email' => 'test@example.com',
-			'telefax' => '05554433222',
-			'website' => 'www.example.com',
-			'pos' => 1,
-			'flag' => 2,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser',
+			'supplier.address.id' => 23,
+			'supplier.address.siteid' => 12,
+			'supplier.address.parentid' => 'referenceid',
+			'supplier.address.company' => 'unitCompany',
+			'supplier.address.vatid' => 'DE999999999',
+			'supplier.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'supplier.address.title' => 'Herr',
+			'supplier.address.firstname' => 'firstunit',
+			'supplier.address.lastname' => 'lastunit',
+			'supplier.address.address1' => 'unit str.',
+			'supplier.address.address2' => ' 166',
+			'supplier.address.address3' => '4.OG',
+			'supplier.address.postal' => '22769',
+			'supplier.address.city' => 'Hamburg',
+			'supplier.address.state' => 'Hamburg',
+			'supplier.address.countryid' => 'DE',
+			'supplier.address.languageid' => 'de',
+			'supplier.address.telephone' => '05554433221',
+			'supplier.address.email' => 'test@example.com',
+			'supplier.address.telefax' => '05554433222',
+			'supplier.address.website' => 'www.example.com',
+			'supplier.address.position' => 1,
+			'supplier.address.flag' => 2,
+			'supplier.address.mtime' => '2011-01-01 00:00:02',
+			'supplier.address.ctime' => '2011-01-01 00:00:01',
+			'supplier.address.editor' => 'unitTestUser',
 		);
 
 		$this->object = new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', $this->values );
@@ -371,30 +371,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCopyFrom()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'supplier.address.' );
-		$address = new \Aimeos\MShop\Order\Item\Base\Address\Standard( $this->values );
-		$object->copyFrom( $address );
-
-		$this->assertNull( $object->getId() );
-		$this->assertEquals( $this->values['salutation'], $object->getSalutation() );
-		$this->assertEquals( $this->values['company'], $object->getCompany() );
-		$this->assertEquals( $this->values['vatid'], $object->getVatID() );
-		$this->assertEquals( $this->values['title'], $object->getTitle() );
-		$this->assertEquals( $this->values['firstname'], $object->getFirstname() );
-		$this->assertEquals( $this->values['lastname'], $object->getLastname() );
-		$this->assertEquals( $this->values['address1'], $object->getAddress1() );
-		$this->assertEquals( $this->values['address2'], $object->getAddress2() );
-		$this->assertEquals( $this->values['address3'], $object->getAddress3() );
-		$this->assertEquals( $this->values['postal'], $object->getPostal() );
-		$this->assertEquals( $this->values['city'], $object->getCity() );
-		$this->assertEquals( $this->values['state'], $object->getState() );
-		$this->assertEquals( $this->values['countryid'], $object->getCountryId() );
-		$this->assertEquals( $this->values['langid'], $object->getLanguageId() );
-		$this->assertEquals( $this->values['telephone'], $object->getTelephone() );
-		$this->assertEquals( $this->values['telefax'], $object->getTelefax() );
-		$this->assertEquals( $this->values['email'], $object->getEmail() );
-		$this->assertEquals( $this->values['website'], $object->getWebsite() );
-		$this->assertEquals( $this->values['flag'], $object->getFlag() );
+		$address = new \Aimeos\MShop\Order\Item\Base\Address\Standard();
+		$this->object->copyFrom( $address );
 	}
 
 	public function testFromArray()

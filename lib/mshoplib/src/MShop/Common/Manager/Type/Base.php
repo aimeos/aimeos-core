@@ -60,7 +60,9 @@ abstract class Base
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = array(
+			$this->prefix . 'siteid' => $this->getContext()->getLocale()->getSiteId(),
+		);
 		return $this->createItemBase( $values );
 	}
 
@@ -214,7 +216,7 @@ abstract class Base
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->createItemBase( $row );
+				$items[$row[$this->prefix . 'id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

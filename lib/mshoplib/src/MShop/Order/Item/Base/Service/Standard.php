@@ -27,6 +27,7 @@ class Standard
 	private $attributesMap;
 	private $values;
 
+
 	/**
 	 * Initializes the order base service item
 	 *
@@ -62,7 +63,11 @@ class Standard
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
+		if( isset( $this->values['order.base.service.baseid'] ) ) {
+			return (int) $this->values['order.base.service.baseid'];
+		}
+
+		return null;
 	}
 
 
@@ -75,7 +80,7 @@ class Standard
 	{
 		if( $value == $this->getBaseId() ) { return; }
 
-		$this->values['baseid'] = ( $value !== null ? (int) $value : null );
+		$this->values['order.base.service.baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -87,7 +92,11 @@ class Standard
 	 */
 	public function getServiceId()
 	{
-		return( isset( $this->values['servid'] ) ? (string) $this->values['servid'] : '' );
+		if( isset( $this->values['order.base.service.serviceid'] ) ) {
+			return (string) $this->values['order.base.service.serviceid'];
+		}
+
+		return '';
 	}
 
 
@@ -100,7 +109,7 @@ class Standard
 	{
 		if( $servid == $this->getServiceId() ) { return; }
 
-		$this->values['servid'] = (string) $servid;
+		$this->values['order.base.service.serviceid'] = (string) $servid;
 		$this->setModified();
 	}
 
@@ -112,7 +121,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['order.base.service.code'] ) ) {
+			return (string) $this->values['order.base.service.code'];
+		}
+
+		return '';
 	}
 
 
@@ -127,7 +140,7 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
+		$this->values['order.base.service.code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -139,7 +152,11 @@ class Standard
 	 */
 	public function getName()
 	{
-		return ( isset( $this->values['name'] ) ? (string) $this->values['name'] : '' );
+		if( isset( $this->values['order.base.service.name'] ) ) {
+			return (string) $this->values['order.base.service.name'];
+		}
+
+		return '';
 	}
 
 
@@ -152,7 +169,7 @@ class Standard
 	{
 		if( $name == $this->getName() ) { return; }
 
-		$this->values['name'] = (string) $name;
+		$this->values['order.base.service.name'] = (string) $name;
 		$this->setModified();
 	}
 
@@ -164,7 +181,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
+		if( isset( $this->values['order.base.service.type'] ) ) {
+			return (string) $this->values['order.base.service.type'];
+		}
+
+		return '';
 	}
 
 
@@ -177,7 +198,7 @@ class Standard
 	{
 		if( $type == $this->getType() ) { return; }
 
-		$this->values['type'] = (string) $type;
+		$this->values['order.base.service.type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -189,7 +210,11 @@ class Standard
 	 */
 	public function getMediaUrl()
 	{
-		return ( isset( $this->values['mediaurl'] ) ? (string) $this->values['mediaurl'] : '' );
+		if( isset( $this->values['order.base.service.mediaurl'] ) ) {
+			return (string) $this->values['order.base.service.mediaurl'];
+		}
+
+		return '';
 	}
 
 
@@ -204,7 +229,7 @@ class Standard
 			return;
 		}
 
-		$this->values['mediaurl'] = (string) $value;
+		$this->values['order.base.service.mediaurl'] = (string) $value;
 		$this->setModified();
 	}
 

@@ -28,16 +28,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'siteid' => 123,
-			'label' => 'test coupon',
-			'provider' => 'Example',
-			'config' => array( 'key'=>'test' ),
-			'start' => null,
-			'end' => null,
-			'status' => true,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'coupon.siteid' => 123,
+			'coupon.label' => 'test coupon',
+			'coupon.provider' => 'Example',
+			'coupon.config' => array( 'key'=>'test' ),
+			'coupon.start' => null,
+			'coupon.end' => null,
+			'coupon.status' => true,
+			'coupon.mtime' => '2011-01-01 00:00:02',
+			'coupon.ctime' => '2011-01-01 00:00:01',
+			'coupon.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Coupon\Item\Standard( $this->values );

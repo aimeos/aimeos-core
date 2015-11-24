@@ -41,7 +41,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['product.stock.warehouse.code'] ) ) {
+			return (string) $this->values['product.stock.warehouse.code'];
+		}
+
+		return '';
 	}
 
 
@@ -54,7 +58,7 @@ class Standard
 	{
 		$this->checkCode( $code );
 
-		$this->values['code'] = (string) $code;
+		$this->values['product.stock.warehouse.code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -66,7 +70,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['product.stock.warehouse.label'] ) ) {
+			return (string) $this->values['product.stock.warehouse.label'];
+		}
+
+		return '';
 	}
 
 
@@ -77,7 +85,7 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		$this->values['label'] = (string) $label;
+		$this->values['product.stock.warehouse.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -89,7 +97,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['product.stock.warehouse.status'] ) ) {
+			return (int) $this->values['product.stock.warehouse.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -100,7 +112,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		$this->values['status'] = (int) $status;
+		$this->values['product.stock.warehouse.status'] = (int) $status;
 		$this->setModified();
 	}
 

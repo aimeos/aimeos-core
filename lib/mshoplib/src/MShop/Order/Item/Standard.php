@@ -41,16 +41,16 @@ class Standard
 
 		$this->values = $values;
 
-		if( !isset( $values['datepayment'] ) ) {
-			$this->values['datepayment'] = date( 'Y-m-d H:i:s', time() );
+		if( !isset( $values['order.datepayment'] ) ) {
+			$this->values['order.datepayment'] = date( 'Y-m-d H:i:s' );
 		}
 
-		if( isset( $values['statuspayment'] ) ) {
-			$this->oldPaymentStatus = (int) $values['statuspayment'];
+		if( isset( $values['order.statuspayment'] ) ) {
+			$this->oldPaymentStatus = (int) $values['order.statuspayment'];
 		}
 
-		if( isset( $values['statusdelivery'] ) ) {
-			$this->oldDeliveryStatus = (int) $values['statusdelivery'];
+		if( isset( $values['order.statusdelivery'] ) ) {
+			$this->oldDeliveryStatus = (int) $values['order.statusdelivery'];
 		}
 	}
 
@@ -58,11 +58,15 @@ class Standard
 	/**
 	 * Returns the basic order ID.
 	 *
-	 * @return integer Basic order ID
+	 * @return integer|null Basic order ID
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
+		if( isset( $this->values['order.baseid'] ) ) {
+			return (int) $this->values['order.baseid'];
+		}
+
+		return null;
 	}
 
 
@@ -75,7 +79,7 @@ class Standard
 	{
 		if( $id == $this->getBaseId() ) { return; }
 
-		$this->values['baseid'] = (int) $id;
+		$this->values['order.baseid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -87,7 +91,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : '' );
+		if( isset( $this->values['order.type'] ) ) {
+			return (string) $this->values['order.type'];
+		}
+
+		return '';
 	}
 
 
@@ -102,7 +110,7 @@ class Standard
 
 		$this->checkType( $type );
 
-		$this->values['type'] = (string) $type;
+		$this->values['order.type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -110,11 +118,15 @@ class Standard
 	/**
 	 * Returns the delivery date of the invoice.
 	 *
-	 * @return string ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @return string|null ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
 	public function getDateDelivery()
 	{
-		return ( isset( $this->values['datedelivery'] ) ? (string) $this->values['datedelivery'] : null );
+		if( isset( $this->values['order.datedelivery'] ) ) {
+			return (string) $this->values['order.datedelivery'];
+		}
+
+		return null;
 	}
 
 
@@ -127,7 +139,7 @@ class Standard
 	{
 		if( $date === $this->getDateDelivery() ) { return; }
 
-		$this->values['datedelivery'] = (string) $this->checkDateFormat( $date );
+		$this->values['order.datedelivery'] = (string) $this->checkDateFormat( $date );
 		$this->setModified();
 	}
 
@@ -135,11 +147,15 @@ class Standard
 	/**
 	 * Returns the purchase date of the invoice.
 	 *
-	 * @return string ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @return string|null ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
 	public function getDatePayment()
 	{
-		return ( isset( $this->values['datepayment'] ) ? (string) $this->values['datepayment'] : null );
+		if( isset( $this->values['order.datepayment'] ) ) {
+			return (string) $this->values['order.datepayment'];
+		}
+
+		return null;
 	}
 
 
@@ -152,7 +168,7 @@ class Standard
 	{
 		if( $date === $this->getDatePayment() ) { return; }
 
-		$this->values['datepayment'] = (string) $this->checkDateFormat( $date );
+		$this->values['order.datepayment'] = (string) $this->checkDateFormat( $date );
 		$this->setModified();
 	}
 
@@ -164,8 +180,8 @@ class Standard
 	 */
 	public function getDeliveryStatus()
 	{
-		if( isset( $this->values['statusdelivery'] ) ) {
-			return (int) $this->values['statusdelivery'];
+		if( isset( $this->values['order.statusdelivery'] ) ) {
+			return (int) $this->values['order.statusdelivery'];
 		}
 
 		return \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
@@ -179,7 +195,7 @@ class Standard
 	 */
 	public function setDeliveryStatus( $status )
 	{
-		$this->values['statusdelivery'] = (int) $status;
+		$this->values['order.statusdelivery'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -191,8 +207,8 @@ class Standard
 	 */
 	public function getPaymentStatus()
 	{
-		if( isset( $this->values['statuspayment'] ) ) {
-			return (int) $this->values['statuspayment'];
+		if( isset( $this->values['order.statuspayment'] ) ) {
+			return (int) $this->values['order.statuspayment'];
 		}
 
 		return \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED;
@@ -206,7 +222,7 @@ class Standard
 	 */
 	public function setPaymentStatus( $status )
 	{
-		$this->values['statuspayment'] = (int) $status;
+		$this->values['order.statuspayment'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -218,7 +234,11 @@ class Standard
 	 */
 	public function getRelatedId()
 	{
-		return ( isset( $this->values['relatedid'] ) ? (int) $this->values['relatedid'] : null );
+		if( isset( $this->values['order.relatedid'] ) ) {
+			return (int) $this->values['order.relatedid'];
+		}
+
+		return null;
 	}
 
 
@@ -231,8 +251,8 @@ class Standard
 	public function setRelatedId( $id )
 	{
 		if( $id === $this->getRelatedId() ) { return; }
-		$id = (int) $id;
-		$this->values['relatedid'] = $id;
+
+		$this->values['order.relatedid'] = (int) $id;
 		$this->setModified();
 	}
 

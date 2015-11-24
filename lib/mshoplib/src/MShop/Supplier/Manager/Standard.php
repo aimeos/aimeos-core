@@ -163,7 +163,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array('siteid' => $this->getContext()->getLocale()->getSiteId());
+		$values = array('supplier.siteid' => $this->getContext()->getLocale()->getSiteId());
 		return $this->createItemBase($values);
 	}
 
@@ -495,7 +495,7 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['id']] = $row;
+				$map[$row['supplier.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

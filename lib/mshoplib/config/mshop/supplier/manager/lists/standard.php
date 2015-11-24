@@ -70,11 +70,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT msupli."id", msupli."parentid", msupli."siteid",
-				msupli."typeid", msupli."domain", msupli."refid",
-				msupli."start", msupli."end", msupli."config", msupli."pos",
-				msupli."status", msupli."mtime", msupli."editor",
-				msupli."ctime"
+			SELECT DISTINCT msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
+				msupli."siteid" AS "supplier.lists.siteid", msupli."typeid" AS "supplier.lists.typeid",
+				msupli."domain" AS "supplier.lists.domain", msupli."refid" AS "supplier.lists.refid",
+				msupli."start" AS "supplier.lists.datestart", msupli."end" AS "supplier.lists.dateend",
+				msupli."config" AS "supplier.lists.config", msupli."pos" AS "supplier.lists.position",
+				msupli."status" AS "supplier.lists.status", msupli."mtime" AS "supplier.lists.mtime",
+				msupli."editor" AS "supplier.lists.editor", msupli."ctime" AS "supplier.lists.ctime"
 			FROM "mshop_supplier_list" AS msupli
 			:joins
 			WHERE :cond

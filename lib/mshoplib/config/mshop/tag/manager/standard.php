@@ -33,9 +33,10 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mtag."id", mtag."siteid", mtag."typeid",
-				mtag."langid", mtag."label", mtag."mtime",
-				mtag."editor", mtag."ctime"
+			SELECT DISTINCT mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
+				mtag."typeid" AS "tag.typeid", mtag."langid" AS "tag.languageid",
+				mtag."label" AS "tag.label", mtag."mtime" AS "tag.mtime",
+				mtag."editor" AS "tag.editor", mtag."ctime" AS "tag.ctime"
 			FROM "mshop_tag" AS mtag
 			:joins
 			WHERE :cond

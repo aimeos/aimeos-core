@@ -42,7 +42,11 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
+		if( isset( $this->values['product.property.languageid'] ) ) {
+			return (string) $this->values['product.property.languageid'];
+		}
+
+		return null;
 	}
 
 
@@ -56,7 +60,7 @@ class Standard
 		if ( $id === $this->getLanguageId() ) { return; }
 
 		$this->checkLanguageId( $id );
-		$this->values['langid'] = $id;
+		$this->values['product.property.languageid'] = $id;
 		$this->setModified();
 	}
 
@@ -68,7 +72,11 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
+		if( isset( $this->values['product.property.parentid'] ) ) {
+			return (int) $this->values['product.property.parentid'];
+		}
+
+		return null;
 	}
 
 
@@ -82,8 +90,23 @@ class Standard
 		$id = (int) $id;
 		if ( $id === $this->getParentId() ) { return; }
 
-		$this->values['parentid'] = (int) $id;
+		$this->values['product.property.parentid'] = (int) $id;
 		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the type code of the product property item.
+	 *
+	 * @return string|null Type code of the product property item
+	 */
+	public function getType()
+	{
+		if( isset( $this->values['product.property.type'] ) ) {
+			return (string) $this->values['product.property.type'];
+		}
+
+		return null;
 	}
 
 
@@ -94,7 +117,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['product.property.typeid'] ) ) {
+			return (int) $this->values['product.property.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -108,7 +135,7 @@ class Standard
 		$id = (int) $id;
 		if ( $id === $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $id;
+		$this->values['product.property.typeid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -120,7 +147,11 @@ class Standard
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '' );
+		if( isset( $this->values['product.property.value'] ) ) {
+			return (string) $this->values['product.property.value'];
+		}
+
+		return '';
 	}
 
 
@@ -134,19 +165,8 @@ class Standard
 	{
 		if ( $value == $this->getValue() ) { return; }
 
-		$this->values['value'] = (string) $value;
+		$this->values['product.property.value'] = (string) $value;
 		$this->setModified();
-	}
-
-
-	/**
-	 * Returns the type code of the product property item.
-	 *
-	 * @return string Type code of the product property item
-	 */
-	public function getType()
-	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 

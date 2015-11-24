@@ -38,8 +38,8 @@ class Standard
 
 		$this->values = $values;
 
-		if( isset( $values['id'] ) ) {
-			$this->setId( $values['id'] );
+		if( isset( $values['locale.language.id'] ) ) {
+			$this->setId( $values['locale.language.id'] );
 		}
 	}
 
@@ -51,7 +51,11 @@ class Standard
 	 */
 	public function getId()
 	{
-		return ( isset( $this->values['id'] ) ? (string) $this->values['id'] : null );
+		if( isset( $this->values['locale.language.id'] ) ) {
+			return (string) $this->values['locale.language.id'];
+		}
+
+		return null;
 	}
 
 
@@ -65,12 +69,12 @@ class Standard
 		if( $key !== null )
 		{
 			$this->setCode( $key );
-			$this->values['id'] = $this->values['code'];
+			$this->values['locale.language.id'] = $this->values['locale.language.code'];
 			$this->modified = false;
 		}
 		else
 		{
-			$this->values['id'] = null;
+			$this->values['locale.language.id'] = null;
 			$this->modified = true;
 		}
 	}
@@ -83,7 +87,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['locale.language.code'] ) ) {
+			return (string) $this->values['locale.language.code'];
+		}
+
+		return '';
 	}
 
 
@@ -101,7 +109,7 @@ class Standard
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
 		}
 
-		$this->values['code'] = (string) $key;
+		$this->values['locale.language.code'] = (string) $key;
 		$this->modified = true;
 	}
 
@@ -113,7 +121,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['locale.language.label'] ) ) {
+			return (string) $this->values['locale.language.label'];
+		}
+
+		return '';
 	}
 
 
@@ -126,7 +138,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['locale.language.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -138,7 +150,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['locale.language.status'] ) ) {
+			return (int) $this->values['locale.language.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -151,7 +167,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['locale.language.status'] = (int) $status;
 		$this->setModified();
 	}
 

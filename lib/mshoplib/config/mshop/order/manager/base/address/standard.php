@@ -55,15 +55,20 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordbaad."id", mordbaad."baseid",
-				mordbaad."siteid", mordbaad."addrid", mordbaad."type",
-				mordbaad."company", mordbaad."vatid", mordbaad."salutation", mordbaad."title",
-				mordbaad."firstname", mordbaad."lastname", mordbaad."address1",
-				mordbaad."address2", mordbaad."address3", mordbaad."postal",
-				mordbaad."city", mordbaad."state", mordbaad."countryid",
-				mordbaad."langid", mordbaad."telephone", mordbaad."email",
-				mordbaad."telefax", mordbaad."website", mordbaad."flag",
-				mordbaad."mtime", mordbaad."editor", mordbaad."ctime"
+			SELECT DISTINCT mordbaad."id" AS "order.base.address.id", mordbaad."baseid" AS "order.base.address.baseid",
+				mordbaad."siteid" AS "order.base.address.siteid", mordbaad."addrid" AS "order.base.address.addressid",
+				mordbaad."type" AS "order.base.address.type", mordbaad."flag" AS "order.base.address.flag",
+				mordbaad."company" AS "order.base.address.company", mordbaad."vatid" AS "order.base.address.vatid",
+				mordbaad."salutation" AS "order.base.address.salutation", mordbaad."title" AS "order.base.address.title",
+				mordbaad."firstname" AS "order.base.address.firstname", mordbaad."lastname" AS "order.base.address.lastname",
+				mordbaad."address1" AS "order.base.address.address1", mordbaad."address2" AS "order.base.address.address2",
+				mordbaad."address3" AS "order.base.address.address3", mordbaad."postal" AS "order.base.address.postal",
+				mordbaad."city" AS "order.base.address.city", mordbaad."state" AS "order.base.address.state",
+				mordbaad."countryid" AS "order.base.address.countryid", mordbaad."langid" AS "order.base.address.languageid",
+				mordbaad."telephone" AS "order.base.address.telephone", mordbaad."email" AS "order.base.address.email",
+				mordbaad."telefax" AS "order.base.address.telefax", mordbaad."website" AS "order.base.address.website",
+				mordbaad."mtime" AS "order.base.address.mtime", mordbaad."editor" AS "order.base.address.editor",
+				mordbaad."ctime" AS "order.base.address.ctime"
 			FROM "mshop_order_base_address" AS mordbaad
 			:joins
 			WHERE :cond

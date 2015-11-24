@@ -26,15 +26,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->siteItem = $manager->getSubManager( 'site' )->createItem();
 
 		$this->values = array(
-			'id' => 1,
-			'siteid' => 1,
-			'langid' => 'de',
-			'currencyid' => 'EUR',
-			'pos' => 1,
-			'status' => 1,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'locale.id' => 1,
+			'locale.siteid' => 1,
+			'locale.languageid' => 'de',
+			'locale.currencyid' => 'EUR',
+			'locale.position' => 1,
+			'locale.status' => 1,
+			'locale.mtime' => '2011-01-01 00:00:02',
+			'locale.ctime' => '2011-01-01 00:00:01',
+			'locale.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Locale\Item\Standard(

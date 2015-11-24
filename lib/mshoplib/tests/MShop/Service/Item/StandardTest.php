@@ -27,19 +27,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 541,
-			'siteid'=>99,
-			'pos' => '0',
-			'typeid' => 1,
-			'type' => 'delivery',
-			'code' => 'wa34Hg',
-			'label' => 'deliveryObject',
-			'provider' => 'Standard',
-			'config' => array( 'url' => 'https://localhost/' ),
-			'status' => 0,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'service.id' => 541,
+			'service.siteid' => 99,
+			'service.position' => '0',
+			'service.typeid' => 1,
+			'service.type' => 'delivery',
+			'service.code' => 'wa34Hg',
+			'service.label' => 'deliveryObject',
+			'service.provider' => 'Standard',
+			'service.config' => array( 'url' => 'https://localhost/' ),
+			'service.status' => 0,
+			'service.mtime' => '2011-01-01 00:00:02',
+			'service.ctime' => '2011-01-01 00:00:01',
+			'service.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Service\Item\Standard( $this->values );
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetTypeId()
 	{
-		$this->assertEquals( $this->values['typeid'], $this->object->getTypeId() );
+		$this->assertEquals( 1, $this->object->getTypeId() );
 	}
 
 	public function testSetTypeId()
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetType()
 	{
-		$this->assertEquals( $this->values['type'], $this->object->getType() );
+		$this->assertEquals( 'delivery', $this->object->getType() );
 	}
 
 	public function testGetTimeModified()

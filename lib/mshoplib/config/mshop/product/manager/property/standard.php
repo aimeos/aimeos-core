@@ -32,9 +32,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mpropr."id", mpropr."parentid", mpropr."siteid",
-				mpropr."typeid", mpropr."langid", mpropr."value",
-				mpropr."mtime", mpropr."editor", mpropr."ctime"
+			SELECT DISTINCT mpropr."id" AS "product.property.id", mpropr."parentid" AS "product.property.parentid",
+				mpropr."siteid" AS "product.property.siteid", mpropr."typeid" AS "product.property.typeid",
+				mpropr."langid" AS "product.property.languageid", mpropr."value" AS "product.property.value",
+				mpropr."mtime" AS "product.property.mtime", mpropr."editor" AS "product.property.editor",
+				mpropr."ctime" AS "product.property.ctime"
 			FROM "mshop_product_property" AS mpropr
 			:joins
 			WHERE :cond

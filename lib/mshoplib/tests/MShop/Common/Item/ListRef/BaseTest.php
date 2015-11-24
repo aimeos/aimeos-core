@@ -17,9 +17,6 @@ class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
 }
 
 
-namespace Aimeos\MShop\Common\Item\ListRef;
-
-
 /**
  * Test class for \Aimeos\MShop\Common\Item\ListRef\Base
  */
@@ -37,20 +34,20 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'type' => 'name' ) );
+		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) );
 		$this->textItem1->setContent( 'test name' );
 		$this->textItem1->setId( 1 );
 
-		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'type' => 'name' ) );
+		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) );
 		$this->textItem2->setContent( 'default name' );
 		$this->textItem2->setId( 2 );
 
-		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'test', array( 'type' => 'test' ) );
+		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'test' ) );
 		$this->listItem1->setRefId( $this->textItem1->getId() );
 		$this->listItem1->setPosition( 1 );
 		$this->listItem1->setId( 11 );
 
-		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'test', array( 'type' => 'default' ) );
+		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'default' ) );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
 		$this->listItem2->setPosition( 0 );
 		$this->listItem2->setId( 10 );
@@ -65,7 +62,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 			$this->textItem2->getId() => $this->textItem2,
 		) );
 
-		$this->object = new \Aimeos\MShop\Common\Item\ListRef\Test( '', array(), $listItems, $refItems );
+		$this->object = new \Aimeos\MShop\Common\Item\ListRef\Test( 'text.', array(), $listItems, $refItems );
 	}
 
 

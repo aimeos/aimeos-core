@@ -47,9 +47,10 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordst."id", mordst."siteid", mordst."parentid",
-				mordst."type", mordst."value", mordst."mtime", mordst."ctime",
-				mordst."editor"
+			SELECT DISTINCT mordst."id" AS "order.status.id", mordst."siteid" AS "order.status.siteid",
+				mordst."parentid" AS "order.status.parentid", mordst."type" AS "order.status.type",
+				mordst."value" AS "order.status.value", mordst."mtime" AS "order.status.mtime",
+				mordst."ctime" AS "order.status.ctime", mordst."editor" AS "order.status.editor"
 			FROM "mshop_order_status" AS mordst
 			:joins
 			WHERE :cond

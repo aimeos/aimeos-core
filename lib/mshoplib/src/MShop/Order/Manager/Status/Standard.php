@@ -176,7 +176,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'order.status.siteid'=> $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -679,7 +679,7 @@ class Standard
 				$required, $total, $sitelevel );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->createItemBase( $row );
+				$items[$row['order.status.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

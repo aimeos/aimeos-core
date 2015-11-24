@@ -219,7 +219,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'order.siteid'=> $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -640,7 +640,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['id']] = $this->createItemBase( $row );
+					$items[$row['order.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

@@ -48,7 +48,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values[$this->prefix . 'code'] ) ) {
+			return (string) $this->values[$this->prefix . 'code'];
+		}
+
+		return '';
 	}
 
 
@@ -63,7 +67,7 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
+		$this->values[$this->prefix . 'code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -75,7 +79,11 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
+		if( isset( $this->values[$this->prefix . 'domain'] ) ) {
+			return (string) $this->values[$this->prefix . 'domain'];
+		}
+
+		return '';
 	}
 
 
@@ -88,7 +96,7 @@ class Standard
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->values['domain'] = (string) $domain;
+		$this->values[$this->prefix . 'domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -100,7 +108,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values[$this->prefix . 'label'] ) ) {
+			return (string) $this->values[$this->prefix . 'label'];
+		}
+
+		return '';
 	}
 
 
@@ -113,7 +125,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values[$this->prefix . 'label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -125,7 +137,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values[$this->prefix . 'status'] ) ) {
+			return (int) $this->values[$this->prefix . 'status'];
+		}
+
+		return 0;
 	}
 
 
@@ -138,7 +154,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values[$this->prefix . 'status'] = (int) $status;
 		$this->setModified();
 	}
 

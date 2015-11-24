@@ -140,7 +140,7 @@ class Standard
 	public function createItem()
 	{
 		try {
-			return $this->createItemBase( array( 'siteid' => $this->getContext()->getLocale()->getSiteId() ) );
+			return $this->createItemBase( array( 'locale.siteid' => $this->getContext()->getLocale()->getSiteId() ) );
 		} catch( \Exception $e ) {
 			return $this->createItemBase();
 		}
@@ -200,7 +200,7 @@ class Standard
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		foreach( $this->search( $search, $ref, $total ) as $row ) {
-			$items[$row['id']] = $this->createItemBase( $row );
+			$items[$row['locale.id']] = $this->createItemBase( $row );
 		}
 
 		return $items;
@@ -543,14 +543,14 @@ class Standard
 		// Try to find first item where site matches
 		foreach( $result as $row )
 		{
-			if( $row['siteid'] == $siteId ) {
+			if( $row['locale.siteid'] == $siteId ) {
 				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
 
 		if( ( $row = reset( $result ) ) !== false )
 		{
-			$row['siteid'] = $siteId;
+			$row['locale.siteid'] = $siteId;
 			return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 		}
 
@@ -598,7 +598,7 @@ class Standard
 		// Try to find first item where site and language matches
 		foreach( $result as $row )
 		{
-			if( $row['siteid'] == $siteId && $row['langid'] == $lang ) {
+			if( $row['locale.siteid'] == $siteId && $row['locale.languageid'] == $lang ) {
 				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
@@ -606,9 +606,9 @@ class Standard
 		// Try to find first item where language matches
 		foreach( $result as $row )
 		{
-			if( $row['langid'] == $lang )
+			if( $row['locale.languageid'] == $lang )
 			{
-				$row['siteid'] = $siteId;
+				$row['locale.siteid'] = $siteId;
 				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
@@ -616,7 +616,7 @@ class Standard
 		// Try to find first item where site matches
 		foreach( $result as $row )
 		{
-			if( $row['siteid'] == $siteId ) {
+			if( $row['locale.siteid'] == $siteId ) {
 				return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 			}
 		}
@@ -624,7 +624,7 @@ class Standard
 		// Return first item (no other match found)
 		if( ( $row = reset( $result ) ) !== false )
 		{
-			$row['siteid'] = $siteId;
+			$row['locale.siteid'] = $siteId;
 			return $this->createItemBase( $row, $siteItem, $sitePath, $siteSubTree );
 		}
 
@@ -748,7 +748,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['id']] = $row;
+					$items[$row['locale.id']] = $row;
 				}
 			}
 			catch( \Exception $e )

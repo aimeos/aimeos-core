@@ -74,7 +74,9 @@ abstract class Base
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = array(
+			$this->prefix . 'siteid' => $this->getContext()->getLocale()->getSiteId()
+		);
 		return $this->createItemBase( $values );
 
 	}
@@ -339,12 +341,12 @@ abstract class Base
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null ) {
-					$row['config'] = array();
+				if( ( $row[$this->prefix . 'config'] = json_decode( $row[$this->prefix . 'config'], true ) ) === null ) {
+					$row[$this->prefix . 'config'] = array();
 				}
 
-				$map[$row['id']] = $row;
-				$typeIds[$row['typeid']] = null;
+				$map[$row[$this->prefix . 'id']] = $row;
+				$typeIds[$row[$this->prefix . 'typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -365,10 +367,10 @@ abstract class Base
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['typeid']] ) ) {
-					$row['type'] = $typeItems[$row['typeid']]->getCode();
+				if( isset( $typeItems[$row[$this->prefix . 'typeid']] ) ) {
+					$row[$this->prefix . 'type'] = $typeItems[$row[$this->prefix . 'typeid']]->getCode();
 				}
-				$items[$row['id']] = $this->createItemBase( $row );
+				$items[$row[$this->prefix . 'id']] = $this->createItemBase( $row );
 			}
 		}
 
@@ -417,7 +419,7 @@ abstract class Base
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['domain']][] = $row['refid'];
+				$map[$row[$this->prefix . 'domain']][] = $row[$this->prefix . 'refid'];
 			}
 
 			$dbm->release( $conn, $dbname );

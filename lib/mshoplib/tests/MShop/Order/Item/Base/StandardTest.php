@@ -42,14 +42,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$this->values = array(
-			'id' => 1,
-			'siteid'=>99,
-			'customerid' => 'testuser',
-			'comment' => 'this is a comment from unittest',
-			'status' => 1,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.base.id' => 1,
+			'order.base.siteid' => 99,
+			'order.base.customerid' => 'testuser',
+			'order.base.comment' => 'this is a comment from unittest',
+			'order.base.status' => 0,
+			'order.base.mtime' => '2011-01-01 00:00:02',
+			'order.base.ctime' => '2011-01-01 00:00:01',
+			'order.base.editor' => 'unitTestUser'
 		);
 
 		$this->locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 
@@ -147,9 +147,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetCustomerIc()
+	public function testGetCustomerId()
 	{
-		$this->assertEquals( $this->values['customerid'], $this->object->getCustomerId() );
+		$this->assertEquals( 'testuser', $this->object->getCustomerId() );
 	}
 
 
@@ -195,7 +195,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetComment()
 	{
-		$this->assertEquals( $this->values['comment'], $this->object->getComment() );
+		$this->assertEquals( 'this is a comment from unittest', $this->object->getComment() );
 	}
 
 
@@ -209,7 +209,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( $this->values['status'], $this->object->getStatus() );
+		$this->assertEquals( 0, $this->object->getStatus() );
 	}
 
 	public function testSetStatus()

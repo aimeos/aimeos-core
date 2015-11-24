@@ -28,14 +28,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 1,
-			'siteid' => 99,
-			'baseid' => 42,
-			'code' => 'SomeCode',
-			'ordprodid' => 566778,
-			'mtime' => '2001-12-30 23:59:59',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.base.coupon.id' => 1,
+			'order.base.coupon.siteid' => 99,
+			'order.base.coupon.baseid' => 42,
+			'order.base.coupon.code' => 'SomeCode',
+			'order.base.coupon.ordprodid' => 566778,
+			'order.base.coupon.mtime' => '2001-12-30 23:59:59',
+			'order.base.coupon.ctime' => '2011-01-01 00:00:01',
+			'order.base.coupon.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Coupon\Standard( $this->values );
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 	public function testSetId()
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBaseId()
 	{
-		$this->assertEquals( $this->values['baseid'], $this->object->getBaseId() );
+		$this->assertEquals( 42, $this->object->getBaseId() );
 	}
 
 	public function testSetBaseId()
@@ -94,7 +94,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetCode()
 	{
-		$this->assertEquals( $this->values['code'], $this->object->getCode() );
+		$this->assertEquals( 'SomeCode', $this->object->getCode() );
 	}
 
 	public function testSetCode()
@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProductId()
 	{
-		$this->assertEquals( $this->values['ordprodid'], $this->object->getProductId() );
+		$this->assertEquals( 566778, $this->object->getProductId() );
 	}
 
 	public function testSetProductId()
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( $this->values['mtime'], $this->object->getTimeModified() );
+		$this->assertEquals( '2001-12-30 23:59:59', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()

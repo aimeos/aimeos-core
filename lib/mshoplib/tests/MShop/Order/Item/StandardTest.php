@@ -28,18 +28,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 15,
-			'siteid'=>99,
-			'type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
-			'statusdelivery' => \Aimeos\MShop\Order\Item\Base::STAT_PENDING,
-			'statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
-			'datepayment' => '2004-12-01 12:34:56',
-			'datedelivery' => '2004-01-03 12:34:56',
-			'relatedid' => 1,
-			'baseid' => 4,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.id' => 15,
+			'order.siteid' => 99,
+			'order.type' => \Aimeos\MShop\Order\Item\Base::TYPE_WEB,
+			'order.statusdelivery' => \Aimeos\MShop\Order\Item\Base::STAT_PENDING,
+			'order.statuspayment' => \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED,
+			'order.datepayment' => '2004-12-01 12:34:56',
+			'order.datedelivery' => '2004-01-03 12:34:56',
+			'order.relatedid' => 1,
+			'order.baseid' => 4,
+			'order.mtime' => '2011-01-01 00:00:02',
+			'order.ctime' => '2011-01-01 00:00:01',
+			'order.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Order\Item\Standard( $this->values );
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( $this->values['order.id'], $this->object->getId() );
 	}
 
 	public function testSetId()
@@ -88,7 +88,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBaseId()
 	{
-		$this->assertSame( $this->values['baseid'], $this->object->getBaseId() );
+		$this->assertSame( $this->values['order.baseid'], $this->object->getBaseId() );
 	}
 
 	public function testSetBaseId()
@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetType()
 	{
-		$this->assertEquals( $this->values['type'], $this->object->getType() );
+		$this->assertEquals( $this->values['order.type'], $this->object->getType() );
 	}
 
 	public function testSetType()
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetDateDelivery()
 	{
-		$this->assertEquals( $this->values['datedelivery'], $this->object->getDateDelivery() );
+		$this->assertEquals( $this->values['order.datedelivery'], $this->object->getDateDelivery() );
 	}
 
 	public function testSetDateDelivery()
@@ -130,7 +130,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetDatePayment()
 	{
-		$this->assertEquals( $this->values['datepayment'], $this->object->getDatePayment() );
+		$this->assertEquals( $this->values['order.datepayment'], $this->object->getDatePayment() );
 	}
 
 	public function testSetDatePayment()
@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetDeliveryStatus()
 	{
-		$this->assertEquals( $this->values['statusdelivery'], $this->object->getDeliveryStatus() );
+		$this->assertEquals( $this->values['order.statusdelivery'], $this->object->getDeliveryStatus() );
 	}
 
 	public function testSetDeliveryStatus()
@@ -157,7 +157,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetPaymentStatus()
 	{
-		$this->assertEquals( $this->values['statuspayment'], $this->object->getPaymentStatus() );
+		$this->assertEquals( $this->values['order.statuspayment'], $this->object->getPaymentStatus() );
 	}
 
 	public function testSetPaymentStatus()
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetRelatedId()
 	{
-		$this->assertEquals( $this->values['relatedid'], $this->object->getRelatedId() );
+		$this->assertEquals( $this->values['order.relatedid'], $this->object->getRelatedId() );
 	}
 
 	public function testSetRelatedId()

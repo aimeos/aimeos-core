@@ -21,15 +21,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 12,
-			'siteid' => 12,
-			'code' => 'ExtID',
-			'label' => 'My Site',
-			'config' => array( 'timezone' => 'Europe/Berlin' ),
-			'status' => 1,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'locale.site.id' => 12,
+			'locale.site.siteid' => 12,
+			'locale.site.code' => 'ExtID',
+			'locale.site.label' => 'My Site',
+			'locale.site.config' => array( 'timezone' => 'Europe/Berlin' ),
+			'locale.site.status' => 1,
+			'locale.site.mtime' => '2011-01-01 00:00:02',
+			'locale.site.ctime' => '2011-01-01 00:00:01',
+			'locale.site.editor' => 'unitTestUser'
 		);
 
 		$children = array( new \Aimeos\MShop\Locale\Item\Site\Standard() );

@@ -184,7 +184,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'coupon.siteid'=> $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -527,15 +527,15 @@ class Standard
 			{
 				while( ( $row = $results->fetch() ) !== false )
 				{
-					$config = $row['config'];
+					$config = $row['coupon.config'];
 
-					if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+					if( ( $row['coupon.config'] = json_decode( $row['coupon.config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
 						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
-					$items[$row['id']] = $this->createItemBase( $row );
+					$items[$row['coupon.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

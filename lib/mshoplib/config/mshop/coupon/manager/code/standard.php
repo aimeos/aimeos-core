@@ -33,9 +33,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcouco."id", mcouco."parentid", mcouco."siteid",
-				mcouco."code", mcouco."count", mcouco."start", mcouco."end",
-				mcouco."mtime", mcouco."editor", mcouco."ctime"
+			SELECT DISTINCT mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
+				mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
+				mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
+				mcouco."count" AS "coupon.code.count", mcouco."mtime" AS "coupon.code.mtime",
+				mcouco."editor" AS "coupon.code.editor", mcouco."ctime" AS "coupon.code.ctime"
 			FROM "mshop_coupon_code" AS mcouco
 			:joins
 			WHERE :cond

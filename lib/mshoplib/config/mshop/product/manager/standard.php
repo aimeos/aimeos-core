@@ -34,10 +34,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mpro."id", mpro."siteid", mpro."typeid",
-				mpro."label", mpro."status", mpro."start", mpro."end",
-				mpro."code", mpro."suppliercode", mpro."config",
-				mpro."ctime", mpro."mtime", mpro."editor"
+			SELECT DISTINCT mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
+				mpro."typeid" AS "product.typeid", mpro."label" AS "product.label",
+				mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
+				mpro."code" AS "product.code", mpro."suppliercode" AS "product.suppliercode",
+				mpro."config" AS "product.config", mpro."status" AS "product.status",
+				mpro."ctime" AS "product.ctime", mpro."mtime" AS "product.mtime",
+				mpro."editor" AS "product.editor"
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond

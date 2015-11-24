@@ -21,13 +21,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 'EUR',
-			'label' => 'Euro',
-			'siteid' => 1,
-			'status' => 1,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'locale.currency.id' => 'EUR',
+			'locale.currency.label' => 'Euro',
+			'locale.currency.siteid' => 1,
+			'locale.currency.status' => 1,
+			'locale.currency.mtime' => '2011-01-01 00:00:02',
+			'locale.currency.ctime' => '2011-01-01 00:00:01',
+			'locale.currency.editor' => 'unitTestUser'
 		);
 		$this->object = new \Aimeos\MShop\Locale\Item\Currency\Standard( $this->values );
 	}

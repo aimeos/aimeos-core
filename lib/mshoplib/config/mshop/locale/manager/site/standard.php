@@ -34,9 +34,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mlocsi."id", mlocsi."parentid", mlocsi."code",
-				mlocsi."label", mlocsi."config", mlocsi."status",
-				mlocsi."editor", mlocsi."mtime", mlocsi."ctime"
+			SELECT DISTINCT mlocsi."id" AS "locale.site.id", mlocsi."parentid" AS "locale.site.parentid",
+				mlocsi."code" AS "locale.site.code", mlocsi."label" AS "locale.site.label",
+				mlocsi."config" AS "locale.site.config", mlocsi."status" AS "locale.site.status",
+				mlocsi."editor" AS "locale.site.editor", mlocsi."mtime" AS "locale.site.mtime",
+				mlocsi."ctime" AS "locale.site.ctime"
 			FROM "mshop_locale_site" AS mlocsi
 			WHERE :cond
 			ORDER BY :order

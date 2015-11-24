@@ -587,15 +587,15 @@ class Standard
 			{
 				while( ( $row = $results->fetch() ) !== false )
 				{
-					$config = $row['config'];
+					$config = $row['locale.site.config'];
 
-					if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+					if( ( $row['locale.site.config'] = json_decode( $row['locale.site.config'], true ) ) === null )
 					{
-						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
+						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['locale.site.id'], $config );
 						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
-					$items[$row['id']] = $this->createItemBase( $row );
+					$items[$row['locale.site.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

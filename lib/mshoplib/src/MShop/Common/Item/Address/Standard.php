@@ -46,7 +46,11 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->values['parentid'] ) ? (string) $this->values['parentid'] : '' );
+		if( isset( $this->values[$this->prefix . 'parentid'] ) ) {
+			return (string) $this->values[$this->prefix . 'parentid'];
+		}
+
+		return '';
 	}
 
 
@@ -59,8 +63,23 @@ class Standard
 	{
 		if( $parentid == $this->getParentId() ) { return; }
 
-		$this->values['parentid'] = (string) $parentid;
+		$this->values[$this->prefix . 'parentid'] = (string) $parentid;
 		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the position of the address item.
+	 *
+	 * @return integer Position of the address item
+	 */
+	public function getPosition()
+	{
+		if( isset( $this->values[$this->prefix . 'position'] ) ) {
+			return (string) $this->values[$this->prefix . 'position'];
+		}
+
+		return 0;
 	}
 
 
@@ -73,19 +92,8 @@ class Standard
 	{
 		if( $position == $this->getPosition() ) { return; }
 
-		$this->values['pos'] = (int) $position;
+		$this->values[$this->prefix . 'position'] = (int) $position;
 		$this->setModified();
-	}
-
-
-	/**
-	 * Returns the position of the address item.
-	 *
-	 * @return integer Position of the address item
-	 */
-	public function getPosition()
-	{
-		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
 	}
 
 

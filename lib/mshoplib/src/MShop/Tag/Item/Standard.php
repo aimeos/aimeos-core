@@ -42,7 +42,11 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
+		if( isset( $this->values['tag.languageid'] ) ) {
+			return (string) $this->values['tag.languageid'];
+		}
+
+		return null;
 	}
 
 
@@ -56,8 +60,23 @@ class Standard
 		if( $id === $this->getLanguageId() ) { return; }
 
 		$this->checkLanguageId( $id );
-		$this->values['langid'] = $id;
+		$this->values['tag.languageid'] = $id;
 		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the type code of the product tag item.
+	 *
+	 * @return string|null Type code of the product tag item
+	 */
+	public function getType()
+	{
+		if( isset( $this->values['tag.type'] ) ) {
+			return (string) $this->values['tag.type'];
+		}
+
+		return null;
 	}
 
 
@@ -68,7 +87,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['tag.typeid'] ) ) {
+			return (int) $this->values['tag.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -79,10 +102,9 @@ class Standard
 	 */
 	public function setTypeId( $id )
 	{
-		$id = (int) $id;
 		if( $id === $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $id;
+		$this->values['tag.typeid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -94,7 +116,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['tag.label'] ) ) {
+			return (string) $this->values['tag.label'];
+		}
+
+		return '';
 	}
 
 
@@ -107,19 +133,8 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['tag.label'] = (string) $label;
 		$this->setModified();
-	}
-
-
-	/**
-	 * Returns the type code of the product tag item.
-	 *
-	 * @return string Type code of the product tag item
-	 */
-	public function getType()
-	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
 	}
 
 
