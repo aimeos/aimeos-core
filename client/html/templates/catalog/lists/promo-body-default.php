@@ -13,11 +13,6 @@ $detailController = $this->config( 'client/html/catalog/detail/url/controller', 
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
-/// Price format with price value (%1$s) and currency (%2$s)
-$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
-/// Percent format with value (%1$s) and % sign
-$percentFormat = $this->translate( 'client/html', '%1$s%%' );
-
 ?>
 <?php if( !empty( $productItems ) ) : ?>
 <section class="catalog-list-promo">
@@ -48,7 +43,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 				</div>
 				<div class="stock" data-prodid="<?php echo $id; ?>"></div>
 				<div class="price-list">
-<?php		echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
+<?php		echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 				</div>
 			</a>
 		</li><!--

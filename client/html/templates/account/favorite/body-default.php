@@ -16,7 +16,7 @@ $productItems = $this->get( 'favoriteProductItems', array() );
  * The destination can be a page ID like in a content management system or the
  * module of a software development framework. This "target" must contain or know
  * the controller that should be called by the generated URL.
- * 
+ *
  * @param string Destination of the URL
  * @since 2014.09
  * @category Developer
@@ -32,7 +32,7 @@ $favTarget = $this->config( 'client/html/account/favorite/url/target' );
  * In Model-View-Controller (MVC) applications, the controller contains the methods
  * that create parts of the output displayed in the generated HTML page. Controller
  * names are usually alpha-numeric.
- * 
+ *
  * @param string Name of the controller
  * @since 2014.09
  * @category Developer
@@ -48,7 +48,7 @@ $favController = $this->config( 'client/html/account/favorite/url/controller', '
  * In Model-View-Controller (MVC) applications, actions are the methods of a
  * controller that create parts of the output displayed in the generated HTML page.
  * Action names are usually alpha-numeric.
- * 
+ *
  * @param string Name of the action
  * @since 2014.09
  * @category Developer
@@ -70,7 +70,7 @@ $favAction = $this->config( 'client/html/account/favorite/url/action', 'favorite
  * framework. This is because the infrastructure of the application is used for
  * generating the URLs. The full list of available config options is referenced
  * in the "see also" section of this page.
- * 
+ *
  * @param string Associative list of configuration options
  * @since 2014.09
  * @category Developer
@@ -85,11 +85,6 @@ $detailTarget = $this->config( 'client/html/catalog/detail/url/target' );
 $detailController = $this->config( 'client/html/catalog/detail/url/controller', 'catalog' );
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
-
-/// Price format with price value (%1$s) and currency (%2$s)
-$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
-/// Percent format with value (%1$s) and % sign
-$percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 ?>
 <section class="aimeos account-favorite">
@@ -133,7 +128,7 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 <?php			endif; ?>
 				<h3 class="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
 				<div class="price-list">
-<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
+<?php			echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 				</div>
 			</a>
 		</li>

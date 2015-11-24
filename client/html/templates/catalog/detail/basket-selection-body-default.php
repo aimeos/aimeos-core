@@ -49,7 +49,7 @@ $attrDeps = json_encode( $this->get( 'selectionAttributeDependencies', new stdCl
 ?>
 <div class="catalog-detail-basket-selection" data-proddeps="<?php echo $enc->attr( $prodDeps ); ?>" data-attrdeps="<?php echo $enc->attr( $attrDeps ); ?>">
 <?php foreach( $this->get( 'selectionProducts', array() ) as $prodid => $product ) : ?>
-<?php	$prices = $product->getRefItems( 'price', 'default', 'default' ); ?>
+<?php	$prices = $product->getRefItems( 'price', null, 'default' ); ?>
 <?php	if( !empty( $prices ) ) : ?>
 	<div class="price price-prodid-<?php echo $prodid; ?>">
 <?php		echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $prices ) ); ?>

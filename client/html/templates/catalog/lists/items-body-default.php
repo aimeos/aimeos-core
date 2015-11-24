@@ -29,7 +29,7 @@ $position = $this->get( 'itemPosition', 0 );
  *
  * The partial template files are usually stored in the templates/partials/ folder
  * of the core or the extensions. The configured path to the partial file must
- * be relative to the templates/ folder, e.g. "partials/price-default.php". 
+ * be relative to the templates/ folder, e.g. "partials/price-default.php".
  *
  * @param string Relative path to the template file
  * @since 2015.04
@@ -65,7 +65,7 @@ $position = $this->get( 'itemPosition', 0 );
 			</div>
 			<div class="stock" data-prodid="<?php echo $id; ?>"></div>
 			<div class="price-list">
-<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', 'default', 'default' ) ) ); ?>
+<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 			</div>
 <?php	echo $this->get( 'itemsBody' ); ?>
 		</a>
