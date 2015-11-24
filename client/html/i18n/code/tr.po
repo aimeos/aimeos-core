@@ -208,3 +208,7 @@ msgstr "ambalaj-yüksekliği"
 #. Product property package-weight
 msgid "package-weight"
 msgstr "ambalaj-ağırlığı"
+
+#. Default price format
+msgid "price:default"
+msgstr "%1$s %2$s"

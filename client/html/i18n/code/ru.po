@@ -209,3 +209,7 @@ msgstr "высота пакет"
 #. Product property package-weight
 msgid "package-weight"
 msgstr "вес пакета"
+
+#. Default price format
+msgid "price:default"
+msgstr "%1$s %2$s"

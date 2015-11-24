@@ -209,3 +209,7 @@ msgstr ""
 #. Product property package-weight
 msgid "package-weight"
 msgstr ""
+
+#. Default price format
+msgid "price:default"
+msgstr "%1$s %2$s"

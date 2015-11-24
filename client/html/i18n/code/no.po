@@ -207,3 +207,7 @@ msgstr ""
 #. Product attribute
 msgid "width"
 msgstr ""
+
+#. Default price format
+msgid "price:default"
+msgstr "%1$s %2$s"

@@ -16,8 +16,6 @@ if( !is_array( $prices ) ) {
 $format = array(
 	/// Price quantity format with quantity (%1$s)
 	'quantity' => $this->translate( 'client/html', 'from %1$s' ),
-	/// Price format with price value (%1$s) and currency (%2$s)
-	'value' => $this->translate( 'client/html', '%1$s %2$s' ),
 	/// Price shipping format with shipping / payment cost value (%1$s) and currency (%2$s)
 	'costs' => $this->translate( 'client/html', '+ %1$s %2$s/item' ),
 	/// Rebate format with rebate value (%1$s) and currency (%2$s)
@@ -37,6 +35,9 @@ $format = array(
 
 	$costs = $priceItem->getCosts();
 	$rebate = $priceItem->getRebate();
+	$key = 'price:' . $priceItem->getType();
+	/// Price format with price value (%1$s) and currency (%2$s)
+	$format['value'] = $this->translate( 'client/html/code', $key );
 	$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
 ?>
 <div class="price-item <?php echo $enc->attr( $priceItem->getType() ); ?>">
