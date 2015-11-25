@@ -106,9 +106,9 @@ class Standard
 	public function createItem()
 	{
 		try {
-			$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+			$values = array( 'locale.currency.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		} catch( \Exception $ex ) {
-			$values = array( 'siteid' => null );
+			$values = array( 'locale.currency.siteid' => null );
 		}
 
 		return $this->createItemBase( $values );
@@ -413,7 +413,7 @@ class Standard
 			try
 			{
 				while( ( $row = $results->fetch() ) !== false ) {
-					$items[$row['id']] = $this->createItemBase( $row );
+					$items[$row['locale.currency.id']] = $this->createItemBase( $row );
 				}
 			}
 			catch( \Exception $e )

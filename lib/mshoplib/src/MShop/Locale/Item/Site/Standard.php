@@ -58,7 +58,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['locale.site.code'] ) ) {
+			return (string) $this->values['locale.site.code'];
+		}
+
+		return '';
 	}
 
 
@@ -73,7 +77,7 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
+		$this->values['locale.site.code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -85,7 +89,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['locale.site.label'] ) ) {
+			return (string) $this->values['locale.site.label'];
+		}
+
+		return '';
 	}
 
 
@@ -98,7 +106,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['locale.site.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -110,7 +118,11 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->values['config'] ) ? $this->values['config'] : array() );
+		if( isset( $this->values['locale.site.config'] ) ) {
+			return (array) $this->values['locale.site.config'];
+		}
+
+		return array();
 	}
 
 
@@ -121,7 +133,7 @@ class Standard
 	 */
 	public function setConfig( array $options )
 	{
-		$this->values['config'] = $options;
+		$this->values['locale.site.config'] = $options;
 		$this->setModified();
 	}
 
@@ -133,7 +145,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['locale.site.status'] ) ) {
+			return (int) $this->values['locale.site.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -146,7 +162,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['locale.site.status'] = (int) $status;
 		$this->setModified();
 	}
 

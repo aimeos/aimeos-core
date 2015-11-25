@@ -47,7 +47,11 @@ class Standard
 	 */
 	public function getLanguageId()
 	{
-		return ( isset( $this->values['langid'] ) ? (string) $this->values['langid'] : null );
+		if( isset( $this->values['text.languageid'] ) ) {
+			return (string) $this->values['text.languageid'];
+		}
+
+		return null;
 	}
 
 
@@ -62,7 +66,7 @@ class Standard
 		if( $langid === $this->getLanguageId() ) { return; }
 
 		$this->checkLanguageId( $langid );
-		$this->values['langid'] = $langid;
+		$this->values['text.languageid'] = $langid;
 		$this->setModified();
 	}
 
@@ -74,7 +78,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['text.typeid'] ) ) {
+			return (int) $this->values['text.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -87,7 +95,7 @@ class Standard
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $typeid;
+		$this->values['text.typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -99,7 +107,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
+		if( isset( $this->values['text.type'] ) ) {
+			return (string) $this->values['text.type'];
+		}
+
+		return null;
 	}
 
 
@@ -110,7 +122,11 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
+		if( isset( $this->values['text.domain'] ) ) {
+			return (string) $this->values['text.domain'];
+		}
+
+		return '';
 	}
 
 
@@ -123,7 +139,7 @@ class Standard
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->values['domain'] = (string) $domain;
+		$this->values['text.domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -135,7 +151,11 @@ class Standard
 	 */
 	public function getContent()
 	{
-		return ( isset( $this->values['content'] ) ? (string) $this->values['content'] : '' );
+		if( isset( $this->values['text.content'] ) ) {
+			return (string) $this->values['text.content'];
+		}
+
+		return '';
 	}
 
 
@@ -149,7 +169,7 @@ class Standard
 		if( $text == $this->getContent() ) { return; }
 
 		ini_set( 'mbstring.substitute_character', 'none' );
-		$this->values['content'] = @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' );
+		$this->values['text.content'] = @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' );
 		$this->setModified();
 	}
 
@@ -161,7 +181,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['text.label'] ) ) {
+			return (string) $this->values['text.label'];
+		}
+
+		return '';
 	}
 
 
@@ -174,7 +198,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['text.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -186,7 +210,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['text.status'] ) ) {
+			return (int) $this->values['text.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -199,7 +227,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['text.status'] = (int) $status;
 		$this->setModified();
 	}
 

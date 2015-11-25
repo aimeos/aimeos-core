@@ -27,6 +27,7 @@ class Standard
 	private $products;
 	private $values;
 
+
 	/**
 	 * Initializes the order product instance.
 	 *
@@ -49,6 +50,7 @@ class Standard
 		$this->products = $products;
 	}
 
+
 	/**
 	 * Clones internal objects of the order base product item.
 	 */
@@ -57,6 +59,7 @@ class Standard
 		$this->price = clone $this->price;
 	}
 
+
 	/**
 	 * Returns the base ID.
 	 *
@@ -64,7 +67,11 @@ class Standard
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
+		if( isset( $this->values['order.base.product.baseid'] ) ) {
+			return (int) $this->values['order.base.product.baseid'];
+		}
+
+		return null;
 	}
 
 
@@ -77,7 +84,7 @@ class Standard
 	{
 		if( $value == $this->getBaseId() ) { return; }
 
-		$this->values['baseid'] = ( $value !== null ? (int) $value : null );
+		$this->values['order.base.product.baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -90,7 +97,11 @@ class Standard
 	 */
 	public function getOrderProductId()
 	{
-		return ( isset( $this->values['ordprodid'] ) ? (int) $this->values['ordprodid'] : null );
+		if( isset( $this->values['order.base.product.ordprodid'] ) ) {
+			return (int) $this->values['order.base.product.ordprodid'];
+		}
+
+		return null;
 	}
 
 
@@ -104,7 +115,7 @@ class Standard
 	{
 		if( $orderProductId === $this->getOrderProductId() ) { return; }
 
-		$this->values['ordprodid'] = ( $orderProductId !== null ? (int) $orderProductId : null );
+		$this->values['order.base.product.ordprodid'] = ( $orderProductId !== null ? (int) $orderProductId : null );
 		$this->setModified();
 	}
 
@@ -116,7 +127,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
+		if( isset( $this->values['order.base.product.type'] ) ) {
+			return (string) $this->values['order.base.product.type'];
+		}
+
+		return '';
 	}
 
 	/**
@@ -128,7 +143,7 @@ class Standard
 	{
 		if( $type == $this->getType() ) { return; }
 
-		$this->values['type'] = (string) $type;
+		$this->values['order.base.product.type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -162,7 +177,11 @@ class Standard
 	 */
 	public function getSupplierCode()
 	{
-		return ( isset( $this->values['suppliercode'] ) ? (string) $this->values['suppliercode'] : '' );
+		if( isset( $this->values['order.base.product.suppliercode'] ) ) {
+			return (string) $this->values['order.base.product.suppliercode'];
+		}
+
+		return '';
 	}
 
 
@@ -177,7 +196,7 @@ class Standard
 
 		if( $suppliercode == $this->getSupplierCode() ) { return; }
 
-		$this->values['suppliercode'] = (string) $suppliercode;
+		$this->values['order.base.product.suppliercode'] = (string) $suppliercode;
 		$this->setModified();
 	}
 
@@ -189,7 +208,11 @@ class Standard
 	 */
 	public function getProductId()
 	{
-		return ( isset( $this->values['prodid'] ) ? (string) $this->values['prodid'] : '' );
+		if( isset( $this->values['order.base.product.productid'] ) ) {
+			return (string) $this->values['order.base.product.productid'];
+		}
+
+		return '';
 	}
 
 
@@ -202,7 +225,7 @@ class Standard
 	{
 		if( $id == $this->getProductId() ) { return; }
 
-		$this->values['prodid'] = (string) $id;
+		$this->values['order.base.product.productid'] = (string) $id;
 		$this->setModified();
 	}
 
@@ -214,7 +237,11 @@ class Standard
 	 */
 	public function getProductCode()
 	{
-		return ( isset( $this->values['prodcode'] ) ? (string) $this->values['prodcode'] : '' );
+		if( isset( $this->values['order.base.product.prodcode'] ) ) {
+			return (string) $this->values['order.base.product.prodcode'];
+		}
+
+		return '';
 	}
 
 
@@ -229,7 +256,7 @@ class Standard
 
 		if( $code == $this->getProductCode() ) { return; }
 
-		$this->values['prodcode'] = (string) $code;
+		$this->values['order.base.product.prodcode'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -241,7 +268,11 @@ class Standard
 	 */
 	public function getWarehouseCode()
 	{
-		return ( isset( $this->values['warehousecode'] ) ? (string) $this->values['warehousecode'] : '' );
+		if( isset( $this->values['order.base.product.warehousecode'] ) ) {
+			return (string) $this->values['order.base.product.warehousecode'];
+		}
+
+		return '';
 	}
 
 
@@ -256,7 +287,7 @@ class Standard
 
 		if( $code == $this->getWarehouseCode() ) { return; }
 
-		$this->values['warehousecode'] = (string) $code;
+		$this->values['order.base.product.warehousecode'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -268,7 +299,11 @@ class Standard
 	 */
 	public function getName()
 	{
-		return ( isset( $this->values['name'] ) ? (string) $this->values['name'] : '' );
+		if( isset( $this->values['order.base.product.name'] ) ) {
+			return (string) $this->values['order.base.product.name'];
+		}
+
+		return '';
 	}
 
 
@@ -281,7 +316,7 @@ class Standard
 	{
 		if( $value == $this->getName() ) { return; }
 
-		$this->values['name'] = (string) $value;
+		$this->values['order.base.product.name'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -293,7 +328,11 @@ class Standard
 	 */
 	public function getMediaUrl()
 	{
-		return ( isset( $this->values['mediaurl'] ) ? (string) $this->values['mediaurl'] : '' );
+		if( isset( $this->values['order.base.product.mediaurl'] ) ) {
+			return (string) $this->values['order.base.product.mediaurl'];
+		}
+
+		return '';
 	}
 
 
@@ -306,7 +345,7 @@ class Standard
 	{
 		if( $value == $this->getMediaUrl() ) { return; }
 
-		$this->values['mediaurl'] = (string) $value;
+		$this->values['order.base.product.mediaurl'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -318,7 +357,11 @@ class Standard
 	 */
 	public function getQuantity()
 	{
-		return ( isset( $this->values['quantity'] ) ? (int) $this->values['quantity'] : 1 );
+		if( isset( $this->values['order.base.product.quantity'] ) ) {
+			return (int) $this->values['order.base.product.quantity'];
+		}
+
+		return 1;
 	}
 
 
@@ -341,7 +384,7 @@ class Standard
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
 		}
 
-		$this->values['quantity'] = $quantity;
+		$this->values['order.base.product.quantity'] = $quantity;
 		$this->setModified();
 	}
 
@@ -380,9 +423,9 @@ class Standard
 	{
 		$price = clone $this->price;
 
-		$price->setValue( $price->getValue() * $this->values['quantity'] );
-		$price->setCosts( $price->getCosts() * $this->values['quantity'] );
-		$price->setRebate( $price->getRebate() * $this->values['quantity'] );
+		$price->setValue( $price->getValue() * $this->values['order.base.product.quantity'] );
+		$price->setCosts( $price->getCosts() * $this->values['order.base.product.quantity'] );
+		$price->setRebate( $price->getRebate() * $this->values['order.base.product.quantity'] );
 
 		return $price;
 	}
@@ -395,7 +438,11 @@ class Standard
 	 */
 	public function getFlags()
 	{
-		return ( isset( $this->values['flags'] ) ? (int) $this->values['flags'] : \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE );
+		if( isset( $this->values['order.base.product.flags'] ) ) {
+			return (int) $this->values['order.base.product.flags'];
+		}
+
+		return \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE;
 	}
 
 
@@ -409,7 +456,7 @@ class Standard
 		if( $value == $this->getFlags() ) { return; }
 
 		$this->checkFlags( $value );
-		$this->values['flags'] = (int) $value;
+		$this->values['order.base.product.flags'] = (int) $value;
 		$this->setModified();
 	}
 
@@ -421,7 +468,11 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : null );
+		if( isset( $this->values['order.base.product.position'] ) ) {
+			return (int) $this->values['order.base.product.position'];
+		}
+
+		return null;
 	}
 
 
@@ -439,7 +490,7 @@ class Standard
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
 		}
 
-		$this->values['pos'] = ( $value !== null ? (int) $value : null );
+		$this->values['order.base.product.position'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -453,7 +504,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED );
+		if( isset( $this->values['order.base.product.status'] ) ) {
+			return (int) $this->values['order.base.product.status'];
+		}
+
+		return \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED;
 	}
 
 
@@ -466,7 +521,7 @@ class Standard
 	 */
 	public function setStatus( $value )
 	{
-		$this->values['status'] = (int) $value;
+		$this->values['order.base.product.status'] = (int) $value;
 		$this->setModified();
 	}
 

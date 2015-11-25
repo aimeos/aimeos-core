@@ -214,10 +214,10 @@ class Standard
 	public function createItem()
 	{
 		$locale = $this->getContext()->getLocale();
-		$values = array( 'siteid' => $locale->getSiteId() );
+		$values = array( 'price.siteid' => $locale->getSiteId() );
 
 		if( $locale->getCurrencyId() !== null ) {
-			$values['currencyid'] = $locale->getCurrencyId();
+			$values['price.currencyid'] = $locale->getCurrencyId();
 		}
 
 		return $this->createItemBase( $values );
@@ -565,8 +565,8 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$map[$row['id']] = $row;
-				$typeIds[$row['typeid']] = null;
+				$map[$row['price.id']] = $row;
+				$typeIds[$row['price.typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -587,8 +587,8 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['typeid']] ) ) {
-					$map[$id]['type'] = $typeItems[$row['typeid']]->getCode();
+				if( isset( $typeItems[$row['price.typeid']] ) ) {
+					$map[$id]['price.type'] = $typeItems[$row['price.typeid']]->getCode();
 				}
 			}
 		}

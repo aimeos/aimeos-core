@@ -28,15 +28,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 987,
-			'siteid'=>99,
-			'typeid' => 44,
-			'langid' => 'en',
-			'type' => 'taste',
-			'label' => 'salty',
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'tag.id' => 987,
+			'tag.siteid' => 99,
+			'tag.typeid' => 44,
+			'tag.languageid' => 'en',
+			'tag.type' => 'taste',
+			'tag.label' => 'salty',
+			'tag.mtime' => '2011-01-01 00:00:02',
+			'tag.ctime' => '2011-01-01 00:00:01',
+			'tag.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Tag\Item\Standard( $this->values );

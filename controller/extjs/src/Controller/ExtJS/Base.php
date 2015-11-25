@@ -478,7 +478,7 @@ abstract class Base
 			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Site item for code "%1$s" not found', $site ) );
 		}
 
-		$values = array( 'siteid' => $siteItem->getId() );
+		$values = array( 'locale.siteid' => $siteItem->getId() );
 		$sitepath = array_keys( $siteManager->getPath( $siteItem->getId() ) );
 		$sitetree = $this->getSiteIdsFromTree( $siteManager->getTree( $siteItem->getId() ) );
 

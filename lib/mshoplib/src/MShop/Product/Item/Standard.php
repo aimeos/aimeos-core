@@ -47,7 +47,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['product.typeid'] ) ) {
+			return (int) $this->values['product.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -60,7 +64,7 @@ class Standard
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $typeid;
+		$this->values['product.typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -72,7 +76,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
+		if( isset( $this->values['product.type'] ) ) {
+			return (string) $this->values['product.type'];
+		}
+
+		return null;
 	}
 
 
@@ -83,7 +91,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['product.status'] ) ) {
+			return (int) $this->values['product.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -96,7 +108,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['product.status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -108,7 +120,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['product.code'] ) ) {
+			return (string) $this->values['product.code'];
+		}
+
+		return '';
 	}
 
 
@@ -123,7 +139,7 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
+		$this->values['product.code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -135,7 +151,11 @@ class Standard
 	 */
 	public function getSupplierCode()
 	{
-		return ( isset( $this->values['suppliercode'] ) ? (string) $this->values['suppliercode'] : '' );
+		if( isset( $this->values['product.suppliercode'] ) ) {
+			return (string) $this->values['product.suppliercode'];
+		}
+
+		return '';
 	}
 
 
@@ -148,7 +168,7 @@ class Standard
 	{
 		if( $suppliercode == $this->getSupplierCode() ) { return; }
 
-		$this->values['suppliercode'] = (string) $suppliercode;
+		$this->values['product.suppliercode'] = (string) $suppliercode;
 		$this->setModified();
 	}
 
@@ -160,7 +180,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['product.label'] ) ) {
+			return (string) $this->values['product.label'];
+		}
+
+		return '';
 	}
 
 
@@ -173,7 +197,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['product.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -185,7 +209,11 @@ class Standard
 	 */
 	public function getDateStart()
 	{
-		return ( isset( $this->values['start'] ) ? (string) $this->values['start'] : null );
+		if( isset( $this->values['product.datestart'] ) ) {
+			return (string) $this->values['product.datestart'];
+		}
+
+		return null;
 	}
 
 
@@ -198,7 +226,7 @@ class Standard
 	{
 		if( $date === $this->getDateStart() ) { return; }
 
-		$this->values['start'] = $this->checkDateFormat( $date );
+		$this->values['product.datestart'] = $this->checkDateFormat( $date );
 		$this->setModified();
 	}
 
@@ -210,7 +238,11 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		return ( isset( $this->values['end'] ) ? (string) $this->values['end'] : null );
+		if( isset( $this->values['product.dateend'] ) ) {
+			return (string) $this->values['product.dateend'];
+		}
+
+		return null;
 	}
 
 
@@ -223,7 +255,7 @@ class Standard
 	{
 		if( $date === $this->getDateEnd() ) { return; }
 
-		$this->values['end'] = $this->checkDateFormat( $date );
+		$this->values['product.dateend'] = $this->checkDateFormat( $date );
 		$this->setModified();
 	}
 
@@ -235,7 +267,11 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->values['config'] ) ? $this->values['config'] : array() );
+		if( isset( $this->values['product.config'] ) ) {
+			return (array) $this->values['product.config'];
+		}
+
+		return array();
 	}
 
 
@@ -246,7 +282,7 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		$this->values['config'] = $config;
+		$this->values['product.config'] = $config;
 		$this->setModified();
 	}
 

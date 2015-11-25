@@ -71,11 +71,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mattli."id", mattli."parentid", mattli."siteid",
-				mattli."typeid", mattli."domain", mattli."refid",
-				mattli."start", mattli."end", mattli."config", mattli."pos",
-				mattli."status", mattli."mtime", mattli."ctime",
-				mattli."editor"
+			SELECT DISTINCT mattli."id" AS "attribute.lists.id", mattli."siteid" AS "attribute.lists.siteid",
+				mattli."parentid" AS "attribute.lists.parentid", mattli."typeid" AS "attribute.lists.typeid",
+				mattli."domain" AS "attribute.lists.domain", mattli."refid" AS "attribute.lists.refid",
+				mattli."start" AS "attribute.lists.datestart", mattli."end" AS "attribute.lists.dateend",
+				mattli."config" AS "attribute.lists.config", mattli."pos" AS "attribute.lists.position",
+				mattli."status" AS "attribute.lists.status", mattli."mtime" AS "attribute.lists.mtime",
+				mattli."ctime" AS "attribute.lists.ctime", mattli."editor" AS "attribute.lists.editor"
 			FROM "mshop_attribute_list" AS mattli
 			:joins
 			WHERE :cond

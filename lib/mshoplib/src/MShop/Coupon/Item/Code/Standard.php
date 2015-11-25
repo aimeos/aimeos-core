@@ -44,7 +44,11 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
+		if( isset( $this->values['coupon.code.parentid'] ) ) {
+			return (int) $this->values['coupon.code.parentid'];
+		}
+
+		return null;
 	}
 
 
@@ -57,7 +61,7 @@ class Standard
 	{
 		if( $id == $this->getParentId() ) { return; }
 
-		$this->values['parentid'] = (int) $id;
+		$this->values['coupon.code.parentid'] = (int) $id;
 		$this->setModified();
 	}
 
@@ -69,7 +73,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : null );
+		if( isset( $this->values['coupon.code.code'] ) ) {
+			return (string) $this->values['coupon.code.code'];
+		}
+
+		return null;
 	}
 
 
@@ -84,7 +92,7 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
+		$this->values['coupon.code.code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -96,7 +104,11 @@ class Standard
 	 */
 	public function getCount()
 	{
-		return ( isset( $this->values['count'] ) ? (int) $this->values['count'] : 0 );
+		if( isset( $this->values['coupon.code.count'] ) ) {
+			return (int) $this->values['coupon.code.count'];
+		}
+
+		return 0;
 	}
 
 
@@ -109,7 +121,7 @@ class Standard
 	{
 		if( $count == $this->getCount() ) { return; }
 
-		$this->values['count'] = (string) $count;
+		$this->values['coupon.code.count'] = (string) $count;
 		$this->setModified();
 	}
 
@@ -121,7 +133,11 @@ class Standard
 	 */
 	public function getDateStart()
 	{
-		return ( isset( $this->values['start'] ) ? (string) $this->values['start'] : null );
+		if( isset( $this->values['coupon.code.datestart'] ) ) {
+			return (string) $this->values['coupon.code.datestart'];
+		}
+
+		return null;
 	}
 
 
@@ -134,7 +150,7 @@ class Standard
 	{
 		if( $date == $this->getDateStart() ) { return; }
 
-		$this->values['start'] = $this->checkDateFormat( $date );
+		$this->values['coupon.code.datestart'] = $this->checkDateFormat( $date );
 
 		$this->setModified();
 	}
@@ -147,7 +163,11 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		return ( isset( $this->values['end'] ) ? (string) $this->values['end'] : null );
+		if( isset( $this->values['coupon.code.dateend'] ) ) {
+			return (string) $this->values['coupon.code.dateend'];
+		}
+
+		return null;
 	}
 
 
@@ -160,7 +180,7 @@ class Standard
 	{
 		if( $date == $this->getDateEnd() ) { return; }
 
-		$this->values['end'] = $this->checkDateFormat( $date );
+		$this->values['coupon.code.dateend'] = $this->checkDateFormat( $date );
 
 		$this->setModified();
 	}

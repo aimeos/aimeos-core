@@ -27,32 +27,32 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->price = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 
 		$attrValues = array(
-			'id' => 3,
-			'siteid'=>99,
-			'ordservid' => 42,
-			'name' => 'UnitName',
-			'type' => 'default',
-			'code' => 'UnitCode',
-			'value' => 'UnitValue',
-			'mtime' => '2020-12-31 23:59:59',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.base.service.attribute.id' => 3,
+			'order.base.service.attribute.siteid' => 99,
+			'order.base.service.attribute.parentid' => 42,
+			'order.base.service.attribute.name' => 'UnitName',
+			'order.base.service.attribute.type' => 'default',
+			'order.base.service.attribute.code' => 'UnitCode',
+			'order.base.service.attribute.value' => 'UnitValue',
+			'order.base.service.attribute.mtime' => '2020-12-31 23:59:59',
+			'order.base.service.attribute.ctime' => '2011-01-01 00:00:01',
+			'order.base.service.attribute.editor' => 'unitTestUser'
 		);
 
 		$this->attribute = array( 'UnitCode' => new \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard( $attrValues ) );
 
 		$this->values = array(
-			'id' => 1,
-			'siteid'=>99,
-			'servid' => 'ServiceID',
-			'baseid' => 42,
-			'code' => 'UnitCode',
-			'name' => 'UnitName',
-			'mediaurl' => 'Url for test',
-			'type' => 'payment',
-			'mtime' => -99,
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.base.service.id' => 1,
+			'order.base.service.siteid' => 99,
+			'order.base.service.serviceid' => 'ServiceID',
+			'order.base.service.baseid' => 42,
+			'order.base.service.code' => 'UnitCode',
+			'order.base.service.name' => 'UnitName',
+			'order.base.service.mediaurl' => 'Url for test',
+			'order.base.service.type' => 'payment',
+			'order.base.service.mtime' => '2012-01-01 00:00:01',
+			'order.base.service.ctime' => '2011-01-01 00:00:01',
+			'order.base.service.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Service\Standard( $this->price, $this->values, $this->attribute );
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 	public function testSetId()
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetServiceId()
 	{
-		$this->assertEquals( $this->values['servid'], $this->object->getServiceId() );
+		$this->assertEquals( 'ServiceID', $this->object->getServiceId() );
 	}
 
 	public function testSetServiceId()
@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetCode()
 	{
-		$this->assertEquals( $this->values['code'], $this->object->getCode() );
+		$this->assertEquals( 'UnitCode', $this->object->getCode() );
 	}
 
 	public function testSetCode()
@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetName()
 	{
-		$this->assertEquals( $this->values['name'], $this->object->getName() );
+		$this->assertEquals( 'UnitName', $this->object->getName() );
 	}
 
 	public function testSetName()
@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetMediaUrl()
 	{
-		$this->assertEquals( $this->values['mediaurl'], $this->object->getMediaUrl() );
+		$this->assertEquals( 'Url for test', $this->object->getMediaUrl() );
 	}
 
 	public function testSetMediaUrl()
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetType()
 	{
-		$this->assertEquals( $this->values['type'], $this->object->getType() );
+		$this->assertEquals( 'payment', $this->object->getType() );
 	}
 
 	public function testSetType()
@@ -309,7 +309,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetTimeModified()
 	{
-		$this->assertEquals( $this->values['mtime'], $this->object->getTimeModified() );
+		$this->assertEquals( '2012-01-01 00:00:01', $this->object->getTimeModified() );
 	}
 
 	public function testGetTimeCreated()

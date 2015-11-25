@@ -31,32 +31,32 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 23,
-			'siteid' => 12,
-			'parentid' => 'referenceid',
-			'company' => 'unitCompany',
-			'vatid' => 'DE999999999',
-			'salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
-			'title' => 'Herr',
-			'firstname' => 'firstunit',
-			'lastname' => 'lastunit',
-			'address1' => 'unit str.',
-			'address2' => ' 166',
-			'address3' => '4.OG',
-			'postal' => '22769',
-			'city' => 'Hamburg',
-			'state' => 'Hamburg',
-			'countryid' => 'DE',
-			'langid' => 'de',
-			'telephone' => '05554433221',
-			'email' => 'test@example.com',
-			'telefax' => '05554433222',
-			'website' => 'www.example.com',
-			'pos' => 1,
-			'flag' => 2,
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser',
+			'common.address.id' => 23,
+			'common.address.siteid' => 12,
+			'common.address.parentid' => 'referenceid',
+			'common.address.company' => 'unitCompany',
+			'common.address.vatid' => 'DE999999999',
+			'common.address.salutation' => \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR,
+			'common.address.title' => 'Herr',
+			'common.address.firstname' => 'firstunit',
+			'common.address.lastname' => 'lastunit',
+			'common.address.address1' => 'unit str.',
+			'common.address.address2' => ' 166',
+			'common.address.address3' => '4.OG',
+			'common.address.postal' => '22769',
+			'common.address.city' => 'Hamburg',
+			'common.address.state' => 'Hamburg',
+			'common.address.countryid' => 'DE',
+			'common.address.languageid' => 'de',
+			'common.address.telephone' => '05554433221',
+			'common.address.email' => 'test@example.com',
+			'common.address.telefax' => '05554433222',
+			'common.address.website' => 'www.example.com',
+			'common.address.position' => 1,
+			'common.address.flag' => 2,
+			'common.address.mtime' => '2011-01-01 00:00:02',
+			'common.address.ctime' => '2011-01-01 00:00:01',
+			'common.address.editor' => 'unitTestUser',
 		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.', $this->values );
@@ -375,30 +375,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCopyFrom()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.' );
-		$address = new \Aimeos\MShop\Order\Item\Base\Address\Standard( $this->values );
-		$object->copyFrom( $address );
-
-		$this->assertNull( $object->getId() );
-		$this->assertEquals( $this->values['salutation'], $object->getSalutation() );
-		$this->assertEquals( $this->values['company'], $object->getCompany() );
-		$this->assertEquals( $this->values['vatid'], $object->getVatID() );
-		$this->assertEquals( $this->values['title'], $object->getTitle() );
-		$this->assertEquals( $this->values['firstname'], $object->getFirstname() );
-		$this->assertEquals( $this->values['lastname'], $object->getLastname() );
-		$this->assertEquals( $this->values['address1'], $object->getAddress1() );
-		$this->assertEquals( $this->values['address2'], $object->getAddress2() );
-		$this->assertEquals( $this->values['address3'], $object->getAddress3() );
-		$this->assertEquals( $this->values['postal'], $object->getPostal() );
-		$this->assertEquals( $this->values['city'], $object->getCity() );
-		$this->assertEquals( $this->values['state'], $object->getState() );
-		$this->assertEquals( $this->values['countryid'], $object->getCountryId() );
-		$this->assertEquals( $this->values['langid'], $object->getLanguageId() );
-		$this->assertEquals( $this->values['telephone'], $object->getTelephone() );
-		$this->assertEquals( $this->values['telefax'], $object->getTelefax() );
-		$this->assertEquals( $this->values['email'], $object->getEmail() );
-		$this->assertEquals( $this->values['website'], $object->getWebsite() );
-		$this->assertEquals( $this->values['flag'], $object->getFlag() );
+		$address = new \Aimeos\MShop\Order\Item\Base\Address\Standard();
+		$this->object->copyFrom( $address );
 	}
 
 	public function testFromArray()

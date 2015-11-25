@@ -45,7 +45,11 @@ class Standard
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
+		if( isset( $this->values['order.base.coupon.baseid'] ) ) {
+			return (int) $this->values['order.base.coupon.baseid'];
+		}
+
+		return null;
 	}
 
 
@@ -58,7 +62,7 @@ class Standard
 	{
 		if( $baseid == $this->getBaseId() ) { return; }
 
-		$this->values['baseid'] = (int) $baseid;
+		$this->values['order.base.coupon.baseid'] = (int) $baseid;
 		$this->setModified();
 	}
 
@@ -70,7 +74,11 @@ class Standard
 	 */
 	public function getProductId()
 	{
-		return ( isset( $this->values['ordprodid'] ) ? (int) $this->values['ordprodid'] : null );
+		if( isset( $this->values['order.base.coupon.ordprodid'] ) ) {
+			return (int) $this->values['order.base.coupon.ordprodid'];
+		}
+
+		return null;
 	}
 
 
@@ -83,7 +91,7 @@ class Standard
 	{
 		if( $productid == $this->getProductId() ) { return; }
 
-		$this->values['ordprodid'] = (int) $productid;
+		$this->values['order.base.coupon.ordprodid'] = (int) $productid;
 		$this->setModified();
 	}
 
@@ -91,11 +99,15 @@ class Standard
 	/**
 	 * Returns the coupon code.
 	 *
-	 * @return string Coupon code.
+	 * @return string|null Coupon code.
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : null );
+		if( isset( $this->values['order.base.coupon.code'] ) ) {
+			return (string) $this->values['order.base.coupon.code'];
+		}
+
+		return null;
 	}
 
 
@@ -110,7 +122,7 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
+		$this->values['order.base.coupon.code'] = (string) $code;
 		$this->setModified();
 	}
 

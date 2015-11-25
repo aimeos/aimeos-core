@@ -44,7 +44,12 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 */
 	public function getId()
 	{
-		return ( isset( $this->values['id'] ) && $this->values['id'] != '' ? (string) $this->values['id'] : null );
+		if( isset( $this->values['id'] ) && $this->values['id'] != '' ) {
+			return (string) $this->values['id'];
+		}
+
+		$key = $this->prefix . 'id';
+		return ( isset( $this->values[$key] ) && $this->values[$key] != '' ? (string) $this->values[$key] : null );
 	}
 
 
@@ -55,11 +60,15 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 */
 	public function setId( $id )
 	{
-		if( ( $this->values['id'] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
+		$key = $this->prefix . 'id';
+
+		if( ( $this->values[$key] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
 			$this->modified = true;
 		} else {
 			$this->modified = false;
 		}
+
+		$this->values['id'] = $this->values[$key];
 	}
 
 
@@ -70,7 +79,12 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 */
 	public function getSiteId()
 	{
-		return ( isset( $this->values['siteid'] ) ? (int) $this->values['siteid'] : null );
+		if( isset( $this->values['siteid'] ) ) {
+			return (int) $this->values['siteid'];
+		}
+
+		$key = $this->prefix . 'siteid';
+		return ( isset( $this->values[$key] ) ? (int) $this->values[$key] : null );
 	}
 
 
@@ -81,7 +95,12 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 */
 	public function getTimeModified()
 	{
-		return ( isset( $this->values['mtime'] ) ? (string) $this->values['mtime'] : null );
+		if( isset( $this->values['mtime'] ) ) {
+			return (string) $this->values['mtime'];
+		}
+
+		$key = $this->prefix . 'mtime';
+		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : null );
 	}
 
 
@@ -92,7 +111,12 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 */
 	public function getTimeCreated()
 	{
-		return ( isset( $this->values['ctime'] ) ? (string) $this->values['ctime'] : null );
+		if( isset( $this->values['ctime'] ) ) {
+			return (string) $this->values['ctime'];
+		}
+
+		$key = $this->prefix . 'ctime';
+		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : null );
 	}
 
 
@@ -103,7 +127,12 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 */
 	public function getEditor()
 	{
-		return ( isset( $this->values['editor'] ) ? (string) $this->values['editor'] : '' );
+		if( isset( $this->values['editor'] ) ) {
+			return (string) $this->values['editor'];
+		}
+
+		$key = $this->prefix . 'editor';
+		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : '' );
 	}
 
 

@@ -47,7 +47,11 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
+		if( isset( $this->values['attribute.domain'] ) ) {
+			return (string) $this->values['attribute.domain'];
+		}
+
+		return '';
 	}
 
 
@@ -60,7 +64,7 @@ class Standard
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->values['domain'] = (string) $domain;
+		$this->values['attribute.domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -72,7 +76,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['attribute.typeid'] ) ) {
+			return (int) $this->values['attribute.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -85,7 +93,7 @@ class Standard
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $typeid;
+		$this->values['attribute.typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -97,7 +105,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
+		if( isset( $this->values['attribute.type'] ) ) {
+			return (string) $this->values['attribute.type'];
+		}
+
+		return null;
 	}
 
 
@@ -108,7 +120,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['attribute.code'] ) ) {
+			return (string) $this->values['attribute.code'];
+		}
+
+		return '';
 	}
 
 
@@ -123,57 +139,7 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
-		$this->setModified();
-	}
-
-
-	/**
-	 * Returns the status (enabled/disabled) of the attribute item.
-	 *
-	 * @return integer Returns the status of the item
-	 */
-	public function getStatus()
-	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
-	}
-
-
-	/**
-	 * Sets the new status of the attribute item.
-	 *
-	 * @param integer $status Status of the item
-	 */
-	public function setStatus( $status )
-	{
-		if( $status == $this->getStatus() ) { return; }
-
-		$this->values['status'] = (int) $status;
-		$this->setModified();
-	}
-
-
-	/**
-	 * Gets the position of the attribute item.
-	 *
-	 * @return integer Position of the attribute item
-	 */
-	public function getPosition()
-	{
-		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
-	}
-
-
-	/**
-	 * Sets the position of the attribute item
-	 *
-	 * @param integer $pos Position of the attribute item
-	 */
-	public function setPosition( $pos )
-	{
-		if( $pos == $this->getPosition() ) { return; }
-
-		$this->values['pos'] = (int) $pos;
+		$this->values['attribute.code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -185,7 +151,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['attribute.label'] ) ) {
+			return (string) $this->values['attribute.label'];
+		}
+
+		return '';
 	}
 
 
@@ -198,7 +168,65 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['attribute.label'] = (string) $label;
+		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the status (enabled/disabled) of the attribute item.
+	 *
+	 * @return integer Returns the status of the item
+	 */
+	public function getStatus()
+	{
+		if( isset( $this->values['attribute.status'] ) ) {
+			return (int) $this->values['attribute.status'];
+		}
+
+		return 0;
+	}
+
+
+	/**
+	 * Sets the new status of the attribute item.
+	 *
+	 * @param integer $status Status of the item
+	 */
+	public function setStatus( $status )
+	{
+		if( $status == $this->getStatus() ) { return; }
+
+		$this->values['attribute.status'] = (int) $status;
+		$this->setModified();
+	}
+
+
+	/**
+	 * Gets the position of the attribute item.
+	 *
+	 * @return integer Position of the attribute item
+	 */
+	public function getPosition()
+	{
+		if( isset( $this->values['attribute.position'] ) ) {
+			return (int) $this->values['attribute.position'];
+		}
+
+		return 0;
+	}
+
+
+	/**
+	 * Sets the position of the attribute item
+	 *
+	 * @param integer $pos Position of the attribute item
+	 */
+	public function setPosition( $pos )
+	{
+		if( $pos == $this->getPosition() ) { return; }
+
+		$this->values['attribute.position'] = (int) $pos;
 		$this->setModified();
 	}
 

@@ -110,7 +110,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'customer.group.siteid'=> $this->getContext()->getLocale()->getSiteId() );
 
 		return $this->createItemBase( $values );
 	}
@@ -490,7 +490,7 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['id']] = $this->createItemBase( $row );
+				$map[$row['customer.group.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

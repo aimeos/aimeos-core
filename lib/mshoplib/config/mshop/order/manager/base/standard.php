@@ -49,11 +49,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordba."id", mordba."siteid", mordba."sitecode",
-				mordba."customerid", mordba."langid", mordba."currencyid",
-				mordba."price", mordba."costs", mordba."rebate",
-				mordba."comment", mordba."status", mordba."mtime",
-				mordba."editor", mordba."ctime"
+			SELECT DISTINCT mordba."id" AS "order.base.id", mordba."siteid" AS "order.base.siteid",
+				mordba."sitecode" AS "order.base.sitecode", mordba."customerid" AS "order.base.customerid",
+				mordba."langid" AS "order.base.languageid", mordba."currencyid" AS "order.base.currencyid",
+				mordba."price" AS "order.base.price", mordba."costs" AS "order.base.costs",
+				mordba."rebate" AS "order.base.rebate", mordba."comment" AS "order.base.comment",
+				mordba."status" AS "order.base.status", mordba."mtime" AS "order.base.mtime",
+				mordba."editor" AS "order.base.editor", mordba."ctime" AS "order.base.ctime"
 			FROM "mshop_order_base" AS mordba
 			:joins
 			WHERE :cond

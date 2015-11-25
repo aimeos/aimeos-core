@@ -42,7 +42,11 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
+		if( isset( $this->values['product.stock.parentid'] ) ) {
+			return (int) $this->values['product.stock.parentid'];
+		}
+
+		return null;
 	}
 
 
@@ -55,7 +59,7 @@ class Standard
 	{
 		if( $parentid == $this->getParentId() ) { return; }
 
-		$this->values['parentid'] = (int) $parentid;
+		$this->values['product.stock.parentid'] = (int) $parentid;
 		$this->setModified();
 	}
 
@@ -67,7 +71,11 @@ class Standard
 	 */
 	public function getWarehouseId()
 	{
-		return ( isset( $this->values['warehouseid'] ) ? (int) $this->values['warehouseid'] : null );
+		if( isset( $this->values['product.stock.warehouseid'] ) ) {
+			return (int) $this->values['product.stock.warehouseid'];
+		}
+
+		return null;
 	}
 
 
@@ -84,7 +92,7 @@ class Standard
 			$warehouseid = (int) $warehouseid;
 		}
 
-		$this->values['warehouseid'] = $warehouseid;
+		$this->values['product.stock.warehouseid'] = $warehouseid;
 		$this->setModified();
 	}
 
@@ -96,7 +104,11 @@ class Standard
 	 */
 	public function getStocklevel()
 	{
-		return ( isset( $this->values['stocklevel'] ) ? (int) $this->values['stocklevel'] : null );
+		if( isset( $this->values['product.stock.stocklevel'] ) ) {
+			return (int) $this->values['product.stock.stocklevel'];
+		}
+
+		return null;
 	}
 
 
@@ -113,7 +125,7 @@ class Standard
 			$stocklevel = (int) $stocklevel;
 		}
 
-		$this->values['stocklevel'] = $stocklevel;
+		$this->values['product.stock.stocklevel'] = $stocklevel;
 		$this->setModified();
 	}
 
@@ -125,7 +137,11 @@ class Standard
 	 */
 	public function getDateBack()
 	{
-		return ( isset( $this->values['backdate'] ) ? (string) $this->values['backdate'] : null );
+		if( isset( $this->values['product.stock.backdate'] ) ) {
+			return (string) $this->values['product.stock.backdate'];
+		}
+
+		return null;
 	}
 
 
@@ -138,7 +154,7 @@ class Standard
 	{
 		if( $backdate === $this->getDateBack() ) { return; }
 
-		$this->values['backdate'] = $this->checkDateFormat( $backdate );;
+		$this->values['product.stock.backdate'] = $this->checkDateFormat( $backdate );;
 		$this->setModified();
 	}
 

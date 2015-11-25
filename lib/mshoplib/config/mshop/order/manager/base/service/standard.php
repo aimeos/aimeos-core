@@ -50,12 +50,14 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordbase."id", mordbase."baseid",
-				mordbase."siteid", mordbase."servid", mordbase."type",
-				mordbase."code", mordbase."name", mordbase."mediaurl",
-				mordbase."price", mordbase."costs", mordbase."rebate",
-				mordbase."taxrate", mordbase."mtime", mordbase."editor",
-				mordbase."ctime"
+			SELECT DISTINCT mordbase."id" AS "order.base.service.id", mordbase."baseid" AS "order.base.service.baseid",
+				mordbase."siteid" AS "order.base.service.siteid", mordbase."servid" AS "order.base.service.serviceid",
+				mordbase."type" AS "order.base.service.type", mordbase."code" AS "order.base.service.code",
+				mordbase."name" AS "order.base.service.name", mordbase."mediaurl" AS "order.base.service.mediaurl",
+				mordbase."price" AS "order.base.service.price", mordbase."costs" AS "order.base.service.costs",
+				mordbase."rebate" AS "order.base.service.rebate", mordbase."taxrate" AS "order.base.service.taxrate",
+				mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
+				mordbase."ctime" AS "order.base.service.ctime"
 			FROM "mshop_order_base_service" AS mordbase
 			:joins
 			WHERE :cond

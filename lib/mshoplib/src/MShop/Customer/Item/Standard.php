@@ -48,24 +48,24 @@ class Standard
 		{
 			switch( $name )
 			{
-				case 'salutation': $address->setSalutation( $value ); break;
-				case 'company': $address->setCompany( $value ); break;
-				case 'vatid': $address->setVatID( $value ); break;
-				case 'title': $address->setTitle( $value ); break;
-				case 'firstname': $address->setFirstname( $value ); break;
-				case 'lastname': $address->setLastname( $value ); break;
-				case 'address1': $address->setAddress1( $value ); break;
-				case 'address2': $address->setAddress2( $value ); break;
-				case 'address3': $address->setAddress3( $value ); break;
-				case 'postal': $address->setPostal( $value ); break;
-				case 'city': $address->setCity( $value ); break;
-				case 'state': $address->setState( $value ); break;
-				case 'langid': $address->setLanguageId( $value ); break;
-				case 'countryid': $address->setCountryId( $value ); break;
-				case 'telephone': $address->setTelephone( $value ); break;
-				case 'telefax': $address->setTelefax( $value ); break;
-				case 'website': $address->setWebsite( $value ); break;
-				case 'email': $address->setEmail( $value ); break;
+				case 'customer.salutation': $address->setSalutation( $value ); break;
+				case 'customer.company': $address->setCompany( $value ); break;
+				case 'customer.vatid': $address->setVatId( $value ); break;
+				case 'customer.title': $address->setTitle( $value ); break;
+				case 'customer.firstname': $address->setFirstname( $value ); break;
+				case 'customer.lastname': $address->setLastname( $value ); break;
+				case 'customer.address1': $address->setAddress1( $value ); break;
+				case 'customer.address2': $address->setAddress2( $value ); break;
+				case 'customer.address3': $address->setAddress3( $value ); break;
+				case 'customer.postal': $address->setPostal( $value ); break;
+				case 'customer.city': $address->setCity( $value ); break;
+				case 'customer.state': $address->setState( $value ); break;
+				case 'customer.languageid': $address->setLanguageId( $value ); break;
+				case 'customer.countryid': $address->setCountryId( $value ); break;
+				case 'customer.telephone': $address->setTelephone( $value ); break;
+				case 'customer.telefax': $address->setTelefax( $value ); break;
+				case 'customer.website': $address->setWebsite( $value ); break;
+				case 'customer.email': $address->setEmail( $value ); break;
 			}
 		}
 
@@ -101,7 +101,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['customer.label'] ) ) {
+			return (string) $this->values['customer.label'];
+		}
+
+		return '';
 	}
 
 
@@ -114,7 +118,7 @@ class Standard
 	{
 		if( $value == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $value;
+		$this->values['customer.label'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -126,7 +130,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['customer.status'] ) ) {
+			return (int) $this->values['customer.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -139,7 +147,7 @@ class Standard
 	{
 		if( $value == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $value;
+		$this->values['customer.status'] = (int) $value;
 		$this->setModified();
 	}
 
@@ -151,7 +159,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['customer.code'] ) ) {
+			return (string) $this->values['customer.code'];
+		}
+
+		return '';
 	}
 
 
@@ -166,7 +178,7 @@ class Standard
 
 		if( $value == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $value;
+		$this->values['customer.code'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -203,7 +215,11 @@ class Standard
 	 */
 	public function getBirthday()
 	{
-		return ( isset( $this->values['birthday'] ) ? (string) $this->values['birthday'] : null );
+		if( isset( $this->values['customer.birthday'] ) ) {
+			return (string) $this->values['customer.birthday'];
+		}
+
+		return null;
 	}
 
 
@@ -216,7 +232,7 @@ class Standard
 	{
 		if( $value === $this->getBirthday() ) { return; }
 
-		$this->values['birthday'] = $this->checkDateOnlyFormat( $value );
+		$this->values['customer.birthday'] = $this->checkDateOnlyFormat( $value );
 		$this->setModified();
 	}
 
@@ -228,7 +244,11 @@ class Standard
 	 */
 	public function getPassword()
 	{
-		return ( isset( $this->values['password'] ) ? (string) $this->values['password'] : '' );
+		if( isset( $this->values['customer.password'] ) ) {
+			return (string) $this->values['customer.password'];
+		}
+
+		return '';
 	}
 
 
@@ -245,7 +265,7 @@ class Standard
 			$value = $this->helper->encode( $value, $this->salt );
 		}
 
-		$this->values['password'] = $value;
+		$this->values['customer.password'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -257,7 +277,11 @@ class Standard
 	 */
 	public function getDateVerified()
 	{
-		return ( isset( $this->values['vdate'] ) ? (string) $this->values['vdate'] : null );
+		if( isset( $this->values['customer.dateverified'] ) ) {
+			return (string) $this->values['customer.dateverified'];
+		}
+
+		return null;
 	}
 
 
@@ -270,7 +294,7 @@ class Standard
 	{
 		if( $value === $this->getDateVerified() ) { return; }
 
-		$this->values['vdate'] = $this->checkDateOnlyFormat( $value );
+		$this->values['customer.dateverified'] = $this->checkDateOnlyFormat( $value );
 		$this->setModified();
 	}
 
@@ -387,6 +411,7 @@ class Standard
 		$list['customer.email'] = $this->getPaymentAddress()->getEmail();
 		$list['customer.telefax'] = $this->getPaymentAddress()->getTelefax();
 		$list['customer.website'] = $this->getPaymentAddress()->getWebsite();
+
 		return $list;
 	}
 

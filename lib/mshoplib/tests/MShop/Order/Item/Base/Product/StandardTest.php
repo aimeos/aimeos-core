@@ -33,39 +33,38 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->price = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
 
 		$attrValues = array(
-			'id' => 4,
-			'siteid' => 99,
-			'ordprodid' => 11,
-			'type' => 'default',
-			'code' => 'size',
-			'value' => '30',
-			'name' => 'small',
-			'mtime' => '2011-01-06 13:20:34',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.base.product.attribute.id' => 4,
+			'order.base.product.attribute.siteid' => 99,
+			'order.base.product.attribute.parentid' => 11,
+			'order.base.product.attribute.type' => 'default',
+			'order.base.product.attribute.code' => 'size',
+			'order.base.product.attribute.value' => '30',
+			'order.base.product.attribute.name' => 'small',
+			'order.base.product.attribute.mtime' => '2011-01-06 13:20:34',
+			'order.base.product.attribute.ctime' => '2011-01-01 00:00:01',
+			'order.base.product.attribute.editor' => 'unitTestUser'
 		);
 		$this->attribute = array( new \Aimeos\MShop\Order\Item\Base\Product\Attribute\Standard( $attrValues ) );
 
 		$this->values = array(
-			'id' => 1,
-			'siteid' => 99,
-			'ordprodid' => 10,
-			'type' => 'bundle',
-			'prodid' => 10,
-			'baseid' => 42,
-			'suppliercode' => 'UnitSupplier',
-			'productid' => 111,
-			'prodcode' => 'UnitProd',
-			'warehousecode' => 'unitwarehouse',
-			'name' => 'UnitProduct',
-			'mediaurl' => 'testurl',
-			'quantity' => 11,
-			'flags' => \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE,
-			'status' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
-			'pos' => 1,
-			'mtime' => '2000-12-31 23:59:59',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser',
+			'order.base.product.id' => 1,
+			'order.base.product.siteid' => 99,
+			'order.base.product.ordprodid' => 10,
+			'order.base.product.type' => 'bundle',
+			'order.base.product.productid' => 100,
+			'order.base.product.baseid' => 42,
+			'order.base.product.suppliercode' => 'UnitSupplier',
+			'order.base.product.prodcode' => 'UnitProd',
+			'order.base.product.warehousecode' => 'unitwarehouse',
+			'order.base.product.name' => 'UnitProduct',
+			'order.base.product.mediaurl' => 'testurl',
+			'order.base.product.quantity' => 11,
+			'order.base.product.flags' => \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE,
+			'order.base.product.status' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
+			'order.base.product.position' => 1,
+			'order.base.product.mtime' => '2000-12-31 23:59:59',
+			'order.base.product.ctime' => '2011-01-01 00:00:01',
+			'order.base.product.editor' => 'unitTestUser',
 		);
 
 		$this->subProducts = array(
@@ -103,7 +102,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 	public function testSetId()
@@ -159,7 +158,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetSupplierCode()
 	{
-		$this->assertEquals( $this->values['suppliercode'], $this->object->getSupplierCode() );
+		$this->assertEquals( 'UnitSupplier', $this->object->getSupplierCode() );
 	}
 
 	public function testSetSupplierCode()
@@ -171,7 +170,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProductId()
 	{
-		$this->assertEquals( $this->values['prodid'], $this->object->getProductId() );
+		$this->assertEquals( 100, $this->object->getProductId() );
 	}
 
 	public function testSetProductId()
@@ -183,7 +182,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetProductCode()
 	{
-		$this->assertEquals( $this->values['prodcode'], $this->object->getProductCode() );
+		$this->assertEquals( 'UnitProd', $this->object->getProductCode() );
 	}
 
 	public function testSetProductCode()
@@ -195,7 +194,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetWarehouseCode()
 	{
-		$this->assertEquals( $this->values['warehousecode'], $this->object->getWarehouseCode() );
+		$this->assertEquals( 'unitwarehouse', $this->object->getWarehouseCode() );
 	}
 
 	public function testSetWarehouseCode()
@@ -207,7 +206,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetName()
 	{
-		$this->assertEquals( $this->values['name'], $this->object->getName() );
+		$this->assertEquals( 'UnitProduct', $this->object->getName() );
 	}
 
 	public function testSetName()
@@ -219,7 +218,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetMediaUrl()
 	{
-		$this->assertEquals( $this->values['mediaurl'], $this->object->getMediaUrl() );
+		$this->assertEquals( 'testurl', $this->object->getMediaUrl() );
 	}
 
 	public function testSetMediaUrl()
@@ -231,7 +230,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetQuantity()
 	{
-		$this->assertEquals( $this->values['quantity'], $this->object->getQuantity() );
+		$this->assertEquals( 11, $this->object->getQuantity() );
 	}
 
 	public function testSetQuantity()
@@ -287,16 +286,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetSumPrice()
 	{
-		$qty = $this->values['quantity'];
-		$this->assertEquals( $this->price->getValue() * $qty, $this->object->getSumPrice()->getValue() );
-		$this->assertEquals( $this->price->getCosts() * $qty, $this->object->getSumPrice()->getCosts() );
-		$this->assertEquals( $this->price->getRebate() * $qty, $this->object->getSumPrice()->getRebate() );
+		$this->assertEquals( $this->price->getValue() * 11, $this->object->getSumPrice()->getValue() );
+		$this->assertEquals( $this->price->getCosts() * 11, $this->object->getSumPrice()->getCosts() );
+		$this->assertEquals( $this->price->getRebate() * 11, $this->object->getSumPrice()->getRebate() );
 		$this->assertEquals( $this->price->getTaxRate(), $this->object->getSumPrice()->getTaxRate() );
 	}
 
 	public function testGetFlags()
 	{
-		$this->assertEquals( $this->values['flags'], $this->object->getFlags() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE, $this->object->getFlags() );
 	}
 
 	public function testSetFlags()
@@ -333,7 +331,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetStatus()
 	{
-		$this->assertEquals( $this->values['status'], $this->object->getStatus() );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getStatus() );
 	}
 
 	public function testSetStatus()

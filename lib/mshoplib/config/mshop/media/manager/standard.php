@@ -34,10 +34,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mmed."id", mmed."siteid", mmed."langid",
-				mmed."typeid", mmed."link" AS "url", mmed."label",
-				mmed."status", mmed."mimetype", mmed."domain", mmed."preview",
-				mmed."mtime", mmed."editor", mmed."ctime"
+			SELECT DISTINCT mmed."id" AS "media.id", mmed."siteid" AS "media.siteid",
+				mmed."langid" AS "media.languageid", mmed."typeid" AS "media.typeid",
+				mmed."link" AS "media.url", mmed."label" AS "media.label",
+				mmed."status" AS "media.status", mmed."mimetype" AS "media.mimetype",
+				mmed."domain" AS "media.domain", mmed."preview" AS "media.preview",
+				mmed."mtime" AS "media.mtime", mmed."editor" AS "media.editor",
+				mmed."ctime" AS "media.ctime"
 			FROM "mshop_media" AS mmed
 			:joins
 			WHERE :cond

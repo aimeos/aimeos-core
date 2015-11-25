@@ -28,17 +28,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 4,
-			'siteid' => 99,
-			'attrid' => 22,
-			'ordprodid' => 11,
-			'type' => 'UnitType',
-			'code' => 'size',
-			'value' => '30',
-			'name' => 'small',
-			'mtime' => '2011-01-06 13:20:34',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.base.product.attribute.id' => 4,
+			'order.base.product.attribute.siteid' => 99,
+			'order.base.product.attribute.attributeid' => 22,
+			'order.base.product.attribute.parentid' => 11,
+			'order.base.product.attribute.type' => 'UnitType',
+			'order.base.product.attribute.code' => 'size',
+			'order.base.product.attribute.value' => '30',
+			'order.base.product.attribute.name' => 'small',
+			'order.base.product.attribute.mtime' => '2011-01-06 13:20:34',
+			'order.base.product.attribute.ctime' => '2011-01-01 00:00:01',
+			'order.base.product.attribute.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Product\Attribute\Standard( $this->values );
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( 4, $this->object->getId() );
 	}
 
 
@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAttributeId()
 	{
-		$this->assertEquals( $this->values['attrid'], $this->object->getAttributeId() );
+		$this->assertEquals( 22, $this->object->getAttributeId() );
 	}
 
 
@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetParentId()
 	{
-		$this->assertEquals( $this->values['ordprodid'], $this->object->getParentId() );
+		$this->assertEquals( 11, $this->object->getParentId() );
 	}
 
 
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetType()
 	{
-		$this->assertEquals( $this->values['type'], $this->object->getType() );
+		$this->assertEquals( 'UnitType', $this->object->getType() );
 	}
 
 
@@ -128,7 +128,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetCode()
 	{
-		$this->assertEquals( $this->values['code'], $this->object->getCode() );
+		$this->assertEquals( 'size', $this->object->getCode() );
 	}
 
 
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetValue()
 	{
-		$this->assertEquals( $this->values['value'], $this->object->getValue() );
+		$this->assertEquals( '30', $this->object->getValue() );
 	}
 
 
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetName()
 	{
-		$this->assertEquals( $this->values['name'], $this->object->getName() );
+		$this->assertEquals( 'small', $this->object->getName() );
 	}
 
 

@@ -28,15 +28,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 66,
-			'siteid'=>99,
-			'parentid' => 46677,
-			'warehouseid' => 44,
-			'stocklevel' => 1000,
-			'backdate' => '2010-01-01 11:55:00',
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'product.stock.id' => 66,
+			'product.stock.siteid' => 99,
+			'product.stock.parentid' => 46677,
+			'product.stock.warehouseid' => 44,
+			'product.stock.stocklevel' => 1000,
+			'product.stock.backdate' => '2010-01-01 11:55:00',
+			'product.stock.mtime' => '2011-01-01 00:00:02',
+			'product.stock.ctime' => '2011-01-01 00:00:01',
+			'product.stock.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Product\Item\Stock\Standard( $this->values );
@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( 66, $this->object->getId() );
 	}
 
 	public function testSetId()
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetParentId()
 	{
-		$this->assertEquals( $this->values['parentid'], $this->object->getParentId() );
+		$this->assertEquals( 46677, $this->object->getParentId() );
 	}
 
 	public function testSetParentId()
@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetWarehouseId()
 	{
-		$this->assertEquals( $this->values['warehouseid'], $this->object->getWarehouseId() );
+		$this->assertEquals( 44, $this->object->getWarehouseId() );
 	}
 
 	public function testSetWarehouseId()
@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetStocklevel()
 	{
-		$this->assertEquals( $this->values['stocklevel'], $this->object->getStocklevel() );
+		$this->assertEquals( 1000, $this->object->getStocklevel() );
 	}
 
 	public function testSetStocklevel()
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetDateBack()
 	{
-		$this->assertEquals( $this->values['backdate'], $this->object->getDateBack() );
+		$this->assertEquals( '2010-01-01 11:55:00', $this->object->getDateBack() );
 	}
 
 	public function testSetDateBack()

@@ -45,7 +45,11 @@ class Standard
 	 */
 	public function getAttributeId()
 	{
-		return ( isset( $this->values['attrid'] ) ? (string) $this->values['attrid'] : '' );
+		if( isset( $this->values['order.base.product.attribute.attributeid'] ) ) {
+			return (string) $this->values['order.base.product.attribute.attributeid'];
+		}
+
+		return '';
 	}
 
 
@@ -58,7 +62,7 @@ class Standard
 	{
 		if( $id == $this->getAttributeId() ) { return; }
 
-		$this->values['attrid'] = (string) $id;
+		$this->values['order.base.product.attribute.attributeid'] = (string) $id;
 		$this->setModified();
 	}
 
@@ -70,7 +74,11 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->values['ordprodid'] ) ? (string) $this->values['ordprodid'] : null );
+		if( isset( $this->values['order.base.product.attribute.parentid'] ) ) {
+			return (string) $this->values['order.base.product.attribute.parentid'];
+		}
+
+		return null;
 	}
 
 
@@ -83,7 +91,7 @@ class Standard
 	{
 		if( $id == $this->getParentId() ) { return; }
 
-		$this->values['ordprodid'] = (string) $id;
+		$this->values['order.base.product.attribute.parentid'] = (string) $id;
 		$this->setModified();
 	}
 
@@ -95,7 +103,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : '' );
+		if( isset( $this->values['order.base.product.attribute.type'] ) ) {
+			return (string) $this->values['order.base.product.attribute.type'];
+		}
+
+		return '';
 	}
 
 
@@ -108,7 +120,7 @@ class Standard
 	{
 		if( $type == $this->getType() ) { return; }
 
-		$this->values['type'] = (string) $type;
+		$this->values['order.base.product.attribute.type'] = (string) $type;
 		$this->setModified();
 	}
 
@@ -120,7 +132,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['order.base.product.attribute.code'] ) ) {
+			return (string) $this->values['order.base.product.attribute.code'];
+		}
+
+		return '';
 	}
 
 
@@ -135,7 +151,7 @@ class Standard
 
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['code'] = (string) $code;
+		$this->values['order.base.product.attribute.code'] = (string) $code;
 		$this->setModified();
 	}
 
@@ -147,7 +163,11 @@ class Standard
 	 */
 	public function getValue()
 	{
-		return ( isset( $this->values['value'] ) ? (string) $this->values['value'] : '' );
+		if( isset( $this->values['order.base.product.attribute.value'] ) ) {
+			return (string) $this->values['order.base.product.attribute.value'];
+		}
+
+		return '';
 	}
 
 
@@ -160,7 +180,7 @@ class Standard
 	{
 		if( $value == $this->getValue() ) { return; }
 
-		$this->values['value'] = $value;
+		$this->values['order.base.product.attribute.value'] = $value;
 		$this->setModified();
 	}
 
@@ -172,7 +192,11 @@ class Standard
 	 */
 	public function getName()
 	{
-		return ( isset( $this->values['name'] ) ? (string) $this->values['name'] : '' );
+		if( isset( $this->values['order.base.product.attribute.name'] ) ) {
+			return (string) $this->values['order.base.product.attribute.name'];
+		}
+
+		return '';
 	}
 
 
@@ -185,7 +209,7 @@ class Standard
 	{
 		if( $name == $this->getName() ) { return; }
 
-		$this->values['name'] = (string) $name;
+		$this->values['order.base.product.attribute.name'] = (string) $name;
 		$this->setModified();
 	}
 

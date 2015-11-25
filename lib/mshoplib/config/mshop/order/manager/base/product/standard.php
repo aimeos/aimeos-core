@@ -53,15 +53,17 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordbapr."id", mordbapr."baseid",
-				mordbapr."siteid", mordbapr."ordprodid", mordbapr."type",
-				mordbapr."prodid", mordbapr."prodcode",
-				mordbapr."suppliercode", mordbapr."warehousecode",
-				mordbapr."name", mordbapr."mediaurl", mordbapr."quantity",
-				mordbapr."price", mordbapr."costs", mordbapr."rebate",
-				mordbapr."taxrate", mordbapr."flags", mordbapr."status",
-				mordbapr."mtime", mordbapr."pos", mordbapr."editor",
-				mordbapr."ctime"
+			SELECT DISTINCT mordbapr."id" AS "order.base.product.id", mordbapr."baseid" AS "order.base.product.baseid",
+				mordbapr."siteid" AS "order.base.product.siteid", mordbapr."ordprodid" AS "order.base.product.ordprodid",
+				mordbapr."prodid" AS "order.base.product.productid", mordbapr."prodcode" AS "order.base.product.prodcode",
+				mordbapr."suppliercode" AS "order.base.product.suppliercode", mordbapr."warehousecode" AS "order.base.product.warehousecode",
+				mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
+				mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."quantity" AS "order.base.product.quantity",
+				mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
+				mordbapr."rebate" AS "order.base.product.rebate", mordbapr."taxrate" AS "order.base.product.taxrate",
+				mordbapr."flags" AS "order.base.product.flags", mordbapr."status" AS "order.base.product.status",
+				mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
+				mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime"
 			FROM "mshop_order_base_product" AS mordbapr
 			:joins
 			WHERE :cond

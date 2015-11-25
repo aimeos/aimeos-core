@@ -140,7 +140,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'text.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -523,8 +523,8 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$map[$row['id']] = $row;
-				$typeIds[$row['typeid']] = null;
+				$map[$row['text.id']] = $row;
+				$typeIds[$row['text.typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -545,8 +545,8 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['typeid']] ) ) {
-					$map[$id]['type'] = $typeItems[$row['typeid']]->getCode();
+				if( isset( $typeItems[$row['text.typeid']] ) ) {
+					$map[$id]['text.type'] = $typeItems[$row['text.typeid']]->getCode();
 				}
 			}
 		}

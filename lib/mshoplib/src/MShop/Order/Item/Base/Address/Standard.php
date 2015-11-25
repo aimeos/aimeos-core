@@ -44,7 +44,11 @@ class Standard
 	 */
 	public function getBaseId()
 	{
-		return ( isset( $this->values['baseid'] ) ? (int) $this->values['baseid'] : null );
+		if( isset( $this->values['order.base.address.baseid'] ) ) {
+			return (int) $this->values['order.base.address.baseid'];
+		}
+
+		return null;
 	}
 
 
@@ -57,7 +61,7 @@ class Standard
 	{
 		if( $value == $this->getBaseId() ) { return; }
 
-		$this->values['baseid'] = ( $value !== null ? (int) $value : null );
+		$this->values['order.base.address.baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
 	}
 
@@ -69,7 +73,11 @@ class Standard
 	 */
 	public function getAddressId()
 	{
-		return ( isset( $this->values['addrid'] ) ? (string) $this->values['addrid'] : '' );
+		if( isset( $this->values['order.base.address.addressid'] ) ) {
+			return (string) $this->values['order.base.address.addressid'];
+		}
+
+		return '';
 	}
 
 
@@ -82,7 +90,7 @@ class Standard
 	{
 		if( $addrid == $this->getAddressId() ) { return; }
 
-		$this->values['addrid'] = (string) $addrid;
+		$this->values['order.base.address.addressid'] = (string) $addrid;
 		$this->setModified();
 	}
 
@@ -94,7 +102,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+		if( isset( $this->values['order.base.address.type'] ) ) {
+			return (string) $this->values['order.base.address.type'];
+		}
+
+		return \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY;
 	}
 
 
@@ -109,7 +121,7 @@ class Standard
 
 		$this->checkType( $type );
 
-		$this->values['type'] = (string) $type;
+		$this->values['order.base.address.type'] = (string) $type;
 		$this->setModified();
 	}
 

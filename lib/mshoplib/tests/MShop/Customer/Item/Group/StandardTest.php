@@ -16,13 +16,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => '123',
-			'siteid' => '456',
-			'code' => 'unitgroup',
-			'label' => 'unittest',
-			'ctime' => '1970-01-01 00:00:00',
-			'mtime' => '2000-01-01 00:00:00',
-			'editor' => 'unittest',
+			'customer.group.id' => '123',
+			'customer.group.siteid' => '456',
+			'customer.group.code' => 'unitgroup',
+			'customer.group.label' => 'unittest',
+			'customer.group.ctime' => '1970-01-01 00:00:00',
+			'customer.group.mtime' => '2000-01-01 00:00:00',
+			'customer.group.editor' => 'unittest',
 		);
 
 		$this->object = new \Aimeos\MShop\Customer\Item\Group\Standard( $this->values );

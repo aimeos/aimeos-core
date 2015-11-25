@@ -41,14 +41,21 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcus."id", mcus."siteid", mcus."label",
-				mcus."code", mcus."company", mcus."vatid", mcus."salutation", mcus."title",
-				mcus."firstname", mcus."lastname", mcus."address1",
-				mcus."address2", mcus."address3", mcus."postal", mcus."city",
-				mcus."state", mcus."countryid", mcus."langid",
-				mcus."telephone", mcus."email", mcus."telefax", mcus."website",
-				mcus."birthday", mcus."status", mcus."vdate", mcus."password",
-				mcus."ctime", mcus."mtime", mcus."editor"
+			SELECT DISTINCT mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
+				mcus."label" AS "customer.label", mcus."code" AS "customer.code",
+				mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
+				mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
+				mcus."firstname" AS "customer.firstname", mcus."lastname" AS "customer.lastname",
+				mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
+				mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
+				mcus."city" AS "customer.city", mcus."state" AS "customer.state",
+				mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.langid",
+				mcus."telephone" AS "customer.telephone", mcus."email" AS "customer.email",
+				mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
+				mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
+				mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
+				mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
+				mcus."editor" AS "customer.editor"
 			FROM "mshop_customer" AS mcus
 			:joins
 			WHERE :cond

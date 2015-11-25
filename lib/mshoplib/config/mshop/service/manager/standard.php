@@ -34,10 +34,12 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mser."id", mser."siteid", mser."pos",
-				mser."typeid", mser."code", mser."label", mser."provider",
-				mser."config", mser."status", mser."mtime", mser."editor",
-				mser."ctime"
+			SELECT DISTINCT mser."id" AS "service.id", mser."siteid" AS "service.siteid",
+				mser."pos" AS "service.position", mser."typeid" AS "service.typeid",
+				mser."code" AS "service.code", mser."label" AS "service.label",
+				mser."provider" AS "service.provider", mser."config" AS "service.config",
+				mser."status" AS "service.status", mser."mtime" AS "service.mtime",
+				mser."editor" AS "service.editor",	mser."ctime" AS "service.ctime"
 			FROM "mshop_service" AS mser
 			:joins
 			WHERE :cond

@@ -40,11 +40,15 @@ class Standard
 	/**
 	 * Returns the type of the plugin.
 	 *
-	 * @return string Plugin type
+	 * @return string|null Plugin type
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : '' );
+		if( isset( $this->values['plugin.type'] ) ) {
+			return (string) $this->values['plugin.type'];
+		}
+
+		return null;
 	}
 
 
@@ -55,7 +59,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values['plugin.typeid'] ) ) {
+			return (int) $this->values['plugin.typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -68,7 +76,7 @@ class Standard
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $typeid;
+		$this->values['plugin.typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -80,34 +88,11 @@ class Standard
 	 */
 	public function getProvider()
 	{
-		return ( isset( $this->values['provider'] ) ? (string) $this->values['provider'] : '' );
-	}
-
-
-	/**
-	 * Returns the name of the plugin item.
-	 *
-	 * @return string Label of the plugin item
-	 */
-	public function getLabel()
-	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
-	}
-
-
-	/**
-	 * Sets the new label of the plugin item.
-	 *
-	 * @param string $label New label of the plugin item
-	 */
-	public function setLabel( $label )
-	{
-		if( $label == $this->getLabel() ) {
-			return;
+		if( isset( $this->values['plugin.provider'] ) ) {
+			return (string) $this->values['plugin.provider'];
 		}
 
-		$this->values['label'] = (string) $label;
-		$this->setModified();
+		return '';
 	}
 
 
@@ -121,7 +106,36 @@ class Standard
 	{
 		if( $provider == $this->getProvider() ) { return; }
 
-		$this->values['provider'] = (string) $provider;
+		$this->values['plugin.provider'] = (string) $provider;
+		$this->setModified();
+	}
+
+
+	/**
+	 * Returns the name of the plugin item.
+	 *
+	 * @return string Label of the plugin item
+	 */
+	public function getLabel()
+	{
+		if( isset( $this->values['plugin.label'] ) ) {
+			return (string) $this->values['plugin.label'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the new label of the plugin item.
+	 *
+	 * @param string $label New label of the plugin item
+	 */
+	public function setLabel( $label )
+	{
+		if( $label == $this->getLabel() ) { return; }
+
+		$this->values['plugin.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -133,7 +147,11 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->values['config'] ) ? (array) $this->values['config'] : array() );
+		if( isset( $this->values['plugin.config'] ) ) {
+			return (array) $this->values['plugin.config'];
+		}
+
+		return array();
 	}
 
 
@@ -144,7 +162,7 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		$this->values['config'] = $config;
+		$this->values['plugin.config'] = $config;
 		$this->setModified();
 	}
 
@@ -156,7 +174,11 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
+		if( isset( $this->values['plugin.position'] ) ) {
+			return (int) $this->values['plugin.position'];
+		}
+
+		return 0;
 	}
 
 
@@ -169,7 +191,7 @@ class Standard
 	{
 		if( $position == $this->getPosition() ) { return; }
 
-		$this->values['pos'] = (int) $position;
+		$this->values['plugin.position'] = (int) $position;
 		$this->setModified();
 	}
 
@@ -181,7 +203,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['plugin.status'] ) ) {
+			return (int) $this->values['plugin.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -194,7 +220,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['plugin.status'] = (int) $status;
 		$this->setModified();
 	}
 

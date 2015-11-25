@@ -221,7 +221,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	{
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$values = array( 'siteid'=> $context->getLocale()->getSiteId() );
+		$values = array( 'order.base.siteid' => $context->getLocale()->getSiteId() );
 
 		$base = $this->createItemBase( $priceManager->createItem(), clone $context->getLocale(), $values );
 
@@ -746,18 +746,18 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				$price = $priceManager->createItem();
-				$price->setCurrencyId( $row['currencyid'] );
-				$price->setValue( $row['price'] );
-				$price->setCosts( $row['costs'] );
-				$price->setRebate( $row['rebate'] );
+				$price->setCurrencyId( $row['order.base.currencyid'] );
+				$price->setValue( $row['order.base.price'] );
+				$price->setCosts( $row['order.base.costs'] );
+				$price->setRebate( $row['order.base.rebate'] );
 
 				// you may need the site object! take care!
 				$localeItem = $localeManager->createItem();
-				$localeItem->setLanguageId( $row['langid'] );
-				$localeItem->setCurrencyId( $row['currencyid'] );
-				$localeItem->setSiteId( $row['siteid'] );
+				$localeItem->setLanguageId( $row['order.base.languageid'] );
+				$localeItem->setCurrencyId( $row['order.base.currencyid'] );
+				$localeItem->setSiteId( $row['order.base.siteid'] );
 
-				$items[$row['id']] = $this->createItemBase( $price, $localeItem, $row );
+				$items[$row['order.base.id']] = $this->createItemBase( $price, $localeItem, $row );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -923,16 +923,16 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 		$localeManager = \Aimeos\MShop\Factory::createManager( $context, 'locale' );
 
 		$price = $priceManager->createItem();
-		$price->setCurrencyId( $row['currencyid'] );
-		$price->setValue( $row['price'] );
-		$price->setCosts( $row['costs'] );
-		$price->setRebate( $row['rebate'] );
+		$price->setCurrencyId( $row['order.base.currencyid'] );
+		$price->setValue( $row['order.base.price'] );
+		$price->setCosts( $row['order.base.costs'] );
+		$price->setRebate( $row['order.base.rebate'] );
 
 		// you may need the site object! take care!
 		$localeItem = $localeManager->createItem();
-		$localeItem->setLanguageId( $row['langid'] );
-		$localeItem->setCurrencyId( $row['currencyid'] );
-		$localeItem->setSiteId( $row['siteid'] );
+		$localeItem->setLanguageId( $row['order.base.languageid'] );
+		$localeItem->setCurrencyId( $row['order.base.currencyid'] );
+		$localeItem->setSiteId( $row['order.base.siteid'] );
 
 		if( $fresh === false ) {
 			$basket = $this->loadItems( $id, $price, $localeItem, $row, $parts );

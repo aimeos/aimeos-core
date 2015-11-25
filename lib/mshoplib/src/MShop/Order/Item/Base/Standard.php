@@ -95,7 +95,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getId()
 	{
-		return ( isset( $this->values['id'] ) ? (string) $this->values['id'] : null );
+		if( isset( $this->values['order.base.id'] ) ) {
+			return (string) $this->values['order.base.id'];
+		}
+
+		return null;
 	}
 
 
@@ -106,7 +110,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setId( $id )
 	{
-		if( ( $this->values['id'] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
+		if( ( $this->values['order.base.id'] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
 			$this->modified = true;
 		} else {
 			$this->modified = false;
@@ -121,7 +125,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getSiteId()
 	{
-		return ( isset( $this->values['siteid'] ) ? (int) $this->values['siteid'] : null );
+		if( isset( $this->values['order.base.siteid'] ) ) {
+			return (int) $this->values['order.base.siteid'];
+		}
+
+		return null;
 	}
 
 
@@ -132,7 +140,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getSiteCode()
 	{
-		return ( isset( $this->values['sitecode'] ) ? (string) $this->values['sitecode'] : '' );
+		if( isset( $this->values['order.base.sitecode'] ) ) {
+			return (string) $this->values['order.base.sitecode'];
+		}
+
+		return '';
 	}
 
 
@@ -143,7 +155,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getComment()
 	{
-		return ( isset( $this->values['comment'] ) ? (string) $this->values['comment'] : '' );
+		if( isset( $this->values['order.base.comment'] ) ) {
+			return (string) $this->values['order.base.comment'];
+		}
+
+		return '';
 	}
 
 
@@ -156,9 +172,80 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	{
 		if( $comment == $this->getComment() ) { return; }
 
-		$this->values['comment'] = (string) $comment;
-
+		$this->values['order.base.comment'] = (string) $comment;
 		$this->modified = true;
+	}
+
+
+	/**
+	 * Returns the current status of the order base item.
+	 *
+	 * @return integer Status of the item
+	 */
+	public function getStatus()
+	{
+		if( isset( $this->values['order.base.status'] ) ) {
+			return (int) $this->values['order.base.status'];
+		}
+
+		return 0;
+	}
+
+
+	/**
+	 * Sets the new status of the order base item.
+	 *
+	 * @param integer $value Status of the item
+	 */
+	public function setStatus( $value )
+	{
+		$this->values['order.base.status'] = (int) $value;
+		$this->modified = true;
+	}
+
+
+	/**
+	 * Returns modification time of the order item base product.
+	 *
+	 * @return string|null Returns modification time of the order base item
+	 */
+	public function getTimeModified()
+	{
+		if( isset( $this->values['order.base.mtime'] ) ) {
+			return (string) $this->values['order.base.mtime'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Returns the create date of the item.
+	 *
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
+	 */
+	public function getTimeCreated()
+	{
+		if( isset( $this->values['order.base.ctime'] ) ) {
+			return (string) $this->values['order.base.ctime'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Returns the editor code of editor who created/modified the item at last.
+	 *
+	 * @return string Editorcode of editor who created/modified the item at last
+	 */
+	public function getEditor()
+	{
+		if( isset( $this->values['order.base.editor'] ) ) {
+			return (string) $this->values['order.base.editor'];
+		}
+
+		return '';
 	}
 
 
@@ -169,7 +256,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getCustomerId()
 	{
-		return ( isset( $this->values['customerid'] ) ? (string) $this->values['customerid'] : '' );
+		if( isset( $this->values['order.base.customerid'] ) ) {
+			return (string) $this->values['order.base.customerid'];
+		}
+
+		return '';
 	}
 
 
@@ -184,7 +275,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$this->notifyListeners( 'setCustomerId.before', $customerid );
 
-		$this->values['customerid'] = (string) $customerid;
+		$this->values['order.base.customerid'] = (string) $customerid;
 		$this->modified = true;
 
 		$this->notifyListeners( 'setCustomerId.after', $customerid );
@@ -584,17 +675,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
-	 * Tests if the order object was modified.
-	 *
-	 * @return bool True if modified, false if not
-	 */
-	public function isModified()
-	{
-		return $this->modified;
-	}
-
-
-	/**
 	 * Returns a price item with amounts calculated for the products, costs, etc.
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, costs and rebate the customer has to pay
@@ -622,58 +702,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
-	 * Returns the current status of the order base item.
+	 * Tests if the order object was modified.
 	 *
-	 * @return integer Status of the item
+	 * @return bool True if modified, false if not
 	 */
-	public function getStatus()
+	public function isModified()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
-	}
-
-
-	/**
-	 * Sets the new status of the order base item.
-	 *
-	 * @param integer $value Status of the item
-	 */
-	public function setStatus( $value )
-	{
-		$this->values['status'] = (int) $value;
-		$this->modified = true;
-	}
-
-
-	/**
-	 * Returns modification time of the order item base product.
-	 *
-	 * @return string Returns modification time of the order base item
-	 */
-	public function getTimeModified()
-	{
-		return ( isset( $this->values['mtime'] ) ? (string) $this->values['mtime'] : null );
-	}
-
-
-	/**
-	 * Returns the create date of the item.
-	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
-	 */
-	public function getTimeCreated()
-	{
-		return ( isset( $this->values['ctime'] ) ? (string) $this->values['ctime'] : null );
-	}
-
-
-	/**
-	 * Returns the editor code of editor who created/modified the item at last.
-	 *
-	 * @return string Editorcode of editor who created/modified the item at last
-	 */
-	public function getEditor()
-	{
-		return ( isset( $this->values['editor'] ) ? (string) $this->values['editor'] : '' );
+		return $this->modified;
 	}
 
 

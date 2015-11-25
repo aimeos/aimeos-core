@@ -33,9 +33,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mprost."id", mprost."parentid", mprost."siteid",
-				mprost."warehouseid", mprost."stocklevel", mprost."backdate",
-				mprost."mtime", mprost."editor", mprost."ctime"
+			SELECT DISTINCT mprost."id" AS "product.stock.id", mprost."parentid" AS "product.stock.parentid",
+				mprost."siteid" AS "product.stock.siteid", mprost."warehouseid" AS "product.stock.warehouseid",
+				mprost."stocklevel" AS "product.stock.stocklevel", mprost."backdate" AS "product.stock.backdate",
+				mprost."mtime" AS "product.stock.mtime", mprost."editor" AS "product.stock.editor",
+				mprost."ctime" AS "product.stock.ctime"
 			FROM "mshop_product_stock" AS mprost
 			:joins
 			WHERE :cond

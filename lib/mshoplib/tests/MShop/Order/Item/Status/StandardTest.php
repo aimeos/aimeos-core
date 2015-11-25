@@ -26,14 +26,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 1,
-			'siteid'=>99,
-			'parentid'=>11,
-			'type' => 'teststatus',
-			'value' => 'this is a value from unittest',
-			'mtime' => '2011-01-01 00:00:02',
-			'ctime' => '2011-01-01 00:00:01',
-			'editor' => 'unitTestUser'
+			'order.status.id' => 1,
+			'order.status.siteid' => 99,
+			'order.status.parentid'=>11,
+			'order.status.type' => 'teststatus',
+			'order.status.value' => 'this is a value from unittest',
+			'order.status.mtime' => '2011-01-01 00:00:02',
+			'order.status.ctime' => '2011-01-01 00:00:01',
+			'order.status.editor' => 'unitTestUser'
 		);
 
 		$this->object = new \Aimeos\MShop\Order\Item\Status\Standard( $this->values );
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
-		$this->assertEquals( $this->values['id'], $this->object->getId() );
+		$this->assertEquals( 1, $this->object->getId() );
 	}
 
 	public function testSetId()

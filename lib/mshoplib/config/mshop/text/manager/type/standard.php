@@ -33,9 +33,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mtexty."id", mtexty."siteid", mtexty."code",
-				mtexty."domain", mtexty."label", mtexty."status",
-				mtexty."mtime", mtexty."editor", mtexty."ctime"
+			SELECT DISTINCT mtexty."id" AS "text.type.id", mtexty."siteid" AS "text.type.siteid",
+				mtexty."code" AS "text.type.code", mtexty."domain" AS "text.type.domain",
+				mtexty."label" AS "text.type.label", mtexty."status" AS "text.type.status",
+				mtexty."mtime" AS "text.type.mtime", mtexty."editor" AS "text.type.editor",
+				mtexty."ctime" AS "text.type.ctime"
 			FROM "mshop_text_type" mtexty
 			:joins
 			WHERE :cond

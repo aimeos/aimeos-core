@@ -142,7 +142,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'plugin.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -658,15 +658,16 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$config = $row['config'];
-				if( ( $row['config'] = json_decode( $row['config'], true ) ) === null )
+				$config = $row['plugin.config'];
+
+				if( ( $row['plugin.config'] = json_decode( $row['plugin.config'], true ) ) === null )
 				{
-					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['id'], $config );
+					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'plugin.config', $row['plugin.id'], $config );
 					$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$map[$row['id']] = $row;
-				$typeIds[$row['typeid']] = null;
+				$map[$row['plugin.id']] = $row;
+				$typeIds[$row['plugin.typeid']] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -687,8 +688,8 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['typeid']] ) ) {
-					$row['type'] = $typeItems[$row['typeid']]->getCode();
+				if( isset( $typeItems[$row['plugin.typeid']] ) ) {
+					$row['plugin.type'] = $typeItems[$row['plugin.typeid']]->getCode();
 				}
 
 				$items[$id] = $this->createItemBase( $row );

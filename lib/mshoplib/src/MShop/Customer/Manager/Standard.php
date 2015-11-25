@@ -247,6 +247,19 @@ class Standard
 
 
 	/**
+	 * Instantiates a new customer item object.
+	 *
+	 * @return \Aimeos\MShop\Customer\Item\Iface
+	 */
+	public function createItem()
+	{
+		$values = array( 'customer.siteid'=> $this->getContext()->getLocale()->getSiteId() );
+
+		return $this->createItemBase( $values );
+	}
+
+
+	/**
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
@@ -628,7 +641,7 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 			while( ( $row = $results->fetch() ) !== false ) {
-				$map[$row['id']] = $row;
+				$map[$row['customer.id']] = $row;
 			}
 
 			$dbm->release( $conn, $dbname );

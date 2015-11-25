@@ -40,14 +40,19 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT msupad."id", msupad."siteid", msupad."parentid",
-				msupad."company", msupad."vatid", msupad."salutation", msupad."title",
-				msupad."firstname", msupad."lastname", msupad."address1",
-				msupad."address2", msupad."address3", msupad."postal",
-				msupad."city", msupad."state", msupad."countryid",
-				msupad."langid", msupad."telephone", msupad."email",
-				msupad."telefax", msupad."website", msupad."flag",
-				msupad."pos", msupad."mtime", msupad."editor", msupad."ctime"
+			SELECT DISTINCT msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
+				msupad."parentid" AS "supplier.address.parentid", msupad."pos" AS "supplier.address.position",
+				msupad."company" AS "supplier.address.company", msupad."vatid" AS "supplier.address.vatid",
+				msupad."salutation" AS "supplier.address.salutation", msupad."title" AS "supplier.address.title",
+				msupad."firstname" AS "supplier.address.firstname", msupad."lastname" AS "supplier.address.lastname",
+				msupad."address1" AS "supplier.address.address1", msupad."address2" AS "supplier.address.address2",
+				msupad."address3" AS "supplier.address.address3", msupad."postal" AS "supplier.address.postal",
+				msupad."city" AS "supplier.address.city", msupad."state" AS "supplier.address.state",
+				msupad."countryid" AS "supplier.address.countryid", msupad."langid" AS "supplier.address.languageid",
+				msupad."telephone" AS "supplier.address.telephone", msupad."email" AS "supplier.address.email",
+				msupad."telefax" AS "supplier.address.telefax", msupad."website" AS "supplier.address.website",
+				msupad."flag" AS "supplier.address.flag", msupad."mtime" AS "supplier.address.mtime",
+				msupad."editor" AS "supplier.address.editor", msupad."ctime" AS "supplier.address.ctime"
 			FROM "mshop_supplier_address" AS msupad
 			:joins
 			WHERE :cond

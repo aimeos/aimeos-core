@@ -71,11 +71,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mtexli."id", mtexli."parentid", mtexli."siteid",
-				mtexli."typeid", mtexli."domain", mtexli."refid",
-				mtexli."start", mtexli."end", mtexli."config", mtexli."pos",
-				mtexli."status", mtexli."mtime", mtexli."editor",
-				mtexli."ctime"
+			SELECT DISTINCT mtexli."id" AS "text.lists.id", mtexli."parentid" AS "text.lists.parentid",
+				mtexli."siteid" AS "text.lists.siteid", mtexli."typeid" AS "text.lists.typeid",
+				mtexli."domain" AS "text.lists.domain", mtexli."refid" AS "text.lists.refid",
+				mtexli."start" AS "text.lists.datestart", mtexli."end" AS "text.lists.dateend",
+				mtexli."config" AS "text.lists.config", mtexli."pos" AS "text.lists.position",
+				mtexli."status" AS "text.lists.status", mtexli."mtime" AS "text.lists.mtime",
+				mtexli."editor" AS "text.lists.editor", mtexli."ctime" AS "text.lists.ctime"
 			FROM "mshop_text_list" AS mtexli
 			:joins
 			WHERE :cond

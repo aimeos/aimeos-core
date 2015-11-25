@@ -71,11 +71,13 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mprili."id", mprili."parentid", mprili."siteid",
-				mprili."typeid", mprili."domain", mprili."refid",
-				mprili."start", mprili."end", mprili."config", mprili."pos",
-				mprili."status", mprili."mtime", mprili."editor",
-				mprili."ctime"
+			SELECT DISTINCT mprili."id" AS "price.lists.id", mprili."parentid" AS "price.lists.parentid",
+				mprili."siteid" AS "price.lists.siteid", mprili."typeid" AS "price.lists.typeid",
+				mprili."domain" AS "price.lists.domain", mprili."refid" AS "price.lists.refid",
+				mprili."start" AS "price.lists.datestart", mprili."end" AS "price.lists.dateend",
+				mprili."config" AS "price.lists.config", mprili."pos" AS "price.lists.position",
+				mprili."status" AS "price.lists.status", mprili."mtime" AS "price.lists.mtime",
+				mprili."editor" AS "price.lists.editor", mprili."ctime" AS "price.lists.ctime"
 			FROM "mshop_price_list" AS mprili
 			:joins
 			WHERE :cond

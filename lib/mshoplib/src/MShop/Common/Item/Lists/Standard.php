@@ -52,7 +52,11 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->values['parentid'] ) ? (int) $this->values['parentid'] : null );
+		if( isset( $this->values[$this->prefix . 'parentid'] ) ) {
+			return (int) $this->values[$this->prefix . 'parentid'];
+		}
+
+		return null;
 	}
 
 
@@ -66,7 +70,7 @@ class Standard
 	{
 		if( $parentid == $this->getParentId() ) { return; }
 
-		$this->values['parentid'] = (int) $parentid;
+		$this->values[$this->prefix . 'parentid'] = (int) $parentid;
 		$this->setModified();
 	}
 
@@ -78,7 +82,11 @@ class Standard
 	 */
 	public function getDomain()
 	{
-		return ( isset( $this->values['domain'] ) ? (string) $this->values['domain'] : '' );
+		if( isset( $this->values[$this->prefix . 'domain'] ) ) {
+			return (string) $this->values[$this->prefix . 'domain'];
+		}
+
+		return '';
 	}
 
 
@@ -91,7 +99,7 @@ class Standard
 	{
 		if( $domain == $this->getDomain() ) { return; }
 
-		$this->values['domain'] = (string) $domain;
+		$this->values[$this->prefix . 'domain'] = (string) $domain;
 		$this->setModified();
 	}
 
@@ -104,7 +112,11 @@ class Standard
 	 */
 	public function getRefId()
 	{
-		return ( isset( $this->values['refid'] ) ? (string) $this->values['refid'] : '' );
+		if( isset( $this->values[$this->prefix . 'refid'] ) ) {
+			return (string) $this->values[$this->prefix . 'refid'];
+		}
+
+		return '';
 	}
 
 
@@ -118,7 +130,7 @@ class Standard
 	{
 		if( $refid == $this->getRefId() ) { return; }
 
-		$this->values['refid'] = (string) $refid;
+		$this->values[$this->prefix . 'refid'] = (string) $refid;
 		$this->setModified();
 	}
 
@@ -130,7 +142,11 @@ class Standard
 	 */
 	public function getDateStart()
 	{
-		return ( isset( $this->values['start'] ) ? (string) $this->values['start'] : null );
+		if( isset( $this->values[$this->prefix . 'datestart'] ) ) {
+			return (string) $this->values[$this->prefix . 'datestart'];
+		}
+
+		return null;
 	}
 
 
@@ -143,7 +159,7 @@ class Standard
 	{
 		if( $date === $this->getDateStart() ) { return; }
 
-		$this->values['start'] = $this->checkDateFormat( $date );
+		$this->values[$this->prefix . 'datestart'] = $this->checkDateFormat( $date );
 		$this->setModified();
 	}
 
@@ -155,7 +171,11 @@ class Standard
 	 */
 	public function getDateEnd()
 	{
-		return ( isset( $this->values['end'] ) ? (string) $this->values['end'] : null );
+		if( isset( $this->values[$this->prefix . 'dateend'] ) ) {
+			return (string) $this->values[$this->prefix . 'dateend'];
+		}
+
+		return null;
 	}
 
 
@@ -168,7 +188,7 @@ class Standard
 	{
 		if( $date === $this->getDateEnd() ) { return; }
 
-		$this->values['end'] = $this->checkDateFormat( $date );
+		$this->values[$this->prefix . 'dateend'] = $this->checkDateFormat( $date );
 		$this->setModified();
 	}
 
@@ -180,7 +200,11 @@ class Standard
 	 */
 	public function getType()
 	{
-		return ( isset( $this->values['type'] ) ? (string) $this->values['type'] : null );
+		if( isset( $this->values[$this->prefix . 'type'] ) ) {
+			return (string) $this->values[$this->prefix . 'type'];
+		}
+
+		return null;
 	}
 
 
@@ -191,7 +215,11 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		return ( isset( $this->values['typeid'] ) ? (int) $this->values['typeid'] : null );
+		if( isset( $this->values[$this->prefix . 'typeid'] ) ) {
+			return (int) $this->values[$this->prefix . 'typeid'];
+		}
+
+		return null;
 	}
 
 
@@ -204,7 +232,7 @@ class Standard
 	{
 		if( $typeid == $this->getTypeId() ) { return; }
 
-		$this->values['typeid'] = (int) $typeid;
+		$this->values[$this->prefix . 'typeid'] = (int) $typeid;
 		$this->setModified();
 	}
 
@@ -216,7 +244,11 @@ class Standard
 	 */
 	public function getPosition()
 	{
-		return ( isset( $this->values['pos'] ) ? (int) $this->values['pos'] : 0 );
+		if( isset( $this->values[$this->prefix . 'position'] ) ) {
+			return (int) $this->values[$this->prefix . 'position'];
+		}
+
+		return 0;
 	}
 
 
@@ -229,7 +261,7 @@ class Standard
 	{
 		if( $pos == $this->getPosition() ) { return; }
 
-		$this->values['pos'] = (int) $pos;
+		$this->values[$this->prefix . 'position'] = (int) $pos;
 		$this->setModified();
 	}
 
@@ -241,7 +273,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 1 );
+		if( isset( $this->values[$this->prefix . 'status'] ) ) {
+			return (int) $this->values[$this->prefix . 'status'];
+		}
+
+		return 1;
 	}
 
 
@@ -252,11 +288,9 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) {
-			return;
-		}
+		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values[$this->prefix . 'status'] = (int) $status;
 		$this->setModified();
 	}
 
@@ -268,7 +302,11 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->values['config'] ) ? $this->values['config'] : array() );
+		if( isset( $this->values[$this->prefix . 'config'] ) ) {
+			return (array) $this->values[$this->prefix . 'config'];
+		}
+
+		return array();
 	}
 
 
@@ -279,7 +317,7 @@ class Standard
 	 */
 	public function setConfig( array $config )
 	{
-		$this->values['config'] = $config;
+		$this->values[$this->prefix . 'config'] = $config;
 		$this->setModified();
 	}
 

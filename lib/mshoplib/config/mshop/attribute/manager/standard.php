@@ -34,9 +34,12 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT matt."id", matt."siteid", matt."typeid",
-				matt."domain", matt."code", matt."status", matt."pos",
-				matt."label", matt."mtime", matt."ctime", matt."editor"
+			SELECT DISTINCT matt."id" AS "attribute.id", matt."siteid" AS "attribute.siteid",
+				matt."typeid" AS "attribute.typeid", matt."domain" AS "attribute.domain",
+				matt."code" AS "attribute.code", matt."status" AS "attribute.status",
+				matt."pos" AS "attribute.position", matt."label" AS "attribute.label",
+				matt."mtime" AS "attribute.mtime", matt."ctime" AS "attribute.ctime",
+				matt."editor" AS "attribute.editor"
 			FROM "mshop_attribute" AS matt
 			:joins
 			WHERE :cond

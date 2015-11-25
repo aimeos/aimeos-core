@@ -33,9 +33,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mserty."id", mserty."siteid", mserty."domain",
-				mserty."code", mserty."label", mserty."status", mserty."mtime",
-				mserty."editor", mserty."ctime"
+			SELECT DISTINCT mserty."id" AS "service.type.id", mserty."siteid" AS "service.type.siteid",
+				mserty."domain" AS "service.type.domain", mserty."code" AS "service.type.code",
+				mserty."label" AS "service.type.label", mserty."status" AS "service.type.status",
+				mserty."mtime" AS "service.type.mtime", mserty."editor" AS "service.type.editor",
+				mserty."ctime" AS "service.type.ctime"
 			FROM "mshop_service_type" AS mserty
 			:joins
 			WHERE :cond

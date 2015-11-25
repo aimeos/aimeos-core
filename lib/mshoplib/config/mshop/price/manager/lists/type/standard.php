@@ -33,9 +33,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mprility."id", mprility."siteid", mprility."code",
-				mprility."domain", mprility."label", mprility."status",
-				mprility."mtime", mprility."editor", mprility."ctime"
+			SELECT DISTINCT mprility."id" AS "price.lists.type.id", mprility."siteid" AS "price.lists.type.siteid",
+				mprility."code" AS "price.lists.type.code", mprility."domain" AS "price.lists.type.domain",
+				mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
+				mprility."mtime" AS "price.lists.type.mtime", mprility."editor" AS "price.lists.type.editor",
+				mprility."ctime" AS "price.lists.type.ctime"
 			FROM "mshop_price_list_type" AS mprility
 			:joins
 			WHERE :cond

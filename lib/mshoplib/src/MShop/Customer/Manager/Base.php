@@ -57,19 +57,6 @@ abstract class Base
 
 
 	/**
-	 * Instantiates a new customer item object.
-	 *
-	 * @return \Aimeos\MShop\Customer\Item\Iface
-	 */
-	public function createItem()
-	{
-		$values = array( 'siteid'=> $this->getContext()->getLocale()->getSiteId() );
-
-		return $this->createItemBase( $values );
-	}
-
-
-	/**
 	 * Creates a criteria object for searching.
 	 *
 	 * @param boolean $default Include default criteria like the status

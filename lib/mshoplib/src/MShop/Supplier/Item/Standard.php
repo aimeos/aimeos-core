@@ -46,7 +46,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['supplier.label'] ) ) {
+			return (string) $this->values['supplier.label'];
+		}
+
+		return '';
 	}
 
 
@@ -59,7 +63,7 @@ class Standard
 	{
 		if( $value == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $value;
+		$this->values['supplier.label'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -71,7 +75,11 @@ class Standard
 	 */
 	public function getCode()
 	{
-		return ( isset( $this->values['code'] ) ? (string) $this->values['code'] : '' );
+		if( isset( $this->values['supplier.code'] ) ) {
+			return (string) $this->values['supplier.code'];
+		}
+
+		return '';
 	}
 
 
@@ -84,7 +92,7 @@ class Standard
 	{
 		$this->checkCode( $value );
 
-		$this->values['code'] = (string) $value;
+		$this->values['supplier.code'] = (string) $value;
 		$this->setModified();
 	}
 
@@ -97,7 +105,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['supplier.status'] ) ) {
+			return (int) $this->values['supplier.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -110,7 +122,7 @@ class Standard
 	{
 		if( $value == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $value;
+		$this->values['supplier.status'] = (int) $value;
 		$this->setModified();
 	}
 
