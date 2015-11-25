@@ -612,13 +612,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$productCopy->copyFrom( $product );
 		}
 
-
-		$this->assertEquals( 'Cafe Noire Expresso', $productCopy->getName() );
-		$this->assertEquals( 'unitSupplier', $productCopy->getSupplierCode() );
 		$this->assertEquals( 'default', $productCopy->getType() );
 		$this->assertEquals( 'CNE', $productCopy->getProductCode() );
+		$this->assertEquals( 'Cafe Noire Expresso', $productCopy->getName() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $productCopy->getStatus() );
+		$this->assertEquals( '', $productCopy->getSupplierCode() );
 		$this->assertEquals( '', $productCopy->getMediaUrl() );
 
 		$this->assertTrue( $productCopy->isModified() );

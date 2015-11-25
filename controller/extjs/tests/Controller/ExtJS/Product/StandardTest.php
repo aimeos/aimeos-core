@@ -52,7 +52,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( 1, count( $result['items'] ) );
 		$this->assertEquals( 2, $result['total'] );
-		$this->assertEquals( 'unitSupplier', $result['items'][0]->{'product.suppliercode'} );
 	}
 
 
@@ -77,7 +76,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'product.status' => 1,
 				'product.datestart' => '2000-01-01 00:00:00',
 				'product.dateend' => '2001-01-01 00:00:00',
-				'product.suppliercode' => '',
 				'product.typeid' => $type->getId(),
 				'product.config' => (object) array( 'key' => 'value' ),
 			),
@@ -104,7 +102,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $saved['items']->{'product.status'}, $searched['items'][0]->{'product.status'} );
 		$this->assertEquals( $saved['items']->{'product.datestart'}, $searched['items'][0]->{'product.datestart'} );
 		$this->assertEquals( $saved['items']->{'product.dateend'}, $searched['items'][0]->{'product.dateend'} );
-		$this->assertEquals( $saved['items']->{'product.suppliercode'}, $searched['items'][0]->{'product.suppliercode'} );
 		$this->assertEquals( $saved['items']->{'product.typeid'}, $searched['items'][0]->{'product.typeid'} );
 		$this->assertEquals( $saved['items']->{'product.config'}, $searched['items'][0]->{'product.config'} );
 

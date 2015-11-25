@@ -108,7 +108,6 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$item->setTypeId( $this->getTypeId( 'product/type', 'product', $entry['type'] ) );
 			$item->setCode( $entry['code'] );
 			$item->setLabel( $entry['label'] );
-			$item->setSupplierCode( $entry['supplier'] );
 			$item->setDateStart( $entry['start'] );
 			$item->setDateEnd( $entry['end'] );
 			$item->setStatus( $entry['status'] );

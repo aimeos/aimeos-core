@@ -83,9 +83,9 @@ class FreeShippingTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $this->orderBase->getProducts() ) );
 		$this->assertEquals( '-5.00', $product->getPrice()->getCosts() );
 		$this->assertEquals( '5.00', $product->getPrice()->getRebate() );
-		$this->assertEquals( 'unitSupplier', $product->getSupplierCode() );
 		$this->assertEquals( 'U:SD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
+		$this->assertEquals( '', $product->getSupplierCode() );
 		$this->assertEquals( '', $product->getMediaUrl() );
 		$this->assertEquals( 'Versandkosten Nachlass', $product->getName() );
 	}

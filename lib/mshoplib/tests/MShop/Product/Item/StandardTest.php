@@ -34,7 +34,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'product.type' => 'test',
 			'product.status' => 0,
 			'product.code' => 'TEST',
-			'product.suppliercode' => 'unitSupplier',
 			'product.label' => 'testproduct',
 			'product.config' => array( 'css-class' => 'test' ),
 			'product.datestart' => null,
@@ -109,23 +108,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
-	}
-
-
-	public function testGetSupplierCode()
-	{
-		$this->assertEquals( 'unitSupplier', $this->object->getSupplierCode() );
-	}
-
-
-	public function testSetSupplierCode()
-	{
-		$this->assertFalse( $this->object->isModified() );
-
-		$this->object->setSupplierCode( 'unitTestSupplier' );
-		$this->assertEquals( 'unitTestSupplier', $this->object->getSupplierCode() );
-
-		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -259,7 +241,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'product.typeid' => 2,
 			'product.label' => 'test item',
 			'product.code' => 'test',
-			'product.suppliercode' => 'testsup',
 			'product.datestart' => '2000-01-01 00:00:00',
 			'product.dateend' => '2001-01-01 00:00:00',
 			'product.config' => array( 'key' => 'value' ),
@@ -274,7 +255,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['product.typeid'], $item->getTypeId() );
 		$this->assertEquals( $list['product.code'], $item->getCode() );
 		$this->assertEquals( $list['product.label'], $item->getLabel() );
-		$this->assertEquals( $list['product.suppliercode'], $item->getSuppliercode() );
 		$this->assertEquals( $list['product.datestart'], $item->getDateStart() );
 		$this->assertEquals( $list['product.dateend'], $item->getDateEnd() );
 		$this->assertEquals( $list['product.config'], $item->getConfig() );
@@ -294,7 +274,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getType(), $arrayObject['product.type'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['product.label'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['product.status'] );
-		$this->assertEquals( $this->object->getSuppliercode(), $arrayObject['product.suppliercode'] );
 		$this->assertEquals( $this->object->getDateStart(), $arrayObject['product.datestart'] );
 		$this->assertEquals( $this->object->getDateEnd(), $arrayObject['product.dateend'] );
 		$this->assertEquals( $this->object->getConfig(), $arrayObject['product.config'] );

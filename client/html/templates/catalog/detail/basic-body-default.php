@@ -10,13 +10,12 @@ $enc = $this->encoder();
 ?>
 <?php if( isset( $this->detailProductItem ) ) : ?>
 <div class="catalog-detail-basic">
-	<p class="supplier"><?php echo $enc->html( $this->detailProductItem->getSupplierCode() ); ?></p>
 	<h1 class="name"><?php echo $enc->html( $this->detailProductItem->getName(), $enc::TRUST ); ?></h1>
 	<p class="code">
 		<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Article no.:' ), $enc::TRUST ); ?></span>
 		<span class="value"><?php echo $enc->html( $this->detailProductItem->getCode() ); ?></span>
 	</p>
-<?php foreach( $this->detailProductItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?> 
+<?php foreach( $this->detailProductItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
 	<p class="short"><?php echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?></p>
 <?php endforeach; ?>
 <?php echo $this->basicBody; ?>

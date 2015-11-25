@@ -16,31 +16,29 @@ return array(
 	'insert' => array(
 		'ansi' => '
 			INSERT INTO "mshop_product" (
-				"siteid", "typeid", "code", "suppliercode", "label", "status",
+				"siteid", "typeid", "code", "label", "status",
 				"start", "end", "config", "mtime", "editor", "ctime"
 			) VALUES (
-				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 			)
 		'
 	),
 	'update' => array(
 		'ansi' => '
 			UPDATE "mshop_product"
-			SET "siteid" = ?, "typeid" = ?, "code" = ?, "suppliercode" = ?,
-				"label" = ?, "status" = ?, "start" = ?, "end" = ?, "config" = ?,
-				"mtime" = ?, "editor" = ?
+			SET "siteid" = ?, "typeid" = ?, "code" = ?, "label" = ?, "status" = ?,
+				"start" = ?, "end" = ?, "config" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
 	),
 	'search' => array(
 		'ansi' => '
 			SELECT DISTINCT mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
-				mpro."typeid" AS "product.typeid", mpro."label" AS "product.label",
+				mpro."typeid" AS "product.typeid", mpro."code" AS "product.code",
+				mpro."label" AS "product.label", mpro."config" AS "product.config",
 				mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
-				mpro."code" AS "product.code", mpro."suppliercode" AS "product.suppliercode",
-				mpro."config" AS "product.config", mpro."status" AS "product.status",
-				mpro."ctime" AS "product.ctime", mpro."mtime" AS "product.mtime",
-				mpro."editor" AS "product.editor"
+				mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
+				mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor"
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond

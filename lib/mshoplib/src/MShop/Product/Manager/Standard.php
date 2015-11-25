@@ -67,13 +67,6 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.suppliercode'=> array(
-			'code'=>'product.suppliercode',
-			'internalcode'=>'mpro."suppliercode"',
-			'label'=>'Product supplier code',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
 		'product.datestart'=> array(
 			'code'=>'product.datestart',
 			'internalcode'=>'mpro."start"',
@@ -275,20 +268,19 @@ class Standard
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 3, $item->getCode() );
-			$stmt->bind( 4, $item->getSupplierCode() );
-			$stmt->bind( 5, $item->getLabel() );
-			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $item->getDateStart() );
-			$stmt->bind( 8, $item->getDateEnd() );
-			$stmt->bind( 9, json_encode( $item->getConfig() ) );
-			$stmt->bind( 10, $date ); // mtime
-			$stmt->bind( 11, $context->getEditor() );
+			$stmt->bind( 4, $item->getLabel() );
+			$stmt->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getDateStart() );
+			$stmt->bind( 7, $item->getDateEnd() );
+			$stmt->bind( 8, json_encode( $item->getConfig() ) );
+			$stmt->bind( 9, $date ); // mtime
+			$stmt->bind( 10, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 12, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //so item is no longer modified
 			} else {
-				$stmt->bind( 12, $date ); // ctime
+				$stmt->bind( 11, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -668,7 +660,6 @@ class Standard
 			'start' => $item->getDateStart(),
 			'end' => $item->getDateEnd(),
 			'code' => $item->getCode(),
-			'suppliercode' => $item->getSupplierCode(),
 			'ctime' => $item->getTimeCreated(),
 			'mtime' => $item->getTimeModified(),
 			'editor' => $item->getEditor(),

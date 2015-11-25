@@ -11,7 +11,7 @@ return array(
 	// Single article
 	array(
 		'code' => 'demo-article', 'type' => 'default', 'label' => 'Demo article',
-		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,
+		'start' => null, 'end' => null, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo name/de: Demoartikel',
@@ -315,7 +315,7 @@ return array(
 	// Selection articles
 	array(
 		'code' => 'demo-selection-article-1', 'type' => 'default', 'label' => 'Demo variant article 1',
-		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,
+		'start' => null, 'end' => null, 'status' => 1,
 		'attribute' => array(
 			array(
 				'code' => 'demo-blue', 'label' => 'Demo: Blue',
@@ -422,7 +422,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-selection-article-2', 'type' => 'default', 'label' => 'Demo variant article 2',
-		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,
+		'start' => null, 'end' => null, 'status' => 1,
 		'attribute' => array(
 			array(
 				'code' => 'demo-beige', 'label' => 'Demo: Beige',
@@ -781,7 +781,7 @@ return array(
 	// bundle article
 	array(
 		'code' => 'demo-bundle-article', 'type' => 'bundle', 'label' => 'Demo bundle article',
-		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,
+		'start' => null, 'end' => null, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo name/de: Demoartikel mit Bundle',
@@ -924,7 +924,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-rebate', 'type' => 'default', 'label' => 'Demo rebate',
-		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,
+		'start' => null, 'end' => null, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo name/de: Rabatt',

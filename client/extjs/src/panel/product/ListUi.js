@@ -75,13 +75,6 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             editable : false,
             id : 'product-list-label'
         }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.suppliercode',
-            header : MShop.I18n.dt('client/extjs', 'Supplier'),
-            sortable : true,
-            width : 100,
-            editable : false
-        }, {
             xtype : 'datecolumn',
             dataIndex : 'product.datestart',
             header : MShop.I18n.dt('client/extjs', 'Start date'),

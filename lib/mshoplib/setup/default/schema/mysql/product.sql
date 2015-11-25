@@ -58,8 +58,6 @@ CREATE TABLE "mshop_product" (
 	"typeid" INTEGER NOT NULL,
 	-- User product code
 	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
-	-- Supplier code
-	"suppliercode" VARCHAR(32) NOT NULL,
 	-- Default name in admin backend
 	"label" VARCHAR(255) NOT NULL,
 	-- product config values stored in JSON format
@@ -92,8 +90,6 @@ CREATE INDEX "idx_mspro_sid_stat_st_end" ON "mshop_product" ("siteid", "status",
 CREATE INDEX "idx_mspro_id_sid_stat_st_end" ON "mshop_product" ("id", "siteid", "status", "start", "end");
 
 CREATE INDEX "idx_mspro_sid_label" ON "mshop_product" ("siteid", "label");
-
-CREATE INDEX "idx_mspro_sid_supplier" ON "mshop_product" ("siteid", "suppliercode");
 
 CREATE INDEX "idx_mspro_sid_start" ON "mshop_product" ("siteid", "start");
 

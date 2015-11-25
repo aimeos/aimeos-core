@@ -18,6 +18,7 @@ return array(
 		'media/download' => array( 'domain' => 'media', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
 		'price/default' => array( 'domain' => 'price', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'supplier/default' => array( 'domain' => 'supplier', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'tag/default' => array( 'domain' => 'tag', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'product/suggestion' => array( 'domain' => 'product', 'code' => 'suggestion', 'label' => 'Suggestion', 'status' => 1 ),

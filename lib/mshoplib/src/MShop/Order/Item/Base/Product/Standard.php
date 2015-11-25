@@ -724,11 +724,15 @@ class Standard
 	 */
 	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product )
 	{
-		$this->setName( $product->getName() );
-		$this->setType( $product->getType() );
-		$this->setSupplierCode( $product->getSupplierCode() );
 		$this->setProductCode( $product->getCode() );
 		$this->setProductId( $product->getId() );
+		$this->setType( $product->getType() );
+		$this->setName( $product->getName() );
+
+		$items = $product->getRefItems( 'supplier', 'default', 'default' );
+		if( ( $item = reset( $items ) ) !== false ) {
+			$this->setSupplierCode( $item->getCode() );
+		}
 
 		$items = $product->getRefItems( 'media', 'default', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {

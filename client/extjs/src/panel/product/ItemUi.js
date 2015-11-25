@@ -93,18 +93,6 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             maxLength : 255,
                             emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
                         }, {
-                            xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Supplier'),
-                            name : 'product.suppliercode',
-                            store : MShop.GlobalStoreMgr.createStore('Supplier'),
-                            displayField : 'supplier.label',
-                            valueField : 'supplier.label',
-                            forceSelection : true,
-                            triggerAction : 'all',
-                            submitValue : true,
-                            typeAhead : true,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Product supplier (optional)')
-                        }, {
                             xtype : 'datefield',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
                             name : 'product.datestart',

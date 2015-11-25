@@ -80,15 +80,6 @@ MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicker
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Supplier'),
-                id : 'refsupplier',
-                width : 120,
-                hidden : true,
-                renderer : this.refColumnRenderer.createDelegate(this, ['product.suppliercode'], true)
-            },
-            {
-                xtype : 'gridcolumn',
-                dataIndex : conf.listNamePrefix + 'refid',
                 header : MShop.I18n.dt('client/extjs', 'Start date'),
                 id : 'refprodstart',
                 width : 120,

@@ -145,35 +145,6 @@ class Standard
 
 
 	/**
-	 * Returns the supplier code of the product item.
-	 *
-	 * @return string supplier code of the product item
-	 */
-	public function getSupplierCode()
-	{
-		if( isset( $this->values['product.suppliercode'] ) ) {
-			return (string) $this->values['product.suppliercode'];
-		}
-
-		return '';
-	}
-
-
-	/**
-	 * Sets the new supplier code of the product item.
-	 *
-	 * @param string $suppliercode New supplier code of the product item
-	 */
-	public function setSupplierCode( $suppliercode )
-	{
-		if( $suppliercode == $this->getSupplierCode() ) { return; }
-
-		$this->values['product.suppliercode'] = (string) $suppliercode;
-		$this->setModified();
-	}
-
-
-	/**
 	 * Returns the label of the product item.
 	 *
 	 * @return string Label of the product item
@@ -317,7 +288,6 @@ class Standard
 				case 'product.code': $this->setCode( $value ); break;
 				case 'product.label': $this->setLabel( $value ); break;
 				case 'product.status': $this->setStatus( $value ); break;
-				case 'product.suppliercode': $this->setSupplierCode( $value ); break;
 				case 'product.datestart': $this->setDateStart( $value ); break;
 				case 'product.dateend': $this->setDateEnd( $value ); break;
 				case 'product.config': $this->setConfig( $value ); break;
@@ -343,7 +313,6 @@ class Standard
 		$list['product.code'] = $this->getCode();
 		$list['product.label'] = $this->getLabel();
 		$list['product.status'] = $this->getStatus();
-		$list['product.suppliercode'] = $this->getSupplierCode();
 		$list['product.datestart'] = $this->getDateStart();
 		$list['product.dateend'] = $this->getDateEnd();
 		$list['product.config'] = $this->getConfig();

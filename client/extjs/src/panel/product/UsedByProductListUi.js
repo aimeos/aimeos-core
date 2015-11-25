@@ -147,17 +147,6 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
                     "product.label"], true)
             },
             {
-                xtype : 'gridcolumn',
-                dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Supplier'),
-                sortable : false,
-                width : 100,
-                hidden : true,
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
-                    this.ParentItemUi.store,
-                    "product.suppliercode"], true)
-            },
-            {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
                 header : MShop.I18n.dt('client/extjs', 'Start date'),

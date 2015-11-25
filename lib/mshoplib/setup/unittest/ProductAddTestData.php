@@ -113,7 +113,6 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$product->setTypeId( $typeIds[$dataset['typeid']] );
 			$product->setCode( $dataset['code'] );
 			$product->setLabel( $dataset['label'] );
-			$product->setSupplierCode( $dataset['suppliercode'] );
 			$product->setStatus( $dataset['status'] );
 
 			if( isset( $dataset['config'] ) ) {

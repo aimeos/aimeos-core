@@ -53,21 +53,6 @@ interface Iface
 	public function setCode( $code );
 
 	/**
-	 * Returns the supplier code of the product.
-	 *
-	 * @return string Supplier code of the product
-	 */
-	public function getSupplierCode();
-
-	/**
-	 * Sets a new supplier code of the product item.
-	 *
-	 * @param string $suppliercode New supplier code of the product
-	 * @return void
-	 */
-	public function setSupplierCode( $suppliercode );
-
-	/**
 	 * Returns the label of the product item.
 	 *
 	 * @return string Label of the product item

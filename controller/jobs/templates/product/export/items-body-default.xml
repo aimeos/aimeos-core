@@ -20,7 +20,6 @@ $enc = $this->encoder();
 				<type><![CDATA[<?php echo $item->getType(); ?>]]></type>
 				<code><![CDATA[<?php echo $item->getCode(); ?>]]></code>
 				<label><![CDATA[<?php echo $item->getCode(); ?>]]></label>
-				<supplier><![CDATA[<?php echo $item->getSupplierCode(); ?>]]></supplier>
 				<start><![CDATA[<?php echo $item->getDateStart(); ?>]]></start>
 				<end><![CDATA[<?php echo $item->getDateEnd(); ?>]]></end>
 				<status><![CDATA[<?php echo $item->getStatus(); ?>]]></status>
@@ -178,7 +177,6 @@ $enc = $this->encoder();
 						<type><![CDATA[<?php echo $item->getType(); ?>]]></type>
 						<code><![CDATA[<?php echo $item->getCode(); ?>]]></code>
 						<label><![CDATA[<?php echo $item->getCode(); ?>]]></code>
-						<supplier><![CDATA[<?php echo $item->getSupplierCode(); ?>]]></supplier>
 						<start><![CDATA[<?php echo $item->getDateStart(); ?>]]></start>
 						<end><![CDATA[<?php echo $item->getDateEnd(); ?>]]></end>
 						<status><![CDATA[<?php echo $item->getStatus(); ?>]]></status>

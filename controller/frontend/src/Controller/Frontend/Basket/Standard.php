@@ -93,7 +93,7 @@ class Standard
 
 		$context = $this->getContext();
 
-		$productItem = $this->getDomainItem( 'product', 'product.id', $prodid, array( 'media', 'price', 'product', 'text' ) );
+		$productItem = $this->getDomainItem( 'product', 'product.id', $prodid, array( 'media', 'supplier', 'price', 'product', 'text' ) );
 
 		$orderBaseProductItem = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' )->createItem();
 		$orderBaseProductItem->copyFrom( $productItem );

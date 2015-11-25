@@ -67,9 +67,9 @@ class FixedRebateTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, count( $products ) );
 		$this->assertEquals( '-2.50', $product->getPrice()->getValue() );
 		$this->assertEquals( '2.50', $product->getPrice()->getRebate() );
-		$this->assertEquals( 'unitSupplier', $product->getSupplierCode() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
+		$this->assertEquals( '', $product->getSupplierCode() );
 		$this->assertEquals( '', $product->getMediaUrl() );
 		$this->assertEquals( 'Geldwerter Nachlass', $product->getName() );
 	}

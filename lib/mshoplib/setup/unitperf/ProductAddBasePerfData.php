@@ -75,7 +75,6 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 		$productItem = $productManager->createItem();
 		$productItem->setTypeId( $productTypeItem->getId() );
 		$productItem->setStatus( 1 );
-		$productItem->setSupplierCode( 'My brand' );
 		$productItem->setDateStart( '1970-01-01 00:00:00' );
 
 		for( $i = 0; $i < $this->count; $i++ )

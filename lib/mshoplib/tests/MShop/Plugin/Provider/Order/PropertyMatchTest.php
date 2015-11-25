@@ -32,7 +32,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setTypeId( 2 );
 		$this->plugin->setProvider( 'PropertyMatch' );
-		$this->plugin->setConfig( array( 'product.suppliercode' => 'unitSupplier' ) );
+		$this->plugin->setConfig( array( 'product.label' => 'Cafe Noire Cappuccino' ) );
 		$this->plugin->setStatus( '1' );
 
 
@@ -99,7 +99,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 		// two conditions
 		$this->plugin->setConfig( array(
 			'product.stock.warehouse.code' => 'default',
-			'product.suppliercode' => 'unitSupplier',
+			'product.label' => 'Cafe Noire Cappuccino',
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
@@ -109,7 +109,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateFail()
 	{
-		$this->plugin->setConfig( array( 'product.suppliercode' => 'wrongSupplier' ) );
+		$this->plugin->setConfig( array( 'product.label' => 'wrong label' ) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
@@ -121,7 +121,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->plugin->setConfig( array(
 			'product.stock.warehouse.code' => 'unit_warehouse2',
-			'product.suppliercode' => 'wrongSupplier',
+			'product.label' => 'wrong label',
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelper::getContext(), $this->plugin );
 
