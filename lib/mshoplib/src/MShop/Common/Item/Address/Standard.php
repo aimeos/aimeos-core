@@ -76,7 +76,7 @@ class Standard
 	public function getPosition()
 	{
 		if( isset( $this->values[$this->prefix . 'position'] ) ) {
-			return (string) $this->values[$this->prefix . 'position'];
+			return (int) $this->values[$this->prefix . 'position'];
 		}
 
 		return 0;

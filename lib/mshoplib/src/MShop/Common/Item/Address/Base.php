@@ -608,7 +608,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	public function getFlag()
 	{
 		if( isset( $this->values[$this->prefix . 'flag'] ) ) {
-			return (string) $this->values[$this->prefix . 'flag'];
+			return (int) $this->values[$this->prefix . 'flag'];
 		}
 
 		return 0;

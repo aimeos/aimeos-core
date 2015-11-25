@@ -298,7 +298,7 @@ class Standard
 	/**
 	 * Returns the configuration of the list item.
 	 *
-	 * @return string Custom configuration values
+	 * @return array Custom configuration values
 	 */
 	public function getConfig()
 	{
@@ -390,7 +390,7 @@ class Standard
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @return Associative list of item properties and their values
+	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray()
 	{
