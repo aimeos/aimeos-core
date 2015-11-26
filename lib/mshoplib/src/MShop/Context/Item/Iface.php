@@ -59,10 +59,25 @@ interface Iface
 	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $databaseManager );
 
 	/**
+	 * Returns the file system object.
+	 *
+	 * @return \Aimeos\MW\Filesystem\BasicIface File system object
+	 */
+	public function getFilesystem();
+
+	/**
+	 * Sets the file system object.
+	 *
+	 * @param \Aimeos\MW\Filesystem\BasicIface $filesystem File system object
+	 * @return void
+	 */
+	public function setFilesystem( \Aimeos\MW\Filesystem\BasicIface $filesystem );
+
+	/**
 	 * Returns the database manager object.
 	 *
 	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
-	 */
+	*/
 	public function getDatabaseManager();
 
 	/**

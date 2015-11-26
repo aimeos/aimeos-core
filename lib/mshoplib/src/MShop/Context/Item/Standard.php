@@ -23,6 +23,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	private $cache;
 	private $config;
 	private $dbm;
+	private $filesystem;
 	private $locale;
 	private $logger;
 	private $session;
@@ -42,6 +43,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->cache = null;
 		$this->config = null;
 		$this->dbm = null;
+		$this->filesystem = null;
 		$this->locale = null;
 		$this->logger = null;
 		$this->session = null;
@@ -160,6 +162,33 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->dbm;
+	}
+
+
+	/**
+	 * Returns the file system object.
+	 *
+	 * @return \Aimeos\MW\Filesystem\BasicIface File system object
+	 */
+	public function getFilesystem()
+	{
+		if( !isset( $this->filesystem ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'File system object not available' ) );
+		}
+
+		return $this->filesystem;
+	}
+
+
+	/**
+	 * Sets the file system object.
+	 *
+	 * @param \Aimeos\MW\Filesystem\BasicIface $filesystem File system object
+	 * @return void
+	 */
+	public function setFilesystem( \Aimeos\MW\Filesystem\BasicIface $filesystem )
+	{
+		$this->filesystem = $filesystem;
 	}
 
 
