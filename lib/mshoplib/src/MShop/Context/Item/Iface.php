@@ -92,7 +92,7 @@ interface Iface
 	/**
 	 * Returns the translation/internationalization object for the given locale (null for default one).
 	 *
-	 * @param string $locale Two letter language ISO code for specific language instead of default one
+	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
 	 * @return \Aimeos\MW\Translation\Iface Internationalization object
 	 */
 	public function getI18n( $locale = null );
