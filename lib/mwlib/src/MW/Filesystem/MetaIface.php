@@ -29,15 +29,6 @@ interface MetaIface
 	public function size( $path );
 
 	/**
-	 * Returns the mime type of the file
-	 *
-	 * @param string $path Path to the file
-	 * @return string Mime type
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	 */
-	public function mime( $path );
-
-	/**
 	 * Returns the Unix time stamp for the file
 	 *
 	 * @param string $path Path to the file

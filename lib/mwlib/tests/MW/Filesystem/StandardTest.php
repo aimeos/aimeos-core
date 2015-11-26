@@ -107,27 +107,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testMime()
-	{
-		file_put_contents( $this->basedir . 'file3', 'test' );
-
-		$result = $this->object->mime( 'file3' );
-
-		unlink( $this->basedir . 'file3' );
-
-		$this->assertEquals( 'text/plain', $result );
-	}
-
-
-	public function testMimeException()
-	{
-		$this->markTestSkipped( 'HHVM does not return an error' );
-
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
-		$this->object->mime( 'mimeinvalid' );
-	}
-
-
 	public function testTime()
 	{
 		touch( $this->basedir . 'file4' );

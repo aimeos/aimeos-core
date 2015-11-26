@@ -12,15 +12,14 @@ namespace Aimeos\MW\Filesystem;
 
 
 /**
- * Interface for basic file system methods
+ * Implementation of basic file system methods
  *
  * @package MW
  * @subpackage Filesystem
  */
-class Standard extends Base implements BasicIface, DirIface, MetaIface
+class Standard implements BasicIface, DirIface, MetaIface
 {
 	private $basepath;
-	private $finfo;
 
 
 	/**
@@ -30,23 +29,7 @@ class Standard extends Base implements BasicIface, DirIface, MetaIface
 	 */
 	public function __construct( $basepath )
 	{
-		if( ( $this->finfo = @finfo_open( FILEINFO_MIME_TYPE ) ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
-		}
-
 		$this->basepath = rtrim( $basepath, '/' ) . '/';
-	}
-
-
-	/**
-	 * Cleans up all object resources
-	 */
-	public function __destruct()
-	{
-		if( is_resource( $this->finfo ) ) {
-			finfo_close( $this->finfo );
-		}
 	}
 
 
@@ -101,7 +84,7 @@ class Standard extends Base implements BasicIface, DirIface, MetaIface
 	 * {@inheritDoc}
 	 *
 	 * @param string $path Path to the filesystem or directory
-	 * @return \Iterator Iterator over the entries
+	 * @return \Iterator|array Iterator over the entries or array with entries
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function scan( $path = null )
@@ -129,24 +112,6 @@ class Standard extends Base implements BasicIface, DirIface, MetaIface
 		}
 
 		return $size;
-	}
-
-
-	/**
-	 * Returns the mime type of the file
-	 *
-	 * @param string $path Path to the file
-	 * @return string Mime type
-	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	 */
-	public function mime( $path )
-	{
-		if( ( $mime = @finfo_file( $this->finfo, $this->basepath . $path ) ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
-		}
-
-		return $mime;
 	}
 
 
@@ -243,18 +208,12 @@ class Standard extends Base implements BasicIface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @param string $content New file content
-	 * @param integer $option File options from \Aimeos\MW\Filesystem\Base
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function write( $path, $content, $option = Base::OPT_NONE )
+	public function write( $path, $content )
 	{
 		if( @file_put_contents( $this->basepath . $path, $content ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
-		}
-
-		if( $option & \Aimeos\MW\Filesystem\Base::OPT_PRIVATE && @chmod( $this->basepath . $path, 0600 ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -268,11 +227,10 @@ class Standard extends Base implements BasicIface, DirIface, MetaIface
 	 *
 	 * @param string $path Path to the file
 	 * @param resource $stream File stream descriptor
-	 * @param integer $option File options from \Aimeos\MW\Filesystem\Base
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function writes( $path, $stream, $option = Base::OPT_NONE )
+	public function writes( $path, $stream )
 	{
 		if( ( $handle = @fopen( $this->basepath . $path, 'w' ) ) === false ) {
 			$error = error_get_last();

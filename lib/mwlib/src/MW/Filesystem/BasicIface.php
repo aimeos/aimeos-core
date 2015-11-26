@@ -20,17 +20,17 @@ namespace Aimeos\MW\Filesystem;
 interface BasicIface
 {
 	/**
-	 * Returns an iterator over the entries in the given path
+	 * Returns the entries in the given path
 	 *
-	 * To get the file name, you have to convert the iterator result to a
-	 * string value:
+	 * This method returns an iterator or array!
+	 * To get the file name, you have to convert the entry to a string value:
 	 *
 	 *  foreach( $fs->scan() as $entry ) {
 	 *      echo (string) $entry . "\n";
 	 *  }
 	 *
 	 * @param string $path Path to the filesystem or directory
-	 * @return \Iterator Iterator over the entries
+	 * @return \Iterator|array Iterator over the entries or array with entries
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function scan( $path = null );
@@ -105,17 +105,12 @@ interface BasicIface
 	 * If the file already exists, the its content will be overwritten. This
 	 * method is only suited for smaller files.
 	 *
-	 * The "option" parameter is a bitmask that can contain one or more OPT_*
-	 * values from the \Aimeos\MW\Filesystem\Base class. To make a file private
-	 * for example, use \Aimeos\MW\Filesystem\Base::OPT_PRIVATE.
-	 *
 	 * @param string $path Path to the file
 	 * @param string $content New file content
-	 * @param integer $option File options from \Aimeos\MW\Filesystem\Base
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function write( $path, $content, $option = Base::OPT_NONE );
+	public function write( $path, $content );
 
 	/**
 	 * Write the content of the stream descriptor into the remote file
@@ -138,17 +133,12 @@ interface BasicIface
 	 * Checking if "$readhandle" is a resource is necessary to avoid errors
 	 * because some drivers will close the handle automatically!
 	 *
-	 * The "option" parameter is a bitmask that can contain one or more OPT_*
-	 * values from the \Aimeos\MW\Filesystem\Base class. To make a file private
-	 * for example, use \Aimeos\MW\Filesystem\Base::OPT_PRIVATE.
-	 *
 	 * @param string $path Path to the file
 	 * @param resource $stream File stream descriptor
-	 * @param integer $option File options from \Aimeos\MW\Filesystem\Base
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
-	public function writes( $path, $stream, $option = Base::OPT_NONE );
+	public function writes( $path, $stream );
 
 	/**
 	 * Renames a file, moves it to a new location or both at once
