@@ -74,7 +74,7 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$fs = new \Aimeos\MW\Filesystem\Standard( __DIR__ . '/tmp' );
+		$fs = new \Aimeos\MW\Filesystem\Standard( array( 'basedir' => __DIR__ . '/tmp' ) );
 		$ctx->setFilesystem( $fs );
 
 

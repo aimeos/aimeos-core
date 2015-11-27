@@ -17,7 +17,7 @@ namespace Aimeos\MW\Filesystem;
  * @package MW
  * @subpackage Filesystem
  */
-interface BasicIface
+interface Iface
 {
 	/**
 	 * Returns the entries in the given path

@@ -17,19 +17,21 @@ namespace Aimeos\MW\Filesystem;
  * @package MW
  * @subpackage Filesystem
  */
-class Standard implements BasicIface, DirIface, MetaIface
+class Standard implements Iface, DirIface, MetaIface
 {
-	private $basepath;
+	private $basedir;
 
 
 	/**
 	 * Initializes the object
 	 *
-	 * @param string $basepath Root path to the file system
+	 * @param array $config Adapter configuration
 	 */
-	public function __construct( $basepath )
+	public function __construct( array $config )
 	{
-		$this->basepath = rtrim( $basepath, '/' ) . '/';
+		if( isset( $config['basedir'] ) ) {
+			$this->basedir = rtrim( $config['basedir'], '/' ) . '/';
+		}
 	}
 
 
@@ -42,7 +44,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function isdir( $path )
 	{
-		return is_dir( $this->basepath . $path );
+		return is_dir( $this->basedir . $path );
 	}
 
 
@@ -55,7 +57,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	*/
 	public function mkdir( $path )
 	{
-		if( @mkdir( $this->basepath . $path ) === false ) {
+		if( @mkdir( $this->basedir . $path ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -71,7 +73,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	*/
 	public function rmdir( $path )
 	{
-		if( @rmdir( $this->basepath . $path ) === false ) {
+		if( @rmdir( $this->basedir . $path ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -90,7 +92,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	public function scan( $path = null )
 	{
 		try {
-			return new \DirectoryIterator( $this->basepath . $path );
+			return new \DirectoryIterator( $this->basedir . $path );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
@@ -106,7 +108,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function size( $path )
 	{
-		if( ( $size = @filesize( $this->basepath . $path ) ) === false ) {
+		if( ( $size = @filesize( $this->basedir . $path ) ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -124,7 +126,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function time( $path )
 	{
-		if( ( $time = @filemtime( $this->basepath . $path ) ) === false ) {
+		if( ( $time = @filemtime( $this->basedir . $path ) ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -142,7 +144,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function rm( $path )
 	{
-		if( @unlink( $this->basepath . $path ) === false ) {
+		if( @unlink( $this->basedir . $path ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -157,7 +159,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function has( $path )
 	{
-		return file_exists( $this->basepath . $path );
+		return file_exists( $this->basedir . $path );
 	}
 
 
@@ -172,7 +174,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function read( $path )
 	{
-		if( ( $content = @file_get_contents( $this->basepath . $path ) ) === false ) {
+		if( ( $content = @file_get_contents( $this->basedir . $path ) ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -192,7 +194,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function reads( $path )
 	{
-		if( ( $handle = @fopen( $this->basepath . $path, 'r' ) ) === false ) {
+		if( ( $handle = @fopen( $this->basedir . $path, 'r' ) ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -213,7 +215,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function write( $path, $content )
 	{
-		if( @file_put_contents( $this->basepath . $path, $content ) === false ) {
+		if( @file_put_contents( $this->basedir . $path, $content ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -232,7 +234,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function writes( $path, $stream )
 	{
-		if( ( $handle = @fopen( $this->basepath . $path, 'w' ) ) === false ) {
+		if( ( $handle = @fopen( $this->basedir . $path, 'w' ) ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -263,7 +265,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function move( $from, $to )
 	{
-		if( @rename( $this->basepath . $from, $this->basepath . $to ) === false ) {
+		if( @rename( $this->basedir . $from, $this->basedir . $to ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
@@ -280,7 +282,7 @@ class Standard implements BasicIface, DirIface, MetaIface
 	 */
 	public function copy( $from, $to )
 	{
-		if( @copy( $this->basepath . $from, $this->basepath . $to ) === false ) {
+		if( @copy( $this->basedir . $from, $this->basedir . $to ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}

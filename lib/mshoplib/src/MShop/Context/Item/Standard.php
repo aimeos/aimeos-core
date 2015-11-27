@@ -168,7 +168,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Returns the file system object.
 	 *
-	 * @return \Aimeos\MW\Filesystem\BasicIface File system object
+	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 */
 	public function getFilesystem()
 	{
@@ -183,10 +183,10 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Sets the file system object.
 	 *
-	 * @param \Aimeos\MW\Filesystem\BasicIface $filesystem File system object
+	 * @param \Aimeos\MW\Filesystem\Iface $filesystem File system object
 	 * @return void
 	 */
-	public function setFilesystem( \Aimeos\MW\Filesystem\BasicIface $filesystem )
+	public function setFilesystem( \Aimeos\MW\Filesystem\Iface $filesystem )
 	{
 		$this->filesystem = $filesystem;
 	}

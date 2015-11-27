@@ -12,7 +12,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->basedir = dirname( dirname( __DIR__ ) ) . '/tmp/';
-		$this->object = new \Aimeos\MW\Filesystem\Standard( $this->basedir );
+		$this->object = new \Aimeos\MW\Filesystem\Standard( array( 'basedir' => $this->basedir ) );
 	}
 
 
