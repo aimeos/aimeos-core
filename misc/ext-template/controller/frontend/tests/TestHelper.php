@@ -1,7 +1,5 @@
 <?php
 
-namespace Aimeos;
-
 
 /**
  * @copyright Metaways Infosystems GmbH, 2012
