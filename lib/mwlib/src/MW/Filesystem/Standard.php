@@ -57,7 +57,7 @@ class Standard implements Iface, DirIface, MetaIface
 	*/
 	public function mkdir( $path )
 	{
-		if( @mkdir( $this->basedir . $path ) === false ) {
+		if( @mkdir( $this->basedir . $path, 0775, true ) === false ) {
 			$error = error_get_last();
 			throw new Exception( $error['message'] );
 		}
