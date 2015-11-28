@@ -198,16 +198,16 @@ class Standard
 
 
 	/**
-	 * Returns the customer group item object specificed by its ID
+	 * Returns the item for the given search key and ID or code.
 	 *
-	 * @param integer $id Unique customer ID referencing an existing customer group
+	 * @param string $value Unique ID or code to search for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Customer\Item\Group\Iface Returns the customer group item for the given ID
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $value, array $ref = array() )
 	{
-		return $this->getItemBase( 'customer.group.id', $id, $ref );
+		return $this->getItemBase( array( 'customer.group.id', 'customer.group.code' ), $value, $ref );
 	}
 
 

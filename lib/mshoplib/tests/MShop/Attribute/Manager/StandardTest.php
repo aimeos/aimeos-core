@@ -103,10 +103,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'attribute.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-
 		$results = $this->object->searchItems( $search, array( 'text' ) );
+
 		if( ( $itemA = reset( $results ) ) === false ) {
-			throw new \Exception( 'No search results available in testGetItem()' );
+			throw new \Exception( 'No search results available' );
 		}
 
 		$itemB = $this->object->getItem( $itemA->getId(), array( 'text' ) );
@@ -114,6 +114,27 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
 		$this->assertEquals( 1, count( $itemB->getListItems( 'text' ) ) );
 		$this->assertEquals( 1, count( $itemB->getRefItems( 'text' ) ) );
+	}
+
+
+	public function testGetItemCode()
+	{
+		$search = $this->object->createSearch();
+		$conditions = array(
+			$search->compare( '==', 'attribute.code', 'm' ),
+			$search->compare( '==', 'attribute.editor', $this->editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$results = $this->object->searchItems( $search );
+
+		if( ( $itemA = reset( $results ) ) === false ) {
+			throw new \Exception( 'No search results available' );
+		}
+
+		$itemB = $this->object->getItem( 'm' );
+
+		$this->assertEquals( $itemA->getId(), $itemB->getId() );
+		$this->assertEquals( $itemA->getCode(), $itemB->getCode() );
 	}
 
 

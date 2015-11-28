@@ -632,21 +632,37 @@ abstract class Base
 
 
 	/**
-	 * Returns the item for the given search key and ID.
+	 * Returns the item for the given search key and ID or code.
 	 *
-	 * @param string $key Search key for the requested ID
-	 * @param integer $id Unique ID to search for
+	 * @param string|array $key Search key for the requested ID or code
+	 * @param string $value Unique ID or code to search for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function getItemBase( $key, $id, array $ref = array() )
+	protected function getItemBase( $key, $value, array $ref = array() )
 	{
 		$criteria = $this->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', $key, $id ) );
+
+		if( is_array( $key ) )
+		{
+			$expr = array();
+			foreach( $key as $str ) {
+				$expr[] = $criteria->compare( '==', $str, $value );
+			}
+			$criteria->setConditions( $criteria->combine( '||', $expr ) );
+		}
+		else
+		{
+			$criteria->setConditions( $criteria->compare( '==', $key, $value ) );
+		}
+
 		$items = $this->searchItems( $criteria, $ref );
 
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found', $key, $id ) );
+		if( ( $item = reset( $items ) ) === false )
+		{
+			$msg = sprintf( 'No item with "%2$s" in "%1$s" found', implode( '|', (array) $key ), $value );
+			throw new \Aimeos\MShop\Exception( $msg );
 		}
 
 		return $item;

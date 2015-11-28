@@ -308,15 +308,16 @@ class Standard
 
 
 	/**
-	 * Returns the coupon code object specified by its ID.
+	 * Returns the item for the given search key and ID or code.
 	 *
-	 * @param integer $id Unique ID of the coupon code in the storage
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code object
-	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be found
+	 * @param string $value Unique ID or code to search for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $value, array $ref = array() )
 	{
-		return $this->getItemBase( 'coupon.code.id', $id, $ref );
+		return $this->getItemBase( array( 'coupon.code.id', 'coupon.code.code' ), $value, $ref );
 	}
 
 

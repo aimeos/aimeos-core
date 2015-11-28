@@ -316,16 +316,16 @@ class Standard
 
 
 	/**
-	 * Returns the site item specified by its ID.
+	 * Returns the item for the given search key and ID or code.
 	 *
-	 * @param string $id Unique ID of the site data in the storage
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Returns the site item of the given id
-	 * @throws \Aimeos\MShop\Exception If the item couldn't be found
+	 * @param string $value Unique ID or code to search for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $value, array $ref = array() )
 	{
-		return $this->getItemBase( 'locale.site.id', $id, $ref );
+		return $this->getItemBase( array( 'locale.site.id', 'locale.site.code' ), $value, $ref );
 	}
 
 

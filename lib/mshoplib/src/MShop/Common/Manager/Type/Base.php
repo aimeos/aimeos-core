@@ -162,26 +162,16 @@ abstract class Base
 
 
 	/**
-	 * Returns the type item specified by its ID
+	 * Returns the type item specified by its ID or code
 	 *
-	 * @param integer $id Id of type item object
+	 * @param string $value ID or code of type item object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Returns the type item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $value, array $ref = array() )
 	{
-		$conf = reset( $this->searchConfig );
-
-		$criteria = $this->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', $conf['code'], $id ) );
-		$items = $this->searchItems( $criteria, $ref );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Type item with ID "%1$s" in "%2$s" not found', $id, $conf['code'] ) );
-		}
-
-		return $item;
+		return $this->getItemBase( array( $this->prefix . 'id', $this->prefix . 'code' ), $value, $ref );
 	}
 
 

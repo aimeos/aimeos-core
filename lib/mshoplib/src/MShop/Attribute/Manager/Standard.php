@@ -190,16 +190,16 @@ class Standard
 
 
 	/**
-	 * Returns the attributes item specified by its ID.
+	 * Returns the item for the given search key and ID or code.
 	 *
-	 * @param integer $id Unique ID of the attribute item in the storage
+	 * @param string $value Unique ID or code to search for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Returns the attribute item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $value, array $ref = array() )
 	{
-		return $this->getItemBase( 'attribute.id', $id, $ref );
+		return $this->getItemBase( array( 'attribute.id', 'attribute.code' ), $value, $ref );
 	}
 
 

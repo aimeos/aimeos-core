@@ -234,16 +234,16 @@ class Standard
 
 
 	/**
-	 * Returns the service item specified by the given id.
+	 * Returns the item for the given search key and ID or code.
 	 *
-	 * @param int $id Unique ID of the service item
+	 * @param string $value Unique ID or code to search for
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Service\Item\Iface Returns the service item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $value, array $ref = array() )
 	{
-		return $this->getItemBase( 'service.id', $id, $ref );
+		return $this->getItemBase( array( 'service.id', 'service.code' ), $value, $ref );
 	}
 
 
