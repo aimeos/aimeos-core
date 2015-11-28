@@ -117,27 +117,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetItemCode()
-	{
-		$search = $this->object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'attribute.code', 'm' ),
-			$search->compare( '==', 'attribute.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search );
-
-		if( ( $itemA = reset( $results ) ) === false ) {
-			throw new \Exception( 'No search results available' );
-		}
-
-		$itemB = $this->object->getItem( 'm' );
-
-		$this->assertEquals( $itemA->getId(), $itemB->getId() );
-		$this->assertEquals( $itemA->getCode(), $itemB->getCode() );
-	}
-
-
 	public function testSaveUpdateDeleteItem()
 	{
 		$typeManager = $this->object->getSubManager( 'type' );
