@@ -4,8 +4,11 @@
 	"keywords": ["aimeos", "extension"]
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
+	"prefer-stable": true,
+	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=5.3.3",
+		"composer/installers": "~1.0"
 	},
 	"autoload": {
 		"psr-4": {
