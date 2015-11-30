@@ -233,6 +233,33 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testProcessInvalid()
+	{
+		$mapping = array(
+			0 => 'attribute.type',
+			1 => 'attribute.code',
+		);
+
+		$data = array(
+			0 => 'invalid',
+			1 => '30',
+		);
+
+		$product = $this->create( 'job_csv_test' );
+
+		$object = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Attribute\Standard( $this->context, $mapping, $this->endpoint );
+
+		try {
+			$result = $object->process( $product, $data );
+		} catch( \Exception $e ) {
+			$this->delete( $product );
+			return;
+		}
+
+		$this->markTestFail( 'No exception thrown' );
+	}
+
+
 	public function testProcessListtypes()
 	{
 		$mapping = array(

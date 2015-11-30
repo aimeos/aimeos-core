@@ -116,8 +116,9 @@ class Standard
 
 			foreach( $map as $pos => $list )
 			{
-				if( $list['attribute.code'] === '' || $list['attribute.type'] === '' || isset( $list['product.lists.type'] )
-					&& $this->listTypes !== null && !in_array( $list['product.lists.type'], (array) $this->listTypes )
+				if( !isset( $list['attribute.code'] ) || $list['attribute.code'] === '' || $list['attribute.type'] === ''
+					|| isset( $list['product.lists.type'] ) && $this->listTypes !== null
+					&& !in_array( $list['product.lists.type'], (array) $this->listTypes )
 				) {
 					continue;
 				}
