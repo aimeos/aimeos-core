@@ -23,7 +23,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	private $cache;
 	private $config;
 	private $dbm;
-	private $filesystem;
+	private $fsm;
 	private $locale;
 	private $logger;
 	private $session;
@@ -43,7 +43,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->cache = null;
 		$this->config = null;
 		$this->dbm = null;
-		$this->filesystem = null;
+		$this->fsm = null;
 		$this->locale = null;
 		$this->logger = null;
 		$this->session = null;
@@ -166,29 +166,29 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
-	 * Returns the file system object.
+	 * Sets the file system manager object.
 	 *
-	 * @return \Aimeos\MW\Filesystem\Iface File system object
+	 * @param \Aimeos\MW\Filesystem\Manager\Iface $manager File system object
+	 * @return void
 	 */
-	public function getFilesystem()
+	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $manager )
 	{
-		if( !isset( $this->filesystem ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'File system object not available' ) );
-		}
-
-		return $this->filesystem;
+		$this->fsm = $manager;
 	}
 
 
 	/**
-	 * Sets the file system object.
+	 * Returns the file system manager object.
 	 *
-	 * @param \Aimeos\MW\Filesystem\Iface $filesystem File system object
-	 * @return void
+	 * @return \Aimeos\MW\Filesystem\Manager\Iface File system manager object
 	 */
-	public function setFilesystem( \Aimeos\MW\Filesystem\Iface $filesystem )
+	public function getFilesystemManager()
 	{
-		$this->filesystem = $filesystem;
+		if( !isset( $this->fsm ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
+		}
+
+		return $this->fsm;
 	}
 
 

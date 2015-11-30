@@ -64,8 +64,8 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$fs = new \Aimeos\MW\Filesystem\Standard( array( 'basedir' => __DIR__ . '/tmp' ) );
-		$ctx->setFilesystem( $fs );
+		$fs = new \Aimeos\MW\Filesystem\Manager\Standard( $conf );
+		$ctx->setFilesystemManager( $fs );
 
 
 		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );

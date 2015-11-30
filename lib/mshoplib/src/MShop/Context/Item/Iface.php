@@ -53,32 +53,32 @@ interface Iface
 	/**
 	 * Sets the database connection manager object.
 	 *
-	 * @param \Aimeos\MW\DB\Manager\Iface $databaseManager Database manager object
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbManager Database manager object
 	 * @return void
 	 */
-	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $databaseManager );
+	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $dbManager );
+
+	/**
+	 * Returns the database manager object.
+	 *
+	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
+	 */
+	public function getDatabaseManager();
+
+	/**
+	 * Sets the file system object.
+	 *
+	 * @param \Aimeos\MW\Filesystem\Manager\Iface $fsManager File system manager object
+	 * @return void
+	 */
+	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $fsManager );
 
 	/**
 	 * Returns the file system object.
 	 *
 	 * @return \Aimeos\MW\Filesystem\Iface File system object
 	 */
-	public function getFilesystem();
-
-	/**
-	 * Sets the file system object.
-	 *
-	 * @param \Aimeos\MW\Filesystem\Iface $filesystem File system object
-	 * @return void
-	 */
-	public function setFilesystem( \Aimeos\MW\Filesystem\Iface $filesystem );
-
-	/**
-	 * Returns the database manager object.
-	 *
-	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
-	*/
-	public function getDatabaseManager();
+	public function getFilesystemManager();
 
 	/**
 	 * Sets the translation/internationalization objects.

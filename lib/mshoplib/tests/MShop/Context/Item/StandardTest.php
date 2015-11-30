@@ -30,10 +30,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->getDatabaseManager();
 	}
 
-	public function testGetFilesystem()
+	public function testGetFilesystemManager()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->getFilesystem();
+		$this->object->getFilesystemManager();
 	}
 
 	public function testGetLocale()
@@ -86,11 +86,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame( $context->getDatabaseManager(), $this->object->getDatabaseManager() );
 	}
 
-	public function testSetFilesystem()
+	public function testSetFilesystemManager()
 	{
 		$context = \TestHelper::getContext();
-		$this->object->setFilesystem( $context->getFilesystem() );
-		$this->assertSame( $context->getFilesystem(), $this->object->getFilesystem() );
+		$this->object->setFilesystemManager( $context->getFilesystemManager() );
+		$this->assertSame( $context->getFilesystemManager(), $this->object->getFilesystemManager() );
 	}
 
 	public function testSetI18n()
