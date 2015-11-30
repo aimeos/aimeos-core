@@ -256,6 +256,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			return;
 		}
 
+		$this->delete( $product );
 		$this->markTestFail( 'No exception thrown' );
 	}
 
