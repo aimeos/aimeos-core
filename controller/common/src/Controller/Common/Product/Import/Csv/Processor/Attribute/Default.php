@@ -53,7 +53,7 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 		 * @see controller/common/product/import/csv/processor/price/listtypes
 		 * @see controller/common/product/import/csv/processor/text/listtypes
 		 */
-		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/attribute/listtypes');
+		$this->_listTypes = $context->getConfig()->get( 'controller/common/product/import/csv/processor/attribute/listtypes' );
 
 		$this->_cache = $this->_getCache( 'attribute' );
 	}
@@ -113,8 +113,10 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_Default
 
 			foreach( $map as $pos => $list )
 			{
-				if( $list['attribute.code'] === '' || $list['attribute.type'] === '' || isset( $list['product.list.type'] )
-					&& $this->_listTypes !== null && !in_array( $list['product.list.type'], (array) $this->_listTypes )
+				if( !isset( $list['attribute.code'] ) || $list['attribute.code'] === ''
+					|| !isset( $list['attribute.type'] ) || $list['attribute.type'] === ''
+					|| isset( $list['product.list.type'] ) && $this->_listTypes !== null
+					&& !in_array( $list['product.list.type'], (array) $this->_listTypes )
 				) {
 					continue;
 				}

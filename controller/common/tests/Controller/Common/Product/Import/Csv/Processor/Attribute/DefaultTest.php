@@ -232,6 +232,34 @@ class Controller_Common_Product_Import_Csv_Processor_Attribute_DefaultTest exten
 	}
 
 
+	public function testProcessInvalid()
+	{
+		$mapping = array(
+			0 => 'attribute.type',
+			1 => 'attribute.code',
+		);
+
+		$data = array(
+			0 => 'invalid',
+			1 => '30',
+		);
+
+		$product = $this->_create( 'job_csv_test' );
+
+		$object = new Controller_Common_Product_Import_Csv_Processor_Attribute_Default( $this->_context, $mapping, $this->_endpoint );
+
+		try {
+			$result = $object->process( $product, $data );
+		} catch( \Exception $e ) {
+			$this->_delete( $product );
+			return;
+		}
+
+		$this->_delete( $product );
+		$this->markTestFail( 'No exception thrown' );
+	}
+
+
 	public function testProcessListtypes()
 	{
 		$mapping = array(
