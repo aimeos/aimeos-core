@@ -168,14 +168,17 @@ class Controller_Common_Product_Import_Csv_Processor_Media_DefaultTest extends P
 	{
 		$mapping = array(
 			0 => 'media.url',
+			1 => 'media.languageid',
 		);
 
 		$data = array(
 			0 => 'path/to/file',
+			1 => 'de',
 		);
 
 		$dataUpdate = array(
 			0 => 'path/to/new',
+			1 => '',
 		);
 
 		$product = $this->_create( 'job_csv_test' );
@@ -198,6 +201,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_DefaultTest extends P
 		$this->assertInstanceOf( 'MShop_Common_Item_List_Interface', $listItem );
 
 		$this->assertEquals( 'path/to/new', $listItem->getRefItem()->getUrl() );
+		$this->assertEquals( null, $listItem->getRefItem()->getLanguageId() );
 	}
 
 

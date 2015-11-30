@@ -88,6 +88,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 				$urls = explode( $separator, $list['media.url'] );
 				$type = ( isset( $list['media.type'] ) ? $list['media.type'] : 'default' );
 				$typecode = ( isset( $list['product.list.type'] ) ? $list['product.list.type'] : 'default' );
+				$langid = ( isset( $list['media.languageid'] ) && $list['media.languageid'] !== '' ? $list['media.languageid'] : null );
 
 				foreach( $urls as $url )
 				{
@@ -99,6 +100,7 @@ class Controller_Common_Product_Import_Csv_Processor_Media_Default
 					}
 
 					$list['media.typeid'] = $this->_getTypeId( 'media/type', 'product', $type );
+					$list['media.languageid'] = $langid;
 					$list['media.domain'] = 'product';
 					$list['media.url'] = $url;
 
