@@ -91,6 +91,7 @@ class Standard
 				$urls = explode( $separator, $list['media.url'] );
 				$type = ( isset( $list['media.type'] ) ? $list['media.type'] : 'default' );
 				$typecode = ( isset( $list['product.lists.type'] ) ? $list['product.lists.type'] : 'default' );
+				$langid = ( isset( $list['media.languageid'] ) && $list['media.languageid'] !== '' ? $list['media.languageid'] : null );
 
 				foreach( $urls as $url )
 				{
@@ -102,6 +103,7 @@ class Standard
 					}
 
 					$list['media.typeid'] = $this->getTypeId( 'media/type', 'product', $type );
+					$list['media.languageid'] = $langid;
 					$list['media.domain'] = 'product';
 					$list['media.url'] = $url;
 

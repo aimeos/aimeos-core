@@ -169,14 +169,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$mapping = array(
 			0 => 'media.url',
+			1 => 'media.languageid',
 		);
 
 		$data = array(
 			0 => 'path/to/file',
+			1 => 'de',
 		);
 
 		$dataUpdate = array(
 			0 => 'path/to/new',
+			1 => '',
 		);
 
 		$product = $this->create( 'job_csv_test' );
@@ -199,6 +202,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 
 		$this->assertEquals( 'path/to/new', $listItem->getRefItem()->getUrl() );
+		$this->assertEquals( null, $listItem->getRefItem()->getLanguageId() );
 	}
 
 
