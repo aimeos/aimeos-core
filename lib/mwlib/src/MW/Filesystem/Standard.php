@@ -57,9 +57,10 @@ class Standard implements Iface, DirIface, MetaIface
 	*/
 	public function mkdir( $path )
 	{
-		if( @mkdir( $this->basedir . $path, 0775, true ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+		$path = $this->basedir . $path;
+
+		if( @mkdir( $path, 0775, true ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t create directory "%1$s"', $this->basedir . $path ) );
 		}
 	}
 
@@ -74,8 +75,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function rmdir( $path )
 	{
 		if( @rmdir( $this->basedir . $path ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t remove directory "%1$s"', $this->basedir . $path ) );
 		}
 	}
 
@@ -109,8 +109,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function size( $path )
 	{
 		if( ( $size = @filesize( $this->basedir . $path ) ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t get file size for "%1$s"', $this->basedir . $path ) );
 		}
 
 		return $size;
@@ -127,8 +126,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function time( $path )
 	{
 		if( ( $time = @filemtime( $this->basedir . $path ) ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t get file time for "%1$s"', $this->basedir . $path ) );
 		}
 
 		return $time;
@@ -145,8 +143,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function rm( $path )
 	{
 		if( @unlink( $this->basedir . $path ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t delete file "%1$s"', $this->basedir . $path ) );
 		}
 	}
 
@@ -175,8 +172,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function read( $path )
 	{
 		if( ( $content = @file_get_contents( $this->basedir . $path ) ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $this->basedir . $path ) );
 		}
 
 		return $content;
@@ -195,8 +191,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function reads( $path )
 	{
 		if( ( $handle = @fopen( $this->basedir . $path, 'r' ) ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $this->basedir . $path ) );
 		}
 
 		return $handle;
@@ -216,8 +211,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function write( $path, $content )
 	{
 		if( @file_put_contents( $this->basedir . $path, $content ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t write file "%1$s"', $this->basedir . $path ) );
 		}
 	}
 
@@ -235,20 +229,17 @@ class Standard implements Iface, DirIface, MetaIface
 	public function writes( $path, $stream )
 	{
 		if( ( $handle = @fopen( $this->basedir . $path, 'w' ) ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t open file "%1$s"', $this->basedir . $path ) );
 		}
 
 		do
 		{
 			if( ( $content = @stream_get_contents( $stream, 1048576 ) ) === false ) {
-				$error = error_get_last();
-				throw new Exception( $error['message'] );
+				throw new Exception( sprintf( 'Couldn\'t read from stream for "%1$s"', $this->basedir . $path ) );
 			}
 
 			if( @fwrite( $handle, $content ) === false ) {
-				$error = error_get_last();
-				throw new Exception( $error['message'] );
+				throw new Exception( sprintf( 'Couldn\'t write to stream for "%1$s"', $this->basedir . $path ) );
 			}
 		}
 		while( $content !== '' );
@@ -266,8 +257,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function move( $from, $to )
 	{
 		if( @rename( $this->basedir . $from, $this->basedir . $to ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t move file from "%1$s" to "%2$s"', $this->basedir . $from, $this->basedir . $to ) );
 		}
 	}
 
@@ -283,8 +273,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function copy( $from, $to )
 	{
 		if( @copy( $this->basedir . $from, $this->basedir . $to ) === false ) {
-			$error = error_get_last();
-			throw new Exception( $error['message'] );
+			throw new Exception( sprintf( 'Couldn\'t copy file from "%1$s" to "%2$s"', $this->basedir . $from, $this->basedir . $to ) );
 		}
 	}
 }
