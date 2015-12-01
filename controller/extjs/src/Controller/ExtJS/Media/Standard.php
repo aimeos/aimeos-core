@@ -47,61 +47,11 @@ class Standard
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
 
-		$config = $this->getContext()->getConfig();
-
-		/** controller/extjs/media/standard/basedir
-		 * Base directory used by all relative directory configuration options
-		 *
-		 * Usually, this is the directory of the document root of your virtual
-		 * host directory as all other directories are relative to that path.
-		 *
-		 * In case you would like to serve files from different domains, the
-		 * basedir option should be the common directory for those domains. If
-		 * e.g. your upload and mimetype directory are totally different, you
-		 * can also use the root directory of your file system ("/") as base
-		 * directory.
-		 *
-		 * @param string Absolute path to the base directory
-		 * @since 2014.03
-		 * @category Developer
-		 */
-		$basedir = $config->get( 'controller/extjs/media/standard/basedir', '.' );
-
-		/** controller/extjs/media/standard/upload/directory
-		 * Upload directory for files and preview images
-		 *
-		 * All uploaded files including the product or payment/delivery images
-		 * as well as the generated preview files are stored in sub-directories
-		 * of the upload directory.
-		 *
-		 * The upload directory must be relative to the "basedir" configuration
-		 * option. If
-		 *
-		 *  /var/www/test
-		 *
-		 * is the configured base directory and the upload directory should be
-		 * located in
-		 *
-		 *  /var/www/test/files/uploads
-		 *
-		 * then the configuration for the uploads directory must be
-		 *
-		 *  files/uploads
-		 *
-		 * Avoid leading and trailing slashes for the upload directory string!
-		 *
-		 * @param string Path relative to the base directory
-		 * @since 2014.03
-		 * @category Developer
-		 * @see controller/extjs/media/standard/basedir
-		 */
-		$uploaddir = $config->get( 'controller/extjs/media/standard/upload/directory', 'upload' );
-
-
 		$idList = array();
 		$ids = (array) $params->items;
 		$context = $this->getContext();
 		$manager = $this->getManager();
+		$fs = $context->getFilesystemManager()->get( 'fs-media' );
 
 
 		$search = $manager->createSearch();
@@ -112,19 +62,12 @@ class Standard
 		{
 			$idList[$item->getDomain()][] = $id;
 
-			if( is_file( $basedir . $item->getPreview() )
-				&& strcmp( ltrim( $uploaddir, '/' ), ltrim( $item->getPreview(), '/' ) ) !== 0
-				&& unlink( $basedir . $item->getPreview() ) === false
-			) {
-				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getPreview() );
-				$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
-			}
-
-			if( is_file( $basedir . $item->getUrl() ) && unlink( $basedir . $item->getUrl() ) === false )
+			try
 			{
-				$msg = sprintf( 'Deleting file "%1$s" failed', $basedir . $item->getUrl() );
-				$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
+				$fs->rm( $item->getUrl() );
+				$fs->rm( $item->getPreview() );
 			}
+			catch( \Exception $e ) {}
 		}
 
 		$manager->deleteItems( $ids );
@@ -165,6 +108,13 @@ class Standard
 	}
 
 
+	/**
+	 * Stores an uploaded file
+	 *
+	 * @param \stdClass $params Associative list of parameters
+	 * @return \stdClass Object with success value
+	 * @throws \Aimeos\Controller\ExtJS\Exception If an error occurs
+	 */
 	public function uploadItem( \stdClass $params )
 	{
 		$this->checkParams( $params, array( 'site', 'domain' ) );
@@ -229,20 +179,16 @@ class Standard
 
 		if( $mediaFile instanceof \Aimeos\MW\Media\Image\Iface )
 		{
-			$item->setPreview( $this->createImage( $mediaFile, 'preview', $params->domain, $fileinfo['tmp_name'], $filename ) );
-			$item->setUrl( $this->createImage( $mediaFile, 'files', $params->domain, $fileinfo['tmp_name'], $filename ) );
+			$item->setUrl( $this->storeImage( $mediaFile, 'files', $params->domain, $filename ) );
+			$item->setPreview( $this->storeImage( $mediaFile, 'preview', $params->domain, $filename ) );
 		}
 		else
 		{
+			$item->setUrl( $this->storeFile( $mediaFile, 'files', $params->domain, $filename ) );
 			$item->setPreview( $this->getMimeIcon( $mediaFile->getMimetype() ) );
-			$item->setUrl( $this->copyFile( $mediaFile, $params->domain, $filename ) );
 		}
 
-		if( unlink( $fileinfo['tmp_name'] ) === false )
-		{
-			$msg = sprintf( 'Deleting file "%1$s" failed', $fileinfo['tmp_name'] );
-			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
-		}
+		unlink( $fileinfo['tmp_name'] );
 
 
 		return (object) $item->toArray();
@@ -350,64 +296,6 @@ class Standard
 
 
 	/**
-	 * Returns the absolute directory for a given relative one.
-	 *
-	 * @param string $relativeDir Relative directory name
-	 * @throws \Aimeos\Controller\ExtJS\Exception If base directory is not available or the full directory couldn't be created
-	 */
-	protected function getAbsoluteDirectory( $relativeDir )
-	{
-		$config = $this->getContext()->getConfig();
-
-		if( ( $dir = $config->get( 'controller/extjs/media/standard/basedir', null ) ) === null ) {
-			throw new \Aimeos\Controller\ExtJS\Exception( 'No base directory configured' );
-		}
-
-		/** controller/extjs/media/standard/upload/dirperms
-		 * Directory permissions used when creating sub-directories
-		 *
-		 * Uploaded files are stored in sub-directories of the configured upload
-		 * directory depending on the domain (e.g. product, catalog, service,
-		 * etc.) and these directories can also contain more directories. Each
-		 * directory is created with the configured permissions.
-		 *
-		 * The representation of the permissions is in octal notation (using 0-7)
-		 * with a leading zero. The first number after the leading zero are the
-		 * permissions for the web server creating the directory, the second is
-		 * for the primary group of the web server and the last number represents
-		 * the permissions for everyone else.
-		 *
-		 * You should use 0775 or 0755 for the permissions as the web server needs
-		 * to write into the new directory and the files are publically available,
-		 * so it's not necessary to limit read access for everyone else. The group
-		 * permissions are important if you plan to upload files directly via FTP
-		 * or by other means because then the web server needs to be able to read
-		 * and manage those files. In this case use 0775 as permissions, otherwise
-		 * you can limit them to 0755.
-		 *
-		 * A more detailed description of the meaning of the Unix file permission
-		 * bits can be found in the Wikipedia article about
-		 * {@link https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation file system permissions}
-		 *
-		 * @param integer Octal Unix permission representation
-		 * @since 2014.03
-		 * @category Developer
-		 * @category User
-		 */
-		$perms = $config->get( 'controller/extjs/media/standard/upload/dirperms', 0775 );
-		$dir .= DIRECTORY_SEPARATOR . $relativeDir;
-
-		if( is_dir( $dir ) === false && @mkdir( $dir, $perms, true ) === false )
-		{
-			$msg = sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms );
-			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
-		}
-
-		return $dir;
-	}
-
-
-	/**
 	 * Returns the file extension for the given mime type.
 	 *
 	 * @param string $mimetype Mime type like "image/png"
@@ -448,30 +336,13 @@ class Standard
 		 * sub-directory and the specific name of the mime type (e.g. "jpeg")
 		 * as file name.
 		 *
-		 * The mime icon directory must be relative to the "basedir" configuration
-		 * option. If
-		 *
-		 *  /var/www/test
-		 *
-		 * is the configured base directory and the upload directory should be
-		 * located in
-		 *
-		 *  /var/www/test/media/mime
-		 *
-		 * then the configuration for the uploads directory must be
-		 *
-		 *  media/mime
-		 *
 		 * Avoid leading and trailing slashes for the upload directory string!
 		 *
-		 * @param string Path relative to the base directory
+		 * @param string Path or URL to the base directory
 		 * @since 2014.03
 		 * @category Developer
-		 * @see controller/extjs/media/standard/basedir
 		 */
-		if( ( $mimedir = $config->get( 'controller/extjs/media/standard/mimeicon/directory', null ) ) === null )
-		{
-			$this->getContext()->getLogger()->log( 'No directory for mime type images configured' );
+		if( ( $mimedir = $config->get( 'controller/extjs/media/standard/mimeicon/directory' ) ) == null ) {
 			return '';
 		}
 
@@ -489,29 +360,52 @@ class Standard
 		 * @category Developer
 		 */
 		$ext = $config->get( 'controller/extjs/media/standard/mimeicon/extension', '.png' );
-		$abspath = $this->getAbsoluteDirectory( $mimedir ) . DIRECTORY_SEPARATOR . $mimetype . $ext;
-		$mimeicon = $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext;
 
-		if( is_file( $abspath ) === false ) {
-			$mimeicon = $mimedir . DIRECTORY_SEPARATOR . 'unknown' . $ext;
-		}
-
-		return $mimeicon;
+		return $mimedir . DIRECTORY_SEPARATOR . $mimetype . $ext;
 	}
 
 
 	/**
-	 * Creates a scaled image and returns it's new file name.
+	 * Stores a binary file and returns it's new relative file name
 	 *
 	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
 	 * @param string $type Type of the image like "preview" or "files"
 	 * @param string $domain Domain the image belongs to, e.g. "product", "attribute", etc.
-	 * @param string $src Path to original file
 	 * @param string $filename Name of the new file without file extension
 	 * @return string Relative path to the new file
-	 * @throws \Aimeos\Controller\ExtJS\Exception If the configuration is invalid or due to insufficient permissions
+	 * @throws \Aimeos\Controller\ExtJS\Exception If an error occurs
 	 */
-	protected function createImage( \Aimeos\MW\Media\Image\Iface $mediaFile, $type, $domain, $src, $filename )
+	protected function storeFile( \Aimeos\MW\Media\Image\Iface $mediaFile, $type, $domain, $filename )
+	{
+		if( ( $file = tempnam( sys_get_temp_dir(), 'ai' ) ) === false )
+		{
+			$msg = sprintf( 'Unable to create file in "%1$s"', sys_get_temp_dir() );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
+		}
+
+		$mediaFile->save( $file, $mediaFile->getMimetype() );
+
+		$fileext = $this->getFileExtension( $mediaFile->getMimetype() );
+		$dest = "${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
+
+		$this->storeRemote( 'fs-media', $dest, $file );
+		unlink( $file );
+
+		return $dest;
+	}
+
+
+	/**
+	 * Stores a scaled image and returns it's new file name.
+	 *
+	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
+	 * @param string $type Type of the image like "preview" or "files"
+	 * @param string $domain Domain the image belongs to, e.g. "product", "attribute", etc.
+	 * @param string $filename Name of the new file without file extension
+	 * @return string Relative path to the new file
+	 * @throws \Aimeos\Controller\ExtJS\Exception If an error occurs
+	 */
+	protected function storeImage( \Aimeos\MW\Media\Image\Iface $mediaFile, $type, $domain, $filename )
 	{
 		$mimetype = $mediaFile->getMimetype();
 		$config = $this->getContext()->getConfig();
@@ -553,16 +447,6 @@ class Standard
 				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'No allowed image types configured for "%1$s"', $type ) );
 			}
 		}
-
-
-		if( ( $mediadir = $config->get( 'controller/extjs/media/standard/upload/directory', null ) ) === null ) {
-			throw new \Aimeos\Controller\ExtJS\Exception( 'No media directory configured' );
-		}
-
-		$ds = DIRECTORY_SEPARATOR;
-		$fileext = $this->getFileExtension( $mimetype );
-		$filepath = $mediadir . $ds . $type . $ds . $domain . $ds . $filename[0] . $ds . $filename[1];
-		$dest = $this->getAbsoluteDirectory( $filepath ) . $ds . $filename . $fileext;
 
 
 		/** controller/extjs/media/standard/files/maxwidth
@@ -639,79 +523,22 @@ class Standard
 		 */
 		$maxheight = $config->get( 'controller/extjs/media/standard/' . $type . '/maxheight', null );
 
+
+		if( ( $file = tempnam( sys_get_temp_dir(), 'ai' ) ) === false )
+		{
+			$msg = sprintf( 'Unable to create file in "%1$s"', sys_get_temp_dir() );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
+		}
+
 		$mediaFile->scale( $maxwidth, $maxheight );
-		$mediaFile->save( $dest, $mimetype );
+		$mediaFile->save( $file, $mimetype );
 
+		$fileext = $this->getFileExtension( $mimetype );
+		$dest = "${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
 
-		/** controller/extjs/media/standard/upload/fileperms
-		 * File permissions used when storing uploaded or created files
-		 *
-		 * The representation of the permissions is in octal notation (using 0-7)
-		 * with a leading zero. The first number after the leading zero are the
-		 * permissions for the web server creating the directory, the second is
-		 * for the primary group of the web server and the last number represents
-		 * the permissions for everyone else.
-		 *
-		 * You should use 0775 or 0755 for the permissions as the web server needs
-		 * to manage the files and they are publically available, so it's not
-		 * necessary to limit read access for everyone else. The group permissions
-		 * are important if you plan to upload files directly via FTP or by other
-		 * means because then the web server needs to be able to read and manage
-		 * those files. In this case use 0775 as permissions, otherwise you can
-		 * limit them to 0755.
-		 *
-		 * A more detailed description of the meaning of the Unix file permission
-		 * bits can be found in the Wikipedia article about
-		 * {@link https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation file system permissions}
-		 *
-		 * @param integer Octal Unix permission representation
-		 * @since 2014.03
-		 * @category Developer
-		 * @category User
-		 */
-		$perms = $config->get( 'controller/extjs/media/standard/upload/fileperms', 0664 );
+		$this->storeRemote( 'fs-media', $dest, $file );
+		unlink( $file );
 
-		if( chmod( $dest, $perms ) === false )
-		{
-			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
-			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
-		}
-
-		return "${mediadir}/${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
-	}
-
-
-	/**
-	 * Copies the given file to a new location.
-	 *
-	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
-	 * @param unknown_type $domain Domain the image belongs to, e.g. "product", "attribute", etc.
-	 * @param string $filename Name of the new file without file extension
-	 * @throws \Aimeos\Controller\ExtJS\Exception If the configuration is invalid or due to insufficient permissions
-	 */
-	protected function copyFile( \Aimeos\MW\Media\Iface $mediaFile, $domain, $filename )
-	{
-		$config = $this->getContext()->getConfig();
-
-		if( ( $mediadir = $config->get( 'controller/extjs/media/standard/upload/directory', null ) ) === null ) {
-				throw new \Aimeos\Controller\ExtJS\Exception( 'No media directory configured' );
-		}
-
-		$ds = DIRECTORY_SEPARATOR;
-		$fileext = $this->getFileExtension( $mediaFile->getMimetype() );
-		$filepath = $mediadir . $ds . 'files' . $ds . $domain . $ds . $filename[0] . $ds . $filename[1];
-		$dest = $this->getAbsoluteDirectory( $filepath ) . $ds . $filename . $fileext;
-
-		$mediaFile->save( $dest, $mediaFile->getMimetype() );
-
-		$perms = $config->get( 'controller/extjs/media/standard/upload/fileperms', 0664 );
-
-		if( chmod( $dest, $perms ) === false )
-		{
-			$msg = sprintf( 'Changing file permissions for "%1$s" to "%2$o" failed', $dest, $perms );
-			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
-		}
-
-		return "${mediadir}/files/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
+		return $dest;
 	}
 }

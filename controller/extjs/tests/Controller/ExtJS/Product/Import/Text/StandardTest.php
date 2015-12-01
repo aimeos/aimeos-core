@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
-		$params->items = $filename;
+		$params->items = basename( $filename );
 
 		$this->object->importFile( $params );
 
@@ -159,12 +159,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$params = new \stdClass();
-		$params->items = $this->testfile;
+		$params->items = basename( $this->testfile );
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 
 		$result = $this->object->uploadFile( $params );
 
-		$this->assertTrue( file_exists( $result['items'] ) );
+		$this->assertTrue( file_exists( $this->testdir . DIRECTORY_SEPARATOR . $result['items'] ) );
 		unlink( $result['items'] );
 
 		$params = (object) array(

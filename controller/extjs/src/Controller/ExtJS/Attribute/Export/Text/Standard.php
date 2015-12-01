@@ -95,61 +95,6 @@ class Standard
 
 		$config = $context->getConfig();
 
-		/** controller/extjs/attribute/export/text/standard/exportdir
-		 * Directory where exported files of attribute texts are stored
-		 *
-		 * All exported files are stored in this file system directory directory.
-		 *
-		 * The export directory must be relative to the "basedir" configuration
-		 * option. If
-		 *
-		 *  /var/www/test
-		 *
-		 * is the configured base directory and the export directory should be
-		 * located in
-		 *
-		 *  /var/www/test/htdocs/files/exports
-		 *
-		 * then the configuration for the export directory must be
-		 *
-		 *  htdocs/files/exports
-		 *
-		 * Avoid leading and trailing slashes for the export directory string!
-		 *
-		 * @param string Relative path in the file system
-		 * @since 2014.03
-		 * @category Developer
-		 * @see controller/extjs/media/standard/basedir
-		 */
-		$dir = $config->get( 'controller/extjs/attribute/export/text/standard/exportdir', 'uploads' );
-
-		/** controller/extjs/attribute/export/text/standard/dirperms
-		 * Directory permissions used when creating the directory if it doesn't exist
-		 *
-		 * The representation of the permissions is in octal notation (using 0-7)
-		 * with a leading zero. The first number after the leading zero are the
-		 * permissions for the web server creating the directory, the second is
-		 * for the primary group of the web server and the last number represents
-		 * the permissions for everyone else.
-		 *
-		 * You should use 0700 for the permissions as the web server needs
-		 * to write into the new directory but the files shouldn't be publicall
-		 * available. The group permissions are only important if you plan to
-		 * retrieve the files directly via FTP or by other means because then
-		 * you need to be able to read and manage those files. In this case use
-		 * 0770 as permissions.
-		 *
-		 * A more detailed description of the meaning of the Unix file permission
-		 * bits can be found in the Wikipedia article about
-		 * {@link https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation file system permissions}
-		 *
-		 * @param integer Octal Unix permission representation
-		 * @since 2014.03
-		 * @category Developer
-		 * @category User
-		 */
-		$perms = $config->get( 'controller/extjs/attribute/export/text/standard/dirperms', 0700 );
-
 		/** controller/extjs/attribute/export/text/standard/downloaddir
 		 * Directory where the exported files can be found through the web
 		 *
@@ -177,16 +122,11 @@ class Standard
 		$downloaddir = $config->get( 'controller/extjs/attribute/export/text/standard/downloaddir', 'uploads' );
 
 		$foldername = 'attribute-text-export_' . date( 'Y-m-d_H:i:s' ) . '_' . md5( time() . getmypid() );
-		$tmpfolder = $dir . DIRECTORY_SEPARATOR . $foldername;
+		$tmppath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $foldername;
 
-		if( is_dir( $dir ) === false && mkdir( $dir, $perms, true ) === false ) {
-			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Couldn\'t create directory "%1$s" with permissions "%2$o"', $dir, $perms ) );
-		}
-
-		$context->getLogger()->log( sprintf( 'Create export directory for attribute IDs: %1$s', implode( ',', $items ) ), \Aimeos\MW\Logger\Base::DEBUG );
-
-		$filename = $this->exportData( $items, $lang, $tmpfolder );
-		$downloadFile = $downloaddir . DIRECTORY_SEPARATOR . basename( $filename );
+		$filename = $this->exportData( $items, $lang, $tmppath );
+		$downloadFile = $downloaddir . '/' . basename( $filename );
+		$this->storeRemote( basename( $filename ), $filename );
 
 		return array(
 			'file' => '<a href="' . $downloadFile . '">' . $context->getI18n()->dt( 'controller/extjs', 'Download' ) . '</a>',

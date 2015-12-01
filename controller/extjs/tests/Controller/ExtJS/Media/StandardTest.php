@@ -132,11 +132,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$mediaItem = $this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
-		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
-		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
+		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
+		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
 
-		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.preview'} ) );
-		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.preview'} );
+		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.preview'} ) );
+		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.preview'} );
 	}
 
 	public function testUploadPdf()
@@ -149,11 +149,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$mediaItem = $this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
-		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
-		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
+		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
+		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
 
 		// No mime icons in file system available, so it will be unknown.png
-		$this->assertEquals( 'tmp/media/mimeicons/unknown.png', $mediaItem->{'media.preview'} );
+		$this->assertEquals( 'tmp/media/mimeicons/application/pdf.png', $mediaItem->{'media.preview'} );
 	}
 
 	public function testUploadBinary()
@@ -166,10 +166,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$mediaItem = $this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
-		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
-		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
+		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
+		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
 
-		$this->assertEquals( 'tmp/media/mimeicons/unknown.png', $mediaItem->{'media.preview'} );
+		$this->assertEquals( 'tmp/media/mimeicons/application/octet-stream.png', $mediaItem->{'media.preview'} );
 	}
 
 
@@ -199,23 +199,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testProtectedCreateImageExceptionByUploadItem()
-	{
-		$context = \TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/standard/upload/directory', null );
-		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
-
-		$_FILES['unittest'] = array(
-			'name' => 'test-jpeg.jpg',
-			'tmp_name' => $this->directory . '/testfiles/test.jpeg',
-			'error' => UPLOAD_ERR_OK,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' ); // no upload directory
-		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
-	}
-
-
 	public function testProtectedGetMimeIconEmptyByUploadItem()
 	{
 		$context = \TestHelper::getContext();
@@ -231,49 +214,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$mediaItem = $object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
-		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
-		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
+		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
+		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
 
 		$this->assertEquals( '', $mediaItem->{'media.preview'} );
-	}
-
-
-
-	public function testProtectedGetAbsoluteDirectoryEmptyByUploadItem()
-	{
-		$context = \TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/standard/basedir', null );
-		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
-
-		$_FILES['unittest'] = array(
-			'name' => 'test-binary.bin',
-			'tmp_name' => $this->directory . '/testfiles/test.bin',
-			'error' => UPLOAD_ERR_OK,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
-
-	}
-
-
-	public function testProtectedGetAbsoluteDirectoryErrorByUploadItem()
-	{
-		$context = \TestHelper::getContext();
-
-		$context->getConfig()->set( 'controller/extjs/media/standard/basedir', '/root/' );
-		$context->getConfig()->set( 'controller/extjs/media/standard/mimeicon/directory', '/2/' );
-
-		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
-
-		$_FILES['unittest'] = array(
-			'name' => 'test-binary.bin',
-			'tmp_name' => $this->directory . '/testfiles/test.bin',
-			'error' => UPLOAD_ERR_OK,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 
 
@@ -287,28 +231,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$mediaItem = $this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 
-		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
-		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
+		$this->assertTrue( is_file( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} ) );
+		unlink( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . $mediaItem->{'media.url'} );
 
-		$this->assertEquals( 'tmp/media/mimeicons/unknown.png', $mediaItem->{'media.preview'} );
-	}
-
-
-	public function testProtectedCopyFileExceptionByUploadBinary()
-	{
-		$context = \TestHelper::getContext();
-		$context->getConfig()->set( 'controller/extjs/media/standard/upload/directory', null );
-
-		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
-
-		$_FILES['unittest'] = array(
-			'name' => 'testbin',
-			'tmp_name' => $this->directory . '/testfiles/testbin',
-			'error' => UPLOAD_ERR_OK,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
+		$this->assertEquals( 'tmp/media/mimeicons/application/octet-stream.png', $mediaItem->{'media.preview'} );
 	}
 
 

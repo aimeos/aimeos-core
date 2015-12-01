@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$params = new \stdClass();
 		$params->site = $this->context->getLocale()->getSite()->getCode();
-		$params->items = $filename;
+		$params->items = basename( $filename );
 
 		$this->object->importFile( $params );
 
@@ -160,12 +160,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$params = new \stdClass();
-		$params->items = $this->testdir . DIRECTORY_SEPARATOR . 'file.txt';
+		$params->items = 'file.txt';
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 
 		$result = $this->object->uploadFile( $params );
 
-		$this->assertTrue( file_exists( $result['items'] ) );
+		$this->assertTrue( file_exists( $this->testdir . DIRECTORY_SEPARATOR . $result['items'] ) );
 		unlink( $result['items'] );
 
 		$params = (object) array(
@@ -351,7 +351,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
 
 		$params = new \stdClass();
-		$params->items = $this->testdir . DIRECTORY_SEPARATOR . 'file.txt';
+		$params->items = 'file.txt';
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 
 		$_FILES['unittest'] = array(
@@ -419,7 +419,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
 
 		$params = new \stdClass();
-		$params->items = $this->testfile;
+		$params->items = basename( $this->testfile );
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 
 		return array( $params, $object );

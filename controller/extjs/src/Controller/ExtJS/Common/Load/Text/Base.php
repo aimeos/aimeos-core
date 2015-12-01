@@ -464,4 +464,76 @@ abstract class Base
 
 		return \Aimeos\MW\Container\Factory::getContainer( $resource, $type, $format, $options );
 	}
+
+
+	/**
+	 * Stores a remote file in the local file system
+	 *
+	 * @param string $path Remote file path
+	 * @param string|null $filename Local file path or null to generate a file name
+	 * @return string Path to the new file
+	 * @throws \Aimeos\Controller\ExtJS\Exception If an error occurs
+	 */
+	protected function storeLocal( $path, $filename = null )
+	{
+		if( $filename === null && ( $filename = tempnam( sys_get_temp_dir(), 'ai' ) ) === false )
+		{
+			$msg = sprintf( 'Unable to create file in "%1$s"', sys_get_temp_dir() );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
+		}
+
+		if( ( $handle = fopen( $filename, 'w' ) ) === false ) {
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Couldn\'t open file "%1$s"', $filename ) );
+		}
+
+		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-admin' );
+		$stream = $fs->reads( $path );
+
+		do
+		{
+			if( ( $content = @stream_get_contents( $stream, 1048576 ) ) === false ) {
+				throw new Exception( sprintf( 'Couldn\'t read from stream for "%1$s"', $path ) );
+			}
+
+			if( @fwrite( $handle, $content ) === false ) {
+				throw new Exception( sprintf( 'Couldn\'t write to stream for "%1$s"', $path ) );
+			}
+		}
+		while( $content !== '' );
+
+		fclose( $handle );
+
+		if( is_resource( $stream ) ) {
+			fclose( $stream );
+		}
+
+		return $filename;
+	}
+
+
+	/**
+	 * Stores a local file in the remote file system
+	 *
+	 * @param string $path Remote file path
+	 * @param string $filename Local file path
+	 * @throws \Aimeos\Controller\ExtJS\Exception If an error occurs
+	 */
+	protected function storeRemote( $path, $filename )
+	{
+		if( ( $handle = fopen( $filename, 'r' ) ) === false ) {
+			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Couldn\'t open file "%1$s"', $filename ) );
+		}
+
+		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-admin' );
+
+		if( $fs->isDir( dirname( $path ) ) === false ) {
+			$fs->mkdir( dirname( $path ) );
+		}
+
+		$fs->writes( $path, $handle );
+
+		if( is_resource( $handle ) ) {
+			fclose( $handle );
+		}
+	}
 }

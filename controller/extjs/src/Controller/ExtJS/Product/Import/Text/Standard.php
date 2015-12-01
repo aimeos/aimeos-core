@@ -50,18 +50,6 @@ class Standard
 
 		$config = $this->getContext()->getConfig();
 
-		/** controller/extjs/product/import/text/standard/uploaddir
-		 * Upload directory for text files that should be imported
-		 *
-		 * The upload directory must be an absolute path. Avoid a trailing slash
-		 * at the end of the upload directory string!
-		 *
-		 * @param string Absolute path including a leading slash
-		 * @since 2014.03
-		 * @category Developer
-		 */
-		$dir = $config->get( 'controller/extjs/product/import/text/standard/uploaddir', 'uploads' );
-
 		/** controller/extjs/product/import/text/standard/enablecheck
 		 * Enables checking uploaded files if they are valid and not part of an attack
 		 *
@@ -78,43 +66,8 @@ class Standard
 		}
 
 		$fileext = pathinfo( $fileinfo['name'], PATHINFO_EXTENSION );
-		$dest = $dir . DIRECTORY_SEPARATOR . md5( $fileinfo['name'] . time() . getmypid() ) . '.' . $fileext;
-
-		if( rename( $fileinfo['tmp_name'], $dest ) !== true )
-		{
-			$msg = sprintf( 'Uploaded file "%1$s" could not be moved to "%2$s" in upload directory', $fileinfo['tmp_name'], $dest );
-			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
-		}
-
-		/** controller/extjs/product/import/text/standard/fileperms
-		 * File permissions used when storing uploaded files
-		 *
-		 * The representation of the permissions is in octal notation (using 0-7)
-		 * with a leading zero. The first number after the leading zero are the
-		 * permissions for the web server creating the directory, the second is
-		 * for the primary group of the web server and the last number represents
-		 * the permissions for everyone else.
-		 *
-		 * You should use 0660 or 0600 for the permissions as the web server needs
-		 * to manage the files. The group permissions are important if you plan
-		 * to upload files directly via FTP or by other means because then the
-		 * web server needs to be able to read and manage those files. In this
-		 * case use 0660 as permissions, otherwise you can limit them to 0600.
-		 *
-		 * A more detailed description of the meaning of the Unix file permission
-		 * bits can be found in the Wikipedia article about
-		 * {@link https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation file system permissions}
-		 *
-		 * @param integer Octal Unix permission representation
-		 * @since 2014.03
-		 * @category Developer
-		 */
-		$perms = $config->get( 'controller/extjs/product/import/text/standard/fileperms', 0660 );
-		if( chmod( $dest, $perms ) !== true )
-		{
-			$msg = sprintf( 'Could not set permissions "%1$s" for file "%2$s"', $perms, $dest );
-			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
-		}
+		$dest = md5( $fileinfo['name'] . time() . getmypid() ) . '.' . $fileext;
+		$this->storeRemote( $dest, $fileinfo['tmp_name'] );
 
 		$result = (object) array(
 			'site' => $params->site,
@@ -155,6 +108,8 @@ class Standard
 
 		foreach( $items as $path )
 		{
+			$tmpfile = $this->storeLocal( $path );
+
 			/** controller/extjs/product/import/text/standard/container/type
 			 * Container file type storing all language files of the texts to import
 			 *
@@ -218,7 +173,7 @@ class Standard
 			 * @category User
 			 * @see controller/extjs/product/import/text/standard/container/format
 			 */
-			$container = $this->createContainer( $path, 'controller/extjs/product/import/text/standard/container' );
+			$container = $this->createContainer( $tmpfile, 'controller/extjs/product/import/text/standard/container' );
 
 			$textTypeMap = array();
 			foreach( $this->getTextTypes( 'product' ) as $item ) {
@@ -229,7 +184,10 @@ class Standard
 				$this->importTextsFromContent( $content, $textTypeMap, 'product' );
 			}
 
-			unlink( $path );
+			unlink( $tmpfile );
+
+			$fs = $this->getContext()->getFilesystemManager()->get( 'fs-admin' );
+			$fs->rm( $path );
 		}
 
 		return array(

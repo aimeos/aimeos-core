@@ -13,7 +13,6 @@ return array(
 				'text' => array(
 					'standard' => array(
 						'enablecheck' => false,
-						'exportdir' => PATH_TESTS . '/tmp',
 						'downloaddir' => PATH_TESTS . '/tmp',
 					),
 				),
@@ -22,7 +21,6 @@ return array(
 				'text' => array(
 					'standard' => array(
 						'enablecheck' => false,
-						'uploaddir' => PATH_TESTS . '/tmp',
 					),
 				),
 			),
@@ -32,7 +30,6 @@ return array(
 				'text' => array(
 					'standard' => array(
 						'enablecheck' => false,
-						'exportdir' => PATH_TESTS . '/tmp',
 						'downloaddir' => PATH_TESTS . '/tmp',
 					),
 				),
@@ -41,7 +38,6 @@ return array(
 				'text' => array(
 					'standard' => array(
 						'enablecheck' => false,
-						'uploaddir' => PATH_TESTS . '/tmp',
 					),
 				),
 			),
@@ -51,7 +47,6 @@ return array(
 				'text' => array(
 					'standard' => array(
 						'enablecheck' => false,
-						'exportdir' => PATH_TESTS . '/tmp',
 						'downloaddir' => PATH_TESTS . '/tmp',
 					),
 				),
@@ -60,7 +55,6 @@ return array(
 				'text' => array(
 					'standard' => array(
 						'enablecheck' => false,
-						'uploaddir' => PATH_TESTS . '/tmp',
 					),
 				),
 			),
@@ -68,16 +62,8 @@ return array(
 		'media' => array(
 			'standard' => array(
 				'enablecheck' => false,
-				'basedir' => PATH_TESTS,
-				'upload' => array(
-					'directory' => 'tmp/media/testdir',
-				),
 				'mimeicon' => array(
 					'directory' => 'tmp/media/mimeicons',
-				),
-				'command' => array(
-					'file' => 'file -b --mime-type %1$s',
-					'identify' => 'identify -quiet -format "%%m" %1$s 2>/dev/null',
 				),
 			),
 		),
