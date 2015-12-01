@@ -375,7 +375,7 @@ class Standard
 	 * @return string Relative path to the new file
 	 * @throws \Aimeos\Controller\ExtJS\Exception If an error occurs
 	 */
-	protected function storeFile( \Aimeos\MW\Media\Image\Iface $mediaFile, $type, $domain, $filename )
+	protected function storeFile( \Aimeos\MW\Media\Iface $mediaFile, $type, $domain, $filename )
 	{
 		if( ( $file = tempnam( sys_get_temp_dir(), 'ai' ) ) === false )
 		{
