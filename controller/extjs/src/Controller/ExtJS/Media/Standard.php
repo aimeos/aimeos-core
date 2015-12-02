@@ -377,19 +377,11 @@ class Standard
 	 */
 	protected function storeFile( \Aimeos\MW\Media\Iface $mediaFile, $type, $domain, $filename )
 	{
-		if( ( $file = tempnam( sys_get_temp_dir(), 'ai' ) ) === false )
-		{
-			$msg = sprintf( 'Unable to create file in "%1$s"', sys_get_temp_dir() );
-			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
-		}
-
-		$mediaFile->save( $file, $mediaFile->getMimetype() );
-
 		$fileext = $this->getFileExtension( $mediaFile->getMimetype() );
 		$dest = "${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
 
 		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-media' );
-		$fs->writef( $dest, $file );
+		$fs->writef( $dest, $mediaFile->getFilepath() );
 
 		unlink( $file );
 
@@ -526,7 +518,22 @@ class Standard
 		$maxheight = $config->get( 'controller/extjs/media/standard/' . $type . '/maxheight', null );
 
 
-		if( ( $file = tempnam( sys_get_temp_dir(), 'ai' ) ) === false )
+		/** controller/extjs/media/default/tempdir
+		 * Directory for storing temporary files
+		 *
+		 * To scale images, temporary files must be created. This configuration
+		 * option should point to a directory where the application can store
+		 * generated files. If not configured, the temp directory of the
+		 * operating system will be used.
+		 *
+		 * @param string Absolute path to the temp directory
+		 * @since 2016.01
+		 * @category Developer
+		 */
+		$tempdir = $config->get( 'controller/extjs/media/default/tempdir', sys_get_temp_dir() );
+
+
+		if( ( $file = tempnam( $tempdir, 'ai' ) ) === false )
 		{
 			$msg = sprintf( 'Unable to create file in "%1$s"', sys_get_temp_dir() );
 			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
