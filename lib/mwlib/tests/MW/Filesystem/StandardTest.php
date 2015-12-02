@@ -11,7 +11,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->basedir = dirname( dirname( __DIR__ ) ) . '/tmp/';
+		$this->basedir = __DIR__ . '/../../tmp/';
 		$this->object = new \Aimeos\MW\Filesystem\Standard( array( 'basedir' => $this->basedir ) );
 	}
 
@@ -177,6 +177,25 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testReadf()
+	{
+		file_put_contents( $this->basedir . 'file77', 'test' );
+
+		$result = $this->object->readf( 'file77' );
+
+		$this->assertTrue( file_exists( $result ) );
+
+		unlink( $result );
+	}
+
+
+	public function testReadfException()
+	{
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->object->readf( 'readinvalid' );
+	}
+
+
 	public function testReads()
 	{
 		file_put_contents( $this->basedir . 'file8', 'test' );
@@ -213,6 +232,28 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->write( '', 'test' );
+	}
+
+
+	public function testWritef()
+	{
+		$file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'file99';
+		file_put_contents( $file, 'test' );
+
+		$this->object->writef( 'file99', $file );
+
+		$result = file_get_contents( $this->basedir . 'file99' );
+		unlink( $this->basedir . 'file99' );
+		unlink( $file );
+
+		$this->assertEquals( 'test', $result );
+	}
+
+
+	public function testWritefException()
+	{
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->object->writef( '', 'test' );
 	}
 
 

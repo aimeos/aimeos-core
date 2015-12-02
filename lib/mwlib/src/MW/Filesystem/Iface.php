@@ -53,20 +53,29 @@ interface Iface
 	public function has( $path );
 
 	/**
-	 * Returns the content of the file
+	 * Returns the content of the remote file
 	 *
 	 * This method should only be used for small files as the content will be
 	 * held in memory. Using it for bigger files may lead to out of memory
 	 * conditions. The reads() method can cope with files of all sizes.
 	 *
-	 * @param string $path Path to the file
+	 * @param string $path Path to the remote file
 	 * @return string File content
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function read( $path );
 
 	/**
-	 * Returns the stream descriptor for the file
+	 * Reads the content of the remote file and writes it to a local one
+	 *
+	 * @param string $path Path to the remote file
+	 * @return string Path of the local file
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function readf( $path );
+
+	/**
+	 * Returns the stream descriptor for the remote file
 	 *
 	 * Reading from a file stream is the better alternative for files bigger
 	 * than a few kilobyte. To read from a file in stream mode and write it to
@@ -93,7 +102,7 @@ interface Iface
 	 * Checking if "$readhandle" is a resource is necessary to avoid errors
 	 * because some drivers will close the handle automatically!
 	 *
-	 * @param string $path Path to the file
+	 * @param string $path Path to the remote file
 	 * @return resource File stream descriptor
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
@@ -102,15 +111,27 @@ interface Iface
 	/**
 	 * Writes the given content to the file
 	 *
-	 * If the file already exists, the its content will be overwritten. This
+	 * If the file already exists, its content will be overwritten. This
 	 * method is only suited for smaller files.
 	 *
-	 * @param string $path Path to the file
+	 * @param string $path Path to the remote file
 	 * @param string $content New file content
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */
 	public function write( $path, $content );
+
+	/**
+	 * Writes the content of the local file to the remote path
+	 *
+	 * If the local file already exists, its content will be overwritten.
+	 *
+	 * @param string $path Path to the remote file
+	 * @param string $file Path to the local file
+	 * @return void
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function writef( $path, $file );
 
 	/**
 	 * Write the content of the stream descriptor into the remote file
@@ -133,7 +154,7 @@ interface Iface
 	 * Checking if "$readhandle" is a resource is necessary to avoid errors
 	 * because some drivers will close the handle automatically!
 	 *
-	 * @param string $path Path to the file
+	 * @param string $path Path to the remote file
 	 * @param resource $stream File stream descriptor
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs

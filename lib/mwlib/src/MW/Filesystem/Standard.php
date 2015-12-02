@@ -20,6 +20,7 @@ namespace Aimeos\MW\Filesystem;
 class Standard implements Iface, DirIface, MetaIface
 {
 	private $basedir;
+	private $tempdir;
 
 
 	/**
@@ -29,9 +30,25 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function __construct( array $config )
 	{
-		if( isset( $config['basedir'] ) ) {
-			$this->basedir = rtrim( $config['basedir'], '/' ) . '/';
+		if( !isset( $config['tempdir'] ) ) {
+			$config['tempdir'] = sys_get_temp_dir();
 		}
+
+		if( !is_dir( $config['tempdir'] ) && mkdir( $config['tempdir'], 0755, true ) === false ) {
+			throw new Exception( sprintf( 'Directory "%1$s" could not be created', $config['tempdir'] ) );
+		}
+
+		if( !isset( $config['basedir'] ) ) {
+			throw new Exception( sprintf( 'Configuration option "%1$s" missing', 'basedir' ) );
+		}
+
+		if( !is_dir( $config['basedir'] ) && mkdir( $config['basedir'], 0755, true ) === false ) {
+			throw new Exception( sprintf( 'Directory "%1$s" could not be created', $config['basedir'] ) );
+		}
+
+		$ds = DIRECTORY_SEPARATOR;
+		$this->basedir = realpath( str_replace( '/', $ds, rtrim( $config['basedir'], '/' ) ) ) . $ds;
+		$this->tempdir = realpath( str_replace( '/', $ds, rtrim( $config['tempdir'], '/' ) ) ) . $ds;
 	}
 
 
@@ -44,7 +61,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function isdir( $path )
 	{
-		return is_dir( $this->basedir . $path );
+		return is_dir( $this->resolve( $path ) );
 	}
 
 
@@ -57,10 +74,8 @@ class Standard implements Iface, DirIface, MetaIface
 	*/
 	public function mkdir( $path )
 	{
-		$path = $this->basedir . $path;
-
-		if( @mkdir( $path, 0775, true ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t create directory "%1$s"', $this->basedir . $path ) );
+		if( @mkdir( $this->resolve( $path ), 0775, true ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t create directory "%1$s"', $path ) );
 		}
 	}
 
@@ -74,8 +89,8 @@ class Standard implements Iface, DirIface, MetaIface
 	*/
 	public function rmdir( $path )
 	{
-		if( @rmdir( $this->basedir . $path ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t remove directory "%1$s"', $this->basedir . $path ) );
+		if( @rmdir( $this->resolve( $path ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t remove directory "%1$s"', $path ) );
 		}
 	}
 
@@ -92,7 +107,7 @@ class Standard implements Iface, DirIface, MetaIface
 	public function scan( $path = null )
 	{
 		try {
-			return new \DirectoryIterator( $this->basedir . $path );
+			return new \DirectoryIterator( $this->resolve( $path ) );
 		} catch( \Exception $e ) {
 			throw new Exception( $e->getMessage(), 0, $e );
 		}
@@ -108,8 +123,8 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function size( $path )
 	{
-		if( ( $size = @filesize( $this->basedir . $path ) ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t get file size for "%1$s"', $this->basedir . $path ) );
+		if( ( $size = @filesize( $this->resolve( $path ) ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t get file size for "%1$s"', $path ) );
 		}
 
 		return $size;
@@ -125,8 +140,8 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function time( $path )
 	{
-		if( ( $time = @filemtime( $this->basedir . $path ) ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t get file time for "%1$s"', $this->basedir . $path ) );
+		if( ( $time = @filemtime( $this->resolve( $path ) ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t get file time for "%1$s"', $path ) );
 		}
 
 		return $time;
@@ -142,8 +157,8 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function rm( $path )
 	{
-		if( @unlink( $this->basedir . $path ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t delete file "%1$s"', $this->basedir . $path ) );
+		if( @unlink( $this->resolve( $path ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t delete file "%1$s"', $path ) );
 		}
 	}
 
@@ -156,7 +171,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function has( $path )
 	{
-		return file_exists( $this->basedir . $path );
+		return file_exists( $this->resolve( $path ) );
 	}
 
 
@@ -171,11 +186,32 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function read( $path )
 	{
-		if( ( $content = @file_get_contents( $this->basedir . $path ) ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $this->basedir . $path ) );
+		if( ( $content = @file_get_contents( $this->resolve( $path ) ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $path ) );
 		}
 
 		return $content;
+	}
+
+
+	/**
+	 * Reads the content of the remote file and writes it to a local one
+	 *
+	 * @param string $path Path to the remote file
+	 * @return string Path of the local file
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function readf( $path )
+	{
+		if( ( $filename = tempnam( $this->tempdir, 'ai-' ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to create file in "%1$s"', $this->tempdir ) );
+		}
+
+		if( @copy( $this->resolve( $path ), $filename ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t copy file from "%1$s" to "%2$s"', $path, $filename ) );
+		}
+
+		return $filename;
 	}
 
 
@@ -190,8 +226,8 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function reads( $path )
 	{
-		if( ( $handle = @fopen( $this->basedir . $path, 'r' ) ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $this->basedir . $path ) );
+		if( ( $handle = @fopen( $this->resolve( $path ), 'r' ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t read file "%1$s"', $path ) );
 		}
 
 		return $handle;
@@ -210,9 +246,35 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function write( $path, $content )
 	{
-		if( @file_put_contents( $this->basedir . $path, $content ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t write file "%1$s"', $this->basedir . $path ) );
+		if( !$this->isDir( dirname( $path ) ) ) {
+			$this->mkdir( dirname( $path ) );
 		}
+
+		if( @file_put_contents( $this->resolve( $path ), $content ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t write file "%1$s"', $path ) );
+		}
+	}
+
+
+	/**
+	 * Writes the content of the local file to the remote path
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @param string $path Path to the remote file
+	 * @param string $file Path to the local file
+	 * @return void
+	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
+	 */
+	public function writef( $path, $local )
+	{
+		if( ( $handle = @fopen( $local, 'r' ) ) === false ) {
+			throw new Exception( sprintf( 'Unable to open file "%1$s"', $local ) );
+		}
+
+		$this->writes( $path, $handle );
+
+		fclose( $handle );
 	}
 
 
@@ -228,21 +290,19 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function writes( $path, $stream )
 	{
-		if( ( $handle = @fopen( $this->basedir . $path, 'w' ) ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t open file "%1$s"', $this->basedir . $path ) );
+		if( !$this->isDir( dirname( $path ) ) ) {
+			$this->mkdir( dirname( $path ) );
 		}
 
-		do
-		{
-			if( ( $content = @stream_get_contents( $stream, 1048576 ) ) === false ) {
-				throw new Exception( sprintf( 'Couldn\'t read from stream for "%1$s"', $this->basedir . $path ) );
-			}
-
-			if( @fwrite( $handle, $content ) === false ) {
-				throw new Exception( sprintf( 'Couldn\'t write to stream for "%1$s"', $this->basedir . $path ) );
-			}
+		if( ( $handle = @fopen( $this->resolve( $path ), 'w' ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t open file "%1$s"', $path ) );
 		}
-		while( $content !== '' );
+
+		if( @stream_copy_to_stream( $stream, $handle ) == false ) {
+			throw new Exception( sprintf( 'Couldn\'t copy stream for "%1$s"', $path ) );
+		}
+
+		fclose( $handle );
 	}
 
 
@@ -256,8 +316,12 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function move( $from, $to )
 	{
-		if( @rename( $this->basedir . $from, $this->basedir . $to ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t move file from "%1$s" to "%2$s"', $this->basedir . $from, $this->basedir . $to ) );
+		if( !$this->isDir( dirname( $to ) ) ) {
+			$this->mkdir( dirname( $to ) );
+		}
+
+		if( @rename( $this->resolve( $from ), $this->resolve( $to ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t move file from "%1$s" to "%2$s"', $from, $to ) );
 		}
 	}
 
@@ -272,8 +336,31 @@ class Standard implements Iface, DirIface, MetaIface
 	 */
 	public function copy( $from, $to )
 	{
-		if( @copy( $this->basedir . $from, $this->basedir . $to ) === false ) {
-			throw new Exception( sprintf( 'Couldn\'t copy file from "%1$s" to "%2$s"', $this->basedir . $from, $this->basedir . $to ) );
+		if( !$this->isDir( dirname( $to ) ) ) {
+			$this->mkdir( dirname( $to ) );
 		}
+
+		if( @copy( $this->resolve( $from ), $this->resolve( $to ) ) === false ) {
+			throw new Exception( sprintf( 'Couldn\'t copy file from "%1$s" to "%2$s"', $from, $to ) );
+		}
+	}
+
+
+	/**
+	 * Resolves the relative path to the absolute one
+	 *
+	 * @param string $path Relative path within file system
+	 * @return string Absolute path
+	 * @throws Exception If relative path is invalid
+	 */
+	protected function resolve( $path )
+	{
+		$path = trim( $path, '/' );
+
+		if( strncmp( $path, '..', 2 ) === 0 || strpos( $path, '/../' ) !== false ) {
+			throw new Exception( sprintf( 'No ".." allowed in path "%1$s"', $path ) );
+		}
+
+		return $this->basedir . str_replace( '/', DIRECTORY_SEPARATOR, $path );
 	}
 }
