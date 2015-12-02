@@ -8,7 +8,7 @@ Ext.ns('MShop.panel.tag');
 
 MShop.panel.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
-    recordName : 'Product_Tag',
+    recordName : 'Tag',
     idProperty : 'tag.id',
     siteidProperty : 'tag.siteid',
     itemUiXType : 'MShop.panel.tag.itemui',
