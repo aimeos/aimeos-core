@@ -388,7 +388,9 @@ class Standard
 		$fileext = $this->getFileExtension( $mediaFile->getMimetype() );
 		$dest = "${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
 
-		$this->storeRemote( 'fs-media', $dest, $file );
+		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-media' );
+		$fs->writef( $dest, $file );
+
 		unlink( $file );
 
 		return $dest;
@@ -536,7 +538,9 @@ class Standard
 		$fileext = $this->getFileExtension( $mimetype );
 		$dest = "${type}/${domain}/${filename[0]}/${filename[1]}/${filename}${fileext}";
 
-		$this->storeRemote( 'fs-media', $dest, $file );
+		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-media' );
+		$fs->writef( $dest, $file );
+
 		unlink( $file );
 
 		return $dest;

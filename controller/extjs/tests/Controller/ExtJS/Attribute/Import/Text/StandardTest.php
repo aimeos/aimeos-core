@@ -360,7 +360,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'error' => 'anError',
 		);
 
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$object->uploadFile( $params );
 
 		restore_error_handler();

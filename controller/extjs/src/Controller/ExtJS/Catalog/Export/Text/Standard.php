@@ -124,7 +124,9 @@ class Standard
 
 		$filename = $this->exportData( $items, $lang, $tmppath );
 		$downloadFile = $downloaddir . '/' . basename( $filename );
-		$this->storeRemote( basename( $filename ), $filename );
+
+		$fs = $context->getFilesystemManager()->get( 'fs-admin' );
+		$fs->writef( basename( $filename ), $filename );
 
 		return array(
 			'file' => '<a href="' . $downloadFile . '">' . $context->getI18n()->dt( 'controller/extjs', 'Download' ) . '</a>',

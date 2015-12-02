@@ -67,7 +67,10 @@ class Standard
 
 		$fileext = pathinfo( $fileinfo['name'], PATHINFO_EXTENSION );
 		$dest = md5( $fileinfo['name'] . time() . getmypid() ) . '.' . $fileext;
-		$this->storeRemote( $dest, $fileinfo['tmp_name'] );
+
+		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-admin' );
+		$fs->writef( $dest, $fileinfo['tmp_name'] );
+
 
 		$result = (object) array(
 			'site' => $params->site,
@@ -104,11 +107,12 @@ class Standard
 		$this->checkParams( $params, array( 'site', 'items' ) );
 		$this->setLocale( $params->site );
 
+		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-admin' );
 		$items = ( !is_array( $params->items ) ? array( $params->items ) : $params->items );
 
 		foreach( $items as $path )
 		{
-			$tmpfile = $this->storeLocal( $path );
+			$tmpfile = $fs->readf( $path );
 
 			/** controller/extjs/product/import/text/standard/container/type
 			 * Container file type storing all language files of the texts to import
@@ -185,8 +189,6 @@ class Standard
 			}
 
 			unlink( $tmpfile );
-
-			$fs = $this->getContext()->getFilesystemManager()->get( 'fs-admin' );
 			$fs->rm( $path );
 		}
 
