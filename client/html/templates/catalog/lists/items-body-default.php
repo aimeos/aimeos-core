@@ -12,6 +12,11 @@ $detailController = $this->config( 'client/html/catalog/detail/url/controller', 
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
+$basketTarget = $this->config( 'client/html/basket/standard/url/target' );
+$basketController = $this->config( 'client/html/basket/standard/url/controller', 'basket' );
+$basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
+$basketConfig = $this->config( 'client/html/basket/standard/url/config', array() );
+
 /// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 /// Percent format with value (%1$s) and % sign
@@ -34,6 +39,20 @@ $position = $this->get( 'itemPosition', 0 );
  * @param string Relative path to the template file
  * @since 2015.04
  * @category Developer
+ */
+
+/** client/html/catalog/list/basket-add
+ * Display the "add to basket" button for each product item
+ *
+ * Enables the button for adding products to the basket from the list view.
+ * This works for all type of products, even for selection products with product
+ * variants and product bundles. By default, also optional attributes are
+ * displayed if they have been associated to a product.
+ *
+ * @param boolean True to display the button, false to hide it
+ * @since 2016.01
+ * @category Developer
+ * @category User
  */
 
 ?>
@@ -64,12 +83,50 @@ $position = $this->get( 'itemPosition', 0 );
 <?php	endforeach; ?>
 			</div>
 			<div class="stock" data-prodid="<?php echo $id; ?>"></div>
+			<!-- div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', $this->get( 'basketProductIds', array() ) ) ); ?>"></div -->
 			<div class="price-list">
 <?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 			</div>
-<?php	echo $this->get( 'itemsBody' ); ?>
 		</a>
+<?php	if( $this->config( 'client/html/catalog/list/basket-add', false ) ) : ?>
+		<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
+<!-- catalog.lists.items.csrf -->
+<?php		echo $this->csrf()->formfield(); ?>
+<!-- catalog.lists.items.csrf -->
+<?php
+			$itemProdDeps = $this->get( 'itemsSelectionProductDependencies', array() );
+			$prodDeps = ( isset( $itemProdDeps[$id] ) ? json_encode( (array) $itemProdDeps[$id] ) : '{}' );
+
+			$itemAttrDeps = $this->get( 'itemsSelectionAttributeDependencies', array() );
+			$attrDeps = ( isset( $itemAttrDeps[$id] ) ? json_encode( (array) $itemAttrDeps[$id] ) : '{}' );
+
+			$itemAttrTypeDeps = $this->get( 'selectionAttributeTypeDependencies', array() );
+			$attrTypeDeps = ( isset( $itemAttrTypeDeps[$id] ) ? (array) $itemAttrTypeDeps[$id] : array() );
+
+			$itemSubProducts = $this->get( 'selectionProducts', array() );
+			$subProducts = ( isset( $itemSubProducts[$id] ) ? (array) $itemSubProducts[$id] : array() );
+
+			$params = array(
+				'selectionProducts' => $subProducts,
+				'selectionAttributeTypeDependencies' => $attrTypeDeps,
+				'selectionAttributeItems' => $this->get( 'itemsSelectionAttributeItems', array() ),
+			);
+?>
+			<div class="items-selection" data-proddeps="<?php echo $enc->attr( $prodDeps ); ?>" data-attrdeps="<?php echo $enc->attr( $attrDeps ); ?>">
+<?php echo $this->partial( 'client/html/common/partials/selection', 'common/partials/selection-default.php', $params ); ?>
+			</div>
+			<div class="addbasket">
+				<div class="group">
+					<input name="<?php echo $enc->attr( $this->formparam( 'b_action' ) ); ?>" type="hidden" value="add" />
+					<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'prodid' ) ) ); ?>" type="hidden" value="<?php echo $id; ?>" />
+					<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'quantity' ) ) ); ?>" type="hidden" value="1" />
+					<button class="standardbutton btn-action" type="submit" value=""><?php echo $enc->html( $this->translate( 'client/html', 'Add to basket' ), $enc::TRUST ); ?></button>
+				</div>
+			</div>
+		</form>
+<?php	endif; ?>
 	</li><!--
 <?php endforeach; ?>
 --></ul>
+<?php	echo $this->get( 'itemsBody' ); ?>
 </div>

@@ -22,6 +22,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$context = \TestHelper::getContext();
+
+		$config = $context->getConfig();
+		$config->set( 'client/html/catalog/list/basket-add', true );
+
 		$paths = \TestHelper::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Items\Standard( $context, $paths );
 
@@ -34,14 +38,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No catalog item found' );
 		}
 
+		$domains = array( 'media', 'price', 'text', 'attribute', 'product' );
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
+		$search->setConditions( $search->compare( '==', 'product.code', array( 'U:TEST', 'U:BUNDLE' ) ) );
 		$total = 0;
 
-		$view = \TestHelper::getView();
 
-		$view->listProductItems = $productManager->searchItems( $search, array( 'media', 'price', 'text' ), $total );
+		$view = \TestHelper::getView( 'unittest', $config );
+
+		$view->listProductItems = $productManager->searchItems( $search, $domains, $total );
 		$view->listProductTotal = $total;
 		$view->listPageSize = 100;
 		$view->listPageCurr = 1;
@@ -74,6 +80,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBody()
 	{
 		$output = $this->object->getBody();
+
 		$this->assertStringStartsWith( '<div class="catalog-list-items">', $output );
 
 		$this->assertContains( '<div class="price-item', $output );
@@ -82,6 +89,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains( '<span class="costs">', $output );
 		$this->assertContains( '<span class="taxrate">', $output );
 	}
+
+
+	public function testGetBodyCsrf()
+	{
+		$output = $this->object->getBody( 1 );
+		$output = str_replace( '_csrf_value', '_csrf_new', $output );
+
+		$this->assertContains( '<input class="csrf-token" type="hidden" name="_csrf_token" value="_csrf_new" />', $output );
+
+		$output = $this->object->modifyBody( $output, 1 );
+
+		$this->assertContains( '<input class="csrf-token" type="hidden" name="_csrf_token" value="_csrf_value" />', $output );
+	}
+
 
 	public function testGetSubClient()
 	{

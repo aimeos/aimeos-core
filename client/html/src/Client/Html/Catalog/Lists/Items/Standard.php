@@ -57,6 +57,8 @@ class Standard
 	 */
 	private $subPartPath = 'client/html/catalog/lists/items/standard/subparts';
 	private $subPartNames = array();
+	private $tags = array();
+	private $expire;
 	private $view;
 
 
@@ -250,6 +252,21 @@ class Standard
 
 
 	/**
+	 * Modifies the cached body content to replace content based on sessions or cookies.
+	 *
+	 * @param string $content Cached content
+	 * @param string $uid Unique identifier for the output if the content is placed more than once on the same page
+	 * @return string Modified body content
+	 */
+	public function modifyBody( $content, $uid )
+	{
+		$content = parent::modifyBody( $content, $uid );
+
+		return $this->replaceSection( $content, $this->getView()->csrf()->formfield(), 'catalog.lists.items.csrf' );
+	}
+
+
+	/**
 	 * Sets the necessary parameter values in the view.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
@@ -263,9 +280,101 @@ class Standard
 		{
 			$view->itemPosition = ( $this->getProductListPage( $view ) - 1 ) * $this->getProductListSize( $view );
 
+			if( $this->getContext()->getConfig()->get( 'client/html/catalog/list/basket-add', false ) ) {
+				$view = $this->addSelectionProducts( $view, $tags, $expire );
+			}
+
 			$this->view = $view;
 		}
 
 		return $this->view;
+	}
+
+
+	/**
+	 * Adds the necessary view parameters for adding selection products to the basket
+	 *
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
+	 * @return \Aimeos\MW\View\Iface Modified view object
+	 */
+	protected function addSelectionProducts( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
+	{
+		$context = $this->getContext();
+		$config = $context->getConfig();
+		$subProdMap = $prodMap = $prodIds = array();
+
+		foreach( (array) $view->get( 'listProductItems', array() ) as $product )
+		{
+			if( $product->getType() === 'select' )
+			{
+				foreach( $product->getListItems( 'product', 'default' ) as $listItem )
+				{
+					$prodMap[$listItem->getParentId()][] = $listItem->getRefId();
+					$prodIds[] = $listItem->getRefId();
+				}
+			}
+		}
+
+
+		$domains = array( 'text', 'price', 'media', 'attribute' );
+		$domains = $config->get( 'client/html/catalog/detail/basket/selection/domains', $domains );
+
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
+		$subproducts = $controller->getProductItems( $prodIds, $domains );
+		$attrIds = $prodDeps = $attrDeps = $attrTypeDeps = array();
+
+		foreach( $prodMap as $prodId => $list )
+		{
+			foreach( $list as $subProdId )
+			{
+				if( isset( $subproducts[$subProdId] ) )
+				{
+					$subProduct = $subproducts[$subProdId];
+					$subProdMap[$prodId][$subProdId] = $subProduct;
+
+					foreach( $subProduct->getRefItems( 'attribute', null, 'variant' ) as $attrId => $attrItem )
+					{
+						$attrTypeDeps[$prodId][$attrItem->getType()][$attrId] = $attrItem->getPosition();
+						$attrDeps[$prodId][$attrId][] = $subProdId;
+						$prodDeps[$prodId][$subProdId][] = $attrId;
+						$attrIds[$attrId] = null;
+					}
+				}
+			}
+
+			ksort( $attrTypeDeps[$prodId] );
+		}
+
+		$this->addMetaItem( $subproducts, 'product', $this->expire, $this->tags );
+		$this->addMetaList( array_keys( $subproducts ), 'product', $this->expire );
+
+
+		$attrManager = $controller->createManager( 'attribute' );
+
+		$search = $attrManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'attribute.id', array_keys( $attrIds ) ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$domains = array( 'text', 'media' );
+		$domains = $config->get( 'client/html/catalog/detail/basket/selection/domains-attributes', $domains );
+
+		$attributes = $attrManager->searchItems( $search, $domains );
+
+		$this->addMetaItem( $attributes, 'attribute', $this->expire, $this->tags );
+		$this->addMetaList( array_keys( $attributes ), 'attribute', $this->expire );
+
+
+		$view->itemsSelectionProducts = $subProdMap;
+		$view->itemsSelectionProductDependencies = $prodDeps;
+		$view->itemsSelectionAttributeDependencies = $attrDeps;
+		$view->itemsSelectionAttributeTypeDependencies = $attrTypeDeps;
+		$view->itemsSelectionAttributeItems = $attributes;
+
+		return $view;
 	}
 }
