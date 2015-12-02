@@ -23,8 +23,8 @@ class Standard
 	implements \Aimeos\MW\Media\Image\Iface
 {
 	private $image;
+	private $origimage;
 	private $options;
-	private $filename;
 
 
 	/**
@@ -37,7 +37,7 @@ class Standard
 	 */
 	public function __construct( $filename, $mimetype, array $options )
 	{
-		parent::__construct( $mimetype );
+		parent::__construct( $filename, $mimetype );
 
 		if( ( $content = @file_get_contents( $filename ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from file "%1$s"', $filename ) );
@@ -47,7 +47,6 @@ class Standard
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unknown image type in "%1$s"', $filename ) );
 		}
 
-		$this->filename = $filename;
 		$this->options = $options;
 	}
 
@@ -57,6 +56,10 @@ class Standard
 	 */
 	public function __destruct()
 	{
+		if( $this->origimage ) {
+			imagedestroy( $this->origimage );
+		}
+
 		if( $this->image ) {
 			imagedestroy( $this->image );
 		}
@@ -123,7 +126,7 @@ class Standard
 	 */
 	public function scale( $width, $height, $fit = true )
 	{
-		if( ( $info = getimagesize( $this->filename ) ) === false ) {
+		if( ( $info = getimagesize( $this->getFilepath() ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to retrive image size' );
 		}
 
@@ -136,15 +139,18 @@ class Standard
 			}
 		}
 
-		if( ( $image = imagecreatetruecolor( $width, $height ) ) === false ) {
+		if( !isset( $this->origimage ) ) {
+			$this->origimage = $this->image;
+		} else {
+			imagedestroy( $this->image );
+		}
+
+		if( ( $this->image = imagecreatetruecolor( $width, $height ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
 		}
 
-		if( imagecopyresampled( $image, $this->image, 0, 0, 0, 0, $width, $height, $info[0], $info[1] ) === false ) {
+		if( imagecopyresampled( $this->image, $this->origimage, 0, 0, 0, 0, $width, $height, $info[0], $info[1] ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to resize image' );
 		}
-
-		imagedestroy( $this->image );
-		$this->image = $image;
 	}
 }

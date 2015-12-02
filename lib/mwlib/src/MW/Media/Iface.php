@@ -21,6 +21,14 @@ namespace Aimeos\MW\Media;
 interface Iface
 {
 	/**
+	 * Returns the original file path of a media object.
+	 *
+	 * @return string Path to the original file
+	 */
+	public function getFilepath();
+
+
+	/**
 	 * Returns the mime type of a media object.
 	 *
 	 * @return string Mime type like "image/png"

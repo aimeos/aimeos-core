@@ -23,7 +23,6 @@ class Standard
 	implements \Aimeos\MW\Media\Application\Iface
 {
 	private $options;
-	private $filename;
 
 
 	/**
@@ -36,9 +35,8 @@ class Standard
 	 */
 	public function __construct( $filename, $mimetype, array $options )
 	{
-		parent::__construct( $mimetype );
+		parent::__construct( $filename, $mimetype );
 
-		$this->filename = $filename;
 		$this->options = $options;
 	}
 
@@ -52,8 +50,10 @@ class Standard
 	 */
 	public function save( $filename, $mimetype )
 	{
-		if( $this->filename != $filename && copy( $this->filename, $filename ) !== true ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to copy "%1$s" to "%2$s"', $this->filename, $filename ) );
+		$filepath = $this->getFilepath();
+
+		if( $filepath != $filename && copy( $filepath, $filename ) !== true ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to copy "%1$s" to "%2$s"', $filepath, $filename ) );
 		}
 	}
 }

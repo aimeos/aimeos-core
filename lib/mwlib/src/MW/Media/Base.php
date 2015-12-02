@@ -20,17 +20,31 @@ namespace Aimeos\MW\Media;
  */
 class Base
 {
+	private $filepath;
 	private $mimetype;
 
 
 	/**
-	 * Initializes the mime type.
+	 * Initializes the media object
 	 *
+	 * @param string $filepath Path of the original file
 	 * @param string $mimetype Mime type of the media data
 	 */
-	public function __construct( $mimetype )
+	public function __construct( $filepath, $mimetype )
 	{
+		$this->filepath = $filepath;
 		$this->mimetype = $mimetype;
+	}
+
+
+	/**
+	 * Returns the original file path of a media object.
+	 *
+	 * @return string Path to the original file
+	 */
+	public function getFilepath()
+	{
+		return $this->filepath;
 	}
 
 
