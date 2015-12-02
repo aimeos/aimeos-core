@@ -267,7 +267,13 @@ class Standard
 			$context = $this->getContext();
 			$config = $context->getConfig();
 
-			if( isset( $view->listCurrentCatItem ) )
+			if( isset( $view->listCurrentCatItem ) ) {
+				$catId = $view->listCurrentCatItem->getId();
+			} else {
+				$catId = $config->get( 'client/html/catalog/list/catid-default', '' );
+			}
+
+			if( $catId != '' )
 			{
 				/** client/html/catalog/lists/promo/size
 				 * The maximum number of products that should be shown in the promotion section
@@ -288,7 +294,6 @@ class Standard
 				$domains = $config->get( 'client/html/catalog/lists/domains', array( 'media', 'price', 'text' ) );
 
 				$total = null;
-				$catId = $view->listCurrentCatItem->getId();
 
 				$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 				$filter = $controller->createIndexFilterCategory( $catId, 'relevance', '+', 0, $size, 'promotion' );

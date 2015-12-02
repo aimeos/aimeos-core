@@ -10,7 +10,10 @@ namespace Aimeos\Client\Html\Catalog\Lists\Promo;
  */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
+	private $context;
+	private $catItem;
 	private $object;
+	private $view;
 
 
 	/**
@@ -21,23 +24,23 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$this->context = \TestHelper::getContext();
 		$paths = \TestHelper::getHtmlTemplatePaths();
-		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Promo\Standard( $context, $paths );
+		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Promo\Standard( $this->context, $paths );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
 		$catItems = $catalogManager->searchItems( $search, array( 'product' ) );
 
-		if( ( $catItem = reset( $catItems ) ) === false ) {
+		if( ( $this->catItem = reset( $catItems ) ) === false ) {
 			throw new \Exception( 'No catalog item found' );
 		}
 
-		$view = \TestHelper::getView();
-		$view->listParams = array();
-		$view->listCurrentCatItem = $catItem;
-		$this->object->setView( $view );
+		$this->view = \TestHelper::getView();
+		$this->view->listParams = array();
+		$this->view->listCurrentCatItem = $this->catItem;
+		$this->object->setView( $this->view );
 	}
 
 
@@ -76,6 +79,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
 		$this->assertEquals( 1, count( $tags ) );
 	}
+
+
+	public function testGetBodyDefaultCatid()
+	{
+		unset( $this->view->listCurrentCatItem );
+		$this->object->setView( $this->view );
+		$this->context->getConfig()->set( 'client/html/catalog/list/catid-default', $this->catItem->getId() );
+
+		$output = $this->object->getBody();
+
+		$this->assertStringStartsWith( '<section class="catalog-list-promo">', $output );
+		$this->assertRegExp( '/.*Expresso.*Cappuccino.*/smu', $output );
+	}
+
 
 	public function testGetSubClient()
 	{
