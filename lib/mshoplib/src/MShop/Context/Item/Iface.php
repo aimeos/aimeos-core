@@ -66,7 +66,7 @@ interface Iface
 	public function getDatabaseManager();
 
 	/**
-	 * Sets the file system object.
+	 * Sets the file system manager object.
 	 *
 	 * @param \Aimeos\MW\Filesystem\Manager\Iface $fsManager File system manager object
 	 * @return void
@@ -74,9 +74,9 @@ interface Iface
 	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $fsManager );
 
 	/**
-	 * Returns the file system object.
+	 * Returns the file system manager object.
 	 *
-	 * @return \Aimeos\MW\Filesystem\Iface File system object
+	 * @return \Aimeos\MW\Filesystem\Manager\Iface File system manager object
 	 */
 	public function getFilesystemManager();
 
