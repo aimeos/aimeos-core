@@ -8439,13 +8439,6 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             editable : false,
             id : 'product-list-label'
         }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.suppliercode',
-            header : MShop.I18n.dt('client/extjs', 'Supplier'),
-            sortable : true,
-            width : 100,
-            editable : false
-        }, {
             xtype : 'datecolumn',
             dataIndex : 'product.datestart',
             header : MShop.I18n.dt('client/extjs', 'Start date'),
@@ -8590,18 +8583,6 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             maxLength : 255,
                             emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
                         }, {
-                            xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Supplier'),
-                            name : 'product.suppliercode',
-                            store : MShop.GlobalStoreMgr.createStore('Supplier'),
-                            displayField : 'supplier.label',
-                            valueField : 'supplier.label',
-                            forceSelection : true,
-                            triggerAction : 'all',
-                            submitValue : true,
-                            typeAhead : true,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Product supplier (optional)')
-                        }, {
                             xtype : 'datefield',
                             fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
                             name : 'product.datestart',
@@ -8735,13 +8716,6 @@ MShop.panel.product.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             sortable : true,
             id : 'product-list-label'
         }, {
-            xtype : 'gridcolumn',
-            dataIndex : 'product.suppliercode',
-            header : MShop.I18n.dt('client/extjs', 'Supplier'),
-            sortable : true,
-            width : 100,
-            hidden : true
-        }, {
             xtype : 'datecolumn',
             dataIndex : 'product.datestart',
             header : MShop.I18n.dt('client/extjs', 'Start date'),
@@ -8864,15 +8838,6 @@ MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicker
                 header : MShop.I18n.dt('client/extjs', 'Label'),
                 id : 'refcontent',
                 renderer : this.refColumnRenderer.createDelegate(this, ['product.label'], true)
-            },
-            {
-                xtype : 'gridcolumn',
-                dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Supplier'),
-                id : 'refsupplier',
-                width : 120,
-                hidden : true,
-                renderer : this.refColumnRenderer.createDelegate(this, ['product.suppliercode'], true)
             },
             {
                 xtype : 'gridcolumn',
@@ -10268,17 +10233,6 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
                 renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
                     this.ParentItemUi.store,
                     "product.label"], true)
-            },
-            {
-                xtype : 'gridcolumn',
-                dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Supplier'),
-                sortable : false,
-                width : 100,
-                hidden : true,
-                renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
-                    this.ParentItemUi.store,
-                    "product.suppliercode"], true)
             },
             {
                 xtype : 'datecolumn',
@@ -16765,7 +16719,7 @@ Ext.ns('MShop.panel.tag');
 
 MShop.panel.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
-    recordName : 'Product_Tag',
+    recordName : 'Tag',
     idProperty : 'tag.id',
     siteidProperty : 'tag.siteid',
     itemUiXType : 'MShop.panel.tag.itemui',
