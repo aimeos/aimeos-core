@@ -533,9 +533,15 @@ class Standard
 		$tempdir = $config->get( 'controller/extjs/media/default/tempdir', sys_get_temp_dir() );
 
 
+		if( !is_dir( $tempdir ) && mkdir( $tempdir, 0750, true ) === false )
+		{
+			$msg = sprintf( 'Unable to create directory "%1$s"', $tempdir );
+			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
+		}
+
 		if( ( $file = tempnam( $tempdir, 'ai' ) ) === false )
 		{
-			$msg = sprintf( 'Unable to create file in "%1$s"', sys_get_temp_dir() );
+			$msg = sprintf( 'Unable to create file in "%1$s"', $tempdir );
 			throw new \Aimeos\Controller\ExtJS\Exception( $msg );
 		}
 
