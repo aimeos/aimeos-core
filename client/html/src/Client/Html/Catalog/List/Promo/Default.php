@@ -263,7 +263,13 @@ class Client_Html_Catalog_List_Promo_Default
 			$context = $this->_getContext();
 			$config = $context->getConfig();
 
-			if( isset( $view->listCurrentCatItem ) )
+			if( isset( $view->listCurrentCatItem ) ) {
+				$catId = $view->listCurrentCatItem->getId();
+			} else {
+				$catId = $config->get( 'client/html/catalog/list/catid-default', '' );
+			}
+
+			if( $catId != '' )
 			{
 				/** client/html/catalog/list/promo/size
 				 * The maximum number of products that should be shown in the promotion section
@@ -284,7 +290,6 @@ class Client_Html_Catalog_List_Promo_Default
 				$domains = $config->get( 'client/html/catalog/list/domains', array( 'media', 'price', 'text' ) );
 
 				$total = null;
-				$catId = $view->listCurrentCatItem->getId();
 
 				$controller = Controller_Frontend_Factory::createController( $context, 'catalog' );
 				$filter = $controller->createIndexFilterCategory( $catId, 'relevance', '+', 0, $size, 'promotion' );

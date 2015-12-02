@@ -3,11 +3,15 @@
 /**
  * @copyright Copyright (c) Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
  */
 
 class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestCase
 {
+	private $_context;
+	private $_catItem;
 	private $_object;
+	private $_view;
 
 
 	/**
@@ -18,23 +22,23 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestC
 	 */
 	protected function setUp()
 	{
-		$context = TestHelper::getContext();
+		$this->_context = TestHelper::getContext();
 		$paths = TestHelper::getHtmlTemplatePaths();
-		$this->_object = new Client_Html_Catalog_List_Promo_Default( $context, $paths );
+		$this->_object = new Client_Html_Catalog_List_Promo_Default( $this->_context, $paths );
 
-		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $context );
+		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 		$search = $catalogManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
 		$catItems = $catalogManager->searchItems( $search, array( 'product' ) );
 
-		if( ( $catItem = reset( $catItems ) ) === false ) {
+		if( ( $this->_catItem = reset( $catItems ) ) === false ) {
 			throw new Exception( 'No catalog item found' );
 		}
 
-		$view = TestHelper::getView();
-		$view->listParams = array();
-		$view->listCurrentCatItem = $catItem;
-		$this->_object->setView( $view );
+		$this->_view = TestHelper::getView();
+		$this->_view->listParams = array();
+		$this->_view->listCurrentCatItem = $this->_catItem;
+		$this->_object->setView( $this->_view );
 	}
 
 
@@ -73,6 +77,20 @@ class Client_Html_Catalog_List_Promo_DefaultTest extends PHPUnit_Framework_TestC
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
 		$this->assertEquals( 1, count( $tags ) );
 	}
+
+
+	public function testGetBodyDefaultCatid()
+	{
+		unset( $this->_view->listCurrentCatItem );
+		$this->_object->setView( $this->_view );
+		$this->_context->getConfig()->set( 'client/html/catalog/list/catid-default', $this->_catItem->getId() );
+
+		$output = $this->_object->getBody();
+
+		$this->assertStringStartsWith( '<section class="catalog-list-promo">', $output );
+		$this->assertRegExp( '/.*Expresso.*Cappuccino.*/smu', $output );
+	}
+
 
 	public function testGetSubClient()
 	{
