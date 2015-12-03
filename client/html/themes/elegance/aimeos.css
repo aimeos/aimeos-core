@@ -752,7 +752,17 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 }
 
 /* price list */
-.catalog-list .price-list {
+.catalog-list .price-list,
+.catalog-list .price {
+	display: none;
+}
+
+.catalog-list .price-actual {
+	display: block;
+}
+
+.catalog-list .price {
+	text-align: left;
 	padding: 0.5em;
 }
 
@@ -792,6 +802,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .catalog-list-items .stock-out .stocklevel {
 	background-color: #A00000;
 }
+
 
 /* List head section */
 .catalog-list-head {
@@ -860,6 +871,11 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 .catalog-list-items {
 	margin: 1em 0;
 	text-align: center;
+}
+
+.catalog-list-items .selection,
+.catalog-list-items .attribute {
+	clear: both;
 }
 
 

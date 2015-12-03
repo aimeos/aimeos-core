@@ -372,7 +372,7 @@ class Standard
 
 
 		if( !empty( $prodIds ) && $config->get( 'client/html/catalog/lists/stock/enable', true ) === true ) {
-			$view->itemsStockUrl = $this->getStockUrl( $view, array_keys( $prodIds ) );
+			$view->itemsStockUrl = $this->getStockUrl( $view, $prodIds );
 		}
 
 		$view->itemsSelectionProducts = $subProdMap;

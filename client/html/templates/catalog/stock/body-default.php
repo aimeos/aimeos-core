@@ -130,7 +130,7 @@ $(".aimeos .product .stock").each(function() {
 	}
 
 	if( html !== '' ) {
-		elem.html( html );
+		elem.html( elem.html() + html );
 		$(".stockitem:first-child", elem).addClass("stock-actual");
 	}
 });

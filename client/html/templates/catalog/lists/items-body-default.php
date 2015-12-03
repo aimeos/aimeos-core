@@ -24,6 +24,8 @@ $percentFormat = $this->translate( 'client/html', '%1$s%%' );
 
 $position = $this->get( 'itemPosition', 0 );
 
+$reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', true );
+
 
 /** client/html/common/partials/price
  * Relative path to the price partial template file
@@ -96,7 +98,7 @@ $position = $this->get( 'itemPosition', 0 );
 			'attributeHiddenItems' => $productItem->getRefItems( 'attribute', null, 'hidden' ),
 		);
 ?>
---><li class="product <?php echo $enc->attr( $css ); ?>">
+--><li class="product <?php echo $enc->attr( $css ); ?>" data-reqstock="<?php echo $reqstock; ?>">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
@@ -117,11 +119,11 @@ $position = $this->get( 'itemPosition', 0 );
 				</div>
 <?php	endforeach; ?>
 			</div>
-			<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', array_merge( array( $id ), array_keys( $subProducts ) ) ) ); ?>"></div>
-			<div class="price-list">
-<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
-			</div>
 		</a>
+		<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', array_merge( array( $id ), array_keys( $subProducts ) ) ) ); ?>"></div>
+		<div class="price-list price price-actual">
+<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
+		</div>
 <?php	if( $this->config( 'client/html/catalog/list/basket-add', false ) ) : ?>
 		<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 <!-- catalog.lists.items.csrf -->

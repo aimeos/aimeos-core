@@ -346,7 +346,7 @@ AimeosCatalogDetail = {
 
 				if( map.hasOwnProperty(prodId) && map[prodId] === len ) {
 
-					var parent = $(".catalog-detail-basket");
+					var parent = $(this).parents(".catalog-detail-basket, .catalog-list .product");
 					var newPrice = $(".price-prodid-" + prodId, parent);
 					var newStock = $(".stock-prodid-" + prodId, parent);
 
