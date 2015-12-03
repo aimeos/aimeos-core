@@ -49,10 +49,16 @@ $position = $this->get( 'itemPosition', 0 );
  * variants and product bundles. By default, also optional attributes are
  * displayed if they have been associated to a product.
  *
+ * '''Note:''' To fetch the necessary product variants, you have to extend the
+ * list of domains for "client/html/catalog/domains", e.g.
+ *
+ *  client/html/catalog/domains = array( 'attribute', 'media', 'price', 'product', 'text' )
+ *
  * @param boolean True to display the button, false to hide it
  * @since 2016.01
  * @category Developer
  * @category User
+ * @see client/html/catalog/domains
  */
 
 ?>
@@ -100,10 +106,10 @@ $position = $this->get( 'itemPosition', 0 );
 			$itemAttrDeps = $this->get( 'itemsSelectionAttributeDependencies', array() );
 			$attrDeps = ( isset( $itemAttrDeps[$id] ) ? json_encode( (array) $itemAttrDeps[$id] ) : '{}' );
 
-			$itemAttrTypeDeps = $this->get( 'selectionAttributeTypeDependencies', array() );
+			$itemAttrTypeDeps = $this->get( 'itemsSelectionAttributeTypeDependencies', array() );
 			$attrTypeDeps = ( isset( $itemAttrTypeDeps[$id] ) ? (array) $itemAttrTypeDeps[$id] : array() );
 
-			$itemSubProducts = $this->get( 'selectionProducts', array() );
+			$itemSubProducts = $this->get( 'itemsSelectionProducts', array() );
 			$subProducts = ( isset( $itemSubProducts[$id] ) ? (array) $itemSubProducts[$id] : array() );
 
 			$params = array(
