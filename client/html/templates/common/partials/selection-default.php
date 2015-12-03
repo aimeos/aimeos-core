@@ -12,12 +12,12 @@ $attributes = $this->get( 'selectionAttributeItems', array() );
 
 
 /** client/html/catalog/detail/basket/selection/type
- * List of layout types for the variant and optional attributes
+ * List of layout types for the variant attributes
  *
- * Each product can contain optional attributes and selection products will
- * contain variant attributes too. This configuration setting allows you to
- * change how these attributs will be displayed, either as drop-down menu
- * (value: "select") or as list of radio buttons (value: "radio").
+ * Selection products will contain variant attributes and this configuration
+ * setting allows you to change how these attributs will be displayed, either
+ * as drop-down menu (value: "select") or as list of radio buttons (value:
+ * "radio").
  *
  * The key for each value must be the type code of the attribute, e.g. "width",
  * "length", "color" or similar types. You can set the layout for all
@@ -40,6 +40,7 @@ $attributes = $this->get( 'selectionAttributeItems', array() );
  * @since 2015.04
  * @category Developer
  * @category User
+ * @see client/html/catalog/detail/basket/attribute/type
  */
 
 ?>

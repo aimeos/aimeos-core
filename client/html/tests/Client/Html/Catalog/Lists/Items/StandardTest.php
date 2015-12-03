@@ -41,7 +41,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$domains = array( 'media', 'price', 'text', 'attribute', 'product' );
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'U:TEST', 'U:BUNDLE' ) ) );
+		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'U:TEST', 'U:BUNDLE' ) ) );
 		$total = 0;
 
 

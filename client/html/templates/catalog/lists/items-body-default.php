@@ -65,9 +65,38 @@ $position = $this->get( 'itemPosition', 0 );
 <div class="catalog-list-items">
 	<ul class="list-items"><!--
 <?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
-<?php	$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $id, 'l_pos' => $position++ ); ?>
-<?php	$conf = $productItem->getConfig(); $css = ( isset( $conf['css-class'] ) ? $conf['css-class'] : '' ); ?>
-	--><li class="product <?php echo $enc->attr( $css ); ?>">
+<?php
+		$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $id, 'l_pos' => $position++ );
+		$conf = $productItem->getConfig(); $css = ( isset( $conf['css-class'] ) ? $conf['css-class'] : '' );
+
+		$itemProdDeps = $this->get( 'itemsSelectionProductDependencies', array() );
+		$prodDeps = ( isset( $itemProdDeps[$id] ) ? json_encode( (array) $itemProdDeps[$id] ) : '{}' );
+
+		$itemAttrDeps = $this->get( 'itemsSelectionAttributeDependencies', array() );
+		$attrDeps = ( isset( $itemAttrDeps[$id] ) ? json_encode( (array) $itemAttrDeps[$id] ) : '{}' );
+
+		$itemAttrTypeDeps = $this->get( 'itemsSelectionAttributeTypeDependencies', array() );
+		$attrTypeDeps = ( isset( $itemAttrTypeDeps[$id] ) ? (array) $itemAttrTypeDeps[$id] : array() );
+
+		$itemSubProducts = $this->get( 'itemsSelectionProducts', array() );
+		$subProducts = ( isset( $itemSubProducts[$id] ) ? (array) $itemSubProducts[$id] : array() );
+
+		$itemAttrConfigItems = $this->get( 'itemsAttributeConfigItems', array() );
+		$attrConfigItems = ( isset( $itemAttrConfigItems[$id] ) ? (array) $itemAttrConfigItems[$id] : array() );
+
+		$selectParams = array(
+			'selectionProducts' => $subProducts,
+			'selectionAttributeTypeDependencies' => $attrTypeDeps,
+			'selectionAttributeItems' => $this->get( 'itemsSelectionAttributeItems', array() ),
+		);
+
+		$attributeParams = array(
+			'attributeConfigItems' => $attrConfigItems,
+			'attributeCustomItems' => $productItem->getRefItems( 'attribute', null, 'custom' ),
+			'attributeHiddenItems' => $productItem->getRefItems( 'attribute', null, 'hidden' ),
+		);
+?>
+--><li class="product <?php echo $enc->attr( $css ); ?>">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
@@ -88,8 +117,7 @@ $position = $this->get( 'itemPosition', 0 );
 				</div>
 <?php	endforeach; ?>
 			</div>
-			<div class="stock" data-prodid="<?php echo $id; ?>"></div>
-			<!-- div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', $this->get( 'basketProductIds', array() ) ) ); ?>"></div -->
+			<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', array( $id ) + array_keys( $subProducts ) ) ); ?>"></div>
 			<div class="price-list">
 <?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 			</div>
@@ -99,27 +127,11 @@ $position = $this->get( 'itemPosition', 0 );
 <!-- catalog.lists.items.csrf -->
 <?php		echo $this->csrf()->formfield(); ?>
 <!-- catalog.lists.items.csrf -->
-<?php
-			$itemProdDeps = $this->get( 'itemsSelectionProductDependencies', array() );
-			$prodDeps = ( isset( $itemProdDeps[$id] ) ? json_encode( (array) $itemProdDeps[$id] ) : '{}' );
-
-			$itemAttrDeps = $this->get( 'itemsSelectionAttributeDependencies', array() );
-			$attrDeps = ( isset( $itemAttrDeps[$id] ) ? json_encode( (array) $itemAttrDeps[$id] ) : '{}' );
-
-			$itemAttrTypeDeps = $this->get( 'itemsSelectionAttributeTypeDependencies', array() );
-			$attrTypeDeps = ( isset( $itemAttrTypeDeps[$id] ) ? (array) $itemAttrTypeDeps[$id] : array() );
-
-			$itemSubProducts = $this->get( 'itemsSelectionProducts', array() );
-			$subProducts = ( isset( $itemSubProducts[$id] ) ? (array) $itemSubProducts[$id] : array() );
-
-			$params = array(
-				'selectionProducts' => $subProducts,
-				'selectionAttributeTypeDependencies' => $attrTypeDeps,
-				'selectionAttributeItems' => $this->get( 'itemsSelectionAttributeItems', array() ),
-			);
-?>
 			<div class="items-selection" data-proddeps="<?php echo $enc->attr( $prodDeps ); ?>" data-attrdeps="<?php echo $enc->attr( $attrDeps ); ?>">
-<?php echo $this->partial( 'client/html/common/partials/selection', 'common/partials/selection-default.php', $params ); ?>
+<?php echo $this->partial( 'client/html/common/partials/selection', 'common/partials/selection-default.php', $selectParams ); ?>
+			</div>
+			<div class="items-attribute">
+<?php echo $this->partial( 'client/html/common/partials/attribute', 'common/partials/attribute-default.php', $attributeParams ); ?>
 			</div>
 			<div class="addbasket">
 				<div class="group">
