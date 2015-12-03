@@ -58,6 +58,22 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetHeaderException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$mock->getHeader();
+	}
+
+
 	public function testGetBody()
 	{
 		$view = $this->object->getView();
@@ -71,6 +87,70 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertStringStartsWith( '<section class="aimeos catalog-detail">', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
 		$this->assertEquals( 5, count( $tags ) );
+	}
+
+
+	public function testGetBodyClientHtmlException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Aimeos\Client\Html\Exception() ) );
+
+		$mock->getBody();
+	}
+
+
+	public function testGetBodyControllerFrontendException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Aimeos\Controller\Frontend\Exception() ) );
+
+		$mock->getBody();
+	}
+
+
+	public function testGetBodyMShopException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Aimeos\MShop\Exception() ) );
+
+		$mock->getBody();
+	}
+
+
+	public function testGetBodyException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$mock->getBody();
 	}
 
 
@@ -98,6 +178,70 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testProcess()
 	{
 		$this->object->process();
+	}
+
+
+	public function testProcessClientHtmlException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, array() ) )
+			->setMethods( array( 'getClientParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'getClientParams' )
+			->will( $this->throwException( new \Aimeos\Client\Html\Exception() ) );
+
+		$mock->process();
+	}
+
+
+	public function testProcessControllerFrontendException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, array() ) )
+			->setMethods( array( 'getClientParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'getClientParams' )
+			->will( $this->throwException( new \Aimeos\Controller\Frontend\Exception() ) );
+
+		$mock->process();
+	}
+
+
+	public function testProcessMShopException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, array() ) )
+			->setMethods( array( 'getClientParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'getClientParams' )
+			->will( $this->throwException( new \Aimeos\MShop\Exception() ) );
+
+		$mock->process();
+	}
+
+
+	public function testProcessException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )
+			->setConstructorArgs( array( $this->context, array() ) )
+			->setMethods( array( 'getClientParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'getClientParams' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$mock->process();
 	}
 
 

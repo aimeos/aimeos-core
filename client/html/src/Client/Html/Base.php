@@ -665,11 +665,17 @@ abstract class Base
 	 */
 	protected function replaceSection( $content, $section, $marker )
 	{
+		$start = 0;
+		$len = strlen( $section );
 		$marker = '<!-- ' . $marker . ' -->';
-		$start = strpos( $content, $marker );
 
-		if( $start !== false && ( $end = strpos( $content, $marker, $start + 1 ) ) !== false ) {
-			return substr_replace( $content, $section, $start, $end - $start + strlen( $marker ) );
+		while( ( $start = @strpos( $content, $marker, $start ) ) !== false )
+		{
+			if( ( $end = strpos( $content, $marker, $start + 1 ) ) !== false ) {
+				$content = substr_replace( $content, $section, $start, $end - $start + strlen( $marker ) );
+			}
+
+			$start += 2 * strlen( $marker ) + $len;
 		}
 
 		return $content;

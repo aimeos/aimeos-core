@@ -50,10 +50,90 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetHeaderException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Basket\Standard\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$mock->getHeader();
+	}
+
+
 	public function testGetBody()
 	{
 		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<section class="aimeos basket-standard">', $output );
+	}
+
+
+	public function testGetBodyClientHtmlException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Basket\Standard\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Aimeos\Client\Html\Exception() ) );
+
+		$mock->getBody();
+	}
+
+
+	public function testGetBodyControllerFrontendException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Basket\Standard\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Aimeos\Controller\Frontend\Exception() ) );
+
+		$mock->getBody();
+	}
+
+
+	public function testGetBodyMShopException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Basket\Standard\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Aimeos\MShop\Exception() ) );
+
+		$mock->getBody();
+	}
+
+
+	public function testGetBodyException()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Basket\Standard\Standard' )
+			->setConstructorArgs( array( $this->context, \TestHelper::getHtmlTemplatePaths() ) )
+			->setMethods( array( 'setViewParams' ) )
+			->getMock();
+
+		$mock->setView( \TestHelper::getView() );
+
+		$mock->expects( $this->once() )->method( 'setViewParams' )
+			->will( $this->throwException( new \Exception() ) );
+
+		$mock->getBody();
 	}
 
 

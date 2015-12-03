@@ -415,12 +415,25 @@ class Standard
 		if( !isset( $this->cache ) )
 		{
 			$context = $this->getContext();
-			$params = $context->getSession()->get( 'aimeos/catalog/detail/params/last', array() );
+			$site = $context->getLocale()->getSite()->getCode();
 
-			$target = $view->config( 'client/html/catalog/detail/url/target' );
-			$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
-			$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
-			$config = $view->config( 'client/html/catalog/detail/url/config', array() );
+			if( ( $params = $context->getSession()->get( 'aimeos/catalog/detail/params/last' . $site ) ) !== null )
+			{
+				$target = $view->config( 'client/html/catalog/detail/url/target' );
+				$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+				$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
+				$config = $view->config( 'client/html/catalog/detail/url/config', array() );
+			}
+			else
+			{
+				$params = $context->getSession()->get( 'aimeos/catalog/lists/params/last' . $site, array() );
+
+				$target = $view->config( 'client/html/catalog/list/url/target' );
+				$controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
+				$action = $view->config( 'client/html/catalog/list/url/action', 'list' );
+				$config = $view->config( 'client/html/catalog/list/url/config', array() );
+
+			}
 
 			$view->standardParams = $this->getClientParams( $view->param() );
 			$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );

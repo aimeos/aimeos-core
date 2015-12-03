@@ -237,7 +237,7 @@ AimeosCatalogDetail = {
 	 */
 	setupSelectionDependencies: function() {
 
-		$(".catalog-detail-basket-selection").on("change", ".select-list", function(event) {
+		$(".catalog-detail-basket-selection, .catalog-list-items .items-selection").on("change", ".select-list", function(event) {
 
 			var elem = $(this);
 			var index = elem.data("index");
@@ -316,7 +316,7 @@ AimeosCatalogDetail = {
 	 */
 	setupSelectionContent: function() {
 
-		$(".catalog-detail-basket-selection").on("change", ".select-list", function(event) {
+		$(".catalog-detail-basket-selection, .catalog-list-items .items-selection").on("change", ".select-list", function(event) {
 
 			var map = {}, len = 0;
 			var attrDeps = $(event.delegateTarget).data("attrdeps") || {}; // {"<attrid>":["prodid",...],...}
@@ -346,7 +346,7 @@ AimeosCatalogDetail = {
 
 				if( map.hasOwnProperty(prodId) && map[prodId] === len ) {
 
-					var parent = $(".catalog-detail-basket");
+					var parent = $(this).parents(".catalog-detail-basket, .catalog-list .product");
 					var newPrice = $(".price-prodid-" + prodId, parent);
 					var newStock = $(".stock-prodid-" + prodId, parent);
 
@@ -383,7 +383,7 @@ AimeosCatalogDetail = {
 	 */
 	setupVariantCheck: function() {
 
-		$(".catalog-detail-basket").on("click", ".addbasket .btn-action", {}, function(event) {
+		$(".catalog-detail-basket, .catalog-list-items").on("click", ".addbasket .btn-action", {}, function(event) {
 
 			var result = true;
 
@@ -487,7 +487,7 @@ AimeosCatalogDetail = {
 	 */
 	setupBasketAdd: function(data) {
 
-		$(".catalog-detail-basket form").on("submit", function(ev) {
+		$(".catalog-detail-basket form, .catalog-list-items form").on("submit", function(ev) {
 
 		    Aimeos.createOverlay();
 		    $.post($(this).attr("action"), $(this).serialize(), function(data) {
