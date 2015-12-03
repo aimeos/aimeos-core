@@ -31,8 +31,8 @@ $warehouseItems = $this->get( 'stockWarehouseItems', array() );
  * the product is actually ordered and the stock level is decreased. If you've
  * configured the stock level update every minute, within this minute another
  * customer can buy the same product that is considered to be still in stock at
- * this time. 
- * 
+ * this time.
+ *
  * @param integer Number of products in stock
  * @since 2014.03
  * @category User
@@ -122,15 +122,15 @@ $(".aimeos .product .stock").each(function() {
 	var html = "";
 	var elem = $(this);
 	var productIds = String( elem.data("prodid") ).split(" ");
-	
+
 	for( var i=0; i<productIds.length; i++ ) {
 		if( aimeosStockHtml.hasOwnProperty( productIds[i] ) ) {
 			html += aimeosStockHtml[productIds[i]];
 		}
 	}
-	
+
 	if( html !== '' ) {
-		elem.php( html );
+		elem.html( html );
 		$(".stockitem:first-child", elem).addClass("stock-actual");
 	}
 });

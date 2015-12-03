@@ -117,7 +117,7 @@ $position = $this->get( 'itemPosition', 0 );
 				</div>
 <?php	endforeach; ?>
 			</div>
-			<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', array( $id ) + array_keys( $subProducts ) ) ); ?>"></div>
+			<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', array_merge( array( $id ), array_keys( $subProducts ) ) ) ); ?>"></div>
 			<div class="price-list">
 <?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 			</div>
@@ -137,7 +137,7 @@ $position = $this->get( 'itemPosition', 0 );
 				<div class="group">
 					<input name="<?php echo $enc->attr( $this->formparam( 'b_action' ) ); ?>" type="hidden" value="add" />
 					<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'prodid' ) ) ); ?>" type="hidden" value="<?php echo $id; ?>" />
-					<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'quantity' ) ) ); ?>" type="hidden" value="1" />
+					<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'quantity' ) ) ); ?>" type="number" min="1" max="2147483647" maxlength="10" step="1" required="required" value="1" />
 					<button class="standardbutton btn-action" type="submit" value=""><?php echo $enc->html( $this->translate( 'client/html', 'Add to basket' ), $enc::TRUST ); ?></button>
 				</div>
 			</div>

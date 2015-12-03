@@ -1158,6 +1158,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	margin: 0;
 }
 
+.catalog-list-items .addbasket input,
 .catalog-detail-basket .group input {
 	vertical-align: middle;
 	text-align: center;
