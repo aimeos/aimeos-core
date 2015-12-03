@@ -397,7 +397,7 @@ class Standard
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
-		$attributeTypes = array();
+		$attrIds = $attributeTypes = array();
 
 		foreach( (array) $view->get( 'listProductItems', array() ) as $product )
 		{
