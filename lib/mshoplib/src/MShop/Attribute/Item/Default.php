@@ -115,7 +115,9 @@ class MShop_Attribute_Item_Default
 	 */
 	public function setCode( $code )
 	{
-		$this->_checkCode( $code );
+		if( strlen( $code ) > 255 ) {
+			throw new MShop_Attribute_Exception( sprintf( 'Code must not be longer than 255 characters' ) );
+		}
 
 		if( $code == $this->getCode() ) { return; }
 
