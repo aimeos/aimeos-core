@@ -66,6 +66,6 @@ abstract class Base
 			}
 		}
 
-		return clone $price;
+		return $price;
 	}
 }
