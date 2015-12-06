@@ -14,7 +14,7 @@ namespace Aimeos\MW\Setup\Task;
  */
 class AttributeExtendCodeLength extends Base
 {
-	private $sql = 'ALTER TABLE "mshop_attribute" CHANGE "code" "code" VARCHAR(255) NOT NULL';
+	private $sql = 'ALTER TABLE "mshop_attribute" CHANGE "code" "code" VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL';
 
 
 	/**
