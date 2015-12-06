@@ -46,9 +46,11 @@ class AttributeExtendCodeLength extends Base
 	{
 		$this->msg( 'Extend length of attribute code', 0 ); $this->status( '' );
 
-		if( $this->schema->tableExists( 'mshop_attribute' ) === true
-			&& $this->schema->columnExists( 'mshop_attribute', 'code' ) === true
-			&& $this->schema->getColumnDetails( 'mshop_attribute', 'code' )->getMaxLength() < 255
+		$schema = $this->getSchema( 'db-attribute' );
+
+		if( $schema->tableExists( 'mshop_attribute' ) === true
+			&& $schema->columnExists( 'mshop_attribute', 'code' ) === true
+			&& $schema->getColumnDetails( 'mshop_attribute', 'code' )->getMaxLength() < 255
 		) {
 			$this->execute( $this->sql );
 			$this->status( 'done' );
