@@ -6,13 +6,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 # Metal <meteoramic@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-12-07 15:39+0000\n"
+"PO-Revision-Date: 2015-12-07 16:54+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -208,7 +209,3 @@ msgstr "ambalaj-yüksekliği"
 #. Product property package-weight
 msgid "package-weight"
 msgstr "ambalaj-ağırlığı"
-
-#. Default price format
-msgid "price:default"
-msgstr ""

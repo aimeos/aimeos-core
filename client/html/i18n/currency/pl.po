@@ -1,6 +1,7 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 # jerzys <jerzy.skalski@gmail.com>, 2014
 msgid ""
 msgstr ""

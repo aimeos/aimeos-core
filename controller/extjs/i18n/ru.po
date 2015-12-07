@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 16:42+0100\n"
-"PO-Revision-Date: 2015-12-07 15:39+0000\n"
+"POT-Creation-Date: 2015-12-07 18:10+0100\n"
+"PO-Revision-Date: 2015-12-07 17:13+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -18,18 +18,31 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: src/Controller/ExtJS/Service/Default.php:94
 #: src/Controller/ExtJS/Service/Standard.php:97
 #, php-format
 msgid "- %1$s : %2$s\n"
 msgstr "- %1$s : %2$s\n"
 
+#: src/Controller/ExtJS/Media/Default.php:673
+#: src/Controller/ExtJS/Media/Default.php:708
+#, php-format
+msgid "Changing file permissions for \"%1$s\" to \"%2$o\" failed"
+msgstr ""
+
+#: src/Controller/ExtJS/Common/Factory/Abstract.php:66
+#: src/Controller/ExtJS/Common/Factory/Abstract.php:160
 #: src/Controller/ExtJS/Common/Factory/Base.php:70
 #: src/Controller/ExtJS/Common/Factory/Base.php:164
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "Класс \"%1$s\" не реализует \"%2$s\""
 
-#: src/Controller/ExtJS/JsonRpc.php:299 src/Controller/ExtJS/JsonRpc.php:386
+#: src/Controller/ExtJS/JsonRpc.php:295 src/Controller/ExtJS/JsonRpc.php:378
+#: src/Controller/ExtJS/Common/Factory/Abstract.php:60
+#: src/Controller/ExtJS/Common/Factory/Abstract.php:154
+#: src/Controller/ExtJS/Factory.php:89 src/Controller/ExtJS/JsonRpc.php:299
+#: src/Controller/ExtJS/JsonRpc.php:386
 #: src/Controller/ExtJS/Common/Factory/Base.php:64
 #: src/Controller/ExtJS/Common/Factory/Base.php:158
 #: src/Controller/ExtJS/Factory.php:93
@@ -37,32 +50,137 @@ msgstr "Класс \"%1$s\" не реализует \"%2$s\""
 msgid "Class \"%1$s\" not found"
 msgstr "Не найден класс \"%1$s\""
 
-#: src/Controller/ExtJS/Factory.php:72
+#: src/Controller/ExtJS/Factory.php:68 src/Controller/ExtJS/Factory.php:72
 #, php-format
 msgid "Controller path is empty"
 msgstr "Не указан путь к контроллеру"
 
+#: src/Controller/ExtJS/Product/Import/Text/Default.php:111
+#: src/Controller/ExtJS/Attribute/Import/Text/Default.php:110
+#: src/Controller/ExtJS/Catalog/Import/Text/Default.php:110
+#: src/Controller/ExtJS/Coupon/Code/Default.php:114
 #: src/Controller/ExtJS/Coupon/Code/Standard.php:117
 #, php-format
 msgid "Could not set permissions \"%1$s\" for file \"%2$s\""
 msgstr "Невозможно установить разрешение \"%1$s\" для файла \"%2$s\""
 
+#: src/Controller/ExtJS/Media/Default.php:399
+#: src/Controller/ExtJS/Product/Export/Text/Default.php:177
+#: src/Controller/ExtJS/Attribute/Export/Text/Default.php:179
+#: src/Controller/ExtJS/Catalog/Export/Text/Default.php:177
+#, php-format
+msgid "Couldn't create directory \"%1$s\" with permissions \"%2$o\""
+msgstr ""
+
+#: src/Controller/ExtJS/Attribute/Export/Text/Default.php:182
+#, php-format
+msgid "Create export directory for attribute IDs: %1$s"
+msgstr ""
+
+#: src/Controller/ExtJS/Catalog/Export/Text/Default.php:180
+#, php-format
+msgid "Create export directory for catalog IDs: %1$s"
+msgstr ""
+
+#: src/Controller/ExtJS/Product/Export/Text/Default.php:180
+#, php-format
+msgid "Create export directory for product IDs: %1$s"
+msgstr ""
+
+#: src/Controller/ExtJS/Media/Default.php:116
+#: src/Controller/ExtJS/Media/Default.php:122
+#: src/Controller/ExtJS/Media/Default.php:240
+#, php-format
+msgid "Deleting file \"%1$s\" failed"
+msgstr ""
+
+#: src/Controller/ExtJS/Product/Export/Text/Default.php:186
+#: src/Controller/ExtJS/Attribute/Export/Text/Default.php:188
+#: src/Controller/ExtJS/Catalog/Export/Text/Default.php:186
 #: src/Controller/ExtJS/Product/Export/Text/Standard.php:132
 #: src/Controller/ExtJS/Attribute/Export/Text/Standard.php:134
 #: src/Controller/ExtJS/Catalog/Export/Text/Standard.php:132
 msgid "Download"
 msgstr "Скачать"
 
+#: src/Controller/ExtJS/Common/Load/Text/Abstract.php:398
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:402
 #, php-format
 msgid "Error in %1$s text import: %2$s"
 msgstr "Ошибка в %1$s при импорте текста: %2$s"
 
-#: src/Controller/ExtJS/JsonRpc.php:303
+#: src/Controller/ExtJS/JsonRpc.php:299 src/Controller/ExtJS/JsonRpc.php:303
 #, php-format
 msgid "Factory \"%1$s\" not found"
 msgstr "Не найдена фабрика \"%1$s\""
 
+#: src/Controller/ExtJS/Order/Factory.php:63
+#: src/Controller/ExtJS/Order/Base/Product/Attribute/Factory.php:63
+#: src/Controller/ExtJS/Order/Base/Product/Factory.php:63
+#: src/Controller/ExtJS/Order/Base/Service/Attribute/Factory.php:63
+#: src/Controller/ExtJS/Order/Base/Service/Factory.php:63
+#: src/Controller/ExtJS/Order/Base/Address/Factory.php:63
+#: src/Controller/ExtJS/Order/Base/Factory.php:63
+#: src/Controller/ExtJS/Customer/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Customer/List/Factory.php:63
+#: src/Controller/ExtJS/Customer/Group/Factory.php:63
+#: src/Controller/ExtJS/Customer/Address/Factory.php:63
+#: src/Controller/ExtJS/Customer/Factory.php:63
+#: src/Controller/ExtJS/Media/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Media/List/Factory.php:63
+#: src/Controller/ExtJS/Media/Type/Factory.php:63
+#: src/Controller/ExtJS/Media/Factory.php:63
+#: src/Controller/ExtJS/Price/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Price/List/Factory.php:63
+#: src/Controller/ExtJS/Price/Type/Factory.php:62
+#: src/Controller/ExtJS/Price/Factory.php:63
+#: src/Controller/ExtJS/Product/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Product/List/Factory.php:63
+#: src/Controller/ExtJS/Product/Property/Type/Factory.php:63
+#: src/Controller/ExtJS/Product/Property/Factory.php:63
+#: src/Controller/ExtJS/Product/Type/Factory.php:63
+#: src/Controller/ExtJS/Product/Tag/Type/Factory.php:63
+#: src/Controller/ExtJS/Product/Tag/Factory.php:63
+#: src/Controller/ExtJS/Product/Stock/Warehouse/Factory.php:63
+#: src/Controller/ExtJS/Product/Stock/Factory.php:63
+#: src/Controller/ExtJS/Product/Factory.php:63
+#: src/Controller/ExtJS/Product/Import/Text/Factory.php:63
+#: src/Controller/ExtJS/Product/Export/Text/Factory.php:63
+#: src/Controller/ExtJS/Attribute/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Attribute/List/Factory.php:63
+#: src/Controller/ExtJS/Attribute/Type/Factory.php:63
+#: src/Controller/ExtJS/Attribute/Factory.php:63
+#: src/Controller/ExtJS/Attribute/Import/Text/Factory.php:63
+#: src/Controller/ExtJS/Attribute/Export/Text/Factory.php:63
+#: src/Controller/ExtJS/Catalog/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Catalog/List/Factory.php:63
+#: src/Controller/ExtJS/Catalog/Factory.php:63
+#: src/Controller/ExtJS/Catalog/Import/Text/Factory.php:63
+#: src/Controller/ExtJS/Catalog/Export/Text/Factory.php:63
+#: src/Controller/ExtJS/Text/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Text/List/Factory.php:63
+#: src/Controller/ExtJS/Text/Type/Factory.php:63
+#: src/Controller/ExtJS/Text/Factory.php:63
+#: src/Controller/ExtJS/Common/Factory/Abstract.php:54
+#: src/Controller/ExtJS/Plugin/Type/Factory.php:63
+#: src/Controller/ExtJS/Plugin/Factory.php:63
+#: src/Controller/ExtJS/Coupon/Code/Factory.php:63
+#: src/Controller/ExtJS/Coupon/Factory.php:63
+#: src/Controller/ExtJS/Admin/Cache/Factory.php:63
+#: src/Controller/ExtJS/Admin/Job/Factory.php:63
+#: src/Controller/ExtJS/Admin/Log/Factory.php:63
+#: src/Controller/ExtJS/Service/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Service/List/Factory.php:63
+#: src/Controller/ExtJS/Service/Type/Factory.php:63
+#: src/Controller/ExtJS/Service/Factory.php:63
+#: src/Controller/ExtJS/Locale/Language/Factory.php:63
+#: src/Controller/ExtJS/Locale/Currency/Factory.php:63
+#: src/Controller/ExtJS/Locale/Factory.php:63
+#: src/Controller/ExtJS/Locale/Site/Factory.php:63
+#: src/Controller/ExtJS/Supplier/List/Type/Factory.php:63
+#: src/Controller/ExtJS/Supplier/List/Factory.php:63
+#: src/Controller/ExtJS/Supplier/Address/Factory.php:63
+#: src/Controller/ExtJS/Supplier/Factory.php:63
 #: src/Controller/ExtJS/Order/Factory.php:67
 #: src/Controller/ExtJS/Order/Base/Product/Attribute/Factory.php:67
 #: src/Controller/ExtJS/Order/Base/Product/Factory.php:67
@@ -134,83 +252,94 @@ msgstr "Не найдена фабрика \"%1$s\""
 msgid "Invalid class name \"%1$s\""
 msgstr "Недопустимое название класса \"%1$s\""
 
-#: src/Controller/ExtJS/Factory.php:84
+#: src/Controller/ExtJS/Factory.php:80 src/Controller/ExtJS/Factory.php:84
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
 msgstr "Недопустимый контроллер \"%1$s\" в \"%2$s\""
 
+#: src/Controller/ExtJS/JsonRpc.php:291 src/Controller/ExtJS/JsonRpc.php:374
 #: src/Controller/ExtJS/JsonRpc.php:295 src/Controller/ExtJS/JsonRpc.php:382
 #, php-format
 msgid "Invalid controller factory name \"%1$s\""
 msgstr "Недопустимое название фабрики контроллера \"%1$s\""
 
+#: src/Controller/ExtJS/Common/Factory/Abstract.php:86
 #: src/Controller/ExtJS/Common/Factory/Base.php:90
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr "Недопустимый домен \"%1$s\""
 
+#: src/Controller/ExtJS/JsonRpc.php:384 src/Controller/ExtJS/Factory.php:95
 #: src/Controller/ExtJS/JsonRpc.php:392 src/Controller/ExtJS/Factory.php:99
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr "Недопустимая фабрика \"%1$s\""
 
+#: src/Controller/ExtJS/Catalog/Import/Text/Default.php:320
+#: src/Controller/ExtJS/Common/Load/Text/Abstract.php:194
 #: src/Controller/ExtJS/Catalog/Import/Text/Standard.php:283
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:198
 #, php-format
 msgid "Invalid list type \"%1$s\""
 msgstr "Недопустимый тип списка \"%1$s\""
 
-#: src/Controller/ExtJS/JsonRpc.php:286
+#: src/Controller/ExtJS/JsonRpc.php:282 src/Controller/ExtJS/JsonRpc.php:286
 #, php-format
 msgid "Invalid method \"%1$s\" in request"
 msgstr "Недопустимый метод \"%1$s\"в запросе"
 
+#: src/Controller/ExtJS/Common/Load/Text/Abstract.php:382
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:386
 #, php-format
 msgid "Invalid row from %1$s text import: %2$s"
 msgstr "Неверная строка из %1$s при импорте текста: %2$s"
 
-#: src/Controller/ExtJS/Base.php:446
+#: src/Controller/ExtJS/Abstract.php:446 src/Controller/ExtJS/Base.php:446
 #, php-format
 msgid "Invalid sort direction \"%1$s\""
 msgstr "Недопустимое направление сортировки \"%1$s\""
 
+#: src/Controller/ExtJS/Common/Load/Text/Abstract.php:391
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:395
 #, php-format
 msgid "Invalid text type \"%1$s\""
 msgstr "Недопустимый тип текста \"%1$s\""
 
-#: src/Controller/ExtJS/Base.php:333
+#: src/Controller/ExtJS/Abstract.php:333 src/Controller/ExtJS/Base.php:333
 #, php-format
 msgid "List item doesn't implement \"%1$s\""
 msgstr "Элемент списка не реализует \"%1$s\""
 
-#: src/Controller/ExtJS/JsonRpc.php:307
+#: src/Controller/ExtJS/JsonRpc.php:303 src/Controller/ExtJS/JsonRpc.php:307
 #, php-format
 msgid "Method \"%1$s\" not found"
 msgstr "Не найден метод \"%1$s\""
 
+#: src/Controller/ExtJS/Common/Load/Text/Abstract.php:107
+#: src/Controller/ExtJS/Abstract.php:293
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:111
 #: src/Controller/ExtJS/Base.php:293
 #, php-format
 msgid "Missing parameter \"%1$s\""
 msgstr "Неверный параметр \"%1$s\""
 
+#: src/Controller/ExtJS/Media/Default.php:550
 #: src/Controller/ExtJS/Media/Standard.php:441
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
 msgstr "Для \"%1$s\" не настроены допустимые типы изображений"
 
-#: src/Controller/ExtJS/JsonRpc.php:246
+#: src/Controller/ExtJS/JsonRpc.php:242 src/Controller/ExtJS/JsonRpc.php:246
 #, php-format
 msgid "Required attribute \"%1$s\" missing in request"
 msgstr "Ошибка в обязательном атрибуте \"%1$s\" при запросе"
 
-#: src/Controller/ExtJS/Base.php:478
+#: src/Controller/ExtJS/Abstract.php:478 src/Controller/ExtJS/Base.php:478
 #, php-format
 msgid "Site item for code \"%1$s\" not found"
 msgstr "Не найден элемент сайта для кода \"%1$s\""
 
+#: src/Controller/ExtJS/Common/Decorator/Abstract.php:49
 #: src/Controller/ExtJS/Common/Decorator/Base.php:53
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -226,6 +355,10 @@ msgstr ""
 msgid "Unable to create file in \"%1$s\""
 msgstr ""
 
+#: src/Controller/ExtJS/Product/Import/Text/Default.php:81
+#: src/Controller/ExtJS/Attribute/Import/Text/Default.php:80
+#: src/Controller/ExtJS/Catalog/Import/Text/Default.php:80
+#: src/Controller/ExtJS/Coupon/Code/Default.php:84
 #: src/Controller/ExtJS/Coupon/Code/Standard.php:87
 #, php-format
 msgid "Uploaded file could not be moved to upload directory \"%1$s\""

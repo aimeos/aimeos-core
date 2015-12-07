@@ -5,14 +5,15 @@
 # 
 # Translators:
 # Translators:
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: Aimeos\n"
+"Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2013-04-23 11:56+0000\n"
-"Last-Translator: nsendetzky <n.sendetzky@metaways.de>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2015-12-07 16:54+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Language-Team: English (http://www.transifex.com/aimeos/aimeos-core/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -177,36 +178,32 @@ msgstr "Expiry year"
 
 #. Warehouse code
 msgid "warehouse:default"
-msgstr ""
+msgstr "warehouse:default"
 
 #. Favorite action
 msgid "favorite"
-msgstr ""
+msgstr "favorite"
 
 #. Pin action
 msgid "pin"
-msgstr ""
+msgstr "pin"
 
 #. Watch action
 msgid "watch"
-msgstr ""
+msgstr "watch"
 
 #. Product property package-length
 msgid "package-length"
-msgstr ""
+msgstr "package-length"
 
 #. Product property package-width
 msgid "package-width"
-msgstr ""
+msgstr "package-width"
 
 #. Product property package-height
 msgid "package-height"
-msgstr ""
+msgstr "package-height"
 
 #. Product property package-weight
 msgid "package-weight"
-msgstr ""
-
-#. Default price format
-msgid "price:default"
-msgstr "%1$s %2$s"
+msgstr "package-weight"

@@ -1,6 +1,7 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 # manuel.fries <manuel.fries@gdatasoftware.com>, 2014
 msgid ""
 msgstr ""
