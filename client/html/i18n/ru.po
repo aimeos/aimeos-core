@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:17+0200\n"
+"POT-Creation-Date: 2015-12-07 16:42+0100\n"
 "PO-Revision-Date: 2015-10-02 08:10+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
@@ -80,19 +80,9 @@ msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%12$s\n%11$s\n%9$s %10$s\n%8$s\n%1
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: templates/checkout/standard/delivery-body-default.php:37
 #: templates/checkout/standard/payment-body-default.php:37
-#: templates/basket/related/bought-body-default.php:16
 #: templates/basket/mini/main-body-default.php:25
 #: templates/basket/mini/product-body-default.php:27
-#: templates/account/watch/body-default.php:90
-#: templates/account/favorite/body-default.php:90
-#: templates/catalog/detail/bought-body-default.php:17
-#: templates/catalog/detail/seen-body-default.php:16
-#: templates/catalog/detail/suggest-body-default.php:18
-#: templates/catalog/detail/bundle-body-default.php:17
-#: templates/catalog/session/pinned-body-default.php:104
-#: templates/catalog/lists/promo-body-default.php:17
-#: templates/catalog/lists/items-body-default.php:16
-#: templates/common/partials/price-default.php:20
+#: templates/catalog/lists/items-body-default.php:21
 #: templates/common/summary/detail-body-default.php:88
 #: templates/email/watch/text-detail-body-default.php:21
 #: templates/email/common/text-summary-detail-body-default.php:55
@@ -101,7 +91,7 @@ msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
-#: templates/common/partials/price-default.php:24
+#: templates/common/partials/price-default.php:22
 #: templates/email/watch/text-detail-body-default.php:27
 #, php-format
 msgid "%1$s %2$s off"
@@ -109,7 +99,7 @@ msgstr "скидка %1$s %2$s"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
-#: templates/catalog/detail/basket-attribute-body-default.php:60
+#: templates/common/partials/attribute-default.php:59
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
 msgstr "%1$s ( %4$s%2$s%3$s )"
@@ -121,16 +111,7 @@ msgid "%1$s at %2$s"
 msgstr "%1$s в %2$s"
 
 #. / Percent format with value (%1$s) and % sign
-#: templates/basket/related/bought-body-default.php:18
-#: templates/account/watch/body-default.php:92
-#: templates/account/favorite/body-default.php:92
-#: templates/catalog/detail/bought-body-default.php:19
-#: templates/catalog/detail/seen-body-default.php:18
-#: templates/catalog/detail/suggest-body-default.php:20
-#: templates/catalog/detail/bundle-body-default.php:19
-#: templates/catalog/session/pinned-body-default.php:106
-#: templates/catalog/lists/promo-body-default.php:19
-#: templates/catalog/lists/items-body-default.php:18
+#: templates/catalog/lists/items-body-default.php:23
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -149,7 +130,7 @@ msgstr "+"
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and
 #. currency (%2$s)
-#: templates/common/partials/price-default.php:22
+#: templates/common/partials/price-default.php:20
 #: templates/email/watch/text-detail-body-default.php:24
 #, php-format
 msgid "+ %1$s %2$s/item"
@@ -172,7 +153,7 @@ msgid "+1 123 456 7890"
 msgstr "+1 123 456 7890"
 
 #. / Rebate percent format with rebate percent value (%1$s)
-#: templates/common/partials/price-default.php:26
+#: templates/common/partials/price-default.php:24
 #: templates/email/watch/text-detail-body-default.php:30
 #, php-format
 msgid "-%1$s%%"
@@ -184,6 +165,7 @@ msgid "Account"
 msgstr "Учётная запись"
 
 #: templates/catalog/detail/basket-body-default.php:34
+#: templates/catalog/lists/items-body-default.php:143
 msgid "Add to basket"
 msgstr "Добавить в корзину"
 
@@ -224,7 +206,7 @@ msgstr "Все заказы отгружены в соответствии с у
 msgid "An account has been created for you."
 msgstr "Для Вас была создана учётная запись."
 
-#: templates/catalog/detail/basic-body-default.php:16
+#: templates/catalog/detail/basic-body-default.php:15
 msgid "Article no.:"
 msgstr "Артикул:"
 
@@ -271,7 +253,7 @@ msgstr "Ошибка в части \"%1$s\" адреса доставки"
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "Ошибка в части\"%1$s\" платёжного адреса"
 
-#: templates/catalog/detail/bundle-body-default.php:24
+#: templates/catalog/detail/bundle-body-default.php:19
 msgid "Bundled products"
 msgstr "Комплект товаров"
 
@@ -436,7 +418,7 @@ msgstr "E-Mail"
 msgid "E-mail notification"
 msgstr "Уведомление по e-mail"
 
-#: templates/account/favorite/body-default.php:105
+#: templates/account/favorite/body-default.php:100
 msgid "Favorite products"
 msgstr "Избранные товары"
 
@@ -478,11 +460,11 @@ msgid ""
 "policy\">privacy policy</a>"
 msgstr "Я принимаю <a href=\"%1$s\" target=\"_blank\" title=\"условия\" alt=\"условия\">условия</a> и согласен с <a href=\"%2$s\" target=\"_blank\" title=\"политика конфиденциальности\" alt=\"политика конфиденциальности\">политикой конфиденциальности</a>"
 
-#: templates/account/watch/body-default.php:163
+#: templates/account/watch/body-default.php:158
 msgid "If back in stock"
 msgstr "Если появится в наличии"
 
-#: templates/account/watch/body-default.php:157
+#: templates/account/watch/body-default.php:152
 msgid "If price decreases"
 msgstr "При снижении цены"
 
@@ -493,7 +475,7 @@ msgid "If you have any questions, please reply to this e-mail"
 msgstr "Если имеются вопросы, можете задать их в ответе на это письмо"
 
 #. / Tax rate format with tax rate in percent (%1$s)
-#: templates/common/partials/price-default.php:28
+#: templates/common/partials/price-default.php:26
 #: templates/common/summary/detail-body-default.php:277
 #: templates/email/watch/text-detail-body-default.php:33
 #: templates/email/common/text-summary-detail-body-default.php:108
@@ -597,7 +579,7 @@ msgid ""
 "try again with a different keyword."
 msgstr "Для <span class=\"searchstring\">\"%1$s\"</span> ничего не найдено. Попробуйте искать по другим словосочетаниям."
 
-#: src/Client/Html/Catalog/Detail/Standard.php:589
+#: src/Client/Html/Catalog/Detail/Standard.php:590
 #, php-format
 msgid "No product with ID \"%1$s\" found"
 msgstr "Не найден товар с ID \"%1$s\""
@@ -624,12 +606,12 @@ msgstr "Нет доступных режимов вывода"
 msgid "Number of coupon codes exceeds the limit"
 msgstr "Количество купонов на скидку превышает установленный предел"
 
-#: templates/common/partials/price-default.php:35
+#: templates/common/partials/price-default.php:33
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
 msgstr "Объект не реализует \"%1$s\""
 
-#: templates/account/watch/body-default.php:151
+#: templates/account/watch/body-default.php:146
 msgid "One month"
 msgstr "Один месяц"
 
@@ -638,7 +620,7 @@ msgstr "Один месяц"
 msgid "One or more products you are watching have been updated."
 msgstr "Были обновлены один или несколько просмотренных товаров."
 
-#: templates/account/watch/body-default.php:149
+#: templates/account/watch/body-default.php:144
 msgid "One week"
 msgstr "Одна неделя"
 
@@ -674,14 +656,14 @@ msgstr "Статус заказа"
 msgid "Order with ID \"%1$s\" not found"
 msgstr "Не найден заказ с номером \"%1$s\""
 
-#: templates/catalog/detail/bought-body-default.php:24
+#: templates/catalog/detail/bought-body-default.php:19
 msgid "Other customers also bought"
 msgstr "Другие клиенты также покупают"
 
-#: templates/account/watch/body-default.php:113
-#: templates/account/watch/body-default.php:184
-#: templates/account/favorite/body-default.php:114
-#: templates/account/favorite/body-default.php:152
+#: templates/account/watch/body-default.php:108
+#: templates/account/watch/body-default.php:179
+#: templates/account/favorite/body-default.php:109
+#: templates/account/favorite/body-default.php:147
 #: templates/catalog/lists/pagination-body-default.php:54
 #, php-format
 msgid "Page %1$d of %2$d"
@@ -710,7 +692,7 @@ msgstr "Издержки на оплату"
 msgid "Payment status"
 msgstr "Статус оплаты"
 
-#: templates/catalog/session/pinned-body-default.php:111
+#: templates/catalog/session/pinned-body-default.php:106
 msgid "Pinned products"
 msgstr "Отмеченные товары"
 
@@ -739,7 +721,7 @@ msgid "Please enter your payment details"
 msgstr "Введите данные для оплаты"
 
 #: templates/checkout/standard/process-body-default.php:91
-#: templates/catalog/detail/basket-selection-body-default.php:85
+#: templates/common/partials/selection-default.php:81
 msgid "Please select"
 msgstr "Сделайте выбор"
 
@@ -776,7 +758,7 @@ msgstr "Ошибка при обработке платежа"
 msgid "Product"
 msgstr "Товар"
 
-#: templates/basket/related/bought-body-default.php:23
+#: templates/basket/related/bought-body-default.php:18
 msgid "Products you might be also interested in"
 msgstr "Товары, которые могут быть Вам интересны"
 
@@ -907,7 +889,7 @@ msgstr "Улица"
 msgid "Sub-total"
 msgstr "Промежуточная сумма"
 
-#: templates/catalog/detail/suggest-body-default.php:25
+#: templates/catalog/detail/suggest-body-default.php:20
 msgid "Suggested products"
 msgstr "Рекомендованные товары"
 
@@ -1010,15 +992,15 @@ msgstr "Подтверждение оплаты за заказ пока ещё 
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr "Оплата за заказ %1$s от %2$s была возвращена."
 
-#: templates/account/watch/body-default.php:152
+#: templates/account/watch/body-default.php:147
 msgid "Three month"
 msgstr "Три месяца"
 
-#: templates/account/watch/body-default.php:147
+#: templates/account/watch/body-default.php:142
 msgid "Time frame"
 msgstr "Временные рамки"
 
-#: templates/catalog/lists/promo-body-default.php:24
+#: templates/catalog/lists/promo-body-default.php:19
 msgid "Top seller"
 msgstr "Лидеры продаж"
 
@@ -1038,7 +1020,7 @@ msgstr "Общее количество"
 msgid "Try again"
 msgstr "Попробуйте еще раз"
 
-#: templates/account/watch/body-default.php:150
+#: templates/account/watch/body-default.php:145
 msgid "Two weeks"
 msgstr "Две недели"
 
@@ -1077,11 +1059,11 @@ msgstr "Обновить"
 msgid "Vat ID"
 msgstr "ID НДС"
 
-#: templates/account/watch/body-default.php:168
+#: templates/account/watch/body-default.php:163
 msgid "Watch"
 msgstr "Следить"
 
-#: templates/account/watch/body-default.php:104
+#: templates/account/watch/body-default.php:99
 #: templates/email/watch/text-detail-body-default.php:40
 msgid "Watched products"
 msgstr "Просмотренные товары"
@@ -1101,9 +1083,9 @@ msgstr "Сайт"
 
 #: templates/basket/standard/coupon-body-default.php:39
 #: templates/account/history/order-body-default.php:17
-#: templates/account/watch/body-default.php:126
-#: templates/account/favorite/body-default.php:126
-#: templates/catalog/session/pinned-body-default.php:120
+#: templates/account/watch/body-default.php:121
+#: templates/account/favorite/body-default.php:121
+#: templates/catalog/session/pinned-body-default.php:115
 #: templates/common/summary/detail-body-default.php:198
 msgid "X"
 msgstr "Х"
@@ -1211,7 +1193,7 @@ msgstr "совпадает с платёжным"
 msgid "new address"
 msgstr "новый адрес"
 
-#: templates/catalog/detail/basket-attribute-body-default.php:52
+#: templates/common/partials/attribute-default.php:51
 msgid "none"
 msgstr "нет"
 
@@ -1267,18 +1249,18 @@ msgstr "▲ Название"
 msgid "▲ Price"
 msgstr "▲ Цена"
 
-#: templates/account/watch/body-default.php:114
-#: templates/account/watch/body-default.php:185
-#: templates/account/favorite/body-default.php:115
-#: templates/account/favorite/body-default.php:153
+#: templates/account/watch/body-default.php:109
+#: templates/account/watch/body-default.php:180
+#: templates/account/favorite/body-default.php:110
+#: templates/account/favorite/body-default.php:148
 #: templates/catalog/lists/pagination-body-default.php:55
 msgid "▶"
 msgstr "▶"
 
-#: templates/account/watch/body-default.php:115
-#: templates/account/watch/body-default.php:186
-#: templates/account/favorite/body-default.php:116
-#: templates/account/favorite/body-default.php:154
+#: templates/account/watch/body-default.php:110
+#: templates/account/watch/body-default.php:181
+#: templates/account/favorite/body-default.php:111
+#: templates/account/favorite/body-default.php:149
 #: templates/catalog/lists/pagination-body-default.php:56
 msgid "▶▶"
 msgstr "▶▶"
@@ -1295,18 +1277,18 @@ msgstr "▼ Название"
 msgid "▼ Price"
 msgstr "▼ Цена"
 
-#: templates/account/watch/body-default.php:112
-#: templates/account/watch/body-default.php:183
-#: templates/account/favorite/body-default.php:113
-#: templates/account/favorite/body-default.php:151
+#: templates/account/watch/body-default.php:107
+#: templates/account/watch/body-default.php:178
+#: templates/account/favorite/body-default.php:108
+#: templates/account/favorite/body-default.php:146
 #: templates/catalog/lists/pagination-body-default.php:53
 msgid "◀"
 msgstr "◀"
 
-#: templates/account/watch/body-default.php:111
-#: templates/account/watch/body-default.php:182
-#: templates/account/favorite/body-default.php:112
-#: templates/account/favorite/body-default.php:150
+#: templates/account/watch/body-default.php:106
+#: templates/account/watch/body-default.php:177
+#: templates/account/favorite/body-default.php:107
+#: templates/account/favorite/body-default.php:145
 #: templates/catalog/lists/pagination-body-default.php:52
 msgid "◀◀"
 msgstr "◀◀"

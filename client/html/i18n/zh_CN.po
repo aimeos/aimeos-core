@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:17+0200\n"
+"POT-Creation-Date: 2015-12-07 16:42+0100\n"
 "PO-Revision-Date: 2015-09-29 12:45+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
@@ -75,19 +75,9 @@ msgstr ""
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: templates/checkout/standard/delivery-body-default.php:37
 #: templates/checkout/standard/payment-body-default.php:37
-#: templates/basket/related/bought-body-default.php:16
 #: templates/basket/mini/main-body-default.php:25
 #: templates/basket/mini/product-body-default.php:27
-#: templates/account/watch/body-default.php:90
-#: templates/account/favorite/body-default.php:90
-#: templates/catalog/detail/bought-body-default.php:17
-#: templates/catalog/detail/seen-body-default.php:16
-#: templates/catalog/detail/suggest-body-default.php:18
-#: templates/catalog/detail/bundle-body-default.php:17
-#: templates/catalog/session/pinned-body-default.php:104
-#: templates/catalog/lists/promo-body-default.php:17
-#: templates/catalog/lists/items-body-default.php:16
-#: templates/common/partials/price-default.php:20
+#: templates/catalog/lists/items-body-default.php:21
 #: templates/common/summary/detail-body-default.php:88
 #: templates/email/watch/text-detail-body-default.php:21
 #: templates/email/common/text-summary-detail-body-default.php:55
@@ -96,7 +86,7 @@ msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
-#: templates/common/partials/price-default.php:24
+#: templates/common/partials/price-default.php:22
 #: templates/email/watch/text-detail-body-default.php:27
 #, php-format
 msgid "%1$s %2$s off"
@@ -104,7 +94,7 @@ msgstr ""
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
-#: templates/catalog/detail/basket-attribute-body-default.php:60
+#: templates/common/partials/attribute-default.php:59
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
 msgstr ""
@@ -116,16 +106,7 @@ msgid "%1$s at %2$s"
 msgstr "%1$s 在 %2$s"
 
 #. / Percent format with value (%1$s) and % sign
-#: templates/basket/related/bought-body-default.php:18
-#: templates/account/watch/body-default.php:92
-#: templates/account/favorite/body-default.php:92
-#: templates/catalog/detail/bought-body-default.php:19
-#: templates/catalog/detail/seen-body-default.php:18
-#: templates/catalog/detail/suggest-body-default.php:20
-#: templates/catalog/detail/bundle-body-default.php:19
-#: templates/catalog/session/pinned-body-default.php:106
-#: templates/catalog/lists/promo-body-default.php:19
-#: templates/catalog/lists/items-body-default.php:18
+#: templates/catalog/lists/items-body-default.php:23
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -144,7 +125,7 @@ msgstr ""
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and
 #. currency (%2$s)
-#: templates/common/partials/price-default.php:22
+#: templates/common/partials/price-default.php:20
 #: templates/email/watch/text-detail-body-default.php:24
 #, php-format
 msgid "+ %1$s %2$s/item"
@@ -167,7 +148,7 @@ msgid "+1 123 456 7890"
 msgstr ""
 
 #. / Rebate percent format with rebate percent value (%1$s)
-#: templates/common/partials/price-default.php:26
+#: templates/common/partials/price-default.php:24
 #: templates/email/watch/text-detail-body-default.php:30
 #, php-format
 msgid "-%1$s%%"
@@ -179,6 +160,7 @@ msgid "Account"
 msgstr ""
 
 #: templates/catalog/detail/basket-body-default.php:34
+#: templates/catalog/lists/items-body-default.php:143
 msgid "Add to basket"
 msgstr "加入购物车"
 
@@ -219,7 +201,7 @@ msgstr "所有交付运受限于我们的条款和条件，这是在我们的网
 msgid "An account has been created for you."
 msgstr ""
 
-#: templates/catalog/detail/basic-body-default.php:16
+#: templates/catalog/detail/basic-body-default.php:15
 msgid "Article no.:"
 msgstr "产品号："
 
@@ -266,7 +248,7 @@ msgstr ""
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "账单地址 \"%1$s\" 有误"
 
-#: templates/catalog/detail/bundle-body-default.php:24
+#: templates/catalog/detail/bundle-body-default.php:19
 msgid "Bundled products"
 msgstr ""
 
@@ -431,7 +413,7 @@ msgstr "电子邮件"
 msgid "E-mail notification"
 msgstr ""
 
-#: templates/account/favorite/body-default.php:105
+#: templates/account/favorite/body-default.php:100
 msgid "Favorite products"
 msgstr ""
 
@@ -473,11 +455,11 @@ msgid ""
 "policy\">privacy policy</a>"
 msgstr "我接受 <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">条款及细则</a> and <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">隐私权政策</a>"
 
-#: templates/account/watch/body-default.php:163
+#: templates/account/watch/body-default.php:158
 msgid "If back in stock"
 msgstr ""
 
-#: templates/account/watch/body-default.php:157
+#: templates/account/watch/body-default.php:152
 msgid "If price decreases"
 msgstr ""
 
@@ -488,7 +470,7 @@ msgid "If you have any questions, please reply to this e-mail"
 msgstr "如果您有任何疑问，请回复此邮件"
 
 #. / Tax rate format with tax rate in percent (%1$s)
-#: templates/common/partials/price-default.php:28
+#: templates/common/partials/price-default.php:26
 #: templates/common/summary/detail-body-default.php:277
 #: templates/email/watch/text-detail-body-default.php:33
 #: templates/email/common/text-summary-detail-body-default.php:108
@@ -592,7 +574,7 @@ msgid ""
 "try again with a different keyword."
 msgstr "未找到<span class=\"searchstring\">\"%1$s\"</span>产品。请换关键词再试。"
 
-#: src/Client/Html/Catalog/Detail/Standard.php:589
+#: src/Client/Html/Catalog/Detail/Standard.php:590
 #, php-format
 msgid "No product with ID \"%1$s\" found"
 msgstr ""
@@ -619,12 +601,12 @@ msgstr "没有可用的视图"
 msgid "Number of coupon codes exceeds the limit"
 msgstr ""
 
-#: templates/common/partials/price-default.php:35
+#: templates/common/partials/price-default.php:33
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
 msgstr ""
 
-#: templates/account/watch/body-default.php:151
+#: templates/account/watch/body-default.php:146
 msgid "One month"
 msgstr ""
 
@@ -633,7 +615,7 @@ msgstr ""
 msgid "One or more products you are watching have been updated."
 msgstr ""
 
-#: templates/account/watch/body-default.php:149
+#: templates/account/watch/body-default.php:144
 msgid "One week"
 msgstr ""
 
@@ -669,14 +651,14 @@ msgstr ""
 msgid "Order with ID \"%1$s\" not found"
 msgstr "订单 ID为 \"%1$s\" 未找到"
 
-#: templates/catalog/detail/bought-body-default.php:24
+#: templates/catalog/detail/bought-body-default.php:19
 msgid "Other customers also bought"
 msgstr ""
 
-#: templates/account/watch/body-default.php:113
-#: templates/account/watch/body-default.php:184
-#: templates/account/favorite/body-default.php:114
-#: templates/account/favorite/body-default.php:152
+#: templates/account/watch/body-default.php:108
+#: templates/account/watch/body-default.php:179
+#: templates/account/favorite/body-default.php:109
+#: templates/account/favorite/body-default.php:147
 #: templates/catalog/lists/pagination-body-default.php:54
 #, php-format
 msgid "Page %1$d of %2$d"
@@ -705,7 +687,7 @@ msgstr "支付费"
 msgid "Payment status"
 msgstr "支付状态"
 
-#: templates/catalog/session/pinned-body-default.php:111
+#: templates/catalog/session/pinned-body-default.php:106
 msgid "Pinned products"
 msgstr ""
 
@@ -734,7 +716,7 @@ msgid "Please enter your payment details"
 msgstr ""
 
 #: templates/checkout/standard/process-body-default.php:91
-#: templates/catalog/detail/basket-selection-body-default.php:85
+#: templates/common/partials/selection-default.php:81
 msgid "Please select"
 msgstr "请选择"
 
@@ -771,7 +753,7 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: templates/basket/related/bought-body-default.php:23
+#: templates/basket/related/bought-body-default.php:18
 msgid "Products you might be also interested in"
 msgstr ""
 
@@ -899,7 +881,7 @@ msgstr "街道"
 msgid "Sub-total"
 msgstr "小计"
 
-#: templates/catalog/detail/suggest-body-default.php:25
+#: templates/catalog/detail/suggest-body-default.php:20
 msgid "Suggested products"
 msgstr "建议产品"
 
@@ -1002,15 +984,15 @@ msgstr ""
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr "%2$s的订单%1$s退款已经完成。"
 
-#: templates/account/watch/body-default.php:152
+#: templates/account/watch/body-default.php:147
 msgid "Three month"
 msgstr ""
 
-#: templates/account/watch/body-default.php:147
+#: templates/account/watch/body-default.php:142
 msgid "Time frame"
 msgstr ""
 
-#: templates/catalog/lists/promo-body-default.php:24
+#: templates/catalog/lists/promo-body-default.php:19
 msgid "Top seller"
 msgstr "畅销产品"
 
@@ -1030,7 +1012,7 @@ msgstr ""
 msgid "Try again"
 msgstr "再试一次"
 
-#: templates/account/watch/body-default.php:150
+#: templates/account/watch/body-default.php:145
 msgid "Two weeks"
 msgstr ""
 
@@ -1069,11 +1051,11 @@ msgstr "更新"
 msgid "Vat ID"
 msgstr ""
 
-#: templates/account/watch/body-default.php:168
+#: templates/account/watch/body-default.php:163
 msgid "Watch"
 msgstr ""
 
-#: templates/account/watch/body-default.php:104
+#: templates/account/watch/body-default.php:99
 #: templates/email/watch/text-detail-body-default.php:40
 msgid "Watched products"
 msgstr ""
@@ -1093,9 +1075,9 @@ msgstr "网址"
 
 #: templates/basket/standard/coupon-body-default.php:39
 #: templates/account/history/order-body-default.php:17
-#: templates/account/watch/body-default.php:126
-#: templates/account/favorite/body-default.php:126
-#: templates/catalog/session/pinned-body-default.php:120
+#: templates/account/watch/body-default.php:121
+#: templates/account/favorite/body-default.php:121
+#: templates/catalog/session/pinned-body-default.php:115
 #: templates/common/summary/detail-body-default.php:198
 msgid "X"
 msgstr "X"
@@ -1203,7 +1185,7 @@ msgstr "跟账单地址一样"
 msgid "new address"
 msgstr "新地址"
 
-#: templates/catalog/detail/basket-attribute-body-default.php:52
+#: templates/common/partials/attribute-default.php:51
 msgid "none"
 msgstr ""
 
@@ -1259,18 +1241,18 @@ msgstr ""
 msgid "▲ Price"
 msgstr ""
 
-#: templates/account/watch/body-default.php:114
-#: templates/account/watch/body-default.php:185
-#: templates/account/favorite/body-default.php:115
-#: templates/account/favorite/body-default.php:153
+#: templates/account/watch/body-default.php:109
+#: templates/account/watch/body-default.php:180
+#: templates/account/favorite/body-default.php:110
+#: templates/account/favorite/body-default.php:148
 #: templates/catalog/lists/pagination-body-default.php:55
 msgid "▶"
 msgstr ""
 
-#: templates/account/watch/body-default.php:115
-#: templates/account/watch/body-default.php:186
-#: templates/account/favorite/body-default.php:116
-#: templates/account/favorite/body-default.php:154
+#: templates/account/watch/body-default.php:110
+#: templates/account/watch/body-default.php:181
+#: templates/account/favorite/body-default.php:111
+#: templates/account/favorite/body-default.php:149
 #: templates/catalog/lists/pagination-body-default.php:56
 msgid "▶▶"
 msgstr ""
@@ -1287,18 +1269,18 @@ msgstr ""
 msgid "▼ Price"
 msgstr ""
 
-#: templates/account/watch/body-default.php:112
-#: templates/account/watch/body-default.php:183
-#: templates/account/favorite/body-default.php:113
-#: templates/account/favorite/body-default.php:151
+#: templates/account/watch/body-default.php:107
+#: templates/account/watch/body-default.php:178
+#: templates/account/favorite/body-default.php:108
+#: templates/account/favorite/body-default.php:146
 #: templates/catalog/lists/pagination-body-default.php:53
 msgid "◀"
 msgstr ""
 
-#: templates/account/watch/body-default.php:111
-#: templates/account/watch/body-default.php:182
-#: templates/account/favorite/body-default.php:112
-#: templates/account/favorite/body-default.php:150
+#: templates/account/watch/body-default.php:106
+#: templates/account/watch/body-default.php:177
+#: templates/account/favorite/body-default.php:107
+#: templates/account/favorite/body-default.php:145
 #: templates/catalog/lists/pagination-body-default.php:52
 msgid "◀◀"
 msgstr ""

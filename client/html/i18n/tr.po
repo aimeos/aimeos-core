@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:17+0200\n"
-"PO-Revision-Date: 2015-09-29 12:45+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2015-12-07 16:42+0100\n"
+"PO-Revision-Date: 2015-12-04 23:54+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "%1$d article"
 msgid_plural "%1$d articles"
 msgstr[0] "%1$d makale"
-msgstr[1] "%1$d articles"
+msgstr[1] "%1$d ürün"
 
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
 #. first name (%4$s), last name (%5$s),
@@ -76,19 +76,9 @@ msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%1
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: templates/checkout/standard/delivery-body-default.php:37
 #: templates/checkout/standard/payment-body-default.php:37
-#: templates/basket/related/bought-body-default.php:16
 #: templates/basket/mini/main-body-default.php:25
 #: templates/basket/mini/product-body-default.php:27
-#: templates/account/watch/body-default.php:90
-#: templates/account/favorite/body-default.php:90
-#: templates/catalog/detail/bought-body-default.php:17
-#: templates/catalog/detail/seen-body-default.php:16
-#: templates/catalog/detail/suggest-body-default.php:18
-#: templates/catalog/detail/bundle-body-default.php:17
-#: templates/catalog/session/pinned-body-default.php:104
-#: templates/catalog/lists/promo-body-default.php:17
-#: templates/catalog/lists/items-body-default.php:16
-#: templates/common/partials/price-default.php:20
+#: templates/catalog/lists/items-body-default.php:21
 #: templates/common/summary/detail-body-default.php:88
 #: templates/email/watch/text-detail-body-default.php:21
 #: templates/email/common/text-summary-detail-body-default.php:55
@@ -97,7 +87,7 @@ msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
-#: templates/common/partials/price-default.php:24
+#: templates/common/partials/price-default.php:22
 #: templates/email/watch/text-detail-body-default.php:27
 #, php-format
 msgid "%1$s %2$s off"
@@ -105,7 +95,7 @@ msgstr "%1$s %2$s indirim"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
-#: templates/catalog/detail/basket-attribute-body-default.php:60
+#: templates/common/partials/attribute-default.php:59
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
 msgstr "%1$s ( %4$s%2$s%3$s )"
@@ -117,16 +107,7 @@ msgid "%1$s at %2$s"
 msgstr "%1$s, %2$s tarihinde"
 
 #. / Percent format with value (%1$s) and % sign
-#: templates/basket/related/bought-body-default.php:18
-#: templates/account/watch/body-default.php:92
-#: templates/account/favorite/body-default.php:92
-#: templates/catalog/detail/bought-body-default.php:19
-#: templates/catalog/detail/seen-body-default.php:18
-#: templates/catalog/detail/suggest-body-default.php:20
-#: templates/catalog/detail/bundle-body-default.php:19
-#: templates/catalog/session/pinned-body-default.php:106
-#: templates/catalog/lists/promo-body-default.php:19
-#: templates/catalog/lists/items-body-default.php:18
+#: templates/catalog/lists/items-body-default.php:23
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -145,7 +126,7 @@ msgstr "+"
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and
 #. currency (%2$s)
-#: templates/common/partials/price-default.php:22
+#: templates/common/partials/price-default.php:20
 #: templates/email/watch/text-detail-body-default.php:24
 #, php-format
 msgid "+ %1$s %2$s/item"
@@ -168,7 +149,7 @@ msgid "+1 123 456 7890"
 msgstr "+1 123 456 7890"
 
 #. / Rebate percent format with rebate percent value (%1$s)
-#: templates/common/partials/price-default.php:26
+#: templates/common/partials/price-default.php:24
 #: templates/email/watch/text-detail-body-default.php:30
 #, php-format
 msgid "-%1$s%%"
@@ -177,9 +158,10 @@ msgstr "-%1$s%%"
 #: templates/email/account/text-detail-body-default.php:16
 #: templates/email/account/html-detail-body-default.php:18
 msgid "Account"
-msgstr ""
+msgstr "Hesap"
 
 #: templates/catalog/detail/basket-body-default.php:34
+#: templates/catalog/lists/items-body-default.php:143
 msgid "Add to basket"
 msgstr "Sepete ekle"
 
@@ -213,14 +195,14 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
-msgstr "Sevk edilen tüm gönderiler web sitemizde yer alan ve siparişinizi verdiğinizde kabul etmiş sayıldığınız hüküm ve koşullara tabidir,.\n\nBu e-mail gizli bilgi içermektedir ve sadece hitap edilen kişinin kullanımı içindir. Eğer bu kişi siz değilseniz lütfen bu maile cevap verin ve daha sonra ekleriyle beraber bu e-maili silin."
+msgstr "Sevk edilen tüm gönderiler web sitemizde yer alan ve siparişinizi verdiğinizde kabul etmiş sayıldığınız hüküm ve koşullara tabidir.\n\nBu e-mail gizli bilgi içermektedir ve sadece hitap edilen kişinin kullanımı içindir. Eğer bu kişi siz değilseniz lütfen bu maile cevap verin ve daha sonra ekleriyle beraber bu e-maili silin."
 
 #: templates/email/account/html-intro-body-default.php:9
 #: templates/email/account/text-intro-body-default.php:8
 msgid "An account has been created for you."
-msgstr ""
+msgstr "Sizin için bir hesap oluşturuldu."
 
-#: templates/catalog/detail/basic-body-default.php:16
+#: templates/catalog/detail/basic-body-default.php:15
 msgid "Article no.:"
 msgstr "Ürün kodu:"
 
@@ -267,7 +249,7 @@ msgstr "Fatura adresi bölüm \"%1$s\" geçersiz"
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "Fatura adresi bölüm \"%1$s\" eksik"
 
-#: templates/catalog/detail/bundle-body-default.php:24
+#: templates/catalog/detail/bundle-body-default.php:19
 msgid "Bundled products"
 msgstr "Sarılmış ürünler"
 
@@ -432,7 +414,7 @@ msgstr "E-Posta"
 msgid "E-mail notification"
 msgstr "E-posta bildirimi"
 
-#: templates/account/favorite/body-default.php:105
+#: templates/account/favorite/body-default.php:100
 msgid "Favorite products"
 msgstr "Favori ürünler"
 
@@ -474,13 +456,13 @@ msgid ""
 "policy\">privacy policy</a>"
 msgstr "<a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">Hükümler ve koşullar</a> ve<a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">gizlilik politikası</a> şartlarını kabul ediyorum."
 
-#: templates/account/watch/body-default.php:163
+#: templates/account/watch/body-default.php:158
 msgid "If back in stock"
 msgstr "Stoğa girdiğinde"
 
-#: templates/account/watch/body-default.php:157
+#: templates/account/watch/body-default.php:152
 msgid "If price decreases"
-msgstr "Eğer fiyat düşerse"
+msgstr "Fiyat düştüğünde"
 
 #. / E-mail outro
 #: templates/email/common/text-outro-body-default.php:9
@@ -489,7 +471,7 @@ msgid "If you have any questions, please reply to this e-mail"
 msgstr "Herhangi bir sorunuz varsa lütfen bu maili cevaplayın"
 
 #. / Tax rate format with tax rate in percent (%1$s)
-#: templates/common/partials/price-default.php:28
+#: templates/common/partials/price-default.php:26
 #: templates/common/summary/detail-body-default.php:277
 #: templates/email/watch/text-detail-body-default.php:33
 #: templates/email/common/text-summary-detail-body-default.php:108
@@ -591,9 +573,9 @@ msgstr "Sonraki"
 msgid ""
 "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
 "try again with a different keyword."
-msgstr "<span class=\"searchstring\">\"%1$s\"</span> için hiç bir madde bulunamadı. Lütfen farklı bir anahtar kelime ile tekrar deneyin."
+msgstr "<span class=\"searchstring\">\"%1$s\"</span> için hiç bir sonuç bulunamadı. Lütfen farklı bir anahtar kelime ile tekrar deneyin."
 
-#: src/Client/Html/Catalog/Detail/Standard.php:589
+#: src/Client/Html/Catalog/Detail/Standard.php:590
 #, php-format
 msgid "No product with ID \"%1$s\" found"
 msgstr "\"%1$s\" ID'ye sahip ürün bulunamadı"
@@ -620,12 +602,12 @@ msgstr "Hiçbir görünüm mevcut değil"
 msgid "Number of coupon codes exceeds the limit"
 msgstr "Kupon kodu sayısı limiti aşıyor"
 
-#: templates/common/partials/price-default.php:35
+#: templates/common/partials/price-default.php:33
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
 msgstr "Nesne \"%1$s\" uygulamıyor"
 
-#: templates/account/watch/body-default.php:151
+#: templates/account/watch/body-default.php:146
 msgid "One month"
 msgstr "Bir ay"
 
@@ -634,7 +616,7 @@ msgstr "Bir ay"
 msgid "One or more products you are watching have been updated."
 msgstr "İzlediğiniz bir veya daha fazla ürün güncellendi."
 
-#: templates/account/watch/body-default.php:149
+#: templates/account/watch/body-default.php:144
 msgid "One week"
 msgstr "Bir hafta"
 
@@ -670,14 +652,14 @@ msgstr "Sipariş durumu"
 msgid "Order with ID \"%1$s\" not found"
 msgstr "\"%1$s\" ID'li sipariş bulunamadı"
 
-#: templates/catalog/detail/bought-body-default.php:24
+#: templates/catalog/detail/bought-body-default.php:19
 msgid "Other customers also bought"
 msgstr "Diğer müşteriler şunları da aldı"
 
-#: templates/account/watch/body-default.php:113
-#: templates/account/watch/body-default.php:184
-#: templates/account/favorite/body-default.php:114
-#: templates/account/favorite/body-default.php:152
+#: templates/account/watch/body-default.php:108
+#: templates/account/watch/body-default.php:179
+#: templates/account/favorite/body-default.php:109
+#: templates/account/favorite/body-default.php:147
 #: templates/catalog/lists/pagination-body-default.php:54
 #, php-format
 msgid "Page %1$d of %2$d"
@@ -686,7 +668,7 @@ msgstr "Toplam %2$d sayfadan %1$d.'si"
 #: templates/email/account/text-detail-body-default.php:18
 #: templates/email/account/html-detail-body-default.php:22
 msgid "Password"
-msgstr ""
+msgstr "Şifre"
 
 #: templates/checkout/standard/process-body-default.php:115
 msgid "Pay now"
@@ -706,7 +688,7 @@ msgstr "Ödeme maliyetleri"
 msgid "Payment status"
 msgstr "Ödeme durumu"
 
-#: templates/catalog/session/pinned-body-default.php:111
+#: templates/catalog/session/pinned-body-default.php:106
 msgid "Pinned products"
 msgstr "Sabitlenmiş ürünler"
 
@@ -735,7 +717,7 @@ msgid "Please enter your payment details"
 msgstr "Lütfen ödeme detaylarını giriniz"
 
 #: templates/checkout/standard/process-body-default.php:91
-#: templates/catalog/detail/basket-selection-body-default.php:85
+#: templates/common/partials/selection-default.php:81
 msgid "Please select"
 msgstr "Lütfen seçiniz"
 
@@ -770,9 +752,9 @@ msgstr "Ödeme işleme başarısız oldu"
 
 #: templates/basket/mini/product-body-default.php:36
 msgid "Product"
-msgstr ""
+msgstr "Ürün"
 
-#: templates/basket/related/bought-body-default.php:23
+#: templates/basket/related/bought-body-default.php:18
 msgid "Products you might be also interested in"
 msgstr "İlgilenebileceğiniz diğer ürünler"
 
@@ -782,7 +764,7 @@ msgstr "Özellikler"
 
 #: templates/basket/mini/product-body-default.php:37
 msgid "Qty"
-msgstr ""
+msgstr "Miktar"
 
 #: templates/common/summary/detail-body-default.php:108
 #: templates/email/common/text-summary-detail-body-default.php:76
@@ -901,7 +883,7 @@ msgstr "Sokak"
 msgid "Sub-total"
 msgstr "Ara-toplam"
 
-#: templates/catalog/detail/suggest-body-default.php:25
+#: templates/catalog/detail/suggest-body-default.php:20
 msgid "Suggested products"
 msgstr "Önerilen ürünler"
 
@@ -1004,15 +986,15 @@ msgstr "Siparişiniz için ödeme onayı hala bekliyor.\nÖdeme yetkilendirildi�
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr "%2$s 'dan %1$s siparişinizin ödemesi iade edilmiştir."
 
-#: templates/account/watch/body-default.php:152
+#: templates/account/watch/body-default.php:147
 msgid "Three month"
 msgstr "Üç ay"
 
-#: templates/account/watch/body-default.php:147
+#: templates/account/watch/body-default.php:142
 msgid "Time frame"
 msgstr "Zaman aralığı"
 
-#: templates/catalog/lists/promo-body-default.php:24
+#: templates/catalog/lists/promo-body-default.php:19
 msgid "Top seller"
 msgstr "Popüler ürünler"
 
@@ -1032,7 +1014,7 @@ msgstr "Toplam miktar"
 msgid "Try again"
 msgstr "Tekrar deneyin"
 
-#: templates/account/watch/body-default.php:150
+#: templates/account/watch/body-default.php:145
 msgid "Two weeks"
 msgstr "İki hafta"
 
@@ -1044,7 +1026,7 @@ msgstr "Metot \"%1$s\" çağrılamıyor"
 #: src/Client/Html/Checkout/Standard/Order/Account/Standard.php:283
 #, php-format
 msgid "Unable to create an account for \"%1$s\": %2$s"
-msgstr ""
+msgstr "\"%1$s\" için bir hesap oluşturulamıyor: %2$s"
 
 #: src/Client/Html/Checkout/Standard/Order/Address/Standard.php:272
 #, php-format
@@ -1069,13 +1051,13 @@ msgstr "Güncelle"
 #: templates/common/partials/address-eu.php:118
 #: templates/common/partials/address-default.php:118
 msgid "Vat ID"
-msgstr "Vergi Numarası"
+msgstr "Vergi Dairesi/Numarası"
 
-#: templates/account/watch/body-default.php:168
+#: templates/account/watch/body-default.php:163
 msgid "Watch"
 msgstr "İzle"
 
-#: templates/account/watch/body-default.php:104
+#: templates/account/watch/body-default.php:99
 #: templates/email/watch/text-detail-body-default.php:40
 msgid "Watched products"
 msgstr "İzlenen ürünler"
@@ -1095,9 +1077,9 @@ msgstr "Web sitesi"
 
 #: templates/basket/standard/coupon-body-default.php:39
 #: templates/account/history/order-body-default.php:17
-#: templates/account/watch/body-default.php:126
-#: templates/account/favorite/body-default.php:126
-#: templates/catalog/session/pinned-body-default.php:120
+#: templates/account/watch/body-default.php:121
+#: templates/account/favorite/body-default.php:121
+#: templates/catalog/session/pinned-body-default.php:115
 #: templates/common/summary/detail-body-default.php:198
 msgid "X"
 msgstr "X"
@@ -1134,7 +1116,7 @@ msgstr "Şimdi bir sonraki adıma yönlendirileceksiniz"
 #: templates/email/account/text-detail-body-default.php:14
 #: templates/email/account/html-detail-body-default.php:13
 msgid "Your account"
-msgstr ""
+msgstr "Hesabınız"
 
 #: templates/catalog/filter/attribute-body-default.php:57
 msgid "Your choice"
@@ -1143,7 +1125,7 @@ msgstr "Seçiminiz"
 #. / Account creation e-mail subject
 #: templates/email/account/header-default.php:9
 msgid "Your new account"
-msgstr ""
+msgstr "Yeni hesabınız"
 
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
@@ -1174,7 +1156,7 @@ msgstr "İzlediğiniz ürünler"
 #: src/Client/Html/Checkout/Standard/Address/Standard.php:16
 #, php-format
 msgid "address"
-msgstr "adres"
+msgstr "Adres"
 
 #: templates/catalog/filter/attribute-body-default.php:70
 msgid "clear all"
@@ -1185,7 +1167,7 @@ msgstr "hepsini temizle"
 #: src/Client/Html/Checkout/Standard/Delivery/Standard.php:16
 #, php-format
 msgid "delivery"
-msgstr "teslimat"
+msgstr "Teslimat"
 
 #. / Price quantity format with quantity (%1$s)
 #: templates/common/partials/price-default.php:18
@@ -1205,7 +1187,7 @@ msgstr "fatura adresi ile aynı"
 msgid "new address"
 msgstr "yeni adres"
 
-#: templates/catalog/detail/basket-attribute-body-default.php:52
+#: templates/common/partials/attribute-default.php:51
 msgid "none"
 msgstr "hiçbiri"
 
@@ -1220,12 +1202,12 @@ msgstr "sipariş"
 #: src/Client/Html/Checkout/Standard/Payment/Standard.php:16
 #, php-format
 msgid "payment"
-msgstr "ödeme"
+msgstr "Ödeme"
 
 #: src/Client/Html/Checkout/Standard/Process/Standard.php:15
 #, php-format
 msgid "process"
-msgstr "işlem"
+msgstr "İşlem"
 
 #. / code for "product is in stock"
 #: templates/catalog/stock/body-default.php:56
@@ -1251,7 +1233,7 @@ msgstr "Ürün sınırsız sayıda mevcut"
 #: src/Client/Html/Checkout/Standard/Summary/Standard.php:16
 #, php-format
 msgid "summary"
-msgstr "özet"
+msgstr "Özet"
 
 #: templates/catalog/lists/pagination-body-default.php:25
 msgid "▲ Name"
@@ -1261,25 +1243,25 @@ msgstr "▲ Ad"
 msgid "▲ Price"
 msgstr "▲ Fiyat"
 
-#: templates/account/watch/body-default.php:114
-#: templates/account/watch/body-default.php:185
-#: templates/account/favorite/body-default.php:115
-#: templates/account/favorite/body-default.php:153
+#: templates/account/watch/body-default.php:109
+#: templates/account/watch/body-default.php:180
+#: templates/account/favorite/body-default.php:110
+#: templates/account/favorite/body-default.php:148
 #: templates/catalog/lists/pagination-body-default.php:55
 msgid "▶"
 msgstr "▶"
 
-#: templates/account/watch/body-default.php:115
-#: templates/account/watch/body-default.php:186
-#: templates/account/favorite/body-default.php:116
-#: templates/account/favorite/body-default.php:154
+#: templates/account/watch/body-default.php:110
+#: templates/account/watch/body-default.php:181
+#: templates/account/favorite/body-default.php:111
+#: templates/account/favorite/body-default.php:149
 #: templates/catalog/lists/pagination-body-default.php:56
 msgid "▶▶"
 msgstr "▶▶"
 
 #: templates/basket/mini/product-body-default.php:31
 msgid "▼"
-msgstr ""
+msgstr "▼"
 
 #: templates/catalog/lists/pagination-body-default.php:23
 msgid "▼ Name"
@@ -1289,18 +1271,18 @@ msgstr "▼ Ad"
 msgid "▼ Price"
 msgstr "▼ Fiyat"
 
-#: templates/account/watch/body-default.php:112
-#: templates/account/watch/body-default.php:183
-#: templates/account/favorite/body-default.php:113
-#: templates/account/favorite/body-default.php:151
+#: templates/account/watch/body-default.php:107
+#: templates/account/watch/body-default.php:178
+#: templates/account/favorite/body-default.php:108
+#: templates/account/favorite/body-default.php:146
 #: templates/catalog/lists/pagination-body-default.php:53
 msgid "◀"
 msgstr "◀"
 
-#: templates/account/watch/body-default.php:111
-#: templates/account/watch/body-default.php:182
-#: templates/account/favorite/body-default.php:112
-#: templates/account/favorite/body-default.php:150
+#: templates/account/watch/body-default.php:106
+#: templates/account/watch/body-default.php:177
+#: templates/account/favorite/body-default.php:107
+#: templates/account/favorite/body-default.php:145
 #: templates/catalog/lists/pagination-body-default.php:52
 msgid "◀◀"
 msgstr "◀◀"

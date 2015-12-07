@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 19:56+0200\n"
+"POT-Creation-Date: 2015-12-07 16:38+0100\n"
 "PO-Revision-Date: 2015-09-29 12:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/Controller/Common/Order/Factory.php:107
 #: src/Controller/Common/Product/Import/Csv/Base.php:81
-#: src/Controller/Common/Product/Import/Csv/Base.php:267
+#: src/Controller/Common/Product/Import/Csv/Base.php:268
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
@@ -30,19 +30,19 @@ msgid "Class \"%1$s\" not available"
 msgstr ""
 
 #: src/Controller/Common/Product/Import/Csv/Base.php:75
-#: src/Controller/Common/Product/Import/Csv/Base.php:261
+#: src/Controller/Common/Product/Import/Csv/Base.php:262
 #, php-format
 msgid "Class \"%1$s\" not found"
 msgstr ""
 
 #: src/Controller/Common/Order/Factory.php:90
 #: src/Controller/Common/Product/Import/Csv/Base.php:69
-#: src/Controller/Common/Product/Import/Csv/Base.php:255
+#: src/Controller/Common/Product/Import/Csv/Base.php:256
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
-#: src/Controller/Common/Product/Import/Csv/Base.php:323
+#: src/Controller/Common/Product/Import/Csv/Base.php:324
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr ""

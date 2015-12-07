@@ -108,7 +108,7 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             value : '0.00'
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Costs per item'),
+                            fieldLabel : MShop.I18n.dt('client/extjs', 'Service fees'),
                             name : 'price.costs',
                             allowBlank : false,
                             value : '0.00'

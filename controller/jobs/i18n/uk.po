@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 19:56+0200\n"
+"POT-Creation-Date: 2015-12-07 16:38+0100\n"
 "PO-Revision-Date: 2015-09-29 12:32+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
@@ -147,7 +147,7 @@ msgstr ""
 msgid "Invalid job method \"%1$s\""
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:367
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:368
 #, php-format
 msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
 msgstr ""
@@ -164,6 +164,11 @@ msgstr ""
 #: src/Controller/Jobs/Admin/Job/Standard.php:96
 #, php-format
 msgid "Method \"%1$s\" not available"
+msgstr ""
+
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:394
+#, php-format
+msgid "No \"product.code\" column in CSV mapping found"
 msgstr ""
 
 #: src/Controller/Jobs/Base.php:124
@@ -253,7 +258,7 @@ msgstr ""
 msgid "Sends paid orders to the ERP system or logistic partner"
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:325
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:326
 #, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
 msgstr ""
@@ -273,12 +278,12 @@ msgstr ""
 msgid "Unable to call method \"%1$s\""
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:524
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:545
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr ""
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:372
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:373
 #, php-format
 msgid "Unable to move imported file"
 msgstr ""

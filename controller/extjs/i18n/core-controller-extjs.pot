@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:17+0200\n"
+"POT-Creation-Date: 2015-12-07 16:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,12 +20,6 @@ msgstr ""
 #: src/Controller/ExtJS/Service/Standard.php:97
 #, php-format
 msgid "- %1$s : %2$s\n"
-msgstr ""
-
-#: src/Controller/ExtJS/Media/Standard.php:676
-#: src/Controller/ExtJS/Media/Standard.php:711
-#, php-format
-msgid "Changing file permissions for \"%1$s\" to \"%2$o\" failed"
 msgstr ""
 
 #: src/Controller/ExtJS/Common/Factory/Base.php:70
@@ -47,47 +41,14 @@ msgstr ""
 msgid "Controller path is empty"
 msgstr ""
 
-#: src/Controller/ExtJS/Product/Import/Text/Standard.php:115
-#: src/Controller/ExtJS/Attribute/Import/Text/Standard.php:114
-#: src/Controller/ExtJS/Catalog/Import/Text/Standard.php:114
 #: src/Controller/ExtJS/Coupon/Code/Standard.php:117
 #, php-format
 msgid "Could not set permissions \"%1$s\" for file \"%2$s\""
 msgstr ""
 
-#: src/Controller/ExtJS/Media/Standard.php:402
-#: src/Controller/ExtJS/Product/Export/Text/Standard.php:181
-#: src/Controller/ExtJS/Attribute/Export/Text/Standard.php:183
-#: src/Controller/ExtJS/Catalog/Export/Text/Standard.php:181
-#, php-format
-msgid "Couldn't create directory \"%1$s\" with permissions \"%2$o\""
-msgstr ""
-
-#: src/Controller/ExtJS/Attribute/Export/Text/Standard.php:186
-#, php-format
-msgid "Create export directory for attribute IDs: %1$s"
-msgstr ""
-
-#: src/Controller/ExtJS/Catalog/Export/Text/Standard.php:184
-#, php-format
-msgid "Create export directory for catalog IDs: %1$s"
-msgstr ""
-
-#: src/Controller/ExtJS/Product/Export/Text/Standard.php:184
-#, php-format
-msgid "Create export directory for product IDs: %1$s"
-msgstr ""
-
-#: src/Controller/ExtJS/Media/Standard.php:119
-#: src/Controller/ExtJS/Media/Standard.php:125
-#: src/Controller/ExtJS/Media/Standard.php:243
-#, php-format
-msgid "Deleting file \"%1$s\" failed"
-msgstr ""
-
-#: src/Controller/ExtJS/Product/Export/Text/Standard.php:190
-#: src/Controller/ExtJS/Attribute/Export/Text/Standard.php:192
-#: src/Controller/ExtJS/Catalog/Export/Text/Standard.php:190
+#: src/Controller/ExtJS/Product/Export/Text/Standard.php:132
+#: src/Controller/ExtJS/Attribute/Export/Text/Standard.php:134
+#: src/Controller/ExtJS/Catalog/Export/Text/Standard.php:132
 msgid "Download"
 msgstr ""
 
@@ -124,8 +85,6 @@ msgstr ""
 #: src/Controller/ExtJS/Product/Property/Type/Factory.php:66
 #: src/Controller/ExtJS/Product/Property/Factory.php:66
 #: src/Controller/ExtJS/Product/Type/Factory.php:67
-#: src/Controller/ExtJS/Product/Tag/Type/Factory.php:67
-#: src/Controller/ExtJS/Product/Tag/Factory.php:67
 #: src/Controller/ExtJS/Product/Stock/Warehouse/Factory.php:67
 #: src/Controller/ExtJS/Product/Stock/Factory.php:67
 #: src/Controller/ExtJS/Product/Factory.php:67
@@ -156,6 +115,8 @@ msgstr ""
 #: src/Controller/ExtJS/Admin/Cache/Factory.php:67
 #: src/Controller/ExtJS/Admin/Job/Factory.php:67
 #: src/Controller/ExtJS/Admin/Log/Factory.php:67
+#: src/Controller/ExtJS/Tag/Type/Factory.php:67
+#: src/Controller/ExtJS/Tag/Factory.php:67
 #: src/Controller/ExtJS/Service/Type/Factory.php:67
 #: src/Controller/ExtJS/Service/Factory.php:67
 #: src/Controller/ExtJS/Service/Lists/Type/Factory.php:67
@@ -192,7 +153,7 @@ msgstr ""
 msgid "Invalid factory \"%1$s\""
 msgstr ""
 
-#: src/Controller/ExtJS/Catalog/Import/Text/Standard.php:324
+#: src/Controller/ExtJS/Catalog/Import/Text/Standard.php:283
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:198
 #, php-format
 msgid "Invalid list type \"%1$s\""
@@ -234,7 +195,7 @@ msgstr ""
 msgid "Missing parameter \"%1$s\""
 msgstr ""
 
-#: src/Controller/ExtJS/Media/Standard.php:553
+#: src/Controller/ExtJS/Media/Standard.php:441
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
 msgstr ""
@@ -254,13 +215,16 @@ msgstr ""
 msgid "Unable to call method \"%1$s\""
 msgstr ""
 
-#: src/Controller/ExtJS/Product/Import/Text/Standard.php:85
+#: src/Controller/ExtJS/Media/Standard.php:538
 #, php-format
-msgid "Uploaded file \"%1$s\" could not be moved to \"%2$s\" in upload directory"
+msgid "Unable to create directory \"%1$s\""
 msgstr ""
 
-#: src/Controller/ExtJS/Attribute/Import/Text/Standard.php:84
-#: src/Controller/ExtJS/Catalog/Import/Text/Standard.php:84
+#: src/Controller/ExtJS/Media/Standard.php:544
+#, php-format
+msgid "Unable to create file in \"%1$s\""
+msgstr ""
+
 #: src/Controller/ExtJS/Coupon/Code/Standard.php:87
 #, php-format
 msgid "Uploaded file could not be moved to upload directory \"%1$s\""

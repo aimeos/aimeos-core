@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:17+0200\n"
-"PO-Revision-Date: 2015-10-14 21:51+0000\n"
+"POT-Creation-Date: 2015-12-07 16:42+0100\n"
+"PO-Revision-Date: 2015-12-07 15:48+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -155,7 +155,7 @@ msgstr "Ungültige Factory \"%1$s\""
 msgid "Invalid job method \"%1$s\""
 msgstr "Ungültige Jobmethode \"%1$s\""
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:367
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:368
 #, php-format
 msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
 msgstr "Ungültige Produktzeilen in \"%1$s\": %2$d/%3$d"
@@ -173,6 +173,11 @@ msgstr "Logs aufräumen"
 #, php-format
 msgid "Method \"%1$s\" not available"
 msgstr "Methode \"%1$s\" nicht verfügbar"
+
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:394
+#, php-format
+msgid "No \"product.code\" column in CSV mapping found"
+msgstr "In der CSV-Zuordnung fehlt die Spalte \"product.code\""
 
 #: src/Controller/Jobs/Base.php:124
 #, php-format
@@ -262,7 +267,7 @@ msgstr "Verschickt E-Mails bei Änderungen des Versandstatus"
 msgid "Sends paid orders to the ERP system or logistic partner"
 msgstr "Übergibt bezahlte Bestellungen an die Warenwirtschaft oder den Logistikpartner"
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:325
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:326
 #, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
 msgstr "Der Produktimport von \"%1$s\" (%2$s) wurde gestartet"
@@ -282,12 +287,12 @@ msgstr "Factorymethode \"%1$s\" kann nicht aufgerufen werden"
 msgid "Unable to call method \"%1$s\""
 msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:524
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:545
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr "Das Produkt mit dem Code \"%1$s\" konnte nicht importiert werden: %2$s"
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:372
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:373
 #, php-format
 msgid "Unable to move imported file"
 msgstr "Die importierte Datei konnte nicht verschoben werden"

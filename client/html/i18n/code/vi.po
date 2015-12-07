@@ -156,6 +156,10 @@ msgstr ""
 msgid "pin"
 msgstr ""
 
+#. Default price format
+msgid "price:default"
+msgstr "%1$s %2$s"
+
 #. Product attribute
 msgid "size"
 msgstr ""
@@ -207,7 +211,3 @@ msgstr ""
 #. Product attribute
 msgid "width"
 msgstr ""
-
-#. Default price format
-msgid "price:default"
-msgstr "%1$s %2$s"

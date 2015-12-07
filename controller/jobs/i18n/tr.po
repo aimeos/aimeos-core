@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:17+0200\n"
-"PO-Revision-Date: 2015-10-14 21:51+0000\n"
+"POT-Creation-Date: 2015-12-07 16:42+0100\n"
+"PO-Revision-Date: 2015-12-07 15:39+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -153,10 +153,10 @@ msgstr "Geçersiz fabrika \"%1$s\""
 msgid "Invalid job method \"%1$s\""
 msgstr "Geçersiz iş metodu \"%1$s\""
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:367
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:368
 #, php-format
 msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
-msgstr ""
+msgstr "\"%1$s\" içinde geçersiz ürün hatları: %2$d/%3$d"
 
 #: src/Controller/Jobs/Customer/Email/Watch/Standard.php:299
 #, php-format
@@ -171,6 +171,11 @@ msgstr "Günlük temizleme"
 #, php-format
 msgid "Method \"%1$s\" not available"
 msgstr "Metot \"%1$s\" mevcut değil"
+
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:394
+#, php-format
+msgid "No \"product.code\" column in CSV mapping found"
+msgstr ""
 
 #: src/Controller/Jobs/Base.php:124
 #, php-format
@@ -260,10 +265,10 @@ msgstr "Sipariş teslimat durumu güncelleme e-mailleri gönderir"
 msgid "Sends paid orders to the ERP system or logistic partner"
 msgstr "ERP sistemine veya lojistik ortağa ödenen siparişleri gönderir"
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:325
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:326
 #, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
-msgstr ""
+msgstr "\"%1$s\" (%2$s)'dan ürün içe aktarma başladı"
 
 #: src/Controller/Jobs/Base.php:96
 #, php-format
@@ -280,12 +285,12 @@ msgstr "Fabrika metodu \"%1$s\" çağrılamıyor"
 msgid "Unable to call method \"%1$s\""
 msgstr "Metot \"%1$s\" çağrılamıyor"
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:524
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:545
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr "\"%1$s\" kodlu ürün içe aktarılamıyor: %2$s"
 
-#: src/Controller/Jobs/Product/Import/Csv/Standard.php:372
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:373
 #, php-format
 msgid "Unable to move imported file"
 msgstr "İçe aktarılan dosya taşınamıyor"

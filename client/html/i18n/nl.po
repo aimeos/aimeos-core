@@ -4,15 +4,16 @@
 # 
 # Translators:
 # Bram Verhaegh <bram@beech.it>, 2015
+# Klaas Runia <info@sennik.nl>, 2015
 # Maurice Lourens <mlourens@gmail.com>, 2015
 # Yves Vermeulen <tmastar@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:17+0200\n"
-"PO-Revision-Date: 2015-09-29 12:45+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2015-12-07 16:42+0100\n"
+"PO-Revision-Date: 2015-12-06 13:27+0000\n"
+"Last-Translator: Klaas Runia <info@sennik.nl>\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,8 +26,8 @@ msgstr ""
 #, php-format
 msgid "%1$d article"
 msgid_plural "%1$d articles"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1$d artikelen"
+msgstr[1] "%1$d artikelen"
 
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
 #. first name (%4$s), last name (%5$s),
@@ -78,19 +79,9 @@ msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%1
 #. / Price format with price value (%1$s) and currency (%2$s)
 #: templates/checkout/standard/delivery-body-default.php:37
 #: templates/checkout/standard/payment-body-default.php:37
-#: templates/basket/related/bought-body-default.php:16
 #: templates/basket/mini/main-body-default.php:25
 #: templates/basket/mini/product-body-default.php:27
-#: templates/account/watch/body-default.php:90
-#: templates/account/favorite/body-default.php:90
-#: templates/catalog/detail/bought-body-default.php:17
-#: templates/catalog/detail/seen-body-default.php:16
-#: templates/catalog/detail/suggest-body-default.php:18
-#: templates/catalog/detail/bundle-body-default.php:17
-#: templates/catalog/session/pinned-body-default.php:104
-#: templates/catalog/lists/promo-body-default.php:17
-#: templates/catalog/lists/items-body-default.php:16
-#: templates/common/partials/price-default.php:20
+#: templates/catalog/lists/items-body-default.php:21
 #: templates/common/summary/detail-body-default.php:88
 #: templates/email/watch/text-detail-body-default.php:21
 #: templates/email/common/text-summary-detail-body-default.php:55
@@ -99,7 +90,7 @@ msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
-#: templates/common/partials/price-default.php:24
+#: templates/common/partials/price-default.php:22
 #: templates/email/watch/text-detail-body-default.php:27
 #, php-format
 msgid "%1$s %2$s off"
@@ -107,7 +98,7 @@ msgstr "%1$s %2$s off"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
-#: templates/catalog/detail/basket-attribute-body-default.php:60
+#: templates/common/partials/attribute-default.php:59
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
 msgstr "%1$s ( %4$s%2$s%3$s )"
@@ -119,16 +110,7 @@ msgid "%1$s at %2$s"
 msgstr "%1$s at %2$s"
 
 #. / Percent format with value (%1$s) and % sign
-#: templates/basket/related/bought-body-default.php:18
-#: templates/account/watch/body-default.php:92
-#: templates/account/favorite/body-default.php:92
-#: templates/catalog/detail/bought-body-default.php:19
-#: templates/catalog/detail/seen-body-default.php:18
-#: templates/catalog/detail/suggest-body-default.php:20
-#: templates/catalog/detail/bundle-body-default.php:19
-#: templates/catalog/session/pinned-body-default.php:106
-#: templates/catalog/lists/promo-body-default.php:19
-#: templates/catalog/lists/items-body-default.php:18
+#: templates/catalog/lists/items-body-default.php:23
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -147,7 +129,7 @@ msgstr "+"
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and
 #. currency (%2$s)
-#: templates/common/partials/price-default.php:22
+#: templates/common/partials/price-default.php:20
 #: templates/email/watch/text-detail-body-default.php:24
 #, php-format
 msgid "+ %1$s %2$s/item"
@@ -167,21 +149,22 @@ msgstr "+ Verzendkosten"
 #: templates/common/partials/address-default.php:127
 #: templates/common/partials/address-default.php:131
 msgid "+1 123 456 7890"
-msgstr ""
+msgstr "+1 123 456 7890"
 
 #. / Rebate percent format with rebate percent value (%1$s)
-#: templates/common/partials/price-default.php:26
+#: templates/common/partials/price-default.php:24
 #: templates/email/watch/text-detail-body-default.php:30
 #, php-format
 msgid "-%1$s%%"
-msgstr ""
+msgstr "-%1$s%%"
 
 #: templates/email/account/text-detail-body-default.php:16
 #: templates/email/account/html-detail-body-default.php:18
 msgid "Account"
-msgstr ""
+msgstr "Account"
 
 #: templates/catalog/detail/basket-body-default.php:34
+#: templates/catalog/lists/items-body-default.php:143
 msgid "Add to basket"
 msgstr "Toevoegen aan winkelmandje"
 
@@ -190,14 +173,14 @@ msgstr "Toevoegen aan winkelmandje"
 #: templates/common/partials/address-default.php:68
 #: templates/common/partials/address-default.php:69
 msgid "Additional"
-msgstr ""
+msgstr "Meer"
 
 #: templates/common/partials/address-eu.php:72
 #: templates/common/partials/address-eu.php:73
 #: templates/common/partials/address-default.php:72
 #: templates/common/partials/address-default.php:73
 msgid "Additional 2"
-msgstr ""
+msgstr "Meer 2"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:275
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:329
@@ -215,14 +198,14 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
-msgstr ""
+msgstr "Alle leveringen zijn onderhevig aan onze voorwaarden en condities die u kunt vinden op onze website. U gaat automatisch akkoord met onze voorwaarden en condities wanneer u een order plaatst.\n\nDeze email bevat vertrouwelijke informatie en is exclusief bedoeld voor de persoon aan wie het is geadresseerd. Wanneer u deze persoon niet bent verzoeken wij u ons hierover te informeren en deze email en eventuele bijlagen te verwijderen."
 
 #: templates/email/account/html-intro-body-default.php:9
 #: templates/email/account/text-intro-body-default.php:8
 msgid "An account has been created for you."
-msgstr ""
+msgstr "We hebben een account voor u aangemaakt."
 
-#: templates/catalog/detail/basic-body-default.php:16
+#: templates/catalog/detail/basic-body-default.php:15
 msgid "Article no.:"
 msgstr "Artikel nr.:"
 
@@ -230,22 +213,22 @@ msgstr "Artikel nr.:"
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:352
 #, php-format
 msgid "At least one billing address part is missing or invalid"
-msgstr ""
+msgstr "Tenminste één factuuradres is niet beschikbaar of niet juist ingevuld."
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:318
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:351
 #, php-format
 msgid "At least one delivery address part is missing or invalid"
-msgstr ""
+msgstr "Tenminste één leveringsadres is niet beschikbaar of niet juist ingevuld."
 
 #: templates/catalog/filter/attribute-body-default.php:54
 msgid "Attributes"
-msgstr ""
+msgstr "Attributen"
 
 #: templates/checkout/standard/summary-body-default.php:17
 #: templates/basket/standard/body-default.php:42
 msgid "Back"
-msgstr ""
+msgstr "Zwart"
 
 #: templates/checkout/standard/body-default.php:27
 #: templates/basket/standard/body-default.php:36
@@ -262,16 +245,16 @@ msgstr "Factuur adres"
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:629
 #, php-format
 msgid "Billing address part \"%1$s\" is invalid"
-msgstr ""
+msgstr "Factuuradres deel \"%1$s\" is onjuist"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:654
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
-msgstr ""
+msgstr "Factuuradres deel \"%1$s\" ontbreekt"
 
-#: templates/catalog/detail/bundle-body-default.php:24
+#: templates/catalog/detail/bundle-body-default.php:19
 msgid "Bundled products"
-msgstr ""
+msgstr "Gebundelde producten"
 
 #: templates/checkout/standard/summary-body-default.php:18
 msgid "Buy now"
@@ -279,7 +262,7 @@ msgstr "Koop nu"
 
 #: templates/catalog/filter/tree-body-default.php:50
 msgid "Categories"
-msgstr ""
+msgstr "Categorieën"
 
 #: templates/common/summary/detail-body-default.php:99
 #: templates/common/summary/service-body-default.php:18
@@ -298,7 +281,7 @@ msgstr "Pas betaling aan"
 
 #: templates/catalog/detail/additional-attribute-body-default.php:15
 msgid "Characteristics"
-msgstr ""
+msgstr "Karakteristieken"
 
 #: templates/basket/standard/body-default.php:46
 msgid "Checkout"
@@ -314,33 +297,33 @@ msgstr "Stad"
 #: src/Client/Html/Common/Factory/Base.php:72 src/Client/Html/Base.php:170
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr ""
+msgstr "\"%2$s\" wordt niet geïmplementeerd door Class \"%1$s\" "
 
 #: src/Client/Html/Common/Factory/Base.php:169 src/Client/Html/Base.php:377
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Interface \"%2$s\" voor klasse \"%1$s\" kon niet worden geimplementeerd"
 
 #: src/Client/Html/Common/Factory/Base.php:163 src/Client/Html/Factory.php:54
 #: src/Client/Html/Base.php:371
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Class \"%1$s\" is niet beschikbaar"
 
 #: src/Client/Html/Common/Factory/Base.php:66 src/Client/Html/Base.php:164
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Class \"%1$s\" niet gevonden"
 
 #: src/Client/Html/Factory.php:35
 #, php-format
 msgid "Client HTML type is empty"
-msgstr ""
+msgstr "Client HTML type is leeg"
 
 #: src/Client/Html/Factory.php:41
 #, php-format
 msgid "Client type \"%1$s\" must consist of two parts separated by \"/\""
-msgstr ""
+msgstr "Client type \"%1$s\" moet bestaan uit twee delen gescheiden door \"/\""
 
 #: templates/account/history/order-body-default.php:21
 msgid "Close"
@@ -375,7 +358,7 @@ msgstr "Coupon"
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:327
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Klant met ID \"%1$s\" niet gevonden"
 
 #. / Payment e-mail form of address with salutation (%1$s), first name (%2$s)
 #. and last name (%3$s)
@@ -383,7 +366,7 @@ msgstr ""
 #: templates/email/common/text-salutation-body-default.php:17
 #, php-format
 msgid "Dear %1$s %2$s %3$s"
-msgstr ""
+msgstr "Geachte  %1$s %2$s %3$s"
 
 #: templates/email/common/html-salutation-body-default.php:30
 #: templates/email/common/text-salutation-body-default.php:28
@@ -404,12 +387,12 @@ msgstr "Bezorg adres"
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:479
 #, php-format
 msgid "Delivery address part \"%1$s\" is invalid"
-msgstr ""
+msgstr "Leveringsadres deel \"%1$s\" is onjuist"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:505
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
-msgstr ""
+msgstr "Leveringsadres deel \"%1$s\" ontbreekt"
 
 #: templates/catalog/detail/additional-text-body-default.php:19
 msgid "Description"
@@ -434,7 +417,7 @@ msgstr "E-mail"
 msgid "E-mail notification"
 msgstr "E-mail notificatie"
 
-#: templates/account/favorite/body-default.php:105
+#: templates/account/favorite/body-default.php:100
 msgid "Favorite products"
 msgstr "Favoriete producten"
 
@@ -449,7 +432,7 @@ msgstr "Velden met een * zijn verplicht"
 
 #: templates/catalog/filter/body-default.php:98
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: templates/common/partials/address-eu.php:52
 #: templates/common/partials/address-eu.php:53
@@ -461,7 +444,7 @@ msgstr "Voornaam"
 #: templates/common/partials/address-eu.php:119
 #: templates/common/partials/address-default.php:119
 msgid "GB999999973"
-msgstr ""
+msgstr "NL999999973"
 
 #: templates/catalog/filter/search-body-default.php:107
 msgid "Go"
@@ -474,13 +457,13 @@ msgid ""
 "conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a "
 "href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy "
 "policy\">privacy policy</a>"
-msgstr ""
+msgstr "Ik accepteer <a href=\"%1$s\" target=\"_blank\" title=\"voorwaarden en condities\" alt=\"voorwaarden en condities\">voorwaarden en condities</a> en <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">privacy policy</a>"
 
-#: templates/account/watch/body-default.php:163
+#: templates/account/watch/body-default.php:158
 msgid "If back in stock"
 msgstr "Wanneer weer op voorraad"
 
-#: templates/account/watch/body-default.php:157
+#: templates/account/watch/body-default.php:152
 msgid "If price decreases"
 msgstr "Als de prijs daalt"
 
@@ -491,7 +474,7 @@ msgid "If you have any questions, please reply to this e-mail"
 msgstr "Als u een vraag heeft, reageer dan op deze mail"
 
 #. / Tax rate format with tax rate in percent (%1$s)
-#: templates/common/partials/price-default.php:28
+#: templates/common/partials/price-default.php:26
 #: templates/common/summary/detail-body-default.php:277
 #: templates/email/watch/text-detail-body-default.php:33
 #: templates/email/common/text-summary-detail-body-default.php:108
@@ -529,37 +512,37 @@ msgstr "Kortingen zijn verrekend"
 #: src/Client/Html/Locale/Select/Factory.php:76
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Ongeldige karakters in class naam \"%1$s\""
 
 #: src/Client/Html/Base.php:362
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
-msgstr ""
+msgstr "Niet- toegestane karakters in klant naam  \"%1$s\""
 
 #: src/Client/Html/Factory.php:47
 #, php-format
 msgid "Invalid characters in client name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Niet toegestane karakters in klant naam \"%1$s\" in \"%2$s\""
 
 #: src/Client/Html/Common/Factory/Base.php:60 src/Client/Html/Base.php:158
 #, php-format
 msgid "Invalid class name \"%1$s\""
-msgstr ""
+msgstr "Niet toegestane class naam \"%1$s\""
 
 #: src/Client/Html/Common/Factory/Base.php:93 src/Client/Html/Base.php:189
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Ongeldig domein \"%1$s\""
 
 #: src/Client/Html/Factory.php:60
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Ongeldige Factory \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Process/Standard.php:295
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
-msgstr ""
+msgstr "Invalid process response from service provider with code \"%1$s\""
 
 #: templates/common/partials/address-eu.php:110
 #: templates/common/partials/address-default.php:110
@@ -593,24 +576,24 @@ msgstr "Volgende"
 msgid ""
 "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
 "try again with a different keyword."
-msgstr ""
+msgstr "Geen artikelen gevonden voor <span class=\"searchstring\">\"%1$s\"</span>. Probeer het aub opnieuw met een ander zoekwoord."
 
-#: src/Client/Html/Catalog/Detail/Standard.php:589
+#: src/Client/Html/Catalog/Detail/Standard.php:590
 #, php-format
 msgid "No product with ID \"%1$s\" found"
-msgstr ""
+msgstr "Geen product met ID \"%1$s\" gevonden"
 
 #: src/Client/Html/Checkout/Update/Standard.php:369
 #: src/Client/Html/Checkout/Standard/Process/Standard.php:387
 #: src/Client/Html/Checkout/Confirm/Standard.php:405
 #, php-format
 msgid "No service for code \"%1$s\" found"
-msgstr ""
+msgstr "geen service voor code \"%1$s\" gevonden"
 
 #: src/Client/Html/Base.php:553
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "Geen type item voor  \"%1$s/%2$s\" in \"%3$s\" gevonden"
 
 #: src/Client/Html/Base.php:53
 #, php-format
@@ -620,23 +603,23 @@ msgstr "Geen weergave beschikbaar"
 #: src/Client/Html/Basket/Standard/Coupon/Standard.php:288
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
-msgstr ""
+msgstr "Aantal coupons overschrijdt de limiet"
 
-#: templates/common/partials/price-default.php:35
+#: templates/common/partials/price-default.php:33
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" niet geïmplementeerd door Object"
 
-#: templates/account/watch/body-default.php:151
+#: templates/account/watch/body-default.php:146
 msgid "One month"
 msgstr "Een maand"
 
 #: templates/email/watch/html-intro-body-default.php:9
 #: templates/email/watch/text-intro-body-default.php:8
 msgid "One or more products you are watching have been updated."
-msgstr ""
+msgstr "Een of meerder producten die u bekijkt zijn gewijzigd"
 
-#: templates/account/watch/body-default.php:149
+#: templates/account/watch/body-default.php:144
 msgid "One week"
 msgstr "Een week"
 
@@ -651,7 +634,7 @@ msgstr "Aankoop ID"
 
 #: templates/account/history/list-body-default.php:101
 msgid "Order channel"
-msgstr ""
+msgstr "Order kanaal"
 
 #: templates/checkout/confirm/order-body-default.php:12
 #: templates/account/history/order-body-default.php:18
@@ -665,34 +648,34 @@ msgstr "Aankoop geschiedenis "
 
 #: templates/checkout/confirm/basic-body-default.php:12
 msgid "Order status"
-msgstr ""
+msgstr "Order status"
 
 #: src/Client/Html/Account/History/Order/Standard.php:340
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
-msgstr ""
+msgstr "Order met ID \"%1$s\" niet gevonden"
 
-#: templates/catalog/detail/bought-body-default.php:24
+#: templates/catalog/detail/bought-body-default.php:19
 msgid "Other customers also bought"
-msgstr ""
+msgstr "Andere klanten kochten ook"
 
-#: templates/account/watch/body-default.php:113
-#: templates/account/watch/body-default.php:184
-#: templates/account/favorite/body-default.php:114
-#: templates/account/favorite/body-default.php:152
+#: templates/account/watch/body-default.php:108
+#: templates/account/watch/body-default.php:179
+#: templates/account/favorite/body-default.php:109
+#: templates/account/favorite/body-default.php:147
 #: templates/catalog/lists/pagination-body-default.php:54
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Pagina %1$d van %2$d"
 
 #: templates/email/account/text-detail-body-default.php:18
 #: templates/email/account/html-detail-body-default.php:22
 msgid "Password"
-msgstr ""
+msgstr "Wachtwoord"
 
 #: templates/checkout/standard/process-body-default.php:115
 msgid "Pay now"
-msgstr ""
+msgstr "Nu afrekenen"
 
 #: templates/checkout/standard/process-body-default.php:74
 #: templates/account/history/list-body-default.php:106
@@ -702,44 +685,44 @@ msgstr "Betaling"
 
 #: templates/common/summary/detail-body-default.php:260
 msgid "Payment costs"
-msgstr ""
+msgstr "Betalingskosten"
 
 #: templates/checkout/confirm/basic-body-default.php:20
 msgid "Payment status"
 msgstr "Betalings status"
 
-#: templates/catalog/session/pinned-body-default.php:111
+#: templates/catalog/session/pinned-body-default.php:106
 msgid "Pinned products"
-msgstr ""
+msgstr "Vastgelegde producten"
 
 #: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Standard.php:259
 msgid "Please accept the terms and conditions"
-msgstr ""
+msgstr "Accepteer aub onze voorwaarden en condities"
 
 #: templates/checkout/standard/summary-body-default.php:13
 msgid "Please check your order"
-msgstr ""
+msgstr "Controleer aub uw order"
 
 #: templates/checkout/standard/delivery-body-default.php:42
 msgid "Please choose your delivery method"
-msgstr ""
+msgstr "Kies de gewenste leveringsmethode"
 
 #: templates/checkout/standard/payment-body-default.php:42
 msgid "Please choose your payment method"
-msgstr ""
+msgstr "Kies de gewenste betalingsmethode"
 
 #: templates/catalog/filter/search-body-default.php:12
 msgid "Please enter at least three characters"
-msgstr ""
+msgstr "Voer minimaal 3 karakters in"
 
 #: templates/checkout/standard/process-body-default.php:78
 msgid "Please enter your payment details"
-msgstr ""
+msgstr "Voer uw betalingsgegevens in"
 
 #: templates/checkout/standard/process-body-default.php:91
-#: templates/catalog/detail/basket-selection-body-default.php:85
+#: templates/common/partials/selection-default.php:81
 msgid "Please select"
-msgstr ""
+msgstr "Selecteer"
 
 #: templates/common/partials/address-eu.php:76
 #: templates/common/partials/address-eu.php:77
@@ -768,23 +751,23 @@ msgstr "Doorgaan"
 
 #: templates/checkout/standard/process-body-default.php:76
 msgid "Processing the payment failed"
-msgstr ""
+msgstr "Het verwerken van uw betaling is mislukt"
 
 #: templates/basket/mini/product-body-default.php:36
 msgid "Product"
-msgstr ""
+msgstr "Product"
 
-#: templates/basket/related/bought-body-default.php:23
+#: templates/basket/related/bought-body-default.php:18
 msgid "Products you might be also interested in"
-msgstr ""
+msgstr "Producten waar u wellicht ook in bent geïnteresseerd"
 
 #: templates/catalog/detail/additional-property-body-default.php:14
 msgid "Properties"
-msgstr ""
+msgstr "Eigenschappen"
 
 #: templates/basket/mini/product-body-default.php:37
 msgid "Qty"
-msgstr ""
+msgstr "Aantal"
 
 #: templates/common/summary/detail-body-default.php:108
 #: templates/email/common/text-summary-detail-body-default.php:76
@@ -797,22 +780,22 @@ msgstr "Gerelateerde"
 
 #: templates/catalog/lists/pagination-body-default.php:45
 msgid "Relevance"
-msgstr ""
+msgstr "Relevantie"
 
 #. / Product search hint with user provided search string (%1$s)
 #: templates/catalog/lists/header-default.php:31
 #, php-format
 msgid "Result for \"%1$s\""
-msgstr ""
+msgstr "Resultaat voor \"%1$s\""
 
 #: templates/common/partials/address-eu.php:43
 #: templates/common/partials/address-default.php:43
 msgid "Salutation"
-msgstr ""
+msgstr "Aanhef"
 
 #: templates/catalog/filter/search-body-default.php:105
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: templates/catalog/lists/head-body-default.php:48
 #, php-format
@@ -820,8 +803,8 @@ msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d arti
 msgid_plural ""
 "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
 "articles)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Zoekresultaat voor <span class=\"searchstring\">\"%1$s\"</span> (%2$d artikelen)"
+msgstr[1] "Zoekresultaat voor <span class=\"searchstring\">\"%1$s\"</span> (%2$d artikelen)"
 
 #: templates/common/partials/address-eu.php:102
 #: templates/common/partials/address-default.php:102
@@ -839,20 +822,20 @@ msgstr "Selecteer taal"
 #: templates/common/partials/address-eu.php:45
 #: templates/common/partials/address-default.php:45
 msgid "Select salutation"
-msgstr ""
+msgstr "Selecteer aanhef"
 
 #: templates/common/partials/address-eu.php:87
 #: templates/common/partials/address-default.php:83
 msgid "Select state"
-msgstr ""
+msgstr "Selecteer staat"
 
 #: templates/email/common/text-summary-detail-body-default.php:86
 msgid "Service fees"
-msgstr ""
+msgstr "Service kosten"
 
 #: templates/common/summary/service-body-default.php:13
 msgid "Services"
-msgstr ""
+msgstr "Services"
 
 #: templates/basket/mini/product-body-default.php:52
 #: templates/common/summary/detail-body-default.php:252
@@ -865,7 +848,7 @@ msgstr "Toon"
 
 #: templates/catalog/lists/quote-body-default.php:19
 msgid "Show all quotes"
-msgstr ""
+msgstr "Toon alle aanbiedingen"
 
 #: templates/catalog/lists/pagination-body-default.php:43
 msgid "Sort by:"
@@ -881,14 +864,14 @@ msgstr "Provincie / Staat"
 #: templates/catalog/stock/body-default.php:45
 #, php-format
 msgid "Stock: %1$s, %2$s"
-msgstr ""
+msgstr "Voorraad: %1$s, %2$s"
 
 #. / Stock string composition with warehouse name (%1$s, normally left out),
 #. stock level string (%2$s) and back in stock date (%3$s)
 #: templates/catalog/stock/body-default.php:47
 #, php-format
 msgid "Stock: %1$s, %2$s, back on %3$s"
-msgstr ""
+msgstr "Voorraad: %1$s, %2$s, terug op %3$s"
 
 #: templates/common/partials/address-eu.php:64
 #: templates/common/partials/address-eu.php:65
@@ -903,14 +886,14 @@ msgstr "Straat"
 msgid "Sub-total"
 msgstr "Subtotaal"
 
-#: templates/catalog/detail/suggest-body-default.php:25
+#: templates/catalog/detail/suggest-body-default.php:20
 msgid "Suggested products"
 msgstr "Aanbevolen producten"
 
 #: templates/common/summary/detail-body-default.php:110
 #: templates/email/common/text-summary-detail-body-default.php:80
 msgid "Sum"
-msgstr ""
+msgstr "Totaal"
 
 #: templates/common/partials/address-eu.php:126
 #: templates/common/partials/address-default.php:126
@@ -920,11 +903,11 @@ msgstr "Telefoon"
 #: src/Client/Html/Base.php:513
 #, php-format
 msgid "Template \"%1$s\" not available"
-msgstr ""
+msgstr "Template \"%1$s\" niet beschikbaar"
 
 #: templates/checkout/standard/summary-option-terms-body-default.php:159
 msgid "Terms and conditions"
-msgstr ""
+msgstr "Voorwaarden en condities"
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -932,7 +915,7 @@ msgstr ""
 #: templates/email/payment/text-intro-body-default.php:11
 #, php-format
 msgid "Thank you for your order %1$s from %2$s."
-msgstr ""
+msgstr "Bedankt voor uw order %1$s van %2$s."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -943,7 +926,7 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "The order is pending until we receive the final payment. If you've chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference."
-msgstr ""
+msgstr "Bedankt voor uw order %1$s van %2$s.\n\nDe order wordt uitgevoerd zodra wij uw betaling hebben ontvangen. Wanneer u hebt gekozen voor vooraf betalen maak dan het totaalbedrag van de factuur over naar onze bankrekening en vermeld daar bij het order nummer %1$s als referentie."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -954,19 +937,19 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "We received the payment and will care about your order immediately."
-msgstr ""
+msgstr "Bedankt voor uw order %1$s van %2$s.\n\nWe hebben uw betaling ontvangen en zullen uw order zo spoedig mogelijk verwerken."
 
 #: templates/checkout/confirm/5/intro-body-default.php:12
 msgid ""
 "Thank you for your order and authorizing the payment.\n"
 "An e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "Bedankt voor uw order en uw machtiging om de betaling van uw rekening af te schrijven. Binnen enkele minuten ontvangt u van ons een email met de gegevens van uw order."
 
 #: templates/checkout/confirm/6/intro-body-default.php:12
 msgid ""
 "Thank you for your order.\n"
 "We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "Bedankt voor uw order.\nWe hebben uw betaling ontvangen en sturen u binnen enkele minuten een email met de order gegevens."
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -976,13 +959,13 @@ msgstr ""
 msgid ""
 "The delivery status of your order %1$s from %2$s has been changed to "
 "\"%3$s\"."
-msgstr ""
+msgstr "De status van uw order %1$s van %2$s is gewijzigd in \"%3$s\"."
 
 #: templates/checkout/confirm/1/intro-body-default.php:12
 msgid ""
 "The order was canceled.\n"
 "Do you wish to retry your order?"
-msgstr ""
+msgstr "U hebt uw order geannuleerd. Wilt u uw order opnieuw plaatsen?"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -990,7 +973,7 @@ msgstr ""
 #: templates/email/delivery/6/text-intro-body-default.php:11
 #, php-format
 msgid "The parcel for your order %1$s from %2$s could not be delivered."
-msgstr ""
+msgstr "Het pakket met uw order %1$s van %2$s kan niet aan u worden geleverd."
 
 #: templates/checkout/confirm/4/intro-body-default.php:12
 msgid ""
@@ -1006,15 +989,15 @@ msgstr "De betaling voor uw bestelling staat nog in wacht. U ontvangt een e-mail
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr "De betaling van uw bestelling %1$s van %2$s is terug gestort."
 
-#: templates/account/watch/body-default.php:152
+#: templates/account/watch/body-default.php:147
 msgid "Three month"
 msgstr "Drie maanden"
 
-#: templates/account/watch/body-default.php:147
+#: templates/account/watch/body-default.php:142
 msgid "Time frame"
-msgstr ""
+msgstr "Tijdslot"
 
-#: templates/catalog/lists/promo-body-default.php:24
+#: templates/catalog/lists/promo-body-default.php:19
 msgid "Top seller"
 msgstr "Top verkoper"
 
@@ -1034,19 +1017,19 @@ msgstr "Totaal aantal"
 msgid "Try again"
 msgstr "Probeer opnieuw"
 
-#: templates/account/watch/body-default.php:150
+#: templates/account/watch/body-default.php:145
 msgid "Two weeks"
 msgstr "Twee weken"
 
 #: src/Client/Html/Common/Decorator/Base.php:55
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "Call method \"%1$s\" kon niet worden aangeroepen"
 
 #: src/Client/Html/Checkout/Standard/Order/Account/Standard.php:283
 #, php-format
 msgid "Unable to create an account for \"%1$s\": %2$s"
-msgstr ""
+msgstr "Wij kunnen geen account aanmaken voor \"%1$s\": %2$s"
 
 #: src/Client/Html/Checkout/Standard/Order/Address/Standard.php:272
 #, php-format
@@ -1073,11 +1056,11 @@ msgstr "Bijwerken"
 msgid "Vat ID"
 msgstr "BTW"
 
-#: templates/account/watch/body-default.php:168
+#: templates/account/watch/body-default.php:163
 msgid "Watch"
 msgstr "Bekijk"
 
-#: templates/account/watch/body-default.php:104
+#: templates/account/watch/body-default.php:99
 #: templates/email/watch/text-detail-body-default.php:40
 msgid "Watched products"
 msgstr "Bekeken producten"
@@ -1097,9 +1080,9 @@ msgstr "Website"
 
 #: templates/basket/standard/coupon-body-default.php:39
 #: templates/account/history/order-body-default.php:17
-#: templates/account/watch/body-default.php:126
-#: templates/account/favorite/body-default.php:126
-#: templates/catalog/session/pinned-body-default.php:120
+#: templates/account/watch/body-default.php:121
+#: templates/account/favorite/body-default.php:121
+#: templates/catalog/session/pinned-body-default.php:115
 #: templates/common/summary/detail-body-default.php:198
 msgid "X"
 msgstr "X"
@@ -1136,16 +1119,16 @@ msgstr "Je zal nu doorgestuurd worden naar de volgende stap"
 #: templates/email/account/text-detail-body-default.php:14
 #: templates/email/account/html-detail-body-default.php:13
 msgid "Your account"
-msgstr ""
+msgstr "Uw account"
 
 #: templates/catalog/filter/attribute-body-default.php:57
 msgid "Your choice"
-msgstr ""
+msgstr "Uw keuze"
 
 #. / Account creation e-mail subject
 #: templates/email/account/header-default.php:9
 msgid "Your new account"
-msgstr ""
+msgstr "Uw nieuwe account"
 
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
@@ -1180,7 +1163,7 @@ msgstr "adres"
 
 #: templates/catalog/filter/attribute-body-default.php:70
 msgid "clear all"
-msgstr ""
+msgstr "Alles wissen"
 
 #: templates/checkout/standard/delivery-body-default.php:41
 #: templates/common/summary/service-body-default.php:16
@@ -1194,22 +1177,22 @@ msgstr "Bezorging"
 #: templates/email/watch/text-detail-body-default.php:18
 #, php-format
 msgid "from %1$s"
-msgstr ""
+msgstr "van %1$s"
 
 #: templates/checkout/standard/address-delivery-body-default.php:70
 #: templates/common/summary/address-body-default.php:131
 #: templates/email/common/text-summary-address-body-default.php:115
 msgid "like billing address"
-msgstr ""
+msgstr "Gelijk aan factuuradres"
 
 #: templates/checkout/standard/address-billing-body-default.php:163
 #: templates/checkout/standard/address-delivery-body-default.php:155
 msgid "new address"
 msgstr "Nieuw adres"
 
-#: templates/catalog/detail/basket-attribute-body-default.php:52
+#: templates/common/partials/attribute-default.php:51
 msgid "none"
-msgstr ""
+msgstr "geen"
 
 #: templates/checkout/standard/order-body-default.php:12
 #: src/Client/Html/Checkout/Standard/Order/Standard.php:16
@@ -1227,27 +1210,27 @@ msgstr "Betaling"
 #: src/Client/Html/Checkout/Standard/Process/Standard.php:15
 #, php-format
 msgid "process"
-msgstr ""
+msgstr "proces"
 
 #. / code for "product is in stock"
 #: templates/catalog/stock/body-default.php:56
 msgid "stock-high"
-msgstr ""
+msgstr "Grote voorraad"
 
 #. / code for "only a few products are available"
 #: templates/catalog/stock/body-default.php:54
 msgid "stock-low"
-msgstr ""
+msgstr "Lage voorraad"
 
 #. / code for "product is out of stock"
 #: templates/catalog/stock/body-default.php:52
 msgid "stock-out"
-msgstr ""
+msgstr "Geen voorraad"
 
 #. / code for "product is available (without stock limit)"
 #: templates/catalog/stock/body-default.php:58
 msgid "stock-unlimited"
-msgstr ""
+msgstr "Onbeperkte voorraad"
 
 #: templates/checkout/standard/summary-body-default.php:12
 #: src/Client/Html/Checkout/Standard/Summary/Standard.php:16
@@ -1263,18 +1246,18 @@ msgstr "▲ Naam"
 msgid "▲ Price"
 msgstr "▲ Prijs"
 
-#: templates/account/watch/body-default.php:114
-#: templates/account/watch/body-default.php:185
-#: templates/account/favorite/body-default.php:115
-#: templates/account/favorite/body-default.php:153
+#: templates/account/watch/body-default.php:109
+#: templates/account/watch/body-default.php:180
+#: templates/account/favorite/body-default.php:110
+#: templates/account/favorite/body-default.php:148
 #: templates/catalog/lists/pagination-body-default.php:55
 msgid "▶"
 msgstr "▶"
 
-#: templates/account/watch/body-default.php:115
-#: templates/account/watch/body-default.php:186
-#: templates/account/favorite/body-default.php:116
-#: templates/account/favorite/body-default.php:154
+#: templates/account/watch/body-default.php:110
+#: templates/account/watch/body-default.php:181
+#: templates/account/favorite/body-default.php:111
+#: templates/account/favorite/body-default.php:149
 #: templates/catalog/lists/pagination-body-default.php:56
 msgid "▶▶"
 msgstr "▶▶"
@@ -1291,18 +1274,18 @@ msgstr "▼ Naam"
 msgid "▼ Price"
 msgstr "▼ Prijs"
 
-#: templates/account/watch/body-default.php:112
-#: templates/account/watch/body-default.php:183
-#: templates/account/favorite/body-default.php:113
-#: templates/account/favorite/body-default.php:151
+#: templates/account/watch/body-default.php:107
+#: templates/account/watch/body-default.php:178
+#: templates/account/favorite/body-default.php:108
+#: templates/account/favorite/body-default.php:146
 #: templates/catalog/lists/pagination-body-default.php:53
 msgid "◀"
 msgstr "◀"
 
-#: templates/account/watch/body-default.php:111
-#: templates/account/watch/body-default.php:182
-#: templates/account/favorite/body-default.php:112
-#: templates/account/favorite/body-default.php:150
+#: templates/account/watch/body-default.php:106
+#: templates/account/watch/body-default.php:177
+#: templates/account/favorite/body-default.php:107
+#: templates/account/favorite/body-default.php:145
 #: templates/catalog/lists/pagination-body-default.php:52
 msgid "◀◀"
 msgstr "◀◀"
