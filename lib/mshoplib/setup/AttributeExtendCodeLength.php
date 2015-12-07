@@ -44,7 +44,7 @@ class AttributeExtendCodeLength extends Base
 	 */
 	protected function mysql()
 	{
-		$this->msg( 'Extend length of attribute code', 0 ); $this->status( '' );
+		$this->msg( 'Extend length of attribute code', 0 );
 
 		$schema = $this->getSchema( 'db-attribute' );
 
