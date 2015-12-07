@@ -12,6 +12,7 @@ return array(
 		'product/width' => array( 'domain' => 'product', 'code' => 'width', 'label' => 'Width', 'status' => 1 ),
 		'product/length' => array( 'domain' => 'product', 'code' => 'length', 'label' => 'Length', 'status' => 1 ),
 		'product/date' => array( 'domain' => 'product', 'code' => 'date', 'label' => 'Date', 'status' => 1 ),
+		'product/download' => array( 'domain' => 'product', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
 		'media/color' => array( 'domain' => 'media', 'code' => 'color', 'label' => 'Color', 'status' => 1 ),
 	),
 

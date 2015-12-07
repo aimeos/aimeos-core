@@ -41,7 +41,7 @@ class MW_Setup_Task_AttributeExtendCodeLength extends MW_Setup_Task_Abstract
 	 */
 	protected function _mysql()
 	{
-		$this->_msg( 'Extend length of attribute code', 0 ); $this->_status( '' );
+		$this->_msg( 'Extend length of attribute code', 0 );
 
 		$schema = $this->_getSchema( 'db-attribute' );
 
