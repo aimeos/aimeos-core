@@ -67,6 +67,12 @@ source_file = controller/jobs/i18n/core-controller-jobs.pot
 source_lang = en
 type = PO
 
+[aimeos-core.controller-jsonadm]
+file_filter = controller/jsonadm/i18n/<lang>.po
+source_file = controller/jsonadm/i18n/core-controller-jsonadm.pot
+source_lang = en
+type = PO
+
 [aimeos-core.lib-mshop]
 file_filter = lib/mshoplib/i18n/<lang>.po
 source_file = lib/mshoplib/i18n/core-mshop.pot

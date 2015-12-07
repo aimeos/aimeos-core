@@ -1,0 +1,76 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-12-07 16:59+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/Controller/JsonAdm/Common/Factory/Base.php:141
+#: src/Controller/JsonAdm/Common/Factory/Base.php:174
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr ""
+
+#: src/Controller/JsonAdm/Common/Factory/Base.php:135
+#: src/Controller/JsonAdm/Common/Factory/Base.php:168
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr ""
+
+#: src/Controller/JsonAdm/Base.php:398
+#, php-format
+msgid "Client generated IDs are not supported"
+msgstr ""
+
+#: src/Controller/JsonAdm/Base.php:67 src/Controller/JsonAdm/Base.php:266
+#: src/Controller/JsonAdm/Base.php:394
+#, php-format
+msgid "Invalid JSON in body"
+msgstr ""
+
+#: src/Controller/JsonAdm/Common/Factory/Base.php:129
+#: src/Controller/JsonAdm/Factory.php:185
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr ""
+
+#: src/Controller/JsonAdm/Factory.php:86
+#, php-format
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr ""
+
+#: src/Controller/JsonAdm/Factory.php:102
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr ""
+
+#: src/Controller/JsonAdm/Base.php:295
+#, php-format
+msgid "No ID given"
+msgstr ""
+
+#: src/Controller/JsonAdm/Base.php:522
+msgid "Not implemented, use PATCH instead"
+msgstr ""
+
+#: src/Controller/JsonAdm/Base.php:861
+#, php-format
+msgid "Template \"%1$s\" not available"
+msgstr ""
+
+#: src/Controller/JsonAdm/Common/Decorator/Base.php:56
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr ""
