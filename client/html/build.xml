@@ -44,7 +44,7 @@
 	</target>
 
 	<target name="i18n" description="Creates translation message files">
-		<exec command="find ./layouts/ ./src/ -type f | xgettext -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=printf:1 --keyword=sprintf:1 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/core-client-html.pot -f -"
+		<exec command="find ./layouts/ ./src/ -type f | xgettext -j -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=printf:1 --keyword=sprintf:1 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/core-client-html.pot -f -"
 			checkreturn="true" logoutput="true" />
 		<foreach list="./i18n,./i18n/code,./i18n/country,./i18n/currency,./i18n/language" param="i18n-dir" target="i18n-files" />
 	</target>
