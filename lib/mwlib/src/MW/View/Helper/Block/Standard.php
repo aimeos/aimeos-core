@@ -70,11 +70,11 @@ class Standard
 	 */
 	public function start( $name )
 	{
-        if( in_array( $name, $this->stack ) ) {
-            throw new Exception( sprintf( 'Block "%1$ss" has already been started', $name ) );
-        }
+		if( in_array( $name, $this->stack ) ) {
+			throw new Exception( sprintf( 'Block "%1$ss" has already been started', $name ) );
+		}
 
-        $this->stack[] = $name;
+		$this->stack[] = $name;
 		ob_start();
 	}
 
@@ -84,10 +84,10 @@ class Standard
 	 */
 	public function stop()
 	{
-        if( ( $name = array_pop( $this->stack ) ) === null ) {
-        	throw new Exception( sprintf( 'No block "%1$ss" has been started before', $name ) );
-        }
+		if( ( $name = array_pop( $this->stack ) ) === null ) {
+			throw new Exception( sprintf( 'No block "%1$ss" has been started before', $name ) );
+		}
 
-        $this->blocks[$name] = ob_get_clean();
+		$this->blocks[$name] = ob_get_clean();
 	}
 }
