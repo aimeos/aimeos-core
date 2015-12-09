@@ -35,6 +35,18 @@ class Standard implements \Aimeos\MW\View\Iface
 {
 	private $helper = array();
 	private $values = array();
+	private $paths;
+
+
+	/**
+	 * Initializes the view object
+	 *
+	 * @param array $paths List of template base paths
+	 */
+	public function __construct( array $paths = array() )
+	{
+		$this->paths = $paths;
+	}
 
 
 	/**
@@ -197,7 +209,7 @@ class Standard implements \Aimeos\MW\View\Iface
 		{
 			ob_start();
 
-			$this->includeFile( $filename );
+			$this->includeFile( $this->resolve( $filename ) );
 
 			return ob_get_clean();
 		}
@@ -216,5 +228,39 @@ class Standard implements \Aimeos\MW\View\Iface
 	protected function includeFile()
 	{
 		include func_get_arg( 0 );
+	}
+
+
+	/**
+	 * Returns the absolute file name for the given relative one
+	 *
+	 * @param string $file Relative path to the template file
+	 * @return string Absolute file path
+	 * @throws \Aimeos\MW\Exception
+	 */
+	protected function resolve( $file )
+	{
+		if( strncmp( $file, '/', 1 ) === 0 ) {
+			return $file;
+		}
+
+		$ds = DIRECTORY_SEPARATOR;
+
+		foreach( array_reverse( (array) $this->paths ) as $path => $relPaths )
+		{
+			foreach( $relPaths as $relPath )
+			{
+				$absPath = $path . $ds . $relPath . $ds . $file;
+				if( $ds !== '/' ) {
+					$absPath = str_replace( '/', $ds, $absPath );
+				}
+
+				if( is_file( $absPath ) ) {
+					return $absPath;
+				}
+			}
+		}
+
+		throw new \Aimeos\MW\View\Exception( sprintf( 'Template "%1$s" not available', $file ) );
 	}
 }

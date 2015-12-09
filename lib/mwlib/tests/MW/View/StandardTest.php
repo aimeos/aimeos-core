@@ -118,4 +118,25 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expected = "Number of files:\n0 Files";
 		$this->assertEquals( $expected, $output );
 	}
+
+
+	public function testAssignRenderRelativePath()
+	{
+		$this->object = new \Aimeos\MW\View\Standard( array( __DIR__ => array( 'testfiles' ) ) );
+		$this->object->addHelper( 'translate', $this->translate );
+
+
+		$this->object->assign( array( 'quantity' => 1 ) );
+		$output = $this->object->render( 'template' );
+
+		$expected = "Number of files:\n1 File";
+		$this->assertEquals( $expected, $output );
+
+
+		$this->object->assign( array( 'quantity' => 0 ) );
+		$output = $this->object->render( 'template' );
+
+		$expected = "Number of files:\n0 Files";
+		$this->assertEquals( $expected, $output );
+	}
 }
