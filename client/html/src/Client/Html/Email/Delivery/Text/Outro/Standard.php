@@ -109,7 +109,7 @@ class Standard
 		$status = $view->extOrderItem->getDeliveryStatus();
 		$default = array( 'email/delivery/' . $status . '/text-outro-body-default.php', 'email/common/text-outro-body-default.php' );
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -164,7 +164,7 @@ class Standard
 		$status = $view->extOrderItem->getDeliveryStatus();
 		$default = array( 'email/delivery/' . $status . '/text-outro-header-default.php', 'email/common/text-outro-header-default.php' );
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

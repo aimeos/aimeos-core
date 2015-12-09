@@ -99,7 +99,7 @@ class Standard
 		$tplconf = 'client/html/checkout/confirm/order/service/standard/template-body';
 		$default = 'common/summary/service-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -146,7 +146,7 @@ class Standard
 		$tplconf = 'client/html/checkout/confirm/order/service/standard/template-header';
 		$default = 'common/summary/service-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

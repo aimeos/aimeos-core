@@ -100,7 +100,7 @@ class Standard
 		$tplconf = 'client/html/checkout/confirm/retry/standard/template-body';
 		$default = 'checkout/confirm/retry-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -146,7 +146,7 @@ class Standard
 		$tplconf = 'client/html/checkout/confirm/retry/standard/template-header';
 		$default = 'checkout/confirm/retry-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

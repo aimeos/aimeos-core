@@ -119,7 +119,7 @@ class Standard
 			$tplconf = 'client/html/catalog/session/seen/standard/template-body';
 			$default = 'catalog/session/seen-body-default.php';
 
-			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$html = $view->render( $view->config( $tplconf, $default ) );
 
 			$cached = $session->get( 'aimeos/catalog/session/seen/cache', array() ) + array( $key => true );
 			$session->set( 'aimeos/catalog/session/seen/cache', $cached );
@@ -180,7 +180,7 @@ class Standard
 			$tplconf = 'client/html/catalog/session/seen/standard/template-header';
 			$default = 'catalog/session/seen-header-default.php';
 
-			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$html = $view->render( $view->config( $tplconf, $default ) );
 
 			$cached = $session->get( 'aimeos/catalog/session/seen/cache', array() ) + array( $key => true );
 			$session->set( 'aimeos/catalog/session/seen/cache', $cached );

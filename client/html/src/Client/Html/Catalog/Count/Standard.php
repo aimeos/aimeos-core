@@ -124,7 +124,7 @@ class Standard
 			$tplconf = 'client/html/catalog/count/standard/template-body';
 			$default = 'catalog/count/body-default.php';
 
-			return $view->render( $this->getTemplate( $tplconf, $default ) );
+			return $view->render( $view->config( $tplconf, $default ) );
 		}
 		catch( \Exception $e )
 		{
@@ -177,7 +177,7 @@ class Standard
 			$tplconf = 'client/html/catalog/count/standard/template-header';
 			$default = 'catalog/count/header-default.php';
 
-			return $view->render( $this->getTemplate( $tplconf, $default ) );
+			return $view->render( $view->config( $tplconf, $default ) );
 		}
 		catch( \Exception $e )
 		{

@@ -103,7 +103,7 @@ class Standard
 		$tplconf = 'client/html/catalog/detail/suggest/standard/template-body';
 		$default = 'catalog/detail/suggest-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -149,7 +149,7 @@ class Standard
 		$tplconf = 'client/html/catalog/detail/suggest/standard/template-header';
 		$default = 'catalog/detail/suggest-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

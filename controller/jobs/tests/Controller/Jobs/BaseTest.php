@@ -9,29 +9,15 @@ namespace Aimeos\Controller\Jobs;
  */
 class BaseTest extends \PHPUnit_Framework_TestCase
 {
-	private $object;
-
-
-	public function setUp()
+	public function testGetTypeItemNotFound()
 	{
 		$context = \TestHelper::getContext();
 		$aimeos = \TestHelper::getAimeos();
 
-		$this->object = new TestAbstract( $context, $aimeos );
-	}
+		$object = new TestAbstract( $context, $aimeos );
 
-
-	public function testGetTypeItemNotFound()
-	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
-		$this->object->getTypeItemPublic( 'product/type', 'product', 'test' );
-	}
-
-
-	public function testGetTemplateNotFound()
-	{
-		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
-		$this->object->getTemplatePublic( 'test', 'test' );
+		$object->getTypeItemPublic( 'product/type', 'product', 'test' );
 	}
 }
 
@@ -39,11 +25,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 class TestAbstract extends \Aimeos\Controller\Jobs\Base
 {
-	public function getTemplatePublic( $confpath, $default )
-	{
-		$this->getTemplate( $confpath, $default );
-	}
-
 	public function getTypeItemPublic( $prefix, $domain, $code )
 	{
 		$this->getTypeItem( $prefix, $domain, $code );

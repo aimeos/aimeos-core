@@ -132,7 +132,7 @@ class Standard
 		$tplconf = 'client/html/checkout/standard/order/standard/template-body';
 		$default = 'checkout/standard/order-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -184,7 +184,7 @@ class Standard
 		$tplconf = 'client/html/checkout/standard/order/standard/template-header';
 		$default = 'checkout/standard/order-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

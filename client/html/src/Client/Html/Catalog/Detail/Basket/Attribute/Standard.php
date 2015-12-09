@@ -101,7 +101,7 @@ class Standard
 		$tplconf = 'client/html/catalog/detail/basket/attribute/standard/template-body';
 		$default = 'catalog/detail/basket-attribute-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -147,7 +147,7 @@ class Standard
 		$tplconf = 'client/html/catalog/detail/basket/attribute/standard/template-header';
 		$default = 'catalog/detail/basket-attribute-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

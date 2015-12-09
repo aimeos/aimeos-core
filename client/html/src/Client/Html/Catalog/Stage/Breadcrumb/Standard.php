@@ -100,7 +100,7 @@ class Standard
 		$tplconf = 'client/html/catalog/stage/breadcrumb/standard/template-body';
 		$default = 'catalog/stage/breadcrumb-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -146,7 +146,7 @@ class Standard
 		$tplconf = 'client/html/catalog/stage/breadcrumb/standard/template-header';
 		$default = 'catalog/stage/breadcrumb-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

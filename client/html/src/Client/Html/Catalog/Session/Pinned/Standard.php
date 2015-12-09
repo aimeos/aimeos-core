@@ -119,7 +119,7 @@ class Standard
 			$tplconf = 'client/html/catalog/session/pinned/standard/template-body';
 			$default = 'catalog/session/pinned-body-default.php';
 
-			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$html = $view->render( $view->config( $tplconf, $default ) );
 
 			$cached = $session->get( 'aimeos/catalog/session/pinned/cache', array() ) + array( $key => true );
 			$session->set( 'aimeos/catalog/session/pinned/cache', $cached );
@@ -180,7 +180,7 @@ class Standard
 			$tplconf = 'client/html/catalog/session/pinned/standard/template-header';
 			$default = 'catalog/session/pinned-header-default.php';
 
-			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$html = $view->render( $view->config( $tplconf, $default ) );
 
 			$cached = $session->get( 'aimeos/catalog/session/pinned/cache', array() ) + array( $key => true );
 			$session->set( 'aimeos/catalog/session/pinned/cache', $cached );

@@ -106,7 +106,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/watch/html/outro/standard/template-body';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/common/html-outro-body-default.php' ) );
+		return $view->render( $view->config( $tplconf, 'email/common/html-outro-body-default.php' ) );
 	}
 
 
@@ -158,7 +158,7 @@ class Standard
 		 */
 		$tplconf = 'client/html/email/watch/html/outro/standard/template-header';
 
-		return $view->render( $this->getTemplate( $tplconf, 'email/common/html-outro-header-default.php' ) );
+		return $view->render( $view->config( $tplconf, 'email/common/html-outro-header-default.php' ) );
 	}
 
 

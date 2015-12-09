@@ -164,7 +164,7 @@ class Standard
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/text-body-default.php', 'email/common/text-body-default.php' );
 
-		$text = $view->render( $this->getTemplate( $tplconf, $default ) );
+		$text = $view->render( $view->config( $tplconf, $default ) );
 		$view->mail()->setBody( $text );
 		return $text;
 	}
@@ -221,7 +221,7 @@ class Standard
 		$status = $view->extOrderItem->getPaymentStatus();
 		$default = array( 'email/payment/' . $status . '/text-header-default.php', 'email/common/text-header-default.php' );
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

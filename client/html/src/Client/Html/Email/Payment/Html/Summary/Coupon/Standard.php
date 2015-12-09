@@ -101,7 +101,7 @@ class Standard
 		$tplconf = 'client/html/email/payment/html/summary/coupon/standard/template-body';
 		$default = 'common/summary/coupon-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -148,7 +148,7 @@ class Standard
 		$tplconf = 'client/html/email/payment/html/summary/coupon/standard/template-header';
 		$default = 'common/summary/coupon-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

@@ -203,7 +203,7 @@ class Standard
 			$tplconf = 'client/html/catalog/lists/standard/template-body';
 			$default = 'catalog/lists/body-default.php';
 
-			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$html = $view->render( $view->config( $tplconf, $default ) );
 
 			$this->setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
@@ -267,7 +267,7 @@ class Standard
 				$tplconf = 'client/html/catalog/lists/standard/template-header';
 				$default = 'catalog/lists/header-default.php';
 
-				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+				$html = $view->render( $view->config( $tplconf, $default ) );
 
 				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}

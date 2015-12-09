@@ -110,7 +110,7 @@ class Standard
 		$status = $view->confirmOrderItem->getPaymentStatus();
 		$default = array( 'checkout/confirm/' . $status . '/intro-body-default.php', 'checkout/confirm/intro-body-default.php' );
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -166,7 +166,7 @@ class Standard
 		$status = $view->confirmOrderItem->getPaymentStatus();
 		$default = array( 'checkout/confirm/' . $status . '/intro-header-default.php', 'checkout/confirm/intro-header-default.php' );
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

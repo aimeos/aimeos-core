@@ -147,7 +147,7 @@ class Base
 		$tplconf = 'controller/jsonadm/standard/template-delete';
 		$default = 'delete-standard.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -242,7 +242,7 @@ class Base
 		$tplconf = 'controller/jsonadm/standard/template-get';
 		$default = 'get-standard.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -370,7 +370,7 @@ class Base
 		$tplconf = 'controller/jsonadm/standard/template-patch';
 		$default = 'patch-standard.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -498,7 +498,7 @@ class Base
 		$tplconf = 'controller/jsonadm/standard/template-post';
 		$default = 'post-standard.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -549,7 +549,7 @@ class Base
 		$tplconf = 'controller/jsonadm/standard/template-put';
 		$default = 'put-standard.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -645,7 +645,7 @@ class Base
 		$tplconf = 'controller/jsonadm/standard/template-options';
 		$default = 'options-standard.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -822,42 +822,5 @@ class Base
 	protected function getPath()
 	{
 		return $this->path;
-	}
-
-
-	/**
-	 * Returns the absolute path to the given template file.
-	 * It uses the first one found from the configured paths in the manifest files, but in reverse order.
-	 *
-	 * @param string|array $default Relative file name or list of file names to use when nothing else is configured
-	 * @param string $confpath Configuration key of the path to the template file
-	 * @return string path the to the template file
-	 * @throws \Aimeos\Controller\JsonAdm\Exception If no template file was found
-	 */
-	protected function getTemplate( $confpath, $default )
-	{
-		$ds = DIRECTORY_SEPARATOR;
-
-		foreach( (array) $default as $fname )
-		{
-			$file = $this->context->getConfig()->get( $confpath, $fname );
-
-			foreach( array_reverse( $this->templatePaths ) as $path => $relPaths )
-			{
-				foreach( $relPaths as $relPath )
-				{
-					$absPath = $path . $ds . $relPath . $ds . $file;
-					if( $ds !== '/' ) {
-						$absPath = str_replace( '/', $ds, $absPath );
-					}
-
-					if( is_file( $absPath ) ) {
-						return $absPath;
-					}
-				}
-			}
-		}
-
-		throw new \Aimeos\Controller\JsonAdm\Exception( sprintf( 'Template "%1$s" not available', $file ) );
 	}
 }

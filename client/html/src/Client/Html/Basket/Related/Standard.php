@@ -139,7 +139,7 @@ class Standard
 		$tplconf = 'client/html/basket/related/standard/template-body';
 		$default = 'basket/related/body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -193,7 +193,7 @@ class Standard
 		$tplconf = 'client/html/basket/related/standard/template-header';
 		$default = 'basket/related/header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

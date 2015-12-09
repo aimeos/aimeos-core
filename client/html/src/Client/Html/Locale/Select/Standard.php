@@ -151,7 +151,7 @@ class Standard
 		$tplconf = 'client/html/locale/select/standard/template-body';
 		$default = 'locale/select/body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -199,7 +199,7 @@ class Standard
 			$tplconf = 'client/html/locale/select/standard/template-header';
 			$default = 'locale/select/header-default.php';
 
-			return $view->render( $this->getTemplate( $tplconf, $default ) );
+			return $view->render( $view->config( $tplconf, $default ) );
 		}
 		catch( \Exception $e )
 		{

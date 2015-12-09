@@ -107,6 +107,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testResolveList()
+	{
+		$expected = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles'. DIRECTORY_SEPARATOR . 'template';
+
+		$this->assertEquals( $expected, $this->object->resolve( array( 'invalid', 'template' ) ) );
+	}
+
+
 	public function testAssignRender()
 	{
 		$this->object->addHelper( 'translate', $this->translate );

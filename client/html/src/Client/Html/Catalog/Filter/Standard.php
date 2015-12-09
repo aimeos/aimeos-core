@@ -180,7 +180,7 @@ class Standard
 			$tplconf = 'client/html/catalog/filter/standard/template-body';
 			$default = 'catalog/filter/body-default.php';
 
-			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$html = $view->render( $view->config( $tplconf, $default ) );
 
 			$this->setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
@@ -250,7 +250,7 @@ class Standard
 				$tplconf = 'client/html/catalog/filter/standard/template-header';
 				$default = 'catalog/filter/header-default.php';
 
-				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+				$html = $view->render( $view->config( $tplconf, $default ) );
 
 				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}

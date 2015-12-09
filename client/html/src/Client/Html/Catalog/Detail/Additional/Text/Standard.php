@@ -100,7 +100,7 @@ class Standard
 		$tplconf = 'client/html/catalog/detail/additional/text/standard/template-body';
 		$default = 'catalog/detail/additional-text-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -146,7 +146,7 @@ class Standard
 		$tplconf = 'client/html/catalog/detail/additional/text/standard/template-header';
 		$default = 'catalog/detail/additional-text-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

@@ -168,7 +168,7 @@ class Standard
 			$tplconf = 'client/html/basket/mini/standard/template-body';
 			$default = 'basket/mini/body-default.php';
 
-			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$html = $view->render( $view->config( $tplconf, $default ) );
 			$this->setBasketCached( $key, $html );
 		}
 		else
@@ -233,7 +233,7 @@ class Standard
 				$tplconf = 'client/html/basket/mini/standard/template-header';
 				$default = 'basket/mini/header-default.php';
 
-				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+				$html = $view->render( $view->config( $tplconf, $default ) );
 				$this->setBasketCached( $key, $html );
 			}
 			catch( \Exception $e )

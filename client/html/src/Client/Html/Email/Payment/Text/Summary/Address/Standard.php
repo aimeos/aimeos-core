@@ -100,7 +100,7 @@ class Standard
 		$tplconf = 'client/html/email/payment/text/summary/address/standard/template-body';
 		$default = 'email/common/text-summary-address-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -146,7 +146,7 @@ class Standard
 		$tplconf = 'client/html/email/payment/text/summary/address/standard/template-header';
 		$default = 'email/common/text-summary-address-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

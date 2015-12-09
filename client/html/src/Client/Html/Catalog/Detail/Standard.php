@@ -258,7 +258,7 @@ class Standard
 			$tplconf = 'client/html/catalog/detail/standard/template-body';
 			$default = 'catalog/detail/body-default.php';
 
-			$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+			$html = $view->render( $view->config( $tplconf, $default ) );
 
 			$this->setCached( 'body', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
@@ -322,7 +322,7 @@ class Standard
 				$tplconf = 'client/html/catalog/detail/standard/template-header';
 				$default = 'catalog/detail/header-default.php';
 
-				$html = $view->render( $this->getTemplate( $tplconf, $default ) );
+				$html = $view->render( $view->config( $tplconf, $default ) );
 
 				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}

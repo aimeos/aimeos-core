@@ -144,7 +144,7 @@ class Standard
 		$tplconf = 'client/html/email/delivery/html/summary/standard/template-body';
 		$default = 'email/common/html-summary-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -190,7 +190,7 @@ class Standard
 		$tplconf = 'client/html/email/delivery/html/summary/standard/template-header';
 		$default = 'email/common/html-summary-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

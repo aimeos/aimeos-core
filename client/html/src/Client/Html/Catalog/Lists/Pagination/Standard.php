@@ -102,7 +102,7 @@ class Standard
 		$tplconf = 'client/html/catalog/lists/pagination/standard/template-body';
 		$default = 'catalog/lists/pagination-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -154,7 +154,7 @@ class Standard
 		$tplconf = 'client/html/catalog/lists/pagination/standard/template-header';
 		$default = 'catalog/lists/pagination-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

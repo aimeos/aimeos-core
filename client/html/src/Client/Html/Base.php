@@ -478,43 +478,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the absolute path to the given template file.
-	 * It uses the first one found from the configured paths in the manifest files, but in reverse order.
-	 *
-	 * @param string|array $default Relative file name or list of file names to use when nothing else is configured
-	 * @param string $confpath Configuration key of the path to the template file
-	 * @return string path the to the template file
-	 * @throws \Aimeos\Client\Html\Exception If no template file was found
-	 */
-	protected function getTemplate( $confpath, $default )
-	{
-		$ds = DIRECTORY_SEPARATOR;
-
-		foreach( (array) $default as $fname )
-		{
-			$file = $this->context->getConfig()->get( $confpath, $fname );
-
-			foreach( array_reverse( $this->templatePaths ) as $path => $relPaths )
-			{
-				foreach( $relPaths as $relPath )
-				{
-					$absPath = $path . $ds . $relPath . $ds . $file;
-					if( $ds !== '/' ) {
-						$absPath = str_replace( '/', $ds, $absPath );
-					}
-
-					if( is_file( $absPath ) ) {
-						return $absPath;
-					}
-				}
-			}
-		}
-
-		throw new \Aimeos\Client\Html\Exception( sprintf( 'Template "%1$s" not available', $file ) );
-	}
-
-
-	/**
 	 * Returns the paths where the layout templates can be found
 	 *
 	 * @return array List of template paths

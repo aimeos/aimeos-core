@@ -101,7 +101,7 @@ class Standard
 		$tplconf = 'client/html/catalog/lists/quote/standard/template-body';
 		$default = 'catalog/lists/quote-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -147,7 +147,7 @@ class Standard
 		$tplconf = 'client/html/catalog/lists/quote/standard/template-header';
 		$default = 'catalog/lists/quote-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

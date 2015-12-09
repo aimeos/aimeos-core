@@ -128,7 +128,7 @@ class Standard
 		$view->siteItems = $items;
 		$view->siteFreq = $changefreq;
 
-		$content->add( $view->render( $this->getTemplate( $tplconf, $default ) ) );
+		$content->add( $view->render( $view->config( $tplconf, $default ) ) );
 	}
 
 
@@ -239,7 +239,7 @@ class Standard
 		$view = $this->getContext()->getView();
 
 		$content = $container->create( $this->getFilename( $filenum ) );
-		$content->add( $view->render( $this->getTemplate( $tplconf, $default ) ) );
+		$content->add( $view->render( $view->config( $tplconf, $default ) ) );
 		$container->add( $content );
 
 		return $content;
@@ -282,7 +282,7 @@ class Standard
 
 		$view = $this->getContext()->getView();
 
-		$content->add( $view->render( $this->getTemplate( $tplconf, $default ) ) );
+		$content->add( $view->render( $view->config( $tplconf, $default ) ) );
 	}
 
 
@@ -325,7 +325,7 @@ class Standard
 		$view->siteFiles = $files;
 
 		$content = $container->create( 'aimeos-sitemap-index.xml' );
-		$content->add( $view->render( $this->getTemplate( $tplconf, $default ) ) );
+		$content->add( $view->render( $view->config( $tplconf, $default ) ) );
 		$container->add( $content );
 	}
 

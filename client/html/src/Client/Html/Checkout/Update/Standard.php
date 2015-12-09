@@ -128,7 +128,7 @@ class Standard
 		$tplconf = 'client/html/checkout/update/standard/template-body';
 		$default = 'checkout/update/body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -176,7 +176,7 @@ class Standard
 			$tplconf = 'client/html/checkout/update/standard/template-header';
 			$default = 'checkout/update/header-default.php';
 
-			return $view->render( $this->getTemplate( $tplconf, $default ) );
+			return $view->render( $view->config( $tplconf, $default ) );
 		}
 		catch( \Exception $e )
 		{

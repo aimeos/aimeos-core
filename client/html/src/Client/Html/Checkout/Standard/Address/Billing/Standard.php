@@ -120,7 +120,7 @@ class Standard
 		$tplconf = 'client/html/checkout/standard/address/billing/standard/template-body';
 		$default = 'checkout/standard/address-billing-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -166,7 +166,7 @@ class Standard
 		$tplconf = 'client/html/checkout/standard/address/billing/standard/template-header';
 		$default = 'checkout/standard/address-billing-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

@@ -103,7 +103,7 @@ class Standard
 		$tplconf = 'client/html/catalog/lists/promo/standard/template-body';
 		$default = 'catalog/lists/promo-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -149,7 +149,7 @@ class Standard
 		$tplconf = 'client/html/catalog/lists/promo/standard/template-header';
 		$default = 'catalog/lists/promo-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 

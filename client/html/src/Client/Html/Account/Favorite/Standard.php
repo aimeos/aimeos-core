@@ -129,7 +129,7 @@ class Standard
 		$tplconf = 'client/html/account/favorite/standard/template-body';
 		$default = 'account/favorite/body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -177,7 +177,7 @@ class Standard
 			$tplconf = 'client/html/account/favorite/standard/template-header';
 			$default = 'account/favorite/header-default.php';
 
-			return $view->render( $this->getTemplate( $tplconf, $default ) );
+			return $view->render( $view->config( $tplconf, $default ) );
 		}
 		catch( \Exception $e )
 		{

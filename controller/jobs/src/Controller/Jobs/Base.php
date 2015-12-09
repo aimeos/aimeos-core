@@ -60,44 +60,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the absolute path to the given template file.
-	 * It uses the first one found from the configured paths in the manifest files, but in reverse order.
-	 *
-	 * @param string|array $default Relative file name or list of file names to use when nothing else is configured
-	 * @param string $confpath Configuration key of the path to the template file
-	 * @return string path the to the template file
-	 * @throws \Aimeos\Controller\Jobs\Exception If no template file was found
-	 */
-	protected function getTemplate( $confpath, $default )
-	{
-		$ds = DIRECTORY_SEPARATOR;
-		$templatePaths = $this->aimeos->getCustomPaths( 'controller/jobs/templates' );
-
-		foreach( (array) $default as $fname )
-		{
-			$file = $this->context->getConfig()->get( $confpath, $fname );
-
-			foreach( array_reverse( $templatePaths ) as $path => $relPaths )
-			{
-				foreach( $relPaths as $relPath )
-				{
-					$absPath = $path . $ds . $relPath . $ds . $file;
-					if( $ds !== '/' ) {
-						$absPath = str_replace( '/', $ds, $absPath );
-					}
-
-					if( is_file( $absPath ) ) {
-						return $absPath;
-					}
-				}
-			}
-		}
-
-		throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Template "%1$s" not available', $file ) );
-	}
-
-
-	/**
 	 * Returns the attribute type item specified by the code.
 	 *
 	 * @param string $prefix Domain prefix for the manager, e.g. "media/type"

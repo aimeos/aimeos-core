@@ -100,7 +100,7 @@ class Standard
 		$tplconf = 'client/html/locale/select/language/standard/template-body';
 		$default = 'locale/select/language-body-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -146,7 +146,7 @@ class Standard
 		$tplconf = 'client/html/locale/select/language/standard/template-header';
 		$default = 'locale/select/language-header-default.php';
 
-		return $view->render( $this->getTemplate( $tplconf, $default ) );
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
