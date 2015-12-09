@@ -15,8 +15,8 @@ $enc = $this->encoder();
  *
  * If you use an absolute URL prefer the https protocol to avoid issues with mixed
  * content. Browsers avoid to load files via http if the page was retrieved via
- * https. 
- *  
+ * https.
+ *
  * @param string Relative path or absolute URL
  * @since 2014.03
  * @see client/html/common/content/baseurl
@@ -84,7 +84,7 @@ $params = $this->param(); unset( $params['target'] );
 					--><div class="media-list"><!--
 <?php				foreach( $attribute->getListItems( 'media', 'icon' ) as $listItem ) : ?>
 <?php					if( ( $item = $listItem->getRefItem() ) !== null ) : ?>
-<?php						echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.php', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--'; ?>
+<?php						echo '-->' . $this->partial( $this->config( 'client/html/common/partials/media', 'common/partials/media-default.php' ), array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ) . '<!--'; ?>
 <?php					endif; ?>
 <?php				endforeach; ?>
 					--></div>

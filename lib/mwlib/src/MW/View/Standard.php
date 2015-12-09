@@ -23,7 +23,7 @@ namespace Aimeos\MW\View;
  * @method \Aimeos\MW\Mail\Message\Iface mail() Returns the e-mail message object
  * @method string number(integer|float|decimal $number, integer $decimals = 2) Returns the formatted number
  * @method string|array param(string|null $name, string|array $default) Returns the parameter value
- * @method string partial(string $confpath, string $default, array $params = array() ) Renders the partial template
+ * @method string partial(string $filepath, array $params = array() ) Renders the partial template
  * @method \Aimeos\MW\View\Helper\Iface request() Returns the request helper object
  * @method string translate(string $domain, string $singular, string $plural = '', integer $number = 1) Returns the translated string or the original one if no translation is available
  * @method string url(string|null $target, string|null $controller = null, string|null $action = null, array $params = array(), array $trailing = array(), array $config = array()) Returns the URL assembled from the given arguments
@@ -41,7 +41,7 @@ class Standard implements \Aimeos\MW\View\Iface
 	/**
 	 * Initializes the view object
 	 *
-	 * @param array $paths List of template base paths
+	 * @param array $paths Associative list of base paths as keys and list of relative paths as value
 	 */
 	public function __construct( array $paths = array() )
 	{
@@ -222,23 +222,13 @@ class Standard implements \Aimeos\MW\View\Iface
 
 
 	/**
-	 * Includes the template file and processes the PHP instructions.
-	 * The filename is passed as first argument but without variable name to prevent messing the variable scope.
-	 */
-	protected function includeFile()
-	{
-		include func_get_arg( 0 );
-	}
-
-
-	/**
 	 * Returns the absolute file name for the given relative one
 	 *
 	 * @param string $file Relative path to the template file
-	 * @return string Absolute file path
-	 * @throws \Aimeos\MW\Exception
+	 * @return string Absolute path to the template file
+	 * @throws \Aimeos\MW\Exception If the template couldn't be found
 	 */
-	protected function resolve( $file )
+	public function resolve( $file )
 	{
 		if( strncmp( $file, '/', 1 ) === 0 ) {
 			return $file;
@@ -246,7 +236,7 @@ class Standard implements \Aimeos\MW\View\Iface
 
 		$ds = DIRECTORY_SEPARATOR;
 
-		foreach( array_reverse( (array) $this->paths ) as $path => $relPaths )
+		foreach( array_reverse( $this->paths ) as $path => $relPaths )
 		{
 			foreach( $relPaths as $relPath )
 			{
@@ -262,5 +252,15 @@ class Standard implements \Aimeos\MW\View\Iface
 		}
 
 		throw new \Aimeos\MW\View\Exception( sprintf( 'Template "%1$s" not available', $file ) );
+	}
+
+
+	/**
+	 * Includes the template file and processes the PHP instructions.
+	 * The filename is passed as first argument but without variable name to prevent messing the variable scope.
+	 */
+	protected function includeFile()
+	{
+		include func_get_arg( 0 );
 	}
 }

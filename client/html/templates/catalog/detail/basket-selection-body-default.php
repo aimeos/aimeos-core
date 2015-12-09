@@ -35,6 +35,6 @@ $params = array(
 
 ?>
 <div class="catalog-detail-basket-selection" data-proddeps="<?php echo $enc->attr( $prodDeps ); ?>" data-attrdeps="<?php echo $enc->attr( $attrDeps ); ?>">
-<?php echo $this->partial( 'client/html/common/partials/selection', 'common/partials/selection-default.php', $params ); ?>
+<?php echo $this->partial( $this->config( 'client/html/common/partials/selection', 'common/partials/selection-default.php' ), $params ); ?>
 <?php echo $this->get( 'selectionBody' ); ?>
 </div>

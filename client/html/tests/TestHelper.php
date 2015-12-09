@@ -35,7 +35,7 @@ class TestHelper
 			$config = self::getContext( $site )->getConfig();
 		}
 
-		$view = new \Aimeos\MW\View\Standard();
+		$view = new \Aimeos\MW\View\Standard( self::getHtmlTemplatePaths() );
 
 		$trans = new \Aimeos\MW\Translation\None( 'de_DE' );
 		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
@@ -62,7 +62,7 @@ class TestHelper
 		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Partial\Standard( $view, $config, self::getHtmlTemplatePaths() );
+		$helper = new \Aimeos\MW\View\Helper\Partial\Standard( $view );
 		$view->addHelper( 'partial', $helper );
 
 		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1' );

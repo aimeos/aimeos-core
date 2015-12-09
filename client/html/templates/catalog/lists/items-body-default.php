@@ -122,7 +122,7 @@ $reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', tr
 		</a>
 		<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', array_merge( array( $id ), array_keys( $subProducts ) ) ) ); ?>"></div>
 		<div class="price-list price price-actual">
-<?php	echo $this->partial( 'client/html/common/partials/price', 'common/partials/price-default.php', array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
+<?php	echo $this->partial( $this->config( 'client/html/common/partials/price', 'common/partials/price-default.php' ), array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 		</div>
 <?php	if( $this->config( 'client/html/catalog/list/basket-add', false ) ) : ?>
 		<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
@@ -130,10 +130,10 @@ $reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', tr
 <?php		echo $this->csrf()->formfield(); ?>
 <!-- catalog.lists.items.csrf -->
 			<div class="items-selection" data-proddeps="<?php echo $enc->attr( $prodDeps ); ?>" data-attrdeps="<?php echo $enc->attr( $attrDeps ); ?>">
-<?php echo $this->partial( 'client/html/common/partials/selection', 'common/partials/selection-default.php', $selectParams ); ?>
+<?php echo $this->partial( $this->config( 'client/html/common/partials/selection', 'common/partials/selection-default.php' ), $selectParams ); ?>
 			</div>
 			<div class="items-attribute">
-<?php echo $this->partial( 'client/html/common/partials/attribute', 'common/partials/attribute-default.php', $attributeParams ); ?>
+<?php echo $this->partial( $this->config( 'client/html/common/partials/attribute', 'common/partials/attribute-default.php' ), $attributeParams ); ?>
 			</div>
 			<div class="addbasket">
 				<div class="group">

@@ -47,10 +47,10 @@ $last = ( ((int) ($total / $limit)) * $limit > $offset ? ((int) ($total / $limit
 		"self": "<?php $params['page']['offset'] = $offset; echo $this->url( $target, $cntl, $action, $params, array(), $config ); ?>"
 	},
 <?php if( isset( $this->errors ) ) : ?>
-	"errors": <?php echo $this->partial( $this->get( 'partial-errors', 'controller/jsonadm/partials/template-errors' ), 'partials/errors-standard.php', array( 'errors' => $this->errors ) ); ?>
+	"errors": <?php echo $this->partial( $this->config( $this->get( 'partial-errors', 'controller/jsonadm/partials/template-errors' ), 'partials/errors-standard.php' ), array( 'errors' => $this->errors ) ); ?>
 <?php elseif( isset( $this->data ) ) : ?>
-	"data": <?php echo $this->partial( $this->get( 'partial-data', 'controller/jsonadm/partials/template-data' ), 'partials/data-standard.php', array( 'data' => $this->get( 'data' ), 'childItems' => $this->get( 'childItems', array() ), 'listItems' => $this->get( 'listItems', array() ) ) ); ?>,
-	"included": <?php echo $this->partial( $this->get( 'partial-included', 'controller/jsonadm/partials/template-included' ), 'partials/included-standard.php', array( 'childItems' => $this->get( 'childItems', array() ), 'refItems' => $this->get( 'refItems', array() ) ) ); ?>
+	"data": <?php echo $this->partial( $this->config( $this->get( 'partial-data', 'controller/jsonadm/partials/template-data' ), 'partials/data-standard.php' ), array( 'data' => $this->get( 'data' ), 'childItems' => $this->get( 'childItems', array() ), 'listItems' => $this->get( 'listItems', array() ) ) ); ?>,
+	"included": <?php echo $this->partial( $this->config( $this->get( 'partial-included', 'controller/jsonadm/partials/template-included' ), 'partials/included-standard.php' ), array( 'childItems' => $this->get( 'childItems', array() ), 'refItems' => $this->get( 'refItems', array() ) ) ); ?>
 <?php endif; ?>
 
 }

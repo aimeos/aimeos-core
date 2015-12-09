@@ -24,7 +24,7 @@ $config = $this->config( 'client/html/catalog/list/url/config', array() );
  *
  * The partial template files are usually stored in the templates/partials/ folder
  * of the core or the extensions. The configured path to the partial file must
- * be relative to the templates/ folder, e.g. "common/partials/media-default.php". 
+ * be relative to the templates/ folder, e.g. "common/partials/media-default.php".
  *
  * @param string Relative path to the template file
  * @since 2015.08
@@ -44,7 +44,7 @@ $config = $this->config( 'client/html/catalog/list/url/config', array() );
 <?php	foreach( $item->getListItems( 'media', 'icon' ) as $listItem ) : ?>
 <?php		if( ( $mediaItem = $listItem->getRefItem() ) !== null ) : ?>
 <?php			$values = array( 'item' => $mediaItem, 'boxAttributes' => array( 'class' => 'media-item' ) ); ?>
-<?php			echo '-->' . $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.php', $values ) . '<!--'; ?>
+<?php			echo '-->' . $this->partial( $this->config( 'client/html/common/partials/media', 'common/partials/media-default.php' ), $values ) . '<!--'; ?>
 <?php		endif; ?>
 <?php	endforeach; ?>
 			--></div><!--
@@ -52,7 +52,7 @@ $config = $this->config( 'client/html/catalog/list/url/config', array() );
 		--></a>
 <?php		if( count( $item->getChildren() ) > 0 ) : ?>
 <?php			$values = array( 'nodes' => $item->getChildren(), 'path' => $path, 'params' => $params, 'level' => $level + 1 ); ?>
-<?php			echo $this->partial( 'client/html/common/partials/tree', 'common/partials/tree-default.php', $values ); ?>
+<?php			echo $this->partial( $this->config( 'client/html/common/partials/tree', 'common/partials/tree-default.php' ), $values ); ?>
 <?php		endif; ?>
 	</li>
 <?php	endif; ?>

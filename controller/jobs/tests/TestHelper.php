@@ -105,7 +105,7 @@ class TestHelper
 			self::getAimeos()->getCustomPaths( 'controller/jobs/templates' )
 		);
 
-		$view = new \Aimeos\MW\View\Standard();
+		$view = new \Aimeos\MW\View\Standard( $tmplpaths );
 
 		$trans = new \Aimeos\MW\Translation\None( 'de_DE' );
 		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
@@ -132,7 +132,7 @@ class TestHelper
 		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Partial\Standard( $view, $config, $tmplpaths );
+		$helper = new \Aimeos\MW\View\Helper\Partial\Standard( $view );
 		$view->addHelper( 'partial', $helper );
 
 		return $view;

@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MW\View\Standard();
+		$this->object = new \Aimeos\MW\View\Standard( array( __DIR__ => array( 'testfiles' ) ) );
 		$this->translate = new \Aimeos\MW\View\Helper\Translate\Standard( $this->object, new \Aimeos\MW\Translation\None( 'en_GB' ) );
 	}
 
@@ -99,6 +99,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testResolve()
+	{
+		$expected = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles'. DIRECTORY_SEPARATOR . 'template';
+
+		$this->assertEquals( $expected, $this->object->resolve( 'template' ) );
+	}
+
+
 	public function testAssignRender()
 	{
 		$this->object->addHelper( 'translate', $this->translate );
@@ -122,7 +130,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAssignRenderRelativePath()
 	{
-		$this->object = new \Aimeos\MW\View\Standard( array( __DIR__ => array( 'testfiles' ) ) );
 		$this->object->addHelper( 'translate', $this->translate );
 
 

@@ -20,11 +20,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$view = new \Aimeos\MW\View\Standard();
-		$conf = new \Aimeos\MW\Config\PHPArray();
-		$paths = array( __DIR__ => array( 'testfiles' ) );
+		$view = new \Aimeos\MW\View\Standard( array( __DIR__ => array( 'testfiles' ) ) );
 
-		$this->object = new \Aimeos\MW\View\Helper\Partial\Standard( $view, $conf, $paths );
+		$this->object = new \Aimeos\MW\View\Helper\Partial\Standard( $view );
 	}
 
 
@@ -42,12 +40,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testTransform()
 	{
-		$this->assertEquals( '', $this->object->transform( '', 'partial.html' ) );
+		$this->assertEquals( '', $this->object->transform( 'partial.html' ) );
 	}
 
 
 	public function testTransformParams()
 	{
-		$this->assertEquals( 'test', $this->object->transform( '', 'partial.html', array( 'testparam' => 'test' ) ) );
+		$this->assertEquals( 'test', $this->object->transform( 'partial.html', array( 'testparam' => 'test' ) ) );
 	}
 }

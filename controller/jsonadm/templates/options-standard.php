@@ -18,7 +18,7 @@ foreach( $this->get( 'resources', array() ) as $resource ) {
 		"resources": <?php echo json_encode( $list ); ?>
 	}
 <?php if( isset( $this->errors ) ) : ?>
-	,"errors": <?php echo $this->partial( 'controller/jsonadm/standard/template-errors', 'partials/errors-standard.php', array( 'errors' => $this->errors ) ); ?>
+	,"errors": <?php echo $this->partial( $this->config( 'controller/jsonadm/standard/template-errors', 'partials/errors-standard.php' ), array( 'errors' => $this->errors ) ); ?>
 <?php endif; ?>
 
 }

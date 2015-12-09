@@ -28,7 +28,7 @@ $enc = $this->encoder();
 						<div class="media-list">
 <?php		foreach( $attrItem->getListItems( 'media', 'default' ) as $listItem ) : ?>
 <?php			if( ( $item = $listItem->getRefItem() ) !== null ) : ?>
-<?php				echo $this->partial( 'client/html/common/partials/media', 'common/partials/media-default.php', array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ); ?>
+<?php				echo $this->partial( $this->config( 'client/html/common/partials/media', 'common/partials/media-default.php' ), array( 'item' => $item, 'boxAttributes' => array( 'class' => 'media-item' ) ) ); ?>
 <?php			endif; ?>
 <?php		endforeach; ?>
 						</div>

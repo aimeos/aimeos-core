@@ -33,6 +33,6 @@ $params = array(
 
 ?>
 <div class="catalog-detail-basket-attribute">
-<?php echo $this->partial( 'client/html/common/partials/attribute', 'common/partials/attribute-default.php', $params ); ?>
+<?php echo $this->partial( $this->config( 'client/html/common/partials/attribute', 'common/partials/attribute-default.php' ), $params ); ?>
 <?php echo $this->get( 'attributeBody' ); ?>
 </div>
