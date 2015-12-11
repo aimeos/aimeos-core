@@ -49,6 +49,7 @@ $fields = $this->param( 'fields', $default );
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), array() ); ?>
 
 <form class="filter" method="POST" action="<?php echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+<?php echo $this->csrf()->formfield(); ?>
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/filter', 'common/partials/filter-default.php' ), $filterParams ); ?>
 	<div class="checkbox">
 		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'ID' ) ); ?></label>

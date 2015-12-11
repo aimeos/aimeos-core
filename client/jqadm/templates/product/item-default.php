@@ -30,6 +30,8 @@ $listParam = array();
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), array() ); ?>
 
 <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="<?php echo $enc->attr( $this->url( $target, $cntl, $action, array(), array(), $config ) ); ?>">
+<?php echo $this->csrf()->formfield(); ?>
+
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
 		<div class="product-basic panel panel-default">
@@ -138,7 +140,7 @@ $listParam = array();
 		<button class="btn btn-primary">
 			<?php echo $enc->html( $this->translate( 'client/jqadm', 'Save' ) ); ?>
 		</button>
-		<a class="btn btn-warning" href="<?php echo $enc->attr( $this->url( $listTarget, $listCntl, $listAction, $listParam, array(), $listConfig ) ); ?>">
+		<a class="btn btn-warning" href="<?php echo $enc->attr( $this->url( $listTarget, $listCntl, $listAction, $listParam, array( 'resource' => 'product' ), $listConfig ) ); ?>">
 			<?php echo $enc->html( $this->translate( 'client/jqadm', 'Cancel' ) ); ?>
 		</a>
 	</div>
