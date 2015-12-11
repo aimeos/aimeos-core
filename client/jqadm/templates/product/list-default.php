@@ -39,14 +39,14 @@ $filterParams = array(
 	'filterOperators' => $this->get( 'filterOperators', array() ),
 );
 
-$navParams = array( 'total' => $this->get( 'total', 0 ) );
-$nav = $this->partial( $this->config( 'client/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), $navParams );
+$pageParams = array( 'total' => $this->get( 'total', 0 ) );
+$pagination = $this->partial( $this->config( 'client/jqadm/partial/pagination', 'common/partials/pagination-default.php' ), $pageParams );
 
 $default = $this->config( 'client/jqadm/product/fields', array( 'product.status', 'product.typeid', 'product.code', 'product.label' ) );
 $fields = $this->param( 'fields', $default );
 
 ?>
-<?php $this->block()->start( 'jqadm_content' ); ?>
+<?php echo $this->partial( $this->config( 'client/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), array() ); ?>
 
 <form class="filter" method="POST" action="<?php echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/filter', 'common/partials/filter-default.php' ), $filterParams ); ?>
@@ -64,7 +64,8 @@ $fields = $this->param( 'fields', $default );
 	</div>
 </form>
 
-<?php echo $nav ?>
+<?php echo $pagination; ?>
+
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -201,8 +202,5 @@ $fields = $this->param( 'fields', $default );
 <?php endforeach; ?>
 	</tbody>
 </table>
-<?php echo $nav; ?>
 
-<?php $this->block()->stop(); ?>
-
-<?php echo $this->render( 'base-default.php' ); ?>
+<?php echo $pagination; ?>

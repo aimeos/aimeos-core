@@ -27,7 +27,7 @@ $listConfig = $this->config( 'client/jqadm/url/search/config', array() );
 $listParam = array();
 
 ?>
-<?php $this->block()->start( 'jqadm_content' ); ?>
+<?php echo $this->partial( $this->config( 'client/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), array() ); ?>
 
 <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="<?php echo $enc->attr( $this->url( $target, $cntl, $action, array(), array(), $config ) ); ?>">
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -143,7 +143,3 @@ $listParam = array();
 		</a>
 	</div>
 </form>
-
-<?php $this->block()->stop(); ?>
-
-<?php echo $this->render( 'base-default.php' ); ?>
