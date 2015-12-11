@@ -21,6 +21,7 @@ namespace Aimeos\Client\Html\Catalog;
 abstract class Base
 	extends \Aimeos\Client\Html\Common\Client\Factory\Base
 {
+	private $controller;
 	private $productList;
 	private $productTotal = 0;
 
@@ -74,7 +75,7 @@ abstract class Base
 	 */
 	protected function createProductListFilter( $text, $catid, $sort, $sortdir, $page, $size, $catfilter, $textfilter )
 	{
-		$controller = \Aimeos\Controller\Frontend\Factory::createController( $this->getContext(), 'catalog' );
+		$controller = $this->getCatalogController();
 
 		if( $text !== '' && $textfilter === true )
 		{
