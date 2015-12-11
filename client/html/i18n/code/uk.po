@@ -1,8 +1,9 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-#
+# 
+# 
+# Translators:
 # Translators:
 # Translators:
 # Translators:
@@ -11,49 +12,17 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"PO-Revision-Date: 2015-12-11 11:43+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
-"Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: uk\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-#. Product attribute
-msgid "color"
-msgstr ""
 
 #. Address salutation
 msgid "company"
-msgstr ""
-
-#. Direct debit service provider
-msgid "directdebit.accountno"
-msgstr ""
-
-#. Direct debit service provider
-msgid "directdebit.accountowner"
-msgstr ""
-
-#. Direct debit service provider
-msgid "directdebit.bankcode"
-msgstr ""
-
-#. Direct debit service provider
-msgid "directdebit.bankname"
-msgstr ""
-
-#. Favorite action
-msgid "favorite"
-msgstr ""
-
-#. Product attribute
-msgid "length"
-msgstr ""
-
-#. Address salutation
-msgid "miss"
 msgstr ""
 
 #. Address salutation
@@ -64,12 +33,28 @@ msgstr ""
 msgid "mrs"
 msgstr ""
 
-#. Product attribute
-msgid "option"
+#. Address salutation
+msgid "miss"
 msgstr ""
 
-#. Order type value
-msgid "order:phone"
+#. Product attribute
+msgid "size"
+msgstr ""
+
+#. Product attribute
+msgid "length"
+msgstr ""
+
+#. Product attribute
+msgid "width"
+msgstr ""
+
+#. Product attribute
+msgid "color"
+msgstr ""
+
+#. Product attribute
+msgid "option"
 msgstr ""
 
 #. Order type value
@@ -80,20 +65,8 @@ msgstr ""
 msgid "order:web"
 msgstr ""
 
-#. Product property package-height
-msgid "package-height"
-msgstr ""
-
-#. Product property package-length
-msgid "package-length"
-msgstr ""
-
-#. Product property package-weight
-msgid "package-weight"
-msgstr ""
-
-#. Product property package-width
-msgid "package-width"
+#. Order type value
+msgid "order:phone"
 msgstr ""
 
 #. Payment status value
@@ -126,38 +99,6 @@ msgstr ""
 
 #. Payment status value
 msgid "pay:6"
-msgstr ""
-
-#. Omnipay service provider
-msgid "payment.cardno"
-msgstr ""
-
-#. Omnipay service provider
-msgid "payment.cvv"
-msgstr ""
-
-#. Omnipay service provider
-msgid "payment.expirymonth"
-msgstr ""
-
-#. Omnipay service provider
-msgid "payment.expiryyear"
-msgstr ""
-
-#. Omnipay service provider
-msgid "payment.firstname"
-msgstr ""
-
-#. Omnipay service provider
-msgid "payment.lastname"
-msgstr ""
-
-#. Pin action
-msgid "pin"
-msgstr ""
-
-#. Product attribute
-msgid "size"
 msgstr ""
 
 #. Delivery status value
@@ -196,16 +137,76 @@ msgstr ""
 msgid "stat:7"
 msgstr ""
 
+#. Direct debit service provider
+msgid "directdebit.accountowner"
+msgstr ""
+
+#. Direct debit service provider
+msgid "directdebit.accountno"
+msgstr ""
+
+#. Direct debit service provider
+msgid "directdebit.bankcode"
+msgstr ""
+
+#. Direct debit service provider
+msgid "directdebit.bankname"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.firstname"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.lastname"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.cardno"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.cvv"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.expirymonth"
+msgstr ""
+
+#. Omnipay service provider
+msgid "payment.expiryyear"
+msgstr ""
+
 #. Warehouse code
 msgid "warehouse:default"
+msgstr ""
+
+#. Favorite action
+msgid "favorite"
+msgstr ""
+
+#. Pin action
+msgid "pin"
 msgstr ""
 
 #. Watch action
 msgid "watch"
 msgstr ""
 
-#. Product attribute
-msgid "width"
+#. Product property package-length
+msgid "package-length"
+msgstr ""
+
+#. Product property package-width
+msgid "package-width"
+msgstr ""
+
+#. Product property package-height
+msgid "package-height"
+msgstr ""
+
+#. Product property package-weight
+msgid "package-weight"
 msgstr ""
 
 msgid "price:default"

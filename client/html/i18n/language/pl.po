@@ -8,6 +8,7 @@
 # Translators:
 # Translators:
 # jerzys <jerzy.skalski@gmail.com>, 2014
+# jerzys <jerzy.skalski@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"

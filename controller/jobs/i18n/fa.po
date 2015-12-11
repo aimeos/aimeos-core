@@ -1,20 +1,20 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-07 18:10+0100\n"
-"PO-Revision-Date: 2015-09-29 12:32+0000\n"
+"PO-Revision-Date: 2015-12-11 11:44+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Persian (http://www.transifex.com/aimeos/aimeos-core/language/fa/)\n"
-"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fa\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: src/Controller/Jobs/Admin/Job/Default.php:28
@@ -24,7 +24,9 @@ msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:39
 #: src/Controller/Jobs/Order/Service/Payment/Standard.php:43
-msgid "Authorized payments of orders will be captured after dispatching or after a configurable amount of time"
+msgid ""
+"Authorized payments of orders will be captured after dispatching or after a "
+"configurable amount of time"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:28
@@ -100,7 +102,9 @@ msgstr "Decreases the stock levels of products in completed orders"
 
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:39
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Standard.php:43
-msgid "Deletes unfinished orders an makes their products and coupon codes available again"
+msgid ""
+"Deletes unfinished orders an makes their products and coupon codes available"
+" again"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:39
@@ -124,7 +128,8 @@ msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:39
 #: src/Controller/Jobs/Admin/Job/Standard.php:43
-msgid "Executes the jobs created by the admin interface, e.g. the text exports"
+msgid ""
+"Executes the jobs created by the admin interface, e.g. the text exports"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Export/Default.php:39
@@ -306,7 +311,8 @@ msgstr ""
 
 #: src/Controller/Jobs/Admin/Log/Default.php:39
 #: src/Controller/Jobs/Admin/Log/Standard.php:43
-msgid "Removes the old log entries from the database and archives them (optional)"
+msgid ""
+"Removes the old log entries from the database and archives them (optional)"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:28
