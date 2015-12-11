@@ -51,6 +51,8 @@ class Factory
 			throw new \Aimeos\Client\JQAdm\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 		}
 
+		$client->setView( $context->getView() );
+
 		return $client;
 	}
 
