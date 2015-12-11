@@ -204,5 +204,5 @@ msgstr ""
 msgid "width"
 msgstr "Width"
 
-#~ msgid "price:default"
-#~ msgstr "%1$s %2$s"
+msgid "price:default"
+msgstr "%1$s %2$s"

@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-07 18:10+0100\n"
-"PO-Revision-Date: 2015-12-07 17:13+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2015-12-09 17:55+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -142,7 +142,7 @@ msgstr "Sınıf \"%1$s\" mevcut değil"
 #: src/MShop/Attribute/Item/Standard.php:139
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "Kod 255 karakterden daha uzun olmamalıdır"
 
 #: src/MShop/Common/Item/Abstract.php:209 src/MShop/Common/Item/Base.php:249
 #, php-format
@@ -180,7 +180,7 @@ msgstr "Yapılandırma nesnesi mevcut değil"
 #: src/MShop/Common/Manager/Type/Abstract.php:55
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "\"%1$s\" için gerekli SQL ifade yapılandırması mevcut değil"
 
 #: src/MShop/Plugin/Provider/Order/Coupon.php:90
 #: src/MShop/Plugin/Provider/Order/Coupon.php:94
@@ -209,7 +209,7 @@ msgstr "Yinelenen kupon kodu \"%1$s\""
 #: src/MShop/Context/Item/Standard.php:188
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "Dosya sistem yöneticisi nesnesi mevcut değil"
 
 #: src/MShop/Order/Item/Base/Product/Abstract.php:44
 #: src/MShop/Order/Item/Base/Abstract.php:64
@@ -462,7 +462,7 @@ msgstr "\"%1$s\" ID'li öğe bulunamadı"
 #: src/MShop/Common/Manager/Abstract.php:626
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "\"%1$s\" içinde \"%2$s\" ID'li öğe bulunamadı"
 
 #: src/MAdmin/Job/Manager/Default.php:359
 #: src/MAdmin/Job/Manager/Standard.php:363
@@ -594,7 +594,7 @@ msgstr "Yeni oluşturulan site  \"saveItem()\" metodu kullanılarak kaydedilemez
 #: src/MShop/Common/Manager/Base.php:664
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "\"%1$s\" içinde \"%2$s\" 'li hiçbir öğe bulunamadı"
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:194
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:198
@@ -1110,7 +1110,7 @@ msgstr "\"%2$s\" içindeki \"%1$s\" kodlu ağaç kökü bulunamadı"
 #: src/MShop/Common/Manager/Type/Abstract.php:199
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "\"%2$s\" içinde \"%1$s\" ID'li tür öğesi bulunamadı"
 
 #: src/MShop/Service/Provider/Abstract.php:262
 #: src/MShop/Service/Provider/Base.php:266

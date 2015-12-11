@@ -207,3 +207,7 @@ msgstr "package-height"
 #. Product property package-weight
 msgid "package-weight"
 msgstr "package-weight"
+
+msgid "price:default"
+msgstr "%1$s %2$s"
+

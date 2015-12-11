@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-07 18:10+0100\n"
-"PO-Revision-Date: 2015-12-07 17:13+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2015-12-09 17:57+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +28,7 @@ msgstr "- %1$s : %2$s\n"
 #: src/Controller/ExtJS/Media/Default.php:708
 #, php-format
 msgid "Changing file permissions for \"%1$s\" to \"%2$o\" failed"
-msgstr ""
+msgstr "\"%1$s\" için dosya izinlerinin \"%2$o\" 'a değiştirilmesi başarısız"
 
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:66
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:160
@@ -70,29 +70,29 @@ msgstr "\"%2$s\" dosyası için \"%1$s\" izinleri ayarlanamadı"
 #: src/Controller/ExtJS/Catalog/Export/Text/Default.php:177
 #, php-format
 msgid "Couldn't create directory \"%1$s\" with permissions \"%2$o\""
-msgstr ""
+msgstr "\"%2$o\" izinlerine sahip \"%1$s\" dizini oluşturulamadı"
 
 #: src/Controller/ExtJS/Attribute/Export/Text/Default.php:182
 #, php-format
 msgid "Create export directory for attribute IDs: %1$s"
-msgstr ""
+msgstr "Şu nitelik ID'leri için dışa aktarma dizini oluştur: %1$s"
 
 #: src/Controller/ExtJS/Catalog/Export/Text/Default.php:180
 #, php-format
 msgid "Create export directory for catalog IDs: %1$s"
-msgstr ""
+msgstr "Şu katalog ID'leri için dışa aktarma dizini oluştur: %1$s"
 
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:180
 #, php-format
 msgid "Create export directory for product IDs: %1$s"
-msgstr ""
+msgstr "Şu ürün ID'leri için dışa aktarma dizini oluştur: %1$s"
 
 #: src/Controller/ExtJS/Media/Default.php:116
 #: src/Controller/ExtJS/Media/Default.php:122
 #: src/Controller/ExtJS/Media/Default.php:240
 #, php-format
 msgid "Deleting file \"%1$s\" failed"
-msgstr ""
+msgstr "\"%1$s\" dosyasını silme başarısız oldu"
 
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:186
 #: src/Controller/ExtJS/Attribute/Export/Text/Default.php:188
@@ -348,12 +348,12 @@ msgstr "Metot \"%1$s\" çağrılamıyor"
 #: src/Controller/ExtJS/Media/Standard.php:538
 #, php-format
 msgid "Unable to create directory \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" dizinini oluşturulamıyor"
 
 #: src/Controller/ExtJS/Media/Standard.php:544
 #, php-format
 msgid "Unable to create file in \"%1$s\""
-msgstr ""
+msgstr "\"%1$s\" içinde dosya oluşturulamıyor"
 
 #: src/Controller/ExtJS/Product/Import/Text/Default.php:81
 #: src/Controller/ExtJS/Attribute/Import/Text/Default.php:80
