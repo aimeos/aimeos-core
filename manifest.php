@@ -14,6 +14,7 @@ return array(
 		'lib/mshoplib/src',
 		'lib/mwlib/src',
 		'client/html/src',
+		'client/jqadm/src',
 		'controller/common/src',
 		'controller/frontend/src',
 		'controller/jsonadm/src',
@@ -49,6 +50,9 @@ return array(
 		),
 		'client/html' => array(
 			'client/html/templates',
+		),
+		'client/jqadm/templates' => array(
+			'client/jqadm/templates',
 		),
 		'controller/extjs' => array(
 			'controller/extjs/src',
