@@ -55,15 +55,12 @@ $pageTotal = ( $total != 0 ? ceil( $total / $limit ) : 1 );
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			Dropdown <span class="caret"></span>
 		</button>
-		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $limit; ?> <span class="caret"></span></a>
-			<ul class="dropdown-menu">
-				<li><a href="<?php $params['page']['limit'] = 25; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">25</a></li>
-				<li><a href="<?php $params['page']['limit'] = 50; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">50</a></li>
-				<li><a href="<?php $params['page']['limit'] = 100; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">100</a></li>
-				<li><a href="<?php $params['page']['limit'] = 200; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">200</a></li>
-				<li><a href="<?php $params['page']['limit'] = 500; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">500</a></li>
-			</ul>
-		</li>
+		<ul class="dropdown-menu">
+			<li><a href="<?php $params['page']['limit'] = 25; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">25</a></li>
+			<li><a href="<?php $params['page']['limit'] = 50; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">50</a></li>
+			<li><a href="<?php $params['page']['limit'] = 100; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">100</a></li>
+			<li><a href="<?php $params['page']['limit'] = 200; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">200</a></li>
+			<li><a href="<?php $params['page']['limit'] = 500; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">500</a></li>
+		</ul>
 	</div>
 </nav>

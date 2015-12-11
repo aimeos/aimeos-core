@@ -201,13 +201,15 @@ class Standard
 	 */
 	public function search()
 	{
+		$total = 0;
 		$view = $this->getView();
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 		$search = $this->initCriteria( $manager->createSearch(), $view->param() );
 
-		$view->items = $manager->searchItems( $search );
-		$view->filterOperators = $search->getOperators();
+		$view->items = $manager->searchItems( $search, array(), $total );
 		$view->filterAttributes = $manager->getSearchAttributes();
+		$view->filterOperators = $search->getOperators();
+		$view->total = $total;
 
 		$tplconf = 'client/jqadm/product/template-list';
 		$default = 'product/list-default.php';

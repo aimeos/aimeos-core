@@ -102,7 +102,7 @@ $fields = $this->param( 'fields', $default );
 				</a>
 			</th>
 <?php endif; ?>
-<?php if( in_array( 'product.id', $fields ) ) : ?>
+<?php if( in_array( 'product.label', $fields ) ) : ?>
 			<th class="product.label">
 				<a href="<?php $params['sort'] = $sort( $params, 'product.label' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Label' ) ); ?>
