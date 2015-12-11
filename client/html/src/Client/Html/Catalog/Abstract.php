@@ -155,12 +155,84 @@ abstract class Client_Html_Catalog_Abstract
 		}
 		elseif( $catid !== '' && $catfilter === true )
 		{
-			return $controller->createIndexFilterCategory( $catid, $sort, $sortdir, ( $page - 1 ) * $size, $size );
+			$catIds = $this->_getCatalogIds( $catid );
+			return $controller->createIndexFilterCategory( $catIds, $sort, $sortdir, ( $page - 1 ) * $size, $size );
 		}
 		else
 		{
 			return $controller->createIndexFilter( $sort, $sortdir, ( $page - 1 ) * $size, $size );
 		}
+	}
+
+
+	/**
+	 * Returns the list of catetory IDs if subcategories should be included
+	 *
+	 * @param string $catId Category ID
+	 * @return string|array Cateogory ID or list of catetory IDs
+	 */
+	private function _getCatalogIds( $catId )
+	{
+		$config = $this->_getContext()->getConfig();
+		$default = MW_Tree_Manager_Abstract::LEVEL_ONE;
+
+		/** client/html/catalog/lists/levels
+		 * Include products of sub-categories in the product list of the current category
+		 *
+		 * Sometimes it may be useful to show products of sub-categories in the
+		 * current category product list, e.g. if the current category contains
+		 * no products at all or if there are only a few products in all categories.
+		 *
+		 * Possible constant values for this setting are:
+		 * * 1 : Only products from the current category
+		 * * 2 : Products from the current category and the direct child categories
+		 * * 3 : Products from the current category and the whole category sub-tree
+		 *
+		 * Caution: Please keep in mind that displaying products of sub-categories
+		 * can slow down your shop, especially if it contains more than a few
+		 * products! You have no real control over the positions of the products
+		 * in the result list too because all products from different categories
+		 * with the same position value are placed randomly.
+		 *
+		 * Usually, a better way is to associate products to all categories they
+		 * should be listed in. This can be done manually if there are only a few
+		 * ones or during the product import automatically.
+		 *
+		 * @param integer Tree level constant
+		 * @since 2015.11
+		 * @category Developer
+		 * @see client/html/catalog/lists/catid-default
+		 * @see client/html/catalog/lists/domains
+		 * @see client/html/catalog/lists/size
+		 */
+		$level = $config->get( 'client/html/catalog/lists/levels', $default );
+
+		if( $level != $default )
+		{
+			$controller = Controller_Frontend_Factory::createController( $this->_getContext(), 'catalog' );
+			$tree = $controller->getCatalogTree( $catId, array(), $level );
+			$catId = $this->_getCatalogIdsFromTree( $tree );
+		}
+
+		return $catId;
+	}
+
+
+	/**
+	 * Returns the list of catalog IDs for the given catalog tree
+	 *
+	 * @param MShop_Catalog_Item_Interface $item Catalog item with children
+	 * @return array List of catalog IDs
+	 */
+	private function _getCatalogIdsFromTree( MShop_Catalog_Item_Interface $item )
+	{
+		$list = array( $item->getId() );
+
+		foreach( $item->getChildren() as $child ) {
+			$list = array_merge( $list, $this->_getCatalogIdsFromTree( $child ) );
+		}
+
+		return $list;
 	}
 
 

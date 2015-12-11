@@ -51,7 +51,7 @@ class MShop_Catalog_Manager_Index_Catalog_Default
 		),
 		'catalog.index.catalog.position' => array(
 			'code'=>'catalog.index.catalog.position()',
-			'internalcode'=>':site AND mcatinca."catid" = $2 AND mcatinca."listtype" = $1 AND mcatinca."pos"',
+			'internalcode'=>':site AND mcatinca."catid" IN ( $2 ) AND mcatinca."listtype" = $1 AND mcatinca."pos"',
 			'label'=>'Product position in category, parameter(<list type code>,<category ID>)',
 			'type'=> 'integer',
 			'internaltype' => MW_DB_Statement_Abstract::PARAM_INT,
