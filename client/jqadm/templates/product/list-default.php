@@ -78,7 +78,7 @@ $fields = $this->param( 'fields', $default );
 				</a>
 			</th>
 <?php endif; ?>
-<?php if( in_array( 'product.id', $fields ) ) : ?>
+<?php if( in_array( 'product.status', $fields ) ) : ?>
 			<th class="product.status">
 				<a href="<?php $params['sort'] = $sort( $params, 'product.status' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Status' ) ); ?>
@@ -152,7 +152,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 			<th class="actions">
 				<a class="btn btn-primary glyphicon glyphicon-plus"
-					href="<?php echo $enc->attr( $this->url( $newTarget, $newCntl, $newAction, array( 'resource' => 'prodcut' ), array(), $newConfig ) ); ?>"
+					href="<?php echo $enc->attr( $this->url( $newTarget, $newCntl, $newAction, array( 'resource' => 'product' ), array(), $newConfig ) ); ?>"
 					aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'New' ) ); ?>">
 				</a>
 			</th>

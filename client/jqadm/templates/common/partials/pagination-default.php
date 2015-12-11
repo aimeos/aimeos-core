@@ -39,7 +39,7 @@ $pageTotal = ( $total != 0 ? ceil( $total / $limit ) : 1 );
 				<span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
 			</a>
 		</li>
-		<li class="disabled"><?php echo $enc->html( sprintf( $this->translate( 'client/jqadm', 'Page %1$d of %2$d' ), $pageCurrent, $pageTotal ) ); ?></li>
+		<li class="disabled"><a href="#"><?php echo $enc->html( sprintf( $this->translate( 'client/jqadm', 'Page %1$d of %2$d' ), $pageCurrent, $pageTotal ) ); ?></a></li>
 		<li>
 			<a href="<?php $params['page']['offset'] = $next; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Next' ) ); ?>">
 				<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
@@ -51,7 +51,10 @@ $pageTotal = ( $total != 0 ? ceil( $total / $limit ) : 1 );
 			</a>
 		</li>
 	</ul>
-	<ul class="size">
+	<div class="size btn-group" role="group">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Dropdown <span class="caret"></span>
+		</button>
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $limit; ?> <span class="caret"></span></a>
 			<ul class="dropdown-menu">
@@ -62,5 +65,5 @@ $pageTotal = ( $total != 0 ? ceil( $total / $limit ) : 1 );
 				<li><a href="<?php $params['page']['limit'] = 500; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">500</a></li>
 			</ul>
 		</li>
-	</ul>
+	</div>
 </nav>
