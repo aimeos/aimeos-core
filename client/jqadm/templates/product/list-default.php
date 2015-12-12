@@ -5,8 +5,12 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-$sort = function( array $params, $code ) {
-	return ( isset( $params['sort'] ) && $params['sort'] === $code ? '-' . $code : $code );
+$sort = function( $sortcode, $code ) {
+	return ( $sortcode === $code ? '-' . $code : $code );
+};
+
+$fields = function( array $params, $code ) {
+	return ( isset( $params['fields'] ) && in_array( $code, (array) $param['fields'] ) ? 'checked="checked"' : '' );
 };
 
 $enc = $this->encoder();
@@ -45,23 +49,29 @@ $pagination = $this->partial( $this->config( 'client/jqadm/partial/pagination', 
 $default = $this->config( 'client/jqadm/product/fields', array( 'product.status', 'product.typeid', 'product.code', 'product.label' ) );
 $fields = $this->param( 'fields', $default );
 
+$sortcode = $this->param( 'sort' );
+
 ?>
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), array() ); ?>
 
 <form class="filter" method="POST" action="<?php echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 <?php echo $this->csrf()->formfield(); ?>
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/filter', 'common/partials/filter-default.php' ), $filterParams ); ?>
-	<div class="checkbox">
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'ID' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Status' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Type' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Code' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Label' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Start date' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'End date' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Created' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Modified' ) ); ?></label>
-		<label><input type="checkbox" name="fields[]"> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Editor' ) ); ?></label>
+	<div class="fields checkbox">
+		<label><input type="checkbox" name="fields[]" value="product.id" <?php echo $fields( $params, 'product.id' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'ID' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.status" <?php echo $fields( $params, 'product.status' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Status' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.typeid" <?php echo $fields( $params, 'product.typeid' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Type' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.code" <?php echo $fields( $params, 'product.code' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Code' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.label" <?php echo $fields( $params, 'product.label' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Label' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.datestart" <?php echo $fields( $params, 'product.datestart' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Start date' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.dateend" <?php echo $fields( $params, 'product.dateend' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'End date' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.ctime" <?php echo $fields( $params, 'product.ctime' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Created' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.mtime" <?php echo $fields( $params, 'product.mtime' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Modified' ) ); ?></label>
+		<label><input type="checkbox" name="fields[]" value="product.editor" <?php echo $fields( $params, 'product.editor' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Editor' ) ); ?></label>
+	</div>
+	<div class="buttons-action">
+		<button class="btn btn-primary"><?php echo $this->translate( 'client/jqadm', 'Search' ); ?></button>
+		<a class="btn btn-warning" href="#"><?php echo $this->translate( 'client/jqadm', 'Clear' ); ?></a>
 	</div>
 </form>
 
@@ -72,7 +82,7 @@ $fields = $this->param( 'fields', $default );
 		<tr>
 <?php if( in_array( 'product.id', $fields ) ) : ?>
 			<th class="product.id">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.id' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.id' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'ID' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -80,7 +90,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.status', $fields ) ) : ?>
 			<th class="product.status">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.status' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.status' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Status' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -88,7 +98,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.typeid', $fields ) ) : ?>
 			<th class="product.type">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.typeid' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.typeid' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Type' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -96,7 +106,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.code', $fields ) ) : ?>
 			<th class="product.code">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.code' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.code' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Code' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -104,7 +114,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.label', $fields ) ) : ?>
 			<th class="product.label">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.label' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.label' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Label' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -112,7 +122,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.datestart', $fields ) ) : ?>
 			<th class="product.datestart">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.datestart' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.datestart' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Start date' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -120,7 +130,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.dateend', $fields ) ) : ?>
 			<th class="product.dateend">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.dateend' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.dateend' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'End date' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -128,7 +138,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.ctime', $fields ) ) : ?>
 			<th class="product.ctime">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.ctime' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.ctime' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Created' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -136,7 +146,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.mtime', $fields ) ) : ?>
 			<th class="product.mtime">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.mtime' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.mtime' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Modified' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
@@ -144,7 +154,7 @@ $fields = $this->param( 'fields', $default );
 <?php endif; ?>
 <?php if( in_array( 'product.editor', $fields ) ) : ?>
 			<th class="product.editor">
-				<a href="<?php $params['sort'] = $sort( $params, 'product.editor' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.editor' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Editor' ) ); ?>
 					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>

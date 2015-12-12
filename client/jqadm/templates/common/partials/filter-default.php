@@ -24,7 +24,9 @@ $filter = $this->param( 'filter' );
 			<fieldset>
 				<select name="filter[key][]" class="filter-key form-control">
 <?php foreach( $attributes as $code => $attr ) : ?>
+<?php	if( $attr->isPublic() ) : ?>
 					<option value="<?php echo $enc->attr( $code ); ?>" <?php echo ( $code === $key ? 'selected' : '' ); ?>><?php echo $enc->html( $attr->getLabel() ); ?></option>
+<?php	endif; ?>
 <?php endforeach; ?>
 				</select><!--
 				--><select name="filter[op][]" class="filter-operator form-control">
@@ -45,7 +47,9 @@ $filter = $this->param( 'filter' );
 			<fieldset>
 				<select name="filter[key][]" class="filter-key form-control">
 <?php foreach( $attributes as $code => $attr ) : ?>
+<?php	if( $attr->isPublic() ) : ?>
 					<option value="<?php echo $enc->attr( $code ); ?>"><?php echo $enc->html( $attr->getLabel() ); ?></option>
+<?php	endif; ?>
 <?php endforeach; ?>
 				</select><!--
 				--><select name="filter[op][]" class="filter-operator form-control">
@@ -77,12 +81,6 @@ $filter = $this->param( 'filter' );
 				</select><!--
 				--><input name="filter[val][]" class="filter-value form-control" type="text" />
 			</fieldset>
-		</td>
-	</tr>
-	<tr class="buttons-action">
-		<td colspan="2">
-			<button class="btn btn-primary"><?php echo $this->translate( 'client/jqadm', 'Search' ); ?></button>
-			<a class="btn btn-warning" href="#"><?php echo $this->translate( 'client/jqadm', 'Clear' ); ?></a>
 		</td>
 	</tr>
 </table>

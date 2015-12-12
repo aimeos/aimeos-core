@@ -309,7 +309,7 @@ abstract class Base
 
 		$sortation = array();
 
-		foreach( explode( ',', $params['sort'] ) as $sort )
+		foreach( (array) $params['sort'] as $sort )
 		{
 			if( $sort[0] === '-' ) {
 				$sortation[] = $criteria->sort( '-', substr( $sort, 1 ) );
