@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Parameter;
+namespace Aimeos\MW\View\Helper\Param;
 
 
 /**
@@ -20,7 +20,7 @@ namespace Aimeos\MW\View\Helper\Parameter;
  */
 class Standard
 	extends \Aimeos\MW\View\Helper\Base
-	implements \Aimeos\MW\View\Helper\Parameter\Iface
+	implements \Aimeos\MW\View\Helper\Param\Iface
 {
 	private $params;
 

@@ -8,7 +8,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Parameter;
+namespace Aimeos\MW\View\Helper\Param;
 
 
 /**
