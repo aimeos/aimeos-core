@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="bootstrap.php">
+	<testsuites>
+		<testsuite name="Client JQAdm suite">
+			<directory>Client/</directory>
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../src</directory>
+		</whitelist>
+	</filter>
+	<logging>
+		<log type="junit" target="<extname>_client-jqadm_test.junit.xml" />
+	</logging>
+</phpunit>

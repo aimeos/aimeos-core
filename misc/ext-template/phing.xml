@@ -5,6 +5,7 @@
 	<target name="test" description="Executes all tests">
 		<phing target="test" haltonfailure="true" dir="lib/custom"/>
 		<phing target="test" haltonfailure="true" dir="client/html" />
+		<phing target="test" haltonfailure="true" dir="client/jqadm" />
 		<phing target="test" haltonfailure="true" dir="client/extjs" />
 		<phing target="test" haltonfailure="true" dir="controller/common" />
 		<phing target="test" haltonfailure="true" dir="controller/frontend" />
@@ -19,6 +20,7 @@
 	<target name="coverage" description="Generates the code coverage report">
 		<phing target="coverage" haltonfailure="true" dir="lib/custom"/>
 		<phing target="coverage" haltonfailure="true" dir="client/html" />
+		<phing target="coverage" haltonfailure="true" dir="client/jqadm" />
 		<phing target="coverage" haltonfailure="true" dir="client/extjs" />
 		<phing target="coverage" haltonfailure="true" dir="controller/common" />
 		<phing target="coverage" haltonfailure="true" dir="controller/frontend" />
@@ -29,6 +31,7 @@
 	<target name="check" description="Checks for code quality">
 		<phing target="check" haltonfailure="true" dir="lib/custom"/>
 		<phing target="check" haltonfailure="true" dir="client/html" />
+		<phing target="check" haltonfailure="true" dir="client/jqadm" />
 		<phing target="check" haltonfailure="true" dir="client/extjs" />
 		<phing target="check" haltonfailure="true" dir="controller/common" />
 		<phing target="check" haltonfailure="true" dir="controller/frontend" />
@@ -39,6 +42,7 @@
 	<target name="clean" description="Cleans up temporary files">
 		<phing target="clean" haltonfailure="true" dir="lib/custom" />
 		<phing target="clean" haltonfailure="true" dir="client/html" />
+		<phing target="clean" haltonfailure="true" dir="client/jqadm" />
 		<phing target="clean" haltonfailure="true" dir="client/extjs" />
 		<phing target="clean" haltonfailure="true" dir="controller/common" />
 		<phing target="clean" haltonfailure="true" dir="controller/frontend" />
@@ -49,6 +53,7 @@
 	<target name="i18n" description="Creates all translation files">
 		<phing target="i18n" haltonfailure="true" dir="lib/custom" />
 		<phing target="i18n" haltonfailure="true" dir="client/html" />
+		<phing target="i18n" haltonfailure="true" dir="client/jqadm" />
 		<phing target="i18n" haltonfailure="true" dir="client/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="controller/common" />
 		<phing target="i18n" haltonfailure="true" dir="controller/frontend" />
@@ -59,6 +64,7 @@
 	<target name="build" description="Builds package for deployment">
 		<phing target="build" haltonfailure="true" dir="lib/custom" />
 		<phing target="build" haltonfailure="true" dir="client/html" />
+		<phing target="build" haltonfailure="true" dir="client/jqadm" />
 		<phing target="build" haltonfailure="true" dir="client/extjs" />
 		<phing target="build" haltonfailure="true" dir="controller/common" />
 		<phing target="build" haltonfailure="true" dir="controller/frontend" />

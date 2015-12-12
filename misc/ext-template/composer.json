@@ -16,16 +16,20 @@
 			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
 			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
 			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
+			"Aimeos\\Client\\JQAdm\\": "client/html/src/Client/JQAdm/",
 			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
 			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
+			"Aimeos\\Controller\\Jsonadm\\": "controller/extjs/src/Controller/Jsonadm/",
 			"Aimeos\\Controller\\ExtJS\\": "controller/extjs/src/Controller/ExtJS/",
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/"
 		},
 		"classmap": [
 			"lib/custom/src",
 			"client/html/src",
+			"client/jsadm/src",
 			"controller/common/src",
 			"controller/frontend/src",
+			"controller/jsonadm/src",
 			"controller/extjs/src",
 			"controller/jobs/src"
 		]
