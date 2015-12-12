@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$params = array( 'id' => $this->getProductItem()->getId() );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'==' => array( 'product.type.code' => 'select' )
 			)
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				)
 			)
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
@@ -227,7 +227,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'limit' => 25
 			)
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
@@ -253,7 +253,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$params = array(
 			'sort' => 'product.label,-product.code'
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
@@ -282,7 +282,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'sort' => 'product.id',
 			'include' => 'product'
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
@@ -322,7 +322,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$params = array( 'id' => '-1' );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$body = '{"data": {"type": "product", "attributes": {"product.label": "test"}}}';

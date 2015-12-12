@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->context->getSession()->set( 'aimeos/orderid', $this->getOrder( '2011-09-17 16:14:32' )->getId() );
 
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'code' => 'paypalexpress' ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'code' => 'paypalexpress' ) );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();

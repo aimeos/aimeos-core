@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetHeader()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'l_pos' => 1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$view->navigationPrev = '#';
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBody()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'l_pos' => 1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$view->navigationPrev = '#';
@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testModifyHeader()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'l_pos' => 1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$content = '<!-- catalog.stage.navigator -->test<!-- catalog.stage.navigator -->';
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testModifyBody()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'l_pos' => 1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'l_pos' => 1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$content = '<!-- catalog.stage.navigator -->test<!-- catalog.stage.navigator -->';

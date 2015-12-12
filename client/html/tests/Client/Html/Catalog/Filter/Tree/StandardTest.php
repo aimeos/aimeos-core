@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$node = $catalogManager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_LIST );
 
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_catid' => $node->getChild( 1 )->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_catid' => $node->getChild( 1 )->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $conf );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_catid' => $node->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_catid' => $node->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $conf );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_catid' => $node->getChild( 0 )->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_catid' => $node->getChild( 0 )->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();

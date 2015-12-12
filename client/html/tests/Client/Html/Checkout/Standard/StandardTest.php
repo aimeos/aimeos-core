@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$view = $this->object->getView();
 		$view->standardStepActive = 'address';
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'c_step' => 'payment' ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'c_step' => 'payment' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();

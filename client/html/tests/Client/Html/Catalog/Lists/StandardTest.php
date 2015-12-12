@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetHeader()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_catid' => $this->getCatalogItem()->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_catid' => $this->getCatalogItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetHeaderSearch()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_search' => '<b>Search result</b>' ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_search' => '<b>Search result</b>' ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBody()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_catid' => $this->getCatalogItem()->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_catid' => $this->getCatalogItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBodyNoDefaultCat()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array() );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array() );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->setView( \TestHelper::getView() );
 
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array() );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array() );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->setView( \TestHelper::getView() );
 
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_catid' => $this->getCatalogItem( 'root' )->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_catid' => $this->getCatalogItem( 'root' )->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBodySearchText()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_search' => 'Kaffee' ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_search' => 'Kaffee' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBodySearchAttribute()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_attrid' => array( -1, -2 ) ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_attrid' => array( -1, -2 ) ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();

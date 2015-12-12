@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $params );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();

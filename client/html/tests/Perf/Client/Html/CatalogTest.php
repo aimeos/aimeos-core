@@ -44,7 +44,7 @@ class CatalogTest extends \PHPUnit_Framework_TestCase
 			'f_catid' => $catalogItem->getId(),
 			'd_prodid' => $productItem->getId()
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 	}
 

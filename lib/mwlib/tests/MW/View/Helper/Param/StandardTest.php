@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\Parameter;
+namespace Aimeos\MW\View\Helper\Param;
 
 
 /**
@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$view = new \Aimeos\MW\View\Standard();
 		$param = array( 'page' => 'test' );
-		$this->object = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$this->object = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 	}
 
 

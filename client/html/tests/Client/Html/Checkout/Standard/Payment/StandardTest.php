@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$param = array(
 			'c_paymentoption' => $service->getId(),
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -132,7 +132,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$view = \TestHelper::getView();
 
 		$param = array( 'c_paymentoption' => -1 );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );
@@ -163,7 +163,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				),
 			),
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->setView( $view );

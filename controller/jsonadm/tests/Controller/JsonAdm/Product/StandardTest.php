@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			),
 			'include' => 'text,product,product/property,product/stock'
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$header = array();
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'sort' => 'product.id',
 			'include' => 'product,product/stock'
 		);
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $params );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $params );
 		$this->view->addHelper( 'param', $helper );
 
 		$header = array();

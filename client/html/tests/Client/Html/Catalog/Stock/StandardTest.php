@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$productId = $this->getProductItem()->getId();
 
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 's_prodid' => $productId ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 's_prodid' => $productId ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBodyStockUnlimited()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 's_prodid' => -1 ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 's_prodid' => -1 ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();

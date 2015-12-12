@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetHeader()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'd_prodid' => $this->getProductItem()->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'd_prodid' => $this->getProductItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBody()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'd_prodid' => $this->getProductItem()->getId() ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'd_prodid' => $this->getProductItem()->getId() ) );
 		$view->addHelper( 'param', $helper );
 
 		$tags = array();

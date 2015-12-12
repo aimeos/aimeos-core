@@ -41,7 +41,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$param = array( 'id' => $manager->getItem( 'CNC' )->getId() );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 
 		$this->object->copy();
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$param = array( 'id' => $manager->getItem( 'CNC' )->getId() );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 
 		$this->object->get();
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			),
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $this->view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 
 		echo $this->object->save();

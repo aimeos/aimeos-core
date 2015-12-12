@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_warehouse' => 'default',
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			),
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -223,7 +223,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_attrvarid' => array_keys( $attributes ),
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -259,7 +259,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_warehouse' => 'default',
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -295,7 +295,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_warehouse' => 'default',
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -331,7 +331,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'b_warehouse' => 'default',
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -352,7 +352,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_quantity' => 1,
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -385,7 +385,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			),
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -410,7 +410,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_position' => 1,
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -434,7 +434,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_position' => array( 0, 1 ),
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -454,7 +454,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_position' => -1,
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -508,7 +508,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'b_warehouse' => $warehouse,
 		);
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();

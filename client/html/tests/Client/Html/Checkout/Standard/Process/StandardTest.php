@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$view = $this->object->getView();
 		$param = array( 'c_step' => 'process' );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$orderid = $this->getOrder( '2008-02-15 12:34:56' )->getId();
@@ -116,7 +116,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$view = $this->object->getView();
 		$param = array( 'c_step' => 'process' );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$orderid = $this->getOrder( '2009-03-18 16:14:32' )->getId();

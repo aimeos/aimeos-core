@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBodySearch()
 	{
 		$view = $this->object->getView();
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array( 'f_search' => '<b>Search result</b>' ) );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_search' => '<b>Search result</b>' ) );
 		$view->addHelper( 'param', $helper );
 
 		$output = $this->object->getBody();

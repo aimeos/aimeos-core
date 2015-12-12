@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$view = $this->object->getView();
 
 		$param = array( 'b_coupon' => '90AB' );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$view = $this->object->getView();
 
 		$param = array( 'b_coupon' => '90AB' );
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$param = array( 'b_action' => 'coupon-delete', 'b_coupon' => '90AB' );
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, $param );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
 		$this->object->process();
