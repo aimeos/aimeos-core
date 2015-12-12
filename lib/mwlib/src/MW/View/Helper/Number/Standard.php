@@ -20,7 +20,7 @@ namespace Aimeos\MW\View\Helper\Number;
  */
 class Standard
 	extends \Aimeos\MW\View\Helper\Base
-	implements \Aimeos\MW\View\Helper\Iface
+	implements \Aimeos\MW\View\Helper\Number\Iface
 {
 	private $dsep;
 	private $tsep;

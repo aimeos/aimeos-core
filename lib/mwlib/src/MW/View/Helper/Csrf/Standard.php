@@ -19,7 +19,7 @@ namespace Aimeos\MW\View\Helper\Csrf;
  */
 class Standard
 	extends \Aimeos\MW\View\Helper\Base
-	implements \Aimeos\MW\View\Helper\Iface
+	implements \Aimeos\MW\View\Helper\Csrf\Iface
 {
 	private $name;
 	private $value;

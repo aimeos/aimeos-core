@@ -20,7 +20,7 @@ namespace Aimeos\MW\View\Helper\Translate;
  */
 class Standard
 	extends \Aimeos\MW\View\Helper\Base
-	implements \Aimeos\MW\View\Helper\Iface
+	implements \Aimeos\MW\View\Helper\Translate\Iface
 {
 	private $translator;
 

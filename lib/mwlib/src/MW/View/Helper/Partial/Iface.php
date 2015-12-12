@@ -17,9 +17,7 @@ namespace Aimeos\MW\View\Helper\Partial;
  * @package MW
  * @subpackage View
  */
-class Standard
-	extends \Aimeos\MW\View\Helper\Base
-	implements \Aimeos\MW\View\Helper\Partial\Iface
+interface Iface extends \Aimeos\MW\View\Helper\Iface
 {
 	/**
 	 * Returns the rendered partial.
@@ -28,11 +26,5 @@ class Standard
 	 * @param array $params Associative list of key/value pair that should be available in the partial
 	 * @return string Rendered partial content
 	 */
-	public function transform( $file, array $params = array() )
-	{
-		$view = clone $this->getView();
-		$view->assign( $params );
-
-		return $view->render( $view->resolve( $file ) );
-	}
+	public function transform( $file, array $params = array() );
 }
