@@ -9,7 +9,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="https://aimeos.org/update?type=<?php echo $this->get( 'type' ); ?>&version=<?php echo $this->get( 'version' ); ?>">
-				<img src="https://aimeos.org/check?type=<?php echo $this->get( 'type' ); ?>&version=<?php echo $this->get( 'version' ); ?>" title="Aimeos logo" />
+				<img class="logo" src="https://aimeos.org/check?type=<?php echo $this->get( 'type' ); ?>&version=<?php echo $this->get( 'version' ); ?>" title="Aimeos logo" />
 			</a>
 		</div>
 

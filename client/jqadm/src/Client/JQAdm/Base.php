@@ -269,8 +269,10 @@ abstract class Base
 
 			foreach( (array) $params['filter']['key'] as $idx => $key )
 			{
-				if( isset( $params['filter']['op'][$idx] ) && isset( $params['filter']['val'][$idx] ) ) {
-					$expr[] = $search->compare( $params['filter']['op'][$idx], $key, $params['filter']['val'][$idx] );
+				if( $key != '' && isset( $params['filter']['op'][$idx] ) && $params['filter']['op'][$idx] != ''
+					&& isset( $params['filter']['val'][$idx] )
+				) {
+					$expr[] = $criteria->compare( $params['filter']['op'][$idx], $key, $params['filter']['val'][$idx] );
 				}
 			}
 
@@ -289,7 +291,7 @@ abstract class Base
 	private function initCriteriaSlice( \Aimeos\MW\Criteria\Iface $criteria, array $params )
 	{
 		$start = ( isset( $params['page']['offset'] ) ? $params['page']['offset'] : 0 );
-		$size = ( isset( $params['page']['limit'] ) ? $params['page']['limit'] : 25 );
+		$size = ( isset( $params['page']['limit'] ) ? $params['page']['limit'] : 100 );
 
 		$criteria->setSlice( $start, $size );
 	}

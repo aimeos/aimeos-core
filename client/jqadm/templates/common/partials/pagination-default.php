@@ -27,8 +27,8 @@ $pageCurrent = floor( $offset / $limit ) + 1;
 $pageTotal = ( $total != 0 ? ceil( $total / $limit ) : 1 );
 
 ?>
-<nav class="search-navigation">
-	<ul class="pagination">
+<nav class="list-page">
+	<ul class="page-offset pagination">
 		<li>
 			<a href="<?php $params['page']['offset'] = $first; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'First' ) ); ?>">
 				<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
@@ -51,9 +51,9 @@ $pageTotal = ( $total != 0 ? ceil( $total / $limit ) : 1 );
 			</a>
 		</li>
 	</ul>
-	<div class="size btn-group" role="group">
+	<div class="page-limit btn-group <?php echo ( $this->get( 'pos', 'top' ) === 'bottom' ? 'dropup' : '' ); ?>" role="group">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Dropdown <span class="caret"></span>
+			<?php echo $limit; ?> <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
 			<li><a href="<?php $params['page']['limit'] = 25; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">25</a></li>
