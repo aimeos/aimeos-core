@@ -123,18 +123,6 @@ class TestHelper
 		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Parameter\Standard( $view, array() );
-		$view->addHelper( 'param', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\FormParam\Standard( $view );
-		$view->addHelper( 'formparam', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
-		$view->addHelper( 'encoder', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Partial\Standard( $view );
-		$view->addHelper( 'partial', $helper );
-
 		return $view;
 	}
 

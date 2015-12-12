@@ -116,9 +116,6 @@ class TestHelper
 		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, $sepDec, $sep1000 );
 		$view->addHelper( 'number', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
-		$view->addHelper( 'encoder', $helper );
-
 		return $view;
 	}
 
