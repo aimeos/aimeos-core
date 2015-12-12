@@ -29,7 +29,7 @@ return array(
 		'lib/custom/config',
 	),
 	'custom' => array(
-		'client/html' => array(
+		'client/html/templates' => array(
 			'client/html/templates',
 		),
 		'client/jqadm/templates' => array(

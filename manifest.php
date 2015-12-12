@@ -24,8 +24,8 @@ return array(
 	),
 	'config' => array(
 		'lib/mshoplib/config',
-		'config',
 		'controller/jsonadm/config',
+		'config',
 	),
 	'i18n' => array(
 		'client/extjs' => 'client/extjs/i18n',
@@ -48,7 +48,7 @@ return array(
 		'client/extjs' => array(
 			'client/extjs/manifest.jsb2',
 		),
-		'client/html' => array(
+		'client/html/templates' => array(
 			'client/html/templates',
 		),
 		'client/jqadm/templates' => array(
