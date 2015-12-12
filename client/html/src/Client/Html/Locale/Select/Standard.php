@@ -364,7 +364,6 @@ class Standard
 			}
 
 			$params = $view->param();
-			unset( $params['target'] );
 
 			$view->selectMap = $map;
 			$view->selectParams = $params;

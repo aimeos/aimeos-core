@@ -16,7 +16,7 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
 $listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
 
 $params = $this->param();
-unset( $params['target'], $params['f_sort'] );
+unset( $params['f_sort'] );
 
 ?>
 <?php if( ( $catItem = end( $catItems ) ) !== false ) : ?>

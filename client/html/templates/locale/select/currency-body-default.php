@@ -12,7 +12,7 @@ $map = $this->get( 'selectMap', array() );
 $params = $this->get( 'selectParams', array() );
 $langId = $this->get( 'selectLanguageId', 'en' );
 $currencyId = $this->get( 'selectCurrencyId', 'EUR' );
-$currencies = ( isset( $map[$langId] ) ? (array) $map[$langId] : array() ); 
+$currencies = ( isset( $map[$langId] ) ? (array) $map[$langId] : array() );
 
 /** client/html/locale/select/currency/url/config
  * Associative list of configuration options used for generating the URL
@@ -26,7 +26,7 @@ $currencies = ( isset( $map[$langId] ) ? (array) $map[$langId] : array() );
  * framework. This is because the infrastructure of the application is used for
  * generating the URLs. The full list of available config options is referenced
  * in the "see also" section of this page.
- * 
+ *
  * @param string Associative list of configuration options
  * @since 2014.09
  * @category Developer
@@ -43,7 +43,7 @@ $paramname = $this->config( 'client/html/locale/select/currency/param-name', 'lo
 			<ul class="select-dropdown">
 <?php	foreach( $currencies as $currency => $locParam ) : ?>
 				<li class="select-item <?php echo ( $currency === $currencyId ? 'active' : '' ); ?>">
-					<a href="<?php echo $enc->attr( $this->url( $this->param( 'target' ), $this->param( 'controller' ), $this->param( 'action' ), array_merge( $params, $locParam ), array(), $config ) ); ?>">
+					<a href="<?php echo $enc->attr( $this->url( $this->request()->getTarget(), $this->param( 'controller' ), $this->param( 'action' ), array_merge( $params, $locParam ), array(), $config ) ); ?>">
 <?php		echo $enc->html( $this->translate( 'client/html/currency', $currency ), $enc::TRUST ); ?>
 					</a>
 				</li>

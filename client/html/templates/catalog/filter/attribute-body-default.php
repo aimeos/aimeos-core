@@ -46,7 +46,7 @@ $listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
 
 $attrMap = $this->get( 'attributeMap', array() );
 $attrIds = $this->param( 'f_attrid', array() );
-$params = $this->param(); unset( $params['target'] );
+$params = $this->param();
 
 ?>
 <section class="catalog-filter-attribute">
