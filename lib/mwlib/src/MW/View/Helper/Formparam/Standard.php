@@ -9,7 +9,7 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\FormParam;
+namespace Aimeos\MW\View\Helper\Formparam;
 
 
 /**

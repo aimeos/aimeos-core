@@ -7,18 +7,18 @@
  */
 
 
-namespace Aimeos\MW\View\Helper\FormParam;
+namespace Aimeos\MW\View\Helper\Formparam;
 
 
 /**
- * Test class for \Aimeos\MW\View\Helper\FormParam\Standard.
+ * Test class for \Aimeos\MW\View\Helper\Formparam\Standard.
  */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	public function testTransform()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$object = new \Aimeos\MW\View\Helper\FormParam\Standard( $view );
+		$object = new \Aimeos\MW\View\Helper\Formparam\Standard( $view );
 
 		$this->assertEquals( 'test', $object->transform( 'test' ) );
 		$this->assertEquals( 'test', $object->transform( array( 'test' ) ) );
@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testTransformMultiNames()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$object = new \Aimeos\MW\View\Helper\FormParam\Standard( $view );
+		$object = new \Aimeos\MW\View\Helper\Formparam\Standard( $view );
 
 		$this->assertEquals( 'test[test2]', $object->transform( array( 'test', 'test2' ) ) );
 	}
@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testTransformWithPrefix()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$object = new \Aimeos\MW\View\Helper\FormParam\Standard( $view, array( 'prefix' ) );
+		$object = new \Aimeos\MW\View\Helper\Formparam\Standard( $view, array( 'prefix' ) );
 
 		$this->assertEquals( 'prefix[test]', $object->transform( 'test' ) );
 		$this->assertEquals( 'prefix[test]', $object->transform( array( 'test' ) ) );
@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testTransformWithMultiPrefix()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$object = new \Aimeos\MW\View\Helper\FormParam\Standard( $view, array( 'pre', 'fix' ) );
+		$object = new \Aimeos\MW\View\Helper\Formparam\Standard( $view, array( 'pre', 'fix' ) );
 
 		$this->assertEquals( 'pre[fix][test]', $object->transform( 'test' ) );
 		$this->assertEquals( 'pre[fix][test]', $object->transform( array( 'test' ) ) );
