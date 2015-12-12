@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$this->object = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1' );
+		$this->object = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1', 'test' );
 	}
 
 
@@ -52,6 +52,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetClientAddress()
 	{
 		$this->assertEquals( '127.0.0.1', $this->object->transform()->getClientAddress() );
+	}
+
+
+	public function testGetTarget()
+	{
+		$this->assertEquals( 'test', $this->object->transform()->getTarget() );
 	}
 
 }

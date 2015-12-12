@@ -19,10 +19,11 @@ namespace Aimeos\MW\View\Helper\Request;
  */
 class Standard
 	extends \Aimeos\MW\View\Helper\Base
-	implements \Aimeos\MW\View\Helper\Iface
+	implements \Aimeos\MW\View\Helper\Request\Iface
 {
 	private $body;
 	private $clientaddr;
+	private $target;
 
 
 	/**
@@ -32,12 +33,13 @@ class Standard
 	 * @param string $body Request body content
 	 * @param string $clientaddr Client IP address
 	 */
-	public function __construct( $view, $body = '', $clientaddr = '' )
+	public function __construct( $view, $body = '', $clientaddr = '', $target = null )
 	{
 		parent::__construct( $view );
 
 		$this->body = $body;
 		$this->clientaddr = $clientaddr;
+		$this->target = $target;
 	}
 
 
@@ -71,5 +73,16 @@ class Standard
 	public function getClientAddress()
 	{
 		return $this->clientaddr;
+	}
+
+
+	/**
+	 * Returns the current page or route name
+	 *
+	 * @return string|null Current page or route name
+	 */
+	public function getTarget()
+	{
+		return $this->target;
 	}
 }
