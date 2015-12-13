@@ -20,7 +20,7 @@ namespace Aimeos\MW\Criteria\Expression\Compare;
  */
 class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 {
-	private static $operators = array( '==' => '=', '!=' => '<>', '~=' => 'LIKE', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<', '&' => '&', '|' => '|', '=~' => 'LIKE' );
+	private static $operators = array( '=~' => 'LIKE', '~=' => 'LIKE', '>' => '>', '>=' => '>=', '<' => '<', '<=' => '<=', '==' => '=', '!=' => '<>', '&' => '&', '|' => '|' );
 	private $conn = null;
 
 

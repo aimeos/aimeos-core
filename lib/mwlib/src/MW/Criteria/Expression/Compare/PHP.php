@@ -20,7 +20,7 @@ namespace Aimeos\MW\Criteria\Expression\Compare;
  */
 class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 {
-	private static $operators = array( '==' => '==', '!=' => '!=', '>=' => '>=', '<=' => '<=', '>' => '>', '<' => '<' );
+	private static $operators = array( '>' => '>', '>=' => '>=', '<' => '<', '<=' => '<=', '==' => '==', '!=' => '!=' );
 
 
 	/**
