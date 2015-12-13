@@ -568,7 +568,7 @@ class Base
 
 		try
 		{
-			$resources = array();
+			$resources = $attributes = array();
 
 			if( ( $domains = $view->param( 'resource' ) ) == '' )
 			{
@@ -583,9 +583,11 @@ class Base
 			{
 				$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
 				$resources = array_merge( $resources, $manager->getResourceType( true ) );
+				$attributes = array_merge( $attributes, $manager->getSearchAttributes( true ) );
 			}
 
 			$view->resources = $resources;
+			$view->attributes = $attributes;
 
 			$header = array(
 				'Content-Type' => 'application/vnd.api+json; supported-ext="bulk"',

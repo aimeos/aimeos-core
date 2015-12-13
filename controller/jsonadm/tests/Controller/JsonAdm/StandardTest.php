@@ -520,6 +520,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 200, $status );
 		$this->assertEquals( 2, count( $header ) );
 		$this->assertEquals( 59, count( $result['meta']['resources'] ) );
+		$this->assertGreaterThan( 0, count( $result['meta']['attributes'] ) );
 		$this->assertArrayNotHasKey( 'errors', $result );
 	}
 
