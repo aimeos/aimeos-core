@@ -56,8 +56,8 @@ $sortcode = $this->param( 'sort' );
 <?php echo $this->csrf()->formfield(); ?>
 
 	<div class="list-fields">
-		<a class="action action-open glyphicon" href="#"></a>
-		<ul class="fields-items">
+		<a class="action action-open glyphicon" href="#">Fields</a>
+		<ul class="fields-items search-item">
 			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.id" <?php echo $checkfields( $fields, 'product.id' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'ID' ) ); ?></label></li>
 			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.status" <?php echo $checkfields( $fields, 'product.status' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Status' ) ); ?></label></li>
 			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.typeid" <?php echo $checkfields( $fields, 'product.typeid' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Type' ) ); ?></label></li>
@@ -71,9 +71,12 @@ $sortcode = $this->param( 'sort' );
 		</ul>
 	</div>
 
+	<div class="list-filter">
+		<a class="action action-open glyphicon" href="#">Filter</a>
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/filter', 'common/partials/filter-default.php' ), $filterParams ); ?>
+	</div>
 
-	<div class="buttons-action">
+	<div class="search-actions">
 		<button class="btn btn-primary"><?php echo $this->translate( 'client/jqadm', 'Search' ); ?></button>
 		<a class="btn btn-warning" href="<?php echo $enc->attr( $this->url( $target, $controller, $action, array( 'resource' => 'product' ), array(), $config ) ); ?>"><?php echo $this->translate( 'client/jqadm', 'Clear' ); ?></a>
 	</div>

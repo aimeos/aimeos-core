@@ -18,9 +18,9 @@ if( !isset( $filter['key'][0] ) ) {
 }
 
 ?>
-<table class="list-filter">
+<table class="filter-items search-item">
 <?php foreach( (array) $filter['key'] as $pos => $key ) : ?>
-	<tr class="input-group filter-line">
+	<tr class="input-group filter-item">
 		<td>
 			<div class="glyphicon glyphicon-plus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
 		</td>
