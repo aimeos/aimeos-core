@@ -97,4 +97,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals(false, $this->object->isRequired());
 	}
+
+	public function testToArray()
+	{
+		$expected = array(
+			'code' => 'attribute_code',
+			'type' => 'attribute_type',
+			'label' => 'labelname',
+			'public' => false,
+			'default' => 'default value',
+			'required' => false,
+		);
+
+		$this->assertEquals($expected, $this->object->toArray());
+	}
 }

@@ -218,4 +218,17 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	{
 		return $this->required;
 	}
+
+
+	public function toArray()
+	{
+		return array(
+			'code' => $this->code,
+			'type' => $this->type,
+			'label' => $this->label,
+			'public' => $this->public,
+			'default' => $this->default,
+			'required' => $this->required,
+		);
+	}
 }
