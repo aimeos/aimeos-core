@@ -30,6 +30,11 @@ $getCntl = $this->config( 'client/jqadm/url/get/controller', 'jqadm' );
 $getAction = $this->config( 'client/jqadm/url/get/action', 'get' );
 $getConfig = $this->config( 'client/jqadm/url/get/config', array() );
 
+$copyTarget = $this->config( 'client/jqadm/url/copy/target' );
+$copyCntl = $this->config( 'client/jqadm/url/copy/controller', 'jqadm' );
+$copyAction = $this->config( 'client/jqadm/url/copy/action', 'copy' );
+$copyConfig = $this->config( 'client/jqadm/url/copy/config', array() );
+
 $delTarget = $this->config( 'client/jqadm/url/delete/target' );
 $delCntl = $this->config( 'client/jqadm/url/delete/controller', 'jqadm' );
 $delAction = $this->config( 'client/jqadm/url/delete/action', 'delete' );
@@ -50,6 +55,8 @@ $sortcode = $this->param( 'sort' );
 
 ?>
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), array() ); ?>
+
+<?php echo $this->partial( $this->config( 'client/jqadm/partial/error', 'common/partials/error-default.php' ), array( 'errors' => $this->get( 'errors', array() ) ) ); ?>
 
 <form class="list-search" method="POST" action="<?php echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 <?php echo $this->csrf()->formfield(); ?>
@@ -167,41 +174,42 @@ $sortcode = $this->param( 'sort' );
 	</thead>
 	<tbody>
 <?php foreach( $this->get( 'items', array() ) as $id => $item ) : ?>
+<?php	$url = $enc->attr( $this->url( $getTarget, $getCntl, $getAction, array( 'resource' => 'product', 'id' => $id ), array(), $getConfig ) ); ?>
 		<tr>
 <?php if( in_array( 'product.id', $fields ) ) : ?>
-			<td class="product.id"><?php echo $enc->html( $item->getId() ); ?></td>
+			<td class="product.id"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getId() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.status', $fields ) ) : ?>
-			<td class="product.status"><div class="glyphicon status-<?php echo $enc->attr( $item->getStatus() ); ?>"></div></td>
+			<td class="product.status"><a class="items-field" href="<?php echo $url; ?>"><div class="glyphicon status-<?php echo $enc->attr( $item->getStatus() ); ?>"></div></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.typeid', $fields ) ) : ?>
-			<td class="product.type"><?php echo $enc->html( $item->getType() ); ?></td>
+			<td class="product.type"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getType() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.code', $fields ) ) : ?>
-			<td class="product.code"><?php echo $enc->html( $item->getCode() ); ?></td>
+			<td class="product.code"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getCode() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.label', $fields ) ) : ?>
-			<td class="product.label"><?php echo $enc->html( $item->getLabel() ); ?></td>
+			<td class="product.label"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getLabel() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.datestart', $fields ) ) : ?>
-			<td class="product.datestart"><?php echo $enc->html( $item->getDateStart() ); ?></td>
+			<td class="product.datestart"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getDateStart() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.dateend', $fields ) ) : ?>
-			<td class="product.dateend"><?php echo $enc->html( $item->getDateEnd() ); ?></td>
+			<td class="product.dateend"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getDateEnd() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.ctime', $fields ) ) : ?>
-			<td class="product.ctime"><?php echo $enc->html( $item->getTimeCreated() ); ?></td>
+			<td class="product.ctime"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getTimeCreated() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.mtime', $fields ) ) : ?>
-			<td class="product.mtime"><?php echo $enc->html( $item->getTimeModified() ); ?></td>
+			<td class="product.mtime"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getTimeModified() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.editor', $fields ) ) : ?>
-			<td class="product.editor"><?php echo $enc->html( $item->getEditor() ); ?></td>
+			<td class="product.editor"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getEditor() ); ?></a></td>
 <?php endif; ?>
 			<td class="actions"><!--
-				--><a class="btn btn-primary glyphicon glyphicon-pencil"
-					href="<?php echo $enc->attr( $this->url( $getTarget, $getCntl, $getAction, array( 'resource' => 'product', 'id' => $id ), array(), $getConfig ) ); ?>"
-					aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Edit' ) ); ?>"></a><!--
+				--><a class="btn btn-default glyphicon glyphicon-duplicate"
+					href="<?php echo $enc->attr( $this->url( $copyTarget, $copyCntl, $copyAction, array( 'resource' => 'product', 'id' => $id ), array(), $copyConfig ) ); ?>"
+					aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Copy' ) ); ?>"></a><!--
 				--><a class="btn btn-danger glyphicon glyphicon-trash"
 					href="<?php echo $enc->attr( $this->url( $delTarget, $delCntl, $delAction, array( 'resource' => 'product', 'id' => $id ), array(), $delConfig ) ); ?>"
 					aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Delete' ) ); ?>"></a><!--
@@ -212,3 +220,5 @@ $sortcode = $this->param( 'sort' );
 </table>
 
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/pagination', 'common/partials/pagination-default.php' ), $pageParams + array( 'pos' => 'bottom' ) ); ?>
+
+<?php echo $this->partial( $this->config( 'client/jqadm/partial/confirm', 'common/partials/confirm-default.php' ) ); ?>
