@@ -223,9 +223,9 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 */
 	protected function checkDateFormat( $date )
 	{
-		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]( |T)[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
+		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9](( |T)[0-2][0-9]:[0-5][0-9]:[0-5][0-9])?$/';
 
-		if( $date !== null )
+		if( $date != null )
 		{
 			if( preg_match( $regex, (string) $date ) !== 1 ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
