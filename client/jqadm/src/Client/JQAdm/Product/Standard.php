@@ -95,14 +95,10 @@ class Standard
 	public function create()
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-		$typeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/type' );
-
-		$search = $typeManager->createSearch();
-		$search->setSortations( array( $search->sort( '+', 'product.type.code' ) ) );
 
 		$view = $this->getView();
 		$view->item = $manager->createItem();
-		$view->itemTypes = $typeManager->searchItems( $search );
+		$view->itemTypes = $this->getTypeItems();
 
 		$tplconf = 'client/jqadm/product/template-item';
 		$default = 'product/item-default.php';
@@ -131,14 +127,10 @@ class Standard
 	public function get()
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-		$typeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/type' );
-
-		$search = $typeManager->createSearch();
-		$search->setSortations( array( $search->sort( '+', 'product.type.code' ) ) );
 
 		$view = $this->getView();
 		$view->item = $manager->getItem( $view->param( 'id' ) );
-		$view->itemTypes = $typeManager->searchItems( $search );
+		$view->itemTypes = $this->getTypeItems();
 
 		$tplconf = 'client/jqadm/product/template-item';
 		$default = 'product/item-default.php';
@@ -160,31 +152,27 @@ class Standard
 
 		try
 		{
+			$config = array();
+			$keys = (array) $view->param( 'item/config/key', array() );
+			$vals = (array) $view->param( 'item/config/val', array() );
+
 			$item->fromArray( $view->param( 'item', array() ) );
 
-			$config = array();
-			$raw = $view->param( 'product.config', array() );
-
-			if( isset( $raw['key'] ) )
+			foreach( $keys as $idx => $key )
 			{
-				foreach( (array) $raw['key'] as $idx => $key ) {
-					$config[$key] = ( isset( $raw['val'][$idx] ) && $raw['val'][$idx] !== '' ? $raw['val'][$idx] : '' );
+				if( trim( $key ) != '' ) {
+					$config[$key] = ( isset( $vals[$idx] ) ? trim( $vals[$idx] ) : null );
 				}
 			}
 
 			$item->setConfig( $config );
-
 			$manager->saveItem( $item, false );
 		}
 		catch( \Exception $e )
 		{
-			$typeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/type' );
-
-			$search = $typeManager->createSearch();
-			$search->setSortations( array( $search->sort( '+', 'product.type.code' ) ) );
-
 			$view->item = $item;
-			$view->itemTypes = $typeManager->searchItems( $search );
+			$view->itemTypes = $this->getTypeItems();
+			$view->errors = array( $e->getMessage() );
 
 			$tplconf = 'client/jqadm/product/template-item';
 			$default = 'product/item-default.php';
@@ -312,5 +300,21 @@ class Standard
 	protected function getSubClientNames()
 	{
 		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
+	}
+
+
+	/**
+	 * Returns the available product type items
+	 *
+	 * @return array List of item implementing \Aimeos\MShop\Common\Type\Iface
+	 */
+	protected function getTypeItems()
+	{
+		$typeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/type' );
+
+		$search = $typeManager->createSearch();
+		$search->setSortations( array( $search->sort( '+', 'product.type.code' ) ) );
+
+		return $typeManager->searchItems( $search );
 	}
 }
