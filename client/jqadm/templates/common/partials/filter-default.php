@@ -7,9 +7,19 @@
 
 $enc = $this->encoder();
 
-$attributes = $this->get( 'attributes', array() );
 $operators = $this->get( 'operators', array() );
 $operators = ( isset( $operators['compare'] ) ? $operators['compare'] : array() );
+
+$operatorMap = array(
+	'=~' => array( 'string' ),
+	'~=' => array( 'string' ),
+	'>' => array( 'date', 'datetime', 'integer', 'float' ),
+	'>=' => array( 'date', 'datetime', 'integer', 'float' ),
+	'<' => array( 'date', 'datetime', 'integer', 'float' ),
+	'<=' => array( 'date', 'datetime', 'integer', 'float' ),
+	'==' => array( 'boolean', 'date', 'datetime', 'integer', 'float', 'string' ),
+	'!=' => array( 'boolean', 'date', 'datetime', 'integer', 'float' ),
+);
 
 $filter = $this->param( 'filter' );
 
@@ -17,32 +27,36 @@ if( !isset( $filter['key'][0] ) ) {
 	$filter['key'][0] = $this->get( 'default', '' );
 }
 
+$cnt = count( (array) $filter['key'] );
+
 ?>
 <table class="filter-items search-item">
-<?php foreach( (array) $filter['key'] as $pos => $key ) : ?>
+<?php for( $pos = 0; $pos < $cnt; $pos++ ) : ?>
 	<tr class="input-group filter-item">
 		<td>
+<?php	if( $pos < $cnt - 1 ) : ?>
+			<div class="glyphicon glyphicon-minus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
+<?php	else : ?>
 			<div class="glyphicon glyphicon-plus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
+<?php	endif; ?>
 		</td>
 		<td>
 			<fieldset>
-				<select name="filter[key][]" class="filter-key form-control">
-<?php foreach( $attributes as $code => $attr ) : ?>
-<?php	if( $attr->isPublic() ) : ?>
-					<option value="<?php echo $enc->attr( $code ); ?>" <?php echo ( $code === $key ? 'selected' : '' ); ?>><?php echo $enc->html( $attr->getLabel() ); ?></option>
-<?php	endif; ?>
-<?php endforeach; ?>
+				<select name="filter[key][]" class="filter-key form-control" data-selected="<?php echo $filter['key'][$pos]; ?>">
 				</select><!--
 				--><select name="filter[op][]" class="filter-operator form-control">
 <?php foreach( $operators as $code ) : ?>
-					<option value="<?php echo $enc->attr( $code ); ?>" <?php echo ( isset( $filter['op'][$pos] ) && $filter['op'][$pos] === $code ? 'selected' : '' ); ?>><?php echo $enc->html( $this->translate( 'client/jqadm/code', $code ) ); ?></option>
+					<option value="<?php echo $enc->attr( $code ); ?>"
+						class="<?php echo ( isset( $operatorMap[$code] ) ? implode( ' ', $operatorMap[$code] ) : '' ); ?>"
+						<?php echo ( isset( $filter['op'][$pos] ) && $filter['op'][$pos] === $code ? 'selected' : '' ); ?>
+					><?php echo $enc->html( $this->translate( 'client/jqadm/code', $code ) ); ?></option>
 <?php endforeach; ?>
 				</select><!--
 				--><input name="filter[val][]" class="filter-value form-control" type="text" value="<?php echo $enc->attr( ( isset( $filter['val'][$pos] ) ? $filter['val'][$pos] : '' ) ); ?>" />
 			</fieldset>
 		</td>
 	</tr>
-<?php endforeach; ?>
+<?php endfor; ?>
 	<tr class="input-group prototype">
 		<td>
 			<div class="glyphicon glyphicon-plus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
@@ -50,11 +64,6 @@ if( !isset( $filter['key'][0] ) ) {
 		<td>
 			<fieldset>
 				<select name="filter[key][]" class="filter-key form-control" disabled="disabled">
-<?php foreach( $attributes as $code => $attr ) : ?>
-<?php	if( $attr->isPublic() ) : ?>
-					<option value="<?php echo $enc->attr( $code ); ?>" <?php echo ( $code === $key ? 'selected' : '' ); ?>><?php echo $enc->html( $attr->getLabel() ); ?></option>
-<?php	endif; ?>
-<?php endforeach; ?>
 				</select><!--
 				--><select name="filter[op][]" class="filter-operator form-control" disabled="disabled">
 <?php foreach( $operators as $code ) : ?>

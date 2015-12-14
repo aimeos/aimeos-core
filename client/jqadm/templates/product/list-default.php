@@ -38,7 +38,6 @@ $delConfig = $this->config( 'client/jqadm/url/delete/config', array() );
 $params = $this->param();
 
 $filterParams = array(
-	'attributes' => $this->get( 'filterAttributes', array() ),
 	'operators' => $this->get( 'filterOperators', array() ),
 	'default' => 'product.label',
 );
