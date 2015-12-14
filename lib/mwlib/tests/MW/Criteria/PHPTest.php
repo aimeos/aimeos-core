@@ -64,7 +64,7 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 	{
 		$expected = array(
 			'combine' => array( '&&', '||', '!' ),
-			'compare' => array( '==', '!=', '>=', '<=', '>', '<' ),
+			'compare' => array( '>', '>=', '<', '<=', '==', '!=' ),
 			'sort' => array( '+', '-' ),
 		);
 		$actual = $this->object->getOperators();

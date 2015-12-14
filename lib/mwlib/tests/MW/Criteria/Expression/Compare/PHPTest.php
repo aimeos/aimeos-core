@@ -34,7 +34,7 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetOperators()
 	{
-		$expected = array( '==', '!=', '>=', '<=', '>', '<' );
+		$expected = array( '>', '>=', '<', '<=', '==', '!=' );
 		$actual = \Aimeos\MW\Criteria\Expression\Compare\PHP::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}

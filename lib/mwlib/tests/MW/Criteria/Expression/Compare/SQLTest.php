@@ -54,7 +54,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetOperators()
 	{
-		$expected = array( '==', '!=', '~=', '>=', '<=', '>', '<', '&', '|', '=~');
+		$expected = array( '=~', '~=', '>', '>=', '<', '<=', '==', '!=', '&', '|' );
 		$actual = \Aimeos\MW\Criteria\Expression\Compare\SQL::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
