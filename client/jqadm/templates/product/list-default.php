@@ -5,12 +5,12 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-$sort = function( $sortcode, $code ) {
-	return ( $sortcode === $code ? '-' . $code : $code );
+$checked = function( array $list, $code ) {
+	return ( in_array( $code, $list ) ? 'checked="checked"' : '' );
 };
 
-$checkfields = function( array $fields, $code ) {
-	return ( in_array( $code, $fields ) ? 'checked="checked"' : '' );
+$sort = function( $sortcode, $code ) {
+	return ( $sortcode === $code ? '-' . $code : $code );
 };
 
 $enc = $this->encoder();
@@ -64,16 +64,16 @@ $sortcode = $this->param( 'sort' );
 	<div class="list-fields">
 		<a class="action action-open glyphicon" href="#">Fields</a>
 		<ul class="fields-items search-item">
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.id" <?php echo $checkfields( $fields, 'product.id' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'ID' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.status" <?php echo $checkfields( $fields, 'product.status' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Status' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.typeid" <?php echo $checkfields( $fields, 'product.typeid' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Type' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.code" <?php echo $checkfields( $fields, 'product.code' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Code' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.label" <?php echo $checkfields( $fields, 'product.label' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Label' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.datestart" <?php echo $checkfields( $fields, 'product.datestart' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Start date' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.dateend" <?php echo $checkfields( $fields, 'product.dateend' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'End date' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.ctime" <?php echo $checkfields( $fields, 'product.ctime' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Created' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.mtime" <?php echo $checkfields( $fields, 'product.mtime' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Modified' ) ); ?></label></li>
-			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.editor" <?php echo $checkfields( $fields, 'product.editor' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Editor' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.id" <?php echo $checked( $fields, 'product.id' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'ID' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.status" <?php echo $checked( $fields, 'product.status' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Status' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.typeid" <?php echo $checked( $fields, 'product.typeid' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Type' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.code" <?php echo $checked( $fields, 'product.code' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Code' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.label" <?php echo $checked( $fields, 'product.label' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Label' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.datestart" <?php echo $checked( $fields, 'product.datestart' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Start date' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.dateend" <?php echo $checked( $fields, 'product.dateend' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'End date' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.ctime" <?php echo $checked( $fields, 'product.ctime' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Created' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.mtime" <?php echo $checked( $fields, 'product.mtime' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Modified' ) ); ?></label></li>
+			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.editor" <?php echo $checked( $fields, 'product.editor' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Editor' ) ); ?></label></li>
 		</ul>
 	</div>
 
