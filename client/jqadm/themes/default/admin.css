@@ -1,0 +1,318 @@
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015
+ */
+
+
+.aimeos .logo {
+	max-height: 40px;
+}
+
+.aimeos .navbar-brand {
+	padding: 5px 10px;
+}
+
+
+
+/* Common styles */
+
+.aimeos th {
+	text-align: center;
+}
+
+
+
+/* Errors */
+
+.aimeos .error-list {
+	list-style: none;
+}
+
+.aimeos .error-list .sr-only:after {
+	content: ":";
+}
+
+
+
+/* List view */
+
+.aimeos .list-search {
+	text-align: center;
+	margin-bottom: 2em;
+}
+
+.aimeos .list-search .search-actions {
+	min-width: 8em;
+	display: none;
+	padding: 1em;
+	clear: both;
+}
+
+.aimeos .list-filter .action {
+	float: left;
+	margin-bottom: 1em;
+}
+
+.aimeos .list-filter .action:before {
+	content:"\e252";
+	margin: 0 1em;
+}
+
+.aimeos .list-filter .action-close:before {
+	content:"\e253";
+}
+
+.aimeos .list-filter td {
+	line-height: 1;
+}
+
+.aimeos .list-filter input {
+	margin: 0 5px;
+}
+
+.aimeos .list-filter fieldset {
+	margin: 5px 0;
+}
+
+.aimeos .list-filter .filter-items {
+	text-align: left;
+	margin: auto;
+	display: none;
+}
+
+.aimeos .list-filter .form-control {
+	display: inline-block;
+	vertical-align: top;
+	margin: 2px 5px;
+	width: 16em;
+	float: none;
+}
+
+.aimeos .list-filter .ui-selectmenu-button {
+	margin: 2px 5px;
+}
+
+.ui-selectmenu-menu .ui-menu {
+	max-height: 20em;
+}
+
+.aimeos .list-filter .filter-operator {
+	width: 8em;
+}
+
+.aimeos .list-filter .filter-operator option {
+	display: none;
+}
+
+.aimeos .list-filter .glyphicon {
+	vertical-align: top;
+	cursor: pointer;
+	margin: 0 1em;
+}
+
+.aimeos .list-fields .action {
+	float: right;
+	margin-bottom: 1em;
+}
+
+.aimeos .list-fields .action:after {
+	content:"\e252";
+	margin: 0 1em;
+}
+
+.aimeos .list-fields .action-close:after {
+	content:"\e253";
+}
+
+
+.aimeos .list-fields .fields-items {
+	text-align: left;
+	max-width: 45em;
+	padding: 0.5em;
+	padding-left: 3.5em;
+	margin: auto;
+	display: none;
+}
+
+.aimeos .list-fields .fields-item {
+	display: inline-block;
+	list-style: none;
+	min-width: 7.95em;
+	margin: auto;
+}
+
+
+.aimeos .list-page {
+	text-align: center;
+}
+
+.aimeos .list-page .pagination {
+	margin: 10px;
+}
+
+.aimeos .list-page .page-limit {
+	vertical-align: top;
+	margin: 10px;
+}
+
+
+.aimeos .list-items th,
+.aimeos .list-items td {
+	vertical-align: middle;
+}
+
+.aimeos .list-items a.items-field {
+	display: inline-block;
+	padding: 6px 0;
+	width: 100%;
+}
+
+.aimeos .list-items .glyphicon {
+	margin: 5px 0.5em;
+	top: 0;
+}
+
+.aimeos .list-items .actions {
+	text-align: right;
+	min-width: 20%;
+	max-width: 9em;
+}
+
+
+.aimeos .list-items .status-1:before {
+	content:"\e013";
+}
+
+.aimeos .list-items .status-0:before {
+	content:"\e014";
+}
+
+.aimeos .list-items .status--1:before {
+	content:"\e105";
+}
+
+.aimeos .list-items .status--2:before {
+	content:"\e118";
+}
+
+
+
+/* Detail view */
+
+.aimeos .panel-heading.has-error {
+	border: solid 1px #A94442;
+	color: #A94442;
+}
+
+.aimeos .item .form-group.mandatory label:after {
+	content: " *";
+}
+
+
+.panel-heading {
+	padding: 0;
+}
+
+.panel-title a {
+	display: block;
+	padding: 10px 15px;
+}
+
+.ui-selectmenu-button span.ui-selectmenu-text {
+	padding: 0.35em 2.1em 0.35em 1em;
+}
+
+.table .actions {
+	vertical-align: top;
+	text-align: right;
+}
+
+.product-stock .warehouse,
+.product-stock .stocklevel,
+.product-stock .dateback {
+	width: 30%;
+}
+
+.product-bundle, .product-selection {
+	display: none;
+}
+
+.product-selection-item:first-child .panel-heading .glyphicon-trash {
+	display: none;
+}
+
+.product-bundles .ui-selectmenu-button {
+	min-width: 10em;
+	width: 100%;
+}
+
+.product-text-language:first-child .glyphicon-trash {
+	display: none;
+}
+
+.product-text-languageid {
+	width: 10em;
+}
+
+.panel-heading .ui-selectmenu-button {
+	color: #FFF;
+	background-image: none;
+	background-color: #337AB7;
+	border-color: #2E6DA4;
+	float: left;
+}
+
+.panel-heading .panel-name {
+	text-align: center;
+	line-height: 1.25;
+}
+
+.panel-heading .btn {
+	vertical-align: top;
+	margin: 2px 0.5em;
+	float: right;
+}
+  
+.fileinput-button input {
+	position: absolute;
+	top: -2px;
+	right: -1px;
+	margin: 0px;
+	opacity: 0;
+	width: 3em;
+	font-size: 100%;
+	height: 2.5em;
+}
+
+.product-image .product-image-preview img {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+.product-image .table > tbody > tr > td {
+	vertical-align: middle;
+}
+
+.center-block {
+	text-align: center;
+}
+
+.center-block .btn {
+	min-width: 8em;
+	margin: 1em;
+}
+	
+@media (max-width: 400px) {
+	th.product-image-label, td.product-image-label {
+		display: none
+	}
+	.product-stock th.dateback, .product-stock td.dateback {
+		display: none
+	}
+}
+
+
+
+.prototype {
+	display: none;
+}
