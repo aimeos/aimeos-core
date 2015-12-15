@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Metal <meteoramic@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 14:45+0200\n"
-"PO-Revision-Date: 2015-09-29 12:30+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-12-07 18:10+0100\n"
+"PO-Revision-Date: 2015-12-09 17:56+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,29 +21,43 @@ msgstr ""
 #: src/Controller/Common/Order/Factory.php:103
 #: src/Controller/Common/Product/Import/Csv/Abstract.php:78
 #: src/Controller/Common/Product/Import/Csv/Abstract.php:264
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:265
+#: src/Controller/Common/Order/Factory.php:107
+#: src/Controller/Common/Product/Import/Csv/Base.php:81
+#: src/Controller/Common/Product/Import/Csv/Base.php:268
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
 #: src/Controller/Common/Order/Factory.php:97
+#: src/Controller/Common/Order/Factory.php:101
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Class \"%1$s\" mevcut değil"
 
 #: src/Controller/Common/Product/Import/Csv/Abstract.php:72
 #: src/Controller/Common/Product/Import/Csv/Abstract.php:258
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:259
+#: src/Controller/Common/Product/Import/Csv/Base.php:75
+#: src/Controller/Common/Product/Import/Csv/Base.php:262
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "Class \"%1$s\" bulunamadı"
 
 #: src/Controller/Common/Order/Factory.php:86
 #: src/Controller/Common/Product/Import/Csv/Abstract.php:66
 #: src/Controller/Common/Product/Import/Csv/Abstract.php:252
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:253
+#: src/Controller/Common/Order/Factory.php:90
+#: src/Controller/Common/Product/Import/Csv/Base.php:69
+#: src/Controller/Common/Product/Import/Csv/Base.php:256
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "%1$s\" class adında geçersiz karakterler"
 
 #: src/Controller/Common/Product/Import/Csv/Abstract.php:320
+#: src/Controller/Common/Product/Import/Csv/Abstract.php:321
+#: src/Controller/Common/Product/Import/Csv/Base.php:324
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "\"%3$s\" içinde \"%1$s/%2$s\" için tür öğesi bulunamadı"

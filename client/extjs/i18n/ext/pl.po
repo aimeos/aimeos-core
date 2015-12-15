@@ -4,11 +4,12 @@
 # 
 # Translators:
 # jerzys <jerzy.skalski@gmail.com>, 2014
+# jerzys <jerzy.skalski@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-14 20:17+0200\n"
+"POT-Creation-Date: 2015-12-07 18:10+0100\n"
 "PO-Revision-Date: 2015-07-09 22:03+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"

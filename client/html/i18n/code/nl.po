@@ -6,6 +6,8 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
+# Klaas Runia <info@sennik.nl>, 2015
 # Maurice Lourens <mlourens@gmail.com>, 2015
 # Sten Pelzer <pelzersten@gmail.com>, 2015
 # Yves Vermeulen <tmastar@gmail.com>, 2015
@@ -14,7 +16,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"PO-Revision-Date: 2015-12-11 11:43+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +39,7 @@ msgstr "Mevr"
 
 #. Address salutation
 msgid "miss"
-msgstr "Mej"
+msgstr "Mevr"
 
 #. Product attribute
 msgid "size"
@@ -73,7 +75,7 @@ msgstr "telefoon"
 
 #. Payment status value
 msgid "pay:-1"
-msgstr "onafgemaakt"
+msgstr "niet gereed"
 
 #. Payment status value
 msgid "pay:0"
@@ -85,7 +87,7 @@ msgstr "geannuleerd"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "geweigert"
+msgstr "geweigerd"
 
 #. Payment status value
 msgid "pay:3"
@@ -105,7 +107,7 @@ msgstr "ontvangen"
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr "onafgemaakt"
+msgstr "niet gereed"
 
 #. Delivery status value
 msgid "stat:0"
@@ -141,7 +143,7 @@ msgstr "geretouneerd"
 
 #. Direct debit service provider
 msgid "directdebit.accountowner"
-msgstr "Account eigenaar"
+msgstr "Account beheerder"
 
 #. Direct debit service provider
 msgid "directdebit.accountno"
@@ -157,31 +159,31 @@ msgstr "Bank naam"
 
 #. Omnipay service provider
 msgid "payment.firstname"
-msgstr ""
+msgstr "Voornaam"
 
 #. Omnipay service provider
 msgid "payment.lastname"
-msgstr ""
+msgstr "Achternaam"
 
 #. Omnipay service provider
 msgid "payment.cardno"
-msgstr ""
+msgstr "Creditcard nummer"
 
 #. Omnipay service provider
 msgid "payment.cvv"
-msgstr ""
+msgstr "Verificatie nummer"
 
 #. Omnipay service provider
 msgid "payment.expirymonth"
-msgstr ""
+msgstr "Verlopen in maand"
 
 #. Omnipay service provider
 msgid "payment.expiryyear"
-msgstr ""
+msgstr "Verlopen in jaar"
 
 #. Warehouse code
 msgid "warehouse:default"
-msgstr ""
+msgstr "Warenhuis:standaard"
 
 #. Favorite action
 msgid "favorite"
@@ -193,20 +195,23 @@ msgstr "pin"
 
 #. Watch action
 msgid "watch"
-msgstr ""
+msgstr "Bekijken"
 
 #. Product property package-length
 msgid "package-length"
-msgstr ""
+msgstr "Pakket-lengte"
 
 #. Product property package-width
 msgid "package-width"
-msgstr ""
+msgstr "Pakket-breedte"
 
 #. Product property package-height
 msgid "package-height"
-msgstr ""
+msgstr "Pakket-hoogte"
 
 #. Product property package-weight
 msgid "package-weight"
-msgstr ""
+msgstr "Pakket-gewicht"
+
+msgid "price:default"
+msgstr "%1$s %2$s"

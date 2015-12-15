@@ -6,12 +6,13 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"PO-Revision-Date: 2015-12-11 11:43+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Italian (http://www.transifex.com/aimeos/aimeos-core/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -207,3 +208,6 @@ msgstr ""
 #. Product property package-weight
 msgid "package-weight"
 msgstr ""
+
+msgid "price:default"
+msgstr "%1$s %2$s"

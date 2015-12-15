@@ -6,6 +6,7 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 msgid ""
 msgstr ""
