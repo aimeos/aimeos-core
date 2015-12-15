@@ -65,20 +65,28 @@ class Standard
 	 */
 	public function copy()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-		$typeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/type' );
-
-		$search = $typeManager->createSearch();
-		$search->setSortations( array( $search->sort( '+', 'product.type.code' ) ) );
-
 		$view = $this->getView();
+		$context = $this->getContext();
 
-		$item = $manager->getItem( $view->param( 'id' ) );
-		$item->setCode( $item->getCode() . '_copy' );
-		$item->setId( null );
+		try
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
-		$view->item = $item;
-		$view->itemTypes = $typeManager->searchItems( $search );
+			$item = $manager->getItem( $view->param( 'id' ) );
+			$item->setCode( $item->getCode() . '_copy' );
+			$item->setId( null );
+
+			$view->item = $item;
+			$view->itemTypes = $typeManager->searchItems( $search );
+
+			return;
+		}
+		catch( \Aimeos\MShop\Exception $e ) {
+			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		}
+		catch( \Exception $e ) {
+			$view->errors = array( $e->getMessage() );
+		}
 
 		$tplconf = 'client/jqadm/product/template-item';
 		$default = 'product/item-default.php';
@@ -94,11 +102,26 @@ class Standard
 	 */
 	public function create()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-
 		$view = $this->getView();
-		$view->item = $manager->createItem();
-		$view->itemTypes = $this->getTypeItems();
+		$context = $this->getContext();
+
+		try
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+			$item = $manager->createItem();
+			$item->setStatus( 1 );
+
+			$view->item = $item;
+			$view->itemTypes = $this->getTypeItems();
+
+			return;
+		}
+		catch( \Aimeos\MShop\Exception $e ) {
+			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		}
+		catch( \Exception $e ) {
+			$view->errors = array( $e->getMessage() );
+		}
 
 		$tplconf = 'client/jqadm/product/template-item';
 		$default = 'product/item-default.php';
@@ -114,8 +137,27 @@ class Standard
 	 */
 	public function delete()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-		$manager->deleteItems( (array) $this->getView()->param( 'id' ) );
+		$view = $this->getView();
+		$context = $this->getContext();
+
+		try
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+			$manager->deleteItems( (array) $view->param( 'id' ) );
+
+			return;
+		}
+		catch( \Aimeos\MShop\Exception $e ) {
+			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		}
+		catch( \Exception $e ) {
+			$view->errors = array( $e->getMessage() );
+		}
+
+		$tplconf = 'client/jqadm/partial/template-error';
+		$default = 'common/partials/error-default.php';
+
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -126,11 +168,24 @@ class Standard
 	 */
 	public function get()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-
 		$view = $this->getView();
-		$view->item = $manager->getItem( $view->param( 'id' ) );
-		$view->itemTypes = $this->getTypeItems();
+		$context = $this->getContext();
+
+		try
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+
+			$view->item = $manager->getItem( $view->param( 'id' ) );
+			$view->itemTypes = $this->getTypeItems();
+
+			return;
+		}
+		catch( \Aimeos\MShop\Exception $e ) {
+			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		}
+		catch( \Exception $e ) {
+			$view->errors = array( $e->getMessage() );
+		}
 
 		$tplconf = 'client/jqadm/product/template-item';
 		$default = 'product/item-default.php';
@@ -146,9 +201,11 @@ class Standard
 	 */
 	public function save()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-		$item = $manager->createItem();
 		$view = $this->getView();
+		$context = $this->getContext();
+
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$item = $manager->createItem();
 
 		try
 		{
@@ -167,18 +224,23 @@ class Standard
 
 			$item->setConfig( $config );
 			$manager->saveItem( $item, false );
+
+			return;
 		}
-		catch( \Exception $e )
-		{
-			$view->item = $item;
-			$view->itemTypes = $this->getTypeItems();
+		catch( \Aimeos\MShop\Exception $e ) {
+			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		}
+		catch( \Exception $e ) {
 			$view->errors = array( $e->getMessage() );
-
-			$tplconf = 'client/jqadm/product/template-item';
-			$default = 'product/item-default.php';
-
-			return $view->render( $view->config( $tplconf, $default ) );
 		}
+
+		$view->item = $item;
+		$view->itemTypes = $this->getTypeItems();
+
+		$tplconf = 'client/jqadm/product/template-item';
+		$default = 'product/item-default.php';
+
+		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
@@ -189,15 +251,27 @@ class Standard
 	 */
 	public function search()
 	{
-		$total = 0;
 		$view = $this->getView();
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-		$search = $this->initCriteria( $manager->createSearch(), $view->param() );
+		$context = $this->getContext();
 
-		$view->items = $manager->searchItems( $search, array(), $total );
-		$view->filterAttributes = $manager->getSearchAttributes();
-		$view->filterOperators = $search->getOperators();
-		$view->total = $total;
+		try
+		{
+			$total = 0;
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+			$search = $this->initCriteria( $manager->createSearch(), $view->param() );
+
+			$view->items = $manager->searchItems( $search, array(), $total );
+			$view->filterOperators = $search->getOperators();
+			$view->total = $total;
+
+			return;
+		}
+		catch( \Aimeos\MShop\Exception $e ) {
+			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		}
+		catch( \Exception $e ) {
+			$view->errors = array( $e->getMessage() );
+		}
 
 		$tplconf = 'client/jqadm/product/template-list';
 		$default = 'product/list-default.php';
@@ -313,7 +387,7 @@ class Standard
 		$typeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/type' );
 
 		$search = $typeManager->createSearch();
-		$search->setSortations( array( $search->sort( '+', 'product.type.code' ) ) );
+		$search->setSortations( array( $search->sort( '+', 'product.type.label' ) ) );
 
 		return $typeManager->searchItems( $search );
 	}
