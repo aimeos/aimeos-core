@@ -77,7 +77,7 @@ class Standard
 			$item->setId( null );
 
 			$view->item = $item;
-			$view->itemTypes = $typeManager->searchItems( $search );
+			$view->itemTypes = $this->getTypeItems();
 
 			return;
 		}
