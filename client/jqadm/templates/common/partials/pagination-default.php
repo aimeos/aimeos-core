@@ -29,38 +29,38 @@ $pageTotal = ( $total != 0 ? ceil( $total / $limit ) : 1 );
 ?>
 <nav class="list-page">
 	<ul class="page-offset pagination">
-		<li>
-			<a href="<?php $params['page']['offset'] = $first; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'First' ) ); ?>">
-				<span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+		<li class="page-item">
+			<a class="page-link" href="<?php $params['page']['offset'] = $first; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'First' ) ); ?>">
+				<span class="fa fa-fast-backward" aria-hidden="true"></span>
 			</a>
 		</li>
-		<li>
-			<a href="<?php $params['page']['offset'] = $prev; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Previous' ) ); ?>">
-				<span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+		<li class="page-item">
+			<a class="page-link" href="<?php $params['page']['offset'] = $prev; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Previous' ) ); ?>">
+				<span class="fa fa-step-backward" aria-hidden="true"></span>
 			</a>
 		</li>
-		<li class="disabled"><a href="#"><?php echo $enc->html( sprintf( $this->translate( 'client/jqadm', 'Page %1$d of %2$d' ), $pageCurrent, $pageTotal ) ); ?></a></li>
-		<li>
-			<a href="<?php $params['page']['offset'] = $next; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Next' ) ); ?>">
-				<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+		<li class="page-item disabled"><a class="page-link" href="#"><?php echo $enc->html( sprintf( $this->translate( 'client/jqadm', 'Page %1$d of %2$d' ), $pageCurrent, $pageTotal ) ); ?></a></li>
+		<li class="page-item">
+			<a class="page-link" href="<?php $params['page']['offset'] = $next; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Next' ) ); ?>">
+				<span class="fa fa-step-forward" aria-hidden="true"></span>
 			</a>
 		</li>
-		<li>
-			<a href="<?php $params['page']['offset'] = $last; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Last' ) ); ?>">
-				<span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+		<li class="page-item">
+			<a class="page-link" href="<?php $params['page']['offset'] = $last; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Last' ) ); ?>">
+				<span class="fa fa-fast-forward" aria-hidden="true"></span>
 			</a>
 		</li>
 	</ul>
 	<div class="page-limit btn-group <?php echo ( $this->get( 'pos', 'top' ) === 'bottom' ? 'dropup' : '' ); ?>" role="group">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<?php echo $limit; ?> <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu">
-			<li><a href="<?php $params['page']['limit'] = 25; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">25</a></li>
-			<li><a href="<?php $params['page']['limit'] = 50; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">50</a></li>
-			<li><a href="<?php $params['page']['limit'] = 100; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">100</a></li>
-			<li><a href="<?php $params['page']['limit'] = 200; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">200</a></li>
-			<li><a href="<?php $params['page']['limit'] = 500; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">500</a></li>
+			<li class="dropdown-item"><a href="<?php $params['page']['limit'] = 25; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">25</a></li>
+			<li class="dropdown-item"><a href="<?php $params['page']['limit'] = 50; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">50</a></li>
+			<li class="dropdown-item"><a href="<?php $params['page']['limit'] = 100; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">100</a></li>
+			<li class="dropdown-item"><a href="<?php $params['page']['limit'] = 200; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">200</a></li>
+			<li class="dropdown-item"><a href="<?php $params['page']['limit'] = 500; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">500</a></li>
 		</ul>
 	</div>
 </nav>

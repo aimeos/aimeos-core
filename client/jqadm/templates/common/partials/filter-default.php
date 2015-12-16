@@ -18,7 +18,7 @@ $operatorMap = array(
 	'<' => array( 'date', 'datetime', 'integer', 'float' ),
 	'<=' => array( 'date', 'datetime', 'integer', 'float' ),
 	'==' => array( 'boolean', 'date', 'datetime', 'integer', 'float', 'string' ),
-	'!=' => array( 'boolean', 'date', 'datetime', 'integer', 'float' ),
+	'!=' => array( 'boolean', 'date', 'datetime', 'integer', 'float', 'string' ),
 );
 
 $filter = $this->param( 'filter' );
@@ -35,9 +35,9 @@ $cnt = count( (array) $filter['key'] );
 	<tr class="input-group filter-item">
 		<td>
 <?php	if( $pos < $cnt - 1 ) : ?>
-			<div class="glyphicon glyphicon-minus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
+			<div class="fa fa-minus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
 <?php	else : ?>
-			<div class="glyphicon glyphicon-plus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
+			<div class="fa fa-plus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
 <?php	endif; ?>
 		</td>
 		<td>
@@ -59,15 +59,17 @@ $cnt = count( (array) $filter['key'] );
 <?php endfor; ?>
 	<tr class="input-group prototype">
 		<td>
-			<div class="glyphicon glyphicon-plus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
+			<div class="fa fa-plus" aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Add filter' ) ); ?>"></div>
 		</td>
 		<td>
 			<fieldset>
-				<select name="filter[key][]" class="filter-key form-control" disabled="disabled">
+				<select name="filter[key][]" class="filter-key form-control" data-selected="<?php echo $this->get( 'default' ); ?>" disabled="disabled">
 				</select><!--
 				--><select name="filter[op][]" class="filter-operator form-control" disabled="disabled">
 <?php foreach( $operators as $code ) : ?>
-					<option value="<?php echo $enc->attr( $code ); ?>"><?php echo $enc->html( $this->translate( 'client/jqadm/code', $code ) ); ?></option>
+					<option value="<?php echo $enc->attr( $code ); ?>"
+						class="<?php echo ( isset( $operatorMap[$code] ) ? implode( ' ', $operatorMap[$code] ) : '' ); ?>"
+					><?php echo $enc->html( $this->translate( 'client/jqadm/code', $code ) ); ?></option>
 <?php endforeach; ?>
 				</select><!--
 				--><input name="filter[val][]" class="filter-value form-control" type="text" disabled="disabled" />

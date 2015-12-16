@@ -62,7 +62,7 @@ $sortcode = $this->param( 'sort' );
 <?php echo $this->csrf()->formfield(); ?>
 
 	<div class="list-fields">
-		<a class="action action-open glyphicon" href="#">Fields</a>
+		<a class="action action-open fa" href="#">Fields</a>
 		<ul class="fields-items search-item">
 			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.id" <?php echo $checked( $fields, 'product.id' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'ID' ) ); ?></label></li>
 			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.status" <?php echo $checked( $fields, 'product.status' ); ?>> <?php echo $enc->html( $this->translate( 'client/jqadm', 'Status' ) ); ?></label></li>
@@ -78,11 +78,11 @@ $sortcode = $this->param( 'sort' );
 	</div>
 
 	<div class="list-filter">
-		<a class="action action-open glyphicon" href="#">Filter</a>
+		<a class="action action-open fa" href="#">Filter</a>
 <?php echo $this->partial( $this->config( 'client/jqadm/partial/filter', 'common/partials/filter-default.php' ), $filterParams ); ?>
 	</div>
 
-	<div class="search-actions">
+	<div class="actions-group">
 		<button class="btn btn-primary"><?php echo $this->translate( 'client/jqadm', 'Search' ); ?></button>
 		<a class="btn btn-warning" href="<?php echo $enc->attr( $this->url( $target, $controller, $action, array( 'resource' => 'product' ), array(), $config ) ); ?>"><?php echo $this->translate( 'client/jqadm', 'Clear' ); ?></a>
 	</div>
@@ -132,7 +132,6 @@ $sortcode = $this->param( 'sort' );
 			<th class="product.datestart">
 				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.datestart' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 					<?php echo $enc->html( $this->translate( 'client/jqadm', 'Start date' ) ); ?>
-					<span class="glyphicon glyphicon-sort" aria-hidden="true"></span>
 				</a>
 			</th>
 <?php endif; ?>
@@ -165,7 +164,7 @@ $sortcode = $this->param( 'sort' );
 			</th>
 <?php endif; ?>
 			<th class="actions">
-				<a class="btn btn-primary glyphicon glyphicon-plus"
+				<a class="btn btn-primary fa fa-plus"
 					href="<?php echo $enc->attr( $this->url( $newTarget, $newCntl, $newAction, array( 'resource' => 'product' ), array(), $newConfig ) ); ?>"
 					aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'New' ) ); ?>">
 				</a>
@@ -180,7 +179,7 @@ $sortcode = $this->param( 'sort' );
 			<td class="product.id"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getId() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.status', $fields ) ) : ?>
-			<td class="product.status"><a class="items-field" href="<?php echo $url; ?>"><div class="glyphicon status-<?php echo $enc->attr( $item->getStatus() ); ?>"></div></a></td>
+			<td class="product.status"><a class="items-field" href="<?php echo $url; ?>"><div class="fa status-<?php echo $enc->attr( $item->getStatus() ); ?>"></div></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.typeid', $fields ) ) : ?>
 			<td class="product.type"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getType() ); ?></a></td>
@@ -207,10 +206,10 @@ $sortcode = $this->param( 'sort' );
 			<td class="product.editor"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getEditor() ); ?></a></td>
 <?php endif; ?>
 			<td class="actions"><!--
-				--><a class="btn btn-default glyphicon glyphicon-duplicate"
+				--><a class="btn btn-secondary fa fa-files-o"
 					href="<?php echo $enc->attr( $this->url( $copyTarget, $copyCntl, $copyAction, array( 'resource' => 'product', 'id' => $id ), array(), $copyConfig ) ); ?>"
 					aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Copy' ) ); ?>"></a><!--
-				--><a class="btn btn-danger glyphicon glyphicon-trash"
+				--><a class="btn btn-danger fa fa-trash"
 					href="<?php echo $enc->attr( $this->url( $delTarget, $delCntl, $delAction, array( 'resource' => 'product', 'id' => $id ), array(), $delConfig ) ); ?>"
 					aria-label="<?php echo $enc->attr( $this->translate( 'client/jqadm', 'Delete' ) ); ?>"></a><!--
 			--></td>

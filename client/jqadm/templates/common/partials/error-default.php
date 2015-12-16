@@ -13,7 +13,7 @@ $errors = $this->get( 'errors', array() );
 <ul class="error-list alert alert-danger" role="alert">
 <?php	foreach( $errors as $error ) : ?>
 	<li class="error-item">
-		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		<span class="fa fa-exclamation-circle" aria-hidden="true"></span>
 		<span class="sr-only"><?php echo $enc->html( $this->translate( 'client/jqadm', 'Error' ) ); ?></span>
 		<?php echo $enc->html( $error ); ?>
 	</li>

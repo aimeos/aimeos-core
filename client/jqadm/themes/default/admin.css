@@ -3,6 +3,12 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
+.card-block:after {
+	display: block;
+	clear: both;
+	content: "";
+}
+
 
 .aimeos .logo {
 	max-height: 40px;
@@ -16,8 +22,29 @@
 
 /* Common styles */
 
-.aimeos th {
+.aimeos thead th {
 	text-align: center;
+}
+
+.aimeos thead th,
+.aimeos thead td {
+	vertical-align: middle;
+}
+
+.aimeos .actions {
+	text-align: right;
+	min-width: 20%;
+	max-width: 9rem;
+}
+
+.aimeos .actions-group {
+	text-align: center;
+	clear: both;
+}
+
+.aimeos .actions-group .btn {
+	min-width: 8rem;
+	margin: 0.5rem;
 }
 
 
@@ -38,28 +65,29 @@
 
 .aimeos .list-search {
 	text-align: center;
-	margin-bottom: 2em;
+	margin-bottom: 2rem;
 }
 
-.aimeos .list-search .search-actions {
-	min-width: 8em;
-	display: none;
-	padding: 1em;
-	clear: both;
+.aimeos .list-search .action {
+	font-weight: 700;
 }
 
 .aimeos .list-filter .action {
+	margin-bottom: 1rem;
 	float: left;
-	margin-bottom: 1em;
 }
 
 .aimeos .list-filter .action:before {
-	content:"\e252";
-	margin: 0 1em;
+	content:"\f0d7";
+	margin: 0 1rem;
 }
 
 .aimeos .list-filter .action-close:before {
-	content:"\e253";
+	content:"\f0d8";
+}
+
+.aimeos .list-search .actions-group {
+	display: none;
 }
 
 .aimeos .list-filter td {
@@ -67,69 +95,63 @@
 }
 
 .aimeos .list-filter input {
-	margin: 0 5px;
+	margin: 0 0.5rem;
 }
 
 .aimeos .list-filter fieldset {
-	margin: 5px 0;
+	margin: 0.5rem 0;
 }
 
 .aimeos .list-filter .filter-items {
 	text-align: left;
-	margin: auto;
 	display: none;
+	margin: auto;
 }
 
 .aimeos .list-filter .form-control {
+	padding: 0.5rem 0.75rem;
 	display: inline-block;
 	vertical-align: top;
-	margin: 2px 5px;
-	width: 16em;
+	width: 16rem;
 	float: none;
 }
 
 .aimeos .list-filter .ui-selectmenu-button {
-	margin: 2px 5px;
+	margin: 0rem 0.5rem;
 }
 
 .ui-selectmenu-menu .ui-menu {
-	max-height: 20em;
+	max-height: 20rem;
 }
 
 .aimeos .list-filter .filter-operator {
-	width: 8em;
+	width: 8rem;
 }
 
 .aimeos .list-filter .filter-operator option {
 	display: none;
 }
 
-.aimeos .list-filter .glyphicon {
-	vertical-align: top;
-	cursor: pointer;
-	margin: 0 1em;
-}
-
 .aimeos .list-fields .action {
+	margin-bottom: 1rem;
 	float: right;
-	margin-bottom: 1em;
 }
 
 .aimeos .list-fields .action:after {
-	content:"\e252";
-	margin: 0 1em;
+	content:"\f0d7";
+	margin: 0 1rem;
 }
 
 .aimeos .list-fields .action-close:after {
-	content:"\e253";
+	content:"\f0d8";
 }
 
 
 .aimeos .list-fields .fields-items {
 	text-align: left;
-	max-width: 45em;
-	padding: 0.5em;
-	padding-left: 3.5em;
+	max-width: 45rem;
+	padding: 0.5rem;
+	padding-left: 3.5rem;
 	margin: auto;
 	display: none;
 }
@@ -137,7 +159,7 @@
 .aimeos .list-fields .fields-item {
 	display: inline-block;
 	list-style: none;
-	min-width: 7.95em;
+	min-width: 7.95rem;
 	margin: auto;
 }
 
@@ -147,59 +169,54 @@
 }
 
 .aimeos .list-page .pagination {
-	margin: 10px;
+	margin: 1rem;
 }
 
 .aimeos .list-page .page-limit {
 	vertical-align: top;
-	margin: 10px;
+	margin: 1rem;
 }
 
-
-.aimeos .list-items th,
-.aimeos .list-items td {
-	vertical-align: middle;
+.aimeos .list-page .btn {
+	padding: 0.5rem 1rem;
 }
+
+.aimeos .list-page .page-link {
+	min-width: 3rem;
+}
+
 
 .aimeos .list-items a.items-field {
 	display: inline-block;
-	padding: 6px 0;
 	width: 100%;
 }
 
-.aimeos .list-items .glyphicon {
-	margin: 5px 0.5em;
-	top: 0;
-}
-
-.aimeos .list-items .actions {
-	text-align: right;
-	min-width: 20%;
-	max-width: 9em;
+.aimeos .list-items .fa {
+	margin: 0 0.5rem;
 }
 
 
 .aimeos .list-items .status-1:before {
-	content:"\e013";
+	content:"\f00c";
 }
 
 .aimeos .list-items .status-0:before {
-	content:"\e014";
+	content:"\f00d";
 }
 
 .aimeos .list-items .status--1:before {
-	content:"\e105";
+	content:"\f06e";
 }
 
 .aimeos .list-items .status--2:before {
-	content:"\e118";
+	content:"\f187";
 }
 
 
 
 /* Detail view */
 
-.aimeos .panel-heading.has-error {
+.aimeos .card-header.has-danger {
 	border: solid 1px #A94442;
 	color: #A94442;
 }
@@ -209,107 +226,6 @@
 }
 
 
-.panel-heading {
-	padding: 0;
-}
-
-.panel-title a {
-	display: block;
-	padding: 10px 15px;
-}
-
-.ui-selectmenu-button span.ui-selectmenu-text {
-	padding: 0.35em 2.1em 0.35em 1em;
-}
-
-.table .actions {
-	vertical-align: top;
-	text-align: right;
-}
-
-.product-stock .warehouse,
-.product-stock .stocklevel,
-.product-stock .dateback {
-	width: 30%;
-}
-
-.product-bundle, .product-selection {
-	display: none;
-}
-
-.product-selection-item:first-child .panel-heading .glyphicon-trash {
-	display: none;
-}
-
-.product-bundles .ui-selectmenu-button {
-	min-width: 10em;
-	width: 100%;
-}
-
-.product-text-language:first-child .glyphicon-trash {
-	display: none;
-}
-
-.product-text-languageid {
-	width: 10em;
-}
-
-.panel-heading .ui-selectmenu-button {
-	color: #FFF;
-	background-image: none;
-	background-color: #337AB7;
-	border-color: #2E6DA4;
-	float: left;
-}
-
-.panel-heading .panel-name {
-	text-align: center;
-	line-height: 1.25;
-}
-
-.panel-heading .btn {
-	vertical-align: top;
-	margin: 2px 0.5em;
-	float: right;
-}
-  
-.fileinput-button input {
-	position: absolute;
-	top: -2px;
-	right: -1px;
-	margin: 0px;
-	opacity: 0;
-	width: 3em;
-	font-size: 100%;
-	height: 2.5em;
-}
-
-.product-image .product-image-preview img {
-	max-width: 100px;
-	max-height: 100px;
-}
-
-.product-image .table > tbody > tr > td {
-	vertical-align: middle;
-}
-
-.center-block {
-	text-align: center;
-}
-
-.center-block .btn {
-	min-width: 8em;
-	margin: 1em;
-}
-	
-@media (max-width: 400px) {
-	th.product-image-label, td.product-image-label {
-		display: none
-	}
-	.product-stock th.dateback, .product-stock td.dateback {
-		display: none
-	}
-}
 
 
 

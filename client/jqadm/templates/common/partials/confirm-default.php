@@ -20,7 +20,7 @@ $enc = $this->encoder();
 			</div>
 			<div class="modal-footer">
 				<a class="btn btn-danger" href="#"><?php echo $enc->html( $this->translate( 'client/jqadm', 'Delete' ) ); ?></a>
-				<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $enc->html( $this->translate( 'client/jqadm', 'Close' ) ); ?></button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo $enc->html( $this->translate( 'client/jqadm', 'Close' ) ); ?></button>
 			</div>
 		</div>
 	</div>
