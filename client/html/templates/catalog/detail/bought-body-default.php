@@ -16,7 +16,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 ?>
 <?php if( !empty( $productItems ) || $this->boughtBody != '' ) : ?>
 <section class="catalog-detail-bought">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Other customers also bought' ); ?></h2>
+	<h2 class="header"><?php echo $this->translate( 'client', 'Other customers also bought' ); ?></h2>
 	<ul class="bought-items">
 <?php	foreach( $positionItems as $id => $item ) : ?>
 <?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; ?>

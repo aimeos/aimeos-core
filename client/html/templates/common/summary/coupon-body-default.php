@@ -14,12 +14,12 @@ if( isset( $this->summaryBasket ) ) {
 
 ?>
 <div class="common-summary-coupon container">
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Coupons' ), $enc::TRUST ); ?></h2>
+	<h2><?php echo $enc->html( $this->translate( 'client', 'Coupons' ), $enc::TRUST ); ?></h2>
 	<div class="header">
 <?php if( isset( $this->summaryUrlCoupon ) ) : ?>
-		<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlCoupon ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
+		<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlCoupon ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
-		<h3><?php echo $enc->html( $this->translate( 'client/html', 'Coupon codes' ), $enc::TRUST ); ?></h3>
+		<h3><?php echo $enc->html( $this->translate( 'client', 'Coupon codes' ), $enc::TRUST ); ?></h3>
 	</div>
 	<div class="content">
 <?php if( !empty( $coupons ) ) : ?>

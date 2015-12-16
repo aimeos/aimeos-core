@@ -337,7 +337,7 @@ class Standard
 
 				if( ( $orderItem = reset( $orderItems ) ) === false )
 				{
-					$msg = $view->translate( 'client/html', 'Order with ID "%1$s" not found' );
+					$msg = $view->translate( 'client', 'Order with ID "%1$s" not found' );
 					throw new \Aimeos\Client\Html\Exception( sprintf( $msg, $orderId ) );
 				}
 

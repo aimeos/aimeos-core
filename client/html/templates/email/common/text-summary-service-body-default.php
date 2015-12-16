@@ -11,7 +11,7 @@
 
 <?php try { ?>
 <?php	$service = $this->extOrderBaseItem->getService( 'delivery' ); ?>
-<?php	echo strip_tags( $this->translate( 'client/html', 'Delivery' ) ); ?>: <?php echo strip_tags( $service->getName() ); ?>
+<?php	echo strip_tags( $this->translate( 'client', 'Delivery' ) ); ?>: <?php echo strip_tags( $service->getName() ); ?>
 
 <?php	foreach( $service->getAttributes() as $attribute ) : ?>
 <?php		if( $attribute->getType() === 'delivery' ) : ?>
@@ -36,7 +36,7 @@
 
 <?php try { ?>
 <?php	$service = $this->extOrderBaseItem->getService( 'payment' ); ?>
-<?php	echo strip_tags( $this->translate( 'client/html', 'Payment' ) ); ?>: <?php echo strip_tags( $service->getName() ); ?>
+<?php	echo strip_tags( $this->translate( 'client', 'Payment' ) ); ?>: <?php echo strip_tags( $service->getName() ); ?>
 
 <?php	foreach( $service->getAttributes() as $attribute ) : ?>
 <?php		if( $attribute->getType() === 'payment' ) : ?>

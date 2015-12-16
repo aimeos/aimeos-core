@@ -16,6 +16,6 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Confirmation' ), $enc::TRUST ); ?></h1>
+	<h1><?php echo $enc->html( $this->translate( 'client', 'Confirmation' ), $enc::TRUST ); ?></h1>
 <?php echo $this->get( 'confirmBody' ); ?>
 </section>

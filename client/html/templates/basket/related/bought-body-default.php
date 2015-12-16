@@ -15,7 +15,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 ?>
 <?php if( !empty( $productItems ) || $this->boughtBody != '' ) : ?>
 <section class="basket-related-bought">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Products you might be also interested in' ); ?></h2>
+	<h2 class="header"><?php echo $this->translate( 'client', 'Products you might be also interested in' ); ?></h2>
 	<ul class="bought-items">
 <?php	foreach( $productItems as $id => $productItem ) : ?>
 		<li class="bought-item">

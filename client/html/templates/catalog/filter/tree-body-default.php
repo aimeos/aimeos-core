@@ -47,7 +47,7 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
 <?php if( $this->config( 'client/html/catalog/filter/tree/force-search', false ) ) : ?>
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'f_catid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'f_catid' ) ); ?>" />
 <?php endif; ?>
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Categories' ), $enc::TRUST ); ?></h2>
+	<h2><?php echo $enc->html( $this->translate( 'client', 'Categories' ), $enc::TRUST ); ?></h2>
 <?php if( isset( $this->treeCatalogTree ) && $this->treeCatalogTree->getStatus() > 0 ) : ?>
 <?php	$values = array( 'nodes' => array( $this->treeCatalogTree ), 'path' => $this->get( 'treeCatalogPath', array() ), 'params' => $this->get( 'treeFilterParams', array() ) ); ?>
 <?php 	echo $this->partial( $this->config( 'client/html/common/partials/tree', 'common/partials/tree-default.php' ), $values ); ?>

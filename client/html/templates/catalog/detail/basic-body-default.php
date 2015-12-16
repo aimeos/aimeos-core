@@ -12,7 +12,7 @@ $enc = $this->encoder();
 <div class="catalog-detail-basic">
 	<h1 class="name"><?php echo $enc->html( $this->detailProductItem->getName(), $enc::TRUST ); ?></h1>
 	<p class="code">
-		<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Article no.:' ), $enc::TRUST ); ?></span>
+		<span class="name"><?php echo $enc->html( $this->translate( 'client', 'Article no.:' ), $enc::TRUST ); ?></span>
 		<span class="value"><?php echo $enc->html( $this->detailProductItem->getCode() ); ?></span>
 	</p>
 <?php foreach( $this->detailProductItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>

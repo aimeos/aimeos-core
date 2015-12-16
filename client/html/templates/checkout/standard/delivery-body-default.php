@@ -34,12 +34,12 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 }
 
 /// Price format with price value (%1$s) and currency (%2$s)
-$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+$priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 ?>
 <section class="checkout-standard-delivery">
-	<h1><?php echo $enc->html( $this->translate( 'client/html', 'delivery' ), $enc::TRUST ); ?></h1>
-	<p class="note"><?php echo $enc->html( $this->translate( 'client/html', 'Please choose your delivery method' ), $enc::TRUST ); ?></p>
+	<h1><?php echo $enc->html( $this->translate( 'client', 'delivery' ), $enc::TRUST ); ?></h1>
+	<p class="note"><?php echo $enc->html( $this->translate( 'client', 'Please choose your delivery method' ), $enc::TRUST ); ?></p>
 <?php foreach( $services as $id => $service ) : ?>
 	<div id="c_delivery-<?php echo $enc->attr( $id ); ?>" class="item item-service">
 		<label class="description" for="c_deliveryoption-<?php echo $enc->attr( $id ); ?>">
@@ -47,7 +47,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
 <?php		$currency = $this->translate( 'client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
 <?php		if( $servicePrices[$id]->getValue() > 0 ) : /// Service fee value (%1$s) and shipping cost value (%2$s) with currency (%3$s) ?>
-			<span class="price-value"><?php echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getCosts() ), $currency ) ); ?></span>
+			<span class="price-value"><?php echo $enc->html( sprintf( $this->translate( 'client', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getCosts() ), $currency ) ); ?></span>
 <?php		else : ?>
 			<span class="price-value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $servicePrices[$id]->getCosts() ), $currency ) ); ?></span>
 <?php		endif; ?>
@@ -93,7 +93,7 @@ $priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
 <?php endforeach; ?>
 <?php echo $this->get( 'deliveryBody' ); ?>
 	<div class="button-group">
-		<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Previous' ), $enc::TRUST ); ?></a>
-		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client/html', 'Next' ), $enc::TRUST ); ?></button>
+		<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->get( 'standardUrlBack' ) ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Previous' ), $enc::TRUST ); ?></a>
+		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client', 'Next' ), $enc::TRUST ); ?></button>
 	</div>
 </section>

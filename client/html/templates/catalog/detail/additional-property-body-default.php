@@ -11,7 +11,7 @@ $enc = $this->encoder();
 ?>
 <div class="additional-box">
 <?php if( count( $propertyItems ) > 0 ) : ?>
-	<h2 class="header properties"><?php echo $enc->html( $this->translate( 'client/html', 'Properties' ), $enc::TRUST ); ?></h2>
+	<h2 class="header properties"><?php echo $enc->html( $this->translate( 'client', 'Properties' ), $enc::TRUST ); ?></h2>
 	<div class="content properties">
 		<table class="properties">
 			<tbody>

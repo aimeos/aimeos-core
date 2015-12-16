@@ -85,7 +85,7 @@ catch( Exception $e )
 }
 
 /// Price format with price value (%1$s) and currency (%2$s)
-$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+$priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 $unhide = $this->get( 'summaryShowHiddenAttributes', false );
 $modify = $this->get( 'summaryEnableModify', false );
@@ -96,18 +96,18 @@ $backParams = $this->get( 'summaryParams', array() );
 <div class="common-summary-detail container">
 	<div class="header">
 <?php if( isset( $this->summaryUrlBasket ) ) : ?>
-		<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlBasket ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
+		<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlBasket ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
-		<h2><?php echo $enc->html( $this->translate( 'client/html', 'Details' ), $enc::TRUST ); ?></h2>
+		<h2><?php echo $enc->html( $this->translate( 'client', 'Details' ), $enc::TRUST ); ?></h2>
 	</div>
 	<div class="basket">
 		<table>
 			<thead>
 				<tr>
 					<th class="details"></th>
-					<th class="quantity"><?php echo $enc->html( $this->translate( 'client/html', 'Quantity' ), $enc::TRUST ); ?></th>
-					<th class="unitprice"><?php echo $enc->html( $this->translate( 'client/html', 'Price' ), $enc::TRUST ); ?></th>
-					<th class="price"><?php echo $enc->html( $this->translate( 'client/html', 'Sum' ), $enc::TRUST ); ?></th>
+					<th class="quantity"><?php echo $enc->html( $this->translate( 'client', 'Quantity' ), $enc::TRUST ); ?></th>
+					<th class="unitprice"><?php echo $enc->html( $this->translate( 'client', 'Price' ), $enc::TRUST ); ?></th>
+					<th class="price"><?php echo $enc->html( $this->translate( 'client', 'Sum' ), $enc::TRUST ); ?></th>
 <?php if( $modify ) : ?>
 					<th class="action"></th>
 <?php endif; ?>
@@ -195,7 +195,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $prodPrice * $product->getQuantity() ), $priceCurrency ) ); ?></td>
 <?php		if( $modify && ( $product->getFlags() & \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) == 0 ) : ?>
 					<td class="action">
-						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b_action' => 'delete', 'b_position' => $position ), array(), $basketConfig ) ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
+						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b_action' => 'delete', 'b_position' => $position ), array(), $basketConfig ) ); ?>"><?php echo $this->translate( 'client', 'X' ); ?></a>
 					</td>
 <?php		endif; ?>
 				</tr>
@@ -242,14 +242,14 @@ $backParams = $this->get( 'summaryParams', array() );
 			</tbody>
 			<tfoot>
 				<tr class="subtotal">
-					<td colspan="3"><?php echo $enc->html( $this->translate( 'client/html', 'Sub-total' ) ); ?></td>
+					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Sub-total' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceValue ), $priceCurrency ) ); ?></td>
 <?php if( $modify ) : ?>
 					<td class="action"></td>
 <?php endif; ?>
 				</tr>
 				<tr class="delivery">
-					<td colspan="3"><?php echo $enc->html( $this->translate( 'client/html', 'Shipping' ) ); ?></td>
+					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Shipping' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ) ); ?></td>
 <?php if( $modify ) : ?>
 					<td class="action"></td>
@@ -257,7 +257,7 @@ $backParams = $this->get( 'summaryParams', array() );
 				</tr>
 <?php if( $paymentPriceService > 0 ) : ?>
 				<tr class="payment">
-					<td colspan="3"><?php echo $enc->html( $this->translate( 'client/html', 'Payment costs' ) ); ?></td>
+					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Payment costs' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ) ); ?></td>
 <?php	if( $modify ) : ?>
 					<td class="action"></td>
@@ -265,7 +265,7 @@ $backParams = $this->get( 'summaryParams', array() );
 				</tr>
 <?php endif; ?>
 				<tr class="total">
-					<td colspan="3"><?php echo $enc->html( $this->translate( 'client/html', 'Total' ) ); ?></td>
+					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Total' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ) ); ?></td>
 <?php if( $modify ) : ?>
 					<td class="action"></td>
@@ -274,7 +274,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $priceValue ) : ?>
 <?php	if( $taxRate > '0.00' && $priceValue > '0.00' ) : ?>
 				<tr class="tax">
-					<td colspan="3"><?php echo $enc->html( sprintf( $this->translate( 'client/html', 'Incl. %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?></td>
+					<td colspan="3"><?php echo $enc->html( sprintf( $this->translate( 'client', 'Incl. %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ) ); ?></td>
 <?php		if( $modify ) : ?>
 					<td class="action"></td>
@@ -284,7 +284,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php endforeach; ?>
 <?php if( $priceRebate > '0.00' ) : ?>
 				<tr class="rebate">
-					<td colspan="3"><?php echo $enc->html( $this->translate( 'client/html', 'Included rebates' ) ); ?></td>
+					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Included rebates' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ) ); ?></td>
 <?php	if( $modify ) : ?>
 					<td class="action"></td>
@@ -292,8 +292,8 @@ $backParams = $this->get( 'summaryParams', array() );
 				</tr>
 <?php endif; ?>
 				<tr class="quantity">
-					<td colspan="3"><?php echo $enc->html( $this->translate( 'client/html', 'Total quantity' ) ); ?></td>
-					<td class="value"><?php echo $enc->html( sprintf( $this->translate( 'client/html', '%1$d article', '%1$d articles', $totalQuantity ), $totalQuantity ) ); ?></td>
+					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Total quantity' ) ); ?></td>
+					<td class="value"><?php echo $enc->html( sprintf( $this->translate( 'client', '%1$d article', '%1$d articles', $totalQuantity ), $totalQuantity ) ); ?></td>
 <?php if( $modify ) : ?>
 					<td class="action"></td>
 <?php endif; ?>

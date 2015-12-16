@@ -51,10 +51,10 @@ $params = $this->param();
 ?>
 <section class="catalog-filter-attribute">
 <?php if( !empty( $attrMap ) ) : ?>
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Attributes' ), $enc::TRUST ); ?></h2>
+	<h2><?php echo $enc->html( $this->translate( 'client', 'Attributes' ), $enc::TRUST ); ?></h2>
 <?php	if( !empty( $attrIds ) ) : ?>
 	<div class="attribute-selected">
-		<span class="selected-intro"><?php echo $enc->html( $this->translate( 'client/html', 'Your choice' ), $enc::TRUST ); ?></span>
+		<span class="selected-intro"><?php echo $enc->html( $this->translate( 'client', 'Your choice' ), $enc::TRUST ); ?></span>
 		<ul class="attr-list">
 <?php		foreach( $attrMap as $attrType => $attributes ) : ?>
 <?php			foreach( $attributes as $id => $attribute ) : ?>
@@ -67,7 +67,7 @@ $params = $this->param();
 		</ul>
 <?php	if( count( $attrIds ) > 1 ) : ?>
 <?php		$current = $params; if( isset( $current['f_attrid'] ) ) { unset( $current['f_attrid'] ); } ?>
-		<a class="selected-all" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $current, array(), $listConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'clear all' ), $enc::TRUST ); ?></a>
+		<a class="selected-all" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $current, array(), $listConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', 'clear all' ), $enc::TRUST ); ?></a>
 <?php	endif; ?>
 	</div>
 <?php	endif; ?>
@@ -101,7 +101,7 @@ $params = $this->param();
 <?php echo $this->attributeBody; ?>
 <?php if( $button ) : ?>
 	<noscript>
-		<button class="filter standardbutton btn-action" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Show' ), $enc::TRUST ); ?></button>
+		<button class="filter standardbutton btn-action" type="submit"><?php echo $enc->html( $this->translate( 'client', 'Show' ), $enc::TRUST ); ?></button>
 	</noscript>
 <?php endif; ?>
 </section>

@@ -22,7 +22,7 @@ catch( Exception $e )
 $quantity = $this->get( 'mainQuantity', 0 );
 
 /// Price format with price value (%1$s) and currency (%2$s)
-$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+$priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 
 /** client/html/basket/standard/url/target
@@ -99,7 +99,7 @@ $basketConfig = $this->config( 'client/html/basket/standard/url/config', array()
 ?>
 <a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 	<div class="basket-mini-main">
-		<span class="quantity"><?php echo $enc->html( sprintf( $this->translate( 'client/html', '%1$d article', '%1$d articles', $quantity ), $quantity ) ); ?></span>
+		<span class="quantity"><?php echo $enc->html( sprintf( $this->translate( 'client', '%1$d article', '%1$d articles', $quantity ), $quantity ) ); ?></span>
 		<span class="value"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $miniPriceValue ), $miniPriceCurrency ) ); ?></span>
 <?php echo $this->get( 'mainBody' ); ?>
 	</div>

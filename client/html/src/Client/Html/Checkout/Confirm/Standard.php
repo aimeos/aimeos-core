@@ -129,7 +129,7 @@ class Standard
 		}
 		catch( \Aimeos\Client\Html\Exception $e )
 		{
-			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( \Aimeos\Controller\Frontend\Exception $e )
@@ -146,7 +146,7 @@ class Standard
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$error = array( $context->getI18n()->dt( 'client', 'A non-recoverable error occured' ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 
@@ -357,7 +357,7 @@ class Standard
 		}
 		catch( \Aimeos\Client\Html\Exception $e )
 		{
-			$error = array( $context->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $context->getI18n()->dt( 'client', $e->getMessage() ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 		catch( \Aimeos\Controller\Frontend\Exception $e )
@@ -374,7 +374,7 @@ class Standard
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$error = array( $context->getI18n()->dt( 'client', 'A non-recoverable error occured' ) );
 			$view->confirmErrorList = $view->get( 'confirmErrorList', array() ) + $error;
 		}
 	}

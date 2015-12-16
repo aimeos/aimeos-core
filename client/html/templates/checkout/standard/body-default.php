@@ -24,7 +24,7 @@ $stepActive = $this->get( 'standardStepActive', false );
 <section class="aimeos checkout-standard">
 	<nav>
 		<ol class="steps">
-			<li class="step basket active"><a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Basket' ), $enc::TRUST ); ?></a></li>
+			<li class="step basket active"><a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Basket' ), $enc::TRUST ); ?></a></li>
 <?php foreach( $this->get( 'standardSteps', array() ) as $name ) :
 
 		$class = '';
@@ -46,7 +46,7 @@ $stepActive = $this->get( 'standardStepActive', false );
 <?php	if( $stepActive && $link ) : ?>
 				<a href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array( 'c_step' => $name ), array(), $checkoutConfig ) ); ?>">
 <?php	endif; ?>
-					<?php echo $enc->html( $this->translate( 'client/html', $name ) ); ?>
+					<?php echo $enc->html( $this->translate( 'client', $name ) ); ?>
 <?php	if( $stepActive && $link ) : ?>
 				</a>
 <?php	endif; ?>

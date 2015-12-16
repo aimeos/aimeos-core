@@ -6,7 +6,7 @@
  */
 
 /// E-mail outro
-$string = $this->translate( 'client/html', 'If you have any questions, please reply to this e-mail' );
+$string = $this->translate( 'client', 'If you have any questions, please reply to this e-mail' );
 
 ?>
 

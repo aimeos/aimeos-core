@@ -16,7 +16,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 ?>
 <?php if( !empty( $productItems ) ) : ?>
 <section class="catalog-list-promo">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Top seller' ); ?></h2>
+	<h2 class="header"><?php echo $this->translate( 'client', 'Top seller' ); ?></h2>
 	<ul class="promo-items"><!--
 <?php	foreach( $productItems as $id => $productItem ) : ?>
 <?php		$firstImage = true; $params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $id ); ?>

@@ -5,7 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-$string = $this->translate( 'client/html', 'An account has been created for you.' );
+$string = $this->translate( 'client', 'An account has been created for you.' );
 
 ?>
 

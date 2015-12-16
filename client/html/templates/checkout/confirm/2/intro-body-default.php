@@ -9,7 +9,7 @@ $enc = $this->encoder();
 
 ?>
 <div class="checkout-confirm-intro">
-	<p class="note"><?php echo nl2br( $enc->html( $this->translate( 'client/html', 'Unfortunately, the payment for your order was refused.
+	<p class="note"><?php echo nl2br( $enc->html( $this->translate( 'client', 'Unfortunately, the payment for your order was refused.
 Do you wish to retry?' ), $enc::TRUST ) ); ?></p>
 <?php echo $this->get( 'introBody' ); ?>
 </div>

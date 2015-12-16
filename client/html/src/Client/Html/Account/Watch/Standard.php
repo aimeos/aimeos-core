@@ -85,7 +85,7 @@ class Standard
 		}
 		catch( \Aimeos\Client\Html\Exception $e )
 		{
-			$error = array( $this->getContext()->getI18n()->dt( 'client/html', $e->getMessage() ) );
+			$error = array( $this->getContext()->getI18n()->dt( 'client', $e->getMessage() ) );
 			$view->watchErrorList = $view->get( 'watchErrorList', array() ) + $error;
 		}
 		catch( \Aimeos\Controller\Frontend\Exception $e )
@@ -102,7 +102,7 @@ class Standard
 		{
 			$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 
-			$error = array( $context->getI18n()->dt( 'client/html', 'A non-recoverable error occured' ) );
+			$error = array( $context->getI18n()->dt( 'client', 'A non-recoverable error occured' ) );
 			$view->watchErrorList = $view->get( 'watchErrorList', array() ) + $error;
 		}
 
@@ -350,7 +350,7 @@ class Standard
 					{
 						if( $total >= $max )
 						{
-							$error = array( sprintf( $context->getI18n()->dt( 'client/html', 'You can only watch up to %1$s products' ), $max ) );
+							$error = array( sprintf( $context->getI18n()->dt( 'client', 'You can only watch up to %1$s products' ), $max ) );
 							$view->watchErrorList = $view->get( 'watchErrorList', array() ) + $error;
 							break;
 						}

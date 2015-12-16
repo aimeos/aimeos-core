@@ -16,7 +16,7 @@ $items = $this->get( 'quoteItems', array() );
 <?php 	foreach( $items as $quoteItem ) : ?>
 		<article><?php echo $enc->html( $quoteItem->getContent() ); ?></article>
 <?php 	endforeach; ?>
-		<a href="#"><?php echo $enc->html( $this->translate( 'client/html', 'Show all quotes' ), $enc::TRUST ); ?></a>
+		<a href="#"><?php echo $enc->html( $this->translate( 'client', 'Show all quotes' ), $enc::TRUST ); ?></a>
 	</div>
 <?php endif; ?>
 <?php echo $this->get( 'quoteBody' ); ?>

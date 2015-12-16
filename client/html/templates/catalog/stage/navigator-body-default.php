@@ -13,10 +13,10 @@ $enc = $this->encoder();
 <div class="catalog-stage-navigator">
 	<nav>
 <?php if( isset( $this->navigationPrev ) ) : ?>
-		<a class="prev" href="<?php echo $enc->attr( $this->navigationPrev ); ?>" rel="prev"><?php echo $enc->html( $this->translate( 'client/html', 'Previous' ), $enc::TRUST ); ?></a>
+		<a class="prev" href="<?php echo $enc->attr( $this->navigationPrev ); ?>" rel="prev"><?php echo $enc->html( $this->translate( 'client', 'Previous' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 <?php if( isset( $this->navigationNext ) ) : ?>
-		<a class="next" href="<?php echo $enc->attr( $this->navigationNext ); ?>" rel="next"><?php echo $enc->html( $this->translate( 'client/html', 'Next' ), $enc::TRUST ); ?></a>
+		<a class="next" href="<?php echo $enc->attr( $this->navigationNext ); ?>" rel="next"><?php echo $enc->html( $this->translate( 'client', 'Next' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 	</nav>
 <?php echo $this->get( 'navigatorBody' ); ?>

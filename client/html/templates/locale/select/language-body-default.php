@@ -34,7 +34,7 @@ $config = $this->config( 'client/html/locale/select/language/url/config', array(
 
 ?>
 <div class="locale-select-language">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Select language' ); ?></h2>
+	<h2 class="header"><?php echo $this->translate( 'client', 'Select language' ); ?></h2>
 	<ul class="select-menu">
 		<li class="select-dropdown select-current"><a href="#"><?php echo $this->translate( 'client/html/language', $langId ); ?></a>
 			<ul class="select-dropdown">

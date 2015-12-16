@@ -8,11 +8,11 @@
 $order = $this->extOrderItem;
 
 /// Delivery e-mail intro with order ID (%1$s), order date (%2$s) and delivery status (%3%s)
-$msg = $this->translate( 'client/html', 'The parcel for your order %1$s from %2$s could not be delivered.' );
+$msg = $this->translate( 'client', 'The parcel for your order %1$s from %2$s could not be delivered.' );
 
 $key = 'stat:' . $order->getDeliveryStatus();
 $status = $this->translate( 'client/html/code', $key );
-$format = $this->translate( 'client/html', 'Y-m-d' );
+$format = $this->translate( 'client', 'Y-m-d' );
 
 $string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ), $status );
 

@@ -48,7 +48,7 @@ $enc = $this->encoder();
 		<div class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></div>
 		<div class="select-value">
 			<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrconfid' ) ) ); ?>">
-				<option class="select-option" value=""><?php echo $enc->html( $this->translate( 'client/html', 'none' ) ); ?></option>
+				<option class="select-option" value=""><?php echo $enc->html( $this->translate( 'client', 'none' ) ); ?></option>
 <?php	foreach( $attributes as $id => $attribute ) : ?>
 				<option class="select-option" value="<?php echo $enc->attr( $id ); ?>">
 <?php		$priceItems = $attribute->getRefItems( 'price', 'default', 'default' ); ?>
@@ -56,7 +56,7 @@ $enc = $this->encoder();
 <?php			$value = $priceItem->getValue() + $priceItem->getCosts(); ?>
 <?php			$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
 <?php			/// Configurable product attribute name (%1$s) with sign (%4$s, +/-), price value (%2$s) and currency (%3$s) ?>
-<?php			echo $enc->html( sprintf( $this->translate( 'client/html', '%1$s ( %4$s%2$s%3$s )' ), $attribute->getName(), $this->number( abs( $value ) ), $currency, ( $value < 0 ? '−' : '+' ) ), $enc::TRUST ); ?>
+<?php			echo $enc->html( sprintf( $this->translate( 'client', '%1$s ( %4$s%2$s%3$s )' ), $attribute->getName(), $this->number( abs( $value ) ), $currency, ( $value < 0 ? '−' : '+' ) ), $enc::TRUST ); ?>
 <?php		else : ?>
 <?php			echo $enc->html( $attribute->getName(), $enc::TRUST ); ?>
 <?php		endif; ?>

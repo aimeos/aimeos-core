@@ -476,7 +476,7 @@ class Standard
 
 				if( $regex && preg_match( '/' . $regex . '/', $value ) !== 1 )
 				{
-					$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is invalid' );
+					$msg = $view->translate( 'client', 'Delivery address part "%1$s" is invalid' );
 					$invalid[$key] = sprintf( $msg, $name );
 					unset( $params[$key] );
 				}
@@ -502,7 +502,7 @@ class Standard
 		{
 			if( !isset( $params[$key] ) || $params[$key] == '' )
 			{
-				$msg = $view->translate( 'client/html', 'Delivery address part "%1$s" is missing' );
+				$msg = $view->translate( 'client', 'Delivery address part "%1$s" is missing' );
 				$invalid[$key] = sprintf( $msg, substr( $key, 19 ) );
 				unset( $params[$key] );
 			}

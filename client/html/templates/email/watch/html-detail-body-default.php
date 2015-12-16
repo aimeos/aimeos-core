@@ -15,7 +15,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 ?>
 <div class="common-summary-detail common-summary container content-block">
 	<div class="header">
-		<h2><?php echo $enc->html( $this->translate( 'client/html', 'Details' ), $enc::TRUST ); ?></h2>
+		<h2><?php echo $enc->html( $this->translate( 'client', 'Details' ), $enc::TRUST ); ?></h2>
 	</div>
 	<div class="basket">
 		<table>

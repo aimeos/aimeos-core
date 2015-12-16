@@ -17,6 +17,6 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Basket' ), $enc::TRUST ); ?></h1>
+	<h1><?php echo $enc->html( $this->translate( 'client', 'Basket' ), $enc::TRUST ); ?></h1>
 <?php echo $this->get( 'miniBody' ); ?>
 </section>

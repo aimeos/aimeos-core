@@ -42,20 +42,20 @@ $warehouseItems = $this->get( 'stockWarehouseItems', array() );
 $stockLow = $this->config( 'client/html/catalog/stock/level/low', 5 );
 
 /// Stock string composition with warehouse name (%1$s, normally left out) and stock level string (%2$s)
-$textStockIn = $this->translate( 'client/html', 'Stock: %1$s, %2$s' );
+$textStockIn = $this->translate( 'client', 'Stock: %1$s, %2$s' );
 /// Stock string composition with warehouse name (%1$s, normally left out), stock level string (%2$s) and back in stock date (%3$s)
-$textStockOut = $this->translate( 'client/html', 'Stock: %1$s, %2$s, back on %3$s' );
-$dateFormat = $this->translate( 'client/html', 'Y-m-d' );
+$textStockOut = $this->translate( 'client', 'Stock: %1$s, %2$s, back on %3$s' );
+$dateFormat = $this->translate( 'client', 'Y-m-d' );
 
 $textStock = array(
 	/// code for "product is out of stock"
-	'stock-out' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-out' ), $enc::TRUST ) ),
+	'stock-out' => nl2br( $enc->html( $this->translate( 'client', 'stock-out' ), $enc::TRUST ) ),
 	/// code for "only a few products are available"
-	'stock-low' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-low' ), $enc::TRUST ) ),
+	'stock-low' => nl2br( $enc->html( $this->translate( 'client', 'stock-low' ), $enc::TRUST ) ),
 	/// code for "product is in stock"
-	'stock-high' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-high' ), $enc::TRUST ) ),
+	'stock-high' => nl2br( $enc->html( $this->translate( 'client', 'stock-high' ), $enc::TRUST ) ),
 	/// code for "product is available (without stock limit)"
-	'stock-unlimited' => nl2br( $enc->html( $this->translate( 'client/html', 'stock-unlimited' ), $enc::TRUST ) ),
+	'stock-unlimited' => nl2br( $enc->html( $this->translate( 'client', 'stock-unlimited' ), $enc::TRUST ) ),
 );
 
 

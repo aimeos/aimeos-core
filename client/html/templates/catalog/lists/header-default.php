@@ -28,7 +28,7 @@ unset( $params['f_sort'] );
 	<meta name="description" content="<?php echo $enc->attr( strip_tags( $textItem->getContent() ) ); ?>" />
 <?php	endforeach; ?>
 <?php elseif( ( $search = $this->param( 'f_search', null ) ) != null ) : /// Product search hint with user provided search string (%1$s) ?>
-	<title><?php echo $enc->html( sprintf( $this->translate( 'client/html', 'Result for "%1$s"' ), strip_tags( $search ) ) ); ?></title>
+	<title><?php echo $enc->html( sprintf( $this->translate( 'client', 'Result for "%1$s"' ), strip_tags( $search ) ) ); ?></title>
 <?php endif; ?>
 	<link rel="canonical" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $params, array(), $listConfig ) ); ?>" />
 	<meta name="application-name" content="Aimeos" />

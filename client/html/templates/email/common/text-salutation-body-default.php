@@ -14,7 +14,7 @@ $salutations = array(
 try
 {
 	/// Payment e-mail form of address with salutation (%1$s), first name (%2$s) and last name (%3$s)
-	$msg = $this->translate( 'client/html', 'Dear %1$s %2$s %3$s' );
+	$msg = $this->translate( 'client', 'Dear %1$s %2$s %3$s' );
 	$addr = $this->extAddressItem;
 
 	$string = sprintf( $msg,

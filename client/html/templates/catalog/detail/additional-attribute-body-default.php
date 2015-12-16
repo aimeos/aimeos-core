@@ -12,7 +12,7 @@ $enc = $this->encoder();
 ?>
 <div class="additional-box">
 <?php if( count( $attrMap ) > 0 ) : ?>
-	<h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client/html', 'Characteristics' ), $enc::TRUST ); ?></h2>
+	<h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client', 'Characteristics' ), $enc::TRUST ); ?></h2>
 	<div class="content attributes">
 		<table class="attributes">
 			<tbody>

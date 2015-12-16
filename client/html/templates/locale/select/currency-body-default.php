@@ -37,7 +37,7 @@ $paramname = $this->config( 'client/html/locale/select/currency/param-name', 'lo
 
 ?>
 <div class="locale-select-currency">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Select currency' ); ?></h2>
+	<h2 class="header"><?php echo $this->translate( 'client', 'Select currency' ); ?></h2>
 	<ul class="select-menu">
 		<li class="select-dropdown select-current"><a href="#"><?php echo $this->translate( 'client/html/currency', $currencyId ); ?></a>
 			<ul class="select-dropdown">

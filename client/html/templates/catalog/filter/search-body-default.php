@@ -9,7 +9,7 @@
 $enc = $this->encoder();
 $phrase = $enc->attr( $this->param( 'f_search' ) );
 $name = $enc->attr( $this->formparam( 'f_search' ) );
-$hint = $this->translate( 'client/html', 'Please enter at least three characters' );
+$hint = $this->translate( 'client', 'Please enter at least three characters' );
 
 /** client/html/catalog/suggest/url/target
  * Destination of the URL where the controller specified in the URL is known
@@ -102,8 +102,8 @@ $suggestUrl = $enc->attr( $this->url( $suggestTarget, $suggestController, $sugge
 
 ?>
 <section class="catalog-filter-search">
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Search' ), $enc::TRUST ); ?></h2>
+	<h2><?php echo $enc->html( $this->translate( 'client', 'Search' ), $enc::TRUST ); ?></h2>
 	<input class="value" type="text" name="<?php echo $name; ?>" value="<?php echo $phrase; ?>" data-url="<?php echo $suggestUrl; ?>" data-hint="<?php echo $hint; ?>" /><!--
-	--><button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Go' ), $enc::TRUST ); ?></button>
+	--><button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client', 'Go' ), $enc::TRUST ); ?></button>
 <?php echo $this->get( 'searchBody' ); ?>
 </section>

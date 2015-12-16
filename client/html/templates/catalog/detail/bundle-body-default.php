@@ -16,7 +16,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 ?>
 <?php if( !empty( $productItems ) || $this->bundleBody != '' ) : ?>
 <section class="catalog-detail-bundle">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Bundled products' ); ?></h2>
+	<h2 class="header"><?php echo $this->translate( 'client', 'Bundled products' ); ?></h2>
 	<ul class="bundle-items"><!--
 <?php	foreach( $positionItems as $id => $item ) : ?>
 <?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; ?>

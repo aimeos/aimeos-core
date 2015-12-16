@@ -15,6 +15,6 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Related' ), $enc::TRUST ); ?></h1>
+	<h1><?php echo $enc->html( $this->translate( 'client', 'Related' ), $enc::TRUST ); ?></h1>
 <?php echo $this->get( 'relatedBody' ); ?>
 </section>

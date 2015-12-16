@@ -17,7 +17,7 @@ $enc = $this->encoder();
 ?>
 <div class="additional-box">
 <?php if( count( $items ) > 0 ) : ?>
-	<h2 class="header downloads"><?php echo $enc->html( $this->translate( 'client/html', 'Downloads' ), $enc::TRUST ); ?></h2>
+	<h2 class="header downloads"><?php echo $enc->html( $this->translate( 'client', 'Downloads' ), $enc::TRUST ); ?></h2>
 	<ul class="content downloads">
 <?php foreach( $items as $id => $item ) : ?>
 <?php	if( isset( $mediaItems[$id] ) ) { $item = $mediaItems[$id]; } ?>

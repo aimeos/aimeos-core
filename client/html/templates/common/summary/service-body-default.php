@@ -10,12 +10,12 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 
 ?>
 <div class="common-summary-service container">
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Services' ), $enc::TRUST ); ?></h2>
+	<h2><?php echo $enc->html( $this->translate( 'client', 'Services' ), $enc::TRUST ); ?></h2>
 	<div class="item delivery <?php echo ( isset( $errors['service']['delivery'] ) ? 'error' : '' ); ?>">
 		<div class="header">
-			<h3><?php echo $enc->html( $this->translate( 'client/html', 'delivery' ), $enc::TRUST ); ?></h3>
+			<h3><?php echo $enc->html( $this->translate( 'client', 'delivery' ), $enc::TRUST ); ?></h3>
 <?php if( isset( $this->summaryUrlServiceDelivery ) ) : ?>
-			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlServiceDelivery ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
+			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlServiceDelivery ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 <?php try { $service = $this->summaryBasket->getService( 'delivery' ); ?>
@@ -47,9 +47,9 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 	</div><!--
 	--><div class="item payment <?php echo ( isset( $errors['service']['payment'] ) ? 'error' : '' ); ?>">
 		<div class="header">
-			<h3><?php echo $enc->html( $this->translate( 'client/html', 'payment' ), $enc::TRUST ); ?></h3>
+			<h3><?php echo $enc->html( $this->translate( 'client', 'payment' ), $enc::TRUST ); ?></h3>
 <?php if( isset( $this->summaryUrlServicePayment ) ) : ?>
-			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlServicePayment ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
+			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlServicePayment ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 <?php try { $service = $this->summaryBasket->getService( 'payment' ); ?>

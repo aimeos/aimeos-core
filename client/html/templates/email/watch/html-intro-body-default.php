@@ -6,7 +6,7 @@
  */
 
 $enc = $this->encoder();
-$string = $this->translate( 'client/html', 'One or more products you are watching have been updated.' );
+$string = $this->translate( 'client', 'One or more products you are watching have been updated.' );
 
 ?>
 <p class="email-common-intro content-block">

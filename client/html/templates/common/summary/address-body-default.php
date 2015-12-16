@@ -16,12 +16,12 @@ $salutations = array(
 
 ?>
 <div class="common-summary-address container">
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Addresses' ), $enc::TRUST ); ?></h2>
+	<h2><?php echo $enc->html( $this->translate( 'client', 'Addresses' ), $enc::TRUST ); ?></h2>
 	<div class="item payment <?php echo ( isset( $errors['address']['payment'] ) ? 'error' : '' ); ?>">
 		<div class="header">
-			<h3><?php echo $enc->html( $this->translate( 'client/html', 'Billing address' ), $enc::TRUST ); ?></h3>
+			<h3><?php echo $enc->html( $this->translate( 'client', 'Billing address' ), $enc::TRUST ); ?></h3>
 <?php if( isset( $this->summaryUrlAddressBilling ) ) : ?>
-			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlAddressBilling ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
+			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlAddressBilling ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 		<div class="content">
@@ -35,7 +35,7 @@ $salutations = array(
 			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
 			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language (%13$s),
 			/// e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s), vatid (%18$s)
-			$this->translate( 'client/html', '%1$s
+			$this->translate( 'client', '%1$s
 %2$s %3$s %4$s %5$s
 %6$s %7$s
 %8$s
@@ -75,9 +75,9 @@ $salutations = array(
 		</div>
 	</div><div class="item delivery <?php echo ( isset( $errors['address']['delivery'] ) ? 'error' : '' ); ?>">
 		<div class="header">
-			<h3><?php echo $enc->html( $this->translate( 'client/html', 'Delivery address' ), $enc::TRUST ); ?></h3>
+			<h3><?php echo $enc->html( $this->translate( 'client', 'Delivery address' ), $enc::TRUST ); ?></h3>
 <?php if( isset( $this->summaryUrlAddressDelivery ) ) : ?>
-			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlAddressDelivery ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Change' ), $enc::TRUST ); ?></a>
+			<a class="modify" href="<?php echo $enc->attr( $this->summaryUrlAddressDelivery ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 		<div class="content">
@@ -91,7 +91,7 @@ $salutations = array(
 			/// address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
 			/// postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), vatid (%13$s), language (%14$s),
 			/// e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site (%18$s)
-			$this->translate( 'client/html', '%1$s
+			$this->translate( 'client', '%1$s
 %2$s %3$s %4$s %5$s
 %6$s %7$s
 %8$s
@@ -128,7 +128,7 @@ $salutations = array(
 	}
 	catch( Exception $e )
 	{
-		echo $enc->html( $this->translate( 'client/html', 'like billing address' ), $enc::TRUST );
+		echo $enc->html( $this->translate( 'client', 'like billing address' ), $enc::TRUST );
 	}
 ?>
 		</div>

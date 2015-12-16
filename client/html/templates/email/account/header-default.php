@@ -6,7 +6,7 @@
  */
 
 /// Account creation e-mail subject
-$this->mail()->setSubject( $this->translate( 'client/html', 'Your new account' ) );
+$this->mail()->setSubject( $this->translate( 'client', 'Your new account' ) );
 
 ?>
 <?php echo $this->get( 'accountHeader' ); ?>

@@ -78,7 +78,7 @@ $attributes = $this->get( 'selectionAttributeItems', array() );
 				</ul>
 <?php	else : ?>
 			<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrvarid', $code ) ) ); ?>" data-index="<?php echo $index++; ?>">
-				<option class="select-option" value=""><?php echo $enc->attr( $this->translate( 'client/html', 'Please select' ) ); ?></option>
+				<option class="select-option" value=""><?php echo $enc->attr( $this->translate( 'client', 'Please select' ) ); ?></option>
 <?php		foreach( $attrIds as $attrId => $position ) : ?>
 <?php			if( isset( $attributes[$attrId] ) ) : ?>
 				<option class="select-option" value="<?php echo $enc->attr( $attrId ); ?>"><?php echo $enc->html( $attributes[$attrId]->getName() ); ?></option>

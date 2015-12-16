@@ -11,9 +11,9 @@ $enc = $this->encoder();
 
 
 
-<?php echo strip_tags( $this->translate( 'client/html', 'Your account' ) ); ?>
+<?php echo strip_tags( $this->translate( 'client', 'Your account' ) ); ?>
 
-<?php	echo $this->translate( 'client/html', 'Account' ); ?>: <?php	echo $this->extAccountCode; ?>
+<?php	echo $this->translate( 'client', 'Account' ); ?>: <?php	echo $this->extAccountCode; ?>
 
-<?php	echo $this->translate( 'client/html', 'Password' ); ?>: <?php	echo $this->extAccountPassword; ?>
+<?php	echo $this->translate( 'client', 'Password' ); ?>: <?php	echo $this->extAccountPassword; ?>
 <?php echo $this->get( 'detailBody' ); ?>

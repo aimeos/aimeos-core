@@ -97,18 +97,18 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php endif; ?>
 
 <?php if( !empty( $listItems ) ) : ?>
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Favorite products' ); ?></h2>
+	<h2 class="header"><?php echo $this->translate( 'client', 'Favorite products' ); ?></h2>
 <?php	if( $this->get( 'favoritePageLast', 1 ) > 1 ) : ?>
 	<nav class="pagination">
 		<div class="sort">
 			<span>&nbsp;</span>
 		</div>
 		<div class="browser">
-			<a class="first" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageFirst ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '◀◀' ), $enc::TRUST ); ?></a>
-			<a class="prev" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePagePrev ) + $favParams, array(), $favConfig ) ); ?>" rel="prev"><?php echo $enc->html( $this->translate( 'client/html', '◀' ), $enc::TRUST ); ?></a>
-			<span><?php echo $enc->html( sprintf( $this->translate( 'client/html', 'Page %1$d of %2$d' ), $this->get( 'favoritePageCurr', 1 ), $this->get( 'favoritePageLast', 1 ) ) ); ?></span>
-			<a class="next" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageNext ) + $favParams, array(), $favConfig ) ); ?>" rel="next"><?php echo $enc->html( $this->translate( 'client/html', '▶' ), $enc::TRUST ); ?></a>
-			<a class="last" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageLast ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '▶▶' ), $enc::TRUST ); ?></a>
+			<a class="first" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageFirst ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', '◀◀' ), $enc::TRUST ); ?></a>
+			<a class="prev" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePagePrev ) + $favParams, array(), $favConfig ) ); ?>" rel="prev"><?php echo $enc->html( $this->translate( 'client', '◀' ), $enc::TRUST ); ?></a>
+			<span><?php echo $enc->html( sprintf( $this->translate( 'client', 'Page %1$d of %2$d' ), $this->get( 'favoritePageCurr', 1 ), $this->get( 'favoritePageLast', 1 ) ) ); ?></span>
+			<a class="next" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageNext ) + $favParams, array(), $favConfig ) ); ?>" rel="next"><?php echo $enc->html( $this->translate( 'client', '▶' ), $enc::TRUST ); ?></a>
+			<a class="last" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageLast ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', '▶▶' ), $enc::TRUST ); ?></a>
 		</div>
 	</nav>
 <?php	endif; ?>
@@ -118,7 +118,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; ?>
 		<li class="favorite-item">
 <?php			$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $productItem->getId() ); ?>
-			<a class="modify" href="<?php echo $this->url( $favTarget, $favController, $favAction, array( 'fav_action' => 'delete', 'fav_id' => $id ) + $favParams, array(), $favConfig ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
+			<a class="modify" href="<?php echo $this->url( $favTarget, $favController, $favAction, array( 'fav_action' => 'delete', 'fav_id' => $id ) + $favParams, array(), $favConfig ); ?>"><?php echo $this->translate( 'client', 'X' ); ?></a>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php			$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
 <?php			if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>
@@ -142,11 +142,11 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 			<span>&nbsp;</span>
 		</div>
 		<div class="browser">
-			<a class="first" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageFirst ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '◀◀' ), $enc::TRUST ); ?></a>
-			<a class="prev" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePagePrev ) + $favParams, array(), $favConfig ) ); ?>" rel="prev"><?php echo $enc->html( $this->translate( 'client/html', '◀' ), $enc::TRUST ); ?></a>
-			<span><?php echo $enc->html( sprintf( $this->translate( 'client/html', 'Page %1$d of %2$d' ), $this->get( 'favoritePageCurr', 1 ), $this->get( 'favoritePageLast', 1 ) ) ); ?></span>
-			<a class="next" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageNext ) + $favParams, array(), $favConfig ) ); ?>" rel="next"><?php echo $enc->html( $this->translate( 'client/html', '▶' ), $enc::TRUST ); ?></a>
-			<a class="last" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageLast ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', '▶▶' ), $enc::TRUST ); ?></a>
+			<a class="first" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageFirst ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', '◀◀' ), $enc::TRUST ); ?></a>
+			<a class="prev" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePagePrev ) + $favParams, array(), $favConfig ) ); ?>" rel="prev"><?php echo $enc->html( $this->translate( 'client', '◀' ), $enc::TRUST ); ?></a>
+			<span><?php echo $enc->html( sprintf( $this->translate( 'client', 'Page %1$d of %2$d' ), $this->get( 'favoritePageCurr', 1 ), $this->get( 'favoritePageLast', 1 ) ) ); ?></span>
+			<a class="next" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageNext ) + $favParams, array(), $favConfig ) ); ?>" rel="next"><?php echo $enc->html( $this->translate( 'client', '▶' ), $enc::TRUST ); ?></a>
+			<a class="last" href="<?php echo $enc->attr( $this->url( $favTarget, $favController, $favAction, array( 'fav_page' => $this->favoritePageLast ) + $favParams, array(), $favConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', '▶▶' ), $enc::TRUST ); ?></a>
 		</div>
 	</nav>
 <?php	endif; ?>

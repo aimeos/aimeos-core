@@ -9,15 +9,15 @@ $enc = $this->encoder();
 
 ?>
 <div class="checkout-confirm-basic">
-	<h2><?php echo $enc->html( $this->translate( 'client/html', 'Order status' ), $enc::TRUST ); ?></h2>
+	<h2><?php echo $enc->html( $this->translate( 'client', 'Order status' ), $enc::TRUST ); ?></h2>
 <?php if( isset( $this->confirmOrderItem ) ) : ?>
 	<ul class="attr-list">
 		<li class="form-item">
-			<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Order ID' ), $enc::TRUST ); ?></span>
+			<span class="name"><?php echo $enc->html( $this->translate( 'client', 'Order ID' ), $enc::TRUST ); ?></span>
 			<span class="value"><?php echo $enc->html( $this->confirmOrderItem->getId() ); ?></span>
 		</li>
 		<li class="form-item">
-			<span class="name"><?php echo $enc->html( $this->translate( 'client/html', 'Payment status' ), $enc::TRUST ); ?></span>
+			<span class="name"><?php echo $enc->html( $this->translate( 'client', 'Payment status' ), $enc::TRUST ); ?></span>
 			<span class="value"><?php $code = 'pay:' . $this->confirmOrderItem->getPaymentStatus(); echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></span>
 		</li>
 	</ul>

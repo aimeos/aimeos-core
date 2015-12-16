@@ -17,7 +17,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 ?>
 <?php if( !empty( $productItems ) || $this->suggestBody != '' ) : ?>
 <section class="catalog-detail-suggest">
-	<h2 class="header"><?php echo $this->translate( 'client/html', 'Suggested products' ); ?></h2>
+	<h2 class="header"><?php echo $this->translate( 'client', 'Suggested products' ); ?></h2>
 	<ul class="suggest-items">
 <?php	foreach( $positionItems as $id => $item ) : ?>
 <?php		if( isset( $productItems[$id] ) ) : $productItem = $productItems[$id]; ?>

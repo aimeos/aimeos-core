@@ -33,17 +33,17 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 	</ul>
 <?php endif; ?>
-	<h1><?php echo $enc->html( $this->translate( 'client/html', 'Basket' ), $enc::TRUST ); ?></h1>
+	<h1><?php echo $enc->html( $this->translate( 'client', 'Basket' ), $enc::TRUST ); ?></h1>
 	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 <?php echo $this->csrf()->formfield(); ?>
 <?php echo $this->get( 'standardBody' ); ?>
 		<div class="button-group">
 <?php if( isset( $this->standardBackUrl ) ) : ?>
-			<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->standardBackUrl ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Back' ), $enc::TRUST ); ?></a>
+			<a class="standardbutton btn-back" href="<?php echo $enc->attr( $this->standardBackUrl ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Back' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
-			<button class="standardbutton btn-update" type="submit"><?php echo $enc->html( $this->translate( 'client/html', 'Update' ), $enc::TRUST ); ?></button>
+			<button class="standardbutton btn-update" type="submit"><?php echo $enc->html( $this->translate( 'client', 'Update' ), $enc::TRUST ); ?></button>
 <?php if( $checkout === true ) : ?>
-			<a class="standardbutton btn-action" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array(), array(), $checkoutConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client/html', 'Checkout' ), $enc::TRUST ); ?></a>
+			<a class="standardbutton btn-action" href="<?php echo $enc->attr( $this->url( $checkoutTarget, $checkoutController, $checkoutAction, array(), array(), $checkoutConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Checkout' ), $enc::TRUST ); ?></a>
 <?php endif; ?>
 		</div>
 	</form>

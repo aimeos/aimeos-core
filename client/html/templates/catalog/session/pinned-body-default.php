@@ -103,7 +103,7 @@ $count = $this->config( 'client/html/catalog/session/pinned/count/enable', 1 );
 ?>
 <section class="catalog-session-pinned">
 	<h2 class="header">
-<?php echo $this->translate( 'client/html', 'Pinned products' ); ?>
+<?php echo $this->translate( 'client', 'Pinned products' ); ?>
 <?php if( $count ) : ?>
 		<span class="count"><?php echo count( $pinList ); ?></span>
 <?php endif; ?>
@@ -112,7 +112,7 @@ $count = $this->config( 'client/html/catalog/session/pinned/count/enable', 1 );
 <?php foreach( $pinList as $id => $productItem ) : ?>
 <?php	$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $id ); ?>
 		<li class="pinned-item">
-			<a class="modify" href="<?php echo $this->url( $pinTarget, $pinController, $pinAction, array( 'pin_action' => 'delete', 'pin_id' => $id ) + $pinParams, array(), $pinConfig ); ?>"><?php echo $this->translate( 'client/html', 'X' ); ?></a>
+			<a class="modify" href="<?php echo $this->url( $pinTarget, $pinController, $pinAction, array( 'pin_action' => 'delete', 'pin_id' => $id ) + $pinParams, array(), $pinConfig ); ?>"><?php echo $this->translate( 'client', 'X' ); ?></a>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php	$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
 <?php	if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>

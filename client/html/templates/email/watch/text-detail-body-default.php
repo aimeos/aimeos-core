@@ -15,29 +15,29 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 
 
 /// Price quantity format with quantity (%1$s)
-$quantityFormat = $this->translate( 'client/html', 'from %1$s' );
+$quantityFormat = $this->translate( 'client', 'from %1$s' );
 
 /// Price format with price value (%1$s) and currency (%2$s)
-$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+$priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 /// Price shipping format with shipping / payment cost value (%1$s) and currency (%2$s)
-$costFormat = $this->translate( 'client/html', '+ %1$s %2$s/item' );
+$costFormat = $this->translate( 'client', '+ %1$s %2$s/item' );
 
 /// Rebate format with rebate value (%1$s) and currency (%2$s)
-$rebateFormat = $this->translate( 'client/html', '%1$s %2$s off' );
+$rebateFormat = $this->translate( 'client', '%1$s %2$s off' );
 
 /// Rebate percent format with rebate percent value (%1$s)
-$rebatePercentFormat = '(' . $this->translate( 'client/html', '-%1$s%%' ) . ')';
+$rebatePercentFormat = '(' . $this->translate( 'client', '-%1$s%%' ) . ')';
 
 /// Tax rate format with tax rate in percent (%1$s)
-$vatFormat = $this->translate( 'client/html', 'Incl. %1$s%% VAT' );
+$vatFormat = $this->translate( 'client', 'Incl. %1$s%% VAT' );
 
 
 ?>
 
 
 
-<?php echo strip_tags( $this->translate( 'client/html', 'Watched products' ) ); ?>:
+<?php echo strip_tags( $this->translate( 'client', 'Watched products' ) ); ?>:
 <?php foreach( $this->extProducts as $entry ) : $product = $entry['item']; ?>
 
 <?php	echo strip_tags( $product->getName() ); ?>

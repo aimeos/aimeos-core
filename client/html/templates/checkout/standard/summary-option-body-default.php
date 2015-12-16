@@ -9,6 +9,6 @@ $enc = $this->encoder();
 
 ?>
 <div class="checkout-standard-summary-option container">
-	<h2 class="header"><?php echo $enc->html( $this->translate( 'client/html', 'Options' ), $enc::TRUST ); ?></h2>
+	<h2 class="header"><?php echo $enc->html( $this->translate( 'client', 'Options' ), $enc::TRUST ); ?></h2>
 <?php echo $this->get( 'optionBody' ); ?>
 </div>

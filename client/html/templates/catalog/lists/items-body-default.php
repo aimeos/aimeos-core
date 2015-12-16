@@ -18,9 +18,9 @@ $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index'
 $basketConfig = $this->config( 'client/html/basket/standard/url/config', array() );
 
 /// Price format with price value (%1$s) and currency (%2$s)
-$priceFormat = $this->translate( 'client/html', '%1$s %2$s' );
+$priceFormat = $this->translate( 'client', '%1$s %2$s' );
 /// Percent format with value (%1$s) and % sign
-$percentFormat = $this->translate( 'client/html', '%1$s%%' );
+$percentFormat = $this->translate( 'client', '%1$s%%' );
 
 $position = $this->get( 'itemPosition', 0 );
 
@@ -140,7 +140,7 @@ $reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', tr
 					<input name="<?php echo $enc->attr( $this->formparam( 'b_action' ) ); ?>" type="hidden" value="add" />
 					<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'prodid' ) ) ); ?>" type="hidden" value="<?php echo $id; ?>" />
 					<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'quantity' ) ) ); ?>" type="number" min="1" max="2147483647" maxlength="10" step="1" required="required" value="1" />
-					<button class="standardbutton btn-action" type="submit" value=""><?php echo $enc->html( $this->translate( 'client/html', 'Add to basket' ), $enc::TRUST ); ?></button>
+					<button class="standardbutton btn-action" type="submit" value=""><?php echo $enc->html( $this->translate( 'client', 'Add to basket' ), $enc::TRUST ); ?></button>
 				</div>
 			</div>
 		</form>

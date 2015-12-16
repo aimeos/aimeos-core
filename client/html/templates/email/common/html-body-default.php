@@ -9,7 +9,7 @@ $logoContent = false;
 $enc = $this->encoder();
 
 /// E-mail HTML title
-$title = $this->translate( 'client/html', 'E-mail notification' );
+$title = $this->translate( 'client', 'E-mail notification' );
 
 /** client/html/email/logo
  * Path to the logo image displayed in HTML e-mails

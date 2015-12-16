@@ -6,7 +6,7 @@
  */
 
 /// Payment e-mail subject with order ID
-$str = $this->translate( 'client/html', 'Your order %1$s' );
+$str = $this->translate( 'client', 'Your order %1$s' );
 $this->mail()->setSubject( sprintf( $str, $this->extOrderItem->getId() ) );
 
 ?>

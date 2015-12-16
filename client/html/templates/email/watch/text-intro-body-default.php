@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-$string = $this->translate( 'client/html', 'One or more products you are watching have been updated.' );
+$string = $this->translate( 'client', 'One or more products you are watching have been updated.' );
 
 ?>
 

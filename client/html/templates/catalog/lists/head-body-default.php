@@ -45,10 +45,10 @@ $textTypes = $this->config( 'client/html/catalog/list/head/text-types', array( '
 <?php if( $searchText != null ) : ?>
 	<div class="head-search">
 <?php	if( ( $total = $this->get( 'listProductTotal', 0 ) ) > 0 ) : ?>
-<?php		$msg = $this->translate( 'client/html', 'Search result for <span class="searchstring">"%1$s"</span> (%2$d article)', 'Search result for <span class="searchstring">"%1$s"</span> (%2$d articles)', $total ); ?>
+<?php		$msg = $this->translate( 'client', 'Search result for <span class="searchstring">"%1$s"</span> (%2$d article)', 'Search result for <span class="searchstring">"%1$s"</span> (%2$d articles)', $total ); ?>
 <?php		echo $enc->html( sprintf( $msg, $enc->html( $searchText ), $total ), $enc::TRUST ); ?>
 <?php	else : ?>
-<?php		echo $enc->html( sprintf( $this->translate( 'client/html', 'No articles found for <span class="searchstring">"%1$s"</span>. Please try again with a different keyword.' ), $enc->html( $searchText ) ), $enc::TRUST ); ?>
+<?php		echo $enc->html( sprintf( $this->translate( 'client', 'No articles found for <span class="searchstring">"%1$s"</span>. Please try again with a different keyword.' ), $enc->html( $searchText ) ), $enc::TRUST ); ?>
 <?php	endif; ?>
 	</div>
 <?php endif; ?>
