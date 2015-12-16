@@ -78,8 +78,6 @@ class Standard
 
 			$view->item = $item;
 			$view->itemTypes = $this->getTypeItems();
-
-			return;
 		}
 		catch( \Aimeos\MShop\Exception $e ) {
 			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
@@ -113,8 +111,6 @@ class Standard
 
 			$view->item = $item;
 			$view->itemTypes = $this->getTypeItems();
-
-			return;
 		}
 		catch( \Aimeos\MShop\Exception $e ) {
 			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
@@ -177,8 +173,6 @@ class Standard
 
 			$view->item = $manager->getItem( $view->param( 'id' ) );
 			$view->itemTypes = $this->getTypeItems();
-
-			return;
 		}
 		catch( \Aimeos\MShop\Exception $e ) {
 			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
@@ -263,8 +257,6 @@ class Standard
 			$view->items = $manager->searchItems( $search, array(), $total );
 			$view->filterOperators = $search->getOperators();
 			$view->total = $total;
-
-			return;
 		}
 		catch( \Aimeos\MShop\Exception $e ) {
 			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
