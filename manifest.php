@@ -14,12 +14,12 @@ return array(
 		'lib/mshoplib/src',
 		'lib/mwlib/src',
 		'client/html/src',
-		'client/jqadm/src',
 		'controller/common/src',
 		'controller/frontend/src',
 		'controller/jsonadm/src',
 		'controller/extjs/src',
 		'controller/jobs/src',
+		'admin/jqadm/src',
 		'lib/mwlib/lib',
 	),
 	'config' => array(
@@ -28,6 +28,7 @@ return array(
 		'config',
 	),
 	'i18n' => array(
+		'admin/jqadm' => 'admin/jqadm/i18n',
 		'client/extjs' => 'client/extjs/i18n',
 		'client/extjs/ext' => 'client/extjs/i18n/ext',
 		'client/html' => 'client/html/i18n',
@@ -51,8 +52,8 @@ return array(
 		'client/html/templates' => array(
 			'client/html/templates',
 		),
-		'client/jqadm/templates' => array(
-			'client/jqadm/templates',
+		'admin/jqadm/templates' => array(
+			'admin/jqadm/templates',
 		),
 		'controller/extjs' => array(
 			'controller/extjs/src',

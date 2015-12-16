@@ -43,13 +43,13 @@
 			"Aimeos\\MW\\": "lib/mwlib/src/MW/",
 			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
 			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
-			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
-			"Aimeos\\Client\\JQAdm\\": "client/jqadm/src/Client/JQAdm/",
 			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
 			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
 			"Aimeos\\Controller\\JsonAdm\\": "controller/jobs/src/Controller/JsonAdm/",
 			"Aimeos\\Controller\\ExtJS\\": "controller/extjs/src/Controller/ExtJS/",
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
+			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
+			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/",
 			"Aimeos\\": ".",
 			"\\": "lib/mwlib/lib/"
 		},
@@ -57,13 +57,13 @@
 			"lib/mshoplib/src",
 			"lib/mwlib/lib",
 			"lib/mwlib/src",
-			"client/html/src",
-			"client/jqadm/src",
 			"controller/common/src",
 			"controller/frontend/src",
 			"controller/jsonadm/src",
 			"controller/extjs/src",
 			"controller/jobs/src",
+			"client/html/src",
+			"admin/jqadm/src",
 			"Bootstrap.php"
 		]
 	}

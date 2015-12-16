@@ -19,6 +19,7 @@
 
 
 	<target name="coverage" description="Creates coverage reports">
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/frontend" />
@@ -26,7 +27,7 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mwlib" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -40,6 +41,7 @@
 
 
 	<target name="test" description="Executes unit tests">
+		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
@@ -47,7 +49,7 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mwlib" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -60,10 +62,10 @@
 	</target>
 
 	<target name="testperf" description="Executes performance tests">
-		<phing target="testperf" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
-		<phing target="testperf" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mwlib" />
+		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="testperf" haltonfailure="true" dir="${coredir}/controller/jobs" />
+		<phing target="testperf" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="testperf" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -74,6 +76,7 @@
 
 	<target name="check" description="Executes all checks">
 		<property name="codestddir" value="${project.basedir}/misc/coding" override="true" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/frontend" />
@@ -82,7 +85,7 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="check" haltonfailure="false" dir="${coredir}/client/extjs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mwlib" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -100,6 +103,12 @@
 		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
+		<confdoc keyprefix="admin/jqadm" wikiprefix="Configuration/Core" keyparts="1"
+			outfile="${coredir}/misc/confdoc/core-admin-jqadm.wiki">
+			<fileset dir="${coredir}/admin/jqadm" expandsymboliclinks="true" >
+				<include name="src/**/*.php" />
+			</fileset>
+		</confdoc>
 		<confdoc keyprefix="client/extjs" wikiprefix="Configuration/Core" keyparts="1"
 			outfile="${coredir}/misc/confdoc/core-client-extjs.wiki">
 			<fileset dir="${coredir}/client/extjs" expandsymboliclinks="true" >
@@ -203,6 +212,7 @@
 
 	<target name="clean" description="Cleans up temporary files">
 		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
@@ -210,7 +220,7 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mwlib" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -220,14 +230,15 @@
 
 
 	<target name="i18n" description="Creates all translation files">
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/extjs" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/extjs" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -240,14 +251,15 @@
 		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/misc/phing" />
 		<jsbpackages />
 		<exec command="tx pull -a -f --minimum-perc=1" checkreturn="true" logoutput="true" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/client/extjs" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/client/extjs" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/client/html" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
