@@ -7,12 +7,12 @@ Ext.ns('MShop.elements.domain');
 
 MShop.elements.domain.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Domain'),
+        fieldLabel : MShop.I18n.dt('admin', 'Domain'),
         anchor : '100%',
         store : MShop.elements.domain.getStore(),
         mode : 'local',
         displayField : 'label',
-        emptyText : MShop.I18n.dt('client/extjs', 'Domain (required)'),
+        emptyText : MShop.I18n.dt('admin', 'Domain (required)'),
         valueField : 'value',
         triggerAction : 'all',
         allowEmpty : false,
@@ -44,16 +44,16 @@ MShop.elements.domain.getStore = function() {
                 type : 'string'
             }],
             data : [
-                ['attribute', MShop.I18n.dt('client/extjs', 'Attribute')],
-                ['catalog', MShop.I18n.dt('client/extjs', 'Catalog')],
-                ['customer', MShop.I18n.dt('client/extjs', 'Customer')],
-                ['media', MShop.I18n.dt('client/extjs', 'Media')],
-                ['plugin', MShop.I18n.dt('client/extjs', 'Plugin')],
-                ['price', MShop.I18n.dt('client/extjs', 'Price')],
-                ['product', MShop.I18n.dt('client/extjs', 'Product')],
-                ['service', MShop.I18n.dt('client/extjs', 'Service')],
-                ['supplier', MShop.I18n.dt('client/extjs', 'Supplier')],
-                ['text', MShop.I18n.dt('client/extjs', 'Text')]]
+                ['attribute', MShop.I18n.dt('admin', 'Attribute')],
+                ['catalog', MShop.I18n.dt('admin', 'Catalog')],
+                ['customer', MShop.I18n.dt('admin', 'Customer')],
+                ['media', MShop.I18n.dt('admin', 'Media')],
+                ['plugin', MShop.I18n.dt('admin', 'Plugin')],
+                ['price', MShop.I18n.dt('admin', 'Price')],
+                ['product', MShop.I18n.dt('admin', 'Product')],
+                ['service', MShop.I18n.dt('admin', 'Service')],
+                ['supplier', MShop.I18n.dt('admin', 'Supplier')],
+                ['text', MShop.I18n.dt('admin', 'Text')]]
         });
     }
 

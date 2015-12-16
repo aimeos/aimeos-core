@@ -22,7 +22,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -35,7 +35,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -49,14 +49,14 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'plugin.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'plugin.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'plugin.typeid',
                             mode : 'local',
                             store : MShop.GlobalStoreMgr.get('Plugin_Type'),
@@ -78,37 +78,37 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             }
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Provider'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Provider'),
                             name : 'plugin.provider',
                             allowBlank : false,
                             maxLength : 255,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Name of the plugin provider class (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Name of the plugin provider class (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'plugin.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'numberfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Position'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Position'),
                             name : 'plugin.position',
                             allowDecimals : false,
                             allowBlank : false,
                             value : 0
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'plugin.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'plugin.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'plugin.editor'
                         }]
                     }]
@@ -128,9 +128,9 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 
     afterRender : function() {
-        var label = this.record ? this.record.data['plugin.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['plugin.label'] : MShop.I18n.dt('admin', 'new');
         //#: Plugin item panel title with attribute label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Plugin: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Plugin: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.plugin.ItemUi.superclass.afterRender.apply(this, arguments);

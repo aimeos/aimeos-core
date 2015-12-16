@@ -170,8 +170,8 @@ MShop.panel.AbstractUsedByListUi = Ext.extend(Ext.Panel, {
     },
 
     onStoreException : function(proxy, type, action, options, response) {
-        var title = MShop.I18n.dt('client/extjs', 'Error');
-        var errmsg = MShop.I18n.dt('client/extjs', 'No error information available');
+        var title = MShop.I18n.dt('admin', 'Error');
+        var errmsg = MShop.I18n.dt('admin', 'No error information available');
         var msg = response && response.error ? Ext.util.Format.nl2br( response.error.message ) : errmsg;
         var code = response && response.error ? response.error.code : 0;
 

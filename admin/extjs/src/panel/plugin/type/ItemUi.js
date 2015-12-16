@@ -17,9 +17,9 @@ MShop.panel.plugin.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['plugin.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['plugin.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Plugin type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Plugin type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Plugin type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.plugin.type.ItemUi.superclass.afterRender.apply(this, arguments);

@@ -47,14 +47,14 @@ MShop.panel.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'attribute.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -62,33 +62,33 @@ MShop.panel.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 80,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "attribute.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 80
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false,
             id : 'attribute-list-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.position',
-            header : MShop.I18n.dt('client/extjs', 'Position'),
+            header : MShop.I18n.dt('admin', 'Position'),
             sortable : true,
             width : 50,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 120,
             editable : false,
@@ -96,7 +96,7 @@ MShop.panel.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 120,
             editable : false,
@@ -104,7 +104,7 @@ MShop.panel.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 120,
             editable : false,

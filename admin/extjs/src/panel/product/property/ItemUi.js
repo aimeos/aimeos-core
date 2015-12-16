@@ -16,7 +16,7 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Properties');
+        this.title = MShop.I18n.dt('admin', 'Properties');
         this.typeStore = MShop.GlobalStoreMgr.get('Product_Property_Type');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
@@ -29,7 +29,7 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -43,7 +43,7 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -61,11 +61,11 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             name : 'product.property.parentid'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'product.property.id'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'product.property.typeid',
                             mode : 'local',
                             store : this.typeStore,
@@ -80,21 +80,21 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             name : 'product.property.languageid'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Value'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Value'),
                             name : 'product.property.value',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Property value (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Property value (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'product.property.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'product.property.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'product.property.editor'
                         }]
                     }]
@@ -108,7 +108,7 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }

@@ -23,7 +23,7 @@ MShop.panel.customer.group.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, 
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Available customer groups');
+        this.title = MShop.I18n.dt('admin', 'Available customer groups');
 
         MShop.panel.customer.group.ListUiSmall.superclass.initComponent.call(this);
     },
@@ -32,38 +32,38 @@ MShop.panel.customer.group.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, 
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'customer.group.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.group.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.group.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             id : 'customer-group-label'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.group.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.group.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.group.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             hidden : true
         }];

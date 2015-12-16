@@ -22,7 +22,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -35,7 +35,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -50,14 +50,14 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'product.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'product.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'product.typeid',
                             mode : 'local',
                             store : MShop.GlobalStoreMgr.get('Product_Type'),
@@ -79,42 +79,42 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             }
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'product.code',
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'EAN, SKU or article number (required)')
+                            emptyText : MShop.I18n.dt('admin', 'EAN, SKU or article number (required)')
                         }, {
                             xtype : 'textarea',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'product.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Start date'),
                             name : 'product.datestart',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'End date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'End date'),
                             name : 'product.dateend',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'product.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'product.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'product.editor'
                         }]
                     }]
@@ -133,9 +133,9 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['product.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['product.label'] : MShop.I18n.dt('admin', 'new');
         //#: Product item panel title with product label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Product: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Product: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.ItemUi.superclass.afterRender.apply(this, arguments);

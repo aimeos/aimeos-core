@@ -23,7 +23,7 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Address');
+        this.title = MShop.I18n.dt('admin', 'Address');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -61,19 +61,19 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.company',
-            header : MShop.I18n.dt('client/extjs', 'Company'),
+            header : MShop.I18n.dt('admin', 'Company'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.vatid',
-            header : MShop.I18n.dt('client/extjs', 'Vat ID'),
+            header : MShop.I18n.dt('admin', 'Vat ID'),
             width : 100,
             hidden : true
         }, {
@@ -84,56 +84,56 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.title',
-            header : MShop.I18n.dt('client/extjs', 'Title'),
+            header : MShop.I18n.dt('admin', 'Title'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.firstname',
-            header : MShop.I18n.dt('client/extjs', 'Firstname'),
+            header : MShop.I18n.dt('admin', 'Firstname'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.lastname',
-            header : MShop.I18n.dt('client/extjs', 'Lastname'),
+            header : MShop.I18n.dt('admin', 'Lastname'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.address1',
-            header : MShop.I18n.dt('client/extjs', 'Street'),
+            header : MShop.I18n.dt('admin', 'Street'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.address2',
-            header : MShop.I18n.dt('client/extjs', 'House no'),
+            header : MShop.I18n.dt('admin', 'House no'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.address3',
-            header : MShop.I18n.dt('client/extjs', 'Additional'),
+            header : MShop.I18n.dt('admin', 'Additional'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.postal',
-            header : MShop.I18n.dt('client/extjs', 'Zip code'),
+            header : MShop.I18n.dt('admin', 'Zip code'),
             width : 70
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.city',
-            header : MShop.I18n.dt('client/extjs', 'City'),
+            header : MShop.I18n.dt('admin', 'City'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.state',
-            header : MShop.I18n.dt('client/extjs', 'State'),
+            header : MShop.I18n.dt('admin', 'State'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.countryid',
-            header : MShop.I18n.dt('client/extjs', 'Country'),
+            header : MShop.I18n.dt('admin', 'Country'),
             width : 30
         }, {
             dataIndex : 'supplier.address.languageid',
@@ -143,18 +143,18 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.telephone',
-            header : MShop.I18n.dt('client/extjs', 'Telephone'),
+            header : MShop.I18n.dt('admin', 'Telephone'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.telefax',
-            header : MShop.I18n.dt('client/extjs', 'Telefax'),
+            header : MShop.I18n.dt('admin', 'Telefax'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.email',
-            header : MShop.I18n.dt('client/extjs', 'E-Mail'),
+            header : MShop.I18n.dt('admin', 'E-Mail'),
             id : 'supplier-address-email'
         }, {
             xtype : 'gridcolumn',
@@ -164,21 +164,21 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'supplier.address.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'supplier.address.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             hidden : true
         }];

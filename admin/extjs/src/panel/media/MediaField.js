@@ -56,12 +56,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         });
 
         this.loadMask = new Ext.LoadMask(this.buttonCt, {
-            msg : MShop.I18n.dt('client/extjs', 'Loading'),
+            msg : MShop.I18n.dt('admin', 'Loading'),
             msgCls : 'x-mask-loading'
         });
 
         // the click to edit text container
-        var clickToEditText = MShop.I18n.dt('client/extjs', 'Click to upload');
+        var clickToEditText = MShop.I18n.dt('admin', 'Click to upload');
         this.textCt = Ext.DomHelper.insertFirst(this.buttonCt, '<div class="x-ux-from-imagefield-text">' +
             clickToEditText + '</div>', true);
         this.textCt.setSize(this.width, this.height / 3);
@@ -149,8 +149,8 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     onUploadFail : function(uploader, response) {
 
         var msg, code;
-        var title = MShop.I18n.dt('client/extjs', 'Upload failed');
-        var errmsg = MShop.I18n.dt('client/extjs', 'Could not upload file. Please notify your administrator');
+        var title = MShop.I18n.dt('admin', 'Upload failed');
+        var errmsg = MShop.I18n.dt('admin', 'Could not upload file. Please notify your administrator');
 
         if(response && response.data && response.data.error) {
             msg = response.data.error.message ? Ext.util.Format.nl2br( response.data.error.message ) : errmsg;
@@ -204,8 +204,8 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
             }, this);
 
             img.on('error', function() {
-                Ext.MessageBox.alert(MShop.I18n.dt('client/extjs', 'Upload failed'),
-                    MShop.I18n.dt('client/extjs', 'Could not upload file. Please notify your administrator')).setIcon(
+                Ext.MessageBox.alert(MShop.I18n.dt('admin', 'Upload failed'),
+                    MShop.I18n.dt('admin', 'Could not upload file. Please notify your administrator')).setIcon(
                     Ext.MessageBox.ERROR);
                 this.loadMask.hide();
             }, this);

@@ -17,7 +17,7 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Order item details');
+        this.title = MShop.I18n.dt('admin', 'Order item details');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
@@ -29,7 +29,7 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -42,7 +42,7 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Invoice'),
+                    title : MShop.I18n.dt('admin', 'Invoice'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -57,21 +57,21 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'order.id'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Source'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Source'),
                             name : 'order.type'
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Payment date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Payment date'),
                             name : 'order.datepayment',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Payment status'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Payment status'),
                             name : 'order.statuspayment',
                             mode : 'local',
                             store : MShop.elements.paymentstatus._store,
@@ -82,13 +82,13 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             typeAhead : true
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Delivery date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Delivery date'),
                             name : 'order.datedelivery',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Delivery status'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Delivery status'),
                             name : 'order.statusdelivery',
                             mode : 'local',
                             store : MShop.elements.deliverystatus._store,
@@ -99,15 +99,15 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             typeAhead : true
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'order.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'order.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'order.editor'
                         }]
                     }]

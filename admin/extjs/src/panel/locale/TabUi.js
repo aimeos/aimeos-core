@@ -20,7 +20,7 @@ MShop.panel.locale.TabUi = Ext.extend(Ext.Panel, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Locale');
+        this.title = MShop.I18n.dt('admin', 'Locale');
 
         this.items = [{
             xtype : 'tabpanel',

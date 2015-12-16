@@ -7,14 +7,14 @@ Ext.ns('MShop.elements.siteLanguage');
 
 MShop.elements.siteLanguage.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Language'),
+        fieldLabel : MShop.I18n.dt('admin', 'Language'),
         anchor : '100%',
         store : MShop.elements.siteLanguage.getStore(),
         mode : 'local',
         displayField : 'label',
         valueField : 'label',
         triggerAction : 'all',
-        emptyText : MShop.I18n.dt('client/extjs', 'Language')
+        emptyText : MShop.I18n.dt('admin', 'Language')
     });
 
     MShop.elements.siteLanguage.ComboBox.superclass.constructor.call(this, config);
@@ -43,7 +43,7 @@ Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
         var languageCode = language ? language.get('id') : 'en';
 
         new Ext.LoadMask(Ext.getBody(), {
-            msg : MShop.I18n.dt('client/extjs', 'Switching language ...')
+            msg : MShop.I18n.dt('admin', 'Switching language ...')
         }).show();
 
         MShop.urlManager.redirect({

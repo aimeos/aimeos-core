@@ -17,7 +17,7 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -30,7 +30,7 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -45,36 +45,36 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'supplier.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'supplier.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'supplier.code',
                             allowBlank : false,
                             maxLength : 32,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textarea',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'supplier.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'supplier.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'supplier.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'supplier.editor'
                         }]
                     }]
@@ -86,9 +86,9 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['supplier.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['supplier.label'] : MShop.I18n.dt('admin', 'new');
         //#: Supplier item panel title with supplier label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Supplier: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Supplier: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.ItemUi.superclass.afterRender.apply(this, arguments);

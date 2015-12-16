@@ -23,7 +23,7 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -36,7 +36,7 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -50,46 +50,46 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'coupon.code.id'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'coupon.code.code',
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'numberfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Count'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Count'),
                             name : 'coupon.code.count',
                             allowDecimals : false,
                             allowBlank : false,
                             value : 1
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Start date'),
                             name : 'coupon.code.datestart',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'End date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'End date'),
                             name : 'coupon.code.dateend',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'coupon.code.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'coupon.code.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'coupon.code.editor'
                         }]
                     }]
@@ -105,9 +105,9 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     afterRender : function() {
 
-        var label = this.record ? this.record.data['coupon.code.code'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['coupon.code.code'] : MShop.I18n.dt('admin', 'new');
         //#: Coupon code item panel title with coupon code ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Coupon code: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Coupon code: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.coupon.code.ItemUi.superclass.afterRender.apply(this, arguments);

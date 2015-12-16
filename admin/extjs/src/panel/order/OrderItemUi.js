@@ -12,7 +12,7 @@ MShop.panel.order.OrderUi = Ext.extend(Ext.FormPanel, {
     idProperty : 'order.base.id',
     siteidProperty : 'order.base.siteid',
 
-    title : MShop.I18n.dt('client/extjs', 'Order'),
+    title : MShop.I18n.dt('admin', 'Order'),
     layout : 'fit',
     flex : 1,
 
@@ -32,31 +32,31 @@ MShop.panel.order.OrderUi = Ext.extend(Ext.FormPanel, {
             },
             items : [{
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Base ID'),
+                fieldLabel : MShop.I18n.dt('admin', 'Base ID'),
                 name : 'order.base.id'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Site'),
+                fieldLabel : MShop.I18n.dt('admin', 'Site'),
                 name : 'order.base.sitecode'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Customer'),
+                fieldLabel : MShop.I18n.dt('admin', 'Customer'),
                 name : 'order.base.customerid'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Currency'),
+                fieldLabel : MShop.I18n.dt('admin', 'Currency'),
                 name : 'order.base.currencyid'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Total'),
+                fieldLabel : MShop.I18n.dt('admin', 'Total'),
                 name : 'order.base.price'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Costs'),
+                fieldLabel : MShop.I18n.dt('admin', 'Costs'),
                 name : 'order.base.costs'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Comment'),
+                fieldLabel : MShop.I18n.dt('admin', 'Comment'),
                 name : 'order.base.comment'
             }]
         }];

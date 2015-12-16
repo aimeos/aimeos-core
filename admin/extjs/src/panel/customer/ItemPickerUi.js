@@ -8,19 +8,19 @@ Ext.ns('MShop.panel.customer');
 
 MShop.panel.customer.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Customer'),
+    title : MShop.I18n.dt('admin', 'Customer'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated customers'),
+            title : MShop.I18n.dt('admin', 'Associated customers'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'customer',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available customers'),
+            title : MShop.I18n.dt('admin', 'Available customers'),
             xtype : 'MShop.panel.customer.listuismall'
         });
 
@@ -36,7 +36,7 @@ MShop.panel.customer.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicke
         return [{
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'typeid',
-            header : MShop.I18n.dt('client/extjs', 'List type'),
+            header : MShop.I18n.dt('admin', 'List type'),
             id : 'listtype',
             width : 70,
             renderer : this.typeColumnRenderer.createDelegate(this,
@@ -44,21 +44,21 @@ MShop.panel.customer.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicke
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             id : 'refstatus',
             width : 50,
             renderer : this.refStatusColumnRenderer.createDelegate(this, ['customer.status'], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'User name'),
+            header : MShop.I18n.dt('admin', 'User name'),
             id : 'refcode',
             width : 150,
             renderer : this.refColumnRenderer.createDelegate(this, ['customer.code'], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Full name'),
+            header : MShop.I18n.dt('admin', 'Full name'),
             id : 'refcontent',
             renderer : this.refColumnRenderer.createDelegate(this, ['customer.label'], true)
         }];

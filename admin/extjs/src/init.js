@@ -6,11 +6,11 @@
 /* superglobal lang stubs */
 
 _ = function(string) {
-    return MShop.I18n.dt('client/extjs/ext', string);
+    return MShop.I18n.dt('admin/ext', string);
 };
 
 _n = function(singular, plural, num) {
-    return MShop.I18n.dn('client/extjs/ext', singular, plural, num);
+    return MShop.I18n.dn('admin/ext', singular, plural, num);
 };
 
 //init config and translations

@@ -117,7 +117,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
         Ext.apply(this.grid, {
             viewConfig : {
-                emptyText : MShop.I18n.dt('client/extjs', 'No items'),
+                emptyText : MShop.I18n.dt('admin', 'No items'),
                 getRowClass : function(record, index) {
 
                     var siteid = MShop.config.site['locale.site.id'];
@@ -135,36 +135,36 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
     initActions : function() {
         this.actionAdd = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Add'),
+            text : MShop.I18n.dt('admin', 'Add'),
             handler : this.onOpenEditWindow.createDelegate(this, ['add'])
         });
 
         this.actionEdit = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Edit'),
+            text : MShop.I18n.dt('admin', 'Edit'),
             disabled : true,
             handler : this.onOpenEditWindow.createDelegate(this, ['edit'])
         });
 
         this.actionCopy = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Copy'),
+            text : MShop.I18n.dt('admin', 'Copy'),
             disabled : true,
             handler : this.onOpenEditWindow.createDelegate(this, ['copy'])
         });
 
         this.actionDelete = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Delete'),
+            text : MShop.I18n.dt('admin', 'Delete'),
             disabled : true,
             handler : this.onDeleteSelectedItems.createDelegate(this)
         });
 
         this.actionExport = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Export'),
+            text : MShop.I18n.dt('admin', 'Export'),
             disabled : (this.exportMethod === null),
             handler : this.onExport ? this.onExport.createDelegate(this) : Ext.emptyFn
         });
 
         this.actionImport = new MShop.elements.ImportButton({
-            text : MShop.I18n.dt('client/extjs', 'Import'),
+            text : MShop.I18n.dt('admin', 'Import'),
             disabled : (this.importMethod === null),
             importMethod : this.importMethod,
             handler : this.onFileSelect ? this.onFileSelect.createDelegate(this) : null
@@ -251,8 +251,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
         var that = this;
 
         Ext.Msg.show({
-            title : MShop.I18n.dt('client/extjs', 'Delete items?'),
-            msg : MShop.I18n.dt('client/extjs', 'You are going to delete one or more items. Would you like to proceed?'),
+            title : MShop.I18n.dt('admin', 'Delete items?'),
+            msg : MShop.I18n.dt('admin', 'You are going to delete one or more items. Would you like to proceed?'),
             buttons : Ext.Msg.YESNO,
             fn : function(btn) {
                 if(btn == 'yes') {
@@ -338,8 +338,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
     onStoreException : function(proxy, type, action, options, response) {
         var msg, code;
-        var title = MShop.I18n.dt('client/extjs', 'Error');
-        var errmsg = MShop.I18n.dt('client/extjs', 'No error information available');
+        var title = MShop.I18n.dt('admin', 'Error');
+        var errmsg = MShop.I18n.dt('admin', 'No error information available');
 
         if(response.error !== undefined) {
             msg = response && response.error ? Ext.util.Format.nl2br( response.error.message ) : errmsg;

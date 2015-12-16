@@ -29,7 +29,7 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Logs');
+        this.title = MShop.I18n.dt('admin', 'Logs');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -50,31 +50,31 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'log.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.facility',
-            header : MShop.I18n.dt('client/extjs', 'Facility'),
+            header : MShop.I18n.dt('admin', 'Facility'),
             width : 50,
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'log.timestamp',
-            header : MShop.I18n.dt('client/extjs', 'Date'),
+            header : MShop.I18n.dt('admin', 'Date'),
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.priority',
-            header : MShop.I18n.dt('client/extjs', 'Priority'),
+            header : MShop.I18n.dt('admin', 'Priority'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.message',
-            header : MShop.I18n.dt('client/extjs', 'Message'),
+            header : MShop.I18n.dt('admin', 'Message'),
             id : 'list-log-message',
             renderer : function(data) {
                 try {
@@ -92,13 +92,13 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.request',
-            header : MShop.I18n.dt('client/extjs', 'Request'),
+            header : MShop.I18n.dt('admin', 'Request'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 120,
             editable : false,
@@ -106,7 +106,7 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 120,
             editable : false,
@@ -114,7 +114,7 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 120,
             editable : false,

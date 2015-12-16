@@ -23,7 +23,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Customer');
+        this.title = MShop.I18n.dt('admin', 'Customer');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -35,7 +35,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'customer.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -43,7 +43,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
@@ -51,42 +51,42 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.code',
-            header : MShop.I18n.dt('client/extjs', 'User name'),
+            header : MShop.I18n.dt('admin', 'User name'),
             sortable : true,
             width : 100,
             id : 'customer-list-code'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.password',
-            header : MShop.I18n.dt('client/extjs', 'Password'),
+            header : MShop.I18n.dt('admin', 'Password'),
             sortable : false,
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.label',
-            header : MShop.I18n.dt('client/extjs', 'Full name'),
+            header : MShop.I18n.dt('admin', 'Full name'),
             sortable : true,
             width : 100,
             id : 'customer-list-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.birthday',
-            header : MShop.I18n.dt('client/extjs', 'Birthday'),
+            header : MShop.I18n.dt('admin', 'Birthday'),
             sortable : false,
             width : 100,
             format : 'Y-m-d'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.dateverified',
-            header : MShop.I18n.dt('client/extjs', 'Verification date'),
+            header : MShop.I18n.dt('admin', 'Verification date'),
             sortable : false,
             width : 100,
             format : 'Y-m-d'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -94,7 +94,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -102,7 +102,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true

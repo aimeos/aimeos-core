@@ -10,7 +10,7 @@ MShop.panel.cache.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Cache item details');
+        this.title = MShop.I18n.dt('admin', 'Cache item details');
 
         this.items = [{
             xtype : 'tabpanel',
@@ -20,7 +20,7 @@ MShop.panel.cache.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -33,7 +33,7 @@ MShop.panel.cache.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -48,19 +48,19 @@ MShop.panel.cache.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'cache.id'
                         }, {
                             xtype : 'textarea',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Value'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Value'),
                             name : 'cache.value',
                             allowBlank : false
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Expires'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Expires'),
                             name : 'cache.expire',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }]
                     }]
                 }]

@@ -7,7 +7,7 @@ Ext.ns('MShop.elements.language');
 
 MShop.elements.language.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Language'),
+        fieldLabel : MShop.I18n.dt('admin', 'Language'),
         anchor : '100%',
         store : MShop.elements.language.getStore(),
         mode : 'local',
@@ -16,7 +16,7 @@ MShop.elements.language.ComboBox = function(config) {
         statusField : 'locale.language.status',
         triggerAction : 'all',
         pageSize : 20,
-        emptyText : MShop.I18n.dt('client/extjs', 'All'),
+        emptyText : MShop.I18n.dt('admin', 'All'),
         typeAhead : true
     });
 
@@ -42,7 +42,7 @@ MShop.elements.language.renderer = function(langId, metaData, record, rowIndex, 
     }
 
     metaData.css = 'statustext-1';
-    return langId || MShop.I18n.dt('client/extjs', 'All');
+    return langId || MShop.I18n.dt('admin', 'All');
 };
 
 /**

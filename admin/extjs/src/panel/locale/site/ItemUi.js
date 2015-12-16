@@ -26,7 +26,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -38,7 +38,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     flex : 1,
                     ref : '../../mainForm',
@@ -54,36 +54,36 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'locale.site.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'locale.site.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'locale.site.code',
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'locale.site.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'locale.site.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'locale.site.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'locale.site.editor'
                         }]
                     }]
@@ -102,9 +102,9 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['locale.site.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['locale.site.label'] : MShop.I18n.dt('admin', 'new');
         //#: Locale site item panel title with site label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Locale site: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Locale site: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.locale.site.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -118,7 +118,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     onSaveItem : function() {
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }

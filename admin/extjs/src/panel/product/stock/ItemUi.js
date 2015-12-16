@@ -16,7 +16,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Product stock');
+        this.title = MShop.I18n.dt('admin', 'Product stock');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
@@ -28,7 +28,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -42,7 +42,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -60,11 +60,11 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             name : 'product.stock.parentid'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'product.stock.id'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Warehouse'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Warehouse'),
                             name : 'product.stock.warehouseid',
                             mode : 'local',
                             store : MShop.GlobalStoreMgr.get('Product_Stock_Warehouse', this.domain),
@@ -85,26 +85,26 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             }
                         }, {
                             xtype : 'numberfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Stock level'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Stock level'),
                             name : 'product.stock.stocklevel',
-                            emptyText : MShop.I18n.dt('client/extjs', 'Quantity or empty if unlimited (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'Quantity or empty if unlimited (optional)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Back in stock'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Back in stock'),
                             name : 'product.stock.dateback',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'product.stock.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'product.stock.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'product.stock.editor'
                         }]
                     }]
@@ -118,7 +118,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }

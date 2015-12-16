@@ -22,7 +22,7 @@ MShop.panel.customer.group.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             itemId : 'MShop.panel.customer.group.ItemUi',
             plugins : ['ux.itemregistry'],
             items : [{
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 xtype : 'panel',
                 layout : 'fit',
                 border : false,
@@ -32,7 +32,7 @@ MShop.panel.customer.group.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -46,31 +46,31 @@ MShop.panel.customer.group.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'customer.group.id'
                         }, {
                             xtype : 'textfield',
                             name : 'customer.group.code',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)'),
                             maxLength : 32
                         }, {
                             xtype : 'textfield',
                             name : 'customer.group.label',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Group label (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
+                            emptyText : MShop.I18n.dt('admin', 'Group label (required)'),
                             maxLength : 255
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'customer.group.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'customer.group.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'customer.group.editor'
                         }]
                     }]
@@ -84,9 +84,9 @@ MShop.panel.customer.group.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
     afterRender : function() {
 
-        var label = this.record ? this.record.data['customer.group.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['customer.group.label'] : MShop.I18n.dt('admin', 'new');
         //#: Customer group item panel title with customer name ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Customer group: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Customer group: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.customer.group.ItemUi.superclass.afterRender.apply(this, arguments);

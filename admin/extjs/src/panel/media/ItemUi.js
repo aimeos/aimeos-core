@@ -21,7 +21,7 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -33,7 +33,7 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     border : false,
                     flex : 1,
@@ -51,14 +51,14 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'media.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'media.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'media.typeid',
                             mode : 'local',
                             store : this.listUI.itemTypeStore,
@@ -83,22 +83,22 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             name : 'media.languageid'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Mimetype'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Mimetype'),
                             name : 'media.mimetype'
                         }, {
                             xtype : 'textfield',
                             name : 'media.label',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'textfield',
                             name : 'media.preview',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Preview URL')
+                            fieldLabel : MShop.I18n.dt('admin', 'Preview URL')
                         }, {
                             xtype : 'textfield',
                             name : 'media.url',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'File URL')
+                            fieldLabel : MShop.I18n.dt('admin', 'File URL')
                         }, {
                             // NOTE: this is not used as a field, more like a
                             // component which works on the whole record
@@ -109,15 +109,15 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             height : 360
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'media.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'media.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'media.editor'
                         }]
                     }]
@@ -130,9 +130,9 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 
     afterRender : function() {
-        var label = this.record ? this.record.data['media.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['media.label'] : MShop.I18n.dt('admin', 'new');
         //#: Media item panel title with media label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Media: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Media: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.media.ItemUi.superclass.afterRender.apply(this, arguments);

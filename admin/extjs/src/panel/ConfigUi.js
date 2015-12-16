@@ -11,7 +11,7 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
     autoExpandColumn : 'config-value',
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Configuration');
+        this.title = MShop.I18n.dt('admin', 'Configuration');
         this.colModel = this.getColumnModel();
         this.tbar = this.getToolBar();
         this.store = this.getStore();
@@ -34,7 +34,7 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
     getToolBar : function() {
         var that = this;
         return new Ext.Toolbar([{
-            text : MShop.I18n.dt('client/extjs', 'Add'),
+            text : MShop.I18n.dt('admin', 'Add'),
 
             handler : function() {
                 that.store.insert(0, new that.record({
@@ -43,7 +43,7 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
                 }));
             }
         }, {
-            text : MShop.I18n.dt('client/extjs', 'Delete'),
+            text : MShop.I18n.dt('admin', 'Delete'),
 
             handler : function() {
                 Ext.each(that.getSelectionModel().getSelections(), function(selection, idx) {
@@ -67,13 +67,13 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
                 sortable : true
             },
             columns : [{
-                header : MShop.I18n.dt('client/extjs', 'Name'),
+                header : MShop.I18n.dt('admin', 'Name'),
                 dataIndex : 'name',
                 editor : {
                     xtype : 'textfield'
                 }
             }, {
-                header : MShop.I18n.dt('client/extjs', 'Value'),
+                header : MShop.I18n.dt('admin', 'Value'),
                 dataIndex : 'value',
                 editor : {
                     xtype : 'textfield'
@@ -119,8 +119,8 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
                     try {
                         obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
                     } catch(err) {
-                        Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), String.format(MShop.I18n.dt(
-                            'client/extjs', 'Invalid value for configuration key "{0}"'), obj.record.data.name));
+                        Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), String.format(MShop.I18n.dt(
+                            'admin', 'Invalid value for configuration key "{0}"'), obj.record.data.name));
 
                         throw new Ext.Error('InvalidData', obj.record.data);
                     }

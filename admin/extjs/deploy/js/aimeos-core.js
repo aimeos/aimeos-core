@@ -352,11 +352,11 @@ MShop.I18n = {
 /* superglobal lang stubs */
 
 _ = function(string) {
-    return MShop.I18n.dt('client/extjs/ext', string);
+    return MShop.I18n.dt('admin/ext', string);
 };
 
 _n = function(singular, plural, num) {
-    return MShop.I18n.dn('client/extjs/ext', singular, plural, num);
+    return MShop.I18n.dn('admin/ext', singular, plural, num);
 };
 
 //init config and translations
@@ -507,7 +507,7 @@ MShop.Schema = {
     getSchema : function(schemaName) {
         if(!this.schemaMap.hasOwnProperty(schemaName)) {
             /// Schema error message with schema name ({0})
-            var msg = MShop.I18n.dt('client/extjs', 'Schema {0} is  not registered');
+            var msg = MShop.I18n.dt('admin', 'Schema {0} is  not registered');
             throw new Ext.Error(String.format(msg, schemaName));
         }
 
@@ -517,7 +517,7 @@ MShop.Schema = {
     getSearchSchema : function(schemaName) {
         if(!this.searchSchemaMap.hasOwnProperty(schemaName)) {
             /// Search schema error message with search schema name ({0})
-            var msg = MShop.I18n.dt('client/extjs', 'Search schema {0} is  not registered');
+            var msg = MShop.I18n.dt('admin', 'Search schema {0} is  not registered');
             throw new Ext.Error(String.format(msg, schemaName));
         }
 
@@ -2687,7 +2687,7 @@ Ext.extend(MShop.elements.site.ComboBox, Ext.form.ComboBox, {
         var siteCode = site ? site.get('locale.site.code') : 'default';
 
         new Ext.LoadMask(Ext.getBody(), {
-            msg : MShop.I18n.dt('client/extjs', 'Switching site ...')
+            msg : MShop.I18n.dt('admin', 'Switching site ...')
         }).show();
 
         MShop.urlManager.redirect({
@@ -2739,14 +2739,14 @@ Ext.ns('MShop.elements.siteLanguage');
 
 MShop.elements.siteLanguage.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Language'),
+        fieldLabel : MShop.I18n.dt('admin', 'Language'),
         anchor : '100%',
         store : MShop.elements.siteLanguage.getStore(),
         mode : 'local',
         displayField : 'label',
         valueField : 'label',
         triggerAction : 'all',
-        emptyText : MShop.I18n.dt('client/extjs', 'Language')
+        emptyText : MShop.I18n.dt('admin', 'Language')
     });
 
     MShop.elements.siteLanguage.ComboBox.superclass.constructor.call(this, config);
@@ -2775,7 +2775,7 @@ Ext.extend(MShop.elements.siteLanguage.ComboBox, Ext.form.ComboBox, {
         var languageCode = language ? language.get('id') : 'en';
 
         new Ext.LoadMask(Ext.getBody(), {
-            msg : MShop.I18n.dt('client/extjs', 'Switching language ...')
+            msg : MShop.I18n.dt('admin', 'Switching language ...')
         }).show();
 
         MShop.urlManager.redirect({
@@ -2884,7 +2884,7 @@ Ext.ns('MShop.elements.language');
 
 MShop.elements.language.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Language'),
+        fieldLabel : MShop.I18n.dt('admin', 'Language'),
         anchor : '100%',
         store : MShop.elements.language.getStore(),
         mode : 'local',
@@ -2893,7 +2893,7 @@ MShop.elements.language.ComboBox = function(config) {
         statusField : 'locale.language.status',
         triggerAction : 'all',
         pageSize : 20,
-        emptyText : MShop.I18n.dt('client/extjs', 'All'),
+        emptyText : MShop.I18n.dt('admin', 'All'),
         typeAhead : true
     });
 
@@ -2919,7 +2919,7 @@ MShop.elements.language.renderer = function(langId, metaData, record, rowIndex, 
     }
 
     metaData.css = 'statustext-1';
-    return langId || MShop.I18n.dt('client/extjs', 'All');
+    return langId || MShop.I18n.dt('admin', 'All');
 };
 
 /**
@@ -2979,7 +2979,7 @@ Ext.ns('MShop.elements.currency');
 MShop.elements.currency.ComboBox = function(config) {
 
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Currency'),
+        fieldLabel : MShop.I18n.dt('admin', 'Currency'),
         anchor : '100%',
         store : MShop.elements.currency.getStore(),
         mode : 'local',
@@ -3050,7 +3050,7 @@ Ext.ns('MShop.elements.salutation');
 
 MShop.elements.salutation.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Salutation'),
+        fieldLabel : MShop.I18n.dt('admin', 'Salutation'),
         anchor : '100%',
         store : MShop.elements.salutation.getStore(),
         mode : 'local',
@@ -3105,11 +3105,11 @@ MShop.elements.salutation.getStore = function() {
                 type : 'string'
             }],
             data : [
-                ['', MShop.I18n.dt('client/extjs', 'unknown')],
-                ['company', MShop.I18n.dt('client/extjs', 'Company')],
-                ['mr', MShop.I18n.dt('client/extjs', 'Mr')],
-                ['mrs', MShop.I18n.dt('client/extjs', 'Mrs')],
-                ['miss', MShop.I18n.dt('client/extjs', 'Miss')]
+                ['', MShop.I18n.dt('admin', 'unknown')],
+                ['company', MShop.I18n.dt('admin', 'Company')],
+                ['mr', MShop.I18n.dt('admin', 'Mr')],
+                ['mrs', MShop.I18n.dt('admin', 'Mrs')],
+                ['miss', MShop.I18n.dt('admin', 'Miss')]
             ]
         });
     }
@@ -3125,7 +3125,7 @@ Ext.ns('MShop.elements.status');
 
 MShop.elements.status.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Status'),
+        fieldLabel : MShop.I18n.dt('admin', 'Status'),
         anchor : '100%',
         store : MShop.elements.status.getStore(),
         mode : 'local',
@@ -3161,10 +3161,10 @@ MShop.elements.status.getStore = function() {
                 type : 'string'
             }],
             data : [
-                [-2, MShop.I18n.dt('client/extjs', 'status:archive')],
-                [-1, MShop.I18n.dt('client/extjs', 'status:review')],
-                [0, MShop.I18n.dt('client/extjs', 'status:disabled')],
-                [1, MShop.I18n.dt('client/extjs', 'status:enabled')]]
+                [-2, MShop.I18n.dt('admin', 'status:archive')],
+                [-1, MShop.I18n.dt('admin', 'status:review')],
+                [0, MShop.I18n.dt('admin', 'status:disabled')],
+                [1, MShop.I18n.dt('admin', 'status:enabled')]]
         });
     }
 
@@ -3179,12 +3179,12 @@ Ext.ns('MShop.elements.domain');
 
 MShop.elements.domain.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Domain'),
+        fieldLabel : MShop.I18n.dt('admin', 'Domain'),
         anchor : '100%',
         store : MShop.elements.domain.getStore(),
         mode : 'local',
         displayField : 'label',
-        emptyText : MShop.I18n.dt('client/extjs', 'Domain (required)'),
+        emptyText : MShop.I18n.dt('admin', 'Domain (required)'),
         valueField : 'value',
         triggerAction : 'all',
         allowEmpty : false,
@@ -3216,16 +3216,16 @@ MShop.elements.domain.getStore = function() {
                 type : 'string'
             }],
             data : [
-                ['attribute', MShop.I18n.dt('client/extjs', 'Attribute')],
-                ['catalog', MShop.I18n.dt('client/extjs', 'Catalog')],
-                ['customer', MShop.I18n.dt('client/extjs', 'Customer')],
-                ['media', MShop.I18n.dt('client/extjs', 'Media')],
-                ['plugin', MShop.I18n.dt('client/extjs', 'Plugin')],
-                ['price', MShop.I18n.dt('client/extjs', 'Price')],
-                ['product', MShop.I18n.dt('client/extjs', 'Product')],
-                ['service', MShop.I18n.dt('client/extjs', 'Service')],
-                ['supplier', MShop.I18n.dt('client/extjs', 'Supplier')],
-                ['text', MShop.I18n.dt('client/extjs', 'Text')]]
+                ['attribute', MShop.I18n.dt('admin', 'Attribute')],
+                ['catalog', MShop.I18n.dt('admin', 'Catalog')],
+                ['customer', MShop.I18n.dt('admin', 'Customer')],
+                ['media', MShop.I18n.dt('admin', 'Media')],
+                ['plugin', MShop.I18n.dt('admin', 'Plugin')],
+                ['price', MShop.I18n.dt('admin', 'Price')],
+                ['product', MShop.I18n.dt('admin', 'Product')],
+                ['service', MShop.I18n.dt('admin', 'Service')],
+                ['supplier', MShop.I18n.dt('admin', 'Supplier')],
+                ['text', MShop.I18n.dt('admin', 'Text')]]
         });
     }
 
@@ -3350,7 +3350,7 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
         Ext.apply(this.grid, {
             viewConfig : {
-                emptyText : MShop.I18n.dt('client/extjs', 'No items'),
+                emptyText : MShop.I18n.dt('admin', 'No items'),
                 getRowClass : function(record, index) {
 
                     var siteid = MShop.config.site['locale.site.id'];
@@ -3368,36 +3368,36 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
     initActions : function() {
         this.actionAdd = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Add'),
+            text : MShop.I18n.dt('admin', 'Add'),
             handler : this.onOpenEditWindow.createDelegate(this, ['add'])
         });
 
         this.actionEdit = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Edit'),
+            text : MShop.I18n.dt('admin', 'Edit'),
             disabled : true,
             handler : this.onOpenEditWindow.createDelegate(this, ['edit'])
         });
 
         this.actionCopy = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Copy'),
+            text : MShop.I18n.dt('admin', 'Copy'),
             disabled : true,
             handler : this.onOpenEditWindow.createDelegate(this, ['copy'])
         });
 
         this.actionDelete = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Delete'),
+            text : MShop.I18n.dt('admin', 'Delete'),
             disabled : true,
             handler : this.onDeleteSelectedItems.createDelegate(this)
         });
 
         this.actionExport = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Export'),
+            text : MShop.I18n.dt('admin', 'Export'),
             disabled : (this.exportMethod === null),
             handler : this.onExport ? this.onExport.createDelegate(this) : Ext.emptyFn
         });
 
         this.actionImport = new MShop.elements.ImportButton({
-            text : MShop.I18n.dt('client/extjs', 'Import'),
+            text : MShop.I18n.dt('admin', 'Import'),
             disabled : (this.importMethod === null),
             importMethod : this.importMethod,
             handler : this.onFileSelect ? this.onFileSelect.createDelegate(this) : null
@@ -3484,8 +3484,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
         var that = this;
 
         Ext.Msg.show({
-            title : MShop.I18n.dt('client/extjs', 'Delete items?'),
-            msg : MShop.I18n.dt('client/extjs', 'You are going to delete one or more items. Would you like to proceed?'),
+            title : MShop.I18n.dt('admin', 'Delete items?'),
+            msg : MShop.I18n.dt('admin', 'You are going to delete one or more items. Would you like to proceed?'),
             buttons : Ext.Msg.YESNO,
             fn : function(btn) {
                 if(btn == 'yes') {
@@ -3571,8 +3571,8 @@ MShop.panel.AbstractListUi = Ext.extend(Ext.Panel, {
 
     onStoreException : function(proxy, type, action, options, response) {
         var msg, code;
-        var title = MShop.I18n.dt('client/extjs', 'Error');
-        var errmsg = MShop.I18n.dt('client/extjs', 'No error information available');
+        var title = MShop.I18n.dt('admin', 'Error');
+        var errmsg = MShop.I18n.dt('admin', 'No error information available');
 
         if(response.error !== undefined) {
             msg = response && response.error ? Ext.util.Format.nl2br( response.error.message ) : errmsg;
@@ -3768,14 +3768,14 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
             hideBorders : true,
             items : [{
                 xtype : 'button',
-                text : MShop.I18n.dt('client/extjs', 'Cancel'),
+                text : MShop.I18n.dt('admin', 'Cancel'),
                 width : 120,
                 scale : 'medium',
                 handler : this.close,
                 scope : this
             }, {
                 xtype : 'button',
-                text : MShop.I18n.dt('client/extjs', 'Save'),
+                text : MShop.I18n.dt('admin', 'Save'),
                 width : 120,
                 scale : 'medium',
                 handler : this.onSaveItem,
@@ -3826,7 +3826,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
         });
 
         this.saveMask = new Ext.LoadMask(this.el, {
-            msg : MShop.I18n.dt('client/extjs', 'Saving')
+            msg : MShop.I18n.dt('admin', 'Saving')
         });
     },
 
@@ -3874,7 +3874,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }
@@ -3960,7 +3960,7 @@ MShop.panel.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -3987,7 +3987,7 @@ MShop.panel.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : this.typeDomain + '.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
@@ -4000,29 +4000,29 @@ MShop.panel.AbstractTypeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         }, {
                             xtype : 'textfield',
                             name : this.typeDomain + '.code',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
                             name : this.typeDomain + '.label',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : this.typeDomain + '.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : this.typeDomain + '.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : this.typeDomain + '.editor'
                         }]
                     }]
@@ -4063,7 +4063,7 @@ MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }
@@ -4106,7 +4106,7 @@ MShop.panel.AbstractListItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         if(index != -1) {
             this.isSaveing = false;
             this.saveMask.hide();
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'This combination already exists'));
             return;
         }
@@ -4157,7 +4157,7 @@ MShop.panel.AbstractTreeItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }
@@ -4279,7 +4279,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     onOpenEditWindow : function(action) {
         if(action === 'add') {
-            return Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Select Item'), MShop.I18n.dt('client/extjs',
+            return Ext.Msg.alert(MShop.I18n.dt('admin', 'Select Item'), MShop.I18n.dt('admin',
                 'Please select an item on the right side and add it via drag and drop to this list.'));
         }
 
@@ -4347,19 +4347,19 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Ref-ID'),
+            header : MShop.I18n.dt('admin', 'Ref-ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'status',
-            header : MShop.I18n.dt('client/extjs', 'List Status'),
+            header : MShop.I18n.dt('admin', 'List Status'),
             width : 50,
             hidden : true,
             align : 'center',
@@ -4367,27 +4367,27 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'position',
-            header : MShop.I18n.dt('client/extjs', 'Position'),
+            header : MShop.I18n.dt('admin', 'Position'),
             width : 50,
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'datestart',
-            header : MShop.I18n.dt('client/extjs', 'Start date'),
+            header : MShop.I18n.dt('admin', 'Start date'),
             width : 120,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'dateend',
-            header : MShop.I18n.dt('client/extjs', 'End date'),
+            header : MShop.I18n.dt('admin', 'End date'),
             width : 120,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'config',
-            header : MShop.I18n.dt('client/extjs', 'Configuration'),
+            header : MShop.I18n.dt('admin', 'Configuration'),
             width : 200,
             editable : false,
             hidden : true,
@@ -4404,21 +4404,21 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 120,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 120,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 50,
             hidden : true
         }].concat(this.getAdditionalColumns() || []);
@@ -4439,7 +4439,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'List item details');
+        this.title = MShop.I18n.dt('admin', 'List item details');
 
         this.items = [{
             xtype : 'form',
@@ -4461,7 +4461,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     name : this.listUI.listNamePrefix + 'status'
                 }, {
                     xtype : 'combo',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'List type'),
+                    fieldLabel : MShop.I18n.dt('admin', 'List type'),
                     name : this.listUI.listNamePrefix + 'typeid',
                     mode : 'local',
                     store : this.listUI.itemTypeStore,
@@ -4472,21 +4472,21 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     allowBlank : false,
                     typeAhead : true,
                     anchor : '100%',
-                    emptyText : MShop.I18n.dt('client/extjs', 'List type')
+                    emptyText : MShop.I18n.dt('admin', 'List type')
                 }, {
                     xtype : 'datefield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Start date'),
                     name : this.listUI.listNamePrefix + 'datestart',
                     format : 'Y-m-d H:i:s',
                     anchor : '100%',
-                    emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                    emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                 }, {
                     xtype : 'datefield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'End date'),
+                    fieldLabel : MShop.I18n.dt('admin', 'End date'),
                     name : this.listUI.listNamePrefix + 'dateend',
                     format : 'Y-m-d H:i:s',
                     anchor : '100%',
-                    emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                    emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                 }].concat(this.getAdditionalFields() || [])
             }, {
                 xtype : 'MShop.panel.configui',
@@ -4502,7 +4502,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }
@@ -4542,7 +4542,7 @@ MShop.panel.ListItemItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
         if(index != -1) {
             this.isSaveing = false;
             this.saveMask.hide();
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'This combination already exists'));
             return;
         }
@@ -4627,7 +4627,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend(Ext.Panel, {
 
         Ext.apply(this.itemListUi.grid, {
             viewConfig : {
-                emptyText : MShop.I18n.dt('client/extjs', 'No items'),
+                emptyText : MShop.I18n.dt('admin', 'No items'),
                 getRowClass : function(record, index) {
 
                     siteid = MShop.config.site['locale.site.id'];
@@ -4863,7 +4863,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend(Ext.Panel, {
 
     typeColumnRenderer : function(refId, metaData, record, rowIndex, colIndex, store, typeStore, displayField) {
         if(Ext.isEmpty(displayField)) {
-            throw new Ext.Error(MShop.I18n.dt('client/extjs', 'Display field is empty'));
+            throw new Ext.Error(MShop.I18n.dt('admin', 'Display field is empty'));
         }
 
         if(!Ext.isEmpty(refId)) {
@@ -4919,7 +4919,7 @@ MShop.panel.AbstractListItemPickerUi = Ext.extend(Ext.Panel, {
         var refItem = this.getRefStore().getById(refId);
 
         if(refItem) {
-            return refItem.get(displayField) || MShop.I18n.dt('client/extjs', 'All');
+            return refItem.get(displayField) || MShop.I18n.dt('admin', 'All');
         }
 
         return '';
@@ -5163,8 +5163,8 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
         var that = this;
 
         Ext.Msg.show({
-            title : MShop.I18n.dt('client/extjs', 'Delete items?'),
-            msg : MShop.I18n.dt('client/extjs', 'You are going to delete one or more items. Would you like to proceed?'),
+            title : MShop.I18n.dt('admin', 'Delete items?'),
+            msg : MShop.I18n.dt('admin', 'You are going to delete one or more items. Would you like to proceed?'),
             buttons : Ext.Msg.YESNO,
             fn : function(btn) {
                 if(btn == 'yes') {
@@ -5239,7 +5239,7 @@ MShop.panel.AbstractTreeUi = Ext.extend(Ext.tree.TreePanel, {
                 case 'destroy':
                     break; // do nothing
                 default:
-                    throw new Ext.Error(String.format(MShop.I18n.dt('client/extjs', 'Invalid action "{0}"'), action));
+                    throw new Ext.Error(String.format(MShop.I18n.dt('admin', 'Invalid action "{0}"'), action));
             }
         }, this);
     },
@@ -5278,7 +5278,7 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
     autoExpandColumn : 'config-value',
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Configuration');
+        this.title = MShop.I18n.dt('admin', 'Configuration');
         this.colModel = this.getColumnModel();
         this.tbar = this.getToolBar();
         this.store = this.getStore();
@@ -5301,7 +5301,7 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
     getToolBar : function() {
         var that = this;
         return new Ext.Toolbar([{
-            text : MShop.I18n.dt('client/extjs', 'Add'),
+            text : MShop.I18n.dt('admin', 'Add'),
 
             handler : function() {
                 that.store.insert(0, new that.record({
@@ -5310,7 +5310,7 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
                 }));
             }
         }, {
-            text : MShop.I18n.dt('client/extjs', 'Delete'),
+            text : MShop.I18n.dt('admin', 'Delete'),
 
             handler : function() {
                 Ext.each(that.getSelectionModel().getSelections(), function(selection, idx) {
@@ -5334,13 +5334,13 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
                 sortable : true
             },
             columns : [{
-                header : MShop.I18n.dt('client/extjs', 'Name'),
+                header : MShop.I18n.dt('admin', 'Name'),
                 dataIndex : 'name',
                 editor : {
                     xtype : 'textfield'
                 }
             }, {
-                header : MShop.I18n.dt('client/extjs', 'Value'),
+                header : MShop.I18n.dt('admin', 'Value'),
                 dataIndex : 'value',
                 editor : {
                     xtype : 'textfield'
@@ -5386,8 +5386,8 @@ MShop.panel.ConfigUi = Ext.extend(Ext.grid.EditorGridPanel, {
                     try {
                         obj.record.data.value = Ext.util.JSON.decode(obj.record.data.value);
                     } catch(err) {
-                        Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), String.format(MShop.I18n.dt(
-                            'client/extjs', 'Invalid value for configuration key "{0}"'), obj.record.data.name));
+                        Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), String.format(MShop.I18n.dt(
+                            'admin', 'Invalid value for configuration key "{0}"'), obj.record.data.name));
 
                         throw new Ext.Error('InvalidData', obj.record.data);
                     }
@@ -5476,7 +5476,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.id',
-                header : MShop.I18n.dt('client/extjs', 'ID'),
+                header : MShop.I18n.dt('admin', 'ID'),
                 sortable : true,
                 editable : false,
                 hidden : true
@@ -5484,7 +5484,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.label',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 sortable : true,
                 align : 'left',
                 id : 'price-label'
@@ -5492,7 +5492,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.status',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 sortable : true,
                 width : 50,
                 align : 'center',
@@ -5501,21 +5501,21 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.typeid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 width : 70,
                 renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "price.type.label"], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.currencyid',
-                header : MShop.I18n.dt('client/extjs', 'Currency'),
+                header : MShop.I18n.dt('admin', 'Currency'),
                 sortable : true,
                 width : 50
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.quantity',
-                header : MShop.I18n.dt('client/extjs', 'Quantity'),
+                header : MShop.I18n.dt('admin', 'Quantity'),
                 sortable : true,
                 width : 70,
                 align : 'right'
@@ -5523,7 +5523,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'numbercolumn',
                 dataIndex : 'price.value',
-                header : MShop.I18n.dt('client/extjs', 'Price'),
+                header : MShop.I18n.dt('admin', 'Price'),
                 sortable : true,
                 width : 100,
                 id : 'price-list-price',
@@ -5532,7 +5532,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'numbercolumn',
                 dataIndex : 'price.rebate',
-                header : MShop.I18n.dt('client/extjs', 'Rebate'),
+                header : MShop.I18n.dt('admin', 'Rebate'),
                 sortable : true,
                 width : 70,
                 hidden : true,
@@ -5541,7 +5541,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'numbercolumn',
                 dataIndex : 'price.costs',
-                header : MShop.I18n.dt('client/extjs', 'Costs'),
+                header : MShop.I18n.dt('admin', 'Costs'),
                 sortable : true,
                 width : 70,
                 hidden : true,
@@ -5550,7 +5550,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.taxrate',
-                header : MShop.I18n.dt('client/extjs', 'Tax rate'),
+                header : MShop.I18n.dt('admin', 'Tax rate'),
                 sortable : true,
                 width : 70,
                 align : 'right',
@@ -5560,7 +5560,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.ctime',
-                header : MShop.I18n.dt('client/extjs', 'Created'),
+                header : MShop.I18n.dt('admin', 'Created'),
                 sortable : true,
                 width : 120,
                 editable : false,
@@ -5569,7 +5569,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.mtime',
-                header : MShop.I18n.dt('client/extjs', 'Last modified'),
+                header : MShop.I18n.dt('admin', 'Last modified'),
                 sortable : true,
                 width : 120,
                 editable : false,
@@ -5578,7 +5578,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'price.editor',
-                header : MShop.I18n.dt('client/extjs', 'Editor'),
+                header : MShop.I18n.dt('admin', 'Editor'),
                 sortable : true,
                 width : 120,
                 editable : false,
@@ -5611,7 +5611,7 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -5624,7 +5624,7 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -5639,14 +5639,14 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'price.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'price.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'price.typeid',
                             mode : 'local',
                             store : this.listUI.ItemTypeStore,
@@ -5668,57 +5668,57 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             }
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'price.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'MShop.elements.currency.combo',
                             name : 'price.currencyid',
-                            emptyText : MShop.I18n.dt('client/extjs', 'Currency (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Currency (required)')
                         }, {
                             xtype : 'numberfield',
                             name : 'price.quantity',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Minimum quantity'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Minimum quantity'),
                             allowNegative : false,
                             allowDecimals : false,
                             allowBlank : false,
                             value : 1
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Actual current price'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Actual current price'),
                             name : 'price.value',
                             allowBlank : false,
                             value : '0.00'
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Substracted rebate amount'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Substracted rebate amount'),
                             name : 'price.rebate',
                             allowBlank : false,
                             value : '0.00'
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Service fees'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Service fees'),
                             name : 'price.costs',
                             allowBlank : false,
                             value : '0.00'
                         }, {
                             xtype : 'ux.decimalfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Tax rate in %'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Tax rate in %'),
                             name : 'price.taxrate',
                             allowBlank : false,
                             value : '0.00'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'price.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'price.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'price.editor'
                         }]
                     }]
@@ -5730,9 +5730,9 @@ MShop.panel.price.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['price.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['price.label'] : MShop.I18n.dt('admin', 'new');
         //#: Price item panel title with price label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Price: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Price: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.price.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -5750,19 +5750,19 @@ Ext.ns('MShop.panel.price');
 
 MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Price'),
+    title : MShop.I18n.dt('admin', 'Price'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated prices'),
+            title : MShop.I18n.dt('admin', 'Associated prices'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'price',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available prices'),
+            title : MShop.I18n.dt('admin', 'Available prices'),
             xtype : 'MShop.panel.price.listuismall'
         });
 
@@ -5812,7 +5812,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 id : 'listtype',
                 width : 70,
                 renderer : this.typeColumnRenderer.createDelegate(this,
@@ -5821,7 +5821,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 id : 'refstatus',
                 width : 50,
                 align : 'center',
@@ -5830,7 +5830,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 id : 'reftype',
                 width : 70,
                 renderer : this.refTypeColumnRenderer.createDelegate(this, [
@@ -5841,7 +5841,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 id : 'reflabel',
                 width : 100,
                 renderer : this.refColumnRenderer.createDelegate(this, ["price.label"], true)
@@ -5849,7 +5849,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Currency'),
+                header : MShop.I18n.dt('admin', 'Currency'),
                 id : 'refcurrency',
                 width : 50,
                 renderer : this.refColumnRenderer.createDelegate(this, ["price.currencyid"], true)
@@ -5857,7 +5857,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Quantity'),
+                header : MShop.I18n.dt('admin', 'Quantity'),
                 id : 'refquantiy',
                 width : 70,
                 align : 'right',
@@ -5866,7 +5866,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Price'),
+                header : MShop.I18n.dt('admin', 'Price'),
                 id : 'refcontent',
                 align : 'right',
                 renderer : this.refDecimalColumnRenderer.createDelegate(this, ["price.value"], true)
@@ -5874,7 +5874,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Rebate'),
+                header : MShop.I18n.dt('admin', 'Rebate'),
                 id : 'refrebate',
                 width : 70,
                 align : 'right',
@@ -5884,7 +5884,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Costs'),
+                header : MShop.I18n.dt('admin', 'Costs'),
                 sortable : false,
                 id : 'refshipping',
                 width : 70,
@@ -5895,7 +5895,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Tax rate'),
+                header : MShop.I18n.dt('admin', 'Tax rate'),
                 sortable : false,
                 id : 'reftaxrate',
                 width : 70,
@@ -5930,7 +5930,7 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
             this.plugins.push(this.browsePlugin);
 
             this.loadMask = new Ext.LoadMask(Ext.getBody(), {
-                msg : MShop.I18n.dt('client/extjs', 'Loading'),
+                msg : MShop.I18n.dt('admin', 'Loading'),
                 msgCls : 'x-mask-loading'
             });
 
@@ -5968,8 +5968,8 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
         onUploadFail : function() {
             this.loadMask.hide();
 
-            Ext.MessageBox.alert(MShop.I18n.dt('client/extjs', 'Upload failed'),
-                MShop.I18n.dt('client/extjs', 'Could not upload file. Please notify your administrator')).setIcon(
+            Ext.MessageBox.alert(MShop.I18n.dt('admin', 'Upload failed'),
+                MShop.I18n.dt('admin', 'Could not upload file. Please notify your administrator')).setIcon(
                 Ext.MessageBox.ERROR);
         },
 
@@ -5980,9 +5980,9 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
             this.loadMask.hide();
 
             Ext.MessageBox.alert(
-                MShop.I18n.dt('client/extjs', 'Upload successful'),
+                MShop.I18n.dt('admin', 'Upload successful'),
                 MShop.I18n.dt(
-                    'client/extjs',
+                    'admin',
                     'The texts of your uploaded file will be imported within a few minutes. You can check the status of the import in the "Job" panel of the "Overview" tab'));
         }
     });
@@ -6008,7 +6008,7 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
         constrain : true,
         maximized : true,
         layout : 'fit',
-        title : MShop.I18n.dt('client/extjs', 'Select languages to export'),
+        title : MShop.I18n.dt('admin', 'Select languages to export'),
 
         gridItemList : null,
         gridList : null,
@@ -6060,19 +6060,19 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
                 columns : [{
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.status',
-                    header : MShop.I18n.dt('client/extjs', 'Status'),
+                    header : MShop.I18n.dt('admin', 'Status'),
                     width : 50,
                     renderer : this.statusColumnRenderer
                 }, {
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.id',
-                    header : MShop.I18n.dt('client/extjs', 'ID'),
+                    header : MShop.I18n.dt('admin', 'ID'),
                     width : 50
                 }, {
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.label',
                     id : 'dd-global-language-label',
-                    header : MShop.I18n.dt('client/extjs', 'Label')
+                    header : MShop.I18n.dt('admin', 'Label')
                 }]
             }, this.gridConfig));
 
@@ -6085,14 +6085,14 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
                 columns : [{
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.status',
-                    header : MShop.I18n.dt('client/extjs', 'Status'),
+                    header : MShop.I18n.dt('admin', 'Status'),
                     width : 50,
                     sortable : true,
                     renderer : this.statusColumnRenderer
                 }, {
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.id',
-                    header : MShop.I18n.dt('client/extjs', 'ID'),
+                    header : MShop.I18n.dt('admin', 'ID'),
                     sortable : true,
                     width : 50
                 }, {
@@ -6100,7 +6100,7 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
                     dataIndex : 'locale.language.label',
                     id : 'global-language-label',
                     sortable : true,
-                    header : MShop.I18n.dt('client/extjs', 'Label')
+                    header : MShop.I18n.dt('admin', 'Label')
                 }],
                 tbar : Ext.apply({
                     xtype : 'ux.advancedsearch',
@@ -6146,7 +6146,7 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
 
         initActions : function() {
             this.actionDelete = new Ext.Action({
-                text : MShop.I18n.dt('client/extjs', 'Delete'),
+                text : MShop.I18n.dt('admin', 'Delete'),
                 disabled : true,
                 handler : this.onDeleteSelectedItems.createDelegate(this)
             });
@@ -6277,8 +6277,8 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
             var that = this;
 
             Ext.Msg.show({
-                title : MShop.I18n.dt('client/extjs', 'Delete items?'),
-                msg : MShop.I18n.dt('client/extjs',
+                title : MShop.I18n.dt('admin', 'Delete items?'),
+                msg : MShop.I18n.dt('admin',
                     'You are going to delete one or more items. Would you like to proceed?'),
                 buttons : Ext.Msg.YESNO,
                 fn : function(btn) {
@@ -6308,14 +6308,14 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
                 hideBorders : true,
                 items : [{
                     xtype : 'button',
-                    text : MShop.I18n.dt('client/extjs', 'Cancel'),
+                    text : MShop.I18n.dt('admin', 'Cancel'),
                     width : 120,
                     scale : 'medium',
                     handler : this.close,
                     scope : this
                 }, {
                     xtype : 'button',
-                    text : MShop.I18n.dt('client/extjs', 'Export'),
+                    text : MShop.I18n.dt('admin', 'Export'),
                     width : 120,
                     scale : 'medium',
                     handler : this.onExportItem,
@@ -6380,8 +6380,8 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
         },
 
         onStoreException : function(proxy, type, action, options, response) {
-            var title = MShop.I18n.dt('client/extjs', 'Error');
-            var errmsg = MShop.I18n.dt('client/extjs', 'No error information available');
+            var title = MShop.I18n.dt('admin', 'Error');
+            var errmsg = MShop.I18n.dt('admin', 'No error information available');
             var msg = response && response.error ? Ext.util.Format.nl2br( response.error.message ) : errmsg;
             var code = response && response.error ? response.error.code : 0;
 
@@ -6432,9 +6432,9 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
             this.close();
 
             Ext.MessageBox.alert(
-                MShop.I18n.dt('client/extjs', 'Export successful'),
+                MShop.I18n.dt('admin', 'Export successful'),
                 MShop.I18n.dt(
-                    'client/extjs',
+                    'admin',
                     'The file with the exported texts will be available within a few minutes. It can then be downloaded from the "Job" panel of the "Overview" tab.'));
         },
 
@@ -6516,14 +6516,14 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'text.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -6531,13 +6531,13 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 70,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "text.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.languageid',
-            header : MShop.I18n.dt('client/extjs', 'Language'),
+            header : MShop.I18n.dt('admin', 'Language'),
             sortable : true,
             width : 50,
             renderer : MShop.elements.language.renderer
@@ -6545,18 +6545,18 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             xtype : 'gridcolumn',
             id : 'text-list-label',
             dataIndex : 'text.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.content',
-            header : MShop.I18n.dt('client/extjs', 'Content'),
+            header : MShop.I18n.dt('admin', 'Content'),
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 120,
             editable : false,
@@ -6564,7 +6564,7 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 120,
             editable : false,
@@ -6572,7 +6572,7 @@ MShop.panel.text.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 120,
             editable : false,
@@ -6604,7 +6604,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -6616,7 +6616,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     border : false,
                     layout : 'fit',
@@ -6635,14 +6635,14 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'text.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'text.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'text.typeid',
                             mode : 'local',
                             store : this.listUI.ItemTypeStore,
@@ -6657,27 +6657,27 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             name : 'text.languageid'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'text.label',
                             allowBlank : true,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name')
                         }, {
                             xtype : MShop.Config.get('client/extjs/common/editor', 'htmleditor'),
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Content'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Content'),
                             name : 'text.content',
                             enableFont : false
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'text.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'text.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'text.editor'
                         }]
                     }]
@@ -6689,9 +6689,9 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['text.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['text.label'] : MShop.I18n.dt('admin', 'new');
         //#: Text item panel title with text label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Text: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Text: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.text.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -6708,19 +6708,19 @@ Ext.ns('MShop.panel.text');
 
 MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Text'),
+    title : MShop.I18n.dt('admin', 'Text'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated texts'),
+            title : MShop.I18n.dt('admin', 'Associated texts'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'text',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available texts'),
+            title : MShop.I18n.dt('admin', 'Available texts'),
             xtype : 'MShop.panel.text.listuismall'
         });
 
@@ -6737,7 +6737,7 @@ MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi,
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 id : 'listtype',
                 width : 70,
                 renderer : this.typeColumnRenderer.createDelegate(this,
@@ -6746,7 +6746,7 @@ MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi,
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 id : 'refstatus',
                 width : 50,
                 align : 'center',
@@ -6755,7 +6755,7 @@ MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi,
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 id : 'reftype',
                 width : 70,
                 renderer : this.refTypeColumnRenderer.createDelegate(this, [
@@ -6766,7 +6766,7 @@ MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi,
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Language'),
+                header : MShop.I18n.dt('admin', 'Language'),
                 id : 'reflang',
                 width : 50,
                 renderer : this.refLangColumnRenderer.createDelegate(this, ['text.languageid'], true)
@@ -6774,14 +6774,14 @@ MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi,
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 id : 'reflabel',
                 renderer : this.refColumnRenderer.createDelegate(this, ['text.label'], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Content'),
+                header : MShop.I18n.dt('admin', 'Content'),
                 id : 'refcontent',
                 hidden : true,
                 renderer : this.refColumnRenderer.createDelegate(this, ['text.content'], true)
@@ -6900,14 +6900,14 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'media.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -6915,40 +6915,40 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 70,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "media.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.languageid',
-            header : MShop.I18n.dt('client/extjs', 'Language'),
+            header : MShop.I18n.dt('admin', 'Language'),
             sortable : true,
             width : 50,
             renderer : MShop.elements.language.renderer
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.mimetype',
-            header : MShop.I18n.dt('client/extjs', 'Mimetype'),
+            header : MShop.I18n.dt('admin', 'Mimetype'),
             sortable : true,
             width : 80,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             id : 'media-list-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.preview',
-            header : MShop.I18n.dt('client/extjs', 'Preview'),
+            header : MShop.I18n.dt('admin', 'Preview'),
             renderer : this.previewRenderer.createDelegate(this),
             id : 'media-list-preview',
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 120,
             editable : false,
@@ -6956,7 +6956,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 120,
             editable : false,
@@ -6964,7 +6964,7 @@ MShop.panel.media.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 120,
             editable : false,
@@ -7002,7 +7002,7 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -7014,7 +7014,7 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     border : false,
                     flex : 1,
@@ -7032,14 +7032,14 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'media.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'media.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'media.typeid',
                             mode : 'local',
                             store : this.listUI.itemTypeStore,
@@ -7064,22 +7064,22 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             name : 'media.languageid'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Mimetype'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Mimetype'),
                             name : 'media.mimetype'
                         }, {
                             xtype : 'textfield',
                             name : 'media.label',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'textfield',
                             name : 'media.preview',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Preview URL')
+                            fieldLabel : MShop.I18n.dt('admin', 'Preview URL')
                         }, {
                             xtype : 'textfield',
                             name : 'media.url',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'File URL')
+                            fieldLabel : MShop.I18n.dt('admin', 'File URL')
                         }, {
                             // NOTE: this is not used as a field, more like a
                             // component which works on the whole record
@@ -7090,15 +7090,15 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             height : 360
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'media.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'media.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'media.editor'
                         }]
                     }]
@@ -7111,9 +7111,9 @@ MShop.panel.media.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 
     afterRender : function() {
-        var label = this.record ? this.record.data['media.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['media.label'] : MShop.I18n.dt('admin', 'new');
         //#: Media item panel title with media label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Media: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Media: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.media.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -7131,19 +7131,19 @@ Ext.ns('MShop.panel.media');
 
 MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Media'),
+    title : MShop.I18n.dt('admin', 'Media'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated media'),
+            title : MShop.I18n.dt('admin', 'Associated media'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'media',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available media'),
+            title : MShop.I18n.dt('admin', 'Available media'),
             xtype : 'MShop.panel.media.listuismall'
         });
 
@@ -7160,7 +7160,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 id : 'listtype',
                 width : 70,
                 renderer : this.typeColumnRenderer.createDelegate(this,
@@ -7169,7 +7169,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 id : 'refstatus',
                 width : 50,
                 align : 'center',
@@ -7178,7 +7178,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 id : 'reftype',
                 width : 70,
                 renderer : this.refTypeColumnRenderer.createDelegate(this, [
@@ -7189,7 +7189,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Mimetype'),
+                header : MShop.I18n.dt('admin', 'Mimetype'),
                 id : 'refmimetype',
                 width : 80,
                 hidden : true,
@@ -7199,7 +7199,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Language'),
+                header : MShop.I18n.dt('admin', 'Language'),
                 id : 'reflang',
                 width : 50,
                 renderer : this.refLangColumnRenderer.createDelegate(this, ['media.languageid'], true)
@@ -7207,14 +7207,14 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 id : 'refcontent',
                 renderer : this.refColumnRenderer.createDelegate(this, ['media.label'], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Preview'),
+                header : MShop.I18n.dt('admin', 'Preview'),
                 id : 'refpreview',
                 width : 100,
                 renderer : this.refPreviewRenderer.createDelegate(this)
@@ -7355,12 +7355,12 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
         });
 
         this.loadMask = new Ext.LoadMask(this.buttonCt, {
-            msg : MShop.I18n.dt('client/extjs', 'Loading'),
+            msg : MShop.I18n.dt('admin', 'Loading'),
             msgCls : 'x-mask-loading'
         });
 
         // the click to edit text container
-        var clickToEditText = MShop.I18n.dt('client/extjs', 'Click to upload');
+        var clickToEditText = MShop.I18n.dt('admin', 'Click to upload');
         this.textCt = Ext.DomHelper.insertFirst(this.buttonCt, '<div class="x-ux-from-imagefield-text">' +
             clickToEditText + '</div>', true);
         this.textCt.setSize(this.width, this.height / 3);
@@ -7448,8 +7448,8 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     onUploadFail : function(uploader, response) {
 
         var msg, code;
-        var title = MShop.I18n.dt('client/extjs', 'Upload failed');
-        var errmsg = MShop.I18n.dt('client/extjs', 'Could not upload file. Please notify your administrator');
+        var title = MShop.I18n.dt('admin', 'Upload failed');
+        var errmsg = MShop.I18n.dt('admin', 'Could not upload file. Please notify your administrator');
 
         if(response && response.data && response.data.error) {
             msg = response.data.error.message ? Ext.util.Format.nl2br( response.data.error.message ) : errmsg;
@@ -7503,8 +7503,8 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
             }, this);
 
             img.on('error', function() {
-                Ext.MessageBox.alert(MShop.I18n.dt('client/extjs', 'Upload failed'),
-                    MShop.I18n.dt('client/extjs', 'Could not upload file. Please notify your administrator')).setIcon(
+                Ext.MessageBox.alert(MShop.I18n.dt('admin', 'Upload failed'),
+                    MShop.I18n.dt('admin', 'Could not upload file. Please notify your administrator')).setIcon(
                     Ext.MessageBox.ERROR);
                 this.loadMask.hide();
             }, this);
@@ -7541,7 +7541,7 @@ MShop.panel.attribute.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Attribute');
+        this.title = MShop.I18n.dt('admin', 'Attribute');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -7557,14 +7557,14 @@ MShop.panel.attribute.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'attribute.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
@@ -7572,33 +7572,33 @@ MShop.panel.attribute.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 100,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "attribute.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false,
             id : 'attribute-list-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.position',
-            header : MShop.I18n.dt('client/extjs', 'Position'),
+            header : MShop.I18n.dt('admin', 'Position'),
             sortable : true,
             width : 50,
             editable : false
         }, {
             xtype : 'datecolumn',
             dataIndex : 'attribute.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -7607,7 +7607,7 @@ MShop.panel.attribute.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'attribute.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -7616,7 +7616,7 @@ MShop.panel.attribute.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -7663,7 +7663,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -7676,7 +7676,7 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -7691,14 +7691,14 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'attribute.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'attribute.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'attribute.typeid',
                             mode : 'local',
                             store : this.typeStore,
@@ -7710,36 +7710,36 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             typeAhead : true
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'attribute.code',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'attribute.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'numberfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Item position within the same type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Item position within the same type'),
                             name : 'attribute.position',
                             allowDecimals : false,
                             allowBlank : false,
                             value : 0
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'attribute.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'attribute.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'attribute.editor'
                         }]
                     }]
@@ -7752,9 +7752,9 @@ MShop.panel.attribute.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
 
     afterRender : function() {
-        var label = this.record ? this.record.data['attribute.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['attribute.label'] : MShop.I18n.dt('admin', 'new');
         //#: Attribute item panel title with attribute label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Attribute: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Attribute: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.attribute.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -7811,14 +7811,14 @@ MShop.panel.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'attribute.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -7826,33 +7826,33 @@ MShop.panel.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 80,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "attribute.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 80
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false,
             id : 'attribute-list-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.position',
-            header : MShop.I18n.dt('client/extjs', 'Position'),
+            header : MShop.I18n.dt('admin', 'Position'),
             sortable : true,
             width : 50,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 120,
             editable : false,
@@ -7860,7 +7860,7 @@ MShop.panel.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 120,
             editable : false,
@@ -7868,7 +7868,7 @@ MShop.panel.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 120,
             editable : false,
@@ -7888,19 +7888,19 @@ Ext.ns('MShop.panel.attribute');
 
 MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Attribute'),
+    title : MShop.I18n.dt('admin', 'Attribute'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated attributes'),
+            title : MShop.I18n.dt('admin', 'Associated attributes'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'attribute',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available attributes'),
+            title : MShop.I18n.dt('admin', 'Available attributes'),
             xtype : 'MShop.panel.attribute.listuismall'
         });
 
@@ -7917,7 +7917,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 id : 'listtype',
                 width : 70,
                 renderer : this.typeColumnRenderer.createDelegate(this,
@@ -7926,7 +7926,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 id : 'refstatus',
                 width : 50,
                 align : 'center',
@@ -7935,7 +7935,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 id : 'reftype',
                 width : 70,
                 renderer : this.refTypeColumnRenderer.createDelegate(this, [
@@ -7946,7 +7946,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Code'),
+                header : MShop.I18n.dt('admin', 'Code'),
                 id : 'refcode',
                 width : 80,
                 renderer : this.refColumnRenderer.createDelegate(this, ['attribute.code'], true)
@@ -7954,7 +7954,7 @@ MShop.panel.attribute.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPick
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 id : 'refcontent',
                 renderer : this.refColumnRenderer.createDelegate(this, ['attribute.label'], true)
             }];
@@ -8315,7 +8315,7 @@ MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Overview');
+        this.title = MShop.I18n.dt('admin', 'Overview');
 
         this.items = [{
             xtype : 'portal',
@@ -8388,7 +8388,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Product');
+        this.title = MShop.I18n.dt('admin', 'Product');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -8403,7 +8403,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'product.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -8411,7 +8411,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -8419,20 +8419,20 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 100,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "product.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -8440,7 +8440,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.datestart',
-            header : MShop.I18n.dt('client/extjs', 'Start date'),
+            header : MShop.I18n.dt('admin', 'Start date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -8448,7 +8448,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.dateend',
-            header : MShop.I18n.dt('client/extjs', 'End date'),
+            header : MShop.I18n.dt('admin', 'End date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -8456,7 +8456,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -8465,7 +8465,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -8474,7 +8474,7 @@ MShop.panel.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -8511,7 +8511,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -8524,7 +8524,7 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -8539,14 +8539,14 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'product.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'product.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'product.typeid',
                             mode : 'local',
                             store : MShop.GlobalStoreMgr.get('Product_Type'),
@@ -8568,42 +8568,42 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             }
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'product.code',
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'EAN, SKU or article number (required)')
+                            emptyText : MShop.I18n.dt('admin', 'EAN, SKU or article number (required)')
                         }, {
                             xtype : 'textarea',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'product.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Start date'),
                             name : 'product.datestart',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'End date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'End date'),
                             name : 'product.dateend',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'product.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'product.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'product.editor'
                         }]
                     }]
@@ -8622,9 +8622,9 @@ MShop.panel.product.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['product.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['product.label'] : MShop.I18n.dt('admin', 'new');
         //#: Product item panel title with product label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Product: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Product: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -8684,14 +8684,14 @@ MShop.panel.product.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'product.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -8699,25 +8699,25 @@ MShop.panel.product.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 70,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "product.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             id : 'product-list-label'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.datestart',
-            header : MShop.I18n.dt('client/extjs', 'Start date'),
+            header : MShop.I18n.dt('admin', 'Start date'),
             sortable : true,
             width : 120,
             hidden : true,
@@ -8725,7 +8725,7 @@ MShop.panel.product.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.dateend',
-            header : MShop.I18n.dt('client/extjs', 'End date'),
+            header : MShop.I18n.dt('admin', 'End date'),
             sortable : true,
             width : 120,
             hidden : true,
@@ -8733,7 +8733,7 @@ MShop.panel.product.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 120,
             editable : false,
@@ -8741,7 +8741,7 @@ MShop.panel.product.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 120,
             editable : false,
@@ -8749,7 +8749,7 @@ MShop.panel.product.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 120,
             editable : false,
@@ -8768,19 +8768,19 @@ Ext.ns('MShop.panel.product');
 
 MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Product'),
+    title : MShop.I18n.dt('admin', 'Product'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated products'),
+            title : MShop.I18n.dt('admin', 'Associated products'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'product',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available products'),
+            title : MShop.I18n.dt('admin', 'Available products'),
             xtype : 'MShop.panel.product.listuismall'
         });
 
@@ -8797,7 +8797,7 @@ MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicker
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 id : 'listtype',
                 width : 70,
                 renderer : this.typeColumnRenderer.createDelegate(this,
@@ -8806,7 +8806,7 @@ MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicker
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 id : 'refstatus',
                 width : 50,
                 align : 'center',
@@ -8815,7 +8815,7 @@ MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicker
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 id : 'reftype',
                 width : 70,
                 renderer : this.refTypeColumnRenderer.createDelegate(this, [
@@ -8826,7 +8826,7 @@ MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicker
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Code'),
+                header : MShop.I18n.dt('admin', 'Code'),
                 id : 'refcode',
                 width : 100,
                 renderer : this.refColumnRenderer.createDelegate(this, ['product.code'], true)
@@ -8834,14 +8834,14 @@ MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicker
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 id : 'refcontent',
                 renderer : this.refColumnRenderer.createDelegate(this, ['product.label'], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Start date'),
+                header : MShop.I18n.dt('admin', 'Start date'),
                 id : 'refprodstart',
                 width : 120,
                 hidden : true,
@@ -8850,7 +8850,7 @@ MShop.panel.product.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicker
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'End date'),
+                header : MShop.I18n.dt('admin', 'End date'),
                 id : 'refprodend',
                 width : 120,
                 hidden : true,
@@ -9037,7 +9037,7 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Properties');
+        this.title = MShop.I18n.dt('admin', 'Properties');
         this.typeStore = MShop.GlobalStoreMgr.get('Product_Property_Type');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
@@ -9050,7 +9050,7 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -9064,7 +9064,7 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -9082,11 +9082,11 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             name : 'product.property.parentid'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'product.property.id'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'product.property.typeid',
                             mode : 'local',
                             store : this.typeStore,
@@ -9101,21 +9101,21 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             name : 'product.property.languageid'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Value'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Value'),
                             name : 'product.property.value',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Property value (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Property value (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'product.property.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'product.property.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'product.property.editor'
                         }]
                     }]
@@ -9129,7 +9129,7 @@ MShop.panel.product.property.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }
@@ -9196,7 +9196,7 @@ MShop.panel.product.property.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Property');
+        this.title = MShop.I18n.dt('admin', 'Property');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -9237,7 +9237,7 @@ MShop.panel.product.property.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.property.id',
-                header : MShop.I18n.dt('client/extjs', 'ID'),
+                header : MShop.I18n.dt('admin', 'ID'),
                 sortable : true,
                 width : 50,
                 hidden : true
@@ -9245,14 +9245,14 @@ MShop.panel.product.property.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.property.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Product ID'),
+                header : MShop.I18n.dt('admin', 'Product ID'),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.property.typeid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 align : 'center',
                 renderer : this.typeColumnRenderer.createDelegate(this, [
                     this.typeStore, "product.property.type.label"
@@ -9261,7 +9261,7 @@ MShop.panel.product.property.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.property.languageid',
-                header : MShop.I18n.dt('client/extjs', 'Language'),
+                header : MShop.I18n.dt('admin', 'Language'),
                 align : 'center',
                 sortable : true,
                 width : 50,
@@ -9270,14 +9270,14 @@ MShop.panel.product.property.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.property.value',
-                header : MShop.I18n.dt('client/extjs', 'Value'),
+                header : MShop.I18n.dt('admin', 'Value'),
                 id : 'product-property-value',
                 sortable : true
             },
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.property.ctime',
-                header : MShop.I18n.dt('client/extjs', 'Created'),
+                header : MShop.I18n.dt('admin', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 130,
@@ -9287,7 +9287,7 @@ MShop.panel.product.property.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.property.mtime',
-                header : MShop.I18n.dt('client/extjs', 'Last modified'),
+                header : MShop.I18n.dt('admin', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 130,
@@ -9297,7 +9297,7 @@ MShop.panel.product.property.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.property.editor',
-                header : MShop.I18n.dt('client/extjs', 'Editor'),
+                header : MShop.I18n.dt('admin', 'Editor'),
                 sortable : true,
                 width : 130,
                 editable : false,
@@ -9368,7 +9368,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Stock');
+        this.title = MShop.I18n.dt('admin', 'Stock');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -9409,7 +9409,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.id',
-                header : MShop.I18n.dt('client/extjs', 'ID'),
+                header : MShop.I18n.dt('admin', 'ID'),
                 sortable : true,
                 width : 50,
                 hidden : true
@@ -9417,14 +9417,14 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Product ID'),
+                header : MShop.I18n.dt('admin', 'Product ID'),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.warehouseid',
-                header : MShop.I18n.dt('client/extjs', 'Warehouse'),
+                header : MShop.I18n.dt('admin', 'Warehouse'),
                 align : 'center',
                 id : 'product-stock-warehouse',
                 renderer : this.typeColumnRenderer.createDelegate(this, [
@@ -9434,7 +9434,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.stocklevel',
-                header : MShop.I18n.dt('client/extjs', 'Quantity'),
+                header : MShop.I18n.dt('admin', 'Quantity'),
                 sortable : true,
                 align : 'center',
                 width : 80
@@ -9442,7 +9442,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.stock.dateback',
-                header : MShop.I18n.dt('client/extjs', 'Date back'),
+                header : MShop.I18n.dt('admin', 'Date back'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 130
@@ -9450,7 +9450,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.stock.ctime',
-                header : MShop.I18n.dt('client/extjs', 'Created'),
+                header : MShop.I18n.dt('admin', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 130,
@@ -9460,7 +9460,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.stock.mtime',
-                header : MShop.I18n.dt('client/extjs', 'Last modified'),
+                header : MShop.I18n.dt('admin', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 130,
@@ -9470,7 +9470,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.editor',
-                header : MShop.I18n.dt('client/extjs', 'Editor'),
+                header : MShop.I18n.dt('admin', 'Editor'),
                 sortable : true,
                 width : 130,
                 editable : false,
@@ -9500,7 +9500,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Product stock');
+        this.title = MShop.I18n.dt('admin', 'Product stock');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
@@ -9512,7 +9512,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -9526,7 +9526,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -9544,11 +9544,11 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             name : 'product.stock.parentid'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'product.stock.id'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Warehouse'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Warehouse'),
                             name : 'product.stock.warehouseid',
                             mode : 'local',
                             store : MShop.GlobalStoreMgr.get('Product_Stock_Warehouse', this.domain),
@@ -9569,26 +9569,26 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             }
                         }, {
                             xtype : 'numberfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Stock level'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Stock level'),
                             name : 'product.stock.stocklevel',
-                            emptyText : MShop.I18n.dt('client/extjs', 'Quantity or empty if unlimited (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'Quantity or empty if unlimited (optional)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Back in stock'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Back in stock'),
                             name : 'product.stock.dateback',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'product.stock.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'product.stock.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'product.stock.editor'
                         }]
                     }]
@@ -9602,7 +9602,7 @@ MShop.panel.product.stock.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }
@@ -9810,8 +9810,8 @@ MShop.panel.AbstractUsedByListUi = Ext.extend(Ext.Panel, {
     },
 
     onStoreException : function(proxy, type, action, options, response) {
-        var title = MShop.I18n.dt('client/extjs', 'Error');
-        var errmsg = MShop.I18n.dt('client/extjs', 'No error information available');
+        var title = MShop.I18n.dt('admin', 'Error');
+        var errmsg = MShop.I18n.dt('admin', 'No error information available');
         var msg = response && response.error ? Ext.util.Format.nl2br( response.error.message ) : errmsg;
         var code = response && response.error ? response.error.code : 0;
 
@@ -9916,7 +9916,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
     initComponent : function() {
         MShop.panel.product.UsedByCatalogListUi.superclass.initComponent.call(this);
 
-        this.title = MShop.I18n.dt('client/extjs', 'Catalog');
+        this.title = MShop.I18n.dt('admin', 'Catalog');
 
         this.catalogStore = MShop.GlobalStoreMgr.get('Catalog');
     },
@@ -9945,7 +9945,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.id',
-                header : MShop.I18n.dt('client/extjs', 'List ID'),
+                header : MShop.I18n.dt('admin', 'List ID'),
                 sortable : true,
                 width : 50,
                 hidden : true
@@ -9953,7 +9953,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 sortable : true,
                 width : 100,
                 renderer : this.listTypeColumnRenderer.createDelegate(this, [
@@ -9963,7 +9963,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'catalog.lists.datestart',
-                header : MShop.I18n.dt('client/extjs', 'List start date'),
+                header : MShop.I18n.dt('admin', 'List start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120
@@ -9971,7 +9971,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'catalog.lists.dateend',
-                header : MShop.I18n.dt('client/extjs', 'List end date'),
+                header : MShop.I18n.dt('admin', 'List end date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120
@@ -9979,7 +9979,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.position',
-                header : MShop.I18n.dt('client/extjs', 'List position'),
+                header : MShop.I18n.dt('admin', 'List position'),
                 sortable : true,
                 width : 70,
                 hidden : true
@@ -9987,7 +9987,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'catalog.lists.ctime',
-                header : MShop.I18n.dt('client/extjs', 'List creation time'),
+                header : MShop.I18n.dt('admin', 'List creation time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120,
@@ -9996,7 +9996,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'catalog.lists.mtime',
-                header : MShop.I18n.dt('client/extjs', 'List modification time'),
+                header : MShop.I18n.dt('admin', 'List modification time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120,
@@ -10005,7 +10005,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.editor',
-                header : MShop.I18n.dt('client/extjs', 'List editor'),
+                header : MShop.I18n.dt('admin', 'List editor'),
                 sortable : true,
                 width : 120,
                 hidden : true
@@ -10013,14 +10013,14 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'ID'),
+                header : MShop.I18n.dt('admin', 'ID'),
                 sortable : true,
                 width : 100
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 sortable : false,
                 width : 50,
                 renderer : this.statusColumnRenderer.createDelegate(this, [this.catalogStore, "catalog.status"], true)
@@ -10028,7 +10028,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Code'),
+                header : MShop.I18n.dt('admin', 'Code'),
                 sortable : false,
                 width : 100,
                 renderer : this.listTypeColumnRenderer.createDelegate(this, [this.catalogStore, "catalog.code"], true)
@@ -10036,7 +10036,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 sortable : false,
                 width : 100,
                 id : 'catalog-list-autoexpand-column',
@@ -10045,7 +10045,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'catalog.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Created'),
+                header : MShop.I18n.dt('admin', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -10057,7 +10057,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'catalog.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Last modified'),
+                header : MShop.I18n.dt('admin', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -10069,7 +10069,7 @@ MShop.panel.product.UsedByCatalogListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'catalog.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Editor'),
+                header : MShop.I18n.dt('admin', 'Editor'),
                 sortable : false,
                 width : 100,
                 hidden : true,
@@ -10113,7 +10113,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
     initComponent : function() {
         MShop.panel.product.UsedByProductListUi.superclass.initComponent.call(this);
 
-        this.title = MShop.I18n.dt('client/extjs', 'Used by');
+        this.title = MShop.I18n.dt('admin', 'Used by');
     },
 
     getColumns : function() {
@@ -10121,7 +10121,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.id',
-                header : MShop.I18n.dt('client/extjs', 'List ID'),
+                header : MShop.I18n.dt('admin', 'List ID'),
                 sortable : true,
                 width : 50,
                 hidden : true
@@ -10129,7 +10129,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 sortable : true,
                 width : 100,
                 renderer : this.listTypeColumnRenderer.createDelegate(this, [
@@ -10139,7 +10139,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.datestart',
-                header : MShop.I18n.dt('client/extjs', 'List start date'),
+                header : MShop.I18n.dt('admin', 'List start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120
@@ -10147,7 +10147,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.dateend',
-                header : MShop.I18n.dt('client/extjs', 'List end date'),
+                header : MShop.I18n.dt('admin', 'List end date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120
@@ -10155,7 +10155,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.position',
-                header : MShop.I18n.dt('client/extjs', 'List position'),
+                header : MShop.I18n.dt('admin', 'List position'),
                 sortable : true,
                 width : 70,
                 hidden : true
@@ -10163,7 +10163,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.mtime',
-                header : MShop.I18n.dt('client/extjs', 'List modification time'),
+                header : MShop.I18n.dt('admin', 'List modification time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120,
@@ -10172,7 +10172,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.ctime',
-                header : MShop.I18n.dt('client/extjs', 'List creation time'),
+                header : MShop.I18n.dt('admin', 'List creation time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120,
@@ -10181,7 +10181,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.editor',
-                header : MShop.I18n.dt('client/extjs', 'List editor'),
+                header : MShop.I18n.dt('admin', 'List editor'),
                 sortable : true,
                 width : 120,
                 hidden : true
@@ -10189,14 +10189,14 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'ID'),
+                header : MShop.I18n.dt('admin', 'ID'),
                 sortable : true,
                 width : 100
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 sortable : false,
                 width : 50,
                 renderer : this.statusColumnRenderer.createDelegate(this, [this.ParentItemUi.store, "product.status"],
@@ -10205,7 +10205,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 sortable : false,
                 width : 100,
                 renderer : this.productTypeColumnRenderer.createDelegate(this, [
@@ -10217,7 +10217,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Code'),
+                header : MShop.I18n.dt('admin', 'Code'),
                 sortable : false,
                 width : 100,
                 renderer : this.listTypeColumnRenderer.createDelegate(this, [this.ParentItemUi.store, "product.code"],
@@ -10226,7 +10226,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 sortable : false,
                 id : 'product-list-autoexpand-column',
                 renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
@@ -10236,7 +10236,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Start date'),
+                header : MShop.I18n.dt('admin', 'Start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -10248,7 +10248,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'End date'),
+                header : MShop.I18n.dt('admin', 'End date'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -10260,7 +10260,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Created'),
+                header : MShop.I18n.dt('admin', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -10272,7 +10272,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Last modified'),
+                header : MShop.I18n.dt('admin', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -10284,7 +10284,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Editor'),
+                header : MShop.I18n.dt('admin', 'Editor'),
                 sortable : false,
                 width : 100,
                 hidden : true,
@@ -10328,7 +10328,7 @@ MShop.panel.catalog.TreeUi = Ext.extend(MShop.panel.AbstractTreeUi, {
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Catalog');
+        this.title = MShop.I18n.dt('admin', 'Catalog');
         this.domain = 'catalog';
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -10394,7 +10394,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -10406,7 +10406,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     flex : 1,
                     ref : '../../mainForm',
@@ -10422,36 +10422,36 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'code',
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'catalog.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'catalog.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'catalog.editor'
                         }]
                     }]
@@ -10471,9 +10471,9 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
 
 
     afterRender : function() {
-        var label = this.record ? this.record.data['label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['label'] : MShop.I18n.dt('admin', 'new');
         //#: Catalog item panel title with catalog label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Catalog: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Catalog: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.catalog.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -10489,7 +10489,7 @@ MShop.panel.catalog.ItemUi = Ext.extend(MShop.panel.AbstractTreeItemUi, {
 
     onSaveItem : function() {
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }
@@ -10708,7 +10708,7 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Service');
+        this.title = MShop.I18n.dt('admin', 'Service');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -10723,7 +10723,7 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'service.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -10731,7 +10731,7 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
@@ -10739,27 +10739,27 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 100,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "service.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.provider',
-            header : MShop.I18n.dt('client/extjs', 'Provider'),
+            header : MShop.I18n.dt('admin', 'Provider'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -10767,14 +10767,14 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.position',
-            header : MShop.I18n.dt('client/extjs', 'Position'),
+            header : MShop.I18n.dt('admin', 'Position'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.config',
-            header : MShop.I18n.dt('client/extjs', 'Configuration'),
+            header : MShop.I18n.dt('admin', 'Configuration'),
             width : 200,
             editable : false,
             renderer : function(value) {
@@ -10790,7 +10790,7 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'service.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -10798,7 +10798,7 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'service.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -10806,7 +10806,7 @@ MShop.panel.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -10842,7 +10842,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -10855,7 +10855,7 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -10870,14 +10870,14 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'service.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'service.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'service.typeid',
                             mode : 'local',
                             store : MShop.GlobalStoreMgr.get('Service_Type'),
@@ -10889,44 +10889,44 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             typeAhead : true
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'service.code',
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Provider'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Provider'),
                             name : 'service.provider',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Name of the service provider class (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Name of the service provider class (required)')
                         }, {
                             xtype : 'textarea',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'service.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'numberfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Position'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Position'),
                             name : 'service.position',
                             allowDecimals : false,
                             allowBlank : false,
                             value : 0
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'service.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'service.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'service.editor'
                         }]
                     }]
@@ -10945,9 +10945,9 @@ MShop.panel.service.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['service.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['service.label'] : MShop.I18n.dt('admin', 'new');
         //#: Service item panel title with service label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Service: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Service: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -11114,7 +11114,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Customer');
+        this.title = MShop.I18n.dt('admin', 'Customer');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -11126,7 +11126,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'customer.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -11134,7 +11134,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
@@ -11142,42 +11142,42 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.code',
-            header : MShop.I18n.dt('client/extjs', 'User name'),
+            header : MShop.I18n.dt('admin', 'User name'),
             sortable : true,
             width : 100,
             id : 'customer-list-code'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.password',
-            header : MShop.I18n.dt('client/extjs', 'Password'),
+            header : MShop.I18n.dt('admin', 'Password'),
             sortable : false,
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.label',
-            header : MShop.I18n.dt('client/extjs', 'Full name'),
+            header : MShop.I18n.dt('admin', 'Full name'),
             sortable : true,
             width : 100,
             id : 'customer-list-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.birthday',
-            header : MShop.I18n.dt('client/extjs', 'Birthday'),
+            header : MShop.I18n.dt('admin', 'Birthday'),
             sortable : false,
             width : 100,
             format : 'Y-m-d'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.dateverified',
-            header : MShop.I18n.dt('client/extjs', 'Verification date'),
+            header : MShop.I18n.dt('admin', 'Verification date'),
             sortable : false,
             width : 100,
             format : 'Y-m-d'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -11185,7 +11185,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -11193,7 +11193,7 @@ MShop.panel.customer.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -11231,7 +11231,7 @@ MShop.panel.customer.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Available customers');
+        this.title = MShop.I18n.dt('admin', 'Available customers');
 
         MShop.panel.customer.ListUiSmall.superclass.initComponent.call(this);
     },
@@ -11240,7 +11240,7 @@ MShop.panel.customer.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'customer.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -11248,7 +11248,7 @@ MShop.panel.customer.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
@@ -11256,26 +11256,26 @@ MShop.panel.customer.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.code',
-            header : MShop.I18n.dt('client/extjs', 'User name'),
+            header : MShop.I18n.dt('admin', 'User name'),
             sortable : true,
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.label',
-            header : MShop.I18n.dt('client/extjs', 'Full name'),
+            header : MShop.I18n.dt('admin', 'Full name'),
             sortable : true,
             id : 'customer-list-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.password',
-            header : MShop.I18n.dt('client/extjs', 'Password'),
+            header : MShop.I18n.dt('admin', 'Password'),
             sortable : false,
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.birthday',
-            header : MShop.I18n.dt('client/extjs', 'Birthday'),
+            header : MShop.I18n.dt('admin', 'Birthday'),
             sortable : false,
             width : 100,
             format : 'Y-m-d',
@@ -11283,7 +11283,7 @@ MShop.panel.customer.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.dateverified',
-            header : MShop.I18n.dt('client/extjs', 'Verification date'),
+            header : MShop.I18n.dt('admin', 'Verification date'),
             sortable : false,
             width : 100,
             format : 'Y-m-d',
@@ -11291,7 +11291,7 @@ MShop.panel.customer.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : false,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -11299,7 +11299,7 @@ MShop.panel.customer.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : false,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -11307,7 +11307,7 @@ MShop.panel.customer.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : false,
             width : 130,
             hidden : true
@@ -11339,7 +11339,7 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             itemId : 'MShop.panel.customer.ItemUi',
             plugins : ['ux.itemregistry'],
             items : [{
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 itemId : 'MShop.panel.customer.ItemUi.BasicPanel',
                 xtype : 'panel',
                 layout : 'fit',
@@ -11360,7 +11360,7 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         border : false,
                         items : [{
-                            title : MShop.I18n.dt('client/extjs', 'Details'),
+                            title : MShop.I18n.dt('admin', 'Details'),
                             xtype : 'panel',
                             layout : 'fit',
                             flex : 1,
@@ -11377,7 +11377,7 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                 autoWidth : true,
                                 items : [{
                                         xtype : 'displayfield',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'ID'),
                                         name : 'customer.id'
                                     }, {
                                         xtype : 'MShop.elements.status.combo',
@@ -11385,52 +11385,52 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.code',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'User name'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'User name, e.g. e-mail address (required)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'User name'),
+                                        emptyText : MShop.I18n.dt('admin', 'User name, e.g. e-mail address (required)'),
                                         allowBlank : false,
                                         maxLength : 32
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.password',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Password'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Password (required)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Password'),
+                                        emptyText : MShop.I18n.dt('admin', 'Password (required)'),
                                         allowBlank : false,
                                         maxLength : 255
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.label',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Full name'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Full name (required)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Full name'),
+                                        emptyText : MShop.I18n.dt('admin', 'Full name (required)'),
                                         allowBlank : false,
                                         maxLength : 255
                                     }, {
                                         xtype : 'datefield',
                                         name : 'customer.birthday',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Birthday'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD (optional)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Birthday'),
+                                        emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD (optional)'),
                                         format : 'Y-m-d'
                                     }, {
                                         xtype : 'datefield',
                                         name : 'customer.dateverified',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Verification date'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD (optional)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Verification date'),
+                                        emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD (optional)'),
                                         format : 'Y-m-d'
                                     }, {
                                         xtype : 'displayfield',
                                         name : 'customer.ctime',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Created')
+                                        fieldLabel : MShop.I18n.dt('admin', 'Created')
                                     }, {
                                         xtype : 'displayfield',
                                         name : 'customer.mtime',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified')
+                                        fieldLabel : MShop.I18n.dt('admin', 'Last modified')
                                     }, {
                                         xtype : 'displayfield',
                                         name : 'customer.editor',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Editor')
+                                        fieldLabel : MShop.I18n.dt('admin', 'Editor')
                                 }]
                             }]
                         }, {
-                            title : MShop.I18n.dt('client/extjs', 'Billing address'),
+                            title : MShop.I18n.dt('admin', 'Billing address'),
                             xtype : 'panel',
                             layout : 'fit',
                             flex : 1,
@@ -11448,14 +11448,14 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                 items : [{
                                         xtype : 'textfield',
                                         name : 'customer.company',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Company'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Company name'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Company'),
+                                        emptyText : MShop.I18n.dt('admin', 'Company name'),
                                         maxLength : 100
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.vatid',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Vat ID'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Vat ID, e.g. "GB999999999"'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Vat ID'),
+                                        emptyText : MShop.I18n.dt('admin', 'Vat ID, e.g. "GB999999999"'),
                                         maxLength : 32
                                     }, {
                                         xtype : 'MShop.elements.salutation.combo',
@@ -11463,65 +11463,65 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.title',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Title'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Honorary title'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Title'),
+                                        emptyText : MShop.I18n.dt('admin', 'Honorary title'),
                                         maxLength : 64
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.firstname',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'First name'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'First name'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'First name'),
+                                        emptyText : MShop.I18n.dt('admin', 'First name'),
                                         maxLength : 64
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.lastname',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Last name'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Last name (required)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Last name'),
+                                        emptyText : MShop.I18n.dt('admin', 'Last name (required)'),
                                         allowBlank : false,
                                         maxLength : 64
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.address1',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Address 1'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Street (required)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Address 1'),
+                                        emptyText : MShop.I18n.dt('admin', 'Street (required)'),
                                         allowBlank : false,
                                         maxLength : 255
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.address2',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Address 2'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'House number'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Address 2'),
+                                        emptyText : MShop.I18n.dt('admin', 'House number'),
                                         maxLength : 255
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.address3',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Address 3'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Additional information, e.g. flat number'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Address 3'),
+                                        emptyText : MShop.I18n.dt('admin', 'Additional information, e.g. flat number'),
                                         maxLength : 255
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.postal',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Postal code'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Postal code'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Postal code'),
+                                        emptyText : MShop.I18n.dt('admin', 'Postal code'),
                                         maxLength : 16
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.city',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'City'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'City name (required)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'City'),
+                                        emptyText : MShop.I18n.dt('admin', 'City name (required)'),
                                         allowBlank : false,
                                         maxLength : 255
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.state',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'State'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Country state, e.g. "NY"'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'State'),
+                                        emptyText : MShop.I18n.dt('admin', 'Country state, e.g. "NY"'),
                                         maxLength : 255
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.countryid',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Country code'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Two letter country code, e.g. "US" (required)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Country code'),
+                                        emptyText : MShop.I18n.dt('admin', 'Two letter country code, e.g. "US" (required)'),
                                         regex : /[A-Za-z]{2}/,
                                         allowBlank : false,
                                         maxLength : 2
@@ -11531,27 +11531,27 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.telephone',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Telephone'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Telephone number, e.g. +155512345'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Telephone'),
+                                        emptyText : MShop.I18n.dt('admin', 'Telephone number, e.g. +155512345'),
                                         maxLength : 32
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.telefax',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Telefax'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Facsimile number, e.g. +155512345'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Telefax'),
+                                        emptyText : MShop.I18n.dt('admin', 'Facsimile number, e.g. +155512345'),
                                         maxLength : 32
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.email',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'E-Mail'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'E-Mail, e.g. me@example.com (required)'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'E-Mail'),
+                                        emptyText : MShop.I18n.dt('admin', 'E-Mail, e.g. me@example.com (required)'),
                                         allowBlank : false,
                                         maxLength : 255
                                     }, {
                                         xtype : 'textfield',
                                         name : 'customer.website',
-                                        fieldLabel : MShop.I18n.dt('client/extjs', 'Website'),
-                                        emptyText : MShop.I18n.dt('client/extjs', 'Web site, e.g. www.example.com'),
+                                        fieldLabel : MShop.I18n.dt('admin', 'Website'),
+                                        emptyText : MShop.I18n.dt('admin', 'Web site, e.g. www.example.com'),
                                         maxLength : 255
                                 }]
                             }]
@@ -11565,9 +11565,9 @@ MShop.panel.customer.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['customer.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['customer.label'] : MShop.I18n.dt('admin', 'new');
         //#: Customer item panel title with customer label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Customer: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Customer: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.customer.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -11586,19 +11586,19 @@ Ext.ns('MShop.panel.customer');
 
 MShop.panel.customer.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Customer'),
+    title : MShop.I18n.dt('admin', 'Customer'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated customers'),
+            title : MShop.I18n.dt('admin', 'Associated customers'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'customer',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available customers'),
+            title : MShop.I18n.dt('admin', 'Available customers'),
             xtype : 'MShop.panel.customer.listuismall'
         });
 
@@ -11614,7 +11614,7 @@ MShop.panel.customer.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicke
         return [{
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'typeid',
-            header : MShop.I18n.dt('client/extjs', 'List type'),
+            header : MShop.I18n.dt('admin', 'List type'),
             id : 'listtype',
             width : 70,
             renderer : this.typeColumnRenderer.createDelegate(this,
@@ -11622,21 +11622,21 @@ MShop.panel.customer.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPicke
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             id : 'refstatus',
             width : 50,
             renderer : this.refStatusColumnRenderer.createDelegate(this, ['customer.status'], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'User name'),
+            header : MShop.I18n.dt('admin', 'User name'),
             id : 'refcode',
             width : 150,
             renderer : this.refColumnRenderer.createDelegate(this, ['customer.code'], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Full name'),
+            header : MShop.I18n.dt('admin', 'Full name'),
             id : 'refcontent',
             renderer : this.refColumnRenderer.createDelegate(this, ['customer.label'], true)
         }];
@@ -11842,7 +11842,7 @@ MShop.panel.customer.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Address');
+        this.title = MShop.I18n.dt('admin', 'Address');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -11880,19 +11880,19 @@ MShop.panel.customer.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.company',
-            header : MShop.I18n.dt('client/extjs', 'Company'),
+            header : MShop.I18n.dt('admin', 'Company'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.vatid',
-            header : MShop.I18n.dt('client/extjs', 'Vat ID'),
+            header : MShop.I18n.dt('admin', 'Vat ID'),
             width : 100,
             hidden : true
         }, {
@@ -11903,56 +11903,56 @@ MShop.panel.customer.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.title',
-            header : MShop.I18n.dt('client/extjs', 'Title'),
+            header : MShop.I18n.dt('admin', 'Title'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.firstname',
-            header : MShop.I18n.dt('client/extjs', 'Firstname'),
+            header : MShop.I18n.dt('admin', 'Firstname'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.lastname',
-            header : MShop.I18n.dt('client/extjs', 'Lastname'),
+            header : MShop.I18n.dt('admin', 'Lastname'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.address1',
-            header : MShop.I18n.dt('client/extjs', 'Street'),
+            header : MShop.I18n.dt('admin', 'Street'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.address2',
-            header : MShop.I18n.dt('client/extjs', 'House no'),
+            header : MShop.I18n.dt('admin', 'House no'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.address3',
-            header : MShop.I18n.dt('client/extjs', 'Additional'),
+            header : MShop.I18n.dt('admin', 'Additional'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.postal',
-            header : MShop.I18n.dt('client/extjs', 'Zip code'),
+            header : MShop.I18n.dt('admin', 'Zip code'),
             width : 70
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.city',
-            header : MShop.I18n.dt('client/extjs', 'City'),
+            header : MShop.I18n.dt('admin', 'City'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.state',
-            header : MShop.I18n.dt('client/extjs', 'State'),
+            header : MShop.I18n.dt('admin', 'State'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.countryid',
-            header : MShop.I18n.dt('client/extjs', 'Country'),
+            header : MShop.I18n.dt('admin', 'Country'),
             align : 'center',
             width : 30
         }, {
@@ -11963,18 +11963,18 @@ MShop.panel.customer.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.telephone',
-            header : MShop.I18n.dt('client/extjs', 'Telephone'),
+            header : MShop.I18n.dt('admin', 'Telephone'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.telefax',
-            header : MShop.I18n.dt('client/extjs', 'Telefax'),
+            header : MShop.I18n.dt('admin', 'Telefax'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.email',
-            header : MShop.I18n.dt('client/extjs', 'E-Mail'),
+            header : MShop.I18n.dt('admin', 'E-Mail'),
             id : 'customer-address-email'
         }, {
             xtype : 'gridcolumn',
@@ -11984,21 +11984,21 @@ MShop.panel.customer.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.address.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.address.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.address.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             hidden : true
         }];
@@ -12033,7 +12033,7 @@ MShop.panel.customer.address.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi,
             itemId : 'MShop.panel.customer.address.ItemUi',
             plugins : ['ux.itemregistry'],
             items : [{
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 xtype : 'panel',
                 layout : 'fit',
                 border : false,
@@ -12043,7 +12043,7 @@ MShop.panel.customer.address.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi,
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -12058,14 +12058,14 @@ MShop.panel.customer.address.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi,
                         items : [{
                             xtype : 'textfield',
                             name : 'customer.address.company',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Company'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Company name'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Company'),
+                            emptyText : MShop.I18n.dt('admin', 'Company name'),
                             maxLength : 100
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.vatid',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Vat ID'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Vat ID, e.g. "GB999999999"'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Vat ID'),
+                            emptyText : MShop.I18n.dt('admin', 'Vat ID, e.g. "GB999999999"'),
                             maxLength : 32
                         }, {
                             xtype : 'MShop.elements.salutation.combo',
@@ -12073,65 +12073,65 @@ MShop.panel.customer.address.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi,
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.title',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Title'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Honorary title'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Title'),
+                            emptyText : MShop.I18n.dt('admin', 'Honorary title'),
                             maxLength : 64
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.firstname',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'First name'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'First name'),
+                            fieldLabel : MShop.I18n.dt('admin', 'First name'),
+                            emptyText : MShop.I18n.dt('admin', 'First name'),
                             maxLength : 64
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.lastname',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last name'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Last name (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last name'),
+                            emptyText : MShop.I18n.dt('admin', 'Last name (required)'),
                             allowBlank : false,
                             maxLength : 64
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.address1',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Address 1'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Street (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Address 1'),
+                            emptyText : MShop.I18n.dt('admin', 'Street (required)'),
                             allowBlank : false,
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.address2',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Address 2'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'House number'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Address 2'),
+                            emptyText : MShop.I18n.dt('admin', 'House number'),
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.address3',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Address 3'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Additional information, e.g. flat number'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Address 3'),
+                            emptyText : MShop.I18n.dt('admin', 'Additional information, e.g. flat number'),
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.postal',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Postal code'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Postal code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Postal code'),
+                            emptyText : MShop.I18n.dt('admin', 'Postal code'),
                             maxLength : 16
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.city',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'City'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'City name (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'City'),
+                            emptyText : MShop.I18n.dt('admin', 'City name (required)'),
                             allowBlank : false,
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.state',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'State'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Country state, e.g. "NY"'),
+                            fieldLabel : MShop.I18n.dt('admin', 'State'),
+                            emptyText : MShop.I18n.dt('admin', 'Country state, e.g. "NY"'),
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.countryid',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Country code'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Two letter country code, e.g. "US" (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Country code'),
+                            emptyText : MShop.I18n.dt('admin', 'Two letter country code, e.g. "US" (required)'),
                             regex : /[A-Za-z]{2}/,
                             allowBlank : false,
                             maxLength : 2
@@ -12141,39 +12141,39 @@ MShop.panel.customer.address.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi,
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.telephone',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Telephone'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Telephone number, e.g. +155512345'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Telephone'),
+                            emptyText : MShop.I18n.dt('admin', 'Telephone number, e.g. +155512345'),
                             maxLength : 32
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.telefax',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Telefax'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Facsimile number, e.g. +155512345'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Telefax'),
+                            emptyText : MShop.I18n.dt('admin', 'Facsimile number, e.g. +155512345'),
                             maxLength : 32
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.email',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'E-Mail'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'E-Mail, e.g. me@example.com (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'E-Mail'),
+                            emptyText : MShop.I18n.dt('admin', 'E-Mail, e.g. me@example.com (required)'),
                             allowBlank : false,
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'customer.address.website',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Website'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Web site, e.g. www.example.com'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Website'),
+                            emptyText : MShop.I18n.dt('admin', 'Web site, e.g. www.example.com'),
                             maxLength : 255
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'customer.address.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'customer.address.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'customer.address.editor'
                         }]
                     }]
@@ -12189,9 +12189,9 @@ MShop.panel.customer.address.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi,
 
     afterRender : function() {
 
-        var label = this.record ? this.record.data['customer.address.lastname'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['customer.address.lastname'] : MShop.I18n.dt('admin', 'new');
         //#: Customer address item panel title with customer name ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Customer address: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Customer address: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.customer.address.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -12233,7 +12233,7 @@ MShop.panel.customer.group.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, 
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Available customer groups');
+        this.title = MShop.I18n.dt('admin', 'Available customer groups');
 
         MShop.panel.customer.group.ListUiSmall.superclass.initComponent.call(this);
     },
@@ -12242,38 +12242,38 @@ MShop.panel.customer.group.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, 
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'customer.group.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.group.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.group.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             id : 'customer-group-label'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.group.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'customer.group.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'customer.group.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             hidden : true
         }];
@@ -12305,7 +12305,7 @@ MShop.panel.customer.group.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             itemId : 'MShop.panel.customer.group.ItemUi',
             plugins : ['ux.itemregistry'],
             items : [{
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 xtype : 'panel',
                 layout : 'fit',
                 border : false,
@@ -12315,7 +12315,7 @@ MShop.panel.customer.group.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -12329,31 +12329,31 @@ MShop.panel.customer.group.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'customer.group.id'
                         }, {
                             xtype : 'textfield',
                             name : 'customer.group.code',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)'),
                             maxLength : 32
                         }, {
                             xtype : 'textfield',
                             name : 'customer.group.label',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Group label (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
+                            emptyText : MShop.I18n.dt('admin', 'Group label (required)'),
                             maxLength : 255
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'customer.group.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'customer.group.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'customer.group.editor'
                         }]
                     }]
@@ -12367,9 +12367,9 @@ MShop.panel.customer.group.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
 
     afterRender : function() {
 
-        var label = this.record ? this.record.data['customer.group.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['customer.group.label'] : MShop.I18n.dt('admin', 'new');
         //#: Customer group item panel title with customer name ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Customer group: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Customer group: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.customer.group.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -12388,19 +12388,19 @@ Ext.ns('MShop.panel.customer.group');
 
 MShop.panel.customer.group.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Group'),
+    title : MShop.I18n.dt('admin', 'Group'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated customer groups'),
+            title : MShop.I18n.dt('admin', 'Associated customer groups'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'customer/group',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available customer groups'),
+            title : MShop.I18n.dt('admin', 'Available customer groups'),
             xtype : 'MShop.panel.customer.group.listuismall'
         });
 
@@ -12416,7 +12416,7 @@ MShop.panel.customer.group.ItemPickerUi = Ext.extend(MShop.panel.AbstractListIte
         return [{
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'typeid',
-            header : MShop.I18n.dt('client/extjs', 'List type'),
+            header : MShop.I18n.dt('admin', 'List type'),
             id : 'listtype',
             width : 70,
             renderer : this.typeColumnRenderer.createDelegate(this,
@@ -12424,13 +12424,13 @@ MShop.panel.customer.group.ItemPickerUi = Ext.extend(MShop.panel.AbstractListIte
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             id : 'refcode',
             renderer : this.refColumnRenderer.createDelegate(this, ['customer.group.code'], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             id : 'refcontent',
             renderer : this.refColumnRenderer.createDelegate(this, ['customer.group.label'], true)
         }];
@@ -12463,7 +12463,7 @@ MShop.panel.supplier.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Supplier');
+        this.title = MShop.I18n.dt('admin', 'Supplier');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -12475,7 +12475,7 @@ MShop.panel.supplier.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'supplier.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -12483,7 +12483,7 @@ MShop.panel.supplier.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
@@ -12491,20 +12491,20 @@ MShop.panel.supplier.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             width : 100,
             id : 'supplier-list-label'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'supplier.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -12512,7 +12512,7 @@ MShop.panel.supplier.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'supplier.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -12520,7 +12520,7 @@ MShop.panel.supplier.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -12552,7 +12552,7 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -12565,7 +12565,7 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -12580,36 +12580,36 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'supplier.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'supplier.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'supplier.code',
                             allowBlank : false,
                             maxLength : 32,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textarea',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'supplier.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'supplier.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'supplier.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'supplier.editor'
                         }]
                     }]
@@ -12621,9 +12621,9 @@ MShop.panel.supplier.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['supplier.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['supplier.label'] : MShop.I18n.dt('admin', 'new');
         //#: Supplier item panel title with supplier label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Supplier: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Supplier: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -12796,7 +12796,7 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Address');
+        this.title = MShop.I18n.dt('admin', 'Address');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -12834,19 +12834,19 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.company',
-            header : MShop.I18n.dt('client/extjs', 'Company'),
+            header : MShop.I18n.dt('admin', 'Company'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.vatid',
-            header : MShop.I18n.dt('client/extjs', 'Vat ID'),
+            header : MShop.I18n.dt('admin', 'Vat ID'),
             width : 100,
             hidden : true
         }, {
@@ -12857,56 +12857,56 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.title',
-            header : MShop.I18n.dt('client/extjs', 'Title'),
+            header : MShop.I18n.dt('admin', 'Title'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.firstname',
-            header : MShop.I18n.dt('client/extjs', 'Firstname'),
+            header : MShop.I18n.dt('admin', 'Firstname'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.lastname',
-            header : MShop.I18n.dt('client/extjs', 'Lastname'),
+            header : MShop.I18n.dt('admin', 'Lastname'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.address1',
-            header : MShop.I18n.dt('client/extjs', 'Street'),
+            header : MShop.I18n.dt('admin', 'Street'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.address2',
-            header : MShop.I18n.dt('client/extjs', 'House no'),
+            header : MShop.I18n.dt('admin', 'House no'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.address3',
-            header : MShop.I18n.dt('client/extjs', 'Additional'),
+            header : MShop.I18n.dt('admin', 'Additional'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.postal',
-            header : MShop.I18n.dt('client/extjs', 'Zip code'),
+            header : MShop.I18n.dt('admin', 'Zip code'),
             width : 70
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.city',
-            header : MShop.I18n.dt('client/extjs', 'City'),
+            header : MShop.I18n.dt('admin', 'City'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.state',
-            header : MShop.I18n.dt('client/extjs', 'State'),
+            header : MShop.I18n.dt('admin', 'State'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.countryid',
-            header : MShop.I18n.dt('client/extjs', 'Country'),
+            header : MShop.I18n.dt('admin', 'Country'),
             width : 30
         }, {
             dataIndex : 'supplier.address.languageid',
@@ -12916,18 +12916,18 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.telephone',
-            header : MShop.I18n.dt('client/extjs', 'Telephone'),
+            header : MShop.I18n.dt('admin', 'Telephone'),
             width : 100
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.telefax',
-            header : MShop.I18n.dt('client/extjs', 'Telefax'),
+            header : MShop.I18n.dt('admin', 'Telefax'),
             width : 100,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.email',
-            header : MShop.I18n.dt('client/extjs', 'E-Mail'),
+            header : MShop.I18n.dt('admin', 'E-Mail'),
             id : 'supplier-address-email'
         }, {
             xtype : 'gridcolumn',
@@ -12937,21 +12937,21 @@ MShop.panel.supplier.address.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'supplier.address.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'supplier.address.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'supplier.address.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             hidden : true
         }];
@@ -12984,7 +12984,7 @@ MShop.panel.supplier.address.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             itemId : 'MShop.panel.supplier.address.ItemUi',
             plugins : ['ux.itemregistry'],
             items : [{
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 xtype : 'panel',
                 layout : 'fit',
                 border : false,
@@ -12994,7 +12994,7 @@ MShop.panel.supplier.address.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -13009,14 +13009,14 @@ MShop.panel.supplier.address.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         items : [{
                             xtype : 'textfield',
                             name : 'supplier.address.company',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Company'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Company name'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Company'),
+                            emptyText : MShop.I18n.dt('admin', 'Company name'),
                             maxLength : 100
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.vatid',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Vat ID'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Vat ID, e.g. "GB999999999"'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Vat ID'),
+                            emptyText : MShop.I18n.dt('admin', 'Vat ID, e.g. "GB999999999"'),
                             maxLength : 32
                         }, {
                             xtype : 'MShop.elements.salutation.combo',
@@ -13024,65 +13024,65 @@ MShop.panel.supplier.address.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.title',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Title'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Honorary title'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Title'),
+                            emptyText : MShop.I18n.dt('admin', 'Honorary title'),
                             maxLength : 64
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.firstname',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'First name'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'First name'),
+                            fieldLabel : MShop.I18n.dt('admin', 'First name'),
+                            emptyText : MShop.I18n.dt('admin', 'First name'),
                             maxLength : 64
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.lastname',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last name'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Last name (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last name'),
+                            emptyText : MShop.I18n.dt('admin', 'Last name (required)'),
                             allowBlank : false,
                             maxLength : 64
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.address1',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Address 1'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Street (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Address 1'),
+                            emptyText : MShop.I18n.dt('admin', 'Street (required)'),
                             allowBlank : false,
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.address2',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Address 2'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'House number'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Address 2'),
+                            emptyText : MShop.I18n.dt('admin', 'House number'),
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.address3',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Address 3'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Additional information, e.g. flat number'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Address 3'),
+                            emptyText : MShop.I18n.dt('admin', 'Additional information, e.g. flat number'),
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.postal',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Postal code'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Postal code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Postal code'),
+                            emptyText : MShop.I18n.dt('admin', 'Postal code'),
                             maxLength : 16
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.city',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'City'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'City name (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'City'),
+                            emptyText : MShop.I18n.dt('admin', 'City name (required)'),
                             allowBlank : false,
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.state',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'State'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Country state, e.g. "NY"'),
+                            fieldLabel : MShop.I18n.dt('admin', 'State'),
+                            emptyText : MShop.I18n.dt('admin', 'Country state, e.g. "NY"'),
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.countryid',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Country code'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Two letter country code, e.g. "US" (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Country code'),
+                            emptyText : MShop.I18n.dt('admin', 'Two letter country code, e.g. "US" (required)'),
                             regex : /[A-Za-z]{2}/,
                             allowBlank : false,
                             maxLength : 2
@@ -13092,39 +13092,39 @@ MShop.panel.supplier.address.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.telephone',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Telephone'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Telephone number, e.g. +155512345'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Telephone'),
+                            emptyText : MShop.I18n.dt('admin', 'Telephone number, e.g. +155512345'),
                             maxLength : 32
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.telefax',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Telefax'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Facsimile number, e.g. +155512345'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Telefax'),
+                            emptyText : MShop.I18n.dt('admin', 'Facsimile number, e.g. +155512345'),
                             maxLength : 32
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.email',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'E-Mail'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'E-Mail, e.g. me@example.com (required)'),
+                            fieldLabel : MShop.I18n.dt('admin', 'E-Mail'),
+                            emptyText : MShop.I18n.dt('admin', 'E-Mail, e.g. me@example.com (required)'),
                             allowBlank : false,
                             maxLength : 255
                         }, {
                             xtype : 'textfield',
                             name : 'supplier.address.website',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Website'),
-                            emptyText : MShop.I18n.dt('client/extjs', 'Web site, e.g. www.example.com'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Website'),
+                            emptyText : MShop.I18n.dt('admin', 'Web site, e.g. www.example.com'),
                             maxLength : 255
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'supplier.address.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'supplier.address.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'supplier.address.editor'
                         }]
                     }]
@@ -13138,9 +13138,9 @@ MShop.panel.supplier.address.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['supplier.address.lastname'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['supplier.address.lastname'] : MShop.I18n.dt('admin', 'new');
         //#: Supplier address item panel title with supplier name ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Supplier address: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Supplier address: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.supplier.address.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -13187,7 +13187,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Plugin');
+        this.title = MShop.I18n.dt('admin', 'Plugin');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -13202,7 +13202,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'plugin.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -13210,7 +13210,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
@@ -13218,20 +13218,20 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 100,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "plugin.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.provider',
-            header : MShop.I18n.dt('client/extjs', 'Provider'),
+            header : MShop.I18n.dt('admin', 'Provider'),
             id : 'plugin-list-provider',
             sortable : true,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -13239,14 +13239,14 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.position',
-            header : MShop.I18n.dt('client/extjs', 'Position'),
+            header : MShop.I18n.dt('admin', 'Position'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.config',
-            header : MShop.I18n.dt('client/extjs', 'Configuration'),
+            header : MShop.I18n.dt('admin', 'Configuration'),
             width : 200,
             editable : false,
             renderer : function(value) {
@@ -13262,7 +13262,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'plugin.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -13270,7 +13270,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'plugin.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -13278,7 +13278,7 @@ MShop.panel.plugin.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -13315,7 +13315,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -13328,7 +13328,7 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -13342,14 +13342,14 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'plugin.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'plugin.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'plugin.typeid',
                             mode : 'local',
                             store : MShop.GlobalStoreMgr.get('Plugin_Type'),
@@ -13371,37 +13371,37 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             }
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Provider'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Provider'),
                             name : 'plugin.provider',
                             allowBlank : false,
                             maxLength : 255,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Name of the plugin provider class (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Name of the plugin provider class (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'plugin.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'numberfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Position'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Position'),
                             name : 'plugin.position',
                             allowDecimals : false,
                             allowBlank : false,
                             value : 0
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'plugin.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'plugin.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'plugin.editor'
                         }]
                     }]
@@ -13421,9 +13421,9 @@ MShop.panel.plugin.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 
     afterRender : function() {
-        var label = this.record ? this.record.data['plugin.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['plugin.label'] : MShop.I18n.dt('admin', 'new');
         //#: Plugin item panel title with attribute label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Plugin: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Plugin: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.plugin.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -13464,7 +13464,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Coupon');
+        this.title = MShop.I18n.dt('admin', 'Coupon');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -13476,7 +13476,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'coupon.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -13484,7 +13484,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 70,
             align : 'center',
@@ -13492,13 +13492,13 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.provider',
-            header : MShop.I18n.dt('client/extjs', 'Provider'),
+            header : MShop.I18n.dt('admin', 'Provider'),
             sortable : true,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -13506,21 +13506,21 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.datestart',
-            header : MShop.I18n.dt('client/extjs', 'Start date'),
+            header : MShop.I18n.dt('admin', 'Start date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.dateend',
-            header : MShop.I18n.dt('client/extjs', 'End date'),
+            header : MShop.I18n.dt('admin', 'End date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.config',
-            header : MShop.I18n.dt('client/extjs', 'Configuration'),
+            header : MShop.I18n.dt('admin', 'Configuration'),
             width : 200,
             editable : false,
             renderer : function(value) {
@@ -13536,7 +13536,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -13544,7 +13544,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -13552,7 +13552,7 @@ MShop.panel.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -13590,7 +13590,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -13603,7 +13603,7 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     title : 'Details',
                     flex : 1,
                     ref : '../../mainForm',
@@ -13618,48 +13618,48 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'coupon.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'coupon.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Provider'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Provider'),
                             name : 'coupon.provider',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Name of the coupon provider class (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Name of the coupon provider class (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'coupon.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Start date'),
                             name : 'coupon.datestart',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'End date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'End date'),
                             name : 'coupon.dateend',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'coupon.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'coupon.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'coupon.editor'
                         }]
                     }]
@@ -13679,9 +13679,9 @@ MShop.panel.coupon.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
 
     afterRender : function() {
-        var label = this.record ? this.record.data['coupon.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['coupon.label'] : MShop.I18n.dt('admin', 'new');
         //#: Coupon item panel title with coupon label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Coupon: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Coupon: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.coupon.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -13726,7 +13726,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Codes');
+        this.title = MShop.I18n.dt('admin', 'Codes');
 
         MShop.panel.coupon.code.ListUi.superclass.initComponent.call(this);
     },
@@ -13736,40 +13736,40 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             id : 'coupon-code-list-code',
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.count',
-            header : MShop.I18n.dt('client/extjs', 'Count'),
+            header : MShop.I18n.dt('admin', 'Count'),
             sortable : true,
             width : 100
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.datestart',
-            header : MShop.I18n.dt('client/extjs', 'Start date'),
+            header : MShop.I18n.dt('admin', 'Start date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.dateend',
-            header : MShop.I18n.dt('client/extjs', 'End date'),
+            header : MShop.I18n.dt('admin', 'End date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -13777,7 +13777,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -13785,7 +13785,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -13798,7 +13798,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         MShop.panel.coupon.code.ListUi.superclass.onBeforeLoad.apply(this, arguments);
 
         if(!this.ParentItemUi.record.data['coupon.id']) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Notice'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Notice'), MShop.I18n.dt('admin',
                 'Please save the coupon first before you can add codes'));
 
             this.actionAdd.setDisabled(true);
@@ -13868,7 +13868,7 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -13881,7 +13881,7 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -13895,46 +13895,46 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'coupon.code.id'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'coupon.code.code',
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'numberfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Count'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Count'),
                             name : 'coupon.code.count',
                             allowDecimals : false,
                             allowBlank : false,
                             value : 1
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Start date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Start date'),
                             name : 'coupon.code.datestart',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'End date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'End date'),
                             name : 'coupon.code.dateend',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'coupon.code.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'coupon.code.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'coupon.code.editor'
                         }]
                     }]
@@ -13950,9 +13950,9 @@ MShop.panel.coupon.code.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     afterRender : function() {
 
-        var label = this.record ? this.record.data['coupon.code.code'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['coupon.code.code'] : MShop.I18n.dt('admin', 'new');
         //#: Coupon code item panel title with coupon code ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Coupon code: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Coupon code: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.coupon.code.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -14000,7 +14000,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Order');
+        this.title = MShop.I18n.dt('admin', 'Order');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -14012,52 +14012,52 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'order.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 55,
             id : 'order-list-id'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.type',
-            header : MShop.I18n.dt('client/extjs', 'Source'),
+            header : MShop.I18n.dt('admin', 'Source'),
             sortable : true,
             width : 85,
             align : 'center'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.datepayment',
-            header : MShop.I18n.dt('client/extjs', 'Purchase date'),
+            header : MShop.I18n.dt('admin', 'Purchase date'),
             sortable : true,
             width : 180,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.statuspayment',
-            header : MShop.I18n.dt('client/extjs', 'Payment status'),
+            header : MShop.I18n.dt('admin', 'Payment status'),
             sortable : true,
             renderer : MShop.elements.paymentstatus.renderer
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.datedelivery',
-            header : MShop.I18n.dt('client/extjs', 'Delivery date'),
+            header : MShop.I18n.dt('admin', 'Delivery date'),
             sortable : true,
             width : 180,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.statusdelivery',
-            header : MShop.I18n.dt('client/extjs', 'Delivery status'),
+            header : MShop.I18n.dt('admin', 'Delivery status'),
             sortable : true,
             renderer : MShop.elements.deliverystatus.renderer
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.relatedid',
-            header : MShop.I18n.dt('client/extjs', 'Related order ID'),
+            header : MShop.I18n.dt('admin', 'Related order ID'),
             id : 'order-relatedid'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             sortable : true,
@@ -14066,7 +14066,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             sortable : true,
@@ -14075,7 +14075,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             sortable : true,
             editable : false,
@@ -14086,7 +14086,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     onOpenEditWindow : function(action) {
         if(action === 'add') {
-            return Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Not implemented'), MShop.I18n.dt('client/extjs',
+            return Ext.Msg.alert(MShop.I18n.dt('admin', 'Not implemented'), MShop.I18n.dt('admin',
                 'Sorry, adding orders manually is currently not implemented'));
         }
 
@@ -14117,7 +14117,7 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Order item details');
+        this.title = MShop.I18n.dt('admin', 'Order item details');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
@@ -14129,7 +14129,7 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -14142,7 +14142,7 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Invoice'),
+                    title : MShop.I18n.dt('admin', 'Invoice'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -14157,21 +14157,21 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'order.id'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Source'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Source'),
                             name : 'order.type'
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Payment date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Payment date'),
                             name : 'order.datepayment',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Payment status'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Payment status'),
                             name : 'order.statuspayment',
                             mode : 'local',
                             store : MShop.elements.paymentstatus._store,
@@ -14182,13 +14182,13 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             typeAhead : true
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Delivery date'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Delivery date'),
                             name : 'order.datedelivery',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Delivery status'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Delivery status'),
                             name : 'order.statusdelivery',
                             mode : 'local',
                             store : MShop.elements.deliverystatus._store,
@@ -14199,15 +14199,15 @@ MShop.panel.order.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             typeAhead : true
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'order.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'order.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'order.editor'
                         }]
                     }]
@@ -14234,7 +14234,7 @@ MShop.panel.order.OrderUi = Ext.extend(Ext.FormPanel, {
     idProperty : 'order.base.id',
     siteidProperty : 'order.base.siteid',
 
-    title : MShop.I18n.dt('client/extjs', 'Order'),
+    title : MShop.I18n.dt('admin', 'Order'),
     layout : 'fit',
     flex : 1,
 
@@ -14254,31 +14254,31 @@ MShop.panel.order.OrderUi = Ext.extend(Ext.FormPanel, {
             },
             items : [{
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Base ID'),
+                fieldLabel : MShop.I18n.dt('admin', 'Base ID'),
                 name : 'order.base.id'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Site'),
+                fieldLabel : MShop.I18n.dt('admin', 'Site'),
                 name : 'order.base.sitecode'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Customer'),
+                fieldLabel : MShop.I18n.dt('admin', 'Customer'),
                 name : 'order.base.customerid'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Currency'),
+                fieldLabel : MShop.I18n.dt('admin', 'Currency'),
                 name : 'order.base.currencyid'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Total'),
+                fieldLabel : MShop.I18n.dt('admin', 'Total'),
                 name : 'order.base.price'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Costs'),
+                fieldLabel : MShop.I18n.dt('admin', 'Costs'),
                 name : 'order.base.costs'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Comment'),
+                fieldLabel : MShop.I18n.dt('admin', 'Comment'),
                 name : 'order.base.comment'
             }]
         }];
@@ -14368,7 +14368,7 @@ MShop.panel.order.base.address.ItemUi = Ext.extend(Ext.Panel, {
     idProperty : 'order.base.address.id',
     siteidProperty : 'order.base.address.siteid',
 
-    title : MShop.I18n.dt('client/extjs', 'Addresses'),
+    title : MShop.I18n.dt('admin', 'Addresses'),
     border : false,
     layout : 'hbox',
     layoutConfig : {
@@ -14384,7 +14384,7 @@ MShop.panel.order.base.address.ItemUi = Ext.extend(Ext.Panel, {
 
         this.items = [{
             xtype : 'form',
-            title : MShop.I18n.dt('client/extjs', 'Billing address'),
+            title : MShop.I18n.dt('admin', 'Billing address'),
             flex : 1,
             autoScroll : true,
             items : [{
@@ -14398,91 +14398,91 @@ MShop.panel.order.base.address.ItemUi = Ext.extend(Ext.Panel, {
                 },
                 items : [{
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                    fieldLabel : MShop.I18n.dt('admin', 'ID'),
                     name : 'order.base.address.id'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Address ID'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Address ID'),
                     name : 'order.base.address.addressid'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Company'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Company'),
                     name : 'order.base.address.company'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Vat ID'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Vat ID'),
                     name : 'order.base.address.vatid'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Salutation'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Salutation'),
                     name : 'order.base.address.salutation'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Title'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Title'),
                     name : 'order.base.address.title'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Firstname'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Firstname'),
                     name : 'order.base.address.firstname'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Lastname'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Lastname'),
                     name : 'order.base.address.lastname'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Address 1'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Address 1'),
                     name : 'order.base.address.address1'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Address 2'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Address 2'),
                     name : 'order.base.address.address2'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Address 3'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Address 3'),
                     name : 'order.base.address.address3'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Postal code'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Postal code'),
                     name : 'order.base.address.postal'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'City'),
+                    fieldLabel : MShop.I18n.dt('admin', 'City'),
                     name : 'order.base.address.city'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'State'),
+                    fieldLabel : MShop.I18n.dt('admin', 'State'),
                     name : 'order.base.address.state'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Country'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Country'),
                     name : 'order.base.address.countryid'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Telephone'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Telephone'),
                     name : 'order.base.address.telephone'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Telefax'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Telefax'),
                     name : 'order.base.address.telefax'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'E-Mail'),
+                    fieldLabel : MShop.I18n.dt('admin', 'E-Mail'),
                     name : 'order.base.address.email'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Website'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Website'),
                     name : 'order.base.address.website'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Created'),
                     name : 'order.base.address.ctime'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                     name : 'order.base.address.mtime'
                 }, {
                     xtype : 'displayfield',
-                    fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                    fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                     name : 'order.base.address.editor'
                 }]
             }]
@@ -14572,7 +14572,7 @@ Ext.ns('MShop.panel.order.base.address');
 
 MShop.panel.order.base.address.DeliveryItemUi = Ext.extend(Ext.FormPanel, {
 
-    title : MShop.I18n.dt('client/extjs', 'Delivery address'),
+    title : MShop.I18n.dt('admin', 'Delivery address'),
     flex : 1,
     autoScroll : true,
     recordName : 'Order_Base_Address',
@@ -14594,91 +14594,91 @@ MShop.panel.order.base.address.DeliveryItemUi = Ext.extend(Ext.FormPanel, {
             },
             items : [{
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                fieldLabel : MShop.I18n.dt('admin', 'ID'),
                 name : 'order.base.address.id'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Address ID'),
+                fieldLabel : MShop.I18n.dt('admin', 'Address ID'),
                 name : 'order.base.address.addressid'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Company'),
+                fieldLabel : MShop.I18n.dt('admin', 'Company'),
                 name : 'order.base.address.company'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Vat ID'),
+                fieldLabel : MShop.I18n.dt('admin', 'Vat ID'),
                 name : 'order.base.address.vatid'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Salutation'),
+                fieldLabel : MShop.I18n.dt('admin', 'Salutation'),
                 name : 'order.base.address.salutation'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Title'),
+                fieldLabel : MShop.I18n.dt('admin', 'Title'),
                 name : 'order.base.address.title'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Firstname'),
+                fieldLabel : MShop.I18n.dt('admin', 'Firstname'),
                 name : 'order.base.address.firstname'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Lastname'),
+                fieldLabel : MShop.I18n.dt('admin', 'Lastname'),
                 name : 'order.base.address.lastname'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Address 1'),
+                fieldLabel : MShop.I18n.dt('admin', 'Address 1'),
                 name : 'order.base.address.address1'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Address 2'),
+                fieldLabel : MShop.I18n.dt('admin', 'Address 2'),
                 name : 'order.base.address.address2'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Address 3'),
+                fieldLabel : MShop.I18n.dt('admin', 'Address 3'),
                 name : 'order.base.address.address3'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Postal code'),
+                fieldLabel : MShop.I18n.dt('admin', 'Postal code'),
                 name : 'order.base.address.postal'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'City'),
+                fieldLabel : MShop.I18n.dt('admin', 'City'),
                 name : 'order.base.address.city'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'State'),
+                fieldLabel : MShop.I18n.dt('admin', 'State'),
                 name : 'order.base.address.state'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Country'),
+                fieldLabel : MShop.I18n.dt('admin', 'Country'),
                 name : 'order.base.address.countryid'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Telephone'),
+                fieldLabel : MShop.I18n.dt('admin', 'Telephone'),
                 name : 'order.base.address.telephone'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Telefax'),
+                fieldLabel : MShop.I18n.dt('admin', 'Telefax'),
                 name : 'order.base.address.telefax'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'E-Mail'),
+                fieldLabel : MShop.I18n.dt('admin', 'E-Mail'),
                 name : 'order.base.address.email'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Website'),
+                fieldLabel : MShop.I18n.dt('admin', 'Website'),
                 name : 'order.base.address.website'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                fieldLabel : MShop.I18n.dt('admin', 'Created'),
                 name : 'order.base.address.ctime'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                 name : 'order.base.address.mtime'
             }, {
                 xtype : 'displayfield',
-                fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                 name : 'order.base.address.editor'
             }]
         }];
@@ -14766,7 +14766,7 @@ Ext.ns('MShop.panel.order.base.product');
 
 MShop.panel.order.base.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Products'),
+    title : MShop.I18n.dt('admin', 'Products'),
     recordName : 'Order_Base_Product',
     idProperty : 'order.base.product.id',
     siteidProperty : 'order.base.product.siteid',
@@ -14820,69 +14820,69 @@ MShop.panel.order.base.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.baseid',
-            header : MShop.I18n.dt('client/extjs', 'Base ID'),
+            header : MShop.I18n.dt('admin', 'Base ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.productid',
-            header : MShop.I18n.dt('client/extjs', 'Product ID'),
+            header : MShop.I18n.dt('admin', 'Product ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.orderproductid',
-            header : MShop.I18n.dt('client/extjs', 'Order product ID'),
+            header : MShop.I18n.dt('admin', 'Order product ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.type',
-            header : MShop.I18n.dt('client/extjs', 'Type')
+            header : MShop.I18n.dt('admin', 'Type')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.prodcode',
-            header : MShop.I18n.dt('client/extjs', 'Code')
+            header : MShop.I18n.dt('admin', 'Code')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.name',
-            header : MShop.I18n.dt('client/extjs', 'Name'),
+            header : MShop.I18n.dt('admin', 'Name'),
             id : 'order-base-product-Label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.quantity',
-            header : MShop.I18n.dt('client/extjs', 'Quantity')
+            header : MShop.I18n.dt('admin', 'Quantity')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.price',
-            header : MShop.I18n.dt('client/extjs', 'Price')
+            header : MShop.I18n.dt('admin', 'Price')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.costs',
-            header : MShop.I18n.dt('client/extjs', 'Costs')
+            header : MShop.I18n.dt('admin', 'Costs')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.rebate',
-            header : MShop.I18n.dt('client/extjs', 'Rebate')
+            header : MShop.I18n.dt('admin', 'Rebate')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.taxrate',
-            header : MShop.I18n.dt('client/extjs', 'Tax rate')
+            header : MShop.I18n.dt('admin', 'Tax rate')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             renderer : MShop.elements.deliverystatus.renderer
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.product.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -14890,7 +14890,7 @@ MShop.panel.order.base.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.product.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -14898,7 +14898,7 @@ MShop.panel.order.base.product.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -14930,7 +14930,7 @@ MShop.panel.order.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Product item details');
+        this.title = MShop.I18n.dt('admin', 'Product item details');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
@@ -14942,7 +14942,7 @@ MShop.panel.order.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Product'),
+                title : MShop.I18n.dt('admin', 'Product'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -14955,7 +14955,7 @@ MShop.panel.order.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -14970,64 +14970,64 @@ MShop.panel.order.product.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'order.base.product.id'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Product ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Product ID'),
                             name : 'order.base.product.productid'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Order product ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Order product ID'),
                             name : 'order.base.product.orderproductid'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'order.base.product.type'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'order.base.product.prodcode'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Name'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Name'),
                             name : 'order.base.product.name'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Quantity'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Quantity'),
                             name : 'order.base.product.quantity'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Price'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Price'),
                             name : 'order.base.product.price'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Costs'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Costs'),
                             name : 'order.base.product.costs'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Rebate'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Rebate'),
                             name : 'order.base.product.rebate'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Tax rate in %'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Tax rate in %'),
                             name : 'order.base.product.taxrate'
                         }, {
                             xtype : 'ux.formattabledisplayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Status'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Status'),
                             name : 'order.base.product.status',
                             renderer : MShop.elements.deliverystatus.renderer
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'order.base.product.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'order.base.product.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'order.base.product.editor'
                         }]
                     }]
@@ -15055,7 +15055,7 @@ Ext.ns('MShop.panel.order.base.product.attribute');
 
 MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Attribute'),
+    title : MShop.I18n.dt('admin', 'Attribute'),
     recordName : 'Order_Base_Product_Attribute',
     idProperty : 'order.base.product.attribute.id',
     siteidProperty : 'order.base.product.attribute.siteid',
@@ -15114,47 +15114,47 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend(MShop.panel.Ab
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.type',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 150
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.name',
-            header : MShop.I18n.dt('client/extjs', 'Name'),
+            header : MShop.I18n.dt('admin', 'Name'),
             id : 'order-base-product-attribute-name'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             width : 150
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.value',
-            header : MShop.I18n.dt('client/extjs', 'Value'),
+            header : MShop.I18n.dt('admin', 'Value'),
             width : 150
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.product.attribute.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.product.attribute.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             hidden : true
         }];
@@ -15172,7 +15172,7 @@ Ext.ns('MShop.panel.order.base.service');
 
 MShop.panel.order.base.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Services'),
+    title : MShop.I18n.dt('admin', 'Services'),
     recordName : 'Order_Base_Service',
     idProperty : 'order.base.service.id',
     siteidProperty : 'order.base.service.siteid',
@@ -15226,54 +15226,54 @@ MShop.panel.order.base.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.baseid',
-            header : MShop.I18n.dt('client/extjs', 'Base ID'),
+            header : MShop.I18n.dt('admin', 'Base ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.serviceid',
-            header : MShop.I18n.dt('client/extjs', 'Service ID'),
+            header : MShop.I18n.dt('admin', 'Service ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.type',
-            header : MShop.I18n.dt('client/extjs', 'Type')
+            header : MShop.I18n.dt('admin', 'Type')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.code',
-            header : MShop.I18n.dt('client/extjs', 'Code')
+            header : MShop.I18n.dt('admin', 'Code')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.name',
-            header : MShop.I18n.dt('client/extjs', 'Name'),
+            header : MShop.I18n.dt('admin', 'Name'),
             id : 'order-base-service-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.price',
-            header : MShop.I18n.dt('client/extjs', 'Price')
+            header : MShop.I18n.dt('admin', 'Price')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.costs',
-            header : MShop.I18n.dt('client/extjs', 'Costs')
+            header : MShop.I18n.dt('admin', 'Costs')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.rebate',
-            header : MShop.I18n.dt('client/extjs', 'Rebate')
+            header : MShop.I18n.dt('admin', 'Rebate')
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.taxrate',
-            header : MShop.I18n.dt('client/extjs', 'Tax rate')
+            header : MShop.I18n.dt('admin', 'Tax rate')
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.service.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -15281,7 +15281,7 @@ MShop.panel.order.base.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.service.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -15289,7 +15289,7 @@ MShop.panel.order.base.service.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -15321,7 +15321,7 @@ MShop.panel.order.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Service item details');
+        this.title = MShop.I18n.dt('admin', 'Service item details');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
@@ -15333,7 +15333,7 @@ MShop.panel.order.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Service'),
+                title : MShop.I18n.dt('admin', 'Service'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -15346,7 +15346,7 @@ MShop.panel.order.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -15361,51 +15361,51 @@ MShop.panel.order.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'order.base.service.id'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Service ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Service ID'),
                             name : 'order.base.service.serviceid'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'order.base.service.type'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'order.base.service.code'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Name'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Name'),
                             name : 'order.base.service.name'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Price'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Price'),
                             name : 'order.base.service.price'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Costs'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Costs'),
                             name : 'order.base.service.costs'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Rebate'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Rebate'),
                             name : 'order.base.service.rebate'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Tax rate in %'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Tax rate in %'),
                             name : 'order.base.service.taxrate'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'order.base.service.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'order.base.service.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'order.base.service.editor'
                         }]
                     }]
@@ -15433,7 +15433,7 @@ Ext.ns('MShop.panel.order.base.service.attribute');
 
 MShop.panel.order.base.service.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Attribute'),
+    title : MShop.I18n.dt('admin', 'Attribute'),
     recordName : 'Order_Base_Service_Attribute',
     idProperty : 'order.base.service.attribute.id',
     siteidProperty : 'order.base.service.attribute.siteid',
@@ -15493,47 +15493,47 @@ MShop.panel.order.base.service.attribute.ListUiSmall = Ext.extend(MShop.panel.Ab
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.attribute.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.attribute.type',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 150
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.attribute.name',
-            header : MShop.I18n.dt('client/extjs', 'Name'),
+            header : MShop.I18n.dt('admin', 'Name'),
             id : 'order-base-service-attribute-name'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.attribute.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             width : 150
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.attribute.value',
-            header : MShop.I18n.dt('client/extjs', 'Value'),
+            header : MShop.I18n.dt('admin', 'Value'),
             width : 150
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.service.attribute.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.service.attribute.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.service.attribute.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             hidden : true
         }];
@@ -15551,7 +15551,7 @@ Ext.ns('MShop.panel.order.base.coupon');
 
 MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Coupons'),
+    title : MShop.I18n.dt('admin', 'Coupons'),
     recordName : 'Order_Base_Coupon',
     idProperty : 'order.base.coupon.id',
     siteidProperty : 'order.base.coupon.siteid',
@@ -15630,33 +15630,33 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.id',
-                header : MShop.I18n.dt('client/extjs', 'ID'),
+                header : MShop.I18n.dt('admin', 'ID'),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.baseid',
-                header : MShop.I18n.dt('client/extjs', 'Base ID'),
+                header : MShop.I18n.dt('admin', 'Base ID'),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.code',
-                header : MShop.I18n.dt('client/extjs', 'Coupon code')
+                header : MShop.I18n.dt('admin', 'Coupon code')
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
-                header : MShop.I18n.dt('client/extjs', 'Product ID'),
+                header : MShop.I18n.dt('admin', 'Product ID'),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
-                header : MShop.I18n.dt('client/extjs', 'Product code'),
+                header : MShop.I18n.dt('admin', 'Product code'),
                 renderer : this.typeColumnRenderer.createDelegate(this, [
                     this.productStore,
                     "order.base.product.prodcode"], true)
@@ -15664,7 +15664,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
-                header : MShop.I18n.dt('client/extjs', 'Product name'),
+                header : MShop.I18n.dt('admin', 'Product name'),
                 renderer : this.typeColumnRenderer.createDelegate(this, [this.productStore, "order.base.product.name"],
                     true),
                 id : 'order-base-coupon-name'
@@ -15672,7 +15672,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
-                header : MShop.I18n.dt('client/extjs', 'Product quantity'),
+                header : MShop.I18n.dt('admin', 'Product quantity'),
                 renderer : this.typeColumnRenderer.createDelegate(this, [
                     this.productStore,
                     "order.base.product.quantity"], true)
@@ -15680,28 +15680,28 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
-                header : MShop.I18n.dt('client/extjs', 'Product price'),
+                header : MShop.I18n.dt('admin', 'Product price'),
                 renderer : this.typeColumnRenderer.createDelegate(this,
                     [this.productStore, "order.base.product.price"], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
-                header : MShop.I18n.dt('client/extjs', 'Product costs'),
+                header : MShop.I18n.dt('admin', 'Product costs'),
                 renderer : this.typeColumnRenderer.createDelegate(this,
                     [this.productStore, "order.base.product.costs"], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
-                header : MShop.I18n.dt('client/extjs', 'Product rebate'),
+                header : MShop.I18n.dt('admin', 'Product rebate'),
                 renderer : this.typeColumnRenderer.createDelegate(this,
                     [this.productStore, "order.base.product.rebate"], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.productid',
-                header : MShop.I18n.dt('client/extjs', 'Product tax rate'),
+                header : MShop.I18n.dt('admin', 'Product tax rate'),
                 renderer : this.typeColumnRenderer.createDelegate(this, [
                     this.productStore,
                     "order.base.product.taxrate"], true)
@@ -15709,7 +15709,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'order.base.coupon.ctime',
-                header : MShop.I18n.dt('client/extjs', 'Created'),
+                header : MShop.I18n.dt('admin', 'Created'),
                 sortable : true,
                 width : 130,
                 format : 'Y-m-d H:i:s',
@@ -15719,7 +15719,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'order.base.coupon.mtime',
-                header : MShop.I18n.dt('client/extjs', 'Last modified'),
+                header : MShop.I18n.dt('admin', 'Last modified'),
                 sortable : true,
                 width : 130,
                 format : 'Y-m-d H:i:s',
@@ -15729,7 +15729,7 @@ MShop.panel.order.base.coupon.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'order.base.coupon.editor',
-                header : MShop.I18n.dt('client/extjs', 'Editor'),
+                header : MShop.I18n.dt('admin', 'Editor'),
                 sortable : true,
                 width : 130,
                 editable : false,
@@ -15785,14 +15785,14 @@ MShop.elements.paymentstatus.getStore = function() {
                 type : 'string'
             }],
             data : [
-                [-1, MShop.I18n.dt('client/extjs', 'pay:unfinished')],
-                [0, MShop.I18n.dt('client/extjs', 'pay:deleted')],
-                [1, MShop.I18n.dt('client/extjs', 'pay:canceled')],
-                [2, MShop.I18n.dt('client/extjs', 'pay:refused')],
-                [3, MShop.I18n.dt('client/extjs', 'pay:refund')],
-                [4, MShop.I18n.dt('client/extjs', 'pay:pending')],
-                [5, MShop.I18n.dt('client/extjs', 'pay:authorized')],
-                [6, MShop.I18n.dt('client/extjs', 'pay:received')]]
+                [-1, MShop.I18n.dt('admin', 'pay:unfinished')],
+                [0, MShop.I18n.dt('admin', 'pay:deleted')],
+                [1, MShop.I18n.dt('admin', 'pay:canceled')],
+                [2, MShop.I18n.dt('admin', 'pay:refused')],
+                [3, MShop.I18n.dt('admin', 'pay:refund')],
+                [4, MShop.I18n.dt('admin', 'pay:pending')],
+                [5, MShop.I18n.dt('admin', 'pay:authorized')],
+                [6, MShop.I18n.dt('admin', 'pay:received')]]
         });
     }
 
@@ -15839,15 +15839,15 @@ MShop.elements.deliverystatus.getStore = function() {
                 type : 'string'
             }],
             data : [
-                [-1, MShop.I18n.dt('client/extjs', 'stat:unfinished')],
-                [0, MShop.I18n.dt('client/extjs', 'stat:deleted')],
-                [1, MShop.I18n.dt('client/extjs', 'stat:pending')],
-                [2, MShop.I18n.dt('client/extjs', 'stat:progress')],
-                [3, MShop.I18n.dt('client/extjs', 'stat:dispatched')],
-                [4, MShop.I18n.dt('client/extjs', 'stat:delivered')],
-                [5, MShop.I18n.dt('client/extjs', 'stat:lost')],
-                [6, MShop.I18n.dt('client/extjs', 'stat:refused')],
-                [7, MShop.I18n.dt('client/extjs', 'stat:returned')]]
+                [-1, MShop.I18n.dt('admin', 'stat:unfinished')],
+                [0, MShop.I18n.dt('admin', 'stat:deleted')],
+                [1, MShop.I18n.dt('admin', 'stat:pending')],
+                [2, MShop.I18n.dt('admin', 'stat:progress')],
+                [3, MShop.I18n.dt('admin', 'stat:dispatched')],
+                [4, MShop.I18n.dt('admin', 'stat:delivered')],
+                [5, MShop.I18n.dt('admin', 'stat:lost')],
+                [6, MShop.I18n.dt('admin', 'stat:refused')],
+                [7, MShop.I18n.dt('admin', 'stat:returned')]]
         });
     }
 
@@ -15864,7 +15864,7 @@ Ext.ns('MShop.panel.job');
 MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Job item details');
+        this.title = MShop.I18n.dt('admin', 'Job item details');
 
         this.items = [{
             xtype : 'tabpanel',
@@ -15874,7 +15874,7 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -15887,7 +15887,7 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -15902,33 +15902,33 @@ MShop.panel.job.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'job.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'job.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'job.label',
                             allowBlank : false,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Method'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Method'),
                             name : 'job.method'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'job.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'job.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'job.editor'
                         }]
                     }]
@@ -15972,7 +15972,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Jobs');
+        this.title = MShop.I18n.dt('admin', 'Jobs');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -15984,7 +15984,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'job.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             editable : false,
@@ -15992,7 +15992,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'job.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -16000,14 +16000,14 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'job.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false,
             id : 'job-list-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'job.method',
-            header : MShop.I18n.dt('client/extjs', 'Method'),
+            header : MShop.I18n.dt('admin', 'Method'),
             sortable : true,
             width : 200,
             editable : false,
@@ -16015,7 +16015,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'job.parameter',
-            header : MShop.I18n.dt('client/extjs', 'Parameter'),
+            header : MShop.I18n.dt('admin', 'Parameter'),
             sortable : false,
             width : 100,
             editable : false,
@@ -16036,7 +16036,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'job.result',
-            header : MShop.I18n.dt('client/extjs', 'Result'),
+            header : MShop.I18n.dt('admin', 'Result'),
             sortable : false,
             width : 200,
             editable : false,
@@ -16060,7 +16060,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'job.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -16069,7 +16069,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'job.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -16078,7 +16078,7 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'job.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 80,
             editable : false
@@ -16099,7 +16099,7 @@ MShop.panel.cache.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Cache item details');
+        this.title = MShop.I18n.dt('admin', 'Cache item details');
 
         this.items = [{
             xtype : 'tabpanel',
@@ -16109,7 +16109,7 @@ MShop.panel.cache.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -16122,7 +16122,7 @@ MShop.panel.cache.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -16137,19 +16137,19 @@ MShop.panel.cache.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'cache.id'
                         }, {
                             xtype : 'textarea',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Value'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Value'),
                             name : 'cache.value',
                             allowBlank : false
                         }, {
                             xtype : 'datefield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Expires'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Expires'),
                             name : 'cache.expire',
                             format : 'Y-m-d H:i:s',
-                            emptyText : MShop.I18n.dt('client/extjs', 'YYYY-MM-DD hh:mm:ss (optional)')
+                            emptyText : MShop.I18n.dt('admin', 'YYYY-MM-DD hh:mm:ss (optional)')
                         }]
                     }]
                 }]
@@ -16187,7 +16187,7 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Cache');
+        this.title = MShop.I18n.dt('admin', 'Cache');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -16199,19 +16199,19 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
     initActions : function() {
 
         this.actionEdit = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Edit'),
+            text : MShop.I18n.dt('admin', 'Edit'),
             disabled : true,
             handler : this.onOpenEditWindow.createDelegate(this, ['edit'])
         });
 
         this.actionDelete = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Delete'),
+            text : MShop.I18n.dt('admin', 'Delete'),
             disabled : true,
             handler : this.onDeleteSelectedItems.createDelegate(this)
         });
 
         this.actionFlush = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Flush'),
+            text : MShop.I18n.dt('admin', 'Flush'),
             handler : this.onFlush.createDelegate(this)
         });
     },
@@ -16237,12 +16237,12 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'cache.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 400
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'cache.value',
-            header : MShop.I18n.dt('client/extjs', 'Value'),
+            header : MShop.I18n.dt('admin', 'Value'),
             id : 'cache-list-value',
             renderer : function(data) {
                 return Ext.util.Format.htmlEncode(data);
@@ -16250,7 +16250,7 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'cache.expire',
-            header : MShop.I18n.dt('client/extjs', 'Expires'),
+            header : MShop.I18n.dt('admin', 'Expires'),
             format : 'Y-m-d H:i:s',
             width : 130
         }];
@@ -16261,8 +16261,8 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         var that = this;
 
         Ext.Msg.show({
-            title : MShop.I18n.dt('client/extjs', 'Flush cache?'),
-            msg : MShop.I18n.dt('client/extjs',
+            title : MShop.I18n.dt('admin', 'Flush cache?'),
+            msg : MShop.I18n.dt('admin',
                 'You are going to flush the complete cache for the current site. Would you like to proceed?'),
             buttons : Ext.Msg.YESNO,
             fn : function(btn) {
@@ -16310,7 +16310,7 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Logs');
+        this.title = MShop.I18n.dt('admin', 'Logs');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -16331,31 +16331,31 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'log.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.facility',
-            header : MShop.I18n.dt('client/extjs', 'Facility'),
+            header : MShop.I18n.dt('admin', 'Facility'),
             width : 50,
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'log.timestamp',
-            header : MShop.I18n.dt('client/extjs', 'Date'),
+            header : MShop.I18n.dt('admin', 'Date'),
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.priority',
-            header : MShop.I18n.dt('client/extjs', 'Priority'),
+            header : MShop.I18n.dt('admin', 'Priority'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.message',
-            header : MShop.I18n.dt('client/extjs', 'Message'),
+            header : MShop.I18n.dt('admin', 'Message'),
             id : 'list-log-message',
             renderer : function(data) {
                 try {
@@ -16373,13 +16373,13 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.request',
-            header : MShop.I18n.dt('client/extjs', 'Request'),
+            header : MShop.I18n.dt('admin', 'Request'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 120,
             editable : false,
@@ -16387,7 +16387,7 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 120,
             editable : false,
@@ -16395,7 +16395,7 @@ MShop.panel.log.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'log.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 120,
             editable : false,
@@ -16430,7 +16430,7 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Warehouse');
+        this.title = MShop.I18n.dt('admin', 'Warehouse');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -16444,32 +16444,32 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'product.stock.warehouse.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.stock.warehouse.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             align : 'center',
             renderer : this.statusColumnRenderer.createDelegate(this)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.stock.warehouse.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.stock.warehouse.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             id : 'product-warehouse-list-label'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.stock.warehouse.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -16477,7 +16477,7 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.stock.warehouse.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -16485,7 +16485,7 @@ MShop.panel.stock.warehouse.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.stock.warehouse.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -16520,7 +16520,7 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -16532,7 +16532,7 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     title : 'Details',
                     flex : 1,
@@ -16549,35 +16549,35 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'product.stock.warehouse.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'product.stock.warehouse.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'product.stock.warehouse.code',
                             allowBlank : false,
                             maxLength : 32,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'product.stock.warehouse.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'product.stock.warehouse.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'product.stock.warehouse.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'product.stock.warehouse.editor'
                         }]
                     }]
@@ -16589,10 +16589,10 @@ MShop.panel.stock.warehouse.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['product.stock.warehouse.label'] : MShop.I18n.dt('client/extjs',
+        var label = this.record ? this.record.data['product.stock.warehouse.label'] : MShop.I18n.dt('admin',
             'new');
         //#: Product warehouse item panel title with warehouse label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Warehouse: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Warehouse: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.stock.warehouse.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -16623,7 +16623,7 @@ MShop.panel.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -16635,7 +16635,7 @@ MShop.panel.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     border : false,
                     flex : 1,
@@ -16653,11 +16653,11 @@ MShop.panel.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'tag.id'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'tag.typeid',
                             mode : 'local',
                             store : this.listUI.typeStore,
@@ -16672,21 +16672,21 @@ MShop.panel.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                             name : 'tag.languageid'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'tag.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Tag value (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Tag value (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'tag.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'tag.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'tag.editor'
                         }]
                     }]
@@ -16698,9 +16698,9 @@ MShop.panel.tag.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['tag.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['tag.label'] : MShop.I18n.dt('admin', 'new');
         //#: Tag item panel title with tag label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Tag: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Tag: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.tag.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -16740,34 +16740,34 @@ MShop.panel.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'tag.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'tag.typeid',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             sortable : true,
             width : 70,
             renderer : this.typeColumnRenderer.createDelegate(this, [this.typeStore, "tag.type.label"], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'tag.languageid',
-            header : MShop.I18n.dt('client/extjs', 'Language'),
+            header : MShop.I18n.dt('admin', 'Language'),
             sortable : true,
             width : 70,
             renderer : MShop.elements.language.renderer
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'tag.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             id : 'product-tag-label'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'tag.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             editable : false,
@@ -16775,7 +16775,7 @@ MShop.panel.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'tag.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             editable : false,
@@ -16783,7 +16783,7 @@ MShop.panel.tag.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'tag.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -16803,19 +16803,19 @@ Ext.ns('MShop.panel.tag');
 
 MShop.panel.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Tags'),
+    title : MShop.I18n.dt('admin', 'Tags'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated tags'),
+            title : MShop.I18n.dt('admin', 'Associated tags'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'tag',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available tags'),
+            title : MShop.I18n.dt('admin', 'Available tags'),
             xtype : 'MShop.panel.tag.listuismall'
         });
 
@@ -16832,7 +16832,7 @@ MShop.panel.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, 
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 id : 'listtype',
                 width : 70,
                 renderer : this.typeColumnRenderer.createDelegate(this,
@@ -16841,7 +16841,7 @@ MShop.panel.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, 
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 id : 'reftype',
                 width : 70,
                 renderer : this.refTypeColumnRenderer.createDelegate(this, [
@@ -16852,7 +16852,7 @@ MShop.panel.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, 
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Language'),
+                header : MShop.I18n.dt('admin', 'Language'),
                 id : 'reflang',
                 width : 70,
                 renderer : this.refLangColumnRenderer.createDelegate(this, ['tag.languageid'], true)
@@ -16860,7 +16860,7 @@ MShop.panel.tag.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, 
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 id : 'refcontent',
                 renderer : this.refColumnRenderer.createDelegate(this, ['tag.label'], true)
             }];
@@ -16890,7 +16890,7 @@ MShop.panel.locale.TabUi = Ext.extend(Ext.Panel, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Locale');
+        this.title = MShop.I18n.dt('admin', 'Locale');
 
         this.items = [{
             xtype : 'tabpanel',
@@ -16938,7 +16938,7 @@ MShop.panel.locale.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'List');
+        this.title = MShop.I18n.dt('admin', 'List');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -16950,14 +16950,14 @@ MShop.panel.locale.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'locale.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -16965,14 +16965,14 @@ MShop.panel.locale.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.languageid',
-            header : MShop.I18n.dt('client/extjs', 'Language'),
+            header : MShop.I18n.dt('admin', 'Language'),
             sortable : true,
             width : 100,
             renderer : MShop.elements.language.renderer
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.currencyid',
-            header : MShop.I18n.dt('client/extjs', 'Currency'),
+            header : MShop.I18n.dt('admin', 'Currency'),
             sortable : true,
             width : 100,
             id : 'locale-currencyid',
@@ -16980,13 +16980,13 @@ MShop.panel.locale.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.position',
-            header : MShop.I18n.dt('client/extjs', 'Position'),
+            header : MShop.I18n.dt('admin', 'Position'),
             sortable : true,
             width : 50
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -16995,7 +16995,7 @@ MShop.panel.locale.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17004,7 +17004,7 @@ MShop.panel.locale.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -17044,7 +17044,7 @@ MShop.panel.locale.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -17056,7 +17056,7 @@ MShop.panel.locale.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     flex : 1,
                     ref : '../../mainForm',
@@ -17072,42 +17072,42 @@ MShop.panel.locale.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'locale.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'locale.status'
                         }, {
                             xtype : 'MShop.elements.language.combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Language'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Language'),
                             name : 'locale.languageid',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Language (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Language (required)')
                         }, {
                             xtype : 'MShop.elements.currency.combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Currency'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Currency'),
                             name : 'locale.currencyid',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Currency (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Currency (required)')
                         }, {
                             xtype : 'numberfield',
                             name : 'locale.position',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Position'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Position'),
                             allowNegative : false,
                             allowDecimals : false,
                             allowBlank : false,
                             value : 0
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'locale.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'locale.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'locale.editor'
                         }]
                     }]
@@ -17120,7 +17120,7 @@ MShop.panel.locale.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     afterRender : function() {
         //#: Locale item panel title with site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Locale item details ({1})');
+        var string = MShop.I18n.dt('admin', 'Locale item details ({1})');
         this.setTitle(String.format(string, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -17154,7 +17154,7 @@ MShop.panel.locale.site.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Site');
+        this.title = MShop.I18n.dt('admin', 'Site');
 
         MShop.panel.locale.site.ListUi.superclass.initComponent.call(this);
 
@@ -17165,14 +17165,14 @@ MShop.panel.locale.site.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'locale.site.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.site.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -17180,14 +17180,14 @@ MShop.panel.locale.site.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.site.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.site.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -17195,7 +17195,7 @@ MShop.panel.locale.site.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.site.config',
-            header : MShop.I18n.dt('client/extjs', 'Configuration'),
+            header : MShop.I18n.dt('admin', 'Configuration'),
             width : 200,
             editable : false,
             renderer : function(value) {
@@ -17211,7 +17211,7 @@ MShop.panel.locale.site.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.site.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17220,7 +17220,7 @@ MShop.panel.locale.site.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.site.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17229,7 +17229,7 @@ MShop.panel.locale.site.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.site.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -17304,7 +17304,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -17316,7 +17316,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     flex : 1,
                     ref : '../../mainForm',
@@ -17332,36 +17332,36 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'locale.site.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'locale.site.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'locale.site.code',
                             allowBlank : false,
                             maxLength : 32,
                             regex : /^[^ \v\t\r\n\f]+$/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'locale.site.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'locale.site.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'locale.site.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'locale.site.editor'
                         }]
                     }]
@@ -17380,9 +17380,9 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['locale.site.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['locale.site.label'] : MShop.I18n.dt('admin', 'new');
         //#: Locale site item panel title with site label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Locale site: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Locale site: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.locale.site.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -17396,7 +17396,7 @@ MShop.panel.locale.site.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     onSaveItem : function() {
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }
@@ -17460,7 +17460,7 @@ MShop.panel.locale.language.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Language');
+        this.title = MShop.I18n.dt('admin', 'Language');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -17472,14 +17472,14 @@ MShop.panel.locale.language.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'locale.language.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.language.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -17487,14 +17487,14 @@ MShop.panel.locale.language.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.language.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.language.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -17502,7 +17502,7 @@ MShop.panel.locale.language.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.language.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17511,7 +17511,7 @@ MShop.panel.locale.language.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.language.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17520,7 +17520,7 @@ MShop.panel.locale.language.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.language.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -17562,7 +17562,7 @@ MShop.panel.locale.language.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -17574,7 +17574,7 @@ MShop.panel.locale.language.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     flex : 1,
                     ref : '../../mainForm',
@@ -17590,36 +17590,36 @@ MShop.panel.locale.language.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'locale.language.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'locale.language.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'locale.language.code',
                             allowBlank : false,
                             maxLength : 5,
                             regex : /[a-zA-Z_-]+/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'locale.language.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'locale.language.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'locale.language.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'locale.language.editor'
                         }]
                     }]
@@ -17631,9 +17631,9 @@ MShop.panel.locale.language.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['locale.language.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['locale.language.label'] : MShop.I18n.dt('admin', 'new');
         //#: Locale language item panel title with language label ({0}) and language code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Locale language: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Locale language: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.locale.language.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -17673,7 +17673,7 @@ MShop.panel.locale.currency.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Currency');
+        this.title = MShop.I18n.dt('admin', 'Currency');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -17685,14 +17685,14 @@ MShop.panel.locale.currency.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'locale.currency.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.currency.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -17700,14 +17700,14 @@ MShop.panel.locale.currency.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.currency.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 100,
             editable : false
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.currency.label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             width : 100,
             editable : false,
@@ -17715,7 +17715,7 @@ MShop.panel.locale.currency.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.currency.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17724,7 +17724,7 @@ MShop.panel.locale.currency.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'locale.currency.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17733,7 +17733,7 @@ MShop.panel.locale.currency.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'locale.currency.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -17775,7 +17775,7 @@ MShop.panel.locale.currency.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -17787,7 +17787,7 @@ MShop.panel.locale.currency.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     flex : 1,
                     ref : '../../mainForm',
@@ -17803,36 +17803,36 @@ MShop.panel.locale.currency.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'locale.currency.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'locale.currency.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'locale.currency.code',
                             allowBlank : false,
                             maxLength : 3,
                             regex : /[a-zA-Z]+/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'locale.currency.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'locale.currency.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'locale.currency.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'locale.currency.editor'
                         }]
                     }]
@@ -17844,9 +17844,9 @@ MShop.panel.locale.currency.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['locale.currency.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['locale.currency.label'] : MShop.I18n.dt('admin', 'new');
         //#: Locale currency item panel title with currency label ({0}) and currency code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Locale currency: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Locale currency: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.locale.currency.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -17888,7 +17888,7 @@ MShop.panel.attribute.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     // Override initComponent to set Label of tab.
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Attribute type');
+        this.title = MShop.I18n.dt('admin', 'Attribute type');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -17903,14 +17903,14 @@ MShop.panel.attribute.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'attribute.type.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.type.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -17918,12 +17918,12 @@ MShop.panel.attribute.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.type.domain',
-            header : MShop.I18n.dt('client/extjs', 'Domain'),
+            header : MShop.I18n.dt('admin', 'Domain'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.type.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 150,
             align : 'center',
@@ -17932,13 +17932,13 @@ MShop.panel.attribute.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.type.label',
             id : 'attribute-type-label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'datecolumn',
             dataIndex : 'attribute.type.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17947,7 +17947,7 @@ MShop.panel.attribute.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'attribute.type.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -17956,7 +17956,7 @@ MShop.panel.attribute.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'attribute.type.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -17989,9 +17989,9 @@ MShop.panel.attribute.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['attribute.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['attribute.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Attribute type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Attribute type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Attribute type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.attribute.type.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -18032,7 +18032,7 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     // Override initComponent to set Label of tab.
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Media type');
+        this.title = MShop.I18n.dt('admin', 'Media type');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -18047,14 +18047,14 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'media.type.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.type.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -18062,12 +18062,12 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.type.domain',
-            header : MShop.I18n.dt('client/extjs', 'Domain'),
+            header : MShop.I18n.dt('admin', 'Domain'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.type.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 150,
             align : 'center',
@@ -18076,13 +18076,13 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             xtype : 'gridcolumn',
             dataIndex : 'media.type.label',
             id : 'media-type-label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'datecolumn',
             dataIndex : 'media.type.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18091,7 +18091,7 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'media.type.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18100,7 +18100,7 @@ MShop.panel.media.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'media.type.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -18132,9 +18132,9 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['media.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['media.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Media type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Media type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Media type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.media.type.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -18175,7 +18175,7 @@ MShop.panel.plugin.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     // Override initComponent to set Label of tab.
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Plugin type');
+        this.title = MShop.I18n.dt('admin', 'Plugin type');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -18190,14 +18190,14 @@ MShop.panel.plugin.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'plugin.type.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.type.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -18205,12 +18205,12 @@ MShop.panel.plugin.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.type.domain',
-            header : MShop.I18n.dt('client/extjs', 'Domain'),
+            header : MShop.I18n.dt('admin', 'Domain'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.type.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 150,
             align : 'center',
@@ -18219,13 +18219,13 @@ MShop.panel.plugin.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.type.label',
             id : 'plugin-type-label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'datecolumn',
             dataIndex : 'plugin.type.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18234,7 +18234,7 @@ MShop.panel.plugin.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'plugin.type.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18243,7 +18243,7 @@ MShop.panel.plugin.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'plugin.type.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -18275,9 +18275,9 @@ MShop.panel.plugin.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['plugin.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['plugin.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Plugin type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Plugin type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Plugin type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.plugin.type.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -18318,7 +18318,7 @@ MShop.panel.price.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     // Override initComponent to set Label of tab.
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Price type');
+        this.title = MShop.I18n.dt('admin', 'Price type');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -18333,14 +18333,14 @@ MShop.panel.price.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'price.type.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'price.type.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -18348,12 +18348,12 @@ MShop.panel.price.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'price.type.domain',
-            header : MShop.I18n.dt('client/extjs', 'Domain'),
+            header : MShop.I18n.dt('admin', 'Domain'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'price.type.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 150,
             align : 'center',
@@ -18362,13 +18362,13 @@ MShop.panel.price.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             xtype : 'gridcolumn',
             dataIndex : 'price.type.label',
             id : 'price-type-label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'datecolumn',
             dataIndex : 'price.type.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18377,7 +18377,7 @@ MShop.panel.price.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'price.type.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18386,7 +18386,7 @@ MShop.panel.price.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'price.type.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -18418,9 +18418,9 @@ MShop.panel.price.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['price.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['price.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Price type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Price type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Price type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.price.type.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -18460,7 +18460,7 @@ MShop.panel.product.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     // Override initComponent to set Label of tab.
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Product type');
+        this.title = MShop.I18n.dt('admin', 'Product type');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -18474,14 +18474,14 @@ MShop.panel.product.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'product.type.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.type.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -18489,12 +18489,12 @@ MShop.panel.product.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.type.domain',
-            header : MShop.I18n.dt('client/extjs', 'Domain'),
+            header : MShop.I18n.dt('admin', 'Domain'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.type.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 150,
             align : 'center',
@@ -18503,13 +18503,13 @@ MShop.panel.product.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             xtype : 'gridcolumn',
             dataIndex : 'product.type.label',
             id : 'product-type-label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.type.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18518,7 +18518,7 @@ MShop.panel.product.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'product.type.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18527,7 +18527,7 @@ MShop.panel.product.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'product.type.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -18557,9 +18557,9 @@ MShop.panel.product.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['product.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['product.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Product type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Product type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Product type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.type.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -18599,7 +18599,7 @@ MShop.panel.service.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     // Override initComponent to set Label of tab.
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Service type');
+        this.title = MShop.I18n.dt('admin', 'Service type');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -18613,14 +18613,14 @@ MShop.panel.service.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'service.type.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.type.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -18628,12 +18628,12 @@ MShop.panel.service.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.type.domain',
-            header : MShop.I18n.dt('client/extjs', 'Domain'),
+            header : MShop.I18n.dt('admin', 'Domain'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.type.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 150,
             align : 'center',
@@ -18642,13 +18642,13 @@ MShop.panel.service.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             xtype : 'gridcolumn',
             dataIndex : 'service.type.label',
             id : 'service-type-label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'datecolumn',
             dataIndex : 'service.type.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18657,7 +18657,7 @@ MShop.panel.service.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'service.type.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18666,7 +18666,7 @@ MShop.panel.service.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'service.type.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -18696,9 +18696,9 @@ MShop.panel.service.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['service.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['service.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Service type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Service type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Service type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.service.type.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -18737,7 +18737,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     // Override initComponent to set Label of tab.
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Text type');
+        this.title = MShop.I18n.dt('admin', 'Text type');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -18751,14 +18751,14 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'text.type.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.type.status',
-            header : MShop.I18n.dt('client/extjs', 'Status'),
+            header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
             align : 'center',
@@ -18766,12 +18766,12 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.type.domain',
-            header : MShop.I18n.dt('client/extjs', 'Domain'),
+            header : MShop.I18n.dt('admin', 'Domain'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.type.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 150,
             align : 'center',
@@ -18780,13 +18780,13 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             xtype : 'gridcolumn',
             dataIndex : 'text.type.label',
             id : 'text-type-label',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'datecolumn',
             dataIndex : 'text.type.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18795,7 +18795,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'text.type.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -18804,7 +18804,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'text.type.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             editable : false,
@@ -18835,9 +18835,9 @@ MShop.panel.text.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['text.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['text.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Text type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Text type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Text type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.text.type.ItemUi.superclass.afterRender.apply(this, arguments);
@@ -18866,7 +18866,7 @@ MShop.panel.type.TabUi = Ext.extend(Ext.Panel, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Types');
+        this.title = MShop.I18n.dt('admin', 'Types');
 
         this.items = [{
             xtype : 'tabpanel',

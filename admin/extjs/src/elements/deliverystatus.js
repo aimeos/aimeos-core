@@ -39,15 +39,15 @@ MShop.elements.deliverystatus.getStore = function() {
                 type : 'string'
             }],
             data : [
-                [-1, MShop.I18n.dt('client/extjs', 'stat:unfinished')],
-                [0, MShop.I18n.dt('client/extjs', 'stat:deleted')],
-                [1, MShop.I18n.dt('client/extjs', 'stat:pending')],
-                [2, MShop.I18n.dt('client/extjs', 'stat:progress')],
-                [3, MShop.I18n.dt('client/extjs', 'stat:dispatched')],
-                [4, MShop.I18n.dt('client/extjs', 'stat:delivered')],
-                [5, MShop.I18n.dt('client/extjs', 'stat:lost')],
-                [6, MShop.I18n.dt('client/extjs', 'stat:refused')],
-                [7, MShop.I18n.dt('client/extjs', 'stat:returned')]]
+                [-1, MShop.I18n.dt('admin', 'stat:unfinished')],
+                [0, MShop.I18n.dt('admin', 'stat:deleted')],
+                [1, MShop.I18n.dt('admin', 'stat:pending')],
+                [2, MShop.I18n.dt('admin', 'stat:progress')],
+                [3, MShop.I18n.dt('admin', 'stat:dispatched')],
+                [4, MShop.I18n.dt('admin', 'stat:delivered')],
+                [5, MShop.I18n.dt('admin', 'stat:lost')],
+                [6, MShop.I18n.dt('admin', 'stat:refused')],
+                [7, MShop.I18n.dt('admin', 'stat:returned')]]
         });
     }
 

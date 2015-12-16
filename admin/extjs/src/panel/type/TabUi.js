@@ -19,7 +19,7 @@ MShop.panel.type.TabUi = Ext.extend(Ext.Panel, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Types');
+        this.title = MShop.I18n.dt('admin', 'Types');
 
         this.items = [{
             xtype : 'tabpanel',

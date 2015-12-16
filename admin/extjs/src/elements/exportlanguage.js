@@ -18,7 +18,7 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
         constrain : true,
         maximized : true,
         layout : 'fit',
-        title : MShop.I18n.dt('client/extjs', 'Select languages to export'),
+        title : MShop.I18n.dt('admin', 'Select languages to export'),
 
         gridItemList : null,
         gridList : null,
@@ -70,19 +70,19 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
                 columns : [{
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.status',
-                    header : MShop.I18n.dt('client/extjs', 'Status'),
+                    header : MShop.I18n.dt('admin', 'Status'),
                     width : 50,
                     renderer : this.statusColumnRenderer
                 }, {
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.id',
-                    header : MShop.I18n.dt('client/extjs', 'ID'),
+                    header : MShop.I18n.dt('admin', 'ID'),
                     width : 50
                 }, {
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.label',
                     id : 'dd-global-language-label',
-                    header : MShop.I18n.dt('client/extjs', 'Label')
+                    header : MShop.I18n.dt('admin', 'Label')
                 }]
             }, this.gridConfig));
 
@@ -95,14 +95,14 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
                 columns : [{
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.status',
-                    header : MShop.I18n.dt('client/extjs', 'Status'),
+                    header : MShop.I18n.dt('admin', 'Status'),
                     width : 50,
                     sortable : true,
                     renderer : this.statusColumnRenderer
                 }, {
                     xtype : 'gridcolumn',
                     dataIndex : 'locale.language.id',
-                    header : MShop.I18n.dt('client/extjs', 'ID'),
+                    header : MShop.I18n.dt('admin', 'ID'),
                     sortable : true,
                     width : 50
                 }, {
@@ -110,7 +110,7 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
                     dataIndex : 'locale.language.label',
                     id : 'global-language-label',
                     sortable : true,
-                    header : MShop.I18n.dt('client/extjs', 'Label')
+                    header : MShop.I18n.dt('admin', 'Label')
                 }],
                 tbar : Ext.apply({
                     xtype : 'ux.advancedsearch',
@@ -156,7 +156,7 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
 
         initActions : function() {
             this.actionDelete = new Ext.Action({
-                text : MShop.I18n.dt('client/extjs', 'Delete'),
+                text : MShop.I18n.dt('admin', 'Delete'),
                 disabled : true,
                 handler : this.onDeleteSelectedItems.createDelegate(this)
             });
@@ -287,8 +287,8 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
             var that = this;
 
             Ext.Msg.show({
-                title : MShop.I18n.dt('client/extjs', 'Delete items?'),
-                msg : MShop.I18n.dt('client/extjs',
+                title : MShop.I18n.dt('admin', 'Delete items?'),
+                msg : MShop.I18n.dt('admin',
                     'You are going to delete one or more items. Would you like to proceed?'),
                 buttons : Ext.Msg.YESNO,
                 fn : function(btn) {
@@ -318,14 +318,14 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
                 hideBorders : true,
                 items : [{
                     xtype : 'button',
-                    text : MShop.I18n.dt('client/extjs', 'Cancel'),
+                    text : MShop.I18n.dt('admin', 'Cancel'),
                     width : 120,
                     scale : 'medium',
                     handler : this.close,
                     scope : this
                 }, {
                     xtype : 'button',
-                    text : MShop.I18n.dt('client/extjs', 'Export'),
+                    text : MShop.I18n.dt('admin', 'Export'),
                     width : 120,
                     scale : 'medium',
                     handler : this.onExportItem,
@@ -390,8 +390,8 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
         },
 
         onStoreException : function(proxy, type, action, options, response) {
-            var title = MShop.I18n.dt('client/extjs', 'Error');
-            var errmsg = MShop.I18n.dt('client/extjs', 'No error information available');
+            var title = MShop.I18n.dt('admin', 'Error');
+            var errmsg = MShop.I18n.dt('admin', 'No error information available');
             var msg = response && response.error ? Ext.util.Format.nl2br( response.error.message ) : errmsg;
             var code = response && response.error ? response.error.code : 0;
 
@@ -442,9 +442,9 @@ MShop.elements.exportlanguage.Window = Ext.extend(Ext.Window, {
             this.close();
 
             Ext.MessageBox.alert(
-                MShop.I18n.dt('client/extjs', 'Export successful'),
+                MShop.I18n.dt('admin', 'Export successful'),
                 MShop.I18n.dt(
-                    'client/extjs',
+                    'admin',
                     'The file with the exported texts will be available within a few minutes. It can then be downloaded from the "Job" panel of the "Overview" tab.'));
         },
 

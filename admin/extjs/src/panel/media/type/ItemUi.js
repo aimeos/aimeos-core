@@ -17,9 +17,9 @@ MShop.panel.media.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['media.type.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['media.type.label'] : MShop.I18n.dt('admin', 'new');
         //#: Media type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Media type: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Media type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.media.type.ItemUi.superclass.afterRender.apply(this, arguments);

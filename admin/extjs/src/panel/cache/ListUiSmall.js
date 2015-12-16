@@ -24,7 +24,7 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Cache');
+        this.title = MShop.I18n.dt('admin', 'Cache');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -36,19 +36,19 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
     initActions : function() {
 
         this.actionEdit = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Edit'),
+            text : MShop.I18n.dt('admin', 'Edit'),
             disabled : true,
             handler : this.onOpenEditWindow.createDelegate(this, ['edit'])
         });
 
         this.actionDelete = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Delete'),
+            text : MShop.I18n.dt('admin', 'Delete'),
             disabled : true,
             handler : this.onDeleteSelectedItems.createDelegate(this)
         });
 
         this.actionFlush = new Ext.Action({
-            text : MShop.I18n.dt('client/extjs', 'Flush'),
+            text : MShop.I18n.dt('admin', 'Flush'),
             handler : this.onFlush.createDelegate(this)
         });
     },
@@ -74,12 +74,12 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'cache.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 400
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'cache.value',
-            header : MShop.I18n.dt('client/extjs', 'Value'),
+            header : MShop.I18n.dt('admin', 'Value'),
             id : 'cache-list-value',
             renderer : function(data) {
                 return Ext.util.Format.htmlEncode(data);
@@ -87,7 +87,7 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'cache.expire',
-            header : MShop.I18n.dt('client/extjs', 'Expires'),
+            header : MShop.I18n.dt('admin', 'Expires'),
             format : 'Y-m-d H:i:s',
             width : 130
         }];
@@ -98,8 +98,8 @@ MShop.panel.cache.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         var that = this;
 
         Ext.Msg.show({
-            title : MShop.I18n.dt('client/extjs', 'Flush cache?'),
-            msg : MShop.I18n.dt('client/extjs',
+            title : MShop.I18n.dt('admin', 'Flush cache?'),
+            msg : MShop.I18n.dt('admin',
                 'You are going to flush the complete cache for the current site. Would you like to proceed?'),
             buttons : Ext.Msg.YESNO,
             fn : function(btn) {

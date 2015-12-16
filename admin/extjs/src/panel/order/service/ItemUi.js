@@ -16,7 +16,7 @@ MShop.panel.order.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Service item details');
+        this.title = MShop.I18n.dt('admin', 'Service item details');
 
         MShop.panel.AbstractItemUi.prototype.setSiteCheck(this);
 
@@ -28,7 +28,7 @@ MShop.panel.order.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Service'),
+                title : MShop.I18n.dt('admin', 'Service'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -41,7 +41,7 @@ MShop.panel.order.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                 },
                 items : [{
                     xtype : 'form',
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     flex : 1,
                     ref : '../../mainForm',
                     autoScroll : true,
@@ -56,51 +56,51 @@ MShop.panel.order.service.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'order.base.service.id'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Service ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Service ID'),
                             name : 'order.base.service.serviceid'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'order.base.service.type'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'order.base.service.code'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Name'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Name'),
                             name : 'order.base.service.name'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Price'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Price'),
                             name : 'order.base.service.price'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Costs'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Costs'),
                             name : 'order.base.service.costs'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Rebate'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Rebate'),
                             name : 'order.base.service.rebate'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Tax rate in %'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Tax rate in %'),
                             name : 'order.base.service.taxrate'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'order.base.service.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'order.base.service.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'order.base.service.editor'
                         }]
                     }]

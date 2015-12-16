@@ -8,19 +8,19 @@ Ext.ns('MShop.panel.media');
 
 MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Media'),
+    title : MShop.I18n.dt('admin', 'Media'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated media'),
+            title : MShop.I18n.dt('admin', 'Associated media'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'media',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available media'),
+            title : MShop.I18n.dt('admin', 'Available media'),
             xtype : 'MShop.panel.media.listuismall'
         });
 
@@ -37,7 +37,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 id : 'listtype',
                 width : 70,
                 renderer : this.typeColumnRenderer.createDelegate(this,
@@ -46,7 +46,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 id : 'refstatus',
                 width : 50,
                 align : 'center',
@@ -55,7 +55,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 id : 'reftype',
                 width : 70,
                 renderer : this.refTypeColumnRenderer.createDelegate(this, [
@@ -66,7 +66,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Mimetype'),
+                header : MShop.I18n.dt('admin', 'Mimetype'),
                 id : 'refmimetype',
                 width : 80,
                 hidden : true,
@@ -76,7 +76,7 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Language'),
+                header : MShop.I18n.dt('admin', 'Language'),
                 id : 'reflang',
                 width : 50,
                 renderer : this.refLangColumnRenderer.createDelegate(this, ['media.languageid'], true)
@@ -84,14 +84,14 @@ MShop.panel.media.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 id : 'refcontent',
                 renderer : this.refColumnRenderer.createDelegate(this, ['media.label'], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
-                header : MShop.I18n.dt('client/extjs', 'Preview'),
+                header : MShop.I18n.dt('admin', 'Preview'),
                 id : 'refpreview',
                 width : 100,
                 renderer : this.refPreviewRenderer.createDelegate(this)

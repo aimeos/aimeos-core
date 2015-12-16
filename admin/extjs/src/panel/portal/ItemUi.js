@@ -16,7 +16,7 @@ MShop.panel.portal.ItemUi = Ext.extend(Ext.Panel, {
 
     initComponent : function() {
 
-        this.title = MShop.I18n.dt('client/extjs', 'Overview');
+        this.title = MShop.I18n.dt('admin', 'Overview');
 
         this.items = [{
             xtype : 'portal',

@@ -8,7 +8,7 @@ Ext.ns('MShop.elements.currency');
 MShop.elements.currency.ComboBox = function(config) {
 
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Currency'),
+        fieldLabel : MShop.I18n.dt('admin', 'Currency'),
         anchor : '100%',
         store : MShop.elements.currency.getStore(),
         mode : 'local',

@@ -28,7 +28,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Codes');
+        this.title = MShop.I18n.dt('admin', 'Codes');
 
         MShop.panel.coupon.code.ListUi.superclass.initComponent.call(this);
     },
@@ -38,40 +38,40 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             id : 'coupon-code-list-code',
             sortable : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.count',
-            header : MShop.I18n.dt('client/extjs', 'Count'),
+            header : MShop.I18n.dt('admin', 'Count'),
             sortable : true,
             width : 100
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.datestart',
-            header : MShop.I18n.dt('client/extjs', 'Start date'),
+            header : MShop.I18n.dt('admin', 'Start date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.dateend',
-            header : MShop.I18n.dt('client/extjs', 'End date'),
+            header : MShop.I18n.dt('admin', 'End date'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -79,7 +79,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'coupon.code.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
             format : 'Y-m-d H:i:s',
@@ -87,7 +87,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'coupon.code.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
             hidden : true
@@ -100,7 +100,7 @@ MShop.panel.coupon.code.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         MShop.panel.coupon.code.ListUi.superclass.onBeforeLoad.apply(this, arguments);
 
         if(!this.ParentItemUi.record.data['coupon.id']) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Notice'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Notice'), MShop.I18n.dt('admin',
                 'Please save the coupon first before you can add codes'));
 
             this.actionAdd.setDisabled(true);

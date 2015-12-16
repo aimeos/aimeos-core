@@ -24,7 +24,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Stock');
+        this.title = MShop.I18n.dt('admin', 'Stock');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -65,7 +65,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.id',
-                header : MShop.I18n.dt('client/extjs', 'ID'),
+                header : MShop.I18n.dt('admin', 'ID'),
                 sortable : true,
                 width : 50,
                 hidden : true
@@ -73,14 +73,14 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Product ID'),
+                header : MShop.I18n.dt('admin', 'Product ID'),
                 width : 50,
                 hidden : true
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.warehouseid',
-                header : MShop.I18n.dt('client/extjs', 'Warehouse'),
+                header : MShop.I18n.dt('admin', 'Warehouse'),
                 align : 'center',
                 id : 'product-stock-warehouse',
                 renderer : this.typeColumnRenderer.createDelegate(this, [
@@ -90,7 +90,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.stocklevel',
-                header : MShop.I18n.dt('client/extjs', 'Quantity'),
+                header : MShop.I18n.dt('admin', 'Quantity'),
                 sortable : true,
                 align : 'center',
                 width : 80
@@ -98,7 +98,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.stock.dateback',
-                header : MShop.I18n.dt('client/extjs', 'Date back'),
+                header : MShop.I18n.dt('admin', 'Date back'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 130
@@ -106,7 +106,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.stock.ctime',
-                header : MShop.I18n.dt('client/extjs', 'Created'),
+                header : MShop.I18n.dt('admin', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 130,
@@ -116,7 +116,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.stock.mtime',
-                header : MShop.I18n.dt('client/extjs', 'Last modified'),
+                header : MShop.I18n.dt('admin', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 130,
@@ -126,7 +126,7 @@ MShop.panel.product.stock.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.stock.editor',
-                header : MShop.I18n.dt('client/extjs', 'Editor'),
+                header : MShop.I18n.dt('admin', 'Editor'),
                 sortable : true,
                 width : 130,
                 editable : false,

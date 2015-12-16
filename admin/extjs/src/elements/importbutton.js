@@ -21,7 +21,7 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
             this.plugins.push(this.browsePlugin);
 
             this.loadMask = new Ext.LoadMask(Ext.getBody(), {
-                msg : MShop.I18n.dt('client/extjs', 'Loading'),
+                msg : MShop.I18n.dt('admin', 'Loading'),
                 msgCls : 'x-mask-loading'
             });
 
@@ -59,8 +59,8 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
         onUploadFail : function() {
             this.loadMask.hide();
 
-            Ext.MessageBox.alert(MShop.I18n.dt('client/extjs', 'Upload failed'),
-                MShop.I18n.dt('client/extjs', 'Could not upload file. Please notify your administrator')).setIcon(
+            Ext.MessageBox.alert(MShop.I18n.dt('admin', 'Upload failed'),
+                MShop.I18n.dt('admin', 'Could not upload file. Please notify your administrator')).setIcon(
                 Ext.MessageBox.ERROR);
         },
 
@@ -71,9 +71,9 @@ MShop.elements.ImportButton = Ext.extend(Ext.Button, {
             this.loadMask.hide();
 
             Ext.MessageBox.alert(
-                MShop.I18n.dt('client/extjs', 'Upload successful'),
+                MShop.I18n.dt('admin', 'Upload successful'),
                 MShop.I18n.dt(
-                    'client/extjs',
+                    'admin',
                     'The texts of your uploaded file will be imported within a few minutes. You can check the status of the import in the "Job" panel of the "Overview" tab'));
         }
     });

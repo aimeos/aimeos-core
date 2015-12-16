@@ -26,7 +26,7 @@ MShop.panel.locale.currency.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -38,7 +38,7 @@ MShop.panel.locale.currency.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     flex : 1,
                     ref : '../../mainForm',
@@ -54,36 +54,36 @@ MShop.panel.locale.currency.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'locale.currency.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'locale.currency.status'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Code'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Code'),
                             name : 'locale.currency.code',
                             allowBlank : false,
                             maxLength : 3,
                             regex : /[a-zA-Z]+/,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Unique code (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Unique code (required)')
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'locale.currency.label',
                             allowBlank : false,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name (required)')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name (required)')
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'locale.currency.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'locale.currency.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'locale.currency.editor'
                         }]
                     }]
@@ -95,9 +95,9 @@ MShop.panel.locale.currency.ItemUi = Ext.extend(MShop.panel.AbstractItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['locale.currency.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['locale.currency.label'] : MShop.I18n.dt('admin', 'new');
         //#: Locale currency item panel title with currency label ({0}) and currency code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Locale currency: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Locale currency: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.locale.currency.ItemUi.superclass.afterRender.apply(this, arguments);

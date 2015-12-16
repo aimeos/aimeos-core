@@ -38,7 +38,7 @@ Ext.extend(MShop.elements.site.ComboBox, Ext.form.ComboBox, {
         var siteCode = site ? site.get('locale.site.code') : 'default';
 
         new Ext.LoadMask(Ext.getBody(), {
-            msg : MShop.I18n.dt('client/extjs', 'Switching site ...')
+            msg : MShop.I18n.dt('admin', 'Switching site ...')
         }).show();
 
         MShop.urlManager.redirect({

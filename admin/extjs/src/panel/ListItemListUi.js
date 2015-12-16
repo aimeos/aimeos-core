@@ -83,7 +83,7 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     onOpenEditWindow : function(action) {
         if(action === 'add') {
-            return Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Select Item'), MShop.I18n.dt('client/extjs',
+            return Ext.Msg.alert(MShop.I18n.dt('admin', 'Select Item'), MShop.I18n.dt('admin',
                 'Please select an item on the right side and add it via drag and drop to this list.'));
         }
 
@@ -151,19 +151,19 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Ref-ID'),
+            header : MShop.I18n.dt('admin', 'Ref-ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'status',
-            header : MShop.I18n.dt('client/extjs', 'List Status'),
+            header : MShop.I18n.dt('admin', 'List Status'),
             width : 50,
             hidden : true,
             align : 'center',
@@ -171,27 +171,27 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'position',
-            header : MShop.I18n.dt('client/extjs', 'Position'),
+            header : MShop.I18n.dt('admin', 'Position'),
             width : 50,
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'datestart',
-            header : MShop.I18n.dt('client/extjs', 'Start date'),
+            header : MShop.I18n.dt('admin', 'Start date'),
             width : 120,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'dateend',
-            header : MShop.I18n.dt('client/extjs', 'End date'),
+            header : MShop.I18n.dt('admin', 'End date'),
             width : 120,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'config',
-            header : MShop.I18n.dt('client/extjs', 'Configuration'),
+            header : MShop.I18n.dt('admin', 'Configuration'),
             width : 200,
             editable : false,
             hidden : true,
@@ -208,21 +208,21 @@ MShop.panel.ListItemListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 120,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 120,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : this.listItemPickerUi.itemConfig.listNamePrefix + 'editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 50,
             hidden : true
         }].concat(this.getAdditionalColumns() || []);

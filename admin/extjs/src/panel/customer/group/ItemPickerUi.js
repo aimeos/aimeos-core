@@ -8,19 +8,19 @@ Ext.ns('MShop.panel.customer.group');
 
 MShop.panel.customer.group.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Group'),
+    title : MShop.I18n.dt('admin', 'Group'),
 
     initComponent : function() {
 
         Ext.apply(this.itemConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Associated customer groups'),
+            title : MShop.I18n.dt('admin', 'Associated customer groups'),
             xtype : 'MShop.panel.listitemlistui',
             domain : 'customer/group',
             getAdditionalColumns : this.getAdditionalColumns.createDelegate(this)
         });
 
         Ext.apply(this.listConfig, {
-            title : MShop.I18n.dt('client/extjs', 'Available customer groups'),
+            title : MShop.I18n.dt('admin', 'Available customer groups'),
             xtype : 'MShop.panel.customer.group.listuismall'
         });
 
@@ -36,7 +36,7 @@ MShop.panel.customer.group.ItemPickerUi = Ext.extend(MShop.panel.AbstractListIte
         return [{
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'typeid',
-            header : MShop.I18n.dt('client/extjs', 'List type'),
+            header : MShop.I18n.dt('admin', 'List type'),
             id : 'listtype',
             width : 70,
             renderer : this.typeColumnRenderer.createDelegate(this,
@@ -44,13 +44,13 @@ MShop.panel.customer.group.ItemPickerUi = Ext.extend(MShop.panel.AbstractListIte
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             id : 'refcode',
             renderer : this.refColumnRenderer.createDelegate(this, ['customer.group.code'], true)
         }, {
             xtype : 'gridcolumn',
             dataIndex : conf.listNamePrefix + 'refid',
-            header : MShop.I18n.dt('client/extjs', 'Label'),
+            header : MShop.I18n.dt('admin', 'Label'),
             id : 'refcontent',
             renderer : this.refColumnRenderer.createDelegate(this, ['customer.group.label'], true)
         }];

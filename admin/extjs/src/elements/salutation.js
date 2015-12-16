@@ -7,7 +7,7 @@ Ext.ns('MShop.elements.salutation');
 
 MShop.elements.salutation.ComboBox = function(config) {
     Ext.applyIf(config, {
-        fieldLabel : MShop.I18n.dt('client/extjs', 'Salutation'),
+        fieldLabel : MShop.I18n.dt('admin', 'Salutation'),
         anchor : '100%',
         store : MShop.elements.salutation.getStore(),
         mode : 'local',
@@ -62,11 +62,11 @@ MShop.elements.salutation.getStore = function() {
                 type : 'string'
             }],
             data : [
-                ['', MShop.I18n.dt('client/extjs', 'unknown')],
-                ['company', MShop.I18n.dt('client/extjs', 'Company')],
-                ['mr', MShop.I18n.dt('client/extjs', 'Mr')],
-                ['mrs', MShop.I18n.dt('client/extjs', 'Mrs')],
-                ['miss', MShop.I18n.dt('client/extjs', 'Miss')]
+                ['', MShop.I18n.dt('admin', 'unknown')],
+                ['company', MShop.I18n.dt('admin', 'Company')],
+                ['mr', MShop.I18n.dt('admin', 'Mr')],
+                ['mrs', MShop.I18n.dt('admin', 'Mrs')],
+                ['miss', MShop.I18n.dt('admin', 'Miss')]
             ]
         });
     }

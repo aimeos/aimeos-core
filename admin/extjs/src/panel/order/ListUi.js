@@ -29,7 +29,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     },
 
     initComponent : function() {
-        this.title = MShop.I18n.dt('client/extjs', 'Order');
+        this.title = MShop.I18n.dt('admin', 'Order');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
@@ -41,52 +41,52 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'order.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             width : 55,
             id : 'order-list-id'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.type',
-            header : MShop.I18n.dt('client/extjs', 'Source'),
+            header : MShop.I18n.dt('admin', 'Source'),
             sortable : true,
             width : 85,
             align : 'center'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.datepayment',
-            header : MShop.I18n.dt('client/extjs', 'Purchase date'),
+            header : MShop.I18n.dt('admin', 'Purchase date'),
             sortable : true,
             width : 180,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.statuspayment',
-            header : MShop.I18n.dt('client/extjs', 'Payment status'),
+            header : MShop.I18n.dt('admin', 'Payment status'),
             sortable : true,
             renderer : MShop.elements.paymentstatus.renderer
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.datedelivery',
-            header : MShop.I18n.dt('client/extjs', 'Delivery date'),
+            header : MShop.I18n.dt('admin', 'Delivery date'),
             sortable : true,
             width : 180,
             format : 'Y-m-d H:i:s'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.statusdelivery',
-            header : MShop.I18n.dt('client/extjs', 'Delivery status'),
+            header : MShop.I18n.dt('admin', 'Delivery status'),
             sortable : true,
             renderer : MShop.elements.deliverystatus.renderer
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.relatedid',
-            header : MShop.I18n.dt('client/extjs', 'Related order ID'),
+            header : MShop.I18n.dt('admin', 'Related order ID'),
             id : 'order-relatedid'
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             sortable : true,
@@ -95,7 +95,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             sortable : true,
@@ -104,7 +104,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             sortable : true,
             editable : false,
@@ -115,7 +115,7 @@ MShop.panel.order.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     onOpenEditWindow : function(action) {
         if(action === 'add') {
-            return Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Not implemented'), MShop.I18n.dt('client/extjs',
+            return Ext.Msg.alert(MShop.I18n.dt('admin', 'Not implemented'), MShop.I18n.dt('admin',
                 'Sorry, adding orders manually is currently not implemented'));
         }
 

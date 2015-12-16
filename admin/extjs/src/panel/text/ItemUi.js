@@ -20,7 +20,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
             plugins : ['ux.itemregistry'],
             items : [{
                 xtype : 'panel',
-                title : MShop.I18n.dt('client/extjs', 'Basic'),
+                title : MShop.I18n.dt('admin', 'Basic'),
                 border : false,
                 layout : 'hbox',
                 layoutConfig : {
@@ -32,7 +32,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                     bodyCssClass : this.readOnlyClass
                 },
                 items : [{
-                    title : MShop.I18n.dt('client/extjs', 'Details'),
+                    title : MShop.I18n.dt('admin', 'Details'),
                     xtype : 'form',
                     border : false,
                     layout : 'fit',
@@ -51,14 +51,14 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                         },
                         items : [{
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'ID'),
+                            fieldLabel : MShop.I18n.dt('admin', 'ID'),
                             name : 'text.id'
                         }, {
                             xtype : 'MShop.elements.status.combo',
                             name : 'text.status'
                         }, {
                             xtype : 'combo',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Type'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Type'),
                             name : 'text.typeid',
                             mode : 'local',
                             store : this.listUI.ItemTypeStore,
@@ -73,27 +73,27 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             name : 'text.languageid'
                         }, {
                             xtype : 'textfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Label'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Label'),
                             name : 'text.label',
                             allowBlank : true,
                             maxLength : 255,
-                            emptyText : MShop.I18n.dt('client/extjs', 'Internal name')
+                            emptyText : MShop.I18n.dt('admin', 'Internal name')
                         }, {
                             xtype : MShop.Config.get('client/extjs/common/editor', 'htmleditor'),
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Content'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Content'),
                             name : 'text.content',
                             enableFont : false
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Created'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Created'),
                             name : 'text.ctime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Last modified'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Last modified'),
                             name : 'text.mtime'
                         }, {
                             xtype : 'displayfield',
-                            fieldLabel : MShop.I18n.dt('client/extjs', 'Editor'),
+                            fieldLabel : MShop.I18n.dt('admin', 'Editor'),
                             name : 'text.editor'
                         }]
                     }]
@@ -105,9 +105,9 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
     },
 
     afterRender : function() {
-        var label = this.record ? this.record.data['text.label'] : MShop.I18n.dt('client/extjs', 'new');
+        var label = this.record ? this.record.data['text.label'] : MShop.I18n.dt('admin', 'new');
         //#: Text item panel title with text label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('client/extjs', 'Text: {0} ({1})');
+        var string = MShop.I18n.dt('admin', 'Text: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.text.ItemUi.superclass.afterRender.apply(this, arguments);

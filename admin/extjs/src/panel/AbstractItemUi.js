@@ -140,14 +140,14 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
             hideBorders : true,
             items : [{
                 xtype : 'button',
-                text : MShop.I18n.dt('client/extjs', 'Cancel'),
+                text : MShop.I18n.dt('admin', 'Cancel'),
                 width : 120,
                 scale : 'medium',
                 handler : this.close,
                 scope : this
             }, {
                 xtype : 'button',
-                text : MShop.I18n.dt('client/extjs', 'Save'),
+                text : MShop.I18n.dt('admin', 'Save'),
                 width : 120,
                 scale : 'medium',
                 handler : this.onSaveItem,
@@ -198,7 +198,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
         });
 
         this.saveMask = new Ext.LoadMask(this.el, {
-            msg : MShop.I18n.dt('client/extjs', 'Saving')
+            msg : MShop.I18n.dt('admin', 'Saving')
         });
     },
 
@@ -246,7 +246,7 @@ MShop.panel.AbstractItemUi = Ext.extend(Ext.Window, {
     onSaveItem : function() {
         // validate data
         if(!this.mainForm.getForm().isValid() && this.fireEvent('validate', this) !== false) {
-            Ext.Msg.alert(MShop.I18n.dt('client/extjs', 'Invalid data'), MShop.I18n.dt('client/extjs',
+            Ext.Msg.alert(MShop.I18n.dt('admin', 'Invalid data'), MShop.I18n.dt('admin',
                 'Please recheck your data'));
             return;
         }

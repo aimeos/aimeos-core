@@ -39,14 +39,14 @@ MShop.elements.paymentstatus.getStore = function() {
                 type : 'string'
             }],
             data : [
-                [-1, MShop.I18n.dt('client/extjs', 'pay:unfinished')],
-                [0, MShop.I18n.dt('client/extjs', 'pay:deleted')],
-                [1, MShop.I18n.dt('client/extjs', 'pay:canceled')],
-                [2, MShop.I18n.dt('client/extjs', 'pay:refused')],
-                [3, MShop.I18n.dt('client/extjs', 'pay:refund')],
-                [4, MShop.I18n.dt('client/extjs', 'pay:pending')],
-                [5, MShop.I18n.dt('client/extjs', 'pay:authorized')],
-                [6, MShop.I18n.dt('client/extjs', 'pay:received')]]
+                [-1, MShop.I18n.dt('admin', 'pay:unfinished')],
+                [0, MShop.I18n.dt('admin', 'pay:deleted')],
+                [1, MShop.I18n.dt('admin', 'pay:canceled')],
+                [2, MShop.I18n.dt('admin', 'pay:refused')],
+                [3, MShop.I18n.dt('admin', 'pay:refund')],
+                [4, MShop.I18n.dt('admin', 'pay:pending')],
+                [5, MShop.I18n.dt('admin', 'pay:authorized')],
+                [6, MShop.I18n.dt('admin', 'pay:received')]]
         });
     }
 

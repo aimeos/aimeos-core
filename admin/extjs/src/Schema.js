@@ -83,7 +83,7 @@ MShop.Schema = {
     getSchema : function(schemaName) {
         if(!this.schemaMap.hasOwnProperty(schemaName)) {
             /// Schema error message with schema name ({0})
-            var msg = MShop.I18n.dt('client/extjs', 'Schema {0} is  not registered');
+            var msg = MShop.I18n.dt('admin', 'Schema {0} is  not registered');
             throw new Ext.Error(String.format(msg, schemaName));
         }
 
@@ -93,7 +93,7 @@ MShop.Schema = {
     getSearchSchema : function(schemaName) {
         if(!this.searchSchemaMap.hasOwnProperty(schemaName)) {
             /// Search schema error message with search schema name ({0})
-            var msg = MShop.I18n.dt('client/extjs', 'Search schema {0} is  not registered');
+            var msg = MShop.I18n.dt('admin', 'Search schema {0} is  not registered');
             throw new Ext.Error(String.format(msg, schemaName));
         }
 

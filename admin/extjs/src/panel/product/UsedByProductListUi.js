@@ -26,7 +26,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
     initComponent : function() {
         MShop.panel.product.UsedByProductListUi.superclass.initComponent.call(this);
 
-        this.title = MShop.I18n.dt('client/extjs', 'Used by');
+        this.title = MShop.I18n.dt('admin', 'Used by');
     },
 
     getColumns : function() {
@@ -34,7 +34,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.id',
-                header : MShop.I18n.dt('client/extjs', 'List ID'),
+                header : MShop.I18n.dt('admin', 'List ID'),
                 sortable : true,
                 width : 50,
                 hidden : true
@@ -42,7 +42,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.typeid',
-                header : MShop.I18n.dt('client/extjs', 'List type'),
+                header : MShop.I18n.dt('admin', 'List type'),
                 sortable : true,
                 width : 100,
                 renderer : this.listTypeColumnRenderer.createDelegate(this, [
@@ -52,7 +52,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.datestart',
-                header : MShop.I18n.dt('client/extjs', 'List start date'),
+                header : MShop.I18n.dt('admin', 'List start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120
@@ -60,7 +60,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.dateend',
-                header : MShop.I18n.dt('client/extjs', 'List end date'),
+                header : MShop.I18n.dt('admin', 'List end date'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120
@@ -68,7 +68,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.position',
-                header : MShop.I18n.dt('client/extjs', 'List position'),
+                header : MShop.I18n.dt('admin', 'List position'),
                 sortable : true,
                 width : 70,
                 hidden : true
@@ -76,7 +76,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.mtime',
-                header : MShop.I18n.dt('client/extjs', 'List modification time'),
+                header : MShop.I18n.dt('admin', 'List modification time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120,
@@ -85,7 +85,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.ctime',
-                header : MShop.I18n.dt('client/extjs', 'List creation time'),
+                header : MShop.I18n.dt('admin', 'List creation time'),
                 format : 'Y-m-d H:i:s',
                 sortable : true,
                 width : 120,
@@ -94,7 +94,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.editor',
-                header : MShop.I18n.dt('client/extjs', 'List editor'),
+                header : MShop.I18n.dt('admin', 'List editor'),
                 sortable : true,
                 width : 120,
                 hidden : true
@@ -102,14 +102,14 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'ID'),
+                header : MShop.I18n.dt('admin', 'ID'),
                 sortable : true,
                 width : 100
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Status'),
+                header : MShop.I18n.dt('admin', 'Status'),
                 sortable : false,
                 width : 50,
                 renderer : this.statusColumnRenderer.createDelegate(this, [this.ParentItemUi.store, "product.status"],
@@ -118,7 +118,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Type'),
+                header : MShop.I18n.dt('admin', 'Type'),
                 sortable : false,
                 width : 100,
                 renderer : this.productTypeColumnRenderer.createDelegate(this, [
@@ -130,7 +130,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Code'),
+                header : MShop.I18n.dt('admin', 'Code'),
                 sortable : false,
                 width : 100,
                 renderer : this.listTypeColumnRenderer.createDelegate(this, [this.ParentItemUi.store, "product.code"],
@@ -139,7 +139,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Label'),
+                header : MShop.I18n.dt('admin', 'Label'),
                 sortable : false,
                 id : 'product-list-autoexpand-column',
                 renderer : MShop.panel.AbstractListUi.prototype.typeColumnRenderer.createDelegate(this, [
@@ -149,7 +149,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Start date'),
+                header : MShop.I18n.dt('admin', 'Start date'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -161,7 +161,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'End date'),
+                header : MShop.I18n.dt('admin', 'End date'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -173,7 +173,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Created'),
+                header : MShop.I18n.dt('admin', 'Created'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -185,7 +185,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'datecolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Last modified'),
+                header : MShop.I18n.dt('admin', 'Last modified'),
                 format : 'Y-m-d H:i:s',
                 sortable : false,
                 width : 120,
@@ -197,7 +197,7 @@ MShop.panel.product.UsedByProductListUi = Ext.extend(MShop.panel.AbstractUsedByL
             {
                 xtype : 'gridcolumn',
                 dataIndex : 'product.lists.parentid',
-                header : MShop.I18n.dt('client/extjs', 'Editor'),
+                header : MShop.I18n.dt('admin', 'Editor'),
                 sortable : false,
                 width : 100,
                 hidden : true,

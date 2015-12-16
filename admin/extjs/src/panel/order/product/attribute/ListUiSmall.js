@@ -8,7 +8,7 @@ Ext.ns('MShop.panel.order.base.product.attribute');
 
 MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
 
-    title : MShop.I18n.dt('client/extjs', 'Attribute'),
+    title : MShop.I18n.dt('admin', 'Attribute'),
     recordName : 'Order_Base_Product_Attribute',
     idProperty : 'order.base.product.attribute.id',
     siteidProperty : 'order.base.product.attribute.siteid',
@@ -67,47 +67,47 @@ MShop.panel.order.base.product.attribute.ListUiSmall = Ext.extend(MShop.panel.Ab
         return [{
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.id',
-            header : MShop.I18n.dt('client/extjs', 'ID'),
+            header : MShop.I18n.dt('admin', 'ID'),
             width : 50,
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.type',
-            header : MShop.I18n.dt('client/extjs', 'Type'),
+            header : MShop.I18n.dt('admin', 'Type'),
             width : 150
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.name',
-            header : MShop.I18n.dt('client/extjs', 'Name'),
+            header : MShop.I18n.dt('admin', 'Name'),
             id : 'order-base-product-attribute-name'
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.code',
-            header : MShop.I18n.dt('client/extjs', 'Code'),
+            header : MShop.I18n.dt('admin', 'Code'),
             width : 150
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.value',
-            header : MShop.I18n.dt('client/extjs', 'Value'),
+            header : MShop.I18n.dt('admin', 'Value'),
             width : 150
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.product.attribute.ctime',
-            header : MShop.I18n.dt('client/extjs', 'Created'),
+            header : MShop.I18n.dt('admin', 'Created'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'datecolumn',
             dataIndex : 'order.base.product.attribute.mtime',
-            header : MShop.I18n.dt('client/extjs', 'Last modified'),
+            header : MShop.I18n.dt('admin', 'Last modified'),
             width : 130,
             format : 'Y-m-d H:i:s',
             hidden : true
         }, {
             xtype : 'gridcolumn',
             dataIndex : 'order.base.product.attribute.editor',
-            header : MShop.I18n.dt('client/extjs', 'Editor'),
+            header : MShop.I18n.dt('admin', 'Editor'),
             width : 130,
             hidden : true
         }];
