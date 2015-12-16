@@ -8,16 +8,16 @@ return array(
 	'include' => array(
 		'lib/custom/src',
 		'client/html/src',
-		'client/jqadm/src',
 		'controller/common/src',
 		'controller/frontend/src',
 		'controller/jsonadm/src',
 		'controller/extjs/src',
 		'controller/jobs/src',
+		'admin/jqadm/src',
 	),
 	'i18n' => array(
-		'client/html' => 'client/html/i18n',
-		'client/jqadm' => 'client/jqadm/i18n',
+		'admin' => 'admin/i18n',
+		'client' => 'client/i18n',
 		'mshop' => 'lib/custom/i18n',
 		'controller/common' => 'controller/common/i18n',
 		'controller/frontend' => 'controller/frontend/i18n',
@@ -29,14 +29,14 @@ return array(
 		'lib/custom/config',
 	),
 	'custom' => array(
+		'admin/jqadm/templates' => array(
+			'admin/jqadm/templates',
+		),
+		'admin/extjs' => array(
+			'admin/extjs/manifest.jsb2',
+		),
 		'client/html/templates' => array(
 			'client/html/templates',
-		),
-		'client/jqadm/templates' => array(
-			'client/jqadm/templates',
-		),
-		'client/extjs' => array(
-			'client/extjs/manifest.jsb2',
 		),
 		'controller/extjs' => array(
 			'controller/extjs/src',
