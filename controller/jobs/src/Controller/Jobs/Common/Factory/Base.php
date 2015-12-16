@@ -65,7 +65,7 @@ abstract class Base
 				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$controller = new $classname( $context, $aimeos, $controller );
+			$controller = new $classname( $controller, $context, $aimeos );
 
 			if( !( $controller instanceof $iface ) ) {
 				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

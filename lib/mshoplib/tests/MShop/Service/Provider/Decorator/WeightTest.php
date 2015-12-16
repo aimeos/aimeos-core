@@ -31,7 +31,7 @@ class WeightTest extends \PHPUnit_Framework_TestCase
 		$this->mockProvider = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Example' )
 			->disableOriginalConstructor()->getMock();
 
-		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Weight( $this->context, $this->servItem, $this->mockProvider );
+		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Weight( $this->mockProvider, $this->context, $this->servItem );
 	}
 
 

@@ -48,7 +48,7 @@ abstract class Base
 				throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$provider = new $classname( $this->getContext(), $item, $code, $provider );
+			$provider = new $classname( $provider, $this->getContext(), $item, $code );
 
 			if( ( $provider instanceof $iface ) === false ) {
 				throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

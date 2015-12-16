@@ -35,7 +35,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $item, 'abcd' );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Example( $context, $item, 'abcd', $provider );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\Example( $provider, $context, $item, 'abcd');
 		$this->object->setObject( $this->object );
 	}
 

@@ -23,7 +23,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelper::getContext();
 
 		$controller = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $context );
-		$this->object = new \Aimeos\Controller\ExtJS\Common\Decorator\Example( $context, $controller );
+		$this->object = new \Aimeos\Controller\ExtJS\Common\Decorator\Example( $controller, $context );
 	}
 
 

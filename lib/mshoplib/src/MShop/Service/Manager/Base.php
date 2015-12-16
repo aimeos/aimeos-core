@@ -39,7 +39,7 @@ abstract class Base
 				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$provider = new $classname( $this->getContext(), $serviceItem, $provider );
+			$provider = new $classname( $provider, $this->getContext(), $serviceItem );
 
 			if( ( $provider instanceof $iface ) === false ) {
 				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface );

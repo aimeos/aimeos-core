@@ -62,7 +62,7 @@ abstract class Base
 				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$manager = new $classname( $context, $manager );
+			$manager = new $classname( $manager, $context );
 
 			if( !( $manager instanceof $iface ) ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );

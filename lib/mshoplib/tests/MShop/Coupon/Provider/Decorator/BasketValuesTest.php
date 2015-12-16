@@ -35,7 +35,7 @@ class BasketValuesTest extends \PHPUnit_Framework_TestCase
 		$this->couponItem = $couponManager->createItem();
 
 		$provider = new \Aimeos\MShop\Coupon\Provider\Example( $context, $this->couponItem, 'abcd' );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\BasketValues( $context, $this->couponItem, 'abcd', $provider );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Decorator\BasketValues( $provider, $context, $this->couponItem, 'abcd' );
 		$this->object->setObject( $this->object );
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );

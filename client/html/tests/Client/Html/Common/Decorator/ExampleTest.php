@@ -31,7 +31,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 		$methods = array( 'getHeader', 'getBody' );
 
 		$this->client = $this->getMock( '\\Aimeos\\Client\\Html\\Catalog\\Filter\\Standard', $methods, array( $context, array() ) );
-		$this->object = new \Aimeos\Client\Html\Common\Decorator\Example( $context, array(), $this->client );
+		$this->object = new \Aimeos\Client\Html\Common\Decorator\Example( $this->client, $context, array() );
 		$this->object->setView( \TestHelper::getView());
 	}
 

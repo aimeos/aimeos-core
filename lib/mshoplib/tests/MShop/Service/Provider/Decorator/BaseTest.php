@@ -34,7 +34,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 				'setCommunication', 'setConfigFE', 'updateAsync', 'updateSync' ) )
 			->getMock();
 
-		$this->object = new TestBase( $this->context, $item, $this->mock );
+		$this->object = new TestBase( $this->mock, $this->context, $item );
 	}
 
 

@@ -28,10 +28,10 @@ abstract class Base
 	/**
 	 * Initializes the controller decorator.
 	 *
-	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param \Aimeos\Controller\Frontend\Iface $controller Controller object
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Controller\Frontend\Iface $controller )
+	public function __construct( \Aimeos\Controller\Frontend\Iface $controller, \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		$this->context = $context;
 		$this->controller = $controller;

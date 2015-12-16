@@ -35,7 +35,7 @@ class CostsTest extends \PHPUnit_Framework_TestCase
 		$this->basket = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )
 			->getSubManager( 'base' )->createItem();
 
-		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Costs( $this->context, $this->servItem, $this->mockProvider );
+		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Costs( $this->mockProvider, $this->context, $this->servItem );
 	}
 
 

@@ -23,10 +23,11 @@ interface Iface
 	/**
 	 * Initializes a new client decorator object.
 	 *
+	 * @param \Aimeos\Admin\JQAdm\Iface $client Client object
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param array $templatePaths Associative list of the file system paths to the core or the extensions as key
 	 * 	and a list of relative paths inside the core or the extension as values
-	 * @param \Aimeos\Admin\JQAdm\Iface $client Client object
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, \Aimeos\Admin\JQAdm\Iface $client );
+	public function __construct( \Aimeos\Admin\JQAdm\Iface $client,
+		\Aimeos\MShop\Context\Item\Iface $context, array $templatePaths );
 }

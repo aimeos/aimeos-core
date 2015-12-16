@@ -34,7 +34,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 			->setConstructorArgs( array( $context, $aimeos ) )
 			->getMock();
 
-		$this->object = new TestBase( $context, $aimeos, $this->stub );
+		$this->object = new TestBase( $this->stub, $context, $aimeos );
 	}
 
 

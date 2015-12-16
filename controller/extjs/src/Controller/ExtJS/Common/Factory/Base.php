@@ -64,7 +64,7 @@ class Base
 				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
-			$controller = new $classname( $context, $controller );
+			$controller = new $classname( $controller, $context );
 
 			if( !( $controller instanceof $iface ) ) {
 				throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );

@@ -24,12 +24,12 @@ interface Iface
 	/**
 	 * Initializes the coupon provider.
 	 *
+	 * @param \Aimeos\MShop\Coupon\Provider\Iface $provider Coupon provider
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
-	 * @param \Aimeos\MShop\Coupon\Provider\Iface $provider Coupon provider
 	 * @return void
 	 */
-	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item,
-		$code, \Aimeos\MShop\Coupon\Provider\Iface $provider );
+	public function __construct( \Aimeos\MShop\Coupon\Provider\Iface $provider,
+		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, $code );
 }

@@ -34,7 +34,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 
 		$serviceProvider = $servManager->getProvider( $item );
-		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Example( $context, $item, $serviceProvider );
+		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Example( $serviceProvider, $context, $item );
 	}
 
 
