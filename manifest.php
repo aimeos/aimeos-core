@@ -28,9 +28,8 @@ return array(
 		'config',
 	),
 	'i18n' => array(
-		'admin/jqadm' => 'admin/jqadm/i18n',
-		'client/extjs' => 'admin/extjs/i18n',
-		'client/extjs/ext' => 'admin/extjs/i18n/ext',
+		'admin' => 'admin/i18n',
+		'admin/ext' => 'admin/i18n/ext',
 		'client/html' => 'client/html/i18n',
 		'client/html/code' => 'client/html/i18n/code',
 		'client/html/country' => 'client/html/i18n/country',

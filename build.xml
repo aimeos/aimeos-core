@@ -237,8 +237,7 @@
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/admin/jqadm" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/admin/extjs" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/admin" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -258,8 +257,7 @@
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/admin/jqadm" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/admin/extjs" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/admin" />
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />

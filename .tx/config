@@ -1,15 +1,15 @@
 [main]
 host = https://www.transifex.com
 
-[aimeos-core.client-extjs]
-file_filter = admin/extjs/i18n/<lang>.po
-source_file = admin/extjs/i18n/core-client-extjs.pot
+[aimeos-core.admin]
+file_filter = admin/i18n/<lang>.po
+source_file = admin/i18n/core-admin.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-extjs-ext]
-file_filter = admin/extjs/i18n/ext/<lang>.po
-source_file = admin/extjs/i18n/ext/core-client-extjs-ext.pot
+[aimeos-core.admin-ext]
+file_filter = admin/i18n/ext/<lang>.po
+source_file = admin/i18n/ext/core-admin-ext.pot
 source_lang = en
 type = PO
 
