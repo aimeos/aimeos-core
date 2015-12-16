@@ -83,9 +83,9 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="check" haltonfailure="false" dir="${coredir}/client/extjs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/admin/jqadm" />
+		<phing target="check" haltonfailure="false" dir="${coredir}/admin/extjs" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -111,7 +111,7 @@
 		</confdoc>
 		<confdoc keyprefix="client/extjs" wikiprefix="Configuration/Core" keyparts="1"
 			outfile="${coredir}/misc/confdoc/core-client-extjs.wiki">
-			<fileset dir="${coredir}/client/extjs" expandsymboliclinks="true" >
+			<fileset dir="${coredir}/admin/extjs" expandsymboliclinks="true" >
 				<include name="src/**/*.js" />
 			</fileset>
 		</confdoc>
@@ -237,8 +237,8 @@
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/client/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/admin/jqadm" />
+		<phing target="i18n" haltonfailure="true" dir="${coredir}/admin/extjs" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -257,9 +257,9 @@
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/client/extjs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/admin/jqadm" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/admin/extjs" />
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />

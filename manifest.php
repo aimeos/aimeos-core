@@ -29,8 +29,8 @@ return array(
 	),
 	'i18n' => array(
 		'admin/jqadm' => 'admin/jqadm/i18n',
-		'client/extjs' => 'client/extjs/i18n',
-		'client/extjs/ext' => 'client/extjs/i18n/ext',
+		'client/extjs' => 'admin/extjs/i18n',
+		'client/extjs/ext' => 'admin/extjs/i18n/ext',
 		'client/html' => 'client/html/i18n',
 		'client/html/code' => 'client/html/i18n/code',
 		'client/html/country' => 'client/html/i18n/country',
@@ -46,14 +46,14 @@ return array(
 		'lib/mshoplib/setup',
 	),
 	'custom' => array(
-		'client/extjs' => array(
-			'client/extjs/manifest.jsb2',
-		),
-		'client/html/templates' => array(
-			'client/html/templates',
+		'admin/extjs' => array(
+			'admin/extjs/manifest.jsb2',
 		),
 		'admin/jqadm/templates' => array(
 			'admin/jqadm/templates',
+		),
+		'client/html/templates' => array(
+			'client/html/templates',
 		),
 		'controller/extjs' => array(
 			'controller/extjs/src',
