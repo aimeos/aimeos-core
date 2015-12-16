@@ -13,33 +13,33 @@ source_file = admin/i18n/ext/core-admin-ext.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html]
-file_filter = client/html/i18n/<lang>.po
-source_file = client/html/i18n/core-client-html.pot
+[aimeos-core.client]
+file_filter = client/i18n/<lang>.po
+source_file = client/i18n/core-client-html.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html-code]
-file_filter = client/html/i18n/code/<lang>.po
-source_file = client/html/i18n/code/core-client-html-code.pot
+[aimeos-core.client-code]
+file_filter = client/i18n/code/<lang>.po
+source_file = client/i18n/code/core-client-code.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html-country]
-file_filter = client/html/i18n/country/<lang>.po
-source_file = client/html/i18n/country/core-client-html-country.pot
+[aimeos-core.client-country]
+file_filter = client/i18n/country/<lang>.po
+source_file = client/i18n/country/core-client-country.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html-language]
-file_filter = client/html/i18n/language/<lang>.po
-source_file = client/html/i18n/language/core-client-html-language.pot
+[aimeos-core.client-language]
+file_filter = client/i18n/language/<lang>.po
+source_file = client/i18n/language/core-client-language.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html-currency]
-file_filter = client/html/i18n/currency/<lang>.po
-source_file = client/html/i18n/currency/core-client-html-currency.pot
+[aimeos-core.client-currency]
+file_filter = client/i18n/currency/<lang>.po
+source_file = client/i18n/currency/core-client-currency.pot
 source_lang = en
 type = PO
 
