@@ -2,13 +2,14 @@
 
 
 /**
+ * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-class TestHelper
+class TestHelperExtjs
 {
 	private static $aimeos;
-	private static $context = array();
+	private static $context;
 
 
 	public static function bootstrap()
@@ -18,6 +19,8 @@ class TestHelper
 		$includepaths = $aimeos->getIncludePaths();
 		$includepaths[] = get_include_path();
 		set_include_path( implode( PATH_SEPARATOR, $includepaths ) );
+
+		spl_autoload_register( 'Aimeos::autoload' );
 	}
 
 
@@ -31,36 +34,6 @@ class TestHelper
 	}
 
 
-	public static function getView()
-	{
-		$view = new \Aimeos\MW\View\Standard();
-
-		$trans = new \Aimeos\MW\Translation\None( 'en' );
-		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
-		$view->addHelper( 'translate', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Url\Standard( $view, 'baseurl' );
-		$view->addHelper( 'url', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, '.', '' );
-		$view->addHelper( 'number', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
-		$view->addHelper( 'date', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, self::getContext()->getConfig() );
-		$view->addHelper( 'config', $helper );
-
-		return $view;
-	}
-
-
-	public static function getHtmlTemplatePaths()
-	{
-		return self::getAimeos()->getCustomPaths( 'client/html' );
-	}
-
-
 	private static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
@@ -68,7 +41,7 @@ class TestHelper
 			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos::autoload' );
 
-			$extdir = dirname( dirname( dirname( dirname( __DIR__ ) ) ) );
+			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
 			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );
 		}
 
@@ -86,6 +59,7 @@ class TestHelper
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
+		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 		$ctx->setConfig( $conf );
 
 
@@ -101,8 +75,8 @@ class TestHelper
 		$ctx->setCache( $cache );
 
 
-		$i18n = new \Aimeos\MW\Translation\None( 'en' );
-		$ctx->setI18n( array( 'en' => $i18n ) );
+		$i18n = new \Aimeos\MW\Translation\None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
 		$session = new \Aimeos\MW\Session\None();

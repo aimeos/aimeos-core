@@ -2,11 +2,10 @@
 
 
 /**
- * @copyright Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-class TestHelper
+class TestHelperJadm
 {
 	private static $aimeos;
 	private static $context;
@@ -49,6 +48,12 @@ class TestHelper
 	}
 
 
+	public static function getControllerPaths()
+	{
+		return self::getAimeos()->getCustomPaths( 'controller/jobs' );
+	}
+
+
 	private static function createContext( $site )
 	{
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();
@@ -84,12 +89,39 @@ class TestHelper
 
 
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
-		$locale = $localeManager->bootstrap( $site, '', '', false );
+		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( '<extname>:unittest' );
+		$view = self::createView( $conf );
+		$ctx->setView( $view );
+
+
+		$ctx->setEditor( 'core:controller/jobs' );
 
 		return $ctx;
 	}
+
+
+	protected static function createView( \Aimeos\MW\Config\Iface $config )
+	{
+		$view = new \Aimeos\MW\View\Standard();
+
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		$sepDec = $config->get( 'client/html/common/format/seperatorDecimal', '.' );
+		$sep1000 = $config->get( 'client/html/common/format/seperator1000', ' ' );
+		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, $sepDec, $sep1000 );
+		$view->addHelper( 'number', $helper );
+
+		return $view;
+	}
+
+
+	public static function errorHandler( $code, $message, $file, $row )
+	{
+		return true;
+	}
+
 }

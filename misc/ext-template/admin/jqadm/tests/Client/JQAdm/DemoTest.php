@@ -21,8 +21,8 @@ class DemoTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->context = \TestHelperJqadm::getContext();
+		$paths = \TestHelperJqadm::getHtmlTemplatePaths();
 
 		// $this->object = new \Aimeos\Client\JQAdm\...\Standard( $this->context, $paths );
 	}

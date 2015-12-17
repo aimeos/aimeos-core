@@ -23,5 +23,5 @@ setlocale(LC_CTYPE, 'en_US.UTF-8');
 setlocale(LC_TIME, 'POSIX');
 
 
-require_once 'TestHelper.php';
-TestHelper::bootstrap();
+require_once 'TestHelperJqadm.php';
+TestHelperJqadm::bootstrap();

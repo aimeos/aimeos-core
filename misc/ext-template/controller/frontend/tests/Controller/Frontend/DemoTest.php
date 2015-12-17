@@ -21,7 +21,7 @@ class DemoTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new \Aimeos\Controller\Frontend\Demo\Standard( \TestHelper::getContext() );
+		// $this->object = new \Aimeos\Controller\Frontend\Demo\Standard( \TestHelperFrontend::getContext() );
 	}
 
 

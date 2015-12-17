@@ -21,5 +21,5 @@ setlocale( LC_NUMERIC, 'POSIX' );
 setlocale( LC_CTYPE, 'en_US.UTF-8' );
 setlocale( LC_TIME, 'POSIX' );
 
-require_once 'TestHelper.php';
-TestHelper::bootstrap();
+require_once 'TestHelperFrontend.php';
+TestHelperFrontend::bootstrap();
