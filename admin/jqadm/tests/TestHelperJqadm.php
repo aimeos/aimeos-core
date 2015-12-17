@@ -34,7 +34,7 @@ class TestHelperJqadm
 			$config = self::getContext( $site )->getConfig();
 		}
 
-		$view = new \Aimeos\MW\View\Standard( self::getJQAdmTemplatePaths() );
+		$view = new \Aimeos\MW\View\Standard( self::getTemplatePaths() );
 
 		$trans = new \Aimeos\MW\Translation\None( 'de_DE' );
 		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
@@ -62,7 +62,7 @@ class TestHelperJqadm
 	}
 
 
-	public static function getJQAdmTemplatePaths()
+	public static function getTemplatePaths()
 	{
 		return self::getAimeos()->getCustomPaths( 'admin/jqadm/templates' );
 	}

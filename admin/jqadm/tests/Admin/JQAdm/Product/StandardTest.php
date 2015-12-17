@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->view = \TestHelperJqadm::getView();
 		$this->context = \TestHelperJqadm::getContext();
-		$templatePaths = \TestHelperJqadm::getJQAdmTemplatePaths();
+		$templatePaths = \TestHelperJqadm::getTemplatePaths();
 
 		$this->object = new \Aimeos\Admin\JQAdm\Product\Standard( $this->context, $templatePaths );
 		$this->object->setView( $this->view );
