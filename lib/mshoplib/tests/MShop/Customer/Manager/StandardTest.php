@@ -25,8 +25,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = \TestHelper::getContext()->getEditor();
-		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelper::getContext() );
+		$this->editor = \TestHelperMShop::getContext()->getEditor();
+		$this->object = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelperMShop::getContext() );
 
 		$this->fixture = array(
 			'customer.label' => 'unitTest',

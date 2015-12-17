@@ -22,11 +22,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Address\Delivery\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessNewAddress()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array(
 			'ca_deliveryoption' => 'null',
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessNewAddressMissing()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array(
 			'ca_deliveryoption' => 'null',
@@ -147,7 +147,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessNewAddressUnknown()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array(
 			'ca_deliveryoption' => 'null',
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessNewAddressInvalid()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$config = $this->context->getConfig();
 		$config->set( 'client/html/checkout/standard/address/validate/postal', '^[0-9]{5}$' );
@@ -229,7 +229,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item->setId( null );
 		$manager->saveItem( $item );
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$this->context->setUserId( $item->getParentId() );
 
 		$param = array( 'ca_delivery_delete' => $item->getId() );
@@ -246,7 +246,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessAddressDeleteUnknown()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array( 'ca_delivery_delete' => '-1' );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
@@ -270,7 +270,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No customer address found' );
 		}
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array( 'ca_delivery_delete' => $item->getId() );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
@@ -305,7 +305,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->context->setUserId( $customer->getId() );
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array( 'ca_deliveryoption' => $address->getId() );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
@@ -323,7 +323,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessInvalidId()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array( 'ca_deliveryoption' => -1 );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );

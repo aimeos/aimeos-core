@@ -29,7 +29,7 @@ class ShippingTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
@@ -114,7 +114,7 @@ class ShippingTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 

@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$helper = new \Aimeos\MW\View\Helper\Encoder\Standard( $view );
 		$view->addHelper( 'encoder', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, \TestHelper::getContext()->getConfig() );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, \TestHelperHtml::getContext()->getConfig() );
 		$view->addHelper( 'config', $helper );
 
 		$this->object = new \Aimeos\MW\View\Helper\Content\Standard( $view );

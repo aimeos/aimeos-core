@@ -28,5 +28,5 @@ setlocale( LC_TIME, 'POSIX' );
  */
 define( 'PATH_TESTS', __DIR__ );
 
-require_once 'TestHelper.php';
-\TestHelper::bootstrap();
+require_once 'TestHelperJobs.php';
+\TestHelperJobs::bootstrap();

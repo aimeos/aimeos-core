@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 
 		$this->mock = $this->getMockBuilder( '\\Aimeos\\MW\\Cache\\DB' )
 			->disableOriginalConstructor()->getMock();

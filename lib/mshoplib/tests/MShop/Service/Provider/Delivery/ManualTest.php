@@ -26,7 +26,7 @@ class ManualTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
 
@@ -56,7 +56,7 @@ class ManualTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetConfigFE()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->assertEquals( array(), $this->object->getConfigFE( $basket ) );
@@ -65,7 +65,7 @@ class ManualTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcess()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$order = $manager->createItem();
 		$this->object->process( $order );
 
@@ -75,7 +75,7 @@ class ManualTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'order/base/service' )->createItem();
+		$item = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/service' )->createItem();
 		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributes() ) );

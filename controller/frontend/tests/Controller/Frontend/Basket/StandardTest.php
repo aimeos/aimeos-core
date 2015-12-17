@@ -17,10 +17,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperFrontend::getContext();
 		$this->object = new \Aimeos\Controller\Frontend\Basket\Standard( $this->context );
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP' ) );
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'U:TESTPSUB01', $basket->getProduct( 0 )->getProductCode() );
 
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductBundle()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:BUNDLE' ) );
@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductVariant()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Product not found' );
 		}
 
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.code', array( 'xs', 'white' ) ) );
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductVariantIncomplete()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Product not found' );
 		}
 
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductVariantNonUnique()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Product not found' );
 		}
 
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductVariantNotRequired()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.code', 'xs' ) );
@@ -226,7 +226,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductConfigAttribute()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'attribute.code', 'xs' ) );
@@ -248,7 +248,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductHiddenAttribute()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -285,7 +285,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductCustomAttribute()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -312,7 +312,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductAttributeNotAssigned()
 	{
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $attributeManager->createSearch();
 		$expr = array(
@@ -344,7 +344,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductNotEnoughStockException()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
@@ -370,7 +370,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductNoStockException()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'EFGH' ) );
@@ -395,7 +395,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductNoStockRequired()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
@@ -412,7 +412,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductNoStockItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'QRST' ) );
@@ -430,7 +430,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductNoPriceException()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'MNOP' ) );
@@ -455,7 +455,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductEmptySelectionException()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:noSel' ) );
 		$items = $productManager->searchItems( $search );
@@ -473,7 +473,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->addProduct( $this->testItem->getId(), 1 );
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $productManager->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTPSUB01' ) );
@@ -489,7 +489,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductLowQuantityPriceException()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
@@ -505,7 +505,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddProductHigherQuantities()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
@@ -550,7 +550,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testEditProductAttributes()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TESTP' ) );
 		$items = $productManager->searchItems( $search );
@@ -559,7 +559,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'Product not found' );
 		}
 
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelper::getContext() );
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $attributeManager->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'attribute.domain', 'product' ),
@@ -601,7 +601,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testEditProductNotEnoughStock()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
@@ -631,7 +631,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testEditProductNoStock()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$search = $productManager->createSearch();
@@ -667,7 +667,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testEditProductStockNotChecked()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
 		$items = $productManager->searchItems( $search );
@@ -937,7 +937,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function getAddress( $company )
 	{
-		$customer = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext(), 'Standard' );
+		$customer = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelperFrontend::getContext(), 'Standard' );
 		$addressManager = $customer->getSubManager( 'address', 'Standard' );
 
 		$search = $addressManager->createSearch();
@@ -957,7 +957,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function getService( $code )
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.code', $code ) );

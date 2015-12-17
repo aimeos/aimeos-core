@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 		$this->object = new \Aimeos\MShop\Order\Manager\Base\Coupon\Standard( $this->context );
 	}
 
@@ -163,7 +163,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );

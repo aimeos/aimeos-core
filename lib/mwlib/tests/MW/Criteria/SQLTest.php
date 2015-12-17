@@ -26,12 +26,12 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$dbm = \TestHelper::getDBManager();
+		$dbm = \TestHelperMw::getDBManager();
 
 		$conn = $dbm->acquire();
 		$this->object = new \Aimeos\MW\Criteria\SQL( $conn );

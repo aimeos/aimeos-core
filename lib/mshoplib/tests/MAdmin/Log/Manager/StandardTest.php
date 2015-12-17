@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MAdmin\Log\Manager\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\MAdmin\Log\Manager\Standard( \TestHelperMShop::getContext() );
 	}
 
 

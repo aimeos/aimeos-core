@@ -14,10 +14,10 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$target = '\\Aimeos\\Controller\\Frontend\\Catalog\\Iface';
 
-		$controller = \Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelper::getContext() );
+		$controller = \Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelperFrontend::getContext() );
 		$this->assertInstanceOf( $target, $controller );
 
-		$controller = \Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelper::getContext(), 'Standard' );
+		$controller = \Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelperFrontend::getContext(), 'Standard' );
 		$this->assertInstanceOf( $target, $controller );
 	}
 
@@ -25,20 +25,20 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testCreateControllerInvalidImplementation()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelper::getContext(), 'Invalid' );
+		\Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelperFrontend::getContext(), 'Invalid' );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelper::getContext(), '%^' );
+		\Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelperFrontend::getContext(), '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelper::getContext(), 'notexist' );
+		\Aimeos\Controller\Frontend\Catalog\Factory::createController( \TestHelperFrontend::getContext(), 'notexist' );
 	}
 }

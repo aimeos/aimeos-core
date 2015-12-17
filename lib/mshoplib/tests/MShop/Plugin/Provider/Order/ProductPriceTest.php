@@ -23,7 +23,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
@@ -69,7 +69,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
@@ -78,7 +78,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->plugin->setConfig( array( 'update' => true ) );
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
 	}
@@ -86,7 +86,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateSelectionPriceCorrect()
 	{
-		$productManager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
 		$result = $productManager->searchItems( $search, array( 'price' ) );
@@ -109,7 +109,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 
 		$this->plugin->setConfig( array( 'update' => true ) );
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
 	}
@@ -120,7 +120,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$this->order->getProduct( 0 )->setPrice( $this->price );
 
 		$this->plugin->setConfig( array( 'update' => true ) );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		try
 		{
@@ -138,7 +138,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateSelectionPriceUpdated()
 	{
-		$productManager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'product' );
+		$productManager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'product' );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'U:TEST' ) );
 		$result = $productManager->searchItems( $search, array( 'price' ) );
@@ -159,7 +159,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$orderProduct->setProductCode( 'U:TESTSUB02' );
 		$orderProduct->setPrice( $this->price );
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		try
 		{
@@ -177,7 +177,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateAttributePriceUpdated()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
 
@@ -228,7 +228,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$refPrice = $product->getPrice()->getValue();
 		$product->setPrice( $this->price );
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		try
 		{
@@ -263,7 +263,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 
 		$oldPrice = clone $product->getPrice();
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
 		$this->assertEquals( $oldPrice, $product->getPrice() );

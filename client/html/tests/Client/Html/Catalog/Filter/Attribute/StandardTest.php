@@ -21,9 +21,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$paths = \TestHelper::getHtmlTemplatePaths();
-		$this->object = new \Aimeos\Client\Html\Catalog\Filter\Attribute\Standard( \TestHelper::getContext(), $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Filter\Attribute\Standard( \TestHelperHtml::getContext(), $paths );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 

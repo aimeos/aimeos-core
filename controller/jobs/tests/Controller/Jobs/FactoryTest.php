@@ -17,8 +17,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$controller = \Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, 'admin/job' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\Jobs\\Iface', $controller );
@@ -27,8 +27,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateControllerEmpty()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, "\t\n" );
@@ -37,8 +37,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateControllerInvalidName()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, '%^' );
@@ -47,8 +47,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateControllerNotExisting()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, 'notexist' );
@@ -57,10 +57,10 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetControllers()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
-		$list = \Aimeos\Controller\Jobs\Factory::getControllers( $context, $aimeos, \TestHelper::getControllerPaths() );
+		$list = \Aimeos\Controller\Jobs\Factory::getControllers( $context, $aimeos, \TestHelperJobs::getControllerPaths() );
 
 		$this->assertGreaterThan( 0, count( $list ) );
 

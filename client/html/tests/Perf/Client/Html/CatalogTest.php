@@ -17,8 +17,8 @@ class CatalogTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->paths = \TestHelper::getHtmlTemplatePaths();
-		$this->context = \TestHelper::getContext( 'unitperf' );
+		$this->paths = \TestHelperHtml::getHtmlTemplatePaths();
+		$this->context = \TestHelperHtml::getContext( 'unitperf' );
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
 		$search = $catalogManager->createSearch();
@@ -38,7 +38,7 @@ class CatalogTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No product item with code "perf-00000" found' );
 		}
 
-		$this->view = \TestHelper::getView( 'unitperf' );
+		$this->view = \TestHelperHtml::getView( 'unitperf' );
 
 		$param = array(
 			'f_catid' => $catalogItem->getId(),

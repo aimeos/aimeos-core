@@ -2,11 +2,11 @@
 
 
 /**
- * @copyright Metaways Infosystems GmbH, 2014
+ * @copyright Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-class TestHelper
+class TestHelperFrontend
 {
 	private static $aimeos;
 	private static $context;
@@ -16,6 +16,7 @@ class TestHelper
 	{
 		self::getAimeos();
 		\Aimeos\MShop\Factory::setCache( false );
+		\Aimeos\Controller\Frontend\Factory::setCache( false );
 	}
 
 
@@ -29,7 +30,7 @@ class TestHelper
 	}
 
 
-	public static function getAimeos()
+	private static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
 		{
@@ -69,6 +70,10 @@ class TestHelper
 		$ctx->setLogger( $logger );
 
 
+		$i18n = new \Aimeos\MW\Translation\None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
+
+
 		$session = new \Aimeos\MW\Session\None();
 		$ctx->setSession( $session );
 
@@ -78,7 +83,7 @@ class TestHelper
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( 'core:controller/common' );
+		$ctx->setEditor( 'core:controller/frontend' );
 
 		return $ctx;
 	}

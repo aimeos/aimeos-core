@@ -22,11 +22,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -110,9 +110,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$context = clone $this->context;
 		$context->getConfig()->set( 'client/html/catalog/lists/catid-default', $this->getCatalogItem()->getId() );
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Standard( $context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 
 		$view = $this->object->getView();
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array() );
@@ -128,9 +128,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$context = clone $this->context;
 		$context->getConfig()->set( 'client/html/catalog/lists/levels', \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Standard( $context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 
 		$view = $this->object->getView();
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array( 'f_catid' => $this->getCatalogItem( 'root' )->getId() ) );

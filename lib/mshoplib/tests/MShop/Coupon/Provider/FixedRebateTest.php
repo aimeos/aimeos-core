@@ -28,7 +28,7 @@ class FixedRebateTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
@@ -77,7 +77,7 @@ class FixedRebateTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddCouponMultipleCurrencies()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$config = array(
 			'fixedrebate.productcode' => 'U:MD',
 			'fixedrebate.rebate' => array(
@@ -120,7 +120,7 @@ class FixedRebateTest extends \PHPUnit_Framework_TestCase
 		$this->orderBase->addProduct( $products['CNE'] );
 		$this->orderBase->addProduct( $products['CNC'] );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$config = array(
 			'fixedrebate.productcode' => 'U:MD',
 			'fixedrebate.rebate' => array(
@@ -169,8 +169,8 @@ class FixedRebateTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddCouponInvalidConfig()
 	{
-		$context = \TestHelper::getContext();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
+		$context = \TestHelperMShop::getContext();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 		$couponItem->setConfig( array( 'fixedrebate.rebate' => '2.50' ) );
 
 		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $couponItem, 'zyxw' );
@@ -189,7 +189,7 @@ class FixedRebateTest extends \PHPUnit_Framework_TestCase
 	protected function getOrderProducts()
 	{
 		$products = array();
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'order/base/product' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->combine( '&&', array(

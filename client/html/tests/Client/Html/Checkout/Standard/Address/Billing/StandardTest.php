@@ -22,11 +22,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Address\Billing\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$customer = $this->getCustomerItem();
 		$this->context->setUserId( $customer->getId() );
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$this->object->setView( $view );
 
 		$output = $this->object->getBody();
@@ -72,7 +72,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$config = $this->context->getConfig();
 		$config->set( 'client/html/common/partials/address', 'common/partials/address-eu.php' );
 
-		$view = \TestHelper::getView( 'unittest', $config );
+		$view = \TestHelperHtml::getView( 'unittest', $config );
 		$this->object->setView( $view );
 
 		$output = $this->object->getBody();
@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessNewAddress()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array(
 			'ca_billingoption' => 'null',
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessNewAddressMissing()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array(
 			'ca_billingoption' => 'null',
@@ -167,7 +167,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessNewAddressUnknown()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array(
 			'ca_billingoption' => 'null',
@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessNewAddressInvalid()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$config = $this->context->getConfig();
 		$config->set( 'client/html/checkout/standard/address/validate/postal', '^[0-9]{5}$' );
@@ -241,7 +241,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$customer = $this->getCustomerItem();
 		$this->context->setUserId( $customer->getId() );
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array( 'ca_billingoption' => $customer->getId() );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
@@ -259,7 +259,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessInvalidId()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array( 'ca_billingoption' => -1 );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );

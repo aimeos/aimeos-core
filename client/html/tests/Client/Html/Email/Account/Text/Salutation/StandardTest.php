@@ -17,7 +17,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( \TestHelperHtml::getContext() );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
@@ -37,13 +37,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 		$this->emailMock = $this->getMock( '\\Aimeos\\MW\\Mail\\Message\\None' );
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Email\Account\Text\Salutation\Standard( $this->context, $paths );
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->extAddressItem = self::$customerItem->getPaymentAddress();
 		$view->addHelper( 'mail', new \Aimeos\MW\View\Helper\Mail\Standard( $view, $this->emailMock ) );
 

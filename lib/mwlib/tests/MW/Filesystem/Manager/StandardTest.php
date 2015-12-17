@@ -11,7 +11,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->config = \TestHelper::getConfig();
+		$this->config = \TestHelperMw::getConfig();
 		$this->object = new \Aimeos\MW\Filesystem\Manager\Standard( $this->config );
 	}
 

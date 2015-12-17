@@ -23,8 +23,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
-		$this->aimeos = \TestHelper::getAimeos();
+		$this->context = \TestHelperJobs::getContext();
+		$this->aimeos = \TestHelperJobs::getAimeos();
 
 		$this->object = new \Aimeos\Controller\Jobs\Customer\Email\Watch\Standard( $this->context, $this->aimeos );
 	}

@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() );
+		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$search = $couponManager->createSearch();
 		$search->setConditions( $search->compare( '~=', 'coupon.code.code', 'OPQR' ) );
@@ -119,7 +119,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );

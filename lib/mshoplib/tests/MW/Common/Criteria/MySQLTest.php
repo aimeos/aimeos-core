@@ -25,7 +25,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext( 'unit' );
+		$context = \TestHelperMShop::getContext( 'unit' );
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 

@@ -15,7 +15,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\Frontend\Catalog\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\Frontend\Catalog\Standard( \TestHelperFrontend::getContext() );
 	}
 
 
@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetCatalogPath()
 	{
-		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$item = $manager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_LIST );
 
 		$list = array();
@@ -304,7 +304,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetIndexItemsCategory()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelper::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$search = $catalogManager->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'new' ) );

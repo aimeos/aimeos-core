@@ -17,7 +17,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$controller = \Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), 'basket' );
+		$controller = \Aimeos\Controller\Frontend\Factory::createController( \TestHelperFrontend::getContext(), 'basket' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\Frontend\\Common\\Iface', $controller );
 	}
 
@@ -25,28 +25,28 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testCreateControllerEmpty()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), "\t\n" );
+		\Aimeos\Controller\Frontend\Factory::createController( \TestHelperFrontend::getContext(), "\t\n" );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), '%^' );
+		\Aimeos\Controller\Frontend\Factory::createController( \TestHelperFrontend::getContext(), '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), 'notexist' );
+		\Aimeos\Controller\Frontend\Factory::createController( \TestHelperFrontend::getContext(), 'notexist' );
 	}
 
 
 	public function testCreateSubControllerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Factory::createController( \TestHelper::getContext(), 'basket/notexist' );
+		\Aimeos\Controller\Frontend\Factory::createController( \TestHelperFrontend::getContext(), 'basket/notexist' );
 	}
 
 
@@ -54,7 +54,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\Frontend\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 
 		$controller1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
 		\Aimeos\Controller\Frontend\Factory::clear();
@@ -70,7 +70,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\Frontend\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 
 		$basket1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
 		$catalog1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
@@ -90,7 +90,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\Frontend\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 
 		$basket1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' );
 		$catalog1 = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );

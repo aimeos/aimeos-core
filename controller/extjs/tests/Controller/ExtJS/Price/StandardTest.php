@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Price\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Price\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearchItemsWithReference()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 
 		$params = (object) array(
 			'site' => 'unittest',
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$controller = \Aimeos\Controller\ExtJS\Price\Type\Factory::createController( \TestHelper::getContext() );
+		$controller = \Aimeos\Controller\ExtJS\Price\Type\Factory::createController( \TestHelperExtjs::getContext() );
 
 		$params = (object) array(
 			'site' => 'unittest',

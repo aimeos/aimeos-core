@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperExtjs::getContext();
 
 		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/attribute/import/text/standard/uploaddir', './tmp' );
 		$this->testfile = $this->testdir . DIRECTORY_SEPARATOR . 'file.txt';
@@ -339,7 +339,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUploadFileExceptionWrongDestination()
 	{
-		set_error_handler( 'TestHelper::errorHandler' );
+		set_error_handler( 'TestHelperExtjs::errorHandler' );
 
 		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/standard/uploaddir', '/up/' );
 		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/standard/enablecheck', false );

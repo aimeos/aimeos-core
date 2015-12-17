@@ -25,7 +25,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$adapter = \TestHelper::getConfig()->get( 'resource/db/adapter', false );
+		$adapter = \TestHelperMw::getConfig()->get( 'resource/db/adapter', false );
 
 		if( $adapter === false || $adapter !== 'mysql' ) {
 			$this->markTestSkipped( 'No MySQL database configured' );
@@ -68,7 +68,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 		);
 
 
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 		$conn = $this->dbm->acquire();
 
 
@@ -124,7 +124,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 		$conn = $this->dbm->acquire();
 
 		$conn->create( 'DROP TABLE "mw_cache_tag_test"' )->execute()->finish();

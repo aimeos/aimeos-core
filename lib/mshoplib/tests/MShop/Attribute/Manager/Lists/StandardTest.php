@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 		$this->editor = $this->context->getEditor();
 		$manager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'Standard' );
 		$this->object = $manager->getSubManager( 'lists', 'Standard' );
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $itemSaved->getId() );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertTrue( $itemSaved->getType() !== null );

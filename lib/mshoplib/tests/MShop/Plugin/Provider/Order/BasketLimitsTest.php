@@ -27,7 +27,7 @@ class BasketLimitsTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$this->order = $orderBaseManager->createItem();
@@ -59,14 +59,14 @@ class BasketLimitsTest extends \PHPUnit_Framework_TestCase
 			'max-products' => 5
 		);
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$plugin = $pluginManager->createItem();
 		$plugin->setTypeId( 2 );
 		$plugin->setProvider( 'BasketLimits' );
 		$plugin->setConfig( $config );
 		$plugin->setStatus( '1' );
 
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\BasketLimits( \TestHelper::getContext(), $plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\BasketLimits( \TestHelperMShop::getContext(), $plugin );
 	}
 
 

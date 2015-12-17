@@ -28,7 +28,7 @@ class PresentTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
@@ -90,8 +90,8 @@ class PresentTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddCouponInvalidConfig()
 	{
-		$context = \TestHelper::getContext();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
+		$context = \TestHelperMShop::getContext();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 
 		$object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, 'zyxw' );
 

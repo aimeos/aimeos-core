@@ -26,7 +26,7 @@ class PostPayTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
 
 		$serviceItem = $serviceManager->createItem();
@@ -69,7 +69,7 @@ class PostPayTest extends \PHPUnit_Framework_TestCase
 	public function testProcess()
 	{
 		// Currently does nothing.
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$this->object->process( $manager->createItem() );
 	}

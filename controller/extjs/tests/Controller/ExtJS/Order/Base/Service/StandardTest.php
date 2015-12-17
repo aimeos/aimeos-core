@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Order\Base\Service\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Order\Base\Service\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperExtjs::getContext() );
 		$baseManager = $manager->getSubManager( 'base' );
 		$search = $baseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '53.50' ) );

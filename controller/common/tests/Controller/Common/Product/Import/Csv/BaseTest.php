@@ -16,8 +16,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	{
 		\Aimeos\MShop\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperCntl::getContext();
+		$aimeos = \TestHelperCntl::getAimeos();
 
 		$this->object = new TestAbstract( $context, $aimeos );
 	}

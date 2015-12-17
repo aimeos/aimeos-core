@@ -13,24 +13,24 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testCreateControllerInvalidImplementation()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelper::getContext(), 'Invalid' );
+		\Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelperFrontend::getContext(), 'Invalid' );
 	}
 
 	public function testCreateControllerInvalidName()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelper::getContext(), '%^' );
+		\Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelperFrontend::getContext(), '%^' );
 	}
 
 	public function testCreateControllerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelper::getContext(), 'notexist' );
+		\Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelperFrontend::getContext(), 'notexist' );
 	}
 
 	public function testAbstractAddControllerDecoratorsWithExclude()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$config = $context->getConfig();
 
 		$config->set( 'controller/frontend/common/decorators/default', array( 'Example' ) );
@@ -45,12 +45,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testAbstractAddControllerDecoratorsNoDomainException()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Exception' );
-		\Aimeos\Controller\Frontend\Service\Factorylocal::createController( \TestHelper::getContext(), 'Standard', '' );
+		\Aimeos\Controller\Frontend\Service\Factorylocal::createController( \TestHelperFrontend::getContext(), 'Standard', '' );
 	}
 
 	public function testAbstractAddDecorators()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$config = $context->getConfig();
 
 		$config->set( 'controller/frontend/common/decorators/default', array( 'Example', 'Example' ) );
@@ -63,7 +63,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testAbstractAddDecoratorsExceptionWrongName()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$config = $context->getConfig();
 		$config->set( 'controller/frontend/common/decorators/default', array( '$$' ) );
 
@@ -73,7 +73,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testAbstractAddDecoratorsExceptionWrongClass()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$config = $context->getConfig();
 		$config->set( 'controller/frontend/common/decorators/default', array( 'WrongClass' ) );
 
@@ -83,16 +83,16 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateController()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$config = $context->getConfig();
 		$config->set( 'controller/frontend/common/decorators/default', array() );
 
 		$target = '\\Aimeos\\Controller\\Frontend\\Service\\Iface';
 
-		$controller = \Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelper::getContext() );
+		$controller = \Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelperFrontend::getContext() );
 		$this->assertInstanceOf( $target, $controller );
 
-		$controller = \Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelper::getContext(), 'Standard' );
+		$controller = \Aimeos\Controller\Frontend\Service\Factory::createController( \TestHelperFrontend::getContext(), 'Standard' );
 		$this->assertInstanceOf( $target, $controller );
 	}
 

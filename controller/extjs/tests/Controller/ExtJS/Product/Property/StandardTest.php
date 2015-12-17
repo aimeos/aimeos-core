@@ -20,7 +20,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Product\Property\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Property\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.code' => 'CNC' ) ) ) )
 		);
 		
-		$prodCtrl = new \Aimeos\Controller\ExtJS\Product\Standard( \TestHelper::getContext() );
+		$prodCtrl = new \Aimeos\Controller\ExtJS\Product\Standard( \TestHelperExtjs::getContext() );
 		$products = $prodCtrl->searchItems( $searchParams );
 		$this->assertEquals( 1, count( $products['items'] ) );
 		
@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.property.type.code' => 'package-weight' ) ) ) )
 		);
 
-		$typeCtrl = new \Aimeos\Controller\ExtJS\Product\Property\Type\Standard( \TestHelper::getContext() );
+		$typeCtrl = new \Aimeos\Controller\ExtJS\Product\Property\Type\Standard( \TestHelperExtjs::getContext() );
 		$types = $typeCtrl->searchItems( $searchParams );
 		$this->assertEquals( 1, count( $types['items'] ) );
 

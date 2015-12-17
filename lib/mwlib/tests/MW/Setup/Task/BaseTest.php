@@ -23,14 +23,14 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$config = \TestHelper::getConfig();
+		$config = \TestHelperMw::getConfig();
 
 		if( $config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$dbm = \TestHelper::getDBManager();
+		$dbm = \TestHelperMw::getDBManager();
 		$conn = $dbm->acquire();
 
 		$schema = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );

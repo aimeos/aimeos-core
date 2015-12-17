@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 		$this->editor = $this->context->getEditor();
 		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( $this->context, 'Standard' );
 		$this->object = $supplierManager->getSubManager( 'lists', 'Standard' );
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$siteid = \TestHelper::getContext()->getLocale()->getSiteId();
+		$siteid = \TestHelperMShop::getContext()->getLocale()->getSiteId();
 
 		$search = $this->object->createSearch();
 		$conditions = array(
@@ -264,7 +264,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSearchItems()
 	{
 		$total = 0;
-		$siteid = \TestHelper::getContext()->getLocale()->getSiteId();
+		$siteid = \TestHelperMShop::getContext()->getLocale()->getSiteId();
 
 
 		$search = $this->object->createSearch();

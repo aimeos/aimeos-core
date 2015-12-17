@@ -21,9 +21,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$paths = \TestHelper::getHtmlTemplatePaths();
-		$this->object = new \Aimeos\Client\Html\Catalog\Filter\Tree\Standard( \TestHelper::getContext(), $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Filter\Tree\Standard( \TestHelperHtml::getContext(), $paths );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBody()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelper::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperHtml::getContext() );
 		$node = $catalogManager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_LIST );
 
 		$view = $this->object->getView();
@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBodyLevelsAlways()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelper::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperHtml::getContext() );
 		$node = $catalogManager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$view = $this->object->getView();
@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBodyLevelsOnly()
 	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelper::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperHtml::getContext() );
 		$node = $catalogManager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
 		$view = $this->object->getView();

@@ -24,8 +24,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = \TestHelper::getContext();
-		$this->aimeos = \TestHelper::getAimeos();
+		$this->context = \TestHelperJobs::getContext();
+		$this->aimeos = \TestHelperJobs::getAimeos();
 		$config = $this->context->getConfig();
 
 		$config->set( 'controller/jobs/product/import/csv/skip-lines', 1 );

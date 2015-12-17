@@ -12,7 +12,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	public function testStore()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$name = 'ControllerFrontendOrderStore';
 		$context->getConfig()->set( 'mshop/order/manager/name', $name );
 
@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testBlock()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$name = 'ControllerFrontendOrderBlock';
 		$context->getConfig()->set( 'controller/common/order/name', $name );
 
@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUnblock()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$name = 'ControllerFrontendOrderUnblock';
 		$context->getConfig()->set( 'controller/common/order/name', $name );
 
@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdate()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperFrontend::getContext();
 		$name = 'ControllerFrontendOrderUpdate';
 		$context->getConfig()->set( 'controller/common/order/name', $name );
 

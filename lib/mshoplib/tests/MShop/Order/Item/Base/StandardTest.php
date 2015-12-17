@@ -32,8 +32,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() );
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderAddressManager = $orderBaseManager->getSubManager( 'address' );
@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'order.base.editor' => 'unitTestUser'
 		);
 
-		$this->locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
+		$this->locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $this->locale, $this->values );
 
@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		//registering order object for plugin use
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$pluginManager->register( $this->object, 'order' );
 	}
 
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLocale()
 	{
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 		$this->object->setLocale( $locale );
 
 		$this->assertEquals( $locale, $this->object->getLocale() );
@@ -445,7 +445,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$this->object->setAddress( $address, $type );
 		}
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderAddressManager = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 		$address = $orderAddressManager->createItem();
 
@@ -496,7 +496,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$type = 'delivery';
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
 		$service = $orderServiceManager->createItem();
 
@@ -648,11 +648,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function createProduct( $code )
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderProductManager = $orderManager->getSubManager( 'base' )->getSubManager( 'product' );
 		$product = $orderProductManager->createItem();
 
-		$price = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
+		$price = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 		$price->setValue( '2.99' );
 
 		$product->setPrice( $price );

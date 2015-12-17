@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Price\Lists\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Price\Lists\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -60,7 +60,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSaveDeleteItem()
 	{
 		$params = (object) array( 'site' => 'unittest', 'limit' => 1, 'price.lists.type.domain' => 'customer' );
-		$priceManager = new \Aimeos\Controller\ExtJS\Price\Standard( \TestHelper::getContext() );
+		$priceManager = new \Aimeos\Controller\ExtJS\Price\Standard( \TestHelperExtjs::getContext() );
 		$result = $priceManager->searchItems( $params );
 
 		$params = (object) array(
@@ -69,7 +69,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'start' => 0,
 			'limit' => 1,
 		);
-		$priceListTypeManager = \Aimeos\Controller\ExtJS\Price\Lists\Type\Factory::createController( \TestHelper::getContext() );
+		$priceListTypeManager = \Aimeos\Controller\ExtJS\Price\Lists\Type\Factory::createController( \TestHelperExtjs::getContext() );
 		$resultType = $priceListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

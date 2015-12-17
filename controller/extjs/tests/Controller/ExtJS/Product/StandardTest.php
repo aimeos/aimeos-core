@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Product\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Product\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperExtjs::getContext() );
 		$typeManager = $productManager->getSubManager( 'type' );
 
 		$search = $typeManager->createSearch();
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testFinish()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperExtjs::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );

@@ -24,7 +24,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
@@ -45,7 +45,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 		$this->order = $baseItem;
 
 		// create a product to mess with in the tests
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
 		$search->setSlice( 0, 1 );
@@ -71,7 +71,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'WTF' ) );
 		$items = $productManager->searchItems( $search );
@@ -87,7 +87,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
@@ -95,14 +95,14 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 	public function testUpdateNone()
 	{
 		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT not set, so check shall not be executed
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 		$this->AssertTrue( $object->update( $this->order, 'check.after' ) );
 	}
 
 
 	public function testUpdateOk()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 		$result = $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 
 		$this->assertTrue( $result );
@@ -120,7 +120,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 
 		$this->order->addProduct( $badItem );
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
@@ -129,7 +129,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateProductEnded()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
@@ -142,7 +142,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 
 		$this->order->addProduct( $badItem );
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
@@ -150,7 +150,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateProductNotStarted()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
@@ -163,7 +163,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 
 		$this->order->addProduct( $badItem );
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
@@ -171,7 +171,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateProductDeactivated()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
@@ -190,7 +190,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 
 		$badItemPosition = key( $products );
 
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 
 		try
 		{

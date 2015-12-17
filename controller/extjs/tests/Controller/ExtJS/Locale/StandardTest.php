@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Locale\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Locale\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -59,7 +59,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'site' => 'unittest',
 			'condition' => (object) array(
 				'&&' => array(
-					(object) array( '==' => (object) array( 'locale.siteid' => \TestHelper::getContext()->getLocale()->getSiteId() ) ),
+					(object) array( '==' => (object) array( 'locale.siteid' => \TestHelperExtjs::getContext()->getLocale()->getSiteId() ) ),
 					(object) array( '==' => (object) array( 'locale.currencyid' => 'EUR' ) ),
 				),
 			),
@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$saveParam = (object) array(
 			'site' => 'unittest',
 			'items' => (object) array(
-				'locale.siteid' => \TestHelper::getContext()->getLocale()->getSiteId(),
+				'locale.siteid' => \TestHelperExtjs::getContext()->getLocale()->getSiteId(),
 				'locale.currencyid' => 'CHF',
 				'locale.languageid' => 'de',
 				'locale.status' => 0,

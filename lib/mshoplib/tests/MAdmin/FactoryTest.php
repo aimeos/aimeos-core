@@ -17,7 +17,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = \Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), 'job' );
+		$manager = \Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), 'job' );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
@@ -25,28 +25,28 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testCreateManagerEmpty()
 	{
 		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
-		\Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), "\n" );
+		\Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), "\n" );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
 		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
-		\Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), '%^' );
+		\Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
-		\Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), 'unknown' );
+		\Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
-		\Aimeos\MAdmin\Factory::createManager( \TestHelper::getContext(), 'job/unknown' );
+		\Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), 'job/unknown' );
 	}
 
 
@@ -54,7 +54,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\MAdmin\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$controller1 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
 		\Aimeos\MAdmin\Factory::clear();
@@ -70,7 +70,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\MAdmin\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$managerA1 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
 		\Aimeos\MAdmin\Factory::clear( (string) $context );
@@ -86,7 +86,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\MAdmin\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$managerA1 = \Aimeos\MAdmin\Factory::createManager( $context, 'log' );
 		$managerB1 = \Aimeos\MAdmin\Factory::createManager( $context, 'job' );

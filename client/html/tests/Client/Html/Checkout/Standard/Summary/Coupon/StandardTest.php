@@ -23,11 +23,11 @@ class StandardTest
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Summary\Coupon\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -49,7 +49,7 @@ class StandardTest
 		$controller = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$basket = $controller->get();
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->standardBasket = $basket;
 		$this->object->setView( $view );
 
@@ -64,7 +64,7 @@ class StandardTest
 		$basket = $controller->get();
 		$basket->addCoupon( 'OPQR' );
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->standardBasket = $basket;
 		$this->object->setView( $view );
 

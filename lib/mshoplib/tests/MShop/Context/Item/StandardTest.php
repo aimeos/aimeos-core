@@ -74,30 +74,30 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetConfig()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$this->object->setConfig( $context->getConfig() );
 		$this->assertSame( $context->getConfig(), $this->object->getConfig() );
 	}
 
 	public function testSetDatabaseManager()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$this->object->setDatabaseManager( $context->getDatabaseManager() );
 		$this->assertSame( $context->getDatabaseManager(), $this->object->getDatabaseManager() );
 	}
 
 	public function testSetFilesystemManager()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$this->object->setFilesystemManager( $context->getFilesystemManager() );
 		$this->assertSame( $context->getFilesystemManager(), $this->object->getFilesystemManager() );
 	}
 
 	public function testSetI18n()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 		$locale->setLanguageId( 'en' );
 		$this->object->setLocale( $locale );
 
@@ -107,21 +107,21 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLocale()
 	{
-		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
+		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 		$this->object->setLocale( $locale );
 		$this->assertSame( $locale, $this->object->getLocale() );
 	}
 
 	public function testSetLogger()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$this->object->setLogger( $context->getLogger() );
 		$this->assertSame( $context->getLogger(), $this->object->getLogger() );
 	}
 
 	public function testSetSession()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$this->object->setSession( $context->getSession() );
 		$this->assertSame( $context->getSession(), $this->object->getSession() );
 	}

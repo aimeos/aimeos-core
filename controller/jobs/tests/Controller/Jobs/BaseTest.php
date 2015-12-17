@@ -11,8 +11,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	public function testGetTypeItemNotFound()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$object = new TestAbstract( $context, $aimeos );
 

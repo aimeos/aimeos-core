@@ -14,7 +14,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext('unitperf');
+		$this->context = \TestHelperJobs::getContext('unitperf');
 
 		$config = $this->context->getConfig();
 		$config->set( 'controller/jobs/product/import/csv/location', 'tmp/product-import.zip' );
@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testImport()
 	{
-		$aimeos = \TestHelper::getAimeos();
+		$aimeos = \TestHelperJobs::getAimeos();
 		$cntl = \Aimeos\Controller\Jobs\Product\Import\Csv\Factory::createController( $this->context, $aimeos, 'Standard' );
 
 		$start = microtime( true );

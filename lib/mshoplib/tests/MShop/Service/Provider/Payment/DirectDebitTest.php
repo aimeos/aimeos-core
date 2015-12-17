@@ -27,7 +27,7 @@ class DirectDebitTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$this->ordServItem = \Aimeos\MShop\Factory::createManager( $context, 'order/base/service' )->createItem();
 		$serviceItem = \Aimeos\MShop\Factory::createManager( $context, 'service' )->createItem();
@@ -73,7 +73,7 @@ class DirectDebitTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetConfigFE()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$search = $orderManager->createSearch();
 		$expr = array(
@@ -158,7 +158,7 @@ class DirectDebitTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcess()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$order = $manager->createItem();
 
 		$this->object->process( $order );

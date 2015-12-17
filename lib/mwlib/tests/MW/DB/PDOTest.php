@@ -24,7 +24,7 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->config = \TestHelper::getConfig();
+		$this->config = \TestHelperMw::getConfig();
 
 		if( ( $adapter = $this->config->get( 'resource/db/adapter', false ) ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
@@ -509,7 +509,7 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 	public function testFactoryFail()
 	{
 		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
-		\Aimeos\MW\DB\Factory::createManager( \TestHelper::getConfig(), 'notDefined' );
+		\Aimeos\MW\DB\Factory::createManager( \TestHelperMw::getConfig(), 'notDefined' );
 	}
 }
 

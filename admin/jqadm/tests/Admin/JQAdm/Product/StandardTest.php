@@ -16,9 +16,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->view = \TestHelper::getView();
-		$this->context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getJQAdmTemplatePaths();
+		$this->view = \TestHelperJqadm::getView();
+		$this->context = \TestHelperJqadm::getContext();
+		$templatePaths = \TestHelperJqadm::getJQAdmTemplatePaths();
 
 		$this->object = new \Aimeos\Admin\JQAdm\Product\Standard( $this->context, $templatePaths );
 		$this->object->setView( $this->view );

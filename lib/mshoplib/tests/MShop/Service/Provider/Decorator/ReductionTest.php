@@ -24,7 +24,7 @@ class ReductionTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 
 		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
 		$this->servItem = $servManager->createItem();

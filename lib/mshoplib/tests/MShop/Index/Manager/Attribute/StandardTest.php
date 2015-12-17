@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MShop\Index\Manager\Attribute\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\MShop\Index\Manager\Attribute\Standard( \TestHelperMShop::getContext() );
 	}
 
 
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearchItems()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
 		$search = $attributeManager->createSearch();
 

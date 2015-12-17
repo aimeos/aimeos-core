@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperCntl::getContext() );
 		$typeManager = $manager->getSubmanager( 'type' );
 
 		$typeSearch = $typeManager->createSearch();
@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public static function tearDownAfterClass()
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperCntl::getContext() );
 		$manager->deleteItem( self::$product->getId() );
 	}
 
@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperCntl::getContext();
 		$this->endpoint = new \Aimeos\Controller\Common\Product\Import\Csv\Processor\Done( $this->context, array() );
 	}
 

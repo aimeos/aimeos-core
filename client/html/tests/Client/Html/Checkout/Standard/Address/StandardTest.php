@@ -22,11 +22,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Address\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetHeaderOtherStep()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->standardStepActive = 'xyz';
 		$this->object->setView( $view );
 
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item = $this->getCustomerItem();
 		$this->context->setUserId( $item->getId() );
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->standardStepActive = 'address';
 		$view->standardSteps = array( 'address', 'after' );
 		$this->object->setView( $view );
@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBodyOtherStep()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->standardStepActive = 'xyz';
 		$this->object->setView( $view );
 

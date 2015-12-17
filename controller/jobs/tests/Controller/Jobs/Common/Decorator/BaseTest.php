@@ -27,8 +27,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->stub = $this->getMockBuilder( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard' )
 			->setConstructorArgs( array( $context, $aimeos ) )

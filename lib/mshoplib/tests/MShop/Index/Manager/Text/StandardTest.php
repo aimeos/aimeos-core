@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
@@ -45,9 +45,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = \TestHelper::getContext()->getEditor();
+		$this->editor = \TestHelperMShop::getContext()->getEditor();
 
-		$this->object = new \Aimeos\MShop\Index\Manager\Text\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\MShop\Index\Manager\Text\Standard( \TestHelperMShop::getContext() );
 	}
 
 
@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'text' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'text' );
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$product = self::$products['CNC'];
 
 		$texts = $product->getRefItems( 'text' );
@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearchTexts()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		$search = $productManager->createSearch();

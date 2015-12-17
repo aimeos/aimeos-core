@@ -28,7 +28,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setProvider( 'PropertyAdd' );
 		$this->plugin->setStatus( '1' );
@@ -40,11 +40,11 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 			'product.stock.dateback'
 		) ) );
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
@@ -66,7 +66,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 
 		$this->order = $orderBaseManager->createItem();
 
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( \TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( \TestHelperMShop::getContext(), $this->plugin );
 	}
 
 
@@ -111,7 +111,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateAttributeExists()
 	{
-		$attributeManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() )->getSubmanager( 'base' )->getSubmanager( 'product' )->getSubmanager( 'attribute' );
+		$attributeManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->getSubmanager( 'base' )->getSubmanager( 'product' )->getSubmanager( 'attribute' );
 
 		$attribute = $attributeManager->createItem();
 

@@ -16,7 +16,7 @@ class CatalogTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext( 'unitperf' );
+		$this->context = \TestHelperMShop::getContext( 'unitperf' );
 
 		// parser warm up so files are already parsed (same as APC is used)
 

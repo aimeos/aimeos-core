@@ -24,7 +24,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
@@ -91,7 +91,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 			'transrollback' => 'ROLLBACK',
 		);
 
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 		$conn = $this->dbm->acquire();
 
 		$sql = 'DROP TABLE IF EXISTS "mw_tree_test"';
@@ -156,7 +156,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 	{
 		$sql = 'DROP TABLE "mw_tree_test"';
 
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 		$conn = $this->dbm->acquire();
 		$conn->create( $sql )->execute()->finish();
 		$this->dbm->release( $conn );

@@ -24,7 +24,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 		$this->context->setUserId( null );
 
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );

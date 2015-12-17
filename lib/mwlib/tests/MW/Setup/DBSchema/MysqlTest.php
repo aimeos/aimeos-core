@@ -24,14 +24,14 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$config = \TestHelper::getConfig();
+		$config = \TestHelperMw::getConfig();
 
 		if( $config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 		$conn = $this->dbm->acquire();
 
 		$sql = '
@@ -59,7 +59,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 
 		$conn = $this->dbm->acquire();
 		$conn->create( 'DROP INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test"' )->execute()->finish();

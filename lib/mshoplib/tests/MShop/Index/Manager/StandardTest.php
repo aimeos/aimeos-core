@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$manager = new \Aimeos\MShop\Index\Manager\Standard( $context );
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 		$this->editor = $this->context->getEditor();
 		$this->object = new \Aimeos\MShop\Index\Manager\Standard( $this->context );
 	}
@@ -87,7 +87,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(

@@ -22,11 +22,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Order\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetHeader()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->standardStepActive = 'order';
 		$this->object->setView( $view );
 
@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBody()
 	{
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->standardStepActive = 'order';
 		$view->paymentForm = new \Aimeos\MShop\Common\Item\Helper\Form\Standard( '', 'POST', array() );
 		$this->object->setView( $view );
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->context->setUserId( '-1' );
 
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 
 		$param = array( 'cs_order' => 1 );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );

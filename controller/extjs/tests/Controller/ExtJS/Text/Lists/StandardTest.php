@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Text\Lists\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Text\Lists\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSaveDeleteItem()
 	{
 		$params = (object) array( 'site' => 'unittest', 'limit' => 1 );
-		$textManager = new \Aimeos\Controller\ExtJS\Text\Standard( \TestHelper::getContext() );
+		$textManager = new \Aimeos\Controller\ExtJS\Text\Standard( \TestHelperExtjs::getContext() );
 		$result = $textManager->searchItems( $params );
 
 		$params = (object) array(
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'start' => 0,
 			'limit' => 1,
 		);
-		$textListTypeManager = \Aimeos\Controller\ExtJS\Text\Lists\Type\Factory::createController( \TestHelper::getContext() );
+		$textListTypeManager = \Aimeos\Controller\ExtJS\Text\Lists\Type\Factory::createController( \TestHelperExtjs::getContext() );
 		$resultType = $textListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

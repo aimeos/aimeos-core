@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Service\Lists\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Service\Lists\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelperExtjs::getContext() );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.label', 'unitlabel' ) );
 		$resultService = $serviceManager->searchItems( $search );
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'start' => 0,
 			'limit' => 1,
 		);
-		$serviceListTypeManager = \Aimeos\Controller\ExtJS\Service\Lists\Type\Factory::createController( \TestHelper::getContext() );
+		$serviceListTypeManager = \Aimeos\Controller\ExtJS\Service\Lists\Type\Factory::createController( \TestHelperExtjs::getContext() );
 		$resultType = $serviceListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

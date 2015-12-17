@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-class TestHelper
+class TestHelperHtml
 {
 	private static $aimeos;
 	private static $context = array();

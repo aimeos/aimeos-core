@@ -17,14 +17,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$controller = \Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), 'attribute' );
+		$controller = \Aimeos\Controller\ExtJS\Factory::createController( \TestHelperExtjs::getContext(), 'attribute' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\ExtJS\\Common\\Iface', $controller );
 	}
 
 
 	public function testCreateSubController()
 	{
-		$controller = \Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), 'attribute/lists/type' );
+		$controller = \Aimeos\Controller\ExtJS\Factory::createController( \TestHelperExtjs::getContext(), 'attribute/lists/type' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\ExtJS\\Common\\Iface', $controller );
 	}
 
@@ -32,28 +32,28 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testCreateControllerEmpty()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), "\t\n" );
+		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelperExtjs::getContext(), "\t\n" );
 	}
 
 
 	public function testCreateControllerInvalidName()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), '%^' );
+		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelperExtjs::getContext(), '%^' );
 	}
 
 
 	public function testCreateControllerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), 'notexist' );
+		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelperExtjs::getContext(), 'notexist' );
 	}
 
 
 	public function testCreateSubControllerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelper::getContext(), 'attribute/notexist' );
+		\Aimeos\Controller\ExtJS\Factory::createController( \TestHelperExtjs::getContext(), 'attribute/notexist' );
 	}
 
 
@@ -61,7 +61,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\ExtJS\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 
 		$controller1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
 		\Aimeos\Controller\ExtJS\Factory::clear();
@@ -77,7 +77,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\ExtJS\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 
 		$cntlA1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
 		$cntlB1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute/lists/type' );
@@ -97,7 +97,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\ExtJS\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 
 		$cntlA1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute' );
 		$cntlB1 = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'attribute/lists/type' );

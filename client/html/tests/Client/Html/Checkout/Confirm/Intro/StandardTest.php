@@ -22,11 +22,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Checkout\Confirm\Intro\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->confirmOrderItem = $item;
 		$this->object->setView( $view );
 
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->confirmOrderItem = $item;
 		$this->object->setView( $view );
 

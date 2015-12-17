@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Locale\Site\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Locale\Site\Standard( \TestHelperExtjs::getContext() );
 	}
 
 

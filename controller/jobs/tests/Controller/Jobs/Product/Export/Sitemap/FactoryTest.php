@@ -11,8 +11,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$obj = \Aimeos\Controller\Jobs\Product\Export\Sitemap\Factory::createController( $context, $aimeos );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\Jobs\\Iface', $obj);
@@ -21,8 +21,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testFactoryExceptionWrongName()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$object = \Aimeos\Controller\Jobs\Product\Export\Sitemap\Factory::createController( $context, $aimeos, 'Wrong$$$Name' );
@@ -31,8 +31,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testFactoryExceptionWrongClass()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$object = \Aimeos\Controller\Jobs\Product\Export\Sitemap\Factory::createController( $context, $aimeos, 'WrongClass' );
@@ -41,8 +41,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testFactoryExceptionWrongInterface()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$object = \Aimeos\Controller\Jobs\Product\Export\Sitemap\Factory::createController( $context, $aimeos, 'Factory' );

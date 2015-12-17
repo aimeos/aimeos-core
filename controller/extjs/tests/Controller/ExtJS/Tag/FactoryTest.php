@@ -14,7 +14,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$obj = \Aimeos\Controller\ExtJS\Tag\Factory::createController( \TestHelper::getContext() );
+		$obj = \Aimeos\Controller\ExtJS\Tag\Factory::createController( \TestHelperExtjs::getContext() );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\ExtJS\\Iface', $obj );
 	}
 
@@ -22,21 +22,21 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testFactoryExceptionWrongName()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Tag\Factory::createController( \TestHelper::getContext(), 'Wrong$$$Name' );
+		\Aimeos\Controller\ExtJS\Tag\Factory::createController( \TestHelperExtjs::getContext(), 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Tag\Factory::createController( \TestHelper::getContext(), 'WrongClass' );
+		\Aimeos\Controller\ExtJS\Tag\Factory::createController( \TestHelperExtjs::getContext(), 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Tag\Factory::createController( \TestHelper::getContext(), 'Factory' );
+		\Aimeos\Controller\ExtJS\Tag\Factory::createController( \TestHelperExtjs::getContext(), 'Factory' );
 	}
 
 }

@@ -28,7 +28,7 @@ class ProductLimitTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setTypeId( 2 );
 		$this->plugin->setProvider( 'ProductLimit' );
@@ -36,11 +36,11 @@ class ProductLimitTest extends \PHPUnit_Framework_TestCase
 		$this->plugin->setStatus( '1' );
 
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC' ) ) );
 
@@ -62,7 +62,7 @@ class ProductLimitTest extends \PHPUnit_Framework_TestCase
 
 		$this->order = $orderBaseManager->createItem();
 
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductLimit( \TestHelper::getContext(), $this->plugin );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductLimit( \TestHelperMShop::getContext(), $this->plugin );
 
 	}
 
@@ -104,7 +104,7 @@ class ProductLimitTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateSingleValueMax()
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$this->plugin->setConfig( array( 'single-value-max' => array( 'EUR' => '10.00' ) ) );
 
@@ -149,7 +149,7 @@ class ProductLimitTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateTotalValueMax()
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelper::getContext() );
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$this->plugin->setConfig( array( 'total-value-max' => array( 'EUR' => '110.00' ) ) );
 

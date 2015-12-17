@@ -27,7 +27,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
@@ -55,14 +55,14 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Example( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Example( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
 
 	public function testUpdate()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Example( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Example( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'test' ) );
 	}

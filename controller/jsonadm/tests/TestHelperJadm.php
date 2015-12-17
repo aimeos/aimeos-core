@@ -1,12 +1,12 @@
 <?php
 
-
 /**
- * @copyright Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-class TestHelper
+
+
+class TestHelperJadm
 {
 	private static $aimeos;
 	private static $context;
@@ -16,7 +16,7 @@ class TestHelper
 	{
 		self::getAimeos();
 		\Aimeos\MShop\Factory::setCache( false );
-		\Aimeos\Controller\Frontend\Factory::setCache( false );
+		\Aimeos\Controller\JsonAdm\Factory::setCache( false );
 	}
 
 
@@ -30,7 +30,7 @@ class TestHelper
 	}
 
 
-	private static function getAimeos()
+	public static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
 		{
@@ -43,9 +43,12 @@ class TestHelper
 	}
 
 
-	/**
-	 * @param string $site
-	 */
+	public static function getControllerPaths()
+	{
+		return self::getAimeos()->getCustomPaths( 'controller/jsonadm/templates' );
+	}
+
+
 	private static function createContext( $site )
 	{
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();
@@ -66,25 +69,55 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$logger = new \Aimeos\MW\Logger\File( 'unittest.log', \Aimeos\MW\Logger\Base::DEBUG );
+		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
 		$ctx->setLogger( $logger );
-
-
-		$i18n = new \Aimeos\MW\Translation\None( 'de' );
-		$ctx->setI18n( array( 'de' => $i18n ) );
 
 
 		$session = new \Aimeos\MW\Session\None();
 		$ctx->setSession( $session );
 
 
+		$i18n = new \Aimeos\MW\Translation\None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
+
+
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
-		$locale = $localeManager->bootstrap( $site, '', '', false );
+		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( 'core:controller/frontend' );
+		$view = self::createView( $conf );
+		$ctx->setView( $view );
+
+
+		$ctx->setEditor( 'core:controller/jsonadm' );
 
 		return $ctx;
+	}
+
+
+	protected static function createView( \Aimeos\MW\Config\Iface $config )
+	{
+		$tmplpaths = self::getAimeos()->getCustomPaths( 'controller/jsonadm/templates' );
+
+		$view = new \Aimeos\MW\View\Standard( $tmplpaths );
+
+		$trans = new \Aimeos\MW\Translation\None( 'de_DE' );
+		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
+		$view->addHelper( 'translate', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Url\Standard( $view, 'http://baseurl' );
+		$view->addHelper( 'url', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, '.', '' );
+		$view->addHelper( 'number', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
+		$view->addHelper( 'date', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		return $view;
 	}
 }

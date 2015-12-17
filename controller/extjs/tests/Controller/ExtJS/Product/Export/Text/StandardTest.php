@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperExtjs::getContext();
 		$this->object = new \Aimeos\Controller\ExtJS\Product\Export\Text\Standard( $this->context );
 	}
 

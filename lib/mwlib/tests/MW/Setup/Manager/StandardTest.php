@@ -24,13 +24,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->config = \TestHelper::getConfig();
+		$this->config = \TestHelperMw::getConfig();
 
 		if( $this->config->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 	}
 
 	/**

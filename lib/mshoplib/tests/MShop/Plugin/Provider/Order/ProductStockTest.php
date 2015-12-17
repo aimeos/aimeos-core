@@ -23,7 +23,7 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Factory::createManager( $this->context, 'plugin' );
 		$this->plugin = $pluginManager->createItem();

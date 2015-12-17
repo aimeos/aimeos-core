@@ -14,7 +14,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Customer\Address\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Customer\Address\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'start' => 0,
 			'limit' => 1,
 		);
-		$manager = \Aimeos\Controller\ExtJS\Customer\Factory::createController( \TestHelper::getContext() );
+		$manager = \Aimeos\Controller\ExtJS\Customer\Factory::createController( \TestHelperExtjs::getContext() );
 		$resultType = $manager->searchItems( $params );
 
 		$saveParam = (object) array(

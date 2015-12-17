@@ -26,7 +26,7 @@ class SiteCheckTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$this->object = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
 	}
 
@@ -68,6 +68,6 @@ class SiteCheckTest extends \PHPUnit_Framework_TestCase
 		$this->object->deleteItem( $item->getId() );
 
 		$this->assertEquals( $item->getId(), $savedItem->getId() );
-		$this->assertEquals( \TestHelper::getContext()->getEditor(), $savedItem->getEditor() );
+		$this->assertEquals( \TestHelperMShop::getContext()->getEditor(), $savedItem->getEditor() );
 	}
 }

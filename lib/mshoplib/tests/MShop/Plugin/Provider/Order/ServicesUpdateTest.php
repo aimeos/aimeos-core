@@ -23,7 +23,7 @@ class ServicesUpdateTest
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Factory::createManager( $context, 'plugin' );
 		$this->plugin = $pluginManager->createItem();
@@ -50,14 +50,14 @@ class ServicesUpdateTest
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
 
 	public function testUpdate()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $context, $this->plugin );
 
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
@@ -117,7 +117,7 @@ class ServicesUpdateTest
 
 	public function testUpdateNotAvailable()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $context, $this->plugin );
 
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
@@ -176,7 +176,7 @@ class ServicesUpdateTest
 
 	public function testUpdateServicesGone()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $context, $this->plugin );
 
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
@@ -214,7 +214,7 @@ class ServicesUpdateTest
 
 	public function testUpdateNoProducts()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesUpdate( $context, $this->plugin );
 
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );

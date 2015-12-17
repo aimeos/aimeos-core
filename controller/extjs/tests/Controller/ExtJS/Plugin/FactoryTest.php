@@ -18,14 +18,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 		$context->getConfig()->set( 'controller/extjs/common/decorators/default', array() );
 	}
 
 
 	public function testCreateController()
 	{
-		$obj = \Aimeos\Controller\ExtJS\Plugin\Factory::createController( \TestHelper::getContext() );
+		$obj = \Aimeos\Controller\ExtJS\Plugin\Factory::createController( \TestHelperExtjs::getContext() );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\ExtJS\\Iface', $obj );
 	}
 
@@ -33,27 +33,27 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testFactoryExceptionWrongName()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Plugin\Factory::createController( \TestHelper::getContext(), 'Wrong$$$Name' );
+		\Aimeos\Controller\ExtJS\Plugin\Factory::createController( \TestHelperExtjs::getContext(), 'Wrong$$$Name' );
 	}
 
 
 	public function testFactoryExceptionWrongClass()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Plugin\Factory::createController( \TestHelper::getContext(), 'WrongClass' );
+		\Aimeos\Controller\ExtJS\Plugin\Factory::createController( \TestHelperExtjs::getContext(), 'WrongClass' );
 	}
 
 
 	public function testFactoryExceptionWrongInterface()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Plugin\Factory::createController( \TestHelper::getContext(), 'Factory' );
+		\Aimeos\Controller\ExtJS\Plugin\Factory::createController( \TestHelperExtjs::getContext(), 'Factory' );
 	}
 
 
 	public function testAbstractAddControllerDecoratorsWithExclude()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 		$config = $context->getConfig();
 
 		$config->set( 'controller/extjs/common/decorators/default', array( 'Example' ) );
@@ -69,13 +69,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testAbstractAddControllerDecoratorsNoDomainException()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		\Aimeos\Controller\ExtJS\Plugin\Factorylocal::createController( \TestHelper::getContext(), 'Standard', '' );
+		\Aimeos\Controller\ExtJS\Plugin\Factorylocal::createController( \TestHelperExtjs::getContext(), 'Standard', '' );
 	}
 
 
 	public function testAbstractAddDecorators()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 		$config = $context->getConfig();
 
 		$config->set( 'controller/extjs/common/decorators/default', array( 'Example', 'Example' ) );
@@ -89,7 +89,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testAbstractAddDecoratorsExceptionWrongName()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 		$config = $context->getConfig();
 		$config->set( 'controller/extjs/common/decorators/default', array( '$$' ) );
 
@@ -100,7 +100,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testAbstractAddDecoratorsExceptionWrongClass()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 		$config = $context->getConfig();
 		$config->set( 'controller/extjs/common/decorators/default', array( 'WrongClass' ) );
 

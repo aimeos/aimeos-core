@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperExtjs::getContext();
 
 		$this->testdir = $this->context->getConfig()->get( 'controller/extjs/attribute/import/text/standard/uploaddir', './tmp' );
 
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() );
+		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperExtjs::getContext() );
 		$search = $couponManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.label', 'Unit test example' ) );
 		$result = $couponManager->searchItems( $search );

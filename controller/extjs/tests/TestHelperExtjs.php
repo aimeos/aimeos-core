@@ -1,20 +1,24 @@
 <?php
 
+
 /**
+ * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-class TestHelper
+class TestHelperExtjs
 {
 	private static $aimeos;
-	private static $context = array();
+	private static $context;
 
 
 	public static function bootstrap()
 	{
+		set_error_handler( 'TestHelperExtjs::errorHandler' );
+
 		self::getAimeos();
 		\Aimeos\MShop\Factory::setCache( false );
-		\Aimeos\Controller\Frontend\Factory::setCache( false );
+		\Aimeos\Controller\ExtJS\Factory::setCache( false );
 	}
 
 
@@ -28,56 +32,22 @@ class TestHelper
 	}
 
 
-	public static function getView( $site = 'unittest', \Aimeos\MW\Config\Iface $config = null )
-	{
-		if( $config === null ) {
-			$config = self::getContext( $site )->getConfig();
-		}
-
-		$view = new \Aimeos\MW\View\Standard( self::getJQAdmTemplatePaths() );
-
-		$trans = new \Aimeos\MW\Translation\None( 'de_DE' );
-		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
-		$view->addHelper( 'translate', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Url\Standard( $view, 'http://baseurl' );
-		$view->addHelper( 'url', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, '.', '' );
-		$view->addHelper( 'number', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
-		$view->addHelper( 'date', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
-		$view->addHelper( 'config', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1' );
-		$view->addHelper( 'request', $helper );
-
-		$helper = new \Aimeos\MW\View\Helper\Csrf\Standard( $view, '_csrf_token', '_csrf_value' );
-		$view->addHelper( 'csrf', $helper );
-
-		return $view;
-	}
-
-
-	public static function getJQAdmTemplatePaths()
-	{
-		return self::getAimeos()->getCustomPaths( 'admin/jqadm/templates' );
-	}
-
-
 	private static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
 		{
 			require_once dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-			self::$aimeos = new \Aimeos\Bootstrap( array(), false );
+			self::$aimeos = new \Aimeos\Bootstrap();
 		}
 
 		return self::$aimeos;
+	}
+
+
+	public static function getControllerPaths()
+	{
+		return self::getAimeos()->getCustomPaths( 'controller/extjs' );
 	}
 
 
@@ -104,6 +74,10 @@ class TestHelper
 		$ctx->setDatabaseManager( $dbm );
 
 
+		$fs = new \Aimeos\MW\Filesystem\Manager\Standard( $conf );
+		$ctx->setFilesystemManager( $fs );
+
+
 		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
 		$ctx->setLogger( $logger );
 
@@ -112,21 +86,26 @@ class TestHelper
 		$ctx->setCache( $cache );
 
 
-		$i18n = new \Aimeos\MW\Translation\None( 'de' );
-		$ctx->setI18n( array( 'de' => $i18n ) );
-
-
 		$session = new \Aimeos\MW\Session\None();
 		$ctx->setSession( $session );
 
+		$i18n = new \Aimeos\MW\Translation\None( 'de' );
+		$ctx->setI18n( array( 'de' => $i18n ) );
 
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
 		$locale = $localeManager->bootstrap( $site, '', '', false );
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( 'core:client/html' );
+		$ctx->setEditor( 'core:controller/extjs' );
 
 		return $ctx;
 	}
+
+
+	public static function errorHandler( $code, $message, $file, $row )
+	{
+		return true;
+	}
+
 }

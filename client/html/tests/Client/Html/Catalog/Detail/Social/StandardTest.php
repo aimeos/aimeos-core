@@ -15,9 +15,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$paths = \TestHelper::getHtmlTemplatePaths();
-		$this->object = new \Aimeos\Client\Html\Catalog\Detail\Social\Standard( \TestHelper::getContext(), $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Detail\Social\Standard( \TestHelperHtml::getContext(), $paths );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function getProductItem()
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperHtml::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
 		$items = $manager->searchItems( $search, array( 'product' ) );

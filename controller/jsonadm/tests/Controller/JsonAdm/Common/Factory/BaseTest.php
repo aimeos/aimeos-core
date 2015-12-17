@@ -16,7 +16,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperJadm::getContext();
 		$config = $this->context->getConfig();
 
 		$config->set( 'controller/jsonadm/common/decorators/default', array() );

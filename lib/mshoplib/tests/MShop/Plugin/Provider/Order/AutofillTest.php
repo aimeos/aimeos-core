@@ -23,7 +23,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
@@ -53,14 +53,14 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
 
 	public function testUpdateNone()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
@@ -71,7 +71,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateOrderNoItem()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$context->setUserId( '' );
 		$this->plugin->setConfig( array( 'autofill.useorder' => '1' ) );
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( $context, $this->plugin );
@@ -84,7 +84,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateOrderNone()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
 		$search = $manager->createSearch();
@@ -111,7 +111,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateOrderAddress()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
 		$search = $manager->createSearch();
@@ -161,7 +161,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateOrderService()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
 		$search = $manager->createSearch();
@@ -216,7 +216,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 		$this->plugin->setConfig( array( 'autofill.delivery' => '1' ) );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
@@ -229,7 +229,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 		$this->plugin->setConfig( array( 'autofill.delivery' => '1', 'autofill.deliverycode' => 'unitcode' ) );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
@@ -243,7 +243,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
 		$this->plugin->setConfig( array( 'autofill.delivery' => '1', 'autofill.deliverycode' => 'xyz' ) );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
@@ -256,7 +256,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
 		$this->plugin->setConfig( array( 'autofill.payment' => '1' ) );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
@@ -269,7 +269,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
 		$this->plugin->setConfig( array( 'autofill.payment' => '1', 'autofill.paymentcode' => 'unitpaymentcode' ) );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
@@ -283,7 +283,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
 		$this->plugin->setConfig( array( 'autofill.payment' => '1', 'autofill.paymentcode' => 'xyz' ) );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );

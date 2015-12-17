@@ -27,7 +27,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
 		$item = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
 

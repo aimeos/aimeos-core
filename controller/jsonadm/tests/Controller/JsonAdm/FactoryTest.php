@@ -13,8 +13,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateController()
 	{
-		$context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getControllerPaths();
+		$context = \TestHelperJadm::getContext();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 
 		$controller = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\JsonAdm\\Common\\Iface', $controller );
@@ -23,8 +23,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateSubController()
 	{
-		$context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getControllerPaths();
+		$context = \TestHelperJadm::getContext();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 
 		$controller = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\JsonAdm\\Common\\Iface', $controller );
@@ -33,8 +33,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateControllerEmpty()
 	{
-		$context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getControllerPaths();
+		$context = \TestHelperJadm::getContext();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 
 		$controller = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, '' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\JsonAdm\\Common\\Iface', $controller );
@@ -43,8 +43,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateControllerInvalidName()
 	{
-		$context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getControllerPaths();
+		$context = \TestHelperJadm::getContext();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\JsonAdm\\Exception' );
 		\Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, '%^' );
@@ -55,8 +55,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\JsonAdm\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getControllerPaths();
+		$context = \TestHelperJadm::getContext();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 
 		$controller1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
 		\Aimeos\Controller\JsonAdm\Factory::clear();
@@ -72,8 +72,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\JsonAdm\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getControllerPaths();
+		$context = \TestHelperJadm::getContext();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 
 		$cntlA1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
 		$cntlB1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );
@@ -93,8 +93,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\Controller\JsonAdm\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getControllerPaths();
+		$context = \TestHelperJadm::getContext();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 
 		$cntlA1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
 		$cntlB1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );

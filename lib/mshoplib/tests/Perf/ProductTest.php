@@ -16,7 +16,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext( 'unitperf' );
+		$this->context = \TestHelperMShop::getContext( 'unitperf' );
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
 		$search = $productManager->createSearch();

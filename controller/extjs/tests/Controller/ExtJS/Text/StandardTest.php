@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = \Aimeos\Controller\ExtJS\Text\Factory::createController( \TestHelper::getContext() );
+		$this->object = \Aimeos\Controller\ExtJS\Text\Factory::createController( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$typeManager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'text/type' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( \TestHelperExtjs::getContext(), 'text/type' );
 		$criteria = $typeManager->createSearch();
 		$criteria->setSlice( 0, 1 );
 		$result = $typeManager->searchItems( $criteria );
@@ -112,7 +112,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveItemLabelContent()
 	{
-		$typeManager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'text/type' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( \TestHelperExtjs::getContext(), 'text/type' );
 		$criteria = $typeManager->createSearch();
 		$criteria->setSlice( 0, 1 );
 		$result = $typeManager->searchItems( $criteria );

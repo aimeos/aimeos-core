@@ -24,8 +24,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->context = \TestHelperHtml::getContext();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Promo\Standard( $this->context, $paths );
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No catalog item found' );
 		}
 
-		$this->view = \TestHelper::getView();
+		$this->view = \TestHelperHtml::getView();
 		$this->view->listParams = array();
 		$this->view->listCurrentCatItem = $this->catItem;
 		$this->object->setView( $this->view );

@@ -17,7 +17,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Tag\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Tag\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'tag.type.code' => 'taste' ) ) ) )
 		);
 
-		$typeCtrl = new \Aimeos\Controller\ExtJS\Tag\Type\Standard( \TestHelper::getContext() );
+		$typeCtrl = new \Aimeos\Controller\ExtJS\Tag\Type\Standard( \TestHelperExtjs::getContext() );
 		$types = $typeCtrl->searchItems( $searchParams );
 		$this->assertEquals( 1, count( $types['items'] ) );
 

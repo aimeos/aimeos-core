@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperHtml::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$search = $orderManager->createSearch();
@@ -42,13 +42,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 		$this->emailMock = $this->getMock( '\\Aimeos\\MW\\Mail\\Message\\None' );
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Email\Payment\Standard( $this->context, $paths );
 
-		$view = \TestHelper::getView( 'unittest', $this->context->getConfig() );
+		$view = \TestHelperHtml::getView( 'unittest', $this->context->getConfig() );
 		$view->extOrderItem = self::$orderItem;
 		$view->extOrderBaseItem = self::$orderBaseItem;
 		$view->extAddressItem = self::$orderBaseItem->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );

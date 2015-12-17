@@ -16,8 +16,8 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$cntlPaths = \TestHelper::getControllerPaths();
-		self::$object = new \Aimeos\Controller\ExtJS\JsonRpc( \TestHelper::getContext(), $cntlPaths );
+		$cntlPaths = \TestHelperExtjs::getControllerPaths();
+		self::$object = new \Aimeos\Controller\ExtJS\JsonRpc( \TestHelperExtjs::getContext(), $cntlPaths );
 	}
 
 

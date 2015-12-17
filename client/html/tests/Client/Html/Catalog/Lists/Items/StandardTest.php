@@ -21,12 +21,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperHtml::getContext();
 
 		$config = $context->getConfig();
 		$config->set( 'client/html/catalog/list/basket-add', true );
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Items\Standard( $context, $paths );
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
@@ -45,7 +45,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 
 
-		$view = \TestHelper::getView( 'unittest', $config );
+		$view = \TestHelperHtml::getView( 'unittest', $config );
 
 		$view->listProductItems = $productManager->searchItems( $search, $domains, $total );
 		$view->listProductTotal = $total;

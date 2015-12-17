@@ -16,13 +16,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\Frontend\Service\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\Frontend\Service\Standard( \TestHelperFrontend::getContext() );
 	}
 
 
 	public static function setUpBeforeClass()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$orderBaseMgr = $orderManager->getSubManager( 'base' );
 		self::$basket = $orderBaseMgr->createItem();
 	}
@@ -36,7 +36,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetServices()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$services = $this->object->getServices( 'delivery', $basket );
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetServicesCache()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->object->getServices( 'delivery', $basket );
@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetServiceAttributesCache()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$services = $this->object->getServices( 'delivery', $basket );
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetServicePrice()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$service = $this->getServiceItem();
@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetServicePriceCache()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$services = $this->object->getServices( 'delivery', $basket );
@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetServicePriceNoItems()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Frontend\\Service\\Exception' );
@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function getServiceItem()
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelperFrontend::getContext() );
 
 		$search = $serviceManager->createSearch( true );
 		$expr = array(

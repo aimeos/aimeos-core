@@ -18,8 +18,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
-		$templatePaths = \TestHelper::getControllerPaths();
+		$this->context = \TestHelperJadm::getContext();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 		$this->view = $this->context->getView();
 
 		$this->object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'product' );
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$header = array();
 		$status = 500;
 
-		$templatePaths = \TestHelper::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 		$object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'product/stock/warehouse' );
 
 		$result = json_decode( $object->get( '', $header, $status ), true );
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$header = array();
 		$status = 500;
 
-		$templatePaths = \TestHelper::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getControllerPaths();
 		$object = new \Aimeos\Controller\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'invalid' );
 
 		$result = json_decode( $object->get( '', $header, $status ), true );

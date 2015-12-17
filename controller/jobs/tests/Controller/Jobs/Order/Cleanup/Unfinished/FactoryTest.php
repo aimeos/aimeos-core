@@ -13,8 +13,8 @@ class FactoryTest
 {
 	public function testCreateController()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$obj = \Aimeos\Controller\Jobs\Order\Cleanup\Unfinished\Factory::createController( $context, $aimeos );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\Jobs\\Iface', $obj );
@@ -23,8 +23,8 @@ class FactoryTest
 
 	public function testFactoryExceptionWrongName()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Order\Cleanup\Unfinished\Factory::createController( $context, $aimeos, 'Wrong$$$Name' );
@@ -33,8 +33,8 @@ class FactoryTest
 
 	public function testFactoryExceptionWrongClass()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Order\Cleanup\Unfinished\Factory::createController( $context, $aimeos, 'WrongClass' );
@@ -43,8 +43,8 @@ class FactoryTest
 
 	public function testFactoryExceptionWrongInterface()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Order\Cleanup\Unfinished\Factory::createController( $context, $aimeos, 'Factory' );

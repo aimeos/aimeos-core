@@ -15,9 +15,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->templatePaths = \TestHelper::getJQAdmTemplatePaths();
-		$this->context = \TestHelper::getContext();
-		$this->context->setView( \TestHelper::getView() );
+		$this->templatePaths = \TestHelperJqadm::getJQAdmTemplatePaths();
+		$this->context = \TestHelperJqadm::getContext();
+		$this->context->setView( \TestHelperJqadm::getView() );
 	}
 
 

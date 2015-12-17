@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Media\Lists\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Media\Lists\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSaveDeleteItem()
 	{
 		$params = (object) array( 'site' => 'unittest', 'limit' => 1, 'media.lists.type.domain' => 'text' );
-		$mediaManager = new \Aimeos\Controller\ExtJS\Media\Standard( \TestHelper::getContext() );
+		$mediaManager = new \Aimeos\Controller\ExtJS\Media\Standard( \TestHelperExtjs::getContext() );
 		$result = $mediaManager->searchItems( $params );
 
 		$params = (object) array(
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'start' => 0,
 			'limit' => 1,
 		);
-		$mediaListTypeManager = \Aimeos\Controller\ExtJS\Media\Lists\Type\Factory::createController( \TestHelper::getContext() );
+		$mediaListTypeManager = \Aimeos\Controller\ExtJS\Media\Lists\Type\Factory::createController( \TestHelperExtjs::getContext() );
 		$resultType = $mediaListTypeManager->searchItems( $params );
 
 		$saveParams = (object) array(

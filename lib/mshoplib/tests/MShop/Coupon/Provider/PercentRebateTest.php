@@ -27,7 +27,7 @@ class PercentRebateTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
@@ -132,8 +132,8 @@ class PercentRebateTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddCouponInvalidConfig()
 	{
-		$context = \TestHelper::getContext();
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelper::getContext() )->createItem();
+		$context = \TestHelperMShop::getContext();
+		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 
 		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, 'zyxw' );
 
@@ -157,7 +157,7 @@ class PercentRebateTest extends \PHPUnit_Framework_TestCase
 	protected function getOrderProducts()
 	{
 		$products = array();
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'order/base/product' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->combine( '&&', array(

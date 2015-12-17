@@ -24,12 +24,12 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 
 		$conn = $this->dbm->acquire();
 
@@ -56,11 +56,11 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			return;
 		}
 
-		$this->dbm = \TestHelper::getDBManager();
+		$this->dbm = \TestHelperMw::getDBManager();
 
 		$conn = $this->dbm->acquire();
 		$conn->create( 'DROP TABLE "mw_log_test"' )->execute()->finish();

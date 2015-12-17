@@ -26,7 +26,7 @@ class PrePayTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
 
 		$serviceItem = $serviceManager->createItem();
@@ -73,7 +73,7 @@ class PrePayTest extends \PHPUnit_Framework_TestCase
 	public function testProcess()
 	{
 		// Currently does nothing.
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$this->object->process( $manager->createItem() );
 	}
@@ -88,7 +88,7 @@ class PrePayTest extends \PHPUnit_Framework_TestCase
 
 	public function testCancel()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderItem = $manager->createItem();
 		$this->object->cancel( $orderItem );
 
@@ -98,7 +98,7 @@ class PrePayTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'order/base/service' )->createItem();
+		$item = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/service' )->createItem();
 		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributes() ) );

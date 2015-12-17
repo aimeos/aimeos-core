@@ -23,8 +23,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->jobItemStub = $this->getMockBuilder( '\\Aimeos\\MAdmin\\Job\\Item\\Standard' )->getMock();
 
@@ -64,8 +64,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testRun()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'madmin/job/manager/name', $name );
@@ -109,8 +109,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testRunInvalidMethod( $method )
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$name = 'ControllerJobsAdminJobDefaultRun';
 		$context->getConfig()->set( 'madmin/job/manager/name', $name );

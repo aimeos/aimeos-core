@@ -29,5 +29,5 @@ setlocale( LC_TIME, 'POSIX' );
 define( 'PATH_TESTS', __DIR__ );
 @mkdir( PATH_TESTS . DIRECTORY_SEPARATOR . 'tmp' );
 
-require_once 'TestHelper.php';
-\TestHelper::bootstrap();
+require_once 'TestHelperExtjs.php';
+\TestHelperExtjs::bootstrap();

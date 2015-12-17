@@ -21,8 +21,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 		$this->object = new \Aimeos\Controller\Jobs\Order\Service\Async\Standard( $context, $aimeos );
 	}
@@ -55,8 +55,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testRun()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';
@@ -94,8 +94,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testRunExceptionProcess()
 	{
-		$context = \TestHelper::getContext();
-		$aimeos = \TestHelper::getAimeos();
+		$context = \TestHelperJobs::getContext();
+		$aimeos = \TestHelperJobs::getAimeos();
 
 
 		$name = 'ControllerJobsServiceAsyncProcessDefaultRun';

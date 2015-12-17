@@ -29,7 +29,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperMShop::getContext();
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 
 		$search = $serviceManager->createSearch();

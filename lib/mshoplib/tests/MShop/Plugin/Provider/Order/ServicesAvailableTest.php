@@ -23,7 +23,7 @@ class ServicesAvailableTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
@@ -55,20 +55,20 @@ class ServicesAvailableTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
 	public function testUpdateNone()
 	{
 		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE not set, so update shall not be executed
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after' ) );
 	}
 
 	public function testUpdateEmptyConfig()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
 		$this->order->setService( $this->service, 'payment' );
@@ -79,7 +79,7 @@ class ServicesAvailableTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateNoServices()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->plugin->setConfig( array(
 				'delivery' => false,
@@ -106,7 +106,7 @@ class ServicesAvailableTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateWithServices()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->order->setService( $this->service, 'payment' );
 		$this->order->setService( $this->service, 'delivery' );

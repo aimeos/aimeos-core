@@ -24,11 +24,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		\Aimeos\MShop\Factory::setCache( true );
 
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Process\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$orderid = $this->getOrder( '2008-02-15 12:34:56' )->getId();
 		$this->context->getSession()->set( 'aimeos/orderid', $orderid );
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$mock = $this->getMockBuilder( '\\Aimeos\\Client\\Html\\Checkout\\Standard\\Process\\Standard' )
 			->setConstructorArgs( array( $this->context, $paths ) )
 			->setMethods( array( 'getOrderServiceCode' ) )

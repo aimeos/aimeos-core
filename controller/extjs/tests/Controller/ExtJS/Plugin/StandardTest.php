@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Plugin\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Plugin\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$manager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperExtjs::getContext() );
 		$typeManager = $manager->getSubManager( 'type' );
 
 		$search = $typeManager->createSearch();

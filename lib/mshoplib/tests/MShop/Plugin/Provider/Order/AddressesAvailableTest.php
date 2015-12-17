@@ -23,7 +23,7 @@ class AddressesAvailableTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
@@ -56,20 +56,20 @@ class AddressesAvailableTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
 	public function testUpdateNone()
 	{
 		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS not set, so update shall not be executed
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after' ) );
 	}
 
 	public function testEmptyConfig()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
 
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
@@ -79,7 +79,7 @@ class AddressesAvailableTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateAddressesNotAvailable()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->plugin->setConfig( array(
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY => false,
@@ -106,7 +106,7 @@ class AddressesAvailableTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateAddressesAvailable()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );

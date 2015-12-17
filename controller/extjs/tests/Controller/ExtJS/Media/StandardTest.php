@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 		$this->object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );
 
 		$tempdir = $context->getConfig()->get( 'controller/extjs/media/standard/upload/directory', 'tmp/media' );
@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$manager = \Aimeos\MShop\Media\Manager\Factory::createManager( \TestHelper::getContext() );
+		$manager = \Aimeos\MShop\Media\Manager\Factory::createManager( \TestHelperExtjs::getContext() );
 		$typeManager = $manager->getSubManager( 'type' );
 		$criteria = $typeManager->createSearch();
 		$criteria->setSlice( 0, 1 );
@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUploadItemExceptionWithEnableCheck()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 		$context->getConfig()->set( 'controller/extjs/media/standard/enablecheck', true );
 
 		$_FILES['unittest'] = array(
@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProtectedGetMimeIconEmptyByUploadItem()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperExtjs::getContext();
 		$context->getConfig()->set( 'controller/extjs/media/standard/mimeicon/directory', null );
 
 		$object = new \Aimeos\Controller\ExtJS\Media\Standard( $context );

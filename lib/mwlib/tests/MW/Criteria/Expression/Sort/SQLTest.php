@@ -23,12 +23,12 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		if( \TestHelper::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
 
-		$dbm = \TestHelper::getDBManager();
+		$dbm = \TestHelperMw::getDBManager();
 		$this->conn = $dbm->acquire();
 	}
 
@@ -40,7 +40,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$dbm = \TestHelper::getDBManager();
+		$dbm = \TestHelperMw::getDBManager();
 		$dbm->release( $this->conn );
 	}
 

@@ -22,11 +22,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext();
+		$this->context = \TestHelperHtml::getContext();
 
-		$paths = \TestHelper::getHtmlTemplatePaths();
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Checkout\Standard\Order\Address\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelper::getView() );
+		$this->object->setView( \TestHelperHtml::getView() );
 	}
 
 
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$basketCntl = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$basketCntl->setAddress( $type, $addrItem );
 
-		$view = \TestHelper::getView();
+		$view = \TestHelperHtml::getView();
 		$view->orderBasket = $basketCntl->get();
 		$view->orderBasket->setCustomerId( $customerItem->getId() );
 		$this->object->setView( $view );

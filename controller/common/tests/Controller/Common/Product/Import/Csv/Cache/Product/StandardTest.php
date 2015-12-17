@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		\Aimeos\MShop\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperCntl::getContext();
 		$this->object = new \Aimeos\Controller\Common\Product\Import\Csv\Cache\Product\Standard( $context );
 	}
 
@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSet()
 	{
-		$item = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'product' )->createItem();
+		$item = \Aimeos\MShop\Factory::createManager( \TestHelperCntl::getContext(), 'product' )->createItem();
 		$item->setCode( 'cache-test' );
 		$item->setId( 1 );
 

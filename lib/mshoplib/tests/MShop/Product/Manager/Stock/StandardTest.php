@@ -25,8 +25,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = \TestHelper::getContext()->getEditor();
-		$this->object = new \Aimeos\MShop\Product\Manager\Stock\Standard( \TestHelper::getContext() );
+		$this->editor = \TestHelperMShop::getContext()->getEditor();
+		$this->object = new \Aimeos\MShop\Product\Manager\Stock\Standard( \TestHelperMShop::getContext() );
 	}
 
 
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'product.code', 'U:WH' ),
@@ -193,7 +193,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No stock item found.' );
 		}
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$productCode = $productManager->getItem( $stockItem->getParentId() )->getCode();
 
 		$warehouseManager = $this->object->getSubManager( 'warehouse' );
@@ -219,7 +219,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No stock item found.' );
 		}
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$productCode = $productManager->getItem( $stockItem->getParentId() )->getCode();
 
 		$warehouseManager = $this->object->getSubManager( 'warehouse' );

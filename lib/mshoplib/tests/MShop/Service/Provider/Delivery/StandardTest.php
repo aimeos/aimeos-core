@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelper::getContext() );
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$result = $serviceManager->searchItems( $search, array( 'price' ) );
@@ -38,7 +38,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 		$item->setCode( 'test' );
 
-		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Standard( \TestHelper::getContext(), $item );
+		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Standard( \TestHelperMShop::getContext(), $item );
 	}
 
 
@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetConfigFE()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->assertEquals( array(), $this->object->getConfigFE( $basket ) );
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCalcPrice()
 	{
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->getSubManager( 'base' );
 		$search = $orderBaseManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.price', '672.00' ) );
 		$result = $orderBaseManager->searchItems( $search );
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testIsAvaible()
 	{
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->getSubManager( 'base' );
 
 		$this->assertTrue( $this->object->isAvailable( $orderBaseManager->createItem() ) );
 	}
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testBuildXML()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$criteria = $orderManager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
 		$criteria->setSlice( 0, 1 );
@@ -343,7 +343,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testBuildXMLWithBundle()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelper::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$criteria = $orderManager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2009-03-18 16:14:32' ) );
 		$criteria->setSlice( 0, 1 );

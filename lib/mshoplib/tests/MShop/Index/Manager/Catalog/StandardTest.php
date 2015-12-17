@@ -26,7 +26,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MShop\Index\Manager\Catalog\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\MShop\Index\Manager\Catalog\Standard( \TestHelperMShop::getContext() );
 	}
 
 
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'catalog' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'catalog' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelper::getContext() );
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNC' ) );
 
@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No product item with code CNE found!' );
 		}
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelper::getContext() );
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$listManager = $catalogManager->getSubManager( 'lists' );
 		$search = $listManager->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'catalog.lists.domain', 'product' ) );
@@ -152,7 +152,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearchItems()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
 		$catSearch = $catalogManager->createSearch();

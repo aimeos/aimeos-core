@@ -27,7 +27,7 @@ class CouponTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
 		$this->plugin = $pluginManager->createItem();
@@ -54,7 +54,7 @@ class CouponTest extends \PHPUnit_Framework_TestCase
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelperMShop::getContext(), $this->plugin );
 		$object->register( $this->order );
 	}
 
@@ -62,7 +62,7 @@ class CouponTest extends \PHPUnit_Framework_TestCase
 	public function testUpdate()
 	{
 		$this->order->addCoupon( 'OPQR', array() );
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'test' ) );
 	}
@@ -70,7 +70,7 @@ class CouponTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateInvalidObject()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelper::getContext(), $this->plugin );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$object->update( new TestPublisher(), 'test' );

@@ -17,14 +17,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testCreateManager()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute' );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
 
 	public function testCreateSubManager()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute/lists/type' );
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute/lists/type' );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
 	}
 
@@ -32,28 +32,28 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testCreateManagerEmpty()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		\Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), "\n" );
+		\Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), "\n" );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		\Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), '%^' );
+		\Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		\Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'unknown' );
+		\Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		\Aimeos\MShop\Factory::createManager( \TestHelper::getContext(), 'attribute/unknown' );
+		\Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute/unknown' );
 	}
 
 
@@ -61,7 +61,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\MShop\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$controller1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		\Aimeos\MShop\Factory::clear();
@@ -77,7 +77,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\MShop\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$managerA1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		$managerB1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );
@@ -97,7 +97,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$cache = \Aimeos\MShop\Factory::setCache( true );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$managerA1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		$managerB1 = \Aimeos\MShop\Factory::createManager( $context, 'attribute/lists/type' );

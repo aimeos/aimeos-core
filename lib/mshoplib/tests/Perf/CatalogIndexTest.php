@@ -17,7 +17,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->context = \TestHelper::getContext( 'unitperf' );
+		$this->context = \TestHelperMShop::getContext( 'unitperf' );
 
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );

@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MAdmin\Job\Manager\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\MAdmin\Job\Manager\Standard( \TestHelperMShop::getContext() );
 	}
 
 
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->deleteItem( $item->getId() );
 
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );

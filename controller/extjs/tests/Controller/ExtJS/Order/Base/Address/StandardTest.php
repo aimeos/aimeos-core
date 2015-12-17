@@ -21,7 +21,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\Controller\ExtJS\Order\Base\Address\Standard( \TestHelper::getContext() );
+		$this->object = new \Aimeos\Controller\ExtJS\Order\Base\Address\Standard( \TestHelperExtjs::getContext() );
 	}
 
 
@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$ctx = \TestHelper::getContext();
+		$ctx = \TestHelperExtjs::getContext();
 
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
 		$siteManager = $localeManager->getSubManager( 'site' );

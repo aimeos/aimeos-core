@@ -21,7 +21,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		$context = clone \TestHelper::getContext();
+		$context = clone \TestHelperMShop::getContext();
 		$context->getConfig()->set( 'mshop/index/manager/text/name', 'MySQL' );
 
 		$manager = new \Aimeos\MShop\Index\Manager\MySQL( $context );
@@ -51,7 +51,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$context = clone \TestHelper::getContext();
+		$context = clone \TestHelperMShop::getContext();
 		$context->getConfig()->set( 'mshop/index/manager/text/name', 'MySQL' );
 
 		$this->editor = $context->getEditor();
@@ -138,7 +138,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearchTexts()
 	{
-		$context = \TestHelper::getContext();
+		$context = \TestHelperMShop::getContext();
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 
 		$search = $productManager->createSearch();

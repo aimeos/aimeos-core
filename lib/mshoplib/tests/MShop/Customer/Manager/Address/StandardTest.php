@@ -26,8 +26,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = \TestHelper::getContext()->getEditor();
-		$customer = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelper::getContext() );
+		$this->editor = \TestHelperMShop::getContext()->getEditor();
+		$customer = new \Aimeos\MShop\Customer\Manager\Standard( \TestHelperMShop::getContext() );
 		$search = $customer->createSearch();
 		$conditions = array(
 			$search->compare( '==', 'customer.label', 'unitCustomer001' ),
@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.address.telefax' => '05554433222',
 			'customer.address.website' => 'www.example.com',
 			'customer.address.position' => 1,
-			'customer.address.siteid' => \TestHelper::getContext()->getLocale()->getSiteId(),
+			'customer.address.siteid' => \TestHelperMShop::getContext()->getLocale()->getSiteId(),
 		);
 
 		$this->object = $customer->getSubManager( 'address', 'Standard' );
