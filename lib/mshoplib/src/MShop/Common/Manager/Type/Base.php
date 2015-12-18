@@ -162,6 +162,25 @@ abstract class Base
 
 
 	/**
+	 * Returns the item specified by its code and domain/type if necessary
+	 *
+	 * @param string $code Code of the item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
+	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
+	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 */
+	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	{
+		$find = array(
+			$this->prefix . 'code' => $code,
+			$this->prefix . 'domain' => $domain,
+		);
+		return $this->findItemBase( $find, $ref );
+	}
+
+
+	/**
 	 * Returns the type item specified by its ID
 	 *
 	 * @param integer $id ID of type item object

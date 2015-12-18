@@ -603,6 +603,38 @@ abstract class Base
 
 
 	/**
+	 * Returns the item for the given search key/value pairs.
+	 *
+	 * @param array $pairs Search key/value pairs for the item
+	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
+	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
+	 */
+	protected function findItemBase( array $pairs, array $ref = array() )
+	{
+		$expr = array();
+		$criteria = $this->createSearch();
+
+		foreach( $pairs as $key => $value )
+		{
+			if( $value === null ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Required value for "%1$s" is missing', $key ) );
+			}
+			$expr[] = $criteria->compare( '==', $key, $value );
+		}
+
+		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
+		$items = $this->searchItems( $criteria, $ref );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No item found for conditions: %1$s', print_r( $pairs, true ) ) );
+		}
+
+		return $item;
+	}
+
+
+	/**
 	 * Returns a list of criteria names from a expression and its sub-expressions.
 	 *
 	 * @param \Aimeos\MW\Criteria\Expression\Iface Criteria object
@@ -636,6 +668,7 @@ abstract class Base
 	 *
 	 * @param string $key Search key for the requested ID
 	 * @param integer $id Unique ID to search for
+	 * @param string[] $ref List of domains whose items should be fetched too
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */

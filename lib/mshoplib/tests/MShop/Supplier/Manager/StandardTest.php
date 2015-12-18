@@ -64,6 +64,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Supplier\\Item\\Iface', $item );
 	}
 
+
+	public function testFindItem()
+	{
+		$item = $this->object->findItem( 'unitCode001' );
+
+		$this->assertEquals( 'unitCode001', $item->getCode() );
+	}
+
+
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();

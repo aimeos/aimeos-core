@@ -113,6 +113,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testFindItem()
+	{
+		$item = $this->object->findItem( 'size', array(), 'product' );
+
+		$this->assertEquals( 'size', $item->getCode() );
+		$this->assertEquals( 'product', $item->getDomain() );
+	}
+
+
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();

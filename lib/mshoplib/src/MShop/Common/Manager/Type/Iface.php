@@ -6,7 +6,6 @@
  * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Common
- * @version $Id $
  */
 
 
@@ -20,6 +19,6 @@ namespace Aimeos\MShop\Common\Manager\Type;
  * @subpackage Common
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
 {
 }

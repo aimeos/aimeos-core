@@ -105,6 +105,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testFindItem()
+	{
+		$item = $this->object->findItem( 'unit_warehouse1' );
+
+		$this->assertEquals( 'unit_warehouse1', $item->getCode() );
+	}
+
+
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();

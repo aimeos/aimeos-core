@@ -143,6 +143,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testFindItem()
+	{
+		$item = $this->object->findItem( 'CNC' );
+
+		$this->assertEquals( 'CNC', $item->getCode() );
+	}
+
+
 	public function testGetItem()
 	{
 		$domains = array( 'text', 'product', 'price', 'media', 'attribute' );

@@ -95,6 +95,32 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testFindItem()
+	{
+		$item = $this->object->findItem( 'm', array( 'text' ), 'product', 'size' );
+
+		$this->assertEquals( 'm', $item->getCode() );
+		$this->assertEquals( 'size', $item->getType() );
+		$this->assertEquals( 'product', $item->getDomain() );
+		$this->assertEquals( 1, count( $item->getListItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );
+	}
+
+
+	public function testFindItemInvalid()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Exception' );
+		$this->object->findItem( 'invalid' );
+	}
+
+
+	public function testFindItemMissing()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Exception' );
+		$this->object->findItem( 'm', array(), 'product' );
+	}
+
+
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Locale\Manager\Site;
  * @subpackage Locale
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Factory\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
 {
 	/**
 	 * Returns a list of item IDs, that are in the path of given item ID.

@@ -41,17 +41,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$param = array( 'id' => $manager->getItem( 'CNC' )->getId() );
+		$param = array( 'id' => $manager->findItem( 'CNC' )->getId() );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 
-		$this->object->copy();
+		$result = $this->object->copy();
+
+		$this->assertContains( 'CNC_copy', $result );
 	}
 
 
 	public function testDelete()
 	{
-		$this->object->delete();
+		$this->assertNull( $this->object->delete() );
 	}
 
 
@@ -59,11 +61,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$param = array( 'id' => $manager->getItem( 'CNC' )->getId() );
+		$param = array( 'id' => $manager->findItem( 'CNC' )->getId() );
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 
-		$this->object->get();
+		$result = $this->object->get();
+
+		$this->assertContains( 'CNC', $result );
 	}
 
 
@@ -99,18 +103,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 
-		echo $this->object->save();
+		$result = $this->object->save();
 
-		try {
-			$manager->deleteItem( $manager->getItem( 'test' )->getId() );
-		} catch( \MShop_Exception $e ) {
-			$this->markTestFailed( 'Item was not saved' );
-		}
+		$manager->deleteItem( $manager->findItem( 'test' )->getId() );
 	}
 
 
 	public function testSearch()
 	{
-		$this->object->search();
+		$result = $this->object->search();
+
+		$this->assertContains( 'CNE', $result );
 	}
 }
