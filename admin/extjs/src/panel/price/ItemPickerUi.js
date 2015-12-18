@@ -33,7 +33,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
         this.typeStore = MShop.GlobalStoreMgr.get('Price_Type', conf.domain);
         this.listTypeStore = MShop.GlobalStoreMgr.get(conf.listTypeControllerName, conf.domain);
 
-        /** client/extjs/panel/price/taxrate
+        /** admin/extjs/panel/price/taxrate
          * Display the tax rate column in all price panels by default
          *
          * Due to the limited size in the panels, the tax rate of prices is
@@ -48,9 +48,9 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
          * @category Developer
          * @category User
          */
-        var showTaxrate = MShop.Config.get('client/extjs/panel/price/taxrate', false);
+        var showTaxrate = MShop.Config.get('admin/extjs/panel/price/taxrate', false);
 
-        /** client/extjs/panel/price/itempickerui/taxrate
+        /** admin/extjs/panel/price/itempickerui/taxrate
          * Display the tax rate column in the price picker UI by default
          *
          * Due to the limited size in the picker UI, the tax rate of prices is
@@ -64,7 +64,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
          * @category Developer
          * @category User
          */
-        showTaxrate = MShop.Config.get('client/extjs/panel/price/itempickerui/taxrate', showTaxrate);
+        showTaxrate = MShop.Config.get('admin/extjs/panel/price/itempickerui/taxrate', showTaxrate);
 
         return [
             {

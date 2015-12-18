@@ -59,7 +59,7 @@ MShop.elements.language.getStore = function() {
             },
             baseParams : {
                 options : {
-                    /** client/extjs/elements/language/showall
+                    /** admin/extjs/elements/language/showall
                      * Displays only the configured languages in drop-down menues
                      *
                      * By default, all languages are shown in the language selectors
@@ -79,7 +79,7 @@ MShop.elements.language.getStore = function() {
                      * @category Developer
                      * @category User
                      */
-                    showall: MShop.Config.get('client/extjs/elements/language/showall', true)
+                    showall: MShop.Config.get('admin/extjs/elements/language/showall', true)
                 }
             }
         });

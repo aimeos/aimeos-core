@@ -2936,7 +2936,7 @@ MShop.elements.language.getStore = function() {
             },
             baseParams : {
                 options : {
-                    /** client/extjs/elements/language/showall
+                    /** admin/extjs/elements/language/showall
                      * Displays only the configured languages in drop-down menues
                      *
                      * By default, all languages are shown in the language selectors
@@ -2956,7 +2956,7 @@ MShop.elements.language.getStore = function() {
                      * @category Developer
                      * @category User
                      */
-                    showall: MShop.Config.get('client/extjs/elements/language/showall', true)
+                    showall: MShop.Config.get('admin/extjs/elements/language/showall', true)
                 }
             }
         });
@@ -5428,7 +5428,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         baseParams : {
             options : {
 
-                /** client/extjs/panel/price/listuismall/showall
+                /** admin/extjs/panel/price/listuismall/showall
                  * Display prices of all items of the same domain in the admin interface
                  *
                  * By default, only the prices for the specific product, attribute or
@@ -5448,7 +5448,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
                  * @category Developer
                  * @category User
                  */
-                'showall' : MShop.Config.get('client/extjs/panel/price/listuismall/showall', false )
+                'showall' : MShop.Config.get('admin/extjs/panel/price/listuismall/showall', false )
             }
         }
     },
@@ -5554,8 +5554,8 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
                 sortable : true,
                 width : 70,
                 align : 'right',
-                hidden : !MShop.Config.get('client/extjs/panel/price/listuismall/taxrate', MShop.Config.get(
-                    'client/extjs/panel/price/taxrate', false))
+                hidden : !MShop.Config.get('admin/extjs/panel/price/listuismall/taxrate', MShop.Config.get(
+                    'admin/extjs/panel/price/taxrate', false))
             },
             {
                 xtype : 'gridcolumn',
@@ -5775,7 +5775,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
         this.typeStore = MShop.GlobalStoreMgr.get('Price_Type', conf.domain);
         this.listTypeStore = MShop.GlobalStoreMgr.get(conf.listTypeControllerName, conf.domain);
 
-        /** client/extjs/panel/price/taxrate
+        /** admin/extjs/panel/price/taxrate
          * Display the tax rate column in all price panels by default
          *
          * Due to the limited size in the panels, the tax rate of prices is
@@ -5790,9 +5790,9 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
          * @category Developer
          * @category User
          */
-        var showTaxrate = MShop.Config.get('client/extjs/panel/price/taxrate', false);
+        var showTaxrate = MShop.Config.get('admin/extjs/panel/price/taxrate', false);
 
-        /** client/extjs/panel/price/itempickerui/taxrate
+        /** admin/extjs/panel/price/itempickerui/taxrate
          * Display the tax rate column in the price picker UI by default
          *
          * Due to the limited size in the picker UI, the tax rate of prices is
@@ -5806,7 +5806,7 @@ MShop.panel.price.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi
          * @category Developer
          * @category User
          */
-        showTaxrate = MShop.Config.get('client/extjs/panel/price/itempickerui/taxrate', showTaxrate);
+        showTaxrate = MShop.Config.get('admin/extjs/panel/price/itempickerui/taxrate', showTaxrate);
 
         return [
             {
@@ -6663,7 +6663,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             maxLength : 255,
                             emptyText : MShop.I18n.dt('admin', 'Internal name')
                         }, {
-                            xtype : MShop.Config.get('client/extjs/common/editor', 'htmleditor'),
+                            xtype : MShop.Config.get('admin/extjs/common/editor', 'htmleditor'),
                             fieldLabel : MShop.I18n.dt('admin', 'Content'),
                             name : 'text.content',
                             enableFont : false

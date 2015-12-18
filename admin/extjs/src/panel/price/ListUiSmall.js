@@ -26,7 +26,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
         baseParams : {
             options : {
 
-                /** client/extjs/panel/price/listuismall/showall
+                /** admin/extjs/panel/price/listuismall/showall
                  * Display prices of all items of the same domain in the admin interface
                  *
                  * By default, only the prices for the specific product, attribute or
@@ -46,7 +46,7 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
                  * @category Developer
                  * @category User
                  */
-                'showall' : MShop.Config.get('client/extjs/panel/price/listuismall/showall', false )
+                'showall' : MShop.Config.get('admin/extjs/panel/price/listuismall/showall', false )
             }
         }
     },
@@ -152,8 +152,8 @@ MShop.panel.price.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
                 sortable : true,
                 width : 70,
                 align : 'right',
-                hidden : !MShop.Config.get('client/extjs/panel/price/listuismall/taxrate', MShop.Config.get(
-                    'client/extjs/panel/price/taxrate', false))
+                hidden : !MShop.Config.get('admin/extjs/panel/price/listuismall/taxrate', MShop.Config.get(
+                    'admin/extjs/panel/price/taxrate', false))
             },
             {
                 xtype : 'gridcolumn',

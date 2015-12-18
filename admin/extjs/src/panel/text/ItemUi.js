@@ -79,7 +79,7 @@ MShop.panel.text.ItemUi = Ext.extend(MShop.panel.AbstractListItemUi, {
                             maxLength : 255,
                             emptyText : MShop.I18n.dt('admin', 'Internal name')
                         }, {
-                            xtype : MShop.Config.get('client/extjs/common/editor', 'htmleditor'),
+                            xtype : MShop.Config.get('admin/extjs/common/editor', 'htmleditor'),
                             fieldLabel : MShop.I18n.dt('admin', 'Content'),
                             name : 'text.content',
                             enableFont : false
