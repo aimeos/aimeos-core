@@ -73,16 +73,16 @@ abstract class Base
 
 
 	/**
-	 * Returns the item for the given search key and ID or code.
+	 * Returns the customer item object specificed by its ID.
 	 *
-	 * @param string $value Unique ID or code to search for
+	 * @param integer $id Unique customer ID referencing an existing customer
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
-	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
+	 * @return \Aimeos\MShop\Customer\Item\Iface Returns the customer item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $value, array $ref = array() )
+	public function getItem( $id, array $ref = array() )
 	{
-		return $this->getItemBase( array( 'customer.id', 'customer.code' ), $value, $ref );
+		return $this->getItemBase( 'customer.id', $id, $ref );
 	}
 
 

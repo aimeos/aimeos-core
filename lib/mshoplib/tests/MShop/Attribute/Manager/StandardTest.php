@@ -103,10 +103,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'attribute.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search, array( 'text' ) );
 
+		$results = $this->object->searchItems( $search, array( 'text' ) );
 		if( ( $itemA = reset( $results ) ) === false ) {
-			throw new \Exception( 'No search results available' );
+			throw new \Exception( 'No search results available in testGetItem()' );
 		}
 
 		$itemB = $this->object->getItem( $itemA->getId(), array( 'text' ) );

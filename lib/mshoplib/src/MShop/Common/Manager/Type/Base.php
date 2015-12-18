@@ -164,14 +164,14 @@ abstract class Base
 	/**
 	 * Returns the type item specified by its ID
 	 *
-	 * @param string $value ID of type item object
+	 * @param integer $id ID of type item object
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Returns the type item of the given ID
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $value, array $ref = array() )
+	public function getItem( $id, array $ref = array() )
 	{
-		return $this->getItemBase( $this->prefix . 'id', $value, $ref );
+		return $this->getItemBase( $this->prefix . 'id', $id, $ref );
 	}
 
 

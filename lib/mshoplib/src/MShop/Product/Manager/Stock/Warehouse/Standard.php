@@ -436,16 +436,16 @@ class Standard
 
 
 	/**
-	 * Returns the item for the given search key and ID or code.
+	 * Creates a warehouse item object for the given item id.
 	 *
-	 * @param string $value Unique ID or code to search for
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
-	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
+	 * @param integer $id Id of the warehouse item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return \Aimeos\MShop\Common\Item\Iface Returns product warehouse item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $value, array $ref = array() )
+	public function getItem( $id, array $ref = array() )
 	{
-		return $this->getItemBase( array( 'product.stock.warehouse.id', 'product.stock.warehouse.code' ), $value, $ref );
+		return $this->getItemBase( 'product.stock.warehouse.id', $id, $ref );
 	}
 
 

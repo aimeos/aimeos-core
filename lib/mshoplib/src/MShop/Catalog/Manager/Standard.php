@@ -249,16 +249,16 @@ class Standard
 
 
 	/**
-	 * Returns the item for the given search key and ID or code.
+	 * Returns the item specified by its ID.
 	 *
-	 * @param string $value Unique ID or code to search for
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
-	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
+	 * @param integer $id Unique ID of the catalog item
+	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Returns the catalog item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $value, array $ref = array() )
+	public function getItem( $id, array $ref = array() )
 	{
-		return $this->getItemBase( array( 'catalog.id', 'catalog.code' ), $value, $ref );
+		return $this->getItemBase( 'catalog.id', $id, $ref );
 	}
 
 
