@@ -262,9 +262,48 @@ Aimeos.Item = {
 
 
 
+Aimeos.Item.Bundle {
+
+	init : function() {
+
+		Aimeos.Item.Bundle.addLine();
+		Aimeos.Item.Bundle.deleteLine();
+	},
+
+
+	addLine : function() {
+
+		$(".product-item-bundle").on("click", ".fa-plus", function(ev) {
+			var line = $(".prototype", ev.delegateTarget);
+			var clone = line.clone();
+
+			clone.insertBefore(line).removeClass("prototype");
+			$(".combobox-prototype", clone).removeClass("combobox-prototype").addClass("combobox").selectmenu();
+		});
+	},
+
+
+	removeLine : function() {
+
+		$(".product-item-bundle").on("click", ".fa-trash", function() {
+			var elem = $(this);
+
+			$("#confirm-delete").modal();
+			$("#confirm-delete").on('click', ".btn-danger", function(e) {
+				$(e.delegateTarget).modal('hide');
+				elem.parents("tr").remove();
+			});
+		});
+	}
+};
+
+
+
 $(function() {
 	
 	Aimeos.Common.init();
 	Aimeos.Filter.init();
+
 	Aimeos.Item.init();
+	Aimeos.Item.Bundle.init();
 });

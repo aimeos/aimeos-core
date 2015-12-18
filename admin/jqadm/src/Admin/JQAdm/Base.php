@@ -24,6 +24,7 @@ abstract class Base
 	private $context;
 	private $subclients;
 	private $templatePaths;
+	private $types = array();
 
 
 	/**
@@ -65,6 +66,26 @@ abstract class Base
 	{
 		$this->view = $view;
 		return $this;
+	}
+
+
+	/**
+	 * Deletes a resource
+	 *
+	 * @return string|null admin output to display or null for redirecting to the list
+	 */
+	public function delete()
+	{
+	}
+
+
+	/**
+	 * Returns a list of resource according to the conditions
+	 *
+	 * @return string admin output to display
+	 */
+	public function search()
+	{
 	}
 
 
@@ -183,7 +204,10 @@ abstract class Base
 			throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
 		}
 
-		return $this->addClientDecorators( $object, $this->templatePaths, $path );
+		$object = $this->addClientDecorators( $object, $this->templatePaths, $path );
+		$object->setView( $this->view );
+
+		return $object;
 	}
 
 

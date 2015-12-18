@@ -55,7 +55,7 @@ class Standard
 	 * @category Developer
 	 */
 	private $subPartPath = 'admin/jqadm/product/standard/subparts';
-	private $subPartNames = array();
+	private $subPartNames = array( 'bundle' );
 
 
 	/**
@@ -78,12 +78,21 @@ class Standard
 
 			$view->item = $item;
 			$view->itemTypes = $this->getTypeItems();
+			$view->itemBody = '';
+
+			foreach( $this->getSubClients() as $client ) {
+				$view->itemBody .= $client->copy();
+			}
 		}
-		catch( \Aimeos\MShop\Exception $e ) {
-			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		catch( \Aimeos\MShop\Exception $e )
+		{
+			$error = array( 'product-item' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
-		catch( \Exception $e ) {
-			$view->errors = array( $e->getMessage() );
+		catch( \Exception $e )
+		{
+			$error = array( 'product-item' => $e->getMessage() );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
 
 		$tplconf = 'admin/jqadm/product/template-item';
@@ -111,12 +120,21 @@ class Standard
 
 			$view->item = $item;
 			$view->itemTypes = $this->getTypeItems();
+			$view->itemBody = '';
+
+			foreach( $this->getSubClients() as $client ) {
+				$view->itemBody .= $client->create();
+			}
 		}
-		catch( \Aimeos\MShop\Exception $e ) {
-			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		catch( \Aimeos\MShop\Exception $e )
+		{
+			$error = array( 'product-item' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
-		catch( \Exception $e ) {
-			$view->errors = array( $e->getMessage() );
+		catch( \Exception $e )
+		{
+			$error = array( 'product-item' => $e->getMessage() );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
 
 		$tplconf = 'admin/jqadm/product/template-item';
@@ -136,18 +154,31 @@ class Standard
 		$view = $this->getView();
 		$context = $this->getContext();
 
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$manager->begin();
+
 		try
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+			foreach( $this->getSubClients() as $client ) {
+				$client->delete();
+			}
+
 			$manager->deleteItems( (array) $view->param( 'id' ) );
+			$manager->commit();
 
 			return;
 		}
-		catch( \Aimeos\MShop\Exception $e ) {
-			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		catch( \Aimeos\MShop\Exception $e )
+		{
+			$error = array( 'list-items' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->errors = $view->get( 'errors', array() ) + $error;
+			$manager->rollback();
 		}
-		catch( \Exception $e ) {
-			$view->errors = array( $e->getMessage() );
+		catch( \Exception $e )
+		{
+			$error = array( 'list-items' => $e->getMessage() );
+			$view->errors = $view->get( 'errors', array() ) + $error;
+			$manager->rollback();
 		}
 
 		$tplconf = 'admin/jqadm/partial/template-error';
@@ -169,16 +200,35 @@ class Standard
 
 		try
 		{
+			/** admin/jqadm/product/domains
+			 * List of domain items that should be fetched along with the product
+			 *
+			 * @param array List of domain names
+			 * @since 2016.01
+			 * @category Developer
+			 */
+			$default = array( 'attribute', 'media', 'price', 'product', 'text' );
+			$domains = $view->config( 'admin/jqadm/product/domains', $default );
+
 			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
-			$view->item = $manager->getItem( $view->param( 'id' ) );
+			$view->item = $manager->getItem( $view->param( 'id' ), $domains );
 			$view->itemTypes = $this->getTypeItems();
+			$view->itemBody = '';
+
+			foreach( $this->getSubClients() as $client ) {
+				$view->itemBody .= $client->get();
+			}
 		}
-		catch( \Aimeos\MShop\Exception $e ) {
-			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		catch( \Aimeos\MShop\Exception $e )
+		{
+			$error = array( 'product-item' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
-		catch( \Exception $e ) {
-			$view->errors = array( $e->getMessage() );
+		catch( \Exception $e )
+		{
+			$error = array( 'product-item' => $e->getMessage() );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
 
 		$tplconf = 'admin/jqadm/product/template-item';
@@ -199,42 +249,40 @@ class Standard
 		$context = $this->getContext();
 
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$manager->begin();
+
 		$item = $manager->createItem();
 
 		try
 		{
-			$config = array();
-			$keys = (array) $view->param( 'item/config/key', array() );
-			$vals = (array) $view->param( 'item/config/val', array() );
-
 			$item->fromArray( $view->param( 'item', array() ) );
+			$item->setConfig( $this->getItemConfig( $view ) );
+			$manager->saveItem( $item );
 
-			foreach( $keys as $idx => $key )
-			{
-				if( trim( $key ) != '' ) {
-					$config[$key] = ( isset( $vals[$idx] ) ? trim( $vals[$idx] ) : null );
-				}
+			$view->item = $item;
+			$view->itemBody = '';
+
+			foreach( $this->getSubClients() as $client ) {
+				$view->itemBody .= $client->save();
 			}
 
-			$item->setConfig( $config );
-			$manager->saveItem( $item, false );
-
+			$manager->commit();
 			return;
 		}
-		catch( \Aimeos\MShop\Exception $e ) {
-			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		catch( \Aimeos\MShop\Exception $e )
+		{
+			$error = array( 'product-item' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->errors = $view->get( 'errors', array() ) + $error;
+			$manager->rollback();
 		}
-		catch( \Exception $e ) {
-			$view->errors = array( $e->getMessage() );
+		catch( \Exception $e )
+		{
+			$error = array( 'product-item' => $e->getMessage() );
+			$view->errors = $view->get( 'errors', array() ) + $error;
+			$manager->rollback();
 		}
 
-		$view->item = $item;
-		$view->itemTypes = $this->getTypeItems();
-
-		$tplconf = 'admin/jqadm/product/template-item';
-		$default = 'product/item-default.php';
-
-		return $view->render( $view->config( $tplconf, $default ) );
+		return $this->create();
 	}
 
 
@@ -257,12 +305,21 @@ class Standard
 			$view->items = $manager->searchItems( $search, array(), $total );
 			$view->filterOperators = $search->getOperators();
 			$view->total = $total;
+			$view->itemBody = '';
+
+			foreach( $this->getSubClients() as $client ) {
+				$view->itemBody .= $client->search();
+			}
 		}
-		catch( \Aimeos\MShop\Exception $e ) {
-			$view->errors = array( $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+		catch( \Aimeos\MShop\Exception $e )
+		{
+			$error = array( 'list-items' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
-		catch( \Exception $e ) {
-			$view->errors = array( $e->getMessage() );
+		catch( \Exception $e )
+		{
+			$error = array( 'list-items' => $e->getMessage() );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
 
 		$tplconf = 'admin/jqadm/product/template-list';
@@ -355,6 +412,29 @@ class Standard
 		 * @see admin/jqadm/product/decorators/global
 		 */
 		return $this->createSubClient( 'product/' . $type, $name );
+	}
+
+
+	/**
+	 * Returns the list of item configuration key/value pairs
+	 *
+	 * @param \Aimeos\MW\View\Iface $view View object with view helpers
+	 * @return array Associative list of item configuration key/value pairs
+	 */
+	protected function getItemConfig( \Aimeos\MW\View\Iface $view )
+	{
+		$config = array();
+		$keys = (array) $view->param( 'item/config/key', array() );
+		$vals = (array) $view->param( 'item/config/val', array() );
+
+		foreach( $keys as $idx => $key )
+		{
+			if( trim( $key ) != '' ) {
+				$config[$key] = ( isset( $vals[$idx] ) ? trim( $vals[$idx] ) : null );
+			}
+		}
+
+		return $config;
 	}
 
 

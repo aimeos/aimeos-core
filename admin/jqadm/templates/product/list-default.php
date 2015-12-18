@@ -91,7 +91,7 @@ $sortcode = $this->param( 'sort' );
 <?php echo $this->partial( $this->config( 'admin/jqadm/partial/pagination', 'common/partials/pagination-default.php' ), $pageParams + array( 'pos' => 'top' ) ); ?>
 
 <table class="list-items table table-hover">
-	<thead>
+	<thead class="header">
 		<tr>
 <?php if( in_array( 'product.id', $fields ) ) : ?>
 			<th class="product.id">
