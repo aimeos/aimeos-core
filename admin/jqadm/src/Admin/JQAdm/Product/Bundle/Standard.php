@@ -298,7 +298,7 @@ class Standard
 
 		$item = $manager->createItem();
 		$item->setParentId( $view->item->getId() );
-		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' ) );
+		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
 		$item->setDomain( 'product' );
 
 		$map = $this->getListItemsMap( $view->item->getId() );
