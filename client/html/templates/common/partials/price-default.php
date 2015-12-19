@@ -37,8 +37,8 @@ $format = array(
 	$rebate = $priceItem->getRebate();
 	$key = 'price:' . $priceItem->getType();
 	/// Price format with price value (%1$s) and currency (%2$s)
-	$format['value'] = $this->translate( 'client/html/code', $key );
-	$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
+	$format['value'] = $this->translate( 'client/code', $key );
+	$currency = $this->translate( 'client/currency', $priceItem->getCurrencyId() );
 ?>
 <div class="price-item <?php echo $enc->attr( $priceItem->getType() ); ?>">
 	<span class="quantity"><?php echo $enc->html( sprintf( $format['quantity'], $priceItem->getQuantity() ), $enc::TRUST ); ?></span>

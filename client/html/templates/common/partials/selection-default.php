@@ -56,7 +56,7 @@ $attributes = $this->get( 'selectionAttributeItems', array() );
 <?php foreach( $this->get( 'selectionAttributeTypeDependencies', array() ) as $code => $attrIds ) : asort( $attrIds ); ?>
 <?php	$layout = $this->config( 'client/html/catalog/detail/basket/selection/type/' . $code, 'select' ); ?>
 	<li class="select-item <?php echo $enc->attr( $layout ) . ' ' . $enc->attr( $code ); ?>">
-		<div class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></div>
+		<div class="select-name"><?php echo $enc->html( $this->translate( 'client/code', $code ) ); ?></div>
 		<div class="select-value">
 <?php	if( $layout === 'radio' ) : ?>
 			<ul class="select-list" data-index="<?php echo $index++; ?>">

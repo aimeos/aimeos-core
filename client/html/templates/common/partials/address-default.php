@@ -44,7 +44,7 @@ $enc = $this->encoder();
 		</label><select id="address-<?php echo $type ?>-salutation<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.salutation' ) ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.salutation' ); ?> >
 			<option value=""><?php echo $enc->html( $this->translate( 'client', 'Select salutation' ), $enc::TRUST ); ?></option>
 <?php	foreach( $salutations as $salutation ) : ?>
-			<option value="<?php echo $enc->attr( $salutation ); ?>" <?php echo $selectfcn( $addr, 'order.base.address.salutation', $salutation ); ?>><?php echo $enc->html( $this->translate( 'client/html/code', $salutation ) ); ?></option>
+			<option value="<?php echo $enc->attr( $salutation ); ?>" <?php echo $selectfcn( $addr, 'order.base.address.salutation', $salutation ); ?>><?php echo $enc->html( $this->translate( 'client/code', $salutation ) ); ?></option>
 <?php	endforeach; ?>
 		</select>
 	</li>
@@ -82,7 +82,7 @@ $enc = $this->encoder();
 		</label><select id="address-<?php echo $type ?>-state<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.state' ) ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.state' ); ?> >
 			<option value=""><?php echo $enc->html( $this->translate( 'client', 'Select state' ), $enc::TRUST ); ?></option>
 <?php	foreach( $states as $regioncode => $stateList ) : ?>
-			<optgroup class="<?php echo $regioncode; ?>" label="<?php echo $enc->attr( $this->translate( 'client/html/country', $regioncode ) ); ?>">
+			<optgroup class="<?php echo $regioncode; ?>" label="<?php echo $enc->attr( $this->translate( 'client/country', $regioncode ) ); ?>">
 <?php		foreach( $stateList as $stateCode => $stateName ) : ?>
 				<option value="<?php echo $enc->attr( $stateCode ); ?>" <?php echo $selectfcn( $addr, 'order.base.address.state', $stateCode ); ?>><?php echo $enc->html( $stateName ); ?></option>
 <?php		endforeach; ?>
@@ -101,7 +101,7 @@ $enc = $this->encoder();
 		</label><select id="address-<?php echo $type ?>-countryid<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.countryid' ) ) ); ?>" <?php echo $disablefcn( $css, 'order.base.address.countryid' ); ?> >
 			<option value=""><?php echo $enc->html( $this->translate( 'client', 'Select country' ), $enc::TRUST ); ?></option>
 <?php	foreach( $countries as $countryId ) : ?>
-			<option value="<?php echo $enc->attr( $countryId ); ?>" <?php echo $selectfcn( $addr, 'order.base.address.countryid', $countryId ); ?>><?php echo $enc->html( $this->translate( 'client/html/country', $countryId ) ); ?></option>
+			<option value="<?php echo $enc->attr( $countryId ); ?>" <?php echo $selectfcn( $addr, 'order.base.address.countryid', $countryId ); ?>><?php echo $enc->html( $this->translate( 'client/country', $countryId ) ); ?></option>
 <?php	endforeach; ?>
 		</select>
 	</li>
@@ -110,7 +110,7 @@ $enc = $this->encoder();
 		<label for="address-<?php echo $type ?>-languageid<?php echo $idstr ?>"><?php echo $enc->html( $this->translate( 'client', 'Language' ), $enc::TRUST ); ?>
 		</label><select id="address-<?php echo $type ?>-languageid<?php echo $idstr ?>" name="<?php echo $enc->attr( $this->formparam( array( $fname, 'order.base.address.languageid' ) ) ); ?>">
 <?php	foreach( $languages as $languageId ) : ?>
-			<option value="<?php echo $enc->attr( $languageId ); ?>" <?php echo $selectfcn( $addr, 'order.base.address.languageid', $languageId ); ?>><?php echo $enc->html( $this->translate( 'client/html/language', $languageId ) ); ?></option>
+			<option value="<?php echo $enc->attr( $languageId ); ?>" <?php echo $selectfcn( $addr, 'order.base.address.languageid', $languageId ); ?>><?php echo $enc->html( $this->translate( 'client/language', $languageId ) ); ?></option>
 <?php	endforeach; ?>
 		</select>
 	</li>

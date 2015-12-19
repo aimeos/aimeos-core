@@ -11,7 +11,7 @@ $enc = $this->encoder();
 try
 {
 	$miniPriceValue = $this->mainPriceItem->getValue() + $this->mainPriceItem->getCosts();
-	$miniPriceCurrency = $this->translate( 'client/html/currency', $this->mainPriceItem->getCurrencyId() );
+	$miniPriceCurrency = $this->translate( 'client/currency', $this->mainPriceItem->getCurrencyId() );
 }
 catch( Exception $e )
 {

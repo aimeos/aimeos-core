@@ -13,7 +13,7 @@ $msg = $this->translate( 'client', 'Thank you for your order %1$s from %2$s.
 We received the payment and will care about your order immediately.' );
 
 $key = 'pay:' . $order->getPaymentStatus();
-$status = $this->translate( 'client/html/code', $key );
+$status = $this->translate( 'client/code', $key );
 $format = $this->translate( 'client', 'Y-m-d' );
 
 $string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ), $status );

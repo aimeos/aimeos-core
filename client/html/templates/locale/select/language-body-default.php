@@ -36,13 +36,13 @@ $config = $this->config( 'client/html/locale/select/language/url/config', array(
 <div class="locale-select-language">
 	<h2 class="header"><?php echo $this->translate( 'client', 'Select language' ); ?></h2>
 	<ul class="select-menu">
-		<li class="select-dropdown select-current"><a href="#"><?php echo $this->translate( 'client/html/language', $langId ); ?></a>
+		<li class="select-dropdown select-current"><a href="#"><?php echo $this->translate( 'client/language', $langId ); ?></a>
 			<ul class="select-dropdown">
 <?php	foreach( $map as $lang => $list ) : ?>
 <?php		$locParams = ( isset( $list[$currencyId] ) ? (array) $list[$currencyId] : (array) reset( $list ) ); ?>
 				<li class="select-item <?php echo ( $lang === $langId ? 'active' : '' ); ?>">
 					<a href="<?php echo $enc->attr( $this->url( $this->request()->getTarget(), $this->param( 'controller' ), $this->param( 'action' ), array_merge( $params, $locParams ), array(), $config ) ); ?>">
-<?php		echo $enc->html( $this->translate( 'client/html/language', $lang ), $enc::TRUST ); ?>
+<?php		echo $enc->html( $this->translate( 'client/language', $lang ), $enc::TRUST ); ?>
 					</a>
 				</li>
 <?php	endforeach; ?>

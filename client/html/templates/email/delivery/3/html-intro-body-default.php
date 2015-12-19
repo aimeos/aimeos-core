@@ -12,7 +12,7 @@ $order = $this->extOrderItem;
 $msg = $this->translate( 'client', 'Your order %1$s from %2$s has been dispatched.' );
 
 $key = 'stat:' . $order->getDeliveryStatus();
-$status = $this->translate( 'client/html/code', $key );
+$status = $this->translate( 'client/code', $key );
 $format = $this->translate( 'client', 'Y-m-d' );
 
 $string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ), $status );

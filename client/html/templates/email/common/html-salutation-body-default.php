@@ -20,7 +20,7 @@ try
 	$addr = $this->extAddressItem;
 
 	$string = sprintf( $msg,
-		( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/html/code', $addr->getSalutation() ) : '' ),
+		( in_array( $addr->getSalutation(), $salutations ) ? $this->translate( 'client/code', $addr->getSalutation() ) : '' ),
 		$addr->getFirstName(),
 		$addr->getLastName()
 	);

@@ -43,7 +43,7 @@ $vatFormat = $this->translate( 'client', 'Incl. %1$s%% VAT' );
 <?php	echo strip_tags( $product->getName() ); ?>
 
 
-<?php	$price = $entry['price']; $priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() ); ?>
+<?php	$price = $entry['price']; $priceCurrency = $this->translate( 'client/currency', $price->getCurrencyId() ); ?>
 <?php	printf( $priceFormat, $this->number( $price->getValue() ), $priceCurrency ); ?> <?php ( $price->getRebate() > '0.00' ? printf( $rebatePercentFormat, $this->number( round( $price->getRebate() * 100 / ( $price->getValue() + $price->getRebate() ) ), 0 ) ) : '' ); ?>
 <?php	if( $price->getCosts() > 0 ) { echo ' ' . strip_tags( sprintf( $costFormat, $this->number( $price->getCosts() ), $priceCurrency ) ); } ?>
 <?php	if( $price->getTaxrate() > 0 ) { echo ', ' . strip_tags( sprintf( $vatFormat, $this->number( $price->getTaxrate() ) ) ); } ?>

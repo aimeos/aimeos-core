@@ -45,7 +45,7 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 		<label class="description" for="c_deliveryoption-<?php echo $enc->attr( $id ); ?>">
 			<input class="option" type="radio" id="c_deliveryoption-<?php echo $enc->attr( $id ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_deliveryoption' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" <?php echo ( $id == $serviceOption ? 'checked="checked"' : '' ); ?> />
 <?php	if( isset( $servicePrices[$id] ) ) : ?>
-<?php		$currency = $this->translate( 'client/html/currency', $servicePrices[$id]->getCurrencyId() ); ?>
+<?php		$currency = $this->translate( 'client/currency', $servicePrices[$id]->getCurrencyId() ); ?>
 <?php		if( $servicePrices[$id]->getValue() > 0 ) : /// Service fee value (%1$s) and shipping cost value (%2$s) with currency (%3$s) ?>
 			<span class="price-value"><?php echo $enc->html( sprintf( $this->translate( 'client', '%1$s%3$s + %2$s%3$s' ), $this->number( $servicePrices[$id]->getValue() ), $this->number( $servicePrices[$id]->getCosts() ), $currency ) ); ?></span>
 <?php		else : ?>
@@ -69,11 +69,11 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 <?php		foreach( $serviceAttributes[$id] as $key => $attribute ) : ?>
 <?php			$value = ( isset( $orderService ) && ( $value = $orderService->getAttribute( $key ) ) !== null ? $value : $attribute->getDefault() ); ?>
 			<li class="form-item <?php echo $enc->attr( $key ) . ( isset( $deliveryCss[$key] ) ? ' ' . join( ' ', $deliveryCss[$key] ) : '' ) . ( $attribute->isRequired() ? ' mandatory' : '' ); ?>">
-				<label for="delivery-<?php echo $enc->attr( $key ); ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $key ) ); ?></label>
+				<label for="delivery-<?php echo $enc->attr( $key ); ?>"><?php echo $enc->html( $this->translate( 'client/code', $key ) ); ?></label>
 <?php			switch( $attribute->getType() ) : case 'select':
 				?><select id="delivery-<?php echo $enc->attr( $key ); ?>" name="<?php echo $enc->attr( $this->formparam( array( 'c_delivery', $id, $key ) ) ); ?>">
 <?php					foreach( (array) $attribute->getDefault() as $option ) : ?>
-					<option value="<?php echo $enc->attr( $option ); ?>"><?php $code = $key . ':' . $option; echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></option>
+					<option value="<?php echo $enc->attr( $option ); ?>"><?php $code = $key . ':' . $option; echo $enc->html( $this->translate( 'client/code', $code ) ); ?></option>
 <?php					endforeach; ?>
 				</select><?php
 					break; case 'boolean':

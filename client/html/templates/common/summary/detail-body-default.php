@@ -44,7 +44,7 @@ if( isset( $this->summaryBasket ) )
 	$priceValue = $price->getValue();
 	$priceService = $price->getCosts();
 	$priceRebate = $price->getRebate();
-	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
+	$priceCurrency = $this->translate( 'client/currency', $price->getCurrencyId() );
 }
 else
 {
@@ -129,7 +129,7 @@ $backParams = $this->get( 'summaryParams', array() );
 						<ul class="attr-list <?php echo $enc->attr( 'attr-list-' . $attrType ); ?>">
 <?php			foreach( $product->getAttributes( $attrType ) as $attribute ) : ?>
 							<li class="attr-item">
-								<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+								<span class="name"><?php echo $enc->html( $this->translate( 'client/code', $attribute->getCode() ) ); ?></span>
 								<span class="value"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?></span>
 							</li>
 <?php			endforeach; ?>
@@ -144,7 +144,7 @@ $backParams = $this->get( 'summaryParams', array() );
 								<a class="change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, $params, array(), $basketConfig ) ); ?>">
 <?php					endif; ?>
 									<span class="sign">−</span>
-									<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+									<span class="name"><?php echo $enc->html( $this->translate( 'client/code', $attribute->getCode() ) ); ?></span>
 									<span class="value"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?></span>
 <?php					if( $modify ) : ?>
 								</a>
@@ -157,7 +157,7 @@ $backParams = $this->get( 'summaryParams', array() );
 						<ul class="attr-list attr-list-custom">
 <?php			foreach( $attributes as $attribute ) : ?>
 							<li class="attr-item">
-								<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+								<span class="name"><?php echo $enc->html( $this->translate( 'client/code', $attribute->getCode() ) ); ?></span>
 								<span class="value"><?php echo $enc->html( $attribute->getValue() ); ?></span>
 							</li>
 <?php			endforeach; ?>
@@ -168,7 +168,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php			foreach( $attributes as $attribute ) : ?>
 <?php				if( $attribute->getCode() === 'download' ) : ?>
 							<li class="attr-item">
-								<span class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?></span>
+								<span class="name"><?php echo $enc->html( $this->translate( 'client/code', $attribute->getCode() ) ); ?></span>
 								<span class="value"><a class="" href="<?php echo $enc->attr( $this->content( $attribute->getValue() ) ); ?>" ><?php echo $enc->html( $attribute->getName() ); ?></a></span>
 							</li>
 <?php				endif; ?>

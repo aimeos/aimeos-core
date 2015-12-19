@@ -14,7 +14,7 @@ try
 	$priceItem = $this->miniBasket->getPrice();
 	$priceValue = $priceItem->getValue();
 	$priceService = $priceItem->getCosts();
-	$priceCurrency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() );
+	$priceCurrency = $this->translate( 'client/currency', $priceItem->getCurrencyId() );
 }
 catch( Exception $e )
 {

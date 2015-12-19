@@ -23,7 +23,7 @@ $enc = $this->encoder();
 <?php			foreach( $subAttrDeps[ $attrItem->getId() ] as $prodid ) { $classes .= ' subproduct-' . $prodid; } ?>
 <?php		endif; ?>
 				<tr class="item<?php echo $classes; ?>">
-					<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $type ), $enc::TRUST ); ?></td>
+					<td class="name"><?php echo $enc->html( $this->translate( 'client/code', $type ), $enc::TRUST ); ?></td>
 					<td class="value">
 						<div class="media-list">
 <?php		foreach( $attrItem->getListItems( 'media', 'default' ) as $listItem ) : ?>

@@ -18,7 +18,7 @@ $enc = $this->encoder();
 		</li>
 		<li class="form-item">
 			<span class="name"><?php echo $enc->html( $this->translate( 'client', 'Payment status' ), $enc::TRUST ); ?></span>
-			<span class="value"><?php $code = 'pay:' . $this->confirmOrderItem->getPaymentStatus(); echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></span>
+			<span class="value"><?php $code = 'pay:' . $this->confirmOrderItem->getPaymentStatus(); echo $enc->html( $this->translate( 'client/code', $code ) ); ?></span>
 		</li>
 	</ul>
 <?php endif; ?>

@@ -17,7 +17,7 @@ $enc = $this->encoder();
 			<tbody>
 <?php foreach( $propertyItems as $propertyItem ) : ?>
 				<tr class="item">
-					<td class="name"><?php echo $enc->html( $this->translate( 'client/html/code', $propertyItem->getType() ), $enc::TRUST ); ?></td>
+					<td class="name"><?php echo $enc->html( $this->translate( 'client/code', $propertyItem->getType() ), $enc::TRUST ); ?></td>
 					<td class="value"><?php echo $enc->html( $propertyItem->getValue() ); ?></td>
 				</tr>
 <?php endforeach; ?>

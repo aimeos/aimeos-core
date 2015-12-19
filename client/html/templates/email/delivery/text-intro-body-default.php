@@ -11,7 +11,7 @@ $order = $this->extOrderItem;
 $msg = $this->translate( 'client', 'The delivery status of your order %1$s from %2$s has been changed to "%3$s".' );
 
 $key = 'stat:' . $order->getDeliveryStatus();
-$status = $this->translate( 'client/html/code', $key );
+$status = $this->translate( 'client/code', $key );
 $format = $this->translate( 'client', 'Y-m-d' );
 
 $string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ), $status );

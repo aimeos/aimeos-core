@@ -85,7 +85,7 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 	<ul class="form-list">
 <?php foreach( $public as $key => $item ) : ?>
 		<li class="form-item <?php echo $key . ( $item->isRequired() ? ' mandatory' : ' optional' ); ?>" data-regex="<?php echo $testfcn( $regex, $key ); ?>">
-			<label for="process-<?php echo $key; ?>"><?php echo $enc->html( $this->translate( 'client/html/code', $item->getCode() ), $enc::TRUST ); ?></label><?php
+			<label for="process-<?php echo $key; ?>"><?php echo $enc->html( $this->translate( 'client/code', $item->getCode() ), $enc::TRUST ); ?></label><?php
 			switch( $item->getType() ) : case 'select':
 				?><select id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>">
 					<option value=""><?php echo $enc->html( $this->translate( 'client', 'Please select' ) ); ?></option>
@@ -94,13 +94,13 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 <?php				endforeach; ?>
 				</select><?php
 				break; case 'boolean':
-				?><input type="checkbox" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
+				?><input type="checkbox" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/code', $key ) ); ?>" /><?php
 				break; case 'integer': case 'number':
-				?><input type="number" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
+				?><input type="number" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/code', $key ) ); ?>" /><?php
 				break; case 'date': case 'datetime': case 'time':
-				?><input type="<?php echo $attribute->getType(); ?>" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" /><?php
+				?><input type="<?php echo $attribute->getType(); ?>" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/code', $key ) ); ?>" /><?php
 				break; default:
-				?><input type="text" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/html/code', $key ) ); ?>" />
+				?><input type="text" id="process-<?php echo $key; ?>" name="<?php echo $enc->attr( $namefcn( $this, $item->getInternalCode() ) ); ?>" value="<?php echo $enc->attr( $item->getDefault() ); ?>" placeholder="<?php echo $enc->attr( $this->translate( 'client/code', $key ) ); ?>" />
 <?php		endswitch; ?>
 		</li>
 <?php endforeach; ?>

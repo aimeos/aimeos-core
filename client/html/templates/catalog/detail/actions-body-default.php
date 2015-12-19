@@ -56,7 +56,7 @@ $urls = array(
 <div class="catalog-detail-actions">
 <?php foreach( $list as $entry ) : ?>
 <?php	if( isset( $urls[$entry] ) ) : ?>
-	<a class="actions-button actions-button-<?php echo $enc->attr( $entry ); ?>" data-login="<?php echo $login; ?>" href="<?php echo $enc->attr( $urls[$entry] ); ?>" title="<?php echo $enc->attr( $this->translate( 'client/html/code', $entry ) ); ?>"></a>
+	<a class="actions-button actions-button-<?php echo $enc->attr( $entry ); ?>" data-login="<?php echo $login; ?>" href="<?php echo $enc->attr( $urls[$entry] ); ?>" title="<?php echo $enc->attr( $this->translate( 'client/code', $entry ) ); ?>"></a>
 <?php	endif; ?>
 <?php endforeach; ?>
 <?php echo $this->actionsBody; ?>

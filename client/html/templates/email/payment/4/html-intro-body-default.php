@@ -14,7 +14,7 @@ $msg = $this->translate( 'client', 'Thank you for your order %1$s from %2$s.
 The order is pending until we receive the final payment. If you\'ve chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference.' );
 
 $key = 'pay:' . $order->getPaymentStatus();
-$status = $this->translate( 'client/html/code', $key );
+$status = $this->translate( 'client/code', $key );
 $format = $this->translate( 'client', 'Y-m-d' );
 
 $string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ), $status );

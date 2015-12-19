@@ -16,7 +16,7 @@
 <?php	foreach( $service->getAttributes() as $attribute ) : ?>
 <?php		if( $attribute->getType() === 'delivery' ) : ?>
 <?php
-				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) );
+				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/code', $attribute->getCode() ) );
 
 				switch( $attribute->getValue() )
 				{
@@ -41,7 +41,7 @@
 <?php	foreach( $service->getAttributes() as $attribute ) : ?>
 <?php		if( $attribute->getType() === 'payment' ) : ?>
 <?php
-				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) );
+				$name = ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/code', $attribute->getCode() ) );
 
 				switch( $attribute->getValue() )
 				{

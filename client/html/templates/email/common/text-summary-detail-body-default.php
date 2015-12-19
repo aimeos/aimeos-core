@@ -17,7 +17,7 @@ try
 	$priceValue = $price->getValue();
 	$priceService = $price->getCosts();
 	$priceRebate = $price->getRebate();
-	$priceCurrency = $this->translate( 'client/html/currency', $price->getCurrencyId() );
+	$priceCurrency = $this->translate( 'client/currency', $price->getCurrencyId() );
 }
 catch( Exception $e )
 {
@@ -69,7 +69,7 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 <?php				endif; ?>
 <?php			break; default: ?>
-- <?php 			echo strip_tags( $this->translate( 'client/html/code', $attribute->getCode() ) ); ?>: <?php echo strip_tags( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?>
+- <?php 			echo strip_tags( $this->translate( 'client/code', $attribute->getCode() ) ); ?>: <?php echo strip_tags( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?>
 
 <?php		endswitch; ?>
 <?php	endforeach; ?>

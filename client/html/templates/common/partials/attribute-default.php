@@ -45,7 +45,7 @@ $enc = $this->encoder();
 <?php foreach( $this->get( 'attributeConfigItems', array() ) as $code => $attributes ) : ?>
 <?php	$layout = $this->config( 'client/html/catalog/detail/basket/attribute/type/' . $code, 'select' ); ?>
 	<li class="select-item <?php echo $enc->attr( $layout ) . ' ' . $enc->attr( $code ); ?>">
-		<div class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $code ) ); ?></div>
+		<div class="select-name"><?php echo $enc->html( $this->translate( 'client/code', $code ) ); ?></div>
 		<div class="select-value">
 			<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrconfid' ) ) ); ?>">
 				<option class="select-option" value=""><?php echo $enc->html( $this->translate( 'client', 'none' ) ); ?></option>
@@ -54,7 +54,7 @@ $enc = $this->encoder();
 <?php		$priceItems = $attribute->getRefItems( 'price', 'default', 'default' ); ?>
 <?php		if( ( $priceItem = reset( $priceItems ) ) !== false ) : ?>
 <?php			$value = $priceItem->getValue() + $priceItem->getCosts(); ?>
-<?php			$currency = $this->translate( 'client/html/currency', $priceItem->getCurrencyId() ); ?>
+<?php			$currency = $this->translate( 'client/currency', $priceItem->getCurrencyId() ); ?>
 <?php			/// Configurable product attribute name (%1$s) with sign (%4$s, +/-), price value (%2$s) and currency (%3$s) ?>
 <?php			echo $enc->html( sprintf( $this->translate( 'client', '%1$s ( %4$s%2$s%3$s )' ), $attribute->getName(), $this->number( abs( $value ) ), $currency, ( $value < 0 ? '−' : '+' ) ), $enc::TRUST ); ?>
 <?php		else : ?>
@@ -70,7 +70,7 @@ $enc = $this->encoder();
 <ul class="selection">
 <?php foreach( $this->get( 'attributeCustomItems', array() ) as $id => $attribute ) : ?>
 	<li class="select-item <?php echo $enc->attr( $attribute->getCode() ); ?>">
-		<div class="select-name"><?php echo $enc->html( $this->translate( 'client/html/code', $attribute->getType() ) ); ?></div>
+		<div class="select-name"><?php echo $enc->html( $this->translate( 'client/code', $attribute->getType() ) ); ?></div>
 		<div class="select-value">
 			<input name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrcustid', $id ) ) ); ?>" type="text" value="" placeholder="<?php echo $enc->attr( $attribute->getName() ); ?>" />
 		</div>

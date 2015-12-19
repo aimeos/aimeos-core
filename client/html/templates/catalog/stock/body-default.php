@@ -75,7 +75,7 @@ foreach( $stockProductIds as $prodId )
 		$whCode = ( isset( $warehouseItems[$whId] ) ? 'warehouse:' . $warehouseItems[$whId]->getCode() : 'default' );
 
 		if( !isset( $whText[$whCode] ) ) {
-			$whText[$whCode] = $this->translate( 'client/html/code', $whCode );
+			$whText[$whCode] = $this->translate( 'client/code', $whCode );
 		}
 
 		$stocklevel = $item->getStockLevel();

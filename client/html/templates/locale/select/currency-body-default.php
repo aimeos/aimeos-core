@@ -39,12 +39,12 @@ $paramname = $this->config( 'client/html/locale/select/currency/param-name', 'lo
 <div class="locale-select-currency">
 	<h2 class="header"><?php echo $this->translate( 'client', 'Select currency' ); ?></h2>
 	<ul class="select-menu">
-		<li class="select-dropdown select-current"><a href="#"><?php echo $this->translate( 'client/html/currency', $currencyId ); ?></a>
+		<li class="select-dropdown select-current"><a href="#"><?php echo $this->translate( 'client/currency', $currencyId ); ?></a>
 			<ul class="select-dropdown">
 <?php	foreach( $currencies as $currency => $locParam ) : ?>
 				<li class="select-item <?php echo ( $currency === $currencyId ? 'active' : '' ); ?>">
 					<a href="<?php echo $enc->attr( $this->url( $this->request()->getTarget(), $this->param( 'controller' ), $this->param( 'action' ), array_merge( $params, $locParam ), array(), $config ) ); ?>">
-<?php		echo $enc->html( $this->translate( 'client/html/currency', $currency ), $enc::TRUST ); ?>
+<?php		echo $enc->html( $this->translate( 'client/currency', $currency ), $enc::TRUST ); ?>
 					</a>
 				</li>
 <?php	endforeach; ?>

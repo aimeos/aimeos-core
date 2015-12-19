@@ -99,15 +99,15 @@ $enc = $this->encoder();
 					</li><!--
 					--><li class="attr-item order-channel">
 						<span class="name"><?php echo $enc->html( $this->translate( 'client', 'Order channel' ), $enc::TRUST ); ?></span>
-						<span class="value"><?php $code = 'order:' . $orderItem->getType(); echo $enc->html( $this->translate( 'client/html/code', $code ), $enc::TRUST ); ?></span>
+						<span class="value"><?php $code = 'order:' . $orderItem->getType(); echo $enc->html( $this->translate( 'client/code', $code ), $enc::TRUST ); ?></span>
 					</li><!--
 					--><li class="attr-item order-payment">
-<?php			$code = 'pay:' . $orderItem->getPaymentStatus(); $paystatus = $this->translate( 'client/html/code', $code ); ?>
+<?php			$code = 'pay:' . $orderItem->getPaymentStatus(); $paystatus = $this->translate( 'client/code', $code ); ?>
 						<span class="name"><?php echo $enc->html( $this->translate( 'client', 'Payment' ), $enc::TRUST ); ?></span>
 						<span class="value"><?php echo ( ( $date = $orderItem->getDatePayment() ) !== null ? $enc->html( sprintf( $attrformat, $paystatus, date_create( $date )->format( $dateformat ) ), $enc::TRUST ) : '' ); ?></span>
 					</li><!--
 					--><li class="attr-item order-delivery">
-<?php			$code = 'stat:' . $orderItem->getDeliveryStatus(); $status = $this->translate( 'client/html/code', $code ); ?>
+<?php			$code = 'stat:' . $orderItem->getDeliveryStatus(); $status = $this->translate( 'client/code', $code ); ?>
 						<span class="name"><?php echo $enc->html( $this->translate( 'client', 'Delivery' ), $enc::TRUST ); ?></span>
 						<span class="value"><?php echo ( ( $date = $orderItem->getDateDelivery() ) !== null ? $enc->html( sprintf( $attrformat, $status, date_create( $date )->format( $dateformat ) ), $enc::TRUST ) : '' ); ?></span>
 					</li>

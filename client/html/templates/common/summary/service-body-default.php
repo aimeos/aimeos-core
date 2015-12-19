@@ -66,7 +66,7 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 <?php		foreach( $service->getAttributes() as $attribute ) : ?>
 <?php			if( $attribute->getType() === 'payment' ) : ?>
 				<li class="pa-<?php echo $enc->attr( $attribute->getCode() ); ?>">
-					<span class="name"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/html/code', $attribute->getCode() ) ) ); ?></span>
+					<span class="name"><?php echo $enc->html( ( $attribute->getName() != '' ? $attribute->getName() : $this->translate( 'client/code', $attribute->getCode() ) ) ); ?></span>
 <?php				switch( $attribute->getValue() ) : case 'array': case 'object': ?>
 					<span class="value"><?php echo $enc->html( join( ', ', (array) $attribute->getValue() ) ); ?></span>
 <?php					break; default: ?>
