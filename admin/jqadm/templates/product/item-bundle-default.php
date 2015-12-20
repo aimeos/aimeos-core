@@ -5,23 +5,7 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-$selected = function( $key, $code ) {
-	return ( $key == $code ? 'selected="selected"' : '' );
-};
-
 $enc = $this->encoder();
-
-$target = $this->config( 'admin/jqadm/url/save/target' );
-$cntl = $this->config( 'admin/jqadm/url/save/controller', 'jqadm' );
-$action = $this->config( 'admin/jqadm/url/save/action', 'save' );
-$config = $this->config( 'admin/jqadm/url/save/config', array() );
-
-$listTarget = $this->config( 'admin/jqadm/url/search/target' );
-$listCntl = $this->config( 'admin/jqadm/url/search/controller', 'jqadm' );
-$listAction = $this->config( 'admin/jqadm/url/search/action', 'search' );
-$listConfig = $this->config( 'admin/jqadm/url/search/config', array() );
-
-$params = $this->param();
 
 ?>
 <div class="product-item-bundle card">
