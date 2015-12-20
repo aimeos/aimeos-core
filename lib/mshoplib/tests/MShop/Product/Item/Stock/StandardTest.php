@@ -110,6 +110,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 200, $this->object->getStocklevel() );
 	}
 
+	public function testSetStocklevelNull()
+	{
+		$this->object->setStocklevel( null );
+		$this->assertEquals( null, $this->object->getStocklevel() );
+
+		$this->object->setStocklevel( '' );
+		$this->assertEquals( null, $this->object->getStocklevel() );
+	}
+
 	public function testGetDateBack()
 	{
 		$this->assertEquals( '2010-01-01 11:55:00', $this->object->getDateBack() );

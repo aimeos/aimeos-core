@@ -121,9 +121,7 @@ class Standard
 	{
 		if( $stocklevel === $this->getStocklevel() ) { return; }
 
-		if( $stocklevel !== null ) {
-			$stocklevel = (int) $stocklevel;
-		}
+		$stocklevel = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
 
 		$this->values['product.stock.stocklevel'] = $stocklevel;
 		$this->setModified();
