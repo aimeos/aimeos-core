@@ -15,7 +15,7 @@ namespace Aimeos\MW\View;
 /**
  * Default view implementation.
  *
- * @method string|array config(string $name = null, string|array $default = null) Returns the config value for the given key
+ * @method mixed config(string $name = null, string|array $default = null) Returns the config value for the given key
  * @method \Aimeos\MW\View\Helper\Iface csrf() Returns the CSRF helper object
  * @method string date(string $date) Returns the formatted date
  * @method \Aimeos\MW\View\Helper\Iface encoder() Returns the encoder helper object
