@@ -67,7 +67,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->physicalItems = $this->getProperties( $view->item->getId() );
+		$view->physicalItems = $this->getItems( $view->item->getId() );
 		$view->physicalBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -90,7 +90,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->physicalItems = $this->getProperties( $view->item->getId() );
+		$view->physicalItems = $this->getItems( $view->item->getId() );
 		$view->physicalBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -113,7 +113,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->physicalItems = $this->getProperties( $view->item->getId() );
+		$view->physicalItems = $this->getItems( $view->item->getId() );
 		$view->physicalBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -142,7 +142,7 @@ class Standard
 
 		try
 		{
-			$this->updateProperties( $view );
+			$this->updateItems( $view );
 
 			$view->physicalBody = '';
 
@@ -271,9 +271,9 @@ class Standard
 	 * Returns the list of property items for physical values
 	 *
 	 * @param string $prodid Unique product ID
-	 * @return array List of items implementing \Aimeos\MShop\Product\Property\Iface
+	 * @return array List of property types as keys and items implementing \Aimeos\MShop\Product\Property\Iface as values
 	 */
-	protected function getProperties( $prodid )
+	protected function getItems( $prodid )
 	{
 		$list = array();
 		$types = array( 'package-length', 'package-width', 'package-height', 'package-weight' );
@@ -299,14 +299,14 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
 	 */
-	protected function updateProperties( \Aimeos\MW\View\Iface $view )
+	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/property' );
 		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/property/type' );
 
 		$ids = array();
-		$items = $this->getProperties( $view->item->getId() );
+		$items = $this->getItems( $view->item->getId() );
 
 		foreach( (array) $view->param( 'physical', array() ) as $type => $value )
 		{
@@ -328,7 +328,7 @@ class Standard
 			}
 
 			$items[$type]->setValue( $value );
-			$manager->saveItem( $items[$type], false );
+			$manager->saveItem( $items[$type] );
 		}
 
 		$manager->deleteItems( $ids );

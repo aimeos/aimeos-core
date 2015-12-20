@@ -142,7 +142,7 @@ class Standard
 
 		try
 		{
-			$this->updateListItems( $view );
+			$this->updateItems( $view );
 
 			$view->bundleBody = '';
 
@@ -267,7 +267,13 @@ class Standard
 	}
 
 
-	protected function getListItemsMap( $prodid )
+	/**
+	 * Returns the referenced products for the given product ID
+	 *
+	 * @param string $prodid Unique product ID
+	 * @return array Associative list of bundle product IDs as keys and list items as values
+	 */
+	protected function getListItems( $prodid )
 	{
 		$map = array();
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
@@ -283,14 +289,19 @@ class Standard
 		$search->setSortations( array( $search->sort( '+', 'product.lists.position' ) ) );
 
 		foreach( $manager->searchItems( $search ) as $id => $listItem ) {
-			$map[$listItem->getRefId()] = $id;
+			$map[$listItem->getRefId()] = $listItem;
 		}
 
 		return $map;
 	}
 
 
-	protected function updateListItems( \Aimeos\MW\View\Iface $view )
+	/**
+	 * Updates existing product bundle references or creates new ones
+	 *
+	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
+	 */
+	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
@@ -301,7 +312,7 @@ class Standard
 		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
 		$item->setDomain( 'product' );
 
-		$map = $this->getListItemsMap( $view->item->getId() );
+		$map = $this->getListItems( $view->item->getId() );
 
 		foreach( (array) $view->param( 'bundle/product.id', array() ) as $pos => $prodid )
 		{
