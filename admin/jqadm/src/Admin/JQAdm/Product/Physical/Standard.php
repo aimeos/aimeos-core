@@ -310,9 +310,13 @@ class Standard
 
 		foreach( (array) $view->param( 'physical', array() ) as $type => $value )
 		{
-			if( $value == '' && isset( $items[$type] ) )
+			$value = trim( $value );
+
+			if( $value == '' )
 			{
-				$ids[] = $items[$type]->getId();
+				if( isset( $items[$type] ) ) {
+					$ids[] = $items[$type]->getId();
+				}
 				continue;
 			}
 
