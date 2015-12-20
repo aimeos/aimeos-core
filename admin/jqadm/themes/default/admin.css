@@ -49,13 +49,33 @@
 
 /* Common styles */
 
-.aimeos thead th {
+.aimeos .card-header {
+	background-color: #373A3C;
+	color: #FFF;
+}
+
+.aimeos th {
 	text-align: center;
+	background-color: #373A3C;
+	color: #FFF;
+}
+
+.aimeos th:first-child {
+	border-top-left-radius: 0.25rem;
+}
+
+.aimeos th:last-child {
+	border-top-right-radius: 0.25rem;
+}
+
+.aimeos th a {
+	color: #FFFFFF;
 }
 
 .aimeos table th,
 .aimeos table td {
 	vertical-align: middle;
+	padding: 0.5rem;
 }
 
 .aimeos .actions {
