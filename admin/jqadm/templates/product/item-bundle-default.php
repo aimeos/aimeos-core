@@ -8,11 +8,11 @@
 $enc = $this->encoder();
 
 ?>
-<div class="product-item-bundle card">
-	<div class="header card-header" role="tab" id="product-item-bundle" role="button" data-toggle="collapse" data-parent="#accordion" href="#product-item-bundle-data" aria-expanded="true" aria-controls="product-item-bundle-data">
+<div class="product-item-bundle card panel">
+	<div id="product-item-bundle" class="header card-header collapsed" role="tab" data-toggle="collapse" data-parent="#accordion" href="#product-item-bundle-data" aria-expanded="false" aria-controls="product-item-bundle-data">
 		<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Bundles' ) ); ?>
 	</div>
-	<div id="product-item-bundle-data" class="item-basic-bundle card-block panel-collapse collapse" role="tabpanel" aria-labelledby="product-item-bundle">
+	<div id="product-item-bundle-data" class="item-bundle card-block panel-collapse collapse" role="tabpanel" aria-labelledby="product-item-bundle">
 		<div class="col-lg-6">
 			<table class="bundle-list table table-default">
 				<thead>

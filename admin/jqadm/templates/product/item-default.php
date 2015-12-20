@@ -33,8 +33,8 @@ $params = $this->param();
 
 	<div id="accordion" role="tablist" aria-multiselectable="true">
 
-		<div class="product-item card">
-			<div class="header card-header" role="tab" id="product-item"role="button" data-toggle="collapse" data-parent="#accordion" href="#product-item-data" aria-expanded="true" aria-controls="product-item-data">
+		<div class="product-item card panel">
+			<div id="product-item" class="header card-header" role="tab" data-toggle="collapse" data-parent="#accordion" href="#product-item-data" aria-expanded="true" aria-controls="product-item-data">
 				<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Basic' ) ); ?>
 			</div>
 			<div id="product-item-data" class="item-basic card-block panel-collapse collapse in" role="tabpanel" aria-labelledby="product-item">
