@@ -280,10 +280,10 @@ class Standard
 
 		$search = $manager->createSearch();
 		$expr = array(
-				$search->compare( '==', 'product.lists.parentid', $prodid ),
-				$search->compare( '==', 'product.lists.domain', 'product' ),
-				$search->compare( '==', 'product.lists.type.domain', 'product' ),
-				$search->compare( '==', 'product.lists.type.code', 'default' ),
+			$search->compare( '==', 'product.lists.parentid', $prodid ),
+			$search->compare( '==', 'product.lists.domain', 'product' ),
+			$search->compare( '==', 'product.lists.type.domain', 'product' ),
+			$search->compare( '==', 'product.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'product.lists.position' ) ) );
