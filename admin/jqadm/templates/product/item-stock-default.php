@@ -36,21 +36,32 @@ $enc = $this->encoder();
 <?php	endforeach; ?>
 						</select>
 					</td>
-			  		<td class="stock-stocklevel"><input type="text" class="form-control" name="stock[product.stock.stocklevel][]" value="<?php echo $enc->attr( $item->getStockLevel() ); ?>" /></td>
-					<td class="stock-databack"><input type="text" class="form-control" name="stock[product.stock.dateback][]" value="<?php echo $enc->attr( $item->getDateBack() ); ?>" /></td>
+					<td class="stock-stocklevel">
+						<input type="text" class="form-control" name="stock[product.stock.stocklevel][]"
+							value="<?php echo $enc->attr( $item->getStockLevel() ); ?>" />
+					</td>
+					<td class="stock-databack">
+						<input type="text" class="form-control date" name="stock[product.stock.dateback][]"
+							value="<?php echo $enc->attr( $item->getDateBack() ); ?>"
+							data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>" />
+					</td>
 					<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
 				</tr>
 <?php endforeach; ?>
 				<tr class="prototype">
 			  		<td class="stock-warehouse">
-						<select class="form-control" name="stock[product.stock.warehouseid][]">
+						<select class="form-control" name="stock[product.stock.warehouseid][]" disabled="disabled">
 <?php foreach( $this->get( 'stockWarehouses', array() ) as $warehouse ) : ?>
 							<option value="<?php echo $enc->attr( $warehouse->getId() ); ?>"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
 <?php endforeach; ?>
 						</select>
 					</td>
 			  		<td class="stock-stocklevel"><input type="text" class="form-control" name="stock[product.stock.stocklevel][]" disabled="disabled" /></td>
-					<td class="stock-databack"><input type="text" class="form-control" name="stock[product.stock.dateback][]" disabled="disabled" /></td>
+					<td class="stock-databack">
+						<input type="text" class="form-control date-prototype"
+							name="stock[product.stock.dateback][]" disabled="disabled"
+							data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>" />
+					</td>
 					<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
 				</tr>
 			</tbody>

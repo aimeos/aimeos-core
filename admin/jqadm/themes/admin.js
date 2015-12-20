@@ -425,7 +425,7 @@ Aimeos.Item = {
 	createDatePicker : function() {
 
 		$(".aimeos .date").each(function(idx, elem) {
-			
+
 			$(elem).datepicker({
 				dateFormat: $(elem).data("format"),
 				constrainInput: false
@@ -473,6 +473,48 @@ Aimeos.Item.Bundle = {
 
 
 
+
+
+
+Aimeos.Item.Stock = {
+
+	init : function() {
+
+		this.addLine();
+		this.removeLine();
+	},
+
+
+	addLine : function() {
+
+		$(".product-item-stock").on("click", ".fa-plus", function(ev) {
+			var line = $(".prototype", ev.delegateTarget);
+			var clone = line.clone();
+
+			clone.insertBefore(line).removeClass("prototype");
+			$("input,select", clone).prop("disabled", false);
+
+			$(".date-prototype", clone).each(function(idx, elem) {
+				$(elem).addClass("date").removeClass("date-prototype");
+				$(elem).datepicker({
+					dateFormat: $(elem).data("format"),
+					constrainInput: false
+				});
+			});
+		});
+	},
+
+
+	removeLine : function() {
+
+		$(".product-item-stock").on("click", ".fa-trash", function() {
+			$(this).parents("tr").remove();
+		});
+	}
+};
+
+
+
 $(function() {
 	
 	Aimeos.init();
@@ -481,4 +523,5 @@ $(function() {
 
 	Aimeos.Item.init();
 	Aimeos.Item.Bundle.init();
+	Aimeos.Item.Stock.init();
 });
