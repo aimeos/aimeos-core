@@ -55,7 +55,7 @@ class Standard
 	 * @category Developer
 	 */
 	private $subPartPath = 'admin/jqadm/product/standard/subparts';
-	private $subPartNames = array( 'bundle', 'physical' );
+	private $subPartNames = array( 'bundle', 'stock', 'physical' );
 
 
 	/**

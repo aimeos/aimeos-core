@@ -315,6 +315,7 @@ class Standard
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
 
+		$ids = array();
 		$items = $this->getItems( $view->item->getId() );
 		$whids = (array) $view->param( 'stock/product.stock.warehouseid', array() );
 
@@ -333,6 +334,10 @@ class Standard
 			$manager->saveItem( $items[$whid] );
 		}
 
-		$manager->deleteItems( array_diff( array_keys( $items ), $whids ) );
+		foreach( array_diff( array_keys( $items ), $whids ) as $id ) {
+			$ids[] = $items[$id]->getId();
+		}
+
+		$manager->deleteItems( $ids );
 	}
 }
