@@ -313,7 +313,7 @@ Aimeos.List = {
 	confirmDelete : function() {
 		var self = this;
 
-		$("#confirm-delete").on("hide.bs.modal", function(e) {
+		$("#confirm-delete").on("click", ".btn-danger", function(e) {
 			window.location.href = $(self.element).attr("href");
 		});
 	},
@@ -432,7 +432,7 @@ Aimeos.Item = {
 			});
 		});
 	}
-};
+},
 
 
 
