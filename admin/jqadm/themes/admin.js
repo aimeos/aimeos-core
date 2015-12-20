@@ -136,26 +136,6 @@ Aimeos = {
 			"method": "OPTIONS",
 			"dataType": "json"
 		});
-
-		Aimeos.askDelete();
-		Aimeos.confirmDelete();
-	},
-
-
-	askDelete : function(element) {
-
-		$(element).on("click", ".fa-trash", function(e) {
-			$("#confirm-delete").modal('show', $(this));
-			return false;
-		});
-	},
-
-
-	confirmDelete : function() {
-
-		$('#confirm-delete').on('show.bs.modal', function(e) {
-			$('.btn-danger', this).attr('href', $(e.relatedTarget).attr('href'));
-		});
 	},
 
 
@@ -166,7 +146,7 @@ Aimeos = {
             $.ajax({
                 dataType: "json",
                 url: data.meta.resources['product'] || null,
-                data: params = {
+                data: {
                     filter: {'&&': [{'=~': {'product.label': request.term}}]},
                     fields: {'product': 'product.label'},
                     sort: 'product.label'
@@ -308,30 +288,37 @@ Aimeos.Filter = {
 
 
 Aimeos.List = {
+		
+	element : null,
+
 
 	init : function() {
 
-		Aimeos.askDelete();
-		Aimeos.confirmDelete();
+		Aimeos.List.askDelete();
+		Aimeos.List.confirmDelete();
 	},
 
 
 	askDelete : function() {
+		var self = this;
 
 		$(".list-items").on("click", ".fa-trash", function(e) {
 			$("#confirm-delete").modal("show", $(this));
+			self.element = this;
 			return false;
 		});
 	},
 
 
 	confirmDelete : function() {
+		var self = this;
 
-		$("#confirm-delete").on("show.bs.modal", function(e) {
-			$(".btn-danger", this).attr("href", $(e.relatedTarget).attr("href"));
+		$("#confirm-delete").on("hide.bs.modal", function(e) {
+			window.location.href = $(self.element).attr("href");
 		});
 	},
 };
+
 
 
 Aimeos.Item = {
