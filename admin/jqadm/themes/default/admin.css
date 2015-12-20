@@ -3,6 +3,11 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
+
+/*
+ * Bootstrap bugfixes
+ */
+
 .card-block:after {
 	display: block;
 	clear: both;
@@ -10,6 +15,10 @@
 }
 
 
+
+/**
+ * JQuery UI styles
+ */
 
 .ai-combobox {
 	position: relative;
@@ -50,31 +59,15 @@
 /* Common styles */
 
 .aimeos .card-header {
-	background-color: #373A3C;
+	background-color: #333333;
+	font-weight: bold;
 	color: #FFF;
-}
-
-.aimeos th {
-	text-align: center;
-	background-color: #373A3C;
-	color: #FFF;
-}
-
-.aimeos th:first-child {
-	border-top-left-radius: 0.25rem;
-}
-
-.aimeos th:last-child {
-	border-top-right-radius: 0.25rem;
-}
-
-.aimeos th a {
-	color: #FFFFFF;
 }
 
 .aimeos table th,
 .aimeos table td {
 	vertical-align: middle;
+	text-align: center;
 	padding: 0.5rem;
 }
 
@@ -237,6 +230,23 @@
 	text-align: center;
 }
 
+.aimeos .list-items th {
+	background-color: #333333;
+	color: #FFF;
+}
+
+.aimeos .list-items th:first-child {
+	border-top-left-radius: 0.25rem;
+}
+
+.aimeos .list-items th:last-child {
+	border-top-right-radius: 0.25rem;
+}
+
+.aimeos .list-items th a {
+	color: #FFFFFF;
+}
+
 .aimeos .list-items a.items-field {
 	display: inline-block;
 	width: 100%;
@@ -268,8 +278,8 @@
 /* Detail view */
 
 .aimeos .card-header.has-danger {
-	border: solid 1px #A94442;
-	color: #A94442;
+	border: solid 1px #D9534F;
+	color: #D9534F;
 }
 
 .aimeos .item .form-group.mandatory label:after {
