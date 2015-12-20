@@ -28,7 +28,7 @@ $enc = $this->encoder();
 			  		<td class="stock-warehouse">
 						<select class="form-control" name="stock[product.stock.warehouseid][]">
 <?php	foreach( $this->get( 'stockWarehouses', array() ) as $warehouse ) : ?>
-<?php		if( $whid === $warehouse->getId() ) : ?>
+<?php		if( $whid == $warehouse->getId() ) : ?>
 							<option value="<?php echo $enc->attr( $warehouse->getId() ); ?>" selected="selected"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
 <?php		else : ?>
 							<option value="<?php echo $enc->attr( $warehouse->getId() ); ?>"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
