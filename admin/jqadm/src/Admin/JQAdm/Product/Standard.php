@@ -70,9 +70,12 @@ class Standard
 
 		try
 		{
+			$default = array( 'attribute', 'media', 'price', 'product', 'text' );
+			$domains = $view->config( 'admin/jqadm/product/domains', $default );
+
 			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
-			$item = $manager->getItem( $view->param( 'id' ) );
+			$item = $manager->getItem( $view->param( 'id' ), $domains );
 			$item->setCode( $item->getCode() . '_copy' );
 			$item->setId( null );
 

@@ -10,6 +10,33 @@
 }
 
 
+
+.ai-combobox {
+	position: relative;
+	display: inline-block;
+	width: 100%;
+}
+
+.ai-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+
+.ai-combobox-input {
+	margin: 0;
+	padding: 5px 10px;
+	width: 90%;
+}
+
+.ai-combobox .ui-button-icons-only {
+    width: 2em;
+}
+
+
+
 .aimeos .logo {
 	max-height: 40px;
 }
@@ -26,8 +53,8 @@
 	text-align: center;
 }
 
-.aimeos thead th,
-.aimeos thead td {
+.aimeos table th,
+.aimeos table td {
 	vertical-align: middle;
 }
 
@@ -186,13 +213,17 @@
 }
 
 
+.aimeos .list-items {
+	text-align: center;
+}
+
 .aimeos .list-items a.items-field {
 	display: inline-block;
 	width: 100%;
 }
 
 .aimeos .list-items .fa {
-	margin: 0 0.5rem;
+	margin: 0 0.25rem;
 }
 
 

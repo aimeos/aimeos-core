@@ -26,12 +26,10 @@ $params = $this->param();
 ?>
 <div class="product-item-bundle card">
 	<div class="header card-header" role="tab" id="product-item-bundle" role="button" data-toggle="collapse" data-parent="#accordion" href="#product-item-bundle-data" aria-expanded="true" aria-controls="product-item-bundle-data">
-		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#product-bundle-data" aria-expanded="true" aria-controls="product-bundle-data">
-			<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Bundles' ) ); ?>
-		</a>
+		<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Bundles' ) ); ?>
 	</div>
 	<div id="product-item-bundle-data" class="item-basic-bundle card-block panel-collapse collapse" role="tabpanel" aria-labelledby="product-item-bundle">
-		<div class="col-sm-6">
+		<div class="col-lg-6">
 			<table class="bundle-list table table-default">
 				<thead>
 					<tr>
@@ -43,7 +41,7 @@ $params = $this->param();
 <?php foreach( $this->get( 'bundleItems', array() ) as $id => $item ) : ?>
 					<tr>
 						<td>
-							<select class="form-control combobox" name="bundle[product.id][]">
+							<select class="combobox" name="bundle[product.id][]">
 								<option value="<?php echo $enc->attr( $id ); ?>" ><?php echo $enc->html( $item->getLabel() ); ?></option>
 							</select>
 						</td>
@@ -52,7 +50,7 @@ $params = $this->param();
 <?php endforeach; ?>
 					<tr class="prototype">
 						<td>
-							<select class="form-control combobox-prototype" name="bundle[id][]">
+							<select class="combobox-prototype" name="bundle[product.id][]" disabled="disabled">
 							</select>
 						</td>
 						<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>

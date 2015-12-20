@@ -38,7 +38,7 @@ $params = $this->param();
 				<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Basic' ) ); ?>
 			</div>
 			<div id="product-item-data" class="item-basic card-block panel-collapse collapse in" role="tabpanel" aria-labelledby="product-item">
-				<div class="col-sm-6">
+				<div class="col-lg-6">
 					<div class="form-group row">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin/jqadm', 'ID' ) ); ?></label>
 						<div class="col-sm-9">
@@ -100,7 +100,7 @@ $params = $this->param();
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-lg-6">
 					<table class="item-config table table-striped">
 						<thead>
 							<tr>

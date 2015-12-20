@@ -1,44 +1,204 @@
-Aimeos = {};
+(function( $ ) {
 
-Aimeos.Common = {
+    $.widget( "ai.combobox", {
+
+        _create: function() {
+            this.wrapper = $( "<span>" )
+                .addClass( "ai-combobox" )
+                .insertAfter( this.element );
+
+            this.element.hide();
+            this._createAutocomplete();
+            this._createShowAll();
+        },
+
+
+        _createAutocomplete: function() {
+            var selected = this.element.children( ":selected" ),
+              value = selected.val() ? selected.text() : "",
+              self = this;
+
+            this.input = $( "<input>" )
+                .appendTo( this.wrapper )
+                .val( value )
+                .attr( "title", "" )
+                .addClass( "ai-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+                .autocomplete({
+                    delay: 0,
+                    minLength: 0,
+                    source: $.proxy( this, "_source" ),
+                    select: function(ev, ui) {
+                        self.element.val(ui.item.value).find("input").val(ui.item.label);
+                        ev.preventDefault();
+                    },
+                    focus: function(ev, ui) {
+                        self.element.val(ui.item.value).next().find("input").val(ui.item.label);
+                        ev.preventDefault();
+                    }
+                })
+                .tooltip({
+                    tooltipClass: "ui-state-highlight"
+                });
+
+            this._on( this.input, {
+                autocompleteselect: function( event, ui ) {
+                    ui.item.option.selected = true;
+                    this._trigger( "select", event, {
+                        item: ui.item.option
+                    });
+                },
+
+                autocompletechange: "_removeInvalid"
+            });
+        },
+
+
+        _createShowAll: function() {
+            var input = this.input,
+                wasOpen = false;
+
+            $( '<button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icons-only"><span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span></button>' )
+                .attr( "tabIndex", -1 )
+                .appendTo( this.wrapper )
+                .button()
+                .removeClass( "ui-corner-all" )
+                .addClass( "ai-combobox-toggle ui-corner-right" )
+                .mousedown(function() {
+                    wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+                })
+               .click(function(ev) {
+                   ev.preventDefault();
+                   input.focus();
+
+                   // Close if already visible
+                   if ( wasOpen ) {
+                       return;
+                   }
+
+                   // Pass empty string as value to search for, displaying all results
+                   input.autocomplete( "search", "" );
+               });
+        },
+
+
+        _source: function( request, response ) {
+            this.options.getfcn( request, response, this.element );
+        },
+
+
+        _removeInvalid: function( event, ui ) {
+
+            // Selected an item, nothing to do
+            if ( ui.item ) {
+              return;
+            }
+
+            // Search for a match (case-insensitive)
+		    var valueLowerCase = this.input.val().toLowerCase();
+            var valid = false;
+
+            this.element.children( "option" ).each(function() {
+                if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+                    this.selected = valid = true;
+                    return false;
+                }
+            });
+
+           // Found a match, nothing to do
+           if ( valid ) {
+              return;
+           }
+
+          // Remove invalid value
+          this.input.val( "" );
+          this.element.val( "" );
+          this.input.autocomplete( "instance" ).term = "";
+        },
+
+        _destroy: function() {
+            this.wrapper.remove();
+            this.element.show();
+        }
+    });
+
+})( jQuery );
+
+
+
+Aimeos = {
+
+	options : null,
+
 
 	init : function() {
-		
-		Aimeos.Common.askDelete();
-		Aimeos.Common.confirmDelete();
+
+		this.options = $.ajax($("body").data("url"), {
+			"method": "OPTIONS",
+			"dataType": "json"
+		});
+
+		Aimeos.askDelete();
+		Aimeos.confirmDelete();
 	},
 
-	
-	askDelete : function() {
-		
-		$(".fa-trash").on("click", function(e) {
+
+	askDelete : function(element) {
+
+		$(element).on("click", ".fa-trash", function(e) {
 			$("#confirm-delete").modal('show', $(this));
 			return false;
 		});
 	},
-	
-	
+
+
 	confirmDelete : function() {
-		
+
 		$('#confirm-delete').on('show.bs.modal', function(e) {
 			$('.btn-danger', this).attr('href', $(e.relatedTarget).attr('href'));
 		});
-	}
+	},
+
+
+	getProducts : function( request, response, element ) {
+
+        Aimeos.options.done(function(data) {
+
+            $.ajax({
+                dataType: "json",
+                url: data.meta.resources['product'] || null,
+                data: params = {
+                    filter: {'&&': [{'=~': {'product.label': request.term}}]},
+                    fields: {'product': 'product.label'},
+                    sort: 'product.label'
+                },
+                success: function(result) {
+                    var list = result.data || [];
+
+                    $("option", element).remove();
+
+                    response( list.map(function(obj) {
+
+                        var opt = $("<option/>").attr("value", obj.id)
+                            .text(obj.attributes['product.label'])
+                            .appendTo(element);
+
+                        return {
+                            label: obj.attributes['product.label'] || null,
+                            value: obj.id,
+                            option: opt
+                        };
+                    }));
+                }
+            });
+        });
+    }
 };
 
 
 
 Aimeos.Filter = {
 
-	promise : null,
-
-
 	init : function() {
-
-		this.promise = $.ajax($("body").data("url"), {
-			"method": "OPTIONS",
-			"dataType": "json"
-		});
 		
 		Aimeos.Filter.addFilterKeys();
 		Aimeos.Filter.addFilterItem();
@@ -55,7 +215,7 @@ Aimeos.Filter = {
 			return;
 		}
 		
-		Aimeos.Filter.promise.done(function(data) {
+		Aimeos.options.done(function(data) {
 			var code = that.data("selected");
 
 			$.each(data.meta && data.meta.attributes || {}, function(key, attr) {
@@ -80,7 +240,7 @@ Aimeos.Filter = {
 		var opitem = $(this).parents(".filter-item").find(".filter-operator");
 		$("option", opitem).hide().removeProp("selected");
 
-		Aimeos.Filter.promise.done(function(data) {
+		Aimeos.options.done(function(data) {
 
 			if( data.meta && data.meta.attributes && data.meta.attributes[ui.item.value] && data.meta.attributes[ui.item.value].type ) {
 				var options = $("option." + data.meta.attributes[ui.item.value].type, opitem)
@@ -145,6 +305,33 @@ Aimeos.Filter = {
 	},
 };
 
+
+
+Aimeos.List = {
+
+	init : function() {
+
+		Aimeos.askDelete();
+		Aimeos.confirmDelete();
+	},
+
+
+	askDelete : function() {
+
+		$(".list-items").on("click", ".fa-trash", function(e) {
+			$("#confirm-delete").modal("show", $(this));
+			return false;
+		});
+	},
+
+
+	confirmDelete : function() {
+
+		$("#confirm-delete").on("show.bs.modal", function(e) {
+			$(".btn-danger", this).attr("href", $(e.relatedTarget).attr("href"));
+		});
+	},
+};
 
 
 Aimeos.Item = {
@@ -262,12 +449,14 @@ Aimeos.Item = {
 
 
 
-Aimeos.Item.Bundle {
+Aimeos.Item.Bundle = {
 
 	init : function() {
 
+		$(".product-item-bundle .combobox").combobox({getfcn: Aimeos.getProducts});
+
 		Aimeos.Item.Bundle.addLine();
-		Aimeos.Item.Bundle.deleteLine();
+		Aimeos.Item.Bundle.removeLine();
 	},
 
 
@@ -278,7 +467,11 @@ Aimeos.Item.Bundle {
 			var clone = line.clone();
 
 			clone.insertBefore(line).removeClass("prototype");
-			$(".combobox-prototype", clone).removeClass("combobox-prototype").addClass("combobox").selectmenu();
+			$(".combobox-prototype", clone)
+				.removeClass("combobox-prototype")
+				.addClass("combobox")
+				.prop("disabled", false)
+				.combobox({getfcn: Aimeos.getProducts});
 		});
 	},
 
@@ -286,13 +479,7 @@ Aimeos.Item.Bundle {
 	removeLine : function() {
 
 		$(".product-item-bundle").on("click", ".fa-trash", function() {
-			var elem = $(this);
-
-			$("#confirm-delete").modal();
-			$("#confirm-delete").on('click', ".btn-danger", function(e) {
-				$(e.delegateTarget).modal('hide');
-				elem.parents("tr").remove();
-			});
+			$(this).parents("tr").remove();
 		});
 	}
 };
@@ -301,7 +488,8 @@ Aimeos.Item.Bundle {
 
 $(function() {
 	
-	Aimeos.Common.init();
+	Aimeos.init();
+	Aimeos.List.init();
 	Aimeos.Filter.init();
 
 	Aimeos.Item.init();
