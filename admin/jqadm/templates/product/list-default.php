@@ -54,8 +54,6 @@ $pageParams = array( 'total' => $this->get( 'total', 0 ) );
 $sortcode = $this->param( 'sort' );
 
 ?>
-<?php echo $this->partial( $this->config( 'admin/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), array() ); ?>
-
 <?php echo $this->partial( $this->config( 'admin/jqadm/partial/error', 'common/partials/error-default.php' ), array( 'errors' => $this->get( 'errors', array() ) ) ); ?>
 
 <form class="list-search" method="POST" action="<?php echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">

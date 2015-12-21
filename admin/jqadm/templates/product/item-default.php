@@ -24,8 +24,6 @@ $listConfig = $this->config( 'admin/jqadm/url/search/config', array() );
 $params = $this->param();
 
 ?>
-<?php echo $this->partial( $this->config( 'admin/jqadm/partial/navigation', 'common/partials/navigation-default.php' ), array() ); ?>
-
 <?php echo $this->partial( $this->config( 'admin/jqadm/partial/error', 'common/partials/error-default.php' ), array( 'errors' => $this->get( 'errors', array() ) ) ); ?>
 
 <form class="item item-product form-horizontal" method="POST" enctype="multipart/form-data" action="<?php echo $enc->attr( $this->url( $target, $cntl, $action, $params, array(), $config ) ); ?>">
