@@ -19,12 +19,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$param = array( 'key' => 'test', 'list' => array( 'test' => array( 'key' => 'value' ) ) );
-
 		$view = new \Aimeos\MW\View\Standard();
-		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
-		$view->addHelper( 'param', $helper );
-
 		$this->object = new \Aimeos\MW\View\Helper\Value\Standard( $view );
 	}
 
@@ -37,17 +32,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testTransform()
 	{
-		$this->assertEquals( 'test', $this->object->transform( 'key', 'none' ) );
-		$this->assertEquals( 'value', $this->object->transform( '/list/test/key', 'none' ) );
-		$this->assertEquals( 'none', $this->object->transform( 'missing', 'none' ) );
+		$params = array( 'key' => 'test', 'list' => array( 'test' => array( 'key' => 'value' ) ) );
+
+		$this->assertEquals( 'test', $this->object->transform( $params, 'key', 'none' ) );
+		$this->assertEquals( 'value', $this->object->transform( $params, '/list/test/key', 'none' ) );
+		$this->assertEquals( 'none', $this->object->transform( $params, 'missing', 'none' ) );
 	}
 
 
 	public function testTransformNoDefault()
 	{
-		$this->assertEquals( 'test', $this->object->transform( 'key' ) );
-		$this->assertEquals( 'value', $this->object->transform( '/list/test/key' ) );
-		$this->assertEquals( null, $this->object->transform( 'missing' ) );
-	}
+		$params = array( 'key' => 'test', 'list' => array( 'test' => array( 'key' => 'value' ) ) );
 
+		$this->assertEquals( 'test', $this->object->transform( $params, 'key' ) );
+		$this->assertEquals( 'value', $this->object->transform( $params, '/list/test/key' ) );
+		$this->assertEquals( null, $this->object->transform( $params, 'missing' ) );
+	}
 }

@@ -12,7 +12,7 @@ namespace Aimeos\MW\View\Helper\Value;
 
 
 /**
- * View helper class for retrieving parameter values
+ * View helper class for retrieving a value from an associative array
  *
  * @package MW
  * @subpackage View
@@ -22,25 +22,24 @@ class Standard
 	implements \Aimeos\MW\View\Helper\Value\Iface
 {
 	/**
-	 * Returns the parameter value for the given key
+	 * Returns the value for the given key in the array
 	 *
+	 * @param array $values Multi-dimensional associative list of key/value pairs
 	 * @param string $key Parameter key like "name" or "list/test" for associative arrays
 	 * @param mixed $default Returned value if no one for key is available
-	 * @return mixed Parameter value
+	 * @return mixed Value from the array or default value if not present in array
 	 */
-	public function transform( $key, $default = null )
+	public function transform( array $values, $key, $default = null )
 	{
-		$params = $this->getView()->param();
-
 		foreach( explode( '/', trim( $key, '/' ) ) as $part )
 		{
-			if( isset( $params[$part] ) ) {
-				$params = $params[$part];
+			if( isset( $values[$part] ) ) {
+				$values = $values[$part];
 			} else {
 				return $default;
 			}
 		}
 
-		return $params;
+		return $values;
 	}
 }
