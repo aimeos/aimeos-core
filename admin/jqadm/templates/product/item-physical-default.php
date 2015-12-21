@@ -25,7 +25,7 @@ $enc = $this->encoder();
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="physical[package-length]"
 						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Product length (yard, inch, etc.)' ) ); ?>"
-						value="<?php echo $enc->attr( $this->value( 'physical/package-length', $value( 'package-length' ) ) ); ?>" >
+						value="<?php echo $enc->attr( $this->param( 'physical/package-length', $value( 'package-length' ) ) ); ?>" >
 				</div>
 			</div>
 			<div class="form-group row optional">
@@ -33,7 +33,7 @@ $enc = $this->encoder();
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="physical[package-width]"
 						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Product width (yard, inch etc.)' ) ); ?>"
-						value="<?php echo $enc->attr( $this->value( 'physical/package-width', $value( 'package-width' ) ) ); ?>" >
+						value="<?php echo $enc->attr( $this->param( 'physical/package-width', $value( 'package-width' ) ) ); ?>" >
 				</div>
 			</div>
 			<div class="form-group row optional">
@@ -41,7 +41,7 @@ $enc = $this->encoder();
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="physical[package-height]"
 						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Product height (yard, inch, etc.)' ) ); ?>"
-						value="<?php echo $enc->attr( $this->value( 'physical/package-height', $value( 'package-height' ) ) ); ?>" >
+						value="<?php echo $enc->attr( $this->param( 'physical/package-height', $value( 'package-height' ) ) ); ?>" >
 				</div>
 			</div>
 		</div>
@@ -51,7 +51,7 @@ $enc = $this->encoder();
 				<div class="col-sm-9">
 					<input type="text" class="form-control" name="physical[package-weight]"
 						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Product weight (pound, ounce, etc.)' ) ); ?>"
-						value="<?php echo $enc->attr( $this->value( 'physical/package-weight', $value( 'package-weight' ) ) ); ?>" >
+						value="<?php echo $enc->attr( $this->param( 'physical/package-weight', $value( 'package-weight' ) ) ); ?>" >
 				</div>
 			</div>
 		</div>
