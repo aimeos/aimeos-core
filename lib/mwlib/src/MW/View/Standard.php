@@ -188,11 +188,18 @@ class Standard implements \Aimeos\MW\View\Iface
 	 */
 	public function get( $key, $default = null )
 	{
-		if( isset( $this->values[$key] ) ) {
-			return $this->values[$key];
+		$values = $this->values;
+
+		foreach( explode( '/', trim( $key, '/' ) ) as $part )
+		{
+			if( is_array( $values ) && isset( $values[$part] ) ) {
+				$values = $values[$part];
+			} else {
+				return $default;
+			}
 		}
 
-		return $default;
+		return $values;
 	}
 
 

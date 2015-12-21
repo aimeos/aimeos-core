@@ -67,6 +67,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->test = 10;
 		$this->assertEquals( 10, $this->object->get( 'test' ) );
+
+		$this->object->test = array( 'key' => 'val' );
+		$this->assertEquals( 'val', $this->object->get( 'test/key' ) );
+
+		$this->object->test = new \stdClass();
+		$this->assertEquals( null, $this->object->get( 'test/key' ) );
 	}
 
 
