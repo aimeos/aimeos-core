@@ -88,133 +88,135 @@ $sortcode = $this->param( 'sort' );
 
 <?php echo $this->partial( $this->config( 'admin/jqadm/partial/pagination', 'common/partials/pagination-default.php' ), $pageParams + array( 'pos' => 'top' ) ); ?>
 
-<table class="list-items table table-hover">
-	<thead class="header">
-		<tr>
+<div class="table-responsive">
+	<table class="list-items table table-hover">
+		<thead class="header">
+			<tr>
 <?php if( in_array( 'product.id', $fields ) ) : ?>
-			<th class="product.id">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.id' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'ID' ) ); ?>
-				</a>
-			</th>
+				<th class="product.id">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.id' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'ID' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.status', $fields ) ) : ?>
-			<th class="product.status">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.status' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Status' ) ); ?>
-				</a>
-			</th>
+				<th class="product.status">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.status' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Status' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.typeid', $fields ) ) : ?>
-			<th class="product.type">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.typeid' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Type' ) ); ?>
-				</a>
-			</th>
+				<th class="product.type">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.typeid' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Type' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.code', $fields ) ) : ?>
-			<th class="product.code">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.code' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Code' ) ); ?>
-				</a>
-			</th>
+				<th class="product.code">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.code' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Code' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.label', $fields ) ) : ?>
-			<th class="product.label">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.label' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Label' ) ); ?>
-				</a>
-			</th>
+				<th class="product.label">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.label' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Label' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.datestart', $fields ) ) : ?>
-			<th class="product.datestart">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.datestart' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Start date' ) ); ?>
-				</a>
-			</th>
+				<th class="product.datestart">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.datestart' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Start date' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.dateend', $fields ) ) : ?>
-			<th class="product.dateend">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.dateend' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'End date' ) ); ?>
-				</a>
-			</th>
+				<th class="product.dateend">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.dateend' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'End date' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.ctime', $fields ) ) : ?>
-			<th class="product.ctime">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.ctime' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Created' ) ); ?>
-				</a>
-			</th>
+				<th class="product.ctime">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.ctime' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Created' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.mtime', $fields ) ) : ?>
-			<th class="product.mtime">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.mtime' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Modified' ) ); ?>
-				</a>
-			</th>
+				<th class="product.mtime">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.mtime' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Modified' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
 <?php if( in_array( 'product.editor', $fields ) ) : ?>
-			<th class="product.editor">
-				<a href="<?php $params['sort'] = $sort( $sortcode, 'product.editor' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Editor' ) ); ?>
-				</a>
-			</th>
+				<th class="product.editor">
+					<a href="<?php $params['sort'] = $sort( $sortcode, 'product.editor' ); echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+						<?php echo $enc->html( $this->translate( 'admin/jqadm', 'Editor' ) ); ?>
+					</a>
+				</th>
 <?php endif; ?>
-			<th class="actions">
-				<a class="btn btn-primary fa fa-plus"
-					href="<?php echo $enc->attr( $this->url( $newTarget, $newCntl, $newAction, array( 'resource' => 'product' ), array(), $newConfig ) ); ?>"
-					aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'New' ) ); ?>">
-				</a>
-			</th>
-		</tr>
-	</thead>
-	<tbody>
+				<th class="actions">
+					<a class="btn btn-primary fa fa-plus"
+						href="<?php echo $enc->attr( $this->url( $newTarget, $newCntl, $newAction, array( 'resource' => 'product' ), array(), $newConfig ) ); ?>"
+						aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'New' ) ); ?>">
+					</a>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
 <?php foreach( $this->get( 'items', array() ) as $id => $item ) : ?>
 <?php	$url = $enc->attr( $this->url( $getTarget, $getCntl, $getAction, array( 'resource' => 'product', 'id' => $id ), array(), $getConfig ) ); ?>
-		<tr>
+			<tr>
 <?php if( in_array( 'product.id', $fields ) ) : ?>
-			<td class="product.id"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getId() ); ?></a></td>
+				<td class="product.id"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getId() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.status', $fields ) ) : ?>
-			<td class="product.status"><a class="items-field" href="<?php echo $url; ?>"><div class="fa status-<?php echo $enc->attr( $item->getStatus() ); ?>"></div></a></td>
+				<td class="product.status"><a class="items-field" href="<?php echo $url; ?>"><div class="fa status-<?php echo $enc->attr( $item->getStatus() ); ?>"></div></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.typeid', $fields ) ) : ?>
-			<td class="product.type"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getType() ); ?></a></td>
+				<td class="product.type"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getType() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.code', $fields ) ) : ?>
-			<td class="product.code"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getCode() ); ?></a></td>
+				<td class="product.code"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getCode() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.label', $fields ) ) : ?>
-			<td class="product.label"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getLabel() ); ?></a></td>
+				<td class="product.label"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getLabel() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.datestart', $fields ) ) : ?>
-			<td class="product.datestart"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getDateStart() ); ?></a></td>
+				<td class="product.datestart"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getDateStart() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.dateend', $fields ) ) : ?>
-			<td class="product.dateend"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getDateEnd() ); ?></a></td>
+				<td class="product.dateend"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getDateEnd() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.ctime', $fields ) ) : ?>
-			<td class="product.ctime"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getTimeCreated() ); ?></a></td>
+				<td class="product.ctime"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getTimeCreated() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.mtime', $fields ) ) : ?>
-			<td class="product.mtime"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getTimeModified() ); ?></a></td>
+				<td class="product.mtime"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getTimeModified() ); ?></a></td>
 <?php endif; ?>
 <?php if( in_array( 'product.editor', $fields ) ) : ?>
-			<td class="product.editor"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getEditor() ); ?></a></td>
+				<td class="product.editor"><a class="items-field" href="<?php echo $url; ?>"><?php echo $enc->html( $item->getEditor() ); ?></a></td>
 <?php endif; ?>
-			<td class="actions"><!--
-				--><a class="btn btn-secondary fa fa-files-o"
-					href="<?php echo $enc->attr( $this->url( $copyTarget, $copyCntl, $copyAction, array( 'resource' => 'product', 'id' => $id ), array(), $copyConfig ) ); ?>"
-					aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Copy' ) ); ?>"></a><!--
-				--><a class="btn btn-danger fa fa-trash"
-					href="<?php echo $enc->attr( $this->url( $delTarget, $delCntl, $delAction, array( 'resource' => 'product', 'id' => $id ), array(), $delConfig ) ); ?>"
-					aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Delete' ) ); ?>"></a><!--
-			--></td>
-		</tr>
+				<td class="actions"><!--
+					--><a class="btn btn-secondary fa fa-files-o"
+						href="<?php echo $enc->attr( $this->url( $copyTarget, $copyCntl, $copyAction, array( 'resource' => 'product', 'id' => $id ), array(), $copyConfig ) ); ?>"
+						aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Copy' ) ); ?>"></a><!--
+					--><a class="btn btn-danger fa fa-trash"
+						href="<?php echo $enc->attr( $this->url( $delTarget, $delCntl, $delAction, array( 'resource' => 'product', 'id' => $id ), array(), $delConfig ) ); ?>"
+						aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Delete' ) ); ?>"></a><!--
+				--></td>
+			</tr>
 <?php endforeach; ?>
-	</tbody>
-</table>
+		</tbody>
+	</table>
+</div>
 
 <?php echo $this->partial( $this->config( 'admin/jqadm/partial/pagination', 'common/partials/pagination-default.php' ), $pageParams + array( 'pos' => 'bottom' ) ); ?>
 
