@@ -323,5 +323,8 @@ class MShop_Customer_Item_DefaultTest extends PHPUnit_Framework_TestCase
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->_object->isModified() );
+
+		$this->_object->getPaymentAddress()->setState( 'HH' );
+		$this->assertTrue( $this->_object->isModified() );
 	}
 }
