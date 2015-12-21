@@ -333,5 +333,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );
+
+		$this->object->getPaymentAddress()->setState( 'HH' );
+		$this->assertTrue( $this->object->isModified() );
 	}
 }

@@ -331,6 +331,17 @@ class Standard
 
 
 	/**
+	 * Tests if this item object was modified
+	 *
+	 * @return boolean True if modified, false if not
+	 */
+	public function isModified()
+	{
+		return parent::isModified() || $this->getPaymentAddress()->isModified();
+	}
+
+
+	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values
