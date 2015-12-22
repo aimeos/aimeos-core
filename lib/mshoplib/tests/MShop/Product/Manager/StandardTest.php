@@ -15,6 +15,7 @@ namespace Aimeos\MShop\Product\Manager;
  */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
+	private $context;
 	private $object;
 	private $editor = '';
 
@@ -27,8 +28,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->editor = \TestHelperMShop::getContext()->getEditor();
-		$this->object = new \Aimeos\MShop\Product\Manager\Standard( \TestHelperMShop::getContext() );
+		$this->context = \TestHelperMShop::getContext();
+		$this->editor = $this->context->getEditor();
+
+		$this->object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
 	}
 
 	/**
@@ -55,12 +58,71 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testCreateSearch()
+	{
+		$search = $this->object->createSearch();
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\SQL', $search );
+	}
+
+
+	public function testGetResourceType()
+	{
+		$result = $this->object->getResourceType();
+
+		$this->assertContains( 'product', $result );
+		$this->assertContains( 'product/type', $result );
+		$this->assertContains( 'product/lists', $result );
+		$this->assertContains( 'product/lists/type', $result );
+		$this->assertContains( 'product/property', $result );
+		$this->assertContains( 'product/property/type', $result );
+		$this->assertContains( 'product/stock', $result );
+		$this->assertContains( 'product/stock/warehouse', $result );
+	}
+
+
+	public function testGetSearchAttributes()
+	{
+		foreach( $this->object->getSearchAttributes() as $attribute ) {
+			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
+		}
+	}
+
+
+	public function testFindItem()
+	{
+		$item = $this->object->findItem( 'CNC' );
+
+		$this->assertEquals( 'CNC', $item->getCode() );
+	}
+
+
+	public function testGetItem()
+	{
+		$domains = array( 'text', 'product', 'price', 'media', 'attribute' );
+
+		$search = $this->object->createSearch();
+		$conditions = array(
+				$search->compare( '==', 'product.code', 'CNC' ),
+				$search->compare( '==', 'product.editor', $this->editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$products = $this->object->searchItems( $search, $domains );
+
+		if( ( $product = reset( $products ) ) === false ) {
+			throw new \Exception( sprintf( 'Found no Productitem with text "%1$s"', 'Cafe Noire Cappuccino' ) );
+		}
+
+		$this->assertEquals( $product, $this->object->getItem( $product->getId(), $domains ) );
+		$this->assertEquals( 6, count( $product->getRefItems( 'text' ) ) );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'product.code', 'CNC' ),
-			$search->compare( '==', 'product.editor', $this->editor )
+				$search->compare( '==', 'product.code', 'CNC' ),
+				$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search );
@@ -143,62 +205,40 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testFindItem()
+	public function testUpdateListItems()
 	{
-		$item = $this->object->findItem( 'CNC' );
+		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
+		$attrId = $attrManager->findItem( 's', array(), 'product', 'size' )->getId();
+		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
 
-		$this->assertEquals( 'CNC', $item->getCode() );
-	}
+		// create new list item
+		$map = array( $attrId => array( 'product.lists.datestart' => '2000-01-01 00:00:00' ) );
+		$this->object->updateListItems( $item, $map, 'attribute', 'hidden' );
 
+		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
+		$listItems = $item->getListItems( 'attribute', 'hidden' );
 
-	public function testGetItem()
-	{
-		$domains = array( 'text', 'product', 'price', 'media', 'attribute' );
-
-		$search = $this->object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'product.code', 'CNC' ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$products = $this->object->searchItems( $search, $domains );
-
-		if( ( $product = reset( $products ) ) === false ) {
-			throw new \Exception( sprintf( 'Found no Productitem with text "%1$s"', 'Cafe Noire Cappuccino' ) );
-		}
-
-		$this->assertEquals( $product, $this->object->getItem( $product->getId(), $domains ) );
-		$this->assertEquals( 6, count( $product->getRefItems( 'text' ) ) );
-	}
+		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertEquals( '2000-01-01 00:00:00', reset( $listItems )->getDateStart() );
 
 
-	public function testGetResourceType()
-	{
-		$result = $this->object->getResourceType();
+		// update existing list item
+		$map = array( $attrId => array( 'product.lists.config' => array( 'key' => 'value' ) ) );
+		$this->object->updateListItems( $item, $map, 'attribute', 'hidden' );
 
-		$this->assertContains( 'product', $result );
-		$this->assertContains( 'product/type', $result );
-		$this->assertContains( 'product/lists', $result );
-		$this->assertContains( 'product/lists/type', $result );
-		$this->assertContains( 'product/property', $result );
-		$this->assertContains( 'product/property/type', $result );
-		$this->assertContains( 'product/stock', $result );
-		$this->assertContains( 'product/stock/warehouse', $result );
-	}
+		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
+		$listItems = $item->getListItems( 'attribute', 'hidden' );
+
+		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertEquals( '2000-01-01 00:00:00', reset( $listItems )->getDateStart() );
+		$this->assertEquals( array( 'key' => 'value' ), reset( $listItems )->getConfig() );
 
 
-	public function testGetSearchAttributes()
-	{
-		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
-		}
-	}
+		// delete existing list item
+		$this->object->updateListItems( $item, array(), 'attribute', 'hidden' );
 
-
-	public function testCreateSearch()
-	{
-		$search = $this->object->createSearch();
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\SQL', $search );
+		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
+		$this->assertEquals( 0, count( $item->getListItems( 'attribute', 'hidden' ) ) );
 	}
 
 
