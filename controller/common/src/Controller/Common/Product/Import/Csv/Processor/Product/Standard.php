@@ -81,7 +81,6 @@ class Standard
 	{
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
-		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 		$separator = $context->getConfig()->get( 'controller/common/product/import/csv/separator', "\n" );
 
 		$this->cache->set( $product );
@@ -90,11 +89,9 @@ class Standard
 
 		try
 		{
-			$pos = 0;
-			$map = $this->getMappedChunk( $data );
-			$listItems = $this->getListItemPool( $product, $map );
+			$types = array();
 
-			foreach( $map as $list )
+			foreach( $this->getMappedChunk( $data ) as $list )
 			{
 				if( !isset( $list['product.code'] ) || $list['product.code'] === '' || isset( $list['product.lists.type'] )
 					&& $this->listTypes !== null && !in_array( $list['product.lists.type'], (array) $this->listTypes )
@@ -102,10 +99,11 @@ class Standard
 					continue;
 				}
 
-				$codes = explode( $separator, $list['product.code'] );
+				$listMap = array();
 				$type = ( isset( $list['product.lists.type'] ) ? $list['product.lists.type'] : 'default' );
+				$types[] = $type;
 
-				foreach( $codes as $code )
+				foreach( explode( $separator, $list['product.code'] ) as $code )
 				{
 					if( ( $prodid = $this->cache->get( $code ) ) === null )
 					{
@@ -113,19 +111,13 @@ class Standard
 						throw new \Aimeos\Controller\Jobs\Exception( sprintf( $msg, $code, $product->getCode() ) );
 					}
 
-					if( ( $listItem = array_shift( $listItems ) ) === null ) {
-						$listItem = $listManager->createItem();
-					}
-
-					$list['product.lists.typeid'] = $this->getTypeId( 'product/lists/type', 'product', $type );
-					$list['product.lists.parentid'] = $product->getId();
-					$list['product.lists.refid'] = $prodid;
-					$list['product.lists.domain'] = 'product';
-
-					$listItem->fromArray( $this->addListItemDefaults( $list, $pos++ ) );
-					$listManager->saveItem( $listItem );
+					$listMap[$prodid] = $list;
 				}
+
+				$manager->updateListItems( $product, $listMap, 'product', $type );
 			}
+
+			$this->deleteListItems( $product->getId(), $types );
 
 			$remaining = $this->getObject()->process( $product, $data );
 
@@ -142,37 +134,24 @@ class Standard
 
 
 	/**
-	 * Returns the pool of list items that can be reassigned
+	 * Deletes all list items whose types aren't in the given list
 	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item object
-	 * @param array $map List of associative arrays containing the chunked properties
-	 * @return array List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param string $prodId Unique product ID
+	 * @param array $types List of types that have been updated
 	 */
-	protected function getListItemPool( \Aimeos\MShop\Product\Item\Iface $product, array $map )
+	protected function deleteListItems( $prodId, array $types )
 	{
-		$pos = 0;
-		$delete = array();
-		$listItems = $product->getListItems( 'product', $this->listTypes );
+		$codes = array_diff( $this->listTypes, $types );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
 
-		foreach( $listItems as $listId => $listItem )
-		{
-			$refItem = $listItem->getRefItem();
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.lists.parentid', $prodId ),
+			$search->compare( '==', 'product.lists.domain', 'product' ),
+			$search->compare( '==', 'product.lists.type.code', $codes ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
 
-			if( isset( $map[$pos] ) && ( !isset( $map[$pos]['product.code'] )
-				|| ( $refItem !== null && $map[$pos]['product.code'] === $refItem->getCode() ) )
-			) {
-				$pos++;
-				continue;
-			}
-
-			$listItems[$listId] = null;
-			$delete[] = $listId;
-			$pos++;
-		}
-
-		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
-		$listManager->deleteItems( $delete );
-
-		return $listItems;
+		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 	}
 }

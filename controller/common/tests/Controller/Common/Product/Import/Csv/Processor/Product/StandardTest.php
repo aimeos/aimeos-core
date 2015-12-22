@@ -36,17 +36,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			1 => 'product.code',
 			2 => 'product.lists.type',
 			3 => 'product.code',
-			4 => 'product.lists.type',
-			5 => 'product.code',
 		);
 
 		$data = array(
 			0 => 'default',
 			1 => 'CNC',
-			2 => 'default',
+			2 => 'suggestion',
 			3 => 'CNE',
-			4 => 'suggestion',
-			5 => 'CNE',
 		);
 
 		$product = $this->create( 'job_csv_test' );
@@ -62,11 +58,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$listItems = $product->getListItems();
 		$expected = array(
 			array( 'default', 'CNC' ),
-			array( 'default', 'CNE' ),
 			array( 'suggestion', 'CNE' ),
 		);
 
-		$this->assertEquals( 3, count( $listItems ) );
+		$this->assertEquals( 2, count( $listItems ) );
 
 		foreach( $listItems as $listItem )
 		{
@@ -84,15 +79,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$mapping = array(
 			0 => 'product.lists.type',
 			1 => 'product.code',
-			2 => 'product.lists.type',
-			3 => 'product.code',
 		);
 
 		$data = array(
 			0 => 'default',
 			1 => "CNC\nCNE",
-			2 => 'suggestion',
-			3 => "CNE\nCNC",
 		);
 
 		$product = $this->create( 'job_csv_test' );
@@ -105,17 +96,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$pos = 0;
+		$codes = array( 'CNC', 'CNE' );
 		$listItems = $product->getListItems();
-		$codes = array( 'CNC', 'CNE', 'CNE', 'CNC' );
-		$types = array( 'default', 'default', 'suggestion', 'suggestion' );
 
-		$this->assertEquals( 4, count( $listItems ) );
+		$this->assertEquals( 2, count( $listItems ) );
 
 		foreach( $listItems as $listItem )
 		{
 			$this->assertEquals( 1, $listItem->getStatus() );
 			$this->assertEquals( 'product', $listItem->getDomain() );
-			$this->assertEquals( $types[$pos], $listItem->getType() );
+			$this->assertEquals( 'default', $listItem->getType() );
 			$this->assertEquals( $codes[$pos], $listItem->getRefItem()->getCode() );
 			$pos++;
 		}
@@ -188,9 +178,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->delete( $product );
 
 
-		$listItems = $product->getListItems();
-
-		$this->assertEquals( 0, count( $listItems ) );
+		$this->assertEquals( 0, count( $product->getListItems() ) );
 	}
 
 
