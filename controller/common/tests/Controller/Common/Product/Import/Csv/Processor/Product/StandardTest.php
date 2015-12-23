@@ -54,23 +54,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->delete( $product );
 
 
-		$pos = 0;
-		$listItems = $product->getListItems();
-		$expected = array(
-			array( 'default', 'CNC' ),
-			array( 'suggestion', 'CNE' ),
-		);
+		$listItems1 = $product->getListItems( 'product', 'default' );
+		$listItems2 = $product->getListItems( 'product', 'suggestion' );
 
-		$this->assertEquals( 2, count( $listItems ) );
+		$this->assertEquals( 1, count( $listItems1 ) );
+		$this->assertEquals( 1, count( $listItems2 ) );
 
-		foreach( $listItems as $listItem )
-		{
-			$this->assertEquals( 1, $listItem->getStatus() );
-			$this->assertEquals( 'product', $listItem->getDomain() );
-			$this->assertEquals( $expected[$pos][0], $listItem->getType() );
-			$this->assertEquals( $expected[$pos][1], $listItem->getRefItem()->getCode() );
-			$pos++;
-		}
+		$this->assertEquals( 1, reset( $listItems1 )->getStatus() );
+		$this->assertEquals( 1, reset( $listItems2 )->getStatus() );
+
+		$this->assertEquals( 'CNC', reset( $listItems1 )->getRefItem()->getCode() );
+		$this->assertEquals( 'CNE', reset( $listItems2 )->getRefItem()->getCode() );
 	}
 
 
