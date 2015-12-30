@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 18:10+0100\n"
+"POT-Creation-Date: 2015-12-16 23:24+0100\n"
 "PO-Revision-Date: 2015-07-09 22:03+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/aimeos/aimeos-core/language/sr/)\n"
@@ -41,7 +41,7 @@ msgid ">="
 msgstr "Posle  (incl.)"
 
 #: lib/ext.ux/AdvancedSearch.js:41 lib/ext.ux/AdvancedSearch.js:37
-#: lib/ext.ux/AdvancedSearch.js:37
+#: extjs/lib/ext.ux/AdvancedSearch.js:37
 msgid "Search"
 msgstr "traži"
 

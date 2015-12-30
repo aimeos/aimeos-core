@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 18:10+0100\n"
+"POT-Creation-Date: 2015-12-16 23:24+0100\n"
 "PO-Revision-Date: 2015-12-11 11:44+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
@@ -19,10 +19,12 @@ msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:28
 #: src/Controller/Jobs/Admin/Job/Standard.php:32
+#: src/Controller/Jobs/Admin/Job/Standard.php:32
 msgid "Admin interface jobs"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:39
+#: src/Controller/Jobs/Order/Service/Payment/Standard.php:43
 #: src/Controller/Jobs/Order/Service/Payment/Standard.php:43
 msgid ""
 "Authorized payments of orders will be captured after dispatching or after a "
@@ -31,31 +33,38 @@ msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:28
 #: src/Controller/Jobs/Order/Service/Async/Standard.php:32
+#: src/Controller/Jobs/Order/Service/Async/Standard.php:32
 msgid "Batch update of payment/delivery status"
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Cache/Default.php:28
+#: src/Controller/Jobs/Admin/Cache/Standard.php:32
 #: src/Controller/Jobs/Admin/Cache/Standard.php:32
 msgid "Cache cleanup"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Payment/Default.php:28
 #: src/Controller/Jobs/Order/Service/Payment/Standard.php:32
+#: src/Controller/Jobs/Order/Service/Payment/Standard.php:32
 msgid "Capture authorized payments"
 msgstr ""
 
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:28
+#: src/Controller/Jobs/Index/Optimize/Standard.php:32
 #: src/Controller/Jobs/Index/Optimize/Standard.php:32
 msgid "Catalog index optimization"
 msgstr ""
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:28
 #: src/Controller/Jobs/Index/Rebuild/Standard.php:32
+#: src/Controller/Jobs/Index/Rebuild/Standard.php:32
 msgid "Catalog index rebuild"
 msgstr ""
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:67
 #: src/Controller/Jobs/Common/Factory/Abstract.php:164
+#: src/Controller/Jobs/Common/Factory/Base.php:71
+#: src/Controller/Jobs/Common/Factory/Base.php:168
 #: src/Controller/Jobs/Common/Factory/Base.php:71
 #: src/Controller/Jobs/Common/Factory/Base.php:168
 #, php-format
@@ -68,26 +77,33 @@ msgstr ""
 #: src/Controller/Jobs/Common/Factory/Base.php:65
 #: src/Controller/Jobs/Common/Factory/Base.php:162
 #: src/Controller/Jobs/Admin/Job/Standard.php:86
+#: src/Controller/Jobs/Common/Factory/Base.php:65
+#: src/Controller/Jobs/Common/Factory/Base.php:162
+#: src/Controller/Jobs/Admin/Job/Standard.php:86
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr ""
 
 #: src/Controller/Jobs/Factory.php:58 src/Controller/Jobs/Factory.php:62
+#: src/Controller/Jobs/Factory.php:62
 #, php-format
 msgid "Class \"%1$s\" not found"
 msgstr ""
 
 #: src/Controller/Jobs/Factory.php:41 src/Controller/Jobs/Factory.php:45
+#: src/Controller/Jobs/Factory.php:45
 #, php-format
 msgid "Controller path is empty"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Export/Sitemap/Default.php:39
 #: src/Controller/Jobs/Product/Export/Sitemap/Standard.php:42
+#: src/Controller/Jobs/Product/Export/Sitemap/Standard.php:42
 msgid "Creates a product site map for search engines"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Bought/Default.php:39
+#: src/Controller/Jobs/Product/Bought/Standard.php:43
 #: src/Controller/Jobs/Product/Bought/Standard.php:43
 msgid "Creates bought together product suggestions"
 msgstr ""
@@ -102,12 +118,14 @@ msgstr "Decreases the stock levels of products in completed orders"
 
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:39
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Standard.php:43
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Standard.php:43
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
 " again"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:39
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Standard.php:43
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Standard.php:43
 msgid "Deletes unpaid orders to keep the database clean"
 msgstr ""
@@ -123,10 +141,12 @@ msgstr "Deprecated: Use order/service/delivery"
 
 #: src/Controller/Jobs/Order/Service/Async/Default.php:39
 #: src/Controller/Jobs/Order/Service/Async/Standard.php:43
+#: src/Controller/Jobs/Order/Service/Async/Standard.php:43
 msgid "Executes payment or delivery service providers that uses batch updates"
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:39
+#: src/Controller/Jobs/Admin/Job/Standard.php:43
 #: src/Controller/Jobs/Admin/Job/Standard.php:43
 msgid ""
 "Executes the jobs created by the admin interface, e.g. the text exports"
@@ -134,10 +154,12 @@ msgstr ""
 
 #: src/Controller/Jobs/Product/Export/Default.php:39
 #: src/Controller/Jobs/Product/Export/Standard.php:42
+#: src/Controller/Jobs/Product/Export/Standard.php:42
 msgid "Exports all available products"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:39
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:42
 #: src/Controller/Jobs/Product/Import/Csv/Standard.php:42
 msgid "Imports new and updates existing products from CSV files"
 msgstr ""
@@ -181,33 +203,56 @@ msgstr ""
 #: src/Controller/Jobs/Admin/Log/Factory.php:75
 #: src/Controller/Jobs/Index/Optimize/Factory.php:75
 #: src/Controller/Jobs/Index/Rebuild/Factory.php:75
+#: src/Controller/Jobs/Order/Email/Delivery/Factory.php:75
+#: src/Controller/Jobs/Order/Email/Payment/Factory.php:75
+#: src/Controller/Jobs/Order/Service/Delivery/Factory.php:75
+#: src/Controller/Jobs/Order/Service/Async/Factory.php:75
+#: src/Controller/Jobs/Order/Service/Payment/Factory.php:75
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Factory.php:75
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Factory.php:75
+#: src/Controller/Jobs/Customer/Email/Watch/Factory.php:75
+#: src/Controller/Jobs/Product/Bought/Factory.php:75
+#: src/Controller/Jobs/Product/Import/Csv/Factory.php:74
+#: src/Controller/Jobs/Product/Export/Sitemap/Factory.php:74
+#: src/Controller/Jobs/Product/Export/Factory.php:74
+#: src/Controller/Jobs/Common/Factory/Base.php:59
+#: src/Controller/Jobs/Admin/Cache/Factory.php:75
+#: src/Controller/Jobs/Admin/Job/Factory.php:75
+#: src/Controller/Jobs/Admin/Log/Factory.php:75
+#: src/Controller/Jobs/Index/Optimize/Factory.php:75
+#: src/Controller/Jobs/Index/Rebuild/Factory.php:75
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:68
 #: src/Controller/Jobs/Admin/Job/Standard.php:72
+#: src/Controller/Jobs/Admin/Job/Standard.php:72
 #, php-format
 msgid "Invalid characters in job name \"%1$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Factory.php:49 src/Controller/Jobs/Factory.php:53
+#: src/Controller/Jobs/Factory.php:53
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Common/Factory/Abstract.php:88
 #: src/Controller/Jobs/Common/Factory/Base.php:92
+#: src/Controller/Jobs/Common/Factory/Base.php:92
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Factory.php:64 src/Controller/Jobs/Factory.php:68
+#: src/Controller/Jobs/Factory.php:68
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:74
+#: src/Controller/Jobs/Admin/Job/Standard.php:78
 #: src/Controller/Jobs/Admin/Job/Standard.php:78
 #, php-format
 msgid "Invalid job method \"%1$s\""
@@ -216,11 +261,13 @@ msgstr ""
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:364
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:365
 #: src/Controller/Jobs/Product/Import/Csv/Standard.php:368
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:368
 #, php-format
 msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
 msgstr ""
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:296
+#: src/Controller/Jobs/Customer/Email/Watch/Standard.php:299
 #: src/Controller/Jobs/Customer/Email/Watch/Standard.php:299
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
@@ -228,10 +275,12 @@ msgstr ""
 
 #: src/Controller/Jobs/Admin/Log/Default.php:28
 #: src/Controller/Jobs/Admin/Log/Standard.php:32
+#: src/Controller/Jobs/Admin/Log/Standard.php:32
 msgid "Log cleanup"
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:91
+#: src/Controller/Jobs/Admin/Job/Standard.php:96
 #: src/Controller/Jobs/Admin/Job/Standard.php:96
 #, php-format
 msgid "Method \"%1$s\" not available"
@@ -239,16 +288,19 @@ msgstr ""
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:391
 #: src/Controller/Jobs/Product/Import/Csv/Standard.php:394
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:394
 #, php-format
 msgid "No \"product.code\" column in CSV mapping found"
 msgstr ""
 
 #: src/Controller/Jobs/Abstract.php:120 src/Controller/Jobs/Base.php:124
+#: src/Controller/Jobs/Base.php:86
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr ""
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:324
+#: src/Controller/Jobs/Customer/Email/Watch/Standard.php:327
 #: src/Controller/Jobs/Customer/Email/Watch/Standard.php:327
 #, php-format
 msgid "No warehouse \"%1$s\" found"
@@ -256,60 +308,72 @@ msgstr ""
 
 #: src/Controller/Jobs/Catalog/Index/Optimize/Default.php:39
 #: src/Controller/Jobs/Index/Optimize/Standard.php:43
+#: src/Controller/Jobs/Index/Optimize/Standard.php:43
 msgid "Optimizes the catalog index for searching products"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:28
+#: src/Controller/Jobs/Order/Email/Delivery/Standard.php:32
 #: src/Controller/Jobs/Order/Email/Delivery/Standard.php:32
 msgid "Order delivery related e-mails"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:28
 #: src/Controller/Jobs/Order/Email/Payment/Standard.php:32
+#: src/Controller/Jobs/Order/Email/Payment/Standard.php:32
 msgid "Order payment related e-mails"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:28
+#: src/Controller/Jobs/Order/Service/Delivery/Standard.php:32
 #: src/Controller/Jobs/Order/Service/Delivery/Standard.php:32
 msgid "Process order delivery services"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Export/Default.php:28
 #: src/Controller/Jobs/Product/Export/Standard.php:31
+#: src/Controller/Jobs/Product/Export/Standard.php:31
 msgid "Product export"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:28
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:31
 #: src/Controller/Jobs/Product/Import/Csv/Standard.php:31
 msgid "Product import CSV"
 msgstr ""
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:33
 #: src/Controller/Jobs/Customer/Email/Watch/Standard.php:36
+#: src/Controller/Jobs/Customer/Email/Watch/Standard.php:36
 msgid "Product notification e-mails"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Export/Sitemap/Default.php:28
+#: src/Controller/Jobs/Product/Export/Sitemap/Standard.php:31
 #: src/Controller/Jobs/Product/Export/Sitemap/Standard.php:31
 msgid "Product site map"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Bought/Default.php:28
 #: src/Controller/Jobs/Product/Bought/Standard.php:32
+#: src/Controller/Jobs/Product/Bought/Standard.php:32
 msgid "Products bought together"
 msgstr ""
 
 #: src/Controller/Jobs/Catalog/Index/Rebuild/Default.php:39
+#: src/Controller/Jobs/Index/Rebuild/Standard.php:43
 #: src/Controller/Jobs/Index/Rebuild/Standard.php:43
 msgid "Rebuilds the catalog index for searching products"
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Cache/Default.php:39
 #: src/Controller/Jobs/Admin/Cache/Standard.php:43
+#: src/Controller/Jobs/Admin/Cache/Standard.php:43
 msgid "Removes the expired entries from the cache"
 msgstr ""
 
 #: src/Controller/Jobs/Admin/Log/Default.php:39
+#: src/Controller/Jobs/Admin/Log/Standard.php:43
 #: src/Controller/Jobs/Admin/Log/Standard.php:43
 msgid ""
 "Removes the old log entries from the database and archives them (optional)"
@@ -317,15 +381,18 @@ msgstr ""
 
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Default.php:28
 #: src/Controller/Jobs/Order/Cleanup/Unfinished/Standard.php:32
+#: src/Controller/Jobs/Order/Cleanup/Unfinished/Standard.php:32
 msgid "Removes unfinished orders"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Default.php:28
 #: src/Controller/Jobs/Order/Cleanup/Unpaid/Standard.php:32
+#: src/Controller/Jobs/Order/Cleanup/Unpaid/Standard.php:32
 msgid "Removes unpaid orders"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:308
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:311
 #: src/Controller/Jobs/Product/Import/Csv/Standard.php:311
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
@@ -333,26 +400,31 @@ msgstr ""
 
 #: src/Controller/Jobs/Customer/Email/Watch/Default.php:44
 #: src/Controller/Jobs/Customer/Email/Watch/Standard.php:47
+#: src/Controller/Jobs/Customer/Email/Watch/Standard.php:47
 msgid "Sends e-mails for watched products"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Email/Payment/Default.php:39
+#: src/Controller/Jobs/Order/Email/Payment/Standard.php:43
 #: src/Controller/Jobs/Order/Email/Payment/Standard.php:43
 msgid "Sends order confirmation or payment status update e-mails"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Email/Delivery/Default.php:39
 #: src/Controller/Jobs/Order/Email/Delivery/Standard.php:43
+#: src/Controller/Jobs/Order/Email/Delivery/Standard.php:43
 msgid "Sends order delivery status update e-mails"
 msgstr ""
 
 #: src/Controller/Jobs/Order/Service/Delivery/Default.php:39
+#: src/Controller/Jobs/Order/Service/Delivery/Standard.php:43
 #: src/Controller/Jobs/Order/Service/Delivery/Standard.php:43
 msgid "Sends paid orders to the ERP system or logistic partner"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:322
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:323
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:326
 #: src/Controller/Jobs/Product/Import/Csv/Standard.php:326
 #, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
@@ -365,11 +437,13 @@ msgstr ""
 
 #: src/Controller/Jobs/Admin/Job/Default.php:87
 #: src/Controller/Jobs/Admin/Job/Standard.php:92
+#: src/Controller/Jobs/Admin/Job/Standard.php:92
 #, php-format
 msgid "Unable to call factory method \"%1$s\""
 msgstr ""
 
 #: src/Controller/Jobs/Common/Decorator/Abstract.php:51
+#: src/Controller/Jobs/Common/Decorator/Base.php:55
 #: src/Controller/Jobs/Common/Decorator/Base.php:55
 #, php-format
 msgid "Unable to call method \"%1$s\""
@@ -378,6 +452,7 @@ msgstr ""
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:521
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:541
 #: src/Controller/Jobs/Product/Import/Csv/Standard.php:545
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:545
 #, php-format
 msgid "Unable to import product with code \"%1$s\": %2$s"
 msgstr ""
@@ -385,17 +460,20 @@ msgstr ""
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:369
 #: src/Controller/Jobs/Product/Import/Csv/Default.php:370
 #: src/Controller/Jobs/Product/Import/Csv/Standard.php:373
+#: src/Controller/Jobs/Product/Import/Csv/Standard.php:373
 #, php-format
 msgid "Unable to move imported file"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Export/Default.php:409
 #: src/Controller/Jobs/Product/Export/Standard.php:412
+#: src/Controller/Jobs/Product/Export/Standard.php:412
 #, php-format
 msgid "aimeos-products-%d.xml"
 msgstr ""
 
 #: src/Controller/Jobs/Product/Export/Sitemap/Default.php:403
+#: src/Controller/Jobs/Product/Export/Sitemap/Standard.php:406
 #: src/Controller/Jobs/Product/Export/Sitemap/Standard.php:406
 #, php-format
 msgid "aimeos-sitemap-%d.xml"

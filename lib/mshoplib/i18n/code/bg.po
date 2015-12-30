@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Bistra Kumanova <b.kumanova@creato.bg>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2015-12-20 17:15+0000\n"
+"Last-Translator: Bistra Kumanova <b.kumanova@creato.bg>\n"
+"Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "Платежният адрес липсва"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Адресът за доставка липсва"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "Платежният адрес не е позволен"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "Адресът за доставка не е позволен"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Липсва опция за плащане"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Липсва опция за доставка"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "Опция за плащане не е позволена"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "Опция за доставка е позволена"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "Съжаляваме, поне един от продуктите не съществува повече. Моля, премахнете го от кошницата си, за да продължите"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "Съжаляваме, поне един от продуктите е недостъпен. Моля, премахнете го от кошницата си, за да продължите"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "Съжаляваме, поне един от продуктите не е наличен. Моля, премахнете го от кошницата си, за да продължите"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "Цената на поне един продукт беше променена и обновена автоматично"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "Съжаляваме, поне един от продуктите е изчерпан Моля, премахнете го от кошницата си, за да продължите"

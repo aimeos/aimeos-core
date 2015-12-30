@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Daniel Vega <danielvega131990@gmail.com>, 2015
 # nsendetzky, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 18:10+0100\n"
-"PO-Revision-Date: 2015-12-11 11:43+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2015-12-16 23:24+0100\n"
+"PO-Revision-Date: 2015-12-29 15:04+0000\n"
+"Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,6 +23,8 @@ msgstr ""
 #: layouts/common/summary/detail-body-default.html:296
 #: templates/basket/mini/main-body-default.php:102
 #: templates/common/summary/detail-body-default.php:296
+#: html/templates/basket/mini/main-body-default.php:102
+#: html/templates/common/summary/detail-body-default.php:296
 #, php-format
 msgid "%1$d article"
 msgid_plural "%1$d articles"
@@ -76,6 +79,22 @@ msgstr[1] "%1$d artículos"
 #. language (%13$s),
 #. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
 #. (%17$s), vatid (%18$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. vatid (%13$s), language (%14$s),
+#. / e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site
+#. (%18$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
+#. first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
+#. number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
+#. language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
+#. (%17$s), vatid (%18$s)
 #: layouts/checkout/standard/address-billing-body-default.html:76
 #: layouts/checkout/standard/address-delivery-body-default.html:85
 #: layouts/common/summary/address-body-default.html:38
@@ -88,6 +107,12 @@ msgstr[1] "%1$d artículos"
 #: templates/common/summary/address-body-default.php:94
 #: templates/email/common/text-summary-address-body-default.php:28
 #: templates/email/common/text-summary-address-body-default.php:78
+#: html/templates/checkout/standard/address-billing-body-default.php:76
+#: html/templates/checkout/standard/address-delivery-body-default.php:85
+#: html/templates/common/summary/address-body-default.php:38
+#: html/templates/common/summary/address-body-default.php:94
+#: html/templates/email/common/text-summary-address-body-default.php:28
+#: html/templates/email/common/text-summary-address-body-default.php:78
 #, php-format
 msgid ""
 "%1$s\n"
@@ -133,6 +158,14 @@ msgstr ""
 #: templates/common/summary/detail-body-default.php:88
 #: templates/email/watch/text-detail-body-default.php:21
 #: templates/email/common/text-summary-detail-body-default.php:55
+#: html/templates/checkout/standard/delivery-body-default.php:37
+#: html/templates/checkout/standard/payment-body-default.php:37
+#: html/templates/basket/mini/main-body-default.php:25
+#: html/templates/basket/mini/product-body-default.php:27
+#: html/templates/catalog/lists/items-body-default.php:21
+#: html/templates/common/summary/detail-body-default.php:88
+#: html/templates/email/watch/text-detail-body-default.php:21
+#: html/templates/email/common/text-summary-detail-body-default.php:55
 #, php-format
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
@@ -143,6 +176,8 @@ msgstr "%1$s %2$s"
 #: src/MW/View/Helper/Price/Default.php:83
 #: templates/common/partials/price-default.php:22
 #: templates/email/watch/text-detail-body-default.php:27
+#: html/templates/common/partials/price-default.php:22
+#: html/templates/email/watch/text-detail-body-default.php:27
 #, php-format
 msgid "%1$s %2$s off"
 msgstr "%1$s %2$s menos"
@@ -153,6 +188,7 @@ msgstr "%1$s %2$s menos"
 #. value (%2$s) and currency (%3$s)
 #: layouts/catalog/detail/basket-attribute-body-default.html:60
 #: templates/common/partials/attribute-default.php:59
+#: html/templates/common/partials/attribute-default.php:59
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
 msgstr "%1$s ( %4$s%2$s%3$s )"
@@ -161,6 +197,8 @@ msgstr "%1$s ( %4$s%2$s%3$s )"
 #: layouts/account/history/list-body-default.html:98
 #: templates/account/history/list-body-default.php:82
 #: templates/account/history/list-body-default.php:98
+#: html/templates/account/history/list-body-default.php:82
+#: html/templates/account/history/list-body-default.php:98
 #, php-format
 msgid "%1$s at %2$s"
 msgstr "%1$s en %2$s"
@@ -177,6 +215,7 @@ msgstr "%1$s en %2$s"
 #: layouts/catalog/list/items-body-default.html:18
 #: layouts/catalog/list/promo-body-default.html:19
 #: templates/catalog/lists/items-body-default.php:23
+#: html/templates/catalog/lists/items-body-default.php:23
 #, php-format
 msgid "%1$s%%"
 msgstr "%1$s%%"
@@ -189,12 +228,15 @@ msgstr "%1$s%%"
 #: layouts/checkout/standard/delivery-body-default.html:50
 #: templates/checkout/standard/delivery-body-default.php:50
 #: templates/checkout/standard/payment-body-default.php:50
+#: html/templates/checkout/standard/delivery-body-default.php:50
+#: html/templates/checkout/standard/payment-body-default.php:50
 #, php-format
 msgid "%1$s%3$s + %2$s%3$s"
 msgstr "%1$s%3$s + %2$s%3$s"
 
 #: layouts/basket/standard/coupon-body-default.html:30
 #: templates/basket/standard/coupon-body-default.php:30
+#: html/templates/basket/standard/coupon-body-default.php:30
 msgid "+"
 msgstr ""
 
@@ -207,12 +249,15 @@ msgstr ""
 #: src/MW/View/Helper/Price/Default.php:81
 #: templates/common/partials/price-default.php:20
 #: templates/email/watch/text-detail-body-default.php:24
+#: html/templates/common/partials/price-default.php:20
+#: html/templates/email/watch/text-detail-body-default.php:24
 #, php-format
 msgid "+ %1$s %2$s/item"
 msgstr "+ %1$s %2$s/unidad"
 
 #: layouts/email/common/text-summary-detail-body-default.html:95
 #: templates/email/common/text-summary-detail-body-default.php:95
+#: html/templates/email/common/text-summary-detail-body-default.php:95
 msgid "+ Payment costs"
 msgstr "+ Comisiones de pago"
 
@@ -220,6 +265,8 @@ msgstr "+ Comisiones de pago"
 #: layouts/email/common/text-summary-detail-body-default.html:103
 #: templates/email/common/text-summary-detail-body-default.php:93
 #: templates/email/common/text-summary-detail-body-default.php:103
+#: html/templates/email/common/text-summary-detail-body-default.php:93
+#: html/templates/email/common/text-summary-detail-body-default.php:103
 msgid "+ Shipping"
 msgstr "+ Envío"
 
@@ -231,6 +278,10 @@ msgstr "+ Envío"
 #: templates/common/partials/address-eu.php:131
 #: templates/common/partials/address-default.php:127
 #: templates/common/partials/address-default.php:131
+#: html/templates/common/partials/address-eu.php:127
+#: html/templates/common/partials/address-eu.php:131
+#: html/templates/common/partials/address-default.php:127
+#: html/templates/common/partials/address-default.php:131
 msgid "+1 123 456 7890"
 msgstr ""
 
@@ -240,6 +291,8 @@ msgstr ""
 #: src/MW/View/Helper/Price/Default.php:85
 #: templates/common/partials/price-default.php:24
 #: templates/email/watch/text-detail-body-default.php:30
+#: html/templates/common/partials/price-default.php:24
+#: html/templates/email/watch/text-detail-body-default.php:30
 #, php-format
 msgid "-%1$s%%"
 msgstr "-%1$s%%"
@@ -248,12 +301,16 @@ msgstr "-%1$s%%"
 #: layouts/email/account/html-detail-body-default.html:18
 #: templates/email/account/text-detail-body-default.php:16
 #: templates/email/account/html-detail-body-default.php:18
+#: html/templates/email/account/text-detail-body-default.php:16
+#: html/templates/email/account/html-detail-body-default.php:18
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 #: layouts/catalog/detail/basket-body-default.html:34
 #: templates/catalog/detail/basket-body-default.php:34
 #: templates/catalog/lists/items-body-default.php:143
+#: html/templates/catalog/detail/basket-body-default.php:34
+#: html/templates/catalog/lists/items-body-default.php:143
 msgid "Add to basket"
 msgstr "Añadir a la cesta"
 
@@ -265,6 +322,10 @@ msgstr "Añadir a la cesta"
 #: templates/common/partials/address-eu.php:69
 #: templates/common/partials/address-default.php:68
 #: templates/common/partials/address-default.php:69
+#: html/templates/common/partials/address-eu.php:68
+#: html/templates/common/partials/address-eu.php:69
+#: html/templates/common/partials/address-default.php:68
+#: html/templates/common/partials/address-default.php:69
 msgid "Additional"
 msgstr "Adicional"
 
@@ -276,6 +337,10 @@ msgstr "Adicional"
 #: templates/common/partials/address-eu.php:73
 #: templates/common/partials/address-default.php:72
 #: templates/common/partials/address-default.php:73
+#: html/templates/common/partials/address-eu.php:72
+#: html/templates/common/partials/address-eu.php:73
+#: html/templates/common/partials/address-default.php:72
+#: html/templates/common/partials/address-default.php:73
 msgid "Additional 2"
 msgstr "Adicional 2"
 
@@ -283,12 +348,15 @@ msgstr "Adicional 2"
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:325
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:275
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:329
+#: html/src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:275
+#: html/src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:329
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
 msgstr "No se ha encontrado la dirección con ID \"%1$s\""
 
 #: layouts/common/summary/address-body-default.html:19
 #: templates/common/summary/address-body-default.php:19
+#: html/templates/common/summary/address-body-default.php:19
 msgid "Addresses"
 msgstr "Direcciones"
 
@@ -296,6 +364,8 @@ msgstr "Direcciones"
 #: layouts/email/common/text-legal-body-default.html:10
 #: templates/email/common/html-legal-body-default.php:12
 #: templates/email/common/text-legal-body-default.php:10
+#: html/templates/email/common/html-legal-body-default.php:12
+#: html/templates/email/common/text-legal-body-default.php:10
 msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
@@ -306,39 +376,49 @@ msgstr "Todos los pedidos enviados están sujetos a nuestros términos y condici
 #: layouts/email/account/text-intro-body-default.html:8
 #: templates/email/account/html-intro-body-default.php:9
 #: templates/email/account/text-intro-body-default.php:8
+#: html/templates/email/account/html-intro-body-default.php:9
+#: html/templates/email/account/text-intro-body-default.php:8
 msgid "An account has been created for you."
-msgstr ""
+msgstr "Se ha creado una cuenta para ud."
 
 #: layouts/catalog/detail/basic-body-default.html:16
 #: templates/catalog/detail/basic-body-default.php:15
+#: html/templates/catalog/detail/basic-body-default.php:15
 msgid "Article no.:"
-msgstr "Nº de artículo:"
+msgstr "Nro. de artículo:"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:304
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:348
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:308
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:352
+#: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:308
+#: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:352
 #, php-format
 msgid "At least one billing address part is missing or invalid"
-msgstr ""
+msgstr "Al menos una parte de la dirección de factura no se encuentra o es incorrecta"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:314
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:347
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:318
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:351
+#: html/src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:318
+#: html/src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:351
 #, php-format
 msgid "At least one delivery address part is missing or invalid"
-msgstr ""
+msgstr "Al menos una parte de la dirección de entrega no se encuentra o es incorrecta"
 
 #: layouts/catalog/filter/attribute-body-default.html:54
 #: templates/catalog/filter/attribute-body-default.php:54
+#: html/templates/catalog/filter/attribute-body-default.php:54
 msgid "Attributes"
-msgstr ""
+msgstr "Atributos"
 
 #: layouts/checkout/standard/summary-body-default.html:17
 #: layouts/basket/standard/body-default.html:42
 #: templates/checkout/standard/summary-body-default.php:17
 #: templates/basket/standard/body-default.php:42
+#: html/templates/checkout/standard/summary-body-default.php:17
+#: html/templates/basket/standard/body-default.php:42
 msgid "Back"
 msgstr "Volver"
 
@@ -348,6 +428,9 @@ msgstr "Volver"
 #: templates/checkout/standard/body-default.php:27
 #: templates/basket/standard/body-default.php:36
 #: templates/basket/mini/body-default.php:20
+#: html/templates/checkout/standard/body-default.php:27
+#: html/templates/basket/standard/body-default.php:36
+#: html/templates/basket/mini/body-default.php:20
 msgid "Basket"
 msgstr "Cesta"
 
@@ -357,35 +440,43 @@ msgstr "Cesta"
 #: templates/checkout/standard/address-billing-body-default.php:61
 #: templates/common/summary/address-body-default.php:22
 #: templates/email/common/text-summary-address-body-default.php:17
+#: html/templates/checkout/standard/address-billing-body-default.php:61
+#: html/templates/common/summary/address-body-default.php:22
+#: html/templates/email/common/text-summary-address-body-default.php:17
 msgid "Billing address"
 msgstr "Dirección de facturación"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:625
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:629
+#: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:629
 #, php-format
 msgid "Billing address part \"%1$s\" is invalid"
-msgstr ""
+msgstr "La parte \"%1$s\" de la dirección de factura no es válida"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:650
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:654
+#: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:654
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
 msgstr "Falta la parte \"%1$s\" de la dirección de facturación"
 
 #: layouts/catalog/detail/bundle-body-default.html:24
 #: templates/catalog/detail/bundle-body-default.php:19
+#: html/templates/catalog/detail/bundle-body-default.php:19
 msgid "Bundled products"
-msgstr ""
+msgstr "Productos empaquetados"
 
 #: layouts/checkout/standard/summary-body-default.html:18
 #: templates/checkout/standard/summary-body-default.php:18
+#: html/templates/checkout/standard/summary-body-default.php:18
 msgid "Buy now"
 msgstr "Comprar ahora"
 
 #: layouts/catalog/filter/tree-body-default.html:50
 #: templates/catalog/filter/tree-body-default.php:50
+#: html/templates/catalog/filter/tree-body-default.php:50
 msgid "Categories"
-msgstr ""
+msgstr "Categorías"
 
 #: layouts/common/summary/service-body-default.html:18
 #: layouts/common/summary/service-body-default.html:52
@@ -399,6 +490,12 @@ msgstr ""
 #: templates/common/summary/address-body-default.php:24
 #: templates/common/summary/address-body-default.php:80
 #: templates/common/summary/coupon-body-default.php:20
+#: html/templates/common/summary/detail-body-default.php:99
+#: html/templates/common/summary/service-body-default.php:18
+#: html/templates/common/summary/service-body-default.php:52
+#: html/templates/common/summary/address-body-default.php:24
+#: html/templates/common/summary/address-body-default.php:80
+#: html/templates/common/summary/coupon-body-default.php:20
 msgid "Change"
 msgstr "Cambio"
 
@@ -408,16 +505,21 @@ msgstr "Cambio"
 #: templates/checkout/confirm/retry-body-default.php:22
 #: templates/checkout/standard/process-body-default.php:111
 #: templates/checkout/standard/process-body-default.php:114
+#: html/templates/checkout/confirm/retry-body-default.php:22
+#: html/templates/checkout/standard/process-body-default.php:111
+#: html/templates/checkout/standard/process-body-default.php:114
 msgid "Change payment"
 msgstr "Cambiar pago"
 
 #: layouts/catalog/detail/additional-attribute-body-default.html:15
 #: templates/catalog/detail/additional-attribute-body-default.php:15
+#: html/templates/catalog/detail/additional-attribute-body-default.php:15
 msgid "Characteristics"
 msgstr "Características"
 
 #: layouts/basket/standard/body-default.html:46
 #: templates/basket/standard/body-default.php:46
+#: html/templates/basket/standard/body-default.php:46
 msgid "Checkout"
 msgstr "Pagar"
 
@@ -429,12 +531,18 @@ msgstr "Pagar"
 #: templates/common/partials/address-eu.php:81
 #: templates/common/partials/address-default.php:76
 #: templates/common/partials/address-default.php:77
+#: html/templates/common/partials/address-eu.php:80
+#: html/templates/common/partials/address-eu.php:81
+#: html/templates/common/partials/address-default.php:76
+#: html/templates/common/partials/address-default.php:77
 msgid "City"
 msgstr "Ciudad"
 
 #: src/Client/Html/Common/Factory/Abstract.php:68
 #: src/Client/Html/Abstract.php:166 src/Client/Html/Common/Factory/Base.php:72
 #: src/Client/Html/Base.php:170
+#: html/src/Client/Html/Common/Factory/Base.php:72
+#: html/src/Client/Html/Base.php:170
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
@@ -442,6 +550,8 @@ msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 #: src/Client/Html/Common/Factory/Abstract.php:165
 #: src/Client/Html/Abstract.php:397
 #: src/Client/Html/Common/Factory/Base.php:169 src/Client/Html/Base.php:377
+#: html/src/Client/Html/Common/Factory/Base.php:169
+#: html/src/Client/Html/Base.php:377
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
@@ -450,6 +560,8 @@ msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 #: src/Client/Html/Abstract.php:391 src/Client/Html/Factory.php:51
 #: src/Client/Html/Common/Factory/Base.php:163 src/Client/Html/Factory.php:54
 #: src/Client/Html/Base.php:371
+#: html/src/Client/Html/Common/Factory/Base.php:163
+#: html/src/Client/Html/Factory.php:54 html/src/Client/Html/Base.php:371
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "La clase \"%1$s\" no está disponible"
@@ -457,22 +569,27 @@ msgstr "La clase \"%1$s\" no está disponible"
 #: src/Client/Html/Common/Factory/Abstract.php:62
 #: src/Client/Html/Abstract.php:160 src/Client/Html/Common/Factory/Base.php:66
 #: src/Client/Html/Base.php:164
+#: html/src/Client/Html/Common/Factory/Base.php:66
+#: html/src/Client/Html/Base.php:164
 #, php-format
 msgid "Class \"%1$s\" not found"
 msgstr "La clase \"%1$s\" no está disponible"
 
 #: src/Client/Html/Factory.php:32 src/Client/Html/Factory.php:35
+#: html/src/Client/Html/Factory.php:35
 #, php-format
 msgid "Client HTML type is empty"
-msgstr ""
+msgstr "El tipo de cliente html está vacío"
 
 #: src/Client/Html/Factory.php:38 src/Client/Html/Factory.php:41
+#: html/src/Client/Html/Factory.php:41
 #, php-format
 msgid "Client type \"%1$s\" must consist of two parts separated by \"/\""
-msgstr ""
+msgstr "El tipo de cliente \"%1$s\" debe constar de dos partes separadas por \"/\""
 
 #: layouts/account/history/order-body-default.html:21
 #: templates/account/history/order-body-default.php:21
+#: html/templates/account/history/order-body-default.php:21
 msgid "Close"
 msgstr "Cerrar"
 
@@ -484,11 +601,16 @@ msgstr "Cerrar"
 #: templates/common/partials/address-eu.php:61
 #: templates/common/partials/address-default.php:60
 #: templates/common/partials/address-default.php:61
+#: html/templates/common/partials/address-eu.php:60
+#: html/templates/common/partials/address-eu.php:61
+#: html/templates/common/partials/address-default.php:60
+#: html/templates/common/partials/address-default.php:61
 msgid "Company"
 msgstr "Empresa"
 
 #: layouts/checkout/confirm/body-default.html:19
 #: templates/checkout/confirm/body-default.php:19
+#: html/templates/checkout/confirm/body-default.php:19
 msgid "Confirmation"
 msgstr "Confirmación"
 
@@ -496,6 +618,8 @@ msgstr "Confirmación"
 #: layouts/common/partials/address-default.html:100
 #: templates/common/partials/address-eu.php:100
 #: templates/common/partials/address-default.php:100
+#: html/templates/common/partials/address-eu.php:100
+#: html/templates/common/partials/address-default.php:100
 msgid "Country"
 msgstr "País"
 
@@ -503,18 +627,23 @@ msgstr "País"
 #: layouts/common/summary/coupon-body-default.html:22
 #: templates/basket/standard/coupon-body-default.php:24
 #: templates/common/summary/coupon-body-default.php:22
+#: html/templates/basket/standard/coupon-body-default.php:24
+#: html/templates/common/summary/coupon-body-default.php:22
 msgid "Coupon codes"
-msgstr ""
+msgstr "Códigos de cupón"
 
 #: layouts/common/summary/coupon-body-default.html:17
 #: layouts/email/common/text-summary-coupon-body-default.html:11
 #: templates/common/summary/coupon-body-default.php:17
 #: templates/email/common/text-summary-coupon-body-default.php:11
+#: html/templates/common/summary/coupon-body-default.php:17
+#: html/templates/email/common/text-summary-coupon-body-default.php:11
 msgid "Coupons"
-msgstr ""
+msgstr "Cupones"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:323
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:327
+#: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:327
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
 msgstr "No se ha encontrado al cliente con  ID \"%1$s\""
@@ -527,6 +656,8 @@ msgstr "No se ha encontrado al cliente con  ID \"%1$s\""
 #: layouts/email/common/html-salutation-body-default.html:19
 #: templates/email/common/html-salutation-body-default.php:19
 #: templates/email/common/text-salutation-body-default.php:17
+#: html/templates/email/common/html-salutation-body-default.php:19
+#: html/templates/email/common/text-salutation-body-default.php:17
 #, php-format
 msgid "Dear %1$s %2$s %3$s"
 msgstr "Estimado/a %1$s %2$s %3$s"
@@ -535,6 +666,8 @@ msgstr "Estimado/a %1$s %2$s %3$s"
 #: layouts/email/common/html-salutation-body-default.html:30
 #: templates/email/common/html-salutation-body-default.php:30
 #: templates/email/common/text-salutation-body-default.php:28
+#: html/templates/email/common/html-salutation-body-default.php:30
+#: html/templates/email/common/text-salutation-body-default.php:28
 msgid "Dear Sir or Madam"
 msgstr "Estimado/a señor/a"
 
@@ -542,6 +675,8 @@ msgstr "Estimado/a señor/a"
 #: layouts/email/common/text-summary-service-body-default.html:14
 #: templates/account/history/list-body-default.php:111
 #: templates/email/common/text-summary-service-body-default.php:14
+#: html/templates/account/history/list-body-default.php:111
+#: html/templates/email/common/text-summary-service-body-default.php:14
 msgid "Delivery"
 msgstr "Entrega"
 
@@ -551,23 +686,29 @@ msgstr "Entrega"
 #: templates/checkout/standard/address-delivery-body-default.php:66
 #: templates/common/summary/address-body-default.php:78
 #: templates/email/common/text-summary-address-body-default.php:67
+#: html/templates/checkout/standard/address-delivery-body-default.php:66
+#: html/templates/common/summary/address-body-default.php:78
+#: html/templates/email/common/text-summary-address-body-default.php:67
 msgid "Delivery address"
 msgstr "Dirección de entrega"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:475
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:479
+#: html/src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:479
 #, php-format
 msgid "Delivery address part \"%1$s\" is invalid"
-msgstr ""
+msgstr "La parte \"%1$s\" de la dirección de entrega no es válida"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:501
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:505
+#: html/src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:505
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
 msgstr "Falta la parte \"%1$s\" de la dirección de entrega"
 
 #: layouts/catalog/detail/additional-text-body-default.html:19
 #: templates/catalog/detail/additional-text-body-default.php:19
+#: html/templates/catalog/detail/additional-text-body-default.php:19
 msgid "Description"
 msgstr "Descripción"
 
@@ -575,11 +716,14 @@ msgstr "Descripción"
 #: layouts/email/watch/html-detail-body-default.html:18
 #: templates/common/summary/detail-body-default.php:101
 #: templates/email/watch/html-detail-body-default.php:18
+#: html/templates/common/summary/detail-body-default.php:101
+#: html/templates/email/watch/html-detail-body-default.php:18
 msgid "Details"
 msgstr "Detalles"
 
 #: layouts/catalog/detail/additional-download-body-default.html:20
 #: templates/catalog/detail/additional-download-body-default.php:20
+#: html/templates/catalog/detail/additional-download-body-default.php:20
 msgid "Downloads"
 msgstr "Descargas"
 
@@ -587,36 +731,44 @@ msgstr "Descargas"
 #: layouts/common/partials/address-default.html:122
 #: templates/common/partials/address-eu.php:122
 #: templates/common/partials/address-default.php:122
+#: html/templates/common/partials/address-eu.php:122
+#: html/templates/common/partials/address-default.php:122
 msgid "E-Mail"
-msgstr "Email"
+msgstr "Correo electrónico"
 
 #. / E-mail HTML title
 #: layouts/email/common/html-body-default.html:12
 #: templates/email/common/html-body-default.php:12
+#: html/templates/email/common/html-body-default.php:12
 msgid "E-mail notification"
-msgstr ""
+msgstr "Notificación de correo electrónico"
 
 #: layouts/account/favorite/body-default.html:105
 #: templates/account/favorite/body-default.php:100
+#: html/templates/account/favorite/body-default.php:100
 msgid "Favorite products"
-msgstr ""
+msgstr "Productos favoritos"
 
 #: layouts/common/partials/address-eu.html:130
 #: layouts/common/partials/address-default.html:130
 #: templates/common/partials/address-eu.php:130
 #: templates/common/partials/address-default.php:130
+#: html/templates/common/partials/address-eu.php:130
+#: html/templates/common/partials/address-default.php:130
 msgid "Fax"
 msgstr "Fax"
 
 #: layouts/checkout/standard/address-body-default.html:13
 #: templates/checkout/standard/address-body-default.php:13
+#: html/templates/checkout/standard/address-body-default.php:13
 msgid "Fields with an * are mandatory"
-msgstr "Los campos con * con obligatorios "
+msgstr "Los campos con * son obligatorios "
 
 #: layouts/catalog/filter/body-default.html:98
 #: templates/catalog/filter/body-default.php:98
+#: html/templates/catalog/filter/body-default.php:98
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 #: layouts/common/partials/address-eu.html:52
 #: layouts/common/partials/address-eu.html:53
@@ -626,6 +778,10 @@ msgstr ""
 #: templates/common/partials/address-eu.php:53
 #: templates/common/partials/address-default.php:52
 #: templates/common/partials/address-default.php:53
+#: html/templates/common/partials/address-eu.php:52
+#: html/templates/common/partials/address-eu.php:53
+#: html/templates/common/partials/address-default.php:52
+#: html/templates/common/partials/address-default.php:53
 msgid "First name"
 msgstr "Nombre"
 
@@ -633,16 +789,20 @@ msgstr "Nombre"
 #: layouts/common/partials/address-default.html:119
 #: templates/common/partials/address-eu.php:119
 #: templates/common/partials/address-default.php:119
+#: html/templates/common/partials/address-eu.php:119
+#: html/templates/common/partials/address-default.php:119
 msgid "GB999999973"
 msgstr ""
 
 #: layouts/catalog/filter/search-body-default.html:107
 #: templates/catalog/filter/search-body-default.php:107
+#: html/templates/catalog/filter/search-body-default.php:107
 msgid "Go"
-msgstr "Adelante"
+msgstr "Buscar"
 
 #: layouts/checkout/standard/summary-option-terms-body-default.html:163
 #: templates/checkout/standard/summary-option-terms-body-default.php:163
+#: html/templates/checkout/standard/summary-option-terms-body-default.php:163
 #, php-format
 msgid ""
 "I accept the <a href=\"%1$s\" target=\"_blank\" title=\"terms and "
@@ -653,19 +813,23 @@ msgstr "Acepto los <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditio
 
 #: layouts/account/watch/body-default.html:163
 #: templates/account/watch/body-default.php:158
+#: html/templates/account/watch/body-default.php:158
 msgid "If back in stock"
-msgstr ""
+msgstr "Si está de nuevo existencia"
 
 #: layouts/account/watch/body-default.html:157
 #: templates/account/watch/body-default.php:152
+#: html/templates/account/watch/body-default.php:152
 msgid "If price decreases"
-msgstr ""
+msgstr "Si el precio disminuye"
 
 #. / E-mail outro
 #: layouts/email/common/text-outro-body-default.html:9
 #: layouts/email/common/html-outro-body-default.html:11
 #: templates/email/common/text-outro-body-default.php:9
 #: templates/email/common/html-outro-body-default.php:11
+#: html/templates/email/common/text-outro-body-default.php:9
+#: html/templates/email/common/html-outro-body-default.php:11
 msgid "If you have any questions, please reply to this e-mail"
 msgstr "Si tiene alguna pregunta, responda a este email"
 
@@ -679,6 +843,10 @@ msgstr "Si tiene alguna pregunta, responda a este email"
 #: templates/common/summary/detail-body-default.php:277
 #: templates/email/watch/text-detail-body-default.php:33
 #: templates/email/common/text-summary-detail-body-default.php:108
+#: html/templates/common/partials/price-default.php:26
+#: html/templates/common/summary/detail-body-default.php:277
+#: html/templates/email/watch/text-detail-body-default.php:33
+#: html/templates/email/common/text-summary-detail-body-default.php:108
 #, php-format
 msgid "Incl. %1$s%% VAT"
 msgstr "Incl. el %1$s%% de IVA"
@@ -689,6 +857,9 @@ msgstr "Incl. el %1$s%% de IVA"
 #: templates/common/summary/detail-body-default.php:287
 #: templates/email/common/text-summary-detail-body-default.php:99
 #: templates/email/common/text-summary-detail-body-default.php:111
+#: html/templates/common/summary/detail-body-default.php:287
+#: html/templates/email/common/text-summary-detail-body-default.php:99
+#: html/templates/email/common/text-summary-detail-body-default.php:111
 msgid "Included rebates"
 msgstr "Rebajas incluidas"
 
@@ -736,24 +907,49 @@ msgstr "Rebajas incluidas"
 #: src/Client/Html/Basket/Mini/Factory.php:76
 #: src/Client/Html/Basket/Standard/Factory.php:76
 #: src/Client/Html/Locale/Select/Factory.php:76
+#: html/src/Client/Html/Checkout/Update/Factory.php:76
+#: html/src/Client/Html/Checkout/Standard/Factory.php:76
+#: html/src/Client/Html/Checkout/Confirm/Factory.php:76
+#: html/src/Client/Html/Account/History/Factory.php:76
+#: html/src/Client/Html/Account/Watch/Factory.php:76
+#: html/src/Client/Html/Account/Favorite/Factory.php:76
+#: html/src/Client/Html/Catalog/Detail/Factory.php:76
+#: html/src/Client/Html/Catalog/Filter/Factory.php:76
+#: html/src/Client/Html/Catalog/Stage/Factory.php:76
+#: html/src/Client/Html/Catalog/Suggest/Factory.php:76
+#: html/src/Client/Html/Catalog/Session/Factory.php:76
+#: html/src/Client/Html/Catalog/Count/Factory.php:76
+#: html/src/Client/Html/Catalog/Stock/Factory.php:76
+#: html/src/Client/Html/Catalog/Lists/Factory.php:76
+#: html/src/Client/Html/Email/Account/Factory.php:75
+#: html/src/Client/Html/Email/Delivery/Factory.php:76
+#: html/src/Client/Html/Email/Watch/Factory.php:76
+#: html/src/Client/Html/Email/Payment/Factory.php:76
+#: html/src/Client/Html/Basket/Related/Factory.php:75
+#: html/src/Client/Html/Basket/Mini/Factory.php:76
+#: html/src/Client/Html/Basket/Standard/Factory.php:76
+#: html/src/Client/Html/Locale/Select/Factory.php:76
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Caracteres no válidos en el nombre de clase \"%1$s\""
 
 #: src/Client/Html/Abstract.php:356 src/Client/Html/Abstract.php:382
-#: src/Client/Html/Base.php:362
+#: src/Client/Html/Base.php:362 html/src/Client/Html/Base.php:362
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
 msgstr "Caracteres no válidos en el nombre del cliente \"%1$s\""
 
 #: src/Client/Html/Factory.php:44 src/Client/Html/Factory.php:47
+#: html/src/Client/Html/Factory.php:47
 #, php-format
 msgid "Invalid characters in client name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Caracteres no válidos en el nombre del cliente \"%1$s\" en \"%2$s\""
 
 #: src/Client/Html/Common/Factory/Abstract.php:56
 #: src/Client/Html/Abstract.php:154 src/Client/Html/Common/Factory/Base.php:60
 #: src/Client/Html/Base.php:158
+#: html/src/Client/Html/Common/Factory/Base.php:60
+#: html/src/Client/Html/Base.php:158
 #, php-format
 msgid "Invalid class name \"%1$s\""
 msgstr "Nombre de clase no válido \"%1$s\""
@@ -761,17 +957,21 @@ msgstr "Nombre de clase no válido \"%1$s\""
 #: src/Client/Html/Common/Factory/Abstract.php:89
 #: src/Client/Html/Abstract.php:185 src/Client/Html/Common/Factory/Base.php:93
 #: src/Client/Html/Base.php:189
+#: html/src/Client/Html/Common/Factory/Base.php:93
+#: html/src/Client/Html/Base.php:189
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr "Dominio no válido \"%1$s\""
 
 #: src/Client/Html/Factory.php:57 src/Client/Html/Factory.php:60
+#: html/src/Client/Html/Factory.php:60
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Constructor no válido \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Process/Default.php:292
 #: src/Client/Html/Checkout/Standard/Process/Standard.php:295
+#: html/src/Client/Html/Checkout/Standard/Process/Standard.php:295
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
 msgstr "Respuesta de proceso no válida desde el proveedor de servicios con código \"%1$s\""
@@ -780,6 +980,8 @@ msgstr "Respuesta de proceso no válida desde el proveedor de servicios con cód
 #: layouts/common/partials/address-default.html:110
 #: templates/common/partials/address-eu.php:110
 #: templates/common/partials/address-default.php:110
+#: html/templates/common/partials/address-eu.php:110
+#: html/templates/common/partials/address-default.php:110
 msgid "Language"
 msgstr "Idioma"
 
@@ -791,16 +993,22 @@ msgstr "Idioma"
 #: templates/common/partials/address-eu.php:57
 #: templates/common/partials/address-default.php:56
 #: templates/common/partials/address-default.php:57
+#: html/templates/common/partials/address-eu.php:56
+#: html/templates/common/partials/address-eu.php:57
+#: html/templates/common/partials/address-default.php:56
+#: html/templates/common/partials/address-default.php:57
 msgid "Last name"
 msgstr "Apellido"
 
 #: layouts/catalog/session/seen-body-default.html:29
 #: templates/catalog/session/seen-body-default.php:29
+#: html/templates/catalog/session/seen-body-default.php:29
 msgid "Last seen"
 msgstr "Última vista"
 
 #: layouts/catalog/list/pagination-body-default.html:27
 #: templates/catalog/lists/pagination-body-default.php:27
+#: html/templates/catalog/lists/pagination-body-default.php:27
 msgid "Name"
 msgstr "Nombre"
 
@@ -812,11 +1020,16 @@ msgstr "Nombre"
 #: templates/checkout/standard/address-body-default.php:17
 #: templates/checkout/standard/payment-body-default.php:98
 #: templates/catalog/stage/navigator-body-default.php:19
+#: html/templates/checkout/standard/delivery-body-default.php:97
+#: html/templates/checkout/standard/address-body-default.php:17
+#: html/templates/checkout/standard/payment-body-default.php:98
+#: html/templates/catalog/stage/navigator-body-default.php:19
 msgid "Next"
 msgstr "Siguiente"
 
 #: layouts/catalog/list/head-body-default.html:51
 #: templates/catalog/lists/head-body-default.php:51
+#: html/templates/catalog/lists/head-body-default.php:51
 #, php-format
 msgid ""
 "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
@@ -825,9 +1038,10 @@ msgstr "No se han encontrado artículos para <span class=\"searchstring\">\"%1$s
 
 #: src/Client/Html/Catalog/Detail/Default.php:585
 #: src/Client/Html/Catalog/Detail/Standard.php:590
+#: html/src/Client/Html/Catalog/Detail/Standard.php:590
 #, php-format
 msgid "No product with ID \"%1$s\" found"
-msgstr ""
+msgstr "No se ha encontrado ningún producto con la ID \"%1$s\""
 
 #: src/Client/Html/Checkout/Update/Default.php:365
 #: src/Client/Html/Checkout/Standard/Process/Default.php:384
@@ -835,52 +1049,64 @@ msgstr ""
 #: src/Client/Html/Checkout/Update/Standard.php:369
 #: src/Client/Html/Checkout/Standard/Process/Standard.php:387
 #: src/Client/Html/Checkout/Confirm/Standard.php:405
+#: html/src/Client/Html/Checkout/Update/Standard.php:369
+#: html/src/Client/Html/Checkout/Standard/Process/Standard.php:387
+#: html/src/Client/Html/Checkout/Confirm/Standard.php:405
 #, php-format
 msgid "No service for code \"%1$s\" found"
-msgstr ""
+msgstr "No se ha encontrado ningún servicio para el código \"%1$s\""
 
 #: src/Client/Html/Abstract.php:586 src/Client/Html/Base.php:553
+#: html/src/Client/Html/Base.php:516
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "No se ha encontrado ningún tipo de elemento para \"%1$s/%2$s\" en \"%3$s\""
 
 #: src/Client/Html/Abstract.php:49 src/Client/Html/Base.php:53
+#: html/src/Client/Html/Base.php:53
 #, php-format
 msgid "No view available"
 msgstr "No hay vistas disponibles"
 
 #: src/Client/Html/Basket/Standard/Coupon/Default.php:284
 #: src/Client/Html/Basket/Standard/Coupon/Standard.php:288
+#: html/src/Client/Html/Basket/Standard/Coupon/Standard.php:288
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
-msgstr ""
+msgstr "El número de códigos de cupones excede el límite"
 
 #: layouts/common/partials/price-default.html:35
 #: src/MW/View/Helper/Price/Default.php:45
 #: templates/common/partials/price-default.php:33
+#: html/templates/common/partials/price-default.php:33
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
 msgstr "El objeto no implementa \"%1$s\""
 
 #: layouts/account/watch/body-default.html:151
 #: templates/account/watch/body-default.php:146
+#: html/templates/account/watch/body-default.php:146
 msgid "One month"
-msgstr ""
+msgstr "Un mes"
 
 #: layouts/email/watch/html-intro-body-default.html:9
 #: layouts/email/watch/text-intro-body-default.html:8
 #: templates/email/watch/html-intro-body-default.php:9
 #: templates/email/watch/text-intro-body-default.php:8
+#: html/templates/email/watch/html-intro-body-default.php:9
+#: html/templates/email/watch/text-intro-body-default.php:8
 msgid "One or more products you are watching have been updated."
-msgstr ""
+msgstr "Uno o más de los productos observados por ud. han sido actualizados."
 
 #: layouts/account/watch/body-default.html:149
 #: templates/account/watch/body-default.php:144
+#: html/templates/account/watch/body-default.php:144
 msgid "One week"
-msgstr ""
+msgstr "Una semana"
 
 #: layouts/checkout/standard/summary-option-body-default.html:12
 #: templates/checkout/standard/summary-option-body-default.php:12
+#: html/templates/checkout/standard/summary-option-body-default.php:12
 msgid "Options"
 msgstr "Opciones"
 
@@ -888,11 +1114,14 @@ msgstr "Opciones"
 #: layouts/account/history/list-body-default.html:97
 #: templates/checkout/confirm/basic-body-default.php:16
 #: templates/account/history/list-body-default.php:97
+#: html/templates/checkout/confirm/basic-body-default.php:16
+#: html/templates/account/history/list-body-default.php:97
 msgid "Order ID"
 msgstr "ID de pedido"
 
 #: layouts/account/history/list-body-default.html:101
 #: templates/account/history/list-body-default.php:101
+#: html/templates/account/history/list-body-default.php:101
 msgid "Order channel"
 msgstr "Canal del pedido"
 
@@ -902,29 +1131,36 @@ msgstr "Canal del pedido"
 #: templates/checkout/confirm/order-body-default.php:12
 #: templates/account/history/order-body-default.php:18
 #: templates/email/common/text-summary-detail-body-default.php:59
+#: html/templates/checkout/confirm/order-body-default.php:12
+#: html/templates/account/history/order-body-default.php:18
+#: html/templates/email/common/text-summary-detail-body-default.php:59
 msgid "Order details"
 msgstr "Detalles del pedido"
 
 #: layouts/account/history/list-body-default.html:89
 #: templates/account/history/list-body-default.php:89
+#: html/templates/account/history/list-body-default.php:89
 msgid "Order history"
 msgstr "Historial de pedidos"
 
 #: layouts/checkout/confirm/basic-body-default.html:12
 #: templates/checkout/confirm/basic-body-default.php:12
+#: html/templates/checkout/confirm/basic-body-default.php:12
 msgid "Order status"
-msgstr ""
+msgstr "Estado de la orden"
 
 #: src/Client/Html/Account/History/Order/Default.php:336
 #: src/Client/Html/Account/History/Order/Standard.php:340
+#: html/src/Client/Html/Account/History/Order/Standard.php:340
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
 msgstr "No se ha encontrado el pedido con ID \"%1$s\""
 
 #: layouts/catalog/detail/bought-body-default.html:24
 #: templates/catalog/detail/bought-body-default.php:19
+#: html/templates/catalog/detail/bought-body-default.php:19
 msgid "Other customers also bought"
-msgstr ""
+msgstr "Otros clientes además compraron"
 
 #: layouts/account/watch/body-default.html:113
 #: layouts/account/watch/body-default.html:184
@@ -936,6 +1172,11 @@ msgstr ""
 #: templates/account/favorite/body-default.php:109
 #: templates/account/favorite/body-default.php:147
 #: templates/catalog/lists/pagination-body-default.php:54
+#: html/templates/account/watch/body-default.php:108
+#: html/templates/account/watch/body-default.php:179
+#: html/templates/account/favorite/body-default.php:109
+#: html/templates/account/favorite/body-default.php:147
+#: html/templates/catalog/lists/pagination-body-default.php:54
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr "Página %1$d de %2$d"
@@ -944,13 +1185,16 @@ msgstr "Página %1$d de %2$d"
 #: layouts/email/account/html-detail-body-default.html:22
 #: templates/email/account/text-detail-body-default.php:18
 #: templates/email/account/html-detail-body-default.php:22
+#: html/templates/email/account/text-detail-body-default.php:18
+#: html/templates/email/account/html-detail-body-default.php:22
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: layouts/checkout/standard/process-body-default.html:115
 #: templates/checkout/standard/process-body-default.php:115
+#: html/templates/checkout/standard/process-body-default.php:115
 msgid "Pay now"
-msgstr ""
+msgstr "Pagar ahora"
 
 #: layouts/checkout/standard/process-body-default.html:74
 #: layouts/account/history/list-body-default.html:106
@@ -958,58 +1202,72 @@ msgstr ""
 #: templates/checkout/standard/process-body-default.php:74
 #: templates/account/history/list-body-default.php:106
 #: templates/email/common/text-summary-service-body-default.php:39
+#: html/templates/checkout/standard/process-body-default.php:74
+#: html/templates/account/history/list-body-default.php:106
+#: html/templates/email/common/text-summary-service-body-default.php:39
 msgid "Payment"
 msgstr "Pago"
 
 #: layouts/common/summary/detail-body-default.html:260
 #: templates/common/summary/detail-body-default.php:260
+#: html/templates/common/summary/detail-body-default.php:260
 msgid "Payment costs"
 msgstr "Comisiones de pago"
 
 #: layouts/checkout/confirm/basic-body-default.html:20
 #: templates/checkout/confirm/basic-body-default.php:20
+#: html/templates/checkout/confirm/basic-body-default.php:20
 msgid "Payment status"
 msgstr "Estado del pago"
 
 #: layouts/catalog/session/pinned-body-default.html:111
 #: templates/catalog/session/pinned-body-default.php:106
+#: html/templates/catalog/session/pinned-body-default.php:106
 msgid "Pinned products"
-msgstr ""
+msgstr "Productos marcados"
 
 #: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Default.php:255
 #: src/Client/Html/Checkout/Standard/Summary/Option/Terms/Standard.php:259
+#: html/src/Client/Html/Checkout/Standard/Summary/Option/Terms/Standard.php:259
 msgid "Please accept the terms and conditions"
 msgstr "Por favor, acepte los términos y condiciones"
 
 #: layouts/checkout/standard/summary-body-default.html:13
 #: templates/checkout/standard/summary-body-default.php:13
+#: html/templates/checkout/standard/summary-body-default.php:13
 msgid "Please check your order"
 msgstr "Compruebe su pedido"
 
 #: layouts/checkout/standard/delivery-body-default.html:42
 #: templates/checkout/standard/delivery-body-default.php:42
+#: html/templates/checkout/standard/delivery-body-default.php:42
 msgid "Please choose your delivery method"
 msgstr "Por favor, elija el método de entrega"
 
 #: layouts/checkout/standard/payment-body-default.html:42
 #: templates/checkout/standard/payment-body-default.php:42
+#: html/templates/checkout/standard/payment-body-default.php:42
 msgid "Please choose your payment method"
 msgstr "Elija su método de pago"
 
 #: layouts/catalog/filter/search-body-default.html:12
 #: templates/catalog/filter/search-body-default.php:12
+#: html/templates/catalog/filter/search-body-default.php:12
 msgid "Please enter at least three characters"
 msgstr "Por favor, introduzca al menos tres caracteres"
 
 #: layouts/checkout/standard/process-body-default.html:78
 #: templates/checkout/standard/process-body-default.php:78
+#: html/templates/checkout/standard/process-body-default.php:78
 msgid "Please enter your payment details"
-msgstr ""
+msgstr "Por favor, introduzca los detalles de su pago"
 
 #: layouts/checkout/standard/process-body-default.html:91
 #: layouts/catalog/detail/basket-selection-body-default.html:85
 #: templates/checkout/standard/process-body-default.php:91
 #: templates/common/partials/selection-default.php:81
+#: html/templates/checkout/standard/process-body-default.php:91
+#: html/templates/common/partials/selection-default.php:81
 msgid "Please select"
 msgstr "Por favor, seleccione"
 
@@ -1021,6 +1279,10 @@ msgstr "Por favor, seleccione"
 #: templates/common/partials/address-eu.php:77
 #: templates/common/partials/address-default.php:95
 #: templates/common/partials/address-default.php:96
+#: html/templates/common/partials/address-eu.php:76
+#: html/templates/common/partials/address-eu.php:77
+#: html/templates/common/partials/address-default.php:95
+#: html/templates/common/partials/address-default.php:96
 msgid "Postal code"
 msgstr "Código postal"
 
@@ -1032,8 +1294,12 @@ msgstr "Código postal"
 #: templates/checkout/standard/address-body-default.php:16
 #: templates/checkout/standard/payment-body-default.php:97
 #: templates/catalog/stage/navigator-body-default.php:16
+#: html/templates/checkout/standard/delivery-body-default.php:96
+#: html/templates/checkout/standard/address-body-default.php:16
+#: html/templates/checkout/standard/payment-body-default.php:97
+#: html/templates/catalog/stage/navigator-body-default.php:16
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 #: layouts/basket/mini/product-body-default.html:38
 #: layouts/catalog/list/pagination-body-default.html:35
@@ -1043,59 +1309,74 @@ msgstr ""
 #: templates/catalog/lists/pagination-body-default.php:35
 #: templates/common/summary/detail-body-default.php:109
 #: templates/email/common/text-summary-detail-body-default.php:78
+#: html/templates/basket/mini/product-body-default.php:38
+#: html/templates/catalog/lists/pagination-body-default.php:35
+#: html/templates/common/summary/detail-body-default.php:109
+#: html/templates/email/common/text-summary-detail-body-default.php:78
 msgid "Price"
 msgstr "Precio"
 
 #: layouts/checkout/standard/process-body-default.html:117
 #: templates/checkout/standard/process-body-default.php:117
+#: html/templates/checkout/standard/process-body-default.php:117
 msgid "Proceed"
 msgstr "Siguiente"
 
 #: layouts/checkout/standard/process-body-default.html:76
 #: templates/checkout/standard/process-body-default.php:76
+#: html/templates/checkout/standard/process-body-default.php:76
 msgid "Processing the payment failed"
-msgstr ""
+msgstr "Procesamiento del pago fallido"
 
 #: layouts/basket/mini/product-body-default.html:36
 #: templates/basket/mini/product-body-default.php:36
+#: html/templates/basket/mini/product-body-default.php:36
 msgid "Product"
-msgstr ""
+msgstr "Producto"
 
 #: layouts/basket/related/bought-body-default.html:23
 #: templates/basket/related/bought-body-default.php:18
+#: html/templates/basket/related/bought-body-default.php:18
 msgid "Products you might be also interested in"
-msgstr ""
+msgstr "Productos en los que también puede estar interesado"
 
 #: layouts/catalog/detail/additional-property-body-default.html:14
 #: templates/catalog/detail/additional-property-body-default.php:14
+#: html/templates/catalog/detail/additional-property-body-default.php:14
 msgid "Properties"
-msgstr ""
+msgstr "Propiedades"
 
 #: layouts/basket/mini/product-body-default.html:37
 #: templates/basket/mini/product-body-default.php:37
+#: html/templates/basket/mini/product-body-default.php:37
 msgid "Qty"
-msgstr ""
+msgstr "Ctd"
 
 #: layouts/common/summary/detail-body-default.html:108
 #: layouts/email/common/text-summary-detail-body-default.html:76
 #: templates/common/summary/detail-body-default.php:108
 #: templates/email/common/text-summary-detail-body-default.php:76
+#: html/templates/common/summary/detail-body-default.php:108
+#: html/templates/email/common/text-summary-detail-body-default.php:76
 msgid "Quantity"
 msgstr "Cantidad"
 
 #: layouts/basket/related/body-default.html:18
 #: templates/basket/related/body-default.php:18
+#: html/templates/basket/related/body-default.php:18
 msgid "Related"
-msgstr ""
+msgstr "Relacionada"
 
 #: layouts/catalog/list/pagination-body-default.html:45
 #: templates/catalog/lists/pagination-body-default.php:45
+#: html/templates/catalog/lists/pagination-body-default.php:45
 msgid "Relevance"
 msgstr "Relevancia"
 
 #. / Product search hint with user provided search string (%1$s)
 #: layouts/catalog/list/header-default.html:31
 #: templates/catalog/lists/header-default.php:31
+#: html/templates/catalog/lists/header-default.php:31
 #, php-format
 msgid "Result for \"%1$s\""
 msgstr "Resultado para \"%1$s\""
@@ -1104,16 +1385,20 @@ msgstr "Resultado para \"%1$s\""
 #: layouts/common/partials/address-default.html:43
 #: templates/common/partials/address-eu.php:43
 #: templates/common/partials/address-default.php:43
+#: html/templates/common/partials/address-eu.php:43
+#: html/templates/common/partials/address-default.php:43
 msgid "Salutation"
 msgstr "Tratamiento"
 
 #: layouts/catalog/filter/search-body-default.html:105
 #: templates/catalog/filter/search-body-default.php:105
+#: html/templates/catalog/filter/search-body-default.php:105
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: layouts/catalog/list/head-body-default.html:48
 #: templates/catalog/lists/head-body-default.php:48
+#: html/templates/catalog/lists/head-body-default.php:48
 #, php-format
 msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d article)"
 msgid_plural ""
@@ -1126,23 +1411,29 @@ msgstr[1] "Resultado de búsqueda para <span class=\"searchstring\">\"%1$s\"</sp
 #: layouts/common/partials/address-default.html:102
 #: templates/common/partials/address-eu.php:102
 #: templates/common/partials/address-default.php:102
+#: html/templates/common/partials/address-eu.php:102
+#: html/templates/common/partials/address-default.php:102
 msgid "Select country"
 msgstr "Seleccionar país"
 
 #: layouts/locale/select/currency-body-default.html:40
 #: templates/locale/select/currency-body-default.php:40
+#: html/templates/locale/select/currency-body-default.php:40
 msgid "Select currency"
-msgstr ""
+msgstr "Seleccionar divisa"
 
 #: layouts/locale/select/language-body-default.html:37
 #: templates/locale/select/language-body-default.php:37
+#: html/templates/locale/select/language-body-default.php:37
 msgid "Select language"
-msgstr ""
+msgstr "Seleccionar idioma"
 
 #: layouts/common/partials/address-eu.html:45
 #: layouts/common/partials/address-default.html:45
 #: templates/common/partials/address-eu.php:45
 #: templates/common/partials/address-default.php:45
+#: html/templates/common/partials/address-eu.php:45
+#: html/templates/common/partials/address-default.php:45
 msgid "Select salutation"
 msgstr "Seleccionar tratamientoT"
 
@@ -1150,16 +1441,20 @@ msgstr "Seleccionar tratamientoT"
 #: layouts/common/partials/address-default.html:83
 #: templates/common/partials/address-eu.php:87
 #: templates/common/partials/address-default.php:83
+#: html/templates/common/partials/address-eu.php:87
+#: html/templates/common/partials/address-default.php:83
 msgid "Select state"
-msgstr ""
+msgstr "Seleccionar estado"
 
 #: layouts/email/common/text-summary-detail-body-default.html:86
 #: templates/email/common/text-summary-detail-body-default.php:86
+#: html/templates/email/common/text-summary-detail-body-default.php:86
 msgid "Service fees"
 msgstr "Tarifas del servicio"
 
 #: layouts/common/summary/service-body-default.html:13
 #: templates/common/summary/service-body-default.php:13
+#: html/templates/common/summary/service-body-default.php:13
 msgid "Services"
 msgstr "Servicios"
 
@@ -1167,21 +1462,26 @@ msgstr "Servicios"
 #: layouts/common/summary/detail-body-default.html:252
 #: templates/basket/mini/product-body-default.php:52
 #: templates/common/summary/detail-body-default.php:252
+#: html/templates/basket/mini/product-body-default.php:52
+#: html/templates/common/summary/detail-body-default.php:252
 msgid "Shipping"
 msgstr "Envío"
 
 #: layouts/catalog/filter/attribute-body-default.html:104
 #: templates/catalog/filter/attribute-body-default.php:104
+#: html/templates/catalog/filter/attribute-body-default.php:104
 msgid "Show"
 msgstr "Mostrar"
 
 #: layouts/catalog/list/quote-body-default.html:19
 #: templates/catalog/lists/quote-body-default.php:19
+#: html/templates/catalog/lists/quote-body-default.php:19
 msgid "Show all quotes"
 msgstr "Mostrar todos los presupuestos"
 
 #: layouts/catalog/list/pagination-body-default.html:43
 #: templates/catalog/lists/pagination-body-default.php:43
+#: html/templates/catalog/lists/pagination-body-default.php:43
 msgid "Sort by:"
 msgstr "Ordenar por:"
 
@@ -1189,6 +1489,8 @@ msgstr "Ordenar por:"
 #: layouts/common/partials/address-default.html:81
 #: templates/common/partials/address-eu.php:85
 #: templates/common/partials/address-default.php:81
+#: html/templates/common/partials/address-eu.php:85
+#: html/templates/common/partials/address-default.php:81
 msgid "State"
 msgstr "Estado"
 
@@ -1198,6 +1500,7 @@ msgstr "Estado"
 #. and stock level string (%2$s)
 #: layouts/catalog/stock/body-default.html:45
 #: templates/catalog/stock/body-default.php:45
+#: html/templates/catalog/stock/body-default.php:45
 #, php-format
 msgid "Stock: %1$s, %2$s"
 msgstr "Stock: %1$s, %2$s"
@@ -1208,6 +1511,7 @@ msgstr "Stock: %1$s, %2$s"
 #. stock level string (%2$s) and back in stock date (%3$s)
 #: layouts/catalog/stock/body-default.html:47
 #: templates/catalog/stock/body-default.php:47
+#: html/templates/catalog/stock/body-default.php:47
 #, php-format
 msgid "Stock: %1$s, %2$s, back on %3$s"
 msgstr "Stock: %1$s, %2$s, de vuelta el %3$s"
@@ -1220,6 +1524,10 @@ msgstr "Stock: %1$s, %2$s, de vuelta el %3$s"
 #: templates/common/partials/address-eu.php:65
 #: templates/common/partials/address-default.php:64
 #: templates/common/partials/address-default.php:65
+#: html/templates/common/partials/address-eu.php:64
+#: html/templates/common/partials/address-eu.php:65
+#: html/templates/common/partials/address-default.php:64
+#: html/templates/common/partials/address-default.php:65
 msgid "Street"
 msgstr "Calle"
 
@@ -1229,11 +1537,15 @@ msgstr "Calle"
 #: templates/common/summary/detail-body-default.php:245
 #: templates/email/common/text-summary-detail-body-default.php:91
 #: templates/email/common/text-summary-detail-body-default.php:101
+#: html/templates/common/summary/detail-body-default.php:245
+#: html/templates/email/common/text-summary-detail-body-default.php:91
+#: html/templates/email/common/text-summary-detail-body-default.php:101
 msgid "Sub-total"
 msgstr "Subtotal"
 
 #: layouts/catalog/detail/suggest-body-default.html:25
 #: templates/catalog/detail/suggest-body-default.php:20
+#: html/templates/catalog/detail/suggest-body-default.php:20
 msgid "Suggested products"
 msgstr "Productos recomendados"
 
@@ -1241,6 +1553,8 @@ msgstr "Productos recomendados"
 #: layouts/email/common/text-summary-detail-body-default.html:80
 #: templates/common/summary/detail-body-default.php:110
 #: templates/email/common/text-summary-detail-body-default.php:80
+#: html/templates/common/summary/detail-body-default.php:110
+#: html/templates/email/common/text-summary-detail-body-default.php:80
 msgid "Sum"
 msgstr "Suma"
 
@@ -1248,6 +1562,8 @@ msgstr "Suma"
 #: layouts/common/partials/address-default.html:126
 #: templates/common/partials/address-eu.php:126
 #: templates/common/partials/address-default.php:126
+#: html/templates/common/partials/address-eu.php:126
+#: html/templates/common/partials/address-default.php:126
 msgid "Telephone"
 msgstr "Teléfono"
 
@@ -1258,6 +1574,7 @@ msgstr "Plantilla \"%1$s\" no disponible"
 
 #: layouts/checkout/standard/summary-option-terms-body-default.html:159
 #: templates/checkout/standard/summary-option-terms-body-default.php:159
+#: html/templates/checkout/standard/summary-option-terms-body-default.php:159
 msgid "Terms and conditions"
 msgstr "Términos y condiciones"
 
@@ -1269,6 +1586,8 @@ msgstr "Términos y condiciones"
 #: layouts/email/payment/text-intro-body-default.html:11
 #: templates/email/payment/html-intro-body-default.php:12
 #: templates/email/payment/text-intro-body-default.php:11
+#: html/templates/email/payment/html-intro-body-default.php:12
+#: html/templates/email/payment/text-intro-body-default.php:11
 #, php-format
 msgid "Thank you for your order %1$s from %2$s."
 msgstr "Gracias por su pedido  %1$s desde %2$s."
@@ -1281,12 +1600,14 @@ msgstr "Gracias por su pedido  %1$s desde %2$s."
 #: layouts/email/payment/4/text-intro-body-default.html:11
 #: templates/email/payment/4/html-intro-body-default.php:12
 #: templates/email/payment/4/text-intro-body-default.php:11
+#: html/templates/email/payment/4/html-intro-body-default.php:12
+#: html/templates/email/payment/4/text-intro-body-default.php:11
 #, php-format
 msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "The order is pending until we receive the final payment. If you've chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference."
-msgstr "Gracias por su pedido %1$s desde %2$s.\n\nEl pedido está pendiente haste que recibamos el pago final. Si ha elegize pager por adelantado, por favor, transfiera el import a nuestra cuenta bancaria indicando el ID del pedido ID %1$s como referencia."
+msgstr "Gracias por su pedido %1$s desde %2$s.\n\nEl pedido está pendiente hasta que recibamos el pago final. Si ha elegido pagar por adelantado, por favor, transfiera el importe a nuestra cuenta bancaria indicando la ID del pedido %1$s como referencia."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -1296,6 +1617,8 @@ msgstr "Gracias por su pedido %1$s desde %2$s.\n\nEl pedido está pendiente hast
 #: layouts/email/payment/6/text-intro-body-default.html:11
 #: templates/email/payment/6/html-intro-body-default.php:12
 #: templates/email/payment/6/text-intro-body-default.php:11
+#: html/templates/email/payment/6/html-intro-body-default.php:12
+#: html/templates/email/payment/6/text-intro-body-default.php:11
 #, php-format
 msgid ""
 "Thank you for your order %1$s from %2$s.\n"
@@ -1305,17 +1628,19 @@ msgstr "Gracias por su pedido %1$s desde %2$s.\n\nHemos recibido el pago y nos e
 
 #: layouts/checkout/confirm/5/intro-body-default.html:12
 #: templates/checkout/confirm/5/intro-body-default.php:12
+#: html/templates/checkout/confirm/5/intro-body-default.php:12
 msgid ""
 "Thank you for your order and authorizing the payment.\n"
 "An e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "Gracias por su pedido y autorización de pago.\nEn los próximos minutos le será enviado un correo electrónico con los detalles de su pedido."
 
 #: layouts/checkout/confirm/6/intro-body-default.html:12
 #: templates/checkout/confirm/6/intro-body-default.php:12
+#: html/templates/checkout/confirm/6/intro-body-default.php:12
 msgid ""
 "Thank you for your order.\n"
 "We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "Gracias por su pedido.\nHemos recibido su pago y se le enviará un correo electrónico con los detalles del pedido en los próximos minutos."
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -1325,6 +1650,8 @@ msgstr ""
 #: layouts/email/delivery/text-intro-body-default.html:11
 #: templates/email/delivery/html-intro-body-default.php:12
 #: templates/email/delivery/text-intro-body-default.php:11
+#: html/templates/email/delivery/html-intro-body-default.php:12
+#: html/templates/email/delivery/text-intro-body-default.php:11
 #, php-format
 msgid ""
 "The delivery status of your order %1$s from %2$s has been changed to "
@@ -1333,10 +1660,11 @@ msgstr "El estado de entrega de su pedido %1$s desde %2$s ha pasado a \"%3$s\"."
 
 #: layouts/checkout/confirm/1/intro-body-default.html:12
 #: templates/checkout/confirm/1/intro-body-default.php:12
+#: html/templates/checkout/confirm/1/intro-body-default.php:12
 msgid ""
 "The order was canceled.\n"
 "Do you wish to retry your order?"
-msgstr ""
+msgstr "El pedido fue cancelado.\n¿Desea reintentar su pedido?"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -1346,16 +1674,19 @@ msgstr ""
 #: layouts/email/delivery/6/text-intro-body-default.html:11
 #: templates/email/delivery/6/html-intro-body-default.php:12
 #: templates/email/delivery/6/text-intro-body-default.php:11
+#: html/templates/email/delivery/6/html-intro-body-default.php:12
+#: html/templates/email/delivery/6/text-intro-body-default.php:11
 #, php-format
 msgid "The parcel for your order %1$s from %2$s could not be delivered."
 msgstr "El paquete de su pedido %1$s desde %2$s no pudo entregarse."
 
 #: layouts/checkout/confirm/4/intro-body-default.html:12
 #: templates/checkout/confirm/4/intro-body-default.php:12
+#: html/templates/checkout/confirm/4/intro-body-default.php:12
 msgid ""
 "The payment confirmation for your order is still pending.\n"
 "You will get an e-mail as soon as the payment is authorized."
-msgstr ""
+msgstr "La confirmación de pago de su pedido se encuentra pendiente.\nSe le enviará un correo electrónico tan pronto como el pago sea autorizado."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -1365,22 +1696,27 @@ msgstr ""
 #: layouts/email/payment/3/text-intro-body-default.html:11
 #: templates/email/payment/3/html-intro-body-default.php:12
 #: templates/email/payment/3/text-intro-body-default.php:11
+#: html/templates/email/payment/3/html-intro-body-default.php:12
+#: html/templates/email/payment/3/text-intro-body-default.php:11
 #, php-format
 msgid "The payment for your order %1$s from %2$s has been refunded."
 msgstr "El pago de su pedido %1$s desde %2$s le ha sido devuelto."
 
 #: layouts/account/watch/body-default.html:152
 #: templates/account/watch/body-default.php:147
+#: html/templates/account/watch/body-default.php:147
 msgid "Three month"
-msgstr ""
+msgstr "Tres meses"
 
 #: layouts/account/watch/body-default.html:147
 #: templates/account/watch/body-default.php:142
+#: html/templates/account/watch/body-default.php:142
 msgid "Time frame"
-msgstr ""
+msgstr "Marco de tiempo"
 
 #: layouts/catalog/list/promo-body-default.html:24
 #: templates/catalog/lists/promo-body-default.php:19
+#: html/templates/catalog/lists/promo-body-default.php:19
 msgid "Top seller"
 msgstr "Éxito de ventas"
 
@@ -1392,11 +1728,16 @@ msgstr "Éxito de ventas"
 #: templates/common/summary/detail-body-default.php:268
 #: templates/email/common/text-summary-detail-body-default.php:97
 #: templates/email/common/text-summary-detail-body-default.php:105
+#: html/templates/basket/mini/product-body-default.php:56
+#: html/templates/common/summary/detail-body-default.php:268
+#: html/templates/email/common/text-summary-detail-body-default.php:97
+#: html/templates/email/common/text-summary-detail-body-default.php:105
 msgid "Total"
 msgstr "Total"
 
 #: layouts/common/summary/detail-body-default.html:295
 #: templates/common/summary/detail-body-default.php:295
+#: html/templates/common/summary/detail-body-default.php:295
 msgid "Total quantity"
 msgstr "Cantidad total"
 
@@ -1404,46 +1745,55 @@ msgstr "Cantidad total"
 #: layouts/checkout/standard/process-body-default.html:112
 #: templates/checkout/confirm/retry-body-default.php:23
 #: templates/checkout/standard/process-body-default.php:112
+#: html/templates/checkout/confirm/retry-body-default.php:23
+#: html/templates/checkout/standard/process-body-default.php:112
 msgid "Try again"
 msgstr "Probar de nuevo"
 
 #: layouts/account/watch/body-default.html:150
 #: templates/account/watch/body-default.php:145
+#: html/templates/account/watch/body-default.php:145
 msgid "Two weeks"
-msgstr ""
+msgstr "Dos semanas"
 
 #: src/Client/Html/Common/Decorator/Abstract.php:51
 #: src/Client/Html/Common/Decorator/Base.php:55
+#: html/src/Client/Html/Common/Decorator/Base.php:55
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr "No se puede llamar al método \"%1$s\""
 
 #: src/Client/Html/Checkout/Standard/Order/Account/Default.php:280
 #: src/Client/Html/Checkout/Standard/Order/Account/Standard.php:283
+#: html/src/Client/Html/Checkout/Standard/Order/Account/Standard.php:283
 #, php-format
 msgid "Unable to create an account for \"%1$s\": %2$s"
-msgstr ""
+msgstr "Imposible crear una cuenta para \"%1$s\": %2$s"
 
 #: src/Client/Html/Checkout/Standard/Order/Address/Default.php:268
 #: src/Client/Html/Checkout/Standard/Order/Address/Standard.php:272
+#: html/src/Client/Html/Checkout/Standard/Order/Address/Standard.php:272
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
 msgstr "No se pudo guardar la dirección para el cliente \"%1$s\": %2$s"
 
 #: src/Client/Html/Abstract.php:686 src/Client/Html/Base.php:653
+#: html/src/Client/Html/Base.php:616
 #, php-format
 msgid "Unable to set cache entry: %1$s"
-msgstr ""
+msgstr "Imposible establecer entrada de caché: %1$s"
 
 #: layouts/checkout/confirm/2/intro-body-default.html:12
 #: templates/checkout/confirm/2/intro-body-default.php:12
+#: html/templates/checkout/confirm/2/intro-body-default.php:12
 msgid ""
 "Unfortunately, the payment for your order was refused.\n"
 "Do you wish to retry?"
-msgstr ""
+msgstr "Desafortunadamente el pago de su pedido fue rechazado.\n¿Desea reintentar el mismo?"
 
 #: layouts/basket/standard/body-default.html:44
 #: templates/basket/standard/body-default.php:44
+#: html/templates/basket/standard/body-default.php:44
 msgid "Update"
 msgstr "Actualizar"
 
@@ -1451,20 +1801,25 @@ msgstr "Actualizar"
 #: layouts/common/partials/address-default.html:118
 #: templates/common/partials/address-eu.php:118
 #: templates/common/partials/address-default.php:118
+#: html/templates/common/partials/address-eu.php:118
+#: html/templates/common/partials/address-default.php:118
 msgid "Vat ID"
-msgstr ""
+msgstr "ID de IVA"
 
 #: layouts/account/watch/body-default.html:168
 #: templates/account/watch/body-default.php:163
+#: html/templates/account/watch/body-default.php:163
 msgid "Watch"
-msgstr ""
+msgstr "Observar"
 
 #: layouts/account/watch/body-default.html:104
 #: layouts/email/watch/text-detail-body-default.html:40
 #: templates/account/watch/body-default.php:99
 #: templates/email/watch/text-detail-body-default.php:40
+#: html/templates/account/watch/body-default.php:99
+#: html/templates/email/watch/text-detail-body-default.php:40
 msgid "Watched products"
-msgstr ""
+msgstr "Productos observados"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -1474,6 +1829,8 @@ msgstr ""
 #: layouts/email/delivery/7/text-intro-body-default.html:11
 #: templates/email/delivery/7/html-intro-body-default.php:12
 #: templates/email/delivery/7/text-intro-body-default.php:11
+#: html/templates/email/delivery/7/html-intro-body-default.php:12
+#: html/templates/email/delivery/7/text-intro-body-default.php:11
 #, php-format
 msgid "We received the returned parcel for your order %1$s from %2$s."
 msgstr "Hemos recibido el paquete devuelto de su pedido %1$s desde %2$s."
@@ -1482,6 +1839,8 @@ msgstr "Hemos recibido el paquete devuelto de su pedido %1$s desde %2$s."
 #: layouts/common/partials/address-default.html:134
 #: templates/common/partials/address-eu.php:134
 #: templates/common/partials/address-default.php:134
+#: html/templates/common/partials/address-eu.php:134
+#: html/templates/common/partials/address-default.php:134
 msgid "Web site"
 msgstr "Sitio web"
 
@@ -1497,6 +1856,12 @@ msgstr "Sitio web"
 #: templates/account/favorite/body-default.php:121
 #: templates/catalog/session/pinned-body-default.php:115
 #: templates/common/summary/detail-body-default.php:198
+#: html/templates/basket/standard/coupon-body-default.php:39
+#: html/templates/account/history/order-body-default.php:17
+#: html/templates/account/watch/body-default.php:121
+#: html/templates/account/favorite/body-default.php:121
+#: html/templates/catalog/session/pinned-body-default.php:115
+#: html/templates/common/summary/detail-body-default.php:198
 msgid "X"
 msgstr "X"
 
@@ -1536,16 +1901,36 @@ msgstr "X"
 #: templates/email/payment/6/text-intro-body-default.php:17
 #: templates/email/payment/html-intro-body-default.php:16
 #: templates/email/payment/text-intro-body-default.php:15
+#: html/templates/account/history/list-body-default.php:81
+#: html/templates/catalog/stock/body-default.php:48
+#: html/templates/email/delivery/3/html-intro-body-default.php:16
+#: html/templates/email/delivery/3/text-intro-body-default.php:15
+#: html/templates/email/delivery/7/html-intro-body-default.php:16
+#: html/templates/email/delivery/7/text-intro-body-default.php:15
+#: html/templates/email/delivery/6/html-intro-body-default.php:16
+#: html/templates/email/delivery/6/text-intro-body-default.php:15
+#: html/templates/email/delivery/html-intro-body-default.php:16
+#: html/templates/email/delivery/text-intro-body-default.php:15
+#: html/templates/email/payment/3/html-intro-body-default.php:16
+#: html/templates/email/payment/3/text-intro-body-default.php:15
+#: html/templates/email/payment/4/html-intro-body-default.php:18
+#: html/templates/email/payment/4/text-intro-body-default.php:17
+#: html/templates/email/payment/6/html-intro-body-default.php:18
+#: html/templates/email/payment/6/text-intro-body-default.php:17
+#: html/templates/email/payment/html-intro-body-default.php:16
+#: html/templates/email/payment/text-intro-body-default.php:15
 msgid "Y-m-d"
 msgstr "A-m-d"
 
 #: layouts/catalog/stage/breadcrumb-body-default.html:20
 #: templates/catalog/stage/breadcrumb-body-default.php:20
+#: html/templates/catalog/stage/breadcrumb-body-default.php:20
 msgid "You are here:"
 msgstr "Usted está aquí:"
 
 #: layouts/checkout/standard/process-body-default.html:80
 #: templates/checkout/standard/process-body-default.php:80
+#: html/templates/checkout/standard/process-body-default.php:80
 msgid "You will now be forwarded to the next step"
 msgstr "Ahora pasará al siguiente paso"
 
@@ -1553,20 +1938,26 @@ msgstr "Ahora pasará al siguiente paso"
 #: layouts/email/account/html-detail-body-default.html:13
 #: templates/email/account/text-detail-body-default.php:14
 #: templates/email/account/html-detail-body-default.php:13
+#: html/templates/email/account/text-detail-body-default.php:14
+#: html/templates/email/account/html-detail-body-default.php:13
 msgid "Your account"
-msgstr ""
+msgstr "Su cuenta"
 
 #: layouts/catalog/filter/attribute-body-default.html:57
 #: templates/catalog/filter/attribute-body-default.php:57
+#: html/templates/catalog/filter/attribute-body-default.php:57
 msgid "Your choice"
-msgstr ""
+msgstr "Su selección"
 
 #. / Account creation e-mail subject
 #: layouts/email/account/header-default.html:9
 #: templates/email/account/header-default.php:9
+#: html/templates/email/account/header-default.php:9
 msgid "Your new account"
-msgstr ""
+msgstr "Su nueva cuenta"
 
+#. / Delivery e-mail subject with order ID
+#. / Payment e-mail subject with order ID
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
 #. / Delivery e-mail subject with order ID
@@ -1575,6 +1966,8 @@ msgstr ""
 #: layouts/email/payment/header-default.html:9
 #: templates/email/delivery/header-default.php:9
 #: templates/email/payment/header-default.php:9
+#: html/templates/email/delivery/header-default.php:9
+#: html/templates/email/payment/header-default.php:9
 #, php-format
 msgid "Your order %1$s"
 msgstr "Su pedido %1$s"
@@ -1587,33 +1980,40 @@ msgstr "Su pedido %1$s"
 #: layouts/email/delivery/3/text-intro-body-default.html:11
 #: templates/email/delivery/3/html-intro-body-default.php:12
 #: templates/email/delivery/3/text-intro-body-default.php:11
+#: html/templates/email/delivery/3/html-intro-body-default.php:12
+#: html/templates/email/delivery/3/text-intro-body-default.php:11
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
 msgstr "Su pedido %1$s desde %2$s ha sido enviado."
 
 #: layouts/catalog/stage/breadcrumb-body-default.html:28
 #: templates/catalog/stage/breadcrumb-body-default.php:28
+#: html/templates/catalog/stage/breadcrumb-body-default.php:28
 msgid "Your search result"
-msgstr ""
+msgstr "El resultado de su búsqueda"
 
 #. / Product notification e-mail subject
 #: layouts/email/watch/header-default.html:9
 #: templates/email/watch/header-default.php:9
+#: html/templates/email/watch/header-default.php:9
 msgid "Your watched products"
-msgstr ""
+msgstr "Sus productos observados"
 
 #: layouts/checkout/standard/address-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Address/Default.php:12
 #: templates/checkout/standard/address-body-default.php:12
 #: src/Client/Html/Checkout/Standard/Address/Standard.php:16
+#: html/templates/checkout/standard/address-body-default.php:12
+#: html/src/Client/Html/Checkout/Standard/Address/Standard.php:16
 #, php-format
 msgid "address"
 msgstr "dirección"
 
 #: layouts/catalog/filter/attribute-body-default.html:70
 #: templates/catalog/filter/attribute-body-default.php:70
+#: html/templates/catalog/filter/attribute-body-default.php:70
 msgid "clear all"
-msgstr ""
+msgstr "limpiar todo"
 
 #: layouts/checkout/standard/delivery-body-default.html:41
 #: layouts/common/summary/service-body-default.html:16
@@ -1621,6 +2021,9 @@ msgstr ""
 #: templates/checkout/standard/delivery-body-default.php:41
 #: templates/common/summary/service-body-default.php:16
 #: src/Client/Html/Checkout/Standard/Delivery/Standard.php:16
+#: html/templates/checkout/standard/delivery-body-default.php:41
+#: html/templates/common/summary/service-body-default.php:16
+#: html/src/Client/Html/Checkout/Standard/Delivery/Standard.php:16
 #, php-format
 msgid "delivery"
 msgstr "entrega"
@@ -1631,6 +2034,8 @@ msgstr "entrega"
 #: src/MW/View/Helper/Price/Default.php:77
 #: templates/common/partials/price-default.php:18
 #: templates/email/watch/text-detail-body-default.php:18
+#: html/templates/common/partials/price-default.php:18
+#: html/templates/email/watch/text-detail-body-default.php:18
 #, php-format
 msgid "from %1$s"
 msgstr "desde %1$s"
@@ -1641,6 +2046,9 @@ msgstr "desde %1$s"
 #: templates/checkout/standard/address-delivery-body-default.php:70
 #: templates/common/summary/address-body-default.php:131
 #: templates/email/common/text-summary-address-body-default.php:115
+#: html/templates/checkout/standard/address-delivery-body-default.php:70
+#: html/templates/common/summary/address-body-default.php:131
+#: html/templates/email/common/text-summary-address-body-default.php:115
 msgid "like billing address"
 msgstr "misma dirección de facturación"
 
@@ -1648,18 +2056,23 @@ msgstr "misma dirección de facturación"
 #: layouts/checkout/standard/address-delivery-body-default.html:155
 #: templates/checkout/standard/address-billing-body-default.php:163
 #: templates/checkout/standard/address-delivery-body-default.php:155
+#: html/templates/checkout/standard/address-billing-body-default.php:163
+#: html/templates/checkout/standard/address-delivery-body-default.php:155
 msgid "new address"
 msgstr "nueva dirección"
 
 #: layouts/catalog/detail/basket-attribute-body-default.html:52
 #: templates/common/partials/attribute-default.php:51
+#: html/templates/common/partials/attribute-default.php:51
 msgid "none"
-msgstr ""
+msgstr "ninguno"
 
 #: layouts/checkout/standard/order-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Order/Default.php:12
 #: templates/checkout/standard/order-body-default.php:12
 #: src/Client/Html/Checkout/Standard/Order/Standard.php:16
+#: html/templates/checkout/standard/order-body-default.php:12
+#: html/src/Client/Html/Checkout/Standard/Order/Standard.php:16
 #, php-format
 msgid "order"
 msgstr "pedido"
@@ -1670,37 +2083,45 @@ msgstr "pedido"
 #: templates/checkout/standard/payment-body-default.php:41
 #: templates/common/summary/service-body-default.php:50
 #: src/Client/Html/Checkout/Standard/Payment/Standard.php:16
+#: html/templates/checkout/standard/payment-body-default.php:41
+#: html/templates/common/summary/service-body-default.php:50
+#: html/src/Client/Html/Checkout/Standard/Payment/Standard.php:16
 #, php-format
 msgid "payment"
 msgstr "pago"
 
 #: src/Client/Html/Checkout/Standard/Process/Default.php:12
 #: src/Client/Html/Checkout/Standard/Process/Standard.php:15
+#: html/src/Client/Html/Checkout/Standard/Process/Standard.php:15
 #, php-format
 msgid "process"
-msgstr ""
+msgstr "procesar"
 
 #. / code for "product is in stock"
 #: layouts/catalog/stock/body-default.html:56
 #: templates/catalog/stock/body-default.php:56
+#: html/templates/catalog/stock/body-default.php:56
 msgid "stock-high"
 msgstr "\"stock\"-alto"
 
 #. / code for "only a few products are available"
 #: layouts/catalog/stock/body-default.html:54
 #: templates/catalog/stock/body-default.php:54
+#: html/templates/catalog/stock/body-default.php:54
 msgid "stock-low"
 msgstr "\"stock\"-bajo"
 
 #. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:52
 #: templates/catalog/stock/body-default.php:52
+#: html/templates/catalog/stock/body-default.php:52
 msgid "stock-out"
 msgstr "\"stock\"-agotado"
 
 #. / code for "product is available (without stock limit)"
 #: layouts/catalog/stock/body-default.html:58
 #: templates/catalog/stock/body-default.php:58
+#: html/templates/catalog/stock/body-default.php:58
 msgid "stock-unlimited"
 msgstr "\"stock\"-ilimitado"
 
@@ -1708,17 +2129,21 @@ msgstr "\"stock\"-ilimitado"
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12
 #: templates/checkout/standard/summary-body-default.php:12
 #: src/Client/Html/Checkout/Standard/Summary/Standard.php:16
+#: html/templates/checkout/standard/summary-body-default.php:12
+#: html/src/Client/Html/Checkout/Standard/Summary/Standard.php:16
 #, php-format
 msgid "summary"
 msgstr "resumen"
 
 #: layouts/catalog/list/pagination-body-default.html:25
 #: templates/catalog/lists/pagination-body-default.php:25
+#: html/templates/catalog/lists/pagination-body-default.php:25
 msgid "▲ Name"
 msgstr "▲ Nombre"
 
 #: layouts/catalog/list/pagination-body-default.html:33
 #: templates/catalog/lists/pagination-body-default.php:33
+#: html/templates/catalog/lists/pagination-body-default.php:33
 msgid "▲ Price"
 msgstr "▲ Precio"
 
@@ -1732,6 +2157,11 @@ msgstr "▲ Precio"
 #: templates/account/favorite/body-default.php:110
 #: templates/account/favorite/body-default.php:148
 #: templates/catalog/lists/pagination-body-default.php:55
+#: html/templates/account/watch/body-default.php:109
+#: html/templates/account/watch/body-default.php:180
+#: html/templates/account/favorite/body-default.php:110
+#: html/templates/account/favorite/body-default.php:148
+#: html/templates/catalog/lists/pagination-body-default.php:55
 msgid "▶"
 msgstr "▶"
 
@@ -1745,21 +2175,29 @@ msgstr "▶"
 #: templates/account/favorite/body-default.php:111
 #: templates/account/favorite/body-default.php:149
 #: templates/catalog/lists/pagination-body-default.php:56
+#: html/templates/account/watch/body-default.php:110
+#: html/templates/account/watch/body-default.php:181
+#: html/templates/account/favorite/body-default.php:111
+#: html/templates/account/favorite/body-default.php:149
+#: html/templates/catalog/lists/pagination-body-default.php:56
 msgid "▶▶"
 msgstr "▶▶"
 
 #: layouts/basket/mini/product-body-default.html:31
 #: templates/basket/mini/product-body-default.php:31
+#: html/templates/basket/mini/product-body-default.php:31
 msgid "▼"
 msgstr ""
 
 #: layouts/catalog/list/pagination-body-default.html:23
 #: templates/catalog/lists/pagination-body-default.php:23
+#: html/templates/catalog/lists/pagination-body-default.php:23
 msgid "▼ Name"
 msgstr "▼ Nombre"
 
 #: layouts/catalog/list/pagination-body-default.html:31
 #: templates/catalog/lists/pagination-body-default.php:31
+#: html/templates/catalog/lists/pagination-body-default.php:31
 msgid "▼ Price"
 msgstr "▼ Precio"
 
@@ -1773,6 +2211,11 @@ msgstr "▼ Precio"
 #: templates/account/favorite/body-default.php:108
 #: templates/account/favorite/body-default.php:146
 #: templates/catalog/lists/pagination-body-default.php:53
+#: html/templates/account/watch/body-default.php:107
+#: html/templates/account/watch/body-default.php:178
+#: html/templates/account/favorite/body-default.php:108
+#: html/templates/account/favorite/body-default.php:146
+#: html/templates/catalog/lists/pagination-body-default.php:53
 msgid "◀"
 msgstr "◀"
 
@@ -1786,5 +2229,10 @@ msgstr "◀"
 #: templates/account/favorite/body-default.php:107
 #: templates/account/favorite/body-default.php:145
 #: templates/catalog/lists/pagination-body-default.php:52
+#: html/templates/account/watch/body-default.php:106
+#: html/templates/account/watch/body-default.php:177
+#: html/templates/account/favorite/body-default.php:107
+#: html/templates/account/favorite/body-default.php:145
+#: html/templates/catalog/lists/pagination-body-default.php:52
 msgid "◀◀"
 msgstr "◀◀"
