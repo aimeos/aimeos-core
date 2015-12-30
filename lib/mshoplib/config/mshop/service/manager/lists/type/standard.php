@@ -33,7 +33,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mserlity."id" AS "service.lists.type.id", mserlity."siteid" AS "service.lists.type.siteid",
+			SELECT mserlity."id" AS "service.lists.type.id", mserlity."siteid" AS "service.lists.type.siteid",
 				mserlity."code" AS "service.lists.type.code", mserlity."domain" AS "service.lists.type.domain",
 				mserlity."label" AS "service.lists.type.label", mserlity."status" AS "service.lists.type.status",
 				mserlity."mtime" AS "service.lists.type.mtime", mserlity."editor" AS "service.lists.type.editor",
@@ -41,6 +41,9 @@ return array(
 			FROM "mshop_service_list_type" AS mserlity
 			:joins
 			WHERE :cond
+			GROUP BY mserlity."id", mserlity."siteid", mserlity."code", mserlity."domain",
+				mserlity."label", mserlity."status", mserlity."mtime", mserlity."editor",
+				mserlity."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 			SELECT "key", COUNT("id") AS "count"
 			FROM (
-				SELECT DISTINCT :key AS "key", mattli."id" AS "id"
+				SELECT :key AS "key", mattli."id" AS "id"
 				FROM "mshop_attribute_list" AS mattli
 				:joins
 				WHERE :cond
+				GROUP BY :key, mattli."id" /*-orderby*/, :order /*orderby-*/
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -71,7 +72,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mattli."id" AS "attribute.lists.id", mattli."siteid" AS "attribute.lists.siteid",
+			SELECT mattli."id" AS "attribute.lists.id", mattli."siteid" AS "attribute.lists.siteid",
 				mattli."parentid" AS "attribute.lists.parentid", mattli."typeid" AS "attribute.lists.typeid",
 				mattli."domain" AS "attribute.lists.domain", mattli."refid" AS "attribute.lists.refid",
 				mattli."start" AS "attribute.lists.datestart", mattli."end" AS "attribute.lists.dateend",
@@ -81,6 +82,10 @@ return array(
 			FROM "mshop_attribute_list" AS mattli
 			:joins
 			WHERE :cond
+			GROUP BY mattli."id", mattli."siteid", mattli."parentid", mattli."typeid",
+				mattli."domain", mattli."refid", mattli."start", mattli."end",
+				mattli."config", mattli."pos", mattli."status", mattli."mtime",
+				mattli."ctime", mattli."editor" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

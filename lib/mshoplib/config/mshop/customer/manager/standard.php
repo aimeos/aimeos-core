@@ -41,7 +41,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
+			SELECT mcus."id" AS "customer.id", mcus."siteid" AS "customer.siteid",
 				mcus."label" AS "customer.label", mcus."code" AS "customer.code",
 				mcus."company" AS "customer.company", mcus."vatid" AS "customer.vatid",
 				mcus."salutation" AS "customer.salutation", mcus."title" AS "customer.title",
@@ -59,6 +59,14 @@ return array(
 			FROM "mshop_customer" AS mcus
 			:joins
 			WHERE :cond
+			GROUP BY mcus."id", mcus."siteid", mcus."label", mcus."code",
+				mcus."company", mcus."vatid", mcus."salutation", mcus."title",
+				mcus."firstname", mcus."lastname", mcus."address1", mcus."address2",
+				mcus."address3", mcus."postal", mcus."city", mcus."state",
+				mcus."countryid", mcus."langid", mcus."telephone", mcus."email",
+				mcus."telefax", mcus."website", mcus."birthday", mcus."status",
+				mcus."vdate", mcus."password", mcus."ctime", mcus."mtime",
+				mcus."editor" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

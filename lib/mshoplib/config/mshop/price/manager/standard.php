@@ -36,7 +36,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
+			SELECT mpri."id" AS "price.id", mpri."siteid" AS "price.siteid",
 				mpri."typeid" AS "price.typeid", mpri."currencyid" AS "price.currencyid",
 				mpri."domain" AS "price.domain", mpri."label" AS "price.label",
 				mpri."quantity" AS "price.quantity", mpri."value" AS "price.value",
@@ -47,6 +47,10 @@ return array(
 			FROM "mshop_price" AS mpri
 			:joins
 			WHERE :cond
+			GROUP BY mpri."id", mpri."siteid", mpri."typeid", mpri."currencyid",
+				mpri."domain", mpri."label", mpri."quantity", mpri."value",
+				mpri."costs", mpri."rebate", mpri."taxrate", mpri."status",
+				mpri."mtime", mpri."editor", mpri."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

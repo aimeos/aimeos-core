@@ -10,10 +10,11 @@ return array(
 		'ansi' => '
 		SELECT "key", COUNT("id") AS "count"
 		FROM (
-			SELECT DISTINCT :key AS "key", mordbaco."id" AS "id"
+			SELECT :key AS "key", mordbaco."id" AS "id"
 			FROM "mshop_order_base_coupon" AS mordbaco
 			:joins
 			WHERE :cond
+			GROUP BY :key, mordbaco."id" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		) AS list
@@ -46,13 +47,16 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordbaco."id" AS "order.base.coupon.id", mordbaco."baseid" AS "order.base.coupon.baseid",
+			SELECT mordbaco."id" AS "order.base.coupon.id", mordbaco."baseid" AS "order.base.coupon.baseid",
 				mordbaco."siteid" AS "order.base.coupon.siteid", mordbaco."ordprodid" AS "order.base.coupon.ordprodid",
 				mordbaco."code" AS "order.base.coupon.code", mordbaco."mtime" AS "order.base.coupon.mtime",
 				mordbaco."editor" AS "order.base.coupon.editor", mordbaco."ctime" AS "order.base.coupon.ctime"
 			FROM "mshop_order_base_coupon" AS mordbaco
 			:joins
 			WHERE :cond
+			GROUP BY mordbaco."id", mordbaco."baseid", mordbaco."siteid", mordbaco."ordprodid",
+				mordbaco."code", mordbaco."mtime", mordbaco."editor", mordbaco."ctime"
+				/*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

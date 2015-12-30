@@ -10,10 +10,11 @@ return array(
 		'ansi' => '
 			SELECT "key", COUNT("id") AS "count"
 			FROM (
-				SELECT DISTINCT :key AS "key", msupli."id" AS "id"
+				SELECT :key AS "key", msupli."id" AS "id"
 				FROM "mshop_supplier_list" AS msupli
 				:joins
 				WHERE :cond
+				GROUP BY :key, msupli."id" /*-orderby*/, :order /*orderby-*/
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -70,7 +71,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
+			SELECT msupli."id" AS "supplier.lists.id", msupli."parentid" AS "supplier.lists.parentid",
 				msupli."siteid" AS "supplier.lists.siteid", msupli."typeid" AS "supplier.lists.typeid",
 				msupli."domain" AS "supplier.lists.domain", msupli."refid" AS "supplier.lists.refid",
 				msupli."start" AS "supplier.lists.datestart", msupli."end" AS "supplier.lists.dateend",
@@ -80,7 +81,11 @@ return array(
 			FROM "mshop_supplier_list" AS msupli
 			:joins
 			WHERE :cond
-			 /*-orderby*/ ORDER BY :order /*orderby-*/
+			GROUP BY msupli."id", msupli."parentid", msupli."siteid", msupli."typeid",
+				msupli."domain", msupli."refid", msupli."start", msupli."end",
+				msupli."config", msupli."pos", msupli."status", msupli."mtime",
+				msupli."editor", msupli."ctime" /*-orderby*/, :order /*orderby-*/
+			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
 	),

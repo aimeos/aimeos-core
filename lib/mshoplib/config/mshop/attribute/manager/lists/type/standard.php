@@ -33,7 +33,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mattlity."id" AS "attribute.lists.type.id", mattlity."siteid" AS "attribute.lists.type.siteid",
+			SELECT mattlity."id" AS "attribute.lists.type.id", mattlity."siteid" AS "attribute.lists.type.siteid",
 				mattlity."code" AS "attribute.lists.type.code", mattlity."domain" AS "attribute.lists.type.domain",
 				mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
 				mattlity."mtime" AS "attribute.lists.type.mtime", mattlity."ctime" AS "attribute.lists.type.ctime",
@@ -41,6 +41,9 @@ return array(
 			FROM "mshop_attribute_list_type" AS mattlity
 			:joins
 			WHERE :cond
+			GROUP BY mattlity."id", mattlity."siteid", mattlity."code", mattlity."domain",
+				mattlity."label", mattlity."status", mattlity."mtime", mattlity."ctime",
+				mattlity."editor" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

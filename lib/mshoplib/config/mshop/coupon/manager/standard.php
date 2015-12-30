@@ -33,7 +33,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
+			SELECT mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
 				mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
 				mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
 				mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
@@ -42,6 +42,9 @@ return array(
 			FROM "mshop_coupon" AS mcou
 			:joins
 			WHERE :cond
+			GROUP BY mcou."id", mcou."siteid", mcou."label", mcou."provider",
+				mcou."start", mcou."end", mcou."config", mcou."status",
+				mcou."mtime", mcou."editor", mcou."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

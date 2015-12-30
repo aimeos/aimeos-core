@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 			SELECT "key", COUNT("id") AS "count"
 			FROM (
-				SELECT DISTINCT :key AS "key", mprili."id" AS "id"
+				SELECT :key AS "key", mprili."id" AS "id"
 				FROM "mshop_price_list" AS mprili
 				:joins
 				WHERE :cond
+				GROUP BY :key, mprili."id" /*-orderby*/, :order /*orderby-*/
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -71,7 +72,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mprili."id" AS "price.lists.id", mprili."parentid" AS "price.lists.parentid",
+			SELECT mprili."id" AS "price.lists.id", mprili."parentid" AS "price.lists.parentid",
 				mprili."siteid" AS "price.lists.siteid", mprili."typeid" AS "price.lists.typeid",
 				mprili."domain" AS "price.lists.domain", mprili."refid" AS "price.lists.refid",
 				mprili."start" AS "price.lists.datestart", mprili."end" AS "price.lists.dateend",
@@ -81,6 +82,10 @@ return array(
 			FROM "mshop_price_list" AS mprili
 			:joins
 			WHERE :cond
+			GROUP BY mprili."id", mprili."parentid", mprili."siteid", mprili."typeid",
+				mprili."domain", mprili."refid", mprili."start", mprili."end",
+				mprili."config", mprili."pos", mprili."status", mprili."mtime",
+				mprili."editor", mprili."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

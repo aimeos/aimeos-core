@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 			SELECT "key", COUNT("id") AS "count"
 			FROM (
-				SELECT DISTINCT :key AS "key", mserli."id" AS "id"
+				SELECT :key AS "key", mserli."id" AS "id"
 				FROM "mshop_service_list" AS mserli
 				:joins
 				WHERE :cond
+				GROUP BY :key, mserli."id" /*-orderby*/, :order /*orderby-*/
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -71,7 +72,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mserli."id" AS "service.lists.id", mserli."parentid" AS "service.lists.parentid",
+			SELECT mserli."id" AS "service.lists.id", mserli."parentid" AS "service.lists.parentid",
 				mserli."siteid" AS "service.lists.siteid", mserli."typeid" AS "service.lists.typeid",
 				mserli."domain" AS "service.lists.domain", mserli."refid" AS "service.lists.refid",
 				mserli."start" AS "service.lists.datestart", mserli."end" AS "service.lists.dateend",
@@ -81,6 +82,10 @@ return array(
 			FROM "mshop_service_list" AS mserli
 			:joins
 			WHERE :cond
+			GROUP BY mserli."id", mserli."parentid", mserli."siteid", mserli."typeid",
+				mserli."domain", mserli."refid", mserli."start", mserli."end",
+				mserli."config", mserli."pos", mserli."status", mserli."mtime",
+				mserli."editor", mserli."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

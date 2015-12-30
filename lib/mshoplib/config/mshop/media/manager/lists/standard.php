@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 			SELECT "key", COUNT("id") AS "count"
 			FROM (
-				SELECT DISTINCT :key AS "key", mmedli."id" AS "id"
+				SELECT :key AS "key", mmedli."id" AS "id"
 				FROM "mshop_media_list" AS mmedli
 				:joins
 				WHERE :cond
+				GROUP BY :key, mmedli."id" /*-orderby*/, :order /*orderby-*/
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -71,7 +72,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mmedli."id" AS "media.lists.id", mmedli."parentid" AS "media.lists.parentid",
+			SELECT mmedli."id" AS "media.lists.id", mmedli."parentid" AS "media.lists.parentid",
 				mmedli."siteid" AS "media.lists.siteid", mmedli."typeid" AS "media.lists.typeid",
 				mmedli."domain" AS "media.lists.domain", mmedli."refid" AS "media.lists.refid",
 				mmedli."start" AS "media.lists.datestart", mmedli."end" AS "media.lists.dateend",
@@ -81,6 +82,10 @@ return array(
 			FROM "mshop_media_list" AS mmedli
 			:joins
 			WHERE :cond
+			GROUP BY mmedli."id", mmedli."parentid", mmedli."siteid", mmedli."typeid",
+				mmedli."domain", mmedli."refid", mmedli."start", mmedli."end",
+				mmedli."config", mmedli."pos", mmedli."status", mmedli."mtime",
+				mmedli."editor", mmedli."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

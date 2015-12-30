@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 			SELECT "key", COUNT("id") AS "count"
 			FROM (
-				SELECT DISTINCT :key AS "key", mtexli."id" AS "id"
+				SELECT :key AS "key", mtexli."id" AS "id"
 				FROM "mshop_text_list" AS mtexli
 				:joins
 				WHERE :cond
+				GROUP BY :key, mtexli."id" /*-orderby*/, :order /*orderby-*/
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -71,7 +72,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mtexli."id" AS "text.lists.id", mtexli."parentid" AS "text.lists.parentid",
+			SELECT mtexli."id" AS "text.lists.id", mtexli."parentid" AS "text.lists.parentid",
 				mtexli."siteid" AS "text.lists.siteid", mtexli."typeid" AS "text.lists.typeid",
 				mtexli."domain" AS "text.lists.domain", mtexli."refid" AS "text.lists.refid",
 				mtexli."start" AS "text.lists.datestart", mtexli."end" AS "text.lists.dateend",
@@ -81,6 +82,10 @@ return array(
 			FROM "mshop_text_list" AS mtexli
 			:joins
 			WHERE :cond
+			GROUP BY mtexli."id", mtexli."parentid", mtexli."siteid", mtexli."typeid",
+				mtexli."domain", mtexli."refid", mtexli."start", mtexli."end",
+				mtexli."config", mtexli."pos", mtexli."status", mtexli."mtime",
+				mtexli."editor", mtexli."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

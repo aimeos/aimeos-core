@@ -40,7 +40,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
+			SELECT msupad."id" AS "supplier.address.id", msupad."siteid" AS "supplier.address.siteid",
 				msupad."parentid" AS "supplier.address.parentid", msupad."pos" AS "supplier.address.position",
 				msupad."company" AS "supplier.address.company", msupad."vatid" AS "supplier.address.vatid",
 				msupad."salutation" AS "supplier.address.salutation", msupad."title" AS "supplier.address.title",
@@ -56,6 +56,13 @@ return array(
 			FROM "mshop_supplier_address" AS msupad
 			:joins
 			WHERE :cond
+			GROUP BY msupad."id", msupad."siteid", msupad."parentid", msupad."pos",
+				msupad."company", msupad."vatid", msupad."salutation", msupad."title",
+				msupad."firstname", msupad."lastname", msupad."address1", msupad."address2",
+				msupad."address3", msupad."postal", msupad."city", msupad."state",
+				msupad."countryid", msupad."langid", msupad."telephone", msupad."email",
+				msupad."telefax", msupad."website", msupad."flag", msupad."mtime",
+				msupad."editor", msupad."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

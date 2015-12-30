@@ -33,7 +33,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
+			SELECT mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
 				mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
 				mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
 				mcouco."count" AS "coupon.code.count", mcouco."mtime" AS "coupon.code.mtime",
@@ -41,6 +41,9 @@ return array(
 			FROM "mshop_coupon_code" AS mcouco
 			:joins
 			WHERE :cond
+			GROUP BY mcouco."id", mcouco."parentid", mcouco."siteid", mcouco."code",
+				mcouco."start", mcouco."end", mcouco."count", mcouco."mtime",
+				mcouco."editor", mcouco."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

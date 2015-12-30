@@ -30,13 +30,15 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcusgr."id" AS "customer.group.id", mcusgr."siteid" AS "customer.group.siteid",
+			SELECT mcusgr."id" AS "customer.group.id", mcusgr."siteid" AS "customer.group.siteid",
 				mcusgr."code" AS "customer.group.code", mcusgr."label" AS "customer.group.label",
 				mcusgr."mtime" AS "customer.group.mtime", mcusgr."editor" AS "customer.group.editor",
 				mcusgr."ctime" AS "customer.group.ctime"
 			FROM "mshop_customer_group" AS mcusgr
 			:joins
 			WHERE :cond
+			GROUP BY mcusgr."id", mcusgr."siteid", mcusgr."code", mcusgr."label",
+				mcusgr."mtime", mcusgr."editor", mcusgr."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

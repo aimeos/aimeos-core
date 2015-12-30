@@ -32,13 +32,16 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
+			SELECT msup."id" AS "supplier.id", msup."siteid" AS "supplier.siteid",
 				msup."code" AS "supplier.code", msup."label" AS "supplier.label",
 				msup."status" AS "supplier.status", msup."mtime" AS "supplier.mtime",
 				msup."editor" AS "supplier.editor", msup."ctime" AS "supplier.ctime"
 			FROM "mshop_supplier" AS msup
 			:joins
 			WHERE :cond
+			GROUP BY msup."id", msup."siteid", msup."code", msup."label",
+				msup."status", msup."mtime", msup."editor", msup."ctime"
+				/*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

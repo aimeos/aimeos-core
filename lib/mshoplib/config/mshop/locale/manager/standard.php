@@ -33,7 +33,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid",
+			SELECT mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid",
 				mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
 				mloc."pos" AS "locale.positon", mloc."status" AS "locale.status",
 				mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
@@ -43,6 +43,9 @@ return array(
 			LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")
 			LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")
 			WHERE :cond
+			GROUP BY mloc."id", mloc."siteid", mloc."langid", mloc."currencyid",
+				mloc."pos", mloc."status", mloc."mtime", mloc."editor",
+				mloc."ctime", :order
 			ORDER BY :order
 			LIMIT :size OFFSET :start
 		'

@@ -34,7 +34,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mtex."id" AS "text.id", mtex."siteid" AS "text.siteid",
+			SELECT mtex."id" AS "text.id", mtex."siteid" AS "text.siteid",
 				mtex."langid" AS "text.languageid",	mtex."typeid" AS "text.typeid",
 				mtex."domain" AS "text.domain", mtex."label" AS "text.label",
 				mtex."content" AS "text.content", mtex."status" AS "text.status",
@@ -43,6 +43,9 @@ return array(
 			FROM "mshop_text" AS mtex
 			:joins
 			WHERE :cond
+			GROUP BY mtex."id", mtex."siteid", mtex."langid",	mtex."typeid",
+				mtex."domain", mtex."label", mtex."content", mtex."status",
+				mtex."mtime", mtex."editor", mtex."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

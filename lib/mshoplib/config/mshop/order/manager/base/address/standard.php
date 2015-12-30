@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 		SELECT "key", COUNT("id") AS "count"
 		FROM (
-			SELECT DISTINCT :key AS "key", mordbaad."id" AS "id"
+			SELECT :key AS "key", mordbaad."id" AS "id"
 			FROM "mshop_order_base_address" AS mordbaad
 			:joins
 			WHERE :cond
+			GROUP BY :key, mordbaad."id" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		) AS list
@@ -55,7 +56,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordbaad."id" AS "order.base.address.id", mordbaad."baseid" AS "order.base.address.baseid",
+			SELECT mordbaad."id" AS "order.base.address.id", mordbaad."baseid" AS "order.base.address.baseid",
 				mordbaad."siteid" AS "order.base.address.siteid", mordbaad."addrid" AS "order.base.address.addressid",
 				mordbaad."type" AS "order.base.address.type", mordbaad."flag" AS "order.base.address.flag",
 				mordbaad."company" AS "order.base.address.company", mordbaad."vatid" AS "order.base.address.vatid",
@@ -72,6 +73,13 @@ return array(
 			FROM "mshop_order_base_address" AS mordbaad
 			:joins
 			WHERE :cond
+			GROUP BY mordbaad."id", mordbaad."baseid", mordbaad."siteid", mordbaad."addrid",
+				mordbaad."type", mordbaad."flag", mordbaad."company", mordbaad."vatid",
+				mordbaad."salutation", mordbaad."title", mordbaad."firstname", mordbaad."lastname",
+				mordbaad."address1", mordbaad."address2", mordbaad."address3", mordbaad."postal",
+				mordbaad."city", mordbaad."state", mordbaad."countryid", mordbaad."langid",
+				mordbaad."telephone", mordbaad."email", mordbaad."telefax", mordbaad."website",
+				mordbaad."mtime", mordbaad."editor", mordbaad."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

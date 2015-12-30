@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 		SELECT "key", COUNT("id") AS "count"
 		FROM (
-			SELECT DISTINCT :key AS "key", mordst."id" AS "id"
+			SELECT :key AS "key", mordst."id" AS "id"
 			FROM "mshop_order_status" AS mordst
 			:joins
 			WHERE :cond
+			GROUP BY :key, mordst."id" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		) AS list
@@ -47,13 +48,16 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordst."id" AS "order.status.id", mordst."siteid" AS "order.status.siteid",
+			SELECT mordst."id" AS "order.status.id", mordst."siteid" AS "order.status.siteid",
 				mordst."parentid" AS "order.status.parentid", mordst."type" AS "order.status.type",
 				mordst."value" AS "order.status.value", mordst."mtime" AS "order.status.mtime",
 				mordst."ctime" AS "order.status.ctime", mordst."editor" AS "order.status.editor"
 			FROM "mshop_order_status" AS mordst
 			:joins
 			WHERE :cond
+			GROUP BY mordst."id", mordst."siteid", mordst."parentid", mordst."type",
+				mordst."value", mordst."mtime", mordst."ctime", mordst."editor"
+				/*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

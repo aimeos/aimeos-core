@@ -34,7 +34,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mser."id" AS "service.id", mser."siteid" AS "service.siteid",
+			SELECT mser."id" AS "service.id", mser."siteid" AS "service.siteid",
 				mser."pos" AS "service.position", mser."typeid" AS "service.typeid",
 				mser."code" AS "service.code", mser."label" AS "service.label",
 				mser."provider" AS "service.provider", mser."config" AS "service.config",
@@ -43,6 +43,10 @@ return array(
 			FROM "mshop_service" AS mser
 			:joins
 			WHERE :cond
+			GROUP BY mser."id", mser."siteid", mser."pos", mser."typeid",
+				mser."code", mser."label", mser."provider", mser."config",
+				mser."status", mser."mtime", mser."editor",	mser."ctime"
+				/*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

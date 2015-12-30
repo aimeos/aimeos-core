@@ -34,7 +34,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
+			SELECT mplu."id" AS "plugin.id", mplu."siteid" AS "plugin.siteid",
 				mplu."typeid" AS "plugin.typeid", mplu."label" AS "plugin.label",
 				mplu."provider" AS "plugin.provider", mplu."config" AS "plugin.config",
 				mplu."pos" AS "plugin.position", mplu."status" AS "plugin.status",
@@ -43,6 +43,9 @@ return array(
 			FROM "mshop_plugin" mplu
 			:joins
 			WHERE :cond
+			GROUP BY mplu."id", mplu."siteid", mplu."typeid", mplu."label",
+				mplu."provider", mplu."config", mplu."pos", mplu."status",
+				mplu."mtime", mplu."editor", mplu."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

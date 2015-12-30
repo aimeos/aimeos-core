@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 			SELECT "key", COUNT("id") AS "count"
 			FROM (
-				SELECT DISTINCT :key AS "key", mcusli."id" AS "id"
+				SELECT :key AS "key", mcusli."id" AS "id"
 				FROM "mshop_customer_list" AS mcusli
 				:joins
 				WHERE :cond
+				GROUP BY :key, mcusli."id"
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -71,7 +72,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mcusli."id" AS "customer.lists.id", mcusli."parentid" AS "customer.lists.parentid",
+			SELECT mcusli."id" AS "customer.lists.id", mcusli."parentid" AS "customer.lists.parentid",
 				mcusli."siteid" AS "customer.lists.siteid", mcusli."typeid" AS "customer.lists.typeid",
 				mcusli."domain" AS "customer.lists.domain", mcusli."refid" AS "customer.lists.refid",
 				mcusli."start" AS "customer.lists.datestart", mcusli."end" AS "customer.lists.dateend",
@@ -81,6 +82,10 @@ return array(
 			FROM "mshop_customer_list" AS mcusli
 			:joins
 			WHERE :cond
+			GROUP BY mcusli."id", mcusli."parentid", mcusli."siteid", mcusli."typeid",
+				mcusli."domain", mcusli."refid", mcusli."start", mcusli."end",
+				mcusli."config", mcusli."pos", mcusli."status", mcusli."mtime",
+				mcusli."editor", mcusli."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

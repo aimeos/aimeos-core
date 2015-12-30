@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 		SELECT "key", COUNT("id") AS "count"
 		FROM (
-			SELECT DISTINCT :key AS "key", mordbapr."id" AS "id"
+			SELECT :key AS "key", mordbapr."id" AS "id"
 			FROM "mshop_order_base_product" AS mordbapr
 			:joins
 			WHERE :cond
+			GROUP BY :key, mordbapr."id" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		) AS list
@@ -53,7 +54,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordbapr."id" AS "order.base.product.id", mordbapr."baseid" AS "order.base.product.baseid",
+			SELECT mordbapr."id" AS "order.base.product.id", mordbapr."baseid" AS "order.base.product.baseid",
 				mordbapr."siteid" AS "order.base.product.siteid", mordbapr."ordprodid" AS "order.base.product.ordprodid",
 				mordbapr."prodid" AS "order.base.product.productid", mordbapr."prodcode" AS "order.base.product.prodcode",
 				mordbapr."suppliercode" AS "order.base.product.suppliercode", mordbapr."warehousecode" AS "order.base.product.warehousecode",
@@ -67,6 +68,12 @@ return array(
 			FROM "mshop_order_base_product" AS mordbapr
 			:joins
 			WHERE :cond
+			GROUP BY mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid",
+				mordbapr."prodid", mordbapr."prodcode", mordbapr."suppliercode", mordbapr."warehousecode",
+				mordbapr."type", mordbapr."name", mordbapr."mediaurl", mordbapr."quantity",
+				mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."taxrate",
+				mordbapr."flags", mordbapr."status", mordbapr."pos", mordbapr."mtime",
+				mordbapr."editor", mordbapr."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

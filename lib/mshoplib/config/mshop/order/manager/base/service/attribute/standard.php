@@ -11,10 +11,11 @@ return array(
 		'ansi' => '
 		SELECT "key", COUNT("id") AS "count"
 		FROM (
-			SELECT DISTINCT :key AS "key", mordbaseat."id" AS "id"
+			SELECT :key AS "key", mordbaseat."id" AS "id"
 			FROM "mshop_order_base_service_attr" AS mordbaseat
 			:joins
 			WHERE :cond
+			GROUP BY :key, mordbaseat."id" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		) AS list
@@ -47,7 +48,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mordbaseat."id" AS "order.base.service.attribute.id", mordbaseat."siteid" AS "order.base.service.attribute.siteid",
+			SELECT mordbaseat."id" AS "order.base.service.attribute.id", mordbaseat."siteid" AS "order.base.service.attribute.siteid",
 				mordbaseat."attrid" AS "order.base.service.attribute.attributeid", mordbaseat."ordservid" AS "order.base.service.attribute.parentid",
 				mordbaseat."type" AS "order.base.service.attribute.type", mordbaseat."code" AS "order.base.service.attribute.code",
 				mordbaseat."value" AS "order.base.service.attribute.value", mordbaseat."name" AS "order.base.service.attribute.name",
@@ -56,6 +57,9 @@ return array(
 			FROM "mshop_order_base_service_attr" AS mordbaseat
 			:joins
 			WHERE :cond
+			GROUP BY mordbaseat."id", mordbaseat."siteid", mordbaseat."attrid", mordbaseat."ordservid",
+				mordbaseat."type", mordbaseat."code", mordbaseat."value", mordbaseat."name",
+				mordbaseat."mtime", mordbaseat."ctime", mordbaseat."editor" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
