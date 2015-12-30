@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
  */
 abstract class Base
 	extends \Aimeos\MShop\Service\Provider\Base
-	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
 	private $object;
 

@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Service\Provider\Payment;
  */
 abstract class Base
 	extends \Aimeos\MShop\Service\Provider\Base
-	implements \Aimeos\MShop\Service\Provider\Payment\Iface
 {
 	/**
 	 * Feature constant if querying for status updates for an order is supported.

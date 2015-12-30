@@ -18,7 +18,8 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
  * @subpackage Service
  */
 class Weight
-extends \Aimeos\MShop\Service\Provider\Decorator\Base
+	extends \Aimeos\MShop\Service\Provider\Decorator\Base
+	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
 	private $beConfig = array(
 		'weight.min' => array(

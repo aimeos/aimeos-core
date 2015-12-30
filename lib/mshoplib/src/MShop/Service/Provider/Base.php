@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Service\Provider;
  * @subpackage Service
  */
 abstract class Base
-implements \Aimeos\MShop\Service\Provider\Iface
 {
 	private $context;
 	private $serviceItem;

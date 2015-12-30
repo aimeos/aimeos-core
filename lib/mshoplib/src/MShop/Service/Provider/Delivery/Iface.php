@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * @copyright Metaways Infosystems GmbH, 2011
@@ -17,7 +17,7 @@ namespace Aimeos\MShop\Service\Provider\Delivery;
  * @package MShop
  * @subpackage Service
  */
-interface Iface extends \Aimeos\MShop\Service\Provider\Factory\Iface
+interface Iface extends \Aimeos\MShop\Service\Provider\Iface, \Aimeos\MShop\Service\Provider\Factory\Iface
 {
 	/**
 	 * Sends the order details to the ERP system for further processing.

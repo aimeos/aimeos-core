@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Service\Provider\Factory;
  * @subpackage Service
  */
 interface Iface
-	extends \Aimeos\MShop\Service\Provider\Iface
 {
 	/**
 	 * Initializes a new service provider object using the given context object.

@@ -20,6 +20,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
  */
 class Country
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
+	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
 	private $beConfig = array(
 		'country.billing-include' => array(

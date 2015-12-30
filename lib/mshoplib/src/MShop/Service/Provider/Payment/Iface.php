@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Service\Provider\Payment;
  * @package MShop
  * @subpackage Service
  */
-interface Iface extends \Aimeos\MShop\Service\Provider\Factory\Iface
+interface Iface extends \Aimeos\MShop\Service\Provider\Iface, \Aimeos\MShop\Service\Provider\Factory\Iface
 {
 	/**
 	 * Cancels the authorization for the given order if supported.

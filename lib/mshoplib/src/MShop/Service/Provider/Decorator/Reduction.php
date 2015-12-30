@@ -19,7 +19,8 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
  * @subpackage Service
  */
 class Reduction
-extends \Aimeos\MShop\Service\Provider\Decorator\Base
+	extends \Aimeos\MShop\Service\Provider\Decorator\Base
+	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
 	private $beConfig = array(
 		'reduction.percent' => array(

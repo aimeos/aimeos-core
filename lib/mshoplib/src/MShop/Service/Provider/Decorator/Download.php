@@ -19,6 +19,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
  */
 class Download
 	extends \Aimeos\MShop\Service\Provider\Decorator\Base
+	implements \Aimeos\MShop\Service\Provider\Decorator\Iface
 {
 	private $beConfig = array(
 		'download.all' => array(
