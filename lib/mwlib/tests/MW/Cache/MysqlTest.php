@@ -85,7 +85,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 				"expire" DATETIME NULL,
 				"value" MEDIUMTEXT NOT NULL,
 				KEY ("expire"),
-				CONSTRAINT PRIMARY KEY ("id", "siteid")
+				CONSTRAINT UNIQUE KEY ("id", "siteid")
 			);
 		';
 		$conn->create( $sql )->execute()->finish();
