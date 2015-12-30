@@ -33,7 +33,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
+			SELECT mpro."id" AS "product.id", mpro."siteid" AS "product.siteid",
 				mpro."typeid" AS "product.typeid", mpro."code" AS "product.code",
 				mpro."label" AS "product.label", mpro."config" AS "product.config",
 				mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
@@ -42,6 +42,10 @@ return array(
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond
+			GROUP BY mpro."id", mpro."siteid", mpro."typeid", mpro."code",
+				mpro."label", mpro."config", mpro."start", mpro."end",
+				mpro."status", mpro."ctime", mpro."mtime", mpro."editor"
+				/*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

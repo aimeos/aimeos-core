@@ -71,7 +71,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mproli."id" AS "product.lists.id", mproli."parentid" AS "product.lists.parentid",
+			SELECT mproli."id" AS "product.lists.id", mproli."parentid" AS "product.lists.parentid",
 				mproli."siteid" AS "product.lists.siteid", mproli."typeid" AS "product.lists.typeid",
 				mproli."domain" AS "product.lists.domain", mproli."refid" AS "product.lists.refid",
 				mproli."start" AS "product.lists.datestart", mproli."end" AS "product.lists.dateend",
@@ -81,6 +81,10 @@ return array(
 			FROM "mshop_product_list" AS mproli
 			:joins
 			WHERE :cond
+			GROUP BY mproli."id", mproli."parentid", mproli."siteid", mproli."typeid",
+				mproli."domain", mproli."refid", mproli."start", mproli."end",
+				mproli."config", mproli."pos", mproli."status", mproli."mtime",
+				mproli."editor", mproli."ctime" /*-orderby*/, :order /*orderby-*/
 			 /*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

@@ -32,13 +32,16 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mprostwa."id" AS "product.stock.warehouse.id", mprostwa."siteid" AS "product.stock.warehouse.siteid",
+			SELECT mprostwa."id" AS "product.stock.warehouse.id", mprostwa."siteid" AS "product.stock.warehouse.siteid",
 				mprostwa."code" AS "product.stock.warehouse.code", mprostwa."label" AS "product.stock.warehouse.label",
 				mprostwa."status" AS "product.stock.warehouse.status", mprostwa."mtime" AS "product.stock.warehouse.mtime",
 				mprostwa."editor" AS "product.stock.warehouse.editor", mprostwa."ctime" AS "product.stock.warehouse.ctime"
 			FROM "mshop_product_stock_warehouse" AS mprostwa
 			:joins
 			WHERE :cond
+			GROUP BY mprostwa."id", mprostwa."siteid", mprostwa."code", mprostwa."label",
+				mprostwa."status", mprostwa."mtime", mprostwa."editor", mprostwa."ctime"
+				/*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

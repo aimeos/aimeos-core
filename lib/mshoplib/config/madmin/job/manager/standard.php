@@ -34,12 +34,15 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT majob."id", majob."siteid", majob."label",
+			SELECT majob."id", majob."siteid", majob."label",
 				majob."method", majob."parameter", majob."result", majob."status",
 				majob."editor", majob."mtime", majob."ctime"
 			FROM "madmin_job" AS majob
 			:joins
 			WHERE :cond
+			GROUP BY majob."id", majob."siteid", majob."label",
+				majob."method", majob."parameter", majob."result", majob."status",
+				majob."editor", majob."mtime", majob."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		',

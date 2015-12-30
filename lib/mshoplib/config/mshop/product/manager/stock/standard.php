@@ -33,7 +33,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mprost."id" AS "product.stock.id", mprost."parentid" AS "product.stock.parentid",
+			SELECT mprost."id" AS "product.stock.id", mprost."parentid" AS "product.stock.parentid",
 				mprost."siteid" AS "product.stock.siteid", mprost."warehouseid" AS "product.stock.warehouseid",
 				mprost."stocklevel" AS "product.stock.stocklevel", mprost."backdate" AS "product.stock.backdate",
 				mprost."mtime" AS "product.stock.mtime", mprost."editor" AS "product.stock.editor",
@@ -41,6 +41,9 @@ return array(
 			FROM "mshop_product_stock" AS mprost
 			:joins
 			WHERE :cond
+			GROUP BY mprost."id", mprost."parentid", mprost."siteid", mprost."warehouseid",
+				mprost."stocklevel", mprost."backdate", mprost."mtime", mprost."editor",
+				mprost."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

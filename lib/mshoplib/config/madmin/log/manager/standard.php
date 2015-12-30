@@ -33,12 +33,15 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT malog."id", malog."siteid", malog."facility",
+			SELECT malog."id", malog."siteid", malog."facility",
 				malog."timestamp", malog."priority", malog."message",
 				malog."request"
 			FROM "madmin_log" AS malog
 			:joins
 			WHERE :cond
+			GROUP BY malog."id", malog."siteid", malog."facility",
+				malog."timestamp", malog."priority", malog."message",
+				malog."request" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 	',

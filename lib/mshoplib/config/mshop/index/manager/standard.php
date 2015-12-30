@@ -23,10 +23,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT mpro."id"
+			SELECT mpro."id"
 			FROM "mshop_product" AS mpro
 			:joins
 			WHERE :cond
+			GROUP BY mpro."id" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

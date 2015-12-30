@@ -34,7 +34,7 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT DISTINCT matt."id" AS "attribute.id", matt."siteid" AS "attribute.siteid",
+			SELECT matt."id" AS "attribute.id", matt."siteid" AS "attribute.siteid",
 				matt."typeid" AS "attribute.typeid", matt."domain" AS "attribute.domain",
 				matt."code" AS "attribute.code", matt."status" AS "attribute.status",
 				matt."pos" AS "attribute.position", matt."label" AS "attribute.label",
@@ -43,6 +43,9 @@ return array(
 			FROM "mshop_attribute" AS matt
 			:joins
 			WHERE :cond
+			GROUP BY matt."id", matt."siteid", matt."typeid", matt."domain",
+				matt."code", matt."status", matt."pos", matt."label",
+				matt."mtime", matt."ctime", matt."editor" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
