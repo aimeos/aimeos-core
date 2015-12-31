@@ -54,6 +54,15 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$this->msg( 'Processing customer demo data', 0 );
 
 		$context = $this->getContext();
+		$value = $context->getConfig()->get( 'setup/default/demo' );
+
+		if( $value === '' )
+		{
+			$this->status( 'OK' );
+			return;
+		}
+
+
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
 
 		$search = $manager->createSearch();
@@ -63,7 +72,7 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$manager->deleteItems( array_keys( $services ) );
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-customer.php';

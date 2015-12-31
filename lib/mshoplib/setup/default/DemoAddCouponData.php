@@ -54,8 +54,16 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$this->msg( 'Processing coupon demo data', 0 );
 
 		$context = $this->getContext();
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'coupon' );
+		$value = $context->getConfig()->get( 'setup/default/demo' );
 
+		if( $value === '' )
+		{
+			$this->status( 'OK' );
+			return;
+		}
+
+
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'coupon' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'coupon.label', 'demo-' ) );
 		$services = $manager->searchItems( $search );
@@ -63,7 +71,7 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$manager->deleteItems( array_keys( $services ) );
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-coupon.php';
@@ -71,7 +79,6 @@ class DemoAddCouponData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			if( ( $data = include( $path ) ) == false ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for coupon domain', $path ) );
 			}
-
 
 			foreach( $data as $entry )
 			{

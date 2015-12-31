@@ -54,12 +54,20 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$this->msg( 'Processing service demo data', 0 );
 
 		$context = $this->getContext();
+		$value = $context->getConfig()->get( 'setup/default/demo' );
+
+		if( $value === '' )
+		{
+			$this->status( 'OK' );
+			return;
+		}
+
+
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'service.code', 'demo-' ) );
 		$services = $manager->searchItems( $search );
-
 
 		foreach( $services as $item )
 		{
@@ -71,7 +79,7 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$manager->deleteItems( array_keys( $services ) );
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-service.php';
@@ -79,7 +87,6 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			if( ( $data = include( $path ) ) == false ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
 			}
-
 
 			foreach( $data as $entry )
 			{
@@ -93,7 +100,6 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				$item->setStatus( $entry['status'] );
 
 				$manager->saveItem( $item );
-
 
 				if( isset( $entry['media'] ) ) {
 					$this->addMedia( $item->getId(), $entry['media'], 'service' );

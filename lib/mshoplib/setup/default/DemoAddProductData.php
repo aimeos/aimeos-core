@@ -54,12 +54,20 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$this->msg( 'Processing product demo data', 0 );
 
 		$context = $this->getContext();
+		$value = $context->getConfig()->get( 'setup/default/demo' );
+
+		if( $value === '' )
+		{
+			$this->status( 'OK' );
+			return;
+		}
+
+
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
 		$products = $manager->searchItems( $search );
-
 
 		foreach( $products as $item )
 		{
@@ -73,7 +81,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$manager->deleteItems( array_keys( $products ) );
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$this->addDemoData();
 			$this->status( 'added' );

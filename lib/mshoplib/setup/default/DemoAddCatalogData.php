@@ -53,8 +53,17 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	{
 		$this->msg( 'Processing catalog demo data', 0 );
 
-		$item = null;
 		$context = $this->getContext();
+		$value = $context->getConfig()->get( 'setup/default/demo' );
+
+		if( $value === '' )
+		{
+			$this->status( 'OK' );
+			return;
+		}
+
+
+		$item = null;
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'catalog' );
 
 		try
@@ -69,7 +78,7 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		catch( \Exception $e ) {; } // If no root node was already inserted into the database
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-catalog.php';
