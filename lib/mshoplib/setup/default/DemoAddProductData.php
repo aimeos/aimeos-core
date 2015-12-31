@@ -50,12 +50,20 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 		$this->_msg( 'Processing product demo data', 0 );
 
 		$context = $this->_getContext();
+		$value = $context->getConfig()->get( 'setup/default/demo', '' );
+
+		if( $value === '' )
+		{
+			$this->_status( 'OK' );
+			return;
+		}
+
+
 		$manager = MShop_Factory::createManager( $context, 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
 		$products = $manager->searchItems( $search );
-
 
 		foreach( $products as $item )
 		{
@@ -69,7 +77,7 @@ class MW_Setup_Task_DemoAddProductData extends MW_Setup_Task_MShopAddDataAbstrac
 		$manager->deleteItems( array_keys( $products ) );
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$this->_addDemoData();
 			$this->_status( 'added' );

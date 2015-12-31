@@ -50,6 +50,15 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 		$this->_msg( 'Processing customer demo data', 0 );
 
 		$context = $this->_getContext();
+		$value = $context->getConfig()->get( 'setup/default/demo', '' );
+
+		if( $value === '' )
+		{
+			$this->_status( 'OK' );
+			return;
+		}
+
+
 		$manager = MShop_Factory::createManager( $context, 'customer' );
 
 		$search = $manager->createSearch();
@@ -59,7 +68,7 @@ class MW_Setup_Task_DemoAddCustomerData extends MW_Setup_Task_MShopAddDataAbstra
 		$manager->deleteItems( array_keys( $services ) );
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-customer.php';

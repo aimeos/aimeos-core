@@ -50,8 +50,16 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 		$this->_msg( 'Processing coupon demo data', 0 );
 
 		$context = $this->_getContext();
-		$manager = MShop_Factory::createManager( $context, 'coupon' );
+		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
+		if( $value === '' )
+		{
+			$this->_status( 'OK' );
+			return;
+		}
+
+
+		$manager = MShop_Factory::createManager( $context, 'coupon' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'coupon.label', 'demo-' ) );
 		$services = $manager->searchItems( $search );
@@ -59,7 +67,7 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 		$manager->deleteItems( array_keys( $services ) );
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-coupon.php';
@@ -67,7 +75,6 @@ class MW_Setup_Task_DemoAddCouponData extends MW_Setup_Task_MShopAddDataAbstract
 			if( ( $data = include( $path ) ) == false ) {
 				throw new MShop_Exception( sprintf( 'No file "%1$s" found for coupon domain', $path ) );
 			}
-
 
 			foreach( $data as $entry )
 			{
