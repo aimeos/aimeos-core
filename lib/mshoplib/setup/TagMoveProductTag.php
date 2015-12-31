@@ -74,7 +74,7 @@ class TagMoveProductTag extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $stmts as $table => $stmts )
 		{
-			$this->msg( sprintf( 'Moving table "%1$s"', $table ), 1 ); $this->status( '' );
+			$this->msg( sprintf( 'Moving table "%1$s"', $table ), 1 );
 
 			if( $this->schema->tableExists( $table ) === true )
 			{
