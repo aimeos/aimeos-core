@@ -54,7 +54,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$this->msg( 'Processing product demo data', 0 );
 
 		$context = $this->getContext();
-		$value = $context->getConfig()->get( 'setup/default/demo' );
+		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
 		if( $value === '' )
 		{

@@ -54,7 +54,7 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		$this->msg( 'Processing catalog demo data', 0 );
 
 		$context = $this->getContext();
-		$value = $context->getConfig()->get( 'setup/default/demo' );
+		$value = $context->getConfig()->get( 'setup/default/demo', '' );
 
 		if( $value === '' )
 		{
