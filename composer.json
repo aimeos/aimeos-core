@@ -22,6 +22,7 @@
 		"php": ">=5.3.3",
 		"ext-curl": "*",
 		"ext-dom": "*",
+		"ext-fileinfo": "*",
 		"ext-json": "*",
 		"ext-mbstring": "*",
 		"ext-pcre": "*",
@@ -31,9 +32,9 @@
 	},
 	"require-dev": {
 		"satooshi/php-coveralls": "dev-master",
-		"squizlabs/php_codesniffer": "1.*",
-		"phpunit/phpunit": "3.7.*",
-		"phing/phing": "2.4.*"
+		"squizlabs/php_codesniffer": "~1.0",
+		"phpunit/phpunit": "~3.7||~4.0",
+		"phing/phing": "~2.4"
 	},
 	"suggest": {
 		"phpdocumentor/phpdocumentor": "Required for generating the API documentation"
