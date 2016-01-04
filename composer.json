@@ -28,7 +28,8 @@
 		"ext-pcre": "*",
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
-		"ext-zip": "*"
+		"ext-zip": "*",
+		"psr/http-message": "~1.0"
 	},
 	"require-dev": {
 		"satooshi/php-coveralls": "dev-master",
