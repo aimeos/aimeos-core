@@ -158,7 +158,7 @@ class Standard
 			$siteid = null;
 		}
 
-		$values = array( 'siteid' => $siteid );
+		$values = array( 'log.siteid' => $siteid );
 		return $this->createItemBase( $values );
 	}
 
@@ -504,7 +504,7 @@ class Standard
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['id']] = $this->createItemBase( $row );
+				$items[$row['log.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );

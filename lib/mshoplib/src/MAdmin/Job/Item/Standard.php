@@ -44,7 +44,11 @@ class Standard
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		if( isset( $this->values['job.status'] ) ) {
+			return (int) $this->values['job.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -55,7 +59,11 @@ class Standard
 	 */
 	public function getLabel()
 	{
-		return ( isset( $this->values['label'] ) ? (string) $this->values['label'] : '' );
+		if( isset( $this->values['job.label'] ) ) {
+			return (string) $this->values['job.label'];
+		}
+
+		return '';
 	}
 
 
@@ -68,7 +76,7 @@ class Standard
 	{
 		if( $label == $this->getLabel() ) { return; }
 
-		$this->values['label'] = (string) $label;
+		$this->values['job.label'] = (string) $label;
 		$this->setModified();
 	}
 
@@ -80,7 +88,11 @@ class Standard
 	 */
 	public function getMethod()
 	{
-		return ( isset( $this->values['method'] ) ? (string) $this->values['method'] : '' );
+		if( isset( $this->values['job.method'] ) ) {
+			return (string) $this->values['job.method'];
+		}
+
+		return '';
 	}
 
 
@@ -93,7 +105,7 @@ class Standard
 	{
 		if( $method == $this->getMethod() ) { return; }
 
-		$this->values['method'] = (string) $method;
+		$this->values['job.method'] = (string) $method;
 		$this->setModified();
 	}
 
@@ -105,7 +117,11 @@ class Standard
 	 */
 	public function getParameter()
 	{
-		return ( isset( $this->values['parameter'] ) ? $this->values['parameter'] : array() );
+		if( isset( $this->values['job.parameter'] ) ) {
+			return (array) $this->values['job.parameter'];
+		}
+
+		return array();
 	}
 
 
@@ -116,7 +132,7 @@ class Standard
 	 */
 	public function setParameter( array $param )
 	{
-		$this->values['parameter'] = $param;
+		$this->values['job.parameter'] = $param;
 		$this->setModified();
 	}
 
@@ -128,7 +144,11 @@ class Standard
 	 */
 	public function getResult()
 	{
-		return ( isset( $this->values['result'] ) ? $this->values['result'] : array() );
+		if( isset( $this->values['job.result'] ) ) {
+			return (array) $this->values['job.result'];
+		}
+
+		return array();
 	}
 
 
@@ -139,7 +159,7 @@ class Standard
 	 */
 	public function setResult( array $result )
 	{
-		$this->values['result'] = $result;
+		$this->values['job.result'] = $result;
 		$this->setModified();
 	}
 
@@ -153,7 +173,7 @@ class Standard
 	{
 		if( $status == $this->getStatus() ) { return; }
 
-		$this->values['status'] = (int) $status;
+		$this->values['job.status'] = (int) $status;
 		$this->setModified();
 	}
 

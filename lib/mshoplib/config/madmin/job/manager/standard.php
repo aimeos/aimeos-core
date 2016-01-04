@@ -34,9 +34,11 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT majob."id", majob."siteid", majob."label",
-				majob."method", majob."parameter", majob."result", majob."status",
-				majob."editor", majob."mtime", majob."ctime"
+			SELECT majob."id" AS "job.id", majob."siteid" AS "job.siteid",
+				majob."label" AS "job.label", majob."method" AS "job.method",
+				majob."parameter" AS "job.parameter", majob."result" AS "job.result",
+				majob."status" AS "job.status", majob."editor" AS "job.editor",
+				majob."mtime" AS "job.mtime", majob."ctime" AS "job.ctime"
 			FROM "madmin_job" AS majob
 			:joins
 			WHERE :cond

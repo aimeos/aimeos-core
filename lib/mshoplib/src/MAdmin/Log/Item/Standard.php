@@ -44,7 +44,11 @@ class Standard
 	 */
 	public function getFacility()
 	{
-		return ( isset( $this->values['facility'] ) ? (string) $this->values['facility'] : '' );
+		if( isset( $this->values['log.facility'] ) ) {
+			return (string) $this->values['log.facility'];
+		}
+
+		return '';
 	}
 
 
@@ -55,7 +59,7 @@ class Standard
 	 */
 	public function setFacility( $facility )
 	{
-		$this->values['facility'] = (string) $facility;
+		$this->values['log.facility'] = (string) $facility;
 		$this->setModified();
 	}
 
@@ -63,11 +67,13 @@ class Standard
 	/**
 	 * Returns the timestamp of the item.
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getTimestamp()
 	{
-		return ( isset( $this->values['timestamp'] ) ? (string) $this->values['timestamp'] : null );
+		if( isset( $this->values['log.timestamp'] ) ) {
+			return (string) $this->values['log.timestamp'];
+		}
 	}
 
 
@@ -78,7 +84,11 @@ class Standard
 	 */
 	public function getPriority()
 	{
-		return ( isset( $this->values['priority'] ) ? (int) $this->values['priority'] : 0 );
+		if( isset( $this->values['log.priority'] ) ) {
+			return (int) $this->values['log.priority'];
+		}
+
+		return 0;
 	}
 
 
@@ -89,7 +99,7 @@ class Standard
 	 */
 	public function setPriority( $priority )
 	{
-		$this->values['priority'] = (int) $priority;
+		$this->values['log.priority'] = (int) $priority;
 		$this->setModified();
 	}
 
@@ -101,7 +111,11 @@ class Standard
 	 */
 	public function getMessage()
 	{
-		return ( isset( $this->values['message'] ) ? (string) $this->values['message'] : '' );
+		if( isset( $this->values['log.message'] ) ) {
+			return (string) $this->values['log.message'];
+		}
+
+		return '';
 	}
 
 
@@ -112,7 +126,7 @@ class Standard
 	 */
 	public function setMessage( $message )
 	{
-		$this->values['message'] = (string) $message;
+		$this->values['log.message'] = (string) $message;
 		$this->setModified();
 	}
 
@@ -124,7 +138,11 @@ class Standard
 	 */
 	public function getRequest()
 	{
-		return ( isset( $this->values['request'] ) ? (string) $this->values['request'] : '' );
+		if( isset( $this->values['log.request'] ) ) {
+			return (string) $this->values['log.request'];
+		}
+
+		return '';
 	}
 
 
@@ -135,7 +153,7 @@ class Standard
 	 */
 	public function setRequest( $request )
 	{
-		$this->values['request'] = (string) $request;
+		$this->values['log.request'] = (string) $request;
 		$this->setModified();
 	}
 

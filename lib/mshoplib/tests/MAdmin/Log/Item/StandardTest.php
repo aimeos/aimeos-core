@@ -23,16 +23,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 1,
-			'siteid' => 2,
-			'facility' => 'UT facility',
-			'timestamp' => '2010-01-01 00:00:00',
-			'priority' => 1,
-			'message' => 'unittest log message',
-			'request' => 'UT request',
-			'ctime' => '2010-01-01 00:00:00',
-			'mtime' => '2010-01-01 00:00:00',
-			'editor' => 'editor foo'
+			'log.id' => 1,
+			'log.siteid' => 2,
+			'log.facility' => 'UT facility',
+			'log.timestamp' => '2010-01-01 00:00:00',
+			'log.priority' => 1,
+			'log.message' => 'unittest log message',
+			'log.request' => 'UT request',
+			'log.ctime' => '2010-01-01 00:00:00',
+			'log.mtime' => '2010-01-01 00:00:00',
+			'log.editor' => 'editor foo'
 		);
 
 		$this->object = new \Aimeos\MAdmin\Log\Item\Standard( $this->values );

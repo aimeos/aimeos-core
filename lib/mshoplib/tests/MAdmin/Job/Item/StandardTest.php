@@ -23,16 +23,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'id' => 1,
-			'siteid' => 2,
-			'label' => 'unittest job',
-			'method' => 'Product_Import_Text.importFile',
-			'parameter' => array( 'items' => 'testfile.ext' ),
-			'result' => array( 'items' => 'testfile2.ext' ),
-			'status' => 1,
-			'editor' => 'unittest',
-			'mtime' => '2010-01-01 00:00:00',
-			'ctime' => '2000-01-01 00:00:00',
+			'job.id' => 1,
+			'job.siteid' => 2,
+			'job.label' => 'unittest job',
+			'job.method' => 'Product_Import_Text.importFile',
+			'job.parameter' => array( 'items' => 'testfile.ext' ),
+			'job.result' => array( 'items' => 'testfile2.ext' ),
+			'job.status' => 1,
+			'job.editor' => 'unittest',
+			'job.mtime' => '2010-01-01 00:00:00',
+			'job.ctime' => '2000-01-01 00:00:00',
 		);
 
 		$this->object = new \Aimeos\MAdmin\Job\Item\Standard( $this->values );

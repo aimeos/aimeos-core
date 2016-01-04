@@ -131,7 +131,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'job.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
@@ -494,21 +494,21 @@ class Standard
 
 			while( ( $row = $results->fetch() ) !== false )
 			{
-				$config = $row['parameter'];
-				if( ( $row['parameter'] = json_decode( $row['parameter'], true ) ) === null )
+				$config = $row['job.parameter'];
+				if( ( $row['job.parameter'] = json_decode( $row['job.parameter'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.parameter', $row['id'], $config );
 					$logger->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$config = $row['result'];
-				if( ( $row['result'] = json_decode( $row['result'], true ) ) === null )
+				$config = $row['job.result'];
+				if( ( $row['job.result'] = json_decode( $row['job.result'], true ) ) === null )
 				{
 					$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'madmin_job.result', $row['id'], $config );
 					$logger->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 				}
 
-				$items[$row['id']] = $this->createItemBase( $row );
+				$items[$row['job.id']] = $this->createItemBase( $row );
 			}
 
 			$dbm->release( $conn, $dbname );
