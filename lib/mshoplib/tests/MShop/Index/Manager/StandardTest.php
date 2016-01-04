@@ -209,9 +209,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$dbm = $context->getDatabaseManager();
 		$siteId = $context->getLocale()->getSiteId();
+		$langid = $context->getLocale()->getLanguageId();
 
 		$sqlProd = 'SELECT "value" FROM "mshop_index_text"
-			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'product\'';
+			WHERE "siteid" = ? AND "prodid" = ? AND "langid" = \'' . $langid . '\'
+				AND "type" = \'name\' AND domain = \'product\'';
 		$sqlAttr = 'SELECT "value" FROM "mshop_index_text"
 			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'attribute\'';
 
