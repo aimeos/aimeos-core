@@ -24,6 +24,7 @@ class Standard
 	private $body;
 	private $clientaddr;
 	private $target;
+	private $files;
 
 
 	/**
@@ -33,13 +34,14 @@ class Standard
 	 * @param string $body Request body content
 	 * @param string $clientaddr Client IP address
 	 */
-	public function __construct( $view, $body = '', $clientaddr = '', $target = null )
+	public function __construct( $view, $body = '', $clientaddr = '', $target = null, $files = array() )
 	{
 		parent::__construct( $view );
 
 		$this->body = $body;
 		$this->clientaddr = $clientaddr;
 		$this->target = $target;
+		$this->files = $files;
 	}
 
 
@@ -84,5 +86,70 @@ class Standard
 	public function getTarget()
 	{
 		return $this->target;
+	}
+
+
+	/**
+	 * Retrieve normalized file upload data.
+	 *
+	 * This method returns upload metadata in a normalized tree, with each leaf
+	 * an instance of Psr\Http\Message\UploadedFileInterface.
+	 *
+	 * These values MAY be prepared from $_FILES or the message body during
+	 * instantiation, or MAY be injected via withUploadedFiles().
+	 *
+	 * @return array An array tree of UploadedFileInterface instances; an empty
+	 *     array MUST be returned if no data is present.
+	 */
+	public function getUploadedFiles()
+	{
+		return $this->createUploadedFiles( $this->files );
+	}
+
+
+	/**
+	 * Creates a normalized file upload data from the given array.
+	 *
+	 * @param array $files File upload data from $_FILES
+	 * @return array Multi-dimensional list of file objects
+	 */
+	protected function createUploadedFiles( array $files )
+	{
+		$list = array();
+
+		foreach( $files as $key => $value )
+		{
+			if( !isset( $value['tmp_name'] ) )
+			{
+				$list[$key] = $this->createUploadedFiles( $value );
+				continue;
+			}
+
+			if( is_array( $value['tmp_name'] ) )
+			{
+				for( $i = 0; $i < count( $value['tmp_name'] ); $i++ )
+				{
+					$list[$key][] = new \Aimeos\MW\View\Helper\Request\File\Standard(
+						$value['tmp_name'][$i],
+						( isset( $value['name'][$i] ) ? $value['name'][$i] : '' ),
+						( isset( $value['size'][$i] ) ? $value['size'][$i] : 0 ),
+						( isset( $value['type'][$i] ) ? $value['type'][$i] : 'application/binary' ),
+						( isset( $value['error'][$i] ) ? $value['error'][$i] : 0 )
+					);
+				}
+			}
+			else
+			{
+				$list[$key] = new \Aimeos\MW\View\Helper\Request\File\Standard(
+					$value['tmp_name'],
+					( isset( $value['name'] ) ? $value['name'] : '' ),
+					( isset( $value['size'] ) ? $value['size'] : 0 ),
+					( isset( $value['type'] ) ? $value['type'] : 'application/binary' ),
+					( isset( $value['error'] ) ? $value['error'] : 0 )
+				);
+			}
+		}
+
+		return $list;
 	}
 }
