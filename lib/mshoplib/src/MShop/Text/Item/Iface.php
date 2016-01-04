@@ -50,7 +50,7 @@ interface Iface
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 * @return void
 	 */
-		public function setLanguageId( $langid );
+	public function setLanguageId( $langid );
 
 	/**
 	 * Returns the content of the text item.

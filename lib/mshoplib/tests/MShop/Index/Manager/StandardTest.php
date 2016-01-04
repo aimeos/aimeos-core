@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$prodText = $this->getValue( $dbm, $sqlProd, 'value', $siteId, $item->getId() );
 		$this->object->deleteItem( $item->getId() );
 
-		$this->assertEquals( '16 discs', $prodText );
+		$this->assertEquals( 'Unterproduct 3', $prodText );
 		$this->assertEquals( 'XL', $attrText );
 	}
 

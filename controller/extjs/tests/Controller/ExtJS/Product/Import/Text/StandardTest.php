@@ -63,9 +63,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$data = array();
 		$data[] = '"Language ID","Type","Code","List type","Text type","Text ID","Text"' . "\n";
 		$data[] = '"en","product","ABCD","default","long","","ABCD: long"' . "\n";
-		$data[] = '"en","product","ABCD","default","metadescription","","ABCD: meta desc"' . "\n";
-		$data[] = '"en","product","ABCD","default","metakeywords","","ABCD: meta keywords"' . "\n";
-		$data[] = '"en","product","ABCD","default","metatitle","","ABCD: meta title"' . "\n";
+		$data[] = '"en","product","ABCD","default","meta-description","","ABCD: meta desc"' . "\n";
+		$data[] = '"en","product","ABCD","default","meta-keyword","","ABCD: meta keywords"' . "\n";
+		$data[] = '"en","product","ABCD","default","url","","ABCD: meta title"' . "\n";
 		$data[] = '"en","product","ABCD","default","name","","ABCD: name"' . "\n";
 		$data[] = '"en","product","ABCD","default","short","","ABCD: short"' . "\n";
 		$data[] = ' ';

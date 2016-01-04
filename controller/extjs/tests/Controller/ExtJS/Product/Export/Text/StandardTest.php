@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'default', $lines[2][1] );
 		$this->assertEquals( 'CNE', $lines[2][2] );
 		$this->assertEquals( 'unittype13', $lines[2][3] );
-		$this->assertEquals( 'metadescription', $lines[2][4] );
+		$this->assertEquals( 'meta-description', $lines[2][4] );
 		$this->assertEquals( 'Expresso', $lines[2][6] );
 	}
 
