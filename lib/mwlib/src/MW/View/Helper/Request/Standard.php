@@ -33,6 +33,8 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param string $body Request body content
 	 * @param string $clientaddr Client IP address
+	 * @param string $target Page ID or route name
+	 * @param \Traversable|array $files Uploaded files
 	 */
 	public function __construct( $view, $body = '', $clientaddr = '', $target = null, $files = array() )
 	{
@@ -110,10 +112,10 @@ class Standard
 	/**
 	 * Creates a normalized file upload data from the given array.
 	 *
-	 * @param array $files File upload data from $_FILES
+	 * @param \Traversable|array $files File upload data from $_FILES
 	 * @return array Multi-dimensional list of file objects
 	 */
-	protected function createUploadedFiles( array $files )
+	protected function createUploadedFiles( $files )
 	{
 		$list = array();
 
