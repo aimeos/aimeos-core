@@ -127,7 +127,7 @@ class Standard
 	public function scale( $width, $height, $fit = true )
 	{
 		if( ( $info = getimagesize( $this->getFilepath() ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( 'Unable to retrive image size' );
+			throw new \Aimeos\MW\Media\Exception( 'Unable to retrieve image size' );
 		}
 
 		if( $fit === true )
