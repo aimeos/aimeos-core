@@ -73,11 +73,41 @@ class MShop_Context_Item_Default implements MShop_Context_Item_Interface
 	 */
 	public function __toString()
 	{
-		if( isset( $this->_locale ) ) {
-			return spl_object_hash( $this->_locale );
+		$hashes = spl_object_hash( $this );
+
+		if( isset( $this->_cache ) ) {
+			$hashes .= spl_object_hash( $this->_cache );
 		}
 
-		return '0';
+		if( isset( $this->_config ) ) {
+			$hashes .= spl_object_hash( $this->_config );
+		}
+
+		if( isset( $this->_dbm ) ) {
+			$hashes .= spl_object_hash( $this->_dbm );
+		}
+
+		if( isset( $this->_locale ) ) {
+			$hashes .= spl_object_hash( $this->_locale );
+		}
+
+		if( isset( $this->_logger ) ) {
+			$hashes .= spl_object_hash( $this->_logger );
+		}
+
+		if( isset( $this->_session ) ) {
+			$hashes .= spl_object_hash( $this->_session );
+		}
+
+		if( isset( $this->_mail ) ) {
+			$hashes .= spl_object_hash( $this->_mail );
+		}
+
+		if( isset( $this->_view ) ) {
+			$hashes .= spl_object_hash( $this->_view );
+		}
+
+		return md5( $hashes );
 	}
 
 
