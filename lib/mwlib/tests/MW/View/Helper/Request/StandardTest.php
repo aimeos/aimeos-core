@@ -25,7 +25,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			)
 		);
 
-		$this->object = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1', 'test', $files );
+
+		$this->object = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Request\Standard' )
+			->setConstructorArgs( array( $view, 'body', '127.0.0.1', 'test', $files ) )
+			->setMethods( array( 'checkUploadedFile' ) )
+			->getMock();
 	}
 
 
@@ -96,7 +100,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			)
 		);
 
-		$object = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1', 'test', $files );
+		$object = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Request\Standard' )
+			->setConstructorArgs( array( $view, 'body', '127.0.0.1', 'test', $files ) )
+			->setMethods( array( 'checkUploadedFile' ) )
+			->getMock();
 
 		$files = $object->transform()->getUploadedFiles();
 
@@ -130,7 +137,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			)
 		);
 
-		$object = new \Aimeos\MW\View\Helper\Request\Standard( $view, 'body', '127.0.0.1', 'test', $files );
+		$object = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Request\Standard' )
+			->setConstructorArgs( array( $view, 'body', '127.0.0.1', 'test', $files ) )
+			->setMethods( array( 'checkUploadedFile' ) )
+			->getMock();
 
 		$files = $object->transform()->getUploadedFiles();
 

@@ -131,27 +131,45 @@ class Standard
 			{
 				for( $i = 0; $i < count( $value['tmp_name'] ); $i++ )
 				{
+					$this->checkUploadedFile( $value['tmp_name'][$i] );
+
 					$list[$key][] = new \Aimeos\MW\View\Helper\Request\File\Standard(
 						$value['tmp_name'][$i],
 						( isset( $value['name'][$i] ) ? $value['name'][$i] : '' ),
 						( isset( $value['size'][$i] ) ? $value['size'][$i] : 0 ),
-						( isset( $value['type'][$i] ) ? $value['type'][$i] : 'application/binary' ),
+						( isset( $value['type'][$i] ) ? $value['type'][$i] : 'application/octet-stream' ),
 						( isset( $value['error'][$i] ) ? $value['error'][$i] : 0 )
 					);
 				}
 			}
 			else
 			{
+				$this->checkUploadedFile( $value['tmp_name'] );
+
 				$list[$key] = new \Aimeos\MW\View\Helper\Request\File\Standard(
 					$value['tmp_name'],
 					( isset( $value['name'] ) ? $value['name'] : '' ),
 					( isset( $value['size'] ) ? $value['size'] : 0 ),
-					( isset( $value['type'] ) ? $value['type'] : 'application/binary' ),
+					( isset( $value['type'] ) ? $value['type'] : 'application/octet-stream' ),
 					( isset( $value['error'] ) ? $value['error'] : 0 )
 				);
 			}
 		}
 
 		return $list;
+	}
+
+
+	/**
+	 * Checks if the file was uploaded
+	 *
+	 * @param string $path Path to the file
+	 * @throws \Aimeos\MW\View\Exception If file wasn't uploaded and this can lead to a security issue
+	 */
+	protected function checkUploadedFile( $path )
+	{
+		if( is_uploaded_file( $path ) === false ) {
+			throw new \Aimeos\MW\View\Exception( sprintf( 'File "%1$s" was not uploaded', $path ) );
+		}
 	}
 }
