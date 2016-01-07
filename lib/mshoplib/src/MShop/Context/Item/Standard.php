@@ -79,11 +79,45 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function __toString()
 	{
-		if( isset( $this->locale ) ) {
-			return spl_object_hash( $this->locale );
+		$hashes = spl_object_hash( $this );
+
+		if( isset( $this->cache ) ) {
+			$hashes .= spl_object_hash( $this->cache );
 		}
 
-		return '0';
+		if( isset( $this->config ) ) {
+			$hashes .= spl_object_hash( $this->config );
+		}
+
+		if( isset( $this->dbm ) ) {
+			$hashes .= spl_object_hash( $this->dbm );
+		}
+
+		if( isset( $this->fsm ) ) {
+			$hashes .= spl_object_hash( $this->fsm );
+		}
+
+		if( isset( $this->locale ) ) {
+			$hashes .= spl_object_hash( $this->locale );
+		}
+
+		if( isset( $this->logger ) ) {
+			$hashes .= spl_object_hash( $this->logger );
+		}
+
+		if( isset( $this->session ) ) {
+			$hashes .= spl_object_hash( $this->session );
+		}
+
+		if( isset( $this->mail ) ) {
+			$hashes .= spl_object_hash( $this->mail );
+		}
+
+		if( isset( $this->view ) ) {
+			$hashes .= spl_object_hash( $this->view );
+		}
+
+		return md5( $hashes );
 	}
 
 
