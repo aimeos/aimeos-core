@@ -6,13 +6,14 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 # Metal <meteoramic@yahoo.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-08-03 01:13+0000\n"
+"PO-Revision-Date: 2015-12-13 14:36+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -95,7 +96,7 @@ msgstr "beklemede"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "yetkilendirilmiş"
+msgstr "onaylanmış"
 
 #. Payment status value
 msgid "pay:6"
@@ -208,3 +209,6 @@ msgstr "ambalaj-yüksekliği"
 #. Product property package-weight
 msgid "package-weight"
 msgstr "ambalaj-ağırlığı"
+
+msgid "price:default"
+msgstr "%1$s %2$s"

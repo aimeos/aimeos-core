@@ -1,43 +1,43 @@
 [main]
 host = https://www.transifex.com
 
-[aimeos-core.client-extjs]
+[aimeos-core.admin]
 file_filter = client/extjs/i18n/<lang>.po
 source_file = client/extjs/i18n/core-client-extjs.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-extjs-ext]
+[aimeos-core.admin-ext]
 file_filter = client/extjs/i18n/ext/<lang>.po
 source_file = client/extjs/i18n/ext/core-client-extjs-ext.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html]
+[aimeos-core.client]
 file_filter = client/html/i18n/<lang>.po
 source_file = client/html/i18n/core-client-html.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html-code]
+[aimeos-core.client-code]
 file_filter = client/html/i18n/code/<lang>.po
 source_file = client/html/i18n/code/core-client-html-code.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html-country]
+[aimeos-core.client-country]
 file_filter = client/html/i18n/country/<lang>.po
 source_file = client/html/i18n/country/core-client-html-country.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html-language]
+[aimeos-core.client-language]
 file_filter = client/html/i18n/language/<lang>.po
 source_file = client/html/i18n/language/core-client-html-language.pot
 source_lang = en
 type = PO
 
-[aimeos-core.client-html-currency]
+[aimeos-core.client-currency]
 file_filter = client/html/i18n/currency/<lang>.po
 source_file = client/html/i18n/currency/core-client-html-currency.pot
 source_lang = en

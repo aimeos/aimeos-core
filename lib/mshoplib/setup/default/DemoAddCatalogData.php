@@ -49,8 +49,17 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 	{
 		$this->_msg( 'Processing catalog demo data', 0 );
 
-		$item = null;
 		$context = $this->_getContext();
+		$value = $context->getConfig()->get( 'setup/default/demo', '' );
+
+		if( $value === '' )
+		{
+			$this->_status( 'OK' );
+			return;
+		}
+
+
+		$item = null;
 		$manager = MShop_Factory::createManager( $context, 'catalog' );
 
 		try
@@ -65,7 +74,7 @@ class MW_Setup_Task_DemoAddCatalogData extends MW_Setup_Task_MShopAddDataAbstrac
 		catch( Exception $e ) {; } // If no root node was already inserted into the database
 
 
-		if( $context->getConfig()->get( 'setup/default/demo', false ) == true )
+		if( $value === '1' )
 		{
 			$ds = DIRECTORY_SEPARATOR;
 			$path = __DIR__ . $ds . 'data' . $ds . 'demo-catalog.php';

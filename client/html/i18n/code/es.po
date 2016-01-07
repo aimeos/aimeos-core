@@ -6,13 +6,15 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
+# Daniel Vega <danielvega131990@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2015-12-29 15:09+0000\n"
+"Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -154,27 +156,27 @@ msgstr "Nombre del banco"
 
 #. Omnipay service provider
 msgid "payment.firstname"
-msgstr ""
+msgstr "Nombre del pago"
 
 #. Omnipay service provider
 msgid "payment.lastname"
-msgstr ""
+msgstr "Apellido del pago"
 
 #. Omnipay service provider
 msgid "payment.cardno"
-msgstr ""
+msgstr "Nro. tarjeta del pago"
 
 #. Omnipay service provider
 msgid "payment.cvv"
-msgstr ""
+msgstr "Número de verificación"
 
 #. Omnipay service provider
 msgid "payment.expirymonth"
-msgstr ""
+msgstr "Mes de caducidad del pago"
 
 #. Omnipay service provider
 msgid "payment.expiryyear"
-msgstr ""
+msgstr "Año de caducidad del pago"
 
 #. Warehouse code
 msgid "warehouse:default"
@@ -182,28 +184,31 @@ msgstr "almacén:predeterminado"
 
 #. Favorite action
 msgid "favorite"
-msgstr ""
+msgstr "favorito"
 
 #. Pin action
 msgid "pin"
-msgstr ""
+msgstr "marcar"
 
 #. Watch action
 msgid "watch"
-msgstr ""
+msgstr "observar"
 
 #. Product property package-length
 msgid "package-length"
-msgstr ""
+msgstr "longitud del paquete"
 
 #. Product property package-width
 msgid "package-width"
-msgstr ""
+msgstr "ancho del paquete"
 
 #. Product property package-height
 msgid "package-height"
-msgstr ""
+msgstr "alto del paquete"
 
 #. Product property package-weight
 msgid "package-weight"
-msgstr ""
+msgstr "peso del paquete"
+
+msgid "price:default"
+msgstr "%1$s %2$s"

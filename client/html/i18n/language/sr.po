@@ -6,6 +6,7 @@
 # Translators:
 # Translators:
 # Translators:
+# Translators:
 # danijel marinovic <danijel06@gmail.com>, 2015
 msgid ""
 msgstr ""

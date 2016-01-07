@@ -120,6 +120,27 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetBodyCategoryLevels()
+	{
+		$context = clone $this->_context;
+		$context->getConfig()->set( 'client/html/catalog/lists/levels', MW_Tree_Manager_Abstract::LEVEL_TREE );
+
+		$paths = \TestHelper::getHtmlTemplatePaths();
+		$this->_object = new \Client_Html_Catalog_List_Default( $context, $paths );
+		$this->_object->setView( \TestHelper::getView() );
+
+		$view = $this->_object->getView();
+		$helper = new \MW_View_Helper_Parameter_Default( $view, array( 'f_catid' => $this->_getCatalogItem( 'root' )->getId() ) );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->_object->getBody();
+		$this->assertRegExp( '#.*Cafe Noire Cappuccino.*#smu', $output );
+		$this->assertRegExp( '#.*Cafe Noire Expresso.*#smu', $output );
+		$this->assertRegExp( '#.*Unittest: Bundle.*#smu', $output );
+		$this->assertRegExp( '#.*Unittest: Test priced Selection.*#smu', $output );
+	}
+
+
 	public function testGetBodySearchText()
 	{
 		$view = $this->_object->getView();
@@ -163,15 +184,15 @@ class Client_Html_Catalog_List_DefaultTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	protected function _getCatalogItem()
+	protected function _getCatalogItem( $code = 'cafe' )
 	{
 		$catalogManager = MShop_Catalog_Manager_Factory::createManager( $this->_context );
 		$search = $catalogManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'catalog.code', 'cafe' ) );
+		$search->setConditions( $search->compare( '==', 'catalog.code', $code ) );
 		$items = $catalogManager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new Exception( 'No catalog item with code "cafe" found' );
+			throw new Exception( sprintf( 'No catalog item with code "%1$s" found', $code ) );
 		}
 
 		return $item;
