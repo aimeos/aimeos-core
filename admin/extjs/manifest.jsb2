@@ -29,7 +29,7 @@
 		}]
 	}, {
 		"name": "ExtJS Core",
-		"file": "js/extjs-all.js",
+		"file": "extjs-all.js",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "ext-base.js",
@@ -40,7 +40,7 @@
 		}]
 	}, {
 		"name": "Aimeos Core",
-		"file": "js/aimeos-core.js",
+		"file": "aimeos-core.js",
 		"isDebug": true,
 		"fileIncludes": [{
 			"text": "ext-override.js",

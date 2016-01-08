@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Aimeos clients" default="all">
+<project name="Aimeos admin" default="all">
 
 	<target name="i18n" description="Creates translation message files">
 		<exec command="find ./extjs/src/ -type f -name '*.js' | xgettext -j -s --no-wrap --add-comments=: --language=Python --from-code=UTF-8 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/core-admin.pot -f -"

@@ -11,6 +11,15 @@
 			</fileset>
 		</jsllint>
 	</target>
+	
+	<target name="build" description="Minifies the javascript files">
+		<jsMin targetDir="deploy" suffix=".min" failOnError="true">
+			<fileset dir="deploy">
+				<include name="aimeos-core.js"/>
+				<include name="extjs-all.js"/>
+			</fileset>
+		</jsMin>
+	</target>
 
 	<target name="all" depends="check" description="Builds all parts of the package">
 	</target>

@@ -204,10 +204,6 @@ class Standard
 			}
 		}
 
-		if( $debug !== true ) {
-			$content = \JSMin::minify( $content );
-		}
-
 		$pkgFileName = $this->basePath . $this->deployDir . $package->file;
 
 		if( file_put_contents( $pkgFileName, $content ) === false ) {

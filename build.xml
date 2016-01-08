@@ -249,7 +249,6 @@
 	<target name="build" description="Creates all files to be generated" >
 		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/misc/phing" />
 		<jsbpackages />
-		<exec command="tx pull -a -f --minimum-perc=1" checkreturn="true" logoutput="true" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />
@@ -258,6 +257,7 @@
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/client" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/admin" />
+		<phing target="build" haltonfailure="true" dir="${coredir}/admin/extjs" />
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />

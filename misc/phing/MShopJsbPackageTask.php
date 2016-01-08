@@ -45,7 +45,7 @@ class MShopJsbPackageTask extends Task
 	{
 		$this->log( 'Generating JSB2 packages' );
 
-		foreach( $this->aimeos->getCustomPaths( 'client/extjs' ) as $base => $paths )
+		foreach( $this->aimeos->getCustomPaths( 'admin/extjs' ) as $base => $paths )
 		{
 			foreach( $paths as $path )
 			{
