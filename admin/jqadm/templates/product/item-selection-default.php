@@ -17,22 +17,16 @@ $enc = $this->encoder();
 	<div id="product-item-selection-data" class="item-selection card-block panel-collapse collapse"
 		role="tabpanel" aria-labelledby="product-item-selection-head">
 
-		<div id="product-item-selection-group" role="tablist" aria-multiselectable="true">
 <?php foreach( (array) $this->get( 'selectionData', array() ) as $code => $map ) : ?>
 			<div class="product-item-selection-groupitem card">
-				<div id="product-item-selection-groupitem-<?php echo $enc->attr( $code ); ?>" class="header card-header"
-					role="tab" data-toggle="collapse" data-parent="#product-item-selection-group"
-					href="#product-item-selection-groupdata-<?php echo $enc->attr( $code ); ?>"
-					aria-expanded="true" aria-controls="product-item-selection-groupdata-<?php echo $enc->attr( $code ); ?>">
+				<div id="product-item-selection-groupitem-<?php echo $enc->attr( $code ); ?>" class="header card-header">
 					<?php echo $enc->html( $this->translate( 'admin', $code ) ); ?>
 					<div class="actions">
 						<div class="btn btn-secondary fa fa-files-o"></div>
 						<div class="btn btn-danger fa fa-trash"></div>
 					</div>
 				</div>
-				<div id="product-item-selection-groupdata-<?php echo $enc->attr( $code ); ?>"
-					class="item-selection card-block panel-collapse collapse"
-					role="tabpanel" aria-labelledby="product-item-selection-groupitem-<?php echo $enc->attr( $code ); ?>">
+				<div id="product-item-selection-groupdata-<?php echo $enc->attr( $code ); ?>" class="item-selection card-block">
 					<div class="col-lg-6">
 						<div class="form-group row">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'ID' ) ); ?></label>
@@ -94,6 +88,6 @@ $enc = $this->encoder();
 				</div>
 			</div>
 <?php endforeach; ?>
-		</div>
+
 	</div>
 </div>

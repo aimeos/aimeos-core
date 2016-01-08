@@ -125,7 +125,7 @@ class TestHelperJqadm
 		$ctx->setLocale( $locale );
 
 
-		$ctx->setEditor( 'core:client/html' );
+		$ctx->setEditor( 'core:admin/jqadm' );
 
 		return $ctx;
 	}

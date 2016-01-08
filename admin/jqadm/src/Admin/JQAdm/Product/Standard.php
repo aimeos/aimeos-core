@@ -55,7 +55,7 @@ class Standard
 	 * @category Developer
 	 */
 	private $subPartPath = 'admin/jqadm/product/standard/subparts';
-	private $subPartNames = array( 'bundle', 'stock', 'physical' );
+	private $subPartNames = array( 'selection', 'bundle', 'image', 'text', 'price', 'stock', 'physical' );
 
 
 	/**
@@ -70,17 +70,17 @@ class Standard
 
 		try
 		{
-			$default = array( 'attribute', 'media', 'price', 'product', 'text' );
-			$domains = $view->config( 'admin/jqadm/product/domains', $default );
+			$this->setData( $view );
 
-			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+			if( isset( $view->itemData['product.code'] ) && $view->itemData['product.code'] !== '' )
+			{
+				$data = $view->itemData;
+				$data['product.code'] = $data['product.code'] . '_copy';
 
-			$item = $manager->getItem( $view->param( 'id' ), $domains );
-			$item->setCode( $item->getCode() . '_copy' );
-			$item->setId( null );
+				$view->item->setCode( $data['product.code'] );
+				$view->itemData = $data;
+			}
 
-			$view->item = $item;
-			$view->itemTypes = $this->getTypeItems();
 			$view->itemBody = '';
 
 			foreach( $this->getSubClients() as $client ) {
@@ -117,12 +117,7 @@ class Standard
 
 		try
 		{
-			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
-			$item = $manager->createItem();
-			$item->setStatus( 1 );
-
-			$view->item = $item;
-			$view->itemTypes = $this->getTypeItems();
+			$this->setData( $view );
 			$view->itemBody = '';
 
 			foreach( $this->getSubClients() as $client ) {
@@ -173,13 +168,13 @@ class Standard
 		}
 		catch( \Aimeos\MShop\Exception $e )
 		{
-			$error = array( 'list-items' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( 'product-item' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
 		}
 		catch( \Exception $e )
 		{
-			$error = array( 'list-items' => $e->getMessage() );
+			$error = array( 'product-item' => $e->getMessage() );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
 		}
@@ -203,20 +198,7 @@ class Standard
 
 		try
 		{
-			/** admin/jqadm/product/domains
-			 * List of domain items that should be fetched along with the product
-			 *
-			 * @param array List of domain names
-			 * @since 2016.01
-			 * @category Developer
-			 */
-			$default = array( 'attribute', 'media', 'price', 'product', 'text' );
-			$domains = $view->config( 'admin/jqadm/product/domains', $default );
-
-			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
-
-			$view->item = $manager->getItem( $view->param( 'id' ), $domains );
-			$view->itemTypes = $this->getTypeItems();
+			$this->setData( $view );
 			$view->itemBody = '';
 
 			foreach( $this->getSubClients() as $client ) {
@@ -316,12 +298,12 @@ class Standard
 		}
 		catch( \Aimeos\MShop\Exception $e )
 		{
-			$error = array( 'list-items' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$error = array( 'product-item' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
 		catch( \Exception $e )
 		{
-			$error = array( 'list-items' => $e->getMessage() );
+			$error = array( 'product-item' => $e->getMessage() );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 		}
 
@@ -419,21 +401,63 @@ class Standard
 
 
 	/**
-	 * Returns the list of item configuration key/value pairs
+	 * Returns the mapped input parameter or the existing items as expected by the template
 	 *
-	 * @param \Aimeos\MW\View\Iface $view View object with view helpers
-	 * @return array Associative list of item configuration key/value pairs
+	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
+	 * @return array Multi-dimensional associative array
+	 */
+	protected function setData( \Aimeos\MW\View\Iface $view )
+	{
+		$context = $this->getContext();
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+
+		$view->itemData = (array) $view->param( 'item', array() );
+		$view->itemTypes = $this->getTypeItems();
+		$view->item = $manager->createItem();
+
+		if( !empty( $view->itemData ) || ( $id = $view->param( 'id' ) ) === null ) {
+			return;
+		}
+
+		/** admin/jqadm/product/domains
+		 * List of domain items that should be fetched along with the product
+		 *
+		 * @param array List of domain names
+		 * @since 2016.01
+		 * @category Developer
+		 */
+		$domains = array( 'attribute', 'media', 'price', 'product', 'text' );
+		$domains = $context->getConfig()->get( 'admin/jqadm/product/domains', $domains );
+		$item = $manager->getItem( $id, $domains );
+
+		$data = $item->toArray();
+		$data['config'] = array( 'key' => array(), 'val' => array() );
+
+		foreach( $item->getConfig() as $key => $value )
+		{
+			$data['config']['key'][] = $key;
+			$data['config']['val'][] = $value;
+		}
+
+		$view->itemData = $data;
+		$view->item = $item;
+	}
+
+
+	/**
+	 * Maps the item configuration from parameters to a list of key/value pairs
+	 *
+	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
+	 * @return array Associative list of key/value pairs
 	 */
 	protected function getItemConfig( \Aimeos\MW\View\Iface $view )
 	{
 		$config = array();
-		$keys = (array) $view->param( 'item/config/key', array() );
-		$vals = (array) $view->param( 'item/config/val', array() );
 
-		foreach( $keys as $idx => $key )
+		foreach( $view->param( 'item/config/key' ) as $idx => $key )
 		{
-			if( trim( $key ) != '' ) {
-				$config[$key] = ( isset( $vals[$idx] ) ? trim( $vals[$idx] ) : null );
+			if( trim( $key ) !== '' ) {
+				$config[$key] = $view->param( 'item/config/val/' . $idx );
 			}
 		}
 

@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JQAdm\Product\Physical;
 /**
  * Default implementation of product physical JQAdm client.
  *
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 class Standard
@@ -188,14 +188,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to remove a decorator added via
-		 * "client/jqadm/common/decorators/default" before they are wrapped
+		 * "admin/jqadm/common/decorators/default" before they are wrapped
 		 * around the JQAdm client.
 		 *
 		 *  admin/jqadm/product/physical/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("\Aimeos\Admin\JQAdm\Common\Decorator\*") added via
-		 * "client/jqadm/common/decorators/default" to the JQAdm client.
+		 * "admin/jqadm/common/decorators/default" to the JQAdm client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2016.01

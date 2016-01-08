@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\Admin\JQAdm\Product\Stock;
+namespace Aimeos\Admin\JQAdm\Product\Text;
 
 
 class StandardTest extends \PHPUnit_Framework_TestCase
@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->context = \TestHelperJqadm::getContext();
 		$templatePaths = \TestHelperJqadm::getTemplatePaths();
 
-		$this->object = new \Aimeos\Admin\JQAdm\Product\Stock\Standard( $this->context, $templatePaths );
+		$this->object = new \Aimeos\Admin\JQAdm\Product\Text\Standard( $this->context, $templatePaths );
 		$this->object->setView( $this->view );
 	}
 
@@ -40,8 +40,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->view->item = $manager->createItem();
 		$result = $this->object->create();
 
+		$this->assertContains( 'Texts', $result );
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertStringStartsWith( '<div class="product-item-stock', $result );
 	}
 
 
@@ -49,11 +49,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$this->view->item = $manager->findItem( 'CNC' );
+		$this->view->item = $manager->findItem( 'ABCD', array( 'text' ) );
 		$result = $this->object->copy();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'value="1200"', $result );
+		$this->assertContains( 'value="Unterproduct 1"', $result );
+	}
+
+
+	public function testDelete()
+	{
+		$result = $this->object->delete();
+
+		$this->assertNull( $this->view->get( 'errors' ) );
+		$this->assertNull( $result );
 	}
 
 
@@ -61,32 +70,35 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$this->view->item = $manager->findItem( 'CNC' );
+		$this->view->item = $manager->findItem( 'ABCD', array( 'text' ) );
 		$result = $this->object->get();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'value="1200"', $result );
+		$this->assertContains( 'value="Unterproduct 1"', $result );
 	}
 
 
 	public function testSave()
 	{
+		$typeManager = \Aimeos\MShop\Factory::createManager( $this->context, 'text/type' );
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
-		$whManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock/warehouse' );
 
 		$item = $manager->findItem( 'CNC' );
-		$item->setCode( 'CNC_copy' );
+		$item->setCode( 'jqadm-test' );
 		$item->setId( null );
 
 		$manager->saveItem( $item );
 
 
 		$param = array(
-			'stock' => array(
-				'product.stock.id' => array( '' ),
-				'product.stock.warehouseid' => array( $whManager->findItem( 'default' )->getId() ),
-				'product.stock.dateback' => array( '2000-01-01 00:00:00' ),
-				'product.stock.stocklevel' => array( '-1' ),
+			'text' => array(
+				'langid' => array( 'de' ),
+				'name' => array( 'listid' => '', 'content' => 'test name' ),
+				'short' => array( 'listid' => '', 'content' => 'short desc' ),
+				'long' => array( 'listid' => '', 'content' => 'long desc' ),
+				'url' => array( 'listid' => '', 'content' => 'url segment' ),
+				'meta-keyword' => array( 'listid' => '', 'content' => 'meta keywords' ),
+				'meta-description' => array( 'listid' => '', 'content' => 'meta desc' ),
 			),
 		);
 
@@ -96,9 +108,26 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$result = $this->object->save();
 
+		$item = $manager->getItem( $item->getId(), array( 'text' ) );
 		$manager->deleteItem( $item->getId() );
 
 		$this->assertNull( $this->view->get( 'errors' ) );
 		$this->assertNull( $result );
+		$this->assertEquals( 6, count( $item->getListItems() ) );
+
+		foreach( $item->getListItems( 'text' ) as $listItem )
+		{
+			$this->assertEquals( 'text', $listItem->getDomain() );
+			$this->assertEquals( 'default', $listItem->getType() );
+
+			$refItem = $listItem->getRefItem();
+			$this->assertEquals( 'de', $refItem->getLanguageId() );
+		}
+	}
+
+
+	public function testSearch()
+	{
+		$this->assertNull( $this->object->search() );
 	}
 }

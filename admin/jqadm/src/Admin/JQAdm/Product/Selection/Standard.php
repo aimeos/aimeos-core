@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JQAdm\Product\Selection;
 /**
  * Default implementation of product selection JQAdm client.
  *
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 class Standard
@@ -67,7 +67,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->selectionData = $this->getSelectionData( $view );
+		$view->selectionData = $this->getData( $view );
 		$view->selectionBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -90,7 +90,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->selectionData = $this->getSelectionData( $view );
+		$view->selectionData = $this->getData( $view );
 		$view->selectionBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -113,7 +113,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->selectionData = $this->getSelectionData( $view );
+		$view->selectionData = $this->getData( $view );
 		$view->selectionBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -142,7 +142,7 @@ class Standard
 
 		try
 		{
-			$this->updateItems( $view->item, $this->getSelectionDataParams( $view ) );
+			$this->updateItems( $view->item, $this->getDataParams( $view ) );
 
 			$view->selectionBody = '';
 
@@ -151,23 +151,14 @@ class Standard
 			}
 
 			$manager->commit();
-			return;
-		}
-		catch( \Aimeos\MShop\Exception $e )
-		{
-			$msg = $context->getI18n()->dt( 'mshop', $e->getMessage() );
-			$error = array( 'product-item-selection' => $msg . ' - ' . $e->getTraceAsString() );
-			$view->errors = $view->get( 'errors', array() ) + $error;
-			$manager->rollback();
 		}
 		catch( \Exception $e )
 		{
-			$error = array( 'product-item-selection' => $e->getMessage() . ' - ' . $e->getTraceAsString() );
-			$view->errors = $view->get( 'errors', array() ) + $error;
+			$msg = $context->getI18n()->dt( 'admin', 'Saving product variants failed' );
+			$view->errors = $view->get( 'errors', array() ) + array( 'product-item-selection' => $msg );
 			$manager->rollback();
+			throw $e;
 		}
-
-		return $this->create();
 	}
 
 
@@ -189,14 +180,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to remove a decorator added via
-		 * "client/jqadm/common/decorators/default" before they are wrapped
+		 * "admin/jqadm/common/decorators/default" before they are wrapped
 		 * around the JQAdm client.
 		 *
 		 *  admin/jqadm/product/selection/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("\Aimeos\Admin\JQAdm\Common\Decorator\*") added via
-		 * "client/jqadm/common/decorators/default" to the JQAdm client.
+		 * "admin/jqadm/common/decorators/default" to the JQAdm client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2016.01
@@ -288,12 +279,12 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
 	 * @return array Multi-dimensional associative array
 	 */
-	protected function getSelectionData( \Aimeos\MW\View\Iface $view )
+	protected function getData( \Aimeos\MW\View\Iface $view )
 	{
-		$data = $this->getSelectionDataParams( $view );
+		$data = $this->getDataParams( $view );
 
 		if( empty( $data ) ) {
-			$data = $this->getSelectionDataExisting( $view );
+			$data = $this->getDataExisting( $view );
 		}
 
 		return $data;
@@ -306,7 +297,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
 	 * @return array Multi-dimensional associative array
 	 */
-	protected function getSelectionDataExisting( \Aimeos\MW\View\Iface $view )
+	protected function getDataExisting( \Aimeos\MW\View\Iface $view )
 	{
 		$data = array();
 		$variants = $view->item->getRefItems( 'product', null, 'default' );
@@ -341,7 +332,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
 	 * @return array Multi-dimensional associative array
 	 */
-	protected function getSelectionDataParams( \Aimeos\MW\View\Iface $view )
+	protected function getDataParams( \Aimeos\MW\View\Iface $view )
 	{
 		$data = array();
 

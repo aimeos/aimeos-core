@@ -93,10 +93,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'product.label' => 'test label',
 				'product.datestart' => null,
 				'product.dateend' => null,
-			),
-			'product.config' => array(
-				'key' => array( 0 => 'test key' ),
-				'val' => array( 0 => 'test value' ),
+				'config' => array(
+					'key' => array( 0 => 'test key' ),
+					'val' => array( 0 => 'test value' ),
+				),
 			),
 		);
 

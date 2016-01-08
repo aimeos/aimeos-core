@@ -23,26 +23,27 @@ $enc = $this->encoder();
 				</tr>
 			</thead>
 			<tbody>
-<?php foreach( $this->get( 'stockItems', array() ) as $whid => $item ) : ?>
+<?php foreach( $this->get( 'stockData/product.stock.id', array() ) as $idx => $id ) : ?>
 				<tr>
 			  		<td class="stock-warehouse">
-						<select class="form-control" name="stock[product.stock.warehouseid][]">
-<?php	foreach( $this->get( 'stockWarehouses', array() ) as $warehouse ) : ?>
-<?php		if( $whid == $warehouse->getId() ) : ?>
-							<option value="<?php echo $enc->attr( $warehouse->getId() ); ?>" selected="selected"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
+						<input type="hidden" name="stock[product.stock.id][]" value="<?php echo $enc->attr( $id ); ?>" />
+			  			<select class="form-control" name="stock[product.stock.warehouseid][]">
+<?php	foreach( $this->get( 'stockWarehouses', array() ) as $whid => $warehouse ) : ?>
+<?php		if( $whid == $this->get( 'stockData/product.stock.warehouseid/' . $idx ) ) : ?>
+							<option value="<?php echo $enc->attr( $whid ); ?>" selected="selected"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
 <?php		else : ?>
-							<option value="<?php echo $enc->attr( $warehouse->getId() ); ?>"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
+							<option value="<?php echo $enc->attr( $whid ); ?>"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
 <?php		endif; ?>
 <?php	endforeach; ?>
 						</select>
 					</td>
 					<td class="stock-stocklevel">
 						<input type="text" class="form-control" name="stock[product.stock.stocklevel][]"
-							value="<?php echo $enc->attr( $item->getStockLevel() ); ?>" />
+							value="<?php echo $enc->attr( $this->get( 'stockData/product.stock.stocklevel/' . $idx ) ); ?>" />
 					</td>
 					<td class="stock-databack">
 						<input type="text" class="form-control date" name="stock[product.stock.dateback][]"
-							value="<?php echo $enc->attr( $item->getDateBack() ); ?>"
+							value="<?php echo $enc->attr( $this->get( 'stockData/product.stock.dateback/' . $idx ) ); ?>"
 							data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>" />
 					</td>
 					<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
@@ -50,9 +51,10 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 				<tr class="prototype">
 			  		<td class="stock-warehouse">
-						<select class="form-control" name="stock[product.stock.warehouseid][]" disabled="disabled">
-<?php foreach( $this->get( 'stockWarehouses', array() ) as $warehouse ) : ?>
-							<option value="<?php echo $enc->attr( $warehouse->getId() ); ?>"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
+						<input type="hidden" name="stock[product.stock.id][]" value="" />
+			  			<select class="form-control" name="stock[product.stock.warehouseid][]" disabled="disabled">
+<?php foreach( $this->get( 'stockWarehouses', array() ) as $whid => $warehouse ) : ?>
+							<option value="<?php echo $enc->attr( $whid ); ?>"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
 <?php endforeach; ?>
 						</select>
 					</td>

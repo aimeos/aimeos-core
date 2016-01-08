@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JQAdm\Product\Bundle;
 /**
  * Default implementation of product bundle JQAdm client.
  *
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 class Standard
@@ -67,7 +67,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->bundleItems = $view->item->getRefItems( 'product', null, 'default' );
+		$this->setData( $view );
 		$view->bundleBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -90,7 +90,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->bundleItems = $view->item->getRefItems( 'product', null, 'default' );
+		$this->setData( $view );
 		$view->bundleBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -113,7 +113,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->bundleItems = $view->item->getRefItems( 'product', null, 'default' );
+		$this->setData( $view );
 		$view->bundleBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -143,7 +143,6 @@ class Standard
 		try
 		{
 			$this->updateItems( $view );
-
 			$view->bundleBody = '';
 
 			foreach( $this->getSubClients() as $client ) {
@@ -188,14 +187,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to remove a decorator added via
-		 * "client/jqadm/common/decorators/default" before they are wrapped
+		 * "admin/jqadm/common/decorators/default" before they are wrapped
 		 * around the JQAdm client.
 		 *
 		 *  admin/jqadm/product/bundle/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("\Aimeos\Admin\JQAdm\Common\Decorator\*") added via
-		 * "client/jqadm/common/decorators/default" to the JQAdm client.
+		 * "admin/jqadm/common/decorators/default" to the JQAdm client.
 		 *
 		 * @param array List of decorator names
 		 * @since 2016.01
@@ -297,6 +296,37 @@ class Standard
 
 
 	/**
+	 * Returns the mapped input parameter or the existing items as expected by the template
+	 *
+	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
+	 * @return array Multi-dimensional associative array
+	 */
+	protected function setData( \Aimeos\MW\View\Iface $view )
+	{
+		$view->bundleData = (array) $view->param( 'bundle', array() );
+
+		if( !empty( $view->bundleData ) || ( $id = $view->item->getId() ) === null
+			|| $view->item->getType() !== 'bundle'
+		) {
+			return;
+		}
+
+		$data = array();
+
+		foreach( $view->item->getListItems( 'product', 'default' ) as $listItem )
+		{
+			$data['product.label'][] = $listItem->getRefItem()->getLabel();
+
+			foreach( $listItem->toArray() as $key => $value ) {
+				$data[$key][] = $value;
+			}
+		}
+
+		$view->bundleData = $data;
+	}
+
+
+	/**
 	 * Updates existing product bundle references or creates new ones
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
@@ -314,7 +344,7 @@ class Standard
 
 		$map = $this->getListItems( $view->item->getId() );
 
-		foreach( (array) $view->param( 'bundle/product.id', array() ) as $pos => $prodid )
+		foreach( (array) $view->param( 'bundle/product.lists.id', array() ) as $pos => $prodid )
 		{
 			if( !isset( $map[$prodid] ) )
 			{

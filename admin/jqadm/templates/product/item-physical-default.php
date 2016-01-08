@@ -15,7 +15,7 @@ $enc = $this->encoder();
 
 ?>
 <div class="product-item-physical card panel">
-	<div id="product-item-physical" class="header card-header collapsed" role="tab" data-toggle="collapse" data-parent="#accordion" href="#product-item-physical-data" aria-expanded="false" aria-controls="product-item-physical-data">
+	<div id="product-item-physical" class="header card-header collapsed" role="tab" data-toggle="collapse" data-parent="#accordion" data-target="#product-item-physical-data" aria-expanded="false" aria-controls="product-item-physical-data">
 		<?php echo $enc->html( $this->translate( 'admin', 'Physical values' ) ); ?>
 	</div>
 	<div id="product-item-physical-data" class="item-physical card-block panel-collapse collapse" role="tabpanel" aria-labelledby="product-item-physical">
