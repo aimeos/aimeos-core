@@ -301,6 +301,12 @@ class Bootstrap
 			spl_autoload_register( array( $this, 'autoload' ), true, false );
 			self::$autoloader = true;
 		}
+
+		$ds = DIRECTORY_SEPARATOR;
+
+		if( is_file( __DIR__ . $ds . 'vendor' . $ds . 'autoload.php' ) ) {
+			require __DIR__ . $ds . 'vendor' . $ds . 'autoload.php';
+		}
 	}
 
 
