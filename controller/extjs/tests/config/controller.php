@@ -59,13 +59,5 @@ return array(
 				),
 			),
 		),
-		'media' => array(
-			'standard' => array(
-				'enablecheck' => false,
-				'mimeicon' => array(
-					'directory' => 'tmp/media/mimeicons',
-				),
-			),
-		),
 	),
 );
