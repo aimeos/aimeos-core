@@ -41,7 +41,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.lists.type.code' => 'unittype2' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '==' => (object) array( 'product.lists.type.code' => 'unittype3' ) ) ) ),
 			'sort' => 'product.lists.position',
 			'dir' => 'ASC',
 			'start' => 0,
@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, $result['total'] );
 		$this->assertEquals( 'media', $result['items'][0]->{'product.lists.domain'} );
 		$this->assertEquals( 1, count( $result['graph']['Media']['items'] ) );
-		$this->assertEquals( 'cn_colombie_266x221', $result['graph']['Media']['items'][0]->{'media.label'} );
+		$this->assertEquals( 'cn_colombie_114x95', $result['graph']['Media']['items'][0]->{'media.label'} );
 	}
 
 

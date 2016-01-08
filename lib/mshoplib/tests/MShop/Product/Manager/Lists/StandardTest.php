@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'product.lists.position', 0 ),
 			$search->compare( '==', 'product.lists.status', 1 ),
 			$search->compare( '==', 'product.lists.editor', $this->editor ),
-			$search->compare( '==', 'product.lists.type.code', 'unittype1' ),
+			$search->compare( '==', 'product.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
