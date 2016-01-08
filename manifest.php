@@ -20,7 +20,6 @@ return array(
 		'controller/extjs/src',
 		'controller/jobs/src',
 		'admin/jqadm/src',
-		'lib/mwlib/lib',
 	),
 	'config' => array(
 		'lib/mshoplib/config',

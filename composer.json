@@ -52,13 +52,11 @@
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
 			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
 			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/",
-			"Aimeos\\": ".",
-			"\\": "lib/mwlib/lib/"
+			"Aimeos\\": "."
 		},
 		"classmap": [
-			"lib/mshoplib/src",
-			"lib/mwlib/lib",
 			"lib/mwlib/src",
+			"lib/mshoplib/src",
 			"controller/common/src",
 			"controller/frontend/src",
 			"controller/jsonadm/src",
