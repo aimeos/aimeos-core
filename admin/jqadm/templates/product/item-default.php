@@ -68,7 +68,7 @@ $params = $this->param();
 					<div class="form-group row mandatory">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Code' ) ); ?></label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" name="item[product.code]"
+							<input type="text" class="form-control" name="item[product.code]" required="required"
 								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Unique code (SKU, EAN)' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.code' ) ); ?>">
 						</div>
@@ -76,7 +76,7 @@ $params = $this->param();
 					<div class="form-group row mandatory">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Label' ) ); ?></label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" name="item[product.label]"
+							<input type="text" class="form-control" name="item[product.label]" required="required"
 								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Internal label' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.label' ) ); ?>">
 						</div>

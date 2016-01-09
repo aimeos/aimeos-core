@@ -275,6 +275,23 @@ class Standard
 
 
 	/**
+	 * Returns the price types the product domain
+	 *
+	 * @return array List of price type items implementing \Aimeos\MShop\Common\Item\Type\Iface
+	 */
+	protected function getPriceTypes()
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price/type' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'price.type.domain', 'product' ) );
+		$search->setSortations( array( $search->sort( '+', 'price.type.label' ) ) );
+
+		return $manager->searchItems( $search );
+	}
+
+
+	/**
 	 * Returns the mapped input parameter or the existing items as expected by the template
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
@@ -282,6 +299,7 @@ class Standard
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view )
 	{
+		$view->priceTypes = $this->getPriceTypes();
 		$view->priceData = (array) $view->param( 'price', array() );
 
 		if( !empty( $view->priceData ) || ( $id = $view->item->getId() ) === null ) {

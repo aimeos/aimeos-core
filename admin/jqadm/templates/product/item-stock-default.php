@@ -51,7 +51,7 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 				<tr class="prototype">
 			  		<td class="stock-warehouse">
-						<input type="hidden" name="stock[product.stock.id][]" value="" />
+						<input type="hidden" name="stock[product.stock.id][]" value="" disabled="disabled" />
 			  			<select class="form-control" name="stock[product.stock.warehouseid][]" disabled="disabled">
 <?php foreach( $this->get( 'stockWarehouses', array() ) as $whid => $warehouse ) : ?>
 							<option value="<?php echo $enc->attr( $whid ); ?>"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>

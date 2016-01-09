@@ -33,19 +33,19 @@ $pageTotal = ( $total != 0 ? ceil( $total / $limit ) : 1 );
 			<a class="page-link" href="<?php $params['page']['offset'] = $first; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'First' ) ); ?>">
 				<span class="fa fa-fast-backward" aria-hidden="true"></span>
 			</a>
-		</li>
-		<li class="page-item">
+		</li><!--
+		--><li class="page-item">
 			<a class="page-link" href="<?php $params['page']['offset'] = $prev; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Previous' ) ); ?>">
 				<span class="fa fa-step-backward" aria-hidden="true"></span>
 			</a>
-		</li>
-		<li class="page-item disabled"><a class="page-link" href="#"><?php echo $enc->html( sprintf( $this->translate( 'admin/jqadm', 'Page %1$d of %2$d' ), $pageCurrent, $pageTotal ) ); ?></a></li>
-		<li class="page-item">
+		</li><!--
+		--><li class="page-item disabled"><a class="page-link" href="#"><?php echo $enc->html( sprintf( $this->translate( 'admin/jqadm', 'Page %1$d of %2$d' ), $pageCurrent, $pageTotal ) ); ?></a></li><!--
+		--><li class="page-item">
 			<a class="page-link" href="<?php $params['page']['offset'] = $next; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Next' ) ); ?>">
 				<span class="fa fa-step-forward" aria-hidden="true"></span>
 			</a>
-		</li>
-		<li class="page-item">
+		</li><!--
+		--><li class="page-item">
 			<a class="page-link" href="<?php $params['page']['offset'] = $last; echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>" aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Last' ) ); ?>">
 				<span class="fa fa-fast-forward" aria-hidden="true"></span>
 			</a>
