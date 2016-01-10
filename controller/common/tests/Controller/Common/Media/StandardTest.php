@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testAdd()
 	{
 		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Media\Standard' )
-			->setMethods( array( 'checkFileUpload', 'getTempFileName', 'storeImage' ) )
+			->setMethods( array( 'checkFileUpload', 'deleteFile', 'getTempFileName', 'storeImage' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
@@ -39,13 +39,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
-
+		$object->expects( $this->once() )->method( 'deleteFile' );
+		$object->expects( $this->exactly( 2 ) )->method( 'storeImage' );
 		$object->expects( $this->once() )->method( 'getTempFileName' )
 			->will( $this->returnValue( __DIR__ . '/testfiles/test.gif' ) );
 
 		$file->expects( $this->once() )->method( 'moveTo' );
-
-		$object->expects( $this->exactly( 2 ) )->method( 'storeImage' );
 
 
 		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
@@ -57,7 +56,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testAddBinary()
 	{
 		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Media\Standard' )
-			->setMethods( array( 'checkFileUpload', 'getTempFileName', 'storeFile' ) )
+			->setMethods( array( 'checkFileUpload', 'deleteFile', 'getTempFileName', 'storeFile' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
@@ -67,13 +66,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
-
+		$object->expects( $this->once() )->method( 'deleteFile' );
+		$object->expects( $this->once() )->method( 'storeFile' );
 		$object->expects( $this->once() )->method( 'getTempFileName' )
 			->will( $this->returnValue( __DIR__ . '/testfiles/test.pdf' ) );
 
 		$file->expects( $this->once() )->method( 'moveTo' );
 
-		$object->expects( $this->once() )->method( 'storeFile' );
 
 
 		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();

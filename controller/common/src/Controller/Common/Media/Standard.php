@@ -67,7 +67,7 @@ class Standard
 		}
 
 		$item->setLabel( basename( $file->getClientFilename() ) );
-		unlink( $tmpname );
+		$this->deleteFile( $tmpname );
 	}
 
 
@@ -128,6 +128,17 @@ class Standard
 					throw new \Aimeos\Controller\Common\Exception( 'Unknown upload error' );
 			}
 		}
+	}
+
+
+	/**
+	 * Removes the file from the file system
+	 *
+	 * @param string $path Path to the file
+	 */
+	protected function deleteFile( $path )
+	{
+		unlink( $path );
 	}
 
 
