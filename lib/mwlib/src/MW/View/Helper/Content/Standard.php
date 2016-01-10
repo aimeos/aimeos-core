@@ -13,14 +13,14 @@ namespace Aimeos\MW\View\Helper\Content;
 
 
 /**
- * View helper class for generating media HTML tags.
+ * View helper class for generating media URLs
  *
  * @package MW
  * @subpackage View
  */
 class Standard
 	extends \Aimeos\MW\View\Helper\Base
-	implements \Aimeos\MW\View\Helper\Iface
+	implements \Aimeos\MW\View\Helper\Content\Iface
 {
 	private $baseurl;
 	private $enc;
