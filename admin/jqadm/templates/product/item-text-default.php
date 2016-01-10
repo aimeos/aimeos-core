@@ -51,7 +51,7 @@ $enc = $this->encoder();
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Long description' ) ); ?></label>
 							<div class="col-sm-9">
 								<input type="hidden" name="text[long][listid][]" value="<?php echo $enc->attr( $this->get( 'textData/long/listid/' . $idx ) ); ?>" />
-								<textarea class="form-control htmleditor" rows="6" name="text[long][content][[]" placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Long description' ) ); ?>" ><?php echo $enc->attr( $this->get( 'textData/long/content/' . $idx ) ); ?></textarea>
+								<textarea class="form-control htmleditor" rows="6" name="text[long][content][]" placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Long description' ) ); ?>" ><?php echo $enc->attr( $this->get( 'textData/long/content/' . $idx ) ); ?></textarea>
 							</div>
 						</div>
 					</div>

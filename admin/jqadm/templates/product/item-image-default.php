@@ -26,7 +26,7 @@ $enc = $this->encoder();
 <?php foreach( $this->get( 'imageData/media.id', array() ) as $idx => $id ) : ?>
 				<tr>
 			  		<td class="image-preview"><img src="<?php echo $enc->attr( $this->get( 'imageData/media.preview/' . $idx ) ); ?>" /></td>
-			  		<td class="image-language">
+					<td class="image-language">
 						<input type="hidden" name="image[product.lists.id][]" value="<?php echo $enc->attr( $this->get( 'imageData/product.lists.id/' . $idx ) ); ?>" />
 						<select class="combobox" name="image[media.languageid][]">
 						  <option value="<?php echo $enc->attr( $this->get( 'imageData/media.languageid/' . $idx ) ); ?>" selected="selected">

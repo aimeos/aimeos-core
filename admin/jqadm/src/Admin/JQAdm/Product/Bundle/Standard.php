@@ -160,12 +160,13 @@ class Standard
 		}
 		catch( \Exception $e )
 		{
+			$context->getLogger()->log( $e->getMessage() . ' - ' . $e->getTraceAsString() );
 			$error = array( 'product-item-bundle' => $e->getMessage() );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
 		}
 
-		return $this->create();
+		throw new \Aimeos\Admin\JQAdm\Exception();
 	}
 
 
@@ -285,13 +286,8 @@ class Standard
 			$search->compare( '==', 'product.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSortations( array( $search->sort( '+', 'product.lists.position' ) ) );
 
-		foreach( $manager->searchItems( $search ) as $id => $listItem ) {
-			$map[$listItem->getRefId()] = $listItem;
-		}
-
-		return $map;
+		return $manager->searchItems( $search );
 	}
 
 
@@ -303,11 +299,13 @@ class Standard
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view )
 	{
+		if( $view->item->getType() !== 'bundle' ) {
+			return;
+		}
+
 		$view->bundleData = (array) $view->param( 'bundle', array() );
 
-		if( !empty( $view->bundleData ) || ( $id = $view->item->getId() ) === null
-			|| $view->item->getType() !== 'bundle'
-		) {
+		if( !empty( $view->bundleData ) ) {
 			return;
 		}
 
@@ -315,7 +313,8 @@ class Standard
 
 		foreach( $view->item->getListItems( 'product', 'default' ) as $listItem )
 		{
-			$data['product.label'][] = $listItem->getRefItem()->getLabel();
+			$refItem = $listItem->getRefItem();
+			$data['product.label'][] = ( $refItem ? $refItem->getLabel() : '' );
 
 			foreach( $listItem->toArray() as $key => $value ) {
 				$data[$key][] = $value;
@@ -344,22 +343,22 @@ class Standard
 
 		$map = $this->getListItems( $view->item->getId() );
 
-		foreach( (array) $view->param( 'bundle/product.lists.id', array() ) as $pos => $prodid )
+		foreach( (array) $view->param( 'bundle/product.lists.id', array() ) as $pos => $listid )
 		{
-			if( !isset( $map[$prodid] ) )
+			if( !isset( $map[$listid] ) )
 			{
 				$item->setId( null );
-				$item->setRefId( $prodid );
+				$item->setRefId( $view->param( 'bundle/product.lists.refid/' . $pos ) );
 				$item->setPosition( $pos );
 
 				$manager->saveItem( $item, false );
 			}
 			else
 			{
-				unset( $map[$prodid] );
+				unset( $map[$listid] );
 			}
 		}
 
-		$manager->deleteItems( $map );
+		$manager->deleteItems( array_keys( $map ) );
 	}
 }

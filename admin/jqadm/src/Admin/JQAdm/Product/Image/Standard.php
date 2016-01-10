@@ -166,6 +166,7 @@ class Standard
 		}
 		catch( \Exception $e )
 		{
+			$context->getLogger()->log( $e->getMessage() . ' - ' . $e->getTraceAsString() );
 			$error = array( 'product-item-image' => $e->getMessage() );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 
@@ -173,7 +174,7 @@ class Standard
 			$manager->rollback();
 		}
 
-		return $this->create();
+		throw new \Aimeos\Admin\JQAdm\Exception();
 	}
 
 

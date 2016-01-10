@@ -16,17 +16,17 @@ $enc = $this->encoder();
 	</div>
 	<div id="product-item-selection-data" class="item-selection card-block panel-collapse collapse"
 		role="tabpanel" aria-labelledby="product-item-selection-head">
+		<div id="product-item-selection-group" role="tablist" aria-multiselectable="true">
 
 <?php foreach( (array) $this->get( 'selectionData', array() ) as $code => $map ) : ?>
-			<div class="product-item-selection-groupitem card">
-				<div id="product-item-selection-groupitem-<?php echo $enc->attr( $code ); ?>" class="header card-header">
+
+			<div class="group-item card">
+				<div id="product-item-selection-group-item-<?php echo $enc->attr( $code ); ?>" class="header card-header">
 					<?php echo $enc->html( $this->translate( 'admin', $code ) ); ?>
-					<div class="actions">
-						<div class="btn btn-secondary fa fa-files-o"></div>
-						<div class="btn btn-danger fa fa-trash"></div>
-					</div>
+					<div class="btn btn-secondary fa fa-files-o"></div>
+					<div class="btn btn-danger fa fa-trash"></div>
 				</div>
-				<div id="product-item-selection-groupdata-<?php echo $enc->attr( $code ); ?>" class="item-selection card-block">
+				<div id="product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>" class="card-block">
 					<div class="col-lg-6">
 						<div class="form-group row">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'ID' ) ); ?></label>
@@ -38,7 +38,7 @@ $enc = $this->encoder();
 						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Code' ) ); ?></label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" name="selection[product.code][]"
+								<input type="text" class="form-control" name="selection[product.code][]" required="required"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Unique code (SKU, EAN)' ) ); ?>"
 									value="<?php echo $enc->attr( $code ); ?>">
 							</div>
@@ -46,7 +46,7 @@ $enc = $this->encoder();
 						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Label' ) ); ?></label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" name="selection[product.label][]"
+								<input type="text" class="form-control" name="selection[product.label][]" required="required"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Internal label' ) ); ?>"
 									value="<?php echo $enc->attr( $this->value( $map, 'product.label' ) ); ?>">
 							</div>
@@ -75,10 +75,9 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 								<tr class="prototype">
 									<td>
-										<input type="hidden" name="selection[attr][ref][]" value="" disabled="disabled />
-										<input type="hidden" name="selection[attr][label][]" value="" disabled="disabled />
-										<select class="combobox-prototype" name="selection[attr][id][]" disabled="disabled">
-										</select>
+										<input type="hidden" name="selection[attr][ref][]" value="" disabled="disabled" />
+										<input type="hidden" name="selection[attr][label][]" value="" disabled="disabled" />
+										<select class="combobox-prototype" name="selection[attr][id][]" disabled="disabled"></select>
 									</td>
 									<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
 								</tr>
@@ -87,7 +86,9 @@ $enc = $this->encoder();
 					</div>
 				</div>
 			</div>
+
 <?php endforeach; ?>
 
+		</div>
 	</div>
 </div>

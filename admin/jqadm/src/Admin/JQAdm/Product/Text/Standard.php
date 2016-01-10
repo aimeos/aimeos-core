@@ -167,14 +167,15 @@ class Standard
 		}
 		catch( \Exception $e )
 		{
-			$error = array( 'product-item-text' => $e->getMessage() . ' - ' . $e->getTraceAsString() );
+			$context->getLogger()->log( $e->getMessage() . ' - ' . $e->getTraceAsString() );
+			$error = array( 'product-item-text' => $e->getMessage() );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 
 			$textManager->rollback();
 			$manager->rollback();
 		}
 
-		return $this->create();
+		throw new \Aimeos\Admin\JQAdm\Exception();
 	}
 
 

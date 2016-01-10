@@ -72,9 +72,10 @@ class Standard
 		{
 			$this->setData( $view );
 
-			if( isset( $view->itemData['product.code'] ) && $view->itemData['product.code'] !== '' )
+			if( isset( $view->itemData['product.code'] ) )
 			{
 				$data = $view->itemData;
+				$data['product.id'] = '';
 				$data['product.code'] = $data['product.code'] . '_copy';
 
 				$view->item->setCode( $data['product.code'] );
@@ -252,7 +253,10 @@ class Standard
 			}
 
 			$manager->commit();
-			return;
+		}
+		catch( \Aimeos\Admin\JQAdm\Exception $e )
+		{
+			return $this->create();
 		}
 		catch( \Aimeos\MShop\Exception $e )
 		{
@@ -262,12 +266,10 @@ class Standard
 		}
 		catch( \Exception $e )
 		{
-			$error = array( 'product-item' => $e->getMessage() );
+			$error = array( 'product-item' => $e->getMessage() . ' - ' . $e->getTraceAsString() );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
 		}
-
-		return $this->create();
 	}
 
 
@@ -454,7 +456,7 @@ class Standard
 	{
 		$config = array();
 
-		foreach( $view->param( 'item/config/key' ) as $idx => $key )
+		foreach( (array) $view->param( 'item/config/key' ) as $idx => $key )
 		{
 			if( trim( $key ) !== '' ) {
 				$config[$key] = $view->param( 'item/config/val/' . $idx );
@@ -472,7 +474,8 @@ class Standard
 	 */
 	protected function getSubClientNames()
 	{
-		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
+		$result = $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
+		return $result;
 	}
 
 

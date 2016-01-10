@@ -151,14 +151,23 @@ class Standard
 			}
 
 			$manager->commit();
+			return;
+		}
+		catch( \Aimeos\MShop\Exception $e )
+		{
+			$error = array( 'product-item-selection' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
+			$view->errors = $view->get( 'errors', array() ) + $error;
+			$manager->rollback();
 		}
 		catch( \Exception $e )
 		{
-			$msg = $context->getI18n()->dt( 'admin', 'Saving product variants failed' );
-			$view->errors = $view->get( 'errors', array() ) + array( 'product-item-selection' => $msg );
+			$context->getLogger()->log( $e->getMessage() . ' - ' . $e->getTraceAsString() );
+			$error = array( 'product-item-selection' => $e->getMessage() );
+			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
-			throw $e;
 		}
+
+		throw new \Aimeos\Admin\JQAdm\Exception();
 	}
 
 

@@ -136,6 +136,8 @@ Aimeos = {
 			"method": "OPTIONS",
 			"dataType": "json"
 		});
+
+		this.showErrors();
 	},
 
 
@@ -191,19 +193,39 @@ Aimeos = {
 
 	getOptionsProducts : function(request, response, element) {
 		Aimeos.getOptions(request, response, element, 'product', 'product.label', 'product.label');
+	},
+
+
+	showErrors : function() {
+
+		$(".aimeos .error-list .error-item").each(function() {
+			$(".aimeos ." + $(this).data("key") + " .header").addClass("has-danger");
+		});
 	}
 };
 
 
 
-Aimeos.Filter = {
+Aimeos.Product = {
 
 	init : function() {
 
-		Aimeos.Filter.addFilterKeys();
-		Aimeos.Filter.addFilterItem();
-		Aimeos.Filter.removeFilterItem();
-		Aimeos.Filter.toggleSearchItems();
+		Aimeos.Product.Filter.init();
+		Aimeos.Product.List.init();
+		Aimeos.Product.Item.init();
+	}
+};
+
+
+
+Aimeos.Product.Filter = {
+
+	init : function() {
+
+		Aimeos.Product.Filter.addFilterKeys();
+		Aimeos.Product.Filter.addFilterItem();
+		Aimeos.Product.Filter.removeFilterItem();
+		Aimeos.Product.Filter.toggleSearchItems();
 	},
 
 
@@ -254,8 +276,8 @@ Aimeos.Filter = {
 	addFilterKeys : function() {
 
 		$( ".aimeos .filter-item .filter-key" ).selectmenu({
-			select: Aimeos.Filter.selectKeys,
-			create: Aimeos.Filter.addKeys
+			select: Aimeos.Product.Filter.selectKeys,
+			create: Aimeos.Product.Filter.addKeys
 		});
 	},
 
@@ -271,8 +293,8 @@ Aimeos.Filter = {
 			$(this).removeClass("fa-plus").addClass("fa-minus");
 
 			$(".filter-key", clone).selectmenu({
-				select: Aimeos.Filter.selectKeys,
-				create: Aimeos.Filter.addKeys
+				select: Aimeos.Product.Filter.selectKeys,
+				create: Aimeos.Product.Filter.addKeys
 			});
 		});
 	},
@@ -307,15 +329,15 @@ Aimeos.Filter = {
 
 
 
-Aimeos.List = {
+Aimeos.Product.List = {
 
 	element : null,
 
 
 	init : function() {
 
-		Aimeos.List.askDelete();
-		Aimeos.List.confirmDelete();
+		Aimeos.Product.List.askDelete();
+		Aimeos.Product.List.confirmDelete();
 	},
 
 
@@ -341,15 +363,23 @@ Aimeos.List = {
 
 
 
-Aimeos.Item = {
+Aimeos.Product.Item = {
 
 	init : function() {
 
-		Aimeos.Item.addConfigLine();
-		Aimeos.Item.deleteConfigLine();
-		Aimeos.Item.setupConfigComplete();
-		Aimeos.Item.createDatePicker();
-		Aimeos.Item.checkFields();
+		Aimeos.Product.Item.addConfigLine();
+		Aimeos.Product.Item.deleteConfigLine();
+		Aimeos.Product.Item.configComplete();
+		Aimeos.Product.Item.createDatePicker();
+		Aimeos.Product.Item.checkFields();
+		Aimeos.Product.Item.checkSubmit();
+
+		Aimeos.Product.Item.Bundle.init();
+		Aimeos.Product.Item.Image.init();
+		Aimeos.Product.Item.Price.init();
+		Aimeos.Product.Item.Selection.init();
+		Aimeos.Product.Item.Stock.init();
+		Aimeos.Product.Item.Text.init();
 	},
 
 
@@ -382,7 +412,7 @@ Aimeos.Item = {
 	},
 
 
-	setupConfigComplete : function() {
+	configComplete : function() {
 
 		$(".aimeos .config-item .config-key").autocomplete({
 			source: ['css-class'],
@@ -397,6 +427,31 @@ Aimeos.Item = {
 
 
 	checkFields : function() {
+
+		$(".aimeos .item .mandatory").on("blur", "input,select", function(ev) {
+
+			if($(this).val() != '') {
+				$(ev.delegateTarget).removeClass("has-danger").addClass("has-success");
+			} else {
+				$(ev.delegateTarget).removeClass("has-success").addClass("has-danger");
+			}
+		});
+
+
+		$(".aimeos .item .form-group").on("blur", "input[pattern]", function(ev) {
+
+			var elem = $(this);
+
+			if(elem.val().match(elem.attr("pattern"))) {
+				$(ev.delegateTarget).removeClass("has-danger").addClass("has-success");
+			} else {
+				$(ev.delegateTarget).removeClass("has-success").addClass("has-danger");
+			}
+		});
+	},
+
+
+	checkSubmit : function() {
 
 		$(".aimeos form").on("submit", function(ev) {
 			var retval = true;
@@ -460,14 +515,14 @@ Aimeos.Item = {
 
 
 
-Aimeos.Item.Bundle = {
+Aimeos.Product.Item.Bundle = {
 
 	init : function() {
 
 		$(".product-item-bundle .combobox").combobox({getfcn: Aimeos.getOptionsProducts});
 
-		Aimeos.Item.Bundle.addLine();
-		Aimeos.Item.Bundle.removeLine();
+		Aimeos.Product.Item.Bundle.addLine();
+		Aimeos.Product.Item.Bundle.removeLine();
 	},
 
 
@@ -478,10 +533,10 @@ Aimeos.Item.Bundle = {
 			var clone = line.clone();
 
 			clone.insertBefore(line).removeClass("prototype");
+			$("[disabled='disabled']", clone).prop("disabled", false);
 			$(".combobox-prototype", clone)
 				.removeClass("combobox-prototype")
 				.addClass("combobox")
-				.prop("disabled", false)
 				.combobox({getfcn: Aimeos.getOptionsProducts});
 		});
 	},
@@ -497,7 +552,7 @@ Aimeos.Item.Bundle = {
 
 
 
-Aimeos.Item.Image = {
+Aimeos.Product.Item.Image = {
 
 	init : function() {
 
@@ -550,7 +605,7 @@ Aimeos.Item.Image = {
 
 
 
-Aimeos.Item.Price = {
+Aimeos.Product.Item.Price = {
 
 	init : function() {
 
@@ -568,13 +623,15 @@ Aimeos.Item.Price = {
 			var clone = block.clone();
 
 			clone.insertAfter(block);
+			$(".ai-combobox", clone).remove();
+			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsCurrencies});
 		});
 	},
 
 
 	removeBlock : function() {
 
-		$(".product-item-price").on("click", ".fa-trash", function() {
+		$(".product-item-price").on("click", ".header .fa-trash", function() {
 			$(this).parents(".group-item").remove();
 		});
 	}
@@ -582,7 +639,67 @@ Aimeos.Item.Price = {
 
 
 
-Aimeos.Item.Stock = {
+Aimeos.Product.Item.Selection = {
+
+	init : function() {
+
+		$(".product-item-selection .combobox").combobox({getfcn: Aimeos.getOptionsProducts});
+
+		this.copyBlock();
+		this.removeBlock();
+		this.addAttribute();
+		this.removeAttribute();
+	},
+
+
+	addAttribute : function() {
+
+		$(".product-item-selection").on("click", ".selection-item-attributes .fa-plus", function(ev) {
+			var line = $(this).parents(".selection-item-attributes").find(".prototype");
+			var clone = line.clone();
+
+			clone.insertBefore(line).removeClass("prototype");
+			$("[disabled='disabled']", clone).prop("disabled", false);
+			$(".combobox-prototype", clone)
+				.removeClass("combobox-prototype")
+				.addClass("combobox")
+				.combobox({getfcn: Aimeos.getOptionsProducts});
+		});
+	},
+
+
+	removeAttribute : function() {
+
+		$(".product-item-selection").on("click", ".selection-item-attributes .fa-trash", function() {
+			$(this).parents("tr").remove();
+		});
+	},
+
+
+	copyBlock : function() {
+
+		$(".product-item-selection").on("click", ".header .fa-files-o", function(ev) {
+			var block = $(this).parents(".group-item");
+			var clone = block.clone();
+
+			clone.insertAfter(block);
+			$(".ai-combobox", clone).remove();
+			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsProducts});
+		});
+	},
+
+
+	removeBlock : function() {
+
+		$(".product-item-selection").on("click", ".header .fa-trash", function() {
+			$(this).parents(".group-item").remove();
+		});
+	}
+};
+
+
+
+Aimeos.Product.Item.Stock = {
 
 	init : function() {
 
@@ -621,7 +738,7 @@ Aimeos.Item.Stock = {
 
 
 
-Aimeos.Item.Text = {
+Aimeos.Product.Item.Text = {
 
 	editorcfg : [
 		{ name: 'clipboard', items: [ 'Undo', 'Redo' ] },
@@ -638,7 +755,7 @@ Aimeos.Item.Text = {
 	init : function() {
 
 		$(".product-item-text .combobox").combobox({getfcn: Aimeos.getOptionsLanguages});
-		$(".product-item-text .htmleditor").ckeditor({toolbar: Aimeos.Item.Text.editorcfg});
+		$(".product-item-text .htmleditor").ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
 
 		this.copyBlock();
 		this.removeBlock();
@@ -652,13 +769,15 @@ Aimeos.Item.Text = {
 			var clone = block.clone();
 
 			clone.insertAfter(block);
+			$(".cke", clone).remove();
+			$(".htmleditor", clone).ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
 		});
 	},
 
 
 	removeBlock : function() {
 
-		$(".product-item-text").on("click", ".fa-trash", function() {
+		$(".product-item-text").on("click", ".header .fa-trash", function() {
 			$(this).parents(".group-item").remove();
 		});
 	}
@@ -669,13 +788,5 @@ Aimeos.Item.Text = {
 $(function() {
 
 	Aimeos.init();
-	Aimeos.List.init();
-	Aimeos.Filter.init();
-
-	Aimeos.Item.init();
-	Aimeos.Item.Bundle.init();
-	Aimeos.Item.Image.init();
-	Aimeos.Item.Price.init();
-	Aimeos.Item.Stock.init();
-	Aimeos.Item.Text.init();
+	Aimeos.Product.init();
 });
