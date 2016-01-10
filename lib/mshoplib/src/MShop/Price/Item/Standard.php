@@ -109,8 +109,7 @@ class Standard
 	{
 		if( $currencyid == $this->getCurrencyId() ) { return; }
 
-		$this->checkCurrencyId( $currencyid, false );
-		$this->values['price.currencyid'] = $currencyid;
+		$this->values['price.currencyid'] = $this->checkCurrencyId( $currencyid, false );
 		$this->setModified();
 	}
 

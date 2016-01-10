@@ -58,15 +58,14 @@ class Standard
 	/**
 	 * Sets the ISO language code.
 	 *
-	 * @param string|null $langid ISO language code (e.g. de or de_DE)
+	 * @param string|null $id ISO language code (e.g. de or de_DE)
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	public function setLanguageId( $langid )
+	public function setLanguageId( $id )
 	{
-		if( $langid === $this->getLanguageId() ) { return; }
+		if( $id === $this->getLanguageId() ) { return; }
 
-		$this->checkLanguageId( $langid );
-		$this->values['text.languageid'] = $langid;
+		$this->values['text.languageid'] = $this->checkLanguageId( $id );
 		$this->setModified();
 	}
 

@@ -263,15 +263,18 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 */
 	protected function checkCurrencyId( $currencyid, $null = true )
 	{
-		if( $null === false && $currencyid === null ) {
+		if( $null === false && $currencyid == null ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', '<null>' ) );
 		}
 
-		if( $currencyid !== null && preg_match( '/^[A-Z]{3}$/', $currencyid ) !== 1 ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', $currencyid ) );
-		}
+		if( $currencyid != null )
+		{
+			if( preg_match( '/^[A-Z]{3}$/', $currencyid ) !== 1 ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', $currencyid ) );
+			}
 
-		return $currencyid;
+			return $currencyid;
+		}
 	}
 
 
@@ -279,16 +282,24 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 * Tests if the language ID parameter represents an ISO language format.
 	 *
 	 * @param string|null $langid ISO language format, e.g. de or de_DE
+	 * @param boolean $null True if null is allowed, false if not
 	 * @return string|null ISO language ID or null for no language
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
-	protected function checkLanguageId( $langid )
+	protected function checkLanguageId( $langid, $null = true )
 	{
-		if( $langid !== null && preg_match( '/^[a-z]{2}(_[A-Z]{2})?$/', $langid ) !== 1 ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
+		if( $null === false && $langid == null ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', '<null>' ) );
 		}
 
-		return $langid;
+		if( $langid != null )
+		{
+			if( preg_match( '/^[a-z]{2}(_[A-Z]{2})?$/', $langid ) !== 1 ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
+			}
+
+			return $langid;
+		}
 	}
 
 

@@ -255,15 +255,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->setLanguageId( 'en' );
 		$this->assertEquals( 'en', $this->object->getLanguageId() );
-
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->setLanguageId( 0 );
 	}
 
 
 	public function testSetLanguageIdInvalid()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->setLanguageId( 0 );
+		$this->object->setLanguageId( '10' );
 	}
 }

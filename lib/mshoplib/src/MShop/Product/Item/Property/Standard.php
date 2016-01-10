@@ -59,8 +59,7 @@ class Standard
 	{
 		if ( $id === $this->getLanguageId() ) { return; }
 
-		$this->checkLanguageId( $id );
-		$this->values['product.property.languageid'] = $id;
+		$this->values['product.property.languageid'] = $this->checkLanguageId( $id );
 		$this->setModified();
 	}
 

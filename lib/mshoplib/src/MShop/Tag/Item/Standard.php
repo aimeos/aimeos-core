@@ -59,8 +59,7 @@ class Standard
 	{
 		if( $id === $this->getLanguageId() ) { return; }
 
-		$this->checkLanguageId( $id );
-		$this->values['tag.languageid'] = $id;
+		$this->values['tag.languageid'] = $this->checkLanguageId( $id );
 		$this->setModified();
 	}
 
