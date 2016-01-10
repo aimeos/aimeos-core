@@ -53,8 +53,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->copy();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'src="prod_123x103/195_prod_123x103.jpg"', $result );
-		$this->assertContains( 'src="prod_266x221/198_prod_266x221.jpg"', $result );
+		$this->assertContains( 'src="/prod_123x103/195_prod_123x103.jpg"', $result );
+		$this->assertContains( 'src="/prod_266x221/198_prod_266x221.jpg"', $result );
 	}
 
 
@@ -75,8 +75,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->get();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'src="prod_123x103/195_prod_123x103.jpg"', $result );
-		$this->assertContains( 'src="prod_266x221/198_prod_266x221.jpg"', $result );
+		$this->assertContains( 'src="/prod_123x103/195_prod_123x103.jpg"', $result );
+		$this->assertContains( 'src="/prod_266x221/198_prod_266x221.jpg"', $result );
 	}
 
 
