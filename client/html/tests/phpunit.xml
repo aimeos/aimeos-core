@@ -5,9 +5,6 @@
 		<testsuite name="Client HTML suite">
 			<directory>Client/</directory>
 		</testsuite>
-		<testsuite name="MWlib">
-			<directory>MW/</directory>
-		</testsuite>
 	</testsuites>
 	<filter>
 		<whitelist>
