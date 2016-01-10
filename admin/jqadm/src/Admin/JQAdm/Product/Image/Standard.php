@@ -285,7 +285,7 @@ class Standard
 	{
 		$view->imageData = (array) $view->param( 'image', array() );
 
-		if( !empty( $view->imageData ) || ( $id = $view->item->getId() ) === null ) {
+		if( !empty( $view->imageData ) ) {
 			return;
 		}
 
@@ -298,10 +298,6 @@ class Standard
 			foreach( $listItem->getRefItem()->toArray() as $key => $value ) {
 				$data[$key][] = $value;
 			}
-		}
-
-		if( !isset( $data['product.lists.id'] ) ) { // show at least one block
-			$data['product.lists.id'][] = '';
 		}
 
 		$view->imageData = $data;
@@ -328,7 +324,6 @@ class Standard
 		$listIds = (array) $view->param( 'image/product.lists.id', array() );
 		$listItems = $manager->getItem( $id, array( 'media' ) )->getListItems( 'media' );
 
-
 		$listItem = $listManager->createItem();
 		$listItem->setTypeId( $listTypeManager->findItem( 'default', array(), 'media' )->getId() );
 		$listItem->setDomain( 'media' );
@@ -352,10 +347,12 @@ class Standard
 				$litem->setId( null );
 
 				if( ( $file = $view->value( $files, $num ) ) === null ) {
-					throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'No uploaded file for %1$d. new entry ', $num ) );
+					throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'No file uploaded for %1$d. new image', $num+1 ) );
 				}
 
-				$cntl->add( $mediaItem, $file );
+				$item = $mediaItem;
+				$cntl->add( $item, $file );
+
 				$num++;
 			}
 			else
@@ -364,13 +361,13 @@ class Standard
 				$item = $litem->getRefItem();
 			}
 
-			$mediaItem->setLabel( $view->param( 'image/media.label/' . $idx ) );
-			$mediaItem->setLanguageId( $view->param( 'image/media.languageid/' . $idx ) );
+			$item->setLabel( $view->param( 'image/media.label/' . $idx ) );
+			$item->setLanguageId( $view->param( 'image/media.languageid/' . $idx ) );
 
-			$mediaManager->saveItem( $mediaItem );
+			$mediaManager->saveItem( $item );
 
 			$litem->setPosition( $idx );
-			$litem->setRefId( $mediaItem->getId() );
+			$litem->setRefId( $item->getId() );
 
 			$listManager->saveItem( $litem, false );
 		}

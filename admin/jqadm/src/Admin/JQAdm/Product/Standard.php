@@ -253,10 +253,11 @@ class Standard
 			}
 
 			$manager->commit();
+			return;
 		}
 		catch( \Aimeos\Admin\JQAdm\Exception $e )
 		{
-			return $this->create();
+			// fall through to create()
 		}
 		catch( \Aimeos\MShop\Exception $e )
 		{
@@ -270,6 +271,8 @@ class Standard
 			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
 		}
+
+		return $this->create();
 	}
 
 

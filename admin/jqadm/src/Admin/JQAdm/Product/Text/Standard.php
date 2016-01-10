@@ -380,10 +380,7 @@ class Standard
 		{
 			foreach( $types as $type )
 			{
-				if( ( $content = trim( $view->param( 'text/' . $type . '/content/' . $idx ) ) ) === '' ) {
-					continue;
-				}
-
+				$content = trim( $view->param( 'text/' . $type . '/content/' . $idx ) );
 				$listid = $view->param( 'text/' . $type . '/listid' . $idx );
 				$listIds[] = $listid;
 
