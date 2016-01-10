@@ -67,6 +67,7 @@ class Standard
 		}
 
 		$item->setLabel( basename( $file->getClientFilename() ) );
+		unlink( $tmpname );
 	}
 
 
@@ -438,8 +439,6 @@ class Standard
 
 		$this->context->getFilesystemManager()->get( $fsname )->writef( $dest, $file );
 
-		unlink( $file );
-
 		return $dest;
 	}
 
@@ -456,7 +455,6 @@ class Standard
 	 */
 	protected function storeImage( \Aimeos\MW\Media\Image\Iface $mediaFile, $type, $filename, $fsname )
 	{
-		$file = $mediaFile->getFilepath();
 		$tmpfile = $this->getTempFileName();
 		$mimetype = $this->getMimeType( $mediaFile, $type );
 
@@ -469,7 +467,6 @@ class Standard
 		$this->context->getFilesystemManager()->get( $fsname )->writef( $dest, $tmpfile );
 
 		unlink( $tmpfile );
-		unlink( $file );
 
 		return $dest;
 	}
