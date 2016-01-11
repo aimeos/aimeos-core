@@ -25,6 +25,12 @@
 		<echo msg="Executing code sniffer" />
 		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways src tests/Admin"
 			  checkreturn="true" logoutput="true"/>
+		<echo msg="Executing Javascript Linter" />
+		<jsllint haltonfailure="true" haltonwarning="true" showwarnings="true">
+			<fileset dir=".">
+				<include name="themes/*.js"/>
+			</fileset>
+		</jsllint>
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
