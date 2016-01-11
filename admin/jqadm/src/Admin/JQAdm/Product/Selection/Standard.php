@@ -67,7 +67,10 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->selectionData = $this->getData( $view );
+		if( $view->item->getType() === 'select' ) {
+			$this->setData( $view, true );
+		}
+
 		$view->selectionBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -90,7 +93,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->selectionData = $this->getData( $view );
+		$this->setData( $view );
 		$view->selectionBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -113,7 +116,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$view->selectionData = $this->getData( $view );
+		$this->setData( $view );
 		$view->selectionBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -142,7 +145,9 @@ class Standard
 
 		try
 		{
-			$this->updateItems( $view->item, $this->getDataParams( $view ) );
+			if( $view->item->getType() === 'select' ) {
+				$this->updateItems( $view );
+			}
 
 			$view->selectionBody = '';
 
@@ -258,45 +263,107 @@ class Standard
 
 
 	/**
-	 * Returns the products for the given codes
+	 * Deletes the removed list items and their referenced items
 	 *
-	 * @param array $codes List of product codes
-	 * @return array List of product codes as key and items implementing \Aimeos\MShop\Product\Item\Iface as values
+	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param array $listIds List of IDs of the still used list items
 	 */
-	protected function getProducts( array $codes )
+	protected function cleanupItems( array $listItems, array $listIds )
 	{
-		$list = array();
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+		$context = $this->getContext();
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
-		$search->setSlice( 0, 0x7fffffff );
+		$rmIds = array();
+		$rmListIds = array_diff( array_keys( $listItems ), $listIds );
 
-		$products = $manager->searchItems( $search, array( 'attribute' ) );
-
-		foreach( $products as $product ) {
-			$list[$product->getCode()] = $product;
+		foreach( $rmListIds as $rmListId ) {
+			$rmIds[] = $listItems[$rmListId]->getRefId();
 		}
 
-		return $products;
+		$search = $listManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.lists.refid', $rmIds ),
+			$search->compare( '==', 'product.lists.domain', 'product' ),
+			$search->compare( '==', 'product.lists.type.code', 'default' ),
+			$search->compare( '==', 'product.lists.type.domain', 'product' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $listManager->aggregate( $search, 'product.lists.refid' ) as $key => $count )
+		{
+			if( $count > 1 ) {
+				unset( $rmIds[$key] );
+			}
+		}
+
+		$listManager->deleteItems( $rmListIds  );
+		$manager->deleteItems( $rmIds  );
 	}
 
 
 	/**
-	 * Returns the mapped input parameter or the existing items as expected by the template
+	 * Creates a new pre-filled item
 	 *
-	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
-	 * @return array Multi-dimensional associative array
+	 * @return \Aimeos\MShop\Product\Item\Iface New product item object
 	 */
-	protected function getData( \Aimeos\MW\View\Iface $view )
+	protected function createItem()
 	{
-		$data = $this->getDataParams( $view );
+		$context = $this->getContext();
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/type' );
 
-		if( empty( $data ) ) {
-			$data = $this->getDataExisting( $view );
-		}
+		$item = $manager->createItem();
+		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
+		$item->setStatus( 1 );
 
-		return $data;
+		return $item;
+	}
+
+
+	/**
+	 * Creates a new pre-filled list item
+	 *
+	 * @param string $id Parent ID for the new list item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New list item object
+	 */
+	protected function createListItem( $id )
+	{
+		$context = $this->getContext();
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
+
+		$item = $manager->createItem();
+		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
+		$item->setDomain( 'product' );
+		$item->setParentId( $id );
+		$item->setStatus( 1 );
+
+		return $item;
+	}
+
+
+	/**
+	 * Returns the products for the given codes and IDs
+	 *
+	 * @param array $codes List of product codes
+	 * @param array $ids List of product IDs
+	 * @return array List of products with ID as key and items implementing \Aimeos\MShop\Product\Item\Iface as values
+	 */
+	protected function getProductItems( array $codes, array $ids )
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.id', $ids ),
+			$search->compare( '==', 'product.code', $codes ),
+		);
+		$search->setConditions( $search->combine( '||', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		return $manager->searchItems( $search, array( 'attribute' ) );
 	}
 
 
@@ -304,9 +371,10 @@ class Standard
 	 * Maps the existing product variants to an associative array as expected by the template
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
+	 * @param boolean $copy True if items should be copied
 	 * @return array Multi-dimensional associative array
 	 */
-	protected function getDataExisting( \Aimeos\MW\View\Iface $view )
+	protected function getDataExisting( \Aimeos\MW\View\Iface $view, $copy = false )
 	{
 		$data = array();
 		$variants = $view->item->getRefItems( 'product', null, 'default' );
@@ -314,20 +382,40 @@ class Standard
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.id', array_keys( $variants ) ) );
-		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$search->setSlice( 0, 0x7fffffff );
 
-		foreach( $manager->searchItems( $search, array( 'attribute' ) ) as $id => $product )
+		$products = $manager->searchItems( $search, array( 'attribute' ) );
+
+		foreach( $view->item->getListItems( 'product', 'default' ) as $listid => $listItem )
 		{
-			$code = $product->getCode();
+			if( ( $refItem = $listItem->getRefItem() ) === null ) {
+				continue;
+			}
 
-			$data[$code]['product.id'] = $id;
-			$data[$code]['product.label'] = $product->getLabel();
-
-			foreach( $product->getRefItems( 'attribute', null, 'variant' ) as $attrid => $attribute )
+			if( $copy === false )
 			{
-				$data[$code]['attr'][$attrid]['ref'] = $code;
-				$data[$code]['attr'][$attrid]['label'] = $attribute->getLabel();
+				$code = $refItem->getCode();
+				$data[$code]['product.lists.id'] = $listid;
+				$data[$code]['product.id'] = $listItem->getRefId();
+			}
+			else
+			{
+				$code = $refItem->getCode() . '_copy';
+				$data[$code]['product.lists.id'] = '';
+				$data[$code]['product.id'] = '';
+			}
+
+			$data[$code]['product.label'] = $refItem->getLabel();
+
+			if( isset( $products[$refItem->getId()] ) )
+			{
+				$attributes = $products[$refItem->getId()]->getRefItems( 'attribute', null, 'variant' );
+
+				foreach( $attributes as $attrid => $attrItem )
+				{
+					$data[$code]['attr'][$attrid]['ref'] = $code;
+					$data[$code]['attr'][$attrid]['label'] = $attrItem->getLabel();
+				}
 			}
 		}
 
@@ -349,6 +437,7 @@ class Standard
 		{
 			if( !empty( $code ) )
 			{
+				$data[$code]['product.lists.id'] = $view->param( 'selection/product.lists.id/' . $pos );
 				$data[$code]['product.id'] = $view->param( 'selection/product.id/' . $pos );
 				$data[$code]['product.label'] = $view->param( 'selection/product.label/' . $pos );
 			}
@@ -381,45 +470,82 @@ class Standard
 
 
 	/**
+	 * Returns the mapped input parameter or the existing items as expected by the template
+	 *
+	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
+	 * @param boolean $copy True if items should be copied
+	 */
+	protected function setData( \Aimeos\MW\View\Iface $view, $copy = false )
+	{
+		$view->selectionData = $this->getDataParams( $view );
+
+		if( !empty( $view->selectionData ) || $view->item->getType() !== 'select' ) {
+			return;
+		}
+
+		$view->selectionData = $this->getDataExisting( $view, $copy );
+	}
+
+
+	/**
 	 * Updates the product variants
 	 *
 	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item with referenced domain items
-	 * @param array $data Multi-dimensional associative array also used by the template
 	 */
-	protected function updateItems( \Aimeos\MShop\Product\Item\Iface $product, array $data )
+	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{
-		$list = array();
+		$id = $view->item->getId();
 		$context = $this->getContext();
+		$data = $this->getDataParams( $view );
 
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
-		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/type' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
-		$typeId = $typeManager->findItem( 'default', array(), 'product' )->getId();
-		$products = $this->getProducts( array_keys( $data ) );
+		$product = $manager->getItem( $id, array( 'product' ) );
+		$listItems = $product->getListItems( 'product', 'default' );
+		$refItems = $product->getRefItems( 'product', null, 'default' );
 
-		foreach( $data as $code => $map )
+		$products = $this->getProductItems( array_keys( $data ), array_keys( $refItems ) );
+		$listIds = (array) $view->param( 'selection/product.lists.id', array() );
+
+		$listItem = $this->createListItem( $id );
+		$prodItem = $this->createItem();
+
+
+		foreach( $listIds as $idx => $listid )
 		{
-			if( !isset( $products[$code] ) )
+			if( !isset( $listItems[$listid] ) )
 			{
-				$item = $manager->createItem();
-				$item->setTypeId( $typeId );
-				$item->setCode( $code );
-				$item->setStatus( 1 );
+				$litem = $listItem;
+				$litem->setId( null );
 
-				if( isset( $map['product.label'] ) ) {
-					$item->setLabel( $map['product.label'] );
-				}
-
-				$manager->saveItem( $item );
-				$products[$code] = $item;
+				$item = $prodItem;
+				$item->setId( null );
+			}
+			else
+			{
+				$litem = $listItems[$listid];
+				$item = $litem->getRefItem();
 			}
 
-			$list[$products[$code]->getId()] = array();
-			$attr = ( isset( $map['attr'] ) ? (array) $map['attr'] : array() );
+			$code = $view->param( 'selection/product.code/' . $idx );
 
-			$manager->updateListItems( $products[$code], $attr, 'attribute', 'variant' );
+			$item->setCode( $code );
+			$item->setLabel( $view->param( 'selection/product.label/' . $idx ) );
+
+			$manager->saveItem( $item );
+
+			$litem->setPosition( $idx );
+			$litem->setRefId( $item->getId() );
+
+			$listManager->saveItem( $litem, false );
+
+			$variant = ( isset( $products[$item->getId()] ) ? $products[$item->getId()] : $item );
+			$attr = ( isset( $data[$code]['attr'] ) ? (array) $data[$code]['attr'] : array() );
+
+			$manager->updateListItems( $variant, $attr, 'attribute', 'variant' );
 		}
 
-		$manager->updateListItems( $product, $list, 'product', 'default' );
+		$this->cleanupItems( $listItems, $listIds );
 	}
 }

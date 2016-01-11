@@ -96,8 +96,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$item = $manager->findItem( 'CNC' );
-		$item->setCode( 'CNC_copy' );
+		$item = $manager->findItem( 'U:TEST' );
+		$item->setCode( 'jqadm-test-selection' );
 		$item->setId( null );
 
 		$manager->saveItem( $item );
@@ -108,6 +108,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$param = array(
 			'selection' => array(
+				'product.lists.id' => array( 0 => '' ),
 				'product.id' => array( 0 => $item->getId() ),
 				'product.code' => array( 0 => 'testprod' ),
 				'product.label' => array( 0 => 'test product' ),
@@ -127,6 +128,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$item = $manager->getItem( $item->getId(), array( 'product' ) );
 		$variants = $item->getListItems( 'product', 'default' );
+
+		if( empty( $variants ) ) {
+			throw new \Exception( 'No variant products available' );
+		}
 
 		$variant = $manager->getItem( reset( $variants )->getRefId(), array( 'attribute' ) );
 		$attributes = $variant->getListItems( 'attribute', 'variant' );

@@ -60,7 +60,7 @@ $sortcode = $this->param( 'sort' );
 <?php echo $this->csrf()->formfield(); ?>
 
 	<div class="list-fields">
-		<a class="action action-open fa" href="#">Fields</a>
+		<span class="label label-primary label-pill action action-open fa">Fields</span>
 		<ul class="fields-items search-item">
 			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.id" <?php echo $checked( $fields, 'product.id' ); ?>> <?php echo $enc->html( $this->translate( 'admin/jqadm', 'ID' ) ); ?></label></li>
 			<li class="fields-item"><label><input type="checkbox" name="fields[]" value="product.status" <?php echo $checked( $fields, 'product.status' ); ?>> <?php echo $enc->html( $this->translate( 'admin/jqadm', 'Status' ) ); ?></label></li>
@@ -76,7 +76,7 @@ $sortcode = $this->param( 'sort' );
 	</div>
 
 	<div class="list-filter">
-		<a class="action action-open fa" href="#">Filter</a>
+		<span class="label label-primary label-pill action action-open fa">Filter</span>
 <?php echo $this->partial( $this->config( 'admin/jqadm/partial/filter', 'common/partials/filter-default.php' ), $filterParams ); ?>
 	</div>
 

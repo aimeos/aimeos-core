@@ -67,7 +67,10 @@ class Standard
 	{
 		$view = $this->getView();
 
-		$this->setData( $view );
+		if( $view->item->getType() === 'bundle' ) {
+			$this->setData( $view );
+		}
+
 		$view->bundleBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -142,7 +145,10 @@ class Standard
 
 		try
 		{
-			$this->updateItems( $view );
+			if( $view->item->getType() === 'bundle' ) {
+				$this->updateItems( $view );
+			}
+
 			$view->bundleBody = '';
 
 			foreach( $this->getSubClients() as $client ) {
@@ -299,13 +305,9 @@ class Standard
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view )
 	{
-		if( $view->item->getType() !== 'bundle' ) {
-			return;
-		}
-
 		$view->bundleData = (array) $view->param( 'bundle', array() );
 
-		if( !empty( $view->bundleData ) ) {
+		if( !empty( $view->bundleData ) || $view->item->getType() !== 'bundle' ) {
 			return;
 		}
 

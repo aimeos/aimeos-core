@@ -3,9 +3,8 @@
 	$.widget( "ai.combobox", {
 
 		_create: function() {
-			this.wrapper = $( "<span>" )
-				.addClass( "ai-combobox" )
-				.insertAfter( this.element );
+
+			this.wrapper = $( "<span>" ).addClass( "ai-combobox" ).insertAfter( this.element );
 
 			this.element.hide();
 			this._createAutocomplete();
@@ -14,31 +13,34 @@
 
 
 		_createAutocomplete: function() {
-			var selected = this.element.children( ":selected" ),
-			  value = selected.val() ? selected.text() : "",
-			  self = this;
 
-			this.input = $( "<input>" )
-				.appendTo( this.wrapper )
-				.val( value )
-				.attr( "title", "" )
-				.addClass( "ai-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
-				.autocomplete({
-					delay: 0,
-					minLength: 0,
-					source: $.proxy( this, "_source" ),
-					select: function(ev, ui) {
-						self.element.val(ui.item.value).find("input").val(ui.item.label);
-						ev.preventDefault();
-					},
-					focus: function(ev, ui) {
-						self.element.val(ui.item.value).next().find("input").val(ui.item.label);
-						ev.preventDefault();
-					}
-				})
-				.tooltip({
-					tooltipClass: "ui-state-highlight"
-				});
+			var selected = this.element.children( ":selected" );
+			var value = selected.val() ? selected.text() : "";
+			var self = this;
+
+			this.input = $( "<input>" );
+			this.input.appendTo( this.wrapper );
+			this.input.val( value );
+			this.input.attr( "title", "" );
+			this.input.addClass( "ai-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" );
+
+			this.input.autocomplete({
+				delay: 0,
+				minLength: 0,
+				source: $.proxy( this, "_source" ),
+				select: function(ev, ui) {
+					self.element.val(ui.item.value).find("input").val(ui.item.label);
+					ev.preventDefault();
+				},
+				focus: function(ev, ui) {
+					self.element.val(ui.item.value).next().find("input").val(ui.item.label);
+					ev.preventDefault();
+				}
+			});
+
+			this.input.tooltip({
+				tooltipClass: "ui-state-highlight"
+			});
 
 			this._on( this.input, {
 				autocompleteselect: function( event, ui ) {
@@ -54,30 +56,34 @@
 
 
 		_createShowAll: function() {
-			var input = this.input,
-				wasOpen = false;
 
-			$( '<button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icons-only"><span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span></button>' )
-				.attr( "tabIndex", -1 )
-				.appendTo( this.wrapper )
-				.button()
-				.removeClass( "ui-corner-all" )
-				.addClass( "ai-combobox-toggle ui-corner-right" )
-				.mousedown(function() {
-					wasOpen = input.autocomplete( "widget" ).is( ":visible" );
-				})
-			   .click(function(ev) {
-				   ev.preventDefault();
-				   input.focus();
+			var input = this.input;
+			var wasOpen = false;
 
-				   // Close if already visible
-				   if ( wasOpen ) {
-					   return;
-				   }
+			var btn = $( '<button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icons-only"><span class="ui-button-icon-primary ui-icon ui-icon-triangle-1-s"></span></button>' );
 
-				   // Pass empty string as value to search for, displaying all results
-				   input.autocomplete( "search", "" );
-			   });
+			btn.attr( "tabIndex", -1 );
+			btn.appendTo( this.wrapper );
+			btn.button();
+			btn.removeClass( "ui-corner-all" );
+			btn.addClass( "ai-combobox-toggle ui-corner-right" );
+
+			btn.mousedown(function() {
+				wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+			});
+
+			btn.click(function(ev) {
+				ev.preventDefault();
+				input.focus();
+
+				// Close if already visible
+				if ( wasOpen ) {
+					return;
+				}
+
+				// Pass empty string as value to search for, displaying all results
+				input.autocomplete( "search", "" );
+			});
 		},
 
 
@@ -90,7 +96,7 @@
 
 			// Selected an item, nothing to do
 			if ( ui.item ) {
-			  return;
+				return;
 			}
 
 			// Search for a match (case-insensitive)
@@ -104,18 +110,20 @@
 				}
 			});
 
-		   // Found a match, nothing to do
-		   if ( valid ) {
-			  return;
-		   }
+			// Found a match, nothing to do
+			if ( valid ) {
+				return;
+			}
 
-		  // Remove invalid value
-		  this.input.val( "" );
-		  this.element.val( "" );
-		  this.input.autocomplete( "instance" ).term = "";
+			// Remove invalid value
+			this.input.val( "" );
+			this.element.val( "" );
+			this.input.autocomplete( "instance" ).term = "";
 		},
 
+
 		_destroy: function() {
+
 			this.wrapper.remove();
 			this.element.show();
 		}
@@ -132,297 +140,26 @@ Aimeos = {
 
 	init : function() {
 
-		this.options = $.ajax($("body").data("url"), {
-			"method": "OPTIONS",
-			"dataType": "json"
-		});
-
+		this.checkFields();
+		this.checkSubmit();
+		this.createDatePicker();
 		this.showErrors();
 	},
 
 
-	getOptions : function(request, response, element, domain, key, sort) {
+	addClone : function(node, getfcn) {
 
-		Aimeos.options.done(function(data) {
+		var clone = node.clone().removeClass("prototype");
+		var combo = $(".combobox-prototype", clone);
 
-			var compare = {}, field = {};
+		combo.combobox({getfcn: getfcn});
+		combo.removeClass("combobox-prototype");
+		combo.addClass("combobox");
 
-			compare[key] = request.term;
-			field[domain] = key;
+		$("[disabled='disabled']", clone).prop("disabled", false);
+		clone.insertBefore(node);
 
-			$.ajax({
-				dataType: "json",
-				url: data.meta.resources[domain] || null,
-				data: {
-					filter: {'&&': [{'=~': compare}]},
-					fields: field,
-					sort: sort
-				},
-				success: function(result) {
-					var list = result.data || [];
-
-					$("option", element).remove();
-
-					response( list.map(function(obj) {
-
-						var opt = $("<option/>").attr("value", obj.id)
-							.text(obj.attributes[key])
-							.appendTo(element);
-
-						return {
-							label: obj.attributes[key] || null,
-							value: obj.id,
-							option: opt
-						};
-					}));
-				}
-			});
-		});
-	},
-
-
-	getOptionsCurrencies : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'locale/currency', 'locale.currency.id', '-locale.currency.status,locale.currency.id');
-	},
-
-
-	getOptionsLanguages : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'locale/language', 'locale.language.id', '-locale.language.status,locale.language.id');
-	},
-
-
-	getOptionsProducts : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'product', 'product.label', 'product.label');
-	},
-
-
-	showErrors : function() {
-
-		$(".aimeos .error-list .error-item").each(function() {
-			$(".aimeos ." + $(this).data("key") + " .header").addClass("has-danger");
-		});
-	}
-};
-
-
-
-Aimeos.Product = {
-
-	init : function() {
-
-		Aimeos.Product.Filter.init();
-		Aimeos.Product.List.init();
-		Aimeos.Product.Item.init();
-	}
-};
-
-
-
-Aimeos.Product.Filter = {
-
-	init : function() {
-
-		Aimeos.Product.Filter.addFilterKeys();
-		Aimeos.Product.Filter.addFilterItem();
-		Aimeos.Product.Filter.removeFilterItem();
-		Aimeos.Product.Filter.toggleSearchItems();
-	},
-
-
-	addKeys : function(e) {
-		var that = $(this);
-		var opitem = that.parents(".filter-item").find(".filter-operator");
-
-		if( $("option", that).length != 0 ) {
-			return;
-		}
-
-		Aimeos.options.done(function(data) {
-			var code = that.data("selected");
-
-			$.each(data.meta && data.meta.attributes || {}, function(key, attr) {
-				if( attr.public && attr.code === code ) {
-					that.append('<option value=' + attr.code + ' selected="selected">' + attr.label + '</option>');
-				} else if( attr.public ) {
-					that.append('<option value=' + attr.code + '>' + attr.label + '</option>');
-				}
-			});
-
-			if( code && data.meta && data.meta.attributes && data.meta.attributes[code] ) {
-				$("option." + data.meta.attributes[code].type, opitem).show();
-			}
-
-			that.selectmenu("refresh");
-		});
-	},
-
-
-	selectKeys : function(e, ui) {
-
-		var opitem = $(this).parents(".filter-item").find(".filter-operator");
-		$("option", opitem).hide().removeProp("selected");
-
-		Aimeos.options.done(function(data) {
-
-			if( data.meta && data.meta.attributes && data.meta.attributes[ui.item.value] && data.meta.attributes[ui.item.value].type ) {
-				var options = $("option." + data.meta.attributes[ui.item.value].type, opitem)
-				options.first().prop("selected", "selected");
-				options.show();
-			}
-		});
-	},
-
-
-	addFilterKeys : function() {
-
-		$( ".aimeos .filter-item .filter-key" ).selectmenu({
-			select: Aimeos.Product.Filter.selectKeys,
-			create: Aimeos.Product.Filter.addKeys
-		});
-	},
-
-
-	addFilterItem : function() {
-
-		$(".aimeos .filter-items").on("click", ".fa-plus", function(e) {
-			var proto = $(".prototype", e.delegateTarget);
-			var clone = proto.clone().insertBefore(proto);
-
-			$("input,select", clone).prop("disabled", false);
-			clone.removeClass("prototype").addClass("filter-item");
-			$(this).removeClass("fa-plus").addClass("fa-minus");
-
-			$(".filter-key", clone).selectmenu({
-				select: Aimeos.Product.Filter.selectKeys,
-				create: Aimeos.Product.Filter.addKeys
-			});
-		});
-	},
-
-
-	removeFilterItem : function() {
-
-		$(".aimeos .list-filter .filter-items").on("click", ".fa-minus", function(e) {
-			var item = $(this).parents(".filter-item");
-
-			item.find(".filter-key").selectmenu("destroy");
-			item.remove();
-		});
-	},
-
-
-	toggleSearchItems : function() {
-
-		$(".aimeos .list-filter, .aimeos .list-fields").on("click", ".action", function(e) {
-
-			$(".filter-items, .fields-items", e.delegateTarget).toggle();
-			$(this).toggleClass("action-close");
-
-			if( $(".aimeos .list-search .search-item:visible").length > 0 ) {
-				$(".aimeos .list-search .actions-group").show();
-			} else {
-				$(".aimeos .list-search .actions-group").hide();
-			}
-		});
-	},
-};
-
-
-
-Aimeos.Product.List = {
-
-	element : null,
-
-
-	init : function() {
-
-		Aimeos.Product.List.askDelete();
-		Aimeos.Product.List.confirmDelete();
-	},
-
-
-	askDelete : function() {
-		var self = this;
-
-		$(".list-items").on("click", ".fa-trash", function(e) {
-			$("#confirm-delete").modal("show", $(this));
-			self.element = this;
-			return false;
-		});
-	},
-
-
-	confirmDelete : function() {
-		var self = this;
-
-		$("#confirm-delete").on("click", ".btn-danger", function(e) {
-			window.location.href = $(self.element).attr("href");
-		});
-	},
-};
-
-
-
-Aimeos.Product.Item = {
-
-	init : function() {
-
-		Aimeos.Product.Item.addConfigLine();
-		Aimeos.Product.Item.deleteConfigLine();
-		Aimeos.Product.Item.configComplete();
-		Aimeos.Product.Item.createDatePicker();
-		Aimeos.Product.Item.checkFields();
-		Aimeos.Product.Item.checkSubmit();
-
-		Aimeos.Product.Item.Bundle.init();
-		Aimeos.Product.Item.Image.init();
-		Aimeos.Product.Item.Price.init();
-		Aimeos.Product.Item.Selection.init();
-		Aimeos.Product.Item.Stock.init();
-		Aimeos.Product.Item.Text.init();
-	},
-
-
-	addConfigLine : function() {
-
-		$(".aimeos .item-config").on("click", ".fa-plus", function(ev) {
-			var line = $(".prototype", ev.delegateTarget);
-			var clone = line.clone();
-
-			clone.insertBefore(line).removeClass("prototype");
-			$("input", clone).prop("disabled", false);
-			$(".config-key", clone).autocomplete({
-				source: ['css-class'],
-				minLength: 0,
-				delay: 0
-			});
-		});
-	},
-
-
-	deleteConfigLine : function() {
-
-		$(".aimeos .item-config .fa-trash").on("click", function(ev) {
-			$(this).parents("tr").remove();
-		});
-
-		$(".aimeos .item-config").on("click", ".fa-trash", function(ev) {
-			$(this).parents("tr").remove();
-		});
-	},
-
-
-	configComplete : function() {
-
-		$(".aimeos .config-item .config-key").autocomplete({
-			source: ['css-class'],
-			minLength: 0,
-			delay: 0
-		});
-
-		$(".aimeos .item").on("click", " .config-key", function(ev) {
-			$(this).autocomplete("search", "");
-		});
+		return clone;
 	},
 
 
@@ -430,7 +167,7 @@ Aimeos.Product.Item = {
 
 		$(".aimeos .item .mandatory").on("blur", "input,select", function(ev) {
 
-			if($(this).val() != '') {
+			if($(this).val() !== '') {
 				$(ev.delegateTarget).removeClass("has-danger").addClass("has-success");
 			} else {
 				$(ev.delegateTarget).removeClass("has-success").addClass("has-danger");
@@ -510,6 +247,313 @@ Aimeos.Product.Item = {
 				constrainInput: false
 			});
 		});
+	},
+
+
+	getOptions : function(request, response, element, domain, key, sort) {
+
+		Aimeos.options.done(function(data) {
+
+			var compare = {}, field = {};
+
+			compare[key] = request.term;
+			field[domain] = key;
+
+			$.ajax({
+				dataType: "json",
+				url: data.meta.resources[domain] || null,
+				data: {
+					filter: {'&&': [{'=~': compare}]},
+					fields: field,
+					sort: sort
+				},
+				success: function(result) {
+					var list = result.data || [];
+
+					$("option", element).remove();
+
+					response( list.map(function(obj) {
+
+						var opt = $("<option/>");
+
+						opt.attr("value", obj.id);
+						opt.text(obj.attributes[key]);
+						opt.appendTo(element);
+
+						return {
+							label: obj.attributes[key] || null,
+							value: obj.id,
+							option: opt
+						};
+					}));
+				}
+			});
+		});
+	},
+
+
+	getOptionsAttributes : function(request, response, element) {
+		Aimeos.getOptions(request, response, element, 'attribute', 'attribute.label', 'attribute.label');
+	},
+
+
+	getOptionsCurrencies : function(request, response, element) {
+		Aimeos.getOptions(request, response, element, 'locale/currency', 'locale.currency.id', '-locale.currency.status,locale.currency.id');
+	},
+
+
+	getOptionsLanguages : function(request, response, element) {
+		Aimeos.getOptions(request, response, element, 'locale/language', 'locale.language.id', '-locale.language.status,locale.language.id');
+	},
+
+
+	getOptionsProducts : function(request, response, element) {
+		Aimeos.getOptions(request, response, element, 'product', 'product.label', 'product.label');
+	},
+
+
+	showErrors : function() {
+
+		$(".aimeos .error-list .error-item").each(function() {
+			$(".aimeos ." + $(this).data("key") + " .header").addClass("has-danger");
+		});
+	}
+};
+
+
+
+Aimeos.Product = {
+
+	init : function() {
+
+		Aimeos.Product.Filter.init();
+		Aimeos.Product.List.init();
+		Aimeos.Product.Item.init();
+	}
+};
+
+
+
+Aimeos.Product.Filter = {
+
+	filterattr : null,
+
+
+	init : function() {
+
+		this.addFilterKeys();
+		this.addFilterItem();
+		this.removeFilterItem();
+		this.toggleSearchItems();
+	},
+
+
+	addKeys : function(e) {
+
+		var self = $(this);
+		var opitem = self.parents(".filter-item").find(".filter-operator");
+
+		if( $("option", self).length !== 0 ) {
+			return;
+		}
+
+		Aimeos.Product.Filter.filterattr.done(function(data) {
+
+			var code = self.data("selected");
+			var keys = data.meta && data.meta.attributes || {};
+
+			$.each(keys, function(key, attr) {
+				if( attr['public'] && attr['code'] === code ) {
+					self.append('<option value=' + attr['code'] + ' selected="selected">' + attr['label'] + '</option>');
+				} else if( attr['public'] ) {
+					self.append('<option value=' + attr['code'] + '>' + attr['label'] + '</option>');
+				}
+			});
+
+			if( code && data.meta && data.meta.attributes && data.meta.attributes[code] ) {
+				$("option." + data.meta.attributes[code].type, opitem).show();
+			}
+
+			self.selectmenu("refresh");
+		});
+	},
+
+
+	selectKeys : function(e, ui) {
+
+		var opitem = $(this).parents(".filter-item").find(".filter-operator");
+		$("option", opitem).hide().removeProp("selected");
+
+		Aimeos.Product.Filter.filterattr.done(function(data) {
+
+			if( data.meta && data.meta.attributes && data.meta.attributes[ui.item.value] && data.meta.attributes[ui.item.value].type ) {
+				var options = $("option." + data.meta.attributes[ui.item.value].type, opitem);
+				options.first().prop("selected", "selected");
+				options.show();
+			}
+		});
+	},
+
+
+	addFilterKeys : function() {
+
+		var self = this;
+
+		Aimeos.options.done(function(data) {
+
+			var url = data.meta && data.meta.resources && data.meta.resources['product'] || null;
+
+			self.filterattr = $.ajax(url, {
+				"method": "OPTIONS",
+				"dataType": "json"
+			});
+
+			$( ".aimeos .filter-item .filter-key" ).selectmenu({
+				select: self.selectKeys,
+				create: self.addKeys
+			});
+		});
+	},
+
+
+	addFilterItem : function() {
+
+		var self = this;
+
+		$(".aimeos .filter-items").on("click", ".fa-plus", function(e) {
+			var proto = $(".prototype", e.delegateTarget);
+			var clone = proto.clone().insertBefore(proto);
+
+			$("input,select", clone).prop("disabled", false);
+			clone.removeClass("prototype").addClass("filter-item");
+			$(this).removeClass("fa-plus").addClass("fa-minus");
+
+			$(".filter-key", clone).selectmenu({
+				select: self.selectKeys,
+				create: self.addKeys
+			});
+		});
+	},
+
+
+	removeFilterItem : function() {
+
+		$(".aimeos .list-filter .filter-items").on("click", ".fa-minus", function(e) {
+			var item = $(this).parents(".filter-item");
+
+			item.find(".filter-key").selectmenu("destroy");
+			item.remove();
+		});
+	},
+
+
+	toggleSearchItems : function() {
+
+		$(".aimeos .list-filter, .aimeos .list-fields").on("click", ".action", function(e) {
+
+			$(".filter-items, .fields-items", e.delegateTarget).toggle();
+			$(this).toggleClass("action-close");
+
+			if( $(".aimeos .list-search .search-item:visible").length > 0 ) {
+				$(".aimeos .list-search .actions-group").show();
+			} else {
+				$(".aimeos .list-search .actions-group").hide();
+			}
+		});
+	}
+};
+
+
+
+Aimeos.Product.List = {
+
+	element : null,
+
+
+	init : function() {
+
+		this.askDelete();
+		this.confirmDelete();
+	},
+
+
+	askDelete : function() {
+		var self = this;
+
+		$(".list-items").on("click", ".fa-trash", function(e) {
+			$("#confirm-delete").modal("show", $(this));
+			self.element = this;
+			return false;
+		});
+	},
+
+
+	confirmDelete : function() {
+		var self = this;
+
+		$("#confirm-delete").on("click", ".btn-danger", function(e) {
+			window.location.href = $(self.element).attr("href");
+		});
+	}
+};
+
+
+
+Aimeos.Product.Item = {
+
+	init : function() {
+
+		this.addConfigLine();
+		this.deleteConfigLine();
+		this.configComplete();
+
+		Aimeos.Product.Item.Bundle.init();
+		Aimeos.Product.Item.Image.init();
+		Aimeos.Product.Item.Price.init();
+		Aimeos.Product.Item.Selection.init();
+		Aimeos.Product.Item.Stock.init();
+		Aimeos.Product.Item.Text.init();
+	},
+
+
+	addConfigLine : function() {
+
+		$(".aimeos .item-config").on("click", ".fa-plus", function(ev) {
+
+			var clone = Aimeos.addClone($(".prototype", ev.delegateTarget));
+
+			$(".config-key", clone).autocomplete({
+				source: ['css-class'],
+				minLength: 0,
+				delay: 0
+			});
+		});
+	},
+
+
+	deleteConfigLine : function() {
+
+		$(".aimeos .item-config .fa-trash").on("click", function(ev) {
+			$(this).parents("tr").remove();
+		});
+
+		$(".aimeos .item-config").on("click", ".fa-trash", function(ev) {
+			$(this).parents("tr").remove();
+		});
+	},
+
+
+	configComplete : function() {
+
+		$(".aimeos .config-item .config-key").autocomplete({
+			source: ['css-class'],
+			minLength: 0,
+			delay: 0
+		});
+
+		$(".aimeos .item").on("click", " .config-key", function(ev) {
+			$(this).autocomplete("search", "");
+		});
 	}
 };
 
@@ -519,25 +563,17 @@ Aimeos.Product.Item.Bundle = {
 
 	init : function() {
 
-		$(".product-item-bundle .combobox").combobox({getfcn: Aimeos.getOptionsProducts});
-
-		Aimeos.Product.Item.Bundle.addLine();
-		Aimeos.Product.Item.Bundle.removeLine();
+		this.addLine();
+		this.removeLine();
+		this.setupComponents();
+		this.showBundles();
 	},
 
 
 	addLine : function() {
 
 		$(".product-item-bundle").on("click", ".fa-plus", function(ev) {
-			var line = $(".prototype", ev.delegateTarget);
-			var clone = line.clone();
-
-			clone.insertBefore(line).removeClass("prototype");
-			$("[disabled='disabled']", clone).prop("disabled", false);
-			$(".combobox-prototype", clone)
-				.removeClass("combobox-prototype")
-				.addClass("combobox")
-				.combobox({getfcn: Aimeos.getOptionsProducts});
+			Aimeos.addClone($(".prototype", ev.delegateTarget), Aimeos.getOptionsProducts);
 		});
 	},
 
@@ -546,6 +582,23 @@ Aimeos.Product.Item.Bundle = {
 
 		$(".product-item-bundle").on("click", ".fa-trash", function() {
 			$(this).parents("tr").remove();
+		});
+	},
+
+
+	setupComponents : function() {
+
+		$(".product-item-bundle .combobox").combobox({getfcn: Aimeos.getOptionsProducts});
+	},
+
+
+	showBundles : function() {
+
+		var panel = $(".product-item-bundle");
+		$(".product-item .item-typeid option[selected]").data("code") === 'bundle' ? panel.show() : panel.hide();
+
+		$(".product-item .item-typeid").on("change", function() {
+			$("option:selected", this).data("code") === 'bundle' ? panel.show() : panel.hide();
 		});
 	}
 };
@@ -556,10 +609,9 @@ Aimeos.Product.Item.Image = {
 
 	init : function() {
 
-		$(".product-item-image .image-language .combobox").combobox({getfcn: Aimeos.getOptionsLanguages});
-
 		this.addLines();
 		this.removeLine();
+		this.setupComponents();
 	},
 
 
@@ -572,18 +624,14 @@ Aimeos.Product.Item.Image = {
 				var line = $(".prototype", ev.delegateTarget);
 
 				for(i=0; i<el.files.length; i++) {
-					var file = el.files[i];
-					var clone = line.clone();
-
-					clone.insertBefore(line).removeClass("prototype").addClass("upload");
-					$("[disabled='disabled']", clone).prop("disabled", false);
-					$(".image-label input", clone).val(el.files[i].name);
-					$(".combobox-prototype", clone)
-						.removeClass("combobox-prototype")
-						.addClass("combobox")
-						.combobox({getfcn: Aimeos.getOptionsLanguages});
 
 					var img = new Image();
+					var file = el.files[i];
+					var clone = Aimeos.addClone(line, Aimeos.getOptionsLanguages);
+
+					clone.addClass("upload");
+					$("input.item-label", clone).val(el.files[i].name);
+
 					img.src = file;
 					$(".image-preview", clone).append(img);
 
@@ -595,11 +643,18 @@ Aimeos.Product.Item.Image = {
 		});
 	},
 
+
 	removeLine : function() {
 
 		$(".product-item-image").on("click", ".fa-trash", function() {
 			$(this).parents("tr").remove();
 		});
+	},
+
+
+	setupComponents : function() {
+
+		$(".product-item-image .image-language .combobox").combobox({getfcn: Aimeos.getOptionsLanguages});
 	}
 };
 
@@ -609,10 +664,10 @@ Aimeos.Product.Item.Price = {
 
 	init : function() {
 
-		$(".product-item-price .combobox").combobox({getfcn: Aimeos.getOptionsCurrencies});
-
 		this.copyBlock();
 		this.removeBlock();
+		this.setupComponents();
+		this.updateHeader();
 	},
 
 
@@ -634,6 +689,23 @@ Aimeos.Product.Item.Price = {
 		$(".product-item-price").on("click", ".header .fa-trash", function() {
 			$(this).parents(".group-item").remove();
 		});
+	},
+
+
+	setupComponents : function() {
+
+		$(".product-item-price .combobox").combobox({getfcn: Aimeos.getOptionsCurrencies});
+	},
+
+
+	updateHeader : function() {
+
+		$(".product-item-price").on("blur", "input.item-label", function() {
+			var item = $(this).parents(".group-item");
+			var value = $(this).val();
+
+			$(".header .item-label", item).html(value);
+		});
 	}
 };
 
@@ -643,27 +715,25 @@ Aimeos.Product.Item.Selection = {
 
 	init : function() {
 
-		$(".product-item-selection .combobox").combobox({getfcn: Aimeos.getOptionsProducts});
-
 		this.copyBlock();
 		this.removeBlock();
 		this.addAttribute();
 		this.removeAttribute();
+		this.setupComponents();
+		this.showSelection();
+		this.updateCode();
 	},
 
 
 	addAttribute : function() {
 
 		$(".product-item-selection").on("click", ".selection-item-attributes .fa-plus", function(ev) {
-			var line = $(this).parents(".selection-item-attributes").find(".prototype");
-			var clone = line.clone();
 
-			clone.insertBefore(line).removeClass("prototype");
-			$("[disabled='disabled']", clone).prop("disabled", false);
-			$(".combobox-prototype", clone)
-				.removeClass("combobox-prototype")
-				.addClass("combobox")
-				.combobox({getfcn: Aimeos.getOptionsProducts});
+			var code = $(this).parents(".group-item").find("input.item-code").val();
+			var line = $(this).parents(".selection-item-attributes").find(".prototype");
+			var clone = Aimeos.addClone(line, Aimeos.getOptionsAttributes);
+
+			$("input.item-attr-ref", clone).val(code);
 		});
 	},
 
@@ -684,7 +754,15 @@ Aimeos.Product.Item.Selection = {
 
 			clone.insertAfter(block);
 			$(".ai-combobox", clone).remove();
-			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsProducts});
+			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsAttributes});
+
+			var codeNode = $("input.item-code", clone);
+			codeNode.val(codeNode.val() + '_copy');
+			codeNode.trigger("blur");
+
+			$("input.item-listid", clone).val('');
+			$("input.item-id", clone).val('');
+			$("p.item-id", clone).empty();
 		});
 	},
 
@@ -693,6 +771,35 @@ Aimeos.Product.Item.Selection = {
 
 		$(".product-item-selection").on("click", ".header .fa-trash", function() {
 			$(this).parents(".group-item").remove();
+		});
+	},
+
+
+	setupComponents : function() {
+
+		$(".product-item-selection .combobox").combobox({getfcn: Aimeos.getOptionsProducts});
+	},
+
+
+	showSelection : function() {
+
+		var panel = $(".product-item-selection");
+		$(".product-item .item-typeid option[selected]").data("code") === 'select' ? panel.show() : panel.hide();
+
+		$(".product-item .item-typeid").on("change", function() {
+			$("option:selected", this).data("code") === 'select' ? panel.show() : panel.hide();
+		});
+	},
+
+
+	updateCode : function() {
+
+		$(".product-item-selection").on("blur", "input.item-code", function() {
+			var item = $(this).parents(".group-item");
+			var value = $(this).val();
+
+			$(".header .item-code", item).html(value);
+			$(".selection-item-attributes .item-attr-ref", item).val(value);
 		});
 	}
 };
@@ -711,11 +818,8 @@ Aimeos.Product.Item.Stock = {
 	addLine : function() {
 
 		$(".product-item-stock").on("click", ".fa-plus", function(ev) {
-			var line = $(".prototype", ev.delegateTarget);
-			var clone = line.clone();
 
-			clone.insertBefore(line).removeClass("prototype");
-			$("[disabled='disabled']", clone).prop("disabled", false);
+			var clone = Aimeos.addClone($(".prototype", ev.delegateTarget));
 
 			$(".date-prototype", clone).each(function(idx, elem) {
 				$(elem).addClass("date").removeClass("date-prototype");
@@ -754,11 +858,10 @@ Aimeos.Product.Item.Text = {
 
 	init : function() {
 
-		$(".product-item-text .combobox").combobox({getfcn: Aimeos.getOptionsLanguages});
-		$(".product-item-text .htmleditor").ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
-
 		this.copyBlock();
 		this.removeBlock();
+		this.setupComponents();
+		this.updateHeader();
 	},
 
 
@@ -770,6 +873,8 @@ Aimeos.Product.Item.Text = {
 
 			clone.insertAfter(block);
 			$(".cke", clone).remove();
+			$(".ai-combobox", clone).remove();
+			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsLanguages});
 			$(".htmleditor", clone).ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
 		});
 	},
@@ -780,9 +885,36 @@ Aimeos.Product.Item.Text = {
 		$(".product-item-text").on("click", ".header .fa-trash", function() {
 			$(this).parents(".group-item").remove();
 		});
+	},
+
+
+	setupComponents : function() {
+
+		$(".product-item-text .combobox").combobox({getfcn: Aimeos.getOptionsLanguages});
+		$(".product-item-text .htmleditor").ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
+	},
+
+
+	updateHeader : function() {
+
+		$(".product-item-text").on("blur", "input.item-name-content", function() {
+			var item = $(this).parents(".group-item");
+			var value = $(this).val();
+
+			$(".header .item-name-content", item).html(value);
+		});
 	}
 };
 
+
+
+/**
+ * Load JSON admin resource definition immediately
+ */
+Aimeos.options = $.ajax($("body").data("url"), {
+	"method": "OPTIONS",
+	"dataType": "json"
+});
 
 
 $(function() {

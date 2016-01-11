@@ -75,7 +75,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$whManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock/warehouse' );
 
 		$item = $manager->findItem( 'CNC' );
-		$item->setCode( 'CNC_copy' );
+		$item->setCode( 'jqadm-test-stock' );
 		$item->setId( null );
 
 		$manager->saveItem( $item );

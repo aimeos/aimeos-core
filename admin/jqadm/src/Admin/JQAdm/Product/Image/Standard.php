@@ -265,6 +265,113 @@ class Standard
 
 
 	/**
+	 * Deletes the removed list items and their referenced items
+	 *
+	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param array $listIds List of IDs of the still used list items
+	 */
+	protected function cleanupItems( array $listItems, array $listIds )
+	{
+		$context = $this->getContext();
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'media' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
+		$cntl = \Aimeos\Controller\Common\Media\Factory::createController( $context );
+
+		$rmItems = array();
+		$rmListIds = array_diff( array_keys( $listItems ), $listIds );
+
+		foreach( $rmListIds as $rmListId )
+		{
+			if( ( $item = $listItems[$rmListId]->getRefItem() ) !== null ) {
+				$rmItems[$item->getId()] = $item;
+			}
+		}
+
+		$search = $listManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.lists.refid', array_keys( $rmItems ) ),
+			$search->compare( '==', 'product.lists.domain', 'media' ),
+			$search->compare( '==', 'product.lists.type.code', 'default' ),
+			$search->compare( '==', 'product.lists.type.domain', 'media' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $listManager->aggregate( $search, 'product.lists.refid' ) as $key => $count )
+		{
+			if( $count > 1 ) {
+				unset( $rmItems[$key] );
+			} else {
+				$cntl->delete( $rmItems[$key] );
+			}
+		}
+
+		$listManager->deleteItems( $rmListIds  );
+		$manager->deleteItems( array_keys( $rmItems )  );
+	}
+
+
+	/**
+	 * Creates a new pre-filled item
+	 *
+	 * @return \Aimeos\MShop\Media\Item\Iface New media item object
+	 */
+	protected function createItem()
+	{
+		$context = $this->getContext();
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'media' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'media/type' );
+
+		$item = $manager->createItem();
+		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
+		$item->setDomain( 'product' );
+		$item->setStatus( 1 );
+
+		return $item;
+	}
+
+
+	/**
+	 * Creates a new pre-filled list item
+	 *
+	 * @param string $id Parent ID for the new list item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface New list item object
+	 */
+	protected function createListItem( $id )
+	{
+		$context = $this->getContext();
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
+
+		$item = $manager->createItem();
+		$item->setTypeId( $typeManager->findItem( 'default', array(), 'media' )->getId() );
+		$item->setDomain( 'media' );
+		$item->setParentId( $id );
+		$item->setStatus( 1 );
+
+		return $item;
+	}
+
+
+	/**
+	 * Returns the media items for the given IDs
+	 *
+	 * @param array $ids List of media IDs
+	 * @return array List of media items with ID as key and items implementing \Aimeos\MShop\Media\Item\Iface as values
+	 */
+	protected function getMediaItems( array $ids )
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'media' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.id', $ids ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		return $manager->searchItems( $search );
+	}
+
+
+	/**
 	 * Returns the list of sub-client names configured for the client.
 	 *
 	 * @return array List of JQAdm client names
@@ -293,9 +400,13 @@ class Standard
 
 		foreach( $view->item->getListItems( 'media', 'default' ) as $id => $listItem )
 		{
+			if( ( $refItem = $listItem->getRefItem() ) === null ) {
+				continue;
+			}
+
 			$data['product.lists.id'][] = $id;
 
-			foreach( $listItem->getRefItem()->toArray() as $key => $value ) {
+			foreach( $refItem->toArray() as $key => $value ) {
 				$data[$key][] = $value;
 			}
 		}
@@ -317,26 +428,16 @@ class Standard
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$mediaManager = \Aimeos\MShop\Factory::createManager( $context, 'media' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
-		$mediaTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'media/type' );
-		$listTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
 		$cntl = \Aimeos\Controller\Common\Media\Factory::createController( $context );
 
 		$listIds = (array) $view->param( 'image/product.lists.id', array() );
 		$listItems = $manager->getItem( $id, array( 'media' ) )->getListItems( 'media' );
+		$mediaItems = $this->getMediaItems( $view->param( 'image/media.id', array() ) );
 
-		$listItem = $listManager->createItem();
-		$listItem->setTypeId( $listTypeManager->findItem( 'default', array(), 'media' )->getId() );
-		$listItem->setDomain( 'media' );
-		$listItem->setParentId( $id );
-		$listItem->setStatus( 1 );
-
-		$mediaItem = $mediaManager->createItem();
-		$mediaItem->setTypeId( $mediaTypeManager->findItem( 'default', array(), 'product' )->getId() );
-		$mediaItem->setDomain( 'product' );
-		$mediaItem->setStatus( 1 );
+		$mediaItem = $this->createItem();
+		$listItem = $this->createListItem( $id );
 
 		$files = $view->value( $view->request()->getUploadedFiles(), 'image/files', array() );
-		$files = ( is_array( $files ) ? $files : array( $files ) );
 		$num = 0;
 
 		foreach( $listIds as $idx => $listid )
@@ -346,14 +447,24 @@ class Standard
 				$litem = $listItem;
 				$litem->setId( null );
 
-				if( ( $file = $view->value( $files, $num ) ) === null ) {
+				$mediaId = $view->param( 'image/media.id/' . $idx );
+
+				if( $mediaId !== '' && isset( $mediaItems[$mediaId] ) )
+				{
+					$item = $mediaItems[$mediaId];
+				}
+				else if( ( $file = $view->value( $files, $num ) ) !== null )
+				{
+					$item = $mediaItem;
+					$item->setId( null );
+
+					$cntl->add( $item, $file );
+					$num++;
+				}
+				else
+				{
 					throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'No file uploaded for %1$d. new image', $num+1 ) );
 				}
-
-				$item = $mediaItem;
-				$cntl->add( $item, $file );
-
-				$num++;
 			}
 			else
 			{
@@ -372,18 +483,6 @@ class Standard
 			$listManager->saveItem( $litem, false );
 		}
 
-
-		$rmIds = array();
-		$rmListIds = array_diff( array_keys( $listItems ), $listIds );
-
-		foreach( $rmListIds as $rmListId )
-		{
-			$item = $listItems[$rmListId]->getRefItem();
-			$cntl->delete( $item );
-			$rmIds[] = $item->getId();
-		}
-
-		$listManager->deleteItems( $rmListIds  );
-		$mediaManager->deleteItems( $rmIds  );
+		$this->cleanupItems( $listItems, $listIds );
 	}
 }

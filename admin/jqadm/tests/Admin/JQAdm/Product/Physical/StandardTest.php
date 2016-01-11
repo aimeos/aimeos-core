@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$item = $manager->findItem( 'CNC' );
-		$item->setCode( 'CNC_copy' );
+		$item->setCode( 'jqadm-test-physical' );
 		$item->setId( null );
 
 		$manager->saveItem( $item );

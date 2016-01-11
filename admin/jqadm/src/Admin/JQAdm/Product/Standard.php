@@ -245,7 +245,7 @@ class Standard
 			$item->setConfig( $this->getItemConfig( $view ) );
 			$manager->saveItem( $item );
 
-			$view->item = $item;
+			$view->item = $manager->getItem( $item->getId() ); // product.type must be available
 			$view->itemBody = '';
 
 			foreach( $this->getSubClients() as $client ) {

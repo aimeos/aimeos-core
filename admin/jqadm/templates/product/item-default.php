@@ -40,25 +40,25 @@ $params = $this->param();
 					<div class="form-group row">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'ID' ) ); ?></label>
 						<div class="col-sm-9">
-							<input type="hidden" name="item[product.id]" value="<?php echo $enc->attr( $this->get( 'itemData/product.id' ) ); ?>" />
-							<p class="form-control-static"><?php echo $enc->attr( $this->get( 'itemData/product.id' ) ); ?></p>
+							<input class="item-id" type="hidden" name="item[product.id]" value="<?php echo $enc->attr( $this->get( 'itemData/product.id' ) ); ?>" />
+							<p class="form-control-static item-id"><?php echo $enc->attr( $this->get( 'itemData/product.id' ) ); ?></p>
 						</div>
 					</div>
 					<div class="form-group row mandatory">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Status' ) ); ?></label>
 						<div class="col-sm-9">
-							<select class="form-control" name="item[product.status]">
-								<option value="1" <?php echo $selected( $this->get( 'itemData/product.status' ), 1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Enabled' ) ); ?></option>
-								<option value="0" <?php echo $selected( $this->get( 'itemData/product.status' ), 0 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Disabled' ) ); ?></option>
-								<option value="-1" <?php echo $selected( $this->get( 'itemData/product.status' ), -1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Review' ) ); ?></option>
-								<option value="-2" <?php echo $selected( $this->get( 'itemData/product.status' ), -2 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Archive' ) ); ?></option>
+							<select class="form-control c-select item-status" name="item[product.status]">
+								<option value="1" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), 1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Enabled' ) ); ?></option>
+								<option value="0" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), 0 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Disabled' ) ); ?></option>
+								<option value="-1" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), -1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Review' ) ); ?></option>
+								<option value="-2" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), -2 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Archive' ) ); ?></option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group row mandatory">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Type' ) ); ?></label>
 						<div class="col-sm-9">
-							<select class="form-control" name="item[product.typeid]">
+							<select class="form-control c-select item-typeid" name="item[product.typeid]">
 <?php foreach( $this->get( 'itemTypes', array() ) as $id => $typeItem ) : ?>
 								<option value="<?php echo $enc->attr( $id ); ?>" data-code="<?php echo $enc->attr( $typeItem->getCode() ); ?>" <?php echo $selected( $this->get( 'itemData/product.typeid' ), $id ); ?>><?php echo $enc->html( $typeItem->getLabel() ); ?></option>
 <?php endforeach; ?>
@@ -68,7 +68,7 @@ $params = $this->param();
 					<div class="form-group row mandatory">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Code' ) ); ?></label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" name="item[product.code]" required="required"
+							<input class="form-control item-code" type="text" name="item[product.code]" required="required"
 								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Unique code (SKU, EAN)' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.code' ) ); ?>">
 						</div>
@@ -76,7 +76,7 @@ $params = $this->param();
 					<div class="form-group row mandatory">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Label' ) ); ?></label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" name="item[product.label]" required="required"
+							<input class="form-control item-label" type="text" name="item[product.label]" required="required"
 								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Internal label' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.label' ) ); ?>">
 						</div>
@@ -84,7 +84,7 @@ $params = $this->param();
 					<div class="form-group row optional">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Start date' ) ); ?></label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control date" name="item[product.datestart]" data-format="<?php echo $this->translate( 'admin/jqadm', 'yy-mm-dd' ); ?>"
+							<input class="form-control item-datestart date" type="text" name="item[product.datestart]" data-format="<?php echo $this->translate( 'admin/jqadm', 'yy-mm-dd' ); ?>"
 								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Start date (YYYY-mm-dd HH:mm:ss)' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.datestart' ) ); ?>">
 						</div>
@@ -92,7 +92,7 @@ $params = $this->param();
 					<div class="form-group row optional">
 						<label class="col-sm-3 control-label"><?php echo $enc->html( $this->translate( 'admin', 'End date' ) ); ?></label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control date" name="item[product.dateend]" data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>"
+							<input class="form-control item-dateend date" type="text" name="item[product.dateend]" data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>"
 								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'End date (YYYY-mm-dd HH:mm:ss)' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.dateend' ) ); ?>" >
 						</div>

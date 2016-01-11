@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$item = $manager->findItem( 'CNC' );
-		$item->setCode( 'jqadm-test' );
+		$item->setCode( 'jqadm-test-image' );
 		$item->setId( null );
 
 		$manager->saveItem( $item );
@@ -104,7 +104,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$files = array(
 			'image' => array(
-				'files' => array( 'tmp_name' => '', 'name' => '', 'type' => '', 'size' => 0, 'error' => 0 ),
+				'files' => array(
+					array( 'tmp_name' => '', 'name' => '', 'type' => '', 'size' => 0, 'error' => 0 ),
+				),
 			),
 		);
 

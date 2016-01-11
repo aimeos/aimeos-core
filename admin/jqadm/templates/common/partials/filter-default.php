@@ -44,7 +44,7 @@ $cnt = count( (array) $filter['key'] );
 			<fieldset>
 				<select name="filter[key][]" class="filter-key form-control" data-selected="<?php echo $filter['key'][$pos]; ?>">
 				</select><!--
-				--><select name="filter[op][]" class="filter-operator form-control">
+				--><select name="filter[op][]" class="filter-operator form-control c-select">
 <?php foreach( $operators as $code ) : ?>
 					<option value="<?php echo $enc->attr( $code ); ?>"
 						class="<?php echo ( isset( $operatorMap[$code] ) ? implode( ' ', $operatorMap[$code] ) : '' ); ?>"
@@ -65,7 +65,7 @@ $cnt = count( (array) $filter['key'] );
 			<fieldset>
 				<select name="filter[key][]" class="filter-key form-control" data-selected="<?php echo $this->get( 'default' ); ?>" disabled="disabled">
 				</select><!--
-				--><select name="filter[op][]" class="filter-operator form-control" disabled="disabled">
+				--><select name="filter[op][]" class="filter-operator form-control c-select" disabled="disabled">
 <?php foreach( $operators as $code ) : ?>
 					<option value="<?php echo $enc->attr( $code ); ?>"
 						class="<?php echo ( isset( $operatorMap[$code] ) ? implode( ' ', $operatorMap[$code] ) : '' ); ?>"

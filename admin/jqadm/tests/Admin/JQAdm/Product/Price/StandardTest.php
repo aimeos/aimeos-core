@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$item = $manager->findItem( 'CNC' );
-		$item->setCode( 'jqadm-test' );
+		$item->setCode( 'jqadm-test-price' );
 		$item->setId( null );
 
 		$manager->saveItem( $item );
