@@ -46,6 +46,7 @@ $enc = $this->encoder();
 					<td class="stock-databack">
 						<input class="form-control item-dateback date" type="text" name="stock[product.stock.dateback][]"
 							value="<?php echo $enc->attr( $this->get( 'stockData/product.stock.dateback/' . $idx ) ); ?>"
+							placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'YYYY-MM-DD hh:mm:ss (optional)' ) ); ?>"
 							data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>" />
 					</td>
 					<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
@@ -64,8 +65,8 @@ $enc = $this->encoder();
 						<input class="form-control item-stocklevel" type="text" name="stock[product.stock.stocklevel][]" disabled="disabled" />
 					</td>
 					<td class="stock-databack">
-						<input type="text" class="form-control date-prototype item-dateback"
-							name="stock[product.stock.dateback][]" disabled="disabled"
+						<input class="form-control date-prototype item-dateback" type="text" name="stock[product.stock.dateback][]" disabled="disabled"
+							placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'YYYY-MM-DD hh:mm:ss (optional)' ) ); ?>"
 							data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>" />
 					</td>
 					<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>

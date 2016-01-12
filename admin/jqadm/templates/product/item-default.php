@@ -48,10 +48,10 @@ $params = $this->param();
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Status' ) ); ?></label>
 						<div class="col-sm-9">
 							<select class="form-control c-select item-status" name="item[product.status]">
-								<option value="1" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), 1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Enabled' ) ); ?></option>
-								<option value="0" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), 0 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Disabled' ) ); ?></option>
-								<option value="-1" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), -1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Review' ) ); ?></option>
-								<option value="-2" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), -2 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'Archive' ) ); ?></option>
+								<option value="1" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), 1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:enabled' ) ); ?></option>
+								<option value="0" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), 0 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:disabled' ) ); ?></option>
+								<option value="-1" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), -1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:review' ) ); ?></option>
+								<option value="-2" <?php echo $selected( $this->get( 'itemData/product.status', 1 ), -2 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:archive' ) ); ?></option>
 							</select>
 						</div>
 					</div>
@@ -69,7 +69,7 @@ $params = $this->param();
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Code' ) ); ?></label>
 						<div class="col-sm-9">
 							<input class="form-control item-code" type="text" name="item[product.code]" required="required"
-								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Unique code (SKU, EAN)' ) ); ?>"
+								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'EAN, SKU or article number (required)' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.code' ) ); ?>">
 						</div>
 					</div>
@@ -77,15 +77,15 @@ $params = $this->param();
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Label' ) ); ?></label>
 						<div class="col-sm-9">
 							<input class="form-control item-label" type="text" name="item[product.label]" required="required"
-								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Internal label' ) ); ?>"
+								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Internal name (required)' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.label' ) ); ?>">
 						</div>
 					</div>
 					<div class="form-group row optional">
 						<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Start date' ) ); ?></label>
 						<div class="col-sm-9">
-							<input class="form-control item-datestart date" type="text" name="item[product.datestart]" data-format="<?php echo $this->translate( 'admin/jqadm', 'yy-mm-dd' ); ?>"
-								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Start date (YYYY-mm-dd HH:mm:ss)' ) ); ?>"
+							<input class="form-control item-datestart date" type="text" name="item[product.datestart]" data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>"
+								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'YYYY-MM-DD hh:mm:ss (optional)' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.datestart' ) ); ?>">
 						</div>
 					</div>
@@ -93,7 +93,7 @@ $params = $this->param();
 						<label class="col-sm-3 control-label"><?php echo $enc->html( $this->translate( 'admin', 'End date' ) ); ?></label>
 						<div class="col-sm-9">
 							<input class="form-control item-dateend date" type="text" name="item[product.dateend]" data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>"
-								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'End date (YYYY-mm-dd HH:mm:ss)' ) ); ?>"
+								placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'YYYY-MM-DD hh:mm:ss (optional)' ) ); ?>"
 								value="<?php echo $enc->attr( $this->get( 'itemData/product.dateend' ) ); ?>" >
 						</div>
 					</div>

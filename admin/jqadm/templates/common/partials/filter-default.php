@@ -35,9 +35,9 @@ $cnt = count( (array) $filter['key'] );
 	<tr class="input-group filter-item">
 		<td>
 <?php	if( $pos < $cnt - 1 ) : ?>
-			<div class="fa fa-minus" aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Add filter' ) ); ?>"></div>
+			<div class="fa fa-minus" aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Remove filter' ) ); ?>"></div>
 <?php	else : ?>
-			<div class="fa fa-plus" aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Add filter' ) ); ?>"></div>
+			<div class="fa fa-plus" aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Add filter' ) ); ?>"></div>
 <?php	endif; ?>
 		</td>
 		<td>
@@ -49,7 +49,7 @@ $cnt = count( (array) $filter['key'] );
 					<option value="<?php echo $enc->attr( $code ); ?>"
 						class="<?php echo ( isset( $operatorMap[$code] ) ? implode( ' ', $operatorMap[$code] ) : '' ); ?>"
 						<?php echo ( isset( $filter['op'][$pos] ) && $filter['op'][$pos] === $code ? 'selected' : '' ); ?>
-					><?php echo $enc->html( $this->translate( 'admin/jqadm/code', $code ) ); ?></option>
+					><?php echo $enc->html( $this->translate( 'admin/ext', $code ) ); ?></option>
 <?php endforeach; ?>
 				</select><!--
 				--><input name="filter[val][]" class="filter-value form-control" type="text" value="<?php echo $enc->attr( ( isset( $filter['val'][$pos] ) ? $filter['val'][$pos] : '' ) ); ?>" />
@@ -59,7 +59,7 @@ $cnt = count( (array) $filter['key'] );
 <?php endfor; ?>
 	<tr class="input-group prototype">
 		<td>
-			<div class="fa fa-plus" aria-label="<?php echo $enc->attr( $this->translate( 'admin/jqadm', 'Add filter' ) ); ?>"></div>
+			<div class="fa fa-plus" aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Add filter' ) ); ?>"></div>
 		</td>
 		<td>
 			<fieldset>
@@ -69,7 +69,7 @@ $cnt = count( (array) $filter['key'] );
 <?php foreach( $operators as $code ) : ?>
 					<option value="<?php echo $enc->attr( $code ); ?>"
 						class="<?php echo ( isset( $operatorMap[$code] ) ? implode( ' ', $operatorMap[$code] ) : '' ); ?>"
-					><?php echo $enc->html( $this->translate( 'admin/jqadm/code', $code ) ); ?></option>
+					><?php echo $enc->html( $this->translate( 'admin/ext', $code ) ); ?></option>
 <?php endforeach; ?>
 				</select><!--
 				--><input name="filter[val][]" class="filter-value form-control" type="text" disabled="disabled" />

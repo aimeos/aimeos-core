@@ -3,6 +3,8 @@
 <project name="Aimeos admin" default="all">
 
 	<target name="i18n" description="Creates translation message files">
+		<exec command="find ./jqadm/templates/ -type f | xgettext -j -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=printf:1 --keyword=sprintf:1 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/core-admin.pot -f -"
+			checkreturn="true" logoutput="true" />
 		<exec command="find ./extjs/src/ -type f -name '*.js' | xgettext -j -s --no-wrap --add-comments=: --language=Python --from-code=UTF-8 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/core-admin.pot -f -"
 			checkreturn="true" logoutput="true" />
 		<exec command="find ./extjs/lib/ext.ux/ -type f -name '*.js' | xgettext -j -s --no-wrap --add-comments=: --language=Python --from-code=UTF-8 --keyword=_ --keyword=_n:1,2,3t -o i18n/ext/core-admin-ext.pot -f -"

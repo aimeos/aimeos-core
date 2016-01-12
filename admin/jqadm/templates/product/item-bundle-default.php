@@ -17,7 +17,7 @@ $enc = $this->encoder();
 			<table class="bundle-list table table-default">
 				<thead>
 					<tr>
-						<th><?php echo $enc->html( $this->translate( 'admin', 'Bundled products' ) ); ?></th>
+						<th><?php echo $enc->html( $this->translate( 'admin', 'Products' ) ); ?></th>
 						<th class="actions"><div class="btn btn-primary fa fa-plus"></div></th>
 					</tr>
 				</thead>
