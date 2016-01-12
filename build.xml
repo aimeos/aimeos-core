@@ -84,7 +84,7 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="check" haltonfailure="true" dir="${coredir}/admin/jqadm" />
+		<phing target="check" haltonfailure="false" dir="${coredir}/admin/jqadm" />
 		<phing target="check" haltonfailure="false" dir="${coredir}/admin/extjs" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
