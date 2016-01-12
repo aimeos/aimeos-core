@@ -109,7 +109,7 @@ $enc = $this->encoder();
 
 		</div>
 
-<?php echo $this->get( 'textBody' ); ?>
+<?php echo $this->get( 'priceBody' ); ?>
 
 	</div>
 </div>

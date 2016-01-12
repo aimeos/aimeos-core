@@ -46,5 +46,6 @@ $enc = $this->encoder();
 				</tbody>
 			</table>
 		</div>
+<?php echo $this->get( 'bundleBody' ); ?>
 	</div>
 </div>

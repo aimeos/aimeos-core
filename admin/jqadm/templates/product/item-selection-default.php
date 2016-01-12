@@ -93,5 +93,6 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 
 		</div>
+<?php echo $this->get( 'selectionBody' ); ?>
 	</div>
 </div>

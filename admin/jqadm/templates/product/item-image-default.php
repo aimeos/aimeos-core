@@ -55,5 +55,6 @@ $enc = $this->encoder();
 				</tr>
 			</tbody>
 		</table>
+<?php echo $this->get( 'imageBody' ); ?>
 	</div>
 </div>

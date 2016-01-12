@@ -67,10 +67,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		if( $view->item->getType() === 'bundle' ) {
-			$this->setData( $view );
-		}
-
+		$this->setData( $view );
 		$view->bundleBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -145,10 +142,7 @@ class Standard
 
 		try
 		{
-			if( $view->item->getType() === 'bundle' ) {
-				$this->updateItems( $view );
-			}
-
+			$this->updateItems( $view );
 			$view->bundleBody = '';
 
 			foreach( $this->getSubClients() as $client ) {
@@ -281,7 +275,6 @@ class Standard
 	 */
 	protected function getListItems( $prodid )
 	{
-		$map = array();
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
 
 		$search = $manager->createSearch();
@@ -305,9 +298,13 @@ class Standard
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view )
 	{
+		if( $view->item->getType() !== 'bundle' ) {
+			return;
+		}
+
 		$view->bundleData = (array) $view->param( 'bundle', array() );
 
-		if( !empty( $view->bundleData ) || $view->item->getType() !== 'bundle' ) {
+		if( !empty( $view->bundleData ) ) {
 			return;
 		}
 
@@ -334,16 +331,21 @@ class Standard
 	 */
 	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{
+		if( $view->item->getType() !== 'bundle' ) {
+			return;
+		}
+
+		$id = $view->item->getId();
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
 
 		$item = $manager->createItem();
-		$item->setParentId( $view->item->getId() );
 		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
 		$item->setDomain( 'product' );
+		$item->setParentId( $id );
 
-		$map = $this->getListItems( $view->item->getId() );
+		$map = $this->getListItems( $id );
 
 		foreach( (array) $view->param( 'bundle/product.lists.id', array() ) as $pos => $listid )
 		{

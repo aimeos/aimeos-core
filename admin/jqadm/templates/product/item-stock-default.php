@@ -72,5 +72,6 @@ $enc = $this->encoder();
 				</tr>
 			</tbody>
 		</table>
+<?php echo $this->get( 'stockBody' ); ?>
 	</div>
 </div>

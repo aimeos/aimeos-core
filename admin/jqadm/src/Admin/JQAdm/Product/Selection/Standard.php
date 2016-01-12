@@ -67,10 +67,7 @@ class Standard
 	{
 		$view = $this->getView();
 
-		if( $view->item->getType() === 'select' ) {
-			$this->setData( $view, true );
-		}
-
+		$this->setData( $view, true );
 		$view->selectionBody = '';
 
 		foreach( $this->getSubClients() as $client ) {
@@ -145,10 +142,7 @@ class Standard
 
 		try
 		{
-			if( $view->item->getType() === 'select' ) {
-				$this->updateItems( $view );
-			}
-
+			$this->updateItems( $view );
 			$view->selectionBody = '';
 
 			foreach( $this->getSubClients() as $client ) {
@@ -477,9 +471,13 @@ class Standard
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view, $copy = false )
 	{
+		if( $view->item->getType() !== 'select' ) {
+			return;
+		}
+
 		$view->selectionData = $this->getDataParams( $view );
 
-		if( !empty( $view->selectionData ) || $view->item->getType() !== 'select' ) {
+		if( !empty( $view->selectionData ) ) {
 			return;
 		}
 
@@ -494,6 +492,10 @@ class Standard
 	 */
 	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{
+		if( $view->item->getType() !== 'select' ) {
+			return;
+		}
+
 		$id = $view->item->getId();
 		$context = $this->getContext();
 		$data = $this->getDataParams( $view );
