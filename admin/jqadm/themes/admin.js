@@ -297,6 +297,11 @@ Aimeos = {
 	},
 
 
+	getOptionsCategories : function(request, response, element) {
+		Aimeos.getOptions(request, response, element, 'catalog', 'catalog.label', 'catalog.label');
+	},
+
+
 	getOptionsCurrencies : function(request, response, element) {
 		Aimeos.getOptions(request, response, element, 'locale/currency', 'locale.currency.id', '-locale.currency.status,locale.currency.id');
 	},
@@ -508,6 +513,7 @@ Aimeos.Product.Item = {
 		this.configComplete();
 
 		Aimeos.Product.Item.Bundle.init();
+		Aimeos.Product.Item.Category.init();
 		Aimeos.Product.Item.Image.init();
 		Aimeos.Product.Item.Price.init();
 		Aimeos.Product.Item.Selection.init();
@@ -600,6 +606,40 @@ Aimeos.Product.Item.Bundle = {
 		$(".product-item .item-typeid").on("change", function() {
 			$("option:selected", this).data("code") === 'bundle' ? panel.show() : panel.hide();
 		});
+	}
+};
+
+
+
+Aimeos.Product.Item.Category = {
+
+	init : function() {
+
+		this.addLine();
+		this.removeLine();
+		this.setupComponents();
+	},
+
+
+	addLine : function() {
+
+		$(".product-item-category").on("click", ".fa-plus", function(ev) {
+			Aimeos.addClone($(".prototype", ev.delegateTarget), Aimeos.getOptionsCategories);
+		});
+	},
+
+
+	removeLine : function() {
+
+		$(".product-item-category").on("click", ".fa-trash", function() {
+			$(this).parents("tr").remove();
+		});
+	},
+
+
+	setupComponents : function() {
+
+		$(".product-item-category .combobox").combobox({getfcn: Aimeos.getOptionsCategories});
 	}
 };
 

@@ -334,7 +334,12 @@ class Standard
 		foreach( $listItems as $listItem )
 		{
 			$catId = $listItem->getParentId();
-			$data['catalog.label'][] = ( isset( $catItems[$catId] ) ? $catItems[$catId]->getLabel() : '' );
+
+			if( isset( $catItems[$catId] ) )
+			{
+				$data['catalog.id'][] = $catId;
+				$data['catalog.label'][] = $catItems[$catId]->getLabel();
+			}
 
 			foreach( $listItem->toArray() as $key => $value ) {
 				$data[$key][] = $value;
@@ -352,33 +357,36 @@ class Standard
 	 */
 	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{
-		$id = $view->item->getId();
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/lists' );
 		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/lists/type' );
+
+		$id = $view->item->getId();
+		$map = $this->getListItems( $id );
+		$listIds = (array) $view->param( 'category/catalog.lists.id', array() );
+
+
+		foreach( $listIds as $pos => $listid )
+		{
+			if( isset( $map[$listid] ) ) {
+				unset( $map[$listid], $listIds[$pos] );
+			}
+		}
+
+		$manager->deleteItems( array_keys( $map ) );
+
 
 		$item = $manager->createItem();
 		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
 		$item->setDomain( 'product' );
 		$item->setRefId( $id );
 
-		$map = $this->getListItems( $id );
-
-		foreach( (array) $view->param( 'category/catalog.lists.id', array() ) as $pos => $listid )
+		foreach( $listIds as $pos => $listid )
 		{
-			if( !isset( $map[$listid] ) )
-			{
-				$item->setId( null );
-				$item->setParentId( $view->param( 'category/catalog.id/' . $pos ) );
+			$item->setId( null );
+			$item->setParentId( $view->param( 'category/catalog.id/' . $pos ) );
 
-				$manager->saveItem( $item, false );
-			}
-			else
-			{
-				unset( $map[$listid] );
-			}
+			$manager->saveItem( $item, false );
 		}
-
-		$manager->deleteItems( array_keys( $map ) );
 	}
 }

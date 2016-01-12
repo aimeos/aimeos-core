@@ -335,34 +335,37 @@ class Standard
 			return;
 		}
 
-		$id = $view->item->getId();
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
+
+		$id = $view->item->getId();
+		$map = $this->getListItems( $id );
+		$listIds = (array) $view->param( 'bundle/product.lists.id', array() );
+
+
+		foreach( $listIds as $pos => $listid )
+		{
+			if( isset( $map[$listid] ) ) {
+				unset( $map[$listid], $listIds[$pos] );
+			}
+		}
+
+		$manager->deleteItems( array_keys( $map ) );
+
 
 		$item = $manager->createItem();
 		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
 		$item->setDomain( 'product' );
 		$item->setParentId( $id );
 
-		$map = $this->getListItems( $id );
-
-		foreach( (array) $view->param( 'bundle/product.lists.id', array() ) as $pos => $listid )
+		foreach( $listIds as $pos => $listid )
 		{
-			if( !isset( $map[$listid] ) )
-			{
-				$item->setId( null );
-				$item->setRefId( $view->param( 'bundle/product.lists.refid/' . $pos ) );
-				$item->setPosition( $pos );
+			$item->setId( null );
+			$item->setRefId( $view->param( 'bundle/product.lists.refid/' . $pos ) );
+			$item->setPosition( $pos );
 
-				$manager->saveItem( $item, false );
-			}
-			else
-			{
-				unset( $map[$listid] );
-			}
+			$manager->saveItem( $item, false );
 		}
-
-		$manager->deleteItems( array_keys( $map ) );
 	}
 }

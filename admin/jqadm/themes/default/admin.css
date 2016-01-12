@@ -321,6 +321,13 @@
 }
 
 
+/* Categories */
+
+.aimeos .product-item-category .ai-combobox {
+	width: 100%;
+}
+
+
 /* Images */
 
 .aimeos .image-list .actions .btn-primary {
