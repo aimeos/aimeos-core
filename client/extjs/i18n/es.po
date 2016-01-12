@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-16 23:24+0100\n"
-"PO-Revision-Date: 2015-12-29 15:05+0000\n"
+"PO-Revision-Date: 2015-12-30 14:49+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -267,7 +267,7 @@ msgstr "Básico"
 #: extjs/src/panel/customer/ItemUi.js:114
 #: extjs/src/panel/order/address/ItemUi.js:34
 msgid "Billing address"
-msgstr "Dirección de facturación"
+msgstr "Dirección de cobro"
 
 #: src/panel/customer/ItemUi.js:90 src/panel/customer/ListUiSmall.js:70
 #: src/panel/customer/ListUi.js:75 extjs/src/panel/customer/ItemUi.js:90
@@ -464,7 +464,7 @@ msgstr "Copiar"
 #: extjs/src/panel/order/product/ListUi.js:110
 #: extjs/src/panel/order/OrderItemUi.js:55
 msgid "Costs"
-msgstr "Costes"
+msgstr "Costos"
 
 #: src/panel/price/ItemUi.js:111
 msgid "Costs per item"
@@ -508,7 +508,7 @@ msgstr "Código de país"
 #: extjs/src/panel/customer/ItemUi.js:199
 #: extjs/src/panel/customer/address/ItemUi.js:117
 msgid "Country state, e.g. \"NY\""
-msgstr "Estado del país, ej. "
+msgstr "Estado del país, ej. \"NY\""
 
 #: src/panel/coupon/ListUi.js:27 extjs/src/panel/coupon/ListUi.js:27
 msgid "Coupon"
@@ -710,7 +710,7 @@ msgstr "Fecha"
 #: src/panel/product/stock/ListUi.js:101
 #: extjs/src/panel/product/stock/ListUi.js:101
 msgid "Date back"
-msgstr "Origen"
+msgstr "Fecha de regreso"
 
 #: src/panel/cache/ListUiSmall.js:45 src/panel/AbstractListUi.js:155
 #: src/panel/ConfigUi.js:46 src/elements/exportlanguage.js:159
@@ -827,7 +827,7 @@ msgstr "Correo electrónico"
 #: extjs/src/panel/customer/ItemUi.js:228
 #: extjs/src/panel/customer/address/ItemUi.js:146
 msgid "E-Mail, e.g. me@example.com (required)"
-msgstr "Correo electrónico, ej. me@example.com (obligatorio)"
+msgstr "Correo electrónico, ej. yo@ejemplo.com (obligatorio)"
 
 #: src/panel/product/ItemUi.js:87 extjs/src/panel/product/ItemUi.js:87
 msgid "EAN, SKU or article number (required)"
@@ -1047,7 +1047,7 @@ msgstr "Limpiar"
 
 #: src/panel/cache/ListUiSmall.js:101 extjs/src/panel/cache/ListUiSmall.js:101
 msgid "Flush cache?"
-msgstr "Limpiar caché"
+msgstr "¿Limpiar caché?"
 
 #: src/panel/customer/ItemUi.js:83 src/panel/customer/ListUiSmall.js:57
 #: src/panel/customer/ItemPickerUi.js:61 src/panel/customer/ListUi.js:68
@@ -1279,7 +1279,7 @@ msgstr "Posición del elemento dentro del mismo tipo"
 
 #: src/panel/job/ItemUi.js:12 extjs/src/panel/job/ItemUi.js:12
 msgid "Job item details"
-msgstr "Detalles del elemento de trabajo"
+msgstr "Detalles de la tarea"
 
 #: src/panel/job/ListUiSmall.js:32 extjs/src/panel/job/ListUiSmall.js:32
 msgid "Jobs"
@@ -1624,7 +1624,7 @@ msgstr "Tipo de lista"
 #: extjs/src/panel/media/MediaField.js:59
 #: extjs/src/elements/importbutton.js:24
 msgid "Loading"
-msgstr "Carga"
+msgstr "Cargando"
 
 #: src/panel/locale/TabUi.js:23 extjs/src/panel/locale/TabUi.js:23
 msgid "Locale"
@@ -1644,7 +1644,7 @@ msgstr "Divisa regional: {0} ({1})"
 #: src/panel/locale/ItemUi.js:104 extjs/src/panel/locale/ItemUi.js:104
 #, python-brace-format
 msgid "Locale item details ({1})"
-msgstr "Detalles regionales del elemento ({1})"
+msgstr "Detalles del elemento regional ({1})"
 
 #. : Locale language item panel title with language label ({0}) and language
 #. code ({1)}
@@ -1775,13 +1775,13 @@ msgstr "Pedido"
 
 #: src/panel/order/ItemUi.js:20 extjs/src/panel/order/ItemUi.js:20
 msgid "Order item details"
-msgstr "Detalles de elementos del pedido"
+msgstr "Detalles del pedido"
 
 #: src/panel/order/product/ItemUi.js:67 src/panel/order/product/ListUi.js:83
 #: extjs/src/panel/order/product/ItemUi.js:67
 #: extjs/src/panel/order/product/ListUi.js:83
 msgid "Order product ID"
-msgstr "ID de productos del pedido"
+msgstr "ID del pedido"
 
 #: src/panel/portal/ItemUi.js:19 extjs/src/panel/portal/ItemUi.js:19
 msgid "Overview"
@@ -1824,7 +1824,7 @@ msgstr "Estado del pago"
 #: extjs/src/panel/ListItemItemUi.js:78 extjs/src/panel/catalog/ItemUi.js:124
 #: extjs/src/panel/locale/site/ItemUi.js:122
 msgid "Please recheck your data"
-msgstr "Vuelva a comprobar sus datos"
+msgstr "Por favor vuelva a comprobar sus datos"
 
 #: src/panel/coupon/code/ListUi.js:104
 #: extjs/src/panel/coupon/code/ListUi.js:104
@@ -1966,7 +1966,7 @@ msgstr "Costos del producto"
 #: src/panel/order/product/ItemUi.js:19
 #: extjs/src/panel/order/product/ItemUi.js:19
 msgid "Product item details"
-msgstr "Detalles del elemento"
+msgstr "Detalles del producto"
 
 #: src/panel/order/coupon/ListUi.js:124
 #: extjs/src/panel/order/coupon/ListUi.js:124
@@ -1986,7 +1986,7 @@ msgstr "Cantidad del producto"
 #: src/panel/order/coupon/ListUi.js:154
 #: extjs/src/panel/order/coupon/ListUi.js:154
 msgid "Product rebate"
-msgstr "Reembolso del producto"
+msgstr "Devolución del producto"
 
 #: src/panel/product/stock/ItemUi.js:19
 #: extjs/src/panel/product/stock/ItemUi.js:19
@@ -2157,7 +2157,7 @@ msgstr "Tarifas de servicio"
 #: src/panel/order/service/ItemUi.js:19
 #: extjs/src/panel/order/service/ItemUi.js:19
 msgid "Service item details"
-msgstr "Detalles del elemento de servicio"
+msgstr "Detalles del servicio"
 
 #: src/panel/service/type/ListUi.js:33
 #: extjs/src/panel/service/type/ListUi.js:33
@@ -2577,11 +2577,11 @@ msgstr "Código único (obligatorio)"
 #: extjs/src/panel/media/MediaField.js:207
 #: extjs/src/elements/importbutton.js:62
 msgid "Upload failed"
-msgstr "Subida fallida"
+msgstr "Carga fallida"
 
 #: src/elements/importbutton.js:74 extjs/src/elements/importbutton.js:74
 msgid "Upload successful"
-msgstr "Subida correcta"
+msgstr "Carga correcta"
 
 #: src/panel/product/UsedByProductListUi.js:29
 #: extjs/src/panel/product/UsedByProductListUi.js:29

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-16 23:24+0100\n"
-"PO-Revision-Date: 2015-12-29 15:04+0000\n"
+"PO-Revision-Date: 2015-12-30 14:46+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -352,7 +352,7 @@ msgstr "Adicional 2"
 #: html/src/Client/Html/Checkout/Standard/Address/Delivery/Standard.php:329
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
-msgstr "No se ha encontrado la dirección con ID \"%1$s\""
+msgstr "No se ha encontrado la dirección con la ID \"%1$s\""
 
 #: layouts/common/summary/address-body-default.html:19
 #: templates/common/summary/address-body-default.php:19
@@ -370,7 +370,7 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
-msgstr "Todos los pedidos enviados están sujetos a nuestros términos y condiciones, disponibles en nuestra página web y aceptados por usted al realizar su pedido.\n\nEl presente email contiene información confidencial y es para uso exclusivo de la persona a la que va dirigido. En caso de que usted no fuera esa persona, le rogamos responda al presente email y elimine el mensaje y sus adjuntos a continuación."
+msgstr "Todos los pedidos enviados están sujetos a nuestros términos y condiciones, disponibles en nuestra página web y aceptados por usted al realizar su pedido.\n\nEl presente correo electrónico contiene información confidencial y es para uso exclusivo de la persona a la que va dirigido. En caso de que usted no fuera esa persona, le rogamos responda al presente correo electrónico y elimine el mensaje y sus adjuntos a continuación."
 
 #: layouts/email/account/html-intro-body-default.html:9
 #: layouts/email/account/text-intro-body-default.html:8
@@ -395,7 +395,7 @@ msgstr "Nro. de artículo:"
 #: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:352
 #, php-format
 msgid "At least one billing address part is missing or invalid"
-msgstr "Al menos una parte de la dirección de factura no se encuentra o es incorrecta"
+msgstr "Al menos una parte de la dirección de cobro no se encuentra o es incorrecta"
 
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:314
 #: src/Client/Html/Checkout/Standard/Address/Delivery/Default.php:347
@@ -444,21 +444,21 @@ msgstr "Cesta"
 #: html/templates/common/summary/address-body-default.php:22
 #: html/templates/email/common/text-summary-address-body-default.php:17
 msgid "Billing address"
-msgstr "Dirección de facturación"
+msgstr "Dirección de cobro"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:625
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:629
 #: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:629
 #, php-format
 msgid "Billing address part \"%1$s\" is invalid"
-msgstr "La parte \"%1$s\" de la dirección de factura no es válida"
+msgstr "La parte \"%1$s\" de la dirección de cobro no es válida"
 
 #: src/Client/Html/Checkout/Standard/Address/Billing/Default.php:650
 #: src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:654
 #: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:654
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
-msgstr "Falta la parte \"%1$s\" de la dirección de facturación"
+msgstr "Falta la parte \"%1$s\" de la dirección de cobro"
 
 #: layouts/catalog/detail/bundle-body-default.html:24
 #: templates/catalog/detail/bundle-body-default.php:19
@@ -606,7 +606,7 @@ msgstr "Cerrar"
 #: html/templates/common/partials/address-default.php:60
 #: html/templates/common/partials/address-default.php:61
 msgid "Company"
-msgstr "Empresa"
+msgstr "Compañía"
 
 #: layouts/checkout/confirm/body-default.html:19
 #: templates/checkout/confirm/body-default.php:19
@@ -646,7 +646,7 @@ msgstr "Cupones"
 #: html/src/Client/Html/Checkout/Standard/Address/Billing/Standard.php:327
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
-msgstr "No se ha encontrado al cliente con  ID \"%1$s\""
+msgstr "No se ha encontrado el cliente con la ID \"%1$s\""
 
 #. / Payment e-mail form of address with salutation (%1$s), first name (%2$s)
 #. and last name (%3$s)
@@ -1004,7 +1004,7 @@ msgstr "Apellido"
 #: templates/catalog/session/seen-body-default.php:29
 #: html/templates/catalog/session/seen-body-default.php:29
 msgid "Last seen"
-msgstr "Última vista"
+msgstr "Última/s vista/s"
 
 #: layouts/catalog/list/pagination-body-default.html:27
 #: templates/catalog/lists/pagination-body-default.php:27
@@ -1117,7 +1117,7 @@ msgstr "Opciones"
 #: html/templates/checkout/confirm/basic-body-default.php:16
 #: html/templates/account/history/list-body-default.php:97
 msgid "Order ID"
-msgstr "ID de pedido"
+msgstr "ID del pedido"
 
 #: layouts/account/history/list-body-default.html:101
 #: templates/account/history/list-body-default.php:101
@@ -1141,13 +1141,13 @@ msgstr "Detalles del pedido"
 #: templates/account/history/list-body-default.php:89
 #: html/templates/account/history/list-body-default.php:89
 msgid "Order history"
-msgstr "Historial de pedidos"
+msgstr "Historial del pedido"
 
 #: layouts/checkout/confirm/basic-body-default.html:12
 #: templates/checkout/confirm/basic-body-default.php:12
 #: html/templates/checkout/confirm/basic-body-default.php:12
 msgid "Order status"
-msgstr "Estado de la orden"
+msgstr "Estado del pedido"
 
 #: src/Client/Html/Account/History/Order/Default.php:336
 #: src/Client/Html/Account/History/Order/Standard.php:340
@@ -1320,7 +1320,7 @@ msgstr "Precio"
 #: templates/checkout/standard/process-body-default.php:117
 #: html/templates/checkout/standard/process-body-default.php:117
 msgid "Proceed"
-msgstr "Siguiente"
+msgstr "Proceder"
 
 #: layouts/checkout/standard/process-body-default.html:76
 #: templates/checkout/standard/process-body-default.php:76
@@ -1350,7 +1350,7 @@ msgstr "Propiedades"
 #: templates/basket/mini/product-body-default.php:37
 #: html/templates/basket/mini/product-body-default.php:37
 msgid "Qty"
-msgstr "Ctd"
+msgstr "Cant"
 
 #: layouts/common/summary/detail-body-default.html:108
 #: layouts/email/common/text-summary-detail-body-default.html:76
@@ -1405,7 +1405,7 @@ msgid_plural ""
 "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
 "articles)"
 msgstr[0] "Resultado de búsqueda para <span class=\"searchstring\">\"%1$s\"</span> (%2$d articles)"
-msgstr[1] "Resultado de búsqueda para <span class=\"searchstring\">\"%1$s\"</span> (%2$d articles)"
+msgstr[1] "Resultado de búsqueda para <span class=\"searchstring\">\"%1$s\"</span> (%2$d artículos)"
 
 #: layouts/common/partials/address-eu.html:102
 #: layouts/common/partials/address-default.html:102
@@ -1435,7 +1435,7 @@ msgstr "Seleccionar idioma"
 #: html/templates/common/partials/address-eu.php:45
 #: html/templates/common/partials/address-default.php:45
 msgid "Select salutation"
-msgstr "Seleccionar tratamientoT"
+msgstr "Seleccionar tratamiento"
 
 #: layouts/common/partials/address-eu.html:87
 #: layouts/common/partials/address-default.html:83
@@ -1503,7 +1503,7 @@ msgstr "Estado"
 #: html/templates/catalog/stock/body-default.php:45
 #, php-format
 msgid "Stock: %1$s, %2$s"
-msgstr "Stock: %1$s, %2$s"
+msgstr "Existencia: %1$s, %2$s"
 
 #. / Stock string composition with warehouse name (%1$s, normally left out),
 #. stock level string (%2$s) and back in stock date (%3$s)
@@ -1514,7 +1514,7 @@ msgstr "Stock: %1$s, %2$s"
 #: html/templates/catalog/stock/body-default.php:47
 #, php-format
 msgid "Stock: %1$s, %2$s, back on %3$s"
-msgstr "Stock: %1$s, %2$s, de vuelta el %3$s"
+msgstr "En existencia: %1$s, %2$s, de nuevo el %3$s"
 
 #: layouts/common/partials/address-eu.html:64
 #: layouts/common/partials/address-eu.html:65
@@ -1990,7 +1990,7 @@ msgstr "Su pedido %1$s desde %2$s ha sido enviado."
 #: templates/catalog/stage/breadcrumb-body-default.php:28
 #: html/templates/catalog/stage/breadcrumb-body-default.php:28
 msgid "Your search result"
-msgstr "El resultado de su búsqueda"
+msgstr "Resultado de su búsqueda"
 
 #. / Product notification e-mail subject
 #: layouts/email/watch/header-default.html:9
@@ -2050,7 +2050,7 @@ msgstr "desde %1$s"
 #: html/templates/common/summary/address-body-default.php:131
 #: html/templates/email/common/text-summary-address-body-default.php:115
 msgid "like billing address"
-msgstr "misma dirección de facturación"
+msgstr "misma dirección de cobro"
 
 #: layouts/checkout/standard/address-billing-body-default.html:163
 #: layouts/checkout/standard/address-delivery-body-default.html:155
@@ -2102,28 +2102,28 @@ msgstr "procesar"
 #: templates/catalog/stock/body-default.php:56
 #: html/templates/catalog/stock/body-default.php:56
 msgid "stock-high"
-msgstr "\"stock\"-alto"
+msgstr "existencia-alta"
 
 #. / code for "only a few products are available"
 #: layouts/catalog/stock/body-default.html:54
 #: templates/catalog/stock/body-default.php:54
 #: html/templates/catalog/stock/body-default.php:54
 msgid "stock-low"
-msgstr "\"stock\"-bajo"
+msgstr "existencia-baja"
 
 #. / code for "product is out of stock"
 #: layouts/catalog/stock/body-default.html:52
 #: templates/catalog/stock/body-default.php:52
 #: html/templates/catalog/stock/body-default.php:52
 msgid "stock-out"
-msgstr "\"stock\"-agotado"
+msgstr "existencia-agotada"
 
 #. / code for "product is available (without stock limit)"
 #: layouts/catalog/stock/body-default.html:58
 #: templates/catalog/stock/body-default.php:58
 #: html/templates/catalog/stock/body-default.php:58
 msgid "stock-unlimited"
-msgstr "\"stock\"-ilimitado"
+msgstr "existencia-ilimitada"
 
 #: layouts/checkout/standard/summary-body-default.html:12
 #: src/Client/Html/Checkout/Standard/Summary/Default.php:12

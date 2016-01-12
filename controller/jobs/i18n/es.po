@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-16 23:24+0100\n"
-"PO-Revision-Date: 2015-12-29 16:14+0000\n"
+"PO-Revision-Date: 2015-12-30 15:03+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -231,7 +231,7 @@ msgstr "Hay caracteres no válidos en el nombre de clase \"%1$s\""
 #: src/Controller/Jobs/Admin/Job/Standard.php:72
 #, php-format
 msgid "Invalid characters in job name \"%1$s\""
-msgstr "Hay caracteres no válidos en el nombre de trabajo \"%1$s\""
+msgstr "Hay caracteres no válidos en el nombre de la tarea \"%1$s\""
 
 #: src/Controller/Jobs/Factory.php:49 src/Controller/Jobs/Factory.php:53
 #: src/Controller/Jobs/Factory.php:53

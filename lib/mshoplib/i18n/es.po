@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Daniel Vega <danielvega131990@gmail.com>, 2015
 # nsendetzky, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-16 23:24+0100\n"
-"PO-Revision-Date: 2015-12-28 22:01+0000\n"
+"PO-Revision-Date: 2015-12-30 15:26+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +59,7 @@ msgstr "Cesta vacía"
 #: src/MShop/Context/Item/Standard.php:109
 #, php-format
 msgid "Cache object not available"
-msgstr "El Objeto de caché no está disponible"
+msgstr "El objeto de caché no está disponible"
 
 #: src/MShop/Catalog/Manager/Default.php:630
 #: src/MShop/Catalog/Manager/Standard.php:648
@@ -292,7 +293,7 @@ msgstr "Hay caracteres no válidos en el código ISO de divisa \"%1$s\""
 #: src/MShop/Common/Item/Base.php:288
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr "Hay caracteres no válidos en el código de lenguaje ISO \"%1$s\""
+msgstr "Hay caracteres no válidos en el código ISO del lenguaje \"%1$s\""
 
 #: src/MShop/Product/Manager/Default.php:520
 #: src/MShop/Plugin/Manager/Default.php:646
@@ -331,7 +332,7 @@ msgstr "Hay caracteres no válidos en el código ISO de divisa \"%1$s\""
 #: src/MShop/Locale/Item/Language/Standard.php:109
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr "Hay caracteres no válidos en el código de lenguaje ISO \"%1$s\""
+msgstr "Hay caracteres no válidos en el código ISO del lenguaje \"%1$s\""
 
 #: src/MShop/Order/Manager/Factory.php:72
 #: src/MShop/Customer/Manager/Abstract.php:167
@@ -407,14 +408,14 @@ msgstr "Caracteres no válidos en nombre de clase \"%1$s\""
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr "Caracteres no válidos en la fecha \"%1$s\". Se espera el formato ISO \"YYYY-MM-DD hh:mm:ss\"."
+msgstr "Caracteres no válidos en la fecha \"%1$s\". Se espera el formato ISO \"AAAA-MM-DD hh:mm:ss\"."
 
 #: src/MShop/Customer/Item/Default.php:404
 #: src/MShop/Customer/Item/Standard.php:438
 #: src/MShop/Customer/Item/Standard.php:438
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr "Hay caracteres no válidos en la fecha \"%1$s\". Se espera formato ISO \"YYYY-MM-DD\"."
+msgstr "Hay caracteres no válidos en la fecha \"%1$s\". Se espera formato ISO \"AAAA-MM-DD\"."
 
 #: src/MShop/Common/Manager/Abstract.php:352
 #: src/MAdmin/Common/Manager/Abstract.php:94
@@ -577,28 +578,28 @@ msgstr "No se ha encontrado el elemento con la ID \"%2$s\" en \"%1$s\""
 #: src/MAdmin/Job/Manager/Standard.php:363
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr "Trabajo con ID \"%1$s\" no encontrado"
+msgstr "Tarea con la ID \"%1$s\" no encontrada"
 
 #: src/MShop/Common/Manager/List/Abstract.php:188
 #: src/MShop/Common/Manager/Lists/Base.php:191
 #: src/MShop/Common/Manager/Lists/Base.php:191
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr "No se ha encontrado el elemento de lista con ID \"%2$s\" en \"%1$s\""
+msgstr "No se ha encontrado el elemento de lista con la ID \"%2$s\" en \"%1$s\""
 
 #: src/MShop/Catalog/Manager/Index/Attribute/Default.php:430
 #: src/MShop/Index/Manager/Attribute/Standard.php:448
 #: src/MShop/Index/Manager/Attribute/Standard.php:448
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr "El tipo de lista para el elemento de atributo con ID \"%1$s\" no está disponible"
+msgstr "El tipo de lista para el elemento de atributo con la ID \"%1$s\" no está disponible"
 
 #: src/MShop/Catalog/Manager/Index/Price/Default.php:474
 #: src/MShop/Index/Manager/Price/Standard.php:492
 #: src/MShop/Index/Manager/Price/Standard.php:492
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr "El tipo de lista para el elemento de precio con ID \"%1$s\" no está disponible"
+msgstr "El tipo de lista para el elemento de precio con la ID \"%1$s\" no está disponible"
 
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:449
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:784
@@ -608,7 +609,7 @@ msgstr "El tipo de lista para el elemento de precio con ID \"%1$s\" no está dis
 #: src/MShop/Index/Manager/Text/Standard.php:802
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr "La lista tipo para elementos de texto con ID \"%1$s\" no está disponible"
+msgstr "La lista tipo para elementos de texto con la ID \"%1$s\" no está disponible"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:226
 #: src/MShop/Service/Provider/Delivery/Standard.php:230
@@ -643,7 +644,7 @@ msgstr "La bandera de bloqueo \"%1$d\" no está dentro del rango permitido"
 #: src/MAdmin/Log/Manager/Standard.php:375
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr "Entrada de registro con ID \"%1$s\" no encontrada"
+msgstr "Entrada de registro con la ID \"%1$s\" no encontrada"
 
 #: src/MShop/Context/Item/Default.php:238
 #: src/MShop/Context/Item/Standard.php:275
@@ -734,7 +735,7 @@ msgstr "No se encontró ningún elemento con \"%2$s\" en \"%1$s\""
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:198
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr "No hay precio disponible para el producto con ID \"%1$s\" ni código de producto \"%2$s\""
+msgstr "No hay precio disponible para el producto con la ID \"%1$s\" ni código de producto \"%2$s\""
 
 #: src/MShop/Coupon/Provider/Abstract.php:173
 #: src/MShop/Coupon/Provider/Base.php:177
@@ -992,7 +993,7 @@ msgstr "La ID del pedido \"%1$s\" en la respuesta XML del proveedor de entrega d
 #: src/MShop/Order/Manager/Base/Standard.php:910
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr "No se ha encontrado el elemento de la base de pedido con ID de pedido \"%1$s\""
+msgstr "No se ha encontrado el elemento de la base de pedido con la ID de pedido \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:238
 #: src/MShop/Service/Provider/Delivery/Standard.php:242
@@ -1047,7 +1048,7 @@ msgstr "El parámetro \"%1$s\" de configuración no está disponible"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:523
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr "PayPal Express: transacción duplicada con ID \"%1$s\" y estado \"%2$s\" "
+msgstr "PayPal Express: transacción duplicada con la ID \"%1$s\" y estado \"%2$s\" "
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:362
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:365
@@ -1070,21 +1071,21 @@ msgstr "PayPal Express: solicitud \"%1$s\" no válida"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:319
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr "PayPal Express: la ID de transacción de pago para el pedido con ID \"%1$s\" no está disponible"
+msgstr "PayPal Express: la ID de transacción de pago para el pedido con la ID \"%1$s\" no está disponible"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:476
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:479
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:479
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr "PayPal Express: la solicitud para el pedido con ID \"%1$s\" ha fallado con \"%2$s\""
+msgstr "PayPal Express: la solicitud para el pedido con la ID \"%1$s\" ha fallado con \"%2$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:506
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:508
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:508
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr "PayPal Express: importe erróneo en el pago \"%1$s\" para el pedido con ID \"%2$s\""
+msgstr "PayPal Express: importe erróneo en el pago \"%1$s\" para el pedido con la ID \"%2$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:498
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:500
@@ -1097,7 +1098,7 @@ msgstr "PayPal Express: receptor de correo electrónico \"%1$s\" incorrecto"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:642
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:642
 msgid "Payment costs"
-msgstr "Costes de pago"
+msgstr "Costos de pago"
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:103
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:107

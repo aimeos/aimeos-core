@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-12-29 15:09+0000\n"
+"PO-Revision-Date: 2015-12-30 14:50+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -156,15 +156,15 @@ msgstr "Nombre del banco"
 
 #. Omnipay service provider
 msgid "payment.firstname"
-msgstr "Nombre del pago"
+msgstr "Nombre"
 
 #. Omnipay service provider
 msgid "payment.lastname"
-msgstr "Apellido del pago"
+msgstr "Apellido"
 
 #. Omnipay service provider
 msgid "payment.cardno"
-msgstr "Nro. tarjeta del pago"
+msgstr "Nro. tarjeta de crédito"
 
 #. Omnipay service provider
 msgid "payment.cvv"
@@ -172,11 +172,11 @@ msgstr "Número de verificación"
 
 #. Omnipay service provider
 msgid "payment.expirymonth"
-msgstr "Mes de caducidad del pago"
+msgstr "Mes de caducidad"
 
 #. Omnipay service provider
 msgid "payment.expiryyear"
-msgstr "Año de caducidad del pago"
+msgstr "Año de caducidad"
 
 #. Warehouse code
 msgid "warehouse:default"

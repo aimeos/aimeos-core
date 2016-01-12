@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Daniel Vega <danielvega131990@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-16 23:24+0100\n"
-"PO-Revision-Date: 2015-12-29 15:42+0000\n"
+"PO-Revision-Date: 2015-12-30 14:58+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -22,14 +23,14 @@ msgstr ""
 #: src/Controller/Frontend/Basket/Standard.php:503
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
-msgstr "No está permitido añadir un producto con ID \"%1$s\""
+msgstr "No está permitido añadir un producto con la ID \"%1$s\""
 
 #: src/Controller/Frontend/Basket/Default.php:902
 #: src/Controller/Frontend/Basket/Standard.php:906
 #: src/Controller/Frontend/Basket/Standard.php:906
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
-msgstr "Los ID de artículos disponibles \"%1$s\" no se corresponden con los ID de los atributos proporcionados  \"%2$s\""
+msgstr "Las ID de artículos disponibles \"%1$s\" no se corresponden con las ID de los atributos proporcionados  \"%2$s\""
 
 #: src/Controller/Frontend/Basket/Default.php:165
 #: src/Controller/Frontend/Basket/Standard.php:169
@@ -101,14 +102,14 @@ msgstr "El código de cupón \"%1$s\" ya no se encuentra disponible"
 #: src/Controller/Frontend/Basket/Standard.php:721
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
-msgstr "Referencias \"%1$s\" no válidas para el producto con ID \"%2$s\""
+msgstr "Referencias \"%1$s\" no válidas para el producto con la ID \"%2$s\""
 
 #: src/Controller/Frontend/Basket/Default.php:832
 #: src/Controller/Frontend/Basket/Standard.php:836
 #: src/Controller/Frontend/Basket/Standard.php:836
 #, php-format
 msgid "Invalid address properties, please check your input"
-msgstr "Propiedades de dirección no válidas. Compruebe lo que ha introducido"
+msgstr "Propiedades de dirección no válidas. Compruebe los datos introducidos"
 
 #: src/Controller/Frontend/Order/Factory.php:62
 #: src/Controller/Frontend/Catalog/Factory.php:63
@@ -134,7 +135,7 @@ msgstr "Caracteres no válidos en el nombre de clase \"%1$s\""
 #: src/Controller/Frontend/Factory.php:79
 #, php-format
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
-msgstr "Caracteres no válidos en el nombre de controlador \"%1$s\" en \"%2$s\""
+msgstr "Caracteres no válidos en el nombre del controlador \"%1$s\" en \"%2$s\""
 
 #: src/Controller/Frontend/Common/Factory/Abstract.php:86
 #: src/Controller/Frontend/Common/Factory/Base.php:90
@@ -228,7 +229,7 @@ msgstr "No se pudo llamar al método \"%1$s::%2$s\""
 #: src/Controller/Frontend/Service/Standard.php:73
 #, php-format
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
-msgstr "No se pudo crear el proveedor \"%1$s\" para el servicio con ID \"%2$s\""
+msgstr "No se pudo crear el proveedor \"%1$s\" para el servicio con la ID \"%2$s\""
 
 #: src/Controller/Frontend/Basket/Default.php:323
 #: src/Controller/Frontend/Basket/Standard.php:327

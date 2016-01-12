@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-16 23:24+0100\n"
-"PO-Revision-Date: 2015-12-29 15:12+0000\n"
+"PO-Revision-Date: 2015-12-30 14:54+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -84,12 +84,12 @@ msgstr "No se puede crear el directorio \"%1$s\" con los permisos \"%2$o\""
 #: src/Controller/ExtJS/Attribute/Export/Text/Default.php:182
 #, php-format
 msgid "Create export directory for attribute IDs: %1$s"
-msgstr "Crear directorio de salida para los IDs de atributos: %1$s"
+msgstr "Crear directorio de salida para las IDs de atributos: %1$s"
 
 #: src/Controller/ExtJS/Catalog/Export/Text/Default.php:180
 #, php-format
 msgid "Create export directory for catalog IDs: %1$s"
-msgstr "Crear directorio de salida para los IDs de catálogos: %1$s"
+msgstr "Crear directorio de salida para las IDs de catálogos: %1$s"
 
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:180
 #, php-format
@@ -442,19 +442,19 @@ msgstr "No se ha encontrado el elemento de tipo sitio para el código \"%1$s\""
 #: src/Controller/ExtJS/Common/Decorator/Base.php:53
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr "Imposible invocar el método \"%1$s\""
+msgstr "No se ha podido invocar el método \"%1$s\""
 
 #: src/Controller/ExtJS/Media/Standard.php:538
 #: src/Controller/ExtJS/Media/Standard.php:538
 #, php-format
 msgid "Unable to create directory \"%1$s\""
-msgstr "Imposible crear el directorio \"%1$s\""
+msgstr "No se ha podido crear el directorio \"%1$s\""
 
 #: src/Controller/ExtJS/Media/Standard.php:544
 #: src/Controller/ExtJS/Media/Standard.php:544
 #, php-format
 msgid "Unable to create file in \"%1$s\""
-msgstr "Imposible crear el archivo en \"%1$s\""
+msgstr "No se ha podido crear el archivo en \"%1$s\""
 
 #: src/Controller/ExtJS/Product/Import/Text/Default.php:81
 #: src/Controller/ExtJS/Attribute/Import/Text/Default.php:80
