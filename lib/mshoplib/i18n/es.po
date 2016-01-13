@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Daniel Vega <danielvega131990@gmail.com>, 2015
 # nsendetzky, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-07 18:10+0100\n"
-"PO-Revision-Date: 2015-12-07 17:13+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2015-12-30 15:26+0000\n"
+"Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,7 +53,7 @@ msgstr "Cesta vacía"
 #: src/MShop/Context/Item/Standard.php:109
 #, php-format
 msgid "Cache object not available"
-msgstr "El Objeto de caché no disponible"
+msgstr "El objeto de caché no está disponible"
 
 #: src/MShop/Catalog/Manager/Default.php:630
 #: src/MShop/Catalog/Manager/Standard.php:648
@@ -142,7 +143,7 @@ msgstr "La clase \"%1$s\" no está disponible"
 #: src/MShop/Attribute/Item/Standard.php:139
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "El código no debe superar los 255 caracteres"
 
 #: src/MShop/Common/Item/Abstract.php:209 src/MShop/Common/Item/Base.php:249
 #, php-format
@@ -155,7 +156,7 @@ msgstr "El código no debe superar los 32 caracteres"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:126
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
-msgstr ""
+msgstr "No se ha encontrado la configuración para \"%1$s\""
 
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:81
 #: src/MShop/Plugin/Provider/Order/PropertyAdd.php:85
@@ -180,13 +181,13 @@ msgstr "Objeto de configuración no disponible"
 #: src/MShop/Common/Manager/Type/Abstract.php:55
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "La configuración de la sentencia SQL necesaria para \"%1$s\" no está disponible"
 
 #: src/MShop/Plugin/Provider/Order/Coupon.php:90
 #: src/MShop/Plugin/Provider/Order/Coupon.php:94
 #, php-format
 msgid "Coupon in basket is not available any more"
-msgstr ""
+msgstr "El cupón de la cesta ya no se encuentra disponible"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:143
 #: src/MShop/Service/Provider/Delivery/Standard.php:147
@@ -204,12 +205,12 @@ msgstr "Objeto de administrador de base de datos no disponible"
 #: src/MShop/Order/Item/Base/Standard.php:594
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
-msgstr ""
+msgstr "Código de cupón \"%1$s\" duplicado"
 
 #: src/MShop/Context/Item/Standard.php:188
 #, php-format
 msgid "File system manager object not available"
-msgstr ""
+msgstr "Objeto del administrador del sistema de archivos no disponible"
 
 #: src/MShop/Order/Item/Base/Product/Abstract.php:44
 #: src/MShop/Order/Item/Base/Abstract.php:64
@@ -242,7 +243,7 @@ msgstr "Hay caracteres no válidos en el código ISO de divisa \"%1$s\""
 #: src/MShop/Common/Item/Abstract.php:242 src/MShop/Common/Item/Base.php:288
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr "Hay caracteres no válidos en el código de lenguaje ISO \"%1$s\""
+msgstr "Hay caracteres no válidos en el código ISO del lenguaje \"%1$s\""
 
 #: src/MShop/Product/Manager/Default.php:520
 #: src/MShop/Plugin/Manager/Default.php:646
@@ -272,7 +273,7 @@ msgstr "Hay caracteres no válidos en el código ISO de divisa \"%1$s\""
 #: src/MShop/Locale/Item/Language/Standard.php:109
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr "Hay caracteres no válidos en el código de lenguaje ISO \"%1$s\""
+msgstr "Hay caracteres no válidos en el código ISO del lenguaje \"%1$s\""
 
 #: src/MShop/Order/Manager/Factory.php:72
 #: src/MShop/Customer/Manager/Abstract.php:167
@@ -326,13 +327,13 @@ msgstr "Caracteres no válidos en nombre de clase \"%1$s\""
 msgid ""
 "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
 "expected."
-msgstr "Caracteres no válidos en la fecha \"%1$s\". Se espera el formato ISO \"YYYY-MM-DD hh:mm:ss\"."
+msgstr "Caracteres no válidos en la fecha \"%1$s\". Se espera el formato ISO \"AAAA-MM-DD hh:mm:ss\"."
 
 #: src/MShop/Customer/Item/Default.php:404
 #: src/MShop/Customer/Item/Standard.php:438
 #, php-format
 msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
-msgstr "Hay caracteres no válidos en la fecha \"%1$s\". Se espera formato ISO \"YYYY-MM-DD\"."
+msgstr "Hay caracteres no válidos en la fecha \"%1$s\". Se espera formato ISO \"AAAA-MM-DD\"."
 
 #: src/MShop/Common/Manager/Abstract.php:352
 #: src/MAdmin/Common/Manager/Abstract.php:94
@@ -391,7 +392,7 @@ msgstr "Caracteres no válidos en la fecha de compra \"%1$s\""
 #: src/MShop/Service/Manager/Standard.php:590
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Caracteres no válidos en el tipo de nombre \"%1$s\""
 
 #: src/MShop/Coupon/Provider/Present.php:37
 #: src/MShop/Coupon/Provider/FreeShipping.php:37
@@ -403,7 +404,7 @@ msgstr ""
 #: src/MShop/Coupon/Provider/FixedRebate.php:43
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
-msgstr ""
+msgstr "Configuración de proveedor de cupón \"%1$s\" no válida, necesita \"%2$s\""
 
 #: src/MShop/Factory.php:97 src/MAdmin/Factory.php:96
 #: src/MShop/Factory.php:101 src/MAdmin/Factory.php:100
@@ -426,7 +427,7 @@ msgstr "Cesta serializada no válida. \"%1$s\" devuelve \"%2$s\"."
 #: src/MShop/Service/Provider/Base.php:373
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Tipo no válido \"%1$s\""
 
 #: src/MShop/Common/Item/Address/Abstract.php:519
 #: src/MShop/Common/Item/Address/Base.php:595
@@ -457,36 +458,36 @@ msgstr "No se ha encontrado el elemento referenciado en dominio \"%1$s\": %2$s"
 #: src/MAdmin/Cache/Manager/Standard.php:389
 #, php-format
 msgid "Item with ID \"%1$s\" not found"
-msgstr ""
+msgstr "No se ha encontrado el elemento con la ID \"%1$s\""
 
 #: src/MShop/Common/Manager/Abstract.php:626
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "No se ha encontrado el elemento con la ID \"%2$s\" en \"%1$s\""
 
 #: src/MAdmin/Job/Manager/Default.php:359
 #: src/MAdmin/Job/Manager/Standard.php:363
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
-msgstr "Trabajo con ID \"%1$s\" no encontrado"
+msgstr "Tarea con la ID \"%1$s\" no encontrada"
 
 #: src/MShop/Common/Manager/List/Abstract.php:188
 #: src/MShop/Common/Manager/Lists/Base.php:191
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr "No se ha encontrado el elemento de lista con ID \"%2$s\" en \"%1$s\""
+msgstr "No se ha encontrado el elemento de lista con la ID \"%2$s\" en \"%1$s\""
 
 #: src/MShop/Catalog/Manager/Index/Attribute/Default.php:430
 #: src/MShop/Index/Manager/Attribute/Standard.php:448
 #, php-format
 msgid "List type for attribute item with ID \"%1$s\" not available"
-msgstr "El tipo de lista para el elemento de atributo con ID \"%1$s\" no está disponible"
+msgstr "El tipo de lista para el elemento de atributo con la ID \"%1$s\" no está disponible"
 
 #: src/MShop/Catalog/Manager/Index/Price/Default.php:474
 #: src/MShop/Index/Manager/Price/Standard.php:492
 #, php-format
 msgid "List type for price item with ID \"%1$s\" not available"
-msgstr "El tipo de lista para el elemento de precio con ID \"%1$s\" no está disponible"
+msgstr "El tipo de lista para el elemento de precio con la ID \"%1$s\" no está disponible"
 
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:449
 #: src/MShop/Catalog/Manager/Index/Text/Default.php:784
@@ -494,7 +495,7 @@ msgstr "El tipo de lista para el elemento de precio con ID \"%1$s\" no está dis
 #: src/MShop/Index/Manager/Text/Standard.php:802
 #, php-format
 msgid "List type for text item with ID \"%1$s\" not available"
-msgstr "La lista tipo para elementos de texto con ID \"%1$s\" no está disponible"
+msgstr "La lista tipo para elementos de texto con la ID \"%1$s\" no está disponible"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:226
 #: src/MShop/Service/Provider/Delivery/Standard.php:230
@@ -524,7 +525,7 @@ msgstr "La bandera de bloqueo \"%1$d\" no está dentro del rango permitido"
 #: src/MAdmin/Log/Manager/Standard.php:375
 #, php-format
 msgid "Log entry with ID \"%1$s\" not found"
-msgstr "Entrada de registro con ID \"%1$s\" no encontrada"
+msgstr "Entrada de registro con la ID \"%1$s\" no encontrada"
 
 #: src/MShop/Context/Item/Default.php:238
 #: src/MShop/Context/Item/Standard.php:275
@@ -576,7 +577,7 @@ msgstr "El método \"%1$s\" para proveedor no está disponible"
 #: src/MShop/Service/Provider/Decorator/Costs.php:84
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Configuración \"%1$s\" no encontrada"
 
 #: src/MShop/Common/Item/Abstract.php:177 src/MShop/Common/Item/Base.php:210
 #, php-format
@@ -594,31 +595,31 @@ msgstr "El sitio recién creado no puede guardarse usando el método \"saveItem(
 #: src/MShop/Common/Manager/Base.php:664
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
-msgstr ""
+msgstr "No se encontró ningún elemento con \"%2$s\" en \"%1$s\""
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:194
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:198
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
-msgstr "No hay precio disponible para el producto con ID \"%1$s\" ni código de producto \"%2$s\""
+msgstr "No hay precio disponible para el producto con la ID \"%1$s\" ni código de producto \"%2$s\""
 
 #: src/MShop/Coupon/Provider/Abstract.php:173
 #: src/MShop/Coupon/Provider/Base.php:177
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "No se encontró ningún producto con código \"%1$s\""
 
 #: src/MShop/Product/Manager/Stock/Default.php:676
 #: src/MShop/Product/Manager/Stock/Standard.php:694
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "No se encontró ningún almacén con código \"%1$s\""
 
 #: src/MShop/Service/Provider/Abstract.php:343
 #: src/MShop/Service/Provider/Base.php:347
 #, php-format
 msgid "Not a date"
-msgstr ""
+msgstr "Fecha no válida"
 
 #: src/MShop/Service/Provider/Abstract.php:349
 #: src/MShop/Service/Provider/Abstract.php:355
@@ -626,43 +627,43 @@ msgstr ""
 #: src/MShop/Service/Provider/Base.php:359
 #, php-format
 msgid "Not a date and time"
-msgstr ""
+msgstr "Fecha y hora no válidas"
 
 #: src/MShop/Service/Provider/Abstract.php:365
 #: src/MShop/Service/Provider/Base.php:369
 #, php-format
 msgid "Not a key/value map"
-msgstr ""
+msgstr "Mapa de clave/valor no válido"
 
 #: src/MShop/Service/Provider/Abstract.php:360
 #: src/MShop/Service/Provider/Base.php:364
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Valor listado no válido"
 
 #: src/MShop/Service/Provider/Abstract.php:337
 #: src/MShop/Service/Provider/Base.php:341
 #, php-format
 msgid "Not a number"
-msgstr ""
+msgstr "Número no válido"
 
 #: src/MShop/Service/Provider/Abstract.php:325
 #: src/MShop/Service/Provider/Base.php:329
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Cadena de texto no válida"
 
 #: src/MShop/Service/Provider/Abstract.php:320
 #: src/MShop/Service/Provider/Base.php:324
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Valor verdadero/falso no válido"
 
 #: src/MShop/Service/Provider/Abstract.php:330
 #: src/MShop/Service/Provider/Base.php:334
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Número entero no válido"
 
 #: src/MShop/Order/Manager/Status/Default.php:190
 #: src/MShop/Order/Manager/Default.php:257
@@ -777,7 +778,7 @@ msgstr "El objeto no es del tipo requerido: \"%1$s\""
 #: src/MAdmin/Cache/Manager/None.php:87 src/MAdmin/Cache/Manager/None.php:91
 #, php-format
 msgid "Operation not supported"
-msgstr ""
+msgstr "Operación no soportada"
 
 #: src/MShop/Service/Provider/Delivery/Default.php:250
 #: src/MShop/Service/Provider/Delivery/Standard.php:254
@@ -791,7 +792,7 @@ msgstr "La ID del pedido \"%1$s\" en la respuesta XML del proveedor de entrega d
 #: src/MShop/Order/Manager/Base/Standard.php:910
 #, php-format
 msgid "Order base item with order ID \"%1$s\" not found"
-msgstr "No se ha encontrado el elemento de la base de pedido con ID de pedido \"%1$s\""
+msgstr "No se ha encontrado el elemento de la base de pedido con la ID de pedido \"%1$s\""
 
 #: src/MShop/Service/Provider/Delivery/Default.php:238
 #: src/MShop/Service/Provider/Delivery/Standard.php:242
@@ -838,7 +839,7 @@ msgstr "El parámetro \"%1$s\" de configuración no está disponible"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:523
 #, php-format
 msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
-msgstr "PayPal Express: transacción duplicada con ID \"%1$s\" y estado \"%2$s\" "
+msgstr "PayPal Express: transacción duplicada con la ID \"%1$s\" y estado \"%2$s\" "
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:362
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:365
@@ -856,19 +857,19 @@ msgstr "PayPal Express: solicitud \"%1$s\" no válida"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:319
 #, php-format
 msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
-msgstr "PayPal Express: la ID de transacción de pago para el pedido con ID \"%1$s\" no está disponible"
+msgstr "PayPal Express: la ID de transacción de pago para el pedido con la ID \"%1$s\" no está disponible"
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:476
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:479
 #, php-format
 msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
-msgstr "PayPal Express: la solicitud para el pedido con ID \"%1$s\" ha fallado con \"%2$s\""
+msgstr "PayPal Express: la solicitud para el pedido con la ID \"%1$s\" ha fallado con \"%2$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:506
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:508
 #, php-format
 msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
-msgstr "PayPal Express: importe erróneo en el pago \"%1$s\" para el pedido con ID \"%2$s\""
+msgstr "PayPal Express: importe erróneo en el pago \"%1$s\" para el pedido con la ID \"%2$s\""
 
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:498
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:500
@@ -879,7 +880,7 @@ msgstr "PayPal Express: receptor de correo electrónico \"%1$s\" incorrecto"
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:640
 #: src/MShop/Service/Provider/Payment/PayPalExpress.php:642
 msgid "Payment costs"
-msgstr "Costes de pago"
+msgstr "Costos de pago"
 
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:103
 #: src/MShop/Plugin/Provider/Order/ProductPrice.php:107
@@ -1037,7 +1038,7 @@ msgstr "No se ha encontrado el sitio para el código \"%1$s\""
 #: src/MShop/Common/Item/Helper/Password/Hash.php:37
 #, php-format
 msgid "The algorithm \"%1$s\" is not supported"
-msgstr ""
+msgstr "El algoritmo \"%1$s\" no está soportado"
 
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:110
 #: src/MShop/Plugin/Provider/Order/BasketLimits.php:114
@@ -1110,7 +1111,7 @@ msgstr "Raíz del árbol con código \"%1$s\" en \"%2$s\" no encontrada"
 #: src/MShop/Common/Manager/Type/Abstract.php:199
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "No se ha encontrado el tipo de elemento con la ID \"%1$s\" en \"%2$s\""
 
 #: src/MShop/Service/Provider/Abstract.php:262
 #: src/MShop/Service/Provider/Base.php:266

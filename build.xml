@@ -249,6 +249,7 @@
 	<target name="build" description="Creates all files to be generated" >
 		<taskdef name="jsbpackages" classname="MShopJsbPackageTask" classpath="${coredir}/misc/phing" />
 		<jsbpackages />
+		<exec command="tx pull -a -f --minimum-perc=1" checkreturn="true" logoutput="true" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />

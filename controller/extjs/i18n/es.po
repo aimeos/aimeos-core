@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Daniel Vega <danielvega131990@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-12-07 18:10+0100\n"
-"PO-Revision-Date: 2015-09-29 12:29+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-12-30 14:54+0000\n"
+"Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
-"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/Controller/ExtJS/Service/Default.php:94
@@ -27,7 +28,7 @@ msgstr ""
 #: src/Controller/ExtJS/Media/Default.php:708
 #, php-format
 msgid "Changing file permissions for \"%1$s\" to \"%2$o\" failed"
-msgstr "Changing file permissions for \"%1$s\" to \"%2$o\" failed"
+msgstr "No se pudieron cambiar los permisos para el archivo \"%1$s\" a \"%2$o\""
 
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:66
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:160
@@ -35,7 +36,7 @@ msgstr "Changing file permissions for \"%1$s\" to \"%2$o\" failed"
 #: src/Controller/ExtJS/Common/Factory/Base.php:164
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr ""
+msgstr "La clase \"%1$s\" no implementa \"%2$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:295 src/Controller/ExtJS/JsonRpc.php:378
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:60
@@ -47,12 +48,12 @@ msgstr ""
 #: src/Controller/ExtJS/Factory.php:93
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "No se ha encontrado la clase \"%1$s\""
 
 #: src/Controller/ExtJS/Factory.php:68 src/Controller/ExtJS/Factory.php:72
 #, php-format
 msgid "Controller path is empty"
-msgstr ""
+msgstr "La ruta del controlador está vacía"
 
 #: src/Controller/ExtJS/Product/Import/Text/Default.php:111
 #: src/Controller/ExtJS/Attribute/Import/Text/Default.php:110
@@ -61,7 +62,7 @@ msgstr ""
 #: src/Controller/ExtJS/Coupon/Code/Standard.php:117
 #, php-format
 msgid "Could not set permissions \"%1$s\" for file \"%2$s\""
-msgstr ""
+msgstr "No se pueden esablecer los permisos \"%1$s\" para el archivo \"%2$s\""
 
 #: src/Controller/ExtJS/Media/Default.php:399
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:177
@@ -69,29 +70,29 @@ msgstr ""
 #: src/Controller/ExtJS/Catalog/Export/Text/Default.php:177
 #, php-format
 msgid "Couldn't create directory \"%1$s\" with permissions \"%2$o\""
-msgstr "Couldn't create directory \"%1$s\" with permissions \"%2$o\""
+msgstr "No se puede crear el directorio \"%1$s\" con los permisos \"%2$o\""
 
 #: src/Controller/ExtJS/Attribute/Export/Text/Default.php:182
 #, php-format
 msgid "Create export directory for attribute IDs: %1$s"
-msgstr "Create export directory for attribute IDs: %1$s"
+msgstr "Crear directorio de salida para las IDs de atributos: %1$s"
 
 #: src/Controller/ExtJS/Catalog/Export/Text/Default.php:180
 #, php-format
 msgid "Create export directory for catalog IDs: %1$s"
-msgstr "Create export directory for catalog IDs: %1$s"
+msgstr "Crear directorio de salida para las IDs de catálogos: %1$s"
 
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:180
 #, php-format
 msgid "Create export directory for product IDs: %1$s"
-msgstr "Create export directory for product IDs: %1$s"
+msgstr "Crear directorio de salida para las IDs de productos: %1$s"
 
 #: src/Controller/ExtJS/Media/Default.php:116
 #: src/Controller/ExtJS/Media/Default.php:122
 #: src/Controller/ExtJS/Media/Default.php:240
 #, php-format
 msgid "Deleting file \"%1$s\" failed"
-msgstr "Deleting file \"%1$s\" failed"
+msgstr "No se pudo eliminar el archivo \"%1$s\""
 
 #: src/Controller/ExtJS/Product/Export/Text/Default.php:186
 #: src/Controller/ExtJS/Attribute/Export/Text/Default.php:188
@@ -100,18 +101,18 @@ msgstr "Deleting file \"%1$s\" failed"
 #: src/Controller/ExtJS/Attribute/Export/Text/Standard.php:134
 #: src/Controller/ExtJS/Catalog/Export/Text/Standard.php:132
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:398
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:402
 #, php-format
 msgid "Error in %1$s text import: %2$s"
-msgstr ""
+msgstr "Error en %1$s texto importado: %2$s"
 
 #: src/Controller/ExtJS/JsonRpc.php:299 src/Controller/ExtJS/JsonRpc.php:303
 #, php-format
 msgid "Factory \"%1$s\" not found"
-msgstr ""
+msgstr "Constructor \"%1$s\" no encontrado"
 
 #: src/Controller/ExtJS/Order/Factory.php:63
 #: src/Controller/ExtJS/Order/Base/Product/Attribute/Factory.php:63
@@ -249,30 +250,30 @@ msgstr ""
 #: src/Controller/ExtJS/Supplier/Lists/Factory.php:66
 #, php-format
 msgid "Invalid class name \"%1$s\""
-msgstr ""
+msgstr "Nombre de clase no válido \"%1$s\""
 
 #: src/Controller/ExtJS/Factory.php:80 src/Controller/ExtJS/Factory.php:84
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Controlador \"%1$s\" no válido en \"%2$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:291 src/Controller/ExtJS/JsonRpc.php:374
 #: src/Controller/ExtJS/JsonRpc.php:295 src/Controller/ExtJS/JsonRpc.php:382
 #, php-format
 msgid "Invalid controller factory name \"%1$s\""
-msgstr ""
+msgstr "Nombre de constructor de controlador \"%1$s\" no válido"
 
 #: src/Controller/ExtJS/Common/Factory/Abstract.php:86
 #: src/Controller/ExtJS/Common/Factory/Base.php:90
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "Dominio \"%1$s\" no válido"
 
 #: src/Controller/ExtJS/JsonRpc.php:384 src/Controller/ExtJS/Factory.php:95
 #: src/Controller/ExtJS/JsonRpc.php:392 src/Controller/ExtJS/Factory.php:99
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "Constructor \"%1$s\" no válido"
 
 #: src/Controller/ExtJS/Catalog/Import/Text/Default.php:320
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:194
@@ -280,39 +281,39 @@ msgstr ""
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:198
 #, php-format
 msgid "Invalid list type \"%1$s\""
-msgstr ""
+msgstr "Tipo de lista \"%1$s\" no válido"
 
 #: src/Controller/ExtJS/JsonRpc.php:282 src/Controller/ExtJS/JsonRpc.php:286
 #, php-format
 msgid "Invalid method \"%1$s\" in request"
-msgstr ""
+msgstr "Método \"%1$s\" no válido en la petición"
 
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:382
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:386
 #, php-format
 msgid "Invalid row from %1$s text import: %2$s"
-msgstr ""
+msgstr "Fila no válida %2$s desde el texto importado %1$s"
 
 #: src/Controller/ExtJS/Abstract.php:446 src/Controller/ExtJS/Base.php:446
 #, php-format
 msgid "Invalid sort direction \"%1$s\""
-msgstr ""
+msgstr "Dirección de ordenamiento \"%1$s\" no válida"
 
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:391
 #: src/Controller/ExtJS/Common/Load/Text/Base.php:395
 #, php-format
 msgid "Invalid text type \"%1$s\""
-msgstr ""
+msgstr "Tipo de texto \"%1$s\" no válido"
 
 #: src/Controller/ExtJS/Abstract.php:333 src/Controller/ExtJS/Base.php:333
 #, php-format
 msgid "List item doesn't implement \"%1$s\""
-msgstr ""
+msgstr "El elemento de lista no implementa \"%1$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:303 src/Controller/ExtJS/JsonRpc.php:307
 #, php-format
 msgid "Method \"%1$s\" not found"
-msgstr ""
+msgstr "No se ha encontrado el método \"%1$s\""
 
 #: src/Controller/ExtJS/Common/Load/Text/Abstract.php:107
 #: src/Controller/ExtJS/Abstract.php:293
@@ -320,39 +321,39 @@ msgstr ""
 #: src/Controller/ExtJS/Base.php:293
 #, php-format
 msgid "Missing parameter \"%1$s\""
-msgstr ""
+msgstr "Parámetro \"%1$s\" no encontrado"
 
 #: src/Controller/ExtJS/Media/Default.php:550
 #: src/Controller/ExtJS/Media/Standard.php:441
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
-msgstr ""
+msgstr "No se ha configurado ningún tipo de imagen permitido para \"%1$s\""
 
 #: src/Controller/ExtJS/JsonRpc.php:242 src/Controller/ExtJS/JsonRpc.php:246
 #, php-format
 msgid "Required attribute \"%1$s\" missing in request"
-msgstr ""
+msgstr "El atributo obligatorio \"%1$s\" no se ha encontrado en la petición"
 
 #: src/Controller/ExtJS/Abstract.php:478 src/Controller/ExtJS/Base.php:478
 #, php-format
 msgid "Site item for code \"%1$s\" not found"
-msgstr ""
+msgstr "No se ha encontrado el elemento de tipo sitio para el código \"%1$s\""
 
 #: src/Controller/ExtJS/Common/Decorator/Abstract.php:49
 #: src/Controller/ExtJS/Common/Decorator/Base.php:53
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "No se ha podido invocar el método \"%1$s\""
 
 #: src/Controller/ExtJS/Media/Standard.php:538
 #, php-format
 msgid "Unable to create directory \"%1$s\""
-msgstr ""
+msgstr "No se ha podido crear el directorio \"%1$s\""
 
 #: src/Controller/ExtJS/Media/Standard.php:544
 #, php-format
 msgid "Unable to create file in \"%1$s\""
-msgstr ""
+msgstr "No se ha podido crear el archivo en \"%1$s\""
 
 #: src/Controller/ExtJS/Product/Import/Text/Default.php:81
 #: src/Controller/ExtJS/Attribute/Import/Text/Default.php:80
@@ -361,4 +362,4 @@ msgstr ""
 #: src/Controller/ExtJS/Coupon/Code/Standard.php:87
 #, php-format
 msgid "Uploaded file could not be moved to upload directory \"%1$s\""
-msgstr ""
+msgstr "El archivo cargado no se pudo mover al directorio de carga \"%1$s\""

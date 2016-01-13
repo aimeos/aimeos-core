@@ -15,7 +15,7 @@ type = PO
 
 [aimeos-core.client]
 file_filter = client/i18n/<lang>.po
-source_file = client/i18n/core-client-html.pot
+source_file = client/i18n/core-client.pot
 source_lang = en
 type = PO
 
