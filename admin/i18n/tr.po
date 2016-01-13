@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015
+# Metal <meteoramic@yahoo.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-01-13 00:55+0100\n"
-"PO-Revision-Date: 2016-01-12 23:59+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2016-01-13 14:55+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,7 +32,7 @@ msgstr "Ekle"
 #: jqadm/templates/common/partials/filter-default.php:40
 #: jqadm/templates/common/partials/filter-default.php:62
 msgid "Add filter"
-msgstr ""
+msgstr "Filtre ekle"
 
 #: src/panel/supplier/address/ListUi.js:114
 #: src/panel/customer/address/ListUi.js:114
@@ -212,7 +212,7 @@ msgstr "Doğum günü"
 
 #: jqadm/templates/product/item-bundle-default.php:13
 msgid "Bundles"
-msgstr ""
+msgstr "Birlikte verilenler"
 
 #: src/panel/cache/ListUiSmall.js:27
 msgid "Cache"
@@ -241,7 +241,7 @@ msgstr "Katalog: {0} ({1})"
 #: jqadm/templates/product/item-category-default.php:13
 #: jqadm/templates/product/item-category-default.php:20
 msgid "Categories"
-msgstr ""
+msgstr "Kategoriler"
 
 #: src/panel/supplier/address/ItemUi.js:107
 #: src/panel/supplier/address/ListUi.js:125 src/panel/customer/ItemUi.js:191
@@ -259,7 +259,7 @@ msgstr "Şehir ismi (gerekli)"
 
 #: jqadm/templates/product/list-default.php:85
 msgid "Clear"
-msgstr ""
+msgstr "Temizle"
 
 #: src/panel/media/MediaField.js:64
 msgid "Click to upload"
@@ -268,7 +268,7 @@ msgstr "Yüklemek için tıklayın"
 #: jqadm/templates/common/partials/confirm-default.php:15
 #: jqadm/templates/common/partials/confirm-default.php:23
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #: src/panel/type/AbstractTypeItemUi.js:65 src/panel/service/type/ListUi.js:67
 #: src/panel/service/ItemUi.js:71 src/panel/service/ListUi.js:63
@@ -691,7 +691,7 @@ msgstr "Dosya URL'si"
 
 #: jqadm/templates/common/partials/pagination-default.php:33
 msgid "First"
-msgstr ""
+msgstr "Birinci"
 
 #: src/panel/supplier/address/ItemUi.js:69
 #: src/panel/supplier/address/ItemUi.js:70 src/panel/customer/ItemUi.js:153
@@ -734,7 +734,7 @@ msgstr "Grup etiketi (gerekli)"
 
 #: jqadm/templates/product/item-physical-default.php:40
 msgid "Height"
-msgstr ""
+msgstr "Yükseklik"
 
 #: src/panel/supplier/address/ItemUi.js:64 src/panel/customer/ItemUi.js:148
 #: src/panel/customer/address/ItemUi.js:66
@@ -806,7 +806,7 @@ msgstr "Kimlik"
 
 #: jqadm/templates/product/item-image-default.php:13
 msgid "Images"
-msgstr ""
+msgstr "Görüntüler"
 
 #: src/panel/AbstractListUi.js:167
 msgid "Import"
@@ -928,7 +928,7 @@ msgstr "Dil (gerekli)"
 
 #: jqadm/templates/common/partials/pagination-default.php:49
 msgid "Last"
-msgstr ""
+msgstr "Sonuncu"
 
 #: src/panel/type/AbstractTypeItemUi.js:83 src/panel/service/type/ListUi.js:91
 #: src/panel/service/ItemUi.js:104 src/panel/service/ListUi.js:116
@@ -1003,7 +1003,7 @@ msgstr "Soyad"
 
 #: jqadm/templates/product/item-physical-default.php:24
 msgid "Length"
-msgstr ""
+msgstr "Uzunluk"
 
 #: src/panel/locale/ListUi.js:32
 msgid "List"
@@ -1109,7 +1109,7 @@ msgstr "Günlükler"
 #: jqadm/templates/product/item-text-default.php:53
 #: jqadm/templates/product/item-text-default.php:56
 msgid "Long description"
-msgstr ""
+msgstr "Uzun açıklama"
 
 #: src/panel/media/ItemPickerUi.js:11 src/elements/domain.js:50
 msgid "Media"
@@ -1138,12 +1138,12 @@ msgstr "Mesaj"
 #: jqadm/templates/product/item-text-default.php:78
 #: jqadm/templates/product/item-text-default.php:81
 msgid "Meta description"
-msgstr ""
+msgstr "Meta description"
 
 #: jqadm/templates/product/item-text-default.php:71
 #: jqadm/templates/product/item-text-default.php:74
 msgid "Meta keywords"
-msgstr ""
+msgstr "Meta keywords"
 
 #: src/panel/job/ItemUi.js:64 src/panel/job/ListUiSmall.js:67
 msgid "Method"
@@ -1194,7 +1194,7 @@ msgstr "Servis sağlayıcı sınıfının adı (gerekli)"
 
 #: jqadm/templates/common/partials/pagination-default.php:44
 msgid "Next"
-msgstr ""
+msgstr "Sonraki"
 
 #: src/panel/AbstractListUi.js:342 src/panel/AbstractUsedByListUi.js:174
 #: src/elements/exportlanguage.js:394
@@ -1215,7 +1215,7 @@ msgstr "Uyarı"
 
 #: jqadm/templates/product/item-default.php:105
 msgid "Option"
-msgstr ""
+msgstr "Seçenek"
 
 #: src/panel/order/OrderItemUi.js:15 src/panel/order/ListUi.js:32
 msgid "Order"
@@ -1236,7 +1236,7 @@ msgstr "Genel bakış"
 #: jqadm/templates/common/partials/pagination-default.php:42
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Toplam %2$d sayfadan %1$d.'si"
 
 #: src/panel/job/ListUiSmall.js:75
 msgid "Parameter"
@@ -1261,7 +1261,7 @@ msgstr "Ödeme durumu"
 
 #: jqadm/templates/product/item-physical-default.php:19
 msgid "Physical values"
-msgstr ""
+msgstr "Fiziksel değerler"
 
 #: src/panel/product/stock/ItemUi.js:122
 #: src/panel/product/property/ItemUi.js:112 src/panel/AbstractItemUi.js:250
@@ -1329,7 +1329,7 @@ msgstr "Önizleme URL'si"
 
 #: jqadm/templates/common/partials/pagination-default.php:38
 msgid "Previous"
-msgstr ""
+msgstr "Önceki"
 
 #: src/panel/price/ListUiSmall.js:124 src/panel/price/ItemPickerUi.js:11
 #: src/panel/price/ItemPickerUi.js:127 src/panel/order/service/ItemUi.js:79
@@ -1356,7 +1356,7 @@ msgstr "Fiyat: {0} ({1})"
 
 #: jqadm/templates/product/item-price-default.php:15
 msgid "Prices"
-msgstr ""
+msgstr "Fiyatlar"
 
 #: src/panel/log/ListUiSmall.js:71
 msgid "Priority"
@@ -1384,7 +1384,7 @@ msgstr "Ürün maliyetleri"
 
 #: jqadm/templates/product/item-physical-default.php:43
 msgid "Product height (yard, inch, etc.)"
-msgstr ""
+msgstr "Ürün yüksekliği (yard, inç, vb)"
 
 #: src/panel/order/product/ItemUi.js:19
 msgid "Product item details"
@@ -1392,7 +1392,7 @@ msgstr "Ürün öğe detayları"
 
 #: jqadm/templates/product/item-physical-default.php:27
 msgid "Product length (yard, inch, etc.)"
-msgstr ""
+msgstr "Ürün uzunluğu (yard, inç, vb)"
 
 #: src/panel/order/coupon/ListUi.js:124
 #: jqadm/templates/product/item-text-default.php:37
@@ -1442,11 +1442,11 @@ msgstr "Ürün türü: {0} ({1})"
 
 #: jqadm/templates/product/item-physical-default.php:53
 msgid "Product weight (pound, ounce, etc.)"
-msgstr ""
+msgstr "Ürün ağırlığı (pound, ons, vb.)"
 
 #: jqadm/templates/product/item-physical-default.php:35
 msgid "Product width (yard, inch etc.)"
-msgstr ""
+msgstr "Ürün genişliği (yard, inç, vb)"
 
 #. : Product item panel title with product label ({0}) and site code ({1)}
 #: src/panel/product/ItemUi.js:150 src/panel/product/ItemUi.js:138
@@ -1507,7 +1507,7 @@ msgstr "İlgili sipariş ID"
 
 #: jqadm/templates/common/partials/filter-default.php:38
 msgid "Remove filter"
-msgstr ""
+msgstr "Filtreyi kaldır"
 
 #: src/panel/log/ListUiSmall.js:95
 msgid "Request"
@@ -1538,7 +1538,7 @@ msgstr "Şema {0} kayıtlı değil"
 
 #: jqadm/templates/product/list-default.php:84
 msgid "Search"
-msgstr ""
+msgstr "Ara"
 
 #: src/Schema.js:96
 #, python-brace-format
@@ -1593,7 +1593,7 @@ msgstr "Servisler"
 #: jqadm/templates/product/item-text-default.php:46
 #: jqadm/templates/product/item-text-default.php:49
 msgid "Short description"
-msgstr ""
+msgstr "Kısa açıklama"
 
 #: src/panel/order/OrderItemUi.js:39 src/panel/locale/site/ListUi.js:27
 msgid "Site"
@@ -1788,7 +1788,7 @@ msgstr "Metin: {0} ({1})"
 
 #: jqadm/templates/product/item-text-default.php:15
 msgid "Texts"
-msgstr ""
+msgstr "Metinler"
 
 #: src/elements/exportlanguage.js:448
 msgid ""
@@ -1861,7 +1861,7 @@ msgstr "Türler"
 #: jqadm/templates/product/item-text-default.php:62
 #: jqadm/templates/product/item-text-default.php:66
 msgid "URL segment"
-msgstr ""
+msgstr "URL segmenti"
 
 #: src/panel/type/AbstractTypeItemUi.js:69 src/panel/service/ItemUi.js:76
 #: src/panel/supplier/ItemUi.js:59
@@ -1907,11 +1907,11 @@ msgstr "Değer"
 
 #: jqadm/templates/product/item-selection-default.php:62
 msgid "Variant attributes"
-msgstr ""
+msgstr "Değişken nitelikleri"
 
 #: jqadm/templates/product/item-selection-default.php:15
 msgid "Variants"
-msgstr ""
+msgstr "Değişkenler"
 
 #: src/panel/supplier/address/ItemUi.js:54
 #: src/panel/supplier/address/ListUi.js:76 src/panel/customer/ItemUi.js:138
@@ -1962,11 +1962,11 @@ msgstr "Web sitesi"
 
 #: jqadm/templates/product/item-physical-default.php:50
 msgid "Weight"
-msgstr ""
+msgstr "Ağırlık"
 
 #: jqadm/templates/product/item-physical-default.php:32
 msgid "Width"
-msgstr ""
+msgstr "Genişlik"
 
 #: src/panel/customer/ItemUi.js:91 src/panel/customer/ItemUi.js:97
 msgid "YYYY-MM-DD (optional)"
@@ -2116,4 +2116,4 @@ msgstr "meçhul"
 #: jqadm/templates/product/item-default.php:87
 #: jqadm/templates/product/item-default.php:95
 msgid "yy-mm-dd"
-msgstr ""
+msgstr "yy-aa-gg"
