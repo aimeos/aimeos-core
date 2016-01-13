@@ -67,12 +67,12 @@ class Controller_ExtJS_Admin_Job_Default
 	 */
 	protected function _transformValues( stdClass $entry )
 	{
-		if( isset( $entry->{'job.parameter'} ) && is_string( $entry->{'job.parameter'} ) ) {
-			$entry->{'job.parameter'} = json_decode( $entry->{'job.parameter'}, true );
+		if( isset( $entry->{'job.parameter'} ) ) {
+			$entry->{'job.parameter'} = (array) $entry->{'job.parameter'};
 		}
 
-		if( isset( $entry->{'job.result'} ) && is_string( $entry->{'job.result'} ) ) {
-			$entry->{'job.parameter'} = json_decode( $entry->{'job.result'}, true );
+		if( isset( $entry->{'job.result'} ) ) {
+			$entry->{'job.result'} = (array) $entry->{'job.result'};
 		}
 
 		return $entry;

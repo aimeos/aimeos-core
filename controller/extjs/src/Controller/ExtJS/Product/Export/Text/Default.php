@@ -183,7 +183,7 @@ class Controller_ExtJS_Product_Export_Text_Default
 		$downloadFile = $downloaddir . DIRECTORY_SEPARATOR . basename( $filename );
 
 		return array(
-			'file' => '<a href="' . $downloadFile . '">' . $context->getI18n()->dt( 'controller/extjs', 'Download' ) . '</a>',
+			'file' => '<a href="' . $downloadFile . '">Download</a>',
 		);
 	}
 

@@ -78,17 +78,13 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             editable : false,
             hidden : true,
             renderer : function(data) {
-                try {
-                    var result = '';
-                    var object = Ext.decode(data);
-
-                    for( var name in object) {
-                        result += name + ': ' + object[name] + '<br/>';
+                var result = '';
+                if(data instanceof Object) {
+                    for( var name in data) {
+                        result += name + ': ' + data[name] + '<br/>';
                     }
-                    return result;
-                } catch(e) {
-                    return data;
                 }
+                return result;
             }
         }, {
             xtype : 'gridcolumn',
@@ -98,21 +94,13 @@ MShop.panel.job.ListUiSmall = Ext.extend(MShop.panel.AbstractListUi, {
             width : 200,
             editable : false,
             renderer : function(data) {
-                try {
-                    var result = '';
-                    var object = Ext.decode(data);
-
-                    if(object instanceof Array) {
-                        return '';
+                var result = '';
+                if(data instanceof Object) {
+                    for( var name in data) {
+                        result += name + ': ' + data[name] + '<br/>';
                     }
-
-                    for( var name in object) {
-                        result += name + ': ' + object[name] + '<br/>';
-                    }
-                    return result;
-                } catch(e) {
-                    return data;
                 }
+                return result;
             }
         }, {
             xtype : 'datecolumn',
