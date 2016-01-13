@@ -35,8 +35,7 @@
 		"satooshi/php-coveralls": "dev-master",
 		"squizlabs/php_codesniffer": "~1.0",
 		"phpunit/phpunit": "~3.7||~4.0",
-		"phing/phing": "~2.4",
-		"tedivm/jshrink": "~1.0"
+		"phing/phing": "~2.4"
 	},
 	"suggest": {
 		"phpdocumentor/phpdocumentor": "Required for generating the API documentation"

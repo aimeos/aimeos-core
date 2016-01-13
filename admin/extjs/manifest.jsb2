@@ -1,7 +1,7 @@
 {
 	"projectName": "Aimeos Core",
-	"deployDir": "deploy",
 	"licenseText": "LGPLv3, http://www.gnu.org/licenses/lgpl.html",
+	"deployDir": ".",
 	"pkgs": [{
 		"name": "ExtJS CSS",
 		"file": "resources/css/ext-all.css",
