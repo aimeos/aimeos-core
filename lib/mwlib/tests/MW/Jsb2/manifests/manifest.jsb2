@@ -1,6 +1,6 @@
 {
 	"projectName": "Jsb2 Test",
-	"deployDir": "./../../../tmp/jsb2",
+	"deployDir": ".",
 	"licenseText": "LGPLv3, http://www.gnu.org/licenses/lgpl.html",
 	"pkgs": [{
 		"name": "Jsb2 Test",

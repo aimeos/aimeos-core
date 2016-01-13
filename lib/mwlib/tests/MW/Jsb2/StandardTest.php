@@ -17,32 +17,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	private $deployPath;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$ds = DIRECTORY_SEPARATOR;
 		$this->manifestPath = __DIR__ . $ds . 'manifests' . $ds;
-		$this->deployPath = __DIR__ . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . $ds;
 		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest.jsb2' );
-	}
-
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function tearDown()
-	{
-		$ds = DIRECTORY_SEPARATOR;
-
-		$this->delTree( __DIR__ . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' );
 	}
 
 
@@ -81,77 +60,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testDeploy()
+	public function testGetFiles()
 	{
-		$ds = DIRECTORY_SEPARATOR;
+		$files = $this->object->getFiles( 'js' );
 
-		$this->object->deploy();
-		$this->assertFileExists( $this->deployPath . 'js' . $ds . 'jsb2-test.js' );
-		$this->assertEquals( '0755', substr( decoct( fileperms( $this->deployPath ) ), 1 ) );
-		$this->assertEquals( '0644',
-			substr( decoct( fileperms( $this->deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
-		);
+		$this->assertEquals( 1, count( $files ) );
+		$this->assertContains( 'test.js', $files[0] );
 	}
 
 
-	public function testDeployPermissionReset()
-	{
-		$ds = DIRECTORY_SEPARATOR;
-
-		$this->object->deploy( null, true, 0645, 0754 );
-		$this->assertFileExists( $this->deployPath . 'js' . $ds . 'jsb2-test.js' );
-		$this->assertEquals( '0754', substr( decoct( fileperms( $this->deployPath ) ), 1 ) );
-		$this->assertEquals( '0645',
-			substr( decoct( fileperms( $this->deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
-		);
-
-		$this->object->deploy( null, true, 0655, 0755 );
-		$this->assertFileExists( $this->deployPath . $ds . 'js' . $ds . 'jsb2-test.js' );
-		$this->assertEquals( '0754', substr( decoct( fileperms( $this->deployPath ) ), 1 ) );
-		$this->assertEquals( '0655',
-			substr( decoct( fileperms( $this->deployPath . 'js' . $ds . 'jsb2-test.js' ) ), 1 )
-		);
-
-	}
-
-
-	public function testDeployFiletypeNoDebug()
-	{
-		$ds = DIRECTORY_SEPARATOR;
-
-		$this->object->deploy( 'js', false );
-		$this->assertFileExists( $this->deployPath . 'js' . $ds . 'jsb2-test.js' );
-	}
-
-
-	public function testGetUrlsWithPackage()
-	{
-		$this->object->deploy();
-		$urls = $this->object->getUrls( 'js' );
-
-		$this->assertEquals( 1, count( $urls ) );
-		$this->assertContains( '/jsb2-test.js', $urls[0] );
-	}
-
-
-	public function testGetUrlsWithoutPackage()
-	{
-		$urls = $this->object->getUrls( 'js' );
-
-		$this->assertEquals( 1, count( $urls ) );
-		$this->assertContains( '/test.js', $urls[0] );
-	}
-
-
-	public function testGetHTMLWithPackage()
-	{
-		$this->object->deploy();
-		$this->assertGreaterThan( 1, strpos( trim( $this->object->getHTML( 'js' ) ), 'jsb2/js/jsb2-test.js' ) );
-		$this->assertEquals( '', $this->object->getHTML( 'css' ) );
-	}
-
-
-	public function testGetHTMLWithoutPackage()
+	public function testGetHTML()
 	{
 		$html = '<script type="text/javascript" src="/./../%1$s"></script>';
 		$mtime = filemtime( __DIR__ . DIRECTORY_SEPARATOR . 'test.js' );
@@ -160,45 +78,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetHTMLFilemtimeException()
+	public function testGetUrls()
 	{
-		$ds = DIRECTORY_SEPARATOR;
-		$filename = __DIR__ . $ds . 'test.js';
-		$alteredFilename = __DIR__ . $ds . '..' . $ds . '..' . $ds . 'tmp' . $ds . 'jsb2' . 'test.js';
+		$urls = $this->object->getUrls( 'js' );
 
-		copy( $filename, $alteredFilename );
-		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_filemtime_exception.jsb2' );
-		unlink( $alteredFilename );
-
-		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
-		$this->object->getHTML( 'js' );
+		$this->assertEquals( 1, count( $urls ) );
+		$this->assertContains( '/test.js', $urls[0] );
 	}
 
 
-	/**
-	 * @param string $dir
-	 */
-	protected function delTree( $dir )
+	public function testGetUrlsFilemtimeException()
 	{
-		if( !is_dir( $dir ) ) {
-			return;
-		}
+		$object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_filemtime_exception.jsb2' );
 
-		$dirIterator = new \DirectoryIterator( $dir );
-
-		foreach( $dirIterator as $iterator )
-		{
-			if( $iterator->isDot() ) {
-				continue;
-			}
-
-			if( $iterator->isDir() ) {
-				$this->delTree( $iterator->getPathname() );
-			} else {
-				unlink( $iterator->getPathname() );
-			}
-		}
-
-		rmdir( $dir );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$object->getHTML( 'js' );
 	}
 }
