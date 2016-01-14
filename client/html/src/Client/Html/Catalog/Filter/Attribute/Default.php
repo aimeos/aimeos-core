@@ -297,6 +297,7 @@ class Client_Html_Catalog_Filter_Attribute_Default
 
 			$search->setConditions( $search->combine( '&&', $expr ) );
 			$search->setSortations( $sort );
+			$search->setSlice( 0, 0x7fffffff );
 
 			/** client/html/catalog/filter/attribute/domains
 			 * List of domain names whose items should be fetched with the filter attributes
