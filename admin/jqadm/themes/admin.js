@@ -312,6 +312,11 @@ Aimeos = {
 	},
 
 
+	getOptionsSites : function(request, response, element) {
+		Aimeos.getOptions(request, response, element, 'locale/site', 'locale.site.label', '-locale.site.status,locale.site.label');
+	},
+
+
 	getOptionsProducts : function(request, response, element) {
 		Aimeos.getOptions(request, response, element, 'product', 'product.label', 'product.label');
 	},
