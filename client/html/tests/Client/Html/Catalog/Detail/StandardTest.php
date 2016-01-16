@@ -90,6 +90,25 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetBodyDefaultId()
+	{
+		$context = clone $this->context;
+		$context->getConfig()->set( 'client/html/catalog/detail/prodid-default', $this->getProductItem()->getId() );
+
+		$paths = \TestHelperHtml::getHtmlTemplatePaths();
+		$this->object = new \Aimeos\Client\Html\Catalog\Detail\Standard( $context, $paths );
+		$this->object->setView( \TestHelperHtml::getView() );
+
+		$view = $this->object->getView();
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, array() );
+		$view->addHelper( 'param', $helper );
+
+		$output = $this->object->getBody();
+
+		$this->assertContains( '<span class="value">CNC</span>', $output );
+	}
+
+
 	public function testGetBodyClientHtmlException()
 	{
 		$mock = $this->getMockBuilder( '\Aimeos\Client\Html\Catalog\Detail\Standard' )

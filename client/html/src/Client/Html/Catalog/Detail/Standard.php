@@ -553,6 +553,25 @@ class Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
+		if( $prodid == '' )
+		{
+			/** client/html/catalog/detail/prodid-default
+			 * The default product ID used if none is given as parameter
+			 *
+			 * To display a product detail view or a part of it for a specific
+			 * product, you can configure its ID using this setting. This is
+			 * most useful in a CMS where the product ID can be configured
+			 * separately for each content node.
+			 *
+			 * @param string Product ID
+			 * @since 2016.01
+			 * @category User
+			 * @category Developer
+			 * @see client/html/catalog/lists/catid-default
+			 */
+			$prodid = $config->get( 'client/html/catalog/detail/prodid-default', '' );
+		}
+
 		/** client/html/catalog/domains
 		 * A list of domain names whose items should be available in the catalog view templates
 		 *

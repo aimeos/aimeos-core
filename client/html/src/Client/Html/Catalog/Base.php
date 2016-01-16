@@ -239,6 +239,7 @@ abstract class Base
 			 * @see client/html/catalog/lists/size
 			 * @see client/html/catalog/lists/domains
 			 * @see client/html/catalog/lists/levels
+			 * @see client/html/catalog/detail/prodid-default
 			 */
 			$catid = $config->get( 'client/html/catalog/lists/catid-default', '' );
 		}
