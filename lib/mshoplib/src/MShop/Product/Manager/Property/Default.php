@@ -22,6 +22,7 @@ class MShop_Product_Manager_Property_Default
 		'product.property.id'=> array(
 			'code'=>'product.property.id',
 			'internalcode'=>'mpropr."id"',
+			'internaldeps'=>array( 'LEFT JOIN "mshop_product_property" AS mpropr ON ( mpropr."parentid" = mpro."id" )' ),
 			'label'=>'Product property ID',
 			'type'=> 'integer',
 			'internaltype'=> MW_DB_Statement_Abstract::PARAM_INT,
@@ -147,13 +148,13 @@ class MShop_Product_Manager_Property_Default
 				$object->compare( '==', 'product.property.languageid', $langid ),
 			);
 			$expr[] = $object->combine( '||', $temp );
-	
+
 			$object->setConditions( $object->combine( '&&', $expr ) );
 		}
-	
+
 		return $object;
 	}
-	
+
 
 	/**
 	 * Inserts the new property items for product item
