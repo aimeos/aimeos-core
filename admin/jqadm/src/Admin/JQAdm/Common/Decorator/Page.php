@@ -28,6 +28,7 @@ class Page extends Base
 	public function setView( \Aimeos\MW\View\Iface $view )
 	{
 		$sites = array();
+		$aimeos = new \Aimeos\Bootstrap();
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'locale/site' );
 
 		$search = $manager->createSearch();
@@ -39,7 +40,7 @@ class Page extends Base
 
 
 		$view->pageSites = $sites;
-		$view->pageLanguages = (new \Aimeos\Bootstrap())->getI18nList( 'admin' );
+		$view->pageLanguages = $aimeos->getI18nList( 'admin' );
 
 		$this->getClient()->setView( $view );
 		return $this;
