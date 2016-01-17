@@ -193,9 +193,10 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 
 		$dbm = $context->getDatabaseManager();
 		$siteId = $context->getLocale()->getSiteId();
+		$langid = $context->getLocale()->getLanguageId();
 
 		$sqlProd = 'SELECT "value" FROM "mshop_catalog_index_text"
-			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'product\'';
+			WHERE "siteid" = ? AND "prodid" = ? AND "langid" = \'' . $langid . '\' AND type = \'name\' AND domain = \'product\'';
 		$sqlAttr = 'SELECT "value" FROM "mshop_catalog_index_text"
 			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'attribute\'';
 
@@ -204,7 +205,7 @@ class MShop_Catalog_Manager_Index_DefaultTest extends PHPUnit_Framework_TestCase
 		$prodText = $this->_getValue( $dbm, $sqlProd, 'value', $siteId, $item->getId() );
 		$this->_object->deleteItem( $item->getId() );
 
-		$this->assertEquals( '16 discs', $prodText );
+		$this->assertEquals( 'Unterproduct 3', $prodText );
 		$this->assertEquals( 'XL', $attrText );
 	}
 
