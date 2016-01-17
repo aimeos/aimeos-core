@@ -341,6 +341,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'product.stock.warehouse.code', 'default' );
 		$expr[] = $search->compare( '==', 'product.stock.warehouse.editor', $this->editor );
 
+		$expr[] = $search->compare( '!=', 'product.property.id', null );
+		$expr[] = $search->compare( '!=', 'product.property.siteid', null );
+		$expr[] = $search->compare( '!=', 'product.property.typeid', null );
+		$expr[] = $search->compare( '==', 'product.property.languageid', null );
+		$expr[] = $search->compare( '==', 'product.property.value', '1' );
+		$expr[] = $search->compare( '==', 'product.property.editor', $this->editor );
+
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
