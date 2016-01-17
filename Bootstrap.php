@@ -233,6 +233,37 @@ class Bootstrap
 
 
 	/**
+	 * Returns the language IDs for the available translations
+	 *
+	 * @param string $section Section name in the i18n paths
+	 * @return array List of ISO language codes
+	 */
+	public function getI18nList( $section )
+	{
+		$list = array();
+		$paths = $this->getI18nPaths();
+		$paths = ( isset( $paths[$section] ) ? (array) $paths[$section] : array() );
+
+		foreach( $paths as $path )
+		{
+			$iter = new \DirectoryIterator( $path );
+
+			foreach( $iter as $file )
+			{
+				$name = $file->getFilename();
+
+				if( $file->isFile() && preg_match('/^[a-z]{2,3}(_[A-Z]{2})?$/', $name ) ) {
+					$list[$name] = null;
+				}
+			}
+		}
+
+		ksort( $list );
+		return array_keys( $list );
+	}
+
+
+	/**
 	 * Returns the configurations of the manifest files in the given directories.
 	 *
 	 * @param array $directories List of directories where the manifest files are stored
