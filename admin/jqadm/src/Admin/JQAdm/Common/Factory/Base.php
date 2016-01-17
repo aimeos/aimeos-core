@@ -65,7 +65,7 @@ class Base
 				throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 			}
 
-			$client = new $classname( $context, $templatePaths, $client );
+			$client = new $classname( $client, $context, $templatePaths );
 
 			if( !( $client instanceof $iface ) ) {
 				throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'Class "%1$s" does not implement "%2$s"', $classname, $iface ) );

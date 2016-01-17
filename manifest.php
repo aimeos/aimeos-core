@@ -24,6 +24,7 @@ return array(
 	'config' => array(
 		'lib/mshoplib/config',
 		'controller/jsonadm/config',
+		'admin/jqadm/config',
 		'config',
 	),
 	'i18n' => array(

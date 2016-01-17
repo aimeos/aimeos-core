@@ -111,6 +111,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearch()
 	{
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, array( 'site' => 'unittest', 'lang' => 'de' ) );
+		$this->view->addHelper( 'param', $helper );
+
 		$result = $this->object->search();
 
 		$this->assertContains( 'CNE', $result );

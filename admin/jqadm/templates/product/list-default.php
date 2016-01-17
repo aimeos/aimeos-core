@@ -54,7 +54,7 @@ $pageParams = array( 'total' => $this->get( 'total', 0 ) );
 $sortcode = $this->param( 'sort' );
 
 ?>
-<?php echo $this->partial( $this->config( 'admin/jqadm/partial/error', 'common/partials/error-default.php' ), array( 'errors' => $this->get( 'errors', array() ) ) ); ?>
+<?php $this->block()->start( 'jqadm_content' ); ?>
 
 <form class="list-search" method="POST" action="<?php echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
 <?php echo $this->csrf()->formfield(); ?>
@@ -220,4 +220,6 @@ $sortcode = $this->param( 'sort' );
 
 <?php echo $this->partial( $this->config( 'admin/jqadm/partial/pagination', 'common/partials/pagination-default.php' ), $pageParams + array( 'pos' => 'bottom' ) ); ?>
 
-<?php echo $this->partial( $this->config( 'admin/jqadm/partial/confirm', 'common/partials/confirm-default.php' ) ); ?>
+<?php $this->block()->stop(); ?>
+
+<?php echo $this->render( $this->config( 'admin/jqadm/template/page', 'common/page-default.php' ) ); ?>
