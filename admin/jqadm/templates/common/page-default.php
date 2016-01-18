@@ -26,9 +26,10 @@ $sites = $this->get( 'pageSites', array() );
 $site = $this->param( 'site' );
 
 $params = $this->param();
+$extParams = array( 'site' => $site, 'lang' => $this->param( 'lang' ) );
 
 ?>
-<div class="aimeos" data-url="<?php echo $enc->attr( $this->url( $jsonTarget, $jsonCntl, $jsonAction, $params, array(), $jsonConfig ) ); ?>">
+<div class="aimeos" data-url="<?php echo $enc->attr( $this->url( $jsonTarget, $jsonCntl, $jsonAction, array( 'site' => $site ), array(), $jsonConfig ) ); ?>">
 
 	<nav class="navbar navbar-full">
 		<a class="navbar-brand" href="https://aimeos.org/update?type={type}&version={version}">
@@ -40,7 +41,7 @@ $params = $this->param();
 		<div class="collapse navbar-toggleable-xs" id="collapse-navbar">
 			<ul class="nav navbar-nav">
 				<li class="nav-item active">
-					<a class="nav-link" href="<?php echo $enc->attr( $this->url( $extTarget, $extCntl, $extAction, $params, array(), $extConfig ) ); ?>">
+					<a class="nav-link" href="<?php echo $enc->attr( $this->url( $extTarget, $extCntl, $extAction, $extParams, array(), $extConfig ) ); ?>">
 						<?php echo $enc->html( $this->translate( 'admin', 'Expert mode' ) ); ?>
 					</a>
 				</li>
