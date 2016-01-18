@@ -225,9 +225,7 @@ class Standard
 	{
 		if( $price == $this->getValue() ) { return; }
 
-		$this->checkPrice( $price );
-
-		$this->values['price.value'] = $this->formatNumber( $price );
+		$this->values['price.value'] = $this->checkPrice( $price );
 		$this->setModified();
 	}
 
@@ -256,9 +254,7 @@ class Standard
 	{
 		if( $price == $this->getCosts() ) { return; }
 
-		$this->checkPrice( $price );
-
-		$this->values['price.costs'] = $this->formatNumber( $price );
+		$this->values['price.costs'] = $this->checkPrice( $price );
 		$this->setModified();
 	}
 
@@ -287,9 +283,7 @@ class Standard
 	{
 		if( $price == $this->getRebate() ) { return; }
 
-		$this->checkPrice( $price );
-
-		$this->values['price.rebate'] = $this->formatNumber( $price );
+		$this->values['price.rebate'] = $this->checkPrice( $price );
 		$this->setModified();
 	}
 
@@ -318,9 +312,7 @@ class Standard
 	{
 		if( $taxrate == $this->getTaxRate() ) { return; }
 
-		$this->checkPrice( $taxrate );
-
-		$this->values['price.taxrate'] = $this->formatNumber( $taxrate );
+		$this->values['price.taxrate'] = $this->checkPrice( $taxrate );
 		$this->setModified();
 	}
 
@@ -479,12 +471,15 @@ class Standard
 	 * Tests if the price is within the requirements.
 	 *
 	 * @param integer|double $value Monetary value
+	 * @return decimal Sanitized monetary value
 	 */
 	protected function checkPrice( $value )
 	{
-		if( !is_numeric( $value ) ) {
+		if( $value !== '' && !is_numeric( $value ) ) {
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
 		}
+
+		return $this->formatNumber( $value );
 	}
 
 
@@ -495,7 +490,7 @@ class Standard
 	 */
 	protected function formatNumber( $number )
 	{
-		return number_format( $number, 2, '.', '' );
+		return number_format( (double) $number, 2, '.', '' );
 	}
 
 }
