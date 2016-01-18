@@ -7,7 +7,7 @@ Ext.ns('MShop');
 
 MShop.UrlManager = function(href) {
     this.href = href || null;
-    this.tmpl = new Ext.Template(MShop.config.urlTemplate);
+    this.tmpl = new Ext.Template(MShop.config.urlTemplate, {re : /\{([\w\-]+)\}|\%([\w\-]+)\%/g});
     this.data = {
         site : MShop.config.site['locale.site.code'],
         lang : MShop.i18n.lang,
