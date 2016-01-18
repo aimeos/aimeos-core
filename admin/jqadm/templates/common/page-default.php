@@ -31,47 +31,54 @@ $params = $this->param();
 <div class="aimeos" data-url="<?php echo $enc->attr( $this->url( $jsonTarget, $jsonCntl, $jsonAction, $params, array(), $jsonConfig ) ); ?>">
 
 	<nav class="navbar navbar-full">
+		<a class="navbar-brand" href="https://aimeos.org/update?type={type}&version={version}">
+			<img src="https://aimeos.org/check?type={type}&version={version}" title="Aimeos update" />
+		</a>
+
 		<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapse-navbar">&#9776;</button>
 
 		<div class="collapse navbar-toggleable-xs" id="collapse-navbar">
-			<a class="navbar-brand" href="https://aimeos.org/update?type={type}&version={version}">
-				<img src="https://aimeos.org/check?type={type}&version={version}" title="Aimeos update" />
-			</a>
 			<ul class="nav navbar-nav">
 				<li class="nav-item active">
 					<a class="nav-link" href="<?php echo $enc->attr( $this->url( $extTarget, $extCntl, $extAction, $params, array(), $extConfig ) ); ?>">
 						<?php echo $enc->html( $this->translate( 'admin', 'Expert mode' ) ); ?>
 					</a>
 				</li>
-			</ul>
-		</div>
+				<li class="nav-item">
 
-		<div class="btn-group">
-			<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<?php echo $enc->attr( $this->param( 'lang', $this->translate( 'admin', 'Language' ) ) ); ?>
-			</button>
-			<div class="dropdown-menu">
+					<div class="btn-group">
+						<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<?php echo $enc->attr( $this->param( 'lang', $this->translate( 'admin', 'Language' ) ) ); ?>
+						</button>
+						<div class="dropdown-menu">
 <?php foreach( $this->get( 'pageLanguages', array() ) as $langid ) : ?>
-				<a class="dropdown-item"
-					href="<?php echo $enc->attr( $this->url( $target, $cntl, $action, array( 'lang' => $langid ) + $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $langid ); ?>
-				</a>
+							<a class="dropdown-item"
+								href="<?php echo $enc->attr( $this->url( $target, $cntl, $action, array( 'lang' => $langid ) + $params, array(), $config ) ); ?>">
+								<?php echo $enc->html( $langid ); ?>
+							</a>
 <?php endforeach; ?>
-			</div>
-		</div>
+						</div>
+					</div>
 
-		<div class="btn-group">
-			<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<?php echo $enc->attr( $this->value( $sites, $site, $this->translate( 'admin', 'Site' ) ) ); ?>
-			</button>
-			<div class="dropdown-menu">
+				</li>
+				<li class="nav-item">
+
+					<div class="btn-group">
+						<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<?php echo $enc->attr( $this->value( $sites, $site, $this->translate( 'admin', 'Site' ) ) ); ?>
+						</button>
+						<div class="dropdown-menu">
 <?php foreach( $sites as $code => $label ) : ?>
-				<a class="dropdown-item"
-					href="<?php echo $enc->attr( $this->url( $target, $cntl, $action, array( 'site' => $code ) + $params, array(), $config ) ); ?>">
-					<?php echo $enc->html( $label ); ?>
-				</a>
+							<a class="dropdown-item"
+								href="<?php echo $enc->attr( $this->url( $target, $cntl, $action, array( 'site' => $code ) + $params, array(), $config ) ); ?>">
+								<?php echo $enc->html( $label ); ?>
+							</a>
 <?php endforeach; ?>
-			</div>
+						</div>
+					</div>
+
+				</li>
+			</ul>
 		</div>
 
 	</nav>
