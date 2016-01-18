@@ -53,6 +53,13 @@ Ext.onReady(function() {
             tbar : [
                 '<a href="' + updateurl + '" target="_blank"><img class="icon-update" src="' + checkurl + '" /></a>',
                 '->',
+                {
+                    xtype : 'button',
+                    text: MShop.I18n.dt('admin', 'Simple mode'),
+                    handler: function() {
+                        window.location.href = MShop.config.jqadmurl;
+                    }
+                },
                 MShop.i18n.available ? {
                     xtype : 'MShop.elements.siteLanguage.combo'
                 } : {},
