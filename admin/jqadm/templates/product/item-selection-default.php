@@ -41,7 +41,7 @@ $enc = $this->encoder();
 						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Code' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="form-control item-code" type="text" name="selection[product.code][]" required="required"
+								<input class="form-control item-code" type="text" name="selection[product.code][]"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'EAN, SKU or article number (required)' ) ); ?>"
 									value="<?php echo $enc->attr( $code ); ?>">
 							</div>
@@ -49,7 +49,7 @@ $enc = $this->encoder();
 						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Label' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="form-control item-label" type="text" name="selection[product.label][]" required="required"
+								<input class="form-control item-label" type="text" name="selection[product.label][]"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Internal name (required)' ) ); ?>"
 									value="<?php echo $enc->attr( $this->value( $map, 'product.label' ) ); ?>">
 							</div>

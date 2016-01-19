@@ -530,7 +530,9 @@ class Standard
 				$item = $litem->getRefItem();
 			}
 
-			$code = $view->param( 'selection/product.code/' . $idx );
+			if( ( $code = $view->param( 'selection/product.code/' . $idx ) ) === '' ) {
+				continue;
+			}
 
 			$item->setCode( $code );
 			$item->setLabel( $view->param( 'selection/product.label/' . $idx ) );

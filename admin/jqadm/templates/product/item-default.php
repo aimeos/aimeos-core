@@ -21,7 +21,11 @@ $listCntl = $this->config( 'admin/jqadm/url/search/controller', 'jqadm' );
 $listAction = $this->config( 'admin/jqadm/url/search/action', 'search' );
 $listConfig = $this->config( 'admin/jqadm/url/search/config', array() );
 
-$params = $this->param();
+$params = array(
+	'resource' => $this->param( 'resource' ),
+	'site' => $this->param( 'site' ),
+	'id' => $this->param( 'id' )
+);
 
 ?>
 <?php $this->block()->start( 'jqadm_content' ); ?>
