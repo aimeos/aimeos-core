@@ -40,7 +40,7 @@ $delCntl = $this->config( 'admin/jqadm/url/delete/controller', 'jqadm' );
 $delAction = $this->config( 'admin/jqadm/url/delete/action', 'delete' );
 $delConfig = $this->config( 'admin/jqadm/url/delete/config', array() );
 
-$params = $this->get( 'listParams', array() );
+$params = $this->get( 'pageParams', array() );
 
 $filterParams = array(
 	'operators' => $this->get( 'filterOperators', array() ),

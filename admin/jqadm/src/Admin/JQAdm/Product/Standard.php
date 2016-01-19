@@ -292,7 +292,7 @@ class Standard
 			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 			$search = $this->initCriteria( $manager->createSearch(), $view->param() );
 
-			$view->listParams = $this->getClientParams();
+			$view->pageParams = $this->getClientParams();
 			$view->items = $manager->searchItems( $search, array(), $total );
 			$view->filterOperators = $search->getOperators();
 			$view->total = $total;
@@ -417,7 +417,7 @@ class Standard
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
-		$view->itemParams = $this->getClientParams();
+		$view->pageParams = $this->getClientParams();
 		$view->itemData = (array) $view->param( 'item', array() );
 		$view->itemTypes = $this->getTypeItems();
 		$view->item = $manager->createItem();
@@ -428,6 +428,10 @@ class Standard
 
 		/** admin/jqadm/product/domains
 		 * List of domain items that should be fetched along with the product
+		 *
+		 * If you need to display additional content, you can configure your own
+		 * list of domains (attribute, media, price, product, text, etc. are
+		 * domains) whose items are fetched from the storage.
 		 *
 		 * @param array List of domain names
 		 * @since 2016.01

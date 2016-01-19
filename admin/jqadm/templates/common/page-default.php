@@ -25,8 +25,10 @@ $extConfig = $this->config( 'admin/extjs/url/config', array() );
 $sites = $this->get( 'pageSites', array() );
 $site = $this->param( 'site' );
 
-$params = $this->param();
 $extParams = array( 'site' => $site, 'lang' => $this->param( 'lang' ) );
+
+$params = $this->get( 'pageParams', array() );
+$params['id'] = $this->param( 'id', '' );
 
 ?>
 <div class="aimeos" data-url="<?php echo $enc->attr( $this->url( $jsonTarget, $jsonCntl, $jsonAction, array( 'site' => $site ), array(), $jsonConfig ) ); ?>">

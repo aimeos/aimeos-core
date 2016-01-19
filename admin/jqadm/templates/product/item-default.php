@@ -21,7 +21,7 @@ $listCntl = $this->config( 'admin/jqadm/url/search/controller', 'jqadm' );
 $listAction = $this->config( 'admin/jqadm/url/search/action', 'search' );
 $listConfig = $this->config( 'admin/jqadm/url/search/config', array() );
 
-$params = $this->get( 'itemParams', array() );
+$params = $this->get( 'pageParams', array() );
 $params['id'] = $this->param( 'id', '' );
 
 ?>
