@@ -298,25 +298,18 @@ class Standard
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view )
 	{
-		if( $view->item->getType() !== 'bundle' ) {
-			return;
-		}
+		$data = (array) $view->param( 'bundle', array() );
 
-		$view->bundleData = (array) $view->param( 'bundle', array() );
-
-		if( !empty( $view->bundleData ) ) {
-			return;
-		}
-
-		$data = array();
-
-		foreach( $view->item->getListItems( 'product', 'default' ) as $listItem )
+		if( empty( $data ) )
 		{
-			$refItem = $listItem->getRefItem();
-			$data['product.label'][] = ( $refItem ? $refItem->getLabel() : '' );
+			foreach( $view->item->getListItems( 'product', 'default' ) as $listItem )
+			{
+				$refItem = $listItem->getRefItem();
+				$data['product.label'][] = ( $refItem ? $refItem->getLabel() : '' );
 
-			foreach( $listItem->toArray() as $key => $value ) {
-				$data[$key][] = $value;
+				foreach( $listItem->toArray() as $key => $value ) {
+					$data[$key][] = $value;
+				}
 			}
 		}
 

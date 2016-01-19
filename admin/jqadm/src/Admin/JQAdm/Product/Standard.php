@@ -267,7 +267,7 @@ class Standard
 		}
 		catch( \Exception $e )
 		{
-			$error = array( 'product-item' => $e->getMessage() . ' - ' . $e->getTraceAsString() );
+			$error = array( 'product-item' => $e->getMessage() );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
 		}

@@ -38,7 +38,7 @@ $enc = $this->encoder();
 						<td>
 							<input class="item-listid" type="hidden" name="bundle[product.lists.id][]" value="" disabled="disabled" />
 							<input class="item-label" type="hidden" name="bundle[product.label][]" value="" disabled="disabled" />
-							<select class="combobox-prototype item-refid" name="bundle[product.id][]" disabled="disabled">
+							<select class="combobox-prototype item-refid" name="bundle[product.lists.refid][]" disabled="disabled">
 							</select>
 						</td>
 						<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>

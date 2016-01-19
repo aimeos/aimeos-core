@@ -317,29 +317,33 @@ class Standard
 		$context = $this->getContext();
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'text/type' );
 
-		$view->textTypes = $manager->searchItems( $manager->createSearch() );
-		$view->textData = (array) $view->param( 'text', array() );
+		$data = (array) $view->param( 'text', array() );
 
-		if( !empty( $view->textData ) || ( $id = $view->item->getId() ) === null ) {
-			return;
-		}
-
-		$data = array();
-		$data['langid'] = array();
-
-		foreach( $view->item->getListItems( 'text', 'default' ) as $listItem )
+		if( empty( $data ) && ( $id = $view->item->getId() ) !== null )
 		{
-			$refItem = $listItem->getRefItem();
-			$type = $refItem->getType();
+			if( !isset( $data['langid'] ) ) {
+				$data['langid'] = array();
+			}
 
-			$data[$type]['listid'][] = $listItem->getId();
-			$data[$type]['content'][] = $refItem->getContent();
+			foreach( $view->item->getListItems( 'text', 'default' ) as $listItem )
+			{
+				$refItem = $listItem->getRefItem();
+				$type = $refItem->getType();
 
-			if( count( $data[$type]['listid'] ) > count( $data['langid'] ) ) {
-				$data['langid'][] = $refItem->getLanguageId();
+				$data[$type]['listid'][] = $listItem->getId();
+				$data[$type]['content'][] = $refItem->getContent();
+
+				if( count( $data[$type]['listid'] ) > count( $data['langid'] ) ) {
+					$data['langid'][] = $refItem->getLanguageId();
+				}
 			}
 		}
 
+		if( !isset( $data['langid'] ) || empty( $data['langid'] ) ) { // show at least one block
+			$data['langid'][] = $context->getLocale()->getLanguageId();
+		}
+
+		$view->textTypes = $manager->searchItems( $manager->createSearch() );
 		$view->textData = $data;
 	}
 

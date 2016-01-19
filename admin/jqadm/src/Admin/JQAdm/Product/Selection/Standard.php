@@ -471,17 +471,17 @@ class Standard
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view, $copy = false )
 	{
-		if( $view->item->getType() !== 'select' ) {
-			return;
+		$data = $this->getDataParams( $view );
+
+		if( empty( $data ) ) {
+			$data = $this->getDataExisting( $view, $copy );
 		}
 
-		$view->selectionData = $this->getDataParams( $view );
-
-		if( !empty( $view->selectionData ) ) {
-			return;
+		if( empty( $data ) ) { // show at least one block
+			$data['']['product.lists.id'] = '';
 		}
 
-		$view->selectionData = $this->getDataExisting( $view, $copy );
+		$view->selectionData = $data;
 	}
 
 

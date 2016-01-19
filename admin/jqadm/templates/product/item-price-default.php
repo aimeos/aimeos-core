@@ -51,7 +51,7 @@ $enc = $this->encoder();
 						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Label' ) ); ?></label>
 							<div class="col-sm-9">
-							<input class="form-control item-label" type="text" name="price[price.label][]" required="required"
+							<input class="form-control item-label" type="text" name="price[price.label][]"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Label' ) ); ?>"
 									value="<?php echo $enc->attr( $this->get( 'priceData/price.label/' . $idx ) ); ?>" />
 							</div>
@@ -59,8 +59,7 @@ $enc = $this->encoder();
 						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Minimum quantity' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="form-control item-quantity" type="number" name="price[price.quantity][]"
-									required="required" step="1" min="1" max="2147483647"
+								<input class="form-control item-quantity" type="number" name="price[price.quantity][]" step="1" min="1" max="2147483647"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Minimum quantity' ) ); ?>"
 									value="<?php echo $enc->attr( $this->get( 'priceData/price.quantity/' . $idx ) ); ?>" />
 							</div>
@@ -68,10 +67,17 @@ $enc = $this->encoder();
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group row mandatory">
+							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Tax rate in %' ) ); ?></label>
+							<div class="col-sm-9">
+								<input class="form-control item-taxrate" type="text" name="price[price.taxrate][]" data-pattern="^[0-9]+(\.[0-9]+)?$"
+									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Tax rate in %' ) ); ?>"
+									value="<?php echo $enc->attr( $this->get( 'priceData/price.taxrate/' . $idx ) ); ?>" />
+							</div>
+						</div>
+						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Actual current price' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="form-control item-value" type="text" name="price[price.value][]"
-									required="required" pattern="^[0-9]+(\.[0-9]+)?$"
+								<input class="form-control item-value" type="text" name="price[price.value][]" data-pattern="^[0-9]+(\.[0-9]+)?$"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Actual current price' ) ); ?>"
 									value="<?php echo $enc->attr( $this->get( 'priceData/price.value/' . $idx ) ); ?>" />
 							</div>
@@ -79,7 +85,7 @@ $enc = $this->encoder();
 						<div class="form-group row optional">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Substracted rebate amount' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="form-control item-rebate" type="text" name="price[price.rebate][]" pattern="^[0-9]+(\.[0-9]+)?$"
+								<input class="form-control item-rebate" type="text" name="price[price.rebate][]" data-pattern="^([0-9]+(\.[0-9]+)?)?$"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Substracted rebate amount' ) ); ?>"
 									value="<?php echo $enc->attr( $this->get( 'priceData/price.rebate/' . $idx ) ); ?>" />
 							</div>
@@ -87,18 +93,9 @@ $enc = $this->encoder();
 						<div class="form-group row optional">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Costs per item' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="form-control item-costs" type="text" name="price[price.costs][]" pattern="^[0-9]+(\.[0-9]+)?$"
+								<input class="form-control item-costs" type="text" name="price[price.costs][]" data-pattern="^([0-9]+(\.[0-9]+)?)?$"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Costs per item' ) ); ?>"
 									value="<?php echo $enc->attr( $this->get( 'priceData/price.costs/' . $idx ) ); ?>" />
-							</div>
-						</div>
-						<div class="form-group row mandatory">
-							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Tax rate in %' ) ); ?></label>
-							<div class="col-sm-9">
-								<input class="form-control item-taxrate" type="text" name="price[price.taxrate][]"
-									required="required" pattern="^[0-9]+(\.[0-9]+)?$"
-									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Tax rate in %' ) ); ?>"
-									value="<?php echo $enc->attr( $this->get( 'priceData/price.taxrate/' . $idx ) ); ?>" />
 							</div>
 						</div>
 					</div>

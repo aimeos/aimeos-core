@@ -300,28 +300,25 @@ class Standard
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view )
 	{
-		$view->priceTypes = $this->getPriceTypes();
-		$view->priceData = (array) $view->param( 'price', array() );
+		$data = (array) $view->param( 'price', array() );
 
-		if( !empty( $view->priceData ) || ( $id = $view->item->getId() ) === null ) {
-			return;
-		}
-
-		$data = array();
-
-		foreach( $view->item->getListItems( 'price' ) as $id => $listItem )
+		if( empty( $view->priceData ) && ( $id = $view->item->getId() ) !== null )
 		{
-			$data['product.lists.id'][] = $id;
+			foreach( $view->item->getListItems( 'price' ) as $id => $listItem )
+			{
+				$data['product.lists.id'][] = $id;
 
-			foreach( $listItem->getRefItem()->toArray() as $key => $value ) {
-				$data[$key][] = $value;
+				foreach( $listItem->getRefItem()->toArray() as $key => $value ) {
+					$data[$key][] = $value;
+				}
 			}
 		}
 
-		if( !isset( $data['product.lists.id'] ) ) { // show at least one block
-			$data['product.lists.id'][] = '';
+		if( !isset( $data['price.currencyid'] ) ) { // show at least one block
+			$data['price.currencyid'][] = $this->getContext()->getLocale()->getCurrencyId();
 		}
 
+		$view->priceTypes = $this->getPriceTypes();
 		$view->priceData = $data;
 	}
 
