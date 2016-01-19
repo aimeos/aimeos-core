@@ -14,7 +14,7 @@ $enc = $this->encoder();
 		aria-expanded="true" aria-controls="product-item-stock-data">
 		<?php echo $enc->html( $this->translate( 'admin', 'Stock level' ) ); ?>
 	</div>
-	<div id="product-item-stock-data" class="item-stock card-block panel-collapse collapse" role="tabpanel" aria-labelledby="product-item-stock">
+	<div id="product-item-stock-data" class="item-stock card-block panel-collapse collapse table-responsive" role="tabpanel" aria-labelledby="product-item-stock">
 		<table class="stock-list table table-default">
 			<thead>
 				<tr>

@@ -12,8 +12,8 @@ $enc = $this->encoder();
 	<div id="product-item-image" class="header card-header" role="tab" data-toggle="collapse" data-parent="#accordion" href="#product-item-image-data" aria-expanded="true" aria-controls="product-item-image-data">
 		<?php echo $enc->html( $this->translate( 'admin', 'Images' ) ); ?>
 	</div>
-	<div id="product-item-image-data" class="item-image card-block panel-collapse collapse" role="tabpanel" aria-labelledby="product-item-image">
-		<table class="image-list table table-default">
+	<div id="product-item-image-data" class="item-image card-block panel-collapse collapse table-responsive" role="tabpanel" aria-labelledby="product-item-image">
+	<table class="image-list table table-default">
 			<thead>
 				<tr>
 			  		<th class="image-preview"><?php echo $enc->html( $this->translate( 'admin', 'Preview' ) ); ?></th>

@@ -24,9 +24,9 @@ $enc = $this->encoder();
 				<div id="product-item-selection-group-item-<?php echo $enc->attr( $code ); ?>" class="header card-header collapsed"
 					data-toggle="collapse" href="#product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>"
 					aria-expanded="true" aria-controls="product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>">
-					<span class="item-code"><?php echo $enc->html( $code ); ?></span>
 					<div class="btn btn-secondary fa fa-files-o"></div>
 					<div class="btn btn-danger fa fa-trash"></div>
+					<span class="item-code header-label"><?php echo $enc->html( $code ); ?></span>
 				</div>
 				<div id="product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>" class="card-block panel-collapse collapse">
 					<div class="col-lg-6">
