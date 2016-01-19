@@ -12,7 +12,7 @@ $controller = $this->config( 'admin/jqadm/url/search/controller', 'jqadm' );
 $action = $this->config( 'admin/jqadm/url/search/action', 'search' );
 $config = $this->config( 'admin/jqadm/url/search/config', array() );
 
-$params = $this->param();
+$params = $this->get( 'pageParams', array() );
 
 $total = $this->get( 'total', 0 );
 $offset = max( $this->param( 'page/offset', 0 ), 0 );

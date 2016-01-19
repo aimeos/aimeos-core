@@ -212,6 +212,27 @@ abstract class Base
 
 
 	/**
+	 * Returns the known client parameters and their values
+	 *
+	 * @param array $names List of parameter names
+	 * @return array Associative list of parameters names as key and their values
+	 */
+	protected function getClientParams( $names = array( 'resource', 'site', 'lang', 'fields', 'filter', 'page', 'sort' ) )
+	{
+		$list = array();
+
+		foreach( $names as $name )
+		{
+			if( ( $val = $this->view->param( $name ) ) !== null ) {
+				$list[$name] = $val;
+			}
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the context object.
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
