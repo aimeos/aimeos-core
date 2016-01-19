@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-13 00:55+0100\n"
-"PO-Revision-Date: 2016-01-13 14:55+0000\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"POT-Creation-Date: 2016-01-19 19:12+0100\n"
+"PO-Revision-Date: 2016-01-19 18:13+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,11 +21,15 @@ msgstr ""
 #: src/panel/price/ItemUi.js:99
 #: jqadm/templates/product/item-price-default.php:71
 #: jqadm/templates/product/item-price-default.php:75
+#: jqadm/templates/product/item-price-default.php:78
+#: jqadm/templates/product/item-price-default.php:81
+#: extjs/src/panel/price/ItemUi.js:99
 msgid "Actual current price"
 msgstr "Güncel cari fiyat"
 
 #: src/panel/AbstractListUi.js:138 src/panel/ConfigUi.js:37
 #: jqadm/templates/product/list-default.php:168
+#: extjs/src/panel/AbstractListUi.js:138 extjs/src/panel/ConfigUi.js:37
 msgid "Add"
 msgstr "Ekle"
 
@@ -36,16 +40,23 @@ msgstr "Filtre ekle"
 
 #: src/panel/supplier/address/ListUi.js:114
 #: src/panel/customer/address/ListUi.js:114
+#: extjs/src/panel/supplier/address/ListUi.js:114
+#: extjs/src/panel/customer/address/ListUi.js:114
 msgid "Additional"
 msgstr "Ek"
 
 #: src/panel/supplier/address/ItemUi.js:96 src/panel/customer/ItemUi.js:180
 #: src/panel/customer/address/ItemUi.js:98
+#: extjs/src/panel/supplier/address/ItemUi.js:96
+#: extjs/src/panel/customer/ItemUi.js:180
+#: extjs/src/panel/customer/address/ItemUi.js:98
 msgid "Additional information, e.g. flat number"
 msgstr "Ek bilgiler, örn. daire numarası"
 
 #: src/panel/supplier/address/ListUi.js:26
 #: src/panel/customer/address/ListUi.js:26
+#: extjs/src/panel/supplier/address/ListUi.js:26
+#: extjs/src/panel/customer/address/ListUi.js:26
 msgid "Address"
 msgstr "Adres"
 
@@ -53,6 +64,11 @@ msgstr "Adres"
 #: src/panel/customer/address/ItemUi.js:84
 #: src/panel/order/address/ItemUi.js:80
 #: src/panel/order/address/DeliveryItemUi.js:65
+#: extjs/src/panel/supplier/address/ItemUi.js:82
+#: extjs/src/panel/customer/ItemUi.js:166
+#: extjs/src/panel/customer/address/ItemUi.js:84
+#: extjs/src/panel/order/address/ItemUi.js:80
+#: extjs/src/panel/order/address/DeliveryItemUi.js:65
 msgid "Address 1"
 msgstr "Adres 1"
 
@@ -60,6 +76,11 @@ msgstr "Adres 1"
 #: src/panel/customer/address/ItemUi.js:91
 #: src/panel/order/address/ItemUi.js:84
 #: src/panel/order/address/DeliveryItemUi.js:69
+#: extjs/src/panel/supplier/address/ItemUi.js:89
+#: extjs/src/panel/customer/ItemUi.js:173
+#: extjs/src/panel/customer/address/ItemUi.js:91
+#: extjs/src/panel/order/address/ItemUi.js:84
+#: extjs/src/panel/order/address/DeliveryItemUi.js:69
 msgid "Address 2"
 msgstr "Adres 2"
 
@@ -67,118 +88,151 @@ msgstr "Adres 2"
 #: src/panel/customer/address/ItemUi.js:97
 #: src/panel/order/address/ItemUi.js:88
 #: src/panel/order/address/DeliveryItemUi.js:73
+#: extjs/src/panel/supplier/address/ItemUi.js:95
+#: extjs/src/panel/customer/ItemUi.js:179
+#: extjs/src/panel/customer/address/ItemUi.js:97
+#: extjs/src/panel/order/address/ItemUi.js:88
+#: extjs/src/panel/order/address/DeliveryItemUi.js:73
 msgid "Address 3"
 msgstr "Adres 3"
 
 #: src/panel/order/address/ItemUi.js:52
 #: src/panel/order/address/DeliveryItemUi.js:37
+#: extjs/src/panel/order/address/ItemUi.js:52
+#: extjs/src/panel/order/address/DeliveryItemUi.js:37
 msgid "Address ID"
 msgstr "Adres ID"
 
 #: src/panel/order/address/ItemUi.js:18
+#: extjs/src/panel/order/address/ItemUi.js:18
 msgid "Addresses"
 msgstr "Adresler"
 
 #: src/panel/AbstractListItemPickerUi.js:341 src/elements/language.js:19
-#: src/elements/language.js:45
+#: src/elements/language.js:45 extjs/src/panel/AbstractListItemPickerUi.js:341
+#: extjs/src/elements/language.js:19 extjs/src/elements/language.js:45
 msgid "All"
 msgstr "Hepsi"
 
 #: src/panel/attribute/ItemPickerUi.js:16
+#: extjs/src/panel/attribute/ItemPickerUi.js:16
 msgid "Associated attributes"
 msgstr "İlişkili nitelikler"
 
 #: src/panel/customer/group/ItemPickerUi.js:16
+#: extjs/src/panel/customer/group/ItemPickerUi.js:16
 msgid "Associated customer groups"
 msgstr "İlişkili müşteri grupları"
 
 #: src/panel/customer/ItemPickerUi.js:16
+#: extjs/src/panel/customer/ItemPickerUi.js:16
 msgid "Associated customers"
 msgstr "İlişkili müşteriler"
 
-#: src/panel/media/ItemPickerUi.js:16
+#: src/panel/media/ItemPickerUi.js:16 extjs/src/panel/media/ItemPickerUi.js:16
 msgid "Associated media"
 msgstr "İlişkili medya"
 
-#: src/panel/price/ItemPickerUi.js:16
+#: src/panel/price/ItemPickerUi.js:16 extjs/src/panel/price/ItemPickerUi.js:16
 msgid "Associated prices"
 msgstr "İlişkili fiyatlar"
 
 #: src/panel/product/ItemPickerUi.js:15
+#: extjs/src/panel/product/ItemPickerUi.js:15
 msgid "Associated products"
 msgstr "İlişkili ürünler"
 
 #: src/panel/product/tag/ItemPickerUi.js:15 src/panel/tag/ItemPickerUi.js:16
+#: extjs/src/panel/tag/ItemPickerUi.js:16
 msgid "Associated tags"
 msgstr "İlişkili etiketler"
 
-#: src/panel/text/ItemPickerUi.js:15
+#: src/panel/text/ItemPickerUi.js:15 extjs/src/panel/text/ItemPickerUi.js:15
 msgid "Associated texts"
 msgstr "İlişkili metinler"
 
 #: src/panel/attribute/ItemPickerUi.js:11 src/panel/attribute/ListUi.js:29
 #: src/panel/order/service/attribute/ListUiSmall.js:11
 #: src/panel/order/product/attribute/ListUiSmall.js:11
-#: src/elements/domain.js:47
+#: src/elements/domain.js:47 extjs/src/panel/attribute/ItemPickerUi.js:11
+#: extjs/src/panel/attribute/ListUi.js:29
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:11
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:11
+#: extjs/src/elements/domain.js:47
 msgid "Attribute"
 msgstr "Nitelik"
 
 #: src/panel/attribute/type/ListUi.js:34
+#: extjs/src/panel/attribute/type/ListUi.js:34
 msgid "Attribute type"
 msgstr "Nitelik türü"
 
 #. : Attribute type item panel title with type label ({0}) and site code ({1)}
 #: src/panel/attribute/type/ItemUi.js:23
+#: extjs/src/panel/attribute/type/ItemUi.js:23
 #, python-brace-format
 msgid "Attribute type: {0} ({1})"
 msgstr "Nitelik türü: {0} ({1})"
 
 #. : Attribute item panel title with attribute label ({0}) and site code ({1)}
 #: src/panel/attribute/ItemUi.js:130 src/panel/attribute/ItemUi.js:129
+#: extjs/src/panel/attribute/ItemUi.js:129
 #, python-brace-format
 msgid "Attribute: {0} ({1})"
 msgstr "Nitelik: {0} ({1})"
 
 #: src/panel/attribute/ItemPickerUi.js:23
+#: extjs/src/panel/attribute/ItemPickerUi.js:23
 msgid "Available attributes"
 msgstr "Mevcut nitelikler"
 
 #: src/panel/customer/group/ListUiSmall.js:26
 #: src/panel/customer/group/ItemPickerUi.js:23
+#: extjs/src/panel/customer/group/ListUiSmall.js:26
+#: extjs/src/panel/customer/group/ItemPickerUi.js:23
 msgid "Available customer groups"
 msgstr "Mevcut müşteri grupları"
 
 #: src/panel/customer/ListUiSmall.js:26 src/panel/customer/ItemPickerUi.js:23
+#: extjs/src/panel/customer/ListUiSmall.js:26
+#: extjs/src/panel/customer/ItemPickerUi.js:23
 msgid "Available customers"
 msgstr "Mevcut müşteriler"
 
-#: src/panel/media/ItemPickerUi.js:23
+#: src/panel/media/ItemPickerUi.js:23 extjs/src/panel/media/ItemPickerUi.js:23
 msgid "Available media"
 msgstr "Mevcut medya"
 
-#: src/panel/price/ItemPickerUi.js:23
+#: src/panel/price/ItemPickerUi.js:23 extjs/src/panel/price/ItemPickerUi.js:23
 msgid "Available prices"
 msgstr "Mevcut fiyatlar"
 
 #: src/panel/product/ItemPickerUi.js:22
+#: extjs/src/panel/product/ItemPickerUi.js:22
 msgid "Available products"
 msgstr "Mevcut ürünler"
 
 #: src/panel/product/tag/ItemPickerUi.js:22 src/panel/tag/ItemPickerUi.js:23
+#: extjs/src/panel/tag/ItemPickerUi.js:23
 msgid "Available tags"
 msgstr "Mevcut etiketler"
 
-#: src/panel/text/ItemPickerUi.js:22
+#: src/panel/text/ItemPickerUi.js:22 extjs/src/panel/text/ItemPickerUi.js:22
 msgid "Available texts"
 msgstr "Mevcut metinler"
 
 #: src/panel/product/stock/ItemUi.js:93
 #: jqadm/templates/product/item-stock-default.php:23
+#: extjs/src/panel/product/stock/ItemUi.js:93
 msgid "Back in stock"
 msgstr "Stoktlarda"
 
 #: src/panel/order/service/ListUi.js:71 src/panel/order/product/ListUi.js:71
 #: src/panel/order/OrderItemUi.js:35 src/panel/order/coupon/ListUi.js:97
+#: extjs/src/panel/order/service/ListUi.js:71
+#: extjs/src/panel/order/product/ListUi.js:71
+#: extjs/src/panel/order/OrderItemUi.js:35
+#: extjs/src/panel/order/coupon/ListUi.js:97
 msgid "Base ID"
 msgstr "Baz ID"
 
@@ -198,15 +252,40 @@ msgstr "Baz ID"
 #: src/panel/locale/currency/ItemUi.js:29 src/panel/locale/site/ItemUi.js:29
 #: src/panel/plugin/ItemUi.js:25 src/panel/tag/ItemUi.js:24
 #: jqadm/templates/product/item-default.php:36
+#: jqadm/templates/product/item-default.php:37
+#: extjs/src/panel/type/AbstractTypeItemUi.js:25
+#: extjs/src/panel/service/ItemUi.js:24 extjs/src/panel/supplier/ItemUi.js:20
+#: extjs/src/panel/supplier/address/ItemUi.js:23
+#: extjs/src/panel/media/ItemUi.js:24 extjs/src/panel/job/ItemUi.js:22
+#: extjs/src/panel/price/ItemUi.js:24 extjs/src/panel/cache/ItemUi.js:23
+#: extjs/src/panel/product/ItemUi.js:25
+#: extjs/src/panel/product/stock/ItemUi.js:31
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:24
+#: extjs/src/panel/product/property/ItemUi.js:32
+#: extjs/src/panel/text/ItemUi.js:23 extjs/src/panel/attribute/ItemUi.js:38
+#: extjs/src/panel/tag/ItemUi.js:24 extjs/src/panel/catalog/ItemUi.js:28
+#: extjs/src/panel/coupon/code/ItemUi.js:26
+#: extjs/src/panel/coupon/ItemUi.js:26 extjs/src/panel/customer/ItemUi.js:23
+#: extjs/src/panel/customer/group/ItemUi.js:25
+#: extjs/src/panel/customer/address/ItemUi.js:25
+#: extjs/src/panel/order/ItemUi.js:32 extjs/src/panel/locale/ItemUi.js:28
+#: extjs/src/panel/locale/language/ItemUi.js:29
+#: extjs/src/panel/locale/currency/ItemUi.js:29
+#: extjs/src/panel/locale/site/ItemUi.js:29
+#: extjs/src/panel/plugin/ItemUi.js:25
 msgid "Basic"
 msgstr "Temel bilgiler"
 
 #: src/panel/customer/ItemUi.js:114 src/panel/order/address/ItemUi.js:34
+#: extjs/src/panel/customer/ItemUi.js:114
+#: extjs/src/panel/order/address/ItemUi.js:34
 msgid "Billing address"
 msgstr "Fatura adresi"
 
 #: src/panel/customer/ItemUi.js:90 src/panel/customer/ListUiSmall.js:70
-#: src/panel/customer/ListUi.js:75
+#: src/panel/customer/ListUi.js:75 extjs/src/panel/customer/ItemUi.js:90
+#: extjs/src/panel/customer/ListUiSmall.js:70
+#: extjs/src/panel/customer/ListUi.js:75
 msgid "Birthday"
 msgstr "Doğum günü"
 
@@ -214,26 +293,30 @@ msgstr "Doğum günü"
 msgid "Bundles"
 msgstr "Birlikte verilenler"
 
-#: src/panel/cache/ListUiSmall.js:27
+#: src/panel/cache/ListUiSmall.js:27 extjs/src/panel/cache/ListUiSmall.js:27
 msgid "Cache"
 msgstr "Önbellek"
 
-#: src/panel/cache/ItemUi.js:13
+#: src/panel/cache/ItemUi.js:13 extjs/src/panel/cache/ItemUi.js:13
 msgid "Cache item details"
 msgstr "Önbellek öğe detayları"
 
 #: src/panel/AbstractItemUi.js:143 src/elements/exportlanguage.js:321
 #: jqadm/templates/product/item-default.php:138
+#: jqadm/templates/product/item-default.php:139
+#: extjs/src/panel/AbstractItemUi.js:143
+#: extjs/src/elements/exportlanguage.js:321
 msgid "Cancel"
 msgstr "İptal"
 
 #: src/panel/product/UsedByCatalogListUi.js:29 src/panel/catalog/TreeUi.js:29
-#: src/elements/domain.js:48
+#: src/elements/domain.js:48 extjs/src/panel/product/UsedByCatalogListUi.js:29
+#: extjs/src/panel/catalog/TreeUi.js:29 extjs/src/elements/domain.js:48
 msgid "Catalog"
 msgstr "Katalog"
 
 #. : Catalog item panel title with catalog label ({0}) and site code ({1)}
-#: src/panel/catalog/ItemUi.js:107
+#: src/panel/catalog/ItemUi.js:107 extjs/src/panel/catalog/ItemUi.js:107
 #, python-brace-format
 msgid "Catalog: {0} ({1})"
 msgstr "Katalog: {0} ({1})"
@@ -249,11 +332,21 @@ msgstr "Kategoriler"
 #: src/panel/customer/address/ListUi.js:125
 #: src/panel/order/address/ItemUi.js:96
 #: src/panel/order/address/DeliveryItemUi.js:81
+#: extjs/src/panel/supplier/address/ItemUi.js:107
+#: extjs/src/panel/supplier/address/ListUi.js:125
+#: extjs/src/panel/customer/ItemUi.js:191
+#: extjs/src/panel/customer/address/ItemUi.js:109
+#: extjs/src/panel/customer/address/ListUi.js:125
+#: extjs/src/panel/order/address/ItemUi.js:96
+#: extjs/src/panel/order/address/DeliveryItemUi.js:81
 msgid "City"
 msgstr "Şehir"
 
 #: src/panel/supplier/address/ItemUi.js:108 src/panel/customer/ItemUi.js:192
 #: src/panel/customer/address/ItemUi.js:110
+#: extjs/src/panel/supplier/address/ItemUi.js:108
+#: extjs/src/panel/customer/ItemUi.js:192
+#: extjs/src/panel/customer/address/ItemUi.js:110
 msgid "City name (required)"
 msgstr "Şehir ismi (gerekli)"
 
@@ -261,7 +354,7 @@ msgstr "Şehir ismi (gerekli)"
 msgid "Clear"
 msgstr "Temizle"
 
-#: src/panel/media/MediaField.js:64
+#: src/panel/media/MediaField.js:64 extjs/src/panel/media/MediaField.js:64
 msgid "Click to upload"
 msgstr "Yüklemek için tıklayın"
 
@@ -301,14 +394,58 @@ msgstr "Kapat"
 #: jqadm/templates/product/list-default.php:68
 #: jqadm/templates/product/list-default.php:119
 #: jqadm/templates/product/item-selection-default.php:42
+#: jqadm/templates/product/item-default.php:70
+#: extjs/src/panel/type/AbstractTypeItemUi.js:65
+#: extjs/src/panel/service/type/ListUi.js:67
+#: extjs/src/panel/service/ItemUi.js:71 extjs/src/panel/service/ListUi.js:63
+#: extjs/src/panel/supplier/ItemUi.js:55 extjs/src/panel/supplier/ListUi.js:54
+#: extjs/src/panel/media/type/ListUi.js:69
+#: extjs/src/panel/price/type/ListUi.js:69
+#: extjs/src/panel/product/type/ListUi.js:67
+#: extjs/src/panel/product/ItemUi.js:82
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:60
+#: extjs/src/panel/product/stock/warehouse/ListUi.js:54
+#: extjs/src/panel/product/ListUiSmall.js:54
+#: extjs/src/panel/product/UsedByProductListUi.js:133
+#: extjs/src/panel/product/ItemPickerUi.js:68
+#: extjs/src/panel/product/ListUi.js:65
+#: extjs/src/panel/product/UsedByCatalogListUi.js:141
+#: extjs/src/panel/text/type/ListUi.js:66
+#: extjs/src/panel/attribute/type/ListUi.js:69
+#: extjs/src/panel/attribute/ItemUi.js:85
+#: extjs/src/panel/attribute/ListUiSmall.js:71
+#: extjs/src/panel/attribute/ItemPickerUi.js:69
+#: extjs/src/panel/attribute/ListUi.js:66 extjs/src/panel/catalog/ItemUi.js:63
+#: extjs/src/panel/coupon/code/ItemUi.js:57
+#: extjs/src/panel/coupon/code/ListUi.js:48
+#: extjs/src/panel/customer/group/ItemUi.js:54
+#: extjs/src/panel/customer/group/ListUiSmall.js:42
+#: extjs/src/panel/customer/group/ItemPickerUi.js:47
+#: extjs/src/panel/order/service/ItemUi.js:71
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:87
+#: extjs/src/panel/order/service/ListUi.js:87
+#: extjs/src/panel/order/product/ItemUi.js:75
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:86
+#: extjs/src/panel/order/product/ListUi.js:93
+#: extjs/src/panel/locale/language/ItemUi.js:64
+#: extjs/src/panel/locale/language/ListUi.js:59
+#: extjs/src/panel/locale/currency/ItemUi.js:64
+#: extjs/src/panel/locale/currency/ListUi.js:59
+#: extjs/src/panel/locale/site/ItemUi.js:64
+#: extjs/src/panel/locale/site/ListUi.js:53
+#: extjs/src/panel/plugin/type/ListUi.js:69
 msgid "Code"
 msgstr "Kod"
 
-#: src/panel/coupon/code/ListUi.js:31
+#: src/panel/coupon/code/ListUi.js:31 extjs/src/panel/coupon/code/ListUi.js:31
 msgid "Codes"
 msgstr "Kodlar"
 
-#: src/panel/order/OrderItemUi.js:59
+#: jqadm/templates/product/list-default.php:63
+msgid "Columns"
+msgstr ""
+
+#: src/panel/order/OrderItemUi.js:59 extjs/src/panel/order/OrderItemUi.js:59
 msgid "Comment"
 msgstr "Yorum"
 
@@ -318,49 +455,79 @@ msgstr "Yorum"
 #: src/panel/customer/address/ListUi.js:71
 #: src/panel/order/address/ItemUi.js:56
 #: src/panel/order/address/DeliveryItemUi.js:41 src/elements/salutation.js:66
+#: extjs/src/panel/supplier/address/ItemUi.js:48
+#: extjs/src/panel/supplier/address/ListUi.js:71
+#: extjs/src/panel/customer/ItemUi.js:132
+#: extjs/src/panel/customer/address/ItemUi.js:50
+#: extjs/src/panel/customer/address/ListUi.js:71
+#: extjs/src/panel/order/address/ItemUi.js:56
+#: extjs/src/panel/order/address/DeliveryItemUi.js:41
+#: extjs/src/elements/salutation.js:66
 msgid "Company"
 msgstr "Şirket"
 
 #: src/panel/supplier/address/ItemUi.js:49 src/panel/customer/ItemUi.js:133
 #: src/panel/customer/address/ItemUi.js:51
+#: extjs/src/panel/supplier/address/ItemUi.js:49
+#: extjs/src/panel/customer/ItemUi.js:133
+#: extjs/src/panel/customer/address/ItemUi.js:51
 msgid "Company name"
 msgstr "Şirket adı"
 
 #: src/panel/service/ListUi.js:92 src/panel/ListItemListUi.js:194
 #: src/panel/coupon/ListUi.js:83 src/panel/locale/site/ListUi.js:68
 #: src/panel/plugin/ListUi.js:91 src/panel/ConfigUi.js:14
+#: extjs/src/panel/service/ListUi.js:92 extjs/src/panel/ListItemListUi.js:194
+#: extjs/src/panel/coupon/ListUi.js:83
+#: extjs/src/panel/locale/site/ListUi.js:68
+#: extjs/src/panel/plugin/ListUi.js:91 extjs/src/panel/ConfigUi.js:14
 msgid "Configuration"
 msgstr "Yapılandırma"
 
 #: src/panel/text/ItemUi.js:83 src/panel/text/ListUiSmall.js:81
 #: src/panel/text/ItemPickerUi.js:84 src/panel/text/ItemPickerUi.js:83
+#: extjs/src/panel/text/ItemUi.js:83 extjs/src/panel/text/ListUiSmall.js:81
+#: extjs/src/panel/text/ItemPickerUi.js:83
 msgid "Content"
 msgstr "İçerik"
 
 #: src/panel/AbstractListUi.js:149
 #: jqadm/templates/product/list-default.php:210
+#: extjs/src/panel/AbstractListUi.js:149
 msgid "Copy"
 msgstr "Kopyala"
 
 #: src/panel/price/ListUiSmall.js:142 src/panel/price/ItemPickerUi.js:145
 #: src/panel/order/service/ItemUi.js:83 src/panel/order/service/ListUi.js:100
 #: src/panel/order/product/ItemUi.js:91 src/panel/order/product/ListUi.js:110
-#: src/panel/order/OrderItemUi.js:55
+#: src/panel/order/OrderItemUi.js:55 extjs/src/panel/price/ListUiSmall.js:142
+#: extjs/src/panel/price/ItemPickerUi.js:145
+#: extjs/src/panel/order/service/ItemUi.js:83
+#: extjs/src/panel/order/service/ListUi.js:100
+#: extjs/src/panel/order/product/ItemUi.js:91
+#: extjs/src/panel/order/product/ListUi.js:110
+#: extjs/src/panel/order/OrderItemUi.js:55
 msgid "Costs"
 msgstr "Maliyetler"
 
 #: src/panel/price/ItemUi.js:111
 #: jqadm/templates/product/item-price-default.php:88
 #: jqadm/templates/product/item-price-default.php:91
+#: jqadm/templates/product/item-price-default.php:94
+#: jqadm/templates/product/item-price-default.php:97
 msgid "Costs per item"
 msgstr "Öğe başına maliyetler"
 
 #: src/panel/media/MediaField.js:153 src/panel/media/MediaField.js:208
-#: src/elements/importbutton.js:63
+#: src/elements/importbutton.js:63 extjs/src/panel/media/MediaField.js:153
+#: extjs/src/panel/media/MediaField.js:208
+#: extjs/src/elements/importbutton.js:63
 msgid "Could not upload file. Please notify your administrator"
 msgstr "Dosya yüklenemedi. Lütfen sistem yöneticinize bildirin."
 
 #: src/panel/coupon/code/ItemUi.js:65 src/panel/coupon/code/ListUi.js:54
+#: extjs/src/panel/coupon/code/ItemUi.js:65
+#: extjs/src/panel/coupon/code/ListUi.js:54
 msgid "Count"
 msgstr "Numara"
 
@@ -368,40 +535,53 @@ msgstr "Numara"
 #: src/panel/customer/address/ListUi.js:136
 #: src/panel/order/address/ItemUi.js:104
 #: src/panel/order/address/DeliveryItemUi.js:89
+#: extjs/src/panel/supplier/address/ListUi.js:136
+#: extjs/src/panel/customer/address/ListUi.js:136
+#: extjs/src/panel/order/address/ItemUi.js:104
+#: extjs/src/panel/order/address/DeliveryItemUi.js:89
 msgid "Country"
 msgstr "Ülke"
 
 #: src/panel/supplier/address/ItemUi.js:120 src/panel/customer/ItemUi.js:204
 #: src/panel/customer/address/ItemUi.js:122
+#: extjs/src/panel/supplier/address/ItemUi.js:120
+#: extjs/src/panel/customer/ItemUi.js:204
+#: extjs/src/panel/customer/address/ItemUi.js:122
 msgid "Country code"
 msgstr "Ülke kodu"
 
 #: src/panel/supplier/address/ItemUi.js:115 src/panel/customer/ItemUi.js:199
 #: src/panel/customer/address/ItemUi.js:117
+#: extjs/src/panel/supplier/address/ItemUi.js:115
+#: extjs/src/panel/customer/ItemUi.js:199
+#: extjs/src/panel/customer/address/ItemUi.js:117
 msgid "Country state, e.g. \"NY\""
 msgstr "Ülke eyaleti, örn. \"NY\""
 
-#: src/panel/coupon/ListUi.js:27
+#: src/panel/coupon/ListUi.js:27 extjs/src/panel/coupon/ListUi.js:27
 msgid "Coupon"
 msgstr "Kupon"
 
 #: src/panel/order/coupon/ListUi.js:104
+#: extjs/src/panel/order/coupon/ListUi.js:104
 msgid "Coupon code"
 msgstr "Kupon kodu"
 
 #. : Coupon code item panel title with coupon code ({0}) and site code ({1)}
 #: src/panel/coupon/code/ItemUi.js:110
+#: extjs/src/panel/coupon/code/ItemUi.js:110
 #, python-brace-format
 msgid "Coupon code: {0} ({1})"
 msgstr "Kupon kodu: {0} ({1})"
 
 #. : Coupon item panel title with coupon label ({0}) and site code ({1)}
-#: src/panel/coupon/ItemUi.js:117
+#: src/panel/coupon/ItemUi.js:117 extjs/src/panel/coupon/ItemUi.js:117
 #, python-brace-format
 msgid "Coupon: {0} ({1})"
 msgstr "Kupon: {0} ({1})"
 
 #: src/panel/order/coupon/ListUi.js:11
+#: extjs/src/panel/order/coupon/ListUi.js:11
 msgid "Coupons"
 msgstr "Kuponlar"
 
@@ -456,22 +636,94 @@ msgstr "Kuponlar"
 #: src/panel/tag/ItemUi.js:79 src/panel/tag/ListUiSmall.js:60
 #: jqadm/templates/product/list-default.php:72
 #: jqadm/templates/product/list-default.php:147
+#: extjs/src/panel/type/AbstractTypeItemUi.js:79
+#: extjs/src/panel/service/type/ListUi.js:82
+#: extjs/src/panel/service/ItemUi.js:100 extjs/src/panel/service/ListUi.js:108
+#: extjs/src/panel/log/ListUiSmall.js:101
+#: extjs/src/panel/supplier/ItemUi.js:69
+#: extjs/src/panel/supplier/address/ItemUi.js:155
+#: extjs/src/panel/supplier/address/ListUi.js:167
+#: extjs/src/panel/supplier/ListUi.js:67
+#: extjs/src/panel/media/type/ListUi.js:84 extjs/src/panel/media/ItemUi.js:112
+#: extjs/src/panel/media/ListUiSmall.js:95 extjs/src/panel/job/ItemUi.js:68
+#: extjs/src/panel/job/ListUiSmall.js:108
+#: extjs/src/panel/price/type/ListUi.js:84 extjs/src/panel/price/ItemUi.js:123
+#: extjs/src/panel/price/ListUiSmall.js:161
+#: extjs/src/panel/product/type/ListUi.js:82
+#: extjs/src/panel/product/ItemUi.js:109
+#: extjs/src/panel/product/stock/ItemUi.js:99
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:73
+#: extjs/src/panel/product/stock/warehouse/ListUi.js:65
+#: extjs/src/panel/product/stock/ListUi.js:109
+#: extjs/src/panel/product/ListUiSmall.js:82
+#: extjs/src/panel/product/UsedByProductListUi.js:176
+#: extjs/src/panel/product/ListUi.js:96
+#: extjs/src/panel/product/property/ItemUi.js:89
+#: extjs/src/panel/product/property/ListUi.js:113
+#: extjs/src/panel/product/UsedByCatalogListUi.js:158
+#: extjs/src/panel/text/type/ListUi.js:81 extjs/src/panel/text/ItemUi.js:88
+#: extjs/src/panel/text/ListUiSmall.js:86
+#: extjs/src/panel/attribute/type/ListUi.js:84
+#: extjs/src/panel/attribute/ItemUi.js:106
+#: extjs/src/panel/attribute/ListUiSmall.js:91
+#: extjs/src/panel/attribute/ListUi.js:86
+#: extjs/src/panel/ListItemListUi.js:211 extjs/src/panel/tag/ItemUi.js:79
+#: extjs/src/panel/tag/ListUiSmall.js:60 extjs/src/panel/catalog/ItemUi.js:77
+#: extjs/src/panel/coupon/code/ItemUi.js:84
+#: extjs/src/panel/coupon/code/ListUi.js:74
+#: extjs/src/panel/coupon/ItemUi.js:87 extjs/src/panel/coupon/ListUi.js:99
+#: extjs/src/panel/customer/ItemUi.js:102
+#: extjs/src/panel/customer/group/ItemUi.js:65
+#: extjs/src/panel/customer/group/ListUiSmall.js:52
+#: extjs/src/panel/customer/ListUiSmall.js:86
+#: extjs/src/panel/customer/address/ItemUi.js:157
+#: extjs/src/panel/customer/address/ListUi.js:168
+#: extjs/src/panel/customer/ListUi.js:89
+#: extjs/src/panel/order/service/ItemUi.js:95
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:97
+#: extjs/src/panel/order/service/ListUi.js:112
+#: extjs/src/panel/order/ItemUi.js:102
+#: extjs/src/panel/order/product/ItemUi.js:108
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:96
+#: extjs/src/panel/order/product/ListUi.js:127
+#: extjs/src/panel/order/address/ItemUi.js:124
+#: extjs/src/panel/order/address/DeliveryItemUi.js:109
+#: extjs/src/panel/order/ListUi.js:89
+#: extjs/src/panel/order/coupon/ListUi.js:169
+#: extjs/src/panel/locale/ItemUi.js:83
+#: extjs/src/panel/locale/language/ItemUi.js:78
+#: extjs/src/panel/locale/language/ListUi.js:74
+#: extjs/src/panel/locale/currency/ItemUi.js:78
+#: extjs/src/panel/locale/currency/ListUi.js:74
+#: extjs/src/panel/locale/ListUi.js:80
+#: extjs/src/panel/locale/site/ItemUi.js:78
+#: extjs/src/panel/locale/site/ListUi.js:84
+#: extjs/src/panel/plugin/type/ListUi.js:84
+#: extjs/src/panel/plugin/ItemUi.js:103 extjs/src/panel/plugin/ListUi.js:107
 msgid "Created"
 msgstr "Oluşturuldu"
 
 #: src/panel/price/ListUiSmall.js:109 src/panel/price/ItemPickerUi.js:110
 #: src/panel/order/OrderItemUi.js:47 src/panel/locale/ItemUi.js:69
 #: src/panel/locale/currency/ListUi.js:32 src/panel/locale/ListUi.js:66
-#: src/elements/currency.js:11
+#: src/elements/currency.js:11 extjs/src/panel/price/ListUiSmall.js:109
+#: extjs/src/panel/price/ItemPickerUi.js:110
+#: extjs/src/panel/order/OrderItemUi.js:47 extjs/src/panel/locale/ItemUi.js:69
+#: extjs/src/panel/locale/currency/ListUi.js:32
+#: extjs/src/panel/locale/ListUi.js:66 extjs/src/elements/currency.js:11
 msgid "Currency"
 msgstr "Para birimi"
 
 #: src/panel/price/ItemUi.js:88 src/panel/locale/ItemUi.js:72
+#: extjs/src/panel/price/ItemUi.js:88 extjs/src/panel/locale/ItemUi.js:72
 msgid "Currency (required)"
 msgstr "Para birimi (gerekli)"
 
 #: src/panel/customer/ItemPickerUi.js:11 src/panel/customer/ListUi.js:26
 #: src/panel/order/OrderItemUi.js:43 src/elements/domain.js:49
+#: extjs/src/panel/customer/ItemPickerUi.js:11
+#: extjs/src/panel/customer/ListUi.js:26
+#: extjs/src/panel/order/OrderItemUi.js:43 extjs/src/elements/domain.js:49
 msgid "Customer"
 msgstr "Müşteri"
 
@@ -480,6 +732,7 @@ msgstr "Müşteri"
 #. : Customer address item panel title with customer name ({0}) and site code
 #. ({1)}
 #: src/panel/customer/address/ItemUi.js:183
+#: extjs/src/panel/customer/address/ItemUi.js:183
 #, python-brace-format
 msgid "Customer address: {0} ({1})"
 msgstr "Müşteri adresi: {0} ({1})"
@@ -489,21 +742,23 @@ msgstr "Müşteri adresi: {0} ({1})"
 #. : Customer group item panel title with customer name ({0}) and site code
 #. ({1)}
 #: src/panel/customer/group/ItemUi.js:89
+#: extjs/src/panel/customer/group/ItemUi.js:89
 #, python-brace-format
 msgid "Customer group: {0} ({1})"
 msgstr "Müşteri grubu: {0} ({1})"
 
 #. : Customer item panel title with customer label ({0}) and site code ({1)}
-#: src/panel/customer/ItemUi.js:251
+#: src/panel/customer/ItemUi.js:251 extjs/src/panel/customer/ItemUi.js:251
 #, python-brace-format
 msgid "Customer: {0} ({1})"
 msgstr "Müşteri: {0} ({1})"
 
-#: src/panel/log/ListUiSmall.js:65
+#: src/panel/log/ListUiSmall.js:65 extjs/src/panel/log/ListUiSmall.js:65
 msgid "Date"
 msgstr "Tarih"
 
 #: src/panel/product/stock/ListUi.js:101
+#: extjs/src/panel/product/stock/ListUi.js:101
 msgid "Date back"
 msgstr "Stoğa gireceği tarih"
 
@@ -511,24 +766,32 @@ msgstr "Stoğa gireceği tarih"
 #: src/panel/ConfigUi.js:46 src/elements/exportlanguage.js:159
 #: jqadm/templates/product/list-default.php:213
 #: jqadm/templates/common/partials/confirm-default.php:22
+#: extjs/src/panel/cache/ListUiSmall.js:45
+#: extjs/src/panel/AbstractListUi.js:155 extjs/src/panel/ConfigUi.js:46
+#: extjs/src/elements/exportlanguage.js:159
 msgid "Delete"
 msgstr "Sil"
 
 #: src/panel/AbstractListUi.js:254 src/panel/AbstractTreeUi.js:224
 #: src/elements/exportlanguage.js:290
 #: jqadm/templates/common/partials/confirm-default.php:16
+#: extjs/src/panel/AbstractListUi.js:254 extjs/src/panel/AbstractTreeUi.js:224
+#: extjs/src/elements/exportlanguage.js:290
 msgid "Delete items?"
 msgstr "Öğeleri sil?"
 
 #: src/panel/order/address/DeliveryItemUi.js:11
+#: extjs/src/panel/order/address/DeliveryItemUi.js:11
 msgid "Delivery address"
 msgstr "Teslimat adresi"
 
 #: src/panel/order/ItemUi.js:85 src/panel/order/ListUi.js:71
+#: extjs/src/panel/order/ItemUi.js:85 extjs/src/panel/order/ListUi.js:71
 msgid "Delivery date"
 msgstr "Teslimat tarihi"
 
 #: src/panel/order/ItemUi.js:91 src/panel/order/ListUi.js:78
+#: extjs/src/panel/order/ItemUi.js:91 extjs/src/panel/order/ListUi.js:78
 msgid "Delivery status"
 msgstr "Teslimat durumu"
 
@@ -548,10 +811,32 @@ msgstr "Teslimat durumu"
 #: src/panel/locale/ItemUi.js:40 src/panel/locale/language/ItemUi.js:41
 #: src/panel/locale/currency/ItemUi.js:41 src/panel/locale/site/ItemUi.js:41
 #: src/panel/plugin/ItemUi.js:38 src/panel/tag/ItemUi.js:36
+#: extjs/src/panel/service/ItemUi.js:37 extjs/src/panel/supplier/ItemUi.js:33
+#: extjs/src/panel/supplier/address/ItemUi.js:33
+#: extjs/src/panel/media/ItemUi.js:36 extjs/src/panel/job/ItemUi.js:35
+#: extjs/src/panel/price/ItemUi.js:37 extjs/src/panel/cache/ItemUi.js:36
+#: extjs/src/panel/product/ItemUi.js:38
+#: extjs/src/panel/product/stock/ItemUi.js:45
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:36
+#: extjs/src/panel/product/property/ItemUi.js:46
+#: extjs/src/panel/text/ItemUi.js:35 extjs/src/panel/attribute/ItemUi.js:51
+#: extjs/src/panel/tag/ItemUi.js:36 extjs/src/panel/catalog/ItemUi.js:40
+#: extjs/src/panel/coupon/code/ItemUi.js:39
+#: extjs/src/panel/coupon/ItemUi.js:39 extjs/src/panel/customer/ItemUi.js:44
+#: extjs/src/panel/customer/group/ItemUi.js:35
+#: extjs/src/panel/customer/address/ItemUi.js:35
+#: extjs/src/panel/order/service/ItemUi.js:44
+#: extjs/src/panel/order/product/ItemUi.js:44
+#: extjs/src/panel/locale/ItemUi.js:40
+#: extjs/src/panel/locale/language/ItemUi.js:41
+#: extjs/src/panel/locale/currency/ItemUi.js:41
+#: extjs/src/panel/locale/site/ItemUi.js:41
+#: extjs/src/panel/plugin/ItemUi.js:38
 msgid "Details"
 msgstr "Detaylar"
 
 #: src/panel/AbstractListItemPickerUi.js:285
+#: extjs/src/panel/AbstractListItemPickerUi.js:285
 msgid "Display field is empty"
 msgstr "Ekran alanı boş"
 
@@ -559,10 +844,17 @@ msgstr "Ekran alanı boş"
 #: src/panel/price/type/ListUi.js:64 src/panel/product/type/ListUi.js:62
 #: src/panel/text/type/ListUi.js:61 src/panel/attribute/type/ListUi.js:64
 #: src/panel/plugin/type/ListUi.js:64 src/elements/domain.js:10
+#: extjs/src/panel/service/type/ListUi.js:62
+#: extjs/src/panel/media/type/ListUi.js:64
+#: extjs/src/panel/price/type/ListUi.js:64
+#: extjs/src/panel/product/type/ListUi.js:62
+#: extjs/src/panel/text/type/ListUi.js:61
+#: extjs/src/panel/attribute/type/ListUi.js:64
+#: extjs/src/panel/plugin/type/ListUi.js:64 extjs/src/elements/domain.js:10
 msgid "Domain"
 msgstr "Domain"
 
-#: src/elements/domain.js:15
+#: src/elements/domain.js:15 extjs/src/elements/domain.js:15
 msgid "Domain (required)"
 msgstr "Domain (gerekli)"
 
@@ -572,20 +864,34 @@ msgstr "Domain (gerekli)"
 #: src/panel/customer/address/ListUi.js:158
 #: src/panel/order/address/ItemUi.js:116
 #: src/panel/order/address/DeliveryItemUi.js:101
+#: extjs/src/panel/supplier/address/ItemUi.js:143
+#: extjs/src/panel/supplier/address/ListUi.js:157
+#: extjs/src/panel/customer/ItemUi.js:227
+#: extjs/src/panel/customer/address/ItemUi.js:145
+#: extjs/src/panel/customer/address/ListUi.js:158
+#: extjs/src/panel/order/address/ItemUi.js:116
+#: extjs/src/panel/order/address/DeliveryItemUi.js:101
 msgid "E-Mail"
 msgstr "E-Posta"
 
 #: src/panel/supplier/address/ItemUi.js:144 src/panel/customer/ItemUi.js:228
 #: src/panel/customer/address/ItemUi.js:146
+#: extjs/src/panel/supplier/address/ItemUi.js:144
+#: extjs/src/panel/customer/ItemUi.js:228
+#: extjs/src/panel/customer/address/ItemUi.js:146
 msgid "E-Mail, e.g. me@example.com (required)"
 msgstr "E-Mail, örn. me@example.com (gerekli)"
 
 #: src/panel/product/ItemUi.js:87 jqadm/templates/product/item-default.php:72
 #: jqadm/templates/product/item-selection-default.php:45
+#: jqadm/templates/product/item-default.php:73
+#: extjs/src/panel/product/ItemUi.js:87
 msgid "EAN, SKU or article number (required)"
 msgstr "EAN, SKU veya ürün numarası (gerekli)"
 
 #: src/panel/cache/ListUiSmall.js:39 src/panel/AbstractListUi.js:143
+#: extjs/src/panel/cache/ListUiSmall.js:39
+#: extjs/src/panel/AbstractListUi.js:143
 msgid "Edit"
 msgstr "Düzenle"
 
@@ -640,6 +946,72 @@ msgstr "Düzenle"
 #: src/panel/product/ListUi.js:114 src/panel/tag/ItemUi.js:87
 #: src/panel/tag/ListUiSmall.js:76 jqadm/templates/product/list-default.php:74
 #: jqadm/templates/product/list-default.php:161
+#: extjs/src/panel/type/AbstractTypeItemUi.js:87
+#: extjs/src/panel/service/type/ListUi.js:100
+#: extjs/src/panel/service/ItemUi.js:108 extjs/src/panel/service/ListUi.js:124
+#: extjs/src/panel/log/ListUiSmall.js:117
+#: extjs/src/panel/supplier/ItemUi.js:77
+#: extjs/src/panel/supplier/address/ItemUi.js:163
+#: extjs/src/panel/supplier/address/ListUi.js:181
+#: extjs/src/panel/supplier/ListUi.js:83
+#: extjs/src/panel/media/type/ListUi.js:102
+#: extjs/src/panel/media/ItemUi.js:120
+#: extjs/src/panel/media/ListUiSmall.js:111 extjs/src/panel/job/ItemUi.js:76
+#: extjs/src/panel/job/ListUiSmall.js:126
+#: extjs/src/panel/price/type/ListUi.js:102
+#: extjs/src/panel/price/ItemUi.js:131
+#: extjs/src/panel/price/ListUiSmall.js:179
+#: extjs/src/panel/product/type/ListUi.js:100
+#: extjs/src/panel/product/ItemUi.js:117
+#: extjs/src/panel/product/stock/ItemUi.js:107
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:81
+#: extjs/src/panel/product/stock/warehouse/ListUi.js:81
+#: extjs/src/panel/product/stock/ListUi.js:129
+#: extjs/src/panel/product/ListUiSmall.js:98
+#: extjs/src/panel/product/UsedByProductListUi.js:200
+#: extjs/src/panel/product/ListUi.js:114
+#: extjs/src/panel/product/property/ItemUi.js:97
+#: extjs/src/panel/product/property/ListUi.js:133
+#: extjs/src/panel/product/UsedByCatalogListUi.js:182
+#: extjs/src/panel/text/type/ListUi.js:99 extjs/src/panel/text/ItemUi.js:96
+#: extjs/src/panel/text/ListUiSmall.js:102
+#: extjs/src/panel/attribute/type/ListUi.js:102
+#: extjs/src/panel/attribute/ItemUi.js:114
+#: extjs/src/panel/attribute/ListUiSmall.js:107
+#: extjs/src/panel/attribute/ListUi.js:104
+#: extjs/src/panel/ListItemListUi.js:225 extjs/src/panel/tag/ItemUi.js:87
+#: extjs/src/panel/tag/ListUiSmall.js:76 extjs/src/panel/catalog/ItemUi.js:85
+#: extjs/src/panel/coupon/code/ItemUi.js:92
+#: extjs/src/panel/coupon/code/ListUi.js:90
+#: extjs/src/panel/coupon/ItemUi.js:95 extjs/src/panel/coupon/ListUi.js:115
+#: extjs/src/panel/customer/ItemUi.js:110
+#: extjs/src/panel/customer/group/ItemUi.js:73
+#: extjs/src/panel/customer/group/ListUiSmall.js:66
+#: extjs/src/panel/customer/ListUiSmall.js:102
+#: extjs/src/panel/customer/address/ItemUi.js:165
+#: extjs/src/panel/customer/address/ListUi.js:182
+#: extjs/src/panel/customer/ListUi.js:105
+#: extjs/src/panel/order/service/ItemUi.js:103
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:111
+#: extjs/src/panel/order/service/ListUi.js:128
+#: extjs/src/panel/order/ItemUi.js:110
+#: extjs/src/panel/order/product/ItemUi.js:116
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:110
+#: extjs/src/panel/order/product/ListUi.js:143
+#: extjs/src/panel/order/address/ItemUi.js:132
+#: extjs/src/panel/order/address/DeliveryItemUi.js:117
+#: extjs/src/panel/order/ListUi.js:107
+#: extjs/src/panel/order/coupon/ListUi.js:189
+#: extjs/src/panel/locale/ItemUi.js:91
+#: extjs/src/panel/locale/language/ItemUi.js:86
+#: extjs/src/panel/locale/language/ListUi.js:92
+#: extjs/src/panel/locale/currency/ItemUi.js:86
+#: extjs/src/panel/locale/currency/ListUi.js:92
+#: extjs/src/panel/locale/ListUi.js:98
+#: extjs/src/panel/locale/site/ItemUi.js:86
+#: extjs/src/panel/locale/site/ListUi.js:102
+#: extjs/src/panel/plugin/type/ListUi.js:102
+#: extjs/src/panel/plugin/ItemUi.js:111 extjs/src/panel/plugin/ListUi.js:123
 msgid "Editor"
 msgstr "Editör"
 
@@ -655,39 +1027,66 @@ msgstr "Editör"
 #: jqadm/templates/product/item-default.php:93
 #: jqadm/templates/product/list-default.php:71
 #: jqadm/templates/product/list-default.php:140
+#: jqadm/templates/product/item-default.php:94
+#: extjs/src/panel/product/ItemUi.js:103
+#: extjs/src/panel/product/ListUiSmall.js:74
+#: extjs/src/panel/product/UsedByProductListUi.js:164
+#: extjs/src/panel/product/ItemPickerUi.js:92
+#: extjs/src/panel/product/ListUi.js:88 extjs/src/panel/ListItemListUi.js:187
+#: extjs/src/panel/ListItemItemUi.js:57
+#: extjs/src/panel/coupon/code/ItemUi.js:78
+#: extjs/src/panel/coupon/code/ListUi.js:67
+#: extjs/src/panel/coupon/ItemUi.js:81 extjs/src/panel/coupon/ListUi.js:76
 msgid "End date"
 msgstr "Bitiş tarihi"
 
 #: src/panel/AbstractListUi.js:341 src/panel/AbstractUsedByListUi.js:173
 #: src/elements/exportlanguage.js:393
 #: jqadm/templates/common/partials/error-default.php:17
+#: extjs/src/panel/AbstractListUi.js:341
+#: extjs/src/panel/AbstractUsedByListUi.js:173
+#: extjs/src/elements/exportlanguage.js:393
 msgid "Error"
 msgstr "Hata"
 
+#: jqadm/templates/common/page-default.php:47
+msgid "Expert mode"
+msgstr ""
+
 #: src/panel/cache/ItemUi.js:60 src/panel/cache/ListUiSmall.js:90
+#: extjs/src/panel/cache/ItemUi.js:60 extjs/src/panel/cache/ListUiSmall.js:90
 msgid "Expires"
 msgstr "Sona eriyor"
 
 #: src/panel/AbstractListUi.js:161 src/elements/exportlanguage.js:328
+#: extjs/src/panel/AbstractListUi.js:161
+#: extjs/src/elements/exportlanguage.js:328
 msgid "Export"
 msgstr "Dışa aktar"
 
-#: src/elements/exportlanguage.js:445
+#: src/elements/exportlanguage.js:445 extjs/src/elements/exportlanguage.js:445
 msgid "Export successful"
 msgstr "Dışa aktarma başarılı"
 
-#: src/panel/log/ListUiSmall.js:59
+#: src/panel/log/ListUiSmall.js:59 extjs/src/panel/log/ListUiSmall.js:59
 msgid "Facility"
 msgstr "Kategori"
 
 #: src/panel/supplier/address/ItemUi.js:138 src/panel/customer/ItemUi.js:222
 #: src/panel/customer/address/ItemUi.js:140
+#: extjs/src/panel/supplier/address/ItemUi.js:138
+#: extjs/src/panel/customer/ItemUi.js:222
+#: extjs/src/panel/customer/address/ItemUi.js:140
 msgid "Facsimile number, e.g. +155512345"
 msgstr "Faks numarası, örn. +155512345"
 
-#: src/panel/media/ItemUi.js:101
+#: src/panel/media/ItemUi.js:101 extjs/src/panel/media/ItemUi.js:101
 msgid "File URL"
 msgstr "Dosya URL'si"
+
+#: jqadm/templates/product/list-default.php:79
+msgid "Filter"
+msgstr ""
 
 #: jqadm/templates/common/partials/pagination-default.php:33
 msgid "First"
@@ -697,6 +1096,12 @@ msgstr "Birinci"
 #: src/panel/supplier/address/ItemUi.js:70 src/panel/customer/ItemUi.js:153
 #: src/panel/customer/ItemUi.js:154 src/panel/customer/address/ItemUi.js:71
 #: src/panel/customer/address/ItemUi.js:72
+#: extjs/src/panel/supplier/address/ItemUi.js:69
+#: extjs/src/panel/supplier/address/ItemUi.js:70
+#: extjs/src/panel/customer/ItemUi.js:153
+#: extjs/src/panel/customer/ItemUi.js:154
+#: extjs/src/panel/customer/address/ItemUi.js:71
+#: extjs/src/panel/customer/address/ItemUi.js:72
 msgid "First name"
 msgstr "İsim"
 
@@ -704,31 +1109,41 @@ msgstr "İsim"
 #: src/panel/customer/address/ListUi.js:93
 #: src/panel/order/address/ItemUi.js:72
 #: src/panel/order/address/DeliveryItemUi.js:57
+#: extjs/src/panel/supplier/address/ListUi.js:93
+#: extjs/src/panel/customer/address/ListUi.js:93
+#: extjs/src/panel/order/address/ItemUi.js:72
+#: extjs/src/panel/order/address/DeliveryItemUi.js:57
 msgid "Firstname"
 msgstr "İsim"
 
-#: src/panel/cache/ListUiSmall.js:51
+#: src/panel/cache/ListUiSmall.js:51 extjs/src/panel/cache/ListUiSmall.js:51
 msgid "Flush"
 msgstr "Temizle"
 
-#: src/panel/cache/ListUiSmall.js:101
+#: src/panel/cache/ListUiSmall.js:101 extjs/src/panel/cache/ListUiSmall.js:101
 msgid "Flush cache?"
 msgstr "Önbelleği temizle?"
 
 #: src/panel/customer/ItemUi.js:83 src/panel/customer/ListUiSmall.js:57
 #: src/panel/customer/ItemPickerUi.js:61 src/panel/customer/ListUi.js:68
+#: extjs/src/panel/customer/ItemUi.js:83
+#: extjs/src/panel/customer/ListUiSmall.js:57
+#: extjs/src/panel/customer/ItemPickerUi.js:61
+#: extjs/src/panel/customer/ListUi.js:68
 msgid "Full name"
 msgstr "Tam isim"
 
-#: src/panel/customer/ItemUi.js:84
+#: src/panel/customer/ItemUi.js:84 extjs/src/panel/customer/ItemUi.js:84
 msgid "Full name (required)"
 msgstr "Tam isim (gerekli)"
 
 #: src/panel/customer/group/ItemPickerUi.js:11
+#: extjs/src/panel/customer/group/ItemPickerUi.js:11
 msgid "Group"
 msgstr "Grup"
 
 #: src/panel/customer/group/ItemUi.js:61
+#: extjs/src/panel/customer/group/ItemUi.js:61
 msgid "Group label (required)"
 msgstr "Grup etiketi (gerekli)"
 
@@ -738,16 +1153,24 @@ msgstr "Yükseklik"
 
 #: src/panel/supplier/address/ItemUi.js:64 src/panel/customer/ItemUi.js:148
 #: src/panel/customer/address/ItemUi.js:66
+#: extjs/src/panel/supplier/address/ItemUi.js:64
+#: extjs/src/panel/customer/ItemUi.js:148
+#: extjs/src/panel/customer/address/ItemUi.js:66
 msgid "Honorary title"
 msgstr "Onursal ünvan"
 
 #: src/panel/supplier/address/ListUi.js:108
 #: src/panel/customer/address/ListUi.js:108
+#: extjs/src/panel/supplier/address/ListUi.js:108
+#: extjs/src/panel/customer/address/ListUi.js:108
 msgid "House no"
 msgstr "Ev no"
 
 #: src/panel/supplier/address/ItemUi.js:90 src/panel/customer/ItemUi.js:174
 #: src/panel/customer/address/ItemUi.js:92
+#: extjs/src/panel/supplier/address/ItemUi.js:90
+#: extjs/src/panel/customer/ItemUi.js:174
+#: extjs/src/panel/customer/address/ItemUi.js:92
 msgid "House number"
 msgstr "Ev numarası"
 
@@ -801,6 +1224,71 @@ msgstr "Ev numarası"
 #: jqadm/templates/product/list-default.php:65
 #: jqadm/templates/product/list-default.php:98
 #: jqadm/templates/product/item-selection-default.php:34
+#: jqadm/templates/product/item-default.php:42
+#: extjs/src/panel/type/AbstractTypeItemUi.js:52
+#: extjs/src/panel/service/type/ListUi.js:47
+#: extjs/src/panel/service/ItemUi.js:52 extjs/src/panel/service/ListUi.js:41
+#: extjs/src/panel/log/ListUiSmall.js:53 extjs/src/panel/supplier/ItemUi.js:48
+#: extjs/src/panel/supplier/address/ListUi.js:64
+#: extjs/src/panel/supplier/ListUi.js:38
+#: extjs/src/panel/media/type/ListUi.js:49 extjs/src/panel/media/ItemUi.js:54
+#: extjs/src/panel/media/ListUiSmall.js:47 extjs/src/panel/job/ItemUi.js:50
+#: extjs/src/panel/job/ListUiSmall.js:44
+#: extjs/src/panel/price/type/ListUi.js:49 extjs/src/panel/price/ItemUi.js:52
+#: extjs/src/panel/price/ListUiSmall.js:77 extjs/src/panel/cache/ItemUi.js:51
+#: extjs/src/panel/cache/ListUiSmall.js:77
+#: extjs/src/panel/product/type/ListUi.js:47
+#: extjs/src/panel/product/ItemUi.js:53
+#: extjs/src/panel/product/stock/ItemUi.js:63
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:53
+#: extjs/src/panel/product/stock/warehouse/ListUi.js:40
+#: extjs/src/panel/product/stock/ListUi.js:68
+#: extjs/src/panel/product/ListUiSmall.js:33
+#: extjs/src/panel/product/UsedByProductListUi.js:105
+#: extjs/src/panel/product/ListUi.js:43
+#: extjs/src/panel/product/property/ItemUi.js:64
+#: extjs/src/panel/product/property/ListUi.js:73
+#: extjs/src/panel/product/UsedByCatalogListUi.js:126
+#: extjs/src/panel/text/type/ListUi.js:46 extjs/src/panel/text/ItemUi.js:54
+#: extjs/src/panel/text/ListUiSmall.js:46
+#: extjs/src/panel/attribute/type/ListUi.js:49
+#: extjs/src/panel/attribute/ItemUi.js:66
+#: extjs/src/panel/attribute/ListUiSmall.js:50
+#: extjs/src/panel/attribute/ListUi.js:45
+#: extjs/src/panel/ListItemListUi.js:154 extjs/src/panel/tag/ItemUi.js:54
+#: extjs/src/panel/tag/ListUiSmall.js:33 extjs/src/panel/catalog/ItemUi.js:56
+#: extjs/src/panel/coupon/code/ItemUi.js:53
+#: extjs/src/panel/coupon/code/ListUi.js:41
+#: extjs/src/panel/coupon/ItemUi.js:54 extjs/src/panel/coupon/ListUi.js:39
+#: extjs/src/panel/customer/ItemUi.js:61
+#: extjs/src/panel/customer/group/ItemUi.js:49
+#: extjs/src/panel/customer/group/ListUiSmall.js:35
+#: extjs/src/panel/customer/ListUiSmall.js:35
+#: extjs/src/panel/customer/address/ListUi.js:64
+#: extjs/src/panel/customer/ListUi.js:38
+#: extjs/src/panel/order/service/ItemUi.js:59
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:71
+#: extjs/src/panel/order/service/ListUi.js:65
+#: extjs/src/panel/order/ItemUi.js:60
+#: extjs/src/panel/order/product/ItemUi.js:59
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:70
+#: extjs/src/panel/order/product/ListUi.js:65
+#: extjs/src/panel/order/address/ItemUi.js:48
+#: extjs/src/panel/order/address/DeliveryItemUi.js:33
+#: extjs/src/panel/order/ListUi.js:44
+#: extjs/src/panel/order/coupon/ListUi.js:90
+#: extjs/src/panel/locale/ItemUi.js:56
+#: extjs/src/panel/locale/language/ItemUi.js:57
+#: extjs/src/panel/locale/language/ListUi.js:44
+#: extjs/src/panel/locale/currency/ItemUi.js:57
+#: extjs/src/panel/locale/currency/ListUi.js:44
+#: extjs/src/panel/locale/ListUi.js:44
+#: extjs/src/panel/locale/site/ItemUi.js:57
+#: extjs/src/panel/locale/site/ListUi.js:38
+#: extjs/src/panel/plugin/type/ListUi.js:49
+#: extjs/src/panel/plugin/ItemUi.js:52 extjs/src/panel/plugin/ListUi.js:47
+#: extjs/src/elements/exportlanguage.js:79
+#: extjs/src/elements/exportlanguage.js:105
 msgid "ID"
 msgstr "Kimlik"
 
@@ -808,11 +1296,11 @@ msgstr "Kimlik"
 msgid "Images"
 msgstr "Görüntüler"
 
-#: src/panel/AbstractListUi.js:167
+#: src/panel/AbstractListUi.js:167 extjs/src/panel/AbstractListUi.js:167
 msgid "Import"
 msgstr "İçe aktar"
 
-#: src/panel/text/ItemUi.js:80
+#: src/panel/text/ItemUi.js:80 extjs/src/panel/text/ItemUi.js:80
 msgid "Internal name"
 msgstr "İç ad"
 
@@ -827,10 +1315,22 @@ msgstr "İç ad"
 #: src/panel/plugin/ItemUi.js:93 src/panel/attribute/ItemUi.js:96
 #: jqadm/templates/product/item-default.php:80
 #: jqadm/templates/product/item-selection-default.php:53
+#: jqadm/templates/product/item-default.php:81
+#: extjs/src/panel/type/AbstractTypeItemUi.js:76
+#: extjs/src/panel/service/ItemUi.js:90 extjs/src/panel/supplier/ItemUi.js:66
+#: extjs/src/panel/media/ItemUi.js:93 extjs/src/panel/job/ItemUi.js:61
+#: extjs/src/panel/price/ItemUi.js:84 extjs/src/panel/product/ItemUi.js:94
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:70
+#: extjs/src/panel/attribute/ItemUi.js:96 extjs/src/panel/catalog/ItemUi.js:74
+#: extjs/src/panel/coupon/ItemUi.js:72
+#: extjs/src/panel/locale/language/ItemUi.js:75
+#: extjs/src/panel/locale/currency/ItemUi.js:75
+#: extjs/src/panel/locale/site/ItemUi.js:75
+#: extjs/src/panel/plugin/ItemUi.js:93
 msgid "Internal name (required)"
 msgstr "İç ad (gerekli)"
 
-#: src/panel/AbstractTreeUi.js:300
+#: src/panel/AbstractTreeUi.js:300 extjs/src/panel/AbstractTreeUi.js:300
 #, python-brace-format
 msgid "Invalid action \"{0}\""
 msgstr "Geçersiz eylem \"{0}\""
@@ -841,27 +1341,37 @@ msgstr "Geçersiz eylem \"{0}\""
 #: src/panel/AbstractTreeItemUi.js:25 src/panel/ListItemItemUi.js:77
 #: src/panel/ListItemItemUi.js:117 src/panel/catalog/ItemUi.js:123
 #: src/panel/locale/site/ItemUi.js:121 src/panel/ConfigUi.js:122
+#: extjs/src/panel/product/stock/ItemUi.js:121
+#: extjs/src/panel/product/property/ItemUi.js:111
+#: extjs/src/panel/AbstractItemUi.js:249
+#: extjs/src/panel/AbstractListItemUi.js:29
+#: extjs/src/panel/AbstractListItemUi.js:72
+#: extjs/src/panel/AbstractTreeItemUi.js:25
+#: extjs/src/panel/ListItemItemUi.js:77 extjs/src/panel/ListItemItemUi.js:117
+#: extjs/src/panel/catalog/ItemUi.js:123
+#: extjs/src/panel/locale/site/ItemUi.js:121 extjs/src/panel/ConfigUi.js:122
 msgid "Invalid data"
 msgstr "Geçersiz veri"
 
-#: src/panel/ConfigUi.js:123
+#: src/panel/ConfigUi.js:123 extjs/src/panel/ConfigUi.js:123
 #, python-brace-format
 msgid "Invalid value for configuration key \"{0}\""
 msgstr "Yapılandırma anahtarı için geçersiz değer \"{0}\""
 
-#: src/panel/order/ItemUi.js:45
+#: src/panel/order/ItemUi.js:45 extjs/src/panel/order/ItemUi.js:45
 msgid "Invoice"
 msgstr "Fatura"
 
 #: src/panel/attribute/ItemUi.js:100 src/panel/attribute/ItemUi.js:99
+#: extjs/src/panel/attribute/ItemUi.js:99
 msgid "Item position within the same type"
 msgstr "Aynı tür içinde öğe konumu"
 
-#: src/panel/job/ItemUi.js:12
+#: src/panel/job/ItemUi.js:12 extjs/src/panel/job/ItemUi.js:12
 msgid "Job item details"
 msgstr "Görev öğe detayları"
 
-#: src/panel/job/ListUiSmall.js:32
+#: src/panel/job/ListUiSmall.js:32 extjs/src/panel/job/ListUiSmall.js:32
 msgid "Jobs"
 msgstr "Görevler"
 
@@ -906,6 +1416,51 @@ msgstr "Görevler"
 #: jqadm/templates/product/list-default.php:69
 #: jqadm/templates/product/list-default.php:126
 #: jqadm/templates/product/item-selection-default.php:50
+#: jqadm/templates/product/item-default.php:78
+#: extjs/src/panel/type/AbstractTypeItemUi.js:73
+#: extjs/src/panel/service/type/ListUi.js:76
+#: extjs/src/panel/service/ItemUi.js:86 extjs/src/panel/service/ListUi.js:77
+#: extjs/src/panel/supplier/ItemUi.js:62 extjs/src/panel/supplier/ListUi.js:60
+#: extjs/src/panel/media/type/ListUi.js:78 extjs/src/panel/media/ItemUi.js:91
+#: extjs/src/panel/media/ListUiSmall.js:82
+#: extjs/src/panel/media/ItemPickerUi.js:87 extjs/src/panel/job/ItemUi.js:57
+#: extjs/src/panel/job/ListUiSmall.js:60
+#: extjs/src/panel/price/type/ListUi.js:78 extjs/src/panel/price/ItemUi.js:81
+#: extjs/src/panel/price/ListUiSmall.js:85
+#: extjs/src/panel/price/ItemPickerUi.js:102
+#: extjs/src/panel/product/type/ListUi.js:76
+#: extjs/src/panel/product/ItemUi.js:90
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:67
+#: extjs/src/panel/product/stock/warehouse/ListUi.js:59
+#: extjs/src/panel/product/ListUiSmall.js:60
+#: extjs/src/panel/product/UsedByProductListUi.js:142
+#: extjs/src/panel/product/ItemPickerUi.js:76
+#: extjs/src/panel/product/ListUi.js:72
+#: extjs/src/panel/product/UsedByCatalogListUi.js:149
+#: extjs/src/panel/text/type/ListUi.js:75 extjs/src/panel/text/ItemUi.js:76
+#: extjs/src/panel/text/ListUiSmall.js:75
+#: extjs/src/panel/text/ItemPickerUi.js:76
+#: extjs/src/panel/attribute/type/ListUi.js:78
+#: extjs/src/panel/attribute/ItemUi.js:92
+#: extjs/src/panel/attribute/ListUiSmall.js:77
+#: extjs/src/panel/attribute/ItemPickerUi.js:77
+#: extjs/src/panel/attribute/ListUi.js:72 extjs/src/panel/tag/ItemUi.js:73
+#: extjs/src/panel/tag/ListUiSmall.js:54
+#: extjs/src/panel/tag/ItemPickerUi.js:68 extjs/src/panel/catalog/ItemUi.js:71
+#: extjs/src/panel/coupon/ItemUi.js:68 extjs/src/panel/coupon/ListUi.js:61
+#: extjs/src/panel/customer/group/ItemUi.js:60
+#: extjs/src/panel/customer/group/ListUiSmall.js:47
+#: extjs/src/panel/customer/group/ItemPickerUi.js:53
+#: extjs/src/panel/locale/language/ItemUi.js:72
+#: extjs/src/panel/locale/language/ListUi.js:66
+#: extjs/src/panel/locale/currency/ItemUi.js:72
+#: extjs/src/panel/locale/currency/ListUi.js:66
+#: extjs/src/panel/locale/site/ItemUi.js:72
+#: extjs/src/panel/locale/site/ListUi.js:60
+#: extjs/src/panel/plugin/type/ListUi.js:78
+#: extjs/src/panel/plugin/ItemUi.js:89 extjs/src/panel/plugin/ListUi.js:76
+#: extjs/src/elements/exportlanguage.js:85
+#: extjs/src/elements/exportlanguage.js:113
 msgid "Label"
 msgstr "Etiket"
 
@@ -919,10 +1474,21 @@ msgstr "Etiket"
 #: src/elements/language.js:10 src/panel/tag/ListUiSmall.js:47
 #: src/panel/tag/ItemPickerUi.js:60
 #: jqadm/templates/product/item-image-default.php:20
+#: jqadm/templates/common/page-default.php:54
+#: extjs/src/panel/media/ListUiSmall.js:68
+#: extjs/src/panel/media/ItemPickerUi.js:79
+#: extjs/src/panel/product/property/ListUi.js:97
+#: extjs/src/panel/text/ListUiSmall.js:67
+#: extjs/src/panel/text/ItemPickerUi.js:68
+#: extjs/src/panel/tag/ListUiSmall.js:47
+#: extjs/src/panel/tag/ItemPickerUi.js:60 extjs/src/panel/locale/ItemUi.js:63
+#: extjs/src/panel/locale/language/ListUi.js:32
+#: extjs/src/panel/locale/ListUi.js:59 extjs/src/elements/siteLanguage.js:10
+#: extjs/src/elements/siteLanguage.js:17 extjs/src/elements/language.js:10
 msgid "Language"
 msgstr "Dil"
 
-#: src/panel/locale/ItemUi.js:66
+#: src/panel/locale/ItemUi.js:66 extjs/src/panel/locale/ItemUi.js:66
 msgid "Language (required)"
 msgstr "Dil (gerekli)"
 
@@ -981,16 +1547,86 @@ msgstr "Sonuncu"
 #: src/panel/product/ListUi.js:105 src/panel/tag/ItemUi.js:83
 #: src/panel/tag/ListUiSmall.js:68 jqadm/templates/product/list-default.php:73
 #: jqadm/templates/product/list-default.php:154
+#: extjs/src/panel/type/AbstractTypeItemUi.js:83
+#: extjs/src/panel/service/type/ListUi.js:91
+#: extjs/src/panel/service/ItemUi.js:104 extjs/src/panel/service/ListUi.js:116
+#: extjs/src/panel/log/ListUiSmall.js:109
+#: extjs/src/panel/supplier/ItemUi.js:73
+#: extjs/src/panel/supplier/address/ItemUi.js:159
+#: extjs/src/panel/supplier/address/ListUi.js:174
+#: extjs/src/panel/supplier/ListUi.js:75
+#: extjs/src/panel/media/type/ListUi.js:93 extjs/src/panel/media/ItemUi.js:116
+#: extjs/src/panel/media/ListUiSmall.js:103 extjs/src/panel/job/ItemUi.js:72
+#: extjs/src/panel/job/ListUiSmall.js:117
+#: extjs/src/panel/price/type/ListUi.js:93 extjs/src/panel/price/ItemUi.js:127
+#: extjs/src/panel/price/ListUiSmall.js:170
+#: extjs/src/panel/product/type/ListUi.js:91
+#: extjs/src/panel/product/ItemUi.js:113
+#: extjs/src/panel/product/stock/ItemUi.js:103
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:77
+#: extjs/src/panel/product/stock/warehouse/ListUi.js:73
+#: extjs/src/panel/product/stock/ListUi.js:119
+#: extjs/src/panel/product/ListUiSmall.js:90
+#: extjs/src/panel/product/UsedByProductListUi.js:188
+#: extjs/src/panel/product/ListUi.js:105
+#: extjs/src/panel/product/property/ItemUi.js:93
+#: extjs/src/panel/product/property/ListUi.js:123
+#: extjs/src/panel/product/UsedByCatalogListUi.js:170
+#: extjs/src/panel/text/type/ListUi.js:90 extjs/src/panel/text/ItemUi.js:92
+#: extjs/src/panel/text/ListUiSmall.js:94
+#: extjs/src/panel/attribute/type/ListUi.js:93
+#: extjs/src/panel/attribute/ItemUi.js:110
+#: extjs/src/panel/attribute/ListUiSmall.js:99
+#: extjs/src/panel/attribute/ListUi.js:95
+#: extjs/src/panel/ListItemListUi.js:218 extjs/src/panel/tag/ItemUi.js:83
+#: extjs/src/panel/tag/ListUiSmall.js:68 extjs/src/panel/catalog/ItemUi.js:81
+#: extjs/src/panel/coupon/code/ItemUi.js:88
+#: extjs/src/panel/coupon/code/ListUi.js:82
+#: extjs/src/panel/coupon/ItemUi.js:91 extjs/src/panel/coupon/ListUi.js:107
+#: extjs/src/panel/customer/ItemUi.js:106
+#: extjs/src/panel/customer/group/ItemUi.js:69
+#: extjs/src/panel/customer/group/ListUiSmall.js:59
+#: extjs/src/panel/customer/ListUiSmall.js:94
+#: extjs/src/panel/customer/address/ItemUi.js:161
+#: extjs/src/panel/customer/address/ListUi.js:175
+#: extjs/src/panel/customer/ListUi.js:97
+#: extjs/src/panel/order/service/ItemUi.js:99
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:104
+#: extjs/src/panel/order/service/ListUi.js:120
+#: extjs/src/panel/order/ItemUi.js:106
+#: extjs/src/panel/order/product/ItemUi.js:112
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:103
+#: extjs/src/panel/order/product/ListUi.js:135
+#: extjs/src/panel/order/address/ItemUi.js:128
+#: extjs/src/panel/order/address/DeliveryItemUi.js:113
+#: extjs/src/panel/order/ListUi.js:98
+#: extjs/src/panel/order/coupon/ListUi.js:179
+#: extjs/src/panel/locale/ItemUi.js:87
+#: extjs/src/panel/locale/language/ItemUi.js:82
+#: extjs/src/panel/locale/language/ListUi.js:83
+#: extjs/src/panel/locale/currency/ItemUi.js:82
+#: extjs/src/panel/locale/currency/ListUi.js:83
+#: extjs/src/panel/locale/ListUi.js:89
+#: extjs/src/panel/locale/site/ItemUi.js:82
+#: extjs/src/panel/locale/site/ListUi.js:93
+#: extjs/src/panel/plugin/type/ListUi.js:93
+#: extjs/src/panel/plugin/ItemUi.js:107 extjs/src/panel/plugin/ListUi.js:115
 msgid "Last modified"
 msgstr "Son değiştirilme"
 
 #: src/panel/supplier/address/ItemUi.js:75 src/panel/customer/ItemUi.js:159
 #: src/panel/customer/address/ItemUi.js:77
+#: extjs/src/panel/supplier/address/ItemUi.js:75
+#: extjs/src/panel/customer/ItemUi.js:159
+#: extjs/src/panel/customer/address/ItemUi.js:77
 msgid "Last name"
 msgstr "Soyad"
 
 #: src/panel/supplier/address/ItemUi.js:76 src/panel/customer/ItemUi.js:160
 #: src/panel/customer/address/ItemUi.js:78
+#: extjs/src/panel/supplier/address/ItemUi.js:76
+#: extjs/src/panel/customer/ItemUi.js:160
+#: extjs/src/panel/customer/address/ItemUi.js:78
 msgid "Last name (required)"
 msgstr "Soyad (gerekli)"
 
@@ -998,6 +1634,10 @@ msgstr "Soyad (gerekli)"
 #: src/panel/customer/address/ListUi.js:98
 #: src/panel/order/address/ItemUi.js:76
 #: src/panel/order/address/DeliveryItemUi.js:61
+#: extjs/src/panel/supplier/address/ListUi.js:98
+#: extjs/src/panel/customer/address/ListUi.js:98
+#: extjs/src/panel/order/address/ItemUi.js:76
+#: extjs/src/panel/order/address/DeliveryItemUi.js:61
 msgid "Lastname"
 msgstr "Soyad"
 
@@ -1005,50 +1645,64 @@ msgstr "Soyad"
 msgid "Length"
 msgstr "Uzunluk"
 
-#: src/panel/locale/ListUi.js:32
+#: src/panel/locale/ListUi.js:32 extjs/src/panel/locale/ListUi.js:32
 msgid "List"
 msgstr "Liste"
 
 #: src/panel/product/UsedByProductListUi.js:37
 #: src/panel/product/UsedByCatalogListUi.js:58
+#: extjs/src/panel/product/UsedByProductListUi.js:37
+#: extjs/src/panel/product/UsedByCatalogListUi.js:58
 msgid "List ID"
 msgstr "Liste ID"
 
-#: src/panel/ListItemListUi.js:166
+#: src/panel/ListItemListUi.js:166 extjs/src/panel/ListItemListUi.js:166
 msgid "List Status"
 msgstr "Liste Durumu"
 
 #: src/panel/product/UsedByProductListUi.js:88
 #: src/panel/product/UsedByCatalogListUi.js:100
+#: extjs/src/panel/product/UsedByProductListUi.js:88
+#: extjs/src/panel/product/UsedByCatalogListUi.js:100
 msgid "List creation time"
 msgstr "Liste oluşturma zamanı"
 
 #: src/panel/product/UsedByProductListUi.js:97
 #: src/panel/product/UsedByCatalogListUi.js:118
+#: extjs/src/panel/product/UsedByProductListUi.js:97
+#: extjs/src/panel/product/UsedByCatalogListUi.js:118
 msgid "List editor"
 msgstr "Liste editörü"
 
 #: src/panel/product/UsedByProductListUi.js:63
 #: src/panel/product/UsedByCatalogListUi.js:84
+#: extjs/src/panel/product/UsedByProductListUi.js:63
+#: extjs/src/panel/product/UsedByCatalogListUi.js:84
 msgid "List end date"
 msgstr "Liste bitiş tarihi"
 
-#: src/panel/ListItemItemUi.js:14
+#: src/panel/ListItemItemUi.js:14 extjs/src/panel/ListItemItemUi.js:14
 msgid "List item details"
 msgstr "Liste öğesi detayları"
 
 #: src/panel/product/UsedByProductListUi.js:79
 #: src/panel/product/UsedByCatalogListUi.js:109
+#: extjs/src/panel/product/UsedByProductListUi.js:79
+#: extjs/src/panel/product/UsedByCatalogListUi.js:109
 msgid "List modification time"
 msgstr "Liste değişiklik zamanı"
 
 #: src/panel/product/UsedByProductListUi.js:71
 #: src/panel/product/UsedByCatalogListUi.js:92
+#: extjs/src/panel/product/UsedByProductListUi.js:71
+#: extjs/src/panel/product/UsedByCatalogListUi.js:92
 msgid "List position"
 msgstr "Liste pozisyonu"
 
 #: src/panel/product/UsedByProductListUi.js:55
 #: src/panel/product/UsedByCatalogListUi.js:76
+#: extjs/src/panel/product/UsedByProductListUi.js:55
+#: extjs/src/panel/product/UsedByCatalogListUi.js:76
 msgid "List start date"
 msgstr "Liste başlangıç tarihi"
 
@@ -1061,14 +1715,27 @@ msgstr "Liste başlangıç tarihi"
 #: src/panel/ListItemItemUi.js:36 src/panel/ListItemItemUi.js:47
 #: src/panel/customer/group/ItemPickerUi.js:39
 #: src/panel/customer/ItemPickerUi.js:39 src/panel/tag/ItemPickerUi.js:40
+#: extjs/src/panel/media/ItemPickerUi.js:40
+#: extjs/src/panel/price/ItemPickerUi.js:73
+#: extjs/src/panel/product/UsedByProductListUi.js:45
+#: extjs/src/panel/product/ItemPickerUi.js:39
+#: extjs/src/panel/product/UsedByCatalogListUi.js:66
+#: extjs/src/panel/text/ItemPickerUi.js:39
+#: extjs/src/panel/attribute/ItemPickerUi.js:40
+#: extjs/src/panel/ListItemItemUi.js:36 extjs/src/panel/ListItemItemUi.js:47
+#: extjs/src/panel/tag/ItemPickerUi.js:40
+#: extjs/src/panel/customer/group/ItemPickerUi.js:39
+#: extjs/src/panel/customer/ItemPickerUi.js:39
 msgid "List type"
 msgstr "Liste türü"
 
 #: src/panel/media/MediaField.js:59 src/elements/importbutton.js:24
+#: extjs/src/panel/media/MediaField.js:59
+#: extjs/src/elements/importbutton.js:24
 msgid "Loading"
 msgstr "Yükleniyor"
 
-#: src/panel/locale/TabUi.js:23
+#: src/panel/locale/TabUi.js:23 extjs/src/panel/locale/TabUi.js:23
 msgid "Locale"
 msgstr "Yerel"
 
@@ -1077,12 +1744,13 @@ msgstr "Yerel"
 #. : Locale currency item panel title with currency label ({0}) and currency
 #. code ({1)}
 #: src/panel/locale/currency/ItemUi.js:100
+#: extjs/src/panel/locale/currency/ItemUi.js:100
 #, python-brace-format
 msgid "Locale currency: {0} ({1})"
 msgstr "Yerel para birimi: {0} ({1})"
 
 #. : Locale item panel title with site code ({1)}
-#: src/panel/locale/ItemUi.js:104
+#: src/panel/locale/ItemUi.js:104 extjs/src/panel/locale/ItemUi.js:104
 #, python-brace-format
 msgid "Locale item details ({1})"
 msgstr "Yerel öğe detayları ({1})"
@@ -1092,17 +1760,19 @@ msgstr "Yerel öğe detayları ({1})"
 #. : Locale language item panel title with language label ({0}) and language
 #. code ({1)}
 #: src/panel/locale/language/ItemUi.js:100
+#: extjs/src/panel/locale/language/ItemUi.js:100
 #, python-brace-format
 msgid "Locale language: {0} ({1})"
 msgstr "Yerel dil: {0} ({1})"
 
 #. : Locale site item panel title with site label ({0}) and site code ({1)}
 #: src/panel/locale/site/ItemUi.js:107
+#: extjs/src/panel/locale/site/ItemUi.js:107
 #, python-brace-format
 msgid "Locale site: {0} ({1})"
 msgstr "Yerel site: {0} ({1})"
 
-#: src/panel/log/ListUiSmall.js:32
+#: src/panel/log/ListUiSmall.js:32 extjs/src/panel/log/ListUiSmall.js:32
 msgid "Logs"
 msgstr "Günlükler"
 
@@ -1112,26 +1782,27 @@ msgid "Long description"
 msgstr "Uzun açıklama"
 
 #: src/panel/media/ItemPickerUi.js:11 src/elements/domain.js:50
+#: extjs/src/panel/media/ItemPickerUi.js:11 extjs/src/elements/domain.js:50
 msgid "Media"
 msgstr "Medya"
 
-#: src/panel/media/type/ListUi.js:34
+#: src/panel/media/type/ListUi.js:34 extjs/src/panel/media/type/ListUi.js:34
 msgid "Media type"
 msgstr "Medya türü"
 
 #. : Media type item panel title with type label ({0}) and site code ({1)}
-#: src/panel/media/type/ItemUi.js:22
+#: src/panel/media/type/ItemUi.js:22 extjs/src/panel/media/type/ItemUi.js:22
 #, python-brace-format
 msgid "Media type: {0} ({1})"
 msgstr "Medya türü: {0} ({1})"
 
 #. : Media item panel title with media label ({0}) and site code ({1)}
-#: src/panel/media/ItemUi.js:135
+#: src/panel/media/ItemUi.js:135 extjs/src/panel/media/ItemUi.js:135
 #, python-brace-format
 msgid "Media: {0} ({1})"
 msgstr "Medya: {0} ({1})"
 
-#: src/panel/log/ListUiSmall.js:77
+#: src/panel/log/ListUiSmall.js:77 extjs/src/panel/log/ListUiSmall.js:77
 msgid "Message"
 msgstr "Mesaj"
 
@@ -1146,29 +1817,34 @@ msgid "Meta keywords"
 msgstr "Meta keywords"
 
 #: src/panel/job/ItemUi.js:64 src/panel/job/ListUiSmall.js:67
+#: extjs/src/panel/job/ItemUi.js:64 extjs/src/panel/job/ListUiSmall.js:67
 msgid "Method"
 msgstr "Metot"
 
 #: src/panel/media/ItemUi.js:86 src/panel/media/ListUiSmall.js:75
-#: src/panel/media/ItemPickerUi.js:69
+#: src/panel/media/ItemPickerUi.js:69 extjs/src/panel/media/ItemUi.js:86
+#: extjs/src/panel/media/ListUiSmall.js:75
+#: extjs/src/panel/media/ItemPickerUi.js:69
 msgid "Mimetype"
 msgstr "MIME türü"
 
 #: src/panel/price/ItemUi.js:92
 #: jqadm/templates/product/item-price-default.php:60
 #: jqadm/templates/product/item-price-default.php:64
+#: jqadm/templates/product/item-price-default.php:63
+#: extjs/src/panel/price/ItemUi.js:92
 msgid "Minimum quantity"
 msgstr "Minimum miktar"
 
-#: src/elements/salutation.js:69
+#: src/elements/salutation.js:69 extjs/src/elements/salutation.js:69
 msgid "Miss"
 msgstr "Bayan"
 
-#: src/elements/salutation.js:67
+#: src/elements/salutation.js:67 extjs/src/elements/salutation.js:67
 msgid "Mr"
 msgstr "Bay"
 
-#: src/elements/salutation.js:68
+#: src/elements/salutation.js:68 extjs/src/elements/salutation.js:68
 msgid "Mrs"
 msgstr "Bayan"
 
@@ -1177,18 +1853,24 @@ msgstr "Bayan"
 #: src/panel/order/service/ListUi.js:91 src/panel/order/product/ItemUi.js:79
 #: src/panel/order/product/attribute/ListUiSmall.js:81
 #: src/panel/order/product/ListUi.js:97 src/panel/ConfigUi.js:70
+#: extjs/src/panel/order/service/ItemUi.js:75
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:82
+#: extjs/src/panel/order/service/ListUi.js:91
+#: extjs/src/panel/order/product/ItemUi.js:79
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:81
+#: extjs/src/panel/order/product/ListUi.js:97 extjs/src/panel/ConfigUi.js:70
 msgid "Name"
 msgstr "İsim"
 
-#: src/panel/coupon/ItemUi.js:65
+#: src/panel/coupon/ItemUi.js:65 extjs/src/panel/coupon/ItemUi.js:65
 msgid "Name of the coupon provider class (required)"
 msgstr "Kupon sağlayıcı sınıfının adı (gerekli)"
 
-#: src/panel/plugin/ItemUi.js:86
+#: src/panel/plugin/ItemUi.js:86 extjs/src/panel/plugin/ItemUi.js:86
 msgid "Name of the plugin provider class (required)"
 msgstr "Eklenti sağlayıcı sınıfının adı (gerekli)"
 
-#: src/panel/service/ItemUi.js:83
+#: src/panel/service/ItemUi.js:83 extjs/src/panel/service/ItemUi.js:83
 msgid "Name of the service provider class (required)"
 msgstr "Servis sağlayıcı sınıfının adı (gerekli)"
 
@@ -1197,39 +1879,48 @@ msgid "Next"
 msgstr "Sonraki"
 
 #: src/panel/AbstractListUi.js:342 src/panel/AbstractUsedByListUi.js:174
-#: src/elements/exportlanguage.js:394
+#: src/elements/exportlanguage.js:394 extjs/src/panel/AbstractListUi.js:342
+#: extjs/src/panel/AbstractUsedByListUi.js:174
+#: extjs/src/elements/exportlanguage.js:394
 msgid "No error information available"
 msgstr "Hiçbir hata bilgisi mevcut değil"
 
 #: src/panel/AbstractListUi.js:120 src/panel/AbstractListItemPickerUi.js:49
+#: extjs/src/panel/AbstractListUi.js:120
+#: extjs/src/panel/AbstractListItemPickerUi.js:49
 msgid "No items"
 msgstr "Öğe yok"
 
-#: src/panel/order/ListUi.js:118
+#: src/panel/order/ListUi.js:118 extjs/src/panel/order/ListUi.js:118
 msgid "Not implemented"
 msgstr "Uygulanmadı"
 
 #: src/panel/coupon/code/ListUi.js:103
+#: extjs/src/panel/coupon/code/ListUi.js:103
 msgid "Notice"
 msgstr "Uyarı"
 
 #: jqadm/templates/product/item-default.php:105
+#: jqadm/templates/product/item-default.php:106
 msgid "Option"
 msgstr "Seçenek"
 
 #: src/panel/order/OrderItemUi.js:15 src/panel/order/ListUi.js:32
+#: extjs/src/panel/order/OrderItemUi.js:15 extjs/src/panel/order/ListUi.js:32
 msgid "Order"
 msgstr "Sipariş"
 
-#: src/panel/order/ItemUi.js:20
+#: src/panel/order/ItemUi.js:20 extjs/src/panel/order/ItemUi.js:20
 msgid "Order item details"
 msgstr "Sipariş öğe detayları"
 
 #: src/panel/order/product/ItemUi.js:67 src/panel/order/product/ListUi.js:83
+#: extjs/src/panel/order/product/ItemUi.js:67
+#: extjs/src/panel/order/product/ListUi.js:83
 msgid "Order product ID"
 msgstr "Sipariş ürün kimliği"
 
-#: src/panel/portal/ItemUi.js:19
+#: src/panel/portal/ItemUi.js:19 extjs/src/panel/portal/ItemUi.js:19
 msgid "Overview"
 msgstr "Genel bakış"
 
@@ -1238,24 +1929,27 @@ msgstr "Genel bakış"
 msgid "Page %1$d of %2$d"
 msgstr "Toplam %2$d sayfadan %1$d.'si"
 
-#: src/panel/job/ListUiSmall.js:75
+#: src/panel/job/ListUiSmall.js:75 extjs/src/panel/job/ListUiSmall.js:75
 msgid "Parameter"
 msgstr "Parametre"
 
 #: src/panel/customer/ItemUi.js:76 src/panel/customer/ListUiSmall.js:63
-#: src/panel/customer/ListUi.js:61
+#: src/panel/customer/ListUi.js:61 extjs/src/panel/customer/ItemUi.js:76
+#: extjs/src/panel/customer/ListUiSmall.js:63
+#: extjs/src/panel/customer/ListUi.js:61
 msgid "Password"
 msgstr "Şifre"
 
-#: src/panel/customer/ItemUi.js:77
+#: src/panel/customer/ItemUi.js:77 extjs/src/panel/customer/ItemUi.js:77
 msgid "Password (required)"
 msgstr "Şifre (gerekli)"
 
-#: src/panel/order/ItemUi.js:68
+#: src/panel/order/ItemUi.js:68 extjs/src/panel/order/ItemUi.js:68
 msgid "Payment date"
 msgstr "Ödeme tarihi"
 
 #: src/panel/order/ItemUi.js:74 src/panel/order/ListUi.js:65
+#: extjs/src/panel/order/ItemUi.js:74 extjs/src/panel/order/ListUi.js:65
 msgid "Payment status"
 msgstr "Ödeme durumu"
 
@@ -1268,35 +1962,44 @@ msgstr "Fiziksel değerler"
 #: src/panel/AbstractListItemUi.js:30 src/panel/AbstractTreeItemUi.js:26
 #: src/panel/ListItemItemUi.js:78 src/panel/catalog/ItemUi.js:124
 #: src/panel/locale/site/ItemUi.js:122
+#: extjs/src/panel/product/stock/ItemUi.js:122
+#: extjs/src/panel/product/property/ItemUi.js:112
+#: extjs/src/panel/AbstractItemUi.js:250
+#: extjs/src/panel/AbstractListItemUi.js:30
+#: extjs/src/panel/AbstractTreeItemUi.js:26
+#: extjs/src/panel/ListItemItemUi.js:78 extjs/src/panel/catalog/ItemUi.js:124
+#: extjs/src/panel/locale/site/ItemUi.js:122
 msgid "Please recheck your data"
 msgstr "Lütfen verilerinizi tekrar kontrol edin"
 
 #: src/panel/coupon/code/ListUi.js:104
+#: extjs/src/panel/coupon/code/ListUi.js:104
 msgid "Please save the coupon first before you can add codes"
 msgstr "Kodları ekleyebilmek için lütfen önce kuponu kaydedin"
 
-#: src/panel/ListItemListUi.js:87
+#: src/panel/ListItemListUi.js:87 extjs/src/panel/ListItemListUi.js:87
 msgid ""
 "Please select an item on the right side and add it via drag and drop to this"
 " list."
 msgstr "Lütfen sağ tarafta bir öğe seçin ve sürükleyip bırakma yöntemiyle listeye ekleyin"
 
 #: src/panel/plugin/ListUi.js:32 src/elements/domain.js:51
+#: extjs/src/panel/plugin/ListUi.js:32 extjs/src/elements/domain.js:51
 msgid "Plugin"
 msgstr "Plugin"
 
-#: src/panel/plugin/type/ListUi.js:34
+#: src/panel/plugin/type/ListUi.js:34 extjs/src/panel/plugin/type/ListUi.js:34
 msgid "Plugin type"
 msgstr "Plugin türü"
 
 #. : Plugin type item panel title with type label ({0}) and site code ({1)}
-#: src/panel/plugin/type/ItemUi.js:22
+#: src/panel/plugin/type/ItemUi.js:22 extjs/src/panel/plugin/type/ItemUi.js:22
 #, python-brace-format
 msgid "Plugin type: {0} ({1})"
 msgstr "Plugin türü: {0} ({1})"
 
 #. : Plugin item panel title with attribute label ({0}) and site code ({1)}
-#: src/panel/plugin/ItemUi.js:133
+#: src/panel/plugin/ItemUi.js:133 extjs/src/panel/plugin/ItemUi.js:133
 #, python-brace-format
 msgid "Plugin: {0} ({1})"
 msgstr "Plugin: {0} ({1})"
@@ -1305,7 +2008,13 @@ msgstr "Plugin: {0} ({1})"
 #: src/panel/attribute/ListUiSmall.js:84 src/panel/attribute/ListUi.js:79
 #: src/panel/ListItemListUi.js:174 src/panel/locale/ItemUi.js:76
 #: src/panel/locale/ListUi.js:74 src/panel/plugin/ItemUi.js:96
-#: src/panel/plugin/ListUi.js:84
+#: src/panel/plugin/ListUi.js:84 extjs/src/panel/service/ItemUi.js:93
+#: extjs/src/panel/service/ListUi.js:85
+#: extjs/src/panel/attribute/ListUiSmall.js:84
+#: extjs/src/panel/attribute/ListUi.js:79
+#: extjs/src/panel/ListItemListUi.js:174 extjs/src/panel/locale/ItemUi.js:76
+#: extjs/src/panel/locale/ListUi.js:74 extjs/src/panel/plugin/ItemUi.js:96
+#: extjs/src/panel/plugin/ListUi.js:84
 msgid "Position"
 msgstr "Pozisyon"
 
@@ -1315,15 +2024,25 @@ msgstr "Pozisyon"
 #: src/panel/customer/address/ItemUi.js:104
 #: src/panel/order/address/ItemUi.js:92
 #: src/panel/order/address/DeliveryItemUi.js:77
+#: extjs/src/panel/supplier/address/ItemUi.js:101
+#: extjs/src/panel/supplier/address/ItemUi.js:102
+#: extjs/src/panel/customer/ItemUi.js:185
+#: extjs/src/panel/customer/ItemUi.js:186
+#: extjs/src/panel/customer/address/ItemUi.js:103
+#: extjs/src/panel/customer/address/ItemUi.js:104
+#: extjs/src/panel/order/address/ItemUi.js:92
+#: extjs/src/panel/order/address/DeliveryItemUi.js:77
 msgid "Postal code"
 msgstr "Posta kodu"
 
 #: src/panel/media/ListUiSmall.js:88 src/panel/media/ItemPickerUi.js:94
 #: jqadm/templates/product/item-image-default.php:19
+#: extjs/src/panel/media/ListUiSmall.js:88
+#: extjs/src/panel/media/ItemPickerUi.js:94
 msgid "Preview"
 msgstr "Önizleme"
 
-#: src/panel/media/ItemUi.js:97
+#: src/panel/media/ItemUi.js:97 extjs/src/panel/media/ItemUi.js:97
 msgid "Preview URL"
 msgstr "Önizleme URL'si"
 
@@ -1335,21 +2054,28 @@ msgstr "Önceki"
 #: src/panel/price/ItemPickerUi.js:127 src/panel/order/service/ItemUi.js:79
 #: src/panel/order/service/ListUi.js:96 src/panel/order/product/ItemUi.js:87
 #: src/panel/order/product/ListUi.js:106 src/elements/domain.js:52
+#: extjs/src/panel/price/ListUiSmall.js:124
+#: extjs/src/panel/price/ItemPickerUi.js:11
+#: extjs/src/panel/price/ItemPickerUi.js:127
+#: extjs/src/panel/order/service/ItemUi.js:79
+#: extjs/src/panel/order/service/ListUi.js:96
+#: extjs/src/panel/order/product/ItemUi.js:87
+#: extjs/src/panel/order/product/ListUi.js:106 extjs/src/elements/domain.js:52
 msgid "Price"
 msgstr "Fiyat"
 
-#: src/panel/price/type/ListUi.js:34
+#: src/panel/price/type/ListUi.js:34 extjs/src/panel/price/type/ListUi.js:34
 msgid "Price type"
 msgstr "Fiyat türü"
 
 #. : Price type item panel title with type label ({0}) and site code ({1)}
-#: src/panel/price/type/ItemUi.js:22
+#: src/panel/price/type/ItemUi.js:22 extjs/src/panel/price/type/ItemUi.js:22
 #, python-brace-format
 msgid "Price type: {0} ({1})"
 msgstr "Fiyat türü: {0} ({1})"
 
 #. : Price item panel title with price label ({0}) and site code ({1)}
-#: src/panel/price/ItemUi.js:145
+#: src/panel/price/ItemUi.js:145 extjs/src/panel/price/ItemUi.js:145
 #, python-brace-format
 msgid "Price: {0} ({1})"
 msgstr "Fiyat: {0} ({1})"
@@ -1358,12 +2084,15 @@ msgstr "Fiyat: {0} ({1})"
 msgid "Prices"
 msgstr "Fiyatlar"
 
-#: src/panel/log/ListUiSmall.js:71
+#: src/panel/log/ListUiSmall.js:71 extjs/src/panel/log/ListUiSmall.js:71
 msgid "Priority"
 msgstr "Öncelik"
 
 #: src/panel/product/ItemPickerUi.js:10 src/panel/product/ListUi.js:28
 #: src/panel/order/product/ItemUi.js:31 src/elements/domain.js:53
+#: extjs/src/panel/product/ItemPickerUi.js:10
+#: extjs/src/panel/product/ListUi.js:28
+#: extjs/src/panel/order/product/ItemUi.js:31 extjs/src/elements/domain.js:53
 msgid "Product"
 msgstr "Ürün"
 
@@ -1371,14 +2100,21 @@ msgstr "Ürün"
 #: src/panel/product/property/ListUi.js:81
 #: src/panel/order/product/ItemUi.js:63 src/panel/order/product/ListUi.js:77
 #: src/panel/order/coupon/ListUi.js:109
+#: extjs/src/panel/product/stock/ListUi.js:76
+#: extjs/src/panel/product/property/ListUi.js:81
+#: extjs/src/panel/order/product/ItemUi.js:63
+#: extjs/src/panel/order/product/ListUi.js:77
+#: extjs/src/panel/order/coupon/ListUi.js:109
 msgid "Product ID"
 msgstr "Ürün ID"
 
 #: src/panel/order/coupon/ListUi.js:116
+#: extjs/src/panel/order/coupon/ListUi.js:116
 msgid "Product code"
 msgstr "Ürün kodu"
 
 #: src/panel/order/coupon/ListUi.js:147
+#: extjs/src/panel/order/coupon/ListUi.js:147
 msgid "Product costs"
 msgstr "Ürün maliyetleri"
 
@@ -1387,6 +2123,7 @@ msgid "Product height (yard, inch, etc.)"
 msgstr "Ürün yüksekliği (yard, inç, vb)"
 
 #: src/panel/order/product/ItemUi.js:19
+#: extjs/src/panel/order/product/ItemUi.js:19
 msgid "Product item details"
 msgstr "Ürün öğe detayları"
 
@@ -1397,22 +2134,27 @@ msgstr "Ürün uzunluğu (yard, inç, vb)"
 #: src/panel/order/coupon/ListUi.js:124
 #: jqadm/templates/product/item-text-default.php:37
 #: jqadm/templates/product/item-text-default.php:41
+#: extjs/src/panel/order/coupon/ListUi.js:124
 msgid "Product name"
 msgstr "Ürün adı"
 
 #: src/panel/order/coupon/ListUi.js:140
+#: extjs/src/panel/order/coupon/ListUi.js:140
 msgid "Product price"
 msgstr "Ürün fiyatı"
 
 #: src/panel/order/coupon/ListUi.js:132
+#: extjs/src/panel/order/coupon/ListUi.js:132
 msgid "Product quantity"
 msgstr "Ürün miktarı"
 
 #: src/panel/order/coupon/ListUi.js:154
+#: extjs/src/panel/order/coupon/ListUi.js:154
 msgid "Product rebate"
 msgstr "Ürün indirimi"
 
 #: src/panel/product/stock/ItemUi.js:19
+#: extjs/src/panel/product/stock/ItemUi.js:19
 msgid "Product stock"
 msgstr "Ürün stoğu"
 
@@ -1427,15 +2169,18 @@ msgid "Product tag: {0} ({1})"
 msgstr "Ürün etiketi: {0} ({1})"
 
 #: src/panel/order/coupon/ListUi.js:161
+#: extjs/src/panel/order/coupon/ListUi.js:161
 msgid "Product tax rate"
 msgstr "Ürün vergi oranı"
 
 #: src/panel/product/type/ListUi.js:33
+#: extjs/src/panel/product/type/ListUi.js:33
 msgid "Product type"
 msgstr "Ürün türü"
 
 #. : Product type item panel title with type label ({0}) and site code ({1)}
 #: src/panel/product/type/ItemUi.js:20
+#: extjs/src/panel/product/type/ItemUi.js:20
 #, python-brace-format
 msgid "Product type: {0} ({1})"
 msgstr "Ürün türü: {0} ({1})"
@@ -1450,58 +2195,78 @@ msgstr "Ürün genişliği (yard, inç, vb)"
 
 #. : Product item panel title with product label ({0}) and site code ({1)}
 #: src/panel/product/ItemUi.js:150 src/panel/product/ItemUi.js:138
+#: extjs/src/panel/product/ItemUi.js:138
 #, python-brace-format
 msgid "Product: {0} ({1})"
 msgstr "Ürün: {0} ({1})"
 
 #: src/panel/order/product/ListUi.js:11
 #: jqadm/templates/product/item-bundle-default.php:20
+#: extjs/src/panel/order/product/ListUi.js:11
 msgid "Products"
 msgstr "Ürünler"
 
 #: src/panel/product/property/ItemUi.js:19
+#: extjs/src/panel/product/property/ItemUi.js:19
 msgid "Properties"
 msgstr "Özellikler"
 
 #: src/panel/product/property/ListUi.js:32
+#: extjs/src/panel/product/property/ListUi.js:32
 msgid "Property"
 msgstr "Özellik"
 
 #: src/panel/product/property/ItemUi.js:86
+#: extjs/src/panel/product/property/ItemUi.js:86
 msgid "Property value (required)"
 msgstr "Özellik değeri (gerekli)"
 
 #: src/panel/service/ItemUi.js:79 src/panel/service/ListUi.js:70
 #: src/panel/coupon/ItemUi.js:61 src/panel/coupon/ListUi.js:55
 #: src/panel/plugin/ItemUi.js:81 src/panel/plugin/ListUi.js:69
+#: extjs/src/panel/service/ItemUi.js:79 extjs/src/panel/service/ListUi.js:70
+#: extjs/src/panel/coupon/ItemUi.js:61 extjs/src/panel/coupon/ListUi.js:55
+#: extjs/src/panel/plugin/ItemUi.js:81 extjs/src/panel/plugin/ListUi.js:69
 msgid "Provider"
 msgstr "Sağlayıcı"
 
-#: src/panel/order/ListUi.js:58
+#: src/panel/order/ListUi.js:58 extjs/src/panel/order/ListUi.js:58
 msgid "Purchase date"
 msgstr "Satın alma tarihi"
 
 #: src/panel/price/ListUiSmall.js:116 src/panel/price/ItemPickerUi.js:118
 #: src/panel/product/stock/ListUi.js:93 src/panel/order/product/ItemUi.js:83
 #: src/panel/order/product/ListUi.js:102
+#: extjs/src/panel/price/ListUiSmall.js:116
+#: extjs/src/panel/price/ItemPickerUi.js:118
+#: extjs/src/panel/product/stock/ListUi.js:93
+#: extjs/src/panel/order/product/ItemUi.js:83
+#: extjs/src/panel/order/product/ListUi.js:102
 msgid "Quantity"
 msgstr "Miktar"
 
 #: src/panel/product/stock/ItemUi.js:90
+#: extjs/src/panel/product/stock/ItemUi.js:90
 msgid "Quantity or empty if unlimited (optional)"
 msgstr "Miktar veya sınırsızsa boş (isteğe bağlı)"
 
 #: src/panel/price/ListUiSmall.js:133 src/panel/price/ItemPickerUi.js:135
 #: src/panel/order/service/ItemUi.js:87 src/panel/order/service/ListUi.js:104
 #: src/panel/order/product/ItemUi.js:95 src/panel/order/product/ListUi.js:114
+#: extjs/src/panel/price/ListUiSmall.js:133
+#: extjs/src/panel/price/ItemPickerUi.js:135
+#: extjs/src/panel/order/service/ItemUi.js:87
+#: extjs/src/panel/order/service/ListUi.js:104
+#: extjs/src/panel/order/product/ItemUi.js:95
+#: extjs/src/panel/order/product/ListUi.js:114
 msgid "Rebate"
 msgstr "İndirim"
 
-#: src/panel/ListItemListUi.js:160
+#: src/panel/ListItemListUi.js:160 extjs/src/panel/ListItemListUi.js:160
 msgid "Ref-ID"
 msgstr "Referans ID"
 
-#: src/panel/order/ListUi.js:84
+#: src/panel/order/ListUi.js:84 extjs/src/panel/order/ListUi.js:84
 msgid "Related order ID"
 msgstr "İlgili sipariş ID"
 
@@ -1509,29 +2274,34 @@ msgstr "İlgili sipariş ID"
 msgid "Remove filter"
 msgstr "Filtreyi kaldır"
 
-#: src/panel/log/ListUiSmall.js:95
+#: src/panel/log/ListUiSmall.js:95 extjs/src/panel/log/ListUiSmall.js:95
 msgid "Request"
 msgstr "Talep"
 
-#: src/panel/job/ListUiSmall.js:96
+#: src/panel/job/ListUiSmall.js:96 extjs/src/panel/job/ListUiSmall.js:92
 msgid "Result"
 msgstr "Sonuç"
 
 #: src/panel/order/address/ItemUi.js:64
 #: src/panel/order/address/DeliveryItemUi.js:49 src/elements/salutation.js:10
+#: extjs/src/panel/order/address/ItemUi.js:64
+#: extjs/src/panel/order/address/DeliveryItemUi.js:49
+#: extjs/src/elements/salutation.js:10
 msgid "Salutation"
 msgstr "Selamlama"
 
 #: src/panel/AbstractItemUi.js:150
 #: jqadm/templates/product/item-default.php:135
+#: jqadm/templates/product/item-default.php:136
+#: extjs/src/panel/AbstractItemUi.js:150
 msgid "Save"
 msgstr "Kaydet"
 
-#: src/panel/AbstractItemUi.js:201
+#: src/panel/AbstractItemUi.js:201 extjs/src/panel/AbstractItemUi.js:201
 msgid "Saving"
 msgstr "Kaydediliyor"
 
-#: src/Schema.js:86
+#: src/Schema.js:86 extjs/src/Schema.js:86
 #, python-brace-format
 msgid "Schema {0} is  not registered"
 msgstr "Şema {0} kayıtlı değil"
@@ -1540,53 +2310,60 @@ msgstr "Şema {0} kayıtlı değil"
 msgid "Search"
 msgstr "Ara"
 
-#: src/Schema.js:96
+#: src/Schema.js:96 extjs/src/Schema.js:96
 #, python-brace-format
 msgid "Search schema {0} is  not registered"
 msgstr "Arama şeması {0} kayıtlı değil"
 
-#: src/panel/ListItemListUi.js:86
+#: src/panel/ListItemListUi.js:86 extjs/src/panel/ListItemListUi.js:86
 msgid "Select Item"
 msgstr "Öğe seç"
 
-#: src/elements/exportlanguage.js:21
+#: src/elements/exportlanguage.js:21 extjs/src/elements/exportlanguage.js:21
 msgid "Select languages to export"
 msgstr "Dış aktarmak için dilleri seçin"
 
 #: src/panel/service/ListUi.js:26 src/panel/order/service/ItemUi.js:31
-#: src/elements/domain.js:54
+#: src/elements/domain.js:54 extjs/src/panel/service/ListUi.js:26
+#: extjs/src/panel/order/service/ItemUi.js:31 extjs/src/elements/domain.js:54
 msgid "Service"
 msgstr "Servis"
 
 #: src/panel/order/service/ItemUi.js:63 src/panel/order/service/ListUi.js:77
+#: extjs/src/panel/order/service/ItemUi.js:63
+#: extjs/src/panel/order/service/ListUi.js:77
 msgid "Service ID"
 msgstr "Servis ID"
 
-#: src/panel/price/ItemUi.js:111
+#: src/panel/price/ItemUi.js:111 extjs/src/panel/price/ItemUi.js:111
 msgid "Service fees"
 msgstr "Hizmet ücretleri"
 
 #: src/panel/order/service/ItemUi.js:19
+#: extjs/src/panel/order/service/ItemUi.js:19
 msgid "Service item details"
 msgstr "Servis öğe detayları"
 
 #: src/panel/service/type/ListUi.js:33
+#: extjs/src/panel/service/type/ListUi.js:33
 msgid "Service type"
 msgstr "Servis türü"
 
 #. : Service type item panel title with type label ({0}) and site code ({1)}
 #: src/panel/service/type/ItemUi.js:20
+#: extjs/src/panel/service/type/ItemUi.js:20
 #, python-brace-format
 msgid "Service type: {0} ({1})"
 msgstr "Servis türü: {0} ({1})"
 
 #. : Service item panel title with service label ({0}) and site code ({1)}
-#: src/panel/service/ItemUi.js:129
+#: src/panel/service/ItemUi.js:129 extjs/src/panel/service/ItemUi.js:129
 #, python-brace-format
 msgid "Service: {0} ({1})"
 msgstr "Servis: {0} ({1})"
 
 #: src/panel/order/service/ListUi.js:11
+#: extjs/src/panel/order/service/ListUi.js:11
 msgid "Services"
 msgstr "Servisler"
 
@@ -1595,15 +2372,23 @@ msgstr "Servisler"
 msgid "Short description"
 msgstr "Kısa açıklama"
 
+#: extjs/src/init.js:58
+msgid "Simple mode"
+msgstr ""
+
 #: src/panel/order/OrderItemUi.js:39 src/panel/locale/site/ListUi.js:27
+#: jqadm/templates/common/page-default.php:71
+#: extjs/src/panel/order/OrderItemUi.js:39
+#: extjs/src/panel/locale/site/ListUi.js:27
 msgid "Site"
 msgstr "Site"
 
-#: src/panel/order/ListUi.js:119
+#: src/panel/order/ListUi.js:119 extjs/src/panel/order/ListUi.js:119
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Maalesef manuel olarak sipariş ekleme henüz uygulanmamaktadır"
 
 #: src/panel/order/ItemUi.js:64 src/panel/order/ListUi.js:51
+#: extjs/src/panel/order/ItemUi.js:64 extjs/src/panel/order/ListUi.js:51
 msgid "Source"
 msgstr "Kaynak"
 
@@ -1619,6 +2404,16 @@ msgstr "Kaynak"
 #: jqadm/templates/product/item-default.php:85
 #: jqadm/templates/product/list-default.php:70
 #: jqadm/templates/product/list-default.php:133
+#: jqadm/templates/product/item-default.php:86
+#: extjs/src/panel/product/ItemUi.js:97
+#: extjs/src/panel/product/ListUiSmall.js:66
+#: extjs/src/panel/product/UsedByProductListUi.js:152
+#: extjs/src/panel/product/ItemPickerUi.js:83
+#: extjs/src/panel/product/ListUi.js:80 extjs/src/panel/ListItemListUi.js:180
+#: extjs/src/panel/ListItemItemUi.js:50
+#: extjs/src/panel/coupon/code/ItemUi.js:72
+#: extjs/src/panel/coupon/code/ListUi.js:60
+#: extjs/src/panel/coupon/ItemUi.js:75 extjs/src/panel/coupon/ListUi.js:69
 msgid "Start date"
 msgstr "Başlangıç tarihi"
 
@@ -1628,6 +2423,13 @@ msgstr "Başlangıç tarihi"
 #: src/panel/customer/address/ListUi.js:130
 #: src/panel/order/address/ItemUi.js:100
 #: src/panel/order/address/DeliveryItemUi.js:85
+#: extjs/src/panel/supplier/address/ItemUi.js:114
+#: extjs/src/panel/supplier/address/ListUi.js:130
+#: extjs/src/panel/customer/ItemUi.js:198
+#: extjs/src/panel/customer/address/ItemUi.js:116
+#: extjs/src/panel/customer/address/ListUi.js:130
+#: extjs/src/panel/order/address/ItemUi.js:100
+#: extjs/src/panel/order/address/DeliveryItemUi.js:85
 msgid "State"
 msgstr "Devlet"
 
@@ -1657,32 +2459,78 @@ msgstr "Devlet"
 #: jqadm/templates/product/item-default.php:48
 #: jqadm/templates/product/list-default.php:66
 #: jqadm/templates/product/list-default.php:105
+#: jqadm/templates/product/item-default.php:49
+#: extjs/src/panel/service/type/ListUi.js:54
+#: extjs/src/panel/service/ListUi.js:49 extjs/src/panel/supplier/ListUi.js:46
+#: extjs/src/panel/media/type/ListUi.js:56
+#: extjs/src/panel/media/ListUiSmall.js:54
+#: extjs/src/panel/media/ItemPickerUi.js:49
+#: extjs/src/panel/job/ListUiSmall.js:52
+#: extjs/src/panel/price/type/ListUi.js:56
+#: extjs/src/panel/price/ListUiSmall.js:93
+#: extjs/src/panel/price/ItemPickerUi.js:82
+#: extjs/src/panel/product/type/ListUi.js:54
+#: extjs/src/panel/product/stock/warehouse/ListUi.js:47
+#: extjs/src/panel/product/ListUiSmall.js:40
+#: extjs/src/panel/product/UsedByProductListUi.js:112
+#: extjs/src/panel/product/ItemPickerUi.js:48
+#: extjs/src/panel/product/ListUi.js:51
+#: extjs/src/panel/product/UsedByCatalogListUi.js:133
+#: extjs/src/panel/text/type/ListUi.js:53
+#: extjs/src/panel/text/ListUiSmall.js:53
+#: extjs/src/panel/text/ItemPickerUi.js:48
+#: extjs/src/panel/attribute/type/ListUi.js:56
+#: extjs/src/panel/attribute/ListUiSmall.js:57
+#: extjs/src/panel/attribute/ItemPickerUi.js:49
+#: extjs/src/panel/attribute/ListUi.js:52 extjs/src/panel/coupon/ListUi.js:47
+#: extjs/src/panel/customer/ListUiSmall.js:43
+#: extjs/src/panel/customer/ItemPickerUi.js:47
+#: extjs/src/panel/customer/ListUi.js:46
+#: extjs/src/panel/order/product/ItemUi.js:103
+#: extjs/src/panel/order/product/ListUi.js:122
+#: extjs/src/panel/locale/language/ListUi.js:51
+#: extjs/src/panel/locale/currency/ListUi.js:51
+#: extjs/src/panel/locale/ListUi.js:51
+#: extjs/src/panel/locale/site/ListUi.js:45
+#: extjs/src/panel/plugin/type/ListUi.js:56
+#: extjs/src/panel/plugin/ListUi.js:55 extjs/src/elements/exportlanguage.js:73
+#: extjs/src/elements/exportlanguage.js:98 extjs/src/elements/status.js:10
 msgid "Status"
 msgstr "Durum"
 
 #: src/panel/product/stock/ListUi.js:27
+#: extjs/src/panel/product/stock/ListUi.js:27
 msgid "Stock"
 msgstr "Stok"
 
 #: src/panel/product/stock/ItemUi.js:88
 #: jqadm/templates/product/item-stock-default.php:15
 #: jqadm/templates/product/item-stock-default.php:22
+#: extjs/src/panel/product/stock/ItemUi.js:88
 msgid "Stock level"
 msgstr "Stok seviyesi"
 
 #: src/panel/supplier/address/ListUi.js:103
 #: src/panel/customer/address/ListUi.js:103
+#: extjs/src/panel/supplier/address/ListUi.js:103
+#: extjs/src/panel/customer/address/ListUi.js:103
 msgid "Street"
 msgstr "Sokak"
 
 #: src/panel/supplier/address/ItemUi.js:83 src/panel/customer/ItemUi.js:167
 #: src/panel/customer/address/ItemUi.js:85
+#: extjs/src/panel/supplier/address/ItemUi.js:83
+#: extjs/src/panel/customer/ItemUi.js:167
+#: extjs/src/panel/customer/address/ItemUi.js:85
 msgid "Street (required)"
 msgstr "Sokak (gerekli)"
 
 #: src/panel/price/ItemUi.js:105
 #: jqadm/templates/product/item-price-default.php:80
 #: jqadm/templates/product/item-price-default.php:83
+#: jqadm/templates/product/item-price-default.php:86
+#: jqadm/templates/product/item-price-default.php:89
+#: extjs/src/panel/price/ItemUi.js:105
 msgid "Substracted rebate amount"
 msgstr "Çıkarılmış indirim tutarı"
 
@@ -1690,7 +2538,8 @@ msgstr "Çıkarılmış indirim tutarı"
 #: src/panel/product/ListUiSmall.js:66
 #: src/panel/product/UsedByProductListUi.js:152
 #: src/panel/product/ItemPickerUi.js:83 src/panel/product/ListUi.js:80
-#: src/elements/domain.js:55
+#: src/elements/domain.js:55 extjs/src/panel/supplier/ListUi.js:26
+#: extjs/src/elements/domain.js:55
 msgid "Supplier"
 msgstr "Tedarikçi"
 
@@ -1699,40 +2548,47 @@ msgstr "Tedarikçi"
 #. : Supplier address item panel title with supplier name ({0}) and site code
 #. ({1)}
 #: src/panel/supplier/address/ItemUi.js:179
+#: extjs/src/panel/supplier/address/ItemUi.js:179
 #, python-brace-format
 msgid "Supplier address: {0} ({1})"
 msgstr "Tedarikçi adresi: {0} ({1})"
 
 #. : Supplier item panel title with supplier label ({0}) and site code ({1)}
-#: src/panel/supplier/ItemUi.js:91
+#: src/panel/supplier/ItemUi.js:91 extjs/src/panel/supplier/ItemUi.js:91
 #, python-brace-format
 msgid "Supplier: {0} ({1})"
 msgstr "Tedarikçi: {0} ({1})"
 
-#: src/elements/siteLanguage.js:46
+#: src/elements/siteLanguage.js:46 extjs/src/elements/siteLanguage.js:46
 msgid "Switching language ..."
 msgstr "Dil değiştiriliyor ..."
 
-#: src/elements/site.js:41
+#: src/elements/site.js:41 extjs/src/elements/site.js:41
 msgid "Switching site ..."
 msgstr "Site değiştiriliyor ..."
 
 #: src/panel/product/tag/ItemUi.js:75 src/panel/tag/ItemUi.js:76
+#: extjs/src/panel/tag/ItemUi.js:76
 msgid "Tag value (required)"
 msgstr "Etiket değeri (gerekli)"
 
 #. : Tag item panel title with tag label ({0}) and site code ({1)}
-#: src/panel/tag/ItemUi.js:101
+#: src/panel/tag/ItemUi.js:101 extjs/src/panel/tag/ItemUi.js:101
 #, python-brace-format
 msgid "Tag: {0} ({1})"
 msgstr "Etiket: {0} ({1})"
 
 #: src/panel/product/tag/ItemPickerUi.js:10 src/panel/tag/ItemPickerUi.js:11
+#: extjs/src/panel/tag/ItemPickerUi.js:11
 msgid "Tags"
 msgstr "Etiketler"
 
 #: src/panel/price/ListUiSmall.js:151 src/panel/price/ItemPickerUi.js:156
 #: src/panel/order/service/ListUi.js:108 src/panel/order/product/ListUi.js:118
+#: extjs/src/panel/price/ListUiSmall.js:151
+#: extjs/src/panel/price/ItemPickerUi.js:156
+#: extjs/src/panel/order/service/ListUi.js:108
+#: extjs/src/panel/order/product/ListUi.js:118
 msgid "Tax rate"
 msgstr "Vergi oranı"
 
@@ -1740,6 +2596,11 @@ msgstr "Vergi oranı"
 #: src/panel/order/product/ItemUi.js:99
 #: jqadm/templates/product/item-price-default.php:96
 #: jqadm/templates/product/item-price-default.php:100
+#: jqadm/templates/product/item-price-default.php:70
+#: jqadm/templates/product/item-price-default.php:73
+#: extjs/src/panel/price/ItemUi.js:117
+#: extjs/src/panel/order/service/ItemUi.js:91
+#: extjs/src/panel/order/product/ItemUi.js:99
 msgid "Tax rate in %"
 msgstr "% vergi oranı"
 
@@ -1749,6 +2610,13 @@ msgstr "% vergi oranı"
 #: src/panel/customer/address/ListUi.js:152
 #: src/panel/order/address/ItemUi.js:112
 #: src/panel/order/address/DeliveryItemUi.js:97
+#: extjs/src/panel/supplier/address/ItemUi.js:137
+#: extjs/src/panel/supplier/address/ListUi.js:151
+#: extjs/src/panel/customer/ItemUi.js:221
+#: extjs/src/panel/customer/address/ItemUi.js:139
+#: extjs/src/panel/customer/address/ListUi.js:152
+#: extjs/src/panel/order/address/ItemUi.js:112
+#: extjs/src/panel/order/address/DeliveryItemUi.js:97
 msgid "Telefax"
 msgstr "Faks"
 
@@ -1758,30 +2626,41 @@ msgstr "Faks"
 #: src/panel/customer/address/ListUi.js:147
 #: src/panel/order/address/ItemUi.js:108
 #: src/panel/order/address/DeliveryItemUi.js:93
+#: extjs/src/panel/supplier/address/ItemUi.js:131
+#: extjs/src/panel/supplier/address/ListUi.js:146
+#: extjs/src/panel/customer/ItemUi.js:215
+#: extjs/src/panel/customer/address/ItemUi.js:133
+#: extjs/src/panel/customer/address/ListUi.js:147
+#: extjs/src/panel/order/address/ItemUi.js:108
+#: extjs/src/panel/order/address/DeliveryItemUi.js:93
 msgid "Telephone"
 msgstr "Telefon"
 
 #: src/panel/supplier/address/ItemUi.js:132 src/panel/customer/ItemUi.js:216
 #: src/panel/customer/address/ItemUi.js:134
+#: extjs/src/panel/supplier/address/ItemUi.js:132
+#: extjs/src/panel/customer/ItemUi.js:216
+#: extjs/src/panel/customer/address/ItemUi.js:134
 msgid "Telephone number, e.g. +155512345"
 msgstr "Telefon numarası, örn. +155512345"
 
 #: src/panel/text/ItemPickerUi.js:10 src/elements/domain.js:56
+#: extjs/src/panel/text/ItemPickerUi.js:10 extjs/src/elements/domain.js:56
 msgid "Text"
 msgstr "Metin"
 
-#: src/panel/text/type/ListUi.js:32
+#: src/panel/text/type/ListUi.js:32 extjs/src/panel/text/type/ListUi.js:32
 msgid "Text type"
 msgstr "Metin türü"
 
 #. : Text type item panel title with type label ({0}) and site code ({1)}
-#: src/panel/text/type/ItemUi.js:21
+#: src/panel/text/type/ItemUi.js:21 extjs/src/panel/text/type/ItemUi.js:21
 #, python-brace-format
 msgid "Text type: {0} ({1})"
 msgstr "Metin türü: {0} ({1})"
 
 #. : Text item panel title with text label ({0}) and site code ({1)}
-#: src/panel/text/ItemUi.js:110
+#: src/panel/text/ItemUi.js:110 extjs/src/panel/text/ItemUi.js:110
 #, python-brace-format
 msgid "Text: {0} ({1})"
 msgstr "Metin: {0} ({1})"
@@ -1790,13 +2669,13 @@ msgstr "Metin: {0} ({1})"
 msgid "Texts"
 msgstr "Metinler"
 
-#: src/elements/exportlanguage.js:448
+#: src/elements/exportlanguage.js:448 extjs/src/elements/exportlanguage.js:448
 msgid ""
 "The file with the exported texts will be available within a few minutes. It "
 "can then be downloaded from the \"Job\" panel of the \"Overview\" tab."
 msgstr "Dışa aktarılan metinli dosyalar bir kaç dakika içinde hazır olacaktır. Hazır olduğunda \"Genel bakış\" sekmesinin \"Görevler\" panelinden indirilebilir."
 
-#: src/elements/importbutton.js:77
+#: src/elements/importbutton.js:77 extjs/src/elements/importbutton.js:77
 msgid ""
 "The texts of your uploaded file will be imported within a few minutes. You "
 "can check the status of the import in the \"Job\" panel of the \"Overview\" "
@@ -1804,6 +2683,8 @@ msgid ""
 msgstr "Yüklediğiniz dosyanın metinleri birkaç dakika içinde içe aktarılacaktır. İçe aktarma durumunu \"Genel bakış\" sekmesinin \"Görevler\" panelinde kontrol edebilirsiniz."
 
 #: src/panel/AbstractListItemUi.js:73 src/panel/ListItemItemUi.js:118
+#: extjs/src/panel/AbstractListItemUi.js:73
+#: extjs/src/panel/ListItemItemUi.js:118
 msgid "This combination already exists"
 msgstr "Bu kombinasyon zaten mevcut"
 
@@ -1814,15 +2695,25 @@ msgstr "Bu kombinasyon zaten mevcut"
 #: src/panel/order/address/ItemUi.js:68
 #: src/panel/order/address/DeliveryItemUi.js:53
 #: jqadm/templates/product/item-image-default.php:21
+#: extjs/src/panel/supplier/address/ItemUi.js:63
+#: extjs/src/panel/supplier/address/ListUi.js:87
+#: extjs/src/panel/customer/ItemUi.js:147
+#: extjs/src/panel/customer/address/ItemUi.js:65
+#: extjs/src/panel/customer/address/ListUi.js:87
+#: extjs/src/panel/order/address/ItemUi.js:68
+#: extjs/src/panel/order/address/DeliveryItemUi.js:53
 msgid "Title"
 msgstr "Başlık"
 
-#: src/panel/order/OrderItemUi.js:51
+#: src/panel/order/OrderItemUi.js:51 extjs/src/panel/order/OrderItemUi.js:51
 msgid "Total"
 msgstr "Toplam"
 
 #: src/panel/supplier/address/ItemUi.js:121 src/panel/customer/ItemUi.js:205
 #: src/panel/customer/address/ItemUi.js:123
+#: extjs/src/panel/supplier/address/ItemUi.js:121
+#: extjs/src/panel/customer/ItemUi.js:205
+#: extjs/src/panel/customer/address/ItemUi.js:123
 msgid "Two letter country code, e.g. \"US\" (required)"
 msgstr "İki harfli ülke kodu, örn. \"TR\" (gerekli)"
 
@@ -1851,10 +2742,38 @@ msgstr "İki harfli ülke kodu, örn. \"TR\" (gerekli)"
 #: jqadm/templates/product/item-default.php:59
 #: jqadm/templates/product/list-default.php:67
 #: jqadm/templates/product/list-default.php:112
+#: jqadm/templates/product/item-default.php:60
+#: extjs/src/panel/service/ItemUi.js:59 extjs/src/panel/service/ListUi.js:57
+#: extjs/src/panel/media/ItemUi.js:61 extjs/src/panel/media/ListUiSmall.js:62
+#: extjs/src/panel/media/ItemPickerUi.js:58 extjs/src/panel/price/ItemUi.js:59
+#: extjs/src/panel/price/ListUiSmall.js:102
+#: extjs/src/panel/price/ItemPickerUi.js:91
+#: extjs/src/panel/product/ItemUi.js:60
+#: extjs/src/panel/product/ListUiSmall.js:48
+#: extjs/src/panel/product/UsedByProductListUi.js:121
+#: extjs/src/panel/product/ItemPickerUi.js:57
+#: extjs/src/panel/product/ListUi.js:59
+#: extjs/src/panel/product/property/ItemUi.js:68
+#: extjs/src/panel/product/property/ListUi.js:88
+#: extjs/src/panel/text/ItemUi.js:61 extjs/src/panel/text/ListUiSmall.js:61
+#: extjs/src/panel/text/ItemPickerUi.js:57
+#: extjs/src/panel/attribute/ItemUi.js:73
+#: extjs/src/panel/attribute/ListUiSmall.js:65
+#: extjs/src/panel/attribute/ItemPickerUi.js:58
+#: extjs/src/panel/attribute/ListUi.js:60 extjs/src/panel/tag/ItemUi.js:58
+#: extjs/src/panel/tag/ListUiSmall.js:40
+#: extjs/src/panel/tag/ItemPickerUi.js:49
+#: extjs/src/panel/order/service/ItemUi.js:67
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:77
+#: extjs/src/panel/order/service/ListUi.js:83
+#: extjs/src/panel/order/product/ItemUi.js:71
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:76
+#: extjs/src/panel/order/product/ListUi.js:89
+#: extjs/src/panel/plugin/ItemUi.js:59 extjs/src/panel/plugin/ListUi.js:63
 msgid "Type"
 msgstr "Tür"
 
-#: src/panel/type/TabUi.js:22
+#: src/panel/type/TabUi.js:22 extjs/src/panel/type/TabUi.js:22
 msgid "Types"
 msgstr "Türler"
 
@@ -1871,28 +2790,44 @@ msgstr "URL segmenti"
 #: src/panel/locale/language/ItemUi.js:69
 #: src/panel/locale/currency/ItemUi.js:69 src/panel/locale/site/ItemUi.js:69
 #: src/panel/attribute/ItemUi.js:89
+#: extjs/src/panel/type/AbstractTypeItemUi.js:69
+#: extjs/src/panel/service/ItemUi.js:76 extjs/src/panel/supplier/ItemUi.js:59
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:64
+#: extjs/src/panel/attribute/ItemUi.js:89 extjs/src/panel/catalog/ItemUi.js:68
+#: extjs/src/panel/coupon/code/ItemUi.js:62
+#: extjs/src/panel/customer/group/ItemUi.js:55
+#: extjs/src/panel/locale/language/ItemUi.js:69
+#: extjs/src/panel/locale/currency/ItemUi.js:69
+#: extjs/src/panel/locale/site/ItemUi.js:69
 msgid "Unique code (required)"
 msgstr "Benzersiz kod (gerekli)"
 
 #: src/panel/media/MediaField.js:152 src/panel/media/MediaField.js:207
-#: src/elements/importbutton.js:62
+#: src/elements/importbutton.js:62 extjs/src/panel/media/MediaField.js:152
+#: extjs/src/panel/media/MediaField.js:207
+#: extjs/src/elements/importbutton.js:62
 msgid "Upload failed"
 msgstr "Yükleme başarısız"
 
-#: src/elements/importbutton.js:74
+#: src/elements/importbutton.js:74 extjs/src/elements/importbutton.js:74
 msgid "Upload successful"
 msgstr "Yükleme başarılı"
 
 #: src/panel/product/UsedByProductListUi.js:29
+#: extjs/src/panel/product/UsedByProductListUi.js:29
 msgid "Used by"
 msgstr "Tarafından kullanılan"
 
 #: src/panel/customer/ItemUi.js:69 src/panel/customer/ListUiSmall.js:51
 #: src/panel/customer/ItemPickerUi.js:54 src/panel/customer/ListUi.js:54
+#: extjs/src/panel/customer/ItemUi.js:69
+#: extjs/src/panel/customer/ListUiSmall.js:51
+#: extjs/src/panel/customer/ItemPickerUi.js:54
+#: extjs/src/panel/customer/ListUi.js:54
 msgid "User name"
 msgstr "Kullanıcı adı"
 
-#: src/panel/customer/ItemUi.js:70
+#: src/panel/customer/ItemUi.js:70 extjs/src/panel/customer/ItemUi.js:70
 msgid "User name, e.g. e-mail address (required)"
 msgstr "Kullanıcı adı, örn. e-mail adresi (gerekli)"
 
@@ -1902,6 +2837,13 @@ msgstr "Kullanıcı adı, örn. e-mail adresi (gerekli)"
 #: src/panel/order/service/attribute/ListUiSmall.js:92
 #: src/panel/order/product/attribute/ListUiSmall.js:91
 #: src/panel/ConfigUi.js:76 jqadm/templates/product/item-default.php:106
+#: jqadm/templates/product/item-default.php:107
+#: extjs/src/panel/cache/ItemUi.js:55 extjs/src/panel/cache/ListUiSmall.js:82
+#: extjs/src/panel/product/property/ItemUi.js:83
+#: extjs/src/panel/product/property/ListUi.js:106
+#: extjs/src/panel/order/service/attribute/ListUiSmall.js:92
+#: extjs/src/panel/order/product/attribute/ListUiSmall.js:91
+#: extjs/src/panel/ConfigUi.js:76
 msgid "Value"
 msgstr "Değer"
 
@@ -1919,16 +2861,28 @@ msgstr "Değişkenler"
 #: src/panel/customer/address/ListUi.js:76
 #: src/panel/order/address/ItemUi.js:60
 #: src/panel/order/address/DeliveryItemUi.js:45
+#: extjs/src/panel/supplier/address/ItemUi.js:54
+#: extjs/src/panel/supplier/address/ListUi.js:76
+#: extjs/src/panel/customer/ItemUi.js:138
+#: extjs/src/panel/customer/address/ItemUi.js:56
+#: extjs/src/panel/customer/address/ListUi.js:76
+#: extjs/src/panel/order/address/ItemUi.js:60
+#: extjs/src/panel/order/address/DeliveryItemUi.js:45
 msgid "Vat ID"
 msgstr "Vergi Numarası"
 
 #: src/panel/supplier/address/ItemUi.js:55 src/panel/customer/ItemUi.js:139
 #: src/panel/customer/address/ItemUi.js:57
+#: extjs/src/panel/supplier/address/ItemUi.js:55
+#: extjs/src/panel/customer/ItemUi.js:139
+#: extjs/src/panel/customer/address/ItemUi.js:57
 msgid "Vat ID, e.g. \"GB999999999\""
 msgstr "Vergi Numarası, örn. \"GB999999999\""
 
 #: src/panel/customer/ItemUi.js:96 src/panel/customer/ListUiSmall.js:78
-#: src/panel/customer/ListUi.js:82
+#: src/panel/customer/ListUi.js:82 extjs/src/panel/customer/ItemUi.js:96
+#: extjs/src/panel/customer/ListUiSmall.js:78
+#: extjs/src/panel/customer/ListUi.js:82
 msgid "Verification date"
 msgstr "Doğrulama tarihi"
 
@@ -1936,6 +2890,9 @@ msgstr "Doğrulama tarihi"
 #: src/panel/product/stock/warehouse/ListUi.js:26
 #: src/panel/product/stock/ListUi.js:83
 #: jqadm/templates/product/item-stock-default.php:21
+#: extjs/src/panel/product/stock/ItemUi.js:67
+#: extjs/src/panel/product/stock/warehouse/ListUi.js:26
+#: extjs/src/panel/product/stock/ListUi.js:83
 msgid "Warehouse"
 msgstr "Depo"
 
@@ -1944,12 +2901,16 @@ msgstr "Depo"
 #. : Product warehouse item panel title with warehouse label ({0}) and site
 #. code ({1)}
 #: src/panel/product/stock/warehouse/ItemUi.js:96
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:96
 #, python-brace-format
 msgid "Warehouse: {0} ({1})"
 msgstr "Depo: {0} ({1})"
 
 #: src/panel/supplier/address/ItemUi.js:151 src/panel/customer/ItemUi.js:235
 #: src/panel/customer/address/ItemUi.js:153
+#: extjs/src/panel/supplier/address/ItemUi.js:151
+#: extjs/src/panel/customer/ItemUi.js:235
+#: extjs/src/panel/customer/address/ItemUi.js:153
 msgid "Web site, e.g. www.example.com"
 msgstr "Web sitesi, örn. www.example.com"
 
@@ -1957,6 +2918,11 @@ msgstr "Web sitesi, örn. www.example.com"
 #: src/panel/customer/address/ItemUi.js:152
 #: src/panel/order/address/ItemUi.js:120
 #: src/panel/order/address/DeliveryItemUi.js:105
+#: extjs/src/panel/supplier/address/ItemUi.js:150
+#: extjs/src/panel/customer/ItemUi.js:234
+#: extjs/src/panel/customer/address/ItemUi.js:152
+#: extjs/src/panel/order/address/ItemUi.js:120
+#: extjs/src/panel/order/address/DeliveryItemUi.js:105
 msgid "Website"
 msgstr "Web sitesi"
 
@@ -1969,6 +2935,7 @@ msgid "Width"
 msgstr "Genişlik"
 
 #: src/panel/customer/ItemUi.js:91 src/panel/customer/ItemUi.js:97
+#: extjs/src/panel/customer/ItemUi.js:91 extjs/src/panel/customer/ItemUi.js:97
 msgid "YYYY-MM-DD (optional)"
 msgstr "YYYY-MM-DD (isteğe bağlı)"
 
@@ -1983,16 +2950,28 @@ msgstr "YYYY-MM-DD (isteğe bağlı)"
 #: jqadm/templates/product/item-stock-default.php:69
 #: jqadm/templates/product/item-default.php:88
 #: jqadm/templates/product/item-default.php:96
+#: jqadm/templates/product/item-default.php:89
+#: jqadm/templates/product/item-default.php:97
+#: extjs/src/panel/cache/ItemUi.js:63 extjs/src/panel/product/ItemUi.js:100
+#: extjs/src/panel/product/ItemUi.js:106
+#: extjs/src/panel/product/stock/ItemUi.js:96
+#: extjs/src/panel/ListItemItemUi.js:54 extjs/src/panel/ListItemItemUi.js:61
+#: extjs/src/panel/coupon/code/ItemUi.js:75
+#: extjs/src/panel/coupon/code/ItemUi.js:81
+#: extjs/src/panel/coupon/ItemUi.js:78 extjs/src/panel/coupon/ItemUi.js:84
+#: extjs/src/panel/order/ItemUi.js:71 extjs/src/panel/order/ItemUi.js:88
 msgid "YYYY-MM-DD hh:mm:ss (optional)"
 msgstr "YYYY-AA-GG ss:dd:ss (isteğe bağlı)"
 
 #: src/panel/AbstractListUi.js:255 src/panel/AbstractTreeUi.js:225
 #: src/elements/exportlanguage.js:292
 #: jqadm/templates/common/partials/confirm-default.php:19
+#: extjs/src/panel/AbstractListUi.js:255 extjs/src/panel/AbstractTreeUi.js:225
+#: extjs/src/elements/exportlanguage.js:292
 msgid "You are going to delete one or more items. Would you like to proceed?"
 msgstr "Bir veya daha fazla öğeyi sileceksiniz. Devam etmek istiyor musunuz?"
 
-#: src/panel/cache/ListUiSmall.js:103
+#: src/panel/cache/ListUiSmall.js:103 extjs/src/panel/cache/ListUiSmall.js:103
 msgid ""
 "You are going to flush the complete cache for the current site. Would you "
 "like to proceed?"
@@ -2000,6 +2979,8 @@ msgstr "Mevcut site için komple önbelleği temizleyeceksiniz. Devam etmek isti
 
 #: src/panel/supplier/address/ListUi.js:120
 #: src/panel/customer/address/ListUi.js:120
+#: extjs/src/panel/supplier/address/ListUi.js:120
+#: extjs/src/panel/customer/address/ListUi.js:120
 msgid "Zip code"
 msgstr "Posta kodu"
 
@@ -2019,95 +3000,119 @@ msgstr "Posta kodu"
 #: src/panel/locale/currency/ItemUi.js:98 src/panel/locale/site/ItemUi.js:105
 #: src/panel/plugin/type/ItemUi.js:20 src/panel/plugin/ItemUi.js:131
 #: src/panel/attribute/ItemUi.js:127 src/panel/product/ItemUi.js:136
-#: src/panel/tag/ItemUi.js:99
+#: src/panel/tag/ItemUi.js:99 extjs/src/panel/service/type/ItemUi.js:18
+#: extjs/src/panel/service/ItemUi.js:127 extjs/src/panel/supplier/ItemUi.js:89
+#: extjs/src/panel/supplier/address/ItemUi.js:177
+#: extjs/src/panel/media/type/ItemUi.js:20 extjs/src/panel/media/ItemUi.js:133
+#: extjs/src/panel/price/type/ItemUi.js:20 extjs/src/panel/price/ItemUi.js:143
+#: extjs/src/panel/product/type/ItemUi.js:18
+#: extjs/src/panel/product/ItemUi.js:136
+#: extjs/src/panel/product/stock/warehouse/ItemUi.js:94
+#: extjs/src/panel/text/type/ItemUi.js:19 extjs/src/panel/text/ItemUi.js:108
+#: extjs/src/panel/attribute/type/ItemUi.js:21
+#: extjs/src/panel/attribute/ItemUi.js:127 extjs/src/panel/tag/ItemUi.js:99
+#: extjs/src/panel/catalog/ItemUi.js:105
+#: extjs/src/panel/coupon/code/ItemUi.js:108
+#: extjs/src/panel/coupon/ItemUi.js:115 extjs/src/panel/customer/ItemUi.js:249
+#: extjs/src/panel/customer/group/ItemUi.js:87
+#: extjs/src/panel/customer/address/ItemUi.js:181
+#: extjs/src/panel/locale/language/ItemUi.js:98
+#: extjs/src/panel/locale/currency/ItemUi.js:98
+#: extjs/src/panel/locale/site/ItemUi.js:105
+#: extjs/src/panel/plugin/type/ItemUi.js:20
+#: extjs/src/panel/plugin/ItemUi.js:131
 msgid "new"
 msgstr "yeni"
 
-#: src/elements/paymentstatus.js:48
+#: src/elements/paymentstatus.js:48 extjs/src/elements/paymentstatus.js:48
 msgid "pay:authorized"
 msgstr "Yetkili"
 
-#: src/elements/paymentstatus.js:44
+#: src/elements/paymentstatus.js:44 extjs/src/elements/paymentstatus.js:44
 msgid "pay:canceled"
 msgstr "İptal edildi"
 
-#: src/elements/paymentstatus.js:43
+#: src/elements/paymentstatus.js:43 extjs/src/elements/paymentstatus.js:43
 msgid "pay:deleted"
 msgstr "Silindi"
 
-#: src/elements/paymentstatus.js:47
+#: src/elements/paymentstatus.js:47 extjs/src/elements/paymentstatus.js:47
 msgid "pay:pending"
 msgstr "Bekliyor"
 
-#: src/elements/paymentstatus.js:49
+#: src/elements/paymentstatus.js:49 extjs/src/elements/paymentstatus.js:49
 msgid "pay:received"
 msgstr "Alındı"
 
-#: src/elements/paymentstatus.js:46
+#: src/elements/paymentstatus.js:46 extjs/src/elements/paymentstatus.js:46
 msgid "pay:refund"
 msgstr "Geri ödeme"
 
-#: src/elements/paymentstatus.js:45
+#: src/elements/paymentstatus.js:45 extjs/src/elements/paymentstatus.js:45
 msgid "pay:refused"
 msgstr "Reddedildi"
 
-#: src/elements/paymentstatus.js:42
+#: src/elements/paymentstatus.js:42 extjs/src/elements/paymentstatus.js:42
 msgid "pay:unfinished"
 msgstr "Tamamlanmadı"
 
-#: src/elements/deliverystatus.js:43
+#: src/elements/deliverystatus.js:43 extjs/src/elements/deliverystatus.js:43
 msgid "stat:deleted"
 msgstr "Silindi"
 
-#: src/elements/deliverystatus.js:47
+#: src/elements/deliverystatus.js:47 extjs/src/elements/deliverystatus.js:47
 msgid "stat:delivered"
 msgstr "Teslim edildi"
 
-#: src/elements/deliverystatus.js:46
+#: src/elements/deliverystatus.js:46 extjs/src/elements/deliverystatus.js:46
 msgid "stat:dispatched"
 msgstr "Sevk edildi"
 
-#: src/elements/deliverystatus.js:48
+#: src/elements/deliverystatus.js:48 extjs/src/elements/deliverystatus.js:48
 msgid "stat:lost"
 msgstr "Kayıp"
 
-#: src/elements/deliverystatus.js:44
+#: src/elements/deliverystatus.js:44 extjs/src/elements/deliverystatus.js:44
 msgid "stat:pending"
 msgstr "Bekliyor"
 
-#: src/elements/deliverystatus.js:45
+#: src/elements/deliverystatus.js:45 extjs/src/elements/deliverystatus.js:45
 msgid "stat:progress"
 msgstr "Devam etmekte"
 
-#: src/elements/deliverystatus.js:49
+#: src/elements/deliverystatus.js:49 extjs/src/elements/deliverystatus.js:49
 msgid "stat:refused"
 msgstr "Reddedildi"
 
-#: src/elements/deliverystatus.js:50
+#: src/elements/deliverystatus.js:50 extjs/src/elements/deliverystatus.js:50
 msgid "stat:returned"
 msgstr "Geri döndü"
 
-#: src/elements/deliverystatus.js:42
+#: src/elements/deliverystatus.js:42 extjs/src/elements/deliverystatus.js:42
 msgid "stat:unfinished"
 msgstr "Tamamlanmadı"
 
 #: src/elements/status.js:46 jqadm/templates/product/item-default.php:54
+#: jqadm/templates/product/item-default.php:55 extjs/src/elements/status.js:46
 msgid "status:archive"
 msgstr "Arşivlendi"
 
 #: src/elements/status.js:48 jqadm/templates/product/item-default.php:52
+#: jqadm/templates/product/item-default.php:53 extjs/src/elements/status.js:48
 msgid "status:disabled"
 msgstr "Devre dışı bırakıldı"
 
 #: src/elements/status.js:49 jqadm/templates/product/item-default.php:51
+#: jqadm/templates/product/item-default.php:52 extjs/src/elements/status.js:49
 msgid "status:enabled"
 msgstr "Etkinleştirildi"
 
 #: src/elements/status.js:47 jqadm/templates/product/item-default.php:53
+#: jqadm/templates/product/item-default.php:54 extjs/src/elements/status.js:47
 msgid "status:review"
 msgstr "İncelemede"
 
-#: src/elements/salutation.js:65
+#: src/elements/salutation.js:65 extjs/src/elements/salutation.js:65
 msgid "unknown"
 msgstr "meçhul"
 
@@ -2115,5 +3120,7 @@ msgstr "meçhul"
 #: jqadm/templates/product/item-stock-default.php:70
 #: jqadm/templates/product/item-default.php:87
 #: jqadm/templates/product/item-default.php:95
+#: jqadm/templates/product/item-default.php:88
+#: jqadm/templates/product/item-default.php:96
 msgid "yy-mm-dd"
 msgstr "yy-aa-gg"
