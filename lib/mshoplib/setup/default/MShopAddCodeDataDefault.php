@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 201
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
@@ -11,12 +10,12 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds default records to plugin table.
+ * Adds code records to the tables
  */
-class MShopAddWarehouseDataDefault extends \Aimeos\MW\Setup\Task\MShopAddWarehouseData
+class MShopAddCodeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 {
 	/**
-	 * Returns the list of task names which this task depends on.
+	 * Returns the list of task names which this task depends on
 	 *
 	 * @return string[] List of task names
 	 */
@@ -27,18 +26,18 @@ class MShopAddWarehouseDataDefault extends \Aimeos\MW\Setup\Task\MShopAddWarehou
 
 
 	/**
-	 * Returns the list of task names which depends on this task.
+	 * Returns the list of task names which depends on this task
 	 *
 	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'MShopAddWarehouseData' );
+		return array();
 	}
 
 
 	/**
-	 * Executes the task for MySQL databases.
+	 * Executes the task for MySQL databases
 	 */
 	protected function mysql()
 	{

@@ -36,7 +36,7 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddTypeDataUnitperf' );
+		return array( 'MShopAddTypeDataUnitperf', 'MShopAddCodeDataUnitperf' );
 	}
 
 

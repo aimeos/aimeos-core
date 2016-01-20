@@ -22,7 +22,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddTypeDataDefault', 'MShopAddWarehouseDataDefault' );
+		return array( 'MShopAddTypeDataDefault', 'MShopAddCodeDataDefault' );
 	}
 
 
