@@ -61,7 +61,7 @@ $enc = $this->encoder();
 							<div class="col-lg-9">
 								<input class="form-control item-quantity" type="number" name="price[price.quantity][]" step="1" min="1" max="2147483647"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Minimum quantity' ) ); ?>"
-									value="<?php echo $enc->attr( $this->get( 'priceData/price.quantity/' . $idx ) ); ?>" />
+									value="<?php echo $enc->attr( $this->get( 'priceData/price.quantity/' . $idx, 1 ) ); ?>" />
 							</div>
 						</div>
 					</div>
@@ -71,7 +71,7 @@ $enc = $this->encoder();
 							<div class="col-lg-9">
 								<input class="form-control item-taxrate" type="text" name="price[price.taxrate][]" data-pattern="^[0-9]+(\.[0-9]+)?$"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Tax rate in %' ) ); ?>"
-									value="<?php echo $enc->attr( $this->get( 'priceData/price.taxrate/' . $idx ) ); ?>" />
+									value="<?php echo $enc->attr( $this->get( 'priceData/price.taxrate/' . $idx, 0 ) ); ?>" />
 							</div>
 						</div>
 						<div class="form-group row mandatory">
@@ -79,7 +79,7 @@ $enc = $this->encoder();
 							<div class="col-lg-9">
 								<input class="form-control item-value" type="text" name="price[price.value][]" data-pattern="^[0-9]+(\.[0-9]+)?$"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Actual current price' ) ); ?>"
-									value="<?php echo $enc->attr( $this->get( 'priceData/price.value/' . $idx ) ); ?>" />
+									value="<?php echo $enc->attr( $this->get( 'priceData/price.value/' . $idx, '0.00' ) ); ?>" />
 							</div>
 						</div>
 						<div class="form-group row optional">
@@ -87,7 +87,7 @@ $enc = $this->encoder();
 							<div class="col-lg-9">
 								<input class="form-control item-rebate" type="text" name="price[price.rebate][]" data-pattern="^([0-9]+(\.[0-9]+)?)?$"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Substracted rebate amount' ) ); ?>"
-									value="<?php echo $enc->attr( $this->get( 'priceData/price.rebate/' . $idx ) ); ?>" />
+									value="<?php echo $enc->attr( $this->get( 'priceData/price.rebate/' . $idx, '0.00' ) ); ?>" />
 							</div>
 						</div>
 						<div class="form-group row optional">
@@ -95,7 +95,7 @@ $enc = $this->encoder();
 							<div class="col-lg-9">
 								<input class="form-control item-costs" type="text" name="price[price.costs][]" data-pattern="^([0-9]+(\.[0-9]+)?)?$"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Costs per item' ) ); ?>"
-									value="<?php echo $enc->attr( $this->get( 'priceData/price.costs/' . $idx ) ); ?>" />
+									value="<?php echo $enc->attr( $this->get( 'priceData/price.costs/' . $idx, '0.00' ) ); ?>" />
 							</div>
 						</div>
 					</div>

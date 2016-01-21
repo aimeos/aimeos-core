@@ -82,7 +82,7 @@ $sortcode = $this->param( 'sort' );
 
 	<div class="actions-group">
 		<button class="btn btn-primary"><?php echo $this->translate( 'admin', 'Search' ); ?></button>
-		<a class="btn btn-warning" href="<?php echo $enc->attr( $this->url( $target, $controller, $action, array( 'resource' => 'product' ), array(), $config ) ); ?>"><?php echo $this->translate( 'admin', 'Clear' ); ?></a>
+		<a class="btn btn-warning" href="<?php echo $enc->attr( $this->url( $target, $controller, $action, array( 'resource' => 'product', 'lang' => $this->param( 'lang' ) ), array(), $config ) ); ?>"><?php echo $this->translate( 'admin', 'Clear' ); ?></a>
 	</div>
 </form>
 
