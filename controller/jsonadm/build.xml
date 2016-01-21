@@ -36,7 +36,7 @@
 	</target>
 
 	<target name="i18n" description="Creates translation message files">
-		<exec command="find ./src/ -type f | xgettext -j -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/core-controller-jsonadm.pot -f -"
+		<exec command="find ./src/ -type f | xgettext -j -s --no-location --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=sprintf:1 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/core-controller-jsonadm.pot -f -"
 			checkreturn="true" logoutput="true" />
 		<foreach param="po-fname" absparam="po-filename" target="i18n-update">
 			<fileset dir="./i18n">

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-19 19:12+0100\n"
+"POT-Creation-Date: 2016-01-21 17:49+0100\n"
 "PO-Revision-Date: 2015-07-15 12:34+0000\n"
 "Last-Translator: Андрей Аксёнов <aksenovaa@bk.ru>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
@@ -39,8 +39,6 @@ msgstr "после"
 msgid ">="
 msgstr "после (вкл.)"
 
-#: lib/ext.ux/AdvancedSearch.js:41 lib/ext.ux/AdvancedSearch.js:37
-#: extjs/lib/ext.ux/AdvancedSearch.js:37
 msgid "Search"
 msgstr "Поиск"
 

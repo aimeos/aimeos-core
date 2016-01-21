@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 18:10+0100\n"
+"POT-Creation-Date: 2016-01-21 17:49+0100\n"
 "PO-Revision-Date: 2015-12-30 15:17+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
@@ -18,69 +18,45 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/Controller/JsonAdm/Common/Factory/Base.php:141
-#: src/Controller/JsonAdm/Common/Factory/Base.php:174
-#: src/Controller/JsonAdm/Common/Factory/Base.php:141
-#: src/Controller/JsonAdm/Common/Factory/Base.php:174
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
 msgstr "La clase \"%1$s\" no implementa \"%2$s\""
 
-#: src/Controller/JsonAdm/Common/Factory/Base.php:135
-#: src/Controller/JsonAdm/Common/Factory/Base.php:168
-#: src/Controller/JsonAdm/Common/Factory/Base.php:135
-#: src/Controller/JsonAdm/Common/Factory/Base.php:168
 #, php-format
 msgid "Class \"%1$s\" not found"
 msgstr "No se ha encontrado la clase \"%1$s\""
 
-#: src/Controller/JsonAdm/Base.php:398 src/Controller/JsonAdm/Base.php:398
 #, php-format
 msgid "Client generated IDs are not supported"
 msgstr "Las IDs generadas por el cliente no están soportadas"
 
-#: src/Controller/JsonAdm/Base.php:67 src/Controller/JsonAdm/Base.php:266
-#: src/Controller/JsonAdm/Base.php:394 src/Controller/JsonAdm/Base.php:67
-#: src/Controller/JsonAdm/Base.php:266 src/Controller/JsonAdm/Base.php:394
 #, php-format
 msgid "Invalid JSON in body"
 msgstr "JSON no válido en el cuerpo"
 
-#: src/Controller/JsonAdm/Common/Factory/Base.php:129
-#: src/Controller/JsonAdm/Factory.php:185
-#: src/Controller/JsonAdm/Common/Factory/Base.php:129
-#: src/Controller/JsonAdm/Factory.php:185
 #, php-format
 msgid "Invalid class name \"%1$s\""
 msgstr "Nombre de clase \"%1$s\" no válido"
 
-#: src/Controller/JsonAdm/Factory.php:86 src/Controller/JsonAdm/Factory.php:86
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
 msgstr "Controlador \"%1$s\" en \"%2$s\" no válido"
 
-#: src/Controller/JsonAdm/Factory.php:102
-#: src/Controller/JsonAdm/Factory.php:102
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr "Constructor \"%1$s\" no válido"
 
-#: src/Controller/JsonAdm/Base.php:295 src/Controller/JsonAdm/Base.php:295
 #, php-format
 msgid "No ID given"
 msgstr "No se ha recibido ningúna ID"
 
-#: src/Controller/JsonAdm/Base.php:522 src/Controller/JsonAdm/Base.php:522
 msgid "Not implemented, use PATCH instead"
 msgstr "No implementado, utilice PATCH"
 
-#: src/Controller/JsonAdm/Base.php:861 src/Controller/JsonAdm/Base.php:861
 #, php-format
 msgid "Template \"%1$s\" not available"
 msgstr "Plantilla \"%1$s\" no disponible"
 
-#: src/Controller/JsonAdm/Common/Decorator/Base.php:56
-#: src/Controller/JsonAdm/Common/Decorator/Base.php:56
 #, php-format
 msgid "Unable to call method \"%1$s\""
 msgstr "Imposible llamar al método \"%1$s\""

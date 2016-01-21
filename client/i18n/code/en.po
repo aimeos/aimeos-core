@@ -152,6 +152,9 @@ msgstr "Last name"
 msgid "pin"
 msgstr "Pin"
 
+msgid "price:default"
+msgstr "%1$s %2$s"
+
 #. Product attribute
 msgid "size"
 msgstr "Size"
@@ -203,6 +206,3 @@ msgstr ""
 #. Product attribute
 msgid "width"
 msgstr "Width"
-
-msgid "price:default"
-msgstr "%1$s %2$s"

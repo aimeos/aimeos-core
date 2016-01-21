@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-07 18:10+0100\n"
+"POT-Creation-Date: 2016-01-21 17:49+0100\n"
 "PO-Revision-Date: 2015-12-09 17:55+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
@@ -18,186 +18,114 @@ msgstr ""
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/Controller/Frontend/Basket/Default.php:499
-#: src/Controller/Frontend/Basket/Standard.php:503
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
 msgstr "\"%1$s\" ID'li ürünü eklemeye izin verilmiyor"
 
-#: src/Controller/Frontend/Basket/Default.php:902
-#: src/Controller/Frontend/Basket/Standard.php:906
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
 msgstr "Mevcut nitelik ID'ler \"%1$s\" verilen nitelik ID'ler \"%2$s\" ile eşleşmiyor"
 
-#: src/Controller/Frontend/Basket/Default.php:165
-#: src/Controller/Frontend/Basket/Standard.php:169
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be changed"
 msgstr "\"%1$d\" konumundaki sepet öğesi değiştirilemez"
 
-#: src/Controller/Frontend/Basket/Default.php:139
-#: src/Controller/Frontend/Basket/Standard.php:143
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
 msgstr "\"%1$d\" konumundaki sepet öğesi manuel olarak silinemez"
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:160
-#: src/Controller/Frontend/Common/Factory/Base.php:70
-#: src/Controller/Frontend/Common/Factory/Base.php:164
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:154
-#: src/Controller/Frontend/Factory.php:84
-#: src/Controller/Frontend/Common/Factory/Base.php:64
-#: src/Controller/Frontend/Common/Factory/Base.php:158
-#: src/Controller/Frontend/Factory.php:88
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Sınıf \"%1$s\" mevcut değil"
 
-#: src/Controller/Frontend/Factory.php:63
-#: src/Controller/Frontend/Factory.php:67
 #, php-format
 msgid "Controller path is empty"
 msgstr "Denetleyici yolu boş"
 
-#: src/Controller/Frontend/Basket/Default.php:257
-#: src/Controller/Frontend/Basket/Standard.php:261
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid"
 msgstr "\"%1$s\" kupon kodu geçersiz"
 
-#: src/Controller/Frontend/Basket/Default.php:210
-#: src/Controller/Frontend/Basket/Standard.php:214
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid or not available any more"
 msgstr "\"%1$s\" kupon kodu geçersiz veya artık kullanılamaz"
 
-#: src/Controller/Frontend/Basket/Default.php:225
-#: src/Controller/Frontend/Basket/Standard.php:229
 #, php-format
 msgid "Coupon for code \"%1$s\" is not available any more"
 msgstr "\"%1$s\" kupon kodu artık kullanılamaz"
 
-#: src/Controller/Frontend/Basket/Default.php:717
-#: src/Controller/Frontend/Basket/Standard.php:721
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
 msgstr "\"%2$s\" ID'li ürün için geçersiz \"%1$s\" referanslar"
 
-#: src/Controller/Frontend/Basket/Default.php:832
-#: src/Controller/Frontend/Basket/Standard.php:836
 #, php-format
 msgid "Invalid address properties, please check your input"
 msgstr "Geçersiz adres özellikleri, girişinizi kontrol edin"
 
-#: src/Controller/Frontend/Order/Factory.php:62
-#: src/Controller/Frontend/Catalog/Factory.php:63
-#: src/Controller/Frontend/Common/Factory/Abstract.php:54
-#: src/Controller/Frontend/Basket/Factory.php:63
-#: src/Controller/Frontend/Service/Factory.php:62
-#: src/Controller/Frontend/Order/Factory.php:66
-#: src/Controller/Frontend/Catalog/Factory.php:67
-#: src/Controller/Frontend/Common/Factory/Base.php:58
-#: src/Controller/Frontend/Basket/Factory.php:67
-#: src/Controller/Frontend/Service/Factory.php:66
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "\"%1$s\" sınıf adında geçersiz karakterler"
 
-#: src/Controller/Frontend/Factory.php:75
-#: src/Controller/Frontend/Factory.php:79
 #, php-format
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
 msgstr " \"%2$s\" içindeki \"%1$s\" denetleyici adında geçersiz karakterler"
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:86
-#: src/Controller/Frontend/Common/Factory/Base.php:90
 #, php-format
 msgid "Invalid domain \"%1$s\""
 msgstr "Geçersiz domain \"%1$s\""
 
-#: src/Controller/Frontend/Factory.php:90
-#: src/Controller/Frontend/Factory.php:94
 #, php-format
 msgid "Invalid factory \"%1$s\""
 msgstr "Geçersiz fabrika \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:294
-#: src/Controller/Frontend/Basket/Standard.php:298
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
 msgstr "\"%1$s\" adres türü için geçersiz değer"
 
-#: src/Controller/Frontend/Basket/Default.php:1008
-#: src/Controller/Frontend/Basket/Standard.php:1012
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
 msgstr "Domain \"%1$s\" ve kod \"%2$s\" için liste türü bulunamadı"
 
-#: src/Controller/Frontend/Basket/Default.php:1110
-#: src/Controller/Frontend/Basket/Standard.php:1114
 #, php-format
 msgid "No article found for selected attributes and product ID \"%1$s\""
 msgstr "Seçilen nitelikler ve \"%1$s\" ürün ID'si için makale bulunamadı"
 
-#: src/Controller/Frontend/Basket/Default.php:975
-#: src/Controller/Frontend/Basket/Standard.php:979
 #, php-format
 msgid "No item for \"%1$s\" (%2$s) found"
 msgstr "\"%1$s\" (%2$s) için hiçbir öğe bulumadı"
 
-#: src/Controller/Frontend/Basket/Default.php:746
-#: src/Controller/Frontend/Basket/Standard.php:750
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
 msgstr "\"%1$s\" ürün ID'si ve \"%2$s\" depo için stok mevcut değil"
 
-#: src/Controller/Frontend/Basket/Default.php:1082
-#: src/Controller/Frontend/Basket/Standard.php:1086
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
 msgstr "Seçilmiş nitelikler ve \"%1$s\" ürün ID'si için benzersiz makale bulunamadı"
 
-#: src/Controller/Frontend/Basket/Default.php:232
-#: src/Controller/Frontend/Basket/Standard.php:236
 #, php-format
 msgid "Requirements for coupon code \"%1$s\" aren't met"
 msgstr "\"%1$s\" kupon kodu için gereksinimler karşılanmıyor"
 
-#: src/Controller/Frontend/Service/Default.php:175
-#: src/Controller/Frontend/Service/Standard.php:179
 #, php-format
 msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
 msgstr "Tür \"%1$s\" ve ID \"%2$s\" ID için servis öğesi bulunamadı"
 
-#: src/Controller/Frontend/Basket/Default.php:386
-#: src/Controller/Frontend/Basket/Default.php:422
-#: src/Controller/Frontend/Basket/Standard.php:390
-#: src/Controller/Frontend/Basket/Standard.php:426
 #, php-format
 msgid "There are not enough products \"%1$s\" in stock"
 msgstr "Stokta yeterli ürün \"%1$s\" yok"
 
-#: src/Controller/Frontend/Common/Decorator/Abstract.php:50
-#: src/Controller/Frontend/Common/Decorator/Base.php:54
 #, php-format
 msgid "Unable to call method \"%1$s::%2$s\""
 msgstr "Metot \"%1$s::%2$s\" çağrılamıyor"
 
-#: src/Controller/Frontend/Service/Default.php:69
-#: src/Controller/Frontend/Service/Standard.php:73
 #, php-format
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
 msgstr "\"%2$s\" ID'li servis için sağlayıcı \"%1$s\" oluşturulamıyor"
 
-#: src/Controller/Frontend/Basket/Default.php:323
-#: src/Controller/Frontend/Basket/Standard.php:327
 #, php-format
 msgid "Unknown attributes \"%1$s\""
 msgstr "Bilinmeyen nitelikler \"%1$s\""
