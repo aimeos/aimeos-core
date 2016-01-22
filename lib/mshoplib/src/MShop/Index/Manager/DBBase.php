@@ -4,7 +4,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 
 
@@ -15,7 +15,7 @@ namespace Aimeos\MShop\Index\Manager;
  * Base class for all database based index managers
  *
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 abstract class DBBase
 	extends \Aimeos\MShop\Common\Manager\Base

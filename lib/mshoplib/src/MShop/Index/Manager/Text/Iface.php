@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 
 
@@ -13,10 +13,10 @@ namespace Aimeos\MShop\Index\Manager\Text;
 
 
 /**
- * Catalog index interface for classes managing product indices.
+ * Text indexer interface for classes managing product indices.
  *
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 interface Iface extends \Aimeos\MShop\Index\Manager\Iface
 {

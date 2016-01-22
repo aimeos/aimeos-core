@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 
 
@@ -13,10 +13,10 @@ namespace Aimeos\MShop\Index\Manager;
 
 
 /**
- * Catalog index manager for searching in product tables.
+ * Index index manager for searching in product tables.
  *
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
@@ -481,11 +481,11 @@ class Standard
 	{
 		$iface = '\\Aimeos\\MShop\\Product\\Item\\Iface';
 		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			throw new \Aimeos\MShop\Index\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
 		if( $item->getId() === null ) {
-			throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );
+			throw new \Aimeos\MShop\Index\Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );
 		}
 
 		$this->rebuildIndex( array( $item->getId() => $item ) );

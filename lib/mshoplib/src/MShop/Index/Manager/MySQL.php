@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 
 
@@ -16,7 +16,7 @@ namespace Aimeos\MShop\Index\Manager;
  * MySQL based index for searching in product tables.
  *
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Standard

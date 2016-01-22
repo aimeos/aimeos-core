@@ -4,7 +4,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 
 
@@ -15,7 +15,7 @@ namespace Aimeos\MShop\Index\Manager\Price;
  * Submanager for product prices.
  *
  * @package MShop
- * @subpackage Catalog
+ * @subpackage Index
  */
 class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
@@ -490,7 +490,7 @@ class Standard
 					if( !isset( $listTypes[$refId] ) )
 					{
 						$msg = sprintf( 'List type for price item with ID "%1$s" not available', $refId );
-						throw new \Aimeos\MShop\Catalog\Exception( $msg );
+						throw new \Aimeos\MShop\Index\Exception( $msg );
 					}
 
 					foreach( $listTypes[$refId] as $listType )

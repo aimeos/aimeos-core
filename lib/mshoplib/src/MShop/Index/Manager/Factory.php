@@ -41,11 +41,11 @@ class Factory
 		 *
 		 * For example, if the name of the default class is
 		 *
-		 *  \Aimeos\MShop\Catalog\Manager\Standard
+		 *  \Aimeos\MShop\Index\Manager\Standard
 		 *
 		 * and you want to replace it with your own version named
 		 *
-		 *  \Aimeos\MShop\Catalog\Manager\Mymanager
+		 *  \Aimeos\MShop\Index\Manager\Mymanager
 		 *
 		 * then you have to set the this configuration option:
 		 *
