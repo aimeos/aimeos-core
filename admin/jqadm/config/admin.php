@@ -2,10 +2,15 @@
 
 return array(
 	'jqadm' => array(
-		'common' => array(
+		'product' => array(
 			'decorators' => array(
-				'default' => array( 'Page' )
-			)
-		)
-	)
+				'global' => array( 'Index', 'Cache', 'Page' ),
+			),
+		),
+		'product/category' => array(
+			'decorators' => array(
+				'local' => array( 'Cache' ),
+			),
+		),
+	),
 );
