@@ -104,9 +104,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$files = array(
 			'image' => array(
-				'files' => array(
-					array( 'tmp_name' => '', 'name' => '', 'type' => '', 'size' => 0, 'error' => 0 ),
-				),
+				'tmp_name' => array( 'files' => array( 0 => '' ) ),
+				'name' => array( 'files' => array( '' ) ),
+				'type' => array( 'files' => array( '' ) ),
+				'size' => array( 'files' => array( 0 ) ),
+				'error' => array( 'files' => array( 0 ) )
 			),
 		);
 
