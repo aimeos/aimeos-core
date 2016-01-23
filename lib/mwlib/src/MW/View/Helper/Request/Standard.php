@@ -118,41 +118,43 @@ class Standard
 	/**
 	 * Creates a normalized file upload data from the given array.
 	 *
-	 * @param array $list File upload data from $_FILES
-	 * @return array Multi-dimensional list of file objects
+	 * @param array $list File upload data from $_FILES with name/tmp_name/error/type/size as keys
+	 * @return array|Psr\Http\Message\UploadedFileInterface Single file object or multi-dimensional list of file objects
 	 */
 	protected function createUploadedFiles( $list )
 	{
-		if( !isset( $list['tmp_name'] ) ) {
-			throw new \Aimeos\MW\View\Exception( 'Invalid file upload array' );
+		$result = array();
+
+		if( !isset( $list['tmp_name'] ) || !isset( $list['error'] ) || $list['error'] === UPLOAD_ERR_NO_FILE ) {
+			return array();
 		}
 
-		if( !is_array( $list['tmp_name'] ) )
+		if( is_array( $list['tmp_name'] ) )
+		{
+			foreach( $list['tmp_name'] as $key => $value )
+			{
+				$temp = array(
+					'tmp_name' => $value,
+					'name' => $list['name'][$key],
+					'type' => $list['type'][$key],
+					'size' => $list['size'][$key],
+					'error' => $list['error'][$key],
+				);
+
+				$result[$key] = $this->createUploadedFiles( $temp );
+			}
+		}
+		else
 		{
 			$this->checkUploadedFile( $list['tmp_name'] );
 
-			return new \Aimeos\MW\View\Helper\Request\File\Standard(
+			$result = new \Aimeos\MW\View\Helper\Request\File\Standard(
 				$list['tmp_name'],
 				( isset( $list['name'] ) ? $list['name'] : '' ),
 				( isset( $list['size'] ) ? $list['size'] : 0 ),
 				( isset( $list['type'] ) ? $list['type'] : 'application/octet-stream' ),
 				( isset( $list['error'] ) ? $list['error'] : 0 )
 			);
-		}
-
-		$result = array();
-
-		foreach( $list['tmp_name'] as $key => $value )
-		{
-			$temp = array(
-				'tmp_name' => $value,
-				'name' => $list['name'][$key],
-				'type' => $list['type'][$key],
-				'size' => $list['size'][$key],
-				'error' => $list['error'][$key],
-			);
-
-			$result[$key] = $this->createUploadedFiles( $temp );
 		}
 
 		return $result;
