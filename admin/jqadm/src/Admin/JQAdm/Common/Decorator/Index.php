@@ -29,7 +29,9 @@ class Index extends Base
 		$result = $this->getClient()->save();
 		$item = $this->getView()->item;
 
-		\Aimeos\MShop\Factory::createManager( $this->getContext(), 'index' )->saveItem( $item );
+		if( $item->getId() !== null ) {
+			\Aimeos\MShop\Factory::createManager( $this->getContext(), 'index' )->saveItem( $item );
+		}
 
 		return $result;
 	}

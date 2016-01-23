@@ -29,8 +29,11 @@ class Cache extends Base
 		$result = $this->getClient()->save();
 		$item = $this->getView()->item;
 
-		$idtag = $item->getResourceType() . '-' . $item->getId();
-		$this->getContext()->getCache()->deleteByTags( array( $item->getResourceType(), $idtag ) );
+		if( $item->getId() !== null )
+		{
+			$idtag = $item->getResourceType() . '-' . $item->getId();
+			$this->getContext()->getCache()->deleteByTags( array( $item->getResourceType(), $idtag ) );
+		}
 
 		return $result;
 	}
