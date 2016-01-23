@@ -155,7 +155,7 @@ class Standard
 			$result[$key] = $this->createUploadedFiles( $temp );
 		}
 
-        return $result;
+		return $result;
 	}
 
 
