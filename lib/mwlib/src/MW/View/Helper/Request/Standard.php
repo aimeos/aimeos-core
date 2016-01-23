@@ -105,58 +105,57 @@ class Standard
 	 */
 	public function getUploadedFiles()
 	{
-		return $this->createUploadedFiles( $this->files );
+		$list = array();
+
+		foreach( $this->files as $name => $array ) {
+			$list[$name] = $this->createUploadedFiles( $array );
+		}
+
+		return $list;
 	}
 
 
 	/**
 	 * Creates a normalized file upload data from the given array.
 	 *
-	 * @param \Traversable|array $files File upload data from $_FILES
+	 * @param array $list File upload data from $_FILES
 	 * @return array Multi-dimensional list of file objects
 	 */
-	protected function createUploadedFiles( $files )
+	protected function createUploadedFiles( $list )
 	{
-		$list = array();
-
-		foreach( $files as $key => $value )
-		{
-			if( !isset( $value['tmp_name'] ) )
-			{
-				$list[$key] = $this->createUploadedFiles( $value );
-				continue;
-			}
-
-			if( is_array( $value['tmp_name'] ) )
-			{
-				for( $i = 0; $i < count( $value['tmp_name'] ); $i++ )
-				{
-					$this->checkUploadedFile( $value['tmp_name'][$i] );
-
-					$list[$key][] = new \Aimeos\MW\View\Helper\Request\File\Standard(
-						$value['tmp_name'][$i],
-						( isset( $value['name'][$i] ) ? $value['name'][$i] : '' ),
-						( isset( $value['size'][$i] ) ? $value['size'][$i] : 0 ),
-						( isset( $value['type'][$i] ) ? $value['type'][$i] : 'application/octet-stream' ),
-						( isset( $value['error'][$i] ) ? $value['error'][$i] : 0 )
-					);
-				}
-			}
-			else
-			{
-				$this->checkUploadedFile( $value['tmp_name'] );
-
-				$list[$key] = new \Aimeos\MW\View\Helper\Request\File\Standard(
-					$value['tmp_name'],
-					( isset( $value['name'] ) ? $value['name'] : '' ),
-					( isset( $value['size'] ) ? $value['size'] : 0 ),
-					( isset( $value['type'] ) ? $value['type'] : 'application/octet-stream' ),
-					( isset( $value['error'] ) ? $value['error'] : 0 )
-				);
-			}
+		if( !isset( $list['tmp_name'] ) ) {
+			throw new \Aimeos\MW\View\Exception( 'Invalid file upload array' );
 		}
 
-		return $list;
+		if( !is_array( $list['tmp_name'] ) )
+		{
+			$this->checkUploadedFile( $list['tmp_name'] );
+
+			return new \Aimeos\MW\View\Helper\Request\File\Standard(
+				$list['tmp_name'],
+				( isset( $list['name'] ) ? $list['name'] : '' ),
+				( isset( $list['size'] ) ? $list['size'] : 0 ),
+				( isset( $list['type'] ) ? $list['type'] : 'application/octet-stream' ),
+				( isset( $list['error'] ) ? $list['error'] : 0 )
+			);
+		}
+
+		$result = array();
+
+		foreach( $list['tmp_name'] as $key => $value )
+		{
+			$temp = array(
+				'tmp_name' => $value,
+				'name' => $list['name'][$key],
+				'type' => $list['type'][$key],
+				'size' => $list['size'][$key],
+				'error' => $list['error'][$key],
+			);
+
+			$result[$key] = $this->createUploadedFiles( $temp );
+		}
+
+        return $result;
 	}
 
 

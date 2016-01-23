@@ -120,12 +120,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$view = new \Aimeos\MW\View\Standard();
 		$files = array(
 			'other' => array(
-				'test' => array(
-					'tmp_name' => 'tempfile2.txt',
-					'name' => 'clientfile2.txt',
-					'type' => 'text/english',
-					'size' => 2048,
-					'error' => 1,
+				'tmp_name' => array(
+					'test' => 'tempfile2.txt',
+				),
+				'name' => array(
+					'test' => 'clientfile2.txt',
+				),
+				'type' => array(
+					'test' => 'text/english',
+				),
+				'size' => array(
+					'test' => 2048,
+				),
+				'error' => array(
+					'test' => 1,
 				),
 			),
 			'test' => array(
