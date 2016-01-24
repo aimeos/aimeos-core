@@ -206,7 +206,7 @@ interface Iface
 	/**
 	 * Sets the group IDs of the logged in user.
 	 *
-	 * @param closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
+	 * @param \Closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
 	 * @return void
 	 */
 	public function setGroupIds( $groupIds );
