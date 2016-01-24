@@ -208,7 +208,7 @@ $sortcode = $this->param( 'sort' );
 					--><a class="btn btn-secondary fa fa-files-o"
 						href="<?php echo $enc->attr( $this->url( $copyTarget, $copyCntl, $copyAction, array( 'id' => $id ) + $params, array(), $copyConfig ) ); ?>"
 						aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Copy' ) ); ?>"></a><!--
-					--><form action="<?php echo $enc->attr( $this->url( $delTarget, $delCntl, $delAction, array( 'id' => $id ) + $params, array(), $delConfig ) ); ?>" method="POST"><!--
+					--><form class="delete" action="<?php echo $enc->attr( $this->url( $delTarget, $delCntl, $delAction, array( 'id' => $id ) + $params, array(), $delConfig ) ); ?>" method="POST"><!--
 						--><input type="hidden" name="resource" value="<?php echo $enc->attr( $this->value( $params, 'resource' ) ); ?>" /><!--
 						--><input type="hidden" name="id" value="<?php echo $enc->attr( $id ); ?>" /><!--
 						--><button class="btn btn-danger fa fa-trash" aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Delete' ) ); ?>"><!--
