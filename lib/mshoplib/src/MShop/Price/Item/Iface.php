@@ -127,17 +127,29 @@ interface Iface
 	/**
 	 * Returns the taxrate amount.
 	 *
-	 * @return string rate of product
+	 * @return string Tax rate of product
 	 */
 	public function getTaxRate();
 
 	/**
-	 * Sets the new Tax rate.
+	 * Sets the new tax rate.
 	 *
 	 * @param string $taxrate Tax rate with two digits precision
 	 * @return void
 	 */
 	public function setTaxRate( $taxrate );
+
+	/**
+	 * Returns the tax for the price item
+	 *
+	 * The tax is calculated according to the value, the costs per item, the
+	 * tax rate and the configuration if tax is included into the price values
+	 * or not
+	 *
+	 * @return string Tax value with four digits precision
+	 * @see mshop/price/taxflag
+	 */
+	public function getTaxValue();
 
 	/**
 	 * Returns the currency ID.

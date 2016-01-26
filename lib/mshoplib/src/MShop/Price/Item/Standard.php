@@ -318,6 +318,29 @@ class Standard
 
 
 	/**
+	 * Returns the tax for the price item
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @return string Tax value with four digits precision
+	 * @see mshop/price/taxflag
+	 */
+	public function getTaxValue()
+	{
+		$qty = $this->getQuantity();
+		$taxrate = $this->getTaxRate();
+
+		if( isset( $this->values['price.taxflag'] ) && (bool) $this->values['price.taxflag'] !== false ) {
+			$tax = ( $this->getValue() + $this->getCosts() ) * $qty / ( 100 + $taxrate ) * $taxrate;
+		} else {
+			$tax = ( $this->getValue() + $this->getCosts() ) * $qty * $taxrate / 100;
+		}
+
+		return $this->formatNumber( $tax, 4 );
+	}
+
+
+	/**
 	 * Returns the status of the item
 	 *
 	 * @return integer Status of the item
@@ -486,11 +509,13 @@ class Standard
 	/**
 	 * Formats the money value.
 	 *
-	 * @param string formatted money value
+	 * @param string|double $number Money value
+	 * @param integer $precision Number of decimal places
+	 * @return string Formatted money value
 	 */
-	protected function formatNumber( $number )
+	protected function formatNumber( $number, $precision = 2 )
 	{
-		return number_format( (double) $number, 2, '.', '' );
+		return number_format( (double) $number, $precision, '.', '' );
 	}
 
 }
