@@ -34,11 +34,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'price.currencyid' => 'EUR',
 			'price.domain' => 'product',
 			'price.label' => 'Price label',
-			'price.quantity' => 1500,
+			'price.quantity' => 15,
 			'price.value' => 195.50,
 			'price.costs' => 19.95,
 			'price.rebate' => 10.00,
 			'price.taxrate' => 19.00,
+			'price.taxflag' => true,
 			'price.status' => true,
 			'price.mtime' => '2011-01-01 00:00:02',
 			'price.ctime' => '2011-01-01 00:00:01',
@@ -180,13 +181,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetQuantity()
 	{
-		$this->assertEquals( 1500, $this->object->getQuantity() );
+		$this->assertEquals( 15, $this->object->getQuantity() );
 	}
 
 	public function testSetQuantity()
 	{
-		$this->object->setQuantity( 2000 );
-		$this->assertEquals( 2000, $this->object->getQuantity() );
+		$this->object->setQuantity( 20 );
+		$this->assertEquals( 20, $this->object->getQuantity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -245,6 +246,25 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->setTaxRate( '22.00' );
 		$this->assertEquals( 22.00, $this->object->getTaxRate() );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+	public function testgetTaxValue()
+	{
+		$this->assertEquals( '515.9937', $this->object->getTaxValue() );
+	}
+
+	public function testgetTaxValueFromNetprice()
+	{
+		$values = array(
+			'price.quantity' => 10,
+			'price.value' => 195.50,
+			'price.costs' => 19.95,
+			'price.taxrate' => 19.00,
+			'price.taxflag' => false,
+		);
+
+		$object = new \Aimeos\MShop\Price\Item\Standard( $values );
+		$this->assertEquals( '409.3550', $object->getTaxValue() );
 	}
 
 	public function testGetStatus()
@@ -320,7 +340,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testToArray()
 	{
 		$arrayObject = $this->object->toArray();
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['price.id'] );
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['price.typeid'] );

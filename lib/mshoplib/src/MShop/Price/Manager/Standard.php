@@ -132,6 +132,8 @@ class Standard
 		),
 	);
 
+	private $taxflag;
+
 
 	/**
 	 * Initializes the object.
@@ -142,6 +144,20 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-price' );
+
+		/** mshop/price/taxflag
+		 * Configuration setting if prices are inclusive or exclusive tax
+		 *
+		 * In Aimeos, prices can be entered either completely with or without tax. The
+		 * default is that prices contains tax. You must specifiy the tax rate for each
+		 * prices to prevent wrong calculations.
+		 *
+		 * @param boolean True if gross prices are used, false for net prices
+		 * @category Developer
+		 * @category User
+		 * @since 2016.02
+		 */
+		$this->taxflag = $context->getConfig()->get( 'mshop/price/taxflag', true );
 	}
 
 
@@ -650,6 +666,8 @@ class Standard
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
+		$values['price.taxflag'] = $this->taxflag;
+
 		return new \Aimeos\MShop\Price\Item\Standard( $values, $listItems, $refItems );
 	}
 }
