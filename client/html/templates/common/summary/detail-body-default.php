@@ -187,7 +187,7 @@ $backParams = $this->get( 'summaryParams', array() );
 						<input class="value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', $position, 'quantity' ) ) ); ?>" value="<?php echo $enc->attr( $product->getQuantity() ); ?>" maxlength="10" required="required" />
 						<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', $position, 'position' ) ) ); ?>" value="<?php echo $enc->attr( $position ); ?>" />
 						<a class="minibutton change" href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array( 'b_action' => 'edit', 'b_position' => $position, 'b_quantity' => $product->getQuantity() + 1 ) + $backParams, array(), $basketConfig ) ); ?>">+</a>
-<?php		else : ?>	
+<?php		else : ?>
 <?php 			echo $enc->html( $product->getQuantity() ); ?>
 <?php		endif; ?>
 					</td>
@@ -271,11 +271,15 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="action"></td>
 <?php endif; ?>
 				</tr>
-<?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $priceValue ) : ?>
+<?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $taxValue ) : ?>
 <?php	if( $taxRate > '0.00' && $priceValue > '0.00' ) : ?>
 				<tr class="tax">
+<?php		if( $this->config( 'mshop/price/taxflag', true ) ) : ?>
 					<td colspan="3"><?php echo $enc->html( sprintf( $this->translate( 'client', 'Incl. %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?></td>
-					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceValue / ( $taxRate + 100 ) * $taxRate ), $priceCurrency ) ); ?></td>
+<?php		else : ?>
+					<td colspan="3"><?php echo $enc->html( sprintf( $this->translate( 'client', '+ %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?></td>
+<?php		endif; ?>
+					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $taxValue ), $priceCurrency ) ); ?></td>
 <?php		if( $modify ) : ?>
 					<td class="action"></td>
 <?php		endif; ?>

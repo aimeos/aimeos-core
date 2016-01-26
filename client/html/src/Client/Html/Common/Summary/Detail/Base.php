@@ -37,9 +37,9 @@ abstract class Base
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] += ( $price->getValue() + $price->getCosts() ) * $product->getQuantity();
+				$taxrates[$taxrate] += $price->getTaxValue();
 			} else {
-				$taxrates[$taxrate] = ( $price->getValue() + $price->getCosts() ) * $product->getQuantity();
+				$taxrates[$taxrate] = $price->getTaxValue();
 			}
 		}
 
@@ -49,9 +49,9 @@ abstract class Base
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] += $price->getValue() + $price->getCosts();
+				$taxrates[$taxrate] += $price->getTaxValue();
 			} else {
-				$taxrates[$taxrate] = $price->getValue() + $price->getCosts();
+				$taxrates[$taxrate] = $price->getTaxValue();
 			}
 		}
 		catch( \Exception $e ) { ; } // if delivery service isn't available
@@ -62,9 +62,9 @@ abstract class Base
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] += $price->getValue() + $price->getCosts();
+				$taxrates[$taxrate] += $price->getTaxValue();
 			} else {
-				$taxrates[$taxrate] = $price->getValue() + $price->getCosts();
+				$taxrates[$taxrate] = $price->getTaxValue();
 			}
 		}
 		catch( \Exception $e ) { ; } // if payment service isn't available
