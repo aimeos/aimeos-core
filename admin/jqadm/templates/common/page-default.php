@@ -31,7 +31,7 @@ $params = $this->get( 'pageParams', array() );
 $params['id'] = $this->param( 'id', '' );
 
 ?>
-<div class="aimeos" data-url="<?php echo $enc->attr( $this->url( $jsonTarget, $jsonCntl, $jsonAction, array( 'site' => $site ), array(), $jsonConfig ) ); ?>">
+<div class="aimeos" data-url="<?php echo $enc->attr( $this->url( $jsonTarget, $jsonCntl, $jsonAction, array( 'site' => $site, 'resource' => '' ), array(), $jsonConfig ) ); ?>">
 
 	<nav class="navbar navbar-full">
 		<a class="navbar-brand" href="https://aimeos.org/update?type={type}&version={version}">
