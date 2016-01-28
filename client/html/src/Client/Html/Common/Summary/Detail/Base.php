@@ -33,38 +33,38 @@ abstract class Base
 
 		foreach( $basket->getProducts() as $product )
 		{
-			$price = $product->getPrice();
+			$price = clone $product->getPrice();
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] += $price->getTaxValue();
+				$taxrates[$taxrate]->addItem( $price, $price->getQuantity() );
 			} else {
-				$taxrates[$taxrate] = $price->getTaxValue();
+				$taxrates[$taxrate] = $price;
 			}
 		}
 
 		try
 		{
-			$price = $basket->getService( 'delivery' )->getPrice();
+			$price = clone $basket->getService( 'delivery' )->getPrice();
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] += $price->getTaxValue();
+				$taxrates[$taxrate]->addItem( $price, $price->getQuantity() );
 			} else {
-				$taxrates[$taxrate] = $price->getTaxValue();
+				$taxrates[$taxrate] = $price;
 			}
 		}
 		catch( \Exception $e ) { ; } // if delivery service isn't available
 
 		try
 		{
-			$price = $basket->getService( 'payment' )->getPrice();
+			$price = clone $basket->getService( 'payment' )->getPrice();
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] += $price->getTaxValue();
+				$taxrates[$taxrate]->addItem( $price, $price->getQuantity() );
 			} else {
-				$taxrates[$taxrate] = $price->getTaxValue();
+				$taxrates[$taxrate] = $price;
 			}
 		}
 		catch( \Exception $e ) { ; } // if payment service isn't available
