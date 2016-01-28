@@ -125,19 +125,36 @@ interface Iface
 	public function setRebate( $price );
 
 	/**
-	 * Returns the taxrate amount.
+	 * Returns the tax rate in percent.
 	 *
 	 * @return string Tax rate of product
 	 */
 	public function getTaxRate();
 
 	/**
-	 * Sets the new tax rate.
+	 * Sets the new tax rate in percent.
 	 *
 	 * @param string $taxrate Tax rate with two digits precision
 	 * @return void
 	 */
 	public function setTaxRate( $taxrate );
+
+	/**
+	 * Returns the tax rate flag.
+	 *
+	 * True if tax is included in the price value, costs and rebate, false if not
+	 *
+	 * @return boolean Tax rate flag for the price
+	 */
+	public function getTaxFlag();
+
+	/**
+	 * Sets the new tax flag.
+	 *
+	 * @param boolean $flag True if tax is included in the price value, costs and rebate, false if not
+	 * @return void
+	*/
+	public function setTaxFlag( $flag );
 
 	/**
 	 * Returns the tax for the price item

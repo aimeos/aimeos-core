@@ -318,6 +318,38 @@ class Standard
 
 
 	/**
+	 * Returns the tax rate flag.
+	 *
+	 * True if tax is included in the price value, costs and rebate, false if not
+	 *
+	 * @return boolean Tax rate flag for the price
+	 */
+	public function getTaxFlag()
+	{
+		if( isset( $this->values['price.taxflag'] ) ) {
+			return (bool) $this->values['price.taxflag'];
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Sets the new tax flag.
+	 *
+	 * @param boolean $flag True if tax is included in the price value, costs and rebate, false if not
+	 * @return void
+	*/
+	public function setTaxFlag( $flag )
+	{
+		if( $flag == $this->getTaxFlag() ) { return; }
+
+		$this->values['price.taxflag'] = (bool) $flag;
+		$this->setModified();
+	}
+
+
+	/**
 	 * Returns the tax for the price item
 	 *
 	 * {@inheritDoc}
@@ -330,7 +362,7 @@ class Standard
 		$qty = $this->getQuantity();
 		$taxrate = $this->getTaxRate();
 
-		if( isset( $this->values['price.taxflag'] ) && (bool) $this->values['price.taxflag'] !== false ) {
+		if( $this->getTaxFlag() !== false ) {
 			$tax = ( $this->getValue() + $this->getCosts() ) * $qty / ( 100 + $taxrate ) * $taxrate;
 		} else {
 			$tax = ( $this->getValue() + $this->getCosts() ) * $qty * $taxrate / 100;
@@ -455,6 +487,7 @@ class Standard
 				case 'price.costs': $this->setCosts( $value ); break;
 				case 'price.rebate': $this->setRebate( $value ); break;
 				case 'price.taxrate': $this->setTaxRate( $value ); break;
+				case 'price.taxflag': $this->setTaxFlag( $value ); break;
 				case 'price.status': $this->setStatus( $value ); break;
 				case 'price.label': $this->setLabel( $value ); break;
 				default: $unknown[$key] = $value;
@@ -483,6 +516,7 @@ class Standard
 		$list['price.costs'] = $this->getCosts();
 		$list['price.rebate'] = $this->getRebate();
 		$list['price.taxrate'] = $this->getTaxRate();
+		$list['price.taxflag'] = $this->getTaxFlag();
 		$list['price.status'] = $this->getStatus();
 		$list['price.label'] = $this->getLabel();
 
