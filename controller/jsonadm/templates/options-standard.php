@@ -9,7 +9,7 @@ $resources = $attributes = array();
 $site = $this->param( 'site', 'default' );
 
 foreach( $this->get( 'resources', array() ) as $resource ) {
-	$resources[$resource] = $this->url( $target, $cntl, $action, array( 'site' => $site, 'resource' => $resource ), array(), $config );
+	$resources[$resource] = $this->url( $target, $cntl, $action, array( 'site' => $site, 'resource' => $resource, 'id' => '' ), array(), $config );
 }
 
 foreach( $this->get( 'attributes', array() ) as $attr ) {
