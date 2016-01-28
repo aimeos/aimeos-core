@@ -271,10 +271,10 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="action"></td>
 <?php endif; ?>
 				</tr>
-<?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $taxValue ) : ?>
-<?php	if( $taxRate > '0.00' && $priceValue > '0.00' ) : ?>
+<?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $priceItem ) : $taxValue = $priceItem->getTaxValue(); ?>
+<?php	if( $taxRate > '0.00' && $taxValue > '0.00' ) : ?>
 				<tr class="tax">
-<?php		if( $this->config( 'mshop/price/taxflag', true ) ) : ?>
+<?php		if( $priceItem->getTaxFlag() ) : ?>
 					<td colspan="3"><?php echo $enc->html( sprintf( $this->translate( 'client', 'Incl. %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?></td>
 <?php		else : ?>
 					<td colspan="3"><?php echo $enc->html( sprintf( $this->translate( 'client', '+ %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?></td>
