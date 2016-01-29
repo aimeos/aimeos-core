@@ -33,15 +33,17 @@ $enc = $this->encoder();
 						<div class="form-group row">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'ID' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="item-listid" type="hidden" name="selection[product.lists.id][]" value="<?php echo $enc->attr( $this->value( $map, 'product.lists.id' ) ); ?>" />
-								<input class="item-id" type="hidden" name="selection[product.id][]" value="<?php echo $enc->attr( $this->value( $map, 'product.id' ) ); ?>" />
+								<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.lists.id', '' ) ) ); ?>"
+									value="<?php echo $enc->attr( $this->value( $map, 'product.lists.id' ) ); ?>" />
+								<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.id', '' ) ) ); ?>"
+									value="<?php echo $enc->attr( $this->value( $map, 'product.id' ) ); ?>" />
 								<p class="form-control-static group-item-id"><?php echo $enc->html( $this->value( $map, 'product.id' ) ); ?></p>
 							</div>
 						</div>
 						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Code' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="form-control item-code" type="text" name="selection[product.code][]"
+								<input class="form-control item-code" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.code', '' ) ) ); ?>"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'EAN, SKU or article number (required)' ) ); ?>"
 									value="<?php echo $enc->attr( $code ); ?>">
 							</div>
@@ -49,7 +51,7 @@ $enc = $this->encoder();
 						<div class="form-group row mandatory">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Label' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="form-control item-label" type="text" name="selection[product.label][]"
+								<input class="form-control item-label" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.label', '' ) ) ); ?>"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Internal name (required)' ) ); ?>"
 									value="<?php echo $enc->attr( $this->value( $map, 'product.label' ) ); ?>">
 							</div>
@@ -67,9 +69,11 @@ $enc = $this->encoder();
 <?php foreach( (array) $this->value( $map, 'attr', array() ) as $attrid => $list ) : ?>
 								<tr>
 									<td>
-										<input class="item-attr-ref" type="hidden" name="selection[attr][ref][]" value="<?php echo $enc->attr( $code ); ?>" />
-										<input class="item-attr-label" type="hidden" name="selection[attr][label][]" value="<?php echo $enc->attr( $this->value( $list, 'label' ) ); ?>" />
-										<select class="combobox item-attr-id" name="selection[attr][id][]">
+										<input class="item-attr-ref" type="hidden" value="<?php echo $enc->attr( $code ); ?>"
+											name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'attr', 'ref', '' ) ) ); ?>" />
+										<input class="item-attr-label" type="hidden" value="<?php echo $enc->attr( $this->value( $list, 'label' ) ); ?>"
+											name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'attr', 'label', '' ) ) ); ?>" />
+										<select class="combobox item-attr-id" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'attr', 'id', '' ) ) ); ?>">
 											<option value="<?php echo $enc->attr( $attrid ); ?>" ><?php echo $enc->html( $this->value( $list, 'label' ) ); ?></option>
 										</select>
 									</td>
@@ -78,9 +82,9 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 								<tr class="prototype">
 									<td>
-										<input class="item-attr-ref" type="hidden" name="selection[attr][ref][]" class="attributes-ref" value="" disabled="disabled" />
-										<input class="item-attr-label" type="hidden" name="selection[attr][label][]" value="" disabled="disabled" />
-										<select class="combobox-prototype item-attr-id" name="selection[attr][id][]" disabled="disabled"></select>
+										<input class="item-attr-ref" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'attr', 'ref', '' ) ) ); ?>" value="" disabled="disabled" />
+										<input class="item-attr-label" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'attr', 'label', '' ) ) ); ?>" value="" disabled="disabled" />
+										<select class="combobox-prototype item-attr-id" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'attr', 'id', '' ) ) ); ?>" disabled="disabled"></select>
 									</td>
 									<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
 								</tr>

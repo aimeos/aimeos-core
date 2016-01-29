@@ -25,9 +25,11 @@ $enc = $this->encoder();
 <?php foreach( $this->get( 'categoryData/catalog.lists.id', array() ) as $idx => $id ) : ?>
 					<tr>
 						<td>
-							<input class="item-listid" type="hidden" name="category[catalog.lists.id][]" value="<?php echo $enc->attr( $id ); ?>" />
-							<input class="item-label" type="hidden" name="category[catalog.label][]" value="<?php echo $enc->attr( $this->get( 'categoryData/catalog.label/' . $idx ) ); ?>" />
-							<select class="combobox item-id" name="category[catalog.id][]">
+							<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'category', 'catalog.lists.id', '' ) ) ); ?>"
+								value="<?php echo $enc->attr( $id ); ?>" />
+							<input class="item-label" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'category', 'catalog.label', '' ) ) ); ?>"
+								value="<?php echo $enc->attr( $this->get( 'categoryData/catalog.label/' . $idx ) ); ?>" />
+							<select class="combobox item-id" name="<?php echo $enc->attr( $this->formparam( array( 'category', 'catalog.id', '' ) ) ); ?>">
 								<option value="<?php echo $enc->attr( $this->get( 'categoryData/catalog.id/' . $idx ) ); ?>" ><?php echo $enc->html( $this->get( 'categoryData/catalog.label/' . $idx ) ); ?></option>
 							</select>
 						</td>
@@ -36,9 +38,9 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 					<tr class="prototype">
 						<td>
-							<input class="item-listid" type="hidden" name="category[catalog.lists.id][]" value="" disabled="disabled" />
-							<input class="item-label" type="hidden" name="category[catalog.label][]" value="" disabled="disabled" />
-							<select class="combobox-prototype item-id" name="category[catalog.id][]" disabled="disabled">
+							<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'category', 'catalog.lists.id', '' ) ) ); ?>" value="" disabled="disabled" />
+							<input class="item-label" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'category', 'catalog.label', '' ) ) ); ?>" value="" disabled="disabled" />
+							<select class="combobox-prototype item-id" name="<?php echo $enc->attr( $this->formparam( array( 'category', 'catalog.id', '' ) ) ); ?>" disabled="disabled">
 							</select>
 						</td>
 						<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>

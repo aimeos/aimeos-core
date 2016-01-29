@@ -25,9 +25,9 @@ $enc = $this->encoder();
 <?php foreach( $this->get( 'bundleData/product.lists.id', array() ) as $idx => $id ) : ?>
 					<tr>
 						<td>
-							<input class="item-listid" type="hidden" name="bundle[product.lists.id][]" value="<?php echo $enc->attr( $id ); ?>" />
-							<input class="item-label" type="hidden" name="bundle[product.label][]" value="<?php echo $enc->attr( $this->get( 'bundleData/product.label/' . $idx ) ); ?>" />
-							<select class="combobox item-refid" name="bundle[product.lists.refid][]">
+							<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'bundle', 'product.lists.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
+							<input class="item-label" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'bundle', 'product.label', '' ) ) ); ?>" value="<?php echo $enc->attr( $this->get( 'bundleData/product.label/' . $idx ) ); ?>" />
+							<select class="combobox item-refid" name="<?php echo $enc->attr( $this->formparam( array( 'bundle', 'product.lists.refid', '' ) ) ); ?>">
 								<option value="<?php echo $enc->attr( $this->get( 'bundleData/product.lists.refid/' . $idx ) ); ?>" ><?php echo $enc->html( $this->get( 'bundleData/product.label/' . $idx ) ); ?></option>
 							</select>
 						</td>
@@ -36,9 +36,9 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 					<tr class="prototype">
 						<td>
-							<input class="item-listid" type="hidden" name="bundle[product.lists.id][]" value="" disabled="disabled" />
-							<input class="item-label" type="hidden" name="bundle[product.label][]" value="" disabled="disabled" />
-							<select class="combobox-prototype item-refid" name="bundle[product.lists.refid][]" disabled="disabled">
+							<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'bundle', 'product.lists.id', '' ) ) ); ?>" value="" disabled="disabled" />
+							<input class="item-label" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'bundle', 'product.label', '' ) ) ); ?>" value="" disabled="disabled" />
+							<select class="combobox-prototype item-refid" name="<?php echo $enc->attr( $this->formparam( array( 'bundle', 'product.lists.refid', '' ) ) ); ?>" disabled="disabled">
 							</select>
 						</td>
 						<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>

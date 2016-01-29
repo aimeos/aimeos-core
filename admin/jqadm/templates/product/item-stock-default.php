@@ -28,8 +28,8 @@ $enc = $this->encoder();
 <?php foreach( $this->get( 'stockData/product.stock.id', array() ) as $idx => $id ) : ?>
 				<tr>
 			  		<td class="stock-warehouse">
-						<input class="item-id" type="hidden" name="stock[product.stock.id][]" value="<?php echo $enc->attr( $id ); ?>" />
-						<select class="form-control c-select item-warehouseid" name="stock[product.stock.warehouseid][]">
+						<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'stock', 'product.stock.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
+						<select class="form-control c-select item-warehouseid" name="<?php echo $enc->attr( $this->formparam( array( 'stock', 'product.stock.warehouseid', '' ) ) ); ?>">
 <?php	foreach( $this->get( 'stockWarehouses', array() ) as $whid => $warehouse ) : ?>
 <?php		if( $whid == $this->get( 'stockData/product.stock.warehouseid/' . $idx ) ) : ?>
 							<option value="<?php echo $enc->attr( $whid ); ?>" selected="selected"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
@@ -40,11 +40,11 @@ $enc = $this->encoder();
 						</select>
 					</td>
 					<td class="stock-stocklevel">
-						<input class="form-control item-stocklevel" type="text" name="stock[product.stock.stocklevel][]"
+						<input class="form-control item-stocklevel" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'stock', 'product.stock.stocklevel', '' ) ) ); ?>"
 							value="<?php echo $enc->attr( $this->get( 'stockData/product.stock.stocklevel/' . $idx ) ); ?>" />
 					</td>
 					<td class="stock-databack">
-						<input class="form-control item-dateback date" type="text" name="stock[product.stock.dateback][]"
+						<input class="form-control item-dateback date" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'stock', 'product.stock.dateback', '' ) ) ); ?>"
 							value="<?php echo $enc->attr( $this->get( 'stockData/product.stock.dateback/' . $idx ) ); ?>"
 							placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'YYYY-MM-DD hh:mm:ss (optional)' ) ); ?>"
 							data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>" />
@@ -54,18 +54,18 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 				<tr class="prototype">
 			  		<td class="stock-warehouse">
-						<input class="item-id" type="hidden" name="stock[product.stock.id][]" value="" disabled="disabled" />
-						<select class="form-control c-select item-warehouseid" name="stock[product.stock.warehouseid][]" disabled="disabled">
+						<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'stock', 'product.stock.id', '' ) ) ); ?>" value="" disabled="disabled" />
+						<select class="form-control c-select item-warehouseid" name="<?php echo $enc->attr( $this->formparam( array( 'stock', 'product.stock.warehouseid', '' ) ) ); ?>" disabled="disabled">
 <?php foreach( $this->get( 'stockWarehouses', array() ) as $whid => $warehouse ) : ?>
 							<option value="<?php echo $enc->attr( $whid ); ?>"><?php echo $enc->html( $warehouse->getLabel() ) ?></option>
 <?php endforeach; ?>
 						</select>
 					</td>
 					<td class="stock-stocklevel">
-						<input class="form-control item-stocklevel" type="text" name="stock[product.stock.stocklevel][]" disabled="disabled" />
+						<input class="form-control item-stocklevel" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'stock', 'product.stock.stocklevel', '' ) ) ); ?>" disabled="disabled" />
 					</td>
 					<td class="stock-databack">
-						<input class="form-control date-prototype item-dateback" type="text" name="stock[product.stock.dateback][]" disabled="disabled"
+						<input class="form-control date-prototype item-dateback" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'stock', 'product.stock.dateback', '' ) ) ); ?>" disabled="disabled"
 							placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'YYYY-MM-DD hh:mm:ss (optional)' ) ); ?>"
 							data-format="<?php echo $this->translate( 'admin', 'yy-mm-dd' ); ?>" />
 					</td>
