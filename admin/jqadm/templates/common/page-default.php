@@ -8,9 +8,9 @@
 $enc = $this->encoder();
 
 $target = $this->request()->getTarget();
-$cntl = $this->config( 'admin/jqadm/url/controller', 'Jqadm' );
-$action = $this->config( 'admin/jqadm/url/action', 'search' );
-$config = $this->config( 'admin/jqadm/url/config', array() );
+$cntl = $this->config( 'admin/jqadm/url/search/controller', 'Jqadm' );
+$action = $this->config( 'admin/jqadm/url/search/action', 'search' );
+$config = $this->config( 'admin/jqadm/url/search/config', array() );
 
 $jsonTarget = $this->config( 'controller/jsonadm/url/options/target' );
 $jsonCntl = $this->config( 'controller/jsonadm/url/options/controller', 'Jsonadm' );
