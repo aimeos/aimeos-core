@@ -33,6 +33,6 @@ class Standard
 		$view = clone $this->getView();
 		$view->assign( $params );
 
-		return $view->render( $view->resolve( $file ) );
+		return $view->render( $file );
 	}
 }

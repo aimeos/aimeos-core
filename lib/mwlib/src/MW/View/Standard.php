@@ -239,7 +239,7 @@ class Standard implements \Aimeos\MW\View\Iface
 	{
 		foreach( (array) $files as $file )
 		{
-			if( strncmp( $file, '/', 1 ) === 0 && is_file( $file ) ) {
+			if( is_file( $file ) ) {
 				return $file;
 			}
 
