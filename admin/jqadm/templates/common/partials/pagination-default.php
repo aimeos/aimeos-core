@@ -8,7 +8,7 @@
 $enc = $this->encoder();
 
 $target = $this->config( 'admin/jqadm/url/search/target' );
-$controller = $this->config( 'admin/jqadm/url/search/controller', 'jqadm' );
+$controller = $this->config( 'admin/jqadm/url/search/controller', 'Jqadm' );
 $action = $this->config( 'admin/jqadm/url/search/action', 'search' );
 $config = $this->config( 'admin/jqadm/url/search/config', array() );
 

@@ -16,27 +16,27 @@ $sort = function( $sortcode, $code ) {
 $enc = $this->encoder();
 
 $target = $this->config( 'admin/jqadm/url/search/target' );
-$controller = $this->config( 'admin/jqadm/url/search/controller', 'jqadm' );
+$controller = $this->config( 'admin/jqadm/url/search/controller', 'Jqadm' );
 $action = $this->config( 'admin/jqadm/url/search/action', 'search' );
 $config = $this->config( 'admin/jqadm/url/search/config', array() );
 
 $newTarget = $this->config( 'admin/jqadm/url/create/target' );
-$newCntl = $this->config( 'admin/jqadm/url/create/controller', 'jqadm' );
+$newCntl = $this->config( 'admin/jqadm/url/create/controller', 'Jqadm' );
 $newAction = $this->config( 'admin/jqadm/url/create/action', 'create' );
 $newConfig = $this->config( 'admin/jqadm/url/create/config', array() );
 
 $getTarget = $this->config( 'admin/jqadm/url/get/target' );
-$getCntl = $this->config( 'admin/jqadm/url/get/controller', 'jqadm' );
+$getCntl = $this->config( 'admin/jqadm/url/get/controller', 'Jqadm' );
 $getAction = $this->config( 'admin/jqadm/url/get/action', 'get' );
 $getConfig = $this->config( 'admin/jqadm/url/get/config', array() );
 
 $copyTarget = $this->config( 'admin/jqadm/url/copy/target' );
-$copyCntl = $this->config( 'admin/jqadm/url/copy/controller', 'jqadm' );
+$copyCntl = $this->config( 'admin/jqadm/url/copy/controller', 'Jqadm' );
 $copyAction = $this->config( 'admin/jqadm/url/copy/action', 'copy' );
 $copyConfig = $this->config( 'admin/jqadm/url/copy/config', array() );
 
 $delTarget = $this->config( 'admin/jqadm/url/delete/target' );
-$delCntl = $this->config( 'admin/jqadm/url/delete/controller', 'jqadm' );
+$delCntl = $this->config( 'admin/jqadm/url/delete/controller', 'Jqadm' );
 $delAction = $this->config( 'admin/jqadm/url/delete/action', 'delete' );
 $delConfig = $this->config( 'admin/jqadm/url/delete/config', array() );
 
@@ -212,7 +212,7 @@ $sortcode = $this->param( 'sort' );
 						--><?php echo $this->csrf()->formfield(); ?><!--
 						--><input type="hidden" name="resource" value="<?php echo $enc->attr( $this->value( $params, 'resource' ) ); ?>" /><!--
 						--><input type="hidden" name="id" value="<?php echo $enc->attr( $id ); ?>" /><!--
-						--><button class="btn btn-danger fa fa-trash" aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Delete' ) ); ?>"><!--
+						--><button class="btn btn-danger fa fa-trash" aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Delete' ) ); ?>" /><!--
 					--></form><!--
 				--></td>
 			</tr>

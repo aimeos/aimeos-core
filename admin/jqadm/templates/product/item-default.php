@@ -12,12 +12,12 @@ $selected = function( $key, $code ) {
 $enc = $this->encoder();
 
 $target = $this->config( 'admin/jqadm/url/save/target' );
-$cntl = $this->config( 'admin/jqadm/url/save/controller', 'jqadm' );
+$cntl = $this->config( 'admin/jqadm/url/save/controller', 'Jqadm' );
 $action = $this->config( 'admin/jqadm/url/save/action', 'save' );
 $config = $this->config( 'admin/jqadm/url/save/config', array() );
 
 $listTarget = $this->config( 'admin/jqadm/url/search/target' );
-$listCntl = $this->config( 'admin/jqadm/url/search/controller', 'jqadm' );
+$listCntl = $this->config( 'admin/jqadm/url/search/controller', 'Jqadm' );
 $listAction = $this->config( 'admin/jqadm/url/search/action', 'search' );
 $listConfig = $this->config( 'admin/jqadm/url/search/config', array() );
 
