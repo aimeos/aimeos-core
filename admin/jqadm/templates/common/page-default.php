@@ -18,7 +18,7 @@ $jsonAction = $this->config( 'controller/jsonadm/url/options/action', 'options' 
 $jsonConfig = $this->config( 'controller/jsonadm/url/options/config', array() );
 
 $extTarget = $this->config( 'admin/extjs/url/target' );
-$extCntl = $this->config( 'admin/extjs/url/controller', 'Extjs' );
+$extCntl = $this->config( 'admin/extjs/url/controller', 'Extadm' );
 $extAction = $this->config( 'admin/extjs/url/action', 'index' );
 $extConfig = $this->config( 'admin/extjs/url/config', array() );
 
