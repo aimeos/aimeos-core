@@ -234,7 +234,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function getI18n( $locale = null )
 	{
-		$locale = ( $locale !== null ? $locale : $this->getLocale()->getLanguageId() );
+		if( $locale === null ) {
+			$locale = $this->getLocale()->getLanguageId();
+		}
+
+		if( $locale === null && reset( $this->i18n ) !== false ) {
+			$locale = key( $this->i18n );
+		}
 
 		if( isset( $this->i18n[$locale] ) ) {
 			return $this->i18n[$locale];
