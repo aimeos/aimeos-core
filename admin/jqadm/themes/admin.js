@@ -254,19 +254,26 @@ Aimeos = {
 
 		Aimeos.options.done(function(data) {
 
-			var compare = {}, field = {};
+			var compare = {}, field = {}, params = {}, param = {};
+			var prefix = $("body").data("prefix");
 
 			compare[key] = request.term;
 			field[domain] = key;
 
+			param['filter'] = {'&&': [{'=~': compare}]};
+			param['fields'] = field;
+			param['sort'] = sort;
+
+			if( prefix ) {
+				params[prefix] = param;
+			} else {
+				$params = param;
+			}
+
 			$.ajax({
 				dataType: "json",
 				url: data.meta.resources[domain] || null,
-				data: {
-					filter: {'&&': [{'=~': compare}]},
-					fields: field,
-					sort: sort
-				},
+				data: params,
 				success: function(result) {
 					var list = result.data || [];
 
