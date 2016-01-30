@@ -79,7 +79,8 @@ $enc = $this->encoder();
 						<div class="form-group row mandatory">
 							<label class="col-lg-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Actual current price' ) ); ?></label>
 							<div class="col-lg-9">
-								<input class="form-control item-value" type="text" name="price[price.value][]" data-pattern="^[0-9]+(\.[0-9]+)?$"
+								<input class="form-control item-value" type="text" data-pattern="^[0-9]+(\.[0-9]+)?$"
+									name="<?php echo $enc->attr( $this->formparam( array( 'price', 'price.value', '' ) ) ); ?>"
 									placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Actual current price' ) ); ?>"
 									value="<?php echo $enc->attr( $this->get( 'priceData/price.value/' . $idx, '0.00' ) ); ?>" />
 							</div>
