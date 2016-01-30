@@ -306,9 +306,13 @@ class Standard
 		{
 			foreach( $view->item->getListItems( 'price' ) as $id => $listItem )
 			{
+				if( ( $refItem = $listItem->getRefItem() ) === null ) {
+					continue;
+				}
+
 				$data['product.lists.id'][] = $id;
 
-				foreach( $listItem->getRefItem()->toArray() as $key => $value ) {
+				foreach( $refItem->toArray() as $key => $value ) {
 					$data[$key][] = $value;
 				}
 			}

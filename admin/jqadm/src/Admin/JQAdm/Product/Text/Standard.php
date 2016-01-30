@@ -327,7 +327,10 @@ class Standard
 
 			foreach( $view->item->getListItems( 'text', 'default' ) as $listItem )
 			{
-				$refItem = $listItem->getRefItem();
+				if( ( $refItem = $listItem->getRefItem() ) === null ) {
+					continue;
+				}
+
 				$type = $refItem->getType();
 
 				$data[$type]['listid'][] = $listItem->getId();
