@@ -40,7 +40,8 @@ $delCntl = $this->config( 'admin/jqadm/url/delete/controller', 'Jqadm' );
 $delAction = $this->config( 'admin/jqadm/url/delete/action', 'delete' );
 $delConfig = $this->config( 'admin/jqadm/url/delete/config', array() );
 
-$params = $this->get( 'pageParams', array() );
+$formparams = $params = $this->get( 'pageParams', array() );
+unset( $formparams['fields'], $formparams['filter'], $formparams['page'] );
 
 $filterParams = array(
 	'operators' => $this->get( 'filterOperators', array() ),
@@ -56,7 +57,7 @@ $sortcode = $this->param( 'sort' );
 ?>
 <?php $this->block()->start( 'jqadm_content' ); ?>
 
-<form class="list-search" method="POST" action="<?php echo $enc->attr( $this->url( $target, $controller, $action, $params, array(), $config ) ); ?>">
+<form class="list-search" method="POST" action="<?php echo $enc->attr( $this->url( $target, $controller, $action, $formparams, array(), $config ) ); ?>">
 <?php echo $this->csrf()->formfield(); ?>
 
 	<div class="list-fields">
