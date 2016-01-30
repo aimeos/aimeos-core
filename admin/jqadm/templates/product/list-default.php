@@ -210,7 +210,7 @@ $sortcode = $this->param( 'sort' );
 						aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Copy' ) ); ?>"></a><!--
 					--><form class="delete" action="<?php echo $enc->attr( $this->url( $delTarget, $delCntl, $delAction, array( 'id' => $id ) + $params, array(), $delConfig ) ); ?>" method="POST"><!--
 						--><?php echo $this->csrf()->formfield(); ?><!--
-						--><input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'resource' ) ) ); ?>" value="<?php echo $enc->attr( $this->value( $params, 'resource' ) ); ?>" /><!--
+						--><input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'resource' ) ) ); ?>" value="product" /><!--
 						--><input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'id' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" /><!--
 						--><button class="btn btn-danger fa fa-trash" aria-label="<?php echo $enc->attr( $this->translate( 'admin', 'Delete' ) ); ?>" /><!--
 					--></form><!--
