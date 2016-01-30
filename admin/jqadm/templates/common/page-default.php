@@ -34,8 +34,8 @@ $params['id'] = $this->param( 'id', '' );
 <div class="aimeos" data-url="<?php echo $enc->attr( $this->url( $jsonTarget, $jsonCntl, $jsonAction, array( 'site' => $site, 'resource' => '', 'id' => '' ), array(), $jsonConfig ) ); ?>">
 
 	<nav class="navbar navbar-full">
-		<a class="navbar-brand" href="https://aimeos.org/update?type={type}&version={version}">
-			<img src="https://aimeos.org/check?type={type}&version={version}" title="Aimeos update" />
+		<a class="navbar-brand" href="https://aimeos.org/update/?type={type}&version={version}">
+			<img src="https://aimeos.org/check/?type={type}&version={version}" title="Aimeos update" />
 		</a>
 
 		<button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapse-navbar">&#9776;</button>
