@@ -86,7 +86,7 @@ try
 	}
 
 	if( ( $tplsite = array_shift( $params ) ) === null ) {
-		$parent = 'default';
+		$tplsite = 'default';
 	}
 
 	spl_autoload_register( 'setup_autoload' );
