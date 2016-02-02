@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-21 17:49+0100\n"
+"POT-Creation-Date: 2016-01-30 17:29+0100\n"
 "PO-Revision-Date: 2015-09-29 12:26+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
@@ -703,16 +703,10 @@ msgstr ""
 msgid "Product height, e.g. 20.0 (in yard, inch, etc.)"
 msgstr ""
 
-msgid "Product height, e.g. 20.0 (yard, inch, etc.)"
-msgstr ""
-
 msgid "Product item details"
 msgstr ""
 
 msgid "Product length, e.g. 30.0 (in yard, inch, etc.)"
-msgstr ""
-
-msgid "Product length, e.g. 30.0 (yard, inch, etc.)"
 msgstr ""
 
 msgid "Product name"
@@ -752,13 +746,7 @@ msgstr ""
 msgid "Product weight, e.g. 1.25 (in pound, ounce, etc.)"
 msgstr ""
 
-msgid "Product weight, e.g. 1.25 (pound, ounce, etc.)"
-msgstr ""
-
 msgid "Product width, e.g. 17.5 (in yard, inch etc.)"
-msgstr ""
-
-msgid "Product width, e.g. 17.5 (yard, inch etc.)"
 msgstr ""
 
 #. : Product item panel title with product label ({0}) and site code ({1)}
