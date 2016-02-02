@@ -22,9 +22,11 @@ $format = array(
 	'rebate' => $this->translate( 'client', '%1$s %2$s off' ),
 	/// Rebate percent format with rebate percent value (%1$s)
 	'rebate%' => $this->translate( 'client', '-%1$s%%' ),
-	/// Tax rate format with tax rate in percent (%1$s)
-	'taxrate' => $this->translate( 'client', 'Incl. %1$s%% VAT' ),
 );
+
+/// Tax rate format with tax rate in percent (%1$s)
+$withtax = $this->translate( 'client', 'Incl. %1$s%% VAT' );
+$notax = $this->translate( 'client', '+ %1$s%% VAT' )
 
 ?>
 <?php foreach( $prices as $priceItem ) : ?>
@@ -36,9 +38,11 @@ $format = array(
 	$costs = $priceItem->getCosts();
 	$rebate = $priceItem->getRebate();
 	$key = 'price:' . $priceItem->getType();
+
 	/// Price format with price value (%1$s) and currency (%2$s)
 	$format['value'] = $this->translate( 'client/code', $key );
 	$currency = $this->translate( 'client/currency', $priceItem->getCurrencyId() );
+	$taxformat = ( $priceItem->getTaxFlag() ? $withtax : $notax );
 ?>
 <div class="price-item <?php echo $enc->attr( $priceItem->getType() ); ?>">
 	<span class="quantity"><?php echo $enc->html( sprintf( $format['quantity'], $priceItem->getQuantity() ), $enc::TRUST ); ?></span>
@@ -50,6 +54,6 @@ $format = array(
 <?php if( $costs > 0 ) : ?>
 	<span class="costs"><?php echo $enc->html( sprintf( $format['costs'], $this->number( $costs ), $currency ), $enc::TRUST ); ?></span>
 <?php endif; ?>
-	<span class="taxrate"><?php echo $enc->html( sprintf( $format['taxrate'], $this->number( $priceItem->getTaxrate() ) ), $enc::TRUST ); ?></span>
+	<span class="taxrate"><?php echo $enc->html( sprintf( $taxformat, $this->number( $priceItem->getTaxrate() ) ), $enc::TRUST ); ?></span>
 </div>
 <?php endforeach; ?>
