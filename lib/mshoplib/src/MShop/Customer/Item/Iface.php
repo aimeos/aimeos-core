@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the new label of the customer item.
 	 *
 	 * @param string $value Label of the customer item
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setLabel( $value );
 
@@ -47,7 +47,7 @@ interface Iface
 	 * Sets the status of the item.
 	 *
 	 * @param integer $value Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setStatus( $value );
 
@@ -63,7 +63,7 @@ interface Iface
 	 * Sets the code of the customer item.
 	 *
 	 * @param string $value Code of the customer item
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setCode( $value );
 
@@ -78,7 +78,7 @@ interface Iface
 	 * Sets the birthday of the customer item.
 	 *
 	 * @param date $value Birthday of the customer item (YYYY-MM-DD format)
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setBirthday( $value );
 
@@ -93,7 +93,7 @@ interface Iface
 	 * Sets the billing address of the customer item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billing address of the customer item
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address );
 
@@ -108,7 +108,7 @@ interface Iface
 	 * Sets the password of the customer item.
 	 *
 	 * @param string $value Password of the customer item
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setPassword( $value );
 
@@ -123,7 +123,7 @@ interface Iface
 	 * Sets the latest verification date of the customer.
 	 *
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD format) or null if unknown
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setDateVerified( $value );
 

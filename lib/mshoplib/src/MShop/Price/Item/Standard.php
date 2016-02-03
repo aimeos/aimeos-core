@@ -74,13 +74,16 @@ class Standard
 	 * Sets the new type ID of the price.
 	 *
 	 * @param integer $typeid Type ID of the price
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return $this; }
 
 		$this->values['price.typeid'] = (int) $typeid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -103,14 +106,17 @@ class Standard
 	 * Sets the used currency ID.
 	 *
 	 * @param string $currencyid Three letter currency code
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	public function setCurrencyId( $currencyid )
 	{
-		if( $currencyid == $this->getCurrencyId() ) { return; }
+		if( $currencyid == $this->getCurrencyId() ) { return $this; }
 
 		$this->values['price.currencyid'] = $this->checkCurrencyId( $currencyid, false );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -133,13 +139,16 @@ class Standard
 	 * Sets the new domain the price is valid for.
 	 *
 	 * @param string $domain Domain name
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return $this; }
 
 		$this->values['price.domain'] = (string) $domain;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -162,13 +171,16 @@ class Standard
 	 * Sets the label of the item
 	 *
 	 * @param string $label Label of the item
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['price.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -191,13 +203,16 @@ class Standard
 	 * Sets the quantity the price is valid for.
 	 *
 	 * @param integer $quantity Quantity
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setQuantity( $quantity )
 	{
-		if( $quantity == $this->getQuantity() ) { return; }
+		if( $quantity == $this->getQuantity() ) { return $this; }
 
 		$this->values['price.quantity'] = (int) $quantity;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -220,13 +235,16 @@ class Standard
 	 * Sets the new amount of money.
 	 *
 	 * @param integer|double $price Amount with two digits precision
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setValue( $price )
 	{
-		if( $price == $this->getValue() ) { return; }
+		if( $price == $this->getValue() ) { return $this; }
 
 		$this->values['price.value'] = $this->checkPrice( $price );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -249,13 +267,16 @@ class Standard
 	 * Sets the new costs.
 	 *
 	 * @param integer|double $price Amount with two digits precision
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setCosts( $price )
 	{
-		if( $price == $this->getCosts() ) { return; }
+		if( $price == $this->getCosts() ) { return $this; }
 
 		$this->values['price.costs'] = $this->checkPrice( $price );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -278,13 +299,16 @@ class Standard
 	 * Sets the new rebate amount.
 	 *
 	 * @param string $price Rebate amount with two digits precision
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setRebate( $price )
 	{
-		if( $price == $this->getRebate() ) { return; }
+		if( $price == $this->getRebate() ) { return $this; }
 
 		$this->values['price.rebate'] = $this->checkPrice( $price );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -307,13 +331,16 @@ class Standard
 	 * Sets the new tax rate.
 	 *
 	 * @param string $taxrate Tax rate with two digits precision
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTaxRate( $taxrate )
 	{
-		if( $taxrate == $this->getTaxRate() ) { return; }
+		if( $taxrate == $this->getTaxRate() ) { return $this; }
 
 		$this->values['price.taxrate'] = $this->checkPrice( $taxrate );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -338,14 +365,16 @@ class Standard
 	 * Sets the new tax flag.
 	 *
 	 * @param boolean $flag True if tax is included in the price value, costs and rebate, false if not
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	*/
 	public function setTaxFlag( $flag )
 	{
-		if( $flag == $this->getTaxFlag() ) { return; }
+		if( $flag == $this->getTaxFlag() ) { return $this; }
 
 		$this->values['price.taxflag'] = (bool) $flag;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -391,13 +420,16 @@ class Standard
 	 * Sets the status of the item
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['price.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -417,17 +449,21 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added
 	 * @param integer $quantity Number of times the Price should be added
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, $quantity = 1 )
 	{
 		if( $item->getCurrencyId() != $this->getCurrencyId() )
 		{
-			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Price can not be added. Currency ID "%1$s" of price item and currently used currency ID "%2$s" does not match.', $item->getCurrencyId(), $this->getCurrencyId() ) );
+			$msg = 'Price can not be added. Currency ID "%1$s" of price item and currently used currency ID "%2$s" does not match.';
+			throw new \Aimeos\MShop\Price\Exception( sprintf( $msg, $item->getCurrencyId(), $this->getCurrencyId() ) );
 		}
 
 		$this->values['price.value'] = $this->formatNumber( $this->getValue() + $item->getValue() * $quantity );
 		$this->values['price.costs'] = $this->formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
 		$this->values['price.rebate'] = $this->formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
+
+		return $this;
 	}
 
 

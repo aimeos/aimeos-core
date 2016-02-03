@@ -31,6 +31,7 @@ interface Iface
 	 * Sets the unique ID of the item.
 	 *
 	 * @param integer $id Unique ID of the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setId( $id );
 

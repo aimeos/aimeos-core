@@ -107,6 +107,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * Sets the id of the order base object.
 	 *
 	 * @param string $id Unique ID of the order base object
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
 	public function setId( $id )
 	{
@@ -115,6 +116,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		} else {
 			$this->modified = false;
 		}
+
+		return $this;
 	}
 
 
@@ -167,6 +170,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * Sets the comment field of the order item
 	 *
 	 * @param string $comment Comment for the order
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
 	public function setComment( $comment )
 	{
@@ -174,6 +178,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$this->values['order.base.comment'] = (string) $comment;
 		$this->modified = true;
+
+		return $this;
 	}
 
 
@@ -196,11 +202,14 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * Sets the new status of the order base item.
 	 *
 	 * @param integer $value Status of the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
 	public function setStatus( $value )
 	{
 		$this->values['order.base.status'] = (int) $value;
 		$this->modified = true;
+
+		return $this;
 	}
 
 
@@ -268,6 +277,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * Sets the customer ID of the customer who has ordered.
 	 *
 	 * @param string $customerid Unique ID of the customer
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
 	public function setCustomerId( $customerid )
 	{
@@ -279,6 +289,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$this->modified = true;
 
 		$this->notifyListeners( 'setCustomerId.after', $customerid );
+
+		return $this;
 	}
 
 
@@ -299,6 +311,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Object containing information
 	 *  about site, language, country and currency
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
 	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale )
 	{
@@ -308,6 +321,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$this->modified = true;
 
 		$this->notifyListeners( 'setLocale.after', $locale );
+
+		return $this;
 	}
 
 
@@ -775,10 +790,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 	/**
 	 * Notifies listeners before the basket becomes an order.
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
 	public function finish()
 	{
 		$this->notifyListeners( 'setOrder.before' );
+		return $this;
 	}
 
 

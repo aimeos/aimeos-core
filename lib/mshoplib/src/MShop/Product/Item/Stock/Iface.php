@@ -31,7 +31,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the Warehouse Id.
 	 *
 	 * @param integer $warehouseid New warehouse Id
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
 	 */
 	public function setWarehouseId( $warehouseid );
 
@@ -46,7 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the stock level.
 	 *
 	 * @param integer $stocklevel New stock level
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
 	 */
 	public function setStocklevel( $stocklevel );
 
@@ -61,8 +61,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the product back in stock date.
 	 *
 	 * @param string|null $backdate New back in stock date of the product
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
 	 */
 	public function setDateBack( $backdate );
-
 }

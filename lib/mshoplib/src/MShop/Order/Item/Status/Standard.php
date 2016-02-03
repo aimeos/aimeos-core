@@ -49,15 +49,16 @@ class Standard
 	 * Sets the parentid of the order status.
 	 *
 	 * @param integer $parentid Parent ID of the order status
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
 	public function setParentId( $parentid )
 	{
-		if( $parentid == $this->getParentId() ) {
-			return;
-		}
+		if( $parentid == $this->getParentId() ) { return $this; }
 
 		$this->values['order.status.parentid'] = (int) $parentid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -79,15 +80,16 @@ class Standard
 	 * Sets the type of the order status.
 	 *
 	 * @param string $type Type of the order status
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) {
-			return;
-		}
+		if( $type == $this->getType() ) { return $this; }
 
 		$this->values['order.status.type'] = (string) $type;
 		$this->setModified();
+
+		return $this;
 	}
 
 	/**
@@ -108,15 +110,16 @@ class Standard
 	 * Sets the value of the order status.
 	 *
 	 * @param string $value Value of the order status
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
 	public function setValue( $value )
 	{
-		if( $value == $this->getValue() ) {
-			return;
-		}
+		if( $value == $this->getValue() ) { return $this; }
 
 		$this->values['order.status.value'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 

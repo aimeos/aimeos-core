@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the domain of the text item.
 	 *
 	 * @param string $domain Domain of the text item
-	 * @return void
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setDomain( $domain );
 
@@ -47,8 +47,7 @@ interface Iface
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
-	 * @return void
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setLanguageId( $langid );
 
@@ -63,7 +62,7 @@ interface Iface
 	 * Sets the content of the text item.
 	 *
 	 * @param string $text Content of the text item
-	 * @return void
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setContent( $text );
 
@@ -78,7 +77,7 @@ interface Iface
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
-	 * @return void
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -93,8 +92,7 @@ interface Iface
 	 * Sets the status of the text item.
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setStatus( $status );
-
 }

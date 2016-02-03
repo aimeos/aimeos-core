@@ -57,6 +57,7 @@ class Standard
 	 * Sets the Base ID of the order.
 	 *
 	 * @param integer $baseid Order base ID.
+	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setBaseId( $baseid )
 	{
@@ -64,6 +65,8 @@ class Standard
 
 		$this->values['order.base.coupon.baseid'] = (int) $baseid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -86,6 +89,7 @@ class Standard
 	 * 	Sets the ID of the ordered product.
 	 *
 	 * 	@param integer $productid ID of the ordered product
+	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setProductId( $productid )
 	{
@@ -93,6 +97,8 @@ class Standard
 
 		$this->values['order.base.coupon.ordprodid'] = (int) $productid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -115,15 +121,16 @@ class Standard
 	 * Sets the coupon code.
 	 *
 	 * @param string $code Coupon code
+	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
-		$this->checkCode( $code );
-
 		if( $code == $this->getCode() ) { return; }
 
-		$this->values['order.base.coupon.code'] = (string) $code;
+		$this->values['order.base.coupon.code'] = (string) $this->checkCode( $code );;
 		$this->setModified();
+
+		return $this;
 	}
 
 

@@ -32,7 +32,7 @@ interface Iface
 	 * Sets a new code for the service item.
 	 *
 	 * @param string $code Code as defined by the service provider
-	 * @return void
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -47,7 +47,7 @@ interface Iface
 	 * Sets the new name of the service provider the item belongs to.
 	 *
 	 * @param string $provider Name of the service provider
-	 * @return void
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setProvider( $provider );
 
@@ -62,7 +62,7 @@ interface Iface
 	 * Sets a new label for the service item.
 	 *
 	 * @param string $label Label as defined by the service provider
-	 * @return void
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -77,7 +77,7 @@ interface Iface
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setStatus( $status );
 }

@@ -43,10 +43,10 @@ class Standard
 		$this->price = $price;
 		$this->values = $values;
 
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Attribute\\Iface', $attributes );
+		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $attributes );
 		$this->attributes = $attributes;
 
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface', $products );
+		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $products );
 		$this->products = $products;
 	}
 
@@ -79,13 +79,16 @@ class Standard
 	 * Sets the base order ID the product belongs to.
 	 *
 	 * @param integer $value New order base ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setBaseId( $value )
 	{
-		if( $value == $this->getBaseId() ) { return; }
+		if( $value == $this->getBaseId() ) { return $this; }
 
 		$this->values['order.base.product.baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -110,13 +113,16 @@ class Standard
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
 	 * @param integer|null $orderProductId Order product ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setOrderProductId( $orderProductId )
 	{
-		if( $orderProductId === $this->getOrderProductId() ) { return; }
+		if( $orderProductId == $this->getOrderProductId() ) { return $this; }
 
 		$this->values['order.base.product.ordprodid'] = ( $orderProductId !== null ? (int) $orderProductId : null );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -134,18 +140,23 @@ class Standard
 		return '';
 	}
 
+
 	/**
 	 * Sets the type of the ordered product.
 	 *
 	 * @param string Type of the order product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return $this; }
 
 		$this->values['order.base.product.type'] = (string) $type;
 		$this->setModified();
+
+		return $this;
 	}
+
 
 	/**
 	 * Returns a array of order base product items
@@ -161,12 +172,16 @@ class Standard
 	 * Sets a array of order base product items
 	 *
 	 * @param array Associative list of product items which must implement the \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setProducts( array $products )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface', $products );
+		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $products );
+
 		$this->products = $products;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -189,15 +204,16 @@ class Standard
 	 * Sets the supplier code.
 	 *
 	 * @param string $suppliercode Code of supplier
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setSupplierCode( $suppliercode )
 	{
-		$this->checkCode( $suppliercode );
+		if( $suppliercode == $this->getSupplierCode() ) { return $this; }
 
-		if( $suppliercode == $this->getSupplierCode() ) { return; }
-
-		$this->values['order.base.product.suppliercode'] = (string) $suppliercode;
+		$this->values['order.base.product.suppliercode'] = (string) $this->checkCode( $suppliercode );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -220,13 +236,16 @@ class Standard
 	 * Sets the ID of a product the customer has selected.
 	 *
 	 * @param string Product Code ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setProductId( $id )
 	{
-		if( $id == $this->getProductId() ) { return; }
+		if( $id == $this->getProductId() ) { return $this; }
 
 		$this->values['order.base.product.productid'] = (string) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -249,15 +268,16 @@ class Standard
 	 * Sets the code of a product the customer has selected.
 	 *
 	 * @param string $code Product code
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setProductCode( $code )
 	{
-		$this->checkCode( $code );
+		if( $code == $this->getProductCode() ) { return $this; }
 
-		if( $code == $this->getProductCode() ) { return; }
-
-		$this->values['order.base.product.prodcode'] = (string) $code;
+		$this->values['order.base.product.prodcode'] = (string) $this->checkCode( $code );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -280,15 +300,16 @@ class Standard
 	 * Sets the code of the warehouse the product should be retrieved from.
 	 *
 	 * @param string $code Warehouse code
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setWarehouseCode( $code )
 	{
-		$this->checkCode( $code );
+		if( $code == $this->getWarehouseCode() ) { return $this; }
 
-		if( $code == $this->getWarehouseCode() ) { return; }
-
-		$this->values['order.base.product.warehousecode'] = (string) $code;
+		$this->values['order.base.product.warehousecode'] = (string) $this->checkCode( $code );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -311,13 +332,16 @@ class Standard
 	 * Sets the localized name of the product.
 	 *
 	 * @param string $value Localized name of the product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setName( $value )
 	{
-		if( $value == $this->getName() ) { return; }
+		if( $value == $this->getName() ) { return $this; }
 
 		$this->values['order.base.product.name'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -340,13 +364,16 @@ class Standard
 	 * Sets the media url of the product the customer has added.
 	 *
 	 * @param string $value Location of the media/picture
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setMediaUrl( $value )
 	{
-		if( $value == $this->getMediaUrl() ) { return; }
+		if( $value == $this->getMediaUrl() ) { return $this; }
 
 		$this->values['order.base.product.mediaurl'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -369,23 +396,20 @@ class Standard
 	 * Sets the amount of products the customer has added.
 	 *
 	 * @param integer $quantity Amount of products
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setQuantity( $quantity )
 	{
-		if( !is_numeric( $quantity ) ) {
-			throw new \Aimeos\MShop\Order\Exception( 'Quantity is invalid. Please enter a positive integer' );
-		}
-
-		$quantity = (int) $quantity;
-
-		if( $quantity == $this->getQuantity() ) { return; }
+		if( $quantity == $this->getQuantity() ) { return $this; }
 
 		if( $quantity < 1 || $quantity > 2147483647 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
 		}
 
-		$this->values['order.base.product.quantity'] = $quantity;
+		$this->values['order.base.product.quantity'] = (int) $quantity;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -404,13 +428,16 @@ class Standard
 	 * Sets the price item for the product.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item containing price and additional costs
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
 	{
-		if( $price === $this->price ) { return; }
+		if( $price === $this->price ) { return $this; }
 
 		$this->price = $price;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -422,10 +449,11 @@ class Standard
 	public function getSumPrice()
 	{
 		$price = clone $this->price;
+		$qty = $this->getQuantity();
 
-		$price->setValue( $price->getValue() * $this->values['order.base.product.quantity'] );
-		$price->setCosts( $price->getCosts() * $this->values['order.base.product.quantity'] );
-		$price->setRebate( $price->getRebate() * $this->values['order.base.product.quantity'] );
+		$price->setValue( $price->getValue() * $qty );
+		$price->setCosts( $price->getCosts() * $qty );
+		$price->setRebate( $price->getRebate() * $qty );
 
 		return $price;
 	}
@@ -450,14 +478,16 @@ class Standard
 	 * Sets the new value for the product item flags.
 	 *
 	 * @param integer $value Flags, e.g. for immutable products
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setFlags( $value )
 	{
-		if( $value == $this->getFlags() ) { return; }
+		if( $value == $this->getFlags() ) { return $this; }
 
-		$this->checkFlags( $value );
-		$this->values['order.base.product.flags'] = (int) $value;
+		$this->values['order.base.product.flags'] = $this->checkFlags( $value );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -480,11 +510,12 @@ class Standard
 	 * Sets the position of the product within the list of ordered products.
 	 *
 	 * @param integer|null $value Product position in the order from 1-n or null for resetting the position
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If there's already a position set
 	 */
 	public function setPosition( $value )
 	{
-		if( $value == $this->getPosition() ) { return; }
+		if( $value == $this->getPosition() ) { return $this; }
 
 		if( $value !== null && $value < 1 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
@@ -492,6 +523,8 @@ class Standard
 
 		$this->values['order.base.product.position'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -514,22 +547,28 @@ class Standard
 
 	/**
 	 * Sets the new delivery status of the order product item.
+	 *
 	 * Possible status values are the STAT_* constants from the
 	 * \Aimeos\MShop\Order\Item\Base class
 	 *
 	 * @param integer $value New delivery status of the product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setStatus( $value )
 	{
+		if( $value == $this->getStatus() ) { return $this; }
+
 		$this->values['order.base.product.status'] = (int) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
 	/**
 	 * Returns the value of the attribute item for the ordered product with the given code.
 	 *
-	 * @param string $code code of the product attribute item
+	 * @param string $code Code of the product attribute item
 	 * @param string $type Type of the product attribute item
 	 * @return string|null value of the attribute item for the ordered product and the given code
 	 */
@@ -548,7 +587,7 @@ class Standard
 	/**
 	 * Returns the attribute item for the ordered product with the given code.
 	 *
-	 * @param string $code code of the product attribute item
+	 * @param string $code Code of the product attribute item
 	 * @param string $type Type of the product attribute item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|null Attribute item for the ordered product and the given code
 	 */
@@ -593,6 +632,7 @@ class Standard
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Service attribute item
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item )
 	{
@@ -609,6 +649,8 @@ class Standard
 
 		$this->attributesMap[$type][$code]->setValue( $item->getValue() );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -616,14 +658,17 @@ class Standard
 	 * Sets the new list of attribute items for the product.
 	 *
 	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setAttributes( array $attributes )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Attribute\\Iface', $attributes );
+		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $attributes );
 
 		$this->attributes = $attributes;
 		$this->attributesMap = null;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -740,6 +785,8 @@ class Standard
 		}
 
 		$this->setModified();
+
+		return $this;
 	}
 
 

@@ -74,13 +74,16 @@ class Standard
 	 * Sets the ID of the basic order item which contains the order details.
 	 *
 	 * @param integer $id ID of the basic order item
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setBaseId( $id )
 	{
-		if( $id == $this->getBaseId() ) { return; }
+		if( $id == $this->getBaseId() ) { return $this; }
 
 		$this->values['order.baseid'] = (int) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -103,15 +106,16 @@ class Standard
 	 * Sets the type of the invoice.
 	 *
 	 * @param string $type Invoice type
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return $this; }
 
-		$this->checkType( $type );
-
-		$this->values['order.type'] = (string) $type;
+		$this->values['order.type'] = (string) $this->checkType( $type );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -134,13 +138,16 @@ class Standard
 	 * Sets the delivery date of the invoice.
 	 *
 	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDateDelivery( $date )
 	{
-		if( $date === $this->getDateDelivery() ) { return; }
+		if( $date === $this->getDateDelivery() ) { return $this; }
 
 		$this->values['order.datedelivery'] = (string) $this->checkDateFormat( $date );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -163,13 +170,16 @@ class Standard
 	 * Sets the purchase date of the invoice.
 	 *
 	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDatePayment( $date )
 	{
-		if( $date === $this->getDatePayment() ) { return; }
+		if( $date === $this->getDatePayment() ) { return $this; }
 
 		$this->values['order.datepayment'] = (string) $this->checkDateFormat( $date );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -192,11 +202,16 @@ class Standard
 	 * Sets the delivery status of the invoice.
 	 *
 	 * @param integer $status Status code constant from \Aimeos\MShop\Order\Item\Base
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDeliveryStatus( $status )
 	{
+		if( $status == $this->getDeliveryStatus() ) { return $this; }
+
 		$this->values['order.statusdelivery'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -219,11 +234,16 @@ class Standard
 	 * Sets the payment status of the invoice.
 	 *
 	 * @param integer $status Payment constant from \Aimeos\MShop\Order\Item\Base
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setPaymentStatus( $status )
 	{
+		if( $status == $this->getPaymentStatus() ) { return $this; }
+
 		$this->values['order.statuspayment'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -246,14 +266,17 @@ class Standard
 	 * Sets the related invoice ID.
 	 *
 	 * @param integer|null $id Related invoice ID
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If ID is invalid
 	 */
 	public function setRelatedId( $id )
 	{
-		if( $id === $this->getRelatedId() ) { return; }
+		if( $id === $this->getRelatedId() ) { return $this; }
 
 		$this->values['order.relatedid'] = (int) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 

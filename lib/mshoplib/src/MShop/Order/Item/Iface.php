@@ -31,7 +31,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the ID of the basic order item which contains the order details.
 	 *
 	 * @param integer $id ID of the basic order item
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setBaseId( $id );
 
@@ -46,7 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the type of the invoice.
 	 *
 	 * @param integer $type Invoice type
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setType( $type );
 
@@ -61,7 +61,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the delivery date of the invoice.
 	 *
 	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDateDelivery( $date );
 
@@ -76,7 +76,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the payment date of the invoice.
 	 *
 	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDatePayment( $date );
 
@@ -91,7 +91,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the delivery status of the invoice.
 	 *
 	 * @param integer $status Status code constant from \Aimeos\MShop\Order\Item\Base
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDeliveryStatus( $status );
 
@@ -106,7 +106,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the payment status of the invoice.
 	 *
 	 * @param integer $status Payment constant from \Aimeos\MShop\Order\Item\Base
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setPaymentStatus( $status );
 
@@ -121,8 +121,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the related invoice ID.
 	 *
 	 * @param integer|null Related invoice ID
-	 * @throws \Aimeos\MShop\Order\Exception If ID is invalid
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setRelatedId( $id );
 

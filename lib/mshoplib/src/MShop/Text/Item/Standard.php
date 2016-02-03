@@ -59,14 +59,17 @@ class Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $id ISO language code (e.g. de or de_DE)
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id === $this->getLanguageId() ) { return; }
+		if( $id == $this->getLanguageId() ) { return $this; }
 
 		$this->values['text.languageid'] = $this->checkLanguageId( $id );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -89,13 +92,16 @@ class Standard
 	 *  Sets the type ID of the text item.
 	 *
 	 * @param integer $typeid Type ID of the text type
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return $this; }
 
 		$this->values['text.typeid'] = (int) $typeid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -133,13 +139,16 @@ class Standard
 	 * Sets the domain of the text item.
 	 *
 	 * @param string $domain Domain of the text item
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return $this; }
 
 		$this->values['text.domain'] = (string) $domain;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -162,14 +171,17 @@ class Standard
 	 * Sets the content of the text item.
 	 *
 	 * @param string $text Content of the text item
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setContent( $text )
 	{
-		if( $text == $this->getContent() ) { return; }
+		if( $text == $this->getContent() ) { return $this; }
 
 		ini_set( 'mbstring.substitute_character', 'none' );
 		$this->values['text.content'] = @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -192,13 +204,16 @@ class Standard
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['text.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -221,13 +236,16 @@ class Standard
 	 * Sets the status of the text item.
 	 *
 	 * @param integer $status true/false for enabled/disabled
+	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['text.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

@@ -78,7 +78,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetExternal()
 	{
-		$this->object->setExternal( false );
+		$return = $this->object->setExternal( false );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Helper\Form\Iface', $return );
 		$this->assertEquals( false, $this->object->getExternal() );
 	}
 
@@ -89,7 +91,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetUrl()
 	{
-		$this->object->setUrl( 'http://www.example.de' );
+		$return = $this->object->setUrl( 'http://www.example.de' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Helper\Form\Iface', $return );
 		$this->assertEquals( 'http://www.example.de', $this->object->getUrl() );
 	}
 
@@ -100,7 +104,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetMethod()
 	{
-		$this->object->setMethod( 'get' );
+		$return = $this->object->setMethod( 'get' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Helper\Form\Iface', $return );
 		$this->assertEquals( 'get', $this->object->getMethod() );
 	}
 
@@ -125,7 +131,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'default' => 'test',
 		) );
 
-		$this->object->setValue( 'name', $item );
+		$return = $this->object->setValue( 'name', $item );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Helper\Form\Iface', $return );
 		$this->assertEquals( 'test', $this->object->getValue( 'name' )->getDefault() );
 	}
 }

@@ -60,7 +60,7 @@ interface Iface
 	 * Sets the new domain the price is valid for.
 	 *
 	 * @param string $domain Domain name
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setDomain( $domain );
 
@@ -75,7 +75,7 @@ interface Iface
 	 * Sets the quantity.
 	 *
 	 * @param integer Quantity
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setQuantity( $quantity );
 
@@ -90,7 +90,7 @@ interface Iface
 	 * Sets the new amount of money.
 	 *
 	 * @param integer|double $price Amount with two digits precision
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setValue( $price );
 
@@ -105,7 +105,7 @@ interface Iface
 	 * Sets the new costs.
 	 *
 	 * @param integer|double $price Amount with two digits precision
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setCosts( $price );
 
@@ -120,7 +120,7 @@ interface Iface
 	 * Sets the new rebate amount.
 	 *
 	 * @param integer|double $price Rebate amount with two digits precision
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setRebate( $price );
 
@@ -135,7 +135,7 @@ interface Iface
 	 * Sets the new tax rate in percent.
 	 *
 	 * @param string $taxrate Tax rate with two digits precision
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTaxRate( $taxrate );
 
@@ -152,7 +152,7 @@ interface Iface
 	 * Sets the new tax flag.
 	 *
 	 * @param boolean $flag True if tax is included in the price value, costs and rebate, false if not
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	*/
 	public function setTaxFlag( $flag );
 
@@ -179,8 +179,8 @@ interface Iface
 	 * Sets the currency ID.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
-	 * @return void
 	 */
 	public function setCurrencyId( $currencyid );
 
@@ -195,7 +195,7 @@ interface Iface
 	 * Sets the status of the item
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setStatus( $status );
 

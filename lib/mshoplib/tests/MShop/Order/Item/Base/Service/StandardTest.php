@@ -70,11 +70,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->object->setId( 5 );
+		$return = $this->object->setId( 5 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 5, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
@@ -100,14 +104,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetBaseId()
 	{
-		$this->object->setBaseId( 111 );
+		$return = $this->object->setBaseId( 111 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 111, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetBaseIdReset()
 	{
-		$this->object->setBaseId( null );
+		$return = $this->object->setBaseId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( null, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -119,8 +127,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetServiceId()
 	{
-		$this->object->setServiceId( 'testServiceID' );
+		$return = $this->object->setServiceId( 'testServiceID' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 'testServiceID', $this->object->getServiceId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetCode()
@@ -130,8 +141,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'testCode' );
+		$return = $this->object->setCode( 'testCode' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 'testCode', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetName()
@@ -141,7 +155,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetName()
 	{
-		$this->object->setName( 'testName' );
+		$return = $this->object->setName( 'testName' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 'testName', $this->object->getName() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -153,7 +169,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetMediaUrl()
 	{
-		$this->object->setMediaUrl( 'testUrl' );
+		$return = $this->object->setMediaUrl( 'testUrl' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 'testUrl', $this->object->getMediaUrl() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -165,7 +183,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetType()
 	{
-		$this->object->setType( 'delivery' );
+		$return = $this->object->setType( 'delivery' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 'delivery', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -178,7 +198,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSetPrice()
 	{
 		$this->price->setCosts( '5.00' );
-		$this->object->setPrice( $this->price );
+		$return = $this->object->setPrice( $this->price );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertFalse( $this->object->isModified() );
 		$this->assertSame( $this->price, $this->object->getPrice() );
 	}
@@ -276,19 +298,22 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item->setType( 'test_type' );
 		$item->setValue( 'test_value' );
 
-		$this->object->setAttributeItem( $item );
+		$return = $this->object->setAttributeItem( $item );
 
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 'test_value', $this->object->getAttributeItem( 'test_code', 'test_type' )->getValue() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$item = $attManager->createItem();
 		$item->setCode( 'test_code' );
 		$item->setType( 'test_type' );
 		$item->setValue( 'test_value2' );
 
-		$this->object->setAttributeItem( $item );
+		$return = $this->object->setAttributeItem( $item );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 'test_value2', $this->object->getAttributeItem( 'test_code', 'test_type' )->getValue() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetAttributes()
@@ -301,10 +326,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$attManager->createItem(),
 		);
 
-		$this->object->setAttributes( $list );
+		$return = $this->object->setAttributes( $list );
 
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( $list, $this->object->getAttributes() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()
@@ -398,8 +424,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No service found' );
 		}
 
-		$serviceCopy->copyFrom( $service );
+		$return = $serviceCopy->copyFrom( $service );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $return );
 		$this->assertEquals( 'unitcode', $serviceCopy->getCode() );
 		$this->assertEquals( 'unitlabel', $serviceCopy->getName() );
 		$this->assertEquals( 'delivery', $serviceCopy->getType() );

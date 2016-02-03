@@ -31,7 +31,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the code of the common list type item
 	 *
 	 * @param integer $code New code of the common list type item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -46,7 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the domain of the common list type item
 	 *
 	 * @param string $domain New domain of the common list type item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setDomain( $domain );
 
@@ -61,7 +61,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the label of the common list type item
 	 *
 	 * @param string $label New label of the common list type item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -76,7 +76,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the status of the common list type item
 	 *
 	 * @param integer $status New status of the common list type item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setStatus( $status );
 }

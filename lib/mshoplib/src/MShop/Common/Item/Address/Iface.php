@@ -23,6 +23,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Copies the values of the address item into another one.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item Address item
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item );
 
@@ -39,7 +40,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new company name.
 	 *
 	 * @param string $company New company name
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setCompany( $company );
 
@@ -56,7 +57,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new vatid.
 	 *
 	 * @param string $vatid New vatid
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setVatID( $vatid );
 
@@ -73,7 +74,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new salutation for the person described by the address.
 	 *
 	 * @param string $salutation Salutation constant defined in \Aimeos\MShop\Common\Item\Address\Base
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setSalutation( $salutation );
 
@@ -90,7 +91,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new title of the person.
 	 *
 	 * @param string $title New title of the person
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setTitle( $title );
 
@@ -107,7 +108,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new first name of the person.
 	 *
 	 * @param string $firstname New first name of the person
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setFirstname( $firstname );
 
@@ -124,7 +125,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new last name of the person.
 	 *
 	 * @param string $lastname New last name of the person
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setLastname( $lastname );
 
@@ -141,7 +142,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new first address part, e.g. the street name.
 	 *
 	 * @param string $address1 New first address part
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setAddress1( $address1 );
 
@@ -158,7 +159,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new second address part, e.g. the house number.
 	 *
 	 * @param string $address2 New second address part
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setAddress2( $address2 );
 
@@ -175,7 +176,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new third address part, e.g. the house name or floor number.
 	 *
 	 * @param string $address3 New third address part
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setAddress3( $address3 );
 
@@ -192,7 +193,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new postal code.
 	 *
 	 * @param string $postal New postal code
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setPostal( $postal );
 
@@ -209,7 +210,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new city name.
 	 *
 	 * @param string $city New city name
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setCity( $city );
 
@@ -226,7 +227,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new state name.
 	 *
 	 * @param string $state New state name
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setState( $state );
 
@@ -243,7 +244,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the ID of the country the address is in.
 	 *
 	 * @param string $countryid Unique ID of the country
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setCountryId( $countryid );
 
@@ -260,7 +261,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the ID of the language.
 	 *
 	 * @param string $langid Unique ID of the language
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setLanguageId( $langid );
 
@@ -277,7 +278,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new telephone number.
 	 *
 	 * @param string $telephone New telephone number
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setTelephone( $telephone );
 
@@ -294,7 +295,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new email address.
 	 *
 	 * @param string $email New email address
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setEmail( $email );
 
@@ -311,7 +312,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new telefax number.
 	 *
 	 * @param string $telefax New telefax number
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setTelefax( $telefax );
 
@@ -328,7 +329,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new website URL.
 	 *
 	 * @param string $website New website URL
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setWebsite( $website );
 
@@ -345,7 +346,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new flag value.
 	 *
 	 * @param integer $flag New flag value
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setFlag( $flag );
 }

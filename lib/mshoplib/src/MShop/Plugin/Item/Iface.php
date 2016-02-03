@@ -38,7 +38,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new type ID of the plugin item.
 	 *
 	 * @param integer $typeid New plugin type ID
-	 * @return void
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setTypeId( $typeid );
 
@@ -53,7 +53,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new label of the plugin item.
 	 *
 	 * @param string $label New label of the plugin item
-	 * @return void
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -68,7 +68,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new provider of the plugin item which is the short name of the plugin class name.
 	 *
 	 * @param string $provider Plugin provider, esp. short plugin class name
-	 * @return void
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setProvider( $provider );
 
@@ -83,7 +83,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new configuration for the plugin item.
 	 *
 	 * @param array $config Custom configuration values
-	 * @return void
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setConfig( array $config );
 
@@ -98,7 +98,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new status of the plugin item.
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setStatus( $status );
 }

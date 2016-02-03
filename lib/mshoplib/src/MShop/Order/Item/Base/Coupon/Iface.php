@@ -31,7 +31,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the base ID of the order.
 	 *
 	 * @param integer $baseid Order base ID.
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setBaseId( $baseid );
 
@@ -47,7 +47,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * 	Sets the product ID of the ordered product
 	 *
 	 *	@param integer $productid The product ID of the ordered product
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setProductId( $productid );
 
@@ -62,8 +62,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the code of a coupon the customer has selected.
 	 *
 	 * @param string $code The code of a coupon the customer has selected.
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setCode( $code );
-
 }

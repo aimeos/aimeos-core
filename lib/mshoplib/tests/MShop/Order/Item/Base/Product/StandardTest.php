@@ -107,11 +107,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->object->setId( 5 );
+		$return = $this->object->setId( 5 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 5, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
@@ -132,11 +136,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetOrderProductId()
 	{
-		$this->object->setOrderProductId( 1001 );
+		$return = $this->object->setOrderProductId( 1001 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 1001, $this->object->getOrderProductId() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->object->setOrderProductId( null );
+		$return = $this->object->setOrderProductId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( null, $this->object->getOrderProductId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -150,7 +158,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetType()
 	{
-		$this->object->setType( 'default' );
+		$return = $this->object->setType( 'default' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'default', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -163,7 +173,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetSupplierCode()
 	{
-		$this->object->setSupplierCode( 'testId' );
+		$return = $this->object->setSupplierCode( 'testId' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'testId', $this->object->getSupplierCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -175,7 +187,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetProductId()
 	{
-		$this->object->setProductId( 'testProdId' );
+		$return = $this->object->setProductId( 'testProdId' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'testProdId', $this->object->getProductId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -187,7 +201,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetProductCode()
 	{
-		$this->object->setProductCode( 'testProdCode' );
+		$return = $this->object->setProductCode( 'testProdCode' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'testProdCode', $this->object->getProductCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -199,7 +215,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetWarehouseCode()
 	{
-		$this->object->setWarehouseCode( 'testWarehouseCode' );
+		$return = $this->object->setWarehouseCode( 'testWarehouseCode' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'testWarehouseCode', $this->object->getWarehouseCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -211,7 +229,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetName()
 	{
-		$this->object->setName( 'Testname2' );
+		$return = $this->object->setName( 'Testname2' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'Testname2', $this->object->getName() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -223,7 +243,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetMediaUrl()
 	{
-		$this->object->setMediaUrl( 'testUrl' );
+		$return = $this->object->setMediaUrl( 'testUrl' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'testUrl', $this->object->getMediaUrl() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -235,14 +257,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetQuantity()
 	{
-		$this->object->setQuantity( 20 );
+		$return = $this->object->setQuantity( 20 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 20, $this->object->getQuantity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetQuantityDecimal()
 	{
-		$this->object->setQuantity( 1.5 );
+		$return = $this->object->setQuantity( 1.5 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 1, $this->object->getQuantity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -279,17 +305,21 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSetPrice()
 	{
 		$this->price->setValue( '5.00' );
-		$this->object->setPrice( $this->price );
+		$return = $this->object->setPrice( $this->price );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertSame( $this->price, $this->object->getPrice() );
 		$this->assertFalse( $this->object->isModified() );
 	}
 
 	public function testGetSumPrice()
 	{
-		$this->assertEquals( $this->price->getValue() * 11, $this->object->getSumPrice()->getValue() );
-		$this->assertEquals( $this->price->getCosts() * 11, $this->object->getSumPrice()->getCosts() );
-		$this->assertEquals( $this->price->getRebate() * 11, $this->object->getSumPrice()->getRebate() );
-		$this->assertEquals( $this->price->getTaxRate(), $this->object->getSumPrice()->getTaxRate() );
+		$price = $this->object->getSumPrice();
+
+		$this->assertEquals( $this->price->getValue() * 11, $price->getValue() );
+		$this->assertEquals( $this->price->getCosts() * 11, $price->getCosts() );
+		$this->assertEquals( $this->price->getRebate() * 11, $price->getRebate() );
+		$this->assertEquals( $this->price->getTaxRate(), $price->getTaxRate() );
 	}
 
 	public function testGetFlags()
@@ -299,7 +329,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetFlags()
 	{
-		$this->object->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
+		$return = $this->object->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE, $this->object->getFlags() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -311,14 +343,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetPosition()
 	{
-		$this->object->setPosition( 2 );
+		$return = $this->object->setPosition( 2 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 2, $this->object->getPosition() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetPositionReset()
 	{
-		$this->object->setPosition( null );
+		$return = $this->object->setPosition( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( null, $this->object->getPosition() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -336,7 +372,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
+		$return = $this->object->setStatus( \Aimeos\MShop\Order\Item\Base::STAT_LOST );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_LOST, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -348,14 +386,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetBaseId()
 	{
-		$this->object->setBaseId( 111 );
+		$return = $this->object->setBaseId( 111 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 111, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetBaseIdReset()
 	{
-		$this->object->setBaseId( null );
+		$return = $this->object->setBaseId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( null, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -470,19 +512,23 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item->setType( 'test_type' );
 		$item->setValue( 'test_value' );
 
-		$this->object->setAttributeItem( $item );
+		$return = $this->object->setAttributeItem( $item );
 
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'test_value', $this->object->getAttributeItem( 'test_code', 'test_type' )->getValue() );
+		$this->assertTrue( $this->object->isModified() );
+
 
 		$item = $attManager->createItem();
 		$item->setCode( 'test_code' );
 		$item->setType( 'test_type' );
 		$item->setValue( 'test_value2' );
 
-		$this->object->setAttributeItem( $item );
+		$return = $this->object->setAttributeItem( $item );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'test_value2', $this->object->getAttributeItem( 'test_code', 'test_type' )->getValue() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetAttributes()
@@ -495,10 +541,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$attManager->createItem(),
 		);
 
-		$this->object->setAttributes( $list );
+		$return = $this->object->setAttributes( $list );
 
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( $list, $this->object->getAttributes() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetProducts()
@@ -508,12 +555,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetProducts()
 	{
-		$this->object->setProducts( array() );
+		$return = $this->object->setProducts( array() );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( array(), $this->object->getProducts() );
 
-		$this->object->setProducts( $this->subProducts );
+		$return = $this->object->setProducts( $this->subProducts );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( $this->subProducts, $this->object->getProducts() );
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -608,10 +659,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
 		$products = $manager->searchItems( $search );
-		if( ( $product = reset( $products ) ) !== false ) {
-			$productCopy->copyFrom( $product );
+
+		if( ( $product = reset( $products ) ) === false ) {
+			throw new \Exception( 'No product found' );
 		}
 
+		$return = $productCopy->copyFrom( $product );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'default', $productCopy->getType() );
 		$this->assertEquals( 'CNE', $productCopy->getProductCode() );
 		$this->assertEquals( 'Cafe Noire Expresso', $productCopy->getName() );

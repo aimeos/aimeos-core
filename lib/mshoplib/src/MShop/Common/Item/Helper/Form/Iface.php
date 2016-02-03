@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the url.
 	 *
 	 * @param string $url Url
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
 	 */
 	public function setUrl( $url );
 
@@ -49,7 +49,7 @@ interface Iface
 	 * Sets the method.
 	 *
 	 * @param string $method Method
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
 	 */
 	public function setMethod( $method );
 
@@ -68,7 +68,7 @@ interface Iface
 	 *
 	 * @param string $key Unique key
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
 	 */
 	public function setValue( $key, \Aimeos\MW\Criteria\Attribute\Iface $value );
 

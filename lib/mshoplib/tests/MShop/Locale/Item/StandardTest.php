@@ -82,11 +82,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetSiteId()
 	{
-		$this->object->setSiteId( 5 );
+		$return = $this->object->setSiteId( 5 );
+
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( '5', $this->object->getSiteId() );
 		$this->assertEquals( array( 5 ), $this->object->getSitePath() );
 		$this->assertEquals( array( 5 ), $this->object->getSiteSubTree() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
 	}
 
 
@@ -98,24 +100,30 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLanguageId()
 	{
-		$this->object->setLanguageId( 'en' );
+		$return = $this->object->setLanguageId( 'en' );
+
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( 'en', $this->object->getLanguageId() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
 	}
 
 
 	public function testSetLanguageIdNull()
 	{
-		$this->object->setLanguageId( null );
+		$return = $this->object->setLanguageId( null );
+
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( null, $this->object->getLanguageId() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
 	}
 
 
 	public function testSetLanguageIdCountry()
 	{
-		$this->object->setLanguageId( 'en_GB' );
+		$return = $this->object->setLanguageId( 'en_GB' );
+
 		$this->assertEquals( 'en_GB', $this->object->getLanguageId() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
 	}
 
 
@@ -148,17 +156,21 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCurrencyId()
 	{
-		$this->object->setCurrencyId( 'AWG' );
+		$return = $this->object->setCurrencyId( 'AWG' );
+
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( 'AWG', $this->object->getCurrencyId() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
 	}
 
 
 	public function testSetCurrencyIdNull()
 	{
-		$this->object->setCurrencyId( null );
+		$return = $this->object->setCurrencyId( null );
+
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( null, $this->object->getCurrencyId() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
 	}
 
 
@@ -177,9 +189,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetPosition()
 	{
-		$this->object->setPosition( 2 );
+		$return = $this->object->setPosition( 2 );
+
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( 2, $this->object->getPosition() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
 	}
 
 

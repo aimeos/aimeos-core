@@ -30,7 +30,7 @@ interface Iface
 	 * Sets the configuration values of the item
 	 *
 	 * @param array $config Configuration values
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setConfig( array $config );
 }

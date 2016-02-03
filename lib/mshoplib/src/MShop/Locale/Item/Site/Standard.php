@@ -70,15 +70,16 @@ class Standard
 	 * Sets the code of the site.
 	 *
 	 * @param string $code The code to set
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
-		$this->checkCode( $code );
+		if( $code == $this->getCode() ) { return $this; }
 
-		if( $code == $this->getCode() ) { return; }
-
-		$this->values['locale.site.code'] = (string) $code;
+		$this->values['locale.site.code'] = (string) $this->checkCode( $code );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -101,13 +102,16 @@ class Standard
 	 * Sets the label property of the site.
 	 *
 	 * @param string $label The label of the Site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['locale.site.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -130,11 +134,14 @@ class Standard
 	 * Sets the config property of the site.
 	 *
 	 * @param array $options Options to be set for the Site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setConfig( array $options )
 	{
 		$this->values['locale.site.config'] = $options;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -157,13 +164,16 @@ class Standard
 	 * Sets status property.
 	 *
 	 * @param integer $status The status of the Site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['locale.site.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

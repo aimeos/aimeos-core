@@ -70,12 +70,15 @@ class Standard
 	 * Sets the unique ID of the node.
 	 *
 	 * @param string|null Unique ID of the node
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function setId( $id )
 	{
-		if( $id === $this->getId() ) { return; }
+		if( $id === $this->getId() ) { return $this; }
 
 		$this->node->setId( $id );
+
+		return $this;
 	}
 
 
@@ -105,12 +108,15 @@ class Standard
 	 * Sets the new internal name of the item.
 	 *
 	 * @param string $name New name of the item
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function setLabel( $name )
 	{
-		if( $name == $this->getLabel() ) { return; }
+		if( $name == $this->getLabel() ) { return $this; }
 
 		$this->node->setLabel( $name );
+
+		return $this;
 	}
 
 
@@ -129,10 +135,13 @@ class Standard
 	 * Sets the config property of the catalog item.
 	 *
 	 * @param array $options Options to be set for the catalog node
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function setConfig( array $options )
 	{
 		$this->node->__set( 'config', $options );
+
+		return $this;
 	}
 
 
@@ -150,13 +159,16 @@ class Standard
 	/**
 	 * Sets the new code of the item.
 	 *
-	 * @param string $name New code of the item
+	 * @param string $code New code of the item
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
-	public function setCode( $name )
+	public function setCode( $code )
 	{
-		$this->checkCode( $name );
+		if( $code == $this->getCode() ) { return $this; }
 
-		$this->node->setCode( $name );
+		$this->node->setCode( $this->checkCode( $code ) );
+
+		return $this;
 	}
 
 
@@ -174,12 +186,15 @@ class Standard
 	 * Sets the new status of the item.
 	 *
 	 * @param integer $status True if enabled, false if not
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status === $this->getStatus() ) { return; }
+		if( $status === $this->getStatus() ) { return $this; }
 
 		$this->node->setStatus( $status );
+
+		return $this;
 	}
 
 	/**
@@ -318,11 +333,14 @@ class Standard
 	 * Adds a child node to this node.
 	 *
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Child node to add
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function addChild( \Aimeos\MShop\Catalog\Item\Iface $item )
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $item;
+
+		return $this;
 	}
 
 

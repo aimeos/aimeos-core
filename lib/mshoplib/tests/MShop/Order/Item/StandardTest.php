@@ -63,11 +63,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->object->setId( 15 );
+		$return = $this->object->setId( 15 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( 15, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
@@ -93,7 +97,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetBaseId()
 	{
-		$this->object->setBaseId( 15 );
+		$return = $this->object->setBaseId( 15 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( 15, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -105,7 +111,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetType()
 	{
-		$this->object->setType( \Aimeos\MShop\Order\Item\Base::TYPE_PHONE );
+		$return = $this->object->setType( \Aimeos\MShop\Order\Item\Base::TYPE_PHONE );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::TYPE_PHONE, $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 
@@ -120,7 +128,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDateDelivery()
 	{
-		$this->object->setDateDelivery( '2008-04-12 12:34:56' );
+		$return = $this->object->setDateDelivery( '2008-04-12 12:34:56' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDateDelivery() );
 		$this->assertTrue( $this->object->isModified() );
 
@@ -135,7 +145,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDatePayment()
 	{
-		$this->object->setDatePayment( '2008-04-12 12:34:56' );
+		$return = $this->object->setDatePayment( '2008-04-12 12:34:56' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDatePayment() );
 		$this->assertTrue( $this->object->isModified() );
 
@@ -150,7 +162,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDeliveryStatus()
 	{
-		$this->object->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+		$return = $this->object->setDeliveryStatus( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $this->object->getDeliveryStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -162,7 +176,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetPaymentStatus()
 	{
-		$this->object->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
+		$return = $this->object->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_DELETED, $this->object->getPaymentStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -174,7 +190,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetRelatedId()
 	{
-		$this->object->setRelatedId( 22 );
+		$return = $this->object->setRelatedId( 22 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( 22, $this->object->getRelatedId() );
 		$this->assertTrue( $this->object->isModified() );
 	}

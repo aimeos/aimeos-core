@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the new name of the item.
 	 *
 	 * @param string $name New name of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function setLabel( $name );
 
@@ -47,7 +47,7 @@ interface Iface
 	 * Sets the code of the item.
 	 *
 	 * @param string $name New code of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function setCode( $name );
 
@@ -62,7 +62,7 @@ interface Iface
 	 * Sets the new status of the item.
 	 *
 	 * @param boolean $status True if enabled, false if not
-	 * @return void
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function setStatus( $status );
 
@@ -92,7 +92,7 @@ interface Iface
 	 * Adds a child node to this node.
 	 *
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Child node to add
-	 * @return void
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
 	 */
 	public function addChild( \Aimeos\MShop\Catalog\Item\Iface $item );
 }

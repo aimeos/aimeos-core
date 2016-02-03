@@ -65,12 +65,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( 999 );
+		$return = $this->object->setId( 999 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Attribute\Item\Iface', $return );
 		$this->assertEquals( 999, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Attribute\Item\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -90,7 +93,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->object->setTypeId( 5 );
+		$return = $this->object->setTypeId( 5 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Attribute\Item\Iface', $return );
 		$this->assertEquals( 5, $this->object->getTypeId() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -104,7 +109,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDomain()
 	{
-		$this->object->setDomain( 'TestDom' );
+		$return = $this->object->setDomain( 'TestDom' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Attribute\Item\Iface', $return );
 		$this->assertEquals( 'TestDom', $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -118,7 +125,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'flobee' );
+		$return = $this->object->setCode( 'flobee' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Attribute\Item\Iface', $return );
 		$this->assertEquals( 'flobee', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -132,9 +141,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetPosition()
 	{
-		$this->object->setPosition( 1 );
-		$this->assertEquals( 1, $this->object->getPosition() );
+		$return = $this->object->setPosition( 1 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Attribute\Item\Iface', $return );
+		$this->assertEquals( 1, $this->object->getPosition() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -147,9 +157,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'weight' );
-		$this->assertEquals( 'weight', $this->object->getLabel() );
+		$return = $this->object->setLabel( 'weight' );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Attribute\Item\Iface', $return );
+		$this->assertEquals( 'weight', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -162,7 +173,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 4 );
+		$return = $this->object->setStatus( 4 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Attribute\Item\Iface', $return );
 		$this->assertEquals( 4, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

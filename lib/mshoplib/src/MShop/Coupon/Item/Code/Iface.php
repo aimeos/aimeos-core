@@ -34,7 +34,7 @@ interface Iface
 	 * Sets the new code for the coupon item.
 	 *
 	 * @param string $code Coupon code
-	 * @return void
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -51,7 +51,7 @@ interface Iface
 	 * Sets the new number of tries the code is valid.
 	 *
 	 * @param integer $count Number of tries
-	 * @return void
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setCount( $count );
 }

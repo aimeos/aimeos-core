@@ -75,22 +75,28 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSetConfig()
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->object->setConfig( $context->getConfig() );
+		$return = $this->object->setConfig( $context->getConfig() );
+
 		$this->assertSame( $context->getConfig(), $this->object->getConfig() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testSetDatabaseManager()
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->object->setDatabaseManager( $context->getDatabaseManager() );
+		$return = $this->object->setDatabaseManager( $context->getDatabaseManager() );
+
 		$this->assertSame( $context->getDatabaseManager(), $this->object->getDatabaseManager() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testSetFilesystemManager()
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->object->setFilesystemManager( $context->getFilesystemManager() );
+		$return = $this->object->setFilesystemManager( $context->getFilesystemManager() );
+
 		$this->assertSame( $context->getFilesystemManager(), $this->object->getFilesystemManager() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testSetI18n()
@@ -101,61 +107,76 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$locale->setLanguageId( 'en' );
 		$this->object->setLocale( $locale );
 
-		$this->object->setI18n( array( 'en' => $context->getI18n() ) );
+		$return = $this->object->setI18n( array( 'en' => $context->getI18n() ) );
+
 		$this->assertSame( $context->getI18n(), $this->object->getI18n() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testSetLocale()
 	{
 		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
-		$this->object->setLocale( $locale );
+		$return = $this->object->setLocale( $locale );
+
 		$this->assertSame( $locale, $this->object->getLocale() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testSetLogger()
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->object->setLogger( $context->getLogger() );
+		$return = $this->object->setLogger( $context->getLogger() );
+
 		$this->assertSame( $context->getLogger(), $this->object->getLogger() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testSetSession()
 	{
 		$context = \TestHelperMShop::getContext();
-		$this->object->setSession( $context->getSession() );
+		$return = $this->object->setSession( $context->getSession() );
+
 		$this->assertSame( $context->getSession(), $this->object->getSession() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testSetMail()
 	{
 		$mail = new \Aimeos\MW\Mail\None();
-		$this->object->setMail( $mail );
+		$return = $this->object->setMail( $mail );
+
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Mail\\Iface', $this->object->getMail() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testSetView()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$this->object->setView( $view );
+		$return = $this->object->setView( $view );
+
 		$this->assertInstanceOf( '\\Aimeos\\MW\\View\\Iface', $this->object->getView() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testGetSetEditor()
 	{
 		$this->assertEquals( '', $this->object->getEditor() );
 
-		$this->object->setEditor( 'testuser' );
+		$return = $this->object->setEditor( 'testuser' );
+
 		$this->assertEquals( 'testuser', $this->object->getEditor() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testGetSetUserId()
 	{
 		$this->assertEquals( null, $this->object->getUserId() );
 
-		$this->object->setUserId( 123 );
+		$return = $this->object->setUserId( 123 );
 		$this->assertEquals( '123', $this->object->getUserId() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 
-		$this->object->setUserId( function() { return 456; } );
+		$return = $this->object->setUserId( function() { return 456; } );
 		$this->assertEquals( '456', $this->object->getUserId() );
 	}
 
@@ -163,8 +184,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals( array(), $this->object->getGroupIds() );
 
-		$this->object->setGroupIds( array( 123 ) );
+		$return = $this->object->setGroupIds( array( 123 ) );
 		$this->assertEquals( array( '123' ), $this->object->getGroupIds() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 
 		$this->object->setGroupIds( function() { return array( 456 ); } );
 		$this->assertEquals( array( '456' ), $this->object->getGroupIds() );

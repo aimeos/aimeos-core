@@ -54,13 +54,16 @@ class Standard
 	 *  Sets the language ID of the product tag item.
 	 *
 	 * @param string|null $id Language ID of the product tag item
+	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id === $this->getLanguageId() ) { return; }
+		if( $id == $this->getLanguageId() ) { return $this; }
 
 		$this->values['tag.languageid'] = $this->checkLanguageId( $id );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -98,13 +101,16 @@ class Standard
 	 * Sets the new type of the product tag item
 	 *
 	 * @param integer|null $id Type of the product tag item
+	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
 	public function setTypeId( $id )
 	{
-		if( $id === $this->getTypeId() ) { return; }
+		if( $id == $this->getTypeId() ) { return $this; }
 
 		$this->values['tag.typeid'] = (int) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -127,13 +133,16 @@ class Standard
 	 * Sets the Label of the product tag item.
 	 *
 	 * @param string $label Label of the product tag item
+	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['tag.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 

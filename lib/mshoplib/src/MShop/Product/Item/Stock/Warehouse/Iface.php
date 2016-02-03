@@ -30,7 +30,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the code of the warehouse item.
 	 *
 	 * @param string $code New Code of the warehouse item
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Stock\Warehouse\Iface Product stock warehouse item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -45,7 +45,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the label of the warehouse item.
 	 *
 	 * @param string $label New label of the warehouse item
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Stock\Warehouse\Iface Product stock warehouse item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -60,8 +60,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the status of the warehouse item.
 	 *
 	 * @param integer $status New status of the warehouse item
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Stock\Warehouse\Iface Product stock warehouse item for chaining method calls
 	 */
 	public function setStatus( $status );
-
 }

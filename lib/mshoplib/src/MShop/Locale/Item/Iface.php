@@ -48,8 +48,8 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	/**
 	 * Sets the identifier of the shop instance.
 	 *
-	 * @param integer ID of the shop instance.
-	 * @return void
+	 * @param integer ID of the shop instance
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setSiteId( $id );
 
@@ -66,7 +66,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setLanguageId( $langid );
 
@@ -83,8 +83,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the currency ID.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
-	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setCurrencyId( $currencyid );
 
@@ -101,7 +100,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the status property
 	 *
 	 * @param integer $status The status of the locale item
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setStatus( $status );
 

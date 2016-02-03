@@ -91,6 +91,8 @@ class Standard
 		// set modified flag
 		$this->billingaddress->setId( null );
 		$this->billingaddress->setId( $this->getId() );
+
+		return $this;
 	}
 
 
@@ -113,13 +115,16 @@ class Standard
 	 * Sets the new label of the customer item.
 	 *
 	 * @param string $value Label of the customer item
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setLabel( $value )
 	{
-		if( $value == $this->getLabel() ) { return; }
+		if( $value == $this->getLabel() ) { return $this; }
 
 		$this->values['customer.label'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -142,13 +147,16 @@ class Standard
 	 * Sets the status of the item.
 	 *
 	 * @param integer $value Status of the item
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setStatus( $value )
 	{
-		if( $value == $this->getStatus() ) { return; }
+		if( $value == $this->getStatus() ) { return $this; }
 
 		$this->values['customer.status'] = (int) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -171,15 +179,16 @@ class Standard
 	 * Sets the new code of the customer item.
 	 *
 	 * @param string $value Code of the customer item
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setCode( $value )
 	{
-		$this->checkCode( $value );
+		if( $value == $this->getCode() ) { return $this; }
 
-		if( $value == $this->getCode() ) { return; }
-
-		$this->values['customer.code'] = (string) $value;
+		$this->values['customer.code'] = (string) $this->checkCode( $value );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -198,13 +207,16 @@ class Standard
 	 * Sets the billingaddress of the customer item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billingaddress of the customer item
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address )
 	{
-		if( $address === $this->billingaddress && $address->isModified() === false ) { return; }
+		if( $address === $this->billingaddress && $address->isModified() === false ) { return $this; }
 
 		$this->billingaddress = $address;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -227,13 +239,16 @@ class Standard
 	 * Sets the birthday of the customer item.
 	 *
 	 * @param string $value Birthday of the customer item
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setBirthday( $value )
 	{
-		if( $value === $this->getBirthday() ) { return; }
+		if( $value === $this->getBirthday() ) { return $this; }
 
 		$this->values['customer.birthday'] = $this->checkDateOnlyFormat( $value );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -256,10 +271,11 @@ class Standard
 	 * Sets the password of the customer item.
 	 *
 	 * @param string $value password of the customer item
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setPassword( $value )
 	{
-		if( $value == $this->getPassword() ) { return; }
+		if( $value == $this->getPassword() ) { return $this; }
 
 		if( $this->helper !== null ) {
 			$value = $this->helper->encode( $value, $this->salt );
@@ -267,6 +283,8 @@ class Standard
 
 		$this->values['customer.password'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -289,13 +307,16 @@ class Standard
 	 * Sets the latest verification date of the customer.
 	 *
 	 * @param string|null $value Latest verification date of the customer (YYYY-MM-DD) or null if unknown
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setDateVerified( $value )
 	{
-		if( $value === $this->getDateVerified() ) { return; }
+		if( $value === $this->getDateVerified() ) { return $this; }
 
 		$this->values['customer.dateverified'] = $this->checkDateOnlyFormat( $value );
 		$this->setModified();
+
+		return $this;
 	}
 
 

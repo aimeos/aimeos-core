@@ -60,7 +60,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -79,9 +81,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->object->setTypeId( 99 );
-		$this->assertEquals( 99, $this->object->getTypeId() );
+		$return = $this->object->setTypeId( 99 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
+		$this->assertEquals( 99, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -94,7 +97,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'anotherLabel' );
+		$return = $this->object->setLabel( 'anotherLabel' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
 		$this->assertEquals( 'anotherLabel', $this->object->getLabel() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -108,7 +113,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetProvider()
 	{
-		$this->object->setProvider( 'newProvider' );
+		$return = $this->object->setProvider( 'newProvider' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
 		$this->assertEquals( 'newProvider', $this->object->getProvider() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -122,7 +129,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetConfig()
 	{
-		$this->object->setConfig( array( 'threshold'=>'20.00' ) );
+		$return = $this->object->setConfig( array( 'threshold' => '20.00' ) );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
 		$this->assertEquals( array( 'threshold'=>'20.00' ), $this->object->getConfig() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -136,7 +145,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetPosition()
 	{
-		$this->object->setPosition( 1 );
+		$return = $this->object->setPosition( 1 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
 		$this->assertEquals( 1, $this->object->getPosition() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -150,7 +161,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

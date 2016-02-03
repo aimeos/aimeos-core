@@ -121,11 +121,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->object->setId( 5 );
+		$return = $this->object->setId( 5 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
 		$this->assertEquals( 5, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
@@ -155,7 +159,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCustomerId()
 	{
-		$this->object->setCustomerId( '44' );
+		$return = $this->object->setCustomerId( '44' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
 		$this->assertEquals( '44', $this->object->getCustomerId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -170,8 +176,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSetLocale()
 	{
 		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
-		$this->object->setLocale( $locale );
+		$return = $this->object->setLocale( $locale );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
 		$this->assertEquals( $locale, $this->object->getLocale() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -201,9 +208,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetComment()
 	{
-		$this->object->setComment( 'New unit test comment' );
-		$this->assertEquals( 'New unit test comment', $this->object->getComment() );
+		$return = $this->object->setComment( 'New unit test comment' );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertEquals( 'New unit test comment', $this->object->getComment() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -214,9 +222,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 1 );
-		$this->assertEquals( 1, $this->object->getStatus() );
+		$return = $this->object->setStatus( 1 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertEquals( 1, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -290,7 +299,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testFinish()
 	{
-		$this->object->finish();
+		$return = $this->object->finish();
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
 	}
 
 

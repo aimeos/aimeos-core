@@ -53,13 +53,16 @@ class Standard
 	 * Sets the code of the warehouse item.
 	 *
 	 * @param string $code New code of the warehouse item
+	 * @return \Aimeos\MShop\Product\Item\Stock\Warehouse\Iface Product stock warehouse item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
-		$this->checkCode( $code );
+		if( $code == $this->getCode() ) { return $this; }
 
-		$this->values['product.stock.warehouse.code'] = (string) $code;
+		$this->values['product.stock.warehouse.code'] = (string) $this->checkCode( $code );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -82,11 +85,16 @@ class Standard
 	 * Sets the label of the warehouse item.
 	 *
 	 * @param string $label New label of the warehouse item
+	 * @return \Aimeos\MShop\Product\Item\Stock\Warehouse\Iface Product stock warehouse item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
+		if( $label == $this->getLabel() ) { return $this; }
+
 		$this->values['product.stock.warehouse.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -109,11 +117,16 @@ class Standard
 	 * Sets the status of the warehouse item.
 	 *
 	 * @param integer $status New status of the warehouse item
+	 * @return \Aimeos\MShop\Product\Item\Stock\Warehouse\Iface Product stock warehouse item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
+		if( $status == $this->getStatus() ) { return $this; }
+
 		$this->values['product.stock.warehouse.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

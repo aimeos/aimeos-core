@@ -51,19 +51,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testSetIdBasic()
+	public function testSetId()
 	{
-		// test 1: set id and compare to be the same
-		$this->object->setId( 'XXX' );
+		$return = $this->object->setId( 'XXX' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Currency\Iface', $return );
 		$this->assertEquals( 'XXX', $this->object->getId() );
-		// test modifier
 		$this->assertFalse( $this->object->isModified() );
 
-		// test 2: set id to null, mdified should be true, id=null
-		$var = null;
-		$this->object->setId( $var );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Currency\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
-		// test modifier
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -90,7 +89,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'USD' );
+		$return = $this->object->setCode( 'USD' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Currency\Iface', $return );
 		$this->assertEquals( 'USD', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -104,7 +105,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'OtherName' );
+		$return = $this->object->setLabel( 'OtherName' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Currency\Iface', $return );
 		$this->assertEquals( 'OtherName', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -124,7 +127,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Currency\Iface', $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

@@ -57,13 +57,16 @@ class Standard
 	 * Sets the label of the coupon item.
 	 *
 	 * @param string $name Coupon name, esp. short coupon class name
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setLabel( $name )
 	{
-		if( $name == $this->getLabel() ) { return; }
+		if( $name == $this->getLabel() ) { return $this; }
 
 		$this->values['coupon.label'] = (string) $name;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -86,14 +89,16 @@ class Standard
 	 * Sets a new starting point of time, in which the coupon is available.
 	 *
 	 * @param string New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date == $this->getDateStart() ) { return; }
+		if( $date == $this->getDateStart() ) { return $this; }
 
 		$this->values['coupon.datestart'] = $this->checkDateFormat( $date );
-
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -116,21 +121,24 @@ class Standard
 	 * Sets a new ending point of time, in which the coupon is available.
 	 *
 	 * @param string New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date == $this->getDateEnd() ) { return; }
+		if( $date == $this->getDateEnd() ) { return $this; }
 
 		$this->values['coupon.dateend'] = $this->checkDateFormat( $date );
 
 		$this->setModified();
+
+		return $this;
 	}
 
 
 	/**
-	 * Returns the name of the provider class to be used.
+	 * Returns the name of the provider class name to be used.
 	 *
-	 * @return string Returns the methode name to use
+	 * @return string Returns the provider class name
 	 */
 	public function getProvider()
 	{
@@ -143,16 +151,19 @@ class Standard
 
 
 	/**
-	 * Set the name of the provider class to be used.
+	 * Set the name of the provider class name to be used.
 	 *
-	 * @param string $provider
+	 * @param string $provider Provider class name
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setProvider( $provider )
 	{
-		if( $provider == $this->getProvider() ) { return; }
+		if( $provider == $this->getProvider() ) { return $this; }
 
 		$this->values['coupon.provider'] = (string) $provider;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -175,13 +186,16 @@ class Standard
 	 * Sets the new configuration for the coupon item.
 	 *
 	 * @param array $config Custom configuration values
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setConfig( array $config )
 	{
-		if( $config == $this->getConfig() ) { return; }
+		if( $config == $this->getConfig() ) { return $this; }
 
 		$this->values['coupon.config'] = $config;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -204,13 +218,16 @@ class Standard
 	 * Sets the new status of the coupon item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['coupon.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

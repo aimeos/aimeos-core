@@ -66,12 +66,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->object->setId( 99 );
+		$return = $this->object->setId( 99 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( 99, $this->object->getId() );
+		$this->assertFalse( $this->object->isModified() );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 3 );
@@ -92,7 +97,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetAttributeId()
 	{
-		$this->object->setAttributeId( 44 );
+		$return = $this->object->setAttributeId( 44 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( 44, $this->object->getAttributeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -107,7 +114,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetParentId()
 	{
-		$this->object->setParentId( 98 );
+		$return = $this->object->setParentId( 98 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( 98, $this->object->getParentId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -121,7 +130,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetType()
 	{
-		$this->object->setType( 'testType' );
+		$return = $this->object->setType( 'testType' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( 'testType', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -135,7 +146,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'testCode' );
+		$return = $this->object->setCode( 'testCode' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( 'testCode', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -149,7 +162,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetValue()
 	{
-		$this->object->setValue( 'custom' );
+		$return = $this->object->setValue( 'custom' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( 'custom', $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -163,7 +178,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetName()
 	{
-		$this->object->setName( 'testName' );
+		$return = $this->object->setName( 'testName' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( 'testName', $this->object->getName() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -200,8 +217,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \Exception( 'No attribute item found' );
 		}
 
-		$this->object->copyFrom( $item );
+		$return = $this->object->copyFrom( $item );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface', $return );
 		$this->assertEquals( $item->getId(), $this->object->getAttributeId() );
 		$this->assertEquals( $item->getLabel(), $this->object->getName() );
 		$this->assertEquals( $item->getType(), $this->object->getCode() );

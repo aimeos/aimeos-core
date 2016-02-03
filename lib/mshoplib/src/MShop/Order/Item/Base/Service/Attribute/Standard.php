@@ -57,13 +57,16 @@ class Standard
 	 * Sets the original attribute ID of the service attribute item.
 	 *
 	 * @param string $id Attribute ID of the service attribute item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setAttributeId( $id )
 	{
-		if( $id == $this->getAttributeId() ) { return; }
+		if( $id == $this->getAttributeId() ) { return $this; }
 
 		$this->values['order.base.service.attribute.attributeid'] = (string) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -86,13 +89,16 @@ class Standard
 	 * Sets the ID of the ordered service item as parent
 	 *
 	 * @param integer $id ID of the ordered service item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setParentId( $id )
 	{
-		if( $id == $this->getParentId() ) { return; }
+		if( $id == $this->getParentId() ) { return $this; }
 
 		$this->values['order.base.service.attribute.parentid'] = (int) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -115,13 +121,16 @@ class Standard
 	 * Sets a new type for the service attribute item.
 	 *
 	 * @param string $type Type of the service attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return $this; }
 
 		$this->values['order.base.service.attribute.type'] = (string) $type;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -144,11 +153,16 @@ class Standard
 	 * Sets a new name for the service attribute item.
 	 *
 	 * @param string $name Name as defined by the service provider
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setName( $name )
 	{
+		if( $name == $this->getName() ) { return $this; }
+
 		$this->values['order.base.service.attribute.name'] = (string) $name;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -171,15 +185,16 @@ class Standard
 	 * Sets a new code for the service attribute item.
 	 *
 	 * @param string $code Code as defined by the service provider
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
-		$this->checkCode( $code );
+		if( $code == $this->getCode() ) { return $this; }
 
-		if( $code == $this->getCode() ) { return; }
-
-		$this->values['order.base.service.attribute.code'] = (string) $code;
+		$this->values['order.base.service.attribute.code'] = (string) $this->checkCode( $code );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -202,13 +217,16 @@ class Standard
 	 * Sets a new value for the service item.
 	 *
 	 * @param string|array $value service attribute item value
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setValue( $value )
 	{
-		if( $value == $this->getValue() ) { return; }
+		if( $value == $this->getValue() ) { return $this; }
 
 		$this->values['order.base.service.attribute.value'] = $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -227,6 +245,7 @@ class Standard
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item )
 	{
@@ -236,6 +255,8 @@ class Standard
 		$this->setValue( $item->getCode() );
 
 		$this->setModified();
+
+		return $this;
 	}
 
 

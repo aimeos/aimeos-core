@@ -61,7 +61,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertNull( $this->object->getId() );
 	}
@@ -73,9 +75,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetParentId()
 	{
-		$this->object->setParentId( 5 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setParentId( 5 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( 5, $this->object->getParentId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetDomain()
@@ -85,9 +89,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDomain()
 	{
-		$this->object->setDomain( 'newDom' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setDomain( 'newDom' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( 'newDom', $this->object->getDomain() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetRefId()
@@ -97,9 +103,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetRefId()
 	{
-		$this->object->setRefId( 'unitReference' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setRefId( 'unitReference' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( 'unitReference', $this->object->getRefId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetDateStart()
@@ -109,9 +117,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDateStart()
 	{
-		$this->object->setDateStart( '2002-01-01 00:00:00' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setDateStart( '2002-01-01 00:00:00' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( '2002-01-01 00:00:00', $this->object->getDateStart() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setDateStart( '2008-34-12' );
@@ -124,9 +134,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDateEnd()
 	{
-		$this->object->setDateEnd( '4400-12-31 00:00:00' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setDateEnd( '4400-12-31 00:00:00' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( '4400-12-31 00:00:00', $this->object->getDateEnd() );
+		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setDateEnd( '2008-34-12' );
@@ -134,9 +146,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetPosition()
 	{
-		$this->object->setPosition( 1234 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setPosition( 1234 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( 1234, $this->object->getPosition() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetPosition()
@@ -146,9 +160,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetStatus()
@@ -163,9 +179,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->object->setTypeId( 18 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setTypeId( 18 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( 18, $this->object->getTypeId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
@@ -196,7 +214,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetConfig()
 	{
-		$this->object->setConfig( array( 'new value'=>'20.00' ) );
+		$return = $this->object->setConfig( array( 'new value'=>'20.00' ) );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertEquals( array( 'new value'=>'20.00' ), $this->object->getConfig() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -215,9 +235,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$obj = new \Aimeos\MShop\Common\Item\Lists\Standard( 'reftest', array() );
 
-		$this->object->setRefItem( $obj );
-		$this->assertFalse( $this->object->isModified() );
+		$return = $this->object->setRefItem( $obj );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $return );
 		$this->assertSame( $obj, $this->object->getRefItem() );
+		$this->assertFalse( $this->object->isModified() );
 	}
 
 

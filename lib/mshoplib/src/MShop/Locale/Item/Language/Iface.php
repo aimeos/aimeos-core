@@ -33,7 +33,7 @@ interface Iface
 	 * Sets the two letter ISO language code.
 	 *
 	 * @param string $key two letter ISO language code
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
 	public function setCode( $key );
 
@@ -50,7 +50,7 @@ interface Iface
 	 * Sets the label property of the language.
 	 *
 	 * @param string $label Label or symbol of the language
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -67,7 +67,7 @@ interface Iface
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the language
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
 	public function setStatus( $status );
 

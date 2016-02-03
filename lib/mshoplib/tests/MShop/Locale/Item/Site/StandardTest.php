@@ -62,11 +62,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->object->setId( 12 );
+		$return = $this->object->setId( 12 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
 		$this->assertFalse( $this->object->isModified() );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
@@ -82,7 +86,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'OtherExtID' );
+		$return = $this->object->setCode( 'OtherExtID' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
 		$this->assertEquals( 'OtherExtID', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -96,7 +102,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'Other Name' );
+		$return = $this->object->setLabel( 'Other Name' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
 		$this->assertEquals( 'Other Name', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -110,7 +118,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetConfig()
 	{
-		$this->object->setConfig( array( 'timezone' => 'Europe/Paris' ) );
+		$return = $this->object->setConfig( array( 'timezone' => 'Europe/Paris' ) );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
 		$this->assertEquals( array( 'timezone' => 'Europe/Paris' ), $this->object->getConfig() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -124,7 +134,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

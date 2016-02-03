@@ -59,14 +59,17 @@ class Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $id ISO language code (e.g. de or de_DE)
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id === $this->getLanguageId() ) { return; }
+		if( $id === $this->getLanguageId() ) { return $this; }
 
 		$this->values['media.languageid'] = $this->checkLanguageId( $id );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -89,13 +92,16 @@ class Standard
 	 * Sets the new type of the media.
 	 *
 	 * @param integer $typeid Type of the media
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return $this; }
 
 		$this->values['media.typeid'] = (int) $typeid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -133,13 +139,16 @@ class Standard
 	 * Sets the domain of the media item.
 	 *
 	 * @param string $domain Domain of media item
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return $this; }
 
 		$this->values['media.domain'] = (string) $domain;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -162,13 +171,16 @@ class Standard
 	 * Sets the new label of the media item.
 	 *
 	 * @param string $label Label of the media item
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['media.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -191,13 +203,16 @@ class Standard
 	 * Sets the new status of the media item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['media.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -220,10 +235,11 @@ class Standard
 	 * Sets the new mime type of the media.
 	 *
 	 * @param string $mimetype Mime type of the media item
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setMimeType( $mimetype )
 	{
-		if( $mimetype == $this->getMimeType() ) { return; }
+		if( $mimetype == $this->getMimeType() ) { return $this; }
 
 		if( preg_match( '/^[a-z\-]+\/[a-zA-Z0-9\.\-\+]+$/', $mimetype ) !== 1 ) {
 			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
@@ -231,6 +247,8 @@ class Standard
 
 		$this->values['media.mimetype'] = (string) $mimetype;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -253,13 +271,16 @@ class Standard
 	 * Sets the new url of the media item.
 	 *
 	 * @param string $url URL of the media file
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setUrl( $url )
 	{
-		if( $url == $this->getUrl() ) { return; }
+		if( $url == $this->getUrl() ) { return $this; }
 
 		$this->values['media.url'] = (string) $url;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -282,13 +303,16 @@ class Standard
 	 * Sets the new preview url of the media item.
 	 *
 	 * @param string $url Preview URL of the media file
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setPreview( $url )
 	{
-		if( $url == $this->getPreview() ) { return; }
+		if( $url == $this->getPreview() ) { return $this; }
 
 		$this->values['media.preview'] = (string) $url;
 		$this->setModified();
+
+		return $this;
 	}
 
 

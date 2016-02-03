@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the original attribute ID of the ordered product attribute.
 	 *
 	 * @param string $id Attribute ID of the ordered product attribute
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
 	public function setAttributeId( $id );
 
@@ -47,7 +47,7 @@ interface Iface
 	 * Sets the type of the product attribute.
 	 *
 	 * @param string $type Type of the attribute
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
 	public function setType( $type );
 
@@ -62,7 +62,7 @@ interface Iface
 	 * Sets the code of the product attribute.
 	 *
 	 * @param string $code Code of the attribute
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -77,7 +77,7 @@ interface Iface
 	 * Sets the value of the product attribute.
 	 *
 	 * @param string|array $value Value of the product attribute
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
 	public function setValue( $value );
 
@@ -92,7 +92,7 @@ interface Iface
 	 * Sets the localized name of the product attribute.
 	 *
 	 * @param string $name Localized name of the product attribute
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
 	public function setName( $name );
 
@@ -100,7 +100,7 @@ interface Iface
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
 	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item );
 }

@@ -71,9 +71,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
-		$this->assertNull( $this->object->getId() );
+		$return = $this->object->setId( null );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -92,9 +93,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->object->setTypeId( 2 );
-		$this->assertEquals( 2, $this->object->getTypeId() );
+		$return = $this->object->setTypeId( 2 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertEquals( 2, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -107,9 +109,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'unittest set label' );
-		$this->assertEquals( 'unittest set label', $this->object->getLabel() );
+		$return = $this->object->setLabel( 'unittest set label' );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertEquals( 'unittest set label', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -122,9 +125,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDomain()
 	{
-		$this->object->setDomain( 'catalog' );
-		$this->assertEquals( 'catalog', $this->object->getDomain() );
+		$return = $this->object->setDomain( 'catalog' );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertEquals( 'catalog', $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -137,7 +141,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetContent()
 	{
-		$this->object->setContent( 'unit test text' );
+		$return = $this->object->setContent( 'unit test text' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
 		$this->assertEquals( 'unit test text', $this->object->getContent() );
 
 		$this->object->setContent( mb_convert_encoding( '&#x0630;&#x0631;&#x0632;', 'UTF-8', 'HTML-ENTITIES' ) );
@@ -168,9 +174,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
-		$this->assertEquals( 0, $this->object->getStatus() );
+		$return = $this->object->setStatus( 0 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

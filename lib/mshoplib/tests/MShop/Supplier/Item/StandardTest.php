@@ -58,9 +58,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Iface', $return );
 		$this->assertNull( $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
@@ -75,9 +77,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'newName' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setLabel( 'newName' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Iface', $return );
 		$this->assertEquals( 'newName', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetCode()
@@ -87,9 +91,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'newCode' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setCode( 'newCode' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Iface', $return );
 		$this->assertEquals( 'newCode', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -101,9 +107,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Iface', $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()

@@ -65,13 +65,16 @@ class Standard
 	 * like the unique ID of a product or a tree node.
 	 *
 	 * @param integer $parentid New parent ID of the common list item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setParentId( $parentid )
 	{
-		if( $parentid == $this->getParentId() ) { return; }
+		if( $parentid == $this->getParentId() ) { return $this; }
 
 		$this->values[$this->prefix . 'parentid'] = (int) $parentid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -94,13 +97,16 @@ class Standard
 	 * Sets the new domain of the common list item, e.g. text od media.
 	 *
 	 * @param string $domain New domain of the common list item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return $this; }
 
 		$this->values[$this->prefix . 'domain'] = (string) $domain;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -125,13 +131,16 @@ class Standard
 	 * of a text item or a media item.
 	 *
 	 * @param string $refid New reference id of the common list item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setRefId( $refid )
 	{
-		if( $refid == $this->getRefId() ) { return; }
+		if( $refid == $this->getRefId() ) { return $this; }
 
 		$this->values[$this->prefix . 'refid'] = (string) $refid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -154,13 +163,16 @@ class Standard
 	 * Sets the new start date of the common list item (YYYY-MM-DD hh:mm:ss).
 	 *
 	 * @param string $date New start date of the common list item (YYYY-MM-DD hh:mm:ss)
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date === $this->getDateStart() ) { return; }
+		if( $date === $this->getDateStart() ) { return $this; }
 
 		$this->values[$this->prefix . 'datestart'] = $this->checkDateFormat( $date );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -183,13 +195,16 @@ class Standard
 	 * Sets the new end date of the common list item (YYYY-MM-DD hh:mm:ss).
 	 *
 	 * @param string $date New end date of the common list item (YYYY-MM-DD hh:mm:ss)
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date === $this->getDateEnd() ) { return; }
+		if( $date === $this->getDateEnd() ) { return $this; }
 
 		$this->values[$this->prefix . 'dateend'] = $this->checkDateFormat( $date );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -227,13 +242,16 @@ class Standard
 	 * Sets the new type id of the list item.
 	 *
 	 * @param integer|null $typeid type id of the list item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return $this; }
 
 		$this->values[$this->prefix . 'typeid'] = (int) $typeid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -256,13 +274,16 @@ class Standard
 	 * Sets the new position of the list item.
 	 *
 	 * @param integer $pos position of the list item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setPosition( $pos )
 	{
-		if( $pos == $this->getPosition() ) { return; }
+		if( $pos == $this->getPosition() ) { return $this; }
 
 		$this->values[$this->prefix . 'position'] = (int) $pos;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -285,13 +306,16 @@ class Standard
 	 * Sets the new status of the list item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values[$this->prefix . 'status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -314,11 +338,14 @@ class Standard
 	 * Sets the new configuration for the list item.
 	 *
 	 * @param array $config Custom configuration values
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setConfig( array $config )
 	{
 		$this->values[$this->prefix . 'config'] = $config;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -337,10 +364,13 @@ class Standard
 	 * Stores the item referenced by the list item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $refItem Item referenced by the list item
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem )
 	{
 		$this->refItem = $refItem;
+
+		return $this;
 	}
 
 

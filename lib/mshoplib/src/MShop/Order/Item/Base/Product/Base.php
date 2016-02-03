@@ -55,8 +55,11 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base
 		$value = (int) $value;
 
 		if( $value < \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE ||
-			$value > \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE ) {
-				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
+			$value > \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE
+		) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
 		}
+
+		return $value;
 	}
 }

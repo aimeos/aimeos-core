@@ -59,11 +59,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
-		$this->assertEquals( null, $this->object->getId() );
+		$return = $this->object->setId( null );
 
-		$this->object->setId( 5 );
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
+		$this->assertEquals( null, $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
+
+		$return = $this->object->setId( 5 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
 		$this->assertEquals( 5, $this->object->getId() );
+		$this->assertFalse( $this->object->isModified() );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 6 );
@@ -87,7 +93,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetBaseId()
 	{
-		$this->object->setBaseId( 99 );
+		$return = $this->object->setBaseId( 99 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
 		$this->assertEquals( 99, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -99,7 +107,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'testId' );
+		$return = $this->object->setCode( 'testId' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
 		$this->assertEquals( 'testId', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -111,7 +121,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetProductId()
 	{
-		$this->object->setProductId( 12345 );
+		$return = $this->object->setProductId( 12345 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
 		$this->assertEquals( 12345, $this->object->getProductId() );
 		$this->assertTrue( $this->object->isModified() );
 	}

@@ -54,13 +54,16 @@ class Standard
 	 *  Sets the language ID of the product property item.
 	 *
 	 * @param string|null $id Language ID of the product property item
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product property item for chaining method calls
 	 */
 	public function setLanguageId( $id )
 	{
-		if ( $id === $this->getLanguageId() ) { return; }
+		if ( $id == $this->getLanguageId() ) { return $this; }
 
 		$this->values['product.property.languageid'] = $this->checkLanguageId( $id );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -83,14 +86,16 @@ class Standard
 	 * Sets the new parent ID of the product property item
 	 *
 	 * @param integer $id Parent ID of the product property item
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product property item for chaining method calls
 	 */
 	public function setParentId( $id )
 	{
-		$id = (int) $id;
-		if ( $id === $this->getParentId() ) { return; }
+		if( $id == $this->getParentId() ) { return $this; }
 
 		$this->values['product.property.parentid'] = (int) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -128,14 +133,16 @@ class Standard
 	 * Sets the new type of the product property item
 	 *
 	 * @param integer|null $id Type of the product property item
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product property item for chaining method calls
 	 */
 	public function setTypeId( $id )
 	{
-		$id = (int) $id;
-		if ( $id === $this->getTypeId() ) { return; }
+		if ( $id == $this->getTypeId() ) { return $this; }
 
 		$this->values['product.property.typeid'] = (int) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -158,14 +165,16 @@ class Standard
 	 * Sets the new value of the property item.
 	 *
 	 * @param string $value Value of the property item
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product property item for chaining method calls
 	 */
 	public function setValue( $value )
 	{
-		if ( $value == $this->getValue() ) { return; }
+		if ( $value == $this->getValue() ) { return $this; }
 
 		$this->values['product.property.value'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 

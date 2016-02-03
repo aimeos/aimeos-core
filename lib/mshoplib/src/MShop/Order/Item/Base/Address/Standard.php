@@ -56,13 +56,16 @@ class Standard
 	 * Sets the order base ID the address belongs to.
 	 *
 	 * @param integer|null $value New base ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function setBaseId( $value )
 	{
-		if( $value == $this->getBaseId() ) { return; }
+		if( $value == $this->getBaseId() ) { return $this; }
 
 		$this->values['order.base.address.baseid'] = ( $value !== null ? (int) $value : null );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -85,13 +88,16 @@ class Standard
 	 * Sets the original customer address ID.
 	 *
 	 * @param string $addrid New customer address ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function setAddressId( $addrid )
 	{
-		if( $addrid == $this->getAddressId() ) { return; }
+		if( $addrid == $this->getAddressId() ) { return $this; }
 
 		$this->values['order.base.address.addressid'] = (string) $addrid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -114,15 +120,18 @@ class Standard
 	 * Sets the new type of the address which can be billing or delivery.
 	 *
 	 * @param string $type New type of the address
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return; }
+		if( $type == $this->getType() ) { return $this; }
 
 		$this->checkType( $type );
 
 		$this->values['order.base.address.type'] = (string) $type;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -130,14 +139,16 @@ class Standard
 	 * Copys all data from a given address item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New address
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $item )
 	{
 		parent::copyFrom( $item );
 
 		$this->setAddressId( $item->getId() );
-
 		$this->setModified();
+
+		return $this;
 	}
 
 

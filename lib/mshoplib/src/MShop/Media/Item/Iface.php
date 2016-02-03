@@ -32,8 +32,7 @@ interface Iface
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $langid ISO language code (e.g. de or de_DE)
-	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setLanguageId( $langid );
 
@@ -48,7 +47,7 @@ interface Iface
 	 * Sets the new label of the media item.
 	 *
 	 * @param string $label Type label of the media item
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -63,7 +62,7 @@ interface Iface
 	 * Sets the new status of the media item.
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setStatus( $status );
 
@@ -78,7 +77,7 @@ interface Iface
 	 * Sets the new mime type of the media.
 	 *
 	 * @param string $mimetype Mime type of the media item
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setMimeType( $mimetype );
 
@@ -93,7 +92,7 @@ interface Iface
 	 * Sets the new url of the media item.
 	 *
 	 * @param string $url URL of the media file
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setUrl( $url );
 
@@ -108,7 +107,7 @@ interface Iface
 	 * Sets the new preview url of the media item.
 	 *
 	 * @param string $url Preview URL of the media file
-	 * @return void
+	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setPreview( $url );
 }

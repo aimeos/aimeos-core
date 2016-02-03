@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the Language Id of the tag item
 	 *
 	 * @param string $id New Language ID of the tag item
-	 * @return void
+	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
 	public function setLanguageId( $id );
 
@@ -47,7 +47,7 @@ interface Iface
 	 * Sets the new label of the tag item.
 	 *
 	 * @param string $label Label of the tag item
-	 * @return void
+	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
 	public function setLabel( $label );
 

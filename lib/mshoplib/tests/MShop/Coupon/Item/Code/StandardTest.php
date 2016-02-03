@@ -61,15 +61,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( '1' );
+		$return = $this->object->setId( '1' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertFalse( false, $this->object->isModified() );
 		$this->assertEquals( 1, $this->object->getId() );
 
-		$this->assertFalse( false, $this->object->isModified() );
+		$return = $this->object->setId( null );
 
-		$this->object->setId( null );
-		$this->assertEquals( null, $this->object->getId() );
-
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
 		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertEquals( null, $this->object->getId() );
 	}
 
 	public function testGetSiteId()
@@ -84,9 +86,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetParentId()
 	{
-		$this->object->setParentId( '3' );
-		$this->assertEquals( 3, $this->object->getParentId() );
+		$return = $this->object->setParentId( '3' );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertEquals( 3, $this->object->getParentId() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
 
@@ -97,7 +100,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'dcba' );
+		$return = $this->object->setCode( 'dcba' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
 		$this->assertEquals( 'dcba', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -109,7 +114,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCount()
 	{
-		$this->object->setCount( 50 );
+		$return = $this->object->setCount( 50 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
 		$this->assertEquals( 50, $this->object->getCount() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -121,8 +128,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDateStart()
 	{
-		$this->object->setDateStart( '2010-04-22 06:22:22' );
+		$return = $this->object->setDateStart( '2010-04-22 06:22:22' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
 		$this->assertEquals( '2010-04-22 06:22:22', $this->object->getDateStart() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetDateEnd()
@@ -132,8 +142,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDateEnd()
 	{
-		$this->object->setDateEnd( '2010-05-22 06:22:22' );
+		$return = $this->object->setDateEnd( '2010-05-22 06:22:22' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
 		$this->assertEquals( '2010-05-22 06:22:22', $this->object->getDateEnd() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()

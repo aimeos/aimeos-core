@@ -33,7 +33,7 @@ interface Iface
 	 * Sets the new status of the product item.
 	 *
 	 * @param integer $status New status of the product
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setStatus( $status );
 
@@ -48,7 +48,7 @@ interface Iface
 	 * Sets a new code of the product item.
 	 *
 	 * @param string $code New code of the product item
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -63,7 +63,7 @@ interface Iface
 	 * Sets a new label of the product item.
 	 *
 	 * @param string $label New label of the product item
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setLabel( $label );
 }

@@ -71,13 +71,16 @@ class Standard
 	 * Sets the new type ID of the plugin item.
 	 *
 	 * @param integer $typeid New plugin type ID
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return $this; }
 
 		$this->values['plugin.typeid'] = (int) $typeid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -101,13 +104,16 @@ class Standard
 	 * name of the plugin class name.
 	 *
 	 * @param string $provider Plugin provider, esp. short plugin class name
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setProvider( $provider )
 	{
-		if( $provider == $this->getProvider() ) { return; }
+		if( $provider == $this->getProvider() ) { return $this; }
 
 		$this->values['plugin.provider'] = (string) $provider;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -130,13 +136,16 @@ class Standard
 	 * Sets the new label of the plugin item.
 	 *
 	 * @param string $label New label of the plugin item
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['plugin.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -159,11 +168,14 @@ class Standard
 	 * Sets the new configuration for the plugin item.
 	 *
 	 * @param array $config Custom configuration values
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setConfig( array $config )
 	{
 		$this->values['plugin.config'] = $config;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -186,13 +198,16 @@ class Standard
 	 * Sets the new position of the plugin item.
 	 *
 	 * @param integer $position Position of the item
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setPosition( $position )
 	{
-		if( $position == $this->getPosition() ) { return; }
+		if( $position == $this->getPosition() ) { return $this; }
 
 		$this->values['plugin.position'] = (int) $position;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -215,13 +230,16 @@ class Standard
 	 * Sets the new status of the plugin item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['plugin.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

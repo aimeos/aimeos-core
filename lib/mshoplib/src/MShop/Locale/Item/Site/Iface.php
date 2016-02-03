@@ -33,7 +33,7 @@ interface Iface
 	 * Sets the code of the Site.
 	 *
 	 * @param string $code The code to set
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -50,7 +50,7 @@ interface Iface
 	 * Sets the label property of the Site.
 	 *
 	 * @param string $label The label of the Site
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -67,7 +67,7 @@ interface Iface
 	 * Sets the config property of the Site.
 	 *
 	 * @param array $options Options to be set for the Site
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setConfig( array $options );
 
@@ -84,7 +84,7 @@ interface Iface
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function setStatus( $status );
 
@@ -114,7 +114,7 @@ interface Iface
 	 * Adds a child node to this node.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Child node to add
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
 	 */
 	public function addChild( \Aimeos\MShop\Locale\Item\Site\Iface $item );
 }

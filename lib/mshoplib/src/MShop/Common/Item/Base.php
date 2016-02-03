@@ -57,6 +57,7 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	 * Sets the new ID of the item.
 	 *
 	 * @param string|null $id ID of the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setId( $id )
 	{
@@ -69,6 +70,7 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 		}
 
 		$this->values['id'] = $this->values[$key];
+		return $this;
 	}
 
 

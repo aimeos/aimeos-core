@@ -31,7 +31,7 @@ interface Iface
 	 * Sets the new position of the item in the list.
 	 *
 	 * @param integer $pos position of the item in the list
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setPosition( $pos );
 }

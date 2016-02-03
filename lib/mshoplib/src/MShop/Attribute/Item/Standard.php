@@ -59,13 +59,16 @@ class Standard
 	 * Set the name of the domain for this attribute item.
 	 *
 	 * @param string $domain Name of the domain e.g. text, media, price...
+	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return $this; }
 
 		$this->values['attribute.domain'] = (string) $domain;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -88,13 +91,16 @@ class Standard
 	 * Sets the new type of the attribute.
 	 *
 	 * @param integer|null $typeid Type of the attribute
+	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return $this; }
 
 		$this->values['attribute.typeid'] = (int) $typeid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -132,6 +138,7 @@ class Standard
 	 * Sets a unique code for the attribute item.
 	 *
 	 * @param string $code Code of the attribute item
+	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
@@ -139,10 +146,12 @@ class Standard
 			throw new \Aimeos\MShop\Attribute\Exception( sprintf( 'Code must not be longer than 255 characters' ) );
 		}
 
-		if( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return $this; }
 
 		$this->values['attribute.code'] = (string) $code;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -165,13 +174,16 @@ class Standard
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
+	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['attribute.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -194,13 +206,16 @@ class Standard
 	 * Sets the new status of the attribute item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['attribute.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -223,13 +238,16 @@ class Standard
 	 * Sets the position of the attribute item
 	 *
 	 * @param integer $pos Position of the attribute item
+	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setPosition( $pos )
 	{
-		if( $pos == $this->getPosition() ) { return; }
+		if( $pos == $this->getPosition() ) { return $this; }
 
 		$this->values['attribute.position'] = (int) $pos;
 		$this->setModified();
+
+		return $this;
 	}
 
 

@@ -60,10 +60,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setId( null );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Stock\Iface', $return );
 		$this->assertNull( $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
@@ -78,10 +79,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetParentId()
 	{
-		$this->object->setParentId( 10000 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setParentId( 10000 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Stock\Iface', $return );
 		$this->assertEquals( 10000, $this->object->getParentId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetWarehouseId()
@@ -91,10 +93,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetWarehouseId()
 	{
-		$this->object->setWarehouseId( 30000 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setWarehouseId( 30000 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Stock\Iface', $return );
 		$this->assertEquals( 30000, $this->object->getWarehouseId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetStocklevel()
@@ -104,10 +107,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStocklevel()
 	{
-		$this->object->setStocklevel( 200 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setStocklevel( 200 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Stock\Iface', $return );
 		$this->assertEquals( 200, $this->object->getStocklevel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetStocklevelNull()
@@ -126,10 +130,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDateBack()
 	{
-		$this->object->setDateBack( '2010-10-10 01:10:00' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setDateBack( '2010-10-10 01:10:00' );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Stock\Iface', $return );
 		$this->assertEquals( '2010-10-10 01:10:00', $this->object->getDateBack() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()

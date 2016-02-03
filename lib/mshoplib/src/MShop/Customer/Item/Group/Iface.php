@@ -30,7 +30,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new code of the customer group
 	 *
 	 * @param string $value Code of the customer group
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface Customer group item for chaining method calls
 	 */
 	public function setCode( $value );
 
@@ -45,7 +45,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new label of the customer group
 	 *
 	 * @param string $value Label of the customer group
-	 * @return void
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface Customer group item for chaining method calls
 	 */
 	public function setLabel( $value );
 }

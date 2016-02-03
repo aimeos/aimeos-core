@@ -54,13 +54,16 @@ class Standard
 	 * Sets the new product ID
 	 *
 	 * @param integer $parentid New product ID
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
 	 */
 	public function setParentId( $parentid )
 	{
-		if( $parentid == $this->getParentId() ) { return; }
+		if( $parentid == $this->getParentId() ) { return $this; }
 
 		$this->values['product.stock.parentid'] = (int) $parentid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -83,17 +86,16 @@ class Standard
 	 * Sets the warehouse Id.
 	 *
 	 * @param integer|null $warehouseid New warehouse Id
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
 	 */
 	public function setWarehouseId( $warehouseid )
 	{
-		if( $warehouseid === $this->getWarehouseId() ) { return; }
+		if( $warehouseid == $this->getWarehouseId() ) { return $this; }
 
-		if( $warehouseid !== null ) {
-			$warehouseid = (int) $warehouseid;
-		}
-
-		$this->values['product.stock.warehouseid'] = $warehouseid;
+		$this->values['product.stock.warehouseid'] = (int) $warehouseid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -116,15 +118,16 @@ class Standard
 	 * Sets the stock level.
 	 *
 	 * @param integer|null $stocklevel New stock level
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
 	 */
 	public function setStocklevel( $stocklevel )
 	{
-		if( $stocklevel === $this->getStocklevel() ) { return; }
+		if( $stocklevel === $this->getStocklevel() ) { return $this; }
 
-		$stocklevel = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
-
-		$this->values['product.stock.stocklevel'] = $stocklevel;
+		$this->values['product.stock.stocklevel'] = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -147,13 +150,16 @@ class Standard
 	 * Sets the product back in stock date.
 	 *
 	 * @param string|null $backdate New back in stock date of the product
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
 	 */
 	public function setDateBack( $backdate )
 	{
-		if( $backdate === $this->getDateBack() ) { return; }
+		if( $backdate == $this->getDateBack() ) { return $this; }
 
 		$this->values['product.stock.backdate'] = $this->checkDateFormat( $backdate );;
 		$this->setModified();
+
+		return $this;
 	}
 
 

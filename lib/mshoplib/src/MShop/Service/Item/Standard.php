@@ -58,15 +58,16 @@ class Standard
 	 * Sets the code of the service item payment.
 	 *
 	 * @param string code of the service item payment
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
-		$this->checkCode( $code );
+		if( $code == $this->getCode() ) { return $this; }
 
-		if( $code == $this->getCode() ) { return; }
-
-		$this->values['service.code'] = (string) $code;
+		$this->values['service.code'] = (string) $this->checkCode( $code );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -104,13 +105,16 @@ class Standard
 	 * Sets the type ID of the service item.
 	 *
 	 * @param integer Type ID of the service item
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setTypeId( $typeId )
 	{
-		if( $typeId == $this->getTypeId() ) { return; }
+		if( $typeId == $this->getTypeId() ) { return $this; }
 
 		$this->values['service.typeid'] = (int) $typeId;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -133,13 +137,16 @@ class Standard
 	 * Sets the new name of the service provider the item belongs to.
 	 *
 	 * @param string $provider Name of the service provider
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setProvider( $provider )
 	{
-		if( $provider == $this->getProvider() ) { return; }
+		if( $provider == $this->getProvider() ) { return $this; }
 
 		$this->values['service.provider'] = (string) $provider;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -162,13 +169,16 @@ class Standard
 	 * Sets the label of the service item payment.
 	 *
 	 * @param string label of the service item payment
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['service.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -191,11 +201,14 @@ class Standard
 	 * Sets the configuration values of the item.
 	 *
 	 * @param array $config Configuration values
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setConfig( array $config )
 	{
 		$this->values['service.config'] = $config;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -218,13 +231,16 @@ class Standard
 	 * Sets the new position of the service item in the list of deliveries.
 	 *
 	 * @param integer $pos Position in item list
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setPosition( $pos )
 	{
-		if( $pos == $this->getPosition() ) { return; }
+		if( $pos == $this->getPosition() ) { return $this; }
 
 		$this->values['service.position'] = (int) $pos;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -247,13 +263,16 @@ class Standard
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['service.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

@@ -59,13 +59,16 @@ class Standard
 	 * Sets the new type ID of the product item.
 	 *
 	 * @param integer $typeid New type ID of the product item
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return; }
+		if( $typeid == $this->getTypeId() ) { return $this; }
 
 		$this->values['product.typeid'] = (int) $typeid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -103,13 +106,16 @@ class Standard
 	 * Sets the new status of the product item.
 	 *
 	 * @param integer $status New status of the product item
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['product.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -132,15 +138,18 @@ class Standard
 	 * Sets the new code of the product item.
 	 *
 	 * @param string $code New code of product item
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
 		$this->checkCode( $code );
 
-		if( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return $this; }
 
 		$this->values['product.code'] = (string) $code;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -163,13 +172,16 @@ class Standard
 	 * Sets a new label of the product item.
 	 *
 	 * @param string $label New label of the product item
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['product.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -192,13 +204,16 @@ class Standard
 	 * Sets a new starting point of time, in which the product is available.
 	 *
 	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date === $this->getDateStart() ) { return; }
+		if( $date === $this->getDateStart() ) { return $this; }
 
 		$this->values['product.datestart'] = $this->checkDateFormat( $date );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -221,13 +236,16 @@ class Standard
 	 * Sets a new ending point of time, in which the product is available.
 	 *
 	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date === $this->getDateEnd() ) { return; }
+		if( $date === $this->getDateEnd() ) { return $this; }
 
 		$this->values['product.dateend'] = $this->checkDateFormat( $date );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -250,11 +268,14 @@ class Standard
 	 * Sets the configuration values of the item.
 	 *
 	 * @param array $config Configuration values
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setConfig( array $config )
 	{
 		$this->values['product.config'] = $config;
 		$this->setModified();
+
+		return $this;
 	}
 
 

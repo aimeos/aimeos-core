@@ -88,9 +88,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertNull( $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
@@ -105,9 +107,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'newName' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setLabel( 'newName' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertEquals( 'newName', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetCode()
@@ -117,9 +121,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->object->setCode( 'neuerUser@unittest.com' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setCode( 'neuerUser@unittest.com' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertEquals( 'neuerUser@unittest.com', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetStatus()
@@ -129,14 +135,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetAndGetPassword()
 	{
-		$this->object->setPassword( '08154712' );
+		$return = $this->object->setPassword( '08154712' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertEquals( '08154712', $this->object->getPassword() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -163,7 +173,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetBirthday()
 	{
-		$this->object->setBirthday( '2010-02-01' );
+		$return = $this->object->setBirthday( '2010-02-01' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertEquals( '2010-02-01', $this->object->getBirthday() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -175,7 +187,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDateVerified()
 	{
-		$this->object->setDateVerified( '2010-02-01' );
+		$return = $this->object->setDateVerified( '2010-02-01' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertEquals( '2010-02-01', $this->object->getDateVerified() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -216,7 +230,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSetPaymentAddress()
 	{
 		$this->address->setCompany( 'unitCompany0815' );
-		$this->object->setPaymentAddress( $this->address );
+		$return = $this->object->setPaymentAddress( $this->address );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertEquals( $this->address, $this->object->getPaymentAddress() );
 	}
 

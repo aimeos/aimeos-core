@@ -172,11 +172,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	protected function checkDeliveryStatus( $value )
 	{
-		$temp = (int) $value;
-
 		if( $temp < \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED || $temp > \Aimeos\MShop\Order\Item\Base::STAT_RETURNED ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order delivery status "%1$s" not within allowed range', $value ) );
 		}
+
+		return (int) $value;
 	}
 
 
@@ -188,11 +188,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	protected function checkPaymentStatus( $value )
 	{
-		$temp = (int) $value;
-
 		if( $temp < \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED || $temp > \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order payment status "%1$s" not within allowed range', $value ) );
 		}
+
+		return (int) $value;
 	}
 
 
@@ -209,9 +209,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			case \Aimeos\MShop\Order\Item\Base::TYPE_REPEAT:
 			case \Aimeos\MShop\Order\Item\Base::TYPE_WEB:
 			case \Aimeos\MShop\Order\Item\Base::TYPE_PHONE:
-				break;
-			default:
-				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order type "%1$s" not within allowed range', $value ) );
+				return (string) $value;
 		}
+
+		throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order type "%1$s" not within allowed range', $value ) );
 	}
 }

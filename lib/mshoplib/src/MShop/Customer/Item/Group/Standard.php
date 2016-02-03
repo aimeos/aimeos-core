@@ -56,13 +56,16 @@ class Standard
 	 * Sets the new code of the customer group
 	 *
 	 * @param string $value Code of the customer group
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface Customer group item for chaining method calls
 	 */
 	public function setCode( $value )
 	{
-		if( $value == $this->getCode() ) { return; }
+		if( $value == $this->getCode() ) { return $this; }
 
 		$this->values['customer.group.code'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -85,13 +88,16 @@ class Standard
 	 * Sets the new label of the customer group
 	 *
 	 * @param string $value Label of the customer group
+	 * @return \Aimeos\MShop\Customer\Item\Group\Iface Customer group item for chaining method calls
 	 */
 	public function setLabel( $value )
 	{
-		if( $value == $this->getLabel() ) { return; }
+		if( $value == $this->getLabel() ) { return $this; }
 
 		$this->values['customer.group.label'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 

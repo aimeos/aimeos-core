@@ -34,7 +34,7 @@ interface Iface
 	 * Sets the new domain of the common list item, e.g. text od media.
 	 *
 	 * @param string $domain New domain of the common list item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setDomain( $domain );
 
@@ -49,7 +49,7 @@ interface Iface
 	 * Sets the new reference id of the common list item, like the unique id of a text item or a media item.
 	 *
 	 * @param string $refid New reference id of the common list item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setRefId( $refid );
 
@@ -64,7 +64,7 @@ interface Iface
 	 * Sets the new status of the list item.
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setStatus( $status );
 
@@ -79,7 +79,7 @@ interface Iface
 	 * Stores the item referenced by the list item.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $refItem Item referenced by the list item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem );
 }

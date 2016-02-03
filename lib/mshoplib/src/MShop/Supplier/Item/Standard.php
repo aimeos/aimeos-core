@@ -58,13 +58,16 @@ class Standard
 	 * Sets the new label of the supplier item.
 	 *
 	 * @param string $value label of the supplier item
+	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
 	public function setLabel( $value )
 	{
-		if( $value == $this->getLabel() ) { return; }
+		if( $value == $this->getLabel() ) { return $this; }
 
 		$this->values['supplier.label'] = (string) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -87,13 +90,16 @@ class Standard
 	 * Sets the new code of the supplier item.
 	 *
 	 * @param string $value Code of the supplier item
+	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
 	public function setCode( $value )
 	{
-		$this->checkCode( $value );
+		if( $value == $this->getCode() ) { return $this; }
 
-		$this->values['supplier.code'] = (string) $value;
+		$this->values['supplier.code'] = (string) $this->checkCode( $value );;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -117,13 +123,16 @@ class Standard
 	 * Sets the new status of the supplier item.
 	 *
 	 * @param integer $value status of the supplier item
+	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
 	public function setStatus( $value )
 	{
-		if( $value == $this->getStatus() ) { return; }
+		if( $value == $this->getStatus() ) { return $this; }
 
 		$this->values['supplier.status'] = (int) $value;
 		$this->setModified();
+
+		return $this;
 	}
 
 

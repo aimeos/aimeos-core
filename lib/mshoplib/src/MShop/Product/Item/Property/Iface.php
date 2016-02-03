@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the Language Id of the property item
 	 *
 	 * @param string $id New Language ID of the property item
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product property item for chaining method calls
 	 */
 	public function setLanguageId( $id );
 
@@ -47,7 +47,7 @@ interface Iface
 	 * Sets the new value of the property item.
 	 *
 	 * @param string $value Value of the property item
-	 * @return void
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product property item for chaining method calls
 	 */
 	public function setValue( $value );
 

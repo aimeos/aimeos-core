@@ -58,13 +58,16 @@ class Standard
 	 * Sets the new customer ID this address belongs to
 	 *
 	 * @param string $parentid New customer ID of the address
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setParentId( $parentid )
 	{
-		if( $parentid == $this->getParentId() ) { return; }
+		if( $parentid == $this->getParentId() ) { return $this; }
 
 		$this->values[$this->prefix . 'parentid'] = (string) $parentid;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -87,13 +90,16 @@ class Standard
 	 * Sets the Position of the address item.
 	 *
 	 * @param integer $position Position of the address item
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setPosition( $position )
 	{
-		if( $position == $this->getPosition() ) { return; }
+		if( $position == $this->getPosition() ) { return $this; }
 
 		$this->values[$this->prefix . 'position'] = (int) $position;
 		$this->setModified();
+
+		return $this;
 	}
 
 

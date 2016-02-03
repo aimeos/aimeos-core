@@ -63,11 +63,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->assertFalse( $this->object->isModified() );
+		$return = $this->object->setId( null );
 
-		$this->object->setId( null );
-		$this->assertTrue( $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
 		$this->assertNull( $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
@@ -82,11 +82,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetPosition()
 	{
-		$this->assertFalse( $this->object->isModified() );
+		$return = $this->object->setPosition( 4 );
 
-		$this->object->setPosition( 4 );
-		$this->assertTrue( $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
 		$this->assertEquals( 4, $this->object->getPosition() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetCode()
@@ -96,11 +96,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetCode()
 	{
-		$this->assertFalse( $this->object->isModified() );
+		$return = $this->object->setCode( 'newCode' );
 
-		$this->object->setCode( 'newCode' );
-		$this->assertTrue( $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
 		$this->assertEquals( 'newCode', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetProvider()
@@ -110,11 +110,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetProvider()
 	{
-		$this->assertFalse( $this->object->isModified() );
+		$return = $this->object->setProvider( 'TestProvider' );
 
-		$this->object->setProvider( 'TestProvider' );
-		$this->assertTrue( $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
 		$this->assertEquals( 'TestProvider', $this->object->getProvider() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetLabel()
@@ -124,11 +124,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->assertFalse( $this->object->isModified() );
+		$return = $this->object->setLabel( 'newName' );
 
-		$this->object->setLabel( 'newName' );
-		$this->assertTrue( $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
 		$this->assertEquals( 'newName', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetStatus()
@@ -139,9 +139,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 10 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setStatus( 10 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
 		$this->assertEquals( 10, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetConfig()
@@ -152,11 +154,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetConfig()
 	{
-		$this->assertFalse( $this->object->isModified() );
+		$return = $this->object->setConfig( array( 'account' => 'testAccount' ) );
 
-		$this->object->setConfig( array( 'account' => 'testAccount' ) );
-		$this->assertTrue( $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
 		$this->assertEquals( array( 'account' => 'testAccount' ), $this->object->getConfig() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTypeId()
@@ -166,12 +168,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->assertFalse( $this->object->isModified() );
+		$return = $this->object->setTypeId( 2 );
 
-		$this->object->setTypeId( 2 );
-
-		$this->assertTrue( $this->object->isModified() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
 		$this->assertEquals( 2, $this->object->getTypeId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetType()

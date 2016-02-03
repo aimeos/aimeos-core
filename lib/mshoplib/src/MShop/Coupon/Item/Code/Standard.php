@@ -56,13 +56,16 @@ class Standard
 	 * Sets the new unique ID of the coupon item the code belongs to.
 	 *
 	 * @param integer $id Unique ID of the coupon item
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setParentId( $id )
 	{
-		if( $id == $this->getParentId() ) { return; }
+		if( $id == $this->getParentId() ) { return $this; }
 
 		$this->values['coupon.code.parentid'] = (int) $id;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -85,15 +88,18 @@ class Standard
 	 * Sets the new code for the coupon item.
 	 *
 	 * @param string $code Coupon code
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
 		$this->checkCode( $code );
 
-		if( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return $this; }
 
 		$this->values['coupon.code.code'] = (string) $code;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -116,13 +122,16 @@ class Standard
 	 * Sets the new number of tries the code is valid.
 	 *
 	 * @param integer $count Number of tries
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setCount( $count )
 	{
-		if( $count == $this->getCount() ) { return; }
+		if( $count == $this->getCount() ) { return $this; }
 
 		$this->values['coupon.code.count'] = (string) $count;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -145,14 +154,16 @@ class Standard
 	 * Sets a new starting point of time, in which the code is available.
 	 *
 	 * @param string New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date == $this->getDateStart() ) { return; }
+		if( $date == $this->getDateStart() ) { return $this; }
 
 		$this->values['coupon.code.datestart'] = $this->checkDateFormat( $date );
-
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -175,14 +186,16 @@ class Standard
 	 * Sets a new ending point of time, in which the code is available.
 	 *
 	 * @param string New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date == $this->getDateEnd() ) { return; }
+		if( $date == $this->getDateEnd() ) { return $this; }
 
 		$this->values['coupon.code.dateend'] = $this->checkDateFormat( $date );
-
 		$this->setModified();
+
+		return $this;
 	}
 
 

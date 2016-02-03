@@ -63,6 +63,7 @@ class Standard
 	 * Sets the id of the language.
 	 *
 	 * @param string $key Id to set
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
 	public function setId( $key )
 	{
@@ -77,6 +78,8 @@ class Standard
 			$this->values['locale.language.id'] = null;
 			$this->modified = true;
 		}
+
+		return $this;
 	}
 
 
@@ -99,10 +102,11 @@ class Standard
 	 * Sets the two letter ISO language code.
 	 *
 	 * @param string $key two letter ISO language code
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
 	public function setCode( $key )
 	{
-		if( $key == $this->getCode() ) { return; }
+		if( $key == $this->getCode() ) { return $this; }
 
 		$len = strlen( $key );
 		if( $len < 2 || $len > 5 || preg_match( '/^[a-z]{2,3}((-|_)[a-zA-Z]{2})?$/', $key ) !== 1 ) {
@@ -111,6 +115,8 @@ class Standard
 
 		$this->values['locale.language.code'] = (string) $key;
 		$this->modified = true;
+
+		return $this;
 	}
 
 
@@ -133,13 +139,16 @@ class Standard
 	 * Sets the label property.
 	 *
 	 * @param string $label Label of the language
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['locale.language.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -162,13 +171,16 @@ class Standard
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['locale.language.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

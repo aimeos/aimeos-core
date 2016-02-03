@@ -38,7 +38,7 @@ interface Iface
 	 * Sets the new type ID of the item.
 	 *
 	 * @param integer $typeid type ID of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setTypeId( $typeid );
 }

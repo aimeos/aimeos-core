@@ -60,10 +60,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId(null);
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setId( null );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
 		$this->assertNull( $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
@@ -78,10 +79,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLanguageId()
 	{
-		$this->object->setLanguageId('fr');
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setLanguageId('fr');
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
 		$this->assertEquals( 'fr', $this->object->getLanguageId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetParentId()
@@ -91,10 +93,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetParentId()
 	{
-		$this->object->setParentId( 22 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setParentId( 22 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
 		$this->assertEquals( 22, $this->object->getParentId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTypeId()
@@ -104,10 +107,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->object->setTypeId(33);
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setTypeId(33);
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
 		$this->assertEquals( 33, $this->object->getTypeId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetType()
@@ -122,10 +126,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetValue()
 	{
-		$this->object->setValue( '15.00' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setValue( '15.00' );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
 		$this->assertEquals( '15.00', $this->object->getValue() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTimeModified()

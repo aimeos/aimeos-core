@@ -113,11 +113,12 @@ class Standard
 	/**
 	 * Sets the identifier of the shop instance.
 	 *
-	 * @param integer ID of the shop instance.
+	 * @param integer ID of the shop instance
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setSiteId( $id )
 	{
-		if( $id === $this->getSiteId() ) { return; }
+		if( $id === $this->getSiteId() ) { return $this; }
 
 		$this->values['locale.siteid'] = (int) $id;
 		$this->sitePath = array( (int) $id );
@@ -126,6 +127,8 @@ class Standard
 		/** @todo: Wrong site item shouldn't be available any more but causes problems in controller */
 
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -148,14 +151,17 @@ class Standard
 	 * Sets the ISO language code.
 	 *
 	 * @param string|null $id ISO language code (e.g. de or de_DE)
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the language ID is invalid
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id == $this->getLanguageId() ) { return; }
+		if( $id == $this->getLanguageId() ) { return $this; }
 
 		$this->values['locale.languageid'] = $this->checkLanguageId( $id );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -178,14 +184,17 @@ class Standard
 	 * Sets the currency ID.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
 	public function setCurrencyId( $currencyid )
 	{
-		if( $currencyid == $this->getCurrencyId() ) { return; }
+		if( $currencyid == $this->getCurrencyId() ) { return $this; }
 
 		$this->values['locale.currencyid'] = $this->checkCurrencyId( $currencyid );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -208,13 +217,16 @@ class Standard
 	 * Sets the position of the item.
 	 *
 	 * @param integer $pos Position of the item
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setPosition( $pos )
 	{
-		if( $pos == $this->getPosition() ) { return; }
+		if( $pos == $this->getPosition() ) { return $this; }
 
 		$this->values['locale.position'] = (int) $pos;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -237,13 +249,16 @@ class Standard
 	 * Sets the status property
 	 *
 	 * @param integer $status The status of the locale item
+	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['locale.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

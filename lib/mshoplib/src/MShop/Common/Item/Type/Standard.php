@@ -60,15 +60,16 @@ class Standard
 	 * Sets the code of the common list type item
 	 *
 	 * @param string $code New code of the common list type item
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setCode( $code )
 	{
-		$this->checkCode( $code );
+		if( $code === $this->getCode() ) { return $this; }
 
-		if( $code == $this->getCode() ) { return; }
-
-		$this->values[$this->prefix . 'code'] = (string) $code;
+		$this->values[$this->prefix . 'code'] = (string) $this->checkCode( $code );
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -91,13 +92,16 @@ class Standard
 	 * Sets the domain of the common list type item
 	 *
 	 * @param string $domain New domain of the common list type item
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return; }
+		if( $domain == $this->getDomain() ) { return $this; }
 
 		$this->values[$this->prefix . 'domain'] = (string) $domain;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -120,13 +124,16 @@ class Standard
 	 * Sets the label of the common list type item
 	 *
 	 * @param string $label New label of the common list type item
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values[$this->prefix . 'label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -149,13 +156,16 @@ class Standard
 	 * Sets the status of the common list type item
 	 *
 	 * @param integer $status New status of the common list type item
+	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values[$this->prefix . 'status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 

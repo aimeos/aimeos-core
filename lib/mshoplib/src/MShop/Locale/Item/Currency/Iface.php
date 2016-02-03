@@ -14,7 +14,7 @@ namespace Aimeos\MShop\Locale\Item\Currency;
 
 /**
  * Common interface for all currency items.
- * 
+ *
  * @package MShop
  * @subpackage Locale
  */
@@ -33,7 +33,7 @@ interface Iface
 	 * Sets the code of the currency.
 	 *
 	 * @param string $key Code of the currency
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
 	 */
 	public function setCode( $key );
 
@@ -50,7 +50,7 @@ interface Iface
 	 * Sets the label or symbol of the currency.
 	 *
 	 * @param string $label Label or symbol of the currency
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -67,7 +67,7 @@ interface Iface
 	 * Sets the status of the item
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
 	 */
 	public function setStatus( $status );
 

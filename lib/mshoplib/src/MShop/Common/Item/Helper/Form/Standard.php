@@ -60,10 +60,13 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Sets if the URL points to an external site.
 	 *
 	 * @param boolean $value True if URL points to an external site, false if it stays on the same site
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
 	 */
 	public function setExternal( $value )
 	{
 		$this->external = (bool) $value;
+
+		return $this;
 	}
 
 
@@ -82,10 +85,13 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Sets the url.
 	 *
 	 * @param string $url Url
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
 	 */
 	public function setUrl( $url )
 	{
 		$this->url = (string) $url;
+
+		return $this;
 	}
 
 
@@ -104,10 +110,13 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * Sets the method.
 	 *
 	 * @param string $method Method
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
 	 */
 	public function setMethod( $method )
 	{
 		$this->method = (string) $method;
+
+		return $this;
 	}
 
 
@@ -132,10 +141,13 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 *
 	 * @param string $key Unique key
 	 * @param \Aimeos\MW\Criteria\Attribute\Iface $value Attribute item for the given key
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
 	 */
 	public function setValue( $key, \Aimeos\MW\Criteria\Attribute\Iface $value )
 	{
 		$this->values[$key] = $value;
+
+		return $this;
 	}
 
 

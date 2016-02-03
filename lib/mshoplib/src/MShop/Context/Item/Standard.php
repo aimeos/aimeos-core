@@ -125,10 +125,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the cache object.
 	 *
 	 * @param \Aimeos\MW\Cache\Iface $cache Cache object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setCache( \Aimeos\MW\Cache\Iface $cache )
 	{
 		$this->cache = $cache;
+
+		return $this;
 	}
 
 
@@ -151,10 +154,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the configuration object.
 	 *
 	 * @param \Aimeos\MW\Config\Iface $config Configuration object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setConfig( \Aimeos\MW\Config\Iface $config )
 	{
 		$this->config = $config;
+
+		return $this;
 	}
 
 
@@ -177,10 +183,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the database connection manager object.
 	 *
 	 * @param \Aimeos\MW\DB\Manager\Iface $manager Database manager object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $manager )
 	{
 		$this->dbm = $manager;
+
+		return $this;
 	}
 
 
@@ -203,11 +212,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the file system manager object.
 	 *
 	 * @param \Aimeos\MW\Filesystem\Manager\Iface $manager File system object
-	 * @return void
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $manager )
 	{
 		$this->fsm = $manager;
+
+		return $this;
 	}
 
 
@@ -223,6 +234,21 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->fsm;
+	}
+
+
+	/**
+	 * Sets the translation/internationalization objects.
+	 *
+	 * @param array $translations Associative list of internationalization objects implementing
+	 * 	\Aimeos\MW\Translation\Iface with locale as key
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setI18n( array $translations )
+	{
+		$this->i18n = $translations;
+
+		return $this;
 	}
 
 
@@ -256,25 +282,16 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
-	 * Sets the translation/internationalization objects.
-	 *
-	 * @param array $translations Associative list of internationalization objects implementing
-	 * 	\Aimeos\MW\Translation\Iface with locale as key
-	 */
-	public function setI18n( array $translations )
-	{
-		$this->i18n = $translations;
-	}
-
-
-	/**
 	 * Sets the localization object.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Localization object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setLocale( \Aimeos\MShop\Locale\Item\Iface $locale )
 	{
 		$this->locale = $locale;
+
+		return $this;
 	}
 
 
@@ -297,10 +314,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the logger object.
 	 *
 	 * @param \Aimeos\MW\Logger\Iface $logger Logger object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setLogger( \Aimeos\MW\Logger\Iface $logger )
 	{
 		$this->logger = $logger;
+
+		return $this;
 	}
 
 
@@ -323,10 +343,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the session object.
 	 *
 	 * @param \Aimeos\MW\Session\Iface $session Session object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setSession( \Aimeos\MW\Session\Iface $session )
 	{
 		$this->session = $session;
+
+		return $this;
 	}
 
 
@@ -349,10 +372,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the mail object.
 	 *
 	 * @param \Aimeos\MW\Mail\Iface $mail Mail object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setMail( \Aimeos\MW\Mail\Iface $mail )
 	{
 		$this->mail = $mail;
+
+		return $this;
 	}
 
 
@@ -375,10 +401,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the view object.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setView( \Aimeos\MW\View\Iface $view )
 	{
 		$this->view = $view;
+
+		return $this;
 	}
 
 
@@ -401,10 +430,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the account name of the user/editor.
 	 *
 	 * @param string $name Account name of the user/editor
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setEditor( $name )
 	{
 		$this->editor = (string) $name;
+
+		return $this;
 	}
 
 
@@ -423,10 +455,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the user ID of the logged in user.
 	 *
 	 * @param closure|string|null $user User ID of the logged in user or closure to retrieve them
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setUserId( $user )
 	{
 		$this->user = $user;
+
+		return $this;
 	}
 
 
@@ -451,10 +486,13 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 * Sets the group IDs of the logged in user.
 	 *
 	 * @param closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setGroupIds( $groupIds )
 	{
 		$this->groups = $groupIds;
+
+		return $this;
 	}
 
 

@@ -59,11 +59,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->object->setId( 15 );
+		$return = $this->object->setId( 15 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
 		$this->assertEquals( 15, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
@@ -83,7 +87,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetParentId()
 	{
-		$this->object->setParentId( 12 );
+		$return = $this->object->setParentId( 12 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
 		$this->assertEquals( 12, $this->object->getParentId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -95,7 +101,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetType()
 	{
-		$this->object->setType( 'unittest' );
+		$return = $this->object->setType( 'unittest' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
 		$this->assertEquals( 'unittest', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -107,7 +115,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetValue()
 	{
-		$this->object->setValue( 'was changed by unittest' );
+		$return = $this->object->setValue( 'was changed by unittest' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
 		$this->assertEquals( 'was changed by unittest', $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -169,8 +179,5 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getTimeModified(), $list['order.status.mtime'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['order.status.ctime'] );
 		$this->assertEquals( $this->object->getEditor(), $list['order.status.editor'] );
-
 	}
-
-
 }

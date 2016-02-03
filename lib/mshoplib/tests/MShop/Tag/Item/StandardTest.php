@@ -60,10 +60,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setId( null );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
 		$this->assertNull( $this->object->getId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
@@ -78,10 +79,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLanguageId()
 	{
-		$this->object->setLanguageId( 'fr' );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setLanguageId( 'fr' );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
 		$this->assertEquals( 'fr', $this->object->getLanguageId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetTypeId()
@@ -91,10 +93,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->object->setTypeId( 33 );
-		$this->assertTrue( $this->object->isModified() );
+		$return = $this->object->setTypeId( 33 );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
 		$this->assertEquals( 33, $this->object->getTypeId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetType()
@@ -109,7 +112,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'bitter' );
+		$return = $this->object->setLabel( 'bitter' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
 		$this->assertTrue( $this->object->isModified() );
 
 		$this->assertEquals( 'bitter', $this->object->getLabel() );

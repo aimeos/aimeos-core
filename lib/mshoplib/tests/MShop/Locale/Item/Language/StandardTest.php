@@ -53,12 +53,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( 'de' );
+		$return = $this->object->setId( 'de' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Language\Iface', $return );
 		$this->assertEquals( 'de', $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$var = null;
-		$this->object->setId( $var );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Language\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -99,9 +102,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'OtherName' );
+		$return = $this->object->setLabel( 'OtherName' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Language\Iface', $return );
 		$this->assertEquals( 'OtherName', $this->object->getLabel() );
-		// test modifier
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -120,9 +124,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Language\Iface', $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
-		// test modifier
 		$this->assertTrue( $this->object->isModified() );
 	}
 

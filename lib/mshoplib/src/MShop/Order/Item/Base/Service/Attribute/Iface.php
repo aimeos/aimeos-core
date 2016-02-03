@@ -32,7 +32,7 @@ interface Iface
 	 * Sets the original attribute ID of the ordered service attribute.
 	 *
 	 * @param string $id Attribute ID of the ordered service attribute
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setAttributeId( $id );
 
@@ -47,7 +47,7 @@ interface Iface
 	 * Sets the type for the service attribute item.
 	 *
 	 * @param string $type Type as defined by the service provider
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setType( $type );
 
@@ -62,7 +62,7 @@ interface Iface
 	 * Sets a new name for the service attribute item.
 	 *
 	 * @param string $name Name as defined by the service provider
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setName( $name );
 
@@ -77,7 +77,7 @@ interface Iface
 	 * Sets a new code for the service attribute item.
 	 *
 	 * @param string $code Code as defined by the service provider
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -92,7 +92,7 @@ interface Iface
 	 * Sets a new value for the service attribute item.
 	 *
 	 * @param string|array $value Service attribute item value
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setValue( $value );
 
@@ -100,7 +100,7 @@ interface Iface
 	 * Copys all data from a given attribute item.
 	 *
 	 * @param \Aimeos\MShop\Attribute\Item\Iface $item Attribute item to copy from
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item );
 }

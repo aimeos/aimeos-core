@@ -31,7 +31,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the label of the coupon item.
 	 *
 	 * @param string $name Name/label of the coupon item.
-	 * @return void
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setLabel( $name );
 
@@ -46,7 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new provider of the coupon item which is the short name of the provider class name.
 	 *
 	 * @param string $provider Coupon provider, esp. short provider class name
-	 * @return void
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setProvider( $provider );
 
@@ -61,7 +61,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new configuration for the coupon item.
 	 *
 	 * @param array $config Custom configuration values
-	 * @return void
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setConfig( array $config );
 
@@ -76,7 +76,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * Sets the new status of the coupon item.
 	 *
 	 * @param integer $status Status of the item
-	 * @return void
+	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setStatus( $status );
 

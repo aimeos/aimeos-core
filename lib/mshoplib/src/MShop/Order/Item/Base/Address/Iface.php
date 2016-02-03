@@ -31,7 +31,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
 	 * Sets the order base ID the address belongs to.
 	 *
 	 * @param integer|null $value New base ID
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function setBaseId( $value );
 
@@ -46,7 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
 	 * Sets the new type of the address which can be billing or delivery.
 	 *
 	 * @param string $type New type of the address
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function setType( $type );
 
@@ -54,8 +54,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
 	 * Copys all data from a given address.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address New address
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function copyFrom( \Aimeos\MShop\Common\Item\Address\Iface $address );
-
 }

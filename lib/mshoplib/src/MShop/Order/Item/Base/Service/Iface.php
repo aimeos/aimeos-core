@@ -31,6 +31,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the order service base ID of the order service item.
 	 *
 	 * @param integer|null Order service base ID
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setBaseId( $id );
 
@@ -45,6 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new ID of the service item used for the order.
 	 *
 	 * @param string $servid ID of the service item used for the order
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setServiceId( $servid );
 
@@ -59,6 +61,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new code for the service item.
 	 *
 	 * @param string $code Code as defined by the service provider
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setCode( $code );
 
@@ -73,6 +76,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new name for the service item.
 	 *
 	 * @param string $name Service item name
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setName( $name );
 
@@ -86,7 +90,8 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets a new type for the service item.
 	 *
-	 * @param string $type type of the service item.
+	 * @param string $type type of the service item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setType( $type );
 
@@ -101,6 +106,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets a new price object for the service item.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price );
 
@@ -126,6 +132,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Adds or replaces the attribute item in the list of service attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item Service attribute item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item );
 
@@ -141,6 +148,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new list of attribute items for the service.
 	 *
 	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setAttributes( array $attributes );
 
@@ -148,6 +156,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Copys all data from a given service item.
 	 *
 	 * @param \Aimeos\MShop\Service\Item\Iface $service New service item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service );
 
@@ -155,6 +164,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the media url of the service item.
 	 *
 	 * @param string $value Location of the media/picture
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setMediaUrl( $value );
 
@@ -164,5 +174,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return string Location of the media
 	 */
 	public function getMediaUrl();
-
 }

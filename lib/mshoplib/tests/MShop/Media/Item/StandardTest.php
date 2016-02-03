@@ -57,9 +57,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetId()
 	{
-		$this->object->setId( null );
+		$return = $this->object->setId( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -71,9 +73,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetDomain()
 	{
-		$this->object->setDomain( null );
+		$return = $this->object->setDomain( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( null, $this->object->getDomain() );
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -91,9 +95,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetTypeId()
 	{
-		$this->object->setTypeId( 3 );
+		$return = $this->object->setTypeId( 3 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( 3, $this->object->getTypeId() );
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -105,9 +111,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLabel()
 	{
-		$this->object->setLabel( 'newPicture' );
+		$return = $this->object->setLabel( 'newPicture' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( 'newPicture', $this->object->getLabel() );
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -119,7 +127,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetLanguageId()
 	{
-		$this->object->setLanguageId( 'en' );
+		$return = $this->object->setLanguageId( 'en' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( 'en', $this->object->getLanguageId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -140,9 +150,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetMimeType()
 	{
-		$this->object->setMimeType( 'image/png' );
+		$return = $this->object->setMimeType( 'image/png' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( 'image/png', $this->object->getMimeType() );
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -168,9 +180,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetUrl()
 	{
-		$this->object->setUrl( '/pictures/category.jpg' );
+		$return = $this->object->setUrl( '/pictures/category.jpg' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( '/pictures/category.jpg', $this->object->getUrl() );
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -182,9 +196,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetPreview()
 	{
-		$this->object->setPreview( '/pictures/category.jpg' );
+		$return = $this->object->setPreview( '/pictures/category.jpg' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( '/pictures/category.jpg', $this->object->getPreview() );
-		$this->assertEquals( true, $this->object->isModified() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 
@@ -196,7 +212,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetStatus()
 	{
-		$this->object->setStatus( 0 );
+		$return = $this->object->setStatus( 0 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

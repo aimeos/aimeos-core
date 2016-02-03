@@ -62,6 +62,7 @@ class Standard
 	 * Sets the ID of the currency.
 	 *
 	 * @param string $key ID of the currency
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
 	 */
 	public function setId( $key )
 	{
@@ -76,6 +77,8 @@ class Standard
 			$this->values['locale.currency.id'] = null;
 			$this->modified = true;
 		}
+
+		return $this;
 	}
 
 
@@ -98,10 +101,11 @@ class Standard
 	 * Sets the code of the currency.
 	 *
 	 * @param string $key Code of the currency
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
 	 */
 	public function setCode( $key )
 	{
-		if( $key == $this->getCode() ) { return; }
+		if( $key == $this->getCode() ) { return $this; }
 
 		if( strlen( $key ) != 3 || ctype_alpha( $key ) === false ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $key ) );
@@ -109,6 +113,8 @@ class Standard
 
 		$this->values['locale.currency.code'] = strtoupper( $key );
 		$this->modified = true;
+
+		return $this;
 	}
 
 
@@ -131,13 +137,16 @@ class Standard
 	 * Sets the label or symbol of the currency.
 	 *
 	 * @param string $label Label or symbol of the currency
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( $label == $this->getLabel() ) { return $this; }
 
 		$this->values['locale.currency.label'] = (string) $label;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -160,13 +169,16 @@ class Standard
 	 * Sets the status of the item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( $status == $this->getStatus() ) { return $this; }
 
 		$this->values['locale.currency.status'] = (int) $status;
 		$this->setModified();
+
+		return $this;
 	}
 
 
