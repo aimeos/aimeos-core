@@ -33,13 +33,13 @@ abstract class Base
 
 		foreach( $basket->getProducts() as $product )
 		{
-			$price = clone $product->getPrice();
+			$price = $product->getSumPrice();
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate]->addItem( $price, $price->getQuantity() );
+				$taxrates[$taxrate]->addItem( $price );
 			} else {
-				$taxrates[$taxrate] = $price;
+				$taxrates[$taxrate] = $price->setQuantity( 1 ); // sum is already calculated
 			}
 		}
 
@@ -51,7 +51,7 @@ abstract class Base
 			if( isset( $taxrates[$taxrate] ) ) {
 				$taxrates[$taxrate]->addItem( $price, $price->getQuantity() );
 			} else {
-				$taxrates[$taxrate] = $price;
+				$taxrates[$taxrate] = $price->setQuantity( 1 ); // only single price
 			}
 		}
 		catch( \Exception $e ) { ; } // if delivery service isn't available
@@ -64,7 +64,7 @@ abstract class Base
 			if( isset( $taxrates[$taxrate] ) ) {
 				$taxrates[$taxrate]->addItem( $price, $price->getQuantity() );
 			} else {
-				$taxrates[$taxrate] = $price;
+				$taxrates[$taxrate] = $price->setQuantity( 1 ); // only single price
 			}
 		}
 		catch( \Exception $e ) { ; } // if payment service isn't available
