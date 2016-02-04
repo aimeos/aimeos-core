@@ -329,23 +329,25 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getServiceId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 4, $item->getType(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 5, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 6, $item->getName(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 7, $item->getMediaUrl(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 8, $price->getValue(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 9, $price->getCosts(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 10, $price->getRebate(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 11, $price->getTaxRate(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 12, $date); // mtime
-			$stmt->bind( 13, $context->getEditor() );
+			$stmt->bind( 3, $item->getServiceId() );
+			$stmt->bind( 4, $item->getType() );
+			$stmt->bind( 5, $item->getCode() );
+			$stmt->bind( 6, $item->getName() );
+			$stmt->bind( 7, $item->getMediaUrl() );
+			$stmt->bind( 8, $price->getValue() );
+			$stmt->bind( 9, $price->getCosts() );
+			$stmt->bind( 10, $price->getRebate() );
+			$stmt->bind( 11, $price->getTaxValue() );
+			$stmt->bind( 12, $price->getTaxRate() );
+			$stmt->bind( 13, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 14, $date); // mtime
+			$stmt->bind( 15, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 14, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 16, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 14, $date ); // ctime
+				$stmt->bind( 16, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

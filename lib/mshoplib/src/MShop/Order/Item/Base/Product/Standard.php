@@ -449,13 +449,7 @@ class Standard
 	public function getSumPrice()
 	{
 		$price = clone $this->price;
-		$qty = $this->getQuantity();
-
-		$price->setValue( $price->getValue() * $qty );
-		$price->setCosts( $price->getCosts() * $qty );
-		$price->setRebate( $price->getRebate() * $qty );
-
-		return $price;
+		return $price->addItem( $price, $this->getQuantity() - 1 );
 	}
 
 

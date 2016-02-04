@@ -87,6 +87,20 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.taxvalue'=> array(
+			'code'=>'order.base.taxvalue',
+			'internalcode'=>'mordba."tax"',
+			'label'=>'Order base tax amount',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.base.taxflag'=> array(
+			'code'=>'order.base.taxflag',
+			'internalcode'=>'mordba."taxflag"',
+			'label'=>'Order base tax flag (0=net price, 1=gross price)',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'order.base.comment'=> array(
 			'code'=>'order.base.comment',
 			'internalcode'=>'mordba."comment"',
@@ -553,16 +567,18 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 			$stmt->bind( 6, $priceItem->getValue() );
 			$stmt->bind( 7, $priceItem->getCosts() );
 			$stmt->bind( 8, $priceItem->getRebate() );
-			$stmt->bind( 9, $item->getComment() );
-			$stmt->bind( 10, $item->getStatus() );
-			$stmt->bind( 11, $date ); // mtime
-			$stmt->bind( 12, $context->getEditor() );
+			$stmt->bind( 9, $priceItem->getTaxValue() );
+			$stmt->bind( 10, $priceItem->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 11, $item->getComment() );
+			$stmt->bind( 12, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 13, $date ); // mtime
+			$stmt->bind( 14, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 13, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 15, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 13, $date ); // ctime
+				$stmt->bind( 15, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -750,6 +766,8 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 				$price->setValue( $row['order.base.price'] );
 				$price->setCosts( $row['order.base.costs'] );
 				$price->setRebate( $row['order.base.rebate'] );
+				$price->setTaxValue( $row['order.base.taxvalue'] );
+				$price->setTaxFlag( $row['order.base.taxflag'] );
 
 				// you may need the site object! take care!
 				$localeItem = $localeManager->createItem();
@@ -927,6 +945,8 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 		$price->setValue( $row['order.base.price'] );
 		$price->setCosts( $row['order.base.costs'] );
 		$price->setRebate( $row['order.base.rebate'] );
+		$price->setTaxValue( $row['order.base.taxvalue'] );
+		$price->setTaxFlag( $row['order.base.taxflag'] );
 
 		// you may need the site object! take care!
 		$localeItem = $localeManager->createItem();

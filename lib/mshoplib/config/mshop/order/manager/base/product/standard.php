@@ -32,11 +32,11 @@ return array(
 		'ansi' => '
 			INSERT INTO "mshop_order_base_product" (
 				"baseid", "siteid", "ordprodid", "type", "prodid", "prodcode",
-				"suppliercode", "warehousecode", "name", "mediaurl",
-				"quantity", "price", "costs", "rebate", "taxrate", "flags",
+				"suppliercode", "warehousecode", "name", "mediaurl", "quantity",
+				"price", "costs", "rebate", "tax", "taxrate", "taxflag", "flags",
 				"status", "pos", "mtime", "editor", "ctime"
 			) VALUES (
-				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 			)
 		'
 	),
@@ -47,8 +47,8 @@ return array(
 				"prodid" = ?, "prodcode" = ?, "suppliercode" = ?,
 				"warehousecode" = ?, "name" = ?, "mediaurl" = ?,
 				"quantity" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
-				"taxrate" = ?, "flags" = ?, "status" = ?, "pos" = ?,
-				"mtime" = ?, "editor" = ?
+				"tax" = ?, "taxrate" = ?, "taxflag" = ?, "flags" = ?,
+				"status" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
 	),
@@ -61,7 +61,8 @@ return array(
 				mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
 				mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."quantity" AS "order.base.product.quantity",
 				mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
-				mordbapr."rebate" AS "order.base.product.rebate", mordbapr."taxrate" AS "order.base.product.taxrate",
+				mordbapr."rebate" AS "order.base.product.rebate", mordbapr."tax" AS "order.base.product.taxvalue",
+				mordbapr."taxrate" AS "order.base.product.taxrate", mordbapr."taxflag" AS "order.base.product.taxflag",
 				mordbapr."flags" AS "order.base.product.flags", mordbapr."status" AS "order.base.product.status",
 				mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
 				mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime"
@@ -71,8 +72,8 @@ return array(
 			GROUP BY mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid",
 				mordbapr."prodid", mordbapr."prodcode", mordbapr."suppliercode", mordbapr."warehousecode",
 				mordbapr."type", mordbapr."name", mordbapr."mediaurl", mordbapr."quantity",
-				mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."taxrate",
-				mordbapr."flags", mordbapr."status", mordbapr."pos", mordbapr."mtime",
+				mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax", mordbapr."taxrate",
+				mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos", mordbapr."mtime",
 				mordbapr."editor", mordbapr."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start

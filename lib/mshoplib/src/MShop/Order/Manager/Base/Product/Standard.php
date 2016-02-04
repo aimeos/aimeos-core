@@ -423,18 +423,20 @@ class Standard
 			$stmt->bind( 12, $price->getValue() );
 			$stmt->bind( 13, $price->getCosts() );
 			$stmt->bind( 14, $price->getRebate() );
-			$stmt->bind( 15, $price->getTaxRate() );
-			$stmt->bind( 16, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 17, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 18, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 19, $date ); // mtime
-			$stmt->bind( 20, $context->getEditor() );
+			$stmt->bind( 15, $price->getTaxValue() );
+			$stmt->bind( 16, $price->getTaxRate() );
+			$stmt->bind( 17, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 18, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 19, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 20, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 21, $date ); // mtime
+			$stmt->bind( 22, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 21, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 23, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 21, $date ); // ctime
+				$stmt->bind( 23, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

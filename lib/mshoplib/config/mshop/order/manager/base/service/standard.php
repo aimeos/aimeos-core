@@ -32,10 +32,10 @@ return array(
 		'ansi' => '
 			INSERT INTO "mshop_order_base_service" (
 				"baseid", "siteid", "servid", "type", "code", "name",
-				"mediaurl", "price", "costs", "rebate", "taxrate", "mtime",
-				"editor", "ctime"
+				"mediaurl", "price", "costs", "rebate", "tax", "taxrate",
+				"taxflag", "mtime", "editor", "ctime"
 			) VALUES (
-				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 			)
 		'
 	),
@@ -44,8 +44,8 @@ return array(
 			UPDATE "mshop_order_base_service"
 			SET "baseid" = ?, "siteid" = ?, "servid" = ?, "type" = ?,
 				"code" = ?, "name" = ?, "mediaurl" = ?, "price" = ?,
-				"costs" = ?, "rebate" = ?, "taxrate" = ?, "mtime" = ?,
-				"editor" = ?
+				"costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
+				"taxflag" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
 	),
@@ -56,7 +56,8 @@ return array(
 				mordbase."type" AS "order.base.service.type", mordbase."code" AS "order.base.service.code",
 				mordbase."name" AS "order.base.service.name", mordbase."mediaurl" AS "order.base.service.mediaurl",
 				mordbase."price" AS "order.base.service.price", mordbase."costs" AS "order.base.service.costs",
-				mordbase."rebate" AS "order.base.service.rebate", mordbase."taxrate" AS "order.base.service.taxrate",
+				mordbase."rebate" AS "order.base.service.rebate", mordbase."tax" AS "order.base.service.taxvalue",
+				mordbase."taxrate" AS "order.base.service.taxrate", mordbase."taxflag" AS "order.base.service.taxflag",
 				mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
 				mordbase."ctime" AS "order.base.service.ctime"
 			FROM "mshop_order_base_service" AS mordbase
@@ -64,8 +65,9 @@ return array(
 			WHERE :cond
 			GROUP BY mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid",
 				mordbase."type", mordbase."code", mordbase."name", mordbase."mediaurl",
-				mordbase."price", mordbase."costs", mordbase."rebate", mordbase."taxrate",
-				mordbase."mtime", mordbase."editor", mordbase."ctime" /*-orderby*/, :order /*orderby-*/
+				mordbase."price", mordbase."costs", mordbase."rebate", mordbase."tax",
+				mordbase."taxrate", mordbase."taxflag", mordbase."mtime", mordbase."editor",
+				mordbase."ctime" /*-orderby*/, :order /*orderby-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
