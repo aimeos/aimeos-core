@@ -666,7 +666,9 @@ class Standard
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
 	{
-		$values['price.taxflag'] = $this->taxflag;
+		if( !isset( $values['price.taxflag'] ) ) {
+			$values['price.taxflag'] = $this->taxflag;
+		}
 
 		return new \Aimeos\MShop\Price\Item\Standard( $values, $listItems, $refItems );
 	}

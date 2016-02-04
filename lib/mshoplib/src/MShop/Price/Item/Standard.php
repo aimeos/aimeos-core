@@ -388,16 +388,36 @@ class Standard
 	 */
 	public function getTaxValue()
 	{
-		$qty = $this->getQuantity();
-		$taxrate = $this->getTaxRate();
+		if( !isset( $this->values['price.tax'] ) )
+		{
+			$taxrate = $this->getTaxRate();
 
-		if( $this->getTaxFlag() !== false ) {
-			$tax = ( $this->getValue() + $this->getCosts() ) * $qty / ( 100 + $taxrate ) * $taxrate;
-		} else {
-			$tax = ( $this->getValue() + $this->getCosts() ) * $qty * $taxrate / 100;
+			if( $this->getTaxFlag() !== false ) {
+				$tax = ( $this->getValue() + $this->getCosts() ) / ( 100 + $taxrate ) * $taxrate;
+			} else {
+				$tax = ( $this->getValue() + $this->getCosts() ) * $taxrate / 100;
+			}
+
+			$this->values['price.tax'] = $this->formatNumber( $tax, 4 );
 		}
 
-		return $this->formatNumber( $tax, 4 );
+		return (string) $this->values['price.tax'];
+	}
+
+
+	/**
+	 * Sets the tax amount
+	 *
+	 * @param integer|double $value Tax value with up to four digits precision
+	 */
+	public function setTaxValue( $value )
+	{
+		if( $value == $this->getTaxValue() ) { return $this; }
+
+		$this->values['price.tax'] = $this->checkPrice( $value );
+		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -462,6 +482,8 @@ class Standard
 		$this->values['price.value'] = $this->formatNumber( $this->getValue() + $item->getValue() * $quantity );
 		$this->values['price.costs'] = $this->formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
 		$this->values['price.rebate'] = $this->formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
+		$this->values['price.tax'] = $this->formatNumber( $this->getTaxValue() + $item->getTaxValue() * $quantity, 4 );
+		$this->values['price.quantity'] = 1;
 
 		return $this;
 	}
@@ -474,7 +496,8 @@ class Standard
 	 * * Value
 	 * * Costs
 	 * * Rebate
-	 * * Taxrate
+	 * * Tax rate
+	 * * Tax flag
 	 * * Quantity
 	 * * Currency ID
 	 *
@@ -489,7 +512,8 @@ class Standard
 		if( $this->getValue() === $price->getValue()
 			&& $this->getCosts() === $price->getCosts()
 			&& $this->getRebate() === $price->getRebate()
-			&& $this->getTaxrate() === $price->getTaxrate()
+			&& $this->getTaxRate() === $price->getTaxRate()
+			&& $this->getTaxFlag() === $price->getTaxFlag()
 			&& $this->getQuantity() === $price->getQuantity()
 			&& $this->getCurrencyId() === $price->getCurrencyId()
 		) {
@@ -522,6 +546,7 @@ class Standard
 				case 'price.value': $this->setValue( $value ); break;
 				case 'price.costs': $this->setCosts( $value ); break;
 				case 'price.rebate': $this->setRebate( $value ); break;
+				case 'price.taxvalue': $this->setTaxValue( $value ); break;
 				case 'price.taxrate': $this->setTaxRate( $value ); break;
 				case 'price.taxflag': $this->setTaxFlag( $value ); break;
 				case 'price.status': $this->setStatus( $value ); break;
@@ -551,6 +576,7 @@ class Standard
 		$list['price.value'] = $this->getValue();
 		$list['price.costs'] = $this->getCosts();
 		$list['price.rebate'] = $this->getRebate();
+		$list['price.taxvalue'] = $this->getTaxValue();
 		$list['price.taxrate'] = $this->getTaxRate();
 		$list['price.taxflag'] = $this->getTaxFlag();
 		$list['price.status'] = $this->getStatus();

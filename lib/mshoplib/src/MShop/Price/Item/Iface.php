@@ -159,14 +159,21 @@ interface Iface
 	/**
 	 * Returns the tax for the price item
 	 *
-	 * The tax is calculated according to the value, the costs per item, the
-	 * tax rate and the configuration if tax is included into the price values
-	 * or not
+	 * If the tax isn't set, it's calculated according to the value, the
+	 * costs per item, the tax rate and the tax flag.
 	 *
 	 * @return string Tax value with four digits precision
 	 * @see mshop/price/taxflag
 	 */
 	public function getTaxValue();
+
+	/**
+	 * Sets the tax amount
+	 *
+	 * @param integer|double $value Tax value with up to four digits precision
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
+	 */
+	public function setTaxValue( $value );
 
 	/**
 	 * Returns the currency ID.
