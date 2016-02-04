@@ -39,7 +39,7 @@ abstract class Base
 			if( isset( $taxrates[$taxrate] ) ) {
 				$taxrates[$taxrate]->addItem( $price );
 			} else {
-				$taxrates[$taxrate] = $price->setQuantity( 1 ); // sum is already calculated
+				$taxrates[$taxrate] = $price->addItem( $price, $product->getQuantity() - 1 );
 			}
 		}
 
@@ -51,7 +51,7 @@ abstract class Base
 			if( isset( $taxrates[$taxrate] ) ) {
 				$taxrates[$taxrate]->addItem( $price, $price->getQuantity() );
 			} else {
-				$taxrates[$taxrate] = $price->setQuantity( 1 ); // only single price
+				$taxrates[$taxrate] = $price->addItem( $price, $product->getQuantity() - 1 );
 			}
 		}
 		catch( \Exception $e ) { ; } // if delivery service isn't available
@@ -64,7 +64,7 @@ abstract class Base
 			if( isset( $taxrates[$taxrate] ) ) {
 				$taxrates[$taxrate]->addItem( $price, $price->getQuantity() );
 			} else {
-				$taxrates[$taxrate] = $price->setQuantity( 1 ); // only single price
+				$taxrates[$taxrate] = $price->addItem( $price, $product->getQuantity() - 1 );
 			}
 		}
 		catch( \Exception $e ) { ; } // if payment service isn't available
