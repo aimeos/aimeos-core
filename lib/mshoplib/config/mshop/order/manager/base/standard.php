@@ -55,7 +55,7 @@ return array(
 				mordba."langid" AS "order.base.languageid", mordba."currencyid" AS "order.base.currencyid",
 				mordba."price" AS "order.base.price", mordba."costs" AS "order.base.costs",
 				mordba."rebate" AS "order.base.rebate", mordba."tax" AS "order.base.taxvalue",
-				mordba."rebate" AS "order.base.taxflag", mordba."comment" AS "order.base.comment",
+				mordba."taxflag" AS "order.base.taxflag", mordba."comment" AS "order.base.comment",
 				mordba."status" AS "order.base.status", mordba."mtime" AS "order.base.mtime",
 				mordba."editor" AS "order.base.editor", mordba."ctime" AS "order.base.ctime"
 			FROM "mshop_order_base" AS mordba
