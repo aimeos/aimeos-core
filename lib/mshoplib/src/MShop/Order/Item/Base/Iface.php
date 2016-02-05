@@ -222,4 +222,16 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
 	public function setStatus( $value );
+
+	/**
+	 * Tests if the order object was modified.
+	 *
+	 * @return bool True if modified, false if not
+	 */
+	public function isModified();
+
+	/**
+	 * Sets the modified flag of the object.
+	 */
+	public function setModified();
 }
