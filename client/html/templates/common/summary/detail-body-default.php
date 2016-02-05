@@ -44,13 +44,17 @@ if( isset( $this->summaryBasket ) )
 	$priceValue = $price->getValue();
 	$priceService = $price->getCosts();
 	$priceRebate = $price->getRebate();
+	$priceTaxflag = $price->getTaxFlag();
+	$priceTaxvalue = $price->getTaxValue();
 	$priceCurrency = $this->translate( 'client/currency', $price->getCurrencyId() );
 }
 else
 {
 	$priceValue = '0.00';
-	$priceService = '0.00';
 	$priceRebate = '0.00';
+	$priceService = '0.00';
+	$priceTaxvalue = '0.00';
+	$priceTaxflag = true;
 	$priceCurrency = '';
 }
 
@@ -115,6 +119,7 @@ $backParams = $this->get( 'summaryParams', array() );
 			</thead>
 			<tbody>
 <?php if( isset( $this->summaryBasket ) ) : ?>
+
 <?php 	foreach( $this->summaryBasket->getProducts() as $position => $product ) : $totalQuantity += $product->getQuantity(); ?>
 				<tr class="product <?php echo ( isset( $errors['product'][$position] ) ? 'error' : '' ); ?>">
 					<td class="details">
@@ -200,6 +205,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php		endif; ?>
 				</tr>
 <?php 	endforeach; ?>
+
 <?php	if( $deliveryPriceValue > 0 ) : ?>
 				<tr class="delivery">
 					<td class="details">
@@ -219,6 +225,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php		endif; ?>
 				</tr>
 <?php	endif; ?>
+
 <?php	if( $paymentPriceValue > 0 ) : ?>
 				<tr class="payment">
 					<td class="details">
@@ -238,6 +245,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php		endif; ?>
 				</tr>
 <?php	endif; ?>
+
 <?php endif; ?>
 			</tbody>
 			<tfoot>
@@ -248,6 +256,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="action"></td>
 <?php endif; ?>
 				</tr>
+
 				<tr class="delivery">
 					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Shipping' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ) ); ?></td>
@@ -255,6 +264,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="action"></td>
 <?php endif; ?>
 				</tr>
+
 <?php if( $paymentPriceService > 0 ) : ?>
 				<tr class="payment">
 					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Payment costs' ) ); ?></td>
@@ -264,13 +274,17 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php endif; ?>
 				</tr>
 <?php endif; ?>
+
+<?php if( $priceTaxflag === true ) : ?>
 				<tr class="total">
 					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Total' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceValue + $priceService ), $priceCurrency ) ); ?></td>
-<?php if( $modify ) : ?>
+<?php	if( $modify ) : ?>
 					<td class="action"></td>
-<?php endif; ?>
+<?php	endif; ?>
 				</tr>
+<?php endif; ?>
+
 <?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $priceItem ) : $taxValue = $priceItem->getTaxValue(); ?>
 <?php	if( $taxRate > '0.00' && $taxValue > '0.00' ) : ?>
 				<tr class="tax">
@@ -286,6 +300,17 @@ $backParams = $this->get( 'summaryParams', array() );
 				</tr>
 <?php	endif; ?>
 <?php endforeach; ?>
+
+<?php if( $priceTaxflag === false ) : ?>
+				<tr class="total">
+					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Total' ) ); ?></td>
+					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceValue + $priceService + $priceTaxvalue ), $priceCurrency ) ); ?></td>
+<?php	if( $modify ) : ?>
+					<td class="action"></td>
+<?php	endif; ?>
+				</tr>
+<?php endif; ?>
+
 <?php if( $priceRebate > '0.00' ) : ?>
 				<tr class="rebate">
 					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Included rebates' ) ); ?></td>
@@ -295,6 +320,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php	endif; ?>
 				</tr>
 <?php endif; ?>
+
 				<tr class="quantity">
 					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Total quantity' ) ); ?></td>
 					<td class="value"><?php echo $enc->html( sprintf( $this->translate( 'client', '%1$d article', '%1$d articles', $totalQuantity ), $totalQuantity ) ); ?></td>
