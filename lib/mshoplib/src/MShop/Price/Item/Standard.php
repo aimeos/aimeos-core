@@ -414,7 +414,7 @@ class Standard
 	{
 		if( $value == $this->getTaxValue() ) { return $this; }
 
-		$this->values['price.tax'] = $this->checkPrice( $value );
+		$this->values['price.tax'] = $this->checkPrice( $value, 4 );
 		$this->setModified();
 
 		return $this;
@@ -590,15 +590,16 @@ class Standard
 	 * Tests if the price is within the requirements.
 	 *
 	 * @param integer|double $value Monetary value
+	 * @param integer $precision Number of decimal places
 	 * @return decimal Sanitized monetary value
 	 */
-	protected function checkPrice( $value )
+	protected function checkPrice( $value, $precision = 2 )
 	{
 		if( $value !== '' && !is_numeric( $value ) ) {
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
 		}
 
-		return $this->formatNumber( $value );
+		return $this->formatNumber( $value, $precision );
 	}
 
 
