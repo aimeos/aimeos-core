@@ -58,9 +58,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$this->addresses = $addresses;
 		$this->services = $services;
 		$this->coupons = $coupons;
-
 		$this->taxflag = $price->getTaxFlag();
-		$this->modified = false;
 	}
 
 
@@ -288,7 +286,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$this->notifyListeners( 'setCustomerId.before', $customerid );
 
 		$this->values['order.base.customerid'] = (string) $customerid;
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'setCustomerId.after', $customerid );
 
@@ -320,7 +318,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$this->notifyListeners( 'setLocale.before', $locale );
 
 		$this->locale = clone $locale;
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'setLocale.after', $locale );
 
@@ -409,7 +407,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		}
 
 		ksort( $this->products );
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'addProduct.after', $item );
 
@@ -432,7 +430,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$product = $this->products[$position];
 		unset( $this->products[$position] );
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'deleteProduct.after', $product );
 	}
@@ -485,7 +483,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$address->setId( null ); // enforce saving as new item
 
 		$this->addresses[$domain] = $address;
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'setAddress.after', $address );
 
@@ -508,7 +506,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$address = $this->addresses[$type];
 		unset( $this->addresses[$type] );
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'deleteAddress.after', $address );
 	}
@@ -560,7 +558,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$service->setId( null ); // enforce saving as new item
 
 		$this->services[$type] = $service;
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'setService.after', $service );
 
@@ -581,7 +579,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$service = $this->services[$type];
 		unset( $this->services[$type] );
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'deleteService.after', $service );
 	}
@@ -625,7 +623,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			$this->products[] = $product;
 		}
 
-		$this->modified = true;
+		$this->setModified();
 
 		$this->notifyListeners( 'addCoupon.after', $code );
 	}
@@ -662,7 +660,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 				$this->coupons[$code] = array();
 			}
 
-			$this->modified = true;
+			$this->setModified();
 
 			$this->notifyListeners( 'deleteCoupon.after', $code );
 		}
@@ -698,15 +696,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function getPrice()
 	{
-		if( $this->modified !== false )
+		if( $this->price->getValue() === '0.00' )
 		{
-			$this->price->setValue( '0.00' );
-			$this->price->setCosts( '0.00' );
-			$this->price->setRebate( '0.00' );
-			$this->price->setTaxRate( '0.00' );
-			$this->price->setTaxValue( '0.00' );
-			$this->price->setTaxFlag( $this->taxflag );
-
 			foreach( $this->getServices() as $service ) {
 				$this->price->addItem( $service->getPrice() );
 			}
@@ -737,6 +728,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	public function setModified()
 	{
 		$this->modified = true;
+
+		$this->price->setValue( '0.00' );
+		$this->price->setCosts( '0.00' );
+		$this->price->setRebate( '0.00' );
+		$this->price->setTaxRate( '0.00' );
+		$this->price->setTaxValue( '0.00' );
+		$this->price->setTaxFlag( $this->taxflag );
 	}
 
 
