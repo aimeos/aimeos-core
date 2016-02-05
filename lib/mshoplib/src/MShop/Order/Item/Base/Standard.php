@@ -698,6 +698,12 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	{
 		if( $this->price->getValue() === '0.00' )
 		{
+			$this->price->setCosts( '0.00' );
+			$this->price->setRebate( '0.00' );
+			$this->price->setTaxRate( '0.00' );
+			$this->price->setTaxValue( '0.00' );
+			$this->price->setTaxFlag( $this->taxflag );
+
 			foreach( $this->getServices() as $service ) {
 				$this->price->addItem( $service->getPrice() );
 			}
@@ -730,11 +736,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$this->modified = true;
 
 		$this->price->setValue( '0.00' );
-		$this->price->setCosts( '0.00' );
-		$this->price->setRebate( '0.00' );
-		$this->price->setTaxRate( '0.00' );
-		$this->price->setTaxValue( '0.00' );
-		$this->price->setTaxFlag( $this->taxflag );
 	}
 
 
