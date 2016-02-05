@@ -36,7 +36,7 @@ CREATE TABLE "mshop_order_base" (
 	-- amount of tax
 	"tax" DECIMAL(14,4) NOT NULL,
 	-- tax flag for net (0) or gross (1) prices
-	"taxflag" SHORTINT NOT NULL,
+	"taxflag" SMALLINT NOT NULL,
 	-- Comment string
 	"comment" TEXT NOT NULL DEFAULT '',
 	-- entry status (0=disabled, 1=enabled)
@@ -236,7 +236,7 @@ CREATE TABLE "mshop_order_base_product" (
 	-- tax rate in percent
 	"taxrate" DECIMAL(5,2) NOT NULL,
 	-- tax flag for net (0) or gross (1) prices
-	"taxflag" SHORTINT NOT NULL,
+	"taxflag" SMALLINT NOT NULL,
 	-- Set flags for this ordered product
 	"flags" INTEGER NOT NULL,
 	-- Position of ordered product
@@ -340,7 +340,7 @@ CREATE TABLE "mshop_order_base_service" (
 	-- tax rate in percent
 	"taxrate" DECIMAL(5,2) NOT NULL,
 	-- tax flag for net (0) or gross (1) prices
-	"taxflag" SHORTINT NOT NULL,
+	"taxflag" SMALLINT NOT NULL,
 	-- Date of last modification of this database entry
 	"mtime" DATETIME NOT NULL,
 	-- Date of creation of this database entry
