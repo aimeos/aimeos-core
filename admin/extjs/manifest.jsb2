@@ -3,17 +3,6 @@
 	"licenseText": "LGPLv3, http://www.gnu.org/licenses/lgpl.html",
 	"deployDir": ".",
 	"pkgs": [{
-		"name": "ExtJS CSS",
-		"file": "resources/css/ext-all.css",
-		"isDebug": true,
-		"fileIncludes": [{
-			"text": "ext-all.css",
-			"path": "lib/extjs/resources/css/"
-		}, {
-			"text": "xtheme-gray.css",
-			"path": "lib/extjs/resources/css/"
-		}]
-	}, {
 		"name": "Aimeos Admin Core CSS",
 		"file": "resources/css/aimeos-core.css",
 		"isDebug": true,
@@ -26,17 +15,6 @@
 		}, {
 			"text": "Portal.css",
 			"path": "lib/ext.ux/Portal/resources/css/"
-		}]
-	}, {
-		"name": "ExtJS Core",
-		"file": "extjs-all.js",
-		"isDebug": true,
-		"fileIncludes": [{
-			"text": "ext-base.js",
-			"path": "lib/extjs/adapter/ext/"
-		}, {
-			"text": "ext-all-debug.js",
-			"path": "lib/extjs/"
 		}]
 	}, {
 		"name": "Aimeos Core",
