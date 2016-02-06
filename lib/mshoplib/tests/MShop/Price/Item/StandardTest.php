@@ -376,7 +376,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'price.value' => '10.00',
 			'price.costs' => '5.00',
 			'price.rebate' => '2.00',
-			'price.taxvalue' => '9.00',
+			'price.taxvalue' => '3.00',
 			'price.taxrate' => '20.00',
 			'price.taxflag' => false,
 			'price.status' => 0,
