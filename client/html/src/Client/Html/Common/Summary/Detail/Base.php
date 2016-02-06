@@ -33,13 +33,13 @@ abstract class Base
 
 		foreach( $basket->getProducts() as $product )
 		{
-			$price = $product->getSumPrice();
+			$price = clone $product->getPrice();
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate]->addItem( $price );
+				$taxrates[$taxrate]->addItem( $price, $product->getQuantity() - 1 );
 			} else {
-				$taxrates[$taxrate] = $price;
+				$taxrates[$taxrate] = $price->addItem( $price, $product->getQuantity() - 1 );
 			}
 		}
 

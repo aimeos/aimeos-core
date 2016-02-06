@@ -445,6 +445,7 @@ class Standard
 	 * Returns the price item for the product whose values are multiplied with the quantity.
 	 *
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with price, additional costs and rebate
+	 * @deprecated Will be removed in 2017.01
 	 */
 	public function getSumPrice()
 	{

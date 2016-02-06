@@ -417,7 +417,7 @@ class Standard
 		if( $value == $this->getTaxValue() ) { return $this; }
 
 		$this->values['price.tax'] = $this->checkPrice( $value, 4 );
-		parent::setModified(); // don't unset tax immediately
+		parent::setModified(); // don't unset tax immediately again
 
 		return $this;
 	}
@@ -491,11 +491,15 @@ class Standard
 			throw new \Aimeos\MShop\Price\Exception( sprintf( $msg, $item->getCurrencyId(), $this->getCurrencyId() ) );
 		}
 
-		$this->values['price.value'] = $this->formatNumber( $this->getValue() + $item->getValue() * $quantity );
-		$this->values['price.costs'] = $this->formatNumber( $this->getCosts() + $item->getCosts() * $quantity );
-		$this->values['price.rebate'] = $this->formatNumber( $this->getRebate() + $item->getRebate() * $quantity );
-		$this->values['price.tax'] = $this->formatNumber( $this->getTaxValue() + $item->getTaxValue() * $quantity, 4 );
-		$this->values['price.quantity'] = 1;
+		if( $this === $item ) { $item = clone $item; }
+		$taxValue = $this->getTaxValue();
+
+		$this->setQuantity( 1 );
+		$this->setTaxFlag( $this->taxflag );
+		$this->setValue( $this->getValue() + $item->getValue() * $quantity );
+		$this->setCosts( $this->getCosts() + $item->getCosts() * $quantity );
+		$this->setRebate( $this->getRebate() + $item->getRebate() * $quantity );
+		$this->setTaxValue( $taxValue + $item->getTaxValue() * $quantity );
 
 		return $this;
 	}
@@ -508,12 +512,13 @@ class Standard
 	 */
 	public function clear()
 	{
-		$this->values['price.value'] = '0.00';
-		$this->values['price.costs'] = '0.00';
-		$this->values['price.rebate'] = '0.00';
-		$this->values['price.tax'] = '0.0000';
-		$this->values['price.taxflag'] = $this->taxflag;
-		$this->values['price.quantity'] = 1;
+		$this->setTaxFlag( $this->taxflag );
+		$this->setQuantity( 1 );
+		$this->setValue( '0.00' );
+		$this->setCosts( '0.00' );
+		$this->setRebate( '0.00' );
+		$this->setTaxRate( '0.00' );
+		$this->setTaxValue( '0.00' );
 	}
 
 

@@ -74,6 +74,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 1, $this->object->getQuantity() );
 	}
 
+	public function testAddItemSelf()
+	{
+		$return = $this->object->addItem( $this->object );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertEquals( '391.00', $this->object->getValue() );
+		$this->assertEquals( '39.90', $this->object->getCosts() );
+		$this->assertEquals( '20.00', $this->object->getRebate() );
+		$this->assertEquals( '68.7990', $this->object->getTaxValue() );
+		$this->assertEquals( 1, $this->object->getQuantity() );
+	}
+
 	public function testAddItemWrongCurrency()
 	{
 		$values = $this->values;
