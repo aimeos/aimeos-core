@@ -23,6 +23,7 @@ return array(
 	),
 	'config' => array(
 		'lib/mshoplib/config',
+		'client/html/config',
 		'controller/jsonadm/config',
 		'admin/jqadm/config',
 		'config',
