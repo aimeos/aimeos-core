@@ -85,6 +85,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->addItem( $price );
 	}
 
+	public function testClear()
+	{
+		$this->object->getTaxFlag( false );
+		$this->object->clear();
+
+		$this->assertEquals( '0.00', $this->object->getValue() );
+		$this->assertEquals( '0.00', $this->object->getCosts() );
+		$this->assertEquals( '0.00', $this->object->getRebate() );
+		$this->assertEquals( '0.00', $this->object->getTaxValue() );
+		$this->assertEquals( true, $this->object->getTaxFlag() );
+		$this->assertEquals( 1, $this->object->getQuantity() );
+	}
+
 	public function testCompare()
 	{
 		$price = new \Aimeos\MShop\Price\Item\Standard( $this->values );

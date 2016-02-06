@@ -31,6 +31,13 @@ interface Iface
 	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, $quantity = 1 );
 
 	/**
+	 * Resets the values of the price item.
+	 *
+	 * The currency ID, domain, type and status stays the same.
+	 */
+	public function clear();
+
+	/**
 	 * Compares the properties of the given price item with its own one.
 	 *
 	 * This method compare only the essential price properties:

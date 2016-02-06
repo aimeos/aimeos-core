@@ -23,6 +23,7 @@ class Standard
 	implements \Aimeos\MShop\Price\Item\Iface
 {
 	private $values;
+	private $taxflag;
 
 
 	/**
@@ -37,6 +38,7 @@ class Standard
 		parent::__construct( 'price.', $values, $listItems, $refItems );
 
 		$this->values = $values;
+		$this->taxflag = ( isset( $values['price.taxflag'] ) ? (bool) $values['price.taxflag'] : true );
 	}
 
 
@@ -415,7 +417,7 @@ class Standard
 		if( $value == $this->getTaxValue() ) { return $this; }
 
 		$this->values['price.tax'] = $this->checkPrice( $value, 4 );
-		$this->setModified();
+		parent::setModified(); // don't unset tax immediately
 
 		return $this;
 	}
@@ -465,6 +467,16 @@ class Standard
 
 
 	/**
+	 * Sets the modified flag of the object.
+	 */
+	public function setModified()
+	{
+		parent::setModified();
+		unset( $this->values['price.tax'] );
+	}
+
+
+	/**
 	 * Add the given price to the current one.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added
@@ -486,6 +498,22 @@ class Standard
 		$this->values['price.quantity'] = 1;
 
 		return $this;
+	}
+
+
+	/**
+	 * Resets the values of the price item.
+	 *
+	 * The currency ID, domain, type and status stays the same.
+	 */
+	public function clear()
+	{
+		$this->values['price.value'] = '0.00';
+		$this->values['price.costs'] = '0.00';
+		$this->values['price.rebate'] = '0.00';
+		$this->values['price.tax'] = '0.0000';
+		$this->values['price.taxflag'] = $this->taxflag;
+		$this->values['price.quantity'] = 1;
 	}
 
 
