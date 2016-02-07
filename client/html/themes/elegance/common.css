@@ -146,7 +146,8 @@
 }
 
 .common-summary-detail .basket {
-	margin: 0 0.5em;
+	margin: 0.5em;
+	margin-top: 0;
 }
 
 .common-summary-detail table {
