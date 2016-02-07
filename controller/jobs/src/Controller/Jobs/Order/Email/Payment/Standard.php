@@ -57,7 +57,7 @@ class Standard
 		$mailer = $context->getMail();
 		$view = $context->getView();
 
-		$templatePaths = $aimeos->getCustomPaths( 'client/html' );
+		$templatePaths = $aimeos->getCustomPaths( 'client/html/templates' );
 
 		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
