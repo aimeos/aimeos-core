@@ -583,6 +583,8 @@ class Standard
 					$price->setRebate( $row['order.base.service.rebate'] );
 					$price->setCosts( $row['order.base.service.costs'] );
 					$price->setTaxRate( $row['order.base.service.taxrate'] );
+					$price->setTaxFlag( $row['order.base.service.taxflag'] );
+
 					$items[$row['order.base.service.id']] = array( 'price' => $price, 'item' => $row );
 				}
 			}
