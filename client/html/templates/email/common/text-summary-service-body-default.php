@@ -8,7 +8,6 @@
 ?>
 
 
-
 <?php try { ?>
 <?php	$service = $this->extOrderBaseItem->getService( 'delivery' ); ?>
 <?php	echo strip_tags( $this->translate( 'client', 'Delivery' ) ); ?>: <?php echo strip_tags( $service->getName() ); ?>
@@ -29,7 +28,7 @@
 				}
 ?>
 - <?php echo strip_tags( $name ); ?>: <?php echo strip_tags( $value ); ?>
- 
+
 <?php		endif; ?>
 <?php	endforeach; ?>
 <?php } catch( Exception $e ) { ; } ?>
@@ -54,9 +53,8 @@
 				}
 ?>
 - <?php echo strip_tags( $name ); ?>: <?php echo strip_tags( $value ); ?>
- 
+
 <?php		endif; ?>
 <?php	endforeach; ?>
 <?php } catch( Exception $e ) { ; } ?>
-
 <?php echo $this->get( 'serviceBody' ); ?>

@@ -11,5 +11,6 @@
 <?php echo strip_tags( $this->translate( 'client', 'Coupons' ) ); ?>:
 <?php foreach( $this->extOrderBaseItem->getCoupons() as $code => $products ) : ?>
 - <?php echo $code; ?>
+
 <?php endforeach; ?>
 <?php echo $this->get( 'couponBody' ); ?>
