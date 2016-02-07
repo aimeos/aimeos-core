@@ -243,13 +243,15 @@ class PayPalExpress
 			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
+		$price = $baseItem->getPrice();
+
 		$values = $this->getAuthParameter();
 		$values['METHOD'] = 'DoCapture';
 		$values['COMPLETETYPE'] = 'Complete';
 		$values['AUTHORIZATIONID'] = $tid;
 		$values['INVNUM'] = $order->getId();
-		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
-		$values['AMT'] = $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts();
+		$values['CURRENCYCODE'] = $price->getCurrencyId();
+		$values['AMT'] = $this->getAmount( $price );
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
@@ -423,14 +425,16 @@ class PayPalExpress
 		$baseItem = $this->getOrderBase( $baseid );
 		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 
+		$price = $baseItem->getPrice();
+
 		$values = $this->getAuthParameter();
 		$values['METHOD'] = 'DoExpressCheckoutPayment';
 		$values['TOKEN'] = $params['token'];
 		$values['PAYERID'] = $params['PayerID'];
 		$values['PAYMENTACTION'] = $this->getConfigValue( array( 'paypalexpress.PaymentAction' ), 'Sale' );
-		$values['CURRENCYCODE'] = $baseItem->getPrice()->getCurrencyId();
+		$values['CURRENCYCODE'] = $price->getCurrencyId();
 		$values['NOTIFYURL'] = $this->getConfigValue( array( 'payment.url-update', 'payment.url-success' ) );
-		$values['AMT'] = ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() );
+		$values['AMT'] = $this->getAmount( $price );
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
@@ -502,8 +506,8 @@ class PayPalExpress
 		}
 
 		$price = $basket->getPrice();
-		$amount = $price->getValue() + $price->getCosts();
-		if( $amount != $params['payment_amount'] )
+
+		if( $this->getAmount( $price ) != $params['payment_amount'] )
 		{
 			$msg = sprintf( 'PayPal Express: Wrong payment amount "%1$s" for order ID "%2$s"', $params['payment_amount'], $params['invoice'] );
 			throw new \Aimeos\MShop\Service\Exception( $msg );
@@ -597,6 +601,7 @@ class PayPalExpress
 	 */
 	protected function getOrderDetails( \Aimeos\MShop\Order\Item\Base\Iface $orderBase )
 	{
+		$deliveryCosts = $paymentCosts = '0.00';
 		$values = $this->getAuthParameter();
 
 		try
@@ -617,26 +622,18 @@ class PayPalExpress
 		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
 		{
+			$price = $product->getPrice();
 			$lastPos = $product->getPosition() - 1;
+
 			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
 			$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = $product->getQuantity();
-			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $product->getPrice()->getValue();
+			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $this->getAmount( $price );
 		}
 
-		foreach( $orderBase->getServices() as $service )
-		{
-			if( ( $val = $service->getPrice()->getValue() ) > '0.00' )
-			{
-				$lastPos++;
-				$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $service->getName();
-				$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
-				$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $val;
-			}
-		}
 
-		$paymentItem = $orderBase->getService( 'payment' );
-		if( ( $paymentCosts = $paymentItem->getPrice()->getCosts() ) > '0.00' )
+		$price = $orderBase->getService( 'payment' )->getPrice();
+		if( ( $paymentCosts = $this->getAmount( $price ) ) > '0.00' )
 		{
 			$lastPos++;
 			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
@@ -644,31 +641,32 @@ class PayPalExpress
 			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
 		}
 
-		$price = $orderBase->getPrice();
-		$amount = $price->getValue() + $price->getCosts();
-
-		$values['MAXAMT'] = $amount + 0.01; // @todo rounding error?
-		$values['PAYMENTREQUEST_0_AMT'] = number_format( $amount, 2, '.', '' );
-		$values['PAYMENTREQUEST_0_ITEMAMT'] = (string) ( $price->getValue() + $paymentCosts );
-		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = (string) ( $price->getCosts() - $paymentCosts );
-		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
-		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
-		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
-		$values['PAYMENTREQUEST_0_TAXAMT'] = $price->getTaxRate();
-		$values['PAYMENTREQUEST_0_CURRENCYCODE'] = $orderBase->getPrice()->getCurrencyId();
-		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->getConfigValue( array( 'paypalexpress.PaymentAction' ), 'sale' );
-
 		try
 		{
 			$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
+			$deliveryCosts = $this->getAmount( $orderServiceDeliveryItem->getPrice() );
 
-			$values['L_SHIPPINGOPTIONAMOUNT0'] = (string) ( $price->getCosts() - $paymentCosts );
+			$values['L_SHIPPINGOPTIONAMOUNT0'] = (string) $deliveryCosts;
 			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 		}
 		catch( \Exception $e ) {; } // If no delivery service is available
 
+
+		$price = $orderBase->getPrice();
+		$amount = $this->getAmount( $price );
+
+		$values['MAXAMT'] = $amount + 0.01; // @todo rounding error?
+		$values['PAYMENTREQUEST_0_AMT'] = $amount;
+		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $price->getValue() + $paymentCosts, 2, '.', '' );
+		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $price->getCosts() - $paymentCosts, 2, '.', '' );
+		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
+		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
+		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
+		$values['PAYMENTREQUEST_0_TAXAMT'] = $price->getTaxValue();
+		$values['PAYMENTREQUEST_0_CURRENCYCODE'] = $orderBase->getPrice()->getCurrencyId();
+		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->getConfigValue( array( 'paypalexpress.PaymentAction' ), 'sale' );
 
 		return $values;
 	}

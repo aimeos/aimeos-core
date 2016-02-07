@@ -422,6 +422,24 @@ abstract class Base
 
 
 	/**
+	 * Returns the calculated amount of the price item
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
+	 * @return string Formatted money amount
+	 */
+	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price )
+	{
+		$amount = $price->getValue() + $price->getCosts();
+
+		if( $price->getTaxFlag() === false ) {
+			$amount += $price->getTaxValue();
+		}
+
+		return number_format( $amount, 2, '.', '' );
+	}
+
+
+	/**
 	 * Returns the order item for the given ID.
 	 *
 	 * @param string $id Unique order ID
