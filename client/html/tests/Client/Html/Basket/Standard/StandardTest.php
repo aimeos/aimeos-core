@@ -441,7 +441,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$output = $this->object->getBody();
 
 		$this->assertRegExp( '#<tfoot>.*<tr class="subtotal">.*<td class="price">0.00 .+</td>.*</tfoot>#smU', $output );
-		$this->assertRegExp( '#<tfoot>.*<tr class="delivery">.*<td class="price">0.00 .+</td>.*</tfoot>#smU', $output );
 		$this->assertRegExp( '#<tfoot>.*<tr class="total">.*<td class="price">0.00 .+</td>.*</tfoot>#smU', $output );
 	}
 

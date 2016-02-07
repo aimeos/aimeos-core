@@ -257,13 +257,15 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php endif; ?>
 				</tr>
 
+<?php if( $priceService - $paymentPriceService > 0 ) : ?>
 				<tr class="delivery">
 					<td colspan="3"><?php echo $enc->html( $this->translate( 'client', 'Shipping' ) ); ?></td>
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ) ); ?></td>
-<?php if( $modify ) : ?>
+<?php	if( $modify ) : ?>
 					<td class="action"></td>
-<?php endif; ?>
+<?php	endif; ?>
 				</tr>
+<?php endif; ?>
 
 <?php if( $paymentPriceService > 0 ) : ?>
 				<tr class="payment">
@@ -271,7 +273,7 @@ $backParams = $this->get( 'summaryParams', array() );
 					<td class="price"><?php echo $enc->html( sprintf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ) ); ?></td>
 <?php	if( $modify ) : ?>
 					<td class="action"></td>
-<?php endif; ?>
+<?php	endif; ?>
 				</tr>
 <?php endif; ?>
 

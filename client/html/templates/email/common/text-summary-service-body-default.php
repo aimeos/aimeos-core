@@ -8,6 +8,7 @@
 ?>
 
 
+
 <?php try { ?>
 <?php	$service = $this->extOrderBaseItem->getService( 'delivery' ); ?>
 <?php	echo strip_tags( $this->translate( 'client', 'Delivery' ) ); ?>: <?php echo strip_tags( $service->getName() ); ?>

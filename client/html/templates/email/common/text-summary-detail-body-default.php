@@ -93,8 +93,10 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 <?php endif; ?>
 <?php echo strip_tags( $this->translate( 'client', 'Sub-total' ) ); ?>: <?php printf( $priceFormat, $this->number( $priceValue ), $priceCurrency ); ?>
 
+<?php if( $priceService - $paymentPriceService > 0 ) : ?>
 <?php echo strip_tags( $this->translate( 'client', '+ Shipping' ) ); ?>: <?php printf( $priceFormat, $this->number( $priceService - $paymentPriceService ), $priceCurrency ); ?>
 
+<?php endif; ?>
 <?php if( $paymentPriceService > 0 ) : ?>
 <?php	echo strip_tags( $this->translate( 'client', '+ Payment costs' ) ); ?>: <?php printf( $priceFormat, $this->number( $paymentPriceService ), $priceCurrency ); ?>
 
@@ -114,6 +116,8 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 <?php	echo strip_tags( $this->translate( 'client', 'Total' ) ); ?>: <?php printf( $priceFormat, $this->number( $priceValue + $priceService + $priceTaxvalue ), $priceCurrency ); ?>
 
 <?php endif; ?>
+<?php if( $priceRebate > '0.00' ) : ?>
 <?php echo strip_tags( $this->translate( 'client', 'Included rebates' ) ); ?>: <?php printf( $priceFormat, $this->number( $priceRebate ), $priceCurrency ); ?>
 
+<?php endif; ?>
 <?php echo $this->get( 'detailBody' ); ?>
