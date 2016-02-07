@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-30 17:29+0100\n"
+"POT-Creation-Date: 2016-02-07 17:36+0100\n"
 "PO-Revision-Date: 2015-09-29 12:45+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Italian (http://www.transifex.com/aimeos/aimeos-core/language/it/)\n"
@@ -47,6 +47,14 @@ msgstr[1] ""
 #. language (%13$s),
 #. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
 #. (%17$s), vatid (%18$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language (%13$s),
+#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site (%17$s), vatid (%18$s)
+#. / Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
+#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
+#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), vatid (%13$s), language (%14$s),
+#. / e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site (%18$s)
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s), first name (%4$s), last name (%5$s),
 #. / address part one (%6$s, e.g street), address part two (%7$s, e.g house number), address part three (%8$s, e.g additional information),
 #. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s), language (%13$s),
@@ -248,6 +256,10 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
+msgstr ""
+
+#. / Payment e-mail legal information
+msgid "All orders are subject to our terms and conditions."
 msgstr ""
 
 msgid "An account has been created for you."
@@ -864,6 +876,8 @@ msgstr ""
 msgid "Your new account"
 msgstr ""
 
+#. / Delivery e-mail subject with order ID
+#. / Payment e-mail subject with order ID
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
 #. / Delivery e-mail subject with order ID

@@ -7,6 +7,7 @@
 # Translators:
 # Translators:
 # Translators:
+# Aimeos <aimeos@aimeos.org>, 2016
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""
@@ -14,7 +15,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-07-09 22:03+0000\n"
+"PO-Revision-Date: 2016-02-04 12:29+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -186,7 +187,7 @@ msgid "CX"
 msgstr "Weihnachtsinsel"
 
 msgid "CY"
-msgstr "Cyprus"
+msgstr "Zypern"
 
 msgid "CZ"
 msgstr "Tschechische Republik"
