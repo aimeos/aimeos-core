@@ -168,6 +168,10 @@
 	color: #555;
 }
 
+.common-summary-detail tr.subtotal {
+  color: #555;
+}
+
 .common-summary-detail tr.total {
 	border-top: 1px solid #D0D0D0;
 	color: #555;

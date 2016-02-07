@@ -60,6 +60,7 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 ?>
 
+
 <?php echo strip_tags( $this->translate( 'client', 'Order details' ) ); ?>:
 <?php foreach( $products as $product ) : ?>
 <?php	$price = $product->getPrice(); ?>
