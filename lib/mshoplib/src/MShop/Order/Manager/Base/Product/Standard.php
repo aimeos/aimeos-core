@@ -142,6 +142,20 @@ class Standard
 			'type'=> 'decimal',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.product.taxvalue' => array(
+			'code'=>'order.base.product.taxvalue',
+			'internalcode'=>'mordbapr."tax"',
+			'label'=>'Order base product tax value',
+			'type'=> 'decimal',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.base.product.taxflag' => array(
+			'code'=>'order.base.product.taxflag',
+			'internalcode'=>'mordbapr."taxflag"',
+			'label'=>'Order base product tax flag (0=net, 1=gross price)',
+			'type'=> 'integer',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'order.base.product.quantity' => array(
 			'code'=>'order.base.product.quantity',
 			'internalcode'=>'mordbapr."quantity"',
@@ -824,7 +838,8 @@ class Standard
 					$price->setRebate( $row['order.base.product.rebate'] );
 					$price->setCosts( $row['order.base.product.costs'] );
 					$price->setTaxRate( $row['order.base.product.taxrate'] );
-					$price->setTaxFlag( $row['order.base.service.taxflag'] );
+					$price->setTaxFlag( $row['order.base.product.taxflag'] );
+					$price->setTaxValue( $row['order.base.product.taxvalue'] );
 
 					$items[$row['order.base.product.id']] = array( 'price' => $price, 'item' => $row );
 				}

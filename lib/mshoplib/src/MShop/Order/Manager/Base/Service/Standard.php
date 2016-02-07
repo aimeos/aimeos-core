@@ -111,6 +111,20 @@ class Standard
 			'type' => 'decimal',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.service.taxvalue' => array(
+			'code'=>'order.base.service.taxvalue',
+			'internalcode'=>'mordbase."tax"',
+			'label'=>'Order base service tax value',
+			'type'=> 'decimal',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.base.service.taxflag' => array(
+			'code'=>'order.base.service.taxflag',
+			'internalcode'=>'mordbase."taxflag"',
+			'label'=>'Order base service tax flag (0=net, 1=gross price)',
+			'type'=> 'integer',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'order.base.service.mtime' => array(
 			'code' => 'order.base.service.mtime',
 			'internalcode' => 'mordbase."mtime"',
@@ -584,6 +598,7 @@ class Standard
 					$price->setCosts( $row['order.base.service.costs'] );
 					$price->setTaxRate( $row['order.base.service.taxrate'] );
 					$price->setTaxFlag( $row['order.base.service.taxflag'] );
+					$price->setTaxValue( $row['order.base.service.taxvalue'] );
 
 					$items[$row['order.base.service.id']] = array( 'price' => $price, 'item' => $row );
 				}

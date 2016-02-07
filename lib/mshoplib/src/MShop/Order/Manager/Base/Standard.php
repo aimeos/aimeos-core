@@ -945,8 +945,8 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 		$price->setValue( $row['order.base.price'] );
 		$price->setCosts( $row['order.base.costs'] );
 		$price->setRebate( $row['order.base.rebate'] );
-		$price->setTaxValue( $row['order.base.taxvalue'] );
 		$price->setTaxFlag( $row['order.base.taxflag'] );
+		$price->setTaxValue( $row['order.base.taxvalue'] );
 
 		// you may need the site object! take care!
 		$localeItem = $localeManager->createItem();

@@ -111,6 +111,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.rebate', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.taxrate', '0.00' );
+		$expr[] = $search->compare( '==', 'order.base.product.taxflag', 1 );
+		$expr[] = $search->compare( '==', 'order.base.product.taxvalue', '0.00' );
 		$expr[] = $search->compare( '==', 'order.base.product.flags', 0 );
 		$expr[] = $search->compare( '==', 'order.base.product.position', 1 );
 		$expr[] = $search->compare( '==', 'order.base.product.status', 1 );
