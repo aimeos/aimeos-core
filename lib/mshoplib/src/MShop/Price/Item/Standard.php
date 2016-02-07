@@ -23,7 +23,6 @@ class Standard
 	implements \Aimeos\MShop\Price\Item\Iface
 {
 	private $values;
-	private $taxflag;
 
 
 	/**
@@ -38,7 +37,6 @@ class Standard
 		parent::__construct( 'price.', $values, $listItems, $refItems );
 
 		$this->values = $values;
-		$this->taxflag = ( isset( $values['price.taxflag'] ) ? (bool) $values['price.taxflag'] : true );
 	}
 
 
@@ -495,7 +493,6 @@ class Standard
 		$taxValue = $this->getTaxValue();
 
 		$this->setQuantity( 1 );
-		$this->setTaxFlag( $this->taxflag );
 		$this->setValue( $this->getValue() + $item->getValue() * $quantity );
 		$this->setCosts( $this->getCosts() + $item->getCosts() * $quantity );
 		$this->setRebate( $this->getRebate() + $item->getRebate() * $quantity );
@@ -512,7 +509,6 @@ class Standard
 	 */
 	public function clear()
 	{
-		$this->setTaxFlag( $this->taxflag );
 		$this->setQuantity( 1 );
 		$this->setValue( '0.00' );
 		$this->setCosts( '0.00' );
