@@ -126,6 +126,8 @@ class Standard
 		$orderBaseProductItem->setAttributes( $attr );
 
 		$this->addProductInStock( $orderBaseProductItem, $productItem->getId(), $quantity, $options, $warehouse );
+
+		$this->domainManager->setSession( $this->basket );
 	}
 
 
@@ -185,6 +187,8 @@ class Standard
 		$product->setPrice( $this->calcPrice( $product, $prices, $quantity ) );
 
 		$this->editProductInStock( $product, $productItem, $quantity, $position, $options );
+
+		$this->domainManager->setSession( $this->basket );
 	}
 
 
@@ -383,8 +387,6 @@ class Standard
 			}
 		}
 
-		$this->domainManager->setSession( $this->basket );
-
 		if( $stocklevel !== null && $stocklevel < $quantity )
 		{
 			$msg = sprintf( 'There are not enough products "%1$s" in stock', $orderBaseProductItem->getName() );
@@ -415,10 +417,8 @@ class Standard
 
 		$this->basket->deleteProduct( $position );
 
-		if( $stocklevel === null || $stocklevel > 0 )
-		{
+		if( $stocklevel === null || $stocklevel > 0 ) {
 			$this->basket->addProduct( $product, $position );
-			$this->domainManager->setSession( $this->basket );
 		}
 
 		if( $stocklevel !== null && $stocklevel < $quantity )
