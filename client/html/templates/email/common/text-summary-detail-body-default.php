@@ -11,6 +11,8 @@ try {
 	$products = array();
 }
 
+$priceTaxvalue = '0.00';
+
 try
 {
 	$price = $this->extOrderBaseItem->getPrice();
@@ -18,7 +20,6 @@ try
 	$priceService = $price->getCosts();
 	$priceRebate = $price->getRebate();
 	$priceTaxflag = $price->getTaxFlag();
-	$priceTaxvalue = $price->getTaxValue();
 	$priceCurrency = $this->translate( 'client/currency', $price->getCurrencyId() );
 }
 catch( Exception $e )
@@ -26,7 +27,6 @@ catch( Exception $e )
 	$priceValue = '0.00';
 	$priceRebate = '0.00';
 	$priceService = '0.00';
-	$priceTaxvalue = '0.00';
 	$priceTaxflag = true;
 	$priceCurrency = '';
 }
@@ -107,7 +107,7 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 <?php endif; ?>
 <?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $priceItem ) : $taxValue = $priceItem->getTaxValue(); ?>
-<?php	if( $taxRate > '0.00' && $taxValue > '0.00' ) : ?>
+<?php	if( $taxRate > '0.00' && $taxValue > '0.00' ) : $priceTaxvalue += $taxValue; ?>
 <?php		$taxFormat = ( $priceItem->getTaxFlag() ? $this->translate( 'client', 'Incl. %1$s%% VAT' ) : $this->translate( 'client', '+ %1$s%% VAT' ) ); ?>
 <?php		echo strip_tags( sprintf( $taxFormat, $this->number( $taxRate ) ) ); ?>: <?php printf( $priceFormat, $this->number( $taxValue ), $priceCurrency ); ?>
 

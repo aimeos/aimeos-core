@@ -37,6 +37,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
  */
 $attrTypes = $this->config( 'client/html/common/summary/detail/product/attribute/types', array( 'variant' ) );
 
+$priceTaxvalue = '0.00';
 
 if( isset( $this->summaryBasket ) )
 {
@@ -45,7 +46,6 @@ if( isset( $this->summaryBasket ) )
 	$priceService = $price->getCosts();
 	$priceRebate = $price->getRebate();
 	$priceTaxflag = $price->getTaxFlag();
-	$priceTaxvalue = $price->getTaxValue();
 	$priceCurrency = $this->translate( 'client/currency', $price->getCurrencyId() );
 }
 else
@@ -53,7 +53,6 @@ else
 	$priceValue = '0.00';
 	$priceRebate = '0.00';
 	$priceService = '0.00';
-	$priceTaxvalue = '0.00';
 	$priceTaxflag = true;
 	$priceCurrency = '';
 }
@@ -288,7 +287,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php endif; ?>
 
 <?php foreach( $this->get( 'summaryTaxRates', array() ) as $taxRate => $priceItem ) : $taxValue = $priceItem->getTaxValue(); ?>
-<?php	if( $taxRate > '0.00' && $taxValue > '0.00' ) : ?>
+<?php	if( $taxRate > '0.00' && $taxValue > '0.00' ) : $priceTaxvalue += $taxValue; ?>
 				<tr class="tax">
 <?php		if( $priceItem->getTaxFlag() ) : ?>
 					<td colspan="3"><?php echo $enc->html( sprintf( $this->translate( 'client', 'Incl. %1$s%% VAT' ), $this->number( $taxRate ) ) ); ?></td>
