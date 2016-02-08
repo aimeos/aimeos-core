@@ -514,7 +514,7 @@ class Standard
 		$this->setCosts( '0.00' );
 		$this->setRebate( '0.00' );
 		$this->setTaxRate( '0.00' );
-		$this->setTaxValue( '0.00' );
+		unset( $this->values['price.tax'] );
 	}
 
 
