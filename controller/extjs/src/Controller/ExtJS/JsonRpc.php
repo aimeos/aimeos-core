@@ -20,7 +20,7 @@ namespace Aimeos\Controller\ExtJS;
  */
 class JsonRpc
 {
-	private $classprefix = '\\Aimeos\\Controller\\ExtJS';
+	private $classprefix = 'Aimeos\\Controller\\ExtJS';
 	private $controllers = array();
 	private $cntlPaths;
 	private $context;
@@ -332,11 +332,7 @@ class JsonRpc
 	{
 		if( $this->controllers === array() )
 		{
-			$subFolder = trim( str_replace( '\\', DIRECTORY_SEPARATOR, $this->getClassPrefix() ), '/' );
-
-			if( strncmp( $subFolder, 'Aimeos' . DIRECTORY_SEPARATOR, 7 ) === 0 ) {
-				$subFolder = substr( $subFolder, 7 );
-			}
+			$subFolder = substr( str_replace( '\\', DIRECTORY_SEPARATOR, $this->getClassPrefix() ), 7 );
 
 			foreach( $this->cntlPaths as $path => $list )
 			{
