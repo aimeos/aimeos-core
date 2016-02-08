@@ -80,8 +80,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$output = $this->object->getBody();
 
-		$this->assertContains( 'Delivery', $output );
-		$this->assertContains( 'Delivery', $output );
+		$this->assertContains( 'delivery', $output );
+		$this->assertContains( 'payment', $output );
 	}
 
 
