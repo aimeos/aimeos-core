@@ -431,7 +431,7 @@ class Standard
 		$cntl = \Aimeos\Controller\Common\Media\Factory::createController( $context );
 
 		$listIds = (array) $view->param( 'image/product.lists.id', array() );
-		$listItems = $manager->getItem( $id, array( 'media' ) )->getListItems( 'media' );
+		$listItems = $manager->getItem( $id, array( 'media' ) )->getListItems( 'media', 'default' );
 		$mediaItems = $this->getMediaItems( $view->param( 'image/media.id', array() ) );
 
 		$mediaItem = $this->createItem();

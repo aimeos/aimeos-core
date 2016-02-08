@@ -370,7 +370,7 @@ class Standard
 
 		$listIds = array();
 		$langIds = (array) $view->param( 'text/langid', array() );
-		$listItems = $manager->getItem( $id, array( 'text' ) )->getListItems( 'text' );
+		$listItems = $manager->getItem( $id, array( 'text' ) )->getListItems( 'text', 'default' );
 
 
 		$listItem = $listManager->createItem();
@@ -424,8 +424,16 @@ class Standard
 		}
 
 
-		$rmIds = array();
-		$rmListIds = array_diff( array_keys( $listItems ), $listIds );
+		$rmIds = $allListIds = array();
+
+		foreach( $listItems as $id => $listItem )
+		{
+			if( in_array( $listItem->getType(), $this->typelist ) ) {
+				$allListIds[] = $id;
+			}
+		}
+
+		$rmListIds = array_diff( $allListIds, $listIds );
 
 		foreach( $rmListIds as $id ) {
 			$rmIds[] = $listItems[$id]->getRefId();
