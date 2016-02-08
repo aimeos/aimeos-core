@@ -57,6 +57,7 @@ class Standard
 	private $subPartPath = 'admin/jqadm/product/text/standard/subparts';
 	private $subPartNames = array();
 	private $types;
+	private $typelist = array( 'name', 'short', 'long', 'url', 'meta-keyword', 'meta-description' );
 
 
 	/**
@@ -332,12 +333,13 @@ class Standard
 				}
 
 				$type = $refItem->getType();
+				$langid = $refItem->getLanguageId();
 
-				$data[$type]['listid'][] = $listItem->getId();
-				$data[$type]['content'][] = $refItem->getContent();
-
-				if( count( $data[$type]['listid'] ) > count( $data['langid'] ) ) {
-					$data['langid'][] = $refItem->getLanguageId();
+				if( in_array( $type, $this->typelist ) )
+				{
+					$data['langid'][$langid] = $langid;
+					$data[$type]['listid'][$langid] = $listItem->getId();
+					$data[$type]['content'][$langid] = $refItem->getContent();
 				}
 			}
 		}
@@ -360,7 +362,6 @@ class Standard
 	{
 		$id = $view->item->getId();
 		$context = $this->getContext();
-		$types = array( 'name', 'short', 'long', 'url', 'meta-keyword', 'meta-description' );
 
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$textManager = \Aimeos\MShop\Factory::createManager( $context, 'text' );
@@ -385,9 +386,12 @@ class Standard
 
 		foreach( $langIds as $idx => $langid )
 		{
-			foreach( $types as $type )
+			foreach( $this->typelist as $type )
 			{
-				$content = trim( $view->param( 'text/' . $type . '/content/' . $idx ) );
+				if( ( $content = trim( $view->param( 'text/' . $type . '/content/' . $idx ) ) ) === '' ) {
+					continue;
+				}
+
 				$listid = $view->param( 'text/' . $type . '/listid' . $idx );
 				$listIds[] = $listid;
 
