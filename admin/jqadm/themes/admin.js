@@ -531,6 +531,7 @@ Aimeos.Product.Item = {
 		Aimeos.Product.Item.Selection.init();
 		Aimeos.Product.Item.Stock.init();
 		Aimeos.Product.Item.Text.init();
+		Aimeos.Product.Item.Download.init();
 	},
 
 
@@ -993,6 +994,46 @@ Aimeos.Product.Item.Text = {
 			var value = $(this).val();
 
 			$(".header .item-name-content", item).html(value);
+		});
+	}
+};
+
+
+
+Aimeos.Product.Item.Download = {
+
+	init : function() {
+
+		this.addLines();
+		this.removeLine();
+	},
+
+
+	addLines : function() {
+
+		$(".product-item-download").on("change", ".fileupload", function(ev) {
+
+			$(this).each( function(idx, el) {
+				$(".upload", ev.delegateTarget).remove();
+				var line = $(".prototype", ev.delegateTarget);
+
+				for(i=0; i<el.files.length; i++) {
+
+					var file = el.files[i];
+					var clone = Aimeos.addClone(line, Aimeos.getOptionsLanguages);
+
+					clone.addClass("upload");
+					$("input.item-label", clone).val(el.files[i].name);
+				}
+			});
+		});
+	},
+
+
+	removeLine : function() {
+
+		$(".product-item-download").on("click", ".fa-trash", function() {
+			$(this).parents("tr").remove();
 		});
 	}
 };
