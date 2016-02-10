@@ -297,9 +297,9 @@ class Standard
 
 
 	/**
-	 * Creates a new pre-filled item
+	 * Creates a new pre-filled attribute item
 	 *
-	 * @return \Aimeos\MShop\Media\Item\Iface New attribute item object
+	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
 	 */
 	protected function createItem()
 	{
@@ -371,7 +371,6 @@ class Standard
 	 * Returns the mapped input parameter or the existing items as expected by the template
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
-	 * @return array Multi-dimensional associative array
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view )
 	{
@@ -408,15 +407,16 @@ class Standard
 	 */
 	protected function storeFile( \Psr\Http\Message\UploadedFileInterface $file )
 	{
+		$ext = pathinfo( $file->getClientFilename(), PATHINFO_EXTENSION );
 		$hash = md5( $file->getClientFilename() . microtime( true ) );
-		$path = "{$hash[0]}/{$hash[1]}/$hash." . pathinfo( $file->getClientFilename(), PATHINFO_EXTENSION );
+		$path = sprintf( '%1/%2/%3.%4', $hash[0], $hash[1], $hash, $ext );
 		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-secure' );
 
-		if( !$fs->isdir( "{$hash[0]}/{$hash[1]}" ) ) {
-			$fs->mkdir( "{$hash[0]}/{$hash[1]}" );
+		if( !$fs->isdir( $hash[0] . '/' . $hash[1] ) ) {
+			$fs->mkdir( $hash[0] . '/' . $hash[1] );
 		}
 
-		$fs->writes( $file->getStream(), $path );
+		$fs->writes( $path, $file->getStream() );
 
 		return $path;
 	}

@@ -311,7 +311,6 @@ class Standard
 	 * Returns the mapped input parameter or the existing items as expected by the template
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
-	 * @return array Multi-dimensional associative array
 	 */
 	protected function setData( \Aimeos\MW\View\Iface $view )
 	{

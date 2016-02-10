@@ -71,7 +71,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGet()
 	{
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$this->view->item = $manager->findItem( 'CNE', array( 'attribute' ) );
