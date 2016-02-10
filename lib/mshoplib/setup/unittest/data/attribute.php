@@ -55,5 +55,6 @@ return array(
 		'attribute/media/color/pink' => array( 'domain' => 'media', 'typeid' => 'media/color', 'code' => 'pink', 'label' => 'pink', 'status' => 0, 'pos' => 6 ),
 
 		'attribute/product/date/custom' => array( 'domain' => 'product', 'typeid' => 'product/date', 'code' => 'custom', 'label' => 'Custom date', 'status' => 1, 'pos' => 0 ),
+		'attribute/product/download/testurl' => array( 'domain' => 'product', 'typeid' => 'product/download', 'code' => 'testurl', 'label' => 'Test URL', 'status' => 1, 'pos' => 0 ),
 	),
 );

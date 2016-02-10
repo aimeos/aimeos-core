@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' );
 
-		$this->assertEquals( 12, count( $result ) );
+		$this->assertEquals( 13, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
 		$this->assertEquals( 4, $result[$item->getId()] );
 	}

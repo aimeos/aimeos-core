@@ -105,12 +105,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'name', $lines[8][4] );
 		$this->assertEquals( '', $lines[8][6] );
 
-		$this->assertEquals( '', $lines[158][0] );
-		$this->assertEquals( 'width', $lines[158][1] );
-		$this->assertEquals( '29', $lines[158][2] );
-		$this->assertEquals( 'default', $lines[158][3] );
-		$this->assertEquals( 'name', $lines[158][4] );
-		$this->assertEquals( '29', $lines[158][6] );
+		$this->assertEquals( '', $lines[163][0] );
+		$this->assertEquals( 'width', $lines[163][1] );
+		$this->assertEquals( '29', $lines[163][2] );
+		$this->assertEquals( 'default', $lines[163][3] );
+		$this->assertEquals( 'name', $lines[163][4] );
+		$this->assertEquals( '29', $lines[163][6] );
 	}
 
 

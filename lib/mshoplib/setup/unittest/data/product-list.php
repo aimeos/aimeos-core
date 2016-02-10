@@ -81,7 +81,7 @@ return array(
 		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/variant', 'domain' => 'attribute', 'refid' => 'attribute/product/length/30', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/variant', 'domain' => 'attribute', 'refid' => 'attribute/product/width/29', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/config', 'domain' => 'attribute', 'refid' => 'attribute/product/color/white', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 3, 'status' => 1 ),
-		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/hidden', 'domain' => 'attribute', 'refid' => 'attribute/product/size/m', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 4, 'status' => 1 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'attribute/hidden', 'domain' => 'attribute', 'refid' => 'attribute/product/download/testurl', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 4, 'status' => 1 ),
 		array( 'parentid' => 'product/CNC', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xs', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/ABCD', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xl', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/EFGH', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xxl', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
