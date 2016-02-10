@@ -409,7 +409,7 @@ class Standard
 	{
 		$ext = pathinfo( $file->getClientFilename(), PATHINFO_EXTENSION );
 		$hash = md5( $file->getClientFilename() . microtime( true ) );
-		$path = sprintf( '%1/%2/%3.%4', $hash[0], $hash[1], $hash, $ext );
+		$path = sprintf( '%s/%s/%s.%s', $hash[0], $hash[1], $hash, $ext );
 		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-secure' );
 
 		if( !$fs->isdir( $hash[0] . '/' . $hash[1] ) ) {
