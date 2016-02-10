@@ -416,7 +416,7 @@ class Standard
 			$fs->mkdir( $hash[0] . '/' . $hash[1] );
 		}
 
-		$fs->writes( $path, $file->getStream() );
+		$fs->writes( $path, $file->getStream()->detach() );
 
 		return $path;
 	}
