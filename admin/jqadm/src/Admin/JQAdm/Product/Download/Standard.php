@@ -105,6 +105,57 @@ class Standard
 
 
 	/**
+	 * Deletes a resource
+	 *
+	 * @return string|null admin output to display or null for redirecting to the list
+	 */
+	public function delete()
+	{
+		$view = $this->getView();
+		$id = (array) $view->param( 'id' );
+
+		$context = $this->getContext();
+		$refIds = $attrIds = array();
+
+
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
+
+		$search = $listManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.lists.parentid', $id ),
+			$search->compare( '==', 'product.lists.domain', 'attribute' ),
+			$search->compare( '==', 'product.lists.type.domain', 'attribute' ),
+			$search->compare( '==', 'product.lists.type.code', 'hidden' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $listManager->searchItems( $search ) as $listItem ) {
+			$refIds[] = $listItem->getRefId();
+		}
+
+
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'attribute.id', $refIds ) );
+		$search->setSlice( 0, 0xfffffff );
+
+		foreach( $manager->searchItems( $search ) as $id => $item )
+		{
+			if( $item->getType() === 'download' ) {
+				$attrIds[] = $id;
+			}
+		}
+
+
+		$manager->begin();
+		$manager->deleteItems( $attrIds );
+		$manager->commit();
+	}
+
+
+	/**
 	 * Returns a single resource
 	 *
 	 * @return string|null admin output to display or null for redirecting to the list
