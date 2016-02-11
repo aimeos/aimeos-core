@@ -113,9 +113,7 @@ class Standard
 	{
 		$view = $this->getView();
 		$id = (array) $view->param( 'id' );
-
 		$context = $this->getContext();
-		$refIds = $attrIds = array();
 
 
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
@@ -130,28 +128,28 @@ class Standard
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
 
-		foreach( $listManager->searchItems( $search ) as $listItem ) {
+		$listItems = $listManager->searchItems( $search );
+		$refIds = array();
+
+		foreach( $listItems as $listItem ) {
 			$refIds[] = $listItem->getRefId();
 		}
 
 
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$items = $this->getAttributeItems( $refIds );
 
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'attribute.id', $refIds ) );
-		$search->setSlice( 0, 0xfffffff );
-
-		foreach( $manager->searchItems( $search ) as $id => $item )
+		foreach( $listItems as $id => $listItem )
 		{
-			if( $item->getType() === 'download' ) {
-				$attrIds[] = $id;
+			$refId = $listItem->getRefId();
+
+			if( isset( $items[$refId] ) && $items[$refId]->getType() === 'download' ) {
+				$listItem->setRefItem( $items[$refId] );
+			} else {
+				unset( $listItems[$id] );
 			}
 		}
 
-
-		$manager->begin();
-		$manager->deleteItems( $attrIds );
-		$manager->commit();
+		$this->cleanupItems( $listItems, array() );
 	}
 
 
