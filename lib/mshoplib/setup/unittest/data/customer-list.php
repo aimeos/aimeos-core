@@ -9,6 +9,7 @@
 return array(
 	'customer/lists/type' => array(
 		'customer/group/default' => array( 'domain' => 'customer/group', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'order/download' => array( 'domain' => 'order', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
 		'product/favorite' => array( 'domain' => 'product', 'code' => 'favorite', 'label' => 'Favorite', 'status' => 1 ),
 		'product/watch' => array( 'domain' => 'product', 'code' => 'watch', 'label' => 'Watch list', 'status' => 1 ),
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
