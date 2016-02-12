@@ -391,7 +391,7 @@ class Standard
 					continue;
 				}
 
-				$listid = $view->param( 'text/' . $type . '/listid' . $idx );
+				$listid = $view->param( 'text/' . $type . '/listid/' . $idx );
 				$listIds[] = $listid;
 
 				if( !isset( $listItems[$listid] ) )
