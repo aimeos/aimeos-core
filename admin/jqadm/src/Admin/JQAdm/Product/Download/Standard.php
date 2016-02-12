@@ -485,43 +485,34 @@ class Standard
 		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
-		$listId = $view->param( 'download/product.lists.id' );
 		$listItems = $manager->getItem( $id, array( 'attribute' ) )->getListItems( 'attribute', 'hidden' );
-		$attrItems = $this->getAttributeItems( (array) $view->param( 'download/attribute.id', array() ) );
 
-		if( !isset( $listItems[$listId] ) )
+		if( ( $listId = $view->param( 'download/product.lists.id' ) ) !== null )
 		{
-			$litem = $this->createListItem( $id );
-			$attrId = $view->param( 'download/attribute.id' );
-
-			if( $attrId !== '' && isset( $attrItems[$attrId] ) )
+			if( !isset( $listItems[$listId] ) )
 			{
-				$item = $attrItems[$attrId];
-			}
-			else if( ( $file = $view->value( $view->request()->getUploadedFiles(), 'download/file' ) ) !== null )
-			{
+				$litem = $this->createListItem( $id );
 				$item = $this->createItem();
-				$item->setCode( $this->storeFile( $file ) );
 			}
 			else
 			{
-				throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'No file uploaded for new download' ) );
+				$litem = $listItems[$listId];
+				$item = $litem->getRefItem();
 			}
+
+			$item->setLabel( $view->param( 'download/attribute.label' ) );
+
+			if( ( $file = $view->value( $view->request()->getUploadedFiles(), 'download/file' ) ) !== null ) {
+				$item->setCode( $this->storeFile( $file ) );
+			}
+
+			$attrManager->saveItem( $item );
+
+			$litem->setPosition( 0 );
+			$litem->setRefId( $item->getId() );
+
+			$listManager->saveItem( $litem, false );
 		}
-		else
-		{
-			$litem = $listItems[$listId];
-			$item = $litem->getRefItem();
-		}
-
-		$item->setLabel( $view->param( 'download/attribute.label' ) );
-
-		$attrManager->saveItem( $item );
-
-		$litem->setPosition( 0 );
-		$litem->setRefId( $item->getId() );
-
-		$listManager->saveItem( $litem, false );
 
 		$this->cleanupItems( $listItems, array( $listId ) );
 	}
