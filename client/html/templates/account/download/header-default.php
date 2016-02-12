@@ -29,6 +29,10 @@ if( isset( $this->downloadItem ) )
 	{
 		@header( 'Location: ' . $value, true, 303 );
 	}
+	else
+	{
+		@header( 'HTTP/1.0 404 Not Found', true, 404 );
+	}
 }
 
 ?>

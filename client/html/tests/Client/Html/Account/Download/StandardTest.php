@@ -63,6 +63,38 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetHeaderRedirect()
+	{
+		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
+		$item->setValue( 'http://localhost/download/test.txt' );
+		$item->setName( 'test download' );
+
+		$view = \TestHelperHtml::getView();
+		$view->downloadItem = $item;
+
+		$this->object->setView( $view );
+
+		$output = $this->object->getHeader();
+		$this->assertEquals( '', $output );
+	}
+
+
+	public function testGetHeaderNotFound()
+	{
+		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
+		$item->setValue( 'download/test.txt' );
+		$item->setName( 'test download' );
+
+		$view = \TestHelperHtml::getView();
+		$view->downloadItem = $item;
+
+		$this->object->setView( $view );
+
+		$output = $this->object->getHeader();
+		$this->assertEquals( '', $output );
+	}
+
+
 	public function testGetSubClientInvalid()
 	{
 		$this->setExpectedException( '\\Aimeos\\Client\\Html\\Exception' );
