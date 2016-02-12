@@ -5,6 +5,11 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
+$dlTarget = $this->config( 'client/html/account/download/url/target' );
+$dlController = $this->config( 'client/html/account/download/url/controller', 'account' );
+$dlAction = $this->config( 'client/html/account/download/url/action', 'download' );
+$dlConfig = $this->config( 'client/html/account/download/url/config', array( 'absoluteUri' => 1 ) );
+
 try {
 	$products = $this->extOrderBaseItem->getProducts();
 } catch( Exception $e ) {
@@ -57,6 +62,7 @@ catch( Exception $e )
 
 /// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client', '%1$s %2$s' );
+$unhide = $this->get( 'summaryShowDownloadAttributes', false );
 
 ?>
 
@@ -67,16 +73,15 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 <?php echo strip_tags( $product->getName() ); ?>
 
-<?php	foreach( $product->getAttributes() as $attribute ) : ?>
-<?php		switch( $attribute->getType() ) : case 'hidden': ?>
-<?php				if( $attribute->getCode() === 'download' ) : ?>
-- <?php 				echo strip_tags( $attribute->getName()); ?>: <?php echo $this->content( $attribute->getValue() ); ?>
+<?php	foreach( array_merge( $product->getAttributes( 'config' ), $product->getAttributes( 'custom' ) ) as $attribute ) : ?>
+- <?php 	echo strip_tags( $this->translate( 'client/code', $attribute->getCode() ) ); ?>: <?php echo strip_tags( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?>
 
-<?php				endif; ?>
-<?php			break; default: ?>
-- <?php 			echo strip_tags( $this->translate( 'client/code', $attribute->getCode() ) ); ?>: <?php echo strip_tags( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?>
+<?php	endforeach; ?>
+<?php	foreach( $product->getAttributes( 'hidden' ) as $attribute ) : ?>
+<?php		if( $unhide && $attribute->getCode() === 'download' ) : ?>
+- <?php 		echo strip_tags( $attribute->getName()); ?>: <?php echo $enc->attr( $this->url( $dlTarget, $dlController, $dlAction, array( 'dl_id' => $attribute->getId() ), array(), $dlConfig ) ); ?>
 
-<?php		endswitch; ?>
+<?php		endif; ?>
 <?php	endforeach; ?>
 <?php echo strip_tags( $this->translate( 'client', 'Quantity' ) ); ?>: <?php echo $product->getQuantity(); ?>
 

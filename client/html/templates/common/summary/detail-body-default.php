@@ -18,6 +18,11 @@ $detailController = $this->config( 'client/html/catalog/detail/url/controller', 
 $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail' );
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( 'absoluteUri' => 1 ) );
 
+$dlTarget = $this->config( 'client/html/account/download/url/target' );
+$dlController = $this->config( 'client/html/account/download/url/controller', 'account' );
+$dlAction = $this->config( 'client/html/account/download/url/action', 'download' );
+$dlConfig = $this->config( 'client/html/account/download/url/config', array( 'absoluteUri' => 1 ) );
+
 /** client/html/common/summary/detail/product/attribute/types
  * List of attribute type codes that should be displayed in the basket along with their product
  *
@@ -90,7 +95,7 @@ catch( Exception $e )
 /// Price format with price value (%1$s) and currency (%2$s)
 $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
-$unhide = $this->get( 'summaryShowHiddenAttributes', false );
+$unhide = $this->get( 'summaryShowDownloadAttributes', false );
 $modify = $this->get( 'summaryEnableModify', false );
 $errors = $this->get( 'summaryErrorCodes', array() );
 $backParams = $this->get( 'summaryParams', array() );
@@ -173,7 +178,7 @@ $backParams = $this->get( 'summaryParams', array() );
 <?php				if( $attribute->getCode() === 'download' ) : ?>
 							<li class="attr-item">
 								<span class="name"><?php echo $enc->html( $this->translate( 'client/code', $attribute->getCode() ) ); ?></span>
-								<span class="value"><a class="" href="<?php echo $enc->attr( $this->content( $attribute->getValue() ) ); ?>" ><?php echo $enc->html( $attribute->getName() ); ?></a></span>
+								<span class="value"><a href="<?php echo $enc->attr( $this->url( $dlTarget, $dlController, $dlAction, array( 'dl_id' => $attribute->getId() ), array(), $dlConfig ) ); ?>" ><?php echo $enc->html( $attribute->getName() ); ?></a></span>
 							</li>
 <?php				endif; ?>
 <?php			endforeach; ?>

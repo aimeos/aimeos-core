@@ -262,7 +262,10 @@ class Standard
 	{
 		// we can't cache the calculation because the same client object is used for all e-mails
 		$view->summaryTaxRates = $this->getTaxRates( $view->extOrderBaseItem );
-		$view->summaryShowHiddenAttributes = true;
+
+		if( $view->extOrderItem->getPaymentStatus() > \Aimeos\MShop\Order\Item\Base::PAY_PENDING ) {
+			$view->summaryShowDownloadAttributes = true;
+		}
 
 		return $view;
 	}

@@ -265,6 +265,10 @@ class Standard
 
 			$view->summaryTaxRates = $this->getTaxRates( $view->summaryBasket );
 
+			if( $view->confirmOrderItem->getPaymentStatus() > \Aimeos\MShop\Order\Item\Base::PAY_PENDING ) {
+				$view->summaryShowDownloadAttributes = true;
+			}
+
 			$this->cache = $view;
 		}
 
