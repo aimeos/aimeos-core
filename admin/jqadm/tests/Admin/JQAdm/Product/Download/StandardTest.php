@@ -43,7 +43,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->view->item = $manager->createItem();
 		$result = $this->object->create();
 
-		$this->assertContains( 'Downloads', $result );
+		$this->assertContains( 'Download', $result );
 		$this->assertNull( $this->view->get( 'errors' ) );
 	}
 
@@ -94,9 +94,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$param = array(
 			'download' => array(
-				'product.lists.id' => array( '' ),
-				'attribute.status' => array( 1 ),
-				'attribute.label' => array( 'test' ),
+				'product.lists.id' => '',
+				'attribute.status' => '1',
+				'attribute.label' => 'test',
 			),
 		);
 
@@ -105,11 +105,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$files = array(
 			'download' => array(
-				'tmp_name' => array( 'files' => array( 0 => '' ) ),
-				'name' => array( 'files' => array( '' ) ),
-				'type' => array( 'files' => array( '' ) ),
-				'size' => array( 'files' => array( 0 ) ),
-				'error' => array( 'files' => array( 0 ) )
+				'tmp_name' => array( 'file' => '' ),
+				'name' => array( 'file' => '' ),
+				'type' => array( 'file' => '' ),
+				'size' => array( 'file' => 0 ),
+				'error' => array( 'file' => 0 )
 			),
 		);
 

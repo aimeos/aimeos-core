@@ -431,16 +431,16 @@ class Standard
 
 		$data = array();
 
-		foreach( $view->item->getListItems( 'attribute', 'hidden' ) as $id => $listItem )
-		{
-			if( ( $refItem = $listItem->getRefItem() ) === null || $refItem->getType() !== 'download' ) {
-				continue;
-			}
+		$listItems = $view->item->getListItems( 'attribute', 'hidden' );
 
-			$data['product.lists.id'][] = $id;
+		if( ( $listItem = reset( $listItems ) ) !== false
+			&& ( $refItem = $listItem->getRefItem() ) !== null
+			&& $refItem->getType() === 'download'
+		) {
+			$data['product.lists.id'] = $listItem->getId();
 
 			foreach( $refItem->toArray() as $key => $value ) {
-				$data[$key][] = $value;
+				$data[$key] = $value;
 			}
 		}
 
@@ -485,57 +485,44 @@ class Standard
 		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
-		$listIds = (array) $view->param( 'download/product.lists.id', array() );
+		$listId = $view->param( 'download/product.lists.id' );
 		$listItems = $manager->getItem( $id, array( 'attribute' ) )->getListItems( 'attribute', 'hidden' );
-		$attrItems = $this->getAttributeItems( $view->param( 'download/attribute.id', array() ) );
+		$attrItems = $this->getAttributeItems( (array) $view->param( 'download/attribute.id', array() ) );
 
-		$attrItem = $this->createItem();
-		$listItem = $this->createListItem( $id );
-
-		$files = $view->value( $view->request()->getUploadedFiles(), 'download/files', array() );
-		$num = 0;
-
-		foreach( $listIds as $idx => $listid )
+		if( !isset( $listItems[$listId] ) )
 		{
-			if( !isset( $listItems[$listid] ) )
+			$litem = $this->createListItem( $id );
+			$attrId = $view->param( 'download/attribute.id' );
+
+			if( $attrId !== '' && isset( $attrItems[$attrId] ) )
 			{
-				$litem = $listItem;
-				$litem->setId( null );
-
-				$attrId = $view->param( 'download/attribute.id/' . $idx );
-
-				if( $attrId !== '' && isset( $attrItems[$attrId] ) )
-				{
-					$item = $attrItems[$attrId];
-				}
-				else if( ( $file = $view->value( $files, $num ) ) !== null )
-				{
-					$item = $attrItem;
-					$item->setId( null );
-					$item->setCode( $this->storeFile( $file ) );
-					$num++;
-				}
-				else
-				{
-					throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'No file uploaded for %1$d. new download', $num+1 ) );
-				}
+				$item = $attrItems[$attrId];
+			}
+			else if( ( $file = $view->value( $view->request()->getUploadedFiles(), 'download/file' ) ) !== null )
+			{
+				$item = $this->createItem();
+				$item->setCode( $this->storeFile( $file ) );
 			}
 			else
 			{
-				$litem = $listItems[$listid];
-				$item = $litem->getRefItem();
+				throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'No file uploaded for new download' ) );
 			}
-
-			$item->setLabel( $view->param( 'download/attribute.label/' . $idx ) );
-
-			$attrManager->saveItem( $item );
-
-			$litem->setPosition( $idx );
-			$litem->setRefId( $item->getId() );
-
-			$listManager->saveItem( $litem, false );
+		}
+		else
+		{
+			$litem = $listItems[$listId];
+			$item = $litem->getRefItem();
 		}
 
-		$this->cleanupItems( $listItems, $listIds );
+		$item->setLabel( $view->param( 'download/attribute.label' ) );
+
+		$attrManager->saveItem( $item );
+
+		$litem->setPosition( 0 );
+		$litem->setRefId( $item->getId() );
+
+		$listManager->saveItem( $litem, false );
+
+		$this->cleanupItems( $listItems, array( $listId ) );
 	}
 }
