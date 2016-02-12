@@ -48,24 +48,26 @@ $enc = $this->encoder();
 		</div>
 		<div class="col-lg-6">
 			<div class="form-group row">
-				<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'File' ) ); ?></label>
+<?php if( $this->get( 'downloadData/path' ) != '' ) : ?>
+				<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Path' ) ); ?></label>
 				<div class="col-sm-9">
-					<p class="form-control-static item-file"><?php echo $enc->attr( $this->get( 'downloadData/path' ) ); ?></p>
+					<p class="form-control-static item-file"><?php echo $enc->html( $this->get( 'downloadData/path' ) ); ?></p>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Size' ) ); ?></label>
 				<div class="col-sm-9">
-					<p class="form-control-static item-file"><?php echo $enc->attr( $this->get( 'downloadData/size' ) ); ?></p>
+					<p class="form-control-static item-file"><?php echo $enc->html( number_format( $this->get( 'downloadData/size' ) / 1024, 0, '.', ' ' ) ); ?> KB</p>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Uploaded' ) ); ?></label>
 				<div class="col-sm-9">
-					<p class="form-control-static item-file"><?php echo $enc->attr( $this->get( 'downloadData/time' ) ); ?></p>
+					<p class="form-control-static item-file"><?php echo $enc->html( date( 'Y-m-d H:i:s', $this->get( 'downloadData/time' ) ) ); ?></p>
 				</div>
 			</div>
+<?php endif; ?>
 		</div>
-		<?php echo $this->get( 'downloadBody' ); ?>
+<?php echo $this->get( 'downloadBody' ); ?>
 	</div>
 </div>
