@@ -330,8 +330,7 @@ class Standard
 			$item->setStocklevel( $view->param( 'stock/product.stock.stocklevel/' . $idx ) );
 			$item->setDateBack( $view->param( 'stock/product.stock.dateback/' . $idx ) );
 
-			$manager->saveItem( $item );
-			$items[$item->getId()] = $item;
+			$manager->saveItem( $item, false );
 		}
 
 		$manager->deleteItems( array_diff( array_keys( $items ), $list ) );
