@@ -11,11 +11,17 @@ if( isset( $this->downloadItem ) )
 
 	if( isset( $this->downloadFilesystem ) && $this->downloadFilesystem->has( $value ) )
 	{
-		$ext = pathinfo( $value, PATHINFO_EXTENSION );
+		$name = $this->downloadItem->getName();
+
+		if( pathinfo( $name, PATHINFO_EXTENSION ) == null
+			&& ( $ext = pathinfo( $value, PATHINFO_EXTENSION ) ) != null
+		) {
+			$name .= '.' . $ext;
+		}
 
 		@header( 'Content-Description: File Transfer' );
 		@header( 'Content-Type: application/octet-stream' );
-		@header( 'Content-Disposition: attachment; filename=' . sprintf( '"%s.%s"', $this->downloadItem->getName(), $ext ) );
+		@header( 'Content-Disposition: attachment; filename="' . $name . '"' );
 		@header( 'Content-Length: ' . $this->downloadFilesystem->size( $value ) );
 		@header( 'Cache-Control: must-revalidate' );
 		@header( 'Pragma: private' );
