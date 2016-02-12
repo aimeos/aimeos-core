@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-30 17:29+0100\n"
+"POT-Creation-Date: 2016-02-12 22:21+0100\n"
 "PO-Revision-Date: 2014-01-29 12:00+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -300,6 +300,9 @@ msgstr ""
 msgid "Domain (required)"
 msgstr ""
 
+msgid "Download"
+msgstr ""
+
 msgid "E-Mail"
 msgstr ""
 
@@ -337,6 +340,9 @@ msgid "Facility"
 msgstr ""
 
 msgid "Facsimile number, e.g. +155512345"
+msgstr ""
+
+msgid "File"
 msgstr ""
 
 msgid "File URL"
@@ -616,6 +622,9 @@ msgstr ""
 msgid "Password (required)"
 msgstr ""
 
+msgid "Path"
+msgstr ""
+
 msgid "Payment date"
 msgstr ""
 
@@ -858,6 +867,9 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
+msgid "Size"
+msgstr ""
+
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr ""
 
@@ -988,6 +1000,9 @@ msgid "Upload failed"
 msgstr ""
 
 msgid "Upload successful"
+msgstr ""
+
+msgid "Uploaded"
 msgstr ""
 
 msgid "Used by"

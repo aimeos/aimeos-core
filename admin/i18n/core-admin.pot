@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 17:36+0100\n"
+"POT-Creation-Date: 2016-02-12 22:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -301,6 +301,9 @@ msgstr "Domain"
 msgid "Domain (required)"
 msgstr "Domain (required)"
 
+msgid "Download"
+msgstr ""
+
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -339,6 +342,9 @@ msgstr "Facility"
 
 msgid "Facsimile number, e.g. +155512345"
 msgstr "Facsimile number, e.g. +155512345"
+
+msgid "File"
+msgstr ""
 
 msgid "File URL"
 msgstr "File URL"
@@ -617,6 +623,9 @@ msgstr "Password"
 msgid "Password (required)"
 msgstr "Password (required)"
 
+msgid "Path"
+msgstr ""
+
 msgid "Payment date"
 msgstr "Payment date"
 
@@ -859,6 +868,9 @@ msgstr ""
 msgid "Site"
 msgstr "Site"
 
+msgid "Size"
+msgstr ""
+
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Sorry, adding orders manually is currently not implemented"
 
@@ -990,6 +1002,9 @@ msgstr "Upload failed"
 
 msgid "Upload successful"
 msgstr "Upload successful"
+
+msgid "Uploaded"
+msgstr ""
 
 msgid "Used by"
 msgstr "Used by"

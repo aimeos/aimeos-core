@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 17:36+0100\n"
-"PO-Revision-Date: 2016-01-30 16:30+0000\n"
+"POT-Creation-Date: 2016-02-12 22:21+0100\n"
+"PO-Revision-Date: 2016-02-12 21:21+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Slovak (http://www.transifex.com/aimeos/aimeos-core/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -304,6 +304,9 @@ msgstr ""
 msgid "Domain (required)"
 msgstr ""
 
+msgid "Download"
+msgstr ""
+
 msgid "E-Mail"
 msgstr ""
 
@@ -341,6 +344,9 @@ msgid "Facility"
 msgstr ""
 
 msgid "Facsimile number, e.g. +155512345"
+msgstr ""
+
+msgid "File"
 msgstr ""
 
 msgid "File URL"
@@ -622,6 +628,9 @@ msgstr ""
 msgid "Password (required)"
 msgstr ""
 
+msgid "Path"
+msgstr ""
+
 msgid "Payment date"
 msgstr ""
 
@@ -866,6 +875,9 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
+msgid "Size"
+msgstr ""
+
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr ""
 
@@ -1002,6 +1014,9 @@ msgid "Upload failed"
 msgstr ""
 
 msgid "Upload successful"
+msgstr ""
+
+msgid "Uploaded"
 msgstr ""
 
 msgid "Used by"

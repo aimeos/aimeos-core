@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 17:36+0100\n"
-"PO-Revision-Date: 2016-01-30 16:30+0000\n"
+"POT-Creation-Date: 2016-02-12 22:21+0100\n"
+"PO-Revision-Date: 2016-02-12 21:21+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -308,6 +308,9 @@ msgstr "Domein"
 msgid "Domain (required)"
 msgstr "Domein (verplicht)"
 
+msgid "Download"
+msgstr ""
+
 msgid "E-Mail"
 msgstr "E-mail"
 
@@ -346,6 +349,9 @@ msgstr "Faciliteit"
 
 msgid "Facsimile number, e.g. +155512345"
 msgstr "Fax nummer, bijv. +31501234567"
+
+msgid "File"
+msgstr ""
 
 msgid "File URL"
 msgstr "Bestands URL"
@@ -626,6 +632,9 @@ msgstr "Wachtwoord"
 msgid "Password (required)"
 msgstr "Wachtwoord (verplicht)"
 
+msgid "Path"
+msgstr ""
+
 msgid "Payment date"
 msgstr "Betaaldatum"
 
@@ -870,6 +879,9 @@ msgstr ""
 msgid "Site"
 msgstr "Site"
 
+msgid "Size"
+msgstr ""
+
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Sorry, handmatig orders toevoegen is momenteel nog niet mogelijk."
 
@@ -1007,6 +1019,9 @@ msgstr "Upload niet gelukt"
 
 msgid "Upload successful"
 msgstr "Upload was succesvol"
+
+msgid "Uploaded"
+msgstr ""
 
 msgid "Used by"
 msgstr "Gebruikt door"

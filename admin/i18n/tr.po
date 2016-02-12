@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 17:36+0100\n"
-"PO-Revision-Date: 2016-01-30 16:30+0000\n"
+"POT-Creation-Date: 2016-02-12 22:21+0100\n"
+"PO-Revision-Date: 2016-02-12 21:21+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -304,6 +304,9 @@ msgstr "Domain"
 msgid "Domain (required)"
 msgstr "Domain (gerekli)"
 
+msgid "Download"
+msgstr ""
+
 msgid "E-Mail"
 msgstr "E-Posta"
 
@@ -342,6 +345,9 @@ msgstr "Kategori"
 
 msgid "Facsimile number, e.g. +155512345"
 msgstr "Faks numarası, örn. +155512345"
+
+msgid "File"
+msgstr ""
 
 msgid "File URL"
 msgstr "Dosya URL'si"
@@ -622,6 +628,9 @@ msgstr "Şifre"
 msgid "Password (required)"
 msgstr "Şifre (gerekli)"
 
+msgid "Path"
+msgstr ""
+
 msgid "Payment date"
 msgstr "Ödeme tarihi"
 
@@ -866,6 +875,9 @@ msgstr "Basit mod"
 msgid "Site"
 msgstr "Site"
 
+msgid "Size"
+msgstr ""
+
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Maalesef manuel olarak sipariş ekleme henüz uygulanmamaktadır"
 
@@ -1003,6 +1015,9 @@ msgstr "Yükleme başarısız"
 
 msgid "Upload successful"
 msgstr "Yükleme başarılı"
+
+msgid "Uploaded"
+msgstr ""
 
 msgid "Used by"
 msgstr "Tarafından kullanılan"

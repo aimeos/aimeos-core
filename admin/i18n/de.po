@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 17:36+0100\n"
-"PO-Revision-Date: 2016-01-30 16:30+0000\n"
+"POT-Creation-Date: 2016-02-12 22:21+0100\n"
+"PO-Revision-Date: 2016-02-12 21:24+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -306,6 +306,9 @@ msgstr "Domäne"
 msgid "Domain (required)"
 msgstr "Domäne (benötigt)"
 
+msgid "Download"
+msgstr "Download"
+
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -344,6 +347,9 @@ msgstr "Kategorie"
 
 msgid "Facsimile number, e.g. +155512345"
 msgstr "Faxnummer, z.B. +155512345"
+
+msgid "File"
+msgstr "Datei"
 
 msgid "File URL"
 msgstr "URL der Datei"
@@ -624,6 +630,9 @@ msgstr "Passwort"
 msgid "Password (required)"
 msgstr "Passwort (benötigt)"
 
+msgid "Path"
+msgstr "Pfad"
+
 msgid "Payment date"
 msgstr "Zahlungsdatum"
 
@@ -868,6 +877,9 @@ msgstr "Einfach-Modus"
 msgid "Site"
 msgstr "Mandant"
 
+msgid "Size"
+msgstr "Grösse"
+
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Leider können noch keine Bestellungen von Hand hinzu gefügt werden"
 
@@ -1005,6 +1017,9 @@ msgstr "Fehler beim Hochladen"
 
 msgid "Upload successful"
 msgstr "Erfolgreich hochgeladen"
+
+msgid "Uploaded"
+msgstr "Hochgeladen"
 
 msgid "Used by"
 msgstr "Verwendet von"

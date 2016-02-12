@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 17:36+0100\n"
-"PO-Revision-Date: 2016-01-30 16:30+0000\n"
+"POT-Creation-Date: 2016-02-12 22:21+0100\n"
+"PO-Revision-Date: 2016-02-12 21:21+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/aimeos/aimeos-core/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -304,6 +304,9 @@ msgstr "Domen"
 msgid "Domain (required)"
 msgstr "Domen (obavezno)"
 
+msgid "Download"
+msgstr ""
+
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -341,6 +344,9 @@ msgid "Facility"
 msgstr "Postrojenje"
 
 msgid "Facsimile number, e.g. +155512345"
+msgstr ""
+
+msgid "File"
 msgstr ""
 
 msgid "File URL"
@@ -622,6 +628,9 @@ msgstr ""
 msgid "Password (required)"
 msgstr ""
 
+msgid "Path"
+msgstr ""
+
 msgid "Payment date"
 msgstr "Datum plaćanja"
 
@@ -866,6 +875,9 @@ msgstr ""
 msgid "Site"
 msgstr "Sajt"
 
+msgid "Size"
+msgstr ""
+
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Izvinite, ručno dodavanje narudžbina nije trenutno implementirano"
 
@@ -1003,6 +1015,9 @@ msgstr "Otpremanje neuspešno"
 
 msgid "Upload successful"
 msgstr "Otpremanje uspešno"
+
+msgid "Uploaded"
+msgstr ""
 
 msgid "Used by"
 msgstr "Koristio"

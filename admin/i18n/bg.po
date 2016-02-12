@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-07 17:36+0100\n"
-"PO-Revision-Date: 2016-01-30 16:30+0000\n"
+"POT-Creation-Date: 2016-02-12 22:21+0100\n"
+"PO-Revision-Date: 2016-02-12 21:21+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -304,6 +304,9 @@ msgstr "Домейн"
 msgid "Domain (required)"
 msgstr "Домейн (задължително)"
 
+msgid "Download"
+msgstr ""
+
 msgid "E-Mail"
 msgstr "E-Mail"
 
@@ -342,6 +345,9 @@ msgstr "Умение"
 
 msgid "Facsimile number, e.g. +155512345"
 msgstr "Факс номер, например +155512345"
+
+msgid "File"
+msgstr ""
 
 msgid "File URL"
 msgstr "Файл URL"
@@ -622,6 +628,9 @@ msgstr "Парола"
 msgid "Password (required)"
 msgstr "Парола (задължително)"
 
+msgid "Path"
+msgstr ""
+
 msgid "Payment date"
 msgstr "Дата на плащане"
 
@@ -866,6 +875,9 @@ msgstr ""
 msgid "Site"
 msgstr "Сайт"
 
+msgid "Size"
+msgstr ""
+
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Ръчното добавяне на поръчки не се реализира за момента"
 
@@ -1003,6 +1015,9 @@ msgstr "Качването е неуспешно"
 
 msgid "Upload successful"
 msgstr "Успешно качване"
+
+msgid "Uploaded"
+msgstr ""
 
 msgid "Used by"
 msgstr "Използван от"
