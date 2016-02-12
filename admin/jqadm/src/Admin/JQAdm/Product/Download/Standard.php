@@ -437,11 +437,21 @@ class Standard
 			&& ( $refItem = $listItem->getRefItem() ) !== null
 			&& $refItem->getType() === 'download'
 		) {
-			$data['product.lists.id'] = $listItem->getId();
-
 			foreach( $refItem->toArray() as $key => $value ) {
 				$data[$key] = $value;
 			}
+
+			$data['product.lists.id'] = $listItem->getId();
+			$data['path'] = $refItem->getCode();
+
+			try
+			{
+				$fs = $this->getContext()->getFilesystemManager()->get( 'fs-secure' );
+
+				$data['time'] = $fs->time( $refItem->getCode() );
+				$data['size'] = $fs->size( $refItem->getCode() );
+			}
+			catch( \Exception $e ) { ; }
 		}
 
 		$view->downloadData = $data;
