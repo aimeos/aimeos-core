@@ -40,5 +40,9 @@ if( isset( $this->downloadItem ) )
 		@header( 'HTTP/1.0 404 Not Found', true, 404 );
 	}
 }
+else
+{
+	@header( 'HTTP/1.0 403 Forbidden', true, 403 );
+}
 
 ?>
