@@ -112,8 +112,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$request->expects( $this->any() )->method( 'getUploadedFiles' )
 			->will( $this->returnValue( array( 'download' => array( 'file' => $file ) ) ) );
 
-		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $this->view , $request, '127.0.0.1', 'test' );
-		$this->view ->addHelper( 'request', $helper );
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $this->view , $request );
+		$this->view->addHelper( 'request', $helper );
 
 		$this->view->item = $item;
 
