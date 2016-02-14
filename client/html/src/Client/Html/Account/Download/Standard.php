@@ -68,6 +68,7 @@ class Standard
 	 */
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
+		return '';
 	}
 
 
@@ -81,40 +82,7 @@ class Standard
 	 */
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
-		try
-		{
-			$view = $this->getView();
-
-			/** client/html/account/download/standard/template-header
-			 * Relative path to the HTML header template of the account download client.
-			 *
-			 * The template file contains the HTML code and processing instructions
-			 * to generate the HTML code that is inserted into the HTML page header
-			 * of the rendered page in the frontend. The configuration string is the
-			 * path to the template file relative to the templates directory (usually
-			 * in client/html/templates).
-			 *
-			 * You can overwrite the template file configuration in extensions and
-			 * provide alternative templates. These alternative templates should be
-			 * named like the default one but with the string "standard" replaced by
-			 * an unique name. You may use the name of your project for this. If
-			 * you've implemented an alternative client class as well, "standard"
-			 * should be replaced by the name of the new class.
-			 *
-			 * @param string Relative path to the template creating code for the HTML page head
-			 * @since 2016.02
-			 * @category Developer
-			 * @see client/html/account/download/standard/template-body
-			 */
-			$tplconf = 'client/html/account/download/standard/template-header';
-			$default = 'account/download/header-default.php';
-
-			return $view->render( $view->config( $tplconf, $default ) );
-		}
-		catch( \Exception $e )
-		{
-			$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
-		}
+		return '';
 	}
 
 
@@ -226,10 +194,10 @@ class Standard
 			$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product/attribute' );
 			$item = $manager->getItem( $id );
 
-			if( $this->checkDownload( $context->getUserId(), $id ) === true )
-			{
-				$view->downloadFilesystem = $context->getFilesystemManager()->get( 'fs-secure' );
-				$view->downloadItem = $item;
+			if( $this->checkDownload( $context->getUserId(), $id ) === true ) {
+				$this->addDownload( $item );
+			} else {
+				$view->response()->withStatus( 403 );
 			}
 
 			parent::process();
@@ -249,6 +217,44 @@ class Standard
 	protected function getSubClientNames()
 	{
 		return $this->getContext()->getConfig()->get( $this->subPartPath, $this->subPartNames );
+	}
+
+
+	protected function addDownload( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item )
+	{
+		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-secure' );
+		$response = $this->getView()->response();
+		$value = $item->getValue();
+
+		if( $fs->has( $value ) )
+		{
+			$name = $item->getName();
+
+			if( pathinfo( $name, PATHINFO_EXTENSION ) == null
+					&& ( $ext = pathinfo( $value, PATHINFO_EXTENSION ) ) != null
+			) {
+				$name .= '.' . $ext;
+			}
+
+			$response->withHeader( 'Content-Description', 'File Transfer' );
+			$response->withHeader( 'Content-Type', 'application/octet-stream' );
+			$response->withHeader( 'Content-Disposition', 'attachment; filename="' . $name . '"' );
+			$response->withHeader( 'Content-Length', $fs->size( $value ) );
+			$response->withHeader( 'Cache-Control', 'must-revalidate' );
+			$response->withHeader( 'Pragma', 'private' );
+			$response->withHeader( 'Expires', 0 );
+
+			$response->withBody( new \Zend\Diactoros\Stream( $fs->reads( $value ) ) );
+		}
+		elseif( filter_var( $value, FILTER_VALIDATE_URL ) !== false )
+		{
+			$response->withHeader( 'Location', $value );
+			$response->withStatus( 303 );
+		}
+		else
+		{
+			$response->withStatus( 404 );
+		}
 	}
 
 

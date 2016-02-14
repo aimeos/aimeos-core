@@ -15,11 +15,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
+		$this->view = \TestHelperHtml::getView();
 		$this->context = \TestHelperHtml::getContext();
-
 		$paths = \TestHelperHtml::getHtmlTemplatePaths();
+
 		$this->object = new \Aimeos\Client\Html\Account\Download\Standard( $this->context, $paths );
-		$this->object->setView( \TestHelperHtml::getView() );
+		$this->object->setView( $this->view );
 	}
 
 
@@ -32,64 +33,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBody()
 	{
 		$output = $this->object->getBody();
-		$this->assertNull( $output );
+		$this->assertEquals( '', $output );
 	}
 
 
 	public function testGetHeader()
 	{
-		$output = $this->object->getHeader();
-		$this->assertEquals( '', $output );
-	}
-
-
-	public function testGetHeaderDownload()
-	{
-		$fs = $this->context->getFilesystemManager()->get( 'fs-secure' );
-		$fs->write( 'download/test.txt', 'test' );
-
-		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
-		$item->setValue( 'download/test.txt' );
-		$item->setName( 'test download' );
-
-		$view = \TestHelperHtml::getView();
-		$view->downloadFilesystem = $fs;
-		$view->downloadItem = $item;
-
-		$this->object->setView( $view );
-
-		$output = $this->object->getHeader();
-		$this->assertEquals( 'test', $output );
-	}
-
-
-	public function testGetHeaderRedirect()
-	{
-		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
-		$item->setValue( 'http://localhost/download/test.txt' );
-		$item->setName( 'test download' );
-
-		$view = \TestHelperHtml::getView();
-		$view->downloadItem = $item;
-
-		$this->object->setView( $view );
-
-		$output = $this->object->getHeader();
-		$this->assertEquals( '', $output );
-	}
-
-
-	public function testGetHeaderNotFound()
-	{
-		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
-		$item->setValue( 'download/test.txt' );
-		$item->setName( 'test download' );
-
-		$view = \TestHelperHtml::getView();
-		$view->downloadItem = $item;
-
-		$this->object->setView( $view );
-
 		$output = $this->object->getHeader();
 		$this->assertEquals( '', $output );
 	}
@@ -209,5 +158,76 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $method->invokeArgs( $this->object, array( 123, 321 ) );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Lists\Iface', $result );
+	}
+
+
+	public function testAddDownload()
+	{
+		$fs = $this->context->getFilesystemManager()->get( 'fs-secure' );
+		$fs->write( 'download/test.txt', 'test' );
+
+		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
+		$item->setValue( 'download/test.txt' );
+		$item->setName( 'test download' );
+
+
+		$response = $this->getMock( '\Psr\Http\Message\ResponseInterface' );
+		$response->expects( $this->exactly( 7 ) )->method( 'withHeader' )->will( $this->returnSelf() );
+
+		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $this->view, $response );
+		$this->view->addHelper( 'response', $helper );
+
+
+		$class = new \ReflectionClass( '\Aimeos\Client\Html\Account\Download\Standard' );
+		$method = $class->getMethod( 'addDownload' );
+		$method->setAccessible( true );
+
+		$method->invokeArgs( $this->object, array( $item ) );
+	}
+
+
+	public function testAddDownloadRedirect()
+	{
+		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
+		$item->setValue( 'http://localhost/dl/test.txt' );
+		$item->setName( 'test download' );
+
+
+		$response = $this->getMock( '\Psr\Http\Message\ResponseInterface' );
+		$response->expects( $this->once() )->method( 'withHeader' )->will( $this->returnSelf() );
+		$response->expects( $this->once() )->method( 'withStatus' )->will( $this->returnSelf() );
+
+		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $this->view, $response );
+		$this->view->addHelper( 'response', $helper );
+
+
+		$class = new \ReflectionClass( '\Aimeos\Client\Html\Account\Download\Standard' );
+		$method = $class->getMethod( 'addDownload' );
+		$method->setAccessible( true );
+
+		$method->invokeArgs( $this->object, array( $item ) );
+	}
+
+
+	public function testAddDownloadNotFound()
+	{
+		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
+		$item->setValue( 'test.txt' );
+		$item->setName( 'test download' );
+
+
+		$response = $this->getMock( '\Psr\Http\Message\ResponseInterface' );
+		$response->expects( $this->never() )->method( 'withHeader' )->will( $this->returnSelf() );
+		$response->expects( $this->once() )->method( 'withStatus' )->will( $this->returnSelf() );
+
+		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $this->view, $response );
+		$this->view->addHelper( 'response', $helper );
+
+
+		$class = new \ReflectionClass( '\Aimeos\Client\Html\Account\Download\Standard' );
+		$method = $class->getMethod( 'addDownload' );
+		$method->setAccessible( true );
+
+		$method->invokeArgs( $this->object, array( $item ) );
 	}
 }
