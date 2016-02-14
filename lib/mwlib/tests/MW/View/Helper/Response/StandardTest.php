@@ -33,6 +33,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testCreateStream()
+	{
+		if( !class_exists( '\Zend\Diactoros\Stream' ) )
+		{
+			$this->setExpectedException( '\Aimeos\MW\Exception' );
+			$this->object->createStream( 'test' );
+		}
+
+		$this->assertInstanceOf( '\Psr\Http\Message\StreamInterface', $this->object->createStream( __FILE__ ) );
+	}
+
+
 	public function testGetProtocolVersion()
 	{
 		$this->response->expects( $this->once() )->method( 'getProtocolVersion' )

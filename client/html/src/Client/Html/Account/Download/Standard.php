@@ -224,7 +224,7 @@ class Standard
 	{
 		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-secure' );
 		$response = $this->getView()->response();
-		$value = $item->getValue();
+		$value = (string) $item->getValue();
 
 		if( $fs->has( $value ) )
 		{
@@ -244,7 +244,7 @@ class Standard
 			$response->withHeader( 'Pragma', 'private' );
 			$response->withHeader( 'Expires', 0 );
 
-			$response->withBody( new \Zend\Diactoros\Stream( $fs->reads( $value ) ) );
+			$response->withBody( $response->createStream( $fs->reads( $value ) ) );
 		}
 		elseif( filter_var( $value, FILTER_VALIDATE_URL ) !== false )
 		{

@@ -9,8 +9,9 @@ namespace Aimeos\Client\Html\Account\Download;
  */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
-	private $object;
 	private $context;
+	private $object;
+	private $view;
 
 
 	protected function setUp()
@@ -171,10 +172,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item->setName( 'test download' );
 
 
+		$stream = $this->getMock( '\Psr\Http\Message\StreamInterface' );
 		$response = $this->getMock( '\Psr\Http\Message\ResponseInterface' );
 		$response->expects( $this->exactly( 7 ) )->method( 'withHeader' )->will( $this->returnSelf() );
 
-		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $this->view, $response );
+		$helper = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Response\Standard' )
+			->setConstructorArgs( array( $this->view, $response ) )
+			->setMethods( array( 'createStream' ) )
+			->getMock();
+		$helper->expects( $this->once() )->method( 'createStream' )->will( $this->returnValue( $stream ) );
 		$this->view->addHelper( 'response', $helper );
 
 

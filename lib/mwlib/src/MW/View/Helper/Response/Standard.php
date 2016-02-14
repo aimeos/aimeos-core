@@ -30,9 +30,7 @@ class Standard
 	 * Initializes the request view helper.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
-	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object
-	 * @param string $clientaddr Client IP address
-	 * @param string $target Page ID or route name
+	 * @param \Psr\Http\Message\ResponseInterface $response Response object
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, \Psr\Http\Message\ResponseInterface $response )
 	{
@@ -50,6 +48,21 @@ class Standard
 	public function transform()
 	{
 		return $this;
+	}
+
+
+	/**
+	 * Creates a new PSR-7 stream object
+	 *
+	 * @return \Psr\Http\Message\StreamInterface Stream object
+	 */
+	public function createStream( $resource )
+	{
+		if( class_exists( '\Zend\Diactoros\Stream' ) ) {
+			return new \Zend\Diactoros\Stream( $resource );
+		}
+
+		throw new \Aimeos\MW\Exception( 'Please install zendframework/zend-diactoros first' );
 	}
 
 

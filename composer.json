@@ -29,8 +29,7 @@
 		"ext-PDO": "*",
 		"ext-pdo_mysql": "*",
 		"ext-zip": "*",
-		"psr/http-message": "~1.0",
-		"zendframework/zend-diactoros": "~1.0"
+		"psr/http-message": "~1.0"
 	},
 	"require-dev": {
 		"satooshi/php-coveralls": "dev-master",
