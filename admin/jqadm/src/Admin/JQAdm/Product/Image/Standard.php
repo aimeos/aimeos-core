@@ -435,7 +435,7 @@ class Standard
 		$mediaItem = $this->createItem();
 		$listItem = $this->createListItem( $id );
 
-		$files = $view->value( $view->request()->getUploadedFiles(), 'image/files', array() );
+		$files = $view->value( (array) $view->request()->getUploadedFiles(), 'image/files', array() );
 		$num = 0;
 
 		foreach( $listIds as $idx => $listid )
