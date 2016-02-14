@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->setConstructorArgs( array( $this->context, \TestHelperHtml::getHtmlTemplatePaths() ) )
 			->setMethods( array( 'checkAccess', 'checkDownload' ) )
 			->getMock();
-		$object->setView( \TestHelperHtml::getView() );
+		$object->setView( $this->view );
 
 		$object->expects( $this->once() )->method( 'checkAccess' )->will( $this->returnValue( true ) );
 		$object->expects( $this->once() )->method( 'checkDownload' )->will( $this->returnValue( true ) );
@@ -93,6 +93,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->will( $this->returnValue( $attrManagerStub->createItem() ) );
 
 		\Aimeos\MShop\Factory::injectManager( $this->context, 'order/base/product/attribute', $attrManagerStub );
+
+
+		$stream = $this->getMock( '\Psr\Http\Message\StreamInterface' );
+		$response = $this->getMock( '\Psr\Http\Message\ResponseInterface' );
+		$response->expects( $this->exactly( 7 ) )->method( 'withHeader' )->will( $this->returnSelf() );
+
+		$helper = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Response\Standard' )
+			->setConstructorArgs( array( $this->view, $response ) )
+			->setMethods( array( 'createStream' ) )
+			->getMock();
+		$helper->expects( $this->once() )->method( 'createStream' )->will( $this->returnValue( $stream ) );
+		$this->view->addHelper( 'response', $helper );
 
 
 		\Aimeos\MShop\Factory::setCache( true );
