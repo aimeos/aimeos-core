@@ -431,7 +431,6 @@ class Standard
 
 		$listIds = (array) $view->param( 'image/product.lists.id', array() );
 		$listItems = $manager->getItem( $id, array( 'media' ) )->getListItems( 'media', 'default' );
-		$mediaItems = $this->getMediaItems( $view->param( 'image/media.id', array() ) );
 
 		$mediaItem = $this->createItem();
 		$listItem = $this->createListItem( $id );
@@ -446,13 +445,7 @@ class Standard
 				$litem = $listItem;
 				$litem->setId( null );
 
-				$mediaId = $view->param( 'image/media.id/' . $idx );
-
-				if( $mediaId !== '' && isset( $mediaItems[$mediaId] ) )
-				{
-					$item = $mediaItems[$mediaId];
-				}
-				else if( ( $file = $view->value( $files, $num ) ) !== null )
+				if( ( $file = $view->value( $files, $num ) ) !== null )
 				{
 					$item = $mediaItem;
 					$item->setId( null );

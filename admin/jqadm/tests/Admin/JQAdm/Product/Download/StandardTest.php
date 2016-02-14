@@ -19,6 +19,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->view = \TestHelperJqadm::getView();
+		$request = $this->getMock( '\Psr\Http\Message\ServerRequestInterface' );
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $this->view , $request, '127.0.0.1', 'test' );
+		$this->view ->addHelper( 'request', $helper );
+
 		$this->context = \TestHelperJqadm::getContext();
 		$templatePaths = \TestHelperJqadm::getTemplatePaths();
 
@@ -103,22 +107,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
 		$this->view->addHelper( 'param', $helper );
 
-		$files = array(
-			'download' => array(
-				'tmp_name' => array( 'file' => '' ),
-				'name' => array( 'file' => '' ),
-				'type' => array( 'file' => '' ),
-				'size' => array( 'file' => 0 ),
-				'error' => array( 'file' => 0 )
-			),
-		);
+		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$request = $this->getMock( '\Psr\Http\Message\ServerRequestInterface' );
+		$request->expects( $this->any() )->method( 'getUploadedFiles' )
+			->will( $this->returnValue( array( 'download' => array( 'file' => $file ) ) ) );
 
-		$helper = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Request\Standard' )
-			->setConstructorArgs( array( $this->view, '', '', null, $files ) )
-			->setMethods( array( 'checkUploadedFile' ) )
-			->getMock();
-		$this->view->addHelper( 'request', $helper );
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $this->view , $request, '127.0.0.1', 'test' );
+		$this->view ->addHelper( 'request', $helper );
+
 		$this->view->item = $item;
+
 
 		$this->object->expects( $this->once() )->method( 'storeFile' )
 			->will( $this->returnValue( 'test/file.ext' ) );
