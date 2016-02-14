@@ -80,12 +80,22 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $params );
 		$view->addHelper( 'param', $helper );
 
+		$request = $this->getMock( '\Psr\Http\Message\ServerRequestInterface' );
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, $request, '127.0.0.1', 'test' );
+		$view->addHelper( 'request', $helper );
+
 		$this->object->process();
 	}
 
 
 	public function testProcessNoService()
 	{
+		$view = $this->object->getView();
+
+		$request = $this->getMock( '\Psr\Http\Message\ServerRequestInterface' );
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, $request, '127.0.0.1', 'test' );
+		$view->addHelper( 'request', $helper );
+
 		$this->object->process();
 	}
 

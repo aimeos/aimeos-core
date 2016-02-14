@@ -169,57 +169,32 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUploadItem()
 	{
-		$file = array(
-			'name' => 'test-binary.bin',
-			'tmp_name' => 'test.bin',
-			'error' => UPLOAD_ERR_OK,
-			'type' => 'application/binary',
-			'size' => 1024
-		);
+		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
 
 
 		$object = $this->getMockBuilder( '\Aimeos\Controller\ExtJS\Media\Standard' )
 			->setMethods( array( 'getUploadedFile' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
+		$object->expects( $this->once() )->method( 'getUploadedFile' )
+			->will( $this->returnValue( $file ) );
 
 		$name = 'ControllerCommonMediaUploadItem';
 		$this->context->getConfig()->set( 'controller/common/media/name', $name );
+
 
 		$stub = $this->getMockBuilder( '\\Aimeos\\Controller\\Common\\Media\\Standard' )
 			->setMethods( array( 'add' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
+		$stub->expects( $this->once() )->method( 'add' );
 
 		\Aimeos\Controller\Common\Media\Factory::injectController( '\\Aimeos\\Controller\\Common\\Media\\' . $name, $stub );
 
 
-		$stub->expects( $this->once() )->method( 'add' );
-
-		$object->expects( $this->once() )->method( 'getUploadedFile' )
-			->will( $this->returnValue( $file ) );
-
-
 		$media = $object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
-
 		\Aimeos\Controller\Common\Media\Factory::injectController( '\\Aimeos\\Controller\\Common\\Media\\' . $name, null );
 
 		$this->assertInstanceOf( '\stdClass', $media );
-	}
-
-
-	public function testUploadItemException()
-	{
-		$this->setExpectedException( '\Aimeos\Controller\ExtJS\Exception' );
-		$this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
-	}
-
-
-	public function testUploadItemExceptionNoUpload()
-	{
-		$_FILES = array( 'tmp_name' => '/dev/null' );
-
-		$this->setExpectedException( '\Aimeos\Controller\ExtJS\Exception' );
-		$this->object->uploadItem( (object) array( 'site' => 'unittest', 'domain' => 'product' ) );
 	}
 }

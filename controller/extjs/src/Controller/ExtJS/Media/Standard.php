@@ -121,14 +121,7 @@ class Standard
 		$item->setDomain( 'product' );
 		$item->setStatus( 1 );
 
-		$fileinfo = $this->getUploadedFile();
-		$file = new \Aimeos\MW\View\Helper\Request\File\Standard(
-			$fileinfo['tmp_name'],
-			$fileinfo['name'],
-			$fileinfo['type'],
-			$fileinfo['size'],
-			$fileinfo['error']
-		);
+		$file = $this->getUploadedFile();
 
 		\Aimeos\Controller\Common\Media\Factory::createController( $context )->add( $item, $file );
 		$manager->saveItem( $item );
@@ -188,21 +181,18 @@ class Standard
 	/**
 	 * Returns the PHP file information of the uploaded file
 	 *
-	 * @throws \Aimeos\Controller\ExtJS\Exception
-	 * @throws \Aimeos\MW\View\Exception
-	 * @return unknown
+	 * @return Psr\Http\Message\UploadedFileInterface Uploaded file
+	 * @throws \Aimeos\Controller\ExtJS\Exception If no file upload is available
 	 */
 	protected function getUploadedFile()
 	{
-		if( ( $fi = reset( $_FILES ) ) === false ) {
+		$files = $this->getContext()->getView()->request()->getUploadedFiles();
+
+		if( ( $file = reset( $files ) ) === false ) {
 			throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
 		}
 
-		if( is_uploaded_file( $fi['tmp_name'] ) === false ) {
-			throw new \Aimeos\Controller\ExtJS\Exception( sprintf( 'File "%1$s" was not uploaded', $fi['tmp_name'] ) );
-		}
-
-		return $fi;
+		return $file;
 	}
 
 

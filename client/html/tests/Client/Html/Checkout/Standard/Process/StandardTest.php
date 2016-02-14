@@ -119,6 +119,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, $param );
 		$view->addHelper( 'param', $helper );
 
+		$request = $this->getMock( '\Psr\Http\Message\ServerRequestInterface' );
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, $request, '127.0.0.1', 'test' );
+		$view->addHelper( 'request', $helper );
+
 		$orderid = $this->getOrder( '2009-03-18 16:14:32' )->getId();
 		$this->context->getSession()->set( 'aimeos/orderid', $orderid );
 
