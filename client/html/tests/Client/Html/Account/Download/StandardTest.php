@@ -61,13 +61,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcess()
 	{
-		$this->object->process();
-	}
+		$response = $this->getMock( '\Psr\Http\Message\ResponseInterface' );
+		$response->expects( $this->never() )->method( 'withHeader' )->will( $this->returnSelf() );
+		$response->expects( $this->once() )->method( 'withStatus' )->will( $this->returnSelf() );
 
+		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $this->view, $response );
+		$this->view->addHelper( 'response', $helper );
 
-	public function testProcessNoItem()
-	{
-		$this->context->setUserId( '123' );
 		$this->object->process();
 	}
 
