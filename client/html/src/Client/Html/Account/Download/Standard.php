@@ -187,7 +187,9 @@ class Standard
 			$id = $view->param( 'dl_id' );
 			$customerId = $context->getUserId();
 
-			if( $this->checkAccess( $customerId, $id ) === false ) {
+			if( $this->checkAccess( $customerId, $id ) === false )
+			{
+				$view->response()->withStatus( 401 );
 				return;
 			}
 
