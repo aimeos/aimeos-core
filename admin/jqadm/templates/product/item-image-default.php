@@ -27,6 +27,7 @@ $enc = $this->encoder();
 				<tr>
 					<td class="image-preview">
 						<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'product.lists.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
+						<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'media.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $this->get( 'imageData/media.id/' . $idx ) ); ?>" />
 						<input class="item-preview" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'media.preview', '' ) ) ); ?>" value="<?php echo $enc->attr( $this->get( 'imageData/media.preview/' . $idx ) ); ?>" />
 						<img class="item-preview" src="<?php echo $this->content( $this->get( 'imageData/media.preview/' . $idx ) ); ?>" />
 					</td>
