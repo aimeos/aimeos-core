@@ -241,10 +241,10 @@ class Standard
 			$response->withHeader( 'Content-Description', 'File Transfer' );
 			$response->withHeader( 'Content-Type', 'application/octet-stream' );
 			$response->withHeader( 'Content-Disposition', 'attachment; filename="' . $name . '"' );
-			$response->withHeader( 'Content-Length', $fs->size( $value ) );
+			$response->withHeader( 'Content-Length', (string) $fs->size( $value ) );
 			$response->withHeader( 'Cache-Control', 'must-revalidate' );
 			$response->withHeader( 'Pragma', 'private' );
-			$response->withHeader( 'Expires', 0 );
+			$response->withHeader( 'Expires', '0' );
 
 			$response->withBody( $response->createStream( $fs->reads( $value ) ) );
 		}
