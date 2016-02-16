@@ -497,24 +497,24 @@ class Standard
 
 		$listItems = $manager->getItem( $id, array( 'attribute' ) )->getListItems( 'attribute', 'hidden' );
 
-		if( ( $listId = $view->param( 'download/product.lists.id' ) ) !== null )
+		$listId = $view->param( 'download/product.lists.id' );
+
+		if( !isset( $listItems[$listId] ) )
 		{
-			if( !isset( $listItems[$listId] ) )
-			{
-				$litem = $this->createListItem( $id );
-				$item = $this->createItem();
-			}
-			else
-			{
-				$litem = $listItems[$listId];
-				$item = $litem->getRefItem();
-			}
+			$litem = $this->createListItem( $id );
+			$item = $this->createItem();
+		}
+		else
+		{
+			$litem = $listItems[$listId];
+			$item = $litem->getRefItem();
+		}
 
+		if( ( $file = $view->value( $view->request()->getUploadedFiles(), 'download/file' ) ) !== null
+			&& $file->getError() === UPLOAD_ERR_OK
+		) {
+			$item->setCode( $this->storeFile( $file ) );
 			$item->setLabel( $view->param( 'download/attribute.label' ) );
-
-			if( ( $file = $view->value( $view->request()->getUploadedFiles(), 'download/file' ) ) !== null ) {
-				$item->setCode( $this->storeFile( $file ) );
-			}
 
 			$attrManager->saveItem( $item );
 
