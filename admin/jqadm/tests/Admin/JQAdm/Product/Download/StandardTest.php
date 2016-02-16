@@ -108,6 +108,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->view->addHelper( 'param', $helper );
 
 		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file->expects( $this->any() )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_OK ) );
+
 		$request = $this->getMock( '\Psr\Http\Message\ServerRequestInterface' );
 		$request->expects( $this->any() )->method( 'getUploadedFiles' )
 			->will( $this->returnValue( array( 'download' => array( 'file' => $file ) ) ) );
