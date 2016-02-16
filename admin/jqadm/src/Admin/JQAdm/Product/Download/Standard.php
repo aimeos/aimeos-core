@@ -510,7 +510,7 @@ class Standard
 			$item = $litem->getRefItem();
 		}
 
-		if( ( $file = $view->value( $view->request()->getUploadedFiles(), 'download/file' ) ) !== null
+		if( ( $file = $view->value( (array) $view->request()->getUploadedFiles(), 'download/file' ) ) !== null
 			&& $file->getError() === UPLOAD_ERR_OK
 		) {
 			$item->setCode( $this->storeFile( $file ) );
