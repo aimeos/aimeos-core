@@ -430,6 +430,12 @@ class Standard
 			$required = array( 'catalog' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
 
+			/** mshop/catalog/manager/standard/search-item/mysql
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * @see mshop/catalog/manager/standard/search-item/ansi
+			 */
+
 			/** mshop/catalog/manager/standard/search-item/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
@@ -487,6 +493,12 @@ class Standard
 			 * @see mshop/catalog/manager/standard/update-parentid/ansi
 			 */
 			$cfgPathSearch = 'mshop/catalog/manager/standard/search-item';
+
+			/** mshop/catalog/manager/standard/count/mysql
+			 * Counts the number of records matched by the given criteria in the database
+			 *
+			 * @see mshop/catalog/manager/standard/count/ansi
+			 */
 
 			/** mshop/catalog/manager/standard/count/ansi
 			 * Counts the number of records matched by the given criteria in the database
@@ -836,6 +848,12 @@ class Standard
 				'dbname' => $this->getResourceName(),
 				'sql' => array(
 
+					/** mshop/catalog/manager/standard/delete/mysql
+					 * Deletes the items matched by the given IDs from the database
+					 *
+					 * @see mshop/catalog/manager/standard/delete/ansi
+					 */
+
 					/** mshop/catalog/manager/standard/delete/ansi
 					 * Deletes the items matched by the given IDs from the database
 					 *
@@ -868,6 +886,12 @@ class Standard
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
 					'delete' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/delete' ) ),
+
+					/** mshop/catalog/manager/standard/get/mysql
+					 * Returns a node record and its complete subtree optionally limited by the level
+					 *
+					 * @see mshop/catalog/manager/standard/get/ansi
+					 */
 
 					/** mshop/catalog/manager/standard/get/ansi
 					 * Returns a node record and its complete subtree optionally limited by the level
@@ -909,6 +933,12 @@ class Standard
 					 */
 					'get' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/get' ) ),
 
+					/** mshop/catalog/manager/standard/insert/mysql
+					 * Inserts a new catalog node into the database table
+					 *
+					 * @see mshop/catalog/manager/standard/insert/ansi
+					 */
+
 					/** mshop/catalog/manager/standard/insert/ansi
 					 * Inserts a new catalog node into the database table
 					 *
@@ -947,6 +977,12 @@ class Standard
 					 */
 					'insert' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/insert' ) ),
 
+					/** mshop/catalog/manager/standard/move-left/mysql
+					 * Updates the left values of the nodes that are moved within the catalog tree
+					 *
+					 * @see mshop/catalog/manager/standard/move-left/ansi
+					 */
+
 					/** mshop/catalog/manager/standard/move-left/ansi
 					 * Updates the left values of the nodes that are moved within the catalog tree
 					 *
@@ -983,6 +1019,12 @@ class Standard
 					 */
 					'move-left' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/move-left' ) ),
 
+					/** mshop/catalog/manager/standard/move-right/mysql
+					 * Updates the left values of the nodes that are moved within the catalog tree
+					 *
+					 * @see mshop/catalog/manager/standard/move-right/ansi
+					 */
+
 					/** mshop/catalog/manager/standard/move-right/ansi
 					 * Updates the left values of the nodes that are moved within the catalog tree
 					 *
@@ -1018,6 +1060,12 @@ class Standard
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
 					'move-right' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/move-right' ) ),
+
+					/** mshop/catalog/manager/standard/search/mysql
+					 * Retrieves the records matched by the given criteria in the database
+					 *
+					 * @see mshop/catalog/manager/standard/search/ansi
+					 */
 
 					/** mshop/catalog/manager/standard/search/ansi
 					 * Retrieves the records matched by the given criteria in the database
@@ -1061,6 +1109,12 @@ class Standard
 					 */
 					'search' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/search' ) ),
 
+					/** mshop/catalog/manager/standard/update/mysql
+					 * Updates an existing catalog node in the database
+					 *
+					 * @see mshop/catalog/manager/standard/update/ansi
+					 */
+
 					/** mshop/catalog/manager/standard/update/ansi
 					 * Updates an existing catalog node in the database
 					 *
@@ -1096,6 +1150,12 @@ class Standard
 					 */
 					'update' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/update' ) ),
 
+					/** mshop/catalog/manager/standard/update-parentid/mysql
+					 * Updates the parent ID after moving a node record
+					 *
+					 * @see mshop/catalog/manager/standard/update-parentid/ansi
+					 */
+
 					/** mshop/catalog/manager/standard/update-parentid/ansi
 					 * Updates the parent ID after moving a node record
 					 *
@@ -1130,6 +1190,12 @@ class Standard
 					 * @see mshop/catalog/manager/standard/update-usage/ansi
 					 */
 					'update-parentid' => str_replace( ':siteid', $siteid, $this->getSqlConfig( 'mshop/catalog/manager/standard/update-parentid' ) ),
+
+					/** mshop/catalog/manager/standard/newid/mysql
+					 * Retrieves the ID generated by the database when inserting a new record
+					 *
+					 * @see mshop/catalog/manager/standard/newid/ansi
+					 */
 
 					/** mshop/catalog/manager/standard/newid/ansi
 					 * Retrieves the ID generated by the database when inserting a new record
@@ -1222,6 +1288,12 @@ class Standard
 
 			if( $case !== true )
 			{
+				/** mshop/catalog/manager/standard/update-usage/mysql
+				 * Updates the config, editor and mtime value of an updated record
+				 *
+				 * @see mshop/catalog/manager/standard/update-usage/ansi
+				 */
+
 				/** mshop/catalog/manager/standard/update-usage/ansi
 				 * Updates the config, editor and mtime value of an updated record
 				 *
@@ -1261,6 +1333,12 @@ class Standard
 			}
 			else
 			{
+				/** mshop/catalog/manager/standard/insert-usage/mysql
+				 * Updates the config, editor, ctime and mtime value of an inserted record
+				 *
+				 * @see mshop/catalog/manager/standard/insert-usage/ansi
+				 */
+
 				/** mshop/catalog/manager/standard/insert-usage/ansi
 				 * Updates the config, editor, ctime and mtime value of an inserted record
 				 *

@@ -117,6 +117,12 @@ class Standard
 	 */
 	public function cleanupIndex( $timestamp )
 	{
+		/** mshop/index/manager/attribute/standard/cleanup/mysql
+		 * Deletes the index attribute records that haven't been touched
+		 *
+		 * @see mshop/index/manager/attribute/standard/cleanup/ansi
+		 */
+
 		/** mshop/index/manager/attribute/standard/cleanup/ansi
 		 * Deletes the index attribute records that haven't been touched
 		 *
@@ -152,6 +158,12 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
+		/** mshop/index/manager/attribute/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/index/manager/attribute/standard/delete/ansi
+		 */
+
 		/** mshop/index/manager/attribute/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
@@ -357,6 +369,12 @@ class Standard
 	 */
 	public function optimize()
 	{
+		/** mshop/index/manager/attribute/standard/optimize/mysql
+		 * Optimizes the stored attribute data for retrieving the records faster
+		 *
+		 * @see mshop/index/manager/attribute/standard/optimize/ansi
+		 */
+
 		/** mshop/index/manager/attribute/standard/optimize/ansi
 		 * Optimizes the stored attribute data for retrieving the records faster
 		 *
@@ -410,6 +428,12 @@ class Standard
 				foreach( $item->getListItems( 'attribute' ) as $listItem ) {
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
+
+				/** mshop/index/manager/attribute/standard/insert/mysql
+				 * Inserts a new attribute record into the product index database
+				 *
+				 * @see mshop/index/manager/attribute/standard/insert/ansi
+				 */
 
 				/** mshop/index/manager/attribute/standard/insert/ansi
 				 * Inserts a new attribute record into the product index database
@@ -492,6 +516,12 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
+		/** mshop/index/manager/attribute/standard/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/attribute/standard/search/ansi
+		 */
+
 		/** mshop/index/manager/attribute/standard/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
@@ -542,6 +572,12 @@ class Standard
 		 * @see mshop/index/manager/attribute/standard/aggregate/ansi
 		 */
 		$cfgPathSearch = 'mshop/index/manager/attribute/standard/search';
+
+		/** mshop/index/manager/attribute/standard/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/attribute/standard/count/ansi
+		 */
 
 		/** mshop/index/manager/attribute/standard/count/ansi
 		 * Counts the number of records matched by the given criteria in the database

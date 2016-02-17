@@ -126,6 +126,12 @@ class Standard
 	 */
 	public function cleanupIndex( $timestamp )
 	{
+		/** mshop/index/manager/text/standard/cleanup/mysql
+		 * Deletes the index text records that haven't been touched
+		 *
+		 * @see mshop/index/manager/text/standard/cleanup/ansi
+		 */
+
 		/** mshop/index/manager/text/standard/cleanup/ansi
 		 * Deletes the index text records that haven't been touched
 		 *
@@ -162,6 +168,12 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
+		/** mshop/index/manager/text/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/index/manager/text/standard/delete/ansi
+		 */
+
 		/** mshop/index/manager/text/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
@@ -368,6 +380,12 @@ class Standard
 	 */
 	public function optimize()
 	{
+		/** mshop/index/manager/text/standard/optimize/mysql
+		 * Optimizes the stored text data for retrieving the records faster
+		 *
+		 * @see mshop/index/manager/text/standard/optimize/ansi
+		 */
+
 		/** mshop/index/manager/text/standard/optimize/ansi
 		 * Optimizes the stored text data for retrieving the records faster
 		 *
@@ -428,6 +446,12 @@ class Standard
 				foreach( $item->getListItems( 'text' ) as $listItem ) {
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
+
+				/** mshop/index/manager/text/standard/insert/mysql
+				 * Inserts a new text record into the product index database
+				 *
+				 * @see mshop/index/manager/text/standard/insert/ansi
+				 */
 
 				/** mshop/index/manager/text/standard/insert/ansi
 				 * Inserts a new text record into the product index database
@@ -521,6 +545,12 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
+		/** mshop/index/manager/text/standard/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/text/standard/search/ansi
+		 */
+
 		/** mshop/index/manager/text/standard/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
@@ -574,6 +604,12 @@ class Standard
 		 * @see mshop/index/manager/text/standard/text/ansi
 		 */
 		$cfgPathSearch = 'mshop/index/manager/text/standard/search';
+
+		/** mshop/index/manager/text/standard/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/text/standard/count/ansi
+		 */
 
 		/** mshop/index/manager/text/standard/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
@@ -646,6 +682,12 @@ class Standard
 		{
 			$required = array( 'product' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+
+			/** mshop/index/manager/text/standard/text/mysql
+			 * Retrieves the text records matched by the given criteria in the database
+			 *
+			 * @see mshop/index/manager/text/standard/text/ansi
+			 */
 
 			/** mshop/index/manager/text/standard/text/ansi
 			 * Retrieves the text records matched by the given criteria in the database
@@ -756,6 +798,12 @@ class Standard
 
 		try
 		{
+			/** mshop/index/manager/text/standard/insert/mysql
+			 * Inserts a new text record into the product index database
+			 *
+			 * @see mshop/index/manager/text/standard/insert/ansi
+			 */
+
 			/** mshop/index/manager/text/standard/insert/ansi
 			 * Inserts a new text record into the product index database
 			 *

@@ -34,6 +34,12 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
+		/** mshop/index/manager/standard/aggregate/mysql
+		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
+		 *
+		 * @see mshop/index/manager/standard/aggregate/ansi
+		 */
+
 		/** mshop/index/manager/standard/aggregate/ansi
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
@@ -272,6 +278,12 @@ class Standard
 	 */
 	public function optimize()
 	{
+		/** mshop/index/manager/standard/optimize/mysql
+		 * Optimizes the stored product data for retrieving the records faster
+		 *
+		 * @see mshop/index/manager/standard/optimize/ansi
+		 */
+
 		/** mshop/index/manager/standard/optimize/ansi
 		 * Optimizes the stored product data for retrieving the records faster
 		 *
@@ -502,6 +514,12 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
+		/** mshop/index/manager/standard/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/standard/search/ansi
+		 */
+
 		/** mshop/index/manager/standard/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
@@ -552,6 +570,12 @@ class Standard
 		 * @see mshop/index/manager/standard/aggregate/ansi
 		 */
 		$cfgPathSearch = 'mshop/index/manager/standard/search';
+
+		/** mshop/index/manager/standard/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/standard/count/ansi
+		 */
 
 		/** mshop/index/manager/standard/count/ansi
 		 * Counts the number of records matched by the given criteria in the database

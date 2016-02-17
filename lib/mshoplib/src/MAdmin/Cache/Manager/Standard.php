@@ -88,6 +88,12 @@ class Standard
 	{
 		if( !isset( $this->object ) )
 		{
+			/** madmin/cache/manager/standard/deletebytag/mysql
+			 * Deletes the items from the database matched by the given tags
+			 *
+			 * @see madmin/cache/manager/standard/deletebytag/ansi
+			 */
+
 			/** madmin/cache/manager/standard/deletebytag/ansi
 			 * Deletes the items from the database matched by the given tags
 			 *
@@ -114,6 +120,12 @@ class Standard
 			 * @see madmin/cache/manager/standard/count/ansi
 			 */
 
+			/** madmin/cache/manager/standard/getbytag/mysql
+			 * Retrieves the records from the database matched by the given tags
+			 *
+			 * @see madmin/cache/manager/standard/getbytag/ansi
+			 */
+
 			/** madmin/cache/manager/standard/getbytag/ansi
 			 * Retrieves the records from the database matched by the given tags
 			 *
@@ -135,6 +147,12 @@ class Standard
 			 * @see madmin/cache/manager/standard/settag/ansi
 			 * @see madmin/cache/manager/standard/search/ansi
 			 * @see madmin/cache/manager/standard/count/ansi
+			 */
+
+			/** madmin/cache/manager/standard/get/mysql
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * @see madmin/cache/manager/standard/get/ansi
 			 */
 
 			/** madmin/cache/manager/standard/get/ansi
@@ -227,6 +245,12 @@ class Standard
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
+		/** madmin/cache/manager/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see madmin/cache/manager/standard/delete/ansi
+		 */
+
 		/** madmin/cache/manager/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
@@ -292,6 +316,12 @@ class Standard
 			return;
 		}
 
+		/** madmin/cache/manager/standard/set/mysql
+		 * Inserts the cache entry into the database
+		 *
+		 * @see madmin/cache/manager/standard/set/ansi
+		 */
+
 		/** madmin/cache/manager/standard/set/ansi
 		 * Inserts the cache entry into the database
 		 *
@@ -322,6 +352,12 @@ class Standard
 		 * @see madmin/cache/manager/standard/settag/ansi
 		 * @see madmin/cache/manager/standard/search/ansi
 		 * @see madmin/cache/manager/standard/count/ansi
+		 */
+
+		/** madmin/cache/manager/standard/settag/mysql
+		 * Inserts a new tag to an existing cache entry
+		 *
+		 * @see madmin/cache/manager/standard/settag/ansi
 		 */
 
 		/** madmin/cache/manager/standard/settag/ansi
@@ -415,6 +451,12 @@ class Standard
 			$required = array( 'cache' );
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ONE;
 
+			/** madmin/cache/manager/standard/search/mysql
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * @see madmin/cache/manager/standard/search/ansi
+			 */
+
 			/** madmin/cache/manager/standard/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
@@ -451,6 +493,12 @@ class Standard
 			 * @see madmin/cache/manager/standard/count/ansi
 			 */
 			$cfgPathSearch = 'madmin/cache/manager/standard/search';
+
+			/** madmin/cache/manager/standard/count/mysql
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * @see madmin/cache/manager/standard/count/ansi
+			 */
 
 			/** madmin/cache/manager/standard/count/ansi
 			 * Retrieves the records matched by the given criteria in the database

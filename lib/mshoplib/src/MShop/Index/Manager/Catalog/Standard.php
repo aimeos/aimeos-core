@@ -125,6 +125,12 @@ class Standard
 	 */
 	public function cleanupIndex( $timestamp )
 	{
+		/** mshop/index/manager/catalog/standard/cleanup/mysql
+		 * Deletes the index catalog records that haven't been touched
+		 *
+		 * @see mshop/index/manager/catalog/standard/cleanup/ansi
+		 */
+
 		/** mshop/index/manager/catalog/standard/cleanup/ansi
 		 * Deletes the index catalog records that haven't been touched
 		 *
@@ -160,6 +166,12 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
+		/** mshop/index/manager/catalog/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/index/manager/catalog/standard/delete/ansi
+		 */
+
 		/** mshop/index/manager/catalog/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
@@ -365,6 +377,12 @@ class Standard
 	 */
 	public function optimize()
 	{
+		/** mshop/index/manager/catalog/standard/optimize/mysql
+		 * Optimizes the stored catalog data for retrieving the records faster
+		 *
+		 * @see mshop/index/manager/catalog/standard/optimize/ansi
+		 */
+
 		/** mshop/index/manager/catalog/standard/optimize/ansi
 		 * Optimizes the stored catalog data for retrieving the records faster
 		 *
@@ -436,6 +454,12 @@ class Standard
 			foreach( $items as $id => $item )
 			{
 				$parentId = $item->getId(); // $id is not $item->getId() for sub-products
+
+				/** mshop/index/manager/catalog/standard/insert/mysql
+				 * Inserts a new catalog record into the product index database
+				 *
+				 * @see mshop/index/manager/catalog/standard/insert/ansi
+				 */
 
 				/** mshop/index/manager/catalog/standard/insert/ansi
 				 * Inserts a new catalog record into the product index database
@@ -511,6 +535,12 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
+		/** mshop/index/manager/catalog/standard/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/catalog/standard/search/ansi
+		 */
+
 		/** mshop/index/manager/catalog/standard/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
@@ -561,6 +591,12 @@ class Standard
 		 * @see mshop/index/manager/catalog/standard/aggregate/ansi
 		 */
 		$cfgPathSearch = 'mshop/index/manager/catalog/standard/search';
+
+		/** mshop/index/manager/catalog/standard/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/catalog/standard/count/ansi
+		 */
 
 		/** mshop/index/manager/catalog/standard/count/ansi
 		 * Counts the number of records matched by the given criteria in the database

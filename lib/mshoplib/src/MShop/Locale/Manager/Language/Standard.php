@@ -142,6 +142,12 @@ class Standard
 
 			if( $id === null )
 			{
+				/** mshop/locale/manager/language/standard/insert/mysql
+				 * Inserts a new language record into the database table
+				 *
+				 * @see mshop/locale/manager/language/standard/insert/ansi
+				 */
+
 				/** mshop/locale/manager/language/standard/insert/ansi
 				 * Inserts a new language record into the database table
 				 *
@@ -170,6 +176,12 @@ class Standard
 			}
 			else
 			{
+				/** mshop/locale/manager/language/standard/update/mysql
+				 * Updates an existing language record in the database
+				 *
+				 * @see mshop/locale/manager/language/standard/update/ansi
+				 */
+
 				/** mshop/locale/manager/language/standard/update/ansi
 				 * Updates an existing language record in the database
 				 *
@@ -230,6 +242,12 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
+		/** mshop/locale/manager/language/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/locale/manager/language/standard/delete/ansi
+		 */
+
 		/** mshop/locale/manager/language/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
@@ -471,6 +489,12 @@ class Standard
 				$search->getSliceSize(),
 			);
 
+			/** mshop/locale/manager/language/standard/search/mysql
+			 * Retrieves the records matched by the given criteria in the database
+			 *
+			 * @see mshop/locale/manager/language/standard/search/ansi
+			 */
+
 			/** mshop/locale/manager/language/standard/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
@@ -540,6 +564,12 @@ class Standard
 
 			if( $total !== null )
 			{
+				/** mshop/locale/manager/language/standard/count/mysql
+				 * Counts the number of records matched by the given criteria in the database
+				 *
+				 * @see mshop/locale/manager/language/standard/count/ansi
+				 */
+
 				/** mshop/locale/manager/language/standard/count/ansi
 				 * Counts the number of records matched by the given criteria in the database
 				 *

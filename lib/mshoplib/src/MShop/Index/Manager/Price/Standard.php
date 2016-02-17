@@ -161,6 +161,12 @@ class Standard
 	 */
 	public function cleanupIndex( $timestamp )
 	{
+		/** mshop/index/manager/price/standard/cleanup/mysql
+		 * Deletes the index price records that haven't been touched
+		 *
+		 * @see mshop/index/manager/price/standard/cleanup/ansi
+		 */
+
 		/** mshop/index/manager/price/standard/cleanup/ansi
 		 * Deletes the index price records that haven't been touched
 		 *
@@ -196,6 +202,12 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
+		/** mshop/index/manager/price/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/index/manager/price/standard/delete/ansi
+		 */
+
 		/** mshop/index/manager/price/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
@@ -401,6 +413,12 @@ class Standard
 	 */
 	public function optimize()
 	{
+		/** mshop/index/manager/price/standard/optimize/mysql
+		 * Optimizes the stored price data for retrieving the records faster
+		 *
+		 * @see mshop/index/manager/price/standard/optimize/ansi
+		 */
+
 		/** mshop/index/manager/price/standard/optimize/ansi
 		 * Optimizes the stored price data for retrieving the records faster
 		 *
@@ -454,6 +472,12 @@ class Standard
 				foreach( $item->getListItems( 'price' ) as $listItem ) {
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
+
+				/** mshop/index/manager/price/standard/insert/mysql
+				 * Inserts a new price record into the product index database
+				 *
+				 * @see mshop/index/manager/price/standard/insert/ansi
+				 */
 
 				/** mshop/index/manager/price/standard/insert/ansi
 				 * Inserts a new price record into the product index database
@@ -542,6 +566,12 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
+		/** mshop/index/manager/price/standard/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/price/standard/search/ansi
+		 */
+
 		/** mshop/index/manager/price/standard/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
@@ -592,6 +622,12 @@ class Standard
 		 * @see mshop/index/manager/price/standard/aggregate/ansi
 		 */
 		$cfgPathSearch = 'mshop/index/manager/price/standard/search';
+
+		/** mshop/index/manager/price/standard/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/index/manager/price/standard/count/ansi
+		 */
 
 		/** mshop/index/manager/price/standard/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
