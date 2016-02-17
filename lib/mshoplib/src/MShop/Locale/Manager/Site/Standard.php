@@ -172,7 +172,7 @@ class Standard
 		{
 			$id = $item->getId();
 
-			/** mshop/locale/manager/site/standard/update
+			/** mshop/locale/manager/site/standard/update/ansi
 			 * Updates an existing site record in the database
 			 *
 			 * The SQL statement must be a string suitable for being used as
@@ -189,11 +189,11 @@ class Standard
 			 * @param string SQL statement for updating records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/standard/insert
-			 * @see mshop/locale/manager/site/standard/delete
-			 * @see mshop/locale/manager/site/standard/search
-			 * @see mshop/locale/manager/site/standard/count
-			 * @see mshop/locale/manager/site/standard/newid
+			 * @see mshop/locale/manager/site/standard/insert/ansi
+			 * @see mshop/locale/manager/site/standard/delete/ansi
+			 * @see mshop/locale/manager/site/standard/search/ansi
+			 * @see mshop/locale/manager/site/standard/count/ansi
+			 * @see mshop/locale/manager/site/standard/newid/ansi
 			 */
 			$path = 'mshop/locale/manager/site/standard/update';
 
@@ -230,7 +230,7 @@ class Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
-		/** mshop/locale/manager/site/standard/delete
+		/** mshop/locale/manager/site/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the site records specified by the given IDs from the
@@ -248,11 +248,11 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/locale/manager/site/standard/insert
-		 * @see mshop/locale/manager/site/standard/update
-		 * @see mshop/locale/manager/site/standard/search
-		 * @see mshop/locale/manager/site/standard/count
-		 * @see mshop/locale/manager/site/standard/newid
+		 * @see mshop/locale/manager/site/standard/insert/ansi
+		 * @see mshop/locale/manager/site/standard/update/ansi
+		 * @see mshop/locale/manager/site/standard/search/ansi
+		 * @see mshop/locale/manager/site/standard/count/ansi
+		 * @see mshop/locale/manager/site/standard/newid/ansi
 		 */
 		$path = 'mshop/locale/manager/site/standard/delete';
 		$this->deleteItemsBase( $ids, $path, false );
@@ -542,7 +542,7 @@ class Standard
 				$search->getSliceSize(),
 			);
 
-			/** mshop/locale/manager/site/standard/search
+			/** mshop/locale/manager/site/standard/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the attribute
@@ -587,11 +587,11 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/standard/insert
-			 * @see mshop/locale/manager/site/standard/update
-			 * @see mshop/locale/manager/site/standard/delete
-			 * @see mshop/locale/manager/site/standard/count
-			 * @see mshop/locale/manager/site/standard/newid
+			 * @see mshop/locale/manager/site/standard/insert/ansi
+			 * @see mshop/locale/manager/site/standard/update/ansi
+			 * @see mshop/locale/manager/site/standard/delete/ansi
+			 * @see mshop/locale/manager/site/standard/count/ansi
+			 * @see mshop/locale/manager/site/standard/newid/ansi
 			 */
 			$path = 'mshop/locale/manager/site/standard/search';
 
@@ -621,7 +621,7 @@ class Standard
 
 			if( $total !== null )
 			{
-				/** mshop/locale/manager/site/standard/count
+				/** mshop/locale/manager/site/standard/count/ansi
 				 * Counts the number of records matched by the given criteria in the database
 				 *
 				 * Counts all records matched by the given criteria from the attribute
@@ -660,11 +660,11 @@ class Standard
 				 * @param string SQL statement for counting items
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/locale/manager/site/standard/insert
-				 * @see mshop/locale/manager/site/standard/update
-				 * @see mshop/locale/manager/site/standard/delete
-				 * @see mshop/locale/manager/site/standard/search
-				 * @see mshop/locale/manager/site/standard/newid
+				 * @see mshop/locale/manager/site/standard/insert/ansi
+				 * @see mshop/locale/manager/site/standard/update/ansi
+				 * @see mshop/locale/manager/site/standard/delete/ansi
+				 * @see mshop/locale/manager/site/standard/search/ansi
+				 * @see mshop/locale/manager/site/standard/newid/ansi
 				 */
 				$path = 'mshop/locale/manager/site/standard/count';
 
@@ -790,7 +790,7 @@ class Standard
 		{
 			$date = date( 'Y-m-d H:i:s' );
 
-			/** mshop/locale/manager/site/standard/insert
+			/** mshop/locale/manager/site/standard/insert/ansi
 			 * Inserts a new currency record into the database table
 			 *
 			 * The SQL statement must be a string suitable for being used as
@@ -809,11 +809,11 @@ class Standard
 			 * @param string SQL statement for inserting records
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/standard/update
-			 * @see mshop/locale/manager/site/standard/delete
-			 * @see mshop/locale/manager/site/standard/search
-			 * @see mshop/locale/manager/site/standard/count
-			 * @see mshop/locale/manager/site/standard/newid
+			 * @see mshop/locale/manager/site/standard/update/ansi
+			 * @see mshop/locale/manager/site/standard/delete/ansi
+			 * @see mshop/locale/manager/site/standard/search/ansi
+			 * @see mshop/locale/manager/site/standard/count/ansi
+			 * @see mshop/locale/manager/site/standard/newid/ansi
 			 */
 			$path = 'mshop/locale/manager/site/standard/insert';
 
@@ -830,7 +830,7 @@ class Standard
 
 			$stmt->execute()->finish();
 
-			/** mshop/locale/manager/site/standard/newid
+			/** mshop/locale/manager/site/standard/newid/ansi
 			 * Retrieves the ID generated by the database when inserting a new record
 			 *
 			 * As soon as a new record is inserted into the database table,
@@ -854,11 +854,11 @@ class Standard
 			 * @param string SQL statement for retrieving the last inserted record ID
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/site/standard/insert
-			 * @see mshop/locale/manager/site/standard/update
-			 * @see mshop/locale/manager/site/standard/delete
-			 * @see mshop/locale/manager/site/standard/search
-			 * @see mshop/locale/manager/site/standard/count
+			 * @see mshop/locale/manager/site/standard/insert/ansi
+			 * @see mshop/locale/manager/site/standard/update/ansi
+			 * @see mshop/locale/manager/site/standard/delete/ansi
+			 * @see mshop/locale/manager/site/standard/search/ansi
+			 * @see mshop/locale/manager/site/standard/count/ansi
 			 */
 			$path = 'mshop/locale/manager/standard/newid';
 			$item->setId( $this->newId( $conn, $this->getSqlConfig( $path ) ) );

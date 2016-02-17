@@ -142,7 +142,7 @@ class Standard
 
 			if( $id === null )
 			{
-				/** mshop/locale/manager/language/standard/insert
+				/** mshop/locale/manager/language/standard/insert/ansi
 				 * Inserts a new language record into the database table
 				 *
 				 * The SQL statement must be a string suitable for being used as
@@ -161,16 +161,16 @@ class Standard
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/locale/manager/language/standard/update
-				 * @see mshop/locale/manager/language/standard/delete
-				 * @see mshop/locale/manager/language/standard/search
-				 * @see mshop/locale/manager/language/standard/count
+				 * @see mshop/locale/manager/language/standard/update/ansi
+				 * @see mshop/locale/manager/language/standard/delete/ansi
+				 * @see mshop/locale/manager/language/standard/search/ansi
+				 * @see mshop/locale/manager/language/standard/count/ansi
 				 */
 				$path = 'mshop/locale/manager/language/standard/insert';
 			}
 			else
 			{
-				/** mshop/locale/manager/language/standard/update
+				/** mshop/locale/manager/language/standard/update/ansi
 				 * Updates an existing language record in the database
 				 *
 				 * The SQL statement must be a string suitable for being used as
@@ -187,10 +187,10 @@ class Standard
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/locale/manager/language/standard/insert
-				 * @see mshop/locale/manager/language/standard/delete
-				 * @see mshop/locale/manager/language/standard/search
-				 * @see mshop/locale/manager/language/standard/count
+				 * @see mshop/locale/manager/language/standard/insert/ansi
+				 * @see mshop/locale/manager/language/standard/delete/ansi
+				 * @see mshop/locale/manager/language/standard/search/ansi
+				 * @see mshop/locale/manager/language/standard/count/ansi
 				 */
 				$path = 'mshop/locale/manager/language/standard/update';
 			}
@@ -230,7 +230,7 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
-		/** mshop/locale/manager/language/standard/delete
+		/** mshop/locale/manager/language/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the language records specified by the given IDs from the
@@ -248,10 +248,10 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/locale/manager/language/standard/insert
-		 * @see mshop/locale/manager/language/standard/update
-		 * @see mshop/locale/manager/language/standard/search
-		 * @see mshop/locale/manager/language/standard/count
+		 * @see mshop/locale/manager/language/standard/insert/ansi
+		 * @see mshop/locale/manager/language/standard/update/ansi
+		 * @see mshop/locale/manager/language/standard/search/ansi
+		 * @see mshop/locale/manager/language/standard/count/ansi
 		 */
 		$path = 'mshop/locale/manager/language/standard/delete';
 		$this->deleteItemsBase( $ids, $path );
@@ -471,7 +471,7 @@ class Standard
 				$search->getSliceSize(),
 			);
 
-			/** mshop/locale/manager/language/standard/search
+			/** mshop/locale/manager/language/standard/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the attribute
@@ -516,10 +516,10 @@ class Standard
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/locale/manager/language/standard/insert
-			 * @see mshop/locale/manager/language/standard/update
-			 * @see mshop/locale/manager/language/standard/delete
-			 * @see mshop/locale/manager/language/standard/count
+			 * @see mshop/locale/manager/language/standard/insert/ansi
+			 * @see mshop/locale/manager/language/standard/update/ansi
+			 * @see mshop/locale/manager/language/standard/delete/ansi
+			 * @see mshop/locale/manager/language/standard/count/ansi
 			 */
 			$path = 'mshop/locale/manager/language/standard/search';
 
@@ -540,7 +540,7 @@ class Standard
 
 			if( $total !== null )
 			{
-				/** mshop/locale/manager/language/standard/count
+				/** mshop/locale/manager/language/standard/count/ansi
 				 * Counts the number of records matched by the given criteria in the database
 				 *
 				 * Counts all records matched by the given criteria from the attribute
@@ -579,10 +579,10 @@ class Standard
 				 * @param string SQL statement for counting items
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/locale/manager/language/standard/insert
-				 * @see mshop/locale/manager/language/standard/update
-				 * @see mshop/locale/manager/language/standard/delete
-				 * @see mshop/locale/manager/language/standard/search
+				 * @see mshop/locale/manager/language/standard/insert/ansi
+				 * @see mshop/locale/manager/language/standard/update/ansi
+				 * @see mshop/locale/manager/language/standard/delete/ansi
+				 * @see mshop/locale/manager/language/standard/search/ansi
 				 */
 				$path = 'mshop/locale/manager/language/standard/count';
 

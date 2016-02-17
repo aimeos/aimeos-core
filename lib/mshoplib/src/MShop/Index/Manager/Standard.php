@@ -34,7 +34,7 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
-		/** mshop/index/manager/standard/aggregate
+		/** mshop/index/manager/standard/aggregate/ansi
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -70,9 +70,9 @@ class Standard
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/standard/count
-		 * @see mshop/index/manager/standard/optimize
-		 * @see mshop/index/manager/standard/search
+		 * @see mshop/index/manager/standard/count/ansi
+		 * @see mshop/index/manager/standard/optimize/ansi
+		 * @see mshop/index/manager/standard/search/ansi
 		 */
 		return $this->aggregateBase( $search, $key, 'mshop/index/manager/standard/aggregate', array( 'product' ) );
 	}
@@ -272,7 +272,7 @@ class Standard
 	 */
 	public function optimize()
 	{
-		/** mshop/index/manager/standard/optimize
+		/** mshop/index/manager/standard/optimize/ansi
 		 * Optimizes the stored product data for retrieving the records faster
 		 *
 		 * The SQL statement should reorganize the data in the DBMS storage to
@@ -287,9 +287,9 @@ class Standard
 		 * @param string SQL statement for optimizing the stored product data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/standard/count
-		 * @see mshop/index/manager/standard/search
-		 * @see mshop/index/manager/standard/aggregate
+		 * @see mshop/index/manager/standard/count/ansi
+		 * @see mshop/index/manager/standard/search/ansi
+		 * @see mshop/index/manager/standard/aggregate/ansi
 		 */
 		$this->optimizeBase( 'mshop/index/manager/standard/optimize' );
 	}
@@ -502,7 +502,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
-		/** mshop/index/manager/standard/search
+		/** mshop/index/manager/standard/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the order
@@ -547,13 +547,13 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/standard/count
-		 * @see mshop/index/manager/standard/optimize
-		 * @see mshop/index/manager/standard/aggregate
+		 * @see mshop/index/manager/standard/count/ansi
+		 * @see mshop/index/manager/standard/optimize/ansi
+		 * @see mshop/index/manager/standard/aggregate/ansi
 		 */
 		$cfgPathSearch = 'mshop/index/manager/standard/search';
 
-		/** mshop/index/manager/standard/count
+		/** mshop/index/manager/standard/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the order
@@ -592,9 +592,9 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/standard/search
-		 * @see mshop/index/manager/standard/optimize
-		 * @see mshop/index/manager/standard/aggregate
+		 * @see mshop/index/manager/standard/search/ansi
+		 * @see mshop/index/manager/standard/optimize/ansi
+		 * @see mshop/index/manager/standard/aggregate/ansi
 		 */
 		$cfgPathCount = 'mshop/index/manager/standard/count';
 
@@ -805,7 +805,7 @@ class Standard
 		{
 			$this->subManagers = array();
 
-			/** mshop/index/manager/standard/submanagers
+			/** mshop/index/manager/submanagers
 			 * A list of sub-manager names used for indexing associated items
 			 *
 			 * All items referenced by a product (e.g. texts, prices, media,
@@ -821,7 +821,7 @@ class Standard
 			 * waste of resources.
 			 *
 			 * @param string List of index sub-manager names
-			 * @since 2014.09
+			 * @since 2016.02
 			 * @category User
 			 * @category Developer
 			 * @see mshop/index/manager/standard/chunksize
@@ -829,7 +829,7 @@ class Standard
 			 * @see mshop/index/manager/standard/index
 			 * @see mshop/index/manager/standard/subdomains
 			 */
-			$path = 'mshop/index/manager/standard/submanagers';
+			$path = 'mshop/index/manager/submanagers';
 			$default = array( 'price', 'catalog', 'attribute', 'text' );
 
 			foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {

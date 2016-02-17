@@ -125,7 +125,7 @@ class Standard
 	 */
 	public function cleanupIndex( $timestamp )
 	{
-		/** mshop/index/manager/catalog/standard/cleanup
+		/** mshop/index/manager/catalog/standard/cleanup/ansi
 		 * Deletes the index catalog records that haven't been touched
 		 *
 		 * During the rebuild process of the product index, the entries of all
@@ -144,10 +144,10 @@ class Standard
 		 * @param string SQL statement for deleting the outdated index records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/catalog/standard/count
-		 * @see mshop/index/manager/catalog/standard/delete
-		 * @see mshop/index/manager/catalog/standard/insert
-		 * @see mshop/index/manager/catalog/standard/search
+		 * @see mshop/index/manager/catalog/standard/count/ansi
+		 * @see mshop/index/manager/catalog/standard/delete/ansi
+		 * @see mshop/index/manager/catalog/standard/insert/ansi
+		 * @see mshop/index/manager/catalog/standard/search/ansi
 		 */
 		$this->cleanupIndexBase( $timestamp, 'mshop/index/manager/catalog/standard/cleanup' );
 	}
@@ -160,7 +160,7 @@ class Standard
 	 */
 	public function deleteItems( array $ids )
 	{
-		/** mshop/index/manager/catalog/standard/delete
+		/** mshop/index/manager/catalog/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the index database.
@@ -178,10 +178,10 @@ class Standard
 		 * @param string SQL statement for deleting index catalog records
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/catalog/standard/count
-		 * @see mshop/index/manager/catalog/standard/cleanup
-		 * @see mshop/index/manager/catalog/standard/insert
-		 * @see mshop/index/manager/catalog/standard/search
+		 * @see mshop/index/manager/catalog/standard/count/ansi
+		 * @see mshop/index/manager/catalog/standard/cleanup/ansi
+		 * @see mshop/index/manager/catalog/standard/insert/ansi
+		 * @see mshop/index/manager/catalog/standard/search/ansi
 		 */
 		$this->deleteItemsBase( $ids, 'mshop/index/manager/catalog/standard/delete' );
 	}
@@ -365,7 +365,7 @@ class Standard
 	 */
 	public function optimize()
 	{
-		/** mshop/index/manager/catalog/standard/optimize
+		/** mshop/index/manager/catalog/standard/optimize/ansi
 		 * Optimizes the stored catalog data for retrieving the records faster
 		 *
 		 * The SQL statement should reorganize the data in the DBMS storage to
@@ -380,9 +380,9 @@ class Standard
 		 * @param string SQL statement for optimizing the stored catalog data
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/index/manager/catalog/standard/count
-		 * @see mshop/index/manager/catalog/standard/search
-		 * @see mshop/index/manager/catalog/standard/aggregate
+		 * @see mshop/index/manager/catalog/standard/count/ansi
+		 * @see mshop/index/manager/catalog/standard/search/ansi
+		 * @see mshop/index/manager/catalog/standard/aggregate/ansi
 		 */
 		$this->optimizeBase( 'mshop/index/manager/catalog/standard/optimize' );
 	}
@@ -437,7 +437,7 @@ class Standard
 			{
 				$parentId = $item->getId(); // $id is not $item->getId() for sub-products
 
-				/** mshop/index/manager/catalog/standard/insert
+				/** mshop/index/manager/catalog/standard/insert/ansi
 				 * Inserts a new catalog record into the product index database
 				 *
 				 * During the product index rebuild, categories related to a
@@ -460,10 +460,10 @@ class Standard
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/index/manager/catalog/standard/cleanup
-				 * @see mshop/index/manager/catalog/standard/delete
-				 * @see mshop/index/manager/catalog/standard/search
-				 * @see mshop/index/manager/catalog/standard/count
+				 * @see mshop/index/manager/catalog/standard/cleanup/ansi
+				 * @see mshop/index/manager/catalog/standard/delete/ansi
+				 * @see mshop/index/manager/catalog/standard/search/ansi
+				 * @see mshop/index/manager/catalog/standard/count/ansi
 				 */
 				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/catalog/standard/insert' );
 
@@ -511,7 +511,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
-		/** mshop/index/manager/catalog/standard/search
+		/** mshop/index/manager/catalog/standard/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the product index
@@ -556,13 +556,13 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/catalog/standard/count
-		 * @see mshop/index/manager/catalog/standard/optimize
-		 * @see mshop/index/manager/catalog/standard/aggregate
+		 * @see mshop/index/manager/catalog/standard/count/ansi
+		 * @see mshop/index/manager/catalog/standard/optimize/ansi
+		 * @see mshop/index/manager/catalog/standard/aggregate/ansi
 		 */
 		$cfgPathSearch = 'mshop/index/manager/catalog/standard/search';
 
-		/** mshop/index/manager/catalog/standard/count
+		/** mshop/index/manager/catalog/standard/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the product index
@@ -601,9 +601,9 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/index/manager/catalog/standard/search
-		 * @see mshop/index/manager/catalog/standard/optimize
-		 * @see mshop/index/manager/catalog/standard/aggregate
+		 * @see mshop/index/manager/catalog/standard/search/ansi
+		 * @see mshop/index/manager/catalog/standard/optimize/ansi
+		 * @see mshop/index/manager/catalog/standard/aggregate/ansi
 		 */
 		$cfgPathCount = 'mshop/index/manager/catalog/standard/count';
 

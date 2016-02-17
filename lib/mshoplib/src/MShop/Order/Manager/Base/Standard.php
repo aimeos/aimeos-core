@@ -160,7 +160,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
-		/** mshop/order/manager/base/standard/aggregate
+		/** mshop/order/manager/base/standard/aggregate/ansi
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
 		 *
 		 * Groups all records by the values in the key column and counts their
@@ -196,12 +196,12 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 		 * @param string SQL statement for aggregating order items
 		 * @since 2014.09
 		 * @category Developer
-		 * @see mshop/order/manager/base/standard/insert
-		 * @see mshop/order/manager/base/standard/update
-		 * @see mshop/order/manager/base/standard/newid
-		 * @see mshop/order/manager/base/standard/delete
-		 * @see mshop/order/manager/base/standard/search
-		 * @see mshop/order/manager/base/standard/count
+		 * @see mshop/order/manager/base/standard/insert/ansi
+		 * @see mshop/order/manager/base/standard/update/ansi
+		 * @see mshop/order/manager/base/standard/newid/ansi
+		 * @see mshop/order/manager/base/standard/delete/ansi
+		 * @see mshop/order/manager/base/standard/search/ansi
+		 * @see mshop/order/manager/base/standard/count/ansi
 		 */
 		$cfgkey = 'mshop/order/manager/base/standard/aggregate';
 		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base' ) );
@@ -253,7 +253,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	 */
 	public function deleteItems( array $ids )
 	{
-		/** mshop/order/manager/base/standard/delete
+		/** mshop/order/manager/base/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the order database.
@@ -271,11 +271,11 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 		 * @param string SQL statement for deleting items
 		 * @since 2014.03
 		 * @category Developer
-		 * @see mshop/order/manager/base/standard/insert
-		 * @see mshop/order/manager/base/standard/update
-		 * @see mshop/order/manager/base/standard/newid
-		 * @see mshop/order/manager/base/standard/search
-		 * @see mshop/order/manager/base/standard/count
+		 * @see mshop/order/manager/base/standard/insert/ansi
+		 * @see mshop/order/manager/base/standard/update/ansi
+		 * @see mshop/order/manager/base/standard/newid/ansi
+		 * @see mshop/order/manager/base/standard/search/ansi
+		 * @see mshop/order/manager/base/standard/count/ansi
 		 */
 		$path = 'mshop/order/manager/base/standard/delete';
 		$this->deleteItemsBase( $ids, $path );
@@ -492,7 +492,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 
 			if( $id === null )
 			{
-				/** mshop/order/manager/base/standard/insert
+				/** mshop/order/manager/base/standard/insert/ansi
 				 * Inserts a new order record into the database table
 				 *
 				 * Items with no ID yet (i.e. the ID is NULL) will be created in
@@ -515,17 +515,17 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 				 * @param string SQL statement for inserting records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/standard/update
-				 * @see mshop/order/manager/base/standard/newid
-				 * @see mshop/order/manager/base/standard/delete
-				 * @see mshop/order/manager/base/standard/search
-				 * @see mshop/order/manager/base/standard/count
+				 * @see mshop/order/manager/base/standard/update/ansi
+				 * @see mshop/order/manager/base/standard/newid/ansi
+				 * @see mshop/order/manager/base/standard/delete/ansi
+				 * @see mshop/order/manager/base/standard/search/ansi
+				 * @see mshop/order/manager/base/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/standard/insert';
 			}
 			else
 			{
-				/** mshop/order/manager/base/standard/update
+				/** mshop/order/manager/base/standard/update/ansi
 				 * Updates an existing order record in the database
 				 *
 				 * Items which already have an ID (i.e. the ID is not NULL) will
@@ -545,11 +545,11 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 				 * @param string SQL statement for updating records
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/standard/insert
-				 * @see mshop/order/manager/base/standard/newid
-				 * @see mshop/order/manager/base/standard/delete
-				 * @see mshop/order/manager/base/standard/search
-				 * @see mshop/order/manager/base/standard/count
+				 * @see mshop/order/manager/base/standard/insert/ansi
+				 * @see mshop/order/manager/base/standard/newid/ansi
+				 * @see mshop/order/manager/base/standard/delete/ansi
+				 * @see mshop/order/manager/base/standard/search/ansi
+				 * @see mshop/order/manager/base/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/standard/update';
 			}
@@ -585,7 +585,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 
 			if( $id === null && $fetch === true )
 			{
-				/** mshop/order/manager/base/standard/newid
+				/** mshop/order/manager/base/standard/newid/ansi
 				 * Retrieves the ID generated by the database when inserting a new record
 				 *
 				 * As soon as a new record is inserted into the database table,
@@ -609,11 +609,11 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 				 * @param string SQL statement for retrieving the last inserted record ID
 				 * @since 2014.03
 				 * @category Developer
-				 * @see mshop/order/manager/base/standard/insert
-				 * @see mshop/order/manager/base/standard/update
-				 * @see mshop/order/manager/base/standard/delete
-				 * @see mshop/order/manager/base/standard/search
-				 * @see mshop/order/manager/base/standard/count
+				 * @see mshop/order/manager/base/standard/insert/ansi
+				 * @see mshop/order/manager/base/standard/update/ansi
+				 * @see mshop/order/manager/base/standard/delete/ansi
+				 * @see mshop/order/manager/base/standard/search/ansi
+				 * @see mshop/order/manager/base/standard/count/ansi
 				 */
 				$path = 'mshop/order/manager/base/standard/newid';
 				$item->setId( $this->newId( $conn, $path ) );
@@ -656,7 +656,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 			$required = array( 'order.base' );
 			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
 
-			/** mshop/order/manager/base/standard/search
+			/** mshop/order/manager/base/standard/search/ansi
 			 * Retrieves the records matched by the given criteria in the database
 			 *
 			 * Fetches the records matched by the given criteria from the order
@@ -701,15 +701,15 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 			 * @param string SQL statement for searching items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/order/manager/base/standard/insert
-			 * @see mshop/order/manager/base/standard/update
-			 * @see mshop/order/manager/base/standard/newid
-			 * @see mshop/order/manager/base/standard/delete
-			 * @see mshop/order/manager/base/standard/count
+			 * @see mshop/order/manager/base/standard/insert/ansi
+			 * @see mshop/order/manager/base/standard/update/ansi
+			 * @see mshop/order/manager/base/standard/newid/ansi
+			 * @see mshop/order/manager/base/standard/delete/ansi
+			 * @see mshop/order/manager/base/standard/count/ansi
 			 */
 			$cfgPathSearch = 'mshop/order/manager/base/standard/search';
 
-			/** mshop/order/manager/base/standard/count
+			/** mshop/order/manager/base/standard/count/ansi
 			 * Counts the number of records matched by the given criteria in the database
 			 *
 			 * Counts all records matched by the given criteria from the order
@@ -748,11 +748,11 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 			 * @param string SQL statement for counting items
 			 * @since 2014.03
 			 * @category Developer
-			 * @see mshop/order/manager/base/standard/insert
-			 * @see mshop/order/manager/base/standard/update
-			 * @see mshop/order/manager/base/standard/newid
-			 * @see mshop/order/manager/base/standard/delete
-			 * @see mshop/order/manager/base/standard/search
+			 * @see mshop/order/manager/base/standard/insert/ansi
+			 * @see mshop/order/manager/base/standard/update/ansi
+			 * @see mshop/order/manager/base/standard/newid/ansi
+			 * @see mshop/order/manager/base/standard/delete/ansi
+			 * @see mshop/order/manager/base/standard/search/ansi
 			 */
 			$cfgPathCount = 'mshop/order/manager/base/standard/count';
 
