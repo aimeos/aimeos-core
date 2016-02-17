@@ -91,6 +91,7 @@ class Standard
 		$config = $context->getConfig();
 
 		/** madmin/log/manager/standard/loglevel
+		 * Sets the severity level for messages to be written to the log
 		 *
 		 * Manager, provider and other active components write messages about
 		 * problems, informational and debug output to the logs. The messages
