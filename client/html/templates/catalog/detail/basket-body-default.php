@@ -10,7 +10,7 @@ $basketController = $this->config( 'client/html/basket/standard/url/controller',
 $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index' );
 $basketConfig = $this->config( 'client/html/basket/standard/url/config', array() );
 
-$reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', true );
+$reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
 $enc = $this->encoder();
 
 ?>

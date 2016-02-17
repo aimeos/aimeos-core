@@ -37,10 +37,22 @@ $attributes = $this->get( 'selectionAttributeItems', array() );
  * client/html/catalog/detail/basket/selection
  *
  * @param array List of attribute types as key and layout types as value, e.g. "select" or "radio"
- * @since 2015.04
+ * @since 2015.10
  * @category Developer
  * @category User
  * @see client/html/catalog/detail/basket/attribute/type
+ */
+
+/** client/html/catalog/detail/basket/selection/type/length
+ * Layout types for the length selection
+ *
+ * @see client/html/catalog/detail/basket/selection/type
+ */
+
+/** client/html/catalog/detail/basket/selection/type/width
+ * Layout types for the width selection
+ *
+ * @see client/html/catalog/detail/basket/selection/type
  */
 
 ?>

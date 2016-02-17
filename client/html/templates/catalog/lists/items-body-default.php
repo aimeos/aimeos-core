@@ -24,7 +24,7 @@ $percentFormat = $this->translate( 'client', '%1$s%%' );
 
 $position = $this->get( 'itemPosition', 0 );
 
-$reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', true );
+$reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
 
 
 /** client/html/common/partials/price

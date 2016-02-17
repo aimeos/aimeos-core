@@ -21,6 +21,17 @@ class Standard
 	extends \Aimeos\Controller\Common\Product\Import\Csv\Cache\Base
 	implements \Aimeos\Controller\Common\Product\Import\Csv\Cache\Iface
 {
+	/** controller/common/product/import/csv/cache/product/name
+	 * Name of the product cache implementation
+	 *
+	 * Use "Myname" if your class is named "\Aimeos\Controller\Common\Product\Import\Csv\Cache\Product\Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the cache class name
+	 * @since 2015.10
+	 * @category Developer
+	 */
+
 	private $prodmap = array();
 
 

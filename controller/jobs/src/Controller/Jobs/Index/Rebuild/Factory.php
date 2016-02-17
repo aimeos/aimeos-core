@@ -154,6 +154,6 @@ class Factory
 		 * @see controller/jobs/index/rebuild/decorators/excludes
 		 * @see controller/jobs/index/rebuild/decorators/global
 		 */
-		return self::addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/rebuild' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'index/rebuild' );
 	}
 }

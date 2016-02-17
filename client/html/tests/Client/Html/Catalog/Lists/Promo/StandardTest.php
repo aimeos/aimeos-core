@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		unset( $this->view->listCurrentCatItem );
 		$this->object->setView( $this->view );
-		$this->context->getConfig()->set( 'client/html/catalog/list/catid-default', $this->catItem->getId() );
+		$this->context->getConfig()->set( 'client/html/catalog/lists/catid-default', $this->catItem->getId() );
 
 		$output = $this->object->getBody();
 

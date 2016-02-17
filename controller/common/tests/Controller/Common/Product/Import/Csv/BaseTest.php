@@ -48,14 +48,14 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	public function testGetCacheInvalidClass()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
-		$this->object->getCachePublic( 'test' );
+		$this->object->getCachePublic( 'unknown' );
 	}
 
 
 	public function testGetCacheInvalidInterface()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
-		$this->object->getCachePublic( 'attribute', 'Invalid' );
+		$this->object->getCachePublic( 'attribute', 'unknown' );
 	}
 
 
@@ -77,14 +77,14 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	public function testGetProcessorsInvalidClass()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
-		$this->object->getProcessorsPublic( array( 'test' => array() ) );
+		$this->object->getProcessorsPublic( array( 'unknown' => array() ) );
 	}
 
 
 	public function testGetProcessorsInvalidInterface()
 	{
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
-		$this->object->getProcessorsPublic( array( 'TestInvalid' => array() ) );
+		$this->object->getProcessorsPublic( array( 'unknown' => array() ) );
 	}
 
 

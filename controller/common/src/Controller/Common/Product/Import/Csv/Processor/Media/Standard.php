@@ -21,6 +21,17 @@ class Standard
 	extends \Aimeos\Controller\Common\Product\Import\Csv\Processor\Base
 	implements \Aimeos\Controller\Common\Product\Import\Csv\Processor\Iface
 {
+	/** controller/common/product/import/csv/processor/media/name
+	 * Name of the media processor implementation
+	 *
+	 * Use "Myname" if your class is named "\Aimeos\Controller\Common\Product\Import\Csv\Processor\Media\Myname".
+	 * The name is case-sensitive and you should avoid camel case names like "MyName".
+	 *
+	 * @param string Last part of the processor class name
+	 * @since 2015.10
+	 * @category Developer
+	 */
+
 	private $listTypes;
 
 

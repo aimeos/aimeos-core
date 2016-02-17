@@ -59,11 +59,17 @@ class Base
 		$config = $context->getConfig();
 		$iface = '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Cache\\Iface';
 
+		if( ctype_alnum( $type ) === false )
+		{
+			$classname = is_string($name) ? '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Cache\\' . $type : '<not a string>';
+			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+		}
+
 		if( $name === null ) {
 			$name = $config->get( 'controller/common/product/import/csv/cache/' . $type . '/name', 'Standard' );
 		}
 
-		if( ctype_alnum( $type ) === false || ctype_alnum( $name ) === false )
+		if( ctype_alnum( $name ) === false )
 		{
 			$classname = is_string($name) ? '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Cache\\' . $type . '\\' . $name : '<not a string>';
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
@@ -248,9 +254,15 @@ class Base
 
 		foreach( $mappings as $type => $mapping )
 		{
+			if( ctype_alnum( $type ) === false )
+			{
+				$classname = is_string($type) ? '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Processor\\' . $type : '<not a string>';
+				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
+			}
+
 			$name = $config->get( 'controller/common/product/import/csv/processor/' . $type . '/name', 'Standard' );
 
-			if( ctype_alnum( $type ) === false )
+			if( ctype_alnum( $name ) === false )
 			{
 				$classname = is_string($name) ? '\\Aimeos\\Controller\\Common\\Product\\Import\\Csv\\Processor\\' . $type . '\\' . $name : '<not a string>';
 				throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );

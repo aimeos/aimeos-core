@@ -154,6 +154,6 @@ class Factory
 		 * @see controller/jobs/index/optimize/decorators/excludes
 		 * @see controller/jobs/index/optimize/decorators/global
 		 */
-		return self::addControllerDecorators( $context, $aimeos, $controller, 'catalog/index/optimize' );
+		return self::addControllerDecorators( $context, $aimeos, $controller, 'index/optimize' );
 	}
 }

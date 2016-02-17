@@ -270,7 +270,7 @@ class Standard
 			if( isset( $view->listCurrentCatItem ) ) {
 				$catId = $view->listCurrentCatItem->getId();
 			} else {
-				$catId = $config->get( 'client/html/catalog/list/catid-default', '' );
+				$catId = $config->get( 'client/html/catalog/lists/catid-default', '' );
 			}
 
 			if( $catId != '' )

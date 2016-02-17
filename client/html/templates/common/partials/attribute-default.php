@@ -34,10 +34,22 @@ $enc = $this->encoder();
  * client/html/catalog/detail/basket/attribute
  *
  * @param array List of attribute types as key and layout types as value, e.g. "select" or "radio"
- * @since 2015.04
+ * @since 2015.10
  * @category Developer
  * @category User
  * @see client/html/catalog/detail/basket/selection/type
+ */
+
+/** client/html/catalog/detail/basket/attribute/type/color
+ * Layout types for the color attribute
+ *
+ * @see client/html/catalog/detail/basket/attribute/type
+ */
+
+/** client/html/catalog/detail/basket/attribute/type/size
+ * Layout types for the size attribute
+ *
+ * @see client/html/catalog/detail/basket/attribute/type
  */
 
 ?>
