@@ -403,7 +403,7 @@ class Standard
 		{
 			$context = $this->getContext();
 			$site = $context->getLocale()->getSite()->getCode();
-			$list += (array) $context->getSession()->get( 'aimeos/catalog/list/params/last/' . $site, array() );
+			$list += (array) $context->getSession()->get( 'aimeos/catalog/lists/params/last/' . $site, array() );
 		}
 
 		return $list;

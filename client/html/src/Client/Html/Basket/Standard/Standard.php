@@ -428,10 +428,10 @@ class Standard
 			{
 				$params = $context->getSession()->get( 'aimeos/catalog/lists/params/last' . $site, array() );
 
-				$target = $view->config( 'client/html/catalog/list/url/target' );
-				$controller = $view->config( 'client/html/catalog/list/url/controller', 'catalog' );
-				$action = $view->config( 'client/html/catalog/list/url/action', 'list' );
-				$config = $view->config( 'client/html/catalog/list/url/config', array() );
+				$target = $view->config( 'client/html/catalog/lists/url/target' );
+				$controller = $view->config( 'client/html/catalog/lists/url/controller', 'catalog' );
+				$action = $view->config( 'client/html/catalog/lists/url/action', 'list' );
+				$config = $view->config( 'client/html/catalog/lists/url/config', array() );
 
 			}
 

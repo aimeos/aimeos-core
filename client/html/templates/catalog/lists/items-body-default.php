@@ -43,7 +43,7 @@ $reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', tr
  * @category Developer
  */
 
-/** client/html/catalog/list/basket-add
+/** client/html/catalog/lists/basket-add
  * Display the "add to basket" button for each product item
  *
  * Enables the button for adding products to the basket from the list view.
@@ -124,7 +124,7 @@ $reqstock = (int) $this->config( 'client/html/basket/standard/require-stock', tr
 		<div class="price-list price price-actual">
 <?php	echo $this->partial( $this->config( 'client/html/common/partials/price', 'common/partials/price-default.php' ), array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 		</div>
-<?php	if( $this->config( 'client/html/catalog/list/basket-add', false ) ) : ?>
+<?php	if( $this->config( 'client/html/catalog/lists/basket-add', false ) ) : ?>
 		<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 <!-- catalog.lists.items.csrf -->
 <?php		echo $this->csrf()->formfield(); ?>

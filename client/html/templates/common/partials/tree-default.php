@@ -10,10 +10,10 @@ $level = $this->get( 'level', 0 );
 $path = $this->get( 'path', array() );
 $params = $this->get( 'params', array() );
 
-$target = $this->config( 'client/html/catalog/list/url/target' );
-$controller = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
-$action = $this->config( 'client/html/catalog/list/url/action', 'list' );
-$config = $this->config( 'client/html/catalog/list/url/config', array() );
+$target = $this->config( 'client/html/catalog/lists/url/target' );
+$controller = $this->config( 'client/html/catalog/lists/url/controller', 'catalog' );
+$action = $this->config( 'client/html/catalog/lists/url/action', 'list' );
+$config = $this->config( 'client/html/catalog/lists/url/config', array() );
 
 /** client/html/common/partials/media
  * Relative path to the media partial template file

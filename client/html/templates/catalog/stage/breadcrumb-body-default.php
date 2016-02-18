@@ -7,10 +7,10 @@
 
 $enc = $this->encoder();
 
-$listTarget = $this->config( 'client/html/catalog/list/url/target' );
-$listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
-$listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
-$listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
+$listTarget = $this->config( 'client/html/catalog/lists/url/target' );
+$listController = $this->config( 'client/html/catalog/lists/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/lists/url/action', 'list' );
+$listConfig = $this->config( 'client/html/catalog/lists/url/config', array() );
 
 $params = $this->get( 'stageParams', array() );
 

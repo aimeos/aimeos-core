@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-/** client/html/catalog/list/url/target
+/** client/html/catalog/lists/url/target
  * Destination of the URL where the controller specified in the URL is known
  *
  * The destination can be a page ID like in a content management system or the
@@ -15,13 +15,13 @@
  * @param string Destination of the URL
  * @since 2014.03
  * @category Developer
- * @see client/html/catalog/list/url/controller
- * @see client/html/catalog/list/url/action
- * @see client/html/catalog/list/url/config
+ * @see client/html/catalog/lists/url/controller
+ * @see client/html/catalog/lists/url/action
+ * @see client/html/catalog/lists/url/config
  */
-$listTarget = $this->config( 'client/html/catalog/list/url/target' );
+$listTarget = $this->config( 'client/html/catalog/lists/url/target' );
 
-/** client/html/catalog/list/url/controller
+/** client/html/catalog/lists/url/controller
  * Name of the controller whose action should be called
  *
  * In Model-View-Controller (MVC) applications, the controller contains the methods
@@ -31,13 +31,13 @@ $listTarget = $this->config( 'client/html/catalog/list/url/target' );
  * @param string Name of the controller
  * @since 2014.03
  * @category Developer
- * @see client/html/catalog/list/url/target
- * @see client/html/catalog/list/url/action
- * @see client/html/catalog/list/url/config
+ * @see client/html/catalog/lists/url/target
+ * @see client/html/catalog/lists/url/action
+ * @see client/html/catalog/lists/url/config
  */
-$listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
+$listController = $this->config( 'client/html/catalog/lists/url/controller', 'catalog' );
 
-/** client/html/catalog/list/url/action
+/** client/html/catalog/lists/url/action
  * Name of the action that should create the output
  *
  * In Model-View-Controller (MVC) applications, actions are the methods of a
@@ -47,13 +47,13 @@ $listController = $this->config( 'client/html/catalog/list/url/controller', 'cat
  * @param string Name of the action
  * @since 2014.03
  * @category Developer
- * @see client/html/catalog/list/url/target
- * @see client/html/catalog/list/url/controller
- * @see client/html/catalog/list/url/config
+ * @see client/html/catalog/lists/url/target
+ * @see client/html/catalog/lists/url/controller
+ * @see client/html/catalog/lists/url/config
  */
-$listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
+$listAction = $this->config( 'client/html/catalog/lists/url/action', 'list' );
 
-/** client/html/catalog/list/url/config
+/** client/html/catalog/lists/url/config
  * Associative list of configuration options used for generating the URL
  *
  * You can specify additional options as key/value pairs used when generating
@@ -69,12 +69,12 @@ $listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
  * @param string Associative list of configuration options
  * @since 2014.03
  * @category Developer
- * @see client/html/catalog/list/url/target
- * @see client/html/catalog/list/url/controller
- * @see client/html/catalog/list/url/action
+ * @see client/html/catalog/lists/url/target
+ * @see client/html/catalog/lists/url/controller
+ * @see client/html/catalog/lists/url/action
  * @see client/html/url/config
  */
-$listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
+$listConfig = $this->config( 'client/html/catalog/lists/url/config', array() );
 
 $listParams = array();
 $params = $this->param();

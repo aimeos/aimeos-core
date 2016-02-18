@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperHtml::getContext();
 
 		$config = $context->getConfig();
-		$config->set( 'client/html/catalog/list/basket-add', true );
+		$config->set( 'client/html/catalog/lists/basket-add', true );
 
 		$paths = \TestHelperHtml::getHtmlTemplatePaths();
 		$this->object = new \Aimeos\Client\Html\Catalog\Lists\Items\Standard( $context, $paths );

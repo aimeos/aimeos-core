@@ -9,7 +9,7 @@ $enc = $this->encoder();
 $catPath = $this->get( 'listCatPath', array() );
 $searchText = $this->param( 'f_search', null );
 
-/** client/html/catalog/list/head/text-types
+/** client/html/catalog/lists/head/text-types
  * The list of text types that should be rendered in the catalog list head section
  *
  * The head section of the catalog list view at least consists of the category
@@ -25,7 +25,7 @@ $searchText = $this->param( 'f_search', null );
  * @category User
  * @category Developer
  */
-$textTypes = $this->config( 'client/html/catalog/list/head/text-types', array( 'short', 'long' ) );
+$textTypes = $this->config( 'client/html/catalog/lists/head/text-types', array( 'short', 'long' ) );
 
 ?>
 <div class="catalog-list-head">

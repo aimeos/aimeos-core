@@ -280,7 +280,7 @@ class Standard
 		{
 			$view->itemPosition = ( $this->getProductListPage( $view ) - 1 ) * $this->getProductListSize( $view );
 
-			if( $this->getContext()->getConfig()->get( 'client/html/catalog/list/basket-add', false ) )
+			if( $this->getContext()->getConfig()->get( 'client/html/catalog/lists/basket-add', false ) )
 			{
 				$view = $this->addSelectionProducts( $view, $tags, $expire );
 				$view = $this->addConfigAttributes( $view, $tags, $expire );
@@ -364,7 +364,7 @@ class Standard
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$domains = $config->get( 'client/html/catalog/list/items/domains-attributes', array( 'text', 'price', 'media' ) );
+		$domains = $config->get( 'client/html/catalog/lists/items/domains-attributes', array( 'text', 'price', 'media' ) );
 		$attributes = $attrManager->searchItems( $search, $domains );
 
 		$this->addMetaItem( $attributes, 'attribute', $this->expire, $this->tags );
@@ -407,7 +407,7 @@ class Standard
 		}
 
 
-		/** client/html/catalog/list/items/domains-attributes
+		/** client/html/catalog/lists/items/domains-attributes
 		 * A list of domain names whose items should be available for the attributes
 		 * in the "items" part of the catalog list view templates
 		 *
@@ -424,7 +424,7 @@ class Standard
 		 * @since 2016.01
 		 * @category Developer
 		 */
-		$domains = $config->get( 'client/html/catalog/list/items/domains-attributes', array( 'text', 'price', 'media' ) );
+		$domains = $config->get( 'client/html/catalog/lists/items/domains-attributes', array( 'text', 'price', 'media' ) );
 
 		$controller = \Aimeos\Controller\Frontend\Factory::createController( $context, 'catalog' );
 		$attrManager = $controller->createManager( 'attribute' );
