@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JQAdm;
 /**
  * Common interface for all JQAdm client classes.
  *
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 interface Iface

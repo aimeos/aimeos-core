@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JQAdm;
 /**
  * Common abstract class for all admin client classes.
  *
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 abstract class Base
@@ -92,11 +92,11 @@ abstract class Base
 	/**
 	 * Adds the decorators to the client object
 	 *
-	 * @param \Aimeos\Admin\JQAdm\Iface $client Client object
+	 * @param \Aimeos\Admin\JQAdm\Iface $client Admin object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param array $decorators List of decorator name that should be wrapped around the client
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Admin\JQAdm\Catalog\Decorator\"
-	 * @return \Aimeos\Admin\JQAdm\Iface Client object
+	 * @return \Aimeos\Admin\JQAdm\Iface Admin object
 	 */
 	protected function addDecorators( \Aimeos\Admin\JQAdm\Iface $client, array $templatePaths,
 		array $decorators, $classprefix )
@@ -131,10 +131,10 @@ abstract class Base
 	/**
 	 * Adds the decorators to the client object
 	 *
-	 * @param \Aimeos\Admin\JQAdm\Iface $client Client object
+	 * @param \Aimeos\Admin\JQAdm\Iface $client Admin object
 	 * @param array $templatePaths List of file system paths where the templates are stored
-	 * @param string $path Client string in lower case, e.g. "catalog/detail/basic"
-	 * @return \Aimeos\Admin\JQAdm\Iface Client object
+	 * @param string $path Admin string in lower case, e.g. "catalog/detail/basic"
+	 * @return \Aimeos\Admin\JQAdm\Iface Admin object
 	 */
 	protected function addClientDecorators( \Aimeos\Admin\JQAdm\Iface $client, array $templatePaths, $path )
 	{

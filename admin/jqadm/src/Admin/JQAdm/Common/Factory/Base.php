@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JQAdm\Common\Factory;
 /**
  * Common methods for all JQAdm client factories.
  *
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 class Base
@@ -40,11 +40,11 @@ class Base
 	 * Adds the decorators to the client object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param \Aimeos\Admin\JQAdm\Iface $client Client object
+	 * @param \Aimeos\Admin\JQAdm\Iface $client Admin object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param array $decorators List of decorator name that should be wrapped around the client
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Admin\JQAdm\Catalog\Decorator\"
-	 * @return \Aimeos\Admin\JQAdm\Iface Client object
+	 * @return \Aimeos\Admin\JQAdm\Iface Admin object
 	 */
 	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
 		\Aimeos\Admin\JQAdm\Iface $client, array $templatePaths, array $decorators, $classprefix )
@@ -80,10 +80,10 @@ class Base
 	 * Adds the decorators to the client object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param \Aimeos\Admin\JQAdm\Iface $client Client object
+	 * @param \Aimeos\Admin\JQAdm\Iface $client Admin object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Path of the client in lower case, e.g. "catalog/detail"
-	 * @return \Aimeos\Admin\JQAdm\Iface Client object
+	 * @return \Aimeos\Admin\JQAdm\Iface Admin object
 	 */
 	protected static function addClientDecorators( \Aimeos\MShop\Context\Item\Iface $context,
 		\Aimeos\Admin\JQAdm\Iface $client, array $templatePaths, $path )
@@ -149,7 +149,7 @@ class Base
 	 * @param string $classname Name of the client class
 	 * @param string $interface Name of the client interface
 	 * @param array $templatePaths List of file system paths where the templates are stored
-	 * @return \Aimeos\Admin\JQAdm\\Iface Client object
+	 * @return \Aimeos\Admin\JQAdm\\Iface Admin object
 	 * @throws \Aimeos\Admin\JQAdm\Exception If client couldn't be found or doesn't implement the interface
 	 */
 	protected static function createClientBase( \Aimeos\MShop\Context\Item\Iface $context, $classname, $interface, $templatePaths )
