@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JQAdm\Product;
 /**
  * Factory for product JQAdm client
  *
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 class Factory
@@ -26,7 +26,7 @@ class Factory
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
 	 * @param array $templatePaths List of file system paths where the templates are stored
-	 * @param string|null $name Client name (default: "Standard")
+	 * @param string|null $name Admin name (default: "Standard")
 	 * @return \Aimeos\Admin\JQAdm\Iface Filter part implementing \Aimeos\Admin\JQAdm\Iface
 	 * @throws \Aimeos\Admin\JQAdm\Exception If requested client implementation couldn't be found or initialisation fails
 	 */

@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JQAdm;
 /**
  * Common factory for JQAdm clients.
  *
- * @package Client
+ * @package Admin
  * @subpackage JQAdm
  */
 class Factory
@@ -25,14 +25,14 @@ class Factory
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
 	 * @param array List of file system paths where the templates are stored
 	 * @param string $type Type of the client, e.g 'product' for \Aimeos\Admin\JQAdm\Product\Standard
-	 * @param string|null $name Client name (default: "Standard")
+	 * @param string|null $name Admin name (default: "Standard")
 	 * @return \Aimeos\Admin\JQAdm\Iface admin client implementing \Aimeos\Admin\JQAdm\Iface
 	 * @throws \Aimeos\Admin\JQAdm\Exception If requested client implementation couldn't be found or initialisation fails
 	 */
 	public static function createClient( \Aimeos\MShop\Context\Item\Iface $context, array $templatePaths, $type, $name = null )
 	{
 		if( empty( $type ) ) {
-			throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'Client JQAdm type is empty' ) );
+			throw new \Aimeos\Admin\JQAdm\Exception( sprintf( 'Admin JQAdm type is empty' ) );
 		}
 
 		if( ctype_alnum( $type ) === false ) {
