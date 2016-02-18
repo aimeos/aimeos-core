@@ -23,7 +23,7 @@ $enc = $this->encoder();
  */
 $contentUrl = $this->config( 'client/html/common/content/baseurl' );
 
-/** client/html/catalog/filter/default/button
+/** client/html/catalog/filter/standard/button
  * Displays the "Search" button in the catalog filter if Javascript is disabled
  *
  * Usually the "Search" button is shown in the catalog filter if the browser
@@ -37,12 +37,12 @@ $contentUrl = $this->config( 'client/html/common/content/baseurl' );
  * @category User
  * @category Developer
  */
-$button = $this->config( 'client/html/catalog/filter/default/button', true );
+$button = $this->config( 'client/html/catalog/filter/standard/button', true );
 
-$listTarget = $this->config( 'client/html/catalog/list/url/target' );
-$listController = $this->config( 'client/html/catalog/list/url/controller', 'catalog' );
-$listAction = $this->config( 'client/html/catalog/list/url/action', 'list' );
-$listConfig = $this->config( 'client/html/catalog/list/url/config', array() );
+$listTarget = $this->config( 'client/html/catalog/lists/url/target' );
+$listController = $this->config( 'client/html/catalog/lists/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/lists/url/action', 'list' );
+$listConfig = $this->config( 'client/html/catalog/lists/url/config', array() );
 
 $attrMap = $this->get( 'attributeMap', array() );
 $attrIds = $this->param( 'f_attrid', array() );
