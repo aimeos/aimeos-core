@@ -39,8 +39,6 @@ class Standard
 	/**
 	 * Removes all expired cache entries.
 	 *
-	 * @inheritDoc
-	 *
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function cleanup()
@@ -51,8 +49,6 @@ class Standard
 
 	/**
 	 * Removes the cache entry identified by the given key.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param string $key Key string that identifies the single cache entry
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
@@ -65,8 +61,6 @@ class Standard
 
 	/**
 	 * Removes the cache entries identified by the given keys.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param string[] $keys List of key strings that identify the cache entries
 	 * 	that should be removed
@@ -81,8 +75,6 @@ class Standard
 	/**
 	 * Removes the cache entries identified by the given tags.
 	 *
-	 * @inheritDoc
-	 *
 	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
@@ -96,8 +88,6 @@ class Standard
 	/**
 	 * Removes all entries of the site from the cache.
 	 *
-	 * @inheritDoc
-	 *
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function flush()
@@ -108,8 +98,6 @@ class Standard
 
 	/**
 	 * Returns the cached value for the given key.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param string $key Path to the requested value like product/id/123
 	 * @param mixed $default Value returned if requested key isn't found
@@ -126,8 +114,6 @@ class Standard
 	/**
 	 * Returns the cached values for the given cache keys if available.
 	 *
-	 * @inheritDoc
-	 *
 	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
@@ -143,8 +129,6 @@ class Standard
 	/**
 	 * Returns the cached keys and values associated to the given tags if available.
 	 *
-	 * @inheritDoc
-	 *
 	 * @param string[] $tags List of tag strings associated to the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
@@ -159,8 +143,6 @@ class Standard
 
 	/**
 	 * Sets the value for the given key in the cache.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param string $key Key string for the given value like product/id/123
 	 * @param string $value Value string that should be stored for the given key
@@ -179,8 +161,6 @@ class Standard
 	/**
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string

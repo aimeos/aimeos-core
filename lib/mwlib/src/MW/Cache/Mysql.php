@@ -83,8 +83,6 @@ class Mysql
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *
-	 * @inheritDoc
-	 *
 	 * @param array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
 	 * @param array $tags Associative list of key/tag or key/tags pairs that should be

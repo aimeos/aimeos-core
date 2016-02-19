@@ -27,8 +27,6 @@ abstract class Base
 	/**
 	 * Updates the list items to the referenced items for the given domain and type
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item including references to other domain items
 	 * @param array $map Associative list of reference ID as key and list of list item properties as key/value pairs
 	 * @param string $domain Domain name of the referenced items

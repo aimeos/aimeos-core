@@ -93,8 +93,6 @@ class DB
 	/**
 	 * Removes all expired cache entries.
 	 *
-	 * @inheritDoc
-	 *
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function cleanup()
@@ -127,8 +125,6 @@ class DB
 
 	/**
 	 * Removes the cache entries identified by the given keys.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param array $keys List of key strings that identify the cache entries
 	 * 	that should be removed
@@ -163,8 +159,6 @@ class DB
 
 	/**
 	 * Removes the cache entries identified by the given tags.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
@@ -201,8 +195,6 @@ class DB
 	/**
 	 * Removes all entries of the site from the cache.
 	 *
-	 * @inheritDoc
-	 *
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function flush()
@@ -227,8 +219,6 @@ class DB
 
 	/**
 	 * Returns the cached values for the given cache keys if available.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param string[] $keys List of key strings for the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
@@ -280,8 +270,6 @@ class DB
 
 	/**
 	 * Returns the cached keys and values associated to the given tags if available.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param string[] $tags List of tag strings associated to the requested cache entries
 	 * @return array Associative list of key/value pairs for the requested cache
@@ -335,8 +323,6 @@ class DB
 	/**
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
-	 *
-	 * @inheritDoc
 	 *
 	 * @param array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string

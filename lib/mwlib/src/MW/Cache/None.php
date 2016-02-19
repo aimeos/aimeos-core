@@ -132,8 +132,6 @@ class None
 	/**
 	 * Adds the given key/value pairs to the cache.
 	 *
-	 * @inheritDoc
-	 *
 	 * @param array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
 	 * @param array $expires Associative list of key/datetime pairs.

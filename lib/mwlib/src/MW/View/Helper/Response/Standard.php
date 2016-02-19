@@ -70,8 +70,6 @@ class Standard
 	/**
 	 * Retrieves the HTTP protocol version as a string.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return string HTTP protocol version.
 	 */
 	public function getProtocolVersion()
@@ -82,8 +80,6 @@ class Standard
 
 	/**
 	 * Return an instance with the specified HTTP protocol version.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $version HTTP protocol version
 	 * @return self
@@ -97,8 +93,6 @@ class Standard
 
 	/**
 	 * Retrieves all message header values.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @return string[][] Returns an associative array of the message's headers.
 	 *	 Each key MUST be a header name, and each value MUST be an array of
@@ -127,8 +121,6 @@ class Standard
 	/**
 	 * Retrieves a message header value by the given case-insensitive name.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $name Case-insensitive header field name.
 	 * @return string[] An array of string values as provided for the given
 	 *	header. If the header does not appear in the message, this method MUST
@@ -143,8 +135,6 @@ class Standard
 	/**
 	 * Retrieves a comma-separated string of the values for a single header.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $name Case-insensitive header field name.
 	 * @return string A string of values as provided for the given header
 	 *	concatenated together using a comma. If the header does not appear in
@@ -158,8 +148,6 @@ class Standard
 
 	/**
 	 * Return an instance with the provided value replacing the specified header.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $name Case-insensitive header field name.
 	 * @param string|string[] $value Header value(s).
@@ -176,8 +164,6 @@ class Standard
 	/**
 	 * Return an instance with the specified header appended with the given value.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $name Case-insensitive header field name to add.
 	 * @param string|string[] $value Header value(s).
 	 * @return self
@@ -191,8 +177,6 @@ class Standard
 
 	/**
 	 * Return an instance without the specified header.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $name Case-insensitive header field name to remove.
 	 * @return self
@@ -218,8 +202,6 @@ class Standard
 	/**
 	 * Return an instance with the specified message body.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param StreamInterface $body Body.
 	 * @return self
 	 * @throws \InvalidArgumentException When the body is not valid.
@@ -234,8 +216,6 @@ class Standard
 	/**
 	 * Gets the response status code.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return int Status code.
 	 */
 	public function getStatusCode()
@@ -246,8 +226,6 @@ class Standard
 
 	/**
 	 * Return an instance with the specified status code and, optionally, reason phrase.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param int $code The 3-digit integer result code to set.
 	 * @param string $reasonPhrase The reason phrase to use with the
@@ -265,8 +243,6 @@ class Standard
 
 	/**
 	 * Gets the response reason phrase associated with the status code.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @return string Reason phrase; must return an empty string if none present.
 	 */

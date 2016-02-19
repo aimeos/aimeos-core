@@ -83,8 +83,6 @@ class Standard
 	/**
 	 * Retrieves the HTTP protocol version as a string.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return string HTTP protocol version.
 	 */
 	public function getProtocolVersion()
@@ -95,8 +93,6 @@ class Standard
 
 	/**
 	 * Return an instance with the specified HTTP protocol version.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $version HTTP protocol version
 	 * @return self
@@ -110,8 +106,6 @@ class Standard
 
 	/**
 	 * Retrieves all message header values.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @return string[][] Returns an associative array of the message's headers.
 	 *	 Each key MUST be a header name, and each value MUST be an array of
@@ -140,8 +134,6 @@ class Standard
 	/**
 	 * Retrieves a message header value by the given case-insensitive name.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $name Case-insensitive header field name.
 	 * @return string[] An array of string values as provided for the given
 	 *	header. If the header does not appear in the message, this method MUST
@@ -156,8 +148,6 @@ class Standard
 	/**
 	 * Retrieves a comma-separated string of the values for a single header.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $name Case-insensitive header field name.
 	 * @return string A string of values as provided for the given header
 	 *	concatenated together using a comma. If the header does not appear in
@@ -171,8 +161,6 @@ class Standard
 
 	/**
 	 * Return an instance with the provided value replacing the specified header.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $name Case-insensitive header field name.
 	 * @param string|string[] $value Header value(s).
@@ -189,8 +177,6 @@ class Standard
 	/**
 	 * Return an instance with the specified header appended with the given value.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $name Case-insensitive header field name to add.
 	 * @param string|string[] $value Header value(s).
 	 * @return self
@@ -204,8 +190,6 @@ class Standard
 
 	/**
 	 * Return an instance without the specified header.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $name Case-insensitive header field name to remove.
 	 * @return self
@@ -231,8 +215,6 @@ class Standard
 	/**
 	 * Return an instance with the specified message body.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param StreamInterface $body Body.
 	 * @return self
 	 * @throws \InvalidArgumentException When the body is not valid.
@@ -247,8 +229,6 @@ class Standard
 	/**
 	 * Retrieves the message's request target.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return string
 	 */
 	public function getRequestTarget()
@@ -259,8 +239,6 @@ class Standard
 
 	/**
 	 * Return an instance with the specific request-target.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @see http://tools.ietf.org/html/rfc7230#section-2.7 (for the various
 	 *	 request-target forms allowed in request messages)
@@ -288,8 +266,6 @@ class Standard
 	/**
 	 * Return an instance with the provided HTTP method.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $method Case-sensitive method.
 	 * @return self
 	 * @throws \InvalidArgumentException for invalid HTTP methods.
@@ -304,8 +280,6 @@ class Standard
 	/**
 	 * Retrieves the URI instance.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @see http://tools.ietf.org/html/rfc3986#section-4.3
 	 * @return UriInterface Returns a UriInterface instance
 	 *	 representing the URI of the request.
@@ -318,8 +292,6 @@ class Standard
 
 	/**
 	 * Returns an instance with the provided URI.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param UriInterface $uri New request URI to use.
 	 * @param bool $preserveHost Preserve the original state of the Host header.
@@ -335,8 +307,6 @@ class Standard
 	/**
 	 * Retrieve server parameters.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return array List of key/value pairs from $_SERVER
 	*/
 	public function getServerParams()
@@ -348,8 +318,6 @@ class Standard
 	/**
 	 * Retrieve cookies.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return array List of key/value pairs from $_SERVER
 	 */
 	public function getCookieParams()
@@ -360,8 +328,6 @@ class Standard
 
 	/**
 	 * Return an instance with the specified cookies.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param array $cookies Array of key/value pairs representing cookies.
 	 * @return self
@@ -376,8 +342,6 @@ class Standard
 	/**
 	 * Retrieve query string arguments.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return array
 	 */
 	public function getQueryParams()
@@ -388,8 +352,6 @@ class Standard
 
 	/**
 	 * Return an instance with the specified query string arguments.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param array $query Array of query string arguments, typically from $_GET.
 	 * @return self
@@ -404,8 +366,6 @@ class Standard
 	/**
 	 * Retrieve normalized file upload data.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return array An array tree of UploadedFileInterface instances; an empty
 	 *	 array MUST be returned if no data is present.
 	 */
@@ -417,8 +377,6 @@ class Standard
 
 	/**
 	 * Create a new instance with the specified uploaded files.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param array An array tree of UploadedFileInterface instances.
 	 * @return self
@@ -433,8 +391,6 @@ class Standard
 	/**
 	 * Retrieve any parameters provided in the request body.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return null|array|object The deserialized body parameters, if any.
 	 *	 These will typically be an array or object.
 	 */
@@ -446,8 +402,6 @@ class Standard
 
 	/**
 	 * Return an instance with the specified body parameters.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param null|array|object $data The deserialized body data. This will
 	 *	 typically be in an array or object.
@@ -465,8 +419,6 @@ class Standard
 	/**
 	 * Retrieve attributes derived from the request.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return mixed[] Attributes derived from the request.
 	 */
 	public function getAttributes()
@@ -477,8 +429,6 @@ class Standard
 
 	/**
 	 * Retrieve a single derived request attribute.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $name The attribute name.
 	 * @param mixed $default Default value to return if the attribute does not exist.
@@ -493,8 +443,6 @@ class Standard
 	/**
 	 * Return an instance with the specified derived request attribute.
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $name The attribute name.
 	 * @param mixed $value The value of the attribute.
 	 * @return self
@@ -508,8 +456,6 @@ class Standard
 
 	/**
 	 * Return an instance that removes the specified derived request attribute.
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $name The attribute name.
 	 * @return self

@@ -98,8 +98,6 @@ class Standard implements Iface, DirIface, MetaIface
 	/**
 	 * Returns an iterator over the entries in the given path
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $path Path to the filesystem or directory
 	 * @return \Iterator|array Iterator over the entries or array with entries
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
@@ -178,8 +176,6 @@ class Standard implements Iface, DirIface, MetaIface
 	/**
 	 * Returns the content of the file
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $path Path to the file
 	 * @return string File content
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
@@ -218,8 +214,6 @@ class Standard implements Iface, DirIface, MetaIface
 	/**
 	 * Returns the stream descriptor for the file
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $path Path to the file
 	 * @return resource File stream descriptor
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
@@ -236,8 +230,6 @@ class Standard implements Iface, DirIface, MetaIface
 
 	/**
 	 * Writes the given content to the file
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $path Path to the file
 	 * @param string $content New file content
@@ -259,8 +251,6 @@ class Standard implements Iface, DirIface, MetaIface
 	/**
 	 * Writes the content of the local file to the remote path
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @param string $path Path to the remote file
 	 * @param string $file Path to the local file
 	 * @return void
@@ -280,8 +270,6 @@ class Standard implements Iface, DirIface, MetaIface
 
 	/**
 	 * Write the content of the stream descriptor into the remote file
-	 *
-	 * {@inheritDoc}
 	 *
 	 * @param string $path Path to the file
 	 * @param resource $stream File stream descriptor

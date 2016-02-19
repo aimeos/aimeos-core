@@ -381,8 +381,6 @@ class Standard
 	/**
 	 * Returns the tax for the price item
 	 *
-	 * {@inheritDoc}
-	 *
 	 * @return string Tax value with four digits precision
 	 * @see mshop/price/taxflag
 	 */
