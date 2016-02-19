@@ -360,7 +360,7 @@ abstract class Base
 	 *
 	 * @param string $domain Name of the domain (product, text, media, etc.)
 	 * @param string $manager Name of the sub manager type in lower case (can contain a path like base/product)
-	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
+	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions
 	 */
 	protected function getSubManagerBase( $domain, $manager, $name )
@@ -512,6 +512,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
+	 * @param array $decorators List of decorator names that should be wrapped around the manager object
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\MShop\Product\Manager\Decorator\"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 */
@@ -800,9 +801,9 @@ abstract class Base
 	/**
 	 * Returns the site coditions for the search request
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
-	 * @param string[] Sorted list of criteria keys
-	 * @param array Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $keys Sorted list of criteria keys
+	 * @param array $attributes Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
 	 * @param string[] $siteIds List of site IDs that should be used for searching
 	 * @return array List of search conditions implementing \Aimeos\MW\Criteria\Expression\Iface
 	 * @since 2015.01
@@ -829,12 +830,13 @@ abstract class Base
 	 * Returns the search result of the statement combined with the given criteria.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
 	 * @param string $cfgPathSearch Path to SQL statement in configuration for searching
 	 * @param string $cfgPathCount Path to SQL statement in configuration for counting
 	 * @param string[] $required Additional search keys to add conditions for even if no conditions are available
 	 * @param integer|null $total Contains the number of all records matching the criteria if not null
 	 * @param integer $sitelevel Constant from \Aimeos\MShop\Locale\Manager\Base for defining which site IDs should be used for searching
+	 * @param array $plugins Associative list of item keys and plugin objects implementing \Aimeos\MW\Criteria\Plugin\Iface
 	 * @return \Aimeos\MW\DB\Result\Iface SQL result object for accessing the found records
 	 * @throws \Aimeos\MShop\Exception if no number of all matching records is available
 	 */
@@ -967,6 +969,8 @@ abstract class Base
 
 	/**
 	 * Starts a database transaction on the connection identified by the given name.
+	 *
+	 * @param string $dbname Name of the database settings in the resource configuration
 	 */
 	protected function beginTransation( $dbname = 'db' )
 	{
@@ -980,6 +984,8 @@ abstract class Base
 
 	/**
 	 * Commits the running database transaction on the connection identified by the given name.
+	 *
+	 * @param string $dbname Name of the database settings in the resource configuration
 	 */
 	protected function commitTransaction( $dbname = 'db' )
 	{
@@ -993,6 +999,8 @@ abstract class Base
 
 	/**
 	 * Rolls back the running database transaction on the connection identified by the given name.
+	 *
+	 * @param string $dbname Name of the database settings in the resource configuration
 	 */
 	protected function rollbackTransaction( $dbname = 'db' )
 	{

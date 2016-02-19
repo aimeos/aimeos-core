@@ -558,7 +558,7 @@ class Standard
 	 * Creates a order base address item object for the given item id.
 	 *
 	 * @param integer $id Id of the order base address item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Returns order base address item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -616,9 +616,9 @@ class Standard
 	/**
 	 * Search for order base address items based on the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
-	 * @param integer &$total Number of items that are available in total
-	 * @return array List of order base address items implementing \Aimeos\MShop\Order\Item\Base\Address\Iface
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @throws \Aimeos\MShop\Order\Exception if creating items failed
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )

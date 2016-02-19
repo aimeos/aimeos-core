@@ -407,10 +407,9 @@ class Standard
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param array $ref List of domain items that should be fetched too
-	 * @param integer &$total Number of items that are available in total
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Customer\Item\Group\Iface
-	 * @throws \Aimeos\MShop\Exception If retrieving items failed
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{

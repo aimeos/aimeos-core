@@ -131,7 +131,7 @@ abstract class Base
 	 * Returns the item specified by its ID
 	 *
 	 * @param integer $id Unique ID of the item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -166,6 +166,8 @@ abstract class Base
 	/**
 	 * Creates a new extension manager in the domain.
 	 *
+	 * @param string $domain Name of the domain (product, text, media, etc.)
+	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( $domain, $name = null )
@@ -189,8 +191,9 @@ abstract class Base
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
@@ -205,9 +208,10 @@ abstract class Base
 	 * Only criteria from the list and list type can be used for searching and
 	 * sorting, but no criteria from the referenced items.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
-	 * @param integer &$total Number of items that are available in total
-	 * @return array List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
+	 * @return array Associative list of domains as keys and lists with pairs of IDs and items implementing \Aimeos\MShop\Common\Item\Iface
 	 * @throws \Aimeos\MShop\Exception if creating items failed
 	 * @see \Aimeos\MW\Criteria\SQL
 	 */

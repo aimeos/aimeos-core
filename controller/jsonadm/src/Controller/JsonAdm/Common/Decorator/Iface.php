@@ -24,8 +24,8 @@ interface Iface
 	 * Initializes a new controller decorator object
 	 *
 	 * @param \Aimeos\Controller\JsonAdm\Iface $controller Controller object
-	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
 	 * @return void

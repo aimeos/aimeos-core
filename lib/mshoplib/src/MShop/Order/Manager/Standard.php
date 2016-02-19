@@ -441,7 +441,7 @@ class Standard
 	 * Returns an order invoice item built from database values.
 	 *
 	 * @param integer $id Unique id of the order invoice
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Order\Item\Iface Returns order invoice item of the given id
 	 * @throws \Aimeos\MShop\Order\Exception If item couldn't be found
 	 */
@@ -542,12 +542,10 @@ class Standard
 	/**
 	 * Searches for orders based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * @param array $ref Not used
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Iface
-	 * @throws \Aimeos\MShop\Order\Exception If creating items failed
-	 * @throws \Aimeos\MW\DB\Exception If a database operation fails
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{

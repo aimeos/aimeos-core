@@ -229,7 +229,7 @@ class Standard
 	 * Returns the supplier item object specificed by its ID.
 	 *
 	 * @param integer $id Unique supplier ID referencing an existing supplier
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Returns the supplier item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -414,9 +414,9 @@ class Standard
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param integer &$total Number of items that are available in total
-	 * @return array List of items implementing \Aimeos\MShop\Supplier\Item\Iface
-	 * @throws \Aimeos\MShop\Supplier\Exception If creating items failed
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
+	 * @return array List of supplier items implementing \Aimeos\MShop\Supplier\Item\Iface
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
@@ -595,6 +595,8 @@ class Standard
 	 * Creates a new supplier item.
 	 *
 	 * @param array $values List of attributes for supplier item
+	 * @param array $listitems Associative list of list item IDs as keys and \Aimeos\MShop\Common\Item\List\Iface as values
+	 * @param array $refItems Associative list of item IDs as keys and \Aimeos\MShop\Common\Item\Iface as values
 	 * @return \Aimeos\MShop\Supplier\Item\Iface New supplier item
 	 */
 	protected function createItemBase( array $values = array(), array $listitems = array(), array $refItems = array() )

@@ -41,8 +41,9 @@ abstract class Base
 	 * Adds the decorators to the controller object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
+	 * @param \Aimeos\Bootstrap $aimeos Aimeos Bootstrap object
 	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
+	 * @param array $decorators List of decorator names that should be wrapped around the controller object
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Controller\Jobs\Attribute\Decorator\"
 	 * @return \Aimeos\Controller\Jobs\Common\Iface Controller object
 	 */

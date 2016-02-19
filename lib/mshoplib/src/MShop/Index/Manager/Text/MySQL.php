@@ -51,6 +51,11 @@ class MySQL
 	);
 
 
+	/**
+	 * Initializes the object
+	 *
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );

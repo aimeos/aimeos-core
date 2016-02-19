@@ -341,7 +341,7 @@ class Standard
 	 * Returns tag tag item with given Id.
 	 *
 	 * @param integer $id Id of the tag tag item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Tag\Item\Iface Returns the tag tag item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -399,12 +399,10 @@ class Standard
 	/**
 	 * Search for all tag items based on the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
-	 * 		[tag.prodid], [tag.domain], [tag.label]
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of tag items implementing \Aimeos\MShop\Tag\Item\Iface
-	 * @throws \Aimeos\MShop\Tag\Exception if creating items failed
-	 * @see \Aimeos\MW\Criteria\SQL
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{

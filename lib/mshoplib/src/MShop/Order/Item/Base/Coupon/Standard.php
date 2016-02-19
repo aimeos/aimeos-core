@@ -27,8 +27,7 @@ class Standard
 	/**
 	 * Initializes the order base coupon item.
 	 *
-	 * @param array $values Values to be set on initialisation.
-	 * Possible keys: 'id', 'baseid', 'ordprodid', 'code', 'mtime'
+	 * @param array $values Associative list of order coupon values
 	 */
 	public function __construct( array $values = array( ) )
 	{
@@ -41,7 +40,7 @@ class Standard
 	/**
 	 * Returns the base ID of the order.
 	 *
-	 * @return integer Order base Id.
+	 * @return integer Order base ID
 	 */
 	public function getBaseId()
 	{
@@ -71,9 +70,9 @@ class Standard
 
 
 	/**
-	 * 	Returns the ID of the ordered product.
+	 * Returns the ID of the ordered product.
 	 *
-	 *  @return integer ID of the ordered product.
+	 * @return integer ID of the ordered product.
 	 */
 	public function getProductId()
 	{
@@ -86,9 +85,9 @@ class Standard
 
 
 	/**
-	 * 	Sets the ID of the ordered product.
+	 * Sets the ID of the ordered product.
 	 *
-	 * 	@param integer $productid ID of the ordered product
+	 * @param integer $productid ID of the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setProductId( $productid )

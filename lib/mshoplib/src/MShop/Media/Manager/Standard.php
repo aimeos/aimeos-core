@@ -250,7 +250,7 @@ class Standard
 	 * Returns an item for the given ID.
 	 *
 	 * @param integer $id ID of the item that should be retrieved
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Media\Item\Iface Returns the media item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -441,10 +441,9 @@ class Standard
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Media\Item\Iface
-	 * @throws \Aimeos\MShop\Media\Exception If creating items failed
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{

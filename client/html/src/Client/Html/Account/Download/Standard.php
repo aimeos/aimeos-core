@@ -222,6 +222,11 @@ class Standard
 	}
 
 
+	/**
+	 * Adds the necessary headers and the download content to the reponse object
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Order product attribute item with file reference
+	 */
 	protected function addDownload( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item )
 	{
 		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-secure' );

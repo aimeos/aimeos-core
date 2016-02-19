@@ -23,7 +23,7 @@ interface Iface
 	 * Deletes the resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -34,7 +34,7 @@ interface Iface
 	 * Returns the requested resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -45,7 +45,7 @@ interface Iface
 	 * Updates the resource or the resource list partitially
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -56,7 +56,7 @@ interface Iface
 	 * Creates or updates the resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -67,7 +67,7 @@ interface Iface
 	 * Creates or updates the resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -78,7 +78,7 @@ interface Iface
 	 * Returns the available REST verbs
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */

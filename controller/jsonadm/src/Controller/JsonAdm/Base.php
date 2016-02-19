@@ -47,7 +47,7 @@ class Base
 	 * Deletes the resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -155,7 +155,7 @@ class Base
 	 * Returns the requested resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -250,7 +250,7 @@ class Base
 	 * Updates the resource or the resource list partitially
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -378,7 +378,7 @@ class Base
 	 * Creates or updates the resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -506,7 +506,7 @@ class Base
 	 * Creates or updates the resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */
@@ -557,7 +557,7 @@ class Base
 	 * Returns the available REST verbs and the available resources
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */

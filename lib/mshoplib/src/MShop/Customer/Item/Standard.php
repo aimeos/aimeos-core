@@ -31,12 +31,12 @@ class Standard
 	/**
 	 * Initializes the customer item object
 	 *
-	 * @param array $values List of attributes that belong to the customer item
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address item object
+	 * @param array $values List of attributes that belong to the customer item
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param string $salt Password salt (optional)
-	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface $helper Password encryption helper object
+	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
 		array $listItems = array(), array $refItems = array(), $salt = '',

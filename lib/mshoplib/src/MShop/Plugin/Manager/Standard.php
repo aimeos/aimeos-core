@@ -267,7 +267,7 @@ class Standard
 	 * Returns plugin item specified by the given ID.
 	 *
 	 * @param integer $id Unique ID of the plugin item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Returns the plugin item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -560,8 +560,8 @@ class Standard
 	 * Searches for plugin items matching the given criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param integer &$total Number of items that are available in total
-	 *
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of plugin items implementing \Aimeos\MShop\Plugin\Item\Iface
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
@@ -739,6 +739,7 @@ class Standard
 	/**
 	 * Creates a new plugin object.
 	 *
+	 * @param array Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Plugin\Item\Iface New plugin object
 	 */
 	protected function createItemBase( array $values = array() )

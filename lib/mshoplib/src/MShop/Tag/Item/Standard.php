@@ -24,8 +24,11 @@ class Standard
 {
 	private $values;
 
+
 	/**
 	 * Initializes the tag item object with the given values
+	 *
+	 * @param array $values Associative list of item key/value pairs
 	 */
 	public function __construct( array $values = array( ) )
 	{

@@ -193,7 +193,7 @@ class Standard
 	 * Returns the coupons item specified by its ID.
 	 *
 	 * @param string $id Unique ID of the coupon item in the storage
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Returns the coupon item of the given ID
 	 * @throws \Aimeos\MShop\Exception If coupon couldn't be found
 	 */
@@ -424,14 +424,10 @@ class Standard
 	/**
 	 * Searchs for coupon items based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array Returns a list of coupon items implementing \Aimeos\MShop\Coupon\Item\Iface
-	 *
-	 * @throws \Aimeos\MW\DB\Exception On failures with the db object
-	 * @throws \Aimeos\MShop\Common\Exception On failures with the \Aimeos\MW\Criteria\ object
-	 * @throws \Aimeos\MShop\Coupon\Exception On failures with the coupon items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
@@ -609,6 +605,7 @@ class Standard
 	 * Returns the coupon model which belongs to the given code.
 	 *
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item interface
+	 * @param string $code Coupon code
 	 * @return \Aimeos\MShop\Coupon\Provider\Iface Returns a coupon provider instance
 	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be found
 	 */

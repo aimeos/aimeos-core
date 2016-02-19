@@ -774,6 +774,7 @@ class Standard
 	 * @param integer $quantity Number of products that should be added to the basket
 	 * @param array $attributeIds List of attributes IDs of the given type
 	 * @param string $type Attribute type
+	 * @param array $attributeValues Associative list of attribute IDs as keys and their codes as values
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Product\Attribute\Iface
 	 */
 	protected function createOrderProductAttributes( \Aimeos\MShop\Price\Item\Iface $price, $prodid, $quantity,

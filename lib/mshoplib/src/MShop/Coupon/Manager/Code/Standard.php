@@ -326,6 +326,7 @@ class Standard
 	 * Returns the coupon code object specified by its ID.
 	 *
 	 * @param integer $id Unique ID of the coupon code in the storage
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code object
 	 * @throws \Aimeos\MShop\Coupon\Exception If coupon couldn't be found
 	 */
@@ -559,15 +560,10 @@ class Standard
 	/**
 	 * Searchs for coupon items based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * Possible search keys: 'coupon.code.id', 'coupon.code.parentid',
-	 * 'coupon.code.code', 'coupon.code.count'.
-	 *
-	 * @param integer &$total Number of items that are available in total (not yet implemented)
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of code items implementing \Aimeos\MShop\Coupon\Item\Code\Iface's
-	 * @throws \Aimeos\MShop\Coupon\Exception
-	 * @throws \Aimeos\MW\Common\Exception
-	 * @throws \Aimeos\MW\DB\Exception
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
@@ -815,9 +811,10 @@ class Standard
 	/**
 	 * Creates a new code instance
 	 *
+	 * @param array $values Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Emtpy coupon code object
 	 */
-	public function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = array() )
 	{
 		return new \Aimeos\MShop\Coupon\Item\Code\Standard( $values );
 	}

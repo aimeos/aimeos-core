@@ -356,7 +356,7 @@ class Standard
 	 * Creates a stock item object for the given item id.
 	 *
 	 * @param integer $id Id of the stock item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Returns the product stock item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -414,15 +414,10 @@ class Standard
 	/**
 	 * Search for stock items based on the given critera.
 	 *
-	 * Possible search keys: 'product.stock.id', 'product.stock.parentid', 'product.stock.siteid',
-	 * 'product.stock.warehouseid', 'product.stock.stocklevel', 'product.stock.backdate'
-	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of stock items implementing \Aimeos\MShop\Product\Item\Stock\Iface
-	 * @throws \Aimeos\MShop\Product\Exception if creating items failed
-	 * @see \Aimeos\MW\Criteria\SQL
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{

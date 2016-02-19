@@ -137,6 +137,7 @@ class Factory
 	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
+	 * @param string|null $name Name of the JsonAdm controller (default: "Standard")
 	 * @throws \Aimeos\Controller\JsonAdm\Exception If the controller couldn't be created
 	 */
 	protected static function createControllerRoot( \Aimeos\MShop\Context\Item\Iface $context,

@@ -331,6 +331,15 @@ class Standard
 	}
 
 
+	/**
+	 * Returns the value for the given property name
+	 *
+	 * Currently supported are "oldPaymentStatus" and "oldDeliveryStatus"
+	 *
+	 * @param string $name Property name
+	 * @return mixed Property value
+	 * @throws \Aimeos\MShop\Order\Exception If the property name is unknown
+	 */
 	public function __get( $name )
 	{
 		switch( $name )

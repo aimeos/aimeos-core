@@ -187,7 +187,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 *
 	 * @param integer|null $id Retrieve nodes starting from the given ID
 	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
-	 * * @param \Aimeos\MW\Criteria\Iface|null $condition Optional criteria object with conditions
+	 * @param \Aimeos\MW\Criteria\Iface|null $condition Optional criteria object with conditions
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
 	public function getNode( $id = null, $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $condition = null )

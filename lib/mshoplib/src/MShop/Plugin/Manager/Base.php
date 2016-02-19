@@ -21,8 +21,15 @@ namespace Aimeos\MShop\Plugin\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
-	protected function addPluginDecorators( \Aimeos\MShop\Plugin\Item\Iface $serviceItem,
-		\Aimeos\MShop\Plugin\Provider\Iface $provider, $names )
+	/**
+	 *
+	 * @param \Aimeos\MShop\Plugin\Item\Iface $pluginItem Plugin item object
+	 * @param \Aimeos\MShop\Plugin\Provider\Iface $provider Plugin provider object
+	 * @param array $names List of decorator names that should be wrapped around the plugin provider object
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin provider object
+	 */
+	protected function addPluginDecorators( \Aimeos\MShop\Plugin\Item\Iface $pluginItem,
+		\Aimeos\MShop\Plugin\Provider\Iface $provider, array $names )
 	{
 		$iface = '\\Aimeos\\MShop\\Plugin\\Provider\\Decorator\\Iface';
 		$classprefix = '\\Aimeos\\MShop\\Plugin\\Provider\\Decorator\\';
@@ -39,7 +46,7 @@ abstract class Base
 				throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$provider = new $classname( $this->getContext(), $serviceItem, $provider );
+			$provider = new $classname( $this->getContext(), $pluginItem, $provider );
 
 			if( ( $provider instanceof $iface ) === false ) {
 				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface );

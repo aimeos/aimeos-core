@@ -298,7 +298,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	 * Returns the order base item specified by the given ID.
 	 *
 	 * @param integer $id Unique id of the order base
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Returns Order base item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -662,12 +662,10 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	/**
 	 * Search for orders based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * @param array $ref Not used
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Iface
-	 * @throws \Aimeos\MShop\Order\Exception If creating items fails
-	 * @throws \Aimeos\MW\DB\Exception If a database operation fails
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
@@ -1039,6 +1037,13 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 	/**
 	 * Returns a new and empty order base item (shopping basket).
 	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
+	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
+	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
+	 * @param array $products List of ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @param array $addresses List of order addresses implementing \Aimeos\MShop\Order\Item\Base\Address\Iface
+	 * @param array $services List of order services implementing \Aimeos\MShop\Order\Item\Base\Service\Iface
+	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface as values
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,

@@ -20,6 +20,9 @@ namespace Aimeos\MW\Session;
  */
 class PHP implements \Aimeos\MW\Session\Iface
 {
+	/**
+	 * Initializes the session object.
+	 */
 	public function __construct()
 	{
 		session_start();

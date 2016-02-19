@@ -286,7 +286,7 @@ class Standard
 	 * Returns the price item object specificed by its ID.
 	 *
 	 * @param integer $id Unique price ID referencing an existing price
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Price\Item\Iface $item Returns the price item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -478,14 +478,10 @@ class Standard
 	/**
 	 * Returns the item objects matched by the given search criteria.
 	 *
-	 * Possible search keys: 'price.id', 'price.currencyid', 'price.quantity',
-	 *  'price.value','price.costs', 'price.rebate', 'price.taxrate', 'price.status'.
-	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param integer &$total Number of items that are available in total
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Price\Item\Iface
-	 *
-	 * @throws \Aimeos\MShop\Price\Exception If creating items failed
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{

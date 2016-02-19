@@ -364,7 +364,7 @@ class Standard
 	 * Returns the order status item specified by its ID.
 	 *
 	 * @param integer $id Unique ID of the order status item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Returns order status item of the given id
 	 * @throws \Aimeos\MShop\Order\Exception If item couldn't be found
 	 */
@@ -586,9 +586,9 @@ class Standard
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
-	 * @param array $ref Not used
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Status\Iface
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )

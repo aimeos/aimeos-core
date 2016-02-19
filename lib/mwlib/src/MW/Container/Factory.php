@@ -24,6 +24,7 @@ class Factory
 	 * Opens an existing container or creates a new one.
 	 *
 	 * @param string $resourcepath Path to the resource like a file
+	 * @param string $type Type of the container object
 	 * @param string $format Format of the content objects inside the container
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */

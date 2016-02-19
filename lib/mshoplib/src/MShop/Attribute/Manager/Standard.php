@@ -444,14 +444,10 @@ class Standard
 	/**
 	 * Searches for attribute items based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of attribute items implementing \Aimeos\MShop\Attribute\Item\Iface
-	 *
-	 * @throws \Aimeos\MW\DB\Exception On failures with the db object
-	 * @throws \Aimeos\MShop\Common\Exception On failures with the \Aimeos\MW\Criteria\ object
-	 * @throws \Aimeos\MShop\Attribute\Exception On failures with the Attribute items
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{

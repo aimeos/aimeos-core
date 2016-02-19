@@ -24,7 +24,9 @@ class Sitecheck
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item which should be inserted
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item which should be inserted
+	 * @param string|null $parentId ID of the parent item where the item should be inserted into
+	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
 	{
@@ -45,10 +47,10 @@ class Sitecheck
 	/**
 	 * Moves an existing item to the new parent in the storage.
 	 *
-	 * @param mixed $id ID of the item that should be moved
-	 * @param mixed $oldParentId ID of the old parent item which currently contains the item that should be removed
-	 * @param mixed $newParentId ID of the new parent item where the item should be moved to
-	 * @param mixed $refId ID of the item where the item should be inserted before (null to append)
+	 * @param string $id ID of the item that should be moved
+	 * @param string $oldParentId ID of the old parent item which currently contains the item that should be removed
+	 * @param string $newParentId ID of the new parent item where the item should be moved to
+	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{

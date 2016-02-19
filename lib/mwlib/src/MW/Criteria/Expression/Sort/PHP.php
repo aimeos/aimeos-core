@@ -128,10 +128,10 @@ class PHP
 
 
 	/**
-	 * @param string &$item Reference to parameter value (will be updated if necessary)
+	 * Returns the internal parameter type for the given string
 	 *
-	 * @param string &$item Parameter value
-	 * @return string Internal parameter type
+	 * @param string &$item Reference to parameter value (will be updated if necessary)
+	 * @return string Internal parameter type like string, float or int
 	 * @throws \Aimeos\MW\Common\Exception If an error occurs
 	 */
 	protected function getParamType( &$item )

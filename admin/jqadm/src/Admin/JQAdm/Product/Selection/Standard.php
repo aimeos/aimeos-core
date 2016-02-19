@@ -488,7 +488,7 @@ class Standard
 	/**
 	 * Updates the product variants
 	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $product Product item with referenced domain items
+	 * @param \Aimeos\MW\View\Iface $view View object with helpers and assigned parameters
 	 */
 	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{

@@ -21,6 +21,13 @@ class Factory
 	extends \Aimeos\Controller\ExtJS\Common\Factory\Base
 	implements \Aimeos\Controller\ExtJS\Common\Factory\Iface
 {
+	/**
+	 * Creates a new price type controller object.
+	 *
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param string|null $name Name of the controller implementaton (default: "Standard")
+	 * @return \Aimeos\Controller\ExtJS\Common\Iface Controller object
+	 */
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** controller/extjs/price/type/name

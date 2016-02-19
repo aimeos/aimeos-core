@@ -109,6 +109,11 @@ class Base implements \Aimeos\MW\Template\Iface
 	}
 
 
+	/**
+	 * Returns the marker names used in the template.
+	 *
+	 * @return array List of marker names
+	 */
 	public function getMarkerNames()
 	{
 		$matches = array();

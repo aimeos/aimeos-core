@@ -327,7 +327,7 @@ class Standard
 	 * Returns order base product for the given product ID.
 	 *
 	 * @param integer $id Product ids to create product object for
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Returns order base product item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -737,8 +737,9 @@ class Standard
 	/**
 	 * Searches for order base products item based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface's
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
@@ -916,6 +917,9 @@ class Standard
 	/**
 	 * Creates new order base product item object initialized with given parameters.
 	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item object with product price
+	 * @param array $values Associative list of ordered product properties
+	 * @param array $attributes List of order product attributes that belong to the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, array $values = array(), array $attributes = array() )

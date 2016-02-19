@@ -267,7 +267,7 @@ class Standard
 	 * Returns the item specified by its ID.
 	 *
 	 * @param integer $id Unique ID of the catalog item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Returns the catalog item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -325,7 +325,9 @@ class Standard
 	/**
 	 * Adds a new item object.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $item Item which should be inserted
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item which should be inserted
+	 * @param string|null $parentId ID of the parent item where the item should be inserted into
+	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
 	{
@@ -350,10 +352,10 @@ class Standard
 	/**
 	 * Moves an existing item to the new parent in the storage.
 	 *
-	 * @param mixed $id ID of the item that should be moved
-	 * @param mixed $oldParentId ID of the old parent item which currently contains the item that should be removed
-	 * @param mixed $newParentId ID of the new parent item where the item should be moved to
-	 * @param mixed $refId ID of the item where the item should be inserted before (null to append)
+	 * @param string $id ID of the item that should be moved
+	 * @param string $oldParentId ID of the old parent item which currently contains the item that should be removed
+	 * @param string $newParentId ID of the new parent item where the item should be moved to
+	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
@@ -410,10 +412,9 @@ class Standard
 	/**
 	 * Searches for all items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Criteria object with conditions, sortations, etc.
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total No function. Reference will be set to null in this case.
-	 * @param integer $total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
@@ -585,7 +586,7 @@ class Standard
 	 * Returns a list of items starting with the given category that are in the path to the root node
 	 *
 	 * @param integer $id ID of item to get the path for
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return array Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface with IDs as keys
 	 */
 	public function getPath( $id, array $ref = array() )
@@ -619,8 +620,8 @@ class Standard
 	/**
 	 * Returns a node and its descendants depending on the given resource.
 	 *
-	 * @param integer|null $id Retrieve nodes starting from the given ID
-	 * @param array List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
+	 * @param string|null $id Retrieve nodes starting from the given ID
+	 * @param string[] List of domains (e.g. text, media, etc.) whose referenced items should be attached to the objects
 	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
@@ -766,6 +767,8 @@ class Standard
 	 * @param array $children List of children of this catalog item
 	 * @param array $listItems List of list items that belong to the catalog item
 	 * @param array $refItems Associative list of referenced items grouped by domain
+	 * @param array $children List of tree nodes implementing \Aimeos\MW\Tree\Node\Iface
+	 * @param \Aimeos\MW\Tree\Node\Iface|null $node Tree node object
 	 * @return \Aimeos\MShop\Catalog\Item\Iface New catalog item
 	 */
 	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array(),

@@ -26,6 +26,8 @@ class Standard
 
 	/**
 	 * Initializes the property item object with the given values
+	 *
+	 * @param array $values Associative list of product property key/value pairs
 	 */
 	public function __construct( array $values = array( ) )
 	{

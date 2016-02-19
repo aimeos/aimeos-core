@@ -42,6 +42,7 @@ class Base
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param \Aimeos\Controller\ExtJS\Common\Iface $controller Controller object
+	 * @param array $decorators List of decorator names which should be wrapped around the conroller object
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Controller\ExtJS\Attribute\Decorator\"
 	 * @return \Aimeos\Controller\ExtJS\Common\Iface Controller object
 	 */

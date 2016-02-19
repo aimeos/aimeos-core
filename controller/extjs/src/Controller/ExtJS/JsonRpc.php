@@ -31,6 +31,7 @@ class JsonRpc
 	 * Should not be instantiated directly. Use getInstance() instead.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
+	 * @param array $cntlPaths List of paths where ExtJS controllers can be found
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, array $cntlPaths )
 	{

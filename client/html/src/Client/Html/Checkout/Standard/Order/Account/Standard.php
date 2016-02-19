@@ -305,6 +305,8 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Customer\Item\Iface $customer Customer object
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billing address object
+	 * @param string $code Unique customer code, e.g. user name or e-mail address
+	 * @param string $password Plain-text password for the customer
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer object filled with data
 	 */
 	protected function addCustomerData( \Aimeos\MShop\Customer\Item\Iface $customer,

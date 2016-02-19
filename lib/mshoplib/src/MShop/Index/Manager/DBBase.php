@@ -74,6 +74,7 @@ abstract class DBBase
 	 * Returns the product item for the given ID
 	 *
 	 * @param integer $id Id of item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item object
 	 */
 	public function getItem( $id, array $ref = array() )

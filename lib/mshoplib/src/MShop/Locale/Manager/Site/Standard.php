@@ -346,7 +346,7 @@ class Standard
 	 * Returns the site item specified by its ID.
 	 *
 	 * @param string $id Unique ID of the site data in the storage
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Returns the site item of the given id
 	 * @throws \Aimeos\MShop\Exception If the item couldn't be found
 	 */
@@ -526,9 +526,9 @@ class Standard
 	/**
 	 * Searches for site items matching the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of site items implementing \Aimeos\MShop\Locale\Item\Site\Iface
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
@@ -944,7 +944,8 @@ class Standard
 	/**
 	 * Create new item object initialized with given parameters.
 	 *
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface
+	 * @param array $data Associative list of item key/value pairs
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item object
 	 */
 	protected function createItemBase( array $data = array( ) )
 	{

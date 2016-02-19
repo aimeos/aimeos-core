@@ -29,7 +29,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
-	 * @param \Aimeos\MShop\Plugin\Provider\Iface $item Plugin item object
+	 * @param \Aimeos\MShop\Plugin\Provider\Iface $provider Plugin provider object
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Plugin\Item\Iface $item,
 		\Aimeos\MShop\Plugin\Provider\Iface $provider )

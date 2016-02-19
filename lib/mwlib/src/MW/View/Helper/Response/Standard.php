@@ -54,6 +54,7 @@ class Standard
 	/**
 	 * Creates a new PSR-7 stream object
 	 *
+	 * @param string|resource Absolute file path or file descriptor
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
 	public function createStream( $resource )

@@ -215,7 +215,7 @@ class Standard
 	 * Returns the attribute object for the given ID.
 	 *
 	 * @param integer $id Attribute ID
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Returns order base service attribute item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -489,9 +489,9 @@ class Standard
 	/**
 	 * Searches for order service attribute items based on the given criteria.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object containing the conditions
-	 * @param array $ref Not used
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
@@ -777,6 +777,7 @@ class Standard
 	/**
 	 * Creates a new order service attribute item object initialized with given parameters.
 	 *
+	 * @param array $values Associative list of order service attribute key/value pairs
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Standard New item
 	 */
 	protected function createItemBase( array $values = array() )

@@ -184,7 +184,7 @@ abstract class Base
 	 * Returns the type item specified by its ID
 	 *
 	 * @param integer $id ID of type item object
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Returns the type item of the given ID
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -197,10 +197,10 @@ abstract class Base
 	/**
 	 * Searches for all type items matching the given critera.
 	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object with conditions
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of type items implementing \Aimeos\MShop\Common\Item\Type\Iface
-	 * @throws \Aimeos\MShop\Common\Exception if creating items failed
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
@@ -281,6 +281,11 @@ abstract class Base
 	}
 
 
+	/**
+	 * Returns the prefix used for the item keys.
+	 *
+	 * @return string Item key prefix
+	 */
 	protected function getPrefix()
 	{
 		return $this->prefix;

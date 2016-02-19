@@ -84,6 +84,8 @@ interface Iface
 	/**
 	 * Creates a new extension manager in the domain.
 	 *
+	 * @param string $domain Name of the domain (product, text, media, etc.)
+	 * @param string|null $name Name of the implementation, will be from configuration (or Standard) if null
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( $domain, $name = null );

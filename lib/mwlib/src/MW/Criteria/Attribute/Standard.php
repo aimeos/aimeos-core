@@ -220,6 +220,11 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	}
 
 
+	/**
+	 * Returns the attribute properties as key/value pairs.
+	 *
+	 * @return array Associative list of attribute key/value pairs
+	 */
 	public function toArray()
 	{
 		return array(

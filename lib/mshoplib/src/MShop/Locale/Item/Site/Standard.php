@@ -28,7 +28,8 @@ class Standard
 	/**
 	 * Initializes the site object.
 	 *
-	 * @param array $values Possible params to be set on initialization
+	 * @param array $values Associative list of item key/value pairs
+	 * @param array $children List of nodes implementing \Aimeos\MW\Tree\Node\Iface
 	 */
 	public function __construct( array $values = array( ), array $children = array() )
 	{

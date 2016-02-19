@@ -35,8 +35,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
 	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
-	 * @param array $values Associative list of key/value pairs containing
-	 * 	e.g. the order or user ID
+	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
+	 * @param array $products List of ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @param array $addresses List of order addresses implementing \Aimeos\MShop\Order\Item\Base\Address\Iface
+	 * @param array $services List of order services implementing \Aimeos\MShop\Order\Item\Base\Service\Iface
+	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface as values
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
 		array $values = array(), array $products = array(), array $addresses = array(),
@@ -566,6 +569,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 	/**
 	 * Deletes the delivery or payment service from the basket.
+	 *
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 */
 	public function deleteService( $type )
 	{

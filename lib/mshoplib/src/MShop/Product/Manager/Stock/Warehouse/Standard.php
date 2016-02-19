@@ -478,7 +478,7 @@ class Standard
 	 * Creates a warehouse item object for the given item id.
 	 *
 	 * @param integer $id Id of the warehouse item
-	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Common\Item\Iface Returns product warehouse item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
@@ -536,14 +536,10 @@ class Standard
 	/**
 	 * Search for warehouse items based on the given critera.
 	 *
-	 * Possible search keys: 'product.warehouse.id', 'product.warehouse.siteid', 'product.warehouse.code'
-	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search object with search conditions
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of warehouse items implementing \Aimeos\MShop\Product\Item\Warehouse\Iface
-	 * @throws \Aimeos\MShop\Product\Exception if creating items failed
-	 * @see \Aimeos\MW\Criteria\SQL
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{

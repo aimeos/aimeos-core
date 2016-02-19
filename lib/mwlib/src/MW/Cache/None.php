@@ -119,6 +119,10 @@ class None
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
 	 * @param mixed $value Value that should be associated with the given path
+	 * @param array $tags List of tag strings that should be assoicated to the
+	 * 	given value in the cache
+	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * 	format when the cache entry expires
 	 */
 	public function set( $name, $value, array $tags = array(), $expire = null )
 	{

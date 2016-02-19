@@ -23,6 +23,12 @@ class Standard
 {
 	private $values;
 
+
+	/**
+	 * Initializes the object
+	 *
+	 * @param array $values Associative list of key/value pairs with order status properties
+	 */
 	public function __construct( array $values = array( ) )
 	{
 		parent::__construct( 'order.status.', $values );

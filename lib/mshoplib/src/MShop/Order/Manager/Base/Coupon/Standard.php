@@ -193,6 +193,7 @@ class Standard
 	 * Returns the order coupon item for the given ID.
 	 *
 	 * @param integer $id ID of the item that should be retrieved
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Item for the given ID
 	 */
 	public function getItem( $id, array $ref = array() )
@@ -466,10 +467,9 @@ class Standard
 	 * Returns the item objects matched by the given search criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param array $ref List of domains to fetch list items and referenced items for
-	 * @param integer &$total Number of items that are available in total
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param integer|null &$total Number of items that are available in total
 	 * @return array Return a list of items implementing \Aimeos\MShop\Order\Item\Base\Coupon\Iface
-	 * @throws \Aimeos\MShop\Order\Exception If creation of an item fails
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
@@ -748,6 +748,7 @@ class Standard
 	/**
 	 * Create new order base coupon item object initialized with given parameters.
 	 *
+	 * @param array $values Associative list of order coupon property pairs
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Standard New item
 	 */
 	protected function createItemBase( array $values = array() )

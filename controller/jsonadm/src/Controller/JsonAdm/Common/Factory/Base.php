@@ -41,8 +41,8 @@ class Base
 	 * Adds the decorators to the JSON API controller object
 	 *
 	 * @param \Aimeos\Controller\JsonAdm\Common\Iface $controller Controller object
-	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the controller separated by slashes, e.g "product/stock"
 	 * @return \Aimeos\Controller\JsonAdm\Common\Iface Controller object

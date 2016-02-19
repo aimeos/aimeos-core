@@ -25,7 +25,7 @@ class Standard
 	 * Returns the requested resource or the resource list
 	 *
 	 * @param string $body Request body
-	 * @param string &$header Variable which contains the HTTP headers and the new ones afterwards
+	 * @param array &$header Variable which contains the HTTP headers and the new ones afterwards
 	 * @param integer &$status Variable which contains the HTTP status afterwards
 	 * @return string Content for response body
 	 */

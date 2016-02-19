@@ -271,9 +271,9 @@ class Standard
 	/**
 	 * Adds data for the given language.
 	 *
-	 * @param string $langid Language id
-	 * @param array $ids List of of item ids whose texts should be added
 	 * @param \Aimeos\MW\Container\Content\Iface $contentItem Content item
+	 * @param string $langid Language ID to add the texts for
+	 * @param array $ids List of of item ids whose texts should be added
 	 */
 	protected function addLanguage( \Aimeos\MW\Container\Content\Iface $contentItem, $langid, array $ids )
 	{

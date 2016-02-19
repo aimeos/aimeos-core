@@ -22,6 +22,13 @@ class Factory
 	extends \Aimeos\Controller\Frontend\Common\Factory\Base
 	implements \Aimeos\Controller\Frontend\Common\Factory\Iface
 {
+	/**
+	 * Creates a new basket controller object.
+	 *
+	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
+	 * @param string|null $name Name of the controller implementaton (default: "Standard")
+	 * @return \Aimeos\Controller\Frontend\Common\Iface Controller object
+	 */
 	public static function createController( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** controller/frontend/basket/name
