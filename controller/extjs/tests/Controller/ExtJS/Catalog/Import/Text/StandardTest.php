@@ -154,13 +154,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUploadFile()
 	{
+		$helper = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Request\Standard' )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$view = new \Aimeos\MW\View\Standard();
+		$view->addHelper( 'request', $helper );
+
 		$object = $this->getMockBuilder( '\Aimeos\Controller\ExtJS\Catalog\Import\Text\Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'storeFile' ) )
 			->getMock();
 		$object->expects( $this->once() )->method( 'storeFile' )->will( $this->returnValue( 'file.txt' ) );
 
-		$this->context->setView( new \Aimeos\MW\View\Standard() );
+		$this->context->setView( $view );
 
 		$params = new \stdClass();
 		$params->items = 'file.txt';
