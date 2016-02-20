@@ -1,1 +1,0 @@
-[{"jsonrpc":"2.0","method":"Product.searchItems","params":{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"},"id":1}, {"jsonrpc":"2.0","method":"Product_Type.searchItems","params":{"site":"unit","start":0,"limit":2,"sort":"product.type.code","dir":"DESC"},"id":2}]

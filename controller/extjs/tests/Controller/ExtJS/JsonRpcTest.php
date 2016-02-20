@@ -27,30 +27,6 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function setUp()
-	{
-		$ds = DIRECTORY_SEPARATOR;
-		$this->testdir = __DIR__ . $ds . '_testfiles' . $ds . 'jsonrpc' . $ds;
-	}
-
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
-	protected function tearDown()
-	{
-	}
-
-
 	public function testGetJsonItemSchemas()
 	{
 		$result = self::$object->getJsonItemSchemas();
@@ -214,7 +190,8 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessJsonObject()
 	{
-		$result = self::$object->process( array(), $this->testdir . 'object.txt' );
+		$content = '{"jsonrpc":"2.0","method":"Product.searchItems","params":{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"},"id":1}';
+		$result = self::$object->process( array(), $content );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'jsonrpc', $object );
@@ -235,7 +212,8 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessJsonArray()
 	{
-		$result = self::$object->process( array(), $this->testdir . 'array.txt' );
+		$content = '[{"jsonrpc":"2.0","method":"Product.searchItems","params":{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"},"id":1}, {"jsonrpc":"2.0","method":"Product_Type.searchItems","params":{"site":"unit","start":0,"limit":2,"sort":"product.type.code","dir":"DESC"},"id":2}]';
+		$result = self::$object->process( array(), $content );
 		$list = json_decode( $result );
 
 		$this->assertEquals( 2, count( $list ) );
@@ -266,7 +244,7 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessJsonWrongFormat()
 	{
-		$result = self::$object->process( array(), $this->testdir . 'invalid.txt' );
+		$result = self::$object->process( array(), '{]}[' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -276,7 +254,7 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessJsonWrongType()
 	{
-		$result = self::$object->process( array(), $this->testdir . 'string.txt' );
+		$result = self::$object->process( array(), '"string"' );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -286,7 +264,8 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessJsonNoMethod()
 	{
-		$result = self::$object->process( array(), $this->testdir . 'nomethod.txt' );
+		$content = '{"jsonrpc":"2.0","params":{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"},"id":1}';
+		$result = self::$object->process( array(), $content );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -296,7 +275,8 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessJsonNoParams()
 	{
-		$result = self::$object->process( array(), $this->testdir . 'noparams.txt' );
+		$content = '{"jsonrpc":"2.0","method":"Product.searchItems","id":1}';
+		$result = self::$object->process( array(), $content );
 		$object = json_decode( $result );
 
 		$this->assertObjectHasAttribute( 'error', $object );
@@ -306,7 +286,8 @@ class JsonRpcTest extends \PHPUnit_Framework_TestCase
 
 	public function testProcessJsonNoId()
 	{
-		$result = self::$object->process( array(), $this->testdir . 'noid.txt' );
+		$content = '{"jsonrpc":"2.0","method":"Product.searchItems","params":{"site":"unittest","condition":{"&&":[{"~=":{"product.label":"Cafe"}}]},"start":0,"limit":10,"sort":"product.label","dir":"DESC"}}';
+		$result = self::$object->process( array(), $content );
 		$this->assertEquals( null, $result );
 	}
 

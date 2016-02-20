@@ -120,14 +120,14 @@ class JsonRpc
 	/**
 	 * Single entry point for all ExtJS requests.
 	 *
-	 * @param array $reqparams Associative list of request parameters (usually $REQUEST)
-	 * @param string $inputstream Name of the input stream (usually php://input)
+	 * @param array $reqparams Associative list of request parameters (usually $_REQUEST)
+	 * @param string $content Content sent with the HTTP request
 	 * @return string|null JSON RPC 2.0 message response
 	 */
-	public function process( array $reqparams, $inputstream )
+	public function process( array $reqparams, $content )
 	{
 		if( isset( $reqparams['jsonrpc'] ) || !isset( $reqparams['method'] ) ) {
-			return $this->processStream( $inputstream );
+			return $this->processStream( $content );
 		}
 
 		return $this->processRequest( $reqparams );
@@ -137,7 +137,7 @@ class JsonRpc
 	/**
 	 * Processes a request using the request paramters.
 	 *
-	 * @param array $reqparams Associative list of request parameters (usually $REQUEST)
+	 * @param array $reqparams Associative list of request parameters (usually $_REQUEST)
 	 * @return string|null JSON RPC 2.0 message response
 	 */
 	protected function processRequest( array $reqparams )
@@ -172,20 +172,16 @@ class JsonRpc
 	/**
 	 * Processes a request using the input stream.
 	 *
-	 * @param string $inputstream Name of the input stream (usually php://input)
+	 * @param string $content Content sent with the HTTP request
 	 * @return string|null JSON RPC 2.0 message response
 	 */
-	protected function processStream( $inputstream )
+	protected function processStream( $content )
 	{
 		$response = array();
 
 		try
 		{
-			if( ( $raw = file_get_contents( $inputstream ) ) === false ) {
-				throw new \Aimeos\Controller\ExtJS\Exception( 'Unable to read JSON encoded request', -32700 );
-			}
-
-			if( ( $request = json_decode( $raw ) ) === null ) {
+			if( ( $request = json_decode( $content ) ) === null ) {
 				throw new \Aimeos\Controller\ExtJS\Exception( 'Invalid JSON encoded request', -32700 );
 			}
 
