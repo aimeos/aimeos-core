@@ -572,6 +572,22 @@ class Base
 
 			if( ( $domains = $view->param( 'resource' ) ) == '' )
 			{
+				/** controller/jsonadm/domains
+				 * A list of domain names whose controllers are available for the JSON API
+				 *
+				 * The HTTP OPTIONS method returns a list of resources known by the
+				 * JSON API including their URLs. The list of available resources
+				 * can be exteded dynamically be implementing a new Jsonadm controller
+				 * class handling request for this new domain.
+				 *
+				 * To add the new domain controller to the list of resources returned
+				 * by the HTTP OPTIONS method, you have to add its name in lower case
+				 * to the existing configuration.
+				 *
+				 * @param array List of domain names
+				 * @since 2016.01
+				 * @category Developer
+				 */
 				$default = array(
 					'attribute', 'catalog', 'coupon', 'customer', 'locale', 'media',
 					'order', 'plugin', 'price', 'product', 'service', 'supplier', 'tag', 'text'

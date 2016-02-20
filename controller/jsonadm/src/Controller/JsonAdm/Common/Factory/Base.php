@@ -81,7 +81,10 @@ class Base
 
 		if( $path !== null && is_string( $path ) )
 		{
-			$excludes = $config->get( 'controller/jsonadm/' . $path . '/decorators/excludes', array() );
+			$dpath = trim( $path, '/' );
+			$dpath = ( $dpath !== '' ? $dpath . '/' : $dpath );
+
+			$excludes = $config->get( 'controller/jsonadm/' . $dpath . 'decorators/excludes', array() );
 			$localClass = str_replace( ' ', '\\', ucwords( str_replace( '/', ' ', $path ) ) );
 
 			foreach( $decorators as $key => $name )
@@ -92,12 +95,15 @@ class Base
 			}
 
 			$classprefix = '\\Aimeos\\Controller\\JsonAdm\\Common\\Decorator\\';
-			$decorators = $config->get( 'controller/jsonadm/' . $path . '/decorators/global', array() );
+			$decorators = $config->get( 'controller/jsonadm/' . $dpath . 'decorators/global', array() );
 			$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $view, $templatePaths, $path );
 
-			$classprefix = '\\Aimeos\\Controller\\JsonAdm\\' . ucfirst( $localClass ) . '\\Decorator\\';
-			$decorators = $config->get( 'controller/jsonadm/' . $path . '/decorators/local', array() );
-			$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $view, $templatePaths, $path );
+			if( !empty( $path ) )
+			{
+				$classprefix = '\\Aimeos\\Controller\\JsonAdm\\' . ucfirst( $localClass ) . '\\Decorator\\';
+				$decorators = $config->get( 'controller/jsonadm/' . $dpath . 'decorators/local', array() );
+				$controller = self::addDecorators( $controller, $decorators, $classprefix, $context, $view, $templatePaths, $path );
+			}
 		}
 
 		return $controller;

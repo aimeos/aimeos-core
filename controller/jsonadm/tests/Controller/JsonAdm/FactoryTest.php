@@ -16,7 +16,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperJadm::getContext();
 		$templatePaths = \TestHelperJadm::getControllerPaths();
 
-		$controller = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
+		$controller = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\JsonAdm\\Common\\Iface', $controller );
 	}
 
@@ -26,7 +26,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperJadm::getContext();
 		$templatePaths = \TestHelperJadm::getControllerPaths();
 
-		$controller = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );
+		$controller = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\JsonAdm\\Common\\Iface', $controller );
 	}
 
@@ -58,9 +58,9 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperJadm::getContext();
 		$templatePaths = \TestHelperJadm::getControllerPaths();
 
-		$controller1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
+		$controller1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
 		\Aimeos\Controller\JsonAdm\Factory::clear();
-		$controller2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
+		$controller2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
 
 		\Aimeos\Controller\JsonAdm\Factory::setCache( $cache );
 
@@ -75,12 +75,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperJadm::getContext();
 		$templatePaths = \TestHelperJadm::getControllerPaths();
 
-		$cntlA1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
-		$cntlB1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );
+		$cntlA1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
+		$cntlB1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
 		\Aimeos\Controller\JsonAdm\Factory::clear( (string) $context );
 
-		$cntlA2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
-		$cntlB2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );
+		$cntlA2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
+		$cntlB2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
 
 		\Aimeos\Controller\JsonAdm\Factory::setCache( $cache );
 
@@ -96,13 +96,13 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperJadm::getContext();
 		$templatePaths = \TestHelperJadm::getControllerPaths();
 
-		$cntlA1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
-		$cntlB1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );
+		$cntlA1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
+		$cntlB1 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
 
-		\Aimeos\Controller\JsonAdm\Factory::clear( (string) $context, 'attribute' );
+		\Aimeos\Controller\JsonAdm\Factory::clear( (string) $context, 'order' );
 
-		$cntlA2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute' );
-		$cntlB2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'attribute/lists/type' );
+		$cntlA2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
+		$cntlB2 = \Aimeos\Controller\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
 
 		\Aimeos\Controller\JsonAdm\Factory::setCache( $cache );
 
