@@ -145,7 +145,7 @@ class Base
 		 * @see controller/jsonadm/standard/template-options
 		 */
 		$tplconf = 'controller/jsonadm/standard/template-delete';
-		$default = 'delete-standard.php';
+		$default = 'delete-default.php';
 
 		return $view->render( $view->config( $tplconf, $default ) );
 	}
@@ -240,7 +240,7 @@ class Base
 		 * @see controller/jsonadm/standard/template-options
 		 */
 		$tplconf = 'controller/jsonadm/standard/template-get';
-		$default = 'get-standard.php';
+		$default = 'get-default.php';
 
 		return $view->render( $view->config( $tplconf, $default ) );
 	}
@@ -368,7 +368,7 @@ class Base
 		 * @see controller/jsonadm/standard/template-options
 		 */
 		$tplconf = 'controller/jsonadm/standard/template-patch';
-		$default = 'patch-standard.php';
+		$default = 'patch-default.php';
 
 		return $view->render( $view->config( $tplconf, $default ) );
 	}
@@ -496,7 +496,7 @@ class Base
 		 * @see controller/jsonadm/standard/template-options
 		 */
 		$tplconf = 'controller/jsonadm/standard/template-post';
-		$default = 'post-standard.php';
+		$default = 'post-default.php';
 
 		return $view->render( $view->config( $tplconf, $default ) );
 	}
@@ -547,7 +547,7 @@ class Base
 		 * @see controller/jsonadm/standard/template-options
 		*/
 		$tplconf = 'controller/jsonadm/standard/template-put';
-		$default = 'put-standard.php';
+		$default = 'put-default.php';
 
 		return $view->render( $view->config( $tplconf, $default ) );
 	}
@@ -661,7 +661,7 @@ class Base
 		 * @see controller/jsonadm/standard/template-put
 		*/
 		$tplconf = 'controller/jsonadm/standard/template-options';
-		$default = 'options-standard.php';
+		$default = 'options-default.php';
 
 		return $view->render( $view->config( $tplconf, $default ) );
 	}
