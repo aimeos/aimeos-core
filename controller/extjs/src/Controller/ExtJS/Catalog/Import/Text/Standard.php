@@ -43,38 +43,17 @@ class Standard
 		$this->checkParams( $params, array( 'site' ) );
 		$this->setLocale( $params->site );
 
-		if( ( $fileinfo = reset( $_FILES ) ) === false ) {
-			throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
-		}
+		$clientFilename = '';
+		$context = $this->getContext();
 
-		$config = $this->getContext()->getConfig();
-
-		/** controller/extjs/catalog/import/text/standard/enablecheck
-		 * Enables checking uploaded files if they are valid and not part of an attack
-		 *
-		 * This configuration option is for unit testing only! Please don't disable
-		 * the checks for uploaded files in production environments as this
-		 * would give attackers the possibility to infiltrate your installation!
-		 *
-		 * @param boolean True to enable, false to disable
-		 * @since 2014.03
-		 * @category Developer
-		 */
-		if( $config->get( 'controller/extjs/catalog/import/text/standard/enablecheck', true ) ) {
-			$this->checkFileUpload( $fileinfo['tmp_name'], $fileinfo['error'] );
-		}
-
-		$fileext = pathinfo( $fileinfo['name'], PATHINFO_EXTENSION );
-		$dest = md5( $fileinfo['name'] . time() . getmypid() ) . '.' . $fileext;
-
-		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-admin' );
-		$fs->writef( $dest, $fileinfo['tmp_name'] );
+		$request = $context->getView()->request();
+		$dest = $this->storeFile( $request, $clientFilename );
 
 		$result = (object) array(
 			'site' => $params->site,
 			'items' => array(
 				(object) array(
-					'job.label' => 'Catalog text import: ' . $fileinfo['name'],
+					'job.label' => 'Catalog text import: ' . $clientFilename,
 					'job.method' => 'Catalog_Import_Text.importFile',
 					'job.parameter' => array(
 						'site' => $params->site,
@@ -85,7 +64,7 @@ class Standard
 			),
 		);
 
-		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->getContext() );
+		$jobController = \Aimeos\Controller\ExtJS\Factory::createController( $context, 'admin/job' );
 		$jobController->saveItems( $result );
 
 		return array(

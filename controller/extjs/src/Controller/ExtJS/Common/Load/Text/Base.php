@@ -67,35 +67,6 @@ abstract class Base
 	}
 
 
-	protected function checkFileUpload( $filename, $errcode )
-	{
-		switch( $errcode )
-		{
-			case UPLOAD_ERR_OK:
-				break;
-			case UPLOAD_ERR_INI_SIZE:
-			case UPLOAD_ERR_FORM_SIZE:
-				throw new \Aimeos\Controller\ExtJS\Exception( 'The uploaded file exceeds the max. allowed filesize' );
-			case UPLOAD_ERR_PARTIAL:
-				throw new \Aimeos\Controller\ExtJS\Exception( 'The uploaded file was only partially uploaded' );
-			case UPLOAD_ERR_NO_FILE:
-				throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded' );
-			case UPLOAD_ERR_NO_TMP_DIR:
-				throw new \Aimeos\Controller\ExtJS\Exception( 'Temporary folder is missing' );
-			case UPLOAD_ERR_CANT_WRITE:
-				throw new \Aimeos\Controller\ExtJS\Exception( 'Failed to write file to disk' );
-			case UPLOAD_ERR_EXTENSION:
-				throw new \Aimeos\Controller\ExtJS\Exception( 'File upload stopped by extension' );
-			default:
-				throw new \Aimeos\Controller\ExtJS\Exception( 'Unknown upload error' );
-		}
-
-		if( is_uploaded_file( $filename ) === false ) {
-			throw new \Aimeos\Controller\ExtJS\Exception( 'File was not uploaded' );
-		}
-	}
-
-
 	/**
 	 * Checks if the required parameter are available.
 	 *
@@ -327,6 +298,34 @@ abstract class Base
 		}
 
 		$context->setLocale( $localeItem );
+	}
+
+
+	/**
+	 * Stores the uploaded file and returns the path to this file
+	 *
+	 * @param \Psr\Http\Message\ServerRequestInterface $request PSR-7 request object
+	 * @param string $clientFilename Result parameter for the file name sent by the client
+	 * @throws \Aimeos\Controller\ExtJS\Exception If no file was uploaded or an error occured
+	 * @return string Path to the stored file
+	 */
+	protected function storeFile( \Psr\Http\Message\ServerRequestInterface $request, &$clientFilename = '' )
+	{
+		$context = $this->getContext();
+		$files = (array) $request->getUploadedFiles();
+
+		if( ( $file = reset( $files ) ) === false || $file->getError() !== UPLOAD_ERR_OK ) {
+			throw new \Aimeos\Controller\ExtJS\Exception( 'No file was uploaded or an error occured' );
+		}
+
+		$clientFilename = $file->getClientFilename();
+		$fileext = pathinfo( $clientFilename, PATHINFO_EXTENSION );
+		$dest = md5( $clientFilename . time() . getmypid() ) . '.' . $fileext;
+
+		$fs = $context->getFilesystemManager()->get( 'fs-admin' );
+		$fs->writes( $dest, $file->getStream()->detach() );
+
+		return $dest;
 	}
 
 

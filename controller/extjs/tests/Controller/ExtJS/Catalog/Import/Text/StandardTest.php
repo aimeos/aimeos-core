@@ -154,31 +154,26 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUploadFile()
 	{
-		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context );
+		$object = $this->getMockBuilder( '\Aimeos\Controller\ExtJS\Catalog\Import\Text\Standard' )
+			->setConstructorArgs( array( $this->context ) )
+			->setMethods( array( 'storeFile' ) )
+			->getMock();
+		$object->expects( $this->once() )->method( 'storeFile' )->will( $this->returnValue( 'file.txt' ) );
 
-		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
-
-		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
-
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => $this->testfile,
-			'error' => UPLOAD_ERR_OK,
-		);
+		$this->context->setView( new \Aimeos\MW\View\Standard() );
 
 		$params = new \stdClass();
-		$params->items = basename( $this->testfile );
+		$params->items = 'file.txt';
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 
-		$result = $this->object->uploadFile( $params );
+		$result = $object->uploadFile( $params );
 
-		$this->assertTrue( file_exists( $this->testdir . DIRECTORY_SEPARATOR . $result['items'] ) );
-		unlink( $result['items'] );
+
+		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context );
 
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '~=' => (object) array( 'job.label' => 'file.txt' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '~=' => (object) array( 'job.parameter' => 'file.txt' ) ) ) ),
 		);
 
 		$result = $jobController->searchItems( $params );
@@ -195,13 +190,24 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 0, count( $result['items'] ) );
 	}
 
+
 	public function testUploadFileExeptionNoFiles()
 	{
+		$helper = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Request\Standard' )
+			->setMethods( array( 'getUploadedFiles' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$helper->expects( $this->once() )->method( 'getUploadedFiles' )->will( $this->returnValue( array() ) );
+
+		$view = new \Aimeos\MW\View\Standard();
+		$view->addHelper( 'request', $helper );
+
+		$this->context->setView( $view );
+
+
 		$params = new \stdClass();
 		$params->items = 'test.txt';
 		$params->site = 'unittest';
-
-		$_FILES = array();
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->uploadFile( $params );

@@ -107,5 +107,4 @@ class TestHelperExtjs
 	{
 		return true;
 	}
-
 }

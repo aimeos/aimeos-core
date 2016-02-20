@@ -147,30 +147,26 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUploadFile()
 	{
-		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context );
+		$object = $this->getMockBuilder( '\Aimeos\Controller\ExtJS\Attribute\Import\Text\Standard' )
+			->setConstructorArgs( array( $this->context ) )
+			->setMethods( array( 'storeFile' ) )
+			->getMock();
+		$object->expects( $this->once() )->method( 'storeFile' )->will( $this->returnValue( 'file.txt' ) );
 
-		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
-
-		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => $this->testdir . DIRECTORY_SEPARATOR . 'file.txt',
-			'error' => UPLOAD_ERR_OK,
-		);
+		$this->context->setView( new \Aimeos\MW\View\Standard() );
 
 		$params = new \stdClass();
 		$params->items = 'file.txt';
 		$params->site = $this->context->getLocale()->getSite()->getCode();
 
-		$result = $this->object->uploadFile( $params );
+		$result = $object->uploadFile( $params );
 
-		$this->assertTrue( file_exists( $this->testdir . DIRECTORY_SEPARATOR . $result['items'] ) );
-		unlink( $result['items'] );
+
+		$jobController = \Aimeos\Controller\ExtJS\Admin\Job\Factory::createController( $this->context );
 
 		$params = (object) array(
 			'site' => 'unittest',
-			'condition' => (object) array( '&&' => array( 0 => (object) array( '~=' => (object) array( 'job.label' => 'file.txt' ) ) ) ),
+			'condition' => (object) array( '&&' => array( 0 => (object) array( '~=' => (object) array( 'job.parameter' => 'file.txt' ) ) ) ),
 		);
 
 		$result = $jobController->searchItems( $params );
@@ -190,180 +186,24 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testUploadFileExeptionNoFiles()
 	{
+		$helper = $this->getMockBuilder( '\Aimeos\MW\View\Helper\Request\Standard' )
+			->setMethods( array( 'getUploadedFiles' ) )
+			->disableOriginalConstructor()
+			->getMock();
+		$helper->expects( $this->once() )->method( 'getUploadedFiles' )->will( $this->returnValue( array() ) );
+
+		$view = new \Aimeos\MW\View\Standard();
+		$view->addHelper( 'request', $helper );
+
+		$this->context->setView( $view );
+
+
 		$params = new \stdClass();
 		$params->items = basename( $this->testfile );
 		$params->site = 'unittest';
 
-		$_FILES = array();
-
 		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
 		$this->object->uploadFile( $params );
-	}
-
-
-	public function testUploadFileExeptionNotAFileUpload()
-	{
-		$res = $this->prepareCheckFileUpload();
-		$params = $res[0];
-		$object = $res[1];
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => UPLOAD_ERR_OK,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadFile( $params );
-	}
-
-
-	public function testAbstractCheckFileUploadExceptionSize()
-	{
-		$res = $this->prepareCheckFileUpload();
-		$params = $res[0];
-		$object = $res[1];
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => UPLOAD_ERR_FORM_SIZE,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadFile( $params );
-	}
-
-
-	public function testAbstractCheckFileUploadExceptionPartial()
-	{
-		$res = $this->prepareCheckFileUpload();
-		$params = $res[0];
-		$object = $res[1];
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => UPLOAD_ERR_PARTIAL,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadFile( $params );
-	}
-
-
-	public function testAbstractCheckFileUploadExceptionNoFile()
-	{
-		$res = $this->prepareCheckFileUpload();
-		$params = $res[0];
-		$object = $res[1];
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => UPLOAD_ERR_NO_FILE,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadFile( $params );
-	}
-
-
-	public function testAbstractCheckFileUploadExceptionNoTmpDir()
-	{
-		$res = $this->prepareCheckFileUpload();
-		$params = $res[0];
-		$object = $res[1];
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => UPLOAD_ERR_NO_TMP_DIR,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadFile( $params );
-	}
-
-
-	public function testAbstractCheckFileUploadExceptionWriteError()
-	{
-		$res = $this->prepareCheckFileUpload();
-		$params = $res[0];
-		$object = $res[1];
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => UPLOAD_ERR_CANT_WRITE,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadFile( $params );
-	}
-
-
-	public function testAbstractCheckFileUploadExceptionExtError()
-	{
-		$res = $this->prepareCheckFileUpload();
-		$params = $res[0];
-		$object = $res[1];
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => UPLOAD_ERR_EXTENSION,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadFile( $params );
-	}
-
-
-	public function testAbstractCheckFileUploadExceptionOtherError()
-	{
-		$res = $this->prepareCheckFileUpload();
-		$params = $res[0];
-		$object = $res[1];
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => 9,
-		);
-
-		$this->setExpectedException( '\\Aimeos\\Controller\\ExtJS\\Exception' );
-		$object->uploadFile( $params );
-	}
-
-
-	public function testUploadFileExceptionWrongDestination()
-	{
-		set_error_handler( 'TestHelperExtjs::errorHandler' );
-
-		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/standard/uploaddir', '/up/' );
-		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/standard/enablecheck', false );
-
-		$object = new \Aimeos\Controller\ExtJS\Attribute\Import\Text\Standard( $this->context );
-
-		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
-
-		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
-
-		$params = new \stdClass();
-		$params->items = 'file.txt';
-		$params->site = $this->context->getLocale()->getSite()->getCode();
-
-		$_FILES['unittest'] = array(
-			'name' => 'file.txt',
-			'tmp_name' => basename( $this->testfile ),
-			'error' => 'anError',
-		);
-
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
-		$object->uploadFile( $params );
-
-		restore_error_handler();
 	}
 
 
@@ -409,19 +249,36 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	protected function prepareCheckFileUpload()
+	public function testAbstractStoreFile()
 	{
-		$this->context->getConfig()->set( 'controller/extjs/attribute/import/text/standard/enablecheck', true );
-		$object = new \Aimeos\Controller\ExtJS\Attribute\Import\Text\Standard( $this->context );
+		$stream = $this->getMock( '\Psr\Http\Message\StreamInterface' );
+		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$request = $this->getMock( '\Psr\Http\Message\ServerRequestInterface' );
 
-		$testfiledir = __DIR__ . DIRECTORY_SEPARATOR . 'testfiles' . DIRECTORY_SEPARATOR;
+		$fsm = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Manager\Standard' )
+			->setMethods( array( 'get' ) )
+			->disableOriginalConstructor()
+			->getMock();
 
-		exec( sprintf( 'cp -r %1$s %2$s', escapeshellarg( $testfiledir ) . '*', escapeshellarg( $this->testdir ) ) );
+		$fs = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Standard' )
+			->setMethods( array( 'writes' ) )
+			->disableOriginalConstructor()
+			->getMock();
 
-		$params = new \stdClass();
-		$params->items = basename( $this->testfile );
-		$params->site = $this->context->getLocale()->getSite()->getCode();
+		$file->expects( $this->once() )->method( 'getError' )->will( $this->returnValue( 0 ) );
+		$file->expects( $this->once() )->method( 'getStream' )->will( $this->returnValue( $stream ) );
+		$request->expects( $this->once() )->method( 'getUploadedFiles' )->will( $this->returnValue( array( $file ) ) );
+		$fsm->expects( $this->once() )->method( 'get' )->will( $this->returnValue( $fs ) );
+		$fs->expects( $this->once() )->method( 'writes' );
 
-		return array( $params, $object );
+		$this->context->setFilesystemManager( $fsm );
+
+
+		$class = new \ReflectionClass( '\Aimeos\Controller\ExtJS\Attribute\Import\Text\Standard' );
+		$method = $class->getMethod( 'storeFile' );
+		$method->setAccessible( true );
+
+		$clientFileName = '';
+		$method->invokeArgs( $this->object, array( $request ) );
 	}
 }
