@@ -49,6 +49,7 @@ class TestHelperJqadm
 		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
+		$config = new \Aimeos\MW\Config\Decorator\Protect( $config, array( 'admin', 'client/html', 'controller/jsonadm' ) );
 		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
 
