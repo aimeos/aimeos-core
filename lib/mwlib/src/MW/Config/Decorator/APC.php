@@ -70,7 +70,7 @@ class APC
 		}
 
 		// not cached
-		if( ( $value = $this->getObject()->get( $path, null ) ) === null )
+		if( ( $value = parent::get( $path, null ) ) === null )
 		{
 			apc_store( '-' . $this->prefix . $path, null );
 			return $default;
@@ -92,7 +92,7 @@ class APC
 	{
 		$path = trim( $path, '/' );
 
-		$this->getObject()->set( $path, $value );
+		parent::set( $path, $value );
 
 		apc_store( $this->prefix . $path, $value );
 	}

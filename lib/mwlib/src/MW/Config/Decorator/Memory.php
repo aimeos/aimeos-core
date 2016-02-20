@@ -64,7 +64,7 @@ class Memory
 			return $return;
 		}
 
-		$return = $this->getObject()->get( $name, null );
+		$return = parent::get( $name, null );
 
 		if( $return === null )
 		{

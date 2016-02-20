@@ -52,7 +52,7 @@ class Protect
 		foreach( $this->prefixes as $prefix => $len )
 		{
 			if( strncmp( $name, $prefix, $len ) === 0 ) {
-				return $this->getObject()->get( $name, $default );
+				return parent::get( $name, $default );
 			}
 		}
 
@@ -71,7 +71,7 @@ class Protect
 		foreach( $this->prefixes as $prefix => $len )
 		{
 			if( strncmp( $name, $prefix, $len ) === 0 ) {
-				return $this->getObject()->set( $name, $value );
+				return parent::set( $name, $value );
 			}
 		}
 

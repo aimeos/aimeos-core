@@ -49,7 +49,7 @@ class Documentor
 	 */
 	public function get( $name, $default = null )
 	{
-		$value = $this->getObject()->get( $name, $default );
+		$value = parent::get( $name, $default );
 
 		$this->file->set( $name, $value, $default );
 
