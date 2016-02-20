@@ -52,7 +52,7 @@ abstract class Base implements \Aimeos\MW\Config\Decorator\Iface
 	 */
 	public function get( $path, $default = null )
 	{
-		$this->object->get( $path, $default );
+		return $this->object->get( $path, $default );
 	}
 
 
