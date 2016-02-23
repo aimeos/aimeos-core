@@ -18,8 +18,6 @@ class TestHelperJadm
 		$includepaths = $aimeos->getIncludePaths();
 		$includepaths[] = get_include_path();
 		set_include_path( implode( PATH_SEPARATOR, $includepaths ) );
-
-		spl_autoload_register( 'Aimeos::autoload' );
 	}
 
 
@@ -38,7 +36,7 @@ class TestHelperJadm
 		if( !isset( self::$aimeos ) )
 		{
 			require_once 'Bootstrap.php';
-			spl_autoload_register( 'Aimeos::autoload' );
+			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
 
 			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
 			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );

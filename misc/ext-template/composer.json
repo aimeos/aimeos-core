@@ -1,7 +1,7 @@
 {
 	"name": "aimeos/<extname>",
 	"description": "Aimeos <extname> extension",
-	"keywords": ["aimeos", "extension"]
+	"keywords": ["aimeos", "extension"],
 	"type": "aimeos-extension",
 	"license": "LGPL-3.0",
 	"prefer-stable": true,
