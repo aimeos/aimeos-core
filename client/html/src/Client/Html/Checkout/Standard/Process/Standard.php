@@ -332,8 +332,6 @@ class Standard
 			$error = array( $context->getI18n()->dt( 'client', 'A non-recoverable error occured' ) );
 			$view->standardErrorList = $view->get( 'standardErrorList', array() ) + $error;
 		}
-
-		$view->standardUrlPayment = $this->getUrlSelf( $view, array( 'c_step' => 'payment' ), array() );
 	}
 
 
@@ -655,5 +653,26 @@ class Standard
 		$config = $view->config( 'client/html/checkout/update/url/config', $config );
 
 		return $view->url( $target, $cntl, $action, $params, array(), $config );
+	}
+
+
+	/**
+	 * Sets the necessary parameter values in the view.
+	 *
+	 * @param \Aimeos\MW\View\Iface $view The view object which generates the HTML output
+	 * @param array &$tags Result array for the list of tags that are associated to the output
+	 * @param string|null &$expire Result variable for the expiration date of the output (null for no expiry)
+	 * @return \Aimeos\MW\View\Iface Modified view object
+	 */
+	protected function setViewParams( \Aimeos\MW\View\Iface $view, array &$tags = array(), &$expire = null )
+	{
+		if( !isset( $this->cache ) )
+		{
+			$view->standardUrlPayment = $this->getUrlSelf( $view, array( 'c_step' => 'payment' ), array() );
+
+			$this->cache = $view;
+		}
+
+		return $this->cache;
 	}
 }
