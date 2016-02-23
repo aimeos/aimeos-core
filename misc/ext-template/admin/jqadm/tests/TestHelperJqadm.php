@@ -66,7 +66,7 @@ class TestHelperJqadm
 		if( !isset( self::$aimeos ) )
 		{
 			require_once 'Bootstrap.php';
-			spl_autoload_register( 'Aimeos::autoload' );
+			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
 
 			$extdir = dirname( dirname( dirname( dirname( __DIR__ ) ) ) );
 			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );
