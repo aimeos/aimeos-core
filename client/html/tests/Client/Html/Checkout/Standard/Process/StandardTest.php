@@ -55,10 +55,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBody()
 	{
-		$this->object->getView()->standardStepActive = 'process';
+		$view = $this->object->getView();
+		$view->standardStepActive = 'process';
 
 		$output = $this->object->getBody();
 		$this->assertStringStartsWith( '<div class="checkout-standard-process">', $output );
+		$this->assertEquals( 'http://baseurl/checkout/standard/?c_step=payment', $view->standardUrlPayment );
 	}
 
 
@@ -101,7 +103,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 0, count( $view->get( 'standardErrorList', array() ) ) );
 		$this->assertEquals( 0, count( $view->get( 'standardProcessParams', array() ) ) );
 		$this->assertEquals( 'GET', $view->standardMethod );
-		$this->assertEquals( 'http://baseurl/checkout/standard/?c_step=payment', $view->standardUrlPayment );
 	}
 
 
@@ -132,7 +133,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'POST', $view->standardMethod );
 		$this->assertEquals( array(), $view->standardProcessParams );
 		$this->assertEquals( true, $view->standardUrlExternal );
-		$this->assertEquals( 'http://baseurl/checkout/standard/?c_step=payment', $view->standardUrlPayment );
 	}
 
 
