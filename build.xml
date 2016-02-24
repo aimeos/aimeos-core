@@ -109,8 +109,8 @@
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="client/extjs" wikiprefix="Configuration/Core" keyparts="1"
-			outfile="${coredir}/misc/confdoc/core-client-extjs.wiki">
+		<confdoc keyprefix="admin/extjs" wikiprefix="Configuration/Core" keyparts="0"
+			outfile="${coredir}/misc/confdoc/core-admin-extjs.wiki">
 			<fileset dir="${coredir}/admin/extjs" expandsymboliclinks="true" >
 				<include name="src/**/*.js" />
 			</fileset>
@@ -144,34 +144,45 @@
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
+		<confdoc keyprefix="controller/jsonadm" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${coredir}/controller/jsonadm/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-controller-jsonadm.wiki">
+			<fileset dir="${coredir}/controller/jsonadm" expandsymboliclinks="true" >
+				<include name="templates/**/*.php" />
+				<include name="src/**/*.php" />
+			</fileset>
+		</confdoc>
 		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${coredir}/controller/jobs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-controller-jobs.wiki">
-			<fileset dir="${coredir}/controller/jobs/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
+			<fileset dir="${coredir}/controller/jobs" expandsymboliclinks="true" >
+				<include name="templates/**/*.php" />
+				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="mshop" wikiprefix="Configuration/Core" keyparts="2"
+		<confdoc keyprefix="mshop" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-mshop.wiki">
 			<fileset dir="${coredir}/lib/mshoplib/src/MShop" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="madmin" wikiprefix="Configuration/Core" keyparts="2"
+		<confdoc keyprefix="madmin" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-madmin.wiki">
 			<fileset dir="${coredir}/lib/mshoplib/src/MAdmin" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
-		<echo msg="Generating API documentation" />
+	</target>
+
+	<target name="api" description="Generates the API documentation">
 		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
-		<exec command="composer require phpdocumentor/phpdocumentor:2.3.*" checkreturn="true" logoutput="true" />
-		<exec command="${coredir}/vendor/bin/phpdoc.php --sourcecode -t ${coredir}/misc/apidoc
-			-d client/html/src -d controller/frontend/src -d controller/extjs/src
-			-d controller/jobs/src -d lib/mshoplib/src -d lib/mwlib/src -f Bootstrap.php
-			--template=responsive-twig" checkreturn="true" logoutput="true" />
+		<exec command="php ${coredir}/vendor/bin/apigen generate --template-theme=bootstrap
+			--title='Aimeos Core API documentation' --tree  --no-source-code -d misc/apidoc
+			-s admin/jqadm/src/ -s client/html/src/ -s controller/common/src/ -s controller/extjs/src/
+			-s controller/frontend/src/ -s controller/jobs/src/ -s controller/jsonadm/src/
+			-s lib/mshoplib/src/ -s lib/mwlib/src/" checkreturn="true" logoutput="true"/>
 	</target>
 
 
