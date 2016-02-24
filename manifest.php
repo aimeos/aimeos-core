@@ -39,6 +39,7 @@ return array(
 		'controller/frontend' => 'controller/frontend/i18n',
 		'controller/jsonadm' => 'controller/jsonadm/i18n',
 		'controller/extjs' => 'controller/extjs/i18n',
+		'controller/jobs' => 'controller/jobs/i18n',
 		'mshop/code' => 'lib/mshoplib/i18n/code',
 		'mshop' => 'lib/mshoplib/i18n',
 	),
