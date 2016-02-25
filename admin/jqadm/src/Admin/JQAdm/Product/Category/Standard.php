@@ -305,11 +305,32 @@ class Standard
 			$search->compare( '==', 'catalog.lists.refid', $prodid ),
 			$search->compare( '==', 'catalog.lists.domain', 'product' ),
 			$search->compare( '==', 'catalog.lists.type.domain', 'product' ),
-			$search->compare( '==', 'catalog.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $manager->searchItems( $search );
+	}
+
+
+	/**
+	 * Returns the available catalog list types
+	 *
+	 * @return array Associative list of catalog list type codes as keys and list type IDs as values
+	 */
+	protected function getListTypes()
+	{
+		$list = array();
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists/type' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'catalog.lists.type.domain', 'product' ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$list[$item->getCode()] = $item->getId();
+		}
+
+		return $list;
 	}
 
 
@@ -346,6 +367,7 @@ class Standard
 		}
 
 		$view->categoryData = $data;
+		$view->categoryListTypes = $this->getListTypes();
 	}
 
 
@@ -356,9 +378,7 @@ class Standard
 	 */
 	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{
-		$context = $this->getContext();
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/lists' );
-		$typeManager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/lists/type' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
 
 		$id = $view->item->getId();
 		$map = $this->getListItems( $id );
@@ -376,7 +396,6 @@ class Standard
 
 
 		$item = $manager->createItem();
-		$item->setTypeId( $typeManager->findItem( 'default', array(), 'product' )->getId() );
 		$item->setDomain( 'product' );
 		$item->setRefId( $id );
 
@@ -384,6 +403,7 @@ class Standard
 		{
 			$item->setId( null );
 			$item->setParentId( $view->param( 'category/catalog.id/' . $pos ) );
+			$item->setTypeId( $view->param( 'category/catalog.lists.typeid/' . $pos ) );
 
 			$manager->saveItem( $item, false );
 		}

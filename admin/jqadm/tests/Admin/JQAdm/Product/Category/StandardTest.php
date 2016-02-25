@@ -55,6 +55,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertNull( $this->view->get( 'errors' ) );
 		$this->assertContains( 'value="Internet"', $result );
 		$this->assertContains( 'value="Neu"', $result );
+		$this->assertContains( 'value="Kaffee"', $result );
 	}
 
 
@@ -77,13 +78,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertNull( $this->view->get( 'errors' ) );
 		$this->assertContains( 'value="Internet"', $result );
 		$this->assertContains( 'value="Neu"', $result );
+		$this->assertContains( 'value="Kaffee"', $result );
 	}
 
 
 	public function testSave()
 	{
-		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'catalog' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( $this->context, 'catalog/lists/type' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$item = $manager->findItem( 'root' );
 		$item->setCode( 'jqadm-test-root' );
@@ -92,9 +95,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager->insertItem( $item );
 
 
+		$typeid = $typeManager->findItem( 'default', array(), 'product' )->getId();
+
 		$param = array(
 			'category' => array(
 				'catalog.lists.id' => array( '' ),
+				'catalog.lists.typeid' => array( $typeid ),
 				'catalog.id' => array( $item->getId() ),
 			),
 		);
@@ -111,6 +117,46 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertNull( $this->view->get( 'errors' ) );
 		$this->assertNull( $result );
 		$this->assertEquals( 1, count( $item->getListItems( 'product' ) ) );
+	}
+
+
+	public function testSavePromotion()
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'catalog' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( $this->context, 'catalog/lists/type' );
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
+
+		$item = $manager->findItem( 'root' );
+		$item->setCode( 'jqadm-test-root' );
+		$item->setId( null );
+
+		$manager->insertItem( $item );
+
+
+		$typeid = $typeManager->findItem( 'promotion', array(), 'product' )->getId();
+
+		$param = array(
+			'category' => array(
+				'catalog.lists.id' => array( '' ),
+				'catalog.lists.typeid' => array( $typeid ),
+				'catalog.id' => array( $item->getId() ),
+			),
+		);
+
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $this->view, $param );
+		$this->view->addHelper( 'param', $helper );
+		$this->view->item = $productManager->createItem();
+
+		$result = $this->object->save();
+
+		$item = $manager->getItem( $item->getId(), array( 'product' ) );
+		$listItems = $item->getListItems( 'product' );
+		$manager->deleteItem( $item->getId() );
+
+		$this->assertNull( $this->view->get( 'errors' ) );
+		$this->assertNull( $result );
+		$this->assertEquals( 1, count( $listItems ) );
+		$this->assertEquals( $typeid, reset( $listItems )->getTypeId() );
 	}
 
 
