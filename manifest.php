@@ -64,6 +64,7 @@ return array(
 		),
 		'controller/jobs/templates' => array(
 			'controller/jobs/templates',
+			'client/html/templates',
 		),
 		'controller/jsonadm/templates' => array(
 			'controller/jsonadm/templates',
