@@ -71,4 +71,36 @@ abstract class Base
 
 		return $taxrates;
 	}
+
+
+	/**
+	 * Returns the payment status at which download files are shown
+	 *
+	 * @return integer Payment status from \Aimeos\MShop\Order\Item\Base
+	 */
+	protected function getDownloadPaymentStatus()
+	{
+		$config = $this->getContext()->getConfig();
+		$default = \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
+
+		/** client/html/common/summary/detail/download/payment-status
+		 * Minium payment status value for product download files
+		 *
+		 * This setting specifies the payment status value of an order for which
+		 * links to bought product download files are shown on the "thank you"
+		 * page, in the "MyAccount" and in the e-mails sent to the customers.
+		 *
+		 * The value is one of the payment constant values from
+		 * {@link https://github.com/aimeos/aimeos-core/blob/master/lib/mshoplib/src/MShop/Order/Item/Base.php#L105}.
+		 * Most of the time, only two values are of interest:
+		 * * 5: payment authorized
+		 * * 6: payment received
+		 *
+		 * @param integer Order payment constant value
+		 * @since 2016.3
+		 * @category User
+		 * @category Developer
+		 */
+		return $config->get( 'client/html/common/summary/detail/download/payment-status', $default );
+	}
 }

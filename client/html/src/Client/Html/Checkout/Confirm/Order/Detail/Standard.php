@@ -263,11 +263,11 @@ class Standard
 		{
 			$view = parent::setViewParams( $view );
 
-			$view->summaryTaxRates = $this->getTaxRates( $view->summaryBasket );
-
-			if( $view->confirmOrderItem->getPaymentStatus() > \Aimeos\MShop\Order\Item\Base::PAY_PENDING ) {
+			if( $view->confirmOrderItem->getPaymentStatus() >= $this->getDownloadPaymentStatus() ) {
 				$view->summaryShowDownloadAttributes = true;
 			}
+
+			$view->summaryTaxRates = $this->getTaxRates( $view->summaryBasket );
 
 			$this->cache = $view;
 		}
