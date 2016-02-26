@@ -35,7 +35,7 @@ return array(
 		'ansi' => '
 			SELECT mloc."id" AS "locale.id", mloc."siteid" AS "locale.siteid",
 				mloc."langid" AS "locale.languageid", mloc."currencyid" AS "locale.currencyid",
-				mloc."pos" AS "locale.positon", mloc."status" AS "locale.status",
+				mloc."pos" AS "locale.position", mloc."status" AS "locale.status",
 				mloc."mtime" AS "locale.mtime", mloc."editor" AS "locale.editor",
 				mloc."ctime" AS "locale.ctime"
 			FROM "mshop_locale" AS mloc
