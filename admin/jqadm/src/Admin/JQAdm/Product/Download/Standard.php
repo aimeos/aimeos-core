@@ -398,8 +398,37 @@ class Standard
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'attribute.id', $ids ) );
+		$expr = array(
+			$search->compare( '==', 'attribute.id', $ids ),
+			$search->compare( '==', 'attribute.domain', 'product' ),
+			$search->compare( '==', 'attribute.type.domain', 'product' ),
+			$search->compare( '==', 'attribute.type.code', 'download' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
+
+		return $manager->searchItems( $search );
+	}
+
+
+	/**
+	 * Returns the referenced products for the given product ID
+	 *
+	 * @param string $prodid Unique product ID
+	 * @return array Associative list of bundle product IDs as keys and list items as values
+	 */
+	protected function getListItems( $prodid )
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists' );
+
+		$search = $manager->createSearch();
+		$expr = array(
+				$search->compare( '==', 'product.lists.parentid', $prodid ),
+				$search->compare( '==', 'product.lists.domain', 'attribute' ),
+				$search->compare( '==', 'product.lists.type.domain', 'attribute' ),
+				$search->compare( '==', 'product.lists.type.code', 'hidden' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		return $manager->searchItems( $search );
 	}
@@ -429,27 +458,37 @@ class Standard
 			return;
 		}
 
-		$data = array();
+		$data = $attrIds = array();
+		$listItems = $this->getListItems( $view->item->getId() );
 
-		$listItems = $view->item->getListItems( 'attribute', 'hidden' );
+		foreach( $listItems as $listItem ) {
+			$attrIds[] = $listItem->getRefId();
+		}
 
-		if( ( $listItem = reset( $listItems ) ) !== false
-			&& ( $refItem = $listItem->getRefItem() ) !== null
-			&& $refItem->getType() === 'download'
-		) {
-			foreach( $refItem->toArray() as $key => $value ) {
+		$attrItems = $this->getAttributeItems( $attrIds );
+
+		foreach( $listItems as $listItem )
+		{
+			if( !isset( $attrItems[$listItem->getRefId()] ) ) {
+				continue;
+			}
+
+			foreach( $listItem->toArray() as $key => $value ) {
 				$data[$key] = $value;
 			}
 
-			$data['product.lists.id'] = $listItem->getId();
-			$data['path'] = $refItem->getCode();
+			foreach( $attrItems[$listItem->getRefId()]->toArray() as $key => $value ) {
+				$data[$key] = $value;
+			}
+
+			$data['path'] = $attrItems[$listItem->getRefId()]->getCode();
 
 			try
 			{
 				$fs = $this->getContext()->getFilesystemManager()->get( 'fs-secure' );
 
-				$data['time'] = $fs->time( $refItem->getCode() );
-				$data['size'] = $fs->size( $refItem->getCode() );
+				$data['time'] = $fs->time( $data['path'] );
+				$data['size'] = $fs->size( $data['path'] );
 			}
 			catch( \Exception $e ) { ; }
 		}
@@ -493,6 +532,7 @@ class Standard
 	 */
 	protected function updateItems( \Aimeos\MW\View\Iface $view )
 	{
+		$attrIds = array();
 		$id = $view->item->getId();
 		$context = $this->getContext();
 
@@ -500,7 +540,13 @@ class Standard
 		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
-		$listItems = $manager->getItem( $id, array( 'attribute' ) )->getListItems( 'attribute', 'hidden' );
+		$listItems = $this->getListItems( $id );
+
+		foreach( $listItems as $listItem ) {
+			$attrIds[] = $listItem->getRefId();
+		}
+
+		$attrItems = $this->getAttributeItems( $attrIds );
 		$listId = $view->param( 'download/product.lists.id' );
 
 		if( !isset( $listItems[$listId] ) )
@@ -511,7 +557,8 @@ class Standard
 		else
 		{
 			$litem = $listItems[$listId];
-			$item = $litem->getRefItem();
+			$refId = $listItem->getRefId();
+			$item = ( isset( $attrItems[$refId] ) ? $attrItems[$refId] : $this->createItem() );
 		}
 
 		if( ( $file = $view->value( (array) $view->request()->getUploadedFiles(), 'download/file' ) ) !== null
@@ -527,7 +574,7 @@ class Standard
 		$litem->setPosition( 0 );
 		$litem->setRefId( $item->getId() );
 		$litem->setStatus( $view->param( 'download/product.lists.status' ) );
-		$listManager->saveItem( $litem, false );
+		$listManager->saveItem( $litem );
 
 		$this->cleanupItems( $listItems, array( $listId ) );
 	}

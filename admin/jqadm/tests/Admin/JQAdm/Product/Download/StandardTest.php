@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$param = array(
 			'download' => array(
 				'product.lists.id' => '',
-				'attribute.status' => '1',
+				'product.lists.status' => '1',
 				'attribute.label' => 'test',
 			),
 		);
