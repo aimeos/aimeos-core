@@ -45,6 +45,14 @@ $enc = $this->encoder();
 						value="<?php echo $enc->attr( $this->get( 'downloadData/attribute.label' ) ); ?>" />
 				</div>
 			</div>
+			<div class="form-group row optional">
+				<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Overwrite file' ) ); ?></label>
+				<div class="col-sm-9">
+					<input class="form-control item-overwrite" type="checkbox"
+						name="<?php echo $enc->attr( $this->formparam( array( 'download', 'overwrite' ) ) ); ?>" value="1"
+						<?php echo $selected( $this->get( 'downloadData/overwrite' ), 1 ); ?> />
+				</div>
+			</div>
 		</div>
 		<div class="col-lg-6">
 			<div class="form-group row">

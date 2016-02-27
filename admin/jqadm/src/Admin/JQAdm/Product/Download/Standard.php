@@ -462,17 +462,22 @@ class Standard
 	 * Stores the uploaded file in the "fs-secure" file system
 	 *
 	 * @param \Psr\Http\Message\UploadedFileInterface $file
+	 * @param string $path Path the file should be stored at
 	 * @return string Path to the uploaded file
 	 */
-	protected function storeFile( \Psr\Http\Message\UploadedFileInterface $file )
+	protected function storeFile( \Psr\Http\Message\UploadedFileInterface $file, $path )
 	{
-		$ext = pathinfo( $file->getClientFilename(), PATHINFO_EXTENSION );
-		$hash = md5( $file->getClientFilename() . microtime( true ) );
-		$path = sprintf( '%s/%s/%s.%s', $hash[0], $hash[1], $hash, $ext );
 		$fs = $this->getContext()->getFilesystemManager()->get( 'fs-secure' );
 
-		if( !$fs->isdir( $hash[0] . '/' . $hash[1] ) ) {
-			$fs->mkdir( $hash[0] . '/' . $hash[1] );
+		if( $path == null )
+		{
+			$ext = pathinfo( $file->getClientFilename(), PATHINFO_EXTENSION );
+			$hash = md5( $file->getClientFilename() . microtime( true ) );
+			$path = sprintf( '%s/%s/%s.%s', $hash[0], $hash[1], $hash, $ext );
+
+			if( !$fs->isdir( $hash[0] . '/' . $hash[1] ) ) {
+				$fs->mkdir( $hash[0] . '/' . $hash[1] );
+			}
 		}
 
 		$fs->writes( $path, $file->getStream()->detach() );
@@ -513,7 +518,9 @@ class Standard
 		if( ( $file = $view->value( (array) $view->request()->getUploadedFiles(), 'download/file' ) ) !== null
 			&& $file->getError() === UPLOAD_ERR_OK
 		) {
-			$item->setCode( $this->storeFile( $file ) );
+			$path = ( $view->param( 'download/overwrite' ) == 1 ? $item->getCode() : null );
+
+			$item->setCode( $this->storeFile( $file, $path ) );
 			$item->setLabel( $view->param( 'download/attribute.label' ) );
 
 			$attrManager->saveItem( $item );
