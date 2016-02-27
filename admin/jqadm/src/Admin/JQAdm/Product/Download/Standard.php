@@ -501,7 +501,6 @@ class Standard
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
 		$listItems = $manager->getItem( $id, array( 'attribute' ) )->getListItems( 'attribute', 'hidden' );
-
 		$listId = $view->param( 'download/product.lists.id' );
 
 		if( !isset( $listItems[$listId] ) )
@@ -519,17 +518,16 @@ class Standard
 			&& $file->getError() === UPLOAD_ERR_OK
 		) {
 			$path = ( $view->param( 'download/overwrite' ) == 1 ? $item->getCode() : null );
-
 			$item->setCode( $this->storeFile( $file, $path ) );
-			$item->setLabel( $view->param( 'download/attribute.label' ) );
-
-			$attrManager->saveItem( $item );
-
-			$litem->setPosition( 0 );
-			$litem->setRefId( $item->getId() );
-
-			$listManager->saveItem( $litem, false );
 		}
+
+		$item->setStatus( $view->param( 'download/attribute.status' ) );
+		$item->setLabel( $view->param( 'download/attribute.label' ) );
+		$attrManager->saveItem( $item );
+
+		$litem->setPosition( 0 );
+		$litem->setRefId( $item->getId() );
+		$listManager->saveItem( $litem, false );
 
 		$this->cleanupItems( $listItems, array( $listId ) );
 	}
