@@ -46,7 +46,7 @@ $enc = $this->encoder();
 				</div>
 			</div>
 			<div class="form-group row optional">
-				<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Overwrite file' ) ); ?></label>
+				<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Replace file' ) ); ?></label>
 				<div class="col-sm-9">
 					<input class="form-control item-overwrite" type="checkbox"
 						name="<?php echo $enc->attr( $this->formparam( array( 'download', 'overwrite' ) ) ); ?>" value="1"
