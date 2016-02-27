@@ -29,11 +29,11 @@ $enc = $this->encoder();
 			<div class="form-group row optional">
 				<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Status' ) ); ?></label>
 				<div class="col-sm-9">
-					<select class="form-control c-select item-status" name="<?php echo $enc->attr( $this->formparam( array( 'download', 'attribute.status' ) ) ); ?>">
-						<option value="1" <?php echo $selected( $this->get( 'downloadData/attribute.status', 1 ), 1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:enabled' ) ); ?></option>
-						<option value="0" <?php echo $selected( $this->get( 'downloadData/attribute.status', 1 ), 0 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:disabled' ) ); ?></option>
-						<option value="-1" <?php echo $selected( $this->get( 'downloadData/attribute.status', 1 ), -1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:review' ) ); ?></option>
-						<option value="-2" <?php echo $selected( $this->get( 'downloadData/attribute.status', 1 ), -2 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:archive' ) ); ?></option>
+					<select class="form-control c-select item-status" name="<?php echo $enc->attr( $this->formparam( array( 'download', 'product.lists.status' ) ) ); ?>">
+						<option value="1" <?php echo $selected( $this->get( 'downloadData/product.lists.status', 1 ), 1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:enabled' ) ); ?></option>
+						<option value="0" <?php echo $selected( $this->get( 'downloadData/product.lists.status', 1 ), 0 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:disabled' ) ); ?></option>
+						<option value="-1" <?php echo $selected( $this->get( 'downloadData/product.lists.status', 1 ), -1 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:review' ) ); ?></option>
+						<option value="-2" <?php echo $selected( $this->get( 'downloadData/product.lists.status', 1 ), -2 ); ?>><?php echo $enc->html( $this->translate( 'admin', 'status:archive' ) ); ?></option>
 					</select>
 				</div>
 			</div>

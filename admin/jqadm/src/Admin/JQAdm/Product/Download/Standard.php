@@ -521,12 +521,12 @@ class Standard
 			$item->setCode( $this->storeFile( $file, $path ) );
 		}
 
-		$item->setStatus( $view->param( 'download/attribute.status' ) );
 		$item->setLabel( $view->param( 'download/attribute.label' ) );
 		$attrManager->saveItem( $item );
 
 		$litem->setPosition( 0 );
 		$litem->setRefId( $item->getId() );
+		$litem->setStatus( $view->param( 'download/product.lists.status' ) );
 		$listManager->saveItem( $litem, false );
 
 		$this->cleanupItems( $listItems, array( $listId ) );
