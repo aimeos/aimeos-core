@@ -21,6 +21,8 @@ $enc = $this->encoder();
 <?php foreach( (array) $this->get( 'selectionData', array() ) as $code => $map ) : ?>
 
 			<div class="group-item card">
+				<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.lists.id', '' ) ) ); ?>"
+					value="<?php echo $enc->attr( $this->value( $map, 'product.lists.id' ) ); ?>" />
 				<div id="product-item-selection-group-item-<?php echo $enc->attr( $code ); ?>" class="header card-header collapsed"
 					data-toggle="collapse" href="#product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>"
 					aria-expanded="true" aria-controls="product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>">
@@ -33,8 +35,6 @@ $enc = $this->encoder();
 						<div class="form-group row">
 							<label class="col-sm-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'ID' ) ); ?></label>
 							<div class="col-sm-9">
-								<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.lists.id', '' ) ) ); ?>"
-									value="<?php echo $enc->attr( $this->value( $map, 'product.lists.id' ) ); ?>" />
 								<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.id', '' ) ) ); ?>"
 									value="<?php echo $enc->attr( $this->value( $map, 'product.id' ) ); ?>" />
 								<p class="form-control-static group-item-id"><?php echo $enc->html( $this->value( $map, 'product.id' ) ); ?></p>

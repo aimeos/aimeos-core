@@ -20,7 +20,8 @@ $enc = $this->encoder();
 <?php foreach( (array) $this->get( 'priceData/price.currencyid', array() ) as $idx => $currencyid ) : ?>
 
 			<div class="group-item card panel">
-				<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'price', 'product.lists.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $this->get( 'priceData/product.lists.id/' . $idx ) ); ?>" />
+				<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'price', 'product.lists.id', '' ) ) ); ?>"
+					value="<?php echo $enc->attr( $this->get( 'priceData/product.lists.id/' . $idx ) ); ?>" />
 				<div id="product-item-price-group-item-<?php echo $enc->attr( $idx ); ?>" class="card-header header collapsed" role="tab"
 					data-toggle="collapse" data-target="#product-item-price-group-data-<?php echo $enc->attr( $idx ); ?>"
 					aria-expanded="false" aria-controls="product-item-price-group-data-<?php echo $enc->attr( $idx ); ?>">

@@ -252,17 +252,18 @@ Aimeos = {
 	},
 
 
-	getOptions : function(request, response, element, domain, key, sort) {
+	getOptions : function(request, response, element, domain, key, sort, criteria) {
 
 		Aimeos.options.done(function(data) {
 
-			var compare = {}, field = {}, params = {}, param = {};
+			var compare = {}, field = {}, list = {}, params = {}, param = {};
 			var prefix = $("body").data("prefix");
 
 			compare[key] = request.term;
+			list = criteria ? [{'=~': compare}, criteria] : [{'=~': compare}];
 			field[domain] = key;
 
-			param['filter'] = {'&&': [{'=~': compare}]};
+			param['filter'] = {'&&': list};
 			param['fields'] = field;
 			param['sort'] = sort;
 
@@ -301,33 +302,33 @@ Aimeos = {
 	},
 
 
-	getOptionsAttributes : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'attribute', 'attribute.label', 'attribute.label');
+	getOptionsAttributes : function(request, response, element, criteria) {
+		Aimeos.getOptions(request, response, element, 'attribute', 'attribute.label', 'attribute.label', criteria);
 	},
 
 
-	getOptionsCategories : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'catalog', 'catalog.label', 'catalog.label');
+	getOptionsCategories : function(request, response, element, criteria) {
+		Aimeos.getOptions(request, response, element, 'catalog', 'catalog.label', 'catalog.label', criteria);
 	},
 
 
-	getOptionsCurrencies : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'locale/currency', 'locale.currency.id', '-locale.currency.status,locale.currency.id');
+	getOptionsCurrencies : function(request, response, element, criteria) {
+		Aimeos.getOptions(request, response, element, 'locale/currency', 'locale.currency.id', '-locale.currency.status,locale.currency.id', criteria);
 	},
 
 
-	getOptionsLanguages : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'locale/language', 'locale.language.id', '-locale.language.status,locale.language.id');
+	getOptionsLanguages : function(request, response, element, criteria) {
+		Aimeos.getOptions(request, response, element, 'locale/language', 'locale.language.id', '-locale.language.status,locale.language.id', criteria);
 	},
 
 
-	getOptionsSites : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'locale/site', 'locale.site.label', '-locale.site.status,locale.site.label');
+	getOptionsSites : function(request, response, element, criteria) {
+		Aimeos.getOptions(request, response, element, 'locale/site', 'locale.site.label', '-locale.site.status,locale.site.label', criteria);
 	},
 
 
-	getOptionsProducts : function(request, response, element) {
-		Aimeos.getOptions(request, response, element, 'product', 'product.label', 'product.label');
+	getOptionsProducts : function(request, response, element, criteria) {
+		Aimeos.getOptions(request, response, element, 'product', 'product.label', 'product.label', criteria);
 	},
 
 
@@ -766,6 +767,10 @@ Aimeos.Product.Item.Price = {
 			clone.insertAfter(block);
 			$(".ai-combobox", clone).remove();
 			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsCurrencies});
+			$("input.item-listid", clone).val('');
+			$(".card-block", clone).show();
+
+			return false;
 		});
 	},
 
@@ -835,8 +840,13 @@ Aimeos.Product.Item.Selection = {
 	copyBlock : function() {
 
 		$(".product-item-selection").on("click", ".header .fa-files-o", function(ev) {
+			var number = Math.floor((Math.random() * 1000));
 			var block = $(this).parents(".group-item");
 			var clone = block.clone();
+
+			$(".card-block", clone).attr("id", "product-item-selection-group-data-" + number);
+			$(".card-header", clone).attr("id", "product-item-selection-group-item-" + number);
+			$(".card-header", clone).attr("data-target", "product-item-selection-group-data-" + number);
 
 			clone.insertAfter(block);
 			$(".ai-combobox", clone).remove();
@@ -957,29 +967,26 @@ Aimeos.Product.Item.Text = {
 
 	init : function() {
 
-		this.copyBlock();
+		this.addBlock();
 		this.removeBlock();
 		this.setupComponents();
 		this.updateHeader();
 	},
 
 
-	copyBlock : function() {
+	addBlock : function() {
 
-		$(".product-item-text").on("click", ".header .fa-files-o", function(ev) {
+		$(".product-item-text").on("click", ".header .fa-plus", function(ev) {
 			var number = Math.floor((Math.random() * 1000));
-			var block = $(this).parents(".group-item");
-			var clone = block.clone();
+			var clone = Aimeos.addClone($(".prototype", ev.delegateTarget), Aimeos.getOptionsLanguages);
 
 			$(".card-block", clone).attr("id", "product-item-text-group-data-" + number);
 			$(".card-header", clone).attr("id", "product-item-text-group-item-" + number);
 			$(".card-header", clone).attr("data-target", "#product-item-text-group-data-" + number);
 
-			clone.insertAfter(block);
-			$(".cke", clone).remove();
-			$(".ai-combobox", clone).remove();
-			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsLanguages});
-			$(".htmleditor", clone).ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
+			$(".htmleditor-prototype", clone).ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
+
+			return false;
 		});
 	},
 
