@@ -343,6 +343,7 @@ class Standard
 
 				$baseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
 				$view->summaryBasket = $baseManager->load( $orderItem->getBaseId() );
+				$view->orderItem = $orderItem;
 			}
 
 			$this->cache = $view;

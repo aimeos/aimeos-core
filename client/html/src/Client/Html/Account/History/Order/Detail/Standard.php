@@ -263,6 +263,10 @@ class Standard
 		{
 			$view = parent::setViewParams( $view );
 
+			if( $view->orderItem->getPaymentStatus() >= $this->getDownloadPaymentStatus() ) {
+				$view->summaryShowDownloadAttributes = true;
+			}
+
 			$view->summaryTaxRates = $this->getTaxRates( $view->summaryBasket );
 
 			$this->cache = $view;
