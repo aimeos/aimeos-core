@@ -759,12 +759,13 @@ Aimeos.Product.Item.Price = {
 			var block = $(this).parents(".group-item");
 			var clone = block.clone();
 
+			$(".card-block", clone).attr("id", "product-item-price-group-data-" + number);
+			$(".card-header", clone).attr("id", "product-item-price-group-item-" + number);
+			$(".card-header", clone).attr("data-target", "product-item-price-group-data-" + number);
+
 			clone.insertAfter(block);
 			$(".ai-combobox", clone).remove();
 			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsCurrencies});
-			$(".card-header", clone).data("target", "product-item-price-group-data-" + number);
-			$(".card-header", clone).attr("id", "product-item-price-group-item-" + number);
-			$(".card-block", clone).attr("id", "product-item-price-group-data-" + number);
 		});
 	},
 
@@ -970,14 +971,15 @@ Aimeos.Product.Item.Text = {
 			var block = $(this).parents(".group-item");
 			var clone = block.clone();
 
+			$(".card-block", clone).attr("id", "product-item-text-group-data-" + number);
+			$(".card-header", clone).attr("id", "product-item-text-group-item-" + number);
+			$(".card-header", clone).attr("data-target", "#product-item-text-group-data-" + number);
+
 			clone.insertAfter(block);
 			$(".cke", clone).remove();
 			$(".ai-combobox", clone).remove();
 			$(".combobox", clone).combobox({getfcn: Aimeos.getOptionsLanguages});
 			$(".htmleditor", clone).ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
-			$(".card-header", clone).data("target", "product-item-text-group-data-" + number);
-			$(".card-header", clone).attr("id", "product-item-text-group-item-" + number);
-			$(".card-block", clone).attr("id", "product-item-text-group-data-" + number);
 		});
 	},
 
