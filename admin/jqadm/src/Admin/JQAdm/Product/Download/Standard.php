@@ -568,13 +568,16 @@ class Standard
 			$item->setCode( $this->storeFile( $file, $path ) );
 		}
 
-		$item->setLabel( $view->param( 'download/attribute.label' ) );
-		$attrManager->saveItem( $item );
+		if( ( $label = $view->param( 'download/attribute.label' ) ) != '' )
+		{
+			$item->setLabel( $label );
+			$attrManager->saveItem( $item );
 
-		$litem->setPosition( 0 );
-		$litem->setRefId( $item->getId() );
-		$litem->setStatus( $view->param( 'download/product.lists.status' ) );
-		$listManager->saveItem( $litem );
+			$litem->setPosition( 0 );
+			$litem->setRefId( $item->getId() );
+			$litem->setStatus( $view->param( 'download/product.lists.status' ) );
+			$listManager->saveItem( $litem );
+		}
 
 		$this->cleanupItems( $listItems, array( $listId ) );
 	}
