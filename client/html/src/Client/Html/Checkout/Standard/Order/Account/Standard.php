@@ -262,21 +262,20 @@ class Standard
 				$search->setSlice( 0, 1 );
 				$result = $manager->searchItems( $search );
 
-				if( empty( $result ) )
+				if( ( $item = reset( $result ) ) === false )
 				{
-					$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
-
-					$password = substr( md5( microtime( true ) . /*getpid() .*/ rand() ), -8 );
+					$password = substr( md5( microtime( true ) . getmypid() . rand() ), -8 );
 					$item = $this->addCustomerData( $manager->createItem(), $addr, $addr->getEmail(), $password );
 					$manager->saveItem( $item );
 
 					$context->setUserId( $item->getId() );
-					$basket->setCustomerId( $item->getId() );
-
-					$orderBaseManager->saveItem( $basket, false );
-
 					$this->sendEmail( $addr, $addr->getEmail(), $password );
 				}
+
+				$basket->setCustomerId( $item->getId() );
+
+				$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
+				$orderBaseManager->saveItem( $basket, false );
 			}
 			catch( \Exception $e )
 			{
