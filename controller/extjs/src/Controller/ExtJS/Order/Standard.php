@@ -70,16 +70,16 @@ class Standard
 	 */
 	protected function transformValues( \stdClass $entry )
 	{
-		if( isset( $entry->{'order.datestart'} ) && $entry->{'order.datestart'} != '' ) {
-			$entry->{'order.datestart'} = str_replace( 'T', ' ', $entry->{'order.datestart'} );
+		if( isset( $entry->{'order.datepayment'} ) && $entry->{'order.datepayment'} != '' ) {
+			$entry->{'order.datepayment'} = str_replace( 'T', ' ', $entry->{'order.datepayment'} );
 		} else {
-			$entry->{'order.datestart'} = null;
+			$entry->{'order.datepayment'} = null;
 		}
 
-		if( isset( $entry->{'order.dateend'} ) && $entry->{'order.dateend'} != '' ) {
-			$entry->{'order.dateend'} = str_replace( 'T', ' ', $entry->{'order.dateend'} );
+		if( isset( $entry->{'order.datedelivery'} ) && $entry->{'order.datedelivery'} != '' ) {
+			$entry->{'order.datedelivery'} = str_replace( 'T', ' ', $entry->{'order.datedelivery'} );
 		} else {
-			$entry->{'order.dateend'} = null;
+			$entry->{'order.datedelivery'} = null;
 		}
 
 		return $entry;
