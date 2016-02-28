@@ -961,7 +961,8 @@ Aimeos.Product.Item.Text = {
 		{ name: 'document', items: [ 'Source' ] },
 		'/',
 		{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat' ] },
-		{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] }
+		{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
+		{ name: 'styles', items: [ 'Format' ] },
 	],
 
 
