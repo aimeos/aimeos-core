@@ -196,11 +196,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetGroups()
 	{
-		$listValues = array( 'domain' => 'customer/group', 'refid' => 123 );
+		$listValues = array( 'domain' => 'customer/group', 'type' => 'default', 'refid' => 123 );
 		$listItems = array( 'customer/group' => array( new \Aimeos\MShop\Common\Item\Lists\Standard( '', $listValues ) ) );
 		$object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, array(), $listItems );
 
 		$this->assertEquals( array( 123 ), $object->getGroups() );
+	}
+
+	public function testSetGroups()
+	{
+		$this->object->setGroups( array( 1, 2, 3 ) );
+		$this->assertEquals( array( 1, 2, 3 ), $this->object->getGroups() );
 	}
 
 	public function testGetPaymentAddress()

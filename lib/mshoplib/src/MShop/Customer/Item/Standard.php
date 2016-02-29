@@ -331,12 +331,22 @@ class Standard
 		{
 			$this->values['groups'] = array();
 
-			foreach( $this->getListItems( 'customer/group' ) as $listItem ) {
+			foreach( $this->getListItems( 'customer/group', 'default' ) as $listItem ) {
 				$this->values['groups'][] = $listItem->getRefId();
 			}
 		}
 
 		return (array) $this->values['groups'];
+	}
+
+	/**
+	 * Sets the group IDs the customer belongs to
+	 *
+	 * @param array $ids List of group IDs
+	 */
+	public function setGroups( array $ids )
+	{
+		$this->values['groups'] = $ids;
 	}
 
 

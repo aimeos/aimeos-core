@@ -133,4 +133,11 @@ interface Iface
 	 * @return array List of group IDs
 	 */
 	public function getGroups();
+
+	/**
+	 * Sets the group IDs the customer belongs to
+	 *
+	 * @param array $ids List of group IDs
+	 */
+	public function setGroups( array $ids );
 }

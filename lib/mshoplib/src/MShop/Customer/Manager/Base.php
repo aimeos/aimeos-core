@@ -102,6 +102,65 @@ abstract class Base
 
 
 	/**
+	 * Adds the customer to the groups listed in the customer item
+	 *
+	 * @param \Aimeos\MShop\Customer\Item\Iface $item Customer item
+	 */
+	protected function addGroups( \Aimeos\MShop\Customer\Item\Iface $item )
+	{
+		if( count( $item->getGroups() ) === 0 ) {
+			return;
+		}
+
+		$listMap = array();
+		$manager = $this->getSubManager( 'lists' );
+		$typeManager = $manager->getSubManager( 'type' );
+		$typeId = $typeManager->findItem( 'default', array(), 'customer/group', 'default' )->getId();
+
+		$listItem = $manager->createItem();
+		$listItem->setParentId( $item->getId() );
+		$listItem->setDomain( 'customer/group' );
+		$listItem->setTypeId( $typeId );
+		$listItem->setStatus( 1 );
+
+
+		$search = $manager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'customer.lists.parentid', $item->getId() ),
+			$search->compare( '==', 'customer.lists.domain', 'customer/group' ),
+			$search->compare( '==', 'customer.lists.type.domain', 'customer/group' ),
+			$search->compare( '==', 'customer.lists.type.code', 'default' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $manager->searchItems( $search ) as $listid => $listItem ) {
+			$listMap[ $listItem->getRefId() ] = $listid;
+		}
+
+
+		$pos = count( $listMap );
+
+		foreach( $item->getGroups() as $gid )
+		{
+			if( isset( $listMap[$gid] ) )
+			{
+				unset( $listMap[$gid] );
+				continue;
+			}
+
+			$listItem->setId( null );
+			$listItem->setRefId( $gid );
+			$listItem->setPosition( $pos++ );
+
+			$manager->saveItem( $listItem, false );
+		}
+
+		$manager->deleteItems( $listMap );
+	}
+
+
+	/**
 	 * Creates a new customer item.
 	 *
 	 * @param array $values List of attributes for customer item

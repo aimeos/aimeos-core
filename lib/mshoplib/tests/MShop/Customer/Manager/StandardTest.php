@@ -116,14 +116,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );
+		$item->setGroups( array( 1, 2, 3 ) );
 		$this->object->saveItem( $item );
-		$itemSaved = $this->object->getItem( $item->getId() );
+		$itemSaved = $this->object->getItem( $item->getId(), array( 'customer/group' ) );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
+		$itemExp->setGroups( array( 2, 4 ) );
 		$this->object->saveItem( $itemExp );
-		$itemUpd = $this->object->getItem( $itemExp->getId() );
+		$itemUpd = $this->object->getItem( $itemExp->getId(), array( 'customer/group' ) );
 
 		$this->object->deleteItem( $item->getId() );
 
@@ -137,6 +139,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getPaymentAddress(), $itemSaved->getPaymentAddress() );
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
+		$this->assertEquals( $item->getGroups(), $itemSaved->getGroups() );
 		$this->assertEquals( $itemSaved->getPaymentAddress()->getId(), $itemSaved->getId() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -151,6 +154,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getPaymentAddress(), $itemUpd->getPaymentAddress() );
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
+		$this->assertEquals( $itemExp->getGroups(), $itemUpd->getGroups() );
 		$this->assertEquals( $itemUpd->getPaymentAddress()->getId(), $itemUpd->getId() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
