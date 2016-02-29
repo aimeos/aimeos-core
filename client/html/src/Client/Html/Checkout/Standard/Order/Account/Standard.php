@@ -327,22 +327,6 @@ class Standard
 		$customer->setLabel( $label );
 		$customer->setStatus( 1 );
 
-		/** client/html/checkout/standard/order/account/standard/groupids
-		 * List of groups new customers should be assigned to
-		 *
-		 * Newly created customers will be assigned automatically to the groups
-		 * given by their IDs. This is especially useful if those groups limit
-		 * functionality for those users.
-		 *
-		 * @param array List of group IDs
-		 * @since 2016.03
-		 * @category User
-		 * @category Developer
-		 */
-		$config = $this->getContext()->getConfig();
-		$gids = (array) $config->get( 'client/html/checkout/standard/order/account/standard/groupids', array() );
-		$customer->setGroups( $gids );
-
 		return $customer;
 	}
 
