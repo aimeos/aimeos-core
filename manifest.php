@@ -37,6 +37,7 @@ return array(
 		'client/html/currency' => 'client/html/i18n/currency',
 		'client/html/language' => 'client/html/i18n/language',
 		'controller/frontend' => 'controller/frontend/i18n',
+		'controller/jobs' => 'controller/jobs/i18n',
 		'mshop/code' => 'lib/mshoplib/i18n/code',
 		'mshop' => 'lib/mshoplib/i18n',
 	),
