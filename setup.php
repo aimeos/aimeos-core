@@ -38,7 +38,7 @@ function setup_autoload( $classname )
 
 function usage()
 {
-	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>]* [--option=key:value]* [sitecode] [tplsite]\n" );
+	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>|<file>]* [--option=key:value]* [sitecode] [tplsite]\n" );
 	exit ( 1 );
 }
 
@@ -107,12 +107,22 @@ try
 
 	$ctx = new \Aimeos\MShop\Context\Item\Standard();
 
+	$config = array();
 	$confPaths = $aimeos->getConfigPaths();
-	if( isset( $options['config'] ) ) {
-		$confPaths = array_merge( $confPaths, (array) $options['config'] );
+
+	if( isset( $options['config'] ) )
+	{
+		foreach( (array) $options['config'] as $path )
+		{
+			if( is_file( $path ) ) {
+				$config = array_replace_recursive( $config, require $path );
+			} else {
+				$confPaths[] = $path;
+			}
+		}
 	}
 
-	$conf = new \Aimeos\MW\Config\PHPArray( array(), $confPaths );
+	$conf = new \Aimeos\MW\Config\PHPArray( $config, $confPaths );
 	$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 	$ctx->setConfig( $conf );
 
