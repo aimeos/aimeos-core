@@ -21,15 +21,6 @@ namespace Aimeos\MW\Session;
 class PHP implements \Aimeos\MW\Session\Iface
 {
 	/**
-	 * Initializes the session object.
-	 */
-	public function __construct()
-	{
-		@session_start();
-	}
-
-
-	/**
 	 * Returns the value of the requested session key.
 	 *
 	 * If the returned value wasn't a string, it's decoded from its JSON
