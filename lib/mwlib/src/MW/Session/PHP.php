@@ -41,8 +41,8 @@ class PHP implements \Aimeos\MW\Session\Iface
 	 */
 	public function get( $name, $default = null )
 	{
-		if( isset( $SESSION[$name] ) ) {
-			return $SESSION[$name];
+		if( isset( $_SESSION[$name] ) ) {
+			return $_SESSION[$name];
 		}
 
 		return $default;
@@ -61,6 +61,6 @@ class PHP implements \Aimeos\MW\Session\Iface
 	 */
 	public function set( $name, $value )
 	{
-		$SESSION[$name] = $value;
+		$_SESSION[$name] = $value;
 	}
 }
