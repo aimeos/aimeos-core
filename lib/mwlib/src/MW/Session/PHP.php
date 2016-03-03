@@ -25,7 +25,7 @@ class PHP implements \Aimeos\MW\Session\Iface
 	 */
 	public function __construct()
 	{
-		session_start();
+		@session_start();
 	}
 
 
