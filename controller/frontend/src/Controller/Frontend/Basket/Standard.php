@@ -103,7 +103,8 @@ class Standard
 		$attr = array();
 		$prices = $productItem->getRefItems( 'price', 'default', 'default' );
 
-		switch( $productItem->getType() ) {
+		switch( $productItem->getType() )
+		{
 			case 'select':
 				$attr = $this->getVariantDetails( $orderBaseProductItem, $productItem, $prices, $variantAttributeIds, $options );
 				break;

@@ -962,7 +962,7 @@ Aimeos.Product.Item.Text = {
 		'/',
 		{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat' ] },
 		{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote' ] },
-		{ name: 'styles', items: [ 'Format' ] },
+		{ name: 'styles', items: [ 'Format' ] }
 	],
 
 
