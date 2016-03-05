@@ -8,6 +8,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'checkout/standard/address' ); ?>
 <section class="checkout-standard-address">
 	<h1><?php echo $enc->html( $this->translate( 'client', 'address' ), $enc::TRUST ); ?></h1>
 	<p class="note"><?php echo $enc->html( $this->translate( 'client', 'Fields with an * are mandatory' ), $enc::TRUST ); ?></p>
@@ -17,3 +18,5 @@ $enc = $this->encoder();
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client', 'Next' ), $enc::TRUST ); ?></button>
 	</div>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/standard/address' ); ?>

@@ -14,6 +14,7 @@ $reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'catalog/detail/basket' ); ?>
 <div class="catalog-detail-basket" data-reqstock="<?php echo $reqstock; ?>">
 <?php if( isset( $this->detailProductItem ) ) : ?>
 	<div class="price price-main price-actual price-prodid-<?php echo $this->detailProductItem->getId(); ?>">
@@ -36,3 +37,5 @@ $enc = $this->encoder();
 		</div>
 	</form>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/basket' ); ?>

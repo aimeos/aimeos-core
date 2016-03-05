@@ -31,7 +31,10 @@ catch( Exception $e )
 }
 
 ?>
+<?php $this->block()->start( 'email/common/html/salutation' ); ?>
 <p class="email-common-salutation content-block">
 <?php echo $enc->html( $string ); ?>
 <?php echo $this->get( 'salutationBody' ); ?>
 </p>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/html/salutation' ); ?>

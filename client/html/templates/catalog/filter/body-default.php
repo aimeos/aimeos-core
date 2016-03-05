@@ -86,6 +86,7 @@ foreach( array( 'f_catid', 'f_name', 'f_sort' ) as $name ) {
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'catalog/filter' ); ?>
 <section class="aimeos catalog-filter">
 <?php if( isset( $this->filterErrorList ) ) : ?>
 	<ul class="error-list">
@@ -104,3 +105,5 @@ $enc = $this->encoder();
 		</form>
 	</nav>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/filter' ); ?>

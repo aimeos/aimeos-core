@@ -114,6 +114,7 @@ foreach( $stockProductIds as $prodId )
 }
 
 ?>
+<?php $this->block()->start( 'catalog/stock' ); ?>
 // <!--
 var aimeosStockHtml = <?php echo json_encode( $result, JSON_FORCE_OBJECT ); ?>;
 
@@ -144,3 +145,5 @@ $(".aimeos .catalog-detail-basket").each(function() {
 	}
 });
 // -->
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/stock' ); ?>

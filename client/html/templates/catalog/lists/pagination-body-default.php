@@ -36,6 +36,7 @@ if( $sort === 'price' ) {
 }
 
 ?>
+<?php $this->block()->start( 'catalog/lists/pagination' ); ?>
 <?php if( $this->get( 'listProductTotal', 0 ) > 0 ) : ?>
 <div class="catalog-list-pagination">
 	<nav class="pagination">
@@ -60,3 +61,5 @@ if( $sort === 'price' ) {
 	</nav>
 </div>
 <?php endif; ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/lists/pagination' ); ?>

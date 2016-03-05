@@ -6,4 +6,7 @@
  */
 
 ?>
+<?php $this->block()->start( 'email/payment' ); ?>
 <?php echo $this->get( 'paymentBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/payment' ); ?>

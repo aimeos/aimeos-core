@@ -12,6 +12,7 @@ $salutations = array(
 );
 
 ?>
+<?php $this->block()->start( 'email/common/text/summary/address' ); ?>
 
 
 <?php echo strip_tags( $this->translate( 'client', 'Billing address' ) ); ?>:
@@ -116,3 +117,5 @@ $salutations = array(
 	}
 ?>
 <?php echo $this->get( 'addressBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/text/summary/address' ); ?>

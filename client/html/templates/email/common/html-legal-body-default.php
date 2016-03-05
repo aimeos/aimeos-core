@@ -11,7 +11,10 @@ $enc = $this->encoder();
 $string = $this->translate( 'client',  'All orders are subject to our terms and conditions.' );
 
 ?>
+<?php $this->block()->start( 'email/common/html/legal' ); ?>
 <p class="email-common-legal content-block">
 <?php echo nl2br( $enc->html( $string, $enc::TRUST ) ); ?>
 <?php echo $this->get( 'legalBody' ); ?>
 </p>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/html/legal' ); ?>

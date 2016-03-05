@@ -7,6 +7,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'basket/related' ); ?>
 <section class="aimeos basket-related">
 <?php if( isset( $this->relatedErrorList ) ) : ?>
 	<ul class="error-list">
@@ -18,3 +19,5 @@ $enc = $this->encoder();
 	<h1><?php echo $enc->html( $this->translate( 'client', 'Related' ), $enc::TRUST ); ?></h1>
 <?php echo $this->get( 'relatedBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'basket/related' ); ?>

@@ -16,6 +16,7 @@ if( isset( $this->detailProductItem ) )
 }
 
 ?>
+<?php $this->block()->start( 'catalog/detail' ); ?>
 <section class="aimeos catalog-detail">
 <?php if( isset( $this->detailErrorList ) ) : ?>
 	<ul class="error-list">
@@ -28,3 +29,5 @@ if( isset( $this->detailProductItem ) )
 <?php echo $this->get( 'detailBody' ); ?>
 	</article>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail' ); ?>

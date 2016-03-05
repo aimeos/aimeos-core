@@ -15,6 +15,7 @@ $salutations = array(
 );
 
 ?>
+<?php $this->block()->start( 'common/summary/address' ); ?>
 <div class="common-summary-address container">
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Addresses' ), $enc::TRUST ); ?></h2>
 	<div class="item payment <?php echo ( isset( $errors['address']['payment'] ) ? 'error' : '' ); ?>">
@@ -135,3 +136,5 @@ $salutations = array(
 	</div>
 <?php echo $this->get( 'addressBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'common/summary/address' ); ?>

@@ -25,6 +25,7 @@ try {
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'basket/stardard' ); ?>
 <section class="aimeos basket-standard">
 <?php if( isset( $this->standardErrorList ) ) : ?>
 	<ul class="error-list">
@@ -48,3 +49,5 @@ $enc = $this->encoder();
 		</div>
 	</form>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'basket/stardard' ); ?>

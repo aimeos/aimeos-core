@@ -8,6 +8,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'locale/select' ); ?>
 <section class="aimeos locale-select">
 <?php if( ( $errors = $this->get( 'selectErrorList', array() ) ) !== array() ) : ?>
 	<ul class="error-list">
@@ -18,3 +19,5 @@ $enc = $this->encoder();
 <?php endif; ?>
 <?php echo $this->get( 'selectBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'locale/select' ); ?>

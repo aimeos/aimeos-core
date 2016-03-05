@@ -49,6 +49,7 @@ $attrIds = $this->param( 'f_attrid', array() );
 $params = $this->param();
 
 ?>
+<?php $this->block()->start( 'catalog/filter/attribute' ); ?>
 <section class="catalog-filter-attribute">
 <?php if( !empty( $attrMap ) ) : ?>
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Attributes' ), $enc::TRUST ); ?></h2>
@@ -105,3 +106,5 @@ $params = $this->param();
 	</noscript>
 <?php endif; ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/filter/attribute' ); ?>

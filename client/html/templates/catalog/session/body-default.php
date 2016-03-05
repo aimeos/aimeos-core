@@ -8,6 +8,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'catalog/session' ); ?>
 <section class="aimeos catalog-session">
 <?php if( isset( $this->sessionErrorList ) ) : ?>
 	<ul class="error-list">
@@ -18,3 +19,5 @@ $enc = $this->encoder();
 <?php endif; ?>
 <?php echo $this->get( 'sessionBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/session' ); ?>

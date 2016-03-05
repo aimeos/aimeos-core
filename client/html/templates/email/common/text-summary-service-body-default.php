@@ -6,6 +6,7 @@
  */
 
 ?>
+<?php $this->block()->start( 'email/common/text/summary/service' ); ?>
 
 
 
@@ -59,3 +60,5 @@
 <?php	endforeach; ?>
 <?php } catch( Exception $e ) { ; } ?>
 <?php echo $this->get( 'serviceBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/text/summary/service' ); ?>

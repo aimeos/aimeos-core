@@ -10,6 +10,7 @@ $enc = $this->encoder();
 $items = $this->get( 'quoteItems', array() );
 
 ?>
+<?php $this->block()->start( 'catalog/lists/quote' ); ?>
 <div class="catalog-list-quote">
 <?php if( count( $items ) > 0 ) : ?>
 	<div class="content">
@@ -21,3 +22,5 @@ $items = $this->get( 'quoteItems', array() );
 <?php endif; ?>
 <?php echo $this->get( 'quoteBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/lists/quote' ); ?>

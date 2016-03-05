@@ -20,7 +20,7 @@ $hint = $this->translate( 'client', 'Please enter at least three characters' );
  *
  * Note: Up to 2015-02, the setting was available as
  * client/html/catalog/listsimple/url/target
- * 
+ *
  * @param string Destination of the URL
  * @since 2014.03
  * @category Developer
@@ -40,7 +40,7 @@ $suggestTarget = $this->config( 'client/html/catalog/suggest/url/target' );
  *
  * Note: Up to 2015-02, the setting was available as
  * client/html/catalog/listsimple/url/controller
- * 
+ *
  * @param string Name of the controller
  * @since 2014.03
  * @category Developer
@@ -60,7 +60,7 @@ $suggestController = $this->config( 'client/html/catalog/suggest/url/controller'
  *
  * Note: Up to 2015-02, the setting was available as
  * client/html/catalog/listsimple/url/action
- * 
+ *
  * @param string Name of the action
  * @since 2014.03
  * @category Developer
@@ -101,9 +101,12 @@ $suggestConfig = $this->config( 'client/html/catalog/suggest/url/config', array(
 $suggestUrl = $enc->attr( $this->url( $suggestTarget, $suggestController, $suggestAction, array(), array(), $suggestConfig ) );
 
 ?>
+<?php $this->block()->start( 'catalog/search' ); ?>
 <section class="catalog-filter-search">
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Search' ), $enc::TRUST ); ?></h2>
 	<input class="value" type="text" name="<?php echo $name; ?>" value="<?php echo $phrase; ?>" data-url="<?php echo $suggestUrl; ?>" data-hint="<?php echo $hint; ?>" /><!--
 	--><button class="standardbutton" type="submit"><?php echo $enc->html( $this->translate( 'client', 'Go' ), $enc::TRUST ); ?></button>
 <?php echo $this->get( 'searchBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/search' ); ?>

@@ -7,6 +7,9 @@
  */
 
 ?>
+<?php $this->block()->start( 'email/common/html/summary' ); ?>
 <div class="common-summary content-block">
 <?php echo $this->get( 'summaryBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/html/summary' ); ?>

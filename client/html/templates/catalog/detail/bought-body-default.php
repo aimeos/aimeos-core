@@ -14,6 +14,7 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'catalog/detail/bought' ); ?>
 <?php if( !empty( $productItems ) || $this->boughtBody != '' ) : ?>
 <section class="catalog-detail-bought">
 	<h2 class="header"><?php echo $this->translate( 'client', 'Other customers also bought' ); ?></h2>
@@ -41,3 +42,5 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php echo $this->boughtBody; ?>
 </section>
 <?php endif; ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/bought' ); ?>

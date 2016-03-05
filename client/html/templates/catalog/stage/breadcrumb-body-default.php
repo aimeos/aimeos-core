@@ -15,6 +15,7 @@ $listConfig = $this->config( 'client/html/catalog/lists/url/config', array() );
 $params = $this->get( 'stageParams', array() );
 
 ?>
+<?php $this->block()->start( 'catalog/stage/breadcrumb' ); ?>
 <div class="catalog-stage-breadcrumb">
 	<nav class="breadcrumb">
 		<span class="title"><?php echo $enc->html( $this->translate( 'client', 'You are here:' ), $enc::TRUST ); ?></span>
@@ -31,4 +32,5 @@ $params = $this->get( 'stageParams', array() );
 	</nav>
 <?php echo $this->get( 'breadcrumbBody' ); ?>
 </div>
-
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/stage/breadcrumb' ); ?>

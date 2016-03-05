@@ -36,6 +36,7 @@ $config = $this->config( 'client/html/locale/select/currency/url/config', array(
 $paramname = $this->config( 'client/html/locale/select/currency/param-name', 'loc_currencyid' );
 
 ?>
+<?php $this->block()->start( 'locale/select/currency' ); ?>
 <div class="locale-select-currency">
 	<h2 class="header"><?php echo $this->translate( 'client', 'Select currency' ); ?></h2>
 	<ul class="select-menu">
@@ -53,3 +54,5 @@ $paramname = $this->config( 'client/html/locale/select/currency/param-name', 'lo
 	</ul>
 <?php echo $this->get( 'currencyBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'locale/select/currency' ); ?>

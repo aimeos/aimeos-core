@@ -37,6 +37,7 @@ foreach( $this->get( 'deliveryError', array() ) as $name => $msg ) {
 $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 ?>
+<?php $this->block()->start( 'checkout/standard/delivery' ); ?>
 <section class="checkout-standard-delivery">
 	<h1><?php echo $enc->html( $this->translate( 'client', 'delivery' ), $enc::TRUST ); ?></h1>
 	<p class="note"><?php echo $enc->html( $this->translate( 'client', 'Please choose your delivery method' ), $enc::TRUST ); ?></p>
@@ -97,3 +98,5 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client', 'Next' ), $enc::TRUST ); ?></button>
 	</div>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/standard/delivery' ); ?>

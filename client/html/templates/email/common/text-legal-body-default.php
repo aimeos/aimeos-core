@@ -6,14 +6,14 @@
  */
 
 /// Payment e-mail legal information
-$string = $this->translate( 'client', 
-'All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.
-
-This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards.' );
+$string = $this->translate( 'client',  'All orders are subject to our terms and conditions.' );
 
 ?>
+<?php $this->block()->start( 'email/common/text/legal' ); ?>
 
 
 
 <?php echo wordwrap( strip_tags( $string ) ); ?>
 <?php echo $this->get( 'legalBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/text/legal' ); ?>

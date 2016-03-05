@@ -62,6 +62,7 @@ foreach( $this->get( 'deliveryHidden', array() ) as $name ) {
 }
 
 ?>
+<?php $this->block()->start( 'checkout/standard/address/delivery' ); ?>
 <div class="checkout-standard-address-delivery">
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Delivery address' ), $enc::TRUST ); ?></h2>
 	<div class="item-address item-like">
@@ -184,3 +185,5 @@ foreach( $this->get( 'deliveryHidden', array() ) as $name ) {
 <?php endif; ?>
 <?php echo $this->get( 'deliveryBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/standard/address/delivery' ); ?>

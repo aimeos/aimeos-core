@@ -9,6 +9,7 @@ $propertyItems = $this->get( 'propertyItems', array() );
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'catalog/detail/additional/property' ); ?>
 <div class="additional-box">
 <?php if( count( $propertyItems ) > 0 ) : ?>
 	<h2 class="header properties"><?php echo $enc->html( $this->translate( 'client', 'Properties' ), $enc::TRUST ); ?></h2>
@@ -27,3 +28,5 @@ $enc = $this->encoder();
 <?php endif; ?>
 <?php echo $this->get( 'propertyBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/additional/property' ); ?>

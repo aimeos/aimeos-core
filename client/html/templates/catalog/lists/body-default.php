@@ -17,6 +17,7 @@ foreach( (array) $this->get( 'listCatPath', array() ) as $cat )
 }
 
 ?>
+<?php $this->block()->start( 'catalog/lists' ); ?>
 <section class="aimeos catalog-list<?php echo $enc->attr( $classes ); ?>">
 <?php if( isset( $this->listErrorList ) ) : ?>
 	<ul class="error-list">
@@ -27,3 +28,5 @@ foreach( (array) $this->get( 'listCatPath', array() ) as $cat )
 <?php endif; ?>
 <?php echo $this->get( 'listBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/lists' ); ?>

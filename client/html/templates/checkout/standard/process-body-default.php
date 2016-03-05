@@ -60,7 +60,7 @@ foreach( $params as $key => $item )
  * end of the regular expression. They will be added automatically. Any slashes
  * inside the expression must be escaped by backlashes, i.e. "/".
  *
- * @param array Associative list of field names and regular expressions 
+ * @param array Associative list of field names and regular expressions
  * @since 2015.07
  * @category User
  * @category Developer
@@ -70,6 +70,7 @@ $defaultRegex = array( 'payment.cardno' => '^[0-9]{16,19}$', 'payment.cvv' => '^
 $regex = $this->config( 'client/html/checkout/standard/process/validate', $defaultRegex );
 
 ?>
+<?php $this->block()->start( 'checkout/standard/process' ); ?>
 <div class="checkout-standard-process">
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Payment' ), $enc::TRUST ); ?></h2>
 <?php if( !empty( $errors ) ) : ?>
@@ -108,13 +109,15 @@ $regex = $this->config( 'client/html/checkout/standard/process/validate', $defau
 <?php echo $this->get( 'processBody' ); ?>
 	<div class="button-group">
 <?php if( !empty( $errors ) ) : ?>
-		<a class="standardbutton" href="<?php echo $enc->attr( $this->standardUrlPayment ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change payment' ), $enc::TRUST ); ?></a> 
+		<a class="standardbutton" href="<?php echo $enc->attr( $this->standardUrlPayment ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change payment' ), $enc::TRUST ); ?></a>
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client', 'Try again' ), $enc::TRUST ); ?></button>
 <?php elseif( !empty( $public ) ) : ?>
-		<a class="standardbutton" href="<?php echo $enc->attr( $this->standardUrlPayment ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change payment' ), $enc::TRUST ); ?></a> 
+		<a class="standardbutton" href="<?php echo $enc->attr( $this->standardUrlPayment ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Change payment' ), $enc::TRUST ); ?></a>
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client', 'Pay now' ), $enc::TRUST ); ?></button>
 <?php else : ?>
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client', 'Proceed' ), $enc::TRUST ); ?></button>
 <?php endif; ?>
 	</div>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/standard/process' ); ?>

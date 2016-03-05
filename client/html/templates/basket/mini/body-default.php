@@ -9,6 +9,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'basket/mini' ); ?>
 <section class="aimeos basket-mini">
 <?php if( ( $errors = $this->get( 'miniErrorList', array() ) ) !== array() ) : ?>
 	<ul class="error-list">
@@ -20,3 +21,5 @@ $enc = $this->encoder();
 	<h1><?php echo $enc->html( $this->translate( 'client', 'Basket' ), $enc::TRUST ); ?></h1>
 <?php echo $this->get( 'miniBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'basket/mini' ); ?>

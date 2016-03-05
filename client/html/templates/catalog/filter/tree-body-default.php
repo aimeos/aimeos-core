@@ -43,6 +43,7 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
  */
 
 ?>
+<?php $this->block()->start( 'catalog/tree' ); ?>
 <section class="catalog-filter-tree <?php echo ( $counts == true ? 'catalog-filter-count' : '' ); ?>">
 <?php if( $this->config( 'client/html/catalog/filter/tree/force-search', false ) ) : ?>
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'f_catid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'f_catid' ) ); ?>" />
@@ -54,3 +55,5 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
 <?php endif; ?>
 <?php echo $this->get( 'treeBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/tree' ); ?>

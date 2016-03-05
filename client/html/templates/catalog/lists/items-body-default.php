@@ -64,6 +64,7 @@ $reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
  */
 
 ?>
+<?php $this->block()->start( 'catalog/lists/items' ); ?>
 <div class="catalog-list-items">
 	<ul class="list-items"><!--
 <?php foreach( $this->get( 'listProductItems', array() ) as $id => $productItem ) : $firstImage = true; ?>
@@ -150,3 +151,5 @@ $reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
 --></ul>
 <?php	echo $this->get( 'itemsBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/lists/items' ); ?>

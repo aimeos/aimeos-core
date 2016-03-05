@@ -5,6 +5,8 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
 
-echo $this->get( 'countBody' );
-
 ?>
+<?php $this->block()->start( 'catalog/count' ); ?>
+<?php echo $this->get( 'countBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/count' ); ?>

@@ -13,6 +13,7 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'catalog/detail/seen' ); ?>
 <?php if( isset( $this->seenProductItem ) ) : $productItem = $this->seenProductItem; ?>
 <?php	$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $productItem->getId() ); ?>
 <a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
@@ -29,3 +30,5 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 </a>
 <?php endif; ?>
 <?php echo $this->seenBody; ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/seen' ); ?>

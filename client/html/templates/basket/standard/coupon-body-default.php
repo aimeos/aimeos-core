@@ -19,6 +19,7 @@ if( isset( $this->standardBasket ) ) {
 }
 
 ?>
+<?php $this->block()->start( 'basket/stardard/coupon' ); ?>
 <div class="basket-standard-coupon container">
 	<div class="header">
 		<h2><?php echo $enc->html( $this->translate( 'client', 'Coupon codes' ) ); ?></h2>
@@ -45,3 +46,5 @@ if( isset( $this->standardBasket ) ) {
 	</div>
 <?php echo $this->get( 'couponBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'basket/stardard/coupon' ); ?>

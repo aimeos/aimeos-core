@@ -6,4 +6,7 @@
  */
 
 ?>
+<?php $this->block()->start( 'email/common/text' ); ?>
 <?php echo $this->get( 'textBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/text' ); ?>

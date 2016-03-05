@@ -8,6 +8,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'checkout/confirm' ); ?>
 <section class="aimeos checkout-confirm">
 <?php if( isset( $this->confirmErrorList ) ) : ?>
 	<ul class="error-list">
@@ -19,3 +20,5 @@ $enc = $this->encoder();
 	<h1><?php echo $enc->html( $this->translate( 'client', 'Confirmation' ), $enc::TRUST ); ?></h1>
 <?php echo $this->get( 'confirmBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/confirm' ); ?>

@@ -87,6 +87,7 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'account/favorite' ); ?>
 <section class="aimeos account-favorite">
 <?php if( ( $errors = $this->get( 'favoriteErrorList', array() ) ) !== array() ) : ?>
 	<ul class="error-list">
@@ -153,3 +154,5 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php endif; ?>
 <?php echo $this->get( 'favoriteBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'account/favorite' ); ?>

@@ -32,7 +32,10 @@ $params = array(
  */
 
 ?>
+<?php $this->block()->start( 'catalog/detail/basket/attribute' ); ?>
 <div class="catalog-detail-basket-attribute">
 <?php echo $this->partial( $this->config( 'client/html/common/partials/attribute', 'common/partials/attribute-default.php' ), $params ); ?>
 <?php echo $this->get( 'attributeBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/basket/attribute' ); ?>

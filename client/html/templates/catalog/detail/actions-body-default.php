@@ -36,8 +36,8 @@ $favConfig = $this->config( 'client/html/account/favorite/url/config', array() )
  * so the products can be associated to the user account.
  *
  * The order of the action names in the configuration determines the order of
- * the actions on the catalog detail page.   
- * 
+ * the actions on the catalog detail page.
+ *
  * @param array List of user action names
  * @since 2014.09
  * @category User
@@ -52,6 +52,7 @@ $urls = array(
 );
 
 ?>
+<?php $this->block()->start( 'catalog/detail/actions' ); ?>
 <!-- catalog.detail.actions -->
 <div class="catalog-detail-actions">
 <?php foreach( $list as $entry ) : ?>
@@ -62,3 +63,5 @@ $urls = array(
 <?php echo $this->actionsBody; ?>
 </div>
 <!-- catalog.detail.actions -->
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/actions' ); ?>
