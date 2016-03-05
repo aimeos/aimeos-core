@@ -71,7 +71,7 @@ class Standard
 	public function start( $name )
 	{
 		if( in_array( $name, $this->stack ) ) {
-			throw new Exception( sprintf( 'Block "%1$ss" has already been started', $name ) );
+			throw new Exception( sprintf( 'Block "%1$s" has already been started', $name ) );
 		}
 
 		$this->stack[] = $name;
@@ -85,7 +85,7 @@ class Standard
 	public function stop()
 	{
 		if( ( $name = array_pop( $this->stack ) ) === null ) {
-			throw new Exception( sprintf( 'No block "%1$ss" has been started before', $name ) );
+			throw new Exception( sprintf( 'No block has been started before' ) );
 		}
 
 		$this->blocks[$name] = ob_get_clean();
