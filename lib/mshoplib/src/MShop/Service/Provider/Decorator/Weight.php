@@ -50,10 +50,10 @@ class Weight
 	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
 	 *    known by the provider but aren't valid
 	 */
-	public function checkConfigBE(array $attributes)
+	public function checkConfigBE( array $attributes )
 	{
-		$error = $this->getProvider()->checkConfigBE($attributes);
-		$error += $this->checkConfig($this->beConfig, $attributes);
+		$error = $this->getProvider()->checkConfigBE( $attributes );
+		$error += $this->checkConfig( $this->beConfig, $attributes );
 
 		return $error;
 	}
@@ -71,8 +71,8 @@ class Weight
 	{
 		$list = $this->getProvider()->getConfigBE();
 
-		foreach ($this->beConfig as $key => $config) {
-			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard($config);
+		foreach( $this->beConfig as $key => $config ) {
+			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
 		}
 
 		return $list;
@@ -85,43 +85,31 @@ class Weight
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object
 	 * @return boolean True if payment provider can be used, false if not
 	 */
-	public function isAvailable(\Aimeos\MShop\Order\Item\Base\Iface $basket)
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$context = $this->getContext();
 		$prodMap = array();
-		$basketWeight = 0;
 
-
-		foreach ($basket->getProducts() as $basketItem)
+		// basket can contain a product several times in different basket items
+		// product IDs are only those of articles, selections and bundles, not of the variants and bundled products
+		foreach( $basket->getProducts() as $basketItem )
 		{
-			$prodId = $basketItem->getProductId();
+			$qty = $basketItem->getQuantity();
+			$code = $basketItem->getProductCode();
+			$prodMap[$code] = ( isset( $prodMap[$code] ) ? $prodMap[$code] + $qty : $qty );
 
-			// basket can contain a product several times in different basket items
-			if (!isset($prodMap[$prodId])) {
-				$prodMap[$prodId] = 0.0;
+			foreach( $basketItem->getProducts() as $prodItem ) // calculate bundled products
+			{
+				$qty = $prodItem->getQuantity();
+				$code = $prodItem->getProductCode();
+				$prodMap[$code] = ( isset( $prodMap[$code] ) ? $prodMap[$code] + $qty : $qty );
 			}
-			$prodMap[$prodId] += $basketItem->getQuantity();
 		}
 
-		$propertyManager = \Aimeos\MShop\Factory::createManager($context, 'product/property');
-		$search = $propertyManager->createSearch(true);
-		$expr = array(
-			$search->compare('==', 'product.property.parentid', array_keys($prodMap)),
-			$search->compare('==', 'product.property.type.code', 'package-weight'),
-			$search->getConditions(),
-		);
-		$search->setConditions($search->combine('&&', $expr));
-		$search->setSlice(0, 0x7fffffff); // if more than 100 products are in the basket
-
-		foreach ($propertyManager->searchItems($search) as $property) {
-			$basketWeight += ((float) $property->getValue()) * $prodMap[$property->getParentId()];
-		}
-
-		if ($this->checkWeightScale($basketWeight) === false) {
+		if ($this->checkWeightScale( $this->getWeight( $prodMap ) ) === false) {
 			return false;
 		}
 
-		return $this->getProvider()->isAvailable($basket);
+		return $this->getProvider()->isAvailable( $basket );
 	}
 
 
@@ -131,19 +119,65 @@ class Weight
 	 * @param float $basketWeight The basket weight
 	 * @return boolean True if the current basket weight is within the providers weight range
 	 */
-	protected function checkWeightScale($basketWeight)
+	protected function checkWeightScale( $basketWeight )
 	{
-		$min = $this->getConfigValue(array('weight.min'));
-		$max = $this->getConfigValue(array('weight.max'));
+		$min = $this->getConfigValue( array( 'weight.min' ) );
+		$max = $this->getConfigValue( array( 'weight.max' ) );
 
-		if ($min !== null && ((float) $min) > $basketWeight) {
+		if( $min !== null && ( (float) $min) > $basketWeight ) {
 			return false;
 		}
 
-		if ($max !== null && ((float) $max) < $basketWeight) {
+		if( $max !== null && ( (float) $max) < $basketWeight ) {
 			return false;
 		}
 
 		return true;
+	}
+
+
+	/**
+	 * Returns the weight of the products
+	 *
+	 * @param array $prodMap Associative list of product codes as keys and quantities as values
+	 * @return float Sumed up product weight multiplied with its quantity
+	 */
+	protected function getWeight( array $prodMap )
+	{
+		$weight = 0;
+		$prodIds = array();
+		$context = $this->getContext();
+
+
+		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$search = $manager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.code', array_keys( $prodMap ) ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff ); // if more than 100 products are in the basket
+
+		foreach( $manager->searchItems( $search ) as $id => $product ) {
+			$prodIds[$id] = $product->getCode();
+		}
+
+
+		$propertyManager = \Aimeos\MShop\Factory::createManager( $context, 'product/property' );
+		$search = $propertyManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'product.property.parentid', array_keys( $prodIds ) ),
+			$search->compare( '==', 'product.property.type.code', 'package-weight' ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff ); // if more than 100 products are in the basket
+
+		foreach( $propertyManager->searchItems( $search ) as $property ) {
+			$weight += ((float) $property->getValue()) * $prodMap[$prodIds[$property->getParentId()]];
+		}
+
+
+		return $weight;
 	}
 }
