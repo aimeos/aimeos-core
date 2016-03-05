@@ -6,7 +6,9 @@
  * @copyright Aimeos (aimeos.org), 2015
  */
 
-echo json_encode( $this->get( 'suggestTextItems', '' ) );
-echo $this->get( 'suggestBody' );
-
 ?>
+<?php $this->block()->start( 'catalog/suggest' ); ?>
+<?php echo json_encode( $this->get( 'suggestTextItems', '' ) ); ?>
+<?php echo $this->get( 'suggestBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/suggest' ); ?>

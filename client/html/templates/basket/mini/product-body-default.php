@@ -27,6 +27,7 @@ catch( Exception $e )
 $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 ?>
+<?php $this->block()->start( 'basket/mini/product' ); ?>
 <div class="basket-mini-product">
 	<span class="minibutton"><?php echo $enc->html( $this->translate( 'client', '▼' ), $enc::TRUST ); ?></span>
 	<div class="basket">
@@ -61,4 +62,5 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 	</div>
 <?php echo $this->get( 'productBody' ); ?>
 </div>
-
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'basket/mini/product' ); ?>

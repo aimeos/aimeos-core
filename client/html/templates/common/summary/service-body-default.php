@@ -9,6 +9,7 @@ $enc = $this->encoder();
 $errors = $this->get( 'summaryErrorCodes', array() );
 
 ?>
+<?php $this->block()->start( 'common/summary/service' ); ?>
 <div class="common-summary-service container">
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Services' ), $enc::TRUST ); ?></h2>
 	<div class="item delivery <?php echo ( isset( $errors['service']['delivery'] ) ? 'error' : '' ); ?>">
@@ -81,3 +82,5 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 	</div>
 <?php echo $this->get( 'serviceBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'common/summary/service' ); ?>

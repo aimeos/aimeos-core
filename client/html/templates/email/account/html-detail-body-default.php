@@ -8,6 +8,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'email/account/html/detail' ); ?>
 <div class="account-detail content-block">
 	<div class="header">
 		<h2><?php echo $enc->html( $this->translate( 'client', 'Your account' ), $enc::TRUST ); ?></h2>
@@ -26,3 +27,5 @@ $enc = $this->encoder();
 	</div>
 <?php echo $this->get( 'detailBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/account/html/detail' ); ?>

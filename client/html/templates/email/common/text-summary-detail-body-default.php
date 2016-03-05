@@ -65,6 +65,7 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 $unhide = $this->get( 'summaryShowDownloadAttributes', false );
 
 ?>
+<?php $this->block()->start( 'email/common/text/summary/detail' ); ?>
 
 
 <?php echo strip_tags( $this->translate( 'client', 'Order details' ) ); ?>:
@@ -127,3 +128,5 @@ $unhide = $this->get( 'summaryShowDownloadAttributes', false );
 
 <?php endif; ?>
 <?php echo $this->get( 'detailBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/text/summary/detail' ); ?>

@@ -8,6 +8,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'email/account/text/detail' ); ?>
 
 
 
@@ -17,3 +18,5 @@ $enc = $this->encoder();
 
 <?php	echo $this->translate( 'client', 'Password' ); ?>: <?php	echo $this->extAccountPassword; ?>
 <?php echo $this->get( 'detailBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/account/text/detail' ); ?>

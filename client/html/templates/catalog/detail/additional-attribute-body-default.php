@@ -10,6 +10,7 @@ $attrMap = $this->get( 'attributeMap', array() );
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'catalog/detail/additional/attribute' ); ?>
 <div class="additional-box">
 <?php if( count( $attrMap ) > 0 ) : ?>
 	<h2 class="header attributes"><?php echo $enc->html( $this->translate( 'client', 'Characteristics' ), $enc::TRUST ); ?></h2>
@@ -43,3 +44,5 @@ $enc = $this->encoder();
 <?php endif; ?>
 <?php echo $this->get( 'attributeBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/additional/attribute' ); ?>

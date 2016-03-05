@@ -33,6 +33,7 @@ $currencyId = $this->get( 'selectCurrencyId', 'EUR' );
 $config = $this->config( 'client/html/locale/select/language/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'locale/select/language' ); ?>
 <div class="locale-select-language">
 	<h2 class="header"><?php echo $this->translate( 'client', 'Select language' ); ?></h2>
 	<ul class="select-menu">
@@ -51,3 +52,5 @@ $config = $this->config( 'client/html/locale/select/language/url/config', array(
 	</ul>
 <?php echo $this->get( 'languageBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'locale/select/language' ); ?>

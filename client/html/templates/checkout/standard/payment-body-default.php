@@ -37,6 +37,7 @@ foreach( $this->get( 'paymentError', array() ) as $name => $msg ) {
 $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 
 ?>
+<?php $this->block()->start( 'checkout/standard/payment' ); ?>
 <section class="checkout-standard-payment">
 	<h1><?php echo $enc->html( $this->translate( 'client', 'payment' ), $enc::TRUST ); ?></h1>
 	<p class="note"><?php echo $enc->html( $this->translate( 'client', 'Please choose your payment method' ), $enc::TRUST ); ?></p>
@@ -98,3 +99,5 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 		<button class="standardbutton btn-action"><?php echo $enc->html( $this->translate( 'client', 'Next' ), $enc::TRUST ); ?></button>
 	</div>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/standard/payment' ); ?>

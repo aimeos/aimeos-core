@@ -167,6 +167,7 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 $backParams = $this->get( 'summaryParams', array() );
 
 ?>
+<?php $this->block()->start( 'common/summary/detail' ); ?>
 <div class="common-summary-detail container">
 	<div class="header">
 <?php if( isset( $this->summaryUrlBasket ) ) : ?>
@@ -405,3 +406,5 @@ $backParams = $this->get( 'summaryParams', array() );
 	</div>
 <?php echo $this->get( 'detailBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'common/summary/detail' ); ?>

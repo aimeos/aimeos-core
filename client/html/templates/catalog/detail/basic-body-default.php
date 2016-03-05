@@ -8,6 +8,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'catalog/detail/basic' ); ?>
 <?php if( isset( $this->detailProductItem ) ) : ?>
 <div class="catalog-detail-basic">
 	<h1 class="name"><?php echo $enc->html( $this->detailProductItem->getName(), $enc::TRUST ); ?></h1>
@@ -21,3 +22,5 @@ $enc = $this->encoder();
 <?php echo $this->basicBody; ?>
 </div>
 <?php endif; ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/basic' ); ?>

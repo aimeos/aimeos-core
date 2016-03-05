@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$output = $this->object->getBody();
 
-		$this->assertContains( 'All deliveries shipped', $output );
+		$this->assertContains( 'All orders are subject to our terms and conditions.', $output );
 	}
 
 

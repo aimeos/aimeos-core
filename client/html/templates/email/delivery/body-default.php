@@ -6,4 +6,7 @@
  */
 
 ?>
+<?php $this->block()->start( 'email/delivery' ); ?>
 <?php echo $this->get( 'deliveryBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/delivery' ); ?>

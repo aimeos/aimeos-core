@@ -9,7 +9,10 @@
 $string = $this->translate( 'client', 'If you have any questions, please reply to this e-mail' );
 
 ?>
+<?php $this->block()->start( 'email/common/text/outro' ); ?>
 
 
 <?php echo wordwrap( strip_tags( $string ) ); ?>
 <?php echo $this->get( 'outroBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/common/text/outro' ); ?>

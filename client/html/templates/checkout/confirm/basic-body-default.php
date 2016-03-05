@@ -8,6 +8,7 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'checkout/confirm/basic' ); ?>
 <div class="checkout-confirm-basic">
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Order status' ), $enc::TRUST ); ?></h2>
 <?php if( isset( $this->confirmOrderItem ) ) : ?>
@@ -24,3 +25,5 @@ $enc = $this->encoder();
 <?php endif; ?>
 <?php echo $this->get( 'basicBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/confirm/basic' ); ?>

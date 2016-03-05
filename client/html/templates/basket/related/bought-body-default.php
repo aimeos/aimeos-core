@@ -13,6 +13,7 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'basket/related/bought' ); ?>
 <?php if( !empty( $productItems ) || $this->boughtBody != '' ) : ?>
 <section class="basket-related-bought">
 	<h2 class="header"><?php echo $this->translate( 'client', 'Products you might be also interested in' ); ?></h2>
@@ -38,3 +39,5 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php echo $this->boughtBody; ?>
 </section>
 <?php endif; ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'basket/related/bought' ); ?>

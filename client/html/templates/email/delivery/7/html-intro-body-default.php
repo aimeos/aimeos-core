@@ -18,7 +18,10 @@ $format = $this->translate( 'client', 'Y-m-d' );
 $string = sprintf( $msg, $order->getId(), date_create( $order->getTimeCreated() )->format( $format ), $status );
 
 ?>
+<?php $this->block()->start( 'email/delivery/html/intro' ); ?>
 <p class="email-common-intro content-block">
 <?php echo $enc->html( nl2br( $string ), $enc::TRUST ); ?>
 <?php echo $this->get( 'introBody' ); ?>
 </p>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/delivery/html/intro' ); ?>

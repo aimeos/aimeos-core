@@ -6,6 +6,9 @@
  */
 
 ?>
+<?php $this->block()->start( 'catalog/detail/additional' ); ?>
 <div class="catalog-detail-additional">
 <?php echo $this->get( 'additionalBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/additional' ); ?>

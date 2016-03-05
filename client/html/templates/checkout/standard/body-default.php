@@ -21,6 +21,7 @@ $link = true;
 $stepActive = $this->get( 'standardStepActive', false );
 
 ?>
+<?php $this->block()->start( 'checkout/standard' ); ?>
 <section class="aimeos checkout-standard">
 	<nav>
 		<ol class="steps">
@@ -66,3 +67,5 @@ $stepActive = $this->get( 'standardStepActive', false );
 <?php echo $this->get( 'standardBody' ); ?>
 	</form>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/standard' ); ?>

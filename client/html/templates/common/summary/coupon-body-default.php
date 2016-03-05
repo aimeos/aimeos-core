@@ -13,6 +13,7 @@ if( isset( $this->summaryBasket ) ) {
 }
 
 ?>
+<?php $this->block()->start( 'common/summary/coupon' ); ?>
 <div class="common-summary-coupon container">
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Coupons' ), $enc::TRUST ); ?></h2>
 	<div class="header">
@@ -32,3 +33,5 @@ if( isset( $this->summaryBasket ) ) {
 	</div>
 <?php echo $this->get( 'couponBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'common/summary/coupon' ); ?>

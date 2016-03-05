@@ -34,6 +34,7 @@ $vatFormat = $this->translate( 'client', 'Incl. %1$s%% VAT' );
 
 
 ?>
+<?php $this->block()->start( 'email/watch/text/detail' ); ?>
 
 
 
@@ -53,3 +54,5 @@ $vatFormat = $this->translate( 'client', 'Incl. %1$s%% VAT' );
 
 <?php endforeach; ?>
 <?php echo $this->get( 'detailBody' ); ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/watch/text/detail' ); ?>

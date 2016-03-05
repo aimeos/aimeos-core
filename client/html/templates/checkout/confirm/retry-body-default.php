@@ -16,6 +16,7 @@ $changeUrl = $this->url( $target, $controller, $action, array( 'c_step' => 'paym
 $retryUrl = $this->url( $target, $controller, $action, array( 'c_step' => 'order', 'cs_option_terms' => 1, 'cs_option_terms_value' => 1, 'cs_order' => 1 ), array(), $config );
 
 ?>
+<?php $this->block()->start( 'checkout/confirm/retry' ); ?>
 <div class="checkout-confirm-retry">
 <?php if( isset( $this->confirmOrderItem ) && $this->confirmOrderItem->getPaymentStatus() < \Aimeos\MShop\Order\Item\Base::PAY_REFUND ) : ?>
 	<div class="button-group">
@@ -25,3 +26,5 @@ $retryUrl = $this->url( $target, $controller, $action, array( 'c_step' => 'order
 <?php endif; ?>
 <?php echo $this->get( 'retryBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/confirm/retry' ); ?>

@@ -87,6 +87,7 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'account/watch' ); ?>
 <section class="aimeos account-watch">
 <?php if( ( $errors = $this->get( 'watchErrorList', array() ) ) !== array() ) : ?>
 	<ul class="error-list">
@@ -185,3 +186,5 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php endif; ?>
 <?php echo $this->get( 'watchBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'account/watch' ); ?>

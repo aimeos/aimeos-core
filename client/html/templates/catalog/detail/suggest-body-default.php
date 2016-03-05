@@ -15,6 +15,7 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'catalog/detail/suggest' ); ?>
 <?php if( !empty( $productItems ) || $this->suggestBody != '' ) : ?>
 <section class="catalog-detail-suggest">
 	<h2 class="header"><?php echo $this->translate( 'client', 'Suggested products' ); ?></h2>
@@ -42,3 +43,5 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php echo $this->suggestBody; ?>
 </section>
 <?php endif; ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/suggest' ); ?>

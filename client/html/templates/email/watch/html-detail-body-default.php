@@ -13,6 +13,7 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( 'absoluteUri' => 1 ) );
 
 ?>
+<?php $this->block()->start( 'email/watch/html/detail' ); ?>
 <div class="common-summary-detail common-summary container content-block">
 	<div class="header">
 		<h2><?php echo $enc->html( $this->translate( 'client', 'Details' ), $enc::TRUST ); ?></h2>
@@ -47,3 +48,5 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 	</div>
 <?php echo $this->get( 'detailBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'email/watch/html/detail' ); ?>

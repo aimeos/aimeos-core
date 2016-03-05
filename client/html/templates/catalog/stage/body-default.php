@@ -17,6 +17,7 @@ foreach( (array) $this->get( 'stageCatPath', array() ) as $cat )
 }
 
 ?>
+<?php $this->block()->start( 'catalog/stage' ); ?>
 <section class="aimeos catalog-stage<?php echo $enc->attr( $classes ); ?>">
 <?php if( isset( $this->stageErrorList ) ) : ?>
 	<ul class="error-list">
@@ -27,3 +28,5 @@ foreach( (array) $this->get( 'stageCatPath', array() ) as $cat )
 <?php endif; ?>
 <?php echo $this->get( 'stageBody' ); ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/stage' ); ?>

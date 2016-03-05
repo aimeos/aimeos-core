@@ -14,6 +14,7 @@ $detailAction = $this->config( 'client/html/catalog/detail/url/action', 'detail'
 $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'catalog/detail/bundle' ); ?>
 <?php if( !empty( $productItems ) || $this->bundleBody != '' ) : ?>
 <section class="catalog-detail-bundle">
 	<h2 class="header"><?php echo $this->translate( 'client', 'Bundled products' ); ?></h2>
@@ -41,3 +42,5 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php echo $this->bundleBody; ?>
 </section>
 <?php endif; ?>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/bundle' ); ?>

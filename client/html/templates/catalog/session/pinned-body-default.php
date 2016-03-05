@@ -101,6 +101,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 $count = $this->config( 'client/html/catalog/session/pinned/count/enable', 1 );
 
 ?>
+<?php $this->block()->start( 'catalog/session/pinned' ); ?>
 <section class="catalog-session-pinned">
 	<h2 class="header">
 <?php echo $this->translate( 'client', 'Pinned products' ); ?>
@@ -130,3 +131,5 @@ $count = $this->config( 'client/html/catalog/session/pinned/count/enable', 1 );
 	</ul>
 <?php echo $this->pinnedBody; ?>
 </section>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/session/pinned' ); ?>

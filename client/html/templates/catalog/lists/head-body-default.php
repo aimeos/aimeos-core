@@ -19,7 +19,7 @@ $searchText = $this->param( 'f_search', null );
  * You can add more text types or remove ones that should be displayed by
  * modifying these list of text types, e.g. if you've added a new text type
  * and texts of that type to some or all categories.
- * 
+ *
  * @param array List of text type names
  * @since 2014.03
  * @category User
@@ -28,6 +28,7 @@ $searchText = $this->param( 'f_search', null );
 $textTypes = $this->config( 'client/html/catalog/lists/head/text-types', array( 'short', 'long' ) );
 
 ?>
+<?php $this->block()->start( 'catalog/lists/head' ); ?>
 <div class="catalog-list-head">
 <?php if( ( $catItem = end( $catPath ) ) !== false ) : ?>
 	<div class="imagelist-default">
@@ -54,3 +55,5 @@ $textTypes = $this->config( 'client/html/catalog/lists/head/text-types', array( 
 <?php endif; ?>
 <?php echo $this->get( 'headBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/lists/head' ); ?>

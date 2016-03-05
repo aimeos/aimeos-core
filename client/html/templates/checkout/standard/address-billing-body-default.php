@@ -57,6 +57,7 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 }
 
 ?>
+<?php $this->block()->start( 'checkout/standard/address/billing' ); ?>
 <div class="checkout-standard-address-billing">
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Billing address' ), $enc::TRUST ); ?></h2>
 <?php if( isset( $this->addressPaymentItem )  ) : ?>
@@ -192,3 +193,5 @@ foreach( $this->get( 'billingHidden', array() ) as $name ) {
 <?php endif; ?>
 <?php echo $this->get( 'billingBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'checkout/standard/address/billing' ); ?>

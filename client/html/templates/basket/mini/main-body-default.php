@@ -97,6 +97,7 @@ $basketAction = $this->config( 'client/html/basket/standard/url/action', 'index'
 $basketConfig = $this->config( 'client/html/basket/standard/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'basket/mini/main' ); ?>
 <a href="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 	<div class="basket-mini-main">
 		<span class="quantity"><?php echo $enc->html( sprintf( $this->translate( 'client', '%1$d article', '%1$d articles', $quantity ), $quantity ) ); ?></span>
@@ -104,3 +105,5 @@ $basketConfig = $this->config( 'client/html/basket/standard/url/config', array()
 <?php echo $this->get( 'mainBody' ); ?>
 	</div>
 </a>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'basket/mini/main' ); ?>

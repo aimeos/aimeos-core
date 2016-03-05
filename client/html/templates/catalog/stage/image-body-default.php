@@ -8,9 +8,12 @@
 $enc = $this->encoder();
 
 ?>
+<?php $this->block()->start( 'catalog/stage/image' ); ?>
 <div class="catalog-stage-image">
 <?php foreach( $this->get( 'imageItems', array() ) as $media ) : ?>
 	<img src="<?php echo $this->content( $media->getUrl() ); ?>" alt="<?php echo $enc->attr( $media->getName() ); ?>" />
 <?php endforeach; ?>
 <?php echo $this->get( 'imageBody' ); ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/stage/image' ); ?>

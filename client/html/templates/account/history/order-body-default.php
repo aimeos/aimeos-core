@@ -13,6 +13,7 @@ $accountAction = $this->config( 'client/html/account/history/url/action', 'histo
 $accountConfig = $this->config( 'client/html/account/history/url/config', array() );
 
 ?>
+<?php $this->block()->start( 'account/history/order' ); ?>
 <div class="account-history-order common-summary">
 	<a class="modify minibutton btn-close" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array(), array(), $accountConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', 'X' ), $enc::TRUST ); ?></a>
 	<h2 class="header"><?php echo $enc->html( $this->translate( 'client', 'Order details' ), $enc::TRUST ); ?></h2>
@@ -21,3 +22,5 @@ $accountConfig = $this->config( 'client/html/account/history/url/config', array(
 		<a class="standardbutton btn-close" href="<?php echo $enc->attr( $this->url( $accountTarget, $accountController, $accountAction, array(), array(), $accountConfig ) ); ?>"><?php echo $enc->html( $this->translate( 'client', 'Close' ), $enc::TRUST ); ?></a>
 	</div>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'account/history/order' ); ?>

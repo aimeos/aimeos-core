@@ -30,7 +30,7 @@ $enc = $this->encoder();
  * * %1$s : Shop URL of the product detail page
  * * %2$s : Name of the product
  * * %3$s : URL of the first product image
- * 
+ *
  * @param array List of social network names
  * @since 2014.09
  * @category User
@@ -55,7 +55,7 @@ $urls = array(
 	 * * %1$s : Shop URL of the product detail page
 	 * * %2$s : Name of the product
 	 * * %3$s : URL of the first product image
-	 * 
+	 *
 	 * @param string URL to share products on Facebook
 	 * @since 2014.09
 	 * @category User
@@ -76,7 +76,7 @@ $urls = array(
 	 * * %1$s : Shop URL of the product detail page
 	 * * %2$s : Name of the product
 	 * * %3$s : URL of the first product image
-	 * 
+	 *
 	 * @param string URL to share products on Google Plus
 	 * @since 2014.09
 	 * @category User
@@ -97,7 +97,7 @@ $urls = array(
 	 * * %1$s : Shop URL of the product detail page
 	 * * %2$s : Name of the product
 	 * * %3$s : URL of the first product image
-	 * 
+	 *
 	 * @param string URL to share products on Twitter
 	 * @since 2014.09
 	 * @category User
@@ -112,13 +112,13 @@ $urls = array(
 	 * Users can share product links on Pinterest. This requires a URL defined
 	 * by Pinterest that accepts the transmitted product page URL. This URL must
 	 * contain the "%1$s", "%2$s" and "%3$s" placeholders for the URL to the
-	 * product detail page, the product name and the product image to be useful. 
+	 * product detail page, the product name and the product image to be useful.
 	 *
 	 * Possible placeholders and replaced values are:
 	 * * %1$s : Shop URL of the product detail page
 	 * * %2$s : Name of the product
 	 * * %3$s : URL of the first product image
-	 * 
+	 *
 	 * @param string URL to share products on Pinterest
 	 * @since 2014.09
 	 * @category User
@@ -142,6 +142,7 @@ $images = $this->detailProductItem->getRefItems( 'media', 'default', 'default' )
 $prodImage = ( ( $image = reset( $images ) ) !== false ? $this->content( $image->getUrl() ) : '' );
 
 ?>
+<?php $this->block()->start( 'catalog/detail/seen' ); ?>
 <div class="catalog-detail-social">
 <?php foreach( $list as $entry ) : ?>
 <?php	if( ( $link = $this->config( 'client/html/catalog/detail/social/url/' . $entry, ( isset( $urls[$entry] ) ? $urls[$entry] : null ) ) ) !== null ) : ?>
@@ -151,3 +152,5 @@ $prodImage = ( ( $image = reset( $images ) ) !== false ? $this->content( $image-
 <?php endforeach; ?>
 <?php echo $this->socialBody; ?>
 </div>
+<?php $this->block()->stop(); ?>
+<?php echo $this->block()->get( 'catalog/detail/seen' ); ?>
