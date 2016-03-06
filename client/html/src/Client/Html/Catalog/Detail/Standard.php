@@ -166,7 +166,7 @@ class Standard
 	 * @since 2014.03
 	 * @category Developer
 	 */
-	private $subPartNames = array( 'social', 'image', 'basic', 'actions', 'basket', 'bundle', 'additional', 'suggest', 'bought', 'seen' );
+	private $subPartNames = array( 'image', 'basic', 'basket', 'actions', 'social', 'bundle', 'additional', 'suggest', 'bought', 'seen' );
 
 	private $tags = array();
 	private $expire;
