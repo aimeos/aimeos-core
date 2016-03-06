@@ -1937,7 +1937,7 @@ html.no-js .catalog-filter-attribute:hover .attribute-lists {
 	display: inline-block;
 	vertical-align: top;
 	min-width: 220px;
-	width: 50%;
+	width: 49%;
 }
 
 @media (max-width: 580px) {
