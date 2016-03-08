@@ -314,10 +314,12 @@
 	display: none;
 }
 
-.catalog-filter-tree .catcode-home:before {
+.catalog-filter-tree .catcode-home > a:before {
 	font: normal normal normal 14px/1 FontAwesome;
-	font-size: 125%;
+	font-size: 133%;
 	content: "\f015";
+	color: #B0A060;
+	vertical-align: bottom;
 }
 
 .catalog-filter-tree .media-list {
