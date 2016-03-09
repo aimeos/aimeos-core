@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-12 22:21+0100\n"
-"PO-Revision-Date: 2016-02-12 21:21+0000\n"
+"POT-Creation-Date: 2016-03-09 13:05+0100\n"
+"PO-Revision-Date: 2016-03-09 12:06+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -276,6 +276,9 @@ msgstr "Date"
 
 msgid "Date back"
 msgstr "Date d'origine"
+
+msgid "Default"
+msgstr ""
 
 msgid "Delete"
 msgstr "Supprimer"
@@ -773,6 +776,9 @@ msgstr "Produit : {0} ({1})"
 msgid "Products"
 msgstr "Produits"
 
+msgid "Promotion"
+msgstr ""
+
 msgid "Properties"
 msgstr ""
 
@@ -804,6 +810,9 @@ msgid "Related order ID"
 msgstr "Identifiant de commande liée"
 
 msgid "Remove filter"
+msgstr ""
+
+msgid "Replace file"
 msgstr ""
 
 msgid "Request"

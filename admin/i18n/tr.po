@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-12 22:21+0100\n"
-"PO-Revision-Date: 2016-02-12 21:21+0000\n"
+"POT-Creation-Date: 2016-03-09 13:05+0100\n"
+"PO-Revision-Date: 2016-03-09 12:06+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -119,7 +119,7 @@ msgid "Available texts"
 msgstr "Mevcut metinler"
 
 msgid "Back in stock"
-msgstr "Stoktlarda"
+msgstr "Stoğa gireceği tarih"
 
 msgid "Base ID"
 msgstr "Baz ID"
@@ -277,6 +277,9 @@ msgstr "Tarih"
 msgid "Date back"
 msgstr "Stoğa gireceği tarih"
 
+msgid "Default"
+msgstr ""
+
 msgid "Delete"
 msgstr "Sil"
 
@@ -305,7 +308,7 @@ msgid "Domain (required)"
 msgstr "Domain (gerekli)"
 
 msgid "Download"
-msgstr ""
+msgstr "İndir"
 
 msgid "E-Mail"
 msgstr "E-Posta"
@@ -347,7 +350,7 @@ msgid "Facsimile number, e.g. +155512345"
 msgstr "Faks numarası, örn. +155512345"
 
 msgid "File"
-msgstr ""
+msgstr "Dosya"
 
 msgid "File URL"
 msgstr "Dosya URL'si"
@@ -629,7 +632,7 @@ msgid "Password (required)"
 msgstr "Şifre (gerekli)"
 
 msgid "Path"
-msgstr ""
+msgstr "Yol"
 
 msgid "Payment date"
 msgstr "Ödeme tarihi"
@@ -773,6 +776,9 @@ msgstr "Ürün: {0} ({1})"
 msgid "Products"
 msgstr "Ürünler"
 
+msgid "Promotion"
+msgstr ""
+
 msgid "Properties"
 msgstr "Özellikler"
 
@@ -805,6 +811,9 @@ msgstr "İlgili sipariş ID"
 
 msgid "Remove filter"
 msgstr "Filtreyi kaldır"
+
+msgid "Replace file"
+msgstr ""
 
 msgid "Request"
 msgstr "Talep"
@@ -876,7 +885,7 @@ msgid "Site"
 msgstr "Site"
 
 msgid "Size"
-msgstr ""
+msgstr "Boyut"
 
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Maalesef manuel olarak sipariş ekleme henüz uygulanmamaktadır"
@@ -1017,7 +1026,7 @@ msgid "Upload successful"
 msgstr "Yükleme başarılı"
 
 msgid "Uploaded"
-msgstr ""
+msgstr "Yüklendi"
 
 msgid "Used by"
 msgstr "Tarafından kullanılan"
