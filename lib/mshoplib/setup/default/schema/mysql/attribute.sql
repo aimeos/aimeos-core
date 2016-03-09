@@ -59,7 +59,7 @@ CREATE TABLE "mshop_attribute" (
 	-- domain the attributes belongs to
 	"domain" VARCHAR(32) NOT NULL,
 	-- code
-	"code" VARCHAR(32) NOT NULL COLLATE utf8_bin,
+	"code" VARCHAR(255) NOT NULL COLLATE utf8_bin,
 	-- label
 	"label" VARCHAR(255) NOT NULL,
 	-- position
