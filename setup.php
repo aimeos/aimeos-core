@@ -15,40 +15,15 @@ ini_set( 'display_errors', 1 );
 date_default_timezone_set( 'UTC' );
 
 
-function setup_autoload( $classname )
+
+/**
+ * Returns the command options given by the user
+ *
+ * @param array $params List of parameters
+ * @return array Associative list of option name and value(s)
+ */
+function getOptions( array $params )
 {
-	if( strncmp( $classname, 'Aimeos\\MW\\Setup\\Task\\', 21 ) === 0 )
-	{
-		$fileName = substr( $classname, 21 ) . '.php';
-		$paths = explode( PATH_SEPARATOR, get_include_path() );
-
-		foreach( $paths as $path )
-		{
-			$file = $path . DIRECTORY_SEPARATOR . $fileName;
-
-			if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
-
-
-function usage()
-{
-	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>|<file>]* [--option=key:value]* [sitecode] [tplsite]\n" );
-	exit ( 1 );
-}
-
-
-$exectimeStart = microtime( true );
-
-try
-{
-	$params = $_SERVER['argv'];
-	array_shift( $params );
 	$options = array();
 
 	foreach( $params as $key => $option )
@@ -81,34 +56,20 @@ try
 		}
 	}
 
-	if( ( $site = array_shift( $params ) ) === null ) {
-		$site = 'default';
-	}
-
-	if( ( $tplsite = array_shift( $params ) ) === null ) {
-		$tplsite = 'default';
-	}
-
-	spl_autoload_register( 'setup_autoload' );
-
-	require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-
-	$aimeos = new \Aimeos\Bootstrap( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
+	return $options;
+}
 
 
-	$taskPaths = $aimeos->getSetupPaths( $tplsite );
-
-	$includePaths = $taskPaths;
-	$includePaths[] = get_include_path();
-
-	if( set_include_path( implode( PATH_SEPARATOR, $includePaths ) ) === false ) {
-		throw new \Exception( 'Unable to extend include path' );
-	}
-
-	$ctx = new \Aimeos\MShop\Context\Item\Standard();
-
+/**
+ * Returns a new configuration object
+ *
+ * @param array $confPaths List of configuration paths from the bootstrap object
+ * @param array $options Associative list of configuration options as key/value pairs
+ * @return \Aimeos\MW\Config\Iface Configuration object
+ */
+function getConfig( array $confPaths, array $options )
+{
 	$config = array();
-	$confPaths = $aimeos->getConfigPaths();
 
 	if( isset( $options['config'] ) )
 	{
@@ -124,9 +85,6 @@ try
 
 	$conf = new \Aimeos\MW\Config\PHPArray( $config, $confPaths );
 	$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
-	$ctx->setConfig( $conf );
-
-	$conf->set( 'setup/site', $site );
 
 	if( isset( $options['option'] ) )
 	{
@@ -144,16 +102,21 @@ try
 		}
 	}
 
-	$dbconfig = $conf->get( 'resource', array() );
+	return $conf;
+}
 
-	foreach( $dbconfig as $rname => $dbconf )
-	{
-		if( strncmp( $rname, 'db', 2 ) !== 0 ) {
-			unset( $dbconfig[$rname] );
-		} else {
-			$conf->set( "resource/$rname/limit", 2 );
-		}
-	}
+
+/**
+ * Returns a new context object
+ *
+ * @param array $confPaths List of configuration paths from the bootstrap object
+ * @param array $options Associative list of configuration options as key/value pairs
+ * @return \Aimeos\MW\Config\Iface Configuration object
+ */
+function getContext( \Aimeos\MW\Config\Iface $conf )
+{
+	$ctx = new \Aimeos\MShop\Context\Item\Standard();
+	$ctx->setConfig( $conf );
 
 	$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 	$ctx->setDatabaseManager( $dbm );
@@ -166,6 +129,121 @@ try
 
 	$cache = new \Aimeos\MW\Cache\None();
 	$ctx->setCache( $cache );
+
+	return $ctx;
+}
+
+
+/**
+ * Returns the fixed and cleaned up database configuration
+ *
+ * @param \Aimeos\MW\Config\Iface $conf Configuration object
+ * @return array Updated database configuration
+ */
+function getDbConfig( \Aimeos\MW\Config\Iface $conf )
+{
+	$dbconfig = $conf->get( 'resource', array() );
+
+	foreach( $dbconfig as $rname => $dbconf )
+	{
+		if( strncmp( $rname, 'db', 2 ) !== 0 ) {
+			unset( $dbconfig[$rname] );
+		} else {
+			$conf->set( "resource/$rname/limit", 2 );
+		}
+	}
+
+	return $dbconfig;
+}
+
+
+/**
+ * Sets the required include paths
+ *
+ * @param array $taskPaths List of setup task paths
+ * @throws \Exception If modifying the include path isn't allowed
+ */
+function setIncludePaths( array $taskPaths )
+{
+	$taskPaths[] = get_include_path();
+
+	if( set_include_path( implode( PATH_SEPARATOR, $taskPaths ) ) === false ) {
+		throw new \Exception( 'Unable to extend include path' );
+	}
+}
+
+
+/**
+ * Autoloader for setup tasks
+ *
+ * @param string $classname Class name including namespace
+ * @return boolean True if class was found, false if not
+ */
+function setupAutoload( $classname )
+{
+	if( strncmp( $classname, 'Aimeos\\MW\\Setup\\Task\\', 21 ) === 0 )
+	{
+		$fileName = substr( $classname, 21 ) . '.php';
+		$paths = explode( PATH_SEPARATOR, get_include_path() );
+
+		foreach( $paths as $path )
+		{
+			$file = $path . DIRECTORY_SEPARATOR . $fileName;
+
+			if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+
+
+/**
+ * Prints the command usage and options, exits the program after printing
+ */
+function usage()
+{
+	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>|<file>]* [--option=key:value]* [sitecode] [tplsite]\n" );
+	exit ( 1 );
+}
+
+
+
+$exectimeStart = microtime( true );
+
+try
+{
+	$params = $_SERVER['argv'];
+	array_shift( $params );
+
+	$options = getOptions( $params );
+
+	if( ( $site = array_shift( $params ) ) === null ) {
+		$site = 'default';
+	}
+
+	if( ( $tplsite = array_shift( $params ) ) === null ) {
+		$tplsite = 'default';
+	}
+
+
+	spl_autoload_register( 'setupAutoload' );
+	require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+
+	$aimeos = new \Aimeos\Bootstrap( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
+
+	$taskPaths = $aimeos->getSetupPaths( $tplsite );
+	setIncludePaths( $taskPaths );
+
+	$conf = getConfig( $aimeos->getConfigPaths(), $options );
+	$conf->set( 'setup/site', $site );
+	$dbconfig = getDbConfig( $conf );
+
+	$ctx = getContext( $conf );
+	$dbm = $ctx->getDatabaseManager();
 
 	$manager = new \Aimeos\MW\Setup\Manager\Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
 	$manager->run( 'mysql' );
