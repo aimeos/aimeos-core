@@ -48,7 +48,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 				</div>
 				<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 					<div class="stock" data-prodid="<?php echo $id; ?>"></div>
-					<div class="price-list" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+					<div class="price-list">
 <?php		echo $this->partial( $this->config( 'client/html/common/partials/price', 'common/partials/price-default.php' ), array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 					</div>
 				</div>

@@ -25,7 +25,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 <?php		$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
 <?php		if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>
 <?php			$mediaUrl = $enc->attr( $this->content( $mediaItem->getPreview() ) ); ?>
-				<div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')">
+				<div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')" itemscope="" itemtype="http://schema.org/ImageObject">
 					<meta itemprop="contentUrl" content="<?php echo $mediaUrl; ?>" />
 				</div>
 <?php		else : ?>

@@ -44,7 +44,7 @@ $notax = $this->translate( 'client', '+ %1$s%% VAT' )
 	$currency = $this->translate( 'client/currency', $priceItem->getCurrencyId() );
 	$taxformat = ( $priceItem->getTaxFlag() ? $withtax : $notax );
 ?>
-<div class="price-item <?php echo $enc->attr( $priceItem->getType() ); ?>" itemscope="" itemtype="http://schema.org/PriceSpecification">
+<div class="price-item <?php echo $enc->attr( $priceItem->getType() ); ?>" itemprop="priceSpecification" itemscope="" itemtype="http://schema.org/PriceSpecification">
 	<meta itemprop="priceCurrency" content="<?php echo $priceItem->getCurrencyId(); ?>" />
 	<span class="quantity" itemscope="" itemtype="http://schema.org/QuantitativeValue"><span itemprop="minValue" ><?php echo $enc->html( sprintf( $format['quantity'], $priceItem->getQuantity() ), $enc::TRUST ); ?></span></span>
 	<span class="value" itemprop="price"><?php echo $enc->html( sprintf( $format['value'], $this->number( $priceItem->getValue() ), $currency ), $enc::TRUST ); ?></span>
