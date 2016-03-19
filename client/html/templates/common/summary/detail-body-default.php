@@ -195,7 +195,7 @@ $backParams = $this->get( 'summaryParams', array() );
 				<tr class="product <?php echo ( isset( $errors['product'][$position] ) ? 'error' : '' ); ?>">
 					<td class="details">
 <?php		if( ( $url = $product->getMediaUrl() ) != '' ) : ?>
-						<img src="<?php echo $this->content( $url ); ?>" />
+						<img src="<?php echo $enc->attr( $this->content( $url ) ); ?>" />
 <?php		endif; ?>
 <?php		$params = array( 'd_prodid' => $product->getProductId(), 'd_name' => $product->getName( 'url' ) ); ?>
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">

@@ -26,9 +26,9 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php			$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
 <?php			if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>
-<?php				$previewUrl = $enc->attr( $this->content( $mediaItem->getPreview() ) ); ?>
-				<div class="media-item" style="background-image: url('<?php echo $previewUrl; ?>')">
-					<meta itemprop="contentUrl" content="<?php echo $previewUrl; ?>" />
+<?php				$mediaUrl = $enc->attr( $this->content( $mediaItem->getPreview() ) ); ?>
+				<div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')">
+					<meta itemprop="contentUrl" content="<?php echo $mediaUrl; ?>" />
 				</div>
 <?php			else : ?>
 				<div class="media-item"></div>

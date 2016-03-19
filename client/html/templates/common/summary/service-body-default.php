@@ -23,7 +23,7 @@ $errors = $this->get( 'summaryErrorCodes', array() );
 		<div class="item">
 <?php	if( ( $url = $service->getMediaUrl() ) != '' ) : ?>
 			<div class="item-icons">
-				<img src="<?php echo $this->content( $url ); ?>" />
+				<img src="<?php echo $enc->attr( $this->content( $url ) ); ?>" />
 			</div>
 <?php	endif; ?>
 			<h4><?php echo $enc->html( $service->getName() ); ?></h4>
