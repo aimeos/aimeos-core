@@ -99,13 +99,17 @@ $reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
 			'attributeHiddenItems' => $productItem->getRefItems( 'attribute', null, 'hidden' ),
 		);
 ?>
---><li class="product <?php echo $enc->attr( $css ); ?>" data-reqstock="<?php echo $reqstock; ?>">
+--><li class="product <?php echo $enc->attr( $css ); ?>" data-reqstock="<?php echo $reqstock; ?>" itemscope="" itemtype="http://schema.org/Product">
 		<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 			<div class="media-list">
 <?php	foreach( $productItem->getRefItems( 'media', 'default', 'default' ) as $mediaItem ) : ?>
-<?php		$mediaUrl = $this->content( $mediaItem->getPreview() ); ?>
+<?php		$mediaUrl = $enc->attr( $this->content( $mediaItem->getPreview() ) ); ?>
 <?php		if( $firstImage === true ) : $firstImage = false; ?>
-				<noscript><div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')"></div></noscript>
+				<noscript>
+					<div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')" itemscope="" itemtype="http://schema.org/ImageObject">
+						<meta itemprop="contentUrl" content="<?php echo $mediaUrl; ?>" />
+					</div>
+				</noscript>
 				<div class="media-item lazy-image" data-src="<?php echo $mediaUrl; ?>"></div>
 <?php		else : ?>
 				<div class="media-item" data-src="<?php echo $mediaUrl; ?>"></div>
@@ -113,17 +117,19 @@ $reqstock = (int) $this->config( 'client/html/basket/require-stock', true );
 <?php	endforeach; ?>
 			</div>
 			<div class="text-list">
-				<h2><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h2>
+				<h2 itemprop="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h2>
 <?php	foreach( $productItem->getRefItems( 'text', 'short', 'default' ) as $textItem ) : ?>
-				<div class="text-item">
+				<div class="text-item" itemprop="description">
 <?php		echo $enc->html( $textItem->getContent(), $enc::TRUST ); ?><br/>
 				</div>
 <?php	endforeach; ?>
 			</div>
 		</a>
-		<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', array_merge( array( $id ), array_keys( $subProducts ) ) ) ); ?>"></div>
-		<div class="price-list price price-actual">
+		<div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+			<div class="stock" data-prodid="<?php echo $enc->attr( implode( ' ', array_merge( array( $id ), array_keys( $subProducts ) ) ) ); ?>"></div>
+			<div class="price-list price price-actual">
 <?php	echo $this->partial( $this->config( 'client/html/common/partials/price', 'common/partials/price-default.php' ), array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
+			</div>
 		</div>
 <?php	if( $this->config( 'client/html/catalog/lists/basket-add', false ) ) : ?>
 		<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">

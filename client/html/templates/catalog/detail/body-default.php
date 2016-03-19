@@ -17,7 +17,7 @@ if( isset( $this->detailProductItem ) )
 
 ?>
 <?php $this->block()->start( 'catalog/detail' ); ?>
-<section class="aimeos catalog-detail">
+<section class="aimeos catalog-detail" itemscope="" itemtype="http://schema.org/Product">
 <?php if( isset( $this->detailErrorList ) ) : ?>
 	<ul class="error-list">
 <?php foreach( (array) $this->detailErrorList as $errmsg ) : ?>

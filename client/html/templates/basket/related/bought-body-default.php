@@ -19,17 +19,20 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array() 
 	<h2 class="header"><?php echo $this->translate( 'client', 'Products you might be also interested in' ); ?></h2>
 	<ul class="bought-items">
 <?php	foreach( $productItems as $id => $productItem ) : ?>
-		<li class="bought-item">
+		<li class="bought-item" itemscope="" itemtype="http://schema.org/Product">
 <?php		$params = array( 'd_name' => $productItem->getName( 'url' ), 'd_prodid' => $productItem->getId() ); ?>
 			<a href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php		$mediaItems = $productItem->getRefItems( 'media', 'default', 'default' ); ?>
 <?php		if( ( $mediaItem = reset( $mediaItems ) ) !== false ) : ?>
-				<div class="media-item" style="background-image: url('<?php echo $this->content( $mediaItem->getPreview() ); ?>')"></div>
+<?php			$mediaUrl = $enc->attr( $this->content( $mediaItem->getPreview() ) ); ?>
+				<div class="media-item" style="background-image: url('<?php echo $mediaUrl; ?>')">
+					<meta itemprop="contentUrl" content="<?php echo $mediaUrl; ?>" />
+				</div>
 <?php		else : ?>
 				<div class="media-item"></div>
 <?php		endif; ?>
-				<h3 class="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
-				<div class="price-list">
+				<h3 class="name" itemprop="name"><?php echo $enc->html( $productItem->getName(), $enc::TRUST ); ?></h3>
+				<div class="price-list" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 <?php		echo $this->partial( $this->config( 'client/html/common/partials/price', 'common/partials/price-default.php' ), array( 'prices' => $productItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 				</div>
 			</a>

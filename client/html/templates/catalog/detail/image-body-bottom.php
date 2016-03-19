@@ -91,7 +91,8 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 		<div class="thumbs">
 <?php	if( count( $mediaItems ) > 1 ) : $class = 'item selected'; ?>
 <?php		foreach( $mediaItems as $id => $mediaItem ) : ?>
-			<a href="<?php echo $url . '#image-' . $id; ?>" class="<?php echo $class; ?>" style="background-image: url('<?php echo $this->content( $mediaItem->getPreview() ); ?>')"></a>
+<?php 			$previewUrl = $enc->attr( $this->content( $mediaItem->getPreview() ) ); ?>
+			<a href="<?php echo $url . '#image-' . $id; ?>" class="<?php echo $class; ?>" style="background-image: url('<?php echo $previewUrl; ?>')"></a>
 <?php			$class = 'item'; ?>
 <?php		endforeach; ?>
 <?php	endif; ?>
@@ -101,11 +102,13 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 	--><div class="image-single">
 		<div class="carousel">
 <?php foreach( $mediaItems as $id => $mediaItem ) : ?>
-<?php	$url = $this->content( $mediaItem->getUrl() ); ?>
+<?php	$mediaUrl = $enc->attr( $this->content( $mediaItem->getUrl() ) ); ?>
 			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item"
-				style="background-image: url('<?php echo $url; ?>')"
-				data-image="<?php echo $url; ?>"
-				data-zoom-image="<?php echo $url; ?>">
+				style="background-image: url('<?php echo $mediaUrl; ?>')"
+				data-image="<?php echo $mediaUrl; ?>"
+				data-zoom-image="<?php echo $mediaUrl; ?>"
+				itemscope="" itemtype="http://schema.org/ImageObject">
+				<meta itemprop="contentUrl" content="<?php echo $mediaUrl; ?>" />
 			</div>
 <?php endforeach; ?>
 		</div>

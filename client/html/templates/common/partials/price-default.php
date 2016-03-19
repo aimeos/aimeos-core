@@ -44,9 +44,10 @@ $notax = $this->translate( 'client', '+ %1$s%% VAT' )
 	$currency = $this->translate( 'client/currency', $priceItem->getCurrencyId() );
 	$taxformat = ( $priceItem->getTaxFlag() ? $withtax : $notax );
 ?>
-<div class="price-item <?php echo $enc->attr( $priceItem->getType() ); ?>">
-	<span class="quantity"><?php echo $enc->html( sprintf( $format['quantity'], $priceItem->getQuantity() ), $enc::TRUST ); ?></span>
-	<span class="value"><?php echo $enc->html( sprintf( $format['value'], $this->number( $priceItem->getValue() ), $currency ), $enc::TRUST ); ?></span>
+<div class="price-item <?php echo $enc->attr( $priceItem->getType() ); ?>" itemscope="" itemtype="http://schema.org/PriceSpecification">
+	<meta itemprop="priceCurrency" content="<?php echo $priceItem->getCurrencyId(); ?>" />
+	<span class="quantity" itemscope="" itemtype="http://schema.org/QuantitativeValue"><span itemprop="minValue" ><?php echo $enc->html( sprintf( $format['quantity'], $priceItem->getQuantity() ), $enc::TRUST ); ?></span></span>
+	<span class="value" itemprop="price"><?php echo $enc->html( sprintf( $format['value'], $this->number( $priceItem->getValue() ), $currency ), $enc::TRUST ); ?></span>
 <?php if( $rebate > 0 ) : ?>
 	<span class="rebate"><?php echo $enc->html( sprintf( $format['rebate'], $this->number( $rebate ), $currency ), $enc::TRUST ); ?></span>
 	<span class="rebatepercent"><?php echo $enc->html( sprintf( $format['rebate%'], $this->number( round( $rebate * 100 / ( $priceItem->getValue() + $rebate ) ), 0 ) ), $enc::TRUST ); ?></span>
@@ -55,5 +56,6 @@ $notax = $this->translate( 'client', '+ %1$s%% VAT' )
 	<span class="costs"><?php echo $enc->html( sprintf( $format['costs'], $this->number( $costs ), $currency ), $enc::TRUST ); ?></span>
 <?php endif; ?>
 	<span class="taxrate"><?php echo $enc->html( sprintf( $taxformat, $this->number( $priceItem->getTaxrate() ) ), $enc::TRUST ); ?></span>
+	<meta itemprop="valueAddedTaxIncluded" content="<?php echo ( $priceItem->getTaxFlag() ? 'true' : 'false' ); ?>" />
 </div>
 <?php endforeach; ?>

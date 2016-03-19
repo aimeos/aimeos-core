@@ -81,13 +81,13 @@ foreach( $stockProductIds as $prodId )
 		$stocklevel = $item->getStockLevel();
 
 		if( $stocklevel === null ) {
-			$level = 'stock-unlimited';
+			$level = 'stock-unlimited'; $link = 'http://schema.org/InStock';
 		} elseif( $stocklevel <= 0 ) {
-			$level = 'stock-out';
+			$level = 'stock-out'; $link = 'http://schema.org/OutOfStock';
 		} elseif( $stocklevel <= $stockLow ) {
-			$level = 'stock-low';
+			$level = 'stock-low'; $link = 'http://schema.org/LimitedAvailability';
 		} else {
-			$level = 'stock-high';
+			$level = 'stock-high'; $link = 'http://schema.org/InStock';
 		}
 
 		if( $stocklevel <= 0 && ( $date = $item->getDateBack() ) != '' )
@@ -107,7 +107,11 @@ foreach( $stockProductIds as $prodId )
 		}
 
 		$text = nl2br( $enc->html( $text, $enc::TRUST ) );
-		$stocks[$level] .= '<div class="stockitem stock-prodid-' . $enc->attr( $prodId ) . ' ' . $level . '" title="' . $enc->attr( $textStock[$level] ) . '"><div class="stocklevel"></div><span class="stocktext">' . $text . '</span></div>';
+		$stocks[$level] .= '<div class="stockitem stock-prodid-' . $enc->attr( $prodId ) . ' ' . $level . '" title="' . $enc->attr( $textStock[$level] ) . '">
+	<link itemprop="availability" href="' . $link . '" />
+	<div class="stocklevel"></div>
+	<span class="stocktext">' . $text . '</span>
+</div>';
 	}
 
 	$result[$prodId] = implode( '', $stocks );

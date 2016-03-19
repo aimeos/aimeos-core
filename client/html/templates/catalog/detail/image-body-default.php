@@ -88,11 +88,13 @@ $url = $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, 
 	<div class="image-single">
 		<div class="carousel">
 <?php foreach( $mediaItems as $id => $mediaItem ) : ?>
-<?php	$previewUrl = $this->content( $mediaItem->getPreview() ); ?>
+<?php	$mediaUrl = $enc->attr( $this->content( $mediaItem->getUrl() ) ); ?>
 			<div id="image-<?php echo $enc->attr( $id ); ?>" class="item"
-				style="background-image: url('<?php echo $previewUrl; ?>')"
-				data-image="<?php echo $previewUrl; ?>"
-				data-zoom-image="<?php echo $this->content( $mediaItem->getUrl() ); ?>">
+				style="background-image: url('<?php echo $mediaUrl; ?>')"
+				data-image="<?php echo $mediaUrl; ?>"
+				data-zoom-image="<?php echo $mediaUrl; ?>"
+				itemscope="" itemtype="http://schema.org/ImageObject">
+				<meta itemprop="contentUrl" content="<?php echo $mediaUrl; ?>" />
 			</div>
 <?php endforeach; ?>
 		</div>
