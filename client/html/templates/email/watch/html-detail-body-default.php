@@ -31,7 +31,7 @@ $detailConfig = $this->config( 'client/html/catalog/detail/url/config', array( '
 					<td class="details">
 <?php	$media = $product->getRefItems( 'media', 'default', 'default' ); ?>
 <?php	if( ( $image = reset( $media ) ) !== false && ( $url = $image->getPreview() ) != '' ) : ?>
-						<img src="<?php echo $enc->attr( $this->content( $url ) ; ?>" />
+						<img src="<?php echo $enc->attr( $this->content( $url ) ); ?>" />
 <?php	endif; ?>
 <?php	$params = array( 'd_prodid' => $product->getId(), 'd_name' => $product->getName( 'url' ) ); ?>
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">

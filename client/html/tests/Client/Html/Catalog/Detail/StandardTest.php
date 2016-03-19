@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expire = null;
 		$output = $this->object->getBody( 1, $tags, $expire );
 
-		$this->assertStringStartsWith( '<section class="aimeos catalog-detail">', $output );
+		$this->assertStringStartsWith( '<section class="aimeos catalog-detail"', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
 		$this->assertEquals( 5, count( $tags ) );
 	}
@@ -105,7 +105,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$output = $this->object->getBody();
 
-		$this->assertContains( '<span class="value">CNC</span>', $output );
+		$this->assertContains( '<span class="value" itemprop="sku">CNC</span>', $output );
 	}
 
 
