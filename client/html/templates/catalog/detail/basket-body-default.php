@@ -15,7 +15,7 @@ $enc = $this->encoder();
 
 ?>
 <?php $this->block()->start( 'catalog/detail/basket' ); ?>
-<div class="catalog-detail-basket" data-reqstock="<?php echo $reqstock; ?>">
+<div class="catalog-detail-basket" data-reqstock="<?php echo $reqstock; ?>" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 <?php if( isset( $this->detailProductItem ) ) : ?>
 	<div class="price price-main price-actual price-prodid-<?php echo $this->detailProductItem->getId(); ?>">
 <?php	echo $this->partial( $this->config( 'client/html/common/partials/price', 'common/partials/price-default.php' ), array( 'prices' => $this->detailProductItem->getRefItems( 'price', null, 'default' ) ) ); ?>
