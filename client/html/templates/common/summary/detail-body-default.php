@@ -201,6 +201,20 @@ $backParams = $this->get( 'summaryParams', array() );
 						<a class="product-name" href="<?php echo $enc->attr( $this->url( $detailTarget, $detailController, $detailAction, $params, array(), $detailConfig ) ); ?>">
 <?php		echo $enc->html( $product->getName(), $enc::TRUST ); ?>
 						</a>
+
+						<p class="code">
+							<span class="name">
+<?php
+								echo $enc->html( $this->translate('client', 'Product code:'), $enc::TRUST);
+?>
+							</span>
+							<span class="value">
+<?php
+								echo $product->getProductCode();
+								//var_dump($product);
+?>
+							</span>
+						</p>
 <?php		foreach( $attrTypes as $attrType ) : ?>
 						<ul class="attr-list <?php echo $enc->attr( 'attr-list-' . $attrType ); ?>">
 <?php			foreach( $product->getAttributes( $attrType ) as $attribute ) : ?>
