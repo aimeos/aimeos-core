@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetBody()
 	{
 		$ds = DIRECTORY_SEPARATOR;
-		$file = '..' . $ds . 'themes' . $ds . 'classic' . $ds . 'media' . $ds . 'aimeos.png';
+		$file = '..' . $ds . 'themes' . $ds . 'elegance' . $ds . 'media' . $ds . 'aimeos.png';
 		$this->context->getConfig()->set( 'client/html/email/logo', $file );
 
 		$this->emailMock->expects( $this->once() )->method( 'embedAttachment' )
