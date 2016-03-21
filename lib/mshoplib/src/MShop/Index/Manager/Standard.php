@@ -124,23 +124,11 @@ class Standard
 		$list = parent::getSearchAttributes( $withsub );
 
 		/** mshop/index/manager/standard/submanagers
-		 * List of manager names that can be instantiated by the index manager
+		 * Replaced by mshop/index/manager/submanagers since 2016.01
 		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2014.03
-		 * @category Developer
+		 * @see mshop/index/manager/standard/submanagers
 		 */
-		$path = 'mshop/index/manager/standard/submanagers';
+		$path = 'mshop/index/manager/submanagers';
 		$default = array( 'price', 'catalog', 'attribute', 'text' );
 
 		$list += $this->getSearchAttributesBase( array(), $path, $default, $withsub );
@@ -364,7 +352,7 @@ class Standard
 		 * @see mshop/index/manager/standard/domains
 		 * @see mshop/index/manager/standard/index
 		 * @see mshop/index/manager/standard/subdomains
-		 * @see mshop/index/manager/standard/submanagers
+		 * @see mshop/index/manager/submanagers
 		 */
 		$size = $config->get( 'mshop/index/manager/standard/chunksize', 1000 );
 
@@ -388,7 +376,7 @@ class Standard
 		 * @see mshop/index/manager/standard/chunksize
 		 * @see mshop/index/manager/standard/domains
 		 * @see mshop/index/manager/standard/subdomains
-		 * @see mshop/index/manager/standard/submanagers
+		 * @see mshop/index/manager/submanagers
 		 */
 		$mode = $config->get( 'mshop/index/manager/standard/index', 'categorized' );
 
@@ -411,7 +399,7 @@ class Standard
 		 * @see mshop/index/manager/standard/chunksize
 		 * @see mshop/index/manager/standard/index
 		 * @see mshop/index/manager/standard/subdomains
-		 * @see mshop/index/manager/standard/submanagers
+		 * @see mshop/index/manager/submanagers
 		 */
 		$default = array( 'attribute', 'price', 'text', 'product' );
 		$domains = $config->get( 'mshop/index/manager/standard/domains', $default );
@@ -718,7 +706,7 @@ class Standard
 		 * @see mshop/index/manager/standard/chunksize
 		 * @see mshop/index/manager/standard/domains
 		 * @see mshop/index/manager/standard/index
-		 * @see mshop/index/manager/standard/submanagers
+		 * @see mshop/index/manager/submanagers
 		 */
 		// Including "text" and "price" messes up the sortation
 		$default = array( 'attribute', 'product' );
