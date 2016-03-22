@@ -74,14 +74,14 @@ MShop.panel.text.ItemPickerUi = Ext.extend(MShop.panel.AbstractListItemPickerUi,
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
                 header : MShop.I18n.dt('admin', 'Label'),
-                id : 'reflabel',
+                id : 'refcontent',
                 renderer : this.refColumnRenderer.createDelegate(this, ['text.label'], true)
             },
             {
                 xtype : 'gridcolumn',
                 dataIndex : conf.listNamePrefix + 'refid',
                 header : MShop.I18n.dt('admin', 'Content'),
-                id : 'refcontent',
+                id : 'reftext',
                 hidden : true,
                 renderer : this.refColumnRenderer.createDelegate(this, ['text.content'], true)
             }];
