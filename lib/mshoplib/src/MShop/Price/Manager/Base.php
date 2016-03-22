@@ -44,7 +44,10 @@ abstract class Base
 				continue;
 			}
 
-			$priceList[$priceItem->getQuantity()] = $priceItem;
+			$qty = $priceItem->getQuantity();
+			if( !isset( $priceList[$qty] ) || $priceList[$qty]->getValue() > $priceItem->getValue() ) {
+				$priceList[$qty] = $priceItem;
+			}
 		}
 
 		ksort( $priceList );

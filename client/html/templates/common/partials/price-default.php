@@ -7,10 +7,19 @@
 
 $enc = $this->encoder();
 $iface = '\Aimeos\MShop\Price\Item\Iface';
-$prices = $this->get( 'prices', array() );
+$priceItems = $this->get( 'prices', array() );
+$prices = array();
 
-if( !is_array( $prices ) ) {
-	$prices = array( $prices );
+if( !is_array( $priceItems ) ) {
+	$priceItems = array( $priceItems );
+}
+
+foreach( $priceItems as $priceItem )
+{
+	$qty = $priceItem->getQuantity();
+	if( !isset( $prices[$qty] ) || $prices[$qty]->getValue() > $priceItem->getValue() ) {
+		$prices[$qty] = $priceItem;
+	}
 }
 
 $format = array(
