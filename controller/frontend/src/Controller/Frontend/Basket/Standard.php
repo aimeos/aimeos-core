@@ -954,7 +954,7 @@ class Standard
 
 
 	/**
-	 * Retrieves the product item specified by the given code.
+	 * Retrieves the domain item specified by the given key and value.
 	 *
 	 * @param string $domain Product manager search key
 	 * @param string $key Domain manager search key
