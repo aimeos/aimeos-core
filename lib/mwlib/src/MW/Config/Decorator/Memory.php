@@ -65,7 +65,7 @@ class Memory
 
 		if( is_array( $value ) && is_array( $local ) ) {
 			$value = array_replace_recursive( $value, $local );
-		} else {
+		} elseif( $local !== null ) {
 			$value = $local;
 		}
 
