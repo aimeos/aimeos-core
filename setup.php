@@ -19,10 +19,10 @@ date_default_timezone_set( 'UTC' );
 /**
  * Returns the command options given by the user
  *
- * @param array $params List of parameters
+ * @param array &$params List of parameters
  * @return array Associative list of option name and value(s)
  */
-function getOptions( array $params )
+function getOptions( array &$params )
 {
 	$options = array();
 
