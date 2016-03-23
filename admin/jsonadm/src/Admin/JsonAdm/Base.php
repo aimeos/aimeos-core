@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JsonAdm;
 /**
  * JSON API common client
  *
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 class Base
@@ -835,7 +835,7 @@ class Base
 	/**
 	 * Returns the path to the client
 	 *
-	 * @return string Controller path, e.g. "product/stock"
+	 * @return string Client path, e.g. "product/stock"
 	 */
 	protected function getPath()
 	{

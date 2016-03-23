@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JsonAdm\Common\Factory;
 /**
  * Common methods for all JSON API factories
  *
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 class Base
@@ -25,13 +25,13 @@ class Base
 	/**
 	 * Injects a client object
 	 *
-	 * The object is returned via createController() if an instance of the class
+	 * The object is returned via createClient() if an instance of the class
 	 * with the name name is requested.
 	 *
 	 * @param string $classname Full name of the class for which the object should be returned
 	 * @param \Aimeos\Admin\JsonAdm\Iface|null $client JSON API client object
 	 */
-	public static function injectController( $classname, \Aimeos\Admin\JsonAdm\Iface $client = null )
+	public static function injectClient( $classname, \Aimeos\Admin\JsonAdm\Iface $client = null )
 	{
 		self::$objects[$classname] = $client;
 	}
@@ -40,14 +40,14 @@ class Base
 	/**
 	 * Adds the decorators to the JSON API client object
 	 *
-	 * @param \Aimeos\Admin\JsonAdm\Common\Iface $client Controller object
+	 * @param \Aimeos\Admin\JsonAdm\Common\Iface $client Client object
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the client separated by slashes, e.g "product/stock"
-	 * @return \Aimeos\Admin\JsonAdm\Common\Iface Controller object
+	 * @return \Aimeos\Admin\JsonAdm\Common\Iface Client object
 	 */
-	protected static function addControllerDecorators( \Aimeos\Admin\JsonAdm\Iface $client,
+	protected static function addClientDecorators( \Aimeos\Admin\JsonAdm\Iface $client,
 		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MW\View\Iface $view, array $templatePaths, $path )
 	{
 		$config = $context->getConfig();
@@ -113,14 +113,14 @@ class Base
 	/**
 	 * Adds the decorators to the client object
 	 *
-	 * @param \Aimeos\Admin\JsonAdm\Iface $client Controller object
+	 * @param \Aimeos\Admin\JsonAdm\Iface $client Client object
 	 * @param array $decorators List of decorator names
 	 * @param string $classprefix Decorator class prefix, e.g. "\Aimeos\Admin\JsonAdm\Product\Decorator\"
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
 	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the client separated by slashes, e.g "product/stock"
-	 * @return \Aimeos\Admin\JsonAdm\Common\Iface Controller object
+	 * @return \Aimeos\Admin\JsonAdm\Common\Iface Client object
 	 */
 	protected static function addDecorators( \Aimeos\Admin\JsonAdm\Iface $client, array $decorators, $classprefix,
 			\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MW\View\Iface $view, $templatePaths, $path )
@@ -161,9 +161,9 @@ class Base
 	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored
 	 * @param string $path Name of the client separated by slashes, e.g "product/stock"
-	 * @return \Aimeos\Admin\JsonAdm\Common\Iface Controller object
+	 * @return \Aimeos\Admin\JsonAdm\Common\Iface Client object
 	 */
-	protected static function createControllerBase( $classname, $interface, \Aimeos\MShop\Context\Item\Iface $context,
+	protected static function createClientBase( $classname, $interface, \Aimeos\MShop\Context\Item\Iface $context,
 		\Aimeos\MW\View\Iface $view, array $templatePaths, $path )
 	{
 		if( isset( self::$objects[$classname] ) ) {

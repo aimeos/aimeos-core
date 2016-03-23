@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JsonAdm\Common\Decorator;
 /**
  * Decorator interface for JSON API client
  *
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 interface Iface
@@ -23,7 +23,7 @@ interface Iface
 	/**
 	 * Initializes a new client decorator object
 	 *
-	 * @param \Aimeos\Admin\JsonAdm\Iface $client Controller object
+	 * @param \Aimeos\Admin\JsonAdm\Iface $client Client object
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param \Aimeos\MW\View\Iface $view View object
 	 * @param array $templatePaths List of file system paths where the templates are stored

@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JsonAdm;
 /**
  * JSON API client interface
  *
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 interface Iface

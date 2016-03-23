@@ -11,43 +11,43 @@ namespace Aimeos\Admin\JsonAdm;
 
 class FactoryTest extends \PHPUnit_Framework_TestCase
 {
-	public function testCreateController()
+	public function testCreateClient()
 	{
 		$context = \TestHelperJadm::getContext();
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 
-		$client = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
+		$client = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order' );
 		$this->assertInstanceOf( '\\Aimeos\\Admin\\JsonAdm\\Common\\Iface', $client );
 	}
 
 
-	public function testCreateSubController()
+	public function testCreateSubClient()
 	{
 		$context = \TestHelperJadm::getContext();
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 
-		$client = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
+		$client = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order/base' );
 		$this->assertInstanceOf( '\\Aimeos\\Admin\\JsonAdm\\Common\\Iface', $client );
 	}
 
 
-	public function testCreateControllerEmpty()
+	public function testCreateClientEmpty()
 	{
 		$context = \TestHelperJadm::getContext();
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 
-		$client = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, '' );
+		$client = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, '' );
 		$this->assertInstanceOf( '\\Aimeos\\Admin\\JsonAdm\\Common\\Iface', $client );
 	}
 
 
-	public function testCreateControllerInvalidName()
+	public function testCreateClientInvalidName()
 	{
 		$context = \TestHelperJadm::getContext();
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 
 		$this->setExpectedException( '\\Aimeos\\Admin\\JsonAdm\\Exception' );
-		\Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, '%^' );
+		\Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, '%^' );
 	}
 
 
@@ -56,11 +56,11 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$cache = \Aimeos\Admin\JsonAdm\Factory::setCache( true );
 
 		$context = \TestHelperJadm::getContext();
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 
-		$client1 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
+		$client1 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order' );
 		\Aimeos\Admin\JsonAdm\Factory::clear();
-		$client2 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
+		$client2 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order' );
 
 		\Aimeos\Admin\JsonAdm\Factory::setCache( $cache );
 
@@ -73,14 +73,14 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$cache = \Aimeos\Admin\JsonAdm\Factory::setCache( true );
 
 		$context = \TestHelperJadm::getContext();
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 
-		$cntlA1 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
-		$cntlB1 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
+		$cntlA1 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order' );
+		$cntlB1 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order/base' );
 		\Aimeos\Admin\JsonAdm\Factory::clear( (string) $context );
 
-		$cntlA2 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
-		$cntlB2 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
+		$cntlA2 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order' );
+		$cntlB2 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order/base' );
 
 		\Aimeos\Admin\JsonAdm\Factory::setCache( $cache );
 
@@ -94,15 +94,15 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$cache = \Aimeos\Admin\JsonAdm\Factory::setCache( true );
 
 		$context = \TestHelperJadm::getContext();
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 
-		$cntlA1 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
-		$cntlB1 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
+		$cntlA1 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order' );
+		$cntlB1 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order/base' );
 
 		\Aimeos\Admin\JsonAdm\Factory::clear( (string) $context, 'order' );
 
-		$cntlA2 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order' );
-		$cntlB2 = \Aimeos\Admin\JsonAdm\Factory::createController( $context, $templatePaths, 'order/base' );
+		$cntlA2 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order' );
+		$cntlB2 = \Aimeos\Admin\JsonAdm\Factory::createClient( $context, $templatePaths, 'order/base' );
 
 		\Aimeos\Admin\JsonAdm\Factory::setCache( $cache );
 

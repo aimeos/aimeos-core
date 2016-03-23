@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->context = \TestHelperJadm::getContext();
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 		$this->view = $this->context->getView();
 
 		$this->object = new \Aimeos\Admin\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'product' );
@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testDelete()
 	{
-		$name = 'ControllerJsonAdmStandard';
+		$name = 'ClientJsonAdmStandard';
 		$this->context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testDeleteBulk()
 	{
-		$name = 'ControllerJsonAdmStandard';
+		$name = 'ClientJsonAdmStandard';
 		$this->context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$header = array();
 		$status = 500;
 
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 		$object = new \Aimeos\Admin\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'product/stock/warehouse' );
 
 		$result = json_decode( $object->get( '', $header, $status ), true );
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$header = array();
 		$status = 500;
 
-		$templatePaths = \TestHelperJadm::getControllerPaths();
+		$templatePaths = \TestHelperJadm::getJsonadmPaths();
 		$object = new \Aimeos\Admin\JsonAdm\Standard( $this->context, $this->view, $templatePaths, 'invalid' );
 
 		$result = json_decode( $object->get( '', $header, $status ), true );
@@ -302,7 +302,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testPatch()
 	{
-		$name = 'ControllerJsonAdmStandard';
+		$name = 'ClientJsonAdmStandard';
 		$this->context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
@@ -345,7 +345,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testPatchBulk()
 	{
-		$name = 'ControllerJsonAdmStandard';
+		$name = 'ClientJsonAdmStandard';
 		$this->context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
@@ -402,7 +402,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testPost()
 	{
-		$name = 'ControllerJsonAdmStandard';
+		$name = 'ClientJsonAdmStandard';
 		$this->context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )
@@ -441,7 +441,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testPostBulk()
 	{
-		$name = 'ControllerJsonAdmStandard';
+		$name = 'ClientJsonAdmStandard';
 		$this->context->getConfig()->set( 'mshop/product/manager/name', $name );
 
 		$productManagerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Product\\Manager\\Standard' )

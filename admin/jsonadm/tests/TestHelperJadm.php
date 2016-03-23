@@ -43,7 +43,7 @@ class TestHelperJadm
 	}
 
 
-	public static function getControllerPaths()
+	public static function getJsonadmPaths()
 	{
 		return self::getAimeos()->getCustomPaths( 'admin/jsonadm/templates' );
 	}

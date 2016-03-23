@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JsonAdm\Supplier;
 /**
  * JSON API supplier client
  *
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 class Standard
@@ -56,13 +56,13 @@ class Standard
 	 * modify what is returned to the caller.
 	 *
 	 * This option allows you to wrap global decorators
-	 * ("\Aimeos\Controller\Jsonadm\Common\Decorator\*") around the Jsonadm
+	 * ("\Aimeos\Admin\Jsonadm\Common\Decorator\*") around the Jsonadm
 	 * client.
 	 *
 	 *  admin/jsonadm/supplier/decorators/global = array( 'decorator1' )
 	 *
 	 * This would add the decorator named "decorator1" defined by
-	 * "\Aimeos\Controller\Jsonadm\Common\Decorator\Decorator1" only to the
+	 * "\Aimeos\Admin\Jsonadm\Common\Decorator\Decorator1" only to the
 	 * "supplier" Jsonadm client.
 	 *
 	 * @param array List of decorator names
@@ -82,13 +82,13 @@ class Standard
 	 * modify what is returned to the caller.
 	 *
 	 * This option allows you to wrap local decorators
-	 * ("\Aimeos\Controller\Jsonadm\Supplier\Decorator\*") around the Jsonadm
+	 * ("\Aimeos\Admin\Jsonadm\Supplier\Decorator\*") around the Jsonadm
 	 * client.
 	 *
 	 *  admin/jsonadm/supplier/decorators/local = array( 'decorator2' )
 	 *
 	 * This would add the decorator named "decorator2" defined by
-	 * "\Aimeos\Controller\Jsonadm\Supplier\Decorator\Decorator2" only to the
+	 * "\Aimeos\Admin\Jsonadm\Supplier\Decorator\Decorator2" only to the
 	 * "supplier" Jsonadm client.
 	 *
 	 * @param array List of decorator names

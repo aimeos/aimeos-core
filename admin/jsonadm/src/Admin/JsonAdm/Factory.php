@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 
@@ -14,7 +14,7 @@ namespace Aimeos\Admin\JsonAdm;
 /**
  * Factory which can create all JSON API clients
  *
- * @package Controller
+ * @package Admin
  * @subpackage JsonAdm
  */
 class Factory
@@ -53,7 +53,7 @@ class Factory
 	/**
 	 * Creates the required client specified by the given path of client names.
 	 *
-	 * Controllers are created by providing only the domain name, e.g. "product"
+	 * Clients are created by providing only the domain name, e.g. "product"
 	 *  for the \Aimeos\Admin\JsonAdm\Product\Standard or a path of names to
 	 * retrieve a specific sub-client, e.g. "product/type" for the
 	 * \Aimeos\Admin\JsonAdm\Product\Type\Standard client.
@@ -64,13 +64,13 @@ class Factory
 	 * @param string|null $name Name of the client implementation ("Standard" if null)
 	 * @throws \Aimeos\Admin\JsonAdm\Exception If the given path is invalid
 	 */
-	static public function createController( \Aimeos\MShop\Context\Item\Iface $context,
+	static public function createClient( \Aimeos\MShop\Context\Item\Iface $context,
 		array $templatePaths, $path, $name = null )
 	{
 		$path = strtolower( trim( $path, "/ \n\t\r\0\x0B" ) );
 
 		if( empty( $path ) ) {
-			return self::createControllerRoot( $context, $context->getView(), $templatePaths, $path, $name );
+			return self::createClientRoot( $context, $context->getView(), $templatePaths, $path, $name );
 		}
 
 		$id = (string) $context;
@@ -98,13 +98,13 @@ class Factory
 			{
 				$args = array( $context, $view, $templatePaths, $path, $name );
 
-				if( ( $client = @call_user_func_array( array( $factory, 'createController' ), $args ) ) === false ) {
+				if( ( $client = @call_user_func_array( array( $factory, 'createClient' ), $args ) ) === false ) {
 					throw new \Aimeos\Admin\JsonAdm\Exception( sprintf( 'Invalid factory "%1$s"', $factory ), 400 );
 				}
 			}
 			else
 			{
-				$client = self::createControllerRoot( $context, $view, $templatePaths, $path, $name );
+				$client = self::createClientRoot( $context, $view, $templatePaths, $path, $name );
 			}
 
 
@@ -140,7 +140,7 @@ class Factory
 	 * @param string|null $name Name of the JsonAdm client (default: "Standard")
 	 * @throws \Aimeos\Admin\JsonAdm\Exception If the client couldn't be created
 	 */
-	protected static function createControllerRoot( \Aimeos\MShop\Context\Item\Iface $context,
+	protected static function createClientRoot( \Aimeos\MShop\Context\Item\Iface $context,
 		\Aimeos\MW\View\Iface $view, array $templatePaths, $path, $name = null )
 	{
 		/** admin/jsonadm/name
@@ -189,7 +189,7 @@ class Factory
 		$iface = '\\Aimeos\\Admin\\JsonAdm\\Iface';
 		$classname = '\\Aimeos\\Admin\\JsonAdm\\' . $name;
 
-		$client = self::createControllerBase( $classname, $iface, $context, $view, $templatePaths, $path );
+		$client = self::createClientBase( $classname, $iface, $context, $view, $templatePaths, $path );
 
 		/** admin/jsonadm/decorators/excludes
 		 * Excludes decorators added by the "common" option from the JSON API clients
@@ -226,13 +226,13 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\Controller\Jsonadm\Common\Decorator\*") around the Jsonadm
+		 * ("\Aimeos\Admin\Jsonadm\Common\Decorator\*") around the Jsonadm
 		 * client.
 		 *
 		 *  admin/jsonadm/product/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\Controller\Jsonadm\Common\Decorator\Decorator1" only to the
+		 * "\Aimeos\Admin\Jsonadm\Common\Decorator\Decorator1" only to the
 		 * "product" Jsonadm client.
 		 *
 		 * @param array List of decorator names
@@ -252,13 +252,13 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\Controller\Jsonadm\Product\Decorator\*") around the Jsonadm
+		 * ("\Aimeos\Admin\Jsonadm\Product\Decorator\*") around the Jsonadm
 		 * client.
 		 *
 		 *  admin/jsonadm/product/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\Controller\Jsonadm\Product\Decorator\Decorator2" only to the
+		 * "\Aimeos\Admin\Jsonadm\Product\Decorator\Decorator2" only to the
 		 * "product" Jsonadm client.
 		 *
 		 * @param array List of decorator names
@@ -269,6 +269,6 @@ class Factory
 		 * @see admin/jsonadm/decorators/global
 		 */
 
-		return self::addControllerDecorators( $client, $context, $view, $templatePaths, $path );
+		return self::addClientDecorators( $client, $context, $view, $templatePaths, $path );
 	}
 }
