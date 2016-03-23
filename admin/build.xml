@@ -3,6 +3,7 @@
 <project name="Aimeos admin" default="all">
 
 	<target name="i18n" description="Creates translation message files">
+		<phing target="i18n" haltonfailure="true" dir="./jsonadm" />
 		<exec command="find ./jqadm/templates/ -type f | xgettext -j -s --no-location --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=printf:1 --keyword=sprintf:1 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/core-admin.pot -f -"
 			checkreturn="true" logoutput="true" />
 		<exec command="find ./extjs/src/ -type f -name '*.js' | xgettext -j -s --no-location --no-wrap --add-comments=: --language=Python --from-code=UTF-8 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/core-admin.pot -f -"
@@ -27,6 +28,7 @@
 	</target>
 
 	<target name="build" description="Builds package for deployment">
+		<phing target="build" haltonfailure="true" dir="./jsonadm" />
 		<foreach param="po-fname" absparam="po-filename" target="build-mo">
             <fileset dir="./i18n">
                 <include name="**/*.po" />

@@ -23,11 +23,11 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/admin/jqadm" />
+		<phing target="coverage" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -45,11 +45,11 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/admin/jqadm" />
+		<phing target="test" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -80,12 +80,12 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="check" haltonfailure="false" dir="${coredir}/admin/jqadm" />
 		<phing target="check" haltonfailure="false" dir="${coredir}/admin/extjs" />
+		<phing target="check" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -103,16 +103,24 @@
 		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
+		<confdoc keyprefix="admin/extjs" wikiprefix="Configuration/Core" keyparts="0"
+			outfile="${coredir}/misc/confdoc/core-admin-extjs.wiki">
+			<fileset dir="${coredir}/admin/extjs" expandsymboliclinks="true" >
+				<include name="src/**/*.js" />
+			</fileset>
+		</confdoc>
 		<confdoc keyprefix="admin/jqadm" wikiprefix="Configuration/Core" keyparts="1"
 			outfile="${coredir}/misc/confdoc/core-admin-jqadm.wiki">
 			<fileset dir="${coredir}/admin/jqadm" expandsymboliclinks="true" >
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="admin/extjs" wikiprefix="Configuration/Core" keyparts="0"
-			outfile="${coredir}/misc/confdoc/core-admin-extjs.wiki">
-			<fileset dir="${coredir}/admin/extjs" expandsymboliclinks="true" >
-				<include name="src/**/*.js" />
+		<confdoc keyprefix="admin/jsonadm" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${coredir}/admin/jsonadm/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-admin-jsonadm.wiki">
+			<fileset dir="${coredir}/admin/jsonadm" expandsymboliclinks="true" >
+				<include name="templates/**/*.php" />
+				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="client/html" wikiprefix="Configuration/Core" keyparts="1"
@@ -121,6 +129,13 @@
 			<fileset dir="${coredir}/client/html" expandsymboliclinks="true" >
 				<include name="templates/**/*.php" />
 				<include name="src/**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc keyprefix="controller/common" wikiprefix="Configuration/Core" keyparts="0"
+			optfile="${coredir}/controller/common/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-controller-common.wiki">
+			<fileset dir="${coredir}/controller/common/src" expandsymboliclinks="true" >
+				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="controller/extjs" wikiprefix="Configuration/Core" keyparts="0"
@@ -137,21 +152,6 @@
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="controller/common" wikiprefix="Configuration/Core" keyparts="0"
-			optfile="${coredir}/controller/common/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/core-controller-common.wiki">
-			<fileset dir="${coredir}/controller/common/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
-			</fileset>
-		</confdoc>
-		<confdoc keyprefix="controller/jsonadm" wikiprefix="Configuration/Core" keyparts="0"
-			optfile="${coredir}/controller/jsonadm/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/core-controller-jsonadm.wiki">
-			<fileset dir="${coredir}/controller/jsonadm" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
-				<include name="src/**/*.php" />
-			</fileset>
-		</confdoc>
 		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${coredir}/controller/jobs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-controller-jobs.wiki">
@@ -160,17 +160,17 @@
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="mshop" wikiprefix="Configuration/Core" keyparts="1"
-			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/core-mshop.wiki">
-			<fileset dir="${coredir}/lib/mshoplib/src/MShop" expandsymboliclinks="true" >
-				<include name="**/*.php" />
-			</fileset>
-		</confdoc>
 		<confdoc keyprefix="madmin" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-madmin.wiki">
 			<fileset dir="${coredir}/lib/mshoplib/src/MAdmin" expandsymboliclinks="true" >
+				<include name="**/*.php" />
+			</fileset>
+		</confdoc>
+		<confdoc keyprefix="mshop" wikiprefix="Configuration/Core" keyparts="1"
+			optfile="${coredir}/lib/mshoplib/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/core-mshop.wiki">
+			<fileset dir="${coredir}/lib/mshoplib/src/MShop" expandsymboliclinks="true" >
 				<include name="**/*.php" />
 			</fileset>
 		</confdoc>
@@ -192,11 +192,11 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/admin/jqadm" />
+		<phing target="clean" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -209,7 +209,6 @@
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/client" />
@@ -227,7 +226,6 @@
 		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jsonadm" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/extjs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/client" />
