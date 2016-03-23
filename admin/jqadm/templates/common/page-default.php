@@ -12,10 +12,10 @@ $cntl = $this->config( 'admin/jqadm/url/search/controller', 'Jqadm' );
 $action = $this->config( 'admin/jqadm/url/search/action', 'search' );
 $config = $this->config( 'admin/jqadm/url/search/config', array() );
 
-$jsonTarget = $this->config( 'controller/jsonadm/url/options/target' );
-$jsonCntl = $this->config( 'controller/jsonadm/url/options/controller', 'Jsonadm' );
-$jsonAction = $this->config( 'controller/jsonadm/url/options/action', 'options' );
-$jsonConfig = $this->config( 'controller/jsonadm/url/options/config', array() );
+$jsonTarget = $this->config( 'admin/jsonadm/url/options/target' );
+$jsonCntl = $this->config( 'admin/jsonadm/url/options/controller', 'Jsonadm' );
+$jsonAction = $this->config( 'admin/jsonadm/url/options/action', 'options' );
+$jsonConfig = $this->config( 'admin/jsonadm/url/options/config', array() );
 
 $extTarget = $this->config( 'admin/extjs/url/target' );
 $extCntl = $this->config( 'admin/extjs/url/controller', 'Extadm' );
