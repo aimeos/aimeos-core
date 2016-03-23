@@ -42,11 +42,11 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( '127.0.0.1', $this->object->get( 'resource/db/host', '127.0.0.2' ) );
 	}
 
-	public function testGetCached()
+	public function testGetLocal()
 	{
 		$conf = new \Aimeos\MW\Config\PHPArray( array() );
-		$cached = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
-		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $cached );
+		$local = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
+		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
 
 		$this->assertEquals( '127.0.0.1', $this->object->get( 'resource/db/host', '127.0.0.2' ) );
 	}
@@ -54,5 +54,18 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 	public function testGetDefault()
 	{
 		$this->assertEquals( 3306, $this->object->get( 'resource/db/port', 3306 ) );
+	}
+
+	public function testGetMerged()
+	{
+		$cfg = array( 'resource' => array( 'db' => array( 'database' => 'test' ) ) );
+		$conf = new \Aimeos\MW\Config\PHPArray( $cfg );
+
+		$local = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
+		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
+
+		$result = $this->object->get( 'resource/db', array() );
+		$this->assertArrayHasKey( 'database', $result );
+		$this->assertArrayHasKey( 'host', $result );
 	}
 }
