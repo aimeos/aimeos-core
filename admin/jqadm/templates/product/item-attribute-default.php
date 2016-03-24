@@ -28,7 +28,7 @@ $enc = $this->encoder();
 							<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'attribute', 'product.lists.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
 							<input class="item-label" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'attribute', 'attribute.label', '' ) ) ); ?>" value="<?php echo $enc->attr( $this->get( 'attributeData/attribute.label/' . $idx ) ); ?>" />
 							<select class="combobox item-refid" name="<?php echo $enc->attr( $this->formparam( array( 'attribute', 'product.lists.refid', '' ) ) ); ?>">
-								<option value="<?php echo $enc->attr( $this->get( 'attributeData/product.lists.refid/' . $idx ) ); ?>" ><?php echo $enc->html( $this->get( 'attributeData/product.label/' . $idx ) ); ?></option>
+								<option value="<?php echo $enc->attr( $this->get( 'attributeData/product.lists.refid/' . $idx ) ); ?>" ><?php echo $enc->html( $this->get( 'attributeData/attribute.label/' . $idx ) ); ?></option>
 							</select>
 						</td>
 						<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
