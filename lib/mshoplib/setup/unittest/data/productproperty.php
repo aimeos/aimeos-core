@@ -7,10 +7,10 @@
 
 return array (
 	'product/property/type' => array(
-		'product/property/type/packheight' => array( 'domain' => 'product/property', 'code' => 'package-height', 'label' => 'Package height', 'status' => 1 ),
-		'product/property/type/packlength' => array( 'domain' => 'product/property', 'code' => 'package-length', 'label' => 'Package lenght', 'status' => 1 ),
-		'product/property/type/packwidth' => array( 'domain' => 'product/property', 'code' => 'package-width', 'label' => 'Package width', 'status' => 1 ),
-		'product/property/type/packweight' => array( 'domain' => 'product/property', 'code' => 'package-weight', 'label' => 'Package Weight', 'status' => 1 ),
+		'product/property/type/packheight' => array( 'domain' => 'product', 'code' => 'package-height', 'label' => 'Package height', 'status' => 1 ),
+		'product/property/type/packlength' => array( 'domain' => 'product', 'code' => 'package-length', 'label' => 'Package lenght', 'status' => 1 ),
+		'product/property/type/packwidth' => array( 'domain' => 'product', 'code' => 'package-width', 'label' => 'Package width', 'status' => 1 ),
+		'product/property/type/packweight' => array( 'domain' => 'product', 'code' => 'package-weight', 'label' => 'Package Weight', 'status' => 1 ),
 	),
 
 	'product/property' => array(

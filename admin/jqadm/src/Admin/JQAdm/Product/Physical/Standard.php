@@ -325,7 +325,7 @@ class Standard
 			{
 				$items[$type] = $manager->createItem();
 				$items[$type]->setParentId( $view->item->getId() );
-				$items[$type]->setTypeId( $typeManager->findItem( $type, array(), 'product/property' )->getId() );
+				$items[$type]->setTypeId( $typeManager->findItem( $type, array(), 'product' )->getId() );
 			}
 
 			$items[$type]->setValue( $value );

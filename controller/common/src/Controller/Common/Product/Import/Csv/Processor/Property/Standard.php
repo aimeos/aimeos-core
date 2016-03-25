@@ -88,7 +88,7 @@ class Standard
 				}
 
 				$typecode = $list['product.property.type'];
-				$list['product.property.typeid'] = $this->getTypeId( 'product/property/type', 'product/property', $typecode );
+				$list['product.property.typeid'] = $this->getTypeId( 'product/property/type', 'product', $typecode );
 				$list['product.property.parentid'] = $product->getId();
 
 				if( ( $item = array_shift( $items ) ) === null ) {
