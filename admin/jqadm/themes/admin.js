@@ -588,6 +588,7 @@ Aimeos.Product.Item.Characteristic = {
 	init : function() {
 
 		Aimeos.Product.Item.Characteristic.Attribute.init();
+		Aimeos.Product.Item.Characteristic.Property.init();
 	}
 };
 
@@ -634,6 +635,37 @@ Aimeos.Product.Item.Characteristic.Attribute = {
 			getfcn: Aimeos.getOptionsAttributes,
 			select: Aimeos.Product.Item.Characteristic.Attribute.select
 		});
+	}
+};
+
+
+Aimeos.Product.Item.Characteristic.Property = {
+
+	init : function() {
+
+		this.addLine();
+		this.removeLine();
+		this.setupComponents();
+	},
+
+
+	addLine : function() {
+
+		$(".product-item-characteristic-property").on("click", ".fa-plus", function(ev) {
+			Aimeos.addClone($(".prototype", ev.delegateTarget), Aimeos.getOptionsLanguages});
+	},
+
+
+	removeLine : function() {
+
+		$(".product-item-characteristic-property").on("click", ".fa-trash", function() {
+			$(this).parents("tr").remove();
+		});
+	},
+
+
+	setupComponents : function() {
+		$(".product-item-characteristic-property .combobox").combobox({getfcn: Aimeos.getOptionsLanguages});
 	}
 };
 

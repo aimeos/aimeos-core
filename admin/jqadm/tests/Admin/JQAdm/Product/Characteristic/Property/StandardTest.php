@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\Admin\JQAdm\Product\Characteristic\Attribute;
+namespace Aimeos\Admin\JQAdm\Product\Characteristic\Property;
 
 
 class StandardTest extends \PHPUnit_Framework_TestCase
@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->context = \TestHelperJqadm::getContext();
 		$templatePaths = \TestHelperJqadm::getTemplatePaths();
 
-		$this->object = new \Aimeos\Admin\JQAdm\Product\Characteristic\Attribute\Standard( $this->context, $templatePaths );
+		$this->object = new \Aimeos\Admin\JQAdm\Product\Characteristic\Property\Standard( $this->context, $templatePaths );
 		$this->object->setView( $this->view );
 	}
 
@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->view->item = $manager->createItem();
 		$result = $this->object->create();
 
-		$this->assertContains( 'Attributes', $result );
+		$this->assertContains( 'Properties', $result );
 		$this->assertNull( $this->view->get( 'errors' ) );
 	}
 
@@ -49,11 +49,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$this->view->item = $manager->findItem( 'CNC', array( 'attribute' ) );
+		$this->view->item = $manager->findItem( 'CNC' );
 		$result = $this->object->copy();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'xs', $result );
+		$this->assertContains( 'Package height', $result );
 	}
 
 
@@ -70,31 +70,35 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$this->view->item = $manager->findItem( 'CNC', array( 'attribute' ) );
+		$this->view->item = $manager->findItem( 'CNC' );
 		$result = $this->object->get();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'xs', $result );
+		$this->assertContains( 'Package height', $result );
 	}
 
 
 	public function testSave()
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
+		$propManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/property' );
+		$typeManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/property/type' );
 
 		$item = $manager->findItem( 'CNC' );
-		$item->setCode( 'jqadm-test-attribute' );
+		$item->setCode( 'jqadm-test-property' );
 		$item->setId( null );
 
 		$manager->saveItem( $item );
 
 
+		$typeid = $typeManager->findItem( 'package-height', array(), 'product/property' )->getId();
+
 		$param = array(
 			'characteristic' => array(
-				'attribute' => array(
-					'product.lists.id' => array( '' ),
-					'product.lists.refid' => array( $attrManager->findItem( 'xs', array(), 'product', 'size' )->getId() ),
+				'property' => array(
+					'product.property.id' => array( '' ),
+					'product.property.typeid' => array( $typeid ),
+					'product.property.value' => array( '10.0' ),
 				),
 			),
 		);
@@ -105,12 +109,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$result = $this->object->save();
 
-		$item = $manager->getItem( $item->getId(), array( 'attribute' ) );
+		$search = $propManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.property.parentid', $item->getId() ) );
+		$items = $propManager->searchItems( $search );
+
 		$manager->deleteItem( $item->getId() );
 
 		$this->assertNull( $this->view->get( 'errors' ) );
 		$this->assertNull( $result );
-		$this->assertEquals( 1, count( $item->getListItems( 'attribute' ) ) );
+		$this->assertEquals( 1, count( $items ) );
+		$this->assertEquals( null, reset( $items )->getLanguageId() );
+		$this->assertEquals( '10.0', reset( $items )->getValue() );
 	}
 
 
