@@ -1,27 +1,28 @@
 /*!
- * Copyright (c) Metaways Infosystems GmbH, 2013
  * LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * Copyright Aimeos (aimeos.org), 2016
  */
 
-Ext.ns('MShop.panel.text.type');
+Ext.ns('MShop.panel.product.property.type');
 
-MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
+MShop.panel.product.property.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
-    recordName : 'Text_Type',
-    idProperty : 'text.type.id',
-    siteidProperty : 'text.type.siteid',
-    itemUiXType : 'MShop.panel.text.type.itemui',
+    recordName : 'Product_Property_Type',
+    idProperty : 'product.property.type.id',
+    siteidProperty : 'product.property.type.siteid',
+
+    itemUiXType : 'MShop.panel.product.property.type.itemui',
 
     // Sort by id ASC
     sortInfo : {
-        field : 'text.type.id',
+        field : 'product.property.type.id',
         direction : 'ASC'
     },
 
     // Create filter
     filterConfig : {
         filters : [{
-            dataIndex : 'text.type.label',
+            dataIndex : 'product.property.type.label',
             operator : '=~',
             value : ''
         }]
@@ -29,27 +30,27 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
 
     // Override initComponent to set Label of tab.
     initComponent : function() {
-        this.title = MShop.I18n.dt('admin', 'Text type');
+        this.title = MShop.I18n.dt('admin', 'Product property type');
 
         MShop.panel.AbstractListUi.prototype.initActions.call(this);
         MShop.panel.AbstractListUi.prototype.initToolbar.call(this);
 
-        MShop.panel.text.type.ListUi.superclass.initComponent.call(this);
+        MShop.panel.product.property.type.ListUi.superclass.initComponent.call(this);
     },
 
-    autoExpandColumn : 'text-type-label',
+    autoExpandColumn : 'product-property-type-label',
 
     getColumns : function() {
         return [{
             xtype : 'gridcolumn',
-            dataIndex : 'text.type.id',
+            dataIndex : 'product.property.type.id',
             header : MShop.I18n.dt('admin', 'ID'),
             sortable : true,
             editable : false,
             hidden : true
         }, {
             xtype : 'gridcolumn',
-            dataIndex : 'text.type.status',
+            dataIndex : 'product.property.type.status',
             header : MShop.I18n.dt('admin', 'Status'),
             sortable : true,
             width : 50,
@@ -57,12 +58,12 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             renderer : this.statusColumnRenderer.createDelegate(this)
         }, {
             xtype : 'gridcolumn',
-            dataIndex : 'text.type.domain',
+            dataIndex : 'product.property.type.domain',
             header : MShop.I18n.dt('admin', 'Domain'),
             sortable : true
         }, {
             xtype : 'gridcolumn',
-            dataIndex : 'text.type.code',
+            dataIndex : 'product.property.type.code',
             header : MShop.I18n.dt('admin', 'Code'),
             sortable : true,
             width : 150,
@@ -70,14 +71,14 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             editable : false
         }, {
             xtype : 'gridcolumn',
-            dataIndex : 'text.type.label',
-            id : 'text-type-label',
+            dataIndex : 'product.property.type.label',
+            id : 'product-property-type-label',
             header : MShop.I18n.dt('admin', 'Label'),
             sortable : true,
             editable : false
         }, {
             xtype : 'datecolumn',
-            dataIndex : 'text.type.ctime',
+            dataIndex : 'product.property.type.ctime',
             header : MShop.I18n.dt('admin', 'Created'),
             sortable : true,
             width : 130,
@@ -86,7 +87,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             hidden : true
         }, {
             xtype : 'datecolumn',
-            dataIndex : 'text.type.mtime',
+            dataIndex : 'product.property.type.mtime',
             header : MShop.I18n.dt('admin', 'Last modified'),
             sortable : true,
             width : 130,
@@ -95,7 +96,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
             hidden : true
         }, {
             xtype : 'gridcolumn',
-            dataIndex : 'text.type.editor',
+            dataIndex : 'product.property.type.editor',
             header : MShop.I18n.dt('admin', 'Editor'),
             sortable : true,
             width : 130,
@@ -105,7 +106,7 @@ MShop.panel.text.type.ListUi = Ext.extend(MShop.panel.AbstractListUi, {
     }
 });
 
-Ext.reg('MShop.panel.text.type.listui', MShop.panel.text.type.ListUi);
+Ext.reg('MShop.panel.product.property.type.listui', MShop.panel.product.property.type.ListUi);
 
-Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.text.type.listui',
-    MShop.panel.text.type.ListUi, 80);
+Ext.ux.ItemRegistry.registerItem('MShop.panel.type.tabUi', 'MShop.panel.product.property.type.listui',
+    MShop.panel.product.property.type.ListUi, 60);
