@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$manager->saveItem( $item );
 
 
-		$typeid = $typeManager->findItem( 'package-height', array(), 'product/property' )->getId();
+		$typeid = $typeManager->findItem( 'package-height', array(), 'product' )->getId();
 
 		$param = array(
 			'characteristic' => array(

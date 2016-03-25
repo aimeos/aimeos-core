@@ -109,10 +109,10 @@ return array(
 	),
 
 	'product/property/type' => array(
-		array( 'domain' => 'product/property', 'code' => 'package-height', 'label' => 'Package height', 'status' => 1 ),
-		array( 'domain' => 'product/property', 'code' => 'package-length', 'label' => 'Package length', 'status' => 1 ),
-		array( 'domain' => 'product/property', 'code' => 'package-width', 'label' => 'Package width', 'status' => 1 ),
-		array( 'domain' => 'product/property', 'code' => 'package-weight', 'label' => 'Package weight', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'package-height', 'label' => 'Package height', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'package-length', 'label' => 'Package length', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'package-width', 'label' => 'Package width', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'package-weight', 'label' => 'Package weight', 'status' => 1 ),
 	),
 
 	'tag/type' => array(
