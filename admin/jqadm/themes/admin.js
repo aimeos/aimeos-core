@@ -528,7 +528,7 @@ Aimeos.Product.Item = {
 		this.deleteConfigLine();
 		this.configComplete();
 
-		Aimeos.Product.Item.Attribute.init();
+		Aimeos.Product.Item.Characteristic.init();
 		Aimeos.Product.Item.Bundle.init();
 		Aimeos.Product.Item.Category.init();
 		Aimeos.Product.Item.Image.init();
@@ -583,7 +583,16 @@ Aimeos.Product.Item = {
 
 
 
-Aimeos.Product.Item.Attribute = {
+Aimeos.Product.Item.Characteristic = {
+
+	init : function() {
+
+		Aimeos.Product.Item.Characteristic.Attribute.init();
+	}
+};
+
+
+Aimeos.Product.Item.Characteristic.Attribute = {
 
 	init : function() {
 
@@ -595,18 +604,18 @@ Aimeos.Product.Item.Attribute = {
 
 	addLine : function() {
 
-		$(".product-item-attribute").on("click", ".fa-plus", function(ev) {
+		$(".product-item-characteristic-attribute").on("click", ".fa-plus", function(ev) {
 			Aimeos.addClone(
 				$(".prototype", ev.delegateTarget),
 				Aimeos.getOptionsAttributes,
-				Aimeos.Product.Item.Attribute.select);
+				Aimeos.Product.Item.Characteristic.Attribute.select);
 		});
 	},
 
 
 	removeLine : function() {
 
-		$(".product-item-attribute").on("click", ".fa-trash", function() {
+		$(".product-item-characteristic-attribute").on("click", ".fa-trash", function() {
 			$(this).parents("tr").remove();
 		});
 	},
@@ -621,9 +630,9 @@ Aimeos.Product.Item.Attribute = {
 
 	setupComponents : function() {
 
-		$(".product-item-attribute .combobox").combobox({
+		$(".product-item-characteristic-attribute .combobox").combobox({
 			getfcn: Aimeos.getOptionsAttributes,
-			select: Aimeos.Product.Item.Attribute.select
+			select: Aimeos.Product.Item.Characteristic.Attribute.select
 		});
 	}
 };

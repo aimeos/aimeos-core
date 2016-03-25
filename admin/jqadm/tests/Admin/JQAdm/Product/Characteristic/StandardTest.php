@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\Admin\JQAdm\Product\Attribute;
+namespace Aimeos\Admin\JQAdm\Product\Characteristic;
 
 
 class StandardTest extends \PHPUnit_Framework_TestCase
@@ -22,7 +22,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->context = \TestHelperJqadm::getContext();
 		$templatePaths = \TestHelperJqadm::getTemplatePaths();
 
-		$this->object = new \Aimeos\Admin\JQAdm\Product\Attribute\Standard( $this->context, $templatePaths );
+		$this->object = new \Aimeos\Admin\JQAdm\Product\Characteristic\Standard( $this->context, $templatePaths );
 		$this->object->setView( $this->view );
 	}
 
@@ -40,8 +40,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->view->item = $manager->createItem();
 		$result = $this->object->create();
 
-		$this->assertContains( 'Attributes', $result );
 		$this->assertNull( $this->view->get( 'errors' ) );
+		$this->assertContains( 'attribute-list', $result );
 	}
 
 
@@ -49,11 +49,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$this->view->item = $manager->findItem( 'CNC', array( 'attribute' ) );
+		$this->view->item = $manager->findItem( 'CNC' );
 		$result = $this->object->copy();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'xs', $result );
+		$this->assertContains( 'attribute-list', $result );
 	}
 
 
@@ -70,11 +70,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
-		$this->view->item = $manager->findItem( 'CNC', array( 'attribute' ) );
+		$this->view->item = $manager->findItem( 'CNC' );
 		$result = $this->object->get();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'xs', $result );
+		$this->assertContains( 'attribute-list', $result );
 	}
 
 
@@ -84,16 +84,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
 
 		$item = $manager->findItem( 'CNC' );
-		$item->setCode( 'jqadm-test-attribute' );
+		$item->setCode( 'jqadm-test-characteristic' );
 		$item->setId( null );
 
 		$manager->saveItem( $item );
 
 
 		$param = array(
-			'attribute' => array(
-				'product.lists.id' => array( '' ),
-				'product.lists.refid' => array( $attrManager->findItem( 'xs', array(), 'product', 'size' )->getId() ),
+			'characteristic' => array(
+				'attribute' => array(
+					'product.lists.id' => array( '' ),
+					'product.lists.refid' => array( $attrManager->findItem( 'xs', array(), 'product', 'size' )->getId() ),
+				),
 			),
 		);
 
@@ -102,13 +104,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->view->item = $item;
 
 		$result = $this->object->save();
-
-		$item = $manager->getItem( $item->getId(), array( 'attribute' ) );
 		$manager->deleteItem( $item->getId() );
 
 		$this->assertNull( $this->view->get( 'errors' ) );
 		$this->assertNull( $result );
-		$this->assertEquals( 1, count( $item->getListItems( 'attribute' ) ) );
 	}
 
 

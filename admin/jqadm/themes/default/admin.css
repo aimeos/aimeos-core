@@ -384,10 +384,7 @@ form.login .input-group-addon {
 	display: none;
 }
 
-
-/* Attributes */
-
-.aimeos .product-item-attribute .ai-combobox {
+.aimeos .ai-combobox {
 	width: 100%;
 }
 
@@ -396,17 +393,6 @@ form.login .input-group-addon {
 
 .aimeos .product-item-bundle {
 	display: none;
-}
-
-.aimeos .product-item-bundle .ai-combobox {
-	width: 100%;
-}
-
-
-/* Categories */
-
-.aimeos .product-item-category .ai-combobox {
-	width: 100%;
 }
 
 
@@ -455,14 +441,10 @@ form.login .input-group-addon {
 	display: none;
 }
 
-.aimeos .product-item-selection .ai-combobox {
-	width: 100%;
-}
-
 
 /** Texts */
 
-.aimeos .product-item-text .header .ai-combobox-input {
+.aimeos .product-item-text .header .ai-combobox {
 	width: 3rem;
 }
 
