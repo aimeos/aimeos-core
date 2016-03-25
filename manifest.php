@@ -50,6 +50,9 @@ return array(
 		'admin/extjs' => array(
 			'admin/extjs/manifest.jsb2',
 		),
+		'admin/jqadm' => array(
+			'admin/jqadm/manifest.jsb2',
+		),
 		'admin/jqadm/templates' => array(
 			'admin/jqadm/templates',
 		),

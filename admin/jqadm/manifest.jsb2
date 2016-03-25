@@ -1,0 +1,22 @@
+{
+	"projectName": "Aimeos Core",
+	"licenseText": "LGPLv3, http://www.gnu.org/licenses/lgpl.html",
+	"pkgs": [{
+		"name": "Aimeos Admin Core CSS",
+		"file": "aimeos-core.css",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "admin.css",
+			"path": "themes/default/"
+		}]
+	}, {
+		"name": "Aimeos Admin Core JS",
+		"file": "aimeos-core.js",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "admin.js",
+			"path": "themes/"
+		}]
+	}],
+	"resources" : []
+}
