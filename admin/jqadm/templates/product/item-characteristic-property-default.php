@@ -6,6 +6,7 @@
  */
 
 $selected = function( $key, $code ) {
+error_log( 'key: ' . $key . ': ' . $code . '<br/>' );
 	return ( $key == $code ? 'selected="selected"' : '' );
 };
 
@@ -16,7 +17,7 @@ $enc = $this->encoder();
 	<table class="property-list table table-default">
 		<thead>
 			<tr>
-				<th><?php echo $enc->html( $this->translate( 'admin', 'Properties' ) ); ?></th>
+				<th colspan="3"><?php echo $enc->html( $this->translate( 'admin', 'Properties' ) ); ?></th>
 				<th class="actions"><div class="btn btn-primary fa fa-plus"></div></th>
 			</tr>
 		</thead>
@@ -25,19 +26,19 @@ $enc = $this->encoder();
 			<tr>
 				<td class="property-type">
 					<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
-					<select class="item-typeid" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.typeid', '' ) ) ); ?>">
+					<select class="c-select item-typeid" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.typeid', '' ) ) ); ?>">
 <?php foreach( $this->get( 'propertyTypes', array() ) as $typeid => $item ) : ?>
-						<option value="<?php echo $enc->attr( $typeid ); ?>" <?php echo $selected( $this->get( 'propertyData/product.property.typeid' ), $typeid ); ?> ><?php echo $enc->html( $item->getLabel() ); ?></option>
+						<option value="<?php echo $enc->attr( $typeid ); ?>" <?php echo $selected( $this->get( 'propertyData/product.property.typeid/' . $idx ), $typeid ); ?> ><?php echo $enc->html( $item->getLabel() ); ?></option>
 <?php endforeach; ?>
 					</select>
 				</td>
-				<td class="property-language>
+				<td class="property-language">
 					<select class="combobox item-languageid" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.languageid', '' ) ) ); ?>">
 						<option value="<?php echo $enc->attr( $this->get( 'propertyData/product.property.languageid/' . $idx ) ); ?>" selected="selected"><?php echo $enc->html( $this->get( 'propertyData/product.property.languageid/' . $idx ) ) ?></option>
 					</select>
 				</td>
 				<td class="property-value">
-					<input class="item-value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.value', '' ) ) ); ?>"
+					<input class="form-control item-value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.value', '' ) ) ); ?>"
 						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Property value' ) ); ?>"
 						value="<?php echo $enc->attr( $this->get( 'propertyData/product.property.value/' . $idx ) ); ?>" />
 				</td>
@@ -47,18 +48,18 @@ $enc = $this->encoder();
 			<tr class="prototype">
 				<td class="property-type">
 					<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.id', '' ) ) ); ?>" value="" disabled="disabled" />
-					<select class="item-typeid" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.typeid', '' ) ) ); ?>">
+					<select class="c-select item-typeid" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.typeid', '' ) ) ); ?>">
 <?php foreach( $this->get( 'propertyTypes', array() ) as $typeid => $item ) : ?>
 						<option value="<?php echo $enc->attr( $typeid ); ?>" ><?php echo $enc->html( $item->getLabel() ); ?></option>
 <?php endforeach; ?>
 					</select>
 				</td>
-				<td class="property-language>
+				<td class="property-language">
 					<select class="combobox-prototype item-languageid" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.languageid', '' ) ) ); ?>" disabled="disabled">
 					</select>
 				</td>
 				<td class="property-value">
-					<input class="item-value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.value', '' ) ) ); ?>"
+					<input class="form-control item-value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.value', '' ) ) ); ?>"
 						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Property value' ) ); ?>" value="" disabled="disabled" />
 				</td>
 				<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>

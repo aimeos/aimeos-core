@@ -53,7 +53,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->copy();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'Package height', $result );
+		$this->assertContains( 'Properties', $result );
 	}
 
 
@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->get();
 
 		$this->assertNull( $this->view->get( 'errors' ) );
-		$this->assertContains( 'Package height', $result );
+		$this->assertContains( 'Properties', $result );
 	}
 
 

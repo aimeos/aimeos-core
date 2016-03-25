@@ -276,10 +276,15 @@ echo $e->getMessage() . PHP_EOL;
 	 */
 	protected function getProperties( $prodid )
 	{
+		$excludes = array( 'package-length', 'package-height', 'package-width', 'package-weight' );
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/property' );
 
 		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.property.parentid', $prodid ) );
+		$expr = array(
+			$search->compare( '==', 'product.property.parentid', $prodid ),
+			$search->compare( '!=', 'product.property.type.code', $excludes ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
 
 		return $manager->searchItems( $search );
@@ -293,9 +298,11 @@ echo $e->getMessage() . PHP_EOL;
 	 */
 	protected function getPropertyTypes()
 	{
+		$excludes = array( 'package-length', 'package-height', 'package-width', 'package-weight' );
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/property/type' );
 
 		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '!=', 'product.property.type.code', $excludes ) );
 		$search->setSlice( 0, 0x7fffffff );
 
 		return $manager->searchItems( $search );

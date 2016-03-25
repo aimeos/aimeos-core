@@ -652,7 +652,8 @@ Aimeos.Product.Item.Characteristic.Property = {
 	addLine : function() {
 
 		$(".product-item-characteristic-property").on("click", ".fa-plus", function(ev) {
-			Aimeos.addClone($(".prototype", ev.delegateTarget), Aimeos.getOptionsLanguages});
+			Aimeos.addClone($(".prototype", ev.delegateTarget), Aimeos.getOptionsLanguages);
+		});
 	},
 
 

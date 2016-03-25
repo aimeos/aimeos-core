@@ -112,7 +112,7 @@ return array(
 		array( 'domain' => 'product/property', 'code' => 'package-height', 'label' => 'Package height', 'status' => 1 ),
 		array( 'domain' => 'product/property', 'code' => 'package-length', 'label' => 'Package length', 'status' => 1 ),
 		array( 'domain' => 'product/property', 'code' => 'package-width', 'label' => 'Package width', 'status' => 1 ),
-		array( 'domain' => 'product/property', 'code' => 'package-weight', 'label' => 'Package Weight', 'status' => 1 ),
+		array( 'domain' => 'product/property', 'code' => 'package-weight', 'label' => 'Package weight', 'status' => 1 ),
 	),
 
 	'tag/type' => array(

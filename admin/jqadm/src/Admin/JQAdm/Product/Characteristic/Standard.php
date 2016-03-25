@@ -55,7 +55,7 @@ class Standard
 	 * @category Developer
 	 */
 	private $subPartPath = 'admin/jqadm/product/characteristic/standard/subparts';
-	private $subPartNames = array( 'attribute' );
+	private $subPartNames = array( 'attribute', 'property' );
 
 
 	/**
