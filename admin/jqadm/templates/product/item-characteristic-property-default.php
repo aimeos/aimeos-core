@@ -48,7 +48,7 @@ $enc = $this->encoder();
 			<tr class="prototype">
 				<td class="property-type">
 					<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.id', '' ) ) ); ?>" value="" disabled="disabled" />
-					<select class="c-select item-typeid" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.typeid', '' ) ) ); ?>">
+					<select class="c-select item-typeid" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.typeid', '' ) ) ); ?>" disabled="disabled">
 <?php foreach( $this->get( 'propertyTypes', array() ) as $typeid => $item ) : ?>
 						<option value="<?php echo $enc->attr( $typeid ); ?>" ><?php echo $enc->html( $item->getLabel() ); ?></option>
 <?php endforeach; ?>

@@ -346,30 +346,30 @@ echo $e->getMessage() . PHP_EOL;
 		$map = $this->getProperties( $id );
 		$ids = (array) $view->param( 'characteristic/property/product.property.id', array() );
 
-
-		foreach( $ids as $pos => $propertyId )
-		{
-			if( isset( $map[$propertyId] ) ) {
-				unset( $map[$propertyId], $ids[$pos] );
-			}
-		}
-
-		$manager->deleteItems( array_keys( $map ) );
-
-
 		$item = $manager->createItem();
-		$item->setParentId( $id );
 
 		foreach( $ids as $pos => $propertyId )
 		{
+			if( isset( $map[$propertyId] ) )
+			{
+				$item = $map[$propertyId];
+				unset( $map[$propertyId] );
+			}
+			else
+			{
+				$item->setId( null );
+				$item->setParentId( $id );
+			}
+
 			$lang = $view->param( 'characteristic/property/product.property.languageid/' . $pos, null );
 
-			$item->setId( null );
 			$item->setLanguageId( ( $lang ? $lang : null ) );
 			$item->setTypeId( $view->param( 'characteristic/property/product.property.typeid/' . $pos, null ) );
 			$item->setValue( $view->param( 'characteristic/property/product.property.value/' . $pos, '' ) );
 
 			$manager->saveItem( $item, false );
 		}
+
+		$manager->deleteItems( array_keys( $map ) );
 	}
 }
