@@ -160,8 +160,8 @@ $privacyUrl = $this->url( $privacyTarget, $privacyController, $privacyAction, ar
 	<h3><?php echo $enc->html( $this->translate( 'client', 'Terms and conditions' ), $enc::TRUST ); ?></h3>
 	<div class="single <?php echo ( $this->get( 'termsError', false ) === true ? 'error' : '' ); ?>">
 		<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'cs_option_terms' ) ) ); ?>" value="1" />
-		<input type="checkbox" name="<?php echo $enc->attr( $this->formparam( array( 'cs_option_terms_value' ) ) ); ?>" value="1" <?php echo ( $this->param( 'cs_option_terms_value', null ) == 1 ? 'checked="checked"' : '' ); ?> />
-		<p><?php echo $enc->html( sprintf( $this->translate( 'client', 'I accept the <a href="%1$s" target="_blank" title="terms and conditions" alt="terms and conditions">terms and conditions</a> and <a href="%2$s" target="_blank" title="privacy policy" alt="privacy policy">privacy policy</a>' ), $enc->attr( $termsUrl ), $enc->attr( $privacyUrl ) ), $enc::TRUST ); ?></p>
+		<input id="option-terms-accept" type="checkbox" name="<?php echo $enc->attr( $this->formparam( array( 'cs_option_terms_value' ) ) ); ?>" value="1" <?php echo ( $this->param( 'cs_option_terms_value', null ) == 1 ? 'checked="checked"' : '' ); ?> />
+		<p><label for="option-terms-accept"><?php echo $enc->html( sprintf( $this->translate( 'client', 'I accept the <a href="%1$s" target="_blank" title="terms and conditions" alt="terms and conditions">terms and conditions</a> and <a href="%2$s" target="_blank" title="privacy policy" alt="privacy policy">privacy policy</a>' ), $enc->attr( $termsUrl ), $enc->attr( $privacyUrl ) ), $enc::TRUST ); ?></label></p>
 	</div>
 <?php echo $this->get( 'termsBody' ); ?>
 </div>
