@@ -73,6 +73,7 @@ $unhide = $this->get( 'summaryShowDownloadAttributes', false );
 <?php	$price = $product->getPrice(); ?>
 
 <?php echo strip_tags( $product->getName() ); ?>
+<?php echo $product->getProductCode(); ?>
 
 <?php	foreach( array_merge( $product->getAttributes( 'config' ), $product->getAttributes( 'custom' ) ) as $attribute ) : ?>
 - <?php 	echo strip_tags( $this->translate( 'client/code', $attribute->getCode() ) ); ?>: <?php echo strip_tags( ( $attribute->getName() != '' ? $attribute->getName() : $attribute->getValue() ) ); ?>
