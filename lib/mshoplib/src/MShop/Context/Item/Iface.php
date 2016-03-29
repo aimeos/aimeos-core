@@ -128,21 +128,6 @@ interface Iface
 	public function getLogger();
 
 	/**
-	 * Sets the session object.
-	 *
-	 * @param \Aimeos\MW\Session\Iface $session Session object
-	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
-	 */
-	public function setSession( \Aimeos\MW\Session\Iface $session );
-
-	/**
-	 * Returns the session object.
-	 *
-	 * @return \Aimeos\MW\Session\Iface Session object
-	 */
-	public function getSession();
-
-	/**
 	 * Sets the mail object.
 	 *
 	 * @param \Aimeos\MW\Mail\Iface $mail Mail object
@@ -156,6 +141,45 @@ interface Iface
 	 * @return \Aimeos\MW\Mail\Iface Mail object
 	 */
 	public function getMail();
+
+	/**
+	 * Sets the message queue manager object.
+	 *
+	 * @param \Aimeos\MW\MQueue\Manager\Iface $mqManager Message queue manager object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager );
+
+	/**
+	 * Returns the message queue manager object.
+	 *
+	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
+	*/
+	public function getMessageQueueManager();
+
+	/**
+	 * Returns the message queue object.
+	 *
+	 * @param string $resource Resource name, e.g. "mq-email"
+	 * @apram string $queue Message queue name, e.g. "order/email/payment"
+	 * @return \Aimeos\MW\Queue\Manager\Iface Message queue object
+	 */
+	public function getMessageQueue( $resource, $queue );
+
+	/**
+	 * Sets the session object.
+	 *
+	 * @param \Aimeos\MW\Session\Iface $session Session object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setSession( \Aimeos\MW\Session\Iface $session );
+
+	/**
+	 * Returns the session object.
+	 *
+	 * @return \Aimeos\MW\Session\Iface Session object
+	*/
+	public function getSession();
 
 	/**
 	 * Sets the view object.

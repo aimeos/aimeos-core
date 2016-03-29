@@ -51,6 +51,7 @@ class TablesCreateMAdmin extends \Aimeos\MW\Setup\Task\Base
 			'db-cache' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'cache.sql',
 			'db-log' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'log.sql',
 			'db-job' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'job.sql',
+			'db-queue' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'queue.sql',
 		);
 
 		$this->setup( $files );

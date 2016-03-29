@@ -100,6 +100,10 @@ class TestHelperHtml
 		$ctx->setConfig( $conf );
 
 
+		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
+		$ctx->setLogger( $logger );
+
+
 		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
@@ -108,8 +112,8 @@ class TestHelperHtml
 		$ctx->setFilesystemManager( $fs );
 
 
-		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
-		$ctx->setLogger( $logger );
+		$mq = new \Aimeos\MW\MQueue\Manager\Standard( $conf );
+		$ctx->setMessageQueueManager( $mq );
 
 
 		$cache = new \Aimeos\MW\Cache\None();

@@ -268,8 +268,10 @@ class Standard
 					$item = $this->addCustomerData( $manager->createItem(), $addr, $addr->getEmail(), $password );
 					$manager->saveItem( $item );
 
+					$msg = $item->toArray();
+					$msg['customer.password'] = $password;
+					$context->getMessageQueue( 'mq-email', 'customer/email/account' )->add( json_encode( $msg ) );
 					$context->setUserId( $item->getId() );
-					$this->sendEmail( $addr, $addr->getEmail(), $password );
 				}
 
 				$basket->setCustomerId( $item->getId() );
@@ -344,35 +346,5 @@ class Standard
 		$customer->setGroups( $gids );
 
 		return $customer;
-	}
-
-
-	/**
-	 * Sends the account creation e-mail to the e-mail address of the customer
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address item of the customer
-	 * @param string $code Customer login name
-	 * @param string $password Customer clear text password
-	 */
-	protected function sendEmail( \Aimeos\MShop\Common\Item\Address\Iface $address, $code, $password )
-	{
-		$context = $this->getContext();
-		$client = \Aimeos\Client\Html\Email\Account\Factory::createClient( $context, $this->getTemplatePaths() );
-
-		$view = $context->getView();
-		$view->extAccountCode = $code;
-		$view->extAccountPassword = $password;
-		$view->extAddressItem = $address;
-
-		$mailer = $context->getMail();
-		$message = $mailer->createMessage();
-		$helper = new \Aimeos\MW\View\Helper\Mail\Standard( $view, $message );
-		$view->addHelper( 'mail', $helper );
-
-		$client->setView( $view );
-		$client->getHeader();
-		$client->getBody();
-
-		$mailer->send( $message );
 	}
 }

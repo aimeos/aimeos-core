@@ -60,6 +60,10 @@ class TestHelperMShop
 		$ctx->setConfig( $conf );
 
 
+		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
+		$ctx->setLogger( $logger );
+
+
 		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
@@ -68,8 +72,8 @@ class TestHelperMShop
 		$ctx->setFilesystemManager( $fs );
 
 
-		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
-		$ctx->setLogger( $logger );
+		$mq = new \Aimeos\MW\MQueue\Manager\Standard( $conf );
+		$ctx->setMessageQueueManager( $mq );
 
 
 		$cache = new \Aimeos\MW\Cache\None();

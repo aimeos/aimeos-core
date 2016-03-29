@@ -2,11 +2,7 @@
 
 /**
  * Common resource configuration file
- *
- * @copyright Copyright (c) Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  */
-
 
 return array(
 
@@ -23,10 +19,10 @@ return array(
 		'port' => 3306,
 
 		// name of the database to use
-		'database' => 'mshop',
+		'database' => 'aimeos',
 
 		// name of the database account used for connecting
-		'username' => 'mshop',
+		'username' => 'aimeos',
 
 		// secret password
 		'password' => '',
@@ -43,4 +39,18 @@ return array(
 	// If using the order domain in an other database or database server
 	// 'db-order' => array('adapter' => 'mysql', 'host' => 'localhost', ....)
 
+	// default message queue configuration
+	'mq' => array(
+
+		// message queue adapter
+		'adapter' => 'Standard',
+		
+		// same as database configuration
+		'db' => array(
+			'adapter' => 'mysql',
+			'host' => 'localhost',
+			'database' => 'aimeos',
+			'username' => 'aimeos',
+			'password' => '',
+		),
 );

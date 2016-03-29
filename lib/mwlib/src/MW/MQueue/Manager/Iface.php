@@ -22,9 +22,9 @@ interface Iface
 	/**
 	 * Returns the message queue for the given name
 	 *
-	 * @param string $name Key for the message queue
+	 * @param string $resource Resource name of the message queue
 	 * @return \Aimeos\MW\MQueue\Iface Message queue object
 	 * @throws \Aimeos\MW\MQueue\Exception If an error occurs
 	 */
-	public function get( $name );
+	public function get( $resource );
 }

@@ -54,16 +54,28 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->getLogger();
 	}
 
-	public function testGetSession()
-	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->getSession();
-	}
-
 	public function testGetMail()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getMail();
+	}
+
+	public function testGetMessageQueueManager()
+	{
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getMessageQueueManager();
+	}
+
+	public function testGetMessageQueue()
+	{
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getMessageQueue( 'email', 'test' );
+	}
+
+	public function testGetSession()
+	{
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getSession();
 	}
 
 	public function testGetView()
@@ -131,21 +143,33 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
-	public function testSetSession()
-	{
-		$context = \TestHelperMShop::getContext();
-		$return = $this->object->setSession( $context->getSession() );
-
-		$this->assertSame( $context->getSession(), $this->object->getSession() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
-	}
-
 	public function testSetMail()
 	{
 		$mail = new \Aimeos\MW\Mail\None();
 		$return = $this->object->setMail( $mail );
 
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Mail\\Iface', $this->object->getMail() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+	}
+
+	public function testSetMessageQueueManager()
+	{
+		$context = \TestHelperMShop::getContext();
+		$return = $this->object->setMessageQueueManager( $context->getMessageQueueManager() );
+
+		$this->assertSame( $context->getMessageQueueManager(), $this->object->getMessageQueueManager() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+
+		$this->setExpectedException( '\\Aimeos\\MW\\MQueue\\Exception' );
+		$this->object->getMessageQueue( 'mq-test', 'test' );
+	}
+
+	public function testSetSession()
+	{
+		$context = \TestHelperMShop::getContext();
+		$return = $this->object->setSession( $context->getSession() );
+
+		$this->assertSame( $context->getSession(), $this->object->getSession() );
 		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
