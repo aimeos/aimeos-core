@@ -340,35 +340,6 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
-	 * Sets the session object.
-	 *
-	 * @param \Aimeos\MW\Session\Iface $session Session object
-	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
-	 */
-	public function setSession( \Aimeos\MW\Session\Iface $session )
-	{
-		$this->session = $session;
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the session object.
-	 *
-	 * @return \Aimeos\MW\Session\Iface Session object
-	 */
-	public function getSession()
-	{
-		if( !isset( $this->session ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Session object not available' ) );
-		}
-
-		return $this->session;
-	}
-
-
-	/**
 	 * Sets the mail object.
 	 *
 	 * @param \Aimeos\MW\Mail\Iface $mail Mail object
@@ -394,6 +365,81 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->mail;
+	}
+
+
+	/**
+	 * Sets the message queue manager object.
+	 *
+	 * @param \Aimeos\MW\MQueue\Manager\Iface $mqManager Message queue manager object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setMessageQueueManager( \Aimeos\MW\MQueue\Manager\Iface $mqManager )
+	{
+		$this->mqueue = $mqManager;
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the message queue manager object.
+	 *
+	 * @return \Aimeos\MW\MQueue\Manager\Iface Message queue manager object
+	*/
+	public function getMessageQueueManager()
+	{
+		if( !isset( $this->mqueue ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
+		}
+
+		return $this->mqueue;
+	}
+
+
+	/**
+	 * Returns the message queue object.
+	 *
+	 * @param string $resource Resource name, e.g. "mq-email"
+	 * @apram string $queue Message queue name, e.g. "order/email/payment"
+	 * @return \Aimeos\MW\Queue\Manager\Iface Message queue object
+	*/
+	public function getMessageQueue( $resource, $queue )
+	{
+		if( !isset( $this->mqueue ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Message queue object not available' ) );
+		}
+
+		return $this->mqueue->get( $resource )->getQueue( $queue );
+	}
+
+
+	/**
+	 * Sets the session object.
+	 *
+	 * @param \Aimeos\MW\Session\Iface $session Session object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setSession( \Aimeos\MW\Session\Iface $session )
+	{
+		$this->session = $session;
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the session object.
+	 *
+	 * @return \Aimeos\MW\Session\Iface Session object
+	 */
+	public function getSession()
+	{
+		if( !isset( $this->session ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Session object not available' ) );
+		}
+
+		return $this->session;
 	}
 
 

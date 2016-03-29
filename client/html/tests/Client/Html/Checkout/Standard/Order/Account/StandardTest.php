@@ -79,24 +79,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$addrItem->setEmail( 'unittest@aimeos.org' );
 
 
-		$mailStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\None' )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$mailMsgStub = $this->getMockBuilder( '\\Aimeos\\MW\\Mail\\Message\\None' )
-			->disableOriginalConstructor()
-			->disableOriginalClone()
-			->getMock();
-
-		$mailStub->expects( $this->once() )
-			->method( 'createMessage' )
-			->will( $this->returnValue( $mailMsgStub ) );
-
-		$mailStub->expects( $this->once() )->method( 'send' );
-
-		$this->context->setMail( $mailStub );
-
-
 		$basketCntl = \Aimeos\Controller\Frontend\Basket\Factory::createController( $this->context );
 		$basketCntl->setAddress( $type, $addrItem );
 

@@ -67,12 +67,20 @@ class TestHelperJobs
 		$ctx->setConfig( $conf );
 
 
+		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
+		$ctx->setLogger( $logger );
+
+
 		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
 
-		$logger = new \Aimeos\MW\Logger\File( $site . '.log', \Aimeos\MW\Logger\Base::DEBUG );
-		$ctx->setLogger( $logger );
+		$fs = new \Aimeos\MW\Filesystem\Manager\Standard( $conf );
+		$ctx->setFilesystemManager( $fs );
+
+
+		$mq = new \Aimeos\MW\MQueue\Manager\Standard( $conf );
+		$ctx->setMessageQueueManager( $mq );
 
 
 		$session = new \Aimeos\MW\Session\None();

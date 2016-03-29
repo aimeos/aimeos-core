@@ -42,6 +42,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetException()
 	{
 		$this->setExpectedException( 'Aimeos\MW\MQueue\Exception' );
-		$this->object->get( 'mq-email' );
+		$this->object->get( 'mq-test' );
 	}
 }
