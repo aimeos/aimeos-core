@@ -13,7 +13,7 @@ before_script:
   - composer self-update
   - composer install || sleep 60 && composer install
   - mysql -e 'create database aimeos;'
-  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ), 'mq-email' => array( 'adapter' => 'Standard', 'db' => array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '' ) ) );" > config/resource.php
+  - echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ), 'mq-email' => array( 'adapter' => 'Standard', 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '' ) ) );" > config/resource.php
 
 script: "vendor/bin/phing setup coverage check"
 
