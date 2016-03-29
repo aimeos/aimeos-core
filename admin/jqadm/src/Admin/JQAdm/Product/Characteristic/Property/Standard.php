@@ -154,7 +154,6 @@ class Standard
 		}
 		catch( \Aimeos\MShop\Exception $e )
 		{
-echo $e->getMessage() . PHP_EOL;
 			$error = array( 'product-item-characteristic-property' => $context->getI18n()->dt( 'mshop', $e->getMessage() ) );
 			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
