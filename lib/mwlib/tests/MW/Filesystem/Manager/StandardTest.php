@@ -37,11 +37,4 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->config->set( 'resource/fs', array( 'adapter' => 'Standard', 'basedir' => __DIR__ ) );
 		$this->assertInstanceof( 'Aimeos\MW\Filesystem\Iface', $this->object->get( 'fs-media' ) );
 	}
-
-
-	public function testGetException()
-	{
-		$this->setExpectedException( 'Aimeos\MW\Filesystem\Exception' );
-		$this->object->get( 'fs-media' );
-	}
 }

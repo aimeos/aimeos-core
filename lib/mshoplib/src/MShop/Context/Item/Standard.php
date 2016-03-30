@@ -245,6 +245,22 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 
 
 	/**
+	 * Returns the file system object for the given resource name.
+	 *
+	 * @param string $resource Resource name, e.g. "fs-admin"
+	 * @return \Aimeos\MW\Filesystem\Iface File system object
+	 */
+	public function getFilesystem( $resource )
+	{
+		if( !isset( $this->fsm ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'File system manager object not available' ) );
+		}
+
+		return $this->fsm->get( $resource );
+	}
+
+
+	/**
 	 * Sets the translation/internationalization objects.
 	 *
 	 * @param array $translations Associative list of internationalization objects implementing

@@ -36,6 +36,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->getFilesystemManager();
 	}
 
+	public function testGetFilesystem()
+	{
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getFilesystem( 'fs' );
+	}
+
 	public function testGetLocale()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
@@ -109,6 +115,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertSame( $context->getFilesystemManager(), $this->object->getFilesystemManager() );
 		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+
+		$this->object->getFilesystem( 'fs-admin' );
 	}
 
 	public function testSetI18n()

@@ -177,10 +177,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testAddDownload()
 	{
 		$fs = $this->context->getFilesystemManager()->get( 'fs-secure' );
-		$fs->write( 'download/test.txt', 'test' );
+		$fs->write( 'tmp/download/test.txt', 'test' );
 
 		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product/attribute' )->createItem();
-		$item->setValue( 'download/test.txt' );
+		$item->setValue( 'tmp/download/test.txt' );
 		$item->setName( 'test download' );
 
 

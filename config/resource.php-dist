@@ -40,6 +40,16 @@ return array(
 	// 'db-order' => array('adapter' => 'mysql', 'host' => 'localhost', ....)
 
 	// default message queue configuration
+	'fs' => array(
+
+		// file system adapter
+		'adapter' => 'Standard',
+		
+		// base directory for file system view
+		'basedir' => '.',
+	),
+
+	// default message queue configuration
 	'mq' => array(
 
 		// message queue adapter

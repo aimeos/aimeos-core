@@ -81,6 +81,14 @@ interface Iface
 	public function getFilesystemManager();
 
 	/**
+	 * Returns the file system object for the given resource name.
+	 *
+	 * @param string $resource Resource name, e.g. "fs-admin"
+	 * @return \Aimeos\MW\Filesystem\Iface File system object
+	 */
+	public function getFilesystem( $resource );
+
+	/**
 	 * Sets the translation/internationalization objects.
 	 *
 	 * @param array $translations Associative list of internationalization objects implementing
