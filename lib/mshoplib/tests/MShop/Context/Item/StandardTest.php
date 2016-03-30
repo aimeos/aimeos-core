@@ -160,7 +160,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertSame( $context->getMessageQueueManager(), $this->object->getMessageQueueManager() );
 		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\MQueue\\Exception' );
 		$this->object->getMessageQueue( 'mq-test', 'test' );
 	}
 

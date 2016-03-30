@@ -45,12 +45,7 @@ return array(
 		// message queue adapter
 		'adapter' => 'Standard',
 		
-		// same as database configuration
-		'db' => array(
-			'adapter' => 'mysql',
-			'host' => 'localhost',
-			'database' => 'aimeos',
-			'username' => 'aimeos',
-			'password' => '',
-		),
+		// use database configuration from resource "db"
+		'db' => 'db',
+	),
 );

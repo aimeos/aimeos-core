@@ -26,8 +26,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	private $fsm;
 	private $locale;
 	private $logger;
-	private $session;
 	private $mail;
+	private $mqueue;
+	private $session;
 	private $view;
 	private $user;
 	private $groups;
@@ -46,8 +47,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->fsm = null;
 		$this->locale = null;
 		$this->logger = null;
-		$this->session = null;
 		$this->mail = null;
+		$this->mqueue = null;
+		$this->session = null;
 		$this->view = null;
 		$this->i18n = array();
 	}
@@ -62,8 +64,9 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->config = ( isset( $this->config ) ? clone $this->config : null );
 		$this->locale = ( isset( $this->locale ) ? clone $this->locale : null );
 		$this->logger = ( isset( $this->logger ) ? clone $this->logger : null );
-		$this->session = ( isset( $this->session ) ? clone $this->session : null );
 		$this->mail = ( isset( $this->mail ) ? clone $this->mail : null );
+		$this->mqueue = ( isset( $this->mqueue ) ? clone $this->mqueue : null );
+		$this->session = ( isset( $this->session ) ? clone $this->session : null );
 		// view is always cloned
 
 		foreach( $this->i18n as $locale => $object ) {
@@ -105,12 +108,16 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 			$hashes .= spl_object_hash( $this->logger );
 		}
 
-		if( isset( $this->session ) ) {
-			$hashes .= spl_object_hash( $this->session );
-		}
-
 		if( isset( $this->mail ) ) {
 			$hashes .= spl_object_hash( $this->mail );
+		}
+
+		if( isset( $this->mqueue ) ) {
+			$hashes .= spl_object_hash( $this->mqueue );
+		}
+
+		if( isset( $this->session ) ) {
+			$hashes .= spl_object_hash( $this->session );
 		}
 
 		if( isset( $this->view ) ) {

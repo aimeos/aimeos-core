@@ -43,9 +43,9 @@ class Standard implements Iface
 	 */
 	public function get( $name )
 	{
-		if( !isset( $this->objects[$name] ) )
-		{
-			$conf = (array) $this->getConfig( $name );
+		$conf = (array) $this->getConfig( $name );
+
+		if( !isset( $this->objects[$name] ) ) {
 			$this->objects[$name] = \Aimeos\MW\Filesystem\Factory::create( $conf );
 		}
 
@@ -66,6 +66,7 @@ class Standard implements Iface
 			return $conf;
 		}
 
+		$name = 'fs';
 		if( ( $conf = $this->config->get( 'resource/fs' ) ) !== null ) {
 			return $conf;
 		}

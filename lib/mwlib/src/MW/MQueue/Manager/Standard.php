@@ -45,6 +45,10 @@ class Standard implements Iface
 	{
 		$conf = (array) $this->getConfig( $resource );
 
+		if( isset( $conf['db'] ) && is_string( $conf['db'] ) ) {
+			$conf['db'] = (array) $this->getConfig( $conf['db'] );
+		}
+
 		if( !isset( $this->objects[$resource] ) ) {
 			$this->objects[$resource] = \Aimeos\MW\MQueue\Factory::create( $conf );
 		}

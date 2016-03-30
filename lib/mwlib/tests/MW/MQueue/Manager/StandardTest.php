@@ -39,9 +39,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetException()
+	public function testGetDatabaseConfig()
 	{
-		$this->setExpectedException( 'Aimeos\MW\MQueue\Exception' );
-		$this->object->get( 'mq-test' );
+		$this->config->set( 'resource/mq-email', array( 'adapter' => 'None', 'db' => 'db' ) );
+		$this->assertInstanceof( 'Aimeos\MW\MQueue\Iface', $this->object->get( 'mq-email' ) );
 	}
 }
