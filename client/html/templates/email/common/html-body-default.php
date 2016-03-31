@@ -74,11 +74,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 <?php echo $content; ?>
 
 .aimeos .content-block {
-	margin: 1.5em 5%;
-	width: 90%;
+	margin: 1.5em 2%;
+	width: 96%;
 }
 .aimeos .logo {
-	margin: 1.5em 5%;
+	margin: 1.5em 2%;
 	margin-top: 0;
 	float: right;
 }
