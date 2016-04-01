@@ -238,8 +238,12 @@ abstract class Base
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = @call_user_func_array( array( $this->object, $name ), $param ) ) === null ) {
-			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
+		if( ( $result = @call_user_func_array( array( $this->object, $name ), $param ) ) === false )
+		{
+			throw new \Aimeos\MShop\Service\Exception( sprintf(
+				'Method "%1$s" for provider "%2$s" in "%3$s" not available',
+				$name, get_class( $this->object ), get_class( $this )
+			) );
 		}
 
 		return $result;
