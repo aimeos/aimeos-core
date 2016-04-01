@@ -157,8 +157,11 @@ abstract class MShop_Order_Item_Abstract extends MShop_Common_Item_Abstract
 	 */
 	protected function _checkDateFormat( $date )
 	{
-		if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/', $date ) !== 1 ) {
-			throw new MShop_Order_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
+		if( $date != null )
+		{
+			if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/', $date ) !== 1 ) {
+				throw new MShop_Order_Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $date ) );
+			}
 		}
 	}
 

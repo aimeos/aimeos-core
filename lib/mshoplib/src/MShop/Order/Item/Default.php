@@ -125,7 +125,7 @@ class MShop_Order_Item_Default
 
 		$this->_checkDateFormat( $date );
 
-		$this->_values['datedelivery'] = (string) $date;
+		$this->_values['datedelivery'] = ( $date != null ? (string) $date : null );
 		$this->setModified();
 	}
 

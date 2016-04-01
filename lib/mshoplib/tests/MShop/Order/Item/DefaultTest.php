@@ -120,6 +120,10 @@ class MShop_Order_Item_DefaultTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals( '2008-04-12 12:34:56', $this->_object->getDateDelivery() );
 		$this->assertTrue( $this->_object->isModified() );
 
+		$this->_object->setDateDelivery( '' );
+		$this->assertEquals( null, $this->_object->getDateDelivery() );
+		$this->assertTrue( $this->_object->isModified() );
+
 		$this->setExpectedException( 'MShop_Order_Exception' );
 		$this->_object->setDateDelivery( '2008-34-12' );
 	}
