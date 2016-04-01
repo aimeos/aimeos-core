@@ -48,6 +48,7 @@ class Client_Html_Email_Delivery_DefaultTest extends PHPUnit_Framework_TestCase
 		$view = TestHelper::getView( 'unittest', $this->_context->getConfig() );
 		$view->extOrderItem = self::$_orderItem;
 		$view->extOrderBaseItem = self::$_orderBaseItem;
+		$view->extAddressItem = self::$_orderBaseItem->getAddress( MShop_Order_Item_Base_Address_Abstract::TYPE_PAYMENT );
 		$view->addHelper( 'mail', new MW_View_Helper_Mail_Default( $view, $this->_emailMock ) );
 
 		$this->_object->setView( $view );
