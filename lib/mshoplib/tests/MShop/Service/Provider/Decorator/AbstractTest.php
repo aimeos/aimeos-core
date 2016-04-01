@@ -163,13 +163,6 @@ class MShop_Service_Provider_Decorator_AbstractTest extends PHPUnit_Framework_Te
 		$response = null; $header = array();
 		$this->_object->updateSync( array(), 'body', $response, $header );
 	}
-
-
-	public function testCallInvalid()
-	{
-		$this->setExpectedException( 'MShop_Service_Exception' );
-		$this->_object->invalid();
-	}
 }
 
 
