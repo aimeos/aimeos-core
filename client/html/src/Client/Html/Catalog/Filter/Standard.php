@@ -519,7 +519,6 @@ class Standard
 				 * @see client/html/catalog/count/url/target
 				 * @see client/html/catalog/count/url/controller
 				 * @see client/html/catalog/count/url/action
-				 * @see client/html/url/config
 				 */
 				$config = $config->get( 'client/html/catalog/count/url/config', array() );
 

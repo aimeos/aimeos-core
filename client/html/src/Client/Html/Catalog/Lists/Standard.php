@@ -592,7 +592,6 @@ class Standard
 		 * @see client/html/catalog/stock/url/target
 		 * @see client/html/catalog/stock/url/controller
 		 * @see client/html/catalog/stock/url/action
-		 * @see client/html/url/config
 		*/
 		$stockConfig = $view->config( 'client/html/catalog/stock/url/config', array() );
 

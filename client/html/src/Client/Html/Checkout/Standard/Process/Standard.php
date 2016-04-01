@@ -478,7 +478,6 @@ class Standard
 		 * @see client/html/checkout/confirm/url/target
 		 * @see client/html/checkout/confirm/url/controller
 		 * @see client/html/checkout/confirm/url/action
-		 * @see client/html/url/config
 		 */
 		$config = $view->config( 'client/html/checkout/confirm/url/config', $config );
 
@@ -563,7 +562,6 @@ class Standard
 		 * @see client/html/checkout/standard/url/target
 		 * @see client/html/checkout/standard/url/controller
 		 * @see client/html/checkout/standard/url/action
-		 * @see client/html/url/config
 		 */
 		$config = $view->config( 'client/html/checkout/standard/url/config', $config );
 
@@ -648,7 +646,6 @@ class Standard
 		 * @see client/html/checkout/update/url/target
 		 * @see client/html/checkout/update/url/controller
 		 * @see client/html/checkout/update/url/action
-		 * @see client/html/url/config
 		 */
 		$config = $view->config( 'client/html/checkout/update/url/config', $config );
 

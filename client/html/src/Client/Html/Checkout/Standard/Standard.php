@@ -487,7 +487,6 @@ class Standard
 			 * @see client/html/checkout/standard/url/target
 			 * @see client/html/checkout/standard/url/controller
 			 * @see client/html/checkout/standard/url/action
-			 * @see client/html/url/config
 			 */
 			$cConfig = $view->config( 'client/html/checkout/standard/url/config', array() );
 
