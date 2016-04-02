@@ -475,7 +475,7 @@ class PayPalExpress
 		if( $rvals['ACK'] !== 'Success' )
 		{
 			$msg = 'PayPal Express: method = ' . $method . ', order ID = ' . $orderid . ', response = ' . print_r( $rvals, true );
-			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::INFO );
+			$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 
 			if( $rvals['ACK'] !== 'SuccessWithWarning' )
 			{
@@ -659,12 +659,11 @@ class PayPalExpress
 
 		$values['MAXAMT'] = $amount + 0.01; // @todo rounding error?
 		$values['PAYMENTREQUEST_0_AMT'] = $amount;
-		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $price->getValue() + $paymentCosts, 2, '.', '' );
+		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $price->getCosts() + $paymentCosts, 2, '.', '' );
 		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $price->getCosts() - $paymentCosts, 2, '.', '' );
 		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
-		$values['PAYMENTREQUEST_0_TAXAMT'] = $price->getTaxValue();
 		$values['PAYMENTREQUEST_0_CURRENCYCODE'] = $orderBase->getPrice()->getCurrencyId();
 		$values['PAYMENTREQUEST_0_PAYMENTACTION'] = $this->getConfigValue( array( 'paypalexpress.PaymentAction' ), 'sale' );
 
