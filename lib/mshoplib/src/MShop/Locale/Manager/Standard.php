@@ -562,6 +562,7 @@ class Standard
 		}
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
 		$result = $this->search( $search );
 
 		// Try to find first item where site matches
