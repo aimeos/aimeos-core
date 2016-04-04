@@ -146,7 +146,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				$item = $manager->createItem();
 				$item->setParentId( $id );
 				$item->setLanguageId( $values['languageid'] );
-				$item->setTypeId( $this->getTypeId( 'product/property/type', 'product/property', $values['type'] ) );
+				$item->setTypeId( $this->getTypeId( 'product/property/type', 'product', $values['type'] ) );
 				$item->setLanguageId( $values['languageid'] );
 				$item->setValue( $values['value'] );
 
