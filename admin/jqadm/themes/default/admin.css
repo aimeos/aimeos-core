@@ -118,19 +118,15 @@ html {
 
 .aimeos .header .header-label {
 	display: inline-block;
-	margin: 0.75rem;
+	margin: 0.45rem;
 }
 
 .aimeos .header .ai-combobox {
 	float: left;
-	margin-top: 0.33rem;
-	margin-bottom: 0.33rem;
 }
 
 .aimeos .header .btn {
 	float: right;
-	margin-top: 0.34rem;
-	margin-bottom: 0.35rem;
 }
 
 .aimeos .header.has-danger {
@@ -139,14 +135,14 @@ html {
 }
 
 .aimeos .card-block .card-header {
-	padding: 0 0.75em;
+	padding: 0.33em 0.75em;
 }
 
 .aimeos table th,
 .aimeos table td {
 	vertical-align: middle;
 	text-align: center;
-	padding: 0.5rem;
+	padding: 0.33rem;
 }
 
 .aimeos table .actions {
