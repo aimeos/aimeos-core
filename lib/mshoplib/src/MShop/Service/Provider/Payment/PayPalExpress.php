@@ -626,7 +626,7 @@ class PayPalExpress
 		{
 			$price = $product->getPrice();
 			$lastPos = $product->getPosition() - 1;
-			$deliveryPrice->setCosts( $deliveryPrice->getCosts() + $price->getCosts() );
+			$deliveryPrice->setCosts( $deliveryPrice->getCosts() + $price->getCosts() * $product->getQuantity() );
 
 			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
@@ -648,8 +648,10 @@ class PayPalExpress
 		try
 		{
 			$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
-			$deliveryPrice->setTaxRate( $orderServiceDeliveryItem->getPrice()->getTaxRate() );
-			$deliveryPrice->addItem( $orderServiceDeliveryItem->getPrice() );
+			$price = $orderServiceDeliveryItem->getPrice();
+
+			$deliveryPrice->setTaxRate( $price->getTaxRate() );
+			$deliveryPrice->addItem( $price );
 
 			$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $this->getAmount( $deliveryPrice ), 2, '.', '' );
 			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
