@@ -628,7 +628,7 @@ class PayPalExpress
 			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
 			$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = $product->getQuantity();
-			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $this->getAmount( $price );
+			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $this->getAmount( $price, false );
 		}
 
 
@@ -644,9 +644,9 @@ class PayPalExpress
 		try
 		{
 			$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
-			$deliveryCosts = $this->getAmount( $orderServiceDeliveryItem->getPrice() );
+			$price = $orderServiceDeliveryItem->getPrice();
 
-			$values['L_SHIPPINGOPTIONAMOUNT0'] = (string) $deliveryCosts;
+			$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $this->getAmount( $price ) - $paymentCosts, 2, '.', '' );
 			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
@@ -657,7 +657,7 @@ class PayPalExpress
 		$price = $orderBase->getPrice();
 		$amount = $this->getAmount( $price );
 
-		$values['MAXAMT'] = $amount + 0.01; // @todo rounding error?
+		$values['MAXAMT'] = $amount + 0.01; // possible rounding error
 		$values['PAYMENTREQUEST_0_AMT'] = $amount;
 		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $price->getCosts() + $paymentCosts, 2, '.', '' );
 		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $price->getCosts() - $paymentCosts, 2, '.', '' );
