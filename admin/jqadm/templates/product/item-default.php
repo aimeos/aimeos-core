@@ -34,7 +34,7 @@ $params['id'] = $this->param( 'id', '' );
 
 		<div class="product-item card panel">
 			<div id="product-item" class="header card-header" role="tab" data-toggle="collapse" data-parent="#accordion" data-target="#product-item-data" aria-expanded="true" aria-controls="product-item-data">
-				<?php echo $enc->html( $this->translate( 'admin', 'Basic' ) ); ?>
+				<?php echo $enc->html( $this->translate( 'admin', 'Basic' ) ); ?> <span class="item-label"> - <?php echo $enc->html( $this->get( 'itemData/product.label' ) ); ?></span>
 			</div>
 			<div id="product-item-data" class="item-basic card-block panel-collapse collapse in" role="tabpanel" aria-labelledby="product-item">
 				<div class="col-lg-6">
