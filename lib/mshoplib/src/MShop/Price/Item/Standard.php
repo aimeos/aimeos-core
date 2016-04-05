@@ -504,6 +504,8 @@ class Standard
 	 * Resets the values of the price item.
 	 *
 	 * The currency ID, domain, type and status stays the same.
+	 *
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function clear()
 	{
@@ -513,6 +515,8 @@ class Standard
 		$this->setRebate( '0.00' );
 		$this->setTaxRate( '0.00' );
 		unset( $this->values['price.tax'] );
+
+		return $this;
 	}
 
 
