@@ -425,13 +425,19 @@ abstract class Base
 	 * Returns the calculated amount of the price item
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item
+	 * @param boolean $costs Include costs per item
+	 * @param boolean $tax Include tax
 	 * @return string Formatted money amount
 	 */
-	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price )
+	protected function getAmount( \Aimeos\MShop\Price\Item\Iface $price, $costs = true, $tax = true )
 	{
-		$amount = $price->getValue() + $price->getCosts();
+		$amount = $price->getValue();
 
-		if( $price->getTaxFlag() === false ) {
+		if( $costs === true ) {
+			$amount += $price->getCosts();
+		}
+
+		if( $tax === true && $price->getTaxFlag() === false ) {
 			$amount += $price->getTaxValue();
 		}
 
