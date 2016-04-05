@@ -437,8 +437,19 @@ abstract class Base
 			$amount += $price->getCosts();
 		}
 
-		if( $tax === true && $price->getTaxFlag() === false ) {
-			$amount += $price->getTaxValue();
+		if( $tax === true && $price->getTaxFlag() === false )
+		{
+			$tmp = clone $price;
+
+			if( $costs === false )
+			{
+				$tmp->clear();
+				$tmp->setValue( $price->getValue() );
+				$tmp->setTaxRate( $price->getTaxRate() );
+				$tmp->setQuantity( $price->getQuantity() );
+			}
+
+			$amount += $tmp->getTaxValue();
 		}
 
 		return number_format( $amount, 2, '.', '' );
