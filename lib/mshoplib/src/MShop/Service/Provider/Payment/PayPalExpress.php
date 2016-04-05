@@ -601,6 +601,7 @@ class PayPalExpress
 	 */
 	protected function getOrderDetails( \Aimeos\MShop\Order\Item\Base\Iface $orderBase )
 	{
+		$deliveryPrice = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem();
 		$deliveryCosts = $paymentCosts = '0.00';
 		$values = $this->getAuthParameter();
 
@@ -619,11 +620,13 @@ class PayPalExpress
 		}
 		catch( \Exception $e ) {; } // If no address is available
 
+
 		$lastPos = 0;
 		foreach( $orderBase->getProducts() as $product )
 		{
 			$price = $product->getPrice();
 			$lastPos = $product->getPosition() - 1;
+			$deliveryPrice->setCosts( $deliveryPrice->getCosts() + $price->getCosts() );
 
 			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
@@ -641,26 +644,29 @@ class PayPalExpress
 			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
 		}
 
+
 		try
 		{
 			$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
-			$price = $orderServiceDeliveryItem->getPrice();
+			$deliveryPrice->setTaxRate( $orderServiceDeliveryItem->getPrice()->getTaxRate() );
+			$deliveryPrice->addItem( $orderServiceDeliveryItem->getPrice() );
 
-			$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $this->getAmount( $price ) - $paymentCosts, 2, '.', '' );
+			$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $this->getAmount( $deliveryPrice ), 2, '.', '' );
 			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 		}
-		catch( \Exception $e ) {; } // If no delivery service is available
+		catch( \Exception $e ) { ; } // If no delivery service is available
 
 
 		$price = $orderBase->getPrice();
 		$amount = $this->getAmount( $price );
+		$deliveryCosts = $this->getAmount( $deliveryPrice );
 
 		$values['MAXAMT'] = $amount + 0.01; // possible rounding error
 		$values['PAYMENTREQUEST_0_AMT'] = $amount;
-		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $price->getCosts() + $paymentCosts, 2, '.', '' );
-		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $price->getCosts() - $paymentCosts, 2, '.', '' );
+		$values['PAYMENTREQUEST_0_ITEMAMT'] = number_format( $amount - $deliveryCosts, 2, '.', '' );
+		$values['PAYMENTREQUEST_0_SHIPPINGAMT'] = number_format( $deliveryCosts, 2, '.', '' );
 		$values['PAYMENTREQUEST_0_INSURANCEAMT'] = '0.00';
 		$values['PAYMENTREQUEST_0_INSURANCEOPTIONOFFERED'] = 'false';
 		$values['PAYMENTREQUEST_0_SHIPDISCAMT'] = '0.00';
