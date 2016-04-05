@@ -48,7 +48,7 @@ $filterParams = array(
 	'default' => 'product.label',
 );
 
-$default = $this->config( 'admin/jqadm/product/fields', array( 'product.status', 'product.typeid', 'product.code', 'product.label' ) );
+$default = $this->config( 'admin/jqadm/product/fields', array( 'product.id', 'product.status', 'product.typeid', 'product.code', 'product.label' ) );
 $fields = $this->param( 'fields', $default );
 
 $pageParams = array( 'total' => $this->get( 'total', 0 ), 'pageParams' => $params );
