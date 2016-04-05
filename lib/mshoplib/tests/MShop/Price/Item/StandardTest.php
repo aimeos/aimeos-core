@@ -100,8 +100,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testClear()
 	{
 		$this->object->getTaxFlag( false );
-		$this->object->clear();
+		$result = $this->object->clear();
 
+		$this->assertInstanceOf( 'Aimeos\MShop\Price\Item\Iface', $result );
 		$this->assertEquals( '0.00', $this->object->getValue() );
 		$this->assertEquals( '0.00', $this->object->getCosts() );
 		$this->assertEquals( '0.00', $this->object->getRebate() );
