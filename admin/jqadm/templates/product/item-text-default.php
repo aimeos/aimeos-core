@@ -105,7 +105,7 @@ $enc = $this->encoder();
 					<div class="btn btn-danger fa fa-trash"></div>
 					<span class="item-name-content header-label"></span>
 				</div>
-				<div id="" class="card-block panel-collapse collapse" role="tabpanel" aria-labelledby="">
+				<div class="card-block panel-collapse collapse" role="tabpanel">
 					<div class="col-lg-6">
 						<div class="form-group row optional">
 							<label class="col-lg-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Product name' ) ); ?></label>
