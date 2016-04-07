@@ -23,7 +23,7 @@ $enc = $this->encoder();
 			<div class="group-item card">
 				<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.lists.id', '' ) ) ); ?>"
 					value="<?php echo $enc->attr( $this->value( $map, 'product.lists.id' ) ); ?>" />
-				<div id="product-item-selection-group-item-<?php echo $enc->attr( $code ); ?>" class="header card-header collapsed"
+				<div id="product-item-selection-group-item-<?php echo $enc->attr( $code ); ?>" class="header card-header collapsed" role="tab"
 					data-toggle="collapse" data-target="#product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>"
 					aria-expanded="true" aria-controls="product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>">
 					<div class="btn btn-secondary fa fa-files-o"></div>
