@@ -258,7 +258,6 @@ Aimeos = {
 		Aimeos.options.done(function(data) {
 
 			var compare = {}, field = {}, list = {}, params = {}, param = {};
-			var prefix = $("body").data("prefix");
 
 			compare[key] = request.term;
 			list = criteria ? [{'=~': compare}, criteria] : [{'=~': compare}];
@@ -268,8 +267,8 @@ Aimeos = {
 			param['fields'] = field;
 			param['sort'] = sort;
 
-			if( prefix ) {
-				params[prefix] = param;
+			if( data.meta.prefix ) {
+				params[data.meta.prefix] = param;
 			} else {
 				params = param;
 			}
