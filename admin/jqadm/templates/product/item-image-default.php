@@ -9,7 +9,7 @@ $enc = $this->encoder();
 
 ?>
 <div class="product-item-image card panel">
-	<div id="product-item-image" class="header card-header" role="tab" data-toggle="collapse" data-parent="#accordion" href="#product-item-image-data" aria-expanded="true" aria-controls="product-item-image-data">
+	<div id="product-item-image" class="header card-header" role="tab" data-toggle="collapse" data-parent="#accordion" data-target="#product-item-image-data" aria-expanded="true" aria-controls="product-item-image-data">
 		<?php echo $enc->html( $this->translate( 'admin', 'Images' ) ); ?>
 	</div>
 	<div id="product-item-image-data" class="item-image card-block panel-collapse collapse table-responsive" role="tabpanel" aria-labelledby="product-item-image">
@@ -29,11 +29,11 @@ $enc = $this->encoder();
 						<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'product.lists.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $id ); ?>" />
 						<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'media.id', '' ) ) ); ?>" value="<?php echo $enc->attr( $this->get( 'imageData/media.id/' . $idx ) ); ?>" />
 						<input class="item-preview" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'media.preview', '' ) ) ); ?>" value="<?php echo $enc->attr( $this->get( 'imageData/media.preview/' . $idx ) ); ?>" />
-						<img class="item-preview" src="<?php echo $this->content( $this->get( 'imageData/media.preview/' . $idx ) ); ?>" />
+						<img class="item-preview" src="<?php echo $this->content( $this->get( 'imageData/media.preview/' . $idx ) ); ?>" alt="<?php echo $enc->html( $this->translate( 'admin', 'Preview' ) ); ?>" />
 					</td>
 					<td class="image-language">
 						<select class="combobox item-languageid" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'media.languageid', '' ) ) ); ?>">
-							<option value="<?php echo $enc->attr( $this->get( 'imageData/media.languageid/' . $idx ) ); ?>" selected="selected"><?php echo $enc->html( $this->get( 'imageData/media.languageid/' . $idx ) ) ?></option>
+							<option value="<?php echo $enc->attr( $this->get( 'imageData/media.languageid/' . $idx ) ); ?>" selected="selected"><?php echo $enc->html( $this->get( 'imageData/media.languageid/' . $idx, $this->translate( 'admin', 'All' ) ) ) ?></option>
 						</select>
 					</td>
 					<td class="image-label">
@@ -47,7 +47,7 @@ $enc = $this->encoder();
 			  		<td class="image-language">
 						<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'product.lists.id', '' ) ) ); ?>" value="" disabled="disabled" />
 						<select class="combobox-prototype item-languageid" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'media.languageid', '' ) ) ); ?>" disabled="disabled">
-							<option value="" selected="selected"></option>
+							<option value="" selected="selected"><?php echo $enc->html( $this->translate( 'admin', 'All' ) ); ?></option>
 						</select>
 					</td>
 					<td class="image-label"><input class="form-control item-label" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'image', 'media.label', '' ) ) ); ?>" value="" disabled="disabled" /></td>

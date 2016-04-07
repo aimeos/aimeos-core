@@ -98,7 +98,7 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 
 			<div class="group-item card panel prototype">
-				<div id="" class="card-header header collapsed" role="tab" data-toggle="collapse" data-target="" aria-expanded="false" aria-controls="">
+				<div class="card-header header collapsed" role="tab" data-toggle="collapse" aria-expanded="false">
 					<select class="combobox-prototype text-langid" name="<?php echo $enc->attr( $this->formparam( array( 'text', 'langid', '' ) ) ); ?>">
 					</select>
 					<div class="btn btn-secondary fa fa-plus"></div>

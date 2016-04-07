@@ -10,7 +10,7 @@ $enc = $this->encoder();
 ?>
 <div class="product-item-selection card panel">
 	<div id="product-item-selection-head" class="header card-header collapsed" role="tab"
-		data-toggle="collapse" data-parent="#accordion" href="#product-item-selection-data"
+		data-toggle="collapse" data-parent="#accordion" data-target="#product-item-selection-data"
 		aria-expanded="true" aria-controls="product-item-selection-data">
 		<?php echo $enc->html( $this->translate( 'admin', 'Variants' ) ); ?>
 	</div>
@@ -24,7 +24,7 @@ $enc = $this->encoder();
 				<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'selection', 'product.lists.id', '' ) ) ); ?>"
 					value="<?php echo $enc->attr( $this->value( $map, 'product.lists.id' ) ); ?>" />
 				<div id="product-item-selection-group-item-<?php echo $enc->attr( $code ); ?>" class="header card-header collapsed"
-					data-toggle="collapse" href="#product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>"
+					data-toggle="collapse" data-target="#product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>"
 					aria-expanded="true" aria-controls="product-item-selection-group-data-<?php echo $enc->attr( $code ); ?>">
 					<div class="btn btn-secondary fa fa-files-o"></div>
 					<div class="btn btn-danger fa fa-trash"></div>

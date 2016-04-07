@@ -13,7 +13,7 @@ $enc = $this->encoder();
 
 ?>
 <div class="product-item-download card panel">
-	<div id="product-item-download" class="header card-header" role="tab" data-toggle="collapse" data-parent="#accordion" href="#product-item-download-data" aria-expanded="true" aria-controls="product-item-download-data">
+	<div id="product-item-download" class="header card-header" role="tab" data-toggle="collapse" data-parent="#accordion" data-target="#product-item-download-data" aria-expanded="true" aria-controls="product-item-download-data">
 		<?php echo $enc->html( $this->translate( 'admin', 'Download' ) ); ?>
 	</div>
 	<div id="product-item-download-data" class="item-download card-block panel-collapse collapse table-responsive" role="tabpanel" aria-labelledby="product-item-download">
