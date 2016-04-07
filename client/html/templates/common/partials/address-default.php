@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 if( !isset( $this->address ) ) {
@@ -32,8 +32,8 @@ $type = $this->get( 'type', 'billing' );
 $css = $this->get( 'css', array() );
 $id = $this->get( 'id' );
 
-$idstr = ( $id != null ? '-' . $id : '' ); 
-$fname = ( $id != null ? 'ca_' . $type . '_' . $id : 'ca_' . $type ); 
+$idstr = ( $id != null ? '-' . $id : '' );
+$fname = ( $id != null ? 'ca_' . $type . '_' . $id : 'ca_' . $type );
 
 $enc = $this->encoder();
 

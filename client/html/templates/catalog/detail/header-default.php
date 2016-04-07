@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 $enc = $this->encoder();
@@ -17,8 +17,8 @@ $enc = $this->encoder();
  *
  * If you use an absolute URL prefer the https protocol to avoid issues with mixed
  * content. Browsers avoid to load files via http if the page was retrieved via
- * https. 
- *  
+ * https.
+ *
  * @param string Relative path or absolute URL
  * @since 2014.03
  * @see client/html/common/content/baseurl
