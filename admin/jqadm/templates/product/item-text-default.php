@@ -98,14 +98,14 @@ $enc = $this->encoder();
 <?php endforeach; ?>
 
 			<div class="group-item card panel prototype">
-				<div id="" class="card-header header collapsed" role="tab" data-toggle="collapse" data-target="" aria-expanded="false" aria-controls="">
+				<div class="card-header header collapsed" role="tab" data-toggle="collapse" aria-expanded="false">
 					<select class="combobox-prototype text-langid" name="<?php echo $enc->attr( $this->formparam( array( 'text', 'langid', '' ) ) ); ?>">
 					</select>
 					<div class="btn btn-secondary fa fa-plus"></div>
 					<div class="btn btn-danger fa fa-trash"></div>
 					<span class="item-name-content header-label"></span>
 				</div>
-				<div id="" class="card-block panel-collapse collapse" role="tabpanel" aria-labelledby="">
+				<div class="card-block panel-collapse collapse" role="tabpanel">
 					<div class="col-lg-6">
 						<div class="form-group row optional">
 							<label class="col-lg-3 form-control-label"><?php echo $enc->html( $this->translate( 'admin', 'Product name' ) ); ?></label>

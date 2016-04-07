@@ -10,7 +10,7 @@ $enc = $this->encoder();
 ?>
 <div class="product-item-stock card panel">
 	<div id="product-item-stock" class="header card-header" role="tab"
-		data-toggle="collapse" data-parent="#accordion" href="#product-item-stock-data"
+		data-toggle="collapse" data-parent="#accordion" data-target="#product-item-stock-data"
 		aria-expanded="true" aria-controls="product-item-stock-data">
 		<?php echo $enc->html( $this->translate( 'admin', 'Stock level' ) ); ?>
 	</div>

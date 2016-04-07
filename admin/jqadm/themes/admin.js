@@ -267,7 +267,7 @@ Aimeos = {
 			param['fields'] = field;
 			param['sort'] = sort;
 
-			if( data.meta.prefix ) {
+			if( data.meta && data.meta.prefix ) {
 				params[data.meta.prefix] = param;
 			} else {
 				params = param;
@@ -1074,6 +1074,7 @@ Aimeos.Product.Item.Text = {
 			$(".card-block", clone).attr("id", "product-item-text-group-data-" + number);
 			$(".card-header", clone).attr("id", "product-item-text-group-item-" + number);
 			$(".card-header", clone).attr("data-target", "#product-item-text-group-data-" + number);
+			$(".card-header", clone).attr("aria-controls", "#product-item-text-group-data-" + number);
 
 			$(".htmleditor-prototype", clone).ckeditor({toolbar: Aimeos.Product.Item.Text.editorcfg});
 
