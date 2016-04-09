@@ -35,6 +35,7 @@ $format = array(
 
 /// Tax rate format with tax rate in percent (%1$s)
 $withtax = $this->translate( 'client', 'Incl. %1$s%% VAT' );
+/// Tax rate format with tax rate in percent (%1$s)
 $notax = $this->translate( 'client', '+ %1$s%% VAT' );
 
 $first = true;

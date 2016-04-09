@@ -79,7 +79,9 @@ $accountConfig = $this->config( 'client/html/account/history/url/config', array(
 
 $orderItems = $this->get( 'listsOrderItems', array() );
 
+/// Date format with year (Y), month (m) and day (d). See http://php.net/manual/en/function.date.php
 $dateformat = $this->translate( 'client', 'Y-m-d' );
+/// Order status (%1$s) and date (%2$s), e.g. "received at 2000-01-01"
 $attrformat = $this->translate( 'client', '%1$s at %2$s' );
 
 $enc = $this->encoder();
