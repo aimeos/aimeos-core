@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Bistra Kumanova <b.kumanova@creato.bg>, 2015
+# Plamen Petkov <mcplamen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2016-02-07 16:41+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2016-04-08 18:13+0000\n"
+"Last-Translator: Plamen Petkov <mcplamen@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -139,7 +140,7 @@ msgstr "+ %1$s %2$s/елемент"
 
 #, php-format
 msgid "+ %1$s%% VAT"
-msgstr ""
+msgstr "+ %1$s%% ДДС"
 
 msgid "+ Payment costs"
 msgstr "+ Разходи за плащане"
@@ -182,7 +183,7 @@ msgstr "Всички изпратени доставки са предмет н�
 
 #. / Payment e-mail legal information
 msgid "All orders are subject to our terms and conditions."
-msgstr ""
+msgstr "Всички поръчки са обект на нашите условия за доставка, който са публикувани на нашия сайт и които вие сте приели, когато сте направили поръчката.\n\nТози емаил съдържа конфиденциална информация и е единствено предназначен за човека към който е адресиран.Ако вие не сте този човек, моля отговорете на този емаил и изстрийте емаила и приложените фаилове."
 
 msgid "An account has been created for you."
 msgstr "Регистрацията Ви е създадена."

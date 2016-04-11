@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Plamen Petkov <mcplamen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2016-01-21 15:42+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2016-04-08 18:00+0000\n"
+"Last-Translator: Plamen Petkov <mcplamen@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -35,7 +36,7 @@ msgstr "Недопустими символи в името на класа \"%1
 
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
-msgstr ""
+msgstr "Неразрешени типове изображения са конфигурирани за \\\"%1$s\\\""
 
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
@@ -43,8 +44,8 @@ msgstr "Не е намерен тип на елемент за \"%1$s/%2$s\" в 
 
 #, php-format
 msgid "Unable to create directory \"%1$s\""
-msgstr ""
+msgstr "Не е възможно да се създаде директория \"%1$s\""
 
 #, php-format
 msgid "Unable to create file in \"%1$s\""
-msgstr ""
+msgstr "Не е възможно да се създаде файл в \"%1$s\""
