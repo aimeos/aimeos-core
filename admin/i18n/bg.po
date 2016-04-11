@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Bistra Kumanova <b.kumanova@creato.bg>, 2015
+# Plamen Petkov <mcplamen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2016-03-09 12:06+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2016-04-08 17:57+0000\n"
+"Last-Translator: Plamen Petkov <mcplamen@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +26,7 @@ msgid "Add"
 msgstr "Добави"
 
 msgid "Add filter"
-msgstr ""
+msgstr "Добави филтър"
 
 msgid "Additional"
 msgstr "Допълнително"
@@ -134,7 +135,7 @@ msgid "Birthday"
 msgstr "Рожден ден"
 
 msgid "Bundles"
-msgstr ""
+msgstr "Пакет"
 
 msgid "Cache"
 msgstr "Кеш"
@@ -154,7 +155,7 @@ msgid "Catalog: {0} ({1})"
 msgstr "Каталог: {0} ({1})"
 
 msgid "Categories"
-msgstr ""
+msgstr "Категории"
 
 msgid "City"
 msgstr "Град"
@@ -163,13 +164,13 @@ msgid "City name (required)"
 msgstr "Град (задължително)"
 
 msgid "Clear"
-msgstr ""
+msgstr "Изчисти"
 
 msgid "Click to upload"
 msgstr "Кликнете, за да качите"
 
 msgid "Close"
-msgstr ""
+msgstr "Затвори"
 
 msgid "Code"
 msgstr "Код"
@@ -178,7 +179,7 @@ msgid "Codes"
 msgstr "Кодове"
 
 msgid "Columns"
-msgstr ""
+msgstr "Колони"
 
 msgid "Comment"
 msgstr "Коментар"
@@ -278,7 +279,7 @@ msgid "Date back"
 msgstr "Дата назад"
 
 msgid "Default"
-msgstr ""
+msgstr "По подразбиране"
 
 msgid "Delete"
 msgstr "Изтрий"
@@ -308,7 +309,7 @@ msgid "Domain (required)"
 msgstr "Домейн (задължително)"
 
 msgid "Download"
-msgstr ""
+msgstr "Изтегли"
 
 msgid "E-Mail"
 msgstr "E-Mail"
@@ -332,7 +333,7 @@ msgid "Error"
 msgstr "Грешка"
 
 msgid "Expert mode"
-msgstr ""
+msgstr "Експертен вид"
 
 msgid "Expires"
 msgstr "Изтича"
@@ -350,16 +351,16 @@ msgid "Facsimile number, e.g. +155512345"
 msgstr "Факс номер, например +155512345"
 
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 msgid "File URL"
 msgstr "Файл URL"
 
 msgid "Filter"
-msgstr ""
+msgstr "Филтър"
 
 msgid "First"
-msgstr ""
+msgstr "Първи"
 
 msgid "First name"
 msgstr "Име"
@@ -386,7 +387,7 @@ msgid "Group label (required)"
 msgstr "Етикет на група (задължително)"
 
 msgid "Height"
-msgstr ""
+msgstr "Височина"
 
 msgid "Honorary title"
 msgstr "Почетна титла"
@@ -401,7 +402,7 @@ msgid "ID"
 msgstr "ID"
 
 msgid "Images"
-msgstr ""
+msgstr "Снимки"
 
 msgid "Import"
 msgstr "Импорт"
@@ -445,7 +446,7 @@ msgid "Language (required)"
 msgstr "Език (задължително)"
 
 msgid "Last"
-msgstr ""
+msgstr "Последен"
 
 msgid "Last modified"
 msgstr "Последна промяна"
@@ -460,7 +461,7 @@ msgid "Lastname"
 msgstr "Фамилия"
 
 msgid "Length"
-msgstr ""
+msgstr "Дължина"
 
 msgid "List"
 msgstr "Списък"
@@ -531,7 +532,7 @@ msgid "Logs"
 msgstr "Logs"
 
 msgid "Long description"
-msgstr ""
+msgstr "Цялостно описание"
 
 msgid "Media"
 msgstr "Медия"
@@ -553,10 +554,10 @@ msgid "Message"
 msgstr "Съобщение"
 
 msgid "Meta description"
-msgstr ""
+msgstr "Мета таг описание"
 
 msgid "Meta keywords"
-msgstr ""
+msgstr "Мета таг ключови думи"
 
 msgid "Method"
 msgstr "Метод"
@@ -589,7 +590,7 @@ msgid "Name of the service provider class (required)"
 msgstr "Име на класа, доставчик на услуги (задължително)"
 
 msgid "Next"
-msgstr ""
+msgstr "Следващ"
 
 msgid "No error information available"
 msgstr "Няма информация за грешка"
@@ -604,7 +605,7 @@ msgid "Notice"
 msgstr "Внимание"
 
 msgid "Option"
-msgstr ""
+msgstr "Опция"
 
 msgid "Order"
 msgstr "Поръчка"
@@ -620,7 +621,7 @@ msgstr "Преглед"
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Страница %1$d на %2$d"
 
 msgid "Parameter"
 msgstr "Парметър"
@@ -632,7 +633,7 @@ msgid "Password (required)"
 msgstr "Парола (задължително)"
 
 msgid "Path"
-msgstr ""
+msgstr "Пътека"
 
 msgid "Payment date"
 msgstr "Дата на плащане"
@@ -641,7 +642,7 @@ msgid "Payment status"
 msgstr "Статус на плащане"
 
 msgid "Physical values"
-msgstr ""
+msgstr "Физични стойности"
 
 msgid "Please recheck your data"
 msgstr "Моля, проверете отново данните"
@@ -683,7 +684,7 @@ msgid "Preview URL"
 msgstr "URL преглед"
 
 msgid "Previous"
-msgstr ""
+msgstr "Предишен"
 
 msgid "Price"
 msgstr "Цена"
@@ -702,7 +703,7 @@ msgid "Price: {0} ({1})"
 msgstr "Цена: {0} ({1})"
 
 msgid "Prices"
-msgstr ""
+msgstr "Цени"
 
 msgid "Priority"
 msgstr "Приоритет"
@@ -720,13 +721,13 @@ msgid "Product costs"
 msgstr "Разходи за продукта"
 
 msgid "Product height, e.g. 20.0 (in yard, inch, etc.)"
-msgstr ""
+msgstr "Височина на продукта, например 20.0 (в см, инчове, и т.н.)"
 
 msgid "Product item details"
 msgstr "Информация за продукта"
 
 msgid "Product length, e.g. 30.0 (in yard, inch, etc.)"
-msgstr ""
+msgstr "Дължина на продукта, например 30.0 (в см, инчове, и т.н.)"
 
 msgid "Product name"
 msgstr "Име на продукта"
@@ -763,10 +764,10 @@ msgid "Product type: {0} ({1})"
 msgstr "Тип на продукта: {0} ({1})"
 
 msgid "Product weight, e.g. 1.25 (in pound, ounce, etc.)"
-msgstr ""
+msgstr "Тегло на продукта, например 1.25 (в грам, кг, и т.н.)"
 
 msgid "Product width, e.g. 17.5 (in yard, inch etc.)"
-msgstr ""
+msgstr "Ширина на продукта, например 17.5 (в см, инчове, и т.н.)"
 
 #. : Product item panel title with product label ({0}) and site code ({1)}
 #, python-brace-format
@@ -777,7 +778,7 @@ msgid "Products"
 msgstr "Продукти"
 
 msgid "Promotion"
-msgstr ""
+msgstr "Промоция"
 
 msgid "Properties"
 msgstr "Свойства"
@@ -810,10 +811,10 @@ msgid "Related order ID"
 msgstr "Н-р на свързана поръчка"
 
 msgid "Remove filter"
-msgstr ""
+msgstr "Премахни филтъра"
 
 msgid "Replace file"
-msgstr ""
+msgstr "Премахни файла"
 
 msgid "Request"
 msgstr "Запитване"
@@ -835,7 +836,7 @@ msgid "Schema {0} is  not registered"
 msgstr "Схема {0}  не е регистрирана"
 
 msgid "Search"
-msgstr ""
+msgstr "Търсене"
 
 #, python-brace-format
 msgid "Search schema {0} is  not registered"
@@ -876,16 +877,16 @@ msgid "Services"
 msgstr "Услуги"
 
 msgid "Short description"
-msgstr ""
+msgstr "Кратко описание"
 
 msgid "Simple mode"
-msgstr ""
+msgstr "Опростен вид"
 
 msgid "Site"
 msgstr "Сайт"
 
 msgid "Size"
-msgstr ""
+msgstr "Размер"
 
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Ръчното добавяне на поръчки не се реализира за момента"
@@ -982,7 +983,7 @@ msgid "Text: {0} ({1})"
 msgstr "Текст: {0} ({1})"
 
 msgid "Texts"
-msgstr ""
+msgstr "Текстове"
 
 msgid ""
 "The file with the exported texts will be available within a few minutes. It "
@@ -1014,7 +1015,7 @@ msgid "Types"
 msgstr "Типове"
 
 msgid "URL segment"
-msgstr ""
+msgstr "URL сегмент"
 
 msgid "Unique code (required)"
 msgstr "Уникален код (задължително)"
@@ -1026,7 +1027,7 @@ msgid "Upload successful"
 msgstr "Успешно качване"
 
 msgid "Uploaded"
-msgstr ""
+msgstr "Качени"
 
 msgid "Used by"
 msgstr "Използван от"
@@ -1041,10 +1042,10 @@ msgid "Value"
 msgstr "Стойност"
 
 msgid "Variant attributes"
-msgstr ""
+msgstr "Видове атрибути"
 
 msgid "Variants"
-msgstr ""
+msgstr "Варианти"
 
 msgid "Vat ID"
 msgstr "ДДС номер"
@@ -1073,10 +1074,10 @@ msgid "Website"
 msgstr "Уеб сайт"
 
 msgid "Weight"
-msgstr ""
+msgstr "Тегло"
 
 msgid "Width"
-msgstr ""
+msgstr "Ширина"
 
 msgid "YYYY-MM-DD (optional)"
 msgstr "YYYY-MM-DD  (по избор)"
@@ -1165,4 +1166,4 @@ msgid "unknown"
 msgstr "неизвестен"
 
 msgid "yy-mm-dd"
-msgstr ""
+msgstr "година-месец-ден"
