@@ -66,7 +66,7 @@ $priceFormat = $this->translate( 'client', '%1$s %2$s' );
 <?php		endif; ?>
 <?php	endforeach; ?>
 		</label><?php
-		if( isset( $serviceAttributes[$id] ) ) :
+		if( isset( $serviceAttributes[$id] ) && !empty( $serviceAttributes[$id] ) ) :
 		?><ul class="form-list">
 <?php		foreach( $serviceAttributes[$id] as $key => $attribute ) : ?>
 <?php			$value = ( isset( $orderService ) && ( $value = $orderService->getAttribute( $key ) ) !== null ? $value : $attribute->getDefault() ); ?>
