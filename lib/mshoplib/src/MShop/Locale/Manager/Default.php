@@ -520,6 +520,7 @@ class MShop_Locale_Manager_Default
 		}
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( array( $search->sort( '+', 'locale.position' ) ) );
 		$result = $this->_search( $search );
 
 		// Try to find first item where site matches
