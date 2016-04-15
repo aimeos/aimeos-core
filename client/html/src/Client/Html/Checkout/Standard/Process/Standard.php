@@ -261,7 +261,9 @@ class Standard
 	{
 		$view = $this->getView();
 
-		if( !in_array( $view->param( 'c_step' ), array( 'order', 'process' ) ) ) {
+		if( !in_array( $view->param( 'c_step' ), array( 'order', 'process' ) )
+			|| !empty( $view->get( 'standardErrorList', array() ) )
+		) {
 			return;
 		}
 
