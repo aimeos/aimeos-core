@@ -257,10 +257,9 @@ class Client_Html_Checkout_Standard_Process_Default
 	public function process()
 	{
 		$view = $this->getView();
+		$errors = $view->get( 'standardErrorList', array() );
 
-		if( !in_array( $view->param( 'c_step' ), array( 'order', 'process' ) )
-			|| !empty( $view->get( 'standardErrorList', array() ) )
-		) {
+		if( !in_array( $view->param( 'c_step' ), array( 'order', 'process' ) ) || !empty( $errors ) ) {
 			return;
 		}
 
