@@ -333,7 +333,7 @@ class Standard
 		{
 			if( ( $item = $listItems[$rmListId]->getRefItem() ) !== null )
 			{
-				if( $fs->has( $item->getCode() ) ) {
+				if( $item->getCode() != '' && $fs->has( $item->getCode() ) ) {
 					$fs->rm( $item->getCode() );
 				}
 				$rmItems[] = $item->getId();
