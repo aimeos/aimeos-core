@@ -23,6 +23,8 @@ $enc = $this->encoder();
 				<div class="col-sm-9">
 					<input class="item-listid" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'download', 'product.lists.id' ) ) ); ?>"
 						value="<?php echo $enc->attr( $this->get( 'downloadData/product.lists.id' ) ); ?>" />
+					<input class="item-id" type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'download', 'attribute.id' ) ) ); ?>"
+						value="<?php echo $enc->attr( $this->get( 'downloadData/attribute.id' ) ); ?>" />
 					<input class="fileupload" type="file" name="download[file]" />
 				</div>
 			</div>
