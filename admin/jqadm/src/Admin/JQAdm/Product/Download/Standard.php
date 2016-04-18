@@ -112,44 +112,36 @@ class Standard
 	public function delete()
 	{
 		$view = $this->getView();
-		$id = (array) $view->param( 'id' );
-		$context = $this->getContext();
-
-
-		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
-
+		$listManager = \Aimeos\MShop\Factory::createManager( $context = $this->getContext(), 'product/lists' );
 		$search = $listManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'product.lists.parentid', $id ),
-			$search->compare( '==', 'product.lists.domain', 'attribute' ),
-			$search->compare( '==', 'product.lists.type.domain', 'attribute' ),
-			$search->compare( '==', 'product.lists.type.code', 'hidden' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
 
-		$listItems = $listManager->searchItems( $search );
-		$refIds = array();
-
-		foreach( $listItems as $listItem ) {
-			$refIds[] = $listItem->getRefId();
-		}
-
-
-		$items = $this->getAttributeItems( $refIds );
-
-		foreach( $listItems as $id => $listItem )
+		foreach( (array) $view->param( 'id' ) as $id )
 		{
-			$refId = $listItem->getRefId();
+			$listItems = $this->getListItems( $id );
+			$items = $this->getAttributeItems( $listItems );
 
-			if( isset( $items[$refId] ) && $items[$refId]->getType() === 'download' ) {
-				$listItem->setRefItem( $items[$refId] );
-			} else {
-				unset( $listItems[$id] );
+			foreach( $listItems as $listid => $listItem )
+			{
+				$refId = $listItem->getRefId();
+
+				$expr = array(
+					$search->compare( '==', 'product.lists.refid', $refId ),
+					$search->compare( '==', 'product.lists.domain', 'attribute' ),
+					$search->compare( '==', 'product.lists.type.code', 'hidden' ),
+					$search->compare( '==', 'product.lists.type.domain', 'attribute' ),
+				);
+				$search->setConditions( $search->combine( '&&', $expr ) );
+				$result = $listManager->aggregate( $search, 'product.lists.refid' );
+
+				if( isset( $items[$refId] ) && $result[$refId] == 1 ) {
+					$listItem->setRefItem( $items[$refId] );
+				} else {
+					unset( $listItems[$id] );
+				}
 			}
-		}
 
-		$this->cleanupItems( $listItems, array() );
+			$this->cleanupItems( $listItems, array() );
+		}
 	}
 
 
@@ -388,18 +380,24 @@ class Standard
 
 
 	/**
-	 * Returns the attribute items for the given IDs
+	 * Returns the attribute items for the given list items
 	 *
-	 * @param array $ids List of attribute IDs
+	 * @param array $listItems List of list items with IDs as key and items implementing \Aimeos\MShop\Common\Item\List\Iface as values
 	 * @return array List of attribute items with ID as key and items implementing \Aimeos\MShop\Attribute\Item\Iface as values
 	 */
-	protected function getAttributeItems( array $ids )
+	protected function getAttributeItems( array $listItems )
 	{
+		$refIds = array();
+
+		foreach( $listItems as $item ) {
+			$refIds[] = $item->getRefId();
+		}
+
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
 
 		$search = $manager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'attribute.id', $ids ),
+			$search->compare( '==', 'attribute.id', $refIds ),
 			$search->compare( '==', 'attribute.domain', 'product' ),
 			$search->compare( '==', 'attribute.type.domain', 'product' ),
 			$search->compare( '==', 'attribute.type.code', 'download' ),
@@ -423,10 +421,10 @@ class Standard
 
 		$search = $manager->createSearch();
 		$expr = array(
-				$search->compare( '==', 'product.lists.parentid', $prodid ),
-				$search->compare( '==', 'product.lists.domain', 'attribute' ),
-				$search->compare( '==', 'product.lists.type.domain', 'attribute' ),
-				$search->compare( '==', 'product.lists.type.code', 'hidden' ),
+			$search->compare( '==', 'product.lists.parentid', $prodid ),
+			$search->compare( '==', 'product.lists.domain', 'attribute' ),
+			$search->compare( '==', 'product.lists.type.domain', 'attribute' ),
+			$search->compare( '==', 'product.lists.type.code', 'hidden' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -458,14 +456,9 @@ class Standard
 			return;
 		}
 
-		$data = $attrIds = array();
+		$data = array();
 		$listItems = $this->getListItems( $view->item->getId() );
-
-		foreach( $listItems as $listItem ) {
-			$attrIds[] = $listItem->getRefId();
-		}
-
-		$attrItems = $this->getAttributeItems( $attrIds );
+		$attrItems = $this->getAttributeItems( $listItems );
 
 		foreach( $listItems as $listItem )
 		{
@@ -541,24 +534,18 @@ class Standard
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 
 		$listItems = $this->getListItems( $id );
-
-		foreach( $listItems as $listItem ) {
-			$attrIds[] = $listItem->getRefId();
-		}
-
-		$attrItems = $this->getAttributeItems( $attrIds );
 		$listId = $view->param( 'download/product.lists.id' );
 
-		if( !isset( $listItems[$listId] ) )
-		{
-			$litem = $this->createListItem( $id );
-			$item = $this->createItem();
-		}
-		else
-		{
+		if( isset( $listItems[$listId] ) ) {
 			$litem = $listItems[$listId];
-			$refId = $listItem->getRefId();
-			$item = ( isset( $attrItems[$refId] ) ? $attrItems[$refId] : $this->createItem() );
+		} else {
+			$litem = $this->createListItem( $id );
+		}
+
+		if( ( $attrId = $view->param( 'download/attribute.id' ) ) != '' ) {
+			$item = $attrManager->getItem( $attrId );
+		} else {
+			$item = $this->createItem();
 		}
 
 		if( ( $file = $view->value( (array) $view->request()->getUploadedFiles(), 'download/file' ) ) !== null
