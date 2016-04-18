@@ -179,11 +179,6 @@ class Standard
 			$view->errors = $view->get( 'errors', array() ) + $error;
 			$manager->rollback();
 		}
-
-		$tplconf = 'admin/jqadm/partial/template-error';
-		$default = 'common/partials/error-default.php';
-
-		return $view->render( $view->config( $tplconf, $default ) );
 	}
 
 
