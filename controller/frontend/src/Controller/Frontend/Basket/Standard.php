@@ -366,7 +366,7 @@ class Standard
 	 * @param string $warehouse Warehouse code for retrieving the stock level
 	 * @throws \Aimeos\Controller\Frontend\Basket\Exception If there's not enough stock available
 	 */
-	private function addProductInStock( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderBaseProductItem,
+	protected function addProductInStock( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderBaseProductItem,
 		$productId, $quantity, array $options, $warehouse )
 	{
 		$stocklevel = null;
@@ -406,7 +406,7 @@ class Standard
 	 * @param array Associative list of options
 	 * @throws \Aimeos\Controller\Frontend\Basket\Exception If there's not enough stock available
 	 */
-	private function editProductInStock( \Aimeos\MShop\Order\Item\Base\Product\Iface $product,
+	protected function editProductInStock( \Aimeos\MShop\Order\Item\Base\Product\Iface $product,
 		\Aimeos\MShop\Product\Item\Iface $productItem, $quantity, $position, array $options )
 	{
 		$stocklevel = null;
@@ -556,7 +556,7 @@ class Standard
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function copyAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $errors, $localeKey )
+	protected function copyAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $errors, $localeKey )
 	{
 		foreach( $basket->getAddresses() as $type => $item )
 		{
@@ -586,7 +586,7 @@ class Standard
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function copyCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $errors, $localeKey )
+	protected function copyCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $errors, $localeKey )
 	{
 		foreach( $basket->getCoupons() as $code => $list )
 		{
@@ -616,7 +616,7 @@ class Standard
 	 * @param string $localeKey Unique identifier of the site, language and currency
 	 * @return array Associative list of errors occured
 	 */
-	private function copyProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $errors, $localeKey )
+	protected function copyProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $errors, $localeKey )
 	{
 		foreach( $basket->getProducts() as $pos => $product )
 		{
@@ -666,7 +666,7 @@ class Standard
 	 * @param array $errors Associative list of previous errors
 	 * @return array Associative list of errors occured
 	 */
-	private function copyServices( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $errors )
+	protected function copyServices( \Aimeos\MShop\Order\Item\Base\Iface $basket, array $errors )
 	{
 		foreach( $basket->getServices() as $type => $item )
 		{
@@ -847,7 +847,7 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Item[] $orderAttributes List of order product attribute items
 	 * @return \Aimeos\MShop\Attribute\Item\Iface[] Associative list of attribute IDs as key and attribute items as values
 	 */
-	private function getAttributeItems( array $orderAttributes )
+	protected function getAttributeItems( array $orderAttributes )
 	{
 		if( empty( $orderAttributes ) ) {
 			return array();
@@ -922,7 +922,7 @@ class Standard
 	 * @param integer $quantity New product quantity
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item with calculated price
 	 */
-	private function calcPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $product, array $prices, $quantity )
+	protected function calcPrice( \Aimeos\MShop\Order\Item\Base\Product\Iface $product, array $prices, $quantity )
 	{
 		$context = $this->getContext();
 
@@ -1077,7 +1077,7 @@ class Standard
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface[] List of order product attributes
 	 * @throws \Aimeos\Controller\Frontend\Basket\Exception If no product variant is found
 	 */
-	private function getVariantDetails( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderBaseProductItem,
+	protected function getVariantDetails( \Aimeos\MShop\Order\Item\Base\Product\Iface $orderBaseProductItem,
 		\Aimeos\MShop\Product\Item\Iface &$productItem, array &$prices, array $variantAttributeIds, array $options )
 	{
 		$attr = array();
