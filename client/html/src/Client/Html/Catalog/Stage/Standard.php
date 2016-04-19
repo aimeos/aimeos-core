@@ -107,6 +107,7 @@ class Standard
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$prefixes = array( 'f' );
+		$context = $this->getContext();
 
 		/** client/html/catalog/stage
 		 * All parameters defined for the catalog stage component and its subparts
@@ -120,9 +121,8 @@ class Standard
 		 */
 		$confkey = 'client/html/catalog/stage';
 
-		if( ( $html = $this->getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( !empty( $context->getUserId() ) || ( $html = $this->getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
-			$context = $this->getContext();
 			$view = $this->getView();
 
 			try
@@ -205,9 +205,10 @@ class Standard
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$prefixes = array( 'f' );
+		$context = $this->getContext();
 		$confkey = 'client/html/catalog/stage';
 
-		if( ( $html = $this->getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( !empty( $context->getUserId() ) || ( $html = $this->getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
@@ -251,7 +252,7 @@ class Standard
 			}
 			catch( \Exception $e )
 			{
-				$this->getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else
