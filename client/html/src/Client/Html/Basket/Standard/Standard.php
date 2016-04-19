@@ -435,8 +435,12 @@ class Standard
 
 			}
 
-			$view->standardParams = $this->getClientParams( $view->param() );
-			$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
+			if( empty( $params ) === false )
+			{
+				$view->standardParams = $this->getClientParams( $view->param() );
+				$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
+			}
+
 			$view->standardBasket = \Aimeos\Controller\Frontend\Factory::createController( $context, 'basket' )->get();
 
 			$this->cache = $view;
