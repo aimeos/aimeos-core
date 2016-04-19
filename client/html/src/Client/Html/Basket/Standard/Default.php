@@ -429,13 +429,17 @@ class Client_Html_Basket_Standard_Default
 			$context = $this->_getContext();
 			$params = $context->getSession()->get( 'arcavias/catalog/detail/params/last', array() );
 
-			$target = $view->config( 'client/html/catalog/detail/url/target' );
-			$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
-			$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
-			$config = $view->config( 'client/html/catalog/detail/url/config', array() );
+			if( empty( $params ) === false )
+			{
+				$target = $view->config( 'client/html/catalog/detail/url/target' );
+				$controller = $view->config( 'client/html/catalog/detail/url/controller', 'catalog' );
+				$action = $view->config( 'client/html/catalog/detail/url/action', 'detail' );
+				$config = $view->config( 'client/html/catalog/detail/url/config', array() );
 
-			$view->standardParams = $this->_getClientParams( $view->param() );
-			$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
+				$view->standardParams = $this->_getClientParams( $view->param() );
+				$view->standardBackUrl = $view->url( $target, $controller, $action, $params, array(), $config );
+			}
+
 			$view->standardBasket = Controller_Frontend_Factory::createController( $context, 'basket' )->get();
 
 			$this->_cache = $view;
