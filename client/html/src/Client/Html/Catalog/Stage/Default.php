@@ -118,7 +118,7 @@ class Client_Html_Catalog_Stage_Default
 		 */
 		$confkey = 'client/html/catalog/stage';
 
-		if( !empty( $context->getUserId() ) || ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( $context->getUserId() != null || ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
@@ -205,7 +205,7 @@ class Client_Html_Catalog_Stage_Default
 		$context = $this->_getContext();
 		$confkey = 'client/html/catalog/stage';
 
-		if( !empty( $context->getUserId() ) || ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( $context->getUserId() != null || ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 

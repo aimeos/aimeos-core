@@ -139,7 +139,7 @@ class Client_Html_Catalog_List_Default
 		 */
 		$confkey = 'client/html/catalog/list';
 
-		if( !empty( $context->getUserId() ) || ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( $context->getUserId() != null || ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
@@ -226,7 +226,7 @@ class Client_Html_Catalog_List_Default
 		$context = $this->_getContext();
 		$confkey = 'client/html/catalog/list';
 
-		if( !empty( $context->getUserId() ) || ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( $context->getUserId() != null || ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
