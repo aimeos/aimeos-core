@@ -102,6 +102,7 @@ class Client_Html_Catalog_Filter_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$prefixes = array( 'f' );
+		$context = $this->_getContext();
 
 		/** client/html/catalog/filter
 		 * All parameters defined for the catalog filter component and its subparts
@@ -115,9 +116,8 @@ class Client_Html_Catalog_Filter_Default
 		 */
 		$confkey = 'client/html/catalog/filter';
 
-		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( !empty( $context->getUserId() ) || ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
-			$context = $this->_getContext();
 			$view = $this->getView();
 
 			try
@@ -206,9 +206,10 @@ class Client_Html_Catalog_Filter_Default
 		self::$_headerSingleton = true;
 
 		$prefixes = array( 'f' );
+		$context = $this->_getContext();
 		$confkey = 'client/html/catalog/filter';
 
-		if( ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( !empty( $context->getUserId() ) || ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
@@ -252,7 +253,7 @@ class Client_Html_Catalog_Filter_Default
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else

@@ -180,6 +180,7 @@ class Client_Html_Catalog_Detail_Default
 	public function getBody( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$prefixes = array( 'd' );
+		$context = $this->_getContext();
 
 		/** client/html/catalog/detail
 		 * All parameters defined for the catalog detail component and its subparts
@@ -193,9 +194,8 @@ class Client_Html_Catalog_Detail_Default
 		 */
 		$confkey = 'client/html/catalog/detail';
 
-		if( ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
+		if( !empty( $context->getUserId() ) || ( $html = $this->_getCached( 'body', $uid, $prefixes, $confkey ) ) === null )
 		{
-			$context = $this->_getContext();
 			$view = $this->getView();
 
 			try
@@ -278,9 +278,10 @@ class Client_Html_Catalog_Detail_Default
 	public function getHeader( $uid = '', array &$tags = array(), &$expire = null )
 	{
 		$prefixes = array( 'd' );
+		$context = $this->_getContext();
 		$confkey = 'client/html/catalog/detail';
 
-		if( ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
+		if( !empty( $context->getUserId() ) || ( $html = $this->_getCached( 'header', $uid, $prefixes, $confkey ) ) === null )
 		{
 			$view = $this->getView();
 
@@ -324,7 +325,7 @@ class Client_Html_Catalog_Detail_Default
 			}
 			catch( Exception $e )
 			{
-				$this->_getContext()->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
+				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
 		}
 		else
