@@ -267,10 +267,31 @@ class Standard
 			$config = $context->getConfig();
 			$attrIds = $attributeMap = $subAttrDeps = array();
 
+			/** client/html/catalog/detail/additional/attribute/variants
+			 * If variant attributes should be displayed in the additional section too
+			 *
+			 * The additional attribute section of the catalog details views contains
+			 * all attributes of type "default" that have been assigned to the product.
+			 * By default, this also includes variant attributes assigned to the article
+			 * of selection products and the ones for the selected variant are displayed
+			 * as well.
+			 *
+			 * This setting can disable displaying them in the additional attribute
+			 * section.
+			 *
+			 * @param boolean True to also display variant attibutes, false to hide them
+			 * @since 2016.05
+			 * @category Developer
+			*/
+			$variants = (bool) $config->get( 'client/html/catalog/detail/additional/attribute/variants', true );
+
 			if( isset( $view->detailProductItem ) )
 			{
 				$attrIds = array_keys( $view->detailProductItem->getRefItems( 'attribute', null, 'default' ) );
-				$attrIds += array_keys( $view->detailProductItem->getRefItems( 'attribute', null, 'variant' ) );
+
+				if( $variants === true ) {
+					$attrIds += array_keys( $view->detailProductItem->getRefItems( 'attribute', null, 'variant' ) );
+				}
 			}
 
 
@@ -301,7 +322,10 @@ class Standard
 			foreach( $products as $subProdId => $subProduct )
 			{
 				$subItems = $subProduct->getRefItems( 'attribute', null, 'default' );
-				$subItems += $subProduct->getRefItems( 'attribute', null, 'variant' );
+
+				if( $variants === true ) {
+					$subItems += $subProduct->getRefItems( 'attribute', null, 'variant' );
+				}
 
 				foreach( $subItems as $attrId => $attrItem )
 				{
