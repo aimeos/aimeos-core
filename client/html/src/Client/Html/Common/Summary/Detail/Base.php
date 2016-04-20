@@ -37,7 +37,7 @@ abstract class Base
 			$taxrate = $price->getTaxrate();
 
 			if( isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate]->addItem( $price, $product->getQuantity() - 1 );
+				$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
 			} else {
 				$taxrates[$taxrate] = $price->addItem( $price, $product->getQuantity() - 1 );
 			}
