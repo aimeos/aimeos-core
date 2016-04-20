@@ -465,6 +465,27 @@ html.no-js .catalog-filter-tree:hover > ul {
 	color: #555;
 }
 
+.catalog-filter-tree .category-selected {
+	display: none;
+	text-align: left;
+	clear: both;
+}
+
+.catalog-filter-tree .category-selected .selected-intro:after {
+	content: ":";
+}
+
+.catalog-filter-tree .category-selected .selected-category {
+	border: solid 1px #D0D0D0;
+	display: inline-block;
+	margin: 0.5em;
+	padding: 0 0.25em;
+}
+
+.catalog-filter-tree .category-selected .selected-category:after {
+	content: " ×";
+}
+
 /* Catalog filter, attribute section */
 .catalog-filter-attribute {
 	margin: 1em 0;

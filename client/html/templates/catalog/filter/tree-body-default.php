@@ -7,7 +7,20 @@
  */
 
 $enc = $this->encoder();
+$params = $this->param();
+$path = $this->get( 'treeCatalogPath', array() );
 $counts = $this->config( 'client/html/catalog/count/enable', true );
+
+$name = '';
+if( ( $node = end( $path ) ) !== false ) {
+	$name = $node->getName();
+}
+
+$listTarget = $this->config( 'client/html/catalog/lists/url/target' );
+$listController = $this->config( 'client/html/catalog/lists/url/controller', 'catalog' );
+$listAction = $this->config( 'client/html/catalog/lists/url/action', 'list' );
+$listConfig = $this->config( 'client/html/catalog/lists/url/config', array() );
+
 
 /** client/html/common/partials/tree
  * Relative path to the category tree partial template file
@@ -49,8 +62,15 @@ $counts = $this->config( 'client/html/catalog/count/enable', true );
 	<input type="hidden" name="<?php echo $enc->attr( $this->formparam( array( 'f_catid' ) ) ); ?>" value="<?php echo $enc->attr( $this->param( 'f_catid' ) ); ?>" />
 <?php endif; ?>
 	<h2><?php echo $enc->html( $this->translate( 'client', 'Categories' ), $enc::TRUST ); ?></h2>
+<?php if( isset( $params['f_catid'] ) ) : ?>
+<?php	unset( $params['f_catid'], $params['f_name'] ); ?>
+	<div class="category-selected">
+		<span class="selected-intro"><?php echo $enc->html( $this->translate( 'client', 'Your choice' ), $enc::TRUST ); ?></span>
+		<a class="selected-category" href="<?php echo $enc->attr( $this->url( $listTarget, $listController, $listAction, $params, array(), $listConfig ) ); ?>"><?php echo $enc->html( $name, $enc::TRUST ); ?></a></li>
+	</div>
+<?php endif; ?>
 <?php if( isset( $this->treeCatalogTree ) && $this->treeCatalogTree->getStatus() > 0 ) : ?>
-<?php	$values = array( 'nodes' => array( $this->treeCatalogTree ), 'path' => $this->get( 'treeCatalogPath', array() ), 'params' => $this->get( 'treeFilterParams', array() ) ); ?>
+<?php	$values = array( 'nodes' => array( $this->treeCatalogTree ), 'path' => $path, 'params' => $this->get( 'treeFilterParams', array() ) ); ?>
 <?php 	echo $this->partial( $this->config( 'client/html/common/partials/tree', 'common/partials/tree-default.php' ), $values ); ?>
 <?php endif; ?>
 <?php echo $this->get( 'treeBody' ); ?>
