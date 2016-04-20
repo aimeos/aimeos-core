@@ -27,7 +27,6 @@ abstract class Base
 	private $stmts = array();
 	private $keySeparator = '.';
 	private $subManagers = array();
-	private $searchAttributes = array();
 
 
 	/**
@@ -280,35 +279,22 @@ abstract class Base
 	 */
 	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
 	{
-		if( !isset( $this->searchAttributes[0] ) )
-		{
-			$attr = array();
+		$attr = array();
 
-			foreach( $list as $key => $fields ) {
-				$attr[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
-			}
-
-			$this->searchAttributes[0] = $attr;
+		foreach( $list as $key => $fields ) {
+			$attr[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
 		}
 
 		if( $withsub === true )
 		{
-			if( !isset( $this->searchAttributes[1] ) )
-			{
-				$attr = $this->searchAttributes[0];
-				$domains = $this->context->getConfig()->get( $path, $default );
+			$domains = $this->context->getConfig()->get( $path, $default );
 
-				foreach( $domains as $domain ) {
-					$attr += $this->getSubManager( $domain )->getSearchAttributes( true );
-				}
-
-				$this->searchAttributes[1] = $attr;
+			foreach( $domains as $domain ) {
+				$attr += $this->getSubManager( $domain )->getSearchAttributes( true );
 			}
-
-			return $this->searchAttributes[1];
 		}
 
-		return $this->searchAttributes[0];
+		return $attr;
 	}
 
 
