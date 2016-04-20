@@ -23,7 +23,6 @@ abstract class MShop_Common_Manager_Abstract
 	private $_stmts = array();
 	private $_keySeparator = '.';
 	private $_subManagers = array();
-	private $_searchAttributes = array();
 
 
 	/**
@@ -275,35 +274,22 @@ abstract class MShop_Common_Manager_Abstract
 	 */
 	protected function _getSearchAttributes( array $list, $path, array $default, $withsub )
 	{
-		if( !isset( $this->_searchAttributes[0] ) )
-		{
-			$attr = array();
+		$attr = array();
 
-			foreach( $list as $key => $fields ) {
-				$attr[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
-			}
-
-			$this->_searchAttributes[0] = $attr;
+		foreach( $list as $key => $fields ) {
+			$attr[$key] = new MW_Common_Criteria_Attribute_Default( $fields );
 		}
 
 		if( $withsub === true )
 		{
-			if( !isset( $this->_searchAttributes[1] ) )
-			{
-				$attr = $this->_searchAttributes[0];
-				$domains = $this->_context->getConfig()->get( $path, $default );
+			$domains = $this->_context->getConfig()->get( $path, $default );
 
-				foreach( $domains as $domain ) {
-					$attr += $this->getSubManager( $domain )->getSearchAttributes( true );
-				}
-
-				$this->_searchAttributes[1] = $attr;
+			foreach( $domains as $domain ) {
+				$attr += $this->getSubManager( $domain )->getSearchAttributes( true );
 			}
-
-			return $this->_searchAttributes[1];
 		}
 
-		return $this->_searchAttributes[0];
+		return $attr;
 	}
 
 
