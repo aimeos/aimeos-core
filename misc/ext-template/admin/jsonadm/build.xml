@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="<extname> extension - JSON admin controller" default="all">
+<project name="<extname> extension - Aimeos admin JSON API" default="all">
 
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
@@ -19,12 +19,12 @@
 
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
-		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways src tests/Controller"
+		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways src tests/Admin"
 			  checkreturn="true" logoutput="true"/>
 	</target>
 
 	<target name="clean" description="Executes all deployment tasks">
-		<delete file="tests/<extname>_controller-jobs_test.junit.xml" quiet="true" failonerror="false" />
+		<delete file="tests/<extname>_admin-jsonadm_test.junit.xml" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<delete quiet="true" failonerror="false" >
 			<fileset dir="tests">

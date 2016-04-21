@@ -8,7 +8,7 @@
 	"minimum-stability": "dev",
 	"require": {
 		"php": ">=5.3.3",
-		"composer/installers": "~1.0"
+		"composer/installers": "^1.0"
 	},
 	"autoload": {
 		"psr-4": {
@@ -17,18 +17,18 @@
 			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
 			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
 			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
-			"Aimeos\\Controller\\Jsonadm\\": "controller/extjs/src/Controller/Jsonadm/",
 			"Aimeos\\Controller\\ExtJS\\": "controller/extjs/src/Controller/ExtJS/",
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
-			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
-			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/"
+			"Aimeos\\Admin\\Jsonadm\\": "admin/jsonadm/src/Admin/Jsonadm/",
+			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/",
+			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/"
 		},
 		"classmap": [
-			"admin/jqadm/src",
 			"client/html/src",
+			"admin/jqadm/src",
+			"admin/jsonadm/src",
 			"controller/common/src",
 			"controller/frontend/src",
-			"controller/jsonadm/src",
 			"controller/extjs/src",
 			"controller/jobs/src",
 			"lib/custom/src"

@@ -20,5 +20,5 @@ setlocale( LC_NUMERIC, 'POSIX' );
 setlocale( LC_CTYPE, 'en_US.UTF-8' );
 setlocale( LC_TIME, 'POSIX' );
 
-require_once 'TestHelperJadm.php';
-TestHelperJadm::bootstrap();
+require_once 'TestHelperJsonadm.php';
+TestHelperJsonadm::bootstrap();

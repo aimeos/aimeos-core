@@ -5,7 +5,7 @@
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015
  */
-class TestHelperJadm
+class TestHelperJsonadm
 {
 	private static $aimeos;
 	private static $context;
@@ -48,7 +48,7 @@ class TestHelperJadm
 
 	public static function getControllerPaths()
 	{
-		return self::getAimeos()->getCustomPaths( 'controller/jobs' );
+		return self::getAimeos()->getCustomPaths( 'admin/jsonadm' );
 	}
 
 
@@ -95,7 +95,7 @@ class TestHelperJadm
 		$ctx->setView( $view );
 
 
-		$ctx->setEditor( 'core:controller/jobs' );
+		$ctx->setEditor( 'core:admin/jsonadm' );
 
 		return $ctx;
 	}

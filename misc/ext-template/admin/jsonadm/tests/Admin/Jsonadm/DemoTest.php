@@ -1,13 +1,8 @@
 <?php
 
-namespace Aimeos\Controller\Jobs;
+namespace Aimeos\Admin\Jsonadm;
 
 
-/**
- * @copyright Metaways Infosystems GmbH, 2013
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
- */
 class DemoTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -21,7 +16,7 @@ class DemoTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		// $this->object = new \Aimeos\Controller\Job\Demo\Standard( \TestHelperJadm::getContext() );
+		// $this->object = new \Aimeos\Admin\Jsonadm\Demo\Standard( \TestHelperJsonadm::getContext() );
 	}
 
 
