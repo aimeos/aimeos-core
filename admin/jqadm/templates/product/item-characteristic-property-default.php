@@ -39,7 +39,7 @@ $enc = $this->encoder();
 				</td>
 				<td class="property-value">
 					<input class="form-control item-value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.value', '' ) ) ); ?>"
-						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Property value' ) ); ?>"
+						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Property value (required)' ) ); ?>"
 						value="<?php echo $enc->attr( $this->get( 'propertyData/product.property.value/' . $idx ) ); ?>" />
 				</td>
 				<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
@@ -60,7 +60,7 @@ $enc = $this->encoder();
 				</td>
 				<td class="property-value">
 					<input class="form-control item-value" type="text" name="<?php echo $enc->attr( $this->formparam( array( 'characteristic', 'property', 'product.property.value', '' ) ) ); ?>"
-						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Property value' ) ); ?>" value="" disabled="disabled" />
+						placeholder="<?php echo $enc->attr( $this->translate( 'admin', 'Property value (required)' ) ); ?>" value="" disabled="disabled" />
 				</td>
 				<td class="actions"><div class="btn btn-danger fa fa-trash"></div></td>
 			</tr>

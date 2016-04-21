@@ -16,8 +16,8 @@ MShop.panel.product.property.type.ItemUi = Ext.extend(MShop.panel.AbstractTypeIt
 
     afterRender : function() {
         var label = this.record ? this.record.data['product.property.type.label'] : MShop.I18n.dt('admin', 'new');
-        //#: Product property.type item panel title with type label ({0}) and site code ({1)}
-        var string = MShop.I18n.dt('admin', 'Product property.type: {0} ({1})');
+        //#: Product property type item panel title with type label ({0}) and site code ({1)}
+        var string = MShop.I18n.dt('admin', 'Product property type: {0} ({1})');
         this.setTitle(String.format(string, label, MShop.config.site["locale.site.label"]));
 
         MShop.panel.product.property.type.ItemUi.superclass.afterRender.apply(this, arguments);
