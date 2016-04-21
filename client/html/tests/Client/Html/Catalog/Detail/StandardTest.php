@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertStringStartsWith( '	<title>Cafe Noire Cappuccino</title>', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 5, count( $tags ) );
+		$this->assertEquals( 6, count( $tags ) );
 	}
 
 
@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertStringStartsWith( '<section class="aimeos catalog-detail"', $output );
 		$this->assertEquals( '2022-01-01 00:00:00', $expire );
-		$this->assertEquals( 5, count( $tags ) );
+		$this->assertEquals( 6, count( $tags ) );
 	}
 
 

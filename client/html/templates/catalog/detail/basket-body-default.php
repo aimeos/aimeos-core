@@ -22,6 +22,7 @@ $enc = $this->encoder();
 <?php	echo $this->partial( $this->config( 'client/html/common/partials/price', 'common/partials/price-default.php' ), array( 'prices' => $this->detailProductItem->getRefItems( 'price', null, 'default' ) ) ); ?>
 	</div>
 <?php endif; ?>
+<?php echo $this->block()->get( 'catalog/detail/basket/service' ); ?>
 	<form method="POST" action="<?php echo $enc->attr( $this->url( $basketTarget, $basketController, $basketAction, array(), array(), $basketConfig ) ); ?>">
 <!-- catalog.detail.basket.csrf -->
 <?php echo $this->csrf()->formfield(); ?>
