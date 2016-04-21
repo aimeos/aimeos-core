@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 13:05+0100\n"
+"POT-Creation-Date: 2016-04-21 23:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,9 @@ msgstr "Attribute type: {0} ({1})"
 msgid "Attribute: {0} ({1})"
 msgstr "Attribute: {0} ({1})"
 
+msgid "Attributes"
+msgstr ""
+
 msgid "Available attributes"
 msgstr "Available attributes"
 
@@ -153,6 +156,9 @@ msgid "Catalog: {0} ({1})"
 msgstr "Catalog: {0} ({1})"
 
 msgid "Categories"
+msgstr ""
+
+msgid "Characteristics"
 msgstr ""
 
 msgid "City"
@@ -726,6 +732,15 @@ msgstr "Product name"
 
 msgid "Product price"
 msgstr "Product price"
+
+msgid "Product property type"
+msgstr ""
+
+#. : Product property.type item panel title with type label ({0}) and site code ({1)}
+#. : Product property type item panel title with type label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Product property type: {0} ({1})"
+msgstr ""
 
 msgid "Product quantity"
 msgstr "Product quantity"

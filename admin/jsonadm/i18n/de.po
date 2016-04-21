@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Aimeos <aimeos@aimeos.org>, 2015
+# Aimeos <aimeos@aimeos.org>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2015-12-07 16:07+0000\n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-04-21 21:08+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -39,8 +39,8 @@ msgid "Invalid class name \"%1$s\""
 msgstr "Der Klassenname \"%1$s\" is ungültig"
 
 #, php-format
-msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr "Ungültiger Name \"%1$s\" des Controllers in \"%2$s\""
+msgid "Invalid client \"%1$s\" in \"%2$s\""
+msgstr "Ungültiger Name \"%1$s\" des Clients in \"%2$s\""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 13:04+0100\n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
 "PO-Revision-Date: 2014-01-29 12:00+0100\n"
 "Last-Translator: Norbert Sendetzky <n.sendetzky@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -92,6 +92,9 @@ msgstr ""
 msgid "Attribute: {0} ({1})"
 msgstr ""
 
+msgid "Attributes"
+msgstr ""
+
 msgid "Available attributes"
 msgstr ""
 
@@ -152,6 +155,9 @@ msgid "Catalog: {0} ({1})"
 msgstr ""
 
 msgid "Categories"
+msgstr ""
+
+msgid "Characteristics"
 msgstr ""
 
 msgid "City"
@@ -726,6 +732,15 @@ msgstr ""
 msgid "Product price"
 msgstr ""
 
+msgid "Product property type"
+msgstr ""
+
+#. : Product property.type item panel title with type label ({0}) and site code ({1)}
+#. : Product property type item panel title with type label ({0}) and site code ({1)}
+#, fuzzy, python-brace-format
+msgid "Product property type: {0} ({1})"
+msgstr "Product tag: {0} ({1})"
+
 msgid "Product quantity"
 msgstr ""
 
@@ -1149,3 +1164,7 @@ msgstr ""
 
 msgid "yy-mm-dd"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Product property.type: {0} ({1})"
+#~ msgstr "Product tag: {0} ({1})"

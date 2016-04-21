@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2015-12-09 18:05+0000\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-04-21 20:42+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,6 +63,9 @@ msgstr "Arama motorları için bir ürün site haritası oluşturur"
 msgid "Creates bought together product suggestions"
 msgstr "Beraber satın alınan ürün önerileri oluşturur"
 
+msgid "Customer account e-mails"
+msgstr ""
+
 msgid "Decreases the counts of successfully redeemed coupons"
 msgstr "Başarıyla itfa edilmiş kuponları geçersiz kılar"
 
@@ -95,6 +98,10 @@ msgstr "Mevcut tüm ürünleri dışa aktarır"
 
 msgid "Imports new and updates existing products from CSV files"
 msgstr "CSV dosyasından yeni ürün içe aktarır veya mevcut ürünleri günceller"
+
+#, php-format
+msgid "Invalid JSON encode message: %1$s"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -193,6 +200,9 @@ msgstr "Ödenmemiş siparişleri kaldırır"
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr "Gerekli haritalama anahtarı \"%1$s\" eksik veya hiçbir dizi içermiyor"
+
+msgid "Sends e-mails for new customer accounts"
+msgstr ""
 
 msgid "Sends e-mails for watched products"
 msgstr "İzlenen ürünler için e-mailler gönderir"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-21 17:37+0100\n"
+"POT-Creation-Date: 2016-04-21 22:09+0200\n"
 "PO-Revision-Date: 2013-09-24 16:22+0000\n"
 "Last-Translator: dhoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -60,6 +60,9 @@ msgstr ""
 msgid "Creates bought together product suggestions"
 msgstr ""
 
+msgid "Customer account e-mails"
+msgstr ""
+
 msgid "Decreases the counts of successfully redeemed coupons"
 msgstr "Decreases the counts of successfully redeemed coupons"
 
@@ -88,6 +91,10 @@ msgid "Exports all available products"
 msgstr ""
 
 msgid "Imports new and updates existing products from CSV files"
+msgstr ""
+
+#, php-format
+msgid "Invalid JSON encode message: %1$s"
 msgstr ""
 
 #, php-format
@@ -185,6 +192,9 @@ msgstr ""
 
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
+msgstr ""
+
+msgid "Sends e-mails for new customer accounts"
 msgstr ""
 
 msgid "Sends e-mails for watched products"

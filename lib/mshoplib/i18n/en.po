@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aimeos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-21 17:37+0100\n"
+"POT-Creation-Date: 2016-04-21 22:09+0200\n"
 "PO-Revision-Date: 2013-04-05 14:29+0200\n"
 "Last-Translator: Daniel Hoffmann <d.hoffmann@metaways.de>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/aimeos/language/en/)\n"
@@ -388,6 +388,10 @@ msgstr ""
 
 #, php-format
 msgid "Manager path is empty"
+msgstr ""
+
+#, php-format
+msgid "Message queue object not available"
 msgstr ""
 
 # error domain: manager
