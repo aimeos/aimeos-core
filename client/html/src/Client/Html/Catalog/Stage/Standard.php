@@ -216,9 +216,9 @@ class Standard
 			{
 				$view = $this->setViewParams( $view, $tags, $expire );
 
-				$output = '';
+				$html = '';
 				foreach( $this->getSubClients() as $subclient ) {
-					$output .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
+					$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->stageHeader = $html;
 
