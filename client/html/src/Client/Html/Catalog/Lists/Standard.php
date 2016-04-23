@@ -243,39 +243,39 @@ class Standard
 					$html .= $subclient->setView( $view )->getHeader( $uid, $tags, $expire );
 				}
 				$view->listHeader = $html;
-
-				/** client/html/catalog/lists/standard/template-header
-				 * Relative path to the HTML header template of the catalog list client.
-				 *
-				 * The template file contains the HTML code and processing instructions
-				 * to generate the HTML code that is inserted into the HTML page header
-				 * of the rendered page in the frontend. The configuration string is the
-				 * path to the template file relative to the templates directory (usually
-				 * in client/html/templates).
-				 *
-				 * You can overwrite the template file configuration in extensions and
-				 * provide alternative templates. These alternative templates should be
-				 * named like the default one but with the string "standard" replaced by
-				 * an unique name. You may use the name of your project for this. If
-				 * you've implemented an alternative client class as well, "standard"
-				 * should be replaced by the name of the new class.
-				 *
-				 * @param string Relative path to the template creating code for the HTML page head
-				 * @since 2014.03
-				 * @category Developer
-				 * @see client/html/catalog/lists/standard/template-body
-				 */
-				$tplconf = 'client/html/catalog/lists/standard/template-header';
-				$default = 'catalog/lists/header-default.php';
-
-				$html = $view->render( $view->config( $tplconf, $default ) );
-
-				$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 			}
 			catch( \Exception $e )
 			{
 				$context->getLogger()->log( $e->getMessage() . PHP_EOL . $e->getTraceAsString() );
 			}
+
+			/** client/html/catalog/lists/standard/template-header
+			 * Relative path to the HTML header template of the catalog list client.
+			 *
+			 * The template file contains the HTML code and processing instructions
+			 * to generate the HTML code that is inserted into the HTML page header
+			 * of the rendered page in the frontend. The configuration string is the
+			 * path to the template file relative to the templates directory (usually
+			 * in client/html/templates).
+			 *
+			 * You can overwrite the template file configuration in extensions and
+			 * provide alternative templates. These alternative templates should be
+			 * named like the default one but with the string "standard" replaced by
+			 * an unique name. You may use the name of your project for this. If
+			 * you've implemented an alternative client class as well, "standard"
+			 * should be replaced by the name of the new class.
+			 *
+			 * @param string Relative path to the template creating code for the HTML page head
+			 * @since 2014.03
+			 * @category Developer
+			 * @see client/html/catalog/lists/standard/template-body
+			 */
+			$tplconf = 'client/html/catalog/lists/standard/template-header';
+			$default = 'catalog/lists/header-default.php';
+
+			$html = $view->render( $view->config( $tplconf, $default ) );
+
+			$this->setCached( 'header', $uid, $prefixes, $confkey, $html, $tags, $expire );
 		}
 		else
 		{
