@@ -11,6 +11,20 @@ $enc = $this->encoder();
 $attributes = $this->get( 'selectionAttributeItems', array() );
 
 
+/** client/html/catalog/detail/basket/selection/preselect
+ * Pre-select first item in selection list
+ *
+ * No option of the available selections for a product is pre-selected by
+ * default. This setting removes the hint to select an option, so the first one
+ * is selected by default.
+ *
+ * @param boolean True to select the first option by default, false to display the select hint
+ * @since 2016.05
+ * @category Developer
+ * @category User
+ */
+$preselect = (bool) $this->config( 'client/html/catalog/detail/basket/selection/preselect', false );
+
 /** client/html/catalog/detail/basket/selection/type
  * List of layout types for the variant attributes
  *
@@ -90,7 +104,9 @@ $attributes = $this->get( 'selectionAttributeItems', array() );
 				</ul>
 <?php	else : ?>
 			<select class="select-list" name="<?php echo $enc->attr( $this->formparam( array( 'b_prod', 0, 'attrvarid', $code ) ) ); ?>" data-index="<?php echo $index++; ?>">
+<?php		if( $preselect === false ) : ?>
 				<option class="select-option" value=""><?php echo $enc->attr( $this->translate( 'client', 'Please select' ) ); ?></option>
+<?php		endif; ?>
 <?php		foreach( $attrIds as $attrId => $position ) : ?>
 <?php			if( isset( $attributes[$attrId] ) ) : ?>
 				<option class="select-option" value="<?php echo $enc->attr( $attrId ); ?>"><?php echo $enc->html( $attributes[$attrId]->getName() ); ?></option>
