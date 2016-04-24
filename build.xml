@@ -25,7 +25,6 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="coverage" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
@@ -46,7 +45,6 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
@@ -80,7 +78,6 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="check" haltonfailure="false" dir="${coredir}/admin/jqadm" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
@@ -99,12 +96,6 @@
 		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
-		<confdoc keyprefix="admin/jqadm" wikiprefix="Configuration/Core" keyparts="1"
-			outfile="${coredir}/misc/confdoc/core-admin-jqadm.wiki">
-			<fileset dir="${coredir}/admin/jqadm" expandsymboliclinks="true" >
-				<include name="src/**/*.php" />
-			</fileset>
-		</confdoc>
 		<confdoc keyprefix="admin/jsonadm" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${coredir}/admin/jsonadm/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-admin-jsonadm.wiki">
@@ -177,7 +168,6 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/admin/jqadm" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
@@ -193,7 +183,6 @@
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/client" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/admin" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -209,7 +198,6 @@
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/client" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/admin" />
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />

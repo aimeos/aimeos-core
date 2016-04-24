@@ -50,7 +50,6 @@
 			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
 			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
-			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/",
 			"Aimeos\\Admin\\JsonAdm\\": "controller/jobs/src/Admin/JsonAdm/",
 			"Aimeos\\": "."
 		},
@@ -61,7 +60,6 @@
 			"controller/frontend/src",
 			"controller/jobs/src",
 			"client/html/src",
-			"admin/jqadm/src",
 			"admin/jsonadm/src",
 			"Bootstrap.php"
 		]

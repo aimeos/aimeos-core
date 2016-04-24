@@ -18,18 +18,14 @@ return array(
 		'controller/frontend/src',
 		'controller/jobs/src',
 		'admin/jsonadm/src',
-		'admin/jqadm/src',
 	),
 	'config' => array(
 		'lib/mshoplib/config',
 		'client/html/config',
 		'admin/jsonadm/config',
-		'admin/jqadm/config',
 		'config',
 	),
 	'i18n' => array(
-		'admin' => 'admin/i18n',
-		'admin/ext' => 'admin/i18n/ext',
 		'admin/jsonadm' => 'admin/jsonadm/i18n',
 		'client' => 'client/i18n',
 		'client/code' => 'client/i18n/code',
@@ -45,12 +41,6 @@ return array(
 		'lib/mshoplib/setup',
 	),
 	'custom' => array(
-		'admin/jqadm' => array(
-			'admin/jqadm/manifest.jsb2',
-		),
-		'admin/jqadm/templates' => array(
-			'admin/jqadm/templates',
-		),
 		'admin/jsonadm/templates' => array(
 			'admin/jsonadm/templates',
 		),
