@@ -25,7 +25,6 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="coverage" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -45,7 +44,6 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -78,7 +76,6 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="check" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -96,14 +93,6 @@
 		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
-		<confdoc keyprefix="admin/jsonadm" wikiprefix="Configuration/Core" keyparts="0"
-			optfile="${coredir}/admin/jsonadm/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/core-admin-jsonadm.wiki">
-			<fileset dir="${coredir}/admin/jsonadm" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
-				<include name="src/**/*.php" />
-			</fileset>
-		</confdoc>
 		<confdoc keyprefix="client/html" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${coredir}/client/html/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-client-html.wiki">
@@ -168,7 +157,6 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/client/html" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/admin/jsonadm" />
 		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -192,7 +180,7 @@
 
 
 	<target name="build" description="Creates all files to be generated" >
-		<exec command="tx pull -a -f --minimum-perc=1" checkreturn="true" logoutput="true" />
+		<exec command="tx pull -a -f" checkreturn="true" logoutput="true" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/common" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />

@@ -3,24 +3,6 @@ host = https://www.transifex.com
 minimum-perc = 1
 minimum_perc = 1
 
-[aimeos-core.admin]
-file_filter = admin/i18n/<lang>.po
-source_file = admin/i18n/core-admin.pot
-source_lang = en
-type = PO
-
-[aimeos-core.admin-ext]
-file_filter = admin/i18n/ext/<lang>.po
-source_file = admin/i18n/ext/core-admin-ext.pot
-source_lang = en
-type = PO
-
-[aimeos-core.admin-jsonadm]
-file_filter = admin/jsonadm/i18n/<lang>.po
-source_file = admin/jsonadm/i18n/core-admin-jsonadm.pot
-source_lang = en
-type = PO
-
 [aimeos-core.client]
 file_filter = client/i18n/<lang>.po
 source_file = client/i18n/core-client.pot

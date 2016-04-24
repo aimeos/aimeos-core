@@ -17,16 +17,13 @@ return array(
 		'controller/common/src',
 		'controller/frontend/src',
 		'controller/jobs/src',
-		'admin/jsonadm/src',
 	),
 	'config' => array(
 		'lib/mshoplib/config',
 		'client/html/config',
-		'admin/jsonadm/config',
 		'config',
 	),
 	'i18n' => array(
-		'admin/jsonadm' => 'admin/jsonadm/i18n',
 		'client' => 'client/i18n',
 		'client/code' => 'client/i18n/code',
 		'client/country' => 'client/i18n/country',
@@ -41,9 +38,6 @@ return array(
 		'lib/mshoplib/setup',
 	),
 	'custom' => array(
-		'admin/jsonadm/templates' => array(
-			'admin/jsonadm/templates',
-		),
 		'client/html/templates' => array(
 			'client/html/templates',
 		),

@@ -50,7 +50,6 @@
 			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
 			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
-			"Aimeos\\Admin\\JsonAdm\\": "controller/jobs/src/Admin/JsonAdm/",
 			"Aimeos\\": "."
 		},
 		"classmap": [
@@ -60,7 +59,6 @@
 			"controller/frontend/src",
 			"controller/jobs/src",
 			"client/html/src",
-			"admin/jsonadm/src",
 			"Bootstrap.php"
 		]
 	}
