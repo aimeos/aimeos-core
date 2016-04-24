@@ -40,10 +40,10 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testInjectController()
 	{
-		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
-		\Aimeos\Controller\Jobs\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard', $cntl );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		\Aimeos\Controller\Jobs\Admin\Cache\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Cache\\Standard', $cntl );
 
-		$iCntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$iCntl = \Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
 		$this->assertSame( $cntl, $iCntl );
 	}
@@ -51,11 +51,11 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testInjectControllerReset()
 	{
-		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
-		\Aimeos\Controller\Jobs\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard', $cntl );
-		\Aimeos\Controller\Jobs\Admin\Job\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard', null );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		\Aimeos\Controller\Jobs\Admin\Cache\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Cache\\Standard', $cntl );
+		\Aimeos\Controller\Jobs\Admin\Cache\Factory::injectController( '\\Aimeos\\Controller\\Jobs\\Admin\\Cache\\Standard', null );
 
-		$new = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$new = \Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
 		$this->assertNotSame( $cntl, $new );
 	}
@@ -64,7 +64,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	public function testAddDecoratorsInvalidName()
 	{
 		$decorators = array( '$' );
-		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'Test_' );
@@ -74,7 +74,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	public function testAddDecoratorsInvalidClass()
 	{
 		$decorators = array( 'Test' );
-		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'TestDecorator' );
@@ -84,7 +84,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	public function testAddDecoratorsInvalidInterface()
 	{
 		$decorators = array( 'Test' );
-		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl,
@@ -94,7 +94,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testAddControllerDecoratorsInvalidDomain()
 	{
-		$cntl = \Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		$cntl = \Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addControllerDecoratorsPublic( $this->context, $this->aimeos, $cntl, '' );
@@ -107,7 +107,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$this->context->getConfig()->set( 'controller/jobs/common/decorators/default', array( 'TestDecorator' ) );
 
 		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
-		\Aimeos\Controller\Jobs\Admin\Job\Factory::createController( $this->context, $this->aimeos, 'Standard' );
+		\Aimeos\Controller\Jobs\Admin\Cache\Factory::createController( $this->context, $this->aimeos, 'Standard' );
 	}
 }
 

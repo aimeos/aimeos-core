@@ -30,7 +30,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$this->stub = $this->getMockBuilder( '\\Aimeos\\Controller\\Jobs\\Admin\\Job\\Standard' )
+		$this->stub = $this->getMockBuilder( '\\Aimeos\\Controller\\Jobs\\Admin\\Cache\\Standard' )
 			->setConstructorArgs( array( $context, $aimeos ) )
 			->getMock();
 

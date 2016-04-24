@@ -20,7 +20,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$controller = \Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, 'admin/job' );
+		$controller = \Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, 'admin/cache' );
 		$this->assertInstanceOf( '\\Aimeos\\Controller\\Jobs\\Iface', $controller );
 	}
 

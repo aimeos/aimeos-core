@@ -16,7 +16,6 @@ return array(
 		'client/html/src',
 		'controller/common/src',
 		'controller/frontend/src',
-		'controller/extjs/src',
 		'controller/jobs/src',
 		'admin/jsonadm/src',
 		'admin/jqadm/src',
@@ -38,7 +37,6 @@ return array(
 		'client/currency' => 'client/i18n/currency',
 		'client/language' => 'client/i18n/language',
 		'controller/frontend' => 'controller/frontend/i18n',
-		'controller/extjs' => 'controller/extjs/i18n',
 		'controller/jobs' => 'controller/jobs/i18n',
 		'mshop/code' => 'lib/mshoplib/i18n/code',
 		'mshop' => 'lib/mshoplib/i18n',
@@ -47,9 +45,6 @@ return array(
 		'lib/mshoplib/setup',
 	),
 	'custom' => array(
-		'admin/extjs' => array(
-			'admin/extjs/manifest.jsb2',
-		),
 		'admin/jqadm' => array(
 			'admin/jqadm/manifest.jsb2',
 		),
@@ -61,9 +56,6 @@ return array(
 		),
 		'client/html/templates' => array(
 			'client/html/templates',
-		),
-		'controller/extjs' => array(
-			'controller/extjs/src',
 		),
 		'controller/jobs' => array(
 			'controller/jobs/src',
