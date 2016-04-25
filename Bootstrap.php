@@ -37,7 +37,7 @@ class Bootstrap
 		}
 
 		if( $defaultdir === true && is_dir( $basedir . DIRECTORY_SEPARATOR . 'ext' ) === true ) {
-			$extdirs[] = $basedir . DIRECTORY_SEPARATOR . 'ext';
+			$extdirs[] = realpath( $basedir . DIRECTORY_SEPARATOR . 'ext' );
 		}
 
 		$this->manifests[$basedir] = $this->getManifestFile( $basedir );
@@ -357,13 +357,11 @@ class Bootstrap
 			}
 
 			if( in_array( $extName, $stack ) ) {
-				$msg = sprintf( 'Circular dependency for "%1$s" detected', $extName );
-				throw new \Exception( $msg );
+				throw new \Exception( sprintf( 'Circular dependency for "%1$s" detected', $extName ) );
 			}
 
 			$stack[] = $extName;
 
-			/** @todo test for expression object or array when implementing version checks */
 			if( isset( $this->dependencies[$extName] ) ) {
 				$this->addManifests( (array) $this->dependencies[$extName], $stack );
 			}
