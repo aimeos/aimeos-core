@@ -292,7 +292,7 @@ class Standard
 			$orderlist->appendChild( $orderitem );
 			$dom->appendChild( $orderlist );
 		}
-		catch( DOMException $e )
+		catch( \DOMException $e )
 		{
 			$msg = 'Creating XML file with order data for delivery provider failed: %1$s';
 			throw new \Aimeos\MShop\Service\Exception( sprintf( $msg, $e->getMessage() ), 0, $e );
