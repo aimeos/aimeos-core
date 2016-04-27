@@ -249,6 +249,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$stock = 10;
+		$bundleStockItems = array();
 
 		foreach( $bundleItems as $bundleId => $bundleItem )
 		{
@@ -265,6 +266,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$bundleStockItem = $stockManagerStub->createItem();
 			$bundleStockItem->setParentId( $bundleId );
 			$bundleStockItem->setStockLevel( $stock - 5 );
+
+			$bundleStockItems[] = $bundleStockItem;
 		}
 
 		$fcn = function( $subject ) {
@@ -272,7 +275,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		};
 
 		$stockManagerStub->expects( $this->exactly( 2 ) )->method( 'searchItems' )
-			->will( $this->onConsecutiveCalls( $stockItems, array( $bundleStockItem ) ) );
+			->will( $this->onConsecutiveCalls( $stockItems, $bundleStockItems ) );
 
 		$stockManagerStub->expects( $this->exactly( 1 ) )->method( 'saveItem' )
 			->with( $this->callback( $fcn ) );
