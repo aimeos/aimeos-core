@@ -48,7 +48,6 @@ class Standard
 	 * Returns the list of URLs for packages files with given filter.
 	 *
 	 * @param string $type Specific filetypes to create output
-	 * @param strig $version URL version string with %s placeholder for the file time
 	 * @return array List of URLs for the package files
 	 */
 	public function getFiles( $type )

@@ -74,9 +74,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->add( 'test' );
 		$msg = $this->object->get();
-		$this->object->del( $msg );
 
 		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $msg );
+
+		$this->object->del( $msg );
+
 		$this->assertNull( $this->object->get() );
 	}
 
@@ -87,9 +89,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->add( 'test2' );
 
 		$msg1 = $this->object->get();
+
+		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $msg1 );
+
 		$this->object->del( $msg1 );
 
 		$msg2 = $this->object->get();
+
+		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $msg2 );
+
 		$this->object->del( $msg2 );
 
 		$this->assertNull( $this->object->get() );

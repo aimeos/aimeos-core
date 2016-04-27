@@ -252,7 +252,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * Writes the content of the local file to the remote path
 	 *
 	 * @param string $path Path to the remote file
-	 * @param string $file Path to the local file
+	 * @param string $local Path to the local file
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */

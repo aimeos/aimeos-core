@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Coupon\Provider;
  * @package MShop
  * @subpackage Coupon
  */
-abstract class Base
+abstract class Base implements Iface
 {
 	private $context;
 	private $object;

@@ -161,6 +161,13 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	public function setService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type );
 
 	/**
+	 * Deletes the delivery or payment service from the basket.
+	 *
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 */
+	public function deleteService( $type );
+
+	/**
 	 * Returns the available coupon codes and the lists of affected product items.
 	 *
 	 * @return array Associative array of codes and lists of product items implementing

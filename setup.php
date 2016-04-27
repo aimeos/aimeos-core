@@ -109,9 +109,8 @@ function getConfig( array $confPaths, array $options )
 /**
  * Returns a new context object
  *
- * @param array $confPaths List of configuration paths from the bootstrap object
- * @param array $options Associative list of configuration options as key/value pairs
- * @return \Aimeos\MW\Config\Iface Configuration object
+ * @param \Aimeos\MW\Config\Iface $conf Configuration object
+ * @return \Aimeos\MShop\Context\Item\Iface New context object
  */
 function getContext( \Aimeos\MW\Config\Iface $conf )
 {
