@@ -689,7 +689,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	/**
 	 * Returns the item type
 	 *
-	 * @return Item type, subtypes are separated by slashes
+	 * @return string Item type, subtypes are separated by slashes
 	 */
 	public function getResourceType()
 	{
