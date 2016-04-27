@@ -172,7 +172,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	protected function checkDeliveryStatus( $value )
 	{
-		if( $temp < \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED || $temp > \Aimeos\MShop\Order\Item\Base::STAT_RETURNED ) {
+		if( $value < \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED || $value > \Aimeos\MShop\Order\Item\Base::STAT_RETURNED ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order delivery status "%1$s" not within allowed range', $value ) );
 		}
 
@@ -188,7 +188,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	protected function checkPaymentStatus( $value )
 	{
-		if( $temp < \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED || $temp > \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ) {
+		if( $value < \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED || $value > \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order payment status "%1$s" not within allowed range', $value ) );
 		}
 
