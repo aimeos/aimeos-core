@@ -253,7 +253,6 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 
 		$productItem = $productManager->createItem();
 		$productItem->setTypeId( $productTypeItem->getId() );
-		$productItem->setSupplierCode( 'My selection brand' );
 		$productItem->setDateStart( '1970-01-01 00:00:00' );
 		$productItem->setStatus( 1 );
 
