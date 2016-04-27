@@ -47,6 +47,9 @@ class TestHelper
 	}
 
 
+	/**
+	 * @param string $site
+	 */
 	private static function createContext( $site )
 	{
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();

@@ -413,7 +413,7 @@ class TestPayPalExpress implements \Aimeos\MW\Communication\Iface
 	 * @param array $what List of rules for the unit tests.
 	 * @param string $error Error message if some of the tests fails.
 	 * @param string $success Success message if all tests were passed.
-	*/
+	 */
 	public function addRule( array $what, $error, $success )
 	{
 		$this->rules['set'] = $what;

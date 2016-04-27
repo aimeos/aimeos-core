@@ -96,7 +96,7 @@ class Standard
 	 *
 	 * @param string $version HTTP protocol version
 	 * @return self
-	*/
+	 */
 	public function withProtocolVersion( $version )
 	{
 		$this->request = $this->request->withProtocolVersion( $version );
@@ -110,7 +110,7 @@ class Standard
 	 * @return string[][] Returns an associative array of the message's headers.
 	 *	 Each key MUST be a header name, and each value MUST be an array of
 	 *	 strings for that header.
-	*/
+	 */
 	public function getHeaders()
 	{
 		return $this->request->getHeaders();
@@ -244,7 +244,7 @@ class Standard
 	 *	 request-target forms allowed in request messages)
 	 * @param mixed $requestTarget
 	 * @return self
-	*/
+	 */
 	public function withRequestTarget( $requestTarget )
 	{
 		$this->request = $this->request->withRequestTarget( $requestTarget );
@@ -256,7 +256,7 @@ class Standard
 	 * Retrieves the HTTP method of the request.
 	 *
 	 * @return string Returns the request method.
-	*/
+	 */
 	public function getMethod()
 	{
 		return $this->request->getMethod();
@@ -269,7 +269,7 @@ class Standard
 	 * @param string $method Case-sensitive method.
 	 * @return self
 	 * @throws \InvalidArgumentException for invalid HTTP methods.
-	*/
+	 */
 	public function withMethod( $method )
 	{
 		$this->request = $this->request->withMethod( $method );
@@ -283,7 +283,7 @@ class Standard
 	 * @see http://tools.ietf.org/html/rfc3986#section-4.3
 	 * @return UriInterface Returns a UriInterface instance
 	 *	 representing the URI of the request.
-	*/
+	 */
 	public function getUri()
 	{
 		return $this->request->getUri();
@@ -296,7 +296,7 @@ class Standard
 	 * @param UriInterface $uri New request URI to use.
 	 * @param bool $preserveHost Preserve the original state of the Host header.
 	 * @return self
-	*/
+	 */
 	public function withUri( UriInterface $uri, $preserveHost = false )
 	{
 		$this->request = $this->request->withUri( $uri, $preserveHost );
@@ -308,7 +308,7 @@ class Standard
 	 * Retrieve server parameters.
 	 *
 	 * @return array List of key/value pairs from $_SERVER
-	*/
+	 */
 	public function getServerParams()
 	{
 		return $this->request->getServerParams();

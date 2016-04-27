@@ -322,7 +322,7 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Iface $invoice Order of the customer
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base item of the customer
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
+	 * @param \DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
 	protected function buildXMLHeader( \Aimeos\MShop\Order\Item\Iface $invoice, \Aimeos\MShop\Order\Item\Base\Iface $base,
@@ -363,7 +363,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
+	 * @param \DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
 	protected function buildXMLService( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
@@ -410,7 +410,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
+	 * @param \DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
 	protected function buildXMLPrice( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
@@ -433,7 +433,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
+	 * @param \DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
 	protected function buildXMLProducts( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
@@ -476,7 +476,7 @@ class Standard
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $parent The bundle product
 	 * @param array $products List of child products attached to $parent
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $productelement DOM element to which the child products are added
+	 * @param \DOMElement $productelement DOM element to which the child products are added
 	 */
 	protected function buildXMLChildList( \Aimeos\MShop\Order\Item\Base\Product\Iface $parent, array $products, \DOMDocument $dom, \DOMElement $productelement )
 	{
@@ -513,7 +513,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
+	 * @param \DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
 	protected function buildXMLAddresses( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
@@ -533,7 +533,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Address object with personal information
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $addresslist DOM element which will be the parent of the new child
+	 * @param \DOMElement $addresslist DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
 	protected function buildXMLAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address,
@@ -567,7 +567,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $orderitem DOM element which will be the parent of the new child
+	 * @param \DOMElement $orderitem DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
 	protected function buildXMLAdditional( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
@@ -592,7 +592,7 @@ class Standard
 	 * @param string $name Name of the new XML element
 	 * @param string|integer $value Value of the new XML element
 	 * @param \DOMDocument $dom DOM document object with contains the XML structure
-	 * @param DOMElement $parent DOM element which will be the parent of the new child
+	 * @param \DOMElement $parent DOM element which will be the parent of the new child
 	 * @throws DOMException If an error occures
 	 */
 	protected function appendChildCDATA( $name, $value, \DOMDocument $dom, \DOMElement $parent )
