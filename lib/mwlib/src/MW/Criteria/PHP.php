@@ -241,12 +241,12 @@ class PHP extends \Aimeos\MW\Criteria\Base
 
 
 	/**
-	* Sets the start number and the size of the requested data slice.
-	*
-	* @param integer $start Start number of the items
-	* @param integer $size Number of items
-	* @return \Aimeos\MW\Criteria\PHP Object instance for fluent interface
-	*/
+	 * Sets the start number and the size of the requested data slice.
+	 *
+	 * @param integer $start Start number of the items
+	 * @param integer $size Number of items
+	 * @return \Aimeos\MW\Criteria\PHP Object instance for fluent interface
+	 */
 	public function setSlice( $start, $size = 100 )
 	{
 		$this->sliceStart = (int) $start;

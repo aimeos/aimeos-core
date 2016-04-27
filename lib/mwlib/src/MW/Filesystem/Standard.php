@@ -71,7 +71,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @param string $path Path to the directory
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	*/
+	 */
 	public function mkdir( $path )
 	{
 		if( @mkdir( $this->resolve( $path ), 0775, true ) === false ) {
@@ -86,7 +86,7 @@ class Standard implements Iface, DirIface, MetaIface
 	 * @param string $path Path to the directory
 	 * @return void
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
-	*/
+	 */
 	public function rmdir( $path )
 	{
 		if( @rmdir( $this->resolve( $path ) ) === false ) {

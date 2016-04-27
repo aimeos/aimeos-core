@@ -273,7 +273,7 @@ class Standard
 		 * @since 2016.01
 		 * @category Developer
 		 * @category User
-		*/
+		 */
 
 		/** controller/common/media/standard/preview/allowedtypes
 		 * A list of image mime types that are allowed for preview image files
@@ -287,7 +287,7 @@ class Standard
 		 * @since 2016.01
 		 * @category Developer
 		 * @category User
-		*/
+		 */
 		$default = array( 'image/jpeg', 'image/png', 'image/gif' );
 		$allowed = $config->get( 'controller/common/media/standard/' . $type . '/allowedtypes', $default );
 
@@ -406,7 +406,7 @@ class Standard
 		 * @since 2016.01
 		 * @category Developer
 		 * @category User
-		*/
+		 */
 
 		/** controller/common/media/standard/preview/maxheight
 		 * Maximum height of the preview images
@@ -425,7 +425,7 @@ class Standard
 		 * @since 2016.01
 		 * @category Developer
 		 * @category User
-		*/
+		 */
 		$maxheight = $config->get( 'controller/common/media/standard/' . $type . '/maxheight', null );
 
 		$mediaFile->scale( $maxwidth, $maxheight );

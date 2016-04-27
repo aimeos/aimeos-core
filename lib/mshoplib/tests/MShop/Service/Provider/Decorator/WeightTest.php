@@ -116,6 +116,9 @@ class WeightTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	/**
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface
+	 */
 	protected function getOrderBaseItem()
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order' );
