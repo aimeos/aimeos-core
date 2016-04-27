@@ -47,18 +47,12 @@
 			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
 			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
 			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
-			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
-			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
-			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
 			"Aimeos\\": "."
 		},
 		"classmap": [
 			"lib/mwlib/src",
 			"lib/mshoplib/src",
 			"controller/common/src",
-			"controller/frontend/src",
-			"controller/jobs/src",
-			"client/html/src",
 			"Bootstrap.php"
 		]
 	}

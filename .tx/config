@@ -3,51 +3,9 @@ host = https://www.transifex.com
 minimum-perc = 1
 minimum_perc = 1
 
-[aimeos-core.client]
-file_filter = client/i18n/<lang>.po
-source_file = client/i18n/core-client.pot
-source_lang = en
-type = PO
-
-[aimeos-core.client-code]
-file_filter = client/i18n/code/<lang>.po
-source_file = client/i18n/code/core-client-code.pot
-source_lang = en
-type = PO
-
-[aimeos-core.client-country]
-file_filter = client/i18n/country/<lang>.po
-source_file = client/i18n/country/core-client-country.pot
-source_lang = en
-type = PO
-
-[aimeos-core.client-language]
-file_filter = client/i18n/language/<lang>.po
-source_file = client/i18n/language/core-client-language.pot
-source_lang = en
-type = PO
-
-[aimeos-core.client-currency]
-file_filter = client/i18n/currency/<lang>.po
-source_file = client/i18n/currency/core-client-currency.pot
-source_lang = en
-type = PO
-
 [aimeos-core.controller-common]
 file_filter = controller/common/i18n/<lang>.po
 source_file = controller/common/i18n/core-controller-common.pot
-source_lang = en
-type = PO
-
-[aimeos-core.controller-frontend]
-file_filter = controller/frontend/i18n/<lang>.po
-source_file = controller/frontend/i18n/core-controller-frontend.pot
-source_lang = en
-type = PO
-
-[aimeos-core.controller-jobs]
-file_filter = controller/jobs/i18n/<lang>.po
-source_file = controller/jobs/i18n/core-controller-jobs.pot
 source_lang = en
 type = PO
 

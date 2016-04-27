@@ -1,7 +1,0 @@
-"job_csv_test1","job csv test product","test"
-"job_csv_test2","job csv test 2. product","default","test","short description"
-"job_csv_test3","job csv test 3. product","default","short","short description","path/to/image.jpg","test",
-"job_csv_test4","job csv test 4. product","default","short","short description","path/to/image.jpg","default","test","10.00","20.00"
-"job_csv_test5","job csv test 5. product","default","short","short description","path/to/image.jpg","default","default","10.00","20.00","test","m"
-"job_csv_test6","job csv test 6. product","default","short","short description","path/to/image.jpg","default","default","10.00","20.00","size","m","test","default"
-"job_csv_test7","job csv test 7. product","default","short","short description","path/to/image.jpg","default","default","10.00","20.00","size","m","CNC","default","test","1.50"

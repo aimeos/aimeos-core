@@ -22,9 +22,6 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="coverage" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -41,9 +38,6 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="test" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -58,8 +52,6 @@
 	<target name="testperf" description="Executes performance tests">
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
-		<phing target="testperf" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="testperf" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="testperf" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -73,9 +65,6 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="check" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="check" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -93,34 +82,11 @@
 		<taskdef name="confdoc" classname="MShopConfigDocTask" classpath="${coredir}/misc/phing" />
 		<mkdir dir="${coredir}/misc/confdoc/" />
 		<echo msg="Generating config documentation" />
-		<confdoc keyprefix="client/html" wikiprefix="Configuration/Core" keyparts="1"
-			optfile="${coredir}/client/html/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/core-client-html.wiki">
-			<fileset dir="${coredir}/client/html" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
-				<include name="src/**/*.php" />
-			</fileset>
-		</confdoc>
 		<confdoc keyprefix="controller/common" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${coredir}/controller/common/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/core-controller-common.wiki">
 			<fileset dir="${coredir}/controller/common/src" expandsymboliclinks="true" >
 				<include name="**/*.php" />
-			</fileset>
-		</confdoc>
-		<confdoc keyprefix="controller/frontend" wikiprefix="Configuration/Core" keyparts="0"
-			optfile="${coredir}/controller/frontend/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/core-controller-frontend.wiki">
-			<fileset dir="${coredir}/controller/frontend/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
-			</fileset>
-		</confdoc>
-		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
-			optfile="${coredir}/controller/jobs/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/core-controller-jobs.wiki">
-			<fileset dir="${coredir}/controller/jobs" expandsymboliclinks="true" >
-				<include name="templates/**/*.php" />
-				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
 		<confdoc keyprefix="madmin" wikiprefix="Configuration/Core" keyparts="1"
@@ -154,9 +120,6 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="clean" haltonfailure="true" dir="${coredir}/client/html" />
 		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -168,9 +131,6 @@
 	<target name="i18n" description="Creates all translation files">
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="i18n" haltonfailure="true" dir="${coredir}/client" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />
@@ -183,9 +143,6 @@
 		<exec command="tx pull -a -f" checkreturn="true" logoutput="true" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/common" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/controller/frontend" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
-		<phing target="build" haltonfailure="true" dir="${coredir}/client" />
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
 				<include name="**/phing.xml" />

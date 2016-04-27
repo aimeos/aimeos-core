@@ -1,5 +1,0 @@
-"item code","item label","item type","item status","text type","text content","text type","text content","media url","price quantity","price value","price tax rate","attribute type","attribute code","subproduct code","product list type","property value","property type","catalog code","catalog list type"
-"job_csv_test","job csv test product","default",1,"short","short description","long","long
-description","path/to/image.jpg",1,"10.00","20.00","import-test","size",,,"1.50","package-weight","root","promotion"
-"job_csv_test2","job csv test 2. product","select",1,"short","short selection
-description","long","long selection description","path/to/image2.jpg",1,"10.00","20.00",,,"job_csv_test","default","1.50","package-weight",,
