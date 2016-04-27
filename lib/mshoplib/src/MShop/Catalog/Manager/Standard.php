@@ -842,7 +842,6 @@ class Standard
 		if( !isset( $this->treeManagers[$siteid] ) )
 		{
 			$context = $this->getContext();
-			$config = $context->getConfig();
 			$dbm = $context->getDatabaseManager();
 
 

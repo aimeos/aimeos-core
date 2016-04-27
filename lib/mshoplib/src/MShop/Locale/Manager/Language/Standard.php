@@ -470,7 +470,6 @@ class Standard
 	{
 		$items = array();
 		$context = $this->getContext();
-		$config = $context->getConfig();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();

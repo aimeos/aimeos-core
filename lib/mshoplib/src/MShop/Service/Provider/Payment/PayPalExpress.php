@@ -602,7 +602,6 @@ class PayPalExpress
 	protected function getOrderDetails( \Aimeos\MShop\Order\Item\Base\Iface $orderBase )
 	{
 		$deliveryPrice = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem();
-		$deliveryCosts = $paymentCosts = '0.00';
 		$values = $this->getAuthParameter();
 
 		try

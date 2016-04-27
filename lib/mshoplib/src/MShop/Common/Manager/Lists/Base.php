@@ -206,7 +206,6 @@ abstract class Base
 	public function moveItem( $id, $ref = null )
 	{
 		$context = $this->getContext();
-		$config = $context->getConfig();
 		$siteid = $context->getLocale()->getSiteId();
 		$cfgPath = $this->getConfigPath();
 

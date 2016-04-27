@@ -209,6 +209,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$return = $this->object->setUserId( function() { return 456; } );
 		$this->assertEquals( '456', $this->object->getUserId() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
 	public function testGetSetGroupIds()
@@ -219,7 +220,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( array( '123' ), $this->object->getGroupIds() );
 		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 
-		$this->object->setGroupIds( function() { return array( 456 ); } );
+		$return = $this->object->setGroupIds( function() { return array( 456 ); } );
 		$this->assertEquals( array( '456' ), $this->object->getGroupIds() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 }

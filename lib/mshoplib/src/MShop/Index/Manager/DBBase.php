@@ -192,7 +192,6 @@ abstract class DBBase
 	protected function optimizeBase( $path )
 	{
 		$context = $this->getContext();
-		$config = $context->getConfig();
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
