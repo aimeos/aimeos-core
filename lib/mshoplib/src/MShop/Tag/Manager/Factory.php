@@ -26,7 +26,7 @@ class Factory
 	 * Creates a tag manager object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param string $name Manager name
+	 * @param string|null $name Manager name
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 * @throws \Aimeos\MShop\Tag\Exception|\Aimeos\MShop\Exception If requested manager
 	 * implementation couldn't be found or initialisation fails

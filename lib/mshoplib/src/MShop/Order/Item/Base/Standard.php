@@ -772,7 +772,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @return Associative list of item properties and their values
+	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray()
 	{

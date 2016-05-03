@@ -25,7 +25,7 @@ class Factory
 	 * Creates a catalog DAO object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
-	 * @param string $name Manager name
+	 * @param string|null $name Manager name
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object
 	 * @throws \Aimeos\MShop\Index\Exception If requested manager implementation couldn't be found
 	 */

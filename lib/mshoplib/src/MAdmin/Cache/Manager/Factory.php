@@ -26,7 +26,7 @@ class Factory
 	 * Creates an admin cache manager object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param string $name Manager name
+	 * @param string|null $name Manager name
 	 * @return \Aimeos\MAdmin\Cache\Manager\Iface Cache manager object
 	 */
 	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )

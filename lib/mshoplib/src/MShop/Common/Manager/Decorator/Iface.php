@@ -26,7 +26,6 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $manager Manager object
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
-	 * @return void
 	 */
 	public function __construct( \Aimeos\MShop\Common\Manager\Iface $manager, \Aimeos\MShop\Context\Item\Iface $context );
 }

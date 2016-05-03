@@ -27,8 +27,8 @@ class Factory
 	 *
 	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
-	 * @param integer $id Context ID the objects have been created with (string of \Aimeos\MShop\Context\Item\Iface)
-	 * @param string $path Path describing the manager to clear, e.g. "product/lists/type"
+	 * @param integer|null $id Context ID the objects have been created with (string of \Aimeos\MShop\Context\Item\Iface)
+	 * @param string|null $path Path describing the manager to clear, e.g. "product/lists/type"
 	 */
 	static public function clear( $id = null, $path = null )
 	{
@@ -60,6 +60,7 @@ class Factory
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object required by managers
 	 * @param string $path Name of the domain (and sub-managers) separated by slashes, e.g "log"
+	 * @return \Aimeos\MShop\Common\Manager\Iface MAdmin manager object
 	 * @throws \Aimeos\MAdmin\Exception If the given path is invalid or the manager wasn't found
 	 */
 	static public function createManager( \Aimeos\MShop\Context\Item\Iface $context, $path )

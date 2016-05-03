@@ -1080,7 +1080,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 
 		foreach( $attrManager->searchItems( $criteria ) as $id => $attribute )
 		{
-			if( $fresh == true )
+			if( $fresh === true )
 			{
 				$attributes[$attribute->getParentId()][] = $attribute;
 				$attribute->setParentId( null );
@@ -1111,7 +1111,7 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 				$subProducts[$item->getPosition()] = $item;
 			}
 
-			if( $fresh == true )
+			if( $fresh === true )
 			{
 				$item->setPosition( null );
 				$item->setBaseId( null );

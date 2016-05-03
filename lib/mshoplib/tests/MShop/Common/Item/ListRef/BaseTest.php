@@ -10,7 +10,7 @@ namespace Aimeos\MShop\Common\Item\ListRef;
  */
 class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
 {
-	function getLabel()
+	public function getLabel()
 	{
 		return 'test label';
 	}

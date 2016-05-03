@@ -160,6 +160,13 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 	}
 
 
+	/**
+	 * Returns the price item with the lowest value
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $price
+	 * @param array $prices
+	 * @return \Aimeos\MShop\Price\Item\Iface
+	 */
 	protected function getLowestPrice( \Aimeos\MShop\Price\Item\Iface $price = null, array $prices = array() )
 	{
 		foreach( $prices as $item )
@@ -179,6 +186,12 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 	}
 
 
+	/**
+	 * Returns the product IDs for the selection products
+	 *
+	 * @throws \Exception
+	 * @return array List of product IDs
+	 */
 	protected function getSelectionProductIds()
 	{
 		$textTypeItems = array();

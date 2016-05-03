@@ -18,7 +18,9 @@ namespace Aimeos\MShop\Common\Item\Address;
  * @package MShop
  * @subpackage Common
  */
-abstract class Base extends \Aimeos\MShop\Common\Item\Base
+abstract class Base
+	extends \Aimeos\MShop\Common\Item\Base
+	implements \Aimeos\MShop\Common\Item\Address\Iface
 {
 	/**
 	 * Saluation is not known.
@@ -455,7 +457,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	/**
 	 * Returns the unique ID of the country the address belongs to.
 	 *
-	 * @return string Unique ID of the country
+	 * @return string|null Unique ID of the country
 	 */
 	public function getCountryId()
 	{
@@ -487,7 +489,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	/**
 	 * Returns the unique ID of the language.
 	 *
-	 * @return string Unique ID of the language
+	 * @return string|null Unique ID of the language
 	 */
 	public function getLanguageId()
 	{
@@ -776,7 +778,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @return Associative list of item properties and their values
+	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray()
 	{

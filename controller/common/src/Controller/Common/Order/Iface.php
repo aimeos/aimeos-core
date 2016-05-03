@@ -24,7 +24,6 @@ interface Iface
 	 * Initializes the object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context
-	 * @return void
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context );
 

@@ -435,7 +435,7 @@ class Standard
 	/**
 	 * Stores a binary file and returns it's new relative file name
 	 *
-	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
+	 * @param \Aimeos\MW\Media\Iface $mediaFile Media object
 	 * @param string $type Type of the image like "preview" or "files"
 	 * @param string $filename Name of the new file without file extension
 	 * @param string Name of the file system to store the files at

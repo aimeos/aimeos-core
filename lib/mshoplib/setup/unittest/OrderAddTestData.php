@@ -96,8 +96,8 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds the required order base data.
 	 *
-	 * @param \Aimeos\MShop\Locale\Manager\Iface $localeManager Locale Manager
-	 * @param \Aimeos\MShop\Order\Manager\Base\Iface $orderBaseManager Order Base Manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $localeManager Locale manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $orderBaseManager Order base manager
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
@@ -185,9 +185,10 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds the required order base service data.
 	 *
-	 * @param \Aimeos\MShop\Order\Manager\Base\Iface $orderBaseManager Order Base Manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $orderBaseManager Order base manager
 	 * @param array $bases Associative list of key/list pairs
 	 * @param array $testdata Associative list of key/list pairs
+	 * @return array Associative list of enhanced order base items
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
 	protected function addOrderBaseServiceData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
@@ -248,12 +249,13 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds the required order base product data.
 	 *
-	 * @param \Aimeos\MShop\Order\Manager\Base\Iface $orderBaseManager Order Base Manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $orderBaseManager Order Base Manager
 	 * @param array $bases Associative list of key/list pairs
 	 * @param array $testdata Associative list of key/list pairs
+	 * @return array Enhanced list of order base items
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	protected function addOrderBaseProductData( \Aimeos\MShop\Common\Manager\Iface$orderBaseManager,
+	protected function addOrderBaseProductData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
 		array $bases, array $testdata )
 	{
 		$ordProds = array();
@@ -378,7 +380,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds the order service attributes.
 	 *
-	 * @param \Aimeos\MShop\Order\Manager\Base\Service\Attribute\Iface $manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $manager
 	 * @param array $testdata
 	 * @param array $ordServices
 	 * @throws \Aimeos\MW\Setup\Exception
@@ -413,7 +415,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds the order test data.
 	 *
-	 * @param \Aimeos\MShop\Order\Manager\Iface $orderManager Order Manager
+	 * @param \Aimeos\MShop\Common\Manager\Iface $orderManager Order manager
 	 * @param array $baseIds List of ids
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found

@@ -18,6 +18,14 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 	private $count = 9000;
 
 
+	/**
+	 * Initializes the object
+	 *
+	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn
+	 * @param string $additional
+	 * @throws \Aimeos\MW\Setup\Exception
+	 */
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
 		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
@@ -93,6 +101,9 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
+	/**
+	 * Returns the context item
+	 */
 	protected function getContext()
 	{
 		return $this->additional;
@@ -100,8 +111,11 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
+	 * Returns the product list item for the given domain and code
+	 *
 	 * @param string $domain
 	 * @param string $code
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
 	protected function getProductListItem( $domain, $code )
 	{

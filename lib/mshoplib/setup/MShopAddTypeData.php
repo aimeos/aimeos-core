@@ -122,6 +122,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 * Returns the manager for the given domain and sub-domains.
 	 *
 	 * @param string $domain String of domain and sub-domains, e.g. "product" or "order/base/service"
+	 * @return \Aimeos\MShop\Common\Manager\Iface Domain manager
 	 * @throws \Aimeos\Controller\Frontend\Exception If domain string is invalid or no manager can be instantiated
 	 */
 	protected function getDomainManager( $domain )
@@ -178,6 +179,9 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
+	/**
+	 * Starts a new transaction
+	 */
 	protected function txBegin()
 	{
 		$dbm = $this->additional->getDatabaseManager();
@@ -188,6 +192,9 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
+	/**
+	 * Commits an existing transaction
+	 */
 	protected function txCommit()
 	{
 		$dbm = $this->additional->getDatabaseManager();

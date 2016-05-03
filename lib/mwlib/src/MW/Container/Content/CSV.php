@@ -116,7 +116,7 @@ class CSV
 	 *
 	 * @return array List of values
 	 */
-	function current()
+	public function current()
 	{
 		return $this->data;
 	}
@@ -127,7 +127,7 @@ class CSV
 	 *
 	 * @return integer|null Position within the CSV file or null if end of file is reached
 	 */
-	function key()
+	public function key()
 	{
 		if( $this->data !== null ) {
 			return $this->position;
@@ -140,7 +140,7 @@ class CSV
 	/**
 	 * Moves forward to next element.
 	 */
-	function next()
+	public function next()
 	{
 		$this->position++;
 		$this->data = $this->getData();
@@ -150,7 +150,7 @@ class CSV
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	function rewind()
+	public function rewind()
 	{
 		$filename = $this->getResource();
 
@@ -172,7 +172,7 @@ class CSV
 	 *
 	 * @return boolean True on success or false on failure
 	 */
-	function valid()
+	public function valid()
 	{
 		return ( $this->data === null ? !feof( $this->fh ) : true );
 	}

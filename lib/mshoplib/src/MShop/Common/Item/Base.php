@@ -18,7 +18,9 @@ namespace Aimeos\MShop\Common\Item;
  * @package MShop
  * @subpackage Common
  */
-abstract class Base extends \Aimeos\MW\Common\Item\Base
+abstract class Base
+	extends \Aimeos\MW\Common\Item\Base
+	implements \Aimeos\MW\Common\Item\Iface
 {
 	private $prefix;
 	private $values;
@@ -184,7 +186,7 @@ abstract class Base extends \Aimeos\MW\Common\Item\Base
 	/**
 	 * Returns the item values as array.
 	 *
-	 * @return Associative list of item properties and their values
+	 * @return array Associative list of item properties and their values
 	 */
 	public function toArray()
 	{

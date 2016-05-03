@@ -26,7 +26,7 @@ class Factory
 	 * Creates an admin log manager object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param string $name Manager name
+	 * @param string|null $name Manager name
 	 * @return \Aimeos\MAdmin\Log\Manager\Iface Log manager object
 	 */
 	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )

@@ -148,7 +148,7 @@ function getDbConfig( \Aimeos\MW\Config\Iface $conf )
 		if( strncmp( $rname, 'db', 2 ) !== 0 ) {
 			unset( $dbconfig[$rname] );
 		} else {
-			$conf->set( "resource/$rname/limit", 2 );
+			$conf->set( 'resource/' . $rname . '/limit', 2 );
 		}
 	}
 

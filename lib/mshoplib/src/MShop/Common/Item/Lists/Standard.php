@@ -48,7 +48,7 @@ class Standard
 	 * Returns the parent ID of the common list item,
 	 * like the unique ID of a product or a tree node.
 	 *
-	 * @return integer Parent ID of the common list item
+	 * @return integer|null Parent ID of the common list item
 	 */
 	public function getParentId()
 	{
@@ -147,7 +147,7 @@ class Standard
 	/**
 	 * Returns the start date of the common list item (YYYY-MM-DD hh:mm:ss).
 	 *
-	 * @return string Start date of the common list item (YYYY-MM-DD hh:mm:ss)
+	 * @return string|null Start date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 */
 	public function getDateStart()
 	{
@@ -179,7 +179,7 @@ class Standard
 	/**
 	 * Returns the end date of the common list item (YYYY-MM-DD hh:mm:ss).
 	 *
-	 * @return string End date of the common list item (YYYY-MM-DD hh:mm:ss)
+	 * @return string|null End date of the common list item (YYYY-MM-DD hh:mm:ss)
 	 */
 	public function getDateEnd()
 	{
@@ -211,7 +211,7 @@ class Standard
 	/**
 	 * Returns the type of the list item.
 	 *
-	 * @return string Type of the list item
+	 * @return string|null Type of the list item
 	 */
 	public function getType()
 	{
@@ -226,7 +226,7 @@ class Standard
 	/**
 	 * Returns the type id of the list item.
 	 *
-	 * @return integer Type id of the list item
+	 * @return integer|null Type id of the list item
 	 */
 	public function getTypeId()
 	{

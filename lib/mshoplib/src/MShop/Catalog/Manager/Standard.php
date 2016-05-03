@@ -681,7 +681,7 @@ class Standard
 	 * Creates a new extension manager in the domain.
 	 *
 	 * @param string $manager Name of the sub manager type
-	 * @param string $name Name of the implementation, will be from configuration (or Default)
+	 * @param string $name|null Name of the implementation, will be from configuration (or Default)
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( $manager, $name = null )
@@ -763,8 +763,7 @@ class Standard
 	/**
 	 * Creates a new catalog item.
 	 *
-	 * @param \Aimeos\MW\Tree\Node\Iface $node Nested set tree node
-	 * @param array $children List of children of this catalog item
+	 * @param array $values Associative list of key/value pairs
 	 * @param array $listItems List of list items that belong to the catalog item
 	 * @param array $refItems Associative list of referenced items grouped by domain
 	 * @param array $children List of tree nodes implementing \Aimeos\MW\Tree\Node\Iface
@@ -1251,7 +1250,7 @@ class Standard
 	 * Creates a flat list node items.
 	 *
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Root node
-	 * @return Associated list of ID / node object pairs
+	 * @return array Associated list of ID / node object pairs
 	 */
 	protected function getNodeMap( \Aimeos\MW\Tree\Node\Iface $node )
 	{
