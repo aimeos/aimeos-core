@@ -314,7 +314,7 @@ class Bootstrap
 	{
 		$manifestFile = $dir . DIRECTORY_SEPARATOR . 'manifest.php';
 
-		if( file_exists( $manifestFile ) ) {
+		if( is_dir( $dir ) && file_exists( $manifestFile ) ) {
 			return include $manifestFile;
 		}
 
