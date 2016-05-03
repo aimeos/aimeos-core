@@ -14,7 +14,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $manifestPath;
-	private $deployPath;
 
 
 	protected function setUp()

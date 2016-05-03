@@ -26,7 +26,7 @@ class Factory
 	 * Creates an admin job manager object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
-	 * @param string $name|null Manager name
+	 * @param string|null $name Manager name
 	 * @return \Aimeos\MAdmin\Job\Manager\Iface Job manager object
 	 */
 	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )

@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Item;
  */
 abstract class Base
 	extends \Aimeos\MW\Common\Item\Base
-	implements \Aimeos\MW\Common\Item\Iface
+	implements \Aimeos\MShop\Common\Item\Iface
 {
 	private $prefix;
 	private $values;

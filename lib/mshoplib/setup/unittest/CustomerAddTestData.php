@@ -74,7 +74,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$parentIds = $this->addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
 		$this->addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
-		$this->addCustomerGroupData( $testdata, $customerGroupManager, $parentIds );
+		$this->addCustomerGroupData( $testdata, $customerGroupManager );
 
 		$this->conn->commit();
 
@@ -186,11 +186,9 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param array $testdata Associative list of key/list pairs
 	 * @param \Aimeos\MShop\Common\Manager\Iface $customerGroupManager Customer group manager
-	 * @param array $parentIds Associative list of keys of the customer test data and customer IDs
 	 * @throws \Aimeos\MW\Setup\Exception If a required ID is not available
 	 */
-	protected function addCustomerGroupData( array $testdata, \Aimeos\MShop\Common\Manager\Iface $customerGroupManager,
-		array $parentIds )
+	protected function addCustomerGroupData( array $testdata, \Aimeos\MShop\Common\Manager\Iface $customerGroupManager )
 	{
 		$group = $customerGroupManager->createItem();
 

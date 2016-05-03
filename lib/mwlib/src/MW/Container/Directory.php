@@ -45,7 +45,7 @@ class Directory
 		}
 
 		parent::__construct( $resourcepath, $options );
-		
+
 		$perm = octdec( $this->getOption( 'dir-perm', '0755' ) );
 
 		if( !is_dir( realpath( $resourcepath ) ) && mkdir( $resourcepath, $perm, true ) === false ) {
@@ -108,7 +108,7 @@ class Directory
 	 *
 	 * @return \Aimeos\MW\Container\Content\Iface Current content object
 	 */
-	function current()
+	public function current()
 	{
 		return new $this->classname( $this->resource->getPathname(), $this->resource->getFilename() );
 	}
@@ -119,7 +119,7 @@ class Directory
 	 *
 	 * @return integer Position within the directory
 	 */
-	function key()
+	public function key()
 	{
 		return $this->resource->key();
 	}
@@ -128,7 +128,7 @@ class Directory
 	/**
 	 * Moves forward to next element.
 	 */
-	function next()
+	public function next()
 	{
 		do {
 			$this->resource->next();
@@ -142,7 +142,7 @@ class Directory
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	function rewind()
+	public function rewind()
 	{
 		$this->resource->rewind();
 	}
@@ -153,7 +153,7 @@ class Directory
 	 *
 	 * @return boolean True on success or false on failure
 	 */
-	function valid()
+	public function valid()
 	{
 		while( $this->resource->isDot() ) {
 			$this->next();

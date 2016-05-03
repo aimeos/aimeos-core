@@ -72,7 +72,11 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$refIds = array();
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
-		//$refIds['product'] = $this->getProductData( $refKeys['product'] );
+
+		if( isset( $refKeys['product'] ) ) {
+			$refIds['product'] = $this->getProductData( $refKeys['product'] );
+		}
+
 		$this->addSupplierListData( $testdata, $refIds );
 
 		$this->status( 'done' );

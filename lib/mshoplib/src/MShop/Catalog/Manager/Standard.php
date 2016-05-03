@@ -681,7 +681,7 @@ class Standard
 	 * Creates a new extension manager in the domain.
 	 *
 	 * @param string $manager Name of the sub manager type
-	 * @param string $name|null Name of the implementation, will be from configuration (or Default)
+	 * @param string|null $name Name of the implementation, will be from configuration (or Default)
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager extending the domain functionality
 	 */
 	public function getSubManager( $manager, $name = null )

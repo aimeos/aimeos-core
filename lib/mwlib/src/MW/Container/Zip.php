@@ -140,7 +140,7 @@ class Zip
 	 *
 	 * @return \Aimeos\MW\Container\Content\Iface Current content object
 	 */
-	function current()
+	public function current()
 	{
 		if( ( $name = $this->container->getNameIndex( $this->position ) ) === false )
 		{
@@ -158,7 +158,7 @@ class Zip
 	 *
 	 * @return integer Position within the CSV file
 	 */
-	function key()
+	public function key()
 	{
 		return $this->position;
 	}
@@ -167,7 +167,7 @@ class Zip
 	/**
 	 * Moves forward to next element.
 	 */
-	function next()
+	public function next()
 	{
 		$this->position++;
 	}
@@ -176,7 +176,7 @@ class Zip
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	function rewind()
+	public function rewind()
 	{
 		$this->position = 0;
 	}
@@ -187,7 +187,7 @@ class Zip
 	 *
 	 * @return boolean True on success or false on failure
 	 */
-	function valid()
+	public function valid()
 	{
 		return $this->position < $this->container->numFiles;
 	}

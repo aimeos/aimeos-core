@@ -14,6 +14,11 @@ class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
 	{
 		return 'test label';
 	}
+
+	public function getResourceType()
+	{
+		return '';
+	}
 }
 
 

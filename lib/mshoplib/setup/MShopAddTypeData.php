@@ -47,7 +47,6 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	protected function mysql()
 	{
 		// executed by tasks in sub-directories for specific sites
-		// $this->process();
 	}
 
 

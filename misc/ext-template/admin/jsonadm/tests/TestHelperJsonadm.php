@@ -115,11 +115,4 @@ class TestHelperJsonadm
 
 		return $view;
 	}
-
-
-	public static function errorHandler( $code, $message, $file, $row )
-	{
-		return true;
-	}
-
 }
