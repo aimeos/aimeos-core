@@ -14,7 +14,7 @@ MShop.panel.media.MediaField = Ext.extend(Ext.form.Field, {
     /**
      * @cfg {String}
      */
-    defaultImage : 'mimeicons/unknown.png',
+    defaultImage : 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
 
     cls : 'aimeos-admin-media-item-preview',
 
