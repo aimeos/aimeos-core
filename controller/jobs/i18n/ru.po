@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2015-12-07 16:54+0000\n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-04-21 20:42+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -64,6 +64,9 @@ msgstr "Создание карты сайта с товарами для пои
 msgid "Creates bought together product suggestions"
 msgstr "Создание подсказок по сопутствующим товарам"
 
+msgid "Customer account e-mails"
+msgstr ""
+
 msgid "Decreases the counts of successfully redeemed coupons"
 msgstr ""
 
@@ -96,6 +99,10 @@ msgstr "Экспорт всех доступных товаров"
 
 msgid "Imports new and updates existing products from CSV files"
 msgstr "Импорт новых и обновление существующих товаров из файлов CSV"
+
+#, php-format
+msgid "Invalid JSON encode message: %1$s"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -194,6 +201,9 @@ msgstr "Удаление неоплаченных заказов"
 #, php-format
 msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr "Обязателный ключ разметки \"%1$s\" невернен или не содержит массива"
+
+msgid "Sends e-mails for new customer accounts"
+msgstr ""
 
 msgid "Sends e-mails for watched products"
 msgstr "Отсылка писем об отслеживаемых товарах"

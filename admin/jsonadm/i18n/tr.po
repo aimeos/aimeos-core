@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015
+# Metal <meteoramic@yahoo.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2015-12-09 17:59+0000\n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-04-22 18:19+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -39,8 +39,8 @@ msgid "Invalid class name \"%1$s\""
 msgstr "Geçersiz class adı \"%1$s\""
 
 #, php-format
-msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr "\"%2$s\" içinde geçersiz denetleyici \"%1$s\""
+msgid "Invalid client \"%1$s\" in \"%2$s\""
+msgstr "\"%2$s\" içinde geçersiz müşteri \"%1$s\""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""

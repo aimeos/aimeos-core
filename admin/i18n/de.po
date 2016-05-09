@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2016-03-09 12:10+0000\n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-04-21 21:17+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -96,6 +96,9 @@ msgstr "Attributtyp: {0} ({1})"
 msgid "Attribute: {0} ({1})"
 msgstr "Attribut: {0} ({1})"
 
+msgid "Attributes"
+msgstr "Attribute"
+
 msgid "Available attributes"
 msgstr "Verfügbare Attribute"
 
@@ -157,6 +160,9 @@ msgstr "Katalog: {0} ({1})"
 
 msgid "Categories"
 msgstr "Kategorien"
+
+msgid "Characteristics"
+msgstr "Charakteristische Merkmale"
 
 msgid "City"
 msgstr "Stadt"
@@ -735,6 +741,17 @@ msgstr "Produktname"
 
 msgid "Product price"
 msgstr "Productpreis"
+
+msgid "Product property type"
+msgstr "Produkteigenschaftstyp"
+
+#. : Product property.type item panel title with type label ({0}) and site
+#. code ({1)}
+#. : Product property type item panel title with type label ({0}) and site
+#. code ({1)}
+#, python-brace-format
+msgid "Product property type: {0} ({1})"
+msgstr "Produkteigenschaftstyp: {0} ({1})"
 
 msgid "Product quantity"
 msgstr "Produktanzahl"
