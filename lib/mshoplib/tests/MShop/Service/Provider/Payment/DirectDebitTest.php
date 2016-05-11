@@ -156,12 +156,13 @@ class DirectDebitTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testProcess()
+	public function testUpdateSync()
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$order = $manager->createItem();
 
-		$this->object->process( $order );
+		$this->object->expects( $this->once() )->method( 'getOrder' )->will( $this->returnValue( $order ) );
+		$this->object->updateSync( array( 'orderid' => -1 ) );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $order->getPaymentStatus() );
 	}
