@@ -152,12 +152,13 @@ class MShop_Service_Provider_Payment_DirectDebitTest extends PHPUnit_Framework_T
 	}
 
 
-	public function testProcess()
+	public function testUpdateSync()
 	{
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
 		$order = $manager->createItem();
 
-		$this->_object->process( $order );
+		$this->_object->expects( $this->once() )->method( '_getOrder' )->will( $this->returnValue( $order ) );
+		$this->_object->updateSync( array( 'orderid' => -1 ) );
 
 		$this->assertEquals( MShop_Order_Item_Abstract::PAY_AUTHORIZED, $order->getPaymentStatus() );
 	}

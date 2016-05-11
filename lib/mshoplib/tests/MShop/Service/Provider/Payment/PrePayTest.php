@@ -66,12 +66,15 @@ class MShop_Service_Provider_Payment_PrePayTest extends PHPUnit_Framework_TestCa
 	}
 
 
-	public function testProcess()
+	public function testUpdateSync()
 	{
-		// Currently does nothing.
 		$manager = MShop_Order_Manager_Factory::createManager( TestHelper::getContext() );
+		$order = $manager->createItem();
 
-		$this->_object->process( $manager->createItem() );
+		$this->_object->expects( $this->once() )->method( '_getOrder' )->will( $this->returnValue( $order ) );
+		$this->_object->updateSync( array( 'orderid' => -1 ) );
+
+		$this->assertEquals( MShop_Order_Item_Abstract::PAY_PENDING, $order->getPaymentStatus() );
 	}
 
 
