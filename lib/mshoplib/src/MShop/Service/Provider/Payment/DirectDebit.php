@@ -130,19 +130,24 @@ class DirectDebit
 
 
 	/**
-	 * Tries to get an authorization or captures the money immediately for the given order if capturing the money
-	 * separately isn't supported or not configured by the shop owner.
+	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @param array $params Request parameter if available
-	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard Form object with URL, action and parameters to redirect to
-	 * 	(e.g. to an external server of the payment provider or to a local success page)
+	 * @param array $params Associative list of request parameters
+	 * @param string|null $body Information sent within the body of the request
+	 * @param string|null &$response Response body for notification requests
+	 * @param array &$header Response headers for notification requests
+	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() )
+	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
 	{
-		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
-		$this->saveOrder( $order );
+		if( isset( $params['orderid'] ) )
+		{
+			$order = $this->getOrder( $params['orderid'] );
+			$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
+			$this->saveOrder( $order );
 
-		return parent::process( $order, $params );
+			return $order;
+		}
 	}
 }
