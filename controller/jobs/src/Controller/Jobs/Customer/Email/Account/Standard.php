@@ -61,10 +61,11 @@ class Standard
 		{
 			if( ( $list = json_decode( $msg->getBody(), true ) ) !== null )
 			{
+				$password = ( isset( $list['customer.password'] ) ? $list['customer.password'] : '' );
 				$item = $custManager->createItem();
 				$item->fromArray( $list );
 
-				$this->sendEmail( $context, $item );
+				$this->sendEmail( $context, $item, $password );
 			}
 			else
 			{
@@ -99,17 +100,16 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context item object
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Payment address item of the customer
-	 * @param string $code Customer login name
 	 * @param string $password Customer clear text password
 	 */
-	protected function sendEmail( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Customer\Item\Iface $item )
+	protected function sendEmail( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Customer\Item\Iface $item, $password )
 	{
 		$address = $item->getPaymentAddress();
 
 		$view = $context->getView();
 		$view->extAddressItem = $address;
 		$view->extAccountCode = $item->getCode();
-		$view->extAccountPassword = $item->getPassword();
+		$view->extAccountPassword = $password;
 
 		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $context->getI18n( $address->getLanguageId() ) );
 		$view->addHelper( 'translate', $helper );
