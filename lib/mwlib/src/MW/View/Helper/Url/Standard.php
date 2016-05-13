@@ -19,7 +19,7 @@ namespace Aimeos\MW\View\Helper\Url;
  * @subpackage View
  */
 class Standard
-	extends \Aimeos\MW\View\Helper\Base
+	extends \Aimeos\MW\View\Helper\Url\Base
 	implements \Aimeos\MW\View\Helper\Url\Iface
 {
 	private $baseUrl;
@@ -56,11 +56,8 @@ class Standard
 		$path .= ( $controller !== null ? $controller . '/' : '' );
 		$path .= ( $action !== null ? $action . '/' : '' );
 
-		$parameter = ( count( $params ) > 0 ? '?' . http_build_query( $params ) : '' );
-		$pretty = ( count( $trailing ) > 0 ? implode( '-', $trailing ) : '' );
-
-		$badchars = array( ' ', '/', '&', '%', '?', '#', '=', '{', '}', '|', '\\', '^', '~', '[', ']', '`' );
-		$pretty = str_replace( $badchars, '-', $pretty );
+		$parameter = ( count( $params ) > 0 ? '?' . http_build_query( $this->sanitize( $params ) ) : '' );
+		$pretty = ( count( $trailing ) > 0 ? implode( '-', $this->sanitize( $trailing ) ) : '' );
 
 		return $this->baseUrl . '/' . $path . $pretty . $parameter;
 	}
