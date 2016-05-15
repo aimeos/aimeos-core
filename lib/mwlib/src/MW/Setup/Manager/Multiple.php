@@ -68,9 +68,47 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 
 	/**
+	 * Cleans up old data required for roll back
+	 *
+	 * @return void
+	 */
+	public function clean()
+	{
+		foreach( $this->tasks as $taskname => $task ) {
+			$this->cleanTasks( array( $taskname ) );
+		}
+	}
+
+
+	/**
+	 * Updates the schema and migrates the data
+	 */
+	public function migrate()
+	{
+		foreach( $this->tasks as $taskname => $task ) {
+			$this->runTasks( 'mysql', array( $taskname ) );
+		}
+	}
+
+
+	/**
+	 * Undo all schema changes and migrate data back
+	 *
+	 * @return void
+	 */
+	public function rollback()
+	{
+		foreach( array_reverse( $this->tasks, true ) as $taskname => $task ) {
+			$this->rollbackTasks( array( $taskname ) );
+		}
+	}
+
+
+	/**
 	 * Executes all tasks for the given database type
 	 *
 	 * @param string $dbtype Name of the database type (mysql, etc.)
+	 * @deprecated 2016.05
 	 */
 	public function run( $dbtype )
 	{
@@ -81,19 +119,58 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 
 	/**
+	 * Runs the clean method of the given tasks and their dependencies
+	 *
+	 * @param array $tasknames List of task names
+	 * @param array $stack List of task names that are sheduled after this task
+	 */
+	protected function cleanTasks( array $tasknames, array $stack = array() )
+	{
+		foreach( $tasknames as $taskname )
+		{
+			if( in_array( $taskname, $this->tasksDone ) ) {
+				continue;
+			}
+
+			if( in_array( $taskname, $stack ) )
+			{
+				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
+				throw new \Aimeos\MW\Setup\Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
+			}
+
+			$stack[] = $taskname;
+
+			if( isset( $this->dependencies[$taskname] ) ) {
+				$this->cleanTasks( (array) $this->dependencies[$taskname], $stack );
+			}
+
+			if( isset( $this->tasks[$taskname] ) ) {
+				$this->tasks[$taskname]->clean();
+			}
+
+			$this->tasksDone[] = $taskname;
+		}
+	}
+
+
+	/**
 	 * Runs the given tasks depending on their dependencies.
 	 *
 	 * @param string $dbtype Database adapter type, e.g. "mysql", "pgsql", etc.
 	 * @param array $tasknames List of task names
 	 * @param array $stack List of task names that are sheduled after this task
+	 * @deprecated 2016.05
 	 */
 	protected function runTasks( $dbtype, array $tasknames, array $stack = array() )
 	{
 		foreach( $tasknames as $taskname )
 		{
-			if( in_array( $taskname, $this->tasksDone ) ) { continue; }
+			if( in_array( $taskname, $this->tasksDone ) ) {
+				continue;
+			}
 
-			if( in_array( $taskname, $stack ) ) {
+			if( in_array( $taskname, $stack ) )
+			{
 				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
 				throw new \Aimeos\MW\Setup\Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
 			}
@@ -104,11 +181,48 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 				$this->runTasks( $dbtype, (array) $this->dependencies[$taskname], $stack );
 			}
 
-			if( isset( $this->tasks[$taskname] ) ) {
+			if( isset( $this->tasks[$taskname] ) )
+			{
 				$this->tasks[$taskname]->run( $dbtype );
+				$this->tasks[$taskname]->migrate();
 			}
 
 			$this->tasksDone[] = $taskname;
+		}
+	}
+
+
+	/**
+	 * Runs the rollback method of the given tasks and their dependencies
+	 *
+	 * @param array $tasknames List of task names
+	 * @param array $stack List of task names that are sheduled after this task
+	 */
+	protected function rollbackTasks( array $tasknames, array $stack = array() )
+	{
+		foreach( $tasknames as $taskname )
+		{
+			if( in_array( $taskname, $this->tasksDone ) ) {
+				continue;
+			}
+
+			if( in_array( $taskname, $stack ) )
+			{
+				$msg = 'Circular dependency for "%1$s" detected. Task stack: %2$s';
+				throw new \Aimeos\MW\Setup\Exception( sprintf( $msg, $taskname, implode( ', ', $stack ) ) );
+			}
+
+			$stack[] = $taskname;
+
+			if( isset( $this->tasks[$taskname] ) ) {
+				$this->tasks[$taskname]->rollback();
+			}
+
+			$this->tasksDone[] = $taskname;
+
+			if( isset( $this->dependencies[$taskname] ) ) {
+				$this->rollbackTasks( array_reverse( (array) $this->dependencies[$taskname], true ), $stack );
+			}
 		}
 	}
 
