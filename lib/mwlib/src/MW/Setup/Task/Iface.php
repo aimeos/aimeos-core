@@ -45,10 +45,23 @@ interface Iface
 	public function getPostDependencies();
 
 	/**
-	 * Executes the task for the given database type.
+	 * Updates the schema and migrates the data
 	 *
-	 * @param string $dbtype Database type (mysql)
 	 * @return void
 	 */
-	public function run( $dbtype );
+	public function migrate();
+
+	/**
+	 * Undo all schema changes and migrate data back
+	 *
+	 * @return void
+	 */
+	public function rollback();
+
+	/**
+	 * Cleans up old data required for roll back
+	 *
+	 * @return void
+	 */
+	public function clean();
 }

@@ -21,10 +21,32 @@ namespace Aimeos\MW\Setup\Manager;
 interface Iface
 {
 	/**
+	 * Updates the schema and migrates the data
+	 *
+	 * @return void
+	 */
+	public function migrate();
+
+	/**
+	 * Undo all schema changes and migrate data back
+	 *
+	 * @return void
+	 */
+	public function rollback();
+
+	/**
+	 * Cleans up old data required for roll back
+	 *
+	 * @return void
+	 */
+	public function clean();
+
+	/**
 	 * Executes all tasks for the given database type.
 	 *
 	 * @param string $dbtype Name of the database type (mysql, etc.)
 	 * @return void
+	 * @deprecated 2016.05
 	 */
 	public function run( $dbtype );
 }

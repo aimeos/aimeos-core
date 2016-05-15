@@ -205,7 +205,7 @@ function setupAutoload( $classname )
  */
 function usage()
 {
-	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>|<file>]* [--option=key:value]* [sitecode] [tplsite]\n" );
+	printf( "Usage: php setup.php [--action=migrate|rollback|clean] [--extdir=<path>]* [--config=<path>|<file>]* [--option=key:value]* [sitecode] [tplsite]\n" );
 	exit ( 1 );
 }
 
@@ -245,7 +245,20 @@ try
 	$dbm = $ctx->getDatabaseManager();
 
 	$manager = new \Aimeos\MW\Setup\Manager\Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
-	$manager->run( 'mysql' );
+
+	$action = ( isset( $options['action'] ) ? $options['action'] : 'migrate' );
+
+	switch( $action )
+	{
+		case 'clean':
+			$manager->clean(); break;
+		case 'migrate':
+			$manager->migrate(); break;
+		case 'rollback':
+			$manager->rollback(); break;
+		default:
+			throw new \Exception( sprintf( 'Invalid action "%1$s"', $action ) );
+	}
 }
 catch( Throwable $t )
 {

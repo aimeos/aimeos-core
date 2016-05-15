@@ -17,6 +17,7 @@ namespace Aimeos\MW\Setup\Manager;
  *
  * @package MW
  * @subpackage Setup
+ * @deprecated 2016.05
  */
 class Standard extends \Aimeos\MW\Setup\Manager\Base
 {
@@ -51,6 +52,41 @@ class Standard extends \Aimeos\MW\Setup\Manager\Base
 
 		if( !is_array( $taskpath ) ) { $taskpath = (array) $taskpath; }
 		$this->setupTasks( $taskpath );
+	}
+
+
+	/**
+	 * Updates the schema and migrates the data
+	 *
+	 * @return void
+	 */
+	public function migrate()
+	{
+		foreach( $this->tasks as $taskname => $task ) {
+			$this->runTasks( 'mysql', array( $taskname ) );
+		}
+	}
+
+
+	/**
+	 * Undo all schema changes and migrate data back
+	 *
+	 * @return void
+	*/
+	public function rollback()
+	{
+
+	}
+
+
+	/**
+	 * Cleans up old data required for roll back
+	 *
+	 * @return void
+	*/
+	public function clean()
+	{
+
 	}
 
 

@@ -47,17 +47,44 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
+	 * Updates the schema and migrates the data
+	 *
+	 * @return void
+	 */
+	public function migrate()
+	{
+	}
+
+
+	/**
+	 * Undo all schema changes and migrate data back
+	 *
+	 * @return void
+	*/
+	public function rollback()
+	{
+	}
+
+
+	/**
+	 * Cleans up old data required for roll back
+	 *
+	 * @return void
+	*/
+	public function clean()
+	{
+	}
+
+
+	/**
 	 * Executes the task for the given database type.
 	 *
 	 * @param string $dbtype Database type string
 	 */
 	public function run( $dbtype )
 	{
-		switch( $dbtype )
-		{
-			case 'mysql': $this->mysql(); break;
-			default:
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unknown database type "%1$s"', $dbtype ) );
+		if( method_exists( $this, 'mysql' ) ) {
+			$this->mysql();
 		}
 	}
 
@@ -85,12 +112,6 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected abstract function mysql();
-
-
-	/**
 	 * Executes a given SQL statement.
 	 *
 	 * @param string $sql SQL statement to execute
@@ -115,31 +136,6 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		foreach( $list as $sql ) {
 			$conn->create( $sql )->execute()->finish();
 		}
-	}
-
-
-	/**
-	 * Executes a given SQL statement and returns the value of the named column and first row.
-	 *
-	 * @param string $sql SQL statement to execute
-	 * @param string $column Column name to retrieve
-	 * @param string $name Name from the resource configuration
-	 */
-	protected function getValue( $sql, $column, $name = 'db' )
-	{
-		$result = $this->getConnection( $name )->create( $sql )->execute();
-
-		if( ( $row = $result->fetch() ) === false ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No rows found: %1$s', $sql ) );
-		}
-
-		if( array_key_exists( $column, $row ) === false ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No column "%1$s" found: %2$s', $column, $sql ) );
-		}
-
-		$result->finish();
-
-		return $row[$column];
 	}
 
 
@@ -176,6 +172,31 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
+	 * Executes a given SQL statement and returns the value of the named column and first row.
+	 *
+	 * @param string $sql SQL statement to execute
+	 * @param string $column Column name to retrieve
+	 * @param string $name Name from the resource configuration
+	 */
+	protected function getValue( $sql, $column, $name = 'db' )
+	{
+		$result = $this->getConnection( $name )->create( $sql )->execute();
+
+		if( ( $row = $result->fetch() ) === false ) {
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No rows found: %1$s', $sql ) );
+		}
+
+		if( array_key_exists( $column, $row ) === false ) {
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'No column "%1$s" found: %2$s', $column, $sql ) );
+		}
+
+		$result->finish();
+
+		return $row[$column];
+	}
+
+
+	/**
 	 * Prints the message for the current test.
 	 *
 	 * @param string $msg Current message
@@ -184,7 +205,9 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	protected function msg( $msg, $level = 0 )
 	{
 		$pre = '';
-		for( $i = 0; $i < 2*$level; $i++ ) { $pre .= ' '; }
+		for( $i = 0; $i < 2*$level; $i++ ) {
+			$pre .= ' ';
+		}
 
 		echo str_pad( $pre . $msg, 70 );
 	}
