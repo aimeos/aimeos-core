@@ -62,9 +62,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	public function testRun()
 	{
 		$this->object->run( 'mysql' );
-
-		$this->setExpectedException( '\\Aimeos\\MW\\Setup\\Exception' );
-		$this->object->run( 'notexisting' );
 	}
 }
 
