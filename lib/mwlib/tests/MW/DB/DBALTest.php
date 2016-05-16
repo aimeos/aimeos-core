@@ -3,7 +3,7 @@
 namespace Aimeos\MW\DB;
 
 
-class PDOTest extends \PHPUnit_Framework_TestCase
+class DBALTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $config;
@@ -18,7 +18,7 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 		}
 
 
-		$this->object = new \Aimeos\MW\DB\Manager\PDO( $this->config );
+		$this->object = new \Aimeos\MW\DB\Manager\DBAL( $this->config );
 
 		if( $adapter == 'mysql' ) {
 			$sql = 'CREATE TABLE "mw_unit_test" ( "id" INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "name" VARCHAR(20) NOT NULL ) ENGINE=InnoDB';
@@ -34,7 +34,7 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 
 	protected function tearDown()
 	{
-		$this->object = new \Aimeos\MW\DB\Manager\PDO( $this->config );
+		$this->object = new \Aimeos\MW\DB\Manager\DBAL( $this->config );
 		$sql = 'DROP TABLE "mw_unit_test"';
 
 		$conn = $this->object->acquire();
@@ -373,53 +373,6 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testMultipleResults()
-	{
-		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
-		$sqlselect = 'SELECT * FROM "mw_unit_test"; SELECT * FROM "mw_unit_test"';
-
-		$conn = $this->object->acquire();
-
-		$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
-		$stmt->bind( 1, 1 );
-		$stmt->bind( 2, 'test' );
-		$stmt->execute()->finish();
-
-		$stmt->bind( 1, null, \Aimeos\MW\DB\Statement\Base::PARAM_NULL );
-		$stmt->bind( 2, 1, \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
-		$stmt->execute()->finish();
-
-		$stmt->bind( 1, 123, \Aimeos\MW\DB\Statement\Base::PARAM_LOB );
-		$stmt->bind( 2, 0.1, \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
-		$stmt->execute()->finish();
-
-
-		$stmt = $conn->create( $sqlselect );
-		$result = $stmt->execute();
-		$resultSets = array();
-
-		do {
-			$resultSets[] = $result->fetch();
-		}
-		while( $result->nextResult() !== false );
-
-		$result->finish();
-
-		$this->object->release( $conn );
-
-
-		/** @todo This doesn't work with PHP 5.3.11 and later but up to PHP 5.3.10, 5.4.x and 5.5.x are OK */
-		/*
-		$expected = array(
-			array( 'id' => 1, 'name' => 'test' ),
-			array( 'id' => 1, 'name' => 'test' ),
-		);
-
-		$this->assertEquals( $expected, $resultSets );
-		*/
-	}
-
-
 	public function testWrongFieldType()
 	{
 		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
@@ -443,19 +396,19 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetId()
 	{
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
+
 		$conn = $this->object->acquire();
 
-		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		$stmt = $conn->create( $sqlinsert );
+		$stmt->bind( 1, 'test' );
+		$stmt->execute()->finish();
 
-		try
-		{
-			$conn->getId( 'test' );
-		}
-		catch ( \Aimeos\MW\DB\Exception $e )
-		{
-			$this->object->release( $conn );
-			throw $e;
-		}
+		$id = $conn->getId( 'seq_id' );
+
+		$this->object->release( $conn );
+
+		$this->assertGreaterThan( 0, $id );
 	}
 
 
@@ -517,10 +470,10 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testPDOException()
+	public function testDBALException()
 	{
 		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
-		$conn = new TestForPDOException();
+		$conn = new TestForDBALException();
 		$this->object->release($conn);
 	}
 
@@ -540,7 +493,7 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 
 
 
-class TestForPDOException implements \Aimeos\MW\DB\Connection\Iface
+class TestForDBALException implements \Aimeos\MW\DB\Connection\Iface
 {
 	public function create($sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE)
 	{

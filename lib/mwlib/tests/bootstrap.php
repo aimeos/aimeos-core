@@ -27,13 +27,15 @@ setlocale(LC_TIME, 'POSIX');
 /*
  * Set include path for tests
  */
+
+require_once dirname( dirname( dirname( __DIR__ ) ) ) . '/vendor/autoload.php';
+
 $testdir =  __DIR__;
 $srcdir =  dirname( $testdir ) . DIRECTORY_SEPARATOR . 'src';
 $libdir =  dirname( $testdir ) . DIRECTORY_SEPARATOR . 'lib';
 
 $path = array( $testdir, $srcdir, $libdir, get_include_path() );
 set_include_path( implode( PATH_SEPARATOR, $path ) );
-
 
 /*
  * Use autoload function for resolving class names

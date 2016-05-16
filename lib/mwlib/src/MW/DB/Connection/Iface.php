@@ -40,6 +40,17 @@ interface Iface
 
 
 	/**
+	 * Returns the ID of the last inserted row or sequence value
+	 *
+	 * This method is not supported by all implementations
+	 *
+	 * @param string|null $name Sequence name
+	 * @return string Unique ID of the last inserted record
+	 */
+	public function getId( $name );
+
+
+	/**
 	 * Starts a transaction for this connection.
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.

@@ -38,6 +38,20 @@ class None
 
 
 	/**
+	 * Returns the ID of the last inserted row or sequence value
+	 *
+	 * Throws an exception because there is no implementation available.
+	 *
+	 * @param string|null $name Sequence name
+	 * @throws \Aimeos\MW\DB\Exception
+	 */
+	public function getId( $name )
+	{
+		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+	}
+
+
+	/**
 	 * Starts a transaction for this connection.
 	 *
 	 * Throws an exception because there is no implementation available.
