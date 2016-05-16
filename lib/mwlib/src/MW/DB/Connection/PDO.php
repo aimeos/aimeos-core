@@ -62,14 +62,13 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 
 
 	/**
-	 * Returns the ID of the last inserted row or sequence value
+	 * Returns the underlying connection object
 	 *
-	 * @param string|null $name Sequence name
-	 * @return string Unique ID of the last inserted record
+	 * @return \PDO Underlying connection object
 	 */
-	public function getId( $name )
+	public function getRawObject()
 	{
-		throw new \Aimeos\MW\DB\Exception( 'Not supported' );
+		return $this->connection;
 	}
 
 

@@ -441,21 +441,13 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetId()
+	public function testGetRawObject()
 	{
 		$conn = $this->object->acquire();
+		$raw = $conn->getRawObject();
+		$this->object->release( $conn );
 
-		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
-
-		try
-		{
-			$conn->getId( 'test' );
-		}
-		catch ( \Aimeos\MW\DB\Exception $e )
-		{
-			$this->object->release( $conn );
-			throw $e;
-		}
+		$this->assertInstanceOf( '\PDO', $raw );
 	}
 
 
@@ -550,7 +542,7 @@ class TestForPDOException implements \Aimeos\MW\DB\Connection\Iface
 	{
 	}
 
-	public function getId($name)
+	public function getRawObject()
 	{
 	}
 

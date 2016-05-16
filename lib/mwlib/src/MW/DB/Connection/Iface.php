@@ -40,14 +40,11 @@ interface Iface
 
 
 	/**
-	 * Returns the ID of the last inserted row or sequence value
+	 * Returns the underlying connection object
 	 *
-	 * This method is not supported by all implementations
-	 *
-	 * @param string|null $name Sequence name
-	 * @return string Unique ID of the last inserted record
+	 * @return mixed Underlying connection object
 	 */
-	public function getId( $name );
+	public function getRawObject();
 
 
 	/**

@@ -19,7 +19,7 @@ namespace Aimeos\MW\DB\Connection;
  */
 class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connection\Iface
 {
-	private $connection = null;
+	private $connection;
 	private $txnumber = 0;
 
 
@@ -64,14 +64,13 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 
 
 	/**
-	 * Returns the ID of the last inserted row or sequence value
+	 * Returns the underlying connection object
 	 *
-	 * @param string|null $name Sequence name
-	 * @return string Unique ID of the last inserted record
+	 * @return \Doctrine\DBAL\Connection Underlying connection object
 	 */
-	public function getId( $name )
+	public function getRawObject()
 	{
-		return $this->connection->lastInsertId( $name );
+		return $this->connection;
 	}
 
 

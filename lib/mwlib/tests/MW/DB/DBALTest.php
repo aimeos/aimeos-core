@@ -394,21 +394,13 @@ class DBALTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetId()
+	public function testGetRawObject()
 	{
-		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
-
 		$conn = $this->object->acquire();
-
-		$stmt = $conn->create( $sqlinsert );
-		$stmt->bind( 1, 'test' );
-		$stmt->execute()->finish();
-
-		$id = $conn->getId( 'seq_id' );
-
+		$raw = $conn->getRawObject();
 		$this->object->release( $conn );
 
-		$this->assertGreaterThan( 0, $id );
+		$this->assertInstanceOf( '\Doctrine\DBAL\Connection', $raw );
 	}
 
 
@@ -503,7 +495,7 @@ class TestForDBALException implements \Aimeos\MW\DB\Connection\Iface
 	{
 	}
 
-	public function getId($name)
+	public function getRawObject()
 	{
 	}
 
