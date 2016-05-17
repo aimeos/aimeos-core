@@ -25,6 +25,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	private $tasks = array();
 	private $tasksDone = array();
 	private $dependencies = array();
+	private $reverse = array();
 
 
 	/**
@@ -70,11 +71,13 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Cleans up old data required for roll back
 	 *
-	 * @return void
+	 * @param string $task Name of the task
 	 */
-	public function clean()
+	public function clean( $task = null )
 	{
-		foreach( $this->tasks as $taskname => $task ) {
+		$tasks = ( $task && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
+
+		foreach( $tasks as $taskname => $task ) {
 			$this->cleanTasks( array( $taskname ) );
 		}
 	}
@@ -82,11 +85,15 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 	/**
 	 * Updates the schema and migrates the data
+	 *
+	 * @param string $task Name of the task
 	 */
-	public function migrate()
+	public function migrate( $task = null )
 	{
-		foreach( $this->tasks as $taskname => $task ) {
-			$this->runTasks( 'mysql', array( $taskname ) );
+		$tasks = ( $task && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
+
+		foreach( $tasks as $taskname => $task ) {
+			$this->migrateTasks( array( $taskname ) );
 		}
 	}
 
@@ -94,11 +101,13 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Undo all schema changes and migrate data back
 	 *
-	 * @return void
+	 * @param string $task Name of the task
 	 */
-	public function rollback()
+	public function rollback( $task = null )
 	{
-		foreach( array_reverse( $this->tasks, true ) as $taskname => $task ) {
+		$tasks = ( $task && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
+
+		foreach( array_reverse( $tasks, true ) as $taskname => $task ) {
 			$this->rollbackTasks( array( $taskname ) );
 		}
 	}
@@ -112,9 +121,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 */
 	public function run( $dbtype )
 	{
-		foreach( $this->tasks as $taskname => $task ) {
-			$this->runTasks( $dbtype, array( $taskname ) );
-		}
+		$this->migrate();
 	}
 
 
@@ -122,7 +129,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 * Runs the clean method of the given tasks and their dependencies
 	 *
 	 * @param array $tasknames List of task names
-	 * @param array $stack List of task names that are sheduled after this task
+	 * @param array $stack List of task names that are scheduled after this task
 	 */
 	protected function cleanTasks( array $tasknames, array $stack = array() )
 	{
@@ -140,10 +147,6 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 			$stack[] = $taskname;
 
-			if( isset( $this->dependencies[$taskname] ) ) {
-				$this->cleanTasks( (array) $this->dependencies[$taskname], $stack );
-			}
-
 			if( isset( $this->tasks[$taskname] ) ) {
 				$this->tasks[$taskname]->clean();
 			}
@@ -156,12 +159,10 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Runs the given tasks depending on their dependencies.
 	 *
-	 * @param string $dbtype Database adapter type, e.g. "mysql", "pgsql", etc.
 	 * @param array $tasknames List of task names
 	 * @param array $stack List of task names that are sheduled after this task
-	 * @deprecated 2016.05
 	 */
-	protected function runTasks( $dbtype, array $tasknames, array $stack = array() )
+	protected function migrateTasks( array $tasknames, array $stack = array() )
 	{
 		foreach( $tasknames as $taskname )
 		{
@@ -178,12 +179,12 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 			$stack[] = $taskname;
 
 			if( isset( $this->dependencies[$taskname] ) ) {
-				$this->runTasks( $dbtype, (array) $this->dependencies[$taskname], $stack );
+				$this->migrateTasks( (array) $this->dependencies[$taskname], $stack );
 			}
 
 			if( isset( $this->tasks[$taskname] ) )
 			{
-				$this->tasks[$taskname]->run( $dbtype );
+				$this->tasks[$taskname]->run( 'mysql' );
 				$this->tasks[$taskname]->migrate();
 			}
 
@@ -214,15 +215,15 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 			$stack[] = $taskname;
 
+			if( isset( $this->reverse[$taskname] ) ) {
+				$this->rollbackTasks( (array) $this->reverse[$taskname], $stack );
+			}
+
 			if( isset( $this->tasks[$taskname] ) ) {
 				$this->tasks[$taskname]->rollback();
 			}
 
 			$this->tasksDone[] = $taskname;
-
-			if( isset( $this->dependencies[$taskname] ) ) {
-				$this->rollbackTasks( array_reverse( (array) $this->dependencies[$taskname], true ), $stack );
-			}
 		}
 	}
 
@@ -246,12 +247,16 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 			$task->setSchemas( $schemas );
 			$task->setConnections( $conns );
 
-			foreach( (array) $task->getPreDependencies() as $taskname ) {
+			foreach( (array) $task->getPreDependencies() as $taskname )
+			{
 				$this->dependencies[$name][] = $taskname;
+				$this->reverse[$taskname][] = $name;
 			}
 
-			foreach( (array) $task->getPostDependencies() as $taskname ) {
+			foreach( (array) $task->getPostDependencies() as $taskname )
+			{
 				$this->dependencies[$taskname][] = $name;
+				$this->reverse[$name][] = $taskname;
 			}
 		}
 	}

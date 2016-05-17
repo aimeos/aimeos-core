@@ -58,9 +58,9 @@ class Standard extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Updates the schema and migrates the data
 	 *
-	 * @return void
+	 * @param string $task Name of the task
 	 */
-	public function migrate()
+	public function migrate( $task = null )
 	{
 		foreach( $this->tasks as $taskname => $task ) {
 			$this->runTasks( 'mysql', array( $taskname ) );
@@ -71,9 +71,9 @@ class Standard extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Undo all schema changes and migrate data back
 	 *
-	 * @return void
+	 * @param string $task Name of the task
 	*/
-	public function rollback()
+	public function rollback( $task = null )
 	{
 
 	}
@@ -82,9 +82,9 @@ class Standard extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Cleans up old data required for roll back
 	 *
-	 * @return void
+	 * @param string $task Name of the task
 	*/
-	public function clean()
+	public function clean( $task = null )
 	{
 
 	}
