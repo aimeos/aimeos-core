@@ -205,7 +205,7 @@ function setupAutoload( $classname )
  */
 function usage()
 {
-	printf( "Usage: php setup.php [--action=migrate|rollback|clean] [--extdir=<path>]* [--config=<path>|<file>]* [--option=key:value]* [sitecode] [tplsite]\n" );
+	printf( "Usage: php setup.php [--extdir=<path>]* [--config=<path>|<file>]* [--option=key:value]* [--action=migrate|rollback|clean] [--task=<name>] [sitecode] [tplsite]\n" );
 	exit ( 1 );
 }
 
@@ -247,15 +247,16 @@ try
 	$manager = new \Aimeos\MW\Setup\Manager\Multiple( $dbm, $dbconfig, $taskPaths, $ctx );
 
 	$action = ( isset( $options['action'] ) ? $options['action'] : 'migrate' );
+	$task = ( isset( $options['task'] ) ? $options['task'] : null );
 
 	switch( $action )
 	{
 		case 'clean':
-			$manager->clean(); break;
+			$manager->clean( $task ); break;
 		case 'migrate':
-			$manager->migrate(); break;
+			$manager->migrate( $task ); break;
 		case 'rollback':
-			$manager->rollback(); break;
+			$manager->rollback( $task ); break;
 		default:
 			throw new \Exception( sprintf( 'Invalid action "%1$s"', $action ) );
 	}
