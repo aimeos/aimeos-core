@@ -79,7 +79,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function setup( array $files )
 	{
-			foreach( $files as $rname => $filepath )
+		foreach( $files as $rname => $filepath )
 		{
 			$this->msg( 'Using schema from ' . basename( $filepath ), 1 ); $this->status( '' );
 
