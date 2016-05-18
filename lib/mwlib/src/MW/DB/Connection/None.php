@@ -38,6 +38,19 @@ class None
 
 
 	/**
+	 * Returns the underlying connection object
+	 *
+	 * Throws an exception because there is no implementation available.
+	 *
+	 * @throws \Aimeos\MW\DB\Exception
+	 */
+	public function getRawObject()
+	{
+		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+	}
+
+
+	/**
 	 * Starts a transaction for this connection.
 	 *
 	 * Throws an exception because there is no implementation available.

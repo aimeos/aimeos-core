@@ -49,4 +49,96 @@ abstract class Base
 	 * Large objects
 	 */
 	const PARAM_LOB = 5;
+
+
+	/**
+	 * Creates the SQL string with bound parameters.
+	 *
+	 * @param array $parts List of SQL statement parts
+	 * @param array $binds List of values for the markers
+	 * @return string SQL statement
+	 */
+	protected function buildSQL( array $parts, array $binds )
+	{
+		$i = 1; $stmt = '';
+
+		foreach( $parts as $part )
+		{
+			$stmt .= $part;
+			if( isset( $binds[$i] ) ) {
+				$stmt .= $binds[$i];
+			}
+			$i++;
+		}
+
+		return $stmt;
+	}
+
+
+	/**
+	 * Returns the PDO type mapped to the Aimeos type
+	 *
+	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
+	 * @param mixed $value Value which should be bound to the placeholder
+	 * @throws \Aimeos\MW\DB\Exception If the type is unknown
+	 */
+	protected function getPdoType( $type, $value )
+	{
+		switch( $type )
+		{
+			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
+				$pdotype = \PDO::PARAM_NULL; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
+				$pdotype = \PDO::PARAM_BOOL; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
+				$pdotype = \PDO::PARAM_INT; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
+				$pdotype = \PDO::PARAM_STR; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+				$pdotype = \PDO::PARAM_STR; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_LOB:
+				$pdotype = \PDO::PARAM_LOB; break;
+			default:
+				throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
+		}
+
+		if( is_null( $value ) ) {
+			$pdotype = \PDO::PARAM_NULL;
+		}
+
+		return $pdotype;
+	}
+
+
+	/**
+	 * Returns the SQL parts split at the markers
+	 *
+	 * @param string $sql SQL statement, mayby with markers
+	 * @return array List of SQL parts split at the markers
+	 * @throws \Aimeos\MW\DB\Exception If the SQL statement is invalid
+	 */
+	protected function getSqlParts( $sql )
+	{
+		$result = array();
+		$parts = explode( '?', $sql );
+
+		if( ( $part = reset( $parts ) ) !== false )
+		{
+			do
+			{
+				$count = 0; $temp = $part;
+				while( ( $count += substr_count( $part, '\'' ) ) % 2 !== 0 )
+				{
+					if( ( $part = next( $parts ) ) === false ) {
+						throw new \Aimeos\MW\DB\Exception( 'Number of apostrophes don\'t match' );
+					}
+					$temp .= '?' . $part;
+				}
+				$result[] = $temp;
+			}
+			while( ( $part = next( $parts ) ) !== false );
+		}
+
+		return $result;
+	}
 }

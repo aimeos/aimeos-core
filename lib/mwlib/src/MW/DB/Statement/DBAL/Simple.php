@@ -1,19 +1,18 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2016
  * @package MW
  * @subpackage DB
  */
 
 
-namespace Aimeos\MW\DB\Statement\PDO;
+namespace Aimeos\MW\DB\Statement\DBAL;
 
 
 /**
- * Database statement class for simple \PDO statements.
+ * Database statement class for simple DBAL statements
  *
  * @package MW
  * @subpackage DB
@@ -29,15 +28,14 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	/**
 	 * Initializes the statement object.
 	 *
-	 * @param \PDO $conn \PDO database connection object
+	 * @param \Doctrine\DBAL\Connection $conn DBAL database connection object
 	 * @param string $sql SQL statement string
 	 */
-	public function __construct( \PDO $conn, $sql )
+	public function __construct( \Doctrine\DBAL\Connection $conn, $sql )
 	{
 		$this->parts = $this->getSqlParts( $sql );
 		$this->conn = $conn;
 		$this->sql = $sql;
-
 	}
 
 
@@ -65,9 +63,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$this->binds[$position] = (float) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
-				// \PDO quote isn't available for ODBC driver
-				$value = str_replace( '\'', '\'\'', str_replace( '\\', '\\\\', $value ) );
-				$this->binds[$position] = '\'' . $value . '\''; break;
+				$this->binds[$position] = $this->conn->quote( $value ); break;
 			default:
 				$this->binds[$position] = $value; break;
 		}
@@ -89,9 +85,9 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 		$sql = $this->buildSQL( $this->parts, $this->binds );
 
 		try {
-			return new \Aimeos\MW\DB\Result\PDO( $this->conn->query( $sql ) );
-		} catch ( \PDOException $pe ) {
-			throw new \Aimeos\MW\DB\Exception( sprintf( 'Executing statement "%1$s" failed: ', $sql ) . $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
+			return new \Aimeos\MW\DB\Result\DBAL( $this->conn->query( $sql ) );
+		} catch ( \Doctrine\DBAL\DBALException $p ) {
+			throw new \Aimeos\MW\DB\Exception( sprintf( 'Executing statement "%1$s" failed: ', $sql ) . $p->getMessage(), $p->getCode() );
 		}
 	}
 
