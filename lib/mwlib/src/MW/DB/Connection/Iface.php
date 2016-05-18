@@ -40,6 +40,14 @@ interface Iface
 
 
 	/**
+	 * Returns the underlying connection object
+	 *
+	 * @return mixed Underlying connection object
+	 */
+	public function getRawObject();
+
+
+	/**
 	 * Starts a transaction for this connection.
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
