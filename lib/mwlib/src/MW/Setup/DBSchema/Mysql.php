@@ -49,4 +49,28 @@ class Mysql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 
 		return false;
 	}
+
+
+	/**
+	 * Checks if the given sequence exists in the database.
+	 *
+	 * @param string $seqname Name of the database sequence
+	 * @return boolean True if the sequence exists, false if not
+	 */
+	public function sequenceExists( $seqname )
+	{
+		return false;
+	}
+
+
+	/**
+	 * Tests if something is supported
+	 *
+	 * @param string $what Type of object
+	 * @return boolean True if supported, false if not
+	 */
+	public function supports( $what )
+	{
+		return false;
+	}
 }

@@ -38,9 +38,9 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Executes the task for MySQL databases.
+	 * Creates the MShop tables
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->msg( 'Creating base tables', 0 );
 		$this->status( '' );
@@ -48,26 +48,26 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			'db-locale' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'locale.sql',
-			'db-attribute' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'attribute.sql',
-			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'customer.sql',
-			'db-media' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'media.sql',
-			'db-order' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'order.sql',
-			'db-plugin' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'plugin.sql',
-			'db-price' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'price.sql',
-			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'product.sql',
-			'db-service' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'service.sql',
-			'db-supplier' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'supplier.sql',
-			'db-text' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'text.sql',
-			'db-coupon' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'coupon.sql',
-			'db-catalog' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'catalog.sql',
-			'db-tag' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'tag.sql',
+			'db-locale' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'locale.php',
+			'db-attribute' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'attribute.php',
+			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'customer.php',
+			'db-media' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'media.php',
+			'db-order' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'order.php',
+			'db-plugin' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'plugin.php',
+			'db-price' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'price.php',
+			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'product.php',
+			'db-service' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'service.php',
+			'db-supplier' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'supplier.php',
+			'db-text' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'text.php',
+			'db-coupon' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'coupon.php',
+			'db-catalog' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'catalog.php',
+			'db-tag' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'tag.php',
 		);
 
 		$this->setup( $files );
 
 		$files = array(
-			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'index.sql',
+			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'index.php',
 		);
 
 		$this->setup( $files );
@@ -81,36 +81,49 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	{
 		foreach( $files as $rname => $filepath )
 		{
-			$this->msg( 'Using tables from ' . basename( $filepath ), 1 ); $this->status( '' );
+			$this->msg( 'Using schema from ' . basename( $filepath ), 1 ); $this->status( '' );
 
-			if( ( $content = file_get_contents( $filepath ) ) === false ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
+			if( ( $list = include( $filepath ) ) === false ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get list from file "%1$s"', $filepath ) );
 			}
 
+			$dbal = $this->getConnection( $rname )->getRawObject();
+
+			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
+				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+			}
+
+			$dbalschema = new \Doctrine\DBAL\Schema\Schema();;
+			$platform = $dbal->getDatabasePlatform();
 			$schema = $this->getSchema( $rname );
 
-			foreach( $this->getTableDefinitions( $content ) as $name => $sql )
+			if( isset( $list['table'] ) )
 			{
-				$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
+				foreach( (array) $list['table'] as $name => $fcn )
+				{
+					$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
-				if( $schema->tableExists( $name ) !== true ) {
-					$this->execute( $sql, $rname );
-					$this->status( 'created' );
-				} else {
-					$this->status( 'OK' );
+					if( $schema->tableExists( $name ) !== true ) {
+						$this->executeList( $fcn( clone $dbalschema )->toSql( $platform ), $rname );
+						$this->status( 'created' );
+					} else {
+						$this->status( 'OK' );
+					}
 				}
 			}
 
-			foreach( $this->getIndexDefinitions( $content ) as $name => $sql )
+			if( isset( $list['sequence'] ) )
 			{
-				$parts = explode( '.', $name );
-				$this->msg( sprintf( 'Checking index "%1$s": ', $name ), 2 );
+				foreach( (array) $list['sequence'] as $name => $fcn )
+				{
+					$this->msg( sprintf( 'Checking sequence "%1$s": ', $name ), 2 );
 
-				if( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
-					$this->execute( $sql, $rname );
-					$this->status( 'created' );
-				} else {
-					$this->status( 'OK' );
+					if( $schema->supports( $schema::HAS_SEQUENCES ) && $schema->sequenceExists( $name ) !== true ) {
+						$this->executeList( $fcn( clone $dbalschema )->toSql( $platform ), $rname );
+						$this->status( 'created' );
+					} else {
+						$this->status( 'OK' );
+					}
 				}
 			}
 		}

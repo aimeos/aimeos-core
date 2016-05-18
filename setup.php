@@ -117,7 +117,7 @@ function getContext( \Aimeos\MW\Config\Iface $conf )
 	$ctx = new \Aimeos\MShop\Context\Item\Standard();
 	$ctx->setConfig( $conf );
 
-	$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
+	$dbm = new \Aimeos\MW\DB\Manager\DBAL( $conf );
 	$ctx->setDatabaseManager( $dbm );
 
 	$logger = new \Aimeos\MW\Logger\Errorlog( \Aimeos\MW\Logger\Base::INFO );

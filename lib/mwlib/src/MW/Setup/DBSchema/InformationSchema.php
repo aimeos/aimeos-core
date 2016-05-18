@@ -67,6 +67,34 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 
 
 	/**
+	 * Checks if the given sequence exists in the database.
+	 *
+	 * @param string $seqname Name of the database sequence
+	 * @return boolean True if the sequence exists, false if not
+	 */
+	public function sequenceExists( $seqname )
+	{
+		$sql = "
+			SELECT SEQUENCE_NAME
+			FROM INFORMATION_SCHEMA.SEQUENCES
+			WHERE SEQUENCE_SCHEMA = ?
+				AND SEQUENCE_NAME = ?
+		";
+
+		$stmt = $this->conn->create( $sql );
+		$stmt->bind( 1, $this->dbname );
+		$stmt->bind( 2, $seqname );
+		$result = $stmt->execute();
+
+		if( $result->fetch() !== false ) {
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
 	 * Checks if the given constraint exists for the specified table in the database.
 	 *
 	 * @param string $tablename Name of the database table
@@ -157,8 +185,8 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 
 		return $this->createColumnItem( $record );
 	}
-	
-	
+
+
 	/**
 	 * Returns the database name.
 	 *
@@ -168,6 +196,19 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	{
 		return $this->dbname;
 	}
+
+
+	/**
+	 * Tests if something is supported
+	 *
+	 * @param string $what Type of object
+	 * @return boolean True if supported, false if not
+	 */
+	public function supports( $what )
+	{
+		return true;
+	}
+
 
 	/**
 	 * Creates a new column item using the columns of the information_schema.columns.

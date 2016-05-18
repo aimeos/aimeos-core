@@ -38,9 +38,9 @@ class TablesCreateMAdmin extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Executes the task for MySQL databases.
+	 * Creates the MAdmin tables
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->msg( 'Creating admin tables', 0 );
 		$this->status( '' );
@@ -48,10 +48,10 @@ class TablesCreateMAdmin extends \Aimeos\MW\Setup\Task\Base
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			'db-cache' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'cache.sql',
-			'db-log' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'log.sql',
-			'db-job' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'job.sql',
-			'db-queue' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'mysql' . $ds . 'queue.sql',
+			'db-cache' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'cache.php',
+			'db-log' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'log.php',
+			'db-job' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'job.php',
+			'db-queue' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'queue.php',
 		);
 
 		$this->setup( $files );
@@ -65,36 +65,49 @@ class TablesCreateMAdmin extends \Aimeos\MW\Setup\Task\Base
 	{
 		foreach( $files as $rname => $filepath )
 		{
-			$this->msg( 'Using tables from ' . basename( $filepath ), 1 ); $this->status( '' );
+			$this->msg( 'Using schema from ' . basename( $filepath ), 1 ); $this->status( '' );
 
-			if( ( $content = file_get_contents( $filepath ) ) === false ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
+			if( ( $list = include( $filepath ) ) === false ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get list from file "%1$s"', $filepath ) );
 			}
 
+			$dbal = $this->getConnection( $rname )->getRawObject();
+
+			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
+				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
+			}
+
+			$dbalschema = new \Doctrine\DBAL\Schema\Schema();;
+			$platform = $dbal->getDatabasePlatform();
 			$schema = $this->getSchema( $rname );
 
-			foreach( $this->getTableDefinitions( $content ) as $name => $sql )
+			if( isset( $list['table'] ) )
 			{
-				$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
+				foreach( (array) $list['table'] as $name => $fcn )
+				{
+					$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
-				if( $schema->tableExists( $name ) !== true ) {
-					$this->execute( $sql, $rname );
-					$this->status( 'created' );
-				} else {
-					$this->status( 'OK' );
+					if( $schema->tableExists( $name ) !== true ) {
+						$this->executeList( $fcn( clone $dbalschema )->toSql( $platform ), $rname );
+						$this->status( 'created' );
+					} else {
+						$this->status( 'OK' );
+					}
 				}
 			}
 
-			foreach( $this->getIndexDefinitions( $content ) as $name => $sql )
+			if( isset( $list['sequence'] ) )
 			{
-				$parts = explode( '.', $name );
-				$this->msg( sprintf( 'Checking index "%1$s": ', $name ), 2 );
+				foreach( (array) $list['sequence'] as $name => $fcn )
+				{
+					$this->msg( sprintf( 'Checking sequence "%1$s": ', $name ), 2 );
 
-				if( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
-					$this->execute( $sql, $rname );
-					$this->status( 'created' );
-				} else {
-					$this->status( 'OK' );
+					if( $schema->supports( $schema::HAS_SEQUENCES ) && $schema->sequenceExists( $name ) !== true ) {
+						$this->executeList( $fcn( clone $dbalschema )->toSql( $platform ), $rname );
+						$this->status( 'created' );
+					} else {
+						$this->status( 'OK' );
+					}
 				}
 			}
 		}
