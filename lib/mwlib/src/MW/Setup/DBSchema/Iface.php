@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MW
  * @subpackage Setup
  */
@@ -20,6 +20,8 @@ namespace Aimeos\MW\Setup\DBSchema;
  */
 interface Iface
 {
+	const HAS_SEQUENCES = 'seqence';
+
 	/**
 	 * Initializes the database schema object.
 	 *
@@ -36,6 +38,14 @@ interface Iface
 	 * @return boolean True if the table exists, false if not
 	 */
 	public function tableExists( $tablename );
+
+	/**
+	 * Checks if the given sequence exists in the database.
+	 *
+	 * @param string $seqname Name of the database sequence
+	 * @return boolean True if the sequence exists, false if not
+	 */
+	public function sequenceExists( $seqname );
 
 	/**
 	 * Checks if the given index (not foreign keys, primary or unique constraints) exists in the database.
@@ -72,11 +82,19 @@ interface Iface
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Object which contains the details
 	 */
 	public function getColumnDetails( $tablename, $columnname );
-	
+
 	/**
 	 * Returns the database name.
 	 *
 	 * @return string Database name
 	 */
-	public function getDBName( );
+	public function getDBName();
+
+	/**
+	 * Tests if something is supported
+	 *
+	 * @param string $what Type of object
+	 * @return boolean True if supported, false if not
+	 */
+	public function supports( $what );
 }
