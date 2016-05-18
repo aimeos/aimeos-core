@@ -59,8 +59,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 				'delete' => 'DELETE FROM mw_mqueue_test WHERE id = ? AND queue = ?',
 			),
 		);
-		$mqeue = new \Aimeos\MW\MQueue\Standard( $config );
-		$this->object = $mqeue->getQueue( 'email' );
+		$mqueue = new \Aimeos\MW\MQueue\Standard( $config );
+		$this->object = $mqueue->getQueue( 'email' );
 	}
 
 
