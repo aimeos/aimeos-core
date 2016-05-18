@@ -27,7 +27,6 @@ class MediaDropLocaleConstraints extends \Aimeos\MW\Setup\Task\Base
 		),
 		'mshop_media' => array(
 			'fk_msmed_siteid' => 'ALTER TABLE "mshop_media" DROP FOREIGN KEY "fk_msmed_siteid"',
-			'fk_msmed_typeid' => 'ALTER TABLE "mshop_media" DROP FOREIGN KEY "fk_msmed_typeid"',
 			'fk_msmed_langid' => 'ALTER TABLE "mshop_media" DROP FOREIGN KEY "fk_msmed_langid"',
 		),
 	);
