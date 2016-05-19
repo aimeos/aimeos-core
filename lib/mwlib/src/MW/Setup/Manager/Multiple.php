@@ -21,6 +21,7 @@ namespace Aimeos\MW\Setup\Manager;
 class Multiple extends \Aimeos\MW\Setup\Manager\Base
 {
 	private $dbm;
+	private $type;
 	private $additional;
 	private $tasks = array();
 	private $tasksDone = array();
@@ -48,6 +49,8 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 		$conns = array();
 		$schemas = array();
+
+		$this->type = ( isset( $dbconfig['db']['adapter'] ) ? $dbconfig['db']['adapter'] : '' );
 
 		foreach( $dbconfig as $rname => $dbconf )
 		{
@@ -184,7 +187,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 			if( isset( $this->tasks[$taskname] ) )
 			{
-				$this->tasks[$taskname]->run( 'mysql' );
+				$this->tasks[$taskname]->run( $this->type );
 				$this->tasks[$taskname]->migrate();
 			}
 

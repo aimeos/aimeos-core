@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2016
  * @package MW
  * @subpackage Setup
  */
@@ -13,33 +12,13 @@ namespace Aimeos\MW\Setup\DBSchema;
 
 
 /**
- * Implements querying the information_schema tables.
+ * Implements querying the PostgreSQL database
  *
  * @package MW
  * @subpackage Setup
  */
-abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
+class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 {
-	private $conn;
-	private $dbname;
-	private $name;
-
-
-	/**
-	 * Initializes the database schema object.
-	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param string $dbname Database name
-	 * @param string $name Adapter name
-	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname, $name )
-	{
-		$this->conn = $conn;
-		$this->dbname = $dbname;
-		$this->name = $name;
-	}
-
-
 	/**
 	 * Checks if the given table exists in the database.
 	 *
@@ -52,13 +31,12 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 			SELECT TABLE_NAME
 			FROM INFORMATION_SCHEMA.TABLES
 			WHERE TABLE_TYPE = 'BASE TABLE'
-				AND TABLE_SCHEMA = ?
+				AND TABLE_SCHEMA = 'public'
 				AND TABLE_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
-		$stmt->bind( 2, $tablename );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $tablename );
 		$result = $stmt->execute();
 
 		if( $result->fetch() !== false ) {
@@ -80,13 +58,12 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$sql = "
 			SELECT SEQUENCE_NAME
 			FROM INFORMATION_SCHEMA.SEQUENCES
-			WHERE SEQUENCE_SCHEMA = ?
+			WHERE SEQUENCE_SCHEMA = 'public'
 				AND SEQUENCE_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
-		$stmt->bind( 2, $seqname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $seqname );
 		$result = $stmt->execute();
 
 		if( $result->fetch() !== false ) {
@@ -109,15 +86,31 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$sql = "
 			SELECT CONSTRAINT_NAME
 			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-			WHERE TABLE_SCHEMA = ?
+			WHERE TABLE_SCHEMA = 'public'
 				AND TABLE_NAME = ?
 				AND CONSTRAINT_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
-		$stmt->bind( 2, $tablename );
-		$stmt->bind( 3, $constraintname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $tablename );
+		$stmt->bind( 2, $constraintname );
+		$result = $stmt->execute();
+
+		if( $result->fetch() !== false ) {
+			return true;
+		}
+
+		$sql = "
+			SELECT indexname
+			FROM pg_indexes
+			WHERE schemaname = 'public'
+				AND tablename = ?
+				AND indexname = ?
+		";
+
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $tablename );
+		$stmt->bind( 2, $constraintname );
 		$result = $stmt->execute();
 
 		if( $result->fetch() !== false ) {
@@ -140,15 +133,44 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$sql = "
 			SELECT COLUMN_NAME
 			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_SCHEMA = ?
+			WHERE TABLE_SCHEMA = 'public'
 				AND TABLE_NAME = ?
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
-		$stmt->bind( 2, $tablename );
-		$stmt->bind( 3, $columnname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $tablename );
+		$stmt->bind( 2, $columnname );
+		$result = $stmt->execute();
+
+		if( $result->fetch() !== false ) {
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Checks if the given index (not foreign keys, primary or unique constraints) exists in the database.
+	 *
+	 * @param string $tablename Name of the database table
+	 * @param string $indexname Name of the database index
+	 * @return boolean True if the index exists, false if not
+	 */
+	public function indexExists( $tablename, $indexname )
+	{
+		$sql = "
+			SELECT indexname
+			FROM pg_indexes
+			WHERE schemaname = 'public'
+				AND tablename = ?
+				AND indexname = ?
+		";
+
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $tablename );
+		$stmt->bind( 2, $indexname );
 		$result = $stmt->execute();
 
 		if( $result->fetch() !== false ) {
@@ -171,15 +193,14 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$sql = "
 			SELECT *
 			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_SCHEMA = ?
+			WHERE TABLE_SCHEMA = 'public'
 				AND TABLE_NAME = ?
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
-		$stmt->bind( 2, $tablename );
-		$stmt->bind( 3, $columnname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $tablename );
+		$stmt->bind( 2, $columnname );
 		$result = $stmt->execute();
 
 		if( ( $record = $result->fetch() ) === false ) {
@@ -191,62 +212,15 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 
 
 	/**
-	 * Returns the database name.
-	 *
-	 * @return string Database name
-	 */
-	public function getDBName()
-	{
-		return $this->dbname;
-	}
-
-
-	/**
-	 * Returns the name of the database adapter
-	 *
-	 * @return string Name of the adapter, e.g. 'mysql'
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-
-	/**
-	 * Tests if something is supported
-	 *
-	 * @param string $what Type of object
-	 * @return boolean True if supported, false if not
-	 */
-	public function supports( $what )
-	{
-		return false;
-	}
-
-
-	/**
 	 * Creates a new column item using the columns of the information_schema.columns.
 	 *
-	 * @param array $record Associative array with TABLE_NAME, COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,
-	 * 	NUMERIC_PRECISION, COLUMN_DEFAULT, IS_NULLABLE
+	 * @param array $record Associative array with column details
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
 	protected function createColumnItem( array $record = array() )
 	{
-		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
-		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,
-			$record['COLUMN_DEFAULT'], $record['IS_NULLABLE'], $record['COLLATION_NAME'] );
+		$length = ( isset( $record['character_maximum_length'] ) ? $record['character_maximum_length'] : $record['numeric_precision'] );
+		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['table_name'], $record['column_name'], $record['data_type'], $length,
+			$record['column_default'], $record['is_nullable'], $record['collation_name'] );
 	}
-
-
-	/**
-	 * Returns the database connection.
-	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
-	 */
-	protected function getConnection()
-	{
-		return $this->conn;
-	}
-
 }

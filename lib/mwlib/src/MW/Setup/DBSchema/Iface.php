@@ -27,9 +27,10 @@ interface Iface
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param string $dbname Database name
+	 * @param string $name Adapter name
 	 * @return void
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname );
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname, $name );
 
 	/**
 	 * Checks if the given table exists for the specified table in the database.
@@ -89,6 +90,13 @@ interface Iface
 	 * @return string Database name
 	 */
 	public function getDBName();
+
+	/**
+	 * Returns the name of the database adapter
+	 *
+	 * @return string Name of the adapter, e.g. 'mysql'
+	 */
+	public function getName();
 
 	/**
 	 * Tests if something is supported

@@ -83,7 +83,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 */
 	public function run( $dbtype )
 	{
-		if( method_exists( $this, 'mysql' ) ) {
+		if( $dbtype === 'mysql' && method_exists( $this, 'mysql' ) ) {
 			$this->mysql();
 		}
 	}

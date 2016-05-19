@@ -40,7 +40,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Database schema class "%1$s" not found', $classname ) );
 		}
 
-		return new $classname( $conn, $dbname );
+		return new $classname( $conn, $dbname, $adapter );
 	}
 
 
