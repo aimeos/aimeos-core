@@ -15,8 +15,7 @@ addons:
     - php5-pgsql
 
 env:
-  global:
-    - DB=mysql
+  - DB=mysql
 
 matrix:
   fast_finish: true
@@ -32,6 +31,7 @@ before_install:
   - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
   - sudo apt-get install postgresql postgresql-contrib
+  - sudo /etc/init.d/postgresql start
 
 before_script:
   - composer self-update

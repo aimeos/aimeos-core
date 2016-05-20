@@ -59,7 +59,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) === 'mysql' )
+		if( ( $adapter = \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) ) === 'mysql' )
 		{
 			$this->dbm = \TestHelperMw::getDBManager();
 
