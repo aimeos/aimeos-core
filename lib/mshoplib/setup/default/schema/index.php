@@ -18,7 +18,7 @@ return array(
 			$table->addColumn( 'attrid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'collation' => 'utf8_bin' ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'mtime', 'datetime', array() );
 			$table->addColumn( 'ctime', 'datetime', array() );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );

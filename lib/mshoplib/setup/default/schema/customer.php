@@ -41,7 +41,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
@@ -140,7 +140,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'status', 'smallint', array() );
 			$table->addColumn( 'mtime', 'datetime', array() );
@@ -198,7 +198,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mtime', 'datetime', array() );
 			$table->addColumn( 'ctime', 'datetime', array() );

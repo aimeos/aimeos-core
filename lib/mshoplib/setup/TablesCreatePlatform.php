@@ -46,54 +46,51 @@ class TablesCreatePlatform extends \Aimeos\MW\Setup\Task\Base
 
 		$ds = DIRECTORY_SEPARATOR;
 
-		$files = array(
-			'db-index' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'index-mysql.sql',
-			'db-order' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'order-mysql.sql',
-			'db-text' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'text-mysql.sql',
-		);
-
-		$this->setup( $files );
+		$this->setup( 'db-index', 'mysql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'index-mysql.sql' );
+		$this->setup( 'db-order', 'mysql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'order-mysql.sql' );
+		$this->setup( 'db-text', 'mysql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'text-mysql.sql' );
 	}
 
 
 	/**
 	 * Creates all required tables if they doesn't exist
 	 */
-	protected function setup( array $files )
+	protected function setup( $rname, $adapter, $filepath )
 	{
-		foreach( $files as $rname => $filepath )
+		$schema = $this->getSchema( $rname );
+
+		if( $adapter !== $schema->getName() ) {
+			return;
+		}
+
+		$this->msg( 'Using schema from ' . basename( $filepath ), 1 ); $this->status( '' );
+
+		if( ( $content = file_get_contents( $filepath ) ) === false ) {
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
+		}
+
+		foreach( $this->getTableDefinitions( $content ) as $name => $sql )
 		{
-			$this->msg( 'Using schema from ' . basename( $filepath ), 1 ); $this->status( '' );
+			$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
-			if( ( $content = file_get_contents( $filepath ) ) === false ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
+			if( $schema->tableExists( $name ) !== true ) {
+				$this->execute( $sql, $rname );
+				$this->status( 'created' );
+			} else {
+				$this->status( 'OK' );
 			}
+		}
 
-			$schema = $this->getSchema( $rname );
+		foreach( $this->getIndexDefinitions( $content ) as $name => $sql )
+		{
+			$parts = explode( '.', $name );
+			$this->msg( sprintf( 'Checking index "%1$s": ', $name ), 2 );
 
-			foreach( $this->getTableDefinitions( $content ) as $name => $sql )
-			{
-				$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
-
-				if( $schema->tableExists( $name ) !== true ) {
-					$this->execute( $sql, $rname );
-					$this->status( 'created' );
-				} else {
-					$this->status( 'OK' );
-				}
-			}
-
-			foreach( $this->getIndexDefinitions( $content ) as $name => $sql )
-			{
-				$parts = explode( '.', $name );
-				$this->msg( sprintf( 'Checking index "%1$s": ', $name ), 2 );
-
-				if( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
-					$this->execute( $sql, $rname );
-					$this->status( 'created' );
-				} else {
-					$this->status( 'OK' );
-				}
+			if( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
+				$this->execute( $sql, $rname );
+				$this->status( 'created' );
+			} else {
+				$this->status( 'OK' );
 			}
 		}
 	}

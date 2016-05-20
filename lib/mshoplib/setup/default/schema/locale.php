@@ -27,7 +27,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', array() );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'level', 'smallint', array() );
@@ -59,8 +59,8 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mslocla_id' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_mslocla_status' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mslocla_label' );
+			$table->addIndex( array( 'siteid', 'status' ), 'idx_mslocla_sid_status' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_mslocla_sid_label' );
 
 			$table->addForeignKeyConstraint( 'mshop_locale_site', array( 'siteid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'SET NULL' ), 'fk_mslocla_siteid' );

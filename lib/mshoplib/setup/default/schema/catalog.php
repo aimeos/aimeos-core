@@ -34,9 +34,9 @@ return array(
 			$table->addColumn( 'parentid', 'integer', array() );
 			$table->addColumn( 'siteid', 'integer', array() );
 			$table->addColumn( 'level', 'smallint', array() );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
+			$table->addColumn( 'config', 'text', array( 'default' => '', 'length' => 0xffff ) );
 			$table->addColumn( 'nleft', 'integer', array() );
 			$table->addColumn( 'nright', 'integer', array() );
 			$table->addColumn( 'status', 'smallint', array() );
@@ -59,7 +59,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'status', 'smallint', array() );
 			$table->addColumn( 'mtime', 'datetime', array() );

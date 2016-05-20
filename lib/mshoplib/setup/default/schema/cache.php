@@ -33,7 +33,7 @@ return array(
 
 			$table->addUniqueIndex( array( 'tid', 'tsiteid', 'tname' ), 'unq_macacta_tid_tsid_tname' );
 
-			$table->addForeignKeyConstraint( 'madmin_cache', array( 'tid' ), array( 'id' ),
+			$table->addForeignKeyConstraint( 'madmin_cache', array( 'tid', 'tsiteid' ), array( 'id', 'siteid' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_macac_tid' );
 
 			return $schema;

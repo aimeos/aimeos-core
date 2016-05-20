@@ -54,7 +54,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'parentid', 'integer', array() );
 			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'count', 'integer', array() );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );

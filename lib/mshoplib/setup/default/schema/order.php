@@ -175,9 +175,9 @@ return array(
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'prodid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'prodcode', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' )  ) );
-			$table->addColumn( 'suppliercode', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' )  ) );
-			$table->addColumn( 'warehousecode', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'prodcode', 'string', array( 'length' => 32  ) );
+			$table->addColumn( 'suppliercode', 'string', array( 'length' => 32  ) );
+			$table->addColumn( 'warehousecode', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'quantity', 'integer', array() );
@@ -210,12 +210,11 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base_product_attr' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'baseid', 'bigint', array() );
+			$table->addColumn( 'ordprodid', 'bigint', array() );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'ordprodid', 'bigint', array() );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'mtime', 'datetime', array() );
@@ -240,7 +239,7 @@ return array(
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'servid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 8 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -269,12 +268,11 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base_service_attr' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'baseid', 'bigint', array() );
+			$table->addColumn( 'ordservid', 'bigint', array() );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'ordservid', 'bigint', array() );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'mtime', 'datetime', array() );
@@ -298,7 +296,7 @@ return array(
 			$table->addColumn( 'baseid', 'bigint', array() );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32, 'customSchemaOptions' => array( 'collation' => 'utf8_bin' ) ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'mtime', 'datetime', array() );
 			$table->addColumn( 'ctime', 'datetime', array() );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
