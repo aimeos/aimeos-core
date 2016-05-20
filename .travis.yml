@@ -20,8 +20,6 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: hhvm
-      env: DB=pgsql
     - php: 7.0
       env: DB=pgsql
 
@@ -37,7 +35,7 @@ before_script:
   - composer self-update
   - composer install || sleep 60 && composer install
   - if [[ $DB = 'mysql' ]]; then mysql -e 'create database aimeos;'; echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
-  - if [[ $DB = 'pgsql' ]]; then psql -c 'create database aimeos;' -U postgres -h 127.0.0.1 -p 5433; echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'postgres', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
+  - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c 'create database aimeos;' -p 5433 postgres; echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'postgres', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
 
 script: "vendor/bin/phing setup coverage check"
 
