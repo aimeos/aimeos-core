@@ -72,6 +72,16 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetColumnString()
+	{
+		$translations = array( 'int_value' => '$intval', 'str_value' => '$strval' );
+
+		$this->assertEquals( "\$strval", $this->object->getColumnString( array( $this->object->sort( '+', 'str_value' ) ), $translations ) );
+		$this->assertEquals( "\$strval", $this->object->getColumnString( array( $this->object->compare( '==', 'str_value', 1 ) ), $translations ) );
+		$this->assertEquals( "", $this->object->getColumnString( array( $this->object->combine( '&&', array() ) ), $translations ) );
+	}
+
+
 	public function testGetConditionString()
 	{
 		$intval = 1;

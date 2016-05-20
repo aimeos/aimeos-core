@@ -7,6 +7,12 @@
  */
 
 return array(
+	'cleanup' => array(
+		'ansi' => '
+			DELETE FROM "mshop_catalog"
+			WHERE :siteid AND "nleft" >= ? AND "nright" <= ?
+		'
+	),
 	'delete' => array(
 		'ansi' => '
 			DELETE FROM "mshop_catalog"
@@ -35,9 +41,9 @@ return array(
 		'ansi' => '
 			INSERT INTO "mshop_catalog" (
 				"siteid", "label", "code", "status", "parentid", "level",
-				"nleft", "nright"
+				"nleft", "nright", "config", "mtime", "ctime", "editor"
 			) VALUES (
-				:siteid, ?, ?, ?, ?, ?, ?, ?
+				:siteid, ?, ?, ?, ?, ?, ?, ?, \'\', \'1970-01-01 00:00:00\', \'1970-01-01 00:00:00\', \'\'
 			)
 		'
 	),
@@ -95,7 +101,6 @@ return array(
 			GROUP BY mcat."id", mcat."code", mcat."label", mcat."config",
 				mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 				mcat."nleft", mcat."nright", mcat."mtime", mcat."editor", mcat."ctime"
-				/*-orderby*/, :order /*orderby-*/
 			ORDER BY :order
 		'
 	),
@@ -111,7 +116,7 @@ return array(
 			GROUP BY mcat."id", mcat."code", mcat."label", mcat."config",
 				mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 				mcat."nleft", mcat."nright", mcat."mtime", mcat."editor", mcat."ctime"
-				/*-orderby*/, :order /*orderby-*/
+				/*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -129,7 +134,8 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );
 

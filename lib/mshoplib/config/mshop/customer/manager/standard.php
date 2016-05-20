@@ -66,7 +66,7 @@ return array(
 				mcus."countryid", mcus."langid", mcus."telephone", mcus."email",
 				mcus."telefax", mcus."website", mcus."birthday", mcus."status",
 				mcus."vdate", mcus."password", mcus."ctime", mcus."mtime",
-				mcus."editor" /*-orderby*/, :order /*orderby-*/
+				mcus."editor" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -84,6 +84,7 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );

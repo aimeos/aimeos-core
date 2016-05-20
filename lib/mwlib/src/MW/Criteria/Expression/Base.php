@@ -24,6 +24,19 @@ abstract class Base
 
 
 	/**
+	 * Translates the sort key into the name required by the storage
+	 *
+	 * @param array $translations Associative list of variable or column names that should be translated
+	 * @return string Translated name (with replaced parameters if the name is an expression function)
+	 */
+	public function translate( array $translations )
+	{
+		$name = $this->getName();
+		return $this->translateName( $name, $translations );
+	}
+
+
+	/**
 	 * Creates a function signature for compare expressions.
 	 *
 	 * @param string $name Function name

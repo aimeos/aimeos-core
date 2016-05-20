@@ -14,7 +14,7 @@ return array(
 				FROM "mshop_supplier_list" AS msupli
 				:joins
 				WHERE :cond
-				GROUP BY :key, msupli."id" /*-orderby*/, :order /*orderby-*/
+				GROUP BY :key, msupli."id" /*-columns*/ , :columns /*columns-*/
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -84,7 +84,7 @@ return array(
 			GROUP BY msupli."id", msupli."parentid", msupli."siteid", msupli."typeid",
 				msupli."domain", msupli."refid", msupli."start", msupli."end",
 				msupli."config", msupli."pos", msupli."status", msupli."mtime",
-				msupli."editor", msupli."ctime" /*-orderby*/, :order /*orderby-*/
+				msupli."editor", msupli."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -102,7 +102,8 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );
 

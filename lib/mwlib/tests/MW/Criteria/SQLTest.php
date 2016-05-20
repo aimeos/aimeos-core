@@ -88,6 +88,16 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testGetColumnString()
+	{
+		$translations = array( 'int_column' => 'int_col', 'str_column' => 'str_col' );
+
+		$this->assertEquals( "str_col", $this->object->getColumnString( array( $this->object->sort( '+', 'str_column' ) ), $translations ) );
+		$this->assertEquals( "str_col", $this->object->getColumnString( array( $this->object->compare( '==', 'str_column', 1 ) ), $translations ) );
+		$this->assertEquals( "", $this->object->getColumnString( array( $this->object->combine( '&&', array() ) ), $translations ) );
+	}
+
+
 	public function testGetConditionString()
 	{
 		$types = array( 'int_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'str_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );

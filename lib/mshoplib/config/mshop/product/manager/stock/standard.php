@@ -43,7 +43,7 @@ return array(
 			WHERE :cond
 			GROUP BY mprost."id", mprost."parentid", mprost."siteid", mprost."warehouseid",
 				mprost."stocklevel", mprost."backdate", mprost."mtime", mprost."editor",
-				mprost."ctime" /*-orderby*/, :order /*orderby-*/
+				mprost."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -68,7 +68,8 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );
 

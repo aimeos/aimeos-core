@@ -33,6 +33,25 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 
 	/**
+	 * Returns a translated colum list separated by comma
+	 *
+	 * @param array $columns List of objects implementing getName() method
+	 * @param array $translations Associative list of item names that should be translated
+	 * @return string Translated columns
+	 */
+	public function getColumnString( array $columns, array $translations = array() )
+	{
+		$list = array();
+
+		foreach( $columns as $item ) {
+			$list[] = $item->translate( $translations );
+		}
+
+		return implode( ', ', $list );
+	}
+
+
+	/**
 	 * Creates condition expressions from a multi-dimensional associative array.
 	 *
 	 * The simplest form of a valid associative array is a single comparison:

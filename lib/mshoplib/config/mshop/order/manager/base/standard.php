@@ -15,7 +15,7 @@ return array(
 			FROM "mshop_order_base" AS mordba
 			:joins
 			WHERE :cond
-			GROUP BY :key, mordba."id" /*-orderby*/, :order /*orderby-*/
+			GROUP BY :key, mordba."id" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		) AS list
@@ -64,7 +64,7 @@ return array(
 			GROUP BY mordba."id", mordba."siteid", mordba."sitecode", mordba."customerid",
 				mordba."langid", mordba."currencyid", mordba."price", mordba."costs",
 				mordba."rebate", mordba."tax", mordba."taxflag", mordba."comment", mordba."status",
-				mordba."mtime", mordba."editor", mordba."ctime" /*-orderby*/, :order /*orderby-*/
+				mordba."mtime", mordba."editor", mordba."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -78,7 +78,8 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );
 

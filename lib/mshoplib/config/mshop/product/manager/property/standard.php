@@ -42,7 +42,7 @@ return array(
 			WHERE :cond
 			GROUP BY mpropr."id", mpropr."parentid", mpropr."siteid", mpropr."typeid",
 				mpropr."langid", mpropr."value", mpropr."mtime", mpropr."editor",
-				mpropr."ctime" /*-orderby*/, :order /*orderby-*/
+				mpropr."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -60,7 +60,8 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );
 

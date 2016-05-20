@@ -50,7 +50,7 @@ return array(
 			GROUP BY mpri."id", mpri."siteid", mpri."typeid", mpri."currencyid",
 				mpri."domain", mpri."label", mpri."quantity", mpri."value",
 				mpri."costs", mpri."rebate", mpri."taxrate", mpri."status",
-				mpri."mtime", mpri."editor", mpri."ctime" /*-orderby*/, :order /*orderby-*/
+				mpri."mtime", mpri."editor", mpri."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -68,6 +68,7 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );

@@ -713,13 +713,15 @@ class Standard
 			$attributes = $this->getSearchAttributes();
 			$types = $this->getSearchTypes( $attributes );
 			$translations = $this->getSearchTranslations( $attributes );
+			$columns = $search->getColumnString( $search->getSortations(), $translations );
 
-			$find = array( ':cond', ':order', ':start', ':size' );
+			$find = array( ':cond', ':order', ':columns', ':start', ':size' );
 			$replace = array(
-				$search->getConditionString( $types, $translations ),
-				$search->getSortationString( $types, $translations ),
-				$search->getSliceStart(),
-				$search->getSliceSize(),
+					$search->getConditionString( $types, $translations ),
+					$search->getSortationString( $types, $translations ),
+					( $columns ? ', ' . $columns : '' ),
+					$search->getSliceStart(),
+					$search->getSliceSize(),
 			);
 
 			/** mshop/locale/manager/standard/search/mysql

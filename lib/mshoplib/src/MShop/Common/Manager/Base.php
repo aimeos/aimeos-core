@@ -871,6 +871,10 @@ abstract class Base
 			$keys[] = 'orderby';
 			$find[] = ':order';
 			$replace[] = $search->getSortationString( $types, $translations );
+
+			$keys[] = 'columns';
+			$find[] = ':columns';
+			$replace[] = $search->getColumnString( $search->getSortations(), $translations );
 		}
 
 

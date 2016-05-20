@@ -42,7 +42,7 @@ return array(
 			WHERE :cond
 			GROUP BY malog."id", malog."siteid", malog."facility",
 				malog."timestamp", malog."priority", malog."message",
-				malog."request" /*-orderby*/, :order /*orderby-*/
+				malog."request" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 	',
@@ -61,5 +61,6 @@ return array(
 	),
 	'newid' => array(
 		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );

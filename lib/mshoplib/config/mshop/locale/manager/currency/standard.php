@@ -39,7 +39,7 @@ return array(
 			FROM "mshop_locale_currency" AS mloccu
 			WHERE :cond
 			GROUP BY mloccu."id", mloccu."label", mloccu."siteid", mloccu."status",
-				mloccu."mtime", mloccu."editor", mloccu."ctime", :order
+				mloccu."mtime", mloccu."editor", mloccu."ctime" :columns
 			ORDER BY :order
 			LIMIT :size OFFSET :start
 		'
@@ -56,7 +56,8 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );
 

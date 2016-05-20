@@ -159,7 +159,7 @@ class Standard
 
 		try
 		{
-			$path = 'mshop/catalog/manager/standard/delete';
+			$path = 'mshop/catalog/manager/standard/cleanup';
 			$sql = $this->getSqlConfig( $path );
 
 			$types = array( 'siteid' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );

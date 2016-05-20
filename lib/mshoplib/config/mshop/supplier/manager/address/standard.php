@@ -62,7 +62,7 @@ return array(
 				msupad."address3", msupad."postal", msupad."city", msupad."state",
 				msupad."countryid", msupad."langid", msupad."telephone", msupad."email",
 				msupad."telefax", msupad."website", msupad."flag", msupad."mtime",
-				msupad."editor", msupad."ctime" /*-orderby*/, :order /*orderby-*/
+				msupad."editor", msupad."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -80,6 +80,7 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );

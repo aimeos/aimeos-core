@@ -76,6 +76,15 @@ interface Iface
 	 */
 	public function getOperators();
 
+	/**
+	 * Returns a translated colum list separated by comma
+	 *
+	 * @param array $columns List of column names or objects implementing getName() method
+	 * @param array $translations Associative list of item names that should be translated
+	 * @return string Translated columns
+	 */
+	public function getColumnString( array $columns, array $translations = array() );
+
 
 	/**
 	 * Returns the expression string.

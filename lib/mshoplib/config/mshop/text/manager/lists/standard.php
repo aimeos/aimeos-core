@@ -15,7 +15,7 @@ return array(
 				FROM "mshop_text_list" AS mtexli
 				:joins
 				WHERE :cond
-				GROUP BY :key, mtexli."id" /*-orderby*/, :order /*orderby-*/
+				GROUP BY :key, mtexli."id" /*-columns*/ , :columns /*columns-*/
 				/*-orderby*/ ORDER BY :order /*orderby-*/
 				LIMIT :size OFFSET :start
 			) AS list
@@ -85,7 +85,7 @@ return array(
 			GROUP BY mtexli."id", mtexli."parentid", mtexli."siteid", mtexli."typeid",
 				mtexli."domain", mtexli."refid", mtexli."start", mtexli."end",
 				mtexli."config", mtexli."pos", mtexli."status", mtexli."mtime",
-				mtexli."editor", mtexli."ctime" /*-orderby*/, :order /*orderby-*/
+				mtexli."editor", mtexli."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -103,7 +103,8 @@ return array(
 		'
 	),
 	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()'
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'pgsql' => 'SELECT lastval()',
 	),
 );
 
