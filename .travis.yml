@@ -34,8 +34,12 @@ before_install:
 before_script:
   - composer self-update
   - composer install || sleep 60 && composer install
-  - if [[ $DB = 'mysql' ]]; then mysql -e 'create database aimeos;'; echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
-  - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c 'create database aimeos;' -p 5433 postgres; echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'port' => 5433, 'database' => 'aimeos', 'username' => 'postgres', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
+  - if [[ $DB = 'mysql' ]]; then mysql -e "CREATE DATABASE aimeos;"; fi
+  - if [[ $DB = 'mysql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
+  - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "CREATE DATABASE aimeos;" -p 5433 postgres; fi
+  - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "CREATE USER aimeos PASSWORD 'aimeos';" -p 5433 postgres; fi
+  - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE aimeos TO aimeos;" -p 5433 postgres; fi
+  - if [[ $DB = 'pgsql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5433, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
 
 script: "vendor/bin/phing setup coverage check"
 
