@@ -200,6 +200,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$conditions = array(
 			$search->compare( '==', 'order.base.service.code', 'OGONE' ),
 			$search->compare( '==', 'order.base.service.editor', $this->editor ),
+			$search->compare( '==', 'order.base.service.attribute.code', 'NAME' ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$orderItems = $this->object->searchItems( $search );

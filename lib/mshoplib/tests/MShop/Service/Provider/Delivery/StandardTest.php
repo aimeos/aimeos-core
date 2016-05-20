@@ -196,6 +196,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 								<type><![CDATA[payment]]></type>
 							</fielditem>
 							<fielditem>
+								<name><![CDATA[Ogone-alias-name]]></name>
+								<value><![CDATA[aliasName]]></value>
+								<type><![CDATA[payment]]></type>
+							</fielditem>
+							<fielditem>
+								<name><![CDATA[Ogone-alias-value]]></name>
+								<value><![CDATA[aliasValue]]></value>
+								<type><![CDATA[payment]]></type>
+							</fielditem>
+							<fielditem>
 								<name><![CDATA[REFID]]></name>
 								<value><![CDATA[12345678]]></value>
 								<type><![CDATA[payment]]></type>
@@ -213,16 +223,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 							<fielditem>
 								<name><![CDATA[X-STATUS]]></name>
 								<value><![CDATA[9]]></value>
-								<type><![CDATA[payment]]></type>
-							</fielditem>
-							<fielditem>
-								<name><![CDATA[ogone-alias-name]]></name>
-								<value><![CDATA[aliasName]]></value>
-								<type><![CDATA[payment]]></type>
-							</fielditem>
-							<fielditem>
-								<name><![CDATA[ogone-alias-value]]></name>
-								<value><![CDATA[aliasValue]]></value>
 								<type><![CDATA[payment]]></type>
 							</fielditem>
 						</fieldlist>

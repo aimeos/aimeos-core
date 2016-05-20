@@ -221,7 +221,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'cafe noire cap' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'Cafe Noire Cap' ) ), 0 ),
 			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -235,7 +235,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCleanupIndex()
 	{
-		$this->object->cleanupIndex( '0000-00-00 00:00:00' );
+		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
 	}
 
 }

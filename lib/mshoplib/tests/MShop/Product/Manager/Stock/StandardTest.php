@@ -184,53 +184,49 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testDecrease()
 	{
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.editor', $this->editor ) );
-		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
-
-		if( ( $stockItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No stock item found.' );
-		}
-
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$productCode = $productManager->getItem( $stockItem->getParentId() )->getCode();
-
 		$warehouseManager = $this->object->getSubManager( 'warehouse' );
-		$warehouseCode = $warehouseManager->getItem( $stockItem->getWarehouseId() )->getCode();
 
-		$this->object->decrease( $productCode, $warehouseCode, 5 );
-		$actual = $this->object->getItem( $stockItem->getId() );
+		$productItem = $productManager->findItem( 'CNC' );
+		$warehouseItem = $warehouseManager->findItem( 'unit_warehouse1' );
+
+		$stockItem = $this->object->createItem();
+		$stockItem->setParentId( $productItem->getId() );
+		$stockItem->setWarehouseId( $warehouseItem->getId() );
+		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->assertEquals( $stockItem->getStocklevel() - 5, $actual->getStocklevel() );
+		$this->object->decrease( $productItem->getCode(), $warehouseItem->getCode(), 5 );
+		$actual = $this->object->getItem( $stockItem->getId() );
+
+		$this->object->deleteItem( $stockItem->getId() );
+
+		$this->assertEquals( -5, $actual->getStocklevel() );
 	}
 
 
 	public function testIncrease()
 	{
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.editor', $this->editor ) );
-		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search );
-
-		if( ( $stockItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No stock item found.' );
-		}
-
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$productCode = $productManager->getItem( $stockItem->getParentId() )->getCode();
-
 		$warehouseManager = $this->object->getSubManager( 'warehouse' );
-		$warehouseCode = $warehouseManager->getItem( $stockItem->getWarehouseId() )->getCode();
 
-		$this->object->increase( $productCode, $warehouseCode, 5 );
-		$actual = $this->object->getItem( $stockItem->getId() );
+		$productItem = $productManager->findItem( 'CNC' );
+		$warehouseItem = $warehouseManager->findItem( 'unit_warehouse1' );
+
+		$stockItem = $this->object->createItem();
+		$stockItem->setParentId( $productItem->getId() );
+		$stockItem->setWarehouseId( $warehouseItem->getId() );
+		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->assertEquals( $stockItem->getStocklevel() + 5, $actual->getStocklevel() );
+		$this->object->increase( $productItem->getCode(), $warehouseItem->getCode(), 5 );
+		$actual = $this->object->getItem( $stockItem->getId() );
+
+		$this->object->deleteItem( $stockItem->getId() );
+
+		$this->assertEquals( 5, $actual->getStocklevel() );
 	}
 
 

@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$param = array( \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
+		$param = array( (string) \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT, (string) \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 		$funcStatPayment = $search->createFunction( 'order.containsStatus', $param );
 
 		$expr = array();
@@ -335,7 +335,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.base.address.postal', '20146' );
 		$expr[] = $search->compare( '==', 'order.base.address.city', 'Hamburg' );
 		$expr[] = $search->compare( '==', 'order.base.address.state', 'Hamburg' );
-		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'de' );
+		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'order.base.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.address.telephone', '055544332211' );
 		$expr[] = $search->compare( '==', 'order.base.address.email', 'test@example.com' );

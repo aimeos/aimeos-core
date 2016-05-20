@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$conditions[] = $search->compare( '==', 'supplier.address.postal', '20457' );
 		$conditions[] = $search->compare( '==', 'supplier.address.city', 'Hamburg' );
 		$conditions[] = $search->compare( '==', 'supplier.address.state', 'Hamburg' );
-		$conditions[] = $search->compare( '==', 'supplier.address.countryid', 'de' );
+		$conditions[] = $search->compare( '==', 'supplier.address.countryid', 'DE' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telephone', '055544332211' );
 		$conditions[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telefax', '055544332212' );

@@ -204,11 +204,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$expr[] = $search->compare( '==', 'customer.birthday', null );
 		$expr[] = $search->compare( '>=', 'customer.password', '' );
-		$expr[] = $search->compare( '>=', 'customer.ctime', '0000-00-00 00:00:00' );
-		$expr[] = $search->compare( '>=', 'customer.mtime', '0000-00-00 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.status', 1 );
-		$expr[] = $search->compare( '!=', 'customer.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'customer.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>', 'customer.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>', 'customer.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
@@ -227,15 +225,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.address.city', 'Berlin' );
 		$expr[] = $search->compare( '==', 'customer.address.state', 'Berlin' );
 		$expr[] = $search->compare( '==', 'customer.address.languageid', 'de' );
-		$expr[] = $search->compare( '==', 'customer.address.countryid', 'de' );
+		$expr[] = $search->compare( '==', 'customer.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'customer.address.telephone', '055544332221' );
 		$expr[] = $search->compare( '==', 'customer.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.telefax', '055544333212' );
 		$expr[] = $search->compare( '==', 'customer.address.website', 'www.example.com' );
 		$expr[] = $search->compare( '==', 'customer.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'customer.address.position', 1 );
-		$expr[] = $search->compare( '!=', 'customer.address.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '!=', 'customer.address.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>', 'customer.address.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>', 'customer.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

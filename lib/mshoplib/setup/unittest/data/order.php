@@ -75,8 +75,8 @@ return array(
 		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction date', 'code' => 'TXDATE', 'value' => '2009-08-18' ),
 		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction account', 'code' => 'X-ACCOUNT', 'value' => 'Kraft02' ),
 		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'transaction status', 'code' => 'X-STATUS', 'value' => 9 ),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias name', 'code' => 'ogone-alias-name', 'value' => 'aliasName' ),
-		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias value', 'code' => 'ogone-alias-value', 'value' => 'aliasValue' ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias name', 'code' => 'Ogone-alias-name', 'value' => 'aliasName' ),
+		array( 'ordservid' => 'OGONE/19.95', 'type' => 'payment', 'name' => 'ogone alias value', 'code' => 'Ogone-alias-value', 'value' => 'aliasValue' ),
 	),
 
 	'order' => array(

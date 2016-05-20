@@ -223,7 +223,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.base.address.postal', '20146' );
 		$expr[] = $search->compare( '==', 'order.base.address.city', 'Hamburg' );
 		$expr[] = $search->compare( '==', 'order.base.address.state', 'Hamburg' );
-		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'de' );
+		$expr[] = $search->compare( '==', 'order.base.address.countryid', 'DE' );
 		$expr[] = $search->compare( '==', 'order.base.address.languageid', 'de' );
 		$expr[] = $search->compare( '==', 'order.base.address.telephone', '055544332211' );
 		$expr[] = $search->compare( '==', 'order.base.address.email', 'test@example.com' );

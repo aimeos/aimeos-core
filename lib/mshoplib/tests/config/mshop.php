@@ -15,14 +15,6 @@ return array(
 			),
 		),
 	),
-	'index' => array(
-		'manager' => array(
-			'name' => 'MySQL',
-			'text' => array(
-				'name' => 'MySQL',
-			),
-		),
-	),
 	'product' => array(
 		'manager' => array(
 			'decorators' => array(

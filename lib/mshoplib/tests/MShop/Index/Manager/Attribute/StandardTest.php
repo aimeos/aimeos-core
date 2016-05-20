@@ -55,6 +55,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $manager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'attribute.code', 'white' ),
+			$search->compare( '==', 'attribute.domain', 'product' ),
 			$search->compare( '==', 'attribute.type.code', 'color' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -195,6 +196,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$attrIds = array( (int) $attrLengthItem->getId(), (int) $attrWidthItem->getId() );
 		$func = $search->createFunction( 'index.attributecount', array( 'variant', $attrIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count attributes
+		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
 		$result = $this->object->searchItems( $search, array() );
 
 		if( ( $product = reset( $result ) ) === false ) {
@@ -215,7 +217,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCleanupIndex()
 	{
-		$this->object->cleanupIndex( '0000-00-00 00:00:00' );
+		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
 	}
 
 }
