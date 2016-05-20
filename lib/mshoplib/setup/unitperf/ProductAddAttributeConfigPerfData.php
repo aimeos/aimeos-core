@@ -38,18 +38,9 @@ class ProductAddAttributeConfigPerfData extends \Aimeos\MW\Setup\Task\ProductAdd
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Insert attribute items and product/attribute relations.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding product config attribute performance data', 0 );
 

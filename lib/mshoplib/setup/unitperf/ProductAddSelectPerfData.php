@@ -44,18 +44,9 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Insert product data.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding product selection performance data', 0 );
 

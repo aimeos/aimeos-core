@@ -38,18 +38,9 @@ class DemoAddCustomerData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Insert service data.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Processing customer demo data', 0 );
 

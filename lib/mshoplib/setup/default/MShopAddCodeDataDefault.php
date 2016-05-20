@@ -39,7 +39,7 @@ class MShopAddCodeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 	/**
 	 * Executes the task for MySQL databases
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->process();
 	}

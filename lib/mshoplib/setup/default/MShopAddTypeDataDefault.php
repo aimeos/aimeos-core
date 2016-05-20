@@ -29,7 +29,7 @@ class MShopAddTypeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->process();
 	}

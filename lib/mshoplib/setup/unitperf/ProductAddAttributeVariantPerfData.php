@@ -38,20 +38,10 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Insert attribute items and product/attribute relations.
 	 */
-	protected function process()
+	public function migrate()
 	{
-
 		$this->msg( 'Adding product variant attribute performance data', 0 );
 
 

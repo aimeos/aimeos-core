@@ -40,7 +40,7 @@ class CatalogAddProductPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerf
 	/**
 	 * Insert catalog nodes and product/catalog relations.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding product categories performance data', 0 );
 

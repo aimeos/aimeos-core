@@ -29,7 +29,7 @@ class MShopAddPluginDataDefault extends \Aimeos\MW\Setup\Task\MShopAddPluginData
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->process();
 	}

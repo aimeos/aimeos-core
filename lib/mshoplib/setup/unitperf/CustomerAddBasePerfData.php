@@ -40,7 +40,7 @@ class CustomerAddBasePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	/**
 	 * Inserts customer items.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding customer performance data', 0 );
 

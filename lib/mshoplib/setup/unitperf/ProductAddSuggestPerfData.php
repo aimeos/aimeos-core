@@ -49,18 +49,9 @@ class ProductAddSuggestPerfData extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Insert product data.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding product suggestion performance data', 0 );
 

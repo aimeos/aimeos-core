@@ -38,18 +38,9 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Insert catalog nodes and relations.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Processing catalog demo data', 0 );
 

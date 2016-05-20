@@ -40,7 +40,7 @@ class ProductAddTextPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDat
 	/**
 	 * Insert text data and product/text relations.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding product text performance data', 0 );
 

@@ -29,7 +29,7 @@ class MShopAddPluginDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddPluginDat
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->process();
 	}

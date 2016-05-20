@@ -40,7 +40,7 @@ class CatalogAddPromoPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	/**
 	 * Inserts catalog promotion products.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding catalog promotion performance data', 0 );
 

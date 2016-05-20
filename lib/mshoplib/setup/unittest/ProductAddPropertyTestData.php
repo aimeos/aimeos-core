@@ -38,18 +38,9 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Adds product test data.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
 		if( !( $this->additional instanceof $iface ) ) {
@@ -86,7 +77,7 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$typeIds = array();
 		$type = $productPropertyTypeManager->createItem();
 		$prodIds = $this->getProductIds( $productManager );
-		
+
 		$this->conn->begin();
 
 		foreach( $testdata['product/property/type'] as $key => $dataset )
@@ -119,11 +110,11 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$this->conn->commit();
 	}
-	
+
 
 	/**
 	 * Retrieves the product IDs for the used codes
-	 * 
+	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $productManager Product manager object
 	 * @return array Associative list of product codes as key (e.g. product/CNC) and IDs as value
 	 */
@@ -135,8 +126,8 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $productManager->searchItems( $search ) as $id => $item ) {
 			$entry[ 'product/' . $item->getCode() ] = $id;
 		}
-		
+
 		return $entry;
-		
+
 	}
 }

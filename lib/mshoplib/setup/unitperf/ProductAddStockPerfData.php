@@ -40,7 +40,7 @@ class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	/**
 	 * Insert price data and product/price relations.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding product stock performance data', 0 );
 

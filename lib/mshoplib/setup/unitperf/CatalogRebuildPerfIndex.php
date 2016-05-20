@@ -38,18 +38,9 @@ class CatalogRebuildPerfIndex extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Rebuilds the index.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Rebuilding index for performance data', 0 );
 

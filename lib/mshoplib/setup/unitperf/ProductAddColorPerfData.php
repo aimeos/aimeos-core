@@ -40,7 +40,7 @@ class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	/**
 	 * Insert text data and product/text relations.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding product color attribute performance data', 0 );
 

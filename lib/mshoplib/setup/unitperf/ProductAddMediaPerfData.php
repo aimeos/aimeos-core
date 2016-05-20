@@ -40,7 +40,7 @@ class ProductAddMediaPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	/**
 	 * Insert media items and product/media relations.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Adding product media performance data', 0 );
 

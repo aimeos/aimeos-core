@@ -38,18 +38,9 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 
 	/**
-	 * Executes the task for MySQL databases.
-	 */
-	protected function mysql()
-	{
-		$this->process();
-	}
-
-
-	/**
 	 * Insert product data.
 	 */
-	protected function process()
+	public function migrate()
 	{
 		$this->msg( 'Processing product demo data', 0 );
 
