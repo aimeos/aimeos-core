@@ -26,7 +26,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	{
 		$config = \TestHelperMw::getConfig();
 
-		if( $config->get( 'resource/db/adapter', false ) === false ) {
+		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) === false ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
@@ -46,7 +46,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 		$conn->create( $sql )->execute()->finish();
 		$conn->create( 'CREATE INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test" ("smallint")' )->execute()->finish();
 
-		$this->object = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ), $adapter );
 
 		$this->dbm->release( $conn );
 	}
