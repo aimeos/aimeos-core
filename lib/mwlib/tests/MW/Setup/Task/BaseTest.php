@@ -33,7 +33,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$dbm = \TestHelperMw::getDBManager();
 		$conn = $dbm->acquire();
 
-		$schema = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ) );
+		$schema = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ), 'mysql' );
 		$this->object = new BaseImpl( $schema, $conn );
 
 		$dbm->release( $conn );
