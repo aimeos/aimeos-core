@@ -26,7 +26,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	{
 		$config = \TestHelperMw::getConfig();
 
-		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) === false ) {
+		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) !== 'mysql' ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
@@ -59,12 +59,15 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$this->dbm = \TestHelperMw::getDBManager();
+		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) === 'mysql' )
+		{
+			$this->dbm = \TestHelperMw::getDBManager();
 
-		$conn = $this->dbm->acquire();
-		$conn->create( 'DROP INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test"' )->execute()->finish();
-		$conn->create( 'DROP TABLE "mw_setup_dbschema_test"' )->execute()->finish();
-		$this->dbm->release( $conn );
+			$conn = $this->dbm->acquire();
+			$conn->create( 'DROP INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test"' )->execute()->finish();
+			$conn->create( 'DROP TABLE "mw_setup_dbschema_test"' )->execute()->finish();
+			$this->dbm->release( $conn );
+		}
 	}
 
 	public function testTableExists()

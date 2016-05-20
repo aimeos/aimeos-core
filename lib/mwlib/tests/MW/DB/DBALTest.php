@@ -13,18 +13,14 @@ class DBALTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->config = \TestHelperMw::getConfig();
 
-		if( ( $adapter = $this->config->get( 'resource/db/adapter', false ) ) === false ) {
-			$this->markTestSkipped( 'No database configured' );
+		if( ( $adapter = $this->config->get( 'resource/db/adapter', false ) ) !== 'mysql' ) {
+			$this->markTestSkipped( 'No MySQL database configured' );
 		}
 
 
 		$this->object = new \Aimeos\MW\DB\Manager\DBAL( $this->config );
 
-		if( $adapter == 'mysql' ) {
-			$sql = 'CREATE TABLE "mw_unit_test" ( "id" INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "name" VARCHAR(20) NOT NULL ) ENGINE=InnoDB';
-		} else {
-			$sql = 'CREATE TABLE "mw_unit_test" ( "id" INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "name" VARCHAR(20) NOT NULL )';
-		}
+		$sql = 'CREATE TABLE "mw_unit_test" ( "id" INT NOT NULL PRIMARY KEY AUTO_INCREMENT, "name" VARCHAR(20) NOT NULL ) ENGINE=InnoDB';
 
 		$conn = $this->object->acquire();
 		$conn->create( $sql )->execute()->finish();

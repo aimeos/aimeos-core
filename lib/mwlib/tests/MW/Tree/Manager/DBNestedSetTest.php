@@ -24,7 +24,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) !== 'mysql' ) {
 			$this->markTestSkipped( 'No database configured' );
 		}
 
@@ -154,12 +154,15 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function tearDown()
 	{
-		$sql = 'DROP TABLE "mw_tree_test"';
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === 'mysql' )
+		{
+			$sql = 'DROP TABLE "mw_tree_test"';
 
-		$this->dbm = \TestHelperMw::getDBManager();
-		$conn = $this->dbm->acquire();
-		$conn->create( $sql )->execute()->finish();
-		$this->dbm->release( $conn );
+			$this->dbm = \TestHelperMw::getDBManager();
+			$conn = $this->dbm->acquire();
+			$conn->create( $sql )->execute()->finish();
+			$this->dbm->release( $conn );
+		}
 	}
 
 

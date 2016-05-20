@@ -12,7 +12,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$config = \TestHelperMw::getConfig();
 
-		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) === false ) {
+		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) !== 'mysql' ) {
 			self::markTestSkipped( 'No database configured' );
 		}
 
