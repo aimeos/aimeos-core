@@ -38,7 +38,7 @@ before_script:
   - composer install || sleep 60 && composer install
   - if [[ $DB = 'mysql' ]]; then mysql -e 'create database aimeos;'; fi
   - if [[ $DB = 'mysql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET NAMES 'utf8'\", \"SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
-  - if [[ $DB = 'pgsql' ]]; then psql -c 'create database aimeos;' -U postgres; fi
+  - if [[ $DB = 'pgsql' ]]; then psql -c 'create database aimeos;' -U postgres -h 127.0.0.1 -p 5432; fi
   - if [[ $DB = 'pgsql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'postgres', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
 
 script: "vendor/bin/phing setup coverage check"
