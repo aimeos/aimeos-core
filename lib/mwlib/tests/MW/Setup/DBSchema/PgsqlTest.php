@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Setup\DBSchema;
 
 
-class MysqlTest extends \PHPUnit_Framework_TestCase
+class PgsqlTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $dbm;
@@ -13,8 +13,8 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	{
 		$config = \TestHelperMw::getConfig();
 
-		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) !== 'mysql' ) {
-			$this->markTestSkipped( 'No database configured' );
+		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) !== 'pgsql' ) {
+			$this->markTestSkipped( 'No PostgreSQL database configured' );
 		}
 
 
@@ -22,8 +22,8 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 		$conn = $this->dbm->acquire();
 
 		$sql = '
-			CREATE TABLE IF NOT EXISTS "mw_setup_dbschema_test" (
-				"integer" INTEGER NOT NULL AUTO_INCREMENT,
+			CREATE TABLE "mw_setup_dbschema_test" (
+				"integer" SERIAL NOT NULL,
 				"varchar16" VARCHAR(16) NOT NULL DEFAULT \'default\',
 				"smallint" SMALLINT NOT NULL,
 				"integernull" INTEGER,
@@ -33,7 +33,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 		$conn->create( $sql )->execute()->finish();
 		$conn->create( 'CREATE INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test" ("smallint")' )->execute()->finish();
 
-		$this->object = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ), $adapter );
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Pgsql( $conn, $config->get( 'resource/db/database', 'notfound' ), $adapter );
 
 		$this->dbm->release( $conn );
 	}
@@ -41,12 +41,11 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 
 	protected function tearDown()
 	{
-		if( ( $adapter = \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) ) === 'mysql' )
+		if( ( $adapter = \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) ) === 'pgsql' )
 		{
 			$this->dbm = \TestHelperMw::getDBManager();
 
 			$conn = $this->dbm->acquire();
-			$conn->create( 'DROP INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test"' )->execute()->finish();
 			$conn->create( 'DROP TABLE "mw_setup_dbschema_test"' )->execute()->finish();
 			$this->dbm->release( $conn );
 		}
@@ -88,7 +87,7 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'mw_setup_dbschema_test', $columnItem->getTableName() );
 		$this->assertEquals( 'integernull', $columnItem->getName() );
 		$this->assertEquals( 'integer', $columnItem->getDataType() );
-		$this->assertEquals( 10, $columnItem->getMaxLength() );
+		$this->assertEquals( 32, $columnItem->getMaxLength() );
 		$this->assertEquals( null, $columnItem->getDefaultValue() );
 		$this->assertTrue( $columnItem->isNullable() );
 

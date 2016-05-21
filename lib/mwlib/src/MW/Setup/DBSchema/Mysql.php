@@ -73,4 +73,25 @@ class Mysql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	{
 		return false;
 	}
+
+
+	/**
+	 * Creates a new column item using the columns of the information_schema.columns.
+	 *
+	 * @param array $record Associative array with column details
+	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
+	 */
+	protected function createColumnItem( array $record = array() )
+	{
+		switch( $record['DATA_TYPE'] )
+		{
+			case 'int': $type = 'integer'; break;
+			default: $type = $record['DATA_TYPE'];
+		}
+
+		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
+
+		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'],
+			$type, $length, $record['COLUMN_DEFAULT'], $record['IS_NULLABLE'], $record['COLLATION_NAME'] );
+	}
 }

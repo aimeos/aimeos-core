@@ -57,7 +57,7 @@ class Standard implements Iface
 
 			$stmt->bind( 1, $this->queue );
 			$stmt->bind( 2, $this->cname );
-			$stmt->bind( 3, '0000-00-00 00:00:00' );
+			$stmt->bind( 3, '0001-01-01 00:00:00' );
 			$stmt->bind( 4, $msg );
 
 			$stmt->execute()->finish();

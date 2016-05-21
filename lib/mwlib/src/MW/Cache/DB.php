@@ -203,7 +203,7 @@ class DB
 
 		try
 		{
-			$stmt = $conn->create( str_replace( ':cond', '1', $this->sql['delete'] ) );
+			$stmt = $conn->create( str_replace( ':cond', '1=1', $this->sql['delete'] ) );
 			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->execute()->finish();
 

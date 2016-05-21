@@ -52,7 +52,7 @@ class Standard extends Base implements Iface
 		{
 			$sql = array(
 				'insert' => $this->getConfig( 'sql/insert', 'INSERT INTO madmin_queue (queue, cname, rtime, message) VALUES (?, ?, ?, ?)' ),
-				'reserve' => $this->getConfig( 'sql/reserve', 'UPDATE madmin_queue SET cname = ?, rtime = ? WHERE queue = ? AND rtime < ? LIMIT 1' ),
+				'reserve' => $this->getConfig( 'sql/reserve', 'UPDATE madmin_queue SET cname = ?, rtime = ? WHERE id IN ( SELECT * FROM ( SELECT id FROM madmin_queue WHERE queue = ? AND rtime < ? LIMIT 1 ) AS t )' ),
 				'get' => $this->getConfig( 'sql/get', 'SELECT * FROM madmin_queue WHERE queue = ? AND cname = ? AND rtime = ? LIMIT 1' ),
 				'delete' => $this->getConfig( 'sql/delete', 'DELETE FROM madmin_queue WHERE id = ? AND queue = ?' ),
 			);

@@ -5,46 +5,49 @@ namespace Aimeos\MW\MQueue\Queue;
 
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
+	private static $dbm;
 	private $object;
 
 
 	public static function setUpBeforeClass()
 	{
-		$config = \TestHelperMw::getConfig();
+		self::$dbm = \TestHelperMw::getDBManager();
 
-		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) !== 'mysql' ) {
-			self::markTestSkipped( 'No database configured' );
+		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+			return;
 		}
 
-		$db = new \Aimeos\MW\DB\Manager\PDO( $config );
+		$schema = new \Doctrine\DBAL\Schema\Schema();
 
-		$sql = 'CREATE TABLE mw_mqueue_test (
-			id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-			queue VARCHAR(255) NOT NULL,
-			cname VARCHAR(32) NOT NULL,
-			rtime DATETIME NOT NULL,
-			message TEXT NOT NULL )
-		';
+		$table = $schema->createTable( 'mw_mqueue_test' );
+		$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+		$table->addColumn( 'queue', 'string', array( 'length' => 255 ) );
+		$table->addColumn( 'cname', 'string', array( 'length' => 32 ) );
+		$table->addColumn( 'rtime', 'datetime', array() );
+		$table->addColumn( 'message', 'text', array( 'length' => 0xffff ) );
+		$table->setPrimaryKey( array( 'id' ) );
 
-		$conn = $db->acquire();
-		$conn->create( $sql )->execute()->finish();
-		$db->release( $conn );
+
+		$conn = self::$dbm->acquire();
+
+		foreach( $schema->toSQL( $conn->getRawObject()->getDatabasePlatform() ) as $sql ) {
+			$conn->create( $sql )->execute()->finish();
+		}
+
+		self::$dbm->release( $conn );
 	}
 
 
 	public static function tearDownAfterClass()
 	{
-		$config = \TestHelperMw::getConfig();
+		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		{
+			$conn = self::$dbm->acquire();
 
-		if( ( $adapter = $config->get( 'resource/db/adapter', false ) ) === false ) {
-			self::markTestSkipped( 'No database configured' );
+			$conn->create( 'DROP TABLE "mw_mqueue_test"' )->execute()->finish();
+
+			self::$dbm->release( $conn );
 		}
-
-		$db = new \Aimeos\MW\DB\Manager\PDO( $config );
-
-		$conn = $db->acquire();
-		$conn->create( 'DROP TABLE "mw_mqueue_test"' )->execute()->finish();
-		$db->release( $conn );
 	}
 
 
@@ -54,7 +57,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'db' => \TestHelperMw::getConfig()->get( 'resource/db' ),
 			'sql' => array(
 				'insert' => 'INSERT INTO mw_mqueue_test (queue, cname, rtime, message) VALUES (?, ?, ?, ?)',
-				'reserve' => 'UPDATE mw_mqueue_test SET cname = ?, rtime = ? WHERE queue = ? AND rtime < ? LIMIT 1',
+				'reserve' => 'UPDATE mw_mqueue_test SET cname = ?, rtime = ? WHERE id IN ( SELECT * FROM ( SELECT id FROM mw_mqueue_test WHERE queue = ? AND rtime < ? LIMIT 1 ) AS t )',
 				'get' => 'SELECT * FROM mw_mqueue_test WHERE queue = ? AND cname = ? AND rtime = ? LIMIT 1',
 				'delete' => 'DELETE FROM mw_mqueue_test WHERE id = ? AND queue = ?',
 			),

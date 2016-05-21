@@ -67,6 +67,6 @@ class TestHelperMw
 
 	private static function createDBManager()
 	{
-		return \Aimeos\MW\DB\Factory::createManager( self::getConfig(), 'PDO' );
+		return \Aimeos\MW\DB\Factory::createManager( self::getConfig(), 'DBAL' );
 	}
 }

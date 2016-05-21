@@ -219,8 +219,16 @@ class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 */
 	protected function createColumnItem( array $record = array() )
 	{
+		switch( $record['data_type'] )
+		{
+			case 'character varying': $type = 'varchar'; break;
+			default: $type = $record['data_type'];
+		}
+
 		$length = ( isset( $record['character_maximum_length'] ) ? $record['character_maximum_length'] : $record['numeric_precision'] );
-		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['table_name'], $record['column_name'], $record['data_type'], $length,
-			$record['column_default'], $record['is_nullable'], $record['collation_name'] );
+		$default = ( preg_match( '/^\'(.*)\'::.+$/', $record['column_default'], $match ) === 1 ? $match[1] : $record['column_default'] );
+
+		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['table_name'], $record['column_name'],
+			$type, $length, $default, $record['is_nullable'], $record['collation_name'] );
 	}
 }
