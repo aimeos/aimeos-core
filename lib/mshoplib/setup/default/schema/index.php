@@ -58,7 +58,7 @@ return array(
 			$table->addColumn( 'priceid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'listtype', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
 			$table->addColumn( 'value', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );

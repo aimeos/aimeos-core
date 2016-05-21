@@ -62,7 +62,7 @@ return array(
 			$table->addColumn( 'typeid', 'integer', array() );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
 			$table->addColumn( 'quantity', 'integer', array() );
 			$table->addColumn( 'value', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );

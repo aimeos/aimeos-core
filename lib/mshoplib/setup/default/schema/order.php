@@ -65,7 +65,7 @@ return array(
 			$table->addColumn( 'customerid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'sitecode', 'string', array( 'length' => 32, 'notnull' => false ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5 ) );
-			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -140,7 +140,7 @@ return array(
 			$table->addColumn( 'city', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'state', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
-			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
+			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );

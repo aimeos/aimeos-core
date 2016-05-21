@@ -72,7 +72,7 @@ return array(
 
 			$table = $schema->createTable( 'mshop_locale_currency' );
 
-			$table->addColumn( 'id', 'string', array( 'length' => 3 ) );
+			$table->addColumn( 'id', 'string', array( 'length' => 3, 'fixed' => true ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'status', 'smallint', array() );
@@ -97,7 +97,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5 ) );
-			$table->addColumn( 'currencyid', 'string', array( 'length' => 3 ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
 			$table->addColumn( 'pos', 'integer', array() );
 			$table->addColumn( 'status', 'smallint', array() );
 			$table->addColumn( 'mtime', 'datetime', array() );
