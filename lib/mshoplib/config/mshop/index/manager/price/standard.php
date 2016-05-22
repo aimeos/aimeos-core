@@ -63,13 +63,6 @@ return array(
 		WHERE "ctime" < ? AND "siteid" = ?
 	'
 	),
-	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()',
-		'pgsql' => 'SELECT lastval()',
-		'sqlite' => 'SELECT last_insert_rowid()',
-		'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
-		'sqlanywhere' => 'SELECT @@IDENTITY',
-	),
 	'optimize' => array(
 		'mysql' => array(
 			'OPTIMIZE TABLE "mshop_index_price"',

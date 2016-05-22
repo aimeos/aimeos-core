@@ -65,7 +65,9 @@ return array(
 		'
 	),
 	'newid' => array(
+		'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'oracle' => 'SELECT mshop_locale_seq.NEXTVAL FROM DUAL',
 		'pgsql' => 'SELECT lastval()',
 		'sqlite' => 'SELECT last_insert_rowid()',
 		'sqlsrv' => 'SELECT SCOPE_IDENTITY()',

@@ -44,13 +44,6 @@ return array(
 			) AS list
 		'
 	),
-	'newid' => array(
-		'mysql' => 'SELECT LAST_INSERT_ID()',
-		'pgsql' => 'SELECT lastval()',
-		'sqlite' => 'SELECT last_insert_rowid()',
-		'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
-		'sqlanywhere' => 'SELECT @@IDENTITY',
-	),
 	'optimize' => array(
 		'mysql' => array(
 			'ANALYZE TABLE "mshop_product"',
