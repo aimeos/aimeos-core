@@ -7,53 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_msord_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msord_id' );
-			return $schema;
-		},
-		'seq_msordst_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msordst_id' );
-			return $schema;
-		},
-		'seq_msordba_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msordba_id' );
-			return $schema;
-		},
-		'seq_msordbaad_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msordbaad_id' );
-			return $schema;
-		},
-		'seq_msordbapr_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msordbapr_id' );
-			return $schema;
-		},
-		'seq_msordbaprat_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msordbaprat_id' );
-			return $schema;
-		},
-		'seq_msordbase_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msordbase_id' );
-			return $schema;
-		},
-		'seq_msordbaseat_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msordbaseat_id' );
-			return $schema;
-		},
-		'seq_msordbaco_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msordbaco_id' );
-			return $schema;
-		},
-	),
 	'table' => array(
 
 		'mshop_order_base' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {

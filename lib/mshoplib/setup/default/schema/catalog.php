@@ -7,23 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_mscat_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscat_id' );
-			return $schema;
-		},
-		'seq_mscatli_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscatli_id' );
-			return $schema;
-		},
-		'seq_mscatlity_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscatlity_id' );
-			return $schema;
-		},
-	),
 	'table' => array(
 
 		'mshop_catalog' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {

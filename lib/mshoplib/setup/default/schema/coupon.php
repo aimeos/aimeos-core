@@ -7,18 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_mscou_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscou_id' );
-			return $schema;
-		},
-		'seq_mscouco_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscouco_id' );
-			return $schema;
-		},
-	),
 	'table' => array(
 
 		'mshop_coupon' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {

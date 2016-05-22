@@ -7,33 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_mscus_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscus_id' );
-			return $schema;
-		},
-		'seq_mscusad_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscusad_id' );
-			return $schema;
-		},
-		'seq_mscusli_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscusli_id' );
-			return $schema;
-		},
-		'seq_mscuslity_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscuslity_id' );
-			return $schema;
-		},
-		'seq_mscusgr_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mscusgr_id' );
-			return $schema;
-		},
-	),
 	'table' => array(
 		'mshop_customer' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
 

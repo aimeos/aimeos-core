@@ -7,18 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_msplu_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msplu_id' );
-			return $schema;
-		},
-		'seq_mspluty_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mspluty_id' );
-			return $schema;
-		},
-	),
 	'table' => array(
 		'mshop_plugin_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
 

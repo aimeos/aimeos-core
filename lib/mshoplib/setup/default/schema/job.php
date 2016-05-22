@@ -7,14 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_majob_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_majob_id' );
-
-			return $schema;
-		}
-	),
 	'table' => array(
 		'madmin_job' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
 

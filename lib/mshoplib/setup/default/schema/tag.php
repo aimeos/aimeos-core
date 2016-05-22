@@ -7,18 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_mstag_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mstag_id' );
-			return $schema;
-		},
-		'seq_mstagty_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mstagty_id' );
-			return $schema;
-		},
-	),
 	'table' => array(
 		'mshop_tag_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
 

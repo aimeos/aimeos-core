@@ -7,14 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_maque_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_maque_id' );
-
-			return $schema;
-		}
-	),
 	'table' => array(
 		'madmin_queue' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
 

@@ -7,18 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_mslocsi_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_mslocsi_id' );
-			return $schema;
-		},
-		'seq_msloc_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_msloc_id' );
-			return $schema;
-		},
-	),
 	'table' => array(
 
 		'mshop_locale_site' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {

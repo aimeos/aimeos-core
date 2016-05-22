@@ -7,14 +7,6 @@
 
 
 return array(
-	'sequence' => array(
-		'seq_malog_id' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$schema->createSequence( 'seq_malog_id' );
-
-			return $schema;
-		}
-	),
 	'table' => array(
 		'madmin_log' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
 
