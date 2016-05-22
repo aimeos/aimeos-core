@@ -2,18 +2,14 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2016
  */
 
 
 namespace Aimeos\MShop\Index\Manager;
 
 
-/**
- * Test class for \Aimeos\MShop\Index\Manager\MySQL.
- */
-class MySQLTest extends \PHPUnit_Framework_TestCase
+class PgSQLTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor;
@@ -22,7 +18,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 	public static function setUpBeforeClass()
 	{
 		$context = clone \TestHelperMShop::getContext();
-		$context->getConfig()->set( 'mshop/index/manager/text/name', 'MySQL' );
+		$context->getConfig()->set( 'mshop/index/manager/text/name', 'PgSQL' );
 
 		$manager = new \Aimeos\MShop\Index\Manager\MySQL( $context );
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
@@ -46,18 +42,18 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$context = clone \TestHelperMShop::getContext();
-		$context->getConfig()->set( 'mshop/index/manager/text/name', 'MySQL' );
+		$context->getConfig()->set( 'mshop/index/manager/text/name', 'PgSQL' );
 
 		$this->editor = $context->getEditor();
 		$config = $context->getConfig();
 
 		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
 
-		if( $dbadapter !== 'mysql' ) {
-			$this->markTestSkipped( 'MySQL specific test' );
+		if( $dbadapter !== 'pgsql' ) {
+			$this->markTestSkipped( 'PostgreSQL specific test' );
 		}
 
-		$this->object = new \Aimeos\MShop\Index\Manager\MySQL( $context );
+		$this->object = new \Aimeos\MShop\Index\Manager\PgSQL( $context );
 	}
 
 
@@ -69,7 +65,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( '\Aimeos\MW\Criteria\MySQL', $this->object->createSearch() );
+		$this->assertInstanceOf( '\Aimeos\MW\Criteria\PgSQL', $this->object->createSearch() );
 	}
 
 
@@ -85,7 +81,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 			{
 				case 'index.text.relevance()':
 				case 'sort:index.text.relevance()':
-					$this->assertGreaterThanOrEqual( 0, strpos( $attribute->getInternalCode(), 'MATCH' ) );
+					$this->assertGreaterThanOrEqual( 0, strpos( $attribute->getInternalCode(), '@@' ) );
 			}
 		}
 	}
@@ -150,12 +146,12 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
 		$langid = $context->getLocale()->getLanguageId();
 
-		$textMgr = $this->object->getSubManager( 'text', 'MySQL' );
+		$textMgr = $this->object->getSubManager( 'text', 'PgSQL' );
 
 
 		$search = $textMgr->createSearch();
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'noir cap' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'Noir Cap' ) ), 0 ),
 			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );

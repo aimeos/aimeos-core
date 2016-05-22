@@ -49,6 +49,10 @@ class TablesCreatePlatform extends \Aimeos\MW\Setup\Task\Base
 		$this->setup( 'db-index', 'mysql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'index-mysql.sql' );
 		$this->setup( 'db-order', 'mysql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'order-mysql.sql' );
 		$this->setup( 'db-text', 'mysql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'text-mysql.sql' );
+
+		$this->setup( 'db-index', 'pgsql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'index-pgsql.sql' );
+		$this->setup( 'db-order', 'pgsql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'order-pgsql.sql' );
+		$this->setup( 'db-text', 'pgsql', realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'text-pgsql.sql' );
 	}
 
 

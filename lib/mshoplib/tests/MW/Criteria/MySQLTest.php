@@ -1,31 +1,22 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2012
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 namespace Aimeos\MW\Criteria;
 
 
-/**
- * Test class for MySQL search criteria class.
- */
 class MySQLTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
-		$context = \TestHelperMShop::getContext( 'unit' );
+		$context = \TestHelperMShop::getContext();
 		$dbm = $context->getDatabaseManager();
 		$conn = $dbm->acquire();
 
@@ -35,12 +26,6 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );

@@ -93,7 +93,6 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'textid', 'listtype' ), 'unq_msindte_p_s_tid_lt' );
-			$table->addIndex( array( 'value' ), 'idx_msindte_value', array( 'fulltext' ) );
 			$table->addIndex( array( 'siteid' ), 'idx_msindte_sid' );
 
 			return $schema;
