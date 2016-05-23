@@ -86,6 +86,6 @@ class WarehouseDropIndexes extends \Aimeos\MW\Setup\Task\Base
 			{
 				$this->status( 'OK' );
 			}
- 		}
+		}
 	}
 }

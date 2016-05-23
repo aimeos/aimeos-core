@@ -71,5 +71,5 @@ class PriceDropDomainIndex extends \Aimeos\MW\Setup\Task\Base
 		{
 			$this->status( 'OK' );
 		}
- 		}
+	}
 }
