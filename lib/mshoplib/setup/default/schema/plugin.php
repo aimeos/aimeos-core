@@ -53,6 +53,9 @@ return array(
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msplu_sid_label' );
 			$table->addIndex( array( 'siteid', 'provider' ), 'idx_msplu_sid_provider' );
 			$table->addIndex( array( 'siteid', 'pos' ), 'idx_msplu_sid_pos' );
+			$table->addIndex( array( 'siteid', 'mtime' ), 'idx_msplu_sid_mtime' );
+			$table->addIndex( array( 'siteid', 'ctime' ), 'idx_msplu_sid_ctime' );
+			$table->addIndex( array( 'siteid', 'editor' ), 'idx_msplu_sid_editor' );
 
 			$table->addForeignKeyConstraint( 'mshop_plugin_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msplu_typeid' );
