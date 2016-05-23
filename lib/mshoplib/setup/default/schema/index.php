@@ -62,7 +62,7 @@ return array(
 			$table->addColumn( 'value', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
-			$table->addColumn( 'taxrate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
+			$table->addColumn( 'taxrate', 'decimal', array( 'precision' => 5, 'scale' => 2 ) );
 			$table->addColumn( 'quantity', 'integer', array() );
 			$table->addColumn( 'mtime', 'datetime', array() );
 			$table->addColumn( 'ctime', 'datetime', array() );
