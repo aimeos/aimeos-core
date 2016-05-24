@@ -17,6 +17,27 @@ class ThreeTask extends Base
 	}
 
 
+	public function migrate()
+	{
+		$this->msg( 'Executing ThreeTask' );
+		$this->status( 'OK' );
+	}
+
+
+	public function rollback()
+	{
+		$this->msg( 'Executing ThreeTask' );
+		$this->status( 'OK' );
+	}
+
+
+	public function clean()
+	{
+		$this->msg( 'Executing ThreeTask' );
+		$this->status( 'OK' );
+	}
+
+
 	protected function mysql()
 	{
 		$this->msg( 'Executing ThreeTask' );

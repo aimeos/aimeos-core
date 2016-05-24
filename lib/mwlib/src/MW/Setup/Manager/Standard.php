@@ -56,6 +56,15 @@ class Standard extends \Aimeos\MW\Setup\Manager\Base
 
 
 	/**
+	 * Cleans up the object
+	 */
+	public function __destruct()
+	{
+		unset( $this->conn );
+	}
+
+
+	/**
 	 * Updates the schema and migrates the data
 	 *
 	 * @param string $task Name of the task

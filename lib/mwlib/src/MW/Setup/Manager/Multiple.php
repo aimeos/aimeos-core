@@ -27,6 +27,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	private $tasksDone = array();
 	private $dependencies = array();
 	private $reverse = array();
+	private $conns = array();
 
 
 	/**
@@ -62,12 +63,25 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Configuration parameter "%1$s" missing in "%2$s"', 'database', $rname ) );
 			}
 
-			$conns[$rname] = $dbm->acquire( $rname );
-			$schemas[$rname] = $this->createSchema( $conns[$rname], $dbconf['adapter'], $dbconf['database'] );
+			$this->conns[$rname] = $dbm->acquire( $rname );
+			$schemas[$rname] = $this->createSchema( $this->conns[$rname], $dbconf['adapter'], $dbconf['database'] );
 		}
 
 		if( !is_array( $taskpath ) ) { $taskpath = (array) $taskpath; }
-		$this->setupTasks( $taskpath, $conns, $schemas );
+		$this->setupTasks( $taskpath, $this->conns, $schemas );
+	}
+
+
+	/**
+	 * Cleans up the object
+	 */
+	public function __destruct()
+	{
+		foreach( $this->conns as $name => $conn ) {
+			$this->dbm->release( $conn, $name );
+		}
+
+		unset( $this->dbm );
 	}
 
 

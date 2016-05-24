@@ -17,6 +17,27 @@ class TwoTask extends Base
 	}
 
 
+	public function migrate()
+	{
+		$this->msg( 'Executing TwoTask' );
+		$this->status( 'OK' );
+	}
+
+
+	public function rollback()
+	{
+		$this->msg( 'Executing TwoTask' );
+		$this->status( 'OK' );
+	}
+
+
+	public function clean()
+	{
+		$this->msg( 'Executing TwoTask' );
+		$this->status( 'OK' );
+	}
+
+
 	protected function mysql()
 	{
 		$this->msg( 'Executing TwoTask' );
