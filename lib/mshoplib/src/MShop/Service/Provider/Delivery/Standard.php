@@ -262,7 +262,7 @@ class Standard
 			if( $status != 0 )
 			{
 				$str = $xpath->query( 'message', $orderitem )->item( 0 )->nodeValue;
-				$msg = sprintf( 'Order with ID "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg );
+				$msg = sprintf( 'Order with ID "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $str );
 				throw new \Aimeos\MShop\Service\Exception( $msg, $status );
 			}
 		}
