@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2016
  * @package MW
  * @subpackage Setup
  */
@@ -13,33 +12,13 @@ namespace Aimeos\MW\Setup\DBSchema;
 
 
 /**
- * Implements querying the information_schema tables.
+ * Implements querying the IBM DB2 database
  *
  * @package MW
  * @subpackage Setup
  */
-abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
+class Db2 extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 {
-	private $conn;
-	private $dbname;
-	private $name;
-
-
-	/**
-	 * Initializes the database schema object.
-	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param string $dbname Database name
-	 * @param string $name Adapter name
-	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname, $name )
-	{
-		$this->conn = $conn;
-		$this->dbname = $dbname;
-		$this->name = $name;
-	}
-
-
 	/**
 	 * Checks if the given table exists in the database.
 	 *
@@ -50,14 +29,14 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	{
 		$sql = "
 			SELECT TABLE_NAME
-			FROM INFORMATION_SCHEMA.TABLES
+			FROM SYSIBM.TABLES
 			WHERE TABLE_TYPE = 'BASE TABLE'
-				AND TABLE_SCHEMA = ?
+				AND TABLE_CATALOG = ?
 				AND TABLE_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $this->getDBName() );
 		$stmt->bind( 2, $tablename );
 		$result = $stmt->execute();
 
@@ -77,16 +56,31 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 */
 	public function sequenceExists( $seqname )
 	{
+		return false;
+	}
+
+
+	/**
+	 * Checks if the given index (not foreign keys, primary or unique constraints) exists in the database.
+	 *
+	 * @param string $tablename Name of the database table
+	 * @param string $indexname Name of the database index
+	 * @return boolean True if the index exists, false if not
+	 */
+	public function indexExists( $tablename, $indexname )
+	{
 		$sql = "
-			SELECT SEQUENCE_NAME
-			FROM INFORMATION_SCHEMA.SEQUENCES
-			WHERE SEQUENCE_SCHEMA = ?
-				AND SEQUENCE_NAME = ?
+			SELECT NAME
+			FROM SYSIBM.SYSINDEXES
+			WHERE DBNAME = ?
+				AND TBNAME = ?
+				AND NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
-		$stmt->bind( 2, $seqname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $this->getDBName() );
+		$stmt->bind( 2, $tablename );
+		$stmt->bind( 3, $indexname );
 		$result = $stmt->execute();
 
 		if( $result->fetch() !== false ) {
@@ -108,14 +102,14 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	{
 		$sql = "
 			SELECT CONSTRAINT_NAME
-			FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-			WHERE TABLE_SCHEMA = ?
+			FROM SYSIBM.TABLE_CONSTRAINTS
+			WHERE TABLE_CATALOG = ?
 				AND TABLE_NAME = ?
 				AND CONSTRAINT_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $this->getDBName() );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $constraintname );
 		$result = $stmt->execute();
@@ -139,14 +133,14 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	{
 		$sql = "
 			SELECT COLUMN_NAME
-			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_SCHEMA = ?
+			FROM SYSIBM.COLUMNS
+			WHERE TABLE_CATALOG = ?
 				AND TABLE_NAME = ?
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $this->getDBName() );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $columnname );
 		$result = $stmt->execute();
@@ -170,14 +164,14 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	{
 		$sql = "
 			SELECT *
-			FROM INFORMATION_SCHEMA.COLUMNS
-			WHERE TABLE_SCHEMA = ?
+			FROM SYSIBM.COLUMNS
+			WHERE TABLE_CATALOG = ?
 				AND TABLE_NAME = ?
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
-		$stmt->bind( 1, $this->dbname );
+		$stmt = $this->getConnection()->create( $sql );
+		$stmt->bind( 1, $this->getDBName() );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $columnname );
 		$result = $stmt->execute();
@@ -187,65 +181,5 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		}
 
 		return $this->createColumnItem( $record );
-	}
-
-
-	/**
-	 * Returns the database connection.
-	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
-	 */
-	protected function getConnection()
-	{
-		return $this->conn;
-	}
-
-
-	/**
-	 * Returns the database name.
-	 *
-	 * @return string Database name
-	 */
-	public function getDBName()
-	{
-		return $this->dbname;
-	}
-
-
-	/**
-	 * Returns the name of the database adapter
-	 *
-	 * @return string Name of the adapter, e.g. 'mysql'
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
-
-
-	/**
-	 * Tests if something is supported
-	 *
-	 * @param string $what Type of object
-	 * @return boolean True if supported, false if not
-	 */
-	public function supports( $what )
-	{
-		return false;
-	}
-
-
-	/**
-	 * Creates a new column item using the columns of the information_schema.columns.
-	 *
-	 * @param array $record Associative array with TABLE_NAME, COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,
-	 * 	NUMERIC_PRECISION, COLUMN_DEFAULT, IS_NULLABLE
-	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
-	 */
-	protected function createColumnItem( array $record = array() )
-	{
-		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
-		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,
-			$record['COLUMN_DEFAULT'], $record['IS_NULLABLE'], $record['COLLATION_NAME'] );
 	}
 }

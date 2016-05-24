@@ -80,6 +80,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * Executes the task for the given database type.
 	 *
 	 * @param string $dbtype Database type string
+	 * @deprecated Use migrate() instead
 	 */
 	public function run( $dbtype )
 	{
