@@ -225,21 +225,25 @@ class Standard
 		$dom = new \DOMDocument( '1.0', 'UTF-8' );
 		$dom->preserveWhiteSpace = false;
 
-		if( $dom->loadXML( $response ) !== true ) {
-			throw new \Aimeos\MShop\Service\Exception(
-				sprintf( 'Loading of XML response "%1$s" from delivery provider failed', $response ), parent::ERR_XML );
+		if( $dom->loadXML( $response ) !== true )
+		{
+			$msg = sprintf( 'Loading of XML response "%1$s" from delivery provider failed', $response );
+			throw new \Aimeos\MShop\Service\Exception( $msg, parent::ERR_XML );
 		}
 
-		if( $dom->schemaValidate( $responseXSD ) !== true ) {
-			throw new \Aimeos\MShop\Service\Exception(
-				sprintf( 'Validation of XML response from delivery provider against schema "%1$s" failed', $responseXSD ), parent::ERR_SCHEMA );
+		if( $dom->schemaValidate( $responseXSD ) !== true )
+		{
+			$msg = sprintf( 'Validation of XML response from delivery provider against schema "%1$s" failed', $responseXSD );
+			throw new \Aimeos\MShop\Service\Exception( $msg, parent::ERR_SCHEMA );
 		}
 
 		$xpath = new \DOMXPath( $dom );
 
 		$globalStatus = $xpath->query( '/response/error' )->item( 0 )->nodeValue;
-		if( $globalStatus != 0 ) {
-			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Order data sent to delivery provider was rejected with code "%1$s" according to XML response', $globalStatus ) );
+		if( $globalStatus != 0 )
+		{
+			$msg = sprintf( 'Order data sent to delivery provider was rejected with code "%1$s" according to XML response', $globalStatus );
+			throw new \Aimeos\MShop\Service\Exception( $msg );
 		}
 
 		$orderitemlist = $xpath->query( '/response/orderlist/orderitem' );
@@ -249,16 +253,17 @@ class Standard
 			$id = $xpath->query( 'id', $orderitem )->item( 0 )->nodeValue;
 			$status = $xpath->query( 'status', $orderitem )->item( 0 )->nodeValue;
 
-			if( $id != $invoiceid ) {
-				throw new \Aimeos\MShop\Service\Exception(
-					sprintf( 'Order ID "%1$s" in XML response of delivery provider differs from stored invoice ID "%2$s" of the order', $id, $invoiceid ) );
+			if( $id != $invoiceid )
+			{
+				$msg = sprintf( 'Order ID "%1$s" in XML response of delivery provider differs from stored invoice ID "%2$s" of the order', $id, $invoiceid );
+				throw new \Aimeos\MShop\Service\Exception( $msg );
 			}
 
 			if( $status != 0 )
 			{
-				$msg = $xpath->query( 'message', $orderitem )->item( 0 )->nodeValue;
-				throw new \Aimeos\MShop\Service\Exception(
-					sprintf( 'Order with ID "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg ), $status );
+				$str = $xpath->query( 'message', $orderitem )->item( 0 )->nodeValue;
+				$msg = sprintf( 'Order with ID "%1$s" was rejected with code "%2$s": %3$s', $id, $status, $msg );
+				throw new \Aimeos\MShop\Service\Exception( $msg, $status );
 			}
 		}
 	}

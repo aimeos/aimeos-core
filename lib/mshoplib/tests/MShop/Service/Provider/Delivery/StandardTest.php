@@ -3,7 +3,7 @@
 /**
  * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
@@ -15,39 +15,31 @@ namespace Aimeos\MShop\Service\Provider\Delivery;
  */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
+	private $context;
 	private $object;
+	private $serviceItem;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$this->context = \TestHelperMShop::getContext();
+
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 		$search = $serviceManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'service.provider', 'Standard' ) );
 		$result = $serviceManager->searchItems( $search, array( 'price' ) );
 
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No order base item found' );
+		if( ( $this->serviceItem = reset( $result ) ) === false ) {
+			throw new \Exception( 'No service item found' );
 		}
 
-		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
-		$item->setCode( 'test' );
+		$this->serviceItem->setConfig( array( 'default.project' => '8502_TEST' ) );
+		$this->serviceItem->setCode( 'test' );
 
-		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Standard( \TestHelperMShop::getContext(), $item );
+		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Standard( $this->context, $this->serviceItem );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -131,6 +123,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	}
 
+
 	public function testIsAvaible()
 	{
 		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->getSubManager( 'base' );
@@ -138,28 +131,123 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->object->isAvailable( $orderBaseManager->createItem() ) );
 	}
 
+
 	public function testIsImplemented()
 	{
 		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Delivery\Base::FEAT_QUERY ) );
 	}
 
+
 	public function testProcess()
 	{
+		$context = \TestHelperMShop::getContext();
+		$orderItem = $this->getOrderItem();
+
+		$object = $this->getMockBuilder( '\Aimeos\MShop\Service\Provider\Delivery\Standard' )
+			->setConstructorArgs( array( $context, $this->serviceItem ) )
+			->setMethods( array( 'sendRequest', 'checkResponse' ) )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'sendRequest' );
+		$object->expects( $this->once() )->method( 'checkResponse' );
+
+		$object->process( $orderItem );
 	}
+
+
+	public function testCheckResponseInvalidXml()
+	{
+		set_error_handler( function( $errno, $errstr ) {} );
+
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Delivery\Standard' );
+		$method = $class->getMethod( 'checkResponse' );
+		$method->setAccessible( true );
+
+		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$method->invokeArgs( $this->object, array( 'test', 1 ) );
+	}
+
+
+	public function testCheckResponseInvalidSchema()
+	{
+		set_error_handler( function( $errno, $errstr ) {} );
+
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Delivery\Standard' );
+		$method = $class->getMethod( 'checkResponse' );
+		$method->setAccessible( true );
+
+		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$method->invokeArgs( $this->object, array( '<test></test>', 1 ) );
+	}
+
+
+	public function testCheckResponseGlobalError()
+	{
+		set_error_handler( function( $errno, $errstr ) {} );
+		$xml = '<response><error>1</error><orderlist></orderlist></response>';
+
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Delivery\Standard' );
+		$method = $class->getMethod( 'checkResponse' );
+		$method->setAccessible( true );
+
+		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$method->invokeArgs( $this->object, array( $xml, 1 ) );
+	}
+
+
+	public function testCheckResponseInvalidInvoice()
+	{
+		set_error_handler( function( $errno, $errstr ) {} );
+		$xml = '<response>
+			<error>0</error>
+			<orderlist>
+				<orderitem>
+					<id>2</id>
+					<projectcode>test</projectcode>
+					<status>0</status>
+					<message></message>
+				</orderitem>
+			</orderlist>
+		</response>';
+
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Delivery\Standard' );
+		$method = $class->getMethod( 'checkResponse' );
+		$method->setAccessible( true );
+
+		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$method->invokeArgs( $this->object, array( $xml, 1 ) );
+	}
+
+
+	public function testCheckResponseInvalidStatus()
+	{
+		set_error_handler( function( $errno, $errstr ) {} );
+		$xml = '<response>
+			<error>0</error>
+			<orderlist>
+				<orderitem>
+					<id>1</id>
+					<projectcode>test</projectcode>
+					<status>1</status>
+					<message></message>
+				</orderitem>
+			</orderlist>
+		</response>';
+
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Delivery\Standard' );
+		$method = $class->getMethod( 'checkResponse' );
+		$method->setAccessible( true );
+
+		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$method->invokeArgs( $this->object, array( $xml, 1 ) );
+	}
+
 
 	public function testBuildXML()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$criteria = $orderManager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2008-02-15 12:34:56' ) );
-		$criteria->setSlice( 0, 1 );
-		$items = $orderManager->searchItems( $criteria );
+		$order = $this->getOrderItem();
 
-		if( ( $order = reset( $items ) ) === false ) {
-			throw new \Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', \Aimeos\MShop\Order\Item\Base::STAT_REFUSED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
-		}
-
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base' );
 		$orderBase = $orderBaseManager->getItem( $order->getBaseId() );
 
 		$expected = '<?xml version="1.0" encoding="UTF-8"?>
@@ -341,19 +429,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $dom->saveXML(), $this->object->buildXML( $order ) );
 	}
 
+
 	public function testBuildXMLWithBundle()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$criteria = $orderManager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', '2009-03-18 16:14:32' ) );
-		$criteria->setSlice( 0, 1 );
-		$items = $orderManager->searchItems( $criteria );
+		$order = $this->getOrderItem( '2009-03-18 16:14:32' );
 
-		if( ( $order = reset( $items ) ) === false ) {
-			throw new \Exception( 'No order item available' );
-		}
-
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base' );
 		$orderBase = $orderBaseManager->getItem( $order->getBaseId() );
 
 		$expected = '<?xml version="1.0" encoding="UTF-8"?>
@@ -494,5 +575,21 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$this->assertEquals( $dom->saveXML(), $this->object->buildXML( $order ) );
+	}
+
+
+	protected function getOrderItem( $datepayment = '2008-02-15 12:34:56' )
+	{
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$criteria = $orderManager->createSearch();
+		$criteria->setConditions( $criteria->compare( '==', 'order.datepayment', $datepayment ) );
+		$criteria->setSlice( 0, 1 );
+		$items = $orderManager->searchItems( $criteria );
+
+		if( ( $item = reset( $items ) ) === false ) {
+			throw new \Exception( 'No order item available' );
+		}
+
+		return $item;
 	}
 }
