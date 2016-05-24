@@ -35,14 +35,6 @@ class MultipleTest extends \PHPUnit_Framework_TestCase
 
 	public function testMigrate()
 	{
-		$expected = '
-Executing OneTask                                                     OK
-
-Executing OneTask                                                     OK
-Executing TwoTask                                                     OK
-Executing TwoTask                                                     OK
-';
-
 		$taskPath = __DIR__ . DIRECTORY_SEPARATOR . 'tasks';
 		$conf = array( 'db' => $this->config->get( 'resource/db', array() ) );
 		$object = new \Aimeos\MW\Setup\Manager\Multiple( $this->dbm, $conf, $taskPath );
@@ -54,7 +46,8 @@ Executing TwoTask                                                     OK
 		$result = ob_get_contents();
 		ob_end_clean();
 
-		$this->assertEquals( $expected, $result );
+		$this->assertContains( 'OneTask', $result );
+		$this->assertContains( 'TwoTask', $result );
 	}
 
 
