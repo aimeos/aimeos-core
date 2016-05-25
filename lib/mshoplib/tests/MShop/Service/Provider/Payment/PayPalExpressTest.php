@@ -1,18 +1,15 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2012
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Service\Provider\Payment;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Provider\Payment\PostPay.
- */
 class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
@@ -21,12 +18,6 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 	private $order;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
@@ -65,17 +56,23 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
 		unset( $this->serviceItem );
 		unset( $this->order );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$result = $this->object->getConfigBE();
+
+		$this->assertEquals( 12, count( $result ) );
+
+		foreach( $result as $key => $item ) {
+			$this->assertInstanceOf( 'Aimeos\MW\Criteria\Attribute\Iface', $item );
+		}
 	}
 
 
@@ -107,6 +104,8 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE ) );
 		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY ) );
 		$this->assertTrue( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_REFUND ) );
+
+		$this->assertFalse( $this->object->isImplemented( -1 ) );
 	}
 
 
@@ -398,6 +397,66 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->process( $this->order );
+	}
+
+
+	public function testSetPaymentStatusNone()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$method = $class->getMethod( 'setPaymentStatus' );
+		$method->setAccessible( true );
+
+		$method->invokeArgs( $this->object, array( $this->order, array() ) );
+
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
+	}
+
+
+	public function testSetPaymentPending()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$method = $class->getMethod( 'setPaymentStatus' );
+		$method->setAccessible( true );
+
+		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Pending', 'PENDINGREASON' => 'error' ) ) );
+
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_PENDING, $this->order->getPaymentStatus() );
+	}
+
+
+	public function testSetPaymentRefunded()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$method = $class->getMethod( 'setPaymentStatus' );
+		$method->setAccessible( true );
+
+		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Refunded' ) ) );
+
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_REFUND, $this->order->getPaymentStatus() );
+	}
+
+
+	public function testSetPaymentCanceled()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$method = $class->getMethod( 'setPaymentStatus' );
+		$method->setAccessible( true );
+
+		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Voided' ) ) );
+
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED, $this->order->getPaymentStatus() );
+	}
+
+
+	public function testSetPaymentInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$method = $class->getMethod( 'setPaymentStatus' );
+		$method->setAccessible( true );
+
+		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Invalid' ) ) );
+
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
 	}
 }
 

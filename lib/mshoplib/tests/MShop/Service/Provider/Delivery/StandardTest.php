@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
@@ -10,9 +10,6 @@
 namespace Aimeos\MShop\Service\Provider\Delivery;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Provider\Delivery\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
@@ -239,6 +236,29 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$method->setAccessible( true );
 
 		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$method->invokeArgs( $this->object, array( $xml, 1 ) );
+	}
+
+
+	public function testCheckResponse()
+	{
+		set_error_handler( function( $errno, $errstr ) {} );
+		$xml = '<response>
+			<error>0</error>
+			<orderlist>
+				<orderitem>
+					<id>1</id>
+					<projectcode>test</projectcode>
+					<status>0</status>
+					<message></message>
+				</orderitem>
+			</orderlist>
+		</response>';
+
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Delivery\Standard' );
+		$method = $class->getMethod( 'checkResponse' );
+		$method->setAccessible( true );
+
 		$method->invokeArgs( $this->object, array( $xml, 1 ) );
 	}
 

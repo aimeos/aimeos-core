@@ -1,30 +1,21 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Service\Provider;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Provider\Base.
- */
 class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $context;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
@@ -33,15 +24,10 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$this->object = new TestBase( $this->context, $serviceItem );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
-		$this->object = null;
+		unset( $this->object );
 	}
 
 
@@ -99,14 +85,232 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( null, $result );
 	}
+
+
+	public function testCheckConfigBoolean()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'boolean', 'required' => true ) ), array( 'key' => '0' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigBooleanInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'boolean', 'required' => true ) ), array( 'key' => 'a' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not a true/false value' ), $result );
+	}
+
+
+	public function testCheckConfigString()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'string', 'required' => true ) ), array( 'key' => 'abc' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigStringInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'string', 'required' => true ) ), array( 'key' => new \stdClass() ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not a string' ), $result );
+	}
+
+
+	public function testCheckConfigInteger()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'integer', 'required' => true ) ), array( 'key' => '123' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigIntegerInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'integer', 'required' => true ) ), array( 'key' => 'abc' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not an integer number' ), $result );
+	}
+
+
+	public function testCheckConfigNumber()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'number', 'required' => true ) ), array( 'key' => '10.25' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigNumberInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'number', 'required' => true ) ), array( 'key' => 'abc' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not a number' ), $result );
+	}
+
+
+	public function testCheckConfigDate()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'date', 'required' => true ) ), array( 'key' => '2000-01-01' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigDateInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'date', 'required' => true ) ), array( 'key' => '01/01/2000' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not a date' ), $result );
+	}
+
+
+	public function testCheckConfigDatetime()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'datetime', 'required' => true ) ), array( 'key' => '2000-01-01 00:00:00' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigDatetimeInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'datetime', 'required' => true ) ), array( 'key' => '01/01/2000' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not a date and time' ), $result );
+	}
+
+
+	public function testCheckConfigSelect()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'select', 'required' => true, 'default' => array( 'test' ) ) ), array( 'key' => 'test' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigSelectInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'select', 'required' => true, 'default' => array( 'test' ) ) ), array( 'key' => 'test2' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not a listed value' ), $result );
+	}
+
+
+	public function testCheckConfigMap()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'map', 'required' => true ) ), array( 'key' => array( 'a' => 'test' ) ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigMapInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$args = array( array( 'key' => array( 'type' => 'map', 'required' => true ) ), array( 'key' => 'test' ) );
+		$result = $method->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not a key/value map' ), $result );
+	}
+
+
+	public function testCheckConfigInvalid()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$method = $class->getMethod( 'checkConfig' );
+		$method->setAccessible( true );
+
+		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+
+		$args = array( array( 'key' => array( 'type' => 'invalid', 'required' => true ) ), array( 'key' => 'abc' ) );
+		$method->invokeArgs( $this->object, $args );
+	}
 }
 
 
 class TestBase extends \Aimeos\MShop\Service\Provider\Base
 {
-	/**
-	 * @param integer $ts
-	 */
 	public function calcDateLimitPublic( $ts, $days = 0, $bd = false, $hd = '' )
 	{
 		return $this->calcDateLimit( $ts, $days, $bd, $hd );
