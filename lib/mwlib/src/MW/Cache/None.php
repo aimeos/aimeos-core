@@ -1,12 +1,11 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2012
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MW
  * @subpackage Cache
- * @version $$
  */
 
 
@@ -30,7 +29,6 @@ class None
 	 */
 	public function delete( $key )
 	{
-
 	}
 
 
@@ -42,7 +40,6 @@ class None
 	 */
 	public function deleteList( array $keys )
 	{
-
 	}
 
 
@@ -54,7 +51,6 @@ class None
 	 */
 	public function deleteByTags( array $tags )
 	{
-
 	}
 
 
@@ -141,6 +137,5 @@ class None
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() )
 	{
-
 	}
 }
