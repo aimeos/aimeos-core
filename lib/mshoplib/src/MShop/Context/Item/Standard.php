@@ -82,49 +82,12 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	 */
 	public function __toString()
 	{
-		$hashes = spl_object_hash( $this );
+		$objects = array(
+			$this, $this->cache, $this->config, $this->dbm, $this->fsm, $this->locale,
+			$this->logger, $this->mail, $this->mqueue, $this->session, $this->view
+		);
 
-		if( isset( $this->cache ) ) {
-			$hashes .= spl_object_hash( $this->cache );
-		}
-
-		if( isset( $this->config ) ) {
-			$hashes .= spl_object_hash( $this->config );
-		}
-
-		if( isset( $this->dbm ) ) {
-			$hashes .= spl_object_hash( $this->dbm );
-		}
-
-		if( isset( $this->fsm ) ) {
-			$hashes .= spl_object_hash( $this->fsm );
-		}
-
-		if( isset( $this->locale ) ) {
-			$hashes .= spl_object_hash( $this->locale );
-		}
-
-		if( isset( $this->logger ) ) {
-			$hashes .= spl_object_hash( $this->logger );
-		}
-
-		if( isset( $this->mail ) ) {
-			$hashes .= spl_object_hash( $this->mail );
-		}
-
-		if( isset( $this->mqueue ) ) {
-			$hashes .= spl_object_hash( $this->mqueue );
-		}
-
-		if( isset( $this->session ) ) {
-			$hashes .= spl_object_hash( $this->session );
-		}
-
-		if( isset( $this->view ) ) {
-			$hashes .= spl_object_hash( $this->view );
-		}
-
-		return md5( $hashes );
+		return md5( $this->hash( $objects ) );
 	}
 
 
@@ -278,7 +241,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Returns the translation/internationalization object for the given locale (null for default one).
 	 *
-	 * @param string $locale Two letter language ISO code for specific language instead of default one
+	 * @param string|null $locale Two letter language ISO code for specific language instead of default one
 	 * @return \Aimeos\MW\Translation\Iface Internationalization object
 	 */
 	public function getI18n( $locale = null )
@@ -579,5 +542,26 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return (array) $this->groups;
+	}
+
+
+	/**
+	 * Returns a hash for the given objects
+	 *
+	 * @param array $list List of objects
+	 * @return string Hash for the objects
+	 */
+	private function hash( array $list )
+	{
+		$hash = '';
+
+		foreach( $list as $item )
+		{
+			if( is_object( $item ) ) {
+				$hash .= spl_object_hash( $item );
+			}
+		}
+
+		return $hash;
 	}
 }

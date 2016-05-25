@@ -786,11 +786,6 @@ class Standard
 
 
 		$context = $this->getContext();
-		$locale = $context->getLocale();
-		$siteid = $context->getLocale()->getSiteId();
-		$editor = $context->getEditor();
-		$date = date( 'Y-m-d H:i:s' );
-
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -844,32 +839,14 @@ class Standard
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
-				foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
-				{
-					if( !isset( $listTypes[$refId] ) ) {
-						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refId );
-						throw new \Aimeos\MShop\Index\Exception( $msg );
-					}
-
-					foreach( $listTypes[$refId] as $listType )
-					{
-						foreach( $prodIds[$id] as $productId )
-						{
-							$this->saveText(
-								$stmt, $productId, $siteid, $refId, $refItem->getLanguageId(), $listType,
-								$refItem->getType(), 'attribute', $refItem->getContent(), $date, $editor
-							);
-						}
-					}
-				}
-
+				$this->saveTexts( $stmt, $item, $listTypes, $prodIds );
 				$names = $item->getRefItems( 'text', 'name' );
 
 				if( empty( $names ) )
 				{
 					$this->saveText(
-						$stmt, $prodIds[$id], $siteid, null, $locale->getLanguageId(), 'default',
-						'name', 'attribute', $item->getLabel(), $date, $editor
+						$stmt, $prodIds[$id], $siteid, null, $context->getLocale()->getLanguageId(),
+						'default', 'name', 'attribute', $item->getLabel(), $date, $editor
 					);
 				}
 			}
@@ -880,6 +857,44 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
+		}
+	}
+
+
+	/**
+	 * Saves the text items referenced indirectly by products
+	 *
+	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\MShop\Common\Item\ListRef $item Item containing associated text items
+	 * @param array $prodIds Associative list of item ID / product IDs pairs
+	 * @param array $listTypes Associative list of item ID / list type code pairs
+	 * @throws \Aimeos\MShop\Index\Exception If no list type for the item is available
+	 */
+	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item,
+		array $listTypes, array $prodIds )
+	{
+		$context = $this->getContext();
+		$siteid = $context->getLocale()->getSiteId();
+		$editor = $context->getEditor();
+		$date = date( 'Y-m-d H:i:s' );
+
+		foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
+		{
+			if( !isset( $listTypes[$refId] ) ) {
+				$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refId );
+				throw new \Aimeos\MShop\Index\Exception( $msg );
+			}
+
+			foreach( $listTypes[$refId] as $listType )
+			{
+				foreach( $prodIds[$item->getId()] as $productId )
+				{
+					$this->saveText(
+						$stmt, $productId, $siteid, $refId, $refItem->getLanguageId(), $listType,
+						$refItem->getType(), $item->getResourceType(), $refItem->getContent(), $date, $editor
+					);
+				}
+			}
 		}
 	}
 
