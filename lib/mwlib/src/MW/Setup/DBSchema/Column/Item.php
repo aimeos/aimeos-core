@@ -49,11 +49,17 @@ class Item implements \Aimeos\MW\Setup\DBSchema\Column\Iface
 		$this->default = $default;
 		$this->collation = (string) $collation;
 
-		switch( $nullable )
+		switch( strtoupper( $nullable ) )
 		{
 			case 'YES':
+			case 'Y':
+			case 'T':
+			case '1':
 				$this->nullable = true; break;
 			case 'NO':
+			case 'N':
+			case 'F':
+			case '0':
 				$this->nullable = false; break;
 			default:
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Invalid value for allowing null: "%1$s', $nullable ) );
