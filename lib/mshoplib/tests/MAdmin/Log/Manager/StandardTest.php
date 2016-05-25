@@ -1,36 +1,26 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
+ */
+
+
 namespace Aimeos\MAdmin\Log\Manager;
 
 
-/**
- * @copyright Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->object = new \Aimeos\MAdmin\Log\Manager\Standard( \TestHelperMShop::getContext() );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -146,5 +136,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->setExpectedException( '\\Aimeos\\MAdmin\\Log\\Exception' );
 		$this->object->getItem( $item->getId() );
+	}
+
+
+	public function testLog()
+	{
+		$mock = $this->getMockBuilder( '\Aimeos\MAdmin\Log\Manager\Standard' )
+			->setConstructorArgs( array( \TestHelperMShop::getContext() ) )
+			->setMethods( array( 'saveItem' ) )
+			->getMock();
+
+		$mock->expects( $this->once() )->method( 'saveItem' );
+
+		$mock->log( 'test' );
 	}
 }

@@ -627,28 +627,6 @@ class Standard
 
 
 	/**
-	 * Returns the search result object for the given SQL statement.
-	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param string $sql SQL-statement to execute
-	 * @return \Aimeos\MW\DB\Result\Iface Returns db result set from given sql statment
-	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
-	{
-		$context = $this->getContext();
-		$statement = $conn->create( $sql );
-
-		try {
-			$statement->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		} catch( \Exception $e ) {
-			$statement->bind( 1, null, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		}
-
-		return $statement->execute();
-	}
-
-
-	/**
 	 * Writes a message to the configured log facility.
 	 *
 	 * @param string $message Message text that should be written to the log facility
