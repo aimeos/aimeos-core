@@ -398,15 +398,6 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 		$this->object->release( $conn );
 
 		$this->assertEquals( array( array( 'id' => 1, 'name' => 'test' ) ), $resultSets );
-
-		/** @todo This doesn't work with PHP 5.3.11 and later but up to PHP 5.3.10, 5.4.x and 5.5.x are OK */
-		/*
-		$expected = array(
-			array( 'id' => 1, 'name' => 'test' ),
-			array( 'id' => 1, 'name' => 'test' ),
-		);
-
-		*/
 	}
 
 

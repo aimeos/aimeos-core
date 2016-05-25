@@ -90,7 +90,6 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 	 * Retrieves the next database result set.
 	 *
 	 * @return boolean True if another result is available, false if not
-	 * @throws \Aimeos\MW\DB\Exception if an error occured in the unterlying driver
 	 */
 	public function nextResult()
 	{
