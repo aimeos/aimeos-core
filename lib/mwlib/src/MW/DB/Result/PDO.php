@@ -97,7 +97,7 @@ class PDO extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifac
 		try {
 			return $this->statement->nextRowset();
 		} catch ( \PDOException $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
+			return false;
 		}
 	}
 }
