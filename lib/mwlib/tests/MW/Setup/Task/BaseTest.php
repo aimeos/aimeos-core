@@ -1,26 +1,20 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
+ */
+
+
 namespace Aimeos\MW\Setup\Task;
 
 
-/**
- * Test class for \Aimeos\MW\Setup\Task\Base.
- *
- * @copyright Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
- */
 class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$config = \TestHelperMw::getConfig();
@@ -39,29 +33,112 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$dbm->release( $conn );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
+		unset( $this->object );
 	}
+
 
 	public function testGetPreDependencies()
 	{
 		$this->assertEquals( array( 'TestTask' ), $this->object->getPreDependencies() );
 	}
 
+
 	public function testGetPostDependencies()
 	{
 		$this->assertEquals( array(), $this->object->getPostDependencies() );
 	}
 
+
+	public function testMigrate()
+	{
+		$this->object->migrate();
+	}
+
+
+	public function testRollback()
+	{
+		$this->object->rollback();
+	}
+
+
+	public function testClean()
+	{
+		$this->object->clean();
+	}
+
+
 	public function testRun()
 	{
 		$this->object->run( 'mysql' );
+	}
+
+
+	public function testGetConnection()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$method = $class->getMethod( 'getConnection' );
+		$method->setAccessible( true );
+
+		$result = $method->invokeArgs( $this->object, array( 'db' ) );
+
+		$this->assertInstanceOf( '\Aimeos\MW\DB\Connection\Iface', $result );
+	}
+
+
+	public function testGetSchema()
+	{
+		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$method = $class->getMethod( 'getSchema' );
+		$method->setAccessible( true );
+
+		$result = $method->invokeArgs( $this->object, array( 'db' ) );
+
+		$this->assertInstanceOf( '\Aimeos\MW\Setup\DBSchema\Iface', $result );
+	}
+
+
+	public function testGetTableDefinitions()
+	{
+		$content = 'CREATE TABLE "test" ( "name" VARCHAR(32) )';
+
+		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$method = $class->getMethod( 'getTableDefinitions' );
+		$method->setAccessible( true );
+
+		$result = $method->invokeArgs( $this->object, array( $content ) );
+
+		$this->assertEquals( array( 'test' => 'CREATE TABLE "test" ( "name" VARCHAR(32) )' ), $result );
+	}
+
+
+	public function testGetIndexDefinitions()
+	{
+		$content = 'CREATE INDEX "idx_test" ON "test" ("name")';
+
+		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$method = $class->getMethod( 'getIndexDefinitions' );
+		$method->setAccessible( true );
+
+		$result = $method->invokeArgs( $this->object, array( $content ) );
+
+		$this->assertEquals( array( 'test.idx_test' => 'CREATE INDEX "idx_test" ON "test" ("name")' ), $result );
+	}
+
+
+	public function testGetTriggerDefinitions()
+	{
+		$content = 'CREATE TRIGGER "tri_test" ON "text"';
+
+		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$method = $class->getMethod( 'getTriggerDefinitions' );
+		$method->setAccessible( true );
+
+		$result = $method->invokeArgs( $this->object, array( $content ) );
+
+		$this->assertEquals( array( 'tri_test' => 'CREATE TRIGGER "tri_test" ON "text"' ), $result );
 	}
 }
 
