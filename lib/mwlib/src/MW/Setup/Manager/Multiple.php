@@ -47,8 +47,6 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 		$this->dbm = $dbm;
 		$this->additional = $additional;
-
-		$conns = array();
 		$schemas = array();
 
 		$this->type = ( isset( $dbconfig['db']['adapter'] ) ? $dbconfig['db']['adapter'] : '' );
@@ -92,7 +90,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 */
 	public function clean( $task = null )
 	{
-		$tasks = ( $task && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
+		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
 
 		foreach( $tasks as $taskname => $task ) {
 			$this->cleanTasks( array( $taskname ) );
@@ -107,7 +105,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 */
 	public function migrate( $task = null )
 	{
-		$tasks = ( $task && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
+		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
 
 		foreach( $tasks as $taskname => $task ) {
 			$this->migrateTasks( array( $taskname ) );
@@ -122,7 +120,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 */
 	public function rollback( $task = null )
 	{
-		$tasks = ( $task && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
+		$tasks = ( $task !== null && isset( $this->tasks[$task] ) ? array( $task => $this->tasks[$task] ) : $this->tasks );
 
 		foreach( array_reverse( $tasks, true ) as $taskname => $task ) {
 			$this->rollbackTasks( array( $taskname ) );

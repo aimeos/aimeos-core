@@ -119,7 +119,7 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 	 */
 	protected function createConnection( $name, $adapter )
 	{
-		$params = $host = $this->config->get( 'resource/' . $name );
+		$params = $this->config->get( 'resource/' . $name );
 
 		$params['user'] = $this->config->get( 'resource/' . $name . '/username' );
 		$params['dbname'] = $this->config->get( 'resource/' . $name . '/database' );
