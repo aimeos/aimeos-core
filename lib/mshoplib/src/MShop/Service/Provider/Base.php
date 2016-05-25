@@ -341,25 +341,25 @@ abstract class Base
 						}
 						break;
 					case 'date':
-						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$';
+						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/';
 						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
 							$errors[$key] = sprintf( 'Not a date' ); continue 2;
 						}
 						break;
 					case 'datetime':
-						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$';
+						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
 							$errors[$key] = sprintf( 'Not a date and time' ); continue 2;
 						}
 						break;
 					case 'time':
-						$pattern = '/^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$';
+						$pattern = '/^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
 						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
 							$errors[$key] = sprintf( 'Not a date and time' ); continue 2;
 						}
 						break;
 					case 'select':
-						if( !is_array( $def['default'] ) || !in_array( $def['default'], $attributes[$key] ) ) {
+						if( !is_array( $def['default'] ) || !in_array( $attributes[$key], $def['default'] ) ) {
 							$errors[$key] = sprintf( 'Not a listed value' ); continue 2;
 						}
 						break;

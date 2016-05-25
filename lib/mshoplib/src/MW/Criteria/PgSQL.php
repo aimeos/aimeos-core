@@ -34,7 +34,6 @@ class PgSQL extends \Aimeos\MW\Criteria\SQL
 
 				if( isset( $params[2] ) )
 				{
-					$str = '';
 					$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\/|\-|\+|\>|\<|\(|\)|\*|\:|\"|\!|\§|\$|\'|\;|\.|\,|\@)+/';
 					$search = trim( preg_replace( $regex, ' ', $params[2] ) );
 
