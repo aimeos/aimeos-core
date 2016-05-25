@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Order\Manager\Base;
  * @package MShop
  * @subpackage Order
  */
-class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
+class Standard extends Base
 {
 	private $searchConfig = array(
 		'order.base.id'=> array(
@@ -927,26 +927,5 @@ class Standard extends \Aimeos\MShop\Order\Manager\Base\Base
 		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE ) {
 			$this->storeServices( $basket );
 		}
-	}
-
-
-	/**
-	 * Returns a new and empty order base item (shopping basket).
-	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price Default price of the basket (usually 0.00)
-	 * @param \Aimeos\MShop\Locale\Item\Iface $locale Locale item containing the site, language and currency
-	 * @param array $values Associative list of key/value pairs containing, e.g. the order or user ID
-	 * @param array $products List of ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
-	 * @param array $addresses List of order addresses implementing \Aimeos\MShop\Order\Item\Base\Address\Iface
-	 * @param array $services List of order services implementing \Aimeos\MShop\Order\Item\Base\Service\Iface
-	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface as values
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
-	 */
-	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = array(), array $products = array(), array $addresses = array(),
-		array $services = array(), array $coupons = array() )
-	{
-		return new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale,
-			$values, $products, $addresses, $services, $coupons );
 	}
 }

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MShop
  * @subpackage Order
  */
@@ -92,5 +92,50 @@ abstract class Base
 		if( $item->getProductCode() === '' ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product does not contain all required values. Product code for item not available.' ) );
 		}
+	}
+
+
+	/**
+	 * Tests if the given product is similar to an existing one.
+	 * Similarity is described by the equality of properties so the quantity of
+	 * the existing product can be updated.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
+	 * @param array $products List of order product items to check against
+	 * @return integer Positon of the same product in the product list
+	 * @throws \Aimeos\MShop\Order\Exception If no similar item was found
+	 */
+	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, array $products )
+	{
+		$attributeMap = array();
+
+		foreach( $item->getAttributes() as $attributeItem ) {
+			$attributeMap[$attributeItem->getCode()] = $attributeItem;
+		}
+
+		foreach( $products as $position => $product )
+		{
+			if( $product->compare( $item ) === false ) {
+				continue;
+			}
+
+			$prodAttributes = $product->getAttributes();
+
+			if( count( $prodAttributes ) !== count( $attributeMap ) ) {
+				continue;
+			}
+
+			foreach( $prodAttributes as $attribute )
+			{
+				if( array_key_exists( $attribute->getCode(), $attributeMap ) === false
+					|| $attributeMap[$attribute->getCode()]->getValue() != $attribute->getValue() ) {
+					continue 2; // jump to outer loop
+				}
+			}
+
+			return $position;
+		}
+
+		return false;
 	}
 }

@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MShop
  * @subpackage Order
  */
@@ -86,6 +86,23 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		foreach( $this->coupons as $key => $value ) {
 			$this->coupons[$key] = $value;
 		}
+	}
+
+
+	/**
+	 * Prepares the object for serialization.
+	 *
+	 * @return array List of properties that should be serialized
+	 */
+	public function __sleep()
+	{
+		/*
+		 * Workaround because database connections can't be serialized
+		 * Listeners will be reattached on wakeup by the customer manager
+		 */
+		$this->clearListeners();
+
+		return array_keys( get_object_vars( $this ) );
 	}
 
 
@@ -175,7 +192,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setComment( $comment )
 	{
-		if( $comment == $this->getComment() ) { return; }
+		if( $comment == $this->getComment() ) { return $this; }
 
 		$this->values['order.base.comment'] = (string) $comment;
 		$this->modified = true;
@@ -369,7 +386,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$this->notifyListeners( 'addProduct.before', $item );
 
-		if( ( $pos = $this->getSameProduct( $item ) ) !== false )
+		if( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== false )
 		{
 			$quantity = $item->getQuantity();
 			$item = $this->products[$pos];
@@ -811,23 +828,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
-	 * Prepares the object for serialization.
-	 *
-	 * @return array List of properties that should be serialized
-	 */
-	public function __sleep()
-	{
-		/*
-		 * Workaround because database connections can't be serialized
-		 * Listeners will be reattached on wakeup by the customer manager
-		 */
-		$this->clearListeners();
-
-		return array_keys( get_object_vars( $this ) );
-	}
-
-
-	/**
 	 * Checks if the price uses the same currency as the price in the basket.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
@@ -836,49 +836,5 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	{
 		$price = clone $this->price;
 		$price->addItem( $item );
-	}
-
-
-	/**
-	 * Tests if the given product is similar to an existing one.
-	 * Similarity is described by the equality of properties so the quantity of
-	 * the existing product can be updated.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
-	 * @return integer Positon of the same product in the product list
-	 * @throws \Aimeos\MShop\Order\Exception If no similar item was found
-	 */
-	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item )
-	{
-		$attributeMap = array();
-
-		foreach( $item->getAttributes() as $attributeItem ) {
-			$attributeMap[$attributeItem->getCode()] = $attributeItem;
-		}
-
-		foreach( $this->products as $position => $product )
-		{
-			if( $product->compare( $item ) === false ) {
-				continue;
-			}
-
-			$prodAttributes = $product->getAttributes();
-
-			if( count( $prodAttributes ) !== count( $attributeMap ) ) {
-				continue;
-			}
-
-			foreach( $prodAttributes as $attribute )
-			{
-				if( array_key_exists( $attribute->getCode(), $attributeMap ) === false
-					|| $attributeMap[$attribute->getCode()]->getValue() != $attribute->getValue() ) {
-					continue 2; // jump to outer loop
-				}
-			}
-
-			return $position;
-		}
-
-		return false;
 	}
 }
