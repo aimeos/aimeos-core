@@ -23,6 +23,7 @@ interface Iface
 	 * Initializes the password helper.
 	 *
 	 * @param array Associative list of key/value pairs of options specific for the hashing method
+	 * @return null
 	 */
 	public function __construct( array $options );
 

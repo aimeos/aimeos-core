@@ -26,7 +26,7 @@ interface Iface
 	 * @param string $text Template as text
 	 * @param string $begin Marker for start sequence with '*' as wildcard
 	 * @param string $end Marker for stop sequence with '*' as wildcard
-	 * @return \Aimeos\MW\Template\Iface
+	 * @return null
 	 */
 	public function __construct( $text, $begin = '', $end = '' );
 

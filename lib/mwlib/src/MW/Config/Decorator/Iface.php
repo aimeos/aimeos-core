@@ -24,7 +24,7 @@ interface Iface extends \Aimeos\MW\Config\Iface
 	 * Initializes the decorator.
 	 *
 	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
-	 * @return void
+	 * @return null
 	 */
 	public function __construct( \Aimeos\MW\Config\Iface $object );
 }

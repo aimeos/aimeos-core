@@ -86,7 +86,7 @@ class Autofill
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket of the customer
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Base\Service\Base
 	 * @param string|null $code Service item code
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface|null Order service item if available or null otherwise
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface|null Order service item if available or null otherwise
 	 */
 	protected function getServiceItem( \Aimeos\MShop\Order\Item\Base\Iface $order, $type, $code = null )
 	{

@@ -222,7 +222,7 @@ interface Iface
 	/**
 	 * Sets the user ID of the logged in user.
 	 *
-	 * @param string $user User ID of the logged in user or closure to retrieve them
+	 * @param \Closure|string|null $user User ID of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setUserId( $user );

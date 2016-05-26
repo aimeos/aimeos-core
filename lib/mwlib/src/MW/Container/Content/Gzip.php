@@ -76,7 +76,7 @@ class Gzip
 	/**
 	 * Adds content to the gzip file.
 	 *
-	 * @param string[] $data Data to add
+	 * @param string $data Data to add
 	 */
 	public function add( $data )
 	{
@@ -91,7 +91,7 @@ class Gzip
 	 *
 	 * @return string Content line ending with
 	 */
-	function current()
+	public function current()
 	{
 		return $this->data;
 	}
@@ -102,7 +102,7 @@ class Gzip
 	 *
 	 * @return integer|null Position within the text file or null if end of file is reached
 	 */
-	function key()
+	public function key()
 	{
 		if( $this->data !== null ) {
 			return $this->position;
@@ -115,7 +115,7 @@ class Gzip
 	/**
 	 * Moves forward to next element.
 	 */
-	function next()
+	public function next()
 	{
 		$this->position++;
 		$this->data = $this->getData();
@@ -125,7 +125,7 @@ class Gzip
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	function rewind()
+	public function rewind()
 	{
 		if( gzrewind( $this->fh ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to rewind file "%1$s"', $this->getResource() ) );
@@ -141,7 +141,7 @@ class Gzip
 	 *
 	 * @return boolean True on success or false on failure
 	 */
-	function valid()
+	public function valid()
 	{
 		return ( $this->data === null ? !gzeof( $this->fh ) : true );
 	}

@@ -26,7 +26,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added
 	 * @param integer $quantity Number of times the Price should be added
-	 * @return void
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function addItem( \Aimeos\MShop\Price\Item\Iface $item, $quantity = 1 );
 
@@ -34,6 +34,8 @@ interface Iface
 	 * Resets the values of the price item.
 	 *
 	 * The currency ID, domain, type and status stays the same.
+	 *
+	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function clear();
 

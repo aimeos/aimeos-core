@@ -30,6 +30,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * Returns the content block for the given name
 	 *
 	 * @param string $name Name of the block
+	 * @return string Content of the block
 	 */
 	public function get( $name );
 
@@ -38,6 +39,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 *
 	 * @param string $name Name of the block
 	 * @param string $content Block content
+	 * @return null
 	 */
 	public function set( $name, $content );
 
@@ -45,11 +47,14 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * Starts a new content block
 	 *
 	 * @param string $name Name of the block
+	 * @return null
 	 */
 	public function start( $name );
 
 	/**
 	 * Stores the current content block
+	 *
+	 * @return null
 	 */
 	public function stop();
 }

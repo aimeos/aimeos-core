@@ -283,7 +283,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->request->expects( $this->once() )->method( 'withParsedBody' )
 			->will( $this->returnValue( $this->request ) );
 
-		$this->assertEquals( $this->object, $this->object->withParsedBody( 'test' ) );
+		$this->assertEquals( $this->object, $this->object->withParsedBody( array( 'test' ) ) );
 	}
 
 

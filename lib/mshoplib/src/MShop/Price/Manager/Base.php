@@ -27,6 +27,7 @@ abstract class Base
 	 * @param array $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
 	 * @param integer $quantity Number of products
 	 * @param string|null $currencyId Three letter ISO currency code or null for all
+	 * @return \Aimeos\MShop\Price\Iface Price item with the lowest price
 	 * @throws \Aimeos\MShop\Price\Exception if no price item is available
 	 */
 	public function getLowestPrice( array $priceItems, $quantity, $currencyId = null )

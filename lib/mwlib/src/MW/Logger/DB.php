@@ -33,7 +33,7 @@ class DB extends Base implements Iface
 	 *		INSERT INTO logtable (facility, logtime, priority, message, requestid) VALUES (?, ?, ?, ?, ?)
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Database statement object for inserting data
-	 * @param integer $priority Minimum priority for logging
+	 * @param integer $loglevel Minimum priority for logging
 	 * @param string|null $requestid Unique identifier for the request so multiple log entries which belong together can be found faster
 	 * @param array|null $facilities Facilities for which messages should be logged
 	 */

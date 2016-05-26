@@ -100,6 +100,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * Deletes an order product item from the (future) order.
 	 *
 	 * @param integer $position Position id of the order product item
+	 * @return null
 	 */
 	public function deleteProduct( $position );
 
@@ -133,6 +134,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
 	 * @param string $domain Address domain defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @return null
 	 */
 	public function deleteAddress( $domain = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 
@@ -164,6 +166,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * Deletes the delivery or payment service from the basket.
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @return null
 	 */
 	public function deleteService( $type );
 
@@ -180,6 +183,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param string $code Coupon code
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
+	 * @return null
 	 */
 	public function addCoupon( $code, array $products = array() );
 
@@ -239,6 +243,8 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 
 	/**
 	 * Sets the modified flag of the object.
+	 *
+	 * @return null
 	 */
 	public function setModified();
 }

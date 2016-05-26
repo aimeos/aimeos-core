@@ -45,6 +45,7 @@ interface Iface
 	 * Deletes a node and its descendants from the storage.
 	 *
 	 * @param mixed $id Delete the node with the ID and all nodes below
+	 * @return null
 	 */
 	public function deleteNode( $id = null );
 
@@ -64,6 +65,7 @@ interface Iface
 	 * @param \Aimeos\MW\Tree\Node\Iface $node New node that should be inserted
 	 * @param integer|null $parentId ID of the parent node where the new node should be inserted below (null for root node)
 	 * @param integer|null $refId ID of the node where the node node should be inserted before (null to append)
+	 * @return null
 	 */
 	public function insertNode( \Aimeos\MW\Tree\Node\Iface $node, $parentId = null, $refId = null );
 
@@ -74,6 +76,7 @@ interface Iface
 	 * @param mixed $oldParentId ID of the old parent node which currently contains the node that should be removed
 	 * @param mixed $newParentId ID of the new parent node where the node should be moved to
 	 * @param mixed $newRefId ID of the node where the node node should be inserted before (null to append)
+	 * @return null
 	 */
 	public function moveNode( $id, $oldParentId, $newParentId, $newRefId = null );
 
@@ -84,6 +87,7 @@ interface Iface
 	 * the tree layout by adding, moving or deleting nodes.
 	 *
 	 * @param \Aimeos\MW\Tree\Node\Iface $node Node, maybe with subnodes
+	 * @return null
 	 */
 	public function saveNode( \Aimeos\MW\Tree\Node\Iface $node );
 

@@ -26,7 +26,7 @@ interface Iface
 	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema Database schema object
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
-	 * @return void
+	 * @return null
 	 */
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null );
 

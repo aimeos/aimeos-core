@@ -48,7 +48,7 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 		try {
 			return $this->statement->rowCount();
 		} catch ( \Doctrine\DBAL\DBALException $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $this->statement->errorInfo() );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), join( ', ', $this->statement->errorInfo() ) );
 		}
 	}
 
@@ -65,7 +65,7 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 		try {
 			return $this->statement->fetch( $this->style[$style] );
 		} catch ( \Doctrine\DBAL\DBALException $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $this->statement->errorInfo() );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), join( ', ', $this->statement->errorInfo() ) );
 		}
 	}
 
@@ -80,7 +80,7 @@ class DBAL extends \Aimeos\MW\DB\Result\Base implements \Aimeos\MW\DB\Result\Ifa
 		try {
 			$this->statement->closeCursor();
 		} catch ( \Doctrine\DBAL\DBALException $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $this->statement->errorInfo() );
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), join( ', ', $this->statement->errorInfo() ) );
 		}
 	}
 

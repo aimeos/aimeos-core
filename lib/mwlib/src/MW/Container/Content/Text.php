@@ -83,7 +83,7 @@ class Text
 	/**
 	 * Adds row to the content object.
 	 *
-	 * @param string[] $data Data to add
+	 * @param string $data Data to add
 	 */
 	public function add( $data )
 	{
@@ -98,7 +98,7 @@ class Text
 	 *
 	 * @return string Content line ending with
 	 */
-	function current()
+	public function current()
 	{
 		return $this->data;
 	}
@@ -109,7 +109,7 @@ class Text
 	 *
 	 * @return integer|null Position within the text file or null if end of file is reached
 	 */
-	function key()
+	public function key()
 	{
 		if( $this->data !== null ) {
 			return $this->position;
@@ -122,7 +122,7 @@ class Text
 	/**
 	 * Moves forward to next element.
 	 */
-	function next()
+	public function next()
 	{
 		$this->position++;
 		$this->data = $this->getData();
@@ -132,7 +132,7 @@ class Text
 	/**
 	 * Rewinds the file pointer to the beginning.
 	 */
-	function rewind()
+	public function rewind()
 	{
 		if( rewind( $this->fh ) === 0 ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Rewind file handle for %1$s failed', $this->getResource() ) );
@@ -148,7 +148,7 @@ class Text
 	 *
 	 * @return boolean True on success or false on failure
 	 */
-	function valid()
+	public function valid()
 	{
 		return ( $this->data === null ? !feof( $this->fh ) : true );
 	}

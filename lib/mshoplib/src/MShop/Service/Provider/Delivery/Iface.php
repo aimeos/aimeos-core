@@ -23,6 +23,7 @@ interface Iface extends \Aimeos\MShop\Service\Provider\Iface, \Aimeos\MShop\Serv
 	 * Sends the order details to the ERP system for further processing.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object to process
+	 * @return null
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order );
 }

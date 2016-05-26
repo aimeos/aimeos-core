@@ -34,6 +34,7 @@ interface Iface
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
 	 * @param mixed $value Value that should be associated with the given path
+	 * @return null
 	 */
 	public function set($name, $value);
 }

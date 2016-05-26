@@ -51,6 +51,7 @@ interface Iface
 	 * @param array $map Associative list of reference ID as key and list of list item properties as key/value pairs
 	 * @param string $domain Domain name of the referenced items
 	 * @param string $type List type for the referenced items
+	 * @return null
 	 */
 	public function updateListItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $map, $domain, $type );
 }

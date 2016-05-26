@@ -772,6 +772,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	/**
+	 * Returns an order base item
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item
+	 * @throws \Exception If no found
+	 */
 	protected function getOrderItem()
 	{
 		$search = $this->object->createSearch();

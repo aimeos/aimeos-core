@@ -36,8 +36,8 @@ abstract class Base
 	/**
 	 * Returns the configuration setting for the given key
 	 *
-	 * @param stirng $key Configuration key like "host" or "db/host"
-	 * @param string $default Default value if no setting is found
+	 * @param string $key Configuration key like "host" or "db/host"
+	 * @param mixed $default Default value if no setting is found
 	 * @return mixed Configuration setting or default value
 	 */
 	protected function getConfig( $key, $default = null )

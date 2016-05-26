@@ -103,6 +103,11 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	/**
+	 * Returns an order base item
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item
+	 */
 	protected function getOrderBaseItem()
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order' );

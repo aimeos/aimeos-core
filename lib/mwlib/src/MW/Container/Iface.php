@@ -26,6 +26,7 @@ interface Iface extends \Iterator
 	 * @param string $resourcepath Path to the resource like a file
 	 * @param string $format Format of the content objects inside the container
 	 * @param array $options Associative list of key/value pairs for configuration
+	 * @return null
 	 */
 	public function __construct( $resourcepath, $format, array $options = array() );
 

@@ -63,7 +63,7 @@ abstract class Base
 	 */
 	public function cleanup( array $siteids )
 	{
-		return $this->manager->cleanup( $siteids );
+		$this->manager->cleanup( $siteids );
 	}
 
 

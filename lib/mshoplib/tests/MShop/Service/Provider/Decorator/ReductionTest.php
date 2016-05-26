@@ -205,6 +205,11 @@ class ReductionTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	/**
+	 * Returns an order product item
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
+	 */
 	protected function getOrderProduct()
 	{
 		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );

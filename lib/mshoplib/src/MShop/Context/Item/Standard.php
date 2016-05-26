@@ -486,7 +486,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Sets the user ID of the logged in user.
 	 *
-	 * @param closure|string|null $user User ID of the logged in user or closure to retrieve them
+	 * @param \Closure|string|null $user User ID of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setUserId( $user )
@@ -517,7 +517,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Sets the group IDs of the logged in user.
 	 *
-	 * @param closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
+	 * @param \Closure|array $groupIds Group IDs of the logged in user or closure to retrieve them
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setGroupIds( $groupIds )

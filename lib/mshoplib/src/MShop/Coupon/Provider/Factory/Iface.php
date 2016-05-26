@@ -27,6 +27,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object
 	 * @param \Aimeos\MShop\Coupon\Item\Iface $item Coupon item to set
 	 * @param string $code Coupon code entered by the customer
+	 * @return null
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Coupon\Item\Iface $item, $code );
 

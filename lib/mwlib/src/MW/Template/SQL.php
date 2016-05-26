@@ -26,7 +26,6 @@ class SQL extends \Aimeos\MW\Template\Base
 	 * @param string $text Statement as text
 	 * @param string $begin Marker for start sequence with '*' as wildcard
 	 * @param string $end Marker for stop sequence with '*' as wildcard
-	 * @return \Aimeos\MW\Template\Iface
 	 */
 	public function __construct( $text, $begin = '/*-$*/', $end = '/*$-*/' )
 	{

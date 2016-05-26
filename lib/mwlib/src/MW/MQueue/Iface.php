@@ -23,6 +23,7 @@ interface Iface
 	 * Initializes the message queue object
 	 *
 	 * @param array $config Associative list of configuration key/value pairs
+	 * @return null
 	 */
 	public function __construct( array $config );
 

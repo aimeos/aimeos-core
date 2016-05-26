@@ -27,6 +27,7 @@ interface Iface
 	 * @param \Aimeos\Controller\Jobs\Iface $controller Controller object
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param \Aimeos\Bootstrap $aimeos \Aimeos\Bootstrap object
+	 * @return null
 	 */
 	public function __construct( \Aimeos\Controller\Jobs\Iface $controller,
 		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos );

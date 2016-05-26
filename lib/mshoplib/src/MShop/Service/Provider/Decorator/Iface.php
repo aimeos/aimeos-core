@@ -27,6 +27,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Service\Provider\Iface $provider Service provider or decorator
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param \Aimeos\MShop\Service\Item\Iface $serviceItem Service item with configuration for the provider
+	 * @return null
 	 */
 	public function __construct( \Aimeos\MShop\Service\Provider\Iface $provider,
 		\Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Service\Item\Iface $serviceItem );

@@ -26,7 +26,6 @@ class T3 extends \Aimeos\MW\Template\Base
 	 * @param string $text Template as text with Typo3-like markers
 	 * @param string $begin Marker for start sequence with '*' as wildcard
 	 * @param string $end Marker for stop sequence with '*' as wildcard
-	 * @return \Aimeos\MW\Template\Iface
 	 */
 	public function __construct( $text, $begin = '<!--###$-->', $end = '<!--$###-->' )
 	{

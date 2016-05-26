@@ -100,7 +100,7 @@ interface Iface
 	 * Queries for status updates for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
-	 * @return void
+	 * @return null
 	 */
 	public function query( \Aimeos\MShop\Order\Item\Iface $order );
 
@@ -110,6 +110,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
 	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 * @return null
 	 */
 	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes );
 
@@ -118,7 +119,7 @@ interface Iface
 	 * Sets the communication object for a service provider.
 	 *
 	 * @param \Aimeos\MW\Communication\Iface $communication Object of communication
-	 * @return void
+	 * @return null
 	 */
 	public function setCommunication( \Aimeos\MW\Communication\Iface $communication );
 

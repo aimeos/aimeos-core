@@ -25,6 +25,7 @@ interface Iface extends \Aimeos\MShop\Plugin\Provider\Iface
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context object with required objects
 	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
+	 * @return null
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\MShop\Plugin\Item\Iface $item );
 }

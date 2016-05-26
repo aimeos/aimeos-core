@@ -598,6 +598,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	/**
+	 * Returns the order item for the given payment date
+	 *
+	 * @param string $datepayment Payment date
+	 * @return \Aimeos\MShop\Order\Item\Iface Order item
+	 * @throws \Exception If no item was found
+	 */
 	protected function getOrderItem( $datepayment = '2008-02-15 12:34:56' )
 	{
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );

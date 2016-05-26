@@ -48,7 +48,7 @@ interface Iface
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Item which should be inserted
 	 * @param integer $parentId ID of the parent item where the item should be inserted into
 	 * @param integer $refId ID of the item where the item should be inserted before (null to append)
-	 * @return void
+	 * @return null
 	 */
 	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null );
 
@@ -60,6 +60,7 @@ interface Iface
 	 * @param mixed $oldParentId ID of the old parent item which currently contains the item that should be removed
 	 * @param mixed $newParentId ID of the new parent item where the item should be moved to
 	 * @param mixed $refId ID of the item where the item should be inserted before (null to append)
+	 * @return null
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null );
 }

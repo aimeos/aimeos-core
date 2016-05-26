@@ -80,6 +80,7 @@ abstract class Base
 	 *
 	 * @param integer $type Type of given value defined in \Aimeos\MW\DB\Statement\Base as constant
 	 * @param mixed $value Value which should be bound to the placeholder
+	 * @return integer PDO parameter type constant
 	 * @throws \Aimeos\MW\DB\Exception If the type is unknown
 	 */
 	protected function getPdoType( $type, $value )

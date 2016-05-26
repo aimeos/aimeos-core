@@ -20,33 +20,7 @@ namespace Aimeos\MW\Common\Manager;
  */
 abstract class Base
 {
-	private $stmts = array();
 	private $keySeparator = '.';
-
-
-	/**
-	 * Returns the cached statement for the given key or creates a new prepared statement.
-	 * If no SQL string is given, the key is used to retrieve the SQL string from the configuration.
-	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param string $cfgkey Unique key for the SQL
-	 * @param string|null $sql SQL string if it shouldn't be retrieved from the configuration
-	 */
-	protected function getCachedStatement( \Aimeos\MW\DB\Connection\Iface $conn, $cfgkey, $sql = null )
-	{
-		if( !isset( $this->stmts['stmt'][$cfgkey] ) || !isset( $this->stmts['conn'][$cfgkey] )
-			|| $conn !== $this->stmts['conn'][$cfgkey]
-		) {
-			if( $sql === null ) {
-				$sql = $this->getSqlConfig( $cfgkey );
-			}
-
-			$this->stmts['stmt'][$cfgkey] = $conn->create( $sql );
-			$this->stmts['conn'][$cfgkey] = $conn;
-		}
-
-		return $this->stmts['stmt'][$cfgkey];
-	}
 
 
 	/**

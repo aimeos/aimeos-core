@@ -64,7 +64,7 @@ class Protect
 	 * Sets the value for the specified key
 	 *
 	 * @param string $name Path to the requested value like tree/node/classname
-	 * @param string $value Value that should be associated with the given path
+	 * @param mixed $value Value that should be associated with the given path
 	 */
 	public function set( $name, $value )
 	{

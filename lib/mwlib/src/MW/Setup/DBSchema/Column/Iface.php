@@ -30,7 +30,7 @@ interface Iface
 	 * @param string $default Default value if not specified
 	 * @param string $nullable "YES" if null values are allowed, "NO" if not
 	 * @param string $collation collation type of the column
-	 * @return void
+	 * @return null
 	 */
 	public function __construct( $tablename, $name, $type, $length, $default, $nullable, $collation );
 

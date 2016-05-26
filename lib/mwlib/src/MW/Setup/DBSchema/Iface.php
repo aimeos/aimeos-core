@@ -28,7 +28,7 @@ interface Iface
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param string $dbname Database name
 	 * @param string $name Adapter name
-	 * @return void
+	 * @return null
 	 */
 	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname, $name );
 

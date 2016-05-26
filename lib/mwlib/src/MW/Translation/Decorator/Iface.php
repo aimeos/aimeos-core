@@ -24,7 +24,7 @@ interface Iface extends \Aimeos\MW\Translation\Iface
 	 * Initializes the decorator.
 	 *
 	 * @param \Aimeos\MW\Translation\Iface $object Translation object or decorator
-	 * @return void
+	 * @return null
 	 */
 	public function __construct( \Aimeos\MW\Translation\Iface $object );
 }

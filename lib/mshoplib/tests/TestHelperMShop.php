@@ -1,16 +1,21 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
+
+
 class TestHelperMShop
 {
 	private static $aimeos;
 	private static $context = array();
 
 
+	/**
+	 * Initializes the environment
+	 */
 	public static function bootstrap()
 	{
 		self::getAimeos();
@@ -18,6 +23,12 @@ class TestHelperMShop
 	}
 
 
+	/**
+	 * Returns the context object
+	 *
+	 * @param string $site Site code
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 */
 	public static function getContext( $site = 'unittest' )
 	{
 		if( !isset( self::$context[$site] ) ) {
@@ -28,6 +39,11 @@ class TestHelperMShop
 	}
 
 
+	/**
+	 * Returns the Aimeos bootstrap object
+	 *
+	 * @return \Aimeos\Bootstrap Aimeos bootstrap object
+	 */
 	private static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
@@ -42,7 +58,10 @@ class TestHelperMShop
 
 
 	/**
-	 * @param string $site
+	 * Creates a new context object
+	 *
+	 * @param string $site Site code
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	private static function createContext( $site )
 	{

@@ -111,7 +111,10 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 
 
 	/**
-	 * @param string $code
+	 * Returns an order product item
+	 *
+	 * @param string $code Unique product code
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order product item
 	 */
 	protected function getOrderProduct( $code )
 	{

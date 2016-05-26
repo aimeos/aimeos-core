@@ -42,7 +42,7 @@ interface Iface
 	 * simply do nothing and return immediately.
 	 *
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
-	 * @return void
+	 * @return null
 	 */
 	public function cleanup();
 
@@ -64,7 +64,7 @@ interface Iface
 	 *
 	 * @param string $key Key string that identifies the single cache entry
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
-	 * @return void
+	 * @return null
 	 */
 	public function delete( $key );
 
@@ -90,6 +90,7 @@ interface Iface
 	 *
 	 * @param array $keys List of key strings that identify the cache entries
 	 * 	that should be removed
+	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteList( array $keys );
@@ -119,6 +120,7 @@ interface Iface
 	 *
 	 * @param string[] $tags List of tag strings that are associated to one or more
 	 * 	cache entries that should be removed
+	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function deleteByTags( array $tags );
@@ -132,6 +134,7 @@ interface Iface
 	 * clean start before new entries are added to the cache and you don't know
 	 * which entries are still in the cache.
 	 *
+	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function flush();
@@ -329,7 +332,7 @@ interface Iface
 	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
 	 * 	format when the cache entry expires
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
-	 * @return void
+	 * @return null
 	 */
 	public function set( $key, $value, array $tags = array(), $expires = null );
 
@@ -420,6 +423,7 @@ interface Iface
 	 * 	associated to the values identified by their key. The value associated
 	 * 	to the key can either be a tag string or an array of tag strings
 	 * @param array $expires Associative list of key/datetime pairs.
+	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
 	public function setList( array $pairs, array $tags = array(), array $expires = array() );

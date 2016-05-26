@@ -42,6 +42,7 @@ class Standard
 	 * Returns the content block for the given name
 	 *
 	 * @param string $name Name of the block
+	 * @return string Content of the block
 	 */
 	public function get( $name )
 	{

@@ -1,17 +1,21 @@
 <?php
 
-
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
+
+
 class TestHelperJobs
 {
 	private static $aimeos;
 	private static $context;
 
 
+	/**
+	 * Initializes the environment
+	 */
 	public static function bootstrap()
 	{
 		self::getAimeos();
@@ -19,6 +23,12 @@ class TestHelperJobs
 	}
 
 
+	/**
+	 * Returns the context object
+	 *
+	 * @param string $site Site code
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 */
 	public static function getContext( $site = 'unittest' )
 	{
 		if( !isset( self::$context[$site] ) ) {
@@ -29,6 +39,11 @@ class TestHelperJobs
 	}
 
 
+	/**
+	 * Returns the Aimeos bootstrap object
+	 *
+	 * @return \Aimeos\Bootstrap Aimeos bootstrap object
+	 */
 	public static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
@@ -42,6 +57,11 @@ class TestHelperJobs
 	}
 
 
+	/**
+	 * Returns the list of controller paths
+	 *
+	 * @return array Controller paths
+	 */
 	public static function getControllerPaths()
 	{
 		return self::getAimeos()->getCustomPaths( 'controller/jobs' );
@@ -49,7 +69,10 @@ class TestHelperJobs
 
 
 	/**
-	 * @param string $site
+	 * Creates a new context object
+	 *
+	 * @param string $site Site code
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
 	 */
 	private static function createContext( $site )
 	{
@@ -106,6 +129,12 @@ class TestHelperJobs
 	}
 
 
+	/**
+	 * Creates a new view object
+	 *
+	 * @param \Aimeos\MW\Config\Iface $config Configuration object
+	 * @return \Aimeos\MW\View\Iface View object
+	 */
 	protected static function createView( \Aimeos\MW\Config\Iface $config )
 	{
 		$tmplpaths = array_merge_recursive(
@@ -134,11 +163,4 @@ class TestHelperJobs
 
 		return $view;
 	}
-
-
-	public static function errorHandler( $code, $message, $file, $row )
-	{
-		return true;
-	}
-
 }

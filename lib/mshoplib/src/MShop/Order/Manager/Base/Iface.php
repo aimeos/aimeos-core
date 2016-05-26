@@ -42,6 +42,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
+	 * @return null
 	 */
 	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = '' );
 
@@ -51,6 +52,7 @@ interface Iface
 	 *
 	 * @param integer $lock Lock value (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 * @param string $type Order type if a customer can have more than one order at once
+	 * @return null
 	 * @throws \Aimeos\MShop\Order\Exception if the lock value is invalid
 	 */
 	public function setSessionLock( $lock, $type = '' );
@@ -72,6 +74,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
 	 * @param integer $parts Bitmap of the basket parts that should be stored
+	 * @return null
 	 */
 	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 }
