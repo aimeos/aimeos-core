@@ -114,9 +114,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	private function addPriceListData( array $testdata, array $refIds )
 	{
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 		$priceListManager = $priceManager->getSubManager( 'lists', 'Standard' );
-		$priceListTypeManager = $priceListManager->getSubManager( 'type', 'Standard' );
 
 		$value = $ship = $domain = $code = array();
 		foreach( $testdata['price/lists'] as $dataset )
@@ -176,12 +174,12 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Returns the price IDs for the given data
 	 *
-	 * @param string $value Price value
-	 * @param string $ship Price shipping costs
+	 * @param array $value Price values
+	 * @param array $ship Price shipping costs
 	 * @param array $typeIds List of price type IDs
 	 * @param array Associative list of identifiers as keys and price IDs as values
 	 */
-	protected function getPriceIds( $value, $ship, array $typeIds )
+	protected function getPriceIds( array $value, array $ship, array $typeIds )
 	{
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 
@@ -234,13 +232,13 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Returns the price type IDs for the given domain and code
+	 * Returns the price type IDs for the given domains and codes
 	 *
-	 * @param string $domain Domain the price type is for
-	 * @param string $code Code the price type is for
+	 * @param array $domain Domain the price type is for
+	 * @param array $code Code the price type is for
 	 * @return array List of price type IDs
 	 */
-	protected function getPriceTypeIds( $domain, $code )
+	protected function getPriceTypeIds( array $domain, array $code )
 	{
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
