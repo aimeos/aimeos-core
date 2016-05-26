@@ -75,16 +75,6 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 				$this->count[$name]++;
 			}
 
-			switch( $adapter )
-			{
-				case 'sqlite':
-				case 'sqlite3':
-					// SQLite uses page locking which prevents a second connection from
-					// reading from tables which are already in use. Fortunately, it is
-					// possible withing the same connection to do the update.
-					return $this->connections[$name][0];
-			}
-
 			return array_pop( $this->connections[$name] );
 
 		}
