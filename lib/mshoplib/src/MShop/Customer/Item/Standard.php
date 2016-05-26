@@ -18,11 +18,8 @@ namespace Aimeos\MShop\Customer\Item;
  * @package MShop
  * @subpackage Customer
  */
-class Standard
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
-	implements \Aimeos\MShop\Customer\Item\Iface
+class Standard extends Base implements Iface
 {
-	private $billingaddress;
 	private $values;
 	private $helper;
 	private $salt;
@@ -42,37 +39,8 @@ class Standard
 		array $listItems = array(), array $refItems = array(), $salt = '',
 		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null )
 	{
-		parent::__construct( 'customer.', $values, $listItems, $refItems );
+		parent::__construct( $address, $values, $listItems, $refItems );
 
-		foreach( $values as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'customer.salutation': $address->setSalutation( $value ); break;
-				case 'customer.company': $address->setCompany( $value ); break;
-				case 'customer.vatid': $address->setVatId( $value ); break;
-				case 'customer.title': $address->setTitle( $value ); break;
-				case 'customer.firstname': $address->setFirstname( $value ); break;
-				case 'customer.lastname': $address->setLastname( $value ); break;
-				case 'customer.address1': $address->setAddress1( $value ); break;
-				case 'customer.address2': $address->setAddress2( $value ); break;
-				case 'customer.address3': $address->setAddress3( $value ); break;
-				case 'customer.postal': $address->setPostal( $value ); break;
-				case 'customer.city': $address->setCity( $value ); break;
-				case 'customer.state': $address->setState( $value ); break;
-				case 'customer.languageid': $address->setLanguageId( $value ); break;
-				case 'customer.countryid': $address->setCountryId( $value ); break;
-				case 'customer.telephone': $address->setTelephone( $value ); break;
-				case 'customer.telefax': $address->setTelefax( $value ); break;
-				case 'customer.website': $address->setWebsite( $value ); break;
-				case 'customer.email': $address->setEmail( $value ); break;
-			}
-		}
-
-		// set modified flag to false
-		$address->setId( $this->getId() );
-
-		$this->billingaddress = $address;
 		$this->values = $values;
 		$this->helper = $helper;
 		$this->salt = $salt;
@@ -89,8 +57,9 @@ class Standard
 		parent::setId( $id );
 
 		// set modified flag
-		$this->billingaddress->setId( null );
-		$this->billingaddress->setId( $this->getId() );
+		$addr = $this->getPaymentAddress();
+		$addr->setId( null );
+		$addr->setId( $this->getId() );
 
 		return $this;
 	}
@@ -186,34 +155,6 @@ class Standard
 		if( $value == $this->getCode() ) { return $this; }
 
 		$this->values['customer.code'] = (string) $this->checkCode( $value );;
-		$this->setModified();
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the billingaddress of the customer item.
-	 *
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface
-	 */
-	public function getPaymentAddress()
-	{
-		return $this->billingaddress;
-	}
-
-
-	/**
-	 * Sets the billingaddress of the customer item.
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Address\Iface $address Billingaddress of the customer item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
-	 */
-	public function setPaymentAddress( \Aimeos\MShop\Common\Item\Address\Iface $address )
-	{
-		if( $address === $this->billingaddress && $address->isModified() === false ) { return $this; }
-
-		$this->billingaddress = $address;
 		$this->setModified();
 
 		return $this;
@@ -354,28 +295,6 @@ class Standard
 
 
 	/**
-	 * Returns the item type
-	 *
-	 * @return string Item type, subtypes are separated by slashes
-	 */
-	public function getResourceType()
-	{
-		return 'customer';
-	}
-
-
-	/**
-	 * Tests if this item object was modified
-	 *
-	 * @return boolean True if modified, false if not
-	 */
-	public function isModified()
-	{
-		return parent::isModified() || $this->getPaymentAddress()->isModified();
-	}
-
-
-	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values
@@ -385,7 +304,6 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
-		$addr = $this->getPaymentAddress();
 
 		foreach( $list as $key => $value )
 		{
@@ -397,24 +315,6 @@ class Standard
 				case 'customer.status': $this->setStatus( $value ); break;
 				case 'customer.password': $this->setPassword( $value ); break;
 				case 'customer.dateverified': $this->setDateVerified( $value ); break;
-				case 'customer.salutation': $addr->setSalutation( $value ); break;
-				case 'customer.company': $addr->setCompany( $value ); break;
-				case 'customer.vatid': $addr->setVatID( $value ); break;
-				case 'customer.title': $addr->setTitle( $value ); break;
-				case 'customer.firstname': $addr->setFirstname( $value ); break;
-				case 'customer.lastname': $addr->setLastname( $value ); break;
-				case 'customer.address1': $addr->setAddress1( $value ); break;
-				case 'customer.address2': $addr->setAddress2( $value ); break;
-				case 'customer.address3': $addr->setAddress3( $value ); break;
-				case 'customer.postal': $addr->setPostal( $value ); break;
-				case 'customer.city': $addr->setCity( $value ); break;
-				case 'customer.state': $addr->setState( $value ); break;
-				case 'customer.languageid': $addr->setLanguageId( $value ); break;
-				case 'customer.countryid': $addr->setCountryId( $value ); break;
-				case 'customer.telephone': $addr->setTelephone( $value ); break;
-				case 'customer.email': $addr->setEmail( $value ); break;
-				case 'customer.telefax': $addr->setTelefax( $value ); break;
-				case 'customer.website': $addr->setWebsite( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -438,35 +338,8 @@ class Standard
 		$list['customer.status'] = $this->getStatus();
 		$list['customer.password'] = $this->getPassword();
 		$list['customer.dateverified'] = $this->getDateVerified();
-		$list['customer.salutation'] = $this->getPaymentAddress()->getSalutation();
-		$list['customer.company'] = $this->getPaymentAddress()->getCompany();
-		$list['customer.vatid'] = $this->getPaymentAddress()->getVatID();
-		$list['customer.title'] = $this->getPaymentAddress()->getTitle();
-		$list['customer.firstname'] = $this->getPaymentAddress()->getFirstname();
-		$list['customer.lastname'] = $this->getPaymentAddress()->getLastname();
-		$list['customer.address1'] = $this->getPaymentAddress()->getAddress1();
-		$list['customer.address2'] = $this->getPaymentAddress()->getAddress2();
-		$list['customer.address3'] = $this->getPaymentAddress()->getAddress3();
-		$list['customer.postal'] = $this->getPaymentAddress()->getPostal();
-		$list['customer.city'] = $this->getPaymentAddress()->getCity();
-		$list['customer.state'] = $this->getPaymentAddress()->getState();
-		$list['customer.languageid'] = $this->getPaymentAddress()->getLanguageId();
-		$list['customer.countryid'] = $this->getPaymentAddress()->getCountryId();
-		$list['customer.telephone'] = $this->getPaymentAddress()->getTelephone();
-		$list['customer.email'] = $this->getPaymentAddress()->getEmail();
-		$list['customer.telefax'] = $this->getPaymentAddress()->getTelefax();
-		$list['customer.website'] = $this->getPaymentAddress()->getWebsite();
 
 		return $list;
-	}
-
-
-	/**
-	 * Implements deep copies for clones.
-	 */
-	public function __clone()
-	{
-		$this->billingaddress = clone $this->billingaddress;
 	}
 
 
