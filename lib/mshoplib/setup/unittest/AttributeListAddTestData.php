@@ -146,9 +146,6 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getPriceData( array $keys )
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
-
 		$value = $ship = $domain = $code = array();
 		foreach( $keys as $dataset )
 		{
@@ -180,9 +177,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	private function addAttributeListData( array $testdata, array $refIds )
 	{
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 		$attributeListManager = $attributeManager->getSubManager( 'lists', 'Standard' );
-		$attributeListTypeManager = $attributeListManager->getSubManager( 'type', 'Standard' );
 
 		$codes = $typeCodes = array();
 		foreach( $testdata['attribute/lists'] as $dataset )
