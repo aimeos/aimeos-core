@@ -493,13 +493,13 @@ abstract class Base
 	 * @param integer $what Test for the specific type of completeness
 	 * @throws \Aimeos\MShop\Order\Exception if there are no products in the basket
 	 */
-	public function check( $what = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL )
+	public function check( $what = self::PARTS_ALL )
 	{
 		$this->checkParts( $what );
 
 		$this->notifyListeners( 'check.before', $what );
 
-		if( ( $what & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) && ( count( $this->products ) < 1 ) ) {
+		if( ( $what & self::PARTS_PRODUCT ) && ( count( $this->products ) < 1 ) ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Basket empty' ) );
 		}
 
@@ -537,7 +537,7 @@ abstract class Base
 	{
 		$value = (int) $value;
 
-		if( $value < \Aimeos\MShop\Order\Item\Base\Base::PARTS_NONE || $value > \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL ) {
+		if( $value < self::PARTS_NONE || $value > self::PARTS_ALL ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
 		}
 	}
@@ -547,6 +547,7 @@ abstract class Base
 	 * Checks if the price uses the same currency as the price in the basket.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
+	 * @return null;
 	 */
 	abstract protected function checkPrice( \Aimeos\MShop\Price\Item\Iface $item );
 

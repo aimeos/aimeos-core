@@ -810,8 +810,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
-	 * @param array $langIds List of two letter ISO language codes
-	 * @param string $prodId Product ID to save the label for
+	 * @param string $prodIds Product ID to save the label for
 	 */
 	protected function saveLabels( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $prodIds )
 	{
