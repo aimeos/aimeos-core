@@ -146,13 +146,12 @@ class Standard
 		{
 			$langid = $this->getContext()->getLocale()->getLanguageId();
 
-			$temp = array(
+			$expr = array(
 				$object->compare( '==', 'product.property.languageid', null ),
 				$object->compare( '==', 'product.property.languageid', $langid ),
 			);
-			$expr[] = $object->combine( '||', $temp );
 
-			$object->setConditions( $object->combine( '&&', $expr ) );
+			$object->setConditions( $object->combine( '||', $expr ) );
 		}
 
 		return $object;
