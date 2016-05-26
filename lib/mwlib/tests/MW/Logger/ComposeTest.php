@@ -14,9 +14,11 @@ class ComposeTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$loggers[] = new \Aimeos\MW\Logger\File( 'tmp/error1.log', \Aimeos\MW\Logger\Base::ERR );
-		$loggers[] = new \Aimeos\MW\Logger\File( 'tmp/error2.log', \Aimeos\MW\Logger\Base::INFO, array( 'test' ) );
-		$loggers[] = new \Aimeos\MW\Logger\File( 'tmp/error3.log', \Aimeos\MW\Logger\Base::DEBUG );
+		$loggers = array(
+			new \Aimeos\MW\Logger\File( 'tmp/error1.log', \Aimeos\MW\Logger\Base::ERR ),
+			new \Aimeos\MW\Logger\File( 'tmp/error2.log', \Aimeos\MW\Logger\Base::INFO, array( 'test' ) ),
+			new \Aimeos\MW\Logger\File( 'tmp/error3.log', \Aimeos\MW\Logger\Base::DEBUG ),
+		);
 
 		$this->object = new \Aimeos\MW\Logger\Compose( $loggers );
 	}

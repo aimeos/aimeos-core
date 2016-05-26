@@ -44,28 +44,7 @@ class Bootstrap
 
 		self::$includePaths = $this->getIncludePaths();
 		$this->registerAutoloader();
-
-		foreach( $this->getManifests( $extdirs ) as $location => $manifest )
-		{
-			if( isset( $this->extensions[$manifest['name']] ) )
-			{
-				$location2 = $this->extensions[$manifest['name']]['location'];
-				$msg = 'Extension "%1$s" exists twice in "%2$s" and in "%3$s"';
-				throw new \Exception( sprintf( $msg, $manifest['name'], $location, $location2 ) );
-			}
-
-			if( !isset( $manifest['depends'] ) || !is_array( $manifest['depends'] ) ) {
-				throw new \Exception( sprintf( 'Incorrect dependency configuration in manifest "%1$s"', $location ) );
-			}
-
-			$manifest['location'] = $location;
-			$this->extensions[$manifest['name']] = $manifest;
-
-			foreach( $manifest['depends'] as $name ) {
-				$this->dependencies[$manifest['name']][$name] = $name;
-			}
-		}
-
+		$this->addDependencies( $extdirs );
 		$this->addManifests( $this->dependencies );
 		self::$includePaths = $this->getIncludePaths();
 	}
@@ -337,6 +316,37 @@ class Bootstrap
 
 		if( is_file( __DIR__ . $ds . 'vendor' . $ds . 'autoload.php' ) ) {
 			require __DIR__ . $ds . 'vendor' . $ds . 'autoload.php';
+		}
+	}
+
+
+	/**
+	 * Adds the dependencies from the extensions
+	 *
+	 * @param array $extdirs List of extension directories
+	 * @throws \Exception If dependencies are incorrectly configured
+	 */
+	private function addDependencies( array $extdirs )
+	{
+		foreach( $this->getManifests( $extdirs ) as $location => $manifest )
+		{
+			if( isset( $this->extensions[$manifest['name']] ) )
+			{
+				$location2 = $this->extensions[$manifest['name']]['location'];
+				$msg = 'Extension "%1$s" exists twice in "%2$s" and in "%3$s"';
+				throw new \Exception( sprintf( $msg, $manifest['name'], $location, $location2 ) );
+			}
+
+			if( !isset( $manifest['depends'] ) || !is_array( $manifest['depends'] ) ) {
+				throw new \Exception( sprintf( 'Incorrect dependency configuration in manifest "%1$s"', $location ) );
+			}
+
+			$manifest['location'] = $location;
+			$this->extensions[$manifest['name']] = $manifest;
+
+			foreach( $manifest['depends'] as $name ) {
+				$this->dependencies[$manifest['name']][$name] = $name;
+			}
 		}
 	}
 
