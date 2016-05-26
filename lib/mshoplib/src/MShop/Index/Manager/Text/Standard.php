@@ -438,6 +438,44 @@ class Standard
 
 		try
 		{
+			/** mshop/index/manager/text/standard/insert/mysql
+			 * Inserts a new text record into the product index database
+			 *
+			 * @see mshop/index/manager/text/standard/insert/ansi
+			 */
+
+			/** mshop/index/manager/text/standard/insert/ansi
+			 * Inserts a new text record into the product index database
+			 *
+			 * During the product index rebuild, texts related to a product
+			 * will be stored in the index for this product. All records
+			 * are deleted before the new ones are inserted.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the order item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the rebuildIndex() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/index/manager/text/standard/cleanup/ansi
+			 * @see mshop/index/manager/text/standard/count/ansi
+			 * @see mshop/index/manager/text/standard/delete/ansi
+			 * @see mshop/index/manager/text/standard/insert/ansi
+			 * @see mshop/index/manager/text/standard/search/ansi
+			 * @see mshop/index/manager/text/standard/text/ansi
+			 */
+			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/standard/insert' );
+
 			foreach( $items as $item )
 			{
 				$parentId = $item->getId(); //  id is not $item->getId() for sub-products
@@ -446,44 +484,6 @@ class Standard
 				foreach( $item->getListItems( 'text' ) as $listItem ) {
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
-
-				/** mshop/index/manager/text/standard/insert/mysql
-				 * Inserts a new text record into the product index database
-				 *
-				 * @see mshop/index/manager/text/standard/insert/ansi
-				 */
-
-				/** mshop/index/manager/text/standard/insert/ansi
-				 * Inserts a new text record into the product index database
-				 *
-				 * During the product index rebuild, texts related to a product
-				 * will be stored in the index for this product. All records
-				 * are deleted before the new ones are inserted.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the order item to the statement before they are
-				 * sent to the database server. The number of question marks must
-				 * be the same as the number of columns listed in the INSERT
-				 * statement. The order of the columns must correspond to the
-				 * order in the rebuildIndex() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/index/manager/text/standard/cleanup/ansi
-				 * @see mshop/index/manager/text/standard/count/ansi
-				 * @see mshop/index/manager/text/standard/delete/ansi
-				 * @see mshop/index/manager/text/standard/insert/ansi
-				 * @see mshop/index/manager/text/standard/search/ansi
-				 * @see mshop/index/manager/text/standard/text/ansi
-				 */
-				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/standard/insert' );
 
 				foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
 				{
@@ -869,8 +869,8 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
-	 * @param array $prodIds Associative list of item ID / product IDs pairs
 	 * @param array $listTypes Associative list of item ID / list type code pairs
+	 * @param array $prodIds Associative list of item ID / product IDs pairs
 	 * @throws \Aimeos\MShop\Index\Exception If no list type for the item is available
 	 */
 	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item,

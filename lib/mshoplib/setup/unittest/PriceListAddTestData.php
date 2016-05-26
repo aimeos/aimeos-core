@@ -133,47 +133,12 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ship[] = $exp[4];
 		}
 
-		$search = $priceTypeManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'price.type.domain', $domain ),
-			$search->compare( '==', 'price.type.code', $code ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$typeids = array();
-		foreach( $priceTypeManager->searchItems( $search ) as $item ) {
-			$typeids[] = $item->getId();
-		}
-
-		$search = $priceManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'price.value', $value ),
-			$search->compare( '==', 'price.costs', $ship ),
-			$search->compare( '==', 'price.typeid', $typeids )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$parentIds = array();
-		foreach( $priceManager->searchItems( $search ) as $item ) {
-			$parentIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
-		}
-
-		$listItemTypeIds = array();
-		$listItemType = $priceListTypeManager->createItem();
 
 		$this->conn->begin();
 
-		foreach( $testdata['price/lists/type'] as $key => $dataset )
-		{
-			$listItemType->setId( null );
-			$listItemType->setCode( $dataset['code'] );
-			$listItemType->setDomain( $dataset['domain'] );
-			$listItemType->setLabel( $dataset['label'] );
-			$listItemType->setStatus( $dataset['status'] );
-
-			$priceListTypeManager->saveItem( $listItemType );
-			$listItemTypeIds[$key] = $listItemType->getId();
-		}
+		$typeids = $this->getPriceTypeIds( $domain, $code );
+		$parentIds = $this->getPriceIds( $value, $ship, $typeids );
+		$listItemTypeIds = $this->getPriceListTypeIds( $testdata['price/lists/type'] );
 
 		$listItem = $priceListManager->createItem();
 		foreach( $testdata['price/lists'] as $dataset )
@@ -205,5 +170,93 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$this->conn->commit();
+	}
+
+
+	/**
+	 * Returns the price IDs for the given data
+	 *
+	 * @param string $value Price value
+	 * @param string $ship Price shipping costs
+	 * @param array $typeIds List of price type IDs
+	 * @param array Associative list of identifiers as keys and price IDs as values
+	 */
+	protected function getPriceIds( $value, $ship, array $typeIds )
+	{
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+
+		$search = $priceManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'price.value', $value ),
+			$search->compare( '==', 'price.costs', $ship ),
+			$search->compare( '==', 'price.typeid', $typeIds )
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$parentIds = array();
+		foreach( $priceManager->searchItems( $search ) as $item ) {
+			$parentIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
+		}
+
+		return $parentIds;
+	}
+
+
+	/**
+	 * Returns the price list type IDs for the given data sets
+	 *
+	 * @param array $data Associative list of identifiers as keys and data sets as values
+	 * @return array Associative list of identifiers as keys and list type IDs as values
+	 */
+	protected function getPriceListTypeIds( array $data )
+	{
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$priceListManager = $priceManager->getSubManager( 'lists', 'Standard' );
+		$priceListTypeManager = $priceListManager->getSubManager( 'type', 'Standard' );
+
+		$listItemTypeIds = array();
+		$listItemType = $priceListTypeManager->createItem();
+
+		foreach( $data as $key => $dataset )
+		{
+			$listItemType->setId( null );
+			$listItemType->setCode( $dataset['code'] );
+			$listItemType->setDomain( $dataset['domain'] );
+			$listItemType->setLabel( $dataset['label'] );
+			$listItemType->setStatus( $dataset['status'] );
+
+			$priceListTypeManager->saveItem( $listItemType );
+			$listItemTypeIds[$key] = $listItemType->getId();
+		}
+
+		return $listItemTypeIds;
+	}
+
+
+	/**
+	 * Returns the price type IDs for the given domain and code
+	 *
+	 * @param string $domain Domain the price type is for
+	 * @param string $code Code the price type is for
+	 * @return array List of price type IDs
+	 */
+	protected function getPriceTypeIds( $domain, $code )
+	{
+		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
+
+		$search = $priceTypeManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'price.type.domain', $domain ),
+			$search->compare( '==', 'price.type.code', $code ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$typeids = array();
+		foreach( $priceTypeManager->searchItems( $search ) as $item ) {
+			$typeids[] = $item->getId();
+		}
+
+		return $typeids;
 	}
 }

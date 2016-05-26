@@ -220,6 +220,25 @@ class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 			throw new \Exception( 'Unable to allocate color' );
 		}
 
+		$image = $this->getImage( $img );
+
+		if( imagedestroy( $img ) === false ) {
+			throw new \Exception( 'Unable to destroy image' );
+		}
+
+		return 'data:' . $mime . ';base64,' . base64_encode( $image );
+	}
+
+
+	/**
+	 * Returns the GIF or PNG image for the given resource
+	 *
+	 * @param resource $img GD image resource
+	 * @return string Binary image data
+	 * @throws \Exception If PHP GD isn't installed
+	 */
+	protected function getImage( $img )
+	{
 		try
 		{
 			ob_start();
@@ -240,11 +259,5 @@ class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 			ob_end_clean();
 			throw $e;
 		}
-
-		if( imagedestroy( $img ) === false ) {
-			throw new \Exception( 'Unable to destroy image' );
-		}
-
-		return 'data:' . $mime . ';base64,' . base64_encode( $image );
 	}
 }

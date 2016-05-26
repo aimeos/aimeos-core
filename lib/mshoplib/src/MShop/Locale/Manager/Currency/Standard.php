@@ -367,11 +367,11 @@ class Standard
 
 			$find = array( ':cond', ':order', ':columns', ':start', ':size' );
 			$replace = array(
-					$search->getConditionString( $types, $translations ),
-					$search->getSortationString( $types, $translations ),
-					( $columns ? ', ' . $columns : '' ),
-					$search->getSliceStart(),
-					$search->getSliceSize(),
+				$search->getConditionString( $types, $translations ),
+				$search->getSortationString( $types, $translations ),
+				( $columns ? ', ' . $columns : '' ),
+				$search->getSliceStart(),
+				$search->getSliceSize(),
 			);
 
 			/** mshop/locale/manager/currency/standard/search/mysql
@@ -447,71 +447,8 @@ class Standard
 				throw $e;
 			}
 
-			if( $total !== null )
-			{
-				/** mshop/locale/manager/currency/standard/count/mysql
-				 * Counts the number of records matched by the given criteria in the database
-				 *
-				 * @see mshop/locale/manager/currency/standard/count/ansi
-				 */
-
-				/** mshop/locale/manager/currency/standard/count/ansi
-				 * Counts the number of records matched by the given criteria in the database
-				 *
-				 * Counts all records matched by the given criteria from the attribute
-				 * database. The records must be from one of the sites that are
-				 * configured via the context item. If the current site is part of
-				 * a tree of sites, the statement can count all records from the
-				 * current site and the complete sub-tree of sites.
-				 *
-				 * As the records can normally be limited by criteria from sub-managers,
-				 * their tables must be joined in the SQL context. This is done by
-				 * using the "internaldeps" property from the definition of the ID
-				 * column of the sub-managers. These internal dependencies specify
-				 * the JOIN between the tables and the used columns for joining. The
-				 * ":joins" placeholder is then replaced by the JOIN strings from
-				 * the sub-managers.
-				 *
-				 * To limit the records matched, conditions can be added to the given
-				 * criteria object. It can contain comparisons like column names that
-				 * must match specific values which can be combined by AND, OR or NOT
-				 * operators. The resulting string of SQL conditions replaces the
-				 * ":cond" placeholder before the statement is sent to the database
-				 * server.
-				 *
-				 * Both, the strings for ":joins" and for ":cond" are the same as for
-				 * the "search" SQL statement.
-				 *
-				 * Contrary to the "search" statement, it doesn't return any records
-				 * but instead the number of records that have been found. As counting
-				 * thousands of records can be a long running task, the maximum number
-				 * of counted records is limited for performance reasons.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for counting items
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/locale/manager/currency/standard/insert/ansi
-				 * @see mshop/locale/manager/currency/standard/update/ansi
-				 * @see mshop/locale/manager/currency/standard/delete/ansi
-				 * @see mshop/locale/manager/currency/standard/search/ansi
-				 */
-				$path = 'mshop/locale/manager/currency/standard/count';
-
-				$sql = $this->getSqlConfig( $path );
-				$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
-
-				$row = $results->fetch();
-				$results->finish();
-
-				if( $row === false ) {
-					throw new \Aimeos\MShop\Locale\Exception( 'No total results value found' );
-				}
-
-				$total = $row['count'];
+			if( $total !== null ) {
+				$total = $this->getTotal( $conn, $find, $replace );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -691,5 +628,82 @@ class Standard
 	protected function createItemBase( array $data = array() )
 	{
 		return new \Aimeos\MShop\Locale\Item\Currency\Standard( $data );
+	}
+
+
+	/**
+	 * Returns the total number of items found for the conditions
+	 *
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param array $find List of markers that should be replaced in the SQL statement
+	 * @param array $replace List of replacements for the markers in the SQL statement
+	 * @throws \Aimeos\MShop\Locale\Exception If no total value was found
+	 * @return integer Total number of found items
+	 */
+	protected function getTotal( \Aimeos\MW\DB\Connection\Iface $conn, array $find, array $replace )
+	{
+		/** mshop/locale/manager/currency/standard/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/locale/manager/currency/standard/count/ansi
+		 */
+
+		/** mshop/locale/manager/currency/standard/count/ansi
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the attribute
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/currency/standard/insert/ansi
+		 * @see mshop/locale/manager/currency/standard/update/ansi
+		 * @see mshop/locale/manager/currency/standard/delete/ansi
+		 * @see mshop/locale/manager/currency/standard/search/ansi
+		 */
+		$path = 'mshop/locale/manager/currency/standard/count';
+
+		$sql = $this->getSqlConfig( $path );
+		$results = $this->getSearchResults( $conn, str_replace( $find, $replace, $sql ) );
+
+		$row = $results->fetch();
+		$results->finish();
+
+		if( $row === false ) {
+			throw new \Aimeos\MShop\Locale\Exception( 'No total results value found' );
+		}
+
+		return $row['count'];
 	}
 }

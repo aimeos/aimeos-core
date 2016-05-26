@@ -417,33 +417,12 @@ class Standard
 		if( empty( $items ) ) { return; }
 
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Product\\Item\\Iface', $items );
+		$listItems = $this->getListItems( $items );
 
-		$ids = $listItems = array();
 		$context = $this->getContext();
-		$listManager = \Aimeos\MShop\Factory::createManager( $context, 'catalog/lists' );
-
-		foreach( $items as $id => $item ) {
-			$ids[] = $id;
-		}
-
-		$search = $listManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'catalog.lists.refid', $ids ),
-			$search->compare( '==', 'catalog.lists.domain', 'product' ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7FFFFFFF );
-
-		$result = $listManager->searchItems( $search );
-
-		foreach( $result as $listItem ) {
-			$listItems[$listItem->getRefId()][] = $listItem;
-		}
-
-		$date = date( 'Y-m-d H:i:s' );
 		$editor = $context->getEditor();
 		$siteid = $context->getLocale()->getSiteId();
+		$date = date( 'Y-m-d H:i:s' );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -451,45 +430,45 @@ class Standard
 
 		try
 		{
+			/** mshop/index/manager/catalog/standard/insert/mysql
+			 * Inserts a new catalog record into the product index database
+			 *
+			 * @see mshop/index/manager/catalog/standard/insert/ansi
+			 */
+
+			/** mshop/index/manager/catalog/standard/insert/ansi
+			 * Inserts a new catalog record into the product index database
+			 *
+			 * During the product index rebuild, categories related to a
+			 * product will be stored in the index for this product. All
+			 * records are deleted before the new ones are inserted.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the order item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the rebuildIndex() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/index/manager/catalog/standard/cleanup/ansi
+			 * @see mshop/index/manager/catalog/standard/delete/ansi
+			 * @see mshop/index/manager/catalog/standard/search/ansi
+			 * @see mshop/index/manager/catalog/standard/count/ansi
+			 */
+			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/catalog/standard/insert' );
+
 			foreach( $items as $id => $item )
 			{
 				$parentId = $item->getId(); // $id is not $item->getId() for sub-products
-
-				/** mshop/index/manager/catalog/standard/insert/mysql
-				 * Inserts a new catalog record into the product index database
-				 *
-				 * @see mshop/index/manager/catalog/standard/insert/ansi
-				 */
-
-				/** mshop/index/manager/catalog/standard/insert/ansi
-				 * Inserts a new catalog record into the product index database
-				 *
-				 * During the product index rebuild, categories related to a
-				 * product will be stored in the index for this product. All
-				 * records are deleted before the new ones are inserted.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the order item to the statement before they are
-				 * sent to the database server. The number of question marks must
-				 * be the same as the number of columns listed in the INSERT
-				 * statement. The order of the columns must correspond to the
-				 * order in the rebuildIndex() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/index/manager/catalog/standard/cleanup/ansi
-				 * @see mshop/index/manager/catalog/standard/delete/ansi
-				 * @see mshop/index/manager/catalog/standard/search/ansi
-				 * @see mshop/index/manager/catalog/standard/count/ansi
-				 */
-				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/catalog/standard/insert' );
 
 				if( !array_key_exists( $parentId, $listItems ) ) { continue; }
 
@@ -644,6 +623,40 @@ class Standard
 		$cfgPathCount = 'mshop/index/manager/catalog/standard/count';
 
 		return $this->searchItemsIndexBase( $search, $ref, $total, $cfgPathSearch, $cfgPathCount );
+	}
+
+
+	/**
+	 * Returns the list items referencing the given products
+	 *
+	 * @param array $items List of product items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @return array Associative list of product IDs as keys and lists of list items as values
+	 */
+	protected function getListItems( array $items )
+	{
+		$ids = $listItems = array();
+		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
+
+		foreach( $items as $id => $item ) {
+			$ids[] = $id;
+		}
+
+		$search = $listManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'catalog.lists.refid', $ids ),
+			$search->compare( '==', 'catalog.lists.domain', 'product' ),
+			$search->getConditions(),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7FFFFFFF );
+
+		$result = $listManager->searchItems( $search );
+
+		foreach( $result as $listItem ) {
+			$listItems[$listItem->getRefId()][] = $listItem;
+		}
+
+		return $listItems;
 	}
 
 

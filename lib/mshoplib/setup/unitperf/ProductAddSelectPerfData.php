@@ -15,7 +15,7 @@ namespace Aimeos\MW\Setup\Task;
  */
 class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
 {
-	private $count = 1000;
+	private $count = 10;
 
 
 	/**

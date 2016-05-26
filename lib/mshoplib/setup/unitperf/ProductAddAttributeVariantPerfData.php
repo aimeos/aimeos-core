@@ -45,90 +45,21 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 		$this->msg( 'Adding product variant attribute performance data', 0 );
 
 
-		$context = $this->getContext();
-
-		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
-		$attrTypeManager = $attrManager->getSubManager( 'type' );
-
-		$search = $attrTypeManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'width' ) );
-		$result = $attrTypeManager->searchItems( $search );
-
-		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No attribute type "size" found' );
-		}
-
-
 		$this->txBegin();
 
-		$attrItem = $attrManager->createItem();
-		$attrItem->setTypeId( $attrTypeItem->getId() );
-		$attrItem->setDomain( 'product' );
-		$attrItem->setStatus( 1 );
-
-		$pos = 0;
-		$attrListWidth = array();
-
-		foreach( array( 'tight', 'normal', 'wide' ) as $size )
-		{
-			$attrItem->setId( null );
-			$attrItem->setCode( $size );
-			$attrItem->setLabel( $size );
-			$attrItem->setPosition( $pos++ );
-
-			$attrManager->saveItem( $attrItem );
-
-			$attrListWidth[$attrItem->getId()] = clone $attrItem;
-		}
-
-
-
-		$search = $attrTypeManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'length' ) );
-		$result = $attrTypeManager->searchItems( $search );
-
-		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No attribute type "size" found' );
-		}
-
-		$attrItem = $attrManager->createItem();
-		$attrItem->setTypeId( $attrTypeItem->getId() );
-		$attrItem->setDomain( 'product' );
-		$attrItem->setStatus( 1 );
-
-		$pos = 0;
-		$attrListLength = array();
-
-		foreach( array( 'short', 'normal', 'long' ) as $size )
-		{
-			$attrItem->setId( null );
-			$attrItem->setCode( $size );
-			$attrItem->setLabel( $size );
-			$attrItem->setPosition( $pos++ );
-
-			$attrManager->saveItem( $attrItem );
-
-			$attrListLength[$attrItem->getId()] = clone $attrItem;
-		}
+		$attrListWidth = $this->getAttributeWidthItems();
+		$attrListLength = $this->getAttributeLengthItems();
 
 		$this->txCommit();
 
 
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
-		$productListManager = $productManager->getSubManager( 'lists' );
-		$productListTypeManager = $productListManager->getSubManager( 'type' );
+		$context = $this->getContext();
 
-		$expr = array();
-		$search = $productListTypeManager->createSearch();
-		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'attribute' );
-		$expr[] = $search->compare( '==', 'product.lists.type.code', 'variant' );
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$types = $productListTypeManager->searchItems( $search );
+		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+		$productListManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
+		$productListTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
 
-		if( ( $productListTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product list type item not found' );
-		}
-
+		$productListTypeItem = $productListTypeManager->findItem( 'variant', array(), 'attribute' );
 
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
@@ -183,5 +114,81 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 
 
 		$this->status( 'done' );
+	}
+
+
+	/**
+	 * Creates and returns the attribute width items
+	 *
+	 * @return array Associative list of IDs as keys and items implementing \Aimeos\MShop\Attribute\Item\Iface as values
+	 */
+	protected function getAttributeWidthItems()
+	{
+		$context = $this->getContext();
+
+		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$attrTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute/type' );
+
+		$attrTypeItem = $attrTypeManager->findItem( 'width', array(), 'product' );
+
+		$attrItem = $attrManager->createItem();
+		$attrItem->setTypeId( $attrTypeItem->getId() );
+		$attrItem->setDomain( 'product' );
+		$attrItem->setStatus( 1 );
+
+		$pos = 0;
+		$attrListWidth = array();
+
+		foreach( array( 'tight', 'normal', 'wide' ) as $size )
+		{
+			$attrItem->setId( null );
+			$attrItem->setCode( $size );
+			$attrItem->setLabel( $size );
+			$attrItem->setPosition( $pos++ );
+
+			$attrManager->saveItem( $attrItem );
+
+			$attrListWidth[$attrItem->getId()] = clone $attrItem;
+		}
+
+		return $attrListWidth;
+	}
+
+
+	/**
+	 * Creates and returns the attribute length items
+	 *
+	 * @return array Associative list of IDs as keys and items implementing \Aimeos\MShop\Attribute\Item\Iface as values
+	 */
+	protected function getAttributeLengthItems()
+	{
+		$context = $this->getContext();
+
+		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+		$attrTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute/type' );
+
+		$attrTypeItem = $attrTypeManager->findItem( 'length', array(), 'product' );
+
+		$attrItem = $attrManager->createItem();
+		$attrItem->setTypeId( $attrTypeItem->getId() );
+		$attrItem->setDomain( 'product' );
+		$attrItem->setStatus( 1 );
+
+		$pos = 0;
+		$attrListLength = array();
+
+		foreach( array( 'short', 'normal', 'long' ) as $size )
+		{
+			$attrItem->setId( null );
+			$attrItem->setCode( $size );
+			$attrItem->setLabel( $size );
+			$attrItem->setPosition( $pos++ );
+
+			$attrManager->saveItem( $attrItem );
+
+			$attrListLength[$attrItem->getId()] = clone $attrItem;
+		}
+
+		return $attrListLength;
 	}
 }

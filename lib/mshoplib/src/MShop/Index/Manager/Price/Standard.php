@@ -466,6 +466,42 @@ class Standard
 
 		try
 		{
+			/** mshop/index/manager/price/standard/insert/mysql
+			 * Inserts a new price record into the product index database
+			 *
+			 * @see mshop/index/manager/price/standard/insert/ansi
+			 */
+
+			/** mshop/index/manager/price/standard/insert/ansi
+			 * Inserts a new price record into the product index database
+			 *
+			 * During the product index rebuild, prices related to a product
+			 * will be stored in the index for this product. All records
+			 * are deleted before the new ones are inserted.
+			 *
+			 * The SQL statement must be a string suitable for being used as
+			 * prepared statement. It must include question marks for binding
+			 * the values from the order item to the statement before they are
+			 * sent to the database server. The number of question marks must
+			 * be the same as the number of columns listed in the INSERT
+			 * statement. The order of the columns must correspond to the
+			 * order in the rebuildIndex() method, so the correct values are
+			 * bound to the columns.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for inserting records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/index/manager/price/standard/cleanup/ansi
+			 * @see mshop/index/manager/price/standard/delete/ansi
+			 * @see mshop/index/manager/price/standard/search/ansi
+			 * @see mshop/index/manager/price/standard/count/ansi
+			 */
+			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/price/standard/insert' );
+
 			foreach( $items as $item )
 			{
 				$listTypes = array();
@@ -473,72 +509,7 @@ class Standard
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
-				/** mshop/index/manager/price/standard/insert/mysql
-				 * Inserts a new price record into the product index database
-				 *
-				 * @see mshop/index/manager/price/standard/insert/ansi
-				 */
-
-				/** mshop/index/manager/price/standard/insert/ansi
-				 * Inserts a new price record into the product index database
-				 *
-				 * During the product index rebuild, prices related to a product
-				 * will be stored in the index for this product. All records
-				 * are deleted before the new ones are inserted.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the order item to the statement before they are
-				 * sent to the database server. The number of question marks must
-				 * be the same as the number of columns listed in the INSERT
-				 * statement. The order of the columns must correspond to the
-				 * order in the rebuildIndex() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2014.03
-				 * @category Developer
-				 * @see mshop/index/manager/price/standard/cleanup/ansi
-				 * @see mshop/index/manager/price/standard/delete/ansi
-				 * @see mshop/index/manager/price/standard/search/ansi
-				 * @see mshop/index/manager/price/standard/count/ansi
-				 */
-				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/price/standard/insert' );
-
-				foreach( $item->getRefItems( 'price' ) as $refId => $refItem )
-				{
-					if( !isset( $listTypes[$refId] ) )
-					{
-						$msg = sprintf( 'List type for price item with ID "%1$s" not available', $refId );
-						throw new \Aimeos\MShop\Index\Exception( $msg );
-					}
-
-					foreach( $listTypes[$refId] as $listType )
-					{
-						$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmt->bind( 3, $refId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmt->bind( 4, $refItem->getCurrencyId() );
-						$stmt->bind( 5, $listType );
-						$stmt->bind( 6, $refItem->getType() );
-						$stmt->bind( 7, $refItem->getValue() );
-						$stmt->bind( 8, $refItem->getCosts() );
-						$stmt->bind( 9, $refItem->getRebate() );
-						$stmt->bind( 10, $refItem->getTaxRate() );
-						$stmt->bind( 11, $refItem->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmt->bind( 12, $date ); //mtime
-						$stmt->bind( 13, $editor );
-						$stmt->bind( 14, $date ); //ctime
-
-						try {
-							$stmt->execute()->finish();
-						} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
-					}
-				}
+				$this->savePrices( $stmt, $item, $listTypes );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -717,5 +688,53 @@ class Standard
 		}
 
 		return $this->subManagers;
+	}
+
+
+	/**
+	 * Saves the text items referenced indirectly by products
+	 *
+	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
+	 * @param array $listTypes Associative list of item ID / list type code pairs
+	 * @throws \Aimeos\MShop\Index\Exception If no list type for the item is available
+	 */
+	protected function savePrices( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $listTypes )
+	{
+		$context = $this->getContext();
+		$siteid = $context->getLocale()->getSiteId();
+		$editor = $context->getEditor();
+		$date = date( 'Y-m-d H:i:s' );
+
+		foreach( $item->getRefItems( 'price' ) as $refId => $refItem )
+		{
+			if( !isset( $listTypes[$refId] ) )
+			{
+				$msg = sprintf( 'List type for price item with ID "%1$s" not available', $refId );
+				throw new \Aimeos\MShop\Index\Exception( $msg );
+			}
+
+			foreach( $listTypes[$refId] as $listType )
+			{
+				$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 3, $refId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 4, $refItem->getCurrencyId() );
+				$stmt->bind( 5, $listType );
+				$stmt->bind( 6, $refItem->getType() );
+				$stmt->bind( 7, $refItem->getValue() );
+				$stmt->bind( 8, $refItem->getCosts() );
+				$stmt->bind( 9, $refItem->getRebate() );
+				$stmt->bind( 10, $refItem->getTaxRate() );
+				$stmt->bind( 11, $refItem->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 12, $date ); //mtime
+				$stmt->bind( 13, $editor );
+				$stmt->bind( 14, $date ); //ctime
+
+				try {
+					$stmt->execute()->finish();
+				} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+			}
+		}
 	}
 }

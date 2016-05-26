@@ -15,7 +15,7 @@ namespace Aimeos\MW\Setup\Task;
  */
 class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 {
-	private $count = 9000;
+	private $count = 90;
 
 
 	/**
