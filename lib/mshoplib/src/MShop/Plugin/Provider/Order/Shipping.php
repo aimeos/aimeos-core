@@ -62,11 +62,26 @@ class Shipping
 			return true;
 		}
 
-		$price = $delivery->getPrice();
+		$this->checkThreshold( $order, $delivery->getPrice(), $config['threshold'] );
+
+		return true;
+	}
+
+
+	/**
+	 * Tests if the shipping threshold is reached and updates the price accordingly
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Delivery price item
+	 * @param array $threshold Associative list of currency/threshold pairs
+	 */
+	protected function checkThreshold( \Aimeos\MShop\Order\Item\Base\Iface $order,
+		\Aimeos\MShop\Price\Item\Iface $price, array $threshold )
+	{
 		$currency = $price->getCurrencyId();
 
-		if( !isset( $config['threshold'][$currency] ) ) {
-			return true;
+		if( !isset( $threshold[$currency] ) ) {
+			return;
 		}
 
 		$sum = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem();
@@ -75,17 +90,15 @@ class Shipping
 			$sum->addItem( $product->getPrice(), $product->getQuantity() );
 		}
 
-		if( $sum->getValue() + $sum->getRebate() >= $config['threshold'][$currency] && $price->getCosts() > '0.00' )
+		if( $sum->getValue() + $sum->getRebate() >= $threshold[$currency] && $price->getCosts() > '0.00' )
 		{
 			$price->setRebate( $price->getCosts() );
 			$price->setCosts( '0.00' );
 		}
-		else if( $sum->getValue() + $sum->getRebate() < $config['threshold'][$currency] && $price->getRebate() > '0.00' )
+		else if( $sum->getValue() + $sum->getRebate() < $threshold[$currency] && $price->getRebate() > '0.00' )
 		{
 			$price->setCosts( $price->getRebate() );
 			$price->setRebate( '0.00' );
 		}
-
-		return true;
 	}
 }
