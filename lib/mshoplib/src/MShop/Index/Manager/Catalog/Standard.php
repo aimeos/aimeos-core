@@ -485,7 +485,7 @@ class Standard
 
 					try {
 						$stmt->execute()->finish();
-					} catch( \Aimeos\MW\DB\Exception $e ) {; } // Ignore duplicates
+					} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
 				}
 			}
 

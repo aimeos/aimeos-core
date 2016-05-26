@@ -71,7 +71,6 @@ class Standard
 		)
 	);
 
-	private $langIds;
 	private $subManagers;
 
 
@@ -425,9 +424,6 @@ class Standard
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Product\\Item\\Iface', $items );
 
 		$context = $this->getContext();
-		$langIds = $this->getLanguageIds( $context->getLocale()->getSitePath() );
-
-
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -482,7 +478,7 @@ class Standard
 				}
 
 				$this->saveTexts( $stmt, $item, $listTypes, array( $parentId => array( $parentId ) ) );
-				$this->saveNames( $stmt, $item, $langIds, $parentId );
+				$this->saveLabels( $stmt, $item, array( $parentId ) );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -796,7 +792,7 @@ class Standard
 				}
 
 				$this->saveTexts( $stmt, $item, $listTypes, $prodIds );
-				$this->saveNames( $stmt, $item, array( $context->getLocale()->getLanguageId() ), $prodIds[$id] );
+				$this->saveLabels( $stmt, $item, $prodIds[$id] );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -817,25 +813,19 @@ class Standard
 	 * @param array $langIds List of two letter ISO language codes
 	 * @param string $prodId Product ID to save the label for
 	 */
-	protected function saveNames( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item,
-		array $langIds, $prodId )
+	protected function saveLabels( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $prodIds )
 	{
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
-		$nameList = array();
 
-		foreach( $item->getRefItems( 'text', 'name' ) as $refItem ) {
-			$nameList[$refItem->getLanguageId()] = $refItem;
-		}
-
-		foreach( $langIds as $langId )
+		if( $item->getRefItems( 'text', 'name' ) === array() )
 		{
-			if( !isset( $nameList[$langId] ) )
+			foreach( $prodIds as $prodId )
 			{
 				$this->saveText(
-					$stmt, $prodId, $siteid, null, $langId, 'default', 'name',
+					$stmt, $prodId, $siteid, null, null, 'default', 'name',
 					$item->getResourceType(), $item->getLabel(), $date, $editor
 				);
 			}
@@ -913,7 +903,7 @@ class Standard
 
 		try {
 			$stmt->execute()->finish();
-		} catch( \Aimeos\MW\DB\Exception $e ) {; } // Ignore duplicates
+		} catch( \Aimeos\MW\DB\Exception $e ) { echo $e->getMessage() . PHP_EOL; } // Ignore duplicates
 	}
 
 
@@ -978,32 +968,5 @@ class Standard
 		}
 
 		return $this->subManagers;
-	}
-
-
-	/**
-	 * Returns the configured langauge IDs for the given sites
-	 *
-	 * @param array $siteIds List of site IDs
-	 * @return array List of language IDs
-	 */
-	protected function getLanguageIds( array $siteIds )
-	{
-		if( !isset( $this->langIds ) )
-		{
-			$list = array();
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'locale' );
-
-			$search = $manager->createSearch( true );
-			$search->setConditions( $search->compare( '==', 'locale.siteid', $siteIds ) );
-
-			foreach( $manager->searchItems( $search ) as $item ) {
-				$list[$item->getLanguageId()] = null;
-			}
-
-			$this->langIds = array_keys( $list );
-		}
-
-		return $this->langIds;
 	}
 }
