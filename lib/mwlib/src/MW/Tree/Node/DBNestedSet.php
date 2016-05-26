@@ -17,8 +17,8 @@ namespace Aimeos\MW\Tree\Node;
  *
  * @package MW
  * @subpackage Tree
- * @property integer $nleft Left number of the nested set item
- * @property integer $nright Right number of the nested set item
+ * @property integer $left Left number of the nested set item
+ * @property integer $right Right number of the nested set item
  */
 class DBNestedSet extends \Aimeos\MW\Tree\Node\Standard
 {
