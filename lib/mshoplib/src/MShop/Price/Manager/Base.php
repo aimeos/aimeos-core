@@ -32,26 +32,7 @@ abstract class Base
 	 */
 	public function getLowestPrice( array $priceItems, $quantity, $currencyId = null )
 	{
-		$priceList = array();
-
-		foreach( $priceItems as $priceItem )
-		{
-			$iface = '\\Aimeos\\MShop\\Price\\Item\\Iface';
-			if( ( $priceItem instanceof $iface ) === false ) {
-				throw new \Aimeos\MShop\Price\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-			}
-
-			if( $currencyId !== null && $currencyId !== $priceItem->getCurrencyId() ) {
-				continue;
-			}
-
-			$qty = $priceItem->getQuantity();
-			if( !isset( $priceList[$qty] ) || $priceList[$qty]->getValue() > $priceItem->getValue() ) {
-				$priceList[$qty] = $priceItem;
-			}
-		}
-
-		ksort( $priceList );
+		$priceList = $this->getPriceList( $priceItems, $currencyId );
 
 		if( ( $price = reset( $priceList ) ) === false ) {
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Price item not available' ) );
@@ -71,5 +52,42 @@ abstract class Base
 		}
 
 		return $price;
+	}
+
+
+	/**
+	 * Returns the price items sorted by quantity
+	 *
+	 * @param array $priceItems List of price items implementing \Aimeos\MShop\Price\Item\Iface
+	 * @param string|null $currencyId Three letter ISO currency code or null for all
+	 * @return array Associative list of quantity as keys and price item as value
+	 * @throws \Aimeos\MShop\Price\Exception If an object is no price item
+	 */
+	protected function getPriceList( array $priceItems, $currencyId )
+	{
+		$list = array();
+
+		foreach( $priceItems as $priceItem )
+		{
+			$iface = '\\Aimeos\\MShop\\Price\\Item\\Iface';
+
+			if( ( $priceItem instanceof $iface ) === false ) {
+				throw new \Aimeos\MShop\Price\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
+			}
+
+			if( $currencyId !== null && $currencyId !== $priceItem->getCurrencyId() ) {
+				continue;
+			}
+
+			$qty = $priceItem->getQuantity();
+
+			if( !isset( $list[$qty] ) || $list[$qty]->getValue() > $priceItem->getValue() ) {
+				$list[$qty] = $priceItem;
+			}
+		}
+
+		ksort( $list );
+
+		return $list;
 	}
 }

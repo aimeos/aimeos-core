@@ -255,18 +255,10 @@ abstract class Base
 	 */
 	protected function calcDateLimit( $timestamp, $skipdays = 0, $businessOnly = false, $publicHolidays = '' )
 	{
-		$holidays = array();
+		$holidays = $this->getPublicHolidays( $publicHolidays );
 
-		if( is_string( $publicHolidays ) && $publicHolidays !== '' )
+		if( !empty( $holidays ) )
 		{
-			$holidays = explode( ',', str_replace( ' ', '', $publicHolidays ) );
-
-			if( sort( $holidays ) === false ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Unable to sort public holidays: "%1$s"', $publicHolidays ) );
-			}
-
-			$holidays = array_flip( $holidays );
-
 			for( $i = 0; $i <= $skipdays; $i++ )
 			{
 				$date = date( 'Y-m-d', $timestamp - $i * 86400 );
@@ -524,5 +516,31 @@ abstract class Base
 
 			$orderServiceItem->setAttributeItem( $item );
 		}
+	}
+
+
+	/**
+	 * Returns the public holidays in ISO format
+	 *
+	 * @param string $list Comma separated list of public holidays in YYYY-MM-DD format
+	 * @return array List of dates in YYYY-MM-DD format
+	 * @throws \Aimeos\MShop\Service\Exception If the given holiday string is in the wrong format and can't be processed
+	 */
+	private function getPublicHolidays( $list )
+	{
+		$holidays = array();
+
+		if( is_string( $list ) && $list !== '' )
+		{
+			$holidays = explode( ',', str_replace( ' ', '', $list ) );
+
+			if( sort( $holidays ) === false ) {
+				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Unable to sort public holidays: "%1$s"', $list ) );
+			}
+
+			$holidays = array_flip( $holidays );
+		}
+
+		return $holidays;
 	}
 }

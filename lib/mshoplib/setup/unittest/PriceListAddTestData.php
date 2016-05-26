@@ -181,9 +181,9 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getPriceIds( array $value, array $ship, array $typeIds )
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$search = $priceManager->createSearch();
+		$search = $manager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'price.value', $value ),
 			$search->compare( '==', 'price.costs', $ship ),
@@ -192,7 +192,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$parentIds = array();
-		foreach( $priceManager->searchItems( $search ) as $item ) {
+		foreach( $manager->searchItems( $search ) as $item ) {
 			$parentIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
 		}
 
@@ -208,12 +208,12 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getPriceListTypeIds( array $data )
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$priceListManager = $priceManager->getSubManager( 'lists', 'Standard' );
-		$priceListTypeManager = $priceListManager->getSubManager( 'type', 'Standard' );
+		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$listManager = $manager->getSubManager( 'lists', 'Standard' );
+		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 
 		$listItemTypeIds = array();
-		$listItemType = $priceListTypeManager->createItem();
+		$listItemType = $listTypeManager->createItem();
 
 		foreach( $data as $key => $dataset )
 		{
@@ -223,7 +223,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItemType->setLabel( $dataset['label'] );
 			$listItemType->setStatus( $dataset['status'] );
 
-			$priceListTypeManager->saveItem( $listItemType );
+			$listTypeManager->saveItem( $listItemType );
 			$listItemTypeIds[$key] = $listItemType->getId();
 		}
 
@@ -240,10 +240,10 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getPriceTypeIds( array $domain, array $code )
 	{
-		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
+		$manager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$typeManager = $manager->getSubManager( 'type', 'Standard' );
 
-		$search = $priceTypeManager->createSearch();
+		$search = $typeManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'price.type.domain', $domain ),
 			$search->compare( '==', 'price.type.code', $code ),
@@ -251,7 +251,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$typeids = array();
-		foreach( $priceTypeManager->searchItems( $search ) as $item ) {
+		foreach( $typeManager->searchItems( $search ) as $item ) {
 			$typeids[] = $item->getId();
 		}
 

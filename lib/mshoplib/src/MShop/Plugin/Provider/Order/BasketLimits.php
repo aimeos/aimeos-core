@@ -100,8 +100,23 @@ class BasketLimits
 	 */
 	protected function checkLimits( \Aimeos\MShop\Price\Item\Iface $sum, $count )
 	{
-		$currencyId = $sum->getCurrencyId();
 		$config = $this->getItemBase()->getConfig();
+
+		$this->checkLimitsValue( $sum, $config );
+		$this->checkLimitsProducts( $sum, $config, $count );
+	}
+
+
+	/**
+	 * Checks for the configured basket limits.
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $sum Total sum of all product price items
+	 * @param array $config Associative list of configuration key/value pairs
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one of the minimum or maximum limits is exceeded
+	 */
+	protected function checkLimitsValue( \Aimeos\MShop\Price\Item\Iface $sum, array $config )
+	{
+		$currencyId = $sum->getCurrencyId();
 
 		if( ( isset( $config['min-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] ) )
 		{
@@ -114,7 +129,19 @@ class BasketLimits
 			$msg = sprintf( 'The maximum basket value of %1$s is exceeded', $config['max-value'][$currencyId] );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
 		}
+	}
 
+
+	/**
+	 * Checks for the configured basket limits.
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface $sum Total sum of all product price items
+	 * @param array $config Associative list of configuration key/value pairs
+	 * @param integer $count Total number of products in the basket
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one of the minimum or maximum limits is exceeded
+	 */
+	protected function checkLimitsProducts( \Aimeos\MShop\Price\Item\Iface $sum, array $config, $count )
+	{
 		if( ( isset( $config['min-products'] ) ) && ( $count < $config['min-products'] ) )
 		{
 			$msg = sprintf( 'The minimum product quantity of %1$d isn\'t reached', $config['min-products'] );

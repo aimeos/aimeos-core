@@ -425,11 +425,7 @@ class Standard
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Product\\Item\\Iface', $items );
 
 		$context = $this->getContext();
-		$sites = $context->getLocale()->getSitePath();
-		$siteid = $context->getLocale()->getSiteId();
-		$langIds = $this->getLanguageIds( $sites );
-		$editor = $context->getEditor();
-		$date = date( 'Y-m-d H:i:s' );
+		$langIds = $this->getLanguageIds( $context->getLocale()->getSitePath() );
 
 
 		$dbm = $context->getDatabaseManager();
@@ -485,37 +481,8 @@ class Standard
 					$listTypes[$listItem->getRefId()][] = $listItem->getType();
 				}
 
-				foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
-				{
-					if( !isset( $listTypes[$refId] ) ) {
-						$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refId );
-						throw new \Aimeos\MShop\Index\Exception( $msg );
-					}
-
-					foreach( $listTypes[$refId] as $listType )
-					{
-						$this->saveText(
-							$stmt, $parentId, $siteid, $refId, $refItem->getLanguageId(), $listType,
-							$refItem->getType(), 'product', $refItem->getContent(), $date, $editor
-						);
-					}
-				}
-
-				$nameList = array();
-				foreach( $item->getRefItems( 'text', 'name' ) as $refItem ) {
-					$nameList[$refItem->getLanguageId()] = $refItem;
-				}
-
-				foreach( $langIds as $langId )
-				{
-					if( !isset( $nameList[$langId] ) )
-					{
-						$this->saveText(
-							$stmt, $parentId, $siteid, null, $langId, 'default',
-							'name', 'product', $item->getLabel(), $date, $editor
-						);
-					}
-				}
+				$this->saveTexts( $stmt, $item, $listTypes, array( $parentId => array( $parentId ) ) );
+				$this->saveNames( $stmt, $item, $langIds, $parentId );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -773,23 +740,9 @@ class Standard
 		if( empty( $prodIds ) ) { return; }
 
 
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
-		$search = $attrManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'attribute.id', array_keys( $prodIds ) ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
-
-		$attributeItems = $attrManager->searchItems( $search, array( 'text' ) );
-
+		$attributeItems = $this->getAttributeItems( array_keys( $prodIds ) );
 
 		$context = $this->getContext();
-		$siteid = $context->getLocale()->getSiteId();
-		$editor = $context->getEditor();
-		$date = date( 'Y-m-d H:i:s' );
-
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
@@ -843,15 +796,7 @@ class Standard
 				}
 
 				$this->saveTexts( $stmt, $item, $listTypes, $prodIds );
-				$names = $item->getRefItems( 'text', 'name' );
-
-				if( empty( $names ) )
-				{
-					$this->saveText(
-						$stmt, $prodIds[$id], $siteid, null, $context->getLocale()->getLanguageId(),
-						'default', 'name', 'attribute', $item->getLabel(), $date, $editor
-					);
-				}
+				$this->saveNames( $stmt, $item, array( $context->getLocale()->getLanguageId() ), $prodIds[$id] );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -865,12 +810,46 @@ class Standard
 
 
 	/**
+	 * Saves the labelfor items where no name is associated
+	 *
+	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
+	 * @param array $langIds List of two letter ISO language codes
+	 * @param string $prodId Product ID to save the label for
+	 */
+	protected function saveNames( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item,
+		array $langIds, $prodId )
+	{
+		$context = $this->getContext();
+		$siteid = $context->getLocale()->getSiteId();
+		$editor = $context->getEditor();
+		$date = date( 'Y-m-d H:i:s' );
+		$nameList = array();
+
+		foreach( $item->getRefItems( 'text', 'name' ) as $refItem ) {
+			$nameList[$refItem->getLanguageId()] = $refItem;
+		}
+
+		foreach( $langIds as $langId )
+		{
+			if( !isset( $nameList[$langId] ) )
+			{
+				$this->saveText(
+					$stmt, $prodId, $siteid, null, $langId, 'default', 'name',
+					$item->getResourceType(), $item->getLabel(), $date, $editor
+				);
+			}
+		}
+	}
+
+
+	/**
 	 * Saves the text items referenced indirectly by products
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
 	 * @param array $listTypes Associative list of item ID / list type code pairs
-	 * @param array $prodIds Associative list of item ID / product IDs pairs
+	 * @param array $prodIds Associative list of item ID / list of product IDs pairs
 	 * @throws \Aimeos\MShop\Index\Exception If no list type for the item is available
 	 */
 	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item,
@@ -935,6 +914,28 @@ class Standard
 		try {
 			$stmt->execute()->finish();
 		} catch( \Aimeos\MW\DB\Exception $e ) {; } // Ignore duplicates
+	}
+
+
+	/**
+	 * Returns the attribute items for the given IDs
+	 *
+	 * @param array $ids Unique attribute IDs
+	 * @return array Associative list of IDs as keys and items implementing \Aimeos\MShop\Attribute\Item\Iface as values
+	 */
+	protected function getAttributeItems( array $ids )
+	{
+		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
+
+		$search = $attrManager->createSearch( true );
+		$expr = array(
+			$search->compare( '==', 'attribute.id', $ids ),
+			$search->getConditions()
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		return $attrManager->searchItems( $search, array( 'text' ) );
 	}
 
 
