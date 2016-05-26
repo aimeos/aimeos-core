@@ -223,7 +223,7 @@ class Standard
 	/**
 	 * Returns the birthday of the customer item.
 	 *
-	 * @return string
+	 * @return string|null Birthday in YYYY-MM-DD format
 	 */
 	public function getBirthday()
 	{
@@ -238,7 +238,7 @@ class Standard
 	/**
 	 * Sets the birthday of the customer item.
 	 *
-	 * @param string $value Birthday of the customer item
+	 * @param string|null $value Birthday of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setBirthday( $value )

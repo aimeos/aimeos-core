@@ -63,7 +63,7 @@ class Standard
 	/**
 	 * Returns the base ID.
 	 *
-	 * @return integer Base ID
+	 * @return integer|null Base ID
 	 */
 	public function getBaseId()
 	{

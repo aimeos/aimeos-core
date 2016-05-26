@@ -80,7 +80,7 @@ class TestHelperJobs
 		$aimeos = self::getAimeos();
 
 
-		$paths = $aimeos->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths();
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 

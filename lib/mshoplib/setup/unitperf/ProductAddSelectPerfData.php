@@ -154,7 +154,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 	/**
 	 * Returns the price item with the lowest value
 	 *
-	 * @param \Aimeos\MShop\Price\Item\Iface $price
+	 * @param \Aimeos\MShop\Price\Item\Iface|null $price
 	 * @param array $prices
 	 * @return \Aimeos\MShop\Price\Item\Iface
 	 */

@@ -388,7 +388,7 @@ abstract class Base
 	 * be returned.
 	 *
 	 * @param array|string $keys Key name or list of key names that should be tested for in the order to test
-	 * @param string $default Returned value if the key wasn't was found
+	 * @param mixed $default Returned value if the key wasn't was found
 	 * @return mixed Value of the first key that matches or null if none was found
 	 */
 	protected function getConfigValue( $keys, $default = null )

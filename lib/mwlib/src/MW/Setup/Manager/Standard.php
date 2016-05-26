@@ -67,7 +67,7 @@ class Standard extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Updates the schema and migrates the data
 	 *
-	 * @param string $task Name of the task
+	 * @param string|null $task Name of the task
 	 */
 	public function migrate( $task = null )
 	{
@@ -80,7 +80,7 @@ class Standard extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Undo all schema changes and migrate data back
 	 *
-	 * @param string $task Name of the task
+	 * @param string|null $task Name of the task
 	*/
 	public function rollback( $task = null )
 	{
@@ -91,7 +91,7 @@ class Standard extends \Aimeos\MW\Setup\Manager\Base
 	/**
 	 * Cleans up old data required for roll back
 	 *
-	 * @param string $task Name of the task
+	 * @param string|null $task Name of the task
 	*/
 	public function clean( $task = null )
 	{

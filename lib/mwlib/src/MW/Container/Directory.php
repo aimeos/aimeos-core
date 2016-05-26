@@ -117,7 +117,7 @@ class Directory
 	/**
 	 * Returns the key of the current element.
 	 *
-	 * @return integer Position within the directory
+	 * @return string Position within the directory
 	 */
 	public function key()
 	{

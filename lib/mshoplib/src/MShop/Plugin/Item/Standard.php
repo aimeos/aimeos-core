@@ -55,7 +55,7 @@ class Standard
 	/**
 	 * Returns the type ID of the plugin.
 	 *
-	 * @return integer Plugin type ID
+	 * @return integer|null Plugin type ID
 	 */
 	public function getTypeId()
 	{

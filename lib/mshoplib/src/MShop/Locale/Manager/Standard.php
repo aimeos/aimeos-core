@@ -661,7 +661,7 @@ class Standard
 	 * Instances a new locale item object.
 	 *
 	 * @param array $values Parameter to initialise the item
-	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $site Site item
+	 * @param \Aimeos\MShop\Locale\Item\Site\Iface|null $site Site item
 	 * @param array $sitePath List of site IDs up to the root site
 	 * @param array $siteSubTree List of site IDs below and including the current site
 	 * @return \Aimeos\MShop\Locale\Item\Standard Locale item
@@ -677,7 +677,7 @@ class Standard
 	 * Returns the search results for the given SQL statement.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param $sql SQL statement
+	 * @param string $sql SQL statement
 	 * @return \Aimeos\MW\DB\Result\Iface Search result object
 	 */
 	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )

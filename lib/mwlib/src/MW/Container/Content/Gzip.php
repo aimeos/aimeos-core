@@ -89,7 +89,7 @@ class Gzip
 	/**
 	 * Return the current element.
 	 *
-	 * @return string Content line ending with
+	 * @return string|null Content line ending with
 	 */
 	public function current()
 	{
@@ -150,7 +150,7 @@ class Gzip
 	/**
 	 * Reads the next line from the file.
 	 *
-	 * @return String Content
+	 * @return string|null Content
 	 */
 	protected function getData()
 	{

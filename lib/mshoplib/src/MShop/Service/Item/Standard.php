@@ -42,7 +42,7 @@ class Standard
 	/**
 	 * Returns the code of the service item payment if available.
 	 *
-	 * @return string
+	 * @return string Service item code
 	 */
 	public function getCode()
 	{
@@ -74,7 +74,7 @@ class Standard
 	/**
 	 * Returns the type of the service item if available.
 	 *
-	 * @return string Service item type
+	 * @return string|null Service item type
 	 */
 	public function getType()
 	{
@@ -89,7 +89,7 @@ class Standard
 	/**
 	 * Returns the type ID of the service item if available.
 	 *
-	 * @return integer Service item type ID
+	 * @return integer|null Service item type ID
 	 */
 	public function getTypeId()
 	{
@@ -153,7 +153,7 @@ class Standard
 	/**
 	 * Returns the label of the service item payment if available.
 	 *
-	 * @return string
+	 * @return string Service item label
 	 */
 	public function getLabel()
 	{

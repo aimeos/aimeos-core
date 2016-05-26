@@ -114,7 +114,7 @@ class CSV
 	/**
 	 * Return the current element.
 	 *
-	 * @return array List of values
+	 * @return array|null List of values
 	 */
 	public function current()
 	{
@@ -181,7 +181,7 @@ class CSV
 	/**
 	 * Reads the next line from the file.
 	 *
-	 * @return array List of values
+	 * @return array|null List of values
 	 */
 	protected function getData()
 	{

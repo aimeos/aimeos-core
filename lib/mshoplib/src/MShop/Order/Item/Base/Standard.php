@@ -299,7 +299,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setCustomerId( $customerid )
 	{
-		if( $customerid === $this->getCustomerId() ) { return; }
+		if( $customerid === $this->getCustomerId() ) { return $this; }
 
 		$this->notifyListeners( 'setCustomerId.before', $customerid );
 
@@ -492,7 +492,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address,
 		$domain = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT )
 	{
-		if( isset( $this->addresses[$domain] ) && $this->addresses[$domain] === $address ) { return; }
+		if( isset( $this->addresses[$domain] ) && $this->addresses[$domain] === $address ) { return $address; }
 
 		$this->notifyListeners( 'setAddress.before', $address );
 

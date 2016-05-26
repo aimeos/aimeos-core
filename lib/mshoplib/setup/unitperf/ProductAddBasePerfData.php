@@ -23,7 +23,7 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn
-	 * @param string $additional
+	 * @param \Aimeos\MShop\Context\Item\Iface|null $additional
 	 * @throws \Aimeos\MW\Setup\Exception
 	 */
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )

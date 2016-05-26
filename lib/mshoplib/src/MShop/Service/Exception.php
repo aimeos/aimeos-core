@@ -28,7 +28,7 @@ class Exception extends \Aimeos\MShop\Exception
 	 *
 	 * @param string $message The exception message to throw
 	 * @param integer $code The exception code
-	 * @param \Exception $previous The previous exception used for the exception chaining
+	 * @param \Exception|null $previous The previous exception used for the exception chaining
 	 * @param array $errorCodes Associative list of error codes
 	 */
 	public function __construct( $message = '', $code = 0, $previous = null, array $errorCodes = array() )

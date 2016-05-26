@@ -30,7 +30,7 @@ class Standard
 	 * Initializes the content view helper.
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
-	 * @param string $baseurl Base URL for the content
+	 * @param string|null $baseurl Base URL for the content
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, $baseurl = null )
 	{

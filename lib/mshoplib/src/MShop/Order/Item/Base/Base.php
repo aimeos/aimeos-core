@@ -102,7 +102,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item
 	 * @param array $products List of order product items to check against
-	 * @return integer Positon of the same product in the product list
+	 * @return integer|boolean Positon of the same product in the product list of false if product is unique
 	 * @throws \Aimeos\MShop\Order\Exception If no similar item was found
 	 */
 	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, array $products )

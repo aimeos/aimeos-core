@@ -148,7 +148,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param string $operator Operator used for the expression
 	 * @param string $type Type constant
 	 * @param mixed $value Value that the variable should be compared to
-	 * @return mixed Escaped value
+	 * @return boolean|double|integer|string Escaped value
 	 */
 	protected function escape( $operator, $type, $value )
 	{
@@ -161,7 +161,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			case 'int':
 				$value = (int) $value; break;
 			case 'float':
-				$value = (float) $value; break;
+				$value = (double) $value; break;
 			default:
 				$value = '\'' . addcslashes( $value, '\'' ) . '\'';
 		}

@@ -43,7 +43,7 @@ class Standard
 	 * Returns the parameter value.
 	 *
 	 * @param string|null $name Name of the parameter key or null for all parameters
-	 * @param string $default Default value if parameter key is not available
+	 * @param mixed $default Default value if parameter key is not available
 	 * @return mixed Parameter value or associative list of key/value pairs
 	 */
 	public function transform( $name = null, $default = null )

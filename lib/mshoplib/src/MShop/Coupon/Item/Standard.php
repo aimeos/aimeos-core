@@ -73,7 +73,7 @@ class Standard
 	/**
 	 * Returns the starting point of time, in which the coupon is available.
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getDateStart()
 	{
@@ -105,7 +105,7 @@ class Standard
 	/**
 	 * Returns the ending point of time, in which the coupon is available.
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getDateEnd()
 	{

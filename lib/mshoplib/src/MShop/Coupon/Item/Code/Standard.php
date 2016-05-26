@@ -40,7 +40,7 @@ class Standard
 	/**
 	 * Returns the unique ID of the coupon item the code belongs to.
 	 *
-	 * @return integer Unique ID of the coupon item
+	 * @return integer|null Unique ID of the coupon item
 	 */
 	public function getParentId()
 	{
@@ -72,7 +72,7 @@ class Standard
 	/**
 	 * Returns the code of the coupon item.
 	 *
-	 * @return string Coupon code
+	 * @return string|null Coupon code
 	 */
 	public function getCode()
 	{
@@ -138,7 +138,7 @@ class Standard
 	/**
 	 * Returns the starting point of time, in which the code is available.
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getDateStart()
 	{
@@ -170,7 +170,7 @@ class Standard
 	/**
 	 * Returns the ending point of time, in which the code is available.
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getDateEnd()
 	{

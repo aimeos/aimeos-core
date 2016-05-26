@@ -98,7 +98,7 @@ class Standard implements Iface, DirIface, MetaIface
 	/**
 	 * Returns an iterator over the entries in the given path
 	 *
-	 * @param string $path Path to the filesystem or directory
+	 * @param string|null $path Path to the filesystem or directory
 	 * @return \Iterator|array Iterator over the entries or array with entries
 	 * @throws \Aimeos\MW\Filesystem\Exception If an error occurs
 	 */

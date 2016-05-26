@@ -23,24 +23,24 @@ interface Iface
 	/**
 	 * Updates the schema and migrates the data
 	 *
-	 * @param string $task Name of the task
-	 * @return void
+	 * @param string|null $task Name of the task
+	 * @return null
 	 */
 	public function migrate( $task = null );
 
 	/**
 	 * Undo all schema changes and migrate data back
 	 *
-	 * @param string $task Name of the task
-	 * @return void
+	 * @param string|null $task Name of the task
+	 * @return null
 	 */
 	public function rollback( $task = null );
 
 	/**
 	 * Cleans up old data required for roll back
 	 *
-	 * @param string $task Name of the task
-	 * @return void
+	 * @param string|null $task Name of the task
+	 * @return null
 	 */
 	public function clean( $task = null );
 
@@ -48,7 +48,7 @@ interface Iface
 	 * Executes all tasks for the given database type.
 	 *
 	 * @param string $dbtype Name of the database type (mysql, etc.)
-	 * @return void
+	 * @return null
 	 * @deprecated 2016.05
 	 */
 	public function run( $dbtype );

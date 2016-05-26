@@ -801,8 +801,8 @@ class Standard
 	 * Adds a new item object.
 	 *
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Item which should be inserted
-	 * @param integer $parentId ID of the parent item where the item should be inserted into
-	 * @param integer $refId ID of the item where the item should be inserted before (null to append)
+	 * @param integer|null $parentId ID of the parent item where the item should be inserted into
+	 * @param integer|null $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null )
 	{
@@ -914,10 +914,10 @@ class Standard
 	/**
 	 * Moves an existing item to the new parent in the storage.
 	 *
-	 * @param mixed $id ID of the item that should be moved
-	 * @param mixed $oldParentId ID of the old parent item which currently contains the item that should be removed
-	 * @param mixed $newParentId ID of the new parent item where the item should be moved to
-	 * @param mixed $refId ID of the item where the item should be inserted before (null to append)
+	 * @param integer $id ID of the item that should be moved
+	 * @param integer $oldParentId ID of the old parent item which currently contains the item that should be removed
+	 * @param integer $newParentId ID of the new parent item where the item should be moved to
+	 * @param integer|null $refId ID of the item where the item should be inserted before (null to append)
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{

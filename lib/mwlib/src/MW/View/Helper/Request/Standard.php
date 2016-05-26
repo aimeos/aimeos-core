@@ -35,7 +35,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object
 	 * @param string $clientaddr Client IP address
-	 * @param string $target Page ID or route name
+	 * @param string|null $target Page ID or route name
 	 */
 	public function __construct( \Aimeos\MW\View\Iface $view, \Psr\Http\Message\ServerRequestInterface $request, $clientaddr = '', $target = null )
 	{

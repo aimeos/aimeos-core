@@ -144,7 +144,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 * @param string $operator Operator used for the expression
 	 * @param integer $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
-	 * @return string Escaped value
+	 * @return double|string|integer Escaped value
 	 */
 	protected function escape( $operator, $type, $value )
 	{
@@ -157,7 +157,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
 				$value = (int) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
-				$value = (float) $value; break;
+				$value = (double) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
 				if( $operator == '~=' ) {
 					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;

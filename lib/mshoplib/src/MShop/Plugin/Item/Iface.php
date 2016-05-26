@@ -30,7 +30,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	/**
 	 * Returns the type ID of the plugin.
 	 *
-	 * @return integer Plugin type ID
+	 * @return integer|null Plugin type ID
 	 */
 	public function getTypeId();
 

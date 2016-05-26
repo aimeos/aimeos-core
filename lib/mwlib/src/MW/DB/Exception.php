@@ -28,7 +28,7 @@ class Exception extends \Aimeos\MW\Exception
 	 * Initializes the exception.
 	 *
 	 * @param string $message Error message
-	 * @param integer $state SQL error code
+	 * @param string $state SQL error code
 	 * @param string $info Additional error info
 	 */
 	public function __construct( $message, $state = '', $info = '' )

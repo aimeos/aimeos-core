@@ -168,7 +168,7 @@ class Standard
 	 * Returns the media object for the given file name
 	 *
 	 * @param string $filename Path and name to the file
-	 * @return \Aimeos\MW\Media\Image\Iface Media object
+	 * @return \Aimeos\MW\Media\Iface Media object
 	 */
 	protected function getMediaFile( $filename )
 	{

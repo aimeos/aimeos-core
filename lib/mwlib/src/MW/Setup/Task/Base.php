@@ -178,7 +178,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * @param string $sql SQL statement to execute
 	 * @param string $column Column name to retrieve
 	 * @param string $name Name from the resource configuration
-	 * @param string Column value
+	 * @return string Column value
 	 */
 	protected function getValue( $sql, $column, $name = 'db' )
 	{

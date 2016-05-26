@@ -70,14 +70,14 @@ interface Iface
 	/**
 	 * Returns the birthday of the customer item.
 	 *
-	 * @return string Birthday date of the customer (YYYY-MM-DD format)
+	 * @return string|null Birthday date of the customer (YYYY-MM-DD format)
 	 */
 	public function getBirthday();
 
 	/**
 	 * Sets the birthday of the customer item.
 	 *
-	 * @param date $value Birthday of the customer item (YYYY-MM-DD format)
+	 * @param string|null $value Birthday of the customer item (YYYY-MM-DD format)
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setBirthday( $value );

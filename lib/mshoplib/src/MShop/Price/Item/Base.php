@@ -72,7 +72,7 @@ abstract class Base
 	 *
 	 * @param integer|double $value Monetary value
 	 * @param integer $precision Number of decimal places
-	 * @return decimal Sanitized monetary value
+	 * @return string Sanitized monetary value
 	 */
 	protected function checkPrice( $value, $precision = 2 )
 	{

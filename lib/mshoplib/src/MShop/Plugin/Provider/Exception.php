@@ -29,7 +29,7 @@ class Exception extends \Aimeos\MShop\Plugin\Exception
 	 *
 	 * @param string $message Custom error message to describe the error
 	 * @param integer $code Custom error code to identify or classify the error
-	 * @param \Exception $previous Previously thrown exception
+	 * @param \Exception|null $previous Previously thrown exception
 	 * @param array $errorCodes List of error codes for error handling
 	 */
 	public function __construct( $message = '', $code = 0, \Exception $previous = null, $errorCodes = array() )

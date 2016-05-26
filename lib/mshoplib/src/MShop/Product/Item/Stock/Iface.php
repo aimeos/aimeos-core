@@ -23,7 +23,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	/**
 	 * Returns the warehouse Id.
 	 *
-	 * @return integer Warehouse Id
+	 * @return integer|null Warehouse Id
 	 */
 	public function getWarehouseId();
 
@@ -38,7 +38,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	/**
 	 * Returns the stock level.
 	 *
-	 * @return integer Stock level
+	 * @return integer|null Stock level
 	 */
 	public function getStocklevel();
 
@@ -53,7 +53,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	/**
 	 * Returns the back in stock date of the product.
 	 *
-	 * @return string Back in stock date of the product
+	 * @return string|null Back in stock date of the product
 	 */
 	public function getDateBack();
 

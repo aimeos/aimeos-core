@@ -40,7 +40,7 @@ class Standard
 	/**
 	 * Returns the base ID of the order.
 	 *
-	 * @return integer Order base ID
+	 * @return integer|null Order base ID
 	 */
 	public function getBaseId()
 	{
@@ -60,7 +60,7 @@ class Standard
 	 */
 	public function setBaseId( $baseid )
 	{
-		if( $baseid == $this->getBaseId() ) { return; }
+		if( $baseid == $this->getBaseId() ) { return $this; }
 
 		$this->values['order.base.coupon.baseid'] = (int) $baseid;
 		$this->setModified();
@@ -72,7 +72,7 @@ class Standard
 	/**
 	 * Returns the ID of the ordered product.
 	 *
-	 * @return integer ID of the ordered product.
+	 * @return integer|null ID of the ordered product.
 	 */
 	public function getProductId()
 	{
@@ -92,7 +92,7 @@ class Standard
 	 */
 	public function setProductId( $productid )
 	{
-		if( $productid == $this->getProductId() ) { return; }
+		if( $productid == $this->getProductId() ) { return $this; }
 
 		$this->values['order.base.coupon.ordprodid'] = (int) $productid;
 		$this->setModified();
@@ -124,7 +124,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code == $this->getCode() ) { return; }
+		if( $code == $this->getCode() ) { return $this; }
 
 		$this->values['order.base.coupon.code'] = (string) $this->checkCode( $code );;
 		$this->setModified();

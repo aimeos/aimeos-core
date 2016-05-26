@@ -23,7 +23,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the base ID.
 	 *
-	 * @return integer Base ID
+	 * @return integer|null Base ID
 	 */
 	public function getBaseId();
 
@@ -39,7 +39,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Returns the parent ID of the ordered product if there is one.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
-	 * @return integer order product ID
+	 * @return integer|null order product ID
 	 */
 	public function getOrderProductId();
 

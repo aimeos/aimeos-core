@@ -24,6 +24,7 @@ interface Iface
 	 * Removes old entries from the storage
 	 *
 	 * @param array $siteids List of IDs for sites Whose entries should be deleted
+	 * @return null
 	 */
 	public function cleanup( array $siteids );
 
@@ -46,7 +47,7 @@ interface Iface
 	 * Deletes the item specified by its ID.
 	 *
 	 * @param mixed $id ID of the item object
-	 * @return void
+	 * @return null
 	 */
 	public function deleteItem( $id );
 
@@ -54,6 +55,7 @@ interface Iface
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
+	 * @return null
 	 */
 	public function deleteItems( array $ids );
 
@@ -95,6 +97,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return null
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true );
 

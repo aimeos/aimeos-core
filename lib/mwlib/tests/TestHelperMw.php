@@ -17,7 +17,7 @@ class TestHelperMw
 	 * Autoloader for classes
 	 *
 	 * @param string $className Class name
-	 * @return True if class was found, false if not
+	 * @return boolean True if class was found, false if not
 	 */
 	public static function autoload( $className )
 	{

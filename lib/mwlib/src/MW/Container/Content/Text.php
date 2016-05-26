@@ -96,7 +96,7 @@ class Text
 	/**
 	 * Return the current element.
 	 *
-	 * @return string Content line ending with
+	 * @return string|null Content line ending with
 	 */
 	public function current()
 	{
@@ -157,7 +157,7 @@ class Text
 	/**
 	 * Reads the next line from the file.
 	 *
-	 * @return string Data
+	 * @return string|null Data
 	 */
 	protected function getData()
 	{

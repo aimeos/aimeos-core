@@ -231,13 +231,14 @@ abstract class Base
 	 * Load the basket item for the given ID.
 	 *
 	 * @param integer $id Unique order base ID
-	 * @param \Aimeos\MShop\Price\Item $price Price object with total order value
-	 * @param \Aimeos\MShop\Locale\Item $localeItem Locale object of the order
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
+	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return \Aimeos\MShop\Order\Item\Base\Standard The loaded order item for the given ID
 	 */
-	protected function loadItems( $id, $price, $localeItem, $row, $parts )
+	protected function loadItems( $id, \Aimeos\MShop\Price\Item\Iface$price,
+		\Aimeos\MShop\Locale\Item\Iface $localeItem, $row, $parts )
 	{
 		$products = $coupons = $addresses = $services = array();
 
@@ -269,13 +270,14 @@ abstract class Base
 	 * Create a new basket item as a clone from an existing order ID.
 	 *
 	 * @param integer $id Unique order base ID
-	 * @param \Aimeos\MShop\Price\Item $price Price object with total order value
-	 * @param \Aimeos\MShop\Locale\Item $localeItem Locale object of the order
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price object with total order value
+	 * @param \Aimeos\MShop\Locale\Item\Iface $localeItem Locale object of the order
 	 * @param array $row Array of values with all relevant order information
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return \Aimeos\MShop\Order\Item\Base\Standard The loaded order item for the given ID
 	 */
-	protected function loadFresh( $id, $price, $localeItem, $row, $parts )
+	protected function loadFresh( $id, \Aimeos\MShop\Price\Item\Iface $price,
+		\Aimeos\MShop\Locale\Item\Iface $localeItem, $row, $parts )
 	{
 		$products = $addresses = $services = array();
 

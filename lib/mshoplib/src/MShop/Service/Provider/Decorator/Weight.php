@@ -140,7 +140,7 @@ class Weight
 	 * Returns the weight of the products
 	 *
 	 * @param array $prodMap Associative list of product codes as keys and quantities as values
-	 * @return float Sumed up product weight multiplied with its quantity
+	 * @return double Sumed up product weight multiplied with its quantity
 	 */
 	protected function getWeight( array $prodMap )
 	{
@@ -178,6 +178,6 @@ class Weight
 		}
 
 
-		return $weight;
+		return (double) $weight;
 	}
 }

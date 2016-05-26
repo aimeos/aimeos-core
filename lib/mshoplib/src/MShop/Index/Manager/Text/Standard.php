@@ -868,7 +868,7 @@ class Standard
 	 * Saves the text items referenced indirectly by products
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
-	 * @param \Aimeos\MShop\Common\Item\ListRef $item Item containing associated text items
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
 	 * @param array $prodIds Associative list of item ID / product IDs pairs
 	 * @param array $listTypes Associative list of item ID / list type code pairs
 	 * @throws \Aimeos\MShop\Index\Exception If no list type for the item is available

@@ -40,7 +40,7 @@ class Standard
 	/**
 	 * Returns the product ID
 	 *
-	 * @return integer Product ID
+	 * @return integer|null Product ID
 	 */
 	public function getParentId()
 	{
@@ -72,7 +72,7 @@ class Standard
 	/**
 	 * Returns the warehouse Id.
 	 *
-	 * @return integer Warehouse Id
+	 * @return integer|null Warehouse Id
 	 */
 	public function getWarehouseId()
 	{
@@ -104,7 +104,7 @@ class Standard
 	/**
 	 * Returns the stock level.
 	 *
-	 * @return integer Stock level
+	 * @return integer|null Stock level
 	 */
 	public function getStocklevel()
 	{
@@ -136,7 +136,7 @@ class Standard
 	/**
 	 * Returns the back in stock date of the product.
 	 *
-	 * @return string Back in stock date of the product
+	 * @return string|null Back in stock date of the product
 	 */
 	public function getDateBack()
 	{

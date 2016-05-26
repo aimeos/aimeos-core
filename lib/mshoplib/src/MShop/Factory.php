@@ -27,8 +27,8 @@ class Factory
 	 *
 	 * If neither a context ID nor a path is given, the complete cache will be pruned.
 	 *
-	 * @param integer $id Context ID the objects have been created with (string of \Aimeos\MShop\Context\Item\Iface)
-	 * @param string $path Path describing the manager to clear, e.g. "product/lists/type"
+	 * @param integer|null $id Context ID the objects have been created with (string of \Aimeos\MShop\Context\Item\Iface)
+	 * @param string|null $path Path describing the manager to clear, e.g. "product/lists/type"
 	 */
 	static public function clear( $id = null, $path = null )
 	{

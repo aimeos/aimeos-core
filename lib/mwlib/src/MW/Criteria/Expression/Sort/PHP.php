@@ -109,7 +109,7 @@ class PHP
 	 * @param string $operator Operator used for the expression
 	 * @param integer $type Type constant
 	 * @param mixed $value Value that the variable or column should be compared to
-	 * @return string Escaped value
+	 * @return double|integer|string Escaped value
 	 */
 	protected function escape( $operator, $type, $value )
 	{
@@ -118,7 +118,7 @@ class PHP
 		switch( $type )
 		{
 			case '(float)':
-				return (float) $value;
+				return (double) $value;
 			case '(int)':
 				return (int) $value;
 			default:
