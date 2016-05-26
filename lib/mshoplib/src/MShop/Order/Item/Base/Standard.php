@@ -68,7 +68,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function __sleep()
 	{
-		return array_merge( array_keys( get_object_vars( $this ) ), parent::__sleep() );
+		/*
+		 * Workaround because database connections can't be serialized
+		 * Listeners will be reattached on wakeup by the customer manager
+		 */
+		$this->clearListeners();
+
+		return array_keys( get_object_vars( $this ) );
 	}
 
 

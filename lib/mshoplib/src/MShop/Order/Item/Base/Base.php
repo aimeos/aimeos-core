@@ -115,23 +115,6 @@ abstract class Base
 
 
 	/**
-	 * Prepares the object for serialization.
-	 *
-	 * @return array List of properties that should be serialized
-	 */
-	public function __sleep()
-	{
-		/*
-		 * Workaround because database connections can't be serialized
-		 * Listeners will be reattached on wakeup by the customer manager
-		 */
-		$this->clearListeners();
-
-		return array_keys( get_object_vars( $this ) );
-	}
-
-
-	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
