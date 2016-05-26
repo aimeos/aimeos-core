@@ -57,9 +57,9 @@ return array(
 	),
 	'cleanup' => array(
 		'ansi' => '
-		DELETE FROM "mshop_index_text"
-		WHERE "ctime" < ? AND "siteid" = ?
-	'
+			DELETE FROM "mshop_index_text"
+			WHERE "ctime" < ? AND "siteid" = ?
+		'
 	),
 	'text' => array(
 		'ansi' => '
