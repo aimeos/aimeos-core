@@ -22,8 +22,6 @@ class Standard
 	implements \Aimeos\MShop\Order\Item\Base\Product\Iface
 {
 	private $price;
-	private $attributes;
-	private $attributesMap;
 	private $products;
 	private $values;
 

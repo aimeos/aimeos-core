@@ -23,8 +23,6 @@ class Standard
 	implements \Aimeos\MShop\Order\Item\Base\Service\Iface
 {
 	private $price;
-	private $attributes;
-	private $attributesMap;
 	private $values;
 
 
@@ -37,13 +35,10 @@ class Standard
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = array(), array $attributes = array() )
 	{
-		parent::__construct( 'order.base.service.', $values );
+		parent::__construct( $price, $values, $attributes );
 
 		$this->values = $values;
 		$this->price = $price;
-
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Attribute\\Iface', $attributes );
-		$this->attributes = $attributes;
 	}
 
 
@@ -277,109 +272,6 @@ class Standard
 
 
 	/**
-	 * Returns the value of the attribute item for the service with the given code.
-	 *
-	 * @param string $code code of the service attribute item
-	 * @param string $type Type of the service attribute item
-	 * @return string|null value of the attribute item for the service and the given code
-	 */
-	public function getAttribute( $code, $type = '' )
-	{
-		$map = $this->getAttributeMap();
-
-		if( isset( $map[$type][$code] ) ) {
-			return $map[$type][$code]->getValue();
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the attribute item for the service with the given code.
-	 *
-	 * @param string $code Code of the service attribute item
-	 * @param string $type Type of the service attribute item
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface|null Attribute item for the service and the given code
-	 */
-	public function getAttributeItem( $code, $type = '' )
-	{
-		$map = $this->getAttributeMap();
-
-		if( isset( $map[$type][$code] ) ) {
-			return $map[$type][$code];
-		}
-
-		return null;
-	}
-
-
-	/**
-	 * Adds or replaces the attribute item in the list of service attributes.
-	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item Service attribute item
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
-	 */
-	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface $item )
-	{
-		$this->getAttributeMap();
-
-		$type = $item->getType();
-		$code = $item->getCode();
-
-		if( !isset( $this->attributesMap[$type][$code] ) )
-		{
-			$this->attributesMap[$type][$code] = $item;
-			$this->attributes[] = $item;
-		}
-
-		$this->attributesMap[$type][$code]->setValue( $item->getValue() );
-		$this->setModified();
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the list of attribute items for the service.
-	 *
-	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
-	 */
-	public function getAttributes( $type = null )
-	{
-		if( $type === null ) {
-			return $this->attributes;
-		}
-
-		$map = $this->getAttributeMap();
-
-		if( isset( $map[$type] ) ) {
-			return $map[$type];
-		}
-
-		return array();
-	}
-
-
-	/**
-	 * Sets the new list of attribute items for the service.
-	 *
-	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
-	 */
-	public function setAttributes( array $attributes )
-	{
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Attribute\\Iface', $attributes );
-
-		$this->attributes = $attributes;
-		$this->attributesMap = null;
-		$this->setModified();
-
-		return $this;
-	}
-
-
-	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values
@@ -452,6 +344,7 @@ class Standard
 		$this->setServiceId( $service->getId() );
 
 		$items = $service->getRefItems( 'media', 'default', 'default' );
+
 		if( ( $item = reset( $items ) ) !== false ) {
 			$this->setMediaUrl( $item->getUrl() );
 		}
@@ -459,25 +352,5 @@ class Standard
 		$this->setModified();
 
 		return $this;
-	}
-
-
-	/**
-	 * Returns the attribute map for the service.
-	 *
-	 * @return array Associative list of type and code as key and an \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface as value
-	 */
-	protected function getAttributeMap()
-	{
-		if( !isset( $this->attributesMap ) )
-		{
-			$this->attributesMap = array();
-
-			foreach( $this->attributes as $attribute ) {
-				$this->attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;
-			}
-		}
-
-		return $this->attributesMap;
 	}
 }
