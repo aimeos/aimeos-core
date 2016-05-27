@@ -20,9 +20,6 @@ namespace Aimeos\MW\Common\Manager;
  */
 abstract class Base
 {
-	private $keySeparator = '.';
-
-
 	/**
 	 * Returns a sorted list of required criteria keys.
 	 *
@@ -52,7 +49,7 @@ abstract class Base
 	 */
 	protected function getKeySeparator()
 	{
-		return $this->keySeparator;
+		return '.';
 	}
 
 
