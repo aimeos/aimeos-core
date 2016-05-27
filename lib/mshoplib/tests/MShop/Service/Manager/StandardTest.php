@@ -48,10 +48,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->cleanup( array( -1 ) );
 	}
 
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Service\\Item\\Iface', $this->object->createItem() );
 	}
+
+
+	public function testSaveInvalid()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
+	}
+
 
 	public function testSaveUpdateDeleteItem()
 	{

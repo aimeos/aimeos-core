@@ -312,6 +312,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testSaveInvalid()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Catalog\Exception' );
+		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
+	}
+
+
 	public function testSaveInsertMoveDeleteItem()
 	{
 		$search = $this->object->createSearch();

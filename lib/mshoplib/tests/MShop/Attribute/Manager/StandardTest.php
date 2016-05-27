@@ -143,6 +143,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testSaveInvalid()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Attribute\Exception' );
+		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$typeManager = $this->object->getSubManager( 'type' );

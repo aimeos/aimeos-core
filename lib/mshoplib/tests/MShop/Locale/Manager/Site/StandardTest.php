@@ -38,6 +38,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testSaveInvalid()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
+		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
+	}
+
+
+	public function testSaveIdException()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
+		$this->object->saveItem( $this->object->createItem() );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->createItem();
@@ -203,6 +217,35 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$item = $this->object->getTree( $expected->getId() );
 		$this->assertEquals( $expected, $item );
+	}
+
+
+	public function testGetTreeNoId()
+	{
+		$object = $this->getMockBuilder( '\Aimeos\MShop\Locale\Manager\Site\Standard' )
+			->setConstructorArgs( array( $this->context ) )
+			->setMethods( array( 'searchItems' ) )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'searchItems' )
+			->will( $this->returnValue( array( $object->createItem() ) ) );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $object->getTree() );
+	}
+
+
+	public function testGetTreeNoItem()
+	{
+		$object = $this->getMockBuilder( '\Aimeos\MShop\Locale\Manager\Site\Standard' )
+			->setConstructorArgs( array( $this->context ) )
+			->setMethods( array( 'searchItems' ) )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'searchItems' )
+			->will( $this->returnValue( array() ) );
+
+		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
+		$object->getTree();
 	}
 
 

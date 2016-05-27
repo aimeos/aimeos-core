@@ -116,6 +116,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'Unit test example', $itemB->getLabel() );
 	}
 
+
+	public function testSaveInvalid()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Coupon\Exception' );
+		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();

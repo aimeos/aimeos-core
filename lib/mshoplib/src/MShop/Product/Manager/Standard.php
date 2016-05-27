@@ -696,30 +696,6 @@ class Standard
 	/**
 	 * Create new product item object initialized with given parameters.
 	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item object
-	 * @return array Associative list of key/value pairs suitable for product item constructor
-	 */
-	protected function createArray( \Aimeos\MShop\Product\Item\Iface $item )
-	{
-		return array(
-			'id' => $item->getId(),
-			'typeid' => $item->getTypeId(),
-			'type' => $item->getType(),
-			'status' => $item->getStatus(),
-			'label' => $item->getLabel(),
-			'start' => $item->getDateStart(),
-			'end' => $item->getDateEnd(),
-			'code' => $item->getCode(),
-			'ctime' => $item->getTimeCreated(),
-			'mtime' => $item->getTimeModified(),
-			'editor' => $item->getEditor(),
-		);
-	}
-
-
-	/**
-	 * Create new product item object initialized with given parameters.
-	 *
 	 * @param array $values Associative list of key/value pairs
 	 * @param array $listitems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface

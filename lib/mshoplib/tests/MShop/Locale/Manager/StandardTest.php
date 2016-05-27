@@ -116,6 +116,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testCreateSearch()
+	{
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch( true ) );
+	}
+
+
 	public function testGetSubManager()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'site' ) );
@@ -216,6 +223,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
+
+
+	public function testSaveInvalid()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
+		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Site\Standard() );
 	}
 
 
