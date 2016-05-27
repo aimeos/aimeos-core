@@ -17,9 +17,7 @@ namespace Aimeos\MShop\Order\Item\Base\Service;
  * @package MShop
  * @subpackage Order
  */
-abstract class Base
-	extends \Aimeos\MShop\Common\Item\Base
-	implements \Aimeos\MShop\Order\Item\Base\Service\Iface
+abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 {
 	/**
 	 * Delivery service.

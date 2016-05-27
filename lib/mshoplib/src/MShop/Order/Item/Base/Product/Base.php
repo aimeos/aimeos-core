@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Order\Item\Base\Product;
  * @package MShop
  * @subpackage Order
  */
-abstract class Base extends \Aimeos\MShop\Order\Item\Base
+abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 {
 	/**
 	 * No flag used.

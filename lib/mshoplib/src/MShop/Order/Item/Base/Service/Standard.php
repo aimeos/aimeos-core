@@ -18,9 +18,7 @@ namespace Aimeos\MShop\Order\Item\Base\Service;
  * @package MShop
  * @subpackage Order
  */
-class Standard
-	extends \Aimeos\MShop\Order\Item\Base\Service\Base
-	implements \Aimeos\MShop\Order\Item\Base\Service\Iface
+class Standard extends Base implements Iface
 {
 	private $price;
 	private $values;

@@ -530,7 +530,7 @@ abstract class Base
 	 * Checks if the price uses the same currency as the price in the basket.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item
-	 * @return null;
+	 * @return null
 	 */
 	abstract protected function checkPrice( \Aimeos\MShop\Price\Item\Iface $item );
 
