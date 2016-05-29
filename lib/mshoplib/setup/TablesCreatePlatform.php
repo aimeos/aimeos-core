@@ -12,7 +12,7 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Creates all platform specific tables
  */
-class TablesCreatePlatform extends \Aimeos\MW\Setup\Task\Base
+class TablesCreatePlatform extends TablesCreateMShop
 {
 	/**
 	 * Returns the list of task names which this task depends on.
@@ -67,35 +67,6 @@ class TablesCreatePlatform extends \Aimeos\MW\Setup\Task\Base
 			return;
 		}
 
-		$this->msg( 'Using schema from ' . basename( $filepath ), 1 ); $this->status( '' );
-
-		if( ( $content = file_get_contents( $filepath ) ) === false ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get content from file "%1$s"', $filepath ) );
-		}
-
-		foreach( $this->getTableDefinitions( $content ) as $name => $sql )
-		{
-			$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
-
-			if( $schema->tableExists( $name ) !== true ) {
-				$this->execute( $sql, $rname );
-				$this->status( 'created' );
-			} else {
-				$this->status( 'OK' );
-			}
-		}
-
-		foreach( $this->getIndexDefinitions( $content ) as $name => $sql )
-		{
-			$parts = explode( '.', $name );
-			$this->msg( sprintf( 'Checking index "%1$s": ', $name ), 2 );
-
-			if( $schema->indexExists( $parts[0], $parts[1] ) !== true ) {
-				$this->execute( $sql, $rname );
-				$this->status( 'created' );
-			} else {
-				$this->status( 'OK' );
-			}
-		}
+		parent::setup( array( $rname => $filepath ) );
 	}
 }
