@@ -14,7 +14,7 @@ return array(
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'salutation', 'string', array( 'length' => 8 ) );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );

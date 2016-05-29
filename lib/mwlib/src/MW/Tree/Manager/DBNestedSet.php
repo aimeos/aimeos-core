@@ -748,7 +748,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			case \Aimeos\MW\Tree\Manager\Base::LEVEL_LIST:
 				return 1;
 			case \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE:
-				return 0x7FFFFFFF; // max. possible level
+				return 0x3FFFFFFF; // max. possible level / 2 to prevent integer overflow
 			default:
 				throw new \Aimeos\MW\Tree\Exception( sprintf( 'Invalid level constant "%1$d"', $level ) );
 		}
