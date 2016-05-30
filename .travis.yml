@@ -1,6 +1,11 @@
 sudo: true
 language: php  
 
+addons:
+  apt:
+    packages:
+    - php5-pgsql
+
 php:
   - hhvm
   - 7.0
@@ -8,11 +13,6 @@ php:
   - 5.5
   - 5.4
   - 5.3
-
-addons:
-  apt:
-    packages:
-    - php5-pgsql
 
 env:
   - DB=mysql
