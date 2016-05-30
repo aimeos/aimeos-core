@@ -82,8 +82,6 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 		$this->additional->setEditor( $this->editor );
 
 
-		$this->txBegin();
-
 		foreach( $testdata as $domain => $datasets )
 		{
 			$this->msg( sprintf( 'Checking "%1$s" type data', $domain ), 1 );
@@ -105,13 +103,11 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 				try {
 					$domainManager->saveItem( $type );
 					$num++;
-				} catch( \Exception $e ) {; } // if type was already available
+				} catch( \Exception $e ) { ; } // if type was already available
 			}
 
 			$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
 		}
-
-		$this->txCommit();
 
 		$this->additional->setEditor( $editor );
 	}

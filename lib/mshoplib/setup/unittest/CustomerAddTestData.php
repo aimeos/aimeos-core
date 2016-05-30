@@ -48,11 +48,25 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$this->msg( 'Adding customer test data', 0 );
-		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'customer.php';
+		$this->additional->setEditor( 'core:unittest' );
 
+		$this->process( __DIR__ . $ds . 'data' . $ds . 'customer.php' );
+
+		$this->status( 'done' );
+
+	}
+
+
+	/**
+	 * Adds the customer data
+	 *
+	 * @param string $path Path to data file
+	 * @throws \Aimeos\MShop\Exception
+	 */
+	protected function process( $path )
+	{
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer domain', $path ) );
 		}
@@ -61,16 +75,18 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$customerAddressManager = $customerManager->getSubManager( 'address', 'Standard' );
 		$customerGroupManager = $customerManager->getSubManager( 'group', 'Standard' );
 
+		$search = $customerManager->createSearch();
+		$search->setConditions( $search->compare( '=~', 'customer.code', 'UTC00' ) );
+		$items = $customerManager->searchItems( $search );
+
 		$this->conn->begin();
 
+		$customerManager->deleteItems( array_keys( $items ) );
 		$parentIds = $this->addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
 		$this->addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
 		$this->addCustomerGroupData( $testdata, $customerGroupManager );
 
 		$this->conn->commit();
-
-		$this->status( 'done' );
-
 	}
 
 
@@ -141,7 +157,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 		foreach( $testdata['customer/address'] as $dataset )
 		{
 			if( !isset( $parentIds[$dataset['parentid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No customer ID found for "%1$s"', $dataset['refid'] ) );
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No customer ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
 			$address->setId( null );
@@ -189,7 +205,9 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$group->setCode( $dataset['code'] );
 			$group->setLabel( $dataset['label'] );
 
-			$customerGroupManager->saveItem( $group, false );
+			try {
+				$customerGroupManager->saveItem( $group, false );
+			} catch( \Exception $e ) { ; } // ignore duplicates
 		}
 	}
 }

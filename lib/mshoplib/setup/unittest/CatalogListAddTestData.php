@@ -203,8 +203,6 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$listItemTypeIds = array();
 		$listItemType = $catalogListTypeManager->createItem();
 
-		$this->conn->begin();
-
 		foreach( $testdata['catalog/lists/type'] as $key => $dataset )
 		{
 			$listItemType->setId( null );
@@ -216,6 +214,8 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$catalogListTypeManager->saveItem( $listItemType );
 			$listItemTypeIds[$key] = $listItemType->getId();
 		}
+
+		$this->conn->begin();
 
 		$listItem = $catalogListManager->createItem();
 		foreach( $testdata['catalog/lists'] as $dataset )
