@@ -23,8 +23,8 @@ class CatalogAddIndexTypeCode extends \Aimeos\MW\Setup\Task\Base
 			'ALTER TABLE "mshop_catalog_index_attribute" ADD "code" VARCHAR(32) NOT NULL AFTER "type"',
 		)
 	);
-	
-	
+
+
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
@@ -34,8 +34,8 @@ class CatalogAddIndexTypeCode extends \Aimeos\MW\Setup\Task\Base
 	{
 		return array();
 	}
-	
-	
+
+
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
@@ -45,8 +45,8 @@ class CatalogAddIndexTypeCode extends \Aimeos\MW\Setup\Task\Base
 	{
 		return array( 'TablesCreateMShop' );
 	}
-	
-	
+
+
 	/**
 	 * Executes the task for MySQL databases.
 	 */
@@ -54,7 +54,7 @@ class CatalogAddIndexTypeCode extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->process( $this->mysql );
 	}
-	
+
 	/**
 	 * Add column to table if it doesn't exist.
 	 *
@@ -63,28 +63,23 @@ class CatalogAddIndexTypeCode extends \Aimeos\MW\Setup\Task\Base
 	protected function process( $stmts )
 	{
 		$this->msg( 'Adding reference ID columns to index tables', 0 );
-		$this->status( '' );
-	
+
 		if( $this->schema->tableExists( 'mshop_catalog_index_attribute' ) === true )
 		{
 			foreach( $stmts as $id => $sql )
 			{
 				$this->msg( sprintf( 'Checking table "%1$s" for column "%2$s"', 'mshop_catalog_index_attribute', $id ), 1 );
-				
+
 				if( $this->schema->columnExists( 'mshop_catalog_index_attribute', $id ) === false )
 				{
 					$this->executeList( $sql );
 					$this->status( 'added' );
-				} 
-				else 
+				}
+				else
 				{
 					$this->status( 'OK' );
 				}
 			}
-		}
-		else
-		{
-			$this->status( 'OK' );
 		}
 	}
 }
