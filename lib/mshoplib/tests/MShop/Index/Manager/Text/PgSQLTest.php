@@ -16,6 +16,15 @@ class PgSQLTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
+		$context = clone \TestHelperMShop::getContext();
+		$config = $context->getConfig();
+
+		$dbadapter = $config->get( 'resource/db-index/adapter', $config->get( 'resource/db/adapter' ) );
+
+		if( $dbadapter !== 'pgsql' ) {
+			$this->markTestSkipped( 'PostgreSQL specific test' );
+		}
+
 		$this->object = new \Aimeos\MShop\Index\Manager\Text\PgSQL( \TestHelperMShop::getContext() );
 	}
 

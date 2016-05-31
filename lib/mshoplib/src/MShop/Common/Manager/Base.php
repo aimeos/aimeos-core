@@ -57,7 +57,14 @@ abstract class Base
 	 */
 	public function createSearch( $default = false )
 	{
-		return new \Aimeos\MW\Criteria\SQL( new \Aimeos\MW\DB\Connection\None() );
+		$dbm = $this->context->getDatabaseManager();
+		$db = $this->getResourceName();
+
+		$conn = $dbm->acquire( $db );
+		$search = new \Aimeos\MW\Criteria\SQL( $conn );
+		$dbm->release( $conn, $db );
+
+		return $search;
 	}
 
 

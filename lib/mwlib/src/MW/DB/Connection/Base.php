@@ -39,6 +39,12 @@ abstract class Base
 	 */
 	public function escape($data)
 	{
-		return str_replace( '\\', '\\\\', str_replace( '\'', '\'\'', $data ) );
+		$quoted = $this->getRawObject()->quote( $data );
+
+		if( $quoted[0] === '\'' ) {
+			$quoted = substr( $quoted, 1, strlen( $quoted ) - 2 );
+		}
+
+		return $quoted;
 	}
 }

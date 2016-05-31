@@ -92,7 +92,12 @@ class MySQL
 	 */
 	public function createSearch( $default = false )
 	{
-		$object = new \Aimeos\MW\Criteria\MySQL( new \Aimeos\MW\DB\Connection\None() );
+		$dbm = $this->getContext()->getDatabaseManager();
+		$db = $this->getResourceName();
+
+		$conn = $dbm->acquire( $db );
+		$object = new \Aimeos\MW\Criteria\MySQL( $conn );
+		$dbm->release( $conn, $db );
 
 		if( $default === true ) {
 			$object->setConditions( parent::createSearch( $default )->getConditions() );

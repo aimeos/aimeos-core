@@ -64,12 +64,8 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 				$this->binds[$position] = (int) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$this->binds[$position] = (float) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
-				// \PDO quote isn't available for ODBC driver
-				$value = str_replace( '\'', '\'\'', str_replace( '\\', '\\\\', $value ) );
-				$this->binds[$position] = '\'' . $value . '\''; break;
 			default:
-				$this->binds[$position] = $value; break;
+				$this->binds[$position] = $this->conn->quote( $value ); break;
 		}
 	}
 

@@ -223,7 +223,7 @@ class DBALTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->release( $conn );
 
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name") VALUES (\'(\\\\\'\')\')', strval( $stmt ) );
+		$this->assertRegexp( '/^INSERT INTO "mw_unit_test" \("name"\) VALUES \(\'\(.*\\\'\)\'\)$/', strval( $stmt ) );
 	}
 
 
@@ -255,7 +255,7 @@ class DBALTest extends \PHPUnit_Framework_TestCase
 		$rows = $result->affectedRows();
 		$result->finish();
 
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name") VALUES (0.15)', strval( $stmt2 ) );
+		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("name") VALUES (\'0.15\')', strval( $stmt2 ) );
 		$this->assertEquals( 1, $rows );
 	}
 

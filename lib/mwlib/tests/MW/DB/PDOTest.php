@@ -214,7 +214,7 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->release( $conn );
 
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, \'(\\\\\'\')\')', strval( $stmt ) );
+		$this->assertRegexp( '/^INSERT INTO "mw_unit_test" \("id", "name"\) VALUES \(1, \'\(.*\\\'\)\'\)$/', strval( $stmt ) );
 	}
 
 
@@ -280,7 +280,7 @@ class PDOTest extends \PHPUnit_Framework_TestCase
 		$rows = $result->affectedRows();
 		$result->finish();
 
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, 0.15)', strval( $stmt2 ) );
+		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, \'0.15\')', strval( $stmt2 ) );
 		$this->assertEquals( 1, $rows );
 	}
 

@@ -146,7 +146,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( "concat('hello','world') LIKE '%low%'", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter(["a","b","c","\'d"])', 4 );
-		$this->assertEquals( "count(name IN ('a','b','c','''d')) = 4", $expr->toString( $types, $translations ) );
+		$this->assertRegexp( "/^count\(name IN \('a','b','c','('|\\\\)'d'\)\) = 4$/", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter([])', 0 );
 		$this->assertEquals( "count(name IN ()) = 0", $expr->toString( $types, $translations ) );

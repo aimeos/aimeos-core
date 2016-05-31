@@ -18,23 +18,28 @@ class PgSQLTest extends \PHPUnit_Framework_TestCase
 	public static function setUpBeforeClass()
 	{
 		$context = clone \TestHelperMShop::getContext();
-		$context->getConfig()->set( 'mshop/index/manager/text/name', 'PgSQL' );
+		$config = $context->getConfig();
+		$dbadapter = $config->get( 'resource/db-index/adapter', $config->get( 'resource/db/adapter' ) );
 
-		$manager = new \Aimeos\MShop\Index\Manager\MySQL( $context );
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
-
-		$search = $productManager->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
-			$search->compare( '==', 'product.editor', $context->getEditor() )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
-
-		foreach( $result as $item )
+		if( $dbadapter === 'pgsql' )
 		{
-			$manager->deleteItem( $item->getId() );
-			$manager->saveItem( $item );
+			$context->getConfig()->set( 'mshop/index/manager/text/name', 'PgSQL' );
+			$manager = new \Aimeos\MShop\Index\Manager\MySQL( $context );
+			$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+
+			$search = $productManager->createSearch();
+			$conditions = array(
+				$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
+				$search->compare( '==', 'product.editor', $context->getEditor() )
+			);
+			$search->setConditions( $search->combine( '&&', $conditions ) );
+			$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
+
+			foreach( $result as $item )
+			{
+				$manager->deleteItem( $item->getId() );
+				$manager->saveItem( $item );
+			}
 		}
 	}
 
@@ -42,17 +47,16 @@ class PgSQLTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$context = clone \TestHelperMShop::getContext();
-		$context->getConfig()->set( 'mshop/index/manager/text/name', 'PgSQL' );
-
 		$this->editor = $context->getEditor();
 		$config = $context->getConfig();
 
-		$dbadapter = $config->get( 'resource/db-product/adapter', $config->get( 'resource/db/adapter' ) );
+		$dbadapter = $config->get( 'resource/db-index/adapter', $config->get( 'resource/db/adapter' ) );
 
 		if( $dbadapter !== 'pgsql' ) {
 			$this->markTestSkipped( 'PostgreSQL specific test' );
 		}
 
+		$context->getConfig()->set( 'mshop/index/manager/text/name', 'PgSQL' );
 		$this->object = new \Aimeos\MShop\Index\Manager\PgSQL( $context );
 	}
 

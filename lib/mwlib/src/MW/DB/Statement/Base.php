@@ -128,7 +128,8 @@ abstract class Base
 			do
 			{
 				$count = 0; $temp = $part;
-				while( ( $count += substr_count( $part, '\'' ) ) % 2 !== 0 )
+				while( ( $pr = str_replace( array( '\'\'', '\\\'' ), '', $part ) ) !== false
+					&& ( $count += substr_count( $pr, '\'' ) ) % 2 !== 0 )
 				{
 					if( ( $part = next( $parts ) ) === false ) {
 						throw new \Aimeos\MW\DB\Exception( 'Number of apostrophes don\'t match' );

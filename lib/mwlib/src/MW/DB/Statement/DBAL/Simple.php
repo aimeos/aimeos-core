@@ -62,10 +62,8 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 				$this->binds[$position] = (int) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$this->binds[$position] = (float) $value; break;
-			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
-				$this->binds[$position] = $this->conn->quote( $value ); break;
 			default:
-				$this->binds[$position] = $value; break;
+				$this->binds[$position] = $this->conn->quote( $value ); break;
 		}
 	}
 

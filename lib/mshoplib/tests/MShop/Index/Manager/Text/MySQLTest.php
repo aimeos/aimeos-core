@@ -16,6 +16,15 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
+		$context = clone \TestHelperMShop::getContext();
+		$config = $context->getConfig();
+
+		$dbadapter = $config->get( 'resource/db-index/adapter', $config->get( 'resource/db/adapter' ) );
+
+		if( $dbadapter !== 'mysql' ) {
+			$this->markTestSkipped( 'MySQL specific test' );
+		}
+
 		$this->object = new \Aimeos\MShop\Index\Manager\Text\MySQL( \TestHelperMShop::getContext() );
 	}
 
