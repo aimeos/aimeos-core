@@ -131,11 +131,6 @@ class OrderMigrateEmailflag extends \Aimeos\MW\Setup\Task\Base
 				$this->status( 'OK' );
 			}
 		}
-		else
-		{
-			$this->status( 'OK' );
-		}
-
 	}
 
 }

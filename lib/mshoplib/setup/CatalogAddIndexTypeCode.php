@@ -63,6 +63,7 @@ class CatalogAddIndexTypeCode extends \Aimeos\MW\Setup\Task\Base
 	protected function process( $stmts )
 	{
 		$this->msg( 'Adding reference ID columns to index tables', 0 );
+		$this->status( '' );
 
 		if( $this->schema->tableExists( 'mshop_catalog_index_attribute' ) === true )
 		{
