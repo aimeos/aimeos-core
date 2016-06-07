@@ -7,14 +7,15 @@
 # Translators:
 # Translators:
 # Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
 # shihua16165 <shihua16165@163.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2016-05-06 13:48+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2016-06-06 09:49+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,52 +25,52 @@ msgstr ""
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr "无帐单地址"
+msgstr "帳單地址 \"%1$s\" 遺漏"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr "无送货地址"
+msgstr "配送地址 \"%1$s\" 遺漏"
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr "插件错误。账单地址有误"
+msgstr "不被允許的帳單地址"
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr "插件错误。送货地址有误"
+msgstr "不被允許的配送地址"
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr "支付服务不可用"
+msgstr "支付選項遺漏"
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr "送货服务不可用"
+msgstr "配送選項遺漏"
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr "服务选项不可用"
+msgstr "不被允許的支付選項"
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr "送货选项不可用"
+msgstr "不被允許的配送選項"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "对不起，部分产品不存在了。请从购物车中删除，继续"
+msgstr "很抱歉，至少一項商品已不存在了。請將其從您的購物車中移除以繼續。"
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "对不起，部分产品被禁用。请从购物车中删除，继续"
+msgstr "很抱歉，至少一個商品已無法購買。請將其從您的購物車中移除以繼續。"
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "对不起，部分产品暂时无法选择。请从购物车中删除，继续"
+msgstr "很抱歉，至少一個商品暫時無法選購。請將其從您的購物車中移除以繼續。"
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr "部分产品价格自动被更新"
+msgstr "至少一個商品的價錢已自動更新"
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "对不起，部分产品暂时缺货。请从购物车中删除，继续"
+msgstr "很抱歉，至少一個商品暫時無存貨。請將其從您的購物車中移除以繼續。"

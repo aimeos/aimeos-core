@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
 # shihua16165 <shihua16165@163.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-05-06 13:44+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2016-06-06 09:55+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 #, php-format
 msgid "%1$d article"
 msgid_plural "%1$d articles"
-msgstr[0] "%1$d 产品"
+msgstr[0] "%1$d 產品"
 
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
 #. first name (%4$s), last name (%5$s),
@@ -46,7 +47,7 @@ msgid ""
 "%16$s\n"
 "%17$s\n"
 "%18$s\n"
-msgstr ""
+msgstr "%1$s\n%2$s %3$s %4$s %5$s\n%6$s %7$s\n%8$s\n%9$s %10$s\n%11$s\n%12$s\n%13$s\n%14$s\n%15$s\n%16$s\n%17$s\n%18$s\n"
 
 #. / Price format with price value (%1$s) and currency (%2$s)
 #, php-format
@@ -56,13 +57,13 @@ msgstr "%1$s %2$s"
 #. / Rebate format with rebate value (%1$s) and currency (%2$s)
 #, php-format
 msgid "%1$s %2$s off"
-msgstr ""
+msgstr "%1$s %2$s 折扣"
 
 #. / Configurable product attribute name (%1$s) with sign (%4$s, +/-), price
 #. value (%2$s) and currency (%3$s)
 #, php-format
 msgid "%1$s ( %4$s%2$s%3$s )"
-msgstr ""
+msgstr "%1$s ( %4$s%2$s%3$s )"
 
 #. / Order status (%1$s) and date (%2$s), e.g. "received at 2000-01-01"
 #, php-format
@@ -81,41 +82,41 @@ msgid "%1$s%3$s + %2$s%3$s"
 msgstr "%1$s%3$s + %2$s%3$s"
 
 msgid "+"
-msgstr ""
+msgstr "+"
 
 #. / Price shipping format with shipping / payment cost value (%1$s) and
 #. currency (%2$s)
 #, php-format
 msgid "+ %1$s %2$s/item"
-msgstr ""
+msgstr "+ %1$s %2$s/項目"
 
 #. / Tax rate format with tax rate in percent (%1$s)
 #, php-format
 msgid "+ %1$s%% VAT"
-msgstr ""
+msgstr "+ %1$s%% 增值稅"
 
 msgid "+ Payment costs"
-msgstr "+ 支付系统手续费"
+msgstr "+ 支付系統手續費"
 
 msgid "+ Shipping"
-msgstr "+ 邮费"
+msgstr "+運送"
 
 msgid "+ shipping costs"
-msgstr ""
+msgstr "+運費"
 
 msgid "+1 123 456 7890"
-msgstr ""
+msgstr "+1 123 456 7890"
 
 #. / Rebate percent format with rebate percent value (%1$s)
 #, php-format
 msgid "-%1$s%%"
-msgstr ""
+msgstr "-%1$s%%"
 
 msgid "Account"
-msgstr ""
+msgstr "帳戶"
 
 msgid "Add to basket"
-msgstr "加入购物车"
+msgstr "加入購物車"
 
 msgid "Additional"
 msgstr "附加"
@@ -125,7 +126,7 @@ msgstr "附加 2"
 
 #, php-format
 msgid "Address with ID \"%1$s\" not found"
-msgstr "未找到 ID \"%1$s\" 地址"
+msgstr "找不到ID為 \"%1$s\"的地址"
 
 msgid "Addresses"
 msgstr "地址"
@@ -134,115 +135,115 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
-msgstr "所有交付运受限于我们的条款和条件，这是在我们的网站，哪些是你接受当您订货。\n \n此电子邮件包含机密信息，是专为使用寻址的人。如果你不是人没那么请回复此邮件并删除电子邮件和附件之后。"
+msgstr "所有的配送及貨運都適用於我們的條款與協議，你可以在我們的網站找到這些條款，當您下訂訂單即表示您同意這些條款與條件。\n這封e-mail包含了專屬個人的私密訊息，如果您不是這封信的收件人請回信給我們並在那之後將這封e-mail與其附件刪除。"
 
 #. / Payment e-mail legal information
 msgid "All orders are subject to our terms and conditions."
-msgstr ""
+msgstr "所有的訂單都適用於我們的條款與協議，你可以在我們的網站找到這些條款，當您下訂訂單即表示您同意這些條款與條件。\n這封e-mail包含了專屬個人的私密訊息，如果您不是這封信的收件人請回信給我們並在那之後將這封e-mail與其附件刪除。"
 
 msgid "An account has been created for you."
-msgstr ""
+msgstr "已為您創建帳戶。"
 
 msgid "Article no.:"
-msgstr "产品号："
+msgstr "產品號："
 
 #, php-format
 msgid "At least one billing address part is missing or invalid"
-msgstr ""
+msgstr "至少一筆帳單寄送地址被遺漏或無效"
 
 #, php-format
 msgid "At least one delivery address part is missing or invalid"
-msgstr ""
+msgstr "至少一筆商品寄送地址被遺漏或無效"
 
 msgid "Attributes"
-msgstr ""
+msgstr "屬性"
 
 msgid "Back"
 msgstr "返回"
 
 msgid "Basket"
-msgstr "购物车"
+msgstr "購物車"
 
 msgid "Billing address"
-msgstr "账单地址"
+msgstr "帳單地址"
 
 #, php-format
 msgid "Billing address part \"%1$s\" is invalid"
-msgstr ""
+msgstr "無效的帳單地址 \"%1$s\""
 
 #, php-format
 msgid "Billing address part \"%1$s\" is missing"
-msgstr "账单地址 \"%1$s\" 有误"
+msgstr "帳單地址 \"%1$s\" 遺漏"
 
 msgid "Bundled products"
-msgstr ""
+msgstr "組合包商品"
 
 msgid "Buy now"
-msgstr "现在购买"
+msgstr "馬上購買"
 
 msgid "Categories"
-msgstr ""
+msgstr "商品型錄"
 
 msgid "Change"
-msgstr "改变"
+msgstr "變更"
 
 msgid "Change payment"
-msgstr "更改付款"
+msgstr "變更支付"
 
 msgid "Characteristics"
-msgstr ""
+msgstr "特色"
 
 msgid "Checkout"
-msgstr "结帐"
+msgstr "結帳"
 
 msgid "City"
 msgstr "市"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement \"%2$s\""
-msgstr ""
+msgstr "class \"%1$s\" 沒有實裝 \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr "类型 \"%1$s\" 不实现接口\"%2$s\""
+msgstr "class \"%1$s\" 沒有實裝界面 \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr "类型 \"%1$s\" 无法使用"
+msgstr "class \"%1$s\" 無法使用"
 
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
+msgstr "找不到class \"%1$s\""
 
 #, php-format
 msgid "Client HTML type is empty"
-msgstr ""
+msgstr "client HTML 類型是空的"
 
 #, php-format
 msgid "Client type \"%1$s\" must consist of two parts separated by \"/\""
-msgstr ""
+msgstr "client 類型 \"%1$s\" 必須由兩個部份組成並以\"/\"隔開"
 
 msgid "Close"
-msgstr "关闭"
+msgstr "關閉"
 
 msgid "Company"
 msgstr "公司"
 
 msgid "Confirmation"
-msgstr "确认"
+msgstr "確認"
 
 msgid "Country"
-msgstr "国家地区"
+msgstr "國家"
 
 msgid "Coupon codes"
-msgstr ""
+msgstr "優惠券代碼"
 
 msgid "Coupons"
-msgstr ""
+msgstr "優惠券"
 
 #, php-format
 msgid "Customer with ID \"%1$s\" not found"
-msgstr "客户 ID \"%1$s\" 未找到"
+msgstr "找不到ID為 \"%1$s\" 的顧客"
 
 #. / Payment e-mail form of address with salutation (%1$s), first name (%2$s)
 #. and last name (%3$s)
@@ -250,61 +251,61 @@ msgstr "客户 ID \"%1$s\" 未找到"
 #. and last name (%3$s)
 #, php-format
 msgid "Dear %1$s %2$s %3$s"
-msgstr "尊敬的 %1$s %2$s %3$s"
+msgstr "親愛的 %1$s %2$s %3$s"
 
 msgid "Dear Sir or Madam"
-msgstr "尊敬的先生或女士"
+msgstr "親愛的先生或女士"
 
 msgid "Delivery"
-msgstr "交货"
+msgstr "運送"
 
 msgid "Delivery address"
-msgstr "送货地址"
+msgstr "收件地址"
 
 #, php-format
 msgid "Delivery address part \"%1$s\" is invalid"
-msgstr ""
+msgstr "無效的收件地址 \"%1$s\""
 
 #, php-format
 msgid "Delivery address part \"%1$s\" is missing"
-msgstr "送货地址 \"%1$s\" 有误"
+msgstr "收件地址 \"%1$s\" 遺漏"
 
 msgid "Description"
-msgstr "描述"
+msgstr "敘述"
 
 msgid "Details"
 msgstr "明细"
 
 msgid "Downloads"
-msgstr ""
+msgstr "下載"
 
 msgid "E-Mail"
-msgstr "电子邮件"
+msgstr "電子郵件"
 
 #. / E-mail HTML title
 msgid "E-mail notification"
-msgstr ""
+msgstr "E-mail通知"
 
 msgid "Favorite products"
-msgstr ""
+msgstr "最愛的商品"
 
 msgid "Fax"
-msgstr "传真"
+msgstr "傳真"
 
 msgid "Fields with an * are mandatory"
-msgstr "带*栏目为必填项"
+msgstr "*為必填欄位"
 
 msgid "Filter"
-msgstr ""
+msgstr "篩選"
 
 msgid "First name"
 msgstr "名"
 
 msgid "GB999999973"
-msgstr ""
+msgstr "GB999999973"
 
 msgid "Go"
-msgstr "前往\n "
+msgstr "前往"
 
 #, php-format
 msgid ""
@@ -312,265 +313,265 @@ msgid ""
 "conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a "
 "href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy "
 "policy\">privacy policy</a>"
-msgstr "我接受 <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">条款及细则</a> and <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">隐私权政策</a>"
+msgstr "我接受 <a href=\"%1$s\" target=\"_blank\" title=\"terms and conditions\" alt=\"terms and conditions\">條款和協議</a> 以及 <a href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy policy\">隱私權政策</a>"
 
 msgid "If back in stock"
-msgstr ""
+msgstr "若商品進貨"
 
 msgid "If price decreases"
-msgstr ""
+msgstr "若價格下降"
 
 #. / E-mail outro
 msgid "If you have any questions, please reply to this e-mail"
-msgstr "如果您有任何疑问，请回复此邮件"
+msgstr "如果您有任何疑問，請回覆此郵件。"
 
 #. / Tax rate format with tax rate in percent (%1$s)
 #, php-format
 msgid "Incl. %1$s%% VAT"
-msgstr ""
+msgstr "包含 %1$s%% 增值稅"
 
 msgid "Included rebates"
-msgstr "已经打完折"
+msgstr "折扣過後"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr "类名 \"%1$s\"有无效的字符"
+msgstr "class名稱 \"%1$s\" 包含無效的字符"
 
 #, php-format
 msgid "Invalid characters in client name \"%1$s\""
-msgstr "客户名 \"%1$s\"有无效的字符 "
+msgstr "client名稱 \"%1$s\"包含無效的字符 "
 
 #, php-format
 msgid "Invalid characters in client name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "client名稱 在\"%2$s\"中的\"%1$s\"包含無效的字符 "
 
 #, php-format
 msgid "Invalid class name \"%1$s\""
-msgstr ""
+msgstr "無效的class名稱 \"%1$s\""
 
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "無效的網域 \"%1$s\""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "無效的factory \"%1$s\""
 
 #, php-format
 msgid "Invalid process response from service provider with code \"%1$s\""
-msgstr "服务提供商反馈无效回答编码 \"%1$s\""
+msgstr "服務供應者傳回無效處理代碼 \"%1$s\""
 
 msgid "Language"
-msgstr "语言"
+msgstr "語言"
 
 msgid "Last name"
-msgstr "姓名"
+msgstr "姓"
 
 msgid "Last seen"
-msgstr "最后出现"
+msgstr "最近觀看"
 
 msgid "Name"
-msgstr "名"
+msgstr "姓名"
 
 msgid "Next"
-msgstr "下"
+msgstr "下一個"
 
 #, php-format
 msgid ""
 "No articles found for <span class=\"searchstring\">\"%1$s\"</span>. Please "
 "try again with a different keyword."
-msgstr "未找到<span class=\"searchstring\">\"%1$s\"</span>产品。请换关键词再试。"
+msgstr "未找到<span class=\"search string\">\"%1$s\"</span>產品。請嘗試使用別的關鍵詞。"
 
 #, php-format
 msgid "No product with ID \"%1$s\" found"
-msgstr ""
+msgstr "沒有找到ID為\"%1$s\"的商品"
 
 #, php-format
 msgid "No service for code \"%1$s\" found"
-msgstr ""
+msgstr "沒有找到代碼為 \"%1$s\" 的服務"
 
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr ""
+msgstr "在 \"%3$s\" 中沒有找到類型項目\"%1$s/%2$s\""
 
 #, php-format
 msgid "No view available"
-msgstr "没有可用的视图"
+msgstr "没有可用的view"
 
 #, php-format
 msgid "Number of coupon codes exceeds the limit"
-msgstr ""
+msgstr "優惠券數量超過限制"
 
 #, php-format
 msgid "Object doesn't implement \"%1$s\""
-msgstr ""
+msgstr "元件沒有實裝 \"%1$s\""
 
 msgid "One month"
-msgstr ""
+msgstr "一個月"
 
 msgid "One or more products you are watching have been updated."
-msgstr ""
+msgstr "一個或多個您關注中的商品已被更新。"
 
 msgid "One week"
-msgstr ""
+msgstr "一個星期"
 
 msgid "Options"
-msgstr "选项"
+msgstr "選項"
 
 msgid "Order ID"
-msgstr "订单编号"
+msgstr "訂單編號"
 
 msgid "Order channel"
-msgstr "订单渠道"
+msgstr "訂單途徑"
 
 msgid "Order details"
-msgstr "订单明细"
+msgstr "訂單明細"
 
 msgid "Order history"
-msgstr "订单记录"
+msgstr "訂單記錄"
 
 msgid "Order status"
-msgstr ""
+msgstr "訂單狀態"
 
 #, php-format
 msgid "Order with ID \"%1$s\" not found"
-msgstr "订单 ID为 \"%1$s\" 未找到"
+msgstr "找不到ID為\"%1$s\"的訂單"
 
 msgid "Other customers also bought"
-msgstr ""
+msgstr "其他人也買了"
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr "第%1$d 页 共 %2$d"
+msgstr "第%1$d 頁 共 %2$d 頁"
 
 msgid "Password"
-msgstr ""
+msgstr "密碼"
 
 msgid "Pay now"
-msgstr ""
+msgstr "馬上付款"
 
 msgid "Payment"
-msgstr "付款"
+msgstr "支付"
 
 msgid "Payment costs"
-msgstr "支付费"
+msgstr "支付手續費"
 
 msgid "Payment status"
-msgstr "支付状态"
+msgstr "支付狀態"
 
 msgid "Pinned products"
-msgstr ""
+msgstr "固定的商品"
 
 msgid "Please accept the terms and conditions"
-msgstr "请接受条款和条件"
+msgstr "請接受條款和協議"
 
 msgid "Please check your order"
-msgstr "请检查您的订单"
+msgstr "請檢查您的訂單"
 
 msgid "Please choose your delivery method"
-msgstr "请选择送货方式"
+msgstr "請選擇您的運送方式"
 
 msgid "Please choose your payment method"
-msgstr "请选择支付方式 "
+msgstr "請選擇您的支付方式 "
 
 msgid "Please enter at least three characters"
-msgstr ""
+msgstr "請至少輸入三個字元"
 
 msgid "Please enter your payment details"
-msgstr ""
+msgstr "請輸入您的支付明細"
 
 msgid "Please select"
-msgstr "请选择"
+msgstr "請選擇"
 
 msgid "Postal code"
-msgstr "邮政编码"
+msgstr "郵遞區號"
 
 msgid "Previous"
-msgstr ""
+msgstr "前一筆"
 
 msgid "Price"
-msgstr "价格"
+msgstr "價格"
 
 msgid "Proceed"
-msgstr "继续"
+msgstr "繼續"
 
 msgid "Processing the payment failed"
-msgstr ""
+msgstr "處理支付失敗"
 
 msgid "Product"
-msgstr ""
+msgstr "商品"
 
 msgid "Products you might be also interested in"
-msgstr ""
+msgstr "您可能會有興趣的商品"
 
 msgid "Properties"
-msgstr ""
+msgstr "屬性"
 
 msgid "Qty"
-msgstr ""
+msgstr "數量"
 
 msgid "Quantity"
-msgstr "数量"
+msgstr "數量"
 
 msgid "Related"
-msgstr ""
+msgstr "關聯的"
 
 msgid "Relevance"
-msgstr "关联"
+msgstr "關聯"
 
 #. / Product search hint with user provided search string (%1$s)
 #, php-format
 msgid "Result for \"%1$s\""
-msgstr "\"%1$s\"结果"
+msgstr "\"%1$s\"的結果"
 
 msgid "Salutation"
-msgstr "称呼"
+msgstr "稱呼"
 
 msgid "Search"
-msgstr ""
+msgstr "搜尋"
 
 #, php-format
 msgid "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d article)"
 msgid_plural ""
 "Search result for <span class=\"searchstring\">\"%1$s\"</span> (%2$d "
 "articles)"
-msgstr[0] " <span class=\"searchstring\">\"%1$s\"</span> (%2$d articles) 搜素结果"
+msgstr[0] "<span class=\"searchstring\">\"%1$s\"</span> (%2$d 產品) 的搜尋结果"
 
 msgid "Select country"
-msgstr "选择国家地区"
+msgstr "選擇國家"
 
 msgid "Select currency"
-msgstr ""
+msgstr "選擇貨幣"
 
 msgid "Select language"
-msgstr ""
+msgstr "選擇語言"
 
 msgid "Select salutation"
-msgstr "选择称呼"
+msgstr "選擇稱呼"
 
 msgid "Select state"
-msgstr ""
+msgstr "選擇州"
 
 msgid "Service fees"
-msgstr "手续费"
+msgstr "服務費"
 
 msgid "Services"
-msgstr "服务"
+msgstr "服務"
 
 msgid "Shipping"
-msgstr "送货费"
+msgstr "運送"
 
 msgid "Show"
-msgstr "显示"
+msgstr "顯示"
 
 msgid "Show all quotes"
-msgstr "显示所有报价"
+msgstr "顯示所有報價"
 
 msgid "Sort by:"
 msgstr "排序方式："
 
 msgid "State"
-msgstr "状态"
+msgstr "狀態"
 
 #. / Stock string composition with warehouse name (%1$s, normally left out)
 #. and stock level string (%2$s)
@@ -578,7 +579,7 @@ msgstr "状态"
 #. and stock level string (%2$s)
 #, php-format
 msgid "Stock: %1$s, %2$s"
-msgstr "库存: %1$s, %2$s"
+msgstr "庫存：%1$s，%2$s"
 
 #. / Stock string composition with warehouse name (%1$s, normally left out),
 #. stock level string (%2$s) and back in stock date (%3$s)
@@ -586,29 +587,29 @@ msgstr "库存: %1$s, %2$s"
 #. stock level string (%2$s) and back in stock date (%3$s)
 #, php-format
 msgid "Stock: %1$s, %2$s, back on %3$s"
-msgstr "库存: %1$s, %2$s, 补货日期%3$s"
+msgstr "庫存：%1$s，%2$s, 補貨日期 %3$s"
 
 msgid "Street"
 msgstr "街道"
 
 msgid "Sub-total"
-msgstr "小计"
+msgstr "小計"
 
 msgid "Suggested products"
-msgstr "建议产品"
+msgstr "建議商品"
 
 msgid "Sum"
-msgstr "合计"
+msgstr "合計"
 
 msgid "Telephone"
-msgstr "电话"
+msgstr "電話"
 
 #, php-format
 msgid "Template \"%1$s\" not available"
-msgstr "模板 \"%1$s\" 不可用"
+msgstr "Template \"%1$s\" 無法使用"
 
 msgid "Terms and conditions"
-msgstr "条款和条件"
+msgstr "條款和協議"
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -616,7 +617,7 @@ msgstr "条款和条件"
 #. status (%3%s)
 #, php-format
 msgid "Thank you for your order %1$s from %2$s."
-msgstr "谢谢您的订单 %1$s 日期 %2$s."
+msgstr "非常感謝您從 %2$s下訂了訂單 %1$s。"
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -627,7 +628,7 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "The order is pending until we receive the final payment. If you've chosen to pay in advance, please transfer the money to our bank account with the order ID %1$s as reference."
-msgstr "非常感谢您的%2$s的订单%1$s。\n\n订单正在等待付款。请经通过银行汇款并且填写订单编号%1$s。"
+msgstr "非常感謝您從%2$s下訂了訂單%1$s。\n\n訂單正在等待支付。如果您想要提前支付，請匯款到訂單 %1$s 中所提示的我們銀行帳戶。"
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -638,17 +639,17 @@ msgid ""
 "Thank you for your order %1$s from %2$s.\n"
 "\n"
 "We received the payment and will care about your order immediately."
-msgstr "非常感谢您的%2$s的订单%1$s。\n\n我收到了您的货款并且正在处理订单。"
+msgstr "非常感謝您從%2$s下訂了訂單%1$s。\n\n我們收到了您的支付並且正在處理訂單。"
 
 msgid ""
 "Thank you for your order and authorizing the payment.\n"
 "An e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "非常感謝您的下訂與支付。\n我們將在幾分鐘之內傳送一封完整訂單明細的e-mail給您。"
 
 msgid ""
 "Thank you for your order.\n"
 "We received your payment and an e-mail with the order details will be sent to you within the next few minutes."
-msgstr ""
+msgstr "非常感謝您的下訂。\n我們將在幾分鐘之內傳送一封完整訂單明細的e-mail給您。"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -658,12 +659,12 @@ msgstr ""
 msgid ""
 "The delivery status of your order %1$s from %2$s has been changed to "
 "\"%3$s\"."
-msgstr ""
+msgstr "您從 %2$s 下訂的訂單 %1$s 的配送狀態已變更為 \"%3$s\"。"
 
 msgid ""
 "The order was canceled.\n"
 "Do you wish to retry your order?"
-msgstr ""
+msgstr "該筆訂單已被取消。\n你確定要重新下訂嗎？"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -671,12 +672,12 @@ msgstr ""
 #. delivery status (%3%s)
 #, php-format
 msgid "The parcel for your order %1$s from %2$s could not be delivered."
-msgstr "%2$s的订单%1$s包裹无法送到"
+msgstr "您從%2$s下訂的訂單%1$s包裹無法送達。"
 
 msgid ""
 "The payment confirmation for your order is still pending.\n"
 "You will get an e-mail as soon as the payment is authorized."
-msgstr ""
+msgstr "您的訂單正在進行確認支付中。\n在支付通過之後我們將會e-mail通知您。"
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -684,61 +685,61 @@ msgstr ""
 #. status (%3%s)
 #, php-format
 msgid "The payment for your order %1$s from %2$s has been refunded."
-msgstr "%2$s的订单%1$s退款已经完成。"
+msgstr "您從%2$s下單的訂單%1$s已退款完成。"
 
 msgid "Three month"
-msgstr ""
+msgstr "三個月"
 
 msgid "Time frame"
-msgstr ""
+msgstr "時間範圍"
 
 msgid "Top seller"
-msgstr "畅销产品"
+msgstr "熱門商品"
 
 msgid "Total"
-msgstr "合计"
+msgstr "合計"
 
 msgid "Total quantity"
-msgstr ""
+msgstr "總計數量"
 
 msgid "Try again"
-msgstr "再试一次"
+msgstr "再試一次"
 
 msgid "Two weeks"
-msgstr ""
+msgstr "兩個星期"
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr ""
+msgstr "無法呼叫method \"%1$s\""
 
 #, php-format
 msgid "Unable to create an account for \"%1$s\": %2$s"
-msgstr ""
+msgstr "無法為\"%1$s\"創建帳戶：%2$s"
 
 #, php-format
 msgid "Unable to save address for customer \"%1$s\": %2$s"
-msgstr "无法保存客户 \"%1$s\": %2$s地址"
+msgstr "無法保存顧客 \"%1$s\" 的地址：%2$s"
 
 #, php-format
 msgid "Unable to set cache entry: %1$s"
-msgstr ""
+msgstr "無法設定快取條目：%1$s"
 
 msgid ""
 "Unfortunately, the payment for your order was refused.\n"
 "Do you wish to retry?"
-msgstr ""
+msgstr "很抱歉，您的支付失敗了。\n您想要重試嗎?"
 
 msgid "Update"
 msgstr "更新"
 
 msgid "Vat ID"
-msgstr ""
+msgstr "增值稅ID"
 
 msgid "Watch"
-msgstr ""
+msgstr "關注"
 
 msgid "Watched products"
-msgstr ""
+msgstr "關注中的商品"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -746,10 +747,10 @@ msgstr ""
 #. delivery status (%3%s)
 #, php-format
 msgid "We received the returned parcel for your order %1$s from %2$s."
-msgstr ""
+msgstr "我們收到了您來自於%2$s的訂單%1$s的退回貨物。"
 
 msgid "Web site"
-msgstr "网址"
+msgstr "網站"
 
 msgid "X"
 msgstr "X"
@@ -760,20 +761,20 @@ msgid "Y-m-d"
 msgstr "年-月-日"
 
 msgid "You are here:"
-msgstr "您现在的位置："
+msgstr "您現在的位置："
 
 msgid "You will now be forwarded to the next step"
 msgstr "正在转到下一步"
 
 msgid "Your account"
-msgstr ""
+msgstr "您的帳戶"
 
 msgid "Your choice"
-msgstr ""
+msgstr "您的選擇"
 
 #. / Account creation e-mail subject
 msgid "Your new account"
-msgstr ""
+msgstr "您的新帳戶"
 
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
@@ -787,7 +788,7 @@ msgstr ""
 #. / Payment e-mail subject with order ID
 #, php-format
 msgid "Your order %1$s"
-msgstr "您的订单 %1$s"
+msgstr "您的訂單 %1$s"
 
 #. / Delivery e-mail intro with order ID (%1$s), order date (%2$s) and
 #. delivery status (%3%s)
@@ -795,95 +796,95 @@ msgstr "您的订单 %1$s"
 #. delivery status (%3%s)
 #, php-format
 msgid "Your order %1$s from %2$s has been dispatched."
-msgstr ""
+msgstr "您從%2$s下訂的訂單%1$s已出貨。"
 
 msgid "Your search result"
-msgstr ""
+msgstr "您的搜尋結果"
 
 #. / Product notification e-mail subject
 msgid "Your watched products"
-msgstr ""
+msgstr "您關注中的商品"
 
 #, php-format
 msgid "address"
 msgstr "地址"
 
 msgid "clear all"
-msgstr ""
+msgstr "清除全部"
 
 #, php-format
 msgid "delivery"
-msgstr "交货"
+msgstr "運送"
 
 #. / Price quantity format with quantity (%1$s)
 #, php-format
 msgid "from %1$s"
-msgstr ""
+msgstr "從 %1$s"
 
 msgid "like billing address"
-msgstr "跟账单地址一样"
+msgstr "同帳單地址"
 
 msgid "new address"
 msgstr "新地址"
 
 msgid "none"
-msgstr ""
+msgstr "無"
 
 #, php-format
 msgid "order"
-msgstr "订单"
+msgstr "訂單"
 
 #, php-format
 msgid "payment"
-msgstr "付款"
+msgstr "支付"
 
 #, php-format
 msgid "process"
-msgstr ""
+msgstr "處理程序"
 
 #. / code for "product is in stock"
 msgid "stock-high"
-msgstr ""
+msgstr "庫存量多"
 
 #. / code for "only a few products are available"
 msgid "stock-low"
-msgstr ""
+msgstr "庫存量少"
 
 #. / code for "product is out of stock"
 msgid "stock-out"
-msgstr ""
+msgstr "無庫存"
 
 #. / code for "product is available (without stock limit)"
 msgid "stock-unlimited"
-msgstr "库存无限"
+msgstr "庫存無限"
 
 #, php-format
 msgid "summary"
-msgstr "总结"
+msgstr "總結"
 
 msgid "▲ Name"
-msgstr ""
+msgstr "▲ 名稱"
 
 msgid "▲ Price"
-msgstr ""
+msgstr "▲ 價格"
 
 msgid "▶"
-msgstr ""
+msgstr "▶"
 
 msgid "▶▶"
-msgstr ""
+msgstr "▶▶"
 
 msgid "▼"
-msgstr ""
+msgstr "▼"
 
 msgid "▼ Name"
-msgstr ""
+msgstr "▼ 名稱"
 
 msgid "▼ Price"
-msgstr ""
+msgstr "▼ 價格"
 
 msgid "◀"
-msgstr ""
+msgstr "◀"
 
 msgid "◀◀"
-msgstr ""
+msgstr "◀◀"
