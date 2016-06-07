@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 21:17+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -96,7 +96,7 @@ msgid "Attribute: {0} ({1})"
 msgstr "Atributo: {0} ({1})"
 
 msgid "Attributes"
-msgstr ""
+msgstr "Atributos"
 
 msgid "Available attributes"
 msgstr "Atributos disponibles"
@@ -158,10 +158,10 @@ msgid "Catalog: {0} ({1})"
 msgstr "Catálogo: {0} ({1})"
 
 msgid "Categories"
-msgstr ""
+msgstr "Categorías"
 
 msgid "Characteristics"
-msgstr ""
+msgstr "Características"
 
 msgid "City"
 msgstr "Ciudad"
@@ -176,7 +176,7 @@ msgid "Click to upload"
 msgstr "Haga clic para subir"
 
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 msgid "Code"
 msgstr "Código"
@@ -315,7 +315,7 @@ msgid "Domain (required)"
 msgstr "Dominio (obligatorio)"
 
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 msgid "E-Mail"
 msgstr "Correo electrónico"
@@ -363,7 +363,7 @@ msgid "File URL"
 msgstr "Dirección del archivo"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 msgid "First"
 msgstr ""
@@ -467,7 +467,7 @@ msgid "Lastname"
 msgstr "Apellido"
 
 msgid "Length"
-msgstr ""
+msgstr "Longitud"
 
 msgid "List"
 msgstr "Lista"
@@ -596,7 +596,7 @@ msgid "Name of the service provider class (required)"
 msgstr "Nombre de la clase del proveedor de servicios (obligatorio)"
 
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 msgid "No error information available"
 msgstr "No hay información del error disponible"
@@ -611,7 +611,7 @@ msgid "Notice"
 msgstr "Aviso"
 
 msgid "Option"
-msgstr ""
+msgstr "Opción"
 
 msgid "Order"
 msgstr "Pedido"
@@ -627,7 +627,7 @@ msgstr "General"
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Página %1$d de %2$d"
 
 msgid "Parameter"
 msgstr "Parámetro"
@@ -690,7 +690,7 @@ msgid "Preview URL"
 msgstr "Dirección de previsualización"
 
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 msgid "Price"
 msgstr "Precio"
@@ -853,7 +853,7 @@ msgid "Schema {0} is  not registered"
 msgstr "El esquema {0} no está registrado"
 
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #, python-brace-format
 msgid "Search schema {0} is  not registered"
@@ -903,7 +903,7 @@ msgid "Site"
 msgstr "Sitio"
 
 msgid "Size"
-msgstr ""
+msgstr "Talla"
 
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Lo sentimos, aún no se ha implementado la adición manual de pedidos"
@@ -1094,7 +1094,7 @@ msgid "Weight"
 msgstr ""
 
 msgid "Width"
-msgstr ""
+msgstr "Ancho"
 
 msgid "YYYY-MM-DD (optional)"
 msgstr "AAAA-MM-DD (opcional)"

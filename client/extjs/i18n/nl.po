@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 21:17+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -99,7 +99,7 @@ msgid "Attribute: {0} ({1})"
 msgstr "Eigenschap: {0} ({1})"
 
 msgid "Attributes"
-msgstr ""
+msgstr "Attributen"
 
 msgid "Available attributes"
 msgstr "Beschikbare kenmerken"
@@ -161,10 +161,10 @@ msgid "Catalog: {0} ({1})"
 msgstr "Catalogus: {0} ({1})"
 
 msgid "Categories"
-msgstr ""
+msgstr "Categorieën"
 
 msgid "Characteristics"
-msgstr ""
+msgstr "Karakteristieken"
 
 msgid "City"
 msgstr "Stad"
@@ -179,7 +179,7 @@ msgid "Click to upload"
 msgstr "Klik om te uploaden"
 
 msgid "Close"
-msgstr ""
+msgstr "Sluiten"
 
 msgid "Code"
 msgstr "Code"
@@ -212,7 +212,7 @@ msgid "Costs"
 msgstr "Kosten"
 
 msgid "Costs per item"
-msgstr ""
+msgstr "Kosten per item"
 
 msgid "Could not upload file. Please notify your administrator"
 msgstr "Kon het bestand niet uploaden, contacteer de beheerder"
@@ -366,7 +366,7 @@ msgid "File URL"
 msgstr "Bestands URL"
 
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 msgid "First"
 msgstr ""
@@ -470,7 +470,7 @@ msgid "Lastname"
 msgstr "Achternaam"
 
 msgid "Length"
-msgstr ""
+msgstr "Lengte"
 
 msgid "List"
 msgstr "Lijst"
@@ -599,7 +599,7 @@ msgid "Name of the service provider class (required)"
 msgstr "Naam van de service provider class (verplicht)"
 
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 msgid "No error information available"
 msgstr "Geen fout informatie beschikaar"
@@ -614,7 +614,7 @@ msgid "Notice"
 msgstr "Notificatie"
 
 msgid "Option"
-msgstr ""
+msgstr "Optie"
 
 msgid "Order"
 msgstr "Aankoop"
@@ -630,7 +630,7 @@ msgstr "Overzicht"
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Pagina %1$d van %2$d"
 
 msgid "Parameter"
 msgstr "Parameter"
@@ -693,7 +693,7 @@ msgid "Preview URL"
 msgstr "Voorbeeld URL"
 
 msgid "Previous"
-msgstr ""
+msgstr "Vorige"
 
 msgid "Price"
 msgstr "Prijs"
@@ -765,12 +765,12 @@ msgid "Product stock"
 msgstr "Product voorraad"
 
 msgid "Product supplier (optional)"
-msgstr ""
+msgstr "Product leverancier (optioneel)"
 
 #. : Product tag item panel title with product label ({0}) and site code ({1)}
 #, python-brace-format
 msgid "Product tag: {0} ({1})"
-msgstr ""
+msgstr "Product tag: {0} ({1})"
 
 msgid "Product tax rate"
 msgstr "Product BTW"
@@ -856,7 +856,7 @@ msgid "Schema {0} is  not registered"
 msgstr "Schema {0} is niet geregistreerd"
 
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #, python-brace-format
 msgid "Search schema {0} is  not registered"
@@ -875,7 +875,7 @@ msgid "Service ID"
 msgstr "Dienst ID"
 
 msgid "Service fees"
-msgstr ""
+msgstr "Service kosten"
 
 msgid "Service item details"
 msgstr "Service item details"
@@ -906,7 +906,7 @@ msgid "Site"
 msgstr "Site"
 
 msgid "Size"
-msgstr ""
+msgstr "Grootte"
 
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Sorry, handmatig orders toevoegen is momenteel nog niet mogelijk."
@@ -1097,7 +1097,7 @@ msgid "Weight"
 msgstr ""
 
 msgid "Width"
-msgstr ""
+msgstr "Breedte"
 
 msgid "YYYY-MM-DD (optional)"
 msgstr "DD-MM-YYYY (optioneel)"
