@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 20:42+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -96,7 +96,7 @@ msgstr "Objet de configuration indisponible"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Configuration de la déclaration SQL requise pour \"%1$s\" indisponible"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
@@ -240,7 +240,7 @@ msgstr ""
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Entrée \"%2$s\" dans \"%1$s\" introuvable"
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
@@ -338,7 +338,7 @@ msgstr "Pas de prix pour le produit \"%1$s\" ou code produit \"%2$s\" disponible
 
 #, php-format
 msgid "No product with code \"%1$s\" found"
-msgstr ""
+msgstr "Pas de produit avec le code \"%1$s\" trouvé"
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
@@ -597,7 +597,7 @@ msgstr "Racine de l'arbre avec le code \"%1$s\" dans \"%2$s\" introuvable"
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Entrée de type \"%1$s\" dans \"%2$s\" introuvable"
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-05-06 15:06+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Henry LIU <dadaycm@hotmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgid "Add filter"
 msgstr ""
 
 msgid "Additional"
-msgstr ""
+msgstr "附加"
 
 msgid "Additional information, e.g. flat number"
 msgstr ""
@@ -96,7 +96,7 @@ msgid "Attribute: {0} ({1})"
 msgstr "属性: {0} ({1})"
 
 msgid "Attributes"
-msgstr ""
+msgstr "属性"
 
 msgid "Available attributes"
 msgstr "可用的属性"
@@ -158,10 +158,10 @@ msgid "Catalog: {0} ({1})"
 msgstr "目录: {0} ({1})"
 
 msgid "Categories"
-msgstr ""
+msgstr "类目"
 
 msgid "Characteristics"
-msgstr ""
+msgstr "特色"
 
 msgid "City"
 msgstr "市"
@@ -176,7 +176,7 @@ msgid "Click to upload"
 msgstr "点击上传"
 
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 msgid "Code"
 msgstr "编码"
@@ -209,7 +209,7 @@ msgid "Costs"
 msgstr "成本"
 
 msgid "Costs per item"
-msgstr ""
+msgstr "每件成本"
 
 msgid "Could not upload file. Please notify your administrator"
 msgstr "无法上传文件。请通知管理员"
@@ -243,7 +243,7 @@ msgid "Coupon: {0} ({1})"
 msgstr ""
 
 msgid "Coupons"
-msgstr ""
+msgstr "优惠券"
 
 msgid "Created"
 msgstr "创建"
@@ -363,13 +363,13 @@ msgid "File URL"
 msgstr ""
 
 msgid "Filter"
-msgstr ""
+msgstr "筛选"
 
 msgid "First"
 msgstr ""
 
 msgid "First name"
-msgstr ""
+msgstr "名"
 
 msgid "Firstname"
 msgstr "名"
@@ -458,7 +458,7 @@ msgid "Last modified"
 msgstr "最后修改"
 
 msgid "Last name"
-msgstr ""
+msgstr "姓名"
 
 msgid "Last name (required)"
 msgstr ""
@@ -467,7 +467,7 @@ msgid "Lastname"
 msgstr "姓"
 
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 msgid "List"
 msgstr ""
@@ -575,16 +575,16 @@ msgid "Minimum quantity"
 msgstr ""
 
 msgid "Miss"
-msgstr ""
+msgstr "女士"
 
 msgid "Mr"
-msgstr ""
+msgstr "先生"
 
 msgid "Mrs"
-msgstr ""
+msgstr "女士"
 
 msgid "Name"
-msgstr ""
+msgstr "名"
 
 msgid "Name of the coupon provider class (required)"
 msgstr ""
@@ -596,7 +596,7 @@ msgid "Name of the service provider class (required)"
 msgstr ""
 
 msgid "Next"
-msgstr ""
+msgstr "下"
 
 msgid "No error information available"
 msgstr ""
@@ -611,7 +611,7 @@ msgid "Notice"
 msgstr ""
 
 msgid "Option"
-msgstr ""
+msgstr "选项"
 
 msgid "Order"
 msgstr ""
@@ -627,13 +627,13 @@ msgstr ""
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "第%1$d 页 共 %2$d"
 
 msgid "Parameter"
 msgstr ""
 
 msgid "Password"
-msgstr ""
+msgstr "口令"
 
 msgid "Password (required)"
 msgstr ""
@@ -645,7 +645,7 @@ msgid "Payment date"
 msgstr ""
 
 msgid "Payment status"
-msgstr ""
+msgstr "支付状态"
 
 msgid "Physical values"
 msgstr ""
@@ -681,7 +681,7 @@ msgid "Position"
 msgstr ""
 
 msgid "Postal code"
-msgstr ""
+msgstr "邮政编码"
 
 msgid "Preview"
 msgstr ""
@@ -690,7 +690,7 @@ msgid "Preview URL"
 msgstr ""
 
 msgid "Previous"
-msgstr ""
+msgstr "前面一个"
 
 msgid "Price"
 msgstr "价格"
@@ -715,7 +715,7 @@ msgid "Priority"
 msgstr ""
 
 msgid "Product"
-msgstr ""
+msgstr "商品"
 
 msgid "Product ID"
 msgstr ""
@@ -798,7 +798,7 @@ msgid "Promotion"
 msgstr ""
 
 msgid "Properties"
-msgstr ""
+msgstr "属性"
 
 msgid "Property"
 msgstr ""
@@ -813,7 +813,7 @@ msgid "Purchase date"
 msgstr ""
 
 msgid "Quantity"
-msgstr ""
+msgstr "数量"
 
 msgid "Quantity or empty if unlimited (optional)"
 msgstr ""
@@ -840,7 +840,7 @@ msgid "Result"
 msgstr ""
 
 msgid "Salutation"
-msgstr ""
+msgstr "称呼"
 
 msgid "Save"
 msgstr ""
@@ -853,7 +853,7 @@ msgid "Schema {0} is  not registered"
 msgstr ""
 
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #, python-brace-format
 msgid "Search schema {0} is  not registered"
@@ -872,7 +872,7 @@ msgid "Service ID"
 msgstr ""
 
 msgid "Service fees"
-msgstr ""
+msgstr "手续费"
 
 msgid "Service item details"
 msgstr ""
@@ -891,7 +891,7 @@ msgid "Service: {0} ({1})"
 msgstr ""
 
 msgid "Services"
-msgstr ""
+msgstr "服务"
 
 msgid "Short description"
 msgstr ""
@@ -903,7 +903,7 @@ msgid "Site"
 msgstr ""
 
 msgid "Size"
-msgstr ""
+msgstr "尺寸"
 
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr ""
@@ -915,7 +915,7 @@ msgid "Start date"
 msgstr ""
 
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 msgid "Status"
 msgstr ""
@@ -927,7 +927,7 @@ msgid "Stock level"
 msgstr ""
 
 msgid "Street"
-msgstr ""
+msgstr "街道"
 
 msgid "Street (required)"
 msgstr ""
@@ -978,7 +978,7 @@ msgid "Telefax"
 msgstr ""
 
 msgid "Telephone"
-msgstr ""
+msgstr "电话"
 
 msgid "Telephone number, e.g. +155512345"
 msgstr ""
@@ -1020,7 +1020,7 @@ msgid "Title"
 msgstr ""
 
 msgid "Total"
-msgstr ""
+msgstr "合计"
 
 msgid "Two letter country code, e.g. \"US\" (required)"
 msgstr ""
@@ -1065,7 +1065,7 @@ msgid "Variants"
 msgstr ""
 
 msgid "Vat ID"
-msgstr ""
+msgstr "增值税编号"
 
 msgid "Vat ID, e.g. \"GB999999999\""
 msgstr ""
@@ -1094,7 +1094,7 @@ msgid "Weight"
 msgstr ""
 
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 msgid "YYYY-MM-DD (optional)"
 msgstr ""

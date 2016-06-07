@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 20:42+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -132,7 +132,7 @@ msgstr ""
 
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
-msgstr ""
+msgstr "Type de liste pour le domaine \"%1$s\" et le code \"%2$s\" non trouvé"
 
 msgid "Log cleanup"
 msgstr ""
@@ -221,7 +221,7 @@ msgstr ""
 
 #, php-format
 msgid "Template \"%1$s\" not available"
-msgstr ""
+msgstr "Modèle \"%1$s\" indisponible"
 
 #, php-format
 msgid "Unable to call factory method \"%1$s\""

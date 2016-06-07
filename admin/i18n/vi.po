@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 21:17+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/aimeos/aimeos-core/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgid "Add filter"
 msgstr ""
 
 msgid "Additional"
-msgstr ""
+msgstr "Bổ sung"
 
 msgid "Additional information, e.g. flat number"
 msgstr ""
@@ -48,7 +48,7 @@ msgid "Address ID"
 msgstr ""
 
 msgid "Addresses"
-msgstr ""
+msgstr "Các địa chỉ"
 
 msgid "All"
 msgstr ""
@@ -130,7 +130,7 @@ msgid "Basic"
 msgstr ""
 
 msgid "Billing address"
-msgstr ""
+msgstr "Địa chỉ hóa đơn"
 
 msgid "Birthday"
 msgstr ""
@@ -162,7 +162,7 @@ msgid "Characteristics"
 msgstr ""
 
 msgid "City"
-msgstr ""
+msgstr "Thành phố"
 
 msgid "City name (required)"
 msgstr ""
@@ -174,7 +174,7 @@ msgid "Click to upload"
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Đóng lại"
 
 msgid "Code"
 msgstr ""
@@ -189,7 +189,7 @@ msgid "Comment"
 msgstr ""
 
 msgid "Company"
-msgstr ""
+msgstr "Công ty"
 
 msgid "Company name"
 msgstr ""
@@ -216,7 +216,7 @@ msgid "Count"
 msgstr ""
 
 msgid "Country"
-msgstr ""
+msgstr "Quốc gia"
 
 msgid "Country code"
 msgstr ""
@@ -292,7 +292,7 @@ msgid "Delete items?"
 msgstr ""
 
 msgid "Delivery address"
-msgstr ""
+msgstr "Địa chỉ gửi"
 
 msgid "Delivery date"
 msgstr ""
@@ -316,7 +316,7 @@ msgid "Download"
 msgstr ""
 
 msgid "E-Mail"
-msgstr ""
+msgstr "Email"
 
 msgid "E-Mail, e.g. me@example.com (required)"
 msgstr ""
@@ -367,7 +367,7 @@ msgid "First"
 msgstr ""
 
 msgid "First name"
-msgstr ""
+msgstr "Tên"
 
 msgid "Firstname"
 msgstr ""
@@ -444,7 +444,7 @@ msgid "Label"
 msgstr ""
 
 msgid "Language"
-msgstr ""
+msgstr "Ngôn ngữ"
 
 msgid "Language (required)"
 msgstr ""
@@ -456,7 +456,7 @@ msgid "Last modified"
 msgstr ""
 
 msgid "Last name"
-msgstr ""
+msgstr "Họ"
 
 msgid "Last name (required)"
 msgstr ""
@@ -582,7 +582,7 @@ msgid "Mrs"
 msgstr ""
 
 msgid "Name"
-msgstr ""
+msgstr "Tên"
 
 msgid "Name of the coupon provider class (required)"
 msgstr ""
@@ -594,7 +594,7 @@ msgid "Name of the service provider class (required)"
 msgstr ""
 
 msgid "Next"
-msgstr ""
+msgstr "Tiếp theo"
 
 msgid "No error information available"
 msgstr ""
@@ -625,7 +625,7 @@ msgstr ""
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Trang %1$d của %2$d"
 
 msgid "Parameter"
 msgstr ""
@@ -643,7 +643,7 @@ msgid "Payment date"
 msgstr ""
 
 msgid "Payment status"
-msgstr ""
+msgstr "Trạng thái chi trả"
 
 msgid "Physical values"
 msgstr ""
@@ -679,7 +679,7 @@ msgid "Position"
 msgstr ""
 
 msgid "Postal code"
-msgstr ""
+msgstr "Mã vùng"
 
 msgid "Preview"
 msgstr ""
@@ -691,7 +691,7 @@ msgid "Previous"
 msgstr ""
 
 msgid "Price"
-msgstr ""
+msgstr "Giá"
 
 msgid "Price type"
 msgstr ""
@@ -811,7 +811,7 @@ msgid "Purchase date"
 msgstr ""
 
 msgid "Quantity"
-msgstr ""
+msgstr "Số lượng"
 
 msgid "Quantity or empty if unlimited (optional)"
 msgstr ""
@@ -838,7 +838,7 @@ msgid "Result"
 msgstr ""
 
 msgid "Salutation"
-msgstr ""
+msgstr "Lời chào mừng"
 
 msgid "Save"
 msgstr ""
@@ -870,7 +870,7 @@ msgid "Service ID"
 msgstr ""
 
 msgid "Service fees"
-msgstr ""
+msgstr "Phí dịch vụ"
 
 msgid "Service item details"
 msgstr ""
@@ -889,7 +889,7 @@ msgid "Service: {0} ({1})"
 msgstr ""
 
 msgid "Services"
-msgstr ""
+msgstr "Dịch vụ"
 
 msgid "Short description"
 msgstr ""
@@ -913,7 +913,7 @@ msgid "Start date"
 msgstr ""
 
 msgid "State"
-msgstr ""
+msgstr "Bang"
 
 msgid "Status"
 msgstr ""
@@ -925,7 +925,7 @@ msgid "Stock level"
 msgstr ""
 
 msgid "Street"
-msgstr ""
+msgstr "Tên đường"
 
 msgid "Street (required)"
 msgstr ""
@@ -976,7 +976,7 @@ msgid "Telefax"
 msgstr ""
 
 msgid "Telephone"
-msgstr ""
+msgstr "Số điện thoại"
 
 msgid "Telephone number, e.g. +155512345"
 msgstr ""
@@ -1018,7 +1018,7 @@ msgid "Title"
 msgstr ""
 
 msgid "Total"
-msgstr ""
+msgstr "Tổng cộng"
 
 msgid "Two letter country code, e.g. \"US\" (required)"
 msgstr ""

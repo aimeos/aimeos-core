@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-01-21 15:42+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr "Class \"%1$s\" niet gevonden"
 
 #, php-format
 msgid "Controller path is empty"
-msgstr ""
+msgstr "Controller pad is leeg"
 
 #, php-format
 msgid "Could not set permissions \"%1$s\" for file \"%2$s\""
@@ -82,7 +82,7 @@ msgstr "Niet toegestande class naam \"%1$s\""
 
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "Ongeldige controller \"%1$s\" in \"%2$s\""
 
 #, php-format
 msgid "Invalid controller factory name \"%1$s\""

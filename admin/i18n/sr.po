@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 21:17+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Serbian (http://www.transifex.com/aimeos/aimeos-core/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgid "Add filter"
 msgstr ""
 
 msgid "Additional"
-msgstr ""
+msgstr "Dodatno"
 
 msgid "Additional information, e.g. flat number"
 msgstr ""
@@ -160,7 +160,7 @@ msgid "Categories"
 msgstr ""
 
 msgid "Characteristics"
-msgstr ""
+msgstr "Karakteristike"
 
 msgid "City"
 msgstr "Grad"
@@ -175,7 +175,7 @@ msgid "Click to upload"
 msgstr "Klik za upload"
 
 msgid "Close"
-msgstr ""
+msgstr "Zatvoriti"
 
 msgid "Code"
 msgstr "Kod"
@@ -208,7 +208,7 @@ msgid "Costs"
 msgstr "Troškovi"
 
 msgid "Costs per item"
-msgstr ""
+msgstr "Troškovi po stavci"
 
 msgid "Could not upload file. Please notify your administrator"
 msgstr "Upload neuspešan. Molim Vas obavestite administratora"
@@ -368,7 +368,7 @@ msgid "First"
 msgstr ""
 
 msgid "First name"
-msgstr ""
+msgstr "Ime"
 
 msgid "Firstname"
 msgstr "Ime"
@@ -457,7 +457,7 @@ msgid "Last modified"
 msgstr "Zadnji put promenjeno"
 
 msgid "Last name"
-msgstr ""
+msgstr "Prezime"
 
 msgid "Last name (required)"
 msgstr ""
@@ -466,7 +466,7 @@ msgid "Lastname"
 msgstr "Prezime"
 
 msgid "Length"
-msgstr ""
+msgstr "Dužina"
 
 msgid "List"
 msgstr "Lista"
@@ -574,13 +574,13 @@ msgid "Minimum quantity"
 msgstr "Minimalna količina"
 
 msgid "Miss"
-msgstr ""
+msgstr "gdica"
 
 msgid "Mr"
-msgstr ""
+msgstr "gosp"
 
 msgid "Mrs"
-msgstr ""
+msgstr "gosp"
 
 msgid "Name"
 msgstr "Ime"
@@ -595,7 +595,7 @@ msgid "Name of the service provider class (required)"
 msgstr "Ime klase provajdera servisa (obavezno)"
 
 msgid "Next"
-msgstr ""
+msgstr "Sledece"
 
 msgid "No error information available"
 msgstr "Infornacija o grešci nedostupna"
@@ -610,7 +610,7 @@ msgid "Notice"
 msgstr "Obaveštenje"
 
 msgid "Option"
-msgstr ""
+msgstr "Opcija"
 
 msgid "Order"
 msgstr "Porudžbina"
@@ -626,7 +626,7 @@ msgstr "Pregled"
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Stranica %1$d od %2$d"
 
 msgid "Parameter"
 msgstr "Parametar"
@@ -689,7 +689,7 @@ msgid "Preview URL"
 msgstr "URL pregleda"
 
 msgid "Previous"
-msgstr ""
+msgstr "Prijasnje"
 
 msgid "Price"
 msgstr "Cena"
@@ -761,12 +761,12 @@ msgid "Product stock"
 msgstr "Stanje proizvoda"
 
 msgid "Product supplier (optional)"
-msgstr ""
+msgstr "Dobavljač proizvoda (opcionalno)"
 
 #. : Product tag item panel title with product label ({0}) and site code ({1)}
 #, python-brace-format
 msgid "Product tag: {0} ({1})"
-msgstr ""
+msgstr "Tag proizvoda: {0} ({1})"
 
 msgid "Product tax rate"
 msgstr "Iznos poreza proizvoda"
@@ -852,7 +852,7 @@ msgid "Schema {0} is  not registered"
 msgstr "Schema {0} is not registered"
 
 msgid "Search"
-msgstr ""
+msgstr "traži"
 
 #, python-brace-format
 msgid "Search schema {0} is  not registered"
@@ -871,7 +871,7 @@ msgid "Service ID"
 msgstr "ID servisa"
 
 msgid "Service fees"
-msgstr ""
+msgstr "Naplata usluge"
 
 msgid "Service item details"
 msgstr "Detalji stavke servisa"
@@ -902,7 +902,7 @@ msgid "Site"
 msgstr "Sajt"
 
 msgid "Size"
-msgstr ""
+msgstr "Veličina"
 
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Izvinite, ručno dodavanje narudžbina nije trenutno implementirano"
@@ -926,7 +926,7 @@ msgid "Stock level"
 msgstr "Stanje zaliha"
 
 msgid "Street"
-msgstr ""
+msgstr "Ulica"
 
 msgid "Street (required)"
 msgstr ""
@@ -1093,7 +1093,7 @@ msgid "Weight"
 msgstr ""
 
 msgid "Width"
-msgstr ""
+msgstr "Širina"
 
 msgid "YYYY-MM-DD (optional)"
 msgstr ""

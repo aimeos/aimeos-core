@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 20:42+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -68,10 +68,10 @@ msgid "Customer account e-mails"
 msgstr ""
 
 msgid "Decreases the counts of successfully redeemed coupons"
-msgstr ""
+msgstr "Zmniejszenie liczby wykorzystanych kuponów, zakończonych sukcesem"
 
 msgid "Decreases the stock levels of products in completed orders"
-msgstr ""
+msgstr "Zmniejszenie stanu magazynowego produktów w zamkniętych zamówieniach"
 
 msgid ""
 "Deletes unfinished orders an makes their products and coupon codes available"
@@ -82,10 +82,10 @@ msgid "Deletes unpaid orders to keep the database clean"
 msgstr "Aby utrzymać porządek w bazie danych, usuń niezapłacone zamówienia"
 
 msgid "Deprecated: Use \"Remove unfinised orders\""
-msgstr ""
+msgstr "Stare i niezalecane: Użyj polecenia \"Usuń niezakończone zamówienia\""
 
 msgid "Deprecated: Use order/service/delivery"
-msgstr ""
+msgstr "Stare i niezalecane: użyj zamówienie/usługa/dostawa"
 
 msgid "Executes payment or delivery service providers that uses batch updates"
 msgstr "Wykonanie płatności i usługi dostawy za pomocą uaktualnienia  wsadowego"
@@ -223,7 +223,7 @@ msgstr ""
 
 #, php-format
 msgid "Template \"%1$s\" not available"
-msgstr ""
+msgstr "Szablon \"%1$s\" niedostępny"
 
 #, php-format
 msgid "Unable to call factory method \"%1$s\""
