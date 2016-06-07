@@ -1,0 +1,46 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-06-02 09:30+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "!="
+msgstr "不等於"
+
+msgid "<"
+msgstr "小於"
+
+msgid "<="
+msgstr "小於(等於)"
+
+msgid "=="
+msgstr "等於"
+
+msgid "=~"
+msgstr "開頭"
+
+msgid ">"
+msgstr "大於"
+
+msgid ">="
+msgstr "大於(等於)"
+
+msgid "Search"
+msgstr "搜尋"
+
+msgid "~="
+msgstr "包含"

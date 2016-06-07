@@ -1,0 +1,158 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-06-06 09:42+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, php-format
+msgid "- %1$s : %2$s\n"
+msgstr "- %1$s : %2$s\n"
+
+#, php-format
+msgid "Changing file permissions for \"%1$s\" to \"%2$o\" failed"
+msgstr "將檔案 \"%1$s\" 的權限設定為 \"%2$o\" 失敗"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr "class \"%1$s\" 沒有實裝 \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "找不到class \"%1$s\""
+
+#, php-format
+msgid "Controller path is empty"
+msgstr "controller路徑為空"
+
+#, php-format
+msgid "Could not set permissions \"%1$s\" for file \"%2$s\""
+msgstr "無法將檔案 \"%2$s\" 的權限設定為 \"%1$s\""
+
+#, php-format
+msgid "Couldn't create directory \"%1$s\" with permissions \"%2$o\""
+msgstr "無法以\"%2$o\" 的權限創建新的資料夾 \"%1$s\""
+
+#, php-format
+msgid "Create export directory for attribute IDs: %1$s"
+msgstr "為屬性ID：%1$s 創建匯出資料夾"
+
+#, php-format
+msgid "Create export directory for catalog IDs: %1$s"
+msgstr "為型錄ID：%1$s 創建匯出資料夾"
+
+#, php-format
+msgid "Create export directory for product IDs: %1$s"
+msgstr "為商品ID：%1$s 創建匯出資料夾"
+
+#, php-format
+msgid "Deleting file \"%1$s\" failed"
+msgstr "刪除檔案 \"%1$s\" 失敗"
+
+msgid "Download"
+msgstr "下載"
+
+#, php-format
+msgid "Error in %1$s text import: %2$s"
+msgstr "在 %1$s 文本匯入發生錯誤：%2$s"
+
+#, php-format
+msgid "Factory \"%1$s\" not found"
+msgstr "找不到factory \"%1$s\""
+
+#, php-format
+msgid "File \"%1$s\" was not uploaded"
+msgstr "檔案 \"%1$s\" 沒有被上傳"
+
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr "無效的class名稱 \"%1$s\""
+
+#, php-format
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr "在 \"%2$s\" 之中包含無效的controller \"%1$s\" "
+
+#, php-format
+msgid "Invalid controller factory name \"%1$s\""
+msgstr "無效的factory controller名稱 \"%1$s\""
+
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr "無效的網域 \"%1$s\""
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "無效的factory \"%1$s\""
+
+#, php-format
+msgid "Invalid list type \"%1$s\""
+msgstr "無效的列表類型 \"%1$s\""
+
+#, php-format
+msgid "Invalid method \"%1$s\" in request"
+msgstr "無效的method \"%1$s\""
+
+#, php-format
+msgid "Invalid row from %1$s text import: %2$s"
+msgstr "在 %2$s 文本匯入中包含了無效的行 %1$s"
+
+#, php-format
+msgid "Invalid sort direction \"%1$s\""
+msgstr "無效的分類資料夾 \"%1$s\""
+
+#, php-format
+msgid "Invalid text type \"%1$s\""
+msgstr "無效的文本類型 \"%1$s\""
+
+#, php-format
+msgid "List item doesn't implement \"%1$s\""
+msgstr "列表項目沒有實裝 \"%1$s\""
+
+#, php-format
+msgid "Method \"%1$s\" not found"
+msgstr "找不到method \"%1$s\""
+
+#, php-format
+msgid "Missing parameter \"%1$s\""
+msgstr "缺少參數 \"%1$s\""
+
+#, php-format
+msgid "No allowed image types configured for \"%1$s\""
+msgstr "在 \"%1$s\" 中沒有被允許的圖片格式"
+
+#, php-format
+msgid "Required attribute \"%1$s\" missing in request"
+msgstr "找不到需要的屬性 \"%1$s\""
+
+#, php-format
+msgid "Site item for code \"%1$s\" not found"
+msgstr "找不到代碼為 \"%1$s\" 的網站項目"
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "無法呼叫method \"%1$s\""
+
+#, php-format
+msgid "Unable to create directory \"%1$s\""
+msgstr "無法創建資料夾 \"%1$s\""
+
+#, php-format
+msgid "Unable to create file in \"%1$s\""
+msgstr "在 \"%1$s\" 無法創建檔案"
+
+#, php-format
+msgid "Uploaded file could not be moved to upload directory \"%1$s\""
+msgstr "上傳的檔案無法被移動到上傳資料夾 \"%1$s\""

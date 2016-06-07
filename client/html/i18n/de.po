@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-09 13:05+0100\n"
-"PO-Revision-Date: 2016-02-07 16:42+0000\n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-04-21 21:01+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -26,54 +26,6 @@ msgid_plural "%1$d articles"
 msgstr[0] "%1$d Artikel"
 msgstr[1] "%1$d Artikel"
 
-#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
-#. first name (%4$s), last name (%5$s),
-#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
-#. number), address part three (%8$s, e.g additional information),
-#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
-#. language (%13$s),
-#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
-#. (%17$s), vatid (%18$s)
-#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
-#. first name (%4$s), last name (%5$s),
-#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
-#. number), address part three (%8$s, e.g additional information),
-#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
-#. vatid (%13$s), language (%14$s),
-#. / e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site
-#. (%18$s)
-#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
-#. first name (%4$s), last name (%5$s),
-#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
-#. number), address part three (%8$s, e.g additional information),
-#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
-#. language (%13$s),
-#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
-#. (%17$s), vatid (%18$s)
-#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
-#. first name (%4$s), last name (%5$s),
-#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
-#. number), address part three (%8$s, e.g additional information),
-#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
-#. vatid (%13$s), language (%14$s),
-#. / e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site
-#. (%18$s)
-#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
-#. first name (%4$s), last name (%5$s),
-#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
-#. number), address part three (%8$s, e.g additional information),
-#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
-#. language (%13$s),
-#. / e-mail (%14$s), phone (%15$s), facsimile/telefax (%16$s), web site
-#. (%17$s), vatid (%18$s)
-#. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
-#. first name (%4$s), last name (%5$s),
-#. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
-#. number), address part three (%8$s, e.g additional information),
-#. / postal/zip code (%9$s), city (%10$s), state (%11$s), country (%12$s),
-#. vatid (%13$s), language (%14$s),
-#. / e-mail (%15$s), phone (%16$s), facsimile/telefax (%17$s), web site
-#. (%18$s)
 #. / Address format with company (%1$s), salutation (%2$s), title (%3$s),
 #. first name (%4$s), last name (%5$s),
 #. / address part one (%6$s, e.g street), address part two (%7$s, e.g house
@@ -115,6 +67,7 @@ msgstr "%1$s %2$s Rabatt"
 msgid "%1$s ( %4$s%2$s%3$s )"
 msgstr "%1$s ( %4$s%2$s%3$s )"
 
+#. / Order status (%1$s) and date (%2$s), e.g. "received at 2000-01-01"
 #, php-format
 msgid "%1$s at %2$s"
 msgstr "%1$s am %2$s"
@@ -139,6 +92,7 @@ msgstr "+"
 msgid "+ %1$s %2$s/item"
 msgstr "+ %1$s %2$s/Stück"
 
+#. / Tax rate format with tax rate in percent (%1$s)
 #, php-format
 msgid "+ %1$s%% VAT"
 msgstr "+ %1$s%% MwSt."
@@ -148,6 +102,9 @@ msgstr "+ Zahlungsgebühren"
 
 msgid "+ Shipping"
 msgstr "+ Versandkosten"
+
+msgid "+ shipping costs"
+msgstr "zzgl. Versandkosten"
 
 msgid "+1 123 456 7890"
 msgstr "+49 123 456 7890"
@@ -180,11 +137,11 @@ msgid ""
 "All deliveries shipped are subject to our terms and conditions, which are available on our website and which you accepted when placing your order.\n"
 "\n"
 "This email contains confidential information and is exclusively for the use of the person addressed. Should you not be that person then please reply to this e-mail and delete the e-mail and attachments afterwards."
-msgstr "Alle Lieferungen erfolgen gemäß unseren AGBs, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n\nDiese E-Mail enthält vertrauliche Information und darf ausschliesslich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschliessend. "
+msgstr "Alle Lieferungen erfolgen gemäß unseren AGB, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n\nDiese E-Mail enthält vertrauliche Information und darf ausschliesslich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschliessend. "
 
 #. / Payment e-mail legal information
 msgid "All orders are subject to our terms and conditions."
-msgstr "Alle Bestellungen erfolgen gemäß unseren AGBs, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n\nDiese E-Mail enthält vertrauliche Information und darf ausschliesslich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschliessend. "
+msgstr "Alle Bestellungen erfolgen gemäß unseren AGB, die Sie auf unserer Website einsehen können und die Sie bei der Auftragserteilung akzeptiert haben.\n\nDiese E-Mail enthält vertrauliche Information und darf ausschliesslich von der angesprochenen Person verwendet werden. Sollten Sie nicht diese Person sein, antworten Sie bitte auf diese E-Mail und löschen Sie diese anschliessend. "
 
 msgid "An account has been created for you."
 msgstr "Es wurde ein Benutzerkonto für Sie angelegt."
@@ -358,7 +315,7 @@ msgid ""
 "conditions\" alt=\"terms and conditions\">terms and conditions</a> and <a "
 "href=\"%2$s\" target=\"_blank\" title=\"privacy policy\" alt=\"privacy "
 "policy\">privacy policy</a>"
-msgstr "Ich akzeptiere die <a href=\"%1$s\" target=\"_blank\" title=\"AGBs\" alt=\"AGBs\">AGBs</a> und die <a href=\"%2$s\" target=\"_blank\" title=\"Datenschutzrichtlinien\" alt=\"Datenschutzrichtlinien\">Datenschutzrichtlinien</a>"
+msgstr "Ich akzeptiere die <a href=\"%1$s\" target=\"_blank\" title=\"AGB\" alt=\"AGB\">AGB</a> und die <a href=\"%2$s\" target=\"_blank\" title=\"Datenschutzrichtlinien\" alt=\"Datenschutzrichtlinien\">Datenschutzrichtlinien</a>"
 
 msgid "If back in stock"
 msgstr "Sobald auf Lager"
@@ -508,7 +465,7 @@ msgid "Pinned products"
 msgstr "Merkliste"
 
 msgid "Please accept the terms and conditions"
-msgstr "Bitte akzeptieren Sie die AGBs"
+msgstr "Bitte akzeptieren Sie die AGB"
 
 msgid "Please check your order"
 msgstr "Bitte überprüfen Sie Ihre Bestellung"
@@ -655,7 +612,7 @@ msgid "Template \"%1$s\" not available"
 msgstr "Es wurde keine Vorlage für \"%1$s\" gefunden"
 
 msgid "Terms and conditions"
-msgstr "AGBs"
+msgstr "AGB"
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
@@ -801,6 +758,8 @@ msgstr "Webseite"
 msgid "X"
 msgstr "X"
 
+#. / Date format with year (Y), month (m) and day (d). See
+#. http://php.net/manual/en/function.date.php
 msgid "Y-m-d"
 msgstr "d.m.Y"
 
@@ -820,30 +779,6 @@ msgstr "Ihre Wahl"
 msgid "Your new account"
 msgstr "Ihr neues Benutzerkonto"
 
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
-#. / Delivery e-mail subject with order ID
-#. / Payment e-mail subject with order ID
 #. / Delivery e-mail subject with order ID
 #. / Payment e-mail subject with order ID
 #. / Delivery e-mail subject with order ID

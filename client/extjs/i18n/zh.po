@@ -1,0 +1,1186 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
+# manuel.fries <manuel.fries@gdatasoftware.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-06-06 09:57+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Actual current price"
+msgstr "實際當前價格"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Add filter"
+msgstr "添加篩選"
+
+msgid "Additional"
+msgstr "附加"
+
+msgid "Additional information, e.g. flat number"
+msgstr "附加訊息，例如 flag number"
+
+msgid "Address"
+msgstr "地址"
+
+msgid "Address 1"
+msgstr "地址1"
+
+msgid "Address 2"
+msgstr "地址2"
+
+msgid "Address 3"
+msgstr "地址3"
+
+msgid "Address ID"
+msgstr "地址ID"
+
+msgid "Addresses"
+msgstr "地址"
+
+msgid "All"
+msgstr "所有"
+
+msgid "Associated attributes"
+msgstr "關聯的屬性"
+
+msgid "Associated customer groups"
+msgstr "關聯的顧客群"
+
+msgid "Associated customers"
+msgstr "關聯的顧客"
+
+msgid "Associated media"
+msgstr "關聯的媒體"
+
+msgid "Associated prices"
+msgstr "關聯的價格"
+
+msgid "Associated products"
+msgstr "關聯的商品"
+
+msgid "Associated tags"
+msgstr "關聯的tag"
+
+msgid "Associated texts"
+msgstr "關聯的文本"
+
+msgid "Attribute"
+msgstr "属性"
+
+msgid "Attribute type"
+msgstr "屬性類型"
+
+#. : Attribute type item panel title with type label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Attribute type: {0} ({1})"
+msgstr "屬性類型： {0} ({1})"
+
+#. : Attribute item panel title with attribute label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Attribute: {0} ({1})"
+msgstr "属性： {0} ({1})"
+
+msgid "Attributes"
+msgstr "屬性"
+
+msgid "Available attributes"
+msgstr "可用的属性"
+
+msgid "Available customer groups"
+msgstr "可用的顧客組"
+
+msgid "Available customers"
+msgstr "可用的顧客"
+
+msgid "Available media"
+msgstr "可用的媒體"
+
+msgid "Available prices"
+msgstr "可用價格"
+
+msgid "Available products"
+msgstr "可用商品"
+
+msgid "Available tags"
+msgstr "可用tag"
+
+msgid "Available texts"
+msgstr "可用文本"
+
+msgid "Back in stock"
+msgstr "商品有庫存 "
+
+msgid "Base ID"
+msgstr "基本ID"
+
+msgid "Basic"
+msgstr "基礎"
+
+msgid "Billing address"
+msgstr "帳單地址"
+
+msgid "Birthday"
+msgstr "生日"
+
+msgid "Bundles"
+msgstr "組合包"
+
+msgid "Cache"
+msgstr "快取"
+
+msgid "Cache item details"
+msgstr "快取項目明細"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Catalog"
+msgstr "商品型錄"
+
+#. : Catalog item panel title with catalog label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Catalog: {0} ({1})"
+msgstr "型錄：{0} ({1})"
+
+msgid "Categories"
+msgstr "商品型錄"
+
+msgid "Characteristics"
+msgstr "特色"
+
+msgid "City"
+msgstr "市"
+
+msgid "City name (required)"
+msgstr "城市名 (必填)"
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Click to upload"
+msgstr "點擊以上傳"
+
+msgid "Close"
+msgstr "關閉"
+
+msgid "Code"
+msgstr "代碼"
+
+msgid "Codes"
+msgstr "代碼"
+
+msgid "Columns"
+msgstr "欄位"
+
+msgid "Comment"
+msgstr "備註"
+
+msgid "Company"
+msgstr "公司"
+
+msgid "Company name"
+msgstr "公司名稱"
+
+msgid "Configuration"
+msgstr "配置"
+
+msgid "Content"
+msgstr "内容"
+
+msgid "Copy"
+msgstr "複製"
+
+msgid "Costs"
+msgstr "成本"
+
+msgid "Costs per item"
+msgstr "項目單價"
+
+msgid "Could not upload file. Please notify your administrator"
+msgstr "無法上傳文件。請通知管理員。"
+
+msgid "Count"
+msgstr "計數"
+
+msgid "Country"
+msgstr "國家"
+
+msgid "Country code"
+msgstr "國家代碼"
+
+msgid "Country state, e.g. \"NY\""
+msgstr "國家州別，例如 \"NY\""
+
+msgid "Coupon"
+msgstr "優惠券"
+
+msgid "Coupon code"
+msgstr "優惠券代碼"
+
+#. : Coupon code item panel title with coupon code ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Coupon code: {0} ({1})"
+msgstr "優惠券代碼：{0} ({1})"
+
+#. : Coupon item panel title with coupon label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Coupon: {0} ({1})"
+msgstr "優惠券：{0} ({1})"
+
+msgid "Coupons"
+msgstr "優惠券"
+
+msgid "Created"
+msgstr "創建"
+
+msgid "Currency"
+msgstr "貨幣"
+
+msgid "Currency (required)"
+msgstr "貨幣 (必填)"
+
+msgid "Customer"
+msgstr "顧客"
+
+#. : Customer address item panel title with customer name ({0}) and site code
+#. ({1)}
+#. : Customer address item panel title with customer name ({0}) and site code
+#. ({1)}
+#, python-brace-format
+msgid "Customer address: {0} ({1})"
+msgstr "顧客地址： {0} ({1})"
+
+#. : Customer group item panel title with customer name ({0}) and site code
+#. ({1)}
+#. : Customer group item panel title with customer name ({0}) and site code
+#. ({1)}
+#, python-brace-format
+msgid "Customer group: {0} ({1})"
+msgstr "顧客群組: {0} ({1})"
+
+#. : Customer item panel title with customer label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Customer: {0} ({1})"
+msgstr "顧客：{0} ({1})"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Date back"
+msgstr "追溯到"
+
+msgid "Default"
+msgstr "預設"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Delete items?"
+msgstr "删除項目？"
+
+msgid "Delivery address"
+msgstr "配送地址"
+
+msgid "Delivery date"
+msgstr "配送日期"
+
+msgid "Delivery status"
+msgstr "配送狀態"
+
+msgid "Details"
+msgstr "明細"
+
+msgid "Display field is empty"
+msgstr "顯示欄位為空"
+
+msgid "Domain"
+msgstr "網域"
+
+msgid "Domain (required)"
+msgstr "網域 (必填)"
+
+msgid "Download"
+msgstr "下載"
+
+msgid "E-Mail"
+msgstr "E-Mail"
+
+msgid "E-Mail, e.g. me@example.com (required)"
+msgstr "E-Mail，例如 me@example.com (必填)"
+
+msgid "EAN, SKU or article number (required)"
+msgstr "歐洲商品編碼，最小存貨單位 or 產品號碼 (必填)"
+
+msgid "Edit"
+msgstr "編輯"
+
+msgid "Editor"
+msgstr "編輯者"
+
+msgid "End date"
+msgstr "結束日期"
+
+msgid "Error"
+msgstr "錯誤"
+
+msgid "Expert mode"
+msgstr "匯出模式"
+
+msgid "Expires"
+msgstr "逾期"
+
+msgid "Export"
+msgstr "匯出"
+
+msgid "Export successful"
+msgstr "匯出成功"
+
+msgid "Facility"
+msgstr "設施"
+
+msgid "Facsimile number, e.g. +155512345"
+msgstr "傳真碼，例如+155512345"
+
+msgid "File"
+msgstr "檔案"
+
+msgid "File URL"
+msgstr "檔案路徑"
+
+msgid "Filter"
+msgstr "篩選"
+
+msgid "First"
+msgstr "第一筆"
+
+msgid "First name"
+msgstr "名"
+
+msgid "Firstname"
+msgstr "名"
+
+msgid "Flush"
+msgstr "清除"
+
+msgid "Flush cache?"
+msgstr "清除快取?"
+
+msgid "Full name"
+msgstr "全名"
+
+msgid "Full name (required)"
+msgstr "全名 (必填)"
+
+msgid "Group"
+msgstr "群組"
+
+msgid "Group label (required)"
+msgstr "群組標籤 (必填)"
+
+msgid "Height"
+msgstr "高度"
+
+msgid "Honorary title"
+msgstr "榮譽稱號"
+
+msgid "House no"
+msgstr "門牌號碼"
+
+msgid "House number"
+msgstr "門牌號碼"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Images"
+msgstr "圖片"
+
+msgid "Import"
+msgstr "匯入"
+
+msgid "Internal name"
+msgstr "內部名稱"
+
+msgid "Internal name (required)"
+msgstr "內部名稱 (必填)"
+
+#, python-brace-format
+msgid "Invalid action \"{0}\""
+msgstr "無效操作 \"{0}\""
+
+msgid "Invalid data"
+msgstr "無效數據"
+
+#, python-brace-format
+msgid "Invalid value for configuration key \"{0}\""
+msgstr "無效的設定key \"{0}\""
+
+msgid "Invoice"
+msgstr "發票"
+
+msgid "Item position within the same type"
+msgstr "同類型項目的位置"
+
+msgid "Job item details"
+msgstr "任務項目明細"
+
+msgid "Jobs"
+msgstr "任務"
+
+msgid "Label"
+msgstr "標籤"
+
+msgid "Language"
+msgstr "語言"
+
+msgid "Language (required)"
+msgstr "語言 (必填)"
+
+msgid "Last"
+msgstr "最後一筆"
+
+msgid "Last modified"
+msgstr "最後修改"
+
+msgid "Last name"
+msgstr "姓"
+
+msgid "Last name (required)"
+msgstr "姓 (必填)"
+
+msgid "Lastname"
+msgstr "姓"
+
+msgid "Length"
+msgstr "長度"
+
+msgid "List"
+msgstr "列表"
+
+msgid "List ID"
+msgstr "列表ID"
+
+msgid "List Status"
+msgstr "列表狀態"
+
+msgid "List creation time"
+msgstr "列表建立時間"
+
+msgid "List editor"
+msgstr "列表編輯者"
+
+msgid "List end date"
+msgstr "列表結束日期"
+
+msgid "List item details"
+msgstr "列表項目明细"
+
+msgid "List modification time"
+msgstr "列表修改時間"
+
+msgid "List position"
+msgstr "列表位置"
+
+msgid "List start date"
+msgstr "列表開始日期"
+
+msgid "List type"
+msgstr "列表類型"
+
+msgid "Loading"
+msgstr "載入中"
+
+msgid "Locale"
+msgstr "區域"
+
+#. : Locale currency item panel title with currency label ({0}) and currency
+#. code ({1)}
+#. : Locale currency item panel title with currency label ({0}) and currency
+#. code ({1)}
+#, python-brace-format
+msgid "Locale currency: {0} ({1})"
+msgstr "區域貨幣：{0} ({1})"
+
+#. : Locale item panel title with site code ({1)}
+#, python-brace-format
+msgid "Locale item details ({1})"
+msgstr "區域項目明細: ({1})"
+
+#. : Locale language item panel title with language label ({0}) and language
+#. code ({1)}
+#. : Locale language item panel title with language label ({0}) and language
+#. code ({1)}
+#, python-brace-format
+msgid "Locale language: {0} ({1})"
+msgstr "區域語言：{0} ({1})"
+
+#. : Locale site item panel title with site label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Locale site: {0} ({1})"
+msgstr "區域分站：{0} ({1})"
+
+msgid "Logs"
+msgstr "Logs"
+
+msgid "Long description"
+msgstr "長敘述"
+
+msgid "Media"
+msgstr "媒體"
+
+msgid "Media type"
+msgstr "媒體類型"
+
+#. : Media type item panel title with type label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Media type: {0} ({1})"
+msgstr "媒體類型：{0} ({1})"
+
+#. : Media item panel title with media label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Media: {0} ({1})"
+msgstr "媒體：{0} ({1})"
+
+msgid "Message"
+msgstr "訊息"
+
+msgid "Meta description"
+msgstr "元敘述"
+
+msgid "Meta keywords"
+msgstr "元關鍵字"
+
+msgid "Method"
+msgstr "Method"
+
+msgid "Mimetype"
+msgstr "MIME 類型"
+
+msgid "Minimum quantity"
+msgstr "最小數量"
+
+msgid "Miss"
+msgstr "小姐"
+
+msgid "Mr"
+msgstr "先生"
+
+msgid "Mrs"
+msgstr "女士"
+
+msgid "Name"
+msgstr "姓名"
+
+msgid "Name of the coupon provider class (required)"
+msgstr "優惠券供應者的class名稱 (必填)"
+
+msgid "Name of the plugin provider class (required)"
+msgstr "插件供應者的class名稱 (必填)"
+
+msgid "Name of the service provider class (required)"
+msgstr "服務供應者的class名稱 (必填)"
+
+msgid "Next"
+msgstr "下一筆"
+
+msgid "No error information available"
+msgstr "沒有可用的錯誤訊息"
+
+msgid "No items"
+msgstr "沒有項目"
+
+msgid "Not implemented"
+msgstr "未實裝"
+
+msgid "Notice"
+msgstr "通知"
+
+msgid "Option"
+msgstr "選項"
+
+msgid "Order"
+msgstr "訂單"
+
+msgid "Order item details"
+msgstr "訂單項目明細"
+
+msgid "Order product ID"
+msgstr "訂單商品ID"
+
+msgid "Overview"
+msgstr "總覽"
+
+#, php-format
+msgid "Page %1$d of %2$d"
+msgstr "第%1$d 頁 共 %2$d 頁"
+
+msgid "Parameter"
+msgstr "參數"
+
+msgid "Password"
+msgstr "密碼"
+
+msgid "Password (required)"
+msgstr "密碼 (必填)"
+
+msgid "Path"
+msgstr "路徑"
+
+msgid "Payment date"
+msgstr "支付日期"
+
+msgid "Payment status"
+msgstr "支付狀態"
+
+msgid "Physical values"
+msgstr "實體數值"
+
+msgid "Please recheck your data"
+msgstr "請再次確認您的資料"
+
+msgid "Please save the coupon first before you can add codes"
+msgstr "在增加新的代碼前請先將您的優惠券代碼儲存"
+
+msgid ""
+"Please select an item on the right side and add it via drag and drop to this"
+" list."
+msgstr "請從右側選擇一樣項目並拖曳到列表。"
+
+msgid "Plugin"
+msgstr "插件"
+
+msgid "Plugin type"
+msgstr "插件類型"
+
+#. : Plugin type item panel title with type label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Plugin type: {0} ({1})"
+msgstr "插件類型：{0} ({1})"
+
+#. : Plugin item panel title with attribute label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Plugin: {0} ({1})"
+msgstr "插件：{0} ({1})"
+
+msgid "Position"
+msgstr "位置"
+
+msgid "Postal code"
+msgstr "郵遞區號代碼"
+
+msgid "Preview"
+msgstr "預覽"
+
+msgid "Preview URL"
+msgstr "預覽路徑"
+
+msgid "Previous"
+msgstr "前一筆"
+
+msgid "Price"
+msgstr "價格"
+
+msgid "Price type"
+msgstr "價格類型"
+
+#. : Price type item panel title with type label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Price type: {0} ({1})"
+msgstr "價格類型：{0} ({1})"
+
+#. : Price item panel title with price label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Price: {0} ({1})"
+msgstr "價格：{0} ({1})"
+
+msgid "Prices"
+msgstr "價格"
+
+msgid "Priority"
+msgstr "優先"
+
+msgid "Product"
+msgstr "商品"
+
+msgid "Product ID"
+msgstr "商品ID"
+
+msgid "Product code"
+msgstr "商品代碼"
+
+msgid "Product costs"
+msgstr "商品成本"
+
+msgid "Product height, e.g. 20.0 (in yard, inch, etc.)"
+msgstr "商品高度"
+
+msgid "Product item details"
+msgstr "商品細節"
+
+msgid "Product length, e.g. 30.0 (in yard, inch, etc.)"
+msgstr "商品長度"
+
+msgid "Product name"
+msgstr "商品名稱"
+
+msgid "Product price"
+msgstr "商品價格"
+
+msgid "Product property type"
+msgstr "商品屬性類型"
+
+#. : Product property.type item panel title with type label ({0}) and site
+#. code ({1)}
+#. : Product property type item panel title with type label ({0}) and site
+#. code ({1)}
+#, python-brace-format
+msgid "Product property type: {0} ({1})"
+msgstr "商品屬性類型：{0} ({1})"
+
+msgid "Product quantity"
+msgstr "商品數量"
+
+msgid "Product rebate"
+msgstr "商品折扣"
+
+msgid "Product stock"
+msgstr "商品存貨"
+
+msgid "Product supplier (optional)"
+msgstr "商品供應商(選填)"
+
+#. : Product tag item panel title with product label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Product tag: {0} ({1})"
+msgstr "商品tag：{0} ({1})"
+
+msgid "Product tax rate"
+msgstr "商品稅率"
+
+msgid "Product type"
+msgstr "商品類型"
+
+#. : Product type item panel title with type label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Product type: {0} ({1})"
+msgstr "商品類型：{0} ({1})"
+
+msgid "Product weight, e.g. 1.25 (in pound, ounce, etc.)"
+msgstr "商品重量"
+
+msgid "Product width, e.g. 17.5 (in yard, inch etc.)"
+msgstr "商品寬度"
+
+#. : Product item panel title with product label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Product: {0} ({1})"
+msgstr "商品：{0} ({1})"
+
+msgid "Products"
+msgstr "商品"
+
+msgid "Promotion"
+msgstr "推廣"
+
+msgid "Properties"
+msgstr "屬性"
+
+msgid "Property"
+msgstr "屬性"
+
+msgid "Property value (required)"
+msgstr "屬性 (必填)"
+
+msgid "Provider"
+msgstr "供應者"
+
+msgid "Purchase date"
+msgstr "購買日期"
+
+msgid "Quantity"
+msgstr "數量"
+
+msgid "Quantity or empty if unlimited (optional)"
+msgstr "數量(空白表示無限制)"
+
+msgid "Rebate"
+msgstr "折扣"
+
+msgid "Ref-ID"
+msgstr ""
+
+msgid "Related order ID"
+msgstr "關聯的訂單ID"
+
+msgid "Remove filter"
+msgstr "清空篩選"
+
+msgid "Replace file"
+msgstr "取代檔案"
+
+msgid "Request"
+msgstr "請求"
+
+msgid "Result"
+msgstr "結果"
+
+msgid "Salutation"
+msgstr "稱呼"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Saving"
+msgstr "保存中"
+
+#, python-brace-format
+msgid "Schema {0} is  not registered"
+msgstr "schema {0} 沒有被登記"
+
+msgid "Search"
+msgstr "搜尋"
+
+#, python-brace-format
+msgid "Search schema {0} is  not registered"
+msgstr "查找的schema {0} 並沒有被登記"
+
+msgid "Select Item"
+msgstr "搜尋項目"
+
+msgid "Select languages to export"
+msgstr "選擇一個語言以匯出"
+
+msgid "Service"
+msgstr "服務"
+
+msgid "Service ID"
+msgstr "服務ID"
+
+msgid "Service fees"
+msgstr "服務費"
+
+msgid "Service item details"
+msgstr "服務項目明細"
+
+msgid "Service type"
+msgstr "服務類型"
+
+#. : Service type item panel title with type label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Service type: {0} ({1})"
+msgstr "服務類型：{0} ({1})"
+
+#. : Service item panel title with service label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Service: {0} ({1})"
+msgstr "服務：{0} ({1})"
+
+msgid "Services"
+msgstr "服務"
+
+msgid "Short description"
+msgstr "短敘述"
+
+msgid "Simple mode"
+msgstr "簡易模式"
+
+msgid "Site"
+msgstr "分站"
+
+msgid "Size"
+msgstr "尺寸"
+
+msgid "Sorry, adding orders manually is currently not implemented"
+msgstr "很抱歉，目前無法實作手動新增訂單"
+
+msgid "Source"
+msgstr "來源"
+
+msgid "Start date"
+msgstr "開始日期"
+
+msgid "State"
+msgstr "州"
+
+msgid "Status"
+msgstr "狀態"
+
+msgid "Stock"
+msgstr "庫存"
+
+msgid "Stock level"
+msgstr "庫存量"
+
+msgid "Street"
+msgstr "街"
+
+msgid "Street (required)"
+msgstr "街 (必填)"
+
+msgid "Substracted rebate amount"
+msgstr "減去扣除數量"
+
+msgid "Supplier"
+msgstr "供應商"
+
+#. : Supplier address item panel title with supplier name ({0}) and site code
+#. ({1)}
+#. : Supplier address item panel title with supplier name ({0}) and site code
+#. ({1)}
+#, python-brace-format
+msgid "Supplier address: {0} ({1})"
+msgstr "供應商地址：{0} ({1})"
+
+#. : Supplier item panel title with supplier label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Supplier: {0} ({1})"
+msgstr "供應商：{0} ({1})"
+
+msgid "Switching language ..."
+msgstr "轉換語言中..."
+
+msgid "Switching site ..."
+msgstr "轉換分站中..."
+
+msgid "Tag value (required)"
+msgstr "tag值 (必填)"
+
+#. : Tag item panel title with tag label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Tag: {0} ({1})"
+msgstr "Tag：{0} ({1})"
+
+msgid "Tags"
+msgstr "標籤"
+
+msgid "Tax rate"
+msgstr "稅率"
+
+msgid "Tax rate in %"
+msgstr "稅率 %"
+
+msgid "Telefax"
+msgstr "傳真"
+
+msgid "Telephone"
+msgstr "電話"
+
+msgid "Telephone number, e.g. +155512345"
+msgstr "電話號碼，例如 +155512345"
+
+msgid "Text"
+msgstr "文本"
+
+msgid "Text type"
+msgstr "文本類型"
+
+#. : Text type item panel title with type label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Text type: {0} ({1})"
+msgstr "文本類型：{0} ({1})"
+
+#. : Text item panel title with text label ({0}) and site code ({1)}
+#, python-brace-format
+msgid "Text: {0} ({1})"
+msgstr "文本：{0} ({1})"
+
+msgid "Texts"
+msgstr "文本"
+
+msgid ""
+"The file with the exported texts will be available within a few minutes. It "
+"can then be downloaded from the \"Job\" panel of the \"Overview\" tab."
+msgstr "包含文本的匯出檔案將在幾分鐘內c匯出完成, 您可以在總覽中的工作面板找到它。"
+
+msgid ""
+"The texts of your uploaded file will be imported within a few minutes. You "
+"can check the status of the import in the \"Job\" panel of the \"Overview\" "
+"tab"
+msgstr "包含文本的匯入檔案將在幾分鐘內匯入完成, 您可以在總覽中的工作面板找到它。"
+
+msgid "This combination already exists"
+msgstr "這個組合已經存在"
+
+msgid "Title"
+msgstr "標題"
+
+msgid "Total"
+msgstr "合計"
+
+msgid "Two letter country code, e.g. \"US\" (required)"
+msgstr "兩個字元的國家代碼，例如: \"US\" (必填)"
+
+msgid "Type"
+msgstr "類別"
+
+msgid "Types"
+msgstr "類別"
+
+msgid "URL segment"
+msgstr "URL片段"
+
+msgid "Unique code (required)"
+msgstr "獨特的代碼(必填)"
+
+msgid "Upload failed"
+msgstr "上傳失敗"
+
+msgid "Upload successful"
+msgstr "上傳成功"
+
+msgid "Uploaded"
+msgstr "已上傳"
+
+msgid "Used by"
+msgstr "被使用於"
+
+msgid "User name"
+msgstr "使用者名稱"
+
+msgid "User name, e.g. e-mail address (required)"
+msgstr "使用者名稱，例如e-mail (必填)"
+
+msgid "Value"
+msgstr "值"
+
+msgid "Variant attributes"
+msgstr ""
+
+msgid "Variants"
+msgstr ""
+
+msgid "Vat ID"
+msgstr "增值稅ID"
+
+msgid "Vat ID, e.g. \"GB999999999\""
+msgstr "增值稅ID，例如\"GB999999999\""
+
+msgid "Verification date"
+msgstr "認證日期"
+
+msgid "Warehouse"
+msgstr "倉庫"
+
+#. : Product warehouse item panel title with warehouse label ({0}) and site
+#. code ({1)}
+#. : Product warehouse item panel title with warehouse label ({0}) and site
+#. code ({1)}
+#, python-brace-format
+msgid "Warehouse: {0} ({1})"
+msgstr "倉庫：{0} ({1})"
+
+msgid "Web site, e.g. www.example.com"
+msgstr "網站，例如 www.example.com"
+
+msgid "Website"
+msgstr "網站"
+
+msgid "Weight"
+msgstr "重量"
+
+msgid "Width"
+msgstr "寬度"
+
+msgid "YYYY-MM-DD (optional)"
+msgstr "YYYY-MM-DD (選填)"
+
+msgid "YYYY-MM-DD hh:mm:ss (optional)"
+msgstr "YYYY-MM-DD hh:mm:ss (選填)"
+
+msgid "You are going to delete one or more items. Would you like to proceed?"
+msgstr "你將要刪除一個或多個項目, 確定嗎？"
+
+msgid ""
+"You are going to flush the complete cache for the current site. Would you "
+"like to proceed?"
+msgstr "你將要清除整個當前分站的所有快取, 確定嗎？"
+
+msgid "Zip code"
+msgstr ""
+
+msgid "new"
+msgstr "新"
+
+msgid "pay:authorized"
+msgstr "支付：已授權"
+
+msgid "pay:canceled"
+msgstr "支付：已取消"
+
+msgid "pay:deleted"
+msgstr "支付：已刪除"
+
+msgid "pay:pending"
+msgstr "支付：待進行"
+
+msgid "pay:received"
+msgstr "支付：已收款"
+
+msgid "pay:refund"
+msgstr "支付：已退款"
+
+msgid "pay:refused"
+msgstr "支付：被拒絕"
+
+msgid "pay:unfinished"
+msgstr "支付：未完成"
+
+msgid "stat:deleted"
+msgstr "狀態：被刪除"
+
+msgid "stat:delivered"
+msgstr "狀態：已送達"
+
+msgid "stat:dispatched"
+msgstr "狀態：已出貨"
+
+msgid "stat:lost"
+msgstr "狀態：遺失"
+
+msgid "stat:pending"
+msgstr "狀態：待處理"
+
+msgid "stat:progress"
+msgstr "狀態：處理中"
+
+msgid "stat:refused"
+msgstr "狀態：被拒絕"
+
+msgid "stat:returned"
+msgstr "狀態：已退貨"
+
+msgid "stat:unfinished"
+msgstr "狀態：未完成"
+
+msgid "status:archive"
+msgstr "狀態：已封存"
+
+msgid "status:disabled"
+msgstr "狀態：已停用"
+
+msgid "status:enabled"
+msgstr "狀態：已啟用"
+
+msgid "status:review"
+msgstr "狀態：已審核"
+
+msgid "unknown"
+msgstr "未知"
+
+msgid "yy-mm-dd"
+msgstr "yy-mm-dd"

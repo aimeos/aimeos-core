@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Henry LIU <dadaycm@hotmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-29 14:45+0200\n"
-"PO-Revision-Date: 2015-07-16 16:01+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-05-06 13:52+0000\n"
+"Last-Translator: Henry LIU <dadaycm@hotmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/aimeos/aimeos-core/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,150 +18,114 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/Controller/Frontend/Basket/Default.php:499
 #, php-format
 msgid "Adding product with ID \"%1$s\" is not allowed"
-msgstr ""
+msgstr "不允许添加 ID为\"%1$s\"的产品"
 
-#: src/Controller/Frontend/Basket/Default.php:902
 #, php-format
 msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
-msgstr ""
+msgstr "可用的属性（ID为\"%1$s\"）与给定属性（ID为\"%2$s\"）不匹配"
 
-#: src/Controller/Frontend/Basket/Default.php:165
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be changed"
-msgstr ""
+msgstr "位置在\"%1$d\"的购物车项目不能被改变"
 
-#: src/Controller/Frontend/Basket/Default.php:139
 #, php-format
 msgid "Basket item at position \"%1$d\" cannot be deleted manually"
-msgstr ""
+msgstr "位置在\"%1$d\"的购物车项目不能被手动删除"
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:66
-#: src/Controller/Frontend/Common/Factory/Abstract.php:160
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "类\"%1$s\"没有实现接口\"%2$s\""
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:60
-#: src/Controller/Frontend/Common/Factory/Abstract.php:154
-#: src/Controller/Frontend/Factory.php:84
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "不存在可用的类\"%1$s\""
 
-#: src/Controller/Frontend/Factory.php:63
 #, php-format
 msgid "Controller path is empty"
-msgstr ""
+msgstr "控制器路径为空"
 
-#: src/Controller/Frontend/Basket/Default.php:257
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid"
-msgstr ""
+msgstr "优惠券代码\"%1$s\"无效"
 
-#: src/Controller/Frontend/Basket/Default.php:210
 #, php-format
 msgid "Coupon code \"%1$s\" is invalid or not available any more"
-msgstr ""
+msgstr "优惠券代码\"%1$s\"无效或者不再可用"
 
-#: src/Controller/Frontend/Basket/Default.php:225
 #, php-format
 msgid "Coupon for code \"%1$s\" is not available any more"
-msgstr ""
+msgstr "优惠券代码\"%1$s\"不再可用"
 
-#: src/Controller/Frontend/Basket/Default.php:717
 #, php-format
 msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
-msgstr ""
+msgstr "无效的\"%1$s\"引用：针对ID为\"%2$s\"的产品"
 
-#: src/Controller/Frontend/Basket/Default.php:832
 #, php-format
 msgid "Invalid address properties, please check your input"
-msgstr ""
+msgstr "无效的地址属性，请检查您的输入"
 
-#: src/Controller/Frontend/Order/Factory.php:62
-#: src/Controller/Frontend/Catalog/Factory.php:63
-#: src/Controller/Frontend/Common/Factory/Abstract.php:54
-#: src/Controller/Frontend/Basket/Factory.php:63
-#: src/Controller/Frontend/Service/Factory.php:62
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "类名称\"%1$s\"存在无效的字符"
 
-#: src/Controller/Frontend/Factory.php:75
 #, php-format
 msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
-msgstr ""
+msgstr "控制器名称 \"%1$s\"在\"%2$s\"存在无效的字符"
 
-#: src/Controller/Frontend/Common/Factory/Abstract.php:86
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr ""
+msgstr "无效的域\"%1$s\""
 
-#: src/Controller/Frontend/Factory.php:90
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr ""
+msgstr "无效的工厂\"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:294
 #, php-format
 msgid "Invalid value for address type \"%1$s\""
-msgstr ""
+msgstr "地址类型\"%1$s\"存在无效的值"
 
-#: src/Controller/Frontend/Basket/Default.php:1008
 #, php-format
 msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
-msgstr ""
+msgstr "列表类型没有找到：针对域\"%1$s\"和代码\"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:1110
 #, php-format
 msgid "No article found for selected attributes and product ID \"%1$s\""
-msgstr ""
+msgstr "物品没找到：针对所选择的属性和产品（ID为\"%1$s\"）"
 
-#: src/Controller/Frontend/Basket/Default.php:975
 #, php-format
 msgid "No item for \"%1$s\" (%2$s) found"
-msgstr ""
+msgstr "未能找到项目：针对\"%1$s\" (%2$s)"
 
-#: src/Controller/Frontend/Basket/Default.php:746
 #, php-format
 msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
-msgstr ""
+msgstr "没有库存：针对产品 ID为 \"%1$s\"以及仓库为\"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:1082
 #, php-format
 msgid "No unique article found for selected attributes and product ID \"%1$s\""
-msgstr ""
+msgstr "未找到唯一物品：针对所选择的属性和产品ID \"%1$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:232
 #, php-format
 msgid "Requirements for coupon code \"%1$s\" aren't met"
-msgstr ""
+msgstr "优惠券（代码为\"%1$s\"）的申请不满足条件"
 
-#: src/Controller/Frontend/Service/Default.php:175
 #, php-format
 msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
-msgstr ""
+msgstr "服务项目未找到：针对类型为\"%1$s\"以及ID为\"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:386
-#: src/Controller/Frontend/Basket/Default.php:422
 #, php-format
 msgid "There are not enough products \"%1$s\" in stock"
-msgstr ""
+msgstr "产品\"%1$s\"的库存不足"
 
-#: src/Controller/Frontend/Common/Decorator/Abstract.php:50
 #, php-format
 msgid "Unable to call method \"%1$s::%2$s\""
-msgstr ""
+msgstr "不能调用方法\"%1$s::%2$s\""
 
-#: src/Controller/Frontend/Service/Default.php:69
 #, php-format
 msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
-msgstr ""
+msgstr "不能创建提供者\"%1$s\"：针对服务ID \"%2$s\""
 
-#: src/Controller/Frontend/Basket/Default.php:323
 #, php-format
 msgid "Unknown attributes \"%1$s\""
-msgstr ""
+msgstr "未知的属性\"%1$s\""
