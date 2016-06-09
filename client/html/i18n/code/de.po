@@ -7,14 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
-# Aimeos <aimeos@aimeos.org>, 2015
+# Aimeos <aimeos@aimeos.org>, 2015-2016
 # nsendetzky, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"PO-Revision-Date: 2016-06-09 12:22+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgstr "Wartend"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "Authorisiert"
+msgstr "Autorisiert"
 
 #. Payment status value
 msgid "pay:6"

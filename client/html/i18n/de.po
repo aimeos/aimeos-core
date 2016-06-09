@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"PO-Revision-Date: 2016-06-09 12:22+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -647,7 +647,7 @@ msgstr "Vielen Dank für Ihre Bestellung %1$s vom %2$s.\n\nWir haben Ihre Zahlun
 msgid ""
 "Thank you for your order and authorizing the payment.\n"
 "An e-mail with the order details will be sent to you within the next few minutes."
-msgstr "Vielen Dank für Ihre Bestellung und die Authorisierung der Zahlung.\nEine E-Mail mit den Bestelldaten wird in den nächsten Minuten an Sie versandt."
+msgstr "Vielen Dank für Ihre Bestellung und die Autorisierung der Zahlung.\nEine E-Mail mit den Bestelldaten wird in den nächsten Minuten an Sie versandt."
 
 msgid ""
 "Thank you for your order.\n"
@@ -680,7 +680,7 @@ msgstr "Das Paket für Ihre Bestellung %1$s vom %2$s konnte nicht zugestellt wer
 msgid ""
 "The payment confirmation for your order is still pending.\n"
 "You will get an e-mail as soon as the payment is authorized."
-msgstr "Die Zahlung für Ihre Bestellung ist noch nicht bestätigt.\nSie bekommen eine E-Mail sobald die Zahlung authorisiert wurde."
+msgstr "Die Zahlung für Ihre Bestellung ist noch nicht bestätigt.\nSie bekommen eine E-Mail sobald die Zahlung autorisiert wurde."
 
 #. / Payment e-mail intro with order ID (%1$s), order date (%2$s) and payment
 #. status (%3%s)
