@@ -3,49 +3,49 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015-2016
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
 "PO-Revision-Date: 2016-06-07 09:37+0000\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>\n"
-"Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: tr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
+msgstr "class \"%1$s\" 沒有實裝界面 \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr "Class \"%1$s\" mevcut değil"
+msgstr "class \"%1$s\" 無法使用"
 
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr "Class \"%1$s\" bulunamadı"
+msgstr "找不到class \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr "%1$s\" class adında geçersiz karakterler"
+msgstr "class名稱 \"%1$s\" 包含無效的字符"
 
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
-msgstr "\"%1$s\" için hiçbir izin verilen görüntü türü yapılandırılmadı"
+msgstr "在 \"%1$s\" 中沒有被允許的圖片格式"
 
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr "\"%3$s\" içinde \"%1$s/%2$s\" için tür öğesi bulunamadı"
+msgstr "在 \"%3$s\" 中沒有找到類型項目 \"%1$s/%2$s\""
 
 #, php-format
 msgid "Unable to create directory \"%1$s\""
-msgstr "\"%1$s\" dizinini oluşturulamıyor"
+msgstr "無法創建資料夾 \"%1$s\""
 
 #, php-format
 msgid "Unable to create file in \"%1$s\""
-msgstr "\"%1$s\" içinde dosya oluşturulamıyor"
+msgstr "無法在 \"%1$s\" 創建檔案"

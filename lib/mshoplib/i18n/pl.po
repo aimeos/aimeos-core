@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 20:42+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -97,7 +97,7 @@ msgstr "Nie dostępny obiekt konfiguracji"
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr ""
+msgstr "Konfiguracja obowiązkowego polecenia SQL \"%1$s\" nie dostępna"
 
 #, php-format
 msgid "Coupon in basket is not available any more"
@@ -241,7 +241,7 @@ msgstr "Nie znaleziono pozycji z ID \"%1$s\""
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr ""
+msgstr "Pozycja z ID \"%2$s\" w \"%1$s\" nie znaleziona"
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
@@ -598,7 +598,7 @@ msgstr "Nie znaleziono korzenia drzewa o kodzie \"%1$s\" w \"%2$s\""
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr ""
+msgstr "Nie znaleziono pozycji z ID \"%1$s\" w \"%2$s\""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
