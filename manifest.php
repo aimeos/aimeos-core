@@ -37,16 +37,4 @@ return array(
 	'setup' => array(
 		'lib/mshoplib/setup',
 	),
-	'custom' => array(
-		'client/html/templates' => array(
-			'client/html/templates',
-		),
-		'controller/jobs' => array(
-			'controller/jobs/src',
-		),
-		'controller/jobs/templates' => array(
-			'controller/jobs/templates',
-			'client/html/templates',
-		),
-	),
 );
