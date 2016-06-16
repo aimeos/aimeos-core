@@ -7,14 +7,15 @@
 # Translators:
 # Translators:
 # Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
 # manuel.fries <manuel.fries@gdatasoftware.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2016-05-06 13:45+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -617,7 +618,7 @@ msgid "SG"
 msgstr "新加坡"
 
 msgid "SH"
-msgstr "圣赫勒拿、阿森松与特里斯坦达库尼亚"
+msgstr "圣赫勒拿，阿森松与特里斯坦达库尼亚"
 
 msgid "SI"
 msgstr "斯洛文尼亚"

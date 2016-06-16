@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 21:17+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -95,7 +95,7 @@ msgid "Attribute: {0} ({1})"
 msgstr "Атрибут: {0} ({1})"
 
 msgid "Attributes"
-msgstr ""
+msgstr "Атрибуты"
 
 msgid "Available attributes"
 msgstr "Доступные атрибуты"
@@ -157,10 +157,10 @@ msgid "Catalog: {0} ({1})"
 msgstr "Каталог: {0} ({1})"
 
 msgid "Categories"
-msgstr ""
+msgstr "Категории"
 
 msgid "Characteristics"
-msgstr ""
+msgstr "Характеристики"
 
 msgid "City"
 msgstr "Город"
@@ -175,7 +175,7 @@ msgid "Click to upload"
 msgstr "Нажмите для загрузки"
 
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 msgid "Code"
 msgstr "Код"
@@ -208,7 +208,7 @@ msgid "Costs"
 msgstr "Издержки"
 
 msgid "Costs per item"
-msgstr ""
+msgstr "Поэлементные издержки"
 
 msgid "Could not upload file. Please notify your administrator"
 msgstr "Невозможно загрузить файл. Известите администратора."
@@ -314,7 +314,7 @@ msgid "Domain (required)"
 msgstr "Принадлежность (обязательно)"
 
 msgid "Download"
-msgstr ""
+msgstr "Скачать"
 
 msgid "E-Mail"
 msgstr "E-Mail"
@@ -362,7 +362,7 @@ msgid "File URL"
 msgstr "URL файла"
 
 msgid "Filter"
-msgstr ""
+msgstr "Фильтр"
 
 msgid "First"
 msgstr ""
@@ -466,7 +466,7 @@ msgid "Lastname"
 msgstr "Фамилия"
 
 msgid "Length"
-msgstr ""
+msgstr "Длина"
 
 msgid "List"
 msgstr "Список"
@@ -595,7 +595,7 @@ msgid "Name of the service provider class (required)"
 msgstr "Название класса поставщика сервиса (обязательно)"
 
 msgid "Next"
-msgstr ""
+msgstr "Далее"
 
 msgid "No error information available"
 msgstr "Информация об ошибке недоступна"
@@ -610,7 +610,7 @@ msgid "Notice"
 msgstr "Замечание"
 
 msgid "Option"
-msgstr ""
+msgstr "Параметр"
 
 msgid "Order"
 msgstr "Заказ"
@@ -626,7 +626,7 @@ msgstr "Обзор"
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Страница %1$d из %2$d"
 
 msgid "Parameter"
 msgstr "Параметр"
@@ -689,7 +689,7 @@ msgid "Preview URL"
 msgstr "URL предпросмотра"
 
 msgid "Previous"
-msgstr ""
+msgstr "Назад"
 
 msgid "Price"
 msgstr "Цена"
@@ -761,12 +761,12 @@ msgid "Product stock"
 msgstr "Товар на складе"
 
 msgid "Product supplier (optional)"
-msgstr ""
+msgstr "Поставщик товара (опционально)"
 
 #. : Product tag item panel title with product label ({0}) and site code ({1)}
 #, python-brace-format
 msgid "Product tag: {0} ({1})"
-msgstr ""
+msgstr "Метка товара: {0} ({1})"
 
 msgid "Product tax rate"
 msgstr "Налоговая ставка на товар"
@@ -852,7 +852,7 @@ msgid "Schema {0} is  not registered"
 msgstr "Незарегистрирована схема {0}"
 
 msgid "Search"
-msgstr ""
+msgstr "Поиск"
 
 #, python-brace-format
 msgid "Search schema {0} is  not registered"
@@ -871,7 +871,7 @@ msgid "Service ID"
 msgstr "ID службы"
 
 msgid "Service fees"
-msgstr ""
+msgstr "Издержки на услуги"
 
 msgid "Service item details"
 msgstr "Сведения по службе"
@@ -902,7 +902,7 @@ msgid "Site"
 msgstr "Сайт"
 
 msgid "Size"
-msgstr ""
+msgstr "Размер"
 
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Ручное добавление заказов пока не реализовано"
@@ -1093,7 +1093,7 @@ msgid "Weight"
 msgstr ""
 
 msgid "Width"
-msgstr ""
+msgstr "Ширина"
 
 msgid "YYYY-MM-DD (optional)"
 msgstr "ГГГГ-ММ-ДД (опционально)"

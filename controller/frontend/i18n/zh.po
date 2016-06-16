@@ -1,0 +1,131 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, php-format
+msgid "Adding product with ID \"%1$s\" is not allowed"
+msgstr "不允許增加ID為 \"%1$s\" 的商品"
+
+#, php-format
+msgid "Available attribute IDs \"%1$s\" do not match the given attribute IDs \"%2$s\""
+msgstr "可用的屬性IDs \"%1$s\" 與 給定的IDs \"%2$s\" 不匹配"
+
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be changed"
+msgstr "位置為\"%1$d\"的購物車項目無法被變更"
+
+#, php-format
+msgid "Basket item at position \"%1$d\" cannot be deleted manually"
+msgstr "位置為\"%1$d\"的購物車項目無法手動移除"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "class \"%1$s\" 沒有實裝界面 \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "class \"%1$s\" 無法使用"
+
+#, php-format
+msgid "Controller path is empty"
+msgstr "controller路徑為空"
+
+#, php-format
+msgid "Coupon code \"%1$s\" is invalid"
+msgstr "優惠券代碼 \"%1$s\" 無效"
+
+#, php-format
+msgid "Coupon code \"%1$s\" is invalid or not available any more"
+msgstr "優惠券代碼 \"%1$s\" 無效 或 已無法使用"
+
+#, php-format
+msgid "Coupon for code \"%1$s\" is not available any more"
+msgstr "優惠券代碼 \"%1$s\" 已無法使用"
+
+#, php-format
+msgid "Invalid \"%1$s\" references for product with ID \"%2$s\""
+msgstr "產品ID \"%2$s\" 使用了無效的參考 \"%1$s\" "
+
+#, php-format
+msgid "Invalid address properties, please check your input"
+msgstr "無效的地址，請確認您的輸入"
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "class名稱 \"%1$s\" 包含無效的字符"
+
+#, php-format
+msgid "Invalid characters in controller name \"%1$s\" in \"%2$s\""
+msgstr "controller名稱 在 \"%2$s\" 中的 \"%1$s\" 包含無效的字符"
+
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr "無效的網域 \"%1$s\""
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "無效的factory \"%1$s\""
+
+#, php-format
+msgid "Invalid value for address type \"%1$s\""
+msgstr "無效的地址類型 \"%1$s\""
+
+#, php-format
+msgid "List type for domain \"%1$s\" and code \"%2$s\" not found"
+msgstr "找不到網域為 \"%1$s\" 以及 代碼為 \"%2$s\" 的列表類型"
+
+#, php-format
+msgid "No article found for selected attributes and product ID \"%1$s\""
+msgstr "選定的屬性與商品找不到產品 \"%1$s\""
+
+#, php-format
+msgid "No item for \"%1$s\" (%2$s) found"
+msgstr "找不到項目 \"%1$s\" (%2$s)"
+
+#, php-format
+msgid "No stock for product ID \"%1$s\" and warehouse \"%2$s\" available"
+msgstr "產品ID \"%1$s\" 與 倉庫 \"%2$s\" 皆無存貨"
+
+#, php-format
+msgid "No unique article found for selected attributes and product ID \"%1$s\""
+msgstr "選定的屬性與商品ID \"%1$s\" 找不到唯一的產品"
+
+#, php-format
+msgid "Requirements for coupon code \"%1$s\" aren't met"
+msgstr "不符合優惠券代碼 \"%1$s\" 的使用條件"
+
+#, php-format
+msgid "Service item for type \"%1$s\" and ID \"%2$s\" not found"
+msgstr "找不到類型為 \"%1$s\" 以及 ID為 \"%2$s\" 的服務項目"
+
+#, php-format
+msgid "There are not enough products \"%1$s\" in stock"
+msgstr "商品 \"%1$s\" 存貨不足"
+
+#, php-format
+msgid "Unable to call method \"%1$s::%2$s\""
+msgstr "無法呼叫method \"%1$s::%2$s\""
+
+#, php-format
+msgid "Unable to create provider \"%1$s\" for service with ID \"%2$s\""
+msgstr "無法為服務ID \"%2$s\" 創建供應者: %1$s"
+
+#, php-format
+msgid "Unknown attributes \"%1$s\""
+msgstr "未知的屬性 \"%1$s\""

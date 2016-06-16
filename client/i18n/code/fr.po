@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2015-12-11 11:43+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -155,11 +155,11 @@ msgstr "Nom de l'établissement bancaire"
 
 #. Omnipay service provider
 msgid "payment.firstname"
-msgstr ""
+msgstr "Prénom"
 
 #. Omnipay service provider
 msgid "payment.lastname"
-msgstr ""
+msgstr "Nom"
 
 #. Omnipay service provider
 msgid "payment.cardno"

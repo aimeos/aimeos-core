@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr "class \"%1$s\" 沒有實裝 \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "找不到Class \"%1$s\" "
+
+#, php-format
+msgid "Client generated IDs are not supported"
+msgstr "client生成的IDs不被支援"
+
+#, php-format
+msgid "Invalid JSON in body"
+msgstr "在body中包含了無效的 JSON"
+
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr "無效的class名稱\"%1$s\""
+
+#, php-format
+msgid "Invalid client \"%1$s\" in \"%2$s\""
+msgstr "在 \"%2$s\" 之中含有無效的client \"%1$s\""
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "無效的factory \"%1$s\""
+
+#, php-format
+msgid "No ID given"
+msgstr "沒有給定ID"
+
+msgid "Not implemented, use PATCH instead"
+msgstr "未實裝，請改用 PATCH"
+
+#, php-format
+msgid "Template \"%1$s\" not available"
+msgstr "template \"%1$s\" 無法使用"
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "無法呼叫method \"%1$s\""

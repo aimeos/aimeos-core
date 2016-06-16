@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-21 23:17+0200\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement \"%2$s\""
+msgstr "W klasie \"%1$s\" nie zaimplementowano \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Nie znaleziono klasy \"%1$s\""
+
+#, php-format
+msgid "Client generated IDs are not supported"
+msgstr ""
+
+#, php-format
+msgid "Invalid JSON in body"
+msgstr ""
+
+#, php-format
+msgid "Invalid class name \"%1$s\""
+msgstr "Niepoprawna nazwa klasy \"%1$s\""
+
+#, php-format
+msgid "Invalid client \"%1$s\" in \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Niepoprawna fabryka \"%1$s\""
+
+#, php-format
+msgid "No ID given"
+msgstr ""
+
+msgid "Not implemented, use PATCH instead"
+msgstr ""
+
+#, php-format
+msgid "Template \"%1$s\" not available"
+msgstr "Szablon \"%1$s\" niedostępny"
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "Nie można wywołać metody \"%1$s\""

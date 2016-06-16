@@ -7,14 +7,15 @@
 # Translators:
 # Translators:
 # Translators:
+# Bruce Liu <zcon.bruce@gmail.com>, 2016
 # shihua16165 <shihua16165@163.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2016-05-06 13:45+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgstr "女士"
 
 #. Address salutation
 msgid "miss"
-msgstr "女士"
+msgstr "小姐"
 
 #. Product attribute
 msgid "size"
@@ -44,35 +45,35 @@ msgstr "尺寸"
 
 #. Product attribute
 msgid "length"
-msgstr "长度"
+msgstr "長度"
 
 #. Product attribute
 msgid "width"
-msgstr "宽度"
+msgstr "寬度"
 
 #. Product attribute
 msgid "color"
-msgstr "颜色"
+msgstr "顏色"
 
 #. Product attribute
 msgid "option"
-msgstr "选项"
+msgstr "選項"
 
 #. Order type value
 msgid "order:repeat"
-msgstr "反复"
+msgstr "重複的"
 
 #. Order type value
 msgid "order:web"
-msgstr "通过因特网"
+msgstr "網路"
 
 #. Order type value
 msgid "order:phone"
-msgstr "通过电话"
+msgstr "電話"
 
 #. Payment status value
 msgid "pay:-1"
-msgstr "未完成"
+msgstr "尚未完成"
 
 #. Payment status value
 msgid "pay:0"
@@ -84,7 +85,7 @@ msgstr "取消"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "已谢绝"
+msgstr "被拒絕"
 
 #. Payment status value
 msgid "pay:3"
@@ -92,15 +93,15 @@ msgstr "已退款"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "处理中"
+msgstr "處理中"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "已授权"
+msgstr "已授權"
 
 #. Payment status value
 msgid "pay:6"
-msgstr "已收到"
+msgstr "已收款"
 
 #. Delivery status value
 msgid "stat:-1"
@@ -112,103 +113,103 @@ msgstr "已删除"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "处理中"
+msgstr "處理中"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "处理中"
+msgstr "程序進行中"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "配送中"
+msgstr "已出貨"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "已交货"
+msgstr "已送達"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "无法确定"
+msgstr "遺失"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "被拒收"
+msgstr "被拒絕"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "被退货"
+msgstr "被退貨"
 
 #. Direct debit service provider
 msgid "directdebit.accountowner"
-msgstr "账户名"
+msgstr "帳戶擁有者"
 
 #. Direct debit service provider
 msgid "directdebit.accountno"
-msgstr "账户号"
+msgstr "帳戶號碼"
 
 #. Direct debit service provider
 msgid "directdebit.bankcode"
-msgstr "银行代码"
+msgstr "銀行代碼"
 
 #. Direct debit service provider
 msgid "directdebit.bankname"
-msgstr "开户行"
+msgstr "銀行名稱"
 
 #. Omnipay service provider
 msgid "payment.firstname"
-msgstr ""
+msgstr "名"
 
 #. Omnipay service provider
 msgid "payment.lastname"
-msgstr ""
+msgstr "姓"
 
 #. Omnipay service provider
 msgid "payment.cardno"
-msgstr ""
+msgstr "信用卡號碼"
 
 #. Omnipay service provider
 msgid "payment.cvv"
-msgstr ""
+msgstr "信用卡安全碼"
 
 #. Omnipay service provider
 msgid "payment.expirymonth"
-msgstr ""
+msgstr "到期月份"
 
 #. Omnipay service provider
 msgid "payment.expiryyear"
-msgstr ""
+msgstr "到期年份"
 
 #. Warehouse code
 msgid "warehouse:default"
-msgstr "仓库代码"
+msgstr "倉庫：預設"
 
 #. Favorite action
 msgid "favorite"
-msgstr ""
+msgstr "我的最愛"
 
 #. Pin action
 msgid "pin"
-msgstr ""
+msgstr "固定"
 
 #. Watch action
 msgid "watch"
-msgstr ""
+msgstr "關注"
 
 #. Product property package-length
 msgid "package-length"
-msgstr ""
+msgstr "包裹長度"
 
 #. Product property package-width
 msgid "package-width"
-msgstr ""
+msgstr "包裹寬度"
 
 #. Product property package-height
 msgid "package-height"
-msgstr ""
+msgstr "包裹寬度"
 
 #. Product property package-weight
 msgid "package-weight"
-msgstr ""
+msgstr "包裹重量"
 
 msgid "price:default"
 msgstr "%1$s %2$s"

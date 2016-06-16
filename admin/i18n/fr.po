@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-21 23:17+0200\n"
-"PO-Revision-Date: 2016-04-21 21:17+0000\n"
+"PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgid "Add filter"
 msgstr ""
 
 msgid "Additional"
-msgstr ""
+msgstr "Complément"
 
 msgid "Additional information, e.g. flat number"
 msgstr ""
@@ -160,7 +160,7 @@ msgid "Categories"
 msgstr ""
 
 msgid "Characteristics"
-msgstr ""
+msgstr "Caractéristiques"
 
 msgid "City"
 msgstr "Ville"
@@ -175,7 +175,7 @@ msgid "Click to upload"
 msgstr "Cliquer pour envoyer"
 
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 msgid "Code"
 msgstr "Code"
@@ -208,7 +208,7 @@ msgid "Costs"
 msgstr "Coûts"
 
 msgid "Costs per item"
-msgstr ""
+msgstr "Coûts par article"
 
 msgid "Could not upload file. Please notify your administrator"
 msgstr "Impossible d'envoyer le fichier. Veuillez contacter votre administrateur"
@@ -368,7 +368,7 @@ msgid "First"
 msgstr ""
 
 msgid "First name"
-msgstr ""
+msgstr "Prénom"
 
 msgid "Firstname"
 msgstr "Prénom"
@@ -457,7 +457,7 @@ msgid "Last modified"
 msgstr "Dernière modification"
 
 msgid "Last name"
-msgstr ""
+msgstr "Nom"
 
 msgid "Last name (required)"
 msgstr ""
@@ -466,7 +466,7 @@ msgid "Lastname"
 msgstr "Nom"
 
 msgid "Length"
-msgstr ""
+msgstr "Longueur"
 
 msgid "List"
 msgstr ""
@@ -574,13 +574,13 @@ msgid "Minimum quantity"
 msgstr "Quantité minimale"
 
 msgid "Miss"
-msgstr ""
+msgstr "Mademoiselle"
 
 msgid "Mr"
-msgstr ""
+msgstr "Mr"
 
 msgid "Mrs"
-msgstr ""
+msgstr "Mme"
 
 msgid "Name"
 msgstr "Nom"
@@ -595,7 +595,7 @@ msgid "Name of the service provider class (required)"
 msgstr "Nom de la classe du fournisseur de service (obligatoire)"
 
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 msgid "No error information available"
 msgstr "Aucune information disponible sur l'erreur"
@@ -610,7 +610,7 @@ msgid "Notice"
 msgstr ""
 
 msgid "Option"
-msgstr ""
+msgstr "Attribut produit"
 
 msgid "Order"
 msgstr "Commande"
@@ -626,7 +626,7 @@ msgstr "Vue d'ensemble"
 
 #, php-format
 msgid "Page %1$d of %2$d"
-msgstr ""
+msgstr "Page %1$d sur %2$d"
 
 msgid "Parameter"
 msgstr "Paramètre"
@@ -761,12 +761,12 @@ msgid "Product stock"
 msgstr "Stock disponible"
 
 msgid "Product supplier (optional)"
-msgstr ""
+msgstr "Fournisseur du produit (optionnel)"
 
 #. : Product tag item panel title with product label ({0}) and site code ({1)}
 #, python-brace-format
 msgid "Product tag: {0} ({1})"
-msgstr ""
+msgstr "Mot-clé associé au produit : {0} ({1})"
 
 msgid "Product tax rate"
 msgstr ""
@@ -852,7 +852,7 @@ msgid "Schema {0} is  not registered"
 msgstr "Le schéma {0} n'est pas référencé"
 
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #, python-brace-format
 msgid "Search schema {0} is  not registered"
@@ -871,7 +871,7 @@ msgid "Service ID"
 msgstr "Identifiant de service"
 
 msgid "Service fees"
-msgstr ""
+msgstr "Frais de service"
 
 msgid "Service item details"
 msgstr ""
@@ -890,7 +890,7 @@ msgid "Service: {0} ({1})"
 msgstr "Service : {0} ({1})"
 
 msgid "Services"
-msgstr ""
+msgstr "Services"
 
 msgid "Short description"
 msgstr ""
@@ -902,7 +902,7 @@ msgid "Site"
 msgstr "Site"
 
 msgid "Size"
-msgstr ""
+msgstr "Taille"
 
 msgid "Sorry, adding orders manually is currently not implemented"
 msgstr "Désolé, la saisie manuelle de commandes est actuellement indisponible"
@@ -926,7 +926,7 @@ msgid "Stock level"
 msgstr "Niveau du stock"
 
 msgid "Street"
-msgstr ""
+msgstr "Rue"
 
 msgid "Street (required)"
 msgstr ""
@@ -1093,7 +1093,7 @@ msgid "Weight"
 msgstr ""
 
 msgid "Width"
-msgstr ""
+msgstr "Largeur"
 
 msgid "YYYY-MM-DD (optional)"
 msgstr ""
