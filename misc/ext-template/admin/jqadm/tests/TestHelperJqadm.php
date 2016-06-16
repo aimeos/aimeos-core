@@ -33,7 +33,7 @@ class TestHelperJqadm
 
 	public static function getView()
 	{
-		$view = new \Aimeos\MW\View\Standard();
+		$view = new \Aimeos\MW\View\Standard( self::getTemplatePaths() );
 
 		$trans = new \Aimeos\MW\Translation\None( 'en' );
 		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
@@ -55,9 +55,9 @@ class TestHelperJqadm
 	}
 
 
-	public static function getHtmlTemplatePaths()
+	public static function getTemplatePaths()
 	{
-		return self::getAimeos()->getCustomPaths( 'client/html' );
+		return self::getAimeos()->getCustomPaths( 'admin/jqadm/templates' );
 	}
 
 
@@ -82,7 +82,7 @@ class TestHelperJqadm
 		$aimeos = self::getAimeos();
 
 
-		$paths = $aimeos->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths();
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );

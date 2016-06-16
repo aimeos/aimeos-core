@@ -34,7 +34,7 @@ class TestHelperHtml
 
 	public static function getView()
 	{
-		$view = new \Aimeos\MW\View\Standard();
+		$view = new \Aimeos\MW\View\Standard( self::getHtmlTemplatePaths() );
 
 		$trans = new \Aimeos\MW\Translation\None( 'en' );
 		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
@@ -58,7 +58,7 @@ class TestHelperHtml
 
 	public static function getHtmlTemplatePaths()
 	{
-		return self::getAimeos()->getCustomPaths( 'client/html' );
+		return self::getAimeos()->getCustomPaths( 'client/html/templates' );
 	}
 
 
@@ -83,7 +83,7 @@ class TestHelperHtml
 		$aimeos = self::getAimeos();
 
 
-		$paths = $aimeos->getConfigPaths( 'mysql' );
+		$paths = $aimeos->getConfigPaths();
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 
 		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
