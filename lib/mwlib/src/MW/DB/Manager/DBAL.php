@@ -123,7 +123,10 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 
 		$params['user'] = $this->config->get( 'resource/' . $name . '/username' );
 		$params['dbname'] = $this->config->get( 'resource/' . $name . '/database' );
-		$params['unix_socket'] = $this->config->get( 'resource/' . $name . '/socket' );
+
+		if( ( $socket = $this->config->get( 'resource/' . $name . '/socket' ) ) != '' ) {
+			$params['unix_socket'] = $socket;
+		}
 
 		switch( $adapter )
 		{
