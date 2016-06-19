@@ -124,7 +124,7 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 		$params['user'] = $this->config->get( 'resource/' . $name . '/username' );
 		$params['dbname'] = $this->config->get( 'resource/' . $name . '/database' );
 
-		if( ( $socket = $this->config->get( 'resource/' . $name . '/socket' ) ) != '' ) {
+		if( ( $socket = $this->config->get( 'resource/' . $name . '/socket' ) ) != null ) {
 			$params['unix_socket'] = $socket;
 		}
 
