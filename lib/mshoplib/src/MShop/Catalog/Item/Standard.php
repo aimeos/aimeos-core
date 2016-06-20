@@ -89,7 +89,7 @@ class Standard
 	 */
 	public function getSiteId()
 	{
-		return $this->node->__get( 'siteid' );
+		return ( $this->node->__isset( 'siteid' ) ? $this->node->__get( 'siteid' ) : null );
 	}
 
 
@@ -204,7 +204,7 @@ class Standard
 	 */
 	public function getTimeModified()
 	{
-		return $this->node->__get( 'mtime' );
+		return ( $this->node->__isset( 'mtime' ) ? $this->node->__get( 'mtime' ) : null );
 	}
 
 
@@ -215,18 +215,18 @@ class Standard
 	 */
 	public function getTimeCreated()
 	{
-		return $this->node->__get( 'ctime' );
+		return ( $this->node->__isset( 'ctime' ) ? $this->node->__get( 'ctime' ) : null );
 	}
 
 
 	/**
 	 * Returns the editor code of editor who created/modified the item at last.
 	 *
-	 * @return string Editorcode of editor who created/modified the item at last
+	 * @return string Editor who created/modified the item at last
 	 */
 	public function getEditor()
 	{
-		return $this->node->__get( 'editor' );
+		return ( $this->node->__isset( 'editor' ) ? $this->node->__get( 'editor' ) : null );
 	}
 
 
@@ -266,15 +266,15 @@ class Standard
 	public function toArray()
 	{
 		return array(
-			'catalog.id' => $this->node->getId(),
-			'catalog.code' => $this->node->getCode(),
-			'catalog.label' => $this->node->getLabel(),
-			'catalog.status' => $this->node->getStatus(),
+			'catalog.id' => $this->getId(),
+			'catalog.code' => $this->getCode(),
+			'catalog.label' => $this->getLabel(),
+			'catalog.status' => $this->getStatus(),
 			'catalog.config' => $this->getConfig(),
-			'catalog.siteid' => $this->node->__get( 'siteid' ),
-			'catalog.ctime' => $this->node->__get( 'ctime' ),
-			'catalog.mtime' => $this->node->__get( 'mtime' ),
-			'catalog.editor' => $this->node->__get( 'editor' ),
+			'catalog.siteid' => $this->getSiteId(),
+			'catalog.ctime' => $this->getTimeCreated(),
+			'catalog.mtime' => $this->getTimeModified(),
+			'catalog.editor' => $this->getEditor(),
 			'catalog.hasChildren' => $this->hasChildren()
 		);
 	}

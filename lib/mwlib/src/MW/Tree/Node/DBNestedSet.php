@@ -29,7 +29,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Node\Standard
 	 */
 	public function hasChildren()
 	{
-		if( $this->right > $this->left + 1 ) {
+		if( isset( $this->right ) && isset( $this->left ) && $this->right > $this->left + 1 ) {
 			return true;
 		}
 
