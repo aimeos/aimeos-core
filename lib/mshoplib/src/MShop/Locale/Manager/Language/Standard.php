@@ -153,7 +153,7 @@ class Standard
 				 *
 				 * The SQL statement must be a string suitable for being used as
 				 * prepared statement. It must include question marks for binding
-				 * the values from the log item to the statement before they are
+				 * the values from the language item to the statement before they are
 				 * sent to the database server. The number of question marks must
 				 * be the same as the number of columns listed in the INSERT
 				 * statement. The order of the columns must correspond to the
@@ -187,7 +187,7 @@ class Standard
 				 *
 				 * The SQL statement must be a string suitable for being used as
 				 * prepared statement. It must include question marks for binding
-				 * the values from the log item to the statement before they are
+				 * the values from the language item to the statement before they are
 				 * sent to the database server. The order of the columns must
 				 * correspond to the order in the saveItems() method, so the
 				 * correct values are bound to the columns.
