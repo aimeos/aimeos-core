@@ -63,7 +63,7 @@ class TestHelper
 		$ctx->setConfig( $conf );
 
 
-		$dbm = new \Aimeos\MW\DB\Manager\PDO( $conf );
+		$dbm = new \Aimeos\MW\DB\Manager\DBAL( $conf );
 		$ctx->setDatabaseManager( $dbm );
 
 
