@@ -93,7 +93,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
 			}
 
-			$dbalschema = new \Doctrine\DBAL\Schema\Schema();;
+			$dbalschema = new \Doctrine\DBAL\Schema\Schema();
 			$platform = $dbal->getDatabasePlatform();
 			$schema = $this->getSchema( $rname );
 
