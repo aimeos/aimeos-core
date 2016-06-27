@@ -34,7 +34,7 @@ interface Iface
 	 * @param integer $style The data can be returned as associative or numerical array
 	 * @return List (numeric or associative array) of columns returned by the SQL statement
 	 */
-	public function fetch( $style = \Aimeos\MW\DB\Result\Base::ASSOC );
+	public function fetch( $style = \Aimeos\MW\DB\Result\Base::FETCH_ASSOC );
 
 
 	/**
