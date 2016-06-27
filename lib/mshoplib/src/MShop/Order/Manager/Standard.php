@@ -88,17 +88,38 @@ class Standard
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'order.mtime'=> array(
-			'code'=>'order.mtime',
-			'internalcode'=>'mord."mtime"',
-			'label'=>'Order modification date',
-			'type'=> 'datetime',
+		'order.cdate'=> array(
+			'code'=>'order.cdate',
+			'internalcode'=>'mord."cdate"',
+			'label'=>'Order creation date',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.cmonth'=> array(
+			'code'=>'order.cmonth',
+			'internalcode'=>'mord."cmonth"',
+			'label'=>'Order creation month',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.chour'=> array(
+			'code'=>'order.chour',
+			'internalcode'=>'mord."chour"',
+			'label'=>'Order creation hour',
+			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.ctime'=> array(
 			'code'=>'order.ctime',
 			'internalcode'=>'mord."ctime"',
 			'label'=>'Order creation date/time',
+			'type'=> 'datetime',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.mtime'=> array(
+			'code'=>'order.mtime',
+			'internalcode'=>'mord."mtime"',
+			'label'=>'Order modification date',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -378,6 +399,9 @@ class Standard
 				$item->setId( $id ); //is not modified anymore
 			} else {
 				$stmt->bind( 11, $date ); //ctime
+				$stmt->bind( 12, date( 'Y-m-d' ) ); //cdate
+				$stmt->bind( 13, date( 'Y-m' ) ); //cmonth
+				$stmt->bind( 14, date( 'H' ) ); //chour
 			}
 
 			$stmt->execute()->finish();

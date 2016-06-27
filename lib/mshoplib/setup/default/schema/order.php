@@ -51,8 +51,11 @@ return array(
 			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'statusdelivery', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'relatedid', 'bigint', array( 'notnull' => false ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
+			$table->addColumn( 'cdate', 'string', array( 'fixed' => 10 ) );
+			$table->addColumn( 'cmonth', 'string', array( 'fixed' => 7 ) );
+			$table->addColumn( 'chour', 'string', array( 'fixed' => 2 ) );
 			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', array() );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msord_id' );
@@ -64,6 +67,9 @@ return array(
 			$table->addIndex( array( 'siteid', 'datepayment' ), 'idx_msord_sid_pdate' );
 			$table->addIndex( array( 'siteid', 'editor' ), 'idx_msord_sid_editor' );
 			$table->addIndex( array( 'siteid', 'ctime' ), 'idx_msord_sid_ctime' );
+			$table->addIndex( array( 'siteid', 'cdate' ), 'idx_msord_sid_cdate' );
+			$table->addIndex( array( 'siteid', 'cmonth' ), 'idx_msord_sid_cmonth' );
+			$table->addIndex( array( 'siteid', 'chour' ), 'idx_msord_sid_chour' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base', array( 'baseid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msord_baseid' );

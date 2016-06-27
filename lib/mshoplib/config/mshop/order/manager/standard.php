@@ -9,27 +9,27 @@
 return array(
 	'aggregate' => array(
 		'ansi' => '
-		SELECT "key", COUNT("id") AS "count"
-		FROM (
-			SELECT :key AS "key", mord."id" AS "id"
-			FROM "mshop_order" AS mord
-			:joins
-			WHERE :cond
-			GROUP BY :key, mord."id" /*-columns*/ , :columns /*columns-*/
-			/*-orderby*/ ORDER BY :order /*orderby-*/
-			LIMIT :size OFFSET :start
-		) AS list
-		GROUP BY "key"
-	'
+			SELECT "key", COUNT("id") AS "count"
+			FROM (
+				SELECT :key AS "key", mord."id" AS "id"
+				FROM "mshop_order" AS mord
+				:joins
+				WHERE :cond
+				GROUP BY :key, mord."id" /*-columns*/ , :columns /*columns-*/
+				/*-orderby*/ ORDER BY :order /*orderby-*/
+				LIMIT :size OFFSET :start
+			) AS list
+			GROUP BY "key"
+		'
 	),
 	'insert' => array(
 		'ansi' => '
 			INSERT INTO "mshop_order" (
 				"baseid", "siteid", "type", "datepayment", "datedelivery",
 				"statusdelivery", "statuspayment", "relatedid", "mtime",
-				"editor", "ctime"
+				"editor", "ctime", "cdate", "cmonth", "chour"
 			) VALUES (
-				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 			)
 		'
 	),
@@ -85,4 +85,3 @@ return array(
 		'sqlanywhere' => 'SELECT @@IDENTITY',
 	),
 );
-

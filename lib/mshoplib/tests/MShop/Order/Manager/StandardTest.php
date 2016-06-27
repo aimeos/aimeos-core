@@ -58,6 +58,42 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testAggregateTimes()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$search->setSortations( array( $search->sort( '-', 'order.cdate' ) ) );
+		$result = $this->object->aggregate( $search, 'order.cmonth' );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 4, reset( $result ) );
+	}
+
+
+	public function testAggregateAddress()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$result = $this->object->aggregate( $search, 'order.base.address.countryid' );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertArrayHasKey( 'DE', $result );
+		$this->assertEquals( 4, reset( $result ) );
+	}
+
+
+	public function testAggregateMonth()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.editor', 'core:unittest' ) );
+		$result = $this->object->aggregate( $search, 'order.type' );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( 'web', $result );
+		$this->assertEquals( 3, $result['web'] );
+	}
+
+
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );
