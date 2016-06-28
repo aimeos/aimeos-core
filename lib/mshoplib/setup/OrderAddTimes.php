@@ -44,6 +44,12 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 		$dbdomain = 'db-order';
 		$this->msg( 'Adding time columns to order table', 0 );
 
+		if( $this->getSchema( $dbdomain )->tableExists( 'mshop_order' ) === false )
+		{
+			$this->status( 'OK' );
+			return;
+		}
+
 		$dbal = $this->getConnection( $dbdomain )->getRawObject();
 
 		if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
@@ -81,6 +87,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 		$columns = array(
 			'cdate' => array( 'string', array( 'fixed' => 10 ) ),
 			'cmonth' => array( 'string', array( 'fixed' => 7 ) ),
+			'cweek' => array( 'string', array( 'fixed' => 7 ) ),
 			'chour' => array( 'string', array( 'fixed' => 2 ) ),
 		);
 
@@ -106,6 +113,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 		$indexes = array(
 			'idx_msord_sid_cdate' => array( 'siteid', 'cdate' ),
 			'idx_msord_sid_cmonth' => array( 'siteid', 'cmonth' ),
+			'idx_msord_sid_cweek' => array( 'siteid', 'cweek' ),
 			'idx_msord_sid_hour' => array( 'siteid', 'chour' ),
 		);
 
@@ -130,7 +138,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 		$start = 0;
 		$conn = $this->getConnection( $dbdomain );
 		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cdate" = \'\' LIMIT 1000 OFFSET :offset';
-		$update = 'UPDATE "mshop_order" SET "cdate" = ?, "cmonth" = ?, "chour" = ? WHERE "id" = ?';
+		$update = 'UPDATE "mshop_order" SET "cdate" = ?, "cmonth" = ?, "cweek" = ?, "chour" = ? WHERE "id" = ?';
 
 		$stmt = $conn->create( $update, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
 
@@ -153,8 +161,9 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 
 				$stmt->bind( 1, $date );
 				$stmt->bind( 2, substr( $date, 0, 7 ) );
-				$stmt->bind( 3, substr( $time, 0, 2 ) );
-				$stmt->bind( 4, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 3, date_create_from_format( 'Y-m-d', $date )->format( 'Y-W' )  );
+				$stmt->bind( 4, substr( $time, 0, 2 ) );
+				$stmt->bind( 5, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 				$stmt->execute()->finish();
 			}

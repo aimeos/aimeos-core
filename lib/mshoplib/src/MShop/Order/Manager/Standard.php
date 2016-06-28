@@ -102,6 +102,13 @@ class Standard
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.cweek'=> array(
+			'code'=>'order.cweek',
+			'internalcode'=>'mord."cweek"',
+			'label'=>'Order creation week',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'order.chour'=> array(
 			'code'=>'order.chour',
 			'internalcode'=>'mord."chour"',

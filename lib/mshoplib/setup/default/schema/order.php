@@ -52,6 +52,7 @@ return array(
 			$table->addColumn( 'statusdelivery', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'relatedid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'cdate', 'string', array( 'fixed' => 10 ) );
+			$table->addColumn( 'cweek', 'string', array( 'fixed' => 7 ) );
 			$table->addColumn( 'cmonth', 'string', array( 'fixed' => 7 ) );
 			$table->addColumn( 'chour', 'string', array( 'fixed' => 2 ) );
 			$table->addColumn( 'ctime', 'datetime', array() );
