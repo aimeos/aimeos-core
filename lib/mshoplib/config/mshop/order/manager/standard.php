@@ -27,9 +27,9 @@ return array(
 			INSERT INTO "mshop_order" (
 				"baseid", "siteid", "type", "datepayment", "datedelivery",
 				"statusdelivery", "statuspayment", "relatedid", "mtime",
-				"editor", "ctime", "cdate", "cmonth", "chour"
+				"editor", "ctime", "cdate", "cmonth", "cweek", "chour"
 			) VALUES (
-				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+				?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 			)
 		'
 	),

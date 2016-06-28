@@ -398,17 +398,18 @@ class Standard
 			$stmt->bind( 6, $item->getDeliveryStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 7, $item->getPaymentStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 8, $item->getRelatedId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 9, $date ); //mtime
+			$stmt->bind( 9, $date ); // mtime
 			$stmt->bind( 10, $context->getEditor() );
 
 			if( $id !== null ) {
 				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id ); //is not modified anymore
+				$item->setId( $id ); // is not modified anymore
 			} else {
-				$stmt->bind( 11, $date ); //ctime
-				$stmt->bind( 12, date( 'Y-m-d' ) ); //cdate
-				$stmt->bind( 13, date( 'Y-m' ) ); //cmonth
-				$stmt->bind( 14, date( 'H' ) ); //chour
+				$stmt->bind( 11, $date ); // ctime
+				$stmt->bind( 12, date( 'Y-m-d' ) ); // cdate
+				$stmt->bind( 13, date( 'Y-m' ) ); // cmonth
+				$stmt->bind( 14, date( 'Y-W' ) ); // cweek
+				$stmt->bind( 15, date( 'H' ) ); // chour
 			}
 
 			$stmt->execute()->finish();
