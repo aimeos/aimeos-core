@@ -105,6 +105,9 @@ class Standard
 					$quality = (int) $this->options['image']['png']['quality'];
 				}
 
+				imagealphablending($this->image, FALSE);
+				imagesavealpha($this->image, TRUE);
+				
 				if( @imagepng( $this->image, $filename, $quality ) === false ) {
 					throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
