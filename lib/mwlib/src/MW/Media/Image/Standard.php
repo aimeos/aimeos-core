@@ -44,7 +44,7 @@ class Standard
 		}
 
 		if( ( $this->image = @imagecreatefromstring( $content ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unknown image type in "%1$s"', $filename ) );
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'The image type in "%1$s" seems to be not supported by gdlib.', $filename) );
 		}
 
 		$this->options = $options;
