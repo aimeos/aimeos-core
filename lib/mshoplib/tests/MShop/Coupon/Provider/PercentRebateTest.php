@@ -70,8 +70,8 @@ class PercentRebateTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( 3, count( $products ) );
 		$this->assertEquals( 1, count( $coupons['zyxw'] ) );
-		$this->assertEquals( '-66.70', $product->getPrice()->getValue() );
-		$this->assertEquals( '66.70', $product->getPrice()->getRebate() );
+		$this->assertEquals( '-70.40', $product->getPrice()->getValue() );
+		$this->assertEquals( '70.40', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
 		$this->assertEquals( '', $product->getSupplierCode() );
