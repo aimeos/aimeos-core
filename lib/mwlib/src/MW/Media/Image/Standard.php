@@ -105,6 +105,14 @@ class Standard
 					$quality = (int) $this->options['image']['png']['quality'];
 				}
 
+				if( @imagealphablending($this->image, false) === false ){
+					throw new \Aimeos\MW\Media\Exception( sprintf( 'There was an error during the png processing in gdlib (alphablending)') );
+				}
+
+				if( @imagesavealpha($this->image, true) === false ){
+					throw new \Aimeos\MW\Media\Exception( sprintf( 'There was an error during the png processing in gdlib(imagesavealpha)') );
+				}
+				
 				if( @imagepng( $this->image, $filename, $quality ) === false ) {
 					throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
