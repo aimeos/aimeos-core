@@ -46,7 +46,7 @@ class PercentRebate
 
 		$sum = 0;
 		foreach( $base->getProducts() as $product ) {
-			$sum += $product->getPrice()->getValue() + $product->getPrice()->getCosts();
+			$sum += ( $product->getPrice()->getValue() + $product->getPrice()->getCosts() ) * $product->getQuantity();
 		}
 
 		$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
