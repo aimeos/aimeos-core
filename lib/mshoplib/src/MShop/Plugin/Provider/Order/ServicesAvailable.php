@@ -44,9 +44,10 @@ class ServicesAvailable
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $order instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
 		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
@@ -68,7 +69,8 @@ class ServicesAvailable
 			if( count( $problems ) > 0 )
 			{
 				$code = array( 'service' => $problems );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( 'Checks for available service items in basket failed' ), -1, null, $code );
+				$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Checks for available service items in basket failed' );
+				throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 			}
 		}
 		return true;

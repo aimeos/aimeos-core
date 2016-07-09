@@ -63,14 +63,16 @@ class PropertyAdd
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $order instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface';
-		if( !( $value instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $value instanceof \Aimeos\MShop\Order\Item\Base\Product\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Product\Iface' ) );
 		}
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
@@ -81,8 +83,10 @@ class PropertyAdd
 		{
 			$keyElements = explode( '.', $key );
 
-			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 ) {
-				throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Configuration invalid' ) );
+			if( $keyElements[0] !== 'product' || count( $keyElements ) < 3 )
+			{
+				$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Configuration invalid' );
+				throw new \Aimeos\MShop\Plugin\Exception( $msg );
 			}
 
 			$productSubManager = $productManager->getSubManager( $keyElements[1] );

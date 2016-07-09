@@ -42,9 +42,10 @@ class ProductLimit
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $order instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
 		$this->checkWithoutCurrency( $order, $value );
@@ -66,12 +67,11 @@ class ProductLimit
 	{
 		$config = $this->getItemBase()->getConfig();
 
-		if( isset( $config['single-number-max'] )
-			&& !is_array( $config['single-number-max'] )
+		if( isset( $config['single-number-max'] ) && !is_array( $config['single-number-max'] )
 			&& $value->getQuantity() > (int) $config['single-number-max']
 		) {
-			$msg = sprintf( 'The maximum product quantity is %1$d', (int) $config['single-number-max'] );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum product quantity is %1$d' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['single-number-max'] ) );
 		}
 
 
@@ -85,8 +85,8 @@ class ProductLimit
 
 			if( $total > (int) $config['total-number-max'] )
 			{
-				$msg = sprintf( 'The maximum quantity of all products is %1$d', (int) $config['total-number-max'] );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+				$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum quantity of all products is %1$d' );
+				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, (int) $config['total-number-max'] ) );
 			}
 		}
 	}
@@ -108,8 +108,8 @@ class ProductLimit
 		if( isset( $config['single-value-max'][$currencyId] )
 			&& $value->getPrice()->getValue() * $value->getQuantity() > (float) $config['single-value-max'][$currencyId]
 		) {
-			$msg = sprintf( 'The maximum product value is %1$s', $config['single-value-max'][$currencyId] );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum product value is %1$s' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['single-value-max'][$currencyId] ) );
 		}
 
 
@@ -124,8 +124,8 @@ class ProductLimit
 
 			if( (float) $price->getValue() > (float) $config['total-value-max'][$currencyId] )
 			{
-				$msg = sprintf( 'The maximum value of all products is %1$s', $config['total-value-max'][$currencyId] );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+				$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum value of all products is %1$s' );
+				throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['total-value-max'][$currencyId] ) );
 			}
 		}
 	}

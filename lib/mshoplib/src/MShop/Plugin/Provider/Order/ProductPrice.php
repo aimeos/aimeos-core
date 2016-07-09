@@ -44,9 +44,10 @@ class ProductPrice
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $order instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
 		if( !( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) {
@@ -104,7 +105,7 @@ class ProductPrice
 		if( count( $changedProducts ) > 0 )
 		{
 			$code = array( 'product' => $changedProducts );
-			$msg = sprintf( 'Please have a look at the prices of the products in your basket' );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Please have a look at the prices of the products in your basket' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
@@ -195,9 +196,9 @@ class ProductPrice
 			$pid = $orderProduct->getProductId();
 			$pcode = $orderProduct->getProductCode();
 			$codes = array( 'product' => array( $pos => 'product.price' ) );
-			$msg = sprintf( 'No price for product ID "%1$s" or product code "%2$s" available', $pid, $pcode );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'No price for product ID "%1$s" or product code "%2$s" available' );
 
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $pid, $pcode ), -1, null, $codes );
 		}
 
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );

@@ -44,9 +44,10 @@ class ProductGone
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $order instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
 		if( !( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) {
@@ -94,7 +95,8 @@ class ProductGone
 		if( count( $notAvailable ) > 0 )
 		{
 			$code = array( 'product' => $notAvailable );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( 'Products in basket not available' ), -1, null, $code );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Products in basket not available' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
 		return true;
