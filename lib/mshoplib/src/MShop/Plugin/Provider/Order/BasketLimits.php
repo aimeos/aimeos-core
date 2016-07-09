@@ -44,9 +44,10 @@ class BasketLimits
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $order instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
 		if( !( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) {
@@ -120,14 +121,14 @@ class BasketLimits
 
 		if( ( isset( $config['min-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] ) )
 		{
-			$msg = sprintf( 'The minimum basket value of %1$s isn\'t reached', $config['min-value'][$currencyId] );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The minimum basket value of %1$s isn\'t reached' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['min-value'][$currencyId] ) );
 		}
 
 		if( ( isset( $config['max-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] ) )
 		{
-			$msg = sprintf( 'The maximum basket value of %1$s is exceeded', $config['max-value'][$currencyId] );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum basket value of %1$s is exceeded' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['max-value'][$currencyId] ) );
 		}
 	}
 
@@ -143,14 +144,14 @@ class BasketLimits
 	{
 		if( ( isset( $config['min-products'] ) ) && ( $count < $config['min-products'] ) )
 		{
-			$msg = sprintf( 'The minimum product quantity of %1$d isn\'t reached', $config['min-products'] );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The minimum product quantity of %1$d isn\'t reached' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['min-products'] ) );
 		}
 
 		if( ( isset( $config['max-products'] ) ) && ( $count > $config['max-products'] ) )
 		{
-			$msg = sprintf( 'The maximum product quantity of %1$d is exceeded', $config['max-products'] );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum product quantity of %1$d is exceeded' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['max-products'] ) );
 		}
 	}
 }

@@ -44,14 +44,16 @@ class PropertyMatch
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $order instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Product\\Iface';
-		if( !( $value instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $value instanceof \Aimeos\MShop\Order\Item\Base\Product\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Product\Iface' ) );
 		}
 
 		$config = $this->getItemBase()->getConfig();
@@ -79,7 +81,8 @@ class PropertyMatch
 		if( reset( $result ) === false )
 		{
 			$code = array( 'product' => array_keys( $config ) );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( 'Product matching given properties not found' ), -1, null, $code );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Product matching given properties not found' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
 		return true;

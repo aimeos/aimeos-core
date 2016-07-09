@@ -49,9 +49,10 @@ class Coupon
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$class = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $order instanceof $class ) ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Object is not of required type "%1$s"', $class ) );
+		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
+		{
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
+			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
 		$notAvailable = array();
@@ -91,7 +92,7 @@ class Coupon
 		if( count( $notAvailable ) > 0 )
 		{
 			$codes = array( 'coupon' => $notAvailable );
-			$msg = sprintf( 'Coupon in basket is not available any more' );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Coupon in basket is not available any more' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
 		}
 
