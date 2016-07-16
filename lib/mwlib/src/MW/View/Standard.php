@@ -160,10 +160,12 @@ class Standard implements \Aimeos\MW\View\Iface
 	 *
 	 * @param string $name Name of the view helper as called in the template
 	 * @param \Aimeos\MW\View\Helper\Iface $helper View helper instance
+	 * @return \Aimeos\MW\View\Iface View object for method chaining
 	 */
 	public function addHelper( $name, \Aimeos\MW\View\Helper\Iface $helper )
 	{
 		$this->helper[$name] = $helper;
+		return $this;
 	}
 
 
