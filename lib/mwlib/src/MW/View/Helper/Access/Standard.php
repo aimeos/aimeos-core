@@ -26,12 +26,12 @@ class Standard extends \Aimeos\MW\View\Helper\Base implements Iface
 	 * Initializes the view helper
 	 *
 	 * @param \Aimeos\MW\View\Iface $view View object
-	 * @param \Closure $fcn Closure function that returns the list of group codes assigned to the current user
+	 * @param \Closure|array $groups Group codes assigned to the current user or closure function that returns the list
 	 */
-	public function __construct( \Aimeos\MW\View\Iface $view, \Closure $fcn )
+	public function __construct( \Aimeos\MW\View\Iface $view, $groups )
 	{
 		parent::__construct( $view );
-		$this->groups = $fcn;
+		$this->groups = $groups;
 	}
 
 
@@ -49,6 +49,6 @@ class Standard extends \Aimeos\MW\View\Helper\Base implements Iface
 			$this->groups = $fcn();
 		}
 
-		return (bool) count( array_intersect( (array) $groups, $this->groups ) );
+		return (bool) count( array_intersect( (array) $groups, (array) $this->groups ) );
 	}
 }
