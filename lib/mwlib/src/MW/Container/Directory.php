@@ -88,7 +88,7 @@ class Directory
 	 */
 	public function get( $name )
 	{
-		return new $this->classname( $this->resource->getPath() . DIRECTORY_SEPARATOR . $name, $name );
+		return new $this->classname( $this->resource->getPath() . DIRECTORY_SEPARATOR . $name, $name, $this->getOptions() );
 	}
 
 
@@ -110,7 +110,7 @@ class Directory
 	 */
 	public function current()
 	{
-		return new $this->classname( $this->resource->getPathname(), $this->resource->getFilename() );
+		return new $this->classname( $this->resource->getPathname(), $this->resource->getFilename(), $this->getOptions() );
 	}
 
 

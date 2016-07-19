@@ -105,7 +105,7 @@ class Zip
 		}
 
 		// $this->container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
-		return new $this->classname( 'zip://' . $this->resourcepath . '#' . $name, $name );
+		return new $this->classname( 'zip://' . $this->resourcepath . '#' . $name, $name, $this->getOptions() );
 	}
 
 
@@ -149,7 +149,7 @@ class Zip
 		}
 
 		// $this->container->getStream( $name ) doesn't work correctly because the stream can't be rewinded
-		return new $this->classname( 'zip://' . $this->resourcepath . '#' . $name, $name );
+		return new $this->classname( 'zip://' . $this->resourcepath . '#' . $name, $name, $this->getOptions() );
 	}
 
 
