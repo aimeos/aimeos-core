@@ -29,7 +29,7 @@ class Sitecheck
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		if( $item->getId() !== null )
+		if( $item->getId() !== null && $item->isModified() )
 		{
 			$actual = $this->getManager()->getItem( $item->getId() )->getSiteId();
 			$siteId = $this->getContext()->getLocale()->getSiteId();
