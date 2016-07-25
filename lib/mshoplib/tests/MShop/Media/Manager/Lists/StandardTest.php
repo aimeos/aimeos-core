@@ -96,6 +96,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
+		$this->assertNotEquals( '', $item->getTypeName() );
 	}
 
 

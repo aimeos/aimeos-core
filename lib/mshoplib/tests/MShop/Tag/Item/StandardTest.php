@@ -3,28 +3,19 @@
 /**
  * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Tag\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Product\Item\Tag\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -33,6 +24,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'tag.typeid' => 44,
 			'tag.languageid' => 'en',
 			'tag.type' => 'taste',
+			'tag.typename' => 'Taste',
 			'tag.label' => 'salty',
 			'tag.mtime' => '2011-01-01 00:00:02',
 			'tag.ctime' => '2011-01-01 00:00:01',
@@ -42,16 +34,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Tag\Item\Standard( $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		$this->object = null;
 	}
+
 
 	public function testGetId()
 	{
@@ -105,6 +93,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'taste', $this->object->getType() );
 	}
 
+	public function testGetTypeName()
+	{
+		$this->assertEquals( 'Taste', $this->object->getTypeName() );
+	}
+
 	public function testGetLabel()
 	{
 		$this->assertEquals( 'salty', $this->object->getLabel() );
@@ -149,6 +142,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'tag.id' => 1,
 			'tag.typeid' => 2,
+			'tag.type' => 'test',
+			'tag.typename' => 'Test',
 			'tag.label' => 'test item',
 			'tag.languageid' => 'de',
 		);
@@ -161,6 +156,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['tag.typeid'], $item->getTypeId() );
 		$this->assertEquals( $list['tag.label'], $item->getLabel() );
 		$this->assertEquals( $list['tag.languageid'], $item->getLanguageId() );
+		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getTypeName() );
+		$this->assertNull( $item->getType() );
 	}
 
 
@@ -171,7 +169,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['tag.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['tag.siteid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['tag.type'] );
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['tag.typeid'] );
+		$this->assertEquals( $this->object->getTypeName(), $arrayObject['tag.typename'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['tag.languageid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['tag.type'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['tag.label'] );

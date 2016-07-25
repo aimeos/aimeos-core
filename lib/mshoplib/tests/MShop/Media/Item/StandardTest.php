@@ -24,6 +24,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'media.siteid' => 123,
 			'media.typeid' => 2,
 			'media.type' => 'category',
+			'media.typename' => 'Category',
 			'media.domain' => 'test_dom',
 			'media.label' => 'testPicture',
 			'media.mimetype' => 'image/jpeg',
@@ -84,6 +85,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetType()
 	{
 		$this->assertEquals( 'category', $this->object->getType() );
+	}
+
+
+	public function testGetTypeName()
+	{
+		$this->assertEquals( 'Category', $this->object->getTypeName() );
 	}
 
 
@@ -254,6 +261,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'media.label' => 'test item',
 			'media.languageid' => 'de',
 			'media.typeid' => 2,
+			'media.type' => 'test',
+			'media.typename' => 'Test',
 			'media.mimetype' => 'image/jpeg',
 			'media.preview' => 'preview.jpg',
 			'media.url' => 'image.jpg',
@@ -273,6 +282,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['media.preview'], $item->getPreview() );
 		$this->assertEquals( $list['media.url'], $item->getUrl() );
 		$this->assertEquals( $list['media.status'], $item->getStatus() );
+		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getTypeName() );
+		$this->assertNull( $item->getType() );
 	}
 
 
@@ -288,6 +300,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['media.label'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['media.languageid'] );
 		$this->assertEquals( $this->object->getMimeType(), $arrayObject['media.mimetype'] );
+		$this->assertEquals( $this->object->getTypeName(), $arrayObject['media.typename'] );
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['media.typeid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['media.type'] );
 		$this->assertEquals( $this->object->getUrl(), $arrayObject['media.url'] );

@@ -28,6 +28,13 @@ interface Iface
 	public function getType();
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName();
+
+	/**
 	 * Returns the type ID of the item.
 	 *
 	 * @return integer|null Type ID of the item

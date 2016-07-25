@@ -601,8 +601,10 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['attribute.typeid']] ) ) {
+				if( isset( $typeItems[$row['attribute.typeid']] ) )
+				{
 					$map[$id]['attribute.type'] = $typeItems[$row['attribute.typeid']]->getCode();
+					$map[$id]['attribute.typename'] = $typeItems[$row['attribute.typeid']]->getName();
 				}
 			}
 		}

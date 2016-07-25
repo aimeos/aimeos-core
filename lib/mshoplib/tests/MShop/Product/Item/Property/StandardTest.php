@@ -2,28 +2,19 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2014-2015
+ * @copyright Aimeos (aimeos.org), 2014-2016
  */
 
 
 namespace Aimeos\MShop\Product\Item\Property;
 
 
-/**
- * Test class for \Aimeos\MShop\Product\Item\Property\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -33,6 +24,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'product.property.typeid' => 44,
 			'product.property.languageid' => 'en',
 			'product.property.type' => 'width',
+			'product.property.typename' => 'Width',
 			'product.property.value' => '30.0',
 			'product.property.mtime' => '2011-01-01 00:00:02',
 			'product.property.ctime' => '2011-01-01 00:00:01',
@@ -42,16 +34,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Product\Item\Property\Standard( $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		$this->object = null;
 	}
+
 
 	public function testGetId()
 	{
@@ -119,6 +107,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'width', $this->object->getType() );
 	}
 
+	public function testGetTypeName()
+	{
+		$this->assertEquals( 'Width', $this->object->getTypeName() );
+	}
+
 	public function testGetValue()
 	{
 		$this->assertEquals( '30.0', $this->object->getValue() );
@@ -162,6 +155,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'product.property.parentid' => 1,
 			'product.property.typeid' => 2,
+			'product.property.type' => 'test',
+			'product.property.typename' => 'Test',
 			'product.property.languageid' => 'de',
 			'product.property.value' => 'value',
 		);
@@ -174,6 +169,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($list['product.property.typeid'], $item->getTypeId());
 		$this->assertEquals($list['product.property.languageid'], $item->getLanguageId());
 		$this->assertEquals($list['product.property.value'], $item->getValue());
+		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getTypeName() );
+		$this->assertNull( $item->getType() );
 	}
 
 
@@ -184,7 +182,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['product.property.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['product.property.siteid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['product.property.type'] );
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['product.property.typeid'] );
+		$this->assertEquals( $this->object->getTypeName(), $arrayObject['product.property.typename'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['product.property.languageid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['product.property.type'] );
 		$this->assertEquals( $this->object->getValue(), $arrayObject['product.property.value'] );

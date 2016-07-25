@@ -364,9 +364,12 @@ abstract class Base
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row[$this->prefix . 'typeid']] ) ) {
+				if( isset( $typeItems[$row[$this->prefix . 'typeid']] ) )
+				{
 					$row[$this->prefix . 'type'] = $typeItems[$row[$this->prefix . 'typeid']]->getCode();
+					$row[$this->prefix . 'typename'] = $typeItems[$row[$this->prefix . 'typeid']]->getName();
 				}
+
 				$items[$row[$this->prefix . 'id']] = $this->createItemBase( $row );
 			}
 		}

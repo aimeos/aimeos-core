@@ -121,6 +121,21 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['text.typename'] ) ) {
+			return (string) $this->values['text.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns the domain of the text item.
 	 *
 	 * @return string Domain of the text item
@@ -270,6 +285,7 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list['text.type'], $list['text.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -299,9 +315,10 @@ class Standard
 		$list = parent::toArray();
 
 		$list['text.languageid'] = $this->getLanguageId();
+		$list['text.typename'] = $this->getTypeName();
 		$list['text.typeid'] = $this->getTypeId();
-		$list['text.label'] = $this->getLabel();
 		$list['text.type'] = $this->getType();
+		$list['text.label'] = $this->getLabel();
 		$list['text.domain'] = $this->getDomain();
 		$list['text.content'] = $this->getContent();
 		$list['text.status'] = $this->getStatus();

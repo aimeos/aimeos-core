@@ -590,8 +590,10 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[ $row['product.property.typeid'] ] ) ) {
+				if( isset( $typeItems[ $row['product.property.typeid'] ] ) )
+				{
 					$row['product.property.type'] = $typeItems[ $row['product.property.typeid'] ]->getCode();
+					$row['product.property.typename'] = $typeItems[$row['product.property.typeid']]->getName();
 				}
 
 				$items[$id] = $this->createItemBase( $row );

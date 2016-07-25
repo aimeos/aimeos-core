@@ -54,6 +54,21 @@ class Standard extends Base
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['price.typename'] ) ) {
+			return (string) $this->values['price.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns the type ID of the price.
 	 *
 	 * @return integer|null Type ID of the price
@@ -517,6 +532,7 @@ class Standard extends Base
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list['price.type'], $list['price.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -553,6 +569,7 @@ class Standard extends Base
 
 		$list['price.typeid'] = $this->getTypeId();
 		$list['price.type'] = $this->getType();
+		$list['price.typename'] = $this->getTypeName();
 		$list['price.currencyid'] = $this->getCurrencyId();
 		$list['price.domain'] = $this->getDomain();
 		$list['price.quantity'] = $this->getQuantity();

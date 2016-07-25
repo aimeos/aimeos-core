@@ -18,30 +18,9 @@ namespace Aimeos\MShop\Plugin\Item;
  * @package MShop
  * @subpackage Plugin
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
+	\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Config\Iface
 {
-	/**
-	 * Returns the type of the plugin.
-	 *
-	 * @return string Plugin type
-	 */
-	public function getType();
-
-	/**
-	 * Returns the type ID of the plugin.
-	 *
-	 * @return integer|null Plugin type ID
-	 */
-	public function getTypeId();
-
-	/**
-	 * Sets the new type ID of the plugin item.
-	 *
-	 * @param integer $typeid New plugin type ID
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
-	 */
-	public function setTypeId( $typeid );
-
 	/**
 	 * Returns the name of the plugin item.
 	 *
@@ -71,21 +50,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setProvider( $provider );
-
-	/**
-	 * Returns the configuration of the plugin item.
-	 *
-	 * @return array Custom configuration values
-	 */
-	public function getConfig();
-
-	/**
-	 * Sets the new configuration for the plugin item.
-	 *
-	 * @param array $config Custom configuration values
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
-	 */
-	public function setConfig( array $config );
 
 	/**
 	 * Returns the status of the plugin item.

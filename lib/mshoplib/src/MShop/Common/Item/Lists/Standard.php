@@ -224,6 +224,21 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values[$this->prefix . 'typename'] ) ) {
+			return (string) $this->values[$this->prefix . 'typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns the type id of the list item.
 	 *
 	 * @return integer|null Type id of the list item

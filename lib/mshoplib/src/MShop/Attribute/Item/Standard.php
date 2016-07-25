@@ -120,6 +120,21 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['attribute.typename'] ) ) {
+			return (string) $this->values['attribute.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns a unique code of the attribute item.
 	 *
 	 * @return string Returns the code of the attribute item
@@ -272,6 +287,7 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list['attribute.type'], $list['attribute.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -305,6 +321,7 @@ class Standard
 		$list['attribute.status'] = $this->getStatus();
 		$list['attribute.typeid'] = $this->getTypeId();
 		$list['attribute.type'] = $this->getType();
+		$list['attribute.typename'] = $this->getTypeName();
 		$list['attribute.position'] = $this->getPosition();
 		$list['attribute.label'] = $this->getLabel();
 

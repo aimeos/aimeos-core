@@ -3,25 +3,19 @@
 /**
  * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Plugin\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Plugin\Item\Standard
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -30,6 +24,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'plugin.typeid' => 2,
 			'plugin.label' => 'unitTestPlugin',
 			'plugin.type' => 'order',
+			'plugin.typename' => 'Order',
 			'plugin.provider' => 'provider',
 			'plugin.config' => array( 'limit' => '40' ),
 			'plugin.position' => 0,
@@ -43,9 +38,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -72,6 +64,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
+
+
+	public function testGetType()
+	{
+		$this->assertEquals( 'order', $this->object->getType() );
+	}
+
+
+	public function testGetTypeName()
+	{
+		$this->assertEquals( 'Order', $this->object->getTypeName() );
+	}
+
 
 	public function testGetTypeId()
 	{
@@ -200,6 +205,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'plugin.id' => 1,
 			'plugin.typeid' => 2,
+			'plugin.type' => 'test',
+			'plugin.typename' => 'Test',
 			'plugin.label' => 'test item',
 			'plugin.provider' => 'FreeShipping',
 			'plugin.config' => array( 'test' ),
@@ -216,6 +223,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['plugin.provider'], $item->getProvider() );
 		$this->assertEquals( $list['plugin.config'], $item->getConfig() );
 		$this->assertEquals( $list['plugin.status'], $item->getStatus() );
+		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getTypeName() );
+		$this->assertNull( $item->getType() );
 	}
 
 
@@ -228,6 +238,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['plugin.siteid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['plugin.type'] );
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['plugin.typeid'] );
+		$this->assertEquals( $this->object->getTypeName(), $arrayObject['plugin.typename'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['plugin.label'] );
 		$this->assertEquals( $this->object->getProvider(), $arrayObject['plugin.provider'] );
 		$this->assertEquals( $this->object->getConfig(), $arrayObject['plugin.config'] );

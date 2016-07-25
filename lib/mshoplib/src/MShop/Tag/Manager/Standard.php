@@ -555,8 +555,10 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['tag.typeid']] ) ) {
+				if( isset( $typeItems[$row['tag.typeid']] ) )
+				{
 					$row['tag.type'] = $typeItems[$row['tag.typeid']]->getCode();
+					$row['tag.typename'] = $typeItems[$row['tag.typeid']]->getName();
 				}
 
 				$items[$id] = $this->createItemBase( $row );

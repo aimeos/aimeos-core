@@ -51,6 +51,13 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setDomain( $domain );
 
 	/**
+	 * Returns the translated name for the type item
+	 *
+	 * @return string Translated name of the type item
+	 */
+	public function getName();
+
+	/**
 	 * Returns the label of the common list type item
 	 *
 	 * @return string Label of the common list type item

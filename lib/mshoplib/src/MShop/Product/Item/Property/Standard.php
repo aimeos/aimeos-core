@@ -117,6 +117,21 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['product.property.typename'] ) ) {
+			return (string) $this->values['product.property.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns the type id of the product property item
 	 *
 	 * @return integer|null Type of the product property item
@@ -201,6 +216,7 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list['product.property.type'], $list['product.property.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -229,6 +245,7 @@ class Standard
 
 		$list['product.property.parentid'] = $this->getParentId();
 		$list['product.property.typeid'] = $this->getTypeId();
+		$list['product.property.typename'] = $this->getTypeName();
 		$list['product.property.languageid'] = $this->getLanguageId();
 		$list['product.property.value'] = $this->getValue();
 		$list['product.property.type'] = $this->getType();

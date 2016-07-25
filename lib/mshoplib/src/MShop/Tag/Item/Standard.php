@@ -86,6 +86,21 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['tag.typename'] ) ) {
+			return (string) $this->values['tag.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns the type id of the product tag item
 	 *
 	 * @return integer|null Type of the product tag item
@@ -170,6 +185,7 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list['tag.type'], $list['tag.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -195,10 +211,11 @@ class Standard
 	{
 		$list = parent::toArray();
 
-		$list['tag.typeid'] = $this->getTypeId();
 		$list['tag.languageid'] = $this->getLanguageId();
 		$list['tag.label'] = $this->getLabel();
 		$list['tag.type'] = $this->getType();
+		$list['tag.typeid'] = $this->getTypeId();
+		$list['tag.typename'] = $this->getTypeName();
 
 		return $list;
 	}

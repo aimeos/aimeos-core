@@ -121,6 +121,21 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['media.typename'] ) ) {
+			return (string) $this->values['media.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns the domain of the media item, if available.
 	 *
 	 * @return string Domain the media item belongs to
@@ -337,6 +352,7 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list['media.type'], $list['media.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -373,12 +389,12 @@ class Standard
 		$list['media.mimetype'] = $this->getMimeType();
 		$list['media.typeid'] = $this->getTypeId();
 		$list['media.type'] = $this->getType();
-		$list['media.url'] = $this->getUrl();
+		$list['media.typename'] = $this->getTypeName();
 		$list['media.preview'] = $this->getPreview();
+		$list['media.url'] = $this->getUrl();
 		$list['media.status'] = $this->getStatus();
 
 		return $list;
 	}
 
 }
-

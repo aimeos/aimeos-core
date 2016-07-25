@@ -3,28 +3,19 @@
 /**
  * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Common\Item\Type;
 
 
-/**
- * Test class for \Aimeos\MShop\Common\Item\Type\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -32,22 +23,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'common.type.code' => 'code',
 			'common.type.domain' => 'domain',
 			'common.type.label' => 'label',
+			'common.type.name' => 'name',
 			'common.type.status' => 1,
 			'common.type.siteid' => 1,
 			'common.type.mtime' => '2011-01-01 00:00:02',
 			'common.type.ctime' => '2011-01-01 00:00:01',
-			'common.type.editor' => 'unitTestUser'
+			'common.type.editor' => 'unitTestUser',
 		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\Type\Standard( 'common.type.', $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -93,6 +80,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Type\Iface', $return );
 		$this->assertEquals( 'domain', $this->object->getDomain() );
 		$this->assertFalse( $this->object->isModified() );
+	}
+
+	public function testGetName()
+	{
+		$this->assertEquals( 'name', $this->object->getName() );
 	}
 
 	public function testGetLabel()
@@ -159,6 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'common.type.code' => 'test',
 			'common.type.domain' => 'testDomain',
 			'common.type.label' => 'test item',
+			'common.type.name' => 'Testeintrag',
 			'common.type.status' => 1,
 		);
 
@@ -169,8 +162,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['common.type.id'], $item->getId() );
 		$this->assertEquals( $list['common.type.code'], $item->getCode() );
 		$this->assertEquals( $list['common.type.domain'], $item->getDomain() );
+		$this->assertEquals( $list['common.type.label'], $item->getName() ); // fallback to label
 		$this->assertEquals( $list['common.type.label'], $item->getLabel() );
 		$this->assertEquals( $list['common.type.status'], $item->getStatus() );
+		$this->assertNull( $item->getSiteId() );
 	}
 
 	public function testToArray()
@@ -181,6 +176,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['common.type.id'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['common.type.code'] );
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['common.type.domain'] );
+		$this->assertEquals( $this->object->getName(), $arrayObject['common.type.name'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['common.type.label'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['common.type.status'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.type.siteid'] );

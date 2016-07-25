@@ -597,8 +597,10 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['media.typeid']] ) ) {
+				if( isset( $typeItems[$row['media.typeid']] ) )
+				{
 					$map[$id]['media.type'] = $typeItems[$row['media.typeid']]->getCode();
+					$map[$id]['media.typename'] = $typeItems[$row['media.typeid']]->getName();
 				}
 			}
 		}

@@ -588,8 +588,10 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['product.typeid']] ) ) {
+				if( isset( $typeItems[$row['product.typeid']] ) )
+				{
 					$map[$id]['product.type'] = $typeItems[$row['product.typeid']]->getCode();
+					$map[$id]['product.typename'] = $typeItems[$row['product.typeid']]->getName();
 				}
 			}
 		}

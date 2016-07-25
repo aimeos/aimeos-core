@@ -87,6 +87,21 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['service.typename'] ) ) {
+			return (string) $this->values['service.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns the type ID of the service item if available.
 	 *
 	 * @return integer|null Service item type ID
@@ -297,6 +312,7 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list['service.type'], $list['service.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -326,6 +342,7 @@ class Standard
 	{
 		$list = parent::toArray();
 
+		$list['service.typename'] = $this->getTypeName();
 		$list['service.typeid'] = $this->getTypeId();
 		$list['service.type'] = $this->getType();
 		$list['service.code'] = $this->getCode();

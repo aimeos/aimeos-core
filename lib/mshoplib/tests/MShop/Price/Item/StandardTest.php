@@ -3,27 +3,18 @@
 /**
  * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 namespace Aimeos\MShop\Price\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Price\Item\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -31,6 +22,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'price.siteid' => 99,
 			'price.typeid' => 2,
 			'price.type' => 'default',
+			'price.typename' => 'Default',
 			'price.currencyid' => 'EUR',
 			'price.domain' => 'product',
 			'price.label' => 'Price label',
@@ -50,16 +42,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		$this->object = null;
 	}
+
 
 	public function testAddItem()
 	{
@@ -147,6 +135,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetType()
 	{
 		$this->assertEquals( 'default', $this->object->getType() );
+	}
+
+	public function testGetTypeName()
+	{
+		$this->assertEquals( 'Default', $this->object->getTypeName() );
 	}
 
 	public function testGetTypeId()
@@ -382,6 +375,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'price.id' => 1,
 			'price.typeid' => 2,
+			'price.type' => 'test',
+			'price.typename' => 'Test',
 			'price.label' => 'test item',
 			'price.currencyid' => 'EUR',
 			'price.quantity' => 3,
@@ -410,6 +405,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['price.taxrate'], $item->getTaxRate() );
 		$this->assertEquals( $list['price.taxflag'], $item->getTaxFlag() );
 		$this->assertEquals( $list['price.status'], $item->getStatus() );
+		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getTypeName() );
+		$this->assertNull( $item->getType() );
 	}
 
 
@@ -419,9 +417,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['price.id'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['price.type'] );
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['price.typeid'] );
+		$this->assertEquals( $this->object->getTypeName(), $arrayObject['price.typename'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['price.siteid'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['price.label'] );
+		$this->assertEquals( $this->object->getDomain(), $arrayObject['price.domain'] );
 		$this->assertEquals( $this->object->getCurrencyId(), $arrayObject['price.currencyid'] );
 		$this->assertEquals( $this->object->getQuantity(), $arrayObject['price.quantity'] );
 		$this->assertEquals( $this->object->getValue(), $arrayObject['price.value'] );

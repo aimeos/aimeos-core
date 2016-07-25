@@ -53,6 +53,21 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['plugin.typename'] ) ) {
+			return (string) $this->values['plugin.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
 	 * Returns the type ID of the plugin.
 	 *
 	 * @return integer|null Plugin type ID
@@ -264,6 +279,7 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list['plugin.type'], $list['plugin.typename'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -293,6 +309,7 @@ class Standard
 		$list = parent::toArray();
 
 		$list['plugin.type'] = $this->getType();
+		$list['plugin.typename'] = $this->getTypeName();
 		$list['plugin.typeid'] = $this->getTypeId();
 		$list['plugin.label'] = $this->getLabel();
 		$list['plugin.provider'] = $this->getProvider();

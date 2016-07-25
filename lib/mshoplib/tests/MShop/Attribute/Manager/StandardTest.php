@@ -140,6 +140,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
 		$this->assertEquals( 1, count( $itemB->getListItems( 'text' ) ) );
 		$this->assertEquals( 1, count( $itemB->getRefItems( 'text' ) ) );
+		$this->assertNotEquals( '', $itemB->getTypeName() );
 	}
 
 

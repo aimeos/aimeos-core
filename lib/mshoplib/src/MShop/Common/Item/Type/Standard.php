@@ -106,6 +106,21 @@ class Standard
 
 
 	/**
+	 * Returns the translated name for the type item
+	 *
+	 * @return string Translated name of the type item
+	 */
+	public function getName()
+	{
+		if( isset( $this->values[$this->prefix . 'name'] ) ) {
+			return (string) $this->values[$this->prefix . 'name'];
+		}
+
+		return $this->getLabel();
+	}
+
+
+	/**
 	 * Returns the label of the common list type item
 	 *
 	 * @return string Label of the common list type item
@@ -190,6 +205,7 @@ class Standard
 	{
 		$unknown = array();
 		$list = parent::fromArray( $list );
+		unset( $list[$this->prefix . 'name'] );
 
 		foreach( $list as $key => $value )
 		{
@@ -218,6 +234,7 @@ class Standard
 
 		$list[$this->prefix . 'code'] = $this->getCode();
 		$list[$this->prefix . 'domain'] = $this->getDomain();
+		$list[$this->prefix . 'name'] = $this->getName();
 		$list[$this->prefix . 'label'] = $this->getLabel();
 		$list[$this->prefix . 'status'] = $this->getStatus();
 

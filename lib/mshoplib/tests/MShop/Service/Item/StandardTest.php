@@ -3,27 +3,18 @@
 /**
  * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 namespace Aimeos\MShop\Service\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Item\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values = array();
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -32,6 +23,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'service.position' => '0',
 			'service.typeid' => 1,
 			'service.type' => 'delivery',
+			'service.typename' => 'Delivery',
 			'service.code' => 'wa34Hg',
 			'service.label' => 'deliveryObject',
 			'service.provider' => 'Standard',
@@ -45,16 +37,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Service\Item\Standard( $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		$this->object = null;
 	}
+
 
 	public function testGetId()
 	{
@@ -180,6 +168,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'delivery', $this->object->getType() );
 	}
 
+	public function testGetTypeName()
+	{
+		$this->assertEquals( 'Delivery', $this->object->getTypeName() );
+	}
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
@@ -209,6 +202,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'service.id' => 1,
 			'service.typeid' => 2,
+			'service.type' => 'test',
+			'service.typename' => 'Test',
 			'service.code' => 'test',
 			'service.label' => 'test item',
 			'service.provider' => 'PayPal',
@@ -222,13 +217,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( array(), $unknown );
 
 		$this->assertEquals( $list['service.id'], $item->getId() );
-		$this->assertEquals( $list['service.typeid'], $item->getTypeId() );
 		$this->assertEquals( $list['service.code'], $item->getCode() );
 		$this->assertEquals( $list['service.label'], $item->getLabel() );
+		$this->assertEquals( $list['service.typeid'], $item->getTypeId() );
 		$this->assertEquals( $list['service.provider'], $item->getProvider() );
 		$this->assertEquals( $list['service.position'], $item->getPosition() );
 		$this->assertEquals( $list['service.config'], $item->getConfig() );
 		$this->assertEquals( $list['service.status'], $item->getStatus() );
+		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getTypeName() );
+		$this->assertNull( $item->getType() );
 	}
 
 
@@ -239,6 +237,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['service.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['service.siteid'] );
+		$this->assertEquals( $this->object->getTypename(), $arrayObject['service.typename'] );
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['service.typeid'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['service.type'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['service.code'] );

@@ -87,8 +87,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$itemB = $this->object->getItem( $item->getId() );
-
 		$this->assertEquals( 19.00, $itemB->getTaxRate() );
+		$this->assertNotEquals( '', $itemB->getTypeName() );
 	}
 
 

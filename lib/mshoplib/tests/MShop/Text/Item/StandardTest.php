@@ -3,28 +3,19 @@
 /**
  * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Text\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Test\Item\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -32,6 +23,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'text.siteid' => 99,
 			'text.languageid' => 'de',
 			'text.typeid' => 1,
+			'text.type' => 'name',
+			'text.typename' => 'Name',
 			'text.label' => 'unittest label',
 			'text.domain' => 'product',
 			'text.content' => 'unittest text',
@@ -45,15 +38,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
-		$this->object = null;
+		unset( $this->object );
 	}
 
 
@@ -98,6 +85,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
 		$this->assertEquals( 2, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetType()
+	{
+		$this->assertEquals( 'name', $this->object->getType() );
+	}
+
+
+	public function testGetTypeName()
+	{
+		$this->assertEquals( 'Name', $this->object->getTypeName() );
 	}
 
 
@@ -213,6 +212,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'text.id' => 1,
 			'text.typeid' => 2,
+			'text.type' => 'test',
+			'text.typename' => 'Test',
 			'text.languageid' => 'de',
 			'text.label' => 'test item',
 			'text.domain' => 'product',
@@ -231,6 +232,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['text.domain'], $item->getDomain() );
 		$this->assertEquals( $list['text.content'], $item->getContent() );
 		$this->assertEquals( $list['text.status'], $item->getStatus() );
+		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getTypeName() );
+		$this->assertNull( $item->getType() );
 	}
 
 
@@ -241,7 +245,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getId(), $data['text.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $data['text.siteid'] );
 		$this->assertEquals( $this->object->getLanguageId(), $data['text.languageid'] );
+		$this->assertEquals( $this->object->getTypeName(), $data['text.typename'] );
 		$this->assertEquals( $this->object->getTypeId(), $data['text.typeid'] );
+		$this->assertEquals( $this->object->getType(), $data['text.type'] );
 		$this->assertEquals( $this->object->getLabel(), $data['text.label'] );
 		$this->assertEquals( $this->object->getDomain(), $data['text.domain'] );
 		$this->assertEquals( $this->object->getContent(), $data['text.content'] );

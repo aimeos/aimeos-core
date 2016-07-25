@@ -724,8 +724,10 @@ class Standard
 
 			foreach( $map as $id => $row )
 			{
-				if( isset( $typeItems[$row['plugin.typeid']] ) ) {
+				if( isset( $typeItems[$row['plugin.typeid']] ) )
+				{
 					$row['plugin.type'] = $typeItems[$row['plugin.typeid']]->getCode();
+					$row['plugin.typename'] = $typeItems[$row['plugin.typeid']]->getName();
 				}
 
 				$items[$id] = $this->createItemBase( $row );

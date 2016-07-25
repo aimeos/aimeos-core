@@ -33,12 +33,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'attribute.status' => 1,
 			'attribute.typeid' => 3,
 			'attribute.type' => 'unittest',
+			'attribute.typename' => 'Unit test',
 			'attribute.position' => 0,
 			'attribute.label' => 'size',
 			'attribute.siteid' => 99,
 			'attribute.mtime' => '2011-01-01 00:00:02',
 			'attribute.ctime' => '2011-01-01 00:00:01',
-			'attribute.editor' => 'unitTestUser'
+			'attribute.editor' => 'unitTestUser',
 		);
 
 		$this->object = new \Aimeos\MShop\Attribute\Item\Standard( $this->values );
@@ -82,6 +83,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetType()
 	{
 		$this->assertEquals( 'unittest', $this->object->getType() );
+	}
+
+
+	public function testGetTypeName()
+	{
+		$this->assertEquals( 'Unit test', $this->object->getTypeName() );
 	}
 
 
@@ -223,6 +230,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'attribute.status' => '0',
 			'attribute.typeid' => 3,
 			'attribute.type' => 'testtype',
+			'attribute.typename' => 'Testtype',
 			'attribute.label' => 'test attribute',
 			'attribute.position' => 10,
 			'attribute.ctime' => '2000-01-01 00:00:00',
@@ -232,7 +240,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array( 'attribute.type' => 'testtype' ), $unknown );
+		$this->assertEquals( array(), $unknown );
 
 		$this->assertEquals( $list['attribute.id'], $item->getId() );
 		$this->assertEquals( $list['attribute.code'], $item->getCode() );
@@ -242,6 +250,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['attribute.label'], $item->getLabel() );
 		$this->assertEquals( $list['attribute.position'], $item->getPosition() );
 		$this->assertNull( $item->getSiteId() );
+		$this->assertNull( $item->getTypeName() );
 		$this->assertNull( $item->getType() );
 	}
 
@@ -256,6 +265,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['attribute.domain'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['attribute.status'] );
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['attribute.typeid'] );
+		$this->assertEquals( $this->object->getTypeName(), $arrayObject['attribute.typename'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['attribute.type'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['attribute.label'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['attribute.position'] );

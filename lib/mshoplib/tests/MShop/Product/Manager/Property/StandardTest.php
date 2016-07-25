@@ -128,6 +128,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
+		$this->assertNotEquals( '', $actual->getTypeName() );
 		$this->assertEquals( $expected, $actual );
 	}
 
