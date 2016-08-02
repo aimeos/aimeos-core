@@ -56,7 +56,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 3306, $this->object->get( 'resource/db/port', 3306 ) );
 	}
 
-	public function testGetMerged()
+	public function testGetOverwrite()
 	{
 		$cfg = array( 'resource' => array( 'db' => array( 'database' => 'test' ) ) );
 		$conf = new \Aimeos\MW\Config\PHPArray( $cfg );
@@ -65,7 +65,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
 
 		$result = $this->object->get( 'resource/db', array() );
-		$this->assertArrayHasKey( 'database', $result );
+		$this->assertArrayNotHasKey( 'database', $result );
 		$this->assertArrayHasKey( 'host', $result );
 	}
 }
