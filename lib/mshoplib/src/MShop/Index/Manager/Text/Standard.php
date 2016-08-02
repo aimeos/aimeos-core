@@ -468,6 +468,10 @@ class Standard
 			 */
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/standard/insert' );
 
+			$siteid = $context->getLocale()->getSiteId();
+			$editor = $context->getEditor();
+			$date = date( 'Y-m-d H:i:s' );
+
 			foreach( $items as $item )
 			{
 				$parentId = $item->getId(); //  id is not $item->getId() for sub-products
@@ -479,6 +483,11 @@ class Standard
 
 				$this->saveTexts( $stmt, $item, $listTypes, array( $parentId => array( $parentId ) ) );
 				$this->saveLabels( $stmt, $item, array( $parentId ) );
+
+				$this->saveText( // save product code for full text search
+					$stmt, $parentId, $siteid, null, null, '', 'code',
+					$item->getResourceType(), $item->getCode(), $date, $editor
+				);
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -902,7 +911,7 @@ class Standard
 
 		try {
 			$stmt->execute()->finish();
-		} catch( \Aimeos\MW\DB\Exception $e ) { echo $e->getMessage() . PHP_EOL; } // Ignore duplicates
+		} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
 	}
 
 
