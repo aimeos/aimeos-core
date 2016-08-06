@@ -33,7 +33,7 @@ class MShopAddTypeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'ProductAddBasePerfData' );
+		return array( 'MShopAddTypeData', 'ProductAddBasePerfData' );
 	}
 
 
