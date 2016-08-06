@@ -27,6 +27,17 @@ class MShopAddTypeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 
 
 	/**
+	 * Returns the list of task names which depends on this task.
+	 *
+	 * @return string[] List of task names
+	 */
+	public function getPostDependencies()
+	{
+		return array( 'MShopAddTypeData' );
+	}
+
+
+	/**
 	 * Executes the task for MySQL databases.
 	 */
 	public function migrate()
