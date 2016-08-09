@@ -90,10 +90,14 @@ class Standard
 
 		$item->setUrl( null );
 
-		$path = $item->getPreview();
-		if( $path !== '' && $fs->has( $path ) ) {
-			$fs->rm( $path );
+		try
+		{
+			$path = $item->getPreview();
+			if( $path !== '' && $fs->has( $path ) ) {
+				$fs->rm( $path );
+			}
 		}
+		catch( \Exception $e ) { ; } // Can be a mime icon with relative path
 
 		$item->setPreview( null );
 	}
