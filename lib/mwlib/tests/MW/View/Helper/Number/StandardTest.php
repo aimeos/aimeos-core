@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$this->object = new \Aimeos\MW\View\Helper\Number\Standard( $view, '.', ' ' );
+		$this->object = new \Aimeos\MW\View\Helper\Number\Standard( $view, '.', ' ', 3 );
 	}
 
 
@@ -45,9 +45,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testTransform()
 	{
-		$this->assertEquals( '1.00', $this->object->transform( 1 ) );
-		$this->assertEquals( '1.00', $this->object->transform( 1.0 ) );
-		$this->assertEquals( '1 000.00', $this->object->transform( 1000.0 ) );
+		$this->assertEquals( '1.000', $this->object->transform( 1 ) );
+		$this->assertEquals( '1.000', $this->object->transform( 1.0 ) );
+		$this->assertEquals( '1 000.000', $this->object->transform( 1000.0 ) );
 	}
 
 

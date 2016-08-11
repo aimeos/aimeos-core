@@ -23,8 +23,8 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * Returns the formatted number.
 	 *
 	 * @param int|float|decimal $number Number to format
-	 * @param integer $decimals Number of decimals behind the decimal point
+	 * @param integer|null $decimals Number of decimals behind the decimal point or null for default value
 	 * @return string Formatted number
 	 */
-	public function transform( $number, $decimals = 2 );
+	public function transform( $number, $decimals = null );
 }

@@ -24,6 +24,7 @@ class Standard
 {
 	private $dsep;
 	private $tsep;
+	private $decimals;
 
 
 	/**
@@ -33,12 +34,13 @@ class Standard
 	 * @param string $decimalSeparator Character for the decimal point
 	 * @param string $thousandsSeperator Character separating groups of thousands
 	 */
-	public function __construct( $view, $decimalSeparator = '.', $thousandsSeperator = '' )
+	public function __construct( $view, $decimalSeparator = '.', $thousandsSeperator = '', $decimals = 2 )
 	{
 		parent::__construct( $view );
 
 		$this->dsep = $decimalSeparator;
 		$this->tsep = $thousandsSeperator;
+		$this->decimals = $decimals;
 	}
 
 
@@ -46,11 +48,15 @@ class Standard
 	 * Returns the formatted number.
 	 *
 	 * @param int|float|decimal $number Number to format
-	 * @param integer $decimals Number of decimals behind the decimal point
+	 * @param integer|null $decimals Number of decimals behind the decimal point or null for default value
 	 * @return string Formatted number
 	 */
-	public function transform( $number, $decimals = 2 )
+	public function transform( $number, $decimals = null )
 	{
+		if( $decimals === null ) {
+			$decimals = $this->decimals;
+		}
+
 		return number_format( $number, $decimals, $this->dsep, $this->tsep );
 	}
 }
