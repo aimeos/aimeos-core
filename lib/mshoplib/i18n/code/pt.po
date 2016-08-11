@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Tadeu Pagliarini <tadeu_up@hotmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2016-07-28 13:57+0000\n"
+"Last-Translator: Tadeu Pagliarini <tadeu_up@hotmail.com>\n"
+"Language-Team: Portuguese (http://www.transifex.com/aimeos/aimeos-core/language/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "Endereço de cobrança faltando"
+
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Endereço de entrega faltando"
+
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "Endereço de cobrança não permitido"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "Endereço de entrega não permitido"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Opção de pagamento faltando"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Opção de entrega faltando"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "Opção de pagamento não permitida"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "Opção de entrega não permitida"
+
+#. ProductGone plugin error: Product doesn't exists
+msgid "product.gone.notexist"
+msgstr "Desculpe, pelo menos um dos produtos não existe mais. Por favor remova-o do carrinho para continuar"
+
+#. ProductGone plugin error: Product status disabled
+msgid "product.gone.status"
+msgstr "Desculpe, pelo menos um dos produtos foi desativado. Por favor remova-o do carrinho para continuar"
+
+#. ProductGone plugin error: Product out of timeframe
+msgid "product.gone.timeframe"
+msgstr "Desculpe, pelo menos um dos produtos não está disponível. Por favor remova-o do carrinho para continuar"
+
+#. ProductPrice plugin error: Product price changed
+msgid "product.price.changed"
+msgstr "O preço de pelo menos um produto mudou nesse meio tempo e foi atualizado automaticamente"
+
+#. ProductStock plugin error: Product out of stock
+msgid "product.stock.notenough"
+msgstr "Desculpe, pelo menos um produto está fora de estoque. Por favor remova-o do carrinho para continuar"
