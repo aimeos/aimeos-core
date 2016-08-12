@@ -31,8 +31,8 @@ return array(
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'password', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'birthday', 'date', array( 'notnull' => false ) );
@@ -44,14 +44,11 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscus_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mscus_sid_code' );
-			$table->addIndex( array( 'langid' ), 'idx_mscus_langid' );
 			$table->addIndex( array( 'siteid', 'status', 'lastname', 'firstname' ), 'idx_mscus_sid_st_ln_fn' );
 			$table->addIndex( array( 'siteid', 'status', 'address1', 'address2' ), 'idx_mscus_sid_st_ad1_ad2' );
 			$table->addIndex( array( 'siteid', 'status', 'postal', 'city' ), 'idx_mscus_sid_st_post_ci' );
-			$table->addIndex( array( 'siteid', 'lastname' ), 'idx_mscus_sid_lastname' );
-			$table->addIndex( array( 'siteid', 'address1' ), 'idx_mscus_sid_address1' );
-			$table->addIndex( array( 'siteid', 'city' ), 'idx_mscus_sid_city' );
-			$table->addIndex( array( 'siteid', 'postal' ), 'idx_mscus_sid_postal' );
+			$table->addIndex( array( 'siteid', 'status', 'city' ), 'idx_mscus_sid_st_city' );
+			$table->addIndex( array( 'siteid', 'langid' ), 'idx_mscus_sid_langid' );
 			$table->addIndex( array( 'siteid', 'email' ), 'idx_mscus_sid_email' );
 
 			return $schema;
@@ -79,8 +76,8 @@ return array(
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'flag', 'integer', array() );
 			$table->addColumn( 'pos', 'smallint', array() );
@@ -93,12 +90,9 @@ return array(
 			$table->addIndex( array( 'siteid', 'lastname', 'firstname' ), 'idx_mscusad_sid_ln_fn' );
 			$table->addIndex( array( 'siteid', 'address1', 'address2' ), 'idx_mscusad_sid_ad1_ad2' );
 			$table->addIndex( array( 'siteid', 'postal', 'city' ), 'idx_mscusad_sid_post_ci' );
-			$table->addIndex( array( 'siteid', 'parentid' ), 'idx_mscusad_sid_pid' );
-			$table->addIndex( array( 'siteid', 'lastname' ), 'idx_mscusad_sid_lastname' );
-			$table->addIndex( array( 'siteid', 'address1' ), 'idx_mscusad_sid_addr1' );
 			$table->addIndex( array( 'siteid', 'city' ), 'idx_mscusad_sid_city' );
-			$table->addIndex( array( 'siteid', 'postal' ), 'idx_mscusad_sid_postal' );
 			$table->addIndex( array( 'siteid', 'email' ), 'idx_mscusad_sid_email' );
+			$table->addIndex( array( 'parentid' ), 'fk_mscusad_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusad_parentid' );
@@ -155,12 +149,14 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_mscusli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_mscusli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_mscusli_pid_sid_pos' );
-
-			$table->addForeignKeyConstraint( 'mshop_customer_list_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusli_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mscusli_pid' );
+			$table->addIndex( array( 'typeid' ), 'fk_mscusli_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
 					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusli_pid' );
+
+			$table->addForeignKeyConstraint( 'mshop_customer_list_type', array( 'typeid' ), array( 'id' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusli_typeid' );
 
 			return $schema;
 		},

@@ -93,6 +93,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
 			}
 
+			$fullschema = $dbal->getSchemaManager()->createSchema();
 			$dbalschema = new \Doctrine\DBAL\Schema\Schema();
 			$platform = $dbal->getDatabasePlatform();
 			$schema = $this->getSchema( $rname );
@@ -103,27 +104,27 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				{
 					$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
-					if( $schema->tableExists( $name ) !== true ) {
-						$this->executeList( $fcn( clone $dbalschema )->toSql( $platform ), $rname );
-						$this->status( 'created' );
-					} else {
-						$this->status( 'OK' );
-					}
+					$comparator = new \Doctrine\DBAL\Schema\Comparator();
+					$schemaDiff = $comparator->compare( $fullschema, $fcn( clone $dbalschema ) );
+					$stmts = $this->exclude( $schemaDiff, $list )->toSaveSql( $platform );
+
+					$this->executeList( $stmts, $rname );
+					$this->status( 'done' );
 				}
 			}
 
-			if( isset( $list['sequence'] ) )
+			if( isset( $list['sequence'] ) && $schema->supports( $schema::HAS_SEQUENCES ) )
 			{
 				foreach( (array) $list['sequence'] as $name => $fcn )
 				{
 					$this->msg( sprintf( 'Checking sequence "%1$s": ', $name ), 2 );
 
-					if( $schema->supports( $schema::HAS_SEQUENCES ) && $schema->sequenceExists( $name ) !== true ) {
-						$this->executeList( $fcn( clone $dbalschema )->toSql( $platform ), $rname );
-						$this->status( 'created' );
-					} else {
-						$this->status( 'OK' );
-					}
+					$comparator = new \Doctrine\DBAL\Schema\Comparator();
+					$schemaDiff = $comparator->compare( $fullschema, $fcn( clone $dbalschema ) );
+					$stmts = $schemaDiff->toSaveSql( $platform );
+
+					$this->executeList( $stmts, $rname );
+					$this->status( 'done' );
 				}
 			}
 		}
@@ -170,5 +171,31 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				}
 			}
 		}
+	}
+
+
+	/**
+	 * Removes excluded indexes from DBAL schema diff
+	 *
+	 * @param \Doctrine\DBAL\Schema\SchemaDiff $schemaDiff DBAL schema diff object
+	 * @param array $list Associative list with "exclude", "table" and "sequence" keys
+	 * @return \Doctrine\DBAL\Schema\SchemaDiff Modified DBAL schema diff object
+	 */
+	private function exclude( \Doctrine\DBAL\Schema\SchemaDiff $schemaDiff, array $list )
+	{
+		if( isset( $list['exclude'] ) )
+		{
+			foreach( $schemaDiff->changedTables as $tableDiff )
+			{
+				foreach( $tableDiff->removedIndexes as $idx => $index )
+				{
+					if( in_array( $index->getName(), $list['exclude'] ) ) {
+						unset( $tableDiff->removedIndexes[$idx] );
+					}
+				}
+			}
+		}
+
+		return $schemaDiff;
 	}
 }

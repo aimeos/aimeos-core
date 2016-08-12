@@ -38,7 +38,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
 			$table->addColumn( 'typeid', 'integer', array() );
-			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
@@ -50,11 +50,12 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspro_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mspro_siteid_code' );
-			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_mspro_sid_stat_st_end' );
 			$table->addIndex( array( 'id', 'siteid', 'status', 'start', 'end' ), 'idx_mspro_id_sid_stat_st_end' );
+			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_mspro_sid_stat_st_end' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_mspro_sid_label' );
 			$table->addIndex( array( 'siteid', 'start' ), 'idx_mspro_sid_start' );
 			$table->addIndex( array( 'siteid', 'end' ), 'idx_mspro_sid_end' );
+			$table->addIndex( array( 'typeid' ), 'fk_mspro_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspro_typeid' );
@@ -111,12 +112,14 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_msproli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_msproli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_msproli_pid_sid_pos' );
+			$table->addIndex( array( 'typeid' ), 'fk_msproli_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_msproli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msproli_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
-					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprorli_pid' );
+					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msproli_pid' );
 
 			return $schema;
 		},
@@ -162,9 +165,11 @@ return array(
 			$table->addUniqueIndex( array( 'parentid', 'siteid', 'typeid', 'langid', 'value' ), 'unq_mspropr_sid_tid_lid_value' );
 			$table->addIndex( array( 'siteid', 'langid' ), 'idx_mspropr_sid_langid' );
 			$table->addIndex( array( 'siteid', 'value' ), 'idx_mspropr_sid_value' );
+			$table->addIndex( array( 'typeid' ), 'fk_mspropr_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mspropr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspropr_parentid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspropr_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product_property_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspropr_typeid' );
@@ -210,15 +215,14 @@ return array(
 			$table->addUniqueIndex( array( 'siteid', 'parentid', 'warehouseid' ), 'unq_msprost_sid_pid_wid' );
 			$table->addIndex( array( 'siteid', 'stocklevel' ), 'idx_msprost_sid_stocklevel' );
 			$table->addIndex( array( 'siteid', 'backdate' ), 'idx_msprost_sid_backdate' );
-			$table->addIndex( array( 'siteid', 'ctime' ), 'idx_msprost_sid_ctime' );
-			$table->addIndex( array( 'siteid', 'mtime' ), 'idx_msprost_sid_mtime' );
-			$table->addIndex( array( 'siteid', 'editor' ), 'idx_msprost_sid_editor' );
+			$table->addIndex( array( 'warehouseid' ), 'fk_msprost_whid' );
+			$table->addIndex( array( 'parentid' ), 'fk_msprost_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprost_parentid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprost_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_product_stock_warehouse', array( 'warehouseid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprost_stock_warehouseid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprost_whid' );
 
 			return $schema;
 		},

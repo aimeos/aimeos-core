@@ -7,6 +7,12 @@
 
 
 return array(
+
+	'exclude' => array(
+		'idx_mstex_sid_dom_cont',
+	),
+
+
 	'table' => array(
 		'mshop_text_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
 
@@ -48,8 +54,10 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mstex_id' );
-			$table->addIndex( array( 'siteid', 'status', 'langid' ), 'idx_mstex_sid_status_langid' );
+			$table->addIndex( array( 'siteid', 'domain', 'status' ), 'idx_mstex_sid_domain_status' );
+			$table->addIndex( array( 'siteid', 'domain', 'langid' ), 'idx_mstex_sid_domain_langid' );
 			$table->addIndex( array( 'siteid', 'domain', 'label' ), 'idx_mstex_sid_dom_label' );
+			$table->addIndex( array( 'typeid' ), 'fk_mstex_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_text_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mstex_typeid' );
@@ -106,6 +114,8 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_mstexli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_mstexli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_mstexli_pid_sid_pos' );
+			$table->addIndex( array( 'typeid' ), 'fk_mstexli_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mstexli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_text_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mstexli_typeid' );

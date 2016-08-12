@@ -38,7 +38,7 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
 			$table->addColumn( 'typeid', 'integer', array() );
-			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'provider', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
@@ -55,6 +55,7 @@ return array(
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msser_sid_code' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msser_sid_label' );
 			$table->addIndex( array( 'siteid', 'pos' ), 'idx_msser_sid_pos' );
+			$table->addIndex( array( 'typeid' ), 'fk_msser_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_service_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msser_typeid' );
@@ -111,6 +112,8 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_msserli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_msserli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_msserli_pid_sid_pos' );
+			$table->addIndex( array( 'typeid' ), 'fk_msserli_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_msserli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_service_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msserli_typeid' );

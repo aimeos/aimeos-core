@@ -32,9 +32,10 @@ return array(
 			$table->addColumn( 'tname', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'tid', 'tsiteid', 'tname' ), 'unq_macacta_tid_tsid_tname' );
+			$table->addIndex( array( 'tid', 'tsiteid' ), 'fk_macac_tid_tsid' );
 
 			$table->addForeignKeyConstraint( 'madmin_cache', array( 'tid', 'tsiteid' ), array( 'id', 'siteid' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_macac_tid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_macac_tid_tsid' );
 
 			return $schema;
 		},

@@ -46,8 +46,9 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mstag_id' );
 			$table->addUniqueIndex( array( 'siteid', 'typeid', 'langid', 'label' ), 'unq_mstag_sid_tid_lid_label' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mstag_sid_label' );
 			$table->addIndex( array( 'siteid', 'langid' ), 'idx_mstag_sid_langid' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_mstag_sid_label' );
+			$table->addIndex( array( 'typeid' ), 'fk_mstag_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_tag_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mstag_typeid' );

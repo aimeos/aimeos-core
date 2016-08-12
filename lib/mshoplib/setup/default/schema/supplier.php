@@ -23,7 +23,9 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssup_id' );
+			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mssup_sid_code' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_mssup_sid_status' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_mssup_sid_label' );
 
 			return $schema;
 		},
@@ -50,8 +52,8 @@ return array(
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'telefax', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'email', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'telefax', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'flag', 'integer', array() );
 			$table->addColumn( 'pos', 'smallint', array() );
@@ -60,11 +62,11 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssupad_id' );
-			$table->addIndex( array( 'langid' ), 'idx_mssupad_langid' );
 			$table->addIndex( array( 'siteid', 'parentid' ), 'idx_mssupad_sid_rid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mssupad_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_supplier', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mssupad_parentid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mssupad_pid' );
 
 			return $schema;
 		},
@@ -118,6 +120,8 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_mssupli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_mssupli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_mssupli_pid_sid_pos' );
+			$table->addIndex( array( 'parentid' ), 'fk_mssupli_pid' );
+			$table->addIndex( array( 'typeid' ), 'fk_mssupli_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_supplier_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mssupli_typeid' );

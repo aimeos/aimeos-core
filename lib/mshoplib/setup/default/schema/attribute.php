@@ -49,9 +49,9 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msatt_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'code', 'typeid' ), 'unq_msattr_sid_dom_cod_tid' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msatt_sid_status' );
 			$table->addIndex( array( 'siteid', 'domain', 'label' ), 'idx_msatt_sid_dom_label' );
 			$table->addIndex( array( 'siteid', 'domain', 'pos' ), 'idx_msatt_sid_dom_pos' );
+			$table->addIndex( array( 'typeid' ), 'fk_msatt_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_attribute_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msatt_typeid' );
@@ -108,6 +108,8 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_msattli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_msattli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_msattli_pid_sid_pos' );
+			$table->addIndex( array( 'typeid' ), 'fk_msattli_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_msattli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_attribute_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msattli_typeid' );

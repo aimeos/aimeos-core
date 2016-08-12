@@ -21,7 +21,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'OrderRenameTables' );
+		return array( 'TablesCreateMShop' );
 	}
 
 
@@ -32,7 +32,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'TablesCreateMShop' );
+		return array();
 	}
 
 
@@ -50,91 +50,6 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 			return;
 		}
 
-		$dbal = $this->getConnection( $dbdomain )->getRawObject();
-
-		if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
-			throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
-		}
-
-
-		$fromSchema = $dbal->getSchemaManager()->createSchema();
-		$toSchema = clone $fromSchema;
-
-		$this->addIndexes( $this->addColumns( $toSchema->getTable( 'mshop_order' ) ) );
-		$sql = $fromSchema->getMigrateToSql( $toSchema, $dbal->getDatabasePlatform() );
-
-		if( $sql !== array() )
-		{
-			$this->executeList( $sql, $dbdomain );
-			$this->migrateData( $dbdomain );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
-		}
-	}
-
-
-	/**
-	 * Adds the missing columns to the table
-	 *
-	 * @param \Doctrine\DBAL\Schema\Table $table Table object
-	 * @return \Doctrine\DBAL\Schema\Table Updated table object
-	 */
-	protected function addColumns( \Doctrine\DBAL\Schema\Table $table )
-	{
-		$columns = array(
-			'cdate' => array( 'string', array( 'fixed' => 10 ) ),
-			'cmonth' => array( 'string', array( 'fixed' => 7 ) ),
-			'cweek' => array( 'string', array( 'fixed' => 7 ) ),
-			'chour' => array( 'string', array( 'fixed' => 2 ) ),
-		);
-
-		foreach( $columns as $name => $def )
-		{
-			if( $table->hasColumn( $name ) === false ) {
-				$table->addColumn( $name, $def[0], $def[1] );
-			}
-		}
-
-		return $table;
-	}
-
-
-	/**
-	 * Adds the missing indexes to the table
-	 *
-	 * @param \Doctrine\DBAL\Schema\Table $table Table object
-	 * @return \Doctrine\DBAL\Schema\Table Updated table object
-	 */
-	protected function addIndexes( \Doctrine\DBAL\Schema\Table $table )
-	{
-		$indexes = array(
-			'idx_msord_sid_cdate' => array( 'siteid', 'cdate' ),
-			'idx_msord_sid_cmonth' => array( 'siteid', 'cmonth' ),
-			'idx_msord_sid_cweek' => array( 'siteid', 'cweek' ),
-			'idx_msord_sid_hour' => array( 'siteid', 'chour' ),
-		);
-
-		foreach( $indexes as $name => $def )
-		{
-			if( $table->hasIndex( $name ) === false ) {
-				$table->addIndex( $def, $name );
-			}
-		}
-
-		return $table;
-	}
-
-
-	/**
-	 * Migrates the time values
-	 *
-	 * @param string $dbdomain Database domain
-	 */
-	protected function migrateData( $dbdomain )
-	{
 		$start = 0;
 		$conn = $this->getConnection( $dbdomain );
 		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cdate" = \'\' LIMIT 1000 OFFSET :offset';
@@ -171,5 +86,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 			$start += $count;
 		}
 		while( $count === 1000 );
+
+		$this->status( 'done' );
 	}
 }

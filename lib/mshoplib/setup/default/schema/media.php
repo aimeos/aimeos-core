@@ -50,12 +50,11 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msmed_id' );
-			$table->addIndex( array( 'langid' ), 'idx_msmed_langid' );
-			$table->addIndex( array( 'siteid', 'status', 'langid' ), 'idx_msmed_sid_status_langid' );
 			$table->addIndex( array( 'siteid', 'domain', 'langid' ), 'idx_msmed_sid_dom_langid' );
 			$table->addIndex( array( 'siteid', 'domain', 'label' ), 'idx_msmed_sid_dom_label' );
 			$table->addIndex( array( 'siteid', 'domain', 'mimetype' ), 'idx_msmed_sid_dom_mime' );
 			$table->addIndex( array( 'siteid', 'domain', 'link' ), 'idx_msmed_sid_dom_link' );
+			$table->addIndex( array( 'typeid' ), 'fk_msmed_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_media_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msmed_typeid' );
@@ -112,12 +111,14 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_msmedli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_msmedli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_msmedli_pid_sid_pos' );
+			$table->addIndex( array( 'typeid' ), 'fk_msmedli_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_msmedli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_media_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msmedli_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_media', array( 'parentid' ), array( 'id' ),
-					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msmedrli_pid' );
+					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msmedli_pid' );
 
 			return $schema;
 		},

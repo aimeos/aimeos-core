@@ -24,7 +24,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_majob_id' );
-			$table->addIndex( array( 'ctime' ), 'idx_majob_ctime' );
+			$table->addIndex( array( 'siteid', 'ctime' ), 'idx_majob_sid_ctime' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_majob_sid_status' );
 
 			return $schema;

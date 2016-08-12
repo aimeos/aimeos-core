@@ -49,6 +49,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_mslocla_id' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_mslocla_sid_status' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_mslocla_sid_label' );
+			$table->addIndex( array( 'siteid' ), 'fk_mslocla_siteid' );
 
 			$table->addForeignKeyConstraint( 'mshop_locale_site', array( 'siteid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'SET NULL' ), 'fk_mslocla_siteid' );
@@ -71,6 +72,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_msloccu_id' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msloccu_sid_status' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_mslocla_label' );
+			$table->addIndex( array( 'siteid' ), 'fk_msloccu_siteid' );
 
 			$table->addForeignKeyConstraint( 'mshop_locale_site', array( 'siteid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'SET NULL' ), 'fk_msloccu_siteid' );
@@ -97,6 +99,9 @@ return array(
 			$table->addIndex( array( 'siteid', 'currencyid' ), 'idx_msloc_sid_curid' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msloc_sid_status' );
 			$table->addIndex( array( 'siteid', 'pos' ), 'idx_msloc_sid_pos' );
+			$table->addIndex( array( 'siteid' ), 'fk_mslocsi_id' );
+			$table->addIndex( array( 'siteid' ), 'fk_mslocla_id' );
+			$table->addIndex( array( 'siteid' ), 'fk_msloccu_id' );
 
 			$table->addForeignKeyConstraint( 'mshop_locale_site', array( 'siteid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msloc_siteid' );

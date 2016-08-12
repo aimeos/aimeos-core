@@ -7,6 +7,13 @@
 
 
 return array(
+
+	'exclude' => array(
+		'idx_msindte_p_s_lt_la_ty_do_va',
+		'idx_msindte_value',
+	),
+
+
 	'table' => array(
 
 		'mshop_index_attribute' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {

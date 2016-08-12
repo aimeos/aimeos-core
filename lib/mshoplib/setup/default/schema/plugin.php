@@ -48,14 +48,12 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msplu_id' );
-			$table->addUniqueIndex( array( 'siteid', 'typeid', 'provider' ), 'unq_mspul_sid_tid_provider' );
+			$table->addUniqueIndex( array( 'siteid', 'typeid', 'provider' ), 'unq_msplu_sid_tid_prov' );
+			$table->addIndex( array( 'siteid', 'provider' ), 'idx_msplu_sid_prov' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msplu_sid_status' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msplu_sid_label' );
-			$table->addIndex( array( 'siteid', 'provider' ), 'idx_msplu_sid_provider' );
 			$table->addIndex( array( 'siteid', 'pos' ), 'idx_msplu_sid_pos' );
-			$table->addIndex( array( 'siteid', 'mtime' ), 'idx_msplu_sid_mtime' );
-			$table->addIndex( array( 'siteid', 'ctime' ), 'idx_msplu_sid_ctime' );
-			$table->addIndex( array( 'siteid', 'editor' ), 'idx_msplu_sid_editor' );
+			$table->addIndex( array( 'typeid' ), 'fk_msplu_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_plugin_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msplu_typeid' );

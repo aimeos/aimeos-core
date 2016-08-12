@@ -52,14 +52,13 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspri_id' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mspri_sid_label' );
-			$table->addIndex( array( 'siteid', 'status', 'currencyid' ), 'idx_mspri_sid_status_currencyid' );
 			$table->addIndex( array( 'siteid', 'domain', 'currencyid' ), 'idx_mspri_sid_dom_currid' );
 			$table->addIndex( array( 'siteid', 'domain', 'quantity' ), 'idx_mspri_sid_dom_quantity' );
 			$table->addIndex( array( 'siteid', 'domain', 'value' ), 'idx_mspri_sid_dom_value' );
 			$table->addIndex( array( 'siteid', 'domain', 'costs' ), 'idx_mspri_sid_dom_costs' );
 			$table->addIndex( array( 'siteid', 'domain', 'rebate' ), 'idx_mspri_sid_dom_rebate' );
 			$table->addIndex( array( 'siteid', 'domain', 'taxrate' ), 'idx_mspri_sid_dom_taxrate' );
+			$table->addIndex( array( 'typeid' ), 'fk_mspri_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_price_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mspri_typeid' );
@@ -116,12 +115,14 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_msprili_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_msprili_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_msprili_pid_sid_pos' );
+			$table->addIndex( array( 'parentid' ), 'fk_msprili_pid' );
+			$table->addIndex( array( 'typeid' ), 'fk_msprili_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_price_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprili_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_price', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprirli_pid' );
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprili_pid' );
 
 			return $schema;
 		},

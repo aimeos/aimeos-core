@@ -27,8 +27,8 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscou_id' );
 			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_mscou_sid_stat_start_end' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mscou_sid_label' );
 			$table->addIndex( array( 'siteid', 'provider' ), 'idx_mscou_sid_provider' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_mscou_sid_label' );
 			$table->addIndex( array( 'siteid', 'start' ), 'idx_mscou_sid_start' );
 			$table->addIndex( array( 'siteid', 'end' ), 'idx_mscou_sid_end' );
 
@@ -55,6 +55,7 @@ return array(
 			$table->addIndex( array( 'siteid', 'count', 'start', 'end' ), 'idx_mscouco_sid_ct_start_end' );
 			$table->addIndex( array( 'siteid', 'start' ), 'idx_mscouco_sid_start' );
 			$table->addIndex( array( 'siteid', 'end' ), 'idx_mscouco_sid_end' );
+			$table->addIndex( array( 'parentid' ), 'fk_mscouco_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_coupon', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscouco_parentid' );

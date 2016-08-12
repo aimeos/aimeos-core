@@ -84,9 +84,14 @@ return array(
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_mscatli_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_mscatli_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_mscatli_pid_sid_pos' );
+			$table->addIndex( array( 'typeid' ), 'fk_mscatli_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mscatli_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_catalog_list_type', array( 'typeid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscatli_typeid' );
+
+			$table->addForeignKeyConstraint( 'mshop_catalog', array( 'parentid' ), array( 'id' ),
+				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscatli_pid' );
 
 			return $schema;
 		},

@@ -11,6 +11,8 @@ namespace Aimeos\MW\Setup\Task;
 
 /**
  * Migrate the database schema
+ *
+ * @deprecated Superseded by DBAL schema migration
  */
 class CatalogAddStatusLevelIndex extends \Aimeos\MW\Setup\Task\Base
 {
@@ -42,18 +44,6 @@ class CatalogAddStatusLevelIndex extends \Aimeos\MW\Setup\Task\Base
 	public function migrate()
 	{
 		$this->msg( 'Adding index to "idx_mscat_status_level"', 0 );
-
-		$schema = $this->getSchema( 'db-catalog' );
-
-		if( $schema->tableExists( 'mshop_catalog' ) === true
-			&& $schema->indexExists( 'mshop_catalog', 'idx_mscat_status_level' ) === false )
-		{
-			$this->execute( 'CREATE INDEX "idx_mscat_status_level" ON "mshop_catalog" ("status", "level")' );
-			$this->status( 'done' );
-		}
-		else
-		{
-			$this->status( 'OK' );
-		}
+		$this->status( 'OK' );
 	}
 }
