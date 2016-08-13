@@ -38,6 +38,27 @@ class TablesCreateMAdmin extends TablesCreateMShop
 
 
 	/**
+	 * Removes old columns and sequences
+	 */
+	public function clean()
+	{
+		$this->msg( 'Cleaning admin tables', 0 );
+		$this->status( '' );
+
+		$ds = DIRECTORY_SEPARATOR;
+
+		$files = array(
+			'db-cache' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'cache.php',
+			'db-log' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'log.php',
+			'db-job' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'job.php',
+			'db-queue' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'queue.php',
+		);
+
+		$this->setupSchema( $files, true );
+	}
+
+
+	/**
 	 * Creates the MAdmin tables
 	 */
 	public function migrate()

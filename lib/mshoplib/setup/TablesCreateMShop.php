@@ -38,6 +38,43 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
+	 * Removes old columns and sequences
+	 */
+	public function clean()
+	{
+		$this->msg( 'Cleaning base tables', 0 );
+		$this->status( '' );
+
+		$ds = DIRECTORY_SEPARATOR;
+
+		$files = array(
+			'db-locale' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'locale.php',
+			'db-attribute' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'attribute.php',
+			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'customer.php',
+			'db-media' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'media.php',
+			'db-order' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'order.php',
+			'db-plugin' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'plugin.php',
+			'db-price' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'price.php',
+			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'product.php',
+			'db-service' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'service.php',
+			'db-supplier' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'supplier.php',
+			'db-text' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'text.php',
+			'db-coupon' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'coupon.php',
+			'db-catalog' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'catalog.php',
+			'db-tag' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'tag.php',
+		);
+
+		$this->setupSchema( $files, true );
+
+		$files = array(
+			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'index.php',
+		);
+
+		$this->setupSchema( $files, true );
+	}
+
+
+	/**
 	 * Creates the MShop tables
 	 */
 	public function migrate()
@@ -77,7 +114,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Creates all required tables from schema if they don't exist
 	 */
-	protected function setupSchema( array $files )
+	protected function setupSchema( array $files, $clean = false )
 	{
 		foreach( $files as $rname => $filepath )
 		{
@@ -106,7 +143,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 					$comparator = new \Doctrine\DBAL\Schema\Comparator();
 					$schemaDiff = $comparator->compare( $fullschema, $fcn( clone $dbalschema ) );
-					$stmts = $this->exclude( $schemaDiff, $list )->toSaveSql( $platform );
+					$stmts = $this->remove( $this->exclude( $schemaDiff, $list ), $clean )->toSaveSql( $platform );
 
 					$this->executeList( $stmts, $rname );
 					$this->status( 'done' );
@@ -121,7 +158,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 					$comparator = new \Doctrine\DBAL\Schema\Comparator();
 					$schemaDiff = $comparator->compare( $fullschema, $fcn( clone $dbalschema ) );
-					$stmts = $schemaDiff->toSaveSql( $platform );
+					$stmts = $this->remove( $schemaDiff, $clean )->toSaveSql( $platform );
 
 					$this->executeList( $stmts, $rname );
 					$this->status( 'done' );
@@ -194,6 +231,28 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 					}
 				}
 			}
+		}
+
+		return $schemaDiff;
+	}
+
+
+	/**
+	 * Keeps removed columns and sequences if not in cleanup mode
+	 *
+	 * @param \Doctrine\DBAL\Schema\SchemaDiff $schemaDiff DBAL schema diff object
+	 * @param boolean $clean If old columns and sequences should be removed
+	 * @return \Doctrine\DBAL\Schema\SchemaDiff Modified DBAL schema diff object
+	 */
+	private function remove( \Doctrine\DBAL\Schema\SchemaDiff $schemaDiff, $clean )
+	{
+		if( $clean !== true )
+		{
+			foreach( $schemaDiff->changedTables as $tableDiff ) {
+				$tableDiff->removedColumns = array();
+			}
+
+			$schemaDiff->removedSequences = array();
 		}
 
 		return $schemaDiff;
