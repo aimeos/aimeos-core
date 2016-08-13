@@ -113,6 +113,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$item->setId( null );
+		$item->setCode( 'unitTest01' );
 		$this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
