@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$this->request = $this->getMock( '\Psr\Http\Message\ServerRequestInterface' );
+		$this->request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
 		$this->object = new \Aimeos\MW\View\Helper\Request\Standard( $view, $this->request, '127.0.0.1', 'test' );
 	}
 
@@ -128,7 +128,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBody()
 	{
-		$stream = $this->getMock( '\Psr\Http\Message\StreamInterface' );
+		$stream = $this->getMockBuilder( '\Psr\Http\Message\StreamInterface' )->getMock();
 
 		$this->request->expects( $this->once() )->method( 'getBody' )
 			->will( $this->returnValue( $stream ) );
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testWithBody()
 	{
-		$stream = $this->getMock( '\Psr\Http\Message\StreamInterface' );
+		$stream = $this->getMockBuilder( '\Psr\Http\Message\StreamInterface' )->getMock();
 
 		$this->request->expects( $this->once() )->method( 'withBody' )
 			->will( $this->returnValue( $this->request ) );
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetUri()
 	{
-		$uri = $this->getMock( '\Psr\Http\Message\UriInterface' );
+		$uri = $this->getMockBuilder( '\Psr\Http\Message\UriInterface' )->getMock();
 
 		$this->request->expects( $this->once() )->method( 'getUri' )
 			->will( $this->returnValue( $uri ) );
@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testWithUri()
 	{
-		$uri = $this->getMock( '\Psr\Http\Message\UriInterface' );
+		$uri = $this->getMockBuilder( '\Psr\Http\Message\UriInterface' )->getMock();
 
 		$this->request->expects( $this->once() )->method( 'withUri' )
 			->will( $this->returnValue( $this->request ) );

@@ -16,7 +16,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$this->response = $this->getMock( '\Psr\Http\Message\ResponseInterface' );
+		$this->response = $this->getMockBuilder( '\Psr\Http\Message\ResponseInterface' )->getMock();
 		$this->object = new \Aimeos\MW\View\Helper\Response\Standard( $view, $this->response );
 	}
 
@@ -128,7 +128,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetBody()
 	{
-		$stream = $this->getMock( '\Psr\Http\Message\StreamInterface' );
+		$stream = $this->getMockBuilder( '\Psr\Http\Message\StreamInterface' )->getMock();
 
 		$this->response->expects( $this->once() )->method( 'getBody' )
 			->will( $this->returnValue( $stream ) );
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testWithBody()
 	{
-		$stream = $this->getMock( '\Psr\Http\Message\StreamInterface' );
+		$stream = $this->getMockBuilder( '\Psr\Http\Message\StreamInterface' )->getMock();
 
 		$this->response->expects( $this->once() )->method( 'withBody' )
 			->will( $this->returnValue( $this->response ) );

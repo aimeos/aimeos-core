@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$object->expects( $this->once() )->method( 'getTempFileName' )
 			->will( $this->returnValue( __DIR__ . '/testfiles/test.gif' ) );
 
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->once() )->method( 'moveTo' );
 
 
@@ -62,7 +62,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$object->expects( $this->once() )->method( 'getTempFileName' )
 			->will( $this->returnValue( __DIR__ . '/testfiles/test.pdf' ) );
 
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->once() )->method( 'moveTo' );
 
 
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckFileUploadOK()
 	{
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->once() )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_OK ) );
 
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
@@ -113,7 +113,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckFileUploadSize()
 	{
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_INI_SIZE ) );
 
 		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckFileUploadPartitial()
 	{
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_PARTIAL ) );
 
 		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckFileUploadNoFile()
 	{
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_NO_FILE ) );
 
 		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckFileUploadNoTmpdir()
 	{
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_NO_TMP_DIR ) );
 
 		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
@@ -153,7 +153,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckFileUploadCantWrite()
 	{
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_CANT_WRITE ) );
 
 		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
@@ -163,7 +163,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckFileUploadExtension()
 	{
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_EXTENSION ) );
 
 		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckFileUploadException()
 	{
-		$file = $this->getMock( '\Psr\Http\Message\UploadedFileInterface' );
+		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
 
 		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
