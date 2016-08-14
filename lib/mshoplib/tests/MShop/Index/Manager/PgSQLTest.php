@@ -108,7 +108,7 @@ class PgSQLTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype19', 'de', 'name', 'product' ) );
