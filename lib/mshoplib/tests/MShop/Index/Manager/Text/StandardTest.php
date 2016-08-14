@@ -91,9 +91,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.text.id' );
 
-		$this->assertEquals( 18, count( $result ) );
+		$this->assertEquals( 22, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 2, $result[$item->getId()] );
+		$this->assertEquals( 3, $result[$item->getId()] );
 	}
 
 
@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$result = $this->object->searchItems( $search, array() );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value

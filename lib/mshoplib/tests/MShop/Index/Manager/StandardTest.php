@@ -185,7 +185,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 7, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
 		$this->assertEquals( 2, $cntPriceA );
-		$this->assertEquals( 10, $cntTextA );
+		$this->assertEquals( 15, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
@@ -550,7 +550,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 3, $total );
+		$this->assertEquals( 5, $total );
 
 
 		$func = $search->createFunction( 'index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
@@ -566,7 +566,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $object->searchItems( $search, array(), $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
@@ -660,7 +660,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( 13, count( $afterInsertAttr ) );
 		$this->assertEquals( 11, count( $afterInsertPrice ) );
-		$this->assertEquals( 8, count( $afterInsertText ) );
+		$this->assertEquals( 10, count( $afterInsertText ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}
 
@@ -736,7 +736,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		//check inserted items
 		$this->assertEquals( 7, count( $afterInsertAttr ) );
 		$this->assertEquals( 7, count( $afterInsertPrice ) );
-		$this->assertEquals( 4, count( $afterInsertText ) );
+		$this->assertEquals( 6, count( $afterInsertText ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}
 

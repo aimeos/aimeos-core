@@ -708,8 +708,7 @@ class Standard
 		 * @see mshop/index/manager/standard/index
 		 * @see mshop/index/manager/submanagers
 		 */
-		// Including "text" and "price" messes up the sortation
-		$default = array( 'attribute', 'product' );
+		$default = array( 'attribute', 'product', 'text' ); // Including "price" messes up the sortation
 		$domains = $context->getConfig()->get( 'mshop/index/manager/standard/subdomains', $default );
 		$size = $context->getConfig()->get( 'mshop/index/manager/standard/chunksize', 1000 );
 
@@ -793,7 +792,7 @@ class Standard
 					$refItem->setId( $list[$refId] ); // insert data for parent product
 					$refItem->setLabel( '' ); // keep sorting by name intact
 
-					foreach( $refItem->getRefitems( 'text', 'name', 'default' ) as $textItem ) {
+					foreach( $refItem->getRefitems( 'text', 'name' ) as $textItem ) {
 						$textItem->setContent( '' ); // keep sorting by name intact
 					}
 				}
