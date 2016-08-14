@@ -831,7 +831,7 @@ class Standard
 		if( $item->getRefItems( 'text', 'name' ) === array() )
 		{
 			if( $item->getLabel() === '' ) {
-				continue;
+				return;
 			}
 
 			foreach( $prodIds as $prodId )
