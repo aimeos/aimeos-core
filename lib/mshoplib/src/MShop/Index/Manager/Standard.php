@@ -790,7 +790,12 @@ class Standard
 				foreach( $result as $refId => $refItem )
 				{
 					$refItem->setId( null );
-					$refItem->setId( $list[$refId] );
+					$refItem->setId( $list[$refId] ); // insert data for parent product
+					$refItem->setLabel( '' ); // keep sorting by name intact
+
+					foreach( $refItem->getRefitems( 'text', 'name', 'default' ) as $textItem ) {
+						$textItem->setContent( '' ); // keep sorting by name intact
+					}
 				}
 			}
 

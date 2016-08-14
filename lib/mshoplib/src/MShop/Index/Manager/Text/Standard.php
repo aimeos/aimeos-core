@@ -830,6 +830,10 @@ class Standard
 
 		if( $item->getRefItems( 'text', 'name' ) === array() )
 		{
+			if( $item->getLabel() === '' ) {
+				continue;
+			}
+
 			foreach( $prodIds as $prodId )
 			{
 				$this->saveText(
@@ -860,6 +864,10 @@ class Standard
 
 		foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
 		{
+			if( $refItem->getContent() === '' ) {
+				continue;
+			}
+
 			if( !isset( $listTypes[$refId] ) ) {
 				$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refId );
 				throw new \Aimeos\MShop\Index\Exception( $msg );
