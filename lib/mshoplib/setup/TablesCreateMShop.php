@@ -142,7 +142,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 					$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
 					$table = $dbalManager->listTableDetails( $name );
-					$tables = ( !empty( $table->getColumns() ) ? array( $table ) : array() );
+					$tables = ( $table->getColumns() !== array() ? array( $table ) : array() );
 
 					$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables );
 					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $fcn( clone $dbalschema ) );
