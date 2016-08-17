@@ -16,7 +16,7 @@ namespace Aimeos\MShop\Coupon\Provider;
  * @package MShop
  * @subpackage Coupon
  */
-class FreeShipping
+class None
 	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
 	implements \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
