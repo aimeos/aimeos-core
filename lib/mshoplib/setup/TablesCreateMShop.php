@@ -130,8 +130,8 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
 			}
 
-			$fullschema = $dbal->getSchemaManager()->createSchema();
 			$dbalschema = new \Doctrine\DBAL\Schema\Schema();
+			$dbalManager = $dbal->getSchemaManager();
 			$platform = $dbal->getDatabasePlatform();
 			$schema = $this->getSchema( $rname );
 
@@ -141,8 +141,11 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				{
 					$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
-					$comparator = new \Doctrine\DBAL\Schema\Comparator();
-					$schemaDiff = $comparator->compare( $fullschema, $fcn( clone $dbalschema ) );
+					$table = $dbalManager->listTableDetails( $name );
+					$tables = ( !empty( $table->getColumns() ) ? array( $table ) : array() );
+
+					$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables );
+					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $fcn( clone $dbalschema ) );
 					$stmts = $this->remove( $this->exclude( $schemaDiff, $list ), $clean )->toSaveSql( $platform );
 
 					$this->executeList( $stmts, $rname );
@@ -152,12 +155,14 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 			if( isset( $list['sequence'] ) && $schema->supports( $schema::HAS_SEQUENCES ) )
 			{
+				$sequences = $dbalManager->listSequences();
+
 				foreach( (array) $list['sequence'] as $name => $fcn )
 				{
 					$this->msg( sprintf( 'Checking sequence "%1$s": ', $name ), 2 );
 
-					$comparator = new \Doctrine\DBAL\Schema\Comparator();
-					$schemaDiff = $comparator->compare( $fullschema, $fcn( clone $dbalschema ) );
+					$seqSchema = new \Doctrine\DBAL\Schema\Schema( array(), $sequences );
+					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $seqSchema, $fcn( clone $dbalschema ) );
 					$stmts = $this->remove( $schemaDiff, $clean )->toSaveSql( $platform );
 
 					$this->executeList( $stmts, $rname );
