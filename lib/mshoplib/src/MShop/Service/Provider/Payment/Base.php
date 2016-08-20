@@ -83,6 +83,19 @@ abstract class Base
 
 
 	/**
+	 * Catches unknown method calls
+	 *
+	 * @param string $name Name of the method
+	 * @param array $param List of method parameter
+	 * @return boolean Always false
+	 */
+	public function __call( $name, array $param )
+	{
+		return false;
+	}
+
+
+	/**
 	 * Checks the backend configuration attributes for validity.
 	 *
 	 * @param array $attributes Attributes added by the shop owner in the administraton interface

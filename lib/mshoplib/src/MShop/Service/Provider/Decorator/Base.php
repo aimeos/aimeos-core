@@ -153,6 +153,19 @@ abstract class Base
 
 
 	/**
+	 * Processes the order
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object to process
+	 * @param array $params Request parameter if available
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard|null Form object or null
+	 */
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() )
+	{
+		return $this->object->process( $order, $params );
+	}
+
+
+	/**
 	 * Queries for status updates for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
@@ -238,7 +251,7 @@ abstract class Base
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = @call_user_func_array( array( $this->object, $name ), $param ) ) === null ) {
+		if( ( $result = @call_user_func_array( array( $this->object, $name ), $param ) ) === false ) {
 			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
 		}
 
