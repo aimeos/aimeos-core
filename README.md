@@ -38,7 +38,7 @@ fits as base for portals or market places.
 
 * [Web site](https://aimeos.org/)
 * [Documentation](https://aimeos.org/docs/)
-* [Help](https://aimeos.org/help/)
+* [Forum](https://aimeos.org/help/)
 * [Issue tracker](https://github.com/aimeos/aimeos-core/issues)
 * [Composer packages](https://packagist.org/packages/aimeos/aimeos-core)
 * [Source code](https://github.com/aimeos/aimeos-core)
