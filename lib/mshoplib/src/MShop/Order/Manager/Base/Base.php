@@ -615,8 +615,11 @@ abstract class Base
 
 			foreach( $item->getAttributes() as $attribute )
 			{
-				$attribute->setParentId( $item->getId() );
-				$attrManager->saveItem( $attribute );
+				if( $attribute->getType() !== 'session' )
+				{
+					$attribute->setParentId( $item->getId() );
+					$attrManager->saveItem( $attribute );
+				}
 			}
 		}
 	}
