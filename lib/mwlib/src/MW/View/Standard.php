@@ -192,7 +192,7 @@ class Standard implements \Aimeos\MW\View\Iface
 	{
 		$values = $this->values;
 
-		foreach( explode( '/', trim( $key, '/' ) ) as $part )
+		foreach( explode( '/', ltrim( $key, '/' ) ) as $part )
 		{
 			if( is_array( $values ) && isset( $values[$part] ) ) {
 				$values = $values[$part];
