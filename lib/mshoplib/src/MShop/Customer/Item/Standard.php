@@ -154,7 +154,7 @@ class Standard extends Base implements Iface
 	{
 		if( $value == $this->getCode() ) { return $this; }
 
-		$this->values['customer.code'] = (string) $this->checkCode( $value );;
+		$this->values['customer.code'] = (string) $value;
 		$this->setModified();
 
 		return $this;
