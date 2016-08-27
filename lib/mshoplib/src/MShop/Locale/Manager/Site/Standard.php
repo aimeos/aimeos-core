@@ -862,6 +862,19 @@ class Standard
 
 
 	/**
+	 * Registers a new item filter for the given name
+	 *
+	 * Not used for site items but required for trees
+	 *
+	 * @param string $name Filter name
+	 * @param \Closure $fcn Callback function
+	 */
+	public function registerItemFilter( $name, \Closure $fcn )
+	{
+	}
+
+
+	/**
 	 * Returns the search results for the given SQL statement.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
