@@ -79,6 +79,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
 		$this->assertEquals( $item->getLanguageId(), $itemSaved->getLanguageId() );
+		$this->assertEquals( $item->getDomain(), $itemSaved->getDomain() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 
 		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
@@ -90,6 +91,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
 		$this->assertEquals( $itemExp->getLanguageId(), $itemUpd->getLanguageId() );
+		$this->assertEquals( $itemExp->getDomain(), $itemUpd->getDomain() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 
 		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
@@ -148,6 +150,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '!=', 'tag.siteid', null );
 		$expr[] = $search->compare( '!=', 'tag.typeid', null );
 		$expr[] = $search->compare( '==', 'tag.languageid', 'de' );
+		$expr[] = $search->compare( '==', 'tag.domain', 'product' );
 		$expr[] = $search->compare( '==', 'tag.label', 'Kaffee' );
 		$expr[] = $search->compare( '==', 'tag.editor', $this->editor );
 

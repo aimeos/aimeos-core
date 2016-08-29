@@ -39,6 +39,38 @@ class Standard
 
 
 	/**
+	 * Returns the domain of the tag item.
+	 *
+	 * @return string Domain of the tag item
+	 */
+	public function getDomain()
+	{
+		if( isset( $this->values['tag.domain'] ) ) {
+			return (string) $this->values['tag.domain'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the domain of the tag item.
+	 *
+	 * @param string $domain Domain of the tag item
+	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
+	 */
+	public function setDomain( $domain )
+	{
+		if( $domain == $this->getDomain() ) { return $this; }
+
+		$this->values['tag.domain'] = (string) $domain;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the language ID of the product tag item.
 	 *
 	 * @return string|null Language ID of the product tag item
@@ -191,6 +223,7 @@ class Standard
 		{
 			switch( $key )
 			{
+				case 'tag.domain': $this->setDomain( $value ); break;
 				case 'tag.typeid': $this->setTypeId( $value ); break;
 				case 'tag.languageid': $this->setLanguageId( $value ); break;
 				case 'tag.label': $this->setLabel( $value ); break;
@@ -211,6 +244,7 @@ class Standard
 	{
 		$list = parent::toArray();
 
+		$list['tag.domain'] = $this->getDomain();
 		$list['tag.languageid'] = $this->getLanguageId();
 		$list['tag.label'] = $this->getLabel();
 		$list['tag.type'] = $this->getType();

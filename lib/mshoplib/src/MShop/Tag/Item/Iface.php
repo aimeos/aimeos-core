@@ -22,6 +22,21 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
+	 * Returns the domain of the tag item.
+	 *
+	 * @return string Domain of the tag item
+	 */
+	public function getDomain();
+
+	/**
+	 * Sets the domain of the tag item.
+	 *
+	 * @param string $domain Domain of the tag item
+	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
+	 */
+	public function setDomain( $domain );
+
+	/**
 	 * Returns the language id of the tag item
 	 *
 	 * @return string Language ID of the tag item

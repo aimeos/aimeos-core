@@ -99,6 +99,7 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$tagItem->setId( null );
+			$tagItem->setDomain( $dataset['domain'] );
 			$tagItem->setLanguageId( $dataset['langid'] );
 			$tagItem->setTypeId( $typeIds[$dataset['typeid']] );
 			$tagItem->setLabel( $dataset['label'] );

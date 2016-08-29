@@ -22,6 +22,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'tag.id' => 987,
 			'tag.siteid' => 99,
 			'tag.typeid' => 44,
+			'tag.domain' => 'product',
 			'tag.languageid' => 'en',
 			'tag.type' => 'taste',
 			'tag.typename' => 'Taste',
@@ -58,6 +59,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
+	}
+
+	public function testGetDomain()
+	{
+		$this->assertEquals( 'product', $this->object->getDomain() );
+	}
+
+	public function testSetDomain()
+	{
+		$return = $this->object->setDomain( 'catalog' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
+		$this->assertEquals( 'catalog', $this->object->getDomain() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetLanguageId()
@@ -144,6 +159,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'tag.typeid' => 2,
 			'tag.type' => 'test',
 			'tag.typename' => 'Test',
+			'tag.domain' => 'product',
 			'tag.label' => 'test item',
 			'tag.languageid' => 'de',
 		);
@@ -154,6 +170,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $list['tag.id'], $item->getId() );
 		$this->assertEquals( $list['tag.typeid'], $item->getTypeId() );
+		$this->assertEquals( $list['tag.domain'], $item->getDomain() );
 		$this->assertEquals( $list['tag.label'], $item->getLabel() );
 		$this->assertEquals( $list['tag.languageid'], $item->getLanguageId() );
 		$this->assertNull( $item->getSiteId() );
@@ -173,8 +190,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getTypeId(), $arrayObject['tag.typeid'] );
 		$this->assertEquals( $this->object->getTypeName(), $arrayObject['tag.typename'] );
 		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['tag.languageid'] );
-		$this->assertEquals( $this->object->getType(), $arrayObject['tag.type'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['tag.label'] );
+		$this->assertEquals( $this->object->getDomain(), $arrayObject['tag.domain'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['tag.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['tag.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['tag.editor'] );

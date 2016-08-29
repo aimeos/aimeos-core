@@ -12,11 +12,11 @@ return array(
 	),
 
 	'tag' => array(
-		'tag/Expresso' => array( 'typeid' => 'tag/sort', 'langid' => 'de', 'label' => 'Expresso' ),
-		'tag/Kaffee' => array( 'typeid' => 'tag/sort', 'langid' => 'de', 'label' => 'Kaffee' ),
-		'tag/Cappuccino' => array( 'typeid' => 'tag/sort', 'langid' => 'de', 'label' => 'Cappuccino' ),
-		'tag/herb' => array( 'typeid' => 'tag/taste', 'langid' => 'de', 'label' => 'herb' ),
-		'tag/mild' => array( 'typeid' => 'tag/taste', 'langid' => 'de', 'label' => 'mild' ),
-		'tag/cremig' => array( 'typeid' => 'tag/taste', 'langid' => 'de', 'label' => 'cremig' ),
+		'tag/Expresso' => array( 'domain' => 'product', 'typeid' => 'tag/sort', 'langid' => 'de', 'label' => 'Expresso' ),
+		'tag/Kaffee' => array( 'domain' => 'product', 'typeid' => 'tag/sort', 'langid' => 'de', 'label' => 'Kaffee' ),
+		'tag/Cappuccino' => array( 'domain' => 'product', 'typeid' => 'tag/sort', 'langid' => 'de', 'label' => 'Cappuccino' ),
+		'tag/herb' => array( 'domain' => 'product', 'typeid' => 'tag/taste', 'langid' => 'de', 'label' => 'herb' ),
+		'tag/mild' => array( 'domain' => 'product', 'typeid' => 'tag/taste', 'langid' => 'de', 'label' => 'mild' ),
+		'tag/cremig' => array( 'domain' => 'product', 'typeid' => 'tag/taste', 'langid' => 'de', 'label' => 'cremig' ),
 	)
 );

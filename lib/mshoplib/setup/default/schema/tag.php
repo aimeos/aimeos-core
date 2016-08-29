@@ -38,16 +38,17 @@ return array(
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array() );
 			$table->addColumn( 'typeid', 'integer', array() );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5 ) );
+			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
+			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mtime', 'datetime', array() );
 			$table->addColumn( 'ctime', 'datetime', array() );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mstag_id' );
-			$table->addUniqueIndex( array( 'siteid', 'typeid', 'langid', 'label' ), 'unq_mstag_sid_tid_lid_label' );
-			$table->addIndex( array( 'siteid', 'langid' ), 'idx_mstag_sid_langid' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_mstag_sid_label' );
+			$table->addUniqueIndex( array( 'siteid', 'domain', 'typeid', 'langid', 'label' ), 'unq_mstag_sid_dom_tid_lid_lab' );
+			$table->addIndex( array( 'siteid', 'domain', 'langid' ), 'idx_mstag_sid_dom_langid' );
+			$table->addIndex( array( 'siteid', 'domain', 'label' ), 'idx_mstag_sid_dom_label' );
 			$table->addIndex( array( 'typeid' ), 'fk_mstag_typeid' );
 
 			$table->addForeignKeyConstraint( 'mshop_tag_type', array( 'typeid' ), array( 'id' ),

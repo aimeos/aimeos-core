@@ -16,17 +16,17 @@ return array(
 	'insert' => array(
 		'ansi' => '
 			INSERT INTO "mshop_tag" (
-				"siteid", "langid", "typeid", "label", "mtime", "editor",
+				"siteid", "langid", "typeid", "domain", "label", "mtime", "editor",
 				"ctime"
 			) VALUES (
-				?, ?, ?, ?, ?, ?, ?
+				?, ?, ?, ?, ?, ?, ?, ?
 			)
 		'
 	),
 	'update' => array(
 		'ansi' => '
 			UPDATE "mshop_tag"
-			SET "siteid" = ?, "langid" = ?, "typeid" = ?, "label" = ?,
+			SET "siteid" = ?, "langid" = ?, "typeid" = ?, "domain" = ?, "label" = ?,
 				"mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
@@ -35,13 +35,14 @@ return array(
 		'ansi' => '
 			SELECT mtag."id" AS "tag.id", mtag."siteid" AS "tag.siteid",
 				mtag."typeid" AS "tag.typeid", mtag."langid" AS "tag.languageid",
-				mtag."label" AS "tag.label", mtag."mtime" AS "tag.mtime",
-				mtag."editor" AS "tag.editor", mtag."ctime" AS "tag.ctime"
+				mtag."domain" AS "tag.domain", mtag."label" AS "tag.label",
+				mtag."mtime" AS "tag.mtime", mtag."editor" AS "tag.editor",
+				mtag."ctime" AS "tag.ctime"
 			FROM "mshop_tag" AS mtag
 			:joins
 			WHERE :cond
 			GROUP BY mtag."id", mtag."siteid", mtag."typeid", mtag."langid",
-				mtag."label", mtag."mtime", mtag."editor", mtag."ctime"
+				mtag."domain", mtag."label", mtag."mtime", mtag."editor", mtag."ctime"
 				/*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start

@@ -46,6 +46,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'tag.domain' => array(
+			'code'=>'tag.domain',
+			'internalcode'=>'mtag."domain"',
+			'label'=>'Tag domain',
+			'type'=> 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'tag.languageid' => array(
 			'code'=>'tag.languageid',
 			'internalcode'=>'mtag."langid"',
@@ -230,15 +237,16 @@ class Standard
 			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getLanguageId() );
 			$stmt->bind( 3, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 4, $item->getLabel() );
-			$stmt->bind( 5, $date ); //mtime
-			$stmt->bind( 6, $context->getEditor() );
+			$stmt->bind( 4, $item->getDomain() );
+			$stmt->bind( 5, $item->getLabel() );
+			$stmt->bind( 6, $date ); //mtime
+			$stmt->bind( 7, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 7, $date ); //ctime
+				$stmt->bind( 8, $date ); //ctime
 			}
 
 			$stmt->execute()->finish();
