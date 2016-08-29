@@ -443,7 +443,6 @@ class Standard
 
 		$list[$this->prefix . 'parentid'] = $this->getParentId();
 		$list[$this->prefix . 'typeid'] = $this->getTypeId();
-		$list[$this->prefix . 'type'] = $this->getType();
 		$list[$this->prefix . 'domain'] = $this->getDomain();
 		$list[$this->prefix . 'refid'] = $this->getRefId();
 		$list[$this->prefix . 'datestart'] = $this->getDateStart();
@@ -451,6 +450,8 @@ class Standard
 		$list[$this->prefix . 'config'] = $this->getConfig();
 		$list[$this->prefix . 'position'] = $this->getPosition();
 		$list[$this->prefix . 'status'] = $this->getStatus();
+		$list[$this->prefix . 'typename'] = $this->getTypeName();
+		$list[$this->prefix . 'type'] = $this->getType();
 
 		return $list;
 	}

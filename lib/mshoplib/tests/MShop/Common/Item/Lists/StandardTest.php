@@ -36,6 +36,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'common.lists.status' => 1,
 			'common.lists.typeid' => 8,
 			'common.lists.type' => 'test',
+			'common.lists.typename' => 'test name',
 			'common.lists.mtime' => '2011-01-01 00:00:02',
 			'common.lists.ctime' => '2011-01-01 00:00:01',
 			'common.lists.editor' => 'unitTestUser'
@@ -282,11 +283,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testToArray()
 	{
 		$expected = array(
-			'common.lists.id' => 8,
+			'common.lists.id' => '8',
 			'common.lists.siteid' => 99,
 			'common.lists.parentid' => 2,
 			'common.lists.typeid' => 8,
-			'common.lists.type' => 'test',
 			'common.lists.domain' => 'testDomain',
 			'common.lists.refid' => 'unitId',
 			'common.lists.datestart' => '2005-01-01 00:00:00',
@@ -297,6 +297,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'common.lists.ctime' => '2011-01-01 00:00:01',
 			'common.lists.mtime' => '2011-01-01 00:00:02',
 			'common.lists.editor' => 'unitTestUser',
+			'common.lists.typename' => 'test name',
+			'common.lists.type' => 'test',
 		);
 
 		$this->assertEquals( $expected, $this->object->toArray() );
