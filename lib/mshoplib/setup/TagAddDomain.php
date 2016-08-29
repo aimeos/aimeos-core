@@ -24,7 +24,7 @@ class TagAddDomain extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'TagMoveProductTag' );
+		return array( 'TagMoveProductTag', 'TablesCreateMShop' );
 	}
 
 
@@ -35,7 +35,7 @@ class TagAddDomain extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'TablesCreateMShop' );
+		return array();
 	}
 
 
