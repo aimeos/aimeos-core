@@ -289,6 +289,7 @@ class Standard extends Base implements Iface
 	public function setGroups( array $ids )
 	{
 		$this->values['groups'] = $ids;
+		$this->setModified();
 
 		return $this;
 	}
