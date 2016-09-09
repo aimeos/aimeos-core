@@ -485,7 +485,7 @@ class Standard
 				$this->saveLabels( $stmt, $item, array( $parentId ) );
 
 				$this->saveText( // save product code for full text search
-					$stmt, $parentId, $siteid, null, null, '', 'code',
+					$stmt, $parentId, $siteid, null, null, 'default', 'code',
 					$item->getResourceType(), $item->getCode(), $date, $editor
 				);
 			}
