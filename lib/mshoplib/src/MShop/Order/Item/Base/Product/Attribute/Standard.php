@@ -159,7 +159,7 @@ class Standard
 	{
 		if( $code == $this->getCode() ) { return $this; }
 
-		$this->values['order.base.product.attribute.code'] = (string) $this->checkCode( $code );;
+		$this->values['order.base.product.attribute.code'] = (string) $this->checkCode( $code );
 		$this->setModified();
 
 		return $this;
@@ -174,7 +174,7 @@ class Standard
 	public function getValue()
 	{
 		if( isset( $this->values['order.base.product.attribute.value'] ) ) {
-			return (string) $this->values['order.base.product.attribute.value'];
+			return $this->values['order.base.product.attribute.value'];
 		}
 
 		return '';
