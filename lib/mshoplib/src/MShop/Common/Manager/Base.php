@@ -668,6 +668,10 @@ abstract class Base
 	 */
 	protected function getSearchSiteConditions( \Aimeos\MW\Criteria\Iface $search, array $keys, array $attributes, array $siteIds )
 	{
+		if( $this->context->getConfig()->get( 'mshop/common/manager/sitecheck', true ) == false ) {
+			return array();
+		}
+
 		$cond = array();
 		$sep = $this->getKeySeparator();
 
