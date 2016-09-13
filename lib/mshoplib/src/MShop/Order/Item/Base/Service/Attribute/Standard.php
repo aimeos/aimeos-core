@@ -206,7 +206,7 @@ class Standard
 	public function getValue()
 	{
 		if( isset( $this->values['order.base.service.attribute.value'] ) ) {
-			return (string) $this->values['order.base.service.attribute.value'];
+			return $this->values['order.base.service.attribute.value'];
 		}
 
 		return '';

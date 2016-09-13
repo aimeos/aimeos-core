@@ -334,7 +334,7 @@ class Standard
 			$stmt->bind( 3, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
 			$stmt->bind( 5, $item->getCode() );
-			$stmt->bind( 6, $item->getValue() );
+			$stmt->bind( 6, json_encode( $item->getValue() ) );
 			$stmt->bind( 7, $item->getName() );
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
