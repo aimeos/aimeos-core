@@ -815,7 +815,7 @@ class Standard
 
 
 	/**
-	 * Saves the labelfor items where no name is associated
+	 * Saves the label for items where no name is associated
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
@@ -828,12 +828,8 @@ class Standard
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
 
-		if( $item->getRefItems( 'text', 'name' ) === array() )
+		if( $item->getRefItems( 'text', 'name' ) === array() && $item->getLabel() !== '' )
 		{
-			if( $item->getLabel() === '' ) {
-				return;
-			}
-
 			foreach( $prodIds as $prodId )
 			{
 				$this->saveText(

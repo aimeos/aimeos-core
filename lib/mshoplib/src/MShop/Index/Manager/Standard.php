@@ -409,30 +409,22 @@ class Standard
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
+		$prodIds = array();
 
-		// index given product items
-		if( !empty( $items ) )
-		{
-			$prodIds = array();
-
-			foreach( $items as $item ) {
-				$prodIds[] = $item->getId();
-			}
-
-			$expr = array(
-				$search->compare( '==', 'product.id', $prodIds ),
-				$defaultConditions,
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$this->writeIndex( $search, $domains, $size );
-			return;
+		foreach( $items as $item ) {
+			$prodIds[] = $item->getId(); // don't rely on array keys
 		}
 
 
 		// index all product items
 		if( $mode === 'all' )
 		{
+			if( !empty( $prodIds ) )
+			{
+				$expr = array( $search->compare( '==', 'product.id', $prodIds ), $defaultConditions );
+				$search->setConditions( $search->combine( '&&', $expr ) );
+			}
+
 			$this->writeIndex( $search, $domains, $size );
 			return;
 		}
@@ -446,6 +438,10 @@ class Standard
 			$catalogSearch->compare( '==', 'catalog.lists.domain', 'product' ),
 			$catalogSearch->getConditions(),
 		);
+
+		if( !empty( $prodIds ) ) {
+			$expr[] = $catalogSearch->compare( '==', 'catalog.lists.refid', $prodIds );
+		}
 
 		$catalogSearch->setConditions( $catalogSearch->combine( '&&', $expr ) );
 		$catalogSearch->setSortations( array( $catalogSearch->sort( '+', 'catalog.lists.refid' ) ) );
