@@ -32,14 +32,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.address.siteid' => array(
-			'label' => 'Customer address site ID',
-			'code' => 'customer.address.siteid',
-			'internalcode' => 'mcusad."siteid"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
+		// no siteid
 		'customer.address.parentid' => array(
 			'label' => 'Customer address parent ID',
 			'code' => 'customer.address.parentid',

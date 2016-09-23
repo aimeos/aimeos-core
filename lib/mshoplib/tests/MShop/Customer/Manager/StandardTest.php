@@ -186,7 +186,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array();
 		$expr[] = $search->compare( '!=', 'customer.id', null );
-		$expr[] = $search->compare( '!=', 'customer.siteid', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer002' );
 		$expr[] = $search->compare( '==', 'customer.code', 'UTC002' );
 
@@ -217,7 +216,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'customer.address.id', null );
-		$expr[] = $search->compare( '!=', 'customer.address.siteid', null );
 		$expr[] = $search->compare( '!=', 'customer.address.parentid', null );
 		$expr[] = $search->compare( '==', 'customer.address.company', 'Example company LLC' );
 		$expr[] = $search->compare( '==', 'customer.address.vatid', 'DE999999999' );

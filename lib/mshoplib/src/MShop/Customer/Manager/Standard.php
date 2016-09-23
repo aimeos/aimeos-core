@@ -30,14 +30,7 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'customer.siteid' => array(
-			'label' => 'Customer site ID',
-			'code' => 'customer.siteid',
-			'internalcode' => 'mcus."siteid"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
+		// no siteid
 		'customer.label' => array(
 			'label' => 'Customer label',
 			'code' => 'customer.label',
@@ -238,7 +231,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists', 'group' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 

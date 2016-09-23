@@ -59,7 +59,7 @@ return array(
 			$table = $schema->createTable( 'mshop_customer_address' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'parentid', 'integer', array() );
 			$table->addColumn( 'company', 'string', array( 'length' => 100 ) );
 			$table->addColumn( 'vatid', 'string', array( 'length' => 32 ) );
@@ -128,8 +128,8 @@ return array(
 			$table = $schema->createTable( 'mshop_customer_list' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', array() );
 			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'parentid', 'integer', array() );
 			$table->addColumn( 'typeid', 'integer', array() );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
@@ -166,7 +166,7 @@ return array(
 			$table = $schema->createTable( 'mshop_customer_group' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mtime', 'datetime', array() );

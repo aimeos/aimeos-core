@@ -29,14 +29,7 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'customer.group.siteid' => array(
-			'code' => 'customer.group.siteid',
-			'internalcode' => 'mcusgr."siteid"',
-			'label' => 'Customer group site ID',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
+		// no siteid
 		'customer.group.code' => array(
 			'code' => 'customer.group.code',
 			'internalcode' => 'mcusgr."code"',
