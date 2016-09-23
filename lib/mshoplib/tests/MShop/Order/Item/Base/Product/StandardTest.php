@@ -128,6 +128,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
+	public function testSetSiteId()
+	{
+		$this->object->setSiteId( 100 );
+		$this->assertEquals( 100, $this->object->getSiteId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
 	public function testGetOrderProductId()
 	{
 		$this->assertEquals( 10, $this->object->getOrderProductId() );
@@ -581,6 +588,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'order.base.product.id' => 1,
 			'order.base.product.baseid' => 2,
+			'order.base.product.siteid' => 123,
 			'order.base.product.productid' => 3,
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.name' => 'test item',
@@ -603,6 +611,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $list['order.base.product.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.product.baseid'], $item->getBaseId() );
+		$this->assertEquals( $list['order.base.product.siteid'], $item->getSiteId() );
 		$this->assertEquals( $list['order.base.product.productid'], $item->getProductId() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.name'], $item->getName() );

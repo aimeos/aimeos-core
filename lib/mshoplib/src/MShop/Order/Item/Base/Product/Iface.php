@@ -21,6 +21,14 @@ namespace Aimeos\MShop\Order\Item\Base\Product;
 interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
+	 * Sets the site ID of the item.
+	 *
+	 * @param integer $value Unique site ID of the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setSiteId( $value );
+
+	/**
 	 * Returns the base ID.
 	 *
 	 * @return integer|null Base ID

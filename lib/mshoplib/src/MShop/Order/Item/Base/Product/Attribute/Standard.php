@@ -39,6 +39,38 @@ class Standard
 
 
 	/**
+	 * Returns the ID of the site the item is stored
+	 *
+	 * @return integer|null Site ID (or null if not available)
+	 */
+	public function getSiteId()
+	{
+		if( isset( $this->values['order.base.product.attribute.siteid'] ) ) {
+			return (int) $this->values['order.base.product.attribute.siteid'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Sets the site ID of the item.
+	 *
+	 * @param integer $value Unique site ID of the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
+	 */
+	public function setSiteId( $value )
+	{
+		if( $value == $this->getSiteId() ) { return $this; }
+
+		$this->values['order.base.product.attribute.siteid'] = (int) $value;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the original attribute ID of the product attribute item.
 	 *
 	 * @return string Attribute ID of the product attribute item
@@ -269,12 +301,18 @@ class Standard
 	public function fromArray( array $list )
 	{
 		$unknown = array();
+
+		if( isset( $list['order.base.product.attribute.siteid'] ) ) { // set siteid in this class too
+			$this->setSiteId( $list['order.base.product.attribute.siteid'] );
+		}
+
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
 		{
 			switch( $key )
 			{
+				case 'order.base.product.attribute.siteid': $this->setSiteId( $value ); break;
 				case 'order.base.product.attribute.attrid': $this->setAttributeId( $value ); break;
 				case 'order.base.product.attribute.parentid': $this->setParentId( $value ); break;
 				case 'order.base.product.attribute.type': $this->setType( $value ); break;
@@ -298,6 +336,7 @@ class Standard
 	{
 		$list = parent::toArray();
 
+		$list['order.base.product.attribute.siteid'] = $this->getSiteId();
 		$list['order.base.product.attribute.attrid'] = $this->getAttributeId();
 		$list['order.base.product.attribute.parentid'] = $this->getParentId();
 		$list['order.base.product.attribute.type'] = $this->getType();

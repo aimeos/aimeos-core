@@ -54,6 +54,38 @@ class Standard extends Base implements Iface
 
 
 	/**
+	 * Returns the ID of the site the item is stored
+	 *
+	 * @return integer|null Site ID (or null if not available)
+	 */
+	public function getSiteId()
+	{
+		if( isset( $this->values['order.base.product.siteid'] ) ) {
+			return (int) $this->values['order.base.product.siteid'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Sets the site ID of the item.
+	 *
+	 * @param integer $value Unique site ID of the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setSiteId( $value )
+	{
+		if( $value == $this->getSiteId() ) { return $this; }
+
+		$this->values['order.base.product.siteid'] = (int) $value;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the base ID.
 	 *
 	 * @return integer|null Base ID
@@ -203,7 +235,7 @@ class Standard extends Base implements Iface
 	{
 		if( $suppliercode == $this->getSupplierCode() ) { return $this; }
 
-		$this->values['order.base.product.suppliercode'] = (string) $this->checkCode( $suppliercode );;
+		$this->values['order.base.product.suppliercode'] = (string) $this->checkCode( $suppliercode );
 		$this->setModified();
 
 		return $this;
@@ -267,7 +299,7 @@ class Standard extends Base implements Iface
 	{
 		if( $code == $this->getProductCode() ) { return $this; }
 
-		$this->values['order.base.product.prodcode'] = (string) $this->checkCode( $code );;
+		$this->values['order.base.product.prodcode'] = (string) $this->checkCode( $code );
 		$this->setModified();
 
 		return $this;
@@ -562,6 +594,11 @@ class Standard extends Base implements Iface
 	public function fromArray( array $list )
 	{
 		$unknown = array();
+
+		if( isset( $list['order.base.product.siteid'] ) ) { // set siteid in this class too
+			$this->setSiteId( $list['order.base.product.siteid'] );
+		}
+
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
@@ -602,6 +639,7 @@ class Standard extends Base implements Iface
 		$list = parent::toArray();
 
 		$list['order.base.product.baseid'] = $this->getBaseId();
+		$list['order.base.product.siteid'] = $this->getSiteId();
 		$list['order.base.product.ordprodid'] = $this->getOrderProductId();
 		$list['order.base.product.type'] = $this->getType();
 		$list['order.base.product.suppliercode'] = $this->getSupplierCode();
@@ -632,6 +670,7 @@ class Standard extends Base implements Iface
 	{
 		if( $this->getFlags() === $item->getFlags()
 			&& $this->getName() === $item->getName()
+			&& $this->getSiteId() === $item->getSiteId()
 			&& $this->getProductCode() === $item->getProductCode()
 			&& $this->getSupplierCode() === $item->getSupplierCode()
 			&& $this->getPrice()->compare( $item->getPrice() ) === true
@@ -650,6 +689,7 @@ class Standard extends Base implements Iface
 	 */
 	public function copyFrom( \Aimeos\MShop\Product\Item\Iface $product )
 	{
+		$this->setSiteId( $product->getSiteId() );
 		$this->setProductCode( $product->getCode() );
 		$this->setProductId( $product->getId() );
 		$this->setType( $product->getType() );

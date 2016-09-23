@@ -329,7 +329,7 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getAttributeId() );
 			$stmt->bind( 3, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getType() );
@@ -630,7 +630,7 @@ class Standard
 		try
 		{
 			$required = array( 'order.base.product.attribute' );
-			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 
 			/** mshop/order/manager/base/product/attribute/standard/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

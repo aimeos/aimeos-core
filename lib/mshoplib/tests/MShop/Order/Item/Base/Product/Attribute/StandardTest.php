@@ -88,6 +88,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testSetSiteId()
+	{
+		$this->object->setSiteId( 100 );
+		$this->assertEquals( 100, $this->object->getSiteId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetAttributeId()
 	{
 		$this->assertEquals( 22, $this->object->getAttributeId() );
@@ -234,6 +242,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$list = array(
 			'order.base.product.attribute.id' => 1,
+			'order.base.product.attribute.siteid' => 123,
 			'order.base.product.attribute.attrid' => 2,
 			'order.base.product.attribute.parentid' => 3,
 			'order.base.product.attribute.type' => 'variant',
@@ -247,6 +256,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( array(), $unknown );
 
 		$this->assertEquals( $list['order.base.product.attribute.id'], $item->getId() );
+		$this->assertEquals( $list['order.base.product.attribute.siteid'], $item->getSiteId() );
 		$this->assertEquals( $list['order.base.product.attribute.attrid'], $item->getAttributeId() );
 		$this->assertEquals( $list['order.base.product.attribute.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['order.base.product.attribute.type'], $item->getType() );
