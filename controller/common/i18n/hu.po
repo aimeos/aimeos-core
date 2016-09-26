@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-16 23:34+0200\n"
+"PO-Revision-Date: 2015-09-29 12:30+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "A/Az \"%1$s\" osztály nem elérhető."
+
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "A/Az \"%1$s\" osztály nem található."
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Érvénytelen karakter a/az \"%1$s\" osztály nevében"
+
+#, php-format
+msgid "No allowed image types configured for \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
+#, php-format
+msgid "Unable to create directory \"%1$s\""
+msgstr "Nem sikerült létrehozni a könyvtárat \"%1$s\""
+
+#, php-format
+msgid "Unable to create file in \"%1$s\""
+msgstr "Nem sikerült létrehozni a fájlt \"%1$s\""
