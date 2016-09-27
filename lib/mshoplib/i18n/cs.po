@@ -1,45 +1,46 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Martin Vyšohlíd <vysohlidm@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-21 22:09+0200\n"
-"PO-Revision-Date: 2015-09-29 12:32+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2016-07-16 23:34+0200\n"
+"PO-Revision-Date: 2016-09-26 21:56+0000\n"
+"Last-Translator: Martin Vyšohlíd <vysohlidm@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
-"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
-msgstr ""
+msgstr "Adresa pro doménu \"%1$s\" není k dispozici"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Oslovení pro adresu \"%1$s\" je mimo povolený rozsah"
 
 #, php-format
 msgid "Address search configuration not available"
-msgstr ""
+msgstr "Konfigurace pro vyhledávání adres není dostupná"
 
 #, php-format
 msgid "Address type \"%1$s\" not within allowed range"
-msgstr ""
+msgstr "Typ adresy \"%1$s\" mimo povolený rozsah"
 
 #, php-format
 msgid "Basket empty"
-msgstr ""
+msgstr "Košík je prázdný"
 
 #, php-format
 msgid "Cache object not available"
-msgstr ""
+msgstr "Objekt nenalezen v mezipaměti"
 
 #, php-format
 msgid "Catalog node for ID \"%1$s\" not available"
@@ -63,11 +64,11 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr ""
+msgstr "Třída \"%1$s\" does not implement interface \"%2$s\""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr ""
+msgstr "Třída \"%1$s\" není k dispozici"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
@@ -95,7 +96,7 @@ msgstr ""
 
 #, php-format
 msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
-msgstr "Configuration of necessary SQL statement for \"%1$s\" not available"
+msgstr ""
 
 #, php-format
 msgid "Coupon in basket is not available any more"
@@ -152,10 +153,12 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "Zakázané znaky ve jméně třídy \"%1$s\""
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr ""
 
 #, php-format
@@ -223,7 +226,8 @@ msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr ""
 
 #, php-format
-msgid "Item could not be saved using method saveItem(). Item ID not available."
+msgid ""
+"Item could not be saved using method saveItem(). Item ID not available."
 msgstr ""
 
 #, php-format
@@ -236,7 +240,7 @@ msgstr ""
 
 #, php-format
 msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
-msgstr "Item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr ""
 
 #, php-format
 msgid "Job with ID \"%1$s\" not found"
@@ -315,7 +319,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"saveItem()\". Try using "
+"method \"insertItem()\" instead."
 msgstr ""
 
 #, php-format
@@ -379,7 +385,9 @@ msgid "Operation not supported"
 msgstr ""
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr ""
 
 #, php-format
@@ -387,7 +395,9 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr ""
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr ""
 
 #, php-format
@@ -446,7 +456,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr ""
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr ""
 
 #, php-format
@@ -458,7 +470,9 @@ msgid "Price item not available"
 msgstr ""
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr ""
 
 #, php-format
@@ -518,11 +532,15 @@ msgid "Session object not available"
 msgstr ""
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr ""
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr ""
 
 #, php-format
@@ -579,7 +597,7 @@ msgstr ""
 
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
-msgstr "Type item with ID \"%1$s\" in \"%2$s\" not found"
+msgstr ""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
@@ -590,7 +608,9 @@ msgid "Unknown search key \"%1$s\""
 msgstr ""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr ""
 
 #, php-format
