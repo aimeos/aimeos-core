@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Nóra Antal <nora1984antal@gmail.com>, 2016
+# Péter Kozma <kopegrafika@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-07-16 23:34+0200\n"
-"PO-Revision-Date: 2016-09-21 14:08+0000\n"
+"PO-Revision-Date: 2016-09-28 12:33+0000\n"
 "Last-Translator: Nóra Antal <nora1984antal@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -72,11 +73,11 @@ msgstr "A/Az \"%1$s\" osztály nem elérhető."
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
-msgstr ""
+msgstr "A kód nem lehet hosszabb 255 karakternél."
 
 #, php-format
 msgid "Code must not be longer than 32 characters"
-msgstr ""
+msgstr "A kód nem lehet hosszabb 32 karakternél."
 
 #, php-format
 msgid "Configuration for \"%1$s\" is missing"
@@ -133,11 +134,11 @@ msgstr ""
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen ISO valutanem jelzés:  \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO language code \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen ISO nyelvkód: \"%1$s\""
 
 #, php-format
 msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
@@ -145,11 +146,11 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in ISO currency code \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakter az ISO valutanem jelzésben: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in ISO language code \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakter az ISO nyelvkódban: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
@@ -167,11 +168,11 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in domain name \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakter a tartomány nevében: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in email address: \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakter az e-mail nevében: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in manager name \"%1$s\""
@@ -183,7 +184,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in price \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakter az árban: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in provider name \"%1$s\""
@@ -191,11 +192,11 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in purchase date \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakter a vásárlási dátumban: \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in type name \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen karakter a típus nevében: \"%1$s\""
 
 #, php-format
 msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
@@ -215,11 +216,11 @@ msgstr ""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen típus: \"%1$s\""
 
 #, php-format
 msgid "Invalid web site URL \"%1$s\""
-msgstr ""
+msgstr "Érvénytelen honlap URL: \"%1$s\""
 
 #, php-format
 msgid "Item can not be deleted. Site ID of item differs from present site ID."
@@ -312,7 +313,7 @@ msgstr ""
 
 #, php-format
 msgid "Missing configuration \"%1$s\""
-msgstr ""
+msgstr "Hiányzó konfiguráció: \"%1$s\""
 
 #, php-format
 msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
@@ -342,11 +343,11 @@ msgstr ""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
-msgstr ""
+msgstr "\"%1$s\" raktárkód nem található!"
 
 #, php-format
 msgid "Not a date"
-msgstr ""
+msgstr "Nem dátum"
 
 #, php-format
 msgid "Not a date and time"
@@ -358,23 +359,23 @@ msgstr ""
 
 #, php-format
 msgid "Not a listed value"
-msgstr ""
+msgstr "Nem felsorolt érték"
 
 #, php-format
 msgid "Not a number"
-msgstr ""
+msgstr "Nem szám"
 
 #, php-format
 msgid "Not a string"
-msgstr ""
+msgstr "Nem karakterlánc"
 
 #, php-format
 msgid "Not a true/false value"
-msgstr ""
+msgstr "Nem igaz/hamis érték"
 
 #, php-format
 msgid "Not an integer number"
-msgstr ""
+msgstr "Nem egész szám"
 
 #, php-format
 msgid "Object is not of required type \"%1$s\""
@@ -489,7 +490,7 @@ msgstr ""
 
 #, php-format
 msgid "Products out of stock"
-msgstr ""
+msgstr "A termékek elfogytak"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"
@@ -513,7 +514,7 @@ msgstr ""
 
 #, php-format
 msgid "Search configuration not available"
-msgstr ""
+msgstr "A keresett konfiguráció nem elérhető"
 
 #, php-format
 msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
