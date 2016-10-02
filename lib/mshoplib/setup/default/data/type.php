@@ -83,6 +83,8 @@ return array(
 	),
 
 	'price/lists/type' => array(
+		array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		array( 'domain' => 'customer/group', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
 	'product/type' => array(
