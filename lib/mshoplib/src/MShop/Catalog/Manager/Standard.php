@@ -155,6 +155,35 @@ class Standard extends Base
 
 		try
 		{
+			/** mshop/catalog/manager/standard/cleanup/mysql
+			 * Deletes the categories for the given site from the database
+			 *
+			 * @see mshop/catalog/manager/standard/cleanup/ansi
+			 */
+
+			/** mshop/catalog/manager/standard/cleanup/ansi
+			 * Deletes the categories for the given site from the database
+			 *
+			 * Removes the records matched by the given site ID from the catalog
+			 * database.
+			 *
+			 * The ":siteid" placeholder is replaced by the name and value of the
+			 * site ID column and the given ID or list of IDs.
+			 *
+			 * The SQL statement should conform to the ANSI standard to be
+			 * compatible with most relational database systems. This also
+			 * includes using double quotes for table and column names.
+			 *
+			 * @param string SQL statement for removing the records
+			 * @since 2014.03
+			 * @category Developer
+			 * @see mshop/catalog/manager/standard/delete/ansi
+			 * @see mshop/catalog/manager/standard/insert/ansi
+			 * @see mshop/catalog/manager/standard/update/ansi
+			 * @see mshop/catalog/manager/standard/newid/ansi
+			 * @see mshop/catalog/manager/standard/search/ansi
+			 * @see mshop/catalog/manager/standard/count/ansi
+			 */
 			$path = 'mshop/catalog/manager/standard/cleanup';
 			$sql = $this->getSqlConfig( $path );
 

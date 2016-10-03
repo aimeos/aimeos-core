@@ -668,6 +668,24 @@ abstract class Base
 	 */
 	protected function getSearchSiteConditions( \Aimeos\MW\Criteria\Iface $search, array $keys, array $attributes, array $siteIds )
 	{
+		/** mshop/common/manager/sitecheck
+		 * Enables or disables using the site IDs in search queries
+		 *
+		 * For market places, products of different shop owners managing their
+		 * own sites should be shown in the frontend. By default, only the items
+		 * from the current site are displayed. Setting this option to false
+		 * disables the restriction to the current site and shows all products
+		 * from all sites. This does also apply to all other records from
+		 * different domains than "product".
+		 *
+		 * This option is most effective if it's only set for the shop frontend,
+		 * so the shop owners will only see and manager their own products in
+		 * the administration interface.
+		 *
+		 * @param boolean True to resrict items to the current site, false to show item form all sites
+		 * @since 2016.10
+		 * @category Developer
+		 */
 		if( $this->context->getConfig()->get( 'mshop/common/manager/sitecheck', true ) == false ) {
 			return array();
 		}
