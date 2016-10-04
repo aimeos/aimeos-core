@@ -1,6 +1,6 @@
 {
 	"name": "aimeos/aimeos-core",
-	"description": "Full-featured e-commerce framework for high performance web shops",
+	"description": "Full-featured e-commerce components for high performance online shops",
 	"homepage": "https://aimeos.org/",
 	"license": "LGPL-3.0",
 	"keywords": ["e-commerce", "shop", "portal", "market place"],
@@ -48,12 +48,14 @@
 			"Aimeos\\MShop\\": "lib/mshoplib/src/MShop/",
 			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
 			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
+			"Aimeos\\Controller\\Jobs\\": "controller/common/src/Controller/Jobs/",
 			"Aimeos\\": "."
 		},
 		"classmap": [
 			"lib/mwlib/src",
 			"lib/mshoplib/src",
 			"controller/common/src",
+			"controller/jobs/src",
 			"Bootstrap.php"
 		]
 	}
