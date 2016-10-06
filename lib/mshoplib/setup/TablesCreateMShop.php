@@ -257,6 +257,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 			{
 				$tableDiff->removedColumns = array();
 				$tableDiff->removedIndexes = array();
+				$tableDiff->renamedIndexes = array();
 			}
 
 			$schemaDiff->removedSequences = array();
