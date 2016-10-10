@@ -87,17 +87,18 @@ class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.type.code', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, 1000 );
 
 		$attrListItem = $this->getProductListItem( 'attribute', 'variant' );
 
-
-		$this->txBegin();
 
 		$start = 0;
 
 		do
 		{
 			$result = $productManager->searchItems( $search );
+
+			$this->txBegin();
 
 			foreach( $result as $id => $item )
 			{
@@ -111,13 +112,13 @@ class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 				}
 			}
 
+			$this->txCommit();
+
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->setSlice( $start, 1000 );
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->txCommit();
 
 
 		$this->status( 'done' );

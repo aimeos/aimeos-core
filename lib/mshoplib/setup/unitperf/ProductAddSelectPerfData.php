@@ -51,11 +51,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 		$this->msg( 'Adding product selection performance data', 0 );
 
 
-		$this->txBegin();
-
 		$selProducts = $this->getSelectionProductIds();
-
-		$this->txCommit();
 
 
 		$productTypeItem = $this->getTypeItem( 'product/type', 'product', 'default' );
@@ -74,9 +70,8 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 		$search = $productManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.typeid', $productTypeItem->getId() ) );
 		$search->setSortations( array( $search->sort( '-', 'product.id' ) ) );
+		$search->setSlice( 0, 1000 );
 
-
-		$this->txBegin();
 
 		$selCount = count( $selProducts );
 		$selPrices = array();
@@ -85,6 +80,8 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 		do
 		{
 			$result = $productManager->searchItems( $search, array( 'price' ) );
+
+			$this->txBegin();
 
 			foreach( $result as $id => $product )
 			{
@@ -120,13 +117,13 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 				$num++;
 			}
 
+			$this->txCommit();
+
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->setSlice( $start, 1000 );
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->txCommit();
 
 
 		$listTypeItem = $this->getTypeItem( 'product/lists/type', 'price', 'default' );
@@ -261,40 +258,61 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 		$productItem->setStatus( 1 );
 
 
+		if( $this->count >= 1000 )
+		{
+			$count = (int) $this->count / 1000;
+			$size = 1000;
+		}
+		else
+		{
+			$count = 1;
+			$size = $this->count;
+		}
+
+
 		$selProducts = array();
 
-		for( $i = 0; $i < $this->count; $i++ )
+		for( $i = 0; $i < $count; $i++ )
 		{
-			$productItem->setId( null );
-			$productItem->setCode( 'perf-select-' . str_pad( $i, 5, '0', STR_PAD_LEFT ) );
-			$productItem->setLabel( 'Selection product ' . ( $i + 1 ) );
-			$productManager->saveItem( $productItem );
+			$this->txBegin();
 
-			$selProducts[] = $productItem->getId();
+			for( $j = 0; $j < $size; $j++ )
+			{
+				$cnt = $i * 1000 + $j;
 
+				$productItem->setId( null );
+				$productItem->setCode( 'perf-select-' . str_pad( $cnt, 5, '0', STR_PAD_LEFT ) );
+				$productItem->setLabel( 'Selection product ' . ( $cnt + 1 ) );
+				$productManager->saveItem( $productItem );
 
-			$textItem->setId( null );
-			$textItem->setTypeId( $textTypeItems['short']->getId() );
-			$textItem->setLabel( 'Short description for ' . ( $i + 1 ) . '. selection product' );
-			$textItem->setContent( 'Short description for ' . ( $i + 1 ) . '. selection product' );
-			$textManager->saveItem( $textItem );
-
-			$productListItem->setId( null );
-			$productListItem->setParentId( $productItem->getId() );
-			$productListItem->setRefId( $textItem->getId() );
-			$productListManager->saveItem( $productListItem, false );
+				$selProducts[] = $productItem->getId();
 
 
-			$textItem->setId( null );
-			$textItem->setTypeId( $textTypeItems['long']->getId() );
-			$textItem->setLabel( 'Long description for ' . ( $i + 1 ) . '. selection product' );
-			$textItem->setContent( 'Long description for ' . ( $i + 1 ) . '. selection product. This may contain some "Lorem ipsum" text' );
-			$textManager->saveItem( $textItem );
+				$textItem->setId( null );
+				$textItem->setTypeId( $textTypeItems['short']->getId() );
+				$textItem->setLabel( 'Short description for ' . ( $cnt + 1 ) . '. selection product' );
+				$textItem->setContent( 'Short description for ' . ( $cnt + 1 ) . '. selection product' );
+				$textManager->saveItem( $textItem );
 
-			$productListItem->setId( null );
-			$productListItem->setParentId( $productItem->getId() );
-			$productListItem->setRefId( $textItem->getId() );
-			$productListManager->saveItem( $productListItem, false );
+				$productListItem->setId( null );
+				$productListItem->setParentId( $productItem->getId() );
+				$productListItem->setRefId( $textItem->getId() );
+				$productListManager->saveItem( $productListItem, false );
+
+
+				$textItem->setId( null );
+				$textItem->setTypeId( $textTypeItems['long']->getId() );
+				$textItem->setLabel( 'Long description for ' . ( $cnt + 1 ) . '. selection product' );
+				$textItem->setContent( 'Long description for ' . ( $cnt + 1 ) . '. selection product. This may contain some "Lorem ipsum" text' );
+				$textManager->saveItem( $textItem );
+
+				$productListItem->setId( null );
+				$productListItem->setParentId( $productItem->getId() );
+				$productListItem->setRefId( $textItem->getId() );
+				$productListManager->saveItem( $productListItem, false );
+			}
+
+			$this->txCommit();
 		}
 
 		return $selProducts;

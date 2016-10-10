@@ -69,24 +69,38 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->getContext() );
 		$productTypeItem = $this->getTypeItem( 'product/type', 'product', 'default' );
 
-		$this->txBegin();
-
 		$productItem = $productManager->createItem();
 		$productItem->setTypeId( $productTypeItem->getId() );
 		$productItem->setStatus( 1 );
 		$productItem->setDateStart( '1970-01-01 00:00:00' );
 
-		for( $i = 0; $i < $this->count; $i++ )
+		if( $this->count >= 1000 )
 		{
-			$code = 'perf-' . str_pad( $i, 5, '0', STR_PAD_LEFT );
-
-			$productItem->setId( null );
-			$productItem->setCode( $code );
-			$productItem->setLabel( $code );
-			$productManager->saveItem( $productItem, false );
+			$count = (int) $this->count / 1000;
+			$size = 1000;
+		}
+		else
+		{
+			$count = 1;
+			$size = $this->count;
 		}
 
-		$this->txCommit();
+		for( $i = 0; $i < $count; $i++ )
+		{
+			$this->txBegin();
+
+			for( $j = 0; $j < $size; $j++ )
+			{
+				$code = 'perf-' . str_pad( $i * 1000 + $j, 5, '0', STR_PAD_LEFT );
+
+				$productItem->setId( null );
+				$productItem->setCode( $code );
+				$productItem->setLabel( $code );
+				$productManager->saveItem( $productItem, false );
+			}
+
+			$this->txCommit();
+		}
 
 		$this->status( 'done' );
 	}

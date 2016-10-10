@@ -101,15 +101,16 @@ class ProductAddTextPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDat
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '+', 'product.lists.id' ) ) );
+		$search->setSlice( 1, 1000 );
 
-
-		$this->txBegin();
 
 		$start = 0;
 
 		do
 		{
 			$result = $productListManager->searchItems( $search );
+
+			$this->txBegin();
 
 			foreach( $result as $listItem )
 			{
@@ -175,13 +176,13 @@ class ProductAddTextPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDat
 				}
 			}
 
+			$this->txCommit();
+
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->setSlice( $start, 1000 );
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->txCommit();
 
 
 		$this->status( 'done' );

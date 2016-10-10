@@ -64,17 +64,18 @@ class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$item = $productStockManager->createItem();
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, 1000 );
 
 		$start = 0;
 		$warehouseid = $whItem->getId();
 		$stocklevels = array( null, 100, 80, 60, 40, 20, 10, 5, 2, 0 );
 
 
-		$this->txBegin();
-
 		do
 		{
 			$result = $productManager->searchItems( $search );
+
+			$this->txBegin();
 
 			foreach( $result as $id => $product )
 			{
@@ -89,13 +90,13 @@ class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 				}
 			}
 
+			$this->txCommit();
+
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->setSlice( $start, 1000 );
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->txCommit();
 
 
 		$this->status( 'done' );

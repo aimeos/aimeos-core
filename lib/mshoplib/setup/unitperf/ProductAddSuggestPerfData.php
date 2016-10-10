@@ -73,17 +73,16 @@ class ProductAddSuggestPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, 1000 );
 
 		$refsearch = $productManager->createSearch();
 		$refsearch->setSortations( array( $refsearch->sort( '+', 'product.id' ) ) );
-		$refsearch->setSlice( 1 );
+		$refsearch->setSlice( 1, 1000 );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $listTypeItem->getId() );
 		$listItem->setDomain( 'product' );
 
-
-		$this->txBegin();
 
 		$start = 0;
 
@@ -93,6 +92,8 @@ class ProductAddSuggestPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$result = $productManager->searchItems( $search );
 			$refresult = $productManager->searchItems( $refsearch );
+
+			$this->txBegin();
 
 			foreach( $result as $id => $product )
 			{
@@ -112,14 +113,14 @@ class ProductAddSuggestPerfData extends \Aimeos\MW\Setup\Task\Base
 				$num++;
 			}
 
+			$this->txCommit();
+
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
-			$refsearch->setSlice( $start + 1 );
+			$search->setSlice( $start, 1000 );
+			$refsearch->setSlice( $start + 1, 1000 );
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->txCommit();
 
 
 		$this->status( 'done' );

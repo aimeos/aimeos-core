@@ -100,16 +100,17 @@ class ProductAddPricePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, 1000 );
 
 		$start = 0;
 		$price = 100;
 		$value = +1;
 
-		$this->txBegin();
-
 		do
 		{
 			$result = $productManager->searchItems( $search );
+
+			$this->txBegin();
 
 			foreach( $result as $id => $item )
 			{
@@ -139,13 +140,13 @@ class ProductAddPricePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 				$price += $value;
 			}
 
+			$this->txCommit();
+
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->setSlice( $start, 1000 );
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->txCommit();
 
 
 		$this->status( 'done' );

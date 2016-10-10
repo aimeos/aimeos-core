@@ -67,7 +67,7 @@ class CatalogAddPromoPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 		$search = $catalogManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'catalog.level' ), $search->sort( '+', 'catalog.left' ) ) );
-
+		$search->setSlice( 0, 1000 );
 
 		$listItem = $catalogListManager->createItem();
 		$listItem->setTypeId( $typeItem->getId() );
@@ -108,7 +108,7 @@ class CatalogAddPromoPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->setSlice( $start, 1000 );
 
 			$this->txCommit();
 		}

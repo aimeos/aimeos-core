@@ -77,11 +77,10 @@ class CatalogAddProductPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerf
 		$listItem->setDomain( 'product' );
 
 
-		$this->txBegin();
-
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, 1000 );
 
 		$start = $pos = 0;
 
@@ -94,6 +93,8 @@ class CatalogAddProductPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerf
 			}
 
 			$result = $productManager->searchItems( $search );
+
+			$this->txBegin();
 
 			foreach( $result as $id => $item )
 			{
@@ -112,13 +113,13 @@ class CatalogAddProductPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerf
 				$catalogListManager->saveItem( $listItem, false );
 			}
 
+			$this->txCommit();
+
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->setSlice( $start, 1000 );
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->txCommit();
 
 
 		$this->status( 'done' );

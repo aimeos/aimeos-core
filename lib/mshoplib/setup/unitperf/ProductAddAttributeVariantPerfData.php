@@ -63,19 +63,20 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
+		$search->setSlice( 0, 1000 );
 
 		$listItem = $productListManager->createItem();
 		$listItem->setTypeId( $productListTypeItem->getId() );
 		$listItem->setDomain( 'attribute' );
 
 
-		$this->txBegin();
-
 		$start = 0;
 
 		do
 		{
 			$result = $productManager->searchItems( $search );
+
+			$this->txBegin();
 
 			foreach( $result as $id => $item )
 			{
@@ -104,13 +105,13 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 				}
 			}
 
+			$this->txCommit();
+
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start );
+			$search->setSlice( $start, 1000 );
 		}
 		while( $count == $search->getSliceSize() );
-
-		$this->txCommit();
 
 
 		$this->status( 'done' );
