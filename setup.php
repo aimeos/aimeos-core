@@ -98,7 +98,7 @@ function getConfig( array $confPaths, array $options )
 				usage();
 			}
 
-			$conf->set( $parts[0], $parts[1] );
+			$conf->set( str_replace( '\\', '/', $parts[0] ), $parts[1] );
 		}
 	}
 
