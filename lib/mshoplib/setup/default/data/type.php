@@ -42,6 +42,7 @@ return array(
 	),
 
 	'customer/lists/type' => array(
+		array( 'domain' => 'customer', 'code' => 'account', 'label' => 'Account', 'status' => 1 ),
 		array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'customer/group', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'order', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
