@@ -22,7 +22,7 @@ class MShopAddLocaleDataDefault extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddLocaleLangCurData', 'MShopAddLocaleData' );
+		return array( 'MShopAddLocaleLangCurData' );
 	}
 
 
@@ -33,7 +33,7 @@ class MShopAddLocaleDataDefault extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return array( 'MShopAddLocaleData' );
 	}
 
 
