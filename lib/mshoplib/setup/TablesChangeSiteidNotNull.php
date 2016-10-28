@@ -22,6 +22,10 @@ class TablesChangeSiteidNotNull extends \Aimeos\MW\Setup\Task\Base
 	';
 
 	private $mysql = array(
+		'madmin_job' => array(
+			'UPDATE "madmin_job" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
+			'ALTER TABLE "madmin_job" CHANGE COLUMN "siteid" "siteid" INTEGER NOT NULL',
+		),
 		'mshop_attribute' => array(
 			'UPDATE "mshop_attribute" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
 			'ALTER TABLE "mshop_attribute" CHANGE COLUMN "siteid" "siteid" INTEGER NOT NULL',
@@ -66,13 +70,13 @@ class TablesChangeSiteidNotNull extends \Aimeos\MW\Setup\Task\Base
 			'UPDATE "mshop_catalog_list_type" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
 			'ALTER TABLE "mshop_catalog_list_type" CHANGE COLUMN "siteid" "siteid" INTEGER NOT NULL',
 		),
-		'mshop_customer' => array(
-			'UPDATE "mshop_customer" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
-			'ALTER TABLE "mshop_customer" CHANGE COLUMN "siteid" "siteid" INTEGER NOT NULL',
+		'mshop_coupon' => array(
+			'UPDATE "mshop_coupon" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
+			'ALTER TABLE "mshop_coupon" CHANGE COLUMN "siteid" "siteid" INTEGER NOT NULL',
 		),
-		'mshop_customer_address' => array(
-			'UPDATE "mshop_customer_address" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
-			'ALTER TABLE "mshop_customer_address" CHANGE COLUMN "siteid" "siteid" INTEGER NOT NULL',
+		'mshop_coupon_code' => array(
+			'UPDATE "mshop_coupon_code" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
+			'ALTER TABLE "mshop_coupon_code" CHANGE COLUMN "siteid" "siteid" INTEGER NOT NULL',
 		),
 		'mshop_customer_list' => array(
 			'UPDATE "mshop_customer_list" SET "siteid" = ( SELECT "id" FROM "mshop_locale_site" WHERE "code" = \'default\' ) WHERE "siteid" IS NULL',
@@ -210,7 +214,7 @@ class TablesChangeSiteidNotNull extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'TablesCreateMShop' );
+		return array( 'TablesCreateMAdmin', 'TablesCreateMShop' );
 	}
 
 	/**
