@@ -50,10 +50,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * returned by this method.
 	 *
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
-	 * @param array|string|null $type Name/Names of the list item type or null for all
+	 * @param array|string|null $listtype Name/Names of the list item type or null for all
+	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function getListItems( $domain = null, $type = null )
+	public function getListItems( $domain = null, $listtype = null, $type = null )
 	{
 		if( $domain === null )
 		{
@@ -85,11 +86,13 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			$this->sortedLists[$domain] = true;
 		}
 
-		if( $type !== null )
+		$list = $this->listItems[$domain];
+
+		if( $listtype !== null )
 		{
 			$list = array();
 			$iface = '\\Aimeos\\MShop\\Common\\Item\\Typeid\\Iface';
-			$listTypes = ( is_array( $type ) ? $type : array( $type ) );
+			$listTypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 
 			foreach( $this->listItems[$domain] as $id => $item )
 			{
@@ -98,9 +101,18 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 				}
 			}
 		}
-		else
+
+		if( $type !== null )
 		{
-			$list = $this->listItems[$domain];
+			$iface = '\\Aimeos\\MShop\\Common\\Item\\Typeid\\Iface';
+			$types = ( is_array( $type ) ? $type : array( $type ) );
+
+			foreach( $list as $id => $item )
+			{
+				if( !( $item->getRefItem() instanceof $iface ) || !in_array( $item->getRefItem()->getType(), $types ) ) {
+					unset( $list[$id] );
+				}
+			}
 		}
 
 		return $list;

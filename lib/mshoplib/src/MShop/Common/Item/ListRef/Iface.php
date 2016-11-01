@@ -28,10 +28,11 @@ interface Iface
 	 * returned by this method.
 	 *
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
-	 * @param array|string|null $type Name/Names of the list item type or null for all
+	 * @param array|string|null $listtype Name/Names of the list item type or null for all
+	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function getListItems( $domain = null, $type = null );
+	public function getListItems( $domain = null, $listtype = null, $type = null );
 
 	/**
 	 * Returns the product, text, etc. items, optionally filtered by type.

@@ -43,7 +43,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$this->textItem1->setContent( 'test name' );
 		$this->textItem1->setId( 1 );
 
-		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) );
+		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'short' ) );
 		$this->textItem2->setContent( 'default name' );
 		$this->textItem2->setId( 2 );
 
@@ -85,7 +85,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( '' );
 
 		$this->assertEquals( $object->getName(), 'test label' );
-		$this->assertEquals( $this->object->getName(), 'default name' );
+		$this->assertEquals( $this->object->getName(), 'test name' );
 	}
 
 
@@ -123,7 +123,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetListItemsWithType()
+	public function testGetListItemsWithListtype()
 	{
 		$result = $this->object->getListItems( 'text', 'test' );
 		$expected = array( $this->listItem1->getId() => $this->listItem1 );
@@ -132,10 +132,31 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetListItemsWithTypes()
+	public function testGetListItemsWithListtypes()
 	{
 		$result = $this->object->getListItems( 'text', array( 'test' ) );
 		$expected = array( $this->listItem1->getId() => $this->listItem1 );
+
+		$this->assertEquals( $expected, $result );
+	}
+
+
+	public function testGetListItemsWithType()
+	{
+		$result = $this->object->getListItems( 'text', null, 'name' );
+		$expected = array( $this->listItem1->getId() => $this->listItem1 );
+
+		$this->assertEquals( $expected, $result );
+	}
+
+
+	public function testGetListItemsWithTypes()
+	{
+		$result = $this->object->getListItems( 'text', null, array( 'name', 'short' ) );
+		$expected = array(
+			$this->listItem1->getId() => $this->listItem1,
+			$this->listItem2->getId() => $this->listItem2,
+		);
 
 		$this->assertEquals( $expected, $result );
 	}
@@ -199,10 +220,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	public function testGetRefItemsWithType()
 	{
 		$result = $this->object->getRefItems( 'text', 'name' );
-		$expected = array(
-			$this->textItem2->getId() => $this->textItem2,
-			$this->textItem1->getId() => $this->textItem1,
-		);
+		$expected = array( $this->textItem1->getId() => $this->textItem1 );
 
 		$this->assertEquals( $expected, $result );
 		$this->assertEquals( array(), $this->object->getRefItems( 'text', 'undefined' ) );
@@ -211,10 +229,10 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetRefItemsWithTypes()
 	{
-		$result = $this->object->getRefItems( 'text', array( 'name' ) );
+		$result = $this->object->getRefItems( 'text', array( 'short', 'name' ) );
 		$expected = array(
-				$this->textItem2->getId() => $this->textItem2,
-				$this->textItem1->getId() => $this->textItem1,
+			$this->textItem2->getId() => $this->textItem2,
+			$this->textItem1->getId() => $this->textItem1,
 		);
 
 		$this->assertEquals( $expected, $result );
