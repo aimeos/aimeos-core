@@ -140,6 +140,37 @@ class Standard
 
 
 	/**
+	 * Returns the product articles and their bundle IDs for the given article ID
+	 *
+	 * @param string $prodId Product ID of the article whose stock level changed
+	 * @return array Associative list of article IDs as keys and the list of bundle IDs as values
+	 */
+	protected function getBundleMap( $prodId )
+	{
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
+
+		$search = $productManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.type.code', 'bundle' ),
+			$search->compare( '==', 'product.lists.domain', 'product' ),
+			$search->compare( '==', 'product.lists.refid', $prodId ),
+			$search->compare( '==', 'product.lists.type.code', 'default' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		return $productManager->searchItems( $search, array( 'product' ) );
+
+		foreach( $bundleItems as $bundleId => $bundleItem )
+		{
+			foreach( $bundleItem->getRefItems( 'product', null, 'default' ) as $id => $item ) {
+				$bundleMap[$id][] = $bundleId;
+			}
+		}
+	}
+
+
+	/**
 	 * Returns the context item object.
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item object
@@ -173,6 +204,29 @@ class Standard
 		$result = $manager->searchItems( $search );
 
 		return reset( $result );
+	}
+
+
+	/**
+	 * Returns the stock items for the given product IDs
+	 *
+	 * @param array $prodIds List of product IDs
+	 * @param string $whcode Warehouse code the stock items must belong to
+	 * @return \Aimeos\MShop\Product\Item\Stock\Iface[] Associative list of stock IDs as keys and stock items as values
+	 */
+	protected function getStockItems( array $prodIds, $whcode )
+	{
+		$stockManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock' );
+
+		$search = $stockManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.stock.parentid', $prodIds ),
+			$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		return $stockManager->searchItems( $search );
 	}
 
 
@@ -256,7 +310,6 @@ class Standard
 	protected function updateStock( \Aimeos\MShop\Order\Item\Iface $orderItem, $how = +1 )
 	{
 		$context = $this->getContext();
-		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$stockManager = \Aimeos\MShop\Factory::createManager( $context, 'product/stock' );
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
 
@@ -277,20 +330,12 @@ class Standard
 				{
 					$stockManager->increase( $item->getProductCode(), $item->getWarehouseCode(), $how * $item->getQuantity() );
 
-					// recalculate stock level of product bundles
-					$search = $productManager->createSearch();
-					$expr = array(
-						$search->compare( '==', 'product.type.code', 'bundle' ),
-						$search->compare( '==', 'product.lists.domain', 'product' ),
-						$search->compare( '==', 'product.lists.refid', $item->getProductId() ),
-						$search->compare( '==', 'product.lists.type.code', 'default' ),
-					);
-					$search->setConditions( $search->combine( '&&', $expr ) );
-					$search->setSlice( 0, 0x7fffffff );
-
-					$bundleItems = $productManager->searchItems( $search, array( 'product' ) );
-
-					$this->updateStockBundle( $bundleItems, $item->getWarehouseCode() );
+					switch( $item->getType() ) {
+						case 'default':
+							$this->updateStockBundle( $item->getProductId(), $item->getWarehouseCode() ); break;
+						case 'select':
+							$this->updateStockSelection( $item->getProductId(), $item->getWarehouseCode() ); break;
+					}
 				}
 
 				$count = count( $items );
@@ -312,38 +357,19 @@ class Standard
 	/**
 	 * Updates the stock levels of bundles for a specific warehouse
 	 *
-	 * @param array $bundleItems List of items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param string $prodId Unique product ID
 	 * @param string $whcode Unique warehouse code
 	 */
-	protected function updateStockBundle( array $bundleItems, $whcode )
+	protected function updateStockBundle( $prodId, $whcode )
 	{
-		$bundleMap = $prodIds = $stock = array();
-		$stockManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
-
-
-		foreach( $bundleItems as $bundleId => $bundleItem )
-		{
-			foreach( $bundleItem->getRefItems( 'product', null, 'default' ) as $id => $item )
-			{
-				$bundleMap[$id][] = $bundleId;
-				$prodIds[] = $id;
-			}
-		}
-
-		if( empty( $prodIds ) ) {
+		if( ( $bundleMap = $this->getBundleMap( $prodId ) ) === array() ) {
 			return;
 		}
 
 
-		$search = $stockManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'product.stock.parentid', $prodIds ),
-			$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
+		$bundleIds = $stock = array();
 
-		foreach( $stockManager->searchItems( $search ) as $stockItem )
+		foreach( $this->getStockItems( array_keys( $bundleMap ), $whcode ) as $stockItem )
 		{
 			if( isset( $bundleMap[$stockItem->getParentId()] ) && $stockItem->getStockLevel() !== null )
 			{
@@ -354,24 +380,20 @@ class Standard
 					} else {
 						$stock[$bundleId] = $stockItem->getStockLevel();
 					}
+
+					$bundleIds[$bundleId] = null;
 				}
 			}
 		}
-
 
 		if( empty( $stock ) ) {
 			return;
 		}
 
-		$search = $stockManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'product.stock.parentid', array_keys( $bundleItems ) ),
-			$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
 
-		foreach( $stockManager->searchItems( $search ) as $item )
+		$stockManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock' );
+
+		foreach( $this->getStockItems( array_keys( $bundleIds ), $whcode ) as $item )
 		{
 			if( isset( $stock[$item->getParentId()] ) )
 			{
@@ -379,5 +401,52 @@ class Standard
 				$stockManager->saveItem( $item );
 			}
 		}
+	}
+
+
+	/**
+	 * Updates the stock levels of selection products for a specific warehouse
+	 *
+	 * @param string $prodId Unique product ID
+	 * @param string $whcode Unique warehouse code
+	 */
+	protected function updateStockSelection( $prodId, $whcode )
+	{
+		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
+		$stockManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock' );
+
+		$sum = 0; $selStockItem = null;
+		$productItem = $productManager->getItem( $prodId, array( 'product' ) );
+
+		$prodIds = array_keys( $productItem->getRefItems( 'product', 'default', 'default' ) );
+		$prodIds[] = $prodId;
+
+		foreach( $this->getStockItems( $prodIds, $whcode ) as $stockItem )
+		{
+			if( $stockItem->getParentId() == $prodId ) {
+				$selStockItem = $stockItem;
+			}
+
+			$stock = $stockItem->getStockLevel();
+
+			if( $stock === null ) {
+				$sum = null;
+			} elseif( $sum !== null && $stock > 0 ) {
+				$sum += $stock;
+			}
+		}
+
+		if( $selStockItem === null )
+		{
+			$whManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock/warehouse' );
+			$whid = $whManager->findItem( $whcode )->getId();
+
+			$selStockItem = $stockManager->createItem();
+			$selStockItem->setWarehouseId( $whid );
+			$selStockItem->setParentId( $prodId );
+		}
+
+		$selStockItem->setStockLevel( $sum );
+		$stockManager->saveItem( $selStockItem, false );
 	}
 }
