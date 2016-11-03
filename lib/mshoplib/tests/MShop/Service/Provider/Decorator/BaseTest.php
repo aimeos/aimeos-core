@@ -31,7 +31,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 			->setConstructorArgs( array( $this->context, $item ) )
 			->setMethods( array( 'calcPrice', 'checkConfigBE', 'checkConfigFE', 'getConfigBE',
 				'getConfigFE', 'injectGlobalConfigBE', 'isAvailable', 'isImplemented', 'query',
-				'setCommunication', 'setConfigFE', 'updateAsync', 'updateSync' ) )
+				'cancel', 'capture', 'process', 'refund', 'setCommunication', 'setConfigFE',
+				'updateAsync', 'updateSync' ) )
 			->getMock();
 
 		$this->object = new TestBase( $this->mock, $this->context, $item );
@@ -120,6 +121,36 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testCancel()
+	{
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+
+		$this->mock->expects( $this->once() )->method( 'cancel' );
+
+		$this->object->cancel( $item );
+	}
+
+
+	public function testCapture()
+	{
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+
+		$this->mock->expects( $this->once() )->method( 'capture' );
+
+		$this->object->capture( $item );
+	}
+
+
+	public function testProcess()
+	{
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+
+		$this->mock->expects( $this->once() )->method( 'process' );
+
+		$this->object->process( $item, array( 'params' ) );
+	}
+
+
 	public function testQuery()
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
@@ -127,6 +158,16 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$this->mock->expects( $this->once() )->method( 'query' );
 
 		$this->object->query( $item );
+	}
+
+
+	public function testRefund()
+	{
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+
+		$this->mock->expects( $this->once() )->method( 'refund' );
+
+		$this->object->refund( $item );
 	}
 
 

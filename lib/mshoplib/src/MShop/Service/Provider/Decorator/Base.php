@@ -153,6 +153,30 @@ abstract class Base
 
 
 	/**
+	 * Cancels the authorization for the given order if supported.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return void
+	 */
+	public function cancel( \Aimeos\MShop\Order\Item\Iface $order )
+	{
+		$this->object->cancel( $order );
+	}
+
+
+	/**
+	 * Captures the money later on request for the given order if supported.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return void
+	 */
+	public function capture( \Aimeos\MShop\Order\Item\Iface $order )
+	{
+		$this->object->capture( $order );
+	}
+
+
+	/**
 	 * Processes the order
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object to process
@@ -162,6 +186,18 @@ abstract class Base
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() )
 	{
 		return $this->object->process( $order, $params );
+	}
+
+
+	/**
+	 * Refunds the money for the given order if supported.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return void
+	 */
+	public function refund( \Aimeos\MShop\Order\Item\Iface $order )
+	{
+		$this->object->refund( $order );
 	}
 
 
