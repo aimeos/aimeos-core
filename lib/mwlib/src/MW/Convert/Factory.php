@@ -32,13 +32,13 @@ class Factory
 			$list = array();
 
 			foreach( $keys as $key ) {
-				$list[] = static::createObject( $key );
+				$list[] = self::createObject( $key );
 			}
 
 			return new \Aimeos\MW\Convert\Compose( $list );
 		}
 
-		return static::createObject( $keys );;
+		return self::createObject( $keys );;
 	}
 
 

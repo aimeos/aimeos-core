@@ -35,7 +35,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param string $replace Replace whitespace characters by given string
 	 * @return string Escaped attribute string
 	 */
-	public function attr( $value, $trust = static::TAINT, $replace = '' );
+	public function attr( $value, $trust = self::TAINT, $replace = '' );
 
 	/**
 	 * Escapes strings for HTML.
@@ -44,7 +44,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
 	 * @return string Escaped HTML string
 	 */
-	public function html( $value, $trust = static::TAINT );
+	public function html( $value, $trust = self::TAINT );
 
 	/**
 	 * Escapes strings for XML.
@@ -54,7 +54,7 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
 	 * @return string Escaped XML string
 	 */
-	public function xml( $value, $trust = static::TAINT );
+	public function xml( $value, $trust = self::TAINT );
 
 	/**
 	 * Escapes strings for URLs.
@@ -65,5 +65,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param array $replace Associative list of characters or strings that should be replaced
 	 * @return string Escaped URI/URL string
 	 */
-	public function url( $value, $trust = static::TAINT, $strip = true, $replace = array( ' ' => '_' ) );
+	public function url( $value, $trust = self::TAINT, $strip = true, $replace = array( ' ' => '_' ) );
 }

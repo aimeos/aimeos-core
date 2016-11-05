@@ -79,7 +79,7 @@ class Factory
 		$iface = '\\Aimeos\\MShop\\Coupon\\Manager\\Iface';
 		$classname = '\\Aimeos\\MShop\\Coupon\\Manager\\' . $name;
 
-		$manager = static::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/coupon/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the coupon manager
@@ -155,6 +155,6 @@ class Factory
 		 * @see mshop/coupon/manager/decorators/excludes
 		 * @see mshop/coupon/manager/decorators/global
 		 */
-		return static::addManagerDecorators( $context, $manager, 'coupon' );
+		return self::addManagerDecorators( $context, $manager, 'coupon' );
 	}
 }

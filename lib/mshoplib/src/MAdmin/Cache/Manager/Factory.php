@@ -77,7 +77,7 @@ class Factory
 		$iface = '\\Aimeos\\MAdmin\\Cache\\Manager\\Iface';
 		$classname = '\\Aimeos\\MAdmin\\Cache\\Manager\\' . $name;
 
-		$manager = static::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** madmin/cache/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the cache manager
@@ -153,6 +153,6 @@ class Factory
 		 * @see madmin/cache/manager/decorators/excludes
 		 * @see madmin/cache/manager/decorators/global
 		 */
-		return static::addManagerDecorators( $context, $manager, 'cache' );
+		return self::addManagerDecorators( $context, $manager, 'cache' );
 	}
 }

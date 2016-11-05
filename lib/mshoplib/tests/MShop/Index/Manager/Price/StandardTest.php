@@ -32,7 +32,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		foreach( $result as $item ) {
-			static::$products[$item->getCode()] = $item;
+			self::$products[$item->getCode()] = $item;
 		}
 	}
 
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$product = clone static::$products['CNC'];
+		$product = clone self::$products['CNC'];
 
 		$prices = $product->getRefItems( 'price' );
 		if( ( $priceItem = reset( $prices ) ) === false ) {
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$priceItems = static::$products['CNC']->getRefItems( 'price', 'default' );
+		$priceItems = self::$products['CNC']->getRefItems( 'price', 'default' );
 		if( ( $priceItem = reset( $priceItems ) ) === false ) {
 			throw new \Exception( 'No price with type "default" available in product CNC' );
 		}

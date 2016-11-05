@@ -33,7 +33,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 */
 	public function __construct( $operator, array $list )
 	{
-		if( !isset( static::$operators[$operator] ) ) {
+		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
@@ -73,7 +73,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 */
 	public static function getOperators()
 	{
-		return array_keys( static::$operators );
+		return array_keys( self::$operators );
 	}
 
 
@@ -94,7 +94,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 		$string = $item->toString( $types, $translations, $plugins );
 
 		if( $this->operator == '!' && $string !== '' ) {
-			return ' ' . static::$operators[$this->operator] . ' ' . $string;
+			return ' ' . self::$operators[$this->operator] . ' ' . $string;
 		}
 
 		while( ( $item = next( $this->expressions ) ) !== false )
@@ -102,7 +102,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 			if( ( $itemstr = $item->toString( $types, $translations, $plugins ) ) !== '' )
 			{
 				if( $string !== '' ) {
-					$string .= ' ' . static::$operators[$this->operator] . ' ' . $itemstr;
+					$string .= ' ' . self::$operators[$this->operator] . ' ' . $itemstr;
 				} else {
 					$string = $itemstr;
 				}

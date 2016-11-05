@@ -79,7 +79,7 @@ class Factory
 		$iface = '\\Aimeos\\MShop\\Price\\Manager\\Iface';
 		$classname = '\\Aimeos\\MShop\\Price\\Manager\\' . $name;
 
-		$manager = static::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/price/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the price manager
@@ -155,7 +155,7 @@ class Factory
 		 * @see mshop/price/manager/decorators/excludes
 		 * @see mshop/price/manager/decorators/global
 		 */
-		return static::addManagerDecorators( $context, $manager, 'price' );
+		return self::addManagerDecorators( $context, $manager, 'price' );
 	}
 
 }

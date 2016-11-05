@@ -47,11 +47,11 @@ class TestHelperMw
 	 */
 	public static function getConfig()
 	{
-		if( !isset( static::$config ) ) {
-			static::$config = static::createConfig();
+		if( !isset( self::$config ) ) {
+			self::$config = self::createConfig();
 		}
 
-		return static::$config;
+		return self::$config;
 	}
 
 
@@ -62,11 +62,11 @@ class TestHelperMw
 	 */
 	public static function getDBManager()
 	{
-		if( !isset( static::$dbm ) ) {
-			static::$dbm = static::createDBManager();
+		if( !isset( self::$dbm ) ) {
+			self::$dbm = self::createDBManager();
 		}
 
-		return static::$dbm;
+		return self::$dbm;
 	}
 
 
@@ -94,6 +94,6 @@ class TestHelperMw
 	 */
 	private static function createDBManager()
 	{
-		return \Aimeos\MW\DB\Factory::createManager( static::getConfig(), 'DBAL' );
+		return \Aimeos\MW\DB\Factory::createManager( self::getConfig(), 'DBAL' );
 	}
 }

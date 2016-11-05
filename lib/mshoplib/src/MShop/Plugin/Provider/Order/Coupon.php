@@ -57,9 +57,9 @@ class Coupon
 
 		$notAvailable = array();
 
-		if( static::$lock === false )
+		if( self::$lock === false )
 		{
-			static::$lock = true;
+			self::$lock = true;
 
 			$couponManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon' );
 
@@ -86,7 +86,7 @@ class Coupon
 				}
 			}
 
-			static::$lock = false;
+			self::$lock = false;
 		}
 
 		if( count( $notAvailable ) > 0 )

@@ -18,7 +18,7 @@ class TestHelperJobs
 	 */
 	public static function bootstrap()
 	{
-		static::getAimeos();
+		self::getAimeos();
 		\Aimeos\MShop\Factory::setCache( false );
 	}
 
@@ -31,11 +31,11 @@ class TestHelperJobs
 	 */
 	public static function getContext( $site = 'unittest' )
 	{
-		if( !isset( static::$context[$site] ) ) {
-			static::$context[$site] = static::createContext( $site );
+		if( !isset( self::$context[$site] ) ) {
+			self::$context[$site] = self::createContext( $site );
 		}
 
-		return clone static::$context[$site];
+		return clone self::$context[$site];
 	}
 
 
@@ -46,14 +46,14 @@ class TestHelperJobs
 	 */
 	public static function getAimeos()
 	{
-		if( !isset( static::$aimeos ) )
+		if( !isset( self::$aimeos ) )
 		{
 			require_once dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-			static::$aimeos = new \Aimeos\Bootstrap( array(), false );
+			self::$aimeos = new \Aimeos\Bootstrap( array(), false );
 		}
 
-		return static::$aimeos;
+		return self::$aimeos;
 	}
 
 
@@ -64,7 +64,7 @@ class TestHelperJobs
 	 */
 	public static function getControllerPaths()
 	{
-		return static::getAimeos()->getCustomPaths( 'controller/jobs' );
+		return self::getAimeos()->getCustomPaths( 'controller/jobs' );
 	}
 
 
@@ -77,7 +77,7 @@ class TestHelperJobs
 	private static function createContext( $site )
 	{
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();
-		$aimeos = static::getAimeos();
+		$aimeos = self::getAimeos();
 
 
 		$paths = $aimeos->getConfigPaths();
@@ -119,7 +119,7 @@ class TestHelperJobs
 		$ctx->setLocale( $locale );
 
 
-		$view = static::createView( $conf );
+		$view = self::createView( $conf );
 		$ctx->setView( $view );
 
 
@@ -138,8 +138,8 @@ class TestHelperJobs
 	protected static function createView( \Aimeos\MW\Config\Iface $config )
 	{
 		$tmplpaths = array_merge_recursive(
-			static::getAimeos()->getCustomPaths( 'client/html/templates' ),
-			static::getAimeos()->getCustomPaths( 'controller/jobs/templates' )
+			self::getAimeos()->getCustomPaths( 'client/html/templates' ),
+			self::getAimeos()->getCustomPaths( 'controller/jobs/templates' )
 		);
 
 		$view = new \Aimeos\MW\View\Standard( $tmplpaths );

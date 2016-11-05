@@ -42,11 +42,11 @@ class Bootstrap
 
 		$this->manifests[$basedir] = $this->getManifestFile( $basedir );
 
-		static::$includePaths = $this->getIncludePaths();
+		self::$includePaths = $this->getIncludePaths();
 		$this->registerAutoloader();
 		$this->addDependencies( $extdirs );
 		$this->addManifests( $this->dependencies );
-		static::$includePaths = $this->getIncludePaths();
+		self::$includePaths = $this->getIncludePaths();
 	}
 
 
@@ -64,7 +64,7 @@ class Bootstrap
 			$fileName = substr( $fileName, 7 );
 		}
 
-		foreach( static::$includePaths as $path )
+		foreach( self::$includePaths as $path )
 		{
 			$file = $path . DIRECTORY_SEPARATOR . $fileName;
 
@@ -306,10 +306,10 @@ class Bootstrap
 	 */
 	protected function registerAutoloader()
 	{
-		if( static::$autoloader === false )
+		if( self::$autoloader === false )
 		{
 			spl_autoload_register( array( $this, 'autoload' ), true, false );
-			static::$autoloader = true;
+			self::$autoloader = true;
 		}
 
 		$ds = DIRECTORY_SEPARATOR;

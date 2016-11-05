@@ -34,7 +34,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 */
 	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $operator, $name, $value )
 	{
-		if( !isset( static::$operators[$operator] ) ) {
+		if( !isset( self::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
@@ -50,7 +50,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 */
 	public static function getOperators()
 	{
-		return array_keys( static::$operators );
+		return array_keys( self::$operators );
 	}
 
 
@@ -64,7 +64,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 */
 	protected function createTerm( $name, $type, $value )
 	{
-		return $name . ' ' . static::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
+		return $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
 	}
 
 

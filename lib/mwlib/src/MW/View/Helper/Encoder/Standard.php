@@ -46,7 +46,7 @@ class Standard
 	 * @param string $replace Replace whitespace characters by given string
 	 * @return string Escaped attribute string
 	 */
-	public function attr( $value, $trust = static::TAINT, $replace = '' )
+	public function attr( $value, $trust = self::TAINT, $replace = '' )
 	{
 		if( $replace != '' ) {
 			$value = str_replace( " \v\t\r\n\f", $replace, $value );
@@ -63,9 +63,9 @@ class Standard
 	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
 	 * @return string Escaped HTML string
 	 */
-	public function html( $value, $trust = static::TAINT )
+	public function html( $value, $trust = self::TAINT )
 	{
-		if( $trust === static::TRUST ) {
+		if( $trust === self::TRUST ) {
 			return $value;
 		}
 
@@ -81,9 +81,9 @@ class Standard
 	 * @param integer $trust Zero to distrust the input, one (1) if you trust in it
 	 * @return string Escaped XML string
 	 */
-	public function xml( $value, $trust = static::TAINT )
+	public function xml( $value, $trust = self::TAINT )
 	{
-		if( $trust === static::TRUST ) {
+		if( $trust === self::TRUST ) {
 			return $value;
 		}
 
@@ -100,7 +100,7 @@ class Standard
 	 * @param array $replace Associative list of characters or strings that should be replaced
 	 * @return string Escaped URI/URL string
 	 */
-	public function url( $value, $trust = static::TAINT, $strip = true, $replace = array( ' ' => '_' ) )
+	public function url( $value, $trust = self::TAINT, $strip = true, $replace = array( ' ' => '_' ) )
 	{
 		if( $strip !== false ) {
 			$value = strip_tags( $value );

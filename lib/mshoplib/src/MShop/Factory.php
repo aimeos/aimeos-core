@@ -35,15 +35,15 @@ class Factory
 		if( $id !== null )
 		{
 			if( $path !== null ) {
-				static::$managers[$id][$path] = null;
+				self::$managers[$id][$path] = null;
 			} else {
-				static::$managers[$id] = array();
+				self::$managers[$id] = array();
 			}
 
 			return;
 		}
 
-		static::$managers = array();
+		self::$managers = array();
 	}
 
 
@@ -72,7 +72,7 @@ class Factory
 
 		$id = (string) $context;
 
-		if( static::$cache === false || !isset( static::$managers[$id][$path] ) )
+		if( self::$cache === false || !isset( self::$managers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -88,7 +88,7 @@ class Factory
 			}
 
 
-			if( static::$cache === false || !isset( static::$managers[$id][$name] ) )
+			if( self::$cache === false || !isset( self::$managers[$id][$name] ) )
 			{
 				$factory = '\\Aimeos\\MShop\\' . ucwords( $name ) . '\\Manager\\Factory';
 
@@ -102,7 +102,7 @@ class Factory
 					throw new \Aimeos\MShop\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				static::$managers[$id][$name] = $manager;
+				self::$managers[$id][$name] = $manager;
 			}
 
 
@@ -110,15 +110,15 @@ class Factory
 			{
 				$tmpname = $name . '/' . $part;
 
-				if( static::$cache === false || !isset( static::$managers[$id][$tmpname] ) ) {
-					static::$managers[$id][$tmpname] = static::$managers[$id][$name]->getSubManager( $part );
+				if( self::$cache === false || !isset( self::$managers[$id][$tmpname] ) ) {
+					self::$managers[$id][$tmpname] = self::$managers[$id][$name]->getSubManager( $part );
 				}
 
 				$name = $tmpname;
 			}
 		}
 
-		return static::$managers[$id][$path];
+		return self::$managers[$id][$path];
 	}
 
 
@@ -135,7 +135,7 @@ class Factory
 	static public function injectManager( \Aimeos\MShop\Context\Item\Iface $context, $path, \Aimeos\MShop\Common\Manager\Iface $object )
 	{
 		$id = (string) $context;
-		static::$managers[$id][$path] = $object;
+		self::$managers[$id][$path] = $object;
 	}
 
 
@@ -147,8 +147,8 @@ class Factory
 	 */
 	static public function setCache( $value )
 	{
-		$old = static::$cache;
-		static::$cache = (boolean) $value;
+		$old = self::$cache;
+		self::$cache = (boolean) $value;
 
 		return $old;
 	}

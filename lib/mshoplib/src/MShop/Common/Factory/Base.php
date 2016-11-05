@@ -33,7 +33,7 @@ abstract class Base
 	 */
 	public static function injectManager( $classname, \Aimeos\MShop\Common\Manager\Iface $manager = null )
 	{
-		static::$objects[$classname] = $manager;
+		self::$objects[$classname] = $manager;
 	}
 
 
@@ -120,15 +120,15 @@ abstract class Base
 		}
 
 		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
-		$manager = static::addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/global', array() );
-		$manager = static::addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', array() );
-		$manager = static::addDecorators( $context, $manager, $decorators, $classprefix );
+		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		return $manager;
 	}
@@ -144,8 +144,8 @@ abstract class Base
 	 */
 	protected static function createManagerBase( \Aimeos\MShop\Context\Item\Iface $context, $classname, $interface )
 	{
-		if( isset( static::$objects[$classname] ) ) {
-			return static::$objects[$classname];
+		if( isset( self::$objects[$classname] ) ) {
+			return self::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {

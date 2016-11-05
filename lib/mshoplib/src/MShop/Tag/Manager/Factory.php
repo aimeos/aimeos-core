@@ -79,7 +79,7 @@ class Factory
 		$iface = '\\Aimeos\\MShop\\Tag\\Manager\\Iface';
 		$classname = '\\Aimeos\\MShop\\Tag\\Manager\\' . $name;
 
-		$manager = static::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/tag/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the tag manager
@@ -155,6 +155,6 @@ class Factory
 		 * @see mshop/tag/manager/decorators/excludes
 		 * @see mshop/tag/manager/decorators/global
 		 */
-		return static::addManagerDecorators( $context, $manager, 'tag' );
+		return self::addManagerDecorators( $context, $manager, 'tag' );
 	}
 }

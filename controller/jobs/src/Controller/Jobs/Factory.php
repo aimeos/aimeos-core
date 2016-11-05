@@ -84,7 +84,7 @@ class Factory
 	static public function getControllers( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, array $cntlPaths )
 	{
 		$cntlList = array();
-		$subFolder = trim( str_replace( '\\', '/', static::$prefix ), '/' );
+		$subFolder = trim( str_replace( '\\', '/', self::$prefix ), '/' );
 
 		if( strncmp( $subFolder, 'Aimeos' . '/', 7 ) === 0 ) {
 			$subFolder = substr( $subFolder, 7 );
@@ -99,7 +99,7 @@ class Factory
 				if( is_dir( $path ) )
 				{
 					$it = new \DirectoryIterator( $path );
-					$list = static::createControllers( $it, $context, $aimeos );
+					$list = self::createControllers( $it, $context, $aimeos );
 
 					$cntlList = array_merge( $cntlList, $list );
 				}
@@ -133,14 +133,14 @@ class Factory
 				$name = strtolower( $entry->getBaseName() );
 				$it = new \DirectoryIterator( $entry->getPathName() );
 				$pref = ( $prefix !== '' ? $prefix . '/' : '' ) . $name;
-				$subList = static::createControllers( $it, $context, $aimeos, $pref );
+				$subList = self::createControllers( $it, $context, $aimeos, $pref );
 
 				$list = array_merge( $list, $subList );
 			}
 			else if( $prefix !== '' && $entry->getType() === 'file'
 				&& ( $name = $entry->getBaseName( '.php' ) ) === 'Factory' )
 			{
-				$list[$prefix] = static::createController( $context, $aimeos, $prefix );
+				$list[$prefix] = self::createController( $context, $aimeos, $prefix );
 			}
 		}
 

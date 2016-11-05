@@ -78,7 +78,7 @@ class Factory
 		$iface = '\\Aimeos\\MShop\\Locale\\Manager\\Iface';
 		$classname = '\\Aimeos\\MShop\\Locale\\Manager\\' . $name;
 
-		$manager = static::createManagerBase( $context, $classname, $iface );
+		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/locale/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the locale manager
@@ -154,7 +154,7 @@ class Factory
 		 * @see mshop/locale/manager/decorators/excludes
 		 * @see mshop/locale/manager/decorators/global
 		 */
-		return static::addManagerDecorators( $context, $manager, 'locale' );
+		return self::addManagerDecorators( $context, $manager, 'locale' );
 	}
 
 }
