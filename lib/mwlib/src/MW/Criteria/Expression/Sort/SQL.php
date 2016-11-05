@@ -37,7 +37,7 @@ class SQL
 	 */
 	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $operator, $name )
 	{
-		if( !isset( self::$operators[$operator] ) ) {
+		if( !isset( static::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
@@ -65,7 +65,7 @@ class SQL
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$operators );
+		return array_keys( static::$operators );
 	}
 
 
@@ -102,7 +102,7 @@ class SQL
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		return $transname . ' ' . self::$operators[$this->operator];
+		return $transname . ' ' . static::$operators[$this->operator];
 	}
 
 

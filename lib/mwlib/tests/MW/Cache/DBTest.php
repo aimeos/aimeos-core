@@ -12,9 +12,9 @@ class DBTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		self::$dbm = \TestHelperMw::getDBManager();
+		static::$dbm = \TestHelperMw::getDBManager();
 
-		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+		if( !( static::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
 			return;
 		}
 
@@ -36,38 +36,38 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		$tagTable->addForeignKeyConstraint( 'mw_cache_test', array( 'tid', 'tsiteid' ), array( 'id', 'siteid' ), array( 'onDelete' => 'CASCADE' ) );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 
 		foreach( $schema->toSQL( $conn->getRawObject()->getDatabasePlatform() ) as $sql ) {
 			$conn->create( $sql )->execute()->finish();
 		}
 
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 	}
 
 
 	public static function tearDownAfterClass()
 	{
-		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		if( static::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
-			$conn = self::$dbm->acquire();
+			$conn = static::$dbm->acquire();
 
 			$conn->create( 'DROP TABLE "mw_cache_tag_test"' )->execute()->finish();
 			$conn->create( 'DROP TABLE "mw_cache_test"' )->execute()->finish();
 
-			self::$dbm->release( $conn );
+			static::$dbm->release( $conn );
 		}
 	}
 
 
 	protected function setUp()
 	{
-		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+		if( !( static::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
 			$this->markTestSkipped( 'No DBAL database manager configured' );
 		}
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 
 		$sql = 'INSERT INTO "mw_cache_test" ("id", "siteid", "expire", "value") VALUES (\'t:1\', 1, NULL, \'test 1\')';
 		$conn->create( $sql )->execute()->finish();
@@ -78,7 +78,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		$sql = 'INSERT INTO "mw_cache_tag_test" ("tid", "tsiteid", "tname") VALUES (\'t:1\', 1, \'tag:1\')';
 		$conn->create( $sql )->execute()->finish();
 
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 
 		$this->config = array( 'siteid' => 1 );
@@ -116,20 +116,20 @@ class DBTest extends \PHPUnit_Framework_TestCase
 			',
 		);
 
-		$this->object = new \Aimeos\MW\Cache\DB( $this->config, self::$dbm );
+		$this->object = new \Aimeos\MW\Cache\DB( $this->config, static::$dbm );
 	}
 
 
 	public function tearDown()
 	{
-		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		if( static::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
-			$conn = self::$dbm->acquire();
+			$conn = static::$dbm->acquire();
 
 			$conn->create( 'DELETE FROM "mw_cache_tag_test"' )->execute()->finish();
 			$conn->create( 'DELETE FROM "mw_cache_test"' )->execute()->finish();
 
-			self::$dbm->release( $conn );
+			static::$dbm->release( $conn );
 		}
 	}
 
@@ -137,7 +137,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	public function testConstructorNoConfig()
 	{
 		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
-		new \Aimeos\MW\Cache\DB( array(), self::$dbm );
+		new \Aimeos\MW\Cache\DB( array(), static::$dbm );
 	}
 
 
@@ -147,7 +147,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		unset( $config['sql'] );
 
 		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
-		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
+		new \Aimeos\MW\Cache\DB( $config, static::$dbm );
 	}
 
 
@@ -157,7 +157,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		unset( $config['search'] );
 
 		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
-		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
+		new \Aimeos\MW\Cache\DB( $config, static::$dbm );
 	}
 
 
@@ -167,7 +167,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		unset( $config['sql']['delete'] );
 
 		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
-		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
+		new \Aimeos\MW\Cache\DB( $config, static::$dbm );
 	}
 
 
@@ -177,7 +177,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		unset( $config['search']['cache.id'] );
 
 		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
-		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
+		new \Aimeos\MW\Cache\DB( $config, static::$dbm );
 	}
 
 
@@ -186,9 +186,9 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		$this->object->cleanup();
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT "id" FROM "mw_cache_test"' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'id' => 't:1' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
@@ -199,16 +199,16 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->delete( 't:1' );
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertFalse( $row );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT "id" FROM "mw_cache_test"' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'id' => 't:2' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
@@ -219,9 +219,9 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->deleteList( array( 't:1', 't:2' ) );
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_test"' )->execute()->fetch();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertFalse( $row );
 	}
@@ -231,16 +231,16 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->deleteByTags( array( 'tag:1' ) );
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertFalse( $row );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT "id" FROM "mw_cache_test"' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'id' => 't:2' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
@@ -251,16 +251,16 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->flush();
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertFalse( $row );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$row = $conn->create( 'SELECT "id" FROM "mw_cache_test"' )->execute()->fetch();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertFalse( $row );
 	}
@@ -295,18 +295,18 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		$this->object->set( 't:3', 'test 3', array( 'tag:2', 'tag:3' ), '2100-01-01 00:00:00' );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:3\' ORDER BY "tname"' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
 		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:3\'' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$expected = array(
 			'expire' => '2100-01-01 00:00:00',
@@ -328,26 +328,26 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		$this->object->setList( $pairs, $tags, $expires );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:3\' ORDER BY "tname"' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'tname' => 'tag:2' ), $result->fetch() );
 		$this->assertEquals( array( 'tname' => 'tag:3' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT "tname" FROM "mw_cache_tag_test" WHERE "tid" = \'t:2\'' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$this->assertEquals( array( 'tname' => 'tag:4' ), $result->fetch() );
 		$this->assertFalse( $result->fetch() );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:3\'' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$expected = array(
 			'expire' => '2100-01-01 00:00:00',
@@ -359,9 +359,9 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse( $result->fetch() );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:2\'' )->execute();
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 
 		$expected = array(
 			'expire' => null,

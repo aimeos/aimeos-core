@@ -79,7 +79,7 @@ class Factory
 		$iface = '\\Aimeos\\MShop\\Text\\Manager\\Iface';
 		$classname = '\\Aimeos\\MShop\\Text\\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = static::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/text/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the text manager
@@ -155,6 +155,6 @@ class Factory
 		 * @see mshop/text/manager/decorators/excludes
 		 * @see mshop/text/manager/decorators/global
 		 */
-		return self::addManagerDecorators( $context, $manager, 'text' );
+		return static::addManagerDecorators( $context, $manager, 'text' );
 	}
 }

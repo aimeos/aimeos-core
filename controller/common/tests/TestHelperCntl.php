@@ -18,7 +18,7 @@ class TestHelperCntl
 	 */
 	public static function bootstrap()
 	{
-		self::getAimeos();
+		static::getAimeos();
 		\Aimeos\MShop\Factory::setCache( false );
 	}
 
@@ -31,11 +31,11 @@ class TestHelperCntl
 	 */
 	public static function getContext( $site = 'unittest' )
 	{
-		if( !isset( self::$context[$site] ) ) {
-			self::$context[$site] = self::createContext( $site );
+		if( !isset( static::$context[$site] ) ) {
+			static::$context[$site] = static::createContext( $site );
 		}
 
-		return clone self::$context[$site];
+		return clone static::$context[$site];
 	}
 
 
@@ -46,14 +46,14 @@ class TestHelperCntl
 	 */
 	public static function getAimeos()
 	{
-		if( !isset( self::$aimeos ) )
+		if( !isset( static::$aimeos ) )
 		{
 			require_once dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-			self::$aimeos = new \Aimeos\Bootstrap( array(), false );
+			static::$aimeos = new \Aimeos\Bootstrap( array(), false );
 		}
 
-		return self::$aimeos;
+		return static::$aimeos;
 	}
 
 
@@ -66,7 +66,7 @@ class TestHelperCntl
 	private static function createContext( $site )
 	{
 		$ctx = new \Aimeos\MShop\Context\Item\Standard();
-		$aimeos = self::getAimeos();
+		$aimeos = static::getAimeos();
 
 
 		$paths = $aimeos->getConfigPaths();

@@ -11,9 +11,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public static function setUpBeforeClass()
 	{
-		self::$dbm = \TestHelperMw::getDBManager();
+		static::$dbm = \TestHelperMw::getDBManager();
 
-		if( !( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
+		if( !( static::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL ) ) {
 			return;
 		}
 
@@ -28,25 +28,25 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$table->setPrimaryKey( array( 'id' ) );
 
 
-		$conn = self::$dbm->acquire();
+		$conn = static::$dbm->acquire();
 
 		foreach( $schema->toSQL( $conn->getRawObject()->getDatabasePlatform() ) as $sql ) {
 			$conn->create( $sql )->execute()->finish();
 		}
 
-		self::$dbm->release( $conn );
+		static::$dbm->release( $conn );
 	}
 
 
 	public static function tearDownAfterClass()
 	{
-		if( self::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
+		if( static::$dbm instanceof \Aimeos\MW\DB\Manager\DBAL )
 		{
-			$conn = self::$dbm->acquire();
+			$conn = static::$dbm->acquire();
 
 			$conn->create( 'DROP TABLE "mw_mqueue_test"' )->execute()->finish();
 
-			self::$dbm->release( $conn );
+			static::$dbm->release( $conn );
 		}
 	}
 

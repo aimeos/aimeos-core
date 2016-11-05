@@ -33,7 +33,7 @@ class Factory
 	 */
 	public static function injectController( $classname, \Aimeos\Controller\Common\Media\Iface $controller = null )
 	{
-		self::$objects[$classname] = $controller;
+		static::$objects[$classname] = $controller;
 	}
 
 
@@ -92,8 +92,8 @@ class Factory
 		$iface = '\\Aimeos\\Controller\\Common\\Media\\Iface';
 		$classname = '\\Aimeos\\Controller\\Common\\Media\\' . $name;
 
-		if( isset( self::$objects[$classname] ) ) {
-			return self::$objects[$classname];
+		if( isset( static::$objects[$classname] ) ) {
+			return static::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {

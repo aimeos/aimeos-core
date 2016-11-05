@@ -35,15 +35,15 @@ class Factory
 		if( $id !== null )
 		{
 			if( $path !== null ) {
-				self::$managers[$id][$path] = null;
+				static::$managers[$id][$path] = null;
 			} else {
-				self::$managers[$id] = array();
+				static::$managers[$id] = array();
 			}
 
 			return;
 		}
 
-		self::$managers = array();
+		static::$managers = array();
 	}
 
 
@@ -71,7 +71,7 @@ class Factory
 
 		$id = (string) $context;
 
-		if( !isset( self::$managers[$id][$path] ) )
+		if( !isset( static::$managers[$id][$path] ) )
 		{
 			$parts = explode( '/', $path );
 
@@ -87,7 +87,7 @@ class Factory
 			}
 
 
-			if( !isset( self::$managers[$id][$name] ) )
+			if( !isset( static::$managers[$id][$name] ) )
 			{
 				$factory = '\\Aimeos\\MAdmin\\' . ucwords( $name ) . '\\Manager\\Factory';
 
@@ -101,7 +101,7 @@ class Factory
 					throw new \Aimeos\MAdmin\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				self::$managers[$id][$name] = $manager;
+				static::$managers[$id][$name] = $manager;
 			}
 
 
@@ -109,15 +109,15 @@ class Factory
 			{
 				$tmpname = $name . '/' . $part;
 
-				if( !isset( self::$managers[$id][$tmpname] ) ) {
-					self::$managers[$id][$tmpname] = self::$managers[$id][$name]->getSubManager( $part );
+				if( !isset( static::$managers[$id][$tmpname] ) ) {
+					static::$managers[$id][$tmpname] = static::$managers[$id][$name]->getSubManager( $part );
 				}
 
 				$name = $tmpname;
 			}
 		}
 
-		return self::$managers[$id][$path];
+		return static::$managers[$id][$path];
 	}
 
 
@@ -129,8 +129,8 @@ class Factory
 	 */
 	static public function setCache( $value )
 	{
-		$old = self::$cache;
-		self::$cache = (boolean) $value;
+		$old = static::$cache;
+		static::$cache = (boolean) $value;
 
 		return $old;
 	}

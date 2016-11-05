@@ -45,7 +45,7 @@ abstract class Base
 	 */
 	public static function createFunction( $name, array $params )
 	{
-		return $name . '(' . self::createSignature( $params ) . ')';
+		return $name . '(' . static::createSignature( $params ) . ')';
 	}
 
 
@@ -68,7 +68,7 @@ abstract class Base
 				case 'double':
 					$list[] = $param; break;
 				case 'array':
-					$list[] = '[' . self::createSignature( $param ) . ']'; break;
+					$list[] = '[' . static::createSignature( $param ) . ']'; break;
 				default:
 					$list[] = '"' . $param . '"';
 			}

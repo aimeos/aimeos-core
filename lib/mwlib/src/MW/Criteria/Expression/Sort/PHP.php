@@ -35,7 +35,7 @@ class PHP
 	 */
 	public function __construct( $operator, $name )
 	{
-		if( !isset( self::$operators[$operator] ) ) {
+		if( !isset( static::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
@@ -62,7 +62,7 @@ class PHP
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$operators );
+		return array_keys( static::$operators );
 	}
 
 
@@ -99,7 +99,7 @@ class PHP
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		return self::$operators[$this->operator] . '(' . $transname . ');';
+		return static::$operators[$this->operator] . '(' . $transname . ');';
 	}
 
 

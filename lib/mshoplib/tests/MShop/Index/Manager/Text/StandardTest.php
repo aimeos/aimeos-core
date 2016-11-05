@@ -33,7 +33,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		foreach( $result as $item ) {
-			self::$products[$item->getCode()] = $item;
+			static::$products[$item->getCode()] = $item;
 		}
 	}
 
@@ -116,7 +116,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$product = self::$products['CNC'];
+		$product = static::$products['CNC'];
 
 		$texts = $product->getRefItems( 'text' );
 		if( ( $textItem = reset( $texts ) ) === false ) {
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
+		$textItems = static::$products['CNC']->getRefItems( 'text', 'name' );
 		if( ( $textItem = reset( $textItems ) ) === false ) {
 			throw new \Exception( 'No text with type "name" available in product CNC' );
 		}

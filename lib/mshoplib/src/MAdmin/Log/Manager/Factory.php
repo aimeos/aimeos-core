@@ -77,7 +77,7 @@ class Factory
 		$iface = '\\Aimeos\\MAdmin\\Log\\Manager\\Iface';
 		$classname = '\\Aimeos\\MAdmin\\Log\\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = static::createManagerBase( $context, $classname, $iface );
 
 		/** madmin/log/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the log manager
@@ -153,6 +153,6 @@ class Factory
 		 * @see madmin/log/manager/decorators/excludes
 		 * @see madmin/log/manager/decorators/global
 		 */
-		return self::addManagerDecorators( $context, $manager, 'log' );
+		return static::addManagerDecorators( $context, $manager, 'log' );
 	}
 }

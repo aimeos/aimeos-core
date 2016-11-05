@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		foreach( $result as $item )
 		{
-			self::$products[$item->getCode()] = $item;
+			static::$products[$item->getCode()] = $item;
 			$manager->saveItem( $item );
 		}
 	}
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSaveDeleteItem()
 	{
-		$item = self::$products['CNE'];
+		$item = static::$products['CNE'];
 
 		$context = $this->context;
 		$dbm = $context->getDatabaseManager();
@@ -468,7 +468,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
 
-		$priceItems = self::$products['CNC']->getRefItems( 'price', 'default' );
+		$priceItems = static::$products['CNC']->getRefItems( 'price', 'default' );
 		if( ( $priceItem = reset( $priceItems ) ) === false ) {
 			throw new \Exception( 'No price with type "default" available in product CNC' );
 		}
@@ -520,7 +520,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$context->getConfig()->set( 'mshop/index/manager/text/name', 'Standard' );
 		$object = new \Aimeos\MShop\Index\Manager\Standard( $context );
 
-		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
+		$textItems = static::$products['CNC']->getRefItems( 'text', 'name' );
 		if( ( $textItem = reset( $textItems ) ) === false ) {
 			throw new \Exception( 'No text with type "name" available in product CNC' );
 		}

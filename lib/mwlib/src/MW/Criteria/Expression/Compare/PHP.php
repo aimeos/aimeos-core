@@ -32,7 +32,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 */
 	public function __construct( $operator, $name, $value )
 	{
-		if( !isset( self::$operators[$operator] ) ) {
+		if( !isset( static::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
@@ -47,7 +47,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$operators );
+		return array_keys( static::$operators );
 	}
 
 
@@ -62,7 +62,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	protected function createTerm( $name, $type, $value )
 	{
 		$escaped = $this->escape( $this->getOperator(), $type, $value );
-		return $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $escaped;
+		return $name . ' ' . static::$operators[$this->getOperator()] . ' ' . $escaped;
 	}
 
 

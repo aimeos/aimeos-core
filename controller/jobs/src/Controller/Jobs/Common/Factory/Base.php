@@ -33,7 +33,7 @@ abstract class Base
 	 */
 	public static function injectController( $classname, \Aimeos\Controller\Jobs\Iface $controller = null )
 	{
-		self::$objects[$classname] = $controller;
+		static::$objects[$classname] = $controller;
 	}
 
 
@@ -129,15 +129,15 @@ abstract class Base
 		}
 
 		$classprefix = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\';
-		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
+		$controller = static::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', array() );
-		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
+		$controller = static::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\Controller\\Jobs\\' . ucfirst( $localClass ) . '\\Decorator\\';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', array() );
-		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
+		$controller = static::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
 		return $controller;
 	}
@@ -155,8 +155,8 @@ abstract class Base
 	protected static function createControllerBase( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		$classname, $interface )
 	{
-		if( isset( self::$objects[$classname] ) ) {
-			return self::$objects[$classname];
+		if( isset( static::$objects[$classname] ) ) {
+			return static::$objects[$classname];
 		}
 
 		if( class_exists( $classname ) === false ) {

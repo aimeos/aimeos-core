@@ -79,7 +79,7 @@ class Factory
 		$iface = '\\Aimeos\\MShop\\Service\\Manager\\Iface';
 		$classname = '\\Aimeos\\MShop\\Service\\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = static::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/service/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the service manager
@@ -155,7 +155,7 @@ class Factory
 		 * @see mshop/service/manager/decorators/excludes
 		 * @see mshop/service/manager/decorators/global
 		 */
-		return self::addManagerDecorators( $context, $manager, 'service' );
+		return static::addManagerDecorators( $context, $manager, 'service' );
 	}
 
 }

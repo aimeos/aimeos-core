@@ -33,7 +33,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 */
 	public function __construct( $operator, array $list )
 	{
-		if( !isset( self::$operators[$operator] ) ) {
+		if( !isset( static::$operators[$operator] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
@@ -73,7 +73,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 */
 	public static function getOperators()
 	{
-		return array_keys( self::$operators );
+		return array_keys( static::$operators );
 	}
 
 
@@ -92,7 +92,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 		}
 
 		if( $this->operator == '!' ) {
-			return ' ' . self::$operators[$this->operator] . ' ' . $item->toString( $types, $translations, $plugins );
+			return ' ' . static::$operators[$this->operator] . ' ' . $item->toString( $types, $translations, $plugins );
 		}
 
 		$string = $item->toString( $types, $translations, $plugins );
@@ -100,7 +100,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 		while( ( $item = next( $this->expressions ) ) !== false )
 		{
 			if( ( $itemstr = $item->toString( $types, $translations, $plugins ) ) !== '' ) {
-				$string .= ' ' . self::$operators[$this->operator] . ' ' . $itemstr;
+				$string .= ' ' . static::$operators[$this->operator] . ' ' . $itemstr;
 			}
 		}
 

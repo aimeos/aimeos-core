@@ -77,7 +77,7 @@ class Factory
 		$iface = '\\Aimeos\\MAdmin\\Job\\Manager\\Iface';
 		$classname = '\\Aimeos\\MAdmin\\Job\\Manager\\' . $name;
 
-		$manager = self::createManagerBase( $context, $classname, $iface );
+		$manager = static::createManagerBase( $context, $classname, $iface );
 
 		/** madmin/job/manager/decorators/excludes
 		 * Excludes decorators added by the "common" option from the job manager
@@ -153,6 +153,6 @@ class Factory
 		 * @see madmin/job/manager/decorators/excludes
 		 * @see madmin/job/manager/decorators/global
 		 */
-		return self::addManagerDecorators( $context, $manager, 'job' );
+		return static::addManagerDecorators( $context, $manager, 'job' );
 	}
 }
