@@ -265,7 +265,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$couponCodeStub->expects( $this->once() )->method( 'increase' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		\Aimeos\MShop\Factory::injectManager( $context, 'coupon/code', $couponCodeStub );
 
@@ -500,7 +500,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$orderProductStub->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->throwException( new \Exception() ) );
+			->will( $this->throwException( new \RuntimeException() ) );
 
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/product', $orderProductStub );
 
@@ -605,7 +605,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( sprintf( 'No order item for payment date "%1$s" found', $datepayment ) );
+			throw new \RuntimeException( sprintf( 'No order item for payment date "%1$s" found', $datepayment ) );
 		}
 
 		return $item;
