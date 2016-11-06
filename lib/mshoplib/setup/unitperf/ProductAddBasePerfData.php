@@ -136,7 +136,7 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 		$types = $manager->searchItems( $search );
 
 		if( ( $listTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product list type item not found' );
+			throw new \RuntimeException( 'Product list type item not found' );
 		}
 
 
@@ -173,7 +173,7 @@ class ProductAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $prefix ) );
+			throw new \RuntimeException( sprintf( 'No type item for "%1$s/%2$s" in "%3$s" found', $domain, $code, $prefix ) );
 		}
 
 		return $item;

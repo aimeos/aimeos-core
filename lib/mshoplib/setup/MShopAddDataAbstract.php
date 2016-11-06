@@ -364,7 +364,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		foreach( $data as $entry )
 		{
 			if( !isset( $codes[$entry['code']] ) ) {
-				throw new \Exception( sprintf( 'No product for code "%1$s" found', $entry['code'] ) );
+				throw new \RuntimeException( sprintf( 'No product for code "%1$s" found', $entry['code'] ) );
 			}
 
 			$listItem->setId( null );
@@ -447,7 +447,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( sprintf( 'No type item found for "%1$s/%2$s" using "%3$s"', $domain, $type, $name ) );
+			throw new \RuntimeException( sprintf( 'No type item found for "%1$s/%2$s" using "%3$s"', $domain, $type, $name ) );
 		}
 
 		return $item->getId();

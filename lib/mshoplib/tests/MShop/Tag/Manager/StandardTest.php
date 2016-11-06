@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No tag item found' );
+			throw new \RuntimeException( 'No tag item found' );
 		}
 
 		$item->setId( null );
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \Exception( sprintf( 'No product tag item found for label "%1$s".', 'herb' ) );
+			throw new \RuntimeException( sprintf( 'No product tag item found for label "%1$s".', 'herb' ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );

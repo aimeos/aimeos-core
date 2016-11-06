@@ -670,7 +670,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$products = $manager->searchItems( $search );
 
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new \Exception( 'No product found' );
+			throw new \RuntimeException( 'No product found' );
 		}
 
 		$return = $productCopy->copyFrom( $product );

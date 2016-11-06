@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \Exception( sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ) );
+			throw new \RuntimeException( sprintf( 'No order found in shop_order_invoice with statuspayment "%1$s"', $status ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No order item found.' );
+			throw new \RuntimeException( 'No order item found.' );
 		}
 
 		$item->setId( null );
@@ -223,7 +223,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No order item found.' );
+			throw new \RuntimeException( 'No order item found.' );
 		}
 
 		$item->setId( null );
@@ -250,7 +250,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->deleteItem( $item->getId() );
 
 		if( ( $statusItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No status item found' );
+			throw new \RuntimeException( 'No status item found' );
 		}
 
 		$this->assertEquals( 1, count( $results ) );
@@ -272,7 +272,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No order item found.' );
+			throw new \RuntimeException( 'No order item found.' );
 		}
 
 		$item->setId( null );
@@ -299,7 +299,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->deleteItem( $item->getId() );
 
 		if( ( $statusItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No status item found' );
+			throw new \RuntimeException( 'No status item found' );
 		}
 
 		$this->assertEquals( 1, count( $results ) );

@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
 
 		if( count( $result ) !== 2 ) {
-			throw new \Exception( 'Products not available' );
+			throw new \RuntimeException( 'Products not available' );
 		}
 
 		foreach( $result as $item )
@@ -100,7 +100,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No attribute found' );
+			throw new \RuntimeException( 'No attribute found' );
 		}
 
 
@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search );
 
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \Exception( 'No item found' );
+			throw new \RuntimeException( 'No item found' );
 		}
 
 		$item = $this->object->getItem( $expected->getId() );
@@ -204,7 +204,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'Product not available' );
+			throw new \RuntimeException( 'Product not available' );
 		}
 
 
@@ -291,7 +291,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $attributeManager->searchItems( $search );
 
 		if( ( $attrWidthItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No attribute item found' );
+			throw new \RuntimeException( 'No attribute item found' );
 		}
 
 		$expr = array(
@@ -304,7 +304,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $attributeManager->searchItems( $search );
 
 		if( ( $attrLenItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No attribute item found' );
+			throw new \RuntimeException( 'No attribute item found' );
 		}
 
 
@@ -380,7 +380,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $catalogManager->searchItems( $catSearch );
 
 		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No catalog item found' );
+			throw new \RuntimeException( 'No catalog item found' );
 		}
 
 		$conditions = array(
@@ -391,7 +391,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $catalogManager->searchItems( $catSearch );
 
 		if( ( $catNewItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No catalog item found' );
+			throw new \RuntimeException( 'No catalog item found' );
 		}
 
 
@@ -470,7 +470,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$priceItems = self::$products['CNC']->getRefItems( 'price', 'default' );
 		if( ( $priceItem = reset( $priceItems ) ) === false ) {
-			throw new \Exception( 'No price with type "default" available in product CNC' );
+			throw new \RuntimeException( 'No price with type "default" available in product CNC' );
 		}
 
 		$conditions = array(
@@ -522,7 +522,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
 		if( ( $textItem = reset( $textItems ) ) === false ) {
-			throw new \Exception( 'No text with type "name" available in product CNC' );
+			throw new \RuntimeException( 'No text with type "name" available in product CNC' );
 		}
 
 		$total = 0;
@@ -600,7 +600,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new \Exception( 'No product found' );
+			throw new \RuntimeException( 'No product found' );
 		}
 
 
@@ -772,11 +772,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$result = $stmt->execute();
 
 			if( ( $row = $result->fetch() ) === false ) {
-				throw new \Exception( 'No rows available' );
+				throw new \RuntimeException( 'No rows available' );
 			}
 
 			if( !isset( $row[$column] ) ) {
-				throw new \Exception( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
+				throw new \RuntimeException( sprintf( 'Column "%1$s" not available for "%2$s"', $column, $sql ) );
 			}
 
 			$value = $row[$column];

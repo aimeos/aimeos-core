@@ -39,7 +39,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 1 );
 		$items = $orderBaseManager->searchItems( $search );
 		if( ( $baseItem = reset( $items ) ) === false ) {
-			throw new \Exception( 'No order base item found.' );
+			throw new \RuntimeException( 'No order base item found.' );
 		}
 
 		$this->order = $baseItem;
@@ -51,7 +51,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 1 );
 		$items = $productManager->searchItems( $search );
 		if( ( $newProduct = reset( $items ) ) === false ) {
-			throw new \Exception( 'Product code "CNE" not found.' );
+			throw new \RuntimeException( 'Product code "CNE" not found.' );
 		}
 
 		$newProduct->setId( null );
@@ -185,7 +185,7 @@ class ProductGoneTest extends \PHPUnit_Framework_TestCase
 		$products = $this->order->getProducts();
 
 		if( count( $products ) < 1 ) {
-			throw new \Exception( 'Product for testing not in basket.' );
+			throw new \RuntimeException( 'Product for testing not in basket.' );
 		}
 
 		$badItemPosition = key( $products );

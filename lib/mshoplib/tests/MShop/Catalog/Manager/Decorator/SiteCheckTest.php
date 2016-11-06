@@ -49,7 +49,7 @@ class SiteCheckTest extends \PHPUnit_Framework_TestCase
 		$pathNodes = $this->object->getPath( $parent->getId() );
 
 		if( ( $node = reset( $pathNodes ) ) === false ) {
-			throw new \Exception( 'No node found' );
+			throw new \RuntimeException( 'No node found' );
 		}
 
 		$this->assertEquals( $parent->getId(), $node->getId() );

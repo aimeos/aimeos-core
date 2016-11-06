@@ -60,7 +60,7 @@ class ProductAddMediaPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$types = $mediaTypeManager->searchItems( $search );
 
 		if( ( $mediaTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Media type item not found' );
+			throw new \RuntimeException( 'Media type item not found' );
 		}
 
 
@@ -76,7 +76,7 @@ class ProductAddMediaPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $productListTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product list type item not found' );
+			throw new \RuntimeException( 'Product list type item not found' );
 		}
 
 		$expr = array();
@@ -87,7 +87,7 @@ class ProductAddMediaPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $downloadListTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product list type item not found' );
+			throw new \RuntimeException( 'Product list type item not found' );
 		}
 
 

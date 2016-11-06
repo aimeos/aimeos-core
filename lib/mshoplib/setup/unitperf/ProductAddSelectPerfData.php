@@ -203,7 +203,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 		}
 
 		if( count( $textTypeItems ) !== 2 ) {
-			throw new \Exception( 'Text type items not found' );
+			throw new \RuntimeException( 'Text type items not found' );
 		}
 
 
@@ -224,7 +224,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $productListTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product list type item not found' );
+			throw new \RuntimeException( 'Product list type item not found' );
 		}
 
 
@@ -246,7 +246,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 		$types = $productTypeManager->searchItems( $search );
 
 		if( ( $productTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product type item not found' );
+			throw new \RuntimeException( 'Product type item not found' );
 		}
 
 

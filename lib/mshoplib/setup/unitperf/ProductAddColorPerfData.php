@@ -210,21 +210,21 @@ class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$list = str_split( ltrim( $code, '#' ), 2 );
 
 		if( count( $list ) !== 3 ) {
-			throw new \Exception( sprintf( 'Invalid color code "%1$s"', $code ) );
+			throw new \RuntimeException( sprintf( 'Invalid color code "%1$s"', $code ) );
 		}
 
 		if( ( $img = imagecreate( 1, 1 ) ) === false ) {
-			throw new \Exception( 'Unable to create image' );
+			throw new \RuntimeException( 'Unable to create image' );
 		}
 
 		if( imagecolorallocate( $img, hexdec( $list[0] ), hexdec( $list[1] ), hexdec( $list[2] ) ) === false ) {
-			throw new \Exception( 'Unable to allocate color' );
+			throw new \RuntimeException( 'Unable to allocate color' );
 		}
 
 		$image = $this->getImage( $img, $mime );
 
 		if( imagedestroy( $img ) === false ) {
-			throw new \Exception( 'Unable to destroy image' );
+			throw new \RuntimeException( 'Unable to destroy image' );
 		}
 
 		return 'data:' . $mime . ';base64,' . base64_encode( $image );
@@ -250,7 +250,7 @@ class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 			} else if( function_exists( 'imagepng' ) === true && imagepng( $img ) === true ) {
 				$mime = 'image/png';
 			} else {
-				throw new \Exception( 'Unable to create image. php-gd not installed?' );
+				throw new \RuntimeException( 'Unable to create image. php-gd not installed?' );
 			}
 
 			$image = ob_get_contents();

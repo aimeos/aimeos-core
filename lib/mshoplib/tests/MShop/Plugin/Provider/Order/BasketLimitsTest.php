@@ -42,7 +42,7 @@ class BasketLimitsTest extends \PHPUnit_Framework_TestCase
 		$items = $orderBaseProductManager->searchItems( $search );
 
 		if( count( $items ) < 2 ) {
-			throw new \Exception( 'Please fix the test data in your database.' );
+			throw new \RuntimeException( 'Please fix the test data in your database.' );
 		}
 
 		foreach( $items as $item ) {

@@ -92,7 +92,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$result = $manager->searchItems( $search );
 
 		if( ( $customer = reset( $result ) ) === false ) {
-			throw new \Exception( 'No customer item for code UTC001" found' );
+			throw new \RuntimeException( 'No customer item for code UTC001" found' );
 		}
 
 		$context->setUserId( $customer->getId() );
@@ -119,7 +119,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$result = $manager->searchItems( $search );
 
 		if( ( $customer = reset( $result ) ) === false ) {
-			throw new \Exception( 'No customer item for code UTC001" found' );
+			throw new \RuntimeException( 'No customer item for code UTC001" found' );
 		}
 
 
@@ -169,7 +169,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$result = $manager->searchItems( $search );
 
 		if( ( $customer = reset( $result ) ) === false ) {
-			throw new \Exception( 'No customer item for code UTC001" found' );
+			throw new \RuntimeException( 'No customer item for code UTC001" found' );
 		}
 
 

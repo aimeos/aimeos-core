@@ -128,7 +128,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 				$result = $localeSiteManager->searchItems( $search );
 
 				if( ( $item = reset( $result ) ) === false ) {
-					throw new \Exception( sprintf( 'No site for code "%1$s" available', $dataset['code'] ) );
+					throw new \RuntimeException( sprintf( 'No site for code "%1$s" available', $dataset['code'] ) );
 				}
 
 				$siteIds[$key] = $item->getId();

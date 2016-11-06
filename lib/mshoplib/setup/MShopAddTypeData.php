@@ -125,7 +125,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 		$domain = strtolower( trim( $domain, "/ \n\t\r\0\x0B" ) );
 
 		if( strlen( $domain ) === 0 ) {
-			throw new \Exception( 'An empty domain is invalid' );
+			throw new \RuntimeException( 'An empty domain is invalid' );
 		}
 
 		if( !isset( $this->domainManagers[$domain] ) )
@@ -135,12 +135,12 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 			foreach( $parts as $part )
 			{
 				if( ctype_alnum( $part ) === false ) {
-					throw new \Exception( sprintf( 'Invalid domain "%1$s"', $domain ) );
+					throw new \RuntimeException( sprintf( 'Invalid domain "%1$s"', $domain ) );
 				}
 			}
 
 			if( ( $domainname = array_shift( $parts ) ) === null ) {
-				throw new \Exception( 'An empty domain is invalid' );
+				throw new \RuntimeException( 'An empty domain is invalid' );
 			}
 
 
@@ -151,7 +151,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 				$manager = call_user_func_array( $factory . '::createManager', array( $this->additional ) );
 
 				if( !( $manager instanceof $iface ) ) {
-					throw new \Exception( sprintf( 'No factory "%1$s" found', $factory ) );
+					throw new \RuntimeException( sprintf( 'No factory "%1$s" found', $factory ) );
 				}
 
 				$this->domainManagers[$domainname] = $manager;

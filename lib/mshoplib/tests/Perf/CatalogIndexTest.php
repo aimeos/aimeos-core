@@ -27,7 +27,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $catalogManager->searchItems( $search );
 
 		if( ( $this->catItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No catalog item found' );
+			throw new \RuntimeException( 'No catalog item found' );
 		}
 
 
@@ -144,7 +144,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $catalogManager->searchItems( $search );
 
 		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No catalog item found' );
+			throw new \RuntimeException( 'No catalog item found' );
 		}
 
 		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );
@@ -299,7 +299,7 @@ class CatalogIndexTest extends \PHPUnit_Framework_TestCase
 		$result = $catalogManager->searchItems( $search );
 
 		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No catalog item found' );
+			throw new \RuntimeException( 'No catalog item found' );
 		}
 
 		$catIds = array( (int) $this->catItem->getId(), (int) $catItem->getId() );

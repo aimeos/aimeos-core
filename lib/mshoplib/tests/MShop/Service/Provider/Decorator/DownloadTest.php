@@ -117,7 +117,7 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No order item found' );
+			throw new \RuntimeException( 'No order item found' );
 		}
 
 		$baseManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' );

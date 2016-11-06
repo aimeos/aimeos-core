@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No group item with label "Unitgroup" found' );
+			throw new \RuntimeException( 'No group item with label "Unitgroup" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );

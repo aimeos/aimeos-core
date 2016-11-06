@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \Exception( 'No attribute list type item found' );
+			throw new \RuntimeException( 'No attribute list type item found' );
 		}
 
 		$this->assertEquals( $expected, $this->object->getItem( $expected->getId() ) );
@@ -94,7 +94,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No type item found' );
+			throw new \RuntimeException( 'No type item found' );
 		}
 
 		$item->setId( null );

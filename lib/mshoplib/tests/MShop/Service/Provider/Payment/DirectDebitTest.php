@@ -84,7 +84,7 @@ class DirectDebitTest extends \PHPUnit_Framework_TestCase
 		$orderItems = $orderManager->searchItems( $search );
 
 		if( ( $order = reset( $orderItems ) ) === false ) {
-			throw new \Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
+			throw new \RuntimeException( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
 		}
 
 		$basket = $orderBaseManager->load( $order->getBaseId() );

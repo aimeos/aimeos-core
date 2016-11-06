@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset($results) ) === false ) {
-			throw new \Exception( 'No list item found' );
+			throw new \RuntimeException( 'No list item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No item found' );
+			throw new \RuntimeException( 'No item found' );
 		}
 
 		$item->setId(null);
@@ -192,11 +192,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new \Exception( 'No first supplier list item' );
+			throw new \RuntimeException( 'No first supplier list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new \Exception( 'No last supplier list item' );
+			throw new \RuntimeException( 'No last supplier list item' );
 		}
 
 		$this->object->moveItem( $last->getId(), $first->getId() );
@@ -217,15 +217,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new \Exception( 'No first supplier list item' );
+			throw new \RuntimeException( 'No first supplier list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new \Exception( 'No second supplier list item' );
+			throw new \RuntimeException( 'No second supplier list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new \Exception( 'No last supplier list item' );
+			throw new \RuntimeException( 'No last supplier list item' );
 		}
 
 		$this->object->moveItem( $first->getId() );
@@ -246,15 +246,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertGreaterThan( 1, count( $listItems ) );
 
 		if( ( $first = reset( $listItems ) ) === false ) {
-			throw new \Exception( 'No first supplier list item' );
+			throw new \RuntimeException( 'No first supplier list item' );
 		}
 
 		if( ( $second = next( $listItems ) ) === false ) {
-			throw new \Exception( 'No second supplier list item' );
+			throw new \RuntimeException( 'No second supplier list item' );
 		}
 
 		if( ( $last = end( $listItems ) ) === false ) {
-			throw new \Exception( 'No last supplier list item' );
+			throw new \RuntimeException( 'No last supplier list item' );
 		}
 
 		$this->object->moveItem( $first->getId(), $last->getId() );
@@ -291,7 +291,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$result = $this->object->searchItems( $search );
 		if( ( $listItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No list item found' );
+			throw new \RuntimeException( 'No list item found' );
 		}
 
 
@@ -367,7 +367,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $manager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No supplier item found' );
+			throw new \RuntimeException( 'No supplier item found' );
 		}
 
 		$search = $this->object->createSearch();

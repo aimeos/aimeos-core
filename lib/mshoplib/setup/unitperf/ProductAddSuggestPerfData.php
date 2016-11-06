@@ -68,7 +68,7 @@ class ProductAddSuggestPerfData extends \Aimeos\MW\Setup\Task\Base
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $listTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product list type item not found' );
+			throw new \RuntimeException( 'Product list type item not found' );
 		}
 
 		$search = $productManager->createSearch();

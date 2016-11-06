@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \Exception( sprintf( 'No text item including "%1$s" found', '%Monetary%' ) );
+			throw new \RuntimeException( sprintf( 'No text item including "%1$s" found', '%Monetary%' ) );
 		}
 
 
@@ -199,7 +199,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$a = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $a ) ) === false ) {
-			throw new \Exception( 'Text item not found.' );
+			throw new \RuntimeException( 'Text item not found.' );
 		}
 
 		$item->setId( null );

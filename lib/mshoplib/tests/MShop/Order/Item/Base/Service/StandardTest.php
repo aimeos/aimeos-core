@@ -421,7 +421,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$services = $manager->searchItems( $search );
 
 		if( ( $service = reset( $services ) ) === false ) {
-			throw new \Exception( 'No service found' );
+			throw new \RuntimeException( 'No service found' );
 		}
 
 		$return = $serviceCopy->copyFrom( $service );

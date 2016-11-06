@@ -27,7 +27,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $serviceManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $this->serviceItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No service item found' );
+			throw new \RuntimeException( 'No service item found' );
 		}
 
 		$this->serviceItem->setConfig( array( 'default.project' => '8502_TEST' ) );
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $orderBaseManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No order base item found' );
+			throw new \RuntimeException( 'No order base item found' );
 		}
 
 		$price = $this->object->calcPrice( $item );
@@ -443,7 +443,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$dom->preserveWhiteSpace = false;
 
 		if( $dom->loadXML( $expected ) !== true ) {
-			throw new \Exception( 'Loading XML failed' );
+			throw new \RuntimeException( 'Loading XML failed' );
 		}
 
 		$this->assertEquals( $dom->saveXML(), $this->object->buildXML( $order ) );
@@ -591,7 +591,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$dom->preserveWhiteSpace = false;
 
 		if( $dom->loadXML( $expected ) !== true ) {
-			throw new \Exception( 'Loading XML failed' );
+			throw new \RuntimeException( 'Loading XML failed' );
 		}
 
 		$this->assertEquals( $dom->saveXML(), $this->object->buildXML( $order ) );
@@ -614,7 +614,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $orderManager->searchItems( $criteria );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No order item available' );
+			throw new \RuntimeException( 'No order item available' );
 		}
 
 		return $item;

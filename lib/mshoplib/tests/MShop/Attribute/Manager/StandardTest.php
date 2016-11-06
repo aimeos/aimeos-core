@@ -132,7 +132,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$results = $this->object->searchItems( $search, array( 'text' ) );
 		if( ( $itemA = reset( $results ) ) === false ) {
-			throw new \Exception( 'No search results available in testGetItem()' );
+			throw new \RuntimeException( 'No search results available in testGetItem()' );
 		}
 
 		$itemB = $this->object->getItem( $itemA->getId(), array( 'text' ) );
@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$typeItems = $typeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $typeItems ) ) === false ) {
-			throw new \Exception( 'No attribute type item available in setUp()' );
+			throw new \RuntimeException( 'No attribute type item available in setUp()' );
 		}
 
 		$item = $this->object->createItem();

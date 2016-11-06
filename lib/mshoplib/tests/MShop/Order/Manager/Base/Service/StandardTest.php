@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( !( $item = reset( $results ) ) ) {
-			throw new \Exception( 'empty results' );
+			throw new \RuntimeException( 'empty results' );
 		}
 
 		$actual = $this->object->getItem( $item->getId() );
@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$orderItems = $this->object->searchItems( $search );
 
 		if( !( $item = reset( $orderItems ) ) ) {
-			throw new \Exception( 'empty search result' );
+			throw new \RuntimeException( 'empty search result' );
 		}
 
 		$item->setId( null );

@@ -61,7 +61,7 @@ class CatalogAddTextPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDat
 		$types = $catalogListTypeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Catalog list type item not found' );
+			throw new \RuntimeException( 'Catalog list type item not found' );
 		}
 
 
@@ -77,7 +77,7 @@ class CatalogAddTextPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDat
 		$types = $textTypeManager->searchItems( $search );
 
 		if( ( $textTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Text type item not found' );
+			throw new \RuntimeException( 'Text type item not found' );
 		}
 
 

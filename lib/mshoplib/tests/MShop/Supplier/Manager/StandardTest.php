@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No supplier item with label "unitSupplier" found' );
+			throw new \RuntimeException( 'No supplier item with label "unitSupplier" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No supplier item found' );
+			throw new \RuntimeException( 'No supplier item found' );
 		}
 
 		$item->setId( null );

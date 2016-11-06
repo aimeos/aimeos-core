@@ -42,13 +42,13 @@ class FileTest extends \PHPUnit_Framework_TestCase
 		$this->object->log( 'error' );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new \Exception( 'No test file found' );
+			throw new \RuntimeException( 'No test file found' );
 		}
 
 		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
-			throw new \Exception( 'No log record found' );
+			throw new \RuntimeException( 'No log record found' );
 		}
 
 		$this->assertEquals( '<message>', $msg[0] );
@@ -67,13 +67,13 @@ class FileTest extends \PHPUnit_Framework_TestCase
 		$this->object->log( array ( 'scalar', 'errortest' ) );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new \Exception( 'No test file found' );
+			throw new \RuntimeException( 'No test file found' );
 		}
 
 		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
-			throw new \Exception( 'No log record found' );
+			throw new \RuntimeException( 'No log record found' );
 		}
 
 		$this->assertEquals( '<message>', $msg[0] );
@@ -88,13 +88,13 @@ class FileTest extends \PHPUnit_Framework_TestCase
 		$this->object->log( 'critical', \Aimeos\MW\Logger\Base::CRIT );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new \Exception( 'No test file found' );
+			throw new \RuntimeException( 'No test file found' );
 		}
 
 		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
-			throw new \Exception( 'No log record found' );
+			throw new \RuntimeException( 'No log record found' );
 		}
 
 		$this->assertEquals( '<message>', $msg[0] );
@@ -109,13 +109,13 @@ class FileTest extends \PHPUnit_Framework_TestCase
 		$this->object->log( 'debug', \Aimeos\MW\Logger\Base::WARN );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new \Exception( 'No test file found' );
+			throw new \RuntimeException( 'No test file found' );
 		}
 
 		$msg = file_get_contents( $this->filename );
 
 		if( $msg !== '' ) {
-			throw new \Exception( 'Log record found but none expected' );
+			throw new \RuntimeException( 'Log record found but none expected' );
 		}
 	}
 
@@ -124,13 +124,13 @@ class FileTest extends \PHPUnit_Framework_TestCase
 		$this->object->log( 'user auth', \Aimeos\MW\Logger\Base::ERR, 'auth' );
 
 		if( !file_exists( $this->filename ) ) {
-			throw new \Exception( 'No test file found' );
+			throw new \RuntimeException( 'No test file found' );
 		}
 
 		$msg = explode( ' ', file_get_contents( $this->filename ) );
 
 		if( empty( $msg ) ) {
-			throw new \Exception( 'No log record found' );
+			throw new \RuntimeException( 'No log record found' );
 		}
 
 		$this->assertEquals( '<auth>', $msg[0] );

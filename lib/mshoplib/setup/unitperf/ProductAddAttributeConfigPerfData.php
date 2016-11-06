@@ -66,7 +66,7 @@ class ProductAddAttributeConfigPerfData extends \Aimeos\MW\Setup\Task\ProductAdd
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $productListTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product list type item not found' );
+			throw new \RuntimeException( 'Product list type item not found' );
 		}
 
 
@@ -130,7 +130,7 @@ class ProductAddAttributeConfigPerfData extends \Aimeos\MW\Setup\Task\ProductAdd
 		$result = $priceTypeManager->searchItems( $search );
 
 		if( ( $priceTypeItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No price type "default" found' );
+			throw new \RuntimeException( 'No price type "default" found' );
 		}
 
 		$priceItem = $priceManager->createItem();
@@ -152,7 +152,7 @@ class ProductAddAttributeConfigPerfData extends \Aimeos\MW\Setup\Task\ProductAdd
 		$result = $attrTypeManager->searchItems( $search );
 
 		if( ( $attrTypeItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No attribute type "option" found' );
+			throw new \RuntimeException( 'No attribute type "option" found' );
 		}
 
 		$attrItem = $attrManager->createItem();
@@ -173,7 +173,7 @@ class ProductAddAttributeConfigPerfData extends \Aimeos\MW\Setup\Task\ProductAdd
 		$result = $listTypeManager->searchItems( $search );
 
 		if( ( $listTypeItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No price list type "default" found' );
+			throw new \RuntimeException( 'No price list type "default" found' );
 		}
 
 		$listItem = $listManager->createItem();

@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'No service provider item found.' );
+			throw new \RuntimeException( 'No service provider item found.' );
 		}
 
 		$item->setId( null );
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No item found' );
+			throw new \RuntimeException( 'No item found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId(), array( 'text' ) ) );
@@ -245,7 +245,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No service item found' );
+			throw new \RuntimeException( 'No service item found' );
 		}
 
 		$item->setProvider( 'Standard,Example' );

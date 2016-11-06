@@ -61,7 +61,7 @@ class PresentTest extends \PHPUnit_Framework_TestCase
 		$products = $this->orderBase->getProducts();
 
 		if( !isset( $coupons['zyxw'][0] ) ) {
-			throw new \Exception( 'Missing coupon product' );
+			throw new \RuntimeException( 'Missing coupon product' );
 		}
 		$product = $coupons['zyxw'][0];
 

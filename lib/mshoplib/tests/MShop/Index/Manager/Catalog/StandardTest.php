@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No catalog item found' );
+			throw new \RuntimeException( 'No catalog item found' );
 		}
 
 
@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new \Exception( 'No product item with code CNE found!' );
+			throw new \RuntimeException( 'No product item with code CNE found!' );
 		}
 
 		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
@@ -106,7 +106,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$catListItems = $listManager->searchItems( $search );
 
 		if( ( $catListItem = reset( $catListItems ) ) === false ) {
-			throw new \Exception( 'No catalog list item found!' );
+			throw new \RuntimeException( 'No catalog list item found!' );
 		}
 
 
@@ -160,14 +160,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $catalogManager->searchItems( $catSearch );
 
 		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No catalog item found' );
+			throw new \RuntimeException( 'No catalog item found' );
 		}
 
 		$catSearch->setConditions( $catSearch->compare( '==', 'catalog.label', 'Neu' ) );
 		$result = $catalogManager->searchItems( $catSearch );
 
 		if( ( $catNewItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No catalog item found' );
+			throw new \RuntimeException( 'No catalog item found' );
 		}
 
 

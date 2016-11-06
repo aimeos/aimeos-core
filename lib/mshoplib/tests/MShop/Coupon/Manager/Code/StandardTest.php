@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $couponManager->searchItems( $search );
 
 		if( ( $item = reset( $results ) ) === false ) {
-			throw new \Exception( 'Code item not found' );
+			throw new \RuntimeException( 'Code item not found' );
 		};
 
 		$this->object = $couponManager->getSubManager( 'code' );
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'no item found exception' );
+			throw new \RuntimeException( 'no item found exception' );
 		}
 
 		$item = $this->object->getItem( $codeItem->getId() );
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No coupon code item found' );
+			throw new \RuntimeException( 'No coupon code item found' );
 		}
 
 		$item->setId( null );
@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No coupon code item found.' );
+			throw new \RuntimeException( 'No coupon code item found.' );
 		}
 
 		$this->object->decrease( $codeItem->getCode(), 1 );
@@ -231,7 +231,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $codeItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No coupon code item found.' );
+			throw new \RuntimeException( 'No coupon code item found.' );
 		}
 
 		$this->object->increase( $codeItem->getCode(), 1 );

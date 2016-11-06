@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( sprintf( 'No order base address item found for type "%1$s".', $type ) );
+			throw new \RuntimeException( sprintf( 'No order base address item found for type "%1$s".', $type ) );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( sprintf( 'No order base address item found for type "%1$s".', $type ) );
+			throw new \RuntimeException( sprintf( 'No order base address item found for type "%1$s".', $type ) );
 		}
 
 		$this->object->deleteItem( $item->getId() );

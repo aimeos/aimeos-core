@@ -50,7 +50,7 @@ class ShippingTest extends \PHPUnit_Framework_TestCase
 		$pResults = $manager->searchItems( $search, array( 'price' ) );
 
 		if( count( $pResults ) !== 3 ) {
-			throw new \Exception( 'Wrong number of products' );
+			throw new \RuntimeException( 'Wrong number of products' );
 		}
 
 		$products = array();
@@ -59,7 +59,7 @@ class ShippingTest extends \PHPUnit_Framework_TestCase
 		}
 
 		if( ( $price = current( $products['IJKL']->getRefItems( 'price' ) ) ) === false ) {
-			throw new \Exception( 'No price item found' );
+			throw new \RuntimeException( 'No price item found' );
 		}
 		$price->setValue( 10.00 );
 
@@ -86,7 +86,7 @@ class ShippingTest extends \PHPUnit_Framework_TestCase
 		$results = $orderBaseServiceManager->searchItems( $serviceSearch );
 
 		if( ( $delivery = reset( $results ) ) === false ) {
-			throw new \Exception( 'No order base item found' );
+			throw new \RuntimeException( 'No order base item found' );
 		}
 
 		$this->order = $orderBaseManager->createItem();

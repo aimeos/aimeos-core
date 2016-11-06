@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
 
 		if( count( $result ) !== 2 ) {
-			throw new \Exception( 'Products not available' );
+			throw new \RuntimeException( 'Products not available' );
 		}
 
 		foreach( $result as $item ) {
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No text item found' );
+			throw new \RuntimeException( 'No text item found' );
 		}
 
 
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$texts = $product->getRefItems( 'text' );
 		if( ( $textItem = reset( $texts ) ) === false ) {
-			throw new \Exception( 'Product doesnt have any price item' );
+			throw new \RuntimeException( 'Product doesnt have any price item' );
 		}
 
 
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
 		if( ( $textItem = reset( $textItems ) ) === false ) {
-			throw new \Exception( 'No text with type "name" available in product CNC' );
+			throw new \RuntimeException( 'No text with type "name" available in product CNC' );
 		}
 
 		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new \Exception( 'No product found' );
+			throw new \RuntimeException( 'No product found' );
 		}
 
 

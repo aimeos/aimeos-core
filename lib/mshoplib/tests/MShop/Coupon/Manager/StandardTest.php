@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $itemA = reset( $results ) ) === false ) {
-			throw new \Exception( 'No results available' );
+			throw new \RuntimeException( 'No results available' );
 		}
 
 		$itemB = $this->object->getItem( $itemA->getId() );
@@ -130,7 +130,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No coupon item found' );
+			throw new \RuntimeException( 'No coupon item found' );
 		}
 
 		$item->setId( null );

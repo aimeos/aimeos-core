@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $item = reset($results) ) === false ) {
-			throw new \Exception( 'No property item found' );
+			throw new \RuntimeException( 'No property item found' );
 		}
 
 		$item->setId(null);
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ($expected = reset($results)) === false ) {
-			throw new \Exception( sprintf( 'No product property item found for value "%1$s".', '25.0' ) );
+			throw new \RuntimeException( sprintf( 'No product property item found for value "%1$s".', '25.0' ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );

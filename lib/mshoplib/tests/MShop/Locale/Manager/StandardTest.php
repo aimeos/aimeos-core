@@ -157,7 +157,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $tmpItem = reset( $items ) ) === false ) {
-			throw new \Exception( 'No locale item found for code: "unit"' );
+			throw new \RuntimeException( 'No locale item found for code: "unit"' );
 		}
 
 		$item = $this->object->getItem( $tmpItem->getId() );
@@ -240,7 +240,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No locale item found for code: "unit"' );
+			throw new \RuntimeException( 'No locale item found for code: "unit"' );
 		}
 
 		$item->setId( null );

@@ -45,7 +45,7 @@ class ErrorlogTest extends \PHPUnit_Framework_TestCase
 		$this->object->log( array( 'scalar', 'test' ) );
 
 		if( ( $content = file( 'error.log' ) ) === false ) {
-			throw new \Exception( 'Unable to open file "error.log"' );
+			throw new \RuntimeException( 'Unable to open file "error.log"' );
 		}
 
 		ini_restore( "error_log" );
@@ -70,7 +70,7 @@ class ErrorlogTest extends \PHPUnit_Framework_TestCase
 		ini_restore( "error_log" );
 
 		if( file_exists( 'error.log' ) ) {
-			throw new \Exception( 'File "error.log" should not be created' );
+			throw new \RuntimeException( 'File "error.log" should not be created' );
 		}
 	}
 

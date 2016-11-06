@@ -214,7 +214,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$items = $attrManager->searchItems( $attrManager->createSearch() );
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No attribute item found' );
+			throw new \RuntimeException( 'No attribute item found' );
 		}
 
 		$return = $this->object->copyFrom( $item );

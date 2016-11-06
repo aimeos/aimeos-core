@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No attribute item found' );
+			throw new \RuntimeException( 'No attribute item found' );
 		}
 
 
@@ -101,12 +101,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search, array( 'attribute' ) );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new \Exception( 'No product item with code CNE found!' );
+			throw new \RuntimeException( 'No product item with code CNE found!' );
 		}
 
 		$attributes = $product->getRefItems( 'attribute' );
 		if( ( $attrItem = reset( $attributes ) ) === false ) {
-			throw new \Exception( 'Product doesnt have any attribute item' );
+			throw new \RuntimeException( 'Product doesnt have any attribute item' );
 		}
 
 		$product->setId( null );
@@ -157,7 +157,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $attributeManager->searchItems( $search );
 
 		if( ( $attrLengthItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No attribute item found' );
+			throw new \RuntimeException( 'No attribute item found' );
 		}
 
 		$expr = array(
@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $attributeManager->searchItems( $search );
 
 		if( ( $attrWidthItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No attribute item found' );
+			throw new \RuntimeException( 'No attribute item found' );
 		}
 
 
@@ -200,7 +200,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search, array() );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new \Exception( 'No product found' );
+			throw new \RuntimeException( 'No product found' );
 		}
 
 		$this->assertEquals( 2, count( $result ) );

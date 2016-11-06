@@ -29,7 +29,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 		$serviceItems = $serviceManager->searchItems( $search );
 
 		if( ( $this->serviceItem = reset( $serviceItems ) ) === false ) {
-			throw new \Exception( 'No paypalexpress service item available' );
+			throw new \RuntimeException( 'No paypalexpress service item available' );
 		}
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Payment\PayPalExpress( $this->context, $this->serviceItem );
@@ -46,7 +46,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 		$orderItems = $orderManager->searchItems( $search );
 
 		if( ( $this->order = reset( $orderItems ) ) === false ) {
-			throw new \Exception( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
+			throw new \RuntimeException( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
 		}
 
 

@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $items ) ) === false ) {
-			throw new \Exception( 'No product item found' );
+			throw new \RuntimeException( 'No product item found' );
 		}
 
 		$search = $this->object->createSearch();
@@ -80,7 +80,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No item found' );
+			throw new \RuntimeException( 'No item found' );
 		}
 
 		$item->setId( null );
@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \Exception( sprintf( 'No stock item found for level "%1$s".', 2000 ) );
+			throw new \RuntimeException( sprintf( 'No stock item found for level "%1$s".', 2000 ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );

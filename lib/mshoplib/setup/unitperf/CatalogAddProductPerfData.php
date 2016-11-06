@@ -61,7 +61,7 @@ class CatalogAddProductPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerf
 		$types = $catalogListTypeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Catalog list type item not found' );
+			throw new \RuntimeException( 'Catalog list type item not found' );
 		}
 
 

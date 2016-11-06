@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text' ) );
 
 		if( count( $result ) !== 2 ) {
-			throw new \Exception( 'Products not available' );
+			throw new \RuntimeException( 'Products not available' );
 		}
 
 		foreach( $result as $item ) {
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $manager->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No price item found' );
+			throw new \RuntimeException( 'No price item found' );
 		}
 
 
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$prices = $product->getRefItems( 'price' );
 		if( ( $priceItem = reset( $prices ) ) === false ) {
-			throw new \Exception( 'Product doesnt have any price item' );
+			throw new \RuntimeException( 'Product doesnt have any price item' );
 		}
 
 
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$priceItems = self::$products['CNC']->getRefItems( 'price', 'default' );
 		if( ( $priceItem = reset( $priceItems ) ) === false ) {
-			throw new \Exception( 'No price with type "default" available in product CNC' );
+			throw new \RuntimeException( 'No price with type "default" available in product CNC' );
 		}
 
 		$search->setConditions( $search->compare( '==', 'index.price.id', $priceItem->getId() ) );

@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $customer->searchItems( $search );
 
 		if( ( $customerItem = reset( $result ) ) === false ) {
-			throw new \Exception( sprintf( 'No customer item found for label "%1$s".', 'unitCustomer001' ) );
+			throw new \RuntimeException( sprintf( 'No customer item found for label "%1$s".', 'unitCustomer001' ) );
 		}
 
 		$this->fixture = array(
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No address item with company "Metaways" found' );
+			throw new \RuntimeException( 'No address item with company "Metaways" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );

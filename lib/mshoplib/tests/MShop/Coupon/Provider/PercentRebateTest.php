@@ -65,7 +65,7 @@ class PercentRebateTest extends \PHPUnit_Framework_TestCase
 		$products = $this->orderBase->getProducts();
 
 		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
-			throw new \Exception( 'No coupon available' );
+			throw new \RuntimeException( 'No coupon available' );
 		}
 
 		$this->assertEquals( 3, count( $products ) );
@@ -99,11 +99,11 @@ class PercentRebateTest extends \PHPUnit_Framework_TestCase
 		$products = $this->orderBase->getProducts();
 
 		if( ( $couponProduct20 = reset( $coupons['zyxw'] ) ) === false ) {
-			throw new \Exception( 'No coupon available' );
+			throw new \RuntimeException( 'No coupon available' );
 		}
 
 		if( ( $couponProduct10 = end( $coupons['zyxw'] ) ) === false ) {
-			throw new \Exception( 'No coupon available' );
+			throw new \RuntimeException( 'No coupon available' );
 		}
 
 		$this->assertEquals( 4, count( $products ) );
@@ -167,7 +167,7 @@ class PercentRebateTest extends \PHPUnit_Framework_TestCase
 		$items = $manager->searchItems( $search );
 
 		if( count( $items ) < 2 ) {
-			throw new \Exception( 'Please fix the test data in your database.' );
+			throw new \RuntimeException( 'Please fix the test data in your database.' );
 		}
 
 		foreach( $items as $item ) {

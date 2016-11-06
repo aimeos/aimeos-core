@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No media item with label "cn_colombie_123x103" found' );
+			throw new \RuntimeException( 'No media item with label "cn_colombie_123x103" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No media item with label "cn_colombie_123x103" found' );
+			throw new \RuntimeException( 'No media item with label "cn_colombie_123x103" found' );
 		}
 
 		$item->setId( null );

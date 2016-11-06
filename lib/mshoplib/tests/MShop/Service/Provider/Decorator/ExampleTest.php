@@ -28,7 +28,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 		$result = $servManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No order base item found' );
+			throw new \RuntimeException( 'No order base item found' );
 		}
 
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
@@ -92,7 +92,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 		$result = $orderBaseManager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No order base item found' );
+			throw new \RuntimeException( 'No order base item found' );
 		}
 
 		$price = $this->object->calcPrice( $item );
@@ -142,7 +142,7 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 		$items = $orderManager->searchItems( $criteria );
 
 		if( ( $order = reset( $items ) ) === false ) {
-			throw new \Exception( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', '6', 'web' ) );
+			throw new \RuntimeException( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', '6', 'web' ) );
 		}
 
 		$this->object->buildXML( $order );

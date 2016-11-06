@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$a = $this->object->searchItems( $search );
 		if( ( $expected = reset( $a ) ) === false ) {
-			throw new \Exception( 'Site item not found' );
+			throw new \RuntimeException( 'Site item not found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -195,7 +195,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \Exception( 'No item found' );
+			throw new \RuntimeException( 'No item found' );
 		}
 
 		$list = $this->object->getPath( $expected->getId() );
@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \Exception( 'No item found' );
+			throw new \RuntimeException( 'No item found' );
 		}
 
 		$item = $this->object->getTree( $expected->getId() );
@@ -257,7 +257,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$results = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $results ) ) === false ) {
-			throw new \Exception( 'No item found' );
+			throw new \RuntimeException( 'No item found' );
 		}
 
 		$item = $this->object->getTree( $expected->getId() );

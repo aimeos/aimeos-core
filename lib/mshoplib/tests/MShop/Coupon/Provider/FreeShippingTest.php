@@ -74,7 +74,7 @@ class FreeShippingTest extends \PHPUnit_Framework_TestCase
 		$coupons = $this->orderBase->getCoupons();
 
 		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
-			throw new \Exception( 'No coupon available' );
+			throw new \RuntimeException( 'No coupon available' );
 		}
 
 		// Test if service delivery item is available

@@ -67,7 +67,7 @@ class CSVTest extends \PHPUnit_Framework_TestCase
 		$expected = ":test:;:file:;:data:\r\n:\\: :;:\0:;:\\:\r\n";
 
 		if( ( $actual = file_get_contents( $csv->getResource() ) ) === false ) {
-			throw new \Exception( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );
+			throw new \RuntimeException( sprintf( 'Unable to get content of file "%1$s"', $csv->getResource() ) );
 		}
 
 		unlink( $csv->getResource() );

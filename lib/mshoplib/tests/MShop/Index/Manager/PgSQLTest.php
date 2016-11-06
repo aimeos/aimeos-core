@@ -144,7 +144,7 @@ class PgSQLTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search );
 
 		if( ( $product = reset( $result ) ) === false ) {
-			throw new \Exception( 'No product found' );
+			throw new \RuntimeException( 'No product found' );
 		}
 
 

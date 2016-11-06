@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new \Exception( 'No customer item with code "UTC003" found' );
+			throw new \RuntimeException( 'No customer item with code "UTC003" found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );

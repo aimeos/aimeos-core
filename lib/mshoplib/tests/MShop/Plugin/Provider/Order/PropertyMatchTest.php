@@ -47,7 +47,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 		$products = $manager->searchItems( $search );
 
 		if( count( $products ) !== 2 ) {
-			throw new \Exception( 'Wrong number of products' );
+			throw new \RuntimeException( 'Wrong number of products' );
 		}
 
 		$this->products = array();

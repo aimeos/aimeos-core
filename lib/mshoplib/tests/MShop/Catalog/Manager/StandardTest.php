@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'Catalog item not found' );
+			throw new \RuntimeException( 'Catalog item not found' );
 		}
 
 		$this->assertEquals( 'Sonstiges', $item->getName() );
@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'Catalog item not found' );
+			throw new \RuntimeException( 'Catalog item not found' );
 		}
 
 		$testItem = $this->object->getItem( $item->getId() );
@@ -201,7 +201,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'Catalog item not found' );
+			throw new \RuntimeException( 'Catalog item not found' );
 		}
 
 		$rootItem = $this->object->getTree( $item->getId(), array( 'text' ), \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
@@ -230,7 +230,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		if( count( $parentIds ) != 2 ) {
-			throw new \Exception( 'Not all categories found!' );
+			throw new \RuntimeException( 'Not all categories found!' );
 		}
 
 		$parentIds[] = 0;
@@ -298,7 +298,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'Catalog item not found' );
+			throw new \RuntimeException( 'Catalog item not found' );
 		}
 
 		$items = $this->object->getPath( $item->getId() );
@@ -330,7 +330,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No root node found' );
+			throw new \RuntimeException( 'No root node found' );
 		}
 
 		$parentId = $item->getId();

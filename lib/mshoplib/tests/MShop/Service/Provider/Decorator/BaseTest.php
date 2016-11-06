@@ -24,7 +24,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$result = $servManager->searchItems($search, array('price'));
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \Exception( 'No order base item found' );
+			throw new \RuntimeException( 'No order base item found' );
 		}
 
 		$this->mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\PrePay' )

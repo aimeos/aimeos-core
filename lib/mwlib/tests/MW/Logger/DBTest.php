@@ -90,7 +90,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		self::$dbm->release( $conn );
 
 		if( $row === false ) {
-			throw new \Exception( 'No log record found' );
+			throw new \RuntimeException( 'No log record found' );
 		}
 
 		$this->assertEquals( 'message', $row['facility'] );
@@ -119,7 +119,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		self::$dbm->release( $conn );
 
 		if( $row === false ) {
-			throw new \Exception( 'No log record found' );
+			throw new \RuntimeException( 'No log record found' );
 		}
 
 		$this->assertEquals( 'message', $row['facility'] );
@@ -142,7 +142,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		self::$dbm->release( $conn );
 
 		if( $row === false ) {
-			throw new \Exception( 'No log record found' );
+			throw new \RuntimeException( 'No log record found' );
 		}
 
 		$this->assertEquals( 32, strlen( $row['request'] ) );
@@ -164,7 +164,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		self::$dbm->release( $conn );
 
 		if( $row !== false ) {
-			throw new \Exception( 'Log record found but none expected' );
+			throw new \RuntimeException( 'Log record found but none expected' );
 		}
 	}
 
@@ -181,7 +181,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		self::$dbm->release( $conn );
 
 		if( $row === false ) {
-			throw new \Exception( 'No log record found' );
+			throw new \RuntimeException( 'No log record found' );
 		}
 
 		$this->assertEquals( 'auth', $row['facility'] );

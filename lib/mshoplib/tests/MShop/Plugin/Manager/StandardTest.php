@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $type->searchItems( $search );
 		if( ( $typeItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No item found' );
+			throw new \RuntimeException( 'No item found' );
 		}
 
 		$this->examplePlugin = $this->object->createItem();
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->object->searchItems( $search );
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \Exception( sprintf( 'No plugin item including "%1$s" found', 'Shipping' ) );
+			throw new \RuntimeException( sprintf( 'No plugin item including "%1$s" found', 'Shipping' ) );
 		}
 
 		$actual = $this->object->getItem( $expected->getId() );
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$a = $this->object->searchItems( $search );
 		if( ( $item = reset( $a ) ) === false ) {
-			throw new \Exception( 'Search provider in test failt' );
+			throw new \RuntimeException( 'Search provider in test failt' );
 		}
 
 		$item->setId( null );

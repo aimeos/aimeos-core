@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$products = $this->object->searchItems( $search, $domains );
 
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new \Exception( sprintf( 'Found no Productitem with text "%1$s"', 'Cafe Noire Cappuccino' ) );
+			throw new \RuntimeException( sprintf( 'Found no Productitem with text "%1$s"', 'Cafe Noire Cappuccino' ) );
 		}
 
 		$this->assertEquals( $product, $this->object->getItem( $product->getId(), $domains ) );
@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \Exception( 'No product item found' );
+			throw new \RuntimeException( 'No product item found' );
 		}
 
 		$item->setId( null );
@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$products = $manager->searchItems( $search );
 
 		if( ( $item = reset( $products ) ) === false ) {
-			throw new \Exception( 'No product found' );
+			throw new \RuntimeException( 'No product found' );
 		}
 
 		$item->setId( null );
@@ -263,7 +263,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$results = $listManager->searchItems( $search );
 		if( ( $listItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No list item found' );
+			throw new \RuntimeException( 'No list item found' );
 		}
 
 		$listTypeManager = $listManager->getSubManager( 'type' );
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$results = $listTypeManager->searchItems( $search );
 		if( ( $listTypeItem = reset( $results ) ) === false ) {
-			throw new \Exception( 'No list type item found' );
+			throw new \RuntimeException( 'No list type item found' );
 		}
 
 		$search = $this->object->createSearch();

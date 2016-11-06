@@ -68,7 +68,7 @@ class ServiceAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 		$types = $typeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Service type item "payment" not found' );
+			throw new \RuntimeException( 'Service type item "payment" not found' );
 		}
 
 		$item = $manager->createItem();
@@ -102,7 +102,7 @@ class ServiceAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 		$types = $typeManager->searchItems( $search );
 
 		if( ( $typeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Service type item "delivery" not found' );
+			throw new \RuntimeException( 'Service type item "delivery" not found' );
 		}
 
 		$item = $manager->createItem();

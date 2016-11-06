@@ -83,14 +83,14 @@ interface Iface
 	 *
 	 *  $localfile = '/path/to/local/file';
 	 *  if( ( $writehandle = fopen( $localfile, 'w' ) ) === false ) {
-	 *      throw new \Exception( $localfile );
+	 *      throw new \RuntimeException( $localfile );
 	 *  }
 	 *
 	 *  $readhandle = $fs->reads( '/path/to/remote/file' );
 	 *
 	 *  while( ( $content = stream_get_contents( $handle, 1024000 ) ) != false ) {
 	 *      if( fwrite( $writehandle, $content ) === false ) {
-	 *          throw new \Exception( $localfile );
+	 *          throw new \RuntimeException( $localfile );
 	 *      }
 	 *  }
 	 *
@@ -142,7 +142,7 @@ interface Iface
 	 *
 	 *  $localfile = '/path/to/local/file';
 	 *  if( ( $readhandle = fopen( $localfile, 'r' ) ) === false ) {
-	 *      throw new \Exception( $localfile );
+	 *      throw new \RuntimeException( $localfile );
 	 *  }
 	 *
 	 *  $fs->writes( '/path/to/remote/file', $readhandle );

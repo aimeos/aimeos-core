@@ -260,7 +260,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 
 
 		if( ( $node = reset( $nodes ) ) === false ) {
-			throw new \Exception('No node found');
+			throw new \RuntimeException('No node found');
 		}
 
 		$search->setConditions( $search->compare( '==', 'tree.level', 3 ) );
@@ -382,7 +382,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 		foreach( $nodes as $node )
 		{
 			if( ( $actual = array_shift( $path ) ) === null ) {
-				throw new \Exception( 'Not enough nodes in path' );
+				throw new \RuntimeException( 'Not enough nodes in path' );
 			}
 
 			$this->assertEquals( $node->getId(), $actual->getId() );

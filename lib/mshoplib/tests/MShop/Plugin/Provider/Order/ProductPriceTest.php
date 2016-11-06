@@ -38,7 +38,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$productItems = $orderBaseProductManager->searchItems( $search );
 
 		if( ( $productItem = reset( $productItems ) ) === false ) {
-			throw new \Exception( 'No order base product item found.' );
+			throw new \RuntimeException( 'No order base product item found.' );
 		}
 
 		$productItem->getPrice()->setValue( 600.00 );
@@ -92,13 +92,13 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $productItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No product found' );
+			throw new \RuntimeException( 'No product found' );
 		}
 
 		$refPrices = $productItem->getRefItems( 'price', 'default', 'default' );
 
 		if( ( $productPrice = reset( $refPrices ) ) === false ) {
-			throw new \Exception( 'No product price available' );
+			throw new \RuntimeException( 'No product price available' );
 		}
 
 
@@ -144,13 +144,13 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$result = $productManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $productItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No product found' );
+			throw new \RuntimeException( 'No product found' );
 		}
 
 		$refPrices = $productItem->getRefItems( 'price', 'default', 'default' );
 
 		if( ( $productPrice = reset( $refPrices ) ) === false ) {
-			throw new \Exception( 'No product price available' );
+			throw new \RuntimeException( 'No product price available' );
 		}
 
 
@@ -191,7 +191,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$attributes = $attrManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $attribute = reset( $attributes ) ) === false ) {
-			throw new \Exception( 'No attribute found' );
+			throw new \RuntimeException( 'No attribute found' );
 		}
 
 		$orderProdAttrManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product/attribute' );
@@ -222,7 +222,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 	{
 		$products = $this->order->getProducts();
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new \Exception( 'There is a product missing from your test data.' );
+			throw new \RuntimeException( 'There is a product missing from your test data.' );
 		}
 
 		$refPrice = $product->getPrice()->getValue();
@@ -241,7 +241,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 			$products = $this->order->getProducts();
 
 			if( ( $product = reset( $products ) ) === false ) {
-				throw new \Exception( 'No product availalbe' );
+				throw new \RuntimeException( 'No product availalbe' );
 			};
 
 			$this->assertEquals( $refPrice, $product->getPrice()->getValue() );
@@ -255,7 +255,7 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$products = $this->order->getProducts();
 
 		if( ( $product = reset( $products ) ) === false ) {
-			throw new \Exception( 'Product missing from your test data.' );
+			throw new \RuntimeException( 'Product missing from your test data.' );
 		}
 
 		$product->setPrice( $this->price );

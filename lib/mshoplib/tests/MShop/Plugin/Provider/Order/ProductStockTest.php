@@ -78,7 +78,7 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 		try
 		{
 			$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
-			throw new \Exception( 'Expected exception not thrown' );
+			throw new \RuntimeException( 'Expected exception not thrown' );
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
@@ -125,7 +125,7 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 		$productItems = $productManager->searchItems( $search );
 
 		if( ( $productItem = reset( $productItems ) ) == false ) {
-			throw new \Exception( 'No product item found' );
+			throw new \RuntimeException( 'No product item found' );
 		}
 
 		$orderProductManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/product' );

@@ -58,7 +58,7 @@ class ProductAddPricePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$types = $priceTypeManager->searchItems( $search );
 
 		if( ( $priceTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Price type item not found' );
+			throw new \RuntimeException( 'Price type item not found' );
 		}
 
 
@@ -84,7 +84,7 @@ class ProductAddPricePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$types = $productListTypeManager->searchItems( $search );
 
 		if( ( $listTypeItem = reset( $types ) ) === false ) {
-			throw new \Exception( 'Product list type item not found' );
+			throw new \RuntimeException( 'Product list type item not found' );
 		}
 
 

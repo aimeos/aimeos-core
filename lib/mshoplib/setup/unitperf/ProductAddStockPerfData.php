@@ -57,7 +57,7 @@ class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$result = $productWarehouseManager->searchItems( $search );
 
 		if( ( $whItem = reset( $result ) ) === false ) {
-			throw new \Exception( 'No warehouse with code "default" found' );
+			throw new \RuntimeException( 'No warehouse with code "default" found' );
 		}
 
 
