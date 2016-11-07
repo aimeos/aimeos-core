@@ -34,7 +34,7 @@ class Currency
 		'currency.exclude' => array(
 			'code' => 'currency.exclude',
 			'internalcode'=> 'currency.exclude',
-			'label'=> 'List of countries not allowed for the service item',
+			'label'=> 'List of currencies not allowed for the service item',
 			'type'=> 'string',
 			'internaltype'=> 'string',
 			'default'=> '',
