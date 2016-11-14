@@ -69,8 +69,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$this->services = array(
-			'payment' => $orderServiceManager->createItem(),
-			'delivery' => $orderServiceManager->createItem(),
+			'payment' => $orderServiceManager->createItem()->setType( 'payment' ),
+			'delivery' => $orderServiceManager->createItem()->setType( 'delivery' ),
 		);
 
 
