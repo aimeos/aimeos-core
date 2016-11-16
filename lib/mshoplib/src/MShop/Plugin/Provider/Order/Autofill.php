@@ -50,13 +50,12 @@ class Autofill
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-
 		$context = $this->getContext();
 		$services = $order->getServices();
 		$addresses = $order->getAddresses();
 
 		if( ( $userid = $context->getUserId() ) !== null
-			&& $this->getConfigValue( 'autofill.useorder', true ) == true
+			&& (bool) $this->getConfigValue( 'autofill.useorder', false ) === true
 			&& ( empty( $addresses ) || empty( $services ) )
 		) {
 			$orderManager = \Aimeos\MShop\Factory::createManager( $context, 'order' );
@@ -75,6 +74,7 @@ class Autofill
 			}
 		}
 
+		$this->setAddressDefault( $order );
 		$this->setServicesDefault( $order );
 
 		return true;
@@ -137,7 +137,7 @@ class Autofill
 	{
 		$addresses = $order->getAddresses();
 
-		if( empty( $addresses ) && $this->getConfigValue( 'autofill.orderaddress', true ) == true )
+		if( empty( $addresses ) && (bool) $this->getConfigValue( 'autofill.orderaddress', true ) === true )
 		{
 			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/base/address' );
 			$search = $manager->createSearch();
@@ -176,6 +176,33 @@ class Autofill
 					$order->setService( $item, $type );
 				}
 			}
+		}
+	}
+
+
+	/**
+	 * Adds the default addresses to the basket if they are not available.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Basket object
+	 */
+	protected function setAddressDefault( \Aimeos\MShop\Order\Item\Base\Iface $order )
+	{
+		$context = $this->getContext();
+		$addresses = $order->getAddresses();
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
+
+		if( $context->getUserId() !== null && !isset( $addresses[$type] )
+			&& (bool) $this->getConfigValue( 'autofill.address', false ) === true
+		) {
+			$customerManager = \Aimeos\MShop\Factory::createManager( $context, 'customer' );
+			$orderAddressManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/address' );
+
+			$address = $customerManager->getItem( $context->getUserId() )->getPaymentAddress();
+
+			$orderAddressItem = $orderAddressManager->createItem();
+			$orderAddressItem->copyFrom( $address );
+
+			$order->setAddress( $orderAddressItem, $type );
 		}
 	}
 

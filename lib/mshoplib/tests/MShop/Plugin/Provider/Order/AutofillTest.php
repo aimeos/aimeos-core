@@ -1,13 +1,14 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2014
+ * @copyright Aimeos (aimeos.org), 2015-2016
+ */
+
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-/**
- * @copyright Metaways Infosystems GmbH, 2014
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
- */
 class AutofillTest extends \PHPUnit_Framework_TestCase
 {
 	private $plugin;
@@ -15,12 +16,6 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	private $order;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
@@ -37,12 +32,6 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->orderManager );
@@ -73,6 +62,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 	{
 		$context = \TestHelperMShop::getContext();
 		$context->setUserId( '' );
+
 		$this->plugin->setConfig( array( 'autofill.useorder' => '1' ) );
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( $context, $this->plugin );
 
@@ -209,6 +199,24 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( 2, count( $this->order->getServices() ) );
 		$this->assertEquals( array(), $this->order->getAddresses() );
+	}
+
+
+	public function testUpdateAddress()
+	{
+		$context = \TestHelperMShop::getContext();
+
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $context );
+		$context->setUserId( $customerManager->findItem( 'UTC001' )->getId() );
+
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
+		$this->plugin->setConfig( array( 'autofill.address' => '1' ) );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( $context, $this->plugin );
+
+		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
+		$this->assertEquals( array(), $this->order->getServices() );
+		$this->assertEquals( 1, count( $this->order->getAddresses() ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Address\\Iface', $this->order->getAddress( $type ) );
 	}
 
 
