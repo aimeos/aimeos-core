@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015
  * @package MShop
  * @subpackage Common
@@ -23,7 +23,7 @@ abstract class Base
 	implements \Aimeos\MShop\Common\Item\Iface
 {
 	private $prefix;
-	private $values;
+	private $basevals;
 	private $modified = false;
 
 	/**
@@ -35,7 +35,7 @@ abstract class Base
 	public function __construct( $prefix, array $values )
 	{
 		$this->prefix = (string) $prefix;
-		$this->values = $values;
+		$this->basevals = $values;
 	}
 
 
@@ -46,12 +46,12 @@ abstract class Base
 	 */
 	public function getId()
 	{
-		if( isset( $this->values['id'] ) && $this->values['id'] != '' ) {
-			return (string) $this->values['id'];
+		if( isset( $this->basevals['id'] ) && $this->basevals['id'] != '' ) {
+			return (string) $this->basevals['id'];
 		}
 
 		$key = $this->prefix . 'id';
-		return ( isset( $this->values[$key] ) && $this->values[$key] != '' ? (string) $this->values[$key] : null );
+		return ( isset( $this->basevals[$key] ) && $this->basevals[$key] != '' ? (string) $this->basevals[$key] : null );
 	}
 
 
@@ -65,13 +65,13 @@ abstract class Base
 	{
 		$key = $this->prefix . 'id';
 
-		if( ( $this->values[$key] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
+		if( ( $this->basevals[$key] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
 			$this->modified = true;
 		} else {
 			$this->modified = false;
 		}
 
-		$this->values['id'] = $this->values[$key];
+		$this->basevals['id'] = $this->basevals[$key];
 		return $this;
 	}
 
@@ -83,12 +83,12 @@ abstract class Base
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->values['siteid'] ) ) {
-			return (int) $this->values['siteid'];
+		if( isset( $this->basevals['siteid'] ) ) {
+			return (int) $this->basevals['siteid'];
 		}
 
 		$key = $this->prefix . 'siteid';
-		return ( isset( $this->values[$key] ) ? (int) $this->values[$key] : null );
+		return ( isset( $this->basevals[$key] ) ? (int) $this->basevals[$key] : null );
 	}
 
 
@@ -99,12 +99,12 @@ abstract class Base
 	 */
 	public function getTimeModified()
 	{
-		if( isset( $this->values['mtime'] ) ) {
-			return (string) $this->values['mtime'];
+		if( isset( $this->basevals['mtime'] ) ) {
+			return (string) $this->basevals['mtime'];
 		}
 
 		$key = $this->prefix . 'mtime';
-		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : null );
+		return ( isset( $this->basevals[$key] ) ? (string) $this->basevals[$key] : null );
 	}
 
 
@@ -115,12 +115,12 @@ abstract class Base
 	 */
 	public function getTimeCreated()
 	{
-		if( isset( $this->values['ctime'] ) ) {
-			return (string) $this->values['ctime'];
+		if( isset( $this->basevals['ctime'] ) ) {
+			return (string) $this->basevals['ctime'];
 		}
 
 		$key = $this->prefix . 'ctime';
-		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : null );
+		return ( isset( $this->basevals[$key] ) ? (string) $this->basevals[$key] : null );
 	}
 
 
@@ -131,12 +131,12 @@ abstract class Base
 	 */
 	public function getEditor()
 	{
-		if( isset( $this->values['editor'] ) ) {
-			return (string) $this->values['editor'];
+		if( isset( $this->basevals['editor'] ) ) {
+			return (string) $this->basevals['editor'];
 		}
 
 		$key = $this->prefix . 'editor';
-		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : '' );
+		return ( isset( $this->basevals[$key] ) ? (string) $this->basevals[$key] : '' );
 	}
 
 
@@ -314,6 +314,6 @@ abstract class Base
 	 */
 	protected function getRawValues()
 	{
-		return $this->values;
+		return $this->basevals;
 	}
 }
