@@ -20,6 +20,50 @@ namespace Aimeos\MW\Setup\Manager;
  */
 abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 {
+	private static $taskPaths = array();
+
+
+	/**
+	 * Initializes the object and sets up the autoloader
+	 *
+	 * @param array $taskPath List of directories containing the setup tasks
+	 */
+	public function __construct( array $taskPaths )
+	{
+		self::$taskPaths = $taskPaths;
+
+		if( spl_autoload_register( 'Aimeos\MW\Setup\Manager\Base::autoload' ) === false ) {
+			throw new \Aimeos\MW\Setup\Exception( 'Unable to register Aimeos\MW\Setup\Manager\Base::autoload' );
+		}
+	}
+
+
+	/**
+	 * Autoloader for setup tasks.
+	 *
+	 * @param string $classname Name of the class to load
+	 * @return boolean True if class was found, false if not
+	 */
+	public static function autoload( $classname )
+	{
+		if( strncmp( $classname, 'Aimeos\\MW\\Setup\\Task\\', 21 ) === 0 )
+		{
+		    $fileName = substr( $classname, 21 ) . '.php';
+
+			foreach( self::$taskPaths as $path )
+			{
+				$file = $path . '/' . $fileName;
+
+				if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+
 	/**
 	 * Creates a new database schema object.
 	 *

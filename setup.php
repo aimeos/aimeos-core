@@ -156,49 +156,6 @@ function getDbConfig( \Aimeos\MW\Config\Iface $conf )
 }
 
 
-/**
- * Sets the required include paths
- *
- * @param array $taskPaths List of setup task paths
- * @throws \Exception If modifying the include path isn't allowed
- */
-function setIncludePaths( array $taskPaths )
-{
-	$taskPaths[] = get_include_path();
-
-	if( set_include_path( implode( PATH_SEPARATOR, $taskPaths ) ) === false ) {
-		throw new \Exception( 'Unable to extend include path' );
-	}
-}
-
-
-/**
- * Autoloader for setup tasks
- *
- * @param string $classname Class name including namespace
- * @return boolean True if class was found, false if not
- */
-function setupAutoload( $classname )
-{
-	if( strncmp( $classname, 'Aimeos\\MW\\Setup\\Task\\', 21 ) === 0 )
-	{
-		$fileName = substr( $classname, 21 ) . '.php';
-		$paths = explode( PATH_SEPARATOR, get_include_path() );
-
-		foreach( $paths as $path )
-		{
-			$file = $path . DIRECTORY_SEPARATOR . $fileName;
-
-			if( file_exists( $file ) === true && ( include_once $file ) !== false ) {
-				return true;
-			}
-		}
-	}
-
-	return false;
-}
-
-
 
 /**
  * Prints the command usage and options, exits the program after printing
@@ -229,13 +186,10 @@ try
 	}
 
 
-	spl_autoload_register( 'setupAutoload' );
 	require 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 	$aimeos = new \Aimeos\Bootstrap( ( isset( $options['extdir'] ) ? (array) $options['extdir'] : array() ) );
-
 	$taskPaths = $aimeos->getSetupPaths( $tplsite );
-	setIncludePaths( $taskPaths );
 
 	$conf = getConfig( $aimeos->getConfigPaths(), $options );
 	$conf->set( 'setup/site', $site );

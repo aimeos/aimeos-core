@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2014
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MW
  * @subpackage Setup
  */
@@ -41,6 +41,8 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 */
 	public function __construct( \Aimeos\MW\DB\Manager\Iface $dbm, array $dbconfig, $taskpath, $additional = null )
 	{
+		parent::__construct( (array) $taskpath );
+
 		if( empty( $dbconfig ) ) {
 			throw new \Aimeos\MW\Setup\Exception( 'No databases configured in resource config file' );
 		}
@@ -65,8 +67,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 			$schemas[$rname] = $this->createSchema( $this->conns[$rname], $dbconf['adapter'], $dbconf['database'] );
 		}
 
-		if( !is_array( $taskpath ) ) { $taskpath = (array) $taskpath; }
-		$this->setupTasks( $taskpath, $this->conns, $schemas );
+		$this->setupTasks( (array) $taskpath, $this->conns, $schemas );
 	}
 
 
