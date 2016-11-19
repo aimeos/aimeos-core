@@ -26,7 +26,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	/**
 	 * Initializes the object and sets up the autoloader
 	 *
-	 * @param array $taskPath List of directories containing the setup tasks
+	 * @param array $taskPaths List of directories containing the setup tasks
 	 */
 	public function __construct( array $taskPaths )
 	{
