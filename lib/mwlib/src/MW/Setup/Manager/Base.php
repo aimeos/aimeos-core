@@ -48,7 +48,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	{
 		if( strncmp( $classname, 'Aimeos\\MW\\Setup\\Task\\', 21 ) === 0 )
 		{
-		    $fileName = substr( $classname, 21 ) . '.php';
+			$fileName = substr( $classname, 21 ) . '.php';
 
 			foreach( self::$taskPaths as $path )
 			{
