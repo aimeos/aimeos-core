@@ -60,12 +60,12 @@ return array(
 			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
