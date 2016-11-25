@@ -22,12 +22,12 @@ return array(
 			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
@@ -44,11 +44,11 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscus_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mscus_sid_code' );
-			$table->addIndex( array( 'siteid', 'status', 'lastname', 'firstname' ), 'idx_mscus_sid_st_ln_fn' );
-			$table->addIndex( array( 'siteid', 'status', 'address1', 'address2' ), 'idx_mscus_sid_st_ad1_ad2' );
-			$table->addIndex( array( 'siteid', 'status', 'postal', 'city' ), 'idx_mscus_sid_st_post_ci' );
-			$table->addIndex( array( 'siteid', 'status', 'city' ), 'idx_mscus_sid_st_city' );
 			$table->addIndex( array( 'siteid', 'langid' ), 'idx_mscus_sid_langid' );
+			$table->addIndex( array( 'siteid', 'lastname', 'firstname' ), 'idx_mscus_sid_last_first' );
+			$table->addIndex( array( 'siteid', 'postal', 'address1' ), 'idx_mscus_sid_post_addr1' );
+			$table->addIndex( array( 'siteid', 'postal', 'city' ), 'idx_mscus_sid_post_city' );
+			$table->addIndex( array( 'siteid', 'city' ), 'idx_mscus_sid_city' );
 			$table->addIndex( array( 'siteid', 'email' ), 'idx_mscus_sid_email' );
 
 			return $schema;
@@ -67,12 +67,12 @@ return array(
 			$table->addColumn( 'title', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'firstname', 'string', array( 'length' => 64 ) );
 			$table->addColumn( 'lastname', 'string', array( 'length' => 64 ) );
-			$table->addColumn( 'address1', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address2', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'address3', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'address1', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address2', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'address3', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'postal', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'city', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'state', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'city', 'string', array( 'length' => 200 ) );
+			$table->addColumn( 'state', 'string', array( 'length' => 200 ) );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'countryid', 'string', array( 'length' => 2, 'notnull' => false, 'fixed' => true ) );
 			$table->addColumn( 'telephone', 'string', array( 'length' => 32 ) );
@@ -86,13 +86,13 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscusad_id' );
+			$table->addIndex( array( 'parentid' ), 'fk_mscusad_pid' );
 			$table->addIndex( array( 'langid' ), 'idx_mscusad_langid' );
-			$table->addIndex( array( 'siteid', 'lastname', 'firstname' ), 'idx_mscusad_sid_ln_fn' );
-			$table->addIndex( array( 'siteid', 'address1', 'address2' ), 'idx_mscusad_sid_ad1_ad2' );
+			$table->addIndex( array( 'siteid', 'lastname', 'firstname' ), 'idx_mscusad_sid_last_first' );
+			$table->addIndex( array( 'siteid', 'postal', 'address1' ), 'idx_mscusad_sid_post_addr1' );
 			$table->addIndex( array( 'siteid', 'postal', 'city' ), 'idx_mscusad_sid_post_ci' );
 			$table->addIndex( array( 'siteid', 'city' ), 'idx_mscusad_sid_city' );
 			$table->addIndex( array( 'siteid', 'email' ), 'idx_mscusad_sid_email' );
-			$table->addIndex( array( 'parentid' ), 'fk_mscusad_pid' );
 
 			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
 				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mscusad_parentid' );
