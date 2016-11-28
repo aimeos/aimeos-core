@@ -74,6 +74,7 @@ class Factory
 
 		if( self::$cache === false || !isset( self::$managers[$id][$path] ) )
 		{
+			$subpath = '';
 			$parts = explode( '/', $path );
 
 			foreach( $parts as $part )
@@ -83,14 +84,14 @@ class Factory
 				}
 			}
 
-			if( ( $name = array_shift( $parts ) ) === null ) {
+			if( ( $domain = array_shift( $parts ) ) === null ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Manager path "%1$s" is invalid', $path ) );
 			}
 
 
-			if( self::$cache === false || !isset( self::$managers[$id][$name] ) )
+			if( self::$cache === false || !isset( self::$managers[$id][$domain] ) )
 			{
-				$factory = '\\Aimeos\\MShop\\' . ucwords( $name ) . '\\Manager\\Factory';
+				$factory = '\\Aimeos\\MShop\\' . ucwords( $domain ) . '\\Manager\\Factory';
 
 				if( class_exists( $factory ) === false ) {
 					throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $factory ) );
@@ -102,19 +103,22 @@ class Factory
 					throw new \Aimeos\MShop\Exception( sprintf( 'Invalid factory "%1$s"', $factory ) );
 				}
 
-				self::$managers[$id][$name] = $manager;
+				self::$managers[$id][$domain] = $manager;
 			}
 
 
 			foreach( $parts as $part )
 			{
-				$tmpname = $name . '/' . $part;
+				$subpath .= $part . '/';
+				$tmpname = $domain . '/' . $part;
+
+				$classname = $context->getConfig()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name' );
 
 				if( self::$cache === false || !isset( self::$managers[$id][$tmpname] ) ) {
-					self::$managers[$id][$tmpname] = self::$managers[$id][$name]->getSubManager( $part );
+					self::$managers[$id][$tmpname] = self::$managers[$id][$domain]->getSubManager( $part, $classname );
 				}
 
-				$name = $tmpname;
+				$domain = $tmpname;
 			}
 		}
 
