@@ -60,6 +60,8 @@ abstract class Base
 				case 'customer.telephone': $address->setTelephone( $value ); break;
 				case 'customer.telefax': $address->setTelefax( $value ); break;
 				case 'customer.website': $address->setWebsite( $value ); break;
+				case 'customer.longitude': $address->setLongitude( $value ); break;
+				case 'customer.latitude': $address->setLatitude( $value ); break;
 				case 'customer.email': $address->setEmail( $value ); break;
 			}
 		}
@@ -156,6 +158,8 @@ abstract class Base
 				case 'customer.email': $addr->setEmail( $value ); break;
 				case 'customer.telefax': $addr->setTelefax( $value ); break;
 				case 'customer.website': $addr->setWebsite( $value ); break;
+				case 'customer.longitude': $addr->setLongitude( $value ); break;
+				case 'customer.latitude': $addr->setLatitude( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -191,6 +195,8 @@ abstract class Base
 		$list['customer.email'] = $this->getPaymentAddress()->getEmail();
 		$list['customer.telefax'] = $this->getPaymentAddress()->getTelefax();
 		$list['customer.website'] = $this->getPaymentAddress()->getWebsite();
+		$list['customer.longitude'] = $this->getPaymentAddress()->getLongitude();
+		$list['customer.latitude'] = $this->getPaymentAddress()->getLatitude();
 
 		return $list;
 	}

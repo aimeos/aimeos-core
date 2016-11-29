@@ -2,28 +2,19 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Customer\Item\Address;
 
 
-/**
- * Test class for \Aimeos\MShop\Customer\Item\Address\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -48,6 +39,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.address.email' => 'test@example.com',
 			'customer.address.telefax' => '05554433222',
 			'customer.address.website' => 'www.example.com',
+			'customer.address.longitude' => '10.0',
+			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
 			'customer.address.flag' => 2,
 			'customer.address.mtime' => '2011-01-01 00:00:02',
@@ -58,12 +51,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.', $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -365,6 +352,34 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->setWebsite( 'localhost' );
 	}
 
+	public function testGetLongitude()
+	{
+		$this->assertEquals( '10.0', $this->object->getLongitude() );
+	}
+
+	public function testSetLongitude()
+	{
+		$return = $this->object->setLongitude( '10.5' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Address\Iface', $return );
+		$this->assertEquals( '10.5', $this->object->getLongitude() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+	public function testGetLatitude()
+	{
+		$this->assertEquals( '50.0', $this->object->getLatitude() );
+	}
+
+	public function testSetLatitude()
+	{
+		$return = $this->object->setLatitude( '53.5' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Address\Iface', $return );
+		$this->assertEquals( '53.5', $this->object->getLatitude() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
 	public function testGetPosition()
 	{
 		$this->assertEquals( 1, $this->object->getPosition() );
@@ -447,6 +462,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.address.telefax' => '02345',
 			'customer.address.email' => 'a@b',
 			'customer.address.website' => 'example.com',
+			'customer.address.longitude' => '10.0',
+			'customer.address.latitude' => '53.5',
 			'customer.address.flag' => 3,
 			'customer.address.position' => 4,
 		);
@@ -476,6 +493,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['customer.address.telefax'], $object->getTelefax() );
 		$this->assertEquals( $list['customer.address.email'], $object->getEmail() );
 		$this->assertEquals( $list['customer.address.website'], $object->getWebsite() );
+		$this->assertEquals( $list['customer.address.longitude'], $object->getLongitude() );
+		$this->assertEquals( $list['customer.address.latitude'], $object->getLatitude() );
 		$this->assertEquals( $list['customer.address.flag'], $object->getFlag() );
 		$this->assertEquals( $list['customer.address.position'], $object->getPosition() );
 	}
@@ -502,11 +521,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getCity(), $arrayObject['customer.address.city'] );
 		$this->assertEquals( $this->object->getState(), $arrayObject['customer.address.state'] );
 		$this->assertEquals( $this->object->getCountryId(), $arrayObject['customer.address.countryid'] );
+		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['customer.address.languageid'] );
 		$this->assertEquals( $this->object->getTelephone(), $arrayObject['customer.address.telephone'] );
 		$this->assertEquals( $this->object->getEmail(), $arrayObject['customer.address.email'] );
 		$this->assertEquals( $this->object->getTelefax(), $arrayObject['customer.address.telefax'] );
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['customer.address.website'] );
-		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['customer.address.languageid'] );
+		$this->assertEquals( $this->object->getLongitude(), $arrayObject['customer.address.longitude'] );
+		$this->assertEquals( $this->object->getLatitude(), $arrayObject['customer.address.latitude'] );
 		$this->assertEquals( $this->object->getFlag(), $arrayObject['customer.address.flag'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['customer.address.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['customer.address.mtime'] );

@@ -19,10 +19,10 @@ return array(
 				"siteid", "parentid", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
-				"email", "telefax", "website", "flag", "pos", "mtime",
-				"editor", "ctime"
+				"email", "telefax", "website", "longitude", "latitude",
+				"flag", "pos", "mtime", "editor", "ctime"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 			)
 		'
 	),
@@ -33,8 +33,8 @@ return array(
 				"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 				"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 				"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
-				"email" = ?, "telefax" = ?, "website" = ?, "flag" = ?,
-				"pos" = ?, "mtime" = ?, "editor" = ?
+				"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
+				"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
 	),
@@ -51,6 +51,7 @@ return array(
 				msupad."countryid" AS "supplier.address.countryid", msupad."langid" AS "supplier.address.languageid",
 				msupad."telephone" AS "supplier.address.telephone", msupad."email" AS "supplier.address.email",
 				msupad."telefax" AS "supplier.address.telefax", msupad."website" AS "supplier.address.website",
+				msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
 				msupad."flag" AS "supplier.address.flag", msupad."mtime" AS "supplier.address.mtime",
 				msupad."editor" AS "supplier.address.editor", msupad."ctime" AS "supplier.address.ctime"
 			FROM "mshop_supplier_address" AS msupad
@@ -61,8 +62,9 @@ return array(
 				msupad."firstname", msupad."lastname", msupad."address1", msupad."address2",
 				msupad."address3", msupad."postal", msupad."city", msupad."state",
 				msupad."countryid", msupad."langid", msupad."telephone", msupad."email",
-				msupad."telefax", msupad."website", msupad."flag", msupad."mtime",
-				msupad."editor", msupad."ctime" /*-columns*/ , :columns /*columns-*/
+				msupad."telefax", msupad."website", msupad."longitude", msupad."latitude",
+				msupad."flag", msupad."mtime", msupad."editor", msupad."ctime"
+				/*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

@@ -61,6 +61,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.address.email' => 'test@example.com',
 			'customer.address.telefax' => '05554433222',
 			'customer.address.website' => 'www.example.com',
+			'customer.address.longitude' => '10.0',
+			'customer.address.latitude' => '50.0',
 			'customer.address.position' => 1,
 			'customer.address.siteid' => \TestHelperMShop::getContext()->getLocale()->getSiteId(),
 		);
@@ -168,6 +170,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getEmail(), $itemSaved->getEmail() );
 		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax() );
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
+		$this->assertEquals( $item->getLongitude(), $itemSaved->getLongitude() );
+		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
 		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -196,6 +200,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getEmail(), $itemUpd->getEmail() );
 		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax() );
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
+		$this->assertEquals( $itemExp->getLongitude(), $itemUpd->getLongitude() );
+		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
 		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
@@ -217,8 +223,31 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$conditions = array(
+			$search->compare( '!=', 'customer.address.id', null ),
+			$search->compare( '!=', 'customer.address.parentid', null ),
 			$search->compare( '==', 'customer.address.company', 'Example company' ),
-			$search->compare( '==', 'customer.address.editor', $this->editor )
+			$search->compare( '==', 'customer.address.vatid', 'DE999999999' ),
+			$search->compare( '==', 'customer.address.salutation', \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR ),
+			$search->compare( '==', 'customer.address.title', 'Dr' ),
+			$search->compare( '==', 'customer.address.firstname', 'Our' ),
+			$search->compare( '==', 'customer.address.lastname', 'Unittest' ),
+			$search->compare( '==', 'customer.address.address1', 'Pickhuben' ),
+			$search->compare( '==', 'customer.address.address2', '2-4' ),
+			$search->compare( '==', 'customer.address.address3', '' ),
+			$search->compare( '==', 'customer.address.postal', '20457' ),
+			$search->compare( '==', 'customer.address.city', 'Hamburg' ),
+			$search->compare( '==', 'customer.address.state', 'Hamburg' ),
+			$search->compare( '==', 'customer.address.countryid', 'DE' ),
+			$search->compare( '==', 'customer.address.languageid', 'de' ),
+			$search->compare( '==', 'customer.address.telephone', '055544332211' ),
+			$search->compare( '==', 'customer.address.email', 'test@example.com' ),
+			$search->compare( '==', 'customer.address.telefax', '055544332212' ),
+			$search->compare( '==', 'customer.address.website', 'www.example.com' ),
+			$search->compare( '==', 'customer.address.longitude', '10.0' ),
+			$search->compare( '==', 'customer.address.latitude', '50.0' ),
+			$search->compare( '>=', 'customer.address.mtime', '1970-01-01 00:00:00' ),
+			$search->compare( '>=', 'customer.address.ctime', '1970-01-01 00:00:00' ),
+			$search->compare( '==', 'customer.address.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );

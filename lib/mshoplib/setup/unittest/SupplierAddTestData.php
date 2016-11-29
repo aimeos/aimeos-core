@@ -116,6 +116,8 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supAdr->setTelefax( $dataset['telefax'] );
 			$supAdr->setWebsite( $dataset['website'] );
 			$supAdr->setLanguageId( $dataset['langid'] );
+			$supAdr->setLatitude( $dataset['latitude'] );
+			$supAdr->setLongitude( $dataset['longitude'] );
 			$supAdr->setParentId( $supIds[$dataset['parentid']] );
 
 			$supplierAddressManager->saveItem( $supAdr, false );

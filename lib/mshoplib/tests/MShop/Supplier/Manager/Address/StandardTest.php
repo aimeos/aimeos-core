@@ -1,22 +1,21 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
+ */
+
+
 namespace Aimeos\MShop\Supplier\Manager\Address;
 
 
-/**
- * @copyright Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object = null;
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
@@ -25,9 +24,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -138,6 +134,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getEmail(), $itemSaved->getEmail() );
 		$this->assertEquals( $item->getTelefax(), $itemSaved->getTelefax() );
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
+		$this->assertEquals( $item->getLongitude(), $itemSaved->getLongitude() );
+		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
 		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -166,6 +164,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getEmail(), $itemUpd->getEmail() );
 		$this->assertEquals( $itemExp->getTelefax(), $itemUpd->getTelefax() );
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
+		$this->assertEquals( $itemExp->getLongitude(), $itemUpd->getLongitude() );
+		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
 		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
@@ -205,10 +205,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$conditions[] = $search->compare( '==', 'supplier.address.city', 'Hamburg' );
 		$conditions[] = $search->compare( '==', 'supplier.address.state', 'Hamburg' );
 		$conditions[] = $search->compare( '==', 'supplier.address.countryid', 'DE' );
+		$conditions[] = $search->compare( '==', 'supplier.address.languageid', 'de' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telephone', '055544332211' );
 		$conditions[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
 		$conditions[] = $search->compare( '==', 'supplier.address.telefax', '055544332212' );
 		$conditions[] = $search->compare( '==', 'supplier.address.website', 'www.example.com' );
+		$conditions[] = $search->compare( '==', 'supplier.address.longitude', '10.5' );
+		$conditions[] = $search->compare( '==', 'supplier.address.latitude', '51.0' );
 		$conditions[] = $search->compare( '>=', 'supplier.address.mtime', '1970-01-01 00:00:00' );
 		$conditions[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
 		$conditions[] = $search->compare( '==', 'supplier.address.editor', $this->editor );

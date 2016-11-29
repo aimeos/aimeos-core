@@ -146,16 +146,18 @@ abstract class Base
 			$stmt->bind( 18, $item->getEmail() );
 			$stmt->bind( 19, $item->getTelefax() );
 			$stmt->bind( 20, $item->getWebsite() );
-			$stmt->bind( 21, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 22, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 23, $date ); //mtime
-			$stmt->bind( 24, $context->getEditor() );
+			$stmt->bind( 21, $item->getLongitude() );
+			$stmt->bind( 22, $item->getLatitude() );
+			$stmt->bind( 23, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 24, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 25, $date ); //mtime
+			$stmt->bind( 26, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 25, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 27, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 25, $date ); // ctime
+				$stmt->bind( 27, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

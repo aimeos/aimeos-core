@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 return array(
@@ -19,10 +19,10 @@ return array(
 				"siteid", "label", "code", "company", "vatid", "salutation", "title",
 				"firstname", "lastname", "address1", "address2", "address3",
 				"postal", "city", "state", "countryid", "langid", "telephone",
-				"email", "telefax", "website", "birthday", "status", "vdate",
-				"password", "mtime", "editor", "ctime"
+				"email", "telefax", "website", "longitude", "latitude", "birthday",
+				"status", "vdate", "password", "mtime", "editor", "ctime"
 			) VALUES (
-				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+				?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 			)
 		'
 	),
@@ -34,8 +34,8 @@ return array(
 				"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
 				"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
 				"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
-				"birthday" = ?, "status" = ?, "vdate" = ?, "password" = ?,
-				"mtime" = ?, "editor" = ?
+				"longitude" = ?, "latitude" = ?, "birthday" = ?, "status" = ?,
+				"vdate" = ?, "password" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
 	),
@@ -52,6 +52,7 @@ return array(
 				mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.langid",
 				mcus."telephone" AS "customer.telephone", mcus."email" AS "customer.email",
 				mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
+				mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
 				mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
 				mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
 				mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
@@ -64,9 +65,10 @@ return array(
 				mcus."firstname", mcus."lastname", mcus."address1", mcus."address2",
 				mcus."address3", mcus."postal", mcus."city", mcus."state",
 				mcus."countryid", mcus."langid", mcus."telephone", mcus."email",
-				mcus."telefax", mcus."website", mcus."birthday", mcus."status",
-				mcus."vdate", mcus."password", mcus."ctime", mcus."mtime",
-				mcus."editor" /*-columns*/ , :columns /*columns-*/
+				mcus."telefax", mcus."website", mcus."longitude", mcus."latitude",
+				mcus."birthday", mcus."status", mcus."vdate", mcus."password",
+				mcus."ctime", mcus."mtime", mcus."editor"
+				/*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'

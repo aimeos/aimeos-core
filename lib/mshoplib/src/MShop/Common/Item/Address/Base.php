@@ -657,6 +657,72 @@ abstract class Base
 
 
 	/**
+	 * Returns the longitude coordinate of the customer address
+	 *
+	 * @return string|null Longitude coordinate as decimal value or null
+	 */
+	public function getLongitude()
+	{
+		if( isset( $this->values[$this->prefix . 'longitude'] ) ) {
+			return (string) $this->values[$this->prefix . 'longitude'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Sets the longitude coordinate of the customer address
+	 *
+	 * @param string|null $value Longitude coordinate as decimal value or null
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 */
+	public function setLongitude( $value )
+	{
+		if( $value == '' ) { $value = null; }
+		if( $value === $this->getLongitude() ) { return $this; }
+
+		$this->values[$this->prefix . 'longitude'] = $value;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the latitude coordinate of the customer address
+	 *
+	 * @return string|null Latitude coordinate as decimal value or null
+	 */
+	public function getLatitude()
+	{
+		if( isset( $this->values[$this->prefix . 'latitude'] ) ) {
+			return (string) $this->values[$this->prefix . 'latitude'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Sets the latitude coordinate of the customer address
+	 *
+	 * @param string|null $value Latitude coordinate as decimal value or null
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 */
+	public function setLatitude( $value )
+	{
+		if( $value == '' ) { $value = null; }
+		if( $value === $this->getLatitude() ) { return $this; }
+
+		$this->values[$this->prefix . 'latitude'] = $value;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the flag value.
 	 *
 	 * @return integer Generic flag value
@@ -725,6 +791,8 @@ abstract class Base
 		$this->setTelefax( $item->getTelefax() );
 		$this->setEmail( $item->getEmail() );
 		$this->setWebsite( $item->getWebsite() );
+		$this->setLongitude( $item->getLongitude() );
+		$this->setLatitude( $item->getLatitude() );
 		$this->setFlag( $item->getFlag() );
 
 		$this->setModified();
@@ -766,6 +834,8 @@ abstract class Base
 				case $this->prefix . 'telefax': $this->setTelefax( $value ); break;
 				case $this->prefix . 'email': $this->setEmail( $value ); break;
 				case $this->prefix . 'website': $this->setWebsite( $value ); break;
+				case $this->prefix . 'longitude': $this->setLongitude( $value ); break;
+				case $this->prefix . 'latitude': $this->setLatitude( $value ); break;
 				case $this->prefix . 'flag': $this->setFlag( $value ); break;
 				default: $unknown[$key] = $value;
 			}
@@ -802,6 +872,8 @@ abstract class Base
 		$list[$this->prefix . 'telefax'] = $this->getTelefax();
 		$list[$this->prefix . 'email'] = $this->getEmail();
 		$list[$this->prefix . 'website'] = $this->getWebsite();
+		$list[$this->prefix . 'longitude'] = $this->getLongitude();
+		$list[$this->prefix . 'latitude'] = $this->getLatitude();
 		$list[$this->prefix . 'flag'] = $this->getFlag();
 
 		return $list;

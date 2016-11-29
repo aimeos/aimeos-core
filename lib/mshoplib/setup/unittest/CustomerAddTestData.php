@@ -124,6 +124,8 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$address->setTelefax( $dataset['telefax'] );
 			$address->setWebsite( $dataset['website'] );
 			$address->setLanguageId( $dataset['langid'] );
+			$address->setLatitude( $dataset['latitude'] );
+			$address->setLongitude( $dataset['longitude'] );
 
 			$customer->setId( null );
 			$customer->setLabel( $dataset['label'] );
@@ -179,6 +181,8 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$address->setTelefax( $dataset['telefax'] );
 			$address->setWebsite( $dataset['website'] );
 			$address->setLanguageId( $dataset['langid'] );
+			$address->setLatitude( $dataset['latitude'] );
+			$address->setLongitude( $dataset['longitude'] );
 			$address->setFlag( $dataset['flag'] );
 			$address->setPosition( $dataset['pos'] );
 			$address->setParentId( $parentIds[$dataset['parentid']] );

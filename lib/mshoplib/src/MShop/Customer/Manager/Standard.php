@@ -171,6 +171,20 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'customer.longitude' => array(
+			'label' => 'Customer longitude',
+			'code' => 'customer.longitude',
+			'internalcode' => 'mcus."longitude"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'customer.latitude' => array(
+			'label' => 'Customer latitude',
+			'code' => 'customer.latitude',
+			'internalcode' => 'mcus."latitude"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'customer.birthday' => array(
 			'label' => 'Customer birthday',
 			'code' => 'customer.birthday',
@@ -465,19 +479,21 @@ class Standard
 			$stmt->bind( 19, $billingAddress->getEmail() );
 			$stmt->bind( 20, $billingAddress->getTelefax() );
 			$stmt->bind( 21, $billingAddress->getWebsite() );
-			$stmt->bind( 22, $item->getBirthday() );
-			$stmt->bind( 23, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 24, $item->getDateVerified() );
-			$stmt->bind( 25, $item->getPassword() );
-			$stmt->bind( 26, $date ); // Modification time
-			$stmt->bind( 27, $context->getEditor() );
+			$stmt->bind( 22, $billingAddress->getLongitude() );
+			$stmt->bind( 23, $billingAddress->getLatitude() );
+			$stmt->bind( 24, $item->getBirthday() );
+			$stmt->bind( 25, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 26, $item->getDateVerified() );
+			$stmt->bind( 27, $item->getPassword() );
+			$stmt->bind( 28, $date ); // Modification time
+			$stmt->bind( 29, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 28, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 30, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$billingAddress->setId( $id ); // enforce ID to be present
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 28, $date ); // Creation time
+				$stmt->bind( 30, $date ); // Creation time
 			}
 
 			$stmt->execute()->finish();

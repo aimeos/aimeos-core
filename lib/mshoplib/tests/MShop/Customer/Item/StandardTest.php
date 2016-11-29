@@ -62,6 +62,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.email' => 'test@example.com',
 			'customer.telefax' => '05554433222',
 			'customer.website' => 'www.example.com',
+			'customer.longitude' => '10.0',
+			'customer.latitude' => '50.0',
 			'customer.mtime'=> '2010-01-05 00:00:05',
 			'customer.ctime'=> '2010-01-01 00:00:00',
 			'customer.editor' => 'unitTestUser'
@@ -231,6 +233,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $address->getEmail(), 'test@example.com' );
 		$this->assertEquals( $address->getTelefax(), '05554433222' );
 		$this->assertEquals( $address->getWebsite(), 'www.example.com' );
+		$this->assertEquals( $address->getLongitude(), '10.0' );
+		$this->assertEquals( $address->getLatitude(), '50.0' );
 	}
 
 	public function testSetPaymentAddress()
@@ -280,6 +284,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.email' => 'test@example.com',
 			'customer.telefax' => '05554433222',
 			'customer.website' => 'www.example.com',
+			'customer.longitude' => '10.0',
+			'customer.latitude' => '53.5',
 		);
 
 		$unknown = $item->fromArray( $list );
@@ -313,6 +319,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['customer.email'], $address->getEmail() );
 		$this->assertEquals( $list['customer.telefax'], $address->getTelefax() );
 		$this->assertEquals( $list['customer.website'], $address->getWebsite() );
+		$this->assertEquals( $list['customer.longitude'], $address->getLongitude() );
+		$this->assertEquals( $list['customer.latitude'], $address->getLatitude() );
 	}
 
 
@@ -350,6 +358,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $address->getEmail(), $arrayObject['customer.email'] );
 		$this->assertEquals( $address->getTelefax(), $arrayObject['customer.telefax'] );
 		$this->assertEquals( $address->getWebsite(), $arrayObject['customer.website'] );
+		$this->assertEquals( $address->getLongitude(), $arrayObject['customer.longitude'] );
+		$this->assertEquals( $address->getLatitude(), $arrayObject['customer.latitude'] );
 	}
 
 	public function testIsModified()

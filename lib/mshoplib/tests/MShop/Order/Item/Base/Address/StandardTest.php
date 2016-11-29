@@ -50,6 +50,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'order.base.address.email' => 'test@example.com',
 			'order.base.address.telefax' => '05554433222',
 			'order.base.address.website' => 'www.example.com',
+			'order.base.address.longitude' => '10.0',
+			'order.base.address.latitude' => '50.0',
 			'order.base.address.languageid' => 'de',
 			'order.base.address.flag' => 2,
 			'order.base.address.mtime' => '2011-01-01 00:00:02',
@@ -394,6 +396,34 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->setWebsite( 'abcde:abc' );
 	}
 
+	public function testGetLongitude()
+	{
+		$this->assertEquals( '10.0', $this->object->getLongitude() );
+	}
+
+	public function testSetLongitude()
+	{
+		$return = $this->object->setLongitude( '10.5' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertEquals( '10.5', $this->object->getLongitude() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+	public function testGetLatitude()
+	{
+		$this->assertEquals( '50.0', $this->object->getLatitude() );
+	}
+
+	public function testSetLatitude()
+	{
+		$return = $this->object->setLatitude( '53.5' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertEquals( '53.5', $this->object->getLatitude() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
 	public function testGetLanguageId()
 	{
 		$this->assertEquals( 'de', $this->object->getLanguageId() );
@@ -493,11 +523,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getCity(), $arrayObject['order.base.address.city'] );
 		$this->assertEquals( $this->object->getState(), $arrayObject['order.base.address.state'] );
 		$this->assertEquals( $this->object->getCountryId(), $arrayObject['order.base.address.countryid'] );
+		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['order.base.address.languageid'] );
 		$this->assertEquals( $this->object->getTelephone(), $arrayObject['order.base.address.telephone'] );
 		$this->assertEquals( $this->object->getEmail(), $arrayObject['order.base.address.email'] );
 		$this->assertEquals( $this->object->getTelefax(), $arrayObject['order.base.address.telefax'] );
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['order.base.address.website'] );
-		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['order.base.address.languageid'] );
+		$this->assertEquals( $this->object->getLongitude(), $arrayObject['order.base.address.longitude'] );
+		$this->assertEquals( $this->object->getLatitude(), $arrayObject['order.base.address.latitude'] );
 		$this->assertEquals( $this->object->getFlag(), $arrayObject['order.base.address.flag'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['order.base.address.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.address.mtime'] );

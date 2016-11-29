@@ -188,6 +188,20 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.address.longitude' => array(
+			'code' => 'order.base.address.longitude',
+			'internalcode' => 'mordbaad."longitude"',
+			'label' => 'Order base address longitude',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.base.address.latitude' => array(
+			'code' => 'order.base.address.latitude',
+			'internalcode' => 'mordbaad."latitude"',
+			'label' => 'Order base address latitude',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'order.base.address.flag' => array(
 			'code' => 'order.base.address.flag',
 			'internalcode' => 'mordbaad."flag"',
@@ -427,35 +441,37 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getAddressId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 4, $item->getType(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 5, $item->getCompany(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 6, $item->getVatID(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 7, $item->getSalutation(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 8, $item->getTitle(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 9, $item->getFirstname(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 10, $item->getLastname(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 11, $item->getAddress1(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 12, $item->getAddress2(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 13, $item->getAddress3(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 14, $item->getPostal(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 15, $item->getCity(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 16, $item->getState(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 17, $item->getCountryId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 18, $item->getLanguageId(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 19, $item->getTelephone(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 20, $item->getEmail(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 21, $item->getTelefax(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 22, $item->getWebsite(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 23, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 24, $date, \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 25, $context->getEditor() );
+			$stmt->bind( 3, $item->getAddressId() );
+			$stmt->bind( 4, $item->getType() );
+			$stmt->bind( 5, $item->getCompany() );
+			$stmt->bind( 6, $item->getVatID() );
+			$stmt->bind( 7, $item->getSalutation() );
+			$stmt->bind( 8, $item->getTitle() );
+			$stmt->bind( 9, $item->getFirstname() );
+			$stmt->bind( 10, $item->getLastname() );
+			$stmt->bind( 11, $item->getAddress1() );
+			$stmt->bind( 12, $item->getAddress2() );
+			$stmt->bind( 13, $item->getAddress3() );
+			$stmt->bind( 14, $item->getPostal() );
+			$stmt->bind( 15, $item->getCity() );
+			$stmt->bind( 16, $item->getState() );
+			$stmt->bind( 17, $item->getCountryId() );
+			$stmt->bind( 18, $item->getLanguageId() );
+			$stmt->bind( 19, $item->getTelephone() );
+			$stmt->bind( 20, $item->getEmail() );
+			$stmt->bind( 21, $item->getTelefax() );
+			$stmt->bind( 22, $item->getWebsite() );
+			$stmt->bind( 23, $item->getLongitude() );
+			$stmt->bind( 24, $item->getLatitude() );
+			$stmt->bind( 25, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 26, $date );
+			$stmt->bind( 27, $context->getEditor() );
 
 			if( $id !== null ) {
-				$stmt->bind( 26, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 28, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 26, $date ); // ctime
+				$stmt->bind( 28, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

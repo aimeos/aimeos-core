@@ -174,6 +174,20 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'supplier.address.longitude' => array(
+			'label' => 'Supplier address longitude',
+			'code' => 'supplier.address.longitude',
+			'internalcode' => 'msupad."longitude"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'supplier.address.latitude' => array(
+			'label' => 'Supplier address latitude',
+			'code' => 'supplier.address.latitude',
+			'internalcode' => 'msupad."latitude"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'supplier.address.flag' => array(
 			'code' => 'supplier.address.flag',
 			'internalcode' => 'msupad."flag"',
