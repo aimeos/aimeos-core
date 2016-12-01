@@ -163,10 +163,10 @@ abstract class Base implements Iface
 	 *
 	 * @param string $productCode Unique product code
 	 * @param integer $quantity Number of products in basket
-	 * @param string $warehouse Unique code of the warehouse the product is from
+	 * @param string $stockType Unique code of the stock type the product is from
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Ordered product
 	 */
-	protected function createProduct( $productCode, $quantity = 1, $warehouse = 'default' )
+	protected function createProduct( $productCode, $quantity = 1, $stockType = 'default' )
 	{
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 		$search = $productManager->createSearch( true );
@@ -191,7 +191,7 @@ abstract class Base implements Iface
 
 		$orderProduct->copyFrom( $product );
 		$orderProduct->setQuantity( $quantity );
-		$orderProduct->setWarehouseCode( $warehouse );
+		$orderProduct->setStockType( $stockType );
 		$orderProduct->setPrice( $price );
 		$orderProduct->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
 
@@ -206,11 +206,11 @@ abstract class Base implements Iface
 	 * @param string $productCode Unique product code
 	 * @param float $rebate Rebate amount that should be granted
 	 * @param integer $quantity Number of products in basket
-	 * @param string $warehouse Unique code of the warehouse the product is from
+	 * @param string $stockType Unique code of the stock type the product is from
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Order products with monetary rebates
 	 */
 	protected function createMonetaryRebateProducts( \Aimeos\MShop\Order\Item\Base\Iface $base,
-		$productCode, $rebate, $quantity = 1, $warehouse = 'default' )
+		$productCode, $rebate, $quantity = 1, $stockType = 'default' )
 	{
 		$orderProducts = array();
 		$prices = $this->getPriceByTaxRate( $base );
@@ -240,7 +240,7 @@ abstract class Base implements Iface
 				$rebate = '0.00';
 			}
 
-			$orderProduct = $this->createProduct( $productCode, $quantity, $warehouse );
+			$orderProduct = $this->createProduct( $productCode, $quantity, $stockType );
 
 			$price = $orderProduct->getPrice();
 			$price->setValue( -$value );

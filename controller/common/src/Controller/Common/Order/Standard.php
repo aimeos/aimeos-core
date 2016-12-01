@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2014
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package Controller
  * @subpackage Common
  */
@@ -221,7 +221,7 @@ class Standard
 		$search = $stockManager->createSearch();
 		$expr = array(
 			$search->compare( '==', 'product.stock.parentid', $prodIds ),
-			$search->compare( '==', 'product.stock.warehouse.code', $whcode ),
+			$search->compare( '==', 'product.stock.type.code', $whcode ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
@@ -328,13 +328,13 @@ class Standard
 
 				foreach( $items as $item )
 				{
-					$stockManager->increase( $item->getProductCode(), $item->getWarehouseCode(), $how * $item->getQuantity() );
+					$stockManager->increase( $item->getProductCode(), $item->getStockType(), $how * $item->getQuantity() );
 
 					switch( $item->getType() ) {
 						case 'default':
-							$this->updateStockBundle( $item->getProductId(), $item->getWarehouseCode() ); break;
+							$this->updateStockBundle( $item->getProductId(), $item->getStockType() ); break;
 						case 'select':
-							$this->updateStockSelection( $item->getProductId(), $item->getWarehouseCode() ); break;
+							$this->updateStockSelection( $item->getProductId(), $item->getStockType() ); break;
 					}
 				}
 
@@ -355,10 +355,10 @@ class Standard
 
 
 	/**
-	 * Updates the stock levels of bundles for a specific warehouse
+	 * Updates the stock levels of bundles for a specific type
 	 *
 	 * @param string $prodId Unique product ID
-	 * @param string $whcode Unique warehouse code
+	 * @param string $whcode Unique stock type
 	 */
 	protected function updateStockBundle( $prodId, $whcode )
 	{
@@ -405,12 +405,12 @@ class Standard
 
 
 	/**
-	 * Updates the stock levels of selection products for a specific warehouse
+	 * Updates the stock levels of selection products for a specific type
 	 *
 	 * @param string $prodId Unique product ID
-	 * @param string $whcode Unique warehouse code
+	 * @param string $stocktype Unique stock type
 	 */
-	protected function updateStockSelection( $prodId, $whcode )
+	protected function updateStockSelection( $prodId, $stocktype )
 	{
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 		$stockManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock' );
@@ -421,7 +421,7 @@ class Standard
 		$prodIds = array_keys( $productItem->getRefItems( 'product', 'default', 'default' ) );
 		$prodIds[] = $prodId;
 
-		foreach( $this->getStockItems( $prodIds, $whcode ) as $stockItem )
+		foreach( $this->getStockItems( $prodIds, $stocktype ) as $stockItem )
 		{
 			if( $stockItem->getParentId() == $prodId ) {
 				$selStockItem = $stockItem;
@@ -438,11 +438,11 @@ class Standard
 
 		if( $selStockItem === null )
 		{
-			$whManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock/warehouse' );
-			$whid = $whManager->findItem( $whcode )->getId();
+			$typeManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product/stock/type' );
+			$typeId = $typeManager->findItem( $stocktype, array(), 'product' )->getId();
 
 			$selStockItem = $stockManager->createItem();
-			$selStockItem->setWarehouseId( $whid );
+			$selStockItem->setTypeId( $typeId );
 			$selStockItem->setParentId( $prodId );
 		}
 

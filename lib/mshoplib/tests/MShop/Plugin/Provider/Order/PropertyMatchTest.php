@@ -1,17 +1,14 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2013
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2013
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-/**
- * Test class for \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch.
- */
 class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -20,12 +17,6 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 	private $products;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
@@ -67,12 +58,6 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object, $this->order, $this->plugin, $this->products );
@@ -90,7 +75,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 		// single condition
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
-		$this->plugin->setConfig( array( 'product.stock.warehouse.code' => 'default' ) );
+		$this->plugin->setConfig( array( 'product.stock.type.code' => 'default' ) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
@@ -98,7 +83,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 
 		// two conditions
 		$this->plugin->setConfig( array(
-			'product.stock.warehouse.code' => 'default',
+			'product.stock.type.code' => 'default',
 			'product.label' => 'Cafe Noire Cappuccino',
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
@@ -120,7 +105,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 	public function testUpdateFailMultipleConditions()
 	{
 		$this->plugin->setConfig( array(
-			'product.stock.warehouse.code' => 'unit_warehouse2',
+			'product.stock.type.code' => 'unit_type2',
 			'product.label' => 'wrong label',
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );

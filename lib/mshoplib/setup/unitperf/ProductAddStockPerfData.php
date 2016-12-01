@@ -49,15 +49,15 @@ class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$productStockManager = $productManager->getSubManager( 'stock' );
-		$productWarehouseManager = $productStockManager->getSubManager( 'warehouse' );
+		$productTypeManager = $productStockManager->getSubManager( 'type' );
 
 
-		$search = $productWarehouseManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.warehouse.code', 'default' ) );
-		$result = $productWarehouseManager->searchItems( $search );
+		$search = $productTypeManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.stock.type.code', 'default' ) );
+		$result = $productTypeManager->searchItems( $search );
 
 		if( ( $whItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No warehouse with code "default" found' );
+			throw new \RuntimeException( 'No type with code "default" found' );
 		}
 
 
@@ -67,7 +67,7 @@ class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$search->setSlice( 0, 1000 );
 
 		$start = 0;
-		$warehouseid = $whItem->getId();
+		$typeid = $whItem->getId();
 		$stocklevels = array( null, 100, 80, 60, 40, 20, 10, 5, 2, 0 );
 
 
@@ -81,7 +81,7 @@ class ProductAddStockPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 			{
 				$item->setId( null );
 				$item->setParentId( $id );
-				$item->setWarehouseId( $warehouseid );
+				$item->setTypeId( $typeid );
 				$item->setStockLevel( current( $stocklevels ) );
 				$productStockManager->saveItem( $item );
 

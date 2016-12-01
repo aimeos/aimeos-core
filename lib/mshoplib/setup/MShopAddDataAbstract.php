@@ -389,11 +389,11 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function addProductStock( $productid, array $data )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock/warehouse' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock/type' );
 
-		$warehouses = array();
+		$types = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
-			$warehouses[$item->getCode()] = $id;
+			$types[$item->getCode()] = $id;
 		}
 
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
@@ -406,7 +406,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setId( null );
 			$item->setDateBack( $entry['dateback'] );
 			$item->setStockLevel( $entry['stocklevel'] );
-			$item->setWarehouseId( $warehouses[$entry['warehouse']] );
+			$item->setTypeId( $types[$entry['type']] );
 
 			$manager->saveItem( $item, false );
 		}

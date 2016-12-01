@@ -50,42 +50,40 @@ class ProductStock
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
+
 		if( !( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) {
 			return true;
 		}
 
+		return $this->checkStockAll( $order );
+	}
 
-		$context = $this->getContext();
-		$outOfStock = $productQuantities = $positions = array();
-		$siteConfig = $context->getLocale()->getSite()->getConfig();
 
-		foreach( $order->getProducts() as $position => $pr )
+	/**
+	 * Checks if all products in the basket have enough stock
+	 *
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
+	 * @return bool True if the checks succeeded
+	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one or more products are out of stock
+	 */
+	protected function checkStockAll( \Aimeos\MShop\Order\Item\Base\Iface $order )
+	{
+		$productIds = $stockTypes = $stockMap = array();
+
+
+		foreach( $order->getProducts() as $orderProductItem )
 		{
-			$productQuantities[$pr->getProductId()] = $pr->getQuantity();
-			$positions[$pr->getProductId()] = $position;
+			$productIds[] = $orderProductItem->getProductId();
+			$stockTypes[] = $orderProductItem->getStockType();
 		}
 
-		$stockManager = \Aimeos\MShop\Factory::createManager( $context, 'product/stock' );
+		$stockItems = $this->getStockItems( $productIds, $stockTypes );
 
-		$search = $stockManager->createSearch();
-		$expr = array( $search->compare( '==', 'product.stock.parentid', array_keys( $productQuantities ) ) );
-
-		if( isset( $siteConfig['repository'] ) ) {
-			$expr[] = $search->compare( '==', 'product.stock.warehouse.code', $siteConfig['warehouse'] );
+		foreach( $stockItems as $stockItem ) {
+			$stockMap[ $stockItem->getParentId() ][ $stockItem->getType() ] = $stockItem->getStocklevel();
 		}
 
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$checkItems = $stockManager->searchItems( $search );
-
-		foreach( $checkItems as $checkItem )
-		{
-			$parentid = $checkItem->getParentId();
-			$stocklevel = $checkItem->getStocklevel();
-
-			if( $stocklevel !== null && $stocklevel < $productQuantities[$parentid] ) {
-				$outOfStock[$positions[$parentid]] = 'stock.notenough';
-			}
-		}
+		$outOfStock = $this->getOutOfStock( $order, $stockMap );
 
 		if( count( $outOfStock ) > 0 )
 		{
@@ -93,6 +91,63 @@ class ProductStock
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Products out of stock' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
+
 		return true;
+	}
+
+
+	/**
+	 * Returns all product positions that have not enough stock
+	 * Adapts the quantity of ordered products where not enough stock is available
+	 *
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
+	 * @param array $stockMap Multi-dimensional associative list of product IDs / stock types / stock levels
+	 * @return array Associative list of product positions in the basket as keys and the out-of-stock code as values
+	 */
+	protected function getOutOfStock( \Aimeos\MShop\Order\Item\Base\Iface $order, array $stockMap )
+	{
+		$outOfStock = array();
+
+		foreach( $order->getProducts() as $position => $orderProductItem )
+		{
+			if( !isset( $stockMap[ $orderProductItem->getProductId() ] )
+				|| !array_key_exists( $orderProductItem->getStockType(), $stockMap[ $orderProductItem->getProductId() ] )
+			) {
+				$outOfStock[ $position ] = 'stock.notenough';
+				continue;
+			}
+
+			$stocklevel = $stockMap[ $orderProductItem->getProductId() ][ $orderProductItem->getStockType() ];
+
+			if( $stocklevel !== null && $stocklevel < $orderProductItem->getQuantity() )
+			{
+				$orderProductItem->setQuantity( $stocklevel );
+				$outOfStock[ $position ] = 'stock.notenough';
+			}
+		}
+
+		return $outOfStock;
+	}
+
+
+	/**
+	 * Returns the stock items for the given product IDs and stock types
+	 *
+	 * @param array|string $productIds Unique product ID or list of product IDs
+	 * @param array|string $types Unique stock types to limit the stock items
+	 * @return array Associative list of stock item IDs as keys and items implementing \Aimeos\MShop\Product\Item\Stock\Iface as values
+	 */
+	protected function getStockItems( $productIds, $types )
+	{
+		$stockManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
+
+		$search = $stockManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'product.stock.parentid', $productIds ),
+			$search->compare( '==', 'product.stock.type.code', $types ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return $stockManager->searchItems( $search );
 	}
 }

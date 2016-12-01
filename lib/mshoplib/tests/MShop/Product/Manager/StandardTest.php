@@ -3,16 +3,13 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Product\Manager;
 
 
-/**
- * Test class for \Aimeos\MShop\Product\Manager\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
@@ -20,12 +17,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
@@ -34,12 +25,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Product\Manager\Standard( $this->context );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -76,7 +61,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains( 'product/property', $result );
 		$this->assertContains( 'product/property/type', $result );
 		$this->assertContains( 'product/stock', $result );
-		$this->assertContains( 'product/stock/warehouse', $result );
+		$this->assertContains( 'product/stock/type', $result );
 	}
 
 
@@ -332,15 +317,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '!=', 'product.stock.id', null );
 		$expr[] = $search->compare( '!=', 'product.stock.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.stock.parentid', null );
-		$expr[] = $search->compare( '!=', 'product.stock.warehouseid', null );
+		$expr[] = $search->compare( '!=', 'product.stock.typeid', null );
 		$expr[] = $search->compare( '==', 'product.stock.stocklevel', 1000 );
 		$expr[] = $search->compare( '==', 'product.stock.dateback', '2010-04-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.stock.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'product.stock.warehouse.id', null );
-		$expr[] = $search->compare( '!=', 'product.stock.warehouse.siteid', null );
-		$expr[] = $search->compare( '==', 'product.stock.warehouse.code', 'default' );
-		$expr[] = $search->compare( '==', 'product.stock.warehouse.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'product.stock.type.id', null );
+		$expr[] = $search->compare( '!=', 'product.stock.type.siteid', null );
+		$expr[] = $search->compare( '==', 'product.stock.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'product.stock.type.editor', $this->editor );
 
 		$expr[] = $search->compare( '!=', 'product.property.id', null );
 		$expr[] = $search->compare( '!=', 'product.property.siteid', null );

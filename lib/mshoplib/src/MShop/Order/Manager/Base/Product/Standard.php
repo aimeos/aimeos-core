@@ -86,10 +86,10 @@ class Standard
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.base.product.warehousecode' => array(
-			'code'=>'order.base.product.warehousecode',
-			'internalcode'=>'mordbapr."warehousecode"',
-			'label'=>'Order base product warehouse code',
+		'order.base.product.stocktype' => array(
+			'code'=>'order.base.product.stocktype',
+			'internalcode'=>'mordbapr."stocktype"',
+			'label'=>'Order base product stock type',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -448,7 +448,7 @@ class Standard
 			$stmt->bind( 5, $item->getProductId() );
 			$stmt->bind( 6, $item->getProductCode() );
 			$stmt->bind( 7, $item->getSupplierCode() );
-			$stmt->bind( 8, $item->getWarehouseCode() );
+			$stmt->bind( 8, $item->getStockType() );
 			$stmt->bind( 9, $item->getName() );
 			$stmt->bind( 10, $item->getMediaUrl() );
 			$stmt->bind( 11, $item->getQuantity() );

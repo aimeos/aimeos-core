@@ -31,7 +31,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'product.stock.id' => 66,
 			'product.stock.siteid' => 99,
 			'product.stock.parentid' => 46677,
-			'product.stock.warehouseid' => 44,
+			'product.stock.typeid' => 44,
+			'product.stock.type' => 'default',
+			'product.stock.typename' => 'Standard',
 			'product.stock.stocklevel' => 1000,
 			'product.stock.backdate' => '2010-01-01 11:55:00',
 			'product.stock.mtime' => '2011-01-01 00:00:02',
@@ -86,17 +88,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetWarehouseId()
+	public function testGetTypeId()
 	{
-		$this->assertEquals( 44, $this->object->getWarehouseId() );
+		$this->assertEquals( 44, $this->object->getTypeId() );
 	}
 
-	public function testSetWarehouseId()
+	public function testSetTypeId()
 	{
-		$return = $this->object->setWarehouseId( 30000 );
+		$return = $this->object->setTypeId( 30000 );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Stock\Iface', $return );
-		$this->assertEquals( 30000, $this->object->getWarehouseId() );
+		$this->assertEquals( 30000, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -166,7 +168,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$list = array(
 			'product.stock.id' => 1,
 			'product.stock.parentid' => 2,
-			'product.stock.warehouseid' => 3,
+			'product.stock.typeid' => 3,
 			'product.stock.stocklevel' => 10,
 			'product.stock.dateback' => '2000-01-01 00:00:00',
 		);
@@ -177,7 +179,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $list['product.stock.id'], $item->getId() );
 		$this->assertEquals( $list['product.stock.parentid'], $item->getParentId() );
-		$this->assertEquals( $list['product.stock.warehouseid'], $item->getWarehouseId() );
+		$this->assertEquals( $list['product.stock.typeid'], $item->getTypeId() );
 		$this->assertEquals( $list['product.stock.stocklevel'], $item->getStocklevel() );
 		$this->assertEquals( $list['product.stock.dateback'], $item->getDateBack() );
 	}
@@ -191,7 +193,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['product.stock.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['product.stock.siteid'] );
 		$this->assertEquals( $this->object->getParentId(), $arrayObject['product.stock.parentid'] );
-		$this->assertEquals( $this->object->getWarehouseId(), $arrayObject['product.stock.warehouseid'] );
+		$this->assertEquals( $this->object->getTypeId(), $arrayObject['product.stock.typeid'] );
 		$this->assertEquals( $this->object->getStocklevel(), $arrayObject['product.stock.stocklevel'] );
 		$this->assertEquals( $this->object->getDateBack(), $arrayObject['product.stock.dateback'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['product.stock.ctime'] );

@@ -1,13 +1,15 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
+ */
+
+
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-/**
- * @copyright Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
- */
 class ProductStockTest extends \PHPUnit_Framework_TestCase
 {
 	private $order;
@@ -15,12 +17,6 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 	private $context;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
@@ -35,12 +31,6 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->plugin, $this->order, $this->context );
@@ -90,12 +80,19 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateNoStockItem()
 	{
-		$const = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
-
 		$this->order->addProduct( $this->getOrderProduct( 'QRST' ) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', $const ) );
+		try
+		{
+			$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
+			throw new \RuntimeException( 'Expected exception not thrown' );
+		}
+		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
+		{
+			$ref = array( 'product' => array( '0' => 'stock.notenough' ) );
+			$this->assertEquals( $ref, $e->getErrorCodes() );
+		}
 	}
 
 
@@ -104,7 +101,10 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 		$const = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 
-		$this->order->addProduct( $this->getOrderProduct( 'MNOP' ) );
+		$orderProduct = $this->getOrderProduct( 'MNOP' );
+		$orderProduct->setStockType( 'unit_type4' );
+
+		$this->order->addProduct( $orderProduct );
 
 		$this->assertTrue( $object->update( $this->order, 'check.after', $const ) );
 	}

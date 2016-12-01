@@ -1,18 +1,15 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Order\Manager\Base\Product;
 
 
-/**
- * Test class for \Aimeos\MShop\Order\Manager\Base\Product\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
@@ -28,12 +25,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -44,11 +35,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:unittest' ) );
-		$result = $this->object->aggregate( $search, 'order.base.product.warehousecode' );
+		$result = $this->object->aggregate( $search, 'order.base.product.stocktype' );
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertArrayHasKey( 'unit_warehouse1', $result );
-		$this->assertEquals( 11, $result['unit_warehouse1'] );
+		$this->assertArrayHasKey( 'unit_type1', $result );
+		$this->assertEquals( 11, $result['unit_type1'] );
 	}
 
 
@@ -103,7 +94,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '!=', 'order.base.product.productid', null );
 		$expr[] = $search->compare( '==', 'order.base.product.prodcode', 'CNE' );
 		$expr[] = $search->compare( '==', 'order.base.product.suppliercode', 'unitsupplier' );
-		$expr[] = $search->compare( '==', 'order.base.product.warehousecode', 'unit_warehouse1' );
+		$expr[] = $search->compare( '==', 'order.base.product.stocktype', 'unit_type1' );
 		$expr[] = $search->compare( '==', 'order.base.product.name', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
@@ -216,7 +207,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getProductId(), $itemSaved->getProductId() );
 		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
 		$this->assertEquals( $item->getSupplierCode(), $itemSaved->getSupplierCode() );
-		$this->assertEquals( $item->getWarehouseCode(), $itemSaved->getWarehouseCode() );
+		$this->assertEquals( $item->getStockType(), $itemSaved->getStockType() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 		$this->assertEquals( $item->getMediaUrl(), $itemSaved->getMediaUrl() );
 		$this->assertEquals( $item->getPrice(), $itemSaved->getPrice() );
@@ -238,7 +229,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getProductId(), $itemUpd->getProductId() );
 		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
 		$this->assertEquals( $itemExp->getSupplierCode(), $itemUpd->getSupplierCode() );
-		$this->assertEquals( $itemExp->getWarehouseCode(), $itemUpd->getWarehouseCode() );
+		$this->assertEquals( $itemExp->getStockType(), $itemUpd->getStockType() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 		$this->assertEquals( $itemExp->getMediaUrl(), $itemUpd->getMediaUrl() );
 		$this->assertEquals( $itemExp->getPrice(), $itemUpd->getPrice() );

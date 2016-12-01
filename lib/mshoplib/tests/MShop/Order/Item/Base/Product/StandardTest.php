@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
@@ -22,12 +22,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	private $subProducts;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->price = \Aimeos\MShop\Price\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
@@ -55,7 +49,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'order.base.product.baseid' => 42,
 			'order.base.product.suppliercode' => 'UnitSupplier',
 			'order.base.product.prodcode' => 'UnitProd',
-			'order.base.product.warehousecode' => 'unitwarehouse',
+			'order.base.product.stocktype' => 'unittype',
 			'order.base.product.name' => 'UnitProduct',
 			'order.base.product.mediaurl' => 'testurl',
 			'order.base.product.quantity' => 11,
@@ -74,12 +68,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Product\Standard( $this->price, $this->values, $this->attribute, $this->subProducts );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -215,17 +203,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetWarehouseCode()
+	public function testGetStockType()
 	{
-		$this->assertEquals( 'unitwarehouse', $this->object->getWarehouseCode() );
+		$this->assertEquals( 'unittype', $this->object->getStockType() );
 	}
 
-	public function testSetWarehouseCode()
+	public function testSetStockType()
 	{
-		$return = $this->object->setWarehouseCode( 'testWarehouseCode' );
+		$return = $this->object->setStockType( 'testStockType' );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
-		$this->assertEquals( 'testWarehouseCode', $this->object->getWarehouseCode() );
+		$this->assertEquals( 'testStockType', $this->object->getStockType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -592,6 +580,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'order.base.product.productid' => 3,
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.name' => 'test item',
+			'order.base.product.stocktype' => 'stocktype',
 			'order.base.product.suppliercode' => 'testsup',
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.mediaurl' => '/path/to/image.jpg',
@@ -615,6 +604,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['order.base.product.productid'], $item->getProductId() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.name'], $item->getName() );
+		$this->assertEquals( $list['order.base.product.stocktype'], $item->getStockType() );
 		$this->assertEquals( $list['order.base.product.suppliercode'], $item->getSupplierCode() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.mediaurl'], $item->getMediaUrl() );
@@ -636,6 +626,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['order.base.product.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['order.base.product.siteid'] );
 		$this->assertEquals( $this->object->getBaseId(), $arrayObject['order.base.product.baseid'] );
+		$this->assertEquals( $this->object->getStockType(), $arrayObject['order.base.product.stocktype'] );
 		$this->assertEquals( $this->object->getSupplierCode(), $arrayObject['order.base.product.suppliercode'] );
 		$this->assertEquals( $this->object->getProductId(), $arrayObject['order.base.product.productid'] );
 		$this->assertEquals( $this->object->getProductCode(), $arrayObject['order.base.product.prodcode'] );

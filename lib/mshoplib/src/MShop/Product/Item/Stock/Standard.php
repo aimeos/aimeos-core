@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MShop
  * @subpackage Product
  */
@@ -24,6 +24,7 @@ class Standard
 {
 	private $values;
 
+
 	/**
 	 * Initializes the stock item object with the given values
 	 *
@@ -34,6 +35,68 @@ class Standard
 		parent::__construct( 'product.stock.', $values );
 
 		$this->values = $values;
+	}
+
+
+	/**
+	 * Returns the type code of the product stock item.
+	 *
+	 * @return string|null Type code of the product stock item
+	 */
+	public function getType()
+	{
+		if( isset( $this->values['product.stock.type'] ) ) {
+			return (string) $this->values['product.stock.type'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Returns the localized name of the type
+	 *
+	 * @return string|null Localized name of the type
+	 */
+	public function getTypeName()
+	{
+		if( isset( $this->values['product.stock.typename'] ) ) {
+			return (string) $this->values['product.stock.typename'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Returns the type id of the product stock item
+	 *
+	 * @return integer|null Type of the product stock item
+	 */
+	public function getTypeId()
+	{
+		if( isset( $this->values['product.stock.typeid'] ) ) {
+			return (int) $this->values['product.stock.typeid'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Sets the new type of the product stock item
+	 *
+	 * @param integer|null $id Type of the product stock item
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product stock item for chaining method calls
+	 */
+	public function setTypeId( $id )
+	{
+		if ( $id == $this->getTypeId() ) { return $this; }
+
+		$this->values['product.stock.typeid'] = (int) $id;
+		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -63,38 +126,6 @@ class Standard
 		if( $parentid == $this->getParentId() ) { return $this; }
 
 		$this->values['product.stock.parentid'] = (int) $parentid;
-		$this->setModified();
-
-		return $this;
-	}
-
-
-	/**
-	 * Returns the warehouse Id.
-	 *
-	 * @return integer|null Warehouse Id
-	 */
-	public function getWarehouseId()
-	{
-		if( isset( $this->values['product.stock.warehouseid'] ) ) {
-			return (int) $this->values['product.stock.warehouseid'];
-		}
-
-		return null;
-	}
-
-
-	/**
-	 * Sets the warehouse Id.
-	 *
-	 * @param integer|null $warehouseid New warehouse Id
-	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
-	 */
-	public function setWarehouseId( $warehouseid )
-	{
-		if( $warehouseid == $this->getWarehouseId() ) { return $this; }
-
-		$this->values['product.stock.warehouseid'] = (int) $warehouseid;
 		$this->setModified();
 
 		return $this;
@@ -192,9 +223,9 @@ class Standard
 			switch( $key )
 			{
 				case 'product.stock.parentid': $this->setParentId( $value ); break;
-				case 'product.stock.warehouseid': $this->setWarehouseId( $value ); break;
 				case 'product.stock.stocklevel': $this->setStocklevel( $value ); break;
 				case 'product.stock.dateback': $this->setDateBack( $value ); break;
+				case 'product.stock.typeid': $this->setTypeId( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -213,9 +244,11 @@ class Standard
 		$list = parent::toArray();
 
 		$list['product.stock.parentid'] = $this->getParentId();
-		$list['product.stock.warehouseid'] = $this->getWarehouseId();
 		$list['product.stock.stocklevel'] = $this->getStocklevel();
 		$list['product.stock.dateback'] = $this->getDateBack();
+		$list['product.stock.typename'] = $this->getTypeName();
+		$list['product.stock.typeid'] = $this->getTypeId();
+		$list['product.stock.type'] = $this->getType();
 
 		return $list;
 	}

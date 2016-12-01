@@ -21,23 +21,23 @@ interface Iface
 	extends \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	/**
-	 * Decreases the stock level of the product for the warehouse.
+	 * Decreases the stock level of the product for the stock type.
 	 *
 	 * @param string $productCode Unique code of a product
-	 * @param string $warehouseCode Unique code of the warehouse
+	 * @param string $stockType Unique code of the stock type
 	 * @param integer $amount Amount the stock level should be decreased
 	 * @return void
 	 */
-	public function decrease( $productCode, $warehouseCode, $amount );
+	public function decrease( $productCode, $stockType, $amount );
 
 
 	/**
-	 * Increases the stock level of the product for the warehouse.
+	 * Increases the stock level of the product for the stock type.
 	 *
 	 * @param string $productCode Unique code of a product
-	 * @param string $warehouseCode Unique code of the warehouse
+	 * @param string $stockType Unique code of the stock type
 	 * @param integer $amount Amount the stock level should be increased
 	 * @return void
 	 */
-	public function increase( $productCode, $warehouseCode, $amount );
+	public function increase( $productCode, $stockType, $amount );
 }

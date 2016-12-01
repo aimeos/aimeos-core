@@ -120,6 +120,10 @@ return array(
 		array( 'domain' => 'product', 'code' => 'package-weight', 'label' => 'Package weight', 'status' => 1 ),
 	),
 
+	'product/stock/type' => array(
+		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+	),
+
 	'tag/type' => array(
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),

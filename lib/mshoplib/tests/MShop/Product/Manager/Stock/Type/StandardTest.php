@@ -1,39 +1,28 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
-namespace Aimeos\MShop\Product\Manager\Stock\Warehouse;
+namespace Aimeos\MShop\Product\Manager\Stock\Type;
 
 
-/**
- * Test class for \Aimeos\MShop\Product\Stock\Warehouse\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
-		$this->object = new \Aimeos\MShop\Product\Manager\Stock\Warehouse\Standard( \TestHelperMShop::getContext() );
+		$this->object = new \Aimeos\MShop\Product\Manager\Stock\Type\Standard( \TestHelperMShop::getContext() );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -48,13 +37,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Product\\Item\\Stock\\Warehouse\\Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testSaveInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Product\Exception' );
+		$this->setExpectedException( '\Aimeos\MShop\Exception' );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 
@@ -63,8 +52,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'product.stock.warehouse.code', 'unit_warehouse1' ),
-			$search->compare( '==', 'product.stock.warehouse.editor', $this->editor )
+			$search->compare( '==', 'product.stock.type.code', 'unit_type1' ),
+			$search->compare( '==', 'product.stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search );
@@ -74,12 +63,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$item->setId( null );
-		$item->setCode( 'unit test warehouse' );
+		$item->setCode( 'unit test type' );
 		$this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setCode( 'unit test warehouse 2' );
+		$itemExp->setCode( 'unit test type 2' );
 		$this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
@@ -91,6 +80,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getSiteid(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
+		$this->assertEquals( $item->getDomain(), $itemSaved->getDomain() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -101,6 +91,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getSiteid(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
+		$this->assertEquals( $itemExp->getDomain(), $itemUpd->getDomain() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
@@ -114,9 +105,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'unit_warehouse1' );
+		$item = $this->object->findItem( 'unit_type1', array(), 'product' );
 
-		$this->assertEquals( 'unit_warehouse1', $item->getCode() );
+		$this->assertEquals( 'unit_type1', $item->getCode() );
 	}
 
 
@@ -124,8 +115,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'product.stock.warehouse.code', 'unit_warehouse1' ),
-			$search->compare( '==', 'product.stock.warehouse.editor', $this->editor )
+			$search->compare( '==', 'product.stock.type.code', 'unit_type1' ),
+			$search->compare( '==', 'product.stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->object->searchItems( $search );
@@ -143,7 +134,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$result = $this->object->getResourceType();
 
-		$this->assertContains( 'product/stock/warehouse', $result );
+		$this->assertContains( 'product/stock/type', $result );
 	}
 
 
@@ -161,12 +152,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'product.stock.warehouse.id', null );
-		$expr[] = $search->compare( '!=', 'product.stock.warehouse.siteid', null );
-		$expr[] = $search->compare( '==', 'product.stock.warehouse.code', 'unit_warehouse1' );
-		$expr[] = $search->compare( '>=', 'product.stock.warehouse.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.stock.warehouse.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.stock.warehouse.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'product.stock.type.id', null );
+		$expr[] = $search->compare( '!=', 'product.stock.type.siteid', null );
+		$expr[] = $search->compare( '==', 'product.stock.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'product.stock.type.code', 'unit_type1' );
+		$expr[] = $search->compare( '>=', 'product.stock.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'product.stock.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'product.stock.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, array(), $total );
@@ -178,8 +170,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'product.stock.warehouse.code', 'unit_warehouse' ),
-			$search->compare( '==', 'product.stock.warehouse.editor', $this->editor )
+			$search->compare( '~=', 'product.stock.type.code', 'unit_type' ),
+			$search->compare( '==', 'product.stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );

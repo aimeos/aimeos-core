@@ -18,23 +18,10 @@ namespace Aimeos\MShop\Product\Item\Stock;
  * @package MShop
  * @subpackage Product
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface,
+	\Aimeos\MShop\Common\Item\Parentid\Iface
 {
-	/**
-	 * Returns the warehouse Id.
-	 *
-	 * @return integer|null Warehouse Id
-	 */
-	public function getWarehouseId();
-
-	/**
-	 * Sets the Warehouse Id.
-	 *
-	 * @param integer $warehouseid New warehouse Id
-	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
-	 */
-	public function setWarehouseId( $warehouseid );
-
 	/**
 	 * Returns the stock level.
 	 *

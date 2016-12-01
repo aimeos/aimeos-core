@@ -48,10 +48,10 @@ class Standard
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.stock.warehouseid' => array(
-			'code'=>'product.stock.warehouseid',
-			'internalcode'=>'mprost."warehouseid"',
-			'label'=>'Product stock warehouse ID',
+		'product.stock.typeid' => array(
+			'code'=>'product.stock.typeid',
+			'internalcode'=>'mprost."typeid"',
+			'label'=>'Product stock type ID',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -114,7 +114,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/product/manager/stock/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'warehouse' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -241,7 +241,7 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getWarehouseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, $item->getStocklevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 5, $item->getDateBack() );
 			$stmt->bind( 6, $date ); //mtime
@@ -376,7 +376,7 @@ class Standard
 	{
 		$path = 'mshop/product/manager/stock/submanagers';
 
-		return $this->getResourceTypeBase( 'product/stock', $path, array( 'warehouse' ), $withsub );
+		return $this->getResourceTypeBase( 'product/stock', $path, array( 'type' ), $withsub );
 	}
 
 
@@ -407,7 +407,7 @@ class Standard
 		 */
 		$path = 'mshop/product/manager/stock/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'warehouse' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
 	}
 
 
@@ -421,7 +421,7 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
 	{
-		$items = array();
+		$items = $map = $typeIds = array();
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -549,8 +549,10 @@ class Standard
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
 
-			while( ( $row = $results->fetch() ) !== false ) {
-				$items[$row['product.stock.id']] = $this->createItemBase( $row );
+			while( ( $row = $results->fetch() ) !== false )
+			{
+				$map[ $row['product.stock.id'] ] = $row;
+				$typeIds[ $row['product.stock.typeid'] ] = null;
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -559,6 +561,26 @@ class Standard
 		{
 			$dbm->release( $conn, $dbname );
 			throw $e;
+		}
+
+		if( !empty( $typeIds ) )
+		{
+			$typeManager = $this->getSubManager( 'type' );
+			$typeSearch = $typeManager->createSearch();
+			$typeSearch->setConditions( $typeSearch->compare( '==', 'product.stock.type.id', array_keys( $typeIds ) ) );
+			$typeSearch->setSlice( 0, $search->getSliceSize() );
+			$typeItems = $typeManager->searchItems( $typeSearch );
+
+			foreach( $map as $id => $row )
+			{
+				if( isset( $typeItems[ $row['product.stock.typeid'] ] ) )
+				{
+					$row['product.stock.type'] = $typeItems[ $row['product.stock.typeid'] ]->getCode();
+					$row['product.stock.typename'] = $typeItems[$row['product.stock.typeid']]->getName();
+				}
+
+				$items[$id] = $this->createItemBase( $row );
+			}
 		}
 
 		return $items;
@@ -688,26 +710,26 @@ class Standard
 
 
 	/**
-	 * Decreases the stock level of the product for the warehouse.
+	 * Decreases the stock level of the product for the type.
 	 *
 	 * @param string $productCode Unique code of a product
-	 * @param string $warehouseCode Unique code of the warehouse
+	 * @param string $typeCode Unique code of the type
 	 * @param integer $amount Amount the stock level should be decreased
 	 */
-	public function decrease( $productCode, $warehouseCode, $amount )
+	public function decrease( $productCode, $typeCode, $amount )
 	{
-		$this->increase( $productCode, $warehouseCode, -$amount );
+		$this->increase( $productCode, $typeCode, -$amount );
 	}
 
 
 	/**
-	 * Increases the stock level of the product for the warehouse.
+	 * Increases the stock level of the product for the type.
 	 *
 	 * @param string $productCode Unique code of a product
-	 * @param string $warehouseCode Unique code of the warehouse
+	 * @param string $typeCode Unique code of the type
 	 * @param integer $amount Amount the stock level should be increased
 	 */
-	public function increase( $productCode, $warehouseCode, $amount )
+	public function increase( $productCode, $typeCode, $amount )
 	{
 		$context = $this->getContext();
 
@@ -716,32 +738,32 @@ class Standard
 		$search->setConditions( $search->compare( '==', 'product.code', $productCode ) );
 		$productIds = array_keys( $productManager->searchItems( $search ) );
 
-		$warehouseManager = $this->getSubManager( 'warehouse' );
-		$search = $warehouseManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.warehouse.code', $warehouseCode ) );
-		$warehouseIds = array_keys( $warehouseManager->searchItems( $search ) );
+		$typeManager = $this->getSubManager( 'type' );
+		$search = $typeManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'product.stock.type.code', $typeCode ) );
+		$typeIds = array_keys( $typeManager->searchItems( $search ) );
 
-		if( empty( $warehouseIds ) ) {
-			throw new \Aimeos\MShop\Product\Exception( sprintf( 'No warehouse for code "%1$s" found', $warehouseCode ) );
+		if( empty( $typeIds ) ) {
+			throw new \Aimeos\MShop\Product\Exception( sprintf( 'No type for code "%1$s" found', $typeCode ) );
 		}
 
 		$search = $this->createSearch();
 		$expr = array(
 			$search->compare( '==', 'product.stock.siteid', $context->getLocale()->getSitePath() ),
 			$search->compare( '==', 'product.stock.parentid', $productIds ),
-			$search->compare( '==', 'product.stock.warehouseid', $warehouseIds ),
+			$search->compare( '==', 'product.stock.typeid', $typeIds ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$types = array(
 			'product.stock.siteid' => $this->searchConfig['product.stock.siteid']['internaltype'],
 			'product.stock.parentid' => $this->searchConfig['product.stock.parentid']['internaltype'],
-			'product.stock.warehouseid' => $this->searchConfig['product.stock.warehouseid']['internaltype'],
+			'product.stock.typeid' => $this->searchConfig['product.stock.typeid']['internaltype'],
 		);
 		$translations = array(
 			'product.stock.siteid' => '"siteid"',
 			'product.stock.parentid' => '"parentid"',
-			'product.stock.warehouseid' => '"warehouseid"',
+			'product.stock.typeid' => '"typeid"',
 		);
 
 		$conditions = $search->getConditionString( $types, $translations );
@@ -753,13 +775,13 @@ class Standard
 		try
 		{
 			/** mshop/product/manager/stock/standard/stocklevel/mysql
-			 * Increases or decreases the stock level for the given product and warehouse code
+			 * Increases or decreases the stock level for the given product and type code
 			 *
 			 * @see mshop/product/manager/stock/standard/stocklevel/ansi
 			 */
 
 			/** mshop/product/manager/stock/standard/stocklevel/ansi
-			 * Increases or decreases the stock level for the given product and warehouse code
+			 * Increases or decreases the stock level for the given product and type code
 			 *
 			 * The stock level is decreased for the ordered products each time
 			 * an order is placed by a customer successfully. Also, updates
@@ -809,7 +831,7 @@ class Standard
 	 * Creates new stock item object.
 	 *
 	 * @param array $values Possible optional array keys can be given:
-	 * id, parentid, siteid, warehouseid, stocklevel, backdate
+	 * id, parentid, siteid, typeid, stocklevel, backdate
 	 * @return \Aimeos\MShop\Product\Item\Stock\Standard New stock item object
 	 */
 	protected function createItemBase( array $values = array() )

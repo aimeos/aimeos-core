@@ -308,7 +308,7 @@ return array(
 			array( 'type' => 'package-weight', 'languageid' => null, 'value' => '2.5' ),
 		),
 		'stock' => array(
-			array( 'stocklevel' => null, 'warehouse' => 'default', 'dateback' => null )
+			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
 		),
 	),
 
@@ -417,7 +417,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 3, 'warehouse' => 'default', 'dateback' => null ),
+			array( 'stocklevel' => 3, 'typeid' => 'default', 'dateback' => null ),
 		),
 	),
 	array(
@@ -520,7 +520,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 0, 'warehouse' => 'default', 'dateback' => '2015-01-01 12:00:00' ),
+			array( 'stocklevel' => 0, 'typeid' => 'default', 'dateback' => '2015-01-01 12:00:00' ),
 		),
 	),
 	array(
@@ -919,7 +919,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 3, 'warehouse' => 'default', 'dateback' => null ),
+			array( 'stocklevel' => 3, 'typeid' => 'default', 'dateback' => null ),
 		),
 	),
 	array(

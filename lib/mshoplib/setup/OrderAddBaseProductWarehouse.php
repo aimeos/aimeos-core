@@ -16,8 +16,7 @@ namespace Aimeos\MW\Setup\Task;
 class OrderAddBaseProductWarehouse extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
-		'ALTER TABLE "mshop_order_base_product" ADD "warehousecode" VARCHAR(32) NOT NULL COLLATE utf8_bin AFTER "suppliercode"',
-		'UPDATE "mshop_order_base_product" SET "warehousecode" = \'default\' WHERE "warehousecode" = \'\'',
+		'UPDATE "mshop_order_base_product" SET "stocktype" = \'default\' WHERE "stocktype" = \'\'',
 	);
 
 
@@ -65,7 +64,7 @@ class OrderAddBaseProductWarehouse extends \Aimeos\MW\Setup\Task\Base
 		$schema = $this->getSchema( 'db-order' );
 
 		if( $schema->tableExists( $table ) === true &&
-			$schema->columnExists( $table, 'warehousecode' ) === false )
+			$schema->columnExists( $table, 'stocktype' ) === true )
 		{
 			$this->executeList( $stmts, 'db-order' );
 			$this->status( 'done' );

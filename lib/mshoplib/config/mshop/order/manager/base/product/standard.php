@@ -32,7 +32,7 @@ return array(
 		'ansi' => '
 			INSERT INTO "mshop_order_base_product" (
 				"baseid", "siteid", "ordprodid", "type", "prodid", "prodcode",
-				"suppliercode", "warehousecode", "name", "mediaurl", "quantity",
+				"suppliercode", "stocktype", "name", "mediaurl", "quantity",
 				"price", "costs", "rebate", "tax", "taxrate", "taxflag", "flags",
 				"status", "pos", "mtime", "editor", "ctime"
 			) VALUES (
@@ -45,7 +45,7 @@ return array(
 			UPDATE "mshop_order_base_product"
 			SET "baseid" = ?, "siteid" = ?, "ordprodid" = ?, "type" = ?,
 				"prodid" = ?, "prodcode" = ?, "suppliercode" = ?,
-				"warehousecode" = ?, "name" = ?, "mediaurl" = ?,
+				"stocktype" = ?, "name" = ?, "mediaurl" = ?,
 				"quantity" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
 				"tax" = ?, "taxrate" = ?, "taxflag" = ?, "flags" = ?,
 				"status" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
@@ -57,7 +57,7 @@ return array(
 			SELECT mordbapr."id" AS "order.base.product.id", mordbapr."baseid" AS "order.base.product.baseid",
 				mordbapr."siteid" AS "order.base.product.siteid", mordbapr."ordprodid" AS "order.base.product.ordprodid",
 				mordbapr."prodid" AS "order.base.product.productid", mordbapr."prodcode" AS "order.base.product.prodcode",
-				mordbapr."suppliercode" AS "order.base.product.suppliercode", mordbapr."warehousecode" AS "order.base.product.warehousecode",
+				mordbapr."suppliercode" AS "order.base.product.suppliercode", mordbapr."stocktype" AS "order.base.product.stocktype",
 				mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
 				mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."quantity" AS "order.base.product.quantity",
 				mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
@@ -70,7 +70,7 @@ return array(
 			:joins
 			WHERE :cond
 			GROUP BY mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid",
-				mordbapr."prodid", mordbapr."prodcode", mordbapr."suppliercode", mordbapr."warehousecode",
+				mordbapr."prodid", mordbapr."prodcode", mordbapr."suppliercode", mordbapr."stocktype",
 				mordbapr."type", mordbapr."name", mordbapr."mediaurl", mordbapr."quantity",
 				mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax", mordbapr."taxrate",
 				mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos", mordbapr."mtime",

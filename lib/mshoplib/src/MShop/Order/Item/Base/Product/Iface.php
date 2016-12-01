@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MShop
  * @subpackage Order
  */
@@ -121,19 +121,19 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setProductCode( $code );
 
 	/**
-	 * Returns the code of the warehouse the product should be retrieved from.
+	 * Returns the code of the stock type the product should be retrieved from.
 	 *
-	 * @return string Warehouse code
+	 * @return string Stock type
 	 */
-	public function getWarehouseCode();
+	public function getStockType();
 
 	/**
-	 * Sets the code of the warehouse the product should be retrieved from.
+	 * Sets the code of the stock type the product should be retrieved from.
 	 *
-	 * @param string $code Warehouse code
+	 * @param string $code Stock type
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setWarehouseCode( $code );
+	public function setStockType( $code );
 
 	/**
 	 * Returns the localized name of the product

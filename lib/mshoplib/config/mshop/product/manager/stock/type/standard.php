@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2014-2016
+ */
+
+return array(
+	'delete' => array(
+		'ansi' => '
+			DELETE FROM "mshop_product_stock_type"
+			WHERE :cond AND siteid = ?
+		'
+	),
+	'insert' => array(
+		'ansi' => '
+			INSERT INTO "mshop_product_stock_type" (
+				"siteid", "code", "domain", "label", "status",
+				"mtime", "editor", "ctime"
+			) VALUES (
+				?, ?, ?, ?, ?, ?, ?, ?
+			)
+		'
+	),
+	'update' => array(
+		'ansi' => '
+			UPDATE "mshop_product_stock_type"
+			SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
+				"status" = ?, "mtime" = ?, "editor" = ?
+			WHERE "id" = ?
+		'
+	),
+	'search' => array(
+		'ansi' => '
+			SELECT mprostty."id" AS "product.stock.type.id", mprostty."siteid" AS "product.stock.type.siteid",
+				mprostty."code" AS "product.stock.type.code", mprostty."domain" AS "product.stock.type.domain",
+				mprostty."label" AS "product.stock.type.label", mprostty."status" AS "product.stock.type.status",
+				mprostty."mtime" AS "product.stock.type.mtime", mprostty."editor" AS "product.stock.type.editor",
+				mprostty."ctime" AS "product.stock.type.ctime"
+			FROM "mshop_product_stock_type" mprostty
+			:joins
+			WHERE :cond
+			GROUP BY mprostty."id", mprostty."siteid", mprostty."code", mprostty."domain",
+				mprostty."label", mprostty."status", mprostty."mtime", mprostty."editor",
+				mprostty."ctime" /*-columns*/ , :columns /*columns-*/
+			/*-orderby*/ ORDER BY :order /*orderby-*/
+			LIMIT :size OFFSET :start
+		'
+	),
+	'count' => array(
+		'ansi' => '
+			SELECT COUNT(*) AS "count"
+			FROM (
+				SELECT DISTINCT mprostty."id"
+				FROM "mshop_product_stock_type" mprostty
+				:joins
+				WHERE :cond
+				LIMIT 10000 OFFSET 0
+			) AS list
+		'
+	),
+	'newid' => array(
+		'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+		'mysql' => 'SELECT LAST_INSERT_ID()',
+		'oracle' => 'SELECT mshop_product_stock_type_seq.CURRVAL FROM DUAL',
+		'pgsql' => 'SELECT lastval()',
+		'sqlite' => 'SELECT last_insert_rowid()',
+		'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+		'sqlanywhere' => 'SELECT @@IDENTITY',
+	),
+);

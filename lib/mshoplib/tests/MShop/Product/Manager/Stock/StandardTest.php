@@ -1,28 +1,21 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Product\Manager\Stock;
 
 
-/**
- * Test class for \Aimeos\MShop\Product\Stock\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
@@ -30,10 +23,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -100,7 +89,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
-		$this->assertEquals( $item->getWarehouseId(), $itemSaved->getWarehouseId() );
+		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
 		$this->assertEquals( $item->getStockLevel(), $itemSaved->getStockLevel() );
 		$this->assertEquals( $item->getDateBack(), $itemSaved->getDateBack() );
 
@@ -111,7 +100,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
 		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
-		$this->assertEquals( $itemExp->getWarehouseId(), $itemUpd->getWarehouseId() );
+		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
 		$this->assertEquals( $itemExp->getStockLevel(), $itemUpd->getStockLevel() );
 		$this->assertEquals( $itemExp->getDateBack(), $itemUpd->getDateBack() );
 
@@ -148,7 +137,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->getResourceType();
 
 		$this->assertContains( 'product/stock', $result );
-		$this->assertContains( 'product/stock/warehouse', $result );
+		$this->assertContains( 'product/stock/type', $result );
 	}
 
 
@@ -169,7 +158,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '!=', 'product.stock.id', null );
 		$expr[] = $search->compare( '!=', 'product.stock.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.stock.parentid', null );
-		$expr[] = $search->compare( '!=', 'product.stock.warehouseid', null );
+		$expr[] = $search->compare( '!=', 'product.stock.typeid', null );
 		$expr[] = $search->compare( '==', 'product.stock.stocklevel', 1000 );
 		$expr[] = $search->compare( '==', 'product.stock.dateback', '2010-04-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'product.stock.mtime', '1970-01-01 00:00:00' );
@@ -192,19 +181,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testDecrease()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$warehouseManager = $this->object->getSubManager( 'warehouse' );
+		$typeManager = $this->object->getSubManager( 'type' );
 
 		$productItem = $productManager->findItem( 'CNC' );
-		$warehouseItem = $warehouseManager->findItem( 'unit_warehouse1' );
+		$typeItem = $typeManager->findItem( 'unit_type1', array(), 'product' );
 
 		$stockItem = $this->object->createItem();
 		$stockItem->setParentId( $productItem->getId() );
-		$stockItem->setWarehouseId( $warehouseItem->getId() );
+		$stockItem->setTypeId( $typeItem->getId() );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->decrease( $productItem->getCode(), $warehouseItem->getCode(), 5 );
+		$this->object->decrease( $productItem->getCode(), $typeItem->getCode(), 5 );
 		$actual = $this->object->getItem( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );
@@ -216,19 +205,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testIncrease()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$warehouseManager = $this->object->getSubManager( 'warehouse' );
+		$typeManager = $this->object->getSubManager( 'type' );
 
 		$productItem = $productManager->findItem( 'CNC' );
-		$warehouseItem = $warehouseManager->findItem( 'unit_warehouse1' );
+		$typeItem = $typeManager->findItem( 'unit_type1', array(), 'product' );
 
 		$stockItem = $this->object->createItem();
 		$stockItem->setParentId( $productItem->getId() );
-		$stockItem->setWarehouseId( $warehouseItem->getId() );
+		$stockItem->setTypeId( $typeItem->getId() );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->increase( $productItem->getCode(), $warehouseItem->getCode(), 5 );
+		$this->object->increase( $productItem->getCode(), $typeItem->getCode(), 5 );
 		$actual = $this->object->getItem( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );

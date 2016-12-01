@@ -34,7 +34,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'CatalogRebuildTestIndex', 'MShopAddWarehouseData' );
+		return array( 'CatalogRebuildTestIndex', 'MShopAddTypeData' );
 	}
 
 
@@ -74,7 +74,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$productStockManager = $productManager->getSubManager( 'stock', 'Standard' );
-		$productStockWarehouse = $productStockManager->getSubManager( 'warehouse', 'Standard' );
+		$productStockTypeManager = $productStockManager->getSubManager( 'type', 'Standard' );
 
 		$prodcode = array();
 		foreach( $testdata['product/stock'] as $dataset )
@@ -95,20 +95,20 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 			$parentIds['product/' . $item->getCode()] = $item->getId();
 		}
 
-		$wareIds = array();
-		$ware = $productStockWarehouse->createItem();
+		$typeIds = array();
+		$typeItem = $productStockTypeManager->createItem();
 
 		$this->conn->begin();
 
-		foreach( $testdata['product/stock/warehouse'] as $key => $dataset )
+		foreach( $testdata['product/stock/type'] as $key => $dataset )
 		{
-			$ware->setId( null );
-			$ware->setCode( $dataset['code'] );
-			$ware->setLabel( $dataset['label'] );
-			$ware->setStatus( $dataset['status'] );
+			$typeItem->setId( null );
+			$typeItem->setCode( $dataset['code'] );
+			$typeItem->setLabel( $dataset['label'] );
+			$typeItem->setStatus( $dataset['status'] );
 
-			$productStockWarehouse->saveItem( $ware );
-			$wareIds[$key] = $ware->getId();
+			$productStockTypeManager->saveItem( $typeItem );
+			$typeIds[$key] = $typeItem->getId();
 		}
 
 		$stock = $productStockManager->createItem();
@@ -118,13 +118,13 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product ID found for "%1$s"', $dataset['parentid'] ) );
 			}
 
-			if( !isset( $wareIds[$dataset['warehouseid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No warehouse ID found for "%1$s"', $dataset['warehouseid'] ) );
+			if( !isset( $typeIds[$dataset['typeid']] ) ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$stock->setId( null );
 			$stock->setParentId( $parentIds[$dataset['parentid']] );
-			$stock->setWarehouseId( $wareIds[$dataset['warehouseid']] );
+			$stock->setTypeId( $typeIds[$dataset['typeid']] );
 			$stock->setStocklevel( $dataset['stocklevel'] );
 			$stock->setDateBack( $dataset['backdate'] );
 

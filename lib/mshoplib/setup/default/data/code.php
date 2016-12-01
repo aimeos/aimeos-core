@@ -8,8 +8,4 @@ return array(
 	'customer/group' => array(
 		'admin' => array( 'code' => 'admin', 'label' => 'Administrator' ),
 	),
-
-	'product/stock/warehouse' => array(
-		'default' => array( 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
-	),
 );

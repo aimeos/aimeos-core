@@ -107,7 +107,7 @@ return array(
 			$table->addColumn( 'prodid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'prodcode', 'string', array( 'length' => 32  ) );
 			$table->addColumn( 'suppliercode', 'string', array( 'length' => 32  ) );
-			$table->addColumn( 'warehousecode', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'stocktype', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'quantity', 'integer', array() );

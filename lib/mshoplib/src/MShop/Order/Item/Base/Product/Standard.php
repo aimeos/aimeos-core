@@ -307,14 +307,14 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Returns the code of the warehouse the product should be retrieved from.
+	 * Returns the code of the stock type the product should be retrieved from.
 	 *
-	 * @return string Warehouse code
+	 * @return string Stock type
 	 */
-	public function getWarehouseCode()
+	public function getStockType()
 	{
-		if( isset( $this->values['order.base.product.warehousecode'] ) ) {
-			return (string) $this->values['order.base.product.warehousecode'];
+		if( isset( $this->values['order.base.product.stocktype'] ) ) {
+			return (string) $this->values['order.base.product.stocktype'];
 		}
 
 		return '';
@@ -322,16 +322,16 @@ class Standard extends Base implements Iface
 
 
 	/**
-	 * Sets the code of the warehouse the product should be retrieved from.
+	 * Sets the code of the stock type the product should be retrieved from.
 	 *
-	 * @param string $code Warehouse code
+	 * @param string $code Stock type
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setWarehouseCode( $code )
+	public function setStockType( $code )
 	{
-		if( $code == $this->getWarehouseCode() ) { return $this; }
+		if( $code == $this->getStockType() ) { return $this; }
 
-		$this->values['order.base.product.warehousecode'] = (string) $this->checkCode( $code );
+		$this->values['order.base.product.stocktype'] = (string) $this->checkCode( $code );
 		$this->setModified();
 
 		return $this;
@@ -608,6 +608,7 @@ class Standard extends Base implements Iface
 				case 'order.base.product.baseid': $this->setBaseId( $value ); break;
 				case 'order.base.product.ordprodid': $this->setOrderProductId( $value ); break;
 				case 'order.base.product.type': $this->setType( $value ); break;
+				case 'order.base.product.stocktype': $this->setStockType( $value ); break;
 				case 'order.base.product.suppliercode': $this->setSupplierCode( $value ); break;
 				case 'order.base.product.productid': $this->setProductId( $value ); break;
 				case 'order.base.product.prodcode': $this->setProductCode( $value ); break;
@@ -642,6 +643,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.siteid'] = $this->getSiteId();
 		$list['order.base.product.ordprodid'] = $this->getOrderProductId();
 		$list['order.base.product.type'] = $this->getType();
+		$list['order.base.product.stocktype'] = $this->getStockType();
 		$list['order.base.product.suppliercode'] = $this->getSupplierCode();
 		$list['order.base.product.productid'] = $this->getProductId();
 		$list['order.base.product.prodcode'] = $this->getProductCode();
@@ -671,6 +673,7 @@ class Standard extends Base implements Iface
 		if( $this->getFlags() === $item->getFlags()
 			&& $this->getName() === $item->getName()
 			&& $this->getSiteId() === $item->getSiteId()
+			&& $this->getStockType() === $item->getStockType()
 			&& $this->getProductCode() === $item->getProductCode()
 			&& $this->getSupplierCode() === $item->getSupplierCode()
 			&& $this->getPrice()->compare( $item->getPrice() ) === true

@@ -16,7 +16,7 @@ return array(
 	'insert' => array(
 		'ansi' => '
 			INSERT INTO "mshop_product_stock" (
-				"parentid", "siteid", "warehouseid", "stocklevel", "backdate",
+				"parentid", "siteid", "typeid", "stocklevel", "backdate",
 				"mtime", "editor", "ctime"
 			) VALUES (
 				?, ?, ?, ?, ?, ?, ?, ?
@@ -26,7 +26,7 @@ return array(
 	'update' => array(
 		'ansi' => '
 			UPDATE "mshop_product_stock"
-			SET "parentid" = ?, "siteid" = ?, "warehouseid" = ?,
+			SET "parentid" = ?, "siteid" = ?, "typeid" = ?,
 				"stocklevel" = ?, "backdate" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
 		'
@@ -34,14 +34,14 @@ return array(
 	'search' => array(
 		'ansi' => '
 			SELECT mprost."id" AS "product.stock.id", mprost."parentid" AS "product.stock.parentid",
-				mprost."siteid" AS "product.stock.siteid", mprost."warehouseid" AS "product.stock.warehouseid",
+				mprost."siteid" AS "product.stock.siteid", mprost."typeid" AS "product.stock.typeid",
 				mprost."stocklevel" AS "product.stock.stocklevel", mprost."backdate" AS "product.stock.backdate",
 				mprost."mtime" AS "product.stock.mtime", mprost."editor" AS "product.stock.editor",
 				mprost."ctime" AS "product.stock.ctime"
 			FROM "mshop_product_stock" AS mprost
 			:joins
 			WHERE :cond
-			GROUP BY mprost."id", mprost."parentid", mprost."siteid", mprost."warehouseid",
+			GROUP BY mprost."id", mprost."parentid", mprost."siteid", mprost."typeid",
 				mprost."stocklevel", mprost."backdate", mprost."mtime", mprost."editor",
 				mprost."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
