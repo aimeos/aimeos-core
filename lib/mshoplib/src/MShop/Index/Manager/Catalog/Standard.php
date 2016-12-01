@@ -634,16 +634,12 @@ class Standard
 	 */
 	protected function getListItems( array $items )
 	{
-		$ids = $listItems = array();
+		$listItems = array();
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
-
-		foreach( $items as $id => $item ) {
-			$ids[] = $id;
-		}
 
 		$search = $listManager->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'catalog.lists.refid', $ids ),
+			$search->compare( '==', 'catalog.lists.refid', array_keys( $items ) ),
 			$search->compare( '==', 'catalog.lists.domain', 'product' ),
 			$search->getConditions(),
 		);
