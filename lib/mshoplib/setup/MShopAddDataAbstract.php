@@ -406,7 +406,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setId( null );
 			$item->setDateBack( $entry['dateback'] );
 			$item->setStockLevel( $entry['stocklevel'] );
-			$item->setTypeId( $types[$entry['type']] );
+			$item->setTypeId( $types[$entry['typeid']] );
 
 			$manager->saveItem( $item, false );
 		}
