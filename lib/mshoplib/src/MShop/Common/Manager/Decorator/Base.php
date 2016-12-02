@@ -121,7 +121,7 @@ abstract class Base
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = array(), $domain = 'product', $type = null )
 	{
 		return $this->manager->findItem( $code, $ref, $domain, $type );
 	}
