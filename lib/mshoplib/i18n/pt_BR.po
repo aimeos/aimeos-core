@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Bruno Rodrigues <brunojti@gmail.com>, 2016
 # Tadeu Pagliarini <tadeu_up@hotmail.com>, 2016
@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-16 23:34+0200\n"
+"POT-Creation-Date: 2016-12-02 10:47+0100\n"
 "PO-Revision-Date: 2016-08-11 03:50+0000\n"
 "Last-Translator: Bruno Rodrigues <brunojti@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/aimeos/aimeos-core/language/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, php-format
@@ -157,9 +157,7 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Caracteres inválidos no nome da classe \"%1$s\""
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr "Caracteres inválidos na data \"%1$s\". Formato \"YYYY-MM-DD hh:mm:ss\" esperado."
 
 #, php-format
@@ -227,8 +225,7 @@ msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr "Item não pode ser removido. ID do site do item é diferente do ID do site atual."
 
 #, php-format
-msgid ""
-"Item could not be saved using method saveItem(). Item ID not available."
+msgid "Item could not be saved using method saveItem(). Item ID not available."
 msgstr "Item não pode ser salvo usando o método saveItem(). ID indisponível"
 
 #, php-format
@@ -320,9 +317,7 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "ID atual \"%1$s\" para o item difere da antiga ID \"%2$s\""
 
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"saveItem()\". Try using "
-"method \"insertItem()\" instead."
+msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
 msgstr "Site recém criado não pôde ser salvo usando o método \"saveItem()\". Tente usar o método \"insertItem()\"."
 
 #, php-format
@@ -340,6 +335,10 @@ msgstr "Produto com ID \"%1$s\" ou código \"%2$s\"  sem preço disponível"
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "Nenhum produto com ID \"%1$s\" foi encontrado"
+
+#, fuzzy, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr "Nenhum depósito com o código \"%1$s\" foi encontrado"
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
@@ -386,9 +385,7 @@ msgid "Operation not supported"
 msgstr "Operção não suportada"
 
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
 msgstr "Pedido \"%1$s\" na resposta XML do provedor de entrega é diferente do ID da fatura \"%2$s\" do pedido"
 
 #, php-format
@@ -396,9 +393,7 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Item base com ID do pedido \"%1$s\" não encontrado"
 
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
 msgstr "Dados do pedido enviados para o provedor de entrega foi rejeitado com o código \"%1$s\" de acordo com a resposta XML"
 
 #, php-format
@@ -457,9 +452,7 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Por favor, verifique os preços dos produtos em seu carrinho"
 
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
 msgstr "Preço não pode ser adicionado. Moeda \"%1$s\" do item e moeda atual \"%2$s\" são diferentes."
 
 #, php-format
@@ -471,9 +464,7 @@ msgid "Price item not available"
 msgstr "Valor do item não disponível"
 
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
+msgid "Product does not contain all required values. Product code for item not available."
 msgstr "Produto não contém todos os valores obrigatórios. Código do produto para o item não disponível."
 
 #, php-format
@@ -533,15 +524,11 @@ msgid "Session object not available"
 msgstr "Objeto de sessão não disponível"
 
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
 msgstr "Site não pode ser inserido. ID do site é diferente do ID do site pai."
 
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
 msgstr "Site não pode ser movido. Site é diferente do ID do site atual, site pai ou novo site pai."
 
 #, php-format
@@ -609,9 +596,7 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Chave de pesquisa deconhecida \"%1$s\""
 
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
 msgstr "Validação da resposta XML do provedor de entrega contra o esquema \"%1$s\" falhou"
 
 #, php-format

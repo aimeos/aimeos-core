@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Aimeos <aimeos@aimeos.org>, 2015-2016
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-16 23:34+0200\n"
+"POT-Creation-Date: 2016-12-02 10:47+0100\n"
 "PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, php-format
@@ -158,9 +158,7 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
 #, php-format
-msgid ""
-"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
-"expected."
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
 msgstr "Datum  \"%1$s\" enthält unerlaubte Zeichen. ISO Format \"YYYY-MM-DD hh:mm:ss\" erwartet."
 
 #, php-format
@@ -228,8 +226,7 @@ msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr "Item kann nicht gelöscht werden. Aktuelle Site-ID stimmt nicht mit Site-ID des Items überein."
 
 #, php-format
-msgid ""
-"Item could not be saved using method saveItem(). Item ID not available."
+msgid "Item could not be saved using method saveItem(). Item ID not available."
 msgstr "Item konnte nicht mit Methode saveItem() gespeichert werden. Item-ID nicht verfügbar."
 
 #, php-format
@@ -321,9 +318,7 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Neue ID \"%1$s\" für das Item stimmt nicht mit der alten ID \"%2$s\" überein"
 
 #, php-format
-msgid ""
-"Newly created site can not be saved using method \"saveItem()\". Try using "
-"method \"insertItem()\" instead."
+msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
 msgstr "Neu erstellte Seite kann nicht mit Methode \"saveItem()\" gespeichert werden. Versuchen Sie Methode \"insertItem()\"."
 
 #, php-format
@@ -341,6 +336,10 @@ msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "Es konnte kein Produkt mit dem Code \"%1$s\" gefunden werden"
+
+#, fuzzy, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr "Es wurde kein Warenlager für den Code \"%1$s\" gefunden"
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
@@ -387,9 +386,7 @@ msgid "Operation not supported"
 msgstr "Funktion wird nicht unterstützt"
 
 #, php-format
-msgid ""
-"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
-"invoice ID \"%2$s\" of the order"
+msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
 msgstr "ID \"%1$s\" der Bestelldaten in XML-Antwort des Logistikdienstleisters stimmt nicht mit hinterlegter Rechnungs-ID \"%2$s\" der Bestellung überein"
 
 #, php-format
@@ -397,9 +394,7 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Bestellung (Order-Base-Item) mit ID \"%1$s\" nicht gefunden"
 
 #, php-format
-msgid ""
-"Order data sent to delivery provider was rejected with code \"%1$s\" "
-"according to XML response"
+msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
 msgstr "Zum Logistikdienstleister übertragene Bestelldaten wurden laut XML-Antwort mit Code \"%1$s\" abgelehnt"
 
 #, php-format
@@ -458,9 +453,7 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Bitte werfen Sie einen Blick auf die Preise der Produkte in Ihrem Warenkorb"
 
 #, php-format
-msgid ""
-"Price can not be added. Currency ID \"%1$s\" of price item and currently "
-"used currency ID \"%2$s\" does not match."
+msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
 msgstr "Der Preis kann nicht hinzugezählt werden. Währungs-ID \"%1$s\" des Preis-Items und aktuell verwendete Währungs-ID \"%2$s\" stimmen nicht überein."
 
 #, php-format
@@ -472,9 +465,7 @@ msgid "Price item not available"
 msgstr "Preis-Item nicht verfügbar"
 
 #, php-format
-msgid ""
-"Product does not contain all required values. Product code for item not "
-"available."
+msgid "Product does not contain all required values. Product code for item not available."
 msgstr "Das Produkt enthält nicht alle geforderten Parameter. Produkt-Code für Item nicht verfügbar."
 
 #, php-format
@@ -534,15 +525,11 @@ msgid "Session object not available"
 msgstr "Session-Objekt nicht verfügbar"
 
 #, php-format
-msgid ""
-"Site can not be inserted. Site ID of site differs from site ID of parent "
-"site."
+msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
 msgstr "Seite kann nicht eingefügt werden. Site-ID der Seite stimmt nicht mit Site-ID der Eltern-Seite überein."
 
 #, php-format
-msgid ""
-"Site can not be moved. Site ID of site differs from present site id, site ID"
-" of existing parent site or site id of new parent site."
+msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
 msgstr "Seite kann nicht verschoben werden. Site-ID der Seite stimmt nicht mit der aktuellen Site-ID, der Site-ID der bestehenden Eltern-Seite oder mit der Site-ID der neuen Eltern-Seite überein."
 
 #, php-format
@@ -610,9 +597,7 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Unbekannter Suchschlüssel \"%1$s\""
 
 #, php-format
-msgid ""
-"Validation of XML response from delivery provider against schema \"%1$s\" "
-"failed"
+msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
 msgstr "Validierung der vom Logistikdienstleister erhaltenen XML-Datei gegen das Schema \"%1$s\" fehlgeschlagen"
 
 #, php-format

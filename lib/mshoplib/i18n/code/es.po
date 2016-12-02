@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# 
+#
+#
 # Translators:
 # Translators:
 # Translators:
@@ -16,43 +16,27 @@ msgstr ""
 "PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. Address plugin error: Payment address not available
-msgid "address.payment.available.none"
-msgstr "Falta la dirección de cobro"
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
 msgstr "Falta la dirección de entrega"
 
-#. Address plugin error: Payment address not allowed
-msgid "address.payment.available.notallowed"
-msgstr "No se permite dirección de cobro"
-
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
 msgstr "No se permite dirección de entrega"
 
-#. Service plugin error: Payment service not available
-msgid "service.payment.available.none"
-msgstr "Falta la opción de pago"
+#. Address plugin error: Payment address not available
+msgid "address.payment.available.none"
+msgstr "Falta la dirección de cobro"
 
-#. Service plugin error: Delivery service not available
-msgid "service.delivery.available.none"
-msgstr "Falta la opción de entrega"
-
-#. Service plugin error: Payment service not allowed
-msgid "service.payment.available.notallowed"
-msgstr "No se permite opción de pago"
-
-#. Service plugin error: Delivery service not allowed
-msgid "service.delivery.available.notallowed"
-msgstr "No se permite opción de entrega"
+#. Address plugin error: Payment address not allowed
+msgid "address.payment.available.notallowed"
+msgstr "No se permite dirección de cobro"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
@@ -73,3 +57,19 @@ msgstr "El precio de al menos un producto ha cambiado entretanto y se ha actuali
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
 msgstr "Lo sentimos, al menos uno de los productos está agotado. Elimínelo de la cesta para continuar"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "Falta la opción de entrega"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "No se permite opción de entrega"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "Falta la opción de pago"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "No se permite opción de pago"

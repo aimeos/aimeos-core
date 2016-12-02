@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Martin Vyšohlíd <vysohlidm@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-02 10:48+0100\n"
+"PO-Revision-Date: 2016-09-26 21:55+0000\n"
+"Last-Translator: Martin Vyšohlíd <vysohlidm@gmail.com>\n"
+"Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "Controller path is empty"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Zakázané znaky ve jméně třídy \"%1$s\""
+
+#, php-format
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr ""
+
+#, fuzzy, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr "Zakázané znaky ve jméně třídy \"%1$s\""
+
+#, fuzzy, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Zakázané znaky ve jméně třídy \"%1$s\""
+
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr ""
+
+#~ msgid "Authorized payments of orders will be captured after dispatching or after a configurable amount of time"
+#~ msgstr "Potvrzené platby objednávek budou získány po odeslání nebo nastavitelném časovém intervalu"
+
+#~ msgid "Batch update of payment/delivery status"
+#~ msgstr "Dávková aktualizace plateb/objednávek"
+
+#~ msgid "Cache cleanup"
+#~ msgstr "Vymazat mezipaměť"
+
+#~ msgid "Capture authorized payments"
+#~ msgstr "Načíst autorizované platby"
+
+#~ msgid "Catalog index optimization"
+#~ msgstr "Optimalizace indexu katalogu"
+
+#~ msgid "Catalog index rebuild"
+#~ msgstr "Znovu sestavit index katalogu"

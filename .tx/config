@@ -9,6 +9,12 @@ source_file = controller/common/i18n/core-controller-common.pot
 source_lang = en
 type = PO
 
+[aimeos-core.controller-jobs]
+file_filter = controller/jobs/i18n/<lang>.po
+source_file = controller/jobs/i18n/core-controller-jobs.pot
+source_lang = en
+type = PO
+
 [aimeos-core.lib-mshop]
 file_filter = lib/mshoplib/i18n/<lang>.po
 source_file = lib/mshoplib/i18n/core-mshop.pot
