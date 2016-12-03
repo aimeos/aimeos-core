@@ -1,13 +1,15 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015
+ */
+
+
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-/**
- * @copyright Metaways Infosystems GmbH, 2011
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
- */
 class ServicesAvailableTest extends \PHPUnit_Framework_TestCase
 {
 	private $order;
@@ -15,12 +17,6 @@ class ServicesAvailableTest extends \PHPUnit_Framework_TestCase
 	private $service;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
@@ -33,17 +29,12 @@ class ServicesAvailableTest extends \PHPUnit_Framework_TestCase
 		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context )->getSubManager( 'base' );
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
 
-		$this->order = $orderBaseManager->createItem();
 		$this->service = $orderBaseServiceManager->createItem();
+		$this->order = $orderBaseManager->createItem();
+		$this->order->__sleep(); // remove event listeners
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->orderManager );

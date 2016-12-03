@@ -245,8 +245,7 @@ class Standard extends Base
 
 		$base = $this->createItemBase( $priceManager->createItem(), clone $context->getLocale(), $values );
 
-		$pluginManager = \Aimeos\MShop\Factory::createManager( $context, 'plugin' );
-		$pluginManager->register( $base, 'order' );
+		\Aimeos\MShop\Factory::createManager( $context, 'plugin' )->register( $base, 'order' );
 
 		return $base;
 	}
@@ -895,6 +894,9 @@ class Standard extends Base
 		} else {
 			$basket = $this->loadFresh( $id, $price, $localeItem, $row, $parts );
 		}
+
+		$pluginManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'plugin' );
+		$pluginManager->register( $basket, 'order' );
 
 		return $basket;
 	}

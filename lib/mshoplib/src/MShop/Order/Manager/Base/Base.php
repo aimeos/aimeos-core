@@ -297,9 +297,6 @@ abstract class Base
 		$basket = $this->createItemBase( $price, $localeItem, $row );
 		$basket->setId( null );
 
-		$pluginManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'plugin' );
-		$pluginManager->register( $basket, 'order' );
-
 		foreach( $products as $item ) {
 			$basket->addProduct( $item );
 		}

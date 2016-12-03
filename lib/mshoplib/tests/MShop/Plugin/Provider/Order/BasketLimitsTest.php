@@ -1,17 +1,14 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-/**
- * Test class for \Aimeos\MShop\Plugin\Provider\Order\Complete.
- */
 class BasketLimitsTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -19,18 +16,13 @@ class BasketLimitsTest extends \PHPUnit_Framework_TestCase
 	private $order;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$this->order = $orderBaseManager->createItem();
+		$this->order->__sleep(); // remove event listeners
 
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
 		$search = $orderBaseProductManager->createSearch();

@@ -28,6 +28,7 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 
 		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' );
 		$this->order = $orderBaseManager->createItem();
+		$this->order->__sleep(); // remove plugins
 	}
 
 
@@ -72,8 +73,8 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
-			$ref = array( 'product' => array( '0' => 'stock.notenough' ) );
-			$this->assertEquals( $ref, $e->getErrorCodes() );
+			$this->assertEquals( array( 'product' => array( '0' => 'stock.notenough' ) ), $e->getErrorCodes() );
+			$this->assertEquals( array(), $this->order->getProducts() );
 		}
 	}
 
@@ -90,8 +91,8 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
-			$ref = array( 'product' => array( '0' => 'stock.notenough' ) );
-			$this->assertEquals( $ref, $e->getErrorCodes() );
+			$this->assertEquals( array( 'product' => array( '0' => 'stock.notenough' ) ), $e->getErrorCodes() );
+			$this->assertEquals( array(), $this->order->getProducts() );
 		}
 	}
 

@@ -1,18 +1,15 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Order\Manager\Base;
 
 
-/**
- * Test class for \Aimeos\MShop\Order\Manager\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -20,26 +17,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
-		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->context = \TestHelperMShop::getContext();
+		$this->editor = $this->context->getEditor();
+
 		$this->object = new \Aimeos\MShop\Order\Manager\Base\Standard( $this->context );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -562,8 +548,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $item->getCustomerId(), $basket->getCustomerId() );
 		$this->assertEquals( $basket->getLocale()->getSiteId(), $basket->getSiteId() );
 
-		// because of FreeShipping plugin price is not 6.50
-		$this->assertEquals( 1.50, $basket->getPrice()->getCosts() );
+		$this->assertEquals( 6.50, $basket->getPrice()->getCosts() );
 
 		$pos = 1;
 		$products = $basket->getProducts();
@@ -761,7 +746,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$basket = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, true );
 
 		$this->assertEquals( '672.00', $basket->getPrice()->getValue() );
-		$this->assertEquals( '32.00', $basket->getPrice()->getCosts() );
+		$this->assertEquals( '37.00', $basket->getPrice()->getCosts() );
 		$this->assertEquals( 0, count( $basket->getCoupons() ) );
 
 		$basket->addCoupon( 'CDEF' );

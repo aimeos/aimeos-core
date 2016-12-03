@@ -29,6 +29,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$orderBaseManager = $this->orderManager->getSubManager( 'base' );
 
 		$this->order = $orderBaseManager->createItem();
+		$this->order->__sleep(); // remove event listeners
 	}
 
 

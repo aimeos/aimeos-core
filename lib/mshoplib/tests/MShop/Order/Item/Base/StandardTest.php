@@ -35,10 +35,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$price = \Aimeos\MShop\Price\Manager\Factory::createManager( $context )->createItem();
 		$this->locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( $context )->createItem();
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $price, $this->locale, $this->values );
-
-		//registering order object for plugin use
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
-		$pluginManager->register( $this->object, 'order' );
 	}
 
 

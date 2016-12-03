@@ -1,17 +1,15 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
+
 
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-/**
- * Test class for \Aimeos\MShop\Plugin\Provider\Order\ProductLimit.
- */
 class ProductLimitTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -20,12 +18,6 @@ class ProductLimitTest extends \PHPUnit_Framework_TestCase
 	private $products;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
@@ -61,18 +53,13 @@ class ProductLimitTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$this->order = $orderBaseManager->createItem();
+		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductLimit( \TestHelperMShop::getContext(), $this->plugin );
 
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object, $this->order, $this->plugin, $this->products );

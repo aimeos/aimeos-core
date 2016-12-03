@@ -72,11 +72,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 			'payment' => $orderServiceManager->createItem(),
 			'delivery' => $orderServiceManager->createItem(),
 		);
-
-
-		//registering order object for plugin use
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$pluginManager->register( $this->object, 'order' );
 	}
 
 
@@ -196,17 +191,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 		$expected = array( 1 => $testProduct, 2 => $product );
 		$this->assertEquals( $expected, $this->object->getProducts() );
-	}
-
-
-	public function testAddProductExceedLimit()
-	{
-		$product = $this->createProduct( 'prodid3' );
-		$product->setQuantity( 11 );
-
-		// Exceed limit for single product
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
-		$this->object->addProduct( $product );
 	}
 
 
@@ -355,6 +339,24 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testCheck()
+	{
+		foreach( $this->products as $product ) {
+			$this->object->addProduct( $product );
+		}
+
+		foreach( $this->addresses as $type => $address ) {
+			$this->object->setAddress( $address, $type );
+		}
+
+		foreach( $this->services as $type => $service ) {
+			$this->object->setService( $service, $type );
+		}
+
+		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
+	}
+
+
 	public function testCheckInvalid()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
@@ -373,65 +375,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
-	}
-
-
-	public function testCheckAddresses()
-	{
-		foreach( $this->products as $product ) {
-			$this->object->addProduct( $product );
-		}
-
-		foreach( $this->addresses as $type => $address ) {
-			$this->object->setAddress( $address, $type );
-		}
-
-		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
-	}
-
-
-	public function testCheckNoAddresses()
-	{
-		foreach( $this->products as $product ) {
-			$this->object->addProduct( $product );
-		}
-
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
-		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
-	}
-
-
-	public function testCheckServices()
-	{
-		foreach( $this->products as $product ) {
-			$this->object->addProduct( $product );
-		}
-
-		foreach( $this->addresses as $type => $address ) {
-			$this->object->setAddress( $address, $type );
-		}
-
-		foreach( $this->services as $type => $service ) {
-			$this->object->setService( $service, $type );
-		}
-
-		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
-	}
-
-
-	public function testCheckNoServices()
-	{
-
-		foreach( $this->products as $product ) {
-			$this->object->addProduct( $product );
-		}
-
-		foreach( $this->addresses as $type => $address ) {
-			$this->object->setAddress( $address, $type );
-		}
-
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
-		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 	}
 
 

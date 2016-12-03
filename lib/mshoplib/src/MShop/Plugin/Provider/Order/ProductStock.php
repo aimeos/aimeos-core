@@ -50,46 +50,16 @@ class ProductStock
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-
-		if( !( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) {
+		if( is_integer( $value ) && ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) === 0 ) {
 			return true;
 		}
 
-		return $this->checkStockAll( $order );
-	}
+		$outOfStock = $this->checkStock( $order );
 
-
-	/**
-	 * Checks if all products in the basket have enough stock
-	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
-	 * @return bool True if the checks succeeded
-	 * @throws \Aimeos\MShop\Plugin\Provider\Exception If one or more products are out of stock
-	 */
-	protected function checkStockAll( \Aimeos\MShop\Order\Item\Base\Iface $order )
-	{
-		$productIds = $stockTypes = $stockMap = array();
-
-
-		foreach( $order->getProducts() as $orderProductItem )
+		if( !empty( $outOfStock ) )
 		{
-			$productIds[] = $orderProductItem->getProductId();
-			$stockTypes[] = $orderProductItem->getStockType();
-		}
-
-		$stockItems = $this->getStockItems( $productIds, $stockTypes );
-
-		foreach( $stockItems as $stockItem ) {
-			$stockMap[ $stockItem->getParentId() ][ $stockItem->getType() ] = $stockItem->getStocklevel();
-		}
-
-		$outOfStock = $this->getOutOfStock( $order, $stockMap );
-
-		if( count( $outOfStock ) > 0 )
-		{
-			$code = array( 'product' => $outOfStock );
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Products out of stock' );
-			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, array( 'product' => $outOfStock ) );
 		}
 
 		return true;
@@ -97,33 +67,49 @@ class ProductStock
 
 
 	/**
-	 * Returns all product positions that have not enough stock
-	 * Adapts the quantity of ordered products where not enough stock is available
+	 * Checks if all products in the basket have enough stock
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
-	 * @param array $stockMap Multi-dimensional associative list of product IDs / stock types / stock levels
-	 * @return array Associative list of product positions in the basket as keys and the out-of-stock code as values
+	 * @return array Associative list of basket product positions as keys and the error codes as values
 	 */
-	protected function getOutOfStock( \Aimeos\MShop\Order\Item\Base\Iface $order, array $stockMap )
+	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order )
 	{
-		$outOfStock = array();
+		$productIds = $stockTypes = $stockMap = $outOfStock = array();
+
+		foreach( $order->getProducts() as $orderProductItem )
+		{
+			$productIds[] = $orderProductItem->getProductId();
+			$stockTypes[] = $orderProductItem->getStockType();
+		}
+
+		foreach( $this->getStockItems( $productIds, $stockTypes ) as $stockItem ) {
+			$stockMap[ $stockItem->getParentId() ][ $stockItem->getType() ] = $stockItem->getStocklevel();
+		}
+
 
 		foreach( $order->getProducts() as $position => $orderProductItem )
 		{
 			if( !isset( $stockMap[ $orderProductItem->getProductId() ] )
 				|| !array_key_exists( $orderProductItem->getStockType(), $stockMap[ $orderProductItem->getProductId() ] )
 			) {
-				$outOfStock[ $position ] = 'stock.notenough';
+				$outOfStock[$position] = 'stock.notenough';
+				$order->deleteProduct( $position );
 				continue;
 			}
 
 			$stocklevel = $stockMap[ $orderProductItem->getProductId() ][ $orderProductItem->getStockType() ];
 
-			if( $stocklevel !== null && $stocklevel < $orderProductItem->getQuantity() )
-			{
-				$orderProductItem->setQuantity( $stocklevel );
-				$outOfStock[ $position ] = 'stock.notenough';
+			if( $stocklevel === null || $stocklevel >= $orderProductItem->getQuantity() ) {
+				continue;
 			}
+
+			if( $stocklevel > 0 ) {
+				$orderProductItem->setQuantity( $stocklevel ); // update quantity to actual stock level
+			} else {
+				$order->deleteProduct( $position );
+			}
+
+			$outOfStock[$position] = 'stock.notenough';
 		}
 
 		return $outOfStock;

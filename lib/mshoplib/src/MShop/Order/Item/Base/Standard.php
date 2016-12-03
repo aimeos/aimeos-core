@@ -70,7 +70,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	{
 		/*
 		 * Workaround because database connections can't be serialized
-		 * Listeners will be reattached on wakeup by the customer manager
+		 * Listeners will be reattached on wakeup by the order base manager
 		 */
 		$this->clearListeners();
 

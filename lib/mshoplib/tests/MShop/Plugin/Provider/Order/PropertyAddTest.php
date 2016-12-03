@@ -56,6 +56,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$this->order = $orderBaseManager->createItem();
+		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyAdd( \TestHelperMShop::getContext(), $this->plugin );
 	}
