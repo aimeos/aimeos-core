@@ -54,9 +54,7 @@ class ProductStock
 			return true;
 		}
 
-		$outOfStock = $this->checkStock( $order );
-
-		if( !empty( $outOfStock ) )
+		if( ( $outOfStock = $this->checkStock( $order ) ) !== array() )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Products out of stock' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, array( 'product' => $outOfStock ) );
@@ -74,7 +72,7 @@ class ProductStock
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order )
 	{
-		$productIds = $stockTypes = $stockMap = $outOfStock = array();
+		$productIds = $stockTypes = $stockMap = array();
 
 		foreach( $order->getProducts() as $orderProductItem )
 		{
@@ -86,18 +84,33 @@ class ProductStock
 			$stockMap[ $stockItem->getParentId() ][ $stockItem->getType() ] = $stockItem->getStocklevel();
 		}
 
+		return $this->checkStockLevels( $order, $stockMap );
+	}
+
+
+	/**
+	 * Checks if the products in the basket have enough stock
+	 *
+	 * Removes products from the basket which are out of stock and decreases the
+	 * quantities of orders products if there's not enough stock.
+	 *
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $order Shop basket object
+	 * @param array $stockMap Multi-dimensional associative list of product ID / stock type as keys and stock level as values
+	 * @return array Associative list of basket positions as keys and error codes as values
+	 */
+	protected function checkStockLevels( \Aimeos\MShop\Order\Item\Base\Iface $order, array $stockMap )
+	{
+		$outOfStock = array();
 
 		foreach( $order->getProducts() as $position => $orderProductItem )
 		{
-			if( !isset( $stockMap[ $orderProductItem->getProductId() ] )
-				|| !array_key_exists( $orderProductItem->getStockType(), $stockMap[ $orderProductItem->getProductId() ] )
-			) {
-				$outOfStock[$position] = 'stock.notenough';
-				$order->deleteProduct( $position );
-				continue;
-			}
+			$stocklevel = 0;
 
-			$stocklevel = $stockMap[ $orderProductItem->getProductId() ][ $orderProductItem->getStockType() ];
+			if( isset( $stockMap[ $orderProductItem->getProductId() ] )
+				&& array_key_exists( $orderProductItem->getStockType(), $stockMap[ $orderProductItem->getProductId() ] )
+			) {
+				$stocklevel = $stockMap[ $orderProductItem->getProductId() ][ $orderProductItem->getStockType() ];
+			}
 
 			if( $stocklevel === null || $stocklevel >= $orderProductItem->getQuantity() ) {
 				continue;
