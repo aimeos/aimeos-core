@@ -415,7 +415,7 @@ class Standard
 	 * Rebuilds the index text for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of product items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
 	public function rebuildIndex( array $items = array() )
 	{
@@ -474,18 +474,10 @@ class Standard
 
 			foreach( $items as $item )
 			{
-				$parentId = $item->getId(); //  id is not $item->getId() for sub-products
-
-				$listTypes = array();
-				foreach( $item->getListItems( 'text' ) as $listItem ) {
-					$listTypes[$listItem->getRefId()][] = $listItem->getType();
-				}
-
-				$this->saveTexts( $stmt, $item, $listTypes, array( $parentId => array( $parentId ) ) );
-				$this->saveLabels( $stmt, $item, array( $parentId ) );
+				$this->saveTexts( $stmt, $item, $item->getId() );
 
 				$this->saveText( // save product code for full text search
-					$stmt, $parentId, $siteid, null, null, 'default', 'code',
+					$stmt, $item->getId(), $siteid, null, null, 'default', 'code',
 					$item->getResourceType(), $item->getCode(), $date, $editor
 				);
 			}
@@ -499,7 +491,8 @@ class Standard
 			throw $e;
 		}
 
-		$this->saveAttributeTexts( $items );
+
+		$this->saveDomainTexts( $items );
 
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
@@ -727,115 +720,66 @@ class Standard
 
 
 	/**
-	 * Saves texts associated with attributes to catalog_index_text.
+	 * Saves texts associated with the configured domain items in the product index
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
 	 */
-	protected function saveAttributeTexts( array $items )
+	protected function saveDomainTexts( array $items )
 	{
-		$prodIds = array();
-
-		foreach( $items as $item )
-		{
-			foreach( $item->getRefItems( 'attribute', null, 'default' ) as $attrItem ) {
-				$prodIds[$attrItem->getId()][] = $item->getId();
-			}
-		}
-
-		if( empty( $prodIds ) ) { return; }
-
-
-		$attributeItems = $this->getAttributeItems( array_keys( $prodIds ) );
-
 		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
 
-		try
+
+		/** mshop/index/manager/text/domains
+		 * A list of domain names whose texts should be indexed too
+		 *
+		 * Supplementary items associated to products that can contain a list
+		 * of text items themselves (attributes, media, prices, texts) can be
+		 * added to the index too. To be more precise, there text items. This
+		 * configuration option configures the list of domains whose items
+		 * should be added to the index.
+		 *
+		 * @param string List of domain names
+		 * @since 2016.10
+		 * @category User
+		 * @category Developer
+		 */
+		$domains = $context->getConfig()->get( 'mshop/index/manager/text/domains', array( 'attribute' ) );
+
+
+		foreach( $domains as $domain )
 		{
-			/** mshop/index/manager/text/standard/insert/mysql
-			 * Inserts a new text record into the product index database
-			 *
-			 * @see mshop/index/manager/text/standard/insert/ansi
-			 */
+			$refIds = array();
 
-			/** mshop/index/manager/text/standard/insert/ansi
-			 * Inserts a new text record into the product index database
-			 *
-			 * During the product index rebuild, texts related to a product
-			 * will be stored in the index for this product. All records
-			 * are deleted before the new ones are inserted.
-			 *
-			 * The SQL statement must be a string suitable for being used as
-			 * prepared statement. It must include question marks for binding
-			 * the values from the order item to the statement before they are
-			 * sent to the database server. The number of question marks must
-			 * be the same as the number of columns listed in the INSERT
-			 * statement. The order of the columns must correspond to the
-			 * order in the rebuildIndex() method, so the correct values are
-			 * bound to the columns.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for inserting records
-			 * @since 2014.03
-			 * @category Developer
-			 * @see mshop/index/manager/text/standard/aggregate/ansi
-			 * @see mshop/index/manager/text/standard/cleanup/ansi
-			 * @see mshop/index/manager/text/standard/count/ansi
-			 * @see mshop/index/manager/text/standard/insert/ansi
-			 * @see mshop/index/manager/text/standard/optimize/ansi
-			 * @see mshop/index/manager/text/standard/search/ansi
-			 * @see mshop/index/manager/text/standard/text/ansi
-			 */
-			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/standard/insert' );
-
-			foreach( $attributeItems as $id => $item )
-			{
-				$listTypes = array();
-				foreach( $item->getListItems( 'text', 'default' ) as $listItem ) {
-					$listTypes[$listItem->getRefId()][] = $listItem->getType();
-				}
-
-				$this->saveTexts( $stmt, $item, $listTypes, $prodIds );
-				$this->saveLabels( $stmt, $item, $prodIds[$id] );
+			foreach( $items as $item ) {
+				$refIds = array_merge( $refIds, array_keys( $item->getRefItems( $domain ) ) );
 			}
 
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-	}
+			$domainItems = $this->getDomainItems( $domain, array_unique( $refIds ) );
 
+			$conn = $dbm->acquire( $dbname );
 
-	/**
-	 * Saves the label for items where no name is associated
-	 *
-	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
-	 * @param array $prodIds Product ID to save the label for
-	 */
-	protected function saveLabels( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $prodIds )
-	{
-		$context = $this->getContext();
-		$siteid = $context->getLocale()->getSiteId();
-		$editor = $context->getEditor();
-		$date = date( 'Y-m-d H:i:s' );
-
-		if( $item->getRefItems( 'text', 'name' ) === array() && $item->getLabel() !== '' )
-		{
-			foreach( $prodIds as $prodId )
+			try
 			{
-				$this->saveText(
-					$stmt, $prodId, $siteid, null, null, 'default', 'name',
-					$item->getResourceType(), $item->getLabel(), $date, $editor
-				);
+				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/standard/insert' );
+
+				foreach( $items as $item )
+				{
+					foreach( $item->getRefItems( $domain ) as $refId => $refItem )
+					{
+						if( isset( $domainItems[$refId] ) ) {
+							$this->saveTexts( $stmt, $domainItems[$refId], $item->getId() );
+						}
+					}
+				}
+
+				$dbm->release( $conn, $dbname );
+			}
+			catch( \Exception $e )
+			{
+				$dbm->release( $conn, $dbname );
+				throw $e;
 			}
 		}
 	}
@@ -846,39 +790,37 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
-	 * @param array $listTypes Associative list of item ID / list type code pairs
-	 * @param array $prodIds Associative list of item ID / list of product IDs pairs
-	 * @throws \Aimeos\MShop\Index\Exception If no list type for the item is available
+	 * @param string $prodId Product ID to add the texts too
 	 */
-	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item,
-		array $listTypes, array $prodIds )
+	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item, $prodId )
 	{
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
+		$types = array();
 
-		foreach( $item->getRefItems( 'text' ) as $refId => $refItem )
+		foreach( $item->getListItems( 'text' ) as $listItem )
 		{
-			if( $refItem->getContent() === '' ) {
+			if( ( $refItem = $listItem->getRefItem() ) === null || $refItem->getContent() === '' ) {
 				continue;
 			}
 
-			if( !isset( $listTypes[$refId] ) ) {
-				$msg = sprintf( 'List type for text item with ID "%1$s" not available', $refId );
-				throw new \Aimeos\MShop\Index\Exception( $msg );
-			}
+			$this->saveText(
+				$stmt, $prodId, $siteid, $refItem->getId(), $refItem->getLanguageId(), $listItem->getType(),
+				$refItem->getType(), $item->getResourceType(), $refItem->getContent(), $date, $editor
+			);
 
-			foreach( $listTypes[$refId] as $listType )
-			{
-				foreach( $prodIds[$item->getId()] as $productId )
-				{
-					$this->saveText(
-						$stmt, $productId, $siteid, $refId, $refItem->getLanguageId(), $listType,
-						$refItem->getType(), $item->getResourceType(), $refItem->getContent(), $date, $editor
-					);
-				}
-			}
+			$types[] = $refItem->getType();
+		}
+
+
+		if( !in_array( 'name', $types ) && ( $name = $item->getName() ) !== '' )
+		{
+			$this->saveText(
+				$stmt, $prodId, $siteid, null, null, 'default', 'name',
+				$item->getResourceType(), $name, $date, $editor
+			);
 		}
 	}
 
@@ -920,24 +862,25 @@ class Standard
 
 
 	/**
-	 * Returns the attribute items for the given IDs
+	 * Returns the domain items for the given IDs
 	 *
-	 * @param array $ids Unique attribute IDs
-	 * @return array Associative list of IDs as keys and items implementing \Aimeos\MShop\Attribute\Item\Iface as values
+	 * @param string $domain Name of the data domain the IDs are from
+	 * @param array $ids Unique domain IDs
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface[] Associative list of IDs as keys and items as values
 	 */
-	protected function getAttributeItems( array $ids )
+	protected function getDomainItems( $domain, array $ids )
 	{
-		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $domain );
 
-		$search = $attrManager->createSearch( true );
+		$search = $manager->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'attribute.id', $ids ),
+			$search->compare( '==', $domain . '.id', $ids ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
 
-		return $attrManager->searchItems( $search, array( 'text' ) );
+		return $manager->searchItems( $search, array( 'text' ) );
 	}
 
 

@@ -1,18 +1,15 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2012
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2012
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
 namespace Aimeos\MShop\Index\Manager\Text;
 
 
-/**
- * Test class for \Aimeos\MShop\Index\Manager\Text\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -37,12 +34,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 	}
 
-	/**
-	 * Sets up the fixture.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
@@ -51,12 +43,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -91,9 +77,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.text.id' );
 
-		$this->assertEquals( 22, count( $result ) );
+		$this->assertEquals( 26, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 3, $result[$item->getId()] );
+		$this->assertEquals( 4, $result[$item->getId()] );
 	}
 
 
