@@ -499,7 +499,27 @@ class Standard
 			throw $e;
 		}
 
-		$this->saveAttributeTexts( $items );
+
+		/** mshop/index/manager/text/domains
+		 * A list of domain names whose texts should be indexed too
+		 *
+		 * Supplementary items associated to products that can contain a list
+		 * of text items themselves (attributes, media, prices, texts) can be
+		 * added to the index too. To be more precise, there text items. This
+		 * configuration option configures the list of domains whose items
+		 * should be added to the index (currently only "attribute" or no domain
+		 * are possible values).
+		 *
+		 * @param string List of domain names
+		 * @since 2016.10
+		 * @category User
+		 * @category Developer
+		 */
+		$domains = $context->getConfig()->get( 'mshop/index/manager/text/domains', array( 'attribute' ) );
+
+		if( in_array( 'attribute', (array) $domains ) ) {
+			$this->saveAttributeTexts( $items );
+		}
 
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
