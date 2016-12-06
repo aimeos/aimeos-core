@@ -1,9 +1,8 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MW
  * @subpackage Setup
  */
@@ -13,7 +12,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Creates the required table.
+ * Base class for all setup tasks
  *
  * @package MW
  * @subpackage Setup
@@ -22,6 +21,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 {
 	private $connections = array();
 	private $schemas = array();
+	private $paths = array();
 	protected $additional;
 
 	/** @deprecated Use getSchema() instead */
@@ -37,11 +37,14 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * @param \Aimeos\MW\Setup\DBSchema\Iface $schema Database schema object
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
 	 * @param mixed $additional Additionally provided information for the setup tasks if required
+	 * @param array $paths List of paths of the setup tasks ordered by dependencies
 	 */
-	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
+	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn,
+		$additional = null, array $paths = array() )
 	{
 		$this->schema = $schema;
 		$this->conn = $conn;
+		$this->paths = $paths;
 		$this->additional = $additional;
 	}
 
@@ -169,6 +172,17 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 		}
 
 		return $this->schemas[$name];
+	}
+
+
+	/**
+	 * Returns the setup task paths ordered by their dependencies
+	 *
+	 * @return array List of file system paths
+	 */
+	protected function getSetupPaths()
+	{
+		return $this->paths;
 	}
 
 
