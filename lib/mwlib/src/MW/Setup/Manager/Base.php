@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2014
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2014
+ * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MW
  * @subpackage Setup
  */
@@ -130,7 +130,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 				}
 
 				$interface = '\\Aimeos\\MW\\Setup\\Task\\Iface';
-				$task = new $classname( $schema, $conn, $additional );
+				$task = new $classname( $schema, $conn, $additional, $paths );
 
 				if( ( $task instanceof $interface ) === false ) {
 					throw new \Aimeos\MW\Setup\Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, '\\Aimeos\\MW\\Setup\\Task\\Iface' ) );

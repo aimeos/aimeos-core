@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
@@ -48,10 +48,10 @@ class TablesCreateMAdmin extends TablesCreateMShop
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			'db-cache' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'cache.php',
-			'db-log' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'log.php',
-			'db-job' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'job.php',
-			'db-queue' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'queue.php',
+			'db-cache' => 'default' . $ds . 'schema' . $ds . 'cache.php',
+			'db-log' => 'default' . $ds . 'schema' . $ds . 'log.php',
+			'db-job' => 'default' . $ds . 'schema' . $ds . 'job.php',
+			'db-queue' => 'default' . $ds . 'schema' . $ds . 'queue.php',
 		);
 
 		$this->setupSchema( $files, true );
@@ -69,10 +69,10 @@ class TablesCreateMAdmin extends TablesCreateMShop
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			'db-cache' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'cache.php',
-			'db-log' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'log.php',
-			'db-job' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'job.php',
-			'db-queue' => realpath( __DIR__ ) . $ds . 'default' . $ds . 'schema' . $ds . 'queue.php',
+			'db-cache' => 'default' . $ds . 'schema' . $ds . 'cache.php',
+			'db-log' => 'default' . $ds . 'schema' . $ds . 'log.php',
+			'db-job' => 'default' . $ds . 'schema' . $ds . 'job.php',
+			'db-queue' => 'default' . $ds . 'schema' . $ds . 'queue.php',
 		);
 
 		$this->setupSchema( $files );

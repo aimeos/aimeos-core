@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Metaways Infosystems GmbH, 2011
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 
 
@@ -48,26 +48,26 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			'db-locale' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'locale.php',
-			'db-attribute' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'attribute.php',
-			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'customer.php',
-			'db-media' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'media.php',
-			'db-order' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'order.php',
-			'db-plugin' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'plugin.php',
-			'db-price' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'price.php',
-			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'product.php',
-			'db-service' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'service.php',
-			'db-supplier' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'supplier.php',
-			'db-text' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'text.php',
-			'db-coupon' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'coupon.php',
-			'db-catalog' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'catalog.php',
-			'db-tag' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'tag.php',
+			'db-locale' => 'default' . $ds . 'schema' . $ds . 'locale.php',
+			'db-attribute' => 'default' . $ds . 'schema' . $ds . 'attribute.php',
+			'db-customer' => 'default' . $ds . 'schema' . $ds . 'customer.php',
+			'db-media' => 'default' . $ds . 'schema' . $ds . 'media.php',
+			'db-order' => 'default' . $ds . 'schema' . $ds . 'order.php',
+			'db-plugin' => 'default' . $ds . 'schema' . $ds . 'plugin.php',
+			'db-price' => 'default' . $ds . 'schema' . $ds . 'price.php',
+			'db-product' => 'default' . $ds . 'schema' . $ds . 'product.php',
+			'db-service' => 'default' . $ds . 'schema' . $ds . 'service.php',
+			'db-supplier' => 'default' . $ds . 'schema' . $ds . 'supplier.php',
+			'db-text' => 'default' . $ds . 'schema' . $ds . 'text.php',
+			'db-coupon' => 'default' . $ds . 'schema' . $ds . 'coupon.php',
+			'db-catalog' => 'default' . $ds . 'schema' . $ds . 'catalog.php',
+			'db-tag' => 'default' . $ds . 'schema' . $ds . 'tag.php',
 		);
 
 		$this->setupSchema( $files, true );
 
 		$files = array(
-			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'index.php',
+			'db-product' => 'default' . $ds . 'schema' . $ds . 'index.php',
 		);
 
 		$this->setupSchema( $files, true );
@@ -85,26 +85,26 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 		$ds = DIRECTORY_SEPARATOR;
 
 		$files = array(
-			'db-locale' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'locale.php',
-			'db-attribute' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'attribute.php',
-			'db-customer' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'customer.php',
-			'db-media' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'media.php',
-			'db-order' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'order.php',
-			'db-plugin' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'plugin.php',
-			'db-price' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'price.php',
-			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'product.php',
-			'db-service' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'service.php',
-			'db-supplier' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'supplier.php',
-			'db-text' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'text.php',
-			'db-coupon' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'coupon.php',
-			'db-catalog' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'catalog.php',
-			'db-tag' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'tag.php',
+			'db-locale' => 'default' . $ds . 'schema' . $ds . 'locale.php',
+			'db-attribute' => 'default' . $ds . 'schema' . $ds . 'attribute.php',
+			'db-customer' => 'default' . $ds . 'schema' . $ds . 'customer.php',
+			'db-media' => 'default' . $ds . 'schema' . $ds . 'media.php',
+			'db-order' => 'default' . $ds . 'schema' . $ds . 'order.php',
+			'db-plugin' => 'default' . $ds . 'schema' . $ds . 'plugin.php',
+			'db-price' => 'default' . $ds . 'schema' . $ds . 'price.php',
+			'db-product' => 'default' . $ds . 'schema' . $ds . 'product.php',
+			'db-service' => 'default' . $ds . 'schema' . $ds . 'service.php',
+			'db-supplier' => 'default' . $ds . 'schema' . $ds . 'supplier.php',
+			'db-text' => 'default' . $ds . 'schema' . $ds . 'text.php',
+			'db-coupon' => 'default' . $ds . 'schema' . $ds . 'coupon.php',
+			'db-catalog' => 'default' . $ds . 'schema' . $ds . 'catalog.php',
+			'db-tag' => 'default' . $ds . 'schema' . $ds . 'tag.php',
 		);
 
 		$this->setupSchema( $files );
 
 		$files = array(
-			'db-product' => __DIR__ . $ds . 'default' . $ds . 'schema' . $ds . 'index.php',
+			'db-product' => 'default' . $ds . 'schema' . $ds . 'index.php',
 		);
 
 		$this->setupSchema( $files );
@@ -112,17 +112,58 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
-	 * Creates all required tables from schema if they don't exist
+	 * Returns the schema objects for the given type and relative path
+	 *
+	 * @param string $type Schema type, e.g. "table" or "sequence"
+	 * @param string $relpath Relative path to the scheme file
+	 * @return \Doctrine\DBAL\Schema\Schema[] Associative list of names as keys and schema objects as values
 	 */
-	protected function setupSchema( array $files, $clean = false )
+	protected function getSchemaObjects( $type, $relpath )
 	{
-		foreach( $files as $rname => $filepath )
+		$schemaList = array();
+		$dbalschema = new \Doctrine\DBAL\Schema\Schema();
+
+		foreach( $this->getSetupPaths() as $abspath )
 		{
-			$this->msg( 'Using schema from ' . basename( $filepath ), 1 ); $this->status( '' );
+			$filepath = $abspath . DIRECTORY_SEPARATOR . $relpath;
+
+			if( !file_exists( $filepath ) ) {
+				continue;
+			}
 
 			if( ( $list = include( $filepath ) ) === false ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get list from file "%1$s"', $filepath ) );
 			}
+
+			if( !isset( $list[$type] ) ) {
+				continue;
+			}
+
+			foreach( (array) $list[$type] as $name => $fcn )
+			{
+				if( !isset( $schemaList[$name] ) ) {
+					$schemaList[$name] = clone $dbalschema;
+				}
+
+				$schemaList[$name] = $fcn( $schemaList[$name] );
+			}
+		}
+
+		return $schemaList;
+	}
+
+
+	/**
+	 * Creates all required tables from schema if they don't exist
+	 *
+	 * @param array $files Associative list of resource names as keys and file paths as values
+	 * @param boolean $clean True to remove left over columns or indexes, false to keep them untouched
+	 */
+	protected function setupSchema( array $files, $clean = false )
+	{
+		foreach( $files as $rname => $relpath )
+		{
+			$this->msg( 'Using schema from ' . basename( $relpath ), 1 ); $this->status( '' );
 
 			$dbal = $this->getConnection( $rname )->getRawObject();
 
@@ -130,39 +171,36 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
 			}
 
-			$dbalschema = new \Doctrine\DBAL\Schema\Schema();
 			$dbalManager = $dbal->getSchemaManager();
 			$platform = $dbal->getDatabasePlatform();
 			$schema = $this->getSchema( $rname );
 
-			if( isset( $list['table'] ) )
+
+			foreach( $this->getSchemaObjects( 'table', $relpath ) as $name => $dbalschema )
 			{
-				foreach( (array) $list['table'] as $name => $fcn )
-				{
-					$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
+				$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
-					$table = $dbalManager->listTableDetails( $name );
-					$tables = ( $table->getColumns() !== array() ? array( $table ) : array() );
+				$table = $dbalManager->listTableDetails( $name );
+				$tables = ( $table->getColumns() !== array() ? array( $table ) : array() );
 
-					$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables );
-					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $fcn( clone $dbalschema ) );
-					$stmts = $this->remove( $this->exclude( $schemaDiff, $list ), $clean )->toSaveSql( $platform );
+				$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables );
+				$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $dbalschema );
+				$stmts = $this->remove( $this->exclude( $schemaDiff, $relpath ), $clean )->toSaveSql( $platform );
 
-					$this->executeList( $stmts, $rname );
-					$this->status( 'done' );
-				}
+				$this->executeList( $stmts, $rname );
+				$this->status( 'done' );
 			}
 
-			if( isset( $list['sequence'] ) && $schema->supports( $schema::HAS_SEQUENCES ) )
+			if( $schema->supports( $schema::HAS_SEQUENCES ) )
 			{
 				$sequences = $dbalManager->listSequences();
 
-				foreach( (array) $list['sequence'] as $name => $fcn )
+				foreach( $this->getSchemaObjects( 'sequence', $relpath ) as $name => $dbalschema )
 				{
 					$this->msg( sprintf( 'Checking sequence "%1$s": ', $name ), 2 );
 
 					$seqSchema = new \Doctrine\DBAL\Schema\Schema( array(), $sequences );
-					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $seqSchema, $fcn( clone $dbalschema ) );
+					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $seqSchema, $dbalschema );
 					$stmts = $this->remove( $schemaDiff, $clean )->toSaveSql( $platform );
 
 					$this->executeList( $stmts, $rname );
@@ -175,6 +213,9 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 	/**
 	 * Creates all required tables from SQL statements if they don't exist
+	 *
+	 * @param array $files Associative list of resource names as keys and file paths as values
+	 * @deprecated Use setupSchema() instead
 	 */
 	protected function setup( array $files )
 	{
@@ -220,19 +261,32 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	 * Removes excluded indexes from DBAL schema diff
 	 *
 	 * @param \Doctrine\DBAL\Schema\SchemaDiff $schemaDiff DBAL schema diff object
-	 * @param array $list Associative list with "exclude", "table" and "sequence" keys
+	 * @param string $relpath Relative path to the scheme file
 	 * @return \Doctrine\DBAL\Schema\SchemaDiff Modified DBAL schema diff object
 	 */
-	private function exclude( \Doctrine\DBAL\Schema\SchemaDiff $schemaDiff, array $list )
+	private function exclude( \Doctrine\DBAL\Schema\SchemaDiff $schemaDiff, $relpath )
 	{
-		if( isset( $list['exclude'] ) )
+		foreach( $this->getSetupPaths() as $abspath )
 		{
-			foreach( $schemaDiff->changedTables as $tableDiff )
+			$filepath = $abspath . DIRECTORY_SEPARATOR . $relpath;
+
+			if( !file_exists( $filepath ) ) {
+				continue;
+			}
+
+			if( ( $list = include( $filepath ) ) === false ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unable to get list from file "%1$s"', $filepath ) );
+			}
+
+			if( isset( $list['exclude'] ) )
 			{
-				foreach( $tableDiff->removedIndexes as $idx => $index )
+				foreach( $schemaDiff->changedTables as $tableDiff )
 				{
-					if( in_array( $index->getName(), $list['exclude'] ) ) {
-						unset( $tableDiff->removedIndexes[$idx] );
+					foreach( $tableDiff->removedIndexes as $idx => $index )
+					{
+						if( in_array( $index->getName(), $list['exclude'] ) ) {
+							unset( $tableDiff->removedIndexes[$idx] );
+						}
 					}
 				}
 			}
