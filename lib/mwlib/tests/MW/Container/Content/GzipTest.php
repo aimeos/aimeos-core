@@ -5,7 +5,7 @@ namespace Aimeos\MW\Container\Content;
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015
+ * @copyright Aimeos (aimeos.org), 2015-2016
  */
 class GzipTest extends \PHPUnit_Framework_TestCase
 {
