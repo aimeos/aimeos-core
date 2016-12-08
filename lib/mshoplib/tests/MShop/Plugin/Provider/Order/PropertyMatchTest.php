@@ -77,7 +77,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 		// single condition
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 
-		$this->plugin->setConfig( array( 'product.stock.type.code' => 'default' ) );
+		$this->plugin->setConfig( array( 'product.property.type.code' => 'package-height' ) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
@@ -85,7 +85,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 
 		// two conditions
 		$this->plugin->setConfig( array(
-			'product.stock.type.code' => 'default',
+			'product.property.type.code' => 'package-height',
 			'product.label' => 'Cafe Noire Cappuccino',
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
@@ -107,7 +107,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 	public function testUpdateFailMultipleConditions()
 	{
 		$this->plugin->setConfig( array(
-			'product.stock.type.code' => 'unit_type2',
+			'product.property.type.code' => 'package-height',
 			'product.label' => 'wrong label',
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );

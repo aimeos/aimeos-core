@@ -60,8 +60,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertContains( 'product/lists/type', $result );
 		$this->assertContains( 'product/property', $result );
 		$this->assertContains( 'product/property/type', $result );
-		$this->assertContains( 'product/stock', $result );
-		$this->assertContains( 'product/stock/type', $result );
 	}
 
 
@@ -314,19 +312,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'product.lists.type.status', 1 );
 		$expr[] = $search->compare( '==', 'product.lists.type.editor', $this->editor );
 
-		$expr[] = $search->compare( '!=', 'product.stock.id', null );
-		$expr[] = $search->compare( '!=', 'product.stock.siteid', null );
-		$expr[] = $search->compare( '!=', 'product.stock.parentid', null );
-		$expr[] = $search->compare( '!=', 'product.stock.typeid', null );
-		$expr[] = $search->compare( '==', 'product.stock.stocklevel', 1000 );
-		$expr[] = $search->compare( '==', 'product.stock.dateback', '2010-04-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.stock.editor', $this->editor );
-
-		$expr[] = $search->compare( '!=', 'product.stock.type.id', null );
-		$expr[] = $search->compare( '!=', 'product.stock.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.stock.type.code', 'default' );
-		$expr[] = $search->compare( '==', 'product.stock.type.editor', $this->editor );
-
 		$expr[] = $search->compare( '!=', 'product.property.id', null );
 		$expr[] = $search->compare( '!=', 'product.property.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.property.typeid', null );
@@ -396,11 +381,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'stock' ) );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'stock', 'Standard' ) );
-
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists' ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists', 'Standard' ) );
+
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'property' ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'property', 'Standard' ) );
 
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type', 'Standard' ) );

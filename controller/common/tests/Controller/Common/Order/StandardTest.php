@@ -189,19 +189,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetStockItems()
 	{
 		$context = \TestHelperCntl::getContext();
-		$prodId = \Aimeos\MShop\Factory::createManager( $context, 'product' )->findItem( 'CNE' )->getId();
 
 		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
 		$method = $class->getMethod( 'getStockItems' );
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
-		$result = $method->invokeArgs( $object, array( array( $prodId ), 'default' ) );
+		$result = $method->invokeArgs( $object, array( array( 'CNE' ), 'default' ) );
 
 		$this->assertEquals( 1, count( $result ) );
 
 		foreach( $result as $item ) {
-			$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Stock\Iface', $item );
+			$this->assertInstanceOf( '\Aimeos\MShop\Stock\Item\Iface', $item );
 		}
 	}
 
@@ -370,14 +369,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/product', $orderProductStub );
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Product\Manager\Stock\Standard' )
+		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'increase' ) )
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'increase' );
 
-		\Aimeos\MShop\Factory::injectManager( $context, 'product/stock', $stockStub );
+		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
 		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
@@ -416,14 +415,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/product', $orderProductStub );
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Product\Manager\Stock\Standard' )
+		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'increase' ) )
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'increase' );
 
-		\Aimeos\MShop\Factory::injectManager( $context, 'product/stock', $stockStub );
+		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
 		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
@@ -462,14 +461,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/product', $orderProductStub );
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Product\Manager\Stock\Standard' )
+		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'increase' ) )
 			->getMock();
 
 		$stockStub->expects( $this->once() )->method( 'increase' );
 
-		\Aimeos\MShop\Factory::injectManager( $context, 'product/stock', $stockStub );
+		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
 		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
@@ -521,7 +520,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$context = \TestHelperCntl::getContext();
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Product\Manager\Stock\Standard' )
+		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
@@ -530,21 +529,21 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			return $item->getStocklevel() === 10;
 		} ) );
 
-		\Aimeos\MShop\Factory::injectManager( $context, 'product/stock', $stockStub );
+		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
 		$stockItem = $stockStub->createItem();
 
 		$stockItem1 = clone $stockItem;
-		$stockItem1->setParentId( 2 );
+		$stockItem1->setProductCode( 'X2' );
 		$stockItem1->setStocklevel( 10 );
 
 		$stockItem2 = clone $stockItem;
-		$stockItem2->setParentId( 3 );
+		$stockItem2->setProductCode( 'X3' );
 		$stockItem2->setStocklevel( 20 );
 
 		$stockItem3 = clone $stockItem;
-		$stockItem3->setParentId( 1 );
+		$stockItem3->setProductCode( 'X1' );
 		$stockItem3->setStocklevel( 30 );
 
 
@@ -554,7 +553,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'getBundleMap' )
-			->will( $this->returnValue( array( 2 => array( 1 ), 3 => array( 1 ) ) ) );
+			->will( $this->returnValue( array( 'X2' => array( 'X1' ), 'X3' => array( 'X1' ) ) ) );
 
 		$object->expects( $this->exactly( 2 ) )->method( 'getStockItems' )
 			->will( $this->onConsecutiveCalls( array( $stockItem2, $stockItem1 ), array( $stockItem3 ) ) );
@@ -570,11 +569,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testUpdateStockSelection()
 	{
 		$context = \TestHelperCntl::getContext();
-		$stockItem = \Aimeos\MShop\Factory::createManager( $context, 'product/stock' )->createItem();
+		$stockItem = \Aimeos\MShop\Factory::createManager( $context, 'stock' )->createItem();
 		$prodId = \Aimeos\MShop\Factory::createManager( $context, 'product' )->findItem( 'U:TEST' )->getId();
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Product\Manager\Stock\Standard' )
+		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
@@ -583,7 +582,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			return $item->getStocklevel() === 300;
 		} ) );
 
-		\Aimeos\MShop\Factory::injectManager( $context, 'product/stock', $stockStub );
+		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
 		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );

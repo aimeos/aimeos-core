@@ -176,58 +176,5 @@ return array(
 
 			return $schema;
 		},
-
-		'mshop_product_stock_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$table = $schema->createTable( 'mshop_product_stock_type' );
-
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
-
-			$table->setPrimaryKey( array( 'id' ), 'pk_msprostty_id' );
-			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_msprostty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msprostty_sid_status' );
-			$table->addIndex( array( 'siteid', 'label' ), 'idx_msprostty_sid_label' );
-			$table->addIndex( array( 'siteid', 'code' ), 'idx_msprostty_sid_code' );
-
-			return $schema;
-		},
-
-		'mshop_product_stock' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
-
-			$table = $schema->createTable( 'mshop_product_stock' );
-
-			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'parentid', 'integer', array() );
-			$table->addColumn( 'typeid', 'integer', array() );
-			$table->addColumn( 'stocklevel', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'backdate', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
-
-			$table->setPrimaryKey( array( 'id' ), 'pk_msprost_id' );
-			$table->addUniqueIndex( array( 'siteid', 'parentid', 'typeid' ), 'unq_msprost_sid_pid_tid' );
-			$table->addIndex( array( 'siteid', 'stocklevel' ), 'idx_msprost_sid_stocklevel' );
-			$table->addIndex( array( 'siteid', 'backdate' ), 'idx_msprost_sid_backdate' );
-			$table->addIndex( array( 'typeid' ), 'fk_msprost_typeid' );
-			$table->addIndex( array( 'parentid' ), 'fk_msprost_pid' );
-
-			$table->addForeignKeyConstraint( 'mshop_product', array( 'parentid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprost_pid' );
-
-			$table->addForeignKeyConstraint( 'mshop_product_stock_type', array( 'typeid' ), array( 'id' ),
-				array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_msprost_typeid' );
-
-			return $schema;
-		},
 	),
 );

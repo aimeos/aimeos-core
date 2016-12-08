@@ -72,16 +72,16 @@ class ProductStock
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order )
 	{
-		$productIds = $stockTypes = $stockMap = array();
+		$productCodes = $stockTypes = $stockMap = array();
 
 		foreach( $order->getProducts() as $orderProductItem )
 		{
-			$productIds[] = $orderProductItem->getProductId();
+			$productCodes[] = $orderProductItem->getProductCode();
 			$stockTypes[] = $orderProductItem->getStockType();
 		}
 
-		foreach( $this->getStockItems( $productIds, $stockTypes ) as $stockItem ) {
-			$stockMap[ $stockItem->getParentId() ][ $stockItem->getType() ] = $stockItem->getStocklevel();
+		foreach( $this->getStockItems( $productCodes, $stockTypes ) as $stockItem ) {
+			$stockMap[ $stockItem->getProductCode() ][ $stockItem->getType() ] = $stockItem->getStocklevel();
 		}
 
 		return $this->checkStockLevels( $order, $stockMap );
@@ -106,10 +106,10 @@ class ProductStock
 		{
 			$stocklevel = 0;
 
-			if( isset( $stockMap[ $orderProductItem->getProductId() ] )
-				&& array_key_exists( $orderProductItem->getStockType(), $stockMap[ $orderProductItem->getProductId() ] )
+			if( isset( $stockMap[ $orderProductItem->getProductCode() ] )
+				&& array_key_exists( $orderProductItem->getStockType(), $stockMap[ $orderProductItem->getProductCode() ] )
 			) {
-				$stocklevel = $stockMap[ $orderProductItem->getProductId() ][ $orderProductItem->getStockType() ];
+				$stocklevel = $stockMap[ $orderProductItem->getProductCode() ][ $orderProductItem->getStockType() ];
 			}
 
 			if( $stocklevel === null || $stocklevel >= $orderProductItem->getQuantity() ) {
@@ -130,20 +130,20 @@ class ProductStock
 
 
 	/**
-	 * Returns the stock items for the given product IDs and stock types
+	 * Returns the stock items for the given product codes and stock types
 	 *
-	 * @param array|string $productIds Unique product ID or list of product IDs
+	 * @param array|string $productIds Unique product code or list of product codes
 	 * @param array|string $types Unique stock types to limit the stock items
-	 * @return array Associative list of stock item IDs as keys and items implementing \Aimeos\MShop\Product\Item\Stock\Iface as values
+	 * @return array Associative list of stock item IDs as keys and items implementing \Aimeos\MShop\Stock\Item\Iface as values
 	 */
-	protected function getStockItems( $productIds, $types )
+	protected function getStockItems( $codes, $types )
 	{
-		$stockManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
+		$stockManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock' );
 
 		$search = $stockManager->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.stock.parentid', $productIds ),
-			$search->compare( '==', 'product.stock.type.code', $types ),
+			$search->compare( '==', 'stock.productcode', $codes ),
+			$search->compare( '==', 'stock.type.code', $types ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

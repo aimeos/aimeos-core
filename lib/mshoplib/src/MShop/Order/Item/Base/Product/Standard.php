@@ -313,8 +313,8 @@ class Standard extends Base implements Iface
 	 */
 	public function getStockType()
 	{
-		if( isset( $this->values['order.base.product.stocktype'] ) ) {
-			return (string) $this->values['order.base.product.stocktype'];
+		if( isset( $this->values['order.base.stocktype'] ) ) {
+			return (string) $this->values['order.base.stocktype'];
 		}
 
 		return '';
@@ -331,7 +331,7 @@ class Standard extends Base implements Iface
 	{
 		if( $code == $this->getStockType() ) { return $this; }
 
-		$this->values['order.base.product.stocktype'] = (string) $this->checkCode( $code );
+		$this->values['order.base.stocktype'] = (string) $this->checkCode( $code );
 		$this->setModified();
 
 		return $this;
@@ -608,7 +608,7 @@ class Standard extends Base implements Iface
 				case 'order.base.product.baseid': $this->setBaseId( $value ); break;
 				case 'order.base.product.ordprodid': $this->setOrderProductId( $value ); break;
 				case 'order.base.product.type': $this->setType( $value ); break;
-				case 'order.base.product.stocktype': $this->setStockType( $value ); break;
+				case 'order.base.stocktype': $this->setStockType( $value ); break;
 				case 'order.base.product.suppliercode': $this->setSupplierCode( $value ); break;
 				case 'order.base.product.productid': $this->setProductId( $value ); break;
 				case 'order.base.product.prodcode': $this->setProductCode( $value ); break;
@@ -643,7 +643,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.siteid'] = $this->getSiteId();
 		$list['order.base.product.ordprodid'] = $this->getOrderProductId();
 		$list['order.base.product.type'] = $this->getType();
-		$list['order.base.product.stocktype'] = $this->getStockType();
+		$list['order.base.stocktype'] = $this->getStockType();
 		$list['order.base.product.suppliercode'] = $this->getSupplierCode();
 		$list['order.base.product.productid'] = $this->getProductId();
 		$list['order.base.product.prodcode'] = $this->getProductCode();

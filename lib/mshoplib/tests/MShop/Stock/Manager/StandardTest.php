@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MShop\Product\Manager\Stock;
+namespace Aimeos\MShop\Stock\Manager;
 
 
 class StandardTest extends \PHPUnit_Framework_TestCase
@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
-		$this->object = new \Aimeos\MShop\Product\Manager\Stock\Standard( \TestHelperMShop::getContext() );
+		$this->object = new \Aimeos\MShop\Stock\Manager\Standard( \TestHelperMShop::getContext() );
 	}
 
 
@@ -37,34 +37,21 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Product\\Item\\Stock\\Iface', $this->object->createItem() );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Stock\\Item\\Iface', $this->object->createItem() );
 	}
 
 
 	public function testSaveInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Product\Exception' );
+		$this->setExpectedException( '\Aimeos\MShop\Stock\Exception' );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$search = $productManager->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'product.code', 'U:WH' ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $productManager->searchItems( $search );
-
-		if( ( $product = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No product item found' );
-		}
-
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.stock.editor', $this->editor ) );
+		$search->setConditions( $search->compare( '==', 'stock.editor', $this->editor ) );
 		$search->setSlice( 0, 1 );
 		$items = $this->object->searchItems( $search );
 
@@ -73,7 +60,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$item->setId( null );
-		$item->setParentId( $product->getId() );
+		$item->setProductCode( 'XYZ' );
 		$this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
@@ -88,8 +75,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
-		$this->assertEquals( $item->getParentId(), $itemSaved->getParentId() );
 		$this->assertEquals( $item->getTypeId(), $itemSaved->getTypeId() );
+		$this->assertEquals( $item->getProductCode(), $itemSaved->getProductCode() );
 		$this->assertEquals( $item->getStockLevel(), $itemSaved->getStockLevel() );
 		$this->assertEquals( $item->getDateBack(), $itemSaved->getDateBack() );
 
@@ -99,8 +86,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $itemExp->getId(), $itemUpd->getId() );
 		$this->assertEquals( $itemExp->getSiteId(), $itemUpd->getSiteId() );
-		$this->assertEquals( $itemExp->getParentId(), $itemUpd->getParentId() );
 		$this->assertEquals( $itemExp->getTypeId(), $itemUpd->getTypeId() );
+		$this->assertEquals( $itemExp->getProductCode(), $itemUpd->getProductCode() );
 		$this->assertEquals( $itemExp->getStockLevel(), $itemUpd->getStockLevel() );
 		$this->assertEquals( $itemExp->getDateBack(), $itemUpd->getDateBack() );
 
@@ -117,8 +104,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'product.stock.stocklevel', 2000 ),
-			$search->compare( '==', 'product.stock.editor', $this->editor )
+			$search->compare( '==', 'stock.stocklevel', 2000 ),
+			$search->compare( '==', 'stock.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->object->searchItems( $search );
@@ -136,8 +123,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$result = $this->object->getResourceType();
 
-		$this->assertContains( 'product/stock', $result );
-		$this->assertContains( 'product/stock/type', $result );
+		$this->assertContains( 'stock', $result );
+		$this->assertContains( 'stock/type', $result );
 	}
 
 
@@ -155,15 +142,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'product.stock.id', null );
-		$expr[] = $search->compare( '!=', 'product.stock.siteid', null );
-		$expr[] = $search->compare( '!=', 'product.stock.parentid', null );
-		$expr[] = $search->compare( '!=', 'product.stock.typeid', null );
-		$expr[] = $search->compare( '==', 'product.stock.stocklevel', 1000 );
-		$expr[] = $search->compare( '==', 'product.stock.dateback', '2010-04-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.stock.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.stock.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.stock.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'stock.id', null );
+		$expr[] = $search->compare( '!=', 'stock.siteid', null );
+		$expr[] = $search->compare( '!=', 'stock.typeid', null );
+		$expr[] = $search->compare( '!=', 'stock.productcode', null );
+		$expr[] = $search->compare( '==', 'stock.stocklevel', 1000 );
+		$expr[] = $search->compare( '==', 'stock.dateback', '2010-04-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'stock.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'stock.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'stock.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
@@ -180,20 +167,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testDecrease()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$typeManager = $this->object->getSubManager( 'type' );
-
-		$productItem = $productManager->findItem( 'CNC' );
 		$typeItem = $typeManager->findItem( 'unit_type1', array(), 'product' );
 
 		$stockItem = $this->object->createItem();
-		$stockItem->setParentId( $productItem->getId() );
 		$stockItem->setTypeId( $typeItem->getId() );
+		$stockItem->setProductCode( 'CNC' );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->decrease( $productItem->getCode(), $typeItem->getCode(), 5 );
+		$this->object->decrease( 'CNC', $typeItem->getCode(), 5 );
 		$actual = $this->object->getItem( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );
@@ -204,20 +188,17 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testIncrease()
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$typeManager = $this->object->getSubManager( 'type' );
-
-		$productItem = $productManager->findItem( 'CNC' );
 		$typeItem = $typeManager->findItem( 'unit_type1', array(), 'product' );
 
 		$stockItem = $this->object->createItem();
-		$stockItem->setParentId( $productItem->getId() );
 		$stockItem->setTypeId( $typeItem->getId() );
+		$stockItem->setProductCode( 'CNC' );
 		$stockItem->setStockLevel( 0 );
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->increase( $productItem->getCode(), $typeItem->getCode(), 5 );
+		$this->object->increase( 'CNC', $typeItem->getCode(), 5 );
 		$actual = $this->object->getItem( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );

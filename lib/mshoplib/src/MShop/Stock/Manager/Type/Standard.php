@@ -5,87 +5,87 @@
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MShop
- * @subpackage Product
+ * @subpackage Stock
  */
 
 
-namespace Aimeos\MShop\Product\Manager\Stock\Type;
+namespace Aimeos\MShop\Stock\Manager\Type;
 
 
 /**
- * Default product stock type manager implementation.
+ * Default stock type manager implementation.
  *
  * @package MShop
- * @subpackage Product
+ * @subpackage Stock
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Type\Base
-	implements \Aimeos\MShop\Product\Manager\Stock\Type\Iface
+	implements \Aimeos\MShop\Stock\Manager\Type\Iface
 {
 	private $searchConfig = array(
-		'product.stock.type.id'=> array(
-			'code'=>'product.stock.type.id',
-			'internalcode'=>'mprostty."id"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_product_stock_type" AS mprostty ON mprost."typeid" = mprostty."id"' ),
-			'label'=>'Product stock type ID',
+		'stock.type.id'=> array(
+			'code'=>'stock.type.id',
+			'internalcode'=>'mstoty."id"',
+			'internaldeps'=>array( 'LEFT JOIN "mshop_stock_type" AS mstoty ON msto."typeid" = mstoty."id"' ),
+			'label'=>'Stock type ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.stock.type.siteid'=> array(
-			'code'=>'product.stock.type.siteid',
-			'internalcode'=>'mprostty."siteid"',
-			'label'=>'Product stock type site ID',
+		'stock.type.siteid'=> array(
+			'code'=>'stock.type.siteid',
+			'internalcode'=>'mstoty."siteid"',
+			'label'=>'Stock type site ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.stock.type.code'=> array(
-			'code'=>'product.stock.type.code',
-			'internalcode'=>'mprostty."code"',
-			'label'=>'Product stock type code',
+		'stock.type.code'=> array(
+			'code'=>'stock.type.code',
+			'internalcode'=>'mstoty."code"',
+			'label'=>'Stock type code',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.stock.type.domain' => array(
-			'code' => 'product.stock.type.domain',
-			'internalcode' => 'mprostty."domain"',
-			'label' => 'Product stock type domain',
+		'stock.type.domain' => array(
+			'code' => 'stock.type.domain',
+			'internalcode' => 'mstoty."domain"',
+			'label' => 'Stock type domain',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.stock.type.label'=> array(
-			'code'=>'product.stock.type.label',
-			'internalcode'=>'mprostty."label"',
-			'label'=>'Product stock type label',
+		'stock.type.label'=> array(
+			'code'=>'stock.type.label',
+			'internalcode'=>'mstoty."label"',
+			'label'=>'Stock type label',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.stock.type.status'=> array(
-			'code'=>'product.stock.type.status',
-			'internalcode'=>'mprostty."status"',
-			'label'=>'Product stock type status',
+		'stock.type.status'=> array(
+			'code'=>'stock.type.status',
+			'internalcode'=>'mstoty."status"',
+			'label'=>'Stock type status',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'product.stock.type.mtime'=> array(
-			'code'=>'product.stock.type.mtime',
-			'internalcode'=>'mprostty."mtime"',
-			'label'=>'Product stock type modification date/time',
+		'stock.type.mtime'=> array(
+			'code'=>'stock.type.mtime',
+			'internalcode'=>'mstoty."mtime"',
+			'label'=>'Stock type modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.stock.type.ctime'=> array(
-			'code'=>'product.stock.type.ctime',
-			'internalcode'=>'mprostty."ctime"',
-			'label'=>'Product stock type creation date/time',
+		'stock.type.ctime'=> array(
+			'code'=>'stock.type.ctime',
+			'internalcode'=>'mstoty."ctime"',
+			'label'=>'Stock type creation date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.stock.type.editor'=> array(
-			'code'=>'product.stock.type.editor',
-			'internalcode'=>'mprostty."editor"',
-			'label'=>'Product stock type editor',
+		'stock.type.editor'=> array(
+			'code'=>'stock.type.editor',
+			'internalcode'=>'mstoty."editor"',
+			'label'=>'Stock type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -100,7 +100,7 @@ class Standard
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
 		parent::__construct( $context );
-		$this->setResourceName( 'db-product' );
+		$this->setResourceName( 'db-stock' );
 	}
 
 
@@ -111,12 +111,12 @@ class Standard
 	 */
 	public function cleanup( array $siteids )
 	{
-		$path = 'mshop/product/manager/stock/type/submanagers';
+		$path = 'mshop/stock/manager/type/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
-		$this->cleanupBase( $siteids, 'mshop/product/manager/stock/type/standard/delete' );
+		$this->cleanupBase( $siteids, 'mshop/stock/manager/type/standard/delete' );
 	}
 
 
@@ -128,9 +128,9 @@ class Standard
 	 */
 	public function getResourceType( $withsub = true )
 	{
-		$path = 'mshop/product/manager/stock/type/submanagers';
+		$path = 'mshop/stock/manager/type/submanagers';
 
-		return $this->getResourceTypeBase( 'product/stock/type', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'stock/type', $path, array(), $withsub );
 	}
 
 
@@ -142,8 +142,8 @@ class Standard
 	 */
 	public function getSearchAttributes( $withsub = true )
 	{
-		/** mshop/product/manager/stock/type/submanagers
-		 * List of manager names that can be instantiated by the product stock type manager
+		/** mshop/stock/manager/type/submanagers
+		 * List of manager names that can be instantiated by the stock type manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
 		 * Each manager has or can have sub-managers caring about particular
@@ -159,7 +159,7 @@ class Standard
 		 * @since 2017.01
 		 * @category Developer
 		 */
-		$path = 'mshop/product/manager/stock/type/submanagers';
+		$path = 'mshop/stock/manager/type/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
 	}
@@ -174,10 +174,10 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		/** mshop/product/manager/stock/type/name
-		 * Class name of the used product stock type manager implementation
+		/** mshop/stock/manager/type/name
+		 * Class name of the used stock type manager implementation
 		 *
-		 * Each default product stock type manager can be replaced by an alternative imlementation.
+		 * Each default stock type manager can be replaced by an alternative imlementation.
 		 * To use this implementation, you have to set the last part of the class
 		 * name as configuration value so the manager factory knows which class it
 		 * has to instantiate.
@@ -192,7 +192,7 @@ class Standard
 		 *
 		 * then you have to set the this configuration option:
 		 *
-		 *  mshop/product/manager/stock/type/name = Mytype
+		 *  mshop/stock/manager/type/name = Mytype
 		 *
 		 * The value is the last part of your own class name and it's case sensitive,
 		 * so take care that the configuration value is exactly named like the last
@@ -208,8 +208,8 @@ class Standard
 		 * @category Developer
 		 */
 
-		/** mshop/product/manager/stock/type/decorators/excludes
-		 * Excludes decorators added by the "common" option from the product stock type manager
+		/** mshop/stock/manager/type/decorators/excludes
+		 * Excludes decorators added by the "common" option from the stock type manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -218,24 +218,24 @@ class Standard
 		 *
 		 * This option allows you to remove a decorator added via
 		 * "mshop/common/manager/decorators/default" before they are wrapped
-		 * around the product stock type manager.
+		 * around the stock type manager.
 		 *
-		 *  mshop/product/manager/stock/type/decorators/excludes = array( 'decorator1' )
+		 *  mshop/stock/manager/type/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
-		 * "mshop/common/manager/decorators/default" for the product stock type manager.
+		 * "mshop/common/manager/decorators/default" for the stock type manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2017.01
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/stock/type/decorators/global
-		 * @see mshop/product/manager/stock/type/decorators/local
+		 * @see mshop/stock/manager/type/decorators/global
+		 * @see mshop/stock/manager/type/decorators/local
 		 */
 
-		/** mshop/product/manager/stock/type/decorators/global
-		 * Adds a list of globally available decorators only to the product stock type manager
+		/** mshop/stock/manager/type/decorators/global
+		 * Adds a list of globally available decorators only to the stock type manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -243,9 +243,9 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product stock type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the stock type manager.
 		 *
-		 *  mshop/product/manager/stock/type/decorators/global = array( 'decorator1' )
+		 *  mshop/stock/manager/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the product controller.
@@ -254,12 +254,12 @@ class Standard
 		 * @since 2017.01
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/stock/type/decorators/excludes
-		 * @see mshop/product/manager/stock/type/decorators/local
+		 * @see mshop/stock/manager/type/decorators/excludes
+		 * @see mshop/stock/manager/type/decorators/local
 		 */
 
-		/** mshop/product/manager/stock/type/decorators/local
-		 * Adds a list of local decorators only to the product stock type manager
+		/** mshop/stock/manager/type/decorators/local
+		 * Adds a list of local decorators only to the stock type manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -267,23 +267,23 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the product stock type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the stock type manager.
 		 *
-		 *  mshop/product/manager/stock/type/decorators/local = array( 'decorator2' )
+		 *  mshop/stock/manager/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the product
-		 * controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the stock
+		 * manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2017.01
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/product/manager/stock/type/decorators/excludes
-		 * @see mshop/product/manager/stock/type/decorators/global
+		 * @see mshop/stock/manager/type/decorators/excludes
+		 * @see mshop/stock/manager/type/decorators/global
 		 */
 
-		return $this->getSubManagerBase( 'product', 'stock/type/' . $manager, $name );
+		return $this->getSubManagerBase( 'stock', 'type/' . $manager, $name );
 	}
 
 
@@ -294,14 +294,14 @@ class Standard
 	 */
 	protected function getConfigPath()
 	{
-		/** mshop/product/manager/stock/type/standard/insert/mysql
-		 * Inserts a new product stock type record into the database table
+		/** mshop/stock/manager/type/standard/insert/mysql
+		 * Inserts a new stock type record into the database table
 		 *
-		 * @see mshop/product/manager/stock/type/standard/insert/ansi
+		 * @see mshop/stock/manager/type/standard/insert/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/insert/ansi
-		 * Inserts a new product stock type record into the database table
+		/** mshop/stock/manager/type/standard/insert/ansi
+		 * Inserts a new stock type record into the database table
 		 *
 		 * Items with no ID yet (i.e. the ID is NULL) will be created in
 		 * the database and the newly created ID retrieved afterwards
@@ -323,21 +323,21 @@ class Standard
 		 * @param string SQL statement for inserting records
 		 * @since 2017.01
 		 * @category Developer
-		 * @see mshop/product/manager/stock/type/standard/update/ansi
-		 * @see mshop/product/manager/stock/type/standard/newid/ansi
-		 * @see mshop/product/manager/stock/type/standard/delete/ansi
-		 * @see mshop/product/manager/stock/type/standard/search/ansi
-		 * @see mshop/product/manager/stock/type/standard/count/ansi
+		 * @see mshop/stock/manager/type/standard/update/ansi
+		 * @see mshop/stock/manager/type/standard/newid/ansi
+		 * @see mshop/stock/manager/type/standard/delete/ansi
+		 * @see mshop/stock/manager/type/standard/search/ansi
+		 * @see mshop/stock/manager/type/standard/count/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/update/mysql
-		 * Updates an existing product stock type record in the database
+		/** mshop/stock/manager/type/standard/update/mysql
+		 * Updates an existing stock type record in the database
 		 *
-		 * @see mshop/product/manager/stock/type/standard/update/ansi
+		 * @see mshop/stock/manager/type/standard/update/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/update/ansi
-		 * Updates an existing product stock type record in the database
+		/** mshop/stock/manager/type/standard/update/ansi
+		 * Updates an existing stock type record in the database
 		 *
 		 * Items which already have an ID (i.e. the ID is not NULL) will
 		 * be updated in the database.
@@ -356,20 +356,20 @@ class Standard
 		 * @param string SQL statement for updating records
 		 * @since 2017.01
 		 * @category Developer
-		 * @see mshop/product/manager/stock/type/standard/insert/ansi
-		 * @see mshop/product/manager/stock/type/standard/newid/ansi
-		 * @see mshop/product/manager/stock/type/standard/delete/ansi
-		 * @see mshop/product/manager/stock/type/standard/search/ansi
-		 * @see mshop/product/manager/stock/type/standard/count/ansi
+		 * @see mshop/stock/manager/type/standard/insert/ansi
+		 * @see mshop/stock/manager/type/standard/newid/ansi
+		 * @see mshop/stock/manager/type/standard/delete/ansi
+		 * @see mshop/stock/manager/type/standard/search/ansi
+		 * @see mshop/stock/manager/type/standard/count/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/newid/mysql
+		/** mshop/stock/manager/type/standard/newid/mysql
 		 * Retrieves the ID generated by the database when inserting a new record
 		 *
-		 * @see mshop/product/manager/stock/type/standard/newid/ansi
+		 * @see mshop/stock/manager/type/standard/newid/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/newid/ansi
+		/** mshop/stock/manager/type/standard/newid/ansi
 		 * Retrieves the ID generated by the database when inserting a new record
 		 *
 		 * As soon as a new record is inserted into the database table,
@@ -393,20 +393,20 @@ class Standard
 		 * @param string SQL statement for retrieving the last inserted record ID
 		 * @since 2017.01
 		 * @category Developer
-		 * @see mshop/product/manager/stock/type/standard/insert/ansi
-		 * @see mshop/product/manager/stock/type/standard/update/ansi
-		 * @see mshop/product/manager/stock/type/standard/delete/ansi
-		 * @see mshop/product/manager/stock/type/standard/search/ansi
-		 * @see mshop/product/manager/stock/type/standard/count/ansi
+		 * @see mshop/stock/manager/type/standard/insert/ansi
+		 * @see mshop/stock/manager/type/standard/update/ansi
+		 * @see mshop/stock/manager/type/standard/delete/ansi
+		 * @see mshop/stock/manager/type/standard/search/ansi
+		 * @see mshop/stock/manager/type/standard/count/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/delete/mysql
+		/** mshop/stock/manager/type/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
-		 * @see mshop/product/manager/stock/type/standard/delete/ansi
+		 * @see mshop/stock/manager/type/standard/delete/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/delete/ansi
+		/** mshop/stock/manager/type/standard/delete/ansi
 		 * Deletes the items matched by the given IDs from the database
 		 *
 		 * Removes the records specified by the given IDs from the product database.
@@ -424,20 +424,20 @@ class Standard
 		 * @param string SQL statement for deleting items
 		 * @since 2017.01
 		 * @category Developer
-		 * @see mshop/product/manager/stock/type/standard/insert/ansi
-		 * @see mshop/product/manager/stock/type/standard/update/ansi
-		 * @see mshop/product/manager/stock/type/standard/newid/ansi
-		 * @see mshop/product/manager/stock/type/standard/search/ansi
-		 * @see mshop/product/manager/stock/type/standard/count/ansi
+		 * @see mshop/stock/manager/type/standard/insert/ansi
+		 * @see mshop/stock/manager/type/standard/update/ansi
+		 * @see mshop/stock/manager/type/standard/newid/ansi
+		 * @see mshop/stock/manager/type/standard/search/ansi
+		 * @see mshop/stock/manager/type/standard/count/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/search/mysql
+		/** mshop/stock/manager/type/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
 		 *
-		 * @see mshop/product/manager/stock/type/standard/search/ansi
+		 * @see mshop/stock/manager/type/standard/search/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/search/ansi
+		/** mshop/stock/manager/type/standard/search/ansi
 		 * Retrieves the records matched by the given criteria in the database
 		 *
 		 * Fetches the records matched by the given criteria from the product
@@ -482,20 +482,20 @@ class Standard
 		 * @param string SQL statement for searching items
 		 * @since 2017.01
 		 * @category Developer
-		 * @see mshop/product/manager/stock/type/standard/insert/ansi
-		 * @see mshop/product/manager/stock/type/standard/update/ansi
-		 * @see mshop/product/manager/stock/type/standard/newid/ansi
-		 * @see mshop/product/manager/stock/type/standard/delete/ansi
-		 * @see mshop/product/manager/stock/type/standard/count/ansi
+		 * @see mshop/stock/manager/type/standard/insert/ansi
+		 * @see mshop/stock/manager/type/standard/update/ansi
+		 * @see mshop/stock/manager/type/standard/newid/ansi
+		 * @see mshop/stock/manager/type/standard/delete/ansi
+		 * @see mshop/stock/manager/type/standard/count/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/count/mysql
+		/** mshop/stock/manager/type/standard/count/mysql
 		 * Counts the number of records matched by the given criteria in the database
 		 *
-		 * @see mshop/product/manager/stock/type/standard/count/ansi
+		 * @see mshop/stock/manager/type/standard/count/ansi
 		 */
 
-		/** mshop/product/manager/stock/type/standard/count/ansi
+		/** mshop/stock/manager/type/standard/count/ansi
 		 * Counts the number of records matched by the given criteria in the database
 		 *
 		 * Counts all records matched by the given criteria from the product
@@ -534,14 +534,14 @@ class Standard
 		 * @param string SQL statement for counting items
 		 * @since 2017.01
 		 * @category Developer
-		 * @see mshop/product/manager/stock/type/standard/insert/ansi
-		 * @see mshop/product/manager/stock/type/standard/update/ansi
-		 * @see mshop/product/manager/stock/type/standard/newid/ansi
-		 * @see mshop/product/manager/stock/type/standard/delete/ansi
-		 * @see mshop/product/manager/stock/type/standard/search/ansi
+		 * @see mshop/stock/manager/type/standard/insert/ansi
+		 * @see mshop/stock/manager/type/standard/update/ansi
+		 * @see mshop/stock/manager/type/standard/newid/ansi
+		 * @see mshop/stock/manager/type/standard/delete/ansi
+		 * @see mshop/stock/manager/type/standard/search/ansi
 		 */
 
-		return 'mshop/product/manager/stock/type/standard/';
+		return 'mshop/stock/manager/type/standard/';
 	}
 
 

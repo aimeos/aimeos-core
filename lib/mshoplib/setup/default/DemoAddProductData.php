@@ -113,8 +113,12 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			$manager->saveItem( $item );
 
-			$this->addPropertyItems( $entry, $item->getId() );
 			$this->addRefItems( $entry, $item->getId() );
+			$this->addPropertyItems( $entry, $item->getId() );
+
+			if( isset( $entry['stock'] ) ) {
+				$this->addProductStock( $entry['code'], $entry['stock'] );
+			}
 		}
 	}
 
@@ -150,15 +154,11 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	/**
 	 * Adds the referenced items from the given entry data.
 	 *
-	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
+	 * @param array $entry Associative list of data with attribute, media, price, text and product sections
 	 * @param string $id Parent ID for inserting the items
 	 */
 	protected function addRefItems( array $entry, $id )
 	{
-		if( isset( $entry['stock'] ) ) {
-			$this->addProductStock( $id, $entry['stock'] );
-		}
-
 		if( isset( $entry['attribute'] ) ) {
 			$this->addAttributes( $id, $entry['attribute'], 'product' );
 		}

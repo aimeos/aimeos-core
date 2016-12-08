@@ -9,13 +9,13 @@
 return array(
 	'delete' => array(
 		'ansi' => '
-			DELETE FROM "mshop_product_stock_type"
+			DELETE FROM "mshop_stock_type"
 			WHERE :cond AND siteid = ?
 		'
 	),
 	'insert' => array(
 		'ansi' => '
-			INSERT INTO "mshop_product_stock_type" (
+			INSERT INTO "mshop_stock_type" (
 				"siteid", "code", "domain", "label", "status",
 				"mtime", "editor", "ctime"
 			) VALUES (
@@ -25,7 +25,7 @@ return array(
 	),
 	'update' => array(
 		'ansi' => '
-			UPDATE "mshop_product_stock_type"
+			UPDATE "mshop_stock_type"
 			SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
 				"status" = ?, "mtime" = ?, "editor" = ?
 			WHERE "id" = ?
@@ -33,17 +33,17 @@ return array(
 	),
 	'search' => array(
 		'ansi' => '
-			SELECT mprostty."id" AS "product.stock.type.id", mprostty."siteid" AS "product.stock.type.siteid",
-				mprostty."code" AS "product.stock.type.code", mprostty."domain" AS "product.stock.type.domain",
-				mprostty."label" AS "product.stock.type.label", mprostty."status" AS "product.stock.type.status",
-				mprostty."mtime" AS "product.stock.type.mtime", mprostty."editor" AS "product.stock.type.editor",
-				mprostty."ctime" AS "product.stock.type.ctime"
-			FROM "mshop_product_stock_type" mprostty
+			SELECT mstoty."id" AS "stock.type.id", mstoty."siteid" AS "stock.type.siteid",
+				mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
+				mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
+				mstoty."mtime" AS "stock.type.mtime", mstoty."editor" AS "stock.type.editor",
+				mstoty."ctime" AS "stock.type.ctime"
+			FROM "mshop_stock_type" mstoty
 			:joins
 			WHERE :cond
-			GROUP BY mprostty."id", mprostty."siteid", mprostty."code", mprostty."domain",
-				mprostty."label", mprostty."status", mprostty."mtime", mprostty."editor",
-				mprostty."ctime" /*-columns*/ , :columns /*columns-*/
+			GROUP BY mstoty."id", mstoty."siteid", mstoty."code", mstoty."domain",
+				mstoty."label", mstoty."status", mstoty."mtime", mstoty."editor",
+				mstoty."ctime" /*-columns*/ , :columns /*columns-*/
 			/*-orderby*/ ORDER BY :order /*orderby-*/
 			LIMIT :size OFFSET :start
 		'
@@ -52,8 +52,8 @@ return array(
 		'ansi' => '
 			SELECT COUNT(*) AS "count"
 			FROM (
-				SELECT DISTINCT mprostty."id"
-				FROM "mshop_product_stock_type" mprostty
+				SELECT DISTINCT mstoty."id"
+				FROM "mshop_stock_type" mstoty
 				:joins
 				WHERE :cond
 				LIMIT 10000 OFFSET 0
@@ -63,7 +63,7 @@ return array(
 	'newid' => array(
 		'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
 		'mysql' => 'SELECT LAST_INSERT_ID()',
-		'oracle' => 'SELECT mshop_product_stock_type_seq.CURRVAL FROM DUAL',
+		'oracle' => 'SELECT mshop_stock_type_seq.CURRVAL FROM DUAL',
 		'pgsql' => 'SELECT lastval()',
 		'sqlite' => 'SELECT last_insert_rowid()',
 		'sqlsrv' => 'SELECT SCOPE_IDENTITY()',

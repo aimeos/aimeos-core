@@ -7,7 +7,7 @@
  */
 
 
-namespace Aimeos\MShop\Product\Manager\Stock\Type;
+namespace Aimeos\MShop\Stock\Manager\Type;
 
 
 class StandardTest extends \PHPUnit_Framework_TestCase
@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
-		$this->object = new \Aimeos\MShop\Product\Manager\Stock\Type\Standard( \TestHelperMShop::getContext() );
+		$this->object = new \Aimeos\MShop\Stock\Manager\Type\Standard( \TestHelperMShop::getContext() );
 	}
 
 
@@ -52,8 +52,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'product.stock.type.code', 'unit_type1' ),
-			$search->compare( '==', 'product.stock.type.editor', $this->editor )
+			$search->compare( '==', 'stock.type.code', 'unit_type1' ),
+			$search->compare( '==', 'stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search );
@@ -115,8 +115,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'product.stock.type.code', 'unit_type1' ),
-			$search->compare( '==', 'product.stock.type.editor', $this->editor )
+			$search->compare( '==', 'stock.type.code', 'unit_type1' ),
+			$search->compare( '==', 'stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$result = $this->object->searchItems( $search );
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$result = $this->object->getResourceType();
 
-		$this->assertContains( 'product/stock/type', $result );
+		$this->assertContains( 'stock/type', $result );
 	}
 
 
@@ -152,13 +152,13 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$expr = array();
-		$expr[] = $search->compare( '!=', 'product.stock.type.id', null );
-		$expr[] = $search->compare( '!=', 'product.stock.type.siteid', null );
-		$expr[] = $search->compare( '==', 'product.stock.type.domain', 'product' );
-		$expr[] = $search->compare( '==', 'product.stock.type.code', 'unit_type1' );
-		$expr[] = $search->compare( '>=', 'product.stock.type.mtime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '>=', 'product.stock.type.ctime', '1970-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'product.stock.type.editor', $this->editor );
+		$expr[] = $search->compare( '!=', 'stock.type.id', null );
+		$expr[] = $search->compare( '!=', 'stock.type.siteid', null );
+		$expr[] = $search->compare( '==', 'stock.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'stock.type.code', 'unit_type1' );
+		$expr[] = $search->compare( '>=', 'stock.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'stock.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'stock.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, array(), $total );
@@ -170,8 +170,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'product.stock.type.code', 'unit_type' ),
-			$search->compare( '==', 'product.stock.type.editor', $this->editor )
+			$search->compare( '~=', 'stock.type.code', 'unit_type' ),
+			$search->compare( '==', 'stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );

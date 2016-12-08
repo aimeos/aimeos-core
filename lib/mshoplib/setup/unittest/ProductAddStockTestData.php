@@ -52,10 +52,10 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'productstock.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'stock.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product stock domain', $path ) );
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for stock domain', $path ) );
 		}
 
 		$this->addProductStockData( $testdata );
@@ -72,63 +72,43 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addProductStockData( array $testdata )
 	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$productStockManager = $productManager->getSubManager( 'stock', 'Standard' );
-		$productStockTypeManager = $productStockManager->getSubManager( 'type', 'Standard' );
+		$stockManager = \Aimeos\MShop\Stock\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$typeManager = $stockManager->getSubManager( 'type', 'Standard' );
 
-		$prodcode = array();
-		foreach( $testdata['product/stock'] as $dataset )
-		{
-			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for parentid are set wrong "%1$s"', $dataset['parentid'] ) );
-			}
-
-			$prodcode[] = $str;
-		}
-
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', $prodcode ) );
-
-		$parentIds = array();
-		foreach( $productManager->searchItems( $search ) as $item )
-		{
-			$parentIds['product/' . $item->getCode()] = $item->getId();
-		}
 
 		$typeIds = array();
-		$typeItem = $productStockTypeManager->createItem();
+		$typeItem = $typeManager->createItem();
 
 		$this->conn->begin();
 
-		foreach( $testdata['product/stock/type'] as $key => $dataset )
+		foreach( $testdata['stock/type'] as $key => $dataset )
 		{
 			$typeItem->setId( null );
 			$typeItem->setCode( $dataset['code'] );
 			$typeItem->setLabel( $dataset['label'] );
+			$typeItem->setDomain( $dataset['domain'] );
 			$typeItem->setStatus( $dataset['status'] );
 
-			$productStockTypeManager->saveItem( $typeItem );
+			$typeManager->saveItem( $typeItem );
 			$typeIds[$key] = $typeItem->getId();
 		}
 
-		$stock = $productStockManager->createItem();
-		foreach( $testdata['product/stock'] as $dataset )
-		{
-			if( !isset( $parentIds[$dataset['parentid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product ID found for "%1$s"', $dataset['parentid'] ) );
-			}
 
+		$stock = $stockManager->createItem();
+
+		foreach( $testdata['stock'] as $dataset )
+		{
 			if( !isset( $typeIds[$dataset['typeid']] ) ) {
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No type ID found for "%1$s"', $dataset['typeid'] ) );
 			}
 
 			$stock->setId( null );
-			$stock->setParentId( $parentIds[$dataset['parentid']] );
+			$stock->setProductCode( $dataset['productcode'] );
 			$stock->setTypeId( $typeIds[$dataset['typeid']] );
 			$stock->setStocklevel( $dataset['stocklevel'] );
 			$stock->setDateBack( $dataset['backdate'] );
 
-			$productStockManager->saveItem( $stock, false );
+			$stockManager->saveItem( $stock, false );
 		}
 
 		$this->conn->commit();

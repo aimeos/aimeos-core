@@ -5,17 +5,17 @@
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MShop
- * @subpackage Product
+ * @subpackage Stock
  */
 
 
-namespace Aimeos\MShop\Product\Manager\Stock;
+namespace Aimeos\MShop\Stock\Manager;
 
 
 /**
- * Generic interface for product stock objects.
+ * Generic interface for stock managers
  * @package MShop
- * @subpackage Product
+ * @subpackage Stock
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Manager\Factory\Iface

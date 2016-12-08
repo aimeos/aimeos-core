@@ -5,22 +5,22 @@
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2016
  * @package MShop
- * @subpackage Product
+ * @subpackage Stock
  */
 
 
-namespace Aimeos\MShop\Product\Item\Stock;
+namespace Aimeos\MShop\Stock\Item;
 
 
 /**
  * Default product stock item implementation.
  *
  * @package MShop
- * @subpackage Product
+ * @subpackage Stock
  */
 class Standard
 	extends \Aimeos\MShop\Common\Item\Base
-	implements \Aimeos\MShop\Product\Item\Stock\Iface
+	implements \Aimeos\MShop\Stock\Item\Iface
 {
 	private $values;
 
@@ -32,7 +32,7 @@ class Standard
 	 */
 	public function __construct( array $values = array( ) )
 	{
-		parent::__construct( 'product.stock.', $values );
+		parent::__construct( 'stock.', $values );
 
 		$this->values = $values;
 	}
@@ -45,8 +45,8 @@ class Standard
 	 */
 	public function getType()
 	{
-		if( isset( $this->values['product.stock.type'] ) ) {
-			return (string) $this->values['product.stock.type'];
+		if( isset( $this->values['stock.type'] ) ) {
+			return (string) $this->values['stock.type'];
 		}
 
 		return null;
@@ -60,8 +60,8 @@ class Standard
 	 */
 	public function getTypeName()
 	{
-		if( isset( $this->values['product.stock.typename'] ) ) {
-			return (string) $this->values['product.stock.typename'];
+		if( isset( $this->values['stock.typename'] ) ) {
+			return (string) $this->values['stock.typename'];
 		}
 
 		return null;
@@ -75,8 +75,8 @@ class Standard
 	 */
 	public function getTypeId()
 	{
-		if( isset( $this->values['product.stock.typeid'] ) ) {
-			return (int) $this->values['product.stock.typeid'];
+		if( isset( $this->values['stock.typeid'] ) ) {
+			return (int) $this->values['stock.typeid'];
 		}
 
 		return null;
@@ -93,7 +93,7 @@ class Standard
 	{
 		if ( $id == $this->getTypeId() ) { return $this; }
 
-		$this->values['product.stock.typeid'] = (int) $id;
+		$this->values['stock.typeid'] = (int) $id;
 		$this->setModified();
 
 		return $this;
@@ -101,31 +101,31 @@ class Standard
 
 
 	/**
-	 * Returns the product ID
+	 * Returns the code of the stock item.
 	 *
-	 * @return integer|null Product ID
+	 * @return string Product code (SKU)
 	 */
-	public function getParentId()
+	public function getProductCode()
 	{
-		if( isset( $this->values['product.stock.parentid'] ) ) {
-			return (int) $this->values['product.stock.parentid'];
+		if( isset( $this->values['stock.productcode'] ) ) {
+			return (string) $this->values['stock.productcode'];
 		}
 
-		return null;
+		return '';
 	}
 
 
 	/**
-	 * Sets the new product ID
+	 * Sets a new code of the stock item.
 	 *
-	 * @param integer $parentid New product ID
-	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
+	 * @param string $code New product code (SKU)
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
-	public function setParentId( $parentid )
+	public function setProductCode( $code )
 	{
-		if( $parentid == $this->getParentId() ) { return $this; }
+		if( $code == $this->getProductCode() ) { return $this; }
 
-		$this->values['product.stock.parentid'] = (int) $parentid;
+		$this->values['stock.productcode'] = (string) $code;
 		$this->setModified();
 
 		return $this;
@@ -139,8 +139,8 @@ class Standard
 	 */
 	public function getStocklevel()
 	{
-		if( isset( $this->values['product.stock.stocklevel'] ) ) {
-			return (int) $this->values['product.stock.stocklevel'];
+		if( isset( $this->values['stock.stocklevel'] ) ) {
+			return (int) $this->values['stock.stocklevel'];
 		}
 
 		return null;
@@ -157,7 +157,7 @@ class Standard
 	{
 		if( $stocklevel === $this->getStocklevel() ) { return $this; }
 
-		$this->values['product.stock.stocklevel'] = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
+		$this->values['stock.stocklevel'] = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
 		$this->setModified();
 
 		return $this;
@@ -165,14 +165,14 @@ class Standard
 
 
 	/**
-	 * Returns the back in stock date of the product.
+	 * Returns the back in stock date of the
 	 *
 	 * @return string|null Back in stock date of the product
 	 */
 	public function getDateBack()
 	{
-		if( isset( $this->values['product.stock.backdate'] ) ) {
-			return (string) $this->values['product.stock.backdate'];
+		if( isset( $this->values['stock.backdate'] ) ) {
+			return (string) $this->values['stock.backdate'];
 		}
 
 		return null;
@@ -189,7 +189,7 @@ class Standard
 	{
 		if( $backdate == $this->getDateBack() ) { return $this; }
 
-		$this->values['product.stock.backdate'] = $this->checkDateFormat( $backdate );;
+		$this->values['stock.backdate'] = $this->checkDateFormat( $backdate );;
 		$this->setModified();
 
 		return $this;
@@ -203,7 +203,7 @@ class Standard
 	 */
 	public function getResourceType()
 	{
-		return 'product/stock';
+		return 'stock';
 	}
 
 
@@ -222,10 +222,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'product.stock.parentid': $this->setParentId( $value ); break;
-				case 'product.stock.stocklevel': $this->setStocklevel( $value ); break;
-				case 'product.stock.dateback': $this->setDateBack( $value ); break;
-				case 'product.stock.typeid': $this->setTypeId( $value ); break;
+				case 'stock.productcode': $this->setProductCode( $value ); break;
+				case 'stock.stocklevel': $this->setStocklevel( $value ); break;
+				case 'stock.dateback': $this->setDateBack( $value ); break;
+				case 'stock.typeid': $this->setTypeId( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -243,12 +243,12 @@ class Standard
 	{
 		$list = parent::toArray();
 
-		$list['product.stock.parentid'] = $this->getParentId();
-		$list['product.stock.stocklevel'] = $this->getStocklevel();
-		$list['product.stock.dateback'] = $this->getDateBack();
-		$list['product.stock.typename'] = $this->getTypeName();
-		$list['product.stock.typeid'] = $this->getTypeId();
-		$list['product.stock.type'] = $this->getType();
+		$list['stock.productcode'] = $this->getProductCode();
+		$list['stock.stocklevel'] = $this->getStocklevel();
+		$list['stock.dateback'] = $this->getDateBack();
+		$list['stock.typename'] = $this->getTypeName();
+		$list['stock.typeid'] = $this->getTypeId();
+		$list['stock.type'] = $this->getType();
 
 		return $list;
 	}

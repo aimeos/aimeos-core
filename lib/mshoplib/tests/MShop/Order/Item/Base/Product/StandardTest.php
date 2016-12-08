@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'order.base.product.baseid' => 42,
 			'order.base.product.suppliercode' => 'UnitSupplier',
 			'order.base.product.prodcode' => 'UnitProd',
-			'order.base.product.stocktype' => 'unittype',
+			'order.base.stocktype' => 'unittype',
 			'order.base.product.name' => 'UnitProduct',
 			'order.base.product.mediaurl' => 'testurl',
 			'order.base.product.quantity' => 11,
@@ -580,7 +580,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'order.base.product.productid' => 3,
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.name' => 'test item',
-			'order.base.product.stocktype' => 'stocktype',
+			'order.base.stocktype' => 'stocktype',
 			'order.base.product.suppliercode' => 'testsup',
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.mediaurl' => '/path/to/image.jpg',
@@ -604,7 +604,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['order.base.product.productid'], $item->getProductId() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.name'], $item->getName() );
-		$this->assertEquals( $list['order.base.product.stocktype'], $item->getStockType() );
+		$this->assertEquals( $list['order.base.stocktype'], $item->getStockType() );
 		$this->assertEquals( $list['order.base.product.suppliercode'], $item->getSupplierCode() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.mediaurl'], $item->getMediaUrl() );
@@ -626,7 +626,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getId(), $arrayObject['order.base.product.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['order.base.product.siteid'] );
 		$this->assertEquals( $this->object->getBaseId(), $arrayObject['order.base.product.baseid'] );
-		$this->assertEquals( $this->object->getStockType(), $arrayObject['order.base.product.stocktype'] );
+		$this->assertEquals( $this->object->getStockType(), $arrayObject['order.base.stocktype'] );
 		$this->assertEquals( $this->object->getSupplierCode(), $arrayObject['order.base.product.suppliercode'] );
 		$this->assertEquals( $this->object->getProductId(), $arrayObject['order.base.product.productid'] );
 		$this->assertEquals( $this->object->getProductCode(), $arrayObject['order.base.product.prodcode'] );

@@ -24,12 +24,13 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 		$this->plugin->setProvider( 'PropertyAdd' );
 		$this->plugin->setStatus( '1' );
 
-		$this->plugin->setConfig( array( 'product.stock.parentid' => array(
-			'product.stock.typeid',
-			'product.stock.editor',
-			'product.stock.stocklevel',
-			'product.stock.dateback'
-		) ) );
+		$this->plugin->setConfig( array(
+			'product.property.parentid' => array(
+				'product.property.languageid',
+				'product.property.value',
+				'product.property.editor',
+			),
+		) );
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
@@ -77,16 +78,14 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 	public function testUpdateOk()
 	{
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 4, count( $this->products['CNC']->getAttributes() ) );
+		$this->assertEquals( 3, count( $this->products['CNC']->getAttributes() ) );
 
 		$this->products['CNE']->setAttributes( array() );
 		$this->plugin->setConfig( array(
 			'product.lists.parentid' => array(
 				'product.lists.domain',
+				'product.lists.refid',
 			),
-			'product.stock.parentid' => array(
-				'product.stock.stocklevel'
-			)
 		) );
 
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
@@ -97,20 +96,21 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateAttributeExists()
 	{
-		$attributeManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->getSubmanager( 'base' )->getSubmanager( 'product' )->getSubmanager( 'attribute' );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attributeManager = $orderManager->getSubmanager( 'base' )->getSubmanager( 'product' )->getSubmanager( 'attribute' );
 
 		$attribute = $attributeManager->createItem();
 
-		$attribute->setCode( 'product.stock.stocklevel' );
-		$attribute->setName( 'product.stock.stocklevel' );
-		$attribute->setValue( '1200' );
+		$attribute->setCode( 'product.property.value' );
+		$attribute->setName( 'product.property.value' );
+		$attribute->setValue( '1000' );
 		$attribute->setType( 'property' );
 
 		$this->products['CNC']->setAttributes( array( $attribute ) );
 		$this->assertEquals( 1, count( $this->products['CNC']->getAttributes() ) );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 4, count( $this->products['CNC']->getAttributes() ) );
+		$this->assertEquals( 3, count( $this->products['CNC']->getAttributes() ) );
 	}
 
 
@@ -118,21 +118,21 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 	{
 		// Non-existent property:
 
-		$this->plugin->setConfig( array( 'product.stock.parentid' => array(
-			'product.stock.quatsch',
-			'product.stock.editor',
-			'product.stock.stocklevel',
-			'product.stock.dateback'
-		) ) );
+		$this->plugin->setConfig( array(
+			'product.property.parentid' => array(
+				'product.property.quatsch',
+				'product.property.editor',
+			),
+		) );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 3, count( $this->products['CNC']->getAttributes() ) );
+		$this->assertEquals( 1, count( $this->products['CNC']->getAttributes() ) );
 
 
 		// Incorrect key:
 
-		$this->plugin->setConfig( array( 'stock.productid' => array(
-			'stock.typeid',
+		$this->plugin->setConfig( array( 'product.myid' => array(
+			'product.property.typeid',
 		) ) );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );

@@ -384,22 +384,22 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Adds stock levels to the given product in the database.
 	 *
-	 * @param string $productid ID of the product item where the stock levels should be associated to
+	 * @param string $productcode Code of the product item where the stock levels should be associated to
 	 * @param array $data Two dimensional associative list of product stock data
 	 */
-	protected function addProductStock( $productid, array $data )
+	protected function addProductStock( $productcode, array $data )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock/type' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock/type' );
 
 		$types = array();
 		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
 			$types[$item->getCode()] = $id;
 		}
 
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/stock' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock' );
 
 		$item = $manager->createItem();
-		$item->setParentId( $productid );
+		$item->setProductCode( $productcode );
 
 		foreach( $data as $entry )
 		{

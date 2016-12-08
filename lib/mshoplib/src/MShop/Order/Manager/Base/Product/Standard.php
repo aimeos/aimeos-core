@@ -86,8 +86,8 @@ class Standard
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.base.product.stocktype' => array(
-			'code'=>'order.base.product.stocktype',
+		'order.base.stocktype' => array(
+			'code'=>'order.base.stocktype',
 			'internalcode'=>'mordbapr."stocktype"',
 			'label'=>'Order base product stock type',
 			'type'=> 'string',
