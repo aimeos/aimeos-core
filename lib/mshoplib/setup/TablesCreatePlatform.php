@@ -37,6 +37,14 @@ class TablesCreatePlatform extends TablesCreateMShop
 
 
 	/**
+	 * Removes old columns and sequences
+	 */
+	public function clean()
+	{
+	}
+
+
+	/**
 	 * Creates the platform specific schema
 	 */
 	public function migrate()
