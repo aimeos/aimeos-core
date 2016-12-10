@@ -87,7 +87,7 @@ class Standard
 	 * Sets the new type of the product stock item
 	 *
 	 * @param integer|null $id Type of the product stock item
-	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product stock item for chaining method calls
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
 	public function setTypeId( $id )
 	{
@@ -151,7 +151,7 @@ class Standard
 	 * Sets the stock level.
 	 *
 	 * @param integer|null $stocklevel New stock level
-	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
 	public function setStocklevel( $stocklevel )
 	{
@@ -183,7 +183,7 @@ class Standard
 	 * Sets the product back in stock date.
 	 *
 	 * @param string|null $backdate New back in stock date of the product
-	 * @return \Aimeos\MShop\Product\Item\Stock\Iface Product stock item for chaining method calls
+	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
 	public function setDateBack( $backdate )
 	{

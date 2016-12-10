@@ -132,7 +132,7 @@ class ProductStock
 	/**
 	 * Returns the stock items for the given product codes and stock types
 	 *
-	 * @param array|string $productIds Unique product code or list of product codes
+	 * @param array|string $codes Unique product code or list of product codes
 	 * @param array|string $types Unique stock types to limit the stock items
 	 * @return array Associative list of stock item IDs as keys and items implementing \Aimeos\MShop\Stock\Item\Iface as values
 	 */
