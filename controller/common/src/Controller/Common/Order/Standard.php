@@ -147,6 +147,7 @@ class Standard
 	 */
 	protected function getBundleMap( $prodId )
 	{
+		$bundleMap = array();
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$search = $productManager->createSearch();
@@ -167,6 +168,8 @@ class Standard
 				$bundleMap[ $item->getCode() ][] = $bundleItem->getCode();
 			}
 		}
+
+		return $bundleMap;
 	}
 
 
