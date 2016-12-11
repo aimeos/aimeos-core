@@ -14,14 +14,19 @@ namespace Aimeos\MW\Setup\Task;
  */
 class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 {
-	private $stmts = array(
-		'DROP INDEX "unq_msprost_sid_pid_tid" ON "mshop_stock"',
+	private $indexes = array(
+		'unq_msprost_sid_pid_tid' => 'DROP INDEX "unq_msprost_sid_pid_tid" ON "mshop_stock"',
+		'unq_msprost_sid_pid_wid' => 'DROP INDEX "unq_msprost_sid_pid_wid" ON "mshop_stock"',
+	);
+	private $updates = array(
 		'ALTER TABLE "mshop_stock" ADD COLUMN "productcode" VARCHAR(32) NOT NULL',
 		'UPDATE "mshop_stock" SET "productcode" = (
 			SELECT "code" FROM "mshop_product" AS p WHERE p."id" = "parentid" AND p."siteid" = "siteid" LIMIT 1 OFFSET 0
 		)',
-		'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_pid"',
-		'ALTER TABLE "mshop_stock" DROP COLUMN "parentid"',
+	);
+	private $cleanups = array(
+		'fk_msprost_pid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_pid"',
+		'parentid' => 'ALTER TABLE "mshop_stock" DROP COLUMN "parentid"',
 	);
 
 
@@ -52,16 +57,64 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Migrate product code in stock table', 0 );
+		$this->msg( 'Migrate product code in stock table', 0 ); $this->status( '' );
 		$schema = $this->getSchema( 'db-product' );
 
-		if( $schema->tableExists( 'mshop_stock' )
-			&& $schema->columnExists( 'mshop_stock', 'productcode' ) === false
-		) {
-			$this->executeList( $this->stmts );
-			$this->status( 'done' );
-		} else {
-			$this->status( 'OK' );
+		if( $schema->tableExists( 'mshop_stock' ) )
+		{
+			foreach( $this->indexes as $name => $stmt )
+			{
+				$this->msg( sprintf( 'Remove index "%1$s"', $name ), 1 );
+
+				if( $schema->indexExists( 'mshop_stock', $name ) === true )
+				{
+					$this->execute( $stmt );
+					$this->status( 'done' );
+				}
+				else
+				{
+					$this->status( 'OK' );
+				}
+			}
+
+
+			$this->msg( 'Migrate to column "productcode', 1 );
+
+			if( $schema->columnExists( 'mshop_stock', 'productcode' ) === false )
+			{
+				$this->executeList( $this->updates );
+				$this->status( 'done' );
+			}
+			else
+			{
+				$this->status( 'OK' );
+			}
+
+
+			$this->msg( 'Remove foreign key "fk_msprost_pid', 1 );
+
+			if( $schema->constraintExists( 'mshop_stock', 'fk_msprost_pid' ) === true )
+			{
+				$this->execute( $this->cleanups['fk_msprost_pid'] );
+				$this->status( 'done' );
+			}
+			else
+			{
+				$this->status( 'OK' );
+			}
+
+
+			$this->msg( 'Remove column "parentid', 1 );
+
+			if( $schema->columnExists( 'mshop_stock', 'parentid' ) === true )
+			{
+				$this->execute( $this->cleanups['parentid'] );
+				$this->status( 'done' );
+			}
+			else
+			{
+				$this->status( 'OK' );
+			}
 		}
 	}
 }
