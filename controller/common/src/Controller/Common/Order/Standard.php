@@ -160,7 +160,7 @@ class Standard
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
 
-		return $productManager->searchItems( $search, array( 'product' ) );
+		$bundleItems = $productManager->searchItems( $search, array( 'product' ) );
 
 		foreach( $bundleItems as $bundleItem )
 		{

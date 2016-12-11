@@ -129,7 +129,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$result = $method->invokeArgs( $object, array( $prodId ) );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 	}
 
 
