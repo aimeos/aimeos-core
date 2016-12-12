@@ -25,11 +25,10 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 		)',
 	);
 	private $constraints = array(
-		'fk_msprost_stock_warehouseid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_stock_warehouseid"',
 		'fk_msprost_parentid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_parentid"',
 		'fk_msprost_pid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_pid"',
 	);
-	private $colum = 'ALTER TABLE "mshop_stock" DROP COLUMN "parentid"';
+	private $column = 'ALTER TABLE "mshop_stock" DROP COLUMN "parentid"';
 
 
 	/**
