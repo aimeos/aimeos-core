@@ -54,6 +54,15 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 
 
 	/**
+	 * Cleans up the tables
+	 */
+	public function clean()
+	{
+		$this->migrate();
+	}
+
+
+	/**
 	 * Creates the MShop tables
 	 */
 	public function migrate()
