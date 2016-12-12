@@ -93,7 +93,7 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 			}
 
 
-			foreach( $this->constaints as $name => $stmt )
+			foreach( $this->constraints as $name => $stmt )
 			{
 				$this->msg( sprintf( 'Remove foreign key "%1$s"', $name ), 1 );
 
