@@ -57,7 +57,7 @@ class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 
 		if( $schema->tableExists( 'mshop_product_stock_warehouse' ) )
 		{
-			$this->execute( $this->stmt['table'], 'db-product' );
+			$this->execute( $this->stmts['table'], 'db-product' );
 			$this->status( 'done' );
 		}
 		else
@@ -71,7 +71,7 @@ class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 		if( $schema->tableExists( 'mshop_product_stock' )
 			&& $schema->columnExists( 'mshop_product_stock', 'warehouseid' )
 		) {
-			$this->execute( $this->stmt['typeid'], 'db-product' );
+			$this->execute( $this->stmts['typeid'], 'db-product' );
 			$this->status( 'done' );
 		}
 		else
@@ -85,7 +85,7 @@ class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 		if( $schema->tableExists( 'mshop_product_stock' )
 			&& $schema->constraintExists( 'mshop_product_stock', 'fk_msprost_stock_warehouseid' )
 		) {
-			$this->execute( $this->stmt['constraint'], 'db-product' );
+			$this->execute( $this->stmts['constraint'], 'db-product' );
 			$this->status( 'done' );
 		}
 		else
