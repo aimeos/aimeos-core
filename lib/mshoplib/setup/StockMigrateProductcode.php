@@ -24,10 +24,12 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 			SELECT "code" FROM "mshop_product" AS p WHERE p."id" = "parentid" AND p."siteid" = "siteid" LIMIT 1 OFFSET 0
 		)',
 	);
-	private $cleanups = array(
+	private $constraints = array(
+		'fk_msprost_stock_warehouseid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_stock_warehouseid"',
+		'fk_msprost_parentid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_parentid"',
 		'fk_msprost_pid' => 'ALTER TABLE "mshop_stock" DROP FOREIGN KEY "fk_msprost_pid"',
-		'parentid' => 'ALTER TABLE "mshop_stock" DROP COLUMN "parentid"',
 	);
+	private $colum = 'ALTER TABLE "mshop_stock" DROP COLUMN "parentid"';
 
 
 	/**
@@ -78,7 +80,7 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 			}
 
 
-			$this->msg( 'Migrate to column "productcode', 1 );
+			$this->msg( 'Migrate to column "productcode"', 1 );
 
 			if( $schema->columnExists( 'mshop_stock', 'productcode' ) === false )
 			{
@@ -91,24 +93,26 @@ class StockMigrateProductcode extends \Aimeos\MW\Setup\Task\Base
 			}
 
 
-			$this->msg( 'Remove foreign key "fk_msprost_pid', 1 );
-
-			if( $schema->constraintExists( 'mshop_stock', 'fk_msprost_pid' ) === true )
+			foreach( $this->constaints as $name => $stmt )
 			{
-				$this->execute( $this->cleanups['fk_msprost_pid'] );
-				$this->status( 'done' );
-			}
-			else
-			{
-				$this->status( 'OK' );
+				$this->msg( sprintf( 'Remove foreign key "%1$s"', $name ), 1 );
+
+				if( $schema->constraintExists( 'mshop_stock', $name ) === true )
+				{
+					$this->execute( $stmt );
+					$this->status( 'done' );
+				}
+				else
+				{
+					$this->status( 'OK' );
+				}
 			}
 
-
-			$this->msg( 'Remove column "parentid', 1 );
+			$this->msg( 'Remove column "parentid"', 1 );
 
 			if( $schema->columnExists( 'mshop_stock', 'parentid' ) === true )
 			{
-				$this->execute( $this->cleanups['parentid'] );
+				$this->execute( $this->column );
 				$this->status( 'done' );
 			}
 			else

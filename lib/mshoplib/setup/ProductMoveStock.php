@@ -27,7 +27,7 @@ class ProductMoveStock extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'ProductRenameStockWarehouse' );
+		return array( 'ProductRenameStockWarehouse', 'ProductChangeStockProductidParentid' );
 	}
 
 
