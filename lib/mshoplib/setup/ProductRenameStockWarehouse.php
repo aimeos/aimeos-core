@@ -14,7 +14,10 @@ namespace Aimeos\MW\Setup\Task;
  */
 class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 {
-	private $stmt = 'ALTER TABLE "mshop_product_stock_warehouse" RENAME TO "mshop_product_stock_type"';
+	private $stmts = array(
+		'table' => 'ALTER TABLE "mshop_product_stock_warehouse" RENAME TO "mshop_product_stock_type"',
+		'typeid' => 'ALTER TABLE "mshop_product_stock" CHANGE COLUMN "warehouseid" "typeid" INTEGER NOT NULL',
+	);
 
 
 	/**
@@ -44,13 +47,30 @@ class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Rename "mshop_product_stock_wareshouse" table', 0 );
+		$this->msg( 'Rename warehouse table', 0 ); $this->status( '' );
 
 		$schema = $this->getSchema( 'db-product' );
 
+
+		$this->msg( 'Rename "mshop_product_stock_wareshouse"', 0 );
+
 		if( $schema->tableExists( 'mshop_product_stock_warehouse' ) )
 		{
-			$this->execute( $this->stmt, 'db-product' );
+			$this->execute( $this->stmt['table'], 'db-product' );
+			$this->status( 'done' );
+		}
+		else
+		{
+			$this->status( 'OK' );
+		}
+
+
+		$this->msg( 'Rename "mshop_product_stock.wareshouseid"', 0 );
+
+		if( $schema->tableExists( 'mshop_product_stock' )
+			&& $schema->columnExists( 'mshop_product_stock', 'warehouseid' )
+		) {
+			$this->execute( $this->stmt['typeid'], 'db-product' );
 			$this->status( 'done' );
 		}
 		else
