@@ -116,9 +116,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::TYPE_PHONE, $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
-
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
-		$this->object->setType( 500 );
 	}
 
 	public function testGetDateDelivery()
