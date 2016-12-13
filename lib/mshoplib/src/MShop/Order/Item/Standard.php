@@ -112,7 +112,7 @@ class Standard
 	{
 		if( $type == $this->getType() ) { return $this; }
 
-		$this->values['order.type'] = (string) $this->checkType( $type );;
+		$this->values['order.type'] = (string) $type;
 		$this->setModified();
 
 		return $this;

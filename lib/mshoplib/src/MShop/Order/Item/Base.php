@@ -194,24 +194,4 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 		return (int) $value;
 	}
-
-
-	/**
-	 * Checks the given order type is a valid constant.
-	 *
-	 * @param integer $value Type constant defined in \Aimeos\MShop\Order\Item\Base
-	 * @throws \Aimeos\MShop\Order\Exception If order type is invalid
-	 */
-	protected function checkType( $value )
-	{
-		switch( $value )
-		{
-			case \Aimeos\MShop\Order\Item\Base::TYPE_REPEAT:
-			case \Aimeos\MShop\Order\Item\Base::TYPE_WEB:
-			case \Aimeos\MShop\Order\Item\Base::TYPE_PHONE:
-				return (string) $value;
-		}
-
-		throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order type "%1$s" not within allowed range', $value ) );
-	}
 }
