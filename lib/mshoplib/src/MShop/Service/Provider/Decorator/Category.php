@@ -123,7 +123,7 @@ class Category
 	 * Returns the catalog IDs for the given catalog codes
 	 *
 	 * @param array $catalogCodes List of catalog codes
-	 * @return \Aimeos\MShop\Catalog\Item\Iface[] List of catalog items
+	 * @return array List of catalog IDs
 	 */
 	protected function getCatalogIds( array $catalogCodes )
 	{
