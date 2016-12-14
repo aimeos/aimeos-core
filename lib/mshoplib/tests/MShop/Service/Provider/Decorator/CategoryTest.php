@@ -167,6 +167,16 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testIsAvailableExcludeTree()
+	{
+		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
+		$this->servItem->setConfig( array( 'category.exclude' => 'group' ) );
+
+		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
+		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
+	}
+
+
 	public function testIsAvailableInclude()
 	{
 		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
@@ -194,6 +204,16 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
 		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
+	}
+
+
+	public function testIsAvailableIncludeTree()
+	{
+		$this->basket->addProduct( $this->getOrderProduct( 'CNC' ) );
+		$this->servItem->setConfig( array( 'category.include' => 'group' ) );
+
+		$this->mockProvider->expects( $this->once() )->method( 'isAvailable' )->will( $this->returnValue( true ) );
+		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
 

@@ -87,12 +87,10 @@ class Category
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$productIds = $this->getProductIds( $basket );
-		$catalogIds = $this->getCatalogIds( $productIds );
-		$catalogCodes = $this->getCatalogCodes( $catalogIds );
+		$catalogIds = $this->getRefCatalogIds( $this->getProductIds( $basket ) );
 
-		if( $this->checkCategories( $catalogCodes, 'category.include' ) === false
-			|| $this->checkCategories( $catalogCodes, 'category.exclude' ) === true
+		if( $this->checkCategories( $catalogIds, 'category.include' ) === false
+			|| $this->checkCategories( $catalogIds, 'category.exclude' ) === true
 		) {
 			return false;
 		}
@@ -102,82 +100,64 @@ class Category
 
 
 	/**
-	 * Checks if at least one of the given category codes is configured
+	 * Checks if at least one of the given categories is configured
 	 *
-	 * @param array $catalogCodes List of category codes
+	 * @param array $catalogIds List of category IDs
 	 * @param string $key Configuration key (category.include or category.exclude)
 	 * @return boolean|null True if one catalog code is part of the config, false if not, null for no configuration
 	 */
-	protected function checkCategories( array $catalogCodes, $key )
+	protected function checkCategories( array $catalogIds, $key )
 	{
 		if( ( $codes = $this->getConfigValue( array( $key ) ) ) == null ) {
 			return null;
 		}
 
-		return ( array_intersect( $catalogCodes, explode( ',', $codes ) ) !== array() );
+		$configCatalogIds = $this->getCatalogIds( explode( ',', $codes ) );
+		$treeCatalogIds = $this->getTreeCatalogIds( $configCatalogIds );
+
+		return ( array_intersect( $catalogIds, $treeCatalogIds ) !== array() );
 	}
 
 
 	/**
-	 * Returns the catalog codes for the given catalog IDs
+	 * Returns the catalog IDs for the given catalog codes
 	 *
-	 * @param array $catalogIds List of catalog IDs
-	 * @return array List of catalog codes
+	 * @param array $catalogCodes List of catalog codes
+	 * @return \Aimeos\MShop\Catalog\Item\Iface[] List of catalog items
 	 */
-	protected function getCatalogCodes( array $catalogIds )
+	protected function getCatalogIds( array $catalogCodes )
 	{
-		$catalogCodes = array();
 		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
 
-		foreach( $catalogIds as $catId )
-		{
-			$treeNode = $catalogManager->getTree( $catId );
-			$catalogCodes = array_merge( $catalogCodes, $this->getCatalogCodesFromTree( $treeNode ) );
-		}
-
-		return array_unique( $catalogCodes );
-	}
-
-
-	/**
-	 * Returns the catalog codes from the given catalog item and its children
-	 *
-	 * @param \Aimeos\MShop\Catalog\Item\Iface $catalogItem Catalog node object
-	 * @return array List of catalog codes
-	 */
-	protected function getCatalogCodesFromTree( \Aimeos\MShop\Catalog\Item\Iface $catalogItem )
-	{
-		$codes = array( $catalogItem->getCode() );
-
-		foreach( $catalogItem->getChildren() as $childNode ) {
-			$codes = array_merge( $codes, $this->getCatalogCodesFromTree( $childNode ) );
-		}
-
-		return $codes;
-	}
-
-
-	/**
-	 * Returns the catalog IDs for the given product IDs
-	 *
-	 * @param array $productIds List of product IDs
-	 * @return array List of catalog IDs
-	 */
-	protected function getCatalogIds( array $productIds )
-	{
-		$catalogListsManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
-
-		$search = $catalogListsManager->createSearch();
+		$search = $catalogManager->createSearch( true );
 		$expr = array(
-			$search->compare( '==', 'catalog.lists.refid', $productIds ),
-			$search->compare( '==', 'catalog.lists.domain', 'product' ),
-			$search->compare( '==', 'catalog.lists.type.code', 'default' ),
+			$search->compare( '==', 'catalog.code', $catalogCodes ),
+			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $catalogListsManager->aggregate( $search, 'catalog.lists.parentid' );
+		return array_keys( $catalogManager->searchItems( $search ) );
+	}
 
-		return array_keys( $result );
+
+	/**
+	 * Returns the catalog IDs from the given catalog item and its children
+	 *
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $catalogItem Catalog node object
+	 * @return array List of catalog IDs
+	 */
+	protected function getNodeCatalogIds( \Aimeos\MShop\Catalog\Item\Iface $catalogItem )
+	{
+		$catalogIds = array( $catalogItem->getId() );
+
+		foreach( $catalogItem->getChildren() as $childNode )
+		{
+			if( $childNode->getStatus() > 0 ) {
+				$catalogIds = array_merge( $catalogIds, $this->getNodeCatalogIds( $childNode ) );
+			}
+		}
+
+		return $catalogIds;
 	}
 
 
@@ -196,5 +176,48 @@ class Category
 		}
 
 		return $productIds;
+	}
+
+
+	/**
+	 * Returns the catalog IDs which references the given product IDs
+	 *
+	 * @param array $productIds List of product IDs
+	 * @return array List of catalog IDs
+	 */
+	protected function getRefCatalogIds( array $productIds )
+	{
+		$catalogListsManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
+
+		$search = $catalogListsManager->createSearch();
+		$expr = array(
+			$search->compare( '==', 'catalog.lists.refid', $productIds ),
+			$search->compare( '==', 'catalog.lists.domain', 'product' ),
+			$search->compare( '==', 'catalog.lists.type.code', 'default' ),
+		);
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		return array_keys( $catalogListsManager->aggregate( $search, 'catalog.lists.parentid' ) );
+	}
+
+
+	/**
+	 * Returns the catalog codes for the given catalog IDs
+	 *
+	 * @param array $catalogIds List of catalog IDs
+	 * @return array List of catalog codes
+	 */
+	protected function getTreeCatalogIds( array $catalogIds )
+	{
+		$ids = array();
+		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
+
+		foreach( $catalogIds as $catId )
+		{
+			$treeNode = $catalogManager->getTree( $catId );
+			$ids = array_merge( $ids, $this->getNodeCatalogIds( $treeNode ) );
+		}
+
+		return array_unique( $ids );
 	}
 }
