@@ -16,8 +16,8 @@ class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 {
 	private $stmts = array(
 		'table' => 'ALTER TABLE "mshop_product_stock_warehouse" RENAME TO "mshop_product_stock_type"',
-		'typeid' => 'ALTER TABLE "mshop_product_stock" CHANGE COLUMN "warehouseid" "typeid" INTEGER NOT NULL',
 		'constraint' => 'ALTER TABLE "mshop_product_stock" DROP FOREIGN KEY "fk_msprost_stock_warehouseid"',
+		'typeid' => 'ALTER TABLE "mshop_product_stock" CHANGE COLUMN "warehouseid" "typeid" INTEGER NOT NULL',
 	);
 
 
@@ -75,12 +75,12 @@ class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
-		$this->msg( 'Rename "mshop_product_stock.wareshouseid"', 1 );
+		$this->msg( 'Drop "mshop_product_stock.fk_msprost_stock_warehouseid"', 1 );
 
 		if( $schema->tableExists( 'mshop_product_stock' )
-			&& $schema->columnExists( 'mshop_product_stock', 'warehouseid' )
+			&& $schema->constraintExists( 'mshop_product_stock', 'fk_msprost_stock_warehouseid' )
 		) {
-			$this->execute( $this->stmts['typeid'], 'db-product' );
+			$this->execute( $this->stmts['constraint'], 'db-product' );
 			$this->status( 'done' );
 		}
 		else
@@ -89,12 +89,12 @@ class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
-		$this->msg( 'Drop "mshop_product_stock.fk_msprost_stock_warehouseid"', 1 );
+		$this->msg( 'Rename "mshop_product_stock.wareshouseid"', 1 );
 
 		if( $schema->tableExists( 'mshop_product_stock' )
-			&& $schema->constraintExists( 'mshop_product_stock', 'fk_msprost_stock_warehouseid' )
+			&& $schema->columnExists( 'mshop_product_stock', 'warehouseid' )
 		) {
-			$this->execute( $this->stmts['constraint'], 'db-product' );
+			$this->execute( $this->stmts['typeid'], 'db-product' );
 			$this->status( 'done' );
 		}
 		else
