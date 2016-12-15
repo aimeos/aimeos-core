@@ -22,7 +22,6 @@ class Standard extends Base implements Iface
 {
 	private $values;
 	private $helper;
-	private $salt;
 
 
 	/**
@@ -32,18 +31,15 @@ class Standard extends Base implements Iface
 	 * @param array $values List of attributes that belong to the customer item
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
-	 * @param string $salt Password salt (optional)
 	 * @param \Aimeos\MShop\Common\Item\Helper\Password\Iface|null $helper Password encryption helper object
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
-		array $listItems = array(), array $refItems = array(), $salt = '',
-		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null )
+		array $listItems = array(), array $refItems = array(), \Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null )
 	{
 		parent::__construct( $address, $values, $listItems, $refItems );
 
 		$this->values = $values;
 		$this->helper = $helper;
-		$this->salt = $salt;
 	}
 
 
@@ -219,7 +215,7 @@ class Standard extends Base implements Iface
 		if( $value == $this->getPassword() ) { return $this; }
 
 		if( $this->helper !== null ) {
-			$value = $this->helper->encode( $value, $this->salt );
+			$value = $this->helper->encode( $value );
 		}
 
 		$this->values['customer.password'] = (string) $value;
