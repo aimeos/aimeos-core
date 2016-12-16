@@ -54,7 +54,7 @@ class Standard
 	/**
 	 * Creates a new PSR-7 stream object
 	 *
-	 * @param string|resource Absolute file path or file descriptor
+	 * @param string|resource $resource Absolute file path or file descriptor
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
 	public function createStream( $resource )
@@ -64,6 +64,26 @@ class Standard
 		}
 
 		throw new \Aimeos\MW\Exception( 'Please install zendframework/zend-diactoros first' );
+	}
+
+
+	/**
+	 * Creates a new PSR-7 stream object from a content string
+	 *
+	 * @param string $content Content as string
+	 * @return \Psr\Http\Message\StreamInterface Stream object
+	 */
+	public function createStreamFromString( $content )
+	{
+		if( ( $resource = tmpfile() ) === false ) {
+			throw new \Aimeos\MW\Exception( 'Unable to create temporary file' );
+		}
+
+		if( fwrite( $resource, $content ) == false ) {
+			throw new \Aimeos\MW\Exception( 'Unable to write to temporary file' );
+		}
+
+		return $this->createStream( $resource );
 	}
 
 

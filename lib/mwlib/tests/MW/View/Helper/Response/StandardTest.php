@@ -1,12 +1,14 @@
 <?php
 
-namespace Aimeos\MW\View\Helper\Response;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
+
+
+namespace Aimeos\MW\View\Helper\Response;
+
+
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -42,6 +44,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$this->assertInstanceOf( '\Psr\Http\Message\StreamInterface', $this->object->createStream( __FILE__ ) );
+	}
+
+
+	public function testCreateStreamFromString()
+	{
+		if( !class_exists( '\Zend\Diactoros\Stream' ) ) {
+			$this->markTestSkipped( 'Please install "\Zend\Diactoros\Stream"' );
+		}
+
+		$this->assertInstanceOf( '\Psr\Http\Message\StreamInterface', $this->object->createStreamFromString( 'test' ) );
 	}
 
 

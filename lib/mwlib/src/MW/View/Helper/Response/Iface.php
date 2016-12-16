@@ -29,8 +29,16 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface, \Psr\Http\Message\Response
 	/**
 	 * Creates a new PSR-7 stream object
 	 *
-	 * @param string|resource Absolute file path or file descriptor
+	 * @param string|resource $resource Absolute file path or file descriptor
 	 * @return \Psr\Http\Message\StreamInterface Stream object
 	 */
 	public function createStream( $resource );
+
+	/**
+	 * Creates a new PSR-7 stream object from a string
+	 *
+	 * @param string $content Content as string
+	 * @return \Psr\Http\Message\StreamInterface Stream object
+	 */
+	public function createStreamFromString( $content );
 }
