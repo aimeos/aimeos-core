@@ -75,7 +75,7 @@ class Standard
 	 */
 	public function createStreamFromString( $content )
 	{
-		if( ( $resource = tmpfile() ) === false ) {
+		if( ( $resource = fopen( 'php://temp', 'rw' ) ) === false ) {
 			throw new \Aimeos\MW\Exception( 'Unable to create temporary file' );
 		}
 
