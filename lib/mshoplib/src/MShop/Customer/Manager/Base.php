@@ -22,6 +22,7 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	implements \Aimeos\MShop\Customer\Manager\Iface
 {
+	private $salt;
 	private $helper;
 	private $addressManager;
 
@@ -35,6 +36,23 @@ abstract class Base
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-customer' );
+
+		/** mshop/customer/manager/salt
+		 * Password salt for all customer passwords of the installation
+		 *
+		 * The default password salt is used if no user-specific salt can be
+		 * stored in the database along with the user data. It's highly recommended
+		 * to set the salt to a random string of at least eight chars using
+		 * characters, digits and special characters
+		 *
+		 * @param string Installation wide password salt
+		 * @since 2014.03
+		 * @category Developer
+		 * @category User
+		 * @see mshop/customer/manager/password/name
+		 * @sse mshop/customer/manager/password/options
+		 */
+		$this->salt = $context->getConfig()->get( 'mshop/customer/manager/salt', 'mshop' );
 	}
 
 
@@ -159,7 +177,7 @@ abstract class Base
 		$helper = $this->getPasswordHelper();
 		$address = $this->addressManager->createItem();
 
-		return new \Aimeos\MShop\Customer\Item\Standard( $address, $values, $listItems, $refItems, $helper );
+		return new \Aimeos\MShop\Customer\Item\Standard( $address, $values, $listItems, $refItems, $this->salt, $helper );
 	}
 
 
@@ -188,6 +206,7 @@ abstract class Base
 		 * @param string Name of the password helper implementation
 		 * @since 2015.01
 		 * @category Developer
+		 * @see mshop/customer/manager/salt
 		 * @see mshop/customer/manager/password/options
 		 */
 		$name = $config->get( 'mshop/customer/manager/password/name', 'Standard' );
@@ -203,6 +222,7 @@ abstract class Base
 		 * @since 2015.01
 		 * @category Developer
 		 * @see mshop/customer/manager/password/name
+		 * @sse mshop/customer/manager/salt
 		 */
 		$options = $config->get( 'mshop/customer/manager/password/options', array() );
 
