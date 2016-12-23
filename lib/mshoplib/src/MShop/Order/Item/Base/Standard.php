@@ -326,13 +326,14 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		if( $this->price->getValue() === '0.00' )
 		{
 			$this->price->clear();
+			$currencyId = $this->price->getCurrencyId();
 
 			foreach( $this->getServices() as $service ) {
-				$this->price->addItem( $service->getPrice() );
+				$this->price->addItem( $service->getPrice()->setCurrencyId( $currencyId ) );
 			}
 
 			foreach( $this->getProducts() as $product ) {
-				$this->price->addItem( $product->getPrice(), $product->getQuantity() );
+				$this->price->addItem( $product->getPrice()->setCurrencyId( $currencyId ), $product->getQuantity() );
 			}
 		}
 
