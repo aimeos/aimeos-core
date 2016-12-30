@@ -1,15 +1,15 @@
 <?php
 
-namespace Aimeos\MW\Cache;
-
-
 /**
- * Test class for \Aimeos\MW\Cache\Mysql.
- *
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
+
+
+namespace Aimeos\MW\Cache;
+
+
 class MysqlTest extends \PHPUnit_Framework_TestCase
 {
 	private $dbm;
@@ -17,12 +17,6 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) !== 'mysql' ) {
@@ -114,12 +108,6 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === 'mysql' )
@@ -135,13 +123,13 @@ class MysqlTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testSetList()
+	public function testSetMultiple()
 	{
 		$pairs = array( 't:1' => 'test 2' );
 		$tags = array( 't:1' => array( 'tag:1', 'tag:2', 'tag:3' ) );
 		$expires = array( 't:1' => '2100-00-00 00:00:00' );
 
-		$this->object->setList( $pairs, $tags, $expires );
+		$this->object->setMultiple( $pairs, $expires, $tags );
 
 
 		$conn = $this->dbm->acquire();

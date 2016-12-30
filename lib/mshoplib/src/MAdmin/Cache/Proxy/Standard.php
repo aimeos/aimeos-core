@@ -48,6 +48,17 @@ class Standard
 
 
 	/**
+	 * Removes all entries of the site from the cache.
+	 *
+	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
+	 */
+	public function clear()
+	{
+		$this->getObject()->clear();
+	}
+
+
+	/**
 	 * Removes the cache entry identified by the given key.
 	 *
 	 * @param string $key Key string that identifies the single cache entry
@@ -66,9 +77,9 @@ class Standard
 	 * 	that should be removed
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function deleteList( array $keys )
+	public function deleteMultiple( $keys )
 	{
-		$this->getObject()->deleteList( $keys );
+		$this->getObject()->deleteMultiple( $keys );
 	}
 
 
@@ -82,17 +93,6 @@ class Standard
 	public function deleteByTags( array $tags )
 	{
 		$this->getObject()->deleteByTags( $tags );
-	}
-
-
-	/**
-	 * Removes all entries of the site from the cache.
-	 *
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
-	 */
-	public function flush()
-	{
-		$this->getObject()->flush();
 	}
 
 
@@ -115,14 +115,15 @@ class Standard
 	 * Returns the cached values for the given cache keys if available.
 	 *
 	 * @param string[] $keys List of key strings for the requested cache entries
+	 * @param mixed $default Default value to return for keys that do not exist
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function getList( array $keys )
+	public function getMultiple( $keys, $default = null )
 	{
-		return $this->getObject()->getList( $keys );
+		return $this->getObject()->getMultiple( $keys, $default );
 	}
 
 
@@ -135,9 +136,9 @@ class Standard
 	 * 	for that tag
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function getListByTags( array $tags )
+	public function getMultipleByTags( array $tags )
 	{
-		return $this->getObject()->getListByTags( $tags );
+		return $this->getObject()->getMultipleByTags( $tags );
 	}
 
 
@@ -146,15 +147,15 @@ class Standard
 	 *
 	 * @param string $key Key string for the given value like product/id/123
 	 * @param string $value Value string that should be stored for the given key
+	 * @param int|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * 	format when the cache entry expires
 	 * @param string[] $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
-	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
-	 * 	format when the cache entry expires
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function set( $key, $value, array $tags = array(), $expires = null )
+	public function set( $key, $value, $expires = null, array $tags = array() )
 	{
-		$this->getObject()->set( $key, $value, $tags, $expires );
+		$this->getObject()->set( $key, $value, $expires, $tags );
 	}
 
 
@@ -164,15 +165,15 @@ class Standard
 	 *
 	 * @param array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
+	 * @param array $expires Associative list of key/datetime pairs.
 	 * @param string[] $tags Associative list of key/tag or key/tags pairs that should be
 	 * 	associated to the values identified by their key. The value associated
 	 * 	to the key can either be a tag string or an array of tag strings
-	 * @param array $expires Associative list of key/datetime pairs.
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function setList( array $pairs, array $tags = array(), array $expires = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = array() )
 	{
-		$this->getObject()->setList( $pairs, $tags, $expires );
+		$this->getObject()->setMultiple( $pairs, $expires, $tags );
 	}
 
 

@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015-2016
+ */
+
+
 namespace Aimeos\MW\Cache;
 
 
@@ -26,9 +32,9 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testDeleteList()
+	public function testDeleteMultiple()
 	{
-		$this->object->deleteList( array( 'test' ) );
+		$this->object->deleteMultiple( array( 'test' ) );
 	}
 
 
@@ -38,9 +44,9 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testFlush()
+	public function testClear()
 	{
-		$this->object->flush();
+		$this->object->clear();
 	}
 
 
@@ -50,15 +56,15 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetList()
+	public function testGetMultiple()
 	{
-		$this->assertEquals( array(), $this->object->getList( array( 'test' ) ) );
+		$this->assertEquals( array( 'test' => null ), $this->object->getMultiple( array( 'test' ) ) );
 	}
 
 
-	public function testGetListByTags()
+	public function testGetMultipleByTags()
 	{
-		$this->assertEquals( array(), $this->object->getListByTags( array( 'test' ) ) );
+		$this->assertEquals( array(), $this->object->getMultipleByTags( array( 'test' ) ) );
 	}
 
 
@@ -68,8 +74,8 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testSetList()
+	public function testSetMultiple()
 	{
-		$this->object->setList( array() );
+		$this->object->setMultiple( array() );
 	}
 }

@@ -40,7 +40,7 @@ abstract class Base
 	 */
 	public function delete( $key )
 	{
-		$this->deleteList( array( $key ) );
+		$this->deleteMultiple( array( $key ) );
 	}
 
 
@@ -55,7 +55,7 @@ abstract class Base
 	 */
 	public function get( $key, $default = null )
 	{
-		$list = $this->getList( array( $key ) );
+		$list = $this->getMultiple( array( $key ) );
 
 		if( ( $value = reset( $list ) ) !== false ) {
 			return $value;
@@ -69,20 +69,20 @@ abstract class Base
 	 * Sets the value for the given key in the cache.
 	 *
 	 * @param string $key Key string for the given value like product/id/123
-	 * @param string $value Value string that should be stored for the given key
-	 * @param string[] $tags List of tag strings that should be assoicated to the
+	 * @param mixed $value Value string that should be stored for the given key
+	 * @param int|string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
+	 * 	format or as TTL value when the cache entry expires
+	 * @param array $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
-	 * @param string|null $expires Date/time string in "YYYY-MM-DD HH:mm:ss"
-	 * 	format when the cache entry expires
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function set( $key, $value, array $tags = array(), $expires = null )
+	public function set( $key, $value, $expires = null, array $tags = array() )
 	{
 		if( !is_string( $key ) ) {
 			throw new \Aimeos\MW\Cache\Exception( 'Key is not a string' );
 		}
 
 		$expireList = ( $expires !== null ? array( $key => $expires ) : array() );
-		$this->setList( array( $key => $value ), array( $key => $tags ), $expireList );
+		$this->setMultiple( array( $key => $value ), $expireList, array( $key => $tags ) );
 	}
 }

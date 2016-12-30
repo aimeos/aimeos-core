@@ -126,11 +126,11 @@ class DB
 	/**
 	 * Removes the cache entries identified by the given keys.
 	 *
-	 * @param array $keys List of key strings that identify the cache entries
+	 * @param iterable $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function deleteList( array $keys )
+	public function deleteMultiple( $keys )
 	{
 		$conn = $this->dbm->acquire( $this->dbname );
 
@@ -197,7 +197,7 @@ class DB
 	 *
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function flush()
+	public function clear()
 	{
 		$conn = $this->dbm->acquire( $this->dbname );
 
@@ -220,13 +220,14 @@ class DB
 	/**
 	 * Returns the cached values for the given cache keys if available.
 	 *
-	 * @param string[] $keys List of key strings for the requested cache entries
+	 * @param iterable $keys List of key strings for the requested cache entries
+	 * @param mixed $default Default value to return for keys that do not exist
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
 	 * 	will be in the result list
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function getList( array $keys )
+	public function getMultiple( $keys, $default = null )
 	{
 		$list = array();
 		$conn = $this->dbm->acquire( $this->dbname );
@@ -264,6 +265,13 @@ class DB
 			throw $e;
 		}
 
+		foreach( $keys as $key )
+		{
+			if( !isset( $list[$key] ) ) {
+				$list[$key] = $default;
+			}
+		}
+
 		return $list;
 	}
 
@@ -277,7 +285,7 @@ class DB
 	 * 	for that tag
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function getListByTags( array $tags )
+	public function getMultipleByTags( array $tags )
 	{
 		$list = array();
 		$conn = $this->dbm->acquire( $this->dbname );
@@ -324,18 +332,20 @@ class DB
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *
-	 * @param array $pairs Associative list of key/value pairs. Both must be
+	 * @param iterable $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
-	 * @param array $tags Associative list of key/tag or key/tags pairs that should be
-	 * 	associated to the values identified by their key. The value associated
-	 * 	to the key can either be a tag string or an array of tag strings
-	 * @param array $expires Associative list of key/datetime pairs.
+	 * @param int|string|array $expires Associative list of keys and datetime
+	 *  string or integer TTL pairs.
+	 * @param array $tags Associative list of key/tag or key/tags pairs that
+	 *  should be associated to the values identified by their key. The value
+	 *  associated to the key can either be a tag string or an array of tag strings
+	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function setList( array $pairs, array $tags = array(), array $expires = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = array() )
 	{
 		// Remove existing entries first to avoid duplicate key conflicts
-		$this->deleteList( array_keys( $pairs ) );
+		$this->deleteMultiple( array_keys( $pairs ) );
 
 		$type = ( count( $pairs ) > 1 ? \Aimeos\MW\DB\Connection\Base::TYPE_PREP : \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE );
 		$conn = $this->dbm->acquire( $this->dbname );

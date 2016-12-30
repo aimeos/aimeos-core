@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2014
+ * @copyright Aimeos (aimeos.org), 2015-2016
+ */
+
+
 namespace Aimeos\MW\Cache;
 
 
@@ -215,9 +222,9 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testDeleteList()
+	public function testDeleteMultiple()
 	{
-		$this->object->deleteList( array( 't:1', 't:2' ) );
+		$this->object->deleteMultiple( array( 't:1', 't:2' ) );
 
 		$conn = self::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_test"' )->execute()->fetch();
@@ -247,9 +254,9 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testFlush()
+	public function testClear()
 	{
-		$this->object->flush();
+		$this->object->clear();
 
 		$conn = self::$dbm->acquire();
 		$row = $conn->create( 'SELECT * FROM "mw_cache_tag_test"' )->execute()->fetch();
@@ -278,21 +285,21 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetList()
+	public function testGetMultiple()
 	{
-		$this->assertEquals( array( 't:1' => 'test 1' ), $this->object->getList( array( 't:1', 't:2' ) ) );
+		$this->assertEquals( array( 't:1' => 'test 1', 't:2' => null ), $this->object->getMultiple( array( 't:1', 't:2' ) ) );
 	}
 
 
-	public function testGetListByTags()
+	public function testGetMultipleByTags()
 	{
-		$this->assertEquals( array( 't:1' => 'test 1' ), $this->object->getListByTags( array( 'tag:1' ) ) );
+		$this->assertEquals( array( 't:1' => 'test 1' ), $this->object->getMultipleByTags( array( 'tag:1' ) ) );
 	}
 
 
 	public function testSet()
 	{
-		$this->object->set( 't:3', 'test 3', array( 'tag:2', 'tag:3' ), '2100-01-01 00:00:00' );
+		$this->object->set( 't:3', 'test 3', '2100-01-01 00:00:00', array( 'tag:2', 'tag:3' ) );
 
 
 		$conn = self::$dbm->acquire();
@@ -319,13 +326,13 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testSetList()
+	public function testSetMultiple()
 	{
 		$pairs = array( 't:3' => 'test 3', 't:2' => 'test 4' );
 		$tags = array( 't:3' => array( 'tag:2', 'tag:3' ), 't:2' => array( 'tag:4' ) );
 		$expires = array( 't:3' => '2100-01-01 00:00:00' );
 
-		$this->object->setList( $pairs, $tags, $expires );
+		$this->object->setMultiple( $pairs, $expires, $tags );
 
 
 		$conn = self::$dbm->acquire();
