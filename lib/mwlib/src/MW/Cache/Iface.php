@@ -102,7 +102,7 @@ interface Iface
 	 * This is much faster than deleting them one by one as they are combined
 	 * into a single request.
 	 *
-	 * @param \Traversable $keys List of key strings that identify the cache entries
+	 * @param \Traversable|array $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
@@ -214,7 +214,7 @@ interface Iface
 	 * array. No error or warning is returned in this case. If none of the keys
 	 * is found in the cache, an empty array is returned.
 	 *
-	 * @param \Traversable $keys List of key strings for the requested cache entries
+	 * @param \Traversable|array $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
@@ -418,7 +418,7 @@ interface Iface
 	 * $pairs, then it is ignored. The maximum allowed length for tags is 255
 	 * bytes.
 	 *
-	 * @param \Traversable $pairs Associative list of key/value pairs. Both must be
+	 * @param \Traversable|array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
 	 * @param array|int|string|null $expires Associative list of keys and datetime
 	 *  string or integer TTL pairs.

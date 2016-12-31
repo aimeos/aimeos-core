@@ -75,6 +75,6 @@ class TablesCreatePlatform extends TablesCreateMShop
 			return;
 		}
 
-		parent::setup( array( $rname => $filepath ) );
+		$this->setup( array( $rname => $filepath ) );
 	}
 }

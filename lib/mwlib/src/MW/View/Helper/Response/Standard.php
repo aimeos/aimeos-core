@@ -79,7 +79,7 @@ class Standard
 			throw new \Aimeos\MW\Exception( 'Unable to create temporary file' );
 		}
 
-		if( fwrite( $resource, $content ) == false ) {
+		if( (int) fwrite( $resource, $content ) === 0 ) {
 			throw new \Aimeos\MW\Exception( 'Unable to write to temporary file' );
 		}
 

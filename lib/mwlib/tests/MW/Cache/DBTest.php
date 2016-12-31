@@ -328,8 +328,6 @@ class DBTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetMultiple()
 	{
-		$date = date( 'Y-m-d H:i:s', time() + 300 );
-
 		$pairs = array( 't:3' => 'test 3', 't:2' => 'test 4' );
 		$tags = array( 't:3' => array( 'tag:2', 'tag:3' ), 't:2' => array( 'tag:4' ) );
 		$expires = array( 't:3' => '2100-01-01 00:00:00', 't:2' => 300 );
