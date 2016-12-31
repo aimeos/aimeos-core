@@ -83,9 +83,9 @@ class Mysql
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *
-	 * @param iterable $pairs Associative list of key/value pairs. Both must be
+	 * @param \Traversable $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
-	 * @param int|string|array $expires Associative list of keys and datetime
+	 * @param array|int|string|null $expires Associative list of keys and datetime
 	 *  string or integer TTL pairs.
 	 * @param array $tags Associative list of key/tag or key/tags pairs that
 	 *  should be associated to the values identified by their key. The value
@@ -105,7 +105,11 @@ class Mysql
 
 			foreach( $pairs as $key => $value )
 			{
-				$date = ( isset( $expires[$key] ) ? $expires[$key] : null );
+				$date = ( is_array( $expires ) && isset( $expires[$key] ) ? $expires[$key] : $expires );
+
+				if( is_int( $date ) ) {
+					$date = date( 'Y-m-d H:i:s', time() + $date );
+				}
 
 				$stmt->bind( 1, $key );
 				$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

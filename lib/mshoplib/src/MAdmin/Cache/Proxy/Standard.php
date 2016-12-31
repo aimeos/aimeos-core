@@ -165,7 +165,8 @@ class Standard
 	 *
 	 * @param array $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
-	 * @param array $expires Associative list of key/datetime pairs.
+	 * @param array|int|string|null $expires Associative list of keys and datetime
+	 *  string or integer TTL pairs.
 	 * @param string[] $tags Associative list of key/tag or key/tags pairs that should be
 	 * 	associated to the values identified by their key. The value associated
 	 * 	to the key can either be a tag string or an array of tag strings

@@ -328,9 +328,11 @@ class DBTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetMultiple()
 	{
+		$date = date( 'Y-m-d H:i:s', time() + 300 );
+
 		$pairs = array( 't:3' => 'test 3', 't:2' => 'test 4' );
 		$tags = array( 't:3' => array( 'tag:2', 'tag:3' ), 't:2' => array( 'tag:4' ) );
-		$expires = array( 't:3' => '2100-01-01 00:00:00' );
+		$expires = array( 't:3' => '2100-01-01 00:00:00', 't:2' => 300 );
 
 		$this->object->setMultiple( $pairs, $expires, $tags );
 
@@ -370,14 +372,13 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		$result = $conn->create( 'SELECT * FROM "mw_cache_test" WHERE "id" = \'t:2\'' )->execute();
 		self::$dbm->release( $conn );
 
-		$expected = array(
-			'expire' => null,
-			'id' => 't:2',
-			'siteid' => 1,
-			'value' => 'test 4',
-		);
-		$this->assertEquals( $expected, $result->fetch() );
+		$actual = $result->fetch();
+
 		$this->assertFalse( $result->fetch() );
+		$this->assertEquals( 't:2', $actual['id'] );
+		$this->assertEquals( 1, $actual['siteid'] );
+		$this->assertEquals( 'test 4', $actual['value'] );
+		$this->assertGreaterThan( date( 'Y-m-d H:i:s' ), $actual['expire'] );
 	}
 
 

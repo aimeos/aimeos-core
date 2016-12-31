@@ -82,7 +82,6 @@ abstract class Base
 			throw new \Aimeos\MW\Cache\Exception( 'Key is not a string' );
 		}
 
-		$expireList = ( $expires !== null ? array( $key => $expires ) : array() );
-		$this->setMultiple( array( $key => $value ), $expireList, array( $key => $tags ) );
+		$this->setMultiple( array( $key => $value ), $expires, array( $key => $tags ) );
 	}
 }

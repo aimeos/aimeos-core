@@ -126,7 +126,7 @@ class DB
 	/**
 	 * Removes the cache entries identified by the given keys.
 	 *
-	 * @param iterable $keys List of key strings that identify the cache entries
+	 * @param \Traversable $keys List of key strings that identify the cache entries
 	 * 	that should be removed
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
@@ -220,7 +220,7 @@ class DB
 	/**
 	 * Returns the cached values for the given cache keys if available.
 	 *
-	 * @param iterable $keys List of key strings for the requested cache entries
+	 * @param \Traversable $keys List of key strings for the requested cache entries
 	 * @param mixed $default Default value to return for keys that do not exist
 	 * @return array Associative list of key/value pairs for the requested cache
 	 * 	entries. If a cache entry doesn't exist, neither its key nor a value
@@ -332,9 +332,9 @@ class DB
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *
-	 * @param iterable $pairs Associative list of key/value pairs. Both must be
+	 * @param \Traversable $pairs Associative list of key/value pairs. Both must be
 	 * 	a string
-	 * @param int|string|array $expires Associative list of keys and datetime
+	 * @param array|int|string|null $expires Associative list of keys and datetime
 	 *  string or integer TTL pairs.
 	 * @param array $tags Associative list of key/tag or key/tags pairs that
 	 *  should be associated to the values identified by their key. The value
@@ -358,7 +358,11 @@ class DB
 
 			foreach( $pairs as $key => $value )
 			{
-				$date = ( isset( $expires[$key] ) ? $expires[$key] : null );
+				$date = ( is_array( $expires ) && isset( $expires[$key] ) ? $expires[$key] : $expires );
+
+				if( is_int( $date ) ) {
+					$date = date( 'Y-m-d H:i:s', time() + $date );
+				}
 
 				$stmt->bind( 1, $key );
 				$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
