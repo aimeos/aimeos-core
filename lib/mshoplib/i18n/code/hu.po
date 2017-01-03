@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-#
+# 
+# 
 # Translators:
 # Translators:
 # Translators:
@@ -17,27 +17,43 @@ msgstr ""
 "PO-Revision-Date: 2016-09-21 13:59+0000\n"
 "Last-Translator: Nóra Antal <nora1984antal@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
-"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. Address plugin error: Delivery address not available
-msgid "address.delivery.available.none"
-msgstr "A szállítási cím hiányzik"
-
-#. Address plugin error: Delivery address not allowed
-msgid "address.delivery.available.notallowed"
-msgstr "A szállítási cím nem engedélyezett"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
 msgstr "A számlázási cím hiányzik"
 
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "A szállítási cím hiányzik"
+
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
 msgstr "A számlázási cím nem engedélyezett"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "A szállítási cím nem engedélyezett"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "A fizetési opció hiányzik"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "A szállítási opció hiányzik"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "A fizetési opció nincs engedélyezve"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "A szállítási opció nincs engedélyezve"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
@@ -58,19 +74,3 @@ msgstr "Idő közben valamelyik termék ára megváltozott, és automatikusan fr
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
 msgstr "Sajnáljuk, de idő közben valamelyik termék elfogyott. Kérjük távolítsa el kosarából, majd folytassa a vásárlást!"
-
-#. Service plugin error: Delivery service not available
-msgid "service.delivery.available.none"
-msgstr "A szállítási opció hiányzik"
-
-#. Service plugin error: Delivery service not allowed
-msgid "service.delivery.available.notallowed"
-msgstr "A szállítási opció nincs engedélyezve"
-
-#. Service plugin error: Payment service not available
-msgid "service.payment.available.none"
-msgstr "A fizetési opció hiányzik"
-
-#. Service plugin error: Payment service not allowed
-msgid "service.payment.available.notallowed"
-msgstr "A fizetési opció nincs engedélyezve"

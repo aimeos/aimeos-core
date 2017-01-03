@@ -1,21 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Metal <meteoramic@yahoo.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-02 10:47+0100\n"
-"PO-Revision-Date: 2016-06-07 09:37+0000\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"POT-Creation-Date: 2017-01-03 12:04+0100\n"
+"PO-Revision-Date: 2017-01-03 11:14+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #, php-format
@@ -156,7 +156,9 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "\"%1$s\" class adında geçersiz karakterler"
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr "\"%1$s\" tarihinde geçersiz karakterler mevcut. ISO formatı \"YYYY-MM-DD hh:mm:ss\" gerekli."
 
 #, php-format
@@ -224,7 +226,8 @@ msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr "Öğe silinemez. Öğrenin site ID'si mevcut site ID'sinden farklı."
 
 #, php-format
-msgid "Item could not be saved using method saveItem(). Item ID not available."
+msgid ""
+"Item could not be saved using method saveItem(). Item ID not available."
 msgstr "Öğe saveItem() metodu kullanılarak kaydedilemedi. Öğe ID'si mevcut değil."
 
 #, php-format
@@ -316,7 +319,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Öğe için yeni ID \"%1$s\", eski ID \"%2$s\" ile farklılık gösteriyor"
 
 #, php-format
-msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"saveItem()\". Try using "
+"method \"insertItem()\" instead."
 msgstr "Yeni oluşturulan site  \"saveItem()\" metodu kullanılarak kaydedilemez. Bunun yerine \"insertItem()\" metodunu kullanmayı deneyin."
 
 #, php-format
@@ -335,9 +340,13 @@ msgstr "\"%1$s\" ürün ID'si veya \"%2$s\" ürün kodu için hiçbir fiyat mevc
 msgid "No product with code \"%1$s\" found"
 msgstr "\"%1$s\" kodlu hiçbir ürün bulunamadı"
 
-#, fuzzy, php-format
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr ""
+
+#, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr "\"%1$s\" kodlu hiçbir depo bulunamadı"
+msgstr "\"%1$s\" kodu için hiçbir tür bulunamadı"
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
@@ -384,7 +393,9 @@ msgid "Operation not supported"
 msgstr "Operasyon desteklenmiyor"
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr "Teslimat sağlayıcının XML yanıtındaki sipariş ID'si olan \"%1$s\", siparişin kayıtlı fatura ID'si olan \"%2$s\" ile farklılık gösteriyor"
 
 #, php-format
@@ -392,7 +403,9 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "\"%1$s\" sipariş ID'li sipariş temel öğesi bulunamadı"
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr "Teslimat sağlayıcıya gönderilen sipariş bilgisi XML yanıtına göre \"%1$s\" koduyla reddedildi "
 
 #, php-format
@@ -451,7 +464,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Lütfen sepetinizdeki ürünlerin fiyatlarına göz atın"
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr "Fiyat eklenemiyor.  Fiyat öğesinin para birimi ID'si \"%1$s\" ve şu anda kullanılan para birimi ID'si \"%2$s\" eşleşmiyor."
 
 #, php-format
@@ -463,7 +478,9 @@ msgid "Price item not available"
 msgstr "Fiyat öğesi mevcut değil"
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr "Ürün gerekli tüm değerleri içermiyor. Öğe için ürün kodu mevcut değil."
 
 #, php-format
@@ -523,11 +540,15 @@ msgid "Session object not available"
 msgstr "Oturum nesnesi mevcut değil"
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr "Sitesi eklenemiyor. Sitenin site ID'si üst sitenin site ID'sinden farklı."
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr "Sitesi taşınamaz. Sitenin site ID'si mevcut site ID'sinden, varolan üst sitenin site ID'sinden veya yeni üst sitenin site ID'sinden farklı."
 
 #, php-format
@@ -595,7 +616,9 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Bilinmeyene arama anahtarı \"%1$s\""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr "Teslimat sağlayıcıdan XML yanıtının doğrulaması \"%1$s\" şemasına karşı başarısız oldu"
 
 #, php-format

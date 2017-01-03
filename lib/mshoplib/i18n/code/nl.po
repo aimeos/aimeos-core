@@ -1,8 +1,8 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-#
+# 
+# 
 # Translators:
 # Translators:
 # Translators:
@@ -16,27 +16,43 @@ msgstr ""
 "PO-Revision-Date: 2016-06-07 09:37+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
-"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. Address plugin error: Delivery address not available
-msgid "address.delivery.available.none"
-msgstr "Het bezorgadres mist"
-
-#. Address plugin error: Delivery address not allowed
-msgid "address.delivery.available.notallowed"
-msgstr "Ongeldig bezorgadres opgegeven"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
 msgstr "Het factuuradres mist"
 
+#. Address plugin error: Delivery address not available
+msgid "address.delivery.available.none"
+msgstr "Het bezorgadres mist"
+
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
 msgstr "Ongeldig factuuradres opgegeven"
+
+#. Address plugin error: Delivery address not allowed
+msgid "address.delivery.available.notallowed"
+msgstr "Ongeldig bezorgadres opgegeven"
+
+#. Service plugin error: Payment service not available
+msgid "service.payment.available.none"
+msgstr "De betaaloptie is niet opgegeven"
+
+#. Service plugin error: Delivery service not available
+msgid "service.delivery.available.none"
+msgstr "De bezorgoptie is niet opgegeven"
+
+#. Service plugin error: Payment service not allowed
+msgid "service.payment.available.notallowed"
+msgstr "Een betaaloptie is niet geldig"
+
+#. Service plugin error: Delivery service not allowed
+msgid "service.delivery.available.notallowed"
+msgstr "Een bezorgoptie is niet geldig"
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
@@ -57,19 +73,3 @@ msgstr "De prijs van een product is veranderd omdat deze automatisch is aangepas
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
 msgstr "Onze excuses, 1 product is inmiddels niet meer op voorraad. Verwijder deze uit uw mandje."
-
-#. Service plugin error: Delivery service not available
-msgid "service.delivery.available.none"
-msgstr "De bezorgoptie is niet opgegeven"
-
-#. Service plugin error: Delivery service not allowed
-msgid "service.delivery.available.notallowed"
-msgstr "Een bezorgoptie is niet geldig"
-
-#. Service plugin error: Payment service not available
-msgid "service.payment.available.none"
-msgstr "De betaaloptie is niet opgegeven"
-
-#. Service plugin error: Payment service not allowed
-msgid "service.payment.available.notallowed"
-msgstr "Een betaaloptie is niet geldig"

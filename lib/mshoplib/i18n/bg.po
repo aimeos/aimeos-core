@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
 # Bistra Kumanova <b.kumanova@creato.bg>, 2015
 # Plamen Petkov <mcplamen@gmail.com>, 2016
@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-02 10:47+0100\n"
-"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"POT-Creation-Date: 2017-01-03 12:04+0100\n"
+"PO-Revision-Date: 2017-01-03 11:14+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
-"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, php-format
@@ -157,7 +157,9 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr "Недопустими символи в името на класа \"%1$s\""
 
 #, php-format
-msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" expected."
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
 msgstr "Невалидни символи в датата \"%1$s\". Очаква ce съответствие с ISO форматa \"YYYY-MM-DD hh:mm:ss\"."
 
 #, php-format
@@ -225,7 +227,8 @@ msgid "Item can not be deleted. Site ID of item differs from present site ID."
 msgstr "Елементът не може да бъде изтрит. Сайт номера на елемента се различава от текущия сайт номер."
 
 #, php-format
-msgid "Item could not be saved using method saveItem(). Item ID not available."
+msgid ""
+"Item could not be saved using method saveItem(). Item ID not available."
 msgstr "Елементът не може да бъде съхранен чрез метода saveItem(). Номерът на елемента не е наличен."
 
 #, php-format
@@ -317,7 +320,9 @@ msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
 msgstr "Новото ID \"%1$s\" на елемента се различава от старото ID \"%2$s\""
 
 #, php-format
-msgid "Newly created site can not be saved using method \"saveItem()\". Try using method \"insertItem()\" instead."
+msgid ""
+"Newly created site can not be saved using method \"saveItem()\". Try using "
+"method \"insertItem()\" instead."
 msgstr "Новосъздадения сайт не може да бъде съхранен чрез метод \"saveItem()\". Опитайте се да използвате метода \"insertItem ()\"."
 
 #, php-format
@@ -336,9 +341,13 @@ msgstr "Не е намерена цена за продукт с номер \"%1
 msgid "No product with code \"%1$s\" found"
 msgstr "Не е намерен продукт с код \"%1$s\""
 
-#, fuzzy, php-format
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr ""
+
+#, php-format
 msgid "No type for code \"%1$s\" found"
-msgstr "Не е намерен склад с код \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
@@ -385,7 +394,9 @@ msgid "Operation not supported"
 msgstr "Операцията не се поддържа"
 
 #, php-format
-msgid "Order ID \"%1$s\" in XML response of delivery provider differs from stored invoice ID \"%2$s\" of the order"
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
 msgstr "Номера на поръчката \"%1$s\" в XML отговора на изпълнителя на доставката се различава от съхранената фактура с номер \"%2$s\" на поръчката."
 
 #, php-format
@@ -393,7 +404,9 @@ msgid "Order base item with order ID \"%1$s\" not found"
 msgstr "Не е намерен основния елемент на поръчка с поръчка номер \"%1$s\""
 
 #, php-format
-msgid "Order data sent to delivery provider was rejected with code \"%1$s\" according to XML response"
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
 msgstr "Данните на поръчката, изпратени до изпълнителя на доставката бяха отхвърлени с код \"%1$s\", според XML отговора"
 
 #, php-format
@@ -452,7 +465,9 @@ msgid "Please have a look at the prices of the products in your basket"
 msgstr "Моля, прегледайте цените на продуктите във Вашата кошница"
 
 #, php-format
-msgid "Price can not be added. Currency ID \"%1$s\" of price item and currently used currency ID \"%2$s\" does not match."
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
 msgstr "Цената не може да бъде добавена. Валутата на цената \"%1$s\" не съвпада с текущата валута \"%2$s\"."
 
 #, php-format
@@ -464,7 +479,9 @@ msgid "Price item not available"
 msgstr "Не е наличен елемента цена"
 
 #, php-format
-msgid "Product does not contain all required values. Product code for item not available."
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
 msgstr "Продуктът не съдържа всички изисквани стойности. Кодът на продукта не е наличен."
 
 #, php-format
@@ -524,11 +541,15 @@ msgid "Session object not available"
 msgstr "Сесийният обект не е наличен"
 
 #, php-format
-msgid "Site can not be inserted. Site ID of site differs from site ID of parent site."
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
 msgstr "Сайтът не може да бъде добавен. Номера на сайта се различава от номера на родителския сайт."
 
 #, php-format
-msgid "Site can not be moved. Site ID of site differs from present site id, site ID of existing parent site or site id of new parent site."
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
 msgstr "Сайта не може да бъде преместван. Номера на сайта се различава от текущия номер на сайт, от номера на съществуващия родителски сайт или от номера на новия родителски сайт."
 
 #, php-format
@@ -596,7 +617,9 @@ msgid "Unknown search key \"%1$s\""
 msgstr "Неизвестен ключ на търсене \"%1$s\""
 
 #, php-format
-msgid "Validation of XML response from delivery provider against schema \"%1$s\" failed"
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
 msgstr "Грешка при валидацията на XML отговора от изпълнителя на доставката в съответствие със схема \"%1$s\""
 
 #, php-format
