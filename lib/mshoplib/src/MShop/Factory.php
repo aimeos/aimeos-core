@@ -107,18 +107,18 @@ class Factory
 			}
 
 
+			$tmppath = $domain;
+
 			foreach( $parts as $part )
 			{
 				$subpath .= $part . '/';
-				$tmpname = $domain . '/' . $part;
-
 				$classname = $context->getConfig()->get( 'mshop/' . $domain . '/manager/' . $subpath . 'name' );
 
-				if( self::$cache === false || !isset( self::$managers[$id][$tmpname] ) ) {
-					self::$managers[$id][$tmpname] = self::$managers[$id][$domain]->getSubManager( $part, $classname );
+				if( self::$cache === false || !isset( self::$managers[$id][$tmppath . '/' . $part] ) ) {
+					self::$managers[$id][$tmppath . '/' . $part] = self::$managers[$id][$tmppath]->getSubManager( $part, $classname );
 				}
 
-				$domain = $tmpname;
+				$tmppath .= '/' . $part;
 			}
 		}
 
