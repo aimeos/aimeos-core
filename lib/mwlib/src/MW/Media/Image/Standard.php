@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MW
  * @subpackage Media
  */
@@ -45,6 +45,10 @@ class Standard
 
 		if( ( $this->image = @imagecreatefromstring( $content ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'The image type in "%1$s" seems to be not supported by gdlib.', $filename) );
+		}
+
+		if( imagealphablending( $this->image, false ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)') );
 		}
 
 		$this->options = $options;
@@ -105,14 +109,10 @@ class Standard
 					$quality = (int) $this->options['image']['png']['quality'];
 				}
 
-				if( @imagealphablending($this->image, false) === false ){
-					throw new \Aimeos\MW\Media\Exception( sprintf( 'There was an error during the png processing in gdlib (alphablending)') );
+				if( imagesavealpha( $this->image, true ) === false ) {
+					throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagesavealpha)') );
 				}
 
-				if( @imagesavealpha($this->image, true) === false ){
-					throw new \Aimeos\MW\Media\Exception( sprintf( 'There was an error during the png processing in gdlib(imagesavealpha)') );
-				}
-				
 				if( @imagepng( $this->image, $filename, $quality ) === false ) {
 					throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 				}
@@ -135,7 +135,7 @@ class Standard
 	public function scale( $width, $height, $fit = true )
 	{
 		if( ( $info = getimagesize( $this->getFilepath() ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( 'Unable to retrieve image size' );
+			throw new \Aimeos\MW\Media\Exception( 'Unable to retrieve image size for: ' . $this->getFilepath() );
 		}
 
 		if( $fit === true )
@@ -155,6 +155,18 @@ class Standard
 
 		if( ( $this->image = imagecreatetruecolor( $width, $height ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
+		}
+
+		if( imagealphablending( $this->image, false ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)') );
+		}
+
+		if( ( $transparent = imagecolorallocatealpha( $this->image, 255, 255, 255, 127 ) ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagecolorallocatealpha)') );
+		}
+
+		if( imagefilledrectangle( $this->image, 0, 0, $width, $height, $transparent ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagefilledrectangle)') );
 		}
 
 		if( imagecopyresampled( $this->image, $this->origimage, 0, 0, 0, 0, $width, $height, $info[0], $info[1] ) === false ) {
