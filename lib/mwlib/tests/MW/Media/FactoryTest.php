@@ -22,6 +22,28 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( 'image/png', $object->getMimetype() );
 	}
 
+	public function testGetImageAsResource()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$resource = fopen( __DIR__ . $ds .'_testfiles' . $ds . 'image.png', 'rw' );
+		$object = \Aimeos\MW\Media\Factory::get( $resource );
+
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Iface', $object );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Image\\Iface', $object );
+		$this->assertEquals( 'image/png', $object->getMimetype() );
+	}
+
+	public function testGetImageAsString()
+	{
+		$ds = DIRECTORY_SEPARATOR;
+		$content = file_get_contents( __DIR__ . $ds .'_testfiles' . $ds . 'image.png' );
+		$object = \Aimeos\MW\Media\Factory::get( $content );
+
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Iface', $object );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Image\\Iface', $object );
+		$this->assertEquals( 'image/png', $object->getMimetype() );
+	}
+
 
 	public function testGetBinary()
 	{
@@ -31,12 +53,5 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Iface', $object );
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Application\\Iface', $object );
 		$this->assertEquals( 'text/plain', $object->getMimetype() );
-	}
-
-
-	public function testGetException()
-	{
-		$this->setExpectedException('\\Aimeos\\MW\\Media\\Exception');
-		\Aimeos\MW\Media\Factory::get( null );
 	}
 }

@@ -448,11 +448,11 @@ class Standard
 	 */
 	protected function storeFile( \Aimeos\MW\Media\Iface $mediaFile, $type, $filename, $fsname )
 	{
-		$file = $mediaFile->getFilepath();
+		$content = $mediaFile->save();
 		$fileext = $this->getFileExtension( $mediaFile->getMimetype() );
 		$dest = "${type}/${filename[0]}/${filename[1]}/${filename}${fileext}";
 
-		$this->context->getFilesystemManager()->get( $fsname )->writef( $dest, $file );
+		$this->context->getFilesystemManager()->get( $fsname )->write( $dest, $content );
 
 		return $dest;
 	}
@@ -470,18 +470,14 @@ class Standard
 	 */
 	protected function storeImage( \Aimeos\MW\Media\Image\Iface $mediaFile, $type, $filename, $fsname )
 	{
-		$tmpfile = $this->getTempFileName();
-		$mimetype = $this->getMimeType( $mediaFile, $type );
-
 		$this->scaleImage( $mediaFile, $type );
-		$mediaFile->save( $tmpfile, $mimetype );
+		$mimetype = $this->getMimeType( $mediaFile, $type );
+		$content = $mediaFile->save( null, $mimetype );
 
 		$fileext = $this->getFileExtension( $mimetype );
 		$dest = "${type}/${filename[0]}/${filename[1]}/${filename}${fileext}";
 
-		$this->context->getFilesystemManager()->get( $fsname )->writef( $dest, $tmpfile );
-
-		unlink( $tmpfile );
+		$this->context->getFilesystemManager()->get( $fsname )->write( $dest, $content );
 
 		return $dest;
 	}

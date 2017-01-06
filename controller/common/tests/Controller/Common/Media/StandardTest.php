@@ -282,14 +282,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$fs = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Standard' )
-			->setMethods( array( 'writef' ) )
+			->setMethods( array( 'write' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$fsm->expects( $this->once() )->method( 'get' )
 			->will( $this->returnValue( $fs ) );
 
-		$fs->expects( $this->once() )->method( 'writef' );
+		$fs->expects( $this->once() )->method( 'write' );
 
 		$this->context->setFilesystemManager( $fsm );
 
@@ -312,14 +312,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$fs = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Standard' )
-			->setMethods( array( 'writef' ) )
+			->setMethods( array( 'write' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
 		$fsm->expects( $this->once() )->method( 'get' )
 			->will( $this->returnValue( $fs ) );
 
-		$fs->expects( $this->once() )->method( 'writef' );
+		$fs->expects( $this->once() )->method( 'write' );
 
 		$this->context->setFilesystemManager( $fsm );
 
