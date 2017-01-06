@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MW
  * @subpackage Media
  */
@@ -21,14 +21,6 @@ namespace Aimeos\MW\Media;
 interface Iface
 {
 	/**
-	 * Returns the original file path of a media object.
-	 *
-	 * @return string Path to the original file
-	 */
-	public function getFilepath();
-
-
-	/**
 	 * Returns the mime type of a media object.
 	 *
 	 * @return string Mime type like "image/png"
@@ -37,11 +29,11 @@ interface Iface
 
 
 	/**
-	 * Stores the media data at the given file name.
+	 * Stores the media data into the given file name.
 	 *
-	 * @param string $filename Name of the file to save the media data into
-	 * @param string $mimetype Mime type to save the image as
-	 * @return void
+	 * @param string|null $filename File name to save the data into or null to return the data
+	 * @param string|null $mimetype Mime type to save the content as or null to leave the mime type unchanged
+	 * @return string|null File content if file name is null or null if data is saved to the given file name
 	 */
-	public function save( $filename, $mimetype );
+	public function save( $filename = null, $mimetype = null );
 }

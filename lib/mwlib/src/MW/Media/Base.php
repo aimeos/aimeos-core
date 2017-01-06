@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MW
  * @subpackage Media
  */
@@ -20,31 +20,17 @@ namespace Aimeos\MW\Media;
  */
 class Base
 {
-	private $filepath;
 	private $mimetype;
 
 
 	/**
 	 * Initializes the media object
 	 *
-	 * @param string $filepath Path of the original file
 	 * @param string $mimetype Mime type of the media data
 	 */
-	public function __construct( $filepath, $mimetype )
+	public function __construct( $mimetype )
 	{
-		$this->filepath = $filepath;
 		$this->mimetype = $mimetype;
-	}
-
-
-	/**
-	 * Returns the original file path of a media object.
-	 *
-	 * @return string Path to the original file
-	 */
-	public function getFilepath()
-	{
-		return $this->filepath;
 	}
 
 

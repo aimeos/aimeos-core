@@ -22,21 +22,23 @@ class Standard
 	extends \Aimeos\MW\Media\Base
 	implements \Aimeos\MW\Media\Application\Iface
 {
+	private $content;
 	private $options;
 
 
 	/**
 	 * Initializes the new image object.
 	 *
-	 * @param string $filename Name of the media file
+	 * @param string $content File content
 	 * @param string $mimetype Mime type of the media data
 	 * @param array $options Associative list of configuration options
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be retrieved from the given file name
 	 */
-	public function __construct( $filename, $mimetype, array $options )
+	public function __construct( $content, $mimetype, array $options )
 	{
-		parent::__construct( $filename, $mimetype );
+		parent::__construct( $mimetype );
 
+		$this->content = $content;
 		$this->options = $options;
 	}
 
@@ -44,16 +46,19 @@ class Standard
 	/**
 	 * Stores the media data at the given file name.
 	 *
-	 * @param string $filename Name of the file to save the media data into
-	 * @param string $mimetype Mime type to save the image as
+	 * @param string|null $filename File name to save the data into or null to return the data
+	 * @param string|null $mimetype Mime type to save the content as or null to leave the mime type unchanged
+	 * @return string|null File content if file name is null or null if data is saved to the given file name
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
 	 */
-	public function save( $filename, $mimetype )
+	public function save( $filename = null, $mimetype = null )
 	{
-		$filepath = $this->getFilepath();
+		if( $filename === null ) {
+			return $this->content;
+		}
 
-		if( $filepath != $filename && copy( $filepath, $filename ) !== true ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to copy "%1$s" to "%2$s"', $filepath, $filename ) );
+		if( file_put_contents( $filepath, $this->content ) !== true ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save content to "%1$s"', $filename ) );
 		}
 	}
 }

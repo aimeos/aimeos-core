@@ -32,11 +32,4 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Application\\Iface', $object );
 		$this->assertEquals( 'text/plain', $object->getMimetype() );
 	}
-
-
-	public function testGetException()
-	{
-		$this->setExpectedException('\\Aimeos\\MW\\Media\\Exception');
-		\Aimeos\MW\Media\Factory::get( null );
-	}
 }
