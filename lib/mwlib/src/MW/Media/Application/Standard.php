@@ -47,7 +47,7 @@ class Standard
 	 * Stores the media data at the given file name.
 	 *
 	 * @param string|null $filename File name to save the data into or null to return the data
-	 * @param string|null $mimetype Mime type to save the content as or null to leave the mime type unchanged
+	 * @param string|null $mimetype Mime type to save the content as or null to leave the mime type unchanged (not used)
 	 * @return string|null File content if file name is null or null if data is saved to the given file name
 	 * @throws \Aimeos\MW\Media\Exception If image couldn't be saved to the given file name
 	 */
@@ -57,7 +57,7 @@ class Standard
 			return $this->content;
 		}
 
-		if( file_put_contents( $filepath, $this->content ) !== true ) {
+		if( file_put_contents( $filename, $this->content ) !== true ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save content to "%1$s"', $filename ) );
 		}
 	}

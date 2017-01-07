@@ -27,28 +27,25 @@ class Factory
 	 * - image: Associative list of image related options
 	 * - application: Associative list of application related options
 	 *
-	 * @param resource|string|null $file File resource, path to the file or null for new files
+	 * @param resource|string $file File resource, path to the file or file content
 	 * @param array $options Associative list of options for configuring the media class
 	 * @return \Aimeos\MW\Media\Iface Media object
 	 */
 	public static function get( $file, array $options = array() )
 	{
-		$content = '';
+		$content = $file;
 		$mimetype = 'application/octet-stream';
-		$finfo = new \finfo( FILEINFO_MIME_TYPE );
 
-		if( is_resource( $file ) && ( $content = stream_get_contents( $file ) ) === false ) {
+		if( @is_resource( $file ) && ( $content = stream_get_contents( $file ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from stream' ) );
 		}
 
-		if( is_string( $file ) && ( $content = @file_get_contents( $file ) ) === false ) {
+		if( @is_file( $file ) && ( $content = @file_get_contents( $file ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from file "%1$s"', $file ) );
 		}
 
-		if( $content !== '' ) {
-			$mimetype = $finfo->buffer( $content );
-		}
-
+		$finfo = new \finfo( FILEINFO_MIME_TYPE );
+		$mimetype = $finfo->buffer( $content );
 		$mimeparts = explode( '/', $mimetype );
 
 		switch( $mimeparts[0] )
