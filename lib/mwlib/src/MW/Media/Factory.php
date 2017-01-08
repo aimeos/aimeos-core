@@ -34,7 +34,6 @@ class Factory
 	public static function get( $file, array $options = array() )
 	{
 		$content = $file;
-		$mimetype = 'application/octet-stream';
 
 		if( @is_resource( $file ) && ( $content = stream_get_contents( $file ) ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from stream' ) );
