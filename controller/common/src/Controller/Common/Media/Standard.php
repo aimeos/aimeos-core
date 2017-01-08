@@ -127,6 +127,10 @@ class Standard
 		$config = $this->context->getConfig();
 		$media = $this->getMediaFile( $this->getFileContent( $path, $fsname ) );
 
+		if( !( $media instanceof \Aimeos\MW\Media\Image\Iface ) ) {
+			return;
+		}
+
 		if( (bool) $config->get( 'controller/common/media/standard/files/scale', false ) === true )
 		{
 			$mimetype = $this->getMimeType( $media, 'files' );
@@ -469,14 +473,12 @@ class Standard
 
 
 	/**
-	 * Stores a binary file and returns it's new relative file name
+	 * Stores the file content
 	 *
-	 * @param \Aimeos\MW\Media\Iface $media Media object
-	 * @param string $type Type of the image like "preview" or "files"
+	 * @param string $content File content
+	 * @param string $fsname Name of the file system to store the files at
 	 * @param string $filepath Path of the new file
-	 * @param string Name of the file system to store the files at
-	 * @return string Relative path to the new file
-	 * @throws \Aimeos\Controller\Common\Exception If an error occurs
+	 * @param string $oldpath Path of the old file
 	 */
 	protected function storeFile( $content, $fsname, $filepath, $oldpath )
 	{
