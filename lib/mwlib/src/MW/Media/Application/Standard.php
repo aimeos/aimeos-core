@@ -57,7 +57,7 @@ class Standard
 			return $this->content;
 		}
 
-		if( file_put_contents( $filename, $this->content ) !== true ) {
+		if( file_put_contents( $filename, $this->content ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save content to "%1$s"', $filename ) );
 		}
 	}
