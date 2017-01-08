@@ -46,28 +46,34 @@ class Standard
 	public function add( \Aimeos\MShop\Media\Item\Iface $item, \Psr\Http\Message\UploadedFileInterface $file, $fsname = 'fs-media' )
 	{
 		$this->checkFileUpload( $file );
+		$media = $this->getMediaFile( $file->getStream() );
 
-		$tmpname = $this->getTempFileName();
-		$file->moveTo( $tmpname );
-
-		$mediaFile = $this->getMediaFile( $tmpname );
-		$filename = md5( $file->getClientFilename() . getmypid() . microtime( true ) );
-
-		if( $mediaFile instanceof \Aimeos\MW\Media\Image\Iface )
+		if( $media instanceof \Aimeos\MW\Media\Image\Iface )
 		{
-			$item->setUrl( $this->storeImage( $mediaFile, 'files', $filename, $fsname ) );
-			$item->setPreview( $this->storeImage( $mediaFile, 'preview', $filename, $fsname ) );
-			$item->setMimeType( $this->getMimetype( $mediaFile, 'files' ) );
+			$this->scaleImage( $media, 'files' );
+			$mimetype = $this->getMimeType( $media, 'files' );
+			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
+			$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $item->getUrl() );
+			$item->setUrl( $filepath );
+
+			$this->scaleImage( $media, 'preview' );
+			$mimeprev = $this->getMimeType( $media, 'preview' );
+			$filepath = $this->getFilePath( $file->getClientFilename(), 'preview', $mimeprev );
+			$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $item->getPreview() );
+			$item->setPreview( $filepath );
 		}
 		else
 		{
-			$item->setUrl( $this->storeFile( $mediaFile, 'files', $filename, $fsname ) );
-			$item->setPreview( $this->getMimeIcon( $mediaFile->getMimetype() ) );
-			$item->setMimeType( $mediaFile->getMimetype() );
+			$mimetype = $media->getMimeType();
+			$item->setPreview( $this->getMimeIcon( $mimetype ) );
+
+			$filepath = $this->getFilePath( $file->getClientFilename(), 'files', $mimetype );
+			$this->storeFile( $media->save(), $fsname, $filepath, $item->getPreview() );
+			$item->setUrl( $filepath );
 		}
 
 		$item->setLabel( basename( $file->getClientFilename() ) );
-		$this->deleteFile( $tmpname );
+		$item->setMimeType( $mimetype );
 	}
 
 
@@ -88,7 +94,7 @@ class Standard
 			$fs->rm( $path );
 		}
 
-		$item->setUrl( null );
+		$item->setUrl( '' );
 
 		try
 		{
@@ -99,7 +105,43 @@ class Standard
 		}
 		catch( \Exception $e ) { ; } // Can be a mime icon with relative path
 
-		$item->setPreview( null );
+		$item->setPreview( '' );
+	}
+
+
+	/**
+	 * Rescales the files (original and preview) referenced by the media item
+	 *
+	 * The height/width configuration for scaling and which one should be scaled is used from
+	 * - controller/common/media/standard/<files|preview>/maxheight
+	 * - controller/common/media/standard/<files|preview>/maxwidth
+	 * - controller/common/media/standard/<files|preview>/scale
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
+	 * @param string $fsname Name of the file system to rescale the files from
+	 * @return void
+	 */
+	public function scale( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' )
+	{
+		$path = $item->getUrl();
+		$config = $this->context->getConfig();
+		$media = $this->getMediaFile( $this->getFileContent( $path, $fsname ) );
+
+		if( (bool) $config->get( 'controller/common/media/standard/files/scale', false ) === true )
+		{
+			$mimetype = $this->getMimeType( $media, 'files' );
+			$filepath = $this->getFilePath( $path, 'files', $mimetype );
+			$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $path );
+			$item->setUrl( $filepath );
+		}
+
+		if( (bool) $config->get( 'controller/common/media/standard/preview/scale', true ) === true )
+		{
+			$mimetype = $this->getMimeType( $media, 'preview' );
+			$filepath = $this->getFilePath( $path, 'preview', $mimetype );
+			$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $item->getPreview() );
+			$item->setPreview( $filepath );
+		}
 	}
 
 
@@ -136,45 +178,74 @@ class Standard
 
 
 	/**
-	 * Removes the file from the file system
+	 * Returns the file content of the file or URL
 	 *
-	 * @param string $path Path to the file
+	 * @param string $path Path to the file or URL
+	 * @param string $fsname File system name the file is located at
+	 * @return string File content
+	 * @throws \Aimeos\Controller\Common\Exception If no file is found
 	 */
-	protected function deleteFile( $path )
+	protected function getFileContent( $path, $fsname )
 	{
-		unlink( $path );
+		if( $path !== '' )
+		{
+			if( preg_match( '#^[a-zA-Z]{1,10}://#', $path ) === 1 )
+			{
+				if( ( $content = file_get_contents( $path ) ) === false )
+				{
+					$msg = sprintf( 'Download file "%1$s" using file_get_contents failed', $path );
+					throw new \Aimeos\Controller\Common\Exception( $msg );
+				}
+
+				return $content;
+			}
+
+			$fs = $this->context->getFilesystemManager()->get( $fsname );
+
+			if( $fs->has( $path ) !== false ) {
+				return $fs->read( $path );
+			}
+		}
+
+		throw new \Aimeos\Controller\Common\Exception( sprintf( 'File "%1$s" not found', $path ) );
 	}
 
 
 	/**
-	 * Returns the file extension for the given mime type.
+	 * Creates a new file path from the given arguments and random values
 	 *
-	 * @param string $mimetype Mime type like "image/png"
-	 * @return string|null File extension including the dot (e.g. ".png") or null if unknown
+	 * @param string $filename Original file name, can contain the path as well
+	 * @param string $type File type, i.e. "files" or "preview"
+	 * @param string $mimetype Mime type of the file
+	 * @return string New file name including the file path
 	 */
-	protected function getFileExtension( $mimetype )
+	protected function getFilePath( $filename, $type, $mimetype )
 	{
 		switch( $mimetype )
 		{
-			case 'application/pdf': return '.pdf';
+			case 'application/pdf': $ext = '.pdf'; break;
 
-			case 'image/gif': return '.gif';
-			case 'image/jpeg': return '.jpg';
-			case 'image/png': return '.png';
-			case 'image/tiff': return '.tif';
+			case 'image/gif': $ext = '.gif'; break;
+			case 'image/jpeg': $ext = '.jpg'; break;
+			case 'image/png': $ext = '.png'; break;
+			case 'image/tiff': $ext = '.tif'; break;
+
+			default: $ext = '';
 		}
 
-		return null;
+		$filename = md5( $filename . getmypid() . microtime( true ) );
+
+		return "${type}/${filename[0]}/${filename[1]}/${filename}${ext}";
 	}
 
 
 	/**
 	 * Returns the media object for the given file name
 	 *
-	 * @param string $filename Path and name to the file
+	 * @param string $file Path to the file or file content
 	 * @return \Aimeos\MW\Media\Iface Media object
 	 */
-	protected function getMediaFile( $filename )
+	protected function getMediaFile( $file )
 	{
 		/** controller/common/media/standard/options
 		 * Options used for processing the uploaded media files
@@ -201,7 +272,7 @@ class Standard
 		 */
 		$options = $this->context->getConfig()->get( 'controller/common/media/standard/options', array() );
 
-		return \Aimeos\MW\Media\Factory::get( $filename, $options );
+		return \Aimeos\MW\Media\Factory::get( $file, $options );
 	}
 
 
@@ -256,14 +327,14 @@ class Standard
 	/**
 	 * Returns the mime type for the new image
 	 *
-	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
+	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
 	 * @param string $type Type of the image like "preview" or "files"
 	 * @return string New mime type
 	 * @throws \Aimeos\Controller\Common\Exception If no mime types are configured
 	 */
-	protected function getMimeType( \Aimeos\MW\Media\Image\Iface $mediaFile, $type )
+	protected function getMimeType( \Aimeos\MW\Media\Image\Iface $media, $type )
 	{
-		$mimetype = $mediaFile->getMimetype();
+		$mimetype = $media->getMimetype();
 		$config = $this->context->getConfig();
 
 		/** controller/common/media/standard/files/allowedtypes
@@ -309,52 +380,13 @@ class Standard
 
 
 	/**
-	 * Returns a file name for a new temporary file
-	 *
-	 * @throws \Aimeos\Controller\Common\Exception
-	 * @return string File path and name
-	 */
-	protected function getTempFileName()
-	{
-		$config = $this->context->getConfig();
-
-		/** controller/common/media/standard/tempdir
-		 * Directory for storing temporary files
-		 *
-		 * To scale images, temporary files must be created. This configuration
-		 * option should point to a directory where the application can store
-		 * generated files. If not configured, the temp directory of the
-		 * operating system will be used.
-		 *
-		 * @param string Absolute path to the temp directory
-		 * @since 2016.01
-		 * @category Developer
-		 */
-		$tempdir = $config->get( 'controller/common/media/standard/tempdir', sys_get_temp_dir() );
-
-		if( !is_dir( $tempdir ) && mkdir( $tempdir, 0750, true ) === false )
-		{
-			$msg = sprintf( 'Unable to create directory "%1$s"', $tempdir );
-			throw new \Aimeos\Controller\Common\Exception( $msg );
-		}
-
-		if( ( $file = tempnam( $tempdir, 'ai' ) ) === false )
-		{
-			$msg = sprintf( 'Unable to create file in "%1$s"', $tempdir );
-			throw new \Aimeos\Controller\Common\Exception( $msg );
-		}
-
-		return $file;
-	}
-
-
-	/**
 	 * Scales the image according to the configuration settings
 	 *
-	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
+	 * @param \Aimeos\MW\Media\Image\Iface $media Media object
 	 * @param string $type Type of the image like "preview" or "files"
+	 * @param \Aimeos\MW\Media\Image\Iface Scaled media object
 	 */
-	protected function scaleImage( \Aimeos\MW\Media\Image\Iface $mediaFile, $type )
+	protected function scaleImage( \Aimeos\MW\Media\Image\Iface $media, $type )
 	{
 		$config = $this->context->getConfig();
 
@@ -432,53 +464,28 @@ class Standard
 		 */
 		$maxheight = $config->get( 'controller/common/media/standard/' . $type . '/maxheight', null );
 
-		$mediaFile->scale( $maxwidth, $maxheight );
+		return $media->scale( $maxwidth, $maxheight );
 	}
 
 
 	/**
 	 * Stores a binary file and returns it's new relative file name
 	 *
-	 * @param \Aimeos\MW\Media\Iface $mediaFile Media object
+	 * @param \Aimeos\MW\Media\Iface $media Media object
 	 * @param string $type Type of the image like "preview" or "files"
-	 * @param string $filename Name of the new file without file extension
+	 * @param string $filepath Path of the new file
 	 * @param string Name of the file system to store the files at
 	 * @return string Relative path to the new file
 	 * @throws \Aimeos\Controller\Common\Exception If an error occurs
 	 */
-	protected function storeFile( \Aimeos\MW\Media\Iface $mediaFile, $type, $filename, $fsname )
+	protected function storeFile( $content, $fsname, $filepath, $oldpath )
 	{
-		$content = $mediaFile->save();
-		$fileext = $this->getFileExtension( $mediaFile->getMimetype() );
-		$dest = "${type}/${filename[0]}/${filename[1]}/${filename}${fileext}";
+		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
-		$this->context->getFilesystemManager()->get( $fsname )->write( $dest, $content );
+		if( $oldpath !== $filepath && $fs->has( $oldpath ) ) {
+			$fs->rm( $oldpath );
+		}
 
-		return $dest;
-	}
-
-
-	/**
-	 * Stores a scaled image and returns it's new file name.
-	 *
-	 * @param \Aimeos\MW\Media\Image\Iface $mediaFile Media object
-	 * @param string $type Type of the image like "preview" or "files"
-	 * @param string $filename Name of the new file without file extension
-	 * @param string $fsname Name of the file system to store the files at
-	 * @return string Relative path to the new file
-	 * @throws \Aimeos\Controller\Common\Exception If an error occurs
-	 */
-	protected function storeImage( \Aimeos\MW\Media\Image\Iface $mediaFile, $type, $filename, $fsname )
-	{
-		$this->scaleImage( $mediaFile, $type );
-		$mimetype = $this->getMimeType( $mediaFile, $type );
-		$content = $mediaFile->save( null, $mimetype );
-
-		$fileext = $this->getFileExtension( $mimetype );
-		$dest = "${type}/${filename[0]}/${filename[1]}/${filename}${fileext}";
-
-		$this->context->getFilesystemManager()->get( $fsname )->write( $dest, $content );
-
-		return $dest;
+		$fs->write( $filepath, $content );
 	}
 }
