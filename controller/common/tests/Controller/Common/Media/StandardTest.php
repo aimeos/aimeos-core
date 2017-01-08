@@ -1,12 +1,14 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Aimeos (aimeos.org), 2016-2017
+ */
+
+
 namespace Aimeos\Controller\Common\Media;
 
 
-/**
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2016
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $context;
@@ -29,19 +31,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testAdd()
 	{
 		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Media\Standard' )
-			->setMethods( array( 'checkFileUpload', 'deleteFile', 'getTempFileName', 'storeImage' ) )
+			->setMethods( array( 'checkFileUpload', 'storeFile' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
-		$object->expects( $this->once() )->method( 'deleteFile' );
-		$object->expects( $this->exactly( 2 ) )->method( 'storeImage' );
-		$object->expects( $this->once() )->method( 'getTempFileName' )
-			->will( $this->returnValue( __DIR__ . '/testfiles/test.gif' ) );
+		$object->expects( $this->exactly( 2 ) )->method( 'storeFile' );
 
 		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
-		$file->expects( $this->once() )->method( 'moveTo' );
-
+		$file->expects( $this->once() )->method( 'getStream' )
+			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
 
 		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
 
@@ -52,19 +51,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testAddBinary()
 	{
 		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Media\Standard' )
-			->setMethods( array( 'checkFileUpload', 'deleteFile', 'getTempFileName', 'storeFile' ) )
+			->setMethods( array( 'checkFileUpload', 'storeFile' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
-		$object->expects( $this->once() )->method( 'deleteFile' );
 		$object->expects( $this->once() )->method( 'storeFile' );
-		$object->expects( $this->once() )->method( 'getTempFileName' )
-			->will( $this->returnValue( __DIR__ . '/testfiles/test.pdf' ) );
 
 		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
-		$file->expects( $this->once() )->method( 'moveTo' );
-
+		$file->expects( $this->once() )->method( 'getStream' )
+			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.pdf' ) ) );
 
 		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
 
@@ -92,13 +88,39 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$fs->expects( $this->exactly( 2 ) )->method( 'rm' );
 
+		$this->context->setFilesystemManager( $fsm );
 
 		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
 		$item->setPreview( 'test' );
 		$item->setUrl( 'test' );
 
-		$this->context->setFilesystemManager( $fsm );
 		$this->object->delete( $item );
+	}
+
+
+	public function testScale()
+	{
+		$this->context->getConfig()->set( 'controller/common/media/standard/files/scale', true );
+
+		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Media\Standard' )
+			->setMethods( array( 'getFileContent', 'storeFile' ) )
+			->setConstructorArgs( array( $this->context ) )
+			->getMock();
+
+		$object->expects( $this->once() )->method( 'getFileContent' )
+			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.png' ) ) );
+
+		$object->expects( $this->exactly( 2 ) )->method( 'storeFile' );
+
+
+		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'media' )->createItem();
+		$item->setPreview( 'preview.jpg' );
+		$item->setUrl( 'test.jpg' );
+
+		$object->scale( $item );
+
+		$this->assertNotEquals( 'test.jpg', $item->getUrl() );
+		$this->assertNotEquals( 'preview.jpg', $item->getPreview() );
 	}
 
 
@@ -180,38 +202,73 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetFileExtensionPDF()
+	public function testGetFileContent()
 	{
-		$result = $this->access( 'getFileExtension' )->invokeArgs( $this->object, array( 'application/pdf' ) );
-		$this->assertEquals( '.pdf', $result );
+		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp/';
+		if( !is_dir( $dest ) ) { mkdir( $dest, 0755, true ); }
+		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test.gif' );
+
+		$result = $this->access( 'getFileContent' )->invokeArgs( $this->object, array( 'test.gif', 'fs-media' ) );
+
+		$this->assertNotEquals( '', $result );
 	}
 
 
-	public function testGetFileExtensionGIF()
+	public function testGetFileContentHttp()
 	{
-		$result = $this->access( 'getFileExtension' )->invokeArgs( $this->object, array( 'image/gif' ) );
-		$this->assertEquals( '.gif', $result );
+		$url = 'https://aimeos.org/fileadmin/logos/favicon.png';
+		$result = $this->access( 'getFileContent' )->invokeArgs( $this->object, array( $url, 'fs-media' ) );
+
+		$this->assertNotEquals( '', $result );
 	}
 
 
-	public function testGetFileExtensionJPEG()
+	public function testGetFileContentException()
 	{
-		$result = $this->access( 'getFileExtension' )->invokeArgs( $this->object, array( 'image/jpeg' ) );
-		$this->assertEquals( '.jpg', $result );
+		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->access( 'getFileContent' )->invokeArgs( $this->object, array( '', 'fs-media' ) );
 	}
 
 
-	public function testGetFileExtensionPNG()
+	public function testGetFilePathOctet()
 	{
-		$result = $this->access( 'getFileExtension' )->invokeArgs( $this->object, array( 'image/png' ) );
-		$this->assertEquals( '.png', $result );
+		$result = $this->access( 'getFilePath' )->invokeArgs( $this->object, array( '', 'files', 'application/octet-stream' ) );
+		$this->assertFalse( strpos( $result, '.' ) );
 	}
 
 
-	public function testGetFileExtensionTIFF()
+	public function testGetFilePathPDF()
 	{
-		$result = $this->access( 'getFileExtension' )->invokeArgs( $this->object, array( 'image/tiff' ) );
-		$this->assertEquals( '.tif', $result );
+		$result = $this->access( 'getFilePath' )->invokeArgs( $this->object, array( '', 'files', 'application/pdf' ) );
+		$this->assertEquals( '.pdf', substr( $result, -4 ) );
+	}
+
+
+	public function testGetFilePathGIF()
+	{
+		$result = $this->access( 'getFilePath' )->invokeArgs( $this->object, array( '', 'files', 'image/gif' ) );
+		$this->assertEquals( '.gif', substr( $result, -4 ) );
+	}
+
+
+	public function testGetFilePathJPEG()
+	{
+		$result = $this->access( 'getFilePath' )->invokeArgs( $this->object, array( '', 'files', 'image/jpeg' ) );
+		$this->assertEquals( '.jpg', substr( $result, -4 ) );
+	}
+
+
+	public function testGetFilePathPNG()
+	{
+		$result = $this->access( 'getFilePath' )->invokeArgs( $this->object, array( '', 'files', 'image/png' ) );
+		$this->assertEquals( '.png', substr( $result, -4 ) );
+	}
+
+
+	public function testGetFilePathTIFF()
+	{
+		$result = $this->access( 'getFilePath' )->invokeArgs( $this->object, array( '', 'files', 'image/tiff' ) );
+		$this->assertEquals( '.tif', substr( $result, -4 ) );
 	}
 
 
@@ -276,62 +333,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testStoreFile()
 	{
-		$fsm = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Manager\Standard' )
-			->setMethods( array( 'get' ) )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$fs = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Standard' )
-			->setMethods( array( 'write' ) )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$fsm->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( $fs ) );
-
-		$fs->expects( $this->once() )->method( 'write' );
-
-		$this->context->setFilesystemManager( $fsm );
-
+		$content = file_get_contents( __DIR__ . '/testfiles/test.gif' );
 
 		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp/';
 		if( !is_dir( $dest ) ) { mkdir( $dest, 0755, true ); }
-		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test.gif' );
+		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test2.gif' );
 
-		$file = \Aimeos\MW\Media\Factory::get( $dest . 'test.gif' );
+		$this->access( 'storeFile' )->invokeArgs( $this->object, array( $content, 'fs-media', 'test.gif', 'test2.gif' ) );
 
-		$this->access( 'storeFile' )->invokeArgs( $this->object, array( $file, 'files', 'test', 'fs-media' ) );
-	}
+		$this->assertFalse( file_exists( $dest . 'test2.gif' ) );
+		$this->assertTrue( file_exists( $dest . 'test.gif' ) );
 
-
-	public function testStoreImage()
-	{
-		$fsm = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Manager\Standard' )
-			->setMethods( array( 'get' ) )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$fs = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Standard' )
-			->setMethods( array( 'write' ) )
-			->disableOriginalConstructor()
-			->getMock();
-
-		$fsm->expects( $this->once() )->method( 'get' )
-			->will( $this->returnValue( $fs ) );
-
-		$fs->expects( $this->once() )->method( 'write' );
-
-		$this->context->setFilesystemManager( $fsm );
-
-
-		$dest = dirname( dirname( dirname( __DIR__ ) ) ) . '/tmp/';
-		if( !is_dir( $dest ) ) { mkdir( $dest, 0755, true ); }
-		copy( __DIR__ . '/testfiles/test.gif', $dest . 'test.gif' );
-
-		$file = \Aimeos\MW\Media\Factory::get( $dest . 'test.gif' );
-		$result = $this->access( 'storeImage' )->invokeArgs( $this->object, array( $file, 'files', 'test', 'fs-media' ) );
-
-		$this->assertEquals( 'files/t/e/test.gif', $result );
+		unlink( $dest . 'test.gif' );
 	}
 
 

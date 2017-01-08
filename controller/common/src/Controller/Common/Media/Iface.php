@@ -55,4 +55,14 @@ interface Iface
 	 * @return void
 	 */
 	public function delete( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' );
+
+
+	/**
+	 * Rescales the files (original and preview) referenced by the media item
+	 *
+	 * @param \Aimeos\MShop\Media\Item\Iface $item Media item whose files should be scaled
+	 * @param string $fsname Name of the file system to rescale the files from
+	 * @return void
+	 */
+	public function scale( \Aimeos\MShop\Media\Item\Iface $item, $fsname = 'fs-media' );
 }

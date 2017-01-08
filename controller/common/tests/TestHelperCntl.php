@@ -87,6 +87,10 @@ class TestHelperCntl
 		$ctx->setLogger( $logger );
 
 
+		$fsm = new \Aimeos\MW\Filesystem\Manager\Standard( $conf );
+		$ctx->setFilesystemManager( $fsm );
+
+
 		$session = new \Aimeos\MW\Session\None();
 		$ctx->setSession( $session );
 
