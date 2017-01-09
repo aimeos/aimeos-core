@@ -43,16 +43,34 @@ class Factory
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to read from file "%1$s"', $file ) );
 		}
 
+
 		$finfo = new \finfo( FILEINFO_MIME_TYPE );
 		$mimetype = $finfo->buffer( $content );
-		$mimeparts = explode( '/', $mimetype );
+		$mime = explode( '/', $mimetype );
 
-		switch( $mimeparts[0] )
+		$type = ( $mime[0] === 'image' ? 'Image' : 'Application' );
+		$name = ( isset( $options[ $mime[0] ]['name'] ) ? ucfirst( $options[ $mime[0] ]['name'] ) : 'Standard' );
+
+
+		if( ctype_alnum( $name ) === false )
 		{
-			case 'image':
-				return new \Aimeos\MW\Media\Image\Standard( $content, $mimetype, $options );
+			$classname = is_string( $name ) ? '\\Aimeos\\MW\\Media\\' . $name : '<not a string>';
+			throw new \Aimeos\MW\Container\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		return new \Aimeos\MW\Media\Application\Standard( $content, $mimetype, $options );
+		$iface = '\\Aimeos\\MW\\Media\\Iface';
+		$classname = '\\Aimeos\\MW\\Media\\' . $type . '\\' . $name;
+
+		if( class_exists( $classname ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
+		}
+
+		$object = new $classname( $content, $mimetype, $options );
+
+		if( !( $object instanceof $iface ) ) {
+			throw new \Aimeos\MW\Media\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
+		}
+
+		return $object;
 	}
 }
