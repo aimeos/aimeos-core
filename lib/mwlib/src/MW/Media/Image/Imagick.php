@@ -65,7 +65,7 @@ class Imagick
 			$mimetype = $this->getMimeType();
 		}
 
-		$quality = 25;
+		$quality = 20;
 		$mime = explode( '/', $mimetype );
 
 		if( isset( $this->options['image'][ $mime[1] ]['quality'] ) ) {
@@ -75,6 +75,7 @@ class Imagick
 		try
 		{
 			$this->image->setImageFormat( $mime[1] );
+			$this->image->setImageCompression( $quality );
 
 			if( $filename === null ) {
 				return $this->image->getImageBlob();

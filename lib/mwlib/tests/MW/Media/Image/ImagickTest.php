@@ -11,6 +11,14 @@ namespace Aimeos\MW\Media\Image;
 
 class ImagickTest extends \PHPUnit_Framework_TestCase
 {
+	protected function setUp()
+	{
+		if( !class_exists( '\Imagick' ) ) {
+			$this->markTestSkipped( 'Imagick not available' );
+		}
+	}
+
+
 	public function testConstructGif()
 	{
 		$ds = DIRECTORY_SEPARATOR;
