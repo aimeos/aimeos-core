@@ -104,7 +104,7 @@ class Standard
 
 			case 'image/png':
 
-				$quality = 9;
+				$quality = 3;
 				if( isset( $this->options['image']['png']['quality'] ) ) {
 					$quality = (int) $this->options['image']['png']['quality'];
 				}
