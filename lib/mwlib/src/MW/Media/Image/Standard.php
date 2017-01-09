@@ -123,7 +123,7 @@ class Standard
 						throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagesavealpha)') );
 					}
 
-					if( @imagepng( $this->image, $filename, $quality, PNG_NO_FILTER ) === false ) {
+					if( @imagepng( $this->image, $filename, $quality ) === false ) {
 						throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 					}
 
