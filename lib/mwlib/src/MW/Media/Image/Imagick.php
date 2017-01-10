@@ -113,7 +113,7 @@ class Imagick
 		}
 
 		try {
-			$this->image->resizeImage( $width, $height, \Imagick::FILTER_POINT, 1 );
+			$this->image->resizeImage( $width, $height, \Imagick::FILTER_CUBIC, 0.8 );
 		} catch( \Exception $e ) {
 			throw new \Aimeos\MW\Media\Exception( $e->getMessage() );
 		}
