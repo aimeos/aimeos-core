@@ -237,7 +237,7 @@ class Standard implements \Aimeos\MW\View\Iface
 	 * @return string Absolute path to the template file
 	 * @throws \Aimeos\MW\Exception If the template couldn't be found
 	 */
-	public function resolve( $files )
+	protected function resolve( $files )
 	{
 		foreach( (array) $files as $file )
 		{
