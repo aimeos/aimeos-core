@@ -721,7 +721,7 @@ class Standard
 		{
 			foreach( $product->getRefItems( 'product', null, 'default' ) as $subId => $subItem )
 			{
-				$prodList[$subId] = $id;
+				$prodList[$subId][] = $id;
 				$numSubProducts++;
 			}
 
@@ -778,24 +778,33 @@ class Standard
 
 		do
 		{
+			$items = array();
 			$result = $manager->searchItems( $search, $domains );
 
 			if( !empty( $result ) )
 			{
 				foreach( $result as $refId => $refItem )
 				{
-					$refItem->setId( null );
-					$refItem->setId( $list[$refId] ); // insert data for parent product
 					$refItem->setLabel( '' ); // keep sorting by name intact
 
 					foreach( $refItem->getRefitems( 'text', 'name' ) as $textItem ) {
 						$textItem->setContent( '' ); // keep sorting by name intact
 					}
+
+					foreach( (array) $list[$refId] as $parentid )
+					{
+						$item = clone $refItem;
+
+						$item->setId( null );
+						$item->setId( $parentid ); // insert data for parent product
+
+						$items[] = $item;
+					}
 				}
 			}
 
 			foreach( $submanagers as $submanager ) {
-				$submanager->rebuildIndex( $result );
+				$submanager->rebuildIndex( $items );
 			}
 
 			$count = count( $result );
