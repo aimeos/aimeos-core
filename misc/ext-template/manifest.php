@@ -4,6 +4,12 @@ return array(
 	'name' => '<extname>',
 	'depends' => array(
 		'aimeos-core',
+		'ai-admin-extadm',
+		'ai-admin-jqadm',
+		'ai-admin-jsonadm',
+		'ai-client-html',
+		'ai-controller-frontend',
+		'ai-controller-jobs',
 	),
 	'include' => array(
 		'lib/custom/src',
