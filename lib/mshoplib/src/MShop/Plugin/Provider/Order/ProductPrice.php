@@ -202,7 +202,7 @@ class ProductPrice
 		}
 
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$price = $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
+		$price = clone $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
 
 		// add prices of product attributes to compute the end price for comparison
 		foreach( $orderProduct->getAttributes() as $orderAttribute )
