@@ -711,7 +711,6 @@ class Standard
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$search = $manager->createSearch( true );
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
-		$search->setSlice( 0, $size );
 		$defaultConditions = $search->getConditions();
 
 		$prodList = array();
@@ -733,7 +732,7 @@ class Standard
 				);
 				$search->setConditions( $search->combine( '&&', $expr ) );
 
-				$this->saveSubProductsChunk( $search, $domains, $prodList, $size );
+				$this->saveSubProductsChunk( $search, $domains, $prodList, count( $prodList ) );
 
 				$prodList = array();
 				$numSubProducts = 0;
@@ -748,7 +747,7 @@ class Standard
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
-			$this->saveSubProductsChunk( $search, $domains, $prodList, $size );
+			$this->saveSubProductsChunk( $search, $domains, $prodList, count( $prodList ) );
 		}
 	}
 
@@ -779,6 +778,7 @@ class Standard
 		do
 		{
 			$items = array();
+			$search->setSlice( $start, $size );
 			$result = $manager->searchItems( $search, $domains );
 
 			if( !empty( $result ) )
@@ -809,7 +809,6 @@ class Standard
 
 			$count = count( $result );
 			$start += $count;
-			$search->setSlice( $start, $size );
 		}
 		while( $count == $size );
 	}
