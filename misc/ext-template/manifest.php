@@ -8,7 +8,6 @@ return array(
 		'ai-admin-jqadm',
 		'ai-admin-jsonadm',
 		'ai-client-html',
-		'ai-controller-frontend',
 		'ai-controller-jobs',
 	),
 	'include' => array(
