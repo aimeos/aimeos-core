@@ -65,17 +65,17 @@ class Imagick
 			$mimetype = $this->getMimeType();
 		}
 
-		$quality = 20;
+		$quality = 90;
 		$mime = explode( '/', $mimetype );
 
-		if( isset( $this->options['image'][ $mime[1] ]['quality'] ) ) {
-			$quality = 100 - (int) $this->options['image'][ $mime[1] ]['quality'];
+		if( isset( $this->options['image']['quality'] ) ) {
+			$quality = max( min( (int) $this->options['image']['quality'], 100 ), 0 );
 		}
 
 		try
 		{
 			$this->image->setImageFormat( $mime[1] );
-			$this->image->setImageCompression( $quality );
+			$this->image->setImageCompression( 100 - $quality ); // inverse quality scheme
 
 			if( $filename === null ) {
 				return $this->image->getImageBlob();

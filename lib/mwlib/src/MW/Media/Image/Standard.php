@@ -85,6 +85,11 @@ class Standard
 			$mimetype = $this->getMimeType();
 		}
 
+		$quality = 90;
+		if( isset( $this->options['image']['quality'] ) ) {
+			$quality = max( min( (int) $this->options['image']['quality'], 100 ), 0 );
+		}
+
 		try
 		{
 			ob_start();
@@ -101,11 +106,6 @@ class Standard
 
 				case 'image/jpeg':
 
-					$quality = 75;
-					if( isset( $this->options['image']['jpeg']['quality'] ) ) {
-						$quality = (int) $this->options['image']['jpeg']['quality'];
-					}
-
 					if( @imagejpeg( $this->image, $filename, $quality ) === false ) {
 						throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 					}
@@ -114,16 +114,11 @@ class Standard
 
 				case 'image/png':
 
-					$quality = 3;
-					if( isset( $this->options['image']['png']['quality'] ) ) {
-						$quality = (int) $this->options['image']['png']['quality'];
-					}
-
 					if( imagesavealpha( $this->image, true ) === false ) {
 						throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagesavealpha)') );
 					}
 
-					if( @imagepng( $this->image, $filename, $quality ) === false ) {
+					if( @imagepng( $this->image, $filename, (int) 10 - $quality / 10 ) === false ) {
 						throw new \Aimeos\MW\Media\Exception( sprintf( 'Unable to save image to file "%1$s"', $filename ) );
 					}
 
