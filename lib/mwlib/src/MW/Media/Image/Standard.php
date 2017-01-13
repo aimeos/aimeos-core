@@ -159,35 +159,66 @@ class Standard
 			}
 		}
 
-		if( !isset( $this->origimage ) ) {
-			$this->origimage = $this->image;
-		} else {
-			imagedestroy( $this->image );
-		}
+		if( function_exists( 'imagescale' ) === true )
+		{
+			if( ( $result = imagescale( $this->image, $width, $height, IMG_BICUBIC ) ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( 'Unable to scale image' );
+			}
 
-		if( ( $this->image = imagecreatetruecolor( $width, $height ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
+			$this->image = $result;
 		}
-
-		if( imagealphablending( $this->image, false ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)') );
-		}
-
-		if( ( $transparent = imagecolorallocatealpha( $this->image, 255, 255, 255, 127 ) ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagecolorallocatealpha)') );
-		}
-
-		if( imagefilledrectangle( $this->image, 0, 0, $width, $height, $transparent ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagefilledrectangle)') );
-		}
-
-		if( imagecopyresampled( $this->image, $this->origimage, 0, 0, 0, 0, $width, $height, $this->info[0], $this->info[1] ) === false ) {
-			throw new \Aimeos\MW\Media\Exception( 'Unable to resize image' );
+		else
+		{
+			$this->image = $this->resample( $this->image, $this->info[0], $this->info[1], $width, $height );
 		}
 
 		$this->info[0] = $width;
 		$this->info[1] = $height;
 
 		return $this;
+	}
+
+
+	/**
+	 * Resamples the image to the given width and height.
+	 *
+	 * @param resource GDlib image object
+	 * @param integer $srcWidth Width of the existing image
+	 * @param integer $srcHeight Height of the existing image
+	 * @param integer $destWidth Width of the new image
+	 * @param integer $destHeight Height of the new image
+	 * @return resource New GDlib image object
+	 */
+	protected function resample( $image, $srcWidth, $srcHeight, $destWidth, $destHeight )
+	{
+		if( ( $newImage = imagecreatetruecolor( $destWidth, $destHeight ) ) === false ) {
+			throw new \Aimeos\MW\Media\Exception( 'Unable to create new image' );
+		}
+
+		try
+		{
+			if( imagealphablending( $newImage, false ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagealphablending)') );
+			}
+
+			if( ( $transparent = imagecolorallocatealpha( $newImage, 255, 255, 255, 127 ) ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagecolorallocatealpha)') );
+			}
+
+			if( imagefilledrectangle( $newImage, 0, 0, $destWidth, $destHeight, $transparent ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( sprintf( 'GD library failed (imagefilledrectangle)') );
+			}
+
+			if( imagecopyresampled( $newImage, $image, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight ) === false ) {
+				throw new \Aimeos\MW\Media\Exception( 'Unable to resize image' );
+			}
+		}
+		catch( \Exception $e )
+		{
+			imagedestroy( $newImage );
+			throw $e;
+		}
+
+		return $newImage;
 	}
 }
