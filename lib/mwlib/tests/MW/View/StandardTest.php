@@ -102,14 +102,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->assign( array( 'quantity' => 1 ) );
 		$output = $this->object->render( $filenames );
 
-		$expected = "Number of files:\n1 File";
+		$expected = "Number of files: 1 File";
 		$this->assertEquals( $expected, $output );
 
 
 		$this->object->assign( array( 'quantity' => 0 ) );
 		$output = $this->object->render( $filenames );
 
-		$expected = "Number of files:\n0 Files";
+		$expected = "Number of files: 0 Files";
 		$this->assertEquals( $expected, $output );
 	}
 
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->assign( array( 'quantity' => 1 ) );
 		$output = $this->object->render( array( 'notexisting', 'template.php' ) );
 
-		$expected = "Number of files:\n1 File";
+		$expected = "Number of files: 1 File";
 		$this->assertEquals( $expected, $output );
 
 
