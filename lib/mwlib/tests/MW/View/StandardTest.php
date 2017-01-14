@@ -18,7 +18,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->object = new \Aimeos\MW\View\Standard( array( __DIR__ => array( '_testfiles' . DIRECTORY_SEPARATOR . 'php' ) ) );
+		$engines = array( '.phtml' => new \Aimeos\MW\View\Engine\TestEngine() );
+
+		$this->object = new \Aimeos\MW\View\Standard( array( __DIR__ => array( '_testfiles' ) ), $engines );
 		$this->translate = new \Aimeos\MW\View\Helper\Translate\Standard( $this->object, new \Aimeos\MW\Translation\None( 'en_GB' ) );
 	}
 
@@ -94,7 +96,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->addHelper( 'translate', $this->translate );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$filenames = array( 'notexisting', __DIR__ . $ds . '_testfiles'. $ds . 'php' . $ds . 'template.php' );
+		$filenames = array( 'notexisting', __DIR__ . $ds . '_testfiles'. $ds . 'template.php' );
 
 
 		$this->object->assign( array( 'quantity' => 1 ) );
@@ -124,10 +126,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $expected, $output );
 
 
-		$this->object->assign( array( 'quantity' => 0 ) );
-		$output = $this->object->render( array( 'notexisting', 'template.php' ) );
+		$this->object->assign( array( 'quantity' => 2 ) );
+		$output = $this->object->render( array( 'notexisting', 'template.phtml' ) );
 
-		$expected = "Number of files:\n0 Files";
+		$expected = "Number of directories: 2";
 		$this->assertEquals( $expected, $output );
 	}
 }

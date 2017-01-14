@@ -35,6 +35,7 @@ class Standard implements \Aimeos\MW\View\Iface
 {
 	private $helper = array();
 	private $values = array();
+	private $engines;
 	private $paths;
 
 
@@ -42,9 +43,11 @@ class Standard implements \Aimeos\MW\View\Iface
 	 * Initializes the view object
 	 *
 	 * @param array $paths Associative list of base paths as keys and list of relative paths as value
+	 * @param array $engines Associative list of file extensions as keys and \Aimeos\MW\View\Engine\Iface as value
 	 */
-	public function __construct( array $paths = array() )
+	public function __construct( array $paths = array(), array $engines = array() )
 	{
+		$this->engines = $engines;
 		$this->paths = $paths;
 	}
 
@@ -214,11 +217,20 @@ class Standard implements \Aimeos\MW\View\Iface
 	 */
 	public function render( $filename )
 	{
+		$filepath = $this->resolve( $filename );
+
+		foreach( $this->engines as $fileext => $engine )
+		{
+			if( substr_compare( $filepath, $fileext, -strlen( $fileext ) ) ===0 ) {
+				return $engine->render( $filepath, $this->values );
+			}
+		}
+
 		try
 		{
 			ob_start();
 
-			$this->includeFile( $this->resolve( $filename ) );
+			$this->includeFile( $filepath );
 
 			return ob_get_clean();
 		}
@@ -227,6 +239,16 @@ class Standard implements \Aimeos\MW\View\Iface
 			ob_end_clean();
 			throw $e;
 		}
+	}
+
+
+	/**
+	 * Includes the template file and processes the PHP instructions.
+	 * The filename is passed as first argument but without variable name to prevent messing the variable scope.
+	 */
+	protected function includeFile()
+	{
+		include func_get_arg( 0 );
 	}
 
 
@@ -264,15 +286,5 @@ class Standard implements \Aimeos\MW\View\Iface
 		}
 
 		throw new \Aimeos\MW\View\Exception( sprintf( 'Template "%1$s" not available', $file ) );
-	}
-
-
-	/**
-	 * Includes the template file and processes the PHP instructions.
-	 * The filename is passed as first argument but without variable name to prevent messing the variable scope.
-	 */
-	protected function includeFile()
-	{
-		include func_get_arg( 0 );
 	}
 }
