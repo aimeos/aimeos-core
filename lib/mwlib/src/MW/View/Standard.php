@@ -222,7 +222,7 @@ class Standard implements \Aimeos\MW\View\Iface
 		foreach( $this->engines as $fileext => $engine )
 		{
 			if( substr_compare( $filepath, $fileext, -strlen( $fileext ) ) ===0 ) {
-				return $engine->render( $filepath, $this->values );
+				return $engine->render( $this, $filepath, $this->values );
 			}
 		}
 
