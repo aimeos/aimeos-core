@@ -22,7 +22,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddLocaleLangCurData' );
+		return array( 'MShopAddLocaleLangCurData', 'TablesCreateMAdmin' );
 	}
 
 
