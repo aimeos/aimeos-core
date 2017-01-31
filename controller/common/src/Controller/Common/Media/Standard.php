@@ -484,7 +484,7 @@ class Standard
 	{
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
-		if( $oldpath !== $filepath && $fs->has( $oldpath ) ) {
+		if( $oldpath !== '' && $oldpath !== $filepath && $fs->has( $oldpath ) ) {
 			$fs->rm( $oldpath );
 		}
 
