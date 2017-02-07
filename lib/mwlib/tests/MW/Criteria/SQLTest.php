@@ -3,27 +3,18 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
 namespace Aimeos\MW\Criteria;
 
 
-/**
- * Test class for \Aimeos\MW\Criteria\SQL.
- */
 class SQLTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
@@ -39,12 +30,6 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -138,18 +123,6 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL);
 		$this->object->setConditions( $this->object->compare( '==', 'column', 1 ) );
 		$this->assertEquals( "column = 1", $this->object->getConditionString( $types ) );
-	}
-
-
-	public function testGetConditionStringInvalidOperatorForNull()
-	{
-		// test exception in _createTerm:  'null value not allowed for operator'
-		$types = array( 'str_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-
-		$this->object->setConditions( $this->object->compare( '~=', 'str_column', null ) );
-
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
-		$this->object->getConditionString( $types );
 	}
 
 

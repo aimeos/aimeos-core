@@ -131,31 +131,6 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 
 	public function testToStringExcept2()
 	{
-		$types = array(
-			'listitem' => 'string',
-			'stringvar' => 'string',
-			'floatvar' => 'float',
-			'intvar' => 'int',
-			'boolvar' => 'bool',
-			'undefined' => 'int',
-		);
-
-		$translations = array(
-			'listitem' => '$listitem',
-			'stringvar' => '$stringvar',
-			'floatvar' => '$floatvar',
-			'intvar' => '$intvar',
-			'boolvar' => '$boolvar',
-			'undefined' => '$undefined',
-		);
-
-		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>=', 'undefined', null );
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
-		$expr->toString( $types, $translations );
-	}
-
-	public function testToStringExcept3()
-	{
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		new \Aimeos\MW\Criteria\Expression\Compare\PHP('=', 'undefined', null);
 	}
