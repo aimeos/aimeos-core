@@ -97,7 +97,7 @@ abstract class Base
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
-		if( $this->value === null ) {
+		if( $this->value === null && ( $this->operator === '==' || $this->operator === '!=' ) ) {
 			return $this->createNullTerm( $transname );
 		}
 
