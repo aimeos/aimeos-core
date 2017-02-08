@@ -34,7 +34,7 @@ abstract class Base extends \Aimeos\MW\View\Helper\Base
 		{
 			if( is_array( $value ) ) {
 				$params[$key] = $this->sanitize( $value );
-			} elseif( $all || in_array( $key, array( 'f_name', 'd_name' ) ) ) {
+			} elseif( $all || in_array( (string) $key, array( 'f_name', 'd_name' ) ) ) {
 				$params[$key] = trim( preg_replace( $regex, '_', $value ), '_' );
 			}
 		}
