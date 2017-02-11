@@ -88,6 +88,42 @@ class PayPalExpress
 			'default'=> 'Sale',
 			'required'=> false,
 		),
+		'paypalexpress.LandingPage' => array(
+			'code' => 'paypalexpress.LandingPage',
+			'internalcode'=> 'paypalexpress.LandingPage',
+			'label'=> 'Landing page',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> 'Login',
+			'required'=> false,
+		),
+		'paypalexpress.FundingSource' => array(
+			'code' => 'paypalexpress.FundingSource',
+			'internalcode'=> 'paypalexpress.FundingSource',
+			'label'=> 'Funding source',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> 'CreditCard',
+			'required'=> false,
+		),
+		'paypalexpress.AddrOverride' => array(
+			'code' => 'paypalexpress.AddrOverride',
+			'internalcode'=> 'paypalexpress.AddrOverride',
+			'label'=> 'Customer can change address',
+			'type'=> 'integer',
+			'internaltype'=> 'integer',
+			'default'=> 0,
+			'required'=> false,
+		),
+		'paypalexpress.NoShipping' => array(
+			'code' => 'paypalexpress.NoShipping',
+			'internalcode'=> 'paypalexpress.NoShipping',
+			'label'=> 'Don\'t display shipping address',
+			'type'=> 'integer',
+			'internaltype'=> 'integer',
+			'default'=> 1,
+			'required'=> false,
+		),
 		'paypalexpress.url-validate' => array(
 			'code' => 'paypalexpress.url-validate',
 			'internalcode'=> 'paypalexpress.url-validate',
@@ -184,6 +220,8 @@ class PayPalExpress
 		$values['PAYMENTREQUEST_0_INVNUM'] = $orderid;
 		$values['RETURNURL'] = $this->getConfigValue( array( 'payment.url-success' ) );
 		$values['CANCELURL'] = $this->getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
+		$values['USERSELECTEDFUNDINGSOURCE'] = $this->getConfigValue( array( 'paypalexpress.FundingSource' ), 'CreditCard' );
+		$values['LANDINGPAGE'] = $this->getConfigValue( array( 'paypalexpress.LandingPage' ), 'Login' );
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
@@ -606,10 +644,11 @@ class PayPalExpress
 
 		try
 		{
-			$orderAddressDelivery = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+			$orderAddressDelivery = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-			/* setting up the shipping address details (ReviewOrder) */
-			$values['ADDROVERRIDE'] = 1;
+			/* setting up the address details */
+			$values['NOSHIPPING'] = $this->getConfigValue( array( 'paypalexpress.NoShipping' ), 1 );
+			$values['ADDROVERRIDE'] = $this->getConfigValue( array( 'paypalexpress.AddrOverride' ), 0 );
 			$values['PAYMENTREQUEST_0_SHIPTONAME'] = $orderAddressDelivery->getFirstName() . ' ' . $orderAddressDelivery->getLastName();
 			$values['PAYMENTREQUEST_0_SHIPTOSTREET'] = $orderAddressDelivery->getAddress1() . ' ' . $orderAddressDelivery->getAddress2() . ' ' . $orderAddressDelivery->getAddress3();
 			$values['PAYMENTREQUEST_0_SHIPTOCITY'] = $orderAddressDelivery->getCity();
@@ -617,7 +656,7 @@ class PayPalExpress
 			$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $orderAddressDelivery->getCountryId();
 			$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $orderAddressDelivery->getPostal();
 		}
-		catch( \Exception $e ) {; } // If no address is available
+		catch( \Exception $e ) { ; } // If no address is available
 
 
 		$lastPos = 0;
@@ -686,7 +725,7 @@ class PayPalExpress
 	protected function getAuthParameter()
 	{
 		return array(
-			'VERSION' => '87.0',
+			'VERSION' => '204.0',
 			'SIGNATURE' => $this->getConfigValue( array( 'paypalexpress.ApiSignature' ) ),
 			'USER' => $this->getConfigValue( array( 'paypalexpress.ApiUsername' ) ),
 			'PWD' => $this->getConfigValue( array( 'paypalexpress.ApiPassword' ) ),
