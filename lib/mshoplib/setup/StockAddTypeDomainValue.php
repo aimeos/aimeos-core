@@ -53,7 +53,7 @@ class StockAddTypeDomainValue extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Add stock type domain values', 0 ); $this->status( '' );
+		$this->msg( 'Add stock type domain values', 0 );
 		$schema = $this->getSchema( 'db-product' );
 
 		if( $schema->tableExists( 'mshop_stock_type' ) )
