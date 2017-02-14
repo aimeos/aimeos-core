@@ -692,8 +692,8 @@ class PayPalExpress
 			$deliveryPrice->addItem( $price );
 
 			$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $this->getAmount( $deliveryPrice ), 2, '.', '' );
-			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getName();
-			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getCode();
+			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getCode();
+			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getName();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 		}
 		catch( \Exception $e ) { ; } // If no delivery service is available
