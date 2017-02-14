@@ -511,7 +511,7 @@ abstract class Base
 	{
 		if( $langid === $this->getLanguageId() ) { return $this; }
 
-		$this->values[$this->prefix . 'languageid'] = strtolower( (string) $langid );
+		$this->values[$this->prefix . 'languageid'] = (string) $langid;
 		$this->setModified();
 
 		return $this;

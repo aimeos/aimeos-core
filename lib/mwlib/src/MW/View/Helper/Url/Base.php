@@ -23,18 +23,18 @@ abstract class Base extends \Aimeos\MW\View\Helper\Base
 	 * Replaces dangerous characteris in the parameters
 	 *
 	 * @param array $params Associative list of key/value pairs
-	 * @param boolean $all Replace characters in all parameters or in names only
+	 * @param array $names Replace characters in the parameters of the given names, empty for all
 	 * @return array Associative list with encoded values
 	 */
-	protected function sanitize( array $params, $all = false )
+	protected function sanitize( array $params, $names = array( 'f_name', 'd_name' ) )
 	{
 		$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\_|\/)+/';
 
 		foreach( $params as $key => $value )
 		{
 			if( is_array( $value ) ) {
-				$params[$key] = $this->sanitize( $value );
-			} elseif( $all || in_array( $key, array( 'f_name', 'd_name' ) ) ) {
+				$params[$key] = $this->sanitize( $value, $names );
+			} elseif( empty( $names ) || in_array( (string) $key, $names ) ) {
 				$params[$key] = trim( preg_replace( $regex, '_', $value ), '_' );
 			}
 		}
