@@ -434,14 +434,10 @@ class Standard
 			$stock = $stockItem->getStockLevel();
 
 			if( $stock === null ) {
-				$sum = null;
+				return;
 			} elseif( $sum !== null && $stock > 0 ) {
 				$sum += $stock;
 			}
-		}
-
-		if( $sum === null ) {
-			return;
 		}
 
 		if( $selStockItem === null )
