@@ -427,15 +427,17 @@ class Standard
 
 		foreach( $this->getStockItems( $prodCodes, $stocktype ) as $stockItem )
 		{
-			if( $stockItem->getProductCode() == $prodId ) {
+			if( $stockItem->getProductCode() === $productItem->getCode() )
+			{
 				$selStockItem = $stockItem;
+				continue;
 			}
 
-			$stock = $stockItem->getStockLevel();
-
-			if( $stock === null ) {
+			if( ( $stock = $stockItem->getStockLevel() ) === null ) {
 				$sum = null;
-			} elseif( $sum !== null && $stock > 0 ) {
+			}
+
+			if( $sum !== null ) {
 				$sum += $stock;
 			}
 		}
