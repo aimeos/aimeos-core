@@ -440,6 +440,10 @@ class Standard
 			}
 		}
 
+		if( $sum === null ) {
+			return;
+		}
+
 		if( $selStockItem === null )
 		{
 			$typeManager = \Aimeos\MShop\Factory::createManager( $this->context, 'stock/type' );
