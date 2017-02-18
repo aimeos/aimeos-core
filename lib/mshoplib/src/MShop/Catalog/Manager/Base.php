@@ -67,9 +67,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	 * @param array $itemMap Associative list of catalog ID / tree node pairs
 	 * @param array $domains List of domains (e.g. text, media) whose items should be attached to the catalog items
 	 * @param string $prefix Domain prefix
+	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @return array List of items implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	protected function buildItems( array $itemMap, array $domains, $prefix )
+	protected function buildItems( array $itemMap, array $domains, $prefix, array $local = array() )
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = array();
 

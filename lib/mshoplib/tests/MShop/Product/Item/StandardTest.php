@@ -35,7 +35,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'product.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Product\Item\Standard( $this->values );
+		$propItems = array(
+			2 => new \Aimeos\MShop\Product\Item\Property\Standard( array(
+				'product.property.id' => 2,
+				'product.property.parentid' => 1,
+				'product.property.type' => 'proptest',
+			) ),
+			3 => new \Aimeos\MShop\Product\Item\Property\Standard( array(
+				'product.property.id' => 3,
+				'product.property.parentid' => 1,
+				'product.property.type' => 'proptype',
+			) ),
+		);
+
+		$this->object = new \Aimeos\MShop\Product\Item\Standard( $this->values, array(), array(), $propItems );
 	}
 
 
@@ -73,6 +86,30 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
+	}
+
+
+	public function testGetPropertyItems()
+	{
+		$propItems = $this->object->getPropertyItems();
+
+		$this->assertEquals( 2, count( $propItems ) );
+
+		foreach( $propItems as $propItem ) {
+			$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $propItem );
+		}
+	}
+
+
+	public function testGetPropertyItemsType()
+	{
+		$propItems = $this->object->getPropertyItems( 'proptest' );
+
+		$this->assertEquals( 1, count( $propItems ) );
+
+		foreach( $propItems as $propItem ) {
+			$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $propItem );
+		}
 	}
 
 

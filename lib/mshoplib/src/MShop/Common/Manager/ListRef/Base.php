@@ -97,9 +97,10 @@ abstract class Base
 	 * @param array $map Associative list of IDs as keys and the associative array of values
 	 * @param array $domains List of domains to fetch list items and referenced items for
 	 * @param string $prefix Domain prefix
+	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	protected function buildItems( array $map, array $domains, $prefix )
+	protected function buildItems( array $map, array $domains, $prefix, array $local = array() )
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = array();
 
@@ -131,7 +132,12 @@ abstract class Base
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[$id] = $this->createItemBase( $values, $listItems, $refItems );
+			$localItems = array();
+			if( isset( $local[$id] ) ) {
+				$localItems = $local[$id];
+			}
+
+			$items[$id] = $this->createItemBase( $values, $listItems, $refItems, $localItems );
 		}
 
 		return $items;

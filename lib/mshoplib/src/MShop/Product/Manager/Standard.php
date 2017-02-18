@@ -596,7 +596,13 @@ class Standard
 			}
 		}
 
-		return $this->buildItems( $map, $ref, 'product' );
+		$propItems = array();
+		if( in_array( 'product/property', $ref, true ) ) {
+			$propItems = $this->getPropertyItems( array_keys( $map ) );
+		}
+
+
+		return $this->buildItems( $map, $ref, 'product', $propItems );
 	}
 
 
@@ -701,10 +707,36 @@ class Standard
 	 * @param array $values Associative list of key/value pairs
 	 * @param array $listitems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface
+	 * @param array $propertyItems List of items implementing \Aimeos\MShop\Product\Item\Property\Iface
 	 * @return \Aimeos\MShop\Product\Item\Iface New product item
 	 */
-	protected function createItemBase( array $values = array(), array $listitems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = array(), array $listitems = array(),
+		array $refItems = array(), array $propertyItems = array() )
 	{
-		return new \Aimeos\MShop\Product\Item\Standard( $values, $listitems, $refItems );
+		return new \Aimeos\MShop\Product\Item\Standard( $values, $listitems, $refItems, $propertyItems );
+	}
+
+
+	/**
+	 * Returns the property items for the given product IDs
+	 *
+	 * @param array $prodIds List of product IDs
+	 * @return array Associative list of product IDs / property IDs as keys and items implementing
+	 * 	\Aimeos\MShop\Product\Item\Property\Iface as values
+	 */
+	protected function getPropertyItems( array $prodIds )
+	{
+		$list = array();
+		$propManager = $this->getSubManager( 'property' );
+
+		$propSearch = $propManager->createSearch();
+		$propSearch->setConditions( $propSearch->compare( '==', 'product.property.parentid', $prodIds ) );
+		$propSearch->setSlice( 0, 0x7fffffff );
+
+		foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
+			$list[$propItem->getParentId()][$id] = $propItem;
+		}
+
+		return $list;
 	}
 }

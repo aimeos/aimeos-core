@@ -23,6 +23,13 @@ interface Iface
 		\Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
+	 * Returns the property items of the product
+	 *
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
+	 */
+	public function getPropertyItems( $type = null );
+
+	/**
 	 * Returns the status of the product item.
 	 *
 	 * @return integer Status of the product

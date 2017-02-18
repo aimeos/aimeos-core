@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetItem()
 	{
-		$domains = array( 'text', 'product', 'price', 'media', 'attribute' );
+		$domains = array( 'text', 'product', 'price', 'media', 'attribute', 'product/property' );
 
 		$search = $this->object->createSearch();
 		$conditions = array(
@@ -97,6 +97,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( $product, $this->object->getItem( $product->getId(), $domains ) );
 		$this->assertEquals( 6, count( $product->getRefItems( 'text' ) ) );
+		$this->assertEquals( 4, count( $product->getPropertyItems() ) );
 		$this->assertNotEquals( '', $product->getTypeName() );
 	}
 

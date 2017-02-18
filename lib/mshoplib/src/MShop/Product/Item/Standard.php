@@ -23,6 +23,7 @@ class Standard
 	implements \Aimeos\MShop\Product\Item\Iface
 {
 	private $values;
+	private $propItems;
 
 
 	/**
@@ -31,12 +32,40 @@ class Standard
 	 * @param array $values Parameter for initializing the basic properties
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Product\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
+	public function __construct( array $values = array(), array $listItems = array(),
+		array $refItems = array(), array $propItems = array() )
 	{
 		parent::__construct( 'product.', $values, $listItems, $refItems );
 
+		$this->propItems = $propItems;
 		$this->values = $values;
+	}
+
+
+	/**
+	 * Returns the property items of the product
+	 *
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
+	 */
+	public function getPropertyItems( $type = null )
+	{
+		if( $type !== null )
+		{
+			$list = array();
+
+			foreach( $this->propItems as $propId => $propItem )
+			{
+				if( $propItem->getType() === $type ) {
+					$list[$propId] = $propItem;
+				}
+			}
+
+			return $list;
+		}
+
+		return $this->propItems;
 	}
 
 
