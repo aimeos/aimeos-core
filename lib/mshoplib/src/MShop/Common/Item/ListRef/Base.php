@@ -20,9 +20,9 @@ namespace Aimeos\MShop\Common\Item\ListRef;
  */
 abstract class Base extends \Aimeos\MShop\Common\Item\Base
 {
-	private $listItems;
 	private $refItems;
-	private $sortedLists = array();
+	private $listItems;
+	private $sortedLists;
 
 
 	/**
@@ -56,34 +56,20 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getListItems( $domain = null, $listtype = null, $type = null )
 	{
+		$list = array();
+		$this->sortListItems();
+
 		if( $domain === null )
 		{
-			$listItems = array();
-
 			foreach( $this->listItems as $domain => $items ) {
-				$listItems += $items;
+				$list += $items;
 			}
 
-			return $listItems;
+			return $list;
 		}
 
 		if( !isset( $this->listItems[$domain] ) ) {
 			return array();
-		}
-
-		if( !isset( $this->sortedLists[$domain] ) )
-		{
-			foreach( $this->listItems[$domain] as $listItem )
-			{
-				$refId = $listItem->getRefId();
-
-				if( isset( $this->refItems[$domain][$refId] ) ) {
-					$listItem->setRefItem( $this->refItems[$domain][$refId] );
-				}
-			}
-
-			uasort( $this->listItems[$domain], array( $this, 'comparePosition' ) );
-			$this->sortedLists[$domain] = true;
 		}
 
 		$list = $this->listItems[$domain];
@@ -226,5 +212,32 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		}
 
 		return ( $a->position < $b->position ) ? -1 : 1;
+	}
+
+
+	/**
+	 * Sorts the list items according to their position value and attaches the referenced item
+	 */
+	protected function sortListItems()
+	{
+		if( isset( $this->sortedLists ) ) {
+			return;
+		}
+
+		foreach( $this->listItems as $domain => $list )
+		{
+			foreach( $list as $listItem )
+			{
+				$refId = $listItem->getRefId();
+
+				if( isset( $this->refItems[$domain][$refId] ) ) {
+					$listItem->setRefItem( $this->refItems[$domain][$refId] );
+				}
+			}
+
+			uasort( $this->listItems[$domain], array( $this, 'comparePosition' ) );
+		}
+
+		$this->sortedLists = true;
 	}
 }
