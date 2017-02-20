@@ -665,7 +665,9 @@ class PayPalExpress
 		{
 			$price = $product->getPrice();
 			$lastPos = $product->getPosition() - 1;
-			$deliveryPrices = $this->addPrice( $deliveryPrices, (clone $price)->setValue( '0.00' ) );
+
+			$deliveryPrice = clone $price;
+			$deliveryPrices = $this->addPrice( $deliveryPrices, $deliveryPrice->setValue( '0.00' ) );
 
 			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
