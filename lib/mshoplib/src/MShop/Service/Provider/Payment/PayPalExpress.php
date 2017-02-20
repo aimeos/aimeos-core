@@ -639,7 +639,8 @@ class PayPalExpress
 	 */
 	protected function getOrderDetails( \Aimeos\MShop\Order\Item\Base\Iface $orderBase )
 	{
-		$deliveryPrice = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem();
+		$deliveryCosts = 0;
+		$deliveryPrices = array();
 		$values = $this->getAuthParameter();
 
 		try
@@ -664,7 +665,7 @@ class PayPalExpress
 		{
 			$price = $product->getPrice();
 			$lastPos = $product->getPosition() - 1;
-			$deliveryPrice->setCosts( $deliveryPrice->getCosts() + $price->getCosts() * $product->getQuantity() );
+			$deliveryPrices = $this->addPrice( $deliveryPrices, (clone $price)->setValue( '0.00' ) );
 
 			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
@@ -687,11 +688,13 @@ class PayPalExpress
 		{
 			$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
 			$price = $orderServiceDeliveryItem->getPrice();
+			$deliveryPrices = $this->addPrice( $deliveryPrices, $price );
 
-			$deliveryPrice->setTaxRate( $price->getTaxRate() );
-			$deliveryPrice->addItem( $price );
+			foreach( $deliveryPrices as $priceItem ) {
+				$deliveryCosts += $this->getAmount( $priceItem );
+			}
 
-			$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $this->getAmount( $deliveryPrice ), 2, '.', '' );
+			$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $deliveryCosts, 2, '.', '' );
 			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getCode();
 			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getName();
 			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
@@ -701,7 +704,13 @@ class PayPalExpress
 
 		$price = $orderBase->getPrice();
 		$amount = $this->getAmount( $price );
-		$deliveryCosts = $this->getAmount( $deliveryPrice );
+
+		if( $deliveryCosts === 0 )
+		{
+			foreach( $deliveryPrices as $priceItem ) {
+				$deliveryCosts += $this->getAmount( $priceItem );
+			}
+		}
 
 		$values['MAXAMT'] = $amount + 0.01; // possible rounding error
 		$values['PAYMENTREQUEST_0_AMT'] = $amount;
@@ -743,5 +752,28 @@ class PayPalExpress
 	{
 		$basket = $this->getOrderBase( $baseid, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
 		return $basket->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
+	}
+
+
+	/**
+	 * Adds the costs to the price item with the corresponding tax rate
+	 *
+	 * @param \Aimeos\MShop\Price\Item\Iface[] $prices Associative list of tax rates as key and price items as value
+	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item that should be added
+	 * @return \Aimeos\MShop\Price\Item\Iface[] Updated list of price items
+	 */
+	protected function addPrice( array $prices, $price )
+	{
+		$taxrate = $price->getTaxRate();
+
+		if( !isset( $prices[$taxrate] ) )
+		{
+			$prices[$taxrate] = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem();
+			$prices[$taxrate]->setTaxRate( $taxrate );
+		}
+
+		$prices[$taxrate]->addItem( $price );
+
+		return $prices;
 	}
 }
