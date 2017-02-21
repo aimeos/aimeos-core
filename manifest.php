@@ -20,7 +20,6 @@ return array(
 	),
 	'config' => array(
 		'lib/mshoplib/config',
-		'client/html/config',
 		'config',
 	),
 	'i18n' => array(
