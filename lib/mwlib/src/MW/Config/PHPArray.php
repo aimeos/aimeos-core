@@ -154,7 +154,7 @@ class PHPArray
 					$config[$key] = array();
 				}
 
-				$config[$key] = $this->merge( $config[$key], $this->includeFile( $newPath . '.php' ) );
+				$config[$key] = array_replace_recursive( $config[$key], $this->includeFile( $newPath . '.php' ) );
 			}
 		}
 
@@ -167,6 +167,7 @@ class PHPArray
 	 *
 	 * @param array $left Array to be merged into
 	 * @param array $right Array to merge in
+	 * @deprecated Use array_replace_recursive() instead
 	 */
 	protected function merge( array $left, array $right )
 	{
