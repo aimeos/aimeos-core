@@ -3,42 +3,25 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 namespace Aimeos\MShop\Text\Manager;
 
 
-/**
- * Test class for \Aimeos\MShop\Text\Manager\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * @var \Aimeos\MShop\Text\Manager\Standard
-	 */
 	private $object;
-
-	/**
-	 * @var string
-	 * @access protected
-	 */
 	private $editor = '';
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
+
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->object = new \Aimeos\MShop\Text\Manager\Standard( \TestHelperMShop::getContext() );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
+
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -162,7 +145,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '~=', 'text.content', '%Monetary%' ),
+			$search->compare( '~=', 'text.content', 'Monetary' ),
 			$search->compare( '==', 'text.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -170,7 +153,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search );
 
 		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No text item including "%1$s" found', '%Monetary%' ) );
+			throw new \RuntimeException( sprintf( 'No text item including "%1$s" found', 'Monetary' ) );
 		}
 
 
