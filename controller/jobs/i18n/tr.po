@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015-2016
+# Metal <meteoramic@yahoo.com>, 2015-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-03 12:08+0100\n"
-"PO-Revision-Date: 2017-01-03 11:21+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"PO-Revision-Date: 2017-01-11 01:35+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -117,7 +117,7 @@ msgid ""
 msgstr "Eski günlük girişlerini veri tabanından kaldırır ve arşivler (isteğe bağlı)"
 
 msgid "Removes unfinished orders"
-msgstr "bitmemiş siparişleri kaldırır"
+msgstr "Tamamlanmamış siparişleri kaldırır"
 
 msgid "Removes unpaid orders"
 msgstr "Ödenmemiş siparişleri kaldırır"
@@ -127,7 +127,7 @@ msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr "Gerekli haritalama anahtarı \"%1$s\" eksik veya hiçbir dizi içermiyor"
 
 msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr "ERP sistemine veya lojistik ortağa ödenen siparişleri gönderir"
+msgstr "Ödemesi yapılmış siparişleri ERP sistemine veya lojistik ortağa gönderir"
 
 #, php-format
 msgid "Started product import from \"%1$s\" (%2$s)"
