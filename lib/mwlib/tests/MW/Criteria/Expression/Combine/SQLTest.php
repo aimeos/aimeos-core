@@ -72,7 +72,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '||', $objects );
 		$test = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '!', array( $object ) );
 
-		$expected = " NOT ( ( list IN ('a','b','c') AND string LIKE '%value%' ESCAPE '\\\\' ) OR ( float < 0.1 AND int > 10 ) )";
+		$expected = " NOT ( ( list IN ('a','b','c') AND string LIKE '%value%' ESCAPE '_' ) OR ( float < 0.1 AND int > 10 ) )";
 		$this->assertEquals( $expected, $test->toString( $types ) );
 
 		$obj = new \Aimeos\MW\Criteria\Expression\Combine\SQL('&&', array());

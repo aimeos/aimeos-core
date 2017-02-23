@@ -67,7 +67,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 		$term = $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
 
 		if( in_array( $this->getOperator(), array( '=~', '~=' ), true ) ) {
-			$term .= ' ESCAPE \'\\\\\'';
+			$term .= ' ESCAPE \'_\'';
 		}
 
 		return $term;
@@ -167,7 +167,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
 				if( in_array( $operator, array( '~=', '=~' ), true ) )
 				{
-					$value = str_replace( array( '%', '_', '[' ), array( '\\%', '\\_', '\\[' ), $this->conn->escape( $value ) );
+					$value = str_replace( array( '%', '_', '[' ), array( '_%', '__', '_[' ), $this->conn->escape( $value ) );
 					$value = '\'%' . $value . '%\''; break;
 				}
 			default:

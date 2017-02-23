@@ -101,7 +101,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '~=', 'str_column', array( 't1', 't2', 't3' ) ) );
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 1 AND (str_col LIKE '%t1%' ESCAPE '\\\\' OR str_col LIKE '%t2%' ESCAPE '\\\\' OR str_col LIKE '%t3%' ESCAPE '\\\\') )", $this->object->getConditionString( $types, $translations ) );
+		$this->assertEquals( "( int_col = 1 AND (str_col LIKE '%t1%' ESCAPE '_' OR str_col LIKE '%t2%' ESCAPE '_' OR str_col LIKE '%t3%' ESCAPE '_') )", $this->object->getConditionString( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '!=', 'int_column', 2 ) );
 		$this->object->setConditions( $this->object->combine( '!', array( $this->object->combine( '&&', $expr ) ) ) );

@@ -92,7 +92,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( "t.list NOT IN ('a','b','c')", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'string', 'value' );
-		$this->assertEquals( "t.string LIKE '%value%' ESCAPE '\\\\'", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.string LIKE '%value%' ESCAPE '_'", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '<', 'float', 0.1 );
 		$this->assertEquals( "t.float < 0.1", $expr->toString( $types, $translations ) );
@@ -131,7 +131,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( "count('name',10,0.1) = 3", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'strconcat("hello","world")', 'low' );
-		$this->assertEquals( "concat('hello','world') LIKE '%low%' ESCAPE '\\\\'", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "concat('hello','world') LIKE '%low%' ESCAPE '_'", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter(["a","b","c","\'d"])', 4 );
 		$this->assertRegexp( "/^count\(name IN \('a','b','c','('|\\\\)'d'\)\) = 4$/", $expr->toString( $types, $translations ) );
