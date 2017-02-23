@@ -205,13 +205,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$response = null; $header = array();
 		$this->object->updateSync( array(), 'body', $response, $header );
 	}
-
-
-	public function testCallInvalid()
-	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
-		$this->object->invalid();
-	}
 }
 
 
