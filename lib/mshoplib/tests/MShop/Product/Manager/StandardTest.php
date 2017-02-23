@@ -250,21 +250,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			throw new \RuntimeException( 'No list item found' );
 		}
 
-		$listTypeManager = $listManager->getSubManager( 'type' );
-
-		$search = $listTypeManager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'product.lists.type.domain', 'product' ),
-			$search->compare( '==', 'product.lists.type.code', 'suggestion' ),
-			$search->compare( '==', 'product.lists.type.editor', $this->editor ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$results = $listTypeManager->searchItems( $search );
-		if( ( $listTypeItem = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No list type item found' );
-		}
-
 		$search = $this->object->createSearch();
 
 		$expr = array();
@@ -281,7 +266,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '>=', 'product.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
 
-		$param = array( 'product', $listTypeItem->getId(), array( $listItem->getRefId() ) );
+		$param = array( 'product', $listItem->getTypeId(), array( $listItem->getRefId() ) );
 		$expr[] = $search->compare( '>', $search->createFunction( 'product.contains', $param ), 0 );
 
 		$expr[] = $search->compare( '!=', 'product.type.id', null );
@@ -350,6 +335,30 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search, array( 'media' ) );
 
 		$this->assertEquals( 2, count( $result ) );
+	}
+
+
+	public function testSearchWildcards()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '=~', 'product.code', 'CN_' ) );
+		$result = $this->object->searchItems( $search );
+
+		$this->assertEquals( 0, count( $result ) );
+
+
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '=~', 'product.code', 'CN%' ) );
+		$result = $this->object->searchItems( $search );
+
+		$this->assertEquals( 0, count( $result ) );
+
+
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '=~', 'product.code', 'CN[C]' ) );
+		$result = $this->object->searchItems( $search );
+
+		$this->assertEquals( 0, count( $result ) );
 	}
 
 
