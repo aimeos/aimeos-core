@@ -40,6 +40,19 @@ abstract class Base
 
 
 	/**
+	 * Catch unknown methods
+	 *
+	 * @param string $name Name of the method
+	 * @param array $param List of method parameter
+	 * @throws \Aimeos\MShop\Common\Manager\Exception If method call failed
+	 */
+	public function __call( $name, array $param )
+	{
+		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
+	}
+
+
+	/**
 	 * Returns the price when using the provider.
 	 * Usually, this is the lowest price that is available in the service item but can also be a calculated based on
 	 * the basket content, e.g. 2% of the value as transaction cost.

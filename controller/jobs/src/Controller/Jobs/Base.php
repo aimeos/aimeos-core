@@ -38,6 +38,19 @@ abstract class Base
 
 
 	/**
+	 * Catch unknown methods
+	 *
+	 * @param string $name Name of the method
+	 * @param array $param List of method parameter
+	 * @throws \Aimeos\Controller\Jobs\Exception If method call failed
+	 */
+	public function __call( $name, array $param )
+	{
+		throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
+	}
+
+
+	/**
 	 * Returns the context object.
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
