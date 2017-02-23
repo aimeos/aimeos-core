@@ -48,11 +48,7 @@ abstract class Base
 	 */
 	public function __call( $name, array $param )
 	{
-		if( ( $result = call_user_func_array( array( $this->manager, $name ), $param ) ) === false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Method "%1$s" for provider not available', $name ) );
-		}
-
-		return $result;
+		return call_user_func_array( array( $this->manager, $name ), $param );
 	}
 
 

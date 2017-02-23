@@ -38,20 +38,6 @@ abstract class Base
 
 
 	/**
-	 * Catches unknown methods
-	 *
-	 * @param string $name Name of the method
-	 * @param array $param List of method parameter
-	 * @return mixed Returns the value of the called method
-	 * @throws \Aimeos\Controller\Jobs\Exception If method call failed
-	 */
-	public function __call( $name, array $param )
-	{
-		return false;
-	}
-
-
-	/**
 	 * Returns the context object.
 	 *
 	 * @return \Aimeos\MShop\Context\Item\Iface Context object
