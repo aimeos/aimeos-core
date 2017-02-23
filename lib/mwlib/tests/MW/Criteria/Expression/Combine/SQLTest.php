@@ -1,23 +1,17 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2017
+ */
+
+
 namespace Aimeos\MW\Criteria\Expression\Combine;
 
 
-/**
- * Test class for \Aimeos\MW\Criteria\Expression\Combine\SQL.
- *
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
- */
 class SQLTest extends \PHPUnit_Framework_TestCase
 {
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
@@ -25,12 +19,6 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		}
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 	}
@@ -84,7 +72,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '||', $objects );
 		$test = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '!', array( $object ) );
 
-		$expected = " NOT ( ( list IN ('a','b','c') AND string LIKE '%value%' ) OR ( float < 0.1 AND int > 10 ) )";
+		$expected = " NOT ( ( list IN ('a','b','c') AND string LIKE '%value%' ESCAPE '\\\\' ) OR ( float < 0.1 AND int > 10 ) )";
 		$this->assertEquals( $expected, $test->toString( $types ) );
 
 		$obj = new \Aimeos\MW\Criteria\Expression\Combine\SQL('&&', array());

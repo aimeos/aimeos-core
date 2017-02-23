@@ -1,26 +1,20 @@
 <?php
 
+/**
+ * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @copyright Metaways Infosystems GmbH, 2011
+ * @copyright Aimeos (aimeos.org), 2015-2017
+ */
+
+
 namespace Aimeos\MW\Criteria\Expression\Compare;
 
 
-/**
- * Test class for \Aimeos\MW\Criteria\Expression\Compare\SQL.
- *
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
- */
 class SQLTest extends \PHPUnit_Framework_TestCase
 {
 	private $conn = null;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
@@ -32,12 +26,6 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$this->conn = $dbm->acquire();
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$dbm = \TestHelperMw::getDBManager();
@@ -104,7 +92,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( "t.list NOT IN ('a','b','c')", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'string', 'value' );
-		$this->assertEquals( "t.string LIKE '%value%'", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.string LIKE '%value%' ESCAPE '\\\\'", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '<', 'float', 0.1 );
 		$this->assertEquals( "t.float < 0.1", $expr->toString( $types, $translations ) );
@@ -143,7 +131,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( "count('name',10,0.1) = 3", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'strconcat("hello","world")', 'low' );
-		$this->assertEquals( "concat('hello','world') LIKE '%low%'", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "concat('hello','world') LIKE '%low%' ESCAPE '\\\\'", $expr->toString( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter(["a","b","c","\'d"])', 4 );
 		$this->assertRegexp( "/^count\(name IN \('a','b','c','('|\\\\)'d'\)\) = 4$/", $expr->toString( $types, $translations ) );

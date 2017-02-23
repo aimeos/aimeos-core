@@ -64,7 +64,13 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 */
 	protected function createTerm( $name, $type, $value )
 	{
-		return $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
+		$term = $name . ' ' . self::$operators[$this->getOperator()] . ' ' . $this->escape( $this->getOperator(), $type, $value );
+
+		if( in_array( $this->getOperator(), array( '=~', '~=' ), true ) ) {
+			$term .= ' ESCAPE \'\\\\\'';
+		}
+
+		return $term;
 	}
 
 
@@ -159,11 +165,10 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$value = (double) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
-				if( $operator == '~=' ) {
-					$value = '\'%' . $this->conn->escape( $value ) . '%\''; break;
-				}
-				if( $operator == '=~' ) {
-					$value = '\'' . $this->conn->escape( $value ) . '%\''; break;
+				if( in_array( $operator, array( '~=', '=~' ), true ) )
+				{
+					$value = str_replace( array( '%', '_', '[' ), array( '\\%', '\\_', '\\[' ), $this->conn->escape( $value ) );
+					$value = '\'%' . $value . '%\''; break;
 				}
 			default:
 				$value = '\'' . $this->conn->escape( $value ) . '\'';
