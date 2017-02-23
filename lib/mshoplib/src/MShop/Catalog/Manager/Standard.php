@@ -118,6 +118,19 @@ class Standard extends Base
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'catalog.contains' => array(
+			'code'=>'catalog.contains()',
+			'internalcode'=>'( SELECT COUNT(mcatli_cs."parentid")
+				FROM "mshop_catalog_list" AS mcatli_cs
+				WHERE mcat."id" = mcatli_cs."parentid" AND :site
+					AND mcatli_cs."domain" = $1 AND mcatli_cs."refid" IN ( $3 ) AND mcatli_cs."typeid" = $2
+					AND ( mcatli_cs."start" IS NULL OR mcatli_cs."start" <= \':date\' )
+					AND ( mcatli_cs."end" IS NULL OR mcatli_cs."end" >= \':date\' ) )',
+			'label'=>'Number of catalog list items, parameter(<domain>,<list type ID>,<reference IDs>)',
+			'type'=> 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
 	);
 
 
@@ -130,6 +143,12 @@ class Standard extends Base
 	{
 		parent::__construct( $context, $this->searchConfig );
 		$this->setResourceName( 'db-catalog' );
+
+		$date = date( 'Y-m-d H:i:00' );
+		$sites = $context->getLocale()->getSitePath();
+
+		$this->replaceSiteMarker( $this->searchConfig['catalog.contains'], 'mcatli_cs."siteid"', $sites, ':site' );
+		$this->searchConfig['catalog.contains'] = str_replace( ':date', $date, $this->searchConfig['catalog.contains'] );
 	}
 
 

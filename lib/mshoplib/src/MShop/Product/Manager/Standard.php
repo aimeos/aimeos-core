@@ -111,7 +111,12 @@ class Standard
 		),
 		'product.contains' => array(
 			'code'=>'product.contains()',
-			'internalcode'=>'',
+			'internalcode'=>'( SELECT COUNT(mproli_cs."parentid")
+				FROM "mshop_product_list" AS mproli_cs
+				WHERE mpro."id" = mproli_cs."parentid" AND :site
+					AND mproli_cs."domain" = $1 AND mproli_cs."refid" IN ( $3 ) AND mproli_cs."typeid" = $2
+					AND ( mproli_cs."start" IS NULL OR mproli_cs."start" <= \':date\' )
+					AND ( mproli_cs."end" IS NULL OR mproli_cs."end" >= \':date\' ) )',
 			'label'=>'Number of product list items, parameter(<domain>,<list type ID>,<reference IDs>)',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -131,16 +136,10 @@ class Standard
 		$this->setResourceName( 'db-product' );
 
 		$date = date( 'Y-m-d H:i:00' );
-
-		$this->searchConfig['product.contains']['internalcode'] =
-			'( SELECT COUNT(mproli2."parentid") FROM "mshop_product_list" AS mproli2
-				WHERE mpro."id" = mproli2."parentid" AND :site
-					AND mproli2."domain" = $1 AND mproli2."refid" IN ( $3 ) AND mproli2."typeid" = $2
-					AND ( mproli2."start" IS NULL OR mproli2."start" <= \'' . $date . '\' )
-					AND ( mproli2."end" IS NULL OR mproli2."end" >= \'' . $date . '\' ) )';
-
 		$sites = $context->getLocale()->getSitePath();
-		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli2."siteid"', $sites, ':site' );
+
+		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli_cs."siteid"', $sites, ':site' );
+		$this->searchConfig['product.contains'] = str_replace( ':date', $date, $this->searchConfig['product.contains'] );
 	}
 
 
