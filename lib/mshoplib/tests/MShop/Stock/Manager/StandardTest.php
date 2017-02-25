@@ -41,6 +41,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testFindItem()
+	{
+		$item = $this->object->findItem( 'CNC', [], 'product', 'default' );
+
+		$this->assertEquals( 'CNC', $item->getProductCode() );
+	}
+
+
 	public function testSaveInvalid()
 	{
 		$this->setExpectedException( '\Aimeos\MShop\Stock\Exception' );

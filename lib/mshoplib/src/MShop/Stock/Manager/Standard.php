@@ -136,6 +136,22 @@ class Standard
 
 
 	/**
+	 * Returns the item specified by its code and domain/type
+	 *
+	 * @param string $code Code of the item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
+	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
+	 * @return \Aimeos\MShop\Common\Item\Iface Item object
+	 */
+	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	{
+		$list = array( 'stock.productcode' => $code, 'stock.type.domain' => $domain, 'stock.type.code' => $type );
+		return $this->findItemBase( $list );
+	}
+
+
+	/**
 	 * Inserts the new stock item
 	 *
 	 * @param \Aimeos\MShop\Stock\Item\Iface $item Stock item which should be saved
