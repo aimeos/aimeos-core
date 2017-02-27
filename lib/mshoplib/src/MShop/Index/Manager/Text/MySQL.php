@@ -26,7 +26,8 @@ class MySQL
 		'index.text.id' => array(
 			'code'=>'index.text.id',
 			'internalcode'=>'mindte."textid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte USE INDEX ("idx_msindte_value", "idx_msindte_p_s_lt_la_ty_do_va") ON mindte."prodid" = mpro."id"' ),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte
+				USE INDEX ("idx_msindte_value", "idx_msindte_p_s_lt_la_ty_do_va") ON mindte."prodid" = mpro."id"' ),
 			'label'=>'Product index text ID',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -34,7 +35,9 @@ class MySQL
 		),
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
-			'internalcode' => ':site AND mindte."listtype" = $1 AND ( mindte."langid" = $2 OR mindte."langid" IS NULL ) AND MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
+			'internalcode' => ':site AND mindte."listtype" IN ($1)
+				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
+				AND MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,

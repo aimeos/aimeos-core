@@ -24,7 +24,9 @@ class PgSQL
 	private $searchConfig = array(
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
-			'internalcode' => ':site AND mindte."listtype" = $1 AND ( mindte."langid" = $2 OR mindte."langid" IS NULL ) AND CAST( mindte."value" @@ to_tsquery( $3 ) AS integer )',
+			'internalcode' => ':site AND mindte."listtype" IN ($1)
+				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
+				AND CAST( mindte."value" @@ to_tsquery( $3 ) AS integer )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,

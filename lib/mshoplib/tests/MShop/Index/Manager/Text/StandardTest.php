@@ -145,23 +145,32 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSearchItems()
 	{
 		$search = $this->object->createSearch();
-
-		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
-		if( ( $textItem = reset( $textItems ) ) === false ) {
-			throw new \RuntimeException( 'No text with type "name" available in product CNC' );
-		}
-
-		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
-		$result = $this->object->searchItems( $search, array() );
-
-		$this->assertEquals( 1, count( $result ) );
-
 		$search->setConditions( $search->compare( '!=', 'index.text.id', null ) );
 
 		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+	}
 
+
+	public function testSearchItemsTextId()
+	{
+		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
+		if( ( $textItem = reset( $textItems ) ) === false ) {
+			throw new \RuntimeException( 'No text with type "name" available in product CNC' );
+		}
+
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
+		$result = $this->object->searchItems( $search, array() );
+
+		$this->assertEquals( 1, count( $result ) );
+	}
+
+
+	public function testSearchItemsRelevance()
+	{
+		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$search->setConditions( $search->compare( '>', $func, 0 ) ); // text relevance
@@ -172,6 +181,28 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->searchItems( $search, array() );
 
 		$this->assertEquals( 2, count( $result ) );
+	}
+
+
+	public function testSearchItemsRelevanceListtypes()
+	{
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.text.relevance', array( ['default', 'unittype13'], 'de', 'Expr' ) );
+		$search->setConditions( $search->compare( '>', $func, 0 ) ); // text relevance
+
+		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( ['default', 'unittype13'], 'de', 'Expr' ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->object->searchItems( $search, array() );
+
+		$this->assertEquals( 2, count( $result ) );
+	}
+
+
+	public function testSearchItemsValue()
+	{
+		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value
@@ -185,24 +216,41 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testSearchItemsValueListtypes()
+	{
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.text.value', array( ['default', 'unittype13'], 'de', 'name', 'product' ) );
+		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value
+
+		$sortfunc = $search->createFunction( 'sort:index.text.value', array( ['default', 'unittype13'], 'de', 'name' ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->object->searchItems( $search, array() );
+
+		$this->assertEquals( 1, count( $result ) );
+	}
+
+
+	public function testSearchItemsValueTypes()
+	{
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', ['code', 'name'], 'product' ) );
+		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value
+
+		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', ['code', 'name'] ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->object->searchItems( $search, array() );
+
+		$this->assertEquals( 1, count( $result ) );
+	}
+
+
 	public function testSearchTexts()
 	{
 		$context = \TestHelperMShop::getContext();
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
-
-		$search = $productManager->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'product.code', 'CNC' ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $productManager->searchItems( $search );
-
-		if( ( $product = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No product found' );
-		}
-
-
 		$langid = $context->getLocale()->getLanguageId();
 
 		$search = $this->object->createSearch();
@@ -214,7 +262,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$result = $this->object->searchTexts( $search );
 
-		$this->assertArrayHasKey( $product->getId(), $result );
 		$this->assertContains( 'Cafe Noire Cappuccino', $result );
 	}
 

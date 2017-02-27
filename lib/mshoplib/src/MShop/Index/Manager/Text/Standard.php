@@ -35,7 +35,7 @@ class Standard
 			'code'=>'index.text.relevance()',
 			'internalcode'=>'( SELECT COUNT(DISTINCT mindte2."prodid")
 				FROM "mshop_index_text" AS mindte2
-				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" = $1
+				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" IN ($1)
 				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
@@ -46,7 +46,7 @@ class Standard
 			'code'=>'sort:index.text.relevance()',
 			'internalcode'=>'( SELECT COUNT(DISTINCT mindte2."prodid")
 				FROM "mshop_index_text" AS mindte2
-				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" = $1
+				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" IN ($1)
 				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
 			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type'=> 'float',
@@ -55,7 +55,9 @@ class Standard
 		),
 		'index.text.value' => array(
 			'code'=>'index.text.value()',
-			'internalcode'=>':site AND mindte."listtype" = $1 AND ( mindte."langid" = $2 OR mindte."langid" IS NULL ) AND mindte."type" = $3 AND mindte."domain" = $4 AND mindte."value"',
+			'internalcode'=>':site AND mindte."listtype" IN ($1)
+				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
+				AND mindte."type" IN ($3) AND mindte."domain" = $4 AND mindte."value"',
 			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
