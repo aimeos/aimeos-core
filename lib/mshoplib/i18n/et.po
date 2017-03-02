@@ -1,0 +1,625 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-03 12:04+0100\n"
+"PO-Revision-Date: 2015-07-09 20:36+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Estonian (http://www.transifex.com/aimeos/aimeos-core/language/et/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: et\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, php-format
+msgid "Address for domain \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Address salutation \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "Address search configuration not available"
+msgstr ""
+
+#, php-format
+msgid "Address type \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "Basket empty"
+msgstr ""
+
+#, php-format
+msgid "Cache object not available"
+msgstr ""
+
+#, php-format
+msgid "Catalog node for ID \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Catalog path for ID \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "Checks for available addresses in basket failed"
+msgstr ""
+
+#, php-format
+msgid "Checks for available service items in basket failed"
+msgstr ""
+
+#, php-format
+msgid "Child node with index \"%1$d\" not available"
+msgstr ""
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Code must not be longer than 255 characters"
+msgstr ""
+
+#, php-format
+msgid "Code must not be longer than 32 characters"
+msgstr ""
+
+#, php-format
+msgid "Configuration for \"%1$s\" is missing"
+msgstr ""
+
+#, php-format
+msgid "Configuration invalid"
+msgstr ""
+
+#, php-format
+msgid "Configuration not available"
+msgstr ""
+
+#, php-format
+msgid "Configuration object not available"
+msgstr ""
+
+#, php-format
+msgid "Configuration of necessary SQL statement for \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Coupon in basket is not available any more"
+msgstr ""
+
+#, php-format
+msgid "Curl could not be initialized"
+msgstr ""
+
+#, php-format
+msgid "Database manager object not available"
+msgstr ""
+
+#, php-format
+msgid "Duplicate coupon code \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "File system manager object not available"
+msgstr ""
+
+#, php-format
+msgid "Flags \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "ID of last inserted database record not available"
+msgstr ""
+
+#. / Locale ID %1$s
+#, php-format
+msgid "Internationalization object not available for \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid ISO currency code \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid ISO language code \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid JSON as result of search for ID \"%2$s\" in \"%1$s\": %3$s"
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in ISO currency code \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in ISO language code \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid ""
+"Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD hh:mm:ss\" "
+"expected."
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in date \"%1$s\". ISO format \"YYYY-MM-DD\" expected."
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in domain name \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in email address: \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in manager name \"%1$s\" in \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in price \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in provider name \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in purchase date \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid characters in type name \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid configuration for coupon provider \"%1$s\", needs \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "factory \"%1$s\" on vigane"
+
+#, php-format
+msgid "Invalid mime type \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
+msgstr ""
+
+#, php-format
+msgid "Invalid type \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid web site URL \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Item can not be deleted. Site ID of item differs from present site ID."
+msgstr ""
+
+#, php-format
+msgid ""
+"Item could not be saved using method saveItem(). Item ID not available."
+msgstr ""
+
+#, php-format
+msgid "Item referenced in domain \"%1$s\" not found: %2$s"
+msgstr ""
+
+#, php-format
+msgid "Item with ID \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "Item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "Job with ID \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "List type for attribute item with ID \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "List type for price item with ID \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "List type for text item with ID \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Loading of XML response \"%1$s\" from delivery provider failed"
+msgstr ""
+
+#, php-format
+msgid "Locale item for site \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "Locale object not available"
+msgstr ""
+
+#, php-format
+msgid "Lock flag \"%1$d\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "Log entry with ID \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "Log manager object not available"
+msgstr ""
+
+#, php-format
+msgid "Mail object not available"
+msgstr ""
+
+#, php-format
+msgid "Manager path \"%1$s\" is invalid"
+msgstr ""
+
+#, php-format
+msgid "Manager path is empty"
+msgstr ""
+
+#, php-format
+msgid "Message queue object not available"
+msgstr ""
+
+#, php-format
+msgid "Method \"%1$s\" for locale site manager not available"
+msgstr ""
+
+#, php-format
+msgid "Method \"%1$s\" for provider not available"
+msgstr ""
+
+#, php-format
+msgid "Missing configuration \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "New ID \"%1$s\" for item differs from old ID \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid ""
+"Newly created site can not be saved using method \"saveItem()\". Try using "
+"method \"insertItem()\" instead."
+msgstr ""
+
+#, php-format
+msgid "No item found for conditions: %1$s"
+msgstr ""
+
+#, php-format
+msgid "No item with \"%2$s\" in \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
+msgstr ""
+
+#, php-format
+msgid "No product with code \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No warehouse for code \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "Not a date"
+msgstr ""
+
+#, php-format
+msgid "Not a date and time"
+msgstr ""
+
+#, php-format
+msgid "Not a key/value map"
+msgstr ""
+
+#, php-format
+msgid "Not a listed value"
+msgstr ""
+
+#, php-format
+msgid "Not a number"
+msgstr ""
+
+#, php-format
+msgid "Not a string"
+msgstr ""
+
+#, php-format
+msgid "Not a true/false value"
+msgstr ""
+
+#, php-format
+msgid "Not an integer number"
+msgstr ""
+
+#, php-format
+msgid "Object is not of required type \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Operation not supported"
+msgstr ""
+
+#, php-format
+msgid ""
+"Order ID \"%1$s\" in XML response of delivery provider differs from stored "
+"invoice ID \"%2$s\" of the order"
+msgstr ""
+
+#, php-format
+msgid "Order base item with order ID \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid ""
+"Order data sent to delivery provider was rejected with code \"%1$s\" "
+"according to XML response"
+msgstr ""
+
+#, php-format
+msgid "Order delivery status \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "Order payment status \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "Order product position \"%1$s\" must be greater than 0"
+msgstr ""
+
+#, php-format
+msgid "Order type \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "Order with ID \"%1$s\" was rejected with code \"%2$s\": %3$s"
+msgstr ""
+
+#, php-format
+msgid "Parameter \"%1$s\" for configuration not available"
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Duplicate transaction with ID \"%1$s\" and status \"%2$s\" "
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Invalid request \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Payment transaction ID for order ID \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Request for order ID \"%1$s\" failed with \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Wrong payment amount \"%1$s\" for order ID \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "PayPal Express: Wrong receiver email \"%1$s\""
+msgstr ""
+
+msgid "Payment costs"
+msgstr "Maksmiskulu"
+
+#, php-format
+msgid "Please have a look at the prices of the products in your basket"
+msgstr ""
+
+#, php-format
+msgid ""
+"Price can not be added. Currency ID \"%1$s\" of price item and currently "
+"used currency ID \"%2$s\" does not match."
+msgstr ""
+
+#, php-format
+msgid "Price for the given quantity \"%1$d\" not available"
+msgstr ""
+
+#, php-format
+msgid "Price item not available"
+msgstr ""
+
+#, php-format
+msgid ""
+"Product does not contain all required values. Product code for item not "
+"available."
+msgstr ""
+
+#, php-format
+msgid "Product matching given properties not found"
+msgstr ""
+
+#, php-format
+msgid "Product with array key \"%1$d\" not available"
+msgstr ""
+
+#, php-format
+msgid "Products in basket not available"
+msgstr ""
+
+#, php-format
+msgid "Products out of stock"
+msgstr ""
+
+#, php-format
+msgid "Property name \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "Provider in \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Quantity must be a positive integer and must not exceed %1$d"
+msgstr ""
+
+#, php-format
+msgid "Required value for \"%1$s\" is missing"
+msgstr ""
+
+#, php-format
+msgid "Search configuration for \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Search configuration not available"
+msgstr ""
+
+#, php-format
+msgid "Sending order to delivery provider failed with HTTP status \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Sending order to delivery provider failed: \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Service of type \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Session object not available"
+msgstr ""
+
+#, php-format
+msgid ""
+"Site can not be inserted. Site ID of site differs from site ID of parent "
+"site."
+msgstr ""
+
+#, php-format
+msgid ""
+"Site can not be moved. Site ID of site differs from present site id, site ID"
+" of existing parent site or site id of new parent site."
+msgstr ""
+
+#, php-format
+msgid "Site for code \"%1$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "The algorithm \"%1$s\" is not supported"
+msgstr ""
+
+#, php-format
+msgid "The maximum basket value of %1$s is exceeded"
+msgstr ""
+
+#, php-format
+msgid "The maximum product quantity is %1$d"
+msgstr ""
+
+#, php-format
+msgid "The maximum product quantity of %1$d is exceeded"
+msgstr ""
+
+#, php-format
+msgid "The maximum product value is %1$s"
+msgstr ""
+
+#, php-format
+msgid "The maximum quantity of all products is %1$d"
+msgstr ""
+
+#, php-format
+msgid "The maximum value of all products is %1$s"
+msgstr ""
+
+#, php-format
+msgid "The minimum basket value of %1$s isn't reached"
+msgstr ""
+
+#, php-format
+msgid "The minimum product quantity of %1$d isn't reached"
+msgstr ""
+
+#, php-format
+msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Total results value not found"
+msgstr ""
+
+#, php-format
+msgid "Tree root with code \"%1$s\" in \"%2$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
+msgstr ""
+
+#, php-format
+msgid "Unable to sort public holidays: \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Unknown search key \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid ""
+"Validation of XML response from delivery provider against schema \"%1$s\" "
+"failed"
+msgstr ""
+
+#, php-format
+msgid "View object not available"
+msgstr ""
