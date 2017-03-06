@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Aimeos <aimeos@aimeos.org>, 2015-2016
+# Aimeos <aimeos@aimeos.org>, 2015-2017
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-16 23:34+0200\n"
-"PO-Revision-Date: 2016-06-07 09:37+0000\n"
+"POT-Creation-Date: 2017-01-03 12:04+0100\n"
+"PO-Revision-Date: 2017-01-03 11:25+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -341,6 +341,14 @@ msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "Es konnte kein Produkt mit dem Code \"%1$s\" gefunden werden"
+
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr "Es wurde kein Warenlager für den Code \"%1$s\" gefunden"
+
+#, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr "Es wurde kein Typ für den Code \"%1$s\" gefunden"
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"

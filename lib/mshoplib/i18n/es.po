@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-16 23:34+0200\n"
-"PO-Revision-Date: 2016-09-02 17:11+0000\n"
-"Last-Translator: Aldemar Hernández <napalm-beach@lycos.com>\n"
+"POT-Creation-Date: 2017-01-03 12:04+0100\n"
+"PO-Revision-Date: 2017-01-03 11:14+0000\n"
+"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -341,6 +341,14 @@ msgstr "No hay precio disponible para el producto con la ID \"%1$s\" ni código 
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "No se encontró ningún producto con código \"%1$s\""
+
+#, php-format
+msgid "No stock type for code \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No type for code \"%1$s\" found"
+msgstr ""
 
 #, php-format
 msgid "No warehouse for code \"%1$s\" found"
