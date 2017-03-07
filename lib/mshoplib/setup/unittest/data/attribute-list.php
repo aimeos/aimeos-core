@@ -18,7 +18,7 @@ return array(
 	),
 
 	'attribute/lists' => array(
-		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/XS', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/XS', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/s', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/S', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/m', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/M', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/l', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/size/L', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
@@ -45,8 +45,8 @@ return array(
 		array( 'parentid' => 'attribute/color/red', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/color/red', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/color/black', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/color/black', 'start' => '2000-01-01 00:00:00', 'end' => '2001-01-01 00:00:00', 'config' => array(), 'pos' => 0, 'status' => 1 ),
 
-		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/small_items', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 1, 'status' => 1 ),
-		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/small_size', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),
+		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/small_items', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 2, 'status' => 1 ),
+		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/small_size', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 3, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/prod_97x93/199_prod_97x93.jpg', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/attribute/default/12.95/1.99', 'start' => null, 'end' => null, 'config' => array(), 'pos' => 0, 'status' => 1 ),
 	)

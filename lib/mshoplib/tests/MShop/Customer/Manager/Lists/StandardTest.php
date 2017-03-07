@@ -190,8 +190,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->moveItem( $last->getId() );
 
-		$this->assertEquals( 0, $newFirst->getPosition() );
-		$this->assertEquals( 1, $newSecond->getPosition() );
+		$this->assertEquals( 1, $newFirst->getPosition() );
+		$this->assertEquals( 2, $newSecond->getPosition() );
 	}
 
 
@@ -268,7 +268,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.lists.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'customer.lists.dateend', '2022-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'customer.lists.config', null );
-		$expr[] = $search->compare( '>', 'customer.lists.position', 0 );
+		$expr[] = $search->compare( '>', 'customer.lists.position', 1 );
 		$expr[] = $search->compare( '==', 'customer.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'customer.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'customer.lists.ctime', '1970-01-01 00:00:00' );

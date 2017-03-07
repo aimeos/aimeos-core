@@ -187,8 +187,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->moveItem( $last->getId() );
 
-		$this->assertEquals( 0, $newFirst->getPosition() );
-		$this->assertEquals( 1, $newSecond->getPosition() );
+		$this->assertEquals( 1, $newFirst->getPosition() );
+		$this->assertEquals( 2, $newSecond->getPosition() );
 	}
 
 
@@ -264,7 +264,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'price.lists.datestart', null );
 		$expr[] = $search->compare( '==', 'price.lists.dateend', null );
 		$expr[] = $search->compare( '!=', 'price.lists.config', null );
-		$expr[] = $search->compare( '==', 'price.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'price.lists.position', 1 );
 		$expr[] = $search->compare( '==', 'price.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'price.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'price.lists.ctime', '1970-01-01 00:00:00' );
