@@ -279,19 +279,22 @@ abstract class Base
 				$oldpos++;
 			}
 
-			$sql = $this->getSqlConfig( $cfgPath . 'move' );
+			if( $oldpos > 0 )
+			{
+				$sql = $this->getSqlConfig( $cfgPath . 'move' );
 
-			$stmt = $conn->create( $sql );
-			$stmt->bind( 1, -1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); // mtime
-			$stmt->bind( 3, $this->getContext()->getEditor() );
-			$stmt->bind( 4, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $typeid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $domain );
-			$stmt->bind( 8, $oldpos, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt = $conn->create( $sql );
+				$stmt->bind( 1, -1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); // mtime
+				$stmt->bind( 3, $this->getContext()->getEditor() );
+				$stmt->bind( 4, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 5, $parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 6, $typeid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 7, $domain );
+				$stmt->bind( 8, $oldpos, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
-			$stmt->execute()->finish();
+				$stmt->execute()->finish();
+			}
 
 			$dbm->release( $conn, $dbname );
 		}
