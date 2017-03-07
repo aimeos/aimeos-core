@@ -187,8 +187,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->moveItem( $last->getId() );
 
-		$this->assertEquals( 0, $newFirst->getPosition() );
-		$this->assertEquals( 1, $newSecond->getPosition() );
+		$this->assertEquals( 1, $newFirst->getPosition() );
+		$this->assertEquals( 2, $newSecond->getPosition() );
 	}
 
 

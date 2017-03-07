@@ -206,8 +206,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->object->moveItem( $last->getId() );
 
-		$this->assertEquals( 0, $newFirst->getPosition() );
-		$this->assertEquals( 1, $newSecond->getPosition() );
+		$this->assertEquals( 1, $newFirst->getPosition() );
+		$this->assertEquals( 2, $newSecond->getPosition() );
 	}
 
 
@@ -282,7 +282,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'supplier.lists.datestart', '2010-01-01 00:00:00' ),
 			$search->compare( '==', 'supplier.lists.dateend', '2100-01-01 00:00:00' ),
 			$search->compare( '!=', 'supplier.lists.config', null ),
-			$search->compare( '==', 'supplier.lists.position', 0 ),
+			$search->compare( '==', 'supplier.lists.position', 1 ),
 			$search->compare( '==', 'supplier.lists.status', 1 ),
 			$search->compare( '==', 'supplier.lists.editor', $this->editor ),
 			$search->compare( '==', 'supplier.lists.type.code', 'default' ),
@@ -307,7 +307,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'supplier.lists.datestart', '2010-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.lists.dateend', '2100-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'supplier.lists.config', null );
-		$expr[] = $search->compare( '==', 'supplier.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'supplier.lists.position', 1 );
 		$expr[] = $search->compare( '==', 'supplier.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'supplier.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'supplier.lists.ctime', '1970-01-01 00:00:00' );
