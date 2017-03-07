@@ -75,14 +75,4 @@ abstract class Base
 	{
 		$this->getManager()->moveItem( $id, $oldParentId, $newParentId, $refId );
 	}
-
-
-	/**
-	 * Rebuild the index for searching products.
-	 * This can be a long lasting operation.
-	 */
-	public function rebuildIndex()
-	{
-		$this->getManager()->rebuildIndex();
-	}
 }
