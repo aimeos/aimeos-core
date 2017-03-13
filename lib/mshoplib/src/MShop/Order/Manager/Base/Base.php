@@ -89,7 +89,7 @@ abstract class Base
 	 * @param string $type Basket type if a customer can have more than one basket
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Shopping basket
 	 */
-	public function getSession( $type = '' )
+	public function getSession( $type = 'default' )
 	{
 		$context = $this->getContext();
 		$session = $context->getSession();
@@ -125,7 +125,7 @@ abstract class Base
 	 * @param string $type Basket type if a customer can have more than one basket
 	 * @return integer Lock status (@see \Aimeos\MShop\Order\Manager\Base\Base)
 	 */
-	public function getSessionLock( $type = '' )
+	public function getSessionLock( $type = 'default' )
 	{
 		$context = $this->getContext();
 		$session = $context->getSession();
@@ -149,7 +149,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $order Shopping basket
 	 * @param string $type Order type if a customer can have more than one order at once
 	 */
-	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = '' )
+	public function setSession( \Aimeos\MShop\Order\Item\Base\Iface $order, $type = 'default' )
 	{
 		$context = $this->getContext();
 		$session = $context->getSession();
@@ -171,7 +171,7 @@ abstract class Base
 	 * @param string $type Order type if a customer can have more than one order at once
 	 * @throws \Aimeos\MShop\Order\Exception if the lock value is invalid
 	 */
-	public function setSessionLock( $lock, $type = '' )
+	public function setSessionLock( $lock, $type = 'default' )
 	{
 		$this->checkLock( $lock );
 

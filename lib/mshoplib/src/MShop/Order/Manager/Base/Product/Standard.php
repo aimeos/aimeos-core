@@ -927,6 +927,7 @@ class Standard
 		return new \Aimeos\MShop\Order\Item\Base\Product\Standard( $price, $values, $attributes );
 	}
 
+
 	/**
 	 * Searches for attribute items connected with order product item.
 	 *
