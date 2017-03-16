@@ -178,6 +178,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
+	public function testCreateSearchDefault()
+	{
+		$search = $this->object->createSearch( true );
+
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $search );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\Iface', $search->getConditions() );
+
+		$list = $search->getConditions()->getExpressions();
+		$this->assertArrayHasKey( 0, $list );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\Iface', $list[0] );
+		$this->assertEquals( 'order.base.customerid', $list[0]->getName() );
+	}
+
+
 	public function testSearchItems()
 	{
 		$siteid = $this->context->getLocale()->getSiteId();
@@ -296,8 +310,11 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+	}
 
 
+	public function testSearchItemsTotal()
+	{
 		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '>=', 'order.base.customerid', '' ),
@@ -313,6 +330,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		foreach( $items as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
+
+
+	public function testSearchItemsDefault()
+	{
+		$search = $this->object->createSearch(  true );
+		$items = $this->object->searchItems( $search );
+
+		$this->assertEquals( 0, count( $items ) );
 	}
 
 

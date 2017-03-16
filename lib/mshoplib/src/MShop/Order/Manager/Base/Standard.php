@@ -252,6 +252,30 @@ class Standard extends Base
 
 
 	/**
+	 * Creates a search object
+	 *
+	 * @param boolean $default Add default criteria
+	 * @return \Aimeos\MW\Criteria\Iface
+	 */
+	public function createSearch( $default = false )
+	{
+		$search = parent::createSearch( $default );
+
+		if( $default !== false )
+		{
+			$userId = $this->getContext()->getUserId();
+			$expr = [
+				$search->compare( '==', 'order.base.customerid', $userId ),
+				$search->getConditions(),
+			];
+			$search->setConditions( $search->combine( '&&', $expr ) );
+		}
+
+		return $search;
+	}
+
+
+	/**
 	 * Removes multiple items specified by ids in the array.
 	 *
 	 * @param array $ids List of IDs
@@ -837,12 +861,17 @@ class Standard extends Base
 	 * @param integer $id Base ID of the order to load
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @param boolean $fresh Create a new basket by copying the existing one and remove IDs
+	 * @param boolean $default True to use default criteria, false for no limitation
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket including all items
 	 */
-	public function load( $id, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, $fresh = false )
+	public function load( $id, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, $fresh = false, $default = false )
 	{
-		$search = $this->createSearch();
-		$search->setConditions( $search->compare( '==', 'order.base.id', $id ) );
+		$search = $this->createSearch( $default );
+		$expr = [
+			$search->compare( '==', 'order.base.id', $id ),
+			$search->getConditions(),
+		];
+		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();
