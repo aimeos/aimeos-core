@@ -180,6 +180,28 @@ class Bootstrap
 
 
 	/**
+	 * Returns the available extensions
+	 *
+	 * @return array List of available extension names
+	 */
+	public function getExtensions()
+	{
+		$list = [];
+
+		foreach( $this->manifests as $path => $manifest )
+		{
+			if( isset( $manifest['name'] ) && $manifest['name'] != '' ) {
+				$list[] = $manifest['name'];
+			} else {
+				$list[] = basename( $path );
+			}
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the list of paths where setup tasks are stored.
 	 *
 	 * @param string $site Name of the site like "default", "unitperf" and "unittest"
