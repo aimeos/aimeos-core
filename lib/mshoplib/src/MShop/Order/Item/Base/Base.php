@@ -248,45 +248,44 @@ abstract class Base
 
 
 	/**
-	 * Returns the billing or delivery address depending on the given domain.
+	 * Returns the billing or delivery address depending on the given type.
 	 *
-	 * @param string $domain Address domain, usually "billing" or "delivery"
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for the requested domain
+	 * @param string $type Address type, usually "billing" or "delivery"
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for the requested type
 	 */
-	public function getAddress( $domain = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT )
+	public function getAddress( $type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT )
 	{
-		if( !isset( $this->addresses[$domain] ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Address for domain "%1$s" not available', $domain ) );
+		if( !isset( $this->addresses[$type] ) ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Address for type "%1$s" not available', $type ) );
 		}
 
-		return $this->addresses[$domain];
+		return $this->addresses[$type];
 	}
 
 
 	/**
 	 * Sets a customer address as billing or delivery address for an order.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given domain
-	 * @param string $domain Address domain, usually "billing" or "delivery"
+	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
+	 * @param string $type Address type, usually "billing" or "delivery"
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Item that was really added to the basket
 	 */
-	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address,
-			$domain = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT )
+	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type )
 	{
-		if( isset( $this->addresses[$domain] ) && $this->addresses[$domain] === $address ) { return $address; }
+		if( isset( $this->addresses[$type] ) && $this->addresses[$type] === $address ) { return $address; }
 
 		$this->notifyListeners( 'setAddress.before', $address );
 
 		$address = clone $address;
-		$address->setType( $domain ); // enforce that the type is the same as the given one
+		$address->setType( $type ); // enforce that the type is the same as the given one
 		$address->setId( null ); // enforce saving as new item
 
-		$this->addresses[$domain] = $address;
+		$this->addresses[$type] = $address;
 		$this->setModified();
 
 		$this->notifyListeners( 'setAddress.after', $address );
 
-		return $this->addresses[$domain];
+		return $this->addresses[$type];
 	}
 
 
@@ -295,7 +294,7 @@ abstract class Base
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
 	 */
-	public function deleteAddress( $type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY )
+	public function deleteAddress( $type )
 	{
 		if( !isset( $this->addresses[$type] ) ) {
 			return;
@@ -326,7 +325,7 @@ abstract class Base
 	/**
 	 * Returns the delivery or payment service depending on the given type.
 	 *
-	 * @param string $type Service type code like 'payment', 'delivery', etc.
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @return \Aimeos\MShop\Order\Item\Base\Serive\Iface Order service item for the requested type
 	 */
 	public function getService( $type )
@@ -343,7 +342,7 @@ abstract class Base
 	 * Sets a service as delivery or payment service for an order.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
-	 * @param string $type Service type
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Item that was really added to the basket
 	 */
 	public function setService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type )

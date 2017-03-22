@@ -76,7 +76,7 @@ class DirectDebit
 
 		try
 		{
-			$address = $basket->getAddress();
+			$address = $basket->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
 			if( ( $fn = $address->getFirstname() ) !== '' && ( $ln = $address->getLastname() ) !== '' ) {
 				$feconfig['directdebit.accountowner']['default'] = $fn . ' ' . $ln;

@@ -112,31 +112,29 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	public function getAddresses();
 
 	/**
-	 * Returns the billing or delivery address depending on the given domain.
+	 * Returns the billing or delivery address depending on the given type.
 	 *
-	 * @param string $domain Address domain defined in \Aimeos\MShop\Order\Item\Base\Address\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for the requested domain
+	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order address item for the requested type
 	 */
-	public function getAddress( $domain = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+	public function getAddress( $type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
 	/**
 	 * Sets a customer address as billing or delivery address for an order.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given domain
-	 * @param string $domain Address domain defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
+	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Item that was really added to the basket
 	 */
-	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address,
-		$domain = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY
-	);
+	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type );
 
 	/**
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
-	 * @param string $domain Address domain defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
 	 * @return null
 	 */
-	public function deleteAddress( $domain = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
+	public function deleteAddress( $type );
 
 	/**
 	 * Returns all services (delivery, payment, etc.) attached to the shopping basket.
@@ -146,18 +144,18 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	public function getServices();
 
 	/**
-	 * Returns the payment or delivery service depending on the given domain.
+	 * Returns the payment or delivery service depending on the given type.
 	 *
-	 * @param string $type Service domain
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item for the requested domain
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item for the requested type
 	 */
 	public function getService( $type );
 
 	/**
 	 * Sets a service as payment or delivery service for an order.
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
-	 * @param string $type Service type
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given type
+	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Item that was really added to the basket
 	 */
 	public function setService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type );
