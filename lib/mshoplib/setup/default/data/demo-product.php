@@ -776,6 +776,9 @@ return array(
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
+		'stock' => array(
+			array( 'stocklevel' => 3, 'typeid' => 'default', 'dateback' => null )
+		),
 	),
 
 	// bundle article
@@ -919,7 +922,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 3, 'typeid' => 'default', 'dateback' => null ),
+			array( 'stocklevel' => 0, 'typeid' => 'default', 'dateback' => null ),
 		),
 	),
 	array(
@@ -933,6 +936,9 @@ return array(
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => array(),
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
+		),
+		'stock' => array(
+			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
 		),
 	),
 );
