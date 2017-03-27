@@ -374,13 +374,18 @@ class Standard
 	 *
 	 * @param integer $id Job ID to fetch job object for
 	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MAdmin\Job\Item\Iface Returns the job item of the given id
 	 * @throws \Aimeos\MAdmin\Job\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		$criteria = $this->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'job.id', $id ) );
+		$criteria = $this->createSearch( $default );
+		$expr = [
+			$criteria->compare( '==', 'job.id', $id ),
+			$criteria->getConditions()
+		];
+		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {

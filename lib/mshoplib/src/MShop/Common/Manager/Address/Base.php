@@ -81,16 +81,17 @@ abstract class Base
 	 *
 	 * @param integer $id Unique common address ID referencing an existing address
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Returns the address item of the given id
 	 * @throws \Aimeos\MShop\Exception If address search configuration isn't available
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Address search configuration not available' ) );
 		}
 
-		return $this->getItemBase( $conf['code'], $id, $ref );
+		return $this->getItemBase( $conf['code'], $id, $ref, $default );
 	}
 
 

@@ -251,12 +251,13 @@ class Standard
 	 *
 	 * @param integer $id ID of the item that should be retrieved
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Media\Item\Iface Returns the media item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'media.id', $id, $ref );
+		return $this->getItemBase( 'media.id', $id, $ref, $default );
 	}
 
 

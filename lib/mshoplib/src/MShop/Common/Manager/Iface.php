@@ -63,9 +63,11 @@ interface Iface
 	 * Returns the item specified by its ID
 	 *
 	 * @param integer $id Id of item
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function getItem( $id, array $ref = array() );
+	public function getItem( $id, array $ref = [], $default = false );
 
 	/**
 	 * Returns the available manager types

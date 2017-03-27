@@ -230,12 +230,13 @@ class Standard
 	 *
 	 * @param integer $id Unique supplier ID referencing an existing supplier
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Returns the supplier item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'supplier.id', $id, $ref );
+		return $this->getItemBase( 'supplier.id', $id, $ref, $default );
 	}
 
 

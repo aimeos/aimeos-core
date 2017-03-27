@@ -347,12 +347,13 @@ class Standard
 	 *
 	 * @param string $id Unique ID of the site data in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Returns the site item of the given id
 	 * @throws \Aimeos\MShop\Exception If the item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'locale.site.id', $id, $ref );
+		return $this->getItemBase( 'locale.site.id', $id, $ref, $default );
 	}
 
 

@@ -483,12 +483,13 @@ class Standard
 	 *
 	 * @param integer $id Order service ID
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Returns order base service item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'order.base.service.id', $id, $ref );
+		return $this->getItemBase( 'order.base.service.id', $id, $ref, $default );
 	}
 
 

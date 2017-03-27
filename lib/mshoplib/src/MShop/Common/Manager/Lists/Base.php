@@ -173,17 +173,22 @@ abstract class Base
 	 *
 	 * @param integer $id Id of common list item object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Returns common list item object of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
 		if( ( $conf = reset( $this->searchConfig ) ) === false || !isset( $conf['code'] ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
 		}
 
-		$criteria = $this->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', $conf['code'], $id ) );
+		$criteria = $this->createSearch( $default );
+		$expr = [
+			$criteria->compare( '==', $conf['code'], $id ),
+			$criteria->getConditions()
+		];
+		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false )
