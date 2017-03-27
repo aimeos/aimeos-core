@@ -28,7 +28,6 @@
 		"ext-mbstring": "*",
 		"ext-pcre": "*",
 		"ext-PDO": "*",
-		"ext-pdo_mysql": "*",
 		"ext-zip": "*",
 		"doctrine/dbal": "~2.0",
 		"psr/http-message": "~1.0"
