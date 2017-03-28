@@ -282,12 +282,13 @@ class Standard
 	 * @param string $id Language id to create the Language object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Returns the language item of the given id
+	 * @param boolean $default Add default criteria
 	 * @throws \Aimeos\MW\DB\Exception If language object couldn't be fetched
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'locale.language.id', $id, $ref );
+		return $this->getItemBase( 'locale.language.id', $id, $ref, $default );
 	}
 
 

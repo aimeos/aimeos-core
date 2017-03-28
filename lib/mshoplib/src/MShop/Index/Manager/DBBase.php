@@ -75,11 +75,12 @@ abstract class DBBase
 	 *
 	 * @param integer $id Id of item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item object
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->getItem( $id, $ref );
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->getItem( $id, $ref, $default );
 	}
 
 

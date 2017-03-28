@@ -168,12 +168,13 @@ class Standard
 	 *
 	 * @param integer $id Unique ID of the locale item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Locale\Item\Iface Returns the locale item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'locale.id', $id, $ref );
+		return $this->getItemBase( 'locale.id', $id, $ref, $default );
 	}
 
 

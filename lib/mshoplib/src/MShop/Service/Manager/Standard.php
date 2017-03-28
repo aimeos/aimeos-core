@@ -264,12 +264,13 @@ class Standard
 	 *
 	 * @param int $id Unique ID of the service item
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Service\Item\Iface Returns the service item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'service.id', $id, $ref );
+		return $this->getItemBase( 'service.id', $id, $ref, $default );
 	}
 
 

@@ -194,12 +194,13 @@ class Standard
 	 *
 	 * @param string $id Unique ID of the coupon item in the storage
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Returns the coupon item of the given ID
 	 * @throws \Aimeos\MShop\Exception If coupon couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'coupon.id', $id, $ref );
+		return $this->getItemBase( 'coupon.id', $id, $ref, $default );
 	}
 
 

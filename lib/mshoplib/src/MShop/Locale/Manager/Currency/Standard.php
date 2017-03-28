@@ -286,12 +286,13 @@ class Standard
 	 *
 	 * @param string $id Currency ID indentifying the currency object
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Returns the currency item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'locale.currency.id', $id, $ref );
+		return $this->getItemBase( 'locale.currency.id', $id, $ref, $default );
 	}
 
 

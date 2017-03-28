@@ -387,13 +387,18 @@ class Standard
 	 *
 	 * @param integer $id Log ID to fetch log object for
 	 * @param array $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MAdmin\Log\Item\Iface Returns the log item of the given id
 	 * @throws \Aimeos\MAdmin\Log\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		$criteria = $this->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'log.id', $id ) );
+		$criteria = $this->createSearch( $default );
+		$expr = [
+			$criteria->compare( '==', 'log.id', $id ),
+			$criteria->getConditions()
+		];
+		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {

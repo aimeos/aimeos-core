@@ -188,9 +188,9 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Returns the type item of the given ID
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( $this->prefix . 'id', $id, $ref );
+		return $this->getItemBase( $this->prefix . 'id', $id, $ref, $default );
 	}
 
 

@@ -287,12 +287,13 @@ class Standard
 	 *
 	 * @param integer $id Unique price ID referencing an existing price
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Price\Item\Iface $item Returns the price item of the given id
 	 * @throws \Aimeos\MShop\Exception If item couldn't be found
 	 */
-	public function getItem( $id, array $ref = array() )
+	public function getItem( $id, array $ref = [], $default = false )
 	{
-		return $this->getItemBase( 'price.id', $id, $ref );
+		return $this->getItemBase( 'price.id', $id, $ref, $default );
 	}
 
 

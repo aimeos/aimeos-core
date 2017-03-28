@@ -552,13 +552,18 @@ abstract class Base
 	 * @param string $key Search key for the requested ID
 	 * @param integer $id Unique ID to search for
 	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @param boolean $default Add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function getItemBase( $key, $id, array $ref = array() )
+	protected function getItemBase( $key, $id, array $ref = [], $default = false )
 	{
-		$criteria = $this->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', $key, $id ) );
+		$criteria = $this->createSearch( $default );
+		$expr = [
+			$criteria->compare( '==', $key, $id ),
+			$criteria->getConditions()
+		];
+		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
 		$items = $this->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
