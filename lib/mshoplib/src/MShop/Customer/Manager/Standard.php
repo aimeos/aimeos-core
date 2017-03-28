@@ -719,28 +719,4 @@ class Standard
 	{
 		return $this->getSubManagerBase( 'customer', $manager, $name );
 	}
-
-
-	/**
-	 * Returns the address items for the given customer IDs
-	 *
-	 * @param array $prodIds List of customer IDs
-	 * @return array Associative list of customer IDs / address IDs as keys and items implementing
-	 * 	\Aimeos\MShop\Common\Item\Address\Iface as values
-	 */
-	protected function getAddressItems( array $custIds )
-	{
-		$list = [];
-		$manager = $this->getSubManager( 'address' );
-
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $custIds ) );
-		$search->setSlice( 0, 0x7fffffff );
-
-		foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
-			$list[$addrItem->getParentId()][$id] = $addrItem;
-		}
-
-		return $list;
-	}
 }
