@@ -3,16 +3,13 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
 namespace Aimeos\MShop\Customer\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Customer\Item\Standard.
- */
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
@@ -20,12 +17,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	private $address;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$addressValues = array(
@@ -69,15 +60,15 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, $this->values, array(), array(), 'mshop', null );
+		$addresses = array(
+			-1 => new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.', ['customer.address.position' => 1] ),
+			-2 => new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.', ['customer.address.position' => 0] ),
+		);
+
+		$this->object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, $this->values, [], [], 'mshop', null, $addresses );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		unset( $this->object, $this->address, $this->values );
@@ -244,6 +235,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
 		$this->assertEquals( $this->address, $this->object->getPaymentAddress() );
+	}
+
+
+	public function testGetAddressItems()
+	{
+		$i = 0;
+		$list = $this->object->getAddressItems();
+		$this->assertEquals( 2, count( $list ) );
+
+		foreach( $list as $item )
+		{
+			$this->assertEquals( $i++, $item->getPosition() );
+			$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Address\Iface', $item );
+		}
 	}
 
 

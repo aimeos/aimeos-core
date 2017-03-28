@@ -558,7 +558,12 @@ class Standard
 			throw $e;
 		}
 
-		return $this->buildItems( $map, $ref, 'supplier' );
+		$addrItems = array();
+		if( in_array( 'address', $ref, true ) ) {
+			$addrItems = $this->getAddressItems( array_keys( $map ) );
+		}
+
+		return $this->buildItems( $map, $ref, 'supplier', $addrItems );
 	}
 
 
@@ -598,10 +603,35 @@ class Standard
 	 * @param array $values List of attributes for supplier item
 	 * @param array $listitems Associative list of list item IDs as keys and \Aimeos\MShop\Common\Item\List\Iface as values
 	 * @param array $refItems Associative list of item IDs as keys and \Aimeos\MShop\Common\Item\Iface as values
+	 * @param array $addresses List of address items of the supplier item
 	 * @return \Aimeos\MShop\Supplier\Item\Iface New supplier item
 	 */
-	protected function createItemBase( array $values = array(), array $listitems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = [], array $listitems = [], array $refItems = [], array $addresses = [] )
 	{
-		return new \Aimeos\MShop\Supplier\Item\Standard( $values, $listitems, $refItems );
+		return new \Aimeos\MShop\Supplier\Item\Standard( $values, $listitems, $refItems, $addresses );
+	}
+
+
+	/**
+	 * Returns the address items for the given supplier IDs
+	 *
+	 * @param array $prodIds List of supplier IDs
+	 * @return array Associative list of supplier IDs / address IDs as keys and items implementing
+	 * 	\Aimeos\MShop\Common\Item\Address\Iface as values
+	 */
+	protected function getAddressItems( array $supplierIds )
+	{
+		$list = array();
+		$manager = $this->getSubManager( 'address' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '==', 'supplier.address.parentid', $supplierIds ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
+			$list[$addrItem->getParentId()][$id] = $addrItem;
+		}
+
+		return $list;
 	}
 }

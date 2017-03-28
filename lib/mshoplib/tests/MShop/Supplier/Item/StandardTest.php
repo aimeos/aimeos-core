@@ -37,7 +37,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'supplier.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $values );
+		$addresses = array(
+			-1 => new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 1] ),
+			-2 => new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 0] ),
+		);
+
+		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $values, [], [], $addresses );
 	}
 
 	/**
@@ -132,6 +137,20 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );
+	}
+
+
+	public function testGetAddressItems()
+	{
+		$i = 0;
+		$list = $this->object->getAddressItems();
+		$this->assertEquals( 2, count( $list ) );
+
+		foreach( $list as $item )
+		{
+			$this->assertEquals( $i++, $item->getPosition() );
+			$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Address\Iface', $item );
+		}
 	}
 
 

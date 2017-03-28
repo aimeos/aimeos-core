@@ -181,7 +181,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearchItems()
 	{
-		$total = 0;
 		$search = $this->object->createSearch();
 
 		$expr = array();
@@ -242,29 +241,54 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'customer.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search );
 		$this->assertEquals( 1, count( $result ) );
+	}
 
-		//search without base criteria
+
+	public function testSearchItemsTotal()
+	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.address.editor', $this->editor ) );
 		$search->setSlice( 0, 2 );
-		$results = $this->object->searchItems( $search, array(), $total );
+
+		$total = 0;
+		$results = $this->object->searchItems( $search, [], $total );
+
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
 
-		//search with base criteria
+
+	public function testSearchItemsCriteria()
+	{
 		$search = $this->object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'customer.address.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$this->assertEquals( 2, count( $this->object->searchItems( $search, array(), $total ) ) );
+		$this->assertEquals( 2, count( $this->object->searchItems( $search ) ) );
+	}
+
+
+	public function testSearchItemsRef()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'customer.code', 'UTC001' ) );
+
+		$results = $this->object->searchItems( $search, ['address', 'text'] );
+
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new \Exception( 'No customer item for "UTC001" available' );
+		}
+
+		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getAddressItems() ) );
 	}
 
 

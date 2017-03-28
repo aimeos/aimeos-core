@@ -1,22 +1,21 @@
 <?php
 
-namespace Aimeos\MShop\Supplier\Manager;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MShop\Supplier\Manager;
+
+
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object = null;
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
@@ -24,9 +23,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -159,7 +155,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearchItem()
 	{
-		$total = 0;
 		$search = $this->object->createSearch();
 
 		$expr = array();
@@ -199,19 +194,27 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'supplier.address.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search );
 		$this->assertEquals( 1, count( $result ) );
+	}
 
 
-		//search without base criteria
+	public function testSearchItemTotal()
+	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'supplier.editor', $this->editor ) );
 		$search->setSlice( 0, 2 );
+
+		$total = 0;
 		$results = $this->object->searchItems( $search, array(), $total );
+
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
+	}
 
-		//search with base criteria
+
+	public function testSearchItemCriteria()
+	{
 		$search = $this->object->createSearch( true );
 		$conditions = array(
 			$search->compare( '==', 'supplier.editor', $this->editor ),
@@ -219,11 +222,28 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
+
 		$this->assertEquals( 2, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+	}
+
+
+	public function testSearchItemsRef()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'supplier.code', 'unitCode001' ) );
+
+		$results = $this->object->searchItems( $search, ['address', 'text'] );
+
+		if( ( $item = reset( $results ) ) === false ) {
+			throw new \Exception( 'No supplier item for "unitCode001" available' );
+		}
+
+		$this->assertEquals( 3, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getAddressItems() ) );
 	}
 
 

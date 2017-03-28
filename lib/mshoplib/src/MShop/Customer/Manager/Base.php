@@ -167,9 +167,10 @@ abstract class Base
 	 * @param array $values List of attributes for customer item
 	 * @param array $listItems List items associated to the customer item
 	 * @param array $refItems Items referenced by the customer item via the list items
+	 * @param array $addresses List of address items of the customer item
 	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item
 	 */
-	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $addresses = [] )
 	{
 		if( !isset( $this->addressManager ) ) {
 			$this->addressManager = $this->getSubManager( 'address' );
@@ -178,7 +179,7 @@ abstract class Base
 		$helper = $this->getPasswordHelper();
 		$address = $this->addressManager->createItem();
 
-		return new \Aimeos\MShop\Customer\Item\Standard( $address, $values, $listItems, $refItems, $this->salt, $helper );
+		return new \Aimeos\MShop\Customer\Item\Standard( $address, $values, $listItems, $refItems, $this->salt, $helper, $addresses );
 	}
 
 

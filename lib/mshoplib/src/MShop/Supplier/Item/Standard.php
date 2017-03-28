@@ -22,6 +22,8 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\ListRef\Base
 	implements \Aimeos\MShop\Supplier\Item\Iface
 {
+	private $addresses;
+	private $sortedAddr;
 	private $values;
 
 	/**
@@ -31,11 +33,38 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
-	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
+	public function __construct( array $values = [], array $listItems = [], array $refItems = [], $addresses = [] )
 	{
 		parent::__construct( 'supplier.', $values, $listItems, $refItems );
 
+		$this->addresses = $addresses;
 		$this->values = $values;
+	}
+
+
+	/**
+	 * Returns the address items of the supplier
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Associative list of IDs as keys and items as values
+	 */
+	public function getAddressItems()
+	{
+		if( $this->sortedAddr === null )
+		{
+			$fcn = function( $a, $b )
+			{
+				if( $a->getPosition() == $b->getPosition() ) {
+					return 0;
+				}
+
+				return ( $a->getPosition() < $b->getPosition() ? -1 : 1 );
+			};
+
+			uasort( $this->addresses, $fcn );
+			$this->sortedAddr = true;
+		}
+
+		return $this->addresses;
 	}
 
 

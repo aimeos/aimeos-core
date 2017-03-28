@@ -22,7 +22,9 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\ListRef\Base
 	implements \Aimeos\MShop\Customer\Item\Iface
 {
+	private $addresses;
 	private $billingaddress;
+	private $sortedAddr;
 	private $values;
 
 
@@ -33,9 +35,10 @@ abstract class Base
 	 * @param array $values List of attributes that belong to the customer item
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addresses List of referenced address items
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
-		array $listItems = array(), array $refItems = array() )
+		array $listItems = array(), array $refItems = array(), $addresses = array() )
 	{
 		parent::__construct( 'customer.', $values, $listItems, $refItems );
 
@@ -70,7 +73,34 @@ abstract class Base
 		$address->setId( $this->getId() );
 
 		$this->billingaddress = $address;
+		$this->addresses = $addresses;
 		$this->values = $values;
+	}
+
+
+	/**
+	 * Returns the delivery address items of the customer
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Associative list of IDs as keys and address items as values
+	 */
+	public function getAddressItems()
+	{
+		if( $this->sortedAddr === null )
+		{
+			$fcn = function( $a, $b )
+			{
+				if( $a->getPosition() == $b->getPosition() ) {
+					return 0;
+				}
+
+				return ( $a->getPosition() < $b->getPosition() ? -1 : 1 );
+			};
+
+			uasort( $this->addresses, $fcn );
+			$this->sortedAddr = true;
+		}
+
+		return $this->addresses;
 	}
 
 
