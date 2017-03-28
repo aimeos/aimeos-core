@@ -131,7 +131,7 @@ class Standard
 		$path = 'mshop/index/manager/submanagers';
 		$default = array( 'price', 'catalog', 'attribute', 'text' );
 
-		$list += $this->getSearchAttributesBase( array(), $path, $default, $withsub );
+		$list += $this->getSearchAttributesBase( [], $path, $default, $withsub );
 
 		return $list;
 	}
@@ -328,7 +328,7 @@ class Standard
 	 *
 	 * @param array $items Optional product item list
 	 */
-	public function rebuildIndex( array $items = array() )
+	public function rebuildIndex( array $items = [] )
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
@@ -409,7 +409,7 @@ class Standard
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
-		$prodIds = array();
+		$prodIds = [];
 
 		foreach( $items as $item ) {
 			$prodIds[] = $item->getId(); // don't rely on array keys
@@ -496,7 +496,7 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		/** mshop/index/manager/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -617,7 +617,7 @@ class Standard
 	 */
 	protected function clearCache( array $productIds )
 	{
-		$tags = array();
+		$tags = [];
 
 		foreach( $productIds as $prodId ) {
 			$tags[] = 'product-' . $prodId;
@@ -713,7 +713,7 @@ class Standard
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
 		$defaultConditions = $search->getConditions();
 
-		$prodList = array();
+		$prodList = [];
 		$numSubProducts = 0;
 
 		foreach( $items as $id => $product )
@@ -734,7 +734,7 @@ class Standard
 
 				$this->saveSubProductsChunk( $search, $domains, $prodList, count( $prodList ) );
 
-				$prodList = array();
+				$prodList = [];
 				$numSubProducts = 0;
 			}
 		}
@@ -763,7 +763,7 @@ class Standard
 	protected function saveSubProductsChunk( \Aimeos\MW\Criteria\Iface $search, array $domains, array $list, $size )
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-		$submanagers = array();
+		$submanagers = [];
 		$start = 0;
 
 		// Execute only the sub-managers which correspond to one of the given domains
@@ -777,7 +777,7 @@ class Standard
 
 		do
 		{
-			$items = array();
+			$items = [];
 			$search->setSlice( $start, $size );
 			$result = $manager->searchItems( $search, $domains );
 
@@ -823,7 +823,7 @@ class Standard
 	{
 		if( $this->subManagers === null )
 		{
-			$this->subManagers = array();
+			$this->subManagers = [];
 
 			/** mshop/index/manager/submanagers
 			 * A list of sub-manager names used for indexing associated items

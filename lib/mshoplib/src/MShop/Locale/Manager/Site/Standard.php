@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Locale\Manager\Site\Iface
 {
-	private $cache = array();
+	private $cache = [];
 
 	private $searchConfig = array(
 		'locale.site.id' => array(
@@ -336,7 +336,7 @@ class Standard
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		return $this->findItemBase( array( 'locale.site.code' => $code ), $ref );
 	}
@@ -367,7 +367,7 @@ class Standard
 	{
 		$path = 'mshop/locale/manager/site/submanagers';
 
-		return $this->getResourceTypeBase( 'locale/site', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'locale/site', $path, [], $withsub );
 	}
 
 
@@ -398,7 +398,7 @@ class Standard
 		 */
 		$path = 'mshop/locale/manager/site/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -532,9 +532,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of site items implementing \Aimeos\MShop\Locale\Item\Site\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = array();
+		$items = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -667,7 +667,7 @@ class Standard
 		if( $default === true ) {
 			$search = $this->createSearchBase( 'locale.site' );
 		} else {
-			$search = parent::createSearch();
+			$search = parent::createSearch( $default );
 		}
 
 		$expr = array(
@@ -688,7 +688,7 @@ class Standard
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of items implementing \Aimeos\MShop\Locale\Item\Site\Iface with IDs as keys
 	 */
-	public function getPath( $id, array $ref = array() )
+	public function getPath( $id, array $ref = [] )
 	{
 		$item = $this->getTree( $id, $ref, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 		return array( $item->getId() => $item );
@@ -703,7 +703,7 @@ class Standard
 	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE )
+	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE )
 	{
 		if( $id !== null )
 		{
@@ -899,7 +899,7 @@ class Standard
 	 * @param array $data Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item object
 	 */
-	protected function createItemBase( array $data = array( ) )
+	protected function createItemBase( array $data = [] )
 	{
 		return new \Aimeos\MShop\Locale\Item\Site\Standard( $data );
 	}

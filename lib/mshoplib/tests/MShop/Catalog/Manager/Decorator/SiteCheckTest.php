@@ -45,7 +45,7 @@ class SiteCheckTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetTreePath()
 	{
-		$parent = $this->object->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+		$parent = $this->object->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 		$pathNodes = $this->object->getPath( $parent->getId() );
 
 		if( ( $node = reset( $pathNodes ) ) === false ) {
@@ -59,7 +59,7 @@ class SiteCheckTest extends \PHPUnit_Framework_TestCase
 	public function testInsertMoveItem()
 	{
 		$item = $this->object->createItem();
-		$parent = $this->object->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+		$parent = $this->object->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$this->object->insertItem( $item, $parent->getId() );
 		$this->object->moveItem( $item->getId(), $parent->getId(), $parent->getId() );

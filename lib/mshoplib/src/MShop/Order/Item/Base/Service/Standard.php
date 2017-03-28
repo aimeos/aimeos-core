@@ -31,7 +31,7 @@ class Standard extends Base implements Iface
 	 * @param array $values Values to be set on initialisation
 	 * @param array $attributes Attributes to be set on initialisation
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = array(), array $attributes = array() )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
 	{
 		parent::__construct( $price, $values, $attributes );
 
@@ -277,7 +277,7 @@ class Standard extends Base implements Iface
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

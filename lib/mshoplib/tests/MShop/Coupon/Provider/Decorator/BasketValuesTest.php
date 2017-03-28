@@ -28,7 +28,7 @@ class BasketValuesTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$orderProducts = array();
+		$orderProducts = [];
 		$context = \TestHelperMShop::getContext();
 
 		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context );

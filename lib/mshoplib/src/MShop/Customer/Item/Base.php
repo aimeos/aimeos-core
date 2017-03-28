@@ -37,8 +37,8 @@ abstract class Base
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addresses List of referenced address items
 	 */
-	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = array(),
-		array $listItems = array(), array $refItems = array(), $addresses = array() )
+	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
+		array $listItems = [], array $refItems = [], $addresses = [] )
 	{
 		parent::__construct( 'customer.', $values, $listItems, $refItems );
 
@@ -162,7 +162,7 @@ abstract class Base
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 		$addr = $this->getPaymentAddress();
 

@@ -55,7 +55,7 @@ class ServicesUpdate
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-		$ids = array();
+		$ids = [];
 		$context = $this->getContext();
 		$services = $order->getServices();
 

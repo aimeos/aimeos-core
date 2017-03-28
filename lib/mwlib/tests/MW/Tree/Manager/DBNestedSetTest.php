@@ -24,10 +24,10 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 		$table->addColumn( 'parentid', 'integer', array( 'notnull' => false ) );
 		$table->addColumn( 'label', 'string', array( 'length' => 16 ) );
 		$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
-		$table->addColumn( 'level', 'integer', array() );
-		$table->addColumn( 'nleft', 'integer', array() );
-		$table->addColumn( 'nright', 'integer', array() );
-		$table->addColumn( 'status', 'smallint', array() );
+		$table->addColumn( 'level', 'integer', [] );
+		$table->addColumn( 'nleft', 'integer', [] );
+		$table->addColumn( 'nright', 'integer', [] );
+		$table->addColumn( 'status', 'smallint', [] );
 		$table->setPrimaryKey( array( 'id' ) );
 
 		$conn = self::$dbm->acquire();
@@ -59,7 +59,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'No DBAL database manager configured' );
 		}
 
-		$this->config = array();
+		$this->config = [];
 
 		$this->config['search'] = array(
 			'id' => array( 'label' => 'Tree node ID', 'code' => 'tree.id', 'internalcode' => 'id', 'type' => 'integer', 'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT ),
@@ -186,7 +186,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 	public function testConstructorNoConfig()
 	{
 		$this->setExpectedException( '\\Aimeos\\MW\\Tree\\Exception' );
-		new \Aimeos\MW\Tree\Manager\DBNestedSet(array(), self::$dbm);
+		new \Aimeos\MW\Tree\Manager\DBNestedSet([], self::$dbm);
 	}
 
 
@@ -371,7 +371,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 	{
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 
-		$nodes = array();
+		$nodes = [];
 		$nodes[0] = $manager->getNode();
 		$nodes[1] = $nodes[0]->getChild( 1 );
 		$nodes[2] = $nodes[1]->getChild( 0 );
@@ -1062,7 +1062,7 @@ class DBNestedSetTest extends \PHPUnit_Framework_TestCase
 
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
 
-		$method->invokeArgs( $manager, array() );
+		$method->invokeArgs( $manager, [] );
 
 		$this->assertTrue( $manager->isReadOnly() );
 	}

@@ -30,7 +30,7 @@ class Standard
 	 *
 	 * @param array $values Associative list of key/value pairs
 	 */
-	public function __construct( array $values = array() )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'cache.', $values );
 
@@ -133,7 +133,7 @@ class Standard
 	 */
 	public function getTags()
 	{
-		return ( isset( $this->values['tags'] ) ? (array) $this->values['tags'] : array() );
+		return ( isset( $this->values['tags'] ) ? (array) $this->values['tags'] : [] );
 	}
 
 
@@ -168,7 +168,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )
@@ -194,7 +194,7 @@ class Standard
 	 */
 	public function toArray()
 	{
-		$list = array();
+		$list = [];
 
 		$list['cache.id'] = $this->getId();
 		$list['cache.siteid'] = $this->getSiteId();

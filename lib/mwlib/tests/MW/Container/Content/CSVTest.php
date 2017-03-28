@@ -86,7 +86,7 @@ class CSVTest extends \PHPUnit_Framework_TestCase
 			array( '"', ',', '\\' ),
 		);
 
-		$actual = array();
+		$actual = [];
 		foreach( $csv as $entry ) {
 			$actual[] = $entry;
 		}

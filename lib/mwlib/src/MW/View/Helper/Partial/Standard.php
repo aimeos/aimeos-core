@@ -28,7 +28,7 @@ class Standard
 	 * @param array $params Associative list of key/value pair that should be available in the partial
 	 * @return string Rendered partial content
 	 */
-	public function transform( $file, array $params = array() )
+	public function transform( $file, array $params = [] )
 	{
 		$view = clone $this->getView();
 		$view->assign( $params );

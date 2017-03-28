@@ -83,7 +83,7 @@ class Factory
 	 */
 	static public function getControllers( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos, array $cntlPaths )
 	{
-		$cntlList = array();
+		$cntlList = [];
 		$subFolder = trim( str_replace( '\\', '/', self::$prefix ), '/' );
 
 		if( strncmp( $subFolder, 'Aimeos' . '/', 7 ) === 0 ) {
@@ -124,7 +124,7 @@ class Factory
 	static protected function createControllers( \DirectoryIterator $dir, \Aimeos\MShop\Context\Item\Iface $context,
 		\Aimeos\Bootstrap $aimeos, $prefix = '' )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $dir as $entry )
 		{

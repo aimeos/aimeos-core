@@ -316,7 +316,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/order/manager/base/address/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -595,7 +595,7 @@ class Standard
 	{
 		$path = 'mshop/order/manager/base/address/submanagers';
 
-		return $this->getResourceTypeBase( 'order/base/address', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'order/base/address', $path, [], $withsub );
 	}
 
 
@@ -626,7 +626,7 @@ class Standard
 		 */
 		$path = 'mshop/order/manager/base/address/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -638,7 +638,7 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @throws \Aimeos\MShop\Order\Exception if creating items failed
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$context = $this->getContext();
 
@@ -646,7 +646,7 @@ class Standard
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$items = array();
+		$items = [];
 
 		try
 		{
@@ -923,7 +923,7 @@ class Standard
 	 * @param array $values Possible optional array keys can be given: id, type, firstname, lastname
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Standard New order base address item object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Order\Item\Base\Address\Standard( $values );
 	}

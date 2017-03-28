@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['supplier.id'], $item->getId() );
 		$this->assertEquals( $list['supplier.code'], $item->getCode() );

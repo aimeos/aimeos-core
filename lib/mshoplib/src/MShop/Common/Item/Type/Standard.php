@@ -32,7 +32,7 @@ class Standard
 	 * @param string $prefix Property prefix when converting to array
 	 * @param array $values Initial values of the list type item
 	 */
-	public function __construct( $prefix, array $values = array() )
+	public function __construct( $prefix, array $values = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -203,7 +203,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 		unset( $list[$this->prefix . 'name'] );
 

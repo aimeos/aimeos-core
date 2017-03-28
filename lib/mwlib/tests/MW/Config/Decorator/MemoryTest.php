@@ -22,7 +22,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$conf = new \Aimeos\MW\Config\PHPArray( array() );
+		$conf = new \Aimeos\MW\Config\PHPArray( [] );
 		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 	}
 
@@ -44,7 +44,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetLocal()
 	{
-		$conf = new \Aimeos\MW\Config\PHPArray( array() );
+		$conf = new \Aimeos\MW\Config\PHPArray( [] );
 		$local = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
 		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
 
@@ -64,7 +64,7 @@ class MemoryTest extends \PHPUnit_Framework_TestCase
 		$local = array( 'resource' => array( 'db' => array( 'host' => '127.0.0.1' ) ) );
 		$this->object = new \Aimeos\MW\Config\Decorator\Memory( $conf, $local );
 
-		$result = $this->object->get( 'resource/db', array() );
+		$result = $this->object->get( 'resource/db', [] );
 		$this->assertArrayNotHasKey( 'database', $result );
 		$this->assertArrayHasKey( 'host', $result );
 	}

@@ -15,8 +15,8 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'facility', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'timestamp', 'datetime', array() );
-			$table->addColumn( 'priority', 'smallint', array() );
+			$table->addColumn( 'timestamp', 'datetime', [] );
+			$table->addColumn( 'priority', 'smallint', [] );
 			$table->addColumn( 'message', 'text', array( 'length' => 0x1ffff ) );
 			$table->addColumn( 'request', 'string', array( 'length' => 32 ) );
 

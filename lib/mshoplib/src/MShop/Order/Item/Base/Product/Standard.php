@@ -32,7 +32,7 @@ class Standard extends Base implements Iface
 	 * @param array $attributes List of order attributes implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 * @param array $products List of ordered subproducts implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = array(), array $attributes = array(), array $products = array() )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [], array $products = [] )
 	{
 		parent::__construct( $price, $values, $attributes );
 
@@ -593,7 +593,7 @@ class Standard extends Base implements Iface
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 
 		if( isset( $list['order.base.product.siteid'] ) ) { // set siteid in this class too
 			$this->setSiteId( $list['order.base.product.siteid'] );

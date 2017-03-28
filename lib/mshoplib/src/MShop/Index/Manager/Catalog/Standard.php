@@ -209,7 +209,7 @@ class Standard
 	{
 		$path = 'mshop/index/manager/catalog/submanagers';
 
-		return $this->getResourceTypeBase( 'index/catalog', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'index/catalog', $path, [], $withsub );
 	}
 
 
@@ -242,7 +242,7 @@ class Standard
 		 */
 		$path = 'mshop/index/manager/catalog/submanagers';
 
-		$list += $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		$list += $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 
 		return $list;
 	}
@@ -412,7 +412,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function rebuildIndex( array $items = array() )
+	public function rebuildIndex( array $items = [] )
 	{
 		if( empty( $items ) ) { return; }
 
@@ -512,7 +512,7 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		/** mshop/index/manager/catalog/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -634,7 +634,7 @@ class Standard
 	 */
 	protected function getListItems( array $items )
 	{
-		$listItems = array();
+		$listItems = [];
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
 
 		$search = $listManager->createSearch( true );
@@ -665,7 +665,7 @@ class Standard
 	{
 		if( $this->subManagers === null )
 		{
-			$this->subManagers = array();
+			$this->subManagers = [];
 
 			/** mshop/index/manager/catalog/submanagers
 			 * A list of sub-manager names used for indexing associated items to categories
@@ -687,7 +687,7 @@ class Standard
 			 */
 			$path = 'mshop/index/manager/catalog/submanagers';
 
-			foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 				$this->subManagers[$domain] = $this->getSubManager( $domain );
 			}
 

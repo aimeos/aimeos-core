@@ -170,7 +170,7 @@ abstract class Base
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = 'product', $type = null )
+	public function findItem( $code, array $ref = [], $domain = 'product', $type = null )
 	{
 		$find = array(
 			$this->prefix . 'code' => $code,
@@ -202,9 +202,9 @@ abstract class Base
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of type items implementing \Aimeos\MShop\Common\Item\Type\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = array();
+		$items = [];
 
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -275,7 +275,7 @@ abstract class Base
 	 * @param array $values Associative list of key/value pairs
 	 * @return \Aimeos\MShop\Common\Item\Type\Standard New type item object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Common\Item\Type\Standard( $this->prefix, $values );
 	}

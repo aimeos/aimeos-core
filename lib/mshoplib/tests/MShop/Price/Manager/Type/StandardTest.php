@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'price.type.id', null );
 		$expr[] = $search->compare( '!=', 'price.type.siteid', null );
 		$expr[] = $search->compare( '==', 'price.type.domain', 'product' );
@@ -163,7 +163,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'price.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 
 
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 2 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 4, $total );

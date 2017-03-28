@@ -26,5 +26,5 @@ interface Iface extends \Aimeos\MW\View\Helper\Iface
 	 * @param array $params Associative list of key/value pair that should be available in the partial
 	 * @return string Rendered partial content
 	 */
-	public function transform( $file, array $params = array() );
+	public function transform( $file, array $params = [] );
 }

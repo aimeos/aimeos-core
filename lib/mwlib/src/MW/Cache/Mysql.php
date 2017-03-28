@@ -93,7 +93,7 @@ class Mysql
 	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = [] )
 	{
 		$type = ( count( $pairs ) > 1 ? \Aimeos\MW\DB\Connection\Base::TYPE_PREP : \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE );
 		$conn = $this->dbm->acquire( $this->dbname );
@@ -119,7 +119,7 @@ class Mysql
 
 				if( isset( $tags[$key] ) )
 				{
-					$parts = array();
+					$parts = [];
 					$stmtTagPart = $conn->create( '( ?, ?, ? )' );
 
 					foreach( (array) $tags[$key] as $name )

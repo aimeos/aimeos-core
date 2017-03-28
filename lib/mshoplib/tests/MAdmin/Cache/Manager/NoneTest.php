@@ -74,7 +74,7 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->compare( '==', 'cache.id', 'unittest' ) );
 		$results = $this->object->searchItems( $search );
 
-		$this->assertEquals( array(), $results );
+		$this->assertEquals( [], $results );
 	}
 
 

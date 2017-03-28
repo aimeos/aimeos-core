@@ -33,7 +33,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -74,7 +74,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$mediaTypeManager = $mediaManager->getSubManager( 'type', 'Standard' );
 
-		$mtypeIds = array();
+		$mtypeIds = [];
 		$mtype = $mediaTypeManager->createItem();
 
 		$this->conn->begin();

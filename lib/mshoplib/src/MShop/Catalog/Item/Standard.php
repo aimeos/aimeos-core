@@ -34,10 +34,10 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
-	public function __construct( \Aimeos\MW\Tree\Node\Iface $node, array $children = array(),
-		array $listItems = array(), array $refItems = array() )
+	public function __construct( \Aimeos\MW\Tree\Node\Iface $node, array $children = [],
+		array $listItems = [], array $refItems = [] )
 	{
-		parent::__construct( '', array(), $listItems, $refItems );
+		parent::__construct( '', [], $listItems, $refItems );
 
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $children );
 
@@ -127,7 +127,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return $this->node->__isset( 'config' ) && is_array( $this->node->config ) ? $this->node->__get( 'config' ) : array();
+		return $this->node->__isset( 'config' ) && is_array( $this->node->config ) ? $this->node->__get( 'config' ) : [];
 	}
 
 
@@ -238,7 +238,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

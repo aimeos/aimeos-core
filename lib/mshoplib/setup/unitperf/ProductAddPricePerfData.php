@@ -50,7 +50,7 @@ class ProductAddPricePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 		$priceTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'price/type' );
 
-		$expr = array();
+		$expr = [];
 		$search = $priceTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'price.type.domain', 'product' );
 		$expr[] = $search->compare( '==', 'price.type.code', 'default' );
@@ -76,7 +76,7 @@ class ProductAddPricePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 		$productListTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
 
-		$expr = array();
+		$expr = [];
 		$search = $productListTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'price' );

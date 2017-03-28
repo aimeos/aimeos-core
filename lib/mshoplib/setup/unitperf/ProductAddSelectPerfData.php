@@ -74,7 +74,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 
 
 		$selCount = count( $selProducts );
-		$selPrices = array();
+		$selPrices = [];
 		$start = $num = 0;
 
 		do
@@ -155,7 +155,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 	 * @param array $prices
 	 * @return \Aimeos\MShop\Price\Item\Iface
 	 */
-	protected function getLowestPrice( \Aimeos\MShop\Price\Item\Iface $price = null, array $prices = array() )
+	protected function getLowestPrice( \Aimeos\MShop\Price\Item\Iface $price = null, array $prices = [] )
 	{
 		foreach( $prices as $item )
 		{
@@ -182,7 +182,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 	 */
 	protected function getSelectionProductIds()
 	{
-		$textTypeItems = array();
+		$textTypeItems = [];
 		$context = $this->getContext();
 
 
@@ -216,7 +216,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 
 		$productListTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
 
-		$expr = array();
+		$expr = [];
 		$search = $productListTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'text' );
 		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
@@ -238,7 +238,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 
 		$productTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/type' );
 
-		$expr = array();
+		$expr = [];
 		$search = $productTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'product.type.domain', 'product' );
 		$expr[] = $search->compare( '==', 'product.type.code', 'select' );
@@ -270,7 +270,7 @@ class ProductAddSelectPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfD
 		}
 
 
-		$selProducts = array();
+		$selProducts = [];
 
 		for( $i = 0; $i < $count; $i++ )
 		{

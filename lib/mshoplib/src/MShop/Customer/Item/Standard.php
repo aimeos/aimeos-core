@@ -271,7 +271,7 @@ class Standard extends Base implements Iface
 	{
 		if( !isset( $this->values['groups'] ) )
 		{
-			$this->values['groups'] = array();
+			$this->values['groups'] = [];
 
 			foreach( $this->getListItems( 'customer/group', 'default' ) as $listItem ) {
 				$this->values['groups'][] = $listItem->getRefId();
@@ -304,7 +304,7 @@ class Standard extends Base implements Iface
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

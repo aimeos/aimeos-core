@@ -219,8 +219,8 @@ abstract class Base
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = array(), array $products = array(), array $addresses = array(),
-		array $services = array(), array $coupons = array() )
+		array $values = [], array $products = [], array $addresses = [],
+		array $services = [], array $coupons = [] )
 	{
 		return new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale,
 			$values, $products, $addresses, $services, $coupons );
@@ -240,7 +240,7 @@ abstract class Base
 	protected function loadItems( $id, \Aimeos\MShop\Price\Item\Iface$price,
 		\Aimeos\MShop\Locale\Item\Iface $localeItem, $row, $parts )
 	{
-		$products = $coupons = $addresses = $services = array();
+		$products = $coupons = $addresses = $services = [];
 
 		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT
 				|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON
@@ -279,7 +279,7 @@ abstract class Base
 	protected function loadFresh( $id, \Aimeos\MShop\Price\Item\Iface $price,
 		\Aimeos\MShop\Locale\Item\Iface $localeItem, $row, $parts )
 	{
-		$products = $addresses = $services = array();
+		$products = $addresses = $services = [];
 
 		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT ) {
 			$products = $this->loadProducts( $id, true );
@@ -322,7 +322,7 @@ abstract class Base
 	 */
 	protected function loadProducts( $id, $fresh )
 	{
-		$attributes = $products = $subProducts = array();
+		$attributes = $products = $subProducts = [];
 		$manager = $this->getSubManager( 'product' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
@@ -362,7 +362,7 @@ abstract class Base
 				$item->setProducts( $subProducts );
 				$products[$item->getPosition()] = $item;
 
-				$subProducts = array();
+				$subProducts = [];
 			}
 			else
 			{	// in case it's a sub-product
@@ -390,7 +390,7 @@ abstract class Base
 	 */
 	protected function loadAddresses( $id, $fresh )
 	{
-		$items = array();
+		$items = [];
 		$manager = $this->getSubManager( 'address' );
 
 		$criteria = $manager->createSearch();
@@ -422,7 +422,7 @@ abstract class Base
 	 */
 	protected function loadCoupons( $id, $fresh, array $products )
 	{
-		$items = array();
+		$items = [];
 		$manager = $this->getSubManager( 'coupon' );
 
 		$criteria = $manager->createSearch();
@@ -432,7 +432,7 @@ abstract class Base
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
 			if( !isset( $items[$item->getCode()] ) ) {
-				$items[$item->getCode()] = array();
+				$items[$item->getCode()] = [];
 			}
 
 			if( $item->getProductId() !== null )
@@ -459,7 +459,7 @@ abstract class Base
 	 */
 	protected function loadServices( $id, $fresh )
 	{
-		$items = array();
+		$items = [];
 		$manager = $this->getSubManager( 'service' );
 
 		$criteria = $manager->createSearch();

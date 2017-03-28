@@ -67,16 +67,16 @@ class DirectoryTest extends \PHPUnit_Framework_TestCase
 			'testfile.csv' => 1,
 		);
 
-		$actual = array();
+		$actual = [];
 		foreach( $dir as $entry )
 		{
-			$rows = array();
+			$rows = [];
 			foreach( $entry as $row ) {
 				$rows[] = $row;
 			}
 
 			// test if rewind works
-			$rows = array();
+			$rows = [];
 			foreach( $entry as $row ) {
 				$rows[] = $row;
 			}

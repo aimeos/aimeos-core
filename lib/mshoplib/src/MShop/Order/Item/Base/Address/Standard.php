@@ -29,7 +29,7 @@ class Standard
 	 *
 	 * @param array $values List of address elements
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.base.address.', $values );
 
@@ -160,7 +160,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

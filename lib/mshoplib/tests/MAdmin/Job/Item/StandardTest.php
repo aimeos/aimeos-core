@@ -182,7 +182,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['job.id'], $item->getId() );
 		$this->assertEquals( $list['job.label'], $item->getLabel() );

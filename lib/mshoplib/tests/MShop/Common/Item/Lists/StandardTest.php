@@ -234,7 +234,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetRefItem()
 	{
-		$obj = new \Aimeos\MShop\Common\Item\Lists\Standard( 'reftest', array() );
+		$obj = new \Aimeos\MShop\Common\Item\Lists\Standard( 'reftest', [] );
 
 		$return = $this->object->setRefItem( $obj );
 
@@ -267,7 +267,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['common.lists.id'], $item->getId() );
 		$this->assertEquals( $list['common.lists.parentid'], $item->getParentId() );

@@ -202,7 +202,7 @@ class ProductAddTextPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDat
 
 		$types = $textTypeManager->searchItems( $search );
 
-		$textTypes = array();
+		$textTypes = [];
 		foreach( $types as $type ) {
 			$textTypes[$type->getCode()] = $type->getId();
 		}

@@ -16,7 +16,7 @@ namespace Aimeos\MW\Setup\Task;
 class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 {
 	private $editor = '';
-	private $domainManagers = array();
+	private $domainManagers = [];
 
 
 	/**
@@ -37,7 +37,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

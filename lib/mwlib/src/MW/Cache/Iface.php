@@ -305,7 +305,7 @@ interface Iface
 	 * You can also specify an expiration date for the key:
 	 *
 	 * <code>
-	 * $cache->set( 'product/id/100', '<string>', array(), '2100-01-01 12:00:00' );
+	 * $cache->set( 'product/id/100', '<string>', [], '2100-01-01 12:00:00' );
 	 * </code>
 	 *
 	 * In the example, 'product/id/100' would stay in the cache till Jan. 1, 2100
@@ -335,7 +335,7 @@ interface Iface
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 * @return null
 	 */
-	public function set( $key, $value, $expires = null, array $tags = array() );
+	public function set( $key, $value, $expires = null, array $tags = [] );
 
 
 	/**
@@ -376,7 +376,7 @@ interface Iface
 	 * 	'product/id/100/name' => '2000-01-01 00:00:00', // expiry date
 	 * 	'product/id/100/object' =>  3600, // TTL (time to live)
 	 * );
-	 * $cache->setMultiple( $pairs, $expires, array() );
+	 * $cache->setMultiple( $pairs, $expires, [] );
 	 * </code>
 	 *
 	 * In the example, 'product/id/100/name' would have already been expired
@@ -407,7 +407,7 @@ interface Iface
 	 * 	'product/id/100/name' => 'product/id/100',
 	 * 	'product/id/100/prices' => array( 'product/id/100', 'price' ),
 	 * );
-	 * $cache->setMultiple( $pairs, array(), $tags );
+	 * $cache->setMultiple( $pairs, [], $tags );
 	 * </code>
 	 *
 	 * In this case, the tag 'product/id/100' would be associated to the first
@@ -428,5 +428,5 @@ interface Iface
 	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = array() );
+	public function setMultiple( $pairs, $expires = null, array $tags = [] );
 }

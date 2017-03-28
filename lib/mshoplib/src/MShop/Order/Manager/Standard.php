@@ -580,7 +580,7 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$context = $this->getContext();
 
@@ -588,7 +588,7 @@ class Standard
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$items = array();
+		$items = [];
 
 		try
 		{
@@ -785,7 +785,7 @@ class Standard
 	 * @param array $values List of attributes for order item
 	 * @return \Aimeos\MShop\Order\Item\Iface New order item
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Order\Item\Standard( $values );
 	}

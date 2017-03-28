@@ -54,7 +54,7 @@ class ProductStock
 			return true;
 		}
 
-		if( ( $outOfStock = $this->checkStock( $order ) ) !== array() )
+		if( ( $outOfStock = $this->checkStock( $order ) ) !== [] )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Products out of stock' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, array( 'product' => $outOfStock ) );
@@ -72,7 +72,7 @@ class ProductStock
 	 */
 	protected function checkStock( \Aimeos\MShop\Order\Item\Base\Iface $order )
 	{
-		$productCodes = $stockTypes = $stockMap = array();
+		$productCodes = $stockTypes = $stockMap = [];
 
 		foreach( $order->getProducts() as $orderProductItem )
 		{
@@ -100,7 +100,7 @@ class ProductStock
 	 */
 	protected function checkStockLevels( \Aimeos\MShop\Order\Item\Base\Iface $order, array $stockMap )
 	{
-		$outOfStock = array();
+		$outOfStock = [];
 
 		foreach( $order->getProducts() as $position => $orderProductItem )
 		{

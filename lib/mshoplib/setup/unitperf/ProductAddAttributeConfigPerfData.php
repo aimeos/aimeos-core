@@ -58,7 +58,7 @@ class ProductAddAttributeConfigPerfData extends \Aimeos\MW\Setup\Task\ProductAdd
 		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
-		$expr = array();
+		$expr = [];
 		$search = $productListTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'attribute' );
 		$expr[] = $search->compare( '==', 'product.lists.type.code', 'config' );
@@ -183,7 +183,7 @@ class ProductAddAttributeConfigPerfData extends \Aimeos\MW\Setup\Task\ProductAdd
 
 
 		$pos = 0;
-		$attrList = array();
+		$attrList = [];
 
 		foreach( array( 'small sticker' => '+2.50', 'large sticker' => '+7.50' ) as $option => $price )
 		{

@@ -30,11 +30,11 @@ return array(
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'tax', 'decimal', array( 'precision' => 14, 'scale' => 4 ) );
-			$table->addColumn( 'taxflag', 'smallint', array() );
+			$table->addColumn( 'taxflag', 'smallint', [] );
 			$table->addColumn( 'comment', 'text', array( 'length' => 0xfff ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordba_id' );
@@ -50,7 +50,7 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base_address' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'baseid', 'bigint', array() );
+			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'addrid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 8 ) );
@@ -74,9 +74,9 @@ return array(
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'longitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
 			$table->addColumn( 'latitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
-			$table->addColumn( 'flag', 'integer', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'flag', 'integer', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaad_id' );
@@ -100,7 +100,7 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base_product' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'baseid', 'bigint', array() );
+			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
@@ -110,18 +110,18 @@ return array(
 			$table->addColumn( 'stocktype', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'quantity', 'integer', array() );
+			$table->addColumn( 'quantity', 'integer', [] );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'tax', 'decimal', array( 'precision' => 14, 'scale' => 4 ) );
 			$table->addColumn( 'taxrate', 'decimal', array( 'precision' => 5, 'scale' => 2 ) );
-			$table->addColumn( 'taxflag', 'smallint', array() );
-			$table->addColumn( 'flags', 'integer', array() );
-			$table->addColumn( 'pos', 'integer', array() );
+			$table->addColumn( 'taxflag', 'smallint', [] );
+			$table->addColumn( 'flags', 'integer', [] );
+			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', array( 'default' => -1 ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbapr_id' );
@@ -141,15 +141,15 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base_product_attr' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'ordprodid', 'bigint', array() );
+			$table->addColumn( 'ordprodid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaprat_id' );
@@ -167,7 +167,7 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base_service' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'baseid', 'bigint', array() );
+			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'servid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 8 ) );
@@ -179,9 +179,9 @@ return array(
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'tax', 'decimal', array( 'precision' => 14, 'scale' => 4 ) );
 			$table->addColumn( 'taxrate', 'decimal', array( 'precision' => 5, 'scale' => 2 ) );
-			$table->addColumn( 'taxflag', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'taxflag', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbase_id' );
@@ -201,15 +201,15 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base_service_attr' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'ordservid', 'bigint', array() );
+			$table->addColumn( 'ordservid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'attrid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaseat_id' );
@@ -227,12 +227,12 @@ return array(
 			$table = $schema->createTable( 'mshop_order_base_coupon' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'baseid', 'bigint', array() );
+			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'ordprodid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaco_id' );
@@ -254,10 +254,10 @@ return array(
 			$table = $schema->createTable( 'mshop_order' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'baseid', 'bigint', array() );
+			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 8 ) );
-			$table->addColumn( 'datepayment', 'datetime', array() );
+			$table->addColumn( 'datepayment', 'datetime', [] );
 			$table->addColumn( 'datedelivery', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'statusdelivery', 'smallint', array( 'default' => -1 ) );
@@ -266,8 +266,8 @@ return array(
 			$table->addColumn( 'cweek', 'string', array( 'fixed' => 7 ) );
 			$table->addColumn( 'cmonth', 'string', array( 'fixed' => 7 ) );
 			$table->addColumn( 'chour', 'string', array( 'fixed' => 2 ) );
-			$table->addColumn( 'ctime', 'datetime', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
+			$table->addColumn( 'ctime', 'datetime', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msord_id' );
@@ -296,12 +296,12 @@ return array(
 			$table = $schema->createTable( 'mshop_order_status' );
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'bigint', array() );
+			$table->addColumn( 'parentid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordst_id' );

@@ -214,7 +214,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetSetGroupIds()
 	{
-		$this->assertEquals( array(), $this->object->getGroupIds() );
+		$this->assertEquals( [], $this->object->getGroupIds() );
 
 		$return = $this->object->setGroupIds( array( 123 ) );
 		$this->assertEquals( array( '123' ), $this->object->getGroupIds() );

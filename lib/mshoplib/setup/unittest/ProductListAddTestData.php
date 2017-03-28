@@ -58,14 +58,14 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
 		}
 
-		$refKeys = array();
+		$refKeys = [];
 		foreach( $testdata['product/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$refIds = array();
+		$refIds = [];
 		$refIds['attribute'] = $this->getAttributeData( $refKeys['attribute'] );
 		$refIds['media'] = $this->getMediaData( $refKeys['media'] );
 		$refIds['price'] = $this->getPriceData( $refKeys['price'] );
@@ -90,7 +90,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
-		$codes = $typeCodes = $domains = array();
+		$codes = $typeCodes = $domains = [];
 		foreach( $keys as $dataset )
 		{
 			$exp = explode( '/', $dataset );
@@ -111,7 +111,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$typeids = array();
+		$typeids = [];
 		foreach( $attributeTypeManager->searchItems( $search ) as $item ) {
 			$typeids[] = $item->getId();
 		}
@@ -123,7 +123,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $attributeManager->searchItems( $search ) as $item ) {
 			$refIds['attribute/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getCode()] = $item->getId();
 		}
@@ -143,7 +143,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$urls = array();
+		$urls = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -156,7 +156,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $mediaManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $mediaManager->searchItems( $search ) as $item ) {
 			$refIds['media/' . $item->getUrl()] = $item->getId();
 		}
@@ -177,7 +177,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
-		$value = $ship = $domain = $code = array();
+		$value = $ship = $domain = $code = [];
 		foreach( $keys as $dataset )
 		{
 			$exp = explode( '/', $dataset );
@@ -199,7 +199,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$typeids = array();
+		$typeids = [];
 		foreach( $priceTypeManager->searchItems( $search ) as $item ) {
 			$typeids[] = $item->getId();
 		}
@@ -212,7 +212,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $priceManager->searchItems( $search ) as $item ) {
 			$refIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
 		}
@@ -231,7 +231,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$labels = array();
+		$labels = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -244,7 +244,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $textManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $textManager->searchItems( $search ) as $item ) {
 			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
@@ -264,7 +264,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$tagManager = \Aimeos\MShop\Tag\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$prodTag = array();
+		$prodTag = [];
 		foreach( $keys as $key )
 		{
 			$exp = explode( '/', $key );
@@ -279,7 +279,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $tagManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'tag.label', $prodTag ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $tagManager->searchItems( $search ) as $item ) {
 			$refIds['tag/' . $item->getLabel()] = $item->getId();
 		}
@@ -350,7 +350,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function addListTypeData( \Aimeos\MShop\Common\Manager\Iface $manager, array $testdata )
 	{
-		$listItemTypeIds = array();
+		$listItemTypeIds = [];
 		$productListTypeManager = $manager->getSubmanager( 'type', 'Standard' );
 		$listItemType = $productListTypeManager->createItem();
 
@@ -379,7 +379,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getProductIds( \Aimeos\MShop\Common\Manager\Iface $manager, array $testdata )
 	{
-		$parentCodes = $parentIds = array();
+		$parentCodes = $parentIds = [];
 
 		foreach( $testdata['product/lists'] as $dataset )
 		{
@@ -412,7 +412,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	private function getProductRefIds( \Aimeos\MShop\Common\Manager\Iface $manager, array $keys )
 	{
-		$codes = $refIds = array();
+		$codes = $refIds = [];
 
 		foreach( $keys as $dataset )
 		{

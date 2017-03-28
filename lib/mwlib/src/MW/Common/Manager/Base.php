@@ -63,7 +63,7 @@ abstract class Base
 	 */
 	protected function getSearchTranslations( array $attributes )
 	{
-		$translations = array();
+		$translations = [];
 		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
 
 		foreach( $attributes as $key => $item )
@@ -91,7 +91,7 @@ abstract class Base
 	 */
 	protected function getSearchTypes( array $attributes )
 	{
-		$types = array();
+		$types = [];
 		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
 
 		foreach( $attributes as $key => $item )
@@ -118,7 +118,7 @@ abstract class Base
 	 */
 	private function cutNameTail( array $prefix, $string )
 	{
-		$result = array();
+		$result = [];
 		$noprefix = true;
 		$strlen = strlen( $string );
 		$sep = $this->getKeySeparator();
@@ -162,9 +162,9 @@ abstract class Base
 	 */
 	private function getCriteriaKeys( array $prefix, \Aimeos\MW\Criteria\Expression\Iface $expr = null )
 	{
-		if( $expr === null ) { return array(); }
+		if( $expr === null ) { return []; }
 
-		$result = array();
+		$result = [];
 
 		foreach( $this->getCriteriaNames( $expr ) as $item )
 		{
@@ -197,7 +197,7 @@ abstract class Base
 
 		if( $expr instanceof \Aimeos\MW\Criteria\Expression\Combine\Iface )
 		{
-			$list = array();
+			$list = [];
 			foreach( $expr->getExpressions() as $item ) {
 				$list = array_merge( $list, $this->getCriteriaNames( $item ) );
 			}
@@ -208,6 +208,6 @@ abstract class Base
 			return array( $expr->getName() );
 		}
 
-		return array();
+		return [];
 	}
 }

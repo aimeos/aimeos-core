@@ -93,7 +93,7 @@ class None
 	 */
 	public function getMultiple( $keys, $default = null )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $keys as $key ) {
 			$list[$key] = $default;
@@ -113,7 +113,7 @@ class None
 	 */
 	public function getMultipleByTags( array $tags )
 	{
-		return array();
+		return [];
 	}
 
 
@@ -127,7 +127,7 @@ class None
 	 * @param array $tags List of tag strings that should be assoicated to the
 	 * 	given value in the cache
 	 */
-	public function set( $key, $value, $expires = null, array $tags = array() )
+	public function set( $key, $value, $expires = null, array $tags = [] )
 	{
 	}
 
@@ -145,7 +145,7 @@ class None
 	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = [] )
 	{
 	}
 }

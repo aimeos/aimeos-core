@@ -20,7 +20,7 @@ namespace Aimeos\MW\Criteria\Expression;
  */
 abstract class Base
 {
-	private $plugins = array();
+	private $plugins = [];
 
 
 	/**
@@ -57,7 +57,7 @@ abstract class Base
 	 */
 	protected static function createSignature( array $params )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $params as $param )
 		{
@@ -104,7 +104,7 @@ abstract class Base
 			throw new \Aimeos\MW\Common\Exception( 'Unable to extract function name' );
 		}
 
-		$matches = array();
+		$matches = [];
 		$pattern = '/(\[[^\]]*\]|"[^"]*"|[0-9]+\.[0-9]+|[0-9]+),?/';
 
 		if( preg_match_all( $pattern, $paramstr, $matches ) === false ) {
@@ -128,9 +128,9 @@ abstract class Base
 	 * (may include parameter if a name is an expression function)
 	 * @return string Translated name (with replaced parameters if the name is an expression function)
 	 */
-	protected function translateName( &$name, array $translations = array() )
+	protected function translateName( &$name, array $translations = [] )
 	{
-		$params = array();
+		$params = [];
 
 		if( $this->isFunction( $name, $params ) === true )
 		{
@@ -139,7 +139,7 @@ abstract class Base
 				$transname = $translations[$name];
 			}
 
-			$find = array();
+			$find = [];
 			$count = count( $params );
 
 			for( $i = 0; $i < $count; $i++ ) {
@@ -216,13 +216,13 @@ abstract class Base
 	 */
 	private function extractParams( array $strings )
 	{
-		$params = array();
+		$params = [];
 
 		foreach( $strings as $string )
 		{
 			if( isset( $string[0] ) && $string[0] == '[' )
 			{
-				$items = array();
+				$items = [];
 				$pattern = '/("[^"]*"|[0-9]+\.[0-9]+|[0-9]+),?/';
 
 				if( preg_match_all( $pattern, $string, $items ) === false ) {
@@ -231,7 +231,7 @@ abstract class Base
 
 				if( isset( $items[1] ) )
 				{
-					$list = array();
+					$list = [];
 
 					foreach( $items[1] as $item ) {
 						$list[] = $this->escape( '==', $this->getParamType( $item ), $item );

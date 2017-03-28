@@ -69,7 +69,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$couponManager = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$couponCodeManager = $couponManager->getSubmanager( 'code' );
 
-		$couponIds = array();
+		$couponIds = [];
 		$coupon = $couponManager->createItem();
 		foreach( $testdata['coupon'] as $key => $dataset )
 		{
@@ -118,10 +118,10 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$orderBaseProd = $orderBase->getSubManager( 'product', 'Standard' );
 		$orderBaseCoupon = $orderBase->getSubManager( 'coupon', 'Standard' );
 
-		$orderBaseIds = array();
-		$orderBasePrices = array();
-		$ordProdIds = array();
-		$prodcode = $quantity = $pos = array();
+		$orderBaseIds = [];
+		$orderBasePrices = [];
+		$ordProdIds = [];
+		$prodcode = $quantity = $pos = [];
 		foreach( $testdata['order/base/coupon'] as $key => $dataset ) {
 			$exp = explode( '/', $dataset['ordprodid'] );
 

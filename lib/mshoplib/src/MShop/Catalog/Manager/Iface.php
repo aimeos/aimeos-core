@@ -27,7 +27,7 @@ interface Iface
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return array Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface with IDs as keys
 	 */
-	public function getPath( $id, array $ref = array() );
+	public function getPath( $id, array $ref = [] );
 
 
 	/**
@@ -39,7 +39,7 @@ interface Iface
 	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null );
+	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null );
 
 
 	/**

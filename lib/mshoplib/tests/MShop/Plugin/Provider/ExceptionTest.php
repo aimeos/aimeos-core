@@ -43,7 +43,7 @@ class ExceptionTest extends \PHPUnit_Framework_TestCase
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $e )
 		{
-			$this->assertEquals( array(), $e->getErrorCodes() );
+			$this->assertEquals( [], $e->getErrorCodes() );
 		}
 	}
 }

@@ -15,7 +15,7 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'queue', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'cname', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'rtime', 'datetime', array() );
+			$table->addColumn( 'rtime', 'datetime', [] );
 			$table->addColumn( 'message', 'text', array( 'length' => 0xffff ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_maque_id' );

@@ -22,8 +22,8 @@ class SerializedArray
 	extends \Aimeos\MW\Translation\Base
 	implements \Aimeos\MW\Translation\Iface
 {
-	private $translations = array();
-	private $translationSources = array();
+	private $translations = [];
+	private $translationSources = [];
 
 
 	/**
@@ -124,7 +124,7 @@ class SerializedArray
 	 */
 	public function getAll( $domain )
 	{
-		$messages = array();
+		$messages = [];
 
 		foreach( $this->getTranslations( $domain ) as $list ) {
 			$messages = $messages + $list;

@@ -186,12 +186,12 @@ class Standard
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$locale = $this->getContext()->getLocale();
 		$siteIds = $locale->getSitePath();
 		$siteIds[] = $locale->getSiteId();
-		$items = array();
+		$items = [];
 
 		$search = clone $search;
 		$expr = array(
@@ -667,8 +667,8 @@ class Standard
 	 * @param array $siteSubTree List of site IDs below and including the current site
 	 * @return \Aimeos\MShop\Locale\Item\Standard Locale item
 	 */
-	protected function createItemBase( array $values = array( ), \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
-		array $sitePath = array(), array $siteSubTree = array() )
+	protected function createItemBase( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
+		array $sitePath = [], array $siteSubTree = [] )
 	{
 		return new \Aimeos\MShop\Locale\Item\Standard( $values, $site, $sitePath, $siteSubTree );
 	}
@@ -699,7 +699,7 @@ class Standard
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	protected function search( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	protected function search( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$context = $this->getContext();
 
@@ -707,7 +707,7 @@ class Standard
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$items = array();
+		$items = [];
 
 		try
 		{

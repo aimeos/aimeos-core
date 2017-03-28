@@ -28,7 +28,7 @@ class Factory
 	 * @param string $format Format of the content objects inside the container
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public static function getContainer( $resourcepath, $type, $format, array $options = array() )
+	public static function getContainer( $resourcepath, $type, $format, array $options = [] )
 	{
 		if( ctype_alnum( $type ) === false )
 		{

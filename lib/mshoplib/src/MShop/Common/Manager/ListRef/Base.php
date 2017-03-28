@@ -22,7 +22,7 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Common\Manager\ListRef\Iface
 {
-	private $typeIds = array();
+	private $typeIds = [];
 
 	/**
 	 * Updates the list items to the referenced items for the given domain and type
@@ -39,7 +39,7 @@ abstract class Base
 		if( !isset( $this->typeIds[$domain][$type] ) )
 		{
 			$typeManager = $listManager->getSubManager( 'type' );
-			$this->typeIds[$domain][$type] = $typeManager->findItem( $type, array(), $domain )->getId();
+			$this->typeIds[$domain][$type] = $typeManager->findItem( $type, [], $domain )->getId();
 		}
 
 		$listItem = $listManager->createItem();
@@ -49,7 +49,7 @@ abstract class Base
 		$listItem->setStatus( 1 );
 
 		$pos = 0;
-		$listRef = $ids = array();
+		$listRef = $ids = [];
 		$listItems = $item->getListItems( $domain, $type );
 
 		foreach( $listItems as $id => $listItem ) {
@@ -88,7 +88,7 @@ abstract class Base
 	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Common\Item\Iface New item
 	 */
-	abstract protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() );
+	abstract protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] );
 
 
 	/**
@@ -100,9 +100,9 @@ abstract class Base
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	protected function buildItems( array $map, array $domains, $prefix, array $local = array() )
+	protected function buildItems( array $map, array $domains, $prefix, array $local = [] )
 	{
-		$items = $listItemMap = $refItemMap = $refIdMap = array();
+		$items = $listItemMap = $refItemMap = $refIdMap = [];
 
 		if( count( $domains ) > 0 )
 		{
@@ -122,17 +122,17 @@ abstract class Base
 
 		foreach( $map as $id => $values )
 		{
-			$listItems = array();
+			$listItems = [];
 			if( isset( $listItemMap[$id] ) ) {
 				$listItems = $listItemMap[$id];
 			}
 
-			$refItems = array();
+			$refItems = [];
 			if( isset( $refItemMap[$id] ) ) {
 				$refItems = $refItemMap[$id];
 			}
 
-			$localItems = array();
+			$localItems = [];
 			if( isset( $local[$id] ) ) {
 				$localItems = $local[$id];
 			}
@@ -179,7 +179,7 @@ abstract class Base
 	 */
 	protected function getRefItems( array $refIdMap )
 	{
-		$items = array();
+		$items = [];
 		$context = $this->getContext();
 
 		foreach( $refIdMap as $domain => $list )

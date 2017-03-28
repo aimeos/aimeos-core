@@ -20,7 +20,7 @@ namespace Aimeos\MW\Setup\Manager;
  */
 abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 {
-	private static $taskPaths = array();
+	private static $taskPaths = [];
 
 
 	/**
@@ -112,7 +112,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	 */
 	protected function createTasks( array $paths, \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional )
 	{
-		$tasks = array();
+		$tasks = [];
 
 		foreach( $paths as $path )
 		{

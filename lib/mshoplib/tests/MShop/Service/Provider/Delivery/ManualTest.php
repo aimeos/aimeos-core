@@ -33,7 +33,7 @@ class ManualTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->assertEquals( array(), $this->object->getConfigBE() );
+		$this->assertEquals( [], $this->object->getConfigBE() );
 	}
 
 
@@ -42,7 +42,7 @@ class ManualTest extends \PHPUnit_Framework_TestCase
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
-		$this->assertEquals( array(), $this->object->getConfigFE( $basket ) );
+		$this->assertEquals( [], $this->object->getConfigFE( $basket ) );
 	}
 
 

@@ -164,7 +164,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		}
 
 		$search->setConditions( $search->compare( '==', 'index.price.id', $priceItem->getId() ) );
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 	}
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$search->setConditions( $search->compare( '!=', 'index.price.id', null ) );
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'index.price.quantity', 1 ) );
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -206,7 +206,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -222,7 +222,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}
@@ -238,7 +238,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 	}
@@ -254,7 +254,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.price.costs', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 	}
@@ -270,7 +270,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.price.taxrate', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 	}

@@ -7,7 +7,7 @@ class OneTask extends Base
 {
 	public function getPreDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

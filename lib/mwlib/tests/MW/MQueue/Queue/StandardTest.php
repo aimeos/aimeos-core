@@ -23,7 +23,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
 		$table->addColumn( 'queue', 'string', array( 'length' => 255 ) );
 		$table->addColumn( 'cname', 'string', array( 'length' => 32 ) );
-		$table->addColumn( 'rtime', 'datetime', array() );
+		$table->addColumn( 'rtime', 'datetime', [] );
 		$table->addColumn( 'message', 'text', array( 'length' => 0xffff ) );
 		$table->setPrimaryKey( array( 'id' ) );
 

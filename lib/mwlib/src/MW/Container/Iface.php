@@ -28,7 +28,7 @@ interface Iface extends \Iterator
 	 * @param array $options Associative list of key/value pairs for configuration
 	 * @return null
 	 */
-	public function __construct( $resourcepath, $format, array $options = array() );
+	public function __construct( $resourcepath, $format, array $options = [] );
 
 	/**
 	 * Adds content data to the container.

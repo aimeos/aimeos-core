@@ -95,7 +95,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function addOrderBaseData( \Aimeos\MShop\Common\Manager\Iface $localeManager,
 		\Aimeos\MShop\Common\Manager\Iface $orderBaseManager, array $testdata )
 	{
-		$bases = array();
+		$bases = [];
 		$locale = $localeManager->createItem();
 		$customerIds = $this->getCustomerIds( $testdata );
 		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address', 'Standard' );
@@ -187,7 +187,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function addOrderBaseServiceData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
 		array $bases, array $testdata )
 	{
-		$ordServices = array();
+		$ordServices = [];
 		$servIds = $this->getServiceIds( $testdata );
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service', 'Standard' );
 		$orderBaseServiceAttrManager = $orderBaseServiceManager->getSubManager( 'attribute', 'Standard' );
@@ -251,7 +251,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function addOrderBaseProductData( \Aimeos\MShop\Common\Manager\Iface $orderBaseManager,
 		array $bases, array $testdata )
 	{
-		$ordProds = array();
+		$ordProds = [];
 		$products = $this->getProductItems( $testdata );
 		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product', 'Standard' );
 		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Standard' );
@@ -329,7 +329,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function addOrderBaseProductAttributeData( \Aimeos\MShop\Common\Manager\Iface $manager,
 		array $testdata, array $ordProds, array $products )
 	{
-		$attrCodes = array();
+		$attrCodes = [];
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$attributes = $attributeManager->searchItems( $attributeManager->createSearch() );
 
@@ -417,7 +417,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$orderStatusManager = $orderManager->getSubManager( 'status', 'Standard' );
 
-		$ords = array();
+		$ords = [];
 		$ordItem = $orderManager->createItem();
 
 		$this->conn->begin();
@@ -468,7 +468,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getCustomerIds( array $testdata )
 	{
-		$customercodes = $customerIds = array();
+		$customercodes = $customerIds = [];
 
 		foreach( $testdata['order/base'] as $key => $dataset ) {
 			$customercodes[] = $dataset['customerid'];
@@ -494,7 +494,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getProductItems( array $testdata )
 	{
-		$codes = $items = array();
+		$codes = $items = [];
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		foreach( $testdata['order/base/product'] as $key => $dataset )
@@ -524,7 +524,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getServiceIds( array $testdata )
 	{
-		$services = $servIds = array();
+		$services = $servIds = [];
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
 
 		foreach( $testdata['order/base/service'] as $key => $dataset )

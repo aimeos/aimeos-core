@@ -49,7 +49,7 @@ return array(
 			'ANALYZE TABLE "mshop_product"',
 			'ANALYZE TABLE "mshop_product_list"',
 		),
-		'pgsql' => array(),
+		'pgsql' => [],
 	),
 );
 

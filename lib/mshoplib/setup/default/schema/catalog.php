@@ -14,17 +14,17 @@ return array(
 			$table = $schema->createTable( 'mshop_catalog' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', array() );
-			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'level', 'smallint', array() );
+			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'level', 'smallint', [] );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'default' => '', 'length' => 0xffff ) );
-			$table->addColumn( 'nleft', 'integer', array() );
-			$table->addColumn( 'nright', 'integer', array() );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'nleft', 'integer', [] );
+			$table->addColumn( 'nright', 'integer', [] );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscat_id' );
@@ -40,13 +40,13 @@ return array(
 			$table = $schema->createTable( 'mshop_catalog_list_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscatlity_id' );
@@ -63,18 +63,18 @@ return array(
 			$table = $schema->createTable( 'mshop_catalog_list' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', array() );
-			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'typeid', 'integer', array() );
+			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'typeid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'pos', 'integer', array() );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'pos', 'integer', [] );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscatli_id' );

@@ -301,7 +301,7 @@ class Standard extends Base
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		return $this->findItemBase( array( 'catalog.code' => $code ), $ref );
 	}
@@ -462,9 +462,9 @@ class Standard extends Base
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$nodeMap = $siteMap = array();
+		$nodeMap = $siteMap = [];
 		$context = $this->getContext();
 
 		$dbname = $this->getResourceName();
@@ -634,7 +634,7 @@ class Standard extends Base
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @return array Associative list of items implementing \Aimeos\MShop\Catalog\Item\Iface with IDs as keys
 	 */
-	public function getPath( $id, array $ref = array() )
+	public function getPath( $id, array $ref = [] )
 	{
 		$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
 
@@ -648,7 +648,7 @@ class Standard extends Base
 
 			if( !empty( $path ) )
 			{
-				$itemMap = array();
+				$itemMap = [];
 
 				foreach( $path as $node ) {
 					$itemMap[$node->getId()] = $node;
@@ -671,7 +671,7 @@ class Standard extends Base
 	 * @param \Aimeos\MW\Criteria\Iface|null $criteria Optional criteria object with conditions
 	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null )
+	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, \Aimeos\MW\Criteria\Iface $criteria = null )
 	{
 		$sitePath = array_reverse( $this->getContext()->getLocale()->getSitePath() );
 
@@ -683,7 +683,7 @@ class Standard extends Base
 				continue;
 			}
 
-			$listItems = $listItemMap = $refIdMap = array();
+			$listItems = $listItemMap = $refIdMap = [];
 			$nodeMap = $this->getNodeMap( $node );
 
 			if( count( $ref ) > 0 ) {
@@ -702,17 +702,17 @@ class Standard extends Base
 			$refItemMap = $this->getRefItems( $refIdMap );
 			$nodeid = $node->getId();
 
-			$listItems = array();
+			$listItems = [];
 			if( array_key_exists( $nodeid, $listItemMap ) ) {
 				$listItems = $listItemMap[$nodeid];
 			}
 
-			$refItems = array();
+			$refItems = [];
 			if( array_key_exists( $nodeid, $refItemMap ) ) {
 				$refItems = $refItemMap[$nodeid];
 			}
 
-			$item = $this->createItemBase( array(), $listItems, $refItems, array(), $node );
+			$item = $this->createItemBase( [], $listItems, $refItems, [], $node );
 			$this->createTree( $node, $item, $listItemMap, $refItemMap );
 
 			return $item;

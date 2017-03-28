@@ -50,7 +50,7 @@ class TestHelperCntl
 		{
 			require_once dirname( dirname( dirname( __DIR__ ) ) ) . DIRECTORY_SEPARATOR . 'Bootstrap.php';
 
-			self::$aimeos = new \Aimeos\Bootstrap( array(), false );
+			self::$aimeos = new \Aimeos\Bootstrap( [], false );
 		}
 
 		return self::$aimeos;
@@ -73,7 +73,7 @@ class TestHelperCntl
 		$paths[] = __DIR__ . DIRECTORY_SEPARATOR . 'config';
 		$file = __DIR__ . DIRECTORY_SEPARATOR . 'confdoc.ser';
 
-		$conf = new \Aimeos\MW\Config\PHPArray( array(), $paths );
+		$conf = new \Aimeos\MW\Config\PHPArray( [], $paths );
 		$conf = new \Aimeos\MW\Config\Decorator\Memory( $conf );
 		$conf = new \Aimeos\MW\Config\Decorator\Documentor( $conf, $file );
 		$ctx->setConfig( $conf );

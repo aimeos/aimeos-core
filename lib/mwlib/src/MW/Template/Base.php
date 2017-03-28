@@ -48,7 +48,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 */
 	public function enable( $name )
 	{
-		$marray = array();
+		$marray = [];
 
 		foreach( (array) $name as $item )
 		{
@@ -70,7 +70,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 */
 	public function disable( $name )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( (array) $name as $item ) {
 			$list[$item] = '';
@@ -116,7 +116,7 @@ class Base implements \Aimeos\MW\Template\Iface
 	 */
 	public function getMarkerNames()
 	{
-		$matches = array();
+		$matches = [];
 		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->begin, '/' ) ) . '/U';
 
 		if( preg_match_all( $regex, $this->text, $matches ) === false ) {
@@ -183,7 +183,7 @@ class Base implements \Aimeos\MW\Template\Iface
 			return $this->text;
 		}
 
-		$matches = array();
+		$matches = [];
 		$text = $this->text;
 
 		$regex = '/' . str_replace( '\$', '(.*)', preg_quote( $this->begin, '/' ) ) . '/U';

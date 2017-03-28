@@ -31,9 +31,9 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$this->context = \TestHelperJobs::getContext();
 		$config = $this->context->getConfig();
 
-		$config->set( 'controller/jobs/common/decorators/default', array() );
-		$config->set( 'controller/jobs/admin/decorators/global', array() );
-		$config->set( 'controller/jobs/admin/decorators/local', array() );
+		$config->set( 'controller/jobs/common/decorators/default', [] );
+		$config->set( 'controller/jobs/admin/decorators/global', [] );
+		$config->set( 'controller/jobs/admin/decorators/local', [] );
 
 	}
 

@@ -58,7 +58,7 @@ class CostsTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array( 'costs.percent' => '1.5' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -72,9 +72,9 @@ class CostsTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$result = $this->object->checkConfigBE( array() );
+		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertInternalType( 'string', $result['costs.percent'] );

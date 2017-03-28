@@ -102,7 +102,7 @@ class Standard
 	 */
 	public function getConfigBE()
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $this->beConfig as $key => $config ) {
 			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );

@@ -40,7 +40,7 @@ class None
 	 */
 	public function getCache()
 	{
-		return \Aimeos\MW\Cache\Factory::createManager( 'None', array(), null );
+		return \Aimeos\MW\Cache\Factory::createManager( 'None', [], null );
 	}
 
 
@@ -101,9 +101,9 @@ class None
 	 *
 	 * @return array List of cache items implementing \Aimeos\MAdmin\Cache\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		return array();
+		return [];
 	}
 
 
@@ -117,7 +117,7 @@ class None
 	{
 		$path = 'madmin/cache/manager/submanagers';
 
-		return $this->getResourceTypeBase( 'cache', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'cache', $path, [], $withsub );
 	}
 
 
@@ -131,7 +131,7 @@ class None
 	{
 		$path = 'madmin/cache/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

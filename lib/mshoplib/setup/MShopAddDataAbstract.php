@@ -52,7 +52,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -346,7 +346,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 		$listItem->setDomain( 'product' );
 
 
-		$codes = array();
+		$codes = [];
 
 		foreach( $data as $entry ) {
 			$codes[$entry['code']] = null;
@@ -391,7 +391,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock/type' );
 
-		$types = array();
+		$types = [];
 		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
 			$types[$item->getCode()] = $id;
 		}
@@ -521,7 +521,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 
 		do
 		{
-			$refIds = $listIds = $map = array();
+			$refIds = $listIds = $map = [];
 			$result = $listManager->searchItems( $search );
 
 			foreach( $result as $id => $listItem )

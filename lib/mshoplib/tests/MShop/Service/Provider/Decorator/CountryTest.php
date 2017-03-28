@@ -49,7 +49,7 @@ class CountryTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$result = $this->object->getConfigBE();
 
@@ -64,7 +64,7 @@ class CountryTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array(
 			'country.billing-include' => ' DE, AT, CH ',
@@ -86,9 +86,9 @@ class CountryTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$result = $this->object->checkConfigBE( array() );
+		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 4, count( $result ) );
 		$this->assertInternalType( 'null', $result['country.billing-include'] );
@@ -102,12 +102,12 @@ class CountryTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array(
-			'country.billing-include' => array(),
+			'country.billing-include' => [],
 			'country.billing-exclude' => 1.5,
-			'country.delivery-include' => array(),
+			'country.delivery-include' => [],
 			'country.delivery-exclude' => 1.5,
 		);
 		$result = $this->object->checkConfigBE( $attributes );
@@ -143,7 +143,7 @@ class CountryTest extends \PHPUnit_Framework_TestCase
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
-		$this->servItem->setConfig( array() );
+		$this->servItem->setConfig( [] );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )

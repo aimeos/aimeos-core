@@ -68,7 +68,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 
 			$this->cleanupSites( $localeManager );
 
-			$siteIds = array();
+			$siteIds = [];
 			if( isset( $testdata['locale/site'] ) ) {
 				$siteIds = $this->addLocaleSiteData( $localeManager, $testdata['locale/site'] );
 			}
@@ -119,7 +119,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 		$search = $localeSiteManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'locale.site.code', array( 'unittest' ) ) );
 
-		$sites = array();
+		$sites = [];
 
 		foreach( $localeSiteManager->searchItems( $search ) as $site )
 		{

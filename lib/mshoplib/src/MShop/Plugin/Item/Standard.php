@@ -29,7 +29,7 @@ class Standard
 	 *
 	 * @param array $values Associative array of id, typeid, name, config and status
 	 */
-	public function __construct( array $values = array() )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'plugin.', $values );
 
@@ -175,7 +175,7 @@ class Standard
 			return (array) $this->values['plugin.config'];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -277,7 +277,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 		unset( $list['plugin.type'], $list['plugin.typename'] );
 

@@ -33,7 +33,7 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

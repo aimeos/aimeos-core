@@ -74,7 +74,7 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$productPropertyManager = $productManager->getSubManager( 'property', 'Standard' );
 		$productPropertyTypeManager = $productPropertyManager->getSubManager( 'type', 'Standard' );
 
-		$typeIds = array();
+		$typeIds = [];
 		$type = $productPropertyTypeManager->createItem();
 		$prodIds = $this->getProductIds( $productManager );
 
@@ -120,7 +120,7 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getProductIds( \Aimeos\MShop\Common\Manager\Iface $productManager )
 	{
-		$entry = array();
+		$entry = [];
 		$search = $productManager->createSearch();
 
 		foreach( $productManager->searchItems( $search ) as $id => $item ) {

@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'price.id', null );
 		$expr[] = $search->compare( '!=', 'price.siteid', null );
 		$expr[] = $search->compare( '!=', 'price.typeid', null );
@@ -203,7 +203,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'price.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 
@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'price.editor', $this->editor ) );
 		$search->setSlice( 0, 10 );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 23, $total );
 
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetLowestPriceNoPrice()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
-		$this->object->getLowestPrice( array(), 1 );
+		$this->object->getLowestPrice( [], 1 );
 	}
 
 

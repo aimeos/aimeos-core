@@ -21,8 +21,8 @@ namespace Aimeos\MW\DB\Manager;
 class PDO implements \Aimeos\MW\DB\Manager\Iface
 {
 	private $config = null;
-	private $connections = array();
-	private $count = array();
+	private $connections = [];
+	private $count = [];
 
 
 	/**
@@ -135,7 +135,7 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 		$pdo->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
 		$dbc = new \Aimeos\MW\DB\Connection\PDO( $pdo );
 
-		foreach( $this->config->get( 'resource/' . $name . '/stmt', array() ) as $stmt ) {
+		foreach( $this->config->get( 'resource/' . $name . '/stmt', [] ) as $stmt ) {
 			$dbc->create( $stmt )->execute()->finish();
 		}
 

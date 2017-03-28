@@ -209,5 +209,5 @@ interface Iface
 	 *	of IDs and items implementing \Aimeos\MShop\Common\Item\Iface
 	 * @see \Aimeos\MW\Criteria\Iface
 	 */
-	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null );
+	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null );
 }

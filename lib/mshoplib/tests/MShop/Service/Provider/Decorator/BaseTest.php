@@ -63,25 +63,25 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckConfigBE()
 	{
-		$this->mock->expects( $this->once() )->method( 'checkConfigBE' )->will( $this->returnValue( array() ) );
+		$this->mock->expects( $this->once() )->method( 'checkConfigBE' )->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->checkConfigBE( array() ) );
+		$this->assertEquals( [], $this->object->checkConfigBE( [] ) );
 	}
 
 
 	public function testCheckConfigFE()
 	{
-		$this->mock->expects( $this->once() )->method( 'checkConfigFE' )->will( $this->returnValue( array() ) );
+		$this->mock->expects( $this->once() )->method( 'checkConfigFE' )->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->checkConfigFE( array() ) );
+		$this->assertEquals( [], $this->object->checkConfigFE( [] ) );
 	}
 
 
 	public function testGetConfigBE()
 	{
-		$this->mock->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( array() ) );
+		$this->mock->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getConfigBE() );
+		$this->assertEquals( [], $this->object->getConfigBE() );
 	}
 
 
@@ -89,9 +89,9 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->getSubManager( 'base' )->createItem();
 
-		$this->mock->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( array() ) );
+		$this->mock->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getConfigFE( $item ) );
+		$this->assertEquals( [], $this->object->getConfigFE( $item ) );
 	}
 
 
@@ -99,7 +99,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mock->expects( $this->once() )->method( 'injectGlobalConfigBE' );
 
-		$this->object->injectGlobalConfigBE( array() );
+		$this->object->injectGlobalConfigBE( [] );
 	}
 
 
@@ -186,7 +186,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 		$this->mock->expects( $this->once() )->method( 'setConfigFE' );
 
-		$this->object->setConfigFE( $item, array() );
+		$this->object->setConfigFE( $item, [] );
 	}
 
 
@@ -202,8 +202,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mock->expects( $this->once() )->method( 'updateSync' );
 
-		$response = null; $header = array();
-		$this->object->updateSync( array(), 'body', $response, $header );
+		$response = null; $header = [];
+		$this->object->updateSync( [], 'body', $response, $header );
 	}
 }
 

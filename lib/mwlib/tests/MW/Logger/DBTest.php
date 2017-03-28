@@ -23,7 +23,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 		$table->addColumn( 'facility', 'string', array( 'length' => 32 ) );
 		$table->addColumn( 'request', 'string', array( 'length' => 32 ) );
 		$table->addColumn( 'tstamp', 'string', array( 'length' => 20 ) );
-		$table->addColumn( 'priority', 'integer', array() );
+		$table->addColumn( 'priority', 'integer', [] );
 		$table->addColumn( 'message', 'text', array( 'length' => 0xffff ) );
 
 		$conn = self::$dbm->acquire();

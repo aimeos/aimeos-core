@@ -33,7 +33,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -86,7 +86,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Adding data for MShop plugins', 1 );
 
-		$types = array();
+		$types = [];
 		$manager = $pluginManager->getSubManager( 'type' );
 
 		foreach( $manager->searchItems( $manager->createSearch() ) as $item ) {

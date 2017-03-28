@@ -22,8 +22,8 @@ class Memory
 	extends \Aimeos\MW\Config\Decorator\Base
 	implements \Aimeos\MW\Config\Decorator\Iface
 {
-	private $negCache = array();
-	private $cache = array();
+	private $negCache = [];
+	private $cache = [];
 	private $config;
 
 
@@ -33,7 +33,7 @@ class Memory
 	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @param array $config Pre-cached non-shared configuration
 	 */
-	public function __construct( \Aimeos\MW\Config\Iface $object, $config = array() )
+	public function __construct( \Aimeos\MW\Config\Iface $object, $config = [] )
 	{
 		parent::__construct( $object );
 

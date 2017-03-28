@@ -60,7 +60,7 @@ class DemoAddCatalogData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		try
 		{
 			// Don't delete the catalog node because users are likely use it for production
-			$item = $manager->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
+			$item = $manager->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'media' );
 			$this->removeItems( $item->getId(), 'catalog/lists', 'catalog', 'text' );

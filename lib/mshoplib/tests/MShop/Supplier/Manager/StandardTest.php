@@ -157,7 +157,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'supplier.id', null );
 		$expr[] = $search->compare( '!=', 'supplier.siteid', null );
 		$expr[] = $search->compare( '==', 'supplier.label', 'unitSupplier001' );
@@ -206,7 +206,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 2 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );

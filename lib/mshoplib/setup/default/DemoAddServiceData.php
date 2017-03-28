@@ -33,7 +33,7 @@ class DemoAddServiceData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

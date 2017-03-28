@@ -35,7 +35,7 @@ class Standard
 	 *
 	 * @param array $values Associative list of values from database
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.', $values );
 
@@ -288,7 +288,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

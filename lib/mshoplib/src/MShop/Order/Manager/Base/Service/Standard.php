@@ -501,9 +501,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Service\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = array();
+		$items = [];
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 
@@ -660,12 +660,12 @@ class Standard
 			throw $e;
 		}
 
-		$result = array();
+		$result = [];
 		$attributes = $this->getAttributeItems( array_keys( $items ) );
 
 		foreach( $items as $id => $row )
 		{
-			$attrList = array();
+			$attrList = [];
 			if( isset( $attributes[$id] ) ) {
 				$attrList = $attributes[$id];
 			}
@@ -852,7 +852,7 @@ class Standard
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order item service object
 	 */
 	protected function createItemBase( \Aimeos\MShop\Price\Item\Iface $price,
-		array $values = array(), array $attributes = array() )
+		array $values = [], array $attributes = [] )
 	{
 		return new \Aimeos\MShop\Order\Item\Base\Service\Standard( $price, $values, $attributes );
 	}
@@ -872,7 +872,7 @@ class Standard
 		$search->setSortations( array( $search->sort( '+', 'order.base.service.attribute.code' ) ) );
 		$search->setSlice( 0, 0x7fffffff );
 
-		$result = array();
+		$result = [];
 		foreach( $manager->searchItems( $search ) as $item ) {
 			$result[$item->getParentId()][$item->getId()] = $item;
 		}

@@ -45,7 +45,7 @@ interface Iface extends \Aimeos\MShop\Service\Provider\Iface, \Aimeos\MShop\Serv
 	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() );
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] );
 
 	/**
 	 * Refunds the money for the given order if supported.

@@ -560,9 +560,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array Associative list of IDs as keys and items implementing \Aimeos\MShop\Customer\Item\Iface as values
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = array();
+		$map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -699,7 +699,7 @@ class Standard
 			throw $e;
 		}
 
-		$addrItems = array();
+		$addrItems = [];
 		if( in_array( 'address', $ref, true ) ) {
 			$addrItems = $this->getAddressItems( array_keys( $map ) );
 		}
@@ -730,7 +730,7 @@ class Standard
 	 */
 	protected function getAddressItems( array $custIds )
 	{
-		$list = array();
+		$list = [];
 		$manager = $this->getSubManager( 'address' );
 
 		$search = $manager->createSearch();

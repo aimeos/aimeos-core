@@ -53,8 +53,8 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
-		$this->assertEquals( array(), $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getServices() );
 
 	}
 
@@ -68,8 +68,8 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( $context, $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
-		$this->assertEquals( array(), $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getServices() );
 	}
 
 
@@ -95,8 +95,8 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( $context, $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
-		$this->assertEquals( array(), $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getServices() );
 	}
 
 
@@ -146,7 +146,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( 2, count( $this->order->getAddresses() ) );
-		$this->assertEquals( array(), $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getServices() );
 	}
 
 
@@ -199,7 +199,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( 2, count( $this->order->getServices() ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses() );
 	}
 
 
@@ -215,7 +215,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( $context, $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getServices() );
+		$this->assertEquals( [], $this->order->getServices() );
 		$this->assertEquals( 1, count( $this->order->getAddresses() ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Address\\Iface', $this->order->getAddress( $type ) );
 	}
@@ -228,7 +228,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
 	}
@@ -241,7 +241,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
 		$this->assertEquals( 'unitcode', $this->order->getService( $type )->getCode() );
@@ -255,7 +255,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
 	}
@@ -268,7 +268,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
 	}
@@ -281,7 +281,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
 		$this->assertEquals( 'unitpaymentcode', $this->order->getService( $type )->getCode() );
@@ -295,7 +295,7 @@ class AutofillTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Autofill( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( array(), $this->order->getAddresses() );
+		$this->assertEquals( [], $this->order->getAddresses() );
 		$this->assertEquals( 1, count( $this->order->getServices() ) );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
 	}

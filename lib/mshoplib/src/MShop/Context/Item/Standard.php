@@ -33,7 +33,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	private $user;
 	private $groups;
 	private $editor = '';
-	private $i18n = array();
+	private $i18n = [];
 
 
 	/**
@@ -51,7 +51,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->mqueue = null;
 		$this->session = null;
 		$this->view = null;
-		$this->i18n = array();
+		$this->i18n = [];
 	}
 
 

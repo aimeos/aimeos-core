@@ -42,7 +42,7 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 			throw new \RuntimeException( 'Wrong number of products' );
 		}
 
-		$this->products = array();
+		$this->products = [];
 
 		foreach( $products as $product )
 		{

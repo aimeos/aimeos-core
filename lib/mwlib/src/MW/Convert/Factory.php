@@ -29,7 +29,7 @@ class Factory
 	{
 		if( is_array( $keys ) )
 		{
-			$list = array();
+			$list = [];
 
 			foreach( $keys as $key ) {
 				$list[] = self::createObject( $key );

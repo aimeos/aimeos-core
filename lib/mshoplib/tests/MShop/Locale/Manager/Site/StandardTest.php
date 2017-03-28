@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetItem()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '~=', 'locale.site.code', 'unittest' ) );
+		$search->setConditions( $search->compare( '==', 'locale.site.code', 'unittest' ) );
 
 		$a = $this->object->searchItems( $search );
 		if( ( $expected = reset( $a ) ) === false ) {
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'locale.site.id', null );
 		$expr[] = $search->compare( '==', 'locale.site.siteid', $siteid );
 		$expr[] = $search->compare( '==', 'locale.site.code', 'unittest' );
@@ -144,7 +144,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -154,7 +154,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->compare( '==', 'locale.site.code', array( 'unittest' ) ) );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertGreaterThanOrEqual( 1, $total );
 
@@ -242,7 +242,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			->getMock();
 
 		$object->expects( $this->once() )->method( 'searchItems' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
 		$object->getTree();

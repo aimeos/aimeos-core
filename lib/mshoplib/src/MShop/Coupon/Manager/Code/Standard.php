@@ -120,7 +120,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/coupon/manager/code/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -260,7 +260,7 @@ class Standard
 	{
 		$path = 'mshop/coupon/manager/code/submanagers';
 
-		return $this->getResourceTypeBase( 'coupon/code', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'coupon/code', $path, [], $withsub );
 	}
 
 
@@ -291,7 +291,7 @@ class Standard
 		 */
 		$path = 'mshop/coupon/manager/code/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -316,7 +316,7 @@ class Standard
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		return $this->findItemBase( array( 'coupon.code.code' => $code ), $ref );
 	}
@@ -566,12 +566,12 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of code items implementing \Aimeos\MShop\Coupon\Item\Code\Iface's
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
-		$items = array();
+		$items = [];
 
 		try
 		{
@@ -815,7 +815,7 @@ class Standard
 	 * @param array $values Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Emtpy coupon code object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Coupon\Item\Code\Standard( $values );
 	}
@@ -845,12 +845,12 @@ class Standard
 				$object->compare( '>', 'coupon.code.count', 0 )
 			);
 
-			$temp = array();
+			$temp = [];
 			$temp[] = $object->compare( '==', 'coupon.code.datestart', null );
 			$temp[] = $object->compare( '<=', 'coupon.code.datestart', $curDate );
 			$expr[] = $object->combine( '||', $temp );
 
-			$temp = array();
+			$temp = [];
 			$temp[] = $object->compare( '==', 'coupon.code.dateend', null );
 			$temp[] = $object->compare( '>=', 'coupon.code.dateend', $curDate );
 			$expr[] = $object->combine( '||', $temp );

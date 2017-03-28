@@ -19,7 +19,7 @@ namespace Aimeos\MAdmin;
 class Factory
 {
 	static private $cache = true;
-	static private $managers = array();
+	static private $managers = [];
 
 
 	/**
@@ -37,13 +37,13 @@ class Factory
 			if( $path !== null ) {
 				self::$managers[$id][$path] = null;
 			} else {
-				self::$managers[$id] = array();
+				self::$managers[$id] = [];
 			}
 
 			return;
 		}
 
-		self::$managers = array();
+		self::$managers = [];
 	}
 
 

@@ -74,7 +74,7 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
-		$atypeIds = array();
+		$atypeIds = [];
 		$atype = $attributeTypeManager->createItem();
 
 		$this->conn->begin();

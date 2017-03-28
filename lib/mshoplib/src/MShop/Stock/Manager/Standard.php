@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Stock\Manager\Iface
 {
-	private $typeIds = array();
+	private $typeIds = [];
 
 	private $searchConfig = array(
 		'stock.id'=> array(
@@ -144,7 +144,7 @@ class Standard
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		$list = array( 'stock.productcode' => $code, 'stock.type.domain' => $domain, 'stock.type.code' => $type );
 		return $this->findItemBase( $list );
@@ -437,9 +437,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of stock items implementing \Aimeos\MShop\Stock\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = array();
+		$items = $map = $typeIds = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -840,7 +840,7 @@ class Standard
 	 * id, parentid, siteid, typeid, stocklevel, backdate
 	 * @return \Aimeos\MShop\Stock\Item\Standard New stock item object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Stock\Item\Standard( $values );
 	}

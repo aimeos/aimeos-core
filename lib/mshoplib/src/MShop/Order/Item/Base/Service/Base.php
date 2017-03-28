@@ -41,7 +41,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	 * @param array $values Values to be set on initialisation
 	 * @param array $attributes Attributes to be set on initialisation
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = array(), array $attributes = array() )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
 	{
 		parent::__construct( 'order.base.service.', $values );
 
@@ -142,7 +142,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 			return $map[$type];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -192,7 +192,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	{
 		if( !isset( $this->attributesMap ) )
 		{
-			$this->attributesMap = array();
+			$this->attributesMap = [];
 
 			foreach( $this->attributes as $attribute ) {
 				$this->attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;

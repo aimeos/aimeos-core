@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testFindItemMissing()
 	{
 		$this->setExpectedException( '\Aimeos\MShop\Exception' );
-		$this->object->findItem( 'm', array(), 'product' );
+		$this->object->findItem( 'm', [], 'product' );
 	}
 
 
@@ -234,7 +234,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'attribute.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.siteid', null );
 		$expr[] = $search->compare( '!=', 'attribute.typeid', null );
@@ -284,7 +284,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -300,7 +300,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 5 );
 
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 10, $total );
 		foreach( $results as $itemId => $item ) {
@@ -321,7 +321,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 1 );
 
 		$total = 0;
-		$items = $this->object->searchItems( $search, array(), $total );
+		$items = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 6, $total );
 	}

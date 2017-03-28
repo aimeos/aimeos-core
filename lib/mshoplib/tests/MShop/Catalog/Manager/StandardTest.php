@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'catalog.id', null );
 		$expr[] = $search->compare( '!=', 'catalog.siteid', null );
 		$expr[] = $search->compare( '==', 'catalog.code', 'cafe' );
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
 
-		$items = $this->object->searchItems( $search, array(), $total );
+		$items = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, $total );
 		$this->assertEquals( 1, count( $items ) );
@@ -246,7 +246,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search );
-		$parentIds = array();
+		$parentIds = [];
 
 		foreach( $items as $item ) {
 			$parentIds[] = $item->getId();
@@ -261,7 +261,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'catalog.parentid', $parentIds ) );
 
-		$tree = $this->object->getTree( null, array(), \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, $search );
+		$tree = $this->object->getTree( null, [], \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE, $search );
 
 		$categorycat = $tree->getChild( 0 );
 		$groupcat = $tree->getChild( 1 );
@@ -283,7 +283,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $tree->getId(), $groupcat->getNode()->parentid );
 		$this->assertEquals( $categorycat->getId(), $cafecat->getNode()->parentid );
 		$this->assertEquals( $cafecat->getId(), $caffein->getNode()->parentid );
-		$this->assertEquals( array(), $groupcatChildren );
+		$this->assertEquals( [], $groupcatChildren );
 		$this->assertEquals( 3, count( $categorycatChildren ) );
 	}
 

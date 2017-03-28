@@ -13,13 +13,13 @@ return array(
 			$table = $schema->createTable( 'mshop_tag_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mstagty_id' );
@@ -36,13 +36,13 @@ return array(
 			$table = $schema->createTable( 'mshop_tag' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'typeid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'typeid', 'integer', [] );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mstag_id' );

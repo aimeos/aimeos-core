@@ -212,7 +212,7 @@ abstract class Base implements Iface
 	protected function createMonetaryRebateProducts( \Aimeos\MShop\Order\Item\Base\Iface $base,
 		$productCode, $rebate, $quantity = 1, $stockType = 'default' )
 	{
-		$orderProducts = array();
+		$orderProducts = [];
 		$prices = $this->getPriceByTaxRate( $base );
 
 		krsort( $prices );
@@ -264,7 +264,7 @@ abstract class Base implements Iface
 	 */
 	protected function getPriceByTaxRate( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$taxrates = array();
+		$taxrates = [];
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' );
 
 		foreach( $basket->getProducts() as $product )

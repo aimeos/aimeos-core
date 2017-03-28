@@ -32,7 +32,7 @@ class PHPArray
 	 * @param array $config Configuration array
 	 * @param string|array $paths Filesystem path or list of paths to the configuration files
 	 */
-	public function __construct( $config = array(), $paths = array() )
+	public function __construct( $config = [], $paths = [] )
 	{
 		$this->config = $config;
 		$this->paths = (array) $paths;
@@ -115,7 +115,7 @@ class PHPArray
 			if( isset( $config[$current] ) ) {
 				$config[$current] = $this->setPart( $config[$current], $path, $value );
 			} else {
-				$config[$current] = $this->setPart( array(), $path, $value );
+				$config[$current] = $this->setPart( [], $path, $value );
 			}
 
 			return $config;
@@ -142,7 +142,7 @@ class PHPArray
 			if( is_dir( $newPath ) )
 			{
 				if( !isset( $config[$key] ) ) {
-					$config[$key] = array();
+					$config[$key] = [];
 				}
 
 				$config[$key] = $this->load( $config[$key], $newPath, $parts );
@@ -151,7 +151,7 @@ class PHPArray
 			if( file_exists( $newPath . '.php' ) )
 			{
 				if( !isset( $config[$key] ) ) {
-					$config[$key] = array();
+					$config[$key] = [];
 				}
 
 				$config[$key] = array_replace_recursive( $config[$key], $this->includeFile( $newPath . '.php' ) );

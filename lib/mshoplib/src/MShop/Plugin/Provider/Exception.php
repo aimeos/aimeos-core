@@ -32,7 +32,7 @@ class Exception extends \Aimeos\MShop\Plugin\Exception
 	 * @param \Exception|null $previous Previously thrown exception
 	 * @param array $errorCodes List of error codes for error handling
 	 */
-	public function __construct( $message = '', $code = 0, \Exception $previous = null, $errorCodes = array() )
+	public function __construct( $message = '', $code = 0, \Exception $previous = null, $errorCodes = [] )
 	{
 		parent::__construct( $message, $code, $previous );
 

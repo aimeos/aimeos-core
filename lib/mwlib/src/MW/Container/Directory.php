@@ -21,7 +21,7 @@ class Directory
 	extends \Aimeos\MW\Container\Base
 	implements \Aimeos\MW\Container\Iface
 {
-	private $content = array();
+	private $content = [];
 	private $classname;
 	private $resource;
 
@@ -36,7 +36,7 @@ class Directory
 	 * @param string $format Format of the content objects inside the container
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resourcepath, $format, array $options = array() )
+	public function __construct( $resourcepath, $format, array $options = [] )
 	{
 		$this->classname = '\\Aimeos\\MW\\Container\\Content\\' . $format;
 

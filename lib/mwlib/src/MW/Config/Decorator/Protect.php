@@ -21,7 +21,7 @@ class Protect
 	extends \Aimeos\MW\Config\Decorator\Base
 	implements \Aimeos\MW\Config\Decorator\Iface
 {
-	private $prefixes = array();
+	private $prefixes = [];
 
 
 	/**
@@ -30,7 +30,7 @@ class Protect
 	 * @param \Aimeos\MW\Config\Iface $object Config object or decorator
 	 * @param array $prefixes Allowed prefixes for getting and setting values
 	 */
-	public function __construct( \Aimeos\MW\Config\Iface $object, array $prefixes = array() )
+	public function __construct( \Aimeos\MW\Config\Iface $object, array $prefixes = [] )
 	{
 		parent::__construct( $object );
 

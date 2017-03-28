@@ -21,7 +21,7 @@ class APCTest extends \PHPUnit_Framework_TestCase
 			$this->markTestSkipped( 'APC not installed' );
 		}
 
-		$conf = new \Aimeos\MW\Config\PHPArray( array() );
+		$conf = new \Aimeos\MW\Config\PHPArray( [] );
 		$this->object = new \Aimeos\MW\Config\Decorator\APC( $conf, 'test:' );
 	}
 

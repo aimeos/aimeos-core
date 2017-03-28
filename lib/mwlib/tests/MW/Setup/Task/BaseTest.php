@@ -48,7 +48,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetPostDependencies()
 	{
-		$this->assertEquals( array(), $this->object->getPostDependencies() );
+		$this->assertEquals( [], $this->object->getPostDependencies() );
 	}
 
 
@@ -152,7 +152,7 @@ class BaseImpl extends \Aimeos\MW\Setup\Task\Base
 
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 	protected function mysql()

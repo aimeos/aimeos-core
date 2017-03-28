@@ -15,7 +15,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 	public function testCreateNoAdapter()
 	{
 		$this->setExpectedException( '\Aimeos\MW\MQueue\Exception' );
-		Factory::create( array() );
+		Factory::create( [] );
 	}
 
 

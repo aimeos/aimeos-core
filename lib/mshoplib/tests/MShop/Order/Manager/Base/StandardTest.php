@@ -199,7 +199,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.base.id', null );
 		$expr[] = $search->compare( '==', 'order.base.siteid', $siteid );
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
@@ -306,7 +306,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -323,7 +323,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
 		$total = 0;
-		$items = $this->object->searchItems( $search, array(), $total );
+		$items = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 4, $total );
 
@@ -414,10 +414,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item = $this->getOrderItem();
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_NONE );
 
-		$this->assertEquals( array(), $order->getProducts() );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getServices() );
-		$this->assertEquals( array(), $order->getAddresses() );
+		$this->assertEquals( [], $order->getProducts() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getServices() );
+		$this->assertEquals( [], $order->getAddresses() );
 	}
 
 
@@ -427,9 +427,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getProducts() );
-		$this->assertEquals( array(), $order->getServices() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getProducts() );
+		$this->assertEquals( [], $order->getServices() );
 	}
 
 
@@ -439,9 +439,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getServices() );
-		$this->assertEquals( array(), $order->getAddresses() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getServices() );
+		$this->assertEquals( [], $order->getAddresses() );
 	}
 
 
@@ -452,8 +452,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
 		$this->assertGreaterThan( 0, count( $order->getCoupons() ) );
-		$this->assertEquals( array(), $order->getServices() );
-		$this->assertEquals( array(), $order->getAddresses() );
+		$this->assertEquals( [], $order->getServices() );
+		$this->assertEquals( [], $order->getAddresses() );
 	}
 
 
@@ -463,9 +463,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getProducts() );
-		$this->assertEquals( array(), $order->getAddresses() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getProducts() );
+		$this->assertEquals( [], $order->getAddresses() );
 	}
 
 
@@ -503,10 +503,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item = $this->getOrderItem();
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_NONE, true );
 
-		$this->assertEquals( array(), $order->getAddresses() );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getProducts() );
-		$this->assertEquals( array(), $order->getServices() );
+		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getProducts() );
+		$this->assertEquals( [], $order->getServices() );
 	}
 
 
@@ -516,9 +516,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS, true );
 
 		$this->assertGreaterThan( 0, count( $order->getAddresses() ) );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getProducts() );
-		$this->assertEquals( array(), $order->getServices() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getProducts() );
+		$this->assertEquals( [], $order->getServices() );
 	}
 
 
@@ -528,9 +528,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT, true );
 
 		$this->assertGreaterThan( 0, count( $order->getProducts() ) );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getAddresses() );
-		$this->assertEquals( array(), $order->getServices() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getServices() );
 	}
 
 
@@ -539,10 +539,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$item = $this->getOrderItem();
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON, true );
 
-		$this->assertEquals( array(), $order->getAddresses() );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getProducts() );
-		$this->assertEquals( array(), $order->getServices() );
+		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getProducts() );
+		$this->assertEquals( [], $order->getServices() );
 	}
 
 
@@ -552,9 +552,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$order = $this->object->load( $item->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE, true );
 
 		$this->assertGreaterThan( 0, count( $order->getServices() ) );
-		$this->assertEquals( array(), $order->getCoupons() );
-		$this->assertEquals( array(), $order->getAddresses() );
-		$this->assertEquals( array(), $order->getProducts() );
+		$this->assertEquals( [], $order->getCoupons() );
+		$this->assertEquals( [], $order->getAddresses() );
+		$this->assertEquals( [], $order->getProducts() );
 	}
 
 
@@ -591,7 +591,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$services = $basket->getServices();
 		$this->assertEquals( 2, count( $services ) );
 
-		$attributes = array();
+		$attributes = [];
 		foreach( $services as $service ) {
 			$attributes[$service->getCode()] = $service->getAttributes();
 		}
@@ -646,7 +646,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 4800.00 );
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -695,10 +695,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$basket = $this->object->load( $newBasketId, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 		$this->object->deleteItem( $newBasketId );
 
-		$this->assertEquals( array(), $basket->getCoupons() );
-		$this->assertEquals( array(), $basket->getAddresses() );
-		$this->assertEquals( array(), $basket->getProducts() );
-		$this->assertEquals( array(), $basket->getServices() );
+		$this->assertEquals( [], $basket->getCoupons() );
+		$this->assertEquals( [], $basket->getAddresses() );
+		$this->assertEquals( [], $basket->getProducts() );
+		$this->assertEquals( [], $basket->getServices() );
 	}
 
 
@@ -715,9 +715,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getAddresses() ) );
-		$this->assertEquals( array(), $basket->getCoupons() );
-		$this->assertEquals( array(), $basket->getProducts() );
-		$this->assertEquals( array(), $basket->getServices() );
+		$this->assertEquals( [], $basket->getCoupons() );
+		$this->assertEquals( [], $basket->getProducts() );
+		$this->assertEquals( [], $basket->getServices() );
 	}
 
 
@@ -734,9 +734,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getProducts() ) );
-		$this->assertEquals( array(), $basket->getAddresses() );
-		$this->assertEquals( array(), $basket->getCoupons() );
-		$this->assertEquals( array(), $basket->getServices() );
+		$this->assertEquals( [], $basket->getAddresses() );
+		$this->assertEquals( [], $basket->getCoupons() );
+		$this->assertEquals( [], $basket->getServices() );
 	}
 
 
@@ -753,9 +753,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->deleteItem( $newBasketId );
 
 		$this->assertGreaterThan( 0, count( $basket->getServices() ) );
-		$this->assertEquals( array(), $basket->getAddresses() );
-		$this->assertEquals( array(), $basket->getCoupons() );
-		$this->assertEquals( array(), $basket->getProducts() );
+		$this->assertEquals( [], $basket->getAddresses() );
+		$this->assertEquals( [], $basket->getCoupons() );
+		$this->assertEquals( [], $basket->getProducts() );
 	}
 
 
@@ -800,7 +800,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '==', 'order.base.rebate', 14.50 );
 		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
 		$expr[] = $search->compare( '==', 'order.base.price', 53.50 );

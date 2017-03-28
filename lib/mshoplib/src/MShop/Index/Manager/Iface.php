@@ -57,5 +57,5 @@ interface Iface
 	 * @param array $items Optional list with products
 	 * @return void
 	 */
-	public function rebuildIndex( array $items = array() );
+	public function rebuildIndex( array $items = [] );
 }

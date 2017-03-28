@@ -174,12 +174,12 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catItem->getId() ) ); // catalog ID
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) ); // catalog ID
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 8, count( $result ) );
 
@@ -189,7 +189,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
 
@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$func = $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count categories
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 1, count( $result ) );
 	}

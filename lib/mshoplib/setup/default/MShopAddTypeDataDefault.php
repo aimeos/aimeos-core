@@ -33,7 +33,7 @@ class MShopAddTypeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddTypeData
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

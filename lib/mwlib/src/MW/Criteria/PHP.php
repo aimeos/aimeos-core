@@ -21,7 +21,7 @@ namespace Aimeos\MW\Criteria;
 class PHP extends \Aimeos\MW\Criteria\Base
 {
 	private $conditions;
-	private $sortations = array();
+	private $sortations = [];
 	private $sliceStart = 0;
 	private $sliceSize = 100;
 
@@ -116,7 +116,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
 	 * @return string Expression string for searching
 	 */
-	public function getConditionString( array $types, array $translations = array(), array $plugins = array() )
+	public function getConditionString( array $types, array $translations = [], array $plugins = [] )
 	{
 		$types['1'] = 'int';
 
@@ -164,7 +164,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 	 * @param array $translations Associative list of item names that should be translated
 	 * @return string Order string for sorting the items
 	 */
-	public function getSortationString( array $types, array $translations = array() )
+	public function getSortationString( array $types, array $translations = [] )
 	{
 		if( empty( $this->sortations ) )
 		{
@@ -178,7 +178,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 		}
 
 
-		$sortation = array();
+		$sortation = [];
 
 		foreach( $this->sortations as $sortitem )
 		{

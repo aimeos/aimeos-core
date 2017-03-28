@@ -183,7 +183,7 @@ abstract class Base
 	 * @param array $params Request parameter if available
 	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard|null Form object or null
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
 	{
 		return $this->object->process( $order, $params );
 	}
@@ -260,7 +260,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
+	public function updateSync( array $params = [], $body = null, &$response = null, array &$header = [] )
 	{
 		return $this->object->updateSync( $params, $body, $response, $header );
 	}

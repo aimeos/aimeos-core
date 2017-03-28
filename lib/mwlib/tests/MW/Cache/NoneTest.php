@@ -64,7 +64,7 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetMultipleByTags()
 	{
-		$this->assertEquals( array(), $this->object->getMultipleByTags( array( 'test' ) ) );
+		$this->assertEquals( [], $this->object->getMultipleByTags( array( 'test' ) ) );
 	}
 
 
@@ -76,6 +76,6 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetMultiple()
 	{
-		$this->object->setMultiple( array() );
+		$this->object->setMultiple( [] );
 	}
 }

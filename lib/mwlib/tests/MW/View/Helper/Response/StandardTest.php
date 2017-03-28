@@ -78,9 +78,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetHeaders()
 	{
 		$this->response->expects( $this->once() )->method( 'getHeaders' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getHeaders() );
+		$this->assertEquals( [], $this->object->getHeaders() );
 	}
 
 

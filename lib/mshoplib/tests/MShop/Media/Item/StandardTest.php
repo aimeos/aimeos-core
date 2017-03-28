@@ -271,7 +271,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['media.id'], $item->getId() );
 		$this->assertEquals( $list['media.domain'], $item->getDomain() );

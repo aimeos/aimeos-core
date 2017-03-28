@@ -55,7 +55,7 @@ class ProductPrice
 		}
 
 
-		$attrIds = $prodCodes = $changedProducts = array();
+		$attrIds = $prodCodes = $changedProducts = [];
 		$orderProducts = $order->getProducts();
 
 		foreach( $orderProducts as $pos => $item )
@@ -81,7 +81,7 @@ class ProductPrice
 
 		foreach( $orderProducts as $pos => $orderProduct )
 		{
-			$refPrices = array();
+			$refPrices = [];
 
 			// fetch prices of articles/sub-products
 			if( isset( $prodMap[$orderProduct->getProductCode()] ) ) {
@@ -122,7 +122,7 @@ class ProductPrice
 	protected function getAttributes( array $ids )
 	{
 		if( empty( $ids ) ) {
-			return array();
+			return [];
 		}
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
@@ -146,7 +146,7 @@ class ProductPrice
 	protected function getProducts( array $prodCodes )
 	{
 		if( empty( $prodCodes ) ) {
-			return array();
+			return [];
 		}
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
@@ -160,7 +160,7 @@ class ProductPrice
 
 		$products = $productManager->searchItems( $search, array( 'price' ) );
 
-		$prodMap = array();
+		$prodMap = [];
 
 		foreach( $products as $item ) {
 			$prodMap[$item->getCode()] = $item;
@@ -207,7 +207,7 @@ class ProductPrice
 		// add prices of product attributes to compute the end price for comparison
 		foreach( $orderProduct->getAttributes() as $orderAttribute )
 		{
-			$attrPrices = array();
+			$attrPrices = [];
 			$attrId = $orderAttribute->getAttributeId();
 
 			if( isset( $attributes[$attrId] ) ) {

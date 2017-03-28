@@ -213,7 +213,7 @@ class Standard
 	{
 		$path = 'mshop/index/manager/text/submanagers';
 
-		return $this->getResourceTypeBase( 'index/text', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'index/text', $path, [], $withsub );
 	}
 
 
@@ -246,7 +246,7 @@ class Standard
 		 */
 		$path = 'mshop/index/manager/text/submanagers';
 
-		$list += $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		$list += $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 
 		return $list;
 	}
@@ -419,7 +419,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of product items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function rebuildIndex( array $items = array() )
+	public function rebuildIndex( array $items = [] )
 	{
 		if( empty( $items ) ) { return; }
 
@@ -510,7 +510,7 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Product\Item\Iface with ids as keys
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		/** mshop/index/manager/text/standard/search/mysql
 		 * Retrieves the records matched by the given criteria in the database
@@ -638,7 +638,7 @@ class Standard
 	 */
 	public function searchTexts( \Aimeos\MW\Criteria\Iface $search )
 	{
-		$list = array();
+		$list = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -752,7 +752,7 @@ class Standard
 
 		foreach( $domains as $domain )
 		{
-			$refIds = array();
+			$refIds = [];
 
 			foreach( $items as $item ) {
 				$refIds = array_merge( $refIds, array_keys( $item->getRefItems( $domain ) ) );
@@ -800,7 +800,7 @@ class Standard
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
-		$types = array();
+		$types = [];
 
 		foreach( $item->getListItems( 'text' ) as $listItem )
 		{
@@ -895,7 +895,7 @@ class Standard
 	{
 		if( $this->subManagers === null )
 		{
-			$this->subManagers = array();
+			$this->subManagers = [];
 
 			/** mshop/index/manager/text/submanagers
 			 * A list of sub-manager names used for indexing associated items to texts
@@ -917,7 +917,7 @@ class Standard
 			 */
 			$path = 'mshop/index/manager/text/submanagers';
 
-			foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+			foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 				$this->subManagers[$domain] = $this->getSubManager( $domain );
 			}
 

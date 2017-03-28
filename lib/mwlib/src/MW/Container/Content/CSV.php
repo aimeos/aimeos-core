@@ -46,7 +46,7 @@ class CSV
 	 * @param string $name Name of the CSV file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resource, $name, array $options = array() )
+	public function __construct( $resource, $name, array $options = [] )
 	{
 		if( !is_file( $resource ) && substr( $resource, -4 ) !== '.csv' ) {
 			$resource .= '.csv';

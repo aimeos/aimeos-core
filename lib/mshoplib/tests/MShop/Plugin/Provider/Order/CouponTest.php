@@ -61,7 +61,7 @@ class CouponTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdate()
 	{
-		$this->order->addCoupon( 'OPQR', array() );
+		$this->order->addCoupon( 'OPQR', [] );
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'test' ) );

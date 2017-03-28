@@ -120,7 +120,7 @@ abstract class Base
 	 */
 	protected function getSqlParts( $sql )
 	{
-		$result = array();
+		$result = [];
 		$parts = explode( '?', $sql );
 
 		if( ( $part = reset( $parts ) ) !== false )

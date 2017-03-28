@@ -30,7 +30,7 @@ class Standard
 	 * @param array $values Associative array of order product attribute values. Possible
 	 * keys: 'id', 'ordprodid', 'value', 'code', 'mtime'
 	 */
-	public function __construct( array $values = array() )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.base.product.attribute.', $values );
 
@@ -300,7 +300,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 
 		if( isset( $list['order.base.product.attribute.siteid'] ) ) { // set siteid in this class too
 			$this->setSiteId( $list['order.base.product.attribute.siteid'] );

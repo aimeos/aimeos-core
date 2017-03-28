@@ -110,7 +110,7 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			case '!=':
 				return $name . ' NOT IN ' . $this->createValueList( $type, (array) $this->getValue() );
 			default:
-				$terms = array();
+				$terms = [];
 
 				foreach( (array) $this->getValue() as $val ) {
 					$terms[] = $this->createTerm( $name, $type, $val );

@@ -34,8 +34,8 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param \Aimeos\MShop\Product\Item\Property\Iface[] $propItems List of property items
 	 */
-	public function __construct( array $values = array(), array $listItems = array(),
-		array $refItems = array(), array $propItems = array() )
+	public function __construct( array $values = [], array $listItems = [],
+		array $refItems = [], array $propItems = [] )
 	{
 		parent::__construct( 'product.', $values, $listItems, $refItems );
 
@@ -53,7 +53,7 @@ class Standard
 	{
 		if( $type !== null )
 		{
-			$list = array();
+			$list = [];
 
 			foreach( $this->propItems as $propId => $propItem )
 			{
@@ -304,7 +304,7 @@ class Standard
 			return (array) $this->values['product.config'];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -342,7 +342,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 		unset( $list['product.type'], $list['product.typename'] );
 

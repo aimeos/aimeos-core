@@ -239,7 +239,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/address/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -257,7 +257,7 @@ class Standard
 	{
 		$path = 'mshop/customer/manager/address/submanagers';
 
-		return $this->getResourceTypeBase( 'customer/address', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'customer/address', $path, [], $withsub );
 	}
 
 
@@ -288,7 +288,7 @@ class Standard
 		 */
 		$path = 'mshop/customer/manager/address/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -420,7 +420,7 @@ class Standard
 	 * @param array $values List of attributes for address item
 	 * @return \Aimeos\MShop\Customer\Item\Address\Iface New address item
 	 */
-	protected function createItemBase( array $values = array( ) )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Customer\Item\Address\Standard( $this->getPrefix(), $values );
 	}

@@ -248,7 +248,7 @@ class Standard
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		$find = array(
 			'service.code' => $code,
@@ -457,9 +457,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of service items implementing \Aimeos\MShop\Service\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = array();
+		$map = $typeIds = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -715,7 +715,7 @@ class Standard
 		 * @category Developer
 		 * @see mshop/service/provider/delivery/decorators
 		 */
-		$decorators = $config->get( 'mshop/service/provider/' . $item->getType() . '/decorators', array() );
+		$decorators = $config->get( 'mshop/service/provider/' . $item->getType() . '/decorators', [] );
 
 		$provider = $this->addServiceDecorators( $item, $provider, $names );
 		return $this->addServiceDecorators( $item, $provider, $decorators );
@@ -759,7 +759,7 @@ class Standard
 	 * @param array $textItems List of items implementing \Aimeos\MShop\Text\Item\Iface
 	 * @return \Aimeos\MShop\Service\Item\Iface New service item
 	 */
-	protected function createItemBase( array $values = array( ), array $listitems = array( ), array $textItems = array( ) )
+	protected function createItemBase( array $values = [], array $listitems = [], array $textItems = [] )
 	{
 		return new \Aimeos\MShop\Service\Item\Standard( $values, $listitems, $textItems );
 	}

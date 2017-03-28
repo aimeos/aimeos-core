@@ -25,7 +25,7 @@ class Zip
 	private $container;
 	private $classname;
 	private $position = 0;
-	private $content = array();
+	private $content = [];
 	private $resourcepath;
 
 
@@ -39,7 +39,7 @@ class Zip
 	 * @param string $format Format of the content objects inside the container
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resourcepath, $format, array $options = array() )
+	public function __construct( $resourcepath, $format, array $options = [] )
 	{
 		$this->classname = '\\Aimeos\\MW\\Container\\Content\\' . $format;
 

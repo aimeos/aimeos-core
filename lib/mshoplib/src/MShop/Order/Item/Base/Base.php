@@ -73,8 +73,8 @@ abstract class Base
 	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface as values
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-			array $values = array(), array $products = array(), array $addresses = array(),
-			array $services = array(), array $coupons = array() )
+			array $values = [], array $products = [], array $addresses = [],
+			array $services = [], array $coupons = [] )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $products );
 		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $addresses );
@@ -177,7 +177,7 @@ abstract class Base
 		{
 			if( isset( $this->products[$position] ) )
 			{
-				$products = array();
+				$products = [];
 
 				foreach( $this->products as $key => $product )
 				{
@@ -403,7 +403,7 @@ abstract class Base
 	 * @param string $code Coupon code
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
 	 */
-	public function addCoupon( $code, array $products = array() )
+	public function addCoupon( $code, array $products = [] )
 	{
 		if( isset( $this->coupons[$code] ) ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Duplicate coupon code "%1$s"', $code ) );
@@ -439,7 +439,7 @@ abstract class Base
 	 */
 	public function deleteCoupon( $code, $removecode = false )
 	{
-		$products = array();
+		$products = [];
 
 		if( isset( $this->coupons[$code] ) )
 		{
@@ -457,7 +457,7 @@ abstract class Base
 			if( $removecode === true ) {
 				unset( $this->coupons[$code] );
 			} else {
-				$this->coupons[$code] = array();
+				$this->coupons[$code] = [];
 			}
 
 			$this->setModified();
@@ -560,7 +560,7 @@ abstract class Base
 	 */
 	protected function getSameProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, array $products )
 	{
-		$attributeMap = array();
+		$attributeMap = [];
 
 		foreach( $item->getAttributes() as $attributeItem ) {
 			$attributeMap[$attributeItem->getCode()] = $attributeItem;

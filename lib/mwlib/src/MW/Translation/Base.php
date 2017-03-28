@@ -61,7 +61,7 @@ abstract class Base
 	 */
 	protected function getTranslationFileLocations( array $paths, $locale )
 	{
-		$locations = array();
+		$locations = [];
 
 		foreach( $paths as $path )
 		{

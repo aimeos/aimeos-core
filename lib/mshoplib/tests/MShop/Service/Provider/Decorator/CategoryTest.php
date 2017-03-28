@@ -45,7 +45,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'getConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$result = $this->object->getConfigBE();
 
@@ -58,7 +58,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array(
 			'category.include' => 'test',
@@ -76,9 +76,9 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$result = $this->object->checkConfigBE( array() );
+		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertInternalType( 'null', $result['category.include'] );
@@ -90,10 +90,10 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array(
-			'category.include' => array(),
+			'category.include' => [],
 			'category.exclude' => 1,
 		);
 		$result = $this->object->checkConfigBE( $attributes );
@@ -106,7 +106,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testIsAvailableNoConfig()
 	{
-		$this->servItem->setConfig( array() );
+		$this->servItem->setConfig( [] );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )

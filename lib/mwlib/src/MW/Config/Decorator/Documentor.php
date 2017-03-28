@@ -66,7 +66,7 @@ class Documentor
  */
 class ConfigFile
 {
-	private $config = array();
+	private $config = [];
 	private $file;
 
 

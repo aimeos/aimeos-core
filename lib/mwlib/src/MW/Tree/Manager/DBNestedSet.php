@@ -20,7 +20,7 @@ namespace Aimeos\MW\Tree\Manager;
  */
 class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 {
-	private $searchConfig = array();
+	private $searchConfig = [];
 	private $config;
 	private $dbname;
 	private $dbm;
@@ -103,7 +103,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	public function getSearchAttributes()
 	{
-		$attributes = array();
+		$attributes = [];
 
 		foreach( $this->searchConfig as $values ) {
 			$attributes[] = new \Aimeos\MW\Criteria\Attribute\Standard( $values );
@@ -571,7 +571,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 
 			try
 			{
-				$nodes = array();
+				$nodes = [];
 				while( ( $row = $result->fetch() ) !== false ) {
 					$nodes[$row['id']] = $this->createNodeBase( $row );
 				}
@@ -602,7 +602,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 */
 	public function getPath( $id )
 	{
-		$result = array();
+		$result = [];
 		$node = $this->getNode( $id, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE );
 
 		$search = $this->createSearch();
@@ -685,7 +685,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 	 * @param array List of children implementing \Aimeos\MW\Tree\Node\Iface
 	 * @return \Aimeos\MW\Tree\Node\Iface Empty node object
 	 */
-	protected function createNodeBase( array $values = array(), array $children = array() )
+	protected function createNodeBase( array $values = [], array $children = [] )
 	{
 		return new \Aimeos\MW\Tree\Node\DBNestedSet( $values, $children );
 	}

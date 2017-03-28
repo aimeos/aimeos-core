@@ -32,14 +32,14 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetOperator()
 	{
-		$expr = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '||', array() );
+		$expr = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '||', [] );
 		$this->assertEquals( '||', $expr->getOperator() );
 	}
 
 	public function testGetExpressions()
 	{
-		$expr = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '||', array() );
-		$this->assertEquals( array(), $expr->getExpressions() );
+		$expr = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '||', [] );
+		$this->assertEquals( [], $expr->getExpressions() );
 	}
 
 	public function testToString()
@@ -57,15 +57,15 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 			'bool' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
 		);
 
-		$expr1 = array();
+		$expr1 = [];
 		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '==', 'list', array('a', 'b', 'c') );
 		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '~=', 'string', 'value' );
 
-		$expr2 = array();
+		$expr2 = [];
 		$expr2[] = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '<', 'float', 0.1 );
 		$expr2[] = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $conn, '>', 'int', 10 );
 
-		$objects = array();
+		$objects = [];
 		$objects[] = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '&&', $expr1 );
 		$objects[] = new \Aimeos\MW\Criteria\Expression\Combine\SQL( '&&', $expr2 );
 
@@ -75,11 +75,11 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$expected = " NOT ( ( list IN ('a','b','c') AND string LIKE '%value%' ESCAPE '#' ) OR ( float < 0.1 AND int > 10 ) )";
 		$this->assertEquals( $expected, $test->toString( $types ) );
 
-		$obj = new \Aimeos\MW\Criteria\Expression\Combine\SQL('&&', array());
+		$obj = new \Aimeos\MW\Criteria\Expression\Combine\SQL('&&', []);
 		$this->assertEquals('', $obj->toString($types));
 
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
-		new \Aimeos\MW\Criteria\Expression\Combine\SQL('', array());
+		new \Aimeos\MW\Criteria\Expression\Combine\SQL('', []);
 
 	}
 }

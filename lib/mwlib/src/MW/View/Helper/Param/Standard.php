@@ -31,7 +31,7 @@ class Standard
 	 * @param \Aimeos\MW\View\Iface $view View instance with registered view helpers
 	 * @param array $params Associative list of key/value pairs
 	 */
-	public function __construct( $view, array $params = array() )
+	public function __construct( $view, array $params = [] )
 	{
 		parent::__construct( $view );
 

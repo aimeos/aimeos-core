@@ -19,7 +19,7 @@ namespace Aimeos\MW\DB\Statement\DBAL;
  */
 class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Statement\Iface
 {
-	private $binds = array();
+	private $binds = [];
 	private $conn;
 	private $parts;
 	private $sql;

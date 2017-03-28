@@ -31,7 +31,7 @@ class Standard
 	 * @param array $values Associative list of item key/value pairs
 	 * @param array $children List of nodes implementing \Aimeos\MW\Tree\Node\Iface
 	 */
-	public function __construct( array $values = array( ), array $children = array() )
+	public function __construct( array $values = [], array $children = [] )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $children );
 		parent::__construct( 'locale.site.', $values );
@@ -127,7 +127,7 @@ class Standard
 			return (array) $this->values['locale.site.config'];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -197,7 +197,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

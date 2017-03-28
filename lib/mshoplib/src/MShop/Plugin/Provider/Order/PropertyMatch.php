@@ -58,7 +58,7 @@ class PropertyMatch
 
 		$config = $this->getItemBase()->getConfig();
 
-		if( $config === array() ) {
+		if( $config === [] ) {
 			return true;
 		}
 
@@ -66,7 +66,7 @@ class PropertyMatch
 
 		$criteria = $productManager->createSearch( true );
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $criteria->compare( '==', 'product.id', $value->getProductId() );
 		$expr[] = $criteria->getConditions();
 

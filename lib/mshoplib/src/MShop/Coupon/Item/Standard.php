@@ -30,7 +30,7 @@ class Standard
 	 * @param array $values Optional; Associative array with id, label, provider,
 	 * config and status to initialize the item properties
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'coupon.', $values );
 
@@ -178,7 +178,7 @@ class Standard
 			return (array) $this->values['coupon.config'];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -250,7 +250,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

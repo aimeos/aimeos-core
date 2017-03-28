@@ -57,12 +57,12 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for customer list domain', $path ) );
 		}
 
-		$refKeys = array();
+		$refKeys = [];
 		foreach( $testdata['customer/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
-		$refIds = array();
+		$refIds = [];
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
 		$refIds['product'] = $this->getProductData( $refKeys['product'] );
 		$refIds['customer/group'] = $this->getCustomerGroupData( $refKeys['customer/group'] );
@@ -83,7 +83,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$manager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$groupManager = $manager->getSubManager( 'group' );
 
-		$codes = array();
+		$codes = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strrpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -96,7 +96,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $groupManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.group.code', $codes ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $groupManager->searchItems( $search ) as $item ) {
 			$refIds['customer/group/' . $item->getCode()] = $item->getId();
 		}
@@ -115,7 +115,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$codes = array();
+		$codes = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -128,7 +128,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $manager->searchItems( $search ) as $item ) {
 			$refIds['product/' . $item->getCode()] = $item->getId();
 		}
@@ -147,7 +147,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$labels = array();
+		$labels = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -160,7 +160,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $textManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $textManager->searchItems( $search ) as $item ) {
 			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
@@ -183,7 +183,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$customerListManager = $customerManager->getSubManager( 'lists', $type );
 		$customerListTypeManager = $customerListManager->getSubmanager( 'type', $type );
 
-		$itemCode = array();
+		$itemCode = [];
 		foreach( $testdata['customer/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
@@ -196,12 +196,12 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $itemCode ) );
 
-		$parentIds = array();
+		$parentIds = [];
 		foreach( $customerManager->searchItems( $search ) as $item ) {
 			$parentIds['customer/' . $item->getCode()] = $item->getId();
 		}
 
-		$listItemTypeIds = array();
+		$listItemTypeIds = [];
 		$listItemType = $customerListTypeManager->createItem();
 
 		$this->conn->begin();

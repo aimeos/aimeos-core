@@ -28,5 +28,5 @@ interface Iface
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = 'product', $type = null );
+	public function findItem( $code, array $ref = [], $domain = 'product', $type = null );
 }

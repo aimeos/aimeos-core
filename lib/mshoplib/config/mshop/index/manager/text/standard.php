@@ -75,6 +75,6 @@ return array(
 		'mysql' => array(
 			'OPTIMIZE TABLE "mshop_index_text"',
 		),
-		'pgsql' => array(),
+		'pgsql' => [],
 	),
 );

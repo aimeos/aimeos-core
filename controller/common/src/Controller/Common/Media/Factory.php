@@ -19,7 +19,7 @@ namespace Aimeos\Controller\Common\Media;
  */
 class Factory
 {
-	private static $objects = array();
+	private static $objects = [];
 
 
 	/**

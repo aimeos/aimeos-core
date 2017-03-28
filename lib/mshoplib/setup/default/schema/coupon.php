@@ -14,15 +14,15 @@ return array(
 			$table = $schema->createTable( 'mshop_coupon' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'provider', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscou_id' );
@@ -40,14 +40,14 @@ return array(
 			$table = $schema->createTable( 'mshop_coupon_code' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', array() );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'count', 'integer', array() );
+			$table->addColumn( 'count', 'integer', [] );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscouco_id' );

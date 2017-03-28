@@ -90,7 +90,7 @@ class OrderMigrateFlag extends \Aimeos\MW\Setup\Task\Base
 			if( $this->schema->columnExists( $table, 'flag' ) === true )
 			{
 				$cntRows = 0;
-				$mapping = array();
+				$mapping = [];
 
 				for( $i = 1; $i < 16; $i++ ) {
 					$mapping[0x1 << $i] = 0x1 << $i;

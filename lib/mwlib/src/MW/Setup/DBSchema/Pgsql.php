@@ -217,7 +217,7 @@ class Pgsql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param array $record Associative array with column details
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
-	protected function createColumnItem( array $record = array() )
+	protected function createColumnItem( array $record = [] )
 	{
 		switch( $record['data_type'] )
 		{

@@ -440,9 +440,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of property items implementing \Aimeos\MShop\Product\Item\Property\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = array();
+		$items = $map = $typeIds = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -735,7 +735,7 @@ class Standard
 	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, value
 	 * @return \Aimeos\MShop\Product\Item\Property\Standard New property item object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Product\Item\Property\Standard( $values );
 	}

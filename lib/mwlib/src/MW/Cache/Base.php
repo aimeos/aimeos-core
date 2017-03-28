@@ -76,7 +76,7 @@ abstract class Base
 	 * 	given value in the cache
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function set( $key, $value, $expires = null, array $tags = array() )
+	public function set( $key, $value, $expires = null, array $tags = [] )
 	{
 		if( !is_string( $key ) ) {
 			throw new \Aimeos\MW\Cache\Exception( 'Key is not a string' );

@@ -59,7 +59,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array( 'ordercheck.total-number-min' => '0' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -73,7 +73,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array( 'ordercheck.total-number-min' => 'nope' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -87,7 +87,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array( 'ordercheck.limit-days-pending' => '0' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -101,7 +101,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array( 'ordercheck.limit-days-pending' => 'nope' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -167,7 +167,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'searchItems' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\StandardMock', $mock );
 
@@ -188,7 +188,7 @@ class OrderCheckTest extends \PHPUnit_Framework_TestCase
 
 		$mock->expects( $this->once() )
 			->method( 'searchItems' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\StandardMock', $mock );
 

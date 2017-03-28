@@ -23,10 +23,10 @@ namespace Aimeos\MW\View;
  * @method \Aimeos\MW\Mail\Message\Iface mail() Returns the e-mail message object
  * @method string number(integer|float|decimal $number, integer $decimals = 2) Returns the formatted number
  * @method string|array param(string|null $name, string|array $default) Returns the parameter value
- * @method string partial(string $filepath, array $params = array() ) Renders the partial template
+ * @method string partial(string $filepath, array $params = [] ) Renders the partial template
  * @method \Aimeos\MW\View\Helper\Iface request() Returns the request helper object
  * @method string translate(string $domain, string $singular, string $plural = '', integer $number = 1) Returns the translated string or the original one if no translation is available
- * @method string url(string|null $target, string|null $controller = null, string|null $action = null, array $params = array(), array $trailing = array(), array $config = array()) Returns the URL assembled from the given arguments
+ * @method string url(string|null $target, string|null $controller = null, string|null $action = null, array $params = [], array $trailing = [], array $config = []) Returns the URL assembled from the given arguments
  *
  * @package MW
  * @subpackage View

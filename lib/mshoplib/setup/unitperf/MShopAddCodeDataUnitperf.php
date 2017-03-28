@@ -32,7 +32,7 @@ class MShopAddCodeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

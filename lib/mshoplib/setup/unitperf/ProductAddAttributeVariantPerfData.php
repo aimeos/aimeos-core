@@ -59,7 +59,7 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 		$productListManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists' );
 		$productListTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'product/lists/type' );
 
-		$productListTypeItem = $productListTypeManager->findItem( 'variant', array(), 'attribute' );
+		$productListTypeItem = $productListTypeManager->findItem( 'variant', [], 'attribute' );
 
 		$search = $productManager->createSearch();
 		$search->setSortations( array( $search->sort( '+', 'product.id' ) ) );
@@ -130,7 +130,7 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		$attrTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute/type' );
 
-		$attrTypeItem = $attrTypeManager->findItem( 'width', array(), 'product' );
+		$attrTypeItem = $attrTypeManager->findItem( 'width', [], 'product' );
 
 		$attrItem = $attrManager->createItem();
 		$attrItem->setTypeId( $attrTypeItem->getId() );
@@ -138,7 +138,7 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 		$attrItem->setStatus( 1 );
 
 		$pos = 0;
-		$attrListWidth = array();
+		$attrListWidth = [];
 
 		foreach( array( 'tight', 'normal', 'wide' ) as $size )
 		{
@@ -168,7 +168,7 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 		$attrManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
 		$attrTypeManager = \Aimeos\MShop\Factory::createManager( $context, 'attribute/type' );
 
-		$attrTypeItem = $attrTypeManager->findItem( 'length', array(), 'product' );
+		$attrTypeItem = $attrTypeManager->findItem( 'length', [], 'product' );
 
 		$attrItem = $attrManager->createItem();
 		$attrItem->setTypeId( $attrTypeItem->getId() );
@@ -176,7 +176,7 @@ class ProductAddAttributeVariantPerfData extends \Aimeos\MW\Setup\Task\ProductAd
 		$attrItem->setStatus( 1 );
 
 		$pos = 0;
-		$attrListLength = array();
+		$attrListLength = [];
 
 		foreach( array( 'short', 'normal', 'long' ) as $size )
 		{

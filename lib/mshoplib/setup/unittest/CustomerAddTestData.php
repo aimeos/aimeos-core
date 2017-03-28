@@ -33,7 +33,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -101,7 +101,7 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 	protected function addCustomerData( array $testdata, \Aimeos\MShop\Common\Manager\Iface $customerManager,
 		\Aimeos\MShop\Common\Item\Address\Iface $address )
 	{
-		$parentIds = array();
+		$parentIds = [];
 		$customer = $customerManager->createItem();
 
 		foreach( $testdata['customer'] as $key => $dataset )

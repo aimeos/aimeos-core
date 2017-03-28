@@ -399,7 +399,7 @@ class Standard
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		return $this->findItemBase( array( 'product.code' => $code ), $ref );
 	}
@@ -428,9 +428,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of products implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = array();
+		$map = $typeIds = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -596,7 +596,7 @@ class Standard
 			}
 		}
 
-		$propItems = array();
+		$propItems = [];
 		if( in_array( 'product/property', $ref, true ) ) {
 			$propItems = $this->getPropertyItems( array_keys( $map ) );
 		}
@@ -710,8 +710,8 @@ class Standard
 	 * @param array $propertyItems List of items implementing \Aimeos\MShop\Product\Item\Property\Iface
 	 * @return \Aimeos\MShop\Product\Item\Iface New product item
 	 */
-	protected function createItemBase( array $values = array(), array $listitems = array(),
-		array $refItems = array(), array $propertyItems = array() )
+	protected function createItemBase( array $values = [], array $listitems = [],
+		array $refItems = [], array $propertyItems = [] )
 	{
 		return new \Aimeos\MShop\Product\Item\Standard( $values, $listitems, $refItems, $propertyItems );
 	}
@@ -726,7 +726,7 @@ class Standard
 	 */
 	protected function getPropertyItems( array $prodIds )
 	{
-		$list = array();
+		$list = [];
 		$propManager = $this->getSubManager( 'property' );
 
 		$propSearch = $propManager->createSearch();

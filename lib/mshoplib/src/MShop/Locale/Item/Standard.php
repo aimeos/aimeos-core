@@ -36,8 +36,8 @@ class Standard
 	 * @param array $sitePath List of site IDs up to the root site item
 	 * @param array $siteSubTree List of site IDs from all sites below the current site
 	 */
-	public function __construct( array $values = array( ), \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
-		array $sitePath = array(), array $siteSubTree = array() )
+	public function __construct( array $values = [], \Aimeos\MShop\Locale\Item\Site\Iface $site = null,
+		array $sitePath = [], array $siteSubTree = [] )
 	{
 		parent::__construct( 'locale.', $values );
 
@@ -281,7 +281,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 
 		if( isset( $list['locale.siteid'] ) ) {
 			$this->setSiteId( $list['locale.siteid'] );

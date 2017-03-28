@@ -33,7 +33,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -57,12 +57,12 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for text list domain', $path ) );
 		}
 
-		$refKeys = array();
+		$refKeys = [];
 		foreach( $testdata['text/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
-		$refIds = array();
+		$refIds = [];
 		$refIds['media'] = $this->getMediaData( $refKeys['media'] );
 
 		$this->addTextData( $testdata, $refIds );
@@ -82,7 +82,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$urls = array();
+		$urls = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -96,7 +96,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
 		$result = $mediaManager->searchItems( $search );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $result as $item ) {
 			$refIds['media/' . $item->getUrl()] = $item->getId();
 		}
@@ -118,7 +118,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$textListManager = $textManager->getSubManager( 'lists', 'Standard' );
 		$textListTypeManager = $textListManager->getSubmanager( 'type', 'Standard' );
 
-		$labels = array();
+		$labels = [];
 		foreach( $testdata['text/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
@@ -131,12 +131,12 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $textManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
-		$parentIds = array();
+		$parentIds = [];
 		foreach( $textManager->searchItems( $search ) as $item ) {
 			$parentIds['text/' . $item->getLabel()] = $item->getId();
 		}
 
-		$tListTypeIds = array();
+		$tListTypeIds = [];
 		$tListType = $textListTypeManager->createItem();
 
 		$this->conn->begin();

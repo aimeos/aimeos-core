@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Service;
  */
 class Exception extends \Aimeos\MShop\Exception
 {
-	private $errorCodes = array();
+	private $errorCodes = [];
 
 
 	/**
@@ -31,7 +31,7 @@ class Exception extends \Aimeos\MShop\Exception
 	 * @param \Exception|null $previous The previous exception used for the exception chaining
 	 * @param array $errorCodes Associative list of error codes
 	 */
-	public function __construct( $message = '', $code = 0, $previous = null, array $errorCodes = array() )
+	public function __construct( $message = '', $code = 0, $previous = null, array $errorCodes = [] )
 	{
 		parent::__construct( $message, $code );
 

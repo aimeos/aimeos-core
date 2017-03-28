@@ -52,7 +52,7 @@ class ProductAddMediaPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $context );
 		$mediaTypeManager = $mediaManager->getSubManager( 'type' );
 
-		$expr = array();
+		$expr = [];
 		$search = $mediaTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'media.type.domain', 'product' );
 		$expr[] = $search->compare( '==', 'media.type.code', 'default' );
@@ -68,7 +68,7 @@ class ProductAddMediaPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
-		$expr = array();
+		$expr = [];
 		$search = $productListTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'media' );
 		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
@@ -79,7 +79,7 @@ class ProductAddMediaPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 			throw new \RuntimeException( 'Product list type item not found' );
 		}
 
-		$expr = array();
+		$expr = [];
 		$search = $productListTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'media' );
 		$expr[] = $search->compare( '==', 'product.lists.type.code', 'download' );

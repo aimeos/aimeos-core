@@ -242,7 +242,7 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 	 * 	NUMERIC_PRECISION, COLUMN_DEFAULT, IS_NULLABLE
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
-	protected function createColumnItem( array $record = array() )
+	protected function createColumnItem( array $record = [] )
 	{
 		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
 		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,

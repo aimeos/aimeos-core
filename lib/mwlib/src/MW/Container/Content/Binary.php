@@ -37,7 +37,7 @@ class Binary
 	 * @param string $name Name of the file
 	 * @param array $options Associative list of key/value pairs for configuration
 	 */
-	public function __construct( $resource, $name, array $options = array() )
+	public function __construct( $resource, $name, array $options = [] )
 	{
 		if( ( $this->fh = @fopen( $resource, 'a+' ) ) === false
 			&& ( $this->fh = fopen( $resource, 'r' ) ) === false

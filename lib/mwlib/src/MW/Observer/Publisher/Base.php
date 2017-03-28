@@ -20,7 +20,7 @@ namespace Aimeos\MW\Observer\Publisher;
  */
 abstract class Base implements \Aimeos\MW\Observer\Publisher\Iface
 {
-	private $listeners = array();
+	private $listeners = [];
 
 
 	/**
@@ -83,6 +83,6 @@ abstract class Base implements \Aimeos\MW\Observer\Publisher\Iface
 	 */
 	protected function clearListeners()
 	{
-		$this->listeners = array();
+		$this->listeners = [];
 	}
 }

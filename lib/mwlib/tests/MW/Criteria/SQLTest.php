@@ -57,7 +57,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 
 	public function testCombine()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\SQL', $this->object->combine( '||', array() ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\SQL', $this->object->combine( '||', [] ) );
 	}
 
 
@@ -79,7 +79,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( "str_col", $this->object->getColumnString( array( $this->object->sort( '+', 'str_column' ) ), $translations ) );
 		$this->assertEquals( "str_col", $this->object->getColumnString( array( $this->object->compare( '==', 'str_column', 1 ) ), $translations ) );
-		$this->assertEquals( "", $this->object->getColumnString( array( $this->object->combine( '&&', array() ) ), $translations ) );
+		$this->assertEquals( "", $this->object->getColumnString( array( $this->object->combine( '&&', [] ) ), $translations ) );
 	}
 
 
@@ -158,7 +158,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 		$types = array( 'asc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'desc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 		$translations = array( 'asc_column' => 'asc_int_col', 'desc_column' => 'desc_str_col' );
 
-		$sortations = array();
+		$sortations = [];
 		$sortations[] = $this->object->sort( '+', 'asc_column' );
 		$sortations[] = $this->object->sort( '-', 'desc_column' );
 		$this->object->setSortations( $sortations );
@@ -197,7 +197,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetSortations()
 	{
-		$this->assertEquals( array(), $this->object->getSortations() );
+		$this->assertEquals( [], $this->object->getSortations() );
 
 		$sortations = array( $this->object->sort( '+', 'asc_column' ) );
 		$this->object->setSortations( $sortations );
@@ -219,7 +219,7 @@ class SQLTest extends \PHPUnit_Framework_TestCase
 
 	public function testToConditionsEmptyArray()
 	{
-		$condition = $this->object->toConditions( array() );
+		$condition = $this->object->toConditions( [] );
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\SQL', $condition );
 	}
 

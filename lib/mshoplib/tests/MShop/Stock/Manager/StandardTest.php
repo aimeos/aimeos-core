@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'stock.id', null );
 		$expr[] = $search->compare( '!=', 'stock.siteid', null );
 		$expr[] = $search->compare( '!=', 'stock.typeid', null );
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testDecrease()
 	{
 		$typeManager = $this->object->getSubManager( 'type' );
-		$typeItem = $typeManager->findItem( 'unit_type1', array(), 'product' );
+		$typeItem = $typeManager->findItem( 'unit_type1', [], 'product' );
 
 		$stockItem = $this->object->createItem();
 		$stockItem->setTypeId( $typeItem->getId() );
@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testIncrease()
 	{
 		$typeManager = $this->object->getSubManager( 'type' );
-		$typeItem = $typeManager->findItem( 'unit_type1', array(), 'product' );
+		$typeItem = $typeManager->findItem( 'unit_type1', [], 'product' );
 
 		$stockItem = $this->object->createItem();
 		$stockItem->setTypeId( $typeItem->getId() );

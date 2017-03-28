@@ -188,7 +188,7 @@ class FixedRebateTest extends \PHPUnit_Framework_TestCase
 
 	protected function getOrderProducts()
 	{
-		$products = array();
+		$products = [];
 		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/product' );
 
 		$search = $manager->createSearch();

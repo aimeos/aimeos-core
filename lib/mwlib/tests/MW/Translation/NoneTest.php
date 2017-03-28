@@ -135,7 +135,7 @@ class NoneTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAll()
 	{
-		$this->assertEquals( array(), $this->object->getAll( 'testDomain' ) );
+		$this->assertEquals( [], $this->object->getAll( 'testDomain' ) );
 	}
 
 }

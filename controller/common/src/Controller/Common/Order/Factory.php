@@ -20,7 +20,7 @@ namespace Aimeos\Controller\Common\Order;
  */
 class Factory
 {
-	private static $objects = array();
+	private static $objects = [];
 
 
 	/**

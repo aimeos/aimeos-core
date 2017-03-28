@@ -243,7 +243,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['order.base.service.attribute.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.service.attribute.attrid'], $item->getAttributeId() );

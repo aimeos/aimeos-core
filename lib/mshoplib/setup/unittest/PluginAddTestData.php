@@ -33,7 +33,7 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -73,7 +73,7 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for plugin domain', $path ) );
 		}
 
-		$plugTypeIds = array();
+		$plugTypeIds = [];
 		$type = $pluginTypeManager->createItem();
 
 		$this->conn->begin();

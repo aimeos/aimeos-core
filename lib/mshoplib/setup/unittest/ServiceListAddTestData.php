@@ -33,7 +33,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -57,12 +57,12 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for service domain', $path ) );
 		}
 
-		$refKeys = array();
+		$refKeys = [];
 		foreach( $testdata['service/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
-		$refIds = array();
+		$refIds = [];
 		$refIds['media'] = $this->getMediaData( $refKeys['media'] );
 		$refIds['price'] = $this->getPriceData( $refKeys['price'] );
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
@@ -84,7 +84,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$priceTypeManager = $priceManager->getSubManager( 'type', 'Standard' );
 
-		$value = $ship = $domain = $code = array();
+		$value = $ship = $domain = $code = [];
 		foreach( $keys as $dataset )
 		{
 			$exp = explode( '/', $dataset );
@@ -108,7 +108,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$result = $priceTypeManager->searchItems( $search );
 
-		$typeids = array();
+		$typeids = [];
 		foreach( $result as $item ) {
 			$typeids[] = $item->getId();
 		}
@@ -123,7 +123,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$result = $priceManager->searchItems( $search );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $result as $item ) {
 			$refIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
 		}
@@ -143,7 +143,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$labels = array();
+		$labels = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -156,7 +156,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $textManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $textManager->searchItems( $search ) as $item ) {
 			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
@@ -176,7 +176,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$labels = array();
+		$labels = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -189,7 +189,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $mediaManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'media.label', $labels ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $mediaManager->searchItems( $search ) as $item ) {
 			$refIds['media/' . $item->getLabel()] = $item->getId();
 		}
@@ -210,7 +210,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$serviceListManager = $serviceManager->getSubManager( 'lists', 'Standard' );
 
-		$typeDomain = $typeCode = $itemCode = array();
+		$typeDomain = $typeCode = $itemCode = [];
 		foreach( $testdata['service/lists'] as $dataset )
 		{
 			$exp = explode( '/', $dataset['parentid'] );
@@ -276,7 +276,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$listManager = $manager->getSubManager( 'lists', 'Standard' );
 		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 
-		$listItemTypeIds = array();
+		$listItemTypeIds = [];
 		$listItemType = $listTypeManager->createItem();
 
 		foreach( $data as $key => $dataset )
@@ -313,7 +313,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$parentIds = array();
+		$parentIds = [];
 		foreach( $manager->searchItems( $search ) as $item ) {
 			$parentIds['service/' . $item->getType() . '/' . $item->getCode()] = $item->getId();
 		}
@@ -341,7 +341,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$typeids = array();
+		$typeids = [];
 		foreach( $typeManager->searchItems( $search ) as $item ) {
 			$typeids[] = $item->getId();
 		}

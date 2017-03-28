@@ -74,7 +74,7 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$tagManager = \Aimeos\MShop\Tag\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$tagTypeManager = $tagManager->getSubManager( 'type', 'Standard' );
 
-		$typeIds = array();
+		$typeIds = [];
 		$typeItem = $tagTypeManager->createItem();
 
 		$this->conn->begin();

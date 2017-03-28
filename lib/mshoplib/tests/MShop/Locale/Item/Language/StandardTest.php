@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['locale.language.id'], $item->getId() );
 		$this->assertEquals( $list['locale.language.code'], $item->getCode() );

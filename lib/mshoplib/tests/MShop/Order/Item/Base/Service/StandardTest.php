@@ -19,7 +19,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	private $object;
 	private $values;
 	private $price;
-	private $attribute = array();
+	private $attribute = [];
 
 
 	protected function setUp()
@@ -233,7 +233,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
 
-		$this->object->setAttributes( array() );
+		$this->object->setAttributes( [] );
 
 		$result = $this->object->getAttribute( 'code_001' );
 		$this->assertEquals( null, $result );
@@ -267,7 +267,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->getAttributeItem( 'code_003' );
 		$this->assertEquals( null, $result );
 
-		$this->object->setAttributes( array() );
+		$this->object->setAttributes( [] );
 
 		$result = $this->object->getAttributeItem( 'code_001' );
 		$this->assertEquals( null, $result );
@@ -285,7 +285,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAttributesInvalidType()
 	{
-		$this->assertEquals( array(), $this->object->getAttributes( 'invalid' ) );
+		$this->assertEquals( [], $this->object->getAttributes( 'invalid' ) );
 	}
 
 	public function testSetAttributeItem()
@@ -364,7 +364,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['order.base.service.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.service.baseid'], $item->getBaseId() );

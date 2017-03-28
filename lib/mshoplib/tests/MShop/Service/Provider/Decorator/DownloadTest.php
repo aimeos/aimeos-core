@@ -49,7 +49,7 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array( 'download.all' => '1' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -63,9 +63,9 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$attributes = array( 'download.all' => array() );
+		$attributes = array( 'download.all' => [] );
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );

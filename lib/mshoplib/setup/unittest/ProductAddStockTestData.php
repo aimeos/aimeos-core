@@ -76,7 +76,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$typeManager = $stockManager->getSubManager( 'type', 'Standard' );
 
 
-		$typeIds = array();
+		$typeIds = [];
 		$typeItem = $typeManager->createItem();
 
 		$this->conn->begin();

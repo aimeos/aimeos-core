@@ -68,7 +68,7 @@ class TextTest extends \PHPUnit_Framework_TestCase
 
 		$expected = array( 'test text' );
 
-		$actual = array();
+		$actual = [];
 		foreach( $file as $entry ) {
 			$actual[] = $entry;
 		}

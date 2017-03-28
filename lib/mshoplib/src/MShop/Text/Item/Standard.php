@@ -32,7 +32,7 @@ class Standard
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 */
-	public function __construct( array $values = array(), array $listItems = array(), array $refItems = array() )
+	public function __construct( array $values = [], array $listItems = [], array $refItems = [] )
 	{
 		parent::__construct( 'text.', $values, $listItems, $refItems );
 
@@ -283,7 +283,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 		unset( $list['text.type'], $list['text.typename'] );
 

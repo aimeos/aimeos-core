@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		//search without base criteria
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'media.lists.type.id', null );
 		$expr[] = $search->compare( '!=', 'media.lists.type.siteid', null );
 		$expr[] = $search->compare( '==', 'media.lists.type.code', 'option' );
@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 7 );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 7, count( $results ) );
 		$this->assertEquals( 10, $total );
 

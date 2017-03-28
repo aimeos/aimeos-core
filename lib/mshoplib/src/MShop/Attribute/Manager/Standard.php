@@ -198,7 +198,7 @@ class Standard
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		$find = array(
 			'attribute.code' => $code,
@@ -450,9 +450,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of attribute items implementing \Aimeos\MShop\Attribute\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = array();
+		$map = $typeIds = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -651,7 +651,7 @@ class Standard
 	 * @param array $refItems List of items implementing \Aimeos\MShop\Text\Item\Iface
 	 * @return \Aimeos\MShop\Attribute\Item\Iface New product item
 	 */
-	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
 	{
 		return new \Aimeos\MShop\Attribute\Item\Standard( $values, $listItems, $refItems );
 	}

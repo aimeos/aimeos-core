@@ -54,7 +54,7 @@ class ProductGone
 			return true;
 		}
 
-		$productIds = array();
+		$productIds = [];
 		foreach( $order->getProducts() as $pr ) {
 			$productIds[] = $pr->getProductId();
 		}
@@ -65,7 +65,7 @@ class ProductGone
 		$search->setConditions( $search->compare( '==', 'product.id', $productIds ) );
 		$checkItems = $productManager->searchItems( $search );
 
-		$notAvailable = array();
+		$notAvailable = [];
 		$now = date( 'Y-m-d H-i-s' );
 
 		foreach( $order->getProducts() as $position => $orderProduct )

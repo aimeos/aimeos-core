@@ -52,7 +52,7 @@ class ServicesAvailable
 
 		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
 		{
-			$problems = array();
+			$problems = [];
 			$availableServices = $order->getServices();
 
 			foreach( $this->getItemBase()->getConfig() as $type => $value )

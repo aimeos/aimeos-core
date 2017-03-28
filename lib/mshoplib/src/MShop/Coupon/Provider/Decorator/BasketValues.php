@@ -34,13 +34,13 @@ class BasketValues
 		$currency = $price->getCurrencyId();
 		$value = $price->getValue() + $price->getRebate();
 
-		$minvalue = $this->getConfigValue( 'basketvalues.total-value-min', array() );
+		$minvalue = $this->getConfigValue( 'basketvalues.total-value-min', [] );
 
 		if( isset( $minvalue[$currency] ) && $minvalue[$currency] > $value ) {
 			return false;
 		}
 
-		$maxvalue = $this->getConfigValue( 'basketvalues.total-value-max', array() );
+		$maxvalue = $this->getConfigValue( 'basketvalues.total-value-max', [] );
 
 		if( isset( $maxvalue[$currency] ) && $maxvalue[$currency] < $value ) {
 			return false;

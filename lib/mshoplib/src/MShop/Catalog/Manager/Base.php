@@ -21,8 +21,8 @@ namespace Aimeos\MShop\Catalog\Manager;
 abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 {
 	private $searchConfig;
-	private $filter = array();
-	private $treeManagers = array();
+	private $filter = [];
+	private $treeManagers = [];
 
 
 	/**
@@ -70,9 +70,9 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @return array List of items implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	protected function buildItems( array $itemMap, array $domains, $prefix, array $local = array() )
+	protected function buildItems( array $itemMap, array $domains, $prefix, array $local = [] )
 	{
-		$items = $listItemMap = $refItemMap = $refIdMap = array();
+		$items = $listItemMap = $refItemMap = $refIdMap = [];
 
 		if( count( $domains ) > 0 )
 		{
@@ -92,17 +92,17 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 
 		foreach( $itemMap as $id => $node )
 		{
-			$listItems = array();
+			$listItems = [];
 			if( isset( $listItemMap[$id] ) ) {
 				$listItems = $listItemMap[$id];
 			}
 
-			$refItems = array();
+			$refItems = [];
 			if( isset( $refItemMap[$id] ) ) {
 				$refItems = $refItemMap[$id];
 			}
 
-			$items[$id] = $this->createItemBase( array(), $listItems, $refItems, array(), $node );
+			$items[$id] = $this->createItemBase( [], $listItems, $refItems, [], $node );
 		}
 
 		return $items;
@@ -119,8 +119,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	 * @param \Aimeos\MW\Tree\Node\Iface|null $node Tree node object
 	 * @return \Aimeos\MShop\Catalog\Item\Iface New catalog item
 	 */
-	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array(),
-			array $children = array(), \Aimeos\MW\Tree\Node\Iface $node = null )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
+			array $children = [], \Aimeos\MW\Tree\Node\Iface $node = null )
 	{
 		if( $node === null )
 		{
@@ -153,17 +153,17 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	{
 		foreach( $node->getChildren() as $idx => $child )
 		{
-			$listItems = array();
+			$listItems = [];
 			if( array_key_exists( $child->getId(), $listItemMap ) ) {
 				$listItems = $listItemMap[$child->getId()];
 			}
 
-			$refItems = array();
+			$refItems = [];
 			if( array_key_exists( $child->getId(), $refItemMap ) ) {
 				$refItems = $refItemMap[$child->getId()];
 			}
 
-			$newItem = $this->createItemBase( array(), $listItems, $refItems, array(), $child );
+			$newItem = $this->createItemBase( [], $listItems, $refItems, [], $child );
 
 			$result = true;
 			foreach( $this->filter as $fcn ) {
@@ -603,7 +603,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	 */
 	protected function getNodeMap( \Aimeos\MW\Tree\Node\Iface $node )
 	{
-		$map = array();
+		$map = [];
 
 		$map[(string) $node->getId()] = $node;
 

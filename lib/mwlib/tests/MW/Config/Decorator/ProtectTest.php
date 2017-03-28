@@ -10,7 +10,7 @@ class ProtectTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$conf = new \Aimeos\MW\Config\PHPArray( array() );
+		$conf = new \Aimeos\MW\Config\PHPArray( [] );
 		$this->object = new \Aimeos\MW\Config\Decorator\Protect( $conf, array( 'client', 'admin' ) );
 	}
 
@@ -38,6 +38,6 @@ class ProtectTest extends \PHPUnit_Framework_TestCase
 	public function testSetProtected()
 	{
 		$this->setExpectedException( 'Aimeos\MW\Config\Exception' );
-		$this->object->set( 'resource/db', array() );
+		$this->object->set( 'resource/db', [] );
 	}
 }

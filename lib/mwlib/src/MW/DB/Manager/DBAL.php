@@ -20,8 +20,8 @@ namespace Aimeos\MW\DB\Manager;
 class DBAL implements \Aimeos\MW\DB\Manager\Iface
 {
 	private $config = null;
-	private $connections = array();
-	private $count = array();
+	private $connections = [];
+	private $count = [];
 
 
 	/**
@@ -140,7 +140,7 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 		$conn = \Doctrine\DBAL\DriverManager::getConnection( $params );
 		$dbc = new \Aimeos\MW\DB\Connection\DBAL( $conn );
 
-		foreach( $this->config->get( 'resource/' . $name . '/stmt', array() ) as $stmt ) {
+		foreach( $this->config->get( 'resource/' . $name . '/stmt', [] ) as $stmt ) {
 			$dbc->create( $stmt )->execute()->finish();
 		}
 

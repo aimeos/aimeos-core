@@ -19,9 +19,9 @@ namespace Aimeos\MW\Setup\Task;
  */
 abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 {
-	private $connections = array();
-	private $schemas = array();
-	private $paths = array();
+	private $connections = [];
+	private $schemas = [];
+	private $paths = [];
 	protected $additional;
 
 	/** @deprecated Use getSchema() instead */
@@ -40,7 +40,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 * @param array $paths List of paths of the setup tasks ordered by dependencies
 	 */
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn,
-		$additional = null, array $paths = array() )
+		$additional = null, array $paths = [] )
 	{
 		$this->schema = $schema;
 		$this->conn = $conn;
@@ -248,8 +248,8 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 */
 	protected function getTableDefinitions( $content )
 	{
-		$defs = array();
-		$matches = array();
+		$defs = [];
+		$matches = [];
 
 		$regex = '/CREATE TABLE \"?([a-zA-Z0-9_]+)\"? .*(\n\n|$)/sU';
 		if ( preg_match_all($regex, $content, $matches, PREG_SET_ORDER) === false ) {
@@ -272,8 +272,8 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 */
 	protected function getIndexDefinitions( $content )
 	{
-		$defs = array();
-		$matches = array();
+		$defs = [];
+		$matches = [];
 
 		if ( preg_match_all('/CREATE [a-zA-Z]* ?INDEX \"?([a-zA-Z0-9_]+)\"? ON \"?([a-zA-Z0-9_]+)\"? .+(\n\n|$)/sU', $content, $matches, PREG_SET_ORDER) === false ) {
 			throw new \Aimeos\MW\Setup\Exception('Unable to get index definitions');
@@ -296,8 +296,8 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 */
 	protected function getTriggerDefinitions( $content )
 	{
-		$defs = array();
-		$matches = array();
+		$defs = [];
+		$matches = [];
 
 		$regex = '/CREATE TRIGGER \"?([a-zA-Z0-9_]+)\"? .*(\n\n|$)/sU';
 		if ( preg_match_all($regex, $content, $matches, PREG_SET_ORDER) === false ) {

@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '==', 'locale.language.id', 'de' );
 		$expr[] = $search->compare( '>=', 'locale.language.label', 'German' );
 		$expr[] = $search->compare( '==', 'locale.language.code', 'de' );
@@ -107,7 +107,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -116,7 +116,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '~=', 'locale.language.label', 'rman' ) );
 		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 

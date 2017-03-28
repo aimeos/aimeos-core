@@ -20,7 +20,7 @@ namespace Aimeos\Controller\Jobs\Common\Factory;
  */
 abstract class Base
 {
-	private static $objects = array();
+	private static $objects = [];
 
 
 	/**
@@ -118,8 +118,8 @@ abstract class Base
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$decorators = $config->get( 'controller/jobs/common/decorators/default', array() );
-		$excludes = $config->get( 'controller/jobs/' . $domain . '/decorators/excludes', array() );
+		$decorators = $config->get( 'controller/jobs/common/decorators/default', [] );
+		$excludes = $config->get( 'controller/jobs/' . $domain . '/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
 		{
@@ -132,11 +132,11 @@ abstract class Base
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\';
-		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', array() );
+		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', [] );
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\Controller\\Jobs\\' . ucfirst( $localClass ) . '\\Decorator\\';
-		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', array() );
+		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', [] );
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
 		return $controller;

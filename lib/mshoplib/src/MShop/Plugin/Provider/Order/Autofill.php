@@ -96,7 +96,7 @@ class Autofill
 
 		$search = $serviceManager->createSearch( true );
 
-		$expr = array();
+		$expr = [];
 
 		if( $code !== null ) {
 			$expr[] = $search->compare( '==', 'service.code', $code );

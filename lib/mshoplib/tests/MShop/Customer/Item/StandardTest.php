@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$listValues = array( 'domain' => 'customer/group', 'type' => 'default', 'refid' => 123 );
 		$listItems = array( 'customer/group' => array( new \Aimeos\MShop\Common\Item\Lists\Standard( '', $listValues ) ) );
-		$object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, array(), $listItems );
+		$object = new \Aimeos\MShop\Customer\Item\Standard( $this->address, [], $listItems );
 
 		$this->assertEquals( array( 123 ), $object->getGroups() );
 	}
@@ -295,7 +295,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['customer.id'], $item->getId() );
 		$this->assertEquals( $list['customer.code'], $item->getCode() );

@@ -32,6 +32,6 @@ class None
 			return;
 		}
 
-		$base->addCoupon( $this->getCode(), array() );
+		$base->addCoupon( $this->getCode(), [] );
 	}
 }

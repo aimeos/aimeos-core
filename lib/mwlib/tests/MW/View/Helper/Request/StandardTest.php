@@ -66,9 +66,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetHeaders()
 	{
 		$this->request->expects( $this->once() )->method( 'getHeaders' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getHeaders() );
+		$this->assertEquals( [], $this->object->getHeaders() );
 	}
 
 
@@ -209,18 +209,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetServerParams()
 	{
 		$this->request->expects( $this->once() )->method( 'getServerParams' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getServerParams() );
+		$this->assertEquals( [], $this->object->getServerParams() );
 	}
 
 
 	public function testGetCookieParams()
 	{
 		$this->request->expects( $this->once() )->method( 'getCookieParams' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getCookieParams() );
+		$this->assertEquals( [], $this->object->getCookieParams() );
 	}
 
 
@@ -229,16 +229,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->request->expects( $this->once() )->method( 'withCookieParams' )
 			->will( $this->returnValue( $this->request ) );
 
-		$this->assertEquals( $this->object, $this->object->withCookieParams( array() ) );
+		$this->assertEquals( $this->object, $this->object->withCookieParams( [] ) );
 	}
 
 
 	public function testGetQueryParams()
 	{
 		$this->request->expects( $this->once() )->method( 'getQueryParams' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getQueryParams() );
+		$this->assertEquals( [], $this->object->getQueryParams() );
 	}
 
 
@@ -247,16 +247,16 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->request->expects( $this->once() )->method( 'withQueryParams' )
 			->will( $this->returnValue( $this->request ) );
 
-		$this->assertEquals( $this->object, $this->object->withQueryParams( array() ) );
+		$this->assertEquals( $this->object, $this->object->withQueryParams( [] ) );
 	}
 
 
 	public function testGetUploadedFiles()
 	{
 		$this->request->expects( $this->once() )->method( 'getUploadedFiles' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getUploadedFiles() );
+		$this->assertEquals( [], $this->object->getUploadedFiles() );
 	}
 
 
@@ -265,7 +265,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->request->expects( $this->once() )->method( 'withUploadedFiles' )
 			->will( $this->returnValue( $this->request ) );
 
-		$this->assertEquals( $this->object, $this->object->withUploadedFiles( array() ) );
+		$this->assertEquals( $this->object, $this->object->withUploadedFiles( [] ) );
 	}
 
 
@@ -290,9 +290,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetAttributes()
 	{
 		$this->request->expects( $this->once() )->method( 'getAttributes' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$this->assertEquals( array(), $this->object->getAttributes() );
+		$this->assertEquals( [], $this->object->getAttributes() );
 	}
 
 

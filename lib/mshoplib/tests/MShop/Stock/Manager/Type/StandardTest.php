@@ -105,7 +105,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'unit_type1', array(), 'product' );
+		$item = $this->object->findItem( 'unit_type1', [], 'product' );
 
 		$this->assertEquals( 'unit_type1', $item->getCode() );
 	}
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'stock.type.id', null );
 		$expr[] = $search->compare( '!=', 'stock.type.siteid', null );
 		$expr[] = $search->compare( '==', 'stock.type.domain', 'product' );
@@ -161,7 +161,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'stock.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 	}
 
@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setSlice( 0, 2 );
 
 		$total = 0;
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 5, $total );

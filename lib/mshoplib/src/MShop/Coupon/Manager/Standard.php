@@ -430,12 +430,12 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array Returns a list of coupon items implementing \Aimeos\MShop\Coupon\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
-		$items = array();
+		$items = [];
 
 		try
 		{
@@ -662,7 +662,7 @@ class Standard
 		 * @see client/html/account/favorite/decorators/excludes
 		 * @see client/html/account/favorite/decorators/local
 		 */
-		$decorators = $context->getConfig()->get( 'mshop/coupon/provider/decorators', array() );
+		$decorators = $context->getConfig()->get( 'mshop/coupon/provider/decorators', [] );
 
 		$object = $this->addCouponDecorators( $item, $code, $provider, $names );
 		$object = $this->addCouponDecorators( $item, $code, $object, $decorators );
@@ -685,15 +685,15 @@ class Standard
 			$object = $this->createSearchBase( 'coupon' );
 			$curDate = date( 'Y-m-d H:i:00', time() );
 
-			$expr = array();
+			$expr = [];
 			$expr[] = $object->getConditions();
 
-			$temp = array();
+			$temp = [];
 			$temp[] = $object->compare( '==', 'coupon.datestart', null );
 			$temp[] = $object->compare( '<=', 'coupon.datestart', $curDate );
 			$expr[] = $object->combine( '||', $temp );
 
-			$temp = array();
+			$temp = [];
 			$temp[] = $object->compare( '==', 'coupon.dateend', null );
 			$temp[] = $object->compare( '>=', 'coupon.dateend', $curDate );
 			$expr[] = $object->combine( '||', $temp );
@@ -713,7 +713,7 @@ class Standard
 	 * @param array $values Values of the coupon item from the storage
 	 * @return \Aimeos\MShop\Coupon\Item\Standard Returns a new created coupon item instance
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Coupon\Item\Standard( $values );
 	}

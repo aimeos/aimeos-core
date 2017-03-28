@@ -158,7 +158,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 
 
@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 3 );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 3, count( $results ) );
 		$this->assertEquals( 5, $total );
 

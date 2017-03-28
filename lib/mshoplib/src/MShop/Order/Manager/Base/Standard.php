@@ -691,9 +691,9 @@ class Standard extends Base
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Base\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = array();
+		$items = [];
 
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );

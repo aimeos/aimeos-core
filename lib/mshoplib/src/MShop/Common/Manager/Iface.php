@@ -111,5 +111,5 @@ interface Iface
 	 * @param integer &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null );
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null );
 }

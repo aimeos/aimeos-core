@@ -52,7 +52,7 @@ class AddressesAvailable
 
 		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS )
 		{
-			$problems = array();
+			$problems = [];
 			$availableAddresses = $order->getAddresses();
 
 			foreach( $this->getItemBase()->getConfig() as $type => $value )

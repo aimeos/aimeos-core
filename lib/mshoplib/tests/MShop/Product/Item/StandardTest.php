@@ -48,7 +48,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			) ),
 		);
 
-		$this->object = new \Aimeos\MShop\Product\Item\Standard( $this->values, array(), array(), $propItems );
+		$this->object = new \Aimeos\MShop\Product\Item\Standard( $this->values, [], [], $propItems );
 	}
 
 
@@ -299,7 +299,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['product.id'], $item->getId() );
 		$this->assertEquals( $list['product.code'], $item->getCode() );

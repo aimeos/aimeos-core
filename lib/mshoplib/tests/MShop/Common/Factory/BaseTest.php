@@ -29,9 +29,9 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$this->context = \TestHelperMShop::getContext();
 		$config = $this->context->getConfig();
 
-		$config->set( 'mshop/common/manager/decorators/default', array() );
-		$config->set( 'mshop/attribute/manager/decorators/global', array() );
-		$config->set( 'mshop/attribute/manager/decorators/local', array() );
+		$config->set( 'mshop/common/manager/decorators/default', [] );
+		$config->set( 'mshop/attribute/manager/decorators/global', [] );
+		$config->set( 'mshop/attribute/manager/decorators/local', [] );
 	}
 
 

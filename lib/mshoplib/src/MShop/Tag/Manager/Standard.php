@@ -413,9 +413,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of tag items implementing \Aimeos\MShop\Tag\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = array();
+		$items = $map = $typeIds = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -708,7 +708,7 @@ class Standard
 	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, label
 	 * @return \Aimeos\MShop\Tag\Item\Standard New tag item object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Tag\Item\Standard( $values );
 	}

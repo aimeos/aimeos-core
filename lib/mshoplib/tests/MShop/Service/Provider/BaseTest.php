@@ -52,7 +52,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testCheckConfigBE()
 	{
-		$this->assertEquals( array(), $this->object->checkConfigBE( array() ) );
+		$this->assertEquals( [], $this->object->checkConfigBE( [] ) );
 	}
 
 
@@ -80,8 +80,8 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateSync()
 	{
-		$response = null; $header = array();
-		$result = $this->object->updateSync( array(), 'body', $response, $header );
+		$response = null; $header = [];
+		$result = $this->object->updateSync( [], 'body', $response, $header );
 
 		$this->assertEquals( null, $result );
 	}

@@ -68,7 +68,7 @@ class BinaryTest extends \PHPUnit_Framework_TestCase
 
 		$expected = array( 'test data' );
 
-		$actual = array();
+		$actual = [];
 		foreach( $file as $entry ) {
 			$actual[] = $entry;
 		}

@@ -183,7 +183,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'customer.id', null );
 		$expr[] = $search->compare( '==', 'customer.label', 'unitCustomer002' );
 		$expr[] = $search->compare( '==', 'customer.code', 'UTC002' );

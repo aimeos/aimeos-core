@@ -60,7 +60,7 @@ class ProductAddSuggestPerfData extends \Aimeos\MW\Setup\Task\Base
 		$productListManager = $productManager->getSubManager( 'lists' );
 		$productListTypeManager = $productListManager->getSubManager( 'type' );
 
-		$expr = array();
+		$expr = [];
 		$search = $productListTypeManager->createSearch();
 		$expr[] = $search->compare( '==', 'product.lists.type.code', 'suggestion' );
 		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'product' );

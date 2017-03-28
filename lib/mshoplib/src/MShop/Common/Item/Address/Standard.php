@@ -30,7 +30,7 @@ class Standard
 	 * @param string $prefix Property prefix when converting to array
 	 * @param array $values List of attributes that belong to the provider common address item
 	 */
-	public function __construct( $prefix, array $values = array( ) )
+	public function __construct( $prefix, array $values = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -111,7 +111,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

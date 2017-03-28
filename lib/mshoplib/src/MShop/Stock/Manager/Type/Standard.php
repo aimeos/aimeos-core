@@ -112,7 +112,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/stock/manager/type/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -130,7 +130,7 @@ class Standard
 	{
 		$path = 'mshop/stock/manager/type/submanagers';
 
-		return $this->getResourceTypeBase( 'stock/type', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'stock/type', $path, [], $withsub );
 	}
 
 
@@ -161,7 +161,7 @@ class Standard
 		 */
 		$path = 'mshop/stock/manager/type/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 

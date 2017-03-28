@@ -41,14 +41,14 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetOperator()
 	{
-		$expr = new \Aimeos\MW\Criteria\Expression\Combine\PHP( '||', array() );
+		$expr = new \Aimeos\MW\Criteria\Expression\Combine\PHP( '||', [] );
 		$this->assertEquals( '||', $expr->getOperator() );
 	}
 
 	public function testGetExpressions()
 	{
-		$expr = new \Aimeos\MW\Criteria\Expression\Combine\PHP( '||', array() );
-		$this->assertEquals( array(), $expr->getExpressions() );
+		$expr = new \Aimeos\MW\Criteria\Expression\Combine\PHP( '||', [] );
+		$this->assertEquals( [], $expr->getExpressions() );
 	}
 
 	public function testToString()
@@ -71,16 +71,16 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 			'undefined' => '$undefined',
 		);
 
-		$expr1 = array();
+		$expr1 = [];
 		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'listitem', array('a', 'b', 'c') );
 		$expr1[] = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'stringvar', 'value' );
 
 
-		$expr2 = array();
+		$expr2 = [];
 		$expr2[] = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '<', 'floatvar', 0.1 );
 		$expr2[] = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>', 'intvar', 10 );
 
-		$objects = array();
+		$objects = [];
 		$objects[] = new \Aimeos\MW\Criteria\Expression\Combine\PHP( '&&', $expr1 );
 		$objects[] = new \Aimeos\MW\Criteria\Expression\Combine\PHP( '&&', $expr2 );
 

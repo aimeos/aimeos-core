@@ -28,7 +28,7 @@ class RequiredTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$orderProducts = array();
+		$orderProducts = [];
 		$context = \TestHelperMShop::getContext();
 		$this->couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
 

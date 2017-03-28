@@ -30,7 +30,7 @@ class Standard
 	 *
 	 * @param array $values Associative list of item key/value pairs
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'tag.', $values );
 
@@ -215,7 +215,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 		unset( $list['tag.type'], $list['tag.typename'] );
 

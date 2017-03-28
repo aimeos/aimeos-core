@@ -22,7 +22,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 {
 	private static $operators = array( '&&' => 'AND', '||' => 'OR', '!' => 'NOT' );
 	private $operator = '&&';
-	private $expressions = array();
+	private $expressions = [];
 
 
 	/**
@@ -85,7 +85,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
 	 * @return string Expression that evaluates to a boolean result
 	 */
-	public function toString( array $types, array $translations = array(), array $plugins = array() )
+	public function toString( array $types, array $translations = [], array $plugins = [] )
 	{
 		if( ( $item = reset( $this->expressions ) ) === false ) {
 			return '';

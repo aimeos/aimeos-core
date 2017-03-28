@@ -82,7 +82,7 @@ abstract class Base
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		return array();
+		return [];
 	}
 
 
@@ -95,7 +95,7 @@ abstract class Base
 	 */
 	public function checkConfigFE( array $attributes )
 	{
-		return array();
+		return [];
 	}
 
 
@@ -107,7 +107,7 @@ abstract class Base
 	 */
 	public function getConfigBE()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -120,7 +120,7 @@ abstract class Base
 	 */
 	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		return array();
+		return [];
 	}
 
 
@@ -214,7 +214,7 @@ abstract class Base
 	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
+	public function updateSync( array $params = [], $body = null, &$response = null, array &$header = [] )
 	{
 		if( isset( $params['orderid'] ) ) {
 			return $this->getOrder( $params['orderid'] );
@@ -309,7 +309,7 @@ abstract class Base
 	 */
 	protected function checkConfig( array $config, array $attributes )
 	{
-		$errors = array();
+		$errors = [];
 
 		foreach( $config as $key => $def )
 		{
@@ -541,7 +541,7 @@ abstract class Base
 	 */
 	private function getPublicHolidays( $list )
 	{
-		$holidays = array();
+		$holidays = [];
 
 		if( is_string( $list ) && $list !== '' )
 		{

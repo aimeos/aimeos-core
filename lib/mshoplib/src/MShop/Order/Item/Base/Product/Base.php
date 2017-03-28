@@ -45,7 +45,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	 * @param array $values Associative list of order product values
 	 * @param array $attributes List of order attributes implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
-	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = array(), array $attributes = array() )
+	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, array $values = [], array $attributes = [] )
 	{
 		parent::__construct( 'order.base.product.', $values );
 
@@ -104,7 +104,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 			return $this->attributes;
 		}
 
-		$list = array();
+		$list = [];
 
 		foreach( $this->attributes as $attrItem )
 		{
@@ -200,7 +200,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	{
 		if( !isset( $this->attributesMap ) )
 		{
-			$this->attributesMap = array();
+			$this->attributesMap = [];
 
 			foreach( $this->attributes as $attribute ) {
 				$this->attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;

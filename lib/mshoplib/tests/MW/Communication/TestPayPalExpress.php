@@ -20,7 +20,7 @@ namespace Aimeos\MW\Communication;
  */
 class TestPayPalExpress implements \Aimeos\MW\Communication\Iface
 {
-	private $rules = array();
+	private $rules = [];
 
 
 	/**
@@ -71,7 +71,7 @@ class TestPayPalExpress implements \Aimeos\MW\Communication\Iface
 			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No success message for unit tests was set' ) );
 		}
 
-		$params = array();
+		$params = [];
 		parse_str( $payload, $params );
 
 		foreach( $this->rules['set'] as $key => $value )

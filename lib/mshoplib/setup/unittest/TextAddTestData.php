@@ -74,7 +74,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$textTypeManager = $textManager->getSubManager( 'type', 'Standard' );
 
-		$ttypeIds = array();
+		$ttypeIds = [];
 		$ttype = $textTypeManager->createItem();
 
 		$this->conn->begin();

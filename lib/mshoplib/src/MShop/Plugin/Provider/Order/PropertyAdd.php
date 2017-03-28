@@ -93,7 +93,7 @@ class PropertyAdd
 
 			$search = $productSubManager->createSearch( true );
 
-			$cond = array();
+			$cond = [];
 			$cond[] = $search->compare( '==', $key, $value->getProductId() );
 			$cond[] = $search->getConditions();
 

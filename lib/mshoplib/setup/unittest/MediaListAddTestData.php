@@ -33,7 +33,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -57,12 +57,12 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for media list domain', $path ) );
 		}
 
-		$refKeys = array();
+		$refKeys = [];
 		foreach( $testdata['media/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
-		$refIds = array();
+		$refIds = [];
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
 		$refIds['attribute'] = $this->getAttributeData( $refKeys['attribute'] );
 
@@ -83,7 +83,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$attributeTypeManager = $attributeManager->getSubManager( 'type', 'Standard' );
 
-		$codes = $typeCodes = $domains = array();
+		$codes = $typeCodes = $domains = [];
 		foreach( $keys as $dataset )
 		{
 			$exp = explode( '/', $dataset );
@@ -106,7 +106,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$result = $attributeTypeManager->searchItems( $search );
 
-		$typeids = array();
+		$typeids = [];
 		foreach( $result as $item ) {
 			$typeids[] = $item->getId();
 		}
@@ -118,7 +118,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $attributeManager->searchItems( $search ) as $item ) {
 			$refIds['attribute/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getCode()] = $item->getId();
 		}
@@ -137,7 +137,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$labels = array();
+		$labels = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -150,7 +150,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $textManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $textManager->searchItems( $search ) as $item ) {
 			$refIds['text/' . $item->getLabel()] = $item->getId();
 		}
@@ -172,7 +172,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$mediaListManager = $mediaManager->getSubmanager( 'lists', 'Standard' );
 		$mediaListTypeManager = $mediaListManager->getSubManager( 'type', 'Standard' );
 
-		$urls = array();
+		$urls = [];
 		foreach( $testdata['media/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos + 1 ) ) === false ) {
@@ -187,12 +187,12 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$result = $mediaManager->searchItems( $search );
 
-		$parentIds = array();
+		$parentIds = [];
 		foreach( $result as $item ) {
 			$parentIds['media/' . $item->getUrl()] = $item->getId();
 		}
 
-		$medListTypes = array();
+		$medListTypes = [];
 		$medListType = $mediaListTypeManager->createItem();
 
 		foreach( $testdata['media/lists/type'] as $key => $dataset )

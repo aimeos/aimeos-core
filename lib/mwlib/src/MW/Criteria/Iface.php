@@ -83,7 +83,7 @@ interface Iface
 	 * @param array $translations Associative list of item names that should be translated
 	 * @return string Translated columns
 	 */
-	public function getColumnString( array $columns, array $translations = array() );
+	public function getColumnString( array $columns, array $translations = [] );
 
 
 	/**
@@ -94,7 +94,7 @@ interface Iface
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
 	 * @return string Expression string for searching
 	 */
-	public function getConditionString( array $types, array $translations = array(), array $plugins = array() );
+	public function getConditionString( array $types, array $translations = [], array $plugins = [] );
 
 
 	/**
@@ -121,7 +121,7 @@ interface Iface
 	 * @param array $translations Associative list of item names that should be translated
 	 * @return string Order string for sorting the items
 	 */
-	public function getSortationString( array $names, array $translations = array() );
+	public function getSortationString( array $names, array $translations = [] );
 
 
 	/**

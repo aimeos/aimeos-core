@@ -471,7 +471,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$object = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' );
 		$unknown = $object->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['customer.address.id'], $object->getId() );
 		$this->assertEquals( $list['customer.address.parentid'], $object->getParentId() );

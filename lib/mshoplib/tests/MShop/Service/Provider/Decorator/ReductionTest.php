@@ -61,7 +61,7 @@ class ReductionTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array(
 			'reduction.percent' => '1.5',
@@ -81,9 +81,9 @@ class ReductionTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$result = $this->object->checkConfigBE( array() );
+		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertInternalType( 'null', $result['reduction.percent'] );
@@ -96,7 +96,7 @@ class ReductionTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-min' => '10.00' ) );
 
@@ -109,7 +109,7 @@ class ReductionTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$result = $this->object->checkConfigBE( array( 'reduction.basket-value-max' => '100.00' ) );
 

@@ -92,7 +92,7 @@ class ListsChangeTypeidNotNull
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

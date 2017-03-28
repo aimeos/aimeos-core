@@ -193,7 +193,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testUpdateListItems()
 	{
 		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
-		$attrId = $attrManager->findItem( 's', array(), 'product', 'size' )->getId();
+		$attrId = $attrManager->findItem( 's', [], 'product', 'size' )->getId();
 		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
 
 		// create new list item
@@ -220,7 +220,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		// delete existing list item
-		$this->object->updateListItems( $item, array(), 'attribute', 'hidden' );
+		$this->object->updateListItems( $item, [], 'attribute', 'hidden' );
 
 		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
 		$this->assertEquals( 0, count( $item->getListItems( 'attribute', 'hidden' ) ) );
@@ -252,7 +252,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'product.id', null );
 		$expr[] = $search->compare( '!=', 'product.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.typeid', null );
@@ -309,7 +309,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );
 
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 
@@ -320,7 +320,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
 		$search->setSlice( 0, 10 );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 10, count( $results ) );
 		$this->assertEquals( 28, $total );
 

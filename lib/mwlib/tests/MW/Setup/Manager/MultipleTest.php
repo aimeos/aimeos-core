@@ -36,7 +36,7 @@ class MultipleTest extends \PHPUnit_Framework_TestCase
 	public function testMigrate()
 	{
 		$taskPath = __DIR__ . DIRECTORY_SEPARATOR . 'tasks';
-		$conf = array( 'db' => $this->config->get( 'resource/db', array() ) );
+		$conf = array( 'db' => $this->config->get( 'resource/db', [] ) );
 		$object = new \Aimeos\MW\Setup\Manager\Multiple( $this->dbm, $conf, $taskPath );
 
 		ob_start();
@@ -57,7 +57,7 @@ class MultipleTest extends \PHPUnit_Framework_TestCase
 ';
 
 		$taskPath = __DIR__ . DIRECTORY_SEPARATOR . 'tasks';
-		$conf = array( 'db' => $this->config->get( 'resource/db', array() ) );
+		$conf = array( 'db' => $this->config->get( 'resource/db', [] ) );
 		$object = new \Aimeos\MW\Setup\Manager\Multiple( $this->dbm, $conf, $taskPath );
 
 		ob_start();
@@ -77,7 +77,7 @@ class MultipleTest extends \PHPUnit_Framework_TestCase
 ';
 
 		$taskPath = __DIR__ . DIRECTORY_SEPARATOR . 'tasks';
-		$conf = array( 'db' => $this->config->get( 'resource/db', array() ) );
+		$conf = array( 'db' => $this->config->get( 'resource/db', [] ) );
 		$object = new \Aimeos\MW\Setup\Manager\Multiple( $this->dbm, $conf, $taskPath );
 
 		ob_start();

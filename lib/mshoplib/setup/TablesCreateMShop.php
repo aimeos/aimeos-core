@@ -22,7 +22,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -33,7 +33,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -122,7 +122,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function getSchemaObjects( $type, $relpath )
 	{
-		$schemaList = array();
+		$schemaList = [];
 		$dbalschema = new \Doctrine\DBAL\Schema\Schema();
 
 		foreach( $this->getSetupPaths() as $abspath )
@@ -183,7 +183,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
 				$table = $dbalManager->listTableDetails( $name );
-				$tables = ( $table->getColumns() !== array() ? array( $table ) : array() );
+				$tables = ( $table->getColumns() !== [] ? array( $table ) : [] );
 
 				$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables );
 				$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $dbalschema );
@@ -201,7 +201,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				{
 					$this->msg( sprintf( 'Checking sequence "%1$s": ', $name ), 2 );
 
-					$seqSchema = new \Doctrine\DBAL\Schema\Schema( array(), $sequences );
+					$seqSchema = new \Doctrine\DBAL\Schema\Schema( [], $sequences );
 					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $seqSchema, $dbalschema );
 					$stmts = $this->remove( $schemaDiff, $clean )->toSaveSql( $platform );
 
@@ -311,12 +311,12 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 		{
 			foreach( $schemaDiff->changedTables as $tableDiff )
 			{
-				$tableDiff->removedColumns = array();
-				$tableDiff->removedIndexes = array();
-				$tableDiff->renamedIndexes = array();
+				$tableDiff->removedColumns = [];
+				$tableDiff->removedIndexes = [];
+				$tableDiff->renamedIndexes = [];
 			}
 
-			$schemaDiff->removedSequences = array();
+			$schemaDiff->removedSequences = [];
 		}
 
 		return $schemaDiff;

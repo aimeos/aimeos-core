@@ -21,7 +21,7 @@ namespace Aimeos\MW\Jsb2;
  */
 class Standard
 {
-	private $registeredPackages = array();
+	private $registeredPackages = [];
 	private $baseURL = '';
 	private $basePath = '';
 
@@ -33,7 +33,7 @@ class Standard
 	 * @param string $baseURL Base URL for HTML output
 	 * @param array $filter Which packages  schould NOT be returned
 	 */
-	public function __construct( $filename, $baseURL = "", $filter = array() )
+	public function __construct( $filename, $baseURL = "", $filter = [] )
 	{
 		$manifest = $this->getManifest( $filename );
 
@@ -52,7 +52,7 @@ class Standard
 	 */
 	public function getFiles( $type )
 	{
-		$files = array();
+		$files = [];
 
 		foreach( $this->registeredPackages as $filetype => $packageList )
 		{
@@ -80,7 +80,7 @@ class Standard
 	 */
 	public function getUrls( $type, $version = '?v=%s' )
 	{
-		$files = array();
+		$files = [];
 
 		foreach( $this->registeredPackages as $filetype => $packageList )
 		{
@@ -139,7 +139,7 @@ class Standard
 	 */
 	protected function getFileUrls( \stdClass $package, $version = '?v=%s' )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $package->fileIncludes as $singleFile )
 		{
@@ -162,9 +162,9 @@ class Standard
 	 * @param object JSON decoded manifest
 	 * @param array $filter What packages should NOT be returned
 	 */
-	protected function getPackages( $manifest, $filter = array() )
+	protected function getPackages( $manifest, $filter = [] )
 	{
-		$packageContainer = array();
+		$packageContainer = [];
 
 		if( !isset( $manifest->pkgs ) || !is_array( $manifest->pkgs ) ) {
 			throw new \Aimeos\MW\Jsb2\Exception( 'No packages found' );

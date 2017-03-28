@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
-		$result = $method->invokeArgs( $object, array() );
+		$result = $method->invokeArgs( $object, [] );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $result );
 		$this->assertSame( $context, $result );

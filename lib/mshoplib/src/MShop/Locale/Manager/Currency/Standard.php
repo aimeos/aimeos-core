@@ -306,7 +306,7 @@ class Standard
 	{
 		$path = 'mshop/locale/manager/currency/submanagers';
 
-		return $this->getResourceTypeBase( 'locale/currency', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'locale/currency', $path, [], $withsub );
 	}
 
 
@@ -337,7 +337,7 @@ class Standard
 		 */
 		$path = 'mshop/locale/manager/currency/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -349,7 +349,7 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Locale\Item\Currency\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		$context = $this->getContext();
 
@@ -357,7 +357,7 @@ class Standard
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 
-		$items = array( );
+		$items = [];
 
 		try
 		{
@@ -626,7 +626,7 @@ class Standard
 	 * @param array $data Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item object
 	 */
-	protected function createItemBase( array $data = array() )
+	protected function createItemBase( array $data = [] )
 	{
 		return new \Aimeos\MShop\Locale\Item\Currency\Standard( $data );
 	}

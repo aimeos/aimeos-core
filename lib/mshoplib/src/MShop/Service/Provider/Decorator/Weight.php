@@ -87,7 +87,7 @@ class Weight
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$prodMap = array();
+		$prodMap = [];
 
 		// basket can contain a product several times in different basket items
 		// product IDs are only those of articles, selections and bundles, not of the variants and bundled products
@@ -145,7 +145,7 @@ class Weight
 	protected function getWeight( array $prodMap )
 	{
 		$weight = 0;
-		$prodIds = array();
+		$prodIds = [];
 		$context = $this->getContext();
 
 

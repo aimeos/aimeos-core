@@ -24,8 +24,8 @@ abstract class Base
 {
 	private $context;
 	private $resourceName;
-	private $stmts = array();
-	private $subManagers = array();
+	private $stmts = [];
+	private $subManagers = [];
 
 
 	/**
@@ -128,9 +128,9 @@ abstract class Base
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
 	 * @return array List of ID values as key and the number of counted products as value
 	 */
-	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, $cfgPath, $required = array() )
+	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, $cfgPath, $required = [] )
 	{
-		$list = array();
+		$list = [];
 		$context = $this->getContext();
 
 		$dbname = $this->getResourceName();
@@ -273,7 +273,7 @@ abstract class Base
 	 */
 	protected function getSearchAttributesBase( array $list, $path, array $default, $withsub )
 	{
-		$attr = array();
+		$attr = [];
 
 		foreach( $list as $key => $fields ) {
 			$attr[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $fields );
@@ -440,8 +440,8 @@ abstract class Base
 	{
 		$config = $this->context->getConfig();
 
-		$decorators = $config->get( 'mshop/common/manager/decorators/default', array() );
-		$excludes = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', array() );
+		$decorators = $config->get( 'mshop/common/manager/decorators/default', [] );
+		$excludes = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
 		{
@@ -454,12 +454,12 @@ abstract class Base
 		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
-		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
+		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] );
 		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 
 		$subpath = $this->createSubNames( $managerpath );
 		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
-		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', array() );
+		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
 
 		return $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 	}
@@ -496,9 +496,9 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function findItemBase( array $pairs, array $ref = array() )
+	protected function findItemBase( array $pairs, array $ref = [] )
 	{
-		$expr = array();
+		$expr = [];
 		$criteria = $this->createSearch();
 
 		foreach( $pairs as $key => $value )
@@ -594,7 +594,7 @@ abstract class Base
 			return $attributes['id']->getInternalDeps();
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -705,10 +705,10 @@ abstract class Base
 		 * @category Developer
 		 */
 		if( $this->context->getConfig()->get( 'mshop/common/manager/sitecheck', true ) == false ) {
-			return array();
+			return [];
 		}
 
-		$cond = array();
+		$cond = [];
 		$sep = $this->getKeySeparator();
 
 		foreach( $keys as $key )
@@ -740,9 +740,9 @@ abstract class Base
 	 */
 	protected function searchItemsBase( \Aimeos\MW\DB\Connection\Iface $conn, \Aimeos\MW\Criteria\Iface $search,
 		$cfgPathSearch, $cfgPathCount, array $required, &$total = null,
-		$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = array() )
+		$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL, array $plugins = [] )
 	{
-		$joins = array();
+		$joins = [];
 		$conditions = $search->getConditions();
 		$attributes = $this->getSearchAttributes();
 		$siteIds = $this->getSiteIds( $sitelevel );

@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'job.id', null );
 		$expr[] = $search->compare( '!=', 'job.siteid', null );
 		$expr[] = $search->compare( '==', 'job.label', 'unittest job' );
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );

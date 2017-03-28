@@ -29,7 +29,7 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 
 	public function testCombine()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\PHP', $this->object->combine( '||', array() ) );
+		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\PHP', $this->object->combine( '||', [] ) );
 	}
 
 
@@ -63,7 +63,7 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertEquals( "\$strval", $this->object->getColumnString( array( $this->object->sort( '+', 'str_value' ) ), $translations ) );
 		$this->assertEquals( "\$strval", $this->object->getColumnString( array( $this->object->compare( '==', 'str_value', 1 ) ), $translations ) );
-		$this->assertEquals( "", $this->object->getColumnString( array( $this->object->combine( '&&', array() ) ), $translations ) );
+		$this->assertEquals( "", $this->object->getColumnString( array( $this->object->combine( '&&', [] ) ), $translations ) );
 	}
 
 
@@ -158,7 +158,7 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 		$types = array( 'asc_array' => 'int', 'desc_array' => 'string' );
 		$translations = array( 'asc_array' => '$ascIntList', 'desc_array' => '$descStrList' );
 
-		$sortations = array();
+		$sortations = [];
 		$sortations[] = $this->object->sort( '+', 'asc_array' );
 		$sortations[] = $this->object->sort( '-', 'desc_array' );
 		$this->object->setSortations( $sortations );
@@ -203,7 +203,7 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetSortations()
 	{
-		$this->assertEquals( array(), $this->object->getSortations() );
+		$this->assertEquals( [], $this->object->getSortations() );
 
 		$sortations = array( $this->object->sort( '+', 'asc_array' ) );
 		$this->object->setSortations( $sortations );

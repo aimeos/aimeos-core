@@ -169,7 +169,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/order/manager/base/coupon/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -429,7 +429,7 @@ class Standard
 	{
 		$path = 'mshop/order/manager/base/coupon/submanagers';
 
-		return $this->getResourceTypeBase( 'order/base/coupon', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'order/base/coupon', $path, [], $withsub );
 	}
 
 
@@ -460,7 +460,7 @@ class Standard
 		 */
 		$path = 'mshop/order/manager/base/coupon/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -472,9 +472,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array Return a list of items implementing \Aimeos\MShop\Order\Item\Base\Coupon\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = array();
+		$items = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -752,7 +752,7 @@ class Standard
 	 * @param array $values Associative list of order coupon property pairs
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Standard New item
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Order\Item\Base\Coupon\Standard( $values );
 	}

@@ -33,7 +33,7 @@ class Memory
 	 * 	strings as key and list of translation number and translations as value:
 	 * 	array( <domain> => array( <singular> => array( <index> => <translations> ) ) )
 	 */
-	public function __construct( \Aimeos\MW\Translation\Iface $object, array $translations = array() )
+	public function __construct( \Aimeos\MW\Translation\Iface $object, array $translations = [] )
 	{
 		parent::__construct( $object );
 		$this->translations = $translations;

@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	private $object;
 	private $values;
 	private $price;
-	private $attribute = array();
+	private $attribute = [];
 	private $subProducts;
 
 
@@ -442,7 +442,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
 
-		$this->object->setAttributes( array() );
+		$this->object->setAttributes( [] );
 
 		$result = $this->object->getAttribute( 'code_001' );
 		$this->assertEquals( null, $result );
@@ -476,7 +476,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$result = $this->object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
 
-		$this->object->setAttributes( array() );
+		$this->object->setAttributes( [] );
 
 		$result = $this->object->getAttribute( 'code_001' );
 		$this->assertEquals( null, $result );
@@ -494,7 +494,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testGetAttributesInvalidType()
 	{
-		$this->assertEquals( array(), $this->object->getAttributes( 'invalid' ) );
+		$this->assertEquals( [], $this->object->getAttributes( 'invalid' ) );
 	}
 
 	public function testSetAttributeItem()
@@ -550,10 +550,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testSetProducts()
 	{
-		$return = $this->object->setProducts( array() );
+		$return = $this->object->setProducts( [] );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
-		$this->assertEquals( array(), $this->object->getProducts() );
+		$this->assertEquals( [], $this->object->getProducts() );
 
 		$return = $this->object->setProducts( $this->subProducts );
 
@@ -596,7 +596,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['order.base.product.id'], $item->getId() );
 		$this->assertEquals( $list['order.base.product.baseid'], $item->getBaseId() );

@@ -219,7 +219,7 @@ class Standard
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		return $this->findItemBase( array( 'supplier.code' => $code ), $ref );
 	}
@@ -419,9 +419,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of supplier items implementing \Aimeos\MShop\Supplier\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = array();
+		$map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -558,7 +558,7 @@ class Standard
 			throw $e;
 		}
 
-		$addrItems = array();
+		$addrItems = [];
 		if( in_array( 'address', $ref, true ) ) {
 			$addrItems = $this->getAddressItems( array_keys( $map ) );
 		}
@@ -621,7 +621,7 @@ class Standard
 	 */
 	protected function getAddressItems( array $supplierIds )
 	{
-		$list = array();
+		$list = [];
 		$manager = $this->getSubManager( 'address' );
 
 		$search = $manager->createSearch();

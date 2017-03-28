@@ -57,12 +57,12 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for price domain', $path ) );
 		}
 
-		$refKeys = array();
+		$refKeys = [];
 		foreach( $testdata['price/lists'] as $dataset ) {
 			$refKeys[$dataset['domain']][] = $dataset['refid'];
 		}
 
-		$refIds = array();
+		$refIds = [];
 		$refIds['customer'] = $this->getCustomerData( $refKeys['customer'] );
 
 		$this->addPriceListData( $testdata, $refIds );
@@ -82,7 +82,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$codes = array();
+		$codes = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
@@ -95,7 +95,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $customerManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.code', $codes ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $customerManager->searchItems( $search ) as $item ) {
 			$refIds['customer/' . $item->getCode()] = $item->getId();
 		}
@@ -116,7 +116,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$priceListManager = $priceManager->getSubManager( 'lists', 'Standard' );
 
-		$value = $ship = $domain = $code = array();
+		$value = $ship = $domain = $code = [];
 		foreach( $testdata['price/lists'] as $dataset )
 		{
 			$exp = explode( '/', $dataset['parentid'] );
@@ -191,7 +191,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$parentIds = array();
+		$parentIds = [];
 		foreach( $manager->searchItems( $search ) as $item ) {
 			$parentIds['price/' . $item->getDomain() . '/' . $item->getType() . '/' . $item->getValue() . '/' . $item->getCosts()] = $item->getId();
 		}
@@ -212,7 +212,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$listManager = $manager->getSubManager( 'lists', 'Standard' );
 		$listTypeManager = $listManager->getSubManager( 'type', 'Standard' );
 
-		$listItemTypeIds = array();
+		$listItemTypeIds = [];
 		$listItemType = $listTypeManager->createItem();
 
 		foreach( $data as $key => $dataset )
@@ -250,7 +250,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$typeids = array();
+		$typeids = [];
 		foreach( $typeManager->searchItems( $search ) as $item ) {
 			$typeids[] = $item->getId();
 		}

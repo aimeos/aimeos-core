@@ -31,7 +31,7 @@ class Factory
 	 * @param array $options Associative list of options for configuring the media class
 	 * @return \Aimeos\MW\Media\Iface Media object
 	 */
-	public static function get( $file, array $options = array() )
+	public static function get( $file, array $options = [] )
 	{
 		$content = $file;
 

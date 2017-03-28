@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertInstanceof( 'Iterator', $result );
 
-		$list = array();
+		$list = [];
 		foreach( $result as $entry ) {
 			$list[] = (string) $entry;
 		}

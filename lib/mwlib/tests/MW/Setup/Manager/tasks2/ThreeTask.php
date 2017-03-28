@@ -13,7 +13,7 @@ class ThreeTask extends Base
 
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

@@ -316,7 +316,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testGetMimeTypeNoTypes()
 	{
 		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.gif' );
-		$this->context->getConfig()->set( 'controller/common/media/standard/files/allowedtypes', array() );
+		$this->context->getConfig()->set( 'controller/common/media/standard/files/allowedtypes', [] );
 
 		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
 		$this->access( 'getMimeType' )->invokeArgs( $this->object, array( $file, 'files' ) );

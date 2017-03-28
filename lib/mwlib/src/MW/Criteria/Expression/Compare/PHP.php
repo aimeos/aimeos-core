@@ -99,7 +99,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 		{
 			case '==':
 
-				$list = array();
+				$list = [];
 				foreach( (array) $this->getValue() as $value ) {
 					$list[] = $this->createTerm( $name, $type, $value );
 				}
@@ -107,7 +107,7 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 
 			case '!=':
 
-				$list = array();
+				$list = [];
 				foreach( (array) $this->getValue() as $value ) {
 					$list[] = $this->createTerm( $name, $type, $value );
 				}

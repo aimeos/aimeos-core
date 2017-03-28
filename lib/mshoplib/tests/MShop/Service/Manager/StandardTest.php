@@ -132,7 +132,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'unitcode', array(), 'service', 'delivery' );
+		$item = $this->object->findItem( 'unitcode', [], 'service', 'delivery' );
 
 		$this->assertEquals( 'unitcode', $item->getCode() );
 	}
@@ -163,7 +163,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'service.id', null );
 		$expr[] = $search->compare( '!=', 'service.siteid', null );
 		$expr[] = $search->compare( '>', 'service.typeid', 0 );
@@ -213,7 +213,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'service.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
 

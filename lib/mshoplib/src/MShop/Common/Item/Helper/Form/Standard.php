@@ -34,7 +34,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * @param array $values Form parameters implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 * @param boolean $external True if URL points to an external site, false if it stays on the same site
 	 */
-	public function __construct( $url = '', $method = '', array $values = array(), $external = true )
+	public function __construct( $url = '', $method = '', array $values = [], $external = true )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $values );
 

@@ -20,7 +20,7 @@ namespace Aimeos\MW\MQueue;
 class Standard extends Base implements Iface
 {
 	private $conn;
-	private $queues = array();
+	private $queues = [];
 
 
 	/**
@@ -99,7 +99,7 @@ class Standard extends Base implements Iface
 		$pdo->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
 		$dbc = new \Aimeos\MW\DB\Connection\PDO( $pdo );
 
-		foreach( (array) $this->getConfig( 'db/stmt', array() ) as $stmt ) {
+		foreach( (array) $this->getConfig( 'db/stmt', [] ) as $stmt ) {
 			$dbc->create( $stmt )->execute()->finish();
 		}
 

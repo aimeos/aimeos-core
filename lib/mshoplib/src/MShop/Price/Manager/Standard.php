@@ -484,9 +484,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Price\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$map = $typeIds = array();
+		$map = $typeIds = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -699,7 +699,7 @@ class Standard
 	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Price\Item\Iface New price item
 	 */
-	protected function createItemBase( array $values = array(), array $listItems = array(), array $refItems = array() )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
 	{
 		if( !isset( $values['price.taxflag'] ) ) {
 			$values['price.taxflag'] = $this->taxflag;

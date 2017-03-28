@@ -166,7 +166,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['tag.id'], $item->getId() );
 		$this->assertEquals( $list['tag.typeid'], $item->getTypeId() );

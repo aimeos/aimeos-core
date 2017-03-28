@@ -28,7 +28,7 @@ interface Iface
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
 	 * @return string Expression that evaluates to a boolean result
 	 */
-	public function toString( array $types, array $translations = array(), array $plugins = array() );
+	public function toString( array $types, array $translations = [], array $plugins = [] );
 
 
 	/**

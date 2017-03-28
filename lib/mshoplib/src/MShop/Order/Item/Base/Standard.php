@@ -38,8 +38,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 * @param array $coupons Associative list of coupon codes as keys and ordered products implementing \Aimeos\MShop\Order\Item\Base\Product\Iface as values
 	 */
 	public function __construct( \Aimeos\MShop\Price\Item\Iface $price, \Aimeos\MShop\Locale\Item\Iface $locale,
-		array $values = array(), array $products = array(), array $addresses = array(),
-		array $services = array(), array $coupons = array() )
+		array $values = [], array $products = [], array $addresses = [],
+		array $services = [], array $coupons = [] )
 	{
 		parent::__construct( $price, $locale, $values, $products, $addresses, $services, $coupons );
 
@@ -370,7 +370,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 
 		foreach( $list as $key => $value )
 		{

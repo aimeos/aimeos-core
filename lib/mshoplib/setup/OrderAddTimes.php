@@ -32,7 +32,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -60,7 +60,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 		do
 		{
 			$count = 0;
-			$map = array();
+			$map = [];
 			$sql = str_replace( ':offset', $start, $select );
 			$result = $conn->create( $sql )->execute();
 

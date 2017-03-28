@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'attribute.type.id', null );
 		$expr[] = $search->compare( '!=', 'attribute.type.siteid', null );
 		$expr[] = $search->compare( '==', 'attribute.type.domain', 'product' );
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindItem()
 	{
-		$item = $this->object->findItem( 'size', array(), 'product' );
+		$item = $this->object->findItem( 'size', [], 'product' );
 
 		$this->assertEquals( 'size', $item->getCode() );
 		$this->assertEquals( 'product', $item->getDomain() );

@@ -29,7 +29,7 @@ class Standard
 	 *
 	 * @param array $values List of key/value pairs of the customer group
 	 */
-	public function __construct( $values = array() )
+	public function __construct( $values = [] )
 	{
 		parent::__construct( 'customer.group.', $values );
 
@@ -120,7 +120,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

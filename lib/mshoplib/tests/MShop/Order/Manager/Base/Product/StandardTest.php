@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.base.product.id', null );
 		$expr[] = $search->compare( '==', 'order.base.product.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.product.baseid', null );
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );
 
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 14, $total );
@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$this->assertTrue( $item->getId() !== null );
-		$this->assertNotEquals( array( ), $item->getAttributes() );
+		$this->assertNotEquals( [], $item->getAttributes() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
@@ -237,7 +237,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getFlags(), $itemUpd->getFlags() );
-		$this->assertEquals( array( ), $itemUpd->getAttributes() );
+		$this->assertEquals( [], $itemUpd->getAttributes() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

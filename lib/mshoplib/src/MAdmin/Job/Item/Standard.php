@@ -29,7 +29,7 @@ class Standard
 	 *
 	 * @param array $values Associative list of key/value pairs
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'job.', $values );
 
@@ -121,7 +121,7 @@ class Standard
 			return (array) $this->values['job.parameter'];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -148,7 +148,7 @@ class Standard
 			return (array) $this->values['job.result'];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -197,7 +197,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

@@ -76,7 +76,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$productTypeManager = $productManager->getSubManager( 'type', 'Standard' );
 
-		$typeIds = array();
+		$typeIds = [];
 		$type = $productTypeManager->createItem();
 
 		$this->conn->begin();
@@ -109,7 +109,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 			if( isset( $dataset['config'] ) ) {
 				$product->setConfig( $dataset['config'] );
 			} else {
-				$product->setConfig( array() );
+				$product->setConfig( [] );
 			}
 
 			$productManager->saveItem( $product, false );

@@ -41,7 +41,7 @@ class Imagick
 
 		try
 		{
-			$this->image = new \Imagick( array() );
+			$this->image = new \Imagick( [] );
 			$this->image->readImageBlob( $content );
 		}
 		catch( \Exception $e )

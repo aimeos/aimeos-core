@@ -117,7 +117,7 @@ abstract class Base
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = 'product', $type = null )
+	public function findItem( $code, array $ref = [], $domain = 'product', $type = null )
 	{
 		return $this->manager->findItem( $code, $ref, $domain, $type );
 	}
@@ -193,7 +193,7 @@ abstract class Base
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		return $this->manager->searchItems( $search, $ref, $total );
 	}
@@ -212,7 +212,7 @@ abstract class Base
 	 * @throws \Aimeos\MShop\Exception if creating items failed
 	 * @see \Aimeos\MW\Criteria\SQL
 	 */
-	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
 		return $this->manager->searchRefItems( $search, $ref, $total );
 	}

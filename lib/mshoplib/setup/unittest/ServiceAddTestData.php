@@ -33,7 +33,7 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 
@@ -74,7 +74,7 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$serviceTypeManager = $serviceManager->getSubManager( 'type', 'Standard' );
 
-		$typeIds = array();
+		$typeIds = [];
 		$type = $serviceTypeManager->createItem();
 
 		$this->conn->begin();

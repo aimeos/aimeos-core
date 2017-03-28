@@ -32,7 +32,7 @@ class TablesCreatePlatform extends TablesCreateMShop
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

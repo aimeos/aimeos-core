@@ -109,7 +109,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -123,7 +123,7 @@ class MySQLTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );

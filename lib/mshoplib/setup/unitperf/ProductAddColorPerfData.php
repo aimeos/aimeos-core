@@ -168,7 +168,7 @@ class ProductAddColorPerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 
 		$pos = 0;
 		$mime = '';
-		$attrList = array();
+		$attrList = [];
 
 		foreach( $colors as $code => $name )
 		{

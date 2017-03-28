@@ -32,7 +32,7 @@ class MShopAddLocaleLangCurData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

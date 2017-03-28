@@ -9,7 +9,7 @@
 return array(
 
 	'locale/site' => array(
-		'unitperf' => array( 'code' => 'unitperf', 'label' => 'Performance test site', 'config' => array(), 'status' => 0 )
+		'unitperf' => array( 'code' => 'unitperf', 'label' => 'Performance test site', 'config' => [], 'status' => 0 )
 	),
 
 	'locale' => array(

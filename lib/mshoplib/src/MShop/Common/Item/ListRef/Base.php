@@ -33,7 +33,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param array $listItems Two dimensional associative list of domain / ID / list items that implement \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems Two dimensional associative list of domain / ID / domain items that implement \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function __construct( $prefix, array $values = array(), array $listItems = array(), array $refItems = array() )
+	public function __construct( $prefix, array $values = [], array $listItems = [], array $refItems = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -56,7 +56,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getListItems( $domain = null, $listtype = null, $type = null )
 	{
-		$list = array();
+		$list = [];
 		$this->sortListItems();
 
 		if( $domain === null )
@@ -69,14 +69,14 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		}
 
 		if( !isset( $this->listItems[$domain] ) ) {
-			return array();
+			return [];
 		}
 
 		$list = $this->listItems[$domain];
 
 		if( $listtype !== null )
 		{
-			$list = array();
+			$list = [];
 			$iface = '\\Aimeos\\MShop\\Common\\Item\\Typeid\\Iface';
 			$listTypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 
@@ -124,10 +124,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		}
 
 		if( !isset( $this->refItems[$domain] ) || !isset( $this->listItems[$domain] ) ) {
-			return array();
+			return [];
 		}
 
-		$list = array();
+		$list = [];
 		$iface = '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface';
 		$types = ( is_array( $type ) ? $type : array( $type ) );
 		$listtypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );

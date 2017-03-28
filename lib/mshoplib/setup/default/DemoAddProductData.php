@@ -54,7 +54,7 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 		}
 
 
-		$productCodes = array();
+		$productCodes = [];
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		$search = $manager->createSearch();

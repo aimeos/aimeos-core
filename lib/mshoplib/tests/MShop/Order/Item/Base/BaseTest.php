@@ -26,7 +26,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
 		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( $context )->createItem();
 
-		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $locale, array() );
+		$this->object = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $locale, [] );
 
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
@@ -329,11 +329,11 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$this->object->deleteCoupon( 'OPQR' );
 
 		foreach( $this->object->getCoupons() as $coupon => $products ) {
-			$this->assertEquals( array(), $products );
+			$this->assertEquals( [], $products );
 		}
 
 		$this->object->deleteCoupon( 'OPQR', true );
-		$this->assertEquals( array(), $this->object->getCoupons() );
+		$this->assertEquals( [], $this->object->getCoupons() );
 
 		$this->assertTrue( $this->object->isModified() );
 	}

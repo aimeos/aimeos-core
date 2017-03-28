@@ -29,7 +29,7 @@ class Standard
 	 *
 	 * @param array $values Associative list of key/value pairs with order status properties
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'order.status.', $values );
 
@@ -137,7 +137,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

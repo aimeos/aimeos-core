@@ -183,7 +183,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
 	 * @return null
 	 */
-	public function addCoupon( $code, array $products = array() );
+	public function addCoupon( $code, array $products = [] );
 
 	/**
 	 * Removes a coupon from the order.

@@ -188,7 +188,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$conditions = array();
+		$conditions = [];
 		$conditions[] = $search->compare( '!=', 'supplier.address.id', null );
 		$conditions[] = $search->compare( '!=', 'supplier.address.siteid', null );
 		$conditions[] = $search->compare( '!=', 'supplier.address.parentid', null );
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
 

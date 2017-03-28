@@ -65,7 +65,7 @@ abstract class Base
 	 */
 	protected function getPriceList( array $priceItems, $currencyId )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $priceItems as $priceItem )
 		{

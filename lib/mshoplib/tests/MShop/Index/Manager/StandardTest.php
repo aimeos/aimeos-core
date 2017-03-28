@@ -241,7 +241,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -318,7 +318,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'product.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 3, $total );
@@ -331,7 +331,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 6, $total );
@@ -345,7 +345,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -359,7 +359,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 3, $total );
@@ -414,7 +414,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -425,7 +425,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 7, $total );
@@ -441,7 +441,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -455,7 +455,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -478,7 +478,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -490,7 +490,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 6, $total );
@@ -507,7 +507,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 5, $total );
@@ -534,7 +534,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $object->searchItems( $search, array(), $total );
+		$result = $object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -547,7 +547,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$result = $object->searchItems( $search, array(), $total );
+		$result = $object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 6, $total );
@@ -563,7 +563,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $object->searchItems( $search, array(), $total );
+		$result = $object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
@@ -579,7 +579,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
-		$result = $object->searchItems( $search, array(), $total );
+		$result = $object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -700,10 +700,10 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->object->rebuildIndex();
 
 		//check delete
-		$this->assertEquals( array(), $afterDeleteAttr );
-		$this->assertEquals( array(), $afterDeletePrice );
-		$this->assertEquals( array(), $afterDeleteText );
-		$this->assertEquals( array(), $afterDeleteCat );
+		$this->assertEquals( [], $afterDeleteAttr );
+		$this->assertEquals( [], $afterDeletePrice );
+		$this->assertEquals( [], $afterDeleteText );
+		$this->assertEquals( [], $afterDeleteCat );
 
 		//check inserted items
 		$this->assertEquals( 2, count( $afterInsertAttr ) );

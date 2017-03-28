@@ -23,11 +23,11 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	private $dbm;
 	private $type;
 	private $additional;
-	private $tasks = array();
-	private $tasksDone = array();
-	private $dependencies = array();
-	private $reverse = array();
-	private $conns = array();
+	private $tasks = [];
+	private $tasksDone = [];
+	private $dependencies = [];
+	private $reverse = [];
+	private $conns = [];
 
 
 	/**
@@ -49,7 +49,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 		$this->dbm = $dbm;
 		$this->additional = $additional;
-		$schemas = array();
+		$schemas = [];
 
 		$this->type = ( isset( $dbconfig['db']['adapter'] ) ? $dbconfig['db']['adapter'] : '' );
 
@@ -147,7 +147,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 * @param array $tasknames List of task names
 	 * @param array $stack List of task names that are scheduled after this task
 	 */
-	protected function cleanTasks( array $tasknames, array $stack = array() )
+	protected function cleanTasks( array $tasknames, array $stack = [] )
 	{
 		foreach( $tasknames as $taskname )
 		{
@@ -178,7 +178,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 * @param array $tasknames List of task names
 	 * @param array $stack List of task names that are sheduled after this task
 	 */
-	protected function migrateTasks( array $tasknames, array $stack = array() )
+	protected function migrateTasks( array $tasknames, array $stack = [] )
 	{
 		foreach( $tasknames as $taskname )
 		{
@@ -215,7 +215,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 * @param array $tasknames List of task names
 	 * @param array $stack List of task names that are sheduled after this task
 	 */
-	protected function rollbackTasks( array $tasknames, array $stack = array() )
+	protected function rollbackTasks( array $tasknames, array $stack = [] )
 	{
 		foreach( $tasknames as $taskname )
 		{

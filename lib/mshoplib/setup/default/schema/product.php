@@ -13,13 +13,13 @@ return array(
 			$table = $schema->createTable( 'mshop_product_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msproty_id' );
@@ -36,16 +36,16 @@ return array(
 			$table = $schema->createTable( 'mshop_product' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'typeid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'typeid', 'integer', [] );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspro_id' );
@@ -68,13 +68,13 @@ return array(
 			$table = $schema->createTable( 'mshop_product_list_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msprolity_id' );
@@ -91,18 +91,18 @@ return array(
 			$table = $schema->createTable( 'mshop_product_list' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'parentid', 'integer', array() );
-			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'typeid', 'integer', array() );
+			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'typeid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
-			$table->addColumn( 'pos', 'integer', array() );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'pos', 'integer', [] );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msproli_id' );
@@ -129,13 +129,13 @@ return array(
 			$table = $schema->createTable( 'mshop_product_property_type' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'status', 'smallint', array() );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msproprty_id' );
@@ -152,13 +152,13 @@ return array(
 			$table = $schema->createTable( 'mshop_product_property' );
 
 			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
-			$table->addColumn( 'siteid', 'integer', array() );
-			$table->addColumn( 'parentid', 'integer', array() );
-			$table->addColumn( 'typeid', 'integer', array() );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'typeid', 'integer', [] );
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
 			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'mtime', 'datetime', array() );
-			$table->addColumn( 'ctime', 'datetime', array() );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspropr_id' );

@@ -28,7 +28,7 @@ interface Iface
 	 * @param array $ref List of domains to fetch list items and referenced items for
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] Associative list of items implementing \Aimeos\MShop\Locale\Item\Site\Iface with IDs as keys
 	 */
-	public function getPath( $id, array $ref = array() );
+	public function getPath( $id, array $ref = [] );
 
 
 	/**
@@ -39,7 +39,7 @@ interface Iface
 	 * @param integer $level One of the level constants from \Aimeos\MW\Tree\Manager\Base
 	 * @return \Aimeos\MW\Tree\Node\Iface Node, maybe with subnodes
 	 */
-	public function getTree( $id = null, array $ref = array(), $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
+	public function getTree( $id = null, array $ref = [], $level = \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
 
 	/**

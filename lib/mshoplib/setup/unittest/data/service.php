@@ -50,7 +50,7 @@ return array(
 			'code' => 'directdebit-test',
 			'label' => 'direct debit label',
 			'provider' => 'DirectDebit',
-			'config' => array(),
+			'config' => [],
 			'status' => 1
 		),
 		'service/payment/paypalexpress' => array(

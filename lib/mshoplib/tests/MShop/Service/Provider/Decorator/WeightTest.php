@@ -54,7 +54,7 @@ class WeightTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
 		$attributes = array( 'weight.min' => '10.0' );
 		$result = $this->object->checkConfigBE( $attributes );
@@ -68,9 +68,9 @@ class WeightTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->mockProvider->expects( $this->once() )
 			->method( 'checkConfigBE' )
-			->will( $this->returnValue( array() ) );
+			->will( $this->returnValue( [] ) );
 
-		$attributes = array( 'weight.min' => array() );
+		$attributes = array( 'weight.min' => [] );
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );

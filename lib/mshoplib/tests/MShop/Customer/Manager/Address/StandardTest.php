@@ -259,7 +259,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 2 );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 2, count( $results ) );
 		$this->assertEquals( 3, $total );
 

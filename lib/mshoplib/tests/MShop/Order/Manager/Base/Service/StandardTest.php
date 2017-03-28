@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.base.service.id', null );
 		$expr[] = $search->compare( '==', 'order.base.service.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.base.service.baseid', null );
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 2, $total );
@@ -231,7 +231,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$this->assertTrue( $item->getId() !== null );
-		$this->assertNotEquals( array( ), $item->getAttributes() );
+		$this->assertNotEquals( [], $item->getAttributes() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
@@ -256,7 +256,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 		$this->assertEquals( $itemExp->getMediaUrl(), $itemUpd->getMediaUrl() );
 		$this->assertEquals( $itemExp->getPrice(), $itemUpd->getPrice() );
-		$this->assertEquals( array( ), $itemUpd->getAttributes() );
+		$this->assertEquals( [], $itemUpd->getAttributes() );
 
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );

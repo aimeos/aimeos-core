@@ -319,9 +319,9 @@ abstract class Base
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of list items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = array();
+		$items = $map = $typeIds = [];
 
 		$dbm = $this->getContext()->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -347,7 +347,7 @@ abstract class Base
 			while( ( $row = $results->fetch() ) !== false )
 			{
 				if( ( $row[$this->prefix . 'config'] = json_decode( $row[$this->prefix . 'config'], true ) ) === null ) {
-					$row[$this->prefix . 'config'] = array();
+					$row[$this->prefix . 'config'] = [];
 				}
 
 				$map[$row[$this->prefix . 'id']] = $row;
@@ -399,9 +399,9 @@ abstract class Base
 	 * @throws \Aimeos\MShop\Exception If creating items failed
 	 * @see \Aimeos\MW\Criteria\SQL
 	 */
-	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchRefItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = array();
+		$items = $map = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -470,17 +470,17 @@ abstract class Base
 			$prefix = rtrim( $this->getPrefix(), '.' );
 			$object = $this->createSearchBase( $prefix );
 
-			$expr = array();
+			$expr = [];
 			$curDate = date( 'Y-m-d H:i:00' );
 
 			$expr[] = $object->getConditions();
 
-			$exprTwo = array();
+			$exprTwo = [];
 			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $curDate );
 			$exprTwo[] = $object->compare( '==', $prefix . '.datestart', null );
 			$expr[] = $object->combine( '||', $exprTwo );
 
-			$exprTwo = array();
+			$exprTwo = [];
 			$exprTwo[] = $object->compare( '>=', $prefix . '.dateend', $curDate );
 			$exprTwo[] = $object->compare( '==', $prefix . '.dateend', null );
 			$expr[] = $object->combine( '||', $exprTwo );
@@ -530,7 +530,7 @@ abstract class Base
 	 * @param array $values Possible optional array keys can be given: id, parentid, refid, domain, pos, start, end
 	 * @return \Aimeos\MShop\Common\Item\Lists\Standard New common list item object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Common\Item\Lists\Standard( $this->prefix, $values );
 	}

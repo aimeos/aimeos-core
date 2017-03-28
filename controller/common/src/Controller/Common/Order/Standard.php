@@ -147,7 +147,7 @@ class Standard
 	 */
 	protected function getBundleMap( $prodId )
 	{
-		$bundleMap = array();
+		$bundleMap = [];
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$search = $productManager->createSearch();
@@ -365,12 +365,12 @@ class Standard
 	 */
 	protected function updateStockBundle( $prodId, $stockType )
 	{
-		if( ( $bundleMap = $this->getBundleMap( $prodId ) ) === array() ) {
+		if( ( $bundleMap = $this->getBundleMap( $prodId ) ) === [] ) {
 			return;
 		}
 
 
-		$bundleCodes = $stock = array();
+		$bundleCodes = $stock = [];
 
 		foreach( $this->getStockItems( array_keys( $bundleMap ), $stockType ) as $stockItem )
 		{

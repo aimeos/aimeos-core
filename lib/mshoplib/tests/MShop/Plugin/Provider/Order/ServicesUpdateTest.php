@@ -161,7 +161,7 @@ class ServicesUpdateTest
 
 
 		$this->assertTrue( $object->update( $orderStub, 'addProduct.after' ) );
-		$this->assertEquals( array(), $orderStub->getServices() );
+		$this->assertEquals( [], $orderStub->getServices() );
 	}
 
 
@@ -199,7 +199,7 @@ class ServicesUpdateTest
 
 
 		$this->assertTrue( $object->update( $orderStub, 'addAddress.after' ) );
-		$this->assertEquals( array(), $orderStub->getServices() );
+		$this->assertEquals( [], $orderStub->getServices() );
 	}
 
 

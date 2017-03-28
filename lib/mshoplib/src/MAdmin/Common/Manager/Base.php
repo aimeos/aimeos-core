@@ -54,8 +54,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$decorators = $config->get( 'madmin/common/manager/decorators/default', array() );
-		$excludes = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', array() );
+		$decorators = $config->get( 'madmin/common/manager/decorators/default', [] );
+		$excludes = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
 		{
@@ -68,12 +68,12 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$manager = $this->addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
-		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/global', array() );
+		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] );
 		$manager = $this->addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$subpath = $this->createSubNames( $managerpath );
 		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
-		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/local', array() );
+		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
 
 		return $this->addDecorators( $context, $manager, $decorators, $classprefix );
 	}

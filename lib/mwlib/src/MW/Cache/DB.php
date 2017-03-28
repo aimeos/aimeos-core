@@ -229,7 +229,7 @@ class DB
 	 */
 	public function getMultiple( $keys, $default = null )
 	{
-		$list = array();
+		$list = [];
 		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
@@ -287,7 +287,7 @@ class DB
 	 */
 	public function getMultipleByTags( array $tags )
 	{
-		$list = array();
+		$list = [];
 		$conn = $this->dbm->acquire( $this->dbname );
 
 		try
@@ -342,7 +342,7 @@ class DB
 	 * @return null
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = [] )
 	{
 		// Remove existing entries first to avoid duplicate key conflicts
 		$this->deleteMultiple( array_keys( $pairs ) );

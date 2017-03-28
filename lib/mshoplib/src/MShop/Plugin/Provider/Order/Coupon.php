@@ -55,7 +55,7 @@ class Coupon
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-		$notAvailable = array();
+		$notAvailable = [];
 
 		if( self::$lock === false )
 		{

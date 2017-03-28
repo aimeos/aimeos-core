@@ -22,7 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Plugin\Manager\Base
 	implements \Aimeos\MShop\Plugin\Manager\Iface
 {
-	private $plugins = array();
+	private $plugins = [];
 
 	private $searchConfig = array(
 		'plugin.id' => array(
@@ -341,7 +341,7 @@ class Standard
 		 * @category Developer
 		 * @see mshop/plugin/provider/order/decorators
 		 */
-		$decorators = $config->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', array() );
+		$decorators = $config->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', [] );
 
 		$provider = $this->addPluginDecorators( $item, $provider, $names );
 		return $this->addPluginDecorators( $item, $provider, $decorators );
@@ -368,7 +368,7 @@ class Standard
 			$search->setConditions( $search->combine( '&&', $expr ) );
 			$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
 
-			$this->plugins[$type] = array();
+			$this->plugins[$type] = [];
 
 			foreach( $this->searchItems( $search ) as $item ) {
 				$this->plugins[$type][$item->getId()] = $this->getProvider( $item );
@@ -565,9 +565,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of plugin items implementing \Aimeos\MShop\Plugin\Item\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = $map = $typeIds = array();
+		$items = $map = $typeIds = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -745,7 +745,7 @@ class Standard
 	 * @param array Associative list of item key/value pairs
 	 * @return \Aimeos\MShop\Plugin\Item\Iface New plugin object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Plugin\Item\Standard( $values );
 	}

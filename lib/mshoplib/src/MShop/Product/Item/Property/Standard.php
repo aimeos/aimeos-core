@@ -29,7 +29,7 @@ class Standard
 	 *
 	 * @param array $values Associative list of product property key/value pairs
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'product.property.', $values );
 
@@ -214,7 +214,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 		unset( $list['product.property.type'], $list['product.property.typename'] );
 

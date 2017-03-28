@@ -66,7 +66,7 @@ class Sqlserv extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param array $record Associative array with column details
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
-	protected function createColumnItem( array $record = array() )
+	protected function createColumnItem( array $record = [] )
 	{
 		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
 

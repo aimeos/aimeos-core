@@ -32,7 +32,7 @@ class Standard
 	 *
 	 * @param array $values Possible params to be set on init.
 	 */
-	public function __construct( array $values = array( ) )
+	public function __construct( array $values = [] )
 	{
 		parent::__construct( 'locale.language.', $values );
 
@@ -203,7 +203,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

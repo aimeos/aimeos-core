@@ -177,19 +177,19 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrWidthItem->getId() ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
 
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrLengthItem->getId() ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 		$this->assertEquals( 3, count( $result ) );
 
 		$search->setConditions( $search->compare( '!=', 'index.attribute.id', null ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
 
 
@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$func = $search->createFunction( 'index.attributecount', array( 'variant', $attrIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count attributes
 		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 
 		if( ( $product = reset( $result ) ) === false ) {
 			throw new \RuntimeException( 'No product found' );
@@ -210,7 +210,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$func = $search->createFunction( 'index.attribute.code', array( 'default', 'size' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'x' ) );
 
-		$result = $this->object->searchItems( $search, array() );
+		$result = $this->object->searchItems( $search, [] );
 		$this->assertEquals( 4, count( $result ) );
 	}
 

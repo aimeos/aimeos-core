@@ -94,7 +94,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$method->setAccessible( true );
 
 		$this->setExpectedException( '\Aimeos\Mw\Exception' );
-		$method->invokeArgs( $this->object, array( array( array() ) ) );
+		$method->invokeArgs( $this->object, array( array( [] ) ) );
 	}
 
 
@@ -144,6 +144,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$method->setAccessible( true );
 
 		$this->setExpectedException( '\Aimeos\Mw\Exception' );
-		$method->invokeArgs( $this->object, array( array( array() ) ) );
+		$method->invokeArgs( $this->object, array( array( [] ) ) );
 	}
 }

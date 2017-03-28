@@ -56,12 +56,12 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier list domain', $path ) );
 		}
 
-		$refKeys = array();
+		$refKeys = [];
 		foreach( $testdata['supplier/lists'] as $dataset ) {
 			$refKeys[ $dataset['domain'] ][] = $dataset['refid'];
 		}
 
-		$refIds = array();
+		$refIds = [];
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
 
 		if( isset( $refKeys['product'] ) ) {
@@ -84,7 +84,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$codes = array();
+		$codes = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
@@ -97,7 +97,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', $codes ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $manager->searchItems( $search ) as $item ) {
 			$refIds[ 'product/' . $item->getCode() ] = $item->getId();
 		}
@@ -116,7 +116,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$labels = array();
+		$labels = [];
 		foreach( $keys as $dataset )
 		{
 			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos+1 ) ) === false ) {
@@ -129,7 +129,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $textManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'text.label', $labels ) );
 
-		$refIds = array();
+		$refIds = [];
 		foreach( $textManager->searchItems( $search ) as $item )	{
 			$refIds[ 'text/'.$item->getLabel() ] = $item->getId();
 		}
@@ -152,7 +152,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$supplierListManager = $supplierManager->getSubManager( 'lists', $type );
 		$supplierListTypeManager = $supplierListManager->getSubmanager( 'type', $type );
 
-		$itemCode = array();
+		$itemCode = [];
 		foreach( $testdata['supplier/lists'] as $dataset )
 		{
 			if( ( $pos = strpos( $dataset['parentid'], '/' ) ) === false || ( $str = substr( $dataset['parentid'], $pos+1 ) ) === false ) {
@@ -165,12 +165,12 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search = $supplierManager->createSearch();
 		$search->setConditions( $search->compare( '==', 'supplier.code', $itemCode) );
 
-		$parentIds = array();
+		$parentIds = [];
 		foreach( $supplierManager->searchItems( $search ) as $item )	{
 			$parentIds[ 'supplier/'.$item->getCode() ] = $item->getId();
 		}
 
-		$listItemTypeIds = array();
+		$listItemTypeIds = [];
 		$listItemType = $supplierListTypeManager->createItem();
 
 		$this->conn->begin();

@@ -101,7 +101,7 @@ abstract class DBBase
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
 	 */
-	public function rebuildIndex( array $items = array() )
+	public function rebuildIndex( array $items = [] )
 	{
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
@@ -231,7 +231,7 @@ abstract class DBBase
 	protected function searchItemsIndexBase( \Aimeos\MW\Criteria\Iface $search,
 		array $ref, &$total, $cfgPathSearch, $cfgPathCount )
 	{
-		$list = $ids = array();
+		$list = $ids = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();

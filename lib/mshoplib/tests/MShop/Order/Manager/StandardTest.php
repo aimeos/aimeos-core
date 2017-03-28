@@ -324,7 +324,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$param = array( (string) \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT, (string) \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 		$funcStatPayment = $search->createFunction( 'order.containsStatus', $param );
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.id', null );
 		$expr[] = $search->compare( '==', 'order.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.baseid', null );
@@ -453,7 +453,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array(), $total );
+		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
@@ -467,7 +467,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 1 );
 		$total = 0;
-		$items = $this->object->searchItems( $search, array(), $total );
+		$items = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $items ) );
 		$this->assertEquals( 3, $total );

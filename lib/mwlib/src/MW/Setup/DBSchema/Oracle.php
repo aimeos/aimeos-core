@@ -193,7 +193,7 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param array $record Associative array with column details
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
-	protected function createColumnItem( array $record = array() )
+	protected function createColumnItem( array $record = [] )
 	{
 		$length = ( isset( $record['CHAR_COL_DECL_LENGTH'] ) ? $record['CHAR_COL_DECL_LENGTH'] : $record['DATA_PRECISION'] );
 

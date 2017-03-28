@@ -73,7 +73,7 @@ class LogTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateArray()
 	{
-		$this->assertTrue( $this->object->update( $this->order, 'test', array() ) );
+		$this->assertTrue( $this->object->update( $this->order, 'test', [] ) );
 	}
 
 

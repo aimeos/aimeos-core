@@ -44,7 +44,7 @@ class ShippingTest extends \PHPUnit_Framework_TestCase
 			throw new \RuntimeException( 'Wrong number of products' );
 		}
 
-		$products = array();
+		$products = [];
 		foreach( $pResults as $prod ) {
 			$products[$prod->getCode()] = $prod;
 		}

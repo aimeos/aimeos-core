@@ -66,7 +66,7 @@ class None
 	 */
 	public function getAll( $domain )
 	{
-		return array();
+		return [];
 	}
 
 }

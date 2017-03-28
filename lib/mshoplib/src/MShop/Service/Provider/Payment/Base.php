@@ -112,7 +112,7 @@ abstract class Base
 	 */
 	public function getConfigBE()
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $this->beConfig as $key => $config ) {
 			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
@@ -153,11 +153,11 @@ abstract class Base
 	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
 	{
 		$url = $this->getConfigValue( array( 'payment.url-success' ) );
 
-		return new \Aimeos\MShop\Common\Item\Helper\Form\Standard( $url, 'POST', array() );
+		return new \Aimeos\MShop\Common\Item\Helper\Form\Standard( $url, 'POST', [] );
 	}
 
 

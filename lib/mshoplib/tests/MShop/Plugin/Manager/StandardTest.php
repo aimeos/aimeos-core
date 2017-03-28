@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '!=', 'plugin.id', null );
 		$expr[] = $search->compare( '!=', 'plugin.siteid', null );
 		$expr[] = $search->compare( '!=', 'plugin.typeid', null );
@@ -220,18 +220,18 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$expr[] = $search->compare( '==', 'plugin.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$results = $this->object->searchItems( $search, array(), $total );
+		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 
-		$expr = $conditions = array();
+		$expr = $conditions = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'Shipping,Example' );
 		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
 		$conditions[] = $search->combine( '&&', $expr );
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'ProductLimit,Example' );
 		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
 		$conditions[] = $search->combine( '&&', $expr );
-		$expr = array();
+		$expr = [];
 		$expr[] = $search->compare( '~=', 'plugin.provider', 'BasketLimits,Example' );
 		$expr[] = $search->compare( '==', 'plugin.editor', $this->editor );
 		$conditions[] = $search->combine( '&&', $expr );
@@ -250,7 +250,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$total = 0;
 		$search->setSlice( 0, 2 );
-		$this->assertEquals( 2, count( $this->object->searchItems( $search, array(), $total ) ) );
+		$this->assertEquals( 2, count( $this->object->searchItems( $search, [], $total ) ) );
 		$this->assertEquals( 3, $total );
 
 		foreach( $results as $itemId => $item ) {

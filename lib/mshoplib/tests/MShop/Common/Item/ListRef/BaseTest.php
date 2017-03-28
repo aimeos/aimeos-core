@@ -67,7 +67,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 			$this->textItem2->getId() => $this->textItem2,
 		) );
 
-		$this->object = new \Aimeos\MShop\Common\Item\ListRef\Test( 'text.', array(), $listItems, $refItems );
+		$this->object = new \Aimeos\MShop\Common\Item\ListRef\Test( 'text.', [], $listItems, $refItems );
 	}
 
 
@@ -119,7 +119,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 			$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
 		}
 
-		$this->assertEquals( array(), $this->object->getListItems( 'undefined' ) );
+		$this->assertEquals( [], $this->object->getListItems( 'undefined' ) );
 	}
 
 
@@ -213,7 +213,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 			$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Iface', $item );
 		}
 
-		$this->assertEquals( array(), $this->object->getRefItems( 'undefined' ) );
+		$this->assertEquals( [], $this->object->getRefItems( 'undefined' ) );
 	}
 
 
@@ -223,7 +223,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$expected = array( $this->textItem1->getId() => $this->textItem1 );
 
 		$this->assertEquals( $expected, $result );
-		$this->assertEquals( array(), $this->object->getRefItems( 'text', 'undefined' ) );
+		$this->assertEquals( [], $this->object->getRefItems( 'text', 'undefined' ) );
 	}
 
 
@@ -236,7 +236,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		);
 
 		$this->assertEquals( $expected, $result );
-		$this->assertEquals( array(), $this->object->getRefItems( 'text', 'undefined' ) );
+		$this->assertEquals( [], $this->object->getRefItems( 'text', 'undefined' ) );
 	}
 
 
@@ -246,6 +246,6 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$expected = array( $this->textItem1->getId() => $this->textItem1 );
 
 		$this->assertEquals( $expected, $result );
-		$this->assertEquals( array(), $this->object->getRefItems( 'text', 'name', 'undefined' ) );
+		$this->assertEquals( [], $this->object->getRefItems( 'text', 'name', 'undefined' ) );
 	}
 }

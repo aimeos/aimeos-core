@@ -179,7 +179,7 @@ class Sqlanywhere extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 	 * @param array $record Associative array with column details
 	 * @return \Aimeos\MW\Setup\DBSchema\Column\Iface Column item
 	 */
-	protected function createColumnItem( array $record = array() )
+	protected function createColumnItem( array $record = [] )
 	{
 		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['table_name'], $record['column_name'],
 			$record['base_type_str'], $record['width'], $record['default'], $record['nulls'], null );

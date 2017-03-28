@@ -274,7 +274,7 @@ class Standard
 		 * @category Developer
 		 * @category User
 		 */
-		$options = $this->context->getConfig()->get( 'controller/common/media/standard/options', array() );
+		$options = $this->context->getConfig()->get( 'controller/common/media/standard/options', [] );
 
 		return \Aimeos\MW\Media\Factory::get( $file, $options );
 	}

@@ -39,9 +39,9 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 * @param array $translations Associative list of item names that should be translated
 	 * @return string Translated columns
 	 */
-	public function getColumnString( array $columns, array $translations = array() )
+	public function getColumnString( array $columns, array $translations = [] )
 	{
-		$list = array();
+		$list = [];
 
 		foreach( $columns as $item ) {
 			$list[] = $item->translate( $translations );
@@ -113,7 +113,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 */
 	public function toSortations( array $array )
 	{
-		$results = array();
+		$results = [];
 
 		foreach( $array as $name => $op ) {
 			$results[] = $this->sort( $op, $name );
@@ -132,7 +132,7 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 */
 	protected function createCombineExpression( $operator, array $list )
 	{
-		$results = array();
+		$results = [];
 		$operators = $this->getOperators();
 
 		foreach( $list as $entry )

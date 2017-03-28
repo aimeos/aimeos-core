@@ -14,7 +14,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public function testFactory()
 	{
-		$object = \Aimeos\MW\Container\Factory::getContainer( 'tempfile', 'Zip', 'CSV', array() );
+		$object = \Aimeos\MW\Container\Factory::getContainer( 'tempfile', 'Zip', 'CSV', [] );
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Container\\Iface', $object );
 	}
 

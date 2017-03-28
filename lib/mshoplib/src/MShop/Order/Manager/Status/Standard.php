@@ -167,7 +167,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/order/manager/status/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array() ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -427,7 +427,7 @@ class Standard
 	{
 		$path = 'mshop/order/manager/status/submanagers';
 
-		return $this->getResourceTypeBase( 'order/status', $path, array(), $withsub );
+		return $this->getResourceTypeBase( 'order/status', $path, [], $withsub );
 	}
 
 
@@ -458,7 +458,7 @@ class Standard
 		 */
 		$path = 'mshop/order/manager/status/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array(), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
 	}
 
 
@@ -592,9 +592,9 @@ class Standard
 	 * @param integer|null &$total Number of items that are available in total
 	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Status\Iface
 	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = array(), &$total = null )
+	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = array();
+		$items = [];
 		$context = $this->getContext();
 
 		$dbm = $context->getDatabaseManager();
@@ -744,7 +744,7 @@ class Standard
 	 * @param array $values List of attributes for the order status object
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface New order status object
 	 */
-	protected function createItemBase( array $values = array() )
+	protected function createItemBase( array $values = [] )
 	{
 		return new \Aimeos\MShop\Order\Item\Status\Standard( $values );
 	}

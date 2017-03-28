@@ -79,16 +79,16 @@ class ZipTest extends \PHPUnit_Framework_TestCase
 			'testfile.csv' => 2,
 		);
 
-		$actual = array();
+		$actual = [];
 		foreach( $zip as $entry )
 		{
-			$rows = array();
+			$rows = [];
 			foreach( $entry as $row ) {
 				$rows[] = $row;
 			}
 
 			// test if rewind or reopen works
-			$rows = array();
+			$rows = [];
 			foreach( $entry as $row ) {
 				$rows[] = $row;
 			}

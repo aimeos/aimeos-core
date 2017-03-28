@@ -153,7 +153,7 @@ class Standard
 	 * 	given value in the cache
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function set( $key, $value, $expires = null, array $tags = array() )
+	public function set( $key, $value, $expires = null, array $tags = [] )
 	{
 		$this->getObject()->set( $key, $value, $expires, $tags );
 	}
@@ -172,7 +172,7 @@ class Standard
 	 * 	to the key can either be a tag string or an array of tag strings
 	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
 	 */
-	public function setMultiple( $pairs, $expires = null, array $tags = array() )
+	public function setMultiple( $pairs, $expires = null, array $tags = [] )
 	{
 		$this->getObject()->setMultiple( $pairs, $expires, $tags );
 	}

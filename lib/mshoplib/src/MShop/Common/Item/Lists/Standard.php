@@ -33,7 +33,7 @@ class Standard
 	 * @param string $prefix Property prefix when converting to array
 	 * @param array $values Associative list of key/value pairs of the list item
 	 */
-	public function __construct( $prefix, array $values = array() )
+	public function __construct( $prefix, array $values = [] )
 	{
 		parent::__construct( $prefix, $values );
 
@@ -345,7 +345,7 @@ class Standard
 			return (array) $this->values[$this->prefix . 'config'];
 		}
 
-		return array();
+		return [];
 	}
 
 
@@ -408,7 +408,7 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
-		$unknown = array();
+		$unknown = [];
 		$list = parent::fromArray( $list );
 
 		foreach( $list as $key => $value )

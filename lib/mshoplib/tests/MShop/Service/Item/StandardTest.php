@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Service\Item;
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
-	private $values = array();
+	private $values = [];
 
 
 	protected function setUp()
@@ -214,7 +214,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 		$unknown = $item->fromArray( $list );
 
-		$this->assertEquals( array(), $unknown );
+		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['service.id'], $item->getId() );
 		$this->assertEquals( $list['service.code'], $item->getCode() );

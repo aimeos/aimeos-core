@@ -47,7 +47,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * @var array List of internal dependencies
 	 */
-	private $internalDeps = array();
+	private $internalDeps = [];
 
 	/**
 	 * @var string Human readable name of the attribute
@@ -84,7 +84,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *		[required] booblean (optional)
 	 *		[type] string
 	 */
-	public function  __construct( array $params = array() )
+	public function  __construct( array $params = [] )
 	{
 		$required = array( 'type', 'internaltype', 'code', 'internalcode', 'label' );
 

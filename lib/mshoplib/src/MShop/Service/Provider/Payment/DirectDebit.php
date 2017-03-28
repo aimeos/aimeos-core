@@ -71,7 +71,7 @@ class DirectDebit
 	 */
 	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$list = array();
+		$list = [];
 		$feconfig = $this->feConfig;
 
 		try
@@ -139,7 +139,7 @@ class DirectDebit
 	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
+	public function updateSync( array $params = [], $body = null, &$response = null, array &$header = [] )
 	{
 		if( isset( $params['orderid'] ) )
 		{

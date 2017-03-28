@@ -33,7 +33,7 @@ class CustomerAddBasePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	 */
 	public function getPostDependencies()
 	{
-		return array();
+		return [];
 	}
 
 

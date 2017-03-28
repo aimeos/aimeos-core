@@ -27,7 +27,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
 	
 	public function testEncode()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Bcrypt( array() );
+		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Bcrypt( [] );
 
 		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest' ) );
 	}
@@ -43,7 +43,7 @@ class BcryptTest extends \PHPUnit_Framework_TestCase
 
 	public function testEncodeNoSalt()
 	{
-		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Bcrypt( array() );
+		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Bcrypt( [] );
 
 		$this->assertStringStartsWith( '$2y$10$', $object->encode( 'unittest', null ) );
 	}

@@ -20,7 +20,7 @@ namespace Aimeos\MW\Session;
  */
 class None implements \Aimeos\MW\Session\Iface
 {
-	private $data = array();
+	private $data = [];
 
 
 	/**

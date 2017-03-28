@@ -106,7 +106,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 
 		$localeSiteManager = $localeManager->getSubManager( 'site', $manager );
 		$siteItem = $localeSiteManager->createItem();
-		$siteIds = array();
+		$siteIds = [];
 
 		foreach( $data as $key => $dataset )
 		{

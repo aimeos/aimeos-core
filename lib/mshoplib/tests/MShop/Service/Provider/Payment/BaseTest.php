@@ -84,7 +84,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$result = $this->object->process( $item, array() );
+		$result = $this->object->process( $item, [] );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Helper\\Form\\Iface', $result );
 	}
 
@@ -103,7 +103,7 @@ class BaseTest extends \PHPUnit_Framework_TestCase
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )
 			->getSubManager( 'base' )->getSubManager( 'service' )->createItem();
 
-		$this->object->setConfigFE( $item, array() );
+		$this->object->setConfigFE( $item, [] );
 	}
 }
 

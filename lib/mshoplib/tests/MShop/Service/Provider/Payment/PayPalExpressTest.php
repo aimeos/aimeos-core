@@ -132,7 +132,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 
-		$attributeList = array();
+		$attributeList = [];
 		foreach( $attributes as $attribute ) {
 			$attributeList[$attribute->getCode()] = $attribute;
 		}
@@ -140,7 +140,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Helper\\Form\\Iface', $helperForm );
 		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'POST', $helperForm->getMethod() );
-		$this->assertEquals( array(), $helperForm->getValues() );
+		$this->assertEquals( [], $helperForm->getValues() );
 
 		$testData = array(
 			'TOKEN' => 'UT-99999999'
@@ -221,7 +221,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 		$attrManager = $orderBaseManager->getSubManager( 'service' )->getSubManager( 'attribute' );
 
-		$attributeList = array();
+		$attributeList = [];
 		foreach( $attributes as $attribute ) {
 			//remove attr where txn ids as keys, because next test with same txn id would fail
 			if( $attribute->getCode() === '111111110' || $attribute->getCode() === '111111111' ) {
@@ -269,7 +269,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
 		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
 
-		$attributeList = array();
+		$attributeList = [];
 		foreach( $attributes as $attribute ) {
 			$attributeList[$attribute->getCode()] = $attribute;
 		}
@@ -410,7 +410,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 		$method = $class->getMethod( 'setPaymentStatus' );
 		$method->setAccessible( true );
 
-		$method->invokeArgs( $this->object, array( $this->order, array() ) );
+		$method->invokeArgs( $this->object, array( $this->order, [] ) );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
 	}
@@ -467,7 +467,7 @@ class PayPalExpressTest extends \PHPUnit_Framework_TestCase
 
 class TestPayPalExpress implements \Aimeos\MW\Communication\Iface
 {
-	private $rules = array();
+	private $rules = [];
 
 
 	/**
@@ -518,7 +518,7 @@ class TestPayPalExpress implements \Aimeos\MW\Communication\Iface
 			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No success message for unit tests was set' ) );
 		}
 
-		$params = array();
+		$params = [];
 		parse_str( $payload, $params );
 
 		foreach( $this->rules['set'] as $key => $value )

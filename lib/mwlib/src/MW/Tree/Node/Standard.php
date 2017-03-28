@@ -21,7 +21,7 @@ namespace Aimeos\MW\Tree\Node;
 class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\Node\Iface, \Countable
 {
 	private $values;
-	private $children = array();
+	private $children = [];
 	private $modified = false;
 
 
@@ -32,7 +32,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @param array $children Children of the node implementing \Aimeos\MW\Tree\Node\Iface
 	 * @throws \Aimeos\MW\Common\Exception if the children doesn't implement the interface
 	 */
-	public function __construct( array $values = array(), $children = array() )
+	public function __construct( array $values = [], $children = [] )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Tree\\Node\\Iface', $children );
 

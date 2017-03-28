@@ -210,7 +210,7 @@ class PayPalExpress
 	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Standard Form object with URL, action and parameters to redirect to
 	 * 	(e.g. to an external server of the payment provider or to a local success page)
 	 */
-	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = array() )
+	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
 	{
 		$orderid = $order->getId();
 		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
@@ -234,7 +234,7 @@ class PayPalExpress
 		$this->setAttributes( $orderBaseItem->getService( $type ), array( 'TOKEN' => $rvals['TOKEN'] ), 'payment/paypal' );
 		$this->saveOrderBase( $orderBaseItem );
 
-		return new \Aimeos\MShop\Common\Item\Helper\Form\Standard( $paypalUrl, 'POST', array() );
+		return new \Aimeos\MShop\Common\Item\Helper\Form\Standard( $paypalUrl, 'POST', [] );
 	}
 
 
@@ -297,7 +297,7 @@ class PayPalExpress
 
 		$this->setPaymentStatus( $order, $rvals );
 
-		$attributes = array();
+		$attributes = [];
 		if( isset( $rvals['PARENTTRANSACTIONID'] ) ) {
 			$attributes['PARENTTRANSACTIONID'] = $rvals['PARENTTRANSACTIONID'];
 		}
@@ -383,7 +383,7 @@ class PayPalExpress
 	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
 	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function updateSync( array $params = array(), $body = null, &$response = null, array &$header = array() )
+	public function updateSync( array $params = [], $body = null, &$response = null, array &$header = [] )
 	{
 		if( isset( $params['token'] ) && isset( $params['PayerID'] ) && isset( $params['orderid'] ) ) {
 			return $this->doExpressCheckoutPayment( $params );
@@ -507,7 +507,7 @@ class PayPalExpress
 	 */
 	protected function checkResponse( $orderid, $response, $method )
 	{
-		$rvals = array();
+		$rvals = [];
 		parse_str( $response, $rvals );
 
 		if( $rvals['ACK'] !== 'Success' )
@@ -640,7 +640,7 @@ class PayPalExpress
 	protected function getOrderDetails( \Aimeos\MShop\Order\Item\Base\Iface $orderBase )
 	{
 		$deliveryCosts = 0;
-		$deliveryPrices = array();
+		$deliveryPrices = [];
 		$values = $this->getAuthParameter();
 
 		try

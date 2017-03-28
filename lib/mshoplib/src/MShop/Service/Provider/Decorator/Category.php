@@ -115,7 +115,7 @@ class Category
 		$configCatalogIds = $this->getCatalogIds( explode( ',', $codes ) );
 		$treeCatalogIds = $this->getTreeCatalogIds( $configCatalogIds );
 
-		return ( array_intersect( $catalogIds, $treeCatalogIds ) !== array() );
+		return ( array_intersect( $catalogIds, $treeCatalogIds ) !== [] );
 	}
 
 
@@ -169,7 +169,7 @@ class Category
 	 */
 	protected function getProductIds( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$productIds = array();
+		$productIds = [];
 
 		foreach( $basket->getProducts() as $product ) {
 			$productIds[] = $product->getProductId();
@@ -209,7 +209,7 @@ class Category
 	 */
 	protected function getTreeCatalogIds( array $catalogIds )
 	{
-		$ids = array();
+		$ids = [];
 		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
 
 		foreach( $catalogIds as $catId )

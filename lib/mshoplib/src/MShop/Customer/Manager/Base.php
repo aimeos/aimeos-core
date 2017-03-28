@@ -81,7 +81,7 @@ abstract class Base
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = array(), $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
 		return $this->findItemBase( array( 'customer.code' => $code ), $ref );
 	}
@@ -113,10 +113,10 @@ abstract class Base
 			return;
 		}
 
-		$listMap = array();
+		$listMap = [];
 		$manager = $this->getSubManager( 'lists' );
 		$typeManager = $manager->getSubManager( 'type' );
-		$typeId = $typeManager->findItem( 'default', array(), 'customer/group', 'default' )->getId();
+		$typeId = $typeManager->findItem( 'default', [], 'customer/group', 'default' )->getId();
 
 		$listItem = $manager->createItem();
 		$listItem->setParentId( $item->getId() );
@@ -226,7 +226,7 @@ abstract class Base
 		 * @see mshop/customer/manager/password/name
 		 * @sse mshop/customer/manager/salt
 		 */
-		$options = $config->get( 'mshop/customer/manager/password/options', array() );
+		$options = $config->get( 'mshop/customer/manager/password/options', [] );
 
 		if( ctype_alnum( $name ) === false )
 		{

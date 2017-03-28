@@ -144,7 +144,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	public function testConstructorNoConfig()
 	{
 		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
-		new \Aimeos\MW\Cache\DB( array(), self::$dbm );
+		new \Aimeos\MW\Cache\DB( [], self::$dbm );
 	}
 
 
@@ -383,7 +383,7 @@ class DBTest extends \PHPUnit_Framework_TestCase
 	public function testSetException()
 	{
 		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
-		$this->object->set( array(), '' );
+		$this->object->set( [], '' );
 	}
 
 }

@@ -103,7 +103,7 @@ class LocaleChangeSitesToTree extends \Aimeos\MW\Setup\Task\Base
 
 			$stmt = $this->conn->create( $migstmts['search'] );
 			$result = $stmt->execute();
-			$sites = array();
+			$sites = [];
 
 			while( ( $row = $result->fetch() ) !== false ) {
 				$sites[] = $row;

@@ -46,7 +46,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 			throw new \RuntimeException( 'Wrong number of products' );
 		}
 
-		$this->products = array();
+		$this->products = [];
 
 		foreach( $products as $product )
 		{
@@ -80,7 +80,7 @@ class PropertyAddTest extends \PHPUnit_Framework_TestCase
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
 		$this->assertEquals( 3, count( $this->products['CNC']->getAttributes() ) );
 
-		$this->products['CNE']->setAttributes( array() );
+		$this->products['CNE']->setAttributes( [] );
 		$this->plugin->setConfig( array(
 			'product.lists.parentid' => array(
 				'product.lists.domain',

@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Factory;
  */
 abstract class Base
 {
-	private static $objects = array();
+	private static $objects = [];
 
 
 	/**
@@ -109,8 +109,8 @@ abstract class Base
 		 * @since 2014.03
 		 * @category Developer
 		 */
-		$decorators = $config->get( 'mshop/common/manager/decorators/default', array() );
-		$excludes = $config->get( 'mshop/' . $domain . '/manager/decorators/excludes', array() );
+		$decorators = $config->get( 'mshop/common/manager/decorators/default', [] );
+		$excludes = $config->get( 'mshop/' . $domain . '/manager/decorators/excludes', [] );
 
 		foreach( $decorators as $key => $name )
 		{
@@ -123,11 +123,11 @@ abstract class Base
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
-		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/global', array() );
+		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/global', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Decorator\\';
-		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', array() );
+		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
 		return $manager;

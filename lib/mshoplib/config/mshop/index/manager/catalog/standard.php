@@ -65,6 +65,6 @@ return array(
 		'mysql' => array(
 			'OPTIMIZE TABLE "mshop_index_catalog"',
 		),
-		'pgsql' => array(),
+		'pgsql' => [],
 	),
 );
