@@ -186,7 +186,7 @@ abstract class Base
 	/**
 	 * Returns the address items for the given customer IDs
 	 *
-	 * @param array $prodIds List of customer IDs
+	 * @param array $custIds List of customer IDs
 	 * @return array Associative list of customer IDs / address IDs as keys and items implementing
 	 * 	\Aimeos\MShop\Common\Item\Address\Iface as values
 	 */

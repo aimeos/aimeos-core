@@ -33,6 +33,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.code' => '12345ABCDEF',
 			'customer.birthday' => '2010-01-01',
 			'customer.status' => 1,
+			'customer.groups' => [1, 2],
 			'customer.password' => '',
 			'customer.dateverified' => null,
 			'customer.company' => 'unitCompany',
@@ -291,6 +292,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'customer.website' => 'www.example.com',
 			'customer.longitude' => '10.0',
 			'customer.latitude' => '53.5',
+			'customer.groups' => [1, 2],
 		);
 
 		$unknown = $item->fromArray( $list );
@@ -302,6 +304,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $list['customer.label'], $item->getLabel() );
 		$this->assertEquals( $list['customer.birthday'], $item->getBirthday() );
 		$this->assertEquals( $list['customer.status'], $item->getStatus() );
+		$this->assertEquals( $list['customer.groups'], $item->getGroups() );
 		$this->assertEquals( $list['customer.password'], $item->getPassword() );
 		$this->assertEquals( $list['customer.dateverified'], $item->getDateVerified() );
 
@@ -338,12 +341,14 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['customer.label'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['customer.code'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['customer.status'] );
+		$this->assertEquals( $this->object->getGroups(), $arrayObject['customer.groups'] );
 		$this->assertEquals( $this->object->getPassword(), $arrayObject['customer.password'] );
 		$this->assertEquals( $this->object->getBirthday(), $arrayObject['customer.birthday'] );
 		$this->assertEquals( $this->object->getDateVerified(), $arrayObject['customer.dateverified'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['customer.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['customer.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['customer.editor'] );
+
 		$address = $this->object->getPaymentAddress();
 		$this->assertEquals( $address->getCompany(), $arrayObject['customer.company'] );
 		$this->assertEquals( $address->getVatID(), $arrayObject['customer.vatid'] );

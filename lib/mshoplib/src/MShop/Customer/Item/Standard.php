@@ -37,7 +37,7 @@ class Standard extends Base implements Iface
 	 * @param \Aimeos\MShop\Customer\Item\Address\Iface[] $addresses List of delivery addresses
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
-		array $listItems = [], array $refItems = [], $salt = '',
+		array $listItems = [], array $refItems = [], $salt = null,
 		\Aimeos\MShop\Common\Item\Helper\Password\Iface $helper = null, array $addresses = [] )
 	{
 		parent::__construct( $address, $values, $listItems, $refItems, $addresses );
@@ -315,6 +315,7 @@ class Standard extends Base implements Iface
 				case 'customer.code': $this->setCode( $value ); break;
 				case 'customer.birthday': $this->setBirthday( $value ); break;
 				case 'customer.status': $this->setStatus( $value ); break;
+				case 'customer.groups': $this->setGroups( $value ); break;
 				case 'customer.password': $this->setPassword( $value ); break;
 				case 'customer.dateverified': $this->setDateVerified( $value ); break;
 				default: $unknown[$key] = $value;
@@ -338,6 +339,7 @@ class Standard extends Base implements Iface
 		$list['customer.code'] = $this->getCode();
 		$list['customer.birthday'] = $this->getBirthday();
 		$list['customer.status'] = $this->getStatus();
+		$list['customer.groups'] = $this->getGroups();
 		$list['customer.password'] = $this->getPassword();
 		$list['customer.dateverified'] = $this->getDateVerified();
 
