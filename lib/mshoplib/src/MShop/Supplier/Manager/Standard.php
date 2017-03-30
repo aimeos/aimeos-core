@@ -559,7 +559,7 @@ class Standard
 		}
 
 		$addrItems = [];
-		if( in_array( 'address', $ref, true ) ) {
+		if( in_array( 'supplier/address', $ref, true ) ) {
 			$addrItems = $this->getAddressItems( array_keys( $map ) );
 		}
 

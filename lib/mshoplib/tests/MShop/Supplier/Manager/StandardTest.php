@@ -236,7 +236,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'supplier.code', 'unitCode001' ) );
 
-		$results = $this->object->searchItems( $search, ['address', 'text'] );
+		$results = $this->object->searchItems( $search, ['supplier/address', 'text'] );
 
 		if( ( $item = reset( $results ) ) === false ) {
 			throw new \Exception( 'No supplier item for "unitCode001" available' );
