@@ -250,12 +250,7 @@ class Standard
 	 */
 	public function findItem( $code, array $ref = [], $domain = null, $type = null )
 	{
-		$find = array(
-			'service.code' => $code,
-			'service.type.domain' => $domain,
-			'service.type.code' => $type,
-		);
-		return $this->findItemBase( $find, $ref );
+		return $this->findItemBase( ['service.code' => $code], $ref );
 	}
 
 

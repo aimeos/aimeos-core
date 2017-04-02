@@ -49,7 +49,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msser_id' );
-			$table->addUniqueIndex( array( 'siteid', 'typeid', 'code' ), 'unq_msser_siteid_typeid_code' );
+			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_msser_siteid_code' );
 			$table->addIndex( array( 'siteid', 'status' ), 'idx_msser_sid_status' );
 			$table->addIndex( array( 'siteid', 'provider' ), 'idx_msser_sid_prov' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msser_sid_code' );
