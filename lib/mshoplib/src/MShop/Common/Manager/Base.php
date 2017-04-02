@@ -48,7 +48,7 @@ abstract class Base
 	 */
 	public function __call( $name, array $param )
 	{
-		throw new \Aimeos\MShop\Common\Manager\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
+		throw new \Aimeos\MShop\Exception( sprintf( 'Unable to call method "%1$s"', $name ) );
 	}
 
 
