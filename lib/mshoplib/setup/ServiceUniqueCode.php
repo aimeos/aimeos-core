@@ -37,7 +37,7 @@ class ServiceUniqueCode extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
-	 * @return array List of task names
+	 * @return string[] List of task names
 	 */
 	public function getPostDependencies()
 	{
@@ -47,8 +47,6 @@ class ServiceUniqueCode extends \Aimeos\MW\Setup\Task\Base
 
 	/**
 	 * Renames all order tables if they exist.
-	 *
-	 * @param array $stmts Associative array of tables names and lists of SQL statements to execute.
 	 */
 	public function migrate()
 	{
