@@ -19,7 +19,7 @@ class ServiceUniqueCode extends \Aimeos\MW\Setup\Task\Base
 	';
 	private $update = '
 		UPDATE "mshop_service" SET "code"=? WHERE "code"=?
-		AND (SELECT "id" FROM "mshop_service_type" WHERE "code"=\'delivery\')
+		AND "id" IN ( SELECT "id" FROM "mshop_service_type" WHERE "code"=\'delivery\' )
 	';
 
 
