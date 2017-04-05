@@ -17,8 +17,8 @@ class APCTest extends \PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		if( function_exists( 'apc_store' ) === false ) {
-			$this->markTestSkipped( 'APC not installed' );
+		if( function_exists( 'apcu_store' ) === false ) {
+			$this->markTestSkipped( 'APCu not installed' );
 		}
 
 		$conf = new \Aimeos\MW\Config\PHPArray( [] );
