@@ -33,7 +33,7 @@ class APC
 	 */
 	public function __construct( \Aimeos\MW\Translation\Iface $object, $prefix = '' )
 	{
-		if( function_exists( 'apc_store' ) === false ) {
+		if( function_exists( 'apcu_store' ) === false ) {
 			throw new \Aimeos\MW\Translation\Exception( 'APC not available' );
 		}
 
@@ -55,7 +55,7 @@ class APC
 
 		// regular cache
 		$success = false;
-		$value = apc_fetch( $key, $success );
+		$value = apcu_fetch( $key, $success );
 
 		if( $success === true ) {
 			return $value;
@@ -64,7 +64,7 @@ class APC
 		// not cached
 		$value = parent::dt( $domain, $string );
 
-		apc_store( $key, $value );
+		apcu_store( $key, $value );
 
 		return $value;
 	}
@@ -87,7 +87,7 @@ class APC
 
 		// regular cache
 		$success = false;
-		$value = apc_fetch( $key, $success );
+		$value = apcu_fetch( $key, $success );
 
 		if( $success === true ) {
 			return $value;
@@ -96,7 +96,7 @@ class APC
 		// not cached
 		$value = parent::dn( $domain, $singular, $plural, $number );
 
-		apc_store( $key, $value );
+		apcu_store( $key, $value );
 
 		return $value;
 	}
