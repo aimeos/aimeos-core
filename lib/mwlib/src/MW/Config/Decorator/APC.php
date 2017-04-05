@@ -33,8 +33,8 @@ class APC
 	 */
 	public function __construct( \Aimeos\MW\Config\Iface $object, $prefix = '' )
 	{
-		if( function_exists( 'apc_store' ) === false ) {
-			throw new \Aimeos\MW\Config\Exception( 'APC not available' );
+		if( function_exists( 'apcu_store' ) === false ) {
+			throw new \Aimeos\MW\Config\Exception( 'APCu not available' );
 		}
 
 		parent::__construct( $object );
@@ -55,7 +55,7 @@ class APC
 
 		// negative cache
 		$success = false;
-		apc_fetch( '-' . $this->prefix . $path, $success );
+		apcu_fetch( '-' . $this->prefix . $path, $success );
 
 		if( $success === true ) {
 			return $default;
@@ -63,7 +63,7 @@ class APC
 
 		// regular cache
 		$success = false;
-		$value = apc_fetch( $this->prefix . $path, $success );
+		$value = apcu_fetch( $this->prefix . $path, $success );
 
 		if( $success === true ) {
 			return $value;
@@ -72,11 +72,11 @@ class APC
 		// not cached
 		if( ( $value = parent::get( $path, null ) ) === null )
 		{
-			apc_store( '-' . $this->prefix . $path, null );
+			apcu_store( '-' . $this->prefix . $path, null );
 			return $default;
 		}
 
-		apc_store( $this->prefix . $path, $value );
+		apcu_store( $this->prefix . $path, $value );
 
 		return $value;
 	}
@@ -94,6 +94,6 @@ class APC
 
 		parent::set( $path, $value );
 
-		apc_store( $this->prefix . $path, $value );
+		apcu_store( $this->prefix . $path, $value );
 	}
 }
