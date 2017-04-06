@@ -226,9 +226,10 @@ class Standard
 	/**
 	 * Returns an associative list of item properties.
 	 *
+	 * @param boolean True to return private properties, false for public only
 	 * @return array List of item properties.
 	 */
-	public function toArray()
+	public function toArray( $private = false )
 	{
 		$list = parent::toArray();
 

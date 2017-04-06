@@ -397,9 +397,10 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Returns the item values as array.
 	 *
+	 * @param boolean True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray()
+	public function toArray( $private = false )
 	{
 		$price = $this->price;
 		$locale = $this->locale;

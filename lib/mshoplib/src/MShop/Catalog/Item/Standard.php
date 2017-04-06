@@ -261,9 +261,10 @@ class Standard
 	/**
 	 * Returns the public values of the node as array.
 	 *
+	 * @param boolean True to return private properties, false for public only
 	 * @return array Assciative list of key/value pairs
 	 */
-	public function toArray()
+	public function toArray( $private = false )
 	{
 		return array(
 			'catalog.id' => $this->getId(),

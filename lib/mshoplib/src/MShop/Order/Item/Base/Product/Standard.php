@@ -633,9 +633,10 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the item values as associative list.
 	 *
+	 * @param boolean True to return private properties, false for public only
 	 * @return array Associative list of item properties and their values
 	 */
-	public function toArray()
+	public function toArray( $private = false )
 	{
 		$list = parent::toArray();
 
