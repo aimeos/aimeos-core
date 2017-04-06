@@ -153,10 +153,13 @@ abstract class Base
 
 	/**
 	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setModified()
 	{
 		$this->modified = true;
+		return $this;
 	}
 
 

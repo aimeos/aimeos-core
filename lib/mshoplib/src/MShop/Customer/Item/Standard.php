@@ -57,10 +57,8 @@ class Standard extends Base implements Iface
 	{
 		parent::setId( $id );
 
-		// set modified flag
-		$addr = $this->getPaymentAddress();
-		$addr->setId( null );
-		$addr->setId( $this->getId() );
+		// set new ID and modified flag
+		$this->getPaymentAddress()->setId( null )->setId( $this->getId() );
 
 		return $this;
 	}
