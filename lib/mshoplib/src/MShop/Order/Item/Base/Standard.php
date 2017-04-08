@@ -402,8 +402,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function toArray( $private = false )
 	{
-		$price = $this->price;
-		$locale = $this->locale;
+		$price = $this->getPrice();
+		$locale = $this->getLocale();
 
 		return array(
 			'order.base.id' => $this->getId(),
