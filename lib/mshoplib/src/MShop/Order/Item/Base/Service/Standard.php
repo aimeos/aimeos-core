@@ -310,11 +310,10 @@ class Standard extends Base implements Iface
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$price = $this->price;
 
-		$list['order.base.service.baseid'] = $this->getBaseId();
 		$list['order.base.service.code'] = $this->getCode();
 		$list['order.base.service.serviceid'] = $this->getServiceId();
 		$list['order.base.service.name'] = $this->getName();
@@ -324,6 +323,10 @@ class Standard extends Base implements Iface
 		$list['order.base.service.costs'] = $price->getCosts();
 		$list['order.base.service.rebate'] = $price->getRebate();
 		$list['order.base.service.taxrate'] = $price->getTaxRate();
+
+		if( $private === true ) {
+			$list['order.base.service.baseid'] = $this->getBaseId();
+		}
 
 		return $list;
 	}

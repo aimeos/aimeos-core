@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$values = $this->object->toArray();
+		$values = $this->object->toArray( true );
 
 		$this->assertEquals( count( $this->values ), count( $values ) );
 

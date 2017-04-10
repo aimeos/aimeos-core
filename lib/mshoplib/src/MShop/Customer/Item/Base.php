@@ -206,7 +206,7 @@ abstract class Base
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['customer.salutation'] = $this->getPaymentAddress()->getSalutation();
 		$list['customer.company'] = $this->getPaymentAddress()->getCompany();

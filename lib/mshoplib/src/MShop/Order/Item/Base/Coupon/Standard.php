@@ -178,11 +178,14 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
-		$list['order.base.coupon.baseid'] = $this->getBaseId();
 		$list['order.base.coupon.productid'] = $this->getProductId();
 		$list['order.base.coupon.code'] = $this->getCode();
+
+		if( $private === true ) {
+			$list['order.base.coupon.baseid'] = $this->getBaseId();
+		}
 
 		return $list;
 	}

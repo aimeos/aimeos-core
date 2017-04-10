@@ -194,13 +194,17 @@ abstract class Base
 	 */
 	public function toArray( $private = false )
 	{
-		return array(
-			$this->prefix . 'id' => $this->getId(),
-			$this->prefix . 'siteid' => $this->getSiteId(),
-			$this->prefix . 'ctime' => $this->getTimeCreated(),
-			$this->prefix . 'mtime' => $this->getTimeModified(),
-			$this->prefix . 'editor' => $this->getEditor(),
-		);
+		$list = [$this->prefix . 'id' => $this->getId()];
+
+		if( $private === true )
+		{
+			$list[$this->prefix . 'siteid'] = $this->getSiteId();
+			$list[$this->prefix . 'ctime'] = $this->getTimeCreated();
+			$list[$this->prefix . 'mtime'] = $this->getTimeModified();
+			$list[$this->prefix . 'editor'] = $this->getEditor();
+		}
+
+		return $list;
 	}
 
 

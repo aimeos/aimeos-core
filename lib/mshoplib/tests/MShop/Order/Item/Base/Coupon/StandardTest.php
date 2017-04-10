@@ -174,7 +174,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$array = $this->object->toArray();
+		$array = $this->object->toArray( true );
+
 		$this->assertEquals( count( $this->values ), count( $array ) );
 
 		$this->assertEquals( $this->object->getId(), $array['order.base.coupon.id'] );

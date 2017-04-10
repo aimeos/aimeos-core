@@ -266,18 +266,24 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		return array(
+		$list = array(
 			'catalog.id' => $this->getId(),
 			'catalog.code' => $this->getCode(),
 			'catalog.label' => $this->getLabel(),
 			'catalog.status' => $this->getStatus(),
 			'catalog.config' => $this->getConfig(),
-			'catalog.siteid' => $this->getSiteId(),
-			'catalog.ctime' => $this->getTimeCreated(),
-			'catalog.mtime' => $this->getTimeModified(),
-			'catalog.editor' => $this->getEditor(),
 			'catalog.hasChildren' => $this->hasChildren()
 		);
+
+		if( $private === true )
+		{
+			$list['catalog.siteid'] = $this->getSiteId();
+			$list['catalog.ctime'] = $this->getTimeCreated();
+			$list['catalog.mtime'] = $this->getTimeModified();
+			$list['catalog.editor'] = $this->getEditor();
+		}
+
+		return $list;
 	}
 
 

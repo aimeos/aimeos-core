@@ -332,15 +332,19 @@ class Standard extends Base implements Iface
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['customer.label'] = $this->getLabel();
 		$list['customer.code'] = $this->getCode();
 		$list['customer.birthday'] = $this->getBirthday();
 		$list['customer.status'] = $this->getStatus();
-		$list['customer.groups'] = $this->getGroups();
-		$list['customer.password'] = $this->getPassword();
-		$list['customer.dateverified'] = $this->getDateVerified();
+
+		if( $private === true )
+		{
+			$list['customer.groups'] = $this->getGroups();
+			$list['customer.password'] = $this->getPassword();
+			$list['customer.dateverified'] = $this->getDateVerified();
+		}
 
 		return $list;
 	}

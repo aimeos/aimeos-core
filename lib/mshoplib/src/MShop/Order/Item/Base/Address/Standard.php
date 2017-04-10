@@ -186,11 +186,15 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
-		$list['order.base.address.baseid'] = $this->getBaseId();
-		$list['order.base.address.addressid'] = $this->getAddressId();
 		$list['order.base.address.type'] = $this->getType();
+
+		if( $private === true )
+		{
+			$list['order.base.address.baseid'] = $this->getBaseId();
+			$list['order.base.address.addressid'] = $this->getAddressId();
+		}
 
 		return $list;
 	}

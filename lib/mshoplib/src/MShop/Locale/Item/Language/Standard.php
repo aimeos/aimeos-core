@@ -230,7 +230,7 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['locale.language.id'] = $this->getId();
 		$list['locale.language.code'] = $this->getCode();

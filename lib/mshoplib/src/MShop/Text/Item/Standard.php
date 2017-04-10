@@ -313,18 +313,20 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['text.languageid'] = $this->getLanguageId();
 		$list['text.typename'] = $this->getTypeName();
-		$list['text.typeid'] = $this->getTypeId();
 		$list['text.type'] = $this->getType();
 		$list['text.label'] = $this->getLabel();
 		$list['text.domain'] = $this->getDomain();
 		$list['text.content'] = $this->getContent();
 		$list['text.status'] = $this->getStatus();
 
+		if( $private === true ) {
+			$list['text.typeid'] = $this->getTypeId();
+		}
+
 		return $list;
 	}
 }
-;

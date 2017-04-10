@@ -168,7 +168,8 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$list = $this->object->toArray();
+		$list = $this->object->toArray( true );
+
 		$this->assertEquals( count( $this->values ), count( $list ) );
 
 		$this->assertEquals( $this->object->getId(), $list['order.status.id'] );

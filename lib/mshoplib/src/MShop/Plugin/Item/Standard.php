@@ -307,16 +307,19 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['plugin.type'] = $this->getType();
 		$list['plugin.typename'] = $this->getTypeName();
-		$list['plugin.typeid'] = $this->getTypeId();
 		$list['plugin.label'] = $this->getLabel();
 		$list['plugin.provider'] = $this->getProvider();
 		$list['plugin.config'] = $this->getConfig();
 		$list['plugin.status'] = $this->getStatus();
 		$list['plugin.position'] = $this->getPosition();
+
+		if( $private === true ) {
+			$list['plugin.typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}

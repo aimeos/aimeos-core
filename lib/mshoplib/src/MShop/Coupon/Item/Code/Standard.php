@@ -246,13 +246,16 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['coupon.code.count'] = $this->getCount();
 		$list['coupon.code.code'] = $this->getCode();
-		$list['coupon.code.parentid'] = $this->getParentId();
 		$list['coupon.code.datestart'] = $this->getDateStart();
 		$list['coupon.code.dateend'] = $this->getDateEnd();
+
+		if( $private === true ) {
+			$list['coupon.code.parentid'] = $this->getParentId();
+		}
 
 		return $list;
 	}

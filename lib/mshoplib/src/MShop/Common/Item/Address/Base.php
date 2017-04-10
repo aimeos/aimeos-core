@@ -853,7 +853,7 @@ abstract class Base
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list[$this->prefix . 'salutation'] = $this->getSalutation();
 		$list[$this->prefix . 'company'] = $this->getCompany();

@@ -198,10 +198,13 @@ class Standard
 		$list = [];
 
 		$list['cache.id'] = $this->getId();
-		$list['cache.siteid'] = $this->getSiteId();
 		$list['cache.value'] = $this->getValue();
 		$list['cache.expire'] = $this->getTimeExpire();
 		$list['cache.tags'] = $this->getTags();
+
+		if( $private === true ) {
+			$list['cache.siteid'] = $this->getSiteId();
+		}
 
 		return $list;
 	}

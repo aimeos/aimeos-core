@@ -405,22 +405,28 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$price = $this->getPrice();
 		$locale = $this->getLocale();
 
-		return array(
+		$list = array(
 			'order.base.id' => $this->getId(),
-			'order.base.siteid' => $this->getSiteId(),
+			'order.base.customerid' => $this->getCustomerId(),
 			'order.base.sitecode' => $this->getSiteCode(),
 			'order.base.languageid' => $locale->getLanguageId(),
-			'order.base.comment' => $this->getComment(),
-			'order.base.customerid' => $this->getCustomerId(),
+			'order.base.currencyid' => $price->getCurrencyId(),
 			'order.base.price' => $price->getValue(),
 			'order.base.costs' => $price->getCosts(),
 			'order.base.rebate' => $price->getRebate(),
-			'order.base.currencyid' => $price->getCurrencyId(),
 			'order.base.status' => $this->getStatus(),
-			'order.base.mtime' => $this->getTimeModified(),
-			'order.base.ctime' => $this->getTimeCreated(),
-			'order.base.editor' => $this->getEditor(),
+			'order.base.comment' => $this->getComment(),
 		);
+
+		if( $private === true )
+		{
+			$list['order.base.siteid'] = $this->getSiteId();
+			$list['order.base.mtime'] = $this->getTimeModified();
+			$list['order.base.ctime'] = $this->getTimeCreated();
+			$list['order.base.editor'] = $this->getEditor();
+		}
+
+		return $list;
 	}
 
 
