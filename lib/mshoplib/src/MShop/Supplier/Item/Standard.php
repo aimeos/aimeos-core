@@ -210,7 +210,7 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['supplier.code'] = $this->getCode();
 		$list['supplier.label'] = $this->getLabel();

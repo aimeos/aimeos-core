@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->object->toArray();
+		$arrayObject = $this->object->toArray( true );
 		$this->assertEquals( ( count( $this->values ) + 1 ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['locale.language.id'] );

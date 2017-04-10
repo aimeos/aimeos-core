@@ -279,7 +279,7 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['coupon.config'] = $this->getConfig();
 		$list['coupon.label'] = $this->getLabel();

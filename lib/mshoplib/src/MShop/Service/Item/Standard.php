@@ -341,10 +341,9 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['service.typename'] = $this->getTypeName();
-		$list['service.typeid'] = $this->getTypeId();
 		$list['service.type'] = $this->getType();
 		$list['service.code'] = $this->getCode();
 		$list['service.label'] = $this->getLabel();
@@ -352,6 +351,10 @@ class Standard
 		$list['service.position'] = $this->getPosition();
 		$list['service.config'] = $this->getConfig();
 		$list['service.status'] = $this->getStatus();
+
+		if( $private === true ) {
+			$list['service.typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}

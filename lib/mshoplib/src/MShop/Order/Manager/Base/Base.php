@@ -237,13 +237,13 @@ abstract class Base
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return \Aimeos\MShop\Order\Item\Base\Standard The loaded order item for the given ID
 	 */
-	protected function loadItems( $id, \Aimeos\MShop\Price\Item\Iface$price,
+	protected function loadItems( $id, \Aimeos\MShop\Price\Item\Iface $price,
 		\Aimeos\MShop\Locale\Item\Iface $localeItem, $row, $parts )
 	{
 		$products = $coupons = $addresses = $services = [];
 
 		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT
-				|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON
+			|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON
 		) {
 			$products = $this->loadProducts( $id, false );
 		}

@@ -164,14 +164,14 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
+		$list = parent::toArray( $private );
 
-		$list = parent::toArray();
-
-		$list['order.status.parentid'] = $this->getParentId();
 		$list['order.status.type'] = $this->getType();
 		$list['order.status.value'] = $this->getValue();
 
-
+		if( $private === true ) {
+			$list['order.status.parentid'] = $this->getParentId();
+		}
 
 		return $list;
 	}

@@ -315,16 +315,19 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['attribute.domain'] = $this->getDomain();
 		$list['attribute.code'] = $this->getCode();
 		$list['attribute.status'] = $this->getStatus();
-		$list['attribute.typeid'] = $this->getTypeId();
 		$list['attribute.type'] = $this->getType();
 		$list['attribute.typename'] = $this->getTypeName();
 		$list['attribute.position'] = $this->getPosition();
 		$list['attribute.label'] = $this->getLabel();
+
+		if( $private === true ) {
+			$list['attribute.typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}

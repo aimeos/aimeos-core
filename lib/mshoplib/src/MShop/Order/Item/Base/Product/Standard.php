@@ -638,11 +638,8 @@ class Standard extends Base implements Iface
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
-		$list['order.base.product.baseid'] = $this->getBaseId();
-		$list['order.base.product.siteid'] = $this->getSiteId();
-		$list['order.base.product.ordprodid'] = $this->getOrderProductId();
 		$list['order.base.product.type'] = $this->getType();
 		$list['order.base.product.stocktype'] = $this->getStockType();
 		$list['order.base.product.suppliercode'] = $this->getSupplierCode();
@@ -658,6 +655,12 @@ class Standard extends Base implements Iface
 		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.status'] = $this->getStatus();
 		$list['order.base.product.flags'] = $this->getFlags();
+
+		if( $private === true )
+		{
+			$list['order.base.product.baseid'] = $this->getBaseId();
+			$list['order.base.product.ordprodid'] = $this->getOrderProductId();
+		}
 
 		return $list;
 	}

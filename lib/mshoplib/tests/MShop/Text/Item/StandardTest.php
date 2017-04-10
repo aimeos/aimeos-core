@@ -240,7 +240,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$data = $this->object->toArray();
+		$data = $this->object->toArray( true );
+
+		$this->assertEquals( count( $this->values ), count( $data ) );
 
 		$this->assertEquals( $this->object->getId(), $data['text.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $data['text.siteid'] );

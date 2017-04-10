@@ -566,9 +566,8 @@ class Standard extends Base
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
-		$list['price.typeid'] = $this->getTypeId();
 		$list['price.type'] = $this->getType();
 		$list['price.typename'] = $this->getTypeName();
 		$list['price.currencyid'] = $this->getCurrencyId();
@@ -582,6 +581,10 @@ class Standard extends Base
 		$list['price.taxflag'] = $this->getTaxFlag();
 		$list['price.status'] = $this->getStatus();
 		$list['price.label'] = $this->getLabel();
+
+		if( $private === true ) {
+			$list['price.typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}

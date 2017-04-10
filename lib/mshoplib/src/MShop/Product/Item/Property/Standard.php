@@ -242,14 +242,18 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
-		$list['product.property.parentid'] = $this->getParentId();
-		$list['product.property.typeid'] = $this->getTypeId();
 		$list['product.property.typename'] = $this->getTypeName();
 		$list['product.property.languageid'] = $this->getLanguageId();
 		$list['product.property.value'] = $this->getValue();
 		$list['product.property.type'] = $this->getType();
+
+		if( $private === true )
+		{
+			$list['product.property.parentid'] = $this->getParentId();
+			$list['product.property.typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}

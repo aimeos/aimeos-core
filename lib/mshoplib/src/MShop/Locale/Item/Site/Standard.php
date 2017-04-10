@@ -224,7 +224,7 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['locale.site.siteid'] = $this->getSiteId();
 		$list['locale.site.code'] = $this->getCode();

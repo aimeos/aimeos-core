@@ -297,14 +297,17 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['order.base.service.attribute.attrid'] = $this->getAttributeId();
-		$list['order.base.service.attribute.parentid'] = $this->getParentId();
 		$list['order.base.service.attribute.type'] = $this->getType();
 		$list['order.base.service.attribute.name'] = $this->getName();
 		$list['order.base.service.attribute.code'] = $this->getCode();
 		$list['order.base.service.attribute.value'] = $this->getValue();
+
+		if( $private === true ) {
+			$list['order.base.service.attribute.parentid'] = $this->getParentId();
+		}
 
 		return $list;
 	}

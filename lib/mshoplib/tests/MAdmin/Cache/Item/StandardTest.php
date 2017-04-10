@@ -141,7 +141,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$list = $this->object->toArray();
+		$list = $this->object->toArray( true );
 
 		$this->assertEquals( 5, count( $list ) );
 		$this->assertEquals( 'product/id/1:detail-body', $list['cache.id'] );

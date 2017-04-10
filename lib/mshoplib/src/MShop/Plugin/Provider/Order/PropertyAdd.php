@@ -123,7 +123,7 @@ class PropertyAdd
 	protected function addAttributes( \Aimeos\MShop\Common\Item\Iface $item, \Aimeos\MShop\Order\Item\Base\Product\Iface $product, array $properties )
 	{
 		$attributeList = $product->getAttributes();
-		$itemProperties = $item->toArray();
+		$itemProperties = $item->toArray( true );
 
 		foreach( $properties as $code )
 		{

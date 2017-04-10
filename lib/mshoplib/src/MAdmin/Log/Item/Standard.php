@@ -204,7 +204,7 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['log.facility'] = $this->getFacility();
 		$list['log.timestamp'] = $this->getTimestamp();

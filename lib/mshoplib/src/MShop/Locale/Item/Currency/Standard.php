@@ -228,7 +228,8 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
+
 		$list['locale.currency.id'] = $this->getId();
 		$list['locale.currency.code'] = $this->getCode();
 		$list['locale.currency.label'] = $this->getLabel();

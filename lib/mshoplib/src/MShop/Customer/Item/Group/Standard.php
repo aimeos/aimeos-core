@@ -145,7 +145,7 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['customer.group.code'] = $this->getCode();
 		$list['customer.group.label'] = $this->getLabel();

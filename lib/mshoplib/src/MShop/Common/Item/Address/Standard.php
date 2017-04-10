@@ -136,12 +136,15 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$properties = parent::toArray();
+		$list = parent::toArray( $private );
 
-		$properties[$this->prefix . 'parentid'] = $this->getParentId();
-		$properties[$this->prefix . 'position'] = $this->getPosition();
+		$list[$this->prefix . 'position'] = $this->getPosition();
 
-		return $properties;
+		if( $private === true ) {
+			$list[$this->prefix . 'parentid'] = $this->getParentId();
+		}
+
+		return $list;
 	}
 
 }

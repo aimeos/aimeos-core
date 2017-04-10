@@ -382,18 +382,21 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['media.domain'] = $this->getDomain();
 		$list['media.label'] = $this->getLabel();
 		$list['media.languageid'] = $this->getLanguageId();
 		$list['media.mimetype'] = $this->getMimeType();
-		$list['media.typeid'] = $this->getTypeId();
 		$list['media.type'] = $this->getType();
 		$list['media.typename'] = $this->getTypeName();
 		$list['media.preview'] = $this->getPreview();
 		$list['media.url'] = $this->getUrl();
 		$list['media.status'] = $this->getStatus();
+
+		if( $private === true ) {
+			$list['media.typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}

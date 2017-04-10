@@ -301,6 +301,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			'common.lists.type' => 'test',
 		);
 
-		$this->assertEquals( $expected, $this->object->toArray() );
+		$this->assertEquals( $expected, $this->object->toArray( true ) );
 	}
 }

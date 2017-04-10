@@ -16,6 +16,7 @@ namespace Aimeos\MShop\Supplier\Item;
 class StandardTest extends \PHPUnit_Framework_TestCase
 {
 	private $object;
+	private $values;
 
 
 	/**
@@ -26,7 +27,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$values = array(
+		$this->values = array(
 			'supplier.id' => 541,
 			'supplier.siteid' => 99,
 			'supplier.label' => 'unitObject',
@@ -42,7 +43,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 			-2 => new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', ['supplier.address.position' => 0] ),
 		);
 
-		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $values, [], [], $addresses );
+		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $this->values, [], [], $addresses );
 	}
 
 	/**
@@ -184,7 +185,9 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 
 	public function testToArray()
 	{
-		$arrayObject = $this->object->toArray();
+		$arrayObject = $this->object->toArray( true );
+
+		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['supplier.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['supplier.siteid'] );

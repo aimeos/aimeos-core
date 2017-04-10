@@ -373,10 +373,9 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['product.typename'] = $this->getTypeName();
-		$list['product.typeid'] = $this->getTypeId();
 		$list['product.type'] = $this->getType();
 		$list['product.code'] = $this->getCode();
 		$list['product.label'] = $this->getLabel();
@@ -384,6 +383,10 @@ class Standard
 		$list['product.datestart'] = $this->getDateStart();
 		$list['product.dateend'] = $this->getDateEnd();
 		$list['product.config'] = $this->getConfig();
+
+		if( $private === true ) {
+			$list['product.typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}

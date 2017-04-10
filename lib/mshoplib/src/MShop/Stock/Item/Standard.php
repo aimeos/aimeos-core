@@ -242,14 +242,17 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
 		$list['stock.productcode'] = $this->getProductCode();
 		$list['stock.stocklevel'] = $this->getStocklevel();
 		$list['stock.dateback'] = $this->getDateBack();
 		$list['stock.typename'] = $this->getTypeName();
-		$list['stock.typeid'] = $this->getTypeId();
 		$list['stock.type'] = $this->getType();
+
+		if( $private === true ) {
+			$list['stock.typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}

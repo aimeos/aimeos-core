@@ -440,10 +440,8 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = parent::toArray();
+		$list = parent::toArray( $private );
 
-		$list[$this->prefix . 'parentid'] = $this->getParentId();
-		$list[$this->prefix . 'typeid'] = $this->getTypeId();
 		$list[$this->prefix . 'domain'] = $this->getDomain();
 		$list[$this->prefix . 'refid'] = $this->getRefId();
 		$list[$this->prefix . 'datestart'] = $this->getDateStart();
@@ -453,6 +451,12 @@ class Standard
 		$list[$this->prefix . 'status'] = $this->getStatus();
 		$list[$this->prefix . 'typename'] = $this->getTypeName();
 		$list[$this->prefix . 'type'] = $this->getType();
+
+		if( $private === true )
+		{
+			$list[$this->prefix . 'parentid'] = $this->getParentId();
+			$list[$this->prefix . 'typeid'] = $this->getTypeId();
+		}
 
 		return $list;
 	}
