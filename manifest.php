@@ -13,9 +13,7 @@ return array(
 	'include' => array(
 		'lib/mshoplib/src',
 		'lib/mwlib/src',
-		'client/html/src',
 		'controller/common/src',
-		'controller/frontend/src',
 		'controller/jobs/src',
 	),
 	'config' => array(
@@ -23,12 +21,7 @@ return array(
 		'config',
 	),
 	'i18n' => array(
-		'client' => 'client/i18n',
-		'client/code' => 'client/i18n/code',
-		'client/country' => 'client/i18n/country',
-		'client/currency' => 'client/i18n/currency',
-		'client/language' => 'client/i18n/language',
-		'controller/frontend' => 'controller/frontend/i18n',
+		'controller/common' => 'controller/common/i18n',
 		'controller/jobs' => 'controller/jobs/i18n',
 		'mshop/code' => 'lib/mshoplib/i18n/code',
 		'mshop' => 'lib/mshoplib/i18n',
