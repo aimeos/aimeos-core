@@ -22,6 +22,7 @@ class APC
 	extends \Aimeos\MW\Config\Decorator\Base
 	implements \Aimeos\MW\Config\Decorator\Iface
 {
+	private $enable = false;
 	private $prefix;
 
 
@@ -33,12 +34,13 @@ class APC
 	 */
 	public function __construct( \Aimeos\MW\Config\Iface $object, $prefix = '' )
 	{
-		if( function_exists( 'apcu_store' ) === false ) {
-			throw new \Aimeos\MW\Config\Exception( 'APCu not available' );
-		}
-
 		parent::__construct( $object );
-		$this->prefix = $prefix;
+
+		if( function_exists( 'apcu_store' ) === true )
+		{
+			$this->enable = true;
+			$this->prefix = $prefix;
+		}
 	}
 
 
@@ -51,6 +53,10 @@ class APC
 	 */
 	public function get( $path, $default = null )
 	{
+		if( $this->enable === false ) {
+			return parent::get( $path, $default );
+		}
+
 		$path = trim( $path, '/' );
 
 		// negative cache
@@ -90,6 +96,10 @@ class APC
 	 */
 	public function set( $path, $value )
 	{
+		if( $this->enable === false ) {
+			return parent::set( $path, $value );
+		}
+
 		$path = trim( $path, '/' );
 
 		parent::set( $path, $value );
