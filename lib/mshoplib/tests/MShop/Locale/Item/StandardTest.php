@@ -141,13 +141,6 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	}
 
 
-	public function testSetLanguageIdCountryInvalidLowerCase()
-	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->setLanguageId( 'en_gb' );
-	}
-
-
 	public function testGetCurrencyId()
 	{
 		$this->assertEquals( 'EUR', $this->object->getCurrencyId() );
