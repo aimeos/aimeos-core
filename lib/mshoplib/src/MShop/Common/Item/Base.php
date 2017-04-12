@@ -300,10 +300,6 @@ abstract class Base
 	 */
 	protected function checkLanguageId( $langid, $null = true )
 	{
-		if( $langid === '' ) {
-			$langid = null;
-		}
-
 		if( $null === false && $langid == null ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', '<null>' ) );
 		}
