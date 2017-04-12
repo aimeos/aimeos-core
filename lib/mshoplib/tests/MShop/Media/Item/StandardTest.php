@@ -145,7 +145,7 @@ class StandardTest extends \PHPUnit_Framework_TestCase
 	public function testSetLanguageIdInvalid()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->setLanguageId( 'EN' );
+		$this->object->setLanguageId( '00' );
 	}
 
 

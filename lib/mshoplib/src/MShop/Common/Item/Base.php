@@ -310,11 +310,18 @@ abstract class Base
 
 		if( $langid != null )
 		{
-			if( preg_match( '/^[a-z]{2}(_[A-Z]{2})?$/', $langid ) !== 1 ) {
+			if( preg_match( '/^[a-zA-Z]{2}(_[a-zA-Z]{2})?$/', $langid ) !== 1 ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO language code "%1$s"', $langid ) );
 			}
 
-			return $langid;
+			$parts = explode( '_', $langid );
+			$parts[0] = strtolower( $parts[0] );
+
+			if( isset( $parts[1] ) ) {
+				$parts[1] = strtoupper( $parts[1] );
+			}
+
+			return implode( '_', $parts );
 		}
 	}
 
