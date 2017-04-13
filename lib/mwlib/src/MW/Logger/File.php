@@ -63,7 +63,7 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 				$message = json_encode( $message );
 			}
 
-			$message = '<' . $facility . '> ' . date( 'Y-m-d H:i:s' ) . ' ' . $priority . ' ' . $message;
+			$message = '<' . $facility . '> ' . date( 'Y-m-d H:i:s' ) . ' ' . $priority . ' ' . $message . PHP_EOL;
 
 			if ( false === fwrite( $this->stream, $message ) ) {
 				throw new \Aimeos\MW\Logger\Exception( 'Unable to write to stream' );
