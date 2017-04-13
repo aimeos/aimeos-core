@@ -666,9 +666,8 @@ class Standard
 
 		$object = $this->addCouponDecorators( $item, $code, $provider, $names );
 		$object = $this->addCouponDecorators( $item, $code, $object, $decorators );
-		$object->setObject( $object );
 
-		return $object;
+		return $object->setObject( $object );
 	}
 
 

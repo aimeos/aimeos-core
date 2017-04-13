@@ -22,7 +22,6 @@ abstract class Base
 	extends \Aimeos\MShop\Coupon\Provider\Base
 {
 	private $provider;
-	private $object;
 
 
 	/**
@@ -88,27 +87,16 @@ abstract class Base
 
 
 	/**
-	 * Sets the reference of the outside object.
+	 * Injects the reference of the outmost object
 	 *
-	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outside provider or decorator
+	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outmost provider or decorator
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon object for chaining method calls
 	 */
 	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object )
 	{
+		parent::setObject( $object );
+
 		$this->provider->setObject( $object );
-		$this->object = $object;
-	}
-
-
-	/**
-	 * Returns the outmost decorator or a reference to the provider itself.
-	 *
-	 * @return \Aimeos\MShop\Coupon\Provider\Iface Outmost object
-	 */
-	protected function getObject()
-	{
-		if( isset( $this->object ) ) {
-			return $this->object;
-		}
 
 		return $this;
 	}

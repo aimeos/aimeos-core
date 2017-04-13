@@ -51,4 +51,12 @@ interface Iface
 	 * @return boolean True of coupon can be granted, false if not
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base );
+
+	/**
+	 * Injects the reference of the outmost object
+	 *
+	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outmost provider or decorator
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon object for chaining method calls
+	 */
+	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object );
 }

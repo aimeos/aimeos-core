@@ -81,13 +81,15 @@ abstract class Base implements Iface
 
 
 	/**
-	 * Sets the reference of the outside object.
+	 * Injects the reference of the outmost object
 	 *
-	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outside provider or decorator
+	 * @param \Aimeos\MShop\Coupon\Provider\Iface $object Reference to the outmost provider or decorator
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Coupon object for chaining method calls
 	 */
 	public function setObject( \Aimeos\MShop\Coupon\Provider\Iface $object )
 	{
 		$this->object = $object;
+		return $this;
 	}
 
 
@@ -144,13 +146,13 @@ abstract class Base implements Iface
 
 
 	/**
-	 * Returns the outmost decorator or a reference to the provider itself.
+	 * Returns the outmost decorator of the decorator stack
 	 *
-	 * @return \Aimeos\MShop\Coupon\Provider\Iface Outmost object
+	 * @return \Aimeos\MShop\Coupon\Provider\Iface Outmost decorator object
 	 */
 	protected function getObject()
 	{
-		if( isset( $this->object ) ) {
+		if( $this->object !== null ) {
 			return $this->object;
 		}
 
