@@ -344,7 +344,9 @@ class Standard
 		$decorators = $config->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', [] );
 
 		$provider = $this->addPluginDecorators( $item, $provider, $names );
-		return $this->addPluginDecorators( $item, $provider, $decorators );
+		$provider = $this->addPluginDecorators( $item, $provider, $decorators );
+
+		return $provider->setObject( $provider );
 	}
 
 

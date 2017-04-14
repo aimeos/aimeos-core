@@ -66,6 +66,22 @@ abstract class Base
 
 
 	/**
+	 * Injects the outmost object into the decorator stack
+	 *
+	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
+	 */
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object )
+	{
+		parent::setObject( $object );
+
+		$this->object->setObject( $object );
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the next provider or decorator.
 	 *
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Provider or decorator object

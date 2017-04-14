@@ -63,7 +63,6 @@ class ExampleTest extends \PHPUnit_Framework_TestCase
 	public function testUpdate()
 	{
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Example( \TestHelperMShop::getContext(), $this->plugin );
-
 		$this->assertTrue( $object->update( $this->order, 'test' ) );
 	}
 }

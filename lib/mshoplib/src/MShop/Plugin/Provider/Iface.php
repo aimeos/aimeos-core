@@ -20,4 +20,11 @@ namespace Aimeos\MShop\Plugin\Provider;
  */
 interface Iface extends \Aimeos\MW\Observer\Listener\Iface
 {
+	/**
+	 * Injects the outer object into the decorator stack
+	 *
+	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
+	 */
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object );
 }

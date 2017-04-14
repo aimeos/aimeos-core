@@ -55,7 +55,7 @@ class AddressesAvailableTest extends \PHPUnit_Framework_TestCase
 	{
 		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS not set, so update shall not be executed
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-		$this->assertTrue( $object->update( $this->order, 'check.after' ) );
+		$this->assertTrue( $object->setObject( $object )->update( $this->order, 'check.after' ) );
 	}
 
 	public function testEmptyConfig()

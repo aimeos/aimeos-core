@@ -68,7 +68,6 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 	public function testUpdateArticlePriceCorrect()
 	{
 		$this->plugin->setConfig( array( 'update' => true ) );
-
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
@@ -99,7 +98,6 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$orderProduct->setPrice( $productPrice );
 
 		$this->plugin->setConfig( array( 'update' => true ) );
-
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );
@@ -253,7 +251,6 @@ class ProductPriceTest extends \PHPUnit_Framework_TestCase
 		$product->setFlags( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_IMMUTABLE );
 
 		$oldPrice = clone $product->getPrice();
-
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( \TestHelperMShop::getContext(), $this->plugin );
 
 		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) );

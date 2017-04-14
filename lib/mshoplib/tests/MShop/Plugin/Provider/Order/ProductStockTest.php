@@ -57,6 +57,7 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 	{
 		$constant = \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT;
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
+
 		$this->assertTrue( $object->update( $this->order, 'check.after', $constant ) );
 	}
 
@@ -81,8 +82,8 @@ class ProductStockTest extends \PHPUnit_Framework_TestCase
 
 	public function testUpdateNoStockItem()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 		$this->order->addProduct( $this->getOrderProduct( 'QRST' ) );
+		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductStock( $this->context, $this->plugin );
 
 		try
 		{

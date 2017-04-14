@@ -22,6 +22,7 @@ abstract class Base
 {
 	private $item;
 	private $context;
+	private $object;
 
 
 	/**
@@ -34,6 +35,34 @@ abstract class Base
 	{
 		$this->item = $item;
 		$this->context = $context;
+	}
+
+
+	/**
+	 * Injects the outer object into the decorator stack
+	 *
+	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
+	 */
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object )
+	{
+		$this->object = $object;
+		return $this;
+	}
+
+
+	/**
+	 * Returns the first object of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface First object of the decorator stack
+	 */
+	protected function getObject()
+	{
+		if( $this->object !== null ) {
+			return $this->object;
+		}
+
+		return $this;
 	}
 
 

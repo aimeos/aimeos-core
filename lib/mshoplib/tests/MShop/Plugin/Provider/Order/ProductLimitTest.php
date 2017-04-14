@@ -56,7 +56,6 @@ class ProductLimitTest extends \PHPUnit_Framework_TestCase
 		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ProductLimit( \TestHelperMShop::getContext(), $this->plugin );
-
 	}
 
 

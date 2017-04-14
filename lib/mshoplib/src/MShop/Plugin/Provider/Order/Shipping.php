@@ -30,11 +30,11 @@ class Shipping
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this, 'addProduct.after' );
-		$p->addListener( $this, 'deleteProduct.after' );
-		$p->addListener( $this, 'setService.after' );
-		$p->addListener( $this, 'addCoupon.after' );
-		$p->addListener( $this, 'deleteCoupon.after' );
+		$p->addListener( $this->getObject(), 'addProduct.after' );
+		$p->addListener( $this->getObject(), 'deleteProduct.after' );
+		$p->addListener( $this->getObject(), 'setService.after' );
+		$p->addListener( $this->getObject(), 'addCoupon.after' );
+		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
 	}
 
 

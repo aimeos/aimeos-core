@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -28,7 +28,8 @@ class Log
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$this->getContext()->getLogger()->log( 'Plugin: ' . __METHOD__, \Aimeos\MW\Logger\Base::DEBUG );
+		$class = get_class( $this->getProvider() );
+		$this->getContext()->getLogger()->log( 'Plugin::register: ' . $class, \Aimeos\MW\Logger\Base::DEBUG );
 
 		$this->getProvider()->register( $p );
 	}
@@ -43,9 +44,17 @@ class Log
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		$msg = 'Plugin: ' . __METHOD__ . ', action: ' . $action . ( is_scalar( $value ) ? ', value: ' . $value : '' );
+		$class = get_class( $this->getProvider() );
+		$payload = ( is_object( $value ) ? get_class( $value ) : ( is_scalar( $value ) ? $value : '' ) );
+
+		$msg = 'Plugin::update:before: ' . $class . ', action: ' . $action . ', value: ' . $payload;
 		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG );
 
-		return $this->getProvider()->update( $order, $action, $value );
+		$result = $this->getProvider()->update( $order, $action, $value );
+
+		$msg = 'Plugin::update:after: ' . $class . ', action: ' . $action . ', value: ' . $payload;
+		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG );
+
+		return $result;
 	}
 }

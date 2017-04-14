@@ -29,7 +29,7 @@ class PropertyMatch
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$p->addListener( $this, 'addProduct.before' );
+		$p->addListener( $this->getObject(), 'addProduct.before' );
 	}
 
 

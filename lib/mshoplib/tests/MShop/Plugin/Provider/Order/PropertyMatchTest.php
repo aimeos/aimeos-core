@@ -56,7 +56,6 @@ class PropertyMatchTest extends \PHPUnit_Framework_TestCase
 		$this->order->__sleep(); // remove event listeners
 
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
-
 	}
 
 
