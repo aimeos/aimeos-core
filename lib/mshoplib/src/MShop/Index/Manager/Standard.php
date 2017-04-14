@@ -650,7 +650,7 @@ class Standard
 			{
 				$this->begin();
 
-				$this->deleteItems( $prodIds );
+				$this->getObject()->deleteItems( $prodIds );
 
 				foreach( $submanagers as $submanager ) {
 					$submanager->rebuildIndex( $products );
@@ -853,7 +853,7 @@ class Standard
 			$default = array( 'price', 'catalog', 'attribute', 'text' );
 
 			foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
-				$this->subManagers[$domain] = $this->getSubManager( $domain );
+				$this->subManagers[$domain] = $this->getObject()->getSubManager( $domain );
 			}
 
 			return $this->subManagers;

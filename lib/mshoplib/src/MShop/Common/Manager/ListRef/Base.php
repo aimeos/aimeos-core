@@ -34,7 +34,7 @@ abstract class Base
 	 */
 	public function updateListItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $map, $domain, $type )
 	{
-		$listManager =  $this->getSubManager( 'lists' );
+		$listManager =  $this->getObject()->getSubManager( 'lists' );
 
 		if( !isset( $this->typeIds[$domain][$type] ) )
 		{
@@ -154,7 +154,7 @@ abstract class Base
 	 */
 	protected function getListItems( array $ids, array $domains, $prefix )
 	{
-		$manager = $this->getSubManager( 'lists' );
+		$manager = $this->getObject()->getSubManager( 'lists' );
 
 		$search = $manager->createSearch( true );
 

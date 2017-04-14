@@ -125,7 +125,7 @@ class Standard
 	{
 		$path = 'mshop/attribute/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type', 'lists' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/attribute/manager/standard/delete' );
@@ -594,7 +594,7 @@ class Standard
 
 		if( !empty( $typeIds ) )
 		{
-			$typeManager = $this->getSubManager( 'type' );
+			$typeManager = $this->getObject()->getSubManager( 'type' );
 			$typeSearch = $typeManager->createSearch();
 			$typeSearch->setConditions( $typeSearch->compare( '==', 'attribute.type.id', array_keys( $typeIds ) ) );
 			$typeSearch->setSlice( 0, $search->getSliceSize() );

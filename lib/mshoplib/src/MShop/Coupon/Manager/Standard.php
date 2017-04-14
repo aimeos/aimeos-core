@@ -125,7 +125,7 @@ class Standard
 	{
 		$path = 'mshop/coupon/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'code' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/coupon/manager/standard/delete' );

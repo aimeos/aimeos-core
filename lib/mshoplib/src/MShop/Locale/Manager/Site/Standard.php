@@ -543,7 +543,7 @@ class Standard
 
 		try
 		{
-			$attributes = $this->getSearchAttributes();
+			$attributes = $this->getObject()->getSearchAttributes();
 			$types = $this->getSearchTypes( $attributes );
 			$translations = $this->getSearchTranslations( $attributes );
 			$columns = $search->getColumnString( $search->getSortations(), $translations );
@@ -708,21 +708,21 @@ class Standard
 		if( $id !== null )
 		{
 			if( count( $ref ) > 0 ) {
-				return $this->getItem( $id, $ref );
+				return $this->getObject()->getItem( $id, $ref );
 			}
 
 			if( !isset( $this->cache[$id] ) ) {
-				$this->cache[$id] = $this->getItem( $id, $ref );
+				$this->cache[$id] = $this->getObject()->getItem( $id, $ref );
 			}
 
 			return $this->cache[$id];
 		}
 
-		$criteria = $this->createSearch();
+		$criteria = $this->getObject()->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'locale.site.code', 'default' ) );
 		$criteria->setSlice( 0, 1 );
 
-		$items = $this->searchItems( $criteria, $ref );
+		$items = $this->getObject()->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Tree root with code "%1$s" in "%2$s" not found', 'default', 'locale.site.code' ) );

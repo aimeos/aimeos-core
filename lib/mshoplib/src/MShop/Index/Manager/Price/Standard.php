@@ -676,7 +676,7 @@ class Standard
 			$path = 'mshop/index/manager/price/submanagers';
 
 			foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-				$this->subManagers[$domain] = $this->getSubManager( $domain );
+				$this->subManagers[$domain] = $this->getObject()->getSubManager( $domain );
 			}
 
 			return $this->subManagers;

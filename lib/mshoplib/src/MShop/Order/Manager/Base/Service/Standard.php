@@ -233,7 +233,7 @@ class Standard
 	{
 		$path = 'mshop/order/manager/base/service/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'attribute' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/order/manager/base/service/standard/delete' );
@@ -866,7 +866,7 @@ class Standard
 	 */
 	protected function getAttributeItems( $ids )
 	{
-		$manager = $this->getSubManager( 'attribute' );
+		$manager = $this->getObject()->getSubManager( 'attribute' );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.parentid', $ids ) );
 		$search->setSortations( array( $search->sort( '+', 'order.base.service.attribute.code' ) ) );

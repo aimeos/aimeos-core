@@ -242,7 +242,7 @@ class Standard
 
 		$path = 'madmin/cache/manager/submanagers';
 		foreach( $config->get( $path, [] ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		/** madmin/cache/manager/standard/delete/mysql

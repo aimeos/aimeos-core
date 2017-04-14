@@ -104,7 +104,7 @@ class Standard
 	{
 		$path = 'mshop/supplier/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'address' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/supplier/manager/standard/delete' );
@@ -622,7 +622,7 @@ class Standard
 	protected function getAddressItems( array $supplierIds )
 	{
 		$list = [];
-		$manager = $this->getSubManager( 'address' );
+		$manager = $this->getObject()->getSubManager( 'address' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'supplier.address.parentid', $supplierIds ) );

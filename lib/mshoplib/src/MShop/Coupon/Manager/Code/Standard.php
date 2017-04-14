@@ -121,7 +121,7 @@ class Standard
 	{
 		$path = 'mshop/coupon/manager/code/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/coupon/manager/code/standard/delete' );
@@ -741,7 +741,7 @@ class Standard
 	{
 		$context = $this->getContext();
 
-		$search = $this->createSearch();
+		$search = $this->getObject()->createSearch();
 		$search->setConditions( $search->compare( '==', 'coupon.code.siteid', $context->getLocale()->getSitePath() ) );
 
 		$types = array( 'coupon.code.siteid' => $this->searchConfig['coupon.code.siteid']['internaltype'] );

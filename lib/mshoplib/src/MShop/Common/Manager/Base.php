@@ -23,6 +23,7 @@ abstract class Base
 	implements \Aimeos\MShop\Common\Manager\Iface
 {
 	private $context;
+	private $object;
 	private $resourceName;
 	private $stmts = [];
 	private $subManagers = [];
@@ -88,7 +89,7 @@ abstract class Base
 	 */
 	public function deleteItem( $itemId )
 	{
-		$this->deleteItems( array( $itemId ) );
+		$this->getObject()->deleteItems( array( $itemId ) );
 	}
 
 
@@ -120,6 +121,19 @@ abstract class Base
 
 
 	/**
+	 * Injects the reference of the outmost object
+	 *
+	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object )
+	{
+		$this->object = $object;
+		return $this;
+	}
+
+
+	/**
 	 * Counts the number products that are available for the values of the given key.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
@@ -140,7 +154,7 @@ abstract class Base
 		try
 		{
 			$search = clone $search;
-			$attrList = $this->getSearchAttributes();
+			$attrList = $this->getObject()->getSearchAttributes();
 
 			if( !isset( $attrList[$key] ) ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
@@ -262,6 +276,21 @@ abstract class Base
 
 
 	/**
+	 * Returns the outmost decorator of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Outmost decorator object
+	 */
+	protected function getObject()
+	{
+		if( $this->object !== null ) {
+			return $this->object;
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the search attribute objects used for searching.
 	 *
 	 * @param array $list Associative list of search keys and the lists of search definitions
@@ -284,7 +313,7 @@ abstract class Base
 			$domains = $this->context->getConfig()->get( $path, $default );
 
 			foreach( $domains as $domain ) {
-				$attr += $this->getSubManager( $domain )->getSearchAttributes( true );
+				$attr += $this->getObject()->getSubManager( $domain )->getSearchAttributes( true );
 			}
 		}
 
@@ -499,7 +528,7 @@ abstract class Base
 	protected function findItemBase( array $pairs, array $ref = [] )
 	{
 		$expr = [];
-		$criteria = $this->createSearch();
+		$criteria = $this->getObject()->createSearch();
 
 		foreach( $pairs as $key => $value )
 		{
@@ -510,7 +539,7 @@ abstract class Base
 		}
 
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$items = $this->searchItems( $criteria, $ref );
+		$items = $this->getObject()->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No item found for conditions: %1$s', print_r( $pairs, true ) ) );
@@ -558,13 +587,13 @@ abstract class Base
 	 */
 	protected function getItemBase( $key, $id, array $ref = [], $default = false )
 	{
-		$criteria = $this->createSearch( $default );
+		$criteria = $this->getObject()->createSearch( $default );
 		$expr = [
 			$criteria->compare( '==', $key, $id ),
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$items = $this->searchItems( $criteria, $ref );
+		$items = $this->getObject()->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Item with ID "%2$s" in "%1$s" not found', $key, $id ) );
@@ -612,7 +641,7 @@ abstract class Base
 		$list = array( $type );
 
 		foreach( $this->context->getConfig()->get( $path, $default ) as $domain ) {
-			$list = array_merge( $list, $this->getSubManager( $domain )->getResourceType( $withsub ) );
+			$list = array_merge( $list, $this->getObject()->getSubManager( $domain )->getResourceType( $withsub ) );
 		}
 
 		return $list;
@@ -744,7 +773,7 @@ abstract class Base
 	{
 		$joins = [];
 		$conditions = $search->getConditions();
-		$attributes = $this->getSearchAttributes();
+		$attributes = $this->getObject()->getSearchAttributes();
 		$siteIds = $this->getSiteIds( $sitelevel );
 		$keys = $this->getCriteriaKeyList( $search, $required );
 
@@ -837,7 +866,7 @@ abstract class Base
 		$context = $this->getContext();
 		$dbname = $this->getResourceName();
 
-		$search = $this->createSearch();
+		$search = $this->getObject()->createSearch();
 		$search->setConditions( $search->compare( '==', $name, $ids ) );
 
 		$types = array( $name => \Aimeos\MW\DB\Statement\Base::PARAM_STR );

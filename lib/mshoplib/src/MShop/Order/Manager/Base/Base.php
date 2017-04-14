@@ -100,7 +100,7 @@ abstract class Base
 		$key = 'aimeos/basket/content-' . $sitecode . '-' . $language . '-' . $currency . '-' . strval( $type );
 
 		if( ( $serorder = $session->get( $key ) ) === null ) {
-			return $this->createItem();
+			return $this->getObject()->createItem();
 		}
 
 		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
@@ -110,7 +110,7 @@ abstract class Base
 			$msg = sprintf( 'Invalid serialized basket. "%1$s" returns "%2$s".', __METHOD__, $serorder );
 			$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 
-			return $this->createItem();
+			return $this->getObject()->createItem();
 		}
 
 		\Aimeos\MShop\Factory::createManager( $context, 'plugin' )->register( $order, 'order' );
@@ -323,7 +323,7 @@ abstract class Base
 	protected function loadProducts( $id, $fresh )
 	{
 		$attributes = $products = $subProducts = [];
-		$manager = $this->getSubManager( 'product' );
+		$manager = $this->getObject()->getSubManager( 'product' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
 		$criteria = $manager->createSearch();
@@ -391,7 +391,7 @@ abstract class Base
 	protected function loadAddresses( $id, $fresh )
 	{
 		$items = [];
-		$manager = $this->getSubManager( 'address' );
+		$manager = $this->getObject()->getSubManager( 'address' );
 
 		$criteria = $manager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $id ) );
@@ -423,7 +423,7 @@ abstract class Base
 	protected function loadCoupons( $id, $fresh, array $products )
 	{
 		$items = [];
-		$manager = $this->getSubManager( 'coupon' );
+		$manager = $this->getObject()->getSubManager( 'coupon' );
 
 		$criteria = $manager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $id ) );
@@ -460,7 +460,7 @@ abstract class Base
 	protected function loadServices( $id, $fresh )
 	{
 		$items = [];
-		$manager = $this->getSubManager( 'service' );
+		$manager = $this->getObject()->getSubManager( 'service' );
 
 		$criteria = $manager->createSearch();
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $id ) );
@@ -495,7 +495,7 @@ abstract class Base
 	protected function storeProducts( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
 		$position = 1;
-		$manager = $this->getSubManager( 'product' );
+		$manager = $this->getObject()->getSubManager( 'product' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
 		foreach( $basket->getProducts() as $item )
@@ -550,7 +550,7 @@ abstract class Base
 	 */
 	protected function storeAddresses( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$manager = $this->getSubManager( 'address' );
+		$manager = $this->getObject()->getSubManager( 'address' );
 
 		foreach( $basket->getAddresses() as $type => $item )
 		{
@@ -568,7 +568,7 @@ abstract class Base
 	 */
 	protected function storeCoupons( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$manager = $this->getSubManager( 'coupon' );
+		$manager = $this->getObject()->getSubManager( 'coupon' );
 
 		$item = $manager->createItem();
 		$item->setBaseId( $basket->getId() );
@@ -601,7 +601,7 @@ abstract class Base
 	 */
 	protected function storeServices( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$manager = $this->getSubManager( 'service' );
+		$manager = $this->getObject()->getSubManager( 'service' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
 		foreach( $basket->getServices() as $type => $item )

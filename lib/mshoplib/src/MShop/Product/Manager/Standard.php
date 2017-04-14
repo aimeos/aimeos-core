@@ -154,7 +154,7 @@ class Standard
 		$default = array( 'type', 'property', 'lists' );
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/product/manager/standard/delete' );
@@ -580,7 +580,7 @@ class Standard
 
 		if( !empty( $typeIds ) )
 		{
-			$typeManager = $this->getSubManager( 'type' );
+			$typeManager = $this->getObject()->getSubManager( 'type' );
 			$typeSearch = $typeManager->createSearch();
 			$typeSearch->setConditions( $typeSearch->compare( '==', 'product.type.id', array_keys( $typeIds ) ) );
 			$typeSearch->setSlice( 0, $search->getSliceSize() );
@@ -727,7 +727,7 @@ class Standard
 	protected function getPropertyItems( array $prodIds )
 	{
 		$list = [];
-		$propManager = $this->getSubManager( 'property' );
+		$propManager = $this->getObject()->getSubManager( 'property' );
 
 		$propSearch = $propManager->createSearch();
 		$propSearch->setConditions( $propSearch->compare( '==', 'product.property.parentid', $prodIds ) );

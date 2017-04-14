@@ -161,11 +161,11 @@ class Standard extends Base
 	{
 		$context = $this->getContext();
 		$config = $context->getConfig();
-		$search = $this->createSearch();
+		$search = $this->getObject()->createSearch();
 
 		$path = 'mshop/catalog/manager/submanagers';
 		foreach( $config->get( $path, array( 'lists' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$dbm = $context->getDatabaseManager();
@@ -287,7 +287,7 @@ class Standard extends Base
 	public function deleteItems( array $ids )
 	{
 		foreach( $ids as $id ) {
-			$this->deleteItem( $id );
+			$this->getObject()->deleteItem( $id );
 		}
 	}
 
@@ -405,7 +405,7 @@ class Standard extends Base
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
 		$siteid = $this->getContext()->getLocale()->getSiteId();
-		$item = $this->getItem( $id );
+		$item = $this->getObject()->getItem( $id );
 
 		$this->begin();
 

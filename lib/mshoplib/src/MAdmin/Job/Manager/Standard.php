@@ -117,7 +117,7 @@ class Standard
 	{
 		$path = 'madmin/job/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'madmin/job/manager/standard/delete' );
@@ -380,13 +380,13 @@ class Standard
 	 */
 	public function getItem( $id, array $ref = [], $default = false )
 	{
-		$criteria = $this->createSearch( $default );
+		$criteria = $this->getObject()->createSearch( $default );
 		$expr = [
 			$criteria->compare( '==', 'job.id', $id ),
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$items = $this->searchItems( $criteria, $ref );
+		$items = $this->getObject()->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \Aimeos\MAdmin\Job\Exception( sprintf( 'Job with ID "%1$s" not found', $id ) );

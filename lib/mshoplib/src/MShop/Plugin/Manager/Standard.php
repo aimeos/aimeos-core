@@ -128,7 +128,7 @@ class Standard
 	{
 		$path = 'mshop/plugin/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/plugin/manager/standard/delete' );
@@ -360,7 +360,7 @@ class Standard
 	{
 		if( !isset( $this->plugins[$type] ) )
 		{
-			$search = $this->createSearch( true );
+			$search = $this->getObject()->createSearch( true );
 
 			$expr = array(
 				$search->compare( '==', 'plugin.type.code', $type ),
@@ -372,7 +372,7 @@ class Standard
 
 			$this->plugins[$type] = [];
 
-			foreach( $this->searchItems( $search ) as $item ) {
+			foreach( $this->getObject()->searchItems( $search ) as $item ) {
 				$this->plugins[$type][$item->getId()] = $this->getProvider( $item );
 			}
 		}
@@ -719,7 +719,7 @@ class Standard
 
 		if( !empty( $typeIds ) )
 		{
-			$typeManager = $this->getSubManager( 'type' );
+			$typeManager = $this->getObject()->getSubManager( 'type' );
 			$typeSearch = $typeManager->createSearch();
 			$typeSearch->setConditions( $typeSearch->compare( '==', 'plugin.type.id', array_keys( $typeIds ) ) );
 			$typeSearch->setSlice( 0, $search->getSliceSize() );

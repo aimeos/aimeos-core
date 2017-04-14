@@ -139,7 +139,7 @@ class Standard
 	{
 		$path = 'madmin/log/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'madmin/log/manager/standard/delete' );
@@ -393,13 +393,13 @@ class Standard
 	 */
 	public function getItem( $id, array $ref = [], $default = false )
 	{
-		$criteria = $this->createSearch( $default );
+		$criteria = $this->getObject()->createSearch( $default );
 		$expr = [
 			$criteria->compare( '==', 'log.id', $id ),
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$items = $this->searchItems( $criteria, $ref );
+		$items = $this->getObject()->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false ) {
 			throw new \Aimeos\MAdmin\Log\Exception( sprintf( 'Log entry with ID "%1$s" not found', $id ) );
@@ -646,14 +646,14 @@ class Standard
 				$message = json_encode( $message );
 			}
 
-			$item = $this->createItem();
+			$item = $this->getObject()->createItem();
 
 			$item->setFacility( $facility );
 			$item->setPriority( $priority );
 			$item->setMessage( $message );
 			$item->setRequest( $this->requestid );
 
-			$this->saveItem( $item );
+			$this->getObject()->saveItem( $item );
 		}
 	}
 }

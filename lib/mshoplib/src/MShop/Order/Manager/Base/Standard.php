@@ -225,7 +225,7 @@ class Standard extends Base
 		$default = array( 'address', 'coupon', 'product', 'service' );
 
 		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/order/manager/base/standard/delete' );
@@ -867,7 +867,7 @@ class Standard extends Base
 	 */
 	public function load( $id, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, $fresh = false, $default = false )
 	{
-		$search = $this->createSearch( $default );
+		$search = $this->getObject()->createSearch( $default );
 		$expr = [
 			$search->compare( '==', 'order.base.id', $id ),
 			$search->getConditions(),
@@ -940,7 +940,7 @@ class Standard extends Base
 	 */
 	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL )
 	{
-		$this->saveItem( $basket );
+		$this->getObject()->saveItem( $basket );
 
 		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT
 			|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON

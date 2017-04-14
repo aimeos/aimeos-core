@@ -149,7 +149,7 @@ class Standard
 	{
 		$path = 'mshop/text/manager/lists/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/text/manager/lists/standard/delete' );

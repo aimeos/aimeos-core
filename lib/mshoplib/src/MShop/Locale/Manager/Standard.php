@@ -117,7 +117,7 @@ class Standard
 	 */
 	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null )
 	{
-		$siteManager = $this->getSubManager( 'site' );
+		$siteManager = $this->getObject()->getSubManager( 'site' );
 		$siteSearch = $siteManager->createSearch();
 		$siteSearch->setConditions( $siteSearch->compare( '==', 'locale.site.code', $site ) );
 		$siteItems = $siteManager->searchItems( $siteSearch );
@@ -540,7 +540,7 @@ class Standard
 		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		// Try to find exact match
-		$search = $this->createSearch( $active );
+		$search = $this->getObject()->createSearch( $active );
 
 		$expr = array( $search->compare( '==', 'locale.siteid', $sitePath ) );
 
@@ -603,7 +603,7 @@ class Standard
 		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sitePath, array $siteSubTree )
 	{
 		// Try to find the best matching locale
-		$search = $this->createSearch( $active );
+		$search = $this->getObject()->createSearch( $active );
 
 		$expr = array(
 			$search->compare( '==', 'locale.siteid', $sitePath ),
@@ -711,7 +711,7 @@ class Standard
 
 		try
 		{
-			$attributes = $this->getSearchAttributes();
+			$attributes = $this->getObject()->getSearchAttributes();
 			$types = $this->getSearchTypes( $attributes );
 			$translations = $this->getSearchTranslations( $attributes );
 			$columns = $search->getColumnString( $search->getSortations(), $translations );

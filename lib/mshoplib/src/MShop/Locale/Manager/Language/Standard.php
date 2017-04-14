@@ -478,7 +478,7 @@ class Standard
 
 		try
 		{
-			$attributes = $this->getSearchAttributes();
+			$attributes = $this->getObject()->getSearchAttributes();
 			$types = $this->getSearchTypes( $attributes );
 			$translations = $this->getSearchTranslations( $attributes );
 			$columns = $search->getColumnString( $search->getSortations(), $translations );

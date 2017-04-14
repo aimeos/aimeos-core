@@ -116,7 +116,7 @@ class Standard
 	{
 		$path = 'mshop/stock/manager/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/stock/manager/standard/delete' );
@@ -583,7 +583,7 @@ class Standard
 
 		if( !empty( $typeIds ) )
 		{
-			$typeManager = $this->getSubManager( 'type' );
+			$typeManager = $this->getObject()->getSubManager( 'type' );
 
 			$typeSearch = $typeManager->createSearch();
 			$typeSearch->setConditions( $typeSearch->compare( '==', 'stock.type.id', array_keys( $typeIds ) ) );
@@ -753,7 +753,7 @@ class Standard
 	{
 		$context = $this->getContext();
 
-		$search = $this->createSearch();
+		$search = $this->getObject()->createSearch();
 		$expr = array(
 			$search->compare( '==', 'stock.productcode', $productCode ),
 			$search->compare( '==', 'stock.siteid', $context->getLocale()->getSitePath() ),
@@ -857,7 +857,7 @@ class Standard
 	{
 		if( !isset( $this->typeIds[$typeCode] ) )
 		{
-			$typeManager = $this->getSubManager( 'type' );
+			$typeManager = $this->getObject()->getSubManager( 'type' );
 
 			$search = $typeManager->createSearch();
 			$search->setConditions( $search->compare( '==', 'stock.type.code', $typeCode ) );

@@ -130,7 +130,7 @@ abstract class Base
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
-		return $manager;
+		return $manager->setObject( $manager );
 	}
 
 

@@ -183,13 +183,13 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Search configuration not available' ) );
 		}
 
-		$criteria = $this->createSearch( $default );
+		$criteria = $this->getObject()->createSearch( $default );
 		$expr = [
 			$criteria->compare( '==', $conf['code'], $id ),
 			$criteria->getConditions()
 		];
 		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$items = $this->searchItems( $criteria, $ref );
+		$items = $this->getObject()->searchItems( $criteria, $ref );
 
 		if( ( $item = reset( $items ) ) === false )
 		{
@@ -214,7 +214,7 @@ abstract class Base
 		$siteid = $context->getLocale()->getSiteId();
 		$cfgPath = $this->getConfigPath();
 
-		$listItem = $this->getItem( $id );
+		$listItem = $this->getObject()->getItem( $id );
 
 		$newpos = $pos = 0;
 		$oldpos = $listItem->getPosition();
@@ -223,7 +223,7 @@ abstract class Base
 		$domain = $listItem->getDomain();
 
 		if( $ref !== null ) {
-			$pos = $this->getItem( $ref )->getPosition();
+			$pos = $this->getObject()->getItem( $ref )->getPosition();
 		}
 
 		$dbm = $context->getDatabaseManager();
@@ -364,7 +364,7 @@ abstract class Base
 
 		if( !empty( $typeIds ) )
 		{
-			$typeManager = $this->getSubManager( 'type' );
+			$typeManager = $this->getObject()->getSubManager( 'type' );
 			$typeSearch = $typeManager->createSearch();
 			$typeSearch->setConditions( $typeSearch->compare( '==', $name . '.type.id', array_keys( $typeIds ) ) );
 			$typeSearch->setSlice( 0, $search->getSliceSize() );

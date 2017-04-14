@@ -192,7 +192,7 @@ class Standard
 	{
 		$path = 'mshop/order/manager/base/service/attribute/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/order/manager/base/service/attribute/standard/delete' );

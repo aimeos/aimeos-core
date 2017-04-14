@@ -114,7 +114,7 @@ abstract class Base
 		}
 
 		$listMap = [];
-		$manager = $this->getSubManager( 'lists' );
+		$manager = $this->getObject()->getSubManager( 'lists' );
 		$typeManager = $manager->getSubManager( 'type' );
 		$typeId = $typeManager->findItem( 'default', [], 'customer/group', 'default' )->getId();
 
@@ -173,7 +173,7 @@ abstract class Base
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $addresses = [] )
 	{
 		if( !isset( $this->addressManager ) ) {
-			$this->addressManager = $this->getSubManager( 'address' );
+			$this->addressManager = $this->getObject()->getSubManager( 'address' );
 		}
 
 		$helper = $this->getPasswordHelper();
@@ -193,7 +193,7 @@ abstract class Base
 	protected function getAddressItems( array $custIds )
 	{
 		$list = [];
-		$manager = $this->getSubManager( 'address' );
+		$manager = $this->getObject()->getSubManager( 'address' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $custIds ) );

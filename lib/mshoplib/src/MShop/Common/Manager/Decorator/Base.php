@@ -218,6 +218,22 @@ abstract class Base
 	}
 
 
+	/**
+	 * Injects the reference of the outmost object
+	 *
+	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object )
+	{
+		parent::setObject( $object );
+
+		$this->manager->setObject( $object );
+
+		return $this;
+	}
+
+
 
 	/**
 	 * Returns the manager object.

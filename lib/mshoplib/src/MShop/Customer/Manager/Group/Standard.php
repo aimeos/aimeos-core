@@ -89,7 +89,7 @@ class Standard
 	{
 		$path = 'mshop/customer/manager/group/submanagers';
 		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
-			$this->getSubManager( $domain )->cleanup( $siteids );
+			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/customer/manager/group/standard/delete' );
