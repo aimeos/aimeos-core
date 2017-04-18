@@ -44,9 +44,10 @@ class Standard
 	 *
 	 * @param string|null $name Name of the parameter key or null for all parameters
 	 * @param mixed $default Default value if parameter key is not available
+	 * @param boolean $escape Escape HTML if single parameter is returned
 	 * @return mixed Parameter value or associative list of key/value pairs
 	 */
-	public function transform( $name = null, $default = null )
+	public function transform( $name = null, $default = null, $escape = true )
 	{
 		if( $name === null ) {
 			return $this->params;
@@ -64,6 +65,10 @@ class Standard
 			}
 		}
 
-		return $param;
+		if( is_array( $param ) || $escape === false ) {
+			return $param;
+		}
+
+		return htmlspecialchars( $param, ENT_NOQUOTES, 'UTF-8' );
 	}
 }
