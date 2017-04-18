@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Convert\Number;
 
 
-class DecimalCommaTest extends \PHPUnit_Framework_TestCase
+class DecimalCommaTest extends \PHPUnit\Framework\TestCase
 {
 	public function testTranslate()
 	{

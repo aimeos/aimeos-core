@@ -10,7 +10,7 @@
 namespace Aimeos\MShop\Service\Provider;
 
 
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;

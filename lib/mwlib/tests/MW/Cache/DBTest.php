@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Cache;
 
 
-class DBTest extends \PHPUnit_Framework_TestCase
+class DBTest extends \PHPUnit\Framework\TestCase
 {
 	private static $dbm;
 	private $config;

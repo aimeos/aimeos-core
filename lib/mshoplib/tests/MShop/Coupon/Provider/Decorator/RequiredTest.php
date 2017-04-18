@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Coupon\Provider\Decorator;
 /**
  * Test class for \Aimeos\MShop\Coupon\Provider\Decorator\Required.
  */
-class RequiredTest extends \PHPUnit_Framework_TestCase
+class RequiredTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $orderBase;

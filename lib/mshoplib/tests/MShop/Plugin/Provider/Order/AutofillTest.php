@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-class AutofillTest extends \PHPUnit_Framework_TestCase
+class AutofillTest extends \PHPUnit\Framework\TestCase
 {
 	private $plugin;
 	private $orderManager;

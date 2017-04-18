@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Text\Manager\Type;
 /**
  * Test class for \Aimeos\MShop\Text\Manager\Type\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $editor = '';

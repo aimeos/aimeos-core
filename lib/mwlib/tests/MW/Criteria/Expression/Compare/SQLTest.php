@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Criteria\Expression\Compare;
 
 
-class SQLTest extends \PHPUnit_Framework_TestCase
+class SQLTest extends \PHPUnit\Framework\TestCase
 {
 	private $conn = null;
 

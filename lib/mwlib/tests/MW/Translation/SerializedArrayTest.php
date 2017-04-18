@@ -10,7 +10,7 @@ namespace Aimeos\MW\Translation;
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class SerializedArrayTest extends \PHPUnit_Framework_TestCase
+class SerializedArrayTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

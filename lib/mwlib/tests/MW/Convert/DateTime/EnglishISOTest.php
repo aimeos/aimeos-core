@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Convert\DateTime;
 
 
-class EnglishISOTest extends \PHPUnit_Framework_TestCase
+class EnglishISOTest extends \PHPUnit\Framework\TestCase
 {
 	public function testTranslate()
 	{

@@ -3,7 +3,7 @@
 namespace Aimeos\MW\MQueue\Manager;
 
 
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $config;
 	private $object;

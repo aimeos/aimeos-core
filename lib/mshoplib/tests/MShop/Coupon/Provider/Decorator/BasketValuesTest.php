@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Coupon\Provider\Decorator;
 /**
  * Test class for \Aimeos\MShop\Coupon\Provider\Decorator\BasketValues.
  */
-class BasketValuesTest extends \PHPUnit_Framework_TestCase
+class BasketValuesTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $orderBase;

@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Common\Item\Helper\Password;
 /**
  * Test class for \Aimeos\MShop\Common\Item\Helper\Password\Hash
  */
-class BcryptTest extends \PHPUnit_Framework_TestCase
+class BcryptTest extends \PHPUnit\Framework\TestCase
 {
 	/**
 	 * Sets up the fixture. This method is called before a test is executed.

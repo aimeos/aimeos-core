@@ -10,7 +10,7 @@ namespace Aimeos\MW\Container\Content;
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class CSVTest extends \PHPUnit_Framework_TestCase
+class CSVTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

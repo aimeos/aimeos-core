@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Locale\Item\Currency;
 /**
  * Test class for \Aimeos\MShop\Locale\Item\Currency\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;

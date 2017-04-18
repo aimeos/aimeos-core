@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Index\Manager\Price;
 
 
-class MySQLTest extends \PHPUnit_Framework_TestCase
+class MySQLTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

@@ -13,7 +13,7 @@ namespace Aimeos\MW\View\Helper\Mail;
 /**
  * Test class for \Aimeos\MW\View\Helper\Mail.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $message;

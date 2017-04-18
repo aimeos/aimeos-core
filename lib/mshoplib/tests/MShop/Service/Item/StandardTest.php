@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Item;
 
 
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values = [];

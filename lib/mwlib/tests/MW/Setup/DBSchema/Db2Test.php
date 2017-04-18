@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Setup\DBSchema;
 
 
-class Db2Test extends \PHPUnit_Framework_TestCase
+class Db2Test extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
 	private $object;

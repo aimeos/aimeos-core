@@ -13,7 +13,7 @@ namespace Aimeos\MW\View\Helper\Config;
 /**
  * Test class for \Aimeos\MW\View\Helper\Config.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

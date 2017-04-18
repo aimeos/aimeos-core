@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Convert\Text;
 
 
-class LatinUTF8Test extends \PHPUnit_Framework_TestCase
+class LatinUTF8Test extends \PHPUnit\Framework\TestCase
 {
 	public function testTranslate()
 	{

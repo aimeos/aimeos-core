@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Coupon\Provider;
 
 
-class NoneTest extends \PHPUnit_Framework_TestCase
+class NoneTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $orderBase;

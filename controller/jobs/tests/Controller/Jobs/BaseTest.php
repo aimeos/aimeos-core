@@ -7,7 +7,7 @@ namespace Aimeos\Controller\Jobs;
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	public function testGetTypeItemNotFound()
 	{

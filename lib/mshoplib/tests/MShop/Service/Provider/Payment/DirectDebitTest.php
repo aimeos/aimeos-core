@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Service\Provider\Payment;
 /**
  * Test class for \Aimeos\MShop\Service\Provider\Payment\DirectDebit.
  */
-class DirectDebitTest extends \PHPUnit_Framework_TestCase
+class DirectDebitTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $ordServItem;

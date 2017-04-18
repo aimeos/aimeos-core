@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
 /**
  * Test class for \Aimeos\MShop\Service\Provider\Decorator\Costs.
  */
-class CostsTest extends \PHPUnit_Framework_TestCase
+class CostsTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $basket;

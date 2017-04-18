@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Tree\Manager;
 
 
-class DBNestedSetTest extends \PHPUnit_Framework_TestCase
+class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 {
 	private static $dbm;
 	private $config;

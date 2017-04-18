@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Index\Manager\Price;
 /**
  * Test class for \Aimeos\MShop\Index\Manager\Price\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	protected static $products;

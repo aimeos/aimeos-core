@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Setup\DBSchema;
 
 
-class OracleTest extends \PHPUnit_Framework_TestCase
+class OracleTest extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
 	private $object;

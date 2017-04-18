@@ -3,7 +3,7 @@
 namespace Aimeos\MW\DB;
 
 
-class DBALTest extends \PHPUnit_Framework_TestCase
+class DBALTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $config;

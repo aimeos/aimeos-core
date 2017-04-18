@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Config\Decorator;
 
 
-class ProtectTest extends \PHPUnit_Framework_TestCase
+class ProtectTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

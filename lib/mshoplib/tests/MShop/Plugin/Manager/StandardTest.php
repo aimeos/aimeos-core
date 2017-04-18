@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Plugin\Manager;
 /**
  * Test class for \Aimeos\MShop\Plugin\Manager\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $examplePlugin;

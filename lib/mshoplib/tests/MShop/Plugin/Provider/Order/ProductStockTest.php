@@ -10,7 +10,7 @@
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-class ProductStockTest extends \PHPUnit_Framework_TestCase
+class ProductStockTest extends \PHPUnit\Framework\TestCase
 {
 	private $order;
 	private $plugin;

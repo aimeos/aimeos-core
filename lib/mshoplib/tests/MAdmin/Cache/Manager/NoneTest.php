@@ -8,7 +8,7 @@ namespace Aimeos\MAdmin\Cache\Manager;
  * @copyright Metaways Infosystems GmbH, 2014
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class NoneTest extends \PHPUnit_Framework_TestCase
+class NoneTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;

@@ -8,7 +8,7 @@ namespace Aimeos\Perf\Config;
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class ArrayTest extends \PHPUnit_Framework_TestCase
+class ArrayTest extends \PHPUnit\Framework\TestCase
 {
 	public function testArray()
 	{

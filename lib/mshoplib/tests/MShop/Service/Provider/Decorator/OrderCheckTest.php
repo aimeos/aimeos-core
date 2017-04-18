@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
 /**
  * Test class for \Aimeos\MShop\Service\Provider\Decorator\OrderCheck.
  */
-class OrderCheckTest extends \PHPUnit_Framework_TestCase
+class OrderCheckTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $basket;

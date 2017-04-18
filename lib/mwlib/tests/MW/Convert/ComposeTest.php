@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Convert;
 
 
-class ComposeTest extends \PHPUnit_Framework_TestCase
+class ComposeTest extends \PHPUnit\Framework\TestCase
 {
 	public function testTranslate()
 	{

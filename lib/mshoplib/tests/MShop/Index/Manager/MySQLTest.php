@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Index\Manager;
 /**
  * Test class for \Aimeos\MShop\Index\Manager\MySQL.
  */
-class MySQLTest extends \PHPUnit_Framework_TestCase
+class MySQLTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $editor;

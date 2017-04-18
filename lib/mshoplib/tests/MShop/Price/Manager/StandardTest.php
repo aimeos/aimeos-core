@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Price\Manager;
 /**
  * Test class for \Aimeos\MShop\Price\Manager\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $editor = '';

@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Logger;
 
 
-class ErrorlogTest extends \PHPUnit_Framework_TestCase
+class ErrorlogTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

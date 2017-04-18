@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Index\Manager\Text;
 
 
-class PgSQLTest extends \PHPUnit_Framework_TestCase
+class PgSQLTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Setup\DBSchema;
 
 
-class MysqlTest extends \PHPUnit_Framework_TestCase
+class MysqlTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $dbm;

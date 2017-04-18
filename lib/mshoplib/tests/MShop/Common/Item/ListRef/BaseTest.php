@@ -25,7 +25,7 @@ class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
 /**
  * Test class for \Aimeos\MShop\Common\Item\ListRef\Base
  */
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $textItem1;

@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Locale\Manager\Language;
 /**
  * Test class for \Aimeos\MShop\Locale\Manager\Language\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 /**
  * Test class for \Aimeos\MShop\Plugin\Provider\Order\Complete.
  */
-class CouponTest extends \PHPUnit_Framework_TestCase
+class CouponTest extends \PHPUnit\Framework\TestCase
 {
 	private $order;
 	private $plugin;

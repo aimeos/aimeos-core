@@ -3,7 +3,7 @@
 namespace Aimeos\MW\DB;
 
 
-class PDOTest extends \PHPUnit_Framework_TestCase
+class PDOTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $config;

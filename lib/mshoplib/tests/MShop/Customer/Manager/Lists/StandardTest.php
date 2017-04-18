@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Customer\Manager\Lists;
 /**
  * Test class for \Aimeos\MShop\Customer\Manager\Lists\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;

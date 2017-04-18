@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-class CategoryTest extends \PHPUnit_Framework_TestCase
+class CategoryTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $basket;

@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Plugin\Manager;
 /**
  * Test class for \Aimeos\MShop\Plugin\Manager\Factory.
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit\Framework\TestCase
 {
 	public function testCreateManager()
 	{

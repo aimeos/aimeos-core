@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Customer\Manager;
 /**
  * Test class for \Aimeos\MShop\Customer\Manager\Standard
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $fixture;

@@ -13,7 +13,7 @@ namespace Aimeos\Controller\Jobs\Common\Factory;
 /**
  * Test class for \Aimeos\Controller\Jobs\Common\Factory\BaseTest.
  */
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $aimeos;

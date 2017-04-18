@@ -10,7 +10,7 @@ namespace Aimeos\MW\Criteria\Attribute;
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	/**
 	 * @var    \Aimeos\MW\Criteria\Attribute\Standard

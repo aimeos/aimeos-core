@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 /**
  * Test class for \Aimeos\MShop\Plugin\Provider\Order\Example and \Aimeos\MShop\Plugin\Provider\Base because abstract classes can not be tested directly
  */
-class ExampleTest extends \PHPUnit_Framework_TestCase
+class ExampleTest extends \PHPUnit\Framework\TestCase
 {
 	private $order;
 	private $plugin;

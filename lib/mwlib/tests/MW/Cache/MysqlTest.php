@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Cache;
 
 
-class MysqlTest extends \PHPUnit_Framework_TestCase
+class MysqlTest extends \PHPUnit\Framework\TestCase
 {
 	private $dbm;
 	private $config;

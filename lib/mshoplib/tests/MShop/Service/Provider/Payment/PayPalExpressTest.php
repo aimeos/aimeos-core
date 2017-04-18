@@ -10,7 +10,7 @@
 namespace Aimeos\MShop\Service\Provider\Payment;
 
 
-class PayPalExpressTest extends \PHPUnit_Framework_TestCase
+class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;

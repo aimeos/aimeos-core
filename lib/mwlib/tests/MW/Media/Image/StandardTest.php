@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Media\Image;
 
 
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	public function testConstructGif()
 	{

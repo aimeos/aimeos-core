@@ -11,7 +11,7 @@ namespace Aimeos\MShop\Supplier\Manager\Lists\Type;
 /**
  * Test class for \Aimeos\MShop\Supplier\Manager\Lists\Type\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $editor = '';

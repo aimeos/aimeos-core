@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-class CurrencyTest extends \PHPUnit_Framework_TestCase
+class CurrencyTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $basket;

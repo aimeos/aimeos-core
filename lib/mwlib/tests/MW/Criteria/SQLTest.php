@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Criteria;
 
 
-class SQLTest extends \PHPUnit_Framework_TestCase
+class SQLTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

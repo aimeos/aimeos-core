@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Common\Item\Helper\Form;
 /**
  * Test class for \Aimeos\MShop\Common\Item\Helper\Form\Standard
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;

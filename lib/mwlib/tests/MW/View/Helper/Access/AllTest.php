@@ -9,7 +9,7 @@
 namespace Aimeos\MW\View\Helper\Access;
 
 
-class AllTest extends \PHPUnit_Framework_TestCase
+class AllTest extends \PHPUnit\Framework\TestCase
 {
 	public function testTransform()
 	{

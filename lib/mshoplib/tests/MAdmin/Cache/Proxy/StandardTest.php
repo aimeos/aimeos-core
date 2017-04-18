@@ -10,7 +10,7 @@
 namespace Aimeos\MAdmin\Cache\Proxy;
 
 
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
 	private $object;

@@ -10,7 +10,7 @@ namespace Aimeos\MW\Tree\Node;
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class DBNestedSetTest extends \PHPUnit_Framework_TestCase
+class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

@@ -12,7 +12,7 @@ namespace Aimeos\MW\View\Helper\Value;
 /**
  * Test class for \Aimeos\MW\View\Helper\Value.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

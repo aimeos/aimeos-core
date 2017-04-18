@@ -9,7 +9,7 @@
 namespace Aimeos\Controller\Common\Media;
 
 
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;

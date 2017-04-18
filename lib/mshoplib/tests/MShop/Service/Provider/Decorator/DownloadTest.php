@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-class DownloadTest extends \PHPUnit_Framework_TestCase
+class DownloadTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;

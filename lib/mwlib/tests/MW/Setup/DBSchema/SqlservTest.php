@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Setup\DBSchema;
 
 
-class SqlservTest extends \PHPUnit_Framework_TestCase
+class SqlservTest extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
 	private $object;

@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Criteria\Expression\Combine;
 
 
-class SQLTest extends \PHPUnit_Framework_TestCase
+class SQLTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

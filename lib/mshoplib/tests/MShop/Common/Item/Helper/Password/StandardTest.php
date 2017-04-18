@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Common\Item\Helper\Password;
 /**
  * Test class for \Aimeos\MShop\Common\Item\Helper\Password\Standard
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

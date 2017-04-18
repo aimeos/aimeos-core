@@ -9,7 +9,7 @@
 namespace Aimeos\MW\Setup\Manager;
 
 
-class MultipleTest extends \PHPUnit_Framework_TestCase
+class MultipleTest extends \PHPUnit\Framework\TestCase
 {
 	private $config;
 	private $dbm;

@@ -13,7 +13,7 @@ namespace Aimeos\Controller\Jobs\Common\Decorator;
 /**
  * Test class for \Aimeos\Controller\Jobs\Common\Decorator\BaseTest.
  */
-class BaseTest extends \PHPUnit_Framework_TestCase
+class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $stub;
 	private $object;

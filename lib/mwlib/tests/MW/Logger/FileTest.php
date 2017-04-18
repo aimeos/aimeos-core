@@ -8,7 +8,7 @@ namespace Aimeos\MW\Logger;
  * @copyright Metaways Infosystems GmbH, 2013
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class FileTest extends \PHPUnit_Framework_TestCase
+class FileTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $filename;

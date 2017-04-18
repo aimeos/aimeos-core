@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Catalog\Item;
 /**
  * Test class for \Aimeos\MShop\Catalog\Item\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $node;
 	private $object;

@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Coupon\Provider;
 /**
  * Test class for \Aimeos\MShop\Coupon\Provider\Example.
  */
-class ExampleTest extends \PHPUnit_Framework_TestCase
+class ExampleTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $orderBase;

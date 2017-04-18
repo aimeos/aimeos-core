@@ -9,7 +9,7 @@
 namespace Aimeos\MShop\Plugin\Provider\Decorator;
 
 
-class LogTest extends \PHPUnit_Framework_TestCase
+class LogTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $order;

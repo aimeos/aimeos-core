@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Config\Decorator;
 
 
-class APCTest extends \PHPUnit_Framework_TestCase
+class APCTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

@@ -3,7 +3,7 @@
 namespace Aimeos\MW\Setup\DBSchema;
 
 
-class PgsqlTest extends \PHPUnit_Framework_TestCase
+class PgsqlTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $dbm;

@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Catalog\Manager\Decorator;
 /**
  * Test class for \Aimeos\MShop\Catalog\Manager\Decorator\SiteCheck.
  */
-class SiteCheckTest extends \PHPUnit_Framework_TestCase
+class SiteCheckTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

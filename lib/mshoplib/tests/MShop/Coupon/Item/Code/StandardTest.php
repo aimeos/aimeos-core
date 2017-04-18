@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Coupon\Item\Code;
 /**
  * Test class for \Aimeos\MShop\Coupon\Item\Code\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;

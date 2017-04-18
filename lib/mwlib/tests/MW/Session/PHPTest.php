@@ -10,7 +10,7 @@
 namespace Aimeos\MW\Session;
 
 
-class PHPTest extends \PHPUnit_Framework_TestCase
+class PHPTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

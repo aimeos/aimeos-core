@@ -12,7 +12,7 @@ namespace Aimeos\MAdmin\Cache\Manager;
 /**
  * Test class for \Aimeos\MAdmin\Cache\Manager\Factory.
  */
-class FactoryTest extends \PHPUnit_Framework_TestCase
+class FactoryTest extends \PHPUnit\Framework\TestCase
 {
 	public function testCreateManager()
 	{

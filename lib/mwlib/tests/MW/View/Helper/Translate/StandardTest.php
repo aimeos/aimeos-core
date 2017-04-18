@@ -13,7 +13,7 @@ namespace Aimeos\MW\View\Helper\Translate;
 /**
  * Test class for \Aimeos\MW\View\Helper\Translate.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

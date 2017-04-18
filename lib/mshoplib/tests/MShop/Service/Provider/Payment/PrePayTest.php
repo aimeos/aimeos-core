@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Service\Provider\Payment;
 /**
  * Test class for \Aimeos\MShop\Service\Provider\Payment\PrePay.
  */
-class PrePayTest extends \PHPUnit_Framework_TestCase
+class PrePayTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

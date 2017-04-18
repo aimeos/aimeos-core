@@ -10,7 +10,7 @@
 namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
-class PropertyMatchTest extends \PHPUnit_Framework_TestCase
+class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $plugin;

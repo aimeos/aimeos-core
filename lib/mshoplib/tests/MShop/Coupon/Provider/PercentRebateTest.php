@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Coupon\Provider;
 /**
  * Test class for \Aimeos\MShop\Coupon\Provider\PercentRebate.
  */
-class PercentRebateTest extends \PHPUnit_Framework_TestCase
+class PercentRebateTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $orderBase;

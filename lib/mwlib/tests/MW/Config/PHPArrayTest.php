@@ -10,7 +10,7 @@ namespace Aimeos\MW\Config;
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class PHPArrayTest extends \PHPUnit_Framework_TestCase
+class PHPArrayTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

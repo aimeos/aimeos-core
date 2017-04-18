@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Index\Manager;
 /**
  * Test class for \Aimeos\MShop\Index\Manager\Standard.
  */
-class StandardTest extends \PHPUnit_Framework_TestCase
+class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private static $products;
 	private $context;

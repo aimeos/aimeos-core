@@ -9,7 +9,7 @@
 namespace Aimeos\MW\Media\Image;
 
 
-class ImagickTest extends \PHPUnit_Framework_TestCase
+class ImagickTest extends \PHPUnit\Framework\TestCase
 {
 	protected function setUp()
 	{

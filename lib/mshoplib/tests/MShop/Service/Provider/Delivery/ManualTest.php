@@ -10,7 +10,7 @@
 namespace Aimeos\MShop\Service\Provider\Delivery;
 
 
-class ManualTest extends \PHPUnit_Framework_TestCase
+class ManualTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

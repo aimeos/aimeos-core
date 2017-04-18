@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
 /**
  * Test class for \Aimeos\MShop\Service\Provider\Decorator\Weight.
  */
-class WeightTest extends \PHPUnit_Framework_TestCase
+class WeightTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;

@@ -11,7 +11,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 class ServicesUpdateTest
-	extends \PHPUnit_Framework_TestCase
+	extends \PHPUnit\Framework\TestCase
 {
 	private $order;
 	private $plugin;
