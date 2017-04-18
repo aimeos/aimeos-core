@@ -45,7 +45,8 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No test file found' );
 		}
 
-		$msg = explode( ' ', file_get_contents( $this->filename ) );
+		$lines = explode( PHP_EOL, file_get_contents( $this->filename ) );
+		$msg = explode( ' ', $lines[0] );
 
 		if( empty( $msg ) ) {
 			throw new \RuntimeException( 'No log record found' );
@@ -70,7 +71,8 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No test file found' );
 		}
 
-		$msg = explode( ' ', file_get_contents( $this->filename ) );
+		$lines = explode( PHP_EOL, file_get_contents( $this->filename ) );
+		$msg = explode( ' ', $lines[0] );
 
 		if( empty( $msg ) ) {
 			throw new \RuntimeException( 'No log record found' );
@@ -91,7 +93,8 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No test file found' );
 		}
 
-		$msg = explode( ' ', file_get_contents( $this->filename ) );
+		$lines = explode( PHP_EOL, file_get_contents( $this->filename ) );
+		$msg = explode( ' ', $lines[0] );
 
 		if( empty( $msg ) ) {
 			throw new \RuntimeException( 'No log record found' );
@@ -112,7 +115,8 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No test file found' );
 		}
 
-		$msg = file_get_contents( $this->filename );
+		$lines = explode( PHP_EOL, file_get_contents( $this->filename ) );
+		$msg = $lines[0];
 
 		if( $msg !== '' ) {
 			throw new \RuntimeException( 'Log record found but none expected' );
@@ -127,7 +131,8 @@ class FileTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No test file found' );
 		}
 
-		$msg = explode( ' ', file_get_contents( $this->filename ) );
+		$lines = explode( PHP_EOL, file_get_contents( $this->filename ) );
+		$msg = explode( ' ', $lines[0] );
 
 		if( empty( $msg ) ) {
 			throw new \RuntimeException( 'No log record found' );
