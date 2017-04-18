@@ -12,6 +12,7 @@
 		<phing target="test" haltonfailure="true" dir="admin/jqadm" />
 		<phing target="test" haltonfailure="true" dir="admin/extjs" />
 		<phing target="test" haltonfailure="true" dir="client/html" />
+		<phing target="test" haltonfailure="true" dir="client/jsonapi" />
 	</target>
 
 	<target name="testperf" description="Executes all performance tests">
@@ -28,6 +29,7 @@
 		<phing target="coverage" haltonfailure="true" dir="admin/jqadm" />
 		<phing target="coverage" haltonfailure="true" dir="admin/extjs" />
 		<phing target="coverage" haltonfailure="true" dir="client/html" />
+		<phing target="coverage" haltonfailure="true" dir="client/jsonapi" />
 	</target>
 
 	<target name="check" description="Checks for code quality">
@@ -40,6 +42,7 @@
 		<phing target="check" haltonfailure="true" dir="admin/jqadm" />
 		<phing target="check" haltonfailure="true" dir="admin/extjs" />
 		<phing target="check" haltonfailure="true" dir="client/html" />
+		<phing target="check" haltonfailure="true" dir="client/jsonapi" />
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
@@ -52,6 +55,7 @@
 		<phing target="clean" haltonfailure="true" dir="admin/jqadm" />
 		<phing target="clean" haltonfailure="true" dir="admin/extjs" />
 		<phing target="clean" haltonfailure="true" dir="client/html" />
+		<phing target="clean" haltonfailure="true" dir="client/jsonapi" />
 	</target>
 
 	<target name="i18n" description="Creates all translation files">

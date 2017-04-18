@@ -7,7 +7,7 @@ namespace Aimeos\Client\JQAdm;
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
-class DemoTest extends \PHPUnit_Framework_TestCase
+class DemoTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
 	private $object;
@@ -20,7 +20,7 @@ class DemoTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->context = \TestHelperJqadm::getContext();
-		$paths = \TestHelperJqadm::getHtmlTemplatePaths();
+		$paths = \TestHelperJqadm::getTemplatePaths();
 
 		// $this->object = new \Aimeos\Client\JQAdm\...\Standard( $this->context, $paths );
 	}

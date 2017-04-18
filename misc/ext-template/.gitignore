@@ -1,5 +1,3 @@
-client/extjs/deploy/*
-
 coverage/
 *.junit.xml
 *.log

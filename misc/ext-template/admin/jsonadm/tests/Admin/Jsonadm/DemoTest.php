@@ -3,7 +3,7 @@
 namespace Aimeos\Admin\Jsonadm;
 
 
-class DemoTest extends \PHPUnit_Framework_TestCase
+class DemoTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 

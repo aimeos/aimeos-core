@@ -7,7 +7,7 @@
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.3.3",
+		"php": ">=5.4.0",
 		"composer/installers": "^1.0"
 	},
 	"autoload": {
@@ -21,10 +21,12 @@
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
 			"Aimeos\\Admin\\Jsonadm\\": "admin/jsonadm/src/Admin/Jsonadm/",
 			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/",
-			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/"
+			"Aimeos\\Client\\Html\\": "client/html/src/Client/Html/",
+			"Aimeos\\Client\\Jsonapi\\": "client/jsonapi/src/Client/Jsonapi/"
 		},
 		"classmap": [
 			"client/html/src",
+			"client/jsonapi/src",
 			"admin/jqadm/src",
 			"admin/jsonadm/src",
 			"controller/common/src",

@@ -8,11 +8,13 @@ return array(
 		'ai-admin-jqadm',
 		'ai-admin-jsonadm',
 		'ai-client-html',
+		'ai-client-jsonapi',
 		'ai-controller-jobs',
 	),
 	'include' => array(
 		'lib/custom/src',
 		'client/html/src',
+		'client/jsonapi/src',
 		'controller/common/src',
 		'controller/frontend/src',
 		'controller/extjs/src',
@@ -45,6 +47,9 @@ return array(
 		),
 		'client/html/templates' => array(
 			'client/html/templates',
+		),
+		'client/jsonapi/templates' => array(
+			'client/jsonapi/templates',
 		),
 		'controller/extjs' => array(
 			'controller/extjs/src',
