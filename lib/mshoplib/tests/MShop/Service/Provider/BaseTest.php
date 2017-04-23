@@ -67,7 +67,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->query( $item );
 	}
 
@@ -301,7 +301,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'checkConfig' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->expectException( '\Aimeos\MShop\Service\Exception' );
 
 		$args = array( array( 'key' => array( 'type' => 'invalid', 'required' => true ) ), array( 'key' => 'abc' ) );
 		$method->invokeArgs( $this->object, $args );

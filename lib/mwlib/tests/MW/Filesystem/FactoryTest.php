@@ -14,14 +14,14 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateNoAdapter()
 	{
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
 		Factory::create( array( 'basedir' => __DIR__ ) );
 	}
 
 
 	public function testCreateInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
 		Factory::create( array( 'adapter' => 'invalid' ) );
 	}
 }

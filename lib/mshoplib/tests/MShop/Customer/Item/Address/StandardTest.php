@@ -307,7 +307,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'unit@test.de', $this->object->getEmail() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setEmail( 'unittest.de' );
 	}
 
@@ -342,13 +342,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setWebsite( 'http://www.test.de:443' );
 		$this->object->setWebsite( 'https://www.test.de:8080/abc?123' );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setWebsite( '_test:de' );
 	}
 
 	public function testSetWebsiteHostException()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setWebsite( 'localhost' );
 	}
 

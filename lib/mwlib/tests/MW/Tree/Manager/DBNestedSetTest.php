@@ -178,14 +178,14 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	public function testConstructorNoDatabaseManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Tree\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Tree\\Exception' );
 		new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, null);
 	}
 
 
 	public function testConstructorNoConfig()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Tree\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Tree\\Exception' );
 		new \Aimeos\MW\Tree\Manager\DBNestedSet([], self::$dbm);
 	}
 
@@ -194,7 +194,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	{
 		unset( $this->config['sql'] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Tree\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Tree\\Exception' );
 		new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
 	}
 
@@ -203,7 +203,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	{
 		unset( $this->config['sql']['newid'] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Tree\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Tree\\Exception' );
 		new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
 	}
 
@@ -212,7 +212,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	{
 		unset( $this->config['search']['id'] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Tree\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Tree\\Exception' );
 		new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
 	}
 
@@ -282,7 +282,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 			WHERE domain123 = ? AND nleft >= ? AND nright <= ? AND :cond
 		';
 
-		$this->setExpectedException( '\\Aimeos\\MW\\DB\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\DB\\Exception' );
 
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
 		$manager->searchNodes( $manager->createSearch() );
@@ -318,7 +318,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 			DELETE FROM "mw_tree_test" WHERE domain = ? AND nleft12 >= ? AND nright <= ?
 		';
 
-		$this->setExpectedException( '\\Aimeos\\MW\\DB\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\DB\\Exception' );
 
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_ONE  );
@@ -394,7 +394,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
 
-		$this->setExpectedException('\\Aimeos\\MW\\Tree\\Exception');
+		$this->expectException('\\Aimeos\\MW\\Tree\\Exception');
 		$manager->getNode( null, 0);
 	}
 
@@ -435,7 +435,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet($this->config, self::$dbm);
 		$newNode = $manager->createNode();
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Tree\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Tree\\Exception' );
 		$manager->insertNode( $newNode, -1 );
 	}
 
@@ -1010,7 +1010,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$oldparentid = $root->getId();
 		$newparentid = $root->getChild( 0 )->getId();
 
-		$this->setExpectedException( '\\Aimeos\\MW\\DB\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\DB\\Exception' );
 		$manager->moveNode( $nodeid, $oldparentid, $newparentid );
 	}
 
@@ -1033,7 +1033,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 		$node = $manager->createNode();
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Tree\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Tree\\Exception' );
 		$manager->saveNode($node);
 	}
 
@@ -1049,7 +1049,7 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 		$root->setLabel( 'rooot' );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\DB\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\DB\\Exception' );
 		$manager->saveNode( $root );
 	}
 

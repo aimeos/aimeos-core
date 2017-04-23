@@ -21,21 +21,21 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateConverterInvalidName()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Convert\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Convert\\Exception' );
 		\Aimeos\MW\Convert\Factory::createConverter( '$' );
 	}
 
 
 	public function testCreateConverterInvalidClass()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Convert\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Convert\\Exception' );
 		\Aimeos\MW\Convert\Factory::createConverter( 'Test/Invalid' );
 	}
 
 
 	public function testCreateConverterInvalidInterface()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Convert\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Convert\\Exception' );
 		\Aimeos\MW\Convert\Factory::createConverter( 'TestConvert' );
 	}
 }

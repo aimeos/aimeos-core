@@ -399,7 +399,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->process( $this->order );
 	}
 

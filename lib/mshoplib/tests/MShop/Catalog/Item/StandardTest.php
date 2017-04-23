@@ -258,7 +258,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $this->object->getChild( 0 ) );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Catalog\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Catalog\\Exception' );
 		$this->object->getChild( 1 );
 	}
 

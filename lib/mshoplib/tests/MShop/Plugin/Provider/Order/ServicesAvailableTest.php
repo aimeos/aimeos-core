@@ -91,7 +91,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'payment' => true
 		) );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 	}
 
@@ -121,7 +121,7 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'payment' => false
 		) );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 	}
 }

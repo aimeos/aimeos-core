@@ -252,7 +252,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 	}
 
@@ -303,7 +303,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 	}
 
@@ -359,21 +359,21 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->check( -1 );
 	}
 
 
 	public function testCheckAllFailure()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 	}
 
 
 	public function testCheckProductsFailure()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 

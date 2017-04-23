@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'checkResponse' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->expectException( '\Aimeos\MShop\Service\Exception' );
 		$method->invokeArgs( $this->object, array( 'test', 1 ) );
 	}
 
@@ -173,7 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'checkResponse' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->expectException( '\Aimeos\MShop\Service\Exception' );
 		$method->invokeArgs( $this->object, array( '<test></test>', 1 ) );
 	}
 
@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'checkResponse' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->expectException( '\Aimeos\MShop\Service\Exception' );
 		$method->invokeArgs( $this->object, array( $xml, 1 ) );
 	}
 
@@ -211,7 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'checkResponse' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->expectException( '\Aimeos\MShop\Service\Exception' );
 		$method->invokeArgs( $this->object, array( $xml, 1 ) );
 	}
 
@@ -235,7 +235,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$method = $class->getMethod( 'checkResponse' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->expectException( '\Aimeos\MShop\Service\Exception' );
 		$method->invokeArgs( $this->object, array( $xml, 1 ) );
 	}
 

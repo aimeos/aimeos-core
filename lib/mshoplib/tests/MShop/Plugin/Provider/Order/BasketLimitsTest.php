@@ -94,7 +94,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->order->addProduct( $this->products['CNC'] );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
@@ -104,7 +104,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->products['CNE']->setQuantity( 6 );
 		$this->order->addProduct( $this->products['CNE'] );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
@@ -113,7 +113,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->order->addProduct( $this->products['CNE'] );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
@@ -123,7 +123,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->products['CNC']->setQuantity( 2 );
 		$this->order->addProduct( $this->products['CNC'] );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 }

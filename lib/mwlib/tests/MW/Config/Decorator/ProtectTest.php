@@ -23,7 +23,7 @@ class ProtectTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetProtected()
 	{
-		$this->setExpectedException( 'Aimeos\MW\Config\Exception' );
+		$this->expectException( 'Aimeos\MW\Config\Exception' );
 		$this->object->get( 'resource/db' );
 	}
 
@@ -37,7 +37,7 @@ class ProtectTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetProtected()
 	{
-		$this->setExpectedException( 'Aimeos\MW\Config\Exception' );
+		$this->expectException( 'Aimeos\MW\Config\Exception' );
 		$this->object->set( 'resource/db', [] );
 	}
 }

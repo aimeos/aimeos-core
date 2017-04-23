@@ -39,7 +39,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		if( !class_exists( '\Zend\Diactoros\Stream' ) )
 		{
-			$this->setExpectedException( '\Aimeos\MW\Exception' );
+			$this->expectException( '\Aimeos\MW\Exception' );
 			$this->object->createStream( 'test' );
 		}
 

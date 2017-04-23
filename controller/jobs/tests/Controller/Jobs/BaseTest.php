@@ -16,7 +16,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$object = new TestAbstract( $context, $aimeos );
 
-		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->expectException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		$object->getTypeItemPublic( 'product/type', 'product', 'test' );
 	}
 }

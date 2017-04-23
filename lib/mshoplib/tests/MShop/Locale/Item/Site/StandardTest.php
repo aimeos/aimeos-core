@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 99 );
 	}
 
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $this->object->getChild( 0 ) );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->getChild( 1 );
 	}
 

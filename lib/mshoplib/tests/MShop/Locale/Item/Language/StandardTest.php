@@ -69,14 +69,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetIdLength()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->setId( 'espania' );
 	}
 
 
 	public function testSetIdNumeric()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->setId( 123 );
 	}
 
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCodeInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->setCode( 'XXX' );
 	}
 

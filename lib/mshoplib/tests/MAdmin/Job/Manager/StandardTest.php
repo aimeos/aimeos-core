@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->expectException( '\\Aimeos\\MAdmin\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Job\\Exception' );
+		$this->expectException( '\\Aimeos\\MAdmin\\Job\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 }

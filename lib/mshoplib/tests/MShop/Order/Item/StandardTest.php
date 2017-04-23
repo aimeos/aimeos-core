@@ -75,13 +75,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 15, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 6 );
 	}
 
 	public function testSetId2()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setId( 'test' );
 	}
 
@@ -131,7 +131,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDateDelivery() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setDateDelivery( '2008-34-12' );
 	}
 
@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '2008-04-12 12:34:56', $this->object->getDatePayment() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setDatePayment( '2008-34-12' );
 	}
 
@@ -282,7 +282,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testMagicGetException()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Order\\Exception' );
 		$this->object->notExisting;
 	}
 }

@@ -77,7 +77,7 @@ class ErrorlogTest extends \PHPUnit\Framework\TestCase
 
 	public function testLogLevel()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Logger\\Exception' );
+		$this->expectException( '\\Aimeos\\MW\\Logger\\Exception' );
 		$this->object->log( 'wrong loglevel test', -1 );
 	}
 }

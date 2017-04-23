@@ -30,14 +30,14 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Job\\Exception' );
+		$this->expectException( '\\Aimeos\\MAdmin\\Job\\Exception' );
 		\Aimeos\MAdmin\Job\Manager\Factory::createManager( \TestHelperMShop::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		\Aimeos\MAdmin\Job\Manager\Factory::createManager( \TestHelperMShop::getContext(), 'unknown' );
 	}
 

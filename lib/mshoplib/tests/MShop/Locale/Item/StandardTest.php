@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $this->object->getSite() );
 
 		$wrongobject = new \Aimeos\MShop\Locale\Item\Standard();
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$wrongobject->getSite();
 	}
 
@@ -129,14 +129,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( 'test' );
 	}
 
 
 	public function testSetLanguageIdCountryInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( 'en-GB' );
 	}
 
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCurrencyIdInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->expectException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setCurrencyId( 'TEST' );
 	}
 

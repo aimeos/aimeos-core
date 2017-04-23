@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->expectException( '\\Aimeos\\MAdmin\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -134,7 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getRequest(), $itemUpd->getRequest() );
 		$this->assertEquals( $itemExp->getPriority(), $itemUpd->getPriority() );
 
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Log\\Exception' );
+		$this->expectException( '\\Aimeos\\MAdmin\\Log\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
