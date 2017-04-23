@@ -50,7 +50,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$decorators = array( '$' );
 		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
 
-		$this->expectException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'Test_' );
 	}
 
@@ -60,7 +60,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$decorators = array( 'Test' );
 		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
 
-		$this->expectException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'TestDecorator' );
 	}
 
@@ -70,7 +70,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$decorators = array( 'Test' );
 		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
 
-		$this->expectException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl,
 			$decorators, '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\' );
 	}
@@ -80,7 +80,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
 
-		$this->expectException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addControllerDecoratorsPublic( $this->context, $this->aimeos, $cntl, '' );
 	}
 }

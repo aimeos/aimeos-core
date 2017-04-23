@@ -67,7 +67,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->expectException( '\\Aimeos\\MShop\\Service\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->cancel( $item );
 	}
 
@@ -76,7 +76,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->expectException( '\\Aimeos\\MShop\\Service\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->capture( $item );
 	}
 
@@ -93,7 +93,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->expectException( '\\Aimeos\\MShop\\Service\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->refund( $item );
 	}
 

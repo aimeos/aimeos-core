@@ -91,7 +91,7 @@ class PgsqlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $columnItem->getDefaultValue() );
 		$this->assertTrue( $columnItem->isNullable() );
 
-		$this->expectException('\\Aimeos\\MW\\Setup\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Setup\\Exception');
 		$this->object->getColumnDetails( 'mw_setup_dbschema_test', 'notexisting' );
 	}
 

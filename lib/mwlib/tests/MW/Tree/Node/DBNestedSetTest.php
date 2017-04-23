@@ -58,13 +58,13 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetChild()
 	{
-		$this->expectException('\\Aimeos\\MW\\Tree\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Tree\\Exception');
 		$this->object->getChild(null);
 	}
 
 	public function testMagicGet()
 	{
-		$this->expectException('\\Aimeos\\MW\\Tree\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Tree\\Exception');
 		$this->object->notDefined;
 	}
 

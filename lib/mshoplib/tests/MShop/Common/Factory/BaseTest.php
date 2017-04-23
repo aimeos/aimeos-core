@@ -58,7 +58,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Attribute\\Manager\\StandardMock', $manager );
 		\Aimeos\MShop\Attribute\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Attribute\\Manager\\StandardMock', null );
 
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		\Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context, 'StandardMock' );
 	}
 

@@ -275,7 +275,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 
-		$this->expectException( '\Exception' );
+		$this->setExpectedException( '\Exception' );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 
@@ -510,7 +510,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 
-		$this->expectException( '\Exception' );
+		$this->setExpectedException( '\Exception' );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 

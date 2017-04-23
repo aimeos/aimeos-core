@@ -131,14 +131,14 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$types = array( 'int_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'icol', 10 ) );
-		$this->expectException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->getConditionString( $types );
 	}
 
 
 	public function testGetConditionStringInvalidOperator()
 	{
-		$this->expectException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->setConditions( $this->object->compare( '?', 'int_column', 10 ) );
 	}
 
@@ -172,14 +172,14 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$translations = array( 'asc_column' => 'asc_int_col' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
-		$this->expectException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->getSortationString( $types, $translations );
 	}
 
 
 	public function testGetSortationStringInvalidDirection()
 	{
-		$this->expectException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->setSortations( array( $this->object->sort( '/', 'asc_column' ) ) );
 	}
 
@@ -226,7 +226,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testToConditionsInvalidOperator()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Common\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Common\\Exception' );
 		$this->object->toConditions( array( '><' => array( 'name', 'value' ) ) );
 	}
 

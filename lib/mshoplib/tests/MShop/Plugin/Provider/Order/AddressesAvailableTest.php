@@ -91,7 +91,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => true
 		) );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}
 
@@ -121,7 +121,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => false
 		) );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}
 }

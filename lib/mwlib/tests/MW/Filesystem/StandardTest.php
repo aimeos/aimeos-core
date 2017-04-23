@@ -40,7 +40,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testMkdirException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->mkdir( '' );
 	}
 
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRmdirException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->rmdir( 'rmdirinvalid' );
 	}
 
@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testScanException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->scan( 'scaninvalid' );
 	}
 
@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSizeException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->size( 'sizeinvalid' );
 	}
 
@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTimeException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->time( 'timeinvalid' );
 	}
 
@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testRmException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->rm( 'rminvalid' );
 	}
 
@@ -172,7 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testReadException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->read( 'readinvalid' );
 	}
 
@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testReadfException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->readf( 'readinvalid' );
 	}
 
@@ -212,7 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testReadsException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->reads( 'readsinvalid' );
 	}
 
@@ -230,7 +230,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testWriteException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->write( '', 'test' );
 	}
 
@@ -252,7 +252,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testWritefException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->writef( '', 'test' );
 	}
 
@@ -276,7 +276,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testWritesException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->writes( 'file10ex', null );
 	}
 
@@ -299,7 +299,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testMoveException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->move( 'moveinvalid', null );
 	}
 
@@ -323,7 +323,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCopyException()
 	{
-		$this->expectException( '\Aimeos\MW\Filesystem\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Filesystem\Exception' );
 		$this->object->copy( 'copyinvalid', null );
 	}
 }

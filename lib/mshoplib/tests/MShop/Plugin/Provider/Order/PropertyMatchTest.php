@@ -98,7 +98,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( array( 'product.label' => 'wrong label' ) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 
@@ -111,7 +111,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 		) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 
@@ -120,7 +120,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setConfig( array( 'product.lists.domain' => 'foobar' ) );
 		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\PropertyMatch( \TestHelperMShop::getContext(), $this->plugin );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 }

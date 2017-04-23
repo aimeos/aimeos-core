@@ -53,21 +53,21 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testConstructInvalidUnderscoreLocale()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Translation\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Translation\\Exception' );
 		new \Aimeos\MW\Translation\None( 'de_' );
 	}
 
 
 	public function testConstructInvalidCaseLocale()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Translation\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Translation\\Exception' );
 		new \Aimeos\MW\Translation\None( 'de_de' );
 	}
 
 
 	public function testConstructInvalidCharLocale()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Translation\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Translation\\Exception' );
 		new \Aimeos\MW\Translation\None( 'd' );
 	}
 

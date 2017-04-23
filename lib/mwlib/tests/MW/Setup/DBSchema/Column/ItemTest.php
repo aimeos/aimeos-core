@@ -74,7 +74,7 @@ class ItemTest extends \PHPUnit\Framework\TestCase
 		$item = new \Aimeos\MW\Setup\DBSchema\Column\Item( '', '', '', 0, '', 'NO', '' );
 		$this->assertFalse( $item->isNullable() );
 
-		$this->expectException('\\Aimeos\\MW\\Setup\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Setup\\Exception');
 		new \Aimeos\MW\Setup\DBSchema\Column\Item( '', '', '', 0, '', '', '' );
 	}
 }

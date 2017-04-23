@@ -26,35 +26,35 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testConstructNoIncludeFilesExceptions()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
 		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_invalid_fileinclude.jsb2' );
 	}
 
 
 	public function testConstructNoPackageExceptions()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
 		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_invalid_package.jsb2' );
 	}
 
 
 	public function testConstructInvalidPackageContentExceptions()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
 		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_invalid_package_content.jsb2' );
 	}
 
 
 	public function testConstructNotJSONExceptions()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
 		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_no_json.jsb2' );
 	}
 
 
 	public function testConstructFileNotExistingExceptions()
 	{
-		$this->expectException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
 		$this->object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_not_existing.jsb2' );
 	}
 
@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\Jsb2\Standard( $this->manifestPath . 'manifest_filemtime_exception.jsb2' );
 
-		$this->expectException( '\\Aimeos\\MW\\Jsb2\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Jsb2\\Exception' );
 		$object->getHTML( 'js' );
 	}
 }

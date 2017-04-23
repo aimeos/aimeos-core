@@ -135,7 +135,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 			'product.property.typeid',
 		) ) );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 }

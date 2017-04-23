@@ -78,7 +78,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$obj = new \Aimeos\MW\Criteria\Expression\Combine\SQL('&&', []);
 		$this->assertEquals('', $obj->toString($types));
 
-		$this->expectException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		new \Aimeos\MW\Criteria\Expression\Combine\SQL('', []);
 
 	}

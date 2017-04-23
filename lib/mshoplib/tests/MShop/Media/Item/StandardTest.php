@@ -144,7 +144,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( '00' );
 	}
 
@@ -167,14 +167,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMimeTypeNoSlash()
 	{
-		$this->expectException( '\\Aimeos\\MShop\\Media\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Media\\Exception' );
 		$this->object->setMimeType( 'image' );
 	}
 
 
 	public function testSetMimeTypeInvalidCategory()
 	{
-		$this->expectException( '\\Aimeos\\MShop\\Media\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Media\\Exception' );
 		$this->object->setMimeType( 'image+audio/test' );
 	}
 

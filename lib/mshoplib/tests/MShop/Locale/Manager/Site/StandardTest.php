@@ -40,14 +40,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveInvalid()
 	{
-		$this->expectException( '\Aimeos\MShop\Locale\Exception' );
+		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 
 
 	public function testSaveIdException()
 	{
-		$this->expectException( '\Aimeos\MShop\Locale\Exception' );
+		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
 		$this->object->saveItem( $this->object->createItem() );
 	}
 
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -182,7 +182,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -244,7 +244,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->returnValue( [] ) );
 
-		$this->expectException( '\Aimeos\MShop\Locale\Exception' );
+		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
 		$object->getTree();
 	}
 
@@ -284,7 +284,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testMoveItem()
 	{
-		$this->expectException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
 		$this->object->moveItem( null, null, null );
 	}
 }

@@ -63,7 +63,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->expectException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -80,7 +80,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$this->expectException( '\\Aimeos\\MAdmin\\Cache\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MAdmin\\Cache\\Exception' );
 		$this->object->getItem( 'unittest' );
 	}
 

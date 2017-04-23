@@ -110,7 +110,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
@@ -132,7 +132,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
@@ -154,7 +154,7 @@ class ProductGoneTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductGone( \TestHelperMShop::getContext(), $this->plugin );
 
-		$this->expectException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 

@@ -89,7 +89,7 @@ test template
 
 	public function testGetBeginIsNotDefined()
 	{
-		$this->expectException('\\Aimeos\\MW\\Template\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
 		$this->object->get('NOTDEFINED');
 	}
 
@@ -113,7 +113,7 @@ test template
 
 		$object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 
-		$this->expectException('\\Aimeos\\MW\\Template\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
 		$object->get('ITEM');
 	}
 
@@ -168,7 +168,7 @@ test template
 
 		$object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 
-		$this->expectException('\\Aimeos\\MW\\Template\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
 		$object->substitute( array('ITEM'=>'Title' ) );
 	}
 

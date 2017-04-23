@@ -125,13 +125,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>=', 'listitem', array('a', 'b') );
-		$this->expectException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$expr->toString( $types, $translations );
 	}
 
 	public function testToStringExcept2()
 	{
-		$this->expectException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		new \Aimeos\MW\Criteria\Expression\Compare\PHP('=', 'undefined', null);
 	}
 

@@ -94,7 +94,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveInvalid()
 	{
-		$this->expectException( '\Aimeos\MShop\Price\Exception' );
+		$this->setExpectedException( '\Aimeos\MShop\Price\Exception' );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -270,14 +270,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->createItem();
 		$item->setValue( '1.00' );
 
-		$this->expectException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->getLowestPrice( array( $item ), 1, 'USD' );
 	}
 
 
 	public function testGetLowestPriceNoPrice()
 	{
-		$this->expectException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->getLowestPrice( [], 1 );
 	}
 
@@ -288,14 +288,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setValue( '1.00' );
 		$item->setQuantity( 5 );
 
-		$this->expectException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->getLowestPrice( array( $item ), 1 );
 	}
 
 
 	public function testGetLowestPriceWrongItem()
 	{
-		$this->expectException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
 		$this->object->getLowestPrice( array( new \stdClass() ), 1 );
 	}
 }

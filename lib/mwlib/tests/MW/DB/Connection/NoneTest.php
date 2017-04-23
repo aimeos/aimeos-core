@@ -27,35 +27,35 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreate()
 	{
-		$this->expectException( '\Aimeos\MW\DB\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\DB\Exception' );
 		$this->object->create( 'SELECT' );
 	}
 
 
 	public function testGetRawObject()
 	{
-		$this->expectException( '\Aimeos\MW\DB\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\DB\Exception' );
 		$this->object->getRawObject();
 	}
 
 
 	public function testBegin()
 	{
-		$this->expectException( '\Aimeos\MW\DB\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\DB\Exception' );
 		$this->object->begin();
 	}
 
 
 	public function testCommit()
 	{
-		$this->expectException( '\Aimeos\MW\DB\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\DB\Exception' );
 		$this->object->commit();
 	}
 
 
 	public function testRollback()
 	{
-		$this->expectException( '\Aimeos\MW\DB\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\DB\Exception' );
 		$this->object->rollback();
 	}
 }

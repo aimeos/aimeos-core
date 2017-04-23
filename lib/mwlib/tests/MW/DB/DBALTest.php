@@ -322,7 +322,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testWrongFieldType()
 	{
-		$this->expectException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
 		$conn = $this->object->acquire();
@@ -357,7 +357,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 		$conn = $this->object->acquire();
 
-		$this->expectException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 
 		try
 		{
@@ -375,7 +375,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$conn = $this->object->acquire();
 
-		$this->expectException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 
 		try
 		{
@@ -395,7 +395,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 		$conn = $this->object->acquire();
 
-		$this->expectException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 
 		try
 		{
@@ -411,7 +411,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testDBALException()
 	{
-		$this->expectException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 		$conn = new TestForDBALException();
 		$this->object->release($conn);
 	}
@@ -425,7 +425,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testFactoryFail()
 	{
-		$this->expectException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 		\Aimeos\MW\DB\Factory::createManager( \TestHelperMw::getConfig(), 'notDefined' );
 	}
 }

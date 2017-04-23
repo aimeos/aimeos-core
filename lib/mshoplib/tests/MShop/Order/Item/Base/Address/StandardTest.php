@@ -361,7 +361,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'unit@test.de', $this->object->getEmail() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setEmail( 'a@.' );
 	}
 
@@ -392,7 +392,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'www.test.de', $this->object->getWebsite() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->expectException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setWebsite( 'abcde:abc' );
 	}
 

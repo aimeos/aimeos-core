@@ -20,7 +20,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$this->expectException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, "\t\n" );
 	}
 
@@ -30,7 +30,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$this->expectException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, '%^' );
 	}
 
@@ -40,7 +40,7 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$this->expectException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
 		\Aimeos\Controller\Jobs\Factory::createController( $context, $aimeos, 'notexist' );
 	}
 

@@ -42,7 +42,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		unset( $this->object->test );
 		$this->assertEquals( false, isset( $this->object->test ) );
 
-		$this->expectException( '\\Aimeos\\MW\\View\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\View\\Exception' );
 		$this->object->test;
 	}
 
@@ -72,14 +72,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCallInvalidName()
 	{
-		$this->expectException( '\\Aimeos\\MW\\View\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\View\\Exception' );
 		$this->object->invalid();
 	}
 
 
 	public function testCallUnknown()
 	{
-		$this->expectException( '\\Aimeos\\MW\\View\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\View\\Exception' );
 		$this->object->unknown();
 	}
 
