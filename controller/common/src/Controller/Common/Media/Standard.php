@@ -131,21 +131,17 @@ class Standard
 			return;
 		}
 
-		if( (bool) $config->get( 'controller/common/media/standard/files/scale', false ) === true )
-		{
-			$mimetype = $this->getMimeType( $media, 'files' );
-			$filepath = $this->getFilePath( $path, 'files', $mimetype );
-			$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $path );
-			$item->setUrl( $filepath );
-		}
+		$this->scaleImage( $media, 'files' );
+		$mimetype = $this->getMimeType( $media, 'files' );
+		$filepath = $this->getFilePath( $path, 'files', $mimetype );
+		$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $path );
+		$item->setUrl( $filepath );
 
-		if( (bool) $config->get( 'controller/common/media/standard/preview/scale', true ) === true )
-		{
-			$mimetype = $this->getMimeType( $media, 'preview' );
-			$filepath = $this->getFilePath( $path, 'preview', $mimetype );
-			$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $item->getPreview() );
-			$item->setPreview( $filepath );
-		}
+		$this->scaleImage( $media, 'preview' );
+		$mimetype = $this->getMimeType( $media, 'preview' );
+		$filepath = $this->getFilePath( $path, 'preview', $mimetype );
+		$this->storeFile( $media->save( null, $mimetype ), $fsname, $filepath, $item->getPreview() );
+		$item->setPreview( $filepath );
 	}
 
 
