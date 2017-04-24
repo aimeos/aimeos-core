@@ -184,12 +184,16 @@
 		<delete dir="${coredir}/misc/apidoc" quiet="true" failonerror="false" />
 		<exec command="php ${coredir}/vendor/bin/apigen generate --template-theme=bootstrap
 			--title='Aimeos Core API documentation' --tree  --no-source-code -d misc/apidoc
+			-s controller/common/src/ -s controller/jobs/src/
+			-s lib/mshoplib/src/ -s lib/mwlib/src/
 			-s ext/ai-admin-extadm/controller/extjs/src/ -s ext/ai-admin-extadm/controller/jobs/src/
-			-s ext/ai-admin-jqadm/admin/jqadm/src/ -s ext/ai-admin-jsonadm/admin/jsonadm/src/
+			-s ext/ai-admin-jqadm/admin/jqadm/src/
+			-s ext/ai-admin-jsonadm/admin/jsonadm/src/
 			-s ext/ai-client-html/client/html/src/ -s ext/ai-client-html/controller/jobs/src/
-			-s ext/ai-controller-frontend/controller/frontend/src/ -s ext/ai-controller-jobs/controller/common/src/
-			-s ext/ai-controller-jobs/controller/jobs/src/ -s controller/common/src/ -s controller/jobs/src/
-			-s lib/mshoplib/src/ -s lib/mwlib/src/" checkreturn="true" logoutput="true"/>
+			-s ext/ai-client-jsonapi/client/jsonapi/src/
+			-s ext/ai-controller-frontend/controller/frontend/src/
+			-s ext/ai-controller-jobs/controller/common/src/ -s ext/ai-controller-jobs/controller/jobs/src/"
+			checkreturn="true" logoutput="true"/>
 	</target>
 
 
