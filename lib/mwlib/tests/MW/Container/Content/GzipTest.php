@@ -20,7 +20,7 @@ class GzipTest extends \PHPUnit_Framework_TestCase
 	public function testNewFile()
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile.gz';
-		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp', ['gzip-mode' => 'wb'] );
+		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp', array( 'gzip-mode' => 'wb' ) );
 		$resource = $file->getResource();
 		$file->close();
 
@@ -63,13 +63,13 @@ class GzipTest extends \PHPUnit_Framework_TestCase
 	public function testOverwrite()
 	{
 		$filename = 'tmp' . DIRECTORY_SEPARATOR . 'tempfile.gz';
-		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp', ['gzip-mode' => 'wb'] );
+		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp', array( 'gzip-mode' => 'wb' ) );
 		$file->add( 'test text' );
 		$file->close();
 
 		$data1 = file_get_contents( $file->getResource() );
 
-		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp', ['gzip-mode' => 'wb'] );
+		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp', array( 'gzip-mode' => 'wb' ) );
 		$file->add( 'test 2 text' );
 		$file->close();
 
