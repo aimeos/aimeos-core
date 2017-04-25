@@ -52,11 +52,10 @@ class GzipTest extends \PHPUnit\Framework\TestCase
 		$file->add( 'test text' );
 		$file->close();
 
-		$expected = '1f8b08000000000002032a492d2e512849ad2801000000ffff030016fa704509000000';
 		$actual = file_get_contents( $file->getResource() );
 		unlink( $file->getResource() );
 
-		$this->assertEquals( $expected, bin2hex( $actual ) );
+		$this->assertStringStartsWith( '1f8b080000000000', bin2hex( $actual ) );
 		$this->assertEquals( $filename . '.gz', $file->getResource() );
 	}
 
@@ -68,16 +67,17 @@ class GzipTest extends \PHPUnit\Framework\TestCase
 		$file->add( 'test text' );
 		$file->close();
 
+		$data1 = file_get_contents( $file->getResource() );
+
 		$file = new \Aimeos\MW\Container\Content\Gzip( $filename, 'temp', ['gzip-mode' => 'wb'] );
 		$file->add( 'test 2 text' );
 		$file->close();
 
-		$expected = '1f8b08000000000000032a492d2e5130522849ad2801000000ffff030036f787ae0b000000';
-		$actual = file_get_contents( $file->getResource() );
+		$data2 = file_get_contents( $file->getResource() );
 
 		unlink( $file->getResource() );
 
-		$this->assertEquals( $expected, bin2hex( $actual ) );
+		$this->assertNotEquals( $data1, $data2 );
 	}
 
 
