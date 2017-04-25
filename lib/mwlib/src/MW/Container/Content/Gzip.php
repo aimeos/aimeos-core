@@ -27,9 +27,10 @@ class Gzip
 
 
 	/**
-	 * Initializes the text content object.
+	 * Initializes the Gzip content object.
 	 *
 	 * Supported options are:
+	 * - gzip-mode ("rb" for reading, "wb" for writing)
 	 * - gzip-level (default: 5)
 	 *
 	 * @param string $resource Path to the actual file
@@ -46,15 +47,14 @@ class Gzip
 			$name .= '.gz';
 		}
 
+		parent::__construct( $resource, $name, $options );
+
+		$mode = $this->getOption( 'gzip-mode', 'rb' );
 		$level = $this->getOption( 'gzip-level', 5 );
 
-		if( ( $this->fh = @gzopen( $resource, 'rb' . $level ) ) === false
-			&& ( $this->fh = gzopen( $resource, 'wb' ) ) === false
-		) {
+		if( ( $this->fh = gzopen( $resource, $mode . $level ) ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to open file "%1$s"', $resource ) );
 		}
-
-		parent::__construct( $resource, $name, $options );
 
 		$this->data = $this->getData();
 	}
