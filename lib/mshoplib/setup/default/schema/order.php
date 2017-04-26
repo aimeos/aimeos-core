@@ -153,7 +153,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaprat_id' );
-			$table->addUniqueIndex( array( 'ordprodid', 'type', 'code' ), 'unq_msordbaprat_opid_type_code' );
+			$table->addUniqueIndex( array( 'ordprodid', 'attrid', 'type', 'code' ), 'unq_msordbaprat_oid_aid_ty_cd' );
 			$table->addIndex( array( 'ordprodid' ), 'fk_msordbaprat_ordprodid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base_product', array( 'ordprodid' ), array( 'id' ),
@@ -213,7 +213,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbaseat_id' );
-			$table->addUniqueIndex( array( 'ordservid', 'type', 'code' ), 'unq_msordbaseat_osid_type_code' );
+			$table->addUniqueIndex( array( 'ordservid', 'attrid', 'type', 'code' ), 'unq_msordbaseat_oid_aid_ty_cd' );
 			$table->addIndex( array( 'ordservid' ), 'fk_msordbaseat_ordservid' );
 
 			$table->addForeignKeyConstraint( 'mshop_order_base_service', array( 'ordservid' ), array( 'id' ),
