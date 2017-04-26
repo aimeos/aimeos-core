@@ -420,10 +420,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->createItem();
+		$attrItem001->setAttributeId( '1' );
 		$attrItem001->setCode( 'code_001' );
 		$attrItem001->setValue( 'value_001' );
 
 		$attrItem002 = $attManager->createItem();
+		$attrItem002->setAttributeId( '2' );
 		$attrItem002->setCode( 'code_002' );
 		$attrItem002->setType( 'test_002' );
 		$attrItem002->setValue( 'value_002' );
@@ -448,16 +450,41 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $result );
 	}
 
+	public function testGetAttributeList()
+	{
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
+
+		$attrItem001 = $attManager->createItem();
+		$attrItem001->setAttributeId( '1' );
+		$attrItem001->setCode( 'code_001' );
+		$attrItem001->setType( 'test_001' );
+		$attrItem001->setValue( 'value_001' );
+
+		$attrItem002 = $attManager->createItem();
+		$attrItem002->setAttributeId( '2' );
+		$attrItem002->setCode( 'code_001' );
+		$attrItem002->setType( 'test_001' );
+		$attrItem002->setValue( 'value_002' );
+
+		$this->object->setAttributes( array( $attrItem001, $attrItem002 ) );
+
+		$result = $this->object->getAttribute( 'code_001', 'test_001' );
+		$this->assertEquals( ['value_001', 'value_002'], $result );
+	}
+
 	public function testGetAttributeItem()
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$attrItem001 = $attManager->createItem();
+		$attrItem001->setAttributeId( '1' );
 		$attrItem001->setCode( 'code_001' );
 		$attrItem001->setValue( 'value_001' );
 
 		$attrItem002 = $attManager->createItem();
+		$attrItem002->setAttributeId( '2' );
 		$attrItem002->setCode( 'code_002' );
 		$attrItem002->setType( 'test_002' );
 		$attrItem002->setValue( 'value_002' );
@@ -482,6 +509,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $result );
 	}
 
+	public function testGetAttributeItemList()
+	{
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
+
+		$attrItem001 = $attManager->createItem();
+		$attrItem001->setAttributeId( '1' );
+		$attrItem001->setCode( 'code_001' );
+		$attrItem001->setType( 'test_001' );
+		$attrItem001->setValue( 'value_001' );
+
+		$attrItem002 = $attManager->createItem();
+		$attrItem002->setAttributeId( '2' );
+		$attrItem002->setCode( 'code_001' );
+		$attrItem002->setType( 'test_001' );
+		$attrItem002->setValue( 'value_002' );
+
+		$this->object->setAttributes( array( $attrItem001, $attrItem002 ) );
+
+		$result = $this->object->getAttributeItem( 'code_001', 'test_001' );
+		$this->assertEquals( 2, count( $result ) );
+	}
+
 	public function testGetAttributes()
 	{
 		$this->assertEquals( $this->attribute, $this->object->getAttributes() );
@@ -503,6 +553,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
 
 		$item = $attManager->createItem();
+		$item->setAttributeId( '1' );
 		$item->setCode( 'test_code' );
 		$item->setType( 'test_type' );
 		$item->setValue( 'test_value' );
@@ -515,6 +566,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$item = $attManager->createItem();
+		$item->setAttributeId( '1' );
 		$item->setCode( 'test_code' );
 		$item->setType( 'test_type' );
 		$item->setValue( 'test_value2' );

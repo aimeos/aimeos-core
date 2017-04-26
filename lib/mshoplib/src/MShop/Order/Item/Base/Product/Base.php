@@ -55,40 +55,54 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 
 
 	/**
-	 * Returns the value of the attribute item for the ordered product with the given code.
+	 * Returns the value or list of values of the attribute item for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
 	 * @param string $type Type of the product attribute item
-	 * @return string|null value of the attribute item for the ordered product and the given code
+	 * @return array|string|null Value or list of values of the attribute item for the ordered product and the given code
 	 */
 	public function getAttribute( $code, $type = '' )
 	{
 		$map = $this->getAttributeMap();
 
-		if( isset( $map[$type][$code] ) ) {
-			return $map[$type][$code]->getValue();
+		if( !isset( $map[$type][$code] ) ) {
+			return null;
 		}
 
-		return null;
+		if( count( $map[$type][$code] ) === 1 ) {
+			return reset( $map[$type][$code] )->getValue();
+		}
+
+		$list = [];
+		foreach( $map[$type][$code] as $item ) {
+			$list[] = $item->getValue();
+		}
+
+		return $list;
 	}
 
 
 	/**
-	 * Returns the attribute item for the ordered product with the given code.
+	 * Returns the attribute item or list of attribute items for the ordered product with the given code.
 	 *
 	 * @param string $code Code of the product attribute item
 	 * @param string $type Type of the product attribute item
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|null Attribute item for the ordered product and the given code
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface|array|null
+	 * 	Attribute item or list of items for the ordered product and the given code
 	 */
 	public function getAttributeItem( $code, $type = '' )
 	{
 		$map = $this->getAttributeMap();
 
-		if( isset( $map[$type][$code] ) ) {
-			return $map[$type][$code];
+		if( !isset( $map[$type][$code] ) ) {
+			return null;
 		}
 
-		return null;
+		if( count( $map[$type][$code] ) === 1 ) {
+			return reset( $map[$type][$code] );
+		}
+
+		return $map[$type][$code];
 	}
 
 
@@ -129,14 +143,15 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 
 		$type = $item->getType();
 		$code = $item->getCode();
+		$attrId = $item->getAttributeId();
 
-		if( !isset( $this->attributesMap[$type][$code] ) )
+		if( !isset( $this->attributesMap[$type][$code][$attrId] ) )
 		{
-			$this->attributesMap[$type][$code] = $item;
+			$this->attributesMap[$type][$code][$attrId] = $item;
 			$this->attributes[] = $item;
 		}
 
-		$this->attributesMap[$type][$code]->setValue( $item->getValue() );
+		$this->attributesMap[$type][$code][$attrId]->setValue( $item->getValue() );
 		$this->setModified();
 
 		return $this;
@@ -202,8 +217,8 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 		{
 			$this->attributesMap = [];
 
-			foreach( $this->attributes as $attribute ) {
-				$this->attributesMap[$attribute->getType()][$attribute->getCode()] = $attribute;
+			foreach( $this->attributes as $item ) {
+				$this->attributesMap[$item->getType()][$item->getCode()][$item->getAttributeId()] = $item;
 			}
 		}
 
