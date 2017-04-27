@@ -104,6 +104,7 @@ class DirectDebit
 		return $this->checkConfig( $this->feConfig, $attributes );
 	}
 
+
 	/**
 	 * Sets the payment attributes in the given service.
 	 *
