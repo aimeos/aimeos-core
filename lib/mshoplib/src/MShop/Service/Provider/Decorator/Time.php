@@ -110,15 +110,13 @@ class Time
 		$list = [];
 		$feconfig = $this->feConfig;
 
-		$minute = date( 'i' );
-		$minute += 15 - $minute % 15;
-
 		try
 		{
+			$minute = date( 'i' );
 			$service = $basket->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
 
 			if( ( $value = $service->getAttribute( 'time', 'delivery' ) ) == '' ) {
-				$feconfig['time.hourminute']['default'] = date( 'H' ) . ':' . $minute;
+				$feconfig['time.hourminute']['default'] = date( 'H:i', time() + ($minute + 15 - ($minute % 15)) * 60 );
 			} else {
 				$feconfig['time.hourminute']['default'] = $value;
 			}
