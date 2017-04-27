@@ -45,7 +45,7 @@ interface Iface
 	public function setAttributeId( $id );
 
 	/**
-	 * Returns the type of the product attibute.
+	 * Returns the type of the product attribute.
 	 *
 	 * @return string Type of the attribute
 	 */

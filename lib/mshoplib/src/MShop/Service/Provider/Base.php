@@ -324,7 +324,7 @@ abstract class Base
 				switch( $def['type'] )
 				{
 					case 'boolean':
-						if( $attributes[$key] != '0' && $attributes[$key] != '1' ) {
+						if( !is_string( $attributes[$key] ) || $attributes[$key] !== '0' && $attributes[$key] !== '1' ) {
 							$errors[$key] = sprintf( 'Not a true/false value' ); continue 2;
 						}
 						break;
@@ -347,20 +347,20 @@ abstract class Base
 						break;
 					case 'date':
 						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/';
-						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
+						if( !is_string( $attributes[$key] ) || preg_match( $pattern, $attributes[$key] ) !== 1 ) {
 							$errors[$key] = sprintf( 'Not a date' ); continue 2;
 						}
 						break;
 					case 'datetime':
-						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
-						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
+						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9](:[0-5][0-9])?$/';
+						if( !is_string( $attributes[$key] ) || preg_match( $pattern, $attributes[$key] ) !== 1 ) {
 							$errors[$key] = sprintf( 'Not a date and time' ); continue 2;
 						}
 						break;
 					case 'time':
-						$pattern = '/^[0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
-						if( preg_match( $pattern, $attributes[$key] ) !== 1 ) {
-							$errors[$key] = sprintf( 'Not a date and time' ); continue 2;
+						$pattern = '/^([0-2])?[0-9]:[0-5][0-9](:[0-5][0-9])?$/';
+						if( !is_string( $attributes[$key] ) || preg_match( $pattern, $attributes[$key] ) !== 1 ) {
+							$errors[$key] = sprintf( 'Not a time' ); continue 2;
 						}
 						break;
 					case 'select':
