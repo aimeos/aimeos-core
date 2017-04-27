@@ -103,6 +103,15 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIsAvailableFailureNoArticle()
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' );
+		$this->servItem->setConfig( array( 'download.all' => '0' ) );
+
+		$this->assertFalse( $this->object->isAvailable( $manager->createItem() ) );
+	}
+
+
 	/**
 	 * Returns an order base item
 	 *

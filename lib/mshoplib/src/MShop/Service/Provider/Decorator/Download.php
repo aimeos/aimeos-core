@@ -81,15 +81,25 @@ class Download
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$val = (bool) $this->getConfigValue( array( 'download.all' ) );
+		if( (bool) $this->getConfigValue( 'download.all' ) === true )
+		{
+			foreach( $basket->getProducts() as $product )
+			{
+				if( $product->getAttribute( 'download', 'hidden' ) === null ) {
+					return false;
+				}
+			}
+
+			return $this->getProvider()->isAvailable( $basket );
+		}
 
 		foreach( $basket->getProducts() as $product )
 		{
-			if( ((bool) count( $product->getAttributes( 'download' ) )) !== $val ) {
-				return !$val;
+			if( $product->getAttribute( 'download', 'hidden' ) === null ) {
+				return $this->getProvider()->isAvailable( $basket );
 			}
 		}
 
-		return $this->getProvider()->isAvailable( $basket );
+		return false;
 	}
 }
