@@ -91,7 +91,7 @@ class ProductPrice
 			$orderPosPrice = $orderProduct->getPrice();
 			$price = $this->getPrice( $orderProduct, $refPrices, $attributes, $pos );
 
-			if( $orderPosPrice->compare( $price ) === false )
+			if( $orderPosPrice->getTaxFlag() === $price->getTaxFlag() && $orderPosPrice->compare( $price ) === false )
 			{
 				$orderProduct->setPrice( $price );
 
