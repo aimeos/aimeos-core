@@ -23,7 +23,7 @@ abstract class Base
 	implements \Aimeos\MShop\Customer\Item\Iface
 {
 	private $billingaddress;
-	private $values;
+	private $data;
 
 
 	/**
@@ -68,7 +68,7 @@ abstract class Base
 		$address->setId( $this->getId() );
 
 		$this->billingaddress = $address;
-		$this->values = $values;
+		$this->data = $values;
 	}
 
 
