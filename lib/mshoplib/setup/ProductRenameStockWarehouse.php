@@ -28,7 +28,7 @@ class ProductRenameStockWarehouse extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'ProductChangeStockWarehouseIdNotNull', 'ProductWarehouseRenameTable', 'ProductWarehouseAddLabelStatus', 'TablesAddLogColumns', 'TablesChangeSiteidNotNull' );
+		return array( 'ProductChangeStockWarehouseIdNotNull', 'ProductWarehouseRenameTable', 'TablesAddLogColumns', 'TablesChangeSiteidNotNull' );
 	}
 
 
