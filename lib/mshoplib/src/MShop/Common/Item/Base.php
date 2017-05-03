@@ -22,9 +22,10 @@ abstract class Base
 	extends \Aimeos\MW\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Iface
 {
+	private $bdata;
 	private $prefix;
-	private $values;
 	private $modified = false;
+
 
 	/**
 	 * Initializes the class properties.
@@ -35,7 +36,7 @@ abstract class Base
 	public function __construct( $prefix, array $values )
 	{
 		$this->prefix = (string) $prefix;
-		$this->values = $values;
+		$this->bdata = $values;
 	}
 
 
@@ -46,12 +47,12 @@ abstract class Base
 	 */
 	public function getId()
 	{
-		if( isset( $this->values['id'] ) && $this->values['id'] != '' ) {
-			return (string) $this->values['id'];
+		if( isset( $this->bdata['id'] ) && $this->bdata['id'] != '' ) {
+			return (string) $this->bdata['id'];
 		}
 
 		$key = $this->prefix . 'id';
-		return ( isset( $this->values[$key] ) && $this->values[$key] != '' ? (string) $this->values[$key] : null );
+		return ( isset( $this->bdata[$key] ) && $this->bdata[$key] != '' ? (string) $this->bdata[$key] : null );
 	}
 
 
@@ -65,13 +66,13 @@ abstract class Base
 	{
 		$key = $this->prefix . 'id';
 
-		if( ( $this->values[$key] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
+		if( ( $this->bdata[$key] = \Aimeos\MShop\Common\Item\Base::checkId( $this->getId(), $id ) ) === null ) {
 			$this->modified = true;
 		} else {
 			$this->modified = false;
 		}
 
-		$this->values['id'] = $this->values[$key];
+		$this->bdata['id'] = $this->bdata[$key];
 		return $this;
 	}
 
@@ -83,12 +84,12 @@ abstract class Base
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->values['siteid'] ) ) {
-			return (int) $this->values['siteid'];
+		if( isset( $this->bdata['siteid'] ) ) {
+			return (int) $this->bdata['siteid'];
 		}
 
 		$key = $this->prefix . 'siteid';
-		return ( isset( $this->values[$key] ) ? (int) $this->values[$key] : null );
+		return ( isset( $this->bdata[$key] ) ? (int) $this->bdata[$key] : null );
 	}
 
 
@@ -99,12 +100,12 @@ abstract class Base
 	 */
 	public function getTimeModified()
 	{
-		if( isset( $this->values['mtime'] ) ) {
-			return (string) $this->values['mtime'];
+		if( isset( $this->bdata['mtime'] ) ) {
+			return (string) $this->bdata['mtime'];
 		}
 
 		$key = $this->prefix . 'mtime';
-		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : null );
+		return ( isset( $this->bdata[$key] ) ? (string) $this->bdata[$key] : null );
 	}
 
 
@@ -115,12 +116,12 @@ abstract class Base
 	 */
 	public function getTimeCreated()
 	{
-		if( isset( $this->values['ctime'] ) ) {
-			return (string) $this->values['ctime'];
+		if( isset( $this->bdata['ctime'] ) ) {
+			return (string) $this->bdata['ctime'];
 		}
 
 		$key = $this->prefix . 'ctime';
-		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : null );
+		return ( isset( $this->bdata[$key] ) ? (string) $this->bdata[$key] : null );
 	}
 
 
@@ -131,12 +132,12 @@ abstract class Base
 	 */
 	public function getEditor()
 	{
-		if( isset( $this->values['editor'] ) ) {
-			return (string) $this->values['editor'];
+		if( isset( $this->bdata['editor'] ) ) {
+			return (string) $this->bdata['editor'];
 		}
 
 		$key = $this->prefix . 'editor';
-		return ( isset( $this->values[$key] ) ? (string) $this->values[$key] : '' );
+		return ( isset( $this->bdata[$key] ) ? (string) $this->bdata[$key] : '' );
 	}
 
 
@@ -329,6 +330,6 @@ abstract class Base
 	 */
 	protected function getRawValues()
 	{
-		return $this->values;
+		return $this->bdata;
 	}
 }

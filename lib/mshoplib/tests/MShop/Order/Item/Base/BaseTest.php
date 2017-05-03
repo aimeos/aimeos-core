@@ -209,8 +209,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetAddress()
 	{
-		foreach( $this->addresses as $type => $address ) {
+		foreach( $this->addresses as $type => $address )
+		{
 			$address->setId( null );
+			$address->setType( $type );
 			$this->object->setAddress( $address, $type );
 		}
 
@@ -259,8 +261,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetService()
 	{
-		foreach( $this->services as $type => $service ) {
+		foreach( $this->services as $type => $service )
+		{
 			$service->setId( null );
+			$service->setType( $type );
 			$this->object->setService( $service, $type );
 		}
 

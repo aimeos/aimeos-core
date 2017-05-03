@@ -25,7 +25,7 @@ abstract class Base
 	private $addresses;
 	private $billingaddress;
 	private $sortedAddr;
-	private $values;
+	private $data;
 
 
 	/**
@@ -74,7 +74,7 @@ abstract class Base
 
 		$this->billingaddress = $address;
 		$this->addresses = $addresses;
-		$this->values = $values;
+		$this->data = $values;
 	}
 
 
