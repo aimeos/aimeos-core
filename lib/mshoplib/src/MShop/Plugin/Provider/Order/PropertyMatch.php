@@ -65,10 +65,10 @@ class PropertyMatch
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
 
 		$criteria = $productManager->createSearch( true );
-
-		$expr = [];
-		$expr[] = $criteria->compare( '==', 'product.id', $value->getProductId() );
-		$expr[] = $criteria->getConditions();
+		$expr = [
+			$criteria->compare( '==', 'product.id', $value->getProductId() ),
+			$criteria->getConditions(),
+		];
 
 		foreach( $config as $property => $value ) {
 			$expr[] = $criteria->compare( '==', $property, $value );

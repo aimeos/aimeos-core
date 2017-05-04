@@ -22,7 +22,7 @@ class Coupon
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	protected static $lock = false;
+	private $singleton = false;
 
 
 	/**
@@ -33,7 +33,9 @@ class Coupon
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'addProduct.after' );
+		$p->addListener( $this->getObject(), 'editProduct.after' );
 		$p->addListener( $this->getObject(), 'deleteProduct.after' );
+		$p->addListener( $this->getObject(), 'deleteService.after' );
 		$p->addListener( $this->getObject(), 'setService.after' );
 		$p->addListener( $this->getObject(), 'addCoupon.after' );
 		$p->addListener( $this->getObject(), 'check.after' );
@@ -49,6 +51,11 @@ class Coupon
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
+		if( $this->singleton === true ) {
+			return true;
+		}
+		$this->singleton = true;
+
 		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
@@ -56,37 +63,29 @@ class Coupon
 		}
 
 		$notAvailable = [];
+		$couponManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon' );
 
-		if( self::$lock === false )
+		foreach( $order->getCoupons() as $code => $products )
 		{
-			self::$lock = true;
+			$search = $couponManager->createSearch( true );
+			$expr = array(
+				$search->compare( '==', 'coupon.code.code', $code ),
+				$search->getConditions(),
+			);
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSlice( 0, 1 );
 
-			$couponManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon' );
+			$results = $couponManager->searchItems( $search );
 
-			foreach( $order->getCoupons() as $code => $products )
+			if( ( $couponItem = reset( $results ) ) !== false )
 			{
-				$search = $couponManager->createSearch( true );
-				$expr = array(
-					$search->compare( '==', 'coupon.code.code', $code ),
-					$search->getConditions(),
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
-				$search->setSlice( 0, 1 );
-
-				$results = $couponManager->searchItems( $search );
-
-				if( ( $couponItem = reset( $results ) ) !== false )
-				{
-					$couponProvider = $couponManager->getProvider( $couponItem, $code );
-					$couponProvider->updateCoupon( $order );
-				}
-				else
-				{
-					$notAvailable[$code] = 'coupon.gone';
-				}
+				$couponProvider = $couponManager->getProvider( $couponItem, $code );
+				$couponProvider->updateCoupon( $order );
 			}
-
-			self::$lock = false;
+			else
+			{
+				$notAvailable[$code] = 'coupon.gone';
+			}
 		}
 
 		if( count( $notAvailable ) > 0 )
@@ -96,6 +95,7 @@ class Coupon
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $codes );
 		}
 
+		$this->singleton = false;
 		return true;
 	}
 

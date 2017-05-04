@@ -22,6 +22,9 @@ class Autofill
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
+	private $singleton = false;
+
+
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -45,6 +48,11 @@ class Autofill
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
+		if( $this->singleton === true ) {
+			return true;
+		}
+		$this->singleton = true;
+
 		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
@@ -78,6 +86,7 @@ class Autofill
 		$this->setAddressDefault( $order );
 		$this->setServicesDefault( $order );
 
+		$this->singleton = false;
 		return true;
 	}
 

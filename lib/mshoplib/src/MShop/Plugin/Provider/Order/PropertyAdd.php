@@ -76,7 +76,6 @@ class PropertyAdd
 		}
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-
 		$config = $this->getItemBase()->getConfig();
 
 		foreach( $config as $key => $properties )
@@ -92,11 +91,10 @@ class PropertyAdd
 			$productSubManager = $productManager->getSubManager( $keyElements[1] );
 
 			$search = $productSubManager->createSearch( true );
-
-			$cond = [];
-			$cond[] = $search->compare( '==', $key, $value->getProductId() );
-			$cond[] = $search->getConditions();
-
+			$cond = [
+				$search->compare( '==', $key, $value->getProductId() ),
+				$search->getConditions(),
+			];
 			$search->setConditions( $search->combine( '&&', $cond ) );
 
 			$result = $productSubManager->searchItems( $search );
