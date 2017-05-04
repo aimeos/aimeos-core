@@ -829,7 +829,9 @@ abstract class Base
 			$results = $stmt->execute();
 			$row = $results->fetch();
 			$results->finish();
-			$this->context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, \Aimeos\MW\Logger\Base::DEBUG );
+
+			$msg = get_class( $this ) . ' (' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL = ' . $stmt;
+			$this->context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
 			if( $row === false ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Total results value not found' ) );
@@ -845,7 +847,9 @@ abstract class Base
 		$time = microtime( true );
 		$stmt = $conn->create( $sql->str() );
 		$results = $stmt->execute();
-		$this->context->getLogger()->log( __METHOD__ . '(' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL statement: ' . $stmt, \Aimeos\MW\Logger\Base::DEBUG );
+
+		$msg = get_class( $this ) . ' (' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL = ' . $stmt;
+		$this->context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
 		return $results;
 	}

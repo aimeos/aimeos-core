@@ -28,8 +28,10 @@ class Log
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
+		$level = \Aimeos\MW\Logger\Base::DEBUG;
 		$class = get_class( $this->getProvider() );
-		$this->getContext()->getLogger()->log( 'Plugin::register: ' . $class, \Aimeos\MW\Logger\Base::DEBUG );
+
+		$this->getContext()->getLogger()->log( 'Plugin::register: ' . $class, $level, 'core/plugin' );
 
 		$this->getProvider()->register( $p );
 	}
@@ -44,16 +46,17 @@ class Log
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
+		$level = \Aimeos\MW\Logger\Base::DEBUG;
 		$class = get_class( $this->getProvider() );
 		$payload = ( is_object( $value ) ? get_class( $value ) : ( is_scalar( $value ) ? $value : '' ) );
 
 		$msg = 'Plugin::update:before: ' . $class . ', action: ' . $action . ', value: ' . $payload;
-		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG );
+		$this->getContext()->getLogger()->log( $msg, $level, 'core/plugin' );
 
 		$result = $this->getProvider()->update( $order, $action, $value );
 
 		$msg = 'Plugin::update:after: ' . $class . ', action: ' . $action . ', value: ' . $payload;
-		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG );
+		$this->getContext()->getLogger()->log( $msg, $level, 'core/plugin' );
 
 		return $result;
 	}

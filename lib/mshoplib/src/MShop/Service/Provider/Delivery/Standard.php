@@ -79,14 +79,15 @@ class Standard
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order )
 	{
+		$level = \Aimeos\MW\Logger\Base::INFO;
 		$logger = $this->getContext()->getLogger();
 		$xml = $this->buildXML( $order );
 
-		$logger->log( __METHOD__ . ": XML request =\n" . $xml, \Aimeos\MW\Logger\Base::INFO );
+		$logger->log( __METHOD__ . ": XML request =\n" . $xml, $level, 'core/service/delivery' );
 
 		$response = $this->sendRequest( $xml );
 
-		$logger->log( __METHOD__ . ": XML response =\n" . trim( $response ), \Aimeos\MW\Logger\Base::INFO );
+		$logger->log( __METHOD__ . ": XML response =\n" . trim( $response ), $level, 'core/service/delivery' );
 
 		$this->checkResponse( $response, $order->getId() );
 
@@ -162,7 +163,9 @@ class Standard
 
 			if( isset( $config['default.username'] ) && isset( $config['default.password'] ) )
 			{
-				$context->getLogger()->log( 'Using user name and password for authentication', \Aimeos\MW\Logger\Base::NOTICE );
+				$msg = 'Using user name and password for authentication';
+				$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::NOTICE, 'core/service/delivery' );
+
 				curl_setopt( $curl, CURLOPT_HTTPAUTH, CURLAUTH_ANY );
 				curl_setopt( $curl, CURLOPT_USERPWD, $config['default.username'] . ':' . $config['default.password'] );
 			}
@@ -172,31 +175,38 @@ class Standard
 			{
 				if( isset( $config['default.ssl'] ) && $config['default.ssl'] == 'weak' )
 				{
-					$context->getLogger()->log( 'Using weak SSL options', \Aimeos\MW\Logger\Base::NOTICE );
+					$msg = 'Using weak SSL options';
+					$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::NOTICE, 'core/service/delivery' );
+
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, false );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, true );
 				}
 				else
 				{
-					$context->getLogger()->log( 'Using strict SSL options', \Aimeos\MW\Logger\Base::NOTICE );
+					$msg = 'Using strict SSL options';
+					$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::NOTICE, 'core/service/delivery' );
+
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
 					curl_setopt( $curl, CURLOPT_SSL_VERIFYHOST, 2 ); // check CN and match host name
 				}
 			}
 			else
 			{
-				$context->getLogger()->log( 'Using no SSL encryption', \Aimeos\MW\Logger\Base::NOTICE );
+				$msg = 'Using no SSL encryption';
+				$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::NOTICE, 'core/service/delivery' );
 			}
 
-			if( ( $response = curl_exec( $curl ) ) === false ) {
-				throw new \Aimeos\MShop\Service\Exception(
-					sprintf( 'Sending order to delivery provider failed: "%1$s"', curl_error( $curl ) ), parent::ERR_TEMP );
+			if( ( $response = curl_exec( $curl ) ) === false )
+			{
+				$msg = sprintf( 'Sending order to delivery provider failed: "%1$s"', curl_error( $curl ) );
+				throw new \Aimeos\MShop\Service\Exception( $msg, parent::ERR_TEMP );
 			}
 
 			$curlinfo = curl_getinfo( $curl );
-			if( $curlinfo['http_code'] != '200' ) {
-				throw new \Aimeos\MShop\Service\Exception(
-					sprintf( 'Sending order to delivery provider failed with HTTP status "%1$s"', $curlinfo['http_code'] ), parent::ERR_TEMP );
+			if( $curlinfo['http_code'] != '200' )
+			{
+				$msg = sprintf( 'Sending order to delivery provider failed with HTTP status "%1$s"', $curlinfo['http_code'] );
+				throw new \Aimeos\MShop\Service\Exception( $msg, parent::ERR_TEMP );
 			}
 
 			curl_close( $curl );
@@ -337,7 +347,7 @@ class Standard
 		$date = $invoice->getDatePayment();
 
 		if( ( $pdate = preg_replace( $regex, '$1-$2-$3T$4:$5:$6Z', $date ) ) === null ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in purchase date "%1$s"', $date ) );
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in purchase date "%1$s"', $date ) );
 		}
 
 		$config = $this->getServiceItem()->getConfig();
