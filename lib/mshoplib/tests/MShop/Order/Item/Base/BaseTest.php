@@ -193,6 +193,39 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testEditProduct()
+	{
+		$product = $this->createProduct( 'prodid3' );
+		$product->setQuantity( 5 );
+		$products[] = $product;
+
+		$this->object->addProduct( $product );
+		$product->setQuantity( 10 );
+		$this->object->editProduct( $product, 0 );
+
+		$this->assertEquals( $products, $this->object->getProducts() );
+		$this->assertEquals( 10, $this->object->getProduct( 0 )->getQuantity() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testEditProductSame()
+	{
+		foreach( $this->products as $product ) {
+			$this->object->addProduct( $product );
+		}
+
+		$product = clone $this->object->getProduct( 0 );
+		$product->setQuantity( 10 );
+		$this->object->editProduct( $product, 1 );
+
+		$this->assertEquals( 2, count( $this->object->getProducts() ) );
+		$this->assertEquals( 10, $this->object->getProduct( 0 )->getQuantity() );
+		$this->assertEquals( 1, $this->object->getProduct( 1 )->getQuantity() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testDeleteProduct()
 	{
 		foreach( $this->products as $product ) {

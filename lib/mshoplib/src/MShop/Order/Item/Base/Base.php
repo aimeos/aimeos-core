@@ -194,20 +194,44 @@ abstract class Base
 			{
 				$this->products[$position] = $item;
 			}
-
-			$pos = $position;
 		}
 		else
 		{
 			$this->products[] = $item;
-			end( $this->products );
-			$pos = key( $this->products );
 		}
 
 		ksort( $this->products );
 		$this->setModified();
 
 		$this->notifyListeners( 'addProduct.after', $item );
+	}
+
+
+	/**
+	 * Sets a modified order product item to the (future) order.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
+	 * @param integer $position Position id of the order product item
+	 */
+	public function editProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $pos )
+	{
+		if( !array_key_exists( $pos, $this->products ) ) {
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product with array key "%1$d" not available', $pos ) );
+		}
+
+		$this->notifyListeners( 'editProduct.before', $item );
+
+		if( ( $pos = $this->getSameProduct( $item, $this->products ) ) !== false )
+		{
+			$this->products[$pos] = $item;
+			$this->setModified();
+		}
+		else
+		{
+			$this->products[$pos] = $item;
+		}
+
+		$this->notifyListeners( 'editProduct.after', $item );
 	}
 
 
@@ -222,9 +246,10 @@ abstract class Base
 			return;
 		}
 
-		$this->notifyListeners( 'deleteProduct.before', $position );
-
 		$product = $this->products[$position];
+
+		$this->notifyListeners( 'deleteProduct.before', $product );
+
 		unset( $this->products[$position] );
 		$this->setModified();
 

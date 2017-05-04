@@ -96,6 +96,14 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null );
 
 	/**
+	 * Sets a modified order product item to the (future) order.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
+	 * @param integer $position Position id of the order product item
+	 */
+	public function editProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position );
+
+	/**
 	 * Deletes an order product item from the (future) order.
 	 *
 	 * @param integer $position Position id of the order product item
