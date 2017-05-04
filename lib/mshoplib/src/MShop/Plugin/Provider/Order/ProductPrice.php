@@ -44,14 +44,14 @@ class ProductPrice
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
+		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT === 0 ) {
+			return true;
+		}
+
 		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
-		}
-
-		if( !( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) ) {
-			return true;
 		}
 
 

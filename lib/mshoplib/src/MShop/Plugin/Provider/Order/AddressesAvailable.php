@@ -44,34 +44,35 @@ class AddressesAvailable
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
+		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS === 0 ) {
+			return true;
+		}
+
 		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS )
+		$problems = [];
+		$availableAddresses = $order->getAddresses();
+
+		foreach( $this->getItemBase()->getConfig() as $type => $value )
 		{
-			$problems = [];
-			$availableAddresses = $order->getAddresses();
-
-			foreach( $this->getItemBase()->getConfig() as $type => $value )
-			{
-				if( $value == true && !isset( $availableAddresses[$type] ) ) {
-					$problems[$type] = 'available.none';
-				}
-
-				if( $value !== null && $value !== '' && $value == false && isset( $availableAddresses[$type] ) ) {
-					$problems[$type] = 'available.notallowed';
-				}
+			if( $value == true && !isset( $availableAddresses[$type] ) ) {
+				$problems[$type] = 'available.none';
 			}
 
-			if( count( $problems ) > 0 )
-			{
-				$code = array( 'address' => $problems );
-				$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Checks for available addresses in basket failed' );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
+			if( $value !== null && $value !== '' && $value == false && isset( $availableAddresses[$type] ) ) {
+				$problems[$type] = 'available.notallowed';
 			}
+		}
+
+		if( count( $problems ) > 0 )
+		{
+			$code = array( 'address' => $problems );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Checks for available addresses in basket failed' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
 		}
 
 		return true;

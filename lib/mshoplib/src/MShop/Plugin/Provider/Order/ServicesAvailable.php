@@ -44,35 +44,37 @@ class ServicesAvailable
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
+		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE === 0 ) {
+			return true;
+		}
+
 		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
+		$problems = [];
+		$availableServices = $order->getServices();
+
+		foreach( $this->getItemBase()->getConfig() as $type => $value )
 		{
-			$problems = [];
-			$availableServices = $order->getServices();
-
-			foreach( $this->getItemBase()->getConfig() as $type => $value )
-			{
-				if( $value == true && !isset( $availableServices[$type] ) ) {
-					$problems[$type] = 'available.none';
-				}
-
-				if( $value !== null && $value !== '' && $value == false && isset( $availableServices[$type] ) ) {
-					$problems[$type] = 'available.notallowed';
-				}
+			if( $value == true && !isset( $availableServices[$type] ) ) {
+				$problems[$type] = 'available.none';
 			}
 
-			if( count( $problems ) > 0 )
-			{
-				$code = array( 'service' => $problems );
-				$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Checks for available service items in basket failed' );
-				throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
+			if( $value !== null && $value !== '' && $value == false && isset( $availableServices[$type] ) ) {
+				$problems[$type] = 'available.notallowed';
 			}
 		}
+
+		if( count( $problems ) > 0 )
+		{
+			$code = array( 'service' => $problems );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Checks for available service items in basket failed' );
+			throw new \Aimeos\MShop\Plugin\Provider\Exception( $msg, -1, null, $code );
+		}
+
 		return true;
 	}
 }
