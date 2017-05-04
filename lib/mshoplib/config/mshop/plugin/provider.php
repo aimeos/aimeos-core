@@ -1,11 +1,9 @@
 <?php
 
 return [
-	'provider' => [
-		'order' => [
-			'decorators' => [
-				'Singleton', 'Log',
-			],
+	'order' => [
+		'decorators' => [
+			'Log', 'Singleton',
 		],
 	],
 ];

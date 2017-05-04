@@ -21,7 +21,7 @@ namespace Aimeos\MShop\Plugin\Provider\Decorator;
 abstract class Base
 	extends \Aimeos\MShop\Plugin\Provider\Base
 {
-	private $object;
+	private $provider;
 
 
 	/**
@@ -36,7 +36,7 @@ abstract class Base
 	{
 		parent::__construct( $context, $item );
 
-		$this->object = $provider;
+		$this->provider = $provider;
 	}
 
 
@@ -47,7 +47,7 @@ abstract class Base
 	 */
 	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
-		$this->object->register( $p );
+		$this->provider->register( $p );
 	}
 
 
@@ -61,7 +61,7 @@ abstract class Base
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		return $this->object->update( $order, $action, $value );
+		return $this->provider->update( $order, $action, $value );
 	}
 
 
@@ -75,7 +75,7 @@ abstract class Base
 	{
 		parent::setObject( $object );
 
-		$this->object->setObject( $object );
+		$this->provider->setObject( $object );
 
 		return $this;
 	}
@@ -88,6 +88,6 @@ abstract class Base
 	 */
 	protected function getProvider()
 	{
-		return $this->object;
+		return $this->provider;
 	}
 }
