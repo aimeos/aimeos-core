@@ -92,7 +92,6 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
-	 * @return integer Position the product item was inserted at
 	 */
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null );
 
@@ -124,7 +123,6 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Item that was really added to the basket
 	 */
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type );
 
@@ -156,7 +154,6 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given type
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Item that was really added to the basket
 	 */
 	public function setService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type );
 

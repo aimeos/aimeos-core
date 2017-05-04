@@ -158,7 +158,6 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
-	 * @return integer Position the product item was inserted at
 	 */
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null )
 	{
@@ -209,8 +208,6 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'addProduct.after', $item );
-
-		return $pos;
 	}
 
 
@@ -268,7 +265,6 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type, usually "billing" or "delivery"
-	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Item that was really added to the basket
 	 */
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type )
 	{
@@ -284,8 +280,6 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'setAddress.after', $address );
-
-		return $this->addresses[$type];
 	}
 
 
@@ -343,7 +337,6 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Item that was really added to the basket
 	 */
 	public function setService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type )
 	{
@@ -359,8 +352,6 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'setService.after', $service );
-
-		return $this->services[$type];
 	}
 
 

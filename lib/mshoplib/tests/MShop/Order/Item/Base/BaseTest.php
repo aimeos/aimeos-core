@@ -108,10 +108,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$product = $this->createProduct( 'prodid3' );
 		$products[] = $product;
 
-		$pos = $this->object->addProduct( $product );
+		$this->object->addProduct( $product );
 
 		$this->assertSame( $products, $this->object->getProducts() );
-		$this->assertSame( $product, $this->object->getProduct( $pos ) );
+		$this->assertSame( $product, $this->object->getProduct( 2 ) );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -126,10 +126,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$product = $this->createProduct( 'prodid3' );
 		array_splice( $products, 1, 0, array( $product ) );
 
-		$pos = $this->object->addProduct( $product, 1 );
+		$this->object->addProduct( $product, 1 );
 
 		$this->assertEquals( $products, $this->object->getProducts() );
-		$this->assertSame( $product, $this->object->getProduct( $pos ) );
+		$this->assertSame( $product, $this->object->getProduct( 1 ) );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -144,10 +144,10 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$product = $this->createProduct( 'prodid3' );
 		array_splice( $products, 2, 0, array( $product ) );
 
-		$pos = $this->object->addProduct( $product, 2 );
+		$this->object->addProduct( $product, 2 );
 
 		$this->assertEquals( $products, $this->object->getProducts() );
-		$this->assertSame( $product, $this->object->getProduct( $pos ) );
+		$this->assertSame( $product, $this->object->getProduct( 2 ) );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -163,12 +163,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$product->setQuantity( 5 );
 		$products[] = $product;
 
-		$pos1 = $this->object->addProduct( $product );
-		$pos2 = $this->object->addProduct( $product );
+		$this->object->addProduct( $product );
+		$this->object->addProduct( $product );
 
 		$this->assertEquals( $products, $this->object->getProducts() );
-		$this->assertEquals( 10, $this->object->getProduct( $pos2 )->getQuantity() );
-		$this->assertEquals( $pos1, $pos2 );
+		$this->assertEquals( 10, $this->object->getProduct( 2 )->getQuantity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -233,11 +232,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$orderAddressManager = $orderManager->getSubManager( 'base' )->getSubManager( 'address' );
 		$address = $orderAddressManager->createItem();
 
-		$result = $this->object->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+		$this->object->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$item = $this->object->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Address\\Iface', $result );
-		$this->assertEquals( $result, $item );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, $item->getType() );
 		$this->assertTrue( $item->isModified() );
 		$this->assertNull( $item->getId() );
@@ -286,11 +283,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
 		$service = $orderServiceManager->createItem();
 
-		$result = $this->object->setService( $service, $type );
+		$this->object->setService( $service, $type );
 		$item = $this->object->getService( $type );
 
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $result );
-		$this->assertEquals( $result, $item );
 		$this->assertEquals( $type, $item->getType() );
 		$this->assertTrue( $item->isModified() );
 		$this->assertNull( $item->getId() );
