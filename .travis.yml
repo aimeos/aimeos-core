@@ -45,3 +45,8 @@ script: "vendor/bin/phing setup coverage check"
 
 after_success:
   - php vendor/bin/coveralls
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm
