@@ -92,6 +92,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
+	 * @return void
 	 */
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null );
 
@@ -100,6 +101,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
 	 * @param integer $position Position id of the order product item
+	 * @return void
 	 */
 	public function editProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position );
 
@@ -107,7 +109,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * Deletes an order product item from the (future) order.
 	 *
 	 * @param integer $position Position id of the order product item
-	 * @return null
+	 * @return void
 	 */
 	public function deleteProduct( $position );
 
@@ -131,6 +133,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @return void
 	 */
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type );
 
@@ -138,7 +141,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
-	 * @return null
+	 * @return void
 	 */
 	public function deleteAddress( $type );
 
@@ -162,6 +165,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given type
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @return void
 	 */
 	public function setService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type );
 
@@ -169,7 +173,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * Deletes the delivery or payment service from the basket.
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return null
+	 * @return void
 	 */
 	public function deleteService( $type );
 
@@ -186,7 +190,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 *
 	 * @param string $code Coupon code
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
-	 * @return null
+	 * @return void
 	 */
 	public function addCoupon( $code, array $products = [] );
 
@@ -247,7 +251,7 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	/**
 	 * Sets the modified flag of the object.
 	 *
-	 * @return null
+	 * @return void
 	 */
 	public function setModified();
 }

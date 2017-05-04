@@ -211,7 +211,7 @@ abstract class Base
 	 * Sets a modified order product item to the (future) order.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
-	 * @param integer $position Position id of the order product item
+	 * @param integer $pos Position id of the order product item
 	 */
 	public function editProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $pos )
 	{
@@ -293,7 +293,7 @@ abstract class Base
 	 */
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type )
 	{
-		if( isset( $this->addresses[$type] ) && $this->addresses[$type] === $address ) { return $address; }
+		if( isset( $this->addresses[$type] ) && $this->addresses[$type] === $address ) { return; }
 
 		$this->notifyListeners( 'setAddress.before', $address );
 

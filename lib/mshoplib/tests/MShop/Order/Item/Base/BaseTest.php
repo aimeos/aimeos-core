@@ -197,13 +197,12 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$product = $this->createProduct( 'prodid3' );
 		$product->setQuantity( 5 );
-		$products[] = $product;
 
 		$this->object->addProduct( $product );
 		$product->setQuantity( 10 );
 		$this->object->editProduct( $product, 0 );
 
-		$this->assertEquals( $products, $this->object->getProducts() );
+		$this->assertEquals( [$product], $this->object->getProducts() );
 		$this->assertEquals( 10, $this->object->getProduct( 0 )->getQuantity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
