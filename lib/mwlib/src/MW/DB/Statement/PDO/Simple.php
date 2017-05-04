@@ -36,8 +36,6 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	{
 		$this->parts = $this->getSqlParts( $sql );
 		$this->conn = $conn;
-		$this->sql = $sql;
-
 	}
 
 
@@ -67,6 +65,8 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			default:
 				$this->binds[$position] = $this->conn->quote( $value ); break;
 		}
+
+		$this->sql = null;
 	}
 
 
@@ -78,16 +78,24 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 */
 	public function execute()
 	{
-		if( count( $this->binds ) !== count( $this->parts ) - 1 ) {
-			throw new \Aimeos\MW\DB\Exception( sprintf( 'Number of binds (%1$d) doesn\'t match the number of markers in "%2$s"', count( $this->binds ), $this->sql ) );
+		if( count( $this->binds ) !== count( $this->parts ) - 1 )
+		{
+			$msg = 'Number of binds (%1$d) doesn\'t match the number of markers in "%2$s"';
+			throw new \Aimeos\MW\DB\Exception( sprintf( $msg, count( $this->binds ), implode( '?', $this->parts ) ) );
 		}
 
-		$sql = $this->buildSQL( $this->parts, $this->binds );
+		if( $this->sql === null ) {
+			$this->sql = $this->buildSQL( $this->parts, $this->binds );
+		}
 
-		try {
-			return new \Aimeos\MW\DB\Result\PDO( $this->conn->query( $sql ) );
-		} catch ( \PDOException $pe ) {
-			throw new \Aimeos\MW\DB\Exception( sprintf( 'Executing statement "%1$s" failed: ', $sql ) . $pe->getMessage(), $pe->getCode(), $pe->errorInfo );
+		try
+		{
+			return new \Aimeos\MW\DB\Result\PDO( $this->conn->query( $this->sql ) );
+		}
+		catch ( \PDOException $e )
+		{
+			$msg = sprintf( 'Executing statement "%1$s" failed: ', $this->sql );
+			throw new \Aimeos\MW\DB\Exception( $msg . $e->getMessage(), $e->getCode() );
 		}
 	}
 
@@ -99,6 +107,10 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	 */
 	public function __toString()
 	{
-		return $this->buildSQL( $this->parts, $this->binds );
+		if( $this->sql === null ) {
+			$this->sql = $this->buildSQL( $this->parts, $this->binds );
+		}
+
+		return $this->sql;
 	}
 }
