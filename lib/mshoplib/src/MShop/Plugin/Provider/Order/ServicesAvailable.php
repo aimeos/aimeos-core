@@ -44,7 +44,7 @@ class ServicesAvailable
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		if( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE === 0 ) {
+		if( ( $value & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) === 0 ) {
 			return true;
 		}
 
