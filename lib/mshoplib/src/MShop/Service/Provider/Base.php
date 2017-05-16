@@ -469,7 +469,23 @@ abstract class Base
 	 */
 	protected function getOrder( $id )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->context, 'order' )->getItem( $id );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order' );
+
+		$search = $manager->createSearch( true );
+		$expr = [
+			$search->getConditions(),
+			$search->compare( '==', 'order.id', $id ),
+			$search->compare( '==', 'order.base.service.code', $this->serviceItem->getCode() ),
+		];
+		$search->setConditions( $search->combine( '&&', $expr ) );
+
+		$result = $manager->searchItems( $search );
+
+		if( ( $item = reset( $result ) ) === false ) {
+			throw new \Aimeos\MShop\Service\Exception( sprintf( 'No order for ID "%1$s" found', $id ) );
+		}
+
+		return $item;
 	}
 
 
