@@ -8,13 +8,13 @@
 
 return array(
 	'attribute/type' => array(
-		'product/custom' => array( 'domain' => 'product', 'code' => 'custom', 'label' => 'Custom', 'status' => 1 ),
 		'product/color' => array( 'domain' => 'product', 'code' => 'color', 'label' => 'Color', 'status' => 1 ),
 		'product/size' => array( 'domain' => 'product', 'code' => 'size', 'label' => 'Size', 'status' => 1 ),
 		'product/width' => array( 'domain' => 'product', 'code' => 'width', 'label' => 'Width', 'status' => 1 ),
 		'product/length' => array( 'domain' => 'product', 'code' => 'length', 'label' => 'Length', 'status' => 1 ),
 		'product/download' => array( 'domain' => 'product', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
 		'product/date' => array( 'domain' => 'product', 'code' => 'date', 'label' => 'Date', 'status' => 1 ),
+		'product/price' => array( 'domain' => 'product', 'code' => 'price', 'label' => 'Price', 'status' => 1 ),
 		'media/color' => array( 'domain' => 'media', 'code' => 'color', 'label' => 'Color', 'status' => 1 ),
 	),
 
@@ -55,9 +55,8 @@ return array(
 		'attribute/media/color/black' => array( 'domain' => 'media', 'typeid' => 'media/color', 'code' => 'black', 'label' => 'black', 'status' => 0, 'pos' => 5 ),
 		'attribute/media/color/pink' => array( 'domain' => 'media', 'typeid' => 'media/color', 'code' => 'pink', 'label' => 'pink', 'status' => 0, 'pos' => 6 ),
 
-		// @todo Use custom as type for custom dates
 		'attribute/product/date/custom' => array( 'domain' => 'product', 'typeid' => 'product/date', 'code' => 'custom', 'label' => 'Custom date', 'status' => 1, 'pos' => 0 ),
-		'attribute/product/custom/price' => array( 'domain' => 'product', 'typeid' => 'product/custom', 'code' => 'price', 'label' => 'Custom price', 'status' => 1, 'pos' => 1 ),
+		'attribute/product/price/custom' => array( 'domain' => 'product', 'typeid' => 'product/price', 'code' => 'custom', 'label' => 'Custom price', 'status' => 1, 'pos' => 1 ),
 		'attribute/product/download/testurl' => array( 'domain' => 'product', 'typeid' => 'product/download', 'code' => 'testurl', 'label' => 'Test URL', 'status' => 1, 'pos' => 0 ),
 	),
 );

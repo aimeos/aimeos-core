@@ -6,7 +6,7 @@
 
 return [
 	[
-		'attribute.domain' => 'product', 'attribute.type' => 'custom', 'attribute.code' => 'price',
+		'attribute.domain' => 'product', 'attribute.type' => 'price', 'attribute.code' => 'custom',
 		'attribute.label' => 'Custom product price', 'attribute.position' => 0, 'attribute.status' => 1
 	],
 ];

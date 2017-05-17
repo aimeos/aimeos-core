@@ -92,6 +92,7 @@ return array(
 		array( 'parentid' => 'product/U:TESTP', 'typeid' => 'attribute/config', 'domain' => 'attribute', 'refid' => 'attribute/product/size/xs', 'start' => null, 'end' => null, 'config' => [], 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TESTP', 'typeid' => 'attribute/hidden', 'domain' => 'attribute', 'refid' => 'attribute/product/width/29', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TESTP', 'typeid' => 'attribute/custom', 'domain' => 'attribute', 'refid' => 'attribute/product/date/custom', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'product/U:TESTP', 'typeid' => 'attribute/custom', 'domain' => 'attribute', 'refid' => 'attribute/product/price/custom', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TESTSUB01', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/color/white', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TESTSUB01', 'typeid' => 'attribute/default', 'domain' => 'attribute', 'refid' => 'attribute/product/size/m', 'start' => null, 'end' => null, 'config' => [], 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'product/U:TESTSUB02', 'typeid' => 'attribute/variant', 'domain' => 'attribute', 'refid' => 'attribute/product/length/30', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),

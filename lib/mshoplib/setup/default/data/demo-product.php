@@ -58,38 +58,10 @@ return array(
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
-				'label' => 'Demo: Article from 5',
-				'value' => '90.00', 'costs' => '5.00', 'rebate' => '30.00', 'taxrate' => '20.00',
-				'quantity' => 5, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			),
-			array(
-				'label' => 'Demo: Article from 10',
-				'value' => '80.00', 'costs' => '5.00', 'rebate' => '40.00', 'taxrate' => '20.00',
-				'quantity' => 10, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			),
-			array(
 				'label' => 'Demo: Article from 1',
 				'value' => '130.00', 'costs' => '7.50', 'rebate' => '30.00', 'taxrate' => '10.00',
 				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			),
-			array(
-				'label' => 'Demo: Article from 5',
-				'value' => '120.00', 'costs' => '7.50', 'rebate' => '40.00', 'taxrate' => '10.00',
-				'quantity' => 5, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			),
-			array(
-				'label' => 'Demo: Article from 10',
-				'value' => '100.00', 'costs' => '7.50', 'rebate' => '60.00', 'taxrate' => '10.00',
-				'quantity' => 10, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
@@ -285,16 +257,38 @@ return array(
 				'list-start' => null, 'list-end' => null, 'list-status' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo url/de: Kleiner Aufdruck',
+						'label' => 'Demo name/de: Kleiner Aufdruck',
 						'content' => 'Text_Aufdruck',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'type' => 'name', 'languageid' => 'de', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
 					array(
-						'label' => 'Demo url/en: Small print',
+						'label' => 'Demo name/en: Small print',
 						'content' => 'print_text',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+			),
+			array(
+				'code' => 'demo-custom-price', 'label' => 'Demo: Custom price',
+				'type' => 'price', 'position' => 0, 'status' => 1,
+				'list-type' => 'custom', 'list-position' => 1, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo name/de: Zahl was Du willst',
+						'content' => 'Ihr Preis',
+						'type' => 'name', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo name/en: Pay what you want',
+						'content' => 'Your price',
+						'type' => 'name', 'languageid' => 'en', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),

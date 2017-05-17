@@ -351,12 +351,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'media', $result );
 		$this->assertArrayNotHasKey( 'price', $result );
 
-		$this->assertEquals( 13, count( $result['attribute'] ) );
+		$this->assertEquals( 14, count( $result['attribute'] ) );
 		$this->assertEquals( 8, count( $result['media'] ) );
 
 		// this is the total of list items, not the total of referenced items
 		// whose number might be lower due to duplicates
-		$this->assertEquals( 38, $total );
+		$this->assertEquals( 39, $total );
 	}
 
 
