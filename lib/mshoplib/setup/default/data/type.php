@@ -8,13 +8,15 @@
 
 return array(
 	'attribute/type' => array(
+		// @todo Merge text type with custom type
+		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'custom', 'label' => 'Custom', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'color', 'label' => 'Color', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'size', 'label' => 'Size', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'width', 'label' => 'Width', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'length', 'label' => 'Length', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'option', 'label' => 'Option', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
-		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1 ),
 	),
 
 	'attribute/lists/type' => array(
