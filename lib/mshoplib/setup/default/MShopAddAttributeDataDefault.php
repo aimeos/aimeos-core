@@ -21,7 +21,7 @@ class MShopAddAttributeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddAttribu
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'MShopAddAttributeData' );
+		return array( 'MShopSetLocale', 'MShopAddTypeDataDefault' );
 	}
 
 
