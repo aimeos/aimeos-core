@@ -60,7 +60,7 @@ abstract class Base
 	 */
 	public function createItem()
 	{
-		$values = array( 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = array( $this->prefix . 'siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 
