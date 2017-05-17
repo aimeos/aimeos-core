@@ -459,11 +459,11 @@ abstract class Base
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'order' );
 
 		$search = $manager->createSearch( true );
-		$expr = [
+		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'order.id', $id ),
 			$search->compare( '==', 'order.base.service.code', $this->serviceItem->getCode() ),
-		];
+		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
 		$result = $manager->searchItems( $search );
