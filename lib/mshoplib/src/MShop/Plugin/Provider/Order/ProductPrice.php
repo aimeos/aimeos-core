@@ -81,12 +81,12 @@ class ProductPrice
 
 		foreach( $orderProducts as $pos => $orderProduct )
 		{
-			$refPrices = [];
+			if( !isset( $prodMap[$orderProduct->getProductCode()] ) ) {
+				continue; // Product isn't available or excluded
+			}
 
 			// fetch prices of articles/sub-products
-			if( isset( $prodMap[$orderProduct->getProductCode()] ) ) {
-				$refPrices = $prodMap[$orderProduct->getProductCode()]->getRefItems( 'price', 'default', 'default' );
-			}
+			$refPrices = $prodMap[$orderProduct->getProductCode()]->getRefItems( 'price', 'default', 'default' );
 
 			$orderPosPrice = $orderProduct->getPrice();
 			$price = $this->getPrice( $orderProduct, $refPrices, $attributes, $pos );
@@ -149,11 +149,18 @@ class ProductPrice
 			return [];
 		}
 
+		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+		$listTypeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists/type' );
+
+		$attrId = $attrManager->findItem( 'custom', [], 'product', 'price' )->getId();
+		$typeId = $listTypeManager->findItem( 'custom', [], 'attribute' )->getId();
 
 		$search = $productManager->createSearch( true );
+		$func = $search->createFunction( 'product.contains', ['attribute', $typeId, $attrId] );
 		$expr = array(
 			$search->compare( '==', 'product.code', $prodCodes ),
+			$search->compare( '==', $func, 0 ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
