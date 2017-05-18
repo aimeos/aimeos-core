@@ -273,7 +273,7 @@ return array(
 				),
 			),
 			array(
-				'code' => 'demo-custom-price', 'label' => 'Demo: Custom price',
+				'code' => 'custom', 'label' => 'Demo: Custom price',
 				'type' => 'price', 'position' => 0, 'status' => 1,
 				'list-type' => 'custom', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1,

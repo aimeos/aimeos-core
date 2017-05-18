@@ -15,6 +15,9 @@ namespace Aimeos\MW\Setup\Task;
  */
 class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 {
+	private $attributes;
+
+
 	/**
 	 * Initializes the object
 	 *
@@ -89,14 +92,22 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $data as $entry )
 		{
-			$item->setId( null );
-			$item->setTypeId( $this->getTypeId( 'attribute/type', $domain, $entry['type'] ) );
-			$item->setCode( $entry['code'] );
-			$item->setLabel( $entry['label'] );
-			$item->setPosition( $entry['position'] );
-			$item->setStatus( $entry['status'] );
+			if( ( $attrItem = $this->getAttributeItem( $domain, $entry['type'], $entry['code'] ) ) === null )
+			{
+				$item->setId( null );
+				$item->setTypeId( $this->getTypeId( 'attribute/type', $domain, $entry['type'] ) );
+				$item->setCode( $entry['code'] );
+				$item->setLabel( $entry['label'] );
+				$item->setPosition( $entry['position'] );
+				$item->setStatus( $entry['status'] );
 
-			$attrManager->saveItem( $item );
+				$attrManager->saveItem( $item );
+				$id = $item->getId();
+			}
+			else
+			{
+				$id = $attrItem->getId();
+			}
 
 			$listItem->setId( null );
 			$listItem->setTypeId( $this->getTypeId( $domain . '/lists/type', 'attribute', $entry['list-type'] ) );
@@ -105,25 +116,25 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$listItem->setConfig( $entry['list-config'] );
 			$listItem->setPosition( $entry['list-position'] );
 			$listItem->setStatus( $entry['list-status'] );
-			$listItem->setRefId( $item->getId() );
+			$listItem->setRefId( $id );
 
 			$listManager->saveItem( $listItem, false );
 
 
 			if( isset( $entry['attribute'] ) ) {
-				$this->addAttributes( $item->getId(), $entry['attribute'], 'attribute' );
+				$this->addAttributes( $id, $entry['attribute'], 'attribute' );
 			}
 
 			if( isset( $entry['media'] ) ) {
-				$this->addMedia( $item->getId(), $entry['media'], 'attribute' );
+				$this->addMedia( $id, $entry['media'], 'attribute' );
 			}
 
 			if( isset( $entry['price'] ) ) {
-				$this->addPrices( $item->getId(), $entry['price'], 'attribute' );
+				$this->addPrices( $id, $entry['price'], 'attribute' );
 			}
 
 			if( isset( $entry['text'] ) ) {
-				$this->addTexts( $item->getId(), $entry['text'], 'attribute' );
+				$this->addTexts( $id, $entry['text'], 'attribute' );
 			}
 		}
 	}
@@ -409,6 +420,31 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 			$item->setTypeId( $types[$entry['typeid']] );
 
 			$manager->saveItem( $item, false );
+		}
+	}
+
+
+	/**
+	 * Returns the attribute for the given code, type and domain
+	 *
+	 * @param string $domain Domain the attribute belongs to
+	 * @param string $type Attribute type
+	 * @param string $code Attribute code
+	 * @return \Aimeos\MShop\Attribute\Item\Iface|null Found attribute item or null if not available
+	 */
+	protected function getAttributeItem( $domain, $type, $code )
+	{
+		if( $this->attributes === null )
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
+
+			foreach( $manager->searchItems( $manager->createSearch() ) as $item ) {
+				$this->attributes[$item->getDomain()][$item->getType()][$item->getCode()] = $item;
+			}
+		}
+
+		if( isset( $this->attributes[$domain][$type][$code] ) ) {
+			return $this->attributes[$domain][$type][$code];
 		}
 	}
 
