@@ -294,6 +294,28 @@ return array(
 					),
 				),
 			),
+			array(
+				'code' => 'demo-custom-date', 'label' => 'Demo: Custom date',
+				'type' => 'date', 'position' => 0, 'status' => 1,
+				'list-type' => 'custom', 'list-position' => 2, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo name/de: Kundendatum',
+						'content' => 'Kundendatum',
+						'type' => 'name', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo name/en: Customer date',
+						'content' => 'Customer date',
+						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+			),
 		),
 		'property' => array(
 			array( 'type' => 'package-length', 'languageid' => null, 'value' => '20.00' ),
