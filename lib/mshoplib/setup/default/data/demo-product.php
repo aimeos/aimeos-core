@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
+ * @license LGPLv3, https://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
  * @copyright Aimeos (aimeos.org), 2015-2016
  */
@@ -68,32 +68,32 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: Article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/1-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/1.jpg',
+				'url' => 'https://demo.aimeos.org/media/1-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/1.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/2-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/2.jpg',
+				'url' => 'https://demo.aimeos.org/media/2-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/2.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/3-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/3.jpg',
+				'url' => 'https://demo.aimeos.org/media/3-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/3.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/4-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/4.jpg',
+				'url' => 'https://demo.aimeos.org/media/4-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/4.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -633,32 +633,32 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: Selection article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/1-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/1.jpg',
+				'url' => 'https://demo.aimeos.org/media/1-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/1.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/2-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/2.jpg',
+				'url' => 'https://demo.aimeos.org/media/2-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/2.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/3-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/3.jpg',
+				'url' => 'https://demo.aimeos.org/media/3-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/3.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Selection article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/4-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/4.jpg',
+				'url' => 'https://demo.aimeos.org/media/4-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/4.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -892,32 +892,32 @@ return array(
 		'media' => array(
 			array(
 				'label' => 'Demo: Bundle article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/1-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/1.jpg',
+				'url' => 'https://demo.aimeos.org/media/1-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/1.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Bundle article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/2-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/2.jpg',
+				'url' => 'https://demo.aimeos.org/media/2-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/2.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Bundle article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/3-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/3.jpg',
+				'url' => 'https://demo.aimeos.org/media/3-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/3.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo: Bundle article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'http://demo.aimeos.org/media/4-big.jpg',
-				'preview' => 'http://demo.aimeos.org/media/4.jpg',
+				'url' => 'https://demo.aimeos.org/media/4-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/4.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
