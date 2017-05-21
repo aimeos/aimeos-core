@@ -374,7 +374,7 @@ return array(
 						mcus."address1" AS "customer.address1", mcus."address2" AS "customer.address2",
 						mcus."address3" AS "customer.address3", mcus."postal" AS "customer.postal",
 						mcus."city" AS "customer.city", mcus."state" AS "customer.state",
-						mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.langid",
+						mcus."countryid" AS "customer.countryid", mcus."langid" AS "customer.languageid",
 						mcus."telephone" AS "customer.telephone", mcus."email" AS "customer.email",
 						mcus."telefax" AS "customer.telefax", mcus."website" AS "customer.website",
 						mcus."longitude" AS "customer.longitude", mcus."latitude" AS "customer.latitude",
