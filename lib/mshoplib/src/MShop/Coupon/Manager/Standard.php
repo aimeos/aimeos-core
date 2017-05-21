@@ -309,15 +309,15 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId() );
-			$stmt->bind( 2, $item->getLabel() );
-			$stmt->bind( 3, $item->getProvider() );
-			$stmt->bind( 4, json_encode( $item->getConfig() ) );
-			$stmt->bind( 5, $item->getDateStart() );
-			$stmt->bind( 6, $item->getDateEnd() );
-			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 8, $date ); // mtime
-			$stmt->bind( 9, $context->getEditor() );
+			$stmt->bind( 1, $item->getLabel() );
+			$stmt->bind( 2, $item->getProvider() );
+			$stmt->bind( 3, json_encode( $item->getConfig() ) );
+			$stmt->bind( 4, $item->getDateStart() );
+			$stmt->bind( 5, $item->getDateEnd() );
+			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 7, $date ); // mtime
+			$stmt->bind( 8, $context->getEditor() );
+			$stmt->bind( 9, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

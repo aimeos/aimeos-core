@@ -127,32 +127,32 @@ abstract class Base
 
 			$stmt = $this->getCachedStatement( $conn, $this->getConfigPath() . $type );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getParentId() );
-			$stmt->bind( 3, $item->getCompany() );
-			$stmt->bind( 4, $item->getVatId() );
-			$stmt->bind( 5, $item->getSalutation() );
-			$stmt->bind( 6, $item->getTitle() );
-			$stmt->bind( 7, $item->getFirstname() );
-			$stmt->bind( 8, $item->getLastname() );
-			$stmt->bind( 9, $item->getAddress1() );
-			$stmt->bind( 10, $item->getAddress2());
-			$stmt->bind( 11, $item->getAddress3() );
-			$stmt->bind( 12, $item->getPostal() );
-			$stmt->bind( 13, $item->getCity() );
-			$stmt->bind( 14, $item->getState() );
-			$stmt->bind( 15, $item->getCountryId() );
-			$stmt->bind( 16, $item->getLanguageId() );
-			$stmt->bind( 17, $item->getTelephone() );
-			$stmt->bind( 18, $item->getEmail() );
-			$stmt->bind( 19, $item->getTelefax() );
-			$stmt->bind( 20, $item->getWebsite() );
-			$stmt->bind( 21, $item->getLongitude() );
-			$stmt->bind( 22, $item->getLatitude() );
-			$stmt->bind( 23, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 24, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 25, $date ); //mtime
-			$stmt->bind( 26, $context->getEditor() );
+			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getCompany() );
+			$stmt->bind( 3, $item->getVatId() );
+			$stmt->bind( 4, $item->getSalutation() );
+			$stmt->bind( 5, $item->getTitle() );
+			$stmt->bind( 6, $item->getFirstname() );
+			$stmt->bind( 7, $item->getLastname() );
+			$stmt->bind( 8, $item->getAddress1() );
+			$stmt->bind( 9, $item->getAddress2());
+			$stmt->bind( 10, $item->getAddress3() );
+			$stmt->bind( 11, $item->getPostal() );
+			$stmt->bind( 12, $item->getCity() );
+			$stmt->bind( 13, $item->getState() );
+			$stmt->bind( 14, $item->getCountryId() );
+			$stmt->bind( 15, $item->getLanguageId() );
+			$stmt->bind( 16, $item->getTelephone() );
+			$stmt->bind( 17, $item->getEmail() );
+			$stmt->bind( 18, $item->getTelefax() );
+			$stmt->bind( 19, $item->getWebsite() );
+			$stmt->bind( 20, $item->getLongitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( 21, $item->getLatitude(), \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT );
+			$stmt->bind( 22, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 23, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 24, $date ); //mtime
+			$stmt->bind( 25, $context->getEditor() );
+			$stmt->bind( 26, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 27, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

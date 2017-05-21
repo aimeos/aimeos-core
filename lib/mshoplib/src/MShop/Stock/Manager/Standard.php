@@ -256,13 +256,14 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
+
 			$stmt->bind( 1, $item->getProductCode() );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 4, $item->getStocklevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $item->getDateBack() );
-			$stmt->bind( 6, $date ); //mtime
-			$stmt->bind( 7, $context->getEditor() );
+			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getStocklevel(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 4, $item->getDateBack() );
+			$stmt->bind( 5, $date ); //mtime
+			$stmt->bind( 6, $context->getEditor() );
+			$stmt->bind( 7, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

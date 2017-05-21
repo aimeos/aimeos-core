@@ -442,28 +442,29 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
+
 			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 4, $item->getType() );
-			$stmt->bind( 5, $item->getProductId() );
-			$stmt->bind( 6, $item->getProductCode() );
-			$stmt->bind( 7, $item->getSupplierCode() );
-			$stmt->bind( 8, $item->getStockType() );
-			$stmt->bind( 9, $item->getName() );
-			$stmt->bind( 10, $item->getMediaUrl() );
-			$stmt->bind( 11, $item->getQuantity() );
-			$stmt->bind( 12, $price->getValue() );
-			$stmt->bind( 13, $price->getCosts() );
-			$stmt->bind( 14, $price->getRebate() );
-			$stmt->bind( 15, $price->getTaxValue() );
-			$stmt->bind( 16, $price->getTaxRate() );
-			$stmt->bind( 17, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 18, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 19, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 20, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 21, $date ); // mtime
-			$stmt->bind( 22, $context->getEditor() );
+			$stmt->bind( 2, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getType() );
+			$stmt->bind( 4, $item->getProductId() );
+			$stmt->bind( 5, $item->getProductCode() );
+			$stmt->bind( 6, $item->getSupplierCode() );
+			$stmt->bind( 7, $item->getStockType() );
+			$stmt->bind( 8, $item->getName() );
+			$stmt->bind( 9, $item->getMediaUrl() );
+			$stmt->bind( 10, $item->getQuantity() );
+			$stmt->bind( 11, $price->getValue() );
+			$stmt->bind( 12, $price->getCosts() );
+			$stmt->bind( 13, $price->getRebate() );
+			$stmt->bind( 14, $price->getTaxValue() );
+			$stmt->bind( 15, $price->getTaxRate() );
+			$stmt->bind( 16, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 17, $item->getFlags(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 18, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 19, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 20, $date ); // mtime
+			$stmt->bind( 21, $context->getEditor() );
+			$stmt->bind( 22, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 23, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

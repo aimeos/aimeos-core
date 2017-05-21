@@ -329,21 +329,22 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId() );
-			$stmt->bind( 2, $item->getTypeId() );
-			$stmt->bind( 3, $item->getDomain() );
-			$stmt->bind( 4, $item->getCode() );
-			$stmt->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $item->getLabel() );
-			$stmt->bind( 8, $date );
-			$stmt->bind( 9, $context->getEditor() );
+
+			$stmt->bind( 1, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getDomain() );
+			$stmt->bind( 3, $item->getCode() );
+			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 5, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getLabel() );
+			$stmt->bind( 7, $date ); // mtime
+			$stmt->bind( 8, $context->getEditor() );
+			$stmt->bind( 9, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 10, $date );
+				$stmt->bind( 10, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

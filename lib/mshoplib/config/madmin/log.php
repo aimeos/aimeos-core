@@ -12,14 +12,13 @@ return array(
 			'delete' => array(
 				'ansi' => '
 					DELETE FROM "madmin_log"
-					WHERE :cond
-					AND "siteid" = ?
+					WHERE :cond AND "siteid" = ?
 				',
 			),
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "madmin_log" (
-						"siteid", "facility", "timestamp", "priority", "message", "request"
+						"facility", "timestamp", "priority", "message", "request", "siteid"
 					) VALUES (
 						?, ?, ?, ?, ?, ?
 					)
@@ -28,9 +27,9 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "madmin_log"
-					SET "siteid" = ?, "facility" = ?, "timestamp" = ?, "priority" = ?,
+					SET "facility" = ?, "timestamp" = ?, "priority" = ?,
 						"message" = ?, "request" = ?
-					WHERE "id" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				',
 			),
 			'search' => array(

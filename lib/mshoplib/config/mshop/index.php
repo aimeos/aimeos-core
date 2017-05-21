@@ -19,16 +19,16 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_index_attribute" (
-							"prodid", "siteid", "attrid", "listtype", "type", "code",
-							"mtime", "editor", "ctime"
+							"prodid", "attrid", "listtype", "type", "code",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_attribute" (
-							"prodid", "siteid", "attrid", "listtype", "type", "code",
-							"mtime", "editor", "ctime"
+							"prodid", "attrid", "listtype", "type", "code",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -83,16 +83,16 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_index_catalog" (
-							"prodid", "siteid", "catid", "listtype", "pos", "mtime",
-							"editor", "ctime"
+							"prodid", "catid", "listtype", "pos",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_catalog" (
-							"prodid", "siteid", "catid", "listtype", "pos", "mtime",
-							"editor", "ctime"
+							"prodid", "catid", "listtype", "pos",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -147,18 +147,18 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_index_price" (
-							"prodid", "siteid", "priceid", "currencyid", "listtype",
+							"prodid", "priceid", "currencyid", "listtype",
 							"type", "value", "costs", "rebate", "taxrate", "quantity",
-							"mtime", "editor", "ctime"
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_price" (
-							"prodid", "siteid", "priceid", "currencyid", "listtype",
+							"prodid", "priceid", "currencyid", "listtype",
 							"type", "value", "costs", "rebate", "taxrate", "quantity",
-							"mtime", "editor", "ctime"
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -213,16 +213,16 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_index_text" (
-							"prodid", "siteid", "textid", "langid", "listtype", "type",
-							"domain", "value", "mtime", "editor", "ctime"
+							"prodid", "textid", "langid", "listtype", "type",
+							"domain", "value", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_text" (
-							"prodid", "siteid", "textid", "langid", "listtype", "type",
-							"domain", "value", "mtime", "editor", "ctime"
+							"prodid", "textid", "langid", "listtype", "type",
+							"domain", "value", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)

@@ -19,8 +19,8 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "madmin_job" (
-						"siteid", "label", "method", "parameter", "result", "status",
-						"editor", "mtime", "ctime"
+						"label", "method", "parameter", "result", "status",
+						"editor", "mtime", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
@@ -29,9 +29,9 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "madmin_job"
-					SET "siteid" = ?, "label" = ?, "method" = ?, "parameter" = ?,
+					SET "label" = ?, "method" = ?, "parameter" = ?,
 						"result" = ?, "status" = ?, "editor" = ?, "mtime" = ?
-					WHERE "id" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				',
 			),
 			'search' => array(

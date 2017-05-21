@@ -20,8 +20,8 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_service_list_type" (
-								"siteid", "code", "domain", "label", "status", "mtime",
-								"editor", "ctime"
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
 								?, ?, ?, ?, ?, ?, ?, ?
 							)
@@ -30,9 +30,9 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_service_list_type"
-							SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -100,8 +100,8 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_service_list" (
-							"parentid", "siteid", "typeid", "domain", "refid", "start",
-							"end", "config", "pos", "status", "mtime", "editor", "ctime"
+							"parentid", "typeid", "domain", "refid", "start", "end",
+							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -110,10 +110,16 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_service_list"
-						SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?,
-							"refid" = ?, "start" = ?, "end" = ?, "config" = ?, "pos" = ?,
-							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
+					'
+				),
+				'updatepos' => array(
+					'ansi' => '
+						UPDATE "mshop_service_list"
+							SET "pos" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'move' => array(
@@ -122,13 +128,6 @@ return array(
 							SET "pos" = "pos" + ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "parentid" = ? AND "typeid" = ?
 							AND "domain" = ? AND "pos" >= ?
-					'
-				),
-				'updatepos' => array(
-					'ansi' => '
-						UPDATE "mshop_service_list"
-							SET "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
 					'
 				),
 				'getposmax' => array(
@@ -193,8 +192,8 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_service_type" (
-							"siteid", "code", "domain", "label", "status", "mtime",
-							"editor", "ctime"
+							"code", "domain", "label", "status",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -203,9 +202,9 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_service_type"
-						SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
+						SET "code" = ?, "domain" = ?, "label" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -258,8 +257,8 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_service" (
-						"siteid", "pos", "typeid", "code", "label", "provider",
-						"config", "status", "mtime", "editor", "ctime"
+						"pos", "typeid", "code", "label", "provider",
+						"config", "status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
@@ -268,10 +267,9 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_service"
-					SET "siteid" = ?, "pos" = ?, "typeid" = ?, "code" = ?, "label" = ?,
-						"provider" = ?, "config" = ?, "status" = ?, "mtime" = ?,
-						"editor" = ?
-					WHERE "id" = ?
+					SET "pos" = ?, "typeid" = ?, "code" = ?, "label" = ?, "provider" = ?,
+						"config" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
 			'search' => array(

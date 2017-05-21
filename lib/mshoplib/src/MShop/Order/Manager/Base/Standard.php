@@ -607,20 +607,20 @@ class Standard extends Base
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $localeItem->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getCustomerId() );
-			$stmt->bind( 3, $localeItem->getSite()->getCode() );
-			$stmt->bind( 4, $item->getLocale()->getLanguageId() );
-			$stmt->bind( 5, $priceItem->getCurrencyId() );
-			$stmt->bind( 6, $priceItem->getValue() );
-			$stmt->bind( 7, $priceItem->getCosts() );
-			$stmt->bind( 8, $priceItem->getRebate() );
-			$stmt->bind( 9, $priceItem->getTaxValue() );
-			$stmt->bind( 10, $priceItem->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 11, $item->getComment() );
-			$stmt->bind( 12, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 13, $date ); // mtime
-			$stmt->bind( 14, $context->getEditor() );
+			$stmt->bind( 1, $item->getCustomerId() );
+			$stmt->bind( 2, $localeItem->getSite()->getCode() );
+			$stmt->bind( 3, $item->getLocale()->getLanguageId() );
+			$stmt->bind( 4, $priceItem->getCurrencyId() );
+			$stmt->bind( 5, $priceItem->getValue() );
+			$stmt->bind( 6, $priceItem->getCosts() );
+			$stmt->bind( 7, $priceItem->getRebate() );
+			$stmt->bind( 8, $priceItem->getTaxValue() );
+			$stmt->bind( 9, $priceItem->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 10, $item->getComment() );
+			$stmt->bind( 11, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 12, $date ); // mtime
+			$stmt->bind( 13, $context->getEditor() );
+			$stmt->bind( 14, $localeItem->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 15, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -25,8 +25,8 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_catalog_list_type" (
-								"siteid", "code", "domain", "label", "status", "mtime",
-								"editor", "ctime"
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
 								?, ?, ?, ?, ?, ?, ?, ?
 							)
@@ -35,9 +35,9 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_catalog_list_type"
-							SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -113,8 +113,8 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_catalog_list" (
-							"parentid", "siteid", "typeid", "domain", "refid", "start",
-							"end", "config", "pos", "status", "mtime", "editor", "ctime"
+							"parentid", "typeid", "domain", "refid", "start", "end",
+							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -123,17 +123,16 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_catalog_list"
-						SET "parentid" = ?, "siteid" = ?, "typeid" = ?, "domain" = ?,
-							"refid" = ?, "start" = ?, "end" = ?, "config" = ?, "pos" = ?,
-							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						SET "parentid" = ?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'updatepos' => array(
 					'ansi' => '
 						UPDATE "mshop_catalog_list"
 						SET "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'move' => array(

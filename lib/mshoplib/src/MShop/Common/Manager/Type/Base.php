@@ -113,23 +113,24 @@ abstract class Base
 				$type = 'update';
 			}
 
-			$statement = $conn->create( $this->getSqlConfig( $this->getConfigPath() . $type ) );
+			$time = date( 'Y-m-d H:i:s', time() );
+			$stmt = $conn->create( $this->getSqlConfig( $this->getConfigPath() . $type ) );
 
-			$statement->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$statement->bind( 2, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$statement->bind( 3, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$statement->bind( 4, $item->getLabel(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$statement->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$statement->bind( 6, date( 'Y-m-d H:i:s', time() ) ); //mtime
-			$statement->bind( 7, $context->getEditor() );
+			$stmt->bind( 1, $item->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 2, $item->getDomain(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 3, $item->getLabel(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
+			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 5, $time ); //mtime
+			$stmt->bind( 6, $context->getEditor() );
+			$stmt->bind( 7, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$statement->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			} else {
-				$statement->bind( 8, date( 'Y-m-d H:i:s', time() ) ); //ctime
+				$stmt->bind( 8, $time ); //ctime
 			}
 
-			$statement->execute()->finish();
+			$stmt->execute()->finish();
 
 			if( $fetch === true )
 			{

@@ -712,18 +712,18 @@ class Standard
 			foreach( $listTypes[$refId] as $listType )
 			{
 				$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 3, $refId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 4, $refItem->getCurrencyId() );
-				$stmt->bind( 5, $listType );
-				$stmt->bind( 6, $refItem->getType() );
-				$stmt->bind( 7, $refItem->getValue() );
-				$stmt->bind( 8, $refItem->getCosts() );
-				$stmt->bind( 9, $refItem->getRebate() );
-				$stmt->bind( 10, $refItem->getTaxRate() );
-				$stmt->bind( 11, $refItem->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 12, $date ); //mtime
-				$stmt->bind( 13, $editor );
+				$stmt->bind( 2, $refId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 3, $refItem->getCurrencyId() );
+				$stmt->bind( 4, $listType );
+				$stmt->bind( 5, $refItem->getType() );
+				$stmt->bind( 6, $refItem->getValue() );
+				$stmt->bind( 7, $refItem->getCosts() );
+				$stmt->bind( 8, $refItem->getRebate() );
+				$stmt->bind( 9, $refItem->getTaxRate() );
+				$stmt->bind( 10, $refItem->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 11, $date ); //mtime
+				$stmt->bind( 12, $editor );
+				$stmt->bind( 13, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 14, $date ); //ctime
 
 				try {

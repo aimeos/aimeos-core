@@ -277,16 +277,17 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getCode() );
-			$stmt->bind( 4, $item->getLabel() );
-			$stmt->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $item->getDateStart() );
-			$stmt->bind( 7, $item->getDateEnd() );
-			$stmt->bind( 8, json_encode( $item->getConfig() ) );
-			$stmt->bind( 9, $date ); // mtime
-			$stmt->bind( 10, $context->getEditor() );
+
+			$stmt->bind( 1, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getCode() );
+			$stmt->bind( 3, $item->getLabel() );
+			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 5, $item->getDateStart() );
+			$stmt->bind( 6, $item->getDateEnd() );
+			$stmt->bind( 7, json_encode( $item->getConfig() ) );
+			$stmt->bind( 8, $date ); // mtime
+			$stmt->bind( 9, $context->getEditor() );
+			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

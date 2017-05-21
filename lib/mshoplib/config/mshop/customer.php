@@ -19,25 +19,25 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_customer_address" (
-							"siteid", "parentid", "company", "vatid", "salutation", "title",
+							"parentid", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude", "flag",
-							"pos", "mtime", "editor", "ctime"
+							"pos", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_customer_address"
-						SET "siteid" = ?, "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
+						SET "parentid" = ?, "company" = ?, "vatid" = ?, "salutation" = ?,
 							"title" = ?, "firstname" = ?, "lastname" = ?, "address1" = ?,
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
+							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					'
 				),
@@ -106,17 +106,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_customer_group" (
-							"siteid", "code", "label", "mtime", "editor", "ctime"
+							"code", "label", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?,?,?,?,?,?
+							?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_customer_group"
-						SET "siteid" = ?, "code" = ?, "label" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						SET "code" = ?, "label" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -169,8 +169,8 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_customer_list_type" (
-								"siteid", "code", "domain", "label", "status", "mtime",
-								"editor", "ctime"
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
 								?, ?, ?, ?, ?, ?, ?, ?
 							)
@@ -179,9 +179,9 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_customer_list_type"
-							SET "siteid"=?, "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -257,8 +257,8 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_customer_list" (
-							"parentid", "siteid", "typeid", "domain", "refid", "start",
-							"end", "config", "pos", "status", "mtime", "editor", "ctime"
+							"parentid", "typeid", "domain", "refid", "start", "end",
+							"config", "pos", "status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -267,17 +267,16 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_customer_list"
-						SET "parentid"=?, "siteid" = ?, "typeid" = ?, "domain" = ?,
-							"refid" = ?, "start" = ?, "end" = ?, "config" = ?, "pos" = ?,
-							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						SET "parentid"=?, "typeid" = ?, "domain" = ?, "refid" = ?, "start" = ?, "end" = ?,
+							"config" = ?, "pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'updatepos' => array(
 					'ansi' => '
 						UPDATE "mshop_customer_list"
 							SET "pos" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'move' => array(

@@ -310,11 +310,11 @@ class Standard
 			$stmt = $this->getCachedStatement( $conn, $path );
 
 			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 4, $item->getCode() );
-			$stmt->bind( 5, $date ); // mtime
-			$stmt->bind( 6, $context->getEditor() );
+			$stmt->bind( 2, $item->getProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getCode() );
+			$stmt->bind( 4, $date ); // mtime
+			$stmt->bind( 5, $context->getEditor() );
+			$stmt->bind( 6, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -257,14 +257,14 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getLabel() );
-			$stmt->bind( 3, $item->getMethod() );
-			$stmt->bind( 4, json_encode( $item->getParameter() ) );
-			$stmt->bind( 5, json_encode( $item->getResult() ) );
-			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $context->getEditor() );
-			$stmt->bind( 8, $date );
+			$stmt->bind( 1, $item->getLabel() );
+			$stmt->bind( 2, $item->getMethod() );
+			$stmt->bind( 3, json_encode( $item->getParameter() ) );
+			$stmt->bind( 4, json_encode( $item->getResult() ) );
+			$stmt->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $context->getEditor() );
+			$stmt->bind( 7, $date );
+			$stmt->bind( 8, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

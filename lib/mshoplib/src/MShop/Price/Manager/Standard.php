@@ -401,19 +401,19 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId() );
-			$stmt->bind( 3, $item->getCurrencyId() );
-			$stmt->bind( 4, $item->getDomain() );
-			$stmt->bind( 5, $item->getLabel() );
-			$stmt->bind( 6, $item->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $item->getValue() );
-			$stmt->bind( 8, $item->getCosts() );
-			$stmt->bind( 9, $item->getRebate() );
-			$stmt->bind( 10, $item->getTaxRate() );
-			$stmt->bind( 11, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 12, $date ); //mtime
-			$stmt->bind( 13, $context->getEditor() );
+			$stmt->bind( 1, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getCurrencyId() );
+			$stmt->bind( 3, $item->getDomain() );
+			$stmt->bind( 4, $item->getLabel() );
+			$stmt->bind( 5, $item->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getValue() );
+			$stmt->bind( 7, $item->getCosts() );
+			$stmt->bind( 8, $item->getRebate() );
+			$stmt->bind( 9, $item->getTaxRate() );
+			$stmt->bind( 10, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 11, $date ); //mtime
+			$stmt->bind( 12, $context->getEditor() );
+			$stmt->bind( 13, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 14, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -35,11 +35,11 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_address" (
-								"baseid", "siteid", "addrid", "type", "company", "vatid", "salutation",
+								"baseid", "addrid", "type", "company", "vatid", "salutation",
 								"title", "firstname", "lastname", "address1", "address2",
 								"address3", "postal", "city", "state", "countryid", "langid",
 								"telephone", "email", "telefax", "website", "longitude", "latitude",
-								"flag", "mtime", "editor", "ctime"
+								"flag", "mtime", "editor", "siteid", "ctime"
 							) VALUES (
 								?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 							)
@@ -48,14 +48,13 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_address"
-							SET "baseid" = ?, "siteid" = ?, "addrid" = ?, "type" = ?,
-								"company" = ?, "vatid" = ?, "salutation" = ?, "title" = ?, "firstname" = ?,
-								"lastname" = ?, "address1" = ?, "address2" = ?,
-								"address3" = ?, "postal" = ?, "city" = ?, "state" = ?,
-								"countryid" = ?, "langid" = ?, "telephone" = ?, "email" = ?,
-								"telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-								"flag" = ?, "mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							SET "baseid" = ?, "addrid" = ?, "type" = ?, "company" = ?, "vatid" = ?,
+								"salutation" = ?, "title" = ?, "firstname" = ?, "lastname" = ?,
+								"address1" = ?, "address2" = ?, "address3" = ?, "postal" = ?,
+								"city" = ?, "state" = ?, "countryid" = ?, "langid" = ?,
+								"telephone" = ?, "email" = ?, "telefax" = ?, "website" = ?,
+								"longitude" = ?, "latitude" = ?, "flag" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -135,8 +134,8 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_coupon" (
-								"baseid", "siteid", "ordprodid", "code", "mtime", "editor",
-								"ctime"
+								"baseid", "ordprodid", "code",
+								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
 								?, ?, ?, ?, ?, ?, ?
 							)
@@ -145,9 +144,9 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_coupon"
-							SET "baseid" = ?, "siteid" = ?, "ordprodid" = ?, "code" = ?,
+							SET "baseid" = ?, "ordprodid" = ?, "code" = ?,
 								"mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -212,8 +211,8 @@ return array(
 						'insert' => array(
 							'ansi' => '
 								INSERT INTO "mshop_order_base_product_attr" (
-									"siteid", "attrid", "ordprodid", "type", "code", "value",
-									"name", "mtime", "editor", "ctime"
+									"attrid", "ordprodid", "type", "code", "value",
+									"name", "mtime", "editor", "siteid", "ctime"
 								) VALUES (
 									?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 								)
@@ -222,9 +221,9 @@ return array(
 						'update' => array(
 							'ansi' => '
 								UPDATE "mshop_order_base_product_attr"
-								SET "siteid" = ?, "attrid" = ?, "ordprodid" = ?, "type" = ?,
-									"code" = ?, "value" = ?, "name" = ?, "mtime" = ?, "editor" = ?
-								WHERE "id" = ?
+								SET "attrid" = ?, "ordprodid" = ?, "type" = ?, "code" = ?,
+									"value" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+								WHERE "siteid" = ? AND "id" = ?
 							'
 						),
 						'search' => array(
@@ -289,10 +288,10 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_product" (
-								"baseid", "siteid", "ordprodid", "type", "prodid", "prodcode",
+								"baseid", "ordprodid", "type", "prodid", "prodcode",
 								"suppliercode", "stocktype", "name", "mediaurl", "quantity",
 								"price", "costs", "rebate", "tax", "taxrate", "taxflag", "flags",
-								"status", "pos", "mtime", "editor", "ctime"
+								"status", "pos", "mtime", "editor", "siteid", "ctime"
 							) VALUES (
 								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
@@ -301,13 +300,13 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_product"
-							SET "baseid" = ?, "siteid" = ?, "ordprodid" = ?, "type" = ?,
+							SET "baseid" = ?, "ordprodid" = ?, "type" = ?,
 								"prodid" = ?, "prodcode" = ?, "suppliercode" = ?,
 								"stocktype" = ?, "name" = ?, "mediaurl" = ?,
 								"quantity" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
 								"tax" = ?, "taxrate" = ?, "taxflag" = ?, "flags" = ?,
 								"status" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -383,8 +382,8 @@ return array(
 						'insert' => array(
 							'ansi' => '
 								INSERT INTO "mshop_order_base_service_attr" (
-									"siteid", "attrid", "ordservid", "type", "code", "value",
-									"name", "mtime", "editor", "ctime"
+									"attrid", "ordservid", "type", "code", "value",
+									"name", "mtime", "editor", "siteid", "ctime"
 								) VALUES (
 									?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 								)
@@ -393,9 +392,9 @@ return array(
 						'update' => array(
 							'ansi' => '
 								UPDATE "mshop_order_base_service_attr"
-								SET "siteid" = ?, "attrid" = ?, "ordservid" = ?, "type" = ?,
-									"code" = ?, "value" = ?, "name" = ?, "mtime" = ?, "editor" = ?
-								WHERE "id" = ?
+								SET "attrid" = ?, "ordservid" = ?, "type" = ?, "code" = ?,
+									"value" = ?, "name" = ?, "mtime" = ?, "editor" = ?
+								WHERE "siteid" = ? AND "id" = ?
 							'
 						),
 						'search' => array(
@@ -460,9 +459,9 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_service" (
-								"baseid", "siteid", "servid", "type", "code", "name",
+								"baseid", "servid", "type", "code", "name",
 								"mediaurl", "price", "costs", "rebate", "tax", "taxrate",
-								"taxflag", "mtime", "editor", "ctime"
+								"taxflag", "mtime", "editor", "siteid", "ctime"
 							) VALUES (
 								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
@@ -471,11 +470,11 @@ return array(
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_service"
-							SET "baseid" = ?, "siteid" = ?, "servid" = ?, "type" = ?,
+							SET "baseid" = ?, "servid" = ?, "type" = ?,
 								"code" = ?, "name" = ?, "mediaurl" = ?, "price" = ?,
 								"costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
 								"taxflag" = ?, "mtime" = ?, "editor" = ?
-							WHERE "id" = ?
+							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
 					'search' => array(
@@ -545,9 +544,9 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_order_base" (
-							"siteid", "customerid", "sitecode", "langid", "currencyid",
-							"price", "costs", "rebate", "tax", "taxflag", "comment", "status",
-							"mtime", "editor", "ctime"
+							"customerid", "sitecode", "langid", "currencyid",
+							"price", "costs", "rebate", "tax", "taxflag", "comment",
+							"status", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -556,10 +555,10 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_order_base"
-						SET "siteid" = ?, "customerid" = ?, "sitecode" = ?, "langid" = ?,
-							"currencyid" = ?, "price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?,
-							"taxflag" = ?, "comment" = ?, "status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						SET "customerid" = ?, "sitecode" = ?, "langid" = ?, "currencyid" = ?,
+							"price" = ?, "costs" = ?, "rebate" = ?, "tax" = ?, "taxflag" = ?,
+							"comment" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -628,8 +627,8 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_order_status" (
-							"siteid", "parentid", "type", "value", "mtime", "editor",
-							"ctime"
+							"parentid", "type", "value",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?
 						)
@@ -638,9 +637,9 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_order_status"
-						SET "siteid" = ?, "parentid" = ?, "type" = ?, "value" = ?,
+						SET "parentid" = ?, "type" = ?, "value" = ?,
 							"mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -697,9 +696,9 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_order" (
-						"baseid", "siteid", "type", "datepayment", "datedelivery",
+						"baseid", "type", "datepayment", "datedelivery",
 						"statusdelivery", "statuspayment", "relatedid", "mtime",
-						"editor", "ctime", "cdate", "cmonth", "cweek", "chour"
+						"editor", "siteid", "ctime", "cdate", "cmonth", "cweek", "chour"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
@@ -708,10 +707,10 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_order"
-					SET "baseid" = ?, "siteid" = ?, "type" = ?, "datepayment" = ?,
-						"datedelivery" = ?, "statusdelivery" = ?, "statuspayment" = ?,
-						"relatedid" = ?, "mtime" = ?, "editor" = ?
-					WHERE "id" = ?
+					SET "baseid" = ?, "type" = ?, "datepayment" = ?, "datedelivery" = ?,
+						"statusdelivery" = ?, "statuspayment" = ?, "relatedid" = ?,
+						"mtime" = ?, "editor" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
 			'delete' => array(

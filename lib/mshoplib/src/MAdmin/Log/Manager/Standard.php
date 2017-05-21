@@ -274,12 +274,13 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
-			$stmt->bind( 1, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getFacility() );
-			$stmt->bind( 3, date( 'Y-m-d H:i:s' ) );
-			$stmt->bind( 4, $item->getPriority(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $item->getMessage() );
-			$stmt->bind( 6, $item->getRequest() );
+
+			$stmt->bind( 1, $item->getFacility() );
+			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) );
+			$stmt->bind( 3, $item->getPriority(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 4, $item->getMessage() );
+			$stmt->bind( 5, $item->getRequest() );
+			$stmt->bind( 6, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $item->getId() !== null ) {
 				$stmt->bind( 7, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -19,8 +19,8 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_stock_type" (
-							"siteid", "code", "domain", "label", "status",
-							"mtime", "editor", "ctime"
+							"code", "domain", "label", "status",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
 							?, ?, ?, ?, ?, ?, ?, ?
 						)
@@ -29,9 +29,9 @@ return array(
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_stock_type"
-						SET "siteid" = ?, "code" = ?, "domain" = ?, "label" = ?,
+						SET "code" = ?, "domain" = ?, "label" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
-						WHERE "id" = ?
+						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
 				'search' => array(
@@ -84,8 +84,8 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_stock" (
-						"productcode", "siteid", "typeid", "stocklevel", "backdate",
-						"mtime", "editor", "ctime"
+						"productcode", "typeid", "stocklevel", "backdate",
+						"mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?
 					)
@@ -94,9 +94,9 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_stock"
-					SET "productcode" = ?, "siteid" = ?, "typeid" = ?,
-						"stocklevel" = ?, "backdate" = ?, "mtime" = ?, "editor" = ?
-					WHERE "id" = ?
+					SET "productcode" = ?, "typeid" = ?, "stocklevel" = ?,
+						"backdate" = ?, "mtime" = ?, "editor" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
 			'search' => array(

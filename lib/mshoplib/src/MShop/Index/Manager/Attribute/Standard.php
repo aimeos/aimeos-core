@@ -667,13 +667,13 @@ class Standard
 			foreach( $listTypes[$refId] as $listType )
 			{
 				$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 3, $refItem->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 4, $listType );
-				$stmt->bind( 5, $refItem->getType() );
-				$stmt->bind( 6, $refItem->getCode() );
-				$stmt->bind( 7, $date ); // mtime
-				$stmt->bind( 8, $editor );
+				$stmt->bind( 2, $refItem->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 3, $listType );
+				$stmt->bind( 4, $refItem->getType() );
+				$stmt->bind( 5, $refItem->getCode() );
+				$stmt->bind( 6, $date ); // mtime
+				$stmt->bind( 7, $editor );
+				$stmt->bind( 8, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 9, $date ); // ctime
 
 				try {

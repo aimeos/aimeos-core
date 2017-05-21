@@ -439,33 +439,34 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
+
 			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getAddressId() );
-			$stmt->bind( 4, $item->getType() );
-			$stmt->bind( 5, $item->getCompany() );
-			$stmt->bind( 6, $item->getVatID() );
-			$stmt->bind( 7, $item->getSalutation() );
-			$stmt->bind( 8, $item->getTitle() );
-			$stmt->bind( 9, $item->getFirstname() );
-			$stmt->bind( 10, $item->getLastname() );
-			$stmt->bind( 11, $item->getAddress1() );
-			$stmt->bind( 12, $item->getAddress2() );
-			$stmt->bind( 13, $item->getAddress3() );
-			$stmt->bind( 14, $item->getPostal() );
-			$stmt->bind( 15, $item->getCity() );
-			$stmt->bind( 16, $item->getState() );
-			$stmt->bind( 17, $item->getCountryId() );
-			$stmt->bind( 18, $item->getLanguageId() );
-			$stmt->bind( 19, $item->getTelephone() );
-			$stmt->bind( 20, $item->getEmail() );
-			$stmt->bind( 21, $item->getTelefax() );
-			$stmt->bind( 22, $item->getWebsite() );
-			$stmt->bind( 23, $item->getLongitude() );
-			$stmt->bind( 24, $item->getLatitude() );
-			$stmt->bind( 25, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 26, $date );
-			$stmt->bind( 27, $context->getEditor() );
+			$stmt->bind( 2, $item->getAddressId() );
+			$stmt->bind( 3, $item->getType() );
+			$stmt->bind( 4, $item->getCompany() );
+			$stmt->bind( 5, $item->getVatID() );
+			$stmt->bind( 6, $item->getSalutation() );
+			$stmt->bind( 7, $item->getTitle() );
+			$stmt->bind( 8, $item->getFirstname() );
+			$stmt->bind( 9, $item->getLastname() );
+			$stmt->bind( 10, $item->getAddress1() );
+			$stmt->bind( 11, $item->getAddress2() );
+			$stmt->bind( 12, $item->getAddress3() );
+			$stmt->bind( 13, $item->getPostal() );
+			$stmt->bind( 14, $item->getCity() );
+			$stmt->bind( 15, $item->getState() );
+			$stmt->bind( 16, $item->getCountryId() );
+			$stmt->bind( 17, $item->getLanguageId() );
+			$stmt->bind( 18, $item->getTelephone() );
+			$stmt->bind( 19, $item->getEmail() );
+			$stmt->bind( 20, $item->getTelefax() );
+			$stmt->bind( 21, $item->getWebsite() );
+			$stmt->bind( 22, $item->getLongitude() );
+			$stmt->bind( 23, $item->getLatitude() );
+			$stmt->bind( 24, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 25, $date );
+			$stmt->bind( 26, $context->getEditor() );
+			$stmt->bind( 27, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 28, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

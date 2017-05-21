@@ -359,21 +359,22 @@ class Standard
 			}
 
 			$stmt = $this->getCachedStatement( $conn, $path );
+
 			$stmt->bind( 1, $item->getBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getServiceId() );
-			$stmt->bind( 4, $item->getType() );
-			$stmt->bind( 5, $item->getCode() );
-			$stmt->bind( 6, $item->getName() );
-			$stmt->bind( 7, $item->getMediaUrl() );
-			$stmt->bind( 8, $price->getValue() );
-			$stmt->bind( 9, $price->getCosts() );
-			$stmt->bind( 10, $price->getRebate() );
-			$stmt->bind( 11, $price->getTaxValue() );
-			$stmt->bind( 12, $price->getTaxRate() );
-			$stmt->bind( 13, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 14, $date); // mtime
-			$stmt->bind( 15, $context->getEditor() );
+			$stmt->bind( 2, $item->getServiceId() );
+			$stmt->bind( 3, $item->getType() );
+			$stmt->bind( 4, $item->getCode() );
+			$stmt->bind( 5, $item->getName() );
+			$stmt->bind( 6, $item->getMediaUrl() );
+			$stmt->bind( 7, $price->getValue() );
+			$stmt->bind( 8, $price->getCosts() );
+			$stmt->bind( 9, $price->getRebate() );
+			$stmt->bind( 10, $price->getTaxValue() );
+			$stmt->bind( 11, $price->getTaxRate() );
+			$stmt->bind( 12, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 13, $date ); // mtime
+			$stmt->bind( 14, $context->getEditor() );
+			$stmt->bind( 15, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 16, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

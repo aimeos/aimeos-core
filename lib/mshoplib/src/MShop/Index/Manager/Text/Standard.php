@@ -846,15 +846,15 @@ class Standard
 		$reftype, $domain, $content, $date, $editor )
 	{
 		$stmt->bind( 1, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( 3, $refid );
-		$stmt->bind( 4, $lang );
-		$stmt->bind( 5, $listtype );
-		$stmt->bind( 6, $reftype );
-		$stmt->bind( 7, $domain );
-		$stmt->bind( 8, $content );
-		$stmt->bind( 9, $date ); //mtime
-		$stmt->bind( 10, $editor );
+		$stmt->bind( 2, $refid );
+		$stmt->bind( 3, $lang );
+		$stmt->bind( 4, $listtype );
+		$stmt->bind( 5, $reftype );
+		$stmt->bind( 6, $domain );
+		$stmt->bind( 7, $content );
+		$stmt->bind( 8, $date ); //mtime
+		$stmt->bind( 9, $editor );
+		$stmt->bind( 10, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 		$stmt->bind( 11, $date ); //ctime
 
 		try {

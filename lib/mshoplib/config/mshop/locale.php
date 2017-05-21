@@ -210,8 +210,8 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_locale" (
-						"siteid", "langid", "currencyid", "pos", "status", "mtime",
-						"editor", "ctime"
+						"langid", "currencyid", "pos", "status",
+						"mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?
 					)
@@ -220,9 +220,9 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_locale"
-					SET "siteid" = ?, "langid" = ?, "currencyid" = ?, "pos" = ?,
+					SET "langid" = ?, "currencyid" = ?, "pos" = ?,
 						"status" = ?, "mtime" = ?, "editor" = ?
-					WHERE "id" = ?
+					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
 			'search' => array(

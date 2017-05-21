@@ -444,14 +444,14 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getCode() );
-			$stmt->bind( 4, $item->getCount(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, $item->getDateStart() );
-			$stmt->bind( 6, $item->getDateEnd() );
-			$stmt->bind( 7, $date ); // mtime
-			$stmt->bind( 8, $context->getEditor() );
+			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getCode() );
+			$stmt->bind( 3, $item->getCount(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 4, $item->getDateStart() );
+			$stmt->bind( 5, $item->getDateEnd() );
+			$stmt->bind( 6, $date ); // mtime
+			$stmt->bind( 7, $context->getEditor() );
+			$stmt->bind( 8, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

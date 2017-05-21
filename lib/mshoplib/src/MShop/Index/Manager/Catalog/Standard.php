@@ -475,12 +475,12 @@ class Standard
 				foreach( (array) $listItems[$parentId] as $listItem )
 				{
 					$stmt->bind( 1, $parentId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 2, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 3, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 4, $listItem->getType() );
-					$stmt->bind( 5, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 6, $date ); //mtime
-					$stmt->bind( 7, $editor );
+					$stmt->bind( 2, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 3, $listItem->getType() );
+					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 5, $date ); //mtime
+					$stmt->bind( 6, $editor );
+					$stmt->bind( 7, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 8, $date ); //ctime
 
 					try {
