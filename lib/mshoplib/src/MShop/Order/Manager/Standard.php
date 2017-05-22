@@ -259,30 +259,6 @@ class Standard
 
 
 	/**
-	 * Creates a search object.
-	 *
-	 * @param boolean $default Add default criteria; Optional
-	 * @return \Aimeos\MW\Criteria\Iface
-	 */
-	public function createSearch( $default = false )
-	{
-		$search = parent::createSearch( $default );
-
-		if( $default === true )
-		{
-			$expr = array(
-				$search->getConditions(),
-				$search->compare( '!=', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_UNFINISHED ),
-			);
-
-			$search->setConditions( $search->combine( '&&', $expr ) );
-		}
-
-		return $search;
-	}
-
-
-	/**
 	 * Creates a one-time order in the storage from the given invoice object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Order item with necessary values
