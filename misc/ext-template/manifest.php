@@ -59,6 +59,7 @@ return array(
 		),
 		'controller/jobs/templates' => array(
 			'controller/jobs/templates',
+			'client/html/templates',
 		),
 	),
 	'setup' => array(
