@@ -7,5 +7,7 @@
 return array(
 	'customer/group' => array(
 		'admin' => array( 'code' => 'admin', 'label' => 'Administrator' ),
+		'editor' => array( 'code' => 'editor', 'label' => 'Editor' ),
+		'viewer' => array( 'code' => 'viewer', 'label' => 'Viewer' ),
 	),
 );
