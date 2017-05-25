@@ -84,6 +84,13 @@ class Pcntl implements Iface
 			$this->waitOne();
 		}
 
+		foreach( $data as $key => $value )
+		{
+			if( is_object( $value ) ) {
+				$data[$key] = clone $value;
+			}
+		}
+
 		if( ( $pid = pcntl_fork() ) === -1 ) {
 			throw new Exception( 'Unable to fork new process: ' . pcntl_strerror( pcntl_get_last_error() ) );
 		}
