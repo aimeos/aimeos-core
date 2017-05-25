@@ -35,6 +35,30 @@ class Standard implements Iface
 
 
 	/**
+	 * Cleans up the object
+	 */
+	public function __destruct()
+	{
+		foreach( $this->objects as $object ) {
+			unset( $object );
+		}
+	}
+
+
+	/**
+	 * Clones the objects inside.
+	 */
+	public function __clone()
+	{
+		$this->config = clone $this->config;
+
+		foreach( $this->objects as $resource => $object ) {
+			unset( $this->objects[$resource] );
+		}
+	}
+
+
+	/**
 	 * Returns the message queue for the given name
 	 *
 	 * @param string $resource Resource name of the message queue

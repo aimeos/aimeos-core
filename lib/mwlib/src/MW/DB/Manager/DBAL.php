@@ -40,8 +40,11 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 	 */
 	public function __destruct()
 	{
-		foreach( $this->connections as $conn ) {
-			unset( $conn );
+		foreach( $this->connections as $name => $list )
+		{
+			foreach( $list as $conn ) {
+				unset( $conn );
+			}
 		}
 	}
 
@@ -52,6 +55,10 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 	public function __clone()
 	{
 		$this->config = clone $this->config;
+
+		foreach( $this->connections as $name => $list ) {
+			unset( $this->connections[$name] );
+		}
 	}
 
 

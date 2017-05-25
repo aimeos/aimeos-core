@@ -35,6 +35,30 @@ class Standard implements Iface
 
 
 	/**
+	 * Cleans up the object
+	 */
+	public function __destruct()
+	{
+		foreach( $this->objects as $object ) {
+			unset( $object );
+		}
+	}
+
+
+	/**
+	 * Clones the objects inside.
+	 */
+	public function __clone()
+	{
+		$this->config = clone $this->config;
+
+		foreach( $this->objects as $name => $object ) {
+			unset( $this->objects[$name] );
+		}
+	}
+
+
+	/**
 	 * Returns the file system for the given name
 	 *
 	 * @param string $name Key for the file system
