@@ -175,6 +175,21 @@ interface Iface
 	public function getMessageQueue( $resource, $queue );
 
 	/**
+	 * Sets the process object.
+	 *
+	 * @param \Aimeos\MW\Process\Iface $process Process object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setProcess( \Aimeos\MW\Process\Iface $process );
+
+	/**
+	 * Returns the process object.
+	 *
+	 * @return \Aimeos\MW\Process\Iface Process object
+	*/
+	public function getProcess();
+
+	/**
 	 * Sets the session object.
 	 *
 	 * @param \Aimeos\MW\Session\Iface $session Session object

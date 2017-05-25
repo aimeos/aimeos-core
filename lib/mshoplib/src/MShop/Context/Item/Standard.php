@@ -28,6 +28,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	private $logger;
 	private $mail;
 	private $mqueue;
+	private $process;
 	private $session;
 	private $view;
 	private $user;
@@ -49,6 +50,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->logger = null;
 		$this->mail = null;
 		$this->mqueue = null;
+		$this->process = null;
 		$this->session = null;
 		$this->view = null;
 		$this->i18n = [];
@@ -67,6 +69,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		$this->mail = ( isset( $this->mail ) ? clone $this->mail : null );
 		$this->mqueue = ( isset( $this->mqueue ) ? clone $this->mqueue : null );
 		$this->session = ( isset( $this->session ) ? clone $this->session : null );
+		$this->process = ( isset( $this->process ) ? clone $this->process : null );
 		// view is always cloned
 
 		foreach( $this->i18n as $locale => $object ) {
@@ -84,7 +87,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	{
 		$objects = array(
 			$this, $this->cache, $this->config, $this->dbm, $this->fsm, $this->locale,
-			$this->logger, $this->mail, $this->mqueue, $this->session, $this->view
+			$this->logger, $this->mail, $this->mqueue, $this->process, $this->session, $this->view
 		);
 
 		return md5( $this->hash( $objects ) );
@@ -397,6 +400,35 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->mqueue->get( $resource )->getQueue( $queue );
+	}
+
+
+	/**
+	 * Sets the process object.
+	 *
+	 * @param \Aimeos\MW\Process\Iface $process Process object
+	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
+	 */
+	public function setProcess( \Aimeos\MW\Process\Iface $process )
+	{
+		$this->process = $process;
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the process object.
+	 *
+	 * @return \Aimeos\MW\Process\Iface Process object
+	*/
+	public function getProcess()
+	{
+		if( !isset( $this->process ) ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Process object not available' ) );
+		}
+
+		return $this->process;
 	}
 
 

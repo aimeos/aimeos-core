@@ -78,6 +78,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->getMessageQueue( 'email', 'test' );
 	}
 
+	public function testGetProcess()
+	{
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->object->getProcess();
+	}
+
 	public function testGetSession()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
@@ -177,6 +183,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setSession( $context->getSession() );
 
 		$this->assertSame( $context->getSession(), $this->object->getSession() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+	}
+
+	public function testSetProcess()
+	{
+		$process = new \Aimeos\MW\Process\Pcntl();
+		$return = $this->object->setProcess( $process );
+
+		$this->assertSame( $process, $this->object->getProcess() );
 		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 
