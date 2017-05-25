@@ -20,21 +20,21 @@ namespace Aimeos\MW\DB\Statement\DBAL;
 class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Statement\Iface
 {
 	private $binds = [];
-	private $conn;
 	private $parts;
 	private $sql;
 
 
 	/**
-	 * Initializes the statement object.
+	 * Initializes the statement object
 	 *
-	 * @param \Doctrine\DBAL\Connection $conn DBAL database connection object
-	 * @param string $sql SQL statement string
+	 * @param \Aimeos\MW\DB\Connection\DBAL $conn Database connection object
+	 * @param string $sql SQL statement
 	 */
-	public function __construct( \Doctrine\DBAL\Connection $conn, $sql )
+	public function __construct( \Aimeos\MW\DB\Connection\DBAL $conn, $sql )
 	{
+		parent::__construct( $conn );
+
 		$this->parts = $this->getSqlParts( $sql );
-		$this->conn = $conn;
 	}
 
 
@@ -61,8 +61,10 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 				$this->binds[$position] = (int) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$this->binds[$position] = (float) $value; break;
+			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
+				$this->binds[$position] = $this->getConnection()->getRawObject()->quote( $value ); break;
 			default:
-				$this->binds[$position] = $this->conn->quote( $value ); break;
+				throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid parameter type "%1$s"', $type ) );
 		}
 
 		$this->sql = null;
@@ -83,19 +85,20 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			throw new \Aimeos\MW\DB\Exception( sprintf( $msg, count( $this->binds ), implode( '?', $this->parts ) ) );
 		}
 
-		if( $this->sql === null ) {
-			$this->sql = $this->buildSQL( $this->parts, $this->binds );
-		}
-
 		try
 		{
-			return new \Aimeos\MW\DB\Result\DBAL( $this->conn->query( $this->sql ) );
+			$result = $this->exec();
 		}
-		catch ( \Doctrine\DBAL\DBALException $e )
+		catch( \Doctrine\DBAL\DBALException $e )
 		{
-			$msg = sprintf( 'Executing statement "%1$s" failed: ', $this->sql );
-			throw new \Aimeos\MW\DB\Exception( $msg . $e->getMessage(), $e->getCode() );
+			try {
+				$result = $this->reconnect( $e )->exec();
+			} catch( \Doctrine\DBAL\DBALException $e ) {
+				throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+			}
 		}
+
+		return new \Aimeos\MW\DB\Result\DBAL( $result );
 	}
 
 
@@ -111,5 +114,20 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 		}
 
 		return $this->sql;
+	}
+
+
+	/**
+	 * Binds the parameters and executes the SQL statment
+	 *
+	 * @return \Doctrine\DBAL\Driver\Statement Executed DBAL statement
+	 */
+	protected function exec()
+	{
+		if( $this->sql === null ) {
+			$this->sql = $this->buildSQL( $this->parts, $this->binds );
+		}
+
+		return $this->getConnection()->getRawObject()->query( $this->sql );
 	}
 }

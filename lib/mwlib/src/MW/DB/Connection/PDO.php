@@ -20,18 +20,47 @@ namespace Aimeos\MW\DB\Connection;
  */
 class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connection\Iface
 {
-	private $connection = null;
+	private $connection;
 	private $txnumber = 0;
+	private $stmts = array();
 
 
 	/**
-	 * Initializes the \PDO connection object.
+	 * Initializes the PDO connection object.
 	 *
-	 * @param \PDO $connection \PDO connection object
+	 * @param array $params Associative list of connection parameters
+	 * @param string[] $stmts List of SQL statements to execute after connecting
 	 */
-	public function __construct( \PDO $connection )
+	public function __construct( array $params, array $stmts )
 	{
-		$this->connection = $connection;
+		parent::__construct( $params );
+
+		$this->stmts = $stmts;
+		$this->connect();
+	}
+
+
+	/**
+	 * Connects (or reconnects) to the database server
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 */
+	public function connect()
+	{
+		unset( $this->connection );
+		list( $dsn, $user, $pass, $attr ) = $this->getParameters();
+
+		$pdo = new \PDO( $dsn, $user, $pass, $attr );
+		$pdo->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
+
+		$this->connection = $pdo;
+		$this->txnumber = 0;
+
+		foreach( $this->stmts as $stmt ) {
+			$this->create( $stmt )->execute()->finish();
+		}
+
+		return $this;
 	}
 
 
@@ -49,9 +78,9 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 			switch( $type )
 			{
 				case \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE:
-					return new \Aimeos\MW\DB\Statement\PDO\Simple( $this->connection, $sql );
+					return new \Aimeos\MW\DB\Statement\PDO\Simple( $this, $sql );
 				case \Aimeos\MW\DB\Connection\Base::TYPE_PREP:
-					return new \Aimeos\MW\DB\Statement\PDO\Prepared( $this->connection->prepare( $sql ) );
+					return new \Aimeos\MW\DB\Statement\PDO\Prepared( $this, $sql );
 				default:
 					throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
 			}
@@ -69,6 +98,21 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	public function getRawObject()
 	{
 		return $this->connection;
+	}
+
+
+	/**
+	 * Checks if a transaction is currently running
+	 *
+	 * @return boolean True if transaction is currently running, false if not
+	 */
+	public function inTransaction()
+	{
+		if( $this->txnumber > 0 ) {
+			return true;
+		}
+
+		return false;
 	}
 
 

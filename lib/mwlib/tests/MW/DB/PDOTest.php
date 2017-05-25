@@ -24,7 +24,6 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		$this->object = new \Aimeos\MW\DB\Manager\PDO( $this->config );
 		$sql = 'DROP TABLE "mw_unit_test"';
 
 		$conn = $this->object->acquire();
@@ -267,21 +266,27 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testStmtSimpleBindParamType()
+	public function testStmtSimpleInvalidBindParamType()
 	{
 		$sqlinsert2 =  'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
 		$conn = $this->object->acquire();
 
-		$stmt2 = $conn->create( $sqlinsert2 );
-		$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT);
-		$stmt2->bind( 2, 0.15, 123);
-		$result = $stmt2->execute();
-		$rows = $result->affectedRows();
-		$result->finish();
+		try
+		{
+			$stmt2 = $conn->create( $sqlinsert2 );
+			$stmt2->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT);
+			$stmt2->bind( 2, 0.15, 123);
+			$stmt2->execute();
+		}
+		catch( \Aimeos\MW\DB\Exception $de )
+		{
+			$this->object->release( $conn );
+			return;
+		}
 
-		$this->assertEquals( 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, \'0.15\')', strval( $stmt2 ) );
-		$this->assertEquals( 1, $rows );
+		$this->object->release( $conn );
+		$this->fail('An expected exception has not been raised');
 	}
 
 
@@ -413,6 +418,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 			$stmt = $conn->create( $sqlinsert, \Aimeos\MW\DB\Connection\Base::TYPE_PREP );
 			$stmt->bind( 1, 1, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, 'test', 123 );
+			$stmt->execute();
 		}
 		catch ( \Aimeos\MW\DB\Exception $e )
 		{
@@ -492,9 +498,10 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 
 	public function testPDOException()
 	{
+		$mock = $this->getMockBuilder( '\Aimeos\MW\DB\Connection\Iface' )->getMock();
+
 		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
-		$conn = new TestForPDOException();
-		$this->object->release($conn);
+		$this->object->release( $mock );
 	}
 
 
@@ -508,34 +515,5 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
 		\Aimeos\MW\DB\Factory::createManager( \TestHelperMw::getConfig(), 'notDefined' );
-	}
-}
-
-
-
-class TestForPDOException implements \Aimeos\MW\DB\Connection\Iface
-{
-	public function create($sql, $type = \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE)
-	{
-	}
-
-	public function escape($data)
-	{
-	}
-
-	public function getRawObject()
-	{
-	}
-
-	public function begin()
-	{
-	}
-
-	public function commit()
-	{
-	}
-
-	public function rollback()
-	{
 	}
 }

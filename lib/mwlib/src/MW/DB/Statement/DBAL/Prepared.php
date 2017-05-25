@@ -19,17 +19,20 @@ namespace Aimeos\MW\DB\Statement\DBAL;
  */
 class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Statement\Iface
 {
-	private $stmt = null;
+	private $binds = [];
+	private $sql;
 
 
 	/**
 	 * Initializes the statement object
 	 *
-	 * @param \Doctrine\DBAL\Driver\Statement $stmt DBAL database statement object
+	 * @param \Aimeos\MW\DB\Connection\DBAL $conn Database connection object
+	 * @param string $sql SQL statement
 	 */
-	public function __construct( \Doctrine\DBAL\Driver\Statement $stmt )
+	public function __construct( \Aimeos\MW\DB\Connection\DBAL $conn, $sql )
 	{
-		$this->stmt = $stmt;
+		parent::__construct( $conn );
+		$this->sql = $sql;
 	}
 
 
@@ -43,11 +46,7 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	 */
 	public function bind( $position, $value, $type = \Aimeos\MW\DB\Statement\Base::PARAM_STR )
 	{
-		try {
-			$this->stmt->bindValue( $position, $value, $this->getPdoType( $type, $value ) );
-		} catch ( \Doctrine\DBAL\DBALException $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
-		}
+		$this->binds[$position] = [$value, $type];
 	}
 
 
@@ -59,12 +58,38 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	 */
 	public function execute()
 	{
-		try {
-			$this->stmt->execute();
-		} catch ( \Doctrine\DBAL\DBALException $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+		try
+		{
+			$stmt = $this->exec();
+		}
+		catch( \Doctrine\DBAL\DBALException $e )
+		{
+			try {
+				$stmt = $this->reconnect( $e )->exec();
+			} catch( \Doctrine\DBAL\DBALException $e ) {
+				throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+			}
 		}
 
-		return new \Aimeos\MW\DB\Result\DBAL( $this->stmt );
+		return new \Aimeos\MW\DB\Result\DBAL( $stmt );
+	}
+
+
+	/**
+	 * Binds the parameters and executes the SQL statment
+	 *
+	 * @return \Doctrine\DBAL\Driver\Statement Executed DBAL statement
+	 */
+	protected function exec()
+	{
+		$stmt = $this->getConnection()->getRawObject()->prepare( $this->sql );
+
+		foreach( $this->binds as $position => $list ) {
+			$stmt->bindValue( $position, $list[0], $this->getPdoType( $list[1], $list[0] ) );
+		}
+
+		$stmt->execute();
+
+		return $stmt;
 	}
 }

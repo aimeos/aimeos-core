@@ -5,7 +5,7 @@
  * @copyright Metaways Infosystems GmbH, 2014
  * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MW
- * @subpackage View
+ * @subpackage Media
  */
 
 

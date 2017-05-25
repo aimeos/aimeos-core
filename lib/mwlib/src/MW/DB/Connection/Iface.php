@@ -48,6 +48,14 @@ interface Iface
 
 
 	/**
+	 * Checks if a transaction is currently running
+	 *
+	 * @return boolean True if transaction is currently running, false if not
+	 */
+	public function inTransaction();
+
+
+	/**
 	 * Starts a transaction for this connection.
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.

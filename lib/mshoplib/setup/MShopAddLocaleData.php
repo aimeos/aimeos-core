@@ -151,7 +151,8 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Adding data for MShop locale currencies', 1 );
 
-		$currencyItemManager = $localeManager->getSubManager( 'currency', 'Standard' );
+		$currencyManager = $localeManager->getSubManager( 'currency', 'Standard' );
+		$items = $currencyManager->searchItems( $currencyManager->createSearch()->setSlice( 0, 0x7fffffff ) );
 
 		$num = $total = 0;
 
@@ -159,15 +160,18 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$total++;
 
-			$currencyItem = $currencyItemManager->createItem();
-			$currencyItem->setCode( $dataset['id'] );
-			$currencyItem->setLabel( $dataset['label'] );
-			$currencyItem->setStatus( $dataset['status'] );
+			if( !isset( $items[$dataset['id']] ) )
+			{
+				$currencyItem = $currencyManager->createItem();
+				$currencyItem->setCode( $dataset['id'] );
+				$currencyItem->setLabel( $dataset['label'] );
+				$currencyItem->setStatus( $dataset['status'] );
 
-			try {
-				$currencyItemManager->saveItem( $currencyItem );
-				$num++;
-			} catch( \Exception $e ) {; } // if currency was already available
+				$items[$dataset['id']] = $currencyItem;
+			}
+
+			$currencyManager->saveItem( $items[$dataset['id']] );
+			$num++;
 		}
 
 		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );
@@ -184,22 +188,27 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Adding data for MShop locale languages', 1 );
 
-		$languageItemManager = $localeManager->getSubManager( 'language', 'Standard' );
+		$languageManager = $localeManager->getSubManager( 'language', 'Standard' );
+		$items = $languageManager->searchItems( $languageManager->createSearch()->setSlice( 0, 0x7fffffff ) );
 
 		$num = $total = 0;
 
 		foreach( $data as $dataset )
 		{
 			$total++;
-			$languageItem = $languageItemManager->createItem();
-			$languageItem->setCode( $dataset['id'] );
-			$languageItem->setLabel( $dataset['label'] );
-			$languageItem->setStatus( $dataset['status'] );
 
-			try {
-				$languageItemManager->saveItem( $languageItem );
-				$num++;
-			} catch( \Exception $e ) {; } // if language was already available
+			if( !isset( $items[$dataset['id']] ) )
+			{
+				$languageItem = $languageManager->createItem();
+				$languageItem->setCode( $dataset['id'] );
+				$languageItem->setLabel( $dataset['label'] );
+				$languageItem->setStatus( $dataset['status'] );
+
+				$items[$dataset['id']] = $languageItem;
+			}
+
+			$languageManager->saveItem( $items[$dataset['id']] );
+			$num++;
 		}
 
 		$this->status( $num > 0 ? $num . '/' . $total : 'OK' );

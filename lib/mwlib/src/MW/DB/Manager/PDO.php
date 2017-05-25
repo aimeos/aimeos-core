@@ -133,6 +133,7 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 		$pass = $this->config->get( 'resource/' . $name . '/password' );
 		$sock = $this->config->get( 'resource/' . $name . '/socket' );
 		$dbase = $this->config->get( 'resource/' . $name . '/database' );
+		$persist = $this->config->get( 'resource/' . $name . '/opt-persistent', false );
 
 		$dsn = $adapter . ':dbname=' . $dbase;
 		if( $sock == null )
@@ -145,18 +146,9 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 			$dsn .= ';unix_socket=' . $sock;
 		}
 
-		$attr = array(
-			\PDO::ATTR_PERSISTENT => $this->config->get( 'resource/' . $name . '/opt-persistent', false ),
-		);
+		$params = array( $dsn, $user, $pass, array( \PDO::ATTR_PERSISTENT => $persist ) );
+		$stmts = $this->config->get( 'resource/' . $name . '/stmt', array() );
 
-		$pdo = new \PDO( $dsn, $user, $pass, $attr );
-		$pdo->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
-		$dbc = new \Aimeos\MW\DB\Connection\PDO( $pdo );
-
-		foreach( $this->config->get( 'resource/' . $name . '/stmt', [] ) as $stmt ) {
-			$dbc->create( $stmt )->execute()->finish();
-		}
-
-		return $dbc;
+		return new \Aimeos\MW\DB\Connection\PDO( $params, $stmts );
 	}
 }

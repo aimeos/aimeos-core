@@ -144,13 +144,8 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 			default: $params['driver'] = $adapter;
 		}
 
-		$conn = \Doctrine\DBAL\DriverManager::getConnection( $params );
-		$dbc = new \Aimeos\MW\DB\Connection\DBAL( $conn );
+		$stmts = $this->config->get( 'resource/' . $name . '/stmt', [] );
 
-		foreach( $this->config->get( 'resource/' . $name . '/stmt', [] ) as $stmt ) {
-			$dbc->create( $stmt )->execute()->finish();
-		}
-
-		return $dbc;
+		return new \Aimeos\MW\DB\Connection\DBAL( $params, $stmts );
 	}
 }

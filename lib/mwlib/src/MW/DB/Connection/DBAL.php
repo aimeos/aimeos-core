@@ -21,16 +21,44 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 {
 	private $connection;
 	private $txnumber = 0;
+	private $stmts = array();
 
 
 	/**
 	 * Initializes the DBAL connection object
 	 *
-	 * @param \Doctrine\DBAL\Connection $connection DBAL connection object
+	 * @param array $params Associative list of connection parameters
+	 * @param string[] $stmts List of SQL statements to execute after connecting
 	 */
-	public function __construct( \Doctrine\DBAL\Connection $connection )
+	public function __construct( array $params, array $stmts )
 	{
-		$this->connection = $connection;
+		parent::__construct( $params );
+
+		$this->stmts = $stmts;
+		$this->connect();
+	}
+
+
+	/**
+	 * Connects (or reconnects) to the database server
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 */
+	public function connect()
+	{
+		if( $this->connection && $this->connection->ping() ) {
+			return $this;
+		}
+
+		unset( $this->connection );
+		$this->connection = \Doctrine\DBAL\DriverManager::getConnection( $this->getParameters() );
+		$this->txnumber = 0;
+
+		foreach( $this->stmts as $stmt ) {
+			$this->create( $stmt )->execute()->finish();
+		}
+
+		return $this;
 	}
 
 
@@ -49,9 +77,9 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 			switch( $type )
 			{
 				case \Aimeos\MW\DB\Connection\Base::TYPE_SIMPLE:
-					return new \Aimeos\MW\DB\Statement\DBAL\Simple( $this->connection, $sql );
+					return new \Aimeos\MW\DB\Statement\DBAL\Simple( $this, $sql );
 				case \Aimeos\MW\DB\Connection\Base::TYPE_PREP:
-					return new \Aimeos\MW\DB\Statement\DBAL\Prepared( $this->connection->prepare( $sql ) );
+					return new \Aimeos\MW\DB\Statement\DBAL\Prepared( $this, $sql );
 				default:
 					throw new \Aimeos\MW\DB\Exception( sprintf( 'Invalid value "%1$d" for statement type', $type ) );
 			}
@@ -75,7 +103,23 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 
 
 	/**
+	 * Checks if a transaction is currently running
+	 *
+	 * @return boolean True if transaction is currently running, false if not
+	 */
+	public function inTransaction()
+	{
+		if( $this->txnumber > 0 ) {
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
 	 * Starts a transaction for this connection.
+	 *
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
 	 */

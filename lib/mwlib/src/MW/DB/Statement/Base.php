@@ -51,6 +51,20 @@ abstract class Base
 	const PARAM_LOB = 5;
 
 
+	private $conn;
+
+
+	/**
+	 * Initializes the base object
+	 *
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
+	 */
+	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn )
+	{
+		$this->conn = $conn;
+	}
+
+
 	/**
 	 * Creates the SQL string with bound parameters.
 	 *
@@ -72,6 +86,17 @@ abstract class Base
 		}
 
 		return $stmt;
+	}
+
+
+	/**
+	 * Returns the connection object
+	 *
+	 * @return \Aimeos\MW\DB\Connection\DBAL Connection object
+	 */
+	protected function getConnection()
+	{
+		return $this->conn;
 	}
 
 
@@ -142,5 +167,23 @@ abstract class Base
 		}
 
 		return $result;
+	}
+
+
+	/**
+	 * Reconnects to the database server if not in a transaction
+	 *
+	 * @param \Exception $e Exception to throw if a transaction is running
+	 * @return \Aimeos\MW\DB\Statement\Iface Object for method chaining
+	 * @throws \Exception If a transaction is running
+	 */
+	protected function reconnect( \Exception $e )
+	{
+		if( $this->conn->inTransaction() ) {
+			throw $e;
+		}
+
+		$this->conn->connect();
+		return $this;
 	}
 }

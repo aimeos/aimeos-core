@@ -31,6 +31,20 @@ abstract class Base
 	const TYPE_PREP = 1;
 
 
+	private $params;
+
+
+	/**
+	 * Initializes the base class
+	 *
+	 * @param array $params Connection parameters
+	 */
+	public function __construct( array $params = array() )
+	{
+		$this->params = $params;
+	}
+
+
 	/**
 	 * Escapes the value if necessary for direct inclusion in SQL statement.
 	 *
@@ -46,5 +60,27 @@ abstract class Base
 		}
 
 		return $quoted;
+	}
+
+
+	/**
+	 * Returns the connection parameters
+	 *
+	 * @return array Parameters to connect to the database server
+	 */
+	protected function getParameters()
+	{
+		return $this->params;
+	}
+
+
+	/**
+	 * Checks if a transaction is currently running
+	 *
+	 * @return boolean True if transaction is currently running, false if not
+	 */
+	public function inTransaction()
+	{
+		return true; // safe default
 	}
 }
