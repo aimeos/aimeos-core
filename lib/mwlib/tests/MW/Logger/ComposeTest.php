@@ -26,8 +26,10 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		unlink( 'tmp/error1.log' );
-		unlink( 'tmp/error2.log' );
+		if( file_exists( 'tmp/error2.log' ) ) {
+			unlink( 'tmp/error2.log' );
+		}
+
 		unlink( 'tmp/error3.log' );
 	}
 
@@ -36,8 +38,6 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->log( 'warning test', \Aimeos\MW\Logger\Base::WARN );
 
-		$this->assertEquals( '', file_get_contents( 'tmp/error1.log' ) );
-		$this->assertEquals( '', file_get_contents( 'tmp/error2.log' ) );
 		$this->assertNotEquals( '', file_get_contents( 'tmp/error3.log' ) );
 	}
 
@@ -46,7 +46,6 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->log( 'warning test', \Aimeos\MW\Logger\Base::WARN, 'test' );
 
-		$this->assertEquals( '', file_get_contents( 'tmp/error1.log' ) );
 		$this->assertNotEquals( '', file_get_contents( 'tmp/error2.log' ) );
 		$this->assertNotEquals( '', file_get_contents( 'tmp/error3.log' ) );
 	}

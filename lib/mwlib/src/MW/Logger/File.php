@@ -20,8 +20,8 @@ namespace Aimeos\MW\Logger;
  */
 class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 {
-	private $stream;
 	private $loglevel;
+	private $filename;
 	private $facilities;
 
 
@@ -34,10 +34,7 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 	 */
 	public function __construct( $filename, $priority = \Aimeos\MW\Logger\Base::ERR, array $facilities = null )
 	{
-		if ( !$this->stream = fopen( $filename, 'a', false ) ) {
-			throw new \Aimeos\MW\Logger\Exception( sprintf( 'Unable to open file "%1$s" for appending' ), $filename );
-		}
-
+		$this->filename = $filename;
 		$this->loglevel = $priority;
 		$this->facilities = $facilities;
 	}
@@ -65,8 +62,8 @@ class File extends \Aimeos\MW\Logger\Base implements \Aimeos\MW\Logger\Iface
 
 			$message = '<' . $facility . '> ' . date( 'Y-m-d H:i:s' ) . ' ' . $priority . ' ' . $message . PHP_EOL;
 
-			if ( false === fwrite( $this->stream, $message ) ) {
-				throw new \Aimeos\MW\Logger\Exception( 'Unable to write to stream' );
+			if( file_put_contents( $this->filename, $message, FILE_APPEND ) === false ) {
+				throw new \Aimeos\MW\Logger\Exception( sprintf( 'Unable to write to file "%1$s', $this->filename ) );
 			}
 		}
 	}
