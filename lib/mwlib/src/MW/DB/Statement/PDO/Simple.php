@@ -121,7 +121,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 	/**
 	 * Binds the parameters and executes the SQL statment
 	 *
-	 * @return \Doctrine\DBAL\Driver\Statement Executed DBAL statement
+	 * @return \PDOStatement Executed PDO statement
 	 */
 	protected function exec()
 	{
