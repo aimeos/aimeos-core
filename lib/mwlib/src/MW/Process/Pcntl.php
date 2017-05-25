@@ -55,6 +55,15 @@ class Pcntl implements Iface
 
 
 	/**
+	 * Clears the cloned object
+	 */
+	public function __clone()
+	{
+		$this->list = [];
+	}
+
+
+	/**
 	 * Checks if processing tasks in parallel is available
 	 *
 	 * @return boolean True if available, false if not
