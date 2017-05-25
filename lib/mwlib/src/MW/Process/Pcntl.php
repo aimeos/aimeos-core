@@ -29,6 +29,7 @@ class Pcntl implements Iface
 	 *
 	 * @param integer $max Maximum number of tasks allowed to run in parallel
 	 * @param integer $prio Task priority from -20 (high) to 20 (low)
+	 * @return void
 	 * @throws \Aimeos\MW\Process\Exception If setting up the signal handler failed
 	 */
 	public function __construct( $max = 4, $prio = 19 )
@@ -74,7 +75,7 @@ class Pcntl implements Iface
 	 * @param \Closure $fcn Anonymous function to execute
 	 * @param array $data List of parameters that is passed to the closure function
 	 * @param boolean $restart True if the task should be restarted if it fails (only once)
-	 * @return void
+	 * @return \Aimeos\MW\Process\Iface Self object for method chaining
 	 * @throws \Aimeos\MW\Process\Exception If starting the new task failed
 	 */
 	public function start( \Closure $fcn, array $data, $restart = false )
@@ -109,7 +110,7 @@ class Pcntl implements Iface
 	/**
 	 * Waits for the running tasks until all have finished
 	 *
-	 * @return void
+	 * @return \Aimeos\MW\Process\Iface Self object for method chaining
 	 */
 	public function wait()
 	{

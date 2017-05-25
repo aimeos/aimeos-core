@@ -27,7 +27,7 @@ class Check implements Iface
 	/**
 	 * Initializes the object
 	 *
-	 * @param Aimeos\MW\Process\Iface $object Parallel processing object
+	 * @param \Aimeos\MW\Process\Iface $object Parallel processing object
 	 */
 	public function __construct( \Aimeos\MW\Process\Iface $object )
 	{
@@ -52,7 +52,7 @@ class Check implements Iface
 	 * @param \Closure $fcn Anonymous function to execute
 	 * @param array $data List of parameters that is passed to the closure function
 	 * @param boolean $restart True if the task should be restarted if it fails (only once)
-	 * @return void
+	 * @return \Aimeos\MW\Process\Iface Self object for method chaining
 	 * @throws \Aimeos\MW\Process\Exception If starting the new task failed
 	 */
 	public function start( \Closure $fcn, array $data, $restart = false )
@@ -70,7 +70,7 @@ class Check implements Iface
 	/**
 	 * Waits for the running tasks until all have finished
 	 *
-	 * @return void
+	 * @return \Aimeos\MW\Process\Iface Self object for method chaining
 	 */
 	public function wait()
 	{

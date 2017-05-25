@@ -32,14 +32,14 @@ interface Iface
 	 * @param \Closure $fcn Anonymous function to execute
 	 * @param array $data List of parameters that is passed to the closure function
 	 * @param boolean $restart True if the task should be restarted if it fails (only once)
-	 * @return void
+	 * @return \Aimeos\MW\Process\Iface Self object for method chaining
 	 */
 	public function start( \Closure $fcn, array $data, $restart = false );
 
 	/**
 	 * Waits for the running tasks until all have finished
 	 *
-	 * @return void
+	 * @return \Aimeos\MW\Process\Iface Self object for method chaining
 	 */
 	public function wait();
 }

@@ -92,7 +92,7 @@ abstract class Base
 	/**
 	 * Returns the connection object
 	 *
-	 * @return \Aimeos\MW\DB\Connection\DBAL Connection object
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection object
 	 */
 	protected function getConnection()
 	{
