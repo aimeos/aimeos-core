@@ -22,13 +22,14 @@ class PcntlTest extends \PHPUnit\Framework\TestCase
 
 	public function testRun()
 	{
-		$fcn = function() { sleep( 1 ); };
-		$start = microtime( true );
-
 		$object = new \Aimeos\MW\Process\Pcntl();
-		$object->start( $fcn, [] )->start( $fcn, [] )->wait();
+		$fcn = function() { sleep( 1 ); };
 
+		$start = microtime( true );
+		$return = $object->start( $fcn, [] )->start( $fcn, [] )->wait();
 		$msec = ( microtime( true ) - $start );
+
+		$this->assertInstanceOf( '\Aimeos\MW\Process\Iface', $return );
 		$this->assertGreaterThan( 1, $msec );
 		$this->assertLessThan( 2, $msec );
 	}
