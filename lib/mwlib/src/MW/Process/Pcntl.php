@@ -37,19 +37,23 @@ class Pcntl implements Iface
 		$this->max = $max;
 		$this->prio = $prio;
 
-		$handler = function( $signo )
-		{
-			foreach( $this->list as $pid => $entry )
+		if( php_sapi_name() === 'cli' && function_exists( 'pcntl_signal' )
+			&& function_exists( 'pcntl_waitpid' ) && function_exists( 'posix_kill' )
+		) {
+			$handler = function( $signo )
 			{
-				posix_kill( $pid, $signo );
-				pcntl_waitpid( $pid );
+				foreach( $this->list as $pid => $entry )
+				{
+					posix_kill( $pid, $signo );
+					pcntl_waitpid( $pid );
+				}
+
+				exit( 0 );
+			};
+
+			if( pcntl_signal( SIGTERM, $handler ) === false ) {
+				throw new Exception( 'Unable to install signal handler: ' . pcntl_strerror( pcntl_get_last_error() ) );
 			}
-
-			exit( 0 );
-		};
-
-		if( pcntl_signal( SIGTERM, $handler ) === false ) {
-			throw new Exception( 'Unable to install signal handler: ' . pcntl_strerror( pcntl_get_last_error() ) );
 		}
 	}
 
@@ -70,7 +74,7 @@ class Pcntl implements Iface
 	 */
 	public function isAvailable()
 	{
-		if( php_sapi_name() === 'cli' && function_exists( 'pcntl_fork' ) === true ) {
+		if( php_sapi_name() === 'cli' && function_exists( 'pcntl_fork' ) && function_exists( 'pcntl_wait' ) ) {
 			return true;
 		}
 
@@ -108,7 +112,9 @@ class Pcntl implements Iface
 
 		if( $pid === 0 ) // child process
 		{
-			pcntl_setpriority( $this->prio );
+			if( function_exists( 'pcntl_setpriority' ) ) {
+				pcntl_setpriority( $this->prio );
+			}
 
 			for( $i = 0; $i < ob_get_level(); $i++ ) {
 				ob_end_clean(); // avoid printing buffered messages of the parent again
