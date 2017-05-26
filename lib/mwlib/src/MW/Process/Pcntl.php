@@ -100,6 +100,8 @@ class Pcntl implements Iface
 			}
 		}
 
+		flush(); // flush all pending output so it's not printed in childs again
+
 		if( ( $pid = pcntl_fork() ) === -1 ) {
 			throw new Exception( 'Unable to fork new process: ' . pcntl_strerror( pcntl_get_last_error() ) );
 		}
@@ -107,6 +109,10 @@ class Pcntl implements Iface
 		if( $pid === 0 ) // child process
 		{
 			pcntl_setpriority( $this->prio );
+
+			for( $i = 0; $i < ob_get_level(); $i++ ) {
+				ob_end_clean(); // avoid printing buffered messages of the parent again
+			}
 
 			try {
 				call_user_func_array( $fcn, $data );
