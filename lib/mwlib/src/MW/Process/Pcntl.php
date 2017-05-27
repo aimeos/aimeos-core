@@ -37,9 +37,8 @@ class Pcntl implements Iface
 		$this->max = $max;
 		$this->prio = $prio;
 
-		if( php_sapi_name() === 'cli' && function_exists( 'pcntl_signal' )
-			&& function_exists( 'pcntl_waitpid' ) && function_exists( 'posix_kill' )
-		) {
+		if( $this->isAvailable() )
+		{
 			$handler = function( $signo )
 			{
 				foreach( $this->list as $pid => $entry )
@@ -74,7 +73,11 @@ class Pcntl implements Iface
 	 */
 	public function isAvailable()
 	{
-		if( php_sapi_name() === 'cli' && function_exists( 'pcntl_fork' ) && function_exists( 'pcntl_wait' ) ) {
+		if( php_sapi_name() === 'cli'
+			&& function_exists( 'pcntl_fork' ) && function_exists( 'pcntl_wait' )
+			&& function_exists( 'pcntl_signal' ) && function_exists( 'pcntl_waitpid' )
+			&& function_exists( 'pcntl_setpriority' ) && function_exists( 'posix_kill' )
+		) {
 			return true;
 		}
 
@@ -97,36 +100,15 @@ class Pcntl implements Iface
 			$this->waitOne();
 		}
 
-		foreach( $data as $key => $value )
-		{
-			if( is_object( $value ) ) {
-				$data[$key] = clone $value;
-			}
-		}
-
+		$data = $this->clone( $data );
 		flush(); // flush all pending output so it's not printed in childs again
 
 		if( ( $pid = pcntl_fork() ) === -1 ) {
 			throw new Exception( 'Unable to fork new process: ' . pcntl_strerror( pcntl_get_last_error() ) );
 		}
 
-		if( $pid === 0 ) // child process
-		{
-			if( function_exists( 'pcntl_setpriority' ) ) {
-				pcntl_setpriority( $this->prio );
-			}
-
-			for( $i = 0; $i < ob_get_level(); $i++ ) {
-				ob_end_clean(); // avoid printing buffered messages of the parent again
-			}
-
-			try {
-				call_user_func_array( $fcn, $data );
-			} catch( \Exception $e ) {
-				exit( 1 );
-			}
-
-			exit( 0 );
+		if( $pid === 0 ) {  // child process
+			exit( $this->exec( $fcn, $data ) );
 		}
 
 		$this->list[$pid] = [$fcn, $data, $restart];
@@ -147,6 +129,50 @@ class Pcntl implements Iface
 		}
 
 		return $this;
+	}
+
+
+	/**
+	 * Clone all objects in the function parameter list
+	 *
+	 * @param array $data Function parameter list
+	 * @return array Function parameter list with cloned objects
+	 */
+	protected function clone( array $data )
+	{
+		foreach( $data as $key => $value )
+		{
+			if( is_object( $value ) ) {
+				$data[$key] = clone $value;
+			}
+		}
+
+		return $data;
+	}
+
+
+	/**
+	 * Executes the worker function
+	 *
+	 * @param \Closure $fcn Worker function
+	 * @param array $data Function parameter list
+	 * @return integer Process error code
+	 */
+	protected function exec( \Closure $fcn, array $data )
+	{
+		pcntl_setpriority( $this->prio );
+
+		for( $i = 0; $i < ob_get_level(); $i++ ) {
+			ob_end_clean(); // avoid printing buffered messages of the parent again
+		}
+
+		try {
+			call_user_func_array( $fcn, $data );
+		} catch( \Exception $e ) {
+			return 1;
+		}
+
+		return 0;
 	}
 
 
