@@ -100,7 +100,7 @@ class Pcntl implements Iface
 			$this->waitOne();
 		}
 
-		$data = $this->clone( $data );
+		$data = $this->copy( $data );
 		flush(); // flush all pending output so it's not printed in childs again
 
 		if( ( $pid = pcntl_fork() ) === -1 ) {
@@ -138,7 +138,7 @@ class Pcntl implements Iface
 	 * @param array $data Function parameter list
 	 * @return array Function parameter list with cloned objects
 	 */
-	protected function clone( array $data )
+	protected function copy( array $data )
 	{
 		foreach( $data as $key => $value )
 		{
