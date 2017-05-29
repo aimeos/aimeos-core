@@ -67,10 +67,25 @@ interface Iface
 	public function getLabel();
 
 	/**
-	 * Sets a new label of the product item.
+	 * Sets a new URL target specific for that product
 	 *
 	 * @param string $label New label of the product item
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setLabel( $label );
+
+	/**
+	 * Returns the URL target specific for that product
+	 *
+	 * @return string URL target specific for that product
+	 */
+	public function getTarget();
+
+	/**
+	 * Sets a new label of the product item.
+	 *
+	 * @param string $value New URL target specific for that product
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setTarget( $value );
 }

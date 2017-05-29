@@ -124,6 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'catalog.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'catalog.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'catalog.editor', $this->editor );
+		$expr[] = $search->compare( '>=', 'catalog.target', '' );
 
 		$param = array( 'product', $listItem->getTypeId(), array( $listItem->getRefId() ) );
 		$expr[] = $search->compare( '>', $search->createFunction( 'catalog.contains', $param ), 0 );
@@ -379,6 +380,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
+		$this->assertEquals( $item->getTarget(), $itemSaved->getTarget() );
 
 		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -389,6 +391,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
+		$this->assertEquals( $itemExp->getTarget(), $itemUpd->getTarget() );
 
 		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

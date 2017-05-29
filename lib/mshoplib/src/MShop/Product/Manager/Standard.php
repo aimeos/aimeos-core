@@ -110,6 +110,13 @@ class Standard
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'product.target'=> array(
+			'code'=>'product.target',
+			'internalcode'=>'mpro."target"',
+			'label'=>'URL target',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'product.contains' => array(
 			'code'=>'product.contains()',
 			'internalcode'=>'( SELECT COUNT(mproli_cs."parentid")
@@ -287,13 +294,14 @@ class Standard
 			$stmt->bind( 7, json_encode( $item->getConfig() ) );
 			$stmt->bind( 8, $date ); // mtime
 			$stmt->bind( 9, $context->getEditor() );
-			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 10, $item->getTarget() );
+			$stmt->bind( 11, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 12, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //so item is no longer modified
 			} else {
-				$stmt->bind( 11, $date ); // ctime
+				$stmt->bind( 12, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

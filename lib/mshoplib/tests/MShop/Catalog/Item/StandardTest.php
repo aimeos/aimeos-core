@@ -41,6 +41,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'mtime' => '2011-01-01 00:00:02',
 			'ctime' => '2011-01-01 00:00:01',
 			'editor' => 'unitTestUser',
+			'target' => 'testtarget',
 			'hasChildren' => true
 		);
 
@@ -149,6 +150,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetTarget()
+	{
+		$this->assertEquals( 'testtarget', $this->object->getTarget() );
+	}
+
+
+	public function testSetTarget()
+	{
+		$return = $this->object->setTarget( 'ttarget' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertEquals( 'ttarget', $this->object->getTarget() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetSiteid()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
@@ -195,6 +212,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'catalog.config' => array( 'test' ),
 			'catalog.label' => 'test item',
 			'catalog.status' => '0',
+			'catalog.target' => 'ttarget',
 		);
 
 		$unknown = $item->fromArray( $list );
@@ -206,6 +224,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['catalog.config'], $item->getConfig() );
 		$this->assertEquals( $list['catalog.status'], $item->getStatus() );
 		$this->assertEquals( $list['catalog.label'], $item->getLabel() );
+		$this->assertEquals( $list['catalog.target'], $item->getTarget() );
 	}
 
 
@@ -224,6 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->values['ctime'], $values['catalog.ctime'] );
 		$this->assertEquals( $this->values['mtime'], $values['catalog.mtime'] );
 		$this->assertEquals( $this->values['editor'], $values['catalog.editor'] );
+		$this->assertEquals( $this->values['target'], $values['catalog.target'] );
 		$this->assertEquals( $this->values['hasChildren'], $values['catalog.hasChildren'] );
 	}
 

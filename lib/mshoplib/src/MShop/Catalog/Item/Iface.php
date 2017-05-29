@@ -67,6 +67,21 @@ interface Iface
 	public function setStatus( $status );
 
 	/**
+	 * Returns the URL target specific for that category
+	 *
+	 * @return string URL target specific for that category
+	 */
+	public function getTarget();
+
+	/**
+	 * Sets a new URL target specific for that category
+	 *
+	 * @param string $value New URL target specific for that category
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setTarget( $value );
+
+	/**
 	 * Returns a child of this node identified by its index.
 	 *
 	 * @param integer $index Index of child node

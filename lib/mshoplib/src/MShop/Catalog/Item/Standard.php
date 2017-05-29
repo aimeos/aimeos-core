@@ -198,6 +198,31 @@ class Standard
 	}
 
 	/**
+	 * Returns the URL target specific for that category
+	 *
+	 * @return string URL target specific for that category
+	 */
+	public function getTarget()
+	{
+		return ( $this->node->__isset( 'target' ) ? $this->node->__get( 'target' ) : '' );
+	}
+
+	/**
+	 * Sets a new URL target specific for that category
+	 *
+	 * @param string $value New URL target specific for that category
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setTarget( $value )
+	{
+		if( $value === $this->getTarget() ) { return $this; }
+
+		$this->node->__set( 'target', $value );
+
+		return $this;
+	}
+
+	/**
 	 * Returns modification time of the order item base product.
 	 *
 	 * @return string Returns modification time of the order base item
@@ -250,6 +275,7 @@ class Standard
 				case 'catalog.label': $this->node->setLabel( $value ); break;
 				case 'catalog.status': $this->node->setStatus( $value ); break;
 				case 'catalog.config': $this->setConfig( $value ); break;
+				case 'catalog.target': $this->setTarget( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -272,6 +298,7 @@ class Standard
 			'catalog.label' => $this->getLabel(),
 			'catalog.status' => $this->getStatus(),
 			'catalog.config' => $this->getConfig(),
+			'catalog.target' => $this->getTarget(),
 			'catalog.hasChildren' => $this->hasChildren()
 		);
 

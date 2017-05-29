@@ -118,6 +118,13 @@ class Standard extends Base
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'catalog.target'=> array(
+			'code'=>'catalog.target',
+			'internalcode'=>'mcat."target"',
+			'label'=>'Catalog URL target',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'catalog.contains' => array(
 			'code'=>'catalog.contains()',
 			'internalcode'=>'( SELECT COUNT(mcatli_cs."parentid")
@@ -851,17 +858,18 @@ class Standard extends Base
 			$stmt->bind( 1, json_encode( $item->getConfig() ) );
 			$stmt->bind( 2, $date ); // mtime
 			$stmt->bind( 3, $context->getEditor() );
+			$stmt->bind( 4, $item->getTarget() );
 
 			if( $case !== true )
 			{
-				$stmt->bind( 4, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 5, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 5, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 6, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			}
 			else
 			{
-				$stmt->bind( 4, $date ); // ctime
-				$stmt->bind( 5, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 6, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 5, $date ); // ctime
+				$stmt->bind( 6, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 7, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			}
 
 			$stmt->execute()->finish();

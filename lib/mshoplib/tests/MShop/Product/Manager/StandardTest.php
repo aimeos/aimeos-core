@@ -140,6 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getConfig(), $itemSaved->getConfig() );
+		$this->assertEquals( $item->getTarget(), $itemSaved->getTarget() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -155,6 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getDateStart(), $itemUpd->getDateStart() );
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getConfig(), $itemUpd->getConfig() );
+		$this->assertEquals( $itemExp->getTarget(), $itemUpd->getTarget() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -265,6 +267,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'product.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'product.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
+		$expr[] = $search->compare( '>=', 'product.target', '' );
 
 		$param = array( 'product', $listItem->getTypeId(), array( $listItem->getRefId() ) );
 		$expr[] = $search->compare( '>', $search->createFunction( 'product.contains', $param ), 0 );

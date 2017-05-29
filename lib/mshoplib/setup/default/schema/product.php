@@ -47,6 +47,7 @@ return array(
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
+			$table->addColumn( 'target', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mspro_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_mspro_siteid_code' );

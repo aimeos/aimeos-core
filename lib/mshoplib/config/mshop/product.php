@@ -389,9 +389,9 @@ return array(
 				'ansi' => '
 					INSERT INTO "mshop_product" (
 						"typeid", "code", "label", "status", "start", "end",
-						"config", "mtime", "editor", "siteid", "ctime"
+						"config", "mtime", "editor", "target", "siteid", "ctime"
 					) VALUES (
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
@@ -399,7 +399,7 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_product"
 					SET "typeid" = ?, "code" = ?, "label" = ?, "status" = ?,
-						"start" = ?, "end" = ?, "config" = ?, "mtime" = ?, "editor" = ?
+						"start" = ?, "end" = ?, "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -410,13 +410,15 @@ return array(
 						mpro."label" AS "product.label", mpro."config" AS "product.config",
 						mpro."start" AS "product.datestart", mpro."end" AS "product.dateend",
 						mpro."status" AS "product.status", mpro."ctime" AS "product.ctime",
-						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor"
+						mpro."mtime" AS "product.mtime", mpro."editor" AS "product.editor",
+						mpro."target" AS "product.target"
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
 					GROUP BY mpro."id", mpro."siteid", mpro."typeid", mpro."code",
 						mpro."label", mpro."config", mpro."start", mpro."end",
-						mpro."status", mpro."ctime", mpro."mtime", mpro."editor"
+						mpro."status", mpro."ctime", mpro."mtime", mpro."editor",
+						mpro."target"
 						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start

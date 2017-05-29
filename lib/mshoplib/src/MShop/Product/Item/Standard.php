@@ -324,6 +324,38 @@ class Standard
 
 
 	/**
+	 * Returns the URL target specific for that product
+	 *
+	 * @return string URL target specific for that product
+	 */
+	public function getTarget()
+	{
+		if( isset( $this->values['product.target'] ) ) {
+			return (string) $this->values['product.target'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets a new URL target specific for that product
+	 *
+	 * @param string $value New URL target specific for that product
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setTarget( $value )
+	{
+		if( $value === $this->getTarget() ) { return $this; }
+
+		$this->values['product.target'] = (string) $value;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -357,6 +389,7 @@ class Standard
 				case 'product.datestart': $this->setDateStart( $value ); break;
 				case 'product.dateend': $this->setDateEnd( $value ); break;
 				case 'product.config': $this->setConfig( $value ); break;
+				case 'product.target': $this->setTarget( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -383,6 +416,7 @@ class Standard
 		$list['product.datestart'] = $this->getDateStart();
 		$list['product.dateend'] = $this->getDateEnd();
 		$list['product.config'] = $this->getConfig();
+		$list['product.target'] = $this->getTarget();
 
 		if( $private === true ) {
 			$list['product.typeid'] = $this->getTypeId();

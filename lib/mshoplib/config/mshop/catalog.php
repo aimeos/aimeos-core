@@ -204,7 +204,7 @@ return array(
 					SELECT mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
-						mcat."mtime", mcat."editor", mcat."ctime"
+						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
 					FROM "mshop_catalog" AS mcat, "mshop_catalog" AS parent
 					WHERE mcat."siteid" = :siteid AND mcat."nleft" >= parent."nleft"
 						AND mcat."nleft" <= parent."nright"
@@ -213,7 +213,7 @@ return array(
 					GROUP BY mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid",
 						mcat."siteid", mcat."nleft", mcat."nright",
-						mcat."mtime", mcat."editor", mcat."ctime"
+						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
 					ORDER BY mcat."nleft"
 				'
 			),
@@ -230,7 +230,7 @@ return array(
 			'insert-usage' => array(
 				'ansi' => '
 					UPDATE "mshop_catalog"
-					SET "config" = ?, "mtime" = ?, "editor" = ?, "ctime" = ?
+					SET "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?, "ctime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -251,7 +251,7 @@ return array(
 			'update-usage' => array(
 				'ansi' => '
 					UPDATE "mshop_catalog"
-					SET "config" = ?, "mtime" = ?, "editor" = ?
+					SET "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -274,13 +274,14 @@ return array(
 					SELECT mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
-						mcat."mtime", mcat."editor", mcat."ctime"
+						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
 					FROM "mshop_catalog" AS mcat
 					WHERE mcat."siteid" = :siteid AND mcat."nleft" >= ?
 						AND mcat."nright" <= ? AND :cond
 					GROUP BY mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
-						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor", mcat."ctime"
+						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
+						mcat."ctime", mcat."target"
 					ORDER BY :order
 				'
 			),
@@ -289,13 +290,14 @@ return array(
 					SELECT mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
 						mcat."nleft" AS "left", mcat."nright" AS "right",
-						mcat."mtime", mcat."editor", mcat."ctime"
+						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
 					FROM "mshop_catalog" AS mcat
 					:joins
 					WHERE :cond
 					GROUP BY mcat."id", mcat."code", mcat."label", mcat."config",
 						mcat."status", mcat."level", mcat."parentid", mcat."siteid",
-						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor", mcat."ctime"
+						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
+						mcat."ctime", mcat."target"
 						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start

@@ -32,7 +32,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.dateend' => null,
 			'product.ctime' => '2011-01-19 17:04:32',
 			'product.mtime' => '2011-01-19 18:04:32',
-			'product.editor' => 'unitTestUser'
+			'product.editor' => 'unitTestUser',
+			'product.target' => 'testtarget',
 		);
 
 		$propItems = array(
@@ -217,6 +218,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetTarget()
+	{
+		$this->assertEquals( 'testtarget', $this->object->getTarget() );
+	}
+
+
+	public function testSetTarget()
+	{
+		$this->assertFalse( $this->object->isModified() );
+
+		$return = $this->object->setTarget( 'ttarget' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Iface', $return );
+		$this->assertEquals( 'ttarget', $this->object->getTarget() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetDateStart()
 	{
 		$this->assertEquals( null, $this->object->getDateStart() );
@@ -295,6 +314,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'product.dateend' => '2001-01-01 00:00:00',
 			'product.config' => array( 'key' => 'value' ),
 			'product.status' => 0,
+			'product.target' => 'ttarget',
 		);
 
 		$unknown = $item->fromArray( $list );
@@ -309,6 +329,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['product.dateend'], $item->getDateEnd() );
 		$this->assertEquals( $list['product.config'], $item->getConfig() );
 		$this->assertEquals( $list['product.status'], $item->getStatus() );
+		$this->assertEquals( $list['product.target'], $item->getTarget() );
 		$this->assertNull( $item->getSiteId() );
 		$this->assertNull( $item->getTypeName() );
 		$this->assertNull( $item->getType() );
@@ -334,6 +355,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['product.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['product.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['product.editor'] );
+		$this->assertEquals( $this->object->getTarget(), $arrayObject['product.target'] );
 	}
 
 }
