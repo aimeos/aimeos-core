@@ -221,9 +221,9 @@ return array(
 				'ansi' => '
 					INSERT INTO "mshop_catalog" (
 						"siteid", "label", "code", "status", "parentid", "level",
-						"nleft", "nright", "config", "mtime", "ctime", "editor"
+						"nleft", "nright", "config", "mtime", "ctime", "editor", "target"
 					) VALUES (
-						:siteid, ?, ?, ?, ?, ?, ?, ?, \'\', \'1970-01-01 00:00:00\', \'1970-01-01 00:00:00\', \'\'
+						:siteid, ?, ?, ?, ?, ?, ?, ?, \'\', \'1970-01-01 00:00:00\', \'1970-01-01 00:00:00\', \'\', \'\'
 					)
 				'
 			),
