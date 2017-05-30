@@ -23,25 +23,26 @@ class Standard
 	implements \Aimeos\MShop\Customer\Manager\Iface
 {
 	private $searchConfig = array(
+		// no siteid
 		'customer.id' => array(
 			'label' => 'Customer ID',
 			'code' => 'customer.id',
 			'internalcode' => 'mcus."id"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
 		),
-		// no siteid
+		'customer.code' => array(
+			'label' => 'Customer username',
+			'code' => 'customer.code',
+			'internalcode' => 'mcus."code"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'customer.label' => array(
 			'label' => 'Customer label',
 			'code' => 'customer.label',
 			'internalcode' => 'mcus."label"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'customer.code' => array(
-			'label' => 'Customer code',
-			'code' => 'customer.code',
-			'internalcode' => 'mcus."code"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
