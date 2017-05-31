@@ -86,8 +86,8 @@ class Standard
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.base.stocktype' => array(
-			'code'=>'order.base.stocktype',
+		'order.base.product.stocktype' => array(
+			'code'=>'order.base.product.stocktype',
 			'internalcode'=>'mordbapr."stocktype"',
 			'label'=>'Order base product stock type',
 			'type'=> 'string',
@@ -104,6 +104,13 @@ class Standard
 			'code'=>'order.base.product.mediaurl',
 			'internalcode'=>'mordbapr."mediaurl"',
 			'label'=>'Order base product media url',
+			'type'=> 'string',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'order.base.product.target' => array(
+			'code'=>'order.base.product.target',
+			'internalcode'=>'mordbapr."target"',
+			'label'=>'Order base product url target',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -464,13 +471,14 @@ class Standard
 			$stmt->bind( 19, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 20, $date ); // mtime
 			$stmt->bind( 21, $context->getEditor() );
-			$stmt->bind( 22, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 22, $item->getTarget() );
+			$stmt->bind( 23, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 23, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 24, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 23, $date ); // ctime
+				$stmt->bind( 24, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

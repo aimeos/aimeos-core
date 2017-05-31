@@ -291,9 +291,9 @@ return array(
 								"baseid", "ordprodid", "type", "prodid", "prodcode",
 								"suppliercode", "stocktype", "name", "mediaurl", "quantity",
 								"price", "costs", "rebate", "tax", "taxrate", "taxflag", "flags",
-								"status", "pos", "mtime", "editor", "siteid", "ctime"
+								"status", "pos", "mtime", "editor", "target", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
@@ -305,7 +305,7 @@ return array(
 								"stocktype" = ?, "name" = ?, "mediaurl" = ?,
 								"quantity" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
 								"tax" = ?, "taxrate" = ?, "taxflag" = ?, "flags" = ?,
-								"status" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
+								"status" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "target" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
 					),
@@ -322,7 +322,8 @@ return array(
 								mordbapr."taxrate" AS "order.base.product.taxrate", mordbapr."taxflag" AS "order.base.product.taxflag",
 								mordbapr."flags" AS "order.base.product.flags", mordbapr."status" AS "order.base.product.status",
 								mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
-								mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime"
+								mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
+								mordbapr."target" AS "order.base.product.target"
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
@@ -331,7 +332,7 @@ return array(
 								mordbapr."type", mordbapr."name", mordbapr."mediaurl", mordbapr."quantity",
 								mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax", mordbapr."taxrate",
 								mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos", mordbapr."mtime",
-								mordbapr."editor", mordbapr."ctime" /*-columns*/ , :columns /*columns-*/
+								mordbapr."editor", mordbapr."target", mordbapr."ctime" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'

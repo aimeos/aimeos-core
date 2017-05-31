@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'order.base.product.editor', 'core:unittest' ) );
-		$result = $this->object->aggregate( $search, 'order.base.stocktype' );
+		$result = $this->object->aggregate( $search, 'order.base.product.stocktype' );
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'unit_type1', $result );
@@ -94,9 +94,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'order.base.product.productid', null );
 		$expr[] = $search->compare( '==', 'order.base.product.prodcode', 'CNE' );
 		$expr[] = $search->compare( '==', 'order.base.product.suppliercode', 'unitsupplier' );
-		$expr[] = $search->compare( '==', 'order.base.stocktype', 'unit_type1' );
+		$expr[] = $search->compare( '==', 'order.base.product.stocktype', 'unit_type1' );
 		$expr[] = $search->compare( '==', 'order.base.product.name', 'Cafe Noire Expresso' );
 		$expr[] = $search->compare( '==', 'order.base.product.mediaurl', 'somewhere/thump1.jpg' );
+		$expr[] = $search->compare( '>=', 'order.base.product.target', '' );
 		$expr[] = $search->compare( '==', 'order.base.product.quantity', 9 );
 		$expr[] = $search->compare( '==', 'order.base.product.price', '4.50' );
 		$expr[] = $search->compare( '==', 'order.base.product.costs', '0.00' );
@@ -210,6 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getStockType(), $itemSaved->getStockType() );
 		$this->assertEquals( $item->getName(), $itemSaved->getName() );
 		$this->assertEquals( $item->getMediaUrl(), $itemSaved->getMediaUrl() );
+		$this->assertEquals( $item->getTarget(), $itemSaved->getTarget() );
 		$this->assertEquals( $item->getPrice(), $itemSaved->getPrice() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
 		$this->assertEquals( $item->getQuantity(), $itemSaved->getQuantity() );
@@ -232,6 +234,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getStockType(), $itemUpd->getStockType() );
 		$this->assertEquals( $itemExp->getName(), $itemUpd->getName() );
 		$this->assertEquals( $itemExp->getMediaUrl(), $itemUpd->getMediaUrl() );
+		$this->assertEquals( $itemExp->getTarget(), $itemUpd->getTarget() );
 		$this->assertEquals( $itemExp->getPrice(), $itemUpd->getPrice() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );

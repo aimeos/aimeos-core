@@ -52,6 +52,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.stocktype' => 'unittype',
 			'order.base.product.name' => 'UnitProduct',
 			'order.base.product.mediaurl' => 'testurl',
+			'order.base.product.target' => 'testtarget',
 			'order.base.product.quantity' => 11,
 			'order.base.product.flags' => \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE,
 			'order.base.product.status' => \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS,
@@ -242,6 +243,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'testUrl', $this->object->getMediaUrl() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+	public function testGetTarget()
+	{
+		$this->assertEquals( 'testtarget', $this->object->getTarget() );
+	}
+
+	public function testSetTarget()
+	{
+		$return = $this->object->setTarget( 'ttarget' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
+		$this->assertEquals( 'ttarget', $this->object->getTarget() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -636,6 +651,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.product.suppliercode' => 'testsup',
 			'order.base.product.prodcode' => 'test',
 			'order.base.product.mediaurl' => '/path/to/image.jpg',
+			'order.base.product.target' => 'ttarget',
 			'order.base.product.position' => 4,
 			'order.base.product.quantity' => 5,
 			'order.base.product.status' => 0,
@@ -660,6 +676,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['order.base.product.suppliercode'], $item->getSupplierCode() );
 		$this->assertEquals( $list['order.base.product.prodcode'], $item->getProductCode() );
 		$this->assertEquals( $list['order.base.product.mediaurl'], $item->getMediaUrl() );
+		$this->assertEquals( $list['order.base.product.target'], $item->getTarget() );
 		$this->assertEquals( $list['order.base.product.position'], $item->getPosition() );
 		$this->assertEquals( $list['order.base.product.quantity'], $item->getQuantity() );
 		$this->assertEquals( $list['order.base.product.status'], $item->getStatus() );
@@ -684,6 +701,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getProductCode(), $arrayObject['order.base.product.prodcode'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['order.base.product.name'] );
 		$this->assertEquals( $this->object->getMediaUrl(), $arrayObject['order.base.product.mediaurl'] );
+		$this->assertEquals( $this->object->getTarget(), $arrayObject['order.base.product.target'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['order.base.product.position'] );
 		$this->assertEquals( $this->object->getPrice()->getValue(), $arrayObject['order.base.product.price'] );
 		$this->assertEquals( $this->object->getPrice()->getCosts(), $arrayObject['order.base.product.costs'] );
@@ -726,6 +744,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $productCopy->getStatus() );
 		$this->assertEquals( '', $productCopy->getSupplierCode() );
 		$this->assertEquals( '', $productCopy->getMediaUrl() );
+		$this->assertEquals( '', $productCopy->getTarget() );
 
 		$this->assertTrue( $productCopy->isModified() );
 	}

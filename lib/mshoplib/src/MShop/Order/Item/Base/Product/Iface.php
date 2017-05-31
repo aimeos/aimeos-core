@@ -166,6 +166,21 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setMediaUrl( $value );
 
 	/**
+	 * Returns the URL target specific for that product
+	 *
+	 * @return string URL target specific for that product
+	 */
+	public function getTarget();
+
+	/**
+	 * Sets the URL target specific for that product
+	 *
+	 * @param string $value New URL target specific for that product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setTarget( $value );
+
+	/**
 	 * Returns the number of packages the customer has added.
 	 *
 	 * @return integer Amount of product packages

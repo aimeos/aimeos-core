@@ -403,6 +403,38 @@ class Standard extends Base implements Iface
 
 
 	/**
+	 * Returns the URL target specific for that product
+	 *
+	 * @return string URL target specific for that product
+	 */
+	public function getTarget()
+	{
+		if( isset( $this->values['order.base.product.target'] ) ) {
+			return (string) $this->values['order.base.product.target'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the URL target specific for that product
+	 *
+	 * @param string $value New URL target specific for that product
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
+	 */
+	public function setTarget( $value )
+	{
+		if( $value == $this->getTarget() ) { return $this; }
+
+		$this->values['order.base.product.target'] = (string) $value;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the amount of products the customer has added.
 	 *
 	 * @return integer Amount of products
@@ -614,6 +646,7 @@ class Standard extends Base implements Iface
 				case 'order.base.product.prodcode': $this->setProductCode( $value ); break;
 				case 'order.base.product.name': $this->setName( $value ); break;
 				case 'order.base.product.mediaurl': $this->setMediaUrl( $value ); break;
+				case 'order.base.product.target': $this->setTarget( $value ); break;
 				case 'order.base.product.position': $this->setPosition( $value ); break;
 				case 'order.base.product.quantity': $this->setQuantity( $value ); break;
 				case 'order.base.product.status': $this->setStatus( $value ); break;
@@ -647,6 +680,7 @@ class Standard extends Base implements Iface
 		$list['order.base.product.prodcode'] = $this->getProductCode();
 		$list['order.base.product.name'] = $this->getName();
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
+		$list['order.base.product.target'] = $this->getTarget();
 		$list['order.base.product.position'] = $this->getPosition();
 		$list['order.base.product.price'] = $this->price->getValue();
 		$list['order.base.product.costs'] = $this->price->getCosts();
@@ -701,6 +735,7 @@ class Standard extends Base implements Iface
 		$this->setProductId( $product->getId() );
 		$this->setType( $product->getType() );
 		$this->setName( $product->getName() );
+		$this->setTarget( $product->getTarget() );
 
 		$items = $product->getRefItems( 'supplier', 'default', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
