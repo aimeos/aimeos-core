@@ -71,7 +71,10 @@ abstract class Base
 				$ids[] = $listRef[$id];
 			}
 
-			$copy->fromArray( $values );
+			if( is_array( $values ) ) {
+				$copy->fromArray( $values );
+			}
+
 			$copy->setPosition( $pos++ );
 			$listManager->saveItem( $copy );
 		}
