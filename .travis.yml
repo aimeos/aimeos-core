@@ -1,6 +1,5 @@
 sudo: true
 language: php
-dist: trusty
 
 addons:
   apt:
