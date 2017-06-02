@@ -28,7 +28,7 @@ return array(
 		'password' => '',
 
 		// SQL statements executed immediately after connecting to the database server
-		'stmt' => array( "SET NAMES 'utf8'", "SET SESSION sql_mode='ANSI'" ),
+		'stmt' => array( "SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'" ),
 
 		// number of concurrent database connections while processing one request
 		'limit' => 2,
@@ -44,7 +44,7 @@ return array(
 
 		// file system adapter
 		'adapter' => 'Standard',
-		
+
 		// base directory for file system view
 		'basedir' => '.',
 	),
@@ -54,7 +54,7 @@ return array(
 
 		// message queue adapter
 		'adapter' => 'Standard',
-		
+
 		// use database configuration from resource "db"
 		'db' => 'db',
 	),
