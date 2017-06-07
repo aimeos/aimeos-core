@@ -945,7 +945,7 @@ class Standard extends Base
 	 */
 	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL )
 	{
-		$this->getObject()->saveItem( $basket );
+		$basket = $this->getObject()->saveItem( $basket );
 
 		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT
 			|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON

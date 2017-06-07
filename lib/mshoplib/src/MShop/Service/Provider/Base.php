@@ -506,10 +506,11 @@ abstract class Base
 	 * Saves the order item.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $item Order object
+	 * @return \Aimeos\MShop\Order\Item\Iface Order object including the generated ID
 	 */
 	protected function saveOrder( \Aimeos\MShop\Order\Item\Iface $item )
 	{
-		\Aimeos\MShop\Factory::createManager( $this->context, 'order' )->saveItem( $item );
+		return \Aimeos\MShop\Factory::createManager( $this->context, 'order' )->saveItem( $item );
 	}
 
 

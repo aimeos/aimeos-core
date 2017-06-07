@@ -76,7 +76,7 @@ abstract class Base
 			}
 
 			$copy->setPosition( $pos++ );
-			$listManager->saveItem( $copy );
+			$listManager->saveItem( $copy, false );
 		}
 
 		$listManager->deleteItems( array_diff( $listRef, $ids ) );

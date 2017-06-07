@@ -509,7 +509,7 @@ abstract class Base
 				$position = ++$pos;
 			}
 
-			$manager->saveItem( $item );
+			$item = $manager->saveItem( $item );
 			$productId = $item->getId();
 
 			foreach( $item->getAttributes() as $attribute )
@@ -530,7 +530,7 @@ abstract class Base
 					$position = ++$pos;
 				}
 
-				$manager->saveItem( $subProduct );
+				$subProduct = $manager->saveItem( $subProduct );
 				$subProductId = $subProduct->getId();
 
 				foreach( $subProduct->getAttributes() as $attribute )
@@ -608,7 +608,7 @@ abstract class Base
 		{
 			$item->setBaseId( $basket->getId() );
 			$item->setType( $type );
-			$manager->saveItem( $item );
+			$item = $manager->saveItem( $item );
 
 			foreach( $item->getAttributes() as $attribute )
 			{
