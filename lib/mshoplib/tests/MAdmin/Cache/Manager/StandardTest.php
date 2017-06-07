@@ -1,25 +1,21 @@
 <?php
 
-namespace Aimeos\MAdmin\Cache\Manager;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MAdmin\Cache\Manager;
+
+
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
@@ -27,12 +23,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -110,12 +100,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->createItem();
 		$item->setId( 'unittest2' );
 		$item->setValue( 'test2' );
-		$this->object->saveItem( $item );
+		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setValue( 'test3' );
-		$this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $item->getId() );
 
 		$this->object->deleteItem( $item->getId() );
@@ -132,6 +122,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeExpire(), $itemUpd->getTimeExpire() );
 		$this->assertEquals( $itemExp->getValue(), $itemUpd->getValue() );
 		$this->assertEquals( $itemExp->getTags(), $itemUpd->getTags() );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
 
 		$this->setExpectedException( '\\Aimeos\\MAdmin\\Cache\\Exception' );
 		$this->object->getItem( $item->getId() );

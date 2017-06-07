@@ -88,6 +88,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Type\Iface $item Type item object which should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -96,7 +97,9 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( $item->isModified() === false ) { return; }
+		if( !$item->isModified() ) {
+			return $item;
+		}
 
 		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();
@@ -148,6 +151,8 @@ abstract class Base
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		return $item;
 	}
 
 

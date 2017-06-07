@@ -1,25 +1,20 @@
 <?php
 
-namespace Aimeos\MAdmin\Cache\Manager;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+namespace Aimeos\MAdmin\Cache\Manager;
+
+
 class NoneTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $context;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
@@ -27,12 +22,6 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -88,7 +77,9 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	public function testSaveUpdateDeleteItem()
 	{
 		$item = $this->object->createItem();
-		$this->object->saveItem( $item );
+		$result = $this->object->saveItem( $item );
 		$this->object->deleteItem( $item->getId() );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $result );
 	}
 }

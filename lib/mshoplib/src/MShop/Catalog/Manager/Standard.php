@@ -380,6 +380,7 @@ class Standard extends Base
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item which should be inserted
 	 * @param string|null $parentId ID of the parent item where the item should be inserted into
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
+	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
 	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
 	{
@@ -398,6 +399,8 @@ class Standard extends Base
 			$this->rollback();
 			throw $e;
 		}
+
+		return $item;
 	}
 
 
@@ -435,6 +438,7 @@ class Standard extends Base
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -458,6 +462,8 @@ class Standard extends Base
 			$this->rollback();
 			throw $e;
 		}
+
+		return $item;
 	}
 
 

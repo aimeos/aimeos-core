@@ -3,16 +3,13 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
 namespace Aimeos\MShop\Locale\Manager\Site;
 
 
-/**
- * Test class for \Aimeos\MShop\Locale\Manager\Site\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
@@ -58,12 +55,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setLabel( 'new name' );
 		$item->setStatus( 1 );
 		$item->setCode( 'xx' );
-		$this->object->insertItem( $item );
+		$resultSaved = $this->object->insertItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setLabel( 'new new name' );
-		$this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
 		$this->object->deleteItem( $item->getId() );
@@ -94,6 +91,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );

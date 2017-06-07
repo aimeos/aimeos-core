@@ -178,10 +178,11 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$this->manager->saveItem( $item, $fetch );
+		return $this->manager->saveItem( $item, $fetch );
 	}
 
 

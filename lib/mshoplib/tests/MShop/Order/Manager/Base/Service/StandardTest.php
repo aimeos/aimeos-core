@@ -3,16 +3,13 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
 namespace Aimeos\MShop\Order\Manager\Base\Service;
 
 
-/**
- * Test class for \Aimeos\MShop\Order\Manager\Base\Service\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $context;
@@ -218,13 +215,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setCode( 'unittest1' );
-		$this->object->saveItem( $item );
+		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unittest1' );
-		$this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
 		$this->object->deleteItem( $itemSaved->getId() );
@@ -242,7 +239,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getMediaUrl(), $itemSaved->getMediaUrl() );
 		$this->assertEquals( $item->getPrice(), $itemSaved->getPrice() );
 
-
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeModified() );
@@ -258,10 +254,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getPrice(), $itemUpd->getPrice() );
 		$this->assertEquals( [], $itemUpd->getAttributes() );
 
-
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );

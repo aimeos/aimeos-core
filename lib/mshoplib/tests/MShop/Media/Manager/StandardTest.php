@@ -3,34 +3,25 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
 namespace Aimeos\MShop\Media\Manager;
 
 
-/**
- * Test class for \Aimeos\MShop\Media\Manager\Standard
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object = null;
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->object = \Aimeos\MShop\Media\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 	}
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -198,12 +189,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setUrl( 'test.jpg' );
 		$item->setPreview( 'xxxtest-preview.jpg' );
 
-		$this->object->saveItem( $item );
+		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setPreview( 'test-preview.jpg' );
-		$this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
 		$this->object->deleteItem( $item->getId() );
@@ -241,6 +232,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );

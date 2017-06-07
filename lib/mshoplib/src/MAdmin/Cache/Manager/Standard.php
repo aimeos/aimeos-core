@@ -304,6 +304,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MAdmin\Cache\Item\Iface $item Cache item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -313,7 +314,7 @@ class Standard
 		}
 
 		if( !$item->isModified() ) {
-			return;
+			return $item;
 		}
 
 		/** madmin/cache/manager/standard/set/mysql
@@ -397,6 +398,8 @@ class Standard
 
 		$cache->delete( $id );
 		$cache->set( $id, $item->getValue(), $item->getTimeExpire(), $item->getTags() );
+
+		return $item;
 	}
 
 

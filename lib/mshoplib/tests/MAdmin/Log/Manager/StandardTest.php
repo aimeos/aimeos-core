@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
@@ -107,13 +107,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->createItem();
 		$item->setMessage( 'unit test message' );
 		$item->setRequest( 'unit test rqst' );
-		$this->object->saveItem( $item );
+		$resultSaved = $this->object->saveItem( $item );
 
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setRequest( 'unit test request' );
-		$this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $item->getId() );
 
 		$this->object->deleteItem( $item->getId() );
@@ -133,6 +133,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getMessage(), $itemUpd->getMessage() );
 		$this->assertEquals( $itemExp->getRequest(), $itemUpd->getRequest() );
 		$this->assertEquals( $itemExp->getPriority(), $itemUpd->getPriority() );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
 
 		$this->setExpectedException( '\\Aimeos\\MAdmin\\Log\\Exception' );
 		$this->object->getItem( $item->getId() );

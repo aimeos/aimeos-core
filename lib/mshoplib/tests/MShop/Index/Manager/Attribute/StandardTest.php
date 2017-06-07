@@ -3,39 +3,24 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
 namespace Aimeos\MShop\Index\Manager\Attribute;
 
 
-/**
- * Test class for \Aimeos\MShop\Index\Manager\Attribute\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->object = new \Aimeos\MShop\Index\Manager\Attribute\Standard( \TestHelperMShop::getContext() );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );

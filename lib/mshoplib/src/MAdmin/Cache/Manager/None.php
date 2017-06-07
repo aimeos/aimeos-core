@@ -62,9 +62,11 @@ class None
 	 *
 	 * @param \Aimeos\MAdmin\Cache\Item\Iface $item Cache item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
+		return $item;
 	}
 
 

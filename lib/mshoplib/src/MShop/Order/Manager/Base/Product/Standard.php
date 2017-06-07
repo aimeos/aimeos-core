@@ -350,6 +350,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item New or existing product item that should be saved to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -358,7 +359,9 @@ class Standard
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) { return; }
+		if( !$item->isModified() ) {
+			return $item;
+		}
 
 		$context = $this->getContext();
 
@@ -532,6 +535,8 @@ class Standard
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		return $item;
 	}
 
 

@@ -414,6 +414,8 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			'order.base.price' => $price->getValue(),
 			'order.base.costs' => $price->getCosts(),
 			'order.base.rebate' => $price->getRebate(),
+			'order.base.taxvalue' => $price->getTaxValue(),
+			'order.base.taxflag' => $price->getTaxFlag(),
 			'order.base.status' => $this->getStatus(),
 			'order.base.comment' => $this->getComment(),
 		);

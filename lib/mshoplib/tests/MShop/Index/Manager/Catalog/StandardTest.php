@@ -10,32 +10,17 @@
 namespace Aimeos\MShop\Index\Manager\Catalog;
 
 
-/**
- * Test class for \Aimeos\MShop\Index\Manager\Catalog\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->object = new \Aimeos\MShop\Index\Manager\Catalog\Standard( \TestHelperMShop::getContext() );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );

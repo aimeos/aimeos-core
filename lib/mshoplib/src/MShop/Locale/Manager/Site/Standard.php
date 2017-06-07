@@ -147,6 +147,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item New site item for saving to the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 * @throws \Aimeos\MShop\Locale\Exception
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
@@ -160,7 +161,9 @@ class Standard
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Newly created site can not be saved using method "saveItem()". Try using method "insertItem()" instead.' ) );
 		}
 
-		if( !$item->isModified() ) { return; }
+		if( !$item->isModified() ) {
+			return $item;
+		}
 
 		$context = $this->getContext();
 
@@ -223,6 +226,8 @@ class Standard
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		return $item;
 	}
 
 
@@ -740,6 +745,7 @@ class Standard
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Item which should be inserted
 	 * @param integer|null $parentId ID of the parent item where the item should be inserted into
 	 * @param integer|null $refId ID of the item where the item should be inserted before (null to append)
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
 	public function insertItem( \Aimeos\MShop\Locale\Item\Site\Iface $item, $parentId = null, $refId = null )
 	{
@@ -845,6 +851,8 @@ class Standard
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		return $item;
 	}
 
 

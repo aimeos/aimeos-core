@@ -3,40 +3,26 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
 namespace Aimeos\MShop\Service\Manager;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Manager\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $editor = '';
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->editor = \TestHelperMShop::getContext()->getEditor();
 		$this->object = new \Aimeos\MShop\Service\Manager\Standard( \TestHelperMShop::getContext() );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -79,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$item->setId( null );
 		$item->setCode( 'newstaticdelivery' );
-		$this->object->saveItem( $item );
+		$resultSaved = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
@@ -88,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemExp->setPosition( '1' );
 		$itemExp->setStatus( '1' );
 		$itemExp->setProvider( 'HS' );
-		$this->object->saveItem( $itemExp );
+		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
 		$this->object->deleteItem( $item->getId() );
@@ -124,6 +110,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $itemSaved->getId() );

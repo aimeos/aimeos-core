@@ -10,9 +10,6 @@
 namespace Aimeos\MShop\Index\Manager;
 
 
-/**
- * Test class for \Aimeos\MShop\Index\Manager\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private static $products;
@@ -48,12 +45,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->context = \TestHelperMShop::getContext();
@@ -61,12 +52,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Index\Manager\Standard( $this->context );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -179,8 +165,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		// recreate index for CNE
-		$this->object->saveItem( $item );
+		$result = $this->object->saveItem( $item );
 
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $result );
 
 		$this->assertEquals( 7, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );

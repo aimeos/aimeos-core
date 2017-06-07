@@ -263,6 +263,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Order item with necessary values
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
@@ -275,7 +276,9 @@ class Standard
 			throw new \Aimeos\MShop\Order\Exception( 'Required order base ID is missing' );
 		}
 
-		if( !$item->isModified() ) { return; }
+		if( !$item->isModified() ) {
+			return $item;
+		}
 
 		$context = $this->getContext();
 
@@ -442,6 +445,8 @@ class Standard
 
 
 		$this->addStatus( $item );
+
+		return $item;
 	}
 
 

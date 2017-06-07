@@ -27,6 +27,7 @@ class Sitecheck
 	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Item which should be inserted
 	 * @param string|null $parentId ID of the parent item where the item should be inserted into
 	 * @param string|null $refId ID of the item where the item should be inserted before (null to append)
+	 * @return \Aimeos\MShop\Catalog\Item\Iface $item Updated item including the generated ID
 	 */
 	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
 	{
@@ -40,7 +41,7 @@ class Sitecheck
 			}
 		}
 
-		parent::insertItem( $item, $parentId, $refId );
+		return parent::insertItem( $item, $parentId, $refId );
 	}
 
 

@@ -120,6 +120,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Currency item to save in the storage
 	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
 	 *
 	 * @throws \Aimeos\MW\DB\Exception If currency object couldn't be saved
 	 * @throws \Aimeos\MShop\Locale\Exception If failures with currency item object
@@ -131,7 +132,9 @@ class Standard
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) { return; }
+		if( !$item->isModified() ) {
+			return $item;
+		}
 
 		$context = $this->getContext();
 
@@ -237,6 +240,8 @@ class Standard
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+
+		return $item;
 	}
 
 
