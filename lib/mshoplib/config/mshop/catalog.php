@@ -8,11 +8,6 @@
 
 return array(
 	'manager' => array(
-		'decorators' => array(
-			'local' => array(
-				'Sitecheck',
-			),
-		),
 		'lists' => array(
 			'type' => array(
 				'standard' => array(
