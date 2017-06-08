@@ -17,7 +17,7 @@ namespace Aimeos\MW\Setup\DBSchema;
  * @package MW
  * @subpackage Setup
  */
-class Sqlserv extends \Aimeos\MW\Setup\DBSchema\InformationSchema
+class Sqlsrv extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 {
 	/**
 	 * Checks if the given sequence exists in the database.
