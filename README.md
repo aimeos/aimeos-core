@@ -14,9 +14,11 @@
 
 ## What is Aimeos core?
 
-Aimeos is an open source e-commerce framework for web shops consisting of the
-e-commerce library, the administration interface and different front-ends. It's
-a modular stack that offers an unmatched combination of flexibility and speed.
+Aimeos is an Open Source
+<a href="https://aimeos.org/tips/ecommerce-framework/">e-commerce framework</a>
+for online shops consisting of the e-commerce library, the administration interface
+and different front-ends. It's a modular stack that offers an unmatched combination
+of flexibility and speed.
 
 Contrary to other web shops, Aimeos is no monolithic application. Instead, you
 have the choice between several user front-ends and you can adapt them to your
