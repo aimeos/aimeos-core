@@ -16,7 +16,7 @@ class SqlservTest extends \PHPUnit_Framework_TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\Setup\DBSchema\Sqlserv( $this->mock, 'dbname', 'sqlserv' );
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Sqlsrv( $this->mock, 'dbname', 'sqlsrv' );
 	}
 
 
