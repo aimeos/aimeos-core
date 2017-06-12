@@ -343,7 +343,7 @@ abstract class Base
 			}
 
 			if( $item->getProductId() !== null && isset( $products[$item->getBaseId()][$item->getProductId()] ) ) {
-				$items[$item->getBaseId()][$item->getCode()][] = $products[$item->getBaseId()][$item->getProductId()];
+				$map[$item->getBaseId()][$item->getCode()][] = $products[$item->getBaseId()][$item->getProductId()];
 			}
 		}
 
@@ -578,7 +578,7 @@ abstract class Base
 	 */
 	protected function loadCoupons( $id, $fresh, array $products )
 	{
-		$map = $this->getCoupons( [$id], $fresh, $products );
+		$map = $this->getCoupons( [$id], $fresh, [$id => $products] );
 
 		if( ( $items = reset( $map ) ) !== false ) {
 			return $items;
