@@ -309,10 +309,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total );
+		$result = $this->object->searchItems( $search, ['address', 'coupon', 'product', 'service'], $total );
 
-		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 1, $total );
+		$this->assertEquals( 1, count( $result ) );
+
+		$item = reset( $result );
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $item );
+		$this->assertEquals( 2, count( $item->getAddresses() ) );
+		$this->assertEquals( 2, count( $item->getCoupons() ) );
+		$this->assertEquals( 4, count( $item->getProducts() ) );
+		$this->assertEquals( 2, count( $item->getServices() ) );
 	}
 
 

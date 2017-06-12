@@ -698,7 +698,7 @@ class Standard extends Base
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$items = [];
+		$map = [];
 
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
@@ -844,7 +844,7 @@ class Standard extends Base
 				$localeItem->setCurrencyId( $row['order.base.currencyid'] );
 				$localeItem->setSiteId( $row['order.base.siteid'] );
 
-				$items[$row['order.base.id']] = $this->createItemBase( $price, $localeItem, $row );
+				$map[$row['order.base.id']] = [$price, $localeItem, $row];
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -855,7 +855,7 @@ class Standard extends Base
 			throw $e;
 		}
 
-		return $items;
+		return $this->buildItems( $map, $ref );
 	}
 
 

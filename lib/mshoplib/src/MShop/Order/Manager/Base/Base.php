@@ -188,6 +188,63 @@ abstract class Base
 
 
 	/**
+	 * Creates the order base item objects from the map and adds the referenced items
+	 *
+	 * @param array Associative list of order base IDs as keys and list of price/locale/row as values
+	 * @param string[] $ref Domain items that should be added as well, e.g. "address", "coupon", "product", "service"
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface[] Associative list of order base IDs as keys and items as values
+	 */
+	protected function buildItems( array $map, array $ref )
+	{
+		$items = [];
+		$baseIds = array_keys( $map );
+		$addressMap = $couponMap = $productMap = $serviceMap = [];
+
+		if( in_array( 'address', $ref ) ) {
+			$addressMap = $this->getAddresses( $baseIds );
+		}
+
+		if( in_array( 'product', $ref ) ) {
+			$productMap = $this->getProducts( $baseIds );
+		}
+
+		if( in_array( 'coupon', $ref ) ) {
+			$couponMap = $this->getCoupons( $baseIds, false, $productMap );
+		}
+
+		if( in_array( 'service', $ref ) ) {
+			$serviceMap = $this->getServices( $baseIds );
+		}
+
+		foreach( $map as $id => $list )
+		{
+			list( $price, $locale, $row ) = $list;
+			$addresses = $coupons = $products = $services = [];
+
+			if( isset( $addressMap[$id] ) ) {
+				$addresses = $addressMap[$id];
+			}
+
+			if( isset( $couponMap[$id] ) ) {
+				$coupons = $couponMap[$id];
+			}
+
+			if( isset( $productMap[$id] ) ) {
+				$products = $productMap[$id];
+			}
+
+			if( isset( $serviceMap[$id] ) ) {
+				$services = $serviceMap[$id];
+			}
+
+			$items[$id] = $this->createItemBase( $price, $locale, $row, $products, $addresses, $services, $coupons );
+		}
+
+		return $items;
+	}
+
+
+	/**
 	 * Checks if the lock value is a valid constant.
 	 *
 	 * @param integer $value Lock constant
@@ -224,6 +281,184 @@ abstract class Base
 	{
 		return new \Aimeos\MShop\Order\Item\Base\Standard( $price, $locale,
 			$values, $products, $addresses, $services, $coupons );
+	}
+
+
+	/**
+	 * Returns the address item map for the given order base IDs
+	 *
+	 * @param string[] List of order base IDs
+	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @return array Multi-dimensional associative list of order base IDs as keys and order address type/item pairs as values
+	 */
+	protected function getAddresses( array $baseIds, $fresh = false )
+	{
+		$items = [];
+		$manager = $this->getObject()->getSubManager( 'address' );
+
+		$criteria = $manager->createSearch();
+		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $baseIds ) );
+		$sort = [$criteria->sort( '+', 'order.base.address.baseid' ), $criteria->sort( '+', 'order.base.address.type' )];
+		$criteria->setSortations( $sort );
+		$criteria->setSlice( 0, 0x7fffffff );
+
+		foreach( $manager->searchItems( $criteria ) as $item )
+		{
+			if( $fresh === true )
+			{
+				$item->setBaseId( null );
+				$item->setId( null );
+			}
+
+			$items[$item->getBaseId()][$item->getType()] = $item;
+		}
+
+		return $items;
+	}
+
+
+	/**
+	 * Returns the coupon map for the given order base IDs
+	 *
+	 * @param string[] List of order base IDs
+	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @param array Associative list of base IDs and order product ID/item pairs as values
+	 * @return array Multi-dimensional associative list of order base IDs as keys and coupons with product items as values
+	 */
+	protected function getCoupons( array $baseIds, $fresh = false, array $products = [] )
+	{
+		$map = [];
+		$manager = $this->getObject()->getSubManager( 'coupon' );
+
+		$criteria = $manager->createSearch();
+		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $baseIds ) );
+		$sort = [$criteria->sort( '+', 'order.base.coupon.baseid' ), $criteria->sort( '+', 'order.base.coupon.code' )];
+		$criteria->setSortations( $sort );
+		$criteria->setSlice( 0, 0x7fffffff );
+
+		foreach( $manager->searchItems( $criteria ) as $item )
+		{
+			if( !isset( $items[$item->getCode()] ) ) {
+				$map[$item->getBaseId()][$item->getCode()] = [];
+			}
+
+			if( $item->getProductId() !== null && isset( $products[$item->getBaseId()][$item->getProductId()] ) ) {
+				$items[$item->getBaseId()][$item->getCode()][] = $products[$item->getBaseId()][$item->getProductId()];
+			}
+		}
+
+		return $map;
+	}
+
+
+	/**
+	 * Retrieves the ordered products from the storage.
+	 *
+	 * @param array $baseIds List of order base IDs
+	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @return array Multi-dimensional associative list of order base IDs as keys and order product
+	 *	IDs/items pairs in reversed order as values
+	 */
+	protected function getProducts( array $baseIds, $fresh = false )
+	{
+		$map = $attributes = $subProducts = [];
+		$manager = $this->getObject()->getSubManager( 'product' );
+		$attrManager = $manager->getSubManager( 'attribute' );
+
+		$criteria = $manager->createSearch();
+		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $baseIds ) );
+		$sort = [$criteria->sort( '-', 'order.base.product.baseid' ), $criteria->sort( '-', 'order.base.product.position' )];
+		$criteria->setSortations( $sort );
+		$criteria->setSlice( 0, 0x7fffffff );
+
+		$items = $manager->searchItems( $criteria );
+
+
+		$search = $attrManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', array_keys( $items ) ) );
+		$search->setSlice( 0, 0x7fffffff );
+
+		foreach( $attrManager->searchItems( $search ) as $id => $attribute )
+		{
+			if( $fresh === true )
+			{
+				$attributes[$attribute->getParentId()][] = $attribute;
+				$attribute->setParentId( null );
+				$attribute->setId( null );
+			}
+			else
+			{
+				$attributes[$attribute->getParentId()][$id] = $attribute;
+			}
+		}
+
+		foreach( $items as $id => $item )
+		{
+			if( isset( $attributes[$id] ) ) {
+				$item->setAttributes( $attributes[$id] );
+			}
+
+			if( $item->getOrderProductId() === null )
+			{
+				ksort( $subProducts ); // bring the array into the right order because it's reversed
+				$item->setProducts( $subProducts );
+				$map[$item->getBaseId()][$item->getPosition()] = $item;
+
+				$subProducts = [];
+			}
+			else
+			{	// in case it's a sub-product
+				$subProducts[$item->getPosition()] = $item;
+			}
+
+			if( $fresh === true )
+			{
+				$item->setPosition( null );
+				$item->setBaseId( null );
+				$item->setId( null );
+			}
+		}
+
+		return $map;
+	}
+
+
+	/**
+	 * Retrieves the order services from the storage.
+	 *
+	 * @param array $baseIds List of order base IDs
+	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @return array Multi-dimensional associative list of order base IDs as keys and service type/items pairs as values
+	 */
+	protected function getServices( array $baseIds, $fresh = false )
+	{
+		$map = [];
+		$manager = $this->getObject()->getSubManager( 'service' );
+
+		$criteria = $manager->createSearch();
+		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $baseIds ) );
+		$sort = [$criteria->sort( '+', 'order.base.service.baseid' ), $criteria->sort( '+', 'order.base.service.type' )];
+		$criteria->setSortations( $sort );
+		$criteria->setSlice( 0, 0x7fffffff );
+
+		foreach( $manager->searchItems( $criteria ) as $item )
+		{
+			if( $fresh === true )
+			{
+				foreach( $item->getAttributes() as $attribute )
+				{
+						$attribute->setId( null );
+						$attribute->setParentId( null );
+				}
+
+				$item->setBaseId( null );
+				$item->setId( null );
+			}
+
+			$map[$item->getBaseId()][$item->getType()] = $item;
+		}
+
+		return $map;
 	}
 
 
@@ -314,74 +549,6 @@ abstract class Base
 
 
 	/**
-	 * Retrieves the ordered products from the storage.
-	 *
-	 * @param integer $id Order base ID
-	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @return array List of items implementing \Aimeos\MShop\Order\Item\Product\Iface
-	 */
-	protected function loadProducts( $id, $fresh )
-	{
-		$attributes = $products = $subProducts = [];
-		$manager = $this->getObject()->getSubManager( 'product' );
-		$attrManager = $manager->getSubManager( 'attribute' );
-
-		$criteria = $manager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $id ) );
-		$criteria->setSortations( array( $criteria->sort( '-', 'order.base.product.position' ) ) );
-		$items = $manager->searchItems( $criteria );
-
-
-		$criteria = $attrManager->createSearch();
-		$expr = $criteria->compare( '==', 'order.base.product.attribute.parentid', array_keys( $items ) );
-		$criteria->setConditions( $expr );
-
-		foreach( $attrManager->searchItems( $criteria ) as $id => $attribute )
-		{
-			if( $fresh === true )
-			{
-				$attributes[$attribute->getParentId()][] = $attribute;
-				$attribute->setParentId( null );
-				$attribute->setId( null );
-			}
-			else
-			{
-				$attributes[$attribute->getParentId()][$id] = $attribute;
-			}
-		}
-
-		foreach( $items as $id => $item )
-		{
-			if( isset( $attributes[$id] ) ) {
-				$item->setAttributes( $attributes[$id] );
-			}
-
-			if( $item->getOrderProductId() === null )
-			{
-				ksort( $subProducts ); // bring the array into the right order because it's reversed
-				$item->setProducts( $subProducts );
-				$products[$item->getPosition()] = $item;
-
-				$subProducts = [];
-			}
-			else
-			{	// in case it's a sub-product
-				$subProducts[$item->getPosition()] = $item;
-			}
-
-			if( $fresh === true )
-			{
-				$item->setPosition( null );
-				$item->setBaseId( null );
-				$item->setId( null );
-			}
-		}
-
-		return array_reverse( $products, true );
-	}
-
-
-	/**
 	 * Retrieves the addresses of the order from the storage.
 	 *
 	 * @param integer $id Order base ID
@@ -390,25 +557,13 @@ abstract class Base
 	 */
 	protected function loadAddresses( $id, $fresh )
 	{
-		$items = [];
-		$manager = $this->getObject()->getSubManager( 'address' );
+		$map = $this->getAddresses( [$id], $fresh );
 
-		$criteria = $manager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $id ) );
-		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.address.type' ) ) );
-
-		foreach( $manager->searchItems( $criteria ) as $item )
-		{
-			if( $fresh === true )
-			{
-				$item->setBaseId( null );
-				$item->setId( null );
-			}
-
-			$items[$item->getType()] = $item;
+		if( ( $items = reset( $map ) ) !== false ) {
+			return $items;
 		}
 
-		return $items;
+		return [];
 	}
 
 
@@ -417,36 +572,38 @@ abstract class Base
 	 *
 	 * @param integer $id Order base ID
 	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
-	 * @param array List of order products from the basket
+	 * @param array Multi-dimensional associative list of order base IDs as keys and order product
+	 *	IDs/items pairs in reversed order as values
 	 * @return array Associative list of coupon codes as keys and items implementing \Aimeos\MShop\Order\Item\Product\Iface
 	 */
 	protected function loadCoupons( $id, $fresh, array $products )
 	{
-		$items = [];
-		$manager = $this->getObject()->getSubManager( 'coupon' );
+		$map = $this->getCoupons( [$id], $fresh, $products );
 
-		$criteria = $manager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $id ) );
-		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.coupon.code' ) ) );
-
-		foreach( $manager->searchItems( $criteria ) as $item )
-		{
-			if( !isset( $items[$item->getCode()] ) ) {
-				$items[$item->getCode()] = [];
-			}
-
-			if( $item->getProductId() !== null )
-			{
-				foreach( $products as $product )
-				{
-					if( $product->getId() == $item->getProductId() ) {
-						$items[$item->getCode()][] = $product;
-					}
-				}
-			}
+		if( ( $items = reset( $map ) ) !== false ) {
+			return $items;
 		}
 
-		return $items;
+		return [];
+	}
+
+
+	/**
+	 * Retrieves the ordered products from the storage.
+	 *
+	 * @param integer $id Order base ID
+	 * @param boolean $fresh Create new items by copying the existing ones and remove their IDs
+	 * @return \Aimeos\MShop\Order\Item\Product\Iface[] List of product items
+	 */
+	protected function loadProducts( $id, $fresh )
+	{
+		$map = $this->getProducts( [$id], $fresh );
+
+		if( ( $items = reset( $map ) ) !== false ) {
+			return array_reverse( $items, true );
+		}
+
+		return [];
 	}
 
 
@@ -459,31 +616,13 @@ abstract class Base
 	 */
 	protected function loadServices( $id, $fresh )
 	{
-		$items = [];
-		$manager = $this->getObject()->getSubManager( 'service' );
+		$map = $this->getServices( [$id], $fresh );
 
-		$criteria = $manager->createSearch();
-		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $id ) );
-		$criteria->setSortations( array( $criteria->sort( '+', 'order.base.service.type' ) ) );
-
-		foreach( $manager->searchItems( $criteria ) as $item )
-		{
-			if( $fresh === true )
-			{
-				foreach( $item->getAttributes() as $attribute )
-				{
-						$attribute->setId( null );
-						$attribute->setParentId( null );
-				}
-
-				$item->setBaseId( null );
-				$item->setId( null );
-			}
-
-			$items[$item->getType()] = $item;
+		if( ( $items = reset( $map ) ) !== false ) {
+			return $items;
 		}
 
-		return $items;
+		return [];
 	}
 
 
