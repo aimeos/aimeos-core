@@ -309,7 +309,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.service.attribute.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, ['address', 'coupon', 'product', 'service'], $total );
+		$ref = ['order/base/address', 'order/base/coupon', 'order/base/product', 'order/base/service'];
+		$result = $this->object->searchItems( $search, $ref, $total );
 
 		$this->assertEquals( 1, $total );
 		$this->assertEquals( 1, count( $result ) );

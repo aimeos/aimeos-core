@@ -191,7 +191,8 @@ abstract class Base
 	 * Creates the order base item objects from the map and adds the referenced items
 	 *
 	 * @param array Associative list of order base IDs as keys and list of price/locale/row as values
-	 * @param string[] $ref Domain items that should be added as well, e.g. "address", "coupon", "product", "service"
+	 * @param string[] $ref Domain items that should be added as well, e.g.
+	 *	"order/base/address", "order/base/coupon", "order/base/product", "order/base/service"
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface[] Associative list of order base IDs as keys and items as values
 	 */
 	protected function buildItems( array $map, array $ref )
@@ -200,19 +201,19 @@ abstract class Base
 		$baseIds = array_keys( $map );
 		$addressMap = $couponMap = $productMap = $serviceMap = [];
 
-		if( in_array( 'address', $ref ) ) {
+		if( in_array( 'order/base/address', $ref ) ) {
 			$addressMap = $this->getAddresses( $baseIds );
 		}
 
-		if( in_array( 'product', $ref ) ) {
+		if( in_array( 'order/base/product', $ref ) ) {
 			$productMap = $this->getProducts( $baseIds );
 		}
 
-		if( in_array( 'coupon', $ref ) ) {
+		if( in_array( 'order/base/coupon', $ref ) ) {
 			$couponMap = $this->getCoupons( $baseIds, false, $productMap );
 		}
 
-		if( in_array( 'service', $ref ) ) {
+		if( in_array( 'order/base/service', $ref ) ) {
 			$serviceMap = $this->getServices( $baseIds );
 		}
 
