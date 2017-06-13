@@ -107,6 +107,14 @@ class TestHelperMShop
 		$ctx->setSession( $session );
 
 
+		$mail = new \Aimeos\MW\Mail\None();
+		$ctx->setMail( $mail );
+
+
+		$view = self::createView( $conf );
+		$ctx->setView( $view );
+
+
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( $ctx );
 		$locale = $localeManager->bootstrap( $site, 'de', '', false );
 		$ctx->setLocale( $locale );
@@ -115,5 +123,41 @@ class TestHelperMShop
 		$ctx->setEditor( 'core:unittest' );
 
 		return $ctx;
+	}
+
+
+	/**
+	 * Creates a new view object
+	 *
+	 * @param \Aimeos\MW\Config\Iface $config Configuration object
+	 * @return \Aimeos\MW\View\Iface View object
+	 */
+	protected static function createView( \Aimeos\MW\Config\Iface $config )
+	{
+		$tmplpaths = array_merge_recursive(
+			self::getAimeos()->getCustomPaths( 'client/html/templates' ),
+			self::getAimeos()->getCustomPaths( 'controller/jobs/templates' )
+		);
+
+		$view = new \Aimeos\MW\View\Standard( $tmplpaths );
+
+		$trans = new \Aimeos\MW\Translation\None( 'de_DE' );
+		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
+		$view->addHelper( 'translate', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Url\Standard( $view, 'http://baseurl' );
+		$view->addHelper( 'url', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, '.', '' );
+		$view->addHelper( 'number', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
+		$view->addHelper( 'date', $helper );
+
+		$config = new \Aimeos\MW\Config\Decorator\Protect( $config, array( 'controller/jobs', 'client/html' ) );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
+		$view->addHelper( 'config', $helper );
+
+		return $view;
 	}
 }
