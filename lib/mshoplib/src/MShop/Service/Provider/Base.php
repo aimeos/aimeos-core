@@ -363,8 +363,9 @@ abstract class Base
 							$errors[$key] = sprintf( 'Not a time' ); continue 2;
 						}
 						break;
+					case 'list':
 					case 'select':
-						if( !is_array( $def['default'] ) || !in_array( $attributes[$key], $def['default'] ) ) {
+						if( !is_array( $def['default'] ) || !isset( $def['default'][$attributes[$key]] ) ) {
 							$errors[$key] = sprintf( 'Not a listed value' ); continue 2;
 						}
 						break;
