@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 namespace Aimeos\MW\Criteria;
@@ -16,19 +16,21 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$context = \TestHelperMShop::getContext();
-		$dbm = $context->getDatabaseManager();
+		if( \TestHelperMw::getConfig()->get( 'resource/db/adapter', false ) === false ) {
+			$this->markTestSkipped( 'No database configured' );
+		}
+
+		$dbm = \TestHelperMw::getDBManager();
+
 		$conn = $dbm->acquire();
-
 		$this->object = new \Aimeos\MW\Criteria\MySQL( $conn );
-
 		$dbm->release( $conn );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->object );
+		$this->object = null;
 	}
 
 
