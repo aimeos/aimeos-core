@@ -243,13 +243,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCheckConfigSelect()
+	public function testCheckConfigSelectList()
 	{
 		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
 		$method = $class->getMethod( 'checkConfig' );
 		$method->setAccessible( true );
 
-		$args = array( array( 'key' => array( 'type' => 'select', 'required' => true, 'default' => array( 'test' ) ) ), array( 'key' => 'test' ) );
+		$args = [['key' => ['type' => 'select', 'required' => true, 'default' => ['test' => 'val']]], ['key' => 'test']];
 		$result = $method->invokeArgs( $this->object, $args );
 
 		$this->assertEquals( array( 'key' => null ), $result );
