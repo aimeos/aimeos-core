@@ -71,7 +71,6 @@ class DirectDebit
 	 */
 	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$list = [];
 		$feconfig = $this->feConfig;
 
 		try
@@ -84,11 +83,7 @@ class DirectDebit
 		}
 		catch( \Aimeos\MShop\Order\Exception $e ) { ; } // If address isn't available
 
-		foreach( $feconfig as $key => $config ) {
-			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
-		}
-
-		return $list;
+		return $this->getConfigItems( $feconfig );
 	}
 
 

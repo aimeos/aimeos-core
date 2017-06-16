@@ -48,6 +48,8 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+
 		$result = $this->object->getConfigBE();
 
 		$this->assertEquals( 3, count( $result ) );

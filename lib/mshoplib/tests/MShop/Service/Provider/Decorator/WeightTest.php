@@ -43,6 +43,8 @@ class WeightTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigBE' )->will( $this->returnValue( [] ) );
+
 		$result = $this->object->getConfigBE();
 
 		$this->assertArrayHasKey( 'weight.min', $result );

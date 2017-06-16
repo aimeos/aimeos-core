@@ -387,6 +387,23 @@ abstract class Base
 
 
 	/**
+	 * Returns the criteria attribute items for the backend configuration
+	 *
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of criteria attribute items
+	 */
+	protected function getConfigItems( array $configList )
+	{
+		$list = [];
+
+		foreach( $configList as $key => $config ) {
+			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the configuration value that matches one of the given keys.
 	 *
 	 * The config of the service item and (optionally) the global config

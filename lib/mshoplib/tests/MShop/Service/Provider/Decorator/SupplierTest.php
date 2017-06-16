@@ -57,6 +57,9 @@ class SupplierTest extends \PHPUnit_Framework_TestCase
 			throw new \RuntimeException( sprintf( 'No Order found with statuspayment "%1$s" and type "%2$s"', \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, \Aimeos\MShop\Order\Item\Base::TYPE_WEB ) );
 		}
 
+
+		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
+
 		$basket = $orderBaseManager->load( $order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
 		$config = $this->object->getConfigFE( $basket );
 

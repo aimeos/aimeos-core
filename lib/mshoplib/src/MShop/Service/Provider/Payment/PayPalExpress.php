@@ -176,13 +176,7 @@ class PayPalExpress
 	 */
 	public function getConfigBE()
 	{
-		$list = parent::getConfigBE();
-
-		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
-		}
-
-		return $list;
+		return $this->getConfigItems( $this->beConfig );
 	}
 
 

@@ -119,7 +119,6 @@ class Supplier
 	 */
 	public function getConfigFE( \Aimeos\MShop\Order\Item\Base\Iface $basket )
 	{
-		$list = [];
 		$feconfig = $this->feConfig;
 
 		try
@@ -137,10 +136,6 @@ class Supplier
 		}
 		catch( \Aimeos\MShop\Order\Exception $e ) {} // If service isn't available
 
-		foreach( $feconfig as $key => $config ) {
-			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
-		}
-
-		return $list;
+		return array_merge( $this->getProvider()->getConfigFE( $basket ), $this->getConfigItems( $feconfig ) );
 	}
 }
