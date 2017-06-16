@@ -3,16 +3,13 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2017
  */
 
 
 namespace Aimeos\MShop\Coupon\Provider\Decorator;
 
 
-/**
- * Test class for \Aimeos\MShop\Coupon\Provider\Decorator\BasketValues.
- */
 class BasketValuesTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -20,12 +17,6 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 	private $couponItem;
 
 
-	/**
-	 * Sets up the fixture, especially creates products.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$orderProducts = [];
@@ -65,17 +56,41 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
 		unset( $this->orderBase );
 		unset( $this->couponItem );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$result = $this->object->getConfigBE();
+
+		$this->assertArrayHasKey( 'basketvalues.total-value-min', $result );
+		$this->assertArrayHasKey( 'basketvalues.total-value-max', $result );
+	}
+
+
+	public function testCheckConfigBE()
+	{
+		$attributes = ['basketvalues.total-value-min' => '1.5', 'basketvalues.total-value-max' => '10'];
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertInternalType( 'null', $result['basketvalues.total-value-min'] );
+		$this->assertInternalType( 'null', $result['basketvalues.total-value-max'] );
+	}
+
+
+	public function testCheckConfigBEFailure()
+	{
+		$result = $this->object->checkConfigBE( [] );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertInternalType( 'string', $result['basketvalues.total-value-min'] );
+		$this->assertInternalType( 'string', $result['basketvalues.total-value-max'] );
 	}
 
 
@@ -92,7 +107,7 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $result );
 	}
 
-	// // min value higher than order price
+	// min value higher than order price
 	public function testIsAvailableTestMinValue()
 	{
 		$config = array(

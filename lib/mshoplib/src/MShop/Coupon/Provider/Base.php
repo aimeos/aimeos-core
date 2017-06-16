@@ -68,6 +68,30 @@ abstract class Base implements Iface
 		$base->deleteCoupon( $this->code, true );
 	}
 
+	/**
+	 * Checks the backend configuration attributes for validity.
+	 *
+	 * @param array $attributes Attributes added by the shop owner in the administraton interface
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
+	 */
+	public function checkConfigBE( array $attributes )
+	{
+		return [];
+	}
+
+
+	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 */
+	public function getConfigBE()
+	{
+		return [];
+	}
+
 
 	/**
 	 * Tests if a coupon should be granted
@@ -94,13 +118,86 @@ abstract class Base implements Iface
 
 
 	/**
-	 * Returns the stored context object.
+	 * Checks required fields and the types of the config array.
 	 *
-	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 * @param array $config Config parameters
+	 * @param array $attributes Attributes for the config array
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 * 	known by the provider but aren't valid resp. null for attributes whose values are OK
 	 */
-	protected function getContext()
+	protected function checkConfig( array $config, array $attributes )
 	{
-		return $this->context;
+		$errors = [];
+
+		foreach( $config as $key => $def )
+		{
+			if( $def['required'] === true && ( !isset( $attributes[$key] ) || $attributes[$key] === '' ) )
+			{
+				$errors[$key] = sprintf( 'Configuration for "%1$s" is missing', $key );
+				continue;
+			}
+
+			if( isset( $attributes[$key] ) )
+			{
+				switch( $def['type'] )
+				{
+					case 'boolean':
+						if( !is_string( $attributes[$key] ) || $attributes[$key] !== '0' && $attributes[$key] !== '1' ) {
+							$errors[$key] = sprintf( 'Not a true/false value' ); continue 2;
+						}
+						break;
+					case 'string':
+						if( is_string( $attributes[$key] ) === false ) {
+							$errors[$key] = sprintf( 'Not a string' ); continue 2;
+						}
+						break;
+					case 'integer':
+						if( ctype_digit( $attributes[$key] ) === false ) {
+							$errors[$key] = sprintf( 'Not an integer number' ); continue 2;
+						}
+						break;
+					case 'number':
+						if( is_numeric( $attributes[$key] ) === false ) {
+							$errors[$key] = sprintf( 'Not a number' ); continue 2;
+						}
+						break;
+					case 'date':
+						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/';
+						if( !is_string( $attributes[$key] ) || preg_match( $pattern, $attributes[$key] ) !== 1 ) {
+							$errors[$key] = sprintf( 'Not a date' ); continue 2;
+						}
+						break;
+					case 'datetime':
+						$pattern = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9](:[0-5][0-9])?$/';
+						if( !is_string( $attributes[$key] ) || preg_match( $pattern, $attributes[$key] ) !== 1 ) {
+							$errors[$key] = sprintf( 'Not a date and time' ); continue 2;
+						}
+						break;
+					case 'time':
+						$pattern = '/^([0-2])?[0-9]:[0-5][0-9](:[0-5][0-9])?$/';
+						if( !is_string( $attributes[$key] ) || preg_match( $pattern, $attributes[$key] ) !== 1 ) {
+							$errors[$key] = sprintf( 'Not a time' ); continue 2;
+						}
+						break;
+					case 'select':
+						if( !is_array( $def['default'] ) || !isset( $def['default'][$attributes[$key]] ) ) {
+							$errors[$key] = sprintf( 'Not a listed value' ); continue 2;
+						}
+						break;
+					case 'map':
+						if( !is_array( $attributes[$key] ) ) {
+							$errors[$key] = sprintf( 'Not a key/value map' ); continue 2;
+						}
+						break;
+					default:
+						throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Invalid type "%1$s"', $def['type'] ) );
+				}
+			}
+
+			$errors[$key] = null;
+		}
+
+		return $errors;
 	}
 
 
@@ -112,6 +209,23 @@ abstract class Base implements Iface
 	protected function getCode()
 	{
 		return $this->code;
+	}
+
+
+	/**
+	 * Returns the criteria attribute items for the backend configuration
+	 *
+	 * @return \Aimeos\MW\Criteria\Attribute\Iface[] List of criteria attribute items
+	 */
+	protected function getConfigItems( array $configList )
+	{
+		$list = [];
+
+		foreach( $configList as $key => $config ) {
+			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
+		}
+
+		return $list;
 	}
 
 
@@ -131,6 +245,17 @@ abstract class Base implements Iface
 		}
 
 		return $default;
+	}
+
+
+	/**
+	 * Returns the stored context object.
+	 *
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 */
+	protected function getContext()
+	{
+		return $this->context;
 	}
 
 

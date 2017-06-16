@@ -3,28 +3,19 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2017
  */
 
 
 namespace Aimeos\MShop\Coupon\Provider;
 
 
-/**
- * Test class for \Aimeos\MShop\Coupon\Provider\PercentRebate.
- */
 class PercentRebateTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $orderBase;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
@@ -39,12 +30,6 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -139,6 +124,36 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Coupon\\Exception' );
 		$object->addCoupon( $this->orderBase );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$result = $this->object->getConfigBE();
+
+		$this->assertArrayHasKey( 'percentrebate.productcode', $result );
+		$this->assertArrayHasKey( 'percentrebate.rebate', $result );
+	}
+
+
+	public function testCheckConfigBE()
+	{
+		$attributes = ['percentrebate.productcode' => 'test', 'percentrebate.rebate' => 5];
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertInternalType( 'null', $result['percentrebate.productcode'] );
+		$this->assertInternalType( 'null', $result['percentrebate.rebate'] );
+	}
+
+
+	public function testCheckConfigBEFailure()
+	{
+		$result = $this->object->checkConfigBE( [] );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertInternalType( 'string', $result['percentrebate.productcode'] );
+		$this->assertInternalType( 'string', $result['percentrebate.rebate'] );
 	}
 
 
