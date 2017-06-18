@@ -22,7 +22,10 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * Also, the plugin reduces the product quantity automatically if there are not
  * enough products in stock.
  *
- * The checks are executed for the basket and checkout summary view
+ * The checks are executed for the basket and checkout summary view.
+ *
+ * To trace the execution and interaction of the plugins, set the log level to DEBUG:
+ *	madmin/log/manager/standard/loglevel = 7
  *
  * @package MShop
  * @subpackage Plugin

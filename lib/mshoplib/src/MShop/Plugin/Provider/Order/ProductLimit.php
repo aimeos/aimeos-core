@@ -21,7 +21,10 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * - single-value-max: 'EUR' => '100.00' (Maximum amount for one product, i.e. price * quantity)
  * - total-value-max: 'EUR' => '1000.00' (Maximum amount for all product, i.e. basket product * price * quantity)
  *
- * These limits are enforced if any product in the basket changes
+ * These limits are enforced if any product in the basket changes.
+ *
+ * To trace the execution and interaction of the plugins, set the log level to DEBUG:
+ *	madmin/log/manager/standard/loglevel = 7
  *
  * @package MShop
  * @subpackage Plugin

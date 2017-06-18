@@ -24,7 +24,10 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * - optional (payment: '' or delivery: '' or not set)
  * - not allowed (payment: 0 or delivery: 0)
  *
- * The checks are executed before the checkout summary page is rendered
+ * The checks are executed before the checkout summary page is rendered.
+ *
+ * To trace the execution and interaction of the plugins, set the log level to DEBUG:
+ *	madmin/log/manager/standard/loglevel = 7
  *
  * @package MShop
  * @subpackage Plugin

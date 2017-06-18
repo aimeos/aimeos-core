@@ -21,6 +21,9 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * The product properties listed in the array are added to the order product as
  * order product attributes with key/value pairs like code: "length", value: "1.0".
  *
+ * To trace the execution and interaction of the plugins, set the log level to DEBUG:
+ *	madmin/log/manager/standard/loglevel = 7
+ *
  * @package MShop
  * @subpackage Plugin
  */

@@ -13,7 +13,12 @@ namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
 /**
- * Country-limiting decorator for service providers.
+ * Country-limiting decorator for service providers
+ *
+ * This decorator interacts with the ServiceUpdate and Autofill basket plugins!
+ * If the delivery/payment option isn't available any more, the ServiceUpdate
+ * plugin will remove it from the basket and the Autofill plugin will add one
+ * of the available options again.
  *
  * @package MShop
  * @subpackage Service

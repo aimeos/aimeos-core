@@ -26,6 +26,9 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * granted by coupons for example are included into the calculation of the total
  * basket value.
  *
+ * To trace the execution and interaction of the plugins, set the log level to DEBUG:
+ *	madmin/log/manager/standard/loglevel = 7
+ *
  * @package MShop
  * @subpackage Plugin
  * @deprecated Use Reduction service decorator for each delivery option instead

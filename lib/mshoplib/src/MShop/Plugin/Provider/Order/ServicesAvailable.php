@@ -26,6 +26,9 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  *
  * The checks are executed before the checkout summary page is rendered
  *
+ * To trace the execution and interaction of the plugins, set the log level to DEBUG:
+ *	madmin/log/manager/standard/loglevel = 7
+ *
  * @package MShop
  * @subpackage Plugin
  */

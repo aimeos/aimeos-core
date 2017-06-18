@@ -20,6 +20,9 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * backwards if prices are recalculated for B2B or B2C customers. In these cases
  * the customer won't be notified.
  *
+ * To trace the execution and interaction of the plugins, set the log level to DEBUG:
+ *	madmin/log/manager/standard/loglevel = 7
+ *
  * @package MShop
  * @subpackage Plugin
  */

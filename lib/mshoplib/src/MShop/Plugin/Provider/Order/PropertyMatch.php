@@ -24,6 +24,9 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * This configuration enforces products to have a size and color property.
  * Otherwise, they can't be added to the basket by the customers.
  *
+ * To trace the execution and interaction of the plugins, set the log level to DEBUG:
+ *	madmin/log/manager/standard/loglevel = 7
+ *
  * @package MShop
  * @subpackage Plugin
  */
