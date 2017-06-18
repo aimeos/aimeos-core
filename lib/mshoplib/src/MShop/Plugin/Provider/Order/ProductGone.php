@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -14,6 +14,13 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 /**
  * Checks the current availability of the products in a basket
+ *
+ * Products can be removed or disabled by the shop owner or the time frame a
+ * product is avialable can pass by. In these cases, the plugin notifies the
+ * customers that they have to remove the product from the basket before they
+ * can proceed in the checkout process.
+ *
+ * The plugin is executed for the basket and the checkout summary page
  *
  * @package MShop
  * @subpackage Plugin

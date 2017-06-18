@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -13,7 +13,24 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Adds address and service items to basket.
+ * Adds address and service items to the basket
+ *
+ * This plugins acts if a product is added to the basket or a delivery/payment
+ * service is removed from the basket. It adds the a delivery/payment service
+ * item and the customer address(es) to the basket.
+ *
+ * The following options are available:
+ * - autofill.delivery: 1 (add the first delivery option to the basket)
+ * - autofill.delivery: 1 and autofill.deliverycode: '...' (add specific delivery option to the basket)
+ * - autofill.payment: 1 (add the first payment option to the basket)
+ * - autofill.payment: 1 and autofill.paymentcode: '...' (add specific payment option to the basket)
+ * - autofill.orderservice: 1 (add delivery and payment services from the last order of the customer)
+ * - autofill.address: 1 (add billing address of the logged in customer to the basket)
+ * - autofill.orderaddress: 1 (add billing and delivery addresses from the last order of the customer)
+ *
+ * This plugin interacts with other plugins that add products or remove services!
+ * Especially the "ServiceUpdate" plugin may remove a delivery/payment option
+ * that isn't available any more based on the current basket content.
  *
  * @package MShop
  * @subpackage Plugin

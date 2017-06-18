@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -13,7 +13,11 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Update percent rebate value on change.
+ * Updates the basket depending on the coupon
+ *
+ * Executes the coupon providers again on any basket change so they can update
+ * the basket. This is necessary if either the requirement for coupons aren't
+ * met any more or for updating percentual rebates.
  *
  * @package MShop
  * @subpackage Plugin

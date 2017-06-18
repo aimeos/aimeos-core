@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2013
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -14,6 +14,15 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 /**
  * Checks the value of a property defined in the configuration
+ *
+ * Products can be only added to the basket if they contain the required
+ * product properties.
+ *
+ * Example:
+ * - product.property.code: ["size", "color"]
+ *
+ * This configuration enforces products to have a size and color property.
+ * Otherwise, they can't be added to the basket by the customers.
  *
  * @package MShop
  * @subpackage Plugin

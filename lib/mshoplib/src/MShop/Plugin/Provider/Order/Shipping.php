@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -13,7 +13,18 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Free shipping implementation if ordered product sum is above a certain value.
+ * Free shipping implementation if ordered product sum is above a certain value
+ *
+ * Sets the shipping costs to zero if the configured threshold is met or exceeded.
+ * Only the costs of the delivery option are set to 0.00, not the shipping costs
+ * of specific product items!
+ *
+ * Example:
+ * - threshold: 'EUR' => '50.00'
+ *
+ * There would be no shipping costs for orders of 50 EUR or above. The rebates
+ * granted by coupons for example are included into the calculation of the total
+ * basket value.
  *
  * @package MShop
  * @subpackage Plugin

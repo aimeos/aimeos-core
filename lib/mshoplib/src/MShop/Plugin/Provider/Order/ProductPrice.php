@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -13,7 +13,12 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Checks the products in a basket for changed prices.
+ * Checks the products in a basket for changed prices
+ *
+ * Notifies the customers if a price of a product in the basket has changed in
+ * the meantime. This plugin can handle the change from net to gross prices and
+ * backwards if prices are recalculated for B2B or B2C customers. In these cases
+ * the customer won't be notified.
  *
  * @package MShop
  * @subpackage Plugin

@@ -15,6 +15,14 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 /**
  * Product limit implementation if count or sum of a single or of all products in an order exceeds given limit
  *
+ * Enforces product restrictions like
+ * - single-number-max: 10 (Maximum times a single product can be bought in one order)
+ * - total-number-max: 100 (Maximum number of products that can be in the basket, e.g. basket product * quantity)
+ * - single-value-max: 'EUR' => '100.00' (Maximum amount for one product, i.e. price * quantity)
+ * - total-value-max: 'EUR' => '1000.00' (Maximum amount for all product, i.e. basket product * price * quantity)
+ *
+ * These limits are enforced if any product in the basket changes
+ *
  * @package MShop
  * @subpackage Plugin
  */

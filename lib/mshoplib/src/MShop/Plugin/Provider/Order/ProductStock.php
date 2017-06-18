@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -14,6 +14,15 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 /**
  * Checks the products in a basket for sufficient stocklevel
+ *
+ * Notifies the customers if one or more products have gone out of stock in the
+ * meantime. They have to remove this products before they can continue in the
+ * checkout process.
+ *
+ * Also, the plugin reduces the product quantity automatically if there are not
+ * enough products in stock.
+ *
+ * The checks are executed for the basket and checkout summary view
  *
  * @package MShop
  * @subpackage Plugin

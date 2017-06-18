@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -13,7 +13,16 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Updates service items on basket change.
+ * Updates service items on basket change
+ *
+ * Delivery or payment service options can be restricted to certain requirements
+ * like the basket value, the delivery address or if virtual (download) products
+ * are in the basket. If the service option is not available any more due to one
+ * of these restrictions, it will be removed from the basket. Otherwise, the
+ * price of the service option is recalculated.
+ *
+ * This plugin interacts with the "Autofill" plugin, which may re-add one of the
+ * other delivery/payment options automatically, that are still available!
  *
  * @package MShop
  * @subpackage Plugin

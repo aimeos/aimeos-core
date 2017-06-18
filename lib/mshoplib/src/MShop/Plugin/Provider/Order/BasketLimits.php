@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -13,7 +13,16 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Checks if ordered product sum and count of products is above a certain value.
+ * Checks if ordered product sum and count of products is above a certain value
+ *
+ * For the basket and checkout summery view, this plugin checks if the products
+ * in the basket are still within the configured limits.
+ *
+ * Available checks are:
+ * - min-value: 'EUR' => '10.00' (Minimum total basket value incl. rebates)
+ * - max-value: 'EUR' => '10.00' (Maximum total basket value incl. rebates)
+ * - min-products: 10 (Minumum number of articles in the basket i.e. basket product * quantity)
+ * - max-products: 100 (Maximum number of articles in the basket i.e. basket product * quantity)
  *
  * @package MShop
  * @subpackage Plugin

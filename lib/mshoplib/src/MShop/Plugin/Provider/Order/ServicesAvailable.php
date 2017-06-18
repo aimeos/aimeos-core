@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Plugin
  */
@@ -13,7 +13,18 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 
 /**
- * Checks basket for available service items.
+ * Checks for available service items in the basket
+ *
+ * There are two services types by default:
+ * - delivery
+ * - payment
+ *
+ * For both types can be specifified if they are
+ * - required (payment: 1 or delivery: 1)
+ * - optional (payment: '' or delivery: '' or not set)
+ * - not allowed (payment: 0 or delivery: 0)
+ *
+ * The checks are executed before the checkout summary page is rendered
  *
  * @package MShop
  * @subpackage Plugin
