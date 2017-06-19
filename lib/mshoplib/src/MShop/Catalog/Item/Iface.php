@@ -22,6 +22,13 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\Config\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface
 {
 	/**
+	 * Returns the ID of the parent category
+	 *
+	 * @return string|null Unique ID of the parent category
+	 */
+	public function getParentId();
+
+	/**
 	 * Returns the name of the item.
 	 *
 	 * @return string Name of the item

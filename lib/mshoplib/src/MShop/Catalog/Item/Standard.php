@@ -94,6 +94,17 @@ class Standard
 
 
 	/**
+	 * Returns the ID of the parent category
+	 *
+	 * @return string|null Unique ID of the parent category
+	 */
+	public function getParentId()
+	{
+		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : null );
+	}
+
+
+	/**
 	 * Returns the internal name of the item.
 	 *
 	 * @return string Name of the item
@@ -304,6 +315,7 @@ class Standard
 
 		if( $private === true )
 		{
+			$list['catalog.parentid'] = $this->getParentId();
 			$list['catalog.siteid'] = $this->getSiteId();
 			$list['catalog.ctime'] = $this->getTimeCreated();
 			$list['catalog.mtime'] = $this->getTimeModified();

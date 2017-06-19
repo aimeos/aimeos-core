@@ -33,6 +33,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->values = array(
 			'id' => 2,
+			'parentid' => 3,
 			'code' => 'unit-test',
 			'label' => 'unittest',
 			'config' => array( 'testcategory' => '10' ),
@@ -83,6 +84,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetParentId()
+	{
+		$this->assertEquals( 3, $this->object->getParentId() );
 	}
 
 
@@ -235,6 +242,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( count( $this->values ), count( $values ) );
 
 		$this->assertEquals( $this->values['id'], $values['catalog.id'] );
+		$this->assertEquals( $this->values['parentid'], $values['catalog.parentid'] );
 		$this->assertEquals( $this->values['label'], $values['catalog.label'] );
 		$this->assertEquals( $this->values['config'], $values['catalog.config'] );
 		$this->assertEquals( $this->values['status'], $values['catalog.status'] );
