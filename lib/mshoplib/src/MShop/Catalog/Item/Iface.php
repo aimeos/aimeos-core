@@ -29,6 +29,13 @@ interface Iface
 	public function getParentId();
 
 	/**
+	 * Returns the level of the item in the tree
+	 *
+	 * @return integer Level of the item starting with "0" for the root node
+	 */
+	public function getLevel();
+
+	/**
 	 * Returns the name of the item.
 	 *
 	 * @return string Name of the item

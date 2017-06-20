@@ -3,15 +3,12 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 namespace Aimeos\MShop\Catalog\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Catalog\Item\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $node;
@@ -20,12 +17,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	private $listItems;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$listValues = array( 'id' => 1, 'type' => 'default', 'domain' => 'text' );
@@ -34,6 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'id' => 2,
 			'parentid' => 3,
+			'level' => 1,
 			'code' => 'unit-test',
 			'label' => 'unittest',
 			'config' => array( 'testcategory' => '10' ),
@@ -53,12 +45,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -106,6 +92,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
 		$this->assertEquals( 'unit test', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetLevel()
+	{
+		$this->assertEquals( 1, $this->object->getLevel() );
 	}
 
 
@@ -242,6 +234,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( count( $this->values ), count( $values ) );
 
 		$this->assertEquals( $this->values['id'], $values['catalog.id'] );
+		$this->assertEquals( $this->values['level'], $values['catalog.level'] );
 		$this->assertEquals( $this->values['parentid'], $values['catalog.parentid'] );
 		$this->assertEquals( $this->values['label'], $values['catalog.label'] );
 		$this->assertEquals( $this->values['config'], $values['catalog.config'] );

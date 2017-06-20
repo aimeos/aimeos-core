@@ -105,6 +105,17 @@ class Standard
 
 
 	/**
+	 * Returns the level of the item in the tree
+	 *
+	 * @return integer Level of the item starting with "0" for the root node
+	 */
+	public function getLevel()
+	{
+		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : 0 );
+	}
+
+
+	/**
 	 * Returns the internal name of the item.
 	 *
 	 * @return string Name of the item
@@ -315,6 +326,7 @@ class Standard
 
 		if( $private === true )
 		{
+			$list['catalog.level'] = $this->getLevel();
 			$list['catalog.parentid'] = $this->getParentId();
 			$list['catalog.siteid'] = $this->getSiteId();
 			$list['catalog.ctime'] = $this->getTimeCreated();
