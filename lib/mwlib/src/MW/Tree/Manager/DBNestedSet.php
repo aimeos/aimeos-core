@@ -549,6 +549,10 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$right = $node->right;
 		}
 
+		if( $search->getSortations() === [] ) {
+			$search->setSortations( [$search->sort( '+', $this->searchConfig['left']['code'] )] );
+		}
+
 		$types = $this->getSearchTypes( $this->searchConfig );
 		$translations = $this->getSearchTranslations( $this->searchConfig );
 		$conditions = $search->getConditionString( $types, $translations );
