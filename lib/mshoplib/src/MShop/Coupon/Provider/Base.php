@@ -180,7 +180,9 @@ abstract class Base implements Iface
 						}
 						break;
 					case 'select':
-						if( !is_array( $def['default'] ) || !isset( $def['default'][$attributes[$key]] ) ) {
+						if( !is_array( $def['default'] ) || !isset( $def['default'][$attributes[$key]] )
+							&& !in_array( $attributes[$key], $def['default'] )
+						) {
 							$errors[$key] = sprintf( 'Not a listed value' ); continue 2;
 						}
 						break;
