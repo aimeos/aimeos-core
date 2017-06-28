@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 12:08+0100\n"
-"PO-Revision-Date: 2017-01-03 11:21+0000\n"
+"POT-Creation-Date: 2017-06-28 18:59+0200\n"
+"PO-Revision-Date: 2017-06-28 17:04+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -19,133 +19,42 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid ""
-"Authorized payments of orders will be captured after dispatching or after a "
-"configurable amount of time"
-msgstr "Los pagos autorizados de los pedidos serán capturados luego de enviar los mismos o después de un límite de tiempo configurable"
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "La clase \"%1$s\" no implementa la interfaz \"%2$s\""
 
-msgid "Batch update of payment/delivery status"
-msgstr "Actualización por lotes del estado de los pagos y las entregas"
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Clase \"%1$s\" no disponible"
 
-msgid "Cache cleanup"
-msgstr "Limpiar caché"
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Clase \"%1$s\" no encontrada"
 
-msgid "Capture authorized payments"
-msgstr "Obtener pagos autorizados"
-
-msgid "Catalog index optimization"
-msgstr "Optimizar índice del catálogo"
-
-msgid "Catalog index rebuild"
-msgstr "Reconstruir índice del catálogo"
-
-msgid "Creates a product site map for search engines"
-msgstr "Crea un mapa de producto para los motores de búsqueda"
-
-msgid "Creates bought together product suggestions"
-msgstr "Crea sugerencias de productos comprados juntos"
-
-msgid ""
-"Deletes unfinished orders an makes their products and coupon codes available"
-" again"
-msgstr "Elimina las órdenes sin terminar y hace que sus productos y bonos de descuento estén disponibles de nuevo"
-
-msgid "Deletes unpaid orders to keep the database clean"
-msgstr "Elimina las órdenes pendientes de pago para mantener la base de datos limpia"
-
-msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr "Ejecuta el pago o la entrega de servicios de proveedores que utilizan actualizaciones por lotes"
-
-msgid "Exports all available products"
-msgstr "Exporta todos los productos disponibles"
-
-msgid "Imports new and updates existing products from CSV files"
-msgstr "Importa nuevos y actualiza los productos existentes a partir de archivos CSV"
-
-msgid "Index optimization"
-msgstr ""
-
-msgid "Index rebuild"
-msgstr ""
+#, php-format
+msgid "Controller path is empty"
+msgstr "La ruta del controlador está vacía"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Hay caracteres no válidos en el nombre de clase \"%1$s\""
 
 #, php-format
-msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
-msgstr "Líneas de productos no válidas en \"%1$s\": %2$d/%3$d"
-
-msgid "Log cleanup"
-msgstr "Limpiar registro"
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr "Controlador \"%1$s\" no válido en \"%2$s\""
 
 #, php-format
-msgid "No \"product.code\" column in CSV mapping found"
-msgstr "No se ha encntrado la columna \"product.code\" en el mapeo CSV"
-
-msgid "Optimizes the catalog index for searching products"
-msgstr "Optimiza el índice del catálogo para la búsqueda de productos"
-
-msgid "Optimizes the index for searching products faster"
-msgstr ""
-
-msgid "Process order delivery services"
-msgstr "Servicios de proceso de la entrega de pedidos"
-
-msgid "Product export"
-msgstr "Exportar producto"
-
-msgid "Product import CSV"
-msgstr "Importar CSV de producto"
-
-msgid "Product site map"
-msgstr "Mapa de producto"
-
-msgid "Products bought together"
-msgstr "Productos comprados juntos"
-
-msgid "Rebuilds the catalog index for searching products"
-msgstr "Reconstruye el índice del catálogo para la búsqueda de productos"
-
-msgid "Rebuilds the index for searching products"
-msgstr ""
-
-msgid "Removes the expired entries from the cache"
-msgstr "Elimina las entradas caducadas de la caché"
-
-msgid ""
-"Removes the old log entries from the database and archives them (optional)"
-msgstr "Elimina las entradas antiguas del registro de la base de datos y las archiva (opcional)"
-
-msgid "Removes unfinished orders"
-msgstr "Elimina los pedidos sin terminar"
-
-msgid "Removes unpaid orders"
-msgstr "Elimina los pedidos sin pagar"
+msgid "Invalid domain \"%1$s\""
+msgstr "Dominio \"%1$s\" no válido"
 
 #, php-format
-msgid "Required mapping key \"%1$s\" is missing or contains no array"
-msgstr "La clave de mapeo obligatoria \"%1$s\" no se encuentra o no contiene una matriz"
-
-msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr "Envía los pedidos pagados al sistema ERP o socio logístico"
+msgid "Invalid factory \"%1$s\""
+msgstr "Constructor no válido \"%1$s\""
 
 #, php-format
-msgid "Started product import from \"%1$s\" (%2$s)"
-msgstr "Iniciada la importación de productos de \"%1$s\" (%2$s)"
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr "No se ha encontrado el tipo de elemento para \"%1$s/%2$s\" en \"%3$s\""
 
 #, php-format
-msgid "Unable to import product with code \"%1$s\": %2$s"
-msgstr "No se puede importar el producto con código \"%1$s\": %2$s"
-
-#, php-format
-msgid "Unable to move imported file"
-msgstr "No se puede mover el archivo importado"
-
-#, php-format
-msgid "aimeos-products-%d.xml"
-msgstr "productos-aimeos-%d.xml"
-
-#, php-format
-msgid "aimeos-sitemap-%d.xml"
-msgstr "mapa-de-sitio-aimeos-%d.xml"
+msgid "Unable to call method \"%1$s\""
+msgstr "No se ha podido invocar el método \"%1$s\""

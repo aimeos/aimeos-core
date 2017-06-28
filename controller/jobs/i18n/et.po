@@ -3,8 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Bistra Kumanova <b.kumanova@creato.bg>, 2015
-# Plamen Petkov <mcplamen@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
@@ -12,49 +10,49 @@ msgstr ""
 "POT-Creation-Date: 2017-06-28 18:59+0200\n"
 "PO-Revision-Date: 2017-06-28 17:04+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
-"Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
+"Language-Team: Estonian (http://www.transifex.com/aimeos/aimeos-core/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: bg\n"
+"Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
-msgstr "Класът \"%1$s\" не изпълнява интерфейса \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" not available"
-msgstr "Класът \"%1$s\" не е наличен"
+msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr "Класът \"%1$s\" не е намерен"
+msgstr ""
 
 #, php-format
 msgid "Controller path is empty"
-msgstr "Не е указан път към контролера"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr "Недопустими символи в името на класа \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr "Невалиден контролер \"%1$s\" в \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid domain \"%1$s\""
-msgstr "Невалиден домейн \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid factory \"%1$s\""
-msgstr "Невалидна фабрика \"%1$s\""
+msgstr "factory \"%1$s\" on vigane"
 
 #, php-format
 msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr "Не е намерен тип на елемент за \"%1$s/%2$s\" в \"%3$s\""
+msgstr "Kategooriast \"%3$s\" ei leitud ühtegi toodet nimega \"%1$s/%2$s\""
 
 #, php-format
 msgid "Unable to call method \"%1$s\""
-msgstr "Невъзможно е да се извика метод \"%1$s\""
+msgstr ""

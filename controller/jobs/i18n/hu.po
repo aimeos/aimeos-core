@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 12:08+0100\n"
-"PO-Revision-Date: 2017-01-03 11:21+0000\n"
+"POT-Creation-Date: 2017-06-28 18:59+0200\n"
+"PO-Revision-Date: 2017-06-28 17:04+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Hungarian (http://www.transifex.com/aimeos/aimeos-core/language/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -17,133 +17,42 @@ msgstr ""
 "Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid ""
-"Authorized payments of orders will be captured after dispatching or after a "
-"configurable amount of time"
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr ""
 
-msgid "Batch update of payment/delivery status"
-msgstr ""
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "A következő osztály nem elérhető: \"%1$s\""
 
-msgid "Cache cleanup"
-msgstr ""
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "A következő osztály nem található: \"%1$s\""
 
-msgid "Capture authorized payments"
-msgstr ""
-
-msgid "Catalog index optimization"
-msgstr ""
-
-msgid "Catalog index rebuild"
-msgstr ""
-
-msgid "Creates a product site map for search engines"
-msgstr ""
-
-msgid "Creates bought together product suggestions"
-msgstr ""
-
-msgid ""
-"Deletes unfinished orders an makes their products and coupon codes available"
-" again"
-msgstr ""
-
-msgid "Deletes unpaid orders to keep the database clean"
-msgstr ""
-
-msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr ""
-
-msgid "Exports all available products"
-msgstr ""
-
-msgid "Imports new and updates existing products from CSV files"
-msgstr ""
-
-msgid "Index optimization"
-msgstr ""
-
-msgid "Index rebuild"
-msgstr ""
+#, php-format
+msgid "Controller path is empty"
+msgstr "A kontroller útvonal üres"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Érvénytelen karakter a/az \"%1$s\" osztály nevében"
 
 #, php-format
-msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
-msgstr ""
-
-msgid "Log cleanup"
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "No \"product.code\" column in CSV mapping found"
-msgstr ""
+msgid "Invalid domain \"%1$s\""
+msgstr "Érvénytelen domain: \"%1$s\""
 
-msgid "Optimizes the catalog index for searching products"
-msgstr ""
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Érvénytelen gyártó: \"%1$s\""
 
-msgid "Optimizes the index for searching products faster"
-msgstr ""
-
-msgid "Process order delivery services"
-msgstr ""
-
-msgid "Product export"
-msgstr ""
-
-msgid "Product import CSV"
-msgstr ""
-
-msgid "Product site map"
-msgstr ""
-
-msgid "Products bought together"
-msgstr ""
-
-msgid "Rebuilds the catalog index for searching products"
-msgstr ""
-
-msgid "Rebuilds the index for searching products"
-msgstr ""
-
-msgid "Removes the expired entries from the cache"
-msgstr ""
-
-msgid ""
-"Removes the old log entries from the database and archives them (optional)"
-msgstr ""
-
-msgid "Removes unfinished orders"
-msgstr ""
-
-msgid "Removes unpaid orders"
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr ""
 
 #, php-format
-msgid "Required mapping key \"%1$s\" is missing or contains no array"
-msgstr ""
-
-msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr ""
-
-#, php-format
-msgid "Started product import from \"%1$s\" (%2$s)"
-msgstr ""
-
-#, php-format
-msgid "Unable to import product with code \"%1$s\": %2$s"
-msgstr ""
-
-#, php-format
-msgid "Unable to move imported file"
-msgstr ""
-
-#, php-format
-msgid "aimeos-products-%d.xml"
-msgstr ""
-
-#, php-format
-msgid "aimeos-sitemap-%d.xml"
-msgstr ""
+msgid "Unable to call method \"%1$s\""
+msgstr "Nem lehet, meghívni a \"%1$s\" eljárást"

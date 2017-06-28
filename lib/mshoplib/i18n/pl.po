@@ -9,19 +9,43 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 12:04+0100\n"
-"PO-Revision-Date: 2017-01-03 11:14+0000\n"
+"POT-Creation-Date: 2017-06-28 18:59+0200\n"
+"PO-Revision-Date: 2017-06-28 10:15+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>=14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+msgstr ""
 
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
 msgstr "Niedostępny adres w domenie \"%1$s\""
+
+#, php-format
+msgid "Address for type \"%1$s\" not available"
+msgstr ""
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
@@ -70,6 +94,10 @@ msgstr "W klasie \"%1$s\" nie zaimplementowano interfejsu \"%2$s\""
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Klasa \"%1$s\" nie dostępna"
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than 32 characters"
+msgstr ""
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
@@ -334,6 +362,10 @@ msgid "No item with \"%2$s\" in \"%1$s\" found"
 msgstr ""
 
 #, php-format
+msgid "No order for ID \"%1$s\" found"
+msgstr ""
+
+#, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
 msgstr "Produkt ID \"%1$s\" nie ma ceny lub niedostępny kod produktu \"%2$s\""
 
@@ -375,6 +407,10 @@ msgstr ""
 
 #, php-format
 msgid "Not a string"
+msgstr ""
+
+#, php-format
+msgid "Not a time"
 msgstr ""
 
 #, php-format
@@ -477,6 +513,10 @@ msgstr "Nie dostępna cena przy podanej ilości \"%1$d\""
 #, php-format
 msgid "Price item not available"
 msgstr "Nie dostępna cena pozycji"
+
+#, php-format
+msgid "Process object not available"
+msgstr ""
 
 #, php-format
 msgid ""
@@ -597,6 +637,14 @@ msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 msgstr "Typ parametru konfiguracji z kluczem \"%1$s\" musi być typu \"%2$s\""
 
 #, php-format
+msgid "Time value after \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Time value before \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "Total results value not found"
 msgstr "Nie znaleziono łącznych wyników"
 
@@ -607,6 +655,10 @@ msgstr "Nie znaleziono korzenia drzewa o kodzie \"%1$s\" w \"%2$s\""
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
 msgstr "Nie znaleziono pozycji z ID \"%1$s\" w \"%2$s\""
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "Nie można wywołać metody \"%1$s\""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""

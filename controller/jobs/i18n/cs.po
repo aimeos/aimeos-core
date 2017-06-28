@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 12:08+0100\n"
-"PO-Revision-Date: 2017-01-03 11:21+0000\n"
+"POT-Creation-Date: 2017-06-28 18:59+0200\n"
+"PO-Revision-Date: 2017-06-28 17:04+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -18,133 +18,42 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-msgid ""
-"Authorized payments of orders will be captured after dispatching or after a "
-"configurable amount of time"
-msgstr "Potvrzené platby objednávek budou získány po odeslání nebo nastavitelném časovém intervalu"
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Třída \"%1$s\" neimplementuje rozhraní \"%2$s\""
 
-msgid "Batch update of payment/delivery status"
-msgstr "Dávková aktualizace plateb/objednávek"
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Třída \"%1$s\" není k dispozici"
 
-msgid "Cache cleanup"
-msgstr "Vymazat mezipaměť"
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Třída \"%1$s\" nenalezena"
 
-msgid "Capture authorized payments"
-msgstr "Načíst autorizované platby"
-
-msgid "Catalog index optimization"
-msgstr "Optimalizace indexu katalogu"
-
-msgid "Catalog index rebuild"
-msgstr "Znovu sestavit index katalogu"
-
-msgid "Creates a product site map for search engines"
-msgstr ""
-
-msgid "Creates bought together product suggestions"
-msgstr ""
-
-msgid ""
-"Deletes unfinished orders an makes their products and coupon codes available"
-" again"
-msgstr ""
-
-msgid "Deletes unpaid orders to keep the database clean"
-msgstr ""
-
-msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr ""
-
-msgid "Exports all available products"
-msgstr ""
-
-msgid "Imports new and updates existing products from CSV files"
-msgstr ""
-
-msgid "Index optimization"
-msgstr ""
-
-msgid "Index rebuild"
-msgstr ""
+#, php-format
+msgid "Controller path is empty"
+msgstr "Není nastavena cesta kontroléru"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Zakázané znaky ve jméně třídy \"%1$s\""
 
 #, php-format
-msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
-msgstr ""
-
-msgid "Log cleanup"
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
 msgstr ""
 
 #, php-format
-msgid "No \"product.code\" column in CSV mapping found"
-msgstr ""
-
-msgid "Optimizes the catalog index for searching products"
-msgstr ""
-
-msgid "Optimizes the index for searching products faster"
-msgstr ""
-
-msgid "Process order delivery services"
-msgstr ""
-
-msgid "Product export"
-msgstr ""
-
-msgid "Product import CSV"
-msgstr ""
-
-msgid "Product site map"
-msgstr ""
-
-msgid "Products bought together"
-msgstr ""
-
-msgid "Rebuilds the catalog index for searching products"
-msgstr ""
-
-msgid "Rebuilds the index for searching products"
-msgstr ""
-
-msgid "Removes the expired entries from the cache"
-msgstr ""
-
-msgid ""
-"Removes the old log entries from the database and archives them (optional)"
-msgstr ""
-
-msgid "Removes unfinished orders"
-msgstr ""
-
-msgid "Removes unpaid orders"
-msgstr ""
+msgid "Invalid domain \"%1$s\""
+msgstr "Neplatná doména \"%1$s\""
 
 #, php-format
-msgid "Required mapping key \"%1$s\" is missing or contains no array"
-msgstr ""
-
-msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr ""
+msgid "Invalid factory \"%1$s\""
+msgstr "Neplatná továrna \"%1$s\""
 
 #, php-format
-msgid "Started product import from \"%1$s\" (%2$s)"
-msgstr ""
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr "Nenalezen žádný typ položky pro \"%1$s/%2$s\" v \"%3$s\""
 
 #, php-format
-msgid "Unable to import product with code \"%1$s\": %2$s"
-msgstr ""
-
-#, php-format
-msgid "Unable to move imported file"
-msgstr ""
-
-#, php-format
-msgid "aimeos-products-%d.xml"
-msgstr ""
-
-#, php-format
-msgid "aimeos-sitemap-%d.xml"
-msgstr ""
+msgid "Unable to call method \"%1$s\""
+msgstr "Nelze nazvat metodu \"%1$s\""

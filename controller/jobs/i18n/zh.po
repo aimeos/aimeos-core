@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 12:08+0100\n"
-"PO-Revision-Date: 2017-01-03 11:21+0000\n"
+"POT-Creation-Date: 2017-06-28 18:59+0200\n"
+"PO-Revision-Date: 2017-06-28 17:04+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
@@ -18,133 +18,42 @@ msgstr ""
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-msgid ""
-"Authorized payments of orders will be captured after dispatching or after a "
-"configurable amount of time"
-msgstr "已授權的訂單付款將會在dispatching或是配置時間過後被獲取"
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "class \"%1$s\" 沒有實裝界面 \"%2$s\""
 
-msgid "Batch update of payment/delivery status"
-msgstr "批次更新 支付/配送 狀態"
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "class \"%1$s\" 無法使用"
 
-msgid "Cache cleanup"
-msgstr "清除快取"
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "找不到class \"%1$s\""
 
-msgid "Capture authorized payments"
-msgstr "獲取已授權完成的支付"
-
-msgid "Catalog index optimization"
-msgstr "型錄索引最佳化"
-
-msgid "Catalog index rebuild"
-msgstr "型錄索引重新建立"
-
-msgid "Creates a product site map for search engines"
-msgstr "創建供搜尋引擎使用的商品網站地圖"
-
-msgid "Creates bought together product suggestions"
-msgstr "創建一起購買商品推薦"
-
-msgid ""
-"Deletes unfinished orders an makes their products and coupon codes available"
-" again"
-msgstr "刪除未完成的訂單讓商品以及優惠券可再次使用"
-
-msgid "Deletes unpaid orders to keep the database clean"
-msgstr "刪除未付款的訂單"
-
-msgid "Executes payment or delivery service providers that uses batch updates"
-msgstr "執行使用批次更新的支付或配送服務提供者"
-
-msgid "Exports all available products"
-msgstr "匯出所有可用商品"
-
-msgid "Imports new and updates existing products from CSV files"
-msgstr "從CSV匯入新的商品並更新既有商品"
-
-msgid "Index optimization"
-msgstr ""
-
-msgid "Index rebuild"
-msgstr ""
+#, php-format
+msgid "Controller path is empty"
+msgstr "controller路徑為空"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "class名稱 \"%1$s\" 包含無效的字符"
 
 #, php-format
-msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
-msgstr "在 \"%1$s\" 中包含無效的商品線 %2$d/%3$d"
-
-msgid "Log cleanup"
-msgstr "清除log"
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr "在 \"%2$s\" 之中包含無效的controller \"%1$s\""
 
 #, php-format
-msgid "No \"product.code\" column in CSV mapping found"
-msgstr "在CSV找不到 \"product.code\" 欄位"
-
-msgid "Optimizes the catalog index for searching products"
-msgstr "最佳化搜尋商品的型錄索引"
-
-msgid "Optimizes the index for searching products faster"
-msgstr ""
-
-msgid "Process order delivery services"
-msgstr "處理訂單配送服務"
-
-msgid "Product export"
-msgstr "商品匯出"
-
-msgid "Product import CSV"
-msgstr "商品匯入CSV"
-
-msgid "Product site map"
-msgstr "商品網站地圖"
-
-msgid "Products bought together"
-msgstr "一起購買商品"
-
-msgid "Rebuilds the catalog index for searching products"
-msgstr "重建搜尋商品用的型錄索引"
-
-msgid "Rebuilds the index for searching products"
-msgstr ""
-
-msgid "Removes the expired entries from the cache"
-msgstr "從快取中移除過期的條目"
-
-msgid ""
-"Removes the old log entries from the database and archives them (optional)"
-msgstr "從資料庫移除舊的log條目並將其封存(選用)"
-
-msgid "Removes unfinished orders"
-msgstr "移除未完成的訂單"
-
-msgid "Removes unpaid orders"
-msgstr "移除未付款的訂單"
+msgid "Invalid domain \"%1$s\""
+msgstr "無效的網域 \"%1$s\""
 
 #, php-format
-msgid "Required mapping key \"%1$s\" is missing or contains no array"
-msgstr "獲取的mapping當中的key \"%1$s\" 遺失 或是 沒有包含任何陣列"
-
-msgid "Sends paid orders to the ERP system or logistic partner"
-msgstr "發送已支付的訂單到ERP系統或是物流合作夥伴"
+msgid "Invalid factory \"%1$s\""
+msgstr "無效的factory \"%1$s\""
 
 #, php-format
-msgid "Started product import from \"%1$s\" (%2$s)"
-msgstr "開始從 \"%1$s\" (%2$s) 進行商品匯入"
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr "在 \"%3$s\" 中沒有找到類型項目\"%1$s/%2$s\""
 
 #, php-format
-msgid "Unable to import product with code \"%1$s\": %2$s"
-msgstr "無法匯入代碼為 \"%1$s\": %2$s 的商品"
-
-#, php-format
-msgid "Unable to move imported file"
-msgstr "無法移動匯入的檔案"
-
-#, php-format
-msgid "aimeos-products-%d.xml"
-msgstr "aimeos-products-%d.xml"
-
-#, php-format
-msgid "aimeos-sitemap-%d.xml"
-msgstr "aimeos-sitemap-%d.xml"
+msgid "Unable to call method \"%1$s\""
+msgstr "無法呼叫method \"%1$s\""

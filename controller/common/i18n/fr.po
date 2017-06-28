@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 12:04+0100\n"
-"PO-Revision-Date: 2016-12-12 14:39+0000\n"
+"POT-Creation-Date: 2017-06-28 18:59+0200\n"
+"PO-Revision-Date: 2017-06-28 17:07+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: French (http://www.transifex.com/aimeos/aimeos-core/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,14 @@ msgstr "Classe \"%1$s\" indisponible"
 #, php-format
 msgid "Class \"%1$s\" not found"
 msgstr "Classe \"%1$s\" non trouvée"
+
+#, php-format
+msgid "Downloading file \"%1$s\" failed"
+msgstr ""
+
+#, php-format
+msgid "File \"%1$s\" not found"
+msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""

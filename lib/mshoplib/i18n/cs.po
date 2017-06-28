@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 12:04+0100\n"
-"PO-Revision-Date: 2017-01-03 11:14+0000\n"
+"POT-Creation-Date: 2017-06-28 18:59+0200\n"
+"PO-Revision-Date: 2017-06-28 10:15+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -18,9 +18,33 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid ""
+"%1$s\n"
+"%2$s\n"
+"%3$s %4$s\n"
+"%5$s\n"
+"%6$s %7$s\n"
+"%8$s %9$s\n"
+"%10$s\n"
+"%11$s\n"
+"%12$s\n"
+"%13$s\n"
+msgstr ""
+
 #, php-format
 msgid "Address for domain \"%1$s\" not available"
 msgstr "Adresa pro doménu \"%1$s\" není k dispozici"
+
+#, php-format
+msgid "Address for type \"%1$s\" not available"
+msgstr ""
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
@@ -69,6 +93,10 @@ msgstr "Třída \"%1$s\" does not implement interface \"%2$s\""
 #, php-format
 msgid "Class \"%1$s\" not available"
 msgstr "Třída \"%1$s\" není k dispozici"
+
+#, php-format
+msgid "Code \"%1$s\" must not be longer than 32 characters"
+msgstr ""
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
@@ -333,6 +361,10 @@ msgid "No item with \"%2$s\" in \"%1$s\" found"
 msgstr ""
 
 #, php-format
+msgid "No order for ID \"%1$s\" found"
+msgstr ""
+
+#, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
 msgstr ""
 
@@ -374,6 +406,10 @@ msgstr ""
 
 #, php-format
 msgid "Not a string"
+msgstr ""
+
+#, php-format
+msgid "Not a time"
 msgstr ""
 
 #, php-format
@@ -475,6 +511,10 @@ msgstr ""
 
 #, php-format
 msgid "Price item not available"
+msgstr ""
+
+#, php-format
+msgid "Process object not available"
 msgstr ""
 
 #, php-format
@@ -596,6 +636,14 @@ msgid "The type of the configuration option with key \"%1$s\" must be \"%2$s\""
 msgstr ""
 
 #, php-format
+msgid "Time value after \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Time value before \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "Total results value not found"
 msgstr ""
 
@@ -606,6 +654,10 @@ msgstr ""
 #, php-format
 msgid "Type item with ID \"%1$s\" in \"%2$s\" not found"
 msgstr ""
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "Nelze nazvat metodu \"%1$s\""
 
 #, php-format
 msgid "Unable to sort public holidays: \"%1$s\""
