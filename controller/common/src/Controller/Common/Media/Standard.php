@@ -193,7 +193,7 @@ class Standard
 			{
 				if( ( $content = file_get_contents( $path ) ) === false )
 				{
-					$msg = sprintf( 'Download file "%1$s" using file_get_contents failed', $path );
+					$msg = sprintf( 'Downloading file "%1$s" failed', $path );
 					throw new \Aimeos\Controller\Common\Exception( $msg );
 				}
 
