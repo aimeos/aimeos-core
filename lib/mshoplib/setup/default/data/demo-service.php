@@ -10,8 +10,68 @@ return array(
 
 	// delivery items
 	array(
+		'code' => 'demo-pickup', 'type' => 'delivery', 'label' => 'Click & Collect',
+		'provider' => 'Manual,Time,Supplier', 'position' => 0, 'status' => 1, 'config' => [],
+		'text' => array(
+			array(
+				'label' => 'Demo short/de: Abholung vor Ort',
+				'content' => 'Abholung vor Ort',
+				'type' => 'short', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo long/de: Abholung vor Ort',
+				'content' => 'Abholung vor Ort bei einem unserer Läden',
+				'type' => 'long', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo short/en: Local pick-up',
+				'content' => 'Local pick-up',
+				'type' => 'short', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo long/en: Local pick-up',
+				'content' => 'Pick-up at one of our local stores',
+				'type' => 'long', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'price' => array(
+			array(
+				'label' => 'Demo: DHL',
+				'value' => '0.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: DHL',
+				'value' => '0.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '0.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'media' => array(
+			array(
+				'label' => 'Demo: dhl.png', 'mimetype' => 'image/png',
+				'url' => 'http://demo.aimeos.org/media/service/pickup.png',
+				'preview' => 'http://demo.aimeos.org/media/service/pickup.png',
+				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+	),
+	array(
 		'code' => 'demo-dhl', 'type' => 'delivery', 'label' => 'DHL',
-		'provider' => 'Manual,Reduction', 'position' => 0, 'status' => 1,
+		'provider' => 'Manual,Reduction', 'position' => 1, 'status' => 1,
 		'config' => array(
 			'reduction.basket-value-min' => array( 'EUR' => '200.00' ),
 			'reduction.percent' => 100,
@@ -75,7 +135,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-dhlexpress', 'type' => 'delivery', 'label' => 'DHL Express',
-		'provider' => 'Manual', 'config' => [], 'position' => 1, 'status' => 1,
+		'provider' => 'Manual', 'config' => [], 'position' => 2, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung am nächsten Tag',
@@ -135,7 +195,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-fedex', 'type' => 'delivery', 'label' => 'Fedex',
-		'provider' => 'Manual', 'config' => [], 'position' => 2, 'status' => 1,
+		'provider' => 'Manual', 'config' => [], 'position' => 3, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung innerhalb von drei Tagen',
