@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  * @package MShop
  * @subpackage Order
  */
@@ -26,14 +26,14 @@ class Standard
 		'order.id'=> array(
 			'code'=>'order.id',
 			'internalcode'=>'mord."id"',
-			'label'=>'Order invoice ID',
+			'label'=>'Invoice ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.siteid'=> array(
 			'code'=>'order.siteid',
 			'internalcode'=>'mord."siteid"',
-			'label'=>'Order invoice site ID',
+			'label'=>'Invoice site ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -41,7 +41,7 @@ class Standard
 		'order.baseid'=> array(
 			'code'=>'order.baseid',
 			'internalcode'=>'mord."baseid"',
-			'label'=>'Order base ID',
+			'label'=>'Invoice base ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -49,91 +49,95 @@ class Standard
 		'order.type'=> array(
 			'code'=>'order.type',
 			'internalcode'=>'mord."type"',
-			'label'=>'Order type',
+			'label'=>'Invoice type',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.datepayment'=> array(
 			'code'=>'order.datepayment',
 			'internalcode'=>'mord."datepayment"',
-			'label'=>'Order purchase date',
+			'label'=>'Purchase date',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.datedelivery'=> array(
 			'code'=>'order.datedelivery',
 			'internalcode'=>'mord."datedelivery"',
-			'label'=>'Order delivery date',
+			'label'=>'Delivery date',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.statusdelivery'=> array(
 			'code'=>'order.statusdelivery',
 			'internalcode'=>'mord."statusdelivery"',
-			'label'=>'Order delivery status',
+			'label'=>'Delivery status',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.statuspayment'=> array(
 			'code'=>'order.statuspayment',
 			'internalcode'=>'mord."statuspayment"',
-			'label'=>'Order payment status',
+			'label'=>'Payment status',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.relatedid'=> array(
 			'code'=>'order.relatedid',
 			'internalcode'=>'mord."relatedid"',
-			'label'=>'Order related order ID',
+			'label'=>'Related invoice ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.cdate'=> array(
 			'code'=>'order.cdate',
 			'internalcode'=>'mord."cdate"',
-			'label'=>'Order creation date',
+			'label'=>'Creation date',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'order.cmonth'=> array(
 			'code'=>'order.cmonth',
 			'internalcode'=>'mord."cmonth"',
-			'label'=>'Order creation month',
+			'label'=>'Creation month',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'order.cweek'=> array(
 			'code'=>'order.cweek',
 			'internalcode'=>'mord."cweek"',
-			'label'=>'Order creation week',
+			'label'=>'Creation week',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'order.chour'=> array(
 			'code'=>'order.chour',
 			'internalcode'=>'mord."chour"',
-			'label'=>'Order creation hour',
+			'label'=>'Creation hour',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'order.ctime'=> array(
 			'code'=>'order.ctime',
 			'internalcode'=>'mord."ctime"',
-			'label'=>'Order creation date/time',
+			'label'=>'Creation date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.mtime'=> array(
 			'code'=>'order.mtime',
 			'internalcode'=>'mord."mtime"',
-			'label'=>'Order modification date',
+			'label'=>'Modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.editor'=> array(
 			'code'=>'order.editor',
 			'internalcode'=>'mord."editor"',
-			'label'=>'Order editor',
+			'label'=>'Editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
