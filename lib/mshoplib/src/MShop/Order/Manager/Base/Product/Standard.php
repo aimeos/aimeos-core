@@ -161,7 +161,7 @@ class Standard
 		'order.base.product.taxflag' => array(
 			'code'=>'order.base.product.taxflag',
 			'internalcode'=>'mordbapr."taxflag"',
-			'label'=>'Product tax flag (0=net, 1=gross price)',
+			'label'=>'Product tax flag (0=net, 1=gross)',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),

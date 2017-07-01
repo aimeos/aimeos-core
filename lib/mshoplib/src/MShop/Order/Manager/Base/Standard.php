@@ -98,7 +98,7 @@ class Standard extends Base
 		'order.base.taxflag'=> array(
 			'code'=>'order.base.taxflag',
 			'internalcode'=>'mordba."taxflag"',
-			'label'=>'Order tax flag (0=net price, 1=gross price)',
+			'label'=>'Order tax flag (0=net, 1=gross)',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),

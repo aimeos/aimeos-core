@@ -123,7 +123,7 @@ class Standard
 		'order.base.service.taxflag' => array(
 			'code'=>'order.base.service.taxflag',
 			'internalcode'=>'mordbase."taxflag"',
-			'label'=>'Service tax flag (0=net, 1=gross price)',
+			'label'=>'Service tax flag (0=net, 1=gross)',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
