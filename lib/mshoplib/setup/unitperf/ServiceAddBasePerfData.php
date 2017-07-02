@@ -80,7 +80,7 @@ class ServiceAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 
 		for( $i = 0; $i < 100; $i++ )
 		{
-			$code = 'perf-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
+			$code = 'perf-pay-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
 
 			$item->setId( null );
 			$item->setCode( $code );
@@ -114,7 +114,7 @@ class ServiceAddBasePerfData extends \Aimeos\MW\Setup\Task\Base
 
 		for( $i = 0; $i < 100; $i++ )
 		{
-			$code = 'perf-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
+			$code = 'perf-ship-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
 
 			$item->setId( null );
 			$item->setCode( $code );
