@@ -661,7 +661,7 @@ class PayPalExpress
 			$lastPos = $product->getPosition() - 1;
 
 			$deliveryPrice = clone $price;
-			$deliveryPrices = $this->addPrice( $deliveryPrices, $deliveryPrice->setValue( '0.00' ) );
+			$deliveryPrices = $this->addPrice( $deliveryPrices, $deliveryPrice->setValue( '0.00' ), $product->getQuantity() );
 
 			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
 			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
@@ -756,9 +756,10 @@ class PayPalExpress
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface[] $prices Associative list of tax rates as key and price items as value
 	 * @param \Aimeos\MShop\Price\Item\Iface $price Price item that should be added
+	 * @param integer $quantity Product quantity
 	 * @return \Aimeos\MShop\Price\Item\Iface[] Updated list of price items
 	 */
-	protected function addPrice( array $prices, $price )
+	protected function addPrice( array $prices, $price, $quantity = 1 )
 	{
 		$taxrate = $price->getTaxRate();
 
@@ -768,7 +769,7 @@ class PayPalExpress
 			$prices[$taxrate]->setTaxRate( $taxrate );
 		}
 
-		$prices[$taxrate]->addItem( $price );
+		$prices[$taxrate]->addItem( $price, $quantity );
 
 		return $prices;
 	}
