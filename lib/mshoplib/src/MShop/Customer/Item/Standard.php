@@ -357,7 +357,7 @@ class Standard extends Base implements Iface
 	 */
 	protected function checkDateOnlyFormat( $date )
 	{
-		if( $date !== null )
+		if( $date !== null && $date !== '' )
 		{
 			if( preg_match( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9]$/', (string) $date ) !== 1 ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD" expected.', $date ) );
