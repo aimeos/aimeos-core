@@ -601,6 +601,7 @@ class PayPalExpress
 	 */
 	protected function getOrderDetails( \Aimeos\MShop\Order\Item\Base\Iface $orderBase )
 	{
+		$lastPos = 0;
 		$deliveryCosts = 0;
 		$deliveryPrices = array();
 		$values = $this->getAuthParameter();
@@ -626,7 +627,6 @@ class PayPalExpress
 
 		if( $this->getConfigValue( 'paypalexpress.product', true ) )
 		{
-			$lastPos = 0;
 			foreach( $orderBase->getProducts() as $product )
 			{
 				$price = $product->getPrice();
