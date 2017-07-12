@@ -637,65 +637,74 @@ class PayPalExpress
 		$deliveryPrices = [];
 		$values = $this->getAuthParameter();
 
-		try
+
+		if( $this->getConfigValue( 'paypalexpress.address', true ) )
 		{
-			$orderAddressDelivery = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
+			try
+			{
+				$orderAddressDelivery = $orderBase->getAddress( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-			/* setting up the address details */
-			$values['NOSHIPPING'] = $this->getConfigValue( array( 'paypalexpress.NoShipping' ), 1 );
-			$values['ADDROVERRIDE'] = $this->getConfigValue( array( 'paypalexpress.AddrOverride' ), 0 );
-			$values['PAYMENTREQUEST_0_SHIPTONAME'] = $orderAddressDelivery->getFirstName() . ' ' . $orderAddressDelivery->getLastName();
-			$values['PAYMENTREQUEST_0_SHIPTOSTREET'] = $orderAddressDelivery->getAddress1() . ' ' . $orderAddressDelivery->getAddress2() . ' ' . $orderAddressDelivery->getAddress3();
-			$values['PAYMENTREQUEST_0_SHIPTOCITY'] = $orderAddressDelivery->getCity();
-			$values['PAYMENTREQUEST_0_SHIPTOSTATE'] = $orderAddressDelivery->getState();
-			$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $orderAddressDelivery->getCountryId();
-			$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $orderAddressDelivery->getPostal();
-		}
-		catch( \Exception $e ) { ; } // If no address is available
-
-
-		$lastPos = 0;
-		foreach( $orderBase->getProducts() as $product )
-		{
-			$price = $product->getPrice();
-			$lastPos = $product->getPosition() - 1;
-
-			$deliveryPrice = clone $price;
-			$deliveryPrices = $this->addPrice( $deliveryPrices, $deliveryPrice->setValue( '0.00' ), $product->getQuantity() );
-
-			$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
-			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
-			$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = $product->getQuantity();
-			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $this->getAmount( $price, false );
+				/* setting up the address details */
+				$values['NOSHIPPING'] = $this->getConfigValue( array( 'paypalexpress.NoShipping' ), 1 );
+				$values['ADDROVERRIDE'] = $this->getConfigValue( array( 'paypalexpress.AddrOverride' ), 0 );
+				$values['PAYMENTREQUEST_0_SHIPTONAME'] = $orderAddressDelivery->getFirstName() . ' ' . $orderAddressDelivery->getLastName();
+				$values['PAYMENTREQUEST_0_SHIPTOSTREET'] = $orderAddressDelivery->getAddress1() . ' ' . $orderAddressDelivery->getAddress2() . ' ' . $orderAddressDelivery->getAddress3();
+				$values['PAYMENTREQUEST_0_SHIPTOCITY'] = $orderAddressDelivery->getCity();
+				$values['PAYMENTREQUEST_0_SHIPTOSTATE'] = $orderAddressDelivery->getState();
+				$values['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE'] = $orderAddressDelivery->getCountryId();
+				$values['PAYMENTREQUEST_0_SHIPTOZIP'] = $orderAddressDelivery->getPostal();
+			}
+			catch( \Exception $e ) { ; } // If no address is available
 		}
 
 
-		$price = $orderBase->getService( 'payment' )->getPrice();
-		if( ( $paymentCosts = $this->getAmount( $price ) ) > '0.00' )
+		if( $this->getConfigValue( 'paypalexpress.product', true ) )
 		{
-			$lastPos++;
-			$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
-			$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
-			$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
+			$lastPos = 0;
+			foreach( $orderBase->getProducts() as $product )
+			{
+				$price = $product->getPrice();
+				$lastPos = $product->getPosition() - 1;
+
+				$deliveryPrice = clone $price;
+				$deliveryPrices = $this->addPrice( $deliveryPrices, $deliveryPrice->setValue( '0.00' ), $product->getQuantity() );
+
+				$values['L_PAYMENTREQUEST_0_NUMBER' . $lastPos] = $product->getId();
+				$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $product->getName();
+				$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = $product->getQuantity();
+				$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $this->getAmount( $price, false );
+			}
 		}
 
 
-		try
+		if( $this->getConfigValue( 'paypalexpress.service', true ) )
 		{
-			$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
-			$price = $orderServiceDeliveryItem->getPrice();
-			$deliveryPrices = $this->addPrice( $deliveryPrices, $price );
-
-			foreach( $deliveryPrices as $priceItem ) {
-				$deliveryCosts += $this->getAmount( $priceItem );
+			$price = $orderBase->getService( 'payment' )->getPrice();
+			if( ( $paymentCosts = $this->getAmount( $price ) ) > '0.00' )
+			{
+				$lastPos++;
+				$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
+				$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
+				$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
 			}
 
-			$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $deliveryCosts, 2, '.', '' );
-			$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getCode();
-			$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getName();
-			$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
+			try
+			{
+				$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
+				$price = $orderServiceDeliveryItem->getPrice();
+				$deliveryPrices = $this->addPrice( $deliveryPrices, $price );
+
+				foreach( $deliveryPrices as $priceItem ) {
+					$deliveryCosts += $this->getAmount( $priceItem );
+				}
+
+				$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $deliveryCosts, 2, '.', '' );
+				$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getCode();
+				$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getName();
+				$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
+			}
+			catch( \Exception $e ) { ; } // If no delivery service is available
 		}
-		catch( \Exception $e ) { ; } // If no delivery service is available
 
 
 		$price = $orderBase->getPrice();
