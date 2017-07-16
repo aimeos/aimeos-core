@@ -109,10 +109,6 @@ abstract class Base
 	 */
 	protected function addGroups( \Aimeos\MShop\Customer\Item\Iface $item )
 	{
-		if( count( $item->getGroups() ) === 0 ) {
-			return;
-		}
-
 		$listMap = [];
 		$manager = $this->getObject()->getSubManager( 'lists' );
 		$typeManager = $manager->getSubManager( 'type' );
