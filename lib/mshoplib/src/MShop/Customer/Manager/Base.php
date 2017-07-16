@@ -111,15 +111,6 @@ abstract class Base
 	{
 		$listMap = [];
 		$manager = $this->getObject()->getSubManager( 'lists' );
-		$typeManager = $manager->getSubManager( 'type' );
-		$typeId = $typeManager->findItem( 'default', [], 'customer/group', 'default' )->getId();
-
-		$listItem = $manager->createItem();
-		$listItem->setParentId( $item->getId() );
-		$listItem->setDomain( 'customer/group' );
-		$listItem->setTypeId( $typeId );
-		$listItem->setStatus( 1 );
-
 
 		$search = $manager->createSearch();
 		$expr = array(
@@ -136,21 +127,33 @@ abstract class Base
 		}
 
 
-		$pos = count( $listMap );
-
-		foreach( $item->getGroups() as $gid )
+		if( !empty( $item->getGroups() ) )
 		{
-			if( isset( $listMap[$gid] ) )
+			$typeManager = $manager->getSubManager( 'type' );
+			$typeId = $typeManager->findItem( 'default', [], 'customer/group', 'default' )->getId();
+
+			$listItem = $manager->createItem();
+			$listItem->setParentId( $item->getId() );
+			$listItem->setDomain( 'customer/group' );
+			$listItem->setTypeId( $typeId );
+			$listItem->setStatus( 1 );
+
+			$pos = count( $listMap ) ;
+
+			foreach( $item->getGroups() as $gid )
 			{
-				unset( $listMap[$gid] );
-				continue;
+				if( isset( $listMap[$gid] ) )
+				{
+					unset( $listMap[$gid] );
+					continue;
+				}
+
+				$listItem->setId( null );
+				$listItem->setRefId( $gid );
+				$listItem->setPosition( $pos++ );
+
+				$manager->saveItem( $listItem, false );
 			}
-
-			$listItem->setId( null );
-			$listItem->setRefId( $gid );
-			$listItem->setPosition( $pos++ );
-
-			$manager->saveItem( $listItem, false );
 		}
 
 		$manager->deleteItems( $listMap );
