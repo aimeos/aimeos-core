@@ -127,7 +127,7 @@ abstract class Base
 		}
 
 
-		if( !empty( $item->getGroups() ) )
+		if( $item->getGroups() === [] )
 		{
 			$typeManager = $manager->getSubManager( 'type' );
 			$typeId = $typeManager->findItem( 'default', [], 'customer/group', 'default' )->getId();
