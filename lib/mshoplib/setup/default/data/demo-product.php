@@ -35,17 +35,24 @@ return array(
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
+				'label' => 'Demo name/en: Demo article',
+				'content' => 'Demo article',
+				'type' => 'name', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
 				'label' => 'Demo short/en: This is the short description',
 				'content' => 'This is the short description of the demo article.',
 				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo long/en: Add a detailed description',
 				'content' => 'Add a detailed description of the demo article that may be a little bit longer.',
 				'type' => 'long', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
+				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
@@ -572,17 +579,24 @@ return array(
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
+				'label' => 'Demo name/en: Demo selection article',
+				'content' => 'Demo selection article',
+				'type' => 'name', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
 				'label' => 'Demo short/en: This is the short description',
 				'content' => 'This is the short description of the selection demo article.',
 				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo long/en: Add a detailed description',
 				'content' => 'Add a detailed description of the selection demo article that may be a little bit longer.',
 				'type' => 'long', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
+				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
@@ -831,17 +845,24 @@ return array(
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
+				'label' => 'Demo name/en: Demo bundle article',
+				'content' => 'Demo bundle article',
+				'type' => 'name', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
 				'label' => 'Demo short/en: This is the short description',
 				'content' => 'This is the short description of the bundle demo article.',
 				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 			array(
 				'label' => 'Demo long/en: Add a detailed description',
 				'content' => 'Add a detailed description of the bundle demo article that may be a little bit longer.',
 				'type' => 'long', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
+				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
