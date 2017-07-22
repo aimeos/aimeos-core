@@ -314,18 +314,19 @@ class Standard extends Base implements Iface
 
 		$price = $this->price;
 
+		$list['order.base.service.type'] = $this->getType();
 		$list['order.base.service.code'] = $this->getCode();
-		$list['order.base.service.serviceid'] = $this->getServiceId();
 		$list['order.base.service.name'] = $this->getName();
 		$list['order.base.service.mediaurl'] = $this->getMediaUrl();
-		$list['order.base.service.type'] = $this->getType();
 		$list['order.base.service.price'] = $price->getValue();
 		$list['order.base.service.costs'] = $price->getCosts();
 		$list['order.base.service.rebate'] = $price->getRebate();
 		$list['order.base.service.taxrate'] = $price->getTaxRate();
 
-		if( $private === true ) {
+		if( $private === true )
+		{
 			$list['order.base.service.baseid'] = $this->getBaseId();
+			$list['order.base.service.serviceid'] = $this->getServiceId();
 		}
 
 		return $list;

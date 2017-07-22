@@ -180,8 +180,8 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['order.base.coupon.productid'] = $this->getProductId();
 		$list['order.base.coupon.code'] = $this->getCode();
+		$list['order.base.coupon.productid'] = $this->getProductId();
 
 		if( $private === true ) {
 			$list['order.base.coupon.baseid'] = $this->getBaseId();

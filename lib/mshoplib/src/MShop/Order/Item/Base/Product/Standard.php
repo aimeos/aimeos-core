@@ -676,24 +676,24 @@ class Standard extends Base implements Iface
 		$list['order.base.product.type'] = $this->getType();
 		$list['order.base.product.stocktype'] = $this->getStockType();
 		$list['order.base.product.suppliercode'] = $this->getSupplierCode();
-		$list['order.base.product.productid'] = $this->getProductId();
 		$list['order.base.product.prodcode'] = $this->getProductCode();
+		$list['order.base.product.productid'] = $this->getProductId();
+		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.name'] = $this->getName();
 		$list['order.base.product.mediaurl'] = $this->getMediaUrl();
-		$list['order.base.product.target'] = $this->getTarget();
-		$list['order.base.product.position'] = $this->getPosition();
 		$list['order.base.product.price'] = $this->price->getValue();
 		$list['order.base.product.costs'] = $this->price->getCosts();
 		$list['order.base.product.rebate'] = $this->price->getRebate();
 		$list['order.base.product.taxrate'] = $this->price->getTaxRate();
-		$list['order.base.product.quantity'] = $this->getQuantity();
 		$list['order.base.product.status'] = $this->getStatus();
-		$list['order.base.product.flags'] = $this->getFlags();
+		$list['order.base.product.position'] = $this->getPosition();
 
 		if( $private === true )
 		{
 			$list['order.base.product.baseid'] = $this->getBaseId();
 			$list['order.base.product.ordprodid'] = $this->getOrderProductId();
+			$list['order.base.product.target'] = $this->getTarget();
+			$list['order.base.product.flags'] = $this->getFlags();
 		}
 
 		return $list;

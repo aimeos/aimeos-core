@@ -337,13 +337,14 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['order.base.product.attribute.attrid'] = $this->getAttributeId();
 		$list['order.base.product.attribute.type'] = $this->getType();
 		$list['order.base.product.attribute.code'] = $this->getCode();
-		$list['order.base.product.attribute.value'] = $this->getValue();
 		$list['order.base.product.attribute.name'] = $this->getName();
+		$list['order.base.product.attribute.value'] = $this->getValue();
 
-		if( $private === true ) {
+		if( $private === true )
+		{
+			$list['order.base.product.attribute.attrid'] = $this->getAttributeId();
 			$list['order.base.product.attribute.parentid'] = $this->getParentId();
 		}
 

@@ -416,10 +416,11 @@ class Standard
 		$list['product.datestart'] = $this->getDateStart();
 		$list['product.dateend'] = $this->getDateEnd();
 		$list['product.config'] = $this->getConfig();
-		$list['product.target'] = $this->getTarget();
 
-		if( $private === true ) {
+		if( $private === true )
+		{
 			$list['product.typeid'] = $this->getTypeId();
+			$list['product.target'] = $this->getTarget();
 		}
 
 		return $list;

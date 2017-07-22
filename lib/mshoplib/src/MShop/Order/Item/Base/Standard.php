@@ -406,7 +406,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		$locale = $this->getLocale();
 
 		$list = array(
-			'order.base.id' => $this->getId(),
 			'order.base.customerid' => $this->getCustomerId(),
 			'order.base.sitecode' => $this->getSiteCode(),
 			'order.base.languageid' => $locale->getLanguageId(),
@@ -422,6 +421,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		if( $private === true )
 		{
+			$list['order.base.id'] = $this->getId();
 			$list['order.base.siteid'] = $this->getSiteId();
 			$list['order.base.mtime'] = $this->getTimeModified();
 			$list['order.base.ctime'] = $this->getTimeCreated();
