@@ -97,15 +97,17 @@ class CSV
 	 */
 	public function add( $data )
 	{
+		$data = (array) $data;
+		$list = array_fill( 0, max( array_keys( $data ) ), '' );
 		$enclosure = $this->enclosure;
 
-		foreach( (array) $data as $key => $entry )
+		foreach( $data as $pos => $entry )
 		{
 			$entry = str_replace( $this->lineend, $this->endsubst, $entry );
-			$data[$key] = $enclosure . str_replace( $enclosure, $this->escape . $enclosure, $entry ) . $enclosure;
+			$list[$pos] = $enclosure . str_replace( $enclosure, $this->escape . $enclosure, $entry ) . $enclosure;
 		}
 
-		if( fwrite( $this->fh, implode( $this->separator, $data ) . $this->lineend ) === false ) {
+		if( fwrite( $this->fh, implode( $this->separator, $list ) . $this->lineend ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unable to add content to file "%1$s"', $this->getName() ) );
 		}
 	}
