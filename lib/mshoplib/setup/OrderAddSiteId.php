@@ -74,6 +74,9 @@ class OrderAddSiteId extends \Aimeos\MW\Setup\Task\Base
 				WHERE t2.sitecode = t3.code AND t2.id = t4.baseid AND t1.ordservid = t4.id
 			'
 		),
+		'fe_users' => array(
+			'ALTER TABLE "fe_users" ADD "siteid" INTEGER NULL'
+		),
 	);
 
 
