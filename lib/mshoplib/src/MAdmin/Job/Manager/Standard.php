@@ -420,7 +420,7 @@ class Standard
 		try
 		{
 			$required = array( 'job' );
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ONE;
 
 			/** madmin/job/manager/standard/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

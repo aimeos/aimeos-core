@@ -433,7 +433,7 @@ class Standard
 		try
 		{
 			$required = array( 'log' );
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ONE;
 
 			/** madmin/log/manager/standard/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
