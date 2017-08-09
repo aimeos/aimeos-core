@@ -248,8 +248,8 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['coupon.code.count'] = $this->getCount();
 		$list['coupon.code.code'] = $this->getCode();
+		$list['coupon.code.count'] = $this->getCount();
 		$list['coupon.code.datestart'] = $this->getDateStart();
 		$list['coupon.code.dateend'] = $this->getDateEnd();
 
