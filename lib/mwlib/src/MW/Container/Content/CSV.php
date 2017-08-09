@@ -98,8 +98,12 @@ class CSV
 	public function add( $data )
 	{
 		$data = (array) $data;
-		$list = array_fill( 0, max( array_keys( $data ) ), '' );
+		$max = max( array_keys( $data ) );
 		$enclosure = $this->enclosure;
+
+		if( is_int( $max ) ) {
+			$list = array_fill( 0, $max, '' );
+		}
 
 		foreach( $data as $pos => $entry )
 		{
