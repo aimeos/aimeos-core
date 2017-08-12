@@ -29,6 +29,7 @@ class Standard
 			'label' => 'Service ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
 		),
 		'service.siteid' => array(
 			'code' => 'service.siteid',
@@ -46,31 +47,17 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'service.label' => array(
+			'code' => 'service.label',
+			'internalcode' => 'mser."label"',
+			'label' => 'Service label',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'service.code' => array(
 			'code' => 'service.code',
 			'internalcode' => 'mser."code"',
 			'label' => 'Service code',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'service.position' => array(
-			'code' => 'service.position',
-			'internalcode' => 'mser."pos"',
-			'label' => 'Service position',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'service.provider' => array(
-			'code' => 'service.provider',
-			'internalcode' => 'mser."provider"',
-			'label' => 'Service provider',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'service.config' => array(
-			'code' => 'service.config',
-			'internalcode' => 'mser."config"',
-			'label' => 'Service config',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -81,10 +68,38 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'service.label' => array(
-			'code' => 'service.label',
-			'internalcode' => 'mser."label"',
-			'label' => 'Service label',
+		'service.provider' => array(
+			'code' => 'service.provider',
+			'internalcode' => 'mser."provider"',
+			'label' => 'Service provider',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'service.datestart'=> array(
+			'code'=>'service.datestart',
+			'internalcode'=>'mser."start"',
+			'label'=>'Start date/time',
+			'type'=> 'datetime',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'service.dateend'=> array(
+			'code'=>'service.dateend',
+			'internalcode'=>'mser."end"',
+			'label'=>'End date/time',
+			'type'=> 'datetime',
+			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'service.position' => array(
+			'code' => 'service.position',
+			'internalcode' => 'mser."pos"',
+			'label' => 'Service position',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'service.config' => array(
+			'code' => 'service.config',
+			'internalcode' => 'mser."config"',
+			'label' => 'Service config',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -381,17 +396,19 @@ class Standard
 			$stmt->bind( 3, $item->getCode() );
 			$stmt->bind( 4, $item->getLabel() );
 			$stmt->bind( 5, $item->getProvider() );
-			$stmt->bind( 6, json_encode( $item->getConfig() ) );
-			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 8, $date ); // mtime
-			$stmt->bind( 9, $context->getEditor() );
-			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getDateStart() );
+			$stmt->bind( 7, $item->getDateEnd() );
+			$stmt->bind( 8, json_encode( $item->getConfig() ) );
+			$stmt->bind( 9, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 10, $date ); // mtime
+			$stmt->bind( 11, $context->getEditor() );
+			$stmt->bind( 12, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 13, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 11, $date ); // ctime
+				$stmt->bind( 13, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -744,8 +761,28 @@ class Standard
 	 */
 	public function createSearch( $default = false )
 	{
-		if( $default === true ) {
-			return $this->createSearchBase( 'service' );
+		if( $default === true )
+		{
+			$curDate = date( 'Y-m-d H:i:00', time() );
+			$object = $this->createSearchBase( 'service' );
+
+			$expr = array( $object->getConditions() );
+
+			$temp = array(
+				$object->compare( '==', 'service.datestart', null ),
+				$object->compare( '<=', 'service.datestart', $curDate ),
+			);
+			$expr[] = $object->combine( '||', $temp );
+
+			$temp = array(
+				$object->compare( '==', 'service.dateend', null ),
+				$object->compare( '>=', 'service.dateend', $curDate ),
+			);
+			$expr[] = $object->combine( '||', $temp );
+
+			$object->setConditions( $object->combine( '&&', $expr ) );
+
+			return $object;
 		}
 
 		return parent::createSearch();

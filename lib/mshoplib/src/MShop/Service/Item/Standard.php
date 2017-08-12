@@ -198,6 +198,70 @@ class Standard
 
 
 	/**
+	 * Returns the starting point of time, in which the service is available.
+	 *
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
+	 */
+	public function getDateStart()
+	{
+		if( isset( $this->values['service.datestart'] ) ) {
+			return (string) $this->values['service.datestart'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Sets a new starting point of time, in which the service is available.
+	 *
+	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setDateStart( $date )
+	{
+		if( $date === $this->getDateStart() ) { return $this; }
+
+		$this->values['service.datestart'] = $this->checkDateFormat( $date );
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the ending point of time, in which the service is available.
+	 *
+	 * @return string|null ISO date in YYYY-MM-DD hh:mm:ss format
+	 */
+	public function getDateEnd()
+	{
+		if( isset( $this->values['service.dateend'] ) ) {
+			return (string) $this->values['service.dateend'];
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Sets a new ending point of time, in which the service is available.
+	 *
+	 * @param string|null New ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setDateEnd( $date )
+	{
+		if( $date === $this->getDateEnd() ) { return $this; }
+
+		$this->values['service.dateend'] = $this->checkDateFormat( $date );
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the configuration values of the item
 	 *
 	 * @return array Configuration values
@@ -323,6 +387,8 @@ class Standard
 				case 'service.label': $this->setLabel( $value ); break;
 				case 'service.provider': $this->setProvider( $value ); break;
 				case 'service.position': $this->setPosition( $value ); break;
+				case 'service.datestart': $this->setDateStart( $value ); break;
+				case 'service.dateend': $this->setDateEnd( $value ); break;
 				case 'service.config': $this->setConfig( $value ); break;
 				case 'service.status': $this->setStatus( $value ); break;
 				default: $unknown[$key] = $value;
@@ -349,6 +415,8 @@ class Standard
 		$list['service.label'] = $this->getLabel();
 		$list['service.provider'] = $this->getProvider();
 		$list['service.position'] = $this->getPosition();
+		$list['service.datestart'] = $this->getDateStart();
+		$list['service.dateend'] = $this->getDateEnd();
 		$list['service.config'] = $this->getConfig();
 		$list['service.status'] = $this->getStatus();
 

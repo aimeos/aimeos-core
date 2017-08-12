@@ -257,10 +257,10 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_service" (
-						"pos", "typeid", "code", "label", "provider",
+						"pos", "typeid", "code", "label", "provider", "start", "end",
 						"config", "status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
@@ -268,7 +268,7 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_service"
 					SET "pos" = ?, "typeid" = ?, "code" = ?, "label" = ?, "provider" = ?,
-						"config" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						"start" = ?, "end" = ?, "config" = ?, "status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -278,6 +278,7 @@ return array(
 						mser."pos" AS "service.position", mser."typeid" AS "service.typeid",
 						mser."code" AS "service.code", mser."label" AS "service.label",
 						mser."provider" AS "service.provider", mser."config" AS "service.config",
+						mser."start" AS "service.datestart", mser."end" AS "service.dateend",
 						mser."status" AS "service.status", mser."mtime" AS "service.mtime",
 						mser."editor" AS "service.editor",	mser."ctime" AS "service.ctime"
 					FROM "mshop_service" AS mser
@@ -285,7 +286,8 @@ return array(
 					WHERE :cond
 					GROUP BY mser."id", mser."siteid", mser."pos", mser."typeid",
 						mser."code", mser."label", mser."provider", mser."config",
-						mser."status", mser."mtime", mser."editor",	mser."ctime"
+						mser."start", mser."end", mser."status",
+						mser."mtime", mser."ctime", mser."editor"
 						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start

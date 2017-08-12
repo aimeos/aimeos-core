@@ -41,6 +41,8 @@ return array(
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'provider', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
+			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', [] );
@@ -50,7 +52,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msser_id' );
 			$table->addUniqueIndex( array( 'siteid', 'code' ), 'unq_msser_siteid_code' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msser_sid_status' );
+			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_msser_sid_stat_start_end' );
 			$table->addIndex( array( 'siteid', 'provider' ), 'idx_msser_sid_prov' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msser_sid_code' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msser_sid_label' );

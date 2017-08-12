@@ -89,6 +89,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
 		$this->assertEquals( $item->getProvider(), $itemSaved->getProvider() );
 		$this->assertEquals( $item->getPosition(), $itemSaved->getPosition() );
+		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
+		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getConfig(), $itemSaved->getConfig() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
@@ -104,6 +106,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
 		$this->assertEquals( $itemExp->getProvider(), $itemUpd->getProvider() );
 		$this->assertEquals( $itemExp->getPosition(), $itemUpd->getPosition() );
+		$this->assertEquals( $itemExp->getDateStart(), $itemUpd->getDateStart() );
+		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getConfig(), $itemUpd->getConfig() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
@@ -160,6 +164,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'service.code', 'unitcode' );
 		$expr[] = $search->compare( '==', 'service.label', 'unitlabel' );
 		$expr[] = $search->compare( '==', 'service.provider', 'Standard' );
+		$expr[] = $search->compare( '==', 'service.datestart', null );
+		$expr[] = $search->compare( '==', 'service.dateend', null );
 		$expr[] = $search->compare( '~=', 'service.config', 'url' );
 		$expr[] = $search->compare( '==', 'service.status', 1 );
 		$expr[] = $search->compare( '>=', 'service.mtime', '1970-01-01 00:00:00' );

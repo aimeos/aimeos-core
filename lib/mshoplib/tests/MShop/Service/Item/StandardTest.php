@@ -27,6 +27,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'service.code' => 'wa34Hg',
 			'service.label' => 'deliveryObject',
 			'service.provider' => 'Standard',
+			'service.datestart' => '2000-01-01 00:00:00',
+			'service.dateend' => '2100-01-01 00:00:00',
 			'service.config' => array( 'url' => 'https://localhost/' ),
 			'service.status' => 0,
 			'service.mtime' => '2011-01-01 00:00:02',
@@ -49,6 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 541, $this->object->getId() );
 	}
 
+
 	public function testSetId()
 	{
 		$return = $this->object->setId( null );
@@ -58,15 +61,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
+
 	public function testGetPosition()
 	{
 		$this->assertEquals( 0, $this->object->getPosition() );
 	}
+
 
 	public function testSetPosition()
 	{
@@ -77,10 +83,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCode()
 	{
 		$this->assertEquals( 'wa34Hg', $this->object->getCode() );
 	}
+
 
 	public function testSetCode()
 	{
@@ -91,10 +99,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetProvider()
 	{
 		$this->assertEquals( 'Standard', $this->object->getProvider() );
 	}
+
 
 	public function testSetProvider()
 	{
@@ -105,10 +115,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetLabel()
 	{
 		$this->assertEquals( 'deliveryObject', $this->object->getLabel() );
 	}
+
 
 	public function testSetLabel()
 	{
@@ -118,6 +130,39 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'newName', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
+
+
+	public function testGetDateStart()
+	{
+		$this->assertEquals( '2000-01-01 00:00:00', $this->object->getDateStart() );
+	}
+
+
+	public function testSetDateStart()
+	{
+		$return = $this->object->setDateStart( '2010-04-22 06:22:22' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertEquals( '2010-04-22 06:22:22', $this->object->getDateStart() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
+	public function testGetDateEnd()
+	{
+		$this->assertEquals( '2100-01-01 00:00:00', $this->object->getDateEnd() );
+	}
+
+
+	public function testSetDateEnd()
+	{
+		$return = $this->object->setDateEnd( '2010-05-22 06:22:22' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertEquals( '2010-05-22 06:22:22', $this->object->getDateEnd() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
 
 	public function testGetStatus()
 	{
@@ -207,6 +252,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'service.code' => 'test',
 			'service.label' => 'test item',
 			'service.provider' => 'PayPal',
+			'service.datestart' => '2000-01-01 00:00:02',
+			'service.dateend' => '2100-01-01 00:00:01',
 			'service.config' => array( 'test' ),
 			'service.position' => 3,
 			'service.status' => 0,
@@ -222,6 +269,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['service.typeid'], $item->getTypeId() );
 		$this->assertEquals( $list['service.provider'], $item->getProvider() );
 		$this->assertEquals( $list['service.position'], $item->getPosition() );
+		$this->assertEquals( $list['service.datestart'], $item->getDateStart() );
+		$this->assertEquals( $list['service.dateend'], $item->getDateEnd() );
 		$this->assertEquals( $list['service.config'], $item->getConfig() );
 		$this->assertEquals( $list['service.status'], $item->getStatus() );
 		$this->assertNull( $item->getSiteId() );
@@ -245,6 +294,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['service.label'] );
 		$this->assertEquals( $this->object->getProvider(), $arrayObject['service.provider'] );
 		$this->assertEquals( $this->object->getPosition(), $arrayObject['service.position'] );
+		$this->assertEquals( $this->object->getDateStart(), $arrayObject['service.datestart'] );
+		$this->assertEquals( $this->object->getDateEnd(), $arrayObject['service.dateend'] );
 		$this->assertEquals( $this->object->getConfig(), $arrayObject['service.config'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['service.status'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['service.ctime'] );
