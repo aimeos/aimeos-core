@@ -196,6 +196,31 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'supplier.address.editor', $this->editor );
 
+		$expr[] = $search->compare( '!=', 'supplier.lists.id', null );
+		$expr[] = $search->compare( '!=', 'supplier.lists.siteid', null );
+		$expr[] = $search->compare( '>', 'supplier.lists.parentid', 0 );
+		$expr[] = $search->compare( '==', 'supplier.lists.domain', 'text' );
+		$expr[] = $search->compare( '>', 'supplier.lists.typeid', 0 );
+		$expr[] = $search->compare( '>', 'supplier.lists.refid', 0 );
+		$expr[] = $search->compare( '>=', 'supplier.lists.datestart', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'supplier.lists.dateend', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '!=', 'supplier.lists.config', null );
+		$expr[] = $search->compare( '>', 'supplier.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'supplier.lists.status', 1 );
+		$expr[] = $search->compare( '>=', 'supplier.lists.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'supplier.lists.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'supplier.lists.editor', $this->editor );
+
+		$expr[] = $search->compare( '!=', 'supplier.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'supplier.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'supplier.lists.type.code', 'default' );
+		$expr[] = $search->compare( '==', 'supplier.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '>', 'supplier.lists.type.label', '' );
+		$expr[] = $search->compare( '==', 'supplier.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'supplier.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'supplier.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'supplier.lists.type.editor', $this->editor );
+
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->object->searchItems( $search );
 		$this->assertEquals( 1, count( $result ) );
