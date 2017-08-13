@@ -12,7 +12,7 @@ namespace Aimeos\MShop\Supplier\Manager\Lists;
 
 
 /**
- * Default Supplier list manager for creating and handling Supplier list items.
+ * Default supplier list manager for creating and handling supplier list items.
  * @package MShop
  * @subpackage Supplier
  */
@@ -25,7 +25,7 @@ class Standard
 			'code'=>'supplier.lists.id',
 			'internalcode'=>'msupli."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_supplier_list" AS msupli ON ( msup."id" = msupli."parentid" )' ),
-			'label'=>'Supplier list ID',
+			'label'=>'List ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -33,7 +33,7 @@ class Standard
 		'supplier.lists.siteid'=> array(
 			'code'=>'supplier.lists.siteid',
 			'internalcode'=>'msupli."siteid"',
-			'label'=>'Supplier list site ID',
+			'label'=>'List site ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -41,86 +41,86 @@ class Standard
 		'supplier.lists.parentid'=> array(
 			'code'=>'supplier.lists.parentid',
 			'internalcode'=>'msupli."parentid"',
-			'label'=>'Supplier list parent ID',
+			'label'=>'List parent ID',
 			'type'=> 'integer',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'supplier.lists.typeid' => array(
+			'code'=>'supplier.lists.typeid',
+			'internalcode'=>'msupli."typeid"',
+			'label'=>'List type ID',
+			'type'=> 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'supplier.lists.domain'=> array(
 			'code'=>'supplier.lists.domain',
 			'internalcode'=>'msupli."domain"',
-			'label'=>'Supplier list domain',
+			'label'=>'List domain',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'supplier.lists.typeid' => array(
-			'code'=>'supplier.lists.typeid',
-			'internalcode'=>'msupli."typeid"',
-			'label'=>'Supplier list type ID',
-			'type'=> 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
 		),
 		'supplier.lists.refid'=> array(
 			'code'=>'supplier.lists.refid',
 			'internalcode'=>'msupli."refid"',
-			'label'=>'Supplier list reference ID',
+			'label'=>'List reference ID',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.lists.datestart' => array(
 			'code'=>'supplier.lists.datestart',
 			'internalcode'=>'msupli."start"',
-			'label'=>'Supplier list start date/time',
+			'label'=>'List start date/time',
 			'type'=> 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.lists.dateend' => array(
 			'code'=>'supplier.lists.dateend',
 			'internalcode'=>'msupli."end"',
-			'label'=>'Supplier list end date/time',
+			'label'=>'List end date/time',
 			'type'=> 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.lists.config' => array(
 			'code'=>'supplier.lists.config',
 			'internalcode'=>'msupli."config"',
-			'label'=>'Supplier list config',
+			'label'=>'List config',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.lists.position' => array(
 			'code'=>'supplier.lists.position',
 			'internalcode'=>'msupli."pos"',
-			'label'=>'Supplier list position',
+			'label'=>'List position',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'supplier.lists.status' => array(
 			'code'=>'supplier.lists.status',
 			'internalcode'=>'msupli."status"',
-			'label'=>'Supplier list status',
+			'label'=>'List status',
 			'type'=> 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'supplier.lists.ctime'=> array(
 			'code'=>'supplier.lists.ctime',
 			'internalcode'=>'msupli."ctime"',
-			'label'=>'Supplier list create date/time',
+			'label'=>'List create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.lists.mtime'=> array(
 			'code'=>'supplier.lists.mtime',
 			'internalcode'=>'msupli."mtime"',
-			'label'=>'Supplier list modification date/time',
+			'label'=>'List modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'supplier.lists.editor'=> array(
 			'code'=>'supplier.lists.editor',
 			'internalcode'=>'msupli."editor"',
-			'label'=>'Supplier list editor',
+			'label'=>'List editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -178,7 +178,7 @@ class Standard
 	public function getSearchAttributes( $withsub = true )
 	{
 		/** mshop/supplier/manager/lists/submanagers
-		 * List of manager names that can be instantiated by the Supplier list manager
+		 * List of manager names that can be instantiated by the supplier list manager
 		 *
 		 * Managers provide a generic interface to the underlying storage.
 		 * Each manager has or can have sub-managers caring about particular
@@ -201,7 +201,7 @@ class Standard
 
 
 	/**
-	 * Returns a new manager for Supplier list extensions.
+	 * Returns a new manager for supplier list extensions.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
 	 * @param string|null $name Name of the implementation, will be from configuration (or Default) if null
@@ -210,9 +210,9 @@ class Standard
 	public function getSubManager( $manager, $name = null )
 	{
 		/** mshop/supplier/manager/lists/name
-		 * Class name of the used Supplier list manager implementation
+		 * Class name of the used supplier list manager implementation
 		 *
-		 * Each default Supplier list manager can be replaced by an alternative imlementation.
+		 * Each default supplier list manager can be replaced by an alternative imlementation.
 		 * To use this implementation, you have to set the last part of the class
 		 * name as configuration value so the manager factory knows which class it
 		 * has to instantiate.
@@ -244,7 +244,7 @@ class Standard
 		 */
 
 		/** mshop/supplier/manager/lists/decorators/excludes
-		 * Excludes decorators added by the "common" option from the Supplier list manager
+		 * Excludes decorators added by the "common" option from the supplier list manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -253,13 +253,13 @@ class Standard
 		 *
 		 * This option allows you to remove a decorator added via
 		 * "mshop/common/manager/decorators/default" before they are wrapped
-		 * around the Supplier list manager.
+		 * around the supplier list manager.
 		 *
 		 *  mshop/supplier/manager/lists/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
-		 * "mshop/common/manager/decorators/default" for the Supplier list manager.
+		 * "mshop/common/manager/decorators/default" for the supplier list manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -270,7 +270,7 @@ class Standard
 		 */
 
 		/** mshop/supplier/manager/lists/decorators/global
-		 * Adds a list of globally available decorators only to the Supplier list manager
+		 * Adds a list of globally available decorators only to the supplier list manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -278,7 +278,7 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the Supplier list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the supplier list manager.
 		 *
 		 *  mshop/supplier/manager/lists/decorators/global = array( 'decorator1' )
 		 *
@@ -294,7 +294,7 @@ class Standard
 		 */
 
 		/** mshop/supplier/manager/lists/decorators/local
-		 * Adds a list of local decorators only to the Supplier list manager
+		 * Adds a list of local decorators only to the supplier list manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -302,7 +302,7 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the Supplier list manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the supplier list manager.
 		 *
 		 *  mshop/supplier/manager/lists/decorators/local = array( 'decorator2' )
 		 *
@@ -330,13 +330,13 @@ class Standard
 	protected function getConfigPath()
 	{
 		/** mshop/supplier/manager/lists/standard/insert/mysql
-		 * Inserts a new Supplier list record into the database table
+		 * Inserts a new supplier list record into the database table
 		 *
 		 * @see mshop/supplier/manager/lists/standard/insert/ansi
 		 */
 
 		/** mshop/supplier/manager/lists/standard/insert/ansi
-		 * Inserts a new Supplier list record into the database table
+		 * Inserts a new supplier list record into the database table
 		 *
 		 * Items with no ID yet (i.e. the ID is NULL) will be created in
 		 * the database and the newly created ID retrieved afterwards
@@ -344,7 +344,7 @@ class Standard
 		 *
 		 * The SQL statement must be a string suitable for being used as
 		 * prepared statement. It must include question marks for binding
-		 * the values from the Supplier list item to the statement before they are
+		 * the values from the supplier list item to the statement before they are
 		 * sent to the database server. The number of question marks must
 		 * be the same as the number of columns listed in the INSERT
 		 * statement. The order of the columns must correspond to the
@@ -370,20 +370,20 @@ class Standard
 		 */
 
 		/** mshop/supplier/manager/lists/standard/update/mysql
-		 * Updates an existing Supplier list record in the database
+		 * Updates an existing supplier list record in the database
 		 *
 		 * @see mshop/supplier/manager/lists/standard/update/ansi
 		 */
 
 		/** mshop/supplier/manager/lists/standard/update/ansi
-		 * Updates an existing Supplier list record in the database
+		 * Updates an existing supplier list record in the database
 		 *
 		 * Items which already have an ID (i.e. the ID is not NULL) will
 		 * be updated in the database.
 		 *
 		 * The SQL statement must be a string suitable for being used as
 		 * prepared statement. It must include question marks for binding
-		 * the values from the Supplier list item to the statement before they are
+		 * the values from the supplier list item to the statement before they are
 		 * sent to the database server. The order of the columns must
 		 * correspond to the order in the saveItems() method, so the
 		 * correct values are bound to the columns.
