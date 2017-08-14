@@ -11,8 +11,9 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 class AutofillTest extends \PHPUnit\Framework\TestCase
 {
-	private $plugin;
+	private $object;
 	private $order;
+	private $plugin;
 
 
 	protected function setUp()
