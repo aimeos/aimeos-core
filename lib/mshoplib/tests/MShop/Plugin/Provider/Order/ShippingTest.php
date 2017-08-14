@@ -3,7 +3,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
- * @copyright Aimeos (aimeos.org), 2015-2016
+ * @copyright Aimeos (aimeos.org), 2015-2017
  */
 
 
@@ -12,32 +12,77 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 class ShippingTest extends \PHPUnit\Framework\TestCase
 {
-	private $order;
+	private $context;
 	private $object;
 	private $plugin;
-	private $product;
 
 
 	protected function setUp()
 	{
-		$context = \TestHelperMShop::getContext();
+		$this->context = \TestHelperMShop::getContext();
 
-		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $context );
+		$pluginManager = \Aimeos\MShop\Plugin\Manager\Factory::createManager( $this->context );
 		$this->plugin = $pluginManager->createItem();
 		$this->plugin->setTypeId( 2 );
-		$this->plugin->setProvider( 'Shipping' );
-		$this->plugin->setConfig( array( 'threshold' => array( 'EUR' => '34.00' ) ) );
 		$this->plugin->setStatus( '1' );
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$orderBaseProductManager = $orderBaseManager->getSubManager( 'product' );
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( $this->context, $this->plugin );
+	}
+
+
+	protected function tearDown()
+	{
+		unset( $this->object, $this->plugin, $this->context );
+	}
+
+
+	public function testCheckConfigBE()
+	{
+		$attributes = array(
+			'threshold' => ['EUR' => '50.00'],
+		);
+
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( null, $result['threshold'] );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$list = $this->object->getConfigBE();
+
+		$this->assertEquals( 1, count( $list ) );
+		$this->assertArrayHasKey( 'threshold', $list );
+
+		foreach( $list as $entry ) {
+			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+		}
+	}
+
+
+	public function testRegister()
+	{
+		$order = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->createItem();
+
+		$this->object->register( $order );
+	}
+
+
+	public function testUpdate()
+	{
+		$context = \TestHelperMShop::getContext();
+
+		$this->plugin->setProvider( 'Shipping' );
+		$this->plugin->setConfig( array( 'threshold' => array( 'EUR' => '34.00' ) ) );
+
+		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
+		$orderBaseProductManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product' );
 
 		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
 		$search = $manager->createSearch();
-
 		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNE', 'CNC', 'IJKL' ) ) );
-
 		$pResults = $manager->searchItems( $search, array( 'price' ) );
 
 		if( count( $pResults ) !== 3 ) {
@@ -54,9 +99,9 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		}
 		$price->setValue( 10.00 );
 
-		$this->product = $orderBaseProductManager->createItem();
-		$this->product->copyFrom( $products['CNE'] );
-		$this->product->setPrice( $price );
+		$product = $orderBaseProductManager->createItem();
+		$product->copyFrom( $products['CNE'] );
+		$product->setPrice( $price );
 
 		$product2 = $orderBaseProductManager->createItem();
 		$product2->copyFrom( $products['CNC'] );
@@ -80,39 +125,21 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order base item found' );
 		}
 
-		$this->order = $orderBaseManager->createItem();
-		$this->order->__sleep(); // remove event listeners
+		$order = $orderBaseManager->createItem();
+		$order->__sleep(); // remove event listeners
 
-		$this->order->setService( $delivery, 'delivery' );
-		$this->order->addProduct( $this->product );
-		$this->order->addProduct( $product2 );
-		$this->order->addProduct( $product3 );
-
-		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( $context, $this->plugin );
-	}
+		$order->setService( $delivery, 'delivery' );
+		$order->addProduct( $product );
+		$order->addProduct( $product2 );
+		$order->addProduct( $product3 );
 
 
-	protected function tearDown()
-	{
-		unset( $this->object, $this->order, $this->plugin, $this->product );
-	}
+		$this->assertEquals( 5.00, $order->getPrice()->getCosts() );
+		$this->object->update( $order, 'addProduct' );
 
+		$order->addProduct( $product );
+		$this->object->update( $order, 'addProduct' );
 
-	public function testRegister()
-	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\Shipping( \TestHelperMShop::getContext(), $this->plugin );
-		$object->register( $this->order );
-	}
-
-
-	public function testUpdate()
-	{
-		$this->assertEquals( 5.00, $this->order->getPrice()->getCosts() );
-		$this->object->update( $this->order, 'addProduct' );
-
-		$this->order->addProduct( $this->product );
-		$this->object->update( $this->order, 'addProduct' );
-
-		$this->assertEquals( 0.00, $this->order->getPrice()->getCosts() );
+		$this->assertEquals( 0.00, $order->getPrice()->getCosts() );
 	}
 }

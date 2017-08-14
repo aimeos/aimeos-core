@@ -37,6 +37,46 @@ class Shipping
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
+	private $beConfig = array(
+		'threshold' => array(
+			'code' => 'threshold',
+			'internalcode'=> 'threshold',
+			'label'=> 'Free shipping threshold per currency',
+			'type'=> 'map',
+			'internaltype'=> 'array',
+			'default'=> '{}',
+			'required'=> false,
+		),
+	);
+
+
+	/**
+	 * Checks the backend configuration attributes for validity.
+	 *
+	 * @param array $attributes Attributes added by the shop owner in the administraton interface
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 * 	known by the provider but aren't valid
+	 */
+	public function checkConfigBE( array $attributes )
+	{
+		$errors = parent::checkConfigBE( $attributes );
+
+		return array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
+	}
+
+
+	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 */
+	public function getConfigBE()
+	{
+		return $this->getConfigItems( $this->beConfig );
+	}
+
+
 	/**
 	 * Subscribes itself to a publisher
 	 *

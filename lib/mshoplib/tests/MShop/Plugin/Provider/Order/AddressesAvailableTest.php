@@ -12,9 +12,10 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 {
+	private $address;
+	private $object;
 	private $order;
 	private $plugin;
-	private $address;
 
 
 	protected function setUp()
@@ -26,7 +27,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setProvider( 'AddressesAvailable' );
 		$this->plugin->setStatus( 1 );
 
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
 		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address' );
 
 		$this->order = $orderBaseManager->createItem();
@@ -34,39 +35,69 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 
 		$this->address = $orderBaseAddressManager->createItem();
 		$this->address->setLastName( 'Available' );
+
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( $context, $this->plugin );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->plugin );
-		unset( $this->order );
-		unset( $this->address );
+		unset( $this->plugin, $this->order, $this->address, $this->object );
+	}
+
+
+	public function testCheckConfigBE()
+	{
+		$attributes = array(
+			'payment' => '1',
+			'delivery' => '0',
+		);
+
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( null, $result['payment'] );
+		$this->assertEquals( null, $result['delivery'] );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$list = $this->object->getConfigBE();
+
+		$this->assertEquals( 2, count( $list ) );
+		$this->assertArrayHasKey( 'payment', $list );
+		$this->assertArrayHasKey( 'delivery', $list );
+
+		foreach( $list as $entry ) {
+			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+		}
 	}
 
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-		$object->register( $this->order );
+		$this->object->register( $this->order );
 	}
+
 
 	public function testUpdateNone()
 	{
 		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS not set, so update shall not be executed
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-		$this->assertTrue( $object->setObject( $object )->update( $this->order, 'check.after' ) );
+		$this->assertTrue( $this->object->setObject( $this->object )->update( $this->order, 'check.after' ) );
 	}
+
 
 	public function testEmptyConfig()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\AddressesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
 
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->order->setAddress( $this->address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
+
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) );
 	}
+
 
 	public function testUpdateAddressesNotAvailable()
 	{
@@ -94,6 +125,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}
+
 
 	public function testUpdateAddressesAvailable()
 	{

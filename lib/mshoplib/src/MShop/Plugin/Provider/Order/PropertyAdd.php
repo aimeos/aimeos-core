@@ -31,8 +31,8 @@ class PropertyAdd
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
-	private $orderAttrManager;
 	private $type;
+	private $orderAttrManager;
 
 
 	/**

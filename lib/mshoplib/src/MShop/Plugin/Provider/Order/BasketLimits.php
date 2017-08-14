@@ -34,6 +34,73 @@ class BasketLimits
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
+	private $beConfig = array(
+		'min-value' => array(
+			'code' => 'min-value',
+			'internalcode'=> 'min-value',
+			'label'=> 'Minimum basket value',
+			'type'=> 'map',
+			'internaltype'=> 'array',
+			'default'=> '{}',
+			'required'=> false,
+		),
+		'max-value' => array(
+			'code' => 'max-value',
+			'internalcode'=> 'max-value',
+			'label'=> 'Maximum basket value',
+			'type'=> 'map',
+			'internaltype'=> 'array',
+			'default'=> '{}',
+			'required'=> false,
+		),
+		'min-products' => array(
+			'code' => 'min-products',
+			'internalcode'=> 'min-products',
+			'label'=> 'Minimum total products',
+			'type'=> 'number',
+			'internaltype'=> 'integer',
+			'default'=> '1',
+			'required'=> false,
+		),
+		'max-products' => array(
+			'code' => 'max-products',
+			'internalcode'=> 'max-products',
+			'label'=> 'Maximum total products',
+			'type'=> 'number',
+			'internaltype'=> 'integer',
+			'default'=> '',
+			'required'=> false,
+		),
+	);
+
+
+	/**
+	 * Checks the backend configuration attributes for validity.
+	 *
+	 * @param array $attributes Attributes added by the shop owner in the administraton interface
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 * 	known by the provider but aren't valid
+	 */
+	public function checkConfigBE( array $attributes )
+	{
+		$errors = parent::checkConfigBE( $attributes );
+
+		return array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
+	}
+
+
+	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 */
+	public function getConfigBE()
+	{
+		return $this->getConfigItems( $this->beConfig );
+	}
+
+
 	/**
 	 * Subscribes itself to a publisher
 	 *
@@ -131,14 +198,16 @@ class BasketLimits
 	{
 		$currencyId = $sum->getCurrencyId();
 
-		if( ( isset( $config['min-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] ) )
-		{
+		if( ( isset( $config['min-value'][$currencyId] ) ) && is_numeric( $config['min-value'][$currencyId] )
+			&& ( $sum->getValue() + $sum->getRebate() < $config['min-value'][$currencyId] )
+		) {
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The minimum basket value of %1$s isn\'t reached' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['min-value'][$currencyId] ) );
 		}
 
-		if( ( isset( $config['max-value'][$currencyId] ) ) && ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] ) )
-		{
+		if( ( isset( $config['max-value'][$currencyId] ) ) && is_numeric( $config['max-value'][$currencyId] )
+			&& ( $sum->getValue() + $sum->getRebate() > $config['max-value'][$currencyId] )
+		) {
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum basket value of %1$s is exceeded' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['max-value'][$currencyId] ) );
 		}
@@ -154,14 +223,16 @@ class BasketLimits
 	 */
 	protected function checkLimitsProducts( array $config, $count )
 	{
-		if( ( isset( $config['min-products'] ) ) && ( $count < $config['min-products'] ) )
-		{
+		if( ( isset( $config['min-products'] ) ) && is_numeric( $config['min-products'] )
+			&& ( $count < $config['min-products'] )
+		) {
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The minimum product quantity of %1$d isn\'t reached' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['min-products'] ) );
 		}
 
-		if( ( isset( $config['max-products'] ) ) && ( $count > $config['max-products'] ) )
-		{
+		if( ( isset( $config['max-products'] ) ) && is_numeric( $config['max-products'] )
+			&& ( $count > $config['max-products'] )
+		) {
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'The maximum product quantity of %1$d is exceeded' );
 			throw new \Aimeos\MShop\Plugin\Provider\Exception( sprintf( $msg, $config['max-products'] ) );
 		}

@@ -115,6 +115,7 @@ class PropertyMatchTest extends \PHPUnit\Framework\TestCase
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] );
 	}
 
+
 	public function testUpdateFailList()
 	{
 		$this->plugin->setConfig( array( 'product.lists.domain' => 'foobar' ) );

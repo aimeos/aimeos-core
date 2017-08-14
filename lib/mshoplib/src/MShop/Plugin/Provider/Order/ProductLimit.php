@@ -33,6 +33,73 @@ class ProductLimit
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
+	private $beConfig = array(
+		'single-number-max' => array(
+			'code' => 'single-number-max',
+			'internalcode'=> 'single-number-max',
+			'label'=> 'Maximum product quantity',
+			'type'=> 'number',
+			'internaltype'=> 'integer',
+			'default'=> '',
+			'required'=> false,
+		),
+		'total-number-max' => array(
+			'code' => 'total-number-max',
+			'internalcode'=> 'total-number-max',
+			'label'=> 'Maximum total products in basket',
+			'type'=> 'number',
+			'internaltype'=> 'integer',
+			'default'=> '',
+			'required'=> false,
+		),
+		'single-value-max' => array(
+			'code' => 'single-value-max',
+			'internalcode'=> 'single-value-max',
+			'label'=> 'Maximum product value',
+			'type'=> 'map',
+			'internaltype'=> 'array',
+			'default'=> '{}',
+			'required'=> false,
+		),
+		'total-value-max' => array(
+			'code' => 'total-value-max',
+			'internalcode'=> 'total-value-max',
+			'label'=> 'Maximum total basket value',
+			'type'=> 'map',
+			'internaltype'=> 'array',
+			'default'=> '{}',
+			'required'=> false,
+		),
+	);
+
+
+	/**
+	 * Checks the backend configuration attributes for validity.
+	 *
+	 * @param array $attributes Attributes added by the shop owner in the administraton interface
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 * 	known by the provider but aren't valid
+	 */
+	public function checkConfigBE( array $attributes )
+	{
+		$errors = parent::checkConfigBE( $attributes );
+
+		return array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
+	}
+
+
+	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 */
+	public function getConfigBE()
+	{
+		return $this->getConfigItems( $this->beConfig );
+	}
+
+
 	/**
 	 * Subscribes itself to a publisher.
 	 *

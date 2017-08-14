@@ -62,16 +62,45 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
 		unset( $this->order );
+	}
+
+
+	public function testCheckConfigBE()
+	{
+		$attributes = array(
+			'min-products' => '10',
+			'max-products' => '100',
+			'min-value' => ['EUR' => '100.00'],
+			'max-value' => ['EUR' => '1000.00'],
+		);
+
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( null, $result['min-products'] );
+		$this->assertEquals( null, $result['max-products'] );
+		$this->assertEquals( null, $result['min-value'] );
+		$this->assertEquals( null, $result['max-value'] );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$list = $this->object->getConfigBE();
+
+		$this->assertEquals( 4, count( $list ) );
+		$this->assertArrayHasKey( 'min-products', $list );
+		$this->assertArrayHasKey( 'max-products', $list );
+		$this->assertArrayHasKey( 'min-value', $list );
+		$this->assertArrayHasKey( 'max-value', $list );
+
+		foreach( $list as $entry ) {
+			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+		}
 	}
 
 

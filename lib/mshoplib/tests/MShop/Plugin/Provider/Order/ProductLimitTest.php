@@ -59,6 +59,41 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCheckConfigBE()
+	{
+		$attributes = array(
+			'single-number-max' => '10',
+			'total-number-max' => '100',
+			'single-value-max' => ['EUR' => '100.00'],
+			'total-value-max' => ['EUR' => '1000.00'],
+		);
+
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( null, $result['single-number-max'] );
+		$this->assertEquals( null, $result['total-number-max'] );
+		$this->assertEquals( null, $result['single-value-max'] );
+		$this->assertEquals( null, $result['total-value-max'] );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$list = $this->object->getConfigBE();
+
+		$this->assertEquals( 4, count( $list ) );
+		$this->assertArrayHasKey( 'single-number-max', $list );
+		$this->assertArrayHasKey( 'total-number-max', $list );
+		$this->assertArrayHasKey( 'single-value-max', $list );
+		$this->assertArrayHasKey( 'total-value-max', $list );
+
+		foreach( $list as $entry ) {
+			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+		}
+	}
+
+
 	protected function tearDown()
 	{
 		unset( $this->object, $this->order, $this->plugin, $this->products );

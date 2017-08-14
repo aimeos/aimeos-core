@@ -20,12 +20,13 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  * item and the customer address(es) to the basket.
  *
  * The following options are available:
- * - autofill.delivery: 1 (add the first delivery option to the basket)
- * - autofill.delivery: 1 and autofill.deliverycode: '...' (add specific delivery option to the basket)
- * - autofill.payment: 1 (add the first payment option to the basket)
- * - autofill.payment: 1 and autofill.paymentcode: '...' (add specific payment option to the basket)
- * - autofill.orderservice: 1 (add delivery and payment services from the last order of the customer)
  * - autofill.address: 1 (add billing address of the logged in customer to the basket)
+ * - autofill.delivery: 1 (add the first delivery option to the basket)
+ * - autofill.deliverycode: '...' and autofill.delivery: 1 (add specific delivery option to the basket)
+ * - autofill.payment: 1 (add the first payment option to the basket)
+ * - autofill.paymentcode: '...' and autofill.payment: 1 (add specific payment option to the basket)
+ * - autofill.useorder: 1 (use last order of the customer to pre-fill addresses or services)
+ * - autofill.orderservice: 1 (add delivery and payment services from the last order of the customer)
  * - autofill.orderaddress: 1 (add billing and delivery addresses from the last order of the customer)
  *
  * This plugin interacts with other plugins that add products or remove services!
@@ -42,6 +43,109 @@ class Autofill
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
 	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
+	private $beConfig = array(
+		'autofill.address' => array(
+			'code' => 'autofill.address',
+			'internalcode'=> 'autofill.address',
+			'label'=> 'Add customer address automatically',
+			'type'=> 'boolean',
+			'internaltype'=> 'boolean',
+			'default'=> '',
+			'required'=> false,
+		),
+		'autofill.delivery' => array(
+			'code' => 'autofill.delivery',
+			'internalcode'=> 'autofill.delivery',
+			'label'=> 'Add delivery option automatically',
+			'type'=> 'boolean',
+			'internaltype'=> 'boolean',
+			'default'=> '',
+			'required'=> false,
+		),
+		'autofill.deliverycode' => array(
+			'code' => 'autofill.deliverycode',
+			'internalcode'=> 'autofill.deliverycode',
+			'label'=> 'Add delivery by code',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+		),
+		'autofill.payment' => array(
+			'code' => 'autofill.payment',
+			'internalcode'=> 'autofill.payment',
+			'label'=> 'Add payment option automatically',
+			'type'=> 'boolean',
+			'internaltype'=> 'boolean',
+			'default'=> '',
+			'required'=> false,
+		),
+		'autofill.paymentcode' => array(
+			'code' => 'autofill.paymentcode',
+			'internalcode'=> 'autofill.paymentcode',
+			'label'=> 'Add payment by code',
+			'type'=> 'string',
+			'internaltype'=> 'string',
+			'default'=> '',
+			'required'=> false,
+		),
+		'autofill.useorder' => array(
+			'code' => 'autofill.useorder',
+			'internalcode'=> 'autofill.useorder',
+			'label'=> 'Add from last order',
+			'type'=> 'boolean',
+			'internaltype'=> 'boolean',
+			'default'=> '',
+			'required'=> false,
+		),
+		'autofill.orderaddress' => array(
+			'code' => 'autofill.orderaddress',
+			'internalcode'=> 'autofill.orderaddress',
+			'label'=> 'Add address from last order',
+			'type'=> 'boolean',
+			'internaltype'=> 'boolean',
+			'default'=> '',
+			'required'=> false,
+		),
+		'autofill.orderservice' => array(
+			'code' => 'autofill.orderservice',
+			'internalcode'=> 'autofill.orderservice',
+			'label'=> 'Add delivery/payment from last order',
+			'type'=> 'boolean',
+			'internaltype'=> 'boolean',
+			'default'=> '',
+			'required'=> false,
+		),
+	);
+
+
+	/**
+	 * Checks the backend configuration attributes for validity.
+	 *
+	 * @param array $attributes Attributes added by the shop owner in the administraton interface
+	 * @return array An array with the attribute keys as key and an error message as values for all attributes that are
+	 * 	known by the provider but aren't valid
+	 */
+	public function checkConfigBE( array $attributes )
+	{
+		$errors = parent::checkConfigBE( $attributes );
+
+		return array_merge( $errors, $this->checkConfig( $this->beConfig, $attributes ) );
+	}
+
+
+	/**
+	 * Returns the configuration attribute definitions of the provider to generate a list of available fields and
+	 * rules for the value of each field in the administration interface.
+	 *
+	 * @return array List of attribute definitions implementing \Aimeos\MW\Common\Critera\Attribute\Iface
+	 */
+	public function getConfigBE()
+	{
+		return $this->getConfigItems( $this->beConfig );
+	}
+
+
 	/**
 	 * Subscribes itself to a publisher
 	 *

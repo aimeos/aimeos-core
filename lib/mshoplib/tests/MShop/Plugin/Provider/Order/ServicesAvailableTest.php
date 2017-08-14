@@ -12,6 +12,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
 
 class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 {
+	private $object;
 	private $order;
 	private $plugin;
 	private $service;
@@ -26,65 +27,92 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 		$this->plugin->setProvider( 'ServicesAvailable' );
 		$this->plugin->setStatus( 1 );
 
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $context )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base' );
 		$orderBaseServiceManager = $orderBaseManager->getSubManager( 'service' );
 
 		$this->service = $orderBaseServiceManager->createItem();
 		$this->order = $orderBaseManager->createItem();
 		$this->order->__sleep(); // remove event listeners
+
+		$this->object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( $context, $this->plugin );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->orderManager );
-		unset( $this->plugin );
-		unset( $this->service );
-		unset( $this->order );
+		unset( $this->plugin, $this->service, $this->order, $this->object );
+	}
+
+
+	public function testCheckConfigBE()
+	{
+		$attributes = array(
+			'payment' => '1',
+			'delivery' => '0',
+		);
+
+		$result = $this->object->checkConfigBE( $attributes );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( null, $result['payment'] );
+		$this->assertEquals( null, $result['delivery'] );
+	}
+
+
+	public function testGetConfigBE()
+	{
+		$list = $this->object->getConfigBE();
+
+		$this->assertEquals( 2, count( $list ) );
+		$this->assertArrayHasKey( 'payment', $list );
+		$this->assertArrayHasKey( 'delivery', $list );
+
+		foreach( $list as $entry ) {
+			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+		}
 	}
 
 
 	public function testRegister()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-		$object->register( $this->order );
+		$this->object->register( $this->order );
 	}
+
 
 	public function testUpdateNone()
 	{
 		// \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE not set, so update shall not be executed
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-		$this->assertTrue( $object->update( $this->order, 'check.after' ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after' ) );
 	}
+
 
 	public function testUpdateEmptyConfig()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
 		$this->order->setService( $this->service, 'payment' );
 		$this->order->setService( $this->service, 'delivery' );
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
 	}
+
 
 	public function testUpdateNoServices()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-
 		$this->plugin->setConfig( array(
 				'delivery' => false,
 				'payment' => false
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => null,
 				'payment' => null
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => true,
@@ -92,13 +120,12 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
-		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 	}
+
 
 	public function testUpdateWithServices()
 	{
-		$object = new \Aimeos\MShop\Plugin\Provider\Order\ServicesAvailable( \TestHelperMShop::getContext(), $this->plugin );
-
 		$this->order->setService( $this->service, 'payment' );
 		$this->order->setService( $this->service, 'delivery' );
 
@@ -107,14 +134,14 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 				'payment' => null
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => true,
 				'payment' => true
 		) );
 
-		$this->assertTrue( $object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
 		$this->plugin->setConfig( array(
 				'delivery' => false,
@@ -122,6 +149,6 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
-		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 	}
 }

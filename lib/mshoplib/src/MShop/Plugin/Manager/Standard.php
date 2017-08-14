@@ -57,7 +57,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'plugin.provider' => array(
-			'label' => 'Plugin provider',
+			'label' => 'Provider',
 			'code' => 'plugin.provider',
 			'internalcode' => 'mplu."provider"',
 			'type' => 'string',
@@ -276,78 +276,6 @@ class Standard
 	public function getItem( $id, array $ref = [], $default = false )
 	{
 		return $this->getItemBase( 'plugin.id', $id, $ref, $default );
-	}
-
-
-	/**
-	 * Returns the plugin provider which is responsible for the plugin item.
-	 *
-	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
-	 * @return \Aimeos\MShop\Plugin\Provider\Iface Returns the decoratad plugin provider object
-	 * @throws \Aimeos\MShop\Plugin\Exception If provider couldn't be found
-	 */
-	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item )
-	{
-		$type = ucwords( $item->getType() );
-		$names = explode( ',', $item->getProvider() );
-
-		if( ctype_alnum( $type ) === false ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid characters in type name "%1$s"', $type ) );
-		}
-
-		if( ( $provider = array_shift( $names ) ) === null ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Provider in "%1$s" not available', $item->getProvider() ) );
-		}
-
-		if( ctype_alnum( $provider ) === false ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
-		}
-
-		$interface = '\\Aimeos\\MShop\\Plugin\\Provider\\Factory\\Iface';
-		$classname = '\\Aimeos\\MShop\\Plugin\\Provider\\' . $type . '\\' . $provider;
-
-		if( class_exists( $classname ) === false ) {
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
-		}
-
-		$context = $this->getContext();
-		$config = $context->getConfig();
-		$provider = new $classname( $context, $item );
-
-		if( ( $provider instanceof $interface ) === false )
-		{
-			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
-			throw new \Aimeos\MShop\Plugin\Exception( $msg );
-		}
-
-		/** mshop/plugin/provider/order/decorators
-		 * Adds a list of decorators to all order plugin provider objects automatcally
-		 *
-		 * Decorators extend the functionality of a class by adding new aspects
-		 * (e.g. log what is currently done), executing the methods of the underlying
-		 * class only in certain conditions (e.g. only for logged in users) or
-		 * modify what is returned to the caller.
-		 *
-		 * This option allows you to wrap decorators
-		 * ("\Aimeos\MShop\Plugin\Provider\Decorator\*") around the order provider.
-		 *
-		 *  mshop/plugin/provider/order/decorators = array( 'decorator1' )
-		 *
-		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Plugin\Provider\Decorator\Decorator1" to all order provider
-		 * objects.
-		 *
-		 * @param array List of decorator names
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/plugin/provider/order/decorators
-		 */
-		$decorators = $config->get( 'mshop/plugin/provider/' . $item->getType() . '/decorators', [] );
-
-		$provider = $this->addPluginDecorators( $item, $provider, $names );
-		$provider = $this->addPluginDecorators( $item, $provider, $decorators );
-
-		return $provider->setObject( $provider );
 	}
 
 
