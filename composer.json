@@ -13,7 +13,7 @@
 	"repositories": [
 		{
 			"type": "vcs",
-			"url": "https://github.com/aimeos/php-coveralls.git"
+			"url": "https://github.com/aimeos/php-coveralls"
 		}
 	],
 	"prefer-stable": true,
