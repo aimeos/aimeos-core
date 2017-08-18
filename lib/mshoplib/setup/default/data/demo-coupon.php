@@ -13,6 +13,7 @@ return array(
 		'config' => array(
 			'fixedrebate.productcode' => 'demo-rebate',
 			'fixedrebate.rebate' => array( 'EUR' => 125.00, 'USD' => 150.00 ),
+			'basketvalues.total-value-min' => array( 'EUR' => 125.00, 'USD' => 150.00 ),
 		),
 		'codes' => array(
 			array(
