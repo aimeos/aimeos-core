@@ -30,21 +30,21 @@ class OrderCheck
 	private $beConfig = array(
 		'ordercheck.total-number-min' => array(
 			'code' => 'ordercheck.total-number-min',
-			'internalcode'=> 'ordercheck.total-number-min',
-			'label'=> 'OrderCheck: Minimum successful orders',
-			'type'=> 'integer',
-			'internaltype'=> 'integer',
-			'default'=> 0,
-			'required'=> false,
+			'internalcode' => 'ordercheck.total-number-min',
+			'label' => 'OrderCheck: Minimum successful orders',
+			'type' => 'integer',
+			'internaltype' => 'integer',
+			'default' => 0,
+			'required' => false,
 		),
 		'ordercheck.limit-days-pending' => array(
 			'code' => 'ordercheck.limit-days-pending',
-			'internalcode'=> 'ordercheck.limit-days-pending',
-			'label'=> 'OrderCheck: Restrict if unpaid orders within time frame in days',
-			'type'=> 'integer',
-			'internaltype'=> 'integer',
-			'default'=> 0,
-			'required'=> false,
+			'internalcode' => 'ordercheck.limit-days-pending',
+			'label' => 'OrderCheck: Restrict if unpaid orders within time frame in days',
+			'type' => 'integer',
+			'internaltype' => 'integer',
+			'default' => 0,
+			'required' => false,
 		),
 	);
 

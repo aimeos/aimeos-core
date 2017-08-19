@@ -25,12 +25,12 @@ class Example
 	private $beConfig = array(
 		'country' => array(
 			'code' => 'country',
-			'internalcode'=> 'country',
-			'label'=> 'Country',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'internalcode' => 'country',
+			'label' => 'Country',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true,
 		),
 	);
 

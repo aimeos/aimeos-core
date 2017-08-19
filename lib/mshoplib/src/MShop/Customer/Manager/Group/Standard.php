@@ -45,23 +45,23 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.group.ctime'=> array(
+		'customer.group.ctime' => array(
 			'code' => 'customer.group.ctime',
 			'internalcode' => 'mcusgr."ctime"',
-			'label' => 'Group creation time',
+			'label' => 'Group create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.group.mtime'=> array(
+		'customer.group.mtime' => array(
 			'code' => 'customer.group.mtime',
 			'internalcode' => 'mcusgr."mtime"',
-			'label' => 'Group modification time',
+			'label' => 'Group modify date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.group.editor'=> array(
+		'customer.group.editor' => array(
 			'code' => 'customer.group.editor',
 			'internalcode' => 'mcusgr."editor"',
 			'label' => 'Group editor',
@@ -107,7 +107,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'customer.group.siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'customer.group.siteid' => $this->getContext()->getLocale()->getSiteId() );
 
 		return $this->createItemBase( $values );
 	}

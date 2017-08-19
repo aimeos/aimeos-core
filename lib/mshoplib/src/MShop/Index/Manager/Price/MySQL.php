@@ -24,11 +24,11 @@ class MySQL
 {
 	private $searchConfig = array(
 		'index.price.id' => array(
-			'code'=>'index.price.id',
-			'internalcode'=>'mindpr."priceid"',
+			'code' => 'index.price.id',
+			'internalcode' => 'mindpr."priceid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr USE INDEX ("idx_msindpr_s_lt_cu_ty_va", "idx_msindpr_p_s_lt_cu_ty_va") ON mindpr."prodid" = mpro."id"' ),
-			'label'=>'Product index price ID',
-			'type'=> 'integer',
+			'label' => 'Product index price ID',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),

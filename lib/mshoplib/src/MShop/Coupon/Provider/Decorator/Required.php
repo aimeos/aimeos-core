@@ -25,12 +25,12 @@ class Required
 	private $beConfig = array(
 		'required.productcode' => array(
 			'code' => 'required.productcode',
-			'internalcode'=> 'required.productcode',
-			'label'=> 'Code of the product that must be in the basket',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'internalcode' => 'required.productcode',
+			'label' => 'Code of the product that must be in the basket',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true,
 		),
 	);
 

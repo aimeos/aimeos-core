@@ -24,11 +24,11 @@ class MySQL
 {
 	private $searchConfig = array(
 		'index.attribute.id' => array(
-			'code'=>'index.attribute.id',
-			'internalcode'=>'mindat."attrid"',
+			'code' => 'index.attribute.id',
+			'internalcode' => 'mindat."attrid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat USE INDEX ("idx_msindat_s_at_lt", "unq_msindat_p_s_aid_lt") ON mindat."prodid" = mpro."id"' ),
-			'label'=>'Product index attribute ID',
-			'type'=> 'integer',
+			'label' => 'Product index attribute ID',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		)

@@ -24,12 +24,12 @@ class MySQL
 {
 	private $searchConfig = array(
 		'index.text.id' => array(
-			'code'=>'index.text.id',
-			'internalcode'=>'mindte."textid"',
+			'code' => 'index.text.id',
+			'internalcode' => 'mindte."textid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte
 				USE INDEX ("idx_msindte_value", "idx_msindte_p_s_lt_la_ty_do_va") ON mindte."prodid" = mpro."id"' ),
-			'label'=>'Product index text ID',
-			'type'=> 'string',
+			'label' => 'Product index text ID',
+			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),

@@ -41,14 +41,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.address.company'=> array(
+		'customer.address.company' => array(
 			'label' => 'Address company',
 			'code' => 'customer.address.company',
 			'internalcode' => 'mcusad."company"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.address.vatid'=> array(
+		'customer.address.vatid' => array(
 			'label' => 'Address Vat ID',
 			'code' => 'customer.address.vatid',
 			'internalcode' => 'mcusad."vatid"',
@@ -199,28 +199,28 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'customer.address.ctime'=> array(
-			'code'=>'customer.address.ctime',
-			'internalcode'=>'mcusad."ctime"',
-			'label'=>'Address create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.ctime' => array(
+			'code' => 'customer.address.ctime',
+			'internalcode' => 'mcusad."ctime"',
+			'label' => 'Address create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.address.mtime'=> array(
-			'code'=>'customer.address.mtime',
-			'internalcode'=>'mcusad."mtime"',
-			'label'=>'Address modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.mtime' => array(
+			'code' => 'customer.address.mtime',
+			'internalcode' => 'mcusad."mtime"',
+			'label' => 'Address modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.address.editor'=> array(
-			'code'=>'customer.address.editor',
-			'internalcode'=>'mcusad."editor"',
-			'label'=>'Address editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.address.editor' => array(
+			'code' => 'customer.address.editor',
+			'internalcode' => 'mcusad."editor"',
+			'label' => 'Address editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);

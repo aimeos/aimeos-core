@@ -27,7 +27,7 @@ class Standard
 			'code' => 'locale.currency.id',
 			'internalcode' => 'mloccu."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_currency" AS mloccu ON (mloc."currencyid" = mloccu."id")' ),
-			'label' => 'Locale currency ID',
+			'label' => 'Currency ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
@@ -35,7 +35,7 @@ class Standard
 		'locale.currency.siteid' => array(
 			'code' => 'locale.currency.siteid',
 			'internalcode' => 'mloccu."siteid"',
-			'label' => 'Locale currency site ID',
+			'label' => 'Currency site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -43,44 +43,47 @@ class Standard
 		'locale.currency.label' => array(
 			'code' => 'locale.currency.label',
 			'internalcode' => 'mloccu."label"',
-			'label' => 'Locale currency label',
+			'label' => 'Currency label',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.currency.code' => array(
 			'code' => 'locale.currency.code',
 			'internalcode' => 'mloccu."id"',
-			'label' => 'Locale currency code',
+			'label' => 'Currency code',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.currency.status' => array(
 			'code' => 'locale.currency.status',
 			'internalcode' => 'mloccu."status"',
-			'label' => 'Locale currency status',
+			'label' => 'Currency status',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'locale.currency.ctime'=> array(
-			'code'=>'locale.currency.ctime',
-			'internalcode'=>'mloccu."ctime"',
-			'label'=>'Locale currency create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.currency.ctime' => array(
+			'code' => 'locale.currency.ctime',
+			'internalcode' => 'mloccu."ctime"',
+			'label' => 'Currency create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'locale.currency.mtime'=> array(
-			'code'=>'locale.currency.mtime',
-			'internalcode'=>'mloccu."mtime"',
-			'label'=>'Locale currency modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.currency.mtime' => array(
+			'code' => 'locale.currency.mtime',
+			'internalcode' => 'mloccu."mtime"',
+			'label' => 'Currency modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'locale.currency.editor'=> array(
-			'code'=>'locale.currency.editor',
-			'internalcode'=>'mloccu."editor"',
-			'label'=>'Locale currency editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.currency.editor' => array(
+			'code' => 'locale.currency.editor',
+			'internalcode' => 'mloccu."editor"',
+			'label' => 'Currency editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 
@@ -629,7 +632,7 @@ class Standard
 	 * Create new item object initialized with given parameters.
 	 *
 	 * @param array $data Associative list of item key/value pairs
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Locale currency item object
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface Currency item object
 	 */
 	protected function createItemBase( array $data = [] )
 	{

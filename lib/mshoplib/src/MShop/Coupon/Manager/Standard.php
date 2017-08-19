@@ -23,85 +23,88 @@ class Standard
 	implements \Aimeos\MShop\Coupon\Manager\Iface
 {
 	private $searchConfig = array(
-		'coupon.id'=> array(
-			'code'=>'coupon.id',
-			'internalcode'=>'mcou."id"',
-			'label'=>'ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'coupon.id' => array(
+			'code' => 'coupon.id',
+			'internalcode' => 'mcou."id"',
+			'label' => 'ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'coupon.siteid'=> array(
-			'code'=>'coupon.siteid',
-			'internalcode'=>'mcou."siteid"',
-			'label'=>'Site ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'coupon.siteid' => array(
+			'code' => 'coupon.siteid',
+			'internalcode' => 'mcou."siteid"',
+			'label' => 'Site ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'coupon.label'=> array(
-			'code'=>'coupon.label',
-			'internalcode'=>'mcou."label"',
-			'label'=>'Label',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'coupon.label' => array(
+			'code' => 'coupon.label',
+			'internalcode' => 'mcou."label"',
+			'label' => 'Label',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'coupon.provider'=> array(
-			'code'=>'coupon.provider',
-			'internalcode'=>'mcou."provider"',
-			'label'=>'Provider',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'coupon.provider' => array(
+			'code' => 'coupon.provider',
+			'internalcode' => 'mcou."provider"',
+			'label' => 'Provider',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'coupon.datestart'=> array(
-			'code'=>'coupon.datestart',
-			'internalcode'=>'mcou."start"',
-			'label'=>'Start date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'coupon.datestart' => array(
+			'code' => 'coupon.datestart',
+			'internalcode' => 'mcou."start"',
+			'label' => 'Start date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'coupon.dateend'=> array(
-			'code'=>'coupon.dateend',
-			'internalcode'=>'mcou."end"',
-			'label'=>'End date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'coupon.dateend' => array(
+			'code' => 'coupon.dateend',
+			'internalcode' => 'mcou."end"',
+			'label' => 'End date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'coupon.status'=> array(
-			'code'=>'coupon.status',
-			'internalcode'=>'mcou."status"',
-			'label'=>'Status',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'coupon.status' => array(
+			'code' => 'coupon.status',
+			'internalcode' => 'mcou."status"',
+			'label' => 'Status',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'coupon.config'=> array(
-			'code'=>'coupon.config',
-			'internalcode'=>'mcou."config"',
-			'label'=>'Configuration',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'coupon.config' => array(
+			'code' => 'coupon.config',
+			'internalcode' => 'mcou."config"',
+			'label' => 'Configuration',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'coupon.ctime'=> array(
-			'code'=>'coupon.ctime',
-			'internalcode'=>'mcou."ctime"',
-			'label'=>'Create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'coupon.ctime' => array(
+			'code' => 'coupon.ctime',
+			'internalcode' => 'mcou."ctime"',
+			'label' => 'Create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'coupon.mtime'=> array(
-			'code'=>'coupon.mtime',
-			'internalcode'=>'mcou."mtime"',
-			'label'=>'Modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'coupon.mtime' => array(
+			'code' => 'coupon.mtime',
+			'internalcode' => 'mcou."mtime"',
+			'label' => 'Modification date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'coupon.editor'=> array(
-			'code'=>'coupon.editor',
-			'internalcode'=>'mcou."editor"',
-			'label'=>'Editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'coupon.editor' => array(
+			'code' => 'coupon.editor',
+			'internalcode' => 'mcou."editor"',
+			'label' => 'Editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 
@@ -186,7 +189,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'coupon.siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'coupon.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 

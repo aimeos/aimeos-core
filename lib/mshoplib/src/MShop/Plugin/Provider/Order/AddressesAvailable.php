@@ -39,21 +39,21 @@ class AddressesAvailable
 	private $beConfig = array(
 		'payment' => array(
 			'code' => 'payment',
-			'internalcode'=> 'payment',
-			'label'=> 'Require billing address',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> false,
+			'internalcode' => 'payment',
+			'label' => 'Require billing address',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => false,
 		),
 		'delivery' => array(
 			'code' => 'delivery',
-			'internalcode'=> 'delivery',
-			'label'=> 'Require delivery address',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> false,
+			'internalcode' => 'delivery',
+			'label' => 'Require delivery address',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => false,
 		),
 	);
 

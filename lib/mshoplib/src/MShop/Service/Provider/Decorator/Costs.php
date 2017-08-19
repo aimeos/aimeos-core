@@ -25,12 +25,12 @@ class Costs
 	private $beConfig = array(
 		'costs.percent' => array(
 			'code' => 'costs.percent',
-			'internalcode'=> 'costs.percent',
-			'label'=> 'Costs: Decimal percent value',
-			'type'=> 'number',
-			'internaltype'=> 'number',
-			'default'=> 0,
-			'required'=> true,
+			'internalcode' => 'costs.percent',
+			'label' => 'Costs: Decimal percent value',
+			'type' => 'number',
+			'internaltype' => 'number',
+			'default' => 0,
+			'required' => true,
 		),
 	);
 

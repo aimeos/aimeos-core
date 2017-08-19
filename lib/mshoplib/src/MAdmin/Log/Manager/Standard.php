@@ -32,6 +32,7 @@ class Standard
 			'label' => 'Log ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
 		),
 		'log.siteid' => array(
 			'code' => 'log.siteid',
@@ -39,19 +40,20 @@ class Standard
 			'label' => 'Log site ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'log.message' => array(
+			'code' => 'log.message',
+			'internalcode' => 'malog."message"',
+			'label' => 'Log message',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'log.facility' => array(
 			'code' => 'log.facility',
 			'internalcode' => 'malog."facility"',
 			'label' => 'Log facility',
 			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'log.timestamp' => array(
-			'code' => 'log.timestamp',
-			'internalcode' => 'malog."timestamp"',
-			'label' => 'Log create date/time',
-			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'log.priority' => array(
@@ -61,11 +63,11 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'log.message' => array(
-			'code' => 'log.message',
-			'internalcode' => 'malog."message"',
-			'label' => 'Log message',
-			'type' => 'string',
+		'log.timestamp' => array(
+			'code' => 'log.timestamp',
+			'internalcode' => 'malog."timestamp"',
+			'label' => 'Log create date/time',
+			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'log.request' => array(

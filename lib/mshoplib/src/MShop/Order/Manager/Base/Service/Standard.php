@@ -56,10 +56,10 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.base.service.type' => array(
-			'code' => 'order.base.service.type',
-			'internalcode' => 'mordbase."type"',
-			'label' => 'Service type',
+		'order.base.service.name' => array(
+			'code' => 'order.base.service.name',
+			'internalcode' => 'mordbase."name"',
+			'label' => 'Service name',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -70,20 +70,12 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.base.service.name' => array(
-			'code' => 'order.base.service.name',
-			'internalcode' => 'mordbase."name"',
-			'label' => 'Service name',
+		'order.base.service.type' => array(
+			'code' => 'order.base.service.type',
+			'internalcode' => 'mordbase."type"',
+			'label' => 'Service type',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'order.base.service.mediaurl' => array(
-			'code'=>'order.base.service.mediaurl',
-			'internalcode'=>'mordbase."mediaurl"',
-			'label'=>'Service media url',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'order.base.service.price' => array(
 			'code' => 'order.base.service.price',
@@ -114,41 +106,49 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxvalue' => array(
-			'code'=>'order.base.service.taxvalue',
-			'internalcode'=>'mordbase."tax"',
-			'label'=>'Service tax value',
-			'type'=> 'decimal',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'code' => 'order.base.service.taxvalue',
+			'internalcode' => 'mordbase."tax"',
+			'label' => 'Service tax value',
+			'type' => 'decimal',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'order.base.service.taxflag' => array(
-			'code'=>'order.base.service.taxflag',
-			'internalcode'=>'mordbase."taxflag"',
-			'label'=>'Service tax flag (0=net, 1=gross)',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'code' => 'order.base.service.taxflag',
+			'internalcode' => 'mordbase."taxflag"',
+			'label' => 'Service tax flag (0=net, 1=gross)',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'order.base.service.mtime' => array(
-			'code' => 'order.base.service.mtime',
-			'internalcode' => 'mordbase."mtime"',
-			'label' => 'Service modification time',
+		'order.base.service.mediaurl' => array(
+			'code' => 'order.base.service.mediaurl',
+			'internalcode' => 'mordbase."mediaurl"',
+			'label' => 'Service media url',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'order.base.service.ctime' => array(
+			'code' => 'order.base.service.ctime',
+			'internalcode' => 'mordbase."ctime"',
+			'label' => 'Service create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.base.service.ctime'=> array(
-			'code'=>'order.base.service.ctime',
-			'internalcode'=>'mordbase."ctime"',
-			'label'=>'Service create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.base.service.mtime' => array(
+			'code' => 'order.base.service.mtime',
+			'internalcode' => 'mordbase."mtime"',
+			'label' => 'Service modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.base.service.editor'=> array(
-			'code'=>'order.base.service.editor',
-			'internalcode'=>'mordbase."editor"',
-			'label'=>'Service editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.base.service.editor' => array(
+			'code' => 'order.base.service.editor',
+			'internalcode' => 'mordbase."editor"',
+			'label' => 'Service editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -254,7 +254,7 @@ class Standard
 	{
 		$context = $this->getContext();
 		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$values = array( 'order.base.service.siteid'=> $context->getLocale()->getSiteId() );
+		$values = array( 'order.base.service.siteid' => $context->getLocale()->getSiteId() );
 
 		return $this->createItemBase( $priceManager->createItem(), $values );
 	}

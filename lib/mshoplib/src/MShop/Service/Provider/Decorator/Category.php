@@ -29,21 +29,21 @@ class Category
 	private $beConfig = array(
 		'category.include' => array(
 			'code' => 'category.include',
-			'internalcode'=> 'category.include',
-			'label'=> 'Code of allowed category and sub-categories for the service item',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> false,
+			'internalcode' => 'category.include',
+			'label' => 'Code of allowed category and sub-categories for the service item',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => false,
 		),
 		'category.exclude' => array(
 			'code' => 'category.exclude',
-			'internalcode'=> 'category.exclude',
-			'label'=> 'Code of category and sub-categories not allowed for the service item',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> false,
+			'internalcode' => 'category.exclude',
+			'label' => 'Code of category and sub-categories not allowed for the service item',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => false,
 		),
 	);
 

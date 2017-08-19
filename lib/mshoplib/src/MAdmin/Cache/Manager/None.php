@@ -26,9 +26,10 @@ class None
 		'cache.id' => array(
 			'code' => 'cache.id',
 			'internalcode' => '"id"',
-			'label' => 'Cache ID',
+			'label' => 'ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

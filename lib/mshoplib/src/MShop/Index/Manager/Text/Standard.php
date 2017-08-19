@@ -23,51 +23,51 @@ class Standard
 {
 	private $searchConfig = array(
 		'index.text.id' => array(
-			'code'=>'index.text.id',
-			'internalcode'=>'mindte."textid"',
+			'code' => 'index.text.id',
+			'internalcode' => 'mindte."textid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
-			'label'=>'Product index text ID',
-			'type'=> 'string',
+			'label' => 'Product index text ID',
+			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.text.relevance' => array(
-			'code'=>'index.text.relevance()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mindte2."prodid")
+			'code' => 'index.text.relevance()',
+			'internalcode' => '( SELECT COUNT(DISTINCT mindte2."prodid")
 				FROM "mshop_index_text" AS mindte2
 				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" IN ($1)
 				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
-			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
-			'type'=> 'float',
+			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
+			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
 		'sort:index.text.relevance' => array(
-			'code'=>'sort:index.text.relevance()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mindte2."prodid")
+			'code' => 'sort:index.text.relevance()',
+			'internalcode' => '( SELECT COUNT(DISTINCT mindte2."prodid")
 				FROM "mshop_index_text" AS mindte2
 				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" IN ($1)
 				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
-			'label'=>'Product texts, parameter(<list type code>,<language ID>,<search term>)',
-			'type'=> 'float',
+			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
+			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
 		'index.text.value' => array(
-			'code'=>'index.text.value()',
-			'internalcode'=>':site AND mindte."listtype" IN ($1)
+			'code' => 'index.text.value()',
+			'internalcode' => ':site AND mindte."listtype" IN ($1)
 				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
 				AND mindte."type" IN ($3) AND mindte."domain" = $4 AND mindte."value"',
-			'label'=>'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
-			'type'=> 'string',
+			'label' => 'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
+			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'sort:index.text.value' => array(
-			'code'=>'sort:index.text.value()',
-			'internalcode'=>'mindte."value"',
-			'label'=>'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
-			'type'=> 'string',
+			'code' => 'sort:index.text.value()',
+			'internalcode' => 'mindte."value"',
+			'label' => 'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
+			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		)

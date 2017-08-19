@@ -25,39 +25,39 @@ class DirectDebit
 	private $feConfig = array(
 		'directdebit.accountowner' => array(
 			'code' => 'directdebit.accountowner',
-			'internalcode'=> 'accountowner',
-			'label'=> 'Account owner',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true
+			'internalcode' => 'accountowner',
+			'label' => 'Account owner',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true
 		),
 		'directdebit.accountno' => array(
 			'code' => 'directdebit.accountno',
-			'internalcode'=> 'accountno',
-			'label'=> 'Account number',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true
+			'internalcode' => 'accountno',
+			'label' => 'Account number',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true
 		),
 		'directdebit.bankcode' => array(
 			'code' => 'directdebit.bankcode',
-			'internalcode'=> 'bankcode',
-			'label'=> 'Bank code',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true
+			'internalcode' => 'bankcode',
+			'label' => 'Bank code',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true
 		),
 		'directdebit.bankname' => array(
 			'code' => 'directdebit.bankname',
-			'internalcode'=> 'bankname',
-			'label'=> 'Bank name',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true
+			'internalcode' => 'bankname',
+			'label' => 'Bank name',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true
 		),
 	);
 

@@ -28,17 +28,19 @@ class Standard
 		'cache.id' => array(
 			'code' => 'cache.id',
 			'internalcode' => '"id"',
-			'label' => 'Cache ID',
+			'label' => 'ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'cache.siteid' => array(
 			'code' => 'cache.siteid',
 			'internalcode' => '"siteid"',
-			'label' => 'Cache site ID',
+			'label' => 'Site ID',
 			'type' => 'integer',
 			'public' => false,
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
 		),
 		'cache.value' => array(
 			'code' => 'cache.value',
@@ -51,7 +53,7 @@ class Standard
 		'cache.expire' => array(
 			'code' => 'cache.expire',
 			'internalcode' => '"expire"',
-			'label' => 'Cache expiration date/time',
+			'label' => 'Expiration date/time',
 			'type' => 'datetime',
 			'public' => false,
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -59,7 +61,7 @@ class Standard
 		'cache.tag.name' => array(
 			'code' => 'cache.tag.name',
 			'internalcode' => '"tname"',
-			'label' => 'Cache tag name',
+			'label' => 'Tag name',
 			'type' => 'string',
 			'public' => false,
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,

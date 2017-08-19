@@ -23,118 +23,123 @@ class Standard extends Base
 {
 	private $searchConfig = array(
 		'id' => array(
-			'code'=>'catalog.id',
-			'internalcode'=>'mcat."id"',
-			'label'=>'Catalog node ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'code' => 'catalog.id',
+			'internalcode' => 'mcat."id"',
+			'label' => 'ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'catalog.siteid' => array(
+			'code' => 'catalog.siteid',
+			'internalcode' => 'mcat."siteid"',
+			'label' => 'Site ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'parentid' => array(
+			'code' => 'catalog.parentid',
+			'internalcode' => 'mcat."parentid"',
+			'label' => 'Parent ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'level' => array(
+			'code' => 'catalog.level',
+			'internalcode' => 'mcat."level"',
+			'label' => 'Tree level',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'left' => array(
+			'code' => 'catalog.left',
+			'internalcode' => 'mcat."nleft"',
+			'label' => 'Left value',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'right' => array(
+			'code' => 'catalog.right',
+			'internalcode' => 'mcat."nright"',
+			'label' => 'Right value',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
 		),
 		'label' => array(
-			'code'=>'catalog.label',
-			'internalcode'=>'mcat."label"',
-			'label'=>'Catalog node label',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'config' => array(
-			'code' => 'catalog.config',
-			'internalcode' => 'mcat."config"',
-			'label' => 'Catalog node config',
+			'code' => 'catalog.label',
+			'internalcode' => 'mcat."label"',
+			'label' => 'Label',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'code' => array(
-			'code'=>'catalog.code',
-			'internalcode'=>'mcat."code"',
-			'label'=>'Catalog node code',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'code' => 'catalog.code',
+			'internalcode' => 'mcat."code"',
+			'label' => 'Code',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
+		'catalog.target' => array(
+			'code' => 'catalog.target',
+			'internalcode' => 'mcat."target"',
+			'label' => 'URL target',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'status' => array(
-			'code'=>'catalog.status',
-			'internalcode'=>'mcat."status"',
-			'label'=>'Catalog node status',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'code' => 'catalog.status',
+			'internalcode' => 'mcat."status"',
+			'label' => 'Status',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'parentid' => array(
-			'code'=>'catalog.parentid',
-			'internalcode'=>'mcat."parentid"',
-			'label'=>'Catalog node parentid',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'config' => array(
+			'code' => 'catalog.config',
+			'internalcode' => 'mcat."config"',
+			'label' => 'Config',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'level' => array(
-			'code'=>'catalog.level',
-			'internalcode'=>'mcat."level"',
-			'label'=>'Catalog node tree level',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		'left' => array(
-			'code'=>'catalog.left',
-			'internalcode'=>'mcat."nleft"',
-			'label'=>'Catalog node left value',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		'right' => array(
-			'code'=>'catalog.right',
-			'internalcode'=>'mcat."nright"',
-			'label'=>'Catalog node right value',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.siteid' => array(
-			'code'=>'catalog.siteid',
-			'internalcode'=>'mcat."siteid"',
-			'label'=>'Catalog node site ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		'catalog.ctime'=> array(
-			'label' => 'Catalog creation time',
+		'catalog.ctime' => array(
+			'label' => 'Create date/time',
 			'code' => 'catalog.ctime',
 			'internalcode' => 'mcat."ctime"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'catalog.mtime'=> array(
-			'label' => 'Catalog modification time',
+		'catalog.mtime' => array(
+			'label' => 'Modify date/time',
 			'code' => 'catalog.mtime',
 			'internalcode' => 'mcat."mtime"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'catalog.editor'=> array(
-			'code'=>'catalog.editor',
-			'internalcode'=>'mcat."editor"',
-			'label'=>'Catalog editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'catalog.target'=> array(
-			'code'=>'catalog.target',
-			'internalcode'=>'mcat."target"',
-			'label'=>'Catalog URL target',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'catalog.editor' => array(
+			'code' => 'catalog.editor',
+			'internalcode' => 'mcat."editor"',
+			'label' => 'Editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'catalog.contains' => array(
-			'code'=>'catalog.contains()',
-			'internalcode'=>'( SELECT COUNT(mcatli_cs."parentid")
+			'code' => 'catalog.contains()',
+			'internalcode' => '( SELECT COUNT(mcatli_cs."parentid")
 				FROM "mshop_catalog_list" AS mcatli_cs
 				WHERE mcat."id" = mcatli_cs."parentid" AND :site
 					AND mcatli_cs."domain" = $1 AND mcatli_cs."refid" IN ( $3 ) AND mcatli_cs."typeid" = $2
 					AND ( mcatli_cs."start" IS NULL OR mcatli_cs."start" <= \':date\' )
 					AND ( mcatli_cs."end" IS NULL OR mcatli_cs."end" >= \':date\' ) )',
-			'label'=>'Number of catalog list items, parameter(<domain>,<list type ID>,<reference IDs>)',
-			'type'=> 'integer',
+			'label' => 'Number of catalog list items, parameter(<domain>,<list type ID>,<reference IDs>)',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
@@ -735,7 +740,7 @@ class Standard extends Base
 			return $item;
 		}
 
-		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Catalog node for ID "%1$s" not available', $id ) );
+		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'for ID "%1$s" not available', $id ) );
 	}
 
 

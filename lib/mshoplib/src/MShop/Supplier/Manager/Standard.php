@@ -53,33 +53,36 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'supplier.status'=> array(
+		'supplier.status' => array(
 			'code' => 'supplier.status',
 			'internalcode' => 'msup."status"',
 			'label' => 'Status',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'supplier.ctime'=> array(
-			'code'=>'supplier.ctime',
-			'internalcode'=>'msup."ctime"',
-			'label'=>'Create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'supplier.ctime' => array(
+			'code' => 'supplier.ctime',
+			'internalcode' => 'msup."ctime"',
+			'label' => 'Create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'supplier.mtime'=> array(
-			'code'=>'supplier.mtime',
-			'internalcode'=>'msup."mtime"',
-			'label'=>'Modify date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'supplier.mtime' => array(
+			'code' => 'supplier.mtime',
+			'internalcode' => 'msup."mtime"',
+			'label' => 'Modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'supplier.editor'=> array(
-			'code'=>'supplier.editor',
-			'internalcode'=>'msup."editor"',
-			'label'=>'Editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'supplier.editor' => array(
+			'code' => 'supplier.editor',
+			'internalcode' => 'msup."editor"',
+			'label' => 'Editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

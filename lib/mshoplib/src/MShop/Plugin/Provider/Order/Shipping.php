@@ -40,12 +40,12 @@ class Shipping
 	private $beConfig = array(
 		'threshold' => array(
 			'code' => 'threshold',
-			'internalcode'=> 'threshold',
-			'label'=> 'Free shipping threshold per currency',
-			'type'=> 'map',
-			'internaltype'=> 'array',
-			'default'=> '{}',
-			'required'=> false,
+			'internalcode' => 'threshold',
+			'label' => 'Free shipping threshold per currency',
+			'type' => 'map',
+			'internaltype' => 'array',
+			'default' => '{}',
+			'required' => false,
 		),
 	);
 

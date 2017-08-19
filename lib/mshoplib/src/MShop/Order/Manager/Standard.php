@@ -23,132 +23,135 @@ class Standard
 	implements \Aimeos\MShop\Order\Manager\Iface
 {
 	private $searchConfig = array(
-		'order.id'=> array(
-			'code'=>'order.id',
-			'internalcode'=>'mord."id"',
-			'label'=>'Invoice ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.id' => array(
+			'code' => 'order.id',
+			'internalcode' => 'mord."id"',
+			'label' => 'Invoice ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'order.siteid'=> array(
-			'code'=>'order.siteid',
-			'internalcode'=>'mord."siteid"',
-			'label'=>'Invoice site ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.siteid' => array(
+			'code' => 'order.siteid',
+			'internalcode' => 'mord."siteid"',
+			'label' => 'Invoice site ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'order.baseid'=> array(
-			'code'=>'order.baseid',
-			'internalcode'=>'mord."baseid"',
-			'label'=>'Invoice base ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.baseid' => array(
+			'code' => 'order.baseid',
+			'internalcode' => 'mord."baseid"',
+			'label' => 'Invoice base ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'order.type'=> array(
-			'code'=>'order.type',
-			'internalcode'=>'mord."type"',
-			'label'=>'Invoice type',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.datepayment' => array(
+			'code' => 'order.datepayment',
+			'internalcode' => 'mord."datepayment"',
+			'label' => 'Purchase date',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.datepayment'=> array(
-			'code'=>'order.datepayment',
-			'internalcode'=>'mord."datepayment"',
-			'label'=>'Purchase date',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.datedelivery' => array(
+			'code' => 'order.datedelivery',
+			'internalcode' => 'mord."datedelivery"',
+			'label' => 'Delivery date',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.datedelivery'=> array(
-			'code'=>'order.datedelivery',
-			'internalcode'=>'mord."datedelivery"',
-			'label'=>'Delivery date',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.statusdelivery' => array(
+			'code' => 'order.statusdelivery',
+			'internalcode' => 'mord."statusdelivery"',
+			'label' => 'Delivery status',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'order.statusdelivery'=> array(
-			'code'=>'order.statusdelivery',
-			'internalcode'=>'mord."statusdelivery"',
-			'label'=>'Delivery status',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.statuspayment' => array(
+			'code' => 'order.statuspayment',
+			'internalcode' => 'mord."statuspayment"',
+			'label' => 'Payment status',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'order.statuspayment'=> array(
-			'code'=>'order.statuspayment',
-			'internalcode'=>'mord."statuspayment"',
-			'label'=>'Payment status',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.type' => array(
+			'code' => 'order.type',
+			'internalcode' => 'mord."type"',
+			'label' => 'Invoice type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.relatedid'=> array(
-			'code'=>'order.relatedid',
-			'internalcode'=>'mord."relatedid"',
-			'label'=>'Related invoice ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.relatedid' => array(
+			'code' => 'order.relatedid',
+			'internalcode' => 'mord."relatedid"',
+			'label' => 'Related invoice ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'order.cdate'=> array(
-			'code'=>'order.cdate',
-			'internalcode'=>'mord."cdate"',
-			'label'=>'Creation date',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.cdate' => array(
+			'code' => 'order.cdate',
+			'internalcode' => 'mord."cdate"',
+			'label' => 'Create date',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.cmonth'=> array(
-			'code'=>'order.cmonth',
-			'internalcode'=>'mord."cmonth"',
-			'label'=>'Creation month',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.cmonth' => array(
+			'code' => 'order.cmonth',
+			'internalcode' => 'mord."cmonth"',
+			'label' => 'Create month',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.cweek'=> array(
-			'code'=>'order.cweek',
-			'internalcode'=>'mord."cweek"',
-			'label'=>'Creation week',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.cweek' => array(
+			'code' => 'order.cweek',
+			'internalcode' => 'mord."cweek"',
+			'label' => 'Create week',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.chour'=> array(
-			'code'=>'order.chour',
-			'internalcode'=>'mord."chour"',
-			'label'=>'Creation hour',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.chour' => array(
+			'code' => 'order.chour',
+			'internalcode' => 'mord."chour"',
+			'label' => 'Create hour',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.ctime'=> array(
-			'code'=>'order.ctime',
-			'internalcode'=>'mord."ctime"',
-			'label'=>'Creation date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.ctime' => array(
+			'code' => 'order.ctime',
+			'internalcode' => 'mord."ctime"',
+			'label' => 'Create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'order.mtime'=> array(
-			'code'=>'order.mtime',
-			'internalcode'=>'mord."mtime"',
-			'label'=>'Modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.mtime' => array(
+			'code' => 'order.mtime',
+			'internalcode' => 'mord."mtime"',
+			'label' => 'Modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'order.editor'=> array(
-			'code'=>'order.editor',
-			'internalcode'=>'mord."editor"',
-			'label'=>'Editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.editor' => array(
+			'code' => 'order.editor',
+			'internalcode' => 'mord."editor"',
+			'label' => 'Editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'order.containsStatus' => array(
-			'code'=>'order.containsStatus()',
-			'internalcode'=>'( SELECT COUNT(mordst_cs."parentid")
+			'code' => 'order.containsStatus()',
+			'internalcode' => '( SELECT COUNT(mordst_cs."parentid")
 				FROM "mshop_order_status" AS mordst_cs
 				WHERE mord."id" = mordst_cs."parentid" AND :site
 				AND mordst_cs."type" = $1 AND mordst_cs."value" IN ( $2 ) )',
-			'label'=>'Number of order status items, parameter(<type>,<value>)',
-			'type'=> 'integer',
+			'label' => 'Number of order status items, parameter(<type>,<value>)',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
@@ -257,7 +260,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'order.siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'order.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 

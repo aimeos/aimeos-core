@@ -25,21 +25,21 @@ class FixedRebate
 	private $beConfig = array(
 		'fixedrebate.productcode' => array(
 			'code' => 'fixedrebate.productcode',
-			'internalcode'=> 'fixedrebate.productcode',
-			'label'=> 'Product code of the rebate product',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'internalcode' => 'fixedrebate.productcode',
+			'label' => 'Product code of the rebate product',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true,
 		),
 		'fixedrebate.rebate' => array(
 			'code' => 'fixedrebate.rebate',
-			'internalcode'=> 'fixedrebate.rebate',
-			'label'=> 'Map of currency ID and rebate amount',
-			'type'=> 'map',
-			'internaltype'=> 'array',
-			'default'=> [],
-			'required'=> true,
+			'internalcode' => 'fixedrebate.rebate',
+			'label' => 'Map of currency ID and rebate amount',
+			'type' => 'map',
+			'internaltype' => 'array',
+			'default' => [],
+			'required' => true,
 		),
 	);
 

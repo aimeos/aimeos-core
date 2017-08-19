@@ -26,7 +26,7 @@ class Standard
 		'locale.id' => array(
 			'code' => 'locale.id',
 			'internalcode' => 'mloc."id"',
-			'label' => 'Locale ID',
+			'label' => 'ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -34,7 +34,7 @@ class Standard
 		'locale.siteid' => array(
 			'code' => 'locale.siteid',
 			'internalcode' => 'mloc."siteid"',
-			'label' => 'Locale site',
+			'label' => 'Site ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -42,51 +42,54 @@ class Standard
 		'locale.languageid' => array(
 			'code' => 'locale.languageid',
 			'internalcode' => 'mloc."langid"',
-			'label' => 'Locale language ID',
+			'label' => 'Language ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.currencyid' => array(
 			'code' => 'locale.currencyid',
 			'internalcode' => 'mloc."currencyid"',
-			'label' => 'Locale currency ID',
+			'label' => 'Currency ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'locale.position' => array(
-			'code' => 'locale.position',
-			'internalcode' => 'mloc."pos"',
-			'label' => 'Locale position',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'locale.status' => array(
 			'code' => 'locale.status',
 			'internalcode' => 'mloc."status"',
-			'label' => 'Locale status',
+			'label' => 'Status',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'locale.ctime'=> array(
-			'code'=>'locale.ctime',
-			'internalcode'=>'mloc."ctime"',
-			'label'=>'Locale create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.position' => array(
+			'code' => 'locale.position',
+			'internalcode' => 'mloc."pos"',
+			'label' => 'Position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'locale.mtime'=> array(
-			'code'=>'locale.mtime',
-			'internalcode'=>'mloc."mtime"',
-			'label'=>'Locale modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.ctime' => array(
+			'code' => 'locale.ctime',
+			'internalcode' => 'mloc."ctime"',
+			'label' => 'Create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'locale.editor'=> array(
-			'code'=>'locale.editor',
-			'internalcode'=>'mloc."editor"',
-			'label'=>'Locale editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.mtime' => array(
+			'code' => 'locale.mtime',
+			'internalcode' => 'mloc."mtime"',
+			'label' => 'Modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'locale.editor' => array(
+			'code' => 'locale.editor',
+			'internalcode' => 'mloc."editor"',
+			'label' => 'Editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

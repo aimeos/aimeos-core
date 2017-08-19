@@ -25,12 +25,12 @@ class FreeShipping
 	private $beConfig = array(
 		'freeshipping.productcode' => array(
 			'code' => 'freeshipping.productcode',
-			'internalcode'=> 'freeshipping.productcode',
-			'label'=> 'Product code of the free shipping product',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'internalcode' => 'freeshipping.productcode',
+			'label' => 'Product code of the free shipping product',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true,
 		),
 	);
 

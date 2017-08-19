@@ -29,7 +29,7 @@ class Standard
 			'code' => 'locale.site.id',
 			'internalcode' => 'mlocsi."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_site" AS mlocsi ON (mloc."siteid" = mlocsi."id")' ),
-			'label' => 'Locale site ID',
+			'label' => 'Site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -37,82 +37,86 @@ class Standard
 		'locale.site.siteid' => array(
 			'code' => 'locale.site.siteid',
 			'internalcode' => 'mlocsi."id"',
-			'label' => 'Locale site ID',
+			'label' => 'Site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'locale.site.code' => array(
-			'code' => 'locale.site.code',
-			'internalcode' => 'mlocsi."code"',
-			'label' => 'Locale site code',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
 		'locale.site.label' => array(
 			'code' => 'locale.site.label',
 			'internalcode' => 'mlocsi."label"',
-			'label' => 'Locale site label',
+			'label' => 'Site label',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'locale.site.config' => array(
-			'code' => 'locale.site.config',
-			'internalcode' => 'mlocsi."config"',
-			'label' => 'Locale site config',
+		'locale.site.code' => array(
+			'code' => 'locale.site.code',
+			'internalcode' => 'mlocsi."code"',
+			'label' => 'Site code',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.site.status' => array(
 			'code' => 'locale.site.status',
 			'internalcode' => 'mlocsi."status"',
-			'label' => 'Locale site status',
+			'label' => 'Site status',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'locale.site.ctime'=> array(
-			'code'=>'locale.site.ctime',
-			'internalcode'=>'mlocsi."ctime"',
-			'label'=>'Locale site create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.site.config' => array(
+			'code' => 'locale.site.config',
+			'internalcode' => 'mlocsi."config"',
+			'label' => 'Site config',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'locale.site.mtime'=> array(
-			'code'=>'locale.site.mtime',
-			'internalcode'=>'mlocsi."mtime"',
-			'label'=>'Locale site modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.site.ctime' => array(
+			'code' => 'locale.site.ctime',
+			'internalcode' => 'mlocsi."ctime"',
+			'label' => 'Site create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'locale.site.editor'=> array(
-			'code'=>'locale.site.editor',
-			'internalcode'=>'mlocsi."editor"',
-			'label'=>'Locale site editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.site.mtime' => array(
+			'code' => 'locale.site.mtime',
+			'internalcode' => 'mlocsi."mtime"',
+			'label' => 'Site modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'locale.site.editor' => array(
+			'code' => 'locale.site.editor',
+			'internalcode' => 'mlocsi."editor"',
+			'label' => 'Site editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'level' => array(
-			'code'=>'locale.site.level',
-			'internalcode'=>'mlocsi."level"',
-			'label'=>'Locale site tree level',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'code' => 'locale.site.level',
+			'internalcode' => 'mlocsi."level"',
+			'label' => 'Site tree level',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'left' => array(
-			'code'=>'locale.site.left',
-			'internalcode'=>'mlocsi."nleft"',
-			'label'=>'Locale site left value',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'code' => 'locale.site.left',
+			'internalcode' => 'mlocsi."nleft"',
+			'label' => 'Site left value',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'right' => array(
-			'code'=>'locale.site.right',
-			'internalcode'=>'mlocsi."nright"',
-			'label'=>'Locale site right value',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'code' => 'locale.site.right',
+			'internalcode' => 'mlocsi."nright"',
+			'label' => 'Site right value',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 	);
@@ -905,7 +909,7 @@ class Standard
 	 * Create new item object initialized with given parameters.
 	 *
 	 * @param array $data Associative list of item key/value pairs
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item object
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Site item object
 	 */
 	protected function createItemBase( array $data = [] )
 	{

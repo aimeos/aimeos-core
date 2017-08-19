@@ -24,12 +24,12 @@ class Supplier
 	private $feConfig = array(
 		'supplier.code' => array(
 			'code' => 'supplier.code',
-			'internalcode'=> 'supplier.code',
-			'label'=> 'Pick-up address',
-			'type'=> 'list',
-			'internaltype'=> 'array',
-			'default'=> [],
-			'required'=> true
+			'internalcode' => 'supplier.code',
+			'label' => 'Pick-up address',
+			'type' => 'list',
+			'internaltype' => 'array',
+			'default' => [],
+			'required' => true
 		),
 	);
 

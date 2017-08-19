@@ -25,72 +25,74 @@ class Standard
 	private $typeIds = [];
 
 	private $searchConfig = array(
-		'stock.id'=> array(
-			'code'=>'stock.id',
-			'internalcode'=>'msto."id"',
-			'label'=>'Stock ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'stock.id' => array(
+			'code' => 'stock.id',
+			'internalcode' => 'msto."id"',
+			'label' => 'ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'stock.siteid'=> array(
-			'code'=>'stock.siteid',
-			'internalcode'=>'msto."siteid"',
-			'label'=>'Stock site ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		'stock.productcode'=> array(
-			'code'=>'stock.productcode',
-			'internalcode'=>'msto."productcode"',
-			'label'=>'Stock product code',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'stock.siteid' => array(
+			'code' => 'stock.siteid',
+			'internalcode' => 'msto."siteid"',
+			'label' => 'site ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'stock.typeid' => array(
-			'code'=>'stock.typeid',
-			'internalcode'=>'msto."typeid"',
-			'label'=>'Stock type ID',
-			'type'=> 'integer',
+			'code' => 'stock.typeid',
+			'internalcode' => 'msto."typeid"',
+			'label' => 'Type ID',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'stock.productcode' => array(
+			'code' => 'stock.productcode',
+			'internalcode' => 'msto."productcode"',
+			'label' => 'Product code',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'stock.stocklevel' => array(
-			'code'=>'stock.stocklevel',
-			'internalcode'=>'msto."stocklevel"',
-			'label'=>'Stock level',
-			'type'=> 'integer',
+			'code' => 'stock.stocklevel',
+			'internalcode' => 'msto."stocklevel"',
+			'label' => 'Stock level',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'stock.dateback' => array(
-			'code'=>'stock.dateback',
-			'internalcode'=>'msto."backdate"',
-			'label'=>'Stock back in stock date/time',
-			'type'=> 'datetime',
+			'code' => 'stock.dateback',
+			'internalcode' => 'msto."backdate"',
+			'label' => 'Back in stock date/time',
+			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'stock.mtime'=> array(
-			'code'=>'stock.mtime',
-			'internalcode'=>'msto."mtime"',
-			'label'=>'Stock modification date',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'stock.ctime' => array(
+			'code' => 'stock.ctime',
+			'internalcode' => 'msto."ctime"',
+			'label' => 'Creation date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'stock.ctime'=> array(
-			'code'=>'stock.ctime',
-			'internalcode'=>'msto."ctime"',
-			'label'=>'Stock creation date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'stock.mtime' => array(
+			'code' => 'stock.mtime',
+			'internalcode' => 'msto."mtime"',
+			'label' => 'Modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'stock.editor'=> array(
-			'code'=>'stock.editor',
-			'internalcode'=>'msto."editor"',
-			'label'=>'Stock editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'stock.editor' => array(
+			'code' => 'stock.editor',
+			'internalcode' => 'msto."editor"',
+			'label' => 'Editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 
@@ -807,7 +809,7 @@ class Standard
 			 * the current site and all parent sites if the stock level is
 			 * inherited by one of the parent sites.
 			 *
-			 * Each time the stock level is updated, the modification time is
+			 * Each time the stock level is updated, the modify date/time is
 			 * set to the current timestamp and the editor field is updated.
 			 *
 			 * @param string SQL statement for increasing/decreasing the stock level

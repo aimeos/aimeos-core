@@ -29,21 +29,21 @@ class Currency
 	private $beConfig = array(
 		'currency.include' => array(
 			'code' => 'currency.include',
-			'internalcode'=> 'currency.include',
-			'label'=> 'List of currencies allowed for the service item',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> false,
+			'internalcode' => 'currency.include',
+			'label' => 'List of currencies allowed for the service item',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => false,
 		),
 		'currency.exclude' => array(
 			'code' => 'currency.exclude',
-			'internalcode'=> 'currency.exclude',
-			'label'=> 'List of currencies not allowed for the service item',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> false,
+			'internalcode' => 'currency.exclude',
+			'label' => 'List of currencies not allowed for the service item',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => false,
 		),
 	);
 

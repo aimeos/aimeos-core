@@ -24,42 +24,42 @@ class Time
 	private $beConfig = array(
 		'time.start' => array(
 			'code' => 'time.start',
-			'internalcode'=> 'time.start',
-			'label'=> 'Earliest delivery time in 24h "HH:MM" format',
-			'type'=> 'time',
-			'internaltype'=> 'string',
-			'default'=> '00:00',
-			'required'=> false,
+			'internalcode' => 'time.start',
+			'label' => 'Earliest delivery time in 24h "HH:MM" format',
+			'type' => 'time',
+			'internaltype' => 'string',
+			'default' => '00:00',
+			'required' => false,
 		),
 		'time.end' => array(
 			'code' => 'time.end',
-			'internalcode'=> 'time.end',
-			'label'=> 'Latest delivery time in 24h "HH:MM" format',
-			'type'=> 'time',
-			'internaltype'=> 'string',
-			'default'=> '23:59',
-			'required'=> false,
+			'internalcode' => 'time.end',
+			'label' => 'Latest delivery time in 24h "HH:MM" format',
+			'type' => 'time',
+			'internaltype' => 'string',
+			'default' => '23:59',
+			'required' => false,
 		),
 		'time.weekdays' => array(
 			'code' => 'time.weekdays',
-			'internalcode'=> 'time.weekdays',
-			'label'=> 'Comma separated week days the start and end time is valid for, i.e. number from 1 (Monday) to 7 (Sunday)',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '1,2,3,4,5,6,7',
-			'required'=> false,
+			'internalcode' => 'time.weekdays',
+			'label' => 'Comma separated week days the start and end time is valid for, i.e. number from 1 (Monday) to 7 (Sunday)',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '1,2,3,4,5,6,7',
+			'required' => false,
 		),
 	);
 
 	private $feConfig = array(
 		'time.hourminute' => array(
 			'code' => 'time.hourminute',
-			'internalcode'=> 'hourminute',
-			'label'=> 'Delivery time',
-			'type'=> 'time',
-			'internaltype'=> 'time',
-			'default'=> '',
-			'required'=> true
+			'internalcode' => 'hourminute',
+			'label' => 'Delivery time',
+			'type' => 'time',
+			'internaltype' => 'time',
+			'default' => '',
+			'required' => true
 		),
 	);
 

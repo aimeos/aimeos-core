@@ -204,9 +204,9 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
-	 * Returns modification time of the order item base product.
+	 * Returns modify date/time of the order item base product.
 	 *
-	 * @return string|null Returns modification time of the order base item
+	 * @return string|null Returns modify date/time of the order base item
 	 */
 	public function getTimeModified()
 	{

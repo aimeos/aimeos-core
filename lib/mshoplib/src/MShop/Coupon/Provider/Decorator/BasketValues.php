@@ -25,21 +25,21 @@ class BasketValues
 	private $beConfig = array(
 		'basketvalues.total-value-min' => array(
 			'code' => 'basketvalues.total-value-min',
-			'internalcode'=> 'basketvalues.total-value-min',
-			'label'=> 'Minimum total value of the basket',
-			'type'=> 'number',
-			'internaltype'=> 'float',
-			'default'=> 0,
-			'required'=> true,
+			'internalcode' => 'basketvalues.total-value-min',
+			'label' => 'Minimum total value of the basket',
+			'type' => 'number',
+			'internaltype' => 'float',
+			'default' => 0,
+			'required' => true,
 		),
 		'basketvalues.total-value-max' => array(
 			'code' => 'basketvalues.total-value-max',
-			'internalcode'=> 'basketvalues.total-value-max',
-			'label'=> 'Maximum total value of the basket',
-			'type'=> 'number',
-			'internaltype'=> 'float',
-			'default'=> 0,
-			'required'=> true,
+			'internalcode' => 'basketvalues.total-value-max',
+			'label' => 'Maximum total value of the basket',
+			'type' => 'number',
+			'internaltype' => 'float',
+			'default' => 0,
+			'required' => true,
 		),
 	);
 

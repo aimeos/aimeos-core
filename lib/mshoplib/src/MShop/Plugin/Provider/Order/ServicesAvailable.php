@@ -39,21 +39,21 @@ class ServicesAvailable
 	private $beConfig = array(
 		'payment' => array(
 			'code' => 'payment',
-			'internalcode'=> 'payment',
-			'label'=> 'Require payment option',
-			'type'=> 'boolean',
-			'internaltype'=> 'boolean',
-			'default'=> '',
-			'required'=> false,
+			'internalcode' => 'payment',
+			'label' => 'Require payment option',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => '',
+			'required' => false,
 		),
 		'delivery' => array(
 			'code' => 'delivery',
-			'internalcode'=> 'delivery',
-			'label'=> 'Require delivery option',
-			'type'=> 'boolean',
-			'internaltype'=> 'boolean',
-			'default'=> '',
-			'required'=> false,
+			'internalcode' => 'delivery',
+			'label' => 'Require delivery option',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => '',
+			'required' => false,
 		),
 	);
 

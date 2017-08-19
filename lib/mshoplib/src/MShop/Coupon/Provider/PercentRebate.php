@@ -25,21 +25,21 @@ class PercentRebate
 	private $beConfig = array(
 		'percentrebate.productcode' => array(
 			'code' => 'percentrebate.productcode',
-			'internalcode'=> 'percentrebate.productcode',
-			'label'=> 'Product code of the rebate product',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'internalcode' => 'percentrebate.productcode',
+			'label' => 'Product code of the rebate product',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true,
 		),
 		'percentrebate.rebate' => array(
 			'code' => 'percentrebate.rebate',
-			'internalcode'=> 'percentrebate.rebate',
-			'label'=> 'Discount in percent',
-			'type'=> 'number',
-			'internaltype'=> 'decimal',
-			'default'=> 0,
-			'required'=> true,
+			'internalcode' => 'percentrebate.rebate',
+			'label' => 'Discount in percent',
+			'type' => 'number',
+			'internaltype' => 'decimal',
+			'default' => 0,
+			'required' => true,
 		),
 	);
 

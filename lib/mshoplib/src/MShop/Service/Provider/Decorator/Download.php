@@ -29,12 +29,12 @@ class Download
 	private $beConfig = array(
 		'download.all' => array(
 			'code' => 'download.all',
-			'internalcode'=> 'download.all',
-			'label'=> 'Check products: "1" = all must be downloads, "0" = at least one is no download',
-			'type'=> 'boolean',
-			'internaltype'=> 'boolean',
-			'default'=> null,
-			'required'=> false,
+			'internalcode' => 'download.all',
+			'label' => 'Check products: "1" = all must be downloads, "0" = at least one is no download',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => null,
+			'required' => false,
 		),
 	);
 

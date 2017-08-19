@@ -213,28 +213,28 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'order.base.address.ctime' => array(
+			'code' => 'order.base.address.ctime',
+			'internalcode' => 'mordbaad."ctime"',
+			'label' => 'Address create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'order.base.address.mtime' => array(
 			'code' => 'order.base.address.mtime',
 			'internalcode' => 'mordbaad."mtime"',
-			'label' => 'Address modification date/time',
+			'label' => 'Address modify date/time',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.base.address.ctime'=> array(
-			'code'=>'order.base.address.ctime',
-			'internalcode'=>'mordbaad."ctime"',
-			'label'=>'Address create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
-		'order.base.address.editor'=> array(
-			'code'=>'order.base.address.editor',
-			'internalcode'=>'mordbaad."editor"',
-			'label'=>'Address editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.base.address.editor' => array(
+			'code' => 'order.base.address.editor',
+			'internalcode' => 'mordbaad."editor"',
+			'label' => 'Address editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -338,7 +338,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'order.base.address.siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'order.base.address.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 

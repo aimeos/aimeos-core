@@ -21,67 +21,67 @@ class Standard
 	implements \Aimeos\MShop\Order\Manager\Status\Iface
 {
 	private $searchConfig = array(
-		'order.status.id'=> array(
-			'code'=>'order.status.id',
-			'internalcode'=>'mordst."id"',
-			'internaldeps'=> array( 'LEFT JOIN "mshop_order_status" AS mordst ON ( mord."id" = mordst."parentid" )' ),
-			'label'=>'Status ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.status.id' => array(
+			'code' => 'order.status.id',
+			'internalcode' => 'mordst."id"',
+			'internaldeps' => array( 'LEFT JOIN "mshop_order_status" AS mordst ON ( mord."id" = mordst."parentid" )' ),
+			'label' => 'Status ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'order.status.siteid'=> array(
-			'code'=>'order.status.siteid',
-			'internalcode'=>'mordst."siteid"',
-			'label'=>'Status site ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.status.siteid' => array(
+			'code' => 'order.status.siteid',
+			'internalcode' => 'mordst."siteid"',
+			'label' => 'Status site ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'order.status.parentid'=> array(
-			'code'=>'order.status.parentid',
-			'internalcode'=>'mordst."parentid"',
-			'label'=>'Status parent id',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'order.status.parentid' => array(
+			'code' => 'order.status.parentid',
+			'internalcode' => 'mordst."parentid"',
+			'label' => 'Status parent id',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'order.status.type'=> array(
-			'code'=>'order.status.type',
-			'internalcode'=>'mordst."type"',
-			'label'=>'Status type',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.status.type' => array(
+			'code' => 'order.status.type',
+			'internalcode' => 'mordst."type"',
+			'label' => 'Status type',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.status.value'=> array(
-			'code'=>'order.status.value',
-			'internalcode'=>'mordst."value"',
-			'label'=>'Status value',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.status.value' => array(
+			'code' => 'order.status.value',
+			'internalcode' => 'mordst."value"',
+			'label' => 'Status value',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'order.status.mtime'=> array(
-			'code'=>'order.status.mtime',
-			'internalcode'=>'mordst."mtime"',
-			'label'=>'Status modification time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.status.ctime' => array(
+			'code' => 'order.status.ctime',
+			'internalcode' => 'mordst."ctime"',
+			'label' => 'Status create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.status.ctime'=> array(
-			'code'=>'order.status.ctime',
-			'internalcode'=>'mordst."ctime"',
-			'label'=>'Status create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.status.mtime' => array(
+			'code' => 'order.status.mtime',
+			'internalcode' => 'mordst."mtime"',
+			'label' => 'Status modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.status.editor'=> array(
-			'code'=>'order.status.editor',
-			'internalcode'=>'mordst."editor"',
-			'label'=>'Status editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'order.status.editor' => array(
+			'code' => 'order.status.editor',
+			'internalcode' => 'mordst."editor"',
+			'label' => 'Status editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 	);
@@ -185,7 +185,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'order.status.siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'order.status.siteid' => $this->getContext()->getLocale()->getSiteId() );
 		return $this->createItemBase( $values );
 	}
 

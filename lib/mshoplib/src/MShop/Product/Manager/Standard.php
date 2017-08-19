@@ -23,63 +23,63 @@ class Standard
 	implements \Aimeos\MShop\Product\Manager\Iface
 {
 	private $searchConfig = array(
-		'product.siteid'=> array(
-			'code'=>'product.siteid',
-			'internalcode'=>'mpro."siteid"',
-			'label'=>'Site ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'product.siteid' => array(
+			'code' => 'product.siteid',
+			'internalcode' => 'mpro."siteid"',
+			'label' => 'Site ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.typeid'=> array(
-			'code'=>'product.typeid',
-			'internalcode'=>'mpro."typeid"',
-			'label'=>'Type ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'product.typeid' => array(
+			'code' => 'product.typeid',
+			'internalcode' => 'mpro."typeid"',
+			'label' => 'Type ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		'product.label'=> array(
-			'code'=>'product.label',
-			'internalcode'=>'mpro."label"',
-			'label'=>'Label',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.label' => array(
+			'code' => 'product.label',
+			'internalcode' => 'mpro."label"',
+			'label' => 'Label',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.code'=> array(
-			'code'=>'product.code',
-			'internalcode'=>'mpro."code"',
-			'label'=>'SKU',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.code' => array(
+			'code' => 'product.code',
+			'internalcode' => 'mpro."code"',
+			'label' => 'SKU',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.id'=> array(
-			'code'=>'product.id',
-			'internalcode'=>'mpro."id"',
-			'label'=>'ID',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'product.id' => array(
+			'code' => 'product.id',
+			'internalcode' => 'mpro."id"',
+			'label' => 'ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'product.status'=> array(
-			'code'=>'product.status',
-			'internalcode'=>'mpro."status"',
-			'label'=>'Status',
-			'type'=> 'integer',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		'product.datestart' => array(
+			'code' => 'product.datestart',
+			'internalcode' => 'mpro."start"',
+			'label' => 'Start date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.datestart'=> array(
-			'code'=>'product.datestart',
-			'internalcode'=>'mpro."start"',
-			'label'=>'Start date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.dateend' => array(
+			'code' => 'product.dateend',
+			'internalcode' => 'mpro."end"',
+			'label' => 'End date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.dateend'=> array(
-			'code'=>'product.dateend',
-			'internalcode'=>'mpro."end"',
-			'label'=>'End date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.status' => array(
+			'code' => 'product.status',
+			'internalcode' => 'mpro."status"',
+			'label' => 'Status',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'product.config' => array(
 			'code' => 'product.config',
@@ -89,44 +89,48 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'product.ctime'=> array(
-			'code'=>'product.ctime',
-			'internalcode'=>'mpro."ctime"',
-			'label'=>'Create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.target' => array(
+			'code' => 'product.target',
+			'internalcode' => 'mpro."target"',
+			'label' => 'URL target',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'product.mtime'=> array(
-			'code'=>'product.mtime',
-			'internalcode'=>'mpro."mtime"',
-			'label'=>'Modify date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.ctime' => array(
+			'code' => 'product.ctime',
+			'internalcode' => 'mpro."ctime"',
+			'label' => 'Create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'product.editor'=> array(
-			'code'=>'product.editor',
-			'internalcode'=>'mpro."editor"',
-			'label'=>'Editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.mtime' => array(
+			'code' => 'product.mtime',
+			'internalcode' => 'mpro."mtime"',
+			'label' => 'Modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'product.target'=> array(
-			'code'=>'product.target',
-			'internalcode'=>'mpro."target"',
-			'label'=>'URL target',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.editor' => array(
+			'code' => 'product.editor',
+			'internalcode' => 'mpro."editor"',
+			'label' => 'Editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'product.contains' => array(
-			'code'=>'product.contains()',
-			'internalcode'=>'( SELECT COUNT(mproli_cs."parentid")
+			'code' => 'product.contains()',
+			'internalcode' => '( SELECT COUNT(mproli_cs."parentid")
 				FROM "mshop_product_list" AS mproli_cs
 				WHERE mpro."id" = mproli_cs."parentid" AND :site
 					AND mproli_cs."domain" = $1 AND mproli_cs."refid" IN ( $3 ) AND mproli_cs."typeid" = $2
 					AND ( mproli_cs."start" IS NULL OR mproli_cs."start" <= \':date\' )
 					AND ( mproli_cs."end" IS NULL OR mproli_cs."end" >= \':date\' ) )',
-			'label'=>'Number of product list items, parameter(<domain>,<list type ID>,<reference IDs>)',
-			'type'=> 'integer',
+			'label' => 'Number of product list items, parameter(<domain>,<list type ID>,<reference IDs>)',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),

@@ -23,41 +23,41 @@ class Standard
 {
 	private $searchConfig = array(
 		'index.attribute.id' => array(
-			'code'=>'index.attribute.id',
-			'internalcode'=>'mindat."attrid"',
+			'code' => 'index.attribute.id',
+			'internalcode' => 'mindat."attrid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_attribute" AS mindat ON mindat."prodid" = mpro."id"' ),
-			'label'=>'Product index attribute ID',
-			'type'=> 'integer',
+			'label' => 'Product index attribute ID',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'index.attribute.code' => array(
-			'code'=>'index.attribute.code()',
-			'internalcode'=>':site AND mindat."listtype" = $1 AND mindat."type" = $2 AND mindat."code"',
-			'label'=>'Attribute code, parameter(<list type code>,<attribute type code>)',
-			'type'=> 'string',
+			'code' => 'index.attribute.code()',
+			'internalcode' => ':site AND mindat."listtype" = $1 AND mindat."type" = $2 AND mindat."code"',
+			'label' => 'Attribute code, parameter(<list type code>,<attribute type code>)',
+			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
 		'index.attributecount' => array(
-			'code'=>'index.attributecount()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mindat_cnt."attrid")
+			'code' => 'index.attributecount()',
+			'internalcode' => '( SELECT COUNT(DISTINCT mindat_cnt."attrid")
 				FROM "mshop_index_attribute" AS mindat_cnt
 				WHERE mpro."id" = mindat_cnt."prodid" AND :site
 				AND mindat_cnt."attrid" IN ( $2 ) AND mindat_cnt."listtype" = $1 )',
-			'label'=>'Number of product attributes, parameter(<list type code>,<attribute IDs>)',
-			'type'=> 'integer',
+			'label' => 'Number of product attributes, parameter(<list type code>,<attribute IDs>)',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'index.attributeaggregate' => array(
-			'code'=>'index.attributeaggregate()',
-			'internalcode'=>'( SELECT COUNT(DISTINCT mindat_agg."attrid")
+			'code' => 'index.attributeaggregate()',
+			'internalcode' => '( SELECT COUNT(DISTINCT mindat_agg."attrid")
 				FROM "mshop_index_attribute" AS mindat_agg
 				WHERE mpro."id" = mindat_agg."prodid" AND :site
 				AND mindat_agg."attrid" IN ( $1 ) )',
-			'label'=>'Number of product attributes, parameter(<attribute IDs>)',
-			'type'=> 'integer',
+			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
+			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),

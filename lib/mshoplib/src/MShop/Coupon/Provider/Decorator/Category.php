@@ -24,12 +24,12 @@ class Category
 	private $beConfig = array(
 		'category.catid' => array(
 			'code' => 'category.catid',
-			'internalcode'=> 'category.catid',
-			'label'=> 'Category IDs separated by comma',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'internalcode' => 'category.catid',
+			'label' => 'Category IDs separated by comma',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true,
 		),
 	);
 

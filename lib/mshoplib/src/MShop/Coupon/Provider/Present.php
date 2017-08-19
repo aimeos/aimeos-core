@@ -25,21 +25,21 @@ class Present
 	private $beConfig = array(
 		'present.productcode' => array(
 			'code' => 'present.productcode',
-			'internalcode'=> 'present.productcode',
-			'label'=> 'Product code of the rebate product',
-			'type'=> 'string',
-			'internaltype'=> 'string',
-			'default'=> '',
-			'required'=> true,
+			'internalcode' => 'present.productcode',
+			'label' => 'Product code of the rebate product',
+			'type' => 'string',
+			'internaltype' => 'string',
+			'default' => '',
+			'required' => true,
 		),
 		'present.quantity' => array(
 			'code' => 'present.quantity',
-			'internalcode'=> 'present.quantity',
-			'label'=> 'Number of articles that will be added to the basket',
-			'type'=> 'number',
-			'internaltype'=> 'integer',
-			'default'=> 1,
-			'required'=> true,
+			'internalcode' => 'present.quantity',
+			'label' => 'Number of articles that will be added to the basket',
+			'type' => 'number',
+			'internaltype' => 'integer',
+			'default' => 1,
+			'required' => true,
 		),
 	);
 

@@ -25,7 +25,7 @@ class Standard
 	private $searchConfig = array(
 		// no siteid
 		'customer.id' => array(
-			'label' => 'Customer ID',
+			'label' => 'ID',
 			'code' => 'customer.id',
 			'internalcode' => 'mcus."id"',
 			'type' => 'integer',
@@ -53,14 +53,14 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.company'=> array(
+		'customer.company' => array(
 			'label' => 'Company',
 			'code' => 'customer.company',
 			'internalcode' => 'mcus."company"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.vatid'=> array(
+		'customer.vatid' => array(
 			'label' => 'Vat ID',
 			'code' => 'customer.vatid',
 			'internalcode' => 'mcus."vatid"',
@@ -195,21 +195,22 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'customer.status'=> array(
+		'customer.status' => array(
 			'label' => 'Status',
 			'code' => 'customer.status',
 			'internalcode' => 'mcus."status"',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'customer.dateverified'=> array(
+		'customer.dateverified' => array(
 			'label' => 'Verification date',
 			'code' => 'customer.dateverified',
 			'internalcode' => 'mcus."vdate"',
 			'type' => 'date',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'customer.password'=> array(
+		'customer.password' => array(
 			'label' => 'Password',
 			'code' => 'customer.password',
 			'internalcode' => 'mcus."password"',
@@ -217,26 +218,29 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.ctime'=> array(
-			'label' => 'Creation time',
+		'customer.ctime' => array(
+			'label' => 'Create date/time',
 			'code' => 'customer.ctime',
 			'internalcode' => 'mcus."ctime"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'customer.mtime'=> array(
-			'label' => 'Modification time',
+		'customer.mtime' => array(
+			'label' => 'Modify date/time',
 			'code' => 'customer.mtime',
 			'internalcode' => 'mcus."mtime"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'customer.editor'=> array(
-			'label'=>'Editor',
-			'code'=>'customer.editor',
-			'internalcode'=>'mcus."editor"',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'customer.editor' => array(
+			'label' => 'Editor',
+			'code' => 'customer.editor',
+			'internalcode' => 'mcus."editor"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 
@@ -264,7 +268,7 @@ class Standard
 	 */
 	public function createItem()
 	{
-		$values = array( 'customer.siteid'=> $this->getContext()->getLocale()->getSiteId() );
+		$values = array( 'customer.siteid' => $this->getContext()->getLocale()->getSiteId() );
 
 		return $this->createItemBase( $values );
 	}

@@ -94,7 +94,7 @@ abstract class Base
 
 
 	/**
-	 * Returns modification time of the order coupon.
+	 * Returns modify date/time of the order coupon.
 	 *
 	 * @return string|null Modification time (YYYY-MM-DD HH:mm:ss)
 	 */

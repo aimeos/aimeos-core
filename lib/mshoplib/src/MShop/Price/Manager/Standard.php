@@ -109,26 +109,26 @@ class Standard
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'price.mtime'=> array(
-			'code'=>'price.mtime',
-			'internalcode'=>'mpri."mtime"',
-			'label'=>'Price modification date',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'price.mtime' => array(
+			'code' => 'price.mtime',
+			'internalcode' => 'mpri."mtime"',
+			'label' => 'Price modify date',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'price.ctime'=> array(
-			'code'=>'price.ctime',
-			'internalcode'=>'mpri."ctime"',
-			'label'=>'Price creation date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'price.ctime' => array(
+			'code' => 'price.ctime',
+			'internalcode' => 'mpri."ctime"',
+			'label' => 'Price create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'price.editor'=> array(
-			'code'=>'price.editor',
-			'internalcode'=>'mpri."editor"',
-			'label'=>'Price editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'price.editor' => array(
+			'code' => 'price.editor',
+			'internalcode' => 'mpri."editor"',
+			'label' => 'Price editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
 

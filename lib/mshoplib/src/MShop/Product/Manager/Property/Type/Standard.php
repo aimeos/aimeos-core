@@ -52,13 +52,6 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.property.type.status' => array(
-			'code' => 'product.property.type.status',
-			'internalcode' => 'mproprty."status"',
-			'label' => 'Property type status',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-		),
 		'product.property.type.domain' => array(
 			'code' => 'product.property.type.domain',
 			'internalcode' => 'mproprty."domain"',
@@ -66,26 +59,36 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.property.type.mtime'=> array(
-			'code'=>'product.property.type.mtime',
-			'internalcode'=>'mproprty."mtime"',
-			'label'=>'Property type modify date',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.property.type.status' => array(
+			'code' => 'product.property.type.status',
+			'internalcode' => 'mproprty."status"',
+			'label' => 'Property type status',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'product.property.type.ctime'=> array(
-			'code'=>'product.property.type.ctime',
-			'internalcode'=>'mproprty."ctime"',
-			'label'=>'Property type create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.property.type.ctime' => array(
+			'code' => 'product.property.type.ctime',
+			'internalcode' => 'mproprty."ctime"',
+			'label' => 'Property type create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'product.property.type.editor'=> array(
-			'code'=>'product.property.type.editor',
-			'internalcode'=>'mproprty."editor"',
-			'label'=>'Property type editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		'product.property.type.mtime' => array(
+			'code' => 'product.property.type.mtime',
+			'internalcode' => 'mproprty."mtime"',
+			'label' => 'Property type modify date',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'product.property.type.editor' => array(
+			'code' => 'product.property.type.editor',
+			'internalcode' => 'mproprty."editor"',
+			'label' => 'Property type editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

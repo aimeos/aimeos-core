@@ -27,7 +27,7 @@ class Standard
 			'code' => 'locale.language.id',
 			'internalcode' => 'mlocla."id"',
 			'internaldeps' => array( 'LEFT JOIN "mshop_locale_language" AS mlocla ON (mloc."langid" = mlocla."id")' ),
-			'label' => 'Locale language ID',
+			'label' => 'Language ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
@@ -35,7 +35,7 @@ class Standard
 		'locale.language.siteid' => array(
 			'code' => 'locale.language.siteid',
 			'internalcode' => 'mlocla."siteid"',
-			'label' => 'Locale language site ID',
+			'label' => 'Language site ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -43,44 +43,47 @@ class Standard
 		'locale.language.label' => array(
 			'code' => 'locale.language.label',
 			'internalcode' => 'mlocla."label"',
-			'label' => 'Locale language label',
+			'label' => 'Language label',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.language.code' => array(
 			'code' => 'locale.language.code',
 			'internalcode' => 'mlocla."id"',
-			'label' => 'Locale language code',
+			'label' => 'Language code',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'locale.language.status' => array(
 			'code' => 'locale.language.status',
 			'internalcode' => 'mlocla."status"',
-			'label' => 'Locale language status',
+			'label' => 'Language status',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
-		'locale.language.ctime'=> array(
-			'code'=>'locale.language.ctime',
-			'internalcode'=>'mlocla."ctime"',
-			'label'=>'Locale language create date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.language.ctime' => array(
+			'code' => 'locale.language.ctime',
+			'internalcode' => 'mlocla."ctime"',
+			'label' => 'Language create date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'locale.language.mtime'=> array(
-			'code'=>'locale.language.mtime',
-			'internalcode'=>'mlocla."mtime"',
-			'label'=>'Locale language modification date/time',
-			'type'=> 'datetime',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.language.mtime' => array(
+			'code' => 'locale.language.mtime',
+			'internalcode' => 'mlocla."mtime"',
+			'label' => 'Language modify date/time',
+			'type' => 'datetime',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
-		'locale.language.editor'=> array(
-			'code'=>'locale.language.editor',
-			'internalcode'=>'mlocla."editor"',
-			'label'=>'Locale language editor',
-			'type'=> 'string',
-			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR
+		'locale.language.editor' => array(
+			'code' => 'locale.language.editor',
+			'internalcode' => 'mlocla."editor"',
+			'label' => 'Language editor',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 
@@ -624,7 +627,7 @@ class Standard
 	 * Create new item object initialized with given parameters.
 	 *
 	 * @param array $data Associative list of item key/value pairs
-	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item
+	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Language item
 	 */
 	protected function createItemBase( array $data = [] )
 	{
