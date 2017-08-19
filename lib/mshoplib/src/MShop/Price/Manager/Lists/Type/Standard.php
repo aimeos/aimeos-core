@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'price.lists.type.label' => array(
+			'label' => 'Price list type label',
+			'code' => 'price.lists.type.label',
+			'internalcode' => 'mprility."label"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'price.lists.type.code' => array(
 			'code' => 'price.lists.type.code',
 			'internalcode' => 'mprility."code"',
@@ -50,13 +57,6 @@ class Standard
 			'code' => 'price.lists.type.domain',
 			'internalcode' => 'mprility."domain"',
 			'label' => 'Price list type domain',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'price.lists.type.label' => array(
-			'label' => 'Price list type label',
-			'code' => 'price.lists.type.label',
-			'internalcode' => 'mprility."label"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -73,6 +73,7 @@ class Standard
 			'label' => 'Price list type create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'price.lists.type.mtime' => array(
 			'code' => 'price.lists.type.mtime',
@@ -80,6 +81,7 @@ class Standard
 			'label' => 'Price list type modification date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'price.lists.type.editor' => array(
 			'code' => 'price.lists.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label' => 'Price list type editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

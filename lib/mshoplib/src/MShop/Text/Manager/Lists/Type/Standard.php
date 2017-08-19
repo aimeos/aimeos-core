@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'text.lists.type.label' => array(
+			'code'=>'text.lists.type.label',
+			'internalcode'=>'mtexlity."label"',
+			'label'=>'Text list type label',
+			'type'=> 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'text.lists.type.code' => array(
 			'code'=>'text.lists.type.code',
 			'internalcode'=>'mtexlity."code"',
@@ -50,13 +57,6 @@ class Standard
 			'code'=>'text.lists.type.domain',
 			'internalcode'=>'mtexlity."domain"',
 			'label'=>'Text list type domain',
-			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'text.lists.type.label' => array(
-			'code'=>'text.lists.type.label',
-			'internalcode'=>'mtexlity."label"',
-			'label'=>'Text list type label',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -73,6 +73,7 @@ class Standard
 			'label'=>'Text list type create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'text.lists.type.mtime'=> array(
 			'code'=>'text.lists.type.mtime',
@@ -80,6 +81,7 @@ class Standard
 			'label'=>'Text list type modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'text.lists.type.editor'=> array(
 			'code'=>'text.lists.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Text list type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

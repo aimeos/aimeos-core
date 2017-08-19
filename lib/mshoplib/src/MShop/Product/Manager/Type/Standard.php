@@ -53,13 +53,6 @@ class Standard
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
-		'product.type.status' => array(
-			'code'=>'product.type.status',
-			'internalcode'=>'mproty."status"',
-			'label'=>'Type status',
-			'type'=> 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-		),
 		'product.type.domain' => array(
 			'code'=>'product.type.domain',
 			'internalcode'=>'mproty."domain"',
@@ -67,12 +60,20 @@ class Standard
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'product.type.status' => array(
+			'code'=>'product.type.status',
+			'internalcode'=>'mproty."status"',
+			'label'=>'Type status',
+			'type'=> 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'product.type.mtime'=> array(
 			'code'=>'product.type.mtime',
 			'internalcode'=>'mproty."mtime"',
 			'label'=>'Type modify date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'product.type.ctime'=> array(
 			'code'=>'product.type.ctime',
@@ -80,6 +81,7 @@ class Standard
 			'label'=>'Type create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'product.type.editor'=> array(
 			'code'=>'product.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

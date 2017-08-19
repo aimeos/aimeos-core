@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'price.type.label' => array(
+			'code'=>'price.type.label',
+			'internalcode'=>'mprity."label"',
+			'label'=>'Price type label',
+			'type'=> 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'price.type.code' => array(
 			'code'=>'price.type.code',
 			'internalcode'=>'mprity."code"',
@@ -50,13 +57,6 @@ class Standard
 			'code'=>'price.type.domain',
 			'internalcode'=>'mprity."domain"',
 			'label'=>'Price type domain',
-			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'price.type.label' => array(
-			'code'=>'price.type.label',
-			'internalcode'=>'mprity."label"',
-			'label'=>'Price type label',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -73,6 +73,7 @@ class Standard
 			'label'=>'Price type modification date',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'price.type.ctime'=> array(
 			'code'=>'price.type.ctime',
@@ -80,6 +81,7 @@ class Standard
 			'label'=>'Price type creation date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'price.type.editor'=> array(
 			'code'=>'price.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Price type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

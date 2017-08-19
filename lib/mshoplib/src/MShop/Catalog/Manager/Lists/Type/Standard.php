@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'catalog.lists.type.label' => array(
+			'code' => 'catalog.lists.type.label',
+			'internalcode' => 'mcatlity."label"',
+			'label' => 'Catalog list type label',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'catalog.lists.type.code' => array(
 			'code'=>'catalog.lists.type.code',
 			'internalcode'=>'mcatlity."code"',
@@ -51,13 +58,6 @@ class Standard
 			'internalcode'=>'mcatlity."domain"',
 			'label'=>'Catalog list type domain',
 			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'catalog.lists.type.label' => array(
-			'code' => 'catalog.lists.type.label',
-			'internalcode' => 'mcatlity."label"',
-			'label' => 'Catalog list type label',
-			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'catalog.lists.type.status' => array(
@@ -73,6 +73,7 @@ class Standard
 			'internalcode' => 'mcatlity."ctime"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'catalog.lists.type.mtime'=> array(
 			'label' => 'Catalog list type modification time',
@@ -80,6 +81,7 @@ class Standard
 			'internalcode' => 'mcatlity."mtime"',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'catalog.lists.type.editor'=> array(
 			'code'=>'catalog.lists.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Catalog list type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

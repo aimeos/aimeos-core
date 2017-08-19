@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'tag.type.label' => array(
+			'code' => 'tag.type.label',
+			'internalcode' => 'mtagty."label"',
+			'label' => 'Tag type label',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'tag.type.code' => array(
 			'code' => 'tag.type.code',
 			'internalcode' => 'mtagty."code"',
@@ -50,13 +57,6 @@ class Standard
 			'code' => 'tag.type.domain',
 			'internalcode' => 'mtagty."domain"',
 			'label' => 'Tag type domain',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'tag.type.label' => array(
-			'code' => 'tag.type.label',
-			'internalcode' => 'mtagty."label"',
-			'label' => 'Tag type label',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -73,6 +73,7 @@ class Standard
 			'label'=>'Tag type modification date',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'tag.type.ctime'=> array(
 			'code'=>'tag.type.ctime',
@@ -80,6 +81,7 @@ class Standard
 			'label'=>'Tag type creation date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'tag.type.editor'=> array(
 			'code'=>'tag.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Tag type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

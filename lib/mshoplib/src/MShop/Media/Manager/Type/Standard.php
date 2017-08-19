@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'media.type.label' => array(
+			'label' => 'Media type label',
+			'code' => 'media.type.label',
+			'internalcode' => 'mmedty."label"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'media.type.code' => array(
 			'label' => 'Media type code',
 			'code' => 'media.type.code',
@@ -50,13 +57,6 @@ class Standard
 			'label' => 'Media type domain',
 			'code' => 'media.type.domain',
 			'internalcode' => 'mmedty."domain"',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'media.type.label' => array(
-			'label' => 'Media type label',
-			'code' => 'media.type.label',
-			'internalcode' => 'mmedty."label"',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -73,6 +73,7 @@ class Standard
 			'label'=>'Media type create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'media.type.mtime'=> array(
 			'code'=>'media.type.mtime',
@@ -80,6 +81,7 @@ class Standard
 			'label'=>'Media type modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'media.type.editor'=> array(
 			'code'=>'media.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Media type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

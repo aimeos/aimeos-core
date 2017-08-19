@@ -39,6 +39,13 @@ class Standard
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'text.type.label' => array(
+			'code'=>'text.type.label',
+			'internalcode'=>'mtexty."label"',
+			'label'=>'Text type label',
+			'type'=> 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'text.type.code' => array(
 			'code'=>'text.type.code',
 			'internalcode'=>'mtexty."code"',
@@ -50,13 +57,6 @@ class Standard
 			'code'=>'text.type.domain',
 			'internalcode'=>'mtexty."domain"',
 			'label'=>'Text type domain',
-			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'text.type.label' => array(
-			'code'=>'text.type.label',
-			'internalcode'=>'mtexty."label"',
-			'label'=>'Text type label',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -73,6 +73,7 @@ class Standard
 			'label'=>'Text type create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'text.type.mtime'=> array(
 			'code'=>'text.type.mtime',
@@ -80,6 +81,7 @@ class Standard
 			'label'=>'Text type modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'text.type.editor'=> array(
 			'code'=>'text.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Text type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

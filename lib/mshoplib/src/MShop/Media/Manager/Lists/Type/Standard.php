@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'media.lists.type.label' => array(
+			'label' => 'Media list type label',
+			'code' => 'media.lists.type.label',
+			'internalcode' => 'mmedlity."label"',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'media.lists.type.code' => array(
 			'code'=>'media.lists.type.code',
 			'internalcode'=>'mmedlity."code"',
@@ -51,13 +58,6 @@ class Standard
 			'internalcode'=>'mmedlity."domain"',
 			'label'=>'Media list type domain',
 			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'media.lists.type.label' => array(
-			'label' => 'Media list type label',
-			'code' => 'media.lists.type.label',
-			'internalcode' => 'mmedlity."label"',
-			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'media.lists.type.status' => array(
@@ -73,6 +73,7 @@ class Standard
 			'label'=>'Media list type create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'media.lists.type.mtime'=> array(
 			'code'=>'media.lists.type.mtime',
@@ -80,6 +81,7 @@ class Standard
 			'label'=>'Media list type modification date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'media.lists.type.editor'=> array(
 			'code'=>'media.lists.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Media list type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 

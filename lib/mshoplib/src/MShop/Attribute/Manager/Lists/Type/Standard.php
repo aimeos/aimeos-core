@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'attribute.lists.type.label' => array(
+			'code' => 'attribute.lists.type.label',
+			'internalcode' => 'mattlity."label"',
+			'label' => 'List type label',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'attribute.lists.type.code' => array(
 			'code'=>'attribute.lists.type.code',
 			'internalcode'=>'mattlity."code"',
@@ -51,14 +58,6 @@ class Standard
 			'internalcode'=>'mattlity."domain"',
 			'label'=>'List type domain',
 			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
-		'attribute.lists.type.label' => array(
-			'code' => 'attribute.lists.type.label',
-			'internalcode' => 'mattlity."label"',
-			'label' => 'List type label',
-			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'attribute.lists.type.status' => array(

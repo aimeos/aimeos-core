@@ -39,6 +39,13 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'attribute.type.label' => array(
+			'code' => 'attribute.type.label',
+			'internalcode' => 'mattty."label"',
+			'label' => 'Type label',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'attribute.type.code' => array(
 			'code' => 'attribute.type.code',
 			'internalcode' => 'mattty."code"',
@@ -50,14 +57,6 @@ class Standard
 			'code' => 'attribute.type.domain',
 			'internalcode' => 'mattty."domain"',
 			'label' => 'Type domain',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
-		'attribute.type.label' => array(
-			'code' => 'attribute.type.label',
-			'internalcode' => 'mattty."label"',
-			'label' => 'Type label',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),

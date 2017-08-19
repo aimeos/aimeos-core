@@ -39,6 +39,13 @@ class Standard
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'plugin.type.label' => array(
+			'code'=>'plugin.type.label',
+			'internalcode'=>'mpluty."label"',
+			'label'=>'Type label',
+			'type'=> 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'plugin.type.code' => array(
 			'code'=>'plugin.type.code',
 			'internalcode'=>'mpluty."code"',
@@ -50,13 +57,6 @@ class Standard
 			'code'=>'plugin.type.domain',
 			'internalcode'=>'mpluty."domain"',
 			'label'=>'Type domain',
-			'type'=> 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-		),
-		'plugin.type.label' => array(
-			'code'=>'plugin.type.label',
-			'internalcode'=>'mpluty."label"',
-			'label'=>'Type label',
 			'type'=> 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
@@ -73,6 +73,7 @@ class Standard
 			'label'=>'Type modify date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'plugin.type.ctime'=> array(
 			'code'=>'plugin.type.ctime',
@@ -80,6 +81,7 @@ class Standard
 			'label'=>'Type create date/time',
 			'type'=> 'datetime',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 		'plugin.type.editor'=> array(
 			'code'=>'plugin.type.editor',
@@ -87,6 +89,7 @@ class Standard
 			'label'=>'Type editor',
 			'type'=> 'string',
 			'internaltype'=> \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
 		),
 	);
 
