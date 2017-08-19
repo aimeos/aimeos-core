@@ -8,6 +8,7 @@
 return array(
 	'price/lists/type' => array(
 		'customer/default' => array( 'domain' => 'customer', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
 	'price/lists' => array(
