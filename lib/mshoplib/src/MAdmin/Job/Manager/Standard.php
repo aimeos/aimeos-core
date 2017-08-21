@@ -80,7 +80,6 @@ class Standard
 			'label' => 'Create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'job.mtime' => array(
 			'code' => 'job.mtime',
@@ -88,7 +87,6 @@ class Standard
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'job.editor' => array(
 			'code' => 'job.editor',
@@ -96,7 +94,6 @@ class Standard
 			'label' => 'Editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 	);
 

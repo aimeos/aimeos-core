@@ -47,7 +47,6 @@ class Standard
 			'internalcode' => '"value"',
 			'label' => 'Cached value',
 			'type' => 'string',
-			'public' => false,
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'cache.expire' => array(
@@ -55,7 +54,6 @@ class Standard
 			'internalcode' => '"expire"',
 			'label' => 'Expiration date/time',
 			'type' => 'datetime',
-			'public' => false,
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'cache.tag.name' => array(
@@ -63,7 +61,6 @@ class Standard
 			'internalcode' => '"tname"',
 			'label' => 'Tag name',
 			'type' => 'string',
-			'public' => false,
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 	);
