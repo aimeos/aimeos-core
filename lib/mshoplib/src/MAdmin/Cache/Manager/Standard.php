@@ -31,7 +31,6 @@ class Standard
 			'label' => 'ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 		'cache.siteid' => array(
 			'code' => 'cache.siteid',
