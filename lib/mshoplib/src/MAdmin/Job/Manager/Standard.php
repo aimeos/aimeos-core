@@ -29,7 +29,6 @@ class Standard
 			'label' => 'ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
 		),
 		'job.siteid' => array(
 			'code' => 'job.siteid',

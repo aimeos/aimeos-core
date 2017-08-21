@@ -29,7 +29,6 @@ class None
 			'label' => 'ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
 		),
 	);
 

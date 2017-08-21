@@ -32,7 +32,6 @@ class Standard
 			'label' => 'Log ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
 		),
 		'log.siteid' => array(
 			'code' => 'log.siteid',
