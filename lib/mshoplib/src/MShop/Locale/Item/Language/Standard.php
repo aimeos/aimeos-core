@@ -67,7 +67,7 @@ class Standard
 	 */
 	public function setId( $key )
 	{
-		if( $key !== null )
+		if( $key !== null && $key !== '' )
 		{
 			$this->setCode( $key );
 			$this->values['locale.language.id'] = $this->values['locale.language.code'];
