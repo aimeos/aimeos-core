@@ -41,10 +41,6 @@ class Standard
 
 		$this->values = $values;
 
-		if( !isset( $values['order.datepayment'] ) ) {
-			$this->values['order.datepayment'] = date( 'Y-m-d H:i:s' );
-		}
-
 		if( isset( $values['order.statuspayment'] ) ) {
 			$this->oldPaymentStatus = (int) $values['order.statuspayment'];
 		}
@@ -240,6 +236,7 @@ class Standard
 	{
 		if( $status == $this->getPaymentStatus() ) { return $this; }
 
+		$this->values['order.datepayment'] = date( 'Y-m-d H:i:s' );
 		$this->values['order.statuspayment'] = (int) $status;
 		$this->setModified();
 

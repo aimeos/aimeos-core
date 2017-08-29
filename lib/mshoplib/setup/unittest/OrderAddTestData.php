@@ -429,12 +429,12 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$ordItem->setId( null );
-			$ordItem->setBaseId( $baseIds[$dataset['baseid']] );
 			$ordItem->setType( $dataset['type'] );
-			$ordItem->setDateDelivery( $dataset['datedelivery'] );
-			$ordItem->setDatePayment( $dataset['datepayment'] );
+			$ordItem->setBaseId( $baseIds[$dataset['baseid']] );
 			$ordItem->setDeliveryStatus( $dataset['statusdelivery'] );
 			$ordItem->setPaymentStatus( $dataset['statuspayment'] );
+			$ordItem->setDateDelivery( $dataset['datedelivery'] );
+			$ordItem->setDatePayment( $dataset['datepayment'] );
 			$ordItem->setRelatedId( $dataset['relatedid'] );
 
 			$orderManager->saveItem( $ordItem );
