@@ -5,7 +5,7 @@
 	<target name="test" description="Executes unit tests">
 		<echo msg="Executing unit tests" />
 		<exec command="${bindir}phpunit --configuration=phpunit.xml"
-			  dir="tests" checkreturn="true" logoutput="true"/>
+			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 	
 	<target name="testperf" description="Executes performance tests">
@@ -13,20 +13,20 @@
 		<delete file="tests/unitperf.log" quiet="true" failonerror="false" />
 		<delete file="tests/lib-mwlib-jperf.xml" quiet="true" failonerror="false" />
 		<exec command="${bindir}phpunit --configuration=phpunit-perf.xml --repeat 5"
-			  dir="tests" checkreturn="true" logoutput="true"/>
+			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="coverage" description="Generates code coverage report">
 		<echo msg="Generating code coverage report" />
 		<delete file="tests/coverage.xml" quiet="true" failonerror="false" />
 		<exec command="${bindir}phpunit --configuration=phpunit-coverage.xml"
-			  dir="tests" checkreturn="true" logoutput="true"/>
+			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 	
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
 		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways src/MW tests/MW"
-			  checkreturn="true" logoutput="true"/>
+			  checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">

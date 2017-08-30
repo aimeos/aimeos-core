@@ -6,7 +6,7 @@
 		<echo msg="Executing unit tests" />
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit.xml ."
-			  dir="tests" checkreturn="true" logoutput="true"/>
+			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 	
 	<target name="coverage" description="Generates code coverage report">
@@ -14,13 +14,13 @@
 		<delete file="tests/unittest.log" quiet="true" failonerror="false" />
 		<delete dir="tests/coverage" quiet="true" failonerror="false" />
 		<exec command="${bindir}phpunit -d memory_limit=-1 --include-path ${coredir} --configuration=phpunit-coverage.xml ."
-			  dir="tests" checkreturn="true" logoutput="true"/>
+			  dir="tests" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="check" description="Executes code sniffer">
 		<echo msg="Executing code sniffer" />
 		<exec command="${bindir}phpcs -n --standard=${codestddir}/Metaways src tests/Controller"
-			  checkreturn="true" logoutput="true"/>
+			  checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="clean" description="Cleans up temporary files">
