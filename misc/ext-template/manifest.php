@@ -10,6 +10,7 @@ return array(
 		'ai-client-html',
 		'ai-client-jsonapi',
 		'ai-controller-jobs',
+		'ai-controller-frontend',
 	),
 	'include' => array(
 		'lib/custom/src',
