@@ -52,17 +52,17 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->getConfigBE();
 
-		$this->assertArrayHasKey( 'category.catid', $result );
+		$this->assertArrayHasKey( 'category.code', $result );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$attributes = ['category.catid' => '123'];
+		$attributes = ['category.code' => 'test'];
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'null', $result['category.catid'] );
+		$this->assertInternalType( 'null', $result['category.code'] );
 	}
 
 
@@ -71,7 +71,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertInternalType( 'string', $result['category.catid'] );
+		$this->assertInternalType( 'string', $result['category.code'] );
 	}
 
 
@@ -83,7 +83,7 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableWithProduct()
 	{
-		$this->couponItem->setConfig( array( 'category.catid' => $this->getCategory()->getId() ) );
+		$this->couponItem->setConfig( array( 'category.code' => 'cafe' ) );
 
 		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
@@ -91,15 +91,8 @@ class CategoryTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailableWithoutProduct()
 	{
-		$this->couponItem->setConfig( array( 'category.catid' => $this->getCategory( 'tea' )->getId() ) );
+		$this->couponItem->setConfig( array( 'category.code' => 'tea' ) );
 
 		$this->assertFalse( $this->object->isAvailable( $this->orderBase ) );
-	}
-
-
-	protected function getCategory( $code = 'cafe' )
-	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'catalog' );
-		return $manager->findItem( $code );
 	}
 }

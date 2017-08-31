@@ -22,10 +22,10 @@ class Category
 	implements \Aimeos\MShop\Coupon\Provider\Decorator\Iface
 {
 	private $beConfig = array(
-		'category.catid' => array(
-			'code' => 'category.catid',
-			'internalcode' => 'category.catid',
-			'label' => 'Category IDs separated by comma',
+		'category.code' => array(
+			'code' => 'category.code',
+			'internalcode' => 'category.code',
+			'label' => 'Comma separated category codes',
 			'type' => 'string',
 			'internaltype' => 'string',
 			'default' => '',
@@ -67,20 +67,20 @@ class Category
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		if( ( $value = $this->getConfigValue( 'category.catid' ) ) !== null )
+		if( ( $value = $this->getConfigValue( 'category.code' ) ) !== null )
 		{
 			$prodIds = [];
-			$catIds = explode( ',', $value );
+			$catCodes = explode( ',', $value );
 
 			foreach( $base->getProducts() as $product ) {
 				$prodIds[] = $product->getProductId();
 			}
 
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
+			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog' );
 
 			$search = $manager->createSearch( true );
 			$expr = [
-				$search->compare( '==', 'catalog.lists.parentid', $catIds ),
+				$search->compare( '==', 'catalog.code', $catCodes ),
 				$search->compare( '==', 'catalog.lists.domain', 'product' ),
 				$search->compare( '==', 'catalog.lists.refid', $prodIds ),
 				$search->getConditions(),
