@@ -137,12 +137,14 @@ abstract class Base
 	 * Counts the number products that are available for the values of the given key.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
-	 * @param string $key Search key (usually the ID) to aggregate products for
+	 * @param string $key Search key for aggregating the key column
 	 * @param string $cfgPath Configuration key for the SQL statement
 	 * @param string[] $required List of domain/sub-domain names like "catalog.index" that must be additionally joined
+	 * @param string $value Search key for aggregating the value column
 	 * @return array List of ID values as key and the number of counted products as value
+	 * @todo 2018.01 Reorder Parameter list
 	 */
-	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, $cfgPath, $required = [] )
+	protected function aggregateBase( \Aimeos\MW\Criteria\Iface $search, $key, $cfgPath, $required = [], $value = null )
 	{
 		$list = [];
 		$context = $this->getContext();
@@ -156,18 +158,33 @@ abstract class Base
 			$search = clone $search;
 			$attrList = $this->getObject()->getSearchAttributes();
 
+			if( $value === null && ( $value = key( $attrList ) ) === null ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'No search keys available' ) );
+			}
+
 			if( !isset( $attrList[$key] ) ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $key ) );
 			}
 
-			/** @todo Required to get the joins for the index managers, but there should be a better way */
-			$expr = array( $search->getConditions(), $search->compare( '!=', $key, null ) );
+			if( $value !== null && !isset( $attrList[$value] ) ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Unknown search key "%1$s"', $value ) );
+			}
+
+			/** @todo Required to get the joins, but there should be a better way */
+			$expr = array(
+				$search->getConditions(),
+				$search->compare( '!=', $key, null ),
+				$search->compare( '!=', $value, null ),
+			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
 
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$total = null;
 
-			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $this->getSqlConfig( $cfgPath ) );
+			$sql = $this->getSqlConfig( $cfgPath );
+			$sql = str_replace( ':key', $attrList[$key]->getInternalCode(), $sql );
+			$sql = str_replace( ':val', $attrList[$value]->getInternalCode(), $sql );
+
 			$results = $this->searchItemsBase( $conn, $search, $sql, '', $required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {

@@ -43,6 +43,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAggregateAvg()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:unittest' ) );
+		$result = $this->object->aggregate( $search, 'order.base.service.type', 'order.base.service.costs', 'avg' );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( 'delivery', $result );
+		$this->assertEquals( '5.00', $result['delivery'] );
+	}
+
+
+	public function testAggregateSum()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'order.base.service.editor', 'core:unittest' ) );
+		$result = $this->object->aggregate( $search, 'order.base.service.type', 'order.base.service.costs', 'sum' );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertArrayHasKey( 'delivery', $result );
+		$this->assertEquals( '5.00', $result['delivery'] );
+	}
+
+
 	public function testCleanup()
 	{
 		$this->object->cleanup( array( -1 ) );

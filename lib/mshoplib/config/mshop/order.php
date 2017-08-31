@@ -13,18 +13,18 @@ return array(
 				'standard' => array(
 					'aggregate' => array(
 						'ansi' => '
-						SELECT "key", COUNT("id") AS "count"
-						FROM (
-							SELECT :key AS "key", mordbaad."id" AS "id"
-							FROM "mshop_order_base_address" AS mordbaad
-							:joins
-							WHERE :cond
-							GROUP BY :key, mordbaad."id" /*-columns*/ , :columns /*columns-*/
-							/*-orderby*/ ORDER BY :order /*orderby-*/
-							LIMIT :size OFFSET :start
-						) AS list
-						GROUP BY "key"
-					'
+							SELECT "key", COUNT("val") AS "count"
+							FROM (
+								SELECT :key AS "key", :val AS "val"
+								FROM "mshop_order_base_address" AS mordbaad
+								:joins
+								WHERE :cond
+								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+								/*-orderby*/ ORDER BY :order /*orderby-*/
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY "key"
+						'
 					),
 					'delete' => array(
 						'ansi' => '
@@ -112,18 +112,18 @@ return array(
 				'standard' => array(
 					'aggregate' => array(
 						'ansi' => '
-						SELECT "key", COUNT("id") AS "count"
-						FROM (
-							SELECT :key AS "key", mordbaco."id" AS "id"
-							FROM "mshop_order_base_coupon" AS mordbaco
-							:joins
-							WHERE :cond
-							GROUP BY :key, mordbaco."id" /*-columns*/ , :columns /*columns-*/
-							/*-orderby*/ ORDER BY :order /*orderby-*/
-							LIMIT :size OFFSET :start
-						) AS list
-						GROUP BY "key"
-					'
+							SELECT "key", COUNT("val") AS "count"
+							FROM (
+								SELECT :key AS "key", :val AS "val"
+								FROM "mshop_order_base_coupon" AS mordbaco
+								:joins
+								WHERE :cond
+								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+								/*-orderby*/ ORDER BY :order /*orderby-*/
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY "key"
+						'
 					),
 					'delete' => array(
 						'ansi' => '
@@ -189,18 +189,18 @@ return array(
 					'standard' => array(
 						'aggregate' => array(
 							'ansi' => '
-							SELECT "key", COUNT("id") AS "count"
-							FROM (
-								SELECT :key AS "key", mordbaprat."id" AS "id"
-								FROM "mshop_order_base_product_attr" AS mordbaprat
-								:joins
-								WHERE :cond
-								GROUP BY :key, mordbaprat."id" /*-columns*/ , :columns /*columns-*/
-								/*-orderby*/ ORDER BY :order /*orderby-*/
-								LIMIT :size OFFSET :start
-							) AS list
-							GROUP BY "key"
-						'
+								SELECT "key", COUNT("val") AS "count"
+								FROM (
+									SELECT :key AS "key", :val AS "val"
+									FROM "mshop_order_base_product_attr" AS mordbaprat
+									:joins
+									WHERE :cond
+									GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+									/*-orderby*/ ORDER BY :order /*orderby-*/
+									LIMIT :size OFFSET :start
+								) AS list
+								GROUP BY "key"
+							'
 						),
 						'delete' => array(
 							'ansi' => '
@@ -266,18 +266,48 @@ return array(
 				'standard' => array(
 					'aggregate' => array(
 						'ansi' => '
-						SELECT "key", COUNT("id") AS "count"
-						FROM (
-							SELECT :key AS "key", mordbapr."id" AS "id"
-							FROM "mshop_order_base_product" AS mordbapr
-							:joins
-							WHERE :cond
-							GROUP BY :key, mordbapr."id" /*-columns*/ , :columns /*columns-*/
-							/*-orderby*/ ORDER BY :order /*orderby-*/
-							LIMIT :size OFFSET :start
-						) AS list
-						GROUP BY "key"
-					'
+							SELECT "key", COUNT("val") AS "count"
+							FROM (
+								SELECT :key AS "key", :val AS "val"
+								FROM "mshop_order_base_product" AS mordbapr
+								:joins
+								WHERE :cond
+								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+								/*-orderby*/ ORDER BY :order /*orderby-*/
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY "key"
+						'
+					),
+					'aggregateavg' => array(
+						'ansi' => '
+							SELECT "key", AVG("val") AS "count"
+							FROM (
+								SELECT :key AS "key", :val AS "val"
+								FROM "mshop_order_base_product" AS mordbapr
+								:joins
+								WHERE :cond
+								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+								/*-orderby*/ ORDER BY :order /*orderby-*/
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY "key"
+						'
+					),
+					'aggregatesum' => array(
+						'ansi' => '
+							SELECT "key", SUM("val") AS "count"
+							FROM (
+								SELECT :key AS "key", :val AS "val"
+								FROM "mshop_order_base_product" AS mordbapr
+								:joins
+								WHERE :cond
+								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+								/*-orderby*/ ORDER BY :order /*orderby-*/
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY "key"
+						'
 					),
 					'delete' => array(
 						'ansi' => '
@@ -361,13 +391,13 @@ return array(
 					'standard' => array(
 						'aggregate' => array(
 							'ansi' => '
-								SELECT "key", COUNT("id") AS "count"
+								SELECT "key", COUNT("val") AS "count"
 								FROM (
-									SELECT :key AS "key", mordbaseat."id" AS "id"
+									SELECT :key AS "key", :val AS "val"
 									FROM "mshop_order_base_service_attr" AS mordbaseat
 									:joins
 									WHERE :cond
-									GROUP BY :key, mordbaseat."id" /*-columns*/ , :columns /*columns-*/
+									GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 									/*-orderby*/ ORDER BY :order /*orderby-*/
 									LIMIT :size OFFSET :start
 								) AS list
@@ -438,18 +468,48 @@ return array(
 				'standard' => array(
 					'aggregate' => array(
 						'ansi' => '
-						SELECT "key", COUNT("id") AS "count"
-						FROM (
-							SELECT :key AS "key", mordbase."id" AS "id"
-							FROM "mshop_order_base_service" AS mordbase
-							:joins
-							WHERE :cond
-							GROUP BY :key, mordbase."id" /*-columns*/ , :columns /*columns-*/
-							/*-orderby*/ ORDER BY :order /*orderby-*/
-							LIMIT :size OFFSET :start
-						) AS list
-						GROUP BY "key"
-					'
+							SELECT "key", COUNT("val") AS "count"
+							FROM (
+								SELECT :key AS "key", :val AS "val"
+								FROM "mshop_order_base_service" AS mordbase
+								:joins
+								WHERE :cond
+								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+								/*-orderby*/ ORDER BY :order /*orderby-*/
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY "key"
+						'
+					),
+					'aggregateavg' => array(
+						'ansi' => '
+							SELECT "key", AVG("val") AS "count"
+							FROM (
+								SELECT :key AS "key", :val AS "val"
+								FROM "mshop_order_base_service" AS mordbase
+								:joins
+								WHERE :cond
+								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+								/*-orderby*/ ORDER BY :order /*orderby-*/
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY "key"
+						'
+					),
+					'aggregatesum' => array(
+						'ansi' => '
+							SELECT "key", SUM("val") AS "count"
+							FROM (
+								SELECT :key AS "key", :val AS "val"
+								FROM "mshop_order_base_service" AS mordbase
+								:joins
+								WHERE :cond
+								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+								/*-orderby*/ ORDER BY :order /*orderby-*/
+								LIMIT :size OFFSET :start
+							) AS list
+							GROUP BY "key"
+						'
 					),
 					'delete' => array(
 						'ansi' => '
@@ -523,13 +583,43 @@ return array(
 			'standard' => array(
 				'aggregate' => array(
 					'ansi' => '
-						SELECT "key", COUNT("id") AS "count"
+						SELECT "key", COUNT("val") AS "count"
 						FROM (
-							SELECT :key AS "key", mordba."id" AS "id"
+							SELECT :key AS "key", :val AS "val"
 							FROM "mshop_order_base" AS mordba
 							:joins
 							WHERE :cond
-							GROUP BY :key, mordba."id" /*-columns*/ , :columns /*columns-*/
+							GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						) AS list
+						GROUP BY "key"
+					'
+				),
+				'aggregateavg' => array(
+					'ansi' => '
+						SELECT "key", AVG("val") AS "count"
+						FROM (
+							SELECT :key AS "key", :val AS "val"
+							FROM "mshop_order_base" AS mordba
+							:joins
+							WHERE :cond
+							GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						) AS list
+						GROUP BY "key"
+					'
+				),
+				'aggregatesum' => array(
+					'ansi' => '
+						SELECT "key", SUM("val") AS "count"
+						FROM (
+							SELECT :key AS "key", :val AS "val"
+							FROM "mshop_order_base" AS mordba
+							:joins
+							WHERE :cond
+							GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						) AS list
@@ -606,18 +696,18 @@ return array(
 			'standard' => array(
 				'aggregate' => array(
 					'ansi' => '
-					SELECT "key", COUNT("id") AS "count"
-					FROM (
-						SELECT :key AS "key", mordst."id" AS "id"
-						FROM "mshop_order_status" AS mordst
-						:joins
-						WHERE :cond
-						GROUP BY :key, mordst."id" /*-columns*/ , :columns /*columns-*/
-						/*-orderby*/ ORDER BY :order /*orderby-*/
-						LIMIT :size OFFSET :start
-					) AS list
-					GROUP BY "key"
-				'
+						SELECT "key", COUNT("val") AS "count"
+						FROM (
+							SELECT :key AS "key", :val AS "val"
+							FROM "mshop_order_status" AS mordst
+							:joins
+							WHERE :cond
+							GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						) AS list
+						GROUP BY "key"
+					'
 				),
 				'delete' => array(
 					'ansi' => '
@@ -681,13 +771,43 @@ return array(
 		'standard' => array(
 			'aggregate' => array(
 				'ansi' => '
-					SELECT "key", COUNT("id") AS "count"
+					SELECT "key", COUNT("val") AS "count"
 					FROM (
-						SELECT :key AS "key", mord."id" AS "id"
+						SELECT :key AS "key", :val AS "val"
 						FROM "mshop_order" AS mord
 						:joins
 						WHERE :cond
-						GROUP BY :key, mord."id" /*-columns*/ , :columns /*columns-*/
+						GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					) AS list
+					GROUP BY "key"
+				'
+			),
+			'aggregateavg' => array(
+				'ansi' => '
+					SELECT "key", AVG("val") AS "count"
+					FROM (
+						SELECT :key AS "key", :val AS "val"
+						FROM "mshop_order" AS mord
+						:joins
+						WHERE :cond
+						GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					) AS list
+					GROUP BY "key"
+				'
+			),
+			'aggregatesum' => array(
+				'ansi' => '
+					SELECT "key", SUM("val") AS "count"
+					FROM (
+						SELECT :key AS "key", :val AS "val"
+						FROM "mshop_order" AS mord
+						:joins
+						WHERE :cond
+						GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					) AS list

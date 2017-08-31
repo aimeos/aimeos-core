@@ -240,8 +240,9 @@ class Standard
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @param string $key Search key to aggregate items for
 	 * @return array List of the search keys as key and the number of counted items as value
+	 * @todo 2018.01 Add optional parameters to interface
 	 */
-	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
+	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key, $value = null, $type = null )
 	{
 		/** mshop/order/manager/base/product/standard/aggregate/mysql
 		 * Counts the number of records grouped by the values in the key column and matched by the given criteria
@@ -292,8 +293,8 @@ class Standard
 		 * @see mshop/order/manager/base/product/standard/search/ansi
 		 * @see mshop/order/manager/base/product/standard/count/ansi
 		 */
-		$cfgkey = 'mshop/order/manager/base/product/standard/aggregate';
-		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.product' ) );
+		$cfgkey = 'mshop/order/manager/base/product/standard/aggregate' . $type;
+		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.product' ), $value );
 	}
 
 
