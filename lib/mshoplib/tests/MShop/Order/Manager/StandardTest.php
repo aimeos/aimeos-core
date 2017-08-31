@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->aggregate( $search, 'order.cmonth', 'order.base.price', 'avg' );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( '1384.750000', reset( $result ) );
+		$this->assertEquals( '1384.75', round( reset( $result ), 2 ) );
 	}
 
 

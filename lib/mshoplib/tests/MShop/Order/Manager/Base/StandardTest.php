@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertArrayHasKey( 'test@example.com', $result );
-		$this->assertEquals( '1384.750000', $result['test@example.com'] );
+		$this->assertEquals( '1384.75', round( $result['test@example.com'], 2 ) );
 	}
 
 
