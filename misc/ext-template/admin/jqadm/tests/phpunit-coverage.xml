@@ -2,8 +2,8 @@
 
 <phpunit bootstrap="bootstrap.php">
 	<testsuites>
-		<testsuite name="Client JQAdm suite">
-			<directory>Client/</directory>
+		<testsuite name="Admin JQAdm suite">
+			<directory>Admin/</directory>
 		</testsuite>
 	</testsuites>
 	<filter>
