@@ -1,10 +1,11 @@
-sudo: true
+sudo: false
 language: php
 
 addons:
   apt:
     packages:
     - php5-pgsql
+  postgresql: "9.5"
 
 php:
   - hhvm
@@ -25,23 +26,15 @@ matrix:
     - php: 7.1
       env: DB=pgsql
 
-before_install:
-  - sudo /etc/init.d/postgresql stop
-  - curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update -qq
-  - sudo apt-get install postgresql postgresql-contrib
-  - sudo /etc/init.d/postgresql start
-
 before_script:
   - composer self-update
   - composer install || sleep 60 && composer install
   - if [[ $DB = 'mysql' ]]; then mysql -e "CREATE DATABASE aimeos;"; fi
   - if [[ $DB = 'mysql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'mysql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'root', 'password' => '', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array( \"SET SESSIOn sort_buffer_size=2097144; SET NAMES 'utf8'; SET SESSION sql_mode='ANSI'\" ) ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
-  - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "CREATE DATABASE aimeos;" -p 5433 postgres; fi
-  - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "CREATE USER aimeos PASSWORD 'aimeos';" -p 5433 postgres; fi
-  - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE aimeos TO aimeos;" -p 5433 postgres; fi
-  - if [[ $DB = 'pgsql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5433, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
+  - if [[ $DB = 'pgsql' ]]; then psql -c "CREATE DATABASE aimeos;" -U postgres; fi
+  - if [[ $DB = 'pgsql' ]]; then psql -c "CREATE USER aimeos PASSWORD 'aimeos';" -U postgres; fi
+  - if [[ $DB = 'pgsql' ]]; then psql -c "GRANT ALL PRIVILEGES ON DATABASE aimeos TO aimeos;" -U postgres; fi
+  - if [[ $DB = 'pgsql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
 
 script: "vendor/bin/phing setup coverage check"
 
