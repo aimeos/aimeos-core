@@ -5,6 +5,7 @@ addons:
   apt:
     packages:
     - php5-pgsql
+  postgresql: "9.5"
 
 php:
   - hhvm
@@ -24,14 +25,6 @@ matrix:
   include:
     - php: 7.1
       env: DB=pgsql
-
-before_install:
-  - sudo /etc/init.d/postgresql stop
-  - curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  - echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | sudo tee -a /etc/apt/sources.list
-  - sudo apt-get update -qq
-  - sudo apt-get install postgresql postgresql-contrib
-  - sudo /etc/init.d/postgresql start
 
 before_script:
   - composer self-update
