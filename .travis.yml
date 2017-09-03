@@ -16,7 +16,7 @@ php:
   - 5.4
 
 env:
-  - DB=pgsql
+  - DB=mysql
 
 matrix:
   fast_finish: true
