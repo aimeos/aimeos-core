@@ -9,9 +9,6 @@
 namespace Aimeos\MShop\Locale\Item\Site;
 
 
-/**
- * Test class for \Aimeos\MShop\Locale\Item\Site\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -193,7 +190,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) + 3, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['locale.site.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['locale.site.siteid'] );
@@ -210,32 +207,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testAddChild()
 	{
 		$this->object->addChild( $this->object );
-		$this->assertEquals( 2, count( $this->object->getChildren() ) );
 	}
 
 
 	public function testGetChild()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $this->object->getChild( 0 ) );
-
 		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
-		$this->object->getChild( 1 );
+		$this->object->getChild( 0 );
 	}
 
 
 	public function testGetChildren()
 	{
-		$children = $this->object->getChildren();
-		$this->assertEquals( 1, count( $children ) );
-
-		foreach( $children as $child ) {
-			$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $child );
-		}
+		$this->assertEquals( [], $this->object->getChildren() );
 	}
 
 
 	public function testHasChildren()
 	{
-		$this->assertTrue( $this->object->hasChildren() );
+		$this->assertFalse( $this->object->hasChildren() );
 	}
 }

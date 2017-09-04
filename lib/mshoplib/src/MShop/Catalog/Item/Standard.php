@@ -100,7 +100,7 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : null );
+		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : 0 );
 	}
 
 
@@ -292,10 +292,10 @@ class Standard
 		{
 			switch( $key )
 			{
-				case 'catalog.id': $this->node->setId( $value ); break;
-				case 'catalog.code': $this->node->setCode( $value ); break;
-				case 'catalog.label': $this->node->setLabel( $value ); break;
-				case 'catalog.status': $this->node->setStatus( $value ); break;
+				case 'catalog.id': $this->setId( $value ); break;
+				case 'catalog.code': $this->setCode( $value ); break;
+				case 'catalog.label': $this->setLabel( $value ); break;
+				case 'catalog.status': $this->setStatus( $value ); break;
 				case 'catalog.config': $this->setConfig( $value ); break;
 				case 'catalog.target': $this->setTarget( $value ); break;
 				default: $unknown[$key] = $value;
@@ -314,21 +314,21 @@ class Standard
 	 */
 	public function toArray( $private = false )
 	{
-		$list = array(
-			'catalog.id' => $this->getId(),
+		$list = [
 			'catalog.code' => $this->getCode(),
 			'catalog.label' => $this->getLabel(),
-			'catalog.status' => $this->getStatus(),
 			'catalog.config' => $this->getConfig(),
-			'catalog.target' => $this->getTarget(),
-			'catalog.hasChildren' => $this->hasChildren()
-		);
+			'catalog.status' => $this->getStatus(),
+			'catalog.hasChildren' => $this->hasChildren(),
+		];
 
 		if( $private === true )
 		{
+			$list['catalog.id'] = $this->getId();
+			$list['catalog.siteid'] = $this->getSiteId();
+			$list['catalog.target'] = $this->getTarget();
 			$list['catalog.level'] = $this->getLevel();
 			$list['catalog.parentid'] = $this->getParentId();
-			$list['catalog.siteid'] = $this->getSiteId();
 			$list['catalog.ctime'] = $this->getTimeCreated();
 			$list['catalog.mtime'] = $this->getTimeModified();
 			$list['catalog.editor'] = $this->getEditor();
@@ -390,10 +390,10 @@ class Standard
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Child node to add
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item for chaining method calls
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
 	 */
-	public function addChild( \Aimeos\MShop\Catalog\Item\Iface $item )
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item )
 	{
 		// don't set the modified flag as it's only for the values
 		$this->children[] = $item;

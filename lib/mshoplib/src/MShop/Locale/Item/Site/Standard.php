@@ -85,6 +85,36 @@ class Standard
 
 
 	/**
+	 * Returns the config property of the site.
+	 *
+	 * @return array Returns the config of the Site
+	 */
+	public function getConfig()
+	{
+		if( isset( $this->values['locale.site.config'] ) ) {
+			return (array) $this->values['locale.site.config'];
+		}
+
+		return [];
+	}
+
+
+	/**
+	 * Sets the config property of the site.
+	 *
+	 * @param array $options Options to be set for the Site
+	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 */
+	public function setConfig( array $options )
+	{
+		$this->values['locale.site.config'] = $options;
+		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the label property of the site.
 	 *
 	 * @return string Returns the label of the Site
@@ -117,32 +147,24 @@ class Standard
 
 
 	/**
-	 * Returns the config property of the site.
+	 * Returns the level of the item in the tree
 	 *
-	 * @return array Returns the config of the Site
+	 * @return integer Level of the item starting with "0" for the root node
 	 */
-	public function getConfig()
+	public function getLevel()
 	{
-		if( isset( $this->values['locale.site.config'] ) ) {
-			return (array) $this->values['locale.site.config'];
-		}
-
-		return [];
+		return 0;
 	}
 
 
 	/**
-	 * Sets the config property of the site.
+	 * Returns the ID of the parent site
 	 *
-	 * @param array $options Options to be set for the Site
-	 * @return \Aimeos\MShop\Locale\Item\Site\Iface Locale site item for chaining method calls
+	 * @return string Unique ID of the parent site
 	 */
-	public function setConfig( array $options )
+	public function getParentId()
 	{
-		$this->values['locale.site.config'] = $options;
-		$this->setModified();
-
-		return $this;
+		return 0;
 	}
 
 
@@ -226,11 +248,17 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
-		$list['locale.site.siteid'] = $this->getSiteId();
 		$list['locale.site.code'] = $this->getCode();
 		$list['locale.site.label'] = $this->getLabel();
 		$list['locale.site.config'] = $this->getConfig();
 		$list['locale.site.status'] = $this->getStatus();
+		$list['locale.site.hasChildren'] = $this->hasChildren();
+
+		if( $private === true )
+		{
+			$list['locale.site.level'] = $this->getLevel();
+			$list['locale.site.parentid'] = $this->getParentId();
+		}
 
 		return $list;
 	}
@@ -244,10 +272,6 @@ class Standard
 	 */
 	public function getChild( $index )
 	{
-		if( isset( $this->children[$index] ) ) {
-			return $this->children[$index];
-		}
-
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
 	}
 
@@ -259,7 +283,7 @@ class Standard
 	 */
 	public function getChildren()
 	{
-		return $this->children;
+		return [];
 	}
 
 
@@ -270,18 +294,16 @@ class Standard
 	 */
 	public function hasChildren()
 	{
-		return ( count( $this->children ) > 0 ? true : false );
+		return false;
 	}
 
 
 	/**
 	 * Adds a child node to this node.
 	 *
-	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $item Child node to add
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
 	 */
-	public function addChild( \Aimeos\MShop\Locale\Item\Site\Iface $item )
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item )
 	{
-		// don't set the modified flag as it's only for the values
-		$this->children[] = $item;
 	}
 }

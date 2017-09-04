@@ -802,10 +802,9 @@ class Standard
 			$stmt->bind( 2, $item->getLabel() );
 			$stmt->bind( 3, json_encode( $item->getConfig() ) );
 			$stmt->bind( 4, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 5, 0, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $context->getEditor() );
-			$stmt->bind( 7, $date ); // mtime
-			$stmt->bind( 8, $date ); // ctime
+			$stmt->bind( 5, $context->getEditor() );
+			$stmt->bind( 6, $date ); // mtime
+			$stmt->bind( 7, $date ); // ctime
 
 			$stmt->execute()->finish();
 
