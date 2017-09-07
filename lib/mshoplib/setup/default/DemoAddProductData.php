@@ -68,12 +68,10 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 			$this->removeItems( $item->getId(), 'product/lists', 'product', 'price' );
 			$this->removeItems( $item->getId(), 'product/lists', 'product', 'text' );
 			$this->removeListItems( $item->getId(), 'product/lists', 'product' );
-
-			$productCodes[] =  $item->getCode();
 		}
 
-		$this->removeStockItems( $productCodes );
 		$manager->deleteItems( array_keys( $products ) );
+		$this->removeStockItems();
 
 
 		if( $value === '1' )
@@ -187,15 +185,13 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 	/**
 	 * Deletes the stock items that belong to the given product codes
-	 *
-	 * @param array $productCodes List of product codes
 	 */
-	protected function removeStockItems( $productCodes )
+	protected function removeStockItems()
 	{
 		$stockManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock' );
 
 		$search = $stockManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'stock.productcode', $productCodes ) );
+		$search->setConditions( $search->compare( '=~', 'stock.productcode', 'demo-' ) );
 
 		$stockManager->deleteItems( array_keys( $stockManager->searchItems( $search ) ) );
 	}
