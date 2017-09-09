@@ -37,7 +37,7 @@ class PercentRebate
 			'internalcode' => 'percentrebate.rebate',
 			'label' => 'Discount in percent',
 			'type' => 'number',
-			'internaltype' => 'decimal',
+			'internaltype' => 'float',
 			'default' => 0,
 			'required' => true,
 		),

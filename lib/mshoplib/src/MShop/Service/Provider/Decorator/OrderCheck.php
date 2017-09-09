@@ -31,16 +31,16 @@ class OrderCheck
 		'ordercheck.total-number-min' => array(
 			'code' => 'ordercheck.total-number-min',
 			'internalcode' => 'ordercheck.total-number-min',
-			'label' => 'OrderCheck: Minimum successful orders',
+			'label' => 'Required minimum successful orders',
 			'type' => 'integer',
 			'internaltype' => 'integer',
 			'default' => 0,
-			'required' => false,
+			'required' => true,
 		),
 		'ordercheck.limit-days-pending' => array(
 			'code' => 'ordercheck.limit-days-pending',
 			'internalcode' => 'ordercheck.limit-days-pending',
-			'label' => 'OrderCheck: Restrict if unpaid orders within time frame in days',
+			'label' => 'Number of days which must not contain pending orders',
 			'type' => 'integer',
 			'internaltype' => 'integer',
 			'default' => 0,
@@ -120,7 +120,7 @@ class OrderCheck
 			$search = $manager->createSearch( true );
 			$expr = array(
 				$search->compare( '==', 'order.base.customerid', $customerId ),
-				$search->compare( '==', 'order.datepayment', date( 'Y-m-d H:i:s', $time ) ),
+				$search->compare( '>=', 'order.datepayment', date( 'Y-m-d H:i:s', $time ) ),
 				$search->compare( '==', 'order.statuspayment', \Aimeos\MShop\Order\Item\Base::PAY_PENDING ),
 				$search->getConditions(),
 			);

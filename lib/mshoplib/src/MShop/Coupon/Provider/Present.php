@@ -36,10 +36,10 @@ class Present
 			'code' => 'present.quantity',
 			'internalcode' => 'present.quantity',
 			'label' => 'Number of articles that will be added to the basket',
-			'type' => 'number',
+			'type' => 'integer',
 			'internaltype' => 'integer',
 			'default' => 1,
-			'required' => true,
+			'required' => false,
 		),
 	);
 

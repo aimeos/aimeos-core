@@ -28,7 +28,7 @@ class Costs
 			'internalcode' => 'costs.percent',
 			'label' => 'Costs: Decimal percent value',
 			'type' => 'number',
-			'internaltype' => 'number',
+			'internaltype' => 'float',
 			'default' => 0,
 			'required' => true,
 		),

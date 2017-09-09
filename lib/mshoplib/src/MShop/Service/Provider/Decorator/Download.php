@@ -33,8 +33,8 @@ class Download
 			'label' => 'Check products: "1" = all must be downloads, "0" = at least one is no download',
 			'type' => 'boolean',
 			'internaltype' => 'boolean',
-			'default' => null,
-			'required' => false,
+			'default' => '',
+			'required' => true,
 		),
 	);
 

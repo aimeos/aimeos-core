@@ -75,7 +75,10 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBE()
 	{
-		$attributes = ['basketvalues.total-value-min' => '1.5', 'basketvalues.total-value-max' => '10'];
+		$attributes = [
+			'basketvalues.total-value-min' => ['EUR' => '10.5'],
+			'basketvalues.total-value-max' => ['EUR' => '100'],
+		];
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -86,11 +89,11 @@ class BasketValuesTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBEFailure()
 	{
-		$result = $this->object->checkConfigBE( [] );
+		$result = $this->object->checkConfigBE( ['basketvalues.total-value-min' => '10.5'] );
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertInternalType( 'string', $result['basketvalues.total-value-min'] );
-		$this->assertInternalType( 'string', $result['basketvalues.total-value-max'] );
+		$this->assertInternalType( 'null', $result['basketvalues.total-value-max'] );
 	}
 
 

@@ -95,7 +95,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBE()
 	{
-		$attributes = ['present.productcode' => 'test', 'present.quantity' => 5];
+		$attributes = ['present.productcode' => 'test', 'present.quantity' => '5'];
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 2, count( $result ) );
@@ -110,7 +110,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertInternalType( 'string', $result['present.productcode'] );
-		$this->assertInternalType( 'string', $result['present.quantity'] );
+		$this->assertInternalType( 'null', $result['present.quantity'] );
 	}
 
 

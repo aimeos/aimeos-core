@@ -88,7 +88,7 @@ class ReductionTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 3, count( $result ) );
-		$this->assertInternalType( 'null', $result['reduction.percent'] );
+		$this->assertInternalType( 'string', $result['reduction.percent'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-min'] );
 		$this->assertInternalType( 'null', $result['reduction.basket-value-max'] );
 	}

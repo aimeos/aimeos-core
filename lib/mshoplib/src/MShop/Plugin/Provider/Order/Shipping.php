@@ -44,7 +44,7 @@ class Shipping
 			'label' => 'Free shipping threshold per currency',
 			'type' => 'map',
 			'internaltype' => 'array',
-			'default' => '{}',
+			'default' => [],
 			'required' => false,
 		),
 	);
