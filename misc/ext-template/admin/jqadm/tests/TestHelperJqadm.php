@@ -31,15 +31,22 @@ class TestHelperJqadm
 	}
 
 
-	public static function getView()
+	public static function getView( $site = 'unittest', \Aimeos\MW\Config\Iface $config = null )
 	{
+		if( $config === null ) {
+			$config = self::getContext( $site )->getConfig();
+		}
+
 		$view = new \Aimeos\MW\View\Standard( self::getTemplatePaths() );
 
-		$trans = new \Aimeos\MW\Translation\None( 'en' );
+		$helper = new \Aimeos\MW\View\Helper\Param\Standard( $view, ['site' => 'unittest'] );
+		$view->addHelper( 'param', $helper );
+
+		$trans = new \Aimeos\MW\Translation\None( 'de_DE' );
 		$helper = new \Aimeos\MW\View\Helper\Translate\Standard( $view, $trans );
 		$view->addHelper( 'translate', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Url\Standard( $view, 'baseurl' );
+		$helper = new \Aimeos\MW\View\Helper\Url\Standard( $view, 'http://baseurl' );
 		$view->addHelper( 'url', $helper );
 
 		$helper = new \Aimeos\MW\View\Helper\Number\Standard( $view, '.', '' );
@@ -48,8 +55,27 @@ class TestHelperJqadm
 		$helper = new \Aimeos\MW\View\Helper\Date\Standard( $view, 'Y-m-d' );
 		$view->addHelper( 'date', $helper );
 
-		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, self::getContext()->getConfig() );
+		$config = new \Aimeos\MW\Config\Decorator\Protect( $config, array( 'admin', 'client/html', 'controller/jsonadm' ) );
+		$helper = new \Aimeos\MW\View\Helper\Config\Standard( $view, $config );
 		$view->addHelper( 'config', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Session\Standard( $view, new \Aimeos\MW\Session\None() );
+		$view->addHelper( 'session', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Request\Standard( $view, new \Zend\Diactoros\ServerRequest() );
+		$view->addHelper( 'request', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Response\Standard( $view, new \Zend\Diactoros\Response() );
+		$view->addHelper( 'response', $helper );
+
+		$helper = new \Aimeos\MW\View\Helper\Csrf\Standard( $view, '_csrf_token', '_csrf_value' );
+		$view->addHelper( 'csrf', $helper );
+
+		$fcn = function() { return array( 'admin' ); };
+		$helper = new \Aimeos\MW\View\Helper\Access\Standard( $view, $fcn );
+		$view->addHelper( 'access', $helper );
+
+		$view->pageSitePath = [];
 
 		return $view;
 	}
@@ -61,7 +87,7 @@ class TestHelperJqadm
 	}
 
 
-	private static function getAimeos()
+	public static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
 		{
