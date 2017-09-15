@@ -58,7 +58,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.latitude' => '50.0',
 			'customer.mtime'=> '2010-01-05 00:00:05',
 			'customer.ctime'=> '2010-01-01 00:00:00',
-			'customer.editor' => 'unitTestUser'
+			'customer.editor' => 'unitTestUser',
+			'additional' => 'something',
 		);
 
 		$addresses = array(
@@ -73,6 +74,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function tearDown()
 	{
 		unset( $this->object, $this->address, $this->values );
+	}
+
+	public function testGet()
+	{
+		$this->assertEquals( 'something', $this->object->additional );
+		$this->assertNull( $this->object->missing );
+	}
+
+	public function testIsset()
+	{
+		$this->assertTrue( isset( $this->object->additional ) );
+		$this->assertFalse( isset( $this->object->missing ) );
 	}
 
 	public function testGetId()
@@ -336,7 +349,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['customer.id'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['customer.label'] );

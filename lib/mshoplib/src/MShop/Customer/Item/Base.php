@@ -79,6 +79,36 @@ abstract class Base
 
 
 	/**
+	 * Returns the item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @return mixed|null Property value or null if property is unknown
+	 */
+	public function __get( $name )
+	{
+		if( isset( $this->data[$name] ) ) {
+			return $this->data[$name];
+		}
+	}
+
+
+	/**
+	 * Tests if the item property for the given name is available
+	 *
+	 * @param string $name Name of the property
+	 * @return boolean True if the property exists, false if not
+	 */
+	public function __isset( $name )
+	{
+		if( array_key_exists( $name, $this->data ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
+
+	/**
 	 * Returns the delivery address items of the customer
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Associative list of IDs as keys and address items as values
