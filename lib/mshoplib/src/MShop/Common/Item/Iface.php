@@ -21,6 +21,22 @@ namespace Aimeos\MShop\Common\Item;
 interface Iface
 {
 	/**
+	 * Returns the item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @return mixed|null Property value or null if property is unknown
+	 */
+	public function __get( $name );
+
+	/**
+	 * Tests if the item property for the given name is available
+	 *
+	 * @param string $name Name of the property
+	 * @return boolean True if the property exists, false if not
+	 */
+	public function __isset( $name );
+
+	/**
 	 * Returns the unique ID of the item.
 	 *
 	 * @return integer ID of the item

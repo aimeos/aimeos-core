@@ -54,6 +54,7 @@ abstract class Base
 	const PARTS_ALL = 7;
 
 
+	protected $bdata;
 	protected $products;
 	protected $addresses;
 	protected $services;
@@ -84,6 +85,7 @@ abstract class Base
 			\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $couponProducts );
 		}
 
+		$this->bdata = $values;
 		$this->products = $products;
 		$this->addresses = $addresses;
 		$this->services = $services;
@@ -111,6 +113,36 @@ abstract class Base
 		foreach( $this->coupons as $key => $value ) {
 			$this->coupons[$key] = $value;
 		}
+	}
+
+
+	/**
+	 * Returns the item property for the given name
+	 *
+	 * @param string $name Name of the property
+	 * @return mixed|null Property value or null if property is unknown
+	 */
+	public function __get( $name )
+	{
+		if( isset( $this->bdata[$name] ) ) {
+			return $this->bdata[$name];
+		}
+	}
+
+
+	/**
+	 * Tests if the item property for the given name is available
+	 *
+	 * @param string $name Name of the property
+	 * @return boolean True if the property exists, false if not
+	 */
+	public function __isset( $name )
+	{
+		if( array_key_exists( $name, $this->bdata ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 

@@ -380,7 +380,7 @@ return array(
 						mcus."birthday" AS "customer.birthday", mcus."status" AS "customer.status",
 						mcus."vdate" AS "customer.dateverified", mcus."password" AS "customer.password",
 						mcus."ctime" AS "customer.ctime", mcus."mtime" AS "customer.mtime",
-						mcus."editor" AS "customer.editor", mcus.*
+						mcus."editor" AS "customer.editor"
 					FROM "mshop_customer" AS mcus
 					:joins
 					WHERE :cond
