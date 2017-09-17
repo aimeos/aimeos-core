@@ -15,18 +15,24 @@ namespace Aimeos\MW\View;
 /**
  * Common interface for all view classes.
  *
+ * @method boolean access(string|array $groups) True if the current logged in user is in one of the given groups
+ * @method \Aimeos\MW\View\Helper\Block\Iface block() Returns the block helper object
  * @method mixed config(string $name = null, string|array $default = null) Returns the config value for the given key
- * @method \Aimeos\MW\View\Helper\Iface csrf() Returns the CSRF helper object
+ * @method string content(string $path) Returns the URL for the given path (relative, absolute or data URL)
+ * @method \Aimeos\MW\View\Helper\Csrf\Iface csrf() Returns the CSRF helper object
  * @method string date(string $date) Returns the formatted date
- * @method \Aimeos\MW\View\Helper\Iface encoder() Returns the encoder helper object
+ * @method \Aimeos\MW\View\Helper\Encoder\Iface encoder() Returns the encoder helper object
  * @method string formparam(string|array $names) Returns the name for the HTML form parameter
  * @method \Aimeos\MW\Mail\Message\Iface mail() Returns the e-mail message object
- * @method string number(integer|float|decimal $number, integer $decimals = 2) Returns the formatted number
- * @method string|array param(string|null $name, string|array $default) Returns the parameter value
- * @method string partial(string $filepath, array $params = [] ) Renders the partial template
- * @method \Aimeos\MW\View\Helper\Iface request() Returns the request helper object
+ * @method string number(integer|float|decimal $number, integer $decimals = null) Returns the formatted number
+ * @method string|array param(string|null $name, string|array $default) Parameter value or associative list of key/value pairs
+ * @method string partial(string $filepath, array $params = []) Renders the rendered partial template
+ * @method \Aimeos\MW\View\Helper\Request\Iface request() Returns the request view helper object
+ * @method \Aimeos\MW\View\Helper\Response\Iface response() Returns the response view helper object
+ * @method mixed session($name, $default = null) Returns the session value for the given name
  * @method string translate(string $domain, string $singular, string $plural = '', integer $number = 1) Returns the translated string or the original one if no translation is available
  * @method string url(string|null $target, string|null $controller = null, string|null $action = null, array $params = [], array $trailing = [], array $config = []) Returns the URL assembled from the given arguments
+ * @method mixed value(array $values, $key, $default = null) Returns the value for the given key in the array
  *
  * @package MW
  * @subpackage View

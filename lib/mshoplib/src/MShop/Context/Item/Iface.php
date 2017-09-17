@@ -46,7 +46,7 @@ interface Iface
 	/**
 	 * Returns the configuration object.
 	 *
-	 * @return \Aimeos\MShop\Config\Iface Configuration object
+	 * @return \Aimeos\MW\Config\Iface Configuration object
 	 */
 	public function getConfig();
 
@@ -169,8 +169,8 @@ interface Iface
 	 * Returns the message queue object.
 	 *
 	 * @param string $resource Resource name, e.g. "mq-email"
-	 * @apram string $queue Message queue name, e.g. "order/email/payment"
-	 * @return \Aimeos\MW\Queue\Manager\Iface Message queue object
+	 * @param string $queue Message queue name, e.g. "order/email/payment"
+	 * @return \Aimeos\MW\MQueue\Queue\Iface Message queue object
 	 */
 	public function getMessageQueue( $resource, $queue );
 
@@ -222,7 +222,7 @@ interface Iface
 	/**
 	 * Sets the account name of the user/editor.
 	 *
-	 * @param string $name Account name of the user/editor
+	 * @param string $name Account name or IP address of the user/editor
 	 * @return \Aimeos\MShop\Context\Item\Iface Context item for chaining method calls
 	 */
 	public function setEditor( $name );
@@ -230,7 +230,7 @@ interface Iface
 	/**
 	 * Returns the account name of the user/editor.
 	 *
-	 * @return string Account name of the user/editor
+	 * @return string Account name or IP address of the user/editor
 	 */
 	public function getEditor();
 

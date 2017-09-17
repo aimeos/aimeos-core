@@ -12,7 +12,7 @@ namespace Aimeos\MW\View\Helper\Content;
 
 
 /**
- * View helper class for retrieving configuration values.
+ * View helper class for generating media URLs
  *
  * @package MW
  * @subpackage View
