@@ -100,7 +100,19 @@ abstract class Base implements Iface
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		return true;
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon' );
+		$codeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon/code' );
+
+		$search = $manager->createSearch( true );
+		$expr = [
+			$search->compare( '==', 'coupon.code.code', $this->code ),
+			$codeManager->createSearch( true )->getConditions(),
+			$search->getConditions(),
+		];
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSlice( 0, 1 );
+
+		return (bool) count( $manager->searchItems( $search ) );
 	}
 
 
