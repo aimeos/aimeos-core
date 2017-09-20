@@ -50,4 +50,16 @@ class Example
 	public function updateCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 	}
+
+
+	/**
+	 * Tests if a coupon should be granted.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return boolean True of coupon can be granted, false if not
+	 */
+	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
+	{
+		return true;
+	}
 }

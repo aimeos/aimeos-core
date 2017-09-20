@@ -26,7 +26,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, 'zyxw' );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, '90AB' );
 	}
 
 
@@ -49,12 +49,12 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
 
-		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
+		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
 		$this->assertEquals( 3, count( $products ) );
-		$this->assertEquals( 1, count( $coupons['zyxw'] ) );
+		$this->assertEquals( 1, count( $coupons['90AB'] ) );
 		$this->assertEquals( '-70.40', $product->getPrice()->getValue() );
 		$this->assertEquals( '70.40', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );
@@ -83,11 +83,11 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
 
-		if( ( $couponProduct20 = reset( $coupons['zyxw'] ) ) === false ) {
+		if( ( $couponProduct20 = reset( $coupons['90AB'] ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
-		if( ( $couponProduct10 = end( $coupons['zyxw'] ) ) === false ) {
+		if( ( $couponProduct10 = end( $coupons['90AB'] ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
@@ -111,7 +111,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$coupons = $this->orderBase->getCoupons();
 
 		$this->assertEquals( 1, count( $products ) );
-		$this->assertArrayNotHasKey( 'zyxw', $coupons );
+		$this->assertArrayNotHasKey( '90AB', $coupons );
 	}
 
 
@@ -120,7 +120,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 
-		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, 'zyxw' );
+		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, '90AB' );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Coupon\\Exception' );
 		$object->addCoupon( $this->orderBase );
