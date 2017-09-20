@@ -26,7 +26,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, 'zyxw' );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, '90AB' );
 	}
 
 
@@ -44,13 +44,13 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$coupons = $this->orderBase->getCoupons();
 		$products = $this->orderBase->getProducts();
 
-		if( !isset( $coupons['zyxw'][0] ) ) {
+		if( !isset( $coupons['90AB'][0] ) ) {
 			throw new \RuntimeException( 'Missing coupon product' );
 		}
-		$product = $coupons['zyxw'][0];
+		$product = $coupons['90AB'][0];
 
 		$this->assertEquals( 1, count( $products ) );
-		$this->assertEquals( 1, count( $coupons['zyxw'] ) );
+		$this->assertEquals( 1, count( $coupons['90AB'] ) );
 		$this->assertEquals( 'U:PD', $product->getProductCode() );
 		$this->assertNotEquals( '', $product->getProductId() );
 		$this->assertEquals( '', $product->getSupplierCode() );
@@ -68,7 +68,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$products = $this->orderBase->getProducts();
 
 		$this->assertEquals( 0, count( $products ) );
-		$this->assertArrayNotHasKey( 'zyxw', $coupons );
+		$this->assertArrayNotHasKey( '90AB', $coupons );
 	}
 
 
@@ -77,7 +77,7 @@ class PresentTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 
-		$object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, 'zyxw' );
+		$object = new \Aimeos\MShop\Coupon\Provider\Present( $context, $couponItem, '90AB' );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Coupon\\Exception' );
 		$object->addCoupon( $this->orderBase );

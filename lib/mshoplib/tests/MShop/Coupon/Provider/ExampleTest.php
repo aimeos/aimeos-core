@@ -54,15 +54,6 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isAvailable( $this->orderBase ) );
 	}
 
-	public function testIsAvailableFalse()
-	{
-		$context = \TestHelperMShop::getContext();
-		$item = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
-		$object = new \Aimeos\MShop\Coupon\Provider\Example( $context, $item, '5678' );
-
-		$this->assertFalse( $object->isAvailable( $this->orderBase ) );
-	}
-
 	public function testSetObject()
 	{
 		$this->object->setObject( $this->object );

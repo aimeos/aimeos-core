@@ -24,7 +24,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
 		$couponItem->setConfig( array( 'freeshipping.productcode' => 'U:SD' ) );
 
-		$this->object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, 'zyxw' );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 
 		$delPrice = \Aimeos\MShop\Price\Manager\Factory::createManager( $context )->createItem();
@@ -57,7 +57,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$this->object->addCoupon( $this->orderBase );
 		$coupons = $this->orderBase->getCoupons();
 
-		if( ( $product = reset( $coupons['zyxw'] ) ) === false ) {
+		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
@@ -84,7 +84,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$coupons = $this->orderBase->getCoupons();
 
 		$this->assertEquals( 0, count( $products ) );
-		$this->assertArrayNotHasKey( 'zyxw', $coupons );
+		$this->assertArrayNotHasKey( '90AB', $coupons );
 	}
 
 
@@ -93,7 +93,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
-		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, 'zyxw' );
+		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Coupon\\Exception' );
 		$object->addCoupon( $this->orderBase );
