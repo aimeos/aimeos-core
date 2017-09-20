@@ -188,9 +188,11 @@ class Standard
 	 * Returns the last status item for the given order ID.
 	 *
 	 * @param string $parentid Order ID
+	 * @param string $type Status type constant
+	 * @param string $status New status value stored along with the order item
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface|false Order status item or false if no item is available
 	 */
-	protected function getLastStatusItem( $parentid, $type )
+	protected function getLastStatusItem( $parentid, $type, $status )
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order/status' );
 
@@ -198,7 +200,7 @@ class Standard
 		$expr = array(
 			$search->compare( '==', 'order.status.parentid', $parentid ),
 			$search->compare( '==', 'order.status.type', $type ),
-			$search->compare( '!=', 'order.status.value', '' ),
+			$search->compare( '==', 'order.status.value', $status ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSortations( array( $search->sort( '-', 'order.status.ctime' ) ) );
@@ -288,7 +290,7 @@ class Standard
 	 */
 	protected function updateStatus( \Aimeos\MShop\Order\Item\Iface $orderItem, $type, $status, $value )
 	{
-		$statusItem = $this->getLastStatusItem( $orderItem->getId(), $type );
+		$statusItem = $this->getLastStatusItem( $orderItem->getId(), $type, $status );
 
 		if( $statusItem !== false && $statusItem->getValue() == $status ) {
 			return;

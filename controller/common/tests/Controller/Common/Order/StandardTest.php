@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
-		$result = $method->invokeArgs( $object, array( $orderItem->getId(), 'typestatus' ) );
+		$result = $method->invokeArgs( $object, array( $orderItem->getId(), 'typestatus', 'shipped' ) );
 
 		$this->assertEquals( 1, count( $result ) );
 
@@ -180,7 +180,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
-		$result = $method->invokeArgs( $object, array( -1, 0 ) );
+		$result = $method->invokeArgs( $object, array( -1, 0, 0 ) );
 
 		$this->assertFalse( $result );
 	}
