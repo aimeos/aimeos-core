@@ -135,7 +135,7 @@ class Standard
 		$item->setType( $type );
 		$item->setValue( $value );
 
-		$manager->saveItem( $item );
+		$manager->saveItem( $item, false );
 	}
 
 
