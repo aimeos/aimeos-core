@@ -42,6 +42,8 @@ class Coupon
 		$p->addListener( $this->getObject(), 'deleteService.after' );
 		$p->addListener( $this->getObject(), 'setService.after' );
 		$p->addListener( $this->getObject(), 'addCoupon.after' );
+		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
+		$p->addListener( $this->getObject(), 'check.after' );
 	}
 
 
