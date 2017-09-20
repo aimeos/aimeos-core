@@ -9,6 +9,5 @@ return array(
 		'super' => array( 'code' => 'super', 'label' => 'Super user' ),
 		'admin' => array( 'code' => 'admin', 'label' => 'Administrator' ),
 		'editor' => array( 'code' => 'editor', 'label' => 'Editor' ),
-		'viewer' => array( 'code' => 'viewer', 'label' => 'Viewer' ),
 	),
 );
