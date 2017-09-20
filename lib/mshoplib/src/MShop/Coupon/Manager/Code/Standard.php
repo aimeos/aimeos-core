@@ -837,16 +837,9 @@ class Standard
 	 */
 	public function createSearch( $default = false )
 	{
-		$dbm = $this->getContext()->getDatabaseManager();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		$object = new \Aimeos\MW\Criteria\SQL( $conn );
-
-		$dbm->release( $conn, $dbname );
-
 		if( $default === true )
 		{
+			$object = $this->createSearchBase( 'coupon' );
 			$curDate = date( 'Y-m-d H:i:00', time() );
 
 			$expr = array(
@@ -864,8 +857,10 @@ class Standard
 			$expr[] = $object->combine( '||', $temp );
 
 			$object->setConditions( $object->combine( '&&', $expr ) );
+
+			return $object;
 		}
 
-		return $object;
+		return parent::createSearch();
 	}
 }
