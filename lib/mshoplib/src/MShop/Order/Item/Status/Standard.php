@@ -59,7 +59,7 @@ class Standard
 	 */
 	public function setParentId( $parentid )
 	{
-		if( $parentid == $this->getParentId() ) { return $this; }
+		if( (int) $parentid == $this->getParentId() ) { return $this; }
 
 		$this->values['order.status.parentid'] = (int) $parentid;
 		$this->setModified();
@@ -90,7 +90,7 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return $this; }
+		if( (string) $type === $this->getType() ) { return $this; }
 
 		$this->values['order.status.type'] = (string) $type;
 		$this->setModified();
@@ -120,7 +120,7 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if( $value == $this->getValue() ) { return $this; }
+		if( (string) $value === $this->getValue() ) { return $this; }
 
 		$this->values['order.status.value'] = (string) $value;
 		$this->setModified();
