@@ -45,7 +45,7 @@ class Standard
 	public function getBaseId()
 	{
 		if( isset( $this->values['order.base.coupon.baseid'] ) ) {
-			return (int) $this->values['order.base.coupon.baseid'];
+			return (string) $this->values['order.base.coupon.baseid'];
 		}
 	}
 

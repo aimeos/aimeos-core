@@ -45,7 +45,7 @@ class Standard
 	public function getParentId()
 	{
 		if( isset( $this->values['order.status.parentid'] ) ) {
-			return (int) $this->values['order.status.parentid'];
+			return (string) $this->values['order.status.parentid'];
 		}
 	}
 
