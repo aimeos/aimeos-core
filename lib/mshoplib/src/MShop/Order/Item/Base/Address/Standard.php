@@ -40,12 +40,12 @@ class Standard
 	/**
 	 * Returns the order base ID the address belongs to.
 	 *
-	 * @return integer|null Base ID
+	 * @return string|null Base ID
 	 */
 	public function getBaseId()
 	{
 		if( isset( $this->values['order.base.address.baseid'] ) ) {
-			return (int) $this->values['order.base.address.baseid'];
+			return (string) $this->values['order.base.address.baseid'];
 		}
 
 		return null;
@@ -55,15 +55,16 @@ class Standard
 	/**
 	 * Sets the order base ID the address belongs to.
 	 *
-	 * @param integer|null $value New base ID
+	 * @param string $value New base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function setBaseId( $value )
 	{
-		if( $value == $this->getBaseId() ) { return $this; }
-
-		$this->values['order.base.address.baseid'] = ( $value !== null ? (int) $value : null );
-		$this->setModified();
+		if( (string) $value !== $this->getBaseId() )
+		{
+			$this->values['order.base.address.baseid'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -92,10 +93,11 @@ class Standard
 	 */
 	public function setAddressId( $addrid )
 	{
-		if( $addrid == $this->getAddressId() ) { return $this; }
-
-		$this->values['order.base.address.addressid'] = (string) $addrid;
-		$this->setModified();
+		if( (string) $addrid !== $this->getAddressId() )
+		{
+			$this->values['order.base.address.addressid'] = (string) $addrid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -124,12 +126,13 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return $this; }
-
 		$this->checkType( $type );
 
-		$this->values['order.base.address.type'] = (string) $type;
-		$this->setModified();
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['order.base.address.type'] = (string) $type;
+			$this->setModified();
+		}
 
 		return $this;
 	}

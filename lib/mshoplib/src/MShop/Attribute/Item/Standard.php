@@ -63,10 +63,11 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return $this; }
-
-		$this->values['attribute.domain'] = (string) $domain;
-		$this->setModified();
+		if( (string) $domain !== $this->getDomain() )
+		{
+			$this->values['attribute.domain'] = (string) $domain;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -75,12 +76,12 @@ class Standard
 	/**
 	 * Returns the type id of the attribute.
 	 *
-	 * @return integer|null Type of the attribute
+	 * @return string|null Type of the attribute
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['attribute.typeid'] ) ) {
-			return (int) $this->values['attribute.typeid'];
+			return (string) $this->values['attribute.typeid'];
 		}
 
 		return null;
@@ -90,15 +91,16 @@ class Standard
 	/**
 	 * Sets the new type of the attribute.
 	 *
-	 * @param integer|null $typeid Type of the attribute
+	 * @param string $typeid Type of the attribute
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return $this; }
-
-		$this->values['attribute.typeid'] = (int) $typeid;
-		$this->setModified();
+		if( (string) $typeid !== $this->getTypeId() )
+		{
+			$this->values['attribute.typeid'] = (string) $typeid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -161,10 +163,11 @@ class Standard
 			throw new \Aimeos\MShop\Attribute\Exception( sprintf( 'Code must not be longer than 255 characters' ) );
 		}
 
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['attribute.code'] = (string) $code;
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['attribute.code'] = (string) $code;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -193,10 +196,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['attribute.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['attribute.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -225,10 +229,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['attribute.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['attribute.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -257,10 +262,11 @@ class Standard
 	 */
 	public function setPosition( $pos )
 	{
-		if( $pos == $this->getPosition() ) { return $this; }
-
-		$this->values['attribute.position'] = (int) $pos;
-		$this->setModified();
+		if( (int) $pos !== $this->getPosition() )
+		{
+			$this->values['attribute.position'] = (int) $pos;
+			$this->setModified();
+		}
 
 		return $this;
 	}

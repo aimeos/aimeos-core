@@ -39,14 +39,14 @@ interface Iface
 	/**
 	 * Returns the language id of the tag item
 	 *
-	 * @return string Language ID of the tag item
+	 * @return string|null Language ID of the tag item
 	 */
 	public function getLanguageId();
 
 	/**
 	 * Sets the Language Id of the tag item
 	 *
-	 * @param string $id New Language ID of the tag item
+	 * @param string|null $id New Language ID of the tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
 	public function setLanguageId( $id );

@@ -52,30 +52,29 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the order base ID of the order service if available.
 	 *
-	 * @return integer|null Base ID of the item.
+	 * @return string|null Base ID of the item.
 	 */
 	public function getBaseId()
 	{
 		if( isset( $this->values['order.base.service.baseid'] ) ) {
-			return (int) $this->values['order.base.service.baseid'];
+			return (string) $this->values['order.base.service.baseid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the order service base ID of the order service item.
 	 *
-	 * @param integer|null $value Order service base ID
+	 * @param string $value Order service base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setBaseId( $value )
 	{
-		if( $value == $this->getBaseId() ) { return $this; }
-
-		$this->values['order.base.service.baseid'] = ( $value !== null ? (int) $value : null );
-		$this->setModified();
+		if( (string) $value !== $this->getBaseId() )
+		{
+			$this->values['order.base.service.baseid'] = ( $value !== null ? (int) $value : null );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -104,10 +103,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setServiceId( $servid )
 	{
-		if( $servid == $this->getServiceId() ) { return $this; }
-
-		$this->values['order.base.service.serviceid'] = (string) $servid;
-		$this->setModified();
+		if( (string) $servid !== $this->getServiceId() )
+		{
+			$this->values['order.base.service.serviceid'] = (string) $servid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -136,10 +136,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setCode( $code )
 	{
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['order.base.service.code'] = (string) $this->checkCode( $code );;
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['order.base.service.code'] = (string) $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -168,10 +169,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setName( $name )
 	{
-		if( $name == $this->getName() ) { return $this; }
-
-		$this->values['order.base.service.name'] = (string) $name;
-		$this->setModified();
+		if( (string) $name !== $this->getName() )
+		{
+			$this->values['order.base.service.name'] = (string) $name;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -200,10 +202,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return $this; }
-
-		$this->values['order.base.service.type'] = (string) $type;
-		$this->setModified();
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['order.base.service.type'] = (string) $type;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -232,10 +235,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setMediaUrl( $value )
 	{
-		if( $value == $this->getMediaUrl() ) { return $this; }
-
-		$this->values['order.base.service.mediaurl'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getMediaUrl() )
+		{
+			$this->values['order.base.service.mediaurl'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -260,10 +264,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
 	{
-		if( $price === $this->price ) { return $this; }
-
-		$this->price = $price;
-		$this->setModified();
+		if( $price !== $this->price )
+		{
+			$this->price = $price;
+			$this->setModified();
+		}
 
 		return $this;
 	}

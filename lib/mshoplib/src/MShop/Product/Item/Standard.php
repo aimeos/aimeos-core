@@ -72,30 +72,29 @@ class Standard
 	/**
 	 * Returns the type ID of the product item.
 	 *
-	 * @return integer|null Type ID of the product item
+	 * @return string|null Type ID of the product item
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['product.typeid'] ) ) {
-			return (int) $this->values['product.typeid'];
+			return (string) $this->values['product.typeid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the new type ID of the product item.
 	 *
-	 * @param integer $typeid New type ID of the product item
+	 * @param string $typeid New type ID of the product item
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return $this; }
-
-		$this->values['product.typeid'] = (int) $typeid;
-		$this->setModified();
+		if( (string) $typeid !== $this->getTypeId() )
+		{
+			$this->values['product.typeid'] = (string) $typeid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -111,8 +110,6 @@ class Standard
 		if( isset( $this->values['product.type'] ) ) {
 			return (string) $this->values['product.type'];
 		}
-
-		return null;
 	}
 
 
@@ -126,8 +123,6 @@ class Standard
 		if( isset( $this->values['product.typename'] ) ) {
 			return (string) $this->values['product.typename'];
 		}
-
-		return null;
 	}
 
 
@@ -154,10 +149,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['product.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['product.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -186,12 +182,11 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		$this->checkCode( $code );
-
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['product.code'] = (string) $code;
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['product.code'] = (string) $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -220,10 +215,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['product.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['product.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -239,8 +235,6 @@ class Standard
 		if( isset( $this->values['product.datestart'] ) ) {
 			return (string) $this->values['product.datestart'];
 		}
-
-		return null;
 	}
 
 
@@ -252,10 +246,11 @@ class Standard
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date === $this->getDateStart() ) { return $this; }
-
-		$this->values['product.datestart'] = $this->checkDateFormat( $date );
-		$this->setModified();
+		if( $date !== $this->getDateStart() )
+		{
+			$this->values['product.datestart'] = $this->checkDateFormat( $date );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -271,8 +266,6 @@ class Standard
 		if( isset( $this->values['product.dateend'] ) ) {
 			return (string) $this->values['product.dateend'];
 		}
-
-		return null;
 	}
 
 
@@ -284,10 +277,11 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date === $this->getDateEnd() ) { return $this; }
-
-		$this->values['product.dateend'] = $this->checkDateFormat( $date );
-		$this->setModified();
+		if( $date !== $this->getDateEnd() )
+		{
+			$this->values['product.dateend'] = $this->checkDateFormat( $date );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -346,10 +340,11 @@ class Standard
 	 */
 	public function setTarget( $value )
 	{
-		if( $value === $this->getTarget() ) { return $this; }
-
-		$this->values['product.target'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getTarget() )
+		{
+			$this->values['product.target'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}

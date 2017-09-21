@@ -40,29 +40,28 @@ class Standard
 	/**
 	 * Returns the parentid of the order status.
 	 *
-	 * @return integer|null Parent ID of the order
+	 * @return string|null Parent ID of the order
 	 */
 	public function getParentId()
 	{
 		if( isset( $this->values['order.status.parentid'] ) ) {
 			return (int) $this->values['order.status.parentid'];
 		}
-
-		return null;
 	}
 
 	/**
 	 * Sets the parentid of the order status.
 	 *
-	 * @param integer $parentid Parent ID of the order status
+	 * @param string $parentid Parent ID of the order status
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
 	public function setParentId( $parentid )
 	{
-		if( (int) $parentid == $this->getParentId() ) { return $this; }
-
-		$this->values['order.status.parentid'] = (int) $parentid;
-		$this->setModified();
+		if( (string) $parentid !== $this->getParentId() )
+		{
+			$this->values['order.status.parentid'] = (string) $parentid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -90,10 +89,11 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( (string) $type === $this->getType() ) { return $this; }
-
-		$this->values['order.status.type'] = (string) $type;
-		$this->setModified();
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['order.status.type'] = (string) $type;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -120,10 +120,11 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if( (string) $value === $this->getValue() ) { return $this; }
-
-		$this->values['order.status.value'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getValue() )
+		{
+			$this->values['order.status.value'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}

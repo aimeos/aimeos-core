@@ -23,14 +23,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the base ID of the order.
 	 *
-	 * @return integer Order base ID.
+	 * @return string Order base ID.
 	 */
 	public function getBaseId();
 
 	/**
 	 * Sets the base ID of the order.
 	 *
-	 * @param integer $baseid Order base ID.
+	 * @param string $baseid Order base ID.
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setBaseId( $baseid );
@@ -38,7 +38,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 *	Returns the product id of the ordered product.
 	 *
-	 *  @return integer Product ID of the ordered product
+	 *  @return string Product ID of the ordered product
 	 */
 	public function getProductId();
 
@@ -46,7 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * 	Sets the product ID of the ordered product
 	 *
-	 *	@param integer $productid The product ID of the ordered product
+	 *	@param string $productid The product ID of the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setProductId( $productid );

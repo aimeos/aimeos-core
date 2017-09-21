@@ -75,10 +75,11 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['locale.site.code'] = (string) $this->checkCode( $code );;
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['locale.site.code'] = $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -137,10 +138,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['locale.site.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['locale.site.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -191,10 +193,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['locale.site.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['locale.site.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

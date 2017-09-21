@@ -23,14 +23,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Address\Iface
 	/**
 	 * Returns the order base ID the address belongs to.
 	 *
-	 * @return integer|null Base ID
+	 * @return string|null Base ID
 	 */
 	public function getBaseId();
 
 	/**
 	 * Sets the order base ID the address belongs to.
 	 *
-	 * @param integer|null $value New base ID
+	 * @param string $value New base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Address\Iface Order base address item for chaining method calls
 	 */
 	public function setBaseId( $value );

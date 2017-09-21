@@ -38,21 +38,6 @@ class Standard
 
 
 	/**
-	 * Returns the status (enabled/disabled) of the job item.
-	 *
-	 * @return integer Returns the status of the item
-	 */
-	public function getStatus()
-	{
-		if( isset( $this->values['job.status'] ) ) {
-			return (int) $this->values['job.status'];
-		}
-
-		return 0;
-	}
-
-
-	/**
 	 * Returns the name of the job item.
 	 *
 	 * @return string Label of the job item
@@ -71,13 +56,17 @@ class Standard
 	 * Sets the new label of the job item.
 	 *
 	 * @param string $label Type label of the job item
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return; }
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['job.label'] = (string) $label;
+			$this->setModified();
+		}
 
-		$this->values['job.label'] = (string) $label;
-		$this->setModified();
+		return $this;
 	}
 
 
@@ -100,13 +89,17 @@ class Standard
 	 * Sets the new method for the job.
 	 *
 	 * @param string $method Method (object/methodname) to call
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setMethod( $method )
 	{
-		if( $method == $this->getMethod() ) { return; }
+		if( (string) $method !== $this->getMethod() )
+		{
+			$this->values['job.method'] = (string) $method;
+			$this->setModified();
+		}
 
-		$this->values['job.method'] = (string) $method;
-		$this->setModified();
+		return $this;
 	}
 
 
@@ -129,11 +122,14 @@ class Standard
 	 * Sets the new parameter for the job.
 	 *
 	 * @param array $param Parameter for the job
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setParameter( array $param )
 	{
 		$this->values['job.parameter'] = $param;
 		$this->setModified();
+
+		return $this;
 	}
 
 
@@ -156,11 +152,29 @@ class Standard
 	 * Sets the new result of the job.
 	 *
 	 * @param array $result Associative list of result key/value pairs or list thereof
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setResult( array $result )
 	{
 		$this->values['job.result'] = $result;
 		$this->setModified();
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the status (enabled/disabled) of the job item.
+	 *
+	 * @return integer Returns the status of the item
+	 */
+	public function getStatus()
+	{
+		if( isset( $this->values['job.status'] ) ) {
+			return (int) $this->values['job.status'];
+		}
+
+		return 0;
 	}
 
 
@@ -168,13 +182,17 @@ class Standard
 	 * Sets the new status of the job item.
 	 *
 	 * @param integer $status Status of the item
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return; }
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['job.status'] = (int) $status;
+			$this->setModified();
+		}
 
-		$this->values['job.status'] = (int) $status;
-		$this->setModified();
+		return $this;
 	}
 
 

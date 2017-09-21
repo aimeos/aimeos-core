@@ -23,14 +23,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the basic order ID.
 	 *
-	 * @return integer Basic order ID
+	 * @return string Basic order ID
 	 */
 	public function getBaseId();
 
 	/**
 	 * Sets the ID of the basic order item which contains the order details.
 	 *
-	 * @param integer $id ID of the basic order item
+	 * @param string $id ID of the basic order item
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setBaseId( $id );
@@ -38,14 +38,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the type of the invoice (repeating, web, phone, etc).
 	 *
-	 * @return integer Invoice type
+	 * @return string Invoice type
 	 */
 	public function getType();
 
 	/**
 	 * Sets the type of the invoice.
 	 *
-	 * @param integer $type Invoice type
+	 * @param string $type Invoice type
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setType( $type );
@@ -53,14 +53,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the delivery date of the invoice.
 	 *
-	 * @return string ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @return string|null ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
 	public function getDateDelivery();
 
 	/**
 	 * Sets the delivery date of the invoice.
 	 *
-	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDateDelivery( $date );
@@ -68,14 +68,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the payment date of the invoice.
 	 *
-	 * @return string ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @return string|null ISO date in yyyy-mm-dd HH:ii:ss format
 	 */
 	public function getDatePayment();
 
 	/**
 	 * Sets the payment date of the invoice.
 	 *
-	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDatePayment( $date );
@@ -113,14 +113,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the related invoice ID.
 	 *
-	 * @return integer|null Related invoice ID
+	 * @return string|null Related invoice ID
 	 */
 	public function getRelatedId();
 
 	/**
 	 * Sets the related invoice ID.
 	 *
-	 * @param integer|null Related invoice ID
+	 * @param string|null Related invoice ID
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setRelatedId( $id );

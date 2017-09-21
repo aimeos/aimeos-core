@@ -40,30 +40,29 @@ class Standard
 	/**
 	 * Returns the unique ID of the coupon item the code belongs to.
 	 *
-	 * @return integer|null Unique ID of the coupon item
+	 * @return string|null Unique ID of the coupon item
 	 */
 	public function getParentId()
 	{
 		if( isset( $this->values['coupon.code.parentid'] ) ) {
-			return (int) $this->values['coupon.code.parentid'];
+			return (string) $this->values['coupon.code.parentid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the new unique ID of the coupon item the code belongs to.
 	 *
-	 * @param integer $id Unique ID of the coupon item
+	 * @param string $id Unique ID of the coupon item
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setParentId( $id )
 	{
-		if( $id == $this->getParentId() ) { return $this; }
-
-		$this->values['coupon.code.parentid'] = (int) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getParentId() )
+		{
+			$this->values['coupon.code.parentid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -79,8 +78,6 @@ class Standard
 		if( isset( $this->values['coupon.code.code'] ) ) {
 			return (string) $this->values['coupon.code.code'];
 		}
-
-		return null;
 	}
 
 
@@ -92,12 +89,11 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		$this->checkCode( $code );
-
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['coupon.code.code'] = (string) $code;
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['coupon.code.code'] = $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -126,10 +122,11 @@ class Standard
 	 */
 	public function setCount( $count )
 	{
-		if( $count == $this->getCount() ) { return $this; }
-
-		$this->values['coupon.code.count'] = (string) $count;
-		$this->setModified();
+		if( (int) $count !== $this->getCount() )
+		{
+			$this->values['coupon.code.count'] = (int) $count;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -145,8 +142,6 @@ class Standard
 		if( isset( $this->values['coupon.code.datestart'] ) ) {
 			return (string) $this->values['coupon.code.datestart'];
 		}
-
-		return null;
 	}
 
 
@@ -158,10 +153,13 @@ class Standard
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date == $this->getDateStart() ) { return $this; }
+		$date = $this->checkDateFormat( $date );
 
-		$this->values['coupon.code.datestart'] = $this->checkDateFormat( $date );
-		$this->setModified();
+		if( (string) $date !== $this->getDateStart() )
+		{
+			$this->values['coupon.code.datestart'] = (string) $date;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -177,8 +175,6 @@ class Standard
 		if( isset( $this->values['coupon.code.dateend'] ) ) {
 			return (string) $this->values['coupon.code.dateend'];
 		}
-
-		return null;
 	}
 
 
@@ -190,10 +186,13 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date == $this->getDateEnd() ) { return $this; }
+		$date = $this->checkDateFormat( $date );
 
-		$this->values['coupon.code.dateend'] = $this->checkDateFormat( $date );
-		$this->setModified();
+		if( (string) $date !== $this->getDateEnd() )
+		{
+			$this->values['coupon.code.dateend'] = (string) $date;
+			$this->setModified();
+		}
 
 		return $this;
 	}

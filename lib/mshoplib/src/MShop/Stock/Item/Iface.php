@@ -46,7 +46,7 @@ interface Iface
 	/**
 	 * Sets the stock level.
 	 *
-	 * @param integer $stocklevel New stock level
+	 * @param integer|null $stocklevel New stock level
 	 * @return \Aimeos\MShop\Stock\Item\Stock\Iface Stock stock item for chaining method calls
 	 */
 	public function setStocklevel( $stocklevel );

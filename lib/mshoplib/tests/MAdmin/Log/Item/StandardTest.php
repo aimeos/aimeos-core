@@ -1,25 +1,21 @@
 <?php
 
-namespace Aimeos\MAdmin\Log\Item;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MAdmin\Log\Item;
+
+
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -39,12 +35,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -94,8 +84,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetFacility()
 	{
-		$this->object->setFacility( 'UT facility' );
-		$this->assertEquals( 'UT facility', $this->object->getFacility() );
+		$this->object->setFacility( 'UT facility 2' );
+		$this->assertEquals( 'UT facility 2', $this->object->getFacility() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -108,8 +98,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPriority()
 	{
-		$this->object->setPriority( 1 );
-		$this->assertEquals( 1, $this->object->getPriority() );
+		$this->object->setPriority( 2 );
+		$this->assertEquals( 2, $this->object->getPriority() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -122,8 +112,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMessage()
 	{
-		$this->object->setMessage( 'unittest log message' );
-		$this->assertEquals( 'unittest log message', $this->object->getMessage() );
+		$this->object->setMessage( 'unittest log message 2' );
+		$this->assertEquals( 'unittest log message 2', $this->object->getMessage() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -136,8 +126,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetRequest()
 	{
-		$this->object->setRequest( 'UT request' );
-		$this->assertEquals( 'UT request', $this->object->getRequest() );
+		$this->object->setRequest( 'UT request 2' );
+		$this->assertEquals( 'UT request 2', $this->object->getRequest() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 

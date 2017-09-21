@@ -114,15 +114,13 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	/**
 	 * Returns the ID of the site the item is stored.
 	 *
-	 * @return integer|null Site ID (or null if not available)
+	 * @return string|null Site ID (or null if not available)
 	 */
 	public function getSiteId()
 	{
 		if( isset( $this->values['order.base.siteid'] ) ) {
-			return (int) $this->values['order.base.siteid'];
+			return (string) $this->values['order.base.siteid'];
 		}
-
-		return null;
 	}
 
 
@@ -164,10 +162,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setComment( $comment )
 	{
-		if( $comment == $this->getComment() ) { return $this; }
-
-		$this->values['order.base.comment'] = (string) $comment;
-		$this->modified = true;
+		if( (string) $comment !== $this->getComment() )
+		{
+			$this->values['order.base.comment'] = (string) $comment;
+			$this->modified = true;
+		}
 
 		return $this;
 	}
@@ -196,8 +195,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setStatus( $value )
 	{
-		$this->values['order.base.status'] = (int) $value;
-		$this->modified = true;
+		if( (int) $value !== $this->getStatus() )
+		{
+			$this->values['order.base.status'] = (int) $value;
+			$this->modified = true;
+		}
 
 		return $this;
 	}
@@ -213,8 +215,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		if( isset( $this->values['order.base.mtime'] ) ) {
 			return (string) $this->values['order.base.mtime'];
 		}
-
-		return null;
 	}
 
 
@@ -228,8 +228,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 		if( isset( $this->values['order.base.ctime'] ) ) {
 			return (string) $this->values['order.base.ctime'];
 		}
-
-		return null;
 	}
 
 
@@ -271,14 +269,15 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function setCustomerId( $customerid )
 	{
-		if( $customerid === $this->getCustomerId() ) { return $this; }
+		if( (string) $customerid !== $this->getCustomerId() )
+		{
+			$this->notifyListeners( 'setCustomerId.before', $customerid );
 
-		$this->notifyListeners( 'setCustomerId.before', $customerid );
+			$this->values['order.base.customerid'] = (string) $customerid;
+			$this->modified = true;
 
-		$this->values['order.base.customerid'] = (string) $customerid;
-		$this->modified = true;
-
-		$this->notifyListeners( 'setCustomerId.after', $customerid );
+			$this->notifyListeners( 'setCustomerId.after', $customerid );
+		}
 
 		return $this;
 	}

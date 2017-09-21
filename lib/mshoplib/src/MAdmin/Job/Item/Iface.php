@@ -31,7 +31,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new status of the attribute item.
 	 *
 	 * @param integer $status Status of attribute item
-	 * @return void
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setStatus( $status );
 
@@ -46,7 +46,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new label of the attribute item.
 	 *
 	 * @param string $label Type label of the attribute item
-	 * @return void
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setLabel( $label );
 
@@ -62,7 +62,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new method for the job.
 	 *
 	 * @param string $method Method (object/methodname) to call
-	 * @return void
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setMethod( $method );
 
@@ -77,7 +77,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new parameter for the job.
 	 *
 	 * @param array $param Parameter for the job
-	 * @return void
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setParameter( array $param );
 
@@ -92,7 +92,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the new result of the job.
 	 *
 	 * @param array $result Associative list of result key/value pairs or list thereof
-	 * @return void
+	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
 	 */
 	public function setResult( array $result );
 }

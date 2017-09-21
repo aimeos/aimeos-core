@@ -532,7 +532,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	/**
 	 * Returns the user ID of the logged in user.
 	 *
-	 * @return string User ID of the logged in user
+	 * @return string|null User ID of the logged in user
 	 */
 	public function getUserId()
 	{

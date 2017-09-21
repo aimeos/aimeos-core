@@ -62,10 +62,11 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['service.code'] = (string) $this->checkCode( $code );;
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['service.code'] = (string) $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -81,8 +82,6 @@ class Standard
 		if( isset( $this->values['service.type'] ) ) {
 			return (string) $this->values['service.type'];
 		}
-
-		return null;
 	}
 
 
@@ -96,38 +95,35 @@ class Standard
 		if( isset( $this->values['service.typename'] ) ) {
 			return (string) $this->values['service.typename'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Returns the type ID of the service item if available.
 	 *
-	 * @return integer|null Service item type ID
+	 * @return string|null Service item type ID
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['service.typeid'] ) ) {
-			return (int) $this->values['service.typeid'];
+			return (string) $this->values['service.typeid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the type ID of the service item.
 	 *
-	 * @param integer Type ID of the service item
+	 * @param string Type ID of the service item
 	 * @return \Aimeos\MShop\Service\Item\Iface Service item for chaining method calls
 	 */
 	public function setTypeId( $typeId )
 	{
-		if( $typeId == $this->getTypeId() ) { return $this; }
-
-		$this->values['service.typeid'] = (int) $typeId;
-		$this->setModified();
+		if( (string) $typeId !== $this->getTypeId() )
+		{
+			$this->values['service.typeid'] = (string) $typeId;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -156,10 +152,11 @@ class Standard
 	 */
 	public function setProvider( $provider )
 	{
-		if( $provider == $this->getProvider() ) { return $this; }
-
-		$this->values['service.provider'] = (string) $provider;
-		$this->setModified();
+		if( (string) $provider !== $this->getProvider() )
+		{
+			$this->values['service.provider'] = (string) $provider;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -188,10 +185,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['service.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['service.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -207,8 +205,6 @@ class Standard
 		if( isset( $this->values['service.datestart'] ) ) {
 			return (string) $this->values['service.datestart'];
 		}
-
-		return null;
 	}
 
 
@@ -220,10 +216,11 @@ class Standard
 	 */
 	public function setDateStart( $date )
 	{
-		if( $date === $this->getDateStart() ) { return $this; }
-
-		$this->values['service.datestart'] = $this->checkDateFormat( $date );
-		$this->setModified();
+		if( $date !== $this->getDateStart() )
+		{
+			$this->values['service.datestart'] = $this->checkDateFormat( $date );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -239,8 +236,6 @@ class Standard
 		if( isset( $this->values['service.dateend'] ) ) {
 			return (string) $this->values['service.dateend'];
 		}
-
-		return null;
 	}
 
 
@@ -252,10 +247,11 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		if( $date === $this->getDateEnd() ) { return $this; }
-
-		$this->values['service.dateend'] = $this->checkDateFormat( $date );
-		$this->setModified();
+		if( $date !== $this->getDateEnd() )
+		{
+			$this->values['service.dateend'] = $this->checkDateFormat( $date );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -314,10 +310,11 @@ class Standard
 	 */
 	public function setPosition( $pos )
 	{
-		if( $pos == $this->getPosition() ) { return $this; }
-
-		$this->values['service.position'] = (int) $pos;
-		$this->setModified();
+		if( (int) $pos !== $this->getPosition() )
+		{
+			$this->values['service.position'] = (int) $pos;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -346,10 +343,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['service.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['service.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

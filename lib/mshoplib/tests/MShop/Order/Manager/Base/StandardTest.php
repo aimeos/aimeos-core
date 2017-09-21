@@ -413,7 +413,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInternalType( 'string', $address->getId() );
 			$this->assertNotEquals( '', $address->getId() );
-			$this->assertInternalType( 'integer', $address->getBaseId() );
+			$this->assertInternalType( 'string', $address->getBaseId() );
 		}
 
 		$this->assertEquals( 2, count( $order->getCoupons() ) );
@@ -431,7 +431,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInternalType( 'string', $product->getId() );
 			$this->assertNotEquals( '', $product->getId() );
-			$this->assertInternalType( 'integer', $product->getBaseId() );
+			$this->assertInternalType( 'string', $product->getBaseId() );
 			$this->assertGreaterThan( 0, $product->getPosition() );
 		}
 
@@ -439,7 +439,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		{
 			$this->assertInternalType( 'string', $service->getId() );
 			$this->assertNotEquals( '', $service->getId() );
-			$this->assertInternalType( 'integer', $service->getBaseId() );
+			$this->assertInternalType( 'string', $service->getBaseId() );
 		}
 	}
 

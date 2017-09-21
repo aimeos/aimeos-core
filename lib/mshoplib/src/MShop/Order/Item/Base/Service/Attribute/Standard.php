@@ -61,10 +61,11 @@ class Standard
 	 */
 	public function setAttributeId( $id )
 	{
-		if( $id == $this->getAttributeId() ) { return $this; }
-
-		$this->values['order.base.service.attribute.attributeid'] = (string) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getAttributeId() )
+		{
+			$this->values['order.base.service.attribute.attributeid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -80,23 +81,22 @@ class Standard
 		if( isset( $this->values['order.base.service.attribute.parentid'] ) ) {
 			return (string) $this->values['order.base.service.attribute.parentid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the ID of the ordered service item as parent
 	 *
-	 * @param integer $id ID of the ordered service item
+	 * @param string $id ID of the ordered service item
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setParentId( $id )
 	{
-		if( $id == $this->getParentId() ) { return $this; }
-
-		$this->values['order.base.service.attribute.parentid'] = (int) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getParentId() )
+		{
+			$this->values['order.base.service.attribute.parentid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -125,10 +125,11 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return $this; }
-
-		$this->values['order.base.service.attribute.type'] = (string) $type;
-		$this->setModified();
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['order.base.service.attribute.type'] = (string) $type;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -157,10 +158,11 @@ class Standard
 	 */
 	public function setName( $name )
 	{
-		if( $name == $this->getName() ) { return $this; }
-
-		$this->values['order.base.service.attribute.name'] = (string) $name;
-		$this->setModified();
+		if( (string) $name !== $this->getName() )
+		{
+			$this->values['order.base.service.attribute.name'] = (string) $name;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -189,10 +191,11 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['order.base.service.attribute.code'] = (string) $this->checkCode( $code );;
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['order.base.service.attribute.code'] = (string) $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -221,10 +224,11 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if( $value == $this->getValue() ) { return $this; }
-
-		$this->values['order.base.service.attribute.value'] = $value;
-		$this->setModified();
+		if( $value !== $this->getValue() )
+		{
+			$this->values['order.base.service.attribute.value'] = $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}

@@ -50,8 +50,6 @@ class Standard
 		if( isset( $this->values['text.languageid'] ) ) {
 			return (string) $this->values['text.languageid'];
 		}
-
-		return null;
 	}
 
 
@@ -64,10 +62,11 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id == $this->getLanguageId() ) { return $this; }
-
-		$this->values['text.languageid'] = $this->checkLanguageId( $id );
-		$this->setModified();
+		if( $id !== $this->getLanguageId() )
+		{
+			$this->values['text.languageid'] = $this->checkLanguageId( $id );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -76,30 +75,29 @@ class Standard
 	/**
 	 * Returns the type ID of the text item.
 	 *
-	 * @return integer|null Type ID of the text item
+	 * @return string|null Type ID of the text item
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['text.typeid'] ) ) {
-			return (int) $this->values['text.typeid'];
+			return (string) $this->values['text.typeid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 *  Sets the type ID of the text item.
 	 *
-	 * @param integer $typeid Type ID of the text type
+	 * @param string $typeid Type ID of the text type
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return $this; }
-
-		$this->values['text.typeid'] = (int) $typeid;
-		$this->setModified();
+		if( (string) $typeid !== $this->getTypeId() )
+		{
+			$this->values['text.typeid'] = (string) $typeid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -115,8 +113,6 @@ class Standard
 		if( isset( $this->values['text.type'] ) ) {
 			return (string) $this->values['text.type'];
 		}
-
-		return null;
 	}
 
 
@@ -130,8 +126,6 @@ class Standard
 		if( isset( $this->values['text.typename'] ) ) {
 			return (string) $this->values['text.typename'];
 		}
-
-		return null;
 	}
 
 
@@ -158,10 +152,11 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return $this; }
-
-		$this->values['text.domain'] = (string) $domain;
-		$this->setModified();
+		if( (string) $domain !== $this->getDomain() )
+		{
+			$this->values['text.domain'] = (string) $domain;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -190,11 +185,12 @@ class Standard
 	 */
 	public function setContent( $text )
 	{
-		if( $text == $this->getContent() ) { return $this; }
-
-		ini_set( 'mbstring.substitute_character', 'none' );
-		$this->values['text.content'] = @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' );
-		$this->setModified();
+		if( (string) $text !== $this->getContent() )
+		{
+			ini_set( 'mbstring.substitute_character', 'none' );
+			$this->values['text.content'] = @mb_convert_encoding( (string) $text, 'UTF-8', 'UTF-8' );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -223,10 +219,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['text.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['text.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -255,10 +252,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['text.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['text.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

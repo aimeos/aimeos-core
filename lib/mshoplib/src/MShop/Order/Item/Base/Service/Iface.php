@@ -23,14 +23,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the order base ID of the order service if available.
 	 *
-	 * @return integer|null Base ID of the item.
+	 * @return string|null Base ID of the item.
 	 */
 	public function getBaseId();
 
 	/**
 	 * Sets the order service base ID of the order service item.
 	 *
-	 * @param integer|null Order service base ID
+	 * @param string Order service base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setBaseId( $id );
@@ -64,6 +64,21 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function setCode( $code );
+
+	/**
+	 * Returns the location of the media.
+	 *
+	 * @return string Location of the media
+	 */
+	public function getMediaUrl();
+
+	/**
+	 * Sets the media url of the service item.
+	 *
+	 * @param string $value Location of the media/picture
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
+	 */
+	public function setMediaUrl( $value );
 
 	/**
 	 * Returns the name of the service item.
@@ -159,19 +174,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
 	 */
 	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service );
-
-	/**
-	 * Sets the media url of the service item.
-	 *
-	 * @param string $value Location of the media/picture
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
-	 */
-	public function setMediaUrl( $value );
-
-	/**
-	 * Returns the location of the media.
-	 *
-	 * @return string Location of the media
-	 */
-	public function getMediaUrl();
 }

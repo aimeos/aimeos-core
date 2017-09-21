@@ -54,15 +54,13 @@ class Standard
 	/**
 	 * Returns the basic order ID.
 	 *
-	 * @return integer|null Basic order ID
+	 * @return string|null Basic order ID
 	 */
 	public function getBaseId()
 	{
 		if( isset( $this->values['order.baseid'] ) ) {
-			return (int) $this->values['order.baseid'];
+			return (string) $this->values['order.baseid'];
 		}
-
-		return null;
 	}
 
 
@@ -74,10 +72,11 @@ class Standard
 	 */
 	public function setBaseId( $id )
 	{
-		if( $id == $this->getBaseId() ) { return $this; }
-
-		$this->values['order.baseid'] = (int) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getBaseId() )
+		{
+			$this->values['order.baseid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -106,10 +105,11 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return $this; }
-
-		$this->values['order.type'] = (string) $type;
-		$this->setModified();
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['order.type'] = (string) $type;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -125,8 +125,6 @@ class Standard
 		if( isset( $this->values['order.datedelivery'] ) ) {
 			return (string) $this->values['order.datedelivery'];
 		}
-
-		return null;
 	}
 
 
@@ -138,10 +136,11 @@ class Standard
 	 */
 	public function setDateDelivery( $date )
 	{
-		if( $date === $this->getDateDelivery() ) { return $this; }
-
-		$this->values['order.datedelivery'] = (string) $this->checkDateFormat( $date );
-		$this->setModified();
+		if( $date !== $this->getDateDelivery() )
+		{
+			$this->values['order.datedelivery'] = (string) $this->checkDateFormat( $date );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -170,10 +169,11 @@ class Standard
 	 */
 	public function setDatePayment( $date )
 	{
-		if( $date === $this->getDatePayment() ) { return $this; }
-
-		$this->values['order.datepayment'] = (string) $this->checkDateFormat( $date );
-		$this->setModified();
+		if( $date !== $this->getDatePayment() )
+		{
+			$this->values['order.datepayment'] = (string) $this->checkDateFormat( $date );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -202,10 +202,11 @@ class Standard
 	 */
 	public function setDeliveryStatus( $status )
 	{
-		if( $status == $this->getDeliveryStatus() ) { return $this; }
-
-		$this->values['order.statusdelivery'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getDeliveryStatus() )
+		{
+			$this->values['order.statusdelivery'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -234,11 +235,12 @@ class Standard
 	 */
 	public function setPaymentStatus( $status )
 	{
-		if( $status == $this->getPaymentStatus() ) { return $this; }
-
-		$this->values['order.datepayment'] = date( 'Y-m-d H:i:s' );
-		$this->values['order.statuspayment'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getPaymentStatus() )
+		{
+			$this->values['order.datepayment'] = date( 'Y-m-d H:i:s' );
+			$this->values['order.statuspayment'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -247,31 +249,30 @@ class Standard
 	/**
 	 * Returns the related invoice ID.
 	 *
-	 * @param integer|null Related invoice ID
+	 * @param string|null Related invoice ID
 	 */
 	public function getRelatedId()
 	{
 		if( isset( $this->values['order.relatedid'] ) ) {
-			return (int) $this->values['order.relatedid'];
+			return (string) $this->values['order.relatedid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the related invoice ID.
 	 *
-	 * @param integer|null $id Related invoice ID
+	 * @param string|null $id Related invoice ID
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 * @throws \Aimeos\MShop\Order\Exception If ID is invalid
 	 */
 	public function setRelatedId( $id )
 	{
-		if( $id === $this->getRelatedId() ) { return $this; }
-
-		$this->values['order.relatedid'] = (int) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getRelatedId() )
+		{
+			$this->values['order.relatedid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}

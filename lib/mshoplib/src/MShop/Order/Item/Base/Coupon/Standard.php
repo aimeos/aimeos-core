@@ -40,30 +40,29 @@ class Standard
 	/**
 	 * Returns the base ID of the order.
 	 *
-	 * @return integer|null Order base ID
+	 * @return string|null Order base ID
 	 */
 	public function getBaseId()
 	{
 		if( isset( $this->values['order.base.coupon.baseid'] ) ) {
 			return (int) $this->values['order.base.coupon.baseid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the Base ID of the order.
 	 *
-	 * @param integer $baseid Order base ID.
+	 * @param string $baseid Order base ID.
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setBaseId( $baseid )
 	{
-		if( $baseid == $this->getBaseId() ) { return $this; }
-
-		$this->values['order.base.coupon.baseid'] = (int) $baseid;
-		$this->setModified();
+		if( (string) $baseid !== $this->getBaseId() )
+		{
+			$this->values['order.base.coupon.baseid'] = (string) $baseid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -72,30 +71,29 @@ class Standard
 	/**
 	 * Returns the ID of the ordered product.
 	 *
-	 * @return integer|null ID of the ordered product.
+	 * @return string|null ID of the ordered product.
 	 */
 	public function getProductId()
 	{
 		if( isset( $this->values['order.base.coupon.ordprodid'] ) ) {
-			return (int) $this->values['order.base.coupon.ordprodid'];
+			return (string) $this->values['order.base.coupon.ordprodid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the ID of the ordered product.
 	 *
-	 * @param integer $productid ID of the ordered product
+	 * @param string $productid ID of the ordered product
 	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface Order base coupon item for chaining method calls
 	 */
 	public function setProductId( $productid )
 	{
-		if( $productid == $this->getProductId() ) { return $this; }
-
-		$this->values['order.base.coupon.ordprodid'] = (int) $productid;
-		$this->setModified();
+		if( (string) $productid !== $this->getProductId() )
+		{
+			$this->values['order.base.coupon.ordprodid'] = (string) $productid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -111,8 +109,6 @@ class Standard
 		if( isset( $this->values['order.base.coupon.code'] ) ) {
 			return (string) $this->values['order.base.coupon.code'];
 		}
-
-		return null;
 	}
 
 
@@ -124,10 +120,11 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['order.base.coupon.code'] = (string) $this->checkCode( $code );;
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['order.base.coupon.code'] = (string) $this->checkCode( $code );;
+			$this->setModified();
+		}
 
 		return $this;
 	}

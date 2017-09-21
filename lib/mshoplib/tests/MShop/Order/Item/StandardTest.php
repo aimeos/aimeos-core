@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetBaseId()
 	{
-		$this->assertSame( $this->values['order.baseid'], $this->object->getBaseId() );
+		$this->assertEquals( $this->values['order.baseid'], $this->object->getBaseId() );
 	}
 
 	public function testSetBaseId()

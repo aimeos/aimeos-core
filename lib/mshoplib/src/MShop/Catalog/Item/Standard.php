@@ -134,9 +134,9 @@ class Standard
 	 */
 	public function setLabel( $name )
 	{
-		if( $name == $this->getLabel() ) { return $this; }
-
-		$this->node->setLabel( $name );
+		if( (string) $name !== $this->getLabel() ) {
+			$this->node->setLabel( (string) $name );
+		}
 
 		return $this;
 	}
@@ -186,9 +186,9 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->node->setCode( $this->checkCode( $code ) );
+		if( (string) $code !== $this->getCode() ) {
+			$this->node->setCode( $this->checkCode( (string) $code ) );
+		}
 
 		return $this;
 	}
@@ -212,9 +212,9 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status === $this->getStatus() ) { return $this; }
-
-		$this->node->setStatus( $status );
+		if( (int) $status !== $this->getStatus() ) {
+			$this->node->setStatus( $status );
+		}
 
 		return $this;
 	}
@@ -237,9 +237,9 @@ class Standard
 	 */
 	public function setTarget( $value )
 	{
-		if( $value === $this->getTarget() ) { return $this; }
-
-		$this->node->__set( 'target', $value );
+		if( (string) $value !== $this->getTarget() ) {
+			$this->node->__set( 'target', $value );
+		}
 
 		return $this;
 	}

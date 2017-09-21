@@ -24,7 +24,7 @@ interface Iface
 	/**
 	 * Sets the site ID of the item.
 	 *
-	 * @param integer $value Unique site ID of the item
+	 * @param string $value Unique site ID of the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
 	public function setSiteId( $value );

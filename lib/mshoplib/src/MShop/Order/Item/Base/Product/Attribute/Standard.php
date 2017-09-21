@@ -41,15 +41,13 @@ class Standard
 	/**
 	 * Returns the ID of the site the item is stored
 	 *
-	 * @return integer|null Site ID (or null if not available)
+	 * @return string|null Site ID (or null if not available)
 	 */
 	public function getSiteId()
 	{
 		if( isset( $this->values['order.base.product.attribute.siteid'] ) ) {
-			return (int) $this->values['order.base.product.attribute.siteid'];
+			return (string) $this->values['order.base.product.attribute.siteid'];
 		}
-
-		return null;
 	}
 
 
@@ -61,10 +59,11 @@ class Standard
 	 */
 	public function setSiteId( $value )
 	{
-		if( $value == $this->getSiteId() ) { return $this; }
-
-		$this->values['order.base.product.attribute.siteid'] = (int) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getSiteId() )
+		{
+			$this->values['order.base.product.attribute.siteid'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -93,10 +92,11 @@ class Standard
 	 */
 	public function setAttributeId( $id )
 	{
-		if( $id == $this->getAttributeId() ) { return $this; }
-
-		$this->values['order.base.product.attribute.attributeid'] = (string) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getAttributeId() )
+		{
+			$this->values['order.base.product.attribute.attributeid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -112,8 +112,6 @@ class Standard
 		if( isset( $this->values['order.base.product.attribute.parentid'] ) ) {
 			return (string) $this->values['order.base.product.attribute.parentid'];
 		}
-
-		return null;
 	}
 
 
@@ -125,10 +123,11 @@ class Standard
 	 */
 	public function setParentId( $id )
 	{
-		if( $id == $this->getParentId() ) { return $this; }
-
-		$this->values['order.base.product.attribute.parentid'] = (string) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getParentId() )
+		{
+			$this->values['order.base.product.attribute.parentid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -157,10 +156,11 @@ class Standard
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return $this; }
-
-		$this->values['order.base.product.attribute.type'] = (string) $type;
-		$this->setModified();
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['order.base.product.attribute.type'] = (string) $type;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -189,10 +189,11 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code == $this->getCode() ) { return $this; }
-
-		$this->values['order.base.product.attribute.code'] = (string) $this->checkCode( $code );
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values['order.base.product.attribute.code'] = (string) $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -221,10 +222,11 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if( $value == $this->getValue() ) { return $this; }
-
-		$this->values['order.base.product.attribute.value'] = $value;
-		$this->setModified();
+		if( $value !== $this->getValue() )
+		{
+			$this->values['order.base.product.attribute.value'] = $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -253,10 +255,11 @@ class Standard
 	 */
 	public function setName( $name )
 	{
-		if( $name == $this->getName() ) { return $this; }
-
-		$this->values['order.base.product.attribute.name'] = (string) $name;
-		$this->setModified();
+		if( (string) $name !== $this->getName() )
+		{
+			$this->values['order.base.product.attribute.name'] = (string) $name;
+			$this->setModified();
+		}
 
 		return $this;
 	}

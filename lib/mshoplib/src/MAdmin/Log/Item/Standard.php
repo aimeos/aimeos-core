@@ -56,11 +56,17 @@ class Standard
 	 * Sets the new facility of the of the item.
 	 *
 	 * @param string $facility Facility
+	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
 	public function setFacility( $facility )
 	{
-		$this->values['log.facility'] = (string) $facility;
-		$this->setModified();
+		if( (string) $facility !== $this->getFacility() )
+		{
+			$this->values['log.facility'] = (string) $facility;
+			$this->setModified();
+		}
+
+		return $this;
 	}
 
 
@@ -96,11 +102,17 @@ class Standard
 	 * Sets the new priority of the item.
 	 *
 	 * @param integer $priority Priority
+	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
 	public function setPriority( $priority )
 	{
-		$this->values['log.priority'] = (int) $priority;
-		$this->setModified();
+		if( (int) $priority !== $this->getPriority() )
+		{
+			$this->values['log.priority'] = (int) $priority;
+			$this->setModified();
+		}
+
+		return $this;
 	}
 
 
@@ -123,11 +135,17 @@ class Standard
 	 * Sets the new message of the item.
 	 *
 	 * @param string $message Message
+	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
 	public function setMessage( $message )
 	{
-		$this->values['log.message'] = (string) $message;
-		$this->setModified();
+		if( (string) $message !== $this->getMessage() )
+		{
+			$this->values['log.message'] = (string) $message;
+			$this->setModified();
+		}
+
+		return $this;
 	}
 
 
@@ -150,11 +168,17 @@ class Standard
 	 * Sets the new request of the item.
 	 *
 	 * @param string $request Request
+	 * @return \Aimeos\MAdmin\Log\Item\Iface Log item for chaining method calls
 	 */
 	public function setRequest( $request )
 	{
-		$this->values['log.request'] = (string) $request;
-		$this->setModified();
+		if( (string) $request !== $this->getRequest() )
+		{
+			$this->values['log.request'] = (string) $request;
+			$this->setModified();
+		}
+
+		return $this;
 	}
 
 

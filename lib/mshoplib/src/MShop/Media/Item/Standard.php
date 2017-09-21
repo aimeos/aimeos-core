@@ -64,10 +64,11 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id === $this->getLanguageId() ) { return $this; }
-
-		$this->values['media.languageid'] = $this->checkLanguageId( $id );
-		$this->setModified();
+		if( (string) $id !== $this->getLanguageId() )
+		{
+			$this->values['media.languageid'] = $this->checkLanguageId( $id );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -76,12 +77,12 @@ class Standard
 	/**
 	 * Returns the type id of the media.
 	 *
-	 * @return integer|null Type of the media
+	 * @return string|null Type of the media
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['media.typeid'] ) ) {
-			return (int) $this->values['media.typeid'];
+			return (string) $this->values['media.typeid'];
 		}
 
 		return null;
@@ -91,15 +92,16 @@ class Standard
 	/**
 	 * Sets the new type of the media.
 	 *
-	 * @param integer $typeid Type of the media
+	 * @param string $typeid Type of the media
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return $this; }
-
-		$this->values['media.typeid'] = (int) $typeid;
-		$this->setModified();
+		if( $typeid !== $this->getTypeId() )
+		{
+			$this->values['media.typeid'] = (string) $typeid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -115,8 +117,6 @@ class Standard
 		if( isset( $this->values['media.type'] ) ) {
 			return (string) $this->values['media.type'];
 		}
-
-		return null;
 	}
 
 
@@ -130,8 +130,6 @@ class Standard
 		if( isset( $this->values['media.typename'] ) ) {
 			return (string) $this->values['media.typename'];
 		}
-
-		return null;
 	}
 
 
@@ -158,10 +156,11 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return $this; }
-
-		$this->values['media.domain'] = (string) $domain;
-		$this->setModified();
+		if( (string) $domain !== $this->getDomain() )
+		{
+			$this->values['media.domain'] = (string) $domain;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -190,10 +189,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['media.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['media.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -222,10 +222,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['media.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['media.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -254,14 +255,15 @@ class Standard
 	 */
 	public function setMimeType( $mimetype )
 	{
-		if( $mimetype == $this->getMimeType() ) { return $this; }
-
 		if( preg_match( '/^[a-z\-]+\/[a-zA-Z0-9\.\-\+]+$/', $mimetype ) !== 1 ) {
 			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Invalid mime type "%1$s"', $mimetype ) );
 		}
 
-		$this->values['media.mimetype'] = (string) $mimetype;
-		$this->setModified();
+		if( (string) $mimetype !== $this->getMimeType() )
+		{
+			$this->values['media.mimetype'] = (string) $mimetype;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -290,10 +292,11 @@ class Standard
 	 */
 	public function setUrl( $url )
 	{
-		if( $url == $this->getUrl() ) { return $this; }
-
-		$this->values['media.url'] = (string) $url;
-		$this->setModified();
+		if( (string) $url !== $this->getUrl() )
+		{
+			$this->values['media.url'] = (string) $url;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -322,10 +325,11 @@ class Standard
 	 */
 	public function setPreview( $url )
 	{
-		if( $url == $this->getPreview() ) { return $this; }
-
-		$this->values['media.preview'] = (string) $url;
-		$this->setModified();
+		if( (string) $url !== $this->getPreview() )
+		{
+			$this->values['media.preview'] = (string) $url;
+			$this->setModified();
+		}
 
 		return $this;
 	}

@@ -62,10 +62,11 @@ class Standard
 	 */
 	public function setParentId( $parentid )
 	{
-		if( $parentid == $this->getParentId() ) { return $this; }
-
-		$this->values[$this->prefix . 'parentid'] = (string) $parentid;
-		$this->setModified();
+		if( (string) $parentid !== $this->getParentId() )
+		{
+			$this->values[$this->prefix . 'parentid'] = (string) $parentid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -94,10 +95,11 @@ class Standard
 	 */
 	public function setPosition( $position )
 	{
-		if( $position == $this->getPosition() ) { return $this; }
-
-		$this->values[$this->prefix . 'position'] = (int) $position;
-		$this->setModified();
+		if( (int) $position !== $this->getPosition() )
+		{
+			$this->values[$this->prefix . 'position'] = (int) $position;
+			$this->setModified();
+		}
 
 		return $this;
 	}

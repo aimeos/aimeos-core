@@ -98,31 +98,29 @@ class Standard
 	/**
 	 * Returns the Site ID of the item.
 	 *
-	 * @return integer|null Site ID (or null for global site)
+	 * @return string|null Site ID (or null for global site)
 	 */
 	public function getSiteId()
 	{
 		if( isset( $this->values['locale.siteid'] ) ) {
-			return (int) $this->values['locale.siteid'];
+			return (string) $this->values['locale.siteid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the identifier of the shop instance.
 	 *
-	 * @param integer ID of the shop instance
+	 * @param string ID of the shop instance
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setSiteId( $id )
 	{
 		if( $id === $this->getSiteId() ) { return $this; }
 
-		$this->values['locale.siteid'] = (int) $id;
-		$this->sitePath = array( (int) $id );
-		$this->siteSubTree = array( (int) $id );
+		$this->values['locale.siteid'] = (string) $id;
+		$this->sitePath = array( (string) $id );
+		$this->siteSubTree = array( (string) $id );
 
 		/** @todo: Wrong site item shouldn't be available any more but causes problems in controller */
 
@@ -156,10 +154,11 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id == $this->getLanguageId() ) { return $this; }
-
-		$this->values['locale.languageid'] = $this->checkLanguageId( $id );
-		$this->setModified();
+		if( (string) $id !== $this->getLanguageId() )
+		{
+			$this->values['locale.languageid'] = $this->checkLanguageId( $id );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -189,10 +188,11 @@ class Standard
 	 */
 	public function setCurrencyId( $currencyid )
 	{
-		if( $currencyid == $this->getCurrencyId() ) { return $this; }
-
-		$this->values['locale.currencyid'] = $this->checkCurrencyId( $currencyid );
-		$this->setModified();
+		if( (string) $currencyid !== $this->getCurrencyId() )
+		{
+			$this->values['locale.currencyid'] = $this->checkCurrencyId( $currencyid );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -221,10 +221,11 @@ class Standard
 	 */
 	public function setPosition( $pos )
 	{
-		if( $pos == $this->getPosition() ) { return $this; }
-
-		$this->values['locale.position'] = (int) $pos;
-		$this->setModified();
+		if( (int) $pos !== $this->getPosition() )
+		{
+			$this->values['locale.position'] = (int) $pos;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -253,10 +254,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['locale.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['locale.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

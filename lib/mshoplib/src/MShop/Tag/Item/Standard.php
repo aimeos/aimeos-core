@@ -61,10 +61,11 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return $this; }
-
-		$this->values['tag.domain'] = (string) $domain;
-		$this->setModified();
+		if( (string) $domain !== $this->getDomain() )
+		{
+			$this->values['tag.domain'] = (string) $domain;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -80,8 +81,6 @@ class Standard
 		if( isset( $this->values['tag.languageid'] ) ) {
 			return (string) $this->values['tag.languageid'];
 		}
-
-		return null;
 	}
 
 
@@ -93,10 +92,11 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if( $id == $this->getLanguageId() ) { return $this; }
-
-		$this->values['tag.languageid'] = $this->checkLanguageId( $id );
-		$this->setModified();
+		if( $id !== $this->getLanguageId() )
+		{
+			$this->values['tag.languageid'] = $this->checkLanguageId( $id );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -112,8 +112,6 @@ class Standard
 		if( isset( $this->values['tag.type'] ) ) {
 			return (string) $this->values['tag.type'];
 		}
-
-		return null;
 	}
 
 
@@ -127,38 +125,35 @@ class Standard
 		if( isset( $this->values['tag.typename'] ) ) {
 			return (string) $this->values['tag.typename'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Returns the type id of the product tag item
 	 *
-	 * @return integer|null Type of the product tag item
+	 * @return string|null Type of the product tag item
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['tag.typeid'] ) ) {
-			return (int) $this->values['tag.typeid'];
+			return (string) $this->values['tag.typeid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the new type of the product tag item
 	 *
-	 * @param integer|null $id Type of the product tag item
+	 * @param string|null $id Type of the product tag item
 	 * @return \Aimeos\MShop\Tag\Item\Iface Tag item for chaining method calls
 	 */
 	public function setTypeId( $id )
 	{
-		if( $id == $this->getTypeId() ) { return $this; }
-
-		$this->values['tag.typeid'] = (int) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getTypeId() )
+		{
+			$this->values['tag.typeid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -187,10 +182,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['tag.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['tag.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}

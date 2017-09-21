@@ -23,7 +23,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Sets the site ID of the item.
 	 *
-	 * @param integer $value Unique site ID of the item
+	 * @param string $value Unique site ID of the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setSiteId( $value );
@@ -31,14 +31,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the base ID.
 	 *
-	 * @return integer|null Base ID
+	 * @return string|null Base ID
 	 */
 	public function getBaseId();
 
 	/**
 	 * Sets the base ID.
 	 *
-	 * @param integer $baseid New base ID
+	 * @param string $baseid New base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setBaseId( $baseid );
@@ -47,7 +47,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Returns the parent ID of the ordered product if there is one.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
-	 * @return integer|null order product ID
+	 * @return string|null order product ID
 	 */
 	public function getOrderProductId();
 
@@ -55,7 +55,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * Sets the parent ID of the ordered product.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
-	 * @param integer|null Order product ID
+	 * @param string|null Order product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setOrderProductId( $orderProductId );
@@ -235,7 +235,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the position of the product in the order.
 	 *
-	 * @return integer|null Product position in the order from 1-n
+	 * @return integer Product position in the order from 1-n
 	 */
 	public function getPosition();
 

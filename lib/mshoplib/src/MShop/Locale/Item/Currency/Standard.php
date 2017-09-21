@@ -105,14 +105,15 @@ class Standard
 	 */
 	public function setCode( $key )
 	{
-		if( $key == $this->getCode() ) { return $this; }
-
 		if( strlen( $key ) != 3 || ctype_alpha( $key ) === false ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO currency code "%1$s"', $key ) );
 		}
 
-		$this->values['locale.currency.code'] = strtoupper( $key );
-		$this->modified = true;
+		if( (string) $key !== $this->getCode() )
+		{
+			$this->values['locale.currency.code'] = strtoupper( (string) $key );
+			$this->modified = true;
+		}
 
 		return $this;
 	}
@@ -141,10 +142,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['locale.currency.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['locale.currency.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -173,10 +175,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['locale.currency.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['locale.currency.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

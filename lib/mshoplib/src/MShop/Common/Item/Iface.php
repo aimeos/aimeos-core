@@ -39,14 +39,14 @@ interface Iface
 	/**
 	 * Returns the unique ID of the item.
 	 *
-	 * @return integer ID of the item
+	 * @return string ID of the item
 	 */
 	public function getId();
 
 	/**
 	 * Sets the unique ID of the item.
 	 *
-	 * @param integer $id Unique ID of the item
+	 * @param string $id Unique ID of the item
 	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
 	 */
 	public function setId( $id );
@@ -54,28 +54,28 @@ interface Iface
 	/**
 	 * Returns the ID of the site the item is stored
 	 *
-	 * @return integer|null Site ID (or null if not available)
+	 * @return string|null Site ID (or null if not available)
 	 */
 	public function getSiteId();
 
 	/**
 	 * Returns the create date of the item.
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getTimeCreated();
 
 	/**
 	 * Returns the time of last modification.
 	 *
-	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return string|null|null ISO date in YYYY-MM-DD hh:mm:ss format
 	 */
 	public function getTimeModified();
 
 	/**
 	 * Returns the user code of user who created/modified the item at last.
 	 *
-	 * @return string Usercode of user who created/modified the item at last
+	 * @return string|null User code of user who created/modified the item at last
 	 */
 	public function getEditor();
 

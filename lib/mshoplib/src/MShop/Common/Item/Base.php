@@ -77,12 +77,15 @@ abstract class Base
 	 */
 	public function getId()
 	{
+		$key = $this->prefix . 'id';
+
+		if( isset( $this->bdata[$key] ) && $this->bdata[$key] != '' ) {
+			return (string) $this->bdata[$key];
+		}
+
 		if( isset( $this->bdata['id'] ) && $this->bdata['id'] != '' ) {
 			return (string) $this->bdata['id'];
 		}
-
-		$key = $this->prefix . 'id';
-		return ( isset( $this->bdata[$key] ) && $this->bdata[$key] != '' ? (string) $this->bdata[$key] : null );
 	}
 
 
@@ -110,16 +113,19 @@ abstract class Base
 	/**
 	 * Returns the site ID of the item.
 	 *
-	 * @return integer|null Site ID or null if no site id is available
+	 * @return string|null Site ID or null if no site id is available
 	 */
 	public function getSiteId()
 	{
-		if( isset( $this->bdata['siteid'] ) ) {
-			return (int) $this->bdata['siteid'];
+		$key = $this->prefix . 'siteid';
+
+		if( isset( $this->bdata[$key] ) ) {
+			return (string) $this->bdata[$key];
 		}
 
-		$key = $this->prefix . 'siteid';
-		return ( isset( $this->bdata[$key] ) ? (int) $this->bdata[$key] : null );
+		if( isset( $this->bdata['siteid'] ) ) {
+			return (string) $this->bdata['siteid'];
+		}
 	}
 
 
@@ -130,12 +136,15 @@ abstract class Base
 	 */
 	public function getTimeModified()
 	{
+		$key = $this->prefix . 'mtime';
+
+		if( isset( $this->bdata[$key] ) ) {
+			return (string) $this->bdata[$key];
+		}
+
 		if( isset( $this->bdata['mtime'] ) ) {
 			return (string) $this->bdata['mtime'];
 		}
-
-		$key = $this->prefix . 'mtime';
-		return ( isset( $this->bdata[$key] ) ? (string) $this->bdata[$key] : null );
 	}
 
 
@@ -146,12 +155,15 @@ abstract class Base
 	 */
 	public function getTimeCreated()
 	{
+		$key = $this->prefix . 'ctime';
+
+		if( isset( $this->bdata[$key] ) ) {
+			return (string) $this->bdata[$key];
+		}
+
 		if( isset( $this->bdata['ctime'] ) ) {
 			return (string) $this->bdata['ctime'];
 		}
-
-		$key = $this->prefix . 'ctime';
-		return ( isset( $this->bdata[$key] ) ? (string) $this->bdata[$key] : null );
 	}
 
 
@@ -162,12 +174,17 @@ abstract class Base
 	 */
 	public function getEditor()
 	{
+		$key = $this->prefix . 'editor';
+
+		if( isset( $this->bdata[$key] ) ) {
+			return (string) $this->bdata[$key];
+		}
+
 		if( isset( $this->bdata['editor'] ) ) {
 			return (string) $this->bdata['editor'];
 		}
 
-		$key = $this->prefix . 'editor';
-		return ( isset( $this->bdata[$key] ) ? (string) $this->bdata[$key] : '' );
+		return '';
 	}
 
 
@@ -297,6 +314,31 @@ abstract class Base
 
 
 	/**
+	 * Tests if the country ID parameter represents an ISO country format.
+	 *
+	 * @param string|null $countryid Two letter ISO country format, e.g. DE
+	 * @param boolean $null True if null is allowed, false if not
+	 * @return string|null Two letter ISO country ID or null for no country
+	 * @throws \Aimeos\MShop\Exception If the country ID is invalid
+	 */
+	protected function checkCountryId( $countryid, $null = true )
+	{
+		if( $null === false && $countryid == null ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO country code "%1$s"', '<null>' ) );
+		}
+
+		if( $countryid != null )
+		{
+			if( preg_match( '/^[A-Za-z]{2}$/', $countryid ) !== 1 ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO country code "%1$s"', $countryid ) );
+			}
+
+			return strtoupper( $countryid );
+		}
+	}
+
+
+	/**
 	 * Tests if the currency ID parameter represents an ISO currency format.
 	 *
 	 * @param string|null $currencyid Three letter ISO currency format, e.g. EUR
@@ -316,7 +358,7 @@ abstract class Base
 				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid ISO currency code "%1$s"', $currencyid ) );
 			}
 
-			return $currencyid;
+			return strtoupper( $currencyid );
 		}
 	}
 

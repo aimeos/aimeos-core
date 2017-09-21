@@ -60,10 +60,11 @@ class Standard
 	 */
 	public function setLanguageId( $id )
 	{
-		if ( $id == $this->getLanguageId() ) { return $this; }
-
-		$this->values['product.property.languageid'] = $this->checkLanguageId( $id );
-		$this->setModified();
+		if( $id !== $this->getLanguageId() )
+		{
+			$this->values['product.property.languageid'] = $this->checkLanguageId( $id );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -72,30 +73,29 @@ class Standard
 	/**
 	 * Returns the parent id of the product property item
 	 *
-	 * @return integer|null Parent ID of the product property item
+	 * @return string|null Parent ID of the product property item
 	 */
 	public function getParentId()
 	{
 		if( isset( $this->values['product.property.parentid'] ) ) {
-			return (int) $this->values['product.property.parentid'];
+			return (string) $this->values['product.property.parentid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the new parent ID of the product property item
 	 *
-	 * @param integer $id Parent ID of the product property item
+	 * @param string $id Parent ID of the product property item
 	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product property item for chaining method calls
 	 */
 	public function setParentId( $id )
 	{
-		if( $id == $this->getParentId() ) { return $this; }
-
-		$this->values['product.property.parentid'] = (int) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getParentId() )
+		{
+			$this->values['product.property.parentid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -111,8 +111,6 @@ class Standard
 		if( isset( $this->values['product.property.type'] ) ) {
 			return (string) $this->values['product.property.type'];
 		}
-
-		return null;
 	}
 
 
@@ -126,38 +124,35 @@ class Standard
 		if( isset( $this->values['product.property.typename'] ) ) {
 			return (string) $this->values['product.property.typename'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Returns the type id of the product property item
 	 *
-	 * @return integer|null Type of the product property item
+	 * @return string|null Type of the product property item
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['product.property.typeid'] ) ) {
-			return (int) $this->values['product.property.typeid'];
+			return (string) $this->values['product.property.typeid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the new type of the product property item
 	 *
-	 * @param integer|null $id Type of the product property item
+	 * @param string $id Type of the product property item
 	 * @return \Aimeos\MShop\Product\Item\Property\Iface Product property item for chaining method calls
 	 */
 	public function setTypeId( $id )
 	{
-		if ( $id == $this->getTypeId() ) { return $this; }
-
-		$this->values['product.property.typeid'] = (int) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getTypeId() )
+		{
+			$this->values['product.property.typeid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -186,10 +181,11 @@ class Standard
 	 */
 	public function setValue( $value )
 	{
-		if ( $value == $this->getValue() ) { return $this; }
-
-		$this->values['product.property.value'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getValue() )
+		{
+			$this->values['product.property.value'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}

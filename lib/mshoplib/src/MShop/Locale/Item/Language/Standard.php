@@ -106,15 +106,16 @@ class Standard
 	 */
 	public function setCode( $key )
 	{
-		if( $key == $this->getCode() ) { return $this; }
-
 		$len = strlen( $key );
 		if( $len < 2 || $len > 5 || preg_match( '/^[a-z]{2,3}((-|_)[a-zA-Z]{2})?$/', $key ) !== 1 ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
 		}
 
-		$this->values['locale.language.code'] = (string) $key;
-		$this->modified = true;
+		if( (string) $key !== $this->getCode() )
+		{
+			$this->values['locale.language.code'] = (string) $key;
+			$this->modified = true;
+		}
 
 		return $this;
 	}
@@ -143,10 +144,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['locale.language.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['locale.language.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -175,10 +177,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['locale.language.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['locale.language.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

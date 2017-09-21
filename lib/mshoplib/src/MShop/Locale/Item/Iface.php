@@ -48,7 +48,7 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	/**
 	 * Sets the identifier of the shop instance.
 	 *
-	 * @param integer ID of the shop instance
+	 * @param string ID of the shop instance
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setSiteId( $id );

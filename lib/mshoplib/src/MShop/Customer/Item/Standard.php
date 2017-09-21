@@ -87,10 +87,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setLabel( $value )
 	{
-		if( $value == $this->getLabel() ) { return $this; }
-
-		$this->values['customer.label'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getLabel() )
+		{
+			$this->values['customer.label'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -119,10 +120,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setStatus( $value )
 	{
-		if( $value == $this->getStatus() ) { return $this; }
-
-		$this->values['customer.status'] = (int) $value;
-		$this->setModified();
+		if( (int) $value !== $this->getStatus() )
+		{
+			$this->values['customer.status'] = (int) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -151,10 +153,13 @@ class Standard extends Base implements Iface
 	 */
 	public function setCode( $value )
 	{
-		if( $value == $this->getCode() ) { return $this; }
+		// don't use checkCode() because maximum length is 255 chars
 
-		$this->values['customer.code'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getCode() )
+		{
+			$this->values['customer.code'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -183,10 +188,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setBirthday( $value )
 	{
-		if( $value === $this->getBirthday() ) { return $this; }
-
-		$this->values['customer.birthday'] = $this->checkDateOnlyFormat( $value );
-		$this->setModified();
+		if( $value !== $this->getBirthday() )
+		{
+			$this->values['customer.birthday'] = $this->checkDateOnlyFormat( $value );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -215,14 +221,15 @@ class Standard extends Base implements Iface
 	 */
 	public function setPassword( $value )
 	{
-		if( $value == $this->getPassword() ) { return $this; }
+		if( (string) $value !== $this->getPassword() )
+		{
+			if( $this->helper !== null ) {
+				$value = $this->helper->encode( $value, $this->salt );
+			}
 
-		if( $this->helper !== null ) {
-			$value = $this->helper->encode( $value, $this->salt );
+			$this->values['customer.password'] = (string) $value;
+			$this->setModified();
 		}
-
-		$this->values['customer.password'] = (string) $value;
-		$this->setModified();
 
 		return $this;
 	}
@@ -238,8 +245,6 @@ class Standard extends Base implements Iface
 		if( isset( $this->values['customer.dateverified'] ) ) {
 			return (string) $this->values['customer.dateverified'];
 		}
-
-		return null;
 	}
 
 
@@ -251,10 +256,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setDateVerified( $value )
 	{
-		if( $value === $this->getDateVerified() ) { return $this; }
-
-		$this->values['customer.dateverified'] = $this->checkDateOnlyFormat( $value );
-		$this->setModified();
+		if( $value !== $this->getDateVerified() )
+		{
+			$this->values['customer.dateverified'] = $this->checkDateOnlyFormat( $value );
+			$this->setModified();
+		}
 
 		return $this;
 	}

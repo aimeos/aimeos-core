@@ -143,7 +143,7 @@ interface Iface
 	/**
 	 * Sets the new tax rate in percent.
 	 *
-	 * @param string $taxrate Tax rate with two digits precision
+	 * @param integer|double $taxrate Tax rate with two digits precision
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTaxRate( $taxrate );
@@ -194,7 +194,7 @@ interface Iface
 	/**
 	 * Sets the currency ID.
 	 *
-	 * @param string|null $currencyid Three letter ISO currency code (e.g. EUR)
+	 * @param string $currencyid Three letter ISO currency code (e.g. EUR)
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */

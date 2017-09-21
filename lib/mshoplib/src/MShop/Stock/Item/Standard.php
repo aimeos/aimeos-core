@@ -48,8 +48,6 @@ class Standard
 		if( isset( $this->values['stock.type'] ) ) {
 			return (string) $this->values['stock.type'];
 		}
-
-		return null;
 	}
 
 
@@ -63,38 +61,35 @@ class Standard
 		if( isset( $this->values['stock.typename'] ) ) {
 			return (string) $this->values['stock.typename'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Returns the type id of the product stock item
 	 *
-	 * @return integer|null Type of the product stock item
+	 * @return string|null Type of the product stock item
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['stock.typeid'] ) ) {
-			return (int) $this->values['stock.typeid'];
+			return (string) $this->values['stock.typeid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the new type of the product stock item
 	 *
-	 * @param integer|null $id Type of the product stock item
+	 * @param string $id Type of the product stock item
 	 * @return \Aimeos\MShop\Stock\Item\Iface Stock item for chaining method calls
 	 */
 	public function setTypeId( $id )
 	{
-		if ( $id == $this->getTypeId() ) { return $this; }
-
-		$this->values['stock.typeid'] = (int) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getTypeId() )
+		{
+			$this->values['stock.typeid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -123,10 +118,11 @@ class Standard
 	 */
 	public function setProductCode( $code )
 	{
-		if( $code == $this->getProductCode() ) { return $this; }
-
-		$this->values['stock.productcode'] = (string) $code;
-		$this->setModified();
+		if( (string) $code !== $this->getProductCode() )
+		{
+			$this->values['stock.productcode'] = (string) $code;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -142,8 +138,6 @@ class Standard
 		if( isset( $this->values['stock.stocklevel'] ) ) {
 			return (int) $this->values['stock.stocklevel'];
 		}
-
-		return null;
 	}
 
 
@@ -155,10 +149,14 @@ class Standard
 	 */
 	public function setStocklevel( $stocklevel )
 	{
-		if( $stocklevel === $this->getStocklevel() ) { return $this; }
+		$stocklevel = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
 
-		$this->values['stock.stocklevel'] = ( is_numeric( $stocklevel ) ? (int) $stocklevel : null );
-		$this->setModified();
+		if( $stocklevel !== $this->getStocklevel() )
+		{
+			$this->values['stock.stocklevel'] = $stocklevel;
+			$this->setModified();
+		}
+
 
 		return $this;
 	}
@@ -174,8 +172,6 @@ class Standard
 		if( isset( $this->values['stock.backdate'] ) ) {
 			return (string) $this->values['stock.backdate'];
 		}
-
-		return null;
 	}
 
 
@@ -187,10 +183,12 @@ class Standard
 	 */
 	public function setDateBack( $backdate )
 	{
-		if( $backdate == $this->getDateBack() ) { return $this; }
+		if( $backdate !== $this->getDateBack() )
+		{
+			$this->values['stock.backdate'] = $this->checkDateFormat( $backdate );
+			$this->setModified();
+		}
 
-		$this->values['stock.backdate'] = $this->checkDateFormat( $backdate );;
-		$this->setModified();
 
 		return $this;
 	}

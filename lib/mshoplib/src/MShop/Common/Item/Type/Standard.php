@@ -64,10 +64,11 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( $code === $this->getCode() ) { return $this; }
-
-		$this->values[$this->prefix . 'code'] = (string) $this->checkCode( $code );
-		$this->setModified();
+		if( (string) $code !== $this->getCode() )
+		{
+			$this->values[$this->prefix . 'code'] = $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -96,10 +97,11 @@ class Standard
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return $this; }
-
-		$this->values[$this->prefix . 'domain'] = (string) $domain;
-		$this->setModified();
+		if( (string) $domain !== $this->getDomain() )
+		{
+			$this->values[$this->prefix . 'domain'] = (string) $domain;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -143,10 +145,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values[$this->prefix . 'label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values[$this->prefix . 'label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -175,10 +178,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values[$this->prefix . 'status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values[$this->prefix . 'status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

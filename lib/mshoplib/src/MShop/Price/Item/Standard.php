@@ -48,8 +48,6 @@ class Standard extends Base
 		if( isset( $this->values['price.type'] ) ) {
 			return (string) $this->values['price.type'];
 		}
-
-		return null;
 	}
 
 
@@ -63,38 +61,35 @@ class Standard extends Base
 		if( isset( $this->values['price.typename'] ) ) {
 			return (string) $this->values['price.typename'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Returns the type ID of the price.
 	 *
-	 * @return integer|null Type ID of the price
+	 * @return string|null Type ID of the price
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['price.typeid'] ) ) {
-			return (int) $this->values['price.typeid'];
+			return (string) $this->values['price.typeid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the new type ID of the price.
 	 *
-	 * @param integer $typeid Type ID of the price
+	 * @param string $typeid Type ID of the price
 	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return $this; }
-
-		$this->values['price.typeid'] = (int) $typeid;
-		$this->setModified();
+		if( (string) $typeid !== $this->getTypeId() )
+		{
+			$this->values['price.typeid'] = (string) $typeid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -110,8 +105,6 @@ class Standard extends Base
 		if( isset( $this->values['price.currencyid'] ) ) {
 			return (string) $this->values['price.currencyid'];
 		}
-
-		return null;
 	}
 
 
@@ -124,10 +117,11 @@ class Standard extends Base
 	 */
 	public function setCurrencyId( $currencyid )
 	{
-		if( $currencyid == $this->getCurrencyId() ) { return $this; }
-
-		$this->values['price.currencyid'] = $this->checkCurrencyId( $currencyid, false );
-		$this->setModified();
+		if( (string) $currencyid !== $this->getCurrencyId() )
+		{
+			$this->values['price.currencyid'] = (string) $this->checkCurrencyId( $currencyid, false );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -156,10 +150,11 @@ class Standard extends Base
 	 */
 	public function setDomain( $domain )
 	{
-		if( $domain == $this->getDomain() ) { return $this; }
-
-		$this->values['price.domain'] = (string) $domain;
-		$this->setModified();
+		if( (string) $domain !== $this->getDomain() )
+		{
+			$this->values['price.domain'] = (string) $domain;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -188,10 +183,11 @@ class Standard extends Base
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['price.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['price.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -220,10 +216,11 @@ class Standard extends Base
 	 */
 	public function setQuantity( $quantity )
 	{
-		if( $quantity == $this->getQuantity() ) { return $this; }
-
-		$this->values['price.quantity'] = (int) $quantity;
-		$this->setModified();
+		if( (int) $quantity !== $this->getQuantity() )
+		{
+			$this->values['price.quantity'] = (int) $quantity;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -252,10 +249,11 @@ class Standard extends Base
 	 */
 	public function setValue( $price )
 	{
-		if( $price == $this->getValue() ) { return $this; }
-
-		$this->values['price.value'] = $this->checkPrice( $price );
-		$this->setModified();
+		if( (string) $price !== $this->getValue() )
+		{
+			$this->values['price.value'] = (string) $this->checkPrice( $price );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -284,10 +282,11 @@ class Standard extends Base
 	 */
 	public function setCosts( $price )
 	{
-		if( $price == $this->getCosts() ) { return $this; }
-
-		$this->values['price.costs'] = $this->checkPrice( $price );
-		$this->setModified();
+		if( (string) $price !== $this->getCosts() )
+		{
+			$this->values['price.costs'] = (string) $this->checkPrice( $price );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -316,10 +315,11 @@ class Standard extends Base
 	 */
 	public function setRebate( $price )
 	{
-		if( $price == $this->getRebate() ) { return $this; }
-
-		$this->values['price.rebate'] = $this->checkPrice( $price );
-		$this->setModified();
+		if( (string) $price !== $this->getRebate() )
+		{
+			$this->values['price.rebate'] = (string) $this->checkPrice( $price );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -348,10 +348,11 @@ class Standard extends Base
 	 */
 	public function setTaxRate( $taxrate )
 	{
-		if( $taxrate == $this->getTaxRate() ) { return $this; }
-
-		$this->values['price.taxrate'] = $this->checkPrice( $taxrate );
-		$this->setModified();
+		if( (string) $taxrate !== $this->getTaxRate() )
+		{
+			$this->values['price.taxrate'] = (string) $this->checkPrice( $taxrate );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -382,10 +383,11 @@ class Standard extends Base
 	*/
 	public function setTaxFlag( $flag )
 	{
-		if( $flag == $this->getTaxFlag() ) { return $this; }
-
-		$this->values['price.taxflag'] = (bool) $flag;
-		$this->setModified();
+		if( (bool) $flag !== $this->getTaxFlag() )
+		{
+			$this->values['price.taxflag'] = (bool) $flag;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -423,10 +425,11 @@ class Standard extends Base
 	 */
 	public function setTaxValue( $value )
 	{
-		if( $value == $this->getTaxValue() ) { return $this; }
-
-		$this->values['price.tax'] = $this->checkPrice( $value, 4 );
-		parent::setModified(); // don't unset tax immediately again
+		if( (string) $value !== $this->getTaxValue() )
+		{
+			$this->values['price.tax'] = (string) $this->checkPrice( $value, 4 );
+			parent::setModified(); // don't unset tax immediately again
+		}
 
 		return $this;
 	}
@@ -455,10 +458,11 @@ class Standard extends Base
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['price.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['price.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

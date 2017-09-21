@@ -21,14 +21,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the parentid of the order status.
 	 *
-	 * @return integer Parent ID of the order status
+	 * @return string Parent ID of the order status
 	 */
 	public function getParentId();
 
 	/**
 	 * Sets the parentid of the order status.
 	 *
-	 * @param integer $parentid Parent ID of the order status
+	 * @param string $parentid Parent ID of the order status
 	 * @return \Aimeos\MShop\Order\Item\Status\Iface Order status item for chaining method calls
 	 */
 	public function setParentId( $parentid );

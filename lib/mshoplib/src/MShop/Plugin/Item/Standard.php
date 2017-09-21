@@ -47,8 +47,6 @@ class Standard
 		if( isset( $this->values['plugin.type'] ) ) {
 			return (string) $this->values['plugin.type'];
 		}
-
-		return null;
 	}
 
 
@@ -62,38 +60,35 @@ class Standard
 		if( isset( $this->values['plugin.typename'] ) ) {
 			return (string) $this->values['plugin.typename'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Returns the type ID of the plugin.
 	 *
-	 * @return integer|null Plugin type ID
+	 * @return string|null Plugin type ID
 	 */
 	public function getTypeId()
 	{
 		if( isset( $this->values['plugin.typeid'] ) ) {
-			return (int) $this->values['plugin.typeid'];
+			return (string) $this->values['plugin.typeid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the new type ID of the plugin item.
 	 *
-	 * @param integer $typeid New plugin type ID
+	 * @param string $typeid New plugin type ID
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setTypeId( $typeid )
 	{
-		if( $typeid == $this->getTypeId() ) { return $this; }
-
-		$this->values['plugin.typeid'] = (int) $typeid;
-		$this->setModified();
+		if( (string) $typeid !== $this->getTypeId() )
+		{
+			$this->values['plugin.typeid'] = (string) $typeid;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -123,10 +118,11 @@ class Standard
 	 */
 	public function setProvider( $provider )
 	{
-		if( $provider == $this->getProvider() ) { return $this; }
-
-		$this->values['plugin.provider'] = (string) $provider;
-		$this->setModified();
+		if( (string) $provider !== $this->getProvider() )
+		{
+			$this->values['plugin.provider'] = (string) $provider;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -155,10 +151,11 @@ class Standard
 	 */
 	public function setLabel( $label )
 	{
-		if( $label == $this->getLabel() ) { return $this; }
-
-		$this->values['plugin.label'] = (string) $label;
-		$this->setModified();
+		if( (string) $label !== $this->getLabel() )
+		{
+			$this->values['plugin.label'] = (string) $label;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -217,10 +214,11 @@ class Standard
 	 */
 	public function setPosition( $position )
 	{
-		if( $position == $this->getPosition() ) { return $this; }
-
-		$this->values['plugin.position'] = (int) $position;
-		$this->setModified();
+		if( (int) $position !== $this->getPosition() )
+		{
+			$this->values['plugin.position'] = (int) $position;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -249,10 +247,11 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( $status == $this->getStatus() ) { return $this; }
-
-		$this->values['plugin.status'] = (int) $status;
-		$this->setModified();
+		if( (int) $status !== $this->getStatus() )
+		{
+			$this->values['plugin.status'] = (int) $status;
+			$this->setModified();
+		}
 
 		return $this;
 	}

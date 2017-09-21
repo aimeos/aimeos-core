@@ -56,30 +56,29 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the ID of the site the item is stored
 	 *
-	 * @return integer|null Site ID (or null if not available)
+	 * @return string|null Site ID (or null if not available)
 	 */
 	public function getSiteId()
 	{
 		if( isset( $this->values['order.base.product.siteid'] ) ) {
-			return (int) $this->values['order.base.product.siteid'];
+			return (string) $this->values['order.base.product.siteid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the site ID of the item.
 	 *
-	 * @param integer $value Unique site ID of the item
+	 * @param string $value Unique site ID of the item
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setSiteId( $value )
 	{
-		if( $value == $this->getSiteId() ) { return $this; }
-
-		$this->values['order.base.product.siteid'] = (int) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getSiteId() )
+		{
+			$this->values['order.base.product.siteid'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -88,30 +87,29 @@ class Standard extends Base implements Iface
 	/**
 	 * Returns the base ID.
 	 *
-	 * @return integer|null Base ID
+	 * @return string|null Base ID
 	 */
 	public function getBaseId()
 	{
 		if( isset( $this->values['order.base.product.baseid'] ) ) {
-			return (int) $this->values['order.base.product.baseid'];
+			return (string) $this->values['order.base.product.baseid'];
 		}
-
-		return null;
 	}
 
 
 	/**
 	 * Sets the base order ID the product belongs to.
 	 *
-	 * @param integer $value New order base ID
+	 * @param string $value New order base ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
 	public function setBaseId( $value )
 	{
-		if( $value == $this->getBaseId() ) { return $this; }
-
-		$this->values['order.base.product.baseid'] = ( $value !== null ? (int) $value : null );
-		$this->setModified();
+		if( (string) $value !== $this->getBaseId() )
+		{
+			$this->values['order.base.product.baseid'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -121,15 +119,13 @@ class Standard extends Base implements Iface
 	 * Returns the parent ID of the ordered product if there is one.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
-	 * @return integer|null Order product ID
+	 * @return string|null Order product ID
 	 */
 	public function getOrderProductId()
 	{
 		if( isset( $this->values['order.base.product.ordprodid'] ) ) {
-			return (int) $this->values['order.base.product.ordprodid'];
+			return (string) $this->values['order.base.product.ordprodid'];
 		}
-
-		return null;
 	}
 
 
@@ -137,15 +133,16 @@ class Standard extends Base implements Iface
 	 * Sets the parent ID of the ordered product.
 	 * This ID relates to another product of the same order and provides a relation for e.g. sub-products in bundles.
 	 *
-	 * @param integer|null $orderProductId Order product ID
+	 * @param string|null $value Order product ID
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setOrderProductId( $orderProductId )
+	public function setOrderProductId( $value )
 	{
-		if( $orderProductId == $this->getOrderProductId() ) { return $this; }
-
-		$this->values['order.base.product.ordprodid'] = ( $orderProductId !== null ? (int) $orderProductId : null );
-		$this->setModified();
+		if( $value !== $this->getOrderProductId() )
+		{
+			$this->values['order.base.product.ordprodid'] = ( $value !== null ? (string) $value : null );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -174,10 +171,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setType( $type )
 	{
-		if( $type == $this->getType() ) { return $this; }
-
-		$this->values['order.base.product.type'] = (string) $type;
-		$this->setModified();
+		if( (string) $type !== $this->getType() )
+		{
+			$this->values['order.base.product.type'] = (string) $type;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -233,10 +231,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setSupplierCode( $suppliercode )
 	{
-		if( $suppliercode == $this->getSupplierCode() ) { return $this; }
-
-		$this->values['order.base.product.suppliercode'] = (string) $this->checkCode( $suppliercode );
-		$this->setModified();
+		if( (string) $suppliercode !== $this->getSupplierCode() )
+		{
+			$this->values['order.base.product.suppliercode'] = (string) $this->checkCode( $suppliercode );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -265,10 +264,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setProductId( $id )
 	{
-		if( $id == $this->getProductId() ) { return $this; }
-
-		$this->values['order.base.product.productid'] = (string) $id;
-		$this->setModified();
+		if( (string) $id !== $this->getProductId() )
+		{
+			$this->values['order.base.product.productid'] = (string) $id;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -297,10 +297,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setProductCode( $code )
 	{
-		if( $code == $this->getProductCode() ) { return $this; }
-
-		$this->values['order.base.product.prodcode'] = (string) $this->checkCode( $code );
-		$this->setModified();
+		if( (string) $code !== $this->getProductCode() )
+		{
+			$this->values['order.base.product.prodcode'] = (string) $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -329,10 +330,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setStockType( $code )
 	{
-		if( $code == $this->getStockType() ) { return $this; }
-
-		$this->values['order.base.product.stocktype'] = (string) $this->checkCode( $code );
-		$this->setModified();
+		if( (string) $code !== $this->getStockType() )
+		{
+			$this->values['order.base.product.stocktype'] = (string) $this->checkCode( $code );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -361,10 +363,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setName( $value )
 	{
-		if( $value == $this->getName() ) { return $this; }
-
-		$this->values['order.base.product.name'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getName() )
+		{
+			$this->values['order.base.product.name'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -393,10 +396,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setMediaUrl( $value )
 	{
-		if( $value == $this->getMediaUrl() ) { return $this; }
-
-		$this->values['order.base.product.mediaurl'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getMediaUrl() )
+		{
+			$this->values['order.base.product.mediaurl'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -425,10 +429,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setTarget( $value )
 	{
-		if( $value == $this->getTarget() ) { return $this; }
-
-		$this->values['order.base.product.target'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getTarget() )
+		{
+			$this->values['order.base.product.target'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -457,14 +462,15 @@ class Standard extends Base implements Iface
 	 */
 	public function setQuantity( $quantity )
 	{
-		if( $quantity == $this->getQuantity() ) { return $this; }
-
 		if( $quantity < 1 || $quantity > 2147483647 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Quantity must be a positive integer and must not exceed %1$d', 2147483647 ) );
 		}
 
-		$this->values['order.base.product.quantity'] = (int) $quantity;
-		$this->setModified();
+		if( (int) $quantity !== $this->getQuantity() )
+		{
+			$this->values['order.base.product.quantity'] = (int) $quantity;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -489,10 +495,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setPrice( \Aimeos\MShop\Price\Item\Iface $price )
 	{
-		if( $price === $this->price ) { return $this; }
-
-		$this->price = $price;
-		$this->setModified();
+		if( $price !== $this->price )
+		{
+			$this->price = $price;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -534,10 +541,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setFlags( $value )
 	{
-		if( $value == $this->getFlags() ) { return $this; }
-
-		$this->values['order.base.product.flags'] = $this->checkFlags( $value );
-		$this->setModified();
+		if( (int) $value !== $this->getFlags() )
+		{
+			$this->values['order.base.product.flags'] = (int) $this->checkFlags( $value );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -553,8 +561,6 @@ class Standard extends Base implements Iface
 		if( isset( $this->values['order.base.product.position'] ) ) {
 			return (int) $this->values['order.base.product.position'];
 		}
-
-		return null;
 	}
 
 
@@ -567,14 +573,15 @@ class Standard extends Base implements Iface
 	 */
 	public function setPosition( $value )
 	{
-		if( $value == $this->getPosition() ) { return $this; }
-
 		if( $value !== null && $value < 1 ) {
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Order product position "%1$s" must be greater than 0', $value ) );
 		}
 
-		$this->values['order.base.product.position'] = ( $value !== null ? (int) $value : null );
-		$this->setModified();
+		if( $value !== $this->getPosition() )
+		{
+			$this->values['order.base.product.position'] = ( $value !== null ? (int) $value : null );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -582,6 +589,7 @@ class Standard extends Base implements Iface
 
 	/**
 	 * Returns the current delivery status of the order product item.
+	 *
 	 * The returned status values are the STAT_* constants from the
 	 * \Aimeos\MShop\Order\Item\Base class
 	 *
@@ -608,10 +616,11 @@ class Standard extends Base implements Iface
 	 */
 	public function setStatus( $value )
 	{
-		if( $value == $this->getStatus() ) { return $this; }
-
-		$this->values['order.base.product.status'] = (int) $value;
-		$this->setModified();
+		if( (int) $value !== $this->getStatus() )
+		{
+			$this->values['order.base.product.status'] = (int) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}

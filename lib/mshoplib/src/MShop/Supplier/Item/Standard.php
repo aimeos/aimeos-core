@@ -91,10 +91,11 @@ class Standard
 	 */
 	public function setLabel( $value )
 	{
-		if( $value == $this->getLabel() ) { return $this; }
-
-		$this->values['supplier.label'] = (string) $value;
-		$this->setModified();
+		if( (string) $value !== $this->getLabel() )
+		{
+			$this->values['supplier.label'] = (string) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -123,10 +124,11 @@ class Standard
 	 */
 	public function setCode( $value )
 	{
-		if( $value == $this->getCode() ) { return $this; }
-
-		$this->values['supplier.code'] = (string) $this->checkCode( $value );;
-		$this->setModified();
+		if( (string) $value !== $this->getCode() )
+		{
+			$this->values['supplier.code'] = (string) $this->checkCode( $value );
+			$this->setModified();
+		}
 
 		return $this;
 	}
@@ -156,10 +158,11 @@ class Standard
 	 */
 	public function setStatus( $value )
 	{
-		if( $value == $this->getStatus() ) { return $this; }
-
-		$this->values['supplier.status'] = (int) $value;
-		$this->setModified();
+		if( (int) $value !== $this->getStatus() )
+		{
+			$this->values['supplier.status'] = (int) $value;
+			$this->setModified();
+		}
 
 		return $this;
 	}
