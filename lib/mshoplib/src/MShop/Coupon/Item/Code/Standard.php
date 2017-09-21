@@ -153,11 +153,9 @@ class Standard
 	 */
 	public function setDateStart( $date )
 	{
-		$date = $this->checkDateFormat( $date );
-
-		if( (string) $date !== $this->getDateStart() )
+		if( $date !== $this->getDateStart() )
 		{
-			$this->values['coupon.code.datestart'] = (string) $date;
+			$this->values['coupon.code.datestart'] = $this->checkDateFormat( $date );
 			$this->setModified();
 		}
 
@@ -186,11 +184,9 @@ class Standard
 	 */
 	public function setDateEnd( $date )
 	{
-		$date = $this->checkDateFormat( $date );
-
 		if( (string) $date !== $this->getDateEnd() )
 		{
-			$this->values['coupon.code.dateend'] = (string) $date;
+			$this->values['coupon.code.dateend'] = $this->checkDateFormat( $date );
 			$this->setModified();
 		}
 

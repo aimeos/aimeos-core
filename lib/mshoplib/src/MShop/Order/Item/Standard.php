@@ -131,14 +131,14 @@ class Standard
 	/**
 	 * Sets the delivery date of the invoice.
 	 *
-	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDateDelivery( $date )
 	{
 		if( $date !== $this->getDateDelivery() )
 		{
-			$this->values['order.datedelivery'] = (string) $this->checkDateFormat( $date );
+			$this->values['order.datedelivery'] = $this->checkDateFormat( $date );
 			$this->setModified();
 		}
 
@@ -164,14 +164,14 @@ class Standard
 	/**
 	 * Sets the purchase date of the invoice.
 	 *
-	 * @param string $date ISO date in yyyy-mm-dd HH:ii:ss format
+	 * @param string|null $date ISO date in yyyy-mm-dd HH:ii:ss format
 	 * @return \Aimeos\MShop\Order\Item\Iface Order item for chaining method calls
 	 */
 	public function setDatePayment( $date )
 	{
 		if( $date !== $this->getDatePayment() )
 		{
-			$this->values['order.datepayment'] = (string) $this->checkDateFormat( $date );
+			$this->values['order.datepayment'] = $this->checkDateFormat( $date );
 			$this->setModified();
 		}
 
@@ -268,9 +268,9 @@ class Standard
 	 */
 	public function setRelatedId( $id )
 	{
-		if( (string) $id !== $this->getRelatedId() )
+		if( $id !== $this->getRelatedId() )
 		{
-			$this->values['order.relatedid'] = (string) $id;
+			$this->values['order.relatedid'] = $id;
 			$this->setModified();
 		}
 

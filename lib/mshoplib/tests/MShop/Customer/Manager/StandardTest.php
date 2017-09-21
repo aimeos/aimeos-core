@@ -195,7 +195,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'customer.city', '' );
 		$expr[] = $search->compare( '>=', 'customer.state', '' );
 		$expr[] = $search->compare( '!=', 'customer.languageid', null );
-		$expr[] = $search->compare( '>=', 'customer.countryid', '' );
+		$expr[] = $search->compare( '==', 'customer.countryid', null );
 		$expr[] = $search->compare( '>=', 'customer.telephone', '' );
 		$expr[] = $search->compare( '>=', 'customer.email', '' );
 		$expr[] = $search->compare( '>=', 'customer.telefax', '' );

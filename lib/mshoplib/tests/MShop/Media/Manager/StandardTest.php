@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.label', 'cn_colombie_266x221' );
 		$expr[] = $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '==', 'media.preview', 'prod_266x221/198_prod_266x221.jpg' );
-		$expr[] = $search->compare( '==', 'media.mimetype', '' );
+		$expr[] = $search->compare( '==', 'media.mimetype', 'image/jpeg' );
 		$expr[] = $search->compare( '==', 'media.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.ctime', '1970-01-01 00:00:00' );
