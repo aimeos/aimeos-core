@@ -41,7 +41,7 @@ before_script:
   - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "CREATE DATABASE aimeos;" -p 5433 postgres; fi
   - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "CREATE USER aimeos PASSWORD 'aimeos';" -p 5433 postgres; fi
   - if [[ $DB = 'pgsql' ]]; then sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE aimeos TO aimeos;" -p 5433 postgres; fi
-  - if [[ $DB = 'pgsql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'port' => 5433, 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
+  - if [[ $DB = 'pgsql' ]]; then echo "<?php return array( 'db' => array( 'adapter' => 'pgsql', 'host' => '127.0.0.1', 'database' => 'aimeos', 'username' => 'aimeos', 'password' => 'aimeos', 'limit' => 2, 'opt-persistent' => false, 'stmt' => array() ), 'fs' => array( 'adapter' => 'Standard', 'basedir' => '.' ), 'mq' => array( 'adapter' => 'Standard', 'db' => 'db' ) );" > config/resource.php; fi
 
 script: "vendor/bin/phing setup coverage check"
 
