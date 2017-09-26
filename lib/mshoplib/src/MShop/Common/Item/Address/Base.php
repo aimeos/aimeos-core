@@ -588,7 +588,7 @@ abstract class Base
 	 */
 	public function setEmail( $email )
 	{
-		if( $email !== '' && preg_match( '/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/', $email ) !== 1 ) {
+		if( $email != '' && preg_match( '/^.+@[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)*$/', $email ) !== 1 ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in email address: "%1$s"', $email ) );
 		}
 
@@ -653,14 +653,14 @@ abstract class Base
 	/**
 	 * Sets a new website URL.
 	 *
-	 * @param string $website New website URL
+	 * @param string|null $website New website URL
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setWebsite( $website )
 	{
 		$pattern = '#^([a-z]+://)?[a-zA-Z0-9\-]+(\.[a-zA-Z0-9\-]+)+(:[0-9]+)?(/.*)?$#';
 
-		if( $website !== '' && preg_match( $pattern, $website ) !== 1 ) {
+		if( $website != '' && preg_match( $pattern, $website ) !== 1 ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid web site URL "%1$s"', $website ) );
 		}
 
