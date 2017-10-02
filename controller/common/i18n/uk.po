@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 18:38+0200\n"
+"POT-Creation-Date: 2017-10-02 17:30+0200\n"
 "PO-Revision-Date: 2015-09-29 12:30+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
@@ -27,10 +27,6 @@ msgstr ""
 
 #, php-format
 msgid "Class \"%1$s\" not found"
-msgstr ""
-
-#, php-format
-msgid "Download file \"%1$s\" using file_get_contents failed"
 msgstr ""
 
 #, php-format

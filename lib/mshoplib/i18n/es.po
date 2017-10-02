@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 18:59+0200\n"
-"PO-Revision-Date: 2017-06-28 10:15+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2017-10-02 17:58+0200\n"
+"PO-Revision-Date: 2017-10-02 16:05+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,6 +160,10 @@ msgstr "La ID del último registro de la base de datos instalada no está dispon
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
 msgstr "El objeto de internacionalización para \"%1$s\" no está disponible"
+
+#, php-format
+msgid "Invalid ISO country code \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
@@ -355,6 +359,10 @@ msgid ""
 msgstr "El sitio recién creado no puede guardarse usando el método \"saveItem()\". Inténtelo mejor con el método \"insertItem()\". "
 
 #, php-format
+msgid "No catalog node for ID \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "No item found for conditions: %1$s"
 msgstr "No se ha encontrado objeto para las condiciones: %1$s"
 
@@ -373,6 +381,10 @@ msgstr "No hay precio disponible para el producto con la ID \"%1$s\" ni código 
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "No se encontró ningún producto con código \"%1$s\""
+
+#, php-format
+msgid "No search keys available"
+msgstr ""
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"

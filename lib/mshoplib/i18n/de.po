@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Aimeos <aimeos@aimeos.org>, 2015-2017
+# Aimeos, 2015-2017
 # Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
 # nsendetzky, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 18:59+0200\n"
-"PO-Revision-Date: 2017-06-28 14:50+0000\n"
-"Last-Translator: Aimeos <aimeos@aimeos.org>\n"
+"POT-Creation-Date: 2017-10-02 17:58+0200\n"
+"PO-Revision-Date: 2017-10-02 16:06+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -160,6 +160,10 @@ msgstr "ID des zuletzt gespeicherten Datensatzes nicht verfügbar"
 #, php-format
 msgid "Internationalization object not available for \"%1$s\""
 msgstr "Internationalisierungs-Objekt für \"%1$s\" nicht verfügbar"
+
+#, php-format
+msgid "Invalid ISO country code \"%1$s\""
+msgstr "Ungültiger ISO-Ländercode \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
@@ -355,6 +359,10 @@ msgid ""
 msgstr "Neu erstellte Seite kann nicht mit Methode \"saveItem()\" gespeichert werden. Versuchen Sie Methode \"insertItem()\"."
 
 #, php-format
+msgid "No catalog node for ID \"%1$s\""
+msgstr "Kategorie mit ID \"%1$s\" nicht verfügbar"
+
+#, php-format
 msgid "No item found for conditions: %1$s"
 msgstr "Kein Eintrag für Bedingung: %1$s"
 
@@ -373,6 +381,10 @@ msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "Es konnte kein Produkt mit dem Code \"%1$s\" gefunden werden"
+
+#, php-format
+msgid "No search keys available"
+msgstr "Es sind keine Suchschlüssel vorhanden"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"

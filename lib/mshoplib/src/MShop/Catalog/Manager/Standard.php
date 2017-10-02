@@ -740,7 +740,7 @@ class Standard extends Base
 			return $item;
 		}
 
-		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'for ID "%1$s" not available', $id ) );
+		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'No catalog node for ID "%1$s"', $id ) );
 	}
 
 
