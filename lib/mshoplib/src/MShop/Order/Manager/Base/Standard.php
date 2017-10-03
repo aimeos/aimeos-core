@@ -214,6 +214,45 @@ class Standard extends Base
 		 * @see mshop/order/manager/base/standard/search/ansi
 		 * @see mshop/order/manager/base/standard/count/ansi
 		 */
+
+		/** mshop/order/manager/base/standard/aggregateavg/mysql
+		 * Computes the average of all values grouped by the key column and matched by the given criteria
+		 *
+		 * @param string SQL statement for aggregating the order base items and computing the average value
+		 * @since 2017.10
+		 * @category Developer
+		 * @see mshop/order/manager/base/standard/aggregateavg/ansi
+		 * @see mshop/order/manager/base/standard/aggregate/mysql
+		 */
+
+		/** mshop/order/manager/base/standard/aggregateavg/ansi
+		 * Computes the average of all values grouped by the key column and matched by the given criteria
+		 *
+		 * @param string SQL statement for aggregating the order base items and computing the average value
+		 * @since 2017.10
+		 * @category Developer
+		 * @see mshop/order/manager/base/standard/aggregate/ansi
+		 */
+
+		/** mshop/order/manager/base/standard/aggregatesum/mysql
+		 * Computes the sum of all values grouped by the key column and matched by the given criteria
+		 *
+		 * @param string SQL statement for aggregating the order base items and computing the sum
+		 * @since 2017.10
+		 * @category Developer
+		 * @see mshop/order/manager/base/standard/aggregatesum/ansi
+		 * @see mshop/order/manager/base/standard/aggregate/mysql
+		 */
+
+		/** mshop/order/manager/base/standard/aggregatesum/ansi
+		 * Computes the sum of all values grouped by the key column and matched by the given criteria
+		 *
+		 * @param string SQL statement for aggregating the order base items and computing the sum
+		 * @since 2017.10
+		 * @category Developer
+		 * @see mshop/order/manager/base/standard/aggregate/ansi
+		 */
+
 		$cfgkey = 'mshop/order/manager/base/standard/aggregate' . $type;
 		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base' ), $value );
 	}

@@ -293,6 +293,45 @@ class Standard
 		 * @see mshop/order/manager/base/product/standard/search/ansi
 		 * @see mshop/order/manager/base/product/standard/count/ansi
 		 */
+
+		/** mshop/order/manager/base/product/standard/aggregateavg/mysql
+		 * Computes the average of all values grouped by the key column and matched by the given criteria
+		 *
+		 * @param string SQL statement for aggregating the order product items and computing the average value
+		 * @since 2017.10
+		 * @category Developer
+		 * @see mshop/order/manager/base/product/standard/aggregateavg/ansi
+		 * @see mshop/order/manager/base/product/standard/aggregate/mysql
+		 */
+
+		/** mshop/order/manager/base/product/standard/aggregateavg/ansi
+		 * Computes the average of all values grouped by the key column and matched by the given criteria
+		 *
+		 * @param string SQL statement for aggregating the order product items and computing the average value
+		 * @since 2017.10
+		 * @category Developer
+		 * @see mshop/order/manager/base/product/standard/aggregate/ansi
+		 */
+
+		/** mshop/order/manager/base/product/standard/aggregatesum/mysql
+		 * Computes the sum of all values grouped by the key column and matched by the given criteria
+		 *
+		 * @param string SQL statement for aggregating the order product items and computing the sum
+		 * @since 2017.10
+		 * @category Developer
+		 * @see mshop/order/manager/base/product/standard/aggregatesum/ansi
+		 * @see mshop/order/manager/base/product/standard/aggregate/mysql
+		 */
+
+		/** mshop/order/manager/base/product/standard/aggregatesum/ansi
+		 * Computes the sum of all values grouped by the key column and matched by the given criteria
+		 *
+		 * @param string SQL statement for aggregating the order product items and computing the sum
+		 * @since 2017.10
+		 * @category Developer
+		 * @see mshop/order/manager/base/product/standard/aggregate/ansi
+		 */
+
 		$cfgkey = 'mshop/order/manager/base/product/standard/aggregate' . $type;
 		return $this->aggregateBase( $search, $key, $cfgkey, array( 'order.base.product' ), $value );
 	}
