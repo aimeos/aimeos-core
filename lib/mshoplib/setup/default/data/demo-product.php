@@ -439,6 +439,22 @@ return array(
 				),
 			),
 		),
+		'price' => array(
+			array(
+				'label' => 'Demo: Selection article 1 from 1',
+				'value' => '140.00', 'costs' => '10.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Selection article 1 from 1',
+				'value' => '190.00', 'costs' => '15.00', 'rebate' => '0.00', 'taxrate' => '5.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
 		'stock' => array(
 			array( 'stocklevel' => 3, 'typeid' => 'default', 'dateback' => null ),
 		),
