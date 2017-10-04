@@ -159,6 +159,14 @@
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
+		<confdoc keyprefix="client/jsonapi" wikiprefix="Configuration/Core" keyparts="1"
+			optfile="${extdir}/ai-client-jsonapi/client/jsonapi/tests/confdoc.ser"
+			outfile="${coredir}/misc/confdoc/ext-jsonapi-client-jsonapi.wiki">
+			<fileset dir="${extdir}/ai-client-jsonapi/client/jsonapi" expandsymboliclinks="true" >
+				<include name="templates/**/*.php" />
+				<include name="src/**/*.php" />
+			</fileset>
+		</confdoc>
 		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
 			optfile="${extdir}/ai-client-html/controller/jobs/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-html-controller-jobs.wiki">
