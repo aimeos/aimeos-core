@@ -138,6 +138,7 @@
 			outfile="${coredir}/misc/confdoc/ext-jqadm-admin-jqadm.wiki">
 			<fileset dir="${extdir}/ai-admin-jqadm/admin/jqadm" expandsymboliclinks="true" >
 				<include name="templates/**/*.php" />
+				<include name="config/**/*.php" />
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
@@ -146,6 +147,7 @@
 			outfile="${coredir}/misc/confdoc/ext-jsonadm-admin-jsonadm.wiki">
 			<fileset dir="${extdir}/ai-admin-jsonadm/admin/jsonadm" expandsymboliclinks="true" >
 				<include name="templates/**/*.php" />
+				<include name="config/**/*.php" />
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
