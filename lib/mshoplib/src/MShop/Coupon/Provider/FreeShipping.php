@@ -50,10 +50,9 @@ class FreeShipping
 
 		if( !isset( $config['freeshipping.productcode'] ) )
 		{
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf(
-				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->getItemBase()->getProvider(), 'freeshipping.productcode'
-			) );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'freeshipping.productcode' );
+			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
 		$price = clone ( $base->getService( 'delivery' )->getPrice() );

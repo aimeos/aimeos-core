@@ -314,8 +314,10 @@ abstract class Base implements Iface
 		$search->setConditions( $search->compare( '==', 'product.code', $productCode ) );
 		$products = $productManager->searchItems( $search, array( 'text', 'media', 'price' ) );
 
-		if( ( $product = reset( $products ) ) === false ) {
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'No product with code "%1$s" found', $productCode ) );
+		if( ( $product = reset( $products ) ) === false )
+		{
+			$msg = $this->context->getI18n()->dt( 'mshop', 'No product with code "%1$s" found' );
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $productCode ) );
 		}
 
 		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
