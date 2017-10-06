@@ -59,10 +59,9 @@ class Present
 
 		if( !isset( $config['present.productcode'] ) || !isset( $config['present.quantity'] ) )
 		{
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf(
-				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->getItemBase()->getProvider(), 'present.productcode, present.quantity'
-			) );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'present.productcode, present.quantity' );
+			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
 		$orderProduct = $this->createProduct( $config['present.productcode'], $config['present.quantity'] );

@@ -59,10 +59,9 @@ class PercentRebate
 
 		if( !isset( $config['percentrebate.productcode'] ) || !isset( $config['percentrebate.rebate'] ) )
 		{
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf(
-				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->getItemBase()->getProvider(), 'percentrebate.productcode, percentrebate.rebate'
-			) );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'percentrebate.productcode, percentrebate.rebate' );
+			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
 

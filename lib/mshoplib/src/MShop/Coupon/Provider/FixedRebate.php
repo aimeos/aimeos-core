@@ -61,10 +61,9 @@ class FixedRebate
 
 		if( !isset( $config['fixedrebate.productcode'] ) || !isset( $config['fixedrebate.rebate'] ) )
 		{
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf(
-				'Invalid configuration for coupon provider "%1$s", needs "%2$s"',
-				$this->getItemBase()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate'
-			) );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
+			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate' );
+			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
 		if( is_array( $config['fixedrebate.rebate'] ) )
