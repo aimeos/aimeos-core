@@ -112,6 +112,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'order.cwday' => array(
+			'code' => 'order.cwday',
+			'internalcode' => 'mord."cwday"',
+			'label' => 'Create weekday',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'order.chour' => array(
 			'code' => 'order.chour',
 			'internalcode' => 'mord."chour"',
@@ -435,7 +443,8 @@ class Standard
 				$stmt->bind( 12, date( 'Y-m-d' ) ); // cdate
 				$stmt->bind( 13, date( 'Y-m' ) ); // cmonth
 				$stmt->bind( 14, date( 'Y-W' ) ); // cweek
-				$stmt->bind( 15, date( 'H' ) ); // chour
+				$stmt->bind( 15, date( 'w' ) ); // cwday
+				$stmt->bind( 16, date( 'H' ) ); // chour
 			}
 
 			$stmt->execute()->finish();

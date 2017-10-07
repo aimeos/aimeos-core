@@ -819,9 +819,9 @@ return array(
 					INSERT INTO "mshop_order" (
 						"baseid", "type", "datepayment", "datedelivery",
 						"statusdelivery", "statuspayment", "relatedid", "mtime",
-						"editor", "siteid", "ctime", "cdate", "cmonth", "cweek", "chour"
+						"editor", "siteid", "ctime", "cdate", "cmonth", "cweek", "cwday", "chour"
 					) VALUES (
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),

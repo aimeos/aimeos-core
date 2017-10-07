@@ -264,8 +264,9 @@ return array(
 			$table->addColumn( 'statusdelivery', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'relatedid', 'bigint', array( 'notnull' => false ) );
 			$table->addColumn( 'cdate', 'string', array( 'fixed' => 10 ) );
-			$table->addColumn( 'cweek', 'string', array( 'fixed' => 7 ) );
 			$table->addColumn( 'cmonth', 'string', array( 'fixed' => 7 ) );
+			$table->addColumn( 'cweek', 'string', array( 'fixed' => 7 ) );
+			$table->addColumn( 'cwday', 'string', array( 'fixed' => 1 ) );
 			$table->addColumn( 'chour', 'string', array( 'fixed' => 2 ) );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
@@ -283,6 +284,7 @@ return array(
 			$table->addIndex( array( 'siteid', 'cdate' ), 'idx_msord_sid_cdate' );
 			$table->addIndex( array( 'siteid', 'cmonth' ), 'idx_msord_sid_cmonth' );
 			$table->addIndex( array( 'siteid', 'cweek' ), 'idx_msord_sid_cweek' );
+			$table->addIndex( array( 'siteid', 'cwday' ), 'idx_msord_sid_cwday' );
 			$table->addIndex( array( 'siteid', 'chour' ), 'idx_msord_sid_chour' );
 			$table->addIndex( array( 'baseid' ), 'fk_msord_baseid' );
 
