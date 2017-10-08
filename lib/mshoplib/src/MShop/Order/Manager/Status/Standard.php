@@ -612,7 +612,9 @@ class Standard
 		try
 		{
 			$required = array( 'order.status' );
-			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
 
 			/** mshop/order/manager/status/standard/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
@@ -727,7 +729,7 @@ class Standard
 			$cfgPathCount = 'mshop/order/manager/status/standard/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
-				$required, $total, $sitelevel );
+				$required, $total, $level );
 
 			while( ( $row = $results->fetch() ) !== false ) {
 				$items[$row['order.status.id']] = $this->createItemBase( $row );

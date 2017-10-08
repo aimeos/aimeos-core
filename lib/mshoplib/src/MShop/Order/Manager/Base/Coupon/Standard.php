@@ -492,7 +492,9 @@ class Standard
 		try
 		{
 			$required = array( 'order.base.coupon' );
+
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
 
 			/** mshop/order/manager/base/coupon/standard/search/mysql
 			 * Retrieves the records matched by the given criteria in the database

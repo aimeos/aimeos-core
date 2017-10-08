@@ -641,7 +641,9 @@ class Standard
 		try
 		{
 			$required = array( 'order.base.product.attribute' );
-			$sitelevel = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
 
 			/** mshop/order/manager/base/product/attribute/standard/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
@@ -756,7 +758,7 @@ class Standard
 			$cfgPathCount = 'mshop/order/manager/base/product/attribute/standard/count';
 
 			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount,
-				$required, $total, $sitelevel );
+				$required, $total, $level );
 
 			try
 			{

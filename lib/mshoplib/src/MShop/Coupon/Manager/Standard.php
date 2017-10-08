@@ -442,7 +442,8 @@ class Standard
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
 	{
-		$dbm = $this->getContext()->getDatabaseManager();
+		$context = $this->getContext();
+		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
 		$conn = $dbm->acquire( $dbname );
 		$items = [];
@@ -450,7 +451,38 @@ class Standard
 		try
 		{
 			$required = array( 'coupon' );
+
+			/** mshop/coupon/manager/sitemode
+			 * Mode how items from levels below or above in the site tree are handled
+			 *
+			 * By default, only items from the current site are fetched from the
+			 * storage. If the ai-sites extension is installed, you can create a
+			 * tree of sites. Then, this setting allows you to define for the
+			 * whole coupon domain if items from parent sites are inherited,
+			 * sites from child sites are aggregated or both.
+			 *
+			 * Available constants for the site mode are:
+			 * * 0 = only items from the current site
+			 * * 1 = inherit items from parent sites
+			 * * 2 = aggregate items from child sites
+			 * * 3 = inherit and aggregate items at the same time
+			 *
+			 * You also need to set the mode in the locale manager
+			 * (mshop/locale/manager/standard/sitelevel) to one of the constants.
+			 * If you set it to the same value, it will work as described but you
+			 * can also use different modes. For example, if inheritance and
+			 * aggregation is configured the locale manager but only inheritance
+			 * in the domain manager because aggregating items makes no sense in
+			 * this domain, then items wil be only inherited. Thus, you have full
+			 * control over inheritance and aggregation in each domain.
+			 *
+			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
+			 * @category Developer
+			 * @since 2018.01
+			 * @see mshop/locale/manager/standard/sitelevel
+			 */
 			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_PATH;
+			$level = $context->getConfig()->get( 'mshop/coupon/manager/sitemode', $level );
 
 			/** mshop/coupon/manager/standard/search/mysql
 			 * Retrieves the records matched by the given criteria in the database
@@ -575,7 +607,7 @@ class Standard
 					if( ( $row['coupon.config'] = json_decode( $row['coupon.config'], true ) ) === null )
 					{
 						$msg = sprintf( 'Invalid JSON as result of search for ID "%2$s" in "%1$s": %3$s', 'mshop_locale.config', $row['id'], $config );
-						$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
+						$context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::WARN );
 					}
 
 					$items[$row['coupon.id']] = $this->createItemBase( $row );
