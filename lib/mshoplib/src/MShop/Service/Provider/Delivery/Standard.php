@@ -377,38 +377,41 @@ class Standard
 	 */
 	protected function buildXMLService( \Aimeos\MShop\Order\Item\Base\Iface $base, \DOMDocument $dom, \DOMElement $orderitem )
 	{
-		foreach( $base->getServices() as $service )
+		foreach( $base->getServices() as $list )
 		{
-			switch( $service->getType() )
+			foreach( $list as $service )
 			{
-				case 'delivery':
+				switch( $service->getType() )
+				{
+					case 'delivery':
 
-					$deliveryitem = $dom->createElement( 'deliveryitem' );
-					$this->appendChildCDATA( 'code', $service->getCode(), $dom, $deliveryitem );
-					$this->appendChildCDATA( 'name', $service->getName(), $dom, $deliveryitem );
+						$deliveryitem = $dom->createElement( 'deliveryitem' );
+						$this->appendChildCDATA( 'code', $service->getCode(), $dom, $deliveryitem );
+						$this->appendChildCDATA( 'name', $service->getName(), $dom, $deliveryitem );
 
-					$orderitem->appendChild( $deliveryitem );
-					break;
+						$orderitem->appendChild( $deliveryitem );
+						break;
 
-				case 'payment':
+					case 'payment':
 
-					$paymentitem = $dom->createElement( 'paymentitem' );
-					$this->appendChildCDATA( 'code', $service->getCode(), $dom, $paymentitem );
-					$this->appendChildCDATA( 'name', $service->getName(), $dom, $paymentitem );
+						$paymentitem = $dom->createElement( 'paymentitem' );
+						$this->appendChildCDATA( 'code', $service->getCode(), $dom, $paymentitem );
+						$this->appendChildCDATA( 'name', $service->getName(), $dom, $paymentitem );
 
-					$fieldlist = $dom->createElement( 'fieldlist' );
-					foreach( $service->getAttributes() as $attribute )
-					{
-						$fielditem = $dom->createElement( 'fielditem' );
-						$this->appendChildCDATA( 'name', $attribute->getCode(), $dom, $fielditem );
-						$this->appendChildCDATA( 'value', $attribute->getValue(), $dom, $fielditem );
-						$this->appendChildCDATA( 'type', $attribute->getType(), $dom, $fielditem );
-						$fieldlist->appendChild( $fielditem );
-					}
+						$fieldlist = $dom->createElement( 'fieldlist' );
+						foreach( $service->getAttributes() as $attribute )
+						{
+							$fielditem = $dom->createElement( 'fielditem' );
+							$this->appendChildCDATA( 'name', $attribute->getCode(), $dom, $fielditem );
+							$this->appendChildCDATA( 'value', $attribute->getValue(), $dom, $fielditem );
+							$this->appendChildCDATA( 'type', $attribute->getType(), $dom, $fielditem );
+							$fieldlist->appendChild( $fielditem );
+						}
 
-					$paymentitem->appendChild( $fieldlist );
-					$orderitem->appendChild( $paymentitem );
-					break;
+						$paymentitem->appendChild( $fieldlist );
+						$orderitem->appendChild( $paymentitem );
+						break;
+				}
 			}
 		}
 	}

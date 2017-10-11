@@ -422,9 +422,22 @@ abstract class Base implements Iface
 			$taxrates[$taxrate]->addItem( $price, $product->getQuantity() );
 		}
 
-		try
+		foreach( $basket->getService( 'delivery' ) as $service )
 		{
-			$price = $basket->getService( 'delivery' )->getPrice();
+			$price = clone $service->getPrice();
+			$taxrate = $price->getTaxRate();
+
+			if( !isset( $taxrates[$taxrate] ) ) {
+				$taxrates[$taxrate] = $manager->createItem();
+			}
+
+			$taxrates[$taxrate]->addItem( $price );
+
+		}
+
+		foreach( $basket->getService( 'payment' ) as $service )
+		{
+			$price = clone $service->getPrice();
 			$taxrate = $price->getTaxRate();
 
 			if( !isset( $taxrates[$taxrate] ) ) {
@@ -433,20 +446,6 @@ abstract class Base implements Iface
 
 			$taxrates[$taxrate]->addItem( $price );
 		}
-		catch( \Exception $e ) { ; } // if delivery service isn't available
-
-		try
-		{
-			$price = $basket->getService( 'payment' )->getPrice();
-			$taxrate = $price->getTaxRate();
-
-			if( !isset( $taxrates[$taxrate] ) ) {
-				$taxrates[$taxrate] = $manager->createItem();
-			}
-
-			$taxrates[$taxrate]->addItem( $price );
-		}
-		catch( \Exception $e ) { ; } // if payment service isn't available
 
 		return $taxrates;
 	}

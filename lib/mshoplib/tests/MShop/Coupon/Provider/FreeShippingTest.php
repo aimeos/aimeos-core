@@ -42,7 +42,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
-		$this->orderBase->setService( $delivery, 'delivery' );
+		$this->orderBase->addService( $delivery, 'delivery' );
 	}
 
 

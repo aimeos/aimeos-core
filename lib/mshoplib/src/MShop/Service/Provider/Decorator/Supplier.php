@@ -123,7 +123,8 @@ class Supplier
 
 		try
 		{
-			$service = $basket->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
+			$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
+			$service = $basket->getService( $type, $this->getServiceItem()->getCode() );
 
 			if( ( $value = $service->getAttribute( 'supplier.code', 'delivery' ) ) != ''
 				&& isset( $feconfig['supplier.code']['default'][$value] )
@@ -131,7 +132,7 @@ class Supplier
 				// move to first position so it's selected
 				$address = $feconfig['supplier.code']['default'][$value];
 				unset( $feconfig['supplier.code']['default'][$value] );
-				$feconfig['supplier.code']['default'] = array( $value => $address ) + $feconfig['supplier.code']['default'];
+				$feconfig['supplier.code']['default'] = [$value => $address] + $feconfig['supplier.code']['default'];
 			}
 		}
 		catch( \Aimeos\MShop\Order\Exception $e ) {} // If service isn't available

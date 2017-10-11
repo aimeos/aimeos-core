@@ -247,8 +247,11 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
+		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
+
+		foreach( $this->order->getService( $type ) as $item ) {
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $item );
+		}
 	}
 
 
@@ -259,9 +262,13 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
-		$this->assertEquals( 'unitcode', $this->order->getService( $type )->getCode() );
+		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
+
+		foreach( $this->order->getService( $type ) as $item )
+		{
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $item );
+			$this->assertEquals( 'unitcode', $item->getCode() );
+		}
 	}
 
 
@@ -272,8 +279,11 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
+		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
+
+		foreach( $this->order->getService( $type ) as $item ) {
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $item );
+		}
 	}
 
 
@@ -284,8 +294,11 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
+		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
+
+		foreach( $this->order->getService( $type ) as $item ) {
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $item );
+		}
 	}
 
 
@@ -296,9 +309,13 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
-		$this->assertEquals( 'unitpaymentcode', $this->order->getService( $type )->getCode() );
+		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
+
+		foreach( $this->order->getService( $type ) as $item )
+		{
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $item );
+			$this->assertEquals( 'unitpaymentcode', $item->getCode() );
+		}
 	}
 
 
@@ -309,7 +326,10 @@ class AutofillTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.after' ) );
 		$this->assertEquals( [], $this->order->getAddresses() );
-		$this->assertEquals( 1, count( $this->order->getServices() ) );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $this->order->getService( $type ) );
+		$this->assertEquals( 1, count( $this->order->getService( $type ) ) );
+
+		foreach( $this->order->getService( $type ) as $item ) {
+			$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $item );
+		}
 	}
 }

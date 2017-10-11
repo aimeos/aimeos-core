@@ -106,7 +106,8 @@ class Time
 		try
 		{
 			$minute = date( 'i' );
-			$service = $basket->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );
+			$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
+			$service = $basket->getService( $type, $this->getServiceItem()->getCode() );
 
 			if( ( $value = $service->getAttribute( 'time.hourminute', 'delivery' ) ) == '' ) {
 				$feconfig['time.hourminute']['default'] = date( 'H:i', time() + ($minute + 15 - ($minute % 15)) * 60 );

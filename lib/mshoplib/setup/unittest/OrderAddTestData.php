@@ -228,7 +228,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$orderBaseServiceManager->saveItem( $ordServ );
 
 			$ordServices[$key] = $ordServ->getId();
-			$bases['items'][$dataset['baseid']]->setService( $ordServ, $dataset['type'] ); //adds Services to orderbase
+			$bases['items'][$dataset['baseid']]->addService( $ordServ, $dataset['type'] ); //adds Services to orderbase
 		}
 
 		$this->addOrderBaseServiceAttributeData( $orderBaseServiceAttrManager, $testdata, $ordServices );

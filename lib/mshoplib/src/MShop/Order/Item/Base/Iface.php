@@ -153,21 +153,22 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	public function getServices();
 
 	/**
-	 * Returns the payment or delivery service depending on the given type.
+	 * Returns the delivery or payment service depending on the given type.
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order service item for the requested type
+	 * @param string|null $code Code of the service item that should be returned
+	 * @return \Aimeos\MShop\Order\Item\Base\Serive\Iface|\Aimeos\MShop\Order\Item\Base\Serive\Iface[]
+	 * 	Order service item or list of items for the requested type
 	 */
-	public function getService( $type );
+	public function getService( $type, $code = null );
 
 	/**
-	 * Sets a service as payment or delivery service for an order.
+	 * Adds an order service item as delivery or payment service to the basket
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given type
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return void
 	 */
-	public function setService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type );
+	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type );
 
 	/**
 	 * Deletes the delivery or payment service from the basket.

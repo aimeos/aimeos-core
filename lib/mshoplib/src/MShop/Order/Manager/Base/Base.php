@@ -456,7 +456,7 @@ abstract class Base
 				$item->setId( null );
 			}
 
-			$map[$item->getBaseId()][$item->getType()] = $item;
+			$map[$item->getBaseId()][$item->getServiceId()] = $item;
 		}
 
 		return $map;
@@ -542,7 +542,7 @@ abstract class Base
 		}
 
 		foreach( $services as $item ) {
-			$basket->setService( $item, $item->getType() );
+			$basket->addService( $item, $item->getType() );
 		}
 
 		return $basket;
@@ -744,18 +744,21 @@ abstract class Base
 		$manager = $this->getObject()->getSubManager( 'service' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
-		foreach( $basket->getServices() as $type => $item )
+		foreach( $basket->getServices() as $type => $list )
 		{
-			$item->setBaseId( $basket->getId() );
-			$item->setType( $type );
-			$item = $manager->saveItem( $item );
-
-			foreach( $item->getAttributes() as $attribute )
+			foreach( $list as $item )
 			{
-				if( $attribute->getType() !== 'session' )
+				$item->setBaseId( $basket->getId() );
+				$item->setType( $type );
+				$item = $manager->saveItem( $item );
+
+				foreach( $item->getAttributes() as $attribute )
 				{
-					$attribute->setParentId( $item->getId() );
-					$attrManager->saveItem( $attribute );
+					if( $attribute->getType() !== 'session' )
+					{
+						$attribute->setParentId( $item->getId() );
+						$attrManager->saveItem( $attribute );
+					}
 				}
 			}
 		}

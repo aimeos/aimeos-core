@@ -327,8 +327,11 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			$this->price->clear();
 			$currencyId = $this->price->getCurrencyId();
 
-			foreach( $this->getServices() as $service ) {
-				$this->price->addItem( $service->getPrice()->setCurrencyId( $currencyId ) );
+			foreach( $this->getServices() as $list )
+			{
+				foreach( $list as $service ) {
+					$this->price->addItem( $service->getPrice()->setCurrencyId( $currencyId ) );
+				}
 			}
 
 			foreach( $this->getProducts() as $product ) {

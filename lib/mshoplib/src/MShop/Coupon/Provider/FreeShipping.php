@@ -55,11 +55,15 @@ class FreeShipping
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$price = clone ( $base->getService( 'delivery' )->getPrice() );
-		$price->setRebate( $price->getCosts() );
-		$price->setCosts( -$price->getCosts() );
-
 		$orderProduct = $this->createProduct( $config['freeshipping.productcode'], 1 );
+		$price = $orderProduct->getPrice();
+
+		foreach( $base->getService( 'delivery' ) as $service )
+		{
+			$price->setRebate( $price->getRebate() + $service->getPrice()->getCosts() );
+			$price->setCosts( $price->getCosts() - $service->getPrice()->getCosts() );
+		}
+
 		$orderProduct->setPrice( $price );
 
 		$base->addCoupon( $this->getCode(), array( $orderProduct ) );

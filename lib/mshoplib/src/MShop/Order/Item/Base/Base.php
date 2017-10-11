@@ -55,10 +55,10 @@ abstract class Base
 
 
 	protected $bdata;
+	protected $coupons;
 	protected $products;
 	protected $addresses;
-	protected $services;
-	protected $coupons;
+	protected $services = [];
 	private $modified = false;
 
 
@@ -86,10 +86,13 @@ abstract class Base
 		}
 
 		$this->bdata = $values;
+		$this->coupons = $coupons;
 		$this->products = $products;
 		$this->addresses = $addresses;
-		$this->services = $services;
-		$this->coupons = $coupons;
+
+		foreach( $services as $service ) {
+			$this->services[$service->getType()][$service->getServiceId()] = $service;
+		}
 	}
 
 
@@ -177,7 +180,7 @@ abstract class Base
 	public function getProduct( $key )
 	{
 		if( !isset( $this->products[$key] ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product with array key "%1$d" not available', $key ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product not available' ) );
 		}
 
 		return $this->products[$key];
@@ -248,7 +251,7 @@ abstract class Base
 	public function editProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $pos )
 	{
 		if( !array_key_exists( $pos, $this->products ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product with array key "%1$d" not available', $pos ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Product  not available' ) );
 		}
 
 		$this->notifyListeners( 'editProduct.before', $item );
@@ -310,7 +313,7 @@ abstract class Base
 	public function getAddress( $type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT )
 	{
 		if( !isset( $this->addresses[$type] ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Address for type "%1$s" not available', $type ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Address not available' ) );
 		}
 
 		return $this->addresses[$type];
@@ -364,8 +367,8 @@ abstract class Base
 	/**
 	 * Returns all services that are part of the basket.
 	 *
-	 * @return array Associative list of service items implementing \Aimeos\MShop\Order\Service\Iface
-	 *  with "delivery" or "payment" as key
+	 * @return array Associative list of service types ("delivery" or "payment") as keys and list of
+	 *	service items implementing \Aimeos\MShop\Order\Service\Iface as values
 	 */
 	public function getServices()
 	{
@@ -374,15 +377,30 @@ abstract class Base
 
 
 	/**
-	 * Returns the delivery or payment service depending on the given type.
+	 * Returns the delivery or payment services depending on the given type.
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return \Aimeos\MShop\Order\Item\Base\Serive\Iface Order service item for the requested type
+	 * @param string|null $code Code of the service item that should be returned
+	 * @return \Aimeos\MShop\Order\Item\Base\Serive\Iface|\Aimeos\MShop\Order\Item\Base\Serive\Iface[]
+	 * 	Order service item or list of items for the requested type
+	 * @throws \Aimeos\MShop\Order\Exception If no service for the given type and code is found
 	 */
-	public function getService( $type )
+	public function getService( $type, $code = null )
 	{
 		if( !isset( $this->services[$type] ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service of type "%1$s" not available', $type ) );
+			return [];
+		}
+
+		if( $code !== null )
+		{
+			foreach( $this->services[$type] as $service )
+			{
+				if( $service->getCode() === $code ) {
+					return $service;
+				}
+			}
+
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service not available' ) );
 		}
 
 		return $this->services[$type];
@@ -390,25 +408,25 @@ abstract class Base
 
 
 	/**
-	 * Sets a service as delivery or payment service for an order.
+	 * Adds an order service item as delivery or payment service to the basket
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 */
-	public function setService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type )
+	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type )
 	{
 		$this->checkPrice( $service->getPrice() );
 
-		$this->notifyListeners( 'setService.before', $service );
+		$this->notifyListeners( 'addService.before', $service );
 
 		$service = clone $service;
 		$service->setType( $type ); // enforce that the type is the same as the given one
 		$service->setId( null ); // enforce saving as new item
 
-		$this->services[$type] = $service;
+		$this->services[$type][$service->getServiceId()] = $service;
 		$this->setModified();
 
-		$this->notifyListeners( 'setService.after', $service );
+		$this->notifyListeners( 'addService.after', $service );
 	}
 
 
@@ -426,7 +444,7 @@ abstract class Base
 		$this->notifyListeners( 'deleteService.before', $type );
 
 		$service = $this->services[$type];
-		unset( $this->services[$type] );
+		$this->services[$type] = [];
 		$this->setModified();
 
 		$this->notifyListeners( 'deleteService.after', $service );
@@ -454,7 +472,7 @@ abstract class Base
 	public function addCoupon( $code, array $products = [] )
 	{
 		if( isset( $this->coupons[$code] ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Duplicate coupon code "%1$s"', $code ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Duplicate coupon code' ) );
 		}
 
 		foreach( $products as $product )
@@ -568,7 +586,7 @@ abstract class Base
 		$value = (int) $value;
 
 		if( $value < self::PARTS_NONE || $value > self::PARTS_ALL ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags "%1$s" not within allowed range', $value ) );
+			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Flags not within allowed range' ) );
 		}
 	}
 

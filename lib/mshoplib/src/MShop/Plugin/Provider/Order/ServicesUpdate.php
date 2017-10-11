@@ -73,16 +73,22 @@ class ServicesUpdate
 		{
 			$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
 
-			foreach( $services as $type => $service ) {
-				$service->setPrice( $priceManager->createItem() );
+			foreach( $services as $type => $list )
+			{
+				foreach( $list as $item ) {
+					$item->setPrice( $priceManager->createItem() );
+				}
 			}
 
 			return true;
 		}
 
 
-		foreach( $services as $type => $service ) {
-			$ids[$type] = $service->getServiceId();
+		foreach( $services as $type => $list )
+		{
+			foreach( $list as $service ) {
+				$ids[] = $service->getServiceId();
+			}
 		}
 
 		$serviceManager = \Aimeos\MShop\Factory::createManager( $context, 'service' );
@@ -97,21 +103,23 @@ class ServicesUpdate
 		$result = $serviceManager->searchItems( $search, array( 'price' ) );
 
 
-		foreach( $services as $type => $service )
+		foreach( $services as $type => $list )
 		{
-			if( isset( $result[$service->getServiceId()] ) )
-			{
-				$provider = $serviceManager->getProvider( $result[$service->getServiceId()] );
+			$order->deleteService( $type );
 
-				if( $provider->isAvailable( $order ) )
+			foreach( $list as $item )
+			{
+				if( isset( $result[$service->getServiceId()] ) )
 				{
-					$service->setPrice( $provider->calcPrice( $order ) );
-					$order->setService( $service, $type );
-					continue;
+					$provider = $serviceManager->getProvider( $result[$service->getServiceId()] );
+
+					if( $provider->isAvailable( $order ) )
+					{
+						$service->setPrice( $provider->calcPrice( $order ) );
+						$order->addService( $service, $type );
+					}
 				}
 			}
-
-			$order->deleteService( $type );
 		}
 
 		return true;

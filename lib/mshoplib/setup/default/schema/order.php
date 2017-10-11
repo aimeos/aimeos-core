@@ -186,8 +186,7 @@ return array(
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msordbase_id' );
-			$table->addUniqueIndex( array( 'baseid', 'type', 'code' ), 'unq_msordbase_bid_type_code' );
-			$table->addIndex( array( 'siteid', 'baseid', 'code', 'type' ), 'idx_msordbase_sid_bid_cd_typ' );
+			$table->addUniqueIndex( array( 'siteid', 'baseid', 'code', 'type' ), 'unq_msordbase_sid_bid_cd_typ' );
 			$table->addIndex( array( 'siteid', 'code', 'type' ), 'idx_msordbase_sid_code_type' );
 			$table->addIndex( array( 'baseid' ), 'fk_msordbase_baseid' );
 

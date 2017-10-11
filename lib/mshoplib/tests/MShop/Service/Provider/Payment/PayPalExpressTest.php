@@ -130,7 +130,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
 
-		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
+		$attributes = $refOrderBase->getService( 'payment', 'paypalexpress' )->getAttributes();
 
 		$attributeList = [];
 		foreach( $attributes as $attribute ) {
@@ -218,7 +218,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $orderItem );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
-		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
+		$attributes = $refOrderBase->getService( 'payment', 'paypalexpress' )->getAttributes();
 		$attrManager = $orderBaseManager->getSubManager( 'service' )->getSubManager( 'attribute' );
 
 		$attributeList = [];
@@ -267,7 +267,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId() );
-		$attributes = $refOrderBase->getService( 'payment' )->getAttributes();
+		$attributes = $refOrderBase->getService( 'payment', 'paypalexpress' )->getAttributes();
 
 		$attributeList = [];
 		foreach( $attributes as $attribute ) {

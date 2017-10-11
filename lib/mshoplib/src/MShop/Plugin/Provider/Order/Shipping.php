@@ -86,7 +86,8 @@ class Shipping
 	{
 		$p->addListener( $this->getObject(), 'addProduct.after' );
 		$p->addListener( $this->getObject(), 'deleteProduct.after' );
-		$p->addListener( $this->getObject(), 'setService.after' );
+		$p->addListener( $this->getObject(), 'addService.after' );
+		$p->addListener( $this->getObject(), 'deleteService.after' );
 		$p->addListener( $this->getObject(), 'addCoupon.after' );
 		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
 	}
@@ -110,14 +111,13 @@ class Shipping
 		$config = $this->getItemBase()->getConfig();
 		if( !isset( $config['threshold'] ) ) { return true; }
 
-		try {
-			$delivery = $order->getService( 'delivery' );
-		} catch( \Aimeos\MShop\Order\Exception $oe ) {
-			// no delivery item available yet
-			return true;
+		try
+		{
+			foreach( $order->getService( 'delivery' ) as $delivery ) {
+				$this->checkThreshold( $order, $delivery->getPrice(), $config['threshold'] );
+			}
 		}
-
-		$this->checkThreshold( $order, $delivery->getPrice(), $config['threshold'] );
+		catch( \Aimeos\MShop\Order\Exception $oe ) {} // no delivery item available yet
 
 		return true;
 	}

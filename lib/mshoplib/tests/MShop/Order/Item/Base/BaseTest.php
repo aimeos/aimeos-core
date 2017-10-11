@@ -294,30 +294,47 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		{
 			$service->setId( null );
 			$service->setType( $type );
-			$this->object->setService( $service, $type );
+			$this->object->addService( $service, $type );
 		}
 
-		$this->assertEquals( $this->services, $this->object->getServices() );
+		$payments = $this->object->getService( 'payment' );
+		$deliveries = $this->object->getService( 'delivery' );
 
-		$type = 'payment';
-		$this->assertEquals( $this->services[$type], $this->object->getService( $type ) );
+		$this->assertEquals( 2, count( $this->object->getServices() ) );
+		$this->assertEquals( 1, count( $payments ) );
+		$this->assertEquals( 1, count( $deliveries ) );
+
+		$this->assertEquals( $this->services['payment'], reset( $payments ) );
+		$this->assertEquals( $this->services['delivery'], reset( $deliveries ) );
 	}
 
 
-	public function testSetService()
+	public function testGetServiceSingle()
 	{
-		foreach( $this->services as $type => $service ) {
-			$this->object->setService( $service, $type );
-		}
+		$service = $this->services['payment']->setCode( 'test' );
+		$this->object->addService( $service, 'payment' );
 
-		$type = 'delivery';
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$orderServiceManager = $orderManager->getSubManager( 'base' )->getSubManager( 'service' );
-		$service = $orderServiceManager->createItem();
+		$result = $this->object->getService( 'payment', 'test' );
 
-		$this->object->setService( $service, $type );
-		$item = $this->object->getService( $type );
+		$this->assertEquals( $this->services['payment']->getCode(), $result->getCode() );
 
+		$this->setExpectedException( '\Aimeos\MShop\Order\Exception' );
+		$this->object->getService( 'payment', 'invalid' );
+	}
+
+
+	public function testAddService()
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/service' );
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY;
+		$service = $manager->createItem()->setServiceId( -1 );
+
+		$this->object->addService( $service, $type );
+		$this->object->addService( $service, $type );
+		$list = $this->object->getService( $type );
+		$item = reset( $list );
+
+		$this->assertEquals( 1, count( $list ) );
 		$this->assertEquals( $type, $item->getType() );
 		$this->assertTrue( $item->isModified() );
 		$this->assertNull( $item->getId() );
@@ -327,15 +344,12 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testDeleteService()
 	{
 		foreach( $this->services as $type => $service ) {
-			$this->object->setService( $service, $type );
+			$this->object->addService( $service, $type );
 		}
 
 		$this->object->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 		$this->object->deleteService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 		$this->assertTrue( $this->object->isModified() );
-
-		$this->setExpectedException( '\\Aimeos\\MShop\\Order\\Exception' );
-		$this->object->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
 	}
 
 
@@ -381,7 +395,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		}
 
 		foreach( $this->services as $type => $service ) {
-			$this->object->setService( $service, $type );
+			$this->object->addService( $service, $type );
 		}
 
 		$this->object->check( \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );

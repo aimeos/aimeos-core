@@ -90,8 +90,8 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
-		$this->order->setService( $this->service, 'payment' );
-		$this->order->setService( $this->service, 'delivery' );
+		$this->order->addService( $this->service, 'payment' );
+		$this->order->addService( $this->service, 'delivery' );
 
 		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
 
@@ -126,8 +126,8 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateWithServices()
 	{
-		$this->order->setService( $this->service, 'payment' );
-		$this->order->setService( $this->service, 'delivery' );
+		$this->order->addService( $this->service, 'payment' );
+		$this->order->addService( $this->service, 'delivery' );
 
 		$this->plugin->setConfig( array(
 				'delivery' => null,

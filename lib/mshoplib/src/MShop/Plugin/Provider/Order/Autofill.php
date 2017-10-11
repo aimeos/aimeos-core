@@ -298,7 +298,7 @@ class Autofill
 				$type = $service->getType();
 
 				if( ( $item = $this->getServiceItem( $order, $type, $service->getCode() ) ) !== null ) {
-					$order->setService( $item, $type );
+					$order->addService( $item, $type );
 				}
 			}
 		}
@@ -347,7 +347,7 @@ class Autofill
 			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'autofill.deliverycode' ) ) ) !== null
 			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
 		) {
-			$order->setService( $item, $type );
+			$order->addService( $item, $type );
 		}
 
 
@@ -357,7 +357,7 @@ class Autofill
 			&& ( ( $item = $this->getServiceItem( $order, $type, $this->getConfigValue( 'autofill.paymentcode' ) ) ) !== null
 			|| ( $item = $this->getServiceItem( $order, $type ) ) !== null )
 		) {
-			$order->setService( $item, $type );
+			$order->addService( $item, $type );
 		}
 	}
 }

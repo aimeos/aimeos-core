@@ -435,11 +435,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->assertGreaterThan( 0, $product->getPosition() );
 		}
 
-		foreach( $order->getServices() as $service )
+		foreach( $order->getServices() as $list )
 		{
-			$this->assertInternalType( 'string', $service->getId() );
-			$this->assertNotEquals( '', $service->getId() );
-			$this->assertInternalType( 'string', $service->getBaseId() );
+			foreach( $list as $service )
+			{
+				$this->assertInternalType( 'string', $service->getId() );
+				$this->assertNotEquals( '', $service->getId() );
+				$this->assertInternalType( 'string', $service->getBaseId() );
+			}
 		}
 	}
 
@@ -525,10 +528,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->assertEquals( null, $product->getPosition() );
 		}
 
-		foreach( $order->getServices() as $service )
+		foreach( $order->getServices() as $list )
 		{
-			$this->assertEquals( null, $service->getId() );
-			$this->assertEquals( null, $service->getBaseId() );
+			foreach( $list as $service )
+			{
+				$this->assertEquals( null, $service->getId() );
+				$this->assertEquals( null, $service->getBaseId() );
+			}
 		}
 	}
 
@@ -627,8 +633,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 2, count( $services ) );
 
 		$attributes = [];
-		foreach( $services as $service ) {
-			$attributes[$service->getCode()] = $service->getAttributes();
+		foreach( $services as $list )
+		{
+			foreach( $list as $service ) {
+				$attributes[$service->getCode()] = $service->getAttributes();
+			}
 		}
 
 		$this->assertEquals( 9, count( $attributes['OGONE'] ) );
@@ -671,8 +680,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$newServices = $newBasket->getServices();
 
-		foreach( $basket->getServices() as $key => $service ) {
-			$this->assertEquals( $service->getId(), $newServices[$key]->getId() );
+		foreach( $basket->getServices() as $key => $list )
+		{
+			foreach( $list as $service ) {
+				$this->assertEquals( $service->getId(), $newServices[$key][$service->getServiceId()]->getId() );
+			}
 		}
 	}
 

@@ -76,8 +76,8 @@ class ServicesUpdateTest
 		$context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
 
 
-		$orderStub->setService( $serviceDelivery, 'delivery' );
-		$orderStub->setService( $servicePayment, 'payment' );
+		$orderStub->addService( $serviceDelivery, 'delivery' );
+		$orderStub->addService( $servicePayment, 'payment' );
 
 		$serviceItemDelivery = new \Aimeos\MShop\Service\Item\Standard( array( 'type' => 'delivery' ) );
 		$serviceItemPayment = new \Aimeos\MShop\Service\Item\Standard( array( 'type' => 'payment' ) );
@@ -136,8 +136,8 @@ class ServicesUpdateTest
 		$context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
 
 
-		$orderStub->setService( $serviceDelivery, 'delivery' );
-		$orderStub->setService( $servicePayment, 'payment' );
+		$orderStub->addService( $serviceDelivery, 'delivery' );
+		$orderStub->addService( $servicePayment, 'payment' );
 
 		$serviceItemDelivery = new \Aimeos\MShop\Service\Item\Standard( array( 'type' => 'delivery' ) );
 		$serviceItemPayment = new \Aimeos\MShop\Service\Item\Standard( array( 'type' => 'payment' ) );
@@ -161,7 +161,7 @@ class ServicesUpdateTest
 
 
 		$this->assertTrue( $object->update( $orderStub, 'addProduct.after' ) );
-		$this->assertEquals( [], $orderStub->getServices() );
+		$this->assertEquals( ['delivery' => [], 'payment' => []], $orderStub->getServices() );
 	}
 
 
@@ -190,8 +190,8 @@ class ServicesUpdateTest
 			->setMethods( array( 'getProducts' ) )->getMock();
 
 
-		$orderStub->setService( $serviceDelivery, 'delivery' );
-		$orderStub->setService( $servicePayment, 'payment' );
+		$orderStub->addService( $serviceDelivery, 'delivery' );
+		$orderStub->addService( $servicePayment, 'payment' );
 
 
 		$orderStub->expects( $this->once() )->method( 'getProducts' )
@@ -199,7 +199,7 @@ class ServicesUpdateTest
 
 
 		$this->assertTrue( $object->update( $orderStub, 'addAddress.after' ) );
-		$this->assertEquals( [], $orderStub->getServices() );
+		$this->assertEquals( ['delivery' => [], 'payment' => []], $orderStub->getServices() );
 	}
 
 
@@ -221,12 +221,17 @@ class ServicesUpdateTest
 		$servicePayment->setPrice( $priceItem );
 		$servicePayment->setId( 2 );
 
-		$this->order->setService( $serviceDelivery, 'delivery' );
-		$this->order->setService( $servicePayment, 'payment' );
+		$this->order->addService( $serviceDelivery, 'delivery' );
+		$this->order->addService( $servicePayment, 'payment' );
 
 
 		$this->assertTrue( $object->update( $this->order, 'addProduct.after' ) );
-		$this->assertEquals( '0.00', $this->order->getService( 'delivery' )->getPrice()->getCosts() );
-		$this->assertEquals( '0.00', $this->order->getService( 'payment' )->getPrice()->getCosts() );
+
+		foreach( $this->order->getServices() as $list )
+		{
+			foreach( $list as $item ) {
+				$this->assertEquals( '0.00', $item->getPrice()->getCosts() );
+			}
+		}
 	}
 }

@@ -128,7 +128,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$order = $orderBaseManager->createItem();
 		$order->__sleep(); // remove event listeners
 
-		$order->setService( $delivery, 'delivery' );
+		$order->addService( $delivery, 'delivery' );
 		$order->addProduct( $product );
 		$order->addProduct( $product2 );
 		$order->addProduct( $product3 );

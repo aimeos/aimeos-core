@@ -206,12 +206,11 @@ class PayPalExpress
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
 	{
-		$orderid = $order->getId();
 		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
 
 		$values = $this->getOrderDetails( $orderBaseItem );
 		$values['METHOD'] = 'SetExpressCheckout';
-		$values['PAYMENTREQUEST_0_INVNUM'] = $orderid;
+		$values['PAYMENTREQUEST_0_INVNUM'] = $order->getId();
 		$values['RETURNURL'] = $this->getConfigValue( array( 'payment.url-success' ) );
 		$values['CANCELURL'] = $this->getConfigValue( array( 'payment.url-cancel', 'payment.url-success' ) );
 		$values['USERSELECTEDFUNDINGSOURCE'] = $this->getConfigValue( array( 'paypalexpress.FundingSource' ), 'CreditCard' );
@@ -219,13 +218,14 @@ class PayPalExpress
 
 		$urlQuery = http_build_query( $values, '', '&' );
 		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
-		$rvals = $this->checkResponse( $orderid, $response, __METHOD__ );
+		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$default = 'https://www.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s';
 		$paypalUrl = sprintf( $this->getConfigValue( array( 'paypalexpress.PaypalUrl' ), $default ), $rvals['TOKEN'] );
 
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
-		$this->setAttributes( $orderBaseItem->getService( $type ), array( 'TOKEN' => $rvals['TOKEN'] ), 'payment/paypal' );
+		$serviceItem = $orderBaseItem->getService( $type, $this->getServiceItem()->getCode() );
+		$this->setAttributes( $serviceItem, ['TOKEN' => $rvals['TOKEN']], 'payment/paypal' );
 		$this->saveOrderBase( $orderBaseItem );
 
 		return new \Aimeos\MShop\Common\Item\Helper\Form\Standard( $paypalUrl, 'POST', [] );
@@ -265,9 +265,9 @@ class PayPalExpress
 	 */
 	public function capture( \Aimeos\MShop\Order\Item\Iface $order )
 	{
-		$baseid = $order->getBaseId();
-		$baseItem = $this->getOrderBase( $baseid );
-		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
+		$baseItem = $this->getOrderBase( $order->getBaseId() );
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+		$serviceItem = $baseItem->getService( $type, $this->getServiceItem()->getCode() );
 
 		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
@@ -313,7 +313,8 @@ class PayPalExpress
 	public function refund( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		$baseItem = $this->getOrderBase( $order->getBaseId() );
-		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+		$serviceItem = $baseItem->getService( $type, $this->getServiceItem()->getCode() );
 
 		if( ( $tid = $serviceItem->getAttribute( 'TRANSACTIONID', 'payment/paypal' ) ) === null )
 		{
@@ -403,7 +404,8 @@ class PayPalExpress
 
 		$order = $this->getOrder( $params['invoice'] );
 		$baseItem = $this->getOrderBase( $order->getBaseId() );
-		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+		$serviceItem = $baseItem->getService( $type, $this->getServiceItem()->getCode() );
 
 		$this->checkIPN( $baseItem, $params );
 
@@ -453,9 +455,9 @@ class PayPalExpress
 	protected function doExpressCheckoutPayment( $params )
 	{
 		$order = $this->getOrder( $params['orderid'] );
-		$baseid = $order->getBaseId();
-		$baseItem = $this->getOrderBase( $baseid );
-		$serviceItem = $baseItem->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
+		$baseItem = $this->getOrderBase( $order->getBaseId() );
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
+		$serviceItem = $baseItem->getService( $type, $this->getServiceItem()->getCode() );
 
 		$price = $baseItem->getPrice();
 
@@ -679,29 +681,34 @@ class PayPalExpress
 
 		if( $this->getConfigValue( 'paypalexpress.service', true ) )
 		{
-			$price = $orderBase->getService( 'payment' )->getPrice();
-			if( ( $paymentCosts = $this->getAmount( $price ) ) > '0.00' )
+			foreach( $orderBase->getService( 'payment' ) as $service )
 			{
-				$lastPos++;
-				$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
-				$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
-				$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
+				$price = $service->getPrice();
+
+				if( ( $paymentCosts = $this->getAmount( $price ) ) > '0.00' )
+				{
+					$lastPos++;
+					$values['L_PAYMENTREQUEST_0_NAME' . $lastPos] = $this->getContext()->getI18n()->dt( 'mshop', 'Payment costs' );
+					$values['L_PAYMENTREQUEST_0_QTY' . $lastPos] = '1';
+					$values['L_PAYMENTREQUEST_0_AMT' . $lastPos] = $paymentCosts;
+				}
 			}
 
 			try
 			{
-				$orderServiceDeliveryItem = $orderBase->getService( 'delivery' );
-				$price = $orderServiceDeliveryItem->getPrice();
-				$deliveryPrices = $this->addPrice( $deliveryPrices, $price );
+				foreach( $orderBase->getService( 'delivery' ) as $service )
+				{
+					$deliveryPrices = $this->addPrice( $deliveryPrices, $service->getPrice() );
 
-				foreach( $deliveryPrices as $priceItem ) {
-					$deliveryCosts += $this->getAmount( $priceItem );
+					foreach( $deliveryPrices as $priceItem ) {
+						$deliveryCosts += $this->getAmount( $priceItem );
+					}
+
+					$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $deliveryCosts, 2, '.', '' );
+					$values['L_SHIPPINGOPTIONLABEL0'] = $service->getCode();
+					$values['L_SHIPPINGOPTIONNAME0'] = $service->getName();
+					$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 				}
-
-				$values['L_SHIPPINGOPTIONAMOUNT0'] = number_format( $deliveryCosts, 2, '.', '' );
-				$values['L_SHIPPINGOPTIONLABEL0'] = $orderServiceDeliveryItem->getCode();
-				$values['L_SHIPPINGOPTIONNAME0'] = $orderServiceDeliveryItem->getName();
-				$values['L_SHIPPINGOPTIONISDEFAULT0'] = 'true';
 			}
 			catch( \Exception $e ) { ; } // If no delivery service is available
 		}
@@ -755,8 +762,10 @@ class PayPalExpress
 	 */
 	protected function getOrderServiceItem( $baseid )
 	{
+		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
 		$basket = $this->getOrderBase( $baseid, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
-		return $basket->getService( \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT );
+
+		return $basket->getService( $type, $this->getServiceItem()->getCode() );
 	}
 
 

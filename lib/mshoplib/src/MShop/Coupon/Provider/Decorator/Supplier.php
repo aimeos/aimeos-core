@@ -68,13 +68,15 @@ class Supplier
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		$services = $base->getServices();
+		$supplier = $this->getConfigValue( 'supplier.code' );
 
 		if( isset( $services[\Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY] ) )
 		{
-			$service = $services[\Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY];
-
-			if( $service->getAttribute( 'supplier.code', 'delivery' ) === $this->getConfigValue( 'supplier.code' ) ) {
-				return parent::isAvailable( $base );
+			foreach( $services[\Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY] as $service )
+			{
+				if( $service->getAttribute( 'supplier.code', 'delivery' ) === $supplier ) {
+					return parent::isAvailable( $base );
+				}
 			}
 		}
 
