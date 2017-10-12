@@ -136,39 +136,6 @@ class Standard
 
 
 	/**
-	 * Returns the name of the service attribute item.
-	 *
-	 * @return string Name of the service attribute item
-	 */
-	public function getName()
-	{
-		if( isset( $this->values['order.base.service.attribute.name'] ) ) {
-			return (string) $this->values['order.base.service.attribute.name'];
-		}
-
-		return '';
-	}
-
-
-	/**
-	 * Sets a new name for the service attribute item.
-	 *
-	 * @param string $name Name as defined by the service provider
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
-	 */
-	public function setName( $name )
-	{
-		if( (string) $name !== $this->getName() )
-		{
-			$this->values['order.base.service.attribute.name'] = (string) $name;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the code of the service attribute item.
 	 *
 	 * @return string Code of the service attribute item
@@ -202,6 +169,39 @@ class Standard
 
 
 	/**
+	 * Returns the name of the service attribute item.
+	 *
+	 * @return string Name of the service attribute item
+	 */
+	public function getName()
+	{
+		if( isset( $this->values['order.base.service.attribute.name'] ) ) {
+			return (string) $this->values['order.base.service.attribute.name'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets a new name for the service attribute item.
+	 *
+	 * @param string $name Name as defined by the service provider
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 */
+	public function setName( $name )
+	{
+		if( (string) $name !== $this->getName() )
+		{
+			$this->values['order.base.service.attribute.name'] = (string) $name;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the value of the service attribute item.
 	 *
 	 * @return string|array Service attribute item value
@@ -227,6 +227,39 @@ class Standard
 		if( $value !== $this->getValue() )
 		{
 			$this->values['order.base.service.attribute.value'] = $value;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns the quantity of the service attribute.
+	 *
+	 * @return integer Quantity of the service attribute
+	 */
+	public function getQuantity()
+	{
+		if( isset( $this->values['order.base.service.attribute.quantity'] ) ) {
+			return (int) $this->values['order.base.service.attribute.quantity'];
+		}
+
+		return 1;
+	}
+
+
+	/**
+	 * Sets the quantity of the service attribute.
+	 *
+	 * @param integer $value Quantity of the service attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base service attribute item for chaining method calls
+	 */
+	public function setQuantity( $value )
+	{
+		if( (int) $value !== $this->getQuantity() )
+		{
+			$this->values['order.base.service.attribute.quantity'] = (int) $value;
 			$this->setModified();
 		}
 
@@ -285,6 +318,7 @@ class Standard
 				case 'order.base.service.attribute.name': $this->setName( $value ); break;
 				case 'order.base.service.attribute.code': $this->setCode( $value ); break;
 				case 'order.base.service.attribute.value': $this->setValue( $value ); break;
+				case 'order.base.service.attribute.quantity': $this->setQuantity( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -308,6 +342,7 @@ class Standard
 		$list['order.base.service.attribute.name'] = $this->getName();
 		$list['order.base.service.attribute.code'] = $this->getCode();
 		$list['order.base.service.attribute.value'] = $this->getValue();
+		$list['order.base.service.attribute.quantity'] = $this->getQuantity();
 
 		if( $private === true ) {
 			$list['order.base.service.attribute.parentid'] = $this->getParentId();

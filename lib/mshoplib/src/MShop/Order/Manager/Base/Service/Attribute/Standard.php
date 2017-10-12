@@ -84,6 +84,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.service.attribute.quantity' => array(
+			'code' => 'order.base.service.attribute.quantity',
+			'internalcode' => 'mordbaseat."quantity"',
+			'label' => 'Service attribute quantity',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'order.base.service.attribute.ctime' => array(
 			'code' => 'order.base.service.attribute.ctime',
 			'internalcode' => 'mordbaseat."ctime"',
@@ -342,16 +349,17 @@ class Standard
 			$stmt->bind( 3, $item->getType() );
 			$stmt->bind( 4, $item->getCode() );
 			$stmt->bind( 5, json_encode( $item->getValue() ) );
-			$stmt->bind( 6, $item->getName() );
-			$stmt->bind( 7, $date ); // mtime
-			$stmt->bind( 8, $context->getEditor() );
-			$stmt->bind( 9, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 7, $item->getName() );
+			$stmt->bind( 8, $date ); // mtime
+			$stmt->bind( 9, $context->getEditor() );
+			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 10, $date ); // ctime
+				$stmt->bind( 11, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

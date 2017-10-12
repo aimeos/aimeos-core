@@ -75,6 +75,21 @@ interface Iface
 	public function setCode( $code );
 
 	/**
+	 * Returns the localized name of the product attribute.
+	 *
+	 * @return string Localized name of the product attribute
+	 */
+	public function getName();
+
+	/**
+	 * Sets the localized name of the product attribute.
+	 *
+	 * @param string $name Localized name of the product attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
+	 */
+	public function setName( $name );
+
+	/**
 	 * Returns the value of the product attribute.
 	 *
 	 * @return string|array Value of the product attribute
@@ -90,19 +105,19 @@ interface Iface
 	public function setValue( $value );
 
 	/**
-	 * Returns the localized name of the product attribute.
+	 * Returns the quantity of the product attribute.
 	 *
-	 * @return string Localized name of the product attribute
+	 * @return integer Quantity of the product attribute
 	 */
-	public function getName();
+	public function getQuantity();
 
 	/**
-	 * Sets the localized name of the product attribute.
+	 * Sets the quantity of the product attribute.
 	 *
-	 * @param string $name Localized name of the product attribute
+	 * @param integer $value Quantity of the product attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setName( $name );
+	public function setQuantity( $value );
 
 	/**
 	 * Copys all data from a given attribute item.

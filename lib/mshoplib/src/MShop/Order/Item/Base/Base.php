@@ -647,7 +647,9 @@ abstract class Base
 			foreach( $prodAttributes as $attribute )
 			{
 				if( array_key_exists( $attribute->getCode(), $attributeMap ) === false
-					|| $attributeMap[$attribute->getCode()]->getValue() != $attribute->getValue() ) {
+					|| $attributeMap[$attribute->getCode()]->getValue() != $attribute->getValue()
+					|| $attributeMap[$attribute->getCode()]->getQuantity() != $attribute->getQuantity()
+				) {
 					continue 2; // jump to outer loop
 				}
 			}

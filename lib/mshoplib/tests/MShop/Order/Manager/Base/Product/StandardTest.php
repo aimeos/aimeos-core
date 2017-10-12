@@ -142,6 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.code', 'width' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.value', '33' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.name', '33' );
+		$expr[] = $search->compare( '==', 'order.base.product.attribute.quantity', 1 );
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'order.base.product.attribute.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.base.product.attribute.editor', $this->editor );

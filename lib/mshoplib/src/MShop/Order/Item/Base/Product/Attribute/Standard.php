@@ -200,6 +200,39 @@ class Standard
 
 
 	/**
+	 * Returns the localized name of the product attribute.
+	 *
+	 * @return string Localized name of the product attribute
+	 */
+	public function getName()
+	{
+		if( isset( $this->values['order.base.product.attribute.name'] ) ) {
+			return (string) $this->values['order.base.product.attribute.name'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the localized name of the product attribute.
+	 *
+	 * @param string $name Localized name of the product attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
+	 */
+	public function setName( $name )
+	{
+		if( (string) $name !== $this->getName() )
+		{
+			$this->values['order.base.product.attribute.name'] = (string) $name;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the value of the product attribute.
 	 *
 	 * @return string|array Value of the product attribute
@@ -233,31 +266,31 @@ class Standard
 
 
 	/**
-	 * Returns the localized name of the product attribute.
+	 * Returns the quantity of the product attribute.
 	 *
-	 * @return string Localized name of the product attribute
+	 * @return integer Quantity of the product attribute
 	 */
-	public function getName()
+	public function getQuantity()
 	{
-		if( isset( $this->values['order.base.product.attribute.name'] ) ) {
-			return (string) $this->values['order.base.product.attribute.name'];
+		if( isset( $this->values['order.base.product.attribute.quantity'] ) ) {
+			return (int) $this->values['order.base.product.attribute.quantity'];
 		}
 
-		return '';
+		return 1;
 	}
 
 
 	/**
-	 * Sets the localized name of the product attribute.
+	 * Sets the quantity of the product attribute.
 	 *
-	 * @param string $name Localized name of the product attribute
+	 * @param integer $value Quantity of the product attribute
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base product attribute item for chaining method calls
 	 */
-	public function setName( $name )
+	public function setQuantity( $value )
 	{
-		if( (string) $name !== $this->getName() )
+		if( (int) $value !== $this->getQuantity() )
 		{
-			$this->values['order.base.product.attribute.name'] = (string) $name;
+			$this->values['order.base.product.attribute.quantity'] = (int) $value;
 			$this->setModified();
 		}
 
@@ -322,6 +355,7 @@ class Standard
 				case 'order.base.product.attribute.code': $this->setCode( $value ); break;
 				case 'order.base.product.attribute.value': $this->setValue( $value ); break;
 				case 'order.base.product.attribute.name': $this->setName( $value ); break;
+				case 'order.base.product.attribute.quantity': $this->setQuantity( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -344,6 +378,7 @@ class Standard
 		$list['order.base.product.attribute.code'] = $this->getCode();
 		$list['order.base.product.attribute.name'] = $this->getName();
 		$list['order.base.product.attribute.value'] = $this->getValue();
+		$list['order.base.product.attribute.quantity'] = $this->getQuantity();
 
 		if( $private === true )
 		{

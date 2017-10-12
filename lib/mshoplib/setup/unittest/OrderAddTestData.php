@@ -350,6 +350,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordProdAttr->setCode( $dataset['code'] );
 			$ordProdAttr->setValue( $dataset['value'] );
 			$ordProdAttr->setName( $dataset['name'] );
+			$ordProdAttr->setQuantity( $dataset['quantity'] );
 
 			if( isset( $attrCodes[$dataset['code']] ) )
 			{
@@ -395,6 +396,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$ordServAttr->setValue( $dataset['value'] );
 			$ordServAttr->setName( $dataset['name'] );
 			$ordServAttr->setType( $dataset['type'] );
+			$ordServAttr->setQuantity( $dataset['quantity'] );
 
 			if( isset( $dataset['attrid'] ) ) {
 				$ordServAttr->setAttributeId( $dataset['attrid'] );

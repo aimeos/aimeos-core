@@ -52,21 +52,6 @@ interface Iface
 	public function setType( $type );
 
 	/**
-	 * Returns the name of the service attribute item.
-	 *
-	 * @return string Name of the service attribute item
-	 */
-	public function getName();
-
-	/**
-	 * Sets a new name for the service attribute item.
-	 *
-	 * @param string $name Name as defined by the service provider
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
-	 */
-	public function setName( $name );
-
-	/**
 	 * Returns the code of the service attribute item.
 	 *
 	 * @return string code of the service attribute item
@@ -82,6 +67,21 @@ interface Iface
 	public function setCode( $code );
 
 	/**
+	 * Returns the name of the service attribute item.
+	 *
+	 * @return string Name of the service attribute item
+	 */
+	public function getName();
+
+	/**
+	 * Sets a new name for the service attribute item.
+	 *
+	 * @param string $name Name as defined by the service provider
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 */
+	public function setName( $name );
+
+	/**
 	 * Returns the value of the service attribute item.
 	 *
 	 * @return string|array Service attribute item value
@@ -95,6 +95,21 @@ interface Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
 	 */
 	public function setValue( $value );
+
+	/**
+	 * Returns the quantity of the service attribute.
+	 *
+	 * @return integer Quantity of the service attribute
+	 */
+	public function getQuantity();
+
+	/**
+	 * Sets the quantity of the service attribute.
+	 *
+	 * @param integer $value Quantity of the service attribute
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base service attribute item for chaining method calls
+	 */
+	public function setQuantity( $value );
 
 	/**
 	 * Copys all data from a given attribute item.
