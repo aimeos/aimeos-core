@@ -88,10 +88,10 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 		$operators = $this->getOperators();
 
-		if( in_array( $op, $operators['combine'] ) ) {
+		if( in_array( $op, $operators['combine'], true ) ) {
 			return $this->createCombineExpression( $op, (array) $value );
 		}
-		else if( in_array( $op, $operators['compare'] ) ) {
+		else if( in_array( $op, $operators['compare'], true ) ) {
 			return $this->createCompareExpression( $op, (array) $value );
 		}
 

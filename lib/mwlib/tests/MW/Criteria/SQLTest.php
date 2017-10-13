@@ -224,6 +224,13 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testToConditionsInvalid()
+	{
+		$this->setExpectedException( '\\Aimeos\\MW\\Common\\Exception' );
+		$this->object->toConditions( ['=][attribute.id]=15'] );
+	}
+
+
 	public function testToConditionsInvalidOperator()
 	{
 		$this->setExpectedException( '\\Aimeos\\MW\\Common\\Exception' );
