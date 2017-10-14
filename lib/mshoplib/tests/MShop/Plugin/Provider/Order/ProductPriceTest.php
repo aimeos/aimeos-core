@@ -186,6 +186,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$orderProdAttrManager = \Aimeos\MShop\Factory::createManager( $context, 'order/base/product/attribute' );
 		$ordAttr = $orderProdAttrManager->createItem();
 		$ordAttr->copyFrom( $attribute );
+		$ordAttr->setQuantity( 2 );
 
 		$orderProduct = $this->order->getProduct( 0 );
 		$orderProduct->setAttributes( array( $ordAttr ) );
@@ -201,7 +202,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		}
 		catch( \Aimeos\MShop\Plugin\Provider\Exception $mppe )
 		{
-			$this->assertEquals( '612.95', $this->order->getProduct( 0 )->getPrice()->getValue() );
+			$this->assertEquals( '625.90', $this->order->getProduct( 0 )->getPrice()->getValue() );
 			$this->assertEquals( array( 'product' => array( '0' => 'price.changed' ) ), $mppe->getErrorCodes() );
 		}
 	}

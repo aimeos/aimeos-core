@@ -230,7 +230,7 @@ class ProductPrice
 			}
 
 			if( !empty( $attrPrices ) ) {
-				$price->addItem( $priceManager->getLowestPrice( $attrPrices, $orderProduct->getQuantity() ) );
+				$price->addItem( $priceManager->getLowestPrice( $attrPrices, $orderAttribute->getQuantity() ), $orderAttribute->getQuantity() );
 			}
 		}
 
