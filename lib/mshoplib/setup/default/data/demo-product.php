@@ -155,7 +155,7 @@ return array(
 			),
 			array(
 				'code' => 'demo-print-small', 'label' => 'Demo: Small print',
-				'type' => 'option', 'position' => 0, 'status' => 1,
+				'type' => 'print', 'position' => 0, 'status' => 1,
 				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1,
 				'text' => array(
@@ -207,7 +207,7 @@ return array(
 			),
 			array(
 				'code' => 'demo-print-large', 'label' => 'Demo: Large print',
-				'type' => 'option', 'position' => 1, 'status' => 1,
+				'type' => 'print', 'position' => 1, 'status' => 1,
 				'list-type' => 'config', 'list-position' => 2, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1,
 				'text' => array(
@@ -694,112 +694,6 @@ return array(
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
-		'attribute' => array(
-			array(
-				'code' => 'demo-sticker-small', 'label' => 'Demo: Small sticker',
-				'type' => 'option', 'position' => 2, 'status' => 1,
-				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
-				'text' => array(
-					array(
-						'label' => 'Demo name/de: Kleines Etikett',
-						'content' => 'Kleines Etikett',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo name/en: Small sticker',
-						'content' => 'Small sticker',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo url/de: Kleines Etikett',
-						'content' => 'Kleines_Etikett',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo url/en: Small sticker',
-						'content' => 'small_sticker',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-				),
-				'price' => array(
-					array(
-						'label' => 'Demo: Small sticker',
-						'value' => '2.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo: Small sticker',
-						'value' => '3.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-				),
-			),
-			array(
-				'code' => 'demo-sticker-large', 'label' => 'Demo: Large sticker',
-				'type' => 'option', 'position' => 3, 'status' => 1,
-				'list-type' => 'config', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
-				'text' => array(
-					array(
-						'label' => 'Demo name/de: Grosses Etikett',
-						'content' => 'Grosses Etikett',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo name/en: Large sticker',
-						'content' => 'Large sticker',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo url/de: Grosses Etikett',
-						'content' => 'Grosses_Etikett',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo url/en: Large sticker',
-						'content' => 'large_sticker',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-				),
-				'price' => array(
-					array(
-						'label' => 'Demo: Large sticker',
-						'value' => '5.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo: Large sticker',
-						'value' => '7.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-				),
-			),
-		),
 		'product' => array(
 			array(
 				'code' => 'demo-selection-article-1',
@@ -961,6 +855,110 @@ return array(
 			),
 		),
 		'attribute' => array(
+			array(
+				'code' => 'demo-sticker-small', 'label' => 'Demo: Small sticker',
+				'type' => 'sticker', 'position' => 2, 'status' => 1,
+				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo name/de: Kleines Etikett',
+						'content' => 'Kleines Etikett',
+						'type' => 'name', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo name/en: Small sticker',
+						'content' => 'Small sticker',
+						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/de: Kleines Etikett',
+						'content' => 'Kleines_Etikett',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Small sticker',
+						'content' => 'small_sticker',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+				'price' => array(
+					array(
+						'label' => 'Demo: Small sticker',
+						'value' => '2.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo: Small sticker',
+						'value' => '3.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
+						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+			),
+			array(
+				'code' => 'demo-sticker-large', 'label' => 'Demo: Large sticker',
+				'type' => 'sticker', 'position' => 3, 'status' => 1,
+				'list-type' => 'config', 'list-position' => 2, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo name/de: Grosses Etikett',
+						'content' => 'Grosses Etikett',
+						'type' => 'name', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo name/en: Large sticker',
+						'content' => 'Large sticker',
+						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/de: Grosses Etikett',
+						'content' => 'Grosses_Etikett',
+						'type' => 'url', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo url/en: Large sticker',
+						'content' => 'large_sticker',
+						'type' => 'url', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+				'price' => array(
+					array(
+						'label' => 'Demo: Large sticker',
+						'value' => '5.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo: Large sticker',
+						'value' => '7.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
+						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+			),
 		),
 		'product' => array(
 			array(
