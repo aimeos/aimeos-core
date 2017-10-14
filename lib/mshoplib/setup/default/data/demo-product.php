@@ -456,7 +456,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 3, 'typeid' => 'default', 'dateback' => null ),
+			array( 'stocklevel' => 5, 'typeid' => 'default', 'dateback' => null ),
 		),
 	),
 	array(
@@ -717,7 +717,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 3, 'typeid' => 'default', 'dateback' => null )
+			array( 'stocklevel' => 5, 'typeid' => 'default', 'dateback' => null )
 		),
 	),
 
@@ -973,7 +973,7 @@ return array(
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 0, 'typeid' => 'default', 'dateback' => null ),
+			array( 'stocklevel' => 10, 'typeid' => 'default', 'dateback' => null ),
 		),
 	),
 	array(
