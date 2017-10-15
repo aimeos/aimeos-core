@@ -178,7 +178,7 @@ class Standard
 		 */
 		$path = 'mshop/attribute/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'property', 'lists' ), $withsub );
 	}
 
 

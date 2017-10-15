@@ -181,6 +181,138 @@ return array(
 				),
 			),
 		),
+		'property' => array(
+			'type' => array(
+				'standard' => array(
+					'delete' => array(
+						'ansi' => '
+							DELETE FROM "mshop_attribute_property_type"
+							WHERE :cond AND siteid = ?
+						'
+					),
+					'insert' => array(
+						'ansi' => '
+							INSERT INTO "mshop_attribute_property_type" (
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?
+							)
+						'
+					),
+					'update' => array(
+						'ansi' => '
+							UPDATE "mshop_attribute_property_type"
+							SET "code" = ?, "domain" = ?, "label" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
+						'
+					),
+					'search' => array(
+						'ansi' => '
+							SELECT mattprty."id" AS "attribute.property.type.id", mattprty."siteid" AS "attribute.property.type.siteid",
+								mattprty."code" AS "attribute.property.type.code", mattprty."domain" AS "attribute.property.type.domain",
+								mattprty."label" AS "attribute.property.type.label", mattprty."status" AS "attribute.property.type.status",
+								mattprty."mtime" AS "attribute.property.type.mtime", mattprty."editor" AS "attribute.property.type.editor",
+								mattprty."ctime" AS "attribute.property.type.ctime"
+							FROM "mshop_attribute_property_type" mattprty
+							:joins
+							WHERE :cond
+							GROUP BY mattprty."id", mattprty."siteid", mattprty."code", mattprty."domain",
+								mattprty."label", mattprty."status", mattprty."mtime", mattprty."editor",
+								mattprty."ctime" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						'
+					),
+					'count' => array(
+						'ansi' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT mattprty."id"
+								FROM "mshop_attribute_property_type" mattprty
+								:joins
+								WHERE :cond
+								LIMIT 10000 OFFSET 0
+							) AS list
+						'
+					),
+					'newid' => array(
+						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+						'mysql' => 'SELECT LAST_INSERT_ID()',
+						'oracle' => 'SELECT mshop_attribute_property_type_seq.CURRVAL FROM DUAL',
+						'pgsql' => 'SELECT lastval()',
+						'sqlite' => 'SELECT last_insert_rowid()',
+						'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+						'sqlanywhere' => 'SELECT @@IDENTITY',
+					),
+				),
+			),
+			'standard' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "mshop_attribute_property"
+						WHERE :cond AND siteid = ?
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "mshop_attribute_property" (
+							"parentid", "typeid", "langid", "value",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?
+						)
+					'
+				),
+				'update' => array(
+					'ansi' => '
+						UPDATE "mshop_attribute_property"
+						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+							"value" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
+					'
+				),
+				'search' => array(
+					'ansi' => '
+						SELECT mattpr."id" AS "attribute.property.id", mattpr."parentid" AS "attribute.property.parentid",
+							mattpr."siteid" AS "attribute.property.siteid", mattpr."typeid" AS "attribute.property.typeid",
+							mattpr."langid" AS "attribute.property.languageid", mattpr."value" AS "attribute.property.value",
+							mattpr."mtime" AS "attribute.property.mtime", mattpr."editor" AS "attribute.property.editor",
+							mattpr."ctime" AS "attribute.property.ctime"
+						FROM "mshop_attribute_property" AS mattpr
+						:joins
+						WHERE :cond
+						GROUP BY mattpr."id", mattpr."parentid", mattpr."siteid", mattpr."typeid",
+							mattpr."langid", mattpr."value", mattpr."mtime", mattpr."editor",
+							mattpr."ctime" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					'
+				),
+				'count' => array(
+					'ansi' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mattpr."id"
+							FROM "mshop_attribute_property" AS mattpr
+							:joins
+							WHERE :cond
+							LIMIT 10000 OFFSET 0
+						) AS list
+					'
+				),
+				'newid' => array(
+					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+					'mysql' => 'SELECT LAST_INSERT_ID()',
+					'oracle' => 'SELECT mshop_attribute_property_seq.CURRVAL FROM DUAL',
+					'pgsql' => 'SELECT lastval()',
+					'sqlite' => 'SELECT last_insert_rowid()',
+					'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+					'sqlanywhere' => 'SELECT @@IDENTITY',
+				),
+			),
+		),
 		'type' => array(
 			'standard' => array(
 				'delete' => array(

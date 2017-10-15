@@ -270,6 +270,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'attribute.lists.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'attribute.lists.type.editor', $this->editor );
 
+		$expr[] = $search->compare( '!=', 'attribute.property.id', null );
+		$expr[] = $search->compare( '!=', 'attribute.property.siteid', null );
+		$expr[] = $search->compare( '!=', 'attribute.property.typeid', null );
+		$expr[] = $search->compare( '==', 'attribute.property.languageid', 'de' );
+		$expr[] = $search->compare( '==', 'attribute.property.value', '#000000' );
+		$expr[] = $search->compare( '==', 'attribute.property.editor', $this->editor );
+
+		$expr[] = $search->compare( '!=', 'attribute.property.type.id', null );
+		$expr[] = $search->compare( '!=', 'attribute.property.type.siteid', null );
+		$expr[] = $search->compare( '==', 'attribute.property.type.code', 'htmlcolor' );
+		$expr[] = $search->compare( '==', 'attribute.property.type.domain', 'attribute' );
+		$expr[] = $search->compare( '>', 'attribute.property.type.label', 'HTML' );
+		$expr[] = $search->compare( '==', 'attribute.property.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'attribute.property.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'attribute.property.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'attribute.property.type.editor', $this->editor );
+
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
