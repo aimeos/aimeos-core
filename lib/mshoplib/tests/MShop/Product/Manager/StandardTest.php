@@ -311,6 +311,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.property.value', '1' );
 		$expr[] = $search->compare( '==', 'product.property.editor', $this->editor );
 
+		$expr[] = $search->compare( '!=', 'product.property.type.id', null );
+		$expr[] = $search->compare( '!=', 'product.property.type.siteid', null );
+		$expr[] = $search->compare( '==', 'product.property.type.code', 'package-weight' );
+		$expr[] = $search->compare( '==', 'product.property.type.domain', 'product' );
+		$expr[] = $search->compare( '==', 'product.property.type.label', 'Package Weight' );
+		$expr[] = $search->compare( '==', 'product.property.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'product.property.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'product.property.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'product.property.type.editor', $this->editor );
+
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );

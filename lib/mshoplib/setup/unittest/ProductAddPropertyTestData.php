@@ -51,7 +51,7 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$this->additional->setEditor( 'core:unittest' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'productproperty.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'product-property.php';
 
 		if( ( $testdata = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
