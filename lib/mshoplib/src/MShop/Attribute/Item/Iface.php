@@ -22,6 +22,13 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
+	 * Returns the property items of the product
+	 *
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
+	 */
+	public function getPropertyItems( $type = null );
+
+	/**
 	 * Returns the domain of the attribute item.
 	 *
 	 * @return string Returns the domain for this item e.g. text, media, price...

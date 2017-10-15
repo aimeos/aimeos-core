@@ -108,24 +108,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$search = $this->object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'attribute.code', 'm' ),
-			$search->compare( '==', 'attribute.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$itemA = $this->object->findItem( 'black', [], 'product', 'color' );
+		$itemB = $this->object->getItem( $itemA->getId(), ['attribute/property'] );
 
-		$results = $this->object->searchItems( $search, array( 'text' ) );
-		if( ( $itemA = reset( $results ) ) === false ) {
-			throw new \RuntimeException( 'No search results available in testGetItem()' );
-		}
+		$this->assertEquals( $itemA->getId(), $itemB->getId() );
+		$this->assertEquals( 1, count( $itemB->getPropertyItems() ) );
+		$this->assertNotEquals( '', $itemB->getTypeName() );
+	}
 
-		$itemB = $this->object->getItem( $itemA->getId(), array( 'text' ) );
+
+	public function testGetItemLists()
+	{
+		$itemA = $this->object->findItem( 'xxl', [], 'product', 'size' );
+		$itemB = $this->object->getItem( $itemA->getId(), ['text'] );
 
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
 		$this->assertEquals( 1, count( $itemB->getListItems( 'text' ) ) );
 		$this->assertEquals( 1, count( $itemB->getRefItems( 'text' ) ) );
-		$this->assertNotEquals( '', $itemB->getTypeName() );
 	}
 
 

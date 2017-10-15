@@ -755,15 +755,15 @@ class Standard
 	 * Create new product item object initialized with given parameters.
 	 *
 	 * @param array $values Associative list of key/value pairs
-	 * @param array $listitems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
+	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems List of items implementing \Aimeos\MShop\Common\Item\Iface
-	 * @param array $propertyItems List of items implementing \Aimeos\MShop\Product\Item\Property\Iface
+	 * @param array $propertyItems List of items implementing \Aimeos\MShop\Common\Item\Property\Iface
 	 * @return \Aimeos\MShop\Product\Item\Iface New product item
 	 */
-	protected function createItemBase( array $values = [], array $listitems = [],
+	protected function createItemBase( array $values = [], array $listItems = [],
 		array $refItems = [], array $propertyItems = [] )
 	{
-		return new \Aimeos\MShop\Product\Item\Standard( $values, $listitems, $refItems, $propertyItems );
+		return new \Aimeos\MShop\Product\Item\Standard( $values, $listItems, $refItems, $propertyItems );
 	}
 
 

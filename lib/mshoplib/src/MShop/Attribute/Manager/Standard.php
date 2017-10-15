@@ -652,7 +652,12 @@ class Standard
 			}
 		}
 
-		return $this->buildItems( $map, $ref, 'attribute' );
+		$propItems = [];
+		if( in_array( 'attribute/property', $ref, true ) ) {
+			$propItems = $this->getPropertyItems( array_keys( $map ) );
+		}
+
+		return $this->buildItems( $map, $ref, 'attribute', $propItems );
 	}
 
 
@@ -691,10 +696,36 @@ class Standard
 	 * @param array $values Associative list of key/value pairs
 	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems List of items implementing \Aimeos\MShop\Text\Item\Iface
-	 * @return \Aimeos\MShop\Attribute\Item\Iface New product item
+	 * @param array $propertyItems List of items implementing \Aimeos\MShop\Common\Item\Property\Iface
+	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item
 	 */
-	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
+	protected function createItemBase( array $values = [], array $listItems = [],
+		array $refItems = [], array $propertyItems = [] )
 	{
-		return new \Aimeos\MShop\Attribute\Item\Standard( $values, $listItems, $refItems );
+		return new \Aimeos\MShop\Attribute\Item\Standard( $values, $listItems, $refItems, $propertyItems );
+	}
+
+
+	/**
+	 * Returns the property items for the given attribute IDs
+	 *
+	 * @param array $attrIds List of attribute IDs
+	 * @return array Associative list of attribute IDs / property IDs as keys and items implementing
+	 * 	\Aimeos\MShop\Product\Item\Property\Iface as values
+	 */
+	protected function getPropertyItems( array $attrIds )
+	{
+		$list = [];
+		$propManager = $this->getObject()->getSubManager( 'property' );
+
+		$propSearch = $propManager->createSearch();
+		$propSearch->setConditions( $propSearch->compare( '==', 'attribute.property.parentid', $attrIds ) );
+		$propSearch->setSlice( 0, 0x7fffffff );
+
+		foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
+			$list[$propItem->getParentId()][$id] = $propItem;
+		}
+
+		return $list;
 	}
 }
