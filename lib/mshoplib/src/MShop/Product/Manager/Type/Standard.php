@@ -14,6 +14,7 @@ namespace Aimeos\MShop\Product\Manager\Type;
 
 /**
  * Default product type manager for creating and handling product type items.
+ *
  * @package MShop
  * @subpackage Product
  */

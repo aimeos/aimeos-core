@@ -37,12 +37,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$propItems = array(
-			2 => new \Aimeos\MShop\Product\Item\Property\Standard( array(
+			2 => new \Aimeos\MShop\Common\Item\Property\Standard( 'product.property.', array(
 				'product.property.id' => 2,
 				'product.property.parentid' => 1,
 				'product.property.type' => 'proptest',
 			) ),
-			3 => new \Aimeos\MShop\Product\Item\Property\Standard( array(
+			3 => new \Aimeos\MShop\Common\Item\Property\Standard( 'product.property.', array(
 				'product.property.id' => 3,
 				'product.property.parentid' => 1,
 				'product.property.type' => 'proptype',
@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 2, count( $propItems ) );
 
 		foreach( $propItems as $propItem ) {
-			$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $propItem );
+			$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $propItem );
 		}
 	}
 
@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $propItems ) );
 
 		foreach( $propItems as $propItem ) {
-			$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $propItem );
+			$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $propItem );
 		}
 	}
 

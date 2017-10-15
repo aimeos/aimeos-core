@@ -37,13 +37,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Product\\Item\\Property\\Iface', $item );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Property\\Iface', $item );
 	}
 
 
 	public function testSaveInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Product\Exception' );
+		$this->setExpectedException( '\Aimeos\MShop\Exception' );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 

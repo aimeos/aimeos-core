@@ -6,7 +6,7 @@
  */
 
 
-namespace Aimeos\MShop\Product\Item\Property;
+namespace Aimeos\MShop\Common\Item\Property;
 
 
 class StandardTest extends \PHPUnit\Framework\TestCase
@@ -18,20 +18,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$this->values = array(
-			'product.property.id' => 987,
-			'product.property.parentid' => 11,
-			'product.property.siteid' => 99,
-			'product.property.typeid' => 44,
-			'product.property.languageid' => 'en',
-			'product.property.type' => 'width',
-			'product.property.typename' => 'Width',
-			'product.property.value' => '30.0',
-			'product.property.mtime' => '2011-01-01 00:00:02',
-			'product.property.ctime' => '2011-01-01 00:00:01',
-			'product.property.editor' => 'unitTestUser'
+			'common.property.id' => 987,
+			'common.property.parentid' => 11,
+			'common.property.siteid' => 99,
+			'common.property.typeid' => 44,
+			'common.property.languageid' => 'en',
+			'common.property.type' => 'width',
+			'common.property.typename' => 'Width',
+			'common.property.value' => '30.0',
+			'common.property.mtime' => '2011-01-01 00:00:02',
+			'common.property.ctime' => '2011-01-01 00:00:01',
+			'common.property.editor' => 'unitTestUser'
 		);
 
-		$this->object = new \Aimeos\MShop\Product\Item\Property\Standard( $this->values );
+		$this->object = new \Aimeos\MShop\Common\Item\Property\Standard( 'common.property.', $this->values );
 	}
 
 
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -69,7 +69,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLanguageId('fr');
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
 		$this->assertEquals( 'fr', $this->object->getLanguageId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setParentId( 22 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
 		$this->assertEquals( 22, $this->object->getParentId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTypeId(33);
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
 		$this->assertEquals( 33, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setValue( '15.00' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Property\Iface', $return );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
 		$this->assertEquals( '15.00', $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -144,31 +144,31 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetResourceType()
 	{
-		$this->assertEquals( 'product/property', $this->object->getResourceType() );
+		$this->assertEquals( 'common/property', $this->object->getResourceType() );
 	}
 
 
 	public function testFromArray()
 	{
-		$item = new \Aimeos\MShop\Product\Item\Property\Standard();
+		$item = new \Aimeos\MShop\Common\Item\Property\Standard( 'common.property.' );
 
 		$list = array(
-			'product.property.parentid' => 1,
-			'product.property.typeid' => 2,
-			'product.property.type' => 'test',
-			'product.property.typename' => 'Test',
-			'product.property.languageid' => 'de',
-			'product.property.value' => 'value',
+			'common.property.parentid' => 1,
+			'common.property.typeid' => 2,
+			'common.property.type' => 'test',
+			'common.property.typename' => 'Test',
+			'common.property.languageid' => 'de',
+			'common.property.value' => 'value',
 		);
 
 		$unknown = $item->fromArray($list);
 
 		$this->assertEquals([], $unknown);
 
-		$this->assertEquals($list['product.property.parentid'], $item->getParentId());
-		$this->assertEquals($list['product.property.typeid'], $item->getTypeId());
-		$this->assertEquals($list['product.property.languageid'], $item->getLanguageId());
-		$this->assertEquals($list['product.property.value'], $item->getValue());
+		$this->assertEquals($list['common.property.parentid'], $item->getParentId());
+		$this->assertEquals($list['common.property.typeid'], $item->getTypeId());
+		$this->assertEquals($list['common.property.languageid'], $item->getLanguageId());
+		$this->assertEquals($list['common.property.value'], $item->getValue());
 		$this->assertNull( $item->getSiteId() );
 		$this->assertNull( $item->getTypeName() );
 		$this->assertNull( $item->getType() );
@@ -180,17 +180,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$arrayObject = $this->object->toArray( true );
 		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
 
-		$this->assertEquals( $this->object->getId(), $arrayObject['product.property.id'] );
-		$this->assertEquals( $this->object->getSiteId(), $arrayObject['product.property.siteid'] );
-		$this->assertEquals( $this->object->getType(), $arrayObject['product.property.type'] );
-		$this->assertEquals( $this->object->getTypeId(), $arrayObject['product.property.typeid'] );
-		$this->assertEquals( $this->object->getTypeName(), $arrayObject['product.property.typename'] );
-		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['product.property.languageid'] );
-		$this->assertEquals( $this->object->getType(), $arrayObject['product.property.type'] );
-		$this->assertEquals( $this->object->getValue(), $arrayObject['product.property.value'] );
-		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['product.property.ctime'] );
-		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['product.property.mtime'] );
-		$this->assertEquals( $this->object->getEditor(), $arrayObject['product.property.editor'] );
+		$this->assertEquals( $this->object->getId(), $arrayObject['common.property.id'] );
+		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.property.siteid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['common.property.type'] );
+		$this->assertEquals( $this->object->getTypeId(), $arrayObject['common.property.typeid'] );
+		$this->assertEquals( $this->object->getTypeName(), $arrayObject['common.property.typename'] );
+		$this->assertEquals( $this->object->getLanguageId(), $arrayObject['common.property.languageid'] );
+		$this->assertEquals( $this->object->getType(), $arrayObject['common.property.type'] );
+		$this->assertEquals( $this->object->getValue(), $arrayObject['common.property.value'] );
+		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['common.property.ctime'] );
+		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['common.property.mtime'] );
+		$this->assertEquals( $this->object->getEditor(), $arrayObject['common.property.editor'] );
 	}
 
 	public function testIsModified()

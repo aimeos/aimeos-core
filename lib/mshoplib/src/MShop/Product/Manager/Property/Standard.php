@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Product\Manager\Property;
  * @subpackage Product
  */
 class Standard
-	extends \Aimeos\MShop\Common\Manager\Base
+	extends \Aimeos\MShop\Common\Manager\Property\Base
 	implements \Aimeos\MShop\Product\Manager\Property\Iface
 {
 	private $searchConfig = array(
@@ -116,284 +116,11 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/product/manager/property/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'type' ) ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
 		$this->cleanupBase( $siteids, 'mshop/product/manager/property/standard/delete' );
-	}
-
-
-	/**
-	 * Creates new property item object.
-	 *
-	 * @return \Aimeos\MShop\Product\Item\Property\Iface New property item object
-	 */
-	public function createItem()
-	{
-		$values = array( 'product.property.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
-	}
-
-
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		$object = parent::createSearch();
-
-		if( $default === true )
-		{
-			$langid = $this->getContext()->getLocale()->getLanguageId();
-
-			$expr = array(
-				$object->compare( '==', 'product.property.languageid', null ),
-				$object->compare( '==', 'product.property.languageid', $langid ),
-			);
-
-			$object->setConditions( $object->combine( '||', $expr ) );
-		}
-
-		return $object;
-	}
-
-
-	/**
-	 * Inserts the new property items for product item
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Property\Iface $item Property item which should be saved
-	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return \Aimeos\MShop\Common\Item\Iface $item Updated item including the generated ID
-	 */
-	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
-	{
-		$iface = '\\Aimeos\\MShop\\Product\\Item\\Property\\Iface';
-		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Product\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-		}
-
-		if( !$item->isModified() ) {
-			return $item;
-		}
-
-		$context = $this->getContext();
-
-		$dbm = $context->getDatabaseManager();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
-
-			if( $id === null )
-			{
-				/** mshop/product/manager/property/standard/insert/mysql
-				 * Inserts a new product property record into the database table
-				 *
-				 * @see mshop/product/manager/property/standard/insert/ansi
-				 */
-
-				/** mshop/product/manager/property/standard/insert/ansi
-				 * Inserts a new product property record into the database table
-				 *
-				 * Items with no ID yet (i.e. the ID is NULL) will be created in
-				 * the database and the newly created ID retrieved afterwards
-				 * using the "newid" SQL statement.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the product property item to the statement before they are
-				 * sent to the database server. The number of question marks must
-				 * be the same as the number of columns listed in the INSERT
-				 * statement. The order of the columns must correspond to the
-				 * order in the saveItems() method, so the correct values are
-				 * bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for inserting records
-				 * @since 2015.01
-				 * @category Developer
-				 * @see mshop/product/manager/property/standard/update/ansi
-				 * @see mshop/product/manager/property/standard/newid/ansi
-				 * @see mshop/product/manager/property/standard/delete/ansi
-				 * @see mshop/product/manager/property/standard/search/ansi
-				 * @see mshop/product/manager/property/standard/count/ansi
-				 */
-				$path = 'mshop/product/manager/property/standard/insert';
-			}
-			else
-			{
-				/** mshop/product/manager/property/standard/update/mysql
-				 * Updates an existing product property record in the database
-				 *
-				 * @see mshop/product/manager/property/standard/update/ansi
-				 */
-
-				/** mshop/product/manager/property/standard/update/ansi
-				 * Updates an existing product property record in the database
-				 *
-				 * Items which already have an ID (i.e. the ID is not NULL) will
-				 * be updated in the database.
-				 *
-				 * The SQL statement must be a string suitable for being used as
-				 * prepared statement. It must include question marks for binding
-				 * the values from the product property item to the statement before they are
-				 * sent to the database server. The order of the columns must
-				 * correspond to the order in the saveItems() method, so the
-				 * correct values are bound to the columns.
-				 *
-				 * The SQL statement should conform to the ANSI standard to be
-				 * compatible with most relational database systems. This also
-				 * includes using double quotes for table and column names.
-				 *
-				 * @param string SQL statement for updating records
-				 * @since 2015.01
-				 * @category Developer
-				 * @see mshop/product/manager/property/standard/insert/ansi
-				 * @see mshop/product/manager/property/standard/newid/ansi
-				 * @see mshop/product/manager/property/standard/delete/ansi
-				 * @see mshop/product/manager/property/standard/search/ansi
-				 * @see mshop/product/manager/property/standard/count/ansi
-				 */
-				$path = 'mshop/product/manager/property/standard/update';
-			}
-
-			$stmt = $this->getCachedStatement( $conn, $path );
-
-			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getTypeId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 3, $item->getLanguageId() );
-			$stmt->bind( 4, $item->getValue() );
-			$stmt->bind( 5, $date ); //mtime
-			$stmt->bind( 6, $context->getEditor() );
-			$stmt->bind( 7, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-
-			if( $id !== null ) {
-				$stmt->bind( 8, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$item->setId( $id ); //is not modified anymore
-			} else {
-				$stmt->bind( 8, $date ); //ctime
-			}
-
-			$stmt->execute()->finish();
-
-			if( $id === null && $fetch === true )
-			{
-				/** mshop/product/manager/property/standard/newid/mysql
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * @see mshop/product/manager/property/standard/newid/ansi
-				 */
-
-				/** mshop/product/manager/property/standard/newid/ansi
-				 * Retrieves the ID generated by the database when inserting a new record
-				 *
-				 * As soon as a new record is inserted into the database table,
-				 * the database server generates a new and unique identifier for
-				 * that record. This ID can be used for retrieving, updating and
-				 * deleting that specific record from the table again.
-				 *
-				 * For MySQL:
-				 *  SELECT LAST_INSERT_ID()
-				 * For PostgreSQL:
-				 *  SELECT currval('seq_mpropr_id')
-				 * For SQL Server:
-				 *  SELECT SCOPE_IDENTITY()
-				 * For Oracle:
-				 *  SELECT "seq_mpropr_id".CURRVAL FROM DUAL
-				 *
-				 * There's no way to retrive the new ID by a SQL statements that
-				 * fits for most database servers as they implement their own
-				 * specific way.
-				 *
-				 * @param string SQL statement for retrieving the last inserted record ID
-				 * @since 2015.01
-				 * @category Developer
-				 * @see mshop/product/manager/property/standard/insert/ansi
-				 * @see mshop/product/manager/property/standard/update/ansi
-				 * @see mshop/product/manager/property/standard/delete/ansi
-				 * @see mshop/product/manager/property/standard/search/ansi
-				 * @see mshop/product/manager/property/standard/count/ansi
-				 */
-				$path = 'mshop/product/manager/property/standard/newid';
-				$item->setId( $this->newId( $conn, $path ) );
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
-		return $item;
-	}
-
-
-	/**
-	 * Removes multiple items specified by ids in the array.
-	 *
-	 * @param array $ids List of IDs
-	 */
-	public function deleteItems( array $ids )
-	{
-		/** mshop/product/manager/property/standard/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see mshop/product/manager/property/standard/delete/ansi
-		 */
-
-		/** mshop/product/manager/property/standard/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the product database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2015.01
-		 * @category Developer
-		 * @see mshop/product/manager/property/standard/insert/ansi
-		 * @see mshop/product/manager/property/standard/update/ansi
-		 * @see mshop/product/manager/property/standard/newid/ansi
-		 * @see mshop/product/manager/property/standard/search/ansi
-		 * @see mshop/product/manager/property/standard/count/ansi
-		 */
-		$path = 'mshop/product/manager/property/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
-	}
-
-
-	/**
-	 * Returns product property item with given Id.
-	 *
-	 * @param integer $id Id of the product property item
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MShop\Product\Item\Property\Iface Returns the product property item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
-	 */
-	public function getItem( $id, array $ref = [], $default = false )
-	{
-		return $this->getItemBase( 'product.property.id', $id, $ref, $default );
 	}
 
 
@@ -439,210 +166,6 @@ class Standard
 		$path = 'mshop/product/manager/property/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
-	}
-
-
-	/**
-	 * Search for all property items based on the given critera.
-	 *
-	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param integer|null &$total Number of items that are available in total
-	 * @return array List of property items implementing \Aimeos\MShop\Product\Item\Property\Iface
-	 */
-	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null )
-	{
-		$items = $map = $typeIds = [];
-		$context = $this->getContext();
-
-		$dbm = $context->getDatabaseManager();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		try
-		{
-			$required = array( 'product.property' );
-
-			/** mshop/product/manager/sitemode
-			 * Mode how items from levels below or above in the site tree are handled
-			 *
-			 * By default, only items from the current site are fetched from the
-			 * storage. If the ai-sites extension is installed, you can create a
-			 * tree of sites. Then, this setting allows you to define for the
-			 * whole product domain if items from parent sites are inherited,
-			 * sites from child sites are aggregated or both.
-			 *
-			 * Available constants for the site mode are:
-			 * * 0 = only items from the current site
-			 * * 1 = inherit items from parent sites
-			 * * 2 = aggregate items from child sites
-			 * * 3 = inherit and aggregate items at the same time
-			 *
-			 * You also need to set the mode in the locale manager
-			 * (mshop/locale/manager/standard/sitelevel) to one of the constants.
-			 * If you set it to the same value, it will work as described but you
-			 * can also use different modes. For example, if inheritance and
-			 * aggregation is configured the locale manager but only inheritance
-			 * in the domain manager because aggregating items makes no sense in
-			 * this domain, then items wil be only inherited. Thus, you have full
-			 * control over inheritance and aggregation in each domain.
-			 *
-			 * @param integer Constant from Aimeos\MShop\Locale\Manager\Base class
-			 * @category Developer
-			 * @since 2018.01
-			 * @see mshop/locale/manager/standard/sitelevel
-			 */
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
-			$level = $context->getConfig()->get( 'mshop/product/manager/sitemode', $level );
-
-			/** mshop/product/manager/property/standard/search/mysql
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * @see mshop/product/manager/property/standard/search/ansi
-			 */
-
-			/** mshop/product/manager/property/standard/search/ansi
-			 * Retrieves the records matched by the given criteria in the database
-			 *
-			 * Fetches the records matched by the given criteria from the product
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the SELECT statement can retrieve all records
-			 * from the current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * If the records that are retrieved should be ordered by one or more
-			 * columns, the generated string of column / sort direction pairs
-			 * replaces the ":order" placeholder. In case no ordering is required,
-			 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
-			 * markers is removed to speed up retrieving the records. Columns of
-			 * sub-managers can also be used for ordering the result set but then
-			 * no index can be used.
-			 *
-			 * The number of returned records can be limited and can start at any
-			 * number between the begining and the end of the result set. For that
-			 * the ":size" and ":start" placeholders are replaced by the
-			 * corresponding values from the criteria object. The default values
-			 * are 0 for the start and 100 for the size value.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for searching items
-			 * @since 2015.01
-			 * @category Developer
-			 * @see mshop/product/manager/property/standard/insert/ansi
-			 * @see mshop/product/manager/property/standard/update/ansi
-			 * @see mshop/product/manager/property/standard/newid/ansi
-			 * @see mshop/product/manager/property/standard/delete/ansi
-			 * @see mshop/product/manager/property/standard/count/ansi
-			 */
-			$cfgPathSearch = 'mshop/product/manager/property/standard/search';
-
-			/** mshop/product/manager/property/standard/count/mysql
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * @see mshop/product/manager/property/standard/count/ansi
-			 */
-
-			/** mshop/product/manager/property/standard/count/ansi
-			 * Counts the number of records matched by the given criteria in the database
-			 *
-			 * Counts all records matched by the given criteria from the product
-			 * database. The records must be from one of the sites that are
-			 * configured via the context item. If the current site is part of
-			 * a tree of sites, the statement can count all records from the
-			 * current site and the complete sub-tree of sites.
-			 *
-			 * As the records can normally be limited by criteria from sub-managers,
-			 * their tables must be joined in the SQL context. This is done by
-			 * using the "internaldeps" property from the definition of the ID
-			 * column of the sub-managers. These internal dependencies specify
-			 * the JOIN between the tables and the used columns for joining. The
-			 * ":joins" placeholder is then replaced by the JOIN strings from
-			 * the sub-managers.
-			 *
-			 * To limit the records matched, conditions can be added to the given
-			 * criteria object. It can contain comparisons like column names that
-			 * must match specific values which can be combined by AND, OR or NOT
-			 * operators. The resulting string of SQL conditions replaces the
-			 * ":cond" placeholder before the statement is sent to the database
-			 * server.
-			 *
-			 * Both, the strings for ":joins" and for ":cond" are the same as for
-			 * the "search" SQL statement.
-			 *
-			 * Contrary to the "search" statement, it doesn't return any records
-			 * but instead the number of records that have been found. As counting
-			 * thousands of records can be a long running task, the maximum number
-			 * of counted records is limited for performance reasons.
-			 *
-			 * The SQL statement should conform to the ANSI standard to be
-			 * compatible with most relational database systems. This also
-			 * includes using double quotes for table and column names.
-			 *
-			 * @param string SQL statement for counting items
-			 * @since 2015.01
-			 * @category Developer
-			 * @see mshop/product/manager/property/standard/insert/ansi
-			 * @see mshop/product/manager/property/standard/update/ansi
-			 * @see mshop/product/manager/property/standard/newid/ansi
-			 * @see mshop/product/manager/property/standard/delete/ansi
-			 * @see mshop/product/manager/property/standard/search/ansi
-			 */
-			$cfgPathCount =  'mshop/product/manager/property/standard/count';
-
-			$results = $this->searchItemsBase( $conn, $search, $cfgPathSearch, $cfgPathCount, $required, $total, $level );
-			while( ( $row = $results->fetch() ) !== false )
-			{
-				$map[ $row['product.property.id'] ] = $row;
-				$typeIds[ $row['product.property.typeid'] ] = null;
-			}
-
-			$dbm->release( $conn, $dbname );
-		}
-		catch( \Exception $e )
-		{
-			$dbm->release( $conn, $dbname );
-			throw $e;
-		}
-
-		if( !empty( $typeIds ) )
-		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-			$typeSearch = $typeManager->createSearch();
-			$typeSearch->setConditions( $typeSearch->compare( '==', 'product.property.type.id', array_keys( $typeIds ) ) );
-			$typeSearch->setSlice( 0, $search->getSliceSize() );
-			$typeItems = $typeManager->searchItems( $typeSearch );
-
-			foreach( $map as $id => $row )
-			{
-				if( isset( $typeItems[ $row['product.property.typeid'] ] ) )
-				{
-					$row['product.property.type'] = $typeItems[ $row['product.property.typeid'] ]->getCode();
-					$row['product.property.typename'] = $typeItems[$row['product.property.typeid']]->getName();
-				}
-
-				$items[$id] = $this->createItemBase( $row );
-			}
-		}
-
-		return $items;
 	}
 
 
@@ -770,14 +293,270 @@ class Standard
 
 
 	/**
-	 * Creates new property item object.
+	 * Returns the config path for retrieving the configuration values.
 	 *
-	 * @see \Aimeos\MShop\Product\Item\Property\Standard Default property item
-	 * @param array $values Possible optional array keys can be given: id, typeid, langid, type, value
-	 * @return \Aimeos\MShop\Product\Item\Property\Standard New property item object
+	 * @return string Configuration path
 	 */
-	protected function createItemBase( array $values = [] )
+	protected function getConfigPath()
 	{
-		return new \Aimeos\MShop\Product\Item\Property\Standard( $values );
+		/** mshop/product/manager/property/standard/insert/mysql
+		 * Inserts a new product property record into the database table
+		 *
+		 * @see mshop/product/manager/property/standard/insert/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/insert/ansi
+		 * Inserts a new product property record into the database table
+		 *
+		 * Items with no ID yet (i.e. the ID is NULL) will be created in
+		 * the database and the newly created ID retrieved afterwards
+		 * using the "newid" SQL statement.
+		 *
+		 * The SQL statement must be a string suitable for being used as
+		 * prepared statement. It must include question marks for binding
+		 * the values from the product property item to the statement before they are
+		 * sent to the database server. The number of question marks must
+		 * be the same as the number of columns listed in the INSERT
+		 * statement. The order of the columns must correspond to the
+		 * order in the saveItems() method, so the correct values are
+		 * bound to the columns.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for inserting records
+		 * @since 2015.01
+		 * @category Developer
+		 * @see mshop/product/manager/property/standard/update/ansi
+		 * @see mshop/product/manager/property/standard/newid/ansi
+		 * @see mshop/product/manager/property/standard/delete/ansi
+		 * @see mshop/product/manager/property/standard/search/ansi
+		 * @see mshop/product/manager/property/standard/count/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/update/mysql
+		 * Updates an existing product property record in the database
+		 *
+		 * @see mshop/product/manager/property/standard/update/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/update/ansi
+		 * Updates an existing product property record in the database
+		 *
+		 * Items which already have an ID (i.e. the ID is not NULL) will
+		 * be updated in the database.
+		 *
+		 * The SQL statement must be a string suitable for being used as
+		 * prepared statement. It must include question marks for binding
+		 * the values from the product property item to the statement before they are
+		 * sent to the database server. The order of the columns must
+		 * correspond to the order in the saveItems() method, so the
+		 * correct values are bound to the columns.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for updating records
+		 * @since 2015.01
+		 * @category Developer
+		 * @see mshop/product/manager/property/standard/insert/ansi
+		 * @see mshop/product/manager/property/standard/newid/ansi
+		 * @see mshop/product/manager/property/standard/delete/ansi
+		 * @see mshop/product/manager/property/standard/search/ansi
+		 * @see mshop/product/manager/property/standard/count/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/newid/mysql
+		 * Retrieves the ID generated by the database when inserting a new record
+		 *
+		 * @see mshop/product/manager/property/standard/newid/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/newid/ansi
+		 * Retrieves the ID generated by the database when inserting a new record
+		 *
+		 * As soon as a new record is inserted into the database table,
+		 * the database server generates a new and unique identifier for
+		 * that record. This ID can be used for retrieving, updating and
+		 * deleting that specific record from the table again.
+		 *
+		 * For MySQL:
+		 *  SELECT LAST_INSERT_ID()
+		 * For PostgreSQL:
+		 *  SELECT currval('seq_mpropr_id')
+		 * For SQL Server:
+		 *  SELECT SCOPE_IDENTITY()
+		 * For Oracle:
+		 *  SELECT "seq_mpropr_id".CURRVAL FROM DUAL
+		 *
+		 * There's no way to retrive the new ID by a SQL statements that
+		 * fits for most database servers as they implement their own
+		 * specific way.
+		 *
+		 * @param string SQL statement for retrieving the last inserted record ID
+		 * @since 2015.01
+		 * @category Developer
+		 * @see mshop/product/manager/property/standard/insert/ansi
+		 * @see mshop/product/manager/property/standard/update/ansi
+		 * @see mshop/product/manager/property/standard/delete/ansi
+		 * @see mshop/product/manager/property/standard/search/ansi
+		 * @see mshop/product/manager/property/standard/count/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/product/manager/property/standard/delete/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/delete/ansi
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the records specified by the given IDs from the product database.
+		 * The records must be from the site that is configured via the
+		 * context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2015.01
+		 * @category Developer
+		 * @see mshop/product/manager/property/standard/insert/ansi
+		 * @see mshop/product/manager/property/standard/update/ansi
+		 * @see mshop/product/manager/property/standard/newid/ansi
+		 * @see mshop/product/manager/property/standard/search/ansi
+		 * @see mshop/product/manager/property/standard/count/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/search/mysql
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * @see mshop/product/manager/property/standard/search/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/search/ansi
+		 * Retrieves the records matched by the given criteria in the database
+		 *
+		 * Fetches the records matched by the given criteria from the product
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the SELECT statement can retrieve all records
+		 * from the current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * If the records that are retrieved should be ordered by one or more
+		 * columns, the generated string of column / sort direction pairs
+		 * replaces the ":order" placeholder. In case no ordering is required,
+		 * the complete ORDER BY part including the "\/*-orderby*\/...\/*orderby-*\/"
+		 * markers is removed to speed up retrieving the records. Columns of
+		 * sub-managers can also be used for ordering the result set but then
+		 * no index can be used.
+		 *
+		 * The number of returned records can be limited and can start at any
+		 * number between the begining and the end of the result set. For that
+		 * the ":size" and ":start" placeholders are replaced by the
+		 * corresponding values from the criteria object. The default values
+		 * are 0 for the start and 100 for the size value.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for searching items
+		 * @since 2015.01
+		 * @category Developer
+		 * @see mshop/product/manager/property/standard/insert/ansi
+		 * @see mshop/product/manager/property/standard/update/ansi
+		 * @see mshop/product/manager/property/standard/newid/ansi
+		 * @see mshop/product/manager/property/standard/delete/ansi
+		 * @see mshop/product/manager/property/standard/count/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/count/mysql
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * @see mshop/product/manager/property/standard/count/ansi
+		 */
+
+		/** mshop/product/manager/property/standard/count/ansi
+		 * Counts the number of records matched by the given criteria in the database
+		 *
+		 * Counts all records matched by the given criteria from the product
+		 * database. The records must be from one of the sites that are
+		 * configured via the context item. If the current site is part of
+		 * a tree of sites, the statement can count all records from the
+		 * current site and the complete sub-tree of sites.
+		 *
+		 * As the records can normally be limited by criteria from sub-managers,
+		 * their tables must be joined in the SQL context. This is done by
+		 * using the "internaldeps" property from the definition of the ID
+		 * column of the sub-managers. These internal dependencies specify
+		 * the JOIN between the tables and the used columns for joining. The
+		 * ":joins" placeholder is then replaced by the JOIN strings from
+		 * the sub-managers.
+		 *
+		 * To limit the records matched, conditions can be added to the given
+		 * criteria object. It can contain comparisons like column names that
+		 * must match specific values which can be combined by AND, OR or NOT
+		 * operators. The resulting string of SQL conditions replaces the
+		 * ":cond" placeholder before the statement is sent to the database
+		 * server.
+		 *
+		 * Both, the strings for ":joins" and for ":cond" are the same as for
+		 * the "search" SQL statement.
+		 *
+		 * Contrary to the "search" statement, it doesn't return any records
+		 * but instead the number of records that have been found. As counting
+		 * thousands of records can be a long running task, the maximum number
+		 * of counted records is limited for performance reasons.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for counting items
+		 * @since 2015.01
+		 * @category Developer
+		 * @see mshop/product/manager/property/standard/insert/ansi
+		 * @see mshop/product/manager/property/standard/update/ansi
+		 * @see mshop/product/manager/property/standard/newid/ansi
+		 * @see mshop/product/manager/property/standard/delete/ansi
+		 * @see mshop/product/manager/property/standard/search/ansi
+		 */
+
+		return 'mshop/product/manager/property/standard/';
+	}
+
+
+	/**
+	 * Returns the search configuration for searching items.
+	 *
+	 * @return array Associative list of search keys and search definitions
+	 */
+	protected function getSearchConfig()
+	{
+		return $this->searchConfig;
 	}
 }

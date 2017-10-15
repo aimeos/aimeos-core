@@ -13,7 +13,7 @@ namespace Aimeos\MShop\Product\Manager\Type;
 
 
 /**
- * Interface for prodcut type manager.
+ * Interface for product type manager.
  *
  * @package MShop
  * @subpackage Product
