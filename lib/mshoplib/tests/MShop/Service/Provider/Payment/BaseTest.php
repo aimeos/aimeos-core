@@ -1,12 +1,14 @@
 <?php
 
-namespace Aimeos\MShop\Service\Provider\Payment;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MShop\Service\Provider\Payment;
+
+
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -30,12 +32,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -46,8 +42,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->checkConfigBE( array( 'payment.url-success' => true ) );
 
-		$this->assertInternalType( 'array', $result );
-		$this->assertArrayHasKey( 'payment.url-success', $result );
+		$this->assertEquals( 0, count( $result ) );
 	}
 
 
@@ -55,11 +50,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->getConfigBE();
 
+		$this->assertEquals( 0, count( $result ) );
 		$this->assertInternalType( 'array', $result );
-		$this->assertArrayHasKey( 'payment.url-success', $result );
-		$this->assertArrayHasKey( 'payment.url-failure', $result );
-		$this->assertArrayHasKey( 'payment.url-cancel', $result );
-		$this->assertArrayHasKey( 'payment.url-update', $result );
 	}
 
 

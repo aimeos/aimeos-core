@@ -10,20 +10,11 @@
 namespace Aimeos\MShop\Service\Provider\Payment;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Provider\Payment\PostPay.
- */
 class PostPayTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
@@ -39,12 +30,6 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -53,7 +38,7 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->assertEquals( 4, count( $this->object->getConfigBE() ) );
+		$this->assertEquals( 0, count( $this->object->getConfigBE() ) );
 	}
 
 
@@ -61,8 +46,7 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->checkConfigBE( array( 'payment.url-success' => 'testurl' ) );
 
-		$this->assertEquals( 4, count( $result ) );
-		$this->assertEquals( null, $result['payment.url-success'] );
+		$this->assertEquals( 0, count( $result ) );
 	}
 
 
