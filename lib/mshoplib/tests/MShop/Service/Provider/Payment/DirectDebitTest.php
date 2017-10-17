@@ -10,21 +10,12 @@
 namespace Aimeos\MShop\Service\Provider\Payment;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Provider\Payment\DirectDebit.
- */
 class DirectDebitTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $ordServItem;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$context = \TestHelperMShop::getContext();
@@ -40,12 +31,6 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -54,20 +39,15 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigBE()
 	{
-		$this->assertEquals( 4, count( $this->object->getConfigBE() ) );
+		$this->assertEquals( 0, count( $this->object->getConfigBE() ) );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$attributes = array(
-			'payment.url-success' => 'http://returnUrl'
-		);
+		$result = $this->object->checkConfigBE( array( 'payment.url-success' => 'http://returnUrl' ) );
 
-		$result = $this->object->checkConfigBE( $attributes );
-
-		$this->assertEquals( 4, count( $result ) );
-		$this->assertEquals( null, $result['payment.url-success'] );
+		$this->assertEquals( 0, count( $result ) );
 	}
 
 

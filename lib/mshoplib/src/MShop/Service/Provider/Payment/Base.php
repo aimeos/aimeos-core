@@ -42,46 +42,6 @@ abstract class Base
 	const FEAT_REFUND = 4;
 
 
-	private $beConfig = array(
-		'payment.url-success' => array(
-			'code' => 'payment.url-success',
-			'internalcode' => 'payment.url-success',
-			'label' => 'Shop URL customers are redirected to after successful payments',
-			'type' => 'string',
-			'internaltype' => 'string',
-			'default' => '',
-			'required' => false,
-		),
-		'payment.url-failure' => array(
-			'code' => 'payment.url-failure',
-			'internalcode' => 'payment.url-failure',
-			'label' => 'Shop URL customers are redirected to after failed payments',
-			'type' => 'string',
-			'internaltype' => 'string',
-			'default' => '',
-			'required' => false,
-		),
-		'payment.url-cancel' => array(
-			'code' => 'payment.url-cancel',
-			'internalcode' => 'payment.url-cancel',
-			'label' => 'Shop URL customers are redirected to after canceled payments',
-			'type' => 'string',
-			'internaltype' => 'string',
-			'default' => '',
-			'required' => false,
-		),
-		'payment.url-update' => array(
-			'code' => 'payment.url-update',
-			'internalcode' => 'payment.url-update',
-			'label' => 'Shop URL payment status updates from payment providers are sent to',
-			'type' => 'string',
-			'internaltype' => 'string',
-			'default' => '',
-			'required' => false,
-		),
-	);
-
-
 	/**
 	 * Checks the backend configuration attributes for validity.
 	 *
@@ -91,16 +51,7 @@ abstract class Base
 	 */
 	public function checkConfigBE( array $attributes )
 	{
-		$error = $this->checkConfig( $this->beConfig, $attributes );
-
-		foreach( $this->beConfig as $key => $value )
-		{
-			if( isset( $attributes[$key] ) && $value['type'] != gettype( $attributes[$key] ) ) {
-				$error[$key] = sprintf( 'The type of the configuration option with key "%1$s" must be "%2$s"', $key, $value['type'] );
-			}
-		}
-
-		return $error;
+		return [];
 	}
 
 
@@ -112,13 +63,7 @@ abstract class Base
 	 */
 	public function getConfigBE()
 	{
-		$list = [];
-
-		foreach( $this->beConfig as $key => $config ) {
-			$list[$key] = new \Aimeos\MW\Criteria\Attribute\Standard( $config );
-		}
-
-		return $list;
+		return [];
 	}
 
 
