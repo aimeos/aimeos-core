@@ -14,7 +14,7 @@ return array(
 	),
 
 	'product' => array(
-		'product/CNE' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Expresso', 'code' => 'CNE', 'config' => array( 'css-class' => 'top' ), 'status' => 1 ),
+		'product/CNE' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Expresso', 'code' => 'CNE', 'config' => array( 'css-class' => 'top', 'size' => 1 ), 'status' => 1 ),
 		'product/CNC' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Cappuccino', 'code' => 'CNC', 'config' => array( 'css-class' => 'sale' ), 'status' => 1 ),
 		'product/U:MD' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Monetary rebate', 'code' => 'U:MD', 'status' => 0 ),
 		'product/U:SD' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Shipping rebate', 'code' => 'U:SD', 'status' => 0 ),
