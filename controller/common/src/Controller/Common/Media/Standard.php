@@ -480,9 +480,13 @@ class Standard
 	{
 		$fs = $this->context->getFilesystemManager()->get( $fsname );
 
-		if( $oldpath !== '' && $oldpath !== $filepath && $fs->has( $oldpath ) ) {
-			$fs->rm( $oldpath );
+		try
+		{
+			if( $oldpath !== '' && $oldpath !== $filepath && $fs->has( $oldpath ) ) {
+				$fs->rm( $oldpath );
+			}
 		}
+		catch( \Aimeos\MW\Filesystem\Exception $e ) {} // continue if removing file fails
 
 		$fs->write( $filepath, $content );
 	}
