@@ -147,22 +147,6 @@ class PayPalExpress
 	{
 		parent::__construct( $context, $serviceItem );
 
-		$configParameters = array(
-			'paypalexpress.AccountEmail',
-			'paypalexpress.ApiUsername',
-			'paypalexpress.ApiPassword',
-			'paypalexpress.ApiSignature',
-		);
-
-		$config = $serviceItem->getConfig();
-
-		foreach( $configParameters as $param )
-		{
-			if( !isset( $config[$param] ) ) {
-				throw new \Aimeos\MShop\Service\Exception( sprintf( 'Configuration for "%1$s" is missing', $param ) );
-			}
-		}
-
 		$default = 'https://api-3t.paypal.com/nvp';
 		$this->apiendpoint = $this->getConfigValue( array( 'paypalexpress.ApiEndpoint' ), $default );
 	}
