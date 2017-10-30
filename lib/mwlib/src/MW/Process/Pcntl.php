@@ -166,9 +166,15 @@ class Pcntl implements Iface
 			ob_end_clean(); // avoid printing buffered messages of the parent again
 		}
 
-		try {
+		try
+		{
 			call_user_func_array( $fcn, $data );
-		} catch( \Exception $e ) {
+		}
+		catch( \Exception $e )
+		{
+			fwrite( STDERR, $e->getMessage() );
+			fwrite( STDERR, $e->getTraceAsString() );
+
 			return 1;
 		}
 
