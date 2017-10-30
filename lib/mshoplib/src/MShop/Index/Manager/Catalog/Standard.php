@@ -83,11 +83,23 @@ class Standard
 	{
 		parent::__construct( $context );
 
-		$site = $context->getLocale()->getSitePath();
+		$locale = $context->getLocale();
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/index/manager/sitemode', $level );
 
-		$this->replaceSiteMarker( $this->searchConfig['index.catalog.position'], 'mindca."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['index.catalogaggregate'], 'mindca_agg."siteid"', $site );
-		$this->replaceSiteMarker( $this->searchConfig['index.catalogcount'], 'mindca_cnt."siteid"', $site );
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['index.catalog.position'], 'mindca."siteid"', $siteIds );
+		$this->replaceSiteMarker( $this->searchConfig['index.catalogaggregate'], 'mindca_agg."siteid"', $siteIds );
+		$this->replaceSiteMarker( $this->searchConfig['index.catalogcount'], 'mindca_cnt."siteid"', $siteIds );
 	}
 
 
