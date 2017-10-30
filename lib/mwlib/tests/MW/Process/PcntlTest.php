@@ -39,9 +39,38 @@ class PcntlTest extends \PHPUnit\Framework\TestCase
 	{
 		$fcn = function() { throw new \Exception(); };
 
-		$object = new \Aimeos\MW\Process\Pcntl();
+		try
+		{
+			stream_filter_register( "redirect", "\Aimeos\MW\Process\DiscardFilter" );
+			$filter = stream_filter_prepend( STDERR, "redirect", STREAM_FILTER_WRITE );
 
-		$this->setExpectedException( '\Aimeos\MW\Process\Exception' );
-		$object->start( $fcn, [], true )->wait();
+			$object = new \Aimeos\MW\Process\Pcntl();
+			$object->start( $fcn, [], true )->wait();
+
+			stream_filter_remove( $filter );
+		}
+		catch( \Aimeos\MW\Process\Exception $e )
+		{
+			stream_filter_remove( $filter );
+			return;
+		}
+
+		$this->fail( 'Expected exception "\Aimeos\MW\Process\Exception" not thrown' );
+	}
+}
+
+
+
+class DiscardFilter extends \php_user_filter
+{
+	function filter( $in, $out, &$consumed, $closing )
+	{
+		while( $bucket = stream_bucket_make_writeable( $in ) )
+		{
+			$bucket->data = '';
+			$consumed += $bucket->datalen;
+			stream_bucket_append( $out, $bucket );
+		}
+		return PSFS_PASS_ON;
 	}
 }
