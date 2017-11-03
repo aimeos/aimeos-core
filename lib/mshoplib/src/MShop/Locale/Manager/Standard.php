@@ -692,8 +692,9 @@ class Standard
 	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
 	{
 		$stmt = $conn->create( $sql );
+		$level = \Aimeos\MW\Logger\Base::DEBUG;
 
-		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $stmt, \Aimeos\MW\Logger\Base::DEBUG );
+		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $stmt, $level, 'core/sql' );
 
 		return $stmt->execute();
 	}
