@@ -43,13 +43,4 @@ interface Iface
 	 * @return null
 	 */
 	public function clean( $task = null );
-
-	/**
-	 * Executes all tasks for the given database type.
-	 *
-	 * @param string $dbtype Name of the database type (mysql, etc.)
-	 * @return null
-	 * @deprecated 2016.05
-	 */
-	public function run( $dbtype );
 }

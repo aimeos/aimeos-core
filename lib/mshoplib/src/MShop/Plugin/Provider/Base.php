@@ -115,8 +115,6 @@ abstract class Base
 							$errors[$key] = sprintf( 'Not an integer number' ); continue 2;
 						}
 						break;
-					case 'decimal': // deprecated
-					case 'float': // deprecated
 					case 'number':
 						if( is_numeric( $attributes[$key] ) === false ) {
 							$errors[$key] = sprintf( 'Not a number' ); continue 2;

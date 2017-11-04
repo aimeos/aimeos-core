@@ -322,16 +322,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( $this->object->isModified() );
 	}
 
-	public function testGetSumPrice()
-	{
-		$price = $this->object->getSumPrice();
-
-		$this->assertEquals( $this->price->getValue() * 11, $price->getValue() );
-		$this->assertEquals( $this->price->getCosts() * 11, $price->getCosts() );
-		$this->assertEquals( $this->price->getRebate() * 11, $price->getRebate() );
-		$this->assertEquals( $this->price->getTaxRate(), $price->getTaxRate() );
-	}
-
 	public function testGetFlags()
 	{
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Product\Base::FLAG_NONE, $this->object->getFlags() );

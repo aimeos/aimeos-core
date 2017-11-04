@@ -130,18 +130,6 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 
 
 	/**
-	 * Executes all tasks for the given database type
-	 *
-	 * @param string $dbtype Name of the database type (mysql, etc.)
-	 * @deprecated 2016.05
-	 */
-	public function run( $dbtype )
-	{
-		$this->migrate();
-	}
-
-
-	/**
 	 * Runs the clean method of the given tasks and their dependencies
 	 *
 	 * @param array $tasknames List of task names
@@ -198,9 +186,7 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 				$this->migrateTasks( (array) $this->dependencies[$taskname], $stack );
 			}
 
-			if( isset( $this->tasks[$taskname] ) )
-			{
-				$this->tasks[$taskname]->run( $this->type );
+			if( isset( $this->tasks[$taskname] ) ) {
 				$this->tasks[$taskname]->migrate();
 			}
 

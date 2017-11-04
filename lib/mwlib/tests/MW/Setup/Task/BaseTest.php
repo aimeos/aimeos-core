@@ -70,12 +70,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testRun()
-	{
-		$this->object->run( 'mysql' );
-	}
-
-
 	public function testGetConnection()
 	{
 		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );

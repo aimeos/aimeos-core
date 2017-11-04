@@ -31,7 +31,6 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  *
  * @package MShop
  * @subpackage Plugin
- * @deprecated Use Reduction service decorator for each delivery option instead
  */
 class Shipping
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base

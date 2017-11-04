@@ -80,20 +80,6 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
-	 * Executes the task for the given database type.
-	 *
-	 * @param string $dbtype Database type string
-	 * @deprecated Use migrate() instead
-	 */
-	public function run( $dbtype )
-	{
-		if( $dbtype === 'mysql' && method_exists( $this, 'mysql' ) ) {
-			$this->mysql();
-		}
-	}
-
-
-	/**
 	 * Sets the associative list of connections with the resource name as key.
 	 *
 	 * @param array $conns Associative list of connections

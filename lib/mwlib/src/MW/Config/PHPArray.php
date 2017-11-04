@@ -160,26 +160,4 @@ class PHPArray
 
 		return $config;
 	}
-
-
-	/**
-	 * Merges a multi-dimensional array into another one
-	 *
-	 * @param array $left Array to be merged into
-	 * @param array $right Array to merge in
-	 * @deprecated Use array_replace_recursive() instead
-	 */
-	protected function merge( array $left, array $right )
-	{
-		foreach( $right as $key => $value )
-		{
-			if( isset( $left[$key] ) && is_array( $left[$key] ) && is_array( $value ) ) {
-				$left[$key] = $this->merge( $left[$key], $value );
-			} else {
-				$left[$key] = $value;
-			}
-		}
-
-		return $left;
-	}
 }
