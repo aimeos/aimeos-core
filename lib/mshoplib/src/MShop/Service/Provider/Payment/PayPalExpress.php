@@ -190,7 +190,7 @@ class PayPalExpress
 	 */
 	public function process( \Aimeos\MShop\Order\Item\Iface $order, array $params = [] )
 	{
-		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
+		$orderBaseItem = $this->getOrderBase( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 
 		$values = $this->getOrderDetails( $orderBaseItem );
 		$values['METHOD'] = 'SetExpressCheckout';
@@ -747,7 +747,7 @@ class PayPalExpress
 	protected function getOrderServiceItem( $baseid )
 	{
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
-		$basket = $this->getOrderBase( $baseid, \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
+		$basket = $this->getOrderBase( $baseid, \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 
 		return $basket->getService( $type, $this->getServiceItem()->getCode() );
 	}

@@ -42,48 +42,6 @@ abstract class Base
 
 
 	/**
-	 * Load/store no additional order information
-	 */
-	const PARTS_NONE = 0;
-
-	/**
-	 * Load/store order addresses
-	 * Only the addresses of the order will be loaded additionally to the base
-	 * order information.
-	 */
-	const PARTS_ADDRESS = 1;
-
-	/**
-	 * Load/store order coupons
-	 * Only the coupon information stored in the order will be loaded additionally
-	 * to the base order information.
-	 */
-	const PARTS_COUPON = 2;
-
-	/**
-	 * Load/store order products
-	 * Only the ordered products and their associated data of the order will be
-	 * loaded additionally to the base order information.
-	 */
-	const PARTS_PRODUCT = 4;
-
-	/**
-	 * Load/store order services
-	 * Only the services (delivery, payment, etc.) and their associated data of
-	 * the order will be loaded additionally to the base order information.
-	 */
-	const PARTS_SERVICE = 8;
-
-	/**
-	 * Load/store all order content
-	 * The complete order with all associated data will be loaded additionally
-	 * to the base order information. This is the same as the basket content
-	 * of the customer when purchased.
-	 */
-	const PARTS_ALL = 15;
-
-
-	/**
 	 * Returns the current basket of the customer.
 	 *
 	 * @param string $type Basket type if a customer can have more than one basket
@@ -478,21 +436,21 @@ abstract class Base
 	{
 		$products = $coupons = $addresses = $services = [];
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT
-			|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
+			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON
 		) {
 			$products = $this->loadProducts( $id, false );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
 			$coupons = $this->loadCoupons( $id, false, $products );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) {
 			$addresses = $this->loadAddresses( $id, false );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) {
 			$services = $this->loadServices( $id, false );
 		}
 
@@ -517,15 +475,15 @@ abstract class Base
 	{
 		$products = $addresses = $services = [];
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT ) {
 			$products = $this->loadProducts( $id, true );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) {
 			$addresses = $this->loadAddresses( $id, true );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) {
 			$services = $this->loadServices( $id, true );
 		}
 

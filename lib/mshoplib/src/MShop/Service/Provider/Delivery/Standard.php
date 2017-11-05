@@ -282,7 +282,7 @@ class Standard
 	 */
 	public function buildXML( \Aimeos\MShop\Order\Item\Iface $invoice )
 	{
-		$base = $this->getOrderBase( $invoice->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
+		$base = $this->getOrderBase( $invoice->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 
 		try
 		{

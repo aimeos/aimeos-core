@@ -514,7 +514,7 @@ abstract class Base
 	 * @param integer $parts Bitmap of the basket parts that should be loaded
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket, optional with addresses, products, services and coupons
 	 */
-	protected function getOrderBase( $baseId, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE )
+	protected function getOrderBase( $baseId, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
 	{
 		return \Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->load( $baseId, $parts );
 	}
@@ -538,7 +538,7 @@ abstract class Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object with associated items
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE )
+	protected function saveOrderBase( \Aimeos\MShop\Order\Item\Base\Iface $base, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE )
 	{
 		\Aimeos\MShop\Factory::createManager( $this->context, 'order/base' )->store( $base, $parts );
 	}

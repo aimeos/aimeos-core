@@ -217,7 +217,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$orderItem = $this->object->updateSync( $response );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $orderItem );
 
-		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
+		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 		$attributes = $refOrderBase->getService( 'payment', 'paypalexpress' )->getAttributes();
 		$attrManager = $orderBaseManager->getSubManager( 'service' )->getSubManager( 'attribute' );
 

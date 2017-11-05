@@ -23,35 +23,34 @@ abstract class Base
 	implements \Aimeos\MShop\Order\Item\Base\Iface
 {
 	/**
-	 * Check no basket content.
-	 * Don't check if the basket is ready for checkout or ordering.
+	 * Check and load/store only basic basket content
 	 */
 	const PARTS_NONE = 0;
 
 	/**
-	 * Check basket for products.
-	 * Checks if the basket complies to the product related requirements.
+	 * Check and load/store basket with addresses
 	 */
-	const PARTS_PRODUCT = 1;
+	const PARTS_ADDRESS = 1;
 
 	/**
-	 * Check basket for addresses.
-	 * Checks if the basket complies to the address related requirements.
+	 * Load/store basket with coupons
 	 */
-	const PARTS_ADDRESS = 2;
+	const PARTS_COUPON = 2;
 
 	/**
-	 * Check basket for delivery/payment.
-	 * Checks if the basket complies to the delivery/payment related
-	 * requirements.
+	 * Check and load/store basket with products
 	 */
-	const PARTS_SERVICE = 4;
+	const PARTS_PRODUCT = 4;
 
 	/**
-	 * Check basket for all parts.
-	 * This constant matches all other part constants.
+	 * Check and load/store basket with delivery/payment
 	 */
-	const PARTS_ALL = 7;
+	const PARTS_SERVICE = 8;
+
+	/**
+	 * Check and load/store basket with all parts.
+	 */
+	const PARTS_ALL = 15;
 
 
 	protected $bdata;

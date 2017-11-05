@@ -917,7 +917,7 @@ class Standard extends Base
 	 * @param boolean $default True to use default criteria, false for no limitation
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket including all items
 	 */
-	public function load( $id, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, $fresh = false, $default = false )
+	public function load( $id, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, $fresh = false, $default = false )
 	{
 		$search = $this->getObject()->createSearch( $default );
 		$expr = [
@@ -990,25 +990,25 @@ class Standard extends Base
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 */
-	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL )
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL )
 	{
 		$basket = $this->getObject()->saveItem( $basket );
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_PRODUCT
-			|| $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT
+			|| $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON
 		) {
 			$this->storeProducts( $basket );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_COUPON ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_COUPON ) {
 			$this->storeCoupons( $basket );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS ) {
 			$this->storeAddresses( $basket );
 		}
 
-		if( $parts & \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE ) {
+		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) {
 			$this->storeServices( $basket );
 		}
 	}

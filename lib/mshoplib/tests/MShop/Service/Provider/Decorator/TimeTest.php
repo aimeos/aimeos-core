@@ -129,7 +129,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 
 		$this->mockProvider->expects( $this->once() )->method( 'getConfigFE' )->will( $this->returnValue( [] ) );
 
-		$basket = $orderBaseManager->load( $order->getBaseId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_SERVICE );
+		$basket = $orderBaseManager->load( $order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 		$config = $this->object->getConfigFE( $basket );
 
 		$this->assertRegExp( '/[0-2][0-9]:[0-5][0-9]/', $config['time.hourminute']->getDefault() );

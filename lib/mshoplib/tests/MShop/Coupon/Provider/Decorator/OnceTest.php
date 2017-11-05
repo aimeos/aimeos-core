@@ -30,7 +30,7 @@ class OnceTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order base with price "4800.00" found' );
 		}
 
-		$this->orderBase = $orderBaseManager->load( $basket->getId(), \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ADDRESS );
+		$this->orderBase = $orderBaseManager->load( $basket->getId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}
 
 

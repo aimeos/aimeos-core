@@ -68,7 +68,7 @@ interface Iface
 	 * @param boolean $default True to use default criteria, false for no limitation
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Basket including all items
 	 */
-	public function load( $baseId, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL, $fresh = false, $default = false );
+	public function load( $baseId, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL, $fresh = false, $default = false );
 
 	/**
 	 * Saves the complete basket to the storage including the items attached.
@@ -77,5 +77,5 @@ interface Iface
 	 * @param integer $parts Bitmap of the basket parts that should be stored
 	 * @return null
 	 */
-	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Manager\Base\Base::PARTS_ALL );
+	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL );
 }
