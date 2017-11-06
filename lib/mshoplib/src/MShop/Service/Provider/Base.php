@@ -205,6 +205,18 @@ abstract class Base
 
 
 	/**
+	 * Updates the order status sent by payment gateway notifications
+	 *
+	 * @param \Psr\Http\Message\ServerRequestInterface Request object
+	 * @return \Psr\Http\Message\ResponseInterface Response object
+	 */
+	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response )
+	{
+		return $response->withStatus( 501, 'Not implemented' );
+	}
+
+
+	/**
 	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
 	 * @param array $params Associative list of request parameters

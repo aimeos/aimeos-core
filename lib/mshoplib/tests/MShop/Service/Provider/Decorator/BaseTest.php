@@ -32,7 +32,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'calcPrice', 'checkConfigBE', 'checkConfigFE', 'getConfigBE',
 				'getConfigFE', 'injectGlobalConfigBE', 'isAvailable', 'isImplemented', 'query',
 				'cancel', 'capture', 'process', 'refund', 'setCommunication', 'setConfigFE',
-				'updateAsync', 'updateSync' ) )
+				'updateAsync', 'updatePush', 'updateSync' ) )
 			->getMock();
 
 		$this->object = new TestBase( $this->mock, $this->context, $item );
@@ -195,6 +195,19 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'updateAsync' );
 
 		$this->object->updateAsync();
+	}
+
+
+	public function testUpdatePush()
+	{
+		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
+		$response = $this->getMockBuilder( '\Psr\Http\Message\ResponseInterface' )->getMock();
+
+		$this->mock->expects( $this->once() )->method( 'updatePush' )->will( $this->returnValue( $response ) );
+
+		$result = $this->object->updatePush( $request, $response );
+
+		$this->assertInstanceOf( '\Psr\Http\Message\ResponseInterface', $result );
 	}
 
 

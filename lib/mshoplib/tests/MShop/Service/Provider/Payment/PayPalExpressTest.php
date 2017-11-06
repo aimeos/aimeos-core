@@ -15,6 +15,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	private $context;
 	private $object;
 	private $serviceItem;
+	private $orderMock;
 	private $order;
 
 
@@ -50,13 +51,13 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$orderMock = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
+		$this->orderMock = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
 
 		$this->context->getConfig()->set( 'mshop/order/manager/name', 'MockPayPal' );
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\MockPayPal', $orderMock );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\MockPayPal', $this->orderMock );
 	}
 
 
@@ -98,8 +99,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $result['paypalexpress.AccountEmail'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiPassword'] );
 		$this->assertEquals( null, $result['paypalexpress.ApiSignature'] );
-		$this->assertEquals( null, $result['payment.url-cancel'] );
-		$this->assertEquals( null, $result['payment.url-success'] );
 	}
 
 	public function testIsImplemented()
@@ -165,18 +164,22 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$com->addRule( $what, $error, $success );
 		$this->object->setCommunication( $com );
 
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-
-		$response = array(
+		$params = array(
 			'token' => 'UT-99999999',
 			'PayerID' => 'PaypalUnitTestBuyer',
 			'orderid' => $this->order->getId()
 		);
 
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $this->object->updateSync( $response ) );
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $this->object->updateSync( $params ) );
+	}
 
+
+	public function testUpdatePush()
+	{
 		//IPN Call
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
+		$orderBaseManager = $orderManager->getSubManager( 'base' );
+
 		$price = $orderBaseManager->getItem( $this->order->getBaseId() )->getPrice();
 		$amount = $price->getValue() + $price->getCosts();
 		$what = array(
@@ -197,7 +200,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->object->setCommunication( $com );
 
 
-		$response = array(
+		$params = array(
 			'residence_country' => 'US',
 			'receiver_email' => 'selling2@metaways.de',
 			'address_city' => 'San+Jose',
@@ -214,8 +217,22 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			'111111111' => 'Completed'
 		);
 
-		$orderItem = $this->object->updateSync( $response );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $orderItem );
+		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
+		$response = $this->getMockBuilder( '\Psr\Http\Message\ResponseInterface' )->getMock();
+
+		$request->expects( $this->once() )->method( 'getQueryParams' )->will( $this->returnValue( $params ) );
+		$response->expects( $this->once() )->method( 'withStatus' )
+			->will( $this->returnValue( $response ) )
+			->with( $this->equalTo( 200 ) );
+
+		$this->orderMock->expects( $this->once() )->method( 'saveItem' )
+			->with( $this->callback( function( $subject ) {
+				return $subject->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
+			} )
+		);
+
+		$result = $this->object->updatePush( $request, $response );
+		$this->assertInstanceOf( '\Psr\Http\Message\ResponseInterface', $result );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 		$attributes = $refOrderBase->getService( 'payment', 'paypalexpress' )->getAttributes();
@@ -234,8 +251,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		foreach( $testData as $key => $value ) {
 			$this->assertEquals( $attributeList[$key]->getValue(), $testData[$key] );
 		}
-
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $orderItem->getPaymentStatus() );
 	}
 
 

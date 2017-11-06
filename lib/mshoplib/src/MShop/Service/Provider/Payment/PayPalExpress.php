@@ -353,36 +353,26 @@ class PayPalExpress
 
 
 	/**
-	 * Updates the orders for which status updates were received via direct requests (like HTTP).
+	 * Updates the order status sent by payment gateway notifications
 	 *
-	 * @param array $params Associative list of request parameters
-	 * @param string|null $body Information sent within the body of the request
-	 * @param string|null &$response Response body for notification requests
-	 * @param array &$header Response headers for notification requests
-	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
-	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
+	 * @param \Psr\Http\Message\ServerRequestInterface Request object
+	 * @return \Psr\Http\Message\ResponseInterface Response object
 	 */
-	public function updateSync( array $params = [], $body = null, &$response = null, array &$header = [] )
+	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response )
 	{
-		if( isset( $params['token'] ) && isset( $params['PayerID'] ) && isset( $params['orderid'] ) ) {
-			return $this->doExpressCheckoutPayment( $params );
-		}
+		$params = $request->getQueryParams();
 
-		//tid from ipn
-		if( !isset( $params['txn_id'] ) ) {
-			return null;
+		if( !isset( $params['txn_id'] ) ) { //tid from ipn
+			return $response->withStatus( 400, 'PayPal Express: Parameter "txn_id" is missing' );
 		}
 
 		$urlQuery = http_build_query( $params, '', '&' );
 
 		//validation
-		$response = $this->getCommunication()->transmit( $this->getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
+		$result = $this->getCommunication()->transmit( $this->getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
 
-
-		if( $response !== 'VERIFIED' )
-		{
-			$msg = sprintf( 'PayPal Express: Invalid request "%1$s"', $urlQuery );
-			throw new \Aimeos\MShop\Service\Exception( $msg );
+		if( $result !== 'VERIFIED' ) {
+			return $response->withStatus( 400, sprintf( 'PayPal Express: Invalid request "%1$s"', $urlQuery ) );
 		}
 
 
@@ -406,38 +396,26 @@ class PayPalExpress
 		$this->setPaymentStatus( $order, $status );
 		$this->saveOrder( $order );
 
-		return $order;
+		return $response->withStatus( 200 );
 	}
 
 
 	/**
-	 * Checks what features the payment provider implements.
+	 * Updates the orders for which status updates were received via direct requests (like HTTP).
 	 *
-	 * @param integer $what Constant from abstract class
-	 * @return boolean True if feature is available in the payment provider, false if not
+	 * @param array $params Associative list of request parameters
+	 * @param string|null $body Information sent within the body of the request
+	 * @param string|null &$response Response body for notification requests
+	 * @param array &$header Response headers for notification requests
+	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
+	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
 	 */
-	public function isImplemented( $what )
+	public function updateSync( array $params = [], $body = null, &$response = null, array &$header = [] )
 	{
-		switch( $what )
-		{
-			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE:
-			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY:
-			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL:
-			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_REFUND:
-				return true;
+		if( !isset( $params['token'] ) || !isset( $params['PayerID'] ) || !isset( $params['orderid'] ) ) {
+			throw new \Aimeos\MShop\Service\Exception( 'Parameter "token" "PayerID" or "orderid" missing' );
 		}
 
-		return false;
-	}
-
-	/**
-	 * Begins paypalexpress transaction and saves transaction id.
-	 *
-	 * @param mixed $params Update information whose format depends on the payment provider
-	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
-	 */
-	protected function doExpressCheckoutPayment( $params )
-	{
 		$order = $this->getOrder( $params['orderid'] );
 		$baseItem = $this->getOrderBase( $order->getBaseId() );
 		$type = \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_PAYMENT;
@@ -473,6 +451,27 @@ class PayPalExpress
 		$this->saveOrder( $order );
 
 		return $order;
+	}
+
+
+	/**
+	 * Checks what features the payment provider implements.
+	 *
+	 * @param integer $what Constant from abstract class
+	 * @return boolean True if feature is available in the payment provider, false if not
+	 */
+	public function isImplemented( $what )
+	{
+		switch( $what )
+		{
+			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CAPTURE:
+			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY:
+			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_CANCEL:
+			case \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_REFUND:
+				return true;
+		}
+
+		return false;
 	}
 
 

@@ -135,7 +135,16 @@ interface Iface
 
 
 	/**
-	 * Updates the orders for which status updates were received via direct requests (like HTTP).
+	 * Updates the order status sent by payment gateway notifications
+	 *
+	 * @param \Psr\Http\Message\ServerRequestInterface Request object
+	 * @return \Psr\Http\Message\ResponseInterface Response object
+	 */
+	public function updatePush( \Psr\Http\Message\ServerRequestInterface $request, \Psr\Http\Message\ResponseInterface $response );
+
+
+	/**
+	 * Updates the orders for whose status updates have been received by the confirmation page
 	 *
 	 * @param array $params Associative list of request parameters
 	 * @param string|null $body Information sent within the body of the request
