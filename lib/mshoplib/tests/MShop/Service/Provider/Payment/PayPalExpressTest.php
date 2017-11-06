@@ -225,11 +225,11 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( $response ) )
 			->with( $this->equalTo( 200 ) );
 
-		$this->orderMock->expects( $this->once() )->method( 'saveItem' )
-			->with( $this->callback( function( $subject ) {
-				return $subject->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
-			} )
-		);
+		$cmpFcn = function( $subject ) {
+			return $subject->getPaymentStatus() === \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED;
+		};
+
+		$this->orderMock->expects( $this->once() )->method( 'saveItem' )->with( $this->callback( $cmpFcn ) );
 
 		$result = $this->object->updatePush( $request, $response );
 		$this->assertInstanceOf( '\Psr\Http\Message\ResponseInterface', $result );
