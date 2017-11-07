@@ -213,10 +213,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$this->mock->expects( $this->once() )->method( 'updateSync' );
+		$orderItem = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
 
-		$response = null; $header = [];
-		$this->object->updateSync( [], 'body', $response, $header );
+		$this->mock->expects( $this->once() )->method( 'updateSync' )->will( $this->returnValue( $orderItem ) );
+
+		$result = $this->object->updateSync( $request, $orderItem );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $result );
 	}
 }
 

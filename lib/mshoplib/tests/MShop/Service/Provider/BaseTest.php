@@ -93,10 +93,12 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$response = null; $header = [];
-		$result = $this->object->updateSync( [], 'body', $response, $header );
+		$orderItem = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
 
-		$this->assertEquals( null, $result );
+		$result = $this->object->updateSync( $request, $orderItem );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $result );
 	}
 
 

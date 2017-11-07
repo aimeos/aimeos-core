@@ -166,11 +166,19 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$params = array(
 			'token' => 'UT-99999999',
-			'PayerID' => 'PaypalUnitTestBuyer',
-			'orderid' => $this->order->getId()
+			'PayerID' => 'PaypalUnitTestBuyer'
 		);
 
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $this->object->updateSync( $params ) );
+		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
+
+		$request->expects( $this->once() )->method( 'getAttributes' )->will( $this->returnValue( [] ) );
+		$request->expects( $this->once() )->method( 'getParsedBody' )->will( $this->returnValue( [] ) );
+		$request->expects( $this->once() )->method( 'getQueryParams' )->will( $this->returnValue( $params ) );
+
+		$result = $this->object->updateSync( $request, $this->order );
+
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $result );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getPaymentStatus() );
 	}
 
 
@@ -212,7 +220,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		);
 		$testData = array(
 			'TRANSACTIONID' => '111111111',
-			'PAYERID' => 'PaypalUnitTestBuyer',
 			'111111110' => 'Pending',
 			'111111111' => 'Completed'
 		);

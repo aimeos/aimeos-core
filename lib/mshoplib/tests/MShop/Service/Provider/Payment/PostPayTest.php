@@ -52,13 +52,13 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateSync()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$order = $manager->createItem();
+		$orderItem = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
+		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
 
-		$this->object->expects( $this->once() )->method( 'getOrder' )->will( $this->returnValue( $order ) );
-		$this->object->updateSync( array( 'orderid' => -1 ) );
+		$result = $this->object->updateSync( $request, $orderItem );
 
-		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $order->getPaymentStatus() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $result );
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getPaymentStatus() );
 	}
 
 

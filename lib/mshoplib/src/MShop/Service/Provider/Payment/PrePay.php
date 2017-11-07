@@ -31,29 +31,25 @@ class PrePay
 	{
 		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
 		$this->saveOrder( $order );
+
+		return $order;
 	}
 
 
 	/**
-	 * Updates the orders for which status updates were received via direct requests (like HTTP).
+	 * Updates the orders for whose status updates have been received by the confirmation page
 	 *
-	 * @param array $params Associative list of request parameters
-	 * @param string|null $body Information sent within the body of the request
-	 * @param string|null &$response Response body for notification requests
-	 * @param array &$header Response headers for notification requests
-	 * @return \Aimeos\MShop\Order\Item\Iface|null Order item if update was successful, null if the given parameters are not valid for this provider
-	 * @throws \Aimeos\MShop\Service\Exception If updating one of the orders failed
+	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object with parameters and request body
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order item that should be updated
+	 * @return \Aimeos\MShop\Order\Item\Iface Updated order item
+	 * @throws \Aimeos\MShop\Service\Exception If updating the orders failed
 	 */
-	public function updateSync( array $params = [], $body = null, &$response = null, array &$header = [] )
+	public function updateSync( \Psr\Http\Message\ServerRequestInterface $request, \Aimeos\MShop\Order\Item\Iface $order )
 	{
-		if( isset( $params['orderid'] ) )
-		{
-			$order = $this->getOrder( $params['orderid'] );
-			$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
-			$this->saveOrder( $order );
+		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+		$this->saveOrder( $order );
 
-			return $order;
-		}
+		return $order;
 	}
 
 
