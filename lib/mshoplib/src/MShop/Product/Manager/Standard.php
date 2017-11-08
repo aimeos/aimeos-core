@@ -148,9 +148,22 @@ class Standard
 		$this->setResourceName( 'db-product' );
 
 		$date = date( 'Y-m-d H:i:00' );
-		$sites = $context->getLocale()->getSitePath();
+		$locale = $context->getLocale();
 
-		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli_cs."siteid"', $sites, ':site' );
+		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
+		$level = $context->getConfig()->get( 'mshop/product/manager/sitemode', $level );
+
+		$siteIds = [$locale->getSiteId()];
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_PATH ) {
+			$siteIds = array_merge( $siteIds, $locale->getSitePath() );
+		}
+
+		if( $level & \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE ) {
+			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
+		}
+
+		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli_cs."siteid"', $siteIds, ':site' );
 		$this->searchConfig['product.contains'] = str_replace( ':date', $date, $this->searchConfig['product.contains'] );
 	}
 
