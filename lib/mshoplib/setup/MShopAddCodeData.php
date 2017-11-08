@@ -40,7 +40,7 @@ class MShopAddCodeData extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		// executed by tasks in sub-directories for specific sites
 	}

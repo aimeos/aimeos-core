@@ -55,7 +55,7 @@ class ProductWarehouseAddLabelStatus extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->msg( sprintf( 'Adding label and status columns for product warehouse' ), 0 );
 		$this->status( '' );

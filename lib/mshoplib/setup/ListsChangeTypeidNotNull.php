@@ -99,7 +99,7 @@ class ListsChangeTypeidNotNull
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->msg( 'Changing typeid to not allow NULL values', 0 );
 		$this->status( '' );

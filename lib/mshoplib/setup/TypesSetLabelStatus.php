@@ -121,7 +121,7 @@ class TypesSetLabelStatus extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->msg( sprintf( 'Setting label and status values' ), 0 );
 		$this->status( '' );

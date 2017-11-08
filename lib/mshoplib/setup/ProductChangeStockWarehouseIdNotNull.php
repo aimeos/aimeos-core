@@ -56,7 +56,7 @@ class ProductChangeStockWarehouseIdNotNull extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$table = 'mshop_product_stock';
 		$this->msg( sprintf( 'Changing warehouseid column in %1$s', $table ), 0 );

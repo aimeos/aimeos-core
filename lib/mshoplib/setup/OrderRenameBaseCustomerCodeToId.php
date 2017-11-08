@@ -16,7 +16,7 @@ namespace Aimeos\MW\Setup\Task;
 class OrderRenameBaseCustomerCodeToId extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
-		'mshop_order_base' => 
+		'mshop_order_base' =>
 			'ALTER TABLE "mshop_order_base" CHANGE "customercode" "customerid" VARCHAR(32) NOT NULL'
 	);
 
@@ -46,7 +46,7 @@ class OrderRenameBaseCustomerCodeToId extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->process( $this->mysql );
 	}
@@ -75,5 +75,5 @@ class OrderRenameBaseCustomerCodeToId extends \Aimeos\MW\Setup\Task\Base
 				$this->status( 'OK' );
 			}
 		}
-	}	
+	}
 }

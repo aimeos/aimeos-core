@@ -16,11 +16,11 @@ namespace Aimeos\MW\Setup\Task;
 class OrderRenameBaseProductAmountToQuantity extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
-		'mshop_order_base_product' => 
+		'mshop_order_base_product' =>
 			'ALTER TABLE "mshop_order_base_product" CHANGE "amount" "quantity" INTEGER NOT NULL'
 	);
-	
-	
+
+
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
@@ -30,8 +30,8 @@ class OrderRenameBaseProductAmountToQuantity extends \Aimeos\MW\Setup\Task\Base
 	{
 		return array( 'OrderRenameTables' );
 	}
-	
-	
+
+
 	/**
 	 * Returns the list of task names which depends on this task.
 	 *
@@ -41,17 +41,17 @@ class OrderRenameBaseProductAmountToQuantity extends \Aimeos\MW\Setup\Task\Base
 	{
 		return array( 'TablesCreateMShop' );
 	}
-	
-	
+
+
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->process( $this->mysql );
 	}
-	
-	
+
+
 	/**
 	 * Renames column amount to quantity if amount exists.
 	 *
@@ -60,11 +60,11 @@ class OrderRenameBaseProductAmountToQuantity extends \Aimeos\MW\Setup\Task\Base
 	protected function process( array $stmts )
 	{
 		$this->msg( 'Renaming order base product amount to quantity', 0 ); $this->status( '' );
-	
+
 		foreach( $stmts as $table => $stmt )
 		{
 			$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
-		
+
 			if( $this->schema->tableExists( $table ) && $this->schema->columnExists( $table, 'amount' ) === true )
 			{
 				$this->execute( $stmt );
@@ -75,5 +75,5 @@ class OrderRenameBaseProductAmountToQuantity extends \Aimeos\MW\Setup\Task\Base
 				$this->status( 'OK' );
 			}
 		}
-	}	
+	}
 }

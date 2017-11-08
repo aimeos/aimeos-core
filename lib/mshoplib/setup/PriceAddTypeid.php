@@ -50,7 +50,7 @@ class PriceAddTypeid extends \Aimeos\MW\Setup\Task\Base
 	/**
 	 * Executes the task for MySQL databases.
 	 */
-	protected function mysql()
+	public function migrate()
 	{
 		$this->msg( 'Adding typeid column to price table', 0 ); $this->status( '' );
 
