@@ -386,23 +386,24 @@ abstract class Base
 	 */
 	public function getService( $type, $code = null )
 	{
-		if( !isset( $this->services[$type] ) ) {
-			return [];
-		}
-
-		if( $code !== null )
+		if( isset( $this->services[$type] ) )
 		{
-			foreach( $this->services[$type] as $service )
+			if( $code !== null )
 			{
-				if( $service->getCode() === $code ) {
-					return $service;
+				foreach( $this->services[$type] as $service )
+				{
+					if( $service->getCode() === $code ) {
+						return $service;
+					}
 				}
+
+				throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service not available' ) );
 			}
 
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Service not available' ) );
+			return $this->services[$type];
 		}
 
-		return $this->services[$type];
+		return [];
 	}
 
 
