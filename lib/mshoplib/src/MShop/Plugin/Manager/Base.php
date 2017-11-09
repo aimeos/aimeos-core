@@ -21,16 +21,19 @@ namespace Aimeos\MShop\Plugin\Manager;
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 {
+	private $plugins = [];
+
 	/**
 	 * Returns the plugin provider which is responsible for the plugin item.
 	 *
 	 * @param \Aimeos\MShop\Plugin\Item\Iface $item Plugin item object
+	 * @param string $type Plugin type code
 	 * @return \Aimeos\MShop\Plugin\Provider\Iface Returns the decoratad plugin provider object
 	 * @throws \Aimeos\MShop\Plugin\Exception If provider couldn't be found
 	 */
-	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item )
+	public function getProvider( \Aimeos\MShop\Plugin\Item\Iface $item, $type )
 	{
-		$type = ucwords( $item->getType() );
+		$type = ucwords( $type );
 		$names = explode( ',', $item->getProvider() );
 
 		if( ctype_alnum( $type ) === false ) {
@@ -90,6 +93,39 @@ abstract class Base
 		$provider = $this->addPluginDecorators( $item, $provider, $decorators );
 
 		return $provider->setObject( $provider );
+	}
+
+
+	/**
+	 * Registers plugins to the given publisher.
+	 *
+	 * @param \Aimeos\MW\Observer\Publisher\Iface $publisher Publisher object
+	 * @param string $type Unique plugin type code
+	 */
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, $type )
+	{
+		if( !isset( $this->plugins[$type] ) )
+		{
+			$search = $this->getObject()->createSearch( true );
+
+			$expr = array(
+				$search->compare( '==', 'plugin.type.code', $type ),
+				$search->getConditions(),
+			);
+
+			$search->setConditions( $search->combine( '&&', $expr ) );
+			$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
+
+			$this->plugins[$type] = [];
+
+			foreach( $this->getObject()->searchItems( $search ) as $item ) {
+				$this->plugins[$type][$item->getId()] = $this->getProvider( $item, $type );
+			}
+		}
+
+		foreach( $this->plugins[$type] as $plugin ) {
+			$plugin->register( $publisher );
+		}
 	}
 
 

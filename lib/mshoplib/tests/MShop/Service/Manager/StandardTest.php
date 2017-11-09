@@ -244,14 +244,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$item->setProvider( 'Standard,Example' );
-		$provider = $this->object->getProvider( $item );
+		$provider = $this->object->getProvider( $item, 'delivery' );
 
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Service\\Provider\\Iface', $provider );
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Example', $provider );
 
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
-		$this->object->getProvider( $this->object->createItem() );
+		$this->object->getProvider( $this->object->createItem(), 'payment' );
 	}
 
 

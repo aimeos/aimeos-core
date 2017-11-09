@@ -22,8 +22,6 @@ class Standard
 	extends \Aimeos\MShop\Plugin\Manager\Base
 	implements \Aimeos\MShop\Plugin\Manager\Iface
 {
-	private $plugins = [];
-
 	private $searchConfig = array(
 		'plugin.id' => array(
 			'label' => 'ID',
@@ -284,39 +282,6 @@ class Standard
 
 
 	/**
-	 * Registers plugins to the given publisher.
-	 *
-	 * @param \Aimeos\MW\Observer\Publisher\Iface $publisher Publisher object
-	 * @param string $type Unique plugin type code
-	 */
-	public function register( \Aimeos\MW\Observer\Publisher\Iface $publisher, $type )
-	{
-		if( !isset( $this->plugins[$type] ) )
-		{
-			$search = $this->getObject()->createSearch( true );
-
-			$expr = array(
-				$search->compare( '==', 'plugin.type.code', $type ),
-				$search->getConditions(),
-			);
-
-			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSortations( array( $search->sort( '+', 'plugin.position' ) ) );
-
-			$this->plugins[$type] = [];
-
-			foreach( $this->getObject()->searchItems( $search ) as $item ) {
-				$this->plugins[$type][$item->getId()] = $this->getProvider( $item );
-			}
-		}
-
-		foreach( $this->plugins[$type] as $plugin ) {
-			$plugin->register( $publisher );
-		}
-	}
-
-
-	/**
 	 * Saves a new or modified plugin to the storage.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Plugin item
@@ -483,8 +448,6 @@ class Standard
 				$path = 'mshop/plugin/manager/standard/newid';
 				$item->setId( $this->newId( $conn, $path ) );
 			}
-
-			$this->plugins[$id] = $item;
 
 			$dbm->release( $conn, $dbname );
 		}

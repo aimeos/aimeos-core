@@ -33,7 +33,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 
-		$serviceProvider = $servManager->getProvider( $item );
+		$serviceProvider = $servManager->getProvider( $item, $item->getType() );
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Example( $serviceProvider, $context, $item );
 	}
 
@@ -105,7 +105,7 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 
 	public function testIsAvailable()
 	{
-		$orderBaseManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->getSubManager( 'base' );
+		$orderBaseManager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base' );
 		$localeManager = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 
 		$localeItem = $localeManager->createItem();

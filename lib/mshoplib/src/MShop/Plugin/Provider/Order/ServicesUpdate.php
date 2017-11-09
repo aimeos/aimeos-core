@@ -111,7 +111,9 @@ class ServicesUpdate
 			{
 				if( isset( $result[$service->getServiceId()] ) )
 				{
-					$provider = $serviceManager->getProvider( $result[$service->getServiceId()] );
+					$serviceItem = $result[$service->getServiceId()];
+
+					$provider = $serviceManager->getProvider( $serviceItem, $serviceItem->getType() );
 
 					if( $provider->isAvailable( $order ) )
 					{

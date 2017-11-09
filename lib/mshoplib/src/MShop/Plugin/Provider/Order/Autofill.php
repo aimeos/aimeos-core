@@ -237,7 +237,7 @@ class Autofill
 
 		foreach( $result as $item )
 		{
-			$provider = $serviceManager->getProvider( $item );
+			$provider = $serviceManager->getProvider( $item, $item->getType() );
 
 			if( $provider->isAvailable( $order ) === true )
 			{
