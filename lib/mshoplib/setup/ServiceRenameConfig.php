@@ -16,56 +16,103 @@ namespace Aimeos\MW\Setup\Task;
 class ServiceRenameConfig extends \Aimeos\MW\Setup\Task\Base
 {
 	private $mysql = array(
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"project"\', \'"default.project"\')
-			WHERE ms."provider" = \'Default\' AND "config" LIKE \'%"project"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'delivery\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'Default\' AND "config" LIKE \'%"project"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'delivery\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"url"\', \'"default.url"\')
-			WHERE ms."provider" = \'Default\' AND "config" LIKE \'%"url"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'delivery\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'Default\' AND "config" LIKE \'%"url"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'delivery\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"username"\', \'"default.username"\')
-			WHERE ms."provider" = \'Default\' AND "config" LIKE \'%"username"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'delivery\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'Default\' AND "config" LIKE \'%"username"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'delivery\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"password"\', \'"default.password"\')
-			WHERE ms."provider" = \'Default\' AND "config" LIKE \'%"password"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'delivery\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'Default\' AND "config" LIKE \'%"password"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'delivery\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"ssl"\', \'"default.ssl"\')
-			WHERE ms."provider" = \'Default\' AND "config" LIKE \'%"ssl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'delivery\'',
+			WHERE "provider" = \'Default\' AND "config" LIKE \'%"ssl"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'delivery\'
+			)
+		',
 
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"ApiUsername"\', \'"paypalexpress.ApiUsername"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"ApiUsername"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"ApiUsername"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"ApiPassword"\', \'"paypalexpress.ApiPassword"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"ApiPassword"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"ApiPassword"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"ApiSignature"\', \'"paypalexpress.ApiSignature"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"ApiSignature"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"ApiSignature"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"ApiEndpoint"\', \'"paypalexpress.ApiEndpoint"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"ApiEndpoint"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"ApiEndpoint"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"ReturnUrl"\', \'"payment.url-success"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"ReturnUrl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"ReturnUrl"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"CancelUrl"\', \'"payment.url-cancel"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"CancelUrl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"CancelUrl"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"PaymentAction"\', \'"paypalexpress.PaymentAction"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"PaymentAction"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"PaymentAction"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"PaypalUrl"\', \'"paypalexpress.PaypalUrl"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"PaypalUrl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"PaypalUrl"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'_express-checkout&TOKEN="\', \'_express-checkout&useraction=commit&token=%1$s"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"paypalexpress.PaypalUrl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"paypalexpress.PaypalUrl"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'_express-checkout&token="\', \'_express-checkout&useraction=commit&token=%1$s"\')
-			WHERE ms."provider" = \'PayPalExpress\' AND "config" LIKE \'%"paypalexpress.PaypalUrl"%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
-
-		'UPDATE "mshop_service" AS ms, "mshop_service_type" AS mstype
+			WHERE "provider" = \'PayPalExpress\' AND "config" LIKE \'%"paypalexpress.PaypalUrl"%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
+		'UPDATE "mshop_service"
 			SET "config" = REPLACE("config", \'"payment.directdebit."\', \'"directdebit."\')
-			WHERE ms."provider" = \'DirectDebit\' AND "config" LIKE \'%"payment.directdebit."%\' AND ms."typeid" = mstype."id" AND mstype."code" = \'payment\'',
+			WHERE "provider" = \'DirectDebit\' AND "config" LIKE \'%"payment.directdebit."%\' AND "typeid" IN (
+				SELECT "id" FROM "mshop_service_type" WHERE "code" = \'payment\'
+			)
+		',
 	);
 
 
