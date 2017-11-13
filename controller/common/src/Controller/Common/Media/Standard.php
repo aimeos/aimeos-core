@@ -252,10 +252,12 @@ class Standard
 		 *
 		 * When uploading a file, a preview image for that file is generated if
 		 * possible (especially for images). You can configure certain options
-		 * for the generated images, namely the quality of those images with
+		 * for the generated images, namely the implementation of the scaling
+		 * algorithm and the quality of the resulting images with
 		 *
 		 *  array(
 		 *  	'image' => array(
+		 *  		'name' => 'Imagick',
 		 *  		'jpeg' => array(
 		 *  			'quality' => 75
 		 *  		),
