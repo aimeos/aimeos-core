@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-02 17:58+0200\n"
-"PO-Revision-Date: 2017-10-02 16:05+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2017-10-04 13:03+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,7 +161,7 @@ msgstr "\"%1$s\" için uluslararasılaştırma nesnesi mevcut değil"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "Geçersiz ISO ülke kodu \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
@@ -358,7 +358,7 @@ msgstr "Yeni oluşturulan site  \"saveItem()\" metodu kullanılarak kaydedilemez
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "ID \"%1$s\" için katalog düğümü yok"
 
 #, php-format
 msgid "No item found for conditions: %1$s"
@@ -382,7 +382,7 @@ msgstr "\"%1$s\" kodlu hiçbir ürün bulunamadı"
 
 #, php-format
 msgid "No search keys available"
-msgstr ""
+msgstr "Hiç bir arama anahtarı mevcut değil"
 
 #, php-format
 msgid "No stock type for code \"%1$s\" found"
