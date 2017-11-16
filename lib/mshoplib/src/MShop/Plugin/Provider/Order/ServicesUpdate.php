@@ -41,6 +41,7 @@ class ServicesUpdate
 		$p->addListener( $this->getObject(), 'setAddress.after' );
 		$p->addListener( $this->getObject(), 'deleteAddress.after' );
 		$p->addListener( $this->getObject(), 'addProduct.after' );
+		$p->addListener( $this->getObject(), 'editProduct.after' );
 		$p->addListener( $this->getObject(), 'deleteProduct.after' );
 		$p->addListener( $this->getObject(), 'addCoupon.after' );
 		$p->addListener( $this->getObject(), 'deleteCoupon.after' );
