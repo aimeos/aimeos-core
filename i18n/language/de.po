@@ -1,0 +1,579 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Daniel Hoffmann <d.hoffmann@metaways.de>, 2013
+# nsendetzky, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2017-09-22 11:36+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "Abchasisch"
+
+msgid "ae"
+msgstr "Awestisch"
+
+msgid "af"
+msgstr "Afrikaans"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Amharisch"
+
+msgid "an"
+msgstr "Aragonesisch"
+
+msgid "ar"
+msgstr "Arabisch"
+
+msgid "as"
+msgstr "Assamesisch"
+
+msgid "av"
+msgstr "Awarisch"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Aserbaidschanisch"
+
+msgid "ba"
+msgstr "Baschkirisch"
+
+msgid "be"
+msgstr "Belorussisch"
+
+msgid "bg"
+msgstr "Bulgarisch"
+
+msgid "bh"
+msgstr "Biharisch"
+
+msgid "bi"
+msgstr "Bislamisch"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengalisch"
+
+msgid "bo"
+msgstr "Tibetanisch"
+
+msgid "br"
+msgstr "Bretonisch"
+
+msgid "bs"
+msgstr "Bosnisch"
+
+msgid "ca"
+msgstr "Katalanisch"
+
+msgid "ce"
+msgstr "Tschetschenisch"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Korsisch"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Tschechisch"
+
+msgid "cu"
+msgstr "Kirchenslawisch"
+
+msgid "cv"
+msgstr "Tschuwaschisch"
+
+msgid "cy"
+msgstr "Walisisch"
+
+msgid "da"
+msgstr "Dänisch"
+
+msgid "de"
+msgstr "Deutsch"
+
+msgid "dv"
+msgstr "Dhivehi"
+
+msgid "dz"
+msgstr "Dzongkha, Bhutani"
+
+msgid "ee"
+msgstr "Ewe"
+
+msgid "el"
+msgstr "Griechisch"
+
+msgid "en"
+msgstr "Englisch"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "Spanisch"
+
+msgid "et"
+msgstr "Estnisch"
+
+msgid "eu"
+msgstr "Baskisch"
+
+msgid "fa"
+msgstr "Persisch"
+
+msgid "ff"
+msgstr "Fulfulde"
+
+msgid "fi"
+msgstr "Finnisch"
+
+msgid "fj"
+msgstr "Fiji"
+
+msgid "fo"
+msgstr "Färöisch"
+
+msgid "fr"
+msgstr "Französisch"
+
+msgid "fy"
+msgstr "Friesisch"
+
+msgid "ga"
+msgstr "Irisch"
+
+msgid "gd"
+msgstr "Schottisches Gälisch"
+
+msgid "gl"
+msgstr "Galizisch"
+
+msgid "gn"
+msgstr "Guarani"
+
+msgid "gu"
+msgstr "Gujaratisch"
+
+msgid "gv"
+msgstr "Manx"
+
+msgid "ha"
+msgstr "Haussa"
+
+msgid "he"
+msgstr "Hebräisch"
+
+msgid "hi"
+msgstr "Hindi"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Kroatisch"
+
+msgid "ht"
+msgstr "Haitianisch"
+
+msgid "hu"
+msgstr "Ungarisch"
+
+msgid "hy"
+msgstr "Armenisch"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Indonesisch"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiak"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Isländisch"
+
+msgid "it"
+msgstr "Italienisch"
+
+msgid "iu"
+msgstr "Inuktitut (Eskimo)"
+
+msgid "ja"
+msgstr "Japanisch"
+
+msgid "jv"
+msgstr "Javanisch"
+
+msgid "ka"
+msgstr "Georgisch"
+
+msgid "kg"
+msgstr "Kikongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Kasachisch"
+
+msgid "kl"
+msgstr "Kalaallisut (Grönländisch)"
+
+msgid "km"
+msgstr "Kambodschanisch"
+
+msgid "kn"
+msgstr "Kannada"
+
+msgid "ko"
+msgstr "Koreanisch"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Kaschmirisch"
+
+msgid "ku"
+msgstr "Kurdisch"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Kornisch"
+
+msgid "ky"
+msgstr "Kirgisisch"
+
+msgid "la"
+msgstr "Latein"
+
+msgid "lb"
+msgstr "Luxemburgisch"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburgish"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Laotisch"
+
+msgid "lt"
+msgstr "Litauisch"
+
+msgid "lu"
+msgstr "Tschiluba"
+
+msgid "lv"
+msgstr "Lettisch"
+
+msgid "mg"
+msgstr "Malagasisch"
+
+msgid "mh"
+msgstr "Marshallesisch"
+
+msgid "mi"
+msgstr "Maorisch"
+
+msgid "mk"
+msgstr "Mazedonisch"
+
+msgid "ml"
+msgstr "Malajalam"
+
+msgid "mn"
+msgstr "Mongolisch"
+
+msgid "mo"
+msgstr "Moldavisch"
+
+msgid "mr"
+msgstr "Marathi"
+
+msgid "ms"
+msgstr "Malaysisch"
+
+msgid "mt"
+msgstr "Maltesisch"
+
+msgid "my"
+msgstr "Burmesisch"
+
+msgid "na"
+msgstr "Nauruisch"
+
+msgid "nb"
+msgstr "Bokmål"
+
+msgid "nd"
+msgstr "isiNdebele"
+
+msgid "ne"
+msgstr "Nepalesisch"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Holländisch"
+
+msgid "nn"
+msgstr "Nynorsk"
+
+msgid "no"
+msgstr "Norwegisch"
+
+msgid "nr"
+msgstr "Süd-Ndebele"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "Okzitanisch"
+
+msgid "oj"
+msgstr "Ojibwe"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Ossetisch"
+
+msgid "pa"
+msgstr "Pundjabisch"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Polnisch"
+
+msgid "ps"
+msgstr "Paschtu"
+
+msgid "pt"
+msgstr "Portugiesisch"
+
+msgid "qu"
+msgstr "Quechua"
+
+msgid "rm"
+msgstr "Rätoromanisch"
+
+msgid "rn"
+msgstr "Kirundisch"
+
+msgid "ro"
+msgstr "Rumänisch"
+
+msgid "ru"
+msgstr "Russisch"
+
+msgid "rw"
+msgstr "Kijarwanda"
+
+msgid "sa"
+msgstr "Sanskrit"
+
+msgid "sc"
+msgstr "Sardisch"
+
+msgid "sd"
+msgstr "Zinti"
+
+msgid "se"
+msgstr "Nordsamisch"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Singhalesisch"
+
+msgid "sk"
+msgstr "Slowakisch"
+
+msgid "sl"
+msgstr "Slowenisch"
+
+msgid "sm"
+msgstr "Samoanisch"
+
+msgid "sn"
+msgstr "Schonisch"
+
+msgid "so"
+msgstr "Somalisch"
+
+msgid "sq"
+msgstr "Albanisch"
+
+msgid "sr"
+msgstr "Serbisch"
+
+msgid "ss"
+msgstr "Swasiländisch"
+
+msgid "st"
+msgstr "Sesothisch"
+
+msgid "su"
+msgstr "Sudanesisch"
+
+msgid "sv"
+msgstr "Schwedisch"
+
+msgid "sw"
+msgstr "Suaheli"
+
+msgid "ta"
+msgstr "Tamilisch"
+
+msgid "te"
+msgstr "Tegulu"
+
+msgid "tg"
+msgstr "Tadschikisch"
+
+msgid "th"
+msgstr "Thai"
+
+msgid "ti"
+msgstr "Tigrinja"
+
+msgid "tk"
+msgstr "Turkmenisch"
+
+msgid "tl"
+msgstr "Tagalog"
+
+msgid "tn"
+msgstr "Sezuan"
+
+msgid "to"
+msgstr "Tongaisch"
+
+msgid "tr"
+msgstr "Türkisch"
+
+msgid "ts"
+msgstr "Tsongaisch"
+
+msgid "tt"
+msgstr "Tatarisch"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Tahitianisch"
+
+msgid "ug"
+msgstr "Uigur"
+
+msgid "uk"
+msgstr "Ukrainisch"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "Usbekisch"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Vietnamesisch"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Wallonisch"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Jiddish"
+
+msgid "yo"
+msgstr "Joruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Chinesisch"
+
+msgid "zu"
+msgstr "Zulu"

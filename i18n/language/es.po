@@ -1,0 +1,577 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2017-09-23 21:25+0000\n"
+"Last-Translator: Daniel Vega <danielvega131990@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/aimeos/aimeos-core/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "aa"
+msgstr "Afar"
+
+msgid "ab"
+msgstr "Abjasio"
+
+msgid "ae"
+msgstr "Avéstico"
+
+msgid "af"
+msgstr "Afrikáans"
+
+msgid "ak"
+msgstr "Akánico"
+
+msgid "am"
+msgstr "Amhárico"
+
+msgid "an"
+msgstr "Aragonés"
+
+msgid "ar"
+msgstr "Árabe"
+
+msgid "as"
+msgstr "Asamés"
+
+msgid "av"
+msgstr "Avar"
+
+msgid "ay"
+msgstr "Aymara"
+
+msgid "az"
+msgstr "Azerí"
+
+msgid "ba"
+msgstr "Baskir"
+
+msgid "be"
+msgstr "Bielorruso"
+
+msgid "bg"
+msgstr "Búlgaro"
+
+msgid "bh"
+msgstr "Bihari"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengalí"
+
+msgid "bo"
+msgstr "Tibetano"
+
+msgid "br"
+msgstr "Bretón"
+
+msgid "bs"
+msgstr "Bosnio"
+
+msgid "ca"
+msgstr "Catalán"
+
+msgid "ce"
+msgstr "Checheno"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Corso"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Checo"
+
+msgid "cu"
+msgstr "Eslavo eclesiástico"
+
+msgid "cv"
+msgstr "Chuvasio"
+
+msgid "cy"
+msgstr "Galés"
+
+msgid "da"
+msgstr "Danés"
+
+msgid "de"
+msgstr "Alemán "
+
+msgid "dv"
+msgstr "Divehi"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Ewé"
+
+msgid "el"
+msgstr "Griego"
+
+msgid "en"
+msgstr "Inglés"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "Español"
+
+msgid "et"
+msgstr "Estonio"
+
+msgid "eu"
+msgstr "Vasco"
+
+msgid "fa"
+msgstr "Persa"
+
+msgid "ff"
+msgstr "Fulani"
+
+msgid "fi"
+msgstr "Finés"
+
+msgid "fj"
+msgstr "Fiyiano"
+
+msgid "fo"
+msgstr "Feroés"
+
+msgid "fr"
+msgstr "Francés"
+
+msgid "fy"
+msgstr "Frisio"
+
+msgid "ga"
+msgstr "Irlandés"
+
+msgid "gd"
+msgstr "Gaélico escocés"
+
+msgid "gl"
+msgstr "Gallego"
+
+msgid "gn"
+msgstr "Guaraní"
+
+msgid "gu"
+msgstr "Guyaratí"
+
+msgid "gv"
+msgstr "Manés"
+
+msgid "ha"
+msgstr "Hausa"
+
+msgid "he"
+msgstr "Hebreo"
+
+msgid "hi"
+msgstr "Hindi"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Croata"
+
+msgid "ht"
+msgstr "Criollo haitiano"
+
+msgid "hu"
+msgstr "Húngaro"
+
+msgid "hy"
+msgstr "Armenio"
+
+msgid "hz"
+msgstr "Herero"
+
+msgid "ia"
+msgstr "Interlingua"
+
+msgid "id"
+msgstr "Indonesio"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Iñupiaq"
+
+msgid "io"
+msgstr "Ido"
+
+msgid "is"
+msgstr "Islandés"
+
+msgid "it"
+msgstr "Italiano"
+
+msgid "iu"
+msgstr "Inuit"
+
+msgid "ja"
+msgstr "Japonés"
+
+msgid "jv"
+msgstr "Javanés"
+
+msgid "ka"
+msgstr "Georgiano"
+
+msgid "kg"
+msgstr "Kikongo"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Kazajo"
+
+msgid "kl"
+msgstr "Groenlandés"
+
+msgid "km"
+msgstr "Camboyano"
+
+msgid "kn"
+msgstr "Canarés"
+
+msgid "ko"
+msgstr "Coreano"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Cachemir"
+
+msgid "ku"
+msgstr "Kurdo"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Córnico"
+
+msgid "ky"
+msgstr "Kirguís"
+
+msgid "la"
+msgstr "Latín"
+
+msgid "lb"
+msgstr "Luxemburgués"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburgués"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Lao"
+
+msgid "lt"
+msgstr "Lituano"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Letón"
+
+msgid "mg"
+msgstr "Malgache"
+
+msgid "mh"
+msgstr "Marshalés"
+
+msgid "mi"
+msgstr "Maorí"
+
+msgid "mk"
+msgstr "Macedonio"
+
+msgid "ml"
+msgstr "Malayalam"
+
+msgid "mn"
+msgstr "Mongol"
+
+msgid "mo"
+msgstr "Moldavo"
+
+msgid "mr"
+msgstr "Maratí"
+
+msgid "ms"
+msgstr "Malayo"
+
+msgid "mt"
+msgstr "Maltés"
+
+msgid "my"
+msgstr "Birmano"
+
+msgid "na"
+msgstr "Nauruano"
+
+msgid "nb"
+msgstr "Bokmål"
+
+msgid "nd"
+msgstr "Ndebele del norte"
+
+msgid "ne"
+msgstr "Nepalí"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Neerlandés"
+
+msgid "nn"
+msgstr "Nynorsk"
+
+msgid "no"
+msgstr "Noruego"
+
+msgid "nr"
+msgstr "Ndebele del sur"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Chichewa"
+
+msgid "oc"
+msgstr "Occitano"
+
+msgid "oj"
+msgstr "Ojibwa"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Osetio"
+
+msgid "pa"
+msgstr "Panyabí"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Polaco"
+
+msgid "ps"
+msgstr "Pastún"
+
+msgid "pt"
+msgstr "Portugués"
+
+msgid "qu"
+msgstr "Quechua"
+
+msgid "rm"
+msgstr "Retorromance"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "Rumano"
+
+msgid "ru"
+msgstr "Ruso"
+
+msgid "rw"
+msgstr "Kinyarwanda"
+
+msgid "sa"
+msgstr "Sánscrito"
+
+msgid "sc"
+msgstr "Sardo"
+
+msgid "sd"
+msgstr "Sindhi"
+
+msgid "se"
+msgstr "Sami septentrional"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Cingalés"
+
+msgid "sk"
+msgstr "Eslovaco"
+
+msgid "sl"
+msgstr "Esloveno"
+
+msgid "sm"
+msgstr "Samoano"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somalí"
+
+msgid "sq"
+msgstr "Albanés"
+
+msgid "sr"
+msgstr "Serbio"
+
+msgid "ss"
+msgstr "Suazi"
+
+msgid "st"
+msgstr "Sesotho"
+
+msgid "su"
+msgstr "Sondanés"
+
+msgid "sv"
+msgstr "Sueco"
+
+msgid "sw"
+msgstr "Suajili"
+
+msgid "ta"
+msgstr "Tamil"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Tayiko"
+
+msgid "th"
+msgstr "Tailandés"
+
+msgid "ti"
+msgstr "Tigriña"
+
+msgid "tk"
+msgstr "Turcomano"
+
+msgid "tl"
+msgstr "Tagalo"
+
+msgid "tn"
+msgstr "Setsuana"
+
+msgid "to"
+msgstr "Tongano"
+
+msgid "tr"
+msgstr "Turco"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Tártaro"
+
+msgid "tw"
+msgstr "Twi"
+
+msgid "ty"
+msgstr "Tahitiano"
+
+msgid "ug"
+msgstr "Uigur"
+
+msgid "uk"
+msgstr "Ucraniano"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr "Uzbeco"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Vietnamita"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Valón"
+
+msgid "wo"
+msgstr "Wolof"
+
+msgid "xh"
+msgstr "Xhosa"
+
+msgid "yi"
+msgstr "Yidis"
+
+msgid "yo"
+msgstr "Yoruba"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Chino"
+
+msgid "zu"
+msgstr "Zulú"

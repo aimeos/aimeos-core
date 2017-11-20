@@ -1,0 +1,579 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# jerzys <jerzy.skalski@gmail.com>, 2014
+# jerzys <jerzy.skalski@gmail.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2017-09-22 11:36+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+msgid "aa"
+msgstr "afarski"
+
+msgid "ab"
+msgstr "abchaski"
+
+msgid "ae"
+msgstr "awestyjski"
+
+msgid "af"
+msgstr "afrykanerski"
+
+msgid "ak"
+msgstr "akan"
+
+msgid "am"
+msgstr "amharski"
+
+msgid "an"
+msgstr "aragoński"
+
+msgid "ar"
+msgstr "arabski"
+
+msgid "as"
+msgstr "asamski"
+
+msgid "av"
+msgstr "awarski"
+
+msgid "ay"
+msgstr "ajmarski"
+
+msgid "az"
+msgstr "azerski"
+
+msgid "ba"
+msgstr "baszkirski"
+
+msgid "be"
+msgstr "białoruski"
+
+msgid "bg"
+msgstr "bułgarski"
+
+msgid "bh"
+msgstr "bihari"
+
+msgid "bi"
+msgstr "bislama"
+
+msgid "bm"
+msgstr "bambara"
+
+msgid "bn"
+msgstr "bengalski"
+
+msgid "bo"
+msgstr "tybetański"
+
+msgid "br"
+msgstr "bretoński"
+
+msgid "bs"
+msgstr "bośniacki"
+
+msgid "ca"
+msgstr "kataloński"
+
+msgid "ce"
+msgstr "czeczeński"
+
+msgid "ch"
+msgstr "czamorro"
+
+msgid "co"
+msgstr "korsykański"
+
+msgid "cr"
+msgstr "kri"
+
+msgid "cs"
+msgstr "czeski"
+
+msgid "cu"
+msgstr "cerkiewnosłowiański"
+
+msgid "cv"
+msgstr "czuwaski"
+
+msgid "cy"
+msgstr "walijski"
+
+msgid "da"
+msgstr "duński"
+
+msgid "de"
+msgstr "niemiecki"
+
+msgid "dv"
+msgstr "malediwski"
+
+msgid "dz"
+msgstr "dzongkha"
+
+msgid "ee"
+msgstr "ewe"
+
+msgid "el"
+msgstr "grecki"
+
+msgid "en"
+msgstr "angielski"
+
+msgid "eo"
+msgstr "esperanto"
+
+msgid "es"
+msgstr "hiszpański"
+
+msgid "et"
+msgstr "estoński"
+
+msgid "eu"
+msgstr "baskijski"
+
+msgid "fa"
+msgstr "perski"
+
+msgid "ff"
+msgstr "fula"
+
+msgid "fi"
+msgstr "fiński"
+
+msgid "fj"
+msgstr "fidżyjski"
+
+msgid "fo"
+msgstr "farerski"
+
+msgid "fr"
+msgstr "francuski"
+
+msgid "fy"
+msgstr "fryzyjski"
+
+msgid "ga"
+msgstr "irlandzki"
+
+msgid "gd"
+msgstr "szkocki galijski"
+
+msgid "gl"
+msgstr "galicyjski"
+
+msgid "gn"
+msgstr "guarani"
+
+msgid "gu"
+msgstr "gudźarati"
+
+msgid "gv"
+msgstr "manx"
+
+msgid "ha"
+msgstr "hausa"
+
+msgid "he"
+msgstr "hebrajski"
+
+msgid "hi"
+msgstr "hindi"
+
+msgid "ho"
+msgstr "hiri motu"
+
+msgid "hr"
+msgstr "chorwacki"
+
+msgid "ht"
+msgstr "haitański"
+
+msgid "hu"
+msgstr "węgierski"
+
+msgid "hy"
+msgstr "armeński"
+
+msgid "hz"
+msgstr "herero"
+
+msgid "ia"
+msgstr "interlingua"
+
+msgid "id"
+msgstr "indonezyjski"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "igbo"
+
+msgid "ii"
+msgstr "yi"
+
+msgid "ik"
+msgstr "inupiak"
+
+msgid "io"
+msgstr "ido"
+
+msgid "is"
+msgstr "islandzki"
+
+msgid "it"
+msgstr "włoski"
+
+msgid "iu"
+msgstr "inuktitut"
+
+msgid "ja"
+msgstr "japoński"
+
+msgid "jv"
+msgstr "jawajski"
+
+msgid "ka"
+msgstr "gruziński"
+
+msgid "kg"
+msgstr "kongo"
+
+msgid "ki"
+msgstr "kikuju"
+
+msgid "kj"
+msgstr "kwanyama"
+
+msgid "kk"
+msgstr "kazachski"
+
+msgid "kl"
+msgstr "grenlandzki"
+
+msgid "km"
+msgstr "khmerski"
+
+msgid "kn"
+msgstr "kannada"
+
+msgid "ko"
+msgstr "koreański"
+
+msgid "kr"
+msgstr "kanuri"
+
+msgid "ks"
+msgstr "kaszmirski"
+
+msgid "ku"
+msgstr "kurdyjski"
+
+msgid "kv"
+msgstr "komi"
+
+msgid "kw"
+msgstr "kornijski"
+
+msgid "ky"
+msgstr "kirgiski"
+
+msgid "la"
+msgstr "łaciński"
+
+msgid "lb"
+msgstr "luksemburski"
+
+msgid "lg"
+msgstr "luganda"
+
+msgid "li"
+msgstr "limburski"
+
+msgid "ln"
+msgstr "lingala"
+
+msgid "lo"
+msgstr "laotański"
+
+msgid "lt"
+msgstr "litewski"
+
+msgid "lu"
+msgstr "luba-katanga"
+
+msgid "lv"
+msgstr "łotewski"
+
+msgid "mg"
+msgstr "malgaski"
+
+msgid "mh"
+msgstr "marszalski"
+
+msgid "mi"
+msgstr "maori"
+
+msgid "mk"
+msgstr "macedoński"
+
+msgid "ml"
+msgstr "malajalam"
+
+msgid "mn"
+msgstr "mongolski"
+
+msgid "mo"
+msgstr "mołdawski"
+
+msgid "mr"
+msgstr "marathi"
+
+msgid "ms"
+msgstr "malajski"
+
+msgid "mt"
+msgstr "maltański"
+
+msgid "my"
+msgstr "birmański"
+
+msgid "na"
+msgstr "nauruański"
+
+msgid "nb"
+msgstr "norweski bokmål"
+
+msgid "nd"
+msgstr "ndebele północny"
+
+msgid "ne"
+msgstr "nepalski"
+
+msgid "ng"
+msgstr "ndonga"
+
+msgid "nl"
+msgstr "niderlandzki"
+
+msgid "nn"
+msgstr "norweski nynorsk"
+
+msgid "no"
+msgstr "norweski"
+
+msgid "nr"
+msgstr "ndebele południowy"
+
+msgid "nv"
+msgstr "nawaho"
+
+msgid "ny"
+msgstr "cziczewa"
+
+msgid "oc"
+msgstr "oksytański"
+
+msgid "oj"
+msgstr "odżibwe"
+
+msgid "om"
+msgstr "oromo"
+
+msgid "or"
+msgstr "orija"
+
+msgid "os"
+msgstr "osetyjski"
+
+msgid "pa"
+msgstr "pendżabski"
+
+msgid "pi"
+msgstr "pali"
+
+msgid "pl"
+msgstr "polski"
+
+msgid "ps"
+msgstr "paszto"
+
+msgid "pt"
+msgstr "portugalski"
+
+msgid "qu"
+msgstr "keczua"
+
+msgid "rm"
+msgstr "retoromański"
+
+msgid "rn"
+msgstr "rundi"
+
+msgid "ro"
+msgstr "rumuński"
+
+msgid "ru"
+msgstr "rosyjski"
+
+msgid "rw"
+msgstr "ruanda-rundi"
+
+msgid "sa"
+msgstr "sanskryt"
+
+msgid "sc"
+msgstr "sardyński"
+
+msgid "sd"
+msgstr "sindhi"
+
+msgid "se"
+msgstr "północnolapoński"
+
+msgid "sg"
+msgstr "sangolquí"
+
+msgid "si"
+msgstr "syngaleski"
+
+msgid "sk"
+msgstr "słowacki"
+
+msgid "sl"
+msgstr "słoweński"
+
+msgid "sm"
+msgstr "samoański"
+
+msgid "sn"
+msgstr "shona"
+
+msgid "so"
+msgstr "somalijski"
+
+msgid "sq"
+msgstr "albański"
+
+msgid "sr"
+msgstr "serbski"
+
+msgid "ss"
+msgstr "suazi"
+
+msgid "st"
+msgstr "sotho"
+
+msgid "su"
+msgstr "sundajski"
+
+msgid "sv"
+msgstr "szwedzki"
+
+msgid "sw"
+msgstr "suahili"
+
+msgid "ta"
+msgstr "tamilski"
+
+msgid "te"
+msgstr "telugu"
+
+msgid "tg"
+msgstr "tadżycki"
+
+msgid "th"
+msgstr "tajski"
+
+msgid "ti"
+msgstr "tigrinia"
+
+msgid "tk"
+msgstr "turkmeński‎"
+
+msgid "tl"
+msgstr "tagalski"
+
+msgid "tn"
+msgstr "tswana"
+
+msgid "to"
+msgstr "tagalski"
+
+msgid "tr"
+msgstr "turecki"
+
+msgid "ts"
+msgstr "tsonga"
+
+msgid "tt"
+msgstr "tatarski"
+
+msgid "tw"
+msgstr "twi"
+
+msgid "ty"
+msgstr "tahitański"
+
+msgid "ug"
+msgstr "ujgurski"
+
+msgid "uk"
+msgstr "ukraiński"
+
+msgid "ur"
+msgstr "urdu"
+
+msgid "uz"
+msgstr "uzbecki"
+
+msgid "ve"
+msgstr "venda"
+
+msgid "vi"
+msgstr "wietnamski"
+
+msgid "vo"
+msgstr "wolapik"
+
+msgid "wa"
+msgstr "waloński"
+
+msgid "wo"
+msgstr "wolof"
+
+msgid "xh"
+msgstr "xhosa"
+
+msgid "yi"
+msgstr "Jidysz"
+
+msgid "yo"
+msgstr "joruba‎"
+
+msgid "za"
+msgstr "chiński"
+
+msgid "zh"
+msgstr "chiński standardowy"
+
+msgid "zu"
+msgstr "zulu"

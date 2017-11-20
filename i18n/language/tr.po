@@ -1,0 +1,578 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Metal <meteoramic@yahoo.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2017-09-23 21:25+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "aa"
+msgstr "Afarca"
+
+msgid "ab"
+msgstr "Abhazca"
+
+msgid "ae"
+msgstr "Avestçe"
+
+msgid "af"
+msgstr "Afrikanca"
+
+msgid "ak"
+msgstr "Akan"
+
+msgid "am"
+msgstr "Amharca"
+
+msgid "an"
+msgstr "Aragonca"
+
+msgid "ar"
+msgstr "Arapça"
+
+msgid "as"
+msgstr "Assamca"
+
+msgid "av"
+msgstr "Avarca"
+
+msgid "ay"
+msgstr "Aymaraca"
+
+msgid "az"
+msgstr "Azerice"
+
+msgid "ba"
+msgstr "Başkurtça"
+
+msgid "be"
+msgstr "Beyaz Rusça"
+
+msgid "bg"
+msgstr "Bulgarca"
+
+msgid "bh"
+msgstr "Biharice"
+
+msgid "bi"
+msgstr "Bislama"
+
+msgid "bm"
+msgstr "Bambara"
+
+msgid "bn"
+msgstr "Bengalce"
+
+msgid "bo"
+msgstr "Tibetçe"
+
+msgid "br"
+msgstr "Bretonca"
+
+msgid "bs"
+msgstr "Boşnakça"
+
+msgid "ca"
+msgstr "Katalanca"
+
+msgid "ce"
+msgstr "Çeçence"
+
+msgid "ch"
+msgstr "Chamorro"
+
+msgid "co"
+msgstr "Korsikaca"
+
+msgid "cr"
+msgstr "Cree"
+
+msgid "cs"
+msgstr "Çekçe"
+
+msgid "cu"
+msgstr "Kilise Slavcası"
+
+msgid "cv"
+msgstr "Çuvaşça"
+
+msgid "cy"
+msgstr "Galce"
+
+msgid "da"
+msgstr "Danca"
+
+msgid "de"
+msgstr "Almanca"
+
+msgid "dv"
+msgstr "Maldivce"
+
+msgid "dz"
+msgstr "Dzongkha"
+
+msgid "ee"
+msgstr "Ewe"
+
+msgid "el"
+msgstr ".Yunanca"
+
+msgid "en"
+msgstr "İngilizce"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr "İspanyolca"
+
+msgid "et"
+msgstr "Estonca"
+
+msgid "eu"
+msgstr "Baskça"
+
+msgid "fa"
+msgstr "Farsça"
+
+msgid "ff"
+msgstr "Fula"
+
+msgid "fi"
+msgstr "Fince"
+
+msgid "fj"
+msgstr "Fijice"
+
+msgid "fo"
+msgstr "Faroece"
+
+msgid "fr"
+msgstr "Fransızca"
+
+msgid "fy"
+msgstr "Frizce"
+
+msgid "ga"
+msgstr "İrlandaca"
+
+msgid "gd"
+msgstr "İskoç Galcesi"
+
+msgid "gl"
+msgstr "Galiçyaca"
+
+msgid "gn"
+msgstr "Guarani"
+
+msgid "gu"
+msgstr "Gucerat"
+
+msgid "gv"
+msgstr "Manksça"
+
+msgid "ha"
+msgstr "Hausaca"
+
+msgid "he"
+msgstr "İbranice"
+
+msgid "hi"
+msgstr "Hintçe"
+
+msgid "ho"
+msgstr "Hiri motu"
+
+msgid "hr"
+msgstr "Hırvatça"
+
+msgid "ht"
+msgstr "Haiti Creole"
+
+msgid "hu"
+msgstr "Macarca"
+
+msgid "hy"
+msgstr "Ermenice"
+
+msgid "hz"
+msgstr "Hereroca"
+
+msgid "ia"
+msgstr "İnterlingua"
+
+msgid "id"
+msgstr "Endonezyaca"
+
+msgid "ie"
+msgstr "Interlingue"
+
+msgid "ig"
+msgstr "Igbo"
+
+msgid "ii"
+msgstr "Yi"
+
+msgid "ik"
+msgstr "Inupiak"
+
+msgid "io"
+msgstr "İdo"
+
+msgid "is"
+msgstr "İzlandaca"
+
+msgid "it"
+msgstr "İtalyanca"
+
+msgid "iu"
+msgstr "İnuitçe"
+
+msgid "ja"
+msgstr "Japonca"
+
+msgid "jv"
+msgstr "Cavaca"
+
+msgid "ka"
+msgstr "Gürcüce"
+
+msgid "kg"
+msgstr "Kongoca"
+
+msgid "ki"
+msgstr "Kikuyu"
+
+msgid "kj"
+msgstr "Kuanyama"
+
+msgid "kk"
+msgstr "Kazakça"
+
+msgid "kl"
+msgstr "Grönlandca"
+
+msgid "km"
+msgstr "Khmerce"
+
+msgid "kn"
+msgstr "Kannadaca"
+
+msgid "ko"
+msgstr "Korece"
+
+msgid "kr"
+msgstr "Kanuri"
+
+msgid "ks"
+msgstr "Keşmirce"
+
+msgid "ku"
+msgstr "Kürtçe"
+
+msgid "kv"
+msgstr "Komi"
+
+msgid "kw"
+msgstr "Kernevekçe"
+
+msgid "ky"
+msgstr "Kırgızca"
+
+msgid "la"
+msgstr "Latince"
+
+msgid "lb"
+msgstr "Lüksemburgca"
+
+msgid "lg"
+msgstr "Luganda"
+
+msgid "li"
+msgstr "Limburgca"
+
+msgid "ln"
+msgstr "Lingala"
+
+msgid "lo"
+msgstr "Laoca"
+
+msgid "lt"
+msgstr "Litvanca"
+
+msgid "lu"
+msgstr "Luba-Katanga"
+
+msgid "lv"
+msgstr "Letonca"
+
+msgid "mg"
+msgstr "Malgaşça"
+
+msgid "mh"
+msgstr "Marshall"
+
+msgid "mi"
+msgstr "Maorice"
+
+msgid "mk"
+msgstr "Makedonca"
+
+msgid "ml"
+msgstr "Malayalam"
+
+msgid "mn"
+msgstr "Moğolca"
+
+msgid "mo"
+msgstr "Moldovaca"
+
+msgid "mr"
+msgstr "Marathi"
+
+msgid "ms"
+msgstr "Malayca"
+
+msgid "mt"
+msgstr "Maltaca"
+
+msgid "my"
+msgstr "Birmanya"
+
+msgid "na"
+msgstr "Nauruca"
+
+msgid "nb"
+msgstr "Norveççe Bokmal"
+
+msgid "nd"
+msgstr "Kuzey Ndebele"
+
+msgid "ne"
+msgstr "Nepalce"
+
+msgid "ng"
+msgstr "Ndonga"
+
+msgid "nl"
+msgstr "Flemenkçe"
+
+msgid "nn"
+msgstr "Norveççe Nynorsk"
+
+msgid "no"
+msgstr "Norveççe"
+
+msgid "nr"
+msgstr "Güney Ndebele"
+
+msgid "nv"
+msgstr "Navajo"
+
+msgid "ny"
+msgstr "Çevaca"
+
+msgid "oc"
+msgstr "Oksitanca"
+
+msgid "oj"
+msgstr "Ojibva"
+
+msgid "om"
+msgstr "Oromo"
+
+msgid "or"
+msgstr "Oriya"
+
+msgid "os"
+msgstr "Osetçe"
+
+msgid "pa"
+msgstr "Pencapça"
+
+msgid "pi"
+msgstr "Pali"
+
+msgid "pl"
+msgstr "Lehçe"
+
+msgid "ps"
+msgstr "Peştuca"
+
+msgid "pt"
+msgstr "Portekizce"
+
+msgid "qu"
+msgstr "Keçuva"
+
+msgid "rm"
+msgstr "Romansça"
+
+msgid "rn"
+msgstr "Kirundi"
+
+msgid "ro"
+msgstr "Rumence"
+
+msgid "ru"
+msgstr "Rusça"
+
+msgid "rw"
+msgstr "Ruandaca"
+
+msgid "sa"
+msgstr "Sanskritçe"
+
+msgid "sc"
+msgstr "Sardunyaca"
+
+msgid "sd"
+msgstr "Sindice"
+
+msgid "se"
+msgstr "Kuzey Sami"
+
+msgid "sg"
+msgstr "Sango"
+
+msgid "si"
+msgstr "Seylanca"
+
+msgid "sk"
+msgstr "Slovakça"
+
+msgid "sl"
+msgstr "Slovence"
+
+msgid "sm"
+msgstr "Samoaca"
+
+msgid "sn"
+msgstr "Shona"
+
+msgid "so"
+msgstr "Somalice"
+
+msgid "sq"
+msgstr "Arnavutça"
+
+msgid "sr"
+msgstr "Sırpça"
+
+msgid "ss"
+msgstr "Swati"
+
+msgid "st"
+msgstr "Sotho"
+
+msgid "su"
+msgstr "Sundaca"
+
+msgid "sv"
+msgstr "İsveççe"
+
+msgid "sw"
+msgstr "Svahilice"
+
+msgid "ta"
+msgstr "Tamilce"
+
+msgid "te"
+msgstr "Telugu"
+
+msgid "tg"
+msgstr "Tacikçe"
+
+msgid "th"
+msgstr "Taylandca"
+
+msgid "ti"
+msgstr "Tigrince"
+
+msgid "tk"
+msgstr "Türkmence"
+
+msgid "tl"
+msgstr "Tagalogca"
+
+msgid "tn"
+msgstr "Tsvana"
+
+msgid "to"
+msgstr "Tongan"
+
+msgid "tr"
+msgstr "Türkçe"
+
+msgid "ts"
+msgstr "Tsonga"
+
+msgid "tt"
+msgstr "Tatarca"
+
+msgid "tw"
+msgstr "Tvi"
+
+msgid "ty"
+msgstr "Tahitice"
+
+msgid "ug"
+msgstr "Uygurca"
+
+msgid "uk"
+msgstr "Ukraynaca"
+
+msgid "ur"
+msgstr "Urduca"
+
+msgid "uz"
+msgstr "Özbekçe"
+
+msgid "ve"
+msgstr "Venda"
+
+msgid "vi"
+msgstr "Vietnamca"
+
+msgid "vo"
+msgstr "Volapük"
+
+msgid "wa"
+msgstr "Valonca"
+
+msgid "wo"
+msgstr "Volofça"
+
+msgid "xh"
+msgstr "Zosa"
+
+msgid "yi"
+msgstr "Yidce"
+
+msgid "yo"
+msgstr "Yorubaca"
+
+msgid "za"
+msgstr "Zhuang"
+
+msgid "zh"
+msgstr "Çince"
+
+msgid "zu"
+msgstr "Zuluca"

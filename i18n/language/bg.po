@@ -1,0 +1,578 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# Bistra Kumanova <b.kumanova@creato.bg>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2017-09-22 18:34+0000\n"
+"Last-Translator: Bistra Kumanova <b.kumanova@creato.bg>\n"
+"Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "aa"
+msgstr "Афарски"
+
+msgid "ab"
+msgstr "Абхазски"
+
+msgid "ae"
+msgstr "Авестски"
+
+msgid "af"
+msgstr "Африканс"
+
+msgid "ak"
+msgstr "Акан"
+
+msgid "am"
+msgstr "Амхарски"
+
+msgid "an"
+msgstr "Арагонски"
+
+msgid "ar"
+msgstr "Арабски"
+
+msgid "as"
+msgstr "Асамски"
+
+msgid "av"
+msgstr "Аварски"
+
+msgid "ay"
+msgstr "Аймара"
+
+msgid "az"
+msgstr "Азербайджански"
+
+msgid "ba"
+msgstr "Башкирски"
+
+msgid "be"
+msgstr "Беларуски"
+
+msgid "bg"
+msgstr "Български"
+
+msgid "bh"
+msgstr "Бихарски"
+
+msgid "bi"
+msgstr "Бислама"
+
+msgid "bm"
+msgstr "Бамбара"
+
+msgid "bn"
+msgstr "Бенгалски"
+
+msgid "bo"
+msgstr "Тибетски"
+
+msgid "br"
+msgstr "Бретонски"
+
+msgid "bs"
+msgstr "Босненски"
+
+msgid "ca"
+msgstr "Каталонски"
+
+msgid "ce"
+msgstr "Чеченски"
+
+msgid "ch"
+msgstr "Чаморо"
+
+msgid "co"
+msgstr "Корсикански"
+
+msgid "cr"
+msgstr "Кри"
+
+msgid "cs"
+msgstr "Чешки"
+
+msgid "cu"
+msgstr "Църковнославянски"
+
+msgid "cv"
+msgstr "Чувашки"
+
+msgid "cy"
+msgstr "Уелски"
+
+msgid "da"
+msgstr "Датски"
+
+msgid "de"
+msgstr "Немск"
+
+msgid "dv"
+msgstr "Дивехи"
+
+msgid "dz"
+msgstr "Дзонха"
+
+msgid "ee"
+msgstr "Еве"
+
+msgid "el"
+msgstr "Гръцки "
+
+msgid "en"
+msgstr "Английски"
+
+msgid "eo"
+msgstr "Есперанто"
+
+msgid "es"
+msgstr "Испански"
+
+msgid "et"
+msgstr "Естонски"
+
+msgid "eu"
+msgstr "Баски"
+
+msgid "fa"
+msgstr "Персийски"
+
+msgid "ff"
+msgstr "Фула"
+
+msgid "fi"
+msgstr "Фински"
+
+msgid "fj"
+msgstr "Фиджийски"
+
+msgid "fo"
+msgstr "Фарьорски"
+
+msgid "fr"
+msgstr "Френски"
+
+msgid "fy"
+msgstr "Фризийски"
+
+msgid "ga"
+msgstr "Ирландски"
+
+msgid "gd"
+msgstr "Шотландски галски"
+
+msgid "gl"
+msgstr "Галисийски"
+
+msgid "gn"
+msgstr "Гуарани"
+
+msgid "gu"
+msgstr "Гуджарати"
+
+msgid "gv"
+msgstr "Галски (език на обитателите на о. Ман)"
+
+msgid "ha"
+msgstr "Хауса"
+
+msgid "he"
+msgstr "Иврит"
+
+msgid "hi"
+msgstr "Хинди"
+
+msgid "ho"
+msgstr "Хири моту"
+
+msgid "hr"
+msgstr "Хърватски"
+
+msgid "ht"
+msgstr "Хаитянски"
+
+msgid "hu"
+msgstr "Унгарски"
+
+msgid "hy"
+msgstr "Арменски"
+
+msgid "hz"
+msgstr "Хереро"
+
+msgid "ia"
+msgstr "Интерлингва"
+
+msgid "id"
+msgstr "Индонезийски"
+
+msgid "ie"
+msgstr "Интерлингве"
+
+msgid "ig"
+msgstr "Игбо"
+
+msgid "ii"
+msgstr "И"
+
+msgid "ik"
+msgstr "Инупиак"
+
+msgid "io"
+msgstr "Идо"
+
+msgid "is"
+msgstr "Исландски"
+
+msgid "it"
+msgstr "Италиански "
+
+msgid "iu"
+msgstr "Инуктитут"
+
+msgid "ja"
+msgstr "Японски"
+
+msgid "jv"
+msgstr "Явански"
+
+msgid "ka"
+msgstr "Грузински"
+
+msgid "kg"
+msgstr "Конгоански"
+
+msgid "ki"
+msgstr "Кикую"
+
+msgid "kj"
+msgstr "Кваняма"
+
+msgid "kk"
+msgstr "Казахски"
+
+msgid "kl"
+msgstr "Гренландски"
+
+msgid "km"
+msgstr "Кхмерски"
+
+msgid "kn"
+msgstr "Каннада"
+
+msgid "ko"
+msgstr "Корейски"
+
+msgid "kr"
+msgstr "Канури"
+
+msgid "ks"
+msgstr "Кашмирски"
+
+msgid "ku"
+msgstr "Кюрдски"
+
+msgid "kv"
+msgstr "Коми"
+
+msgid "kw"
+msgstr "Корнуолски"
+
+msgid "ky"
+msgstr "Киргиз"
+
+msgid "la"
+msgstr "Латински"
+
+msgid "lb"
+msgstr "Люксембургски"
+
+msgid "lg"
+msgstr "Луганда"
+
+msgid "li"
+msgstr "Лимбургски"
+
+msgid "ln"
+msgstr "Лингала"
+
+msgid "lo"
+msgstr "Лао"
+
+msgid "lt"
+msgstr "Литовски"
+
+msgid "lu"
+msgstr "Люба-катанга"
+
+msgid "lv"
+msgstr "Латвийски"
+
+msgid "mg"
+msgstr "Мадагаскарски"
+
+msgid "mh"
+msgstr "Маршалезе"
+
+msgid "mi"
+msgstr "Маорски"
+
+msgid "mk"
+msgstr "Македонски"
+
+msgid "ml"
+msgstr "Малаялам"
+
+msgid "mn"
+msgstr "Монголски"
+
+msgid "mo"
+msgstr "Молдавски"
+
+msgid "mr"
+msgstr "Маратхи"
+
+msgid "ms"
+msgstr "Малайски"
+
+msgid "mt"
+msgstr "Малтийски"
+
+msgid "my"
+msgstr "Бирмански"
+
+msgid "na"
+msgstr "Науру"
+
+msgid "nb"
+msgstr "Норвежки книжовен"
+
+msgid "nd"
+msgstr "Северна Ндебеле"
+
+msgid "ne"
+msgstr "Непалски"
+
+msgid "ng"
+msgstr "Ндунга"
+
+msgid "nl"
+msgstr "Холандски"
+
+msgid "nn"
+msgstr "Съвременен норвежки"
+
+msgid "no"
+msgstr "Норвежки"
+
+msgid "nr"
+msgstr "Южна Ндебеле"
+
+msgid "nv"
+msgstr "Навахо"
+
+msgid "ny"
+msgstr "Чичева"
+
+msgid "oc"
+msgstr "Окситански"
+
+msgid "oj"
+msgstr "Оджибва"
+
+msgid "om"
+msgstr "Оромо"
+
+msgid "or"
+msgstr "Ория"
+
+msgid "os"
+msgstr "Осетски"
+
+msgid "pa"
+msgstr "Панджаби"
+
+msgid "pi"
+msgstr "Пали"
+
+msgid "pl"
+msgstr "Полски"
+
+msgid "ps"
+msgstr "Пущу"
+
+msgid "pt"
+msgstr "Португалски"
+
+msgid "qu"
+msgstr "Кечуа"
+
+msgid "rm"
+msgstr "Реторомански"
+
+msgid "rn"
+msgstr "Кирунди"
+
+msgid "ro"
+msgstr "Румънски"
+
+msgid "ru"
+msgstr "Руски"
+
+msgid "rw"
+msgstr "Киняруанда"
+
+msgid "sa"
+msgstr "Санскрит"
+
+msgid "sc"
+msgstr "Сардински"
+
+msgid "sd"
+msgstr "Синдхи"
+
+msgid "se"
+msgstr "Северносаамски"
+
+msgid "sg"
+msgstr "Санго"
+
+msgid "si"
+msgstr "Синхалски"
+
+msgid "sk"
+msgstr "Словашки"
+
+msgid "sl"
+msgstr "Словенски"
+
+msgid "sm"
+msgstr "Самоански"
+
+msgid "sn"
+msgstr "Шона"
+
+msgid "so"
+msgstr "Сомалийски"
+
+msgid "sq"
+msgstr "Албански "
+
+msgid "sr"
+msgstr "Сръбски"
+
+msgid "ss"
+msgstr "Свати"
+
+msgid "st"
+msgstr "Сесото"
+
+msgid "su"
+msgstr "Сундански"
+
+msgid "sv"
+msgstr "Шведски"
+
+msgid "sw"
+msgstr "Суахили"
+
+msgid "ta"
+msgstr "Тамилски"
+
+msgid "te"
+msgstr "Телугу"
+
+msgid "tg"
+msgstr "Таджикски"
+
+msgid "th"
+msgstr "Тайландски"
+
+msgid "ti"
+msgstr "Тигриня"
+
+msgid "tk"
+msgstr "Туркменски"
+
+msgid "tl"
+msgstr "Тагалски"
+
+msgid "tn"
+msgstr "Сетсуана"
+
+msgid "to"
+msgstr "Тонга"
+
+msgid "tr"
+msgstr "Турски"
+
+msgid "ts"
+msgstr "Цонга"
+
+msgid "tt"
+msgstr "Татарски"
+
+msgid "tw"
+msgstr "Тви"
+
+msgid "ty"
+msgstr "Таитянски"
+
+msgid "ug"
+msgstr "Уйгурски"
+
+msgid "uk"
+msgstr "Украински"
+
+msgid "ur"
+msgstr "Урду"
+
+msgid "uz"
+msgstr "Узбекски"
+
+msgid "ve"
+msgstr "Венда"
+
+msgid "vi"
+msgstr "Виетнамски"
+
+msgid "vo"
+msgstr "Волапюк"
+
+msgid "wa"
+msgstr "Валонски"
+
+msgid "wo"
+msgstr "Волоф"
+
+msgid "xh"
+msgstr "Кхоса"
+
+msgid "yi"
+msgstr "Идиш"
+
+msgid "yo"
+msgstr "Йоруба"
+
+msgid "za"
+msgstr "Зуанг"
+
+msgid "zh"
+msgstr "Китайски"
+
+msgid "zu"
+msgstr "Зулуски"
