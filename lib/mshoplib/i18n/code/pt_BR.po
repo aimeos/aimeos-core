@@ -13,14 +13,110 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-09-23 01:24+0000\n"
-"Last-Translator: Bruno Rodrigues <brunojti@gmail.com>\n"
+"PO-Revision-Date: 2017-11-21 23:06+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/aimeos/aimeos-core/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Empresa"
+
+#. Address salutation
+msgid "mr"
+msgstr "Sr"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Sra"
+
+#. Address salutation
+msgid "miss"
+msgstr "Srta"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "Mês de validade"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefone"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "não-concluído"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "removido"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "cancelado"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "recusado"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "reembolsado"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "pendente"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "autorizado"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "recebido"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "não-concluído"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "removido"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "pendente"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "em progresso"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "despachado"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "entregue"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "perdido"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "recusado"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "devolvido"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

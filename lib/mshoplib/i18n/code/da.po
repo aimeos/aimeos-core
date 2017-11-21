@@ -7,7 +7,6 @@
 # Translators:
 # Translators:
 # Translators:
-# Tadeu Pagliarini <tadeu_up@hotmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
@@ -15,157 +14,157 @@ msgstr ""
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
 "PO-Revision-Date: 2017-11-21 23:06+0000\n"
 "Last-Translator: Aimeos\n"
-"Language-Team: Portuguese (http://www.transifex.com/aimeos/aimeos-core/language/pt/)\n"
+"Language-Team: Danish (http://www.transifex.com/aimeos/aimeos-core/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt\n"
+"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Address salutation
 msgid "company"
-msgstr "Empresa"
+msgstr "Firma"
 
 #. Address salutation
 msgid "mr"
-msgstr "Sr"
+msgstr ""
 
 #. Address salutation
 msgid "mrs"
-msgstr "Sra"
+msgstr ""
 
 #. Address salutation
 msgid "miss"
-msgstr "Srta"
+msgstr ""
 
 #. Order type value
 msgid "order:repeat"
-msgstr "Mês de validade"
+msgstr ""
 
 #. Order type value
 msgid "order:web"
-msgstr "A"
+msgstr ""
 
 #. Order type value
 msgid "order:phone"
-msgstr "tefefoneído"
+msgstr ""
 
 #. Payment status value
 msgid "pay:-1"
-msgstr "não-concluído"
+msgstr ""
 
 #. Payment status value
 msgid "pay:0"
-msgstr "removido"
+msgstr ""
 
 #. Payment status value
 msgid "pay:1"
-msgstr "cancelado"
+msgstr ""
 
 #. Payment status value
 msgid "pay:2"
-msgstr "recusado"
+msgstr ""
 
 #. Payment status value
 msgid "pay:3"
-msgstr "reembolsado"
+msgstr ""
 
 #. Payment status value
 msgid "pay:4"
-msgstr "pendente"
+msgstr ""
 
 #. Payment status value
 msgid "pay:5"
-msgstr "autorizado"
+msgstr ""
 
 #. Payment status value
 msgid "pay:6"
-msgstr "recebido"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr "não-concluído"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "removido"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "pendente"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "em progresso"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "despachado"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "entregue"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "perdido"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "recusado"
+msgstr ""
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "devolvido"
+msgstr ""
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
-msgstr "Endereço de cobrança faltando"
+msgstr ""
 
 #. Address plugin error: Delivery address not available
 msgid "address.delivery.available.none"
-msgstr "Endereço de entrega faltando"
+msgstr ""
 
 #. Address plugin error: Payment address not allowed
 msgid "address.payment.available.notallowed"
-msgstr "Endereço de cobrança não permitido"
+msgstr ""
 
 #. Address plugin error: Delivery address not allowed
 msgid "address.delivery.available.notallowed"
-msgstr "Endereço de entrega não permitido"
+msgstr ""
 
 #. Service plugin error: Payment service not available
 msgid "service.payment.available.none"
-msgstr "Opção de pagamento faltando"
+msgstr ""
 
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
-msgstr "Opção de entrega faltando"
+msgstr ""
 
 #. Service plugin error: Payment service not allowed
 msgid "service.payment.available.notallowed"
-msgstr "Opção de pagamento não permitida"
+msgstr ""
 
 #. Service plugin error: Delivery service not allowed
 msgid "service.delivery.available.notallowed"
-msgstr "Opção de entrega não permitida"
+msgstr ""
 
 #. ProductGone plugin error: Product doesn't exists
 msgid "product.gone.notexist"
-msgstr "Desculpe, pelo menos um dos produtos não existe mais. Por favor remova-o do carrinho para continuar"
+msgstr ""
 
 #. ProductGone plugin error: Product status disabled
 msgid "product.gone.status"
-msgstr "Desculpe, pelo menos um dos produtos foi desativado. Por favor remova-o do carrinho para continuar"
+msgstr ""
 
 #. ProductGone plugin error: Product out of timeframe
 msgid "product.gone.timeframe"
-msgstr "Desculpe, pelo menos um dos produtos não está disponível. Por favor remova-o do carrinho para continuar"
+msgstr ""
 
 #. ProductPrice plugin error: Product price changed
 msgid "product.price.changed"
-msgstr "O preço de pelo menos um produto mudou nesse meio tempo e foi atualizado automaticamente"
+msgstr ""
 
 #. ProductStock plugin error: Product out of stock
 msgid "product.stock.notenough"
-msgstr "Desculpe, pelo menos um produto está fora de estoque. Por favor remova-o do carrinho para continuar"
+msgstr ""

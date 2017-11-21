@@ -13,14 +13,110 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-09-22 11:54+0000\n"
-"Last-Translator: Martin Vyšohlíd <vysohlidm@gmail.com>\n"
+"PO-Revision-Date: 2017-11-21 23:06+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Společnost"
+
+#. Address salutation
+msgid "mr"
+msgstr "Pan"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Paní"
+
+#. Address salutation
+msgid "miss"
+msgstr "Slečna"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "opakováno"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "nedokončeno"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "odstraněno"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "zrušeno"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "odmítnuto"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "vráceno"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "nevyřízeno"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "autorizováno"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "obdrženo"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "nedokončeno"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "odstraněno"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "nevyřízeno"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "probíhá"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "odesláno"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "doručeno"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "ztraceno"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "odmítnuto"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "vráceno"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

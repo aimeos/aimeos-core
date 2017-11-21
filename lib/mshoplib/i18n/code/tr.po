@@ -13,14 +13,110 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-09-23 21:25+0000\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"PO-Revision-Date: 2017-11-21 23:06+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Şirket"
+
+#. Address salutation
+msgid "mr"
+msgstr "Bay"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Bayan"
+
+#. Address salutation
+msgid "miss"
+msgstr "Bayan"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "tekrarlandı"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "tamamlanmadı"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "silindi"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "iptal edildi"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "reddedildi"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "geri ödendi"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "beklemede"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "onaylanmış"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "teslim alındı"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "tamamlanmadı"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "silindi"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "beklemede"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "devam etmekte"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "sevk edildi"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "teslim edildi"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "kayıp"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "reddedildi"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "geri döndü"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

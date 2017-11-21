@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-09-22 11:36+0000\n"
+"PO-Revision-Date: 2017-11-21 23:06+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Serbian (http://www.transifex.com/aimeos/aimeos-core/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,102 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Firma"
+
+#. Address salutation
+msgid "mr"
+msgstr "gosp"
+
+#. Address salutation
+msgid "mrs"
+msgstr "gosp"
+
+#. Address salutation
+msgid "miss"
+msgstr "gdica"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "ponovljeno"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "nezavrseno"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "obrisano"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "prekinuto"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "odbijeno"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "refundirano"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "cekanje"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "odobreno"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "primljeno"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "nezavrseno"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "obrisano"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "cekanje"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "u napretku"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "poslano"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "isporuceno"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "izgubljeno"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "odbijeno"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "vraćeno"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-09-22 11:36+0000\n"
+"PO-Revision-Date: 2017-11-21 23:06+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Polish (http://www.transifex.com/aimeos/aimeos-core/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +22,102 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#. Address salutation
+msgid "company"
+msgstr "Firma"
+
+#. Address salutation
+msgid "mr"
+msgstr "Pan"
+
+#. Address salutation
+msgid "mrs"
+msgstr "Pani"
+
+#. Address salutation
+msgid "miss"
+msgstr "Panna"
+
+#. Order type value
+msgid "order:repeat"
+msgstr "powtórzenie"
+
+#. Order type value
+msgid "order:web"
+msgstr "internet"
+
+#. Order type value
+msgid "order:phone"
+msgstr "telefon"
+
+#. Payment status value
+msgid "pay:-1"
+msgstr "niedokończone"
+
+#. Payment status value
+msgid "pay:0"
+msgstr "usunięte"
+
+#. Payment status value
+msgid "pay:1"
+msgstr "anulowane"
+
+#. Payment status value
+msgid "pay:2"
+msgstr "odmowa"
+
+#. Payment status value
+msgid "pay:3"
+msgstr "zwrócone"
+
+#. Payment status value
+msgid "pay:4"
+msgstr "w oczekiwaniu"
+
+#. Payment status value
+msgid "pay:5"
+msgstr "autoryzowana"
+
+#. Payment status value
+msgid "pay:6"
+msgstr "otrzymane"
+
+#. Delivery status value
+msgid "stat:-1"
+msgstr "niedokończone"
+
+#. Delivery status value
+msgid "stat:0"
+msgstr "usunięte"
+
+#. Delivery status value
+msgid "stat:1"
+msgstr "w oczekiwaniu"
+
+#. Delivery status value
+msgid "stat:2"
+msgstr "przetwarzane"
+
+#. Delivery status value
+msgid "stat:3"
+msgstr "wysłane"
+
+#. Delivery status value
+msgid "stat:4"
+msgstr "dostarczone"
+
+#. Delivery status value
+msgid "stat:5"
+msgstr "zgubione"
+
+#. Delivery status value
+msgid "stat:6"
+msgstr "odmowa"
+
+#. Delivery status value
+msgid "stat:7"
+msgstr "zwrócone"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"
