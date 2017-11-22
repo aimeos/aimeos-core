@@ -8,7 +8,6 @@ addons:
   postgresql: "9.5"
 
 php:
-  - hhvm
   - 7.1
   - 7.0
   - 5.6
@@ -20,8 +19,6 @@ env:
 
 matrix:
   fast_finish: true
-  allow_failures:
-    - php: hhvm
   include:
     - php: 7.1
       env: DB=pgsql
