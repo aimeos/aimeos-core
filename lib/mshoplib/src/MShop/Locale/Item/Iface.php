@@ -18,7 +18,8 @@ namespace Aimeos\MShop\Locale\Item;
  * @package MShop
  * @subpackage Locale
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the site item object.
@@ -28,7 +29,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 */
 	public function getSite();
 
-
 	/**
 	 * Returns the list site IDs up to the root site item.
 	 *
@@ -36,14 +36,12 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 */
 	public function getSitePath();
 
-
 	/**
 	 * Returns the list site IDs of the whole site subtree.
 	 *
 	 * @return array List of site IDs
 	 */
 	public function getSiteSubTree();
-
 
 	/**
 	 * Sets the identifier of the shop instance.
@@ -53,14 +51,12 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 */
 	public function setSiteId( $id );
 
-
 	/**
 	 * Returns the ISO language code.
 	 *
 	 * @return string|null ISO language code (e.g. de or de_DE)
 	 */
 	public function getLanguageId();
-
 
 	/**
 	 * Sets the ISO language code.
@@ -70,14 +66,12 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 */
 	public function setLanguageId( $langid );
 
-
 	/**
 	 * Returns the currency ID.
 	 *
 	 * @return string|null Three letter ISO currency code (e.g. EUR)
 	 */
 	public function getCurrencyId();
-
 
 	/**
 	 * Sets the currency ID.
@@ -86,22 +80,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
 	 */
 	public function setCurrencyId( $currencyid );
-
-
-	/**
-	 * Returns the status property of the locale item
-	 *
-	 * @return integer Returns the status of the locale item
-	 */
-	public function getStatus();
-
-
-	/**
-	 * Sets the status property
-	 *
-	 * @param integer $status The status of the locale item
-	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for chaining method calls
-	 */
-	public function setStatus( $status );
-
 }

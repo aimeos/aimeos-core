@@ -52,9 +52,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
+	 * @param boolean $active True to return only active items, false to return all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function getListItems( $domain = null, $listtype = null, $type = null )
+	public function getListItems( $domain = null, $listtype = null, $type = null, $active = true )
 	{
 		$list = [];
 		$this->sortListItems();
@@ -65,7 +66,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 				$list += $items;
 			}
 
-			return $list;
+			return $this->filterListItems( $list, $active );
 		}
 
 		if( !isset( $this->listItems[$domain] ) ) {
@@ -101,7 +102,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			}
 		}
 
-		return $list;
+		return $this->filterListItems( $list, $active );
 	}
 
 
@@ -115,12 +116,13 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
+	 * @param boolean $active True to return only active items, false to return all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function getRefItems( $domain = null, $type = null, $listtype = null )
+	public function getRefItems( $domain = null, $type = null, $listtype = null, $active = true )
 	{
 		if( $domain === null ) {
-			return $this->refItems;
+			return $this->filterRefItems( $this->refItems, $active );
 		}
 
 		if( !isset( $this->refItems[$domain] ) || !isset( $this->listItems[$domain] ) ) {
@@ -147,7 +149,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 		uasort( $list, array( $this, 'compareRefPosition' ) );
 
-		return $list;
+		return $this->filterRefItems( $list, $active );
 	}
 
 
@@ -212,6 +214,72 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		}
 
 		return ( $a->position < $b->position ) ? -1 : 1;
+	}
+
+
+	/**
+	 * Returns only active list items
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $list Associative list of items with ID as key and objects as value
+	 * @param boolean $active True for active items only, false for all
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] Filtered associative list of items with ID as key and objects as value
+	 */
+	protected function filterListItems( array $list, $active )
+	{
+		if( (bool) $active === false ) {
+			return $list;
+		}
+
+		$result = [];
+		$date = date( 'Y-m-d H:i:s' );
+
+		foreach( $list as $id => $item )
+		{
+			if( $item instanceof \Aimeos\MShop\Common\Item\Lists\Iface && $item->getStatus() > 0
+				&& ( $item->getDateStart() === null || $item->getDateStart() <= $date )
+				&& ( $item->getDateEnd() === null || $item->getDateEnd() >= $date )
+			) {
+				$result[$id] = $item;
+			}
+		}
+
+		return $result;
+	}
+
+
+	/**
+	 * Returns only active referenced items
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $list Associative list of items with ID as key and objects as value
+	 * @param boolean $active True for active items only, false for all
+	 * @return \Aimeos\MShop\Common\Item\Iface[] Filtered associative list of items with ID as key and objects as value
+	 */
+	protected function filterRefItems( array $list, $active )
+	{
+		if( (bool) $active === false ) {
+			return $list;
+		}
+
+		$result = [];
+		$date = date( 'Y-m-d H:i:s' );
+
+		foreach( $list as $id => $item )
+		{
+			if( $item instanceof \Aimeos\MShop\Common\Item\Status\Iface && $item->getStatus() < 1 ) {
+				continue;
+			}
+
+			if( $item instanceof \Aimeos\MShop\Common\Item\Time\Iface
+				&& ( $item->getDateStart() !== null && $item->getDateStart() > $date
+				|| $item->getDateEnd() !== null && $item->getDateEnd() < $date )
+			) {
+				continue;
+			}
+
+			$result[$id] = $item;
+		}
+
+		return $result;
 	}
 
 

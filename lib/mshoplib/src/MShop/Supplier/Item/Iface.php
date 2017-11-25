@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Supplier\Item;
  * @subpackage Supplier
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the label of the supplier item.
@@ -50,19 +50,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
 	 */
 	public function setCode( $value );
-
-	/**
-	 * Returns the status of the item
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the status of the item
-	 *
-	 * @param integer $value Status of the item
-	 * @return \Aimeos\MShop\Supplier\Item\Iface Supplier item for chaining method calls
-	 */
-	public function setStatus( $value );
 }

@@ -18,8 +18,10 @@ namespace Aimeos\MShop\Plugin\Item;
  * @package MShop
  * @subpackage Plugin
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
-	\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Config\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
+	\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
+	\Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the name of the plugin item.
@@ -50,19 +52,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
 	 */
 	public function setProvider( $provider );
-
-	/**
-	 * Returns the status of the plugin item.
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new status of the plugin item.
-	 *
-	 * @param integer $status Status of the item
-	 * @return \Aimeos\MShop\Plugin\Item\Iface Plugin item for chaining method calls
-	 */
-	public function setStatus( $status );
 }

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Customer\Item;
  * @subpackage Customer
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the label of the customer item.
@@ -35,21 +35,6 @@ interface Iface
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setLabel( $value );
-
-	/**
-	 * Returns the status of the item.
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the status of the item.
-	 *
-	 * @param integer $value Status of the item
-	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
-	 */
-	public function setStatus( $value );
 
 	/**
 	 * Returns the unique code of the customer item.

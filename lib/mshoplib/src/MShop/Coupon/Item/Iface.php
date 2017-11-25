@@ -18,7 +18,8 @@ namespace Aimeos\MShop\Coupon\Item;
  * @package MShop
  * @subpackage Coupon
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Time\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the label of the coupon if available.
@@ -64,20 +65,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
 	 */
 	public function setConfig( array $config );
-
-	/**
-	 * Returns the status of the coupon item.
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new status of the coupon item.
-	 *
-	 * @param integer $status Status of the item
-	 * @return \Aimeos\MShop\Coupon\Item\Iface Coupon item for chaining method calls
-	 */
-	public function setStatus( $status );
-
 }

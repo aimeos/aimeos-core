@@ -159,12 +159,11 @@ abstract class Base
 	{
 		$manager = $this->getObject()->getSubManager( 'lists' );
 
-		$search = $manager->createSearch( true );
+		$search = $manager->createSearch();
 
 		$expr = array(
 			$search->compare( '==', $prefix . '.lists.parentid', $ids ),
 			$search->compare( '==', $prefix . '.lists.domain', $domains ),
-			$search->getConditions(),
 		);
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
@@ -191,12 +190,8 @@ abstract class Base
 			{
 				$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
 
-				$search = $manager->createSearch( true );
-				$expr = array(
-					$search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ),
-					$search->getConditions(),
-				);
-				$search->setConditions( $search->combine( '&&', $expr ) );
+				$search = $manager->createSearch();
+				$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
 				$search->setSlice( 0, 0x7fffffff );
 
 				foreach( $manager->searchItems( $search ) as $id => $item )

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Media\Item;
  * @subpackage Media
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the ISO language code.
@@ -50,21 +50,6 @@ interface Iface
 	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
 	 */
 	public function setLabel( $label );
-
-	/**
-	 * Returns the status of the media item.
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new status of the media item.
-	 *
-	 * @param integer $status Status of the item
-	 * @return \Aimeos\MShop\Media\Item\Iface Media item for chaining method calls
-	 */
-	public function setStatus( $status );
 
 	/**
 	 * Returns the mime type of the media item.
