@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-11-21 23:06+0000\n"
+"PO-Revision-Date: 2017-11-25 21:31+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Serbian (http://www.transifex.com/aimeos/aimeos-core/language/sr/)\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sr\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. Item status
+msgid "status:-2"
+msgstr "status:arhiva"
+
+#. Item status
+msgid "status:-1"
+msgstr "status:pregled"
+
+#. Item status
+msgid "status:0"
+msgstr "status:onemogućeno"
+
+#. Item status
+msgid "status:1"
+msgstr "status:omogućeno"
 
 #. Address salutation
 msgid "company"

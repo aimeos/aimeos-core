@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-11-21 23:06+0000\n"
+"PO-Revision-Date: 2017-11-25 21:31+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
@@ -22,6 +22,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#. Item status
+msgid "status:-2"
+msgstr "狀態：已封存"
+
+#. Item status
+msgid "status:-1"
+msgstr "狀態：已審核"
+
+#. Item status
+msgid "status:0"
+msgstr "狀態：已停用"
+
+#. Item status
+msgid "status:1"
+msgstr "狀態：已啟用"
 
 #. Address salutation
 msgid "company"

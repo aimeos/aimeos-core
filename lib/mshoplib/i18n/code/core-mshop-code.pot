@@ -21,6 +21,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 
+#. Item status
+msgid "status:-2"
+msgstr "Archived"
+
+#. Item status
+msgid "status:-1"
+msgstr "Review"
+
+#. Item status
+msgid "status:0"
+msgstr "Disabled"
+
+#. Item status
+msgid "status:1"
+msgstr "Enabled"
+
+
 #. Address salutation
 msgid "company"
 msgstr "Company"
