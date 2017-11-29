@@ -77,14 +77,13 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 		if( $listtype !== null )
 		{
-			$list = [];
 			$iface = '\\Aimeos\\MShop\\Common\\Item\\Typeid\\Iface';
 			$listTypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 
-			foreach( $this->listItems[$domain] as $id => $item )
+			foreach( $list as $id => $item )
 			{
-				if( $item instanceof $iface && in_array( $item->getType(), $listTypes ) ) {
-					$list[$id] = $item;
+				if( !( $item instanceof $iface ) || !in_array( $item->getType(), $listTypes ) ) {
+					unset( $list[$id] );
 				}
 			}
 		}
