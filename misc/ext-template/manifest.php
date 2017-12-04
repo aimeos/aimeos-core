@@ -22,10 +22,10 @@ return array(
 		'admin/jqadm/src',
 	),
 	'i18n' => array(
-		'client' => 'client/i18n',
-		'client/code' => 'client/i18n/code',
 		'admin' => 'admin/i18n',
 		'admin/jsonadm' => 'admin/jsonadm/i18n',
+		'client' => 'client/i18n',
+		'client/code' => 'client/i18n/code',
 		'controller/common' => 'controller/common/i18n',
 		'controller/frontend' => 'controller/frontend/i18n',
 		'controller/jobs' => 'controller/jobs/i18n',
