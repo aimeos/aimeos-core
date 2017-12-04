@@ -22,16 +22,17 @@ return array(
 		'admin/jqadm/src',
 	),
 	'i18n' => array(
+		'client' => 'client/i18n',
+		'client/code' => 'client/i18n/code',
 		'admin' => 'admin/i18n',
 		'admin/jsonadm' => 'admin/jsonadm/i18n',
 		'controller/common' => 'controller/common/i18n',
 		'controller/frontend' => 'controller/frontend/i18n',
 		'controller/jobs' => 'controller/jobs/i18n',
 		'mshop' => 'lib/custom/i18n',
-		'client' => 'client/i18n',
 	),
 	'config' => array(
-		'lib/custom/config',
+		'config',
 	),
 	'custom' => array(
 		'admin/jsonadm/templates' => array(
