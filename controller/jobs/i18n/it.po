@@ -30,11 +30,7 @@ msgid "Class \"%1$s\" not found"
 msgstr ""
 
 #, php-format
-msgid "Downloading file \"%1$s\" failed"
-msgstr ""
-
-#, php-format
-msgid "File \"%1$s\" not found"
+msgid "Controller path is empty"
 msgstr ""
 
 #, php-format
@@ -42,7 +38,15 @@ msgid "Invalid characters in class name \"%1$s\""
 msgstr ""
 
 #, php-format
-msgid "No allowed image types configured for \"%1$s\""
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
 msgstr ""
 
 #, php-format
@@ -50,9 +54,5 @@ msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
 msgstr ""
 
 #, php-format
-msgid "Unable to create directory \"%1$s\""
-msgstr ""
-
-#, php-format
-msgid "Unable to create file in \"%1$s\""
+msgid "Unable to call method \"%1$s\""
 msgstr ""
