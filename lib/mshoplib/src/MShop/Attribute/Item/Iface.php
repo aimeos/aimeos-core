@@ -19,7 +19,8 @@ namespace Aimeos\MShop\Attribute\Item;
  * @subpackage Attribute
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
+	\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the property items of the product
@@ -57,21 +58,6 @@ interface Iface
 	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
 	 */
 	public function setCode( $code );
-
-	/**
-	 * Returns the status (enabled/disabled) of the attribute item.
-	 *
-	 * @return integer Returns the status
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new status of the attribute item.
-	 *
-	 * @param integer $status Status of attribute item
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
-	 */
-	public function setStatus( $status );
 
 	/**
 	 * Returns the name of the attribute item.

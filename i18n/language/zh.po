@@ -1,0 +1,578 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# manuel.fries <manuel.fries@gdatasoftware.com>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2017-09-23 22:30+0000\n"
+"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "aa"
+msgstr "阿法尔语"
+
+msgid "ab"
+msgstr "阿布哈兹语"
+
+msgid "ae"
+msgstr "阿维斯陀语"
+
+msgid "af"
+msgstr "南非荷兰语"
+
+msgid "ak"
+msgstr "阿寒湖语"
+
+msgid "am"
+msgstr "阿姆哈拉语"
+
+msgid "an"
+msgstr "阿拉贡语"
+
+msgid "ar"
+msgstr "阿拉伯语"
+
+msgid "as"
+msgstr "阿萨姆语"
+
+msgid "av"
+msgstr "意第绪语"
+
+msgid "ay"
+msgstr "艾马拉语"
+
+msgid "az"
+msgstr "阿塞拜疆语"
+
+msgid "ba"
+msgstr "巴什基尔语"
+
+msgid "be"
+msgstr "白俄罗斯语"
+
+msgid "bg"
+msgstr "保加利亚语"
+
+msgid "bh"
+msgstr "比哈里语"
+
+msgid "bi"
+msgstr "比斯拉马语"
+
+msgid "bm"
+msgstr "班巴拉语"
+
+msgid "bn"
+msgstr "孟加拉"
+
+msgid "bo"
+msgstr "藏语"
+
+msgid "br"
+msgstr "布列塔尼语"
+
+msgid "bs"
+msgstr "波斯尼亚语"
+
+msgid "ca"
+msgstr "加泰罗尼亚语"
+
+msgid "ce"
+msgstr "车臣语"
+
+msgid "ch"
+msgstr "查莫洛语"
+
+msgid "co"
+msgstr "科西嘉语"
+
+msgid "cr"
+msgstr "克里语"
+
+msgid "cs"
+msgstr "捷克语"
+
+msgid "cu"
+msgstr "教会斯拉夫语"
+
+msgid "cv"
+msgstr "楚瓦什语"
+
+msgid "cy"
+msgstr "威尔士语"
+
+msgid "da"
+msgstr "丹麦语"
+
+msgid "de"
+msgstr "德语"
+
+msgid "dv"
+msgstr "迪维希语"
+
+msgid "dz"
+msgstr "宗卡语"
+
+msgid "ee"
+msgstr "埃维语"
+
+msgid "el"
+msgstr "希腊语"
+
+msgid "en"
+msgstr "英语"
+
+msgid "eo"
+msgstr "世界语"
+
+msgid "es"
+msgstr "西班牙语"
+
+msgid "et"
+msgstr "爱沙尼亚语"
+
+msgid "eu"
+msgstr "巴斯克语"
+
+msgid "fa"
+msgstr "波斯语"
+
+msgid "ff"
+msgstr "福拉语"
+
+msgid "fi"
+msgstr "芬兰语"
+
+msgid "fj"
+msgstr "斐济语"
+
+msgid "fo"
+msgstr "法罗语"
+
+msgid "fr"
+msgstr "法语"
+
+msgid "fy"
+msgstr "弗里斯兰语"
+
+msgid "ga"
+msgstr "爱尔兰语"
+
+msgid "gd"
+msgstr "苏格兰盖尔语"
+
+msgid "gl"
+msgstr "加利西亚语"
+
+msgid "gn"
+msgstr "瓜拉尼语"
+
+msgid "gu"
+msgstr "古吉拉特语"
+
+msgid "gv"
+msgstr "马恩岛语"
+
+msgid "ha"
+msgstr "豪萨语"
+
+msgid "he"
+msgstr "希伯来语"
+
+msgid "hi"
+msgstr "印地语"
+
+msgid "ho"
+msgstr "莫土语"
+
+msgid "hr"
+msgstr "克罗地亚语"
+
+msgid "ht"
+msgstr "海地克里奥尔语"
+
+msgid "hu"
+msgstr "匈牙利语"
+
+msgid "hy"
+msgstr "亚美尼亚语"
+
+msgid "hz"
+msgstr "赫勒娄语"
+
+msgid "ia"
+msgstr "国际语"
+
+msgid "id"
+msgstr "印度尼西亚语"
+
+msgid "ie"
+msgstr "国际语"
+
+msgid "ig"
+msgstr "伊博语"
+
+msgid "ii"
+msgstr "彝语"
+
+msgid "ik"
+msgstr "依努皮亚语"
+
+msgid "io"
+msgstr "伊多语"
+
+msgid "is"
+msgstr "冰岛语"
+
+msgid "it"
+msgstr "意大利语"
+
+msgid "iu"
+msgstr "因纽特语"
+
+msgid "ja"
+msgstr "日语"
+
+msgid "jv"
+msgstr "爪哇语"
+
+msgid "ka"
+msgstr "格鲁吉亚语"
+
+msgid "kg"
+msgstr "金刚语"
+
+msgid "ki"
+msgstr "基库尤语"
+
+msgid "kj"
+msgstr "克万亚玛语"
+
+msgid "kk"
+msgstr "哈萨克语"
+
+msgid "kl"
+msgstr "格陵兰语"
+
+msgid "km"
+msgstr "高棉语"
+
+msgid "kn"
+msgstr "卡纳达语"
+
+msgid "ko"
+msgstr "韩语"
+
+msgid "kr"
+msgstr "卡努里语"
+
+msgid "ks"
+msgstr "克什米尔语"
+
+msgid "ku"
+msgstr "库尔德语"
+
+msgid "kv"
+msgstr "科米语"
+
+msgid "kw"
+msgstr "康沃尔语"
+
+msgid "ky"
+msgstr "吉尔吉斯语"
+
+msgid "la"
+msgstr "拉丁语"
+
+msgid "lb"
+msgstr "卢森堡语"
+
+msgid "lg"
+msgstr "卢干达语"
+
+msgid "li"
+msgstr "林堡语"
+
+msgid "ln"
+msgstr "林加拉语"
+
+msgid "lo"
+msgstr "老挝语"
+
+msgid "lt"
+msgstr "立陶宛语"
+
+msgid "lu"
+msgstr "卢巴 - 加丹加语"
+
+msgid "lv"
+msgstr "拉脱维亚语"
+
+msgid "mg"
+msgstr "阿姆哈拉语"
+
+msgid "mh"
+msgstr "马绍尔语"
+
+msgid "mi"
+msgstr "毛利语"
+
+msgid "mk"
+msgstr "马其顿语"
+
+msgid "ml"
+msgstr "马拉雅拉姆语"
+
+msgid "mn"
+msgstr "蒙语"
+
+msgid "mo"
+msgstr "摩尔多瓦语"
+
+msgid "mr"
+msgstr "马拉地语"
+
+msgid "ms"
+msgstr "马来语"
+
+msgid "mt"
+msgstr "马耳他语"
+
+msgid "my"
+msgstr "缅甸语"
+
+msgid "na"
+msgstr "瑙鲁语"
+
+msgid "nb"
+msgstr "挪威语"
+
+msgid "nd"
+msgstr "北恩德贝勒语"
+
+msgid "ne"
+msgstr "尼泊尔语"
+
+msgid "ng"
+msgstr " 恩东加语"
+
+msgid "nl"
+msgstr "荷兰语"
+
+msgid "nn"
+msgstr " 新挪威语"
+
+msgid "no"
+msgstr "挪威语"
+
+msgid "nr"
+msgstr "南恩德贝勒语"
+
+msgid "nv"
+msgstr "纳瓦霍语"
+
+msgid "ny"
+msgstr "奇切瓦语"
+
+msgid "oc"
+msgstr "奥克语"
+
+msgid "oj"
+msgstr "奥吉布瓦语"
+
+msgid "om"
+msgstr "奥罗莫语"
+
+msgid "or"
+msgstr "奥里亚语"
+
+msgid "os"
+msgstr "奥塞梯语"
+
+msgid "pa"
+msgstr "旁遮普语"
+
+msgid "pi"
+msgstr "巴利语"
+
+msgid "pl"
+msgstr "波兰语"
+
+msgid "ps"
+msgstr "普什图语"
+
+msgid "pt"
+msgstr "葡萄牙语"
+
+msgid "qu"
+msgstr "克丘亚语"
+
+msgid "rm"
+msgstr "罗曼拉丁语"
+
+msgid "rn"
+msgstr "基隆迪语"
+
+msgid "ro"
+msgstr "罗马尼亚语"
+
+msgid "ru"
+msgstr "俄语"
+
+msgid "rw"
+msgstr "卢旺达语"
+
+msgid "sa"
+msgstr "梵语"
+
+msgid "sc"
+msgstr "撒丁语"
+
+msgid "sd"
+msgstr "信德语"
+
+msgid "se"
+msgstr "北萨米语"
+
+msgid "sg"
+msgstr "三乡语"
+
+msgid "si"
+msgstr "僧伽罗语"
+
+msgid "sk"
+msgstr "斯洛伐克语"
+
+msgid "sl"
+msgstr "斯洛文尼亚语"
+
+msgid "sm"
+msgstr "萨摩亚语"
+
+msgid "sn"
+msgstr "绍纳语"
+
+msgid "so"
+msgstr "索马里语"
+
+msgid "sq"
+msgstr "阿尔巴尼亚语"
+
+msgid "sr"
+msgstr "塞尔维亚语"
+
+msgid "ss"
+msgstr "斯瓦蒂"
+
+msgid "st"
+msgstr "塞索托语"
+
+msgid "su"
+msgstr "巽语"
+
+msgid "sv"
+msgstr "瑞典语"
+
+msgid "sw"
+msgstr "斯瓦希里语"
+
+msgid "ta"
+msgstr "泰米尔语"
+
+msgid "te"
+msgstr "泰卢固语"
+
+msgid "tg"
+msgstr "塔吉克语"
+
+msgid "th"
+msgstr "泰国语"
+
+msgid "ti"
+msgstr "蒂格里亚语"
+
+msgid "tk"
+msgstr "土库曼语"
+
+msgid "tl"
+msgstr "他加禄语"
+
+msgid "tn"
+msgstr "茨瓦纳语"
+
+msgid "to"
+msgstr "同安语"
+
+msgid "tr"
+msgstr "土耳其语"
+
+msgid "ts"
+msgstr "聪加语"
+
+msgid "tt"
+msgstr "鞑靼语"
+
+msgid "tw"
+msgstr "特维语"
+
+msgid "ty"
+msgstr "大溪地语"
+
+msgid "ug"
+msgstr "维吾尔语"
+
+msgid "uk"
+msgstr "乌克兰语"
+
+msgid "ur"
+msgstr "乌尔都语"
+
+msgid "uz"
+msgstr "乌兹别克语"
+
+msgid "ve"
+msgstr "文达语"
+
+msgid "vi"
+msgstr "越南语"
+
+msgid "vo"
+msgstr "沃拉普克语"
+
+msgid "wa"
+msgstr "华隆语"
+
+msgid "wo"
+msgstr "沃洛夫语"
+
+msgid "xh"
+msgstr "科萨语"
+
+msgid "yi"
+msgstr "意第绪语"
+
+msgid "yo"
+msgstr "约鲁巴语"
+
+msgid "za"
+msgstr "庄语"
+
+msgid "zh"
+msgstr "中文"
+
+msgid "zu"
+msgstr "祖鲁语"

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Locale\Item\Language;
  * @subpackage Locale
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the two letter ISO language code.
@@ -27,7 +27,6 @@ interface Iface
 	 * @return string two letter ISO language code
 	 */
 	public function getCode();
-
 
 	/**
 	 * Sets the two letter ISO language code.
@@ -37,14 +36,12 @@ interface Iface
 	 */
 	public function setCode( $key );
 
-
 	/**
 	 * Returns the label property of the language.
 	 *
 	 * @return string Label or symbol of the language
 	 */
 	public function getLabel();
-
 
 	/**
 	 * Sets the label property of the language.
@@ -53,22 +50,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
 	 */
 	public function setLabel( $label );
-
-
-	/**
-	 * Returns the status of the item.
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-
-	/**
-	 * Sets the status of the item.
-	 *
-	 * @param integer $status Status of the language
-	 * @return \Aimeos\MShop\Locale\Item\Language\Iface Locale language item for chaining method calls
-	 */
-	public function setStatus( $status );
-
 }

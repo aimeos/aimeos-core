@@ -6,8 +6,6 @@
 		<exec command="touch ./i18n/<extname>-admin.pot" />
 		<exec command="find ./jqadm/templates/ ./jqadm/src/ -type f | xgettext -j -s --no-wrap --add-comments=/ --language=PHP --from-code=UTF-8 --keyword=printf:1 --keyword=sprintf:1 --keyword=translate:2,2t --keyword=translate:2,3,4t -o i18n/<extname>-admin.pot -f -"
 			checkreturn="true" logoutput="true" />
-		<exec command="find ./extjs/src/ -type f -name '*.js' | xgettext -j -s --no-wrap --add-comments=: --language=Python --from-code=UTF-8 --keyword=dt:2,2t --keyword=dn:2,3,4t -o i18n/<extname>-admin.pot -f -"
-			checkreturn="true" logoutput="true" />
 		<foreach list="./i18n" param="i18n-dir" target="i18n-files" />
 	</target>
 

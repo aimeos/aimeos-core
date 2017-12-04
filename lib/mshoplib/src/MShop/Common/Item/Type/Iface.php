@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Common\Item\Type;
  * @package MShop
  * @subpackage Common
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the code of the common list type item
@@ -71,19 +71,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setLabel( $label );
-
-	/**
-	 * Returns the status of the common list type item
-	 *
-	 * @return integer Status of the common list type item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the status of the common list type item
-	 *
-	 * @param integer $status New status of the common list type item
-	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
-	 */
-	public function setStatus( $status );
 }

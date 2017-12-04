@@ -7,7 +7,6 @@
 [![Build Status](https://travis-ci.org/aimeos/aimeos-core.png?branch=master)](https://travis-ci.org/aimeos/aimeos-core)
 [![Coverage Status](https://coveralls.io/repos/aimeos/aimeos-core/badge.svg?branch=master)](https://coveralls.io/r/aimeos/aimeos-core?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/aimeos-core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/aimeos-core/?branch=master)
-[![HHVM Status](http://hhvm.h4cc.de/badge/aimeos/aimeos-core.svg)](http://hhvm.h4cc.de/package/aimeos/aimeos-core)
 [![License](https://poser.pugx.org/aimeos/aimeos-core/license.svg)](https://packagist.org/packages/aimeos/aimeos-core)
 
 [![Aimeos demo](https://aimeos.org/fileadmin/user_upload/demo.jpg)](http://demo.aimeos.org/)

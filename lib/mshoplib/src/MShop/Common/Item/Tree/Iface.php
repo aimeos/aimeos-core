@@ -17,7 +17,7 @@ namespace Aimeos\MShop\Common\Item\Tree;
  * @package MShop
  * @subpackage Common
  */
-interface Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the code of the item.
@@ -62,21 +62,6 @@ interface Iface
 	 * @return string Unique ID of the parent category
 	 */
 	public function getParentId();
-
-	/**
-	 * Returns the status of the item.
-	 *
-	 * @return boolean True if enabled, false if not
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new status of the item.
-	 *
-	 * @param boolean $status True if enabled, false if not
-	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Item for chaining method calls
-	 */
-	public function setStatus( $status );
 
 	/**
 	 * Returns a child of this node identified by its index.

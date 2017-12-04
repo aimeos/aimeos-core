@@ -161,13 +161,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$result = $method->invokeArgs( $object, array( $orderItem->getId(), 'typestatus', 'shipped' ) );
 
-		$this->assertEquals( 1, count( $result ) );
-
-		foreach( $result as $item )
-		{
-			$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $item );
-			$this->assertEquals( 'shipped', $item->getValue() );
-		}
+		$this->assertNotEquals( false, $result );
+		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $result );
+		$this->assertEquals( 'shipped', $result->getValue() );
 	}
 
 

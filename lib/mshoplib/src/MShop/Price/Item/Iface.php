@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Price\Item;
  * @subpackage Price
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
+	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Add the given price to the current one.
@@ -199,20 +199,4 @@ interface Iface
 	 * @throws \Aimeos\MShop\Exception If the currency ID is invalid
 	 */
 	public function setCurrencyId( $currencyid );
-
-	/**
-	 * Returns the status of the item
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the status of the item
-	 *
-	 * @param integer $status Status of the item
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
-	 */
-	public function setStatus( $status );
-
 }

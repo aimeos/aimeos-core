@@ -21,7 +21,8 @@ namespace Aimeos\MShop\Common\Item\Lists;
 interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
 		\Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Time\Iface,
-		\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface
+		\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface,
+		\Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the domain of the common list item, e.g. text or media.
@@ -52,21 +53,6 @@ interface Iface
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
 	public function setRefId( $refid );
-
-	/**
-	 * Returns the status of the list item.
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new status of the list item.
-	 *
-	 * @param integer $status Status of the item
-	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
-	 */
-	public function setStatus( $status );
 
 	/**
 	 * Returns the referenced item if it's available.

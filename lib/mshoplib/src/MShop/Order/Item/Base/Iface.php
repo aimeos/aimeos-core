@@ -18,7 +18,8 @@ namespace Aimeos\MShop\Order\Item\Base;
  * @package MShop
  * @subpackage Order
  */
-interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Common\Item\Iface
+interface Iface
+	extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the comment field of the order item
@@ -226,21 +227,6 @@ interface Iface extends \Aimeos\MW\Observer\Publisher\Iface, \Aimeos\MShop\Commo
 	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
 	 */
 	public function finish();
-
-	/**
-	 * Returns the current status of the order base item.
-	 *
-	 * @return integer Status of the item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new status of the order base item.
-	 *
-	 * @param integer $value Status of the item
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for chaining method calls
-	 */
-	public function setStatus( $value );
 
 	/**
 	 * Tests if the order object was modified.

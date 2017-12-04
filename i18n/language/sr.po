@@ -1,0 +1,578 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# 
+# Translators:
+# Translators:
+# Translators:
+# Translators:
+# danijel marinovic <danijel06@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-09 09:14+0200\n"
+"PO-Revision-Date: 2017-09-22 11:36+0000\n"
+"Last-Translator: Aimeos\n"
+"Language-Team: Serbian (http://www.transifex.com/aimeos/aimeos-core/language/sr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sr\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "aa"
+msgstr ""
+
+msgid "ab"
+msgstr ""
+
+msgid "ae"
+msgstr ""
+
+msgid "af"
+msgstr ""
+
+msgid "ak"
+msgstr ""
+
+msgid "am"
+msgstr ""
+
+msgid "an"
+msgstr ""
+
+msgid "ar"
+msgstr ""
+
+msgid "as"
+msgstr ""
+
+msgid "av"
+msgstr ""
+
+msgid "ay"
+msgstr ""
+
+msgid "az"
+msgstr ""
+
+msgid "ba"
+msgstr ""
+
+msgid "be"
+msgstr ""
+
+msgid "bg"
+msgstr ""
+
+msgid "bh"
+msgstr ""
+
+msgid "bi"
+msgstr ""
+
+msgid "bm"
+msgstr ""
+
+msgid "bn"
+msgstr ""
+
+msgid "bo"
+msgstr ""
+
+msgid "br"
+msgstr ""
+
+msgid "bs"
+msgstr ""
+
+msgid "ca"
+msgstr ""
+
+msgid "ce"
+msgstr ""
+
+msgid "ch"
+msgstr ""
+
+msgid "co"
+msgstr ""
+
+msgid "cr"
+msgstr ""
+
+msgid "cs"
+msgstr ""
+
+msgid "cu"
+msgstr ""
+
+msgid "cv"
+msgstr ""
+
+msgid "cy"
+msgstr ""
+
+msgid "da"
+msgstr "danski"
+
+msgid "de"
+msgstr ""
+
+msgid "dv"
+msgstr ""
+
+msgid "dz"
+msgstr ""
+
+msgid "ee"
+msgstr ""
+
+msgid "el"
+msgstr ""
+
+msgid "en"
+msgstr "Engleski"
+
+msgid "eo"
+msgstr "Esperanto"
+
+msgid "es"
+msgstr ""
+
+msgid "et"
+msgstr "estonski"
+
+msgid "eu"
+msgstr ""
+
+msgid "fa"
+msgstr "Persijski"
+
+msgid "ff"
+msgstr ""
+
+msgid "fi"
+msgstr "Finski"
+
+msgid "fj"
+msgstr ""
+
+msgid "fo"
+msgstr ""
+
+msgid "fr"
+msgstr "Francuski"
+
+msgid "fy"
+msgstr ""
+
+msgid "ga"
+msgstr "Irski"
+
+msgid "gd"
+msgstr "Skotski Galik"
+
+msgid "gl"
+msgstr ""
+
+msgid "gn"
+msgstr ""
+
+msgid "gu"
+msgstr ""
+
+msgid "gv"
+msgstr ""
+
+msgid "ha"
+msgstr ""
+
+msgid "he"
+msgstr "Jevrejski"
+
+msgid "hi"
+msgstr "Hindu"
+
+msgid "ho"
+msgstr ""
+
+msgid "hr"
+msgstr "Hrvatski"
+
+msgid "ht"
+msgstr ""
+
+msgid "hu"
+msgstr "Madarski"
+
+msgid "hy"
+msgstr ""
+
+msgid "hz"
+msgstr ""
+
+msgid "ia"
+msgstr ""
+
+msgid "id"
+msgstr "Indonezanski"
+
+msgid "ie"
+msgstr ""
+
+msgid "ig"
+msgstr ""
+
+msgid "ii"
+msgstr ""
+
+msgid "ik"
+msgstr ""
+
+msgid "io"
+msgstr ""
+
+msgid "is"
+msgstr ""
+
+msgid "it"
+msgstr "Italijanski"
+
+msgid "iu"
+msgstr ""
+
+msgid "ja"
+msgstr "Japanski"
+
+msgid "jv"
+msgstr ""
+
+msgid "ka"
+msgstr ""
+
+msgid "kg"
+msgstr ""
+
+msgid "ki"
+msgstr "Kikuju"
+
+msgid "kj"
+msgstr ""
+
+msgid "kk"
+msgstr ""
+
+msgid "kl"
+msgstr ""
+
+msgid "km"
+msgstr ""
+
+msgid "kn"
+msgstr ""
+
+msgid "ko"
+msgstr "Korejski"
+
+msgid "kr"
+msgstr ""
+
+msgid "ks"
+msgstr ""
+
+msgid "ku"
+msgstr ""
+
+msgid "kv"
+msgstr ""
+
+msgid "kw"
+msgstr ""
+
+msgid "ky"
+msgstr ""
+
+msgid "la"
+msgstr "Latinski"
+
+msgid "lb"
+msgstr ""
+
+msgid "lg"
+msgstr ""
+
+msgid "li"
+msgstr ""
+
+msgid "ln"
+msgstr ""
+
+msgid "lo"
+msgstr ""
+
+msgid "lt"
+msgstr ""
+
+msgid "lu"
+msgstr ""
+
+msgid "lv"
+msgstr ""
+
+msgid "mg"
+msgstr ""
+
+msgid "mh"
+msgstr ""
+
+msgid "mi"
+msgstr ""
+
+msgid "mk"
+msgstr "Makedonski"
+
+msgid "ml"
+msgstr ""
+
+msgid "mn"
+msgstr "Mongolski"
+
+msgid "mo"
+msgstr ""
+
+msgid "mr"
+msgstr ""
+
+msgid "ms"
+msgstr ""
+
+msgid "mt"
+msgstr ""
+
+msgid "my"
+msgstr ""
+
+msgid "na"
+msgstr ""
+
+msgid "nb"
+msgstr ""
+
+msgid "nd"
+msgstr ""
+
+msgid "ne"
+msgstr ""
+
+msgid "ng"
+msgstr ""
+
+msgid "nl"
+msgstr ""
+
+msgid "nn"
+msgstr ""
+
+msgid "no"
+msgstr "Norveski"
+
+msgid "nr"
+msgstr ""
+
+msgid "nv"
+msgstr ""
+
+msgid "ny"
+msgstr ""
+
+msgid "oc"
+msgstr ""
+
+msgid "oj"
+msgstr ""
+
+msgid "om"
+msgstr ""
+
+msgid "or"
+msgstr ""
+
+msgid "os"
+msgstr ""
+
+msgid "pa"
+msgstr ""
+
+msgid "pi"
+msgstr ""
+
+msgid "pl"
+msgstr "Poljski"
+
+msgid "ps"
+msgstr "Pastu"
+
+msgid "pt"
+msgstr "Portugalski"
+
+msgid "qu"
+msgstr ""
+
+msgid "rm"
+msgstr ""
+
+msgid "rn"
+msgstr ""
+
+msgid "ro"
+msgstr ""
+
+msgid "ru"
+msgstr ""
+
+msgid "rw"
+msgstr ""
+
+msgid "sa"
+msgstr ""
+
+msgid "sc"
+msgstr ""
+
+msgid "sd"
+msgstr ""
+
+msgid "se"
+msgstr ""
+
+msgid "sg"
+msgstr ""
+
+msgid "si"
+msgstr ""
+
+msgid "sk"
+msgstr "Slovacki"
+
+msgid "sl"
+msgstr "Slovenacki"
+
+msgid "sm"
+msgstr ""
+
+msgid "sn"
+msgstr ""
+
+msgid "so"
+msgstr ""
+
+msgid "sq"
+msgstr "Albanski"
+
+msgid "sr"
+msgstr "Srpski"
+
+msgid "ss"
+msgstr ""
+
+msgid "st"
+msgstr ""
+
+msgid "su"
+msgstr ""
+
+msgid "sv"
+msgstr "Svedski"
+
+msgid "sw"
+msgstr "Svahili"
+
+msgid "ta"
+msgstr ""
+
+msgid "te"
+msgstr ""
+
+msgid "tg"
+msgstr ""
+
+msgid "th"
+msgstr ""
+
+msgid "ti"
+msgstr ""
+
+msgid "tk"
+msgstr ""
+
+msgid "tl"
+msgstr ""
+
+msgid "tn"
+msgstr ""
+
+msgid "to"
+msgstr ""
+
+msgid "tr"
+msgstr "Turski"
+
+msgid "ts"
+msgstr ""
+
+msgid "tt"
+msgstr ""
+
+msgid "tw"
+msgstr ""
+
+msgid "ty"
+msgstr ""
+
+msgid "ug"
+msgstr ""
+
+msgid "uk"
+msgstr "Ukrajinski"
+
+msgid "ur"
+msgstr "Urdu"
+
+msgid "uz"
+msgstr ""
+
+msgid "ve"
+msgstr ""
+
+msgid "vi"
+msgstr ""
+
+msgid "vo"
+msgstr ""
+
+msgid "wa"
+msgstr ""
+
+msgid "wo"
+msgstr ""
+
+msgid "xh"
+msgstr ""
+
+msgid "yi"
+msgstr ""
+
+msgid "yo"
+msgstr ""
+
+msgid "za"
+msgstr ""
+
+msgid "zh"
+msgstr ""
+
+msgid "zu"
+msgstr ""

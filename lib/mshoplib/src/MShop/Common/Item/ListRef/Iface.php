@@ -30,9 +30,10 @@ interface Iface
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
+	 * @param boolean $active True to return only active items, false to return all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 */
-	public function getListItems( $domain = null, $listtype = null, $type = null );
+	public function getListItems( $domain = null, $listtype = null, $type = null, $active = true );
 
 	/**
 	 * Returns the product, text, etc. items, optionally filtered by type.
@@ -43,9 +44,10 @@ interface Iface
 	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
+	 * @param boolean $active True to return only active items, false to return all
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	public function getRefItems( $domain = null, $type = null, $listtype = null );
+	public function getRefItems( $domain = null, $type = null, $listtype = null, $active = true );
 
 	/**
 	 * Returns the localized text type of the item or the internal label if no name is available.

@@ -41,20 +41,24 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) );
 		$this->textItem1->setContent( 'test name' );
+		$this->textItem1->setStatus( 1 );
 		$this->textItem1->setId( 1 );
 
 		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'short' ) );
 		$this->textItem2->setContent( 'default name' );
+		$this->textItem2->setStatus( 1 );
 		$this->textItem2->setId( 2 );
 
 		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'test' ) );
 		$this->listItem1->setRefId( $this->textItem1->getId() );
 		$this->listItem1->setPosition( 1 );
+		$this->listItem1->setStatus( 1 );
 		$this->listItem1->setId( 11 );
 
 		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'default' ) );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
 		$this->listItem2->setPosition( 0 );
+		$this->listItem2->setStatus( 1 );
 		$this->listItem2->setId( 10 );
 
 		$listItems = array( 'text' => array(
@@ -84,8 +88,8 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( '' );
 
-		$this->assertEquals( $object->getName(), 'test label' );
-		$this->assertEquals( $this->object->getName(), 'test name' );
+		$this->assertEquals( 'test label', $object->getName() );
+		$this->assertEquals( 'test name', $this->object->getName() );
 	}
 
 

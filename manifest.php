@@ -25,6 +25,9 @@ return array(
 		'controller/jobs' => 'controller/jobs/i18n',
 		'mshop/code' => 'lib/mshoplib/i18n/code',
 		'mshop' => 'lib/mshoplib/i18n',
+		'language' => 'i18n/language',
+		'currency' => 'i18n/currency',
+		'country' => 'i18n/country',
 	),
 	'setup' => array(
 		'lib/mshoplib/setup',

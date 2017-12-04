@@ -18,23 +18,8 @@ namespace Aimeos\MAdmin\Job\Item;
  * @package MAdmin
  * @subpackage Job
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface
+interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
-	/**
-	 * Returns the status (enabled/disabled) of the attribute item.
-	 *
-	 * @return integer Returns the status
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the new status of the attribute item.
-	 *
-	 * @param integer $status Status of attribute item
-	 * @return \Aimeos\MAdmin\Job\Item\Iface Job item for chaining method calls
-	 */
-	public function setStatus( $status );
-
 	/**
 	 * Returns the name of the attribute item.
 	 *

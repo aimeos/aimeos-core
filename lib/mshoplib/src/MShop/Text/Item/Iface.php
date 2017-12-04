@@ -19,7 +19,8 @@ namespace Aimeos\MShop\Text\Item;
  * @subpackage Text
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface,
+	\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the domain of the text item.
@@ -80,19 +81,4 @@ interface Iface
 	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
 	 */
 	public function setLabel( $label );
-
-	/**
-	 * Returns the status of the text item.
-	 *
-	 * @return integer Status of the text item
-	 */
-	public function getStatus();
-
-	/**
-	 * Sets the status of the text item.
-	 *
-	 * @param integer $status Status of the item
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
-	 */
-	public function setStatus( $status );
 }

@@ -6,11 +6,9 @@
 		<phing target="test" haltonfailure="true" dir="lib/custom"/>
 		<phing target="test" haltonfailure="true" dir="controller/common" />
 		<phing target="test" haltonfailure="true" dir="controller/frontend" />
-		<phing target="test" haltonfailure="true" dir="controller/extjs" />
 		<phing target="test" haltonfailure="true" dir="controller/jobs" />
 		<phing target="test" haltonfailure="true" dir="admin/jsonadm" />
 		<phing target="test" haltonfailure="true" dir="admin/jqadm" />
-		<phing target="test" haltonfailure="true" dir="admin/extjs" />
 		<phing target="test" haltonfailure="true" dir="client/html" />
 		<phing target="test" haltonfailure="true" dir="client/jsonapi" />
 	</target>
@@ -23,11 +21,9 @@
 		<phing target="coverage" haltonfailure="true" dir="lib/custom"/>
 		<phing target="coverage" haltonfailure="true" dir="controller/common" />
 		<phing target="coverage" haltonfailure="true" dir="controller/frontend" />
-		<phing target="coverage" haltonfailure="true" dir="controller/extjs" />
 		<phing target="coverage" haltonfailure="true" dir="controller/jobs" />
 		<phing target="coverage" haltonfailure="true" dir="admin/jsonadm" />
 		<phing target="coverage" haltonfailure="true" dir="admin/jqadm" />
-		<phing target="coverage" haltonfailure="true" dir="admin/extjs" />
 		<phing target="coverage" haltonfailure="true" dir="client/html" />
 		<phing target="coverage" haltonfailure="true" dir="client/jsonapi" />
 	</target>
@@ -36,11 +32,9 @@
 		<phing target="check" haltonfailure="true" dir="lib/custom"/>
 		<phing target="check" haltonfailure="true" dir="controller/common" />
 		<phing target="check" haltonfailure="true" dir="controller/frontend" />
-		<phing target="check" haltonfailure="true" dir="controller/extjs" />
 		<phing target="check" haltonfailure="true" dir="controller/jobs" />
 		<phing target="check" haltonfailure="true" dir="admin/jsonadm" />
 		<phing target="check" haltonfailure="true" dir="admin/jqadm" />
-		<phing target="check" haltonfailure="true" dir="admin/extjs" />
 		<phing target="check" haltonfailure="true" dir="client/html" />
 		<phing target="check" haltonfailure="true" dir="client/jsonapi" />
 	</target>
@@ -49,11 +43,9 @@
 		<phing target="clean" haltonfailure="true" dir="lib/custom" />
 		<phing target="clean" haltonfailure="true" dir="controller/common" />
 		<phing target="clean" haltonfailure="true" dir="controller/frontend" />
-		<phing target="clean" haltonfailure="true" dir="controller/extjs" />
 		<phing target="clean" haltonfailure="true" dir="controller/jobs" />
 		<phing target="clean" haltonfailure="true" dir="admin/jsonadm" />
 		<phing target="clean" haltonfailure="true" dir="admin/jqadm" />
-		<phing target="clean" haltonfailure="true" dir="admin/extjs" />
 		<phing target="clean" haltonfailure="true" dir="client/html" />
 		<phing target="clean" haltonfailure="true" dir="client/jsonapi" />
 	</target>
@@ -62,7 +54,6 @@
 		<phing target="i18n" haltonfailure="true" dir="lib/custom" />
 		<phing target="i18n" haltonfailure="true" dir="controller/common" />
 		<phing target="i18n" haltonfailure="true" dir="controller/frontend" />
-		<phing target="i18n" haltonfailure="true" dir="controller/extjs" />
 		<phing target="i18n" haltonfailure="true" dir="controller/jobs" />
 		<phing target="i18n" haltonfailure="true" dir="admin/jsonadm" />
 		<phing target="i18n" haltonfailure="true" dir="admin" />
@@ -73,7 +64,6 @@
 		<phing target="build" haltonfailure="true" dir="lib/custom" />
 		<phing target="build" haltonfailure="true" dir="controller/common" />
 		<phing target="build" haltonfailure="true" dir="controller/frontend" />
-		<phing target="build" haltonfailure="true" dir="controller/extjs" />
 		<phing target="build" haltonfailure="true" dir="controller/jobs" />
 		<phing target="build" haltonfailure="true" dir="admin/jsonadm" />
 		<phing target="build" haltonfailure="true" dir="admin" />

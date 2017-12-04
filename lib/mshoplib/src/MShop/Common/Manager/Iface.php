@@ -112,4 +112,12 @@ interface Iface
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
 	public function searchItems( \Aimeos\MW\Criteria\Iface $search, array $ref = [], &$total = null );
+
+	/**
+	 * Injects the reference of the outmost object
+	 *
+	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
+	 */
+	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object );
 }
