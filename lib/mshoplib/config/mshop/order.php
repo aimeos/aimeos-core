@@ -19,7 +19,6 @@ return array(
 								FROM "mshop_order_base_address" AS mordbaad
 								:joins
 								WHERE :cond
-								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 								/*-orderby*/ ORDER BY :order /*orderby-*/
 								LIMIT :size OFFSET :start
 							) AS list
@@ -118,7 +117,6 @@ return array(
 								FROM "mshop_order_base_coupon" AS mordbaco
 								:joins
 								WHERE :cond
-								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 								/*-orderby*/ ORDER BY :order /*orderby-*/
 								LIMIT :size OFFSET :start
 							) AS list
@@ -195,7 +193,6 @@ return array(
 									FROM "mshop_order_base_product_attr" AS mordbaprat
 									:joins
 									WHERE :cond
-									GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 									/*-orderby*/ ORDER BY :order /*orderby-*/
 									LIMIT :size OFFSET :start
 								) AS list
@@ -272,7 +269,6 @@ return array(
 								FROM "mshop_order_base_product" AS mordbapr
 								:joins
 								WHERE :cond
-								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 								/*-orderby*/ ORDER BY :order /*orderby-*/
 								LIMIT :size OFFSET :start
 							) AS list
@@ -287,7 +283,6 @@ return array(
 								FROM "mshop_order_base_product" AS mordbapr
 								:joins
 								WHERE :cond
-								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 								/*-orderby*/ ORDER BY :order /*orderby-*/
 								LIMIT :size OFFSET :start
 							) AS list
@@ -302,7 +297,6 @@ return array(
 								FROM "mshop_order_base_product" AS mordbapr
 								:joins
 								WHERE :cond
-								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 								/*-orderby*/ ORDER BY :order /*orderby-*/
 								LIMIT :size OFFSET :start
 							) AS list
@@ -397,7 +391,6 @@ return array(
 									FROM "mshop_order_base_service_attr" AS mordbaseat
 									:joins
 									WHERE :cond
-									GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 									/*-orderby*/ ORDER BY :order /*orderby-*/
 									LIMIT :size OFFSET :start
 								) AS list
@@ -474,7 +467,6 @@ return array(
 								FROM "mshop_order_base_service" AS mordbase
 								:joins
 								WHERE :cond
-								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 								/*-orderby*/ ORDER BY :order /*orderby-*/
 								LIMIT :size OFFSET :start
 							) AS list
@@ -489,7 +481,6 @@ return array(
 								FROM "mshop_order_base_service" AS mordbase
 								:joins
 								WHERE :cond
-								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 								/*-orderby*/ ORDER BY :order /*orderby-*/
 								LIMIT :size OFFSET :start
 							) AS list
@@ -504,7 +495,6 @@ return array(
 								FROM "mshop_order_base_service" AS mordbase
 								:joins
 								WHERE :cond
-								GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 								/*-orderby*/ ORDER BY :order /*orderby-*/
 								LIMIT :size OFFSET :start
 							) AS list
@@ -589,7 +579,6 @@ return array(
 							FROM "mshop_order_base" AS mordba
 							:joins
 							WHERE :cond
-							GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						) AS list
@@ -604,7 +593,6 @@ return array(
 							FROM "mshop_order_base" AS mordba
 							:joins
 							WHERE :cond
-							GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						) AS list
@@ -619,7 +607,6 @@ return array(
 							FROM "mshop_order_base" AS mordba
 							:joins
 							WHERE :cond
-							GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						) AS list
@@ -702,7 +689,6 @@ return array(
 							FROM "mshop_order_status" AS mordst
 							:joins
 							WHERE :cond
-							GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						) AS list
@@ -777,7 +763,6 @@ return array(
 						FROM "mshop_order" AS mord
 						:joins
 						WHERE :cond
-						GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					) AS list
@@ -792,7 +777,6 @@ return array(
 						FROM "mshop_order" AS mord
 						:joins
 						WHERE :cond
-						GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					) AS list
@@ -807,7 +791,6 @@ return array(
 						FROM "mshop_order" AS mord
 						:joins
 						WHERE :cond
-						GROUP BY "key", "val" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					) AS list
