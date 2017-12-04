@@ -82,10 +82,11 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 			return $this->compare( '==', '1', '1' );
 		}
 
-		if( ( list( $op, $value ) = each( $array ) ) === false ) {
+		if( ( $value = reset( $array ) ) === false ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid condition array "%1$s"', json_encode( $array ) ) );
 		}
 
+		$op = key( $array );
 		$operators = $this->getOperators();
 
 		if( in_array( $op, $operators['combine'], true ) ) {
@@ -138,8 +139,9 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 		foreach( $list as $entry )
 		{
 			$entry = (array) $entry;
+			$op = key( $entry );
 
-			if( ( list( $op, $value ) = each( $entry ) ) === false ) {
+			if( ( $value = reset( $entry ) ) === false ) {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid combine condition array "%1$s"', json_encode( $entry ) ) );
 			}
 
@@ -167,10 +169,10 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	 */
 	protected function createCompareExpression( $op, array $pair )
 	{
-		if( ( list( $name, $value ) = each( $pair ) ) === false ) {
+		if( ( $value = reset( $pair ) ) === false ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid compare condition array "%1$s"', json_encode( $pair ) ) );
 		}
 
-		return $this->compare( $op, $name, $value );
+		return $this->compare( $op, key( $pair ), $value );
 	}
 }
