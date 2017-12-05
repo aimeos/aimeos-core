@@ -283,7 +283,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
-		$this->assertEquals( 26, count( $results ) );
+		$this->assertEquals( 27, count( $results ) );
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}

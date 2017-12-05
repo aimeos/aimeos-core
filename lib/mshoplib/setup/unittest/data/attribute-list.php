@@ -49,6 +49,7 @@ return array(
 		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/small_size', 'start' => null, 'end' => null, 'config' => [], 'pos' => 3, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'media/default', 'domain' => 'media', 'refid' => 'media/prod_97x93/199_prod_97x93.jpg', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'attribute/size/xs', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/attribute/default/12.95/1.99', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'attribute/size/xl', 'typeid' => 'price/default', 'domain' => 'price', 'refid' => 'price/attribute/default/15.00/1.00', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
 	)
 
 );

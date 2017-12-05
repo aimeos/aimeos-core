@@ -72,13 +72,14 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->context, 'attribute' );
 		$attrItem = $attrManager->findItem( 'xs', ['price'], 'product', 'size' );
+		$attrItem2 = $attrManager->findItem( 'xl', ['price'], 'product', 'size' );
 
-		$quantities = [$attrItem->getId() => 2];
-		$attrItems = [$attrItem->getId() => $attrItem];
+		$quantities = [$attrItem->getId() => 2, $attrItem2->getId() => 1];
+		$attrItems = [$attrItem->getId() => $attrItem, $attrItem2->getId() => $attrItem2];
 
-		$price = $this->access( 'addPrices' )->invokeArgs( $this->object, [$price, $attrItems, $quantities, 1] );
+		$price = $this->access( 'addPrices' )->invokeArgs( $this->object, [$price, $attrItems, $quantities, 2] );
 
-		$this->assertEquals( '22.95', $price->getValue() );
+		$this->assertEquals( '25.00', $price->getValue() );
 	}
 
 

@@ -109,12 +109,15 @@ class ProductFreeOptions
 			if( ( $prices = $attrItem->getRefItems( 'price', 'default', 'default' ) ) !== [] )
 			{
 				$qty = ( isset( $quantities[$attrId] ) ? $quantities[$attrId] : 0 );
-				$priceItem = $priceManager->getLowestPrice( $prices, $qty );
 
-				$qty = ( $qty >= $free ? $qty - $free : 0 );
+				$quantity = ( $qty >= $free ? $qty - $free : 0 );
 				$free = ( $free >= $qty ? $free - $qty : 0 );
 
-				$price->addItem( $priceItem, $qty );
+				if( $quantity > 0 )
+				{
+					$priceItem = $priceManager->getLowestPrice( $prices, $quantity );
+					$price->addItem( $priceItem, $quantity );
+				}
 			}
 		}
 
