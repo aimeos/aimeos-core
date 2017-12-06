@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'default', $result );
-		$this->assertEquals( '106.92', round( $result['default'], 2 ) );
+		$this->assertEquals( '253.83', round( $result['default'], 2 ) );
 	}
 
 
@@ -63,7 +63,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 2, count( $result ) );
 		$this->assertArrayHasKey( 'default', $result );
-		$this->assertEquals( 15, $result['default'] );
+		$this->assertEquals( 25, $result['default'] );
 	}
 
 
