@@ -144,12 +144,13 @@ class Standard
 	 * @param string[] $ref List of domains to fetch list items and referenced items for
 	 * @param string|null $domain Domain of the item if necessary to identify the item uniquely
 	 * @param string|null $type Type code of the item if necessary to identify the item uniquely
+	 * @param boolean $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Item object
 	 */
-	public function findItem( $code, array $ref = [], $domain = null, $type = null )
+	public function findItem( $code, array $ref = [], $domain = null, $type = null, $default = false )
 	{
 		$list = array( 'stock.productcode' => $code, 'stock.type.domain' => $domain, 'stock.type.code' => $type );
-		return $this->findItemBase( $list );
+		return $this->findItemBase( $list, $ref, $default );
 	}
 
 

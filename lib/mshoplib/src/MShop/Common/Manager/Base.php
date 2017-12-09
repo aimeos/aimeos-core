@@ -539,13 +539,14 @@ abstract class Base
 	 *
 	 * @param array $pairs Search key/value pairs for the item
 	 * @param string[] $ref List of domains whose items should be fetched too
+	 * @param boolean $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function findItemBase( array $pairs, array $ref = [] )
+	protected function findItemBase( array $pairs, array $ref, $default  )
 	{
 		$expr = [];
-		$criteria = $this->getObject()->createSearch();
+		$criteria = $this->getObject()->createSearch( $default );
 
 		foreach( $pairs as $key => $value )
 		{
@@ -598,11 +599,11 @@ abstract class Base
 	 * @param string $key Search key for the requested ID
 	 * @param integer $id Unique ID to search for
 	 * @param string[] $ref List of domains whose items should be fetched too
-	 * @param boolean $default Add default criteria
+	 * @param boolean $default True to add default criteria
 	 * @return \Aimeos\MShop\Common\Item\Iface Requested item
 	 * @throws \Aimeos\MShop\Exception if no item with the given ID found
 	 */
-	protected function getItemBase( $key, $id, array $ref = [], $default = false )
+	protected function getItemBase( $key, $id, array $ref, $default )
 	{
 		$criteria = $this->getObject()->createSearch( $default );
 		$expr = [
