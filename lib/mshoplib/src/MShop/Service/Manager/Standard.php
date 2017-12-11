@@ -130,6 +130,8 @@ class Standard
 		),
 	);
 
+	private $date;
+
 
 	/**
 	 * Initializes the object.
@@ -140,6 +142,8 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-service' );
+
+		$this->date = $context->getDateTime();
 	}
 
 
@@ -706,20 +710,19 @@ class Standard
 	{
 		if( $default === true )
 		{
-			$curDate = date( 'Y-m-d H:i:00', time() );
 			$object = $this->createSearchBase( 'service' );
 
 			$expr = array( $object->getConditions() );
 
 			$temp = array(
 				$object->compare( '==', 'service.datestart', null ),
-				$object->compare( '<=', 'service.datestart', $curDate ),
+				$object->compare( '<=', 'service.datestart', $this->date ),
 			);
 			$expr[] = $object->combine( '||', $temp );
 
 			$temp = array(
 				$object->compare( '==', 'service.dateend', null ),
-				$object->compare( '>=', 'service.dateend', $curDate ),
+				$object->compare( '>=', 'service.dateend', $this->date ),
 			);
 			$expr[] = $object->combine( '||', $temp );
 
@@ -742,7 +745,7 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [], array $listitems = [], array $textItems = [] )
 	{
-		$values['date'] = date( 'Y-m-d H:i:s' );
+		$values['date'] = $this->date;
 
 		return new \Aimeos\MShop\Service\Item\Standard( $values, $listitems, $textItems );
 	}

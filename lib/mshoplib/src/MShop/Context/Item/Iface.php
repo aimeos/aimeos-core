@@ -74,6 +74,22 @@ interface Iface
 	public function setFilesystemManager( \Aimeos\MW\Filesystem\Manager\Iface $fsManager );
 
 	/**
+	 * Returns the current date and time
+	 * This is especially useful to share the same request time or if applications
+	 * allow to travel in time.
+	 *
+	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
+	 */
+	public function getDateTime();
+
+	/**
+	 * Sets the current date and time
+	 *
+	 * @param string $datetime Date and time as ISO string (YYYY-MM-DD HH:mm:ss)
+	 */
+	public function setDateTime( $datetime );
+
+	/**
 	 * Returns the file system manager object.
 	 *
 	 * @return \Aimeos\MW\Filesystem\Manager\Iface File system manager object

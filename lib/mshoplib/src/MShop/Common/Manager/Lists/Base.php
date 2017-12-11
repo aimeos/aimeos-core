@@ -22,6 +22,7 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
 	implements \Aimeos\MShop\Common\Manager\Lists\Iface
 {
+	private $date;
 	private $prefix;
 	private $searchConfig;
 
@@ -35,6 +36,7 @@ abstract class Base
 	 */
 	public function __construct( \Aimeos\MShop\Context\Item\Iface $context )
 	{
+		$this->date = $context->getDateTime();
 		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
@@ -477,18 +479,15 @@ abstract class Base
 			$prefix = rtrim( $this->getPrefix(), '.' );
 			$object = $this->createSearchBase( $prefix );
 
-			$expr = [];
-			$curDate = date( 'Y-m-d H:i:00' );
-
-			$expr[] = $object->getConditions();
+			$expr = [$object->getConditions()];
 
 			$exprTwo = [];
-			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $curDate );
+			$exprTwo[] = $object->compare( '<=', $prefix . '.datestart', $this->date );
 			$exprTwo[] = $object->compare( '==', $prefix . '.datestart', null );
 			$expr[] = $object->combine( '||', $exprTwo );
 
 			$exprTwo = [];
-			$exprTwo[] = $object->compare( '>=', $prefix . '.dateend', $curDate );
+			$exprTwo[] = $object->compare( '>=', $prefix . '.dateend', $this->date );
 			$exprTwo[] = $object->compare( '==', $prefix . '.dateend', null );
 			$expr[] = $object->combine( '||', $exprTwo );
 
@@ -539,7 +538,7 @@ abstract class Base
 	 */
 	protected function createItemBase( array $values = [] )
 	{
-		$values['date'] = date( 'Y-m-d H:i:s' );
+		$values['date'] = $this->date;
 
 		return new \Aimeos\MShop\Common\Item\Lists\Standard( $this->prefix, $values );
 	}

@@ -108,6 +108,8 @@ class Standard
 		),
 	);
 
+	private $date;
+
 
 	/**
 	 * Initializes the object.
@@ -118,6 +120,8 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-coupon' );
+
+		$this->date = $context->getDateTime();
 	}
 
 
@@ -655,19 +659,18 @@ class Standard
 		if( $default === true )
 		{
 			$object = $this->createSearchBase( 'coupon' );
-			$curDate = date( 'Y-m-d H:i:00', time() );
 
 			$expr = [];
 			$expr[] = $object->getConditions();
 
 			$temp = [];
 			$temp[] = $object->compare( '==', 'coupon.datestart', null );
-			$temp[] = $object->compare( '<=', 'coupon.datestart', $curDate );
+			$temp[] = $object->compare( '<=', 'coupon.datestart', $this->date );
 			$expr[] = $object->combine( '||', $temp );
 
 			$temp = [];
 			$temp[] = $object->compare( '==', 'coupon.dateend', null );
-			$temp[] = $object->compare( '>=', 'coupon.dateend', $curDate );
+			$temp[] = $object->compare( '>=', 'coupon.dateend', $this->date );
 			$expr[] = $object->combine( '||', $temp );
 
 			$object->setConditions( $object->combine( '&&', $expr ) );
@@ -687,7 +690,7 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [] )
 	{
-		$values['date'] = date( 'Y-m-d H:i:s' );
+		$values['date'] = $this->date;
 
 		return new \Aimeos\MShop\Coupon\Item\Standard( $values );
 	}

@@ -136,6 +136,8 @@ class Standard
 		),
 	);
 
+	private $date;
+
 
 	/**
 	 * Creates the product manager that will use the given context object.
@@ -147,8 +149,8 @@ class Standard
 		parent::__construct( $context );
 		$this->setResourceName( 'db-product' );
 
-		$date = date( 'Y-m-d H:i:00' );
 		$locale = $context->getLocale();
+		$this->date = $context->getDateTime();
 
 		$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 		$level = $context->getConfig()->get( 'mshop/product/manager/sitemode', $level );
@@ -164,7 +166,7 @@ class Standard
 		}
 
 		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli_cs."siteid"', $siteIds, ':site' );
-		$this->searchConfig['product.contains'] = str_replace( ':date', $date, $this->searchConfig['product.contains'] );
+		$this->searchConfig['product.contains'] = str_replace( ':date', $this->date, $this->searchConfig['product.contains'] );
 	}
 
 
@@ -739,20 +741,19 @@ class Standard
 	{
 		if( $default === true )
 		{
-			$curDate = date( 'Y-m-d H:i:00', time() );
 			$object = $this->createSearchBase( 'product' );
 
 			$expr = array( $object->getConditions() );
 
 			$temp = array(
 				$object->compare( '==', 'product.datestart', null ),
-				$object->compare( '<=', 'product.datestart', $curDate ),
+				$object->compare( '<=', 'product.datestart', $this->date ),
 			);
 			$expr[] = $object->combine( '||', $temp );
 
 			$temp = array(
 				$object->compare( '==', 'product.dateend', null ),
-				$object->compare( '>=', 'product.dateend', $curDate ),
+				$object->compare( '>=', 'product.dateend', $this->date ),
 			);
 			$expr[] = $object->combine( '||', $temp );
 
@@ -777,7 +778,7 @@ class Standard
 	protected function createItemBase( array $values = [], array $listItems = [],
 		array $refItems = [], array $propertyItems = [] )
 	{
-		$values['date'] = date( 'Y-m-d H:i:s' );
+		$values['date'] = $this->date;
 
 		return new \Aimeos\MShop\Product\Item\Standard( $values, $listItems, $refItems, $propertyItems );
 	}

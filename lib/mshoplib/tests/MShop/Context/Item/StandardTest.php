@@ -1,13 +1,15 @@
 <?php
 
-namespace Aimeos\MShop\Context\Item;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MShop\Context\Item;
+
+
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -28,6 +30,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getDatabaseManager();
+	}
+
+	public function testGetDateTime()
+	{
+		$this->assertRegexp( '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/', $this->object->getDateTime() );
 	}
 
 	public function testGetFilesystemManager()
@@ -111,6 +118,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setDatabaseManager( $context->getDatabaseManager() );
 
 		$this->assertSame( $context->getDatabaseManager(), $this->object->getDatabaseManager() );
+		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+	}
+
+	public function testSetDateTime()
+	{
+		$return = $this->object->setDateTime( '2000-01-01 00:00:00' );
+
+		$this->assertEquals( '2000-01-01 00:00:00', $this->object->getDateTime() );
 		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
 	}
 

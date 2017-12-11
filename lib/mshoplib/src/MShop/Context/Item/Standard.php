@@ -22,6 +22,7 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 {
 	private $cache;
 	private $config;
+	private $date;
 	private $dbm;
 	private $fsm;
 	private $locale;
@@ -178,6 +179,42 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 		}
 
 		return $this->dbm;
+	}
+
+
+	/**
+	 * Returns the current date and time
+	 * This is especially useful to share the same request time or if applications
+	 * allow to travel in time.
+	 *
+	 * @return string Current date and time as ISO string (YYYY-MM-DD HH:mm:ss)
+	 */
+	public function getDateTime()
+	{
+		if( $this->date === null ) {
+			$this->date = date( 'Y-m-d H:i:00' );
+		}
+
+		return $this->date;
+	}
+
+
+	/**
+	 * Sets the current date and time
+	 *
+	 * @param string $datetime Date and time as ISO string (YYYY-MM-DD HH:mm:ss)
+	 */
+	public function setDateTime( $datetime )
+	{
+		$regex = '/^[0-9]{4}-[0-1][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/';
+
+		if( preg_match( $regex, (string) $datetime ) !== 1 ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in date "%1$s". ISO format "YYYY-MM-DD hh:mm:ss" expected.', $datetime ) );
+		}
+
+		$this->date = $datetime;
+
+		return $this;
 	}
 
 
