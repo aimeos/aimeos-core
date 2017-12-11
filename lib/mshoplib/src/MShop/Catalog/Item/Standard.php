@@ -339,6 +339,17 @@ class Standard
 
 
 	/**
+	 * Tests if the item is available based on status, time, language and currency
+	 *
+	 * @return boolean True if available, false if not
+	 */
+	public function isAvailable()
+	{
+		return (bool) $this->getStatus();
+	}
+
+
+	/**
 	 * Checks, whether this node was modified.
 	 *
 	 * @return boolean True if the content of the node is modified, false if not

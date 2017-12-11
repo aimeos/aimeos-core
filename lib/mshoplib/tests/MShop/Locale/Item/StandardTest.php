@@ -256,4 +256,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['locale.editor'] );
 	}
 
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+	}
+
 }

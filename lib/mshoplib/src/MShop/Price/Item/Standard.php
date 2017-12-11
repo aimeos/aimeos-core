@@ -479,6 +479,18 @@ class Standard extends Base
 
 
 	/**
+	 * Tests if the item is available based on status, time, language and currency
+	 *
+	 * @return boolean True if available, false if not
+	 */
+	public function isAvailable()
+	{
+		return (bool) $this->getStatus()
+			&& ( $this->values['currencyid'] === null || $this->getCurrencyId() === $this->values['currencyid'] );
+	}
+
+
+	/**
 	 * Add the given price to the current one.
 	 *
 	 * @param \Aimeos\MShop\Price\Item\Iface $item Price item which should be added

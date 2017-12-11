@@ -187,6 +187,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['stock.editor'] );
 	}
 
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+	}
+
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );

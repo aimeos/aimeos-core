@@ -87,6 +87,13 @@ interface Iface
 	public function getResourceType();
 
 	/**
+	 * Tests if the item is available based on status, time, language and currency
+	 *
+	 * @return boolean True if available, false if not
+	 */
+	public function isAvailable();
+
+	/**
 	 * Tests if the item was modified.
 	 *
 	 * @return boolean True if modified, false if not

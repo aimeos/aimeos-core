@@ -248,4 +248,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['plugin.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['plugin.editor'] );
 	}
+
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+	}
 }

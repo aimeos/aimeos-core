@@ -33,7 +33,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'media.languageid' => 'de',
 			'media.mtime' => '2011-01-01 00:00:02',
 			'media.ctime' => '2011-01-01 00:00:01',
-			'media.editor' => 'unitTestUser'
+			'media.editor' => 'unitTestUser',
+			'languageid' => 'de',
 		);
 
 		$this->object = new \Aimeos\MShop\Media\Item\Standard( $this->values );
@@ -288,7 +289,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['media.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['media.siteid'] );
@@ -305,6 +306,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['media.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['media.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['media.editor'] );
+	}
+
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
 	}
 
 }

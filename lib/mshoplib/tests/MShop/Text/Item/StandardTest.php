@@ -31,7 +31,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'text.status' => 2,
 			'text.mtime' => '2011-01-01 00:00:02',
 			'text.ctime' => '2011-01-01 00:00:01',
-			'text.editor' => 'unitTestUser'
+			'text.editor' => 'unitTestUser',
+			'languageid' => 'de',
 		);
 
 		$this->object = new \Aimeos\MShop\Text\Item\Standard( $this->values );
@@ -242,7 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$data = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $data ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $data ) );
 
 		$this->assertEquals( $this->object->getId(), $data['text.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $data['text.siteid'] );
@@ -277,5 +278,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setLanguageId( '10' );
+	}
+
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
 	}
 }

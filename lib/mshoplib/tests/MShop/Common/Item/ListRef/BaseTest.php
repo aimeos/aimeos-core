@@ -1,13 +1,15 @@
 <?php
 
-namespace Aimeos\MShop\Common\Item\ListRef;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MShop\Common\Item\ListRef;
+
+
 class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
 {
 	public function getLabel()
@@ -22,9 +24,7 @@ class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
 }
 
 
-/**
- * Test class for \Aimeos\MShop\Common\Item\ListRef\Base
- */
+
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -34,28 +34,27 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	private $listItem2;
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
-		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) );
+		$values = ['languageid' => null, 'text.status' => 1];
+
+		$this->textItem1 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'name' ) + $values );
 		$this->textItem1->setContent( 'test name' );
 		$this->textItem1->setStatus( 1 );
 		$this->textItem1->setId( 1 );
 
-		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'short' ) );
+		$this->textItem2 = new \Aimeos\MShop\Text\Item\Standard( array( 'text.type' => 'short' ) + $values );
 		$this->textItem2->setContent( 'default name' );
 		$this->textItem2->setStatus( 1 );
 		$this->textItem2->setId( 2 );
 
-		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'test' ) );
+		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'test' ) + $values );
 		$this->listItem1->setRefId( $this->textItem1->getId() );
 		$this->listItem1->setPosition( 1 );
 		$this->listItem1->setStatus( 1 );
 		$this->listItem1->setId( 11 );
 
-		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'default' ) );
+		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'default' ) + $values );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
 		$this->listItem2->setPosition( 0 );
 		$this->listItem2->setStatus( 1 );
@@ -75,9 +74,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );

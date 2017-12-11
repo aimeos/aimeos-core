@@ -344,6 +344,17 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 
 	/**
+	 * Tests if the item is available based on status, time, language and currency
+	 *
+	 * @return boolean True if available, false if not
+	 */
+	public function isAvailable()
+	{
+		return true;
+	}
+
+
+	/**
 	 * Tests if the order object was modified.
 	 *
 	 * @return bool True if modified, false if not

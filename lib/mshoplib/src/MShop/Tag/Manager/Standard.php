@@ -93,6 +93,8 @@ class Standard
 		),
 	);
 
+	private $languageId;
+
 
 	/**
 	 * Initializes the object.
@@ -103,6 +105,8 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-tag' );
+
+		$this->languageId = $context->getLocale()->getLanguageId();
 	}
 
 
@@ -750,6 +754,8 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [] )
 	{
+		$values['languageid'] = $this->languageId;
+
 		return new \Aimeos\MShop\Tag\Item\Standard( $values );
 	}
 }

@@ -194,4 +194,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['locale.currency.editor'] );
 	}
 
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+	}
+
 }

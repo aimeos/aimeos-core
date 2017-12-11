@@ -23,6 +23,7 @@ abstract class Base
 {
 	private $prefix;
 	private $searchConfig;
+	private $languageId;
 
 
 	/**
@@ -34,6 +35,7 @@ abstract class Base
 	{
 		parent::__construct( $context );
 
+		$this->languageId = $context->getLocale()->getLanguageId();
 		$this->searchConfig = $this->getSearchConfig();
 
 		if( ( $entry = reset( $this->searchConfig ) ) === false ) {
@@ -295,6 +297,8 @@ abstract class Base
 	 */
 	protected function createItemBase( array $values = [] )
 	{
+		$values['languageid'] = $this->languageId;
+
 		return new \Aimeos\MShop\Common\Item\Property\Standard( $this->prefix, $values );
 	}
 

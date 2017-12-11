@@ -36,7 +36,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'price.status' => true,
 			'price.mtime' => '2011-01-01 00:00:02',
 			'price.ctime' => '2011-01-01 00:00:01',
-			'price.editor' => 'unitTestUser'
+			'price.editor' => 'unitTestUser',
+			'currencyid' => 'EUR',
 		);
 
 		$this->object = new \Aimeos\MShop\Price\Item\Standard( $this->values );
@@ -415,7 +416,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['price.id'] );
 		$this->assertEquals( $this->object->getType(), $arrayObject['price.type'] );
@@ -436,6 +437,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['price.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['price.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['price.editor'] );
+	}
+
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
 	}
 
 	public function testIsModified()

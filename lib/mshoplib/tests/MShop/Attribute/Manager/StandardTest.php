@@ -87,8 +87,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'm', $item->getCode() );
 		$this->assertEquals( 'size', $item->getType() );
 		$this->assertEquals( 'product', $item->getDomain() );
-		$this->assertEquals( 1, count( $item->getListItems( 'text' ) ) );
-		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getListItems( 'text', null, null, false ) ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'text', null, null, false ) ) );
 	}
 
 
@@ -123,8 +123,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemB = $this->object->getItem( $itemA->getId(), ['text'] );
 
 		$this->assertEquals( $itemA->getId(), $itemB->getId() );
-		$this->assertEquals( 1, count( $itemB->getListItems( 'text' ) ) );
-		$this->assertEquals( 1, count( $itemB->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $itemB->getListItems( 'text', null, null, false ) ) );
+		$this->assertEquals( 1, count( $itemB->getRefItems( 'text', null, null, false ) ) );
 	}
 
 

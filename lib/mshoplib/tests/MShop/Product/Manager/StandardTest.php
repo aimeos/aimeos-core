@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$this->assertEquals( $product, $this->object->getItem( $product->getId(), $domains ) );
-		$this->assertEquals( 6, count( $product->getRefItems( 'text' ) ) );
+		$this->assertEquals( 6, count( $product->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 4, count( $product->getPropertyItems() ) );
 		$this->assertNotEquals( '', $product->getTypeName() );
 	}
@@ -206,7 +206,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->updateListItems( $item, $map, 'attribute', 'hidden' );
 
 		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
-		$listItems = $item->getListItems( 'attribute', 'hidden' );
+		$listItems = $item->getListItems( 'attribute', 'hidden', null, false );
 
 		$this->assertEquals( 1, count( $listItems ) );
 		$this->assertEquals( '2000-01-01 00:00:00', reset( $listItems )->getDateStart() );

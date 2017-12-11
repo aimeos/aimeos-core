@@ -132,6 +132,7 @@ class Standard
 		),
 	);
 
+	private $currencyId;
 	private $taxflag;
 
 
@@ -158,6 +159,8 @@ class Standard
 		 * @since 2016.02
 		 */
 		$this->taxflag = $context->getConfig()->get( 'mshop/price/taxflag', true );
+
+		$this->currencyId = $context->getLocale()->getCurrencyId();
 	}
 
 
@@ -738,6 +741,8 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
 	{
+		$values['currencyid'] = $this->currencyId;
+
 		if( !isset( $values['price.taxflag'] ) ) {
 			$values['price.taxflag'] = $this->taxflag;
 		}

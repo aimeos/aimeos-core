@@ -10,21 +10,12 @@
 namespace Aimeos\MShop\Supplier\Item;
 
 
-/**
- * Test class for \Aimeos\MShop\Supplier\Item\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -46,21 +37,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Supplier\Item\Standard( $this->values, [], [], $addresses );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		$this->object = null;
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( 541, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -71,15 +59,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
+
 	public function testGetLabel()
 	{
 		$this->assertEquals( 'unitObject', $this->object->getLabel() );
 	}
+
 
 	public function testSetLabel()
 	{
@@ -90,10 +81,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCode()
 	{
 		$this->assertEquals( 'unitCode', $this->object->getCode() );
 	}
+
 
 	public function testSetCode()
 	{
@@ -111,6 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 4, $this->object->getStatus() );
 	}
 
+
 	public function testSetStatus()
 	{
 		$return = $this->object->setStatus( 0 );
@@ -120,20 +114,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
+
 
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
+
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
+
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+	}
+
 
 	public function testIsModified()
 	{

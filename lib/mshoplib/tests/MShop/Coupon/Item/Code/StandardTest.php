@@ -10,21 +10,12 @@
 namespace Aimeos\MShop\Coupon\Item\Code;
 
 
-/**
- * Test class for \Aimeos\MShop\Coupon\Item\Code\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -37,27 +28,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.code.dateend' => null,
 			'coupon.code.mtime' => '2011-01-01 00:00:02',
 			'coupon.code.ctime' => '2011-01-01 00:00:01',
-			'coupon.code.editor' => 'unitTestUser'
+			'coupon.code.editor' => 'unitTestUser',
+			'date' => date( 'Y-m-d H:i:s' ),
 		);
 
 		$this->object = new \Aimeos\MShop\Coupon\Item\Code\Standard( $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		unset( $this->object );
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( 1, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -74,15 +63,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $this->object->getId() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 123, $this->object->getSiteId() );
 	}
 
+
 	public function testGetParentId()
 	{
 		$this->assertEquals( 2, $this->object->getParentId() );
 	}
+
 
 	public function testSetParentId()
 	{
@@ -93,10 +85,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( true, $this->object->isModified() );
 	}
 
+
 	public function testGetCode()
 	{
 		$this->assertEquals( 'abcd', $this->object->getCode() );
 	}
+
 
 	public function testSetCode()
 	{
@@ -107,10 +101,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCount()
 	{
 		$this->assertEquals( 100, $this->object->getCount() );
 	}
+
 
 	public function testSetCount()
 	{
@@ -121,10 +117,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetDateStart()
 	{
 		$this->assertNull( $this->object->getDateStart() );
 	}
+
 
 	public function testSetDateStart()
 	{
@@ -135,10 +133,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetDateEnd()
 	{
 		$this->assertNull( $this->object->getDateEnd() );
 	}
+
 
 	public function testSetDateEnd()
 	{
@@ -149,15 +149,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetEditor()
 	{
@@ -196,7 +199,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testToArray()
 	{
 		$arrayObject = $this->object->toArray( true );
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['coupon.code.id'] );
 		$this->assertEquals( $this->object->getCode(), $arrayObject['coupon.code.code'] );
@@ -206,6 +209,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['coupon.code.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['coupon.code.editor'] );
 	}
+
+
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+	}
+
 
 	public function testIsModified()
 	{

@@ -96,8 +96,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
 
 		$this->assertEquals( $expected, $actual );
-		$this->assertEquals( 3, count( $actual->getListItems( 'text' ) ) );
-		$this->assertEquals( 3, count( $actual->getRefItems( 'text' ) ) );
+		$this->assertEquals( 3, count( $actual->getListItems( 'text', null, null, false ) ) );
+		$this->assertEquals( 3, count( $actual->getRefItems( 'text', null, null, false ) ) );
 	}
 
 
@@ -281,7 +281,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \Exception( 'No customer item for "UTC001" available' );
 		}
 
-		$this->assertEquals( 1, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 1, count( $item->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $item->getAddressItems() ) );
 	}
 

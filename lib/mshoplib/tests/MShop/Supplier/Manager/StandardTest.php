@@ -270,7 +270,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			throw new \Exception( 'No supplier item for "unitCode001" available' );
 		}
 
-		$this->assertEquals( 3, count( $item->getRefItems( 'text' ) ) );
+		$this->assertEquals( 3, count( $item->getRefItems( 'text', null, null, false ) ) );
 		$this->assertEquals( 1, count( $item->getAddressItems() ) );
 	}
 

@@ -63,10 +63,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		if( $domain === null )
 		{
 			foreach( $this->listItems as $domain => $items ) {
-				$list += $items;
+				$list += $this->filterListItems( $items, $active );
 			}
 
-			return $this->filterListItems( $list, $active );
+			return $list;
 		}
 
 		if( !isset( $this->listItems[$domain] ) ) {
@@ -120,15 +120,21 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getRefItems( $domain = null, $type = null, $listtype = null, $active = true )
 	{
-		if( $domain === null ) {
-			return $this->filterRefItems( $this->refItems, $active );
+		$list = [];
+
+		if( $domain === null )
+		{
+			foreach( $this->refItems as $domain => $items ) {
+				$list[$domain] = $this->filterRefItems( $items, $active );
+			}
+
+			return $list;
 		}
 
 		if( !isset( $this->refItems[$domain] ) || !isset( $this->listItems[$domain] ) ) {
 			return [];
 		}
 
-		$list = [];
 		$iface = '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface';
 		$types = ( is_array( $type ) ? $type : array( $type ) );
 		$listtypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
@@ -137,7 +143,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		{
 			$refId = $listItem->getRefId();
 
-			if( isset( $this->refItems[$domain][$refId] ) && $listItem instanceof $iface
+			if( isset( $this->refItems[$domain][$refId] ) && $listItem instanceof $iface && $listItem->isAvailable()
 				&& ( $type === null || in_array( $this->refItems[$domain][$refId]->getType(), $types ) )
 				&& ( $listtype === null || in_array( $listItem->getType(), $listtypes ) )
 			) {
@@ -230,14 +236,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		}
 
 		$result = [];
-		$date = date( 'Y-m-d H:i:s' );
 
 		foreach( $list as $id => $item )
 		{
-			if( $item instanceof \Aimeos\MShop\Common\Item\Lists\Iface && $item->getStatus() > 0
-				&& ( $item->getDateStart() === null || $item->getDateStart() <= $date )
-				&& ( $item->getDateEnd() === null || $item->getDateEnd() >= $date )
-			) {
+			if( $item->isAvailable() ) {
 				$result[$id] = $item;
 			}
 		}
@@ -260,22 +262,12 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		}
 
 		$result = [];
-		$date = date( 'Y-m-d H:i:s' );
 
 		foreach( $list as $id => $item )
 		{
-			if( $item instanceof \Aimeos\MShop\Common\Item\Status\Iface && $item->getStatus() < 1 ) {
-				continue;
+			if( $item->isAvailable() ) {
+				$result[$id] = $item;
 			}
-
-			if( $item instanceof \Aimeos\MShop\Common\Item\Time\Iface
-				&& ( $item->getDateStart() !== null && $item->getDateStart() > $date
-				|| $item->getDateEnd() !== null && $item->getDateEnd() < $date )
-			) {
-				continue;
-			}
-
-			$result[$id] = $item;
 		}
 
 		return $result;

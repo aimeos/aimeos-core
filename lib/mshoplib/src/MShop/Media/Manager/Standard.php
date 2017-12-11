@@ -121,6 +121,8 @@ class Standard
 		),
 	);
 
+	private $languageId;
+
 
 	/**
 	 * Initializes the object.
@@ -131,6 +133,8 @@ class Standard
 	{
 		parent::__construct( $context );
 		$this->setResourceName( 'db-media' );
+
+		$this->languageId = $context->getLocale()->getLanguageId();
 	}
 
 
@@ -707,6 +711,8 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
 	{
+		$values['languageid'] = $this->languageId;
+
 		return new \Aimeos\MShop\Media\Item\Standard( $values, $listItems, $refItems );
 	}
 }

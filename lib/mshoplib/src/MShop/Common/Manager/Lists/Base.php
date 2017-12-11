@@ -539,6 +539,8 @@ abstract class Base
 	 */
 	protected function createItemBase( array $values = [] )
 	{
+		$values['date'] = date( 'Y-m-d H:i:s' );
+
 		return new \Aimeos\MShop\Common\Item\Lists\Standard( $this->prefix, $values );
 	}
 

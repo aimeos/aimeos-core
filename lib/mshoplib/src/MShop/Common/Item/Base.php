@@ -189,6 +189,17 @@ abstract class Base
 
 
 	/**
+	 * Tests if the item is available based on status, time, language and currency
+	 *
+	 * @return boolean True if available, false if not
+	 */
+	public function isAvailable()
+	{
+		return true;
+	}
+
+
+	/**
 	 * Tests if this Item object was modified.
 	 *
 	 * @return boolean True if modified, false if not

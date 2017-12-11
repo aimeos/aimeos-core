@@ -262,9 +262,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+	}
+
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );
 	}
-
 }

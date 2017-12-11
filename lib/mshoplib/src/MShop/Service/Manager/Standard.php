@@ -742,6 +742,8 @@ class Standard
 	 */
 	protected function createItemBase( array $values = [], array $listitems = [], array $textItems = [] )
 	{
+		$values['date'] = date( 'Y-m-d H:i:s' );
+
 		return new \Aimeos\MShop\Service\Item\Standard( $values, $listitems, $textItems );
 	}
 }

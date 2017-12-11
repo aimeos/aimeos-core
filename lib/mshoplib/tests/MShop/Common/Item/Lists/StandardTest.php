@@ -10,17 +10,11 @@
 namespace Aimeos\MShop\Common\Item\Lists;
 
 
-/**
- * Test class for \Aimeos\MShop\Common\Item\Lists\Standard
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture. This method is called before a test is executed.
-	 */
 	protected function setUp()
 	{
 		$values = array(
@@ -39,16 +33,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.typename' => 'test name',
 			'common.lists.mtime' => '2011-01-01 00:00:02',
 			'common.lists.ctime' => '2011-01-01 00:00:01',
-			'common.lists.editor' => 'unitTestUser'
+			'common.lists.editor' => 'unitTestUser',
+			'date' => date( 'Y-m-d H:i:s' ),
 		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\Lists\Standard( 'common.lists.', $values );
 	}
 
 
-	/**
-	 * Tears down the fixture. This method is called after a test is executed.
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -222,15 +214,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( true, $this->object->isModified() );
 	}
 
+
+	public function testIsAvailable()
+	{
+		$this->assertFalse( $this->object->isAvailable() );
+	}
+
+
 	public function testIsModified()
 	{
 		$this->assertFalse( $this->object->isModified() );
 	}
 
+
 	public function testGetRefItem()
 	{
 		$this->assertEquals( null, $this->object->getRefItem() );
 	}
+
 
 	public function testSetRefItem()
 	{

@@ -28,7 +28,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.property.value' => '30.0',
 			'common.property.mtime' => '2011-01-01 00:00:02',
 			'common.property.ctime' => '2011-01-01 00:00:01',
-			'common.property.editor' => 'unitTestUser'
+			'common.property.editor' => 'unitTestUser',
+			'languageid' => 'de',
 		);
 
 		$this->object = new \Aimeos\MShop\Common\Item\Property\Standard( 'common.property.', $this->values );
@@ -178,7 +179,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testToArray()
 	{
 		$arrayObject = $this->object->toArray( true );
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['common.property.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.property.siteid'] );
@@ -192,6 +193,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['common.property.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['common.property.editor'] );
 	}
+
+
+	public function testIsAvailable()
+	{
+		$this->assertFalse( $this->object->isAvailable() );
+	}
+
 
 	public function testIsModified()
 	{

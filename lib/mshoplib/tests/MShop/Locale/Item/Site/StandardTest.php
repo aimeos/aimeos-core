@@ -162,6 +162,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testIsAvailable()
+	{
+		$this->assertTrue( $this->object->isAvailable() );
+	}
+
+
 	public function testFromArray()
 	{
 		$item = new \Aimeos\MShop\Locale\Item\Site\Standard();

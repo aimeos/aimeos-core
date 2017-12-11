@@ -376,6 +376,20 @@ class Standard
 
 
 	/**
+	 * Tests if the item is available based on status, time, language and currency
+	 *
+	 * @return boolean True if available, false if not
+	 */
+	public function isAvailable()
+	{
+		return (bool) $this->getStatus()
+			&& ( $this->values['languageid'] === null
+			|| $this->getLanguageId() === null
+			|| $this->getLanguageId() === $this->values['languageid'] );
+	}
+
+
+	/**
 	 * Sets the item values from the given array.
 	 *
 	 * @param array $list Associative list of item keys and their values
