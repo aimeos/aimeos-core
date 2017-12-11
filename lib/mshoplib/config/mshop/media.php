@@ -181,6 +181,138 @@ return array(
 				),
 			),
 		),
+		'property' => array(
+			'type' => array(
+				'standard' => array(
+					'delete' => array(
+						'ansi' => '
+							DELETE FROM "mshop_media_property_type"
+							WHERE :cond AND siteid = ?
+						'
+					),
+					'insert' => array(
+						'ansi' => '
+							INSERT INTO "mshop_media_property_type" (
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?
+							)
+						'
+					),
+					'update' => array(
+						'ansi' => '
+							UPDATE "mshop_media_property_type"
+							SET "code" = ?, "domain" = ?, "label" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
+						'
+					),
+					'search' => array(
+						'ansi' => '
+							SELECT mmedprty."id" AS "media.property.type.id", mmedprty."siteid" AS "media.property.type.siteid",
+								mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
+								mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
+								mmedprty."mtime" AS "media.property.type.mtime", mmedprty."editor" AS "media.property.type.editor",
+								mmedprty."ctime" AS "media.property.type.ctime"
+							FROM "mshop_media_property_type" mmedprty
+							:joins
+							WHERE :cond
+							GROUP BY mmedprty."id", mmedprty."siteid", mmedprty."code", mmedprty."domain",
+								mmedprty."label", mmedprty."status", mmedprty."mtime", mmedprty."editor",
+								mmedprty."ctime" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						'
+					),
+					'count' => array(
+						'ansi' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT mmedprty."id"
+								FROM "mshop_media_property_type" mmedprty
+								:joins
+								WHERE :cond
+								LIMIT 10000 OFFSET 0
+							) AS list
+						'
+					),
+					'newid' => array(
+						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+						'mysql' => 'SELECT LAST_INSERT_ID()',
+						'oracle' => 'SELECT mshop_media_property_type_seq.CURRVAL FROM DUAL',
+						'pgsql' => 'SELECT lastval()',
+						'sqlite' => 'SELECT last_insert_rowid()',
+						'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+						'sqlanywhere' => 'SELECT @@IDENTITY',
+					),
+				),
+			),
+			'standard' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "mshop_media_property"
+						WHERE :cond AND siteid = ?
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "mshop_media_property" (
+							"parentid", "typeid", "langid", "value",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?
+						)
+					'
+				),
+				'update' => array(
+					'ansi' => '
+						UPDATE "mshop_media_property"
+						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+							"value" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
+					'
+				),
+				'search' => array(
+					'ansi' => '
+						SELECT mmedpr."id" AS "media.property.id", mmedpr."parentid" AS "media.property.parentid",
+							mmedpr."siteid" AS "media.property.siteid", mmedpr."typeid" AS "media.property.typeid",
+							mmedpr."langid" AS "media.property.languageid", mmedpr."value" AS "media.property.value",
+							mmedpr."mtime" AS "media.property.mtime", mmedpr."editor" AS "media.property.editor",
+							mmedpr."ctime" AS "media.property.ctime"
+						FROM "mshop_media_property" AS mmedpr
+						:joins
+						WHERE :cond
+						GROUP BY mmedpr."id", mmedpr."parentid", mmedpr."siteid", mmedpr."typeid",
+							mmedpr."langid", mmedpr."value", mmedpr."mtime", mmedpr."editor",
+							mmedpr."ctime" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					'
+				),
+				'count' => array(
+					'ansi' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mmedpr."id"
+							FROM "mshop_media_property" AS mmedpr
+							:joins
+							WHERE :cond
+							LIMIT 10000 OFFSET 0
+						) AS list
+					'
+				),
+				'newid' => array(
+					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+					'mysql' => 'SELECT LAST_INSERT_ID()',
+					'oracle' => 'SELECT mshop_media_property_seq.CURRVAL FROM DUAL',
+					'pgsql' => 'SELECT lastval()',
+					'sqlite' => 'SELECT last_insert_rowid()',
+					'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+					'sqlanywhere' => 'SELECT @@IDENTITY',
+				),
+			),
+		),
 		'type' => array(
 			'standard' => array(
 				'delete' => array(

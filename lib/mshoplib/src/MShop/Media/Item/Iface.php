@@ -22,6 +22,13 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
+	 * Returns the property items of the attribute
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
+	 */
+	public function getPropertyItems( $type = null );
+
+	/**
 	 * Returns the ISO language code.
 	 *
 	 * @return string|null ISO language code (e.g. de or de_DE)

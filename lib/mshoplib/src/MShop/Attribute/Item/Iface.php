@@ -23,9 +23,9 @@ interface Iface
 	\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
-	 * Returns the property items of the product
+	 * Returns the property items of the attribute
 	 *
-	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
 	 */
 	public function getPropertyItems( $type = null );
 
