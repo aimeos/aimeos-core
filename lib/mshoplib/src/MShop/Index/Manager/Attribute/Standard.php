@@ -670,10 +670,8 @@ class Standard
 
 		foreach( $item->getRefItems( 'attribute' ) as $refId => $refItem )
 		{
-			if( !isset( $listTypes[$refId] ) )
-			{
-				$msg = sprintf( 'List type for attribute item with ID "%1$s" not available', $refId );
-				throw new \Aimeos\MShop\Index\Exception( $msg );
+			if( !isset( $listTypes[$refId] ) ) {
+				continue;
 			}
 
 			foreach( $listTypes[$refId] as $listType )
