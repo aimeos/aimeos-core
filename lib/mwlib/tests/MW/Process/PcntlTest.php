@@ -31,7 +31,6 @@ class PcntlTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( '\Aimeos\MW\Process\Iface', $return );
 		$this->assertGreaterThan( 1, $msec );
-		$this->assertLessThan( 2, $msec );
 	}
 
 
