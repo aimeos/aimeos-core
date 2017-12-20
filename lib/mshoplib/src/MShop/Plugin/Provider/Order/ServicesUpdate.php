@@ -110,16 +110,16 @@ class ServicesUpdate
 
 			foreach( $list as $item )
 			{
-				if( isset( $result[$service->getServiceId()] ) )
+				if( isset( $result[$item->getServiceId()] ) )
 				{
-					$serviceItem = $result[$service->getServiceId()];
+					$serviceItem = $result[$item->getServiceId()];
 
 					$provider = $serviceManager->getProvider( $serviceItem, $serviceItem->getType() );
 
 					if( $provider->isAvailable( $order ) )
 					{
-						$service->setPrice( $provider->calcPrice( $order ) );
-						$order->addService( $service, $type );
+						$item->setPrice( $provider->calcPrice( $order ) );
+						$order->addService( $item, $type );
 					}
 				}
 			}
