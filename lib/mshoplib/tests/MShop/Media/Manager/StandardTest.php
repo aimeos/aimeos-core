@@ -145,17 +145,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'media.label', 'cn_colombie_123x103' ),
+			$search->compare( '==', 'media.label', 'example image 1' ),
 			$search->compare( '==', 'media.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search );
 
 		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No media item with label "cn_colombie_123x103" found' );
+			throw new \RuntimeException( 'No media item with label "path/to/folder/example1.jpg" found' );
 		}
 
 		$this->assertEquals( $item, $this->object->getItem( $item->getId() ) );
+		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
 		$this->assertNotEquals( '', $item->getTypeName() );
 	}
 

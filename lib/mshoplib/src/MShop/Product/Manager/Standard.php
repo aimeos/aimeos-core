@@ -662,11 +662,7 @@ class Standard
 			}
 		}
 
-		$propItems = [];
-		if( in_array( 'product/property', $ref, true ) ) {
-			$propItems = $this->getPropertyItems( array_keys( $map ) );
-		}
-
+		$propItems = $this->getPropertyItems( array_keys( $map ) );
 
 		return $this->buildItems( $map, $ref, 'product', $propItems );
 	}
@@ -794,14 +790,18 @@ class Standard
 	protected function getPropertyItems( array $prodIds )
 	{
 		$list = [];
-		$propManager = $this->getObject()->getSubManager( 'property' );
 
-		$propSearch = $propManager->createSearch();
-		$propSearch->setConditions( $propSearch->compare( '==', 'product.property.parentid', $prodIds ) );
-		$propSearch->setSlice( 0, 0x7fffffff );
+		if( !empty( $prodIds ) )
+		{
+			$propManager = $this->getObject()->getSubManager( 'property' );
 
-		foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
-			$list[$propItem->getParentId()][$id] = $propItem;
+			$propSearch = $propManager->createSearch();
+			$propSearch->setConditions( $propSearch->compare( '==', 'product.property.parentid', $prodIds ) );
+			$propSearch->setSlice( 0, 0x7fffffff );
+
+			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
+				$list[$propItem->getParentId()][$id] = $propItem;
+			}
 		}
 
 		return $list;

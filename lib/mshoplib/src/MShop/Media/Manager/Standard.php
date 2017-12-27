@@ -649,7 +649,9 @@ class Standard
 			}
 		}
 
-		return $this->buildItems( $map, null, 'media' );
+		$propItems = $this->getPropertyItems( array_keys( $map ) );
+
+		return $this->buildItems( $map, null, 'media', $propItems );
 	}
 
 
@@ -707,12 +709,41 @@ class Standard
 	 * @param array $values Associative list of key/value pairs
 	 * @param array $listItems List of items implementing \Aimeos\MShop\Common\Item\Lists\Iface
 	 * @param array $refItems List of items reference to this item
+	 * @param array $propItems List of media property items implementing \Aimeos\MShop\Common\Item\Property\Iface
 	 * @return \Aimeos\MShop\Media\Item\Iface New product item
 	 */
-	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [] )
+	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [], array $propItems = [] )
 	{
 		$values['languageid'] = $this->languageId;
 
-		return new \Aimeos\MShop\Media\Item\Standard( $values, $listItems, $refItems );
+		return new \Aimeos\MShop\Media\Item\Standard( $values, $listItems, $refItems, $propItems );
+	}
+
+
+	/**
+	 * Returns the property items for the given media IDs
+	 *
+	 * @param array $mediaIds List of media IDs
+	 * @return array Associative list of media IDs / property IDs as keys and items implementing
+	 * 	\Aimeos\MShop\Product\Item\Property\Iface as values
+	 */
+	protected function getPropertyItems( array $mediaIds )
+	{
+		$list = [];
+
+		if( !empty( $mediaIds ) )
+		{
+			$propManager = $this->getObject()->getSubManager( 'property' );
+
+			$propSearch = $propManager->createSearch();
+			$propSearch->setConditions( $propSearch->compare( '==', 'media.property.parentid', $mediaIds ) );
+			$propSearch->setSlice( 0, 0x7fffffff );
+
+			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
+				$list[$propItem->getParentId()][$id] = $propItem;
+			}
+		}
+
+		return $list;
 	}
 }
