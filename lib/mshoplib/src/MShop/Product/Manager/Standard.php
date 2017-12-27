@@ -662,7 +662,10 @@ class Standard
 			}
 		}
 
-		$propItems = $this->getPropertyItems( array_keys( $map ) );
+		$propItems = [];
+		if( in_array( 'product/property', $ref, true ) ) {
+			$propItems = $this->getPropertyItems( array_keys( $map ) );
+		}
 
 		return $this->buildItems( $map, $ref, 'product', $propItems );
 	}
