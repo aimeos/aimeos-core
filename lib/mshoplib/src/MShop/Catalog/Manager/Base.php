@@ -70,7 +70,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @return array List of items implementing \Aimeos\MShop\Catalog\Item\Iface
 	 */
-	protected function buildItems( array $itemMap, array $domains, $prefix, array $local = [] )
+	protected function buildItems( array $itemMap, $domains, $prefix, array $local = [] )
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = [];
 

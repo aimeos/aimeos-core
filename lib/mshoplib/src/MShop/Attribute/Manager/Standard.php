@@ -658,7 +658,7 @@ class Standard
 			$propItems = $this->getPropertyItems( array_keys( $map ) );
 		}
 
-		return $this->buildItems( $map, $ref, 'attribute', $propItems );
+		return $this->buildItems( $map, null, 'attribute', $propItems );
 	}
 
 

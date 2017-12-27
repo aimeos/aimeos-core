@@ -232,7 +232,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
 		$this->assertEquals( $item->getId(), $this->object->getAttributeId() );
-		$this->assertEquals( $item->getLabel(), $this->object->getName() );
+		$this->assertEquals( $item->getName(), $this->object->getName() );
 		$this->assertEquals( $item->getType(), $this->object->getCode() );
 		$this->assertEquals( $item->getCode(), $this->object->getValue() );
 	}

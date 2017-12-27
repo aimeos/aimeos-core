@@ -52,10 +52,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
+
 	public function testCreateItem()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Price\\Item\\Iface', $this->object->createItem() );
 	}
+
 
 	public function testGetItem()
 	{

@@ -649,7 +649,7 @@ class Standard
 			}
 		}
 
-		return $this->buildItems( $map, $ref, 'media' );
+		return $this->buildItems( $map, null, 'media' );
 	}
 
 

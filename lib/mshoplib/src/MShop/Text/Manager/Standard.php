@@ -635,7 +635,7 @@ class Standard
 			}
 		}
 
-		return $this->buildItems( $map, $ref, 'text' );
+		return $this->buildItems( $map, null, 'text' );
 	}
 
 

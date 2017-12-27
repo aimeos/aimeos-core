@@ -684,7 +684,7 @@ class Standard
 			}
 		}
 
-		return $this->buildItems( $map, $ref, 'price' );
+		return $this->buildItems( $map, null, 'price' );
 	}
 
 

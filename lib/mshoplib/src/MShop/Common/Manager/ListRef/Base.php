@@ -98,16 +98,16 @@ abstract class Base
 	 * Creates the items with address item, list items and referenced items.
 	 *
 	 * @param array $map Associative list of IDs as keys and the associative array of values
-	 * @param array $domains List of domains to fetch list items and referenced items for
+	 * @param array|null $domains List of domains to fetch list items and referenced items for or null for all
 	 * @param string $prefix Domain prefix
 	 * @param array $local Associative list of IDs as keys and the associative array of items as values
 	 * @return array List of items implementing \Aimeos\MShop\Common\Item\Iface
 	 */
-	protected function buildItems( array $map, array $domains, $prefix, array $local = [] )
+	protected function buildItems( array $map, $domains, $prefix, array $local = [] )
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = [];
 
-		if( count( $domains ) > 0 )
+		if( $domains === null || count( $domains ) > 0 )
 		{
 			$listItems = $this->getListItems( array_keys( $map ), $domains, $prefix );
 
@@ -151,20 +151,21 @@ abstract class Base
 	 * Returns the list items that belong to the given IDs.
 	 *
 	 * @param array $ids List of IDs
-	 * @param array $domains List of domain names whose referenced items should be attached
+	 * @param array|null $domains List of domain names whose referenced items should be attached or null for all
 	 * @param string $prefix Domain prefix
 	 * @return array List of items implementing \Aimeos\MShop\Common\Lists\Item\Iface
 	 */
-	protected function getListItems( array $ids, array $domains, $prefix )
+	protected function getListItems( array $ids, $domains, $prefix )
 	{
 		$manager = $this->getObject()->getSubManager( 'lists' );
 
 		$search = $manager->createSearch();
 
-		$expr = array(
-			$search->compare( '==', $prefix . '.lists.parentid', $ids ),
-			$search->compare( '==', $prefix . '.lists.domain', $domains ),
-		);
+		$expr = [ $search->compare( '==', $prefix . '.lists.parentid', $ids ) ];
+
+		if( $domains !== null ) {
+			$expr[] = $search->compare( '==', $prefix . '.lists.domain', $domains );
+		}
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
