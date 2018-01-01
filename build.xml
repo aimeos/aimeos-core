@@ -113,26 +113,6 @@
 				<include name="src/**/*.php" />
 			</fileset>
 		</confdoc>
-		<confdoc keyprefix="admin/extjs" wikiprefix="Configuration/Core" keyparts="0"
-			outfile="${coredir}/misc/confdoc/ext-extadm-admin-extjs.wiki">
-			<fileset dir="${extdir}/ai-admin-extadm/admin/extjs" expandsymboliclinks="true" >
-				<include name="src/**/*.js" />
-			</fileset>
-		</confdoc>
-		<confdoc keyprefix="controller/extjs" wikiprefix="Configuration/Core" keyparts="0"
-			optfile="${extdir}/ai-admin-extadm/controller/extjs/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/ext-extadm-controller-extjs.wiki">
-			<fileset dir="${extdir}/ai-admin-extadm/controller/extjs/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
-			</fileset>
-		</confdoc>
-		<confdoc keyprefix="controller/jobs" wikiprefix="Configuration/Core" keyparts="0"
-			optfile="${extdir}/ai-admin-extadm/controller/jobs/tests/confdoc.ser"
-			outfile="${coredir}/misc/confdoc/ext-extadm-controller-jobs.wiki">
-			<fileset dir="${extdir}/ai-admin-extadm/controller/jobs/src" expandsymboliclinks="true" >
-				<include name="**/*.php" />
-			</fileset>
-		</confdoc>
 		<confdoc keyprefix="admin/jqadm" wikiprefix="Configuration/Core" keyparts="1"
 			optfile="${extdir}/ai-admin-jqadm/admin/jqadm/tests/confdoc.ser"
 			outfile="${coredir}/misc/confdoc/ext-jqadm-admin-jqadm.wiki">
@@ -196,7 +176,6 @@
 			--title='Aimeos Core API documentation' --tree  --no-source-code -d misc/apidoc
 			-s controller/common/src/ -s controller/jobs/src/
 			-s lib/mshoplib/src/ -s lib/mwlib/src/
-			-s ext/ai-admin-extadm/controller/extjs/src/ -s ext/ai-admin-extadm/controller/jobs/src/
 			-s ext/ai-admin-jqadm/admin/jqadm/src/
 			-s ext/ai-admin-jsonadm/admin/jsonadm/src/
 			-s ext/ai-client-html/client/html/src/ -s ext/ai-client-html/controller/jobs/src/
