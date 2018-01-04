@@ -57,9 +57,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->aggregate( $search, 'supplier.lists.domain' );
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'text', $result );
 		$this->assertEquals( 2, $result['product'] );
+		$this->assertEquals( 1, $result['media'] );
 		$this->assertEquals( 3, $result['text'] );
 	}
 

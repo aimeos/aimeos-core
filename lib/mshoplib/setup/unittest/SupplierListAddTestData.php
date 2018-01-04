@@ -63,6 +63,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$refIds = [];
 		$refIds['text'] = $this->getTextData( $refKeys['text'] );
+		$refIds['media'] = $this->getMediaData( $refKeys['media'] );
 
 		if( isset( $refKeys['product'] ) ) {
 			$refIds['product'] = $this->getProductData( $refKeys['product'] );
@@ -71,6 +72,39 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$this->addSupplierListData( $testdata, $refIds );
 
 		$this->status( 'done' );
+	}
+
+
+	/**
+	 * Returns required media item ids.
+	 *
+	 * @param array $keys List of keys for search
+	 * @return array $refIds List with referenced Ids
+	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
+	 */
+	protected function getMediaData( array $keys )
+	{
+		$mediaManager = \Aimeos\MShop\Media\Manager\Factory::createManager( $this->additional, 'Standard' );
+
+		$urls = [];
+		foreach( $keys as $dataset )
+		{
+			if( ( $pos = strpos( $dataset, '/' ) ) === false || ( $str = substr( $dataset, $pos + 1 ) ) === false ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Some keys for ref media are set wrong "%1$s"', $dataset ) );
+			}
+
+			$urls[] = $str;
+		}
+
+		$search = $mediaManager->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.url', $urls ) );
+
+		$refIds = [];
+		foreach( $mediaManager->searchItems( $search ) as $item ) {
+			$refIds['media/' . $item->getUrl()] = $item->getId();
+		}
+
+		return $refIds;
 	}
 
 

@@ -23,6 +23,7 @@ return array(
 		'media/default' => array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'price/default' => array( 'domain' => 'price', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		'supplier/default' => array( 'domain' => 'supplier', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
@@ -41,6 +42,7 @@ return array(
 		'media/path/to/folder/example6.jpg' => array( 'langid' => 'de', 'typeid' => 'product/download', 'domain' => 'product', 'label' => 'example image 2', 'link' => 'path/to/folder/example6.jpg', 'preview' => 'path/to/folder/example6.jpg', 'status' => 1, 'mimetype' => 'image/jpeg' ),
 		'media/service_image1' => array( 'langid' => null, 'typeid' => 'service/default', 'domain' => 'service', 'label' => 'service_image1', 'link' => 'path/to/service.png', 'preview' => 'path/to/service.png', 'status' => 1, 'mimetype' => 'image/png' ),
 		'media/path/to/folder/cafe/stage.jpg' => array( 'langid' => 'de', 'typeid' => 'catalog/default', 'domain' => 'catalog', 'label' => 'Cafe Stage image', 'link' => 'path/to/folder/cafe/stage.jpg', 'preview' => 'path/to/folder/cafe/stage.jpg', 'status' => 1, 'mimetype' => 'image/jpeg' ),
+		'media/path/to/supplier.jpg' => array( 'langid' => null, 'typeid' => 'supplier/default', 'domain' => 'supplier', 'label' => 'Supplier image', 'link' => 'path/to/supplier.jpg', 'preview' => 'path/to/supplier.jpg', 'status' => 1, 'mimetype' => 'image/jpeg' ),
 	),
 
 
