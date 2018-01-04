@@ -58,11 +58,12 @@ return array(
 		array( 'domain' => 'product', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		array( 'domain' => 'catalog', 'code' => 'stage', 'label' => 'Stage', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'price', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
+		array( 'domain' => 'supplier', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
-		array( 'domain' => 'catalog', 'code' => 'stage', 'label' => 'Stage', 'status' => 1 ),
 	),
 
 	'media/lists/type' => array(
