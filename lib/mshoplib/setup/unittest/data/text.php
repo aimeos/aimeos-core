@@ -41,7 +41,10 @@ return array (
 		'customer/information' => array( 'domain' => 'customer', 'code' => 'information', 'label' => 'Customer information', 'status' => 1 ),
 		'customer/notify' => array( 'domain' => 'customer', 'code' => 'notify', 'label' => 'Customer notify', 'status' => 1 ),
 		'customer/newsletter' => array( 'domain' => 'customer', 'code' => 'newsletter', 'label' => 'Customer newsletter', 'status' => 1 ),
-		'supplier/description' => array( 'domain' => 'supplier', 'code' => 'description', 'label' => 'Supplier description', 'status' => 1 )
+		'supplier/description' => array( 'domain' => 'supplier', 'code' => 'description', 'label' => 'Supplier description', 'status' => 1 ),
+		'supplier/name' => array( 'domain' => 'supplier', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
+		'supplier/short' => array( 'domain' => 'supplier', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
+		'supplier/long' => array( 'domain' => 'supplier', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
 	),
 
 	'text' => array (
