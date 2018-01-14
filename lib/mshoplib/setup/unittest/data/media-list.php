@@ -16,6 +16,7 @@ return array(
 		'service/default' => array( 'domain' => 'service', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		'text/default' => array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 
+		'attribute/variant' => array( 'domain' => 'attribute', 'code' => 'variant', 'label' => 'Variant', 'status' => 1 ),
 		'attribute/option' => array( 'domain' => 'attribute', 'code' => 'option', 'label' => 'Option', 'status' => 1 ),
 		'attribute/front' => array( 'domain' => 'attribute', 'code' => 'front', 'label' => 'Frontside', 'status' => 1 ),
 		'attribute/back' => array( 'domain' => 'attribute', 'code' => 'back', 'label' => 'Backside', 'status' => 1 ),
