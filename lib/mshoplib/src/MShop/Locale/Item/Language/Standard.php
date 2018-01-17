@@ -106,14 +106,17 @@ class Standard
 	 */
 	public function setCode( $key )
 	{
+		$matches = [];
 		$len = strlen( $key );
-		if( $len < 2 || $len > 5 || preg_match( '/^[a-z]{2,3}((-|_)[a-zA-Z]{2})?$/', $key ) !== 1 ) {
+
+		if( $len < 2 || $len > 5 || preg_match( '/^([a-zA-Z]{2,3})((-|_)([a-zA-Z]{2}))?$/', $key, $matches ) !== 1 ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Invalid characters in ISO language code "%1$s"', $key ) );
 		}
 
 		if( (string) $key !== $this->getCode() )
 		{
-			$this->values['locale.language.code'] = (string) $key;
+			$code = strtolower( $matches[1] ) . ( isset( $matches[4] ) ? $matches[3] . $matches[4] : '' );
+			$this->values['locale.language.code'] = $code;
 			$this->modified = true;
 		}
 
