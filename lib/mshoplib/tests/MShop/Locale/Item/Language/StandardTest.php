@@ -87,10 +87,30 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetCode()
+	{
+		$this->object->setCode( 'de' );
+		$this->assertEquals( 'de', $this->object->getCode() );
+
+		$this->object->setCode( 'DE' );
+		$this->assertEquals( 'de', $this->object->getCode() );
+	}
+
+
 	public function testSetCodeInvalid()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
-		$this->object->setCode( 'XXX' );
+		$this->object->setCode( 'XXXX' );
+	}
+
+
+	public function testSetCodeCountry()
+	{
+		$this->object->setCode( 'de_DE' );
+		$this->assertEquals( 'de_DE', $this->object->getCode() );
+
+		$this->object->setCode( 'DE_DE' );
+		$this->assertEquals( 'de_DE', $this->object->getCode() );
 	}
 
 
