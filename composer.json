@@ -2,7 +2,7 @@
 	"name": "aimeos/aimeos-core",
 	"description": "Full-featured e-commerce components for high performance online shops",
 	"homepage": "https://aimeos.org/",
-	"license": "LGPL-3.0",
+	"license": "LGPL-3.0-or-later",
 	"keywords": ["e-commerce", "shop", "portal", "market place"],
 	"support": {
 		"source": "https://github.com/aimeos/aimeos-core",
