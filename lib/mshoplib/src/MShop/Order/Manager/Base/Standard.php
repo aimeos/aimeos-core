@@ -558,7 +558,7 @@ class Standard extends Base
 			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() && !$item->getLocale()->isModified() ) {
 			return $item;
 		}
 
