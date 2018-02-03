@@ -135,6 +135,75 @@ class Standard
 
 
 	/**
+	 * Removes old entries from the storage.
+	 *
+	 * @param integer[] $siteids List of IDs for sites whose entries should be deleted
+	 */
+	public function cleanup( array $siteids )
+	{
+		$context = $this->getContext();
+		$config = $context->getConfig();
+
+		/** mshop/locale/manager/site/cleanup/shop/domains
+		 * List of madmin domains names whose items referring to the same site should be deleted as well
+		 *
+		 * As items for each domain can be stored in a separate database, the
+		 * site manager needs a list of domain names used to connect to the
+		 * correct database and to remove all items that belong the the deleted
+		 * site.
+		 *
+		 * For each domain the cleanup will be done by the corresponding MShop
+		 * manager. To keep records for old sites in the database even if the
+		 * site was already deleted, you can configure a new list with the
+		 * domains removed you would like to keep, e.g. the "order" domain to
+		 * keep all orders ever placed.
+		 *
+		 * @param array List of domain names in lower case
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/site/cleanup/admin/domains
+		 */
+		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
+		$default = array(
+			'attribute', 'catalog', 'coupon', 'customer', 'index',
+			'media', 'order', 'plugin', 'price', 'product', 'tag',
+			'service', 'subscription', 'supplier', 'text'
+		);
+
+		foreach( $config->get( $path, $default ) as $domain ) {
+echo 'domain: ' . $domain . PHP_EOL;
+			\Aimeos\MShop\Factory::createManager( $context, $domain )->cleanup( $siteids );
+		}
+
+		/** mshop/locale/manager/site/cleanup/admin/domains
+		 * List of mshop domains names whose items referring to the same site should be deleted as well
+		 *
+		 * As items for each domain can be stored in a separate database, the
+		 * site manager needs a list of domain names used to connect to the
+		 * correct database and to remove all items that belong the the deleted
+		 * site.
+		 *
+		 * For each domain the cleanup will be done by the corresponding MAdmin
+		 * manager. To keep records for old sites in the database even if the
+		 * site was already deleted, you can configure a new list with the
+		 * domains removed you would like to keep, e.g. the "log" domain to
+		 * keep all log entries ever written.
+		 *
+		 * @param array List of domain names in lower case
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/locale/manager/site/cleanup/shop/domains
+		 */
+		$path = 'mshop/locale/manager/site/cleanup/admin/domains';
+		$default = array( 'job', 'log', 'cache' );
+
+		foreach( $config->get( $path, $default ) as $domain ) {
+			\Aimeos\MAdmin\Factory::createManager( $context, $domain )->cleanup( $siteids );
+		}
+	}
+
+
+	/**
 	 * Creates a new site object.
 	 *
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface
@@ -245,6 +314,8 @@ class Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
+		$this->cleanup( $ids );
+
 		/** mshop/locale/manager/site/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
 		 *
@@ -277,62 +348,6 @@ class Standard
 		 */
 		$path = 'mshop/locale/manager/site/standard/delete';
 		$this->deleteItemsBase( $ids, $path, false );
-
-		/** mshop/locale/manager/site/cleanup/shop/domains
-		 * List of madmin domains names whose items referring to the same site should be deleted as well
-		 *
-		 * As items for each domain can be stored in a separate database, the
-		 * site manager needs a list of domain names used to connect to the
-		 * correct database and to remove all items that belong the the deleted
-		 * site.
-		 *
-		 * For each domain the cleanup will be done by the corresponding MShop
-		 * manager. To keep records for old sites in the database even if the
-		 * site was already deleted, you can configure a new list with the
-		 * domains removed you would like to keep, e.g. the "order" domain to
-		 * keep all orders ever placed.
-		 *
-		 * @param array List of domain names in lower case
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/locale/manager/site/cleanup/admin/domains
-		 */
-		$path = 'mshop/locale/manager/site/cleanup/shop/domains';
-		$default = array(
-			'attribute', 'catalog', 'coupon', 'customer', 'index',
-			'media', 'order', 'plugin', 'price', 'product', 'tag',
-			'service', 'supplier', 'text'
-		);
-
-		foreach( $config->get( $path, $default ) as $domain ) {
-			\Aimeos\MShop\Factory::createManager( $context, $domain )->cleanup( $ids );
-		}
-
-		/** mshop/locale/manager/site/cleanup/admin/domains
-		 * List of mshop domains names whose items referring to the same site should be deleted as well
-		 *
-		 * As items for each domain can be stored in a separate database, the
-		 * site manager needs a list of domain names used to connect to the
-		 * correct database and to remove all items that belong the the deleted
-		 * site.
-		 *
-		 * For each domain the cleanup will be done by the corresponding MAdmin
-		 * manager. To keep records for old sites in the database even if the
-		 * site was already deleted, you can configure a new list with the
-		 * domains removed you would like to keep, e.g. the "log" domain to
-		 * keep all log entries ever written.
-		 *
-		 * @param array List of domain names in lower case
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/locale/manager/site/cleanup/shop/domains
-		 */
-		$path = 'mshop/locale/manager/site/cleanup/admin/domains';
-		$default = array( 'job', 'log', 'cache' );
-
-		foreach( $config->get( $path, $default ) as $domain ) {
-			\Aimeos\MAdmin\Factory::createManager( $context, $domain )->cleanup( $ids );
-		}
 	}
 
 
