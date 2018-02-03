@@ -69,6 +69,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 		$files = array(
 			'db-product' => 'default' . $ds . 'schema' . $ds . 'index.php',
+			'db-order' => 'default' . $ds . 'schema' . $ds . 'subscription.php',
 		);
 
 		$this->setupSchema( $files, true );
@@ -107,6 +108,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 
 		$files = array(
 			'db-product' => 'default' . $ds . 'schema' . $ds . 'index.php',
+			'db-order' => 'default' . $ds . 'schema' . $ds . 'subscription.php',
 		);
 
 		$this->setupSchema( $files );
