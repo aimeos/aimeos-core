@@ -171,7 +171,6 @@ class Standard
 		);
 
 		foreach( $config->get( $path, $default ) as $domain ) {
-echo 'domain: ' . $domain . PHP_EOL;
 			\Aimeos\MShop\Factory::createManager( $context, $domain )->cleanup( $siteids );
 		}
 
