@@ -54,4 +54,13 @@ interface Iface extends \Aimeos\MShop\Service\Provider\Iface, \Aimeos\MShop\Serv
 	 * @return void
 	 */
 	public function refund( \Aimeos\MShop\Order\Item\Iface $order );
+
+	/**
+	 * Executes the payment again for the given order if supported.
+	 * This requires support of the payment gateway and token based payment
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return void
+	 */
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order );
 }

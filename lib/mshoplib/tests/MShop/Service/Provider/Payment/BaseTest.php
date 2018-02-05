@@ -90,6 +90,15 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testRepay()
+	{
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+
+		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
+		$this->object->repay( $item );
+	}
+
+
 	public function testSetConfigFE()
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )

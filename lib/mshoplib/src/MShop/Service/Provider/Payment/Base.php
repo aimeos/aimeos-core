@@ -41,6 +41,11 @@ abstract class Base
 	 */
 	const FEAT_REFUND = 4;
 
+	/**
+	 * Feature constant if reoccurring payments is supported.
+	 */
+	const FEAT_REPAY = 5;
+
 
 	/**
 	 * Checks the backend configuration attributes for validity.
@@ -114,6 +119,19 @@ abstract class Base
 	public function refund( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'refund' ) );
+	}
+
+
+	/**
+	 * Executes the payment again for the given order if supported.
+	 * This requires support of the payment gateway and token based payment
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return void
+	 */
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
+	{
+		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'repay' ) );
 	}
 
 
