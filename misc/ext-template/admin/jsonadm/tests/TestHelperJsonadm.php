@@ -21,16 +21,6 @@ class TestHelperJsonadm
 	}
 
 
-	public static function getContext( $site = 'unittest' )
-	{
-		if( !isset( self::$context[$site] ) ) {
-			self::$context[$site] = self::createContext( $site );
-		}
-
-		return clone self::$context[$site];
-	}
-
-
 	private static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
@@ -38,11 +28,20 @@ class TestHelperJsonadm
 			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
 
-			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
-			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), true );
+			self::$aimeos = new \Aimeos\Bootstrap();
 		}
 
 		return self::$aimeos;
+	}
+
+
+	public static function getContext( $site = 'unittest' )
+	{
+		if( !isset( self::$context[$site] ) ) {
+			self::$context[$site] = self::createContext( $site );
+		}
+
+		return clone self::$context[$site];
 	}
 
 

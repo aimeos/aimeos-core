@@ -17,16 +17,6 @@ class TestHelperJobs
 	}
 
 
-	public static function getContext( $site = 'unittest' )
-	{
-		if( !isset( self::$context[$site] ) ) {
-			self::$context[$site] = self::createContext( $site );
-		}
-
-		return clone self::$context[$site];
-	}
-
-
 	public static function getAimeos()
 	{
 		if( !isset( self::$aimeos ) )
@@ -34,11 +24,20 @@ class TestHelperJobs
 			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
 
-			$extdir = dirname( dirname( dirname( __DIR__ ) ) );
-			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), false );
+			self::$aimeos = new \Aimeos\Bootstrap();
 		}
 
 		return self::$aimeos;
+	}
+
+
+	public static function getContext( $site = 'unittest' )
+	{
+		if( !isset( self::$context[$site] ) ) {
+			self::$context[$site] = self::createContext( $site );
+		}
+
+		return clone self::$context[$site];
 	}
 
 

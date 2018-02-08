@@ -21,6 +21,20 @@ class TestHelperJqadm
 	}
 
 
+	public static function getAimeos()
+	{
+		if( !isset( self::$aimeos ) )
+		{
+			require_once 'Bootstrap.php';
+			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
+
+			self::$aimeos = new \Aimeos\Bootstrap();
+		}
+
+		return self::$aimeos;
+	}
+
+
 	public static function getContext( $site = 'unittest' )
 	{
 		if( !isset( self::$context[$site] ) ) {
@@ -84,21 +98,6 @@ class TestHelperJqadm
 	public static function getTemplatePaths()
 	{
 		return self::getAimeos()->getCustomPaths( 'admin/jqadm/templates' );
-	}
-
-
-	public static function getAimeos()
-	{
-		if( !isset( self::$aimeos ) )
-		{
-			require_once 'Bootstrap.php';
-			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
-
-			$extdir = dirname( dirname( dirname( dirname( __DIR__ ) ) ) );
-			self::$aimeos = new \Aimeos\Bootstrap( array( $extdir ), true );
-		}
-
-		return self::$aimeos;
 	}
 
 
