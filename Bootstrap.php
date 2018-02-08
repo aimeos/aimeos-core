@@ -288,12 +288,9 @@ class Bootstrap
 
 			foreach( $dir as $dirinfo )
 			{
-				if( $dirinfo->isDot() !== false ) {
-					continue;
-				}
-
-				$manifest = $this->getManifestFile( $dirinfo->getPathName() );
-				if( $manifest === false ) {
+				if( $dirinfo->isDir() === false || $dirinfo->isDot() !== false
+					|| ( $manifest = $this->getManifestFile( $dirinfo->getPathName() ) ) === false
+				) {
 					continue;
 				}
 
@@ -315,7 +312,7 @@ class Bootstrap
 	{
 		$manifestFile = $dir . DIRECTORY_SEPARATOR . 'manifest.php';
 
-		if( is_dir( $dir ) && file_exists( $manifestFile ) ) {
+		if( file_exists( $manifestFile ) ) {
 			return include $manifestFile;
 		}
 
