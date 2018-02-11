@@ -17,7 +17,6 @@
 			"Aimeos\\MAdmin\\": "lib/mshoplib/src/MAdmin/",
 			"Aimeos\\Controller\\Common\\": "controller/common/src/Controller/Common/",
 			"Aimeos\\Controller\\Frontend\\": "controller/frontend/src/Controller/Frontend/",
-			"Aimeos\\Controller\\ExtJS\\": "controller/extjs/src/Controller/ExtJS/",
 			"Aimeos\\Controller\\Jobs\\": "controller/jobs/src/Controller/Jobs/",
 			"Aimeos\\Admin\\Jsonadm\\": "admin/jsonadm/src/Admin/Jsonadm/",
 			"Aimeos\\Admin\\JQAdm\\": "admin/jqadm/src/Admin/JQAdm/",
@@ -31,7 +30,6 @@
 			"admin/jsonadm/src",
 			"controller/common/src",
 			"controller/frontend/src",
-			"controller/extjs/src",
 			"controller/jobs/src",
 			"lib/custom/src"
 		]
