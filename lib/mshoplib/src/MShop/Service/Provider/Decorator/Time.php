@@ -115,7 +115,7 @@ class Time
 				$feconfig['time.hourminute']['default'] = $value;
 			}
 		}
-		catch( \Aimeos\MShop\Order\Exception $e ) { echo $e->getMessage(); } // If service isn't available
+		catch( \Aimeos\MShop\Order\Exception $e ) {} // If service isn't available
 
 		return array_merge( $this->getProvider()->getConfigFE( $basket ), $this->getConfigItems( $feconfig ) );
 	}
