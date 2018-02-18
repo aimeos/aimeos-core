@@ -121,11 +121,15 @@ class ProductStock
 			if( isset( $stockMap[ $orderProductItem->getProductCode() ] )
 				&& array_key_exists( $orderProductItem->getStockType(), $stockMap[ $orderProductItem->getProductCode() ] )
 			) {
-				$stocklevel = $stockMap[ $orderProductItem->getProductCode() ][ $orderProductItem->getStockType() ];
-			}
+				if( ( $stocklevel = $stockMap[ $orderProductItem->getProductCode() ][ $orderProductItem->getStockType() ] ) === null ) {
+					continue;
+				}
 
-			if( $stocklevel === null || $stocklevel >= $orderProductItem->getQuantity() ) {
-				continue;
+				if( $stocklevel >= $orderProductItem->getQuantity() )
+				{
+					$stockMap[ $orderProductItem->getProductCode() ][ $orderProductItem->getStockType() ] -= $orderProductItem->getQuantity();
+					continue;
+				}
 			}
 
 			if( $stocklevel > 0 ) {
