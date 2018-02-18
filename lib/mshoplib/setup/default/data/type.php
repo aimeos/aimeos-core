@@ -18,6 +18,7 @@ return array(
 		array( 'domain' => 'product', 'code' => 'price', 'label' => 'Price', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'text', 'label' => 'Text', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'date', 'label' => 'Date', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'interval', 'label' => 'Interval', 'status' => 1 ),
 	),
 
 	'attribute/lists/type' => array(
@@ -106,6 +107,7 @@ return array(
 		array( 'domain' => 'attribute', 'code' => 'variant', 'label' => 'Variant', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'hidden', 'label' => 'Hidden', 'status' => 1 ),
 		array( 'domain' => 'attribute', 'code' => 'custom', 'label' => 'Custom value', 'status' => 1 ),
+		array( 'domain' => 'attribute', 'code' => 'subscription', 'label' => 'Subscription', 'status' => 1 ),
 		array( 'domain' => 'catalog', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),

@@ -15,6 +15,7 @@ return array(
 		'product/download' => array( 'domain' => 'product', 'code' => 'download', 'label' => 'Download', 'status' => 1 ),
 		'product/date' => array( 'domain' => 'product', 'code' => 'date', 'label' => 'Date', 'status' => 1 ),
 		'product/price' => array( 'domain' => 'product', 'code' => 'price', 'label' => 'Price', 'status' => 1 ),
+		'product/interval' => array( 'domain' => 'product', 'code' => 'interval', 'label' => 'Interval', 'status' => 1 ),
 		'media/color' => array( 'domain' => 'media', 'code' => 'color', 'label' => 'Color', 'status' => 1 ),
 	),
 
@@ -55,6 +56,7 @@ return array(
 		'attribute/media/color/black' => array( 'domain' => 'media', 'typeid' => 'media/color', 'code' => 'black', 'label' => 'black', 'status' => 0, 'pos' => 5 ),
 		'attribute/media/color/pink' => array( 'domain' => 'media', 'typeid' => 'media/color', 'code' => 'pink', 'label' => 'pink', 'status' => 0, 'pos' => 6 ),
 
+		'attribute/product/interval/P1Y0M0W0D' => array( 'domain' => 'product', 'typeid' => 'product/interval', 'code' => 'P1Y0M0W0D', 'label' => 'Interval 1 year', 'status' => 1, 'pos' => 0 ),
 		'attribute/product/date/custom' => array( 'domain' => 'product', 'typeid' => 'product/date', 'code' => 'custom', 'label' => 'Custom date', 'status' => 1, 'pos' => 0 ),
 		'attribute/product/price/custom' => array( 'domain' => 'product', 'typeid' => 'product/price', 'code' => 'custom', 'label' => 'Custom price', 'status' => 1, 'pos' => 1 ),
 		'attribute/product/download/testurl' => array( 'domain' => 'product', 'typeid' => 'product/download', 'code' => 'testurl', 'label' => 'Test URL', 'status' => 1, 'pos' => 0 ),

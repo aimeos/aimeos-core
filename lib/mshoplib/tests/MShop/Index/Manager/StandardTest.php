@@ -93,7 +93,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.attribute.id' );
 
-		$this->assertEquals( 14, count( $result ) );
+		$this->assertEquals( 15, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
 		$this->assertEquals( 4, $result[$item->getId()] );
 	}
@@ -169,10 +169,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $result );
 
-		$this->assertEquals( 7, $cntAttributeA );
+		$this->assertEquals( 8, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
 		$this->assertEquals( 2, $cntPriceA );
-		$this->assertEquals( 19, $cntTextA );
+		$this->assertEquals( 20, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
