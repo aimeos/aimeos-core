@@ -41,6 +41,21 @@ class MShopAddCodeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 	 */
 	public function migrate()
 	{
-		$this->process();
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
+		if( !( $this->additional instanceof $iface ) ) {
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+		}
+
+		$site = $this->additional->getLocale()->getSite()->getCode();
+		$this->msg( sprintf( 'Adding default code data for site "%1$s"', $site ), 0 ); $this->status( '' );
+
+		$ds = DIRECTORY_SEPARATOR;
+		$path = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'code.php';
+
+		if( ( $data = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for default codes', $path ) );
+		}
+
+		$this->process( $data );
 	}
 }
