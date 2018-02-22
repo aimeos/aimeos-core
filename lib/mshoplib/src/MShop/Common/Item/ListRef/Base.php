@@ -23,6 +23,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	private $refItems;
 	private $listItems;
 	private $sortedLists;
+	private $sortedRefs;
 
 
 	/**
@@ -63,7 +64,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		if( is_array( $domain ) || $domain === null )
 		{
 			foreach( $this->listItems as $domain => $items ) {
-				$list += $this->filterListItems( $items, $active );
+				$list += $this->filterItems( $items, $active );
 			}
 
 			return $list;
@@ -101,7 +102,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			}
 		}
 
-		return $this->filterListItems( $list, $active );
+		return $this->filterItems( $list, $active );
 	}
 
 
@@ -112,7 +113,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * to the requested domain to get the items. Otherwise, no items will be
 	 * returned by this method.
 	 *
-	 * @param string|null $domain Name of the domain (e.g. product, text, etc.) or null for all
+	 * @param array|string|null $domain Name/Names of the domain (e.g. product, text, etc.) or null for all
 	 * @param array|string|null $type Name/Names of the item type or null for all
 	 * @param array|string|null $listtype Name/Names of the list item type or null for all
 	 * @param boolean $active True to return only active items, false to return all
@@ -121,11 +122,12 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	public function getRefItems( $domain = null, $type = null, $listtype = null, $active = true )
 	{
 		$list = [];
+		$this->sortRefItems();
 
-		if( $domain === null )
+		if( is_array( $domain ) || $domain === null )
 		{
 			foreach( $this->refItems as $domain => $items ) {
-				$list[$domain] = $this->filterRefItems( $items, $active );
+				$list[$domain] = $this->filterItems( $items, $active );
 			}
 
 			return $list;
@@ -143,18 +145,16 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		{
 			$refId = $listItem->getRefId();
 
-			if( isset( $this->refItems[$domain][$refId] ) && $listItem instanceof $iface && $listItem->isAvailable()
+			if( isset( $this->refItems[$domain][$refId] ) && $listItem instanceof $iface
 				&& ( $type === null || in_array( $this->refItems[$domain][$refId]->getType(), $types ) )
 				&& ( $listtype === null || in_array( $listItem->getType(), $listtypes ) )
+				&& ( $active === false || $listItem->isAvailable() )
 			) {
 				$list[$refId] = $this->refItems[$domain][$refId];
-				$list[$refId]->position = $listItem->getPosition();
 			}
 		}
 
-		uasort( $list, array( $this, 'compareRefPosition' ) );
-
-		return $this->filterRefItems( $list, $active );
+		return $this->filterItems( $list, $active );
 	}
 
 
@@ -223,39 +223,13 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	/**
-	 * Returns only active list items
+	 * Returns only active items
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $list Associative list of items with ID as key and objects as value
 	 * @param boolean $active True for active items only, false for all
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] Filtered associative list of items with ID as key and objects as value
 	 */
-	protected function filterListItems( array $list, $active )
-	{
-		if( (bool) $active === false ) {
-			return $list;
-		}
-
-		$result = [];
-
-		foreach( $list as $id => $item )
-		{
-			if( $item->isAvailable() ) {
-				$result[$id] = $item;
-			}
-		}
-
-		return $result;
-	}
-
-
-	/**
-	 * Returns only active referenced items
-	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $list Associative list of items with ID as key and objects as value
-	 * @param boolean $active True for active items only, false for all
-	 * @return \Aimeos\MShop\Common\Item\Iface[] Filtered associative list of items with ID as key and objects as value
-	 */
-	protected function filterRefItems( array $list, $active )
+	protected function filterItems( array $list, $active )
 	{
 		if( (bool) $active === false ) {
 			return $list;
@@ -298,5 +272,32 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		}
 
 		$this->sortedLists = true;
+	}
+
+
+	/**
+	 * Sorts the referenced items according to their position value
+	 */
+	protected function sortRefItems()
+	{
+		if( isset( $this->sortedRefs ) ) {
+			return;
+		}
+
+		foreach( $this->listItems as $domain => $list )
+		{
+			foreach( $list as $listItem )
+			{
+				$refId = $listItem->getRefId();
+
+				if( isset( $this->refItems[$domain][$refId] ) ) {
+					$this->refItems[$domain][$refId]->position = $listItem->getPosition();
+				}
+			}
+
+			uasort( $this->refItems[$domain], array( $this, 'compareRefPosition' ) );
+		}
+
+		$this->sortedRefs = true;
 	}
 }
