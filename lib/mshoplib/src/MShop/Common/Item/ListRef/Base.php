@@ -286,6 +286,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 		foreach( $this->listItems as $domain => $list )
 		{
+			if( !isset( $this->refItems[$domain] ) ) {
+				continue;
+			}
+
 			foreach( $list as $listItem )
 			{
 				$refId = $listItem->getRefId();
