@@ -50,7 +50,7 @@ class MShopAddCodeDataDefault extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 		$this->msg( sprintf( 'Adding default code data for site "%1$s"', $site ), 0 ); $this->status( '' );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'default' . $ds . 'data' . $ds . 'code.php';
+		$path = __DIR__ . $ds . 'data' . $ds . 'code.php';
 
 		if( ( $data = include( $path ) ) == false ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for default codes', $path ) );
