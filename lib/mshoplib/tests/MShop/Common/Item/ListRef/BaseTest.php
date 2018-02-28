@@ -50,12 +50,14 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$this->listItem1 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'test' ) + $values );
 		$this->listItem1->setRefId( $this->textItem1->getId() );
+		$this->listItem1->setDomain( 'text' );
 		$this->listItem1->setPosition( 1 );
 		$this->listItem1->setStatus( 1 );
 		$this->listItem1->setId( 11 );
 
 		$this->listItem2 = new \Aimeos\MShop\Common\Item\Lists\Standard( 'text.lists.', array( 'text.lists.type' => 'default' ) + $values );
 		$this->listItem2->setRefId( $this->textItem2->getId() );
+		$this->listItem2->setDomain( 'text' );
 		$this->listItem2->setPosition( 0 );
 		$this->listItem2->setStatus( 1 );
 		$this->listItem2->setId( 10 );
