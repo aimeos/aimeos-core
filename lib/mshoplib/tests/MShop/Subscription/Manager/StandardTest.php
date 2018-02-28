@@ -166,6 +166,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'subscription.id', null );
 		$expr[] = $search->compare( '==', 'subscription.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'subscription.ordbaseid', null );
 		$expr[] = $search->compare( '!=', 'subscription.ordprodid', null );
 		$expr[] = $search->compare( '==', 'subscription.datenext', '2000-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01 00:00:00' );

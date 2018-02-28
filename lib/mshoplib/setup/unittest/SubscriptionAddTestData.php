@@ -76,8 +76,11 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $testdata['subscription'] as $key => $dataset )
 		{
+			$ordProdItem = $this->getOrderProductItem( $dataset['ordprodid'] ) ;
+
 			$item = $subscriptionManager->createItem();
-			$item->setOrderProductId( $this->getOrderProductId( $dataset['ordprodid'] ) );
+			$item->setOrderBaseId( $ordProdItem->getBaseId() );
+			$item->setOrderProductId( $ordProdItem->getId() );
 			$item->setDateNext( $dataset['datenext'] );
 			$item->setDateEnd( $dataset['dateend'] );
 			$item->setInterval( $dataset['interval'] );
@@ -94,9 +97,9 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 * Returns the order product ID for the given test data key
 	 *
 	 * @param string $key Test data key
-	 * @return string Order product ID
+	 * @return \MShop\Order\Item\Base\Product\Iface Order product item
 	 */
-	protected function getOrderProductId( $key )
+	protected function getOrderProductItem( $key )
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->additional, 'Standard' )
 			->getSubManager( 'base', 'Standard' )->getSubManager( 'product', 'Standard' );
@@ -116,7 +119,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$result = $manager->searchItems( $search );
 
 		if( ( $item = reset( $result ) ) !== false ) {
-			return $item->getId();
+			return $item;
 		}
 
 		throw new \Exception( sprintf( 'No order product item found for key "%1$s"', $key ) );

@@ -38,6 +38,37 @@ class Standard
 
 
 	/**
+	 * Returns the ID of the base order
+	 *
+	 * @return string ID of the base order
+	 */
+	public function getOrderBaseId()
+	{
+		if( isset( $this->values['subscription.ordbaseid'] ) ) {
+			return (string) $this->values['subscription.ordbaseid'];
+		}
+	}
+
+
+	/**
+	 * Sets the ID of the base order item which the customer bought
+	 *
+	 * @param string $id ID of the base order
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 */
+	public function setOrderBaseId( $id )
+	{
+		if( (string) $id !== $this->getOrderBaseId() )
+		{
+			$this->values['subscription.ordbaseid'] = (string) $id;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the ID of the ordered product
 	 *
 	 * @return string ID of the ordered product
@@ -218,6 +249,7 @@ class Standard
 		{
 			switch( $key )
 			{
+				case 'subscription.ordbaseid': $this->setOrderBaseId( $value ); break;
 				case 'subscription.ordprodid': $this->setOrderProductId( $value ); break;
 				case 'subscription.datenext': $this->setDateNext( $value ); break;
 				case 'subscription.dateend': $this->setDateEnd( $value ); break;
@@ -241,6 +273,7 @@ class Standard
 	{
 		$list = parent::toArray( $private );
 
+		$list['subscription.ordbaseid'] = $this->getOrderBaseId();
 		$list['subscription.ordprodid'] = $this->getOrderProductId();
 		$list['subscription.datenext'] = $this->getDateNext();
 		$list['subscription.dateend'] = $this->getDateEnd();

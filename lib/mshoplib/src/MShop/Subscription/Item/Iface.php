@@ -20,6 +20,21 @@ namespace Aimeos\MShop\Subscription\Item;
 interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
+	 * Returns the ID of the base order
+	 *
+	 * @return string ID of the base order
+	 */
+	public function getOrderBaseId();
+
+	/**
+	 * Sets the ID of the base order item which the customer bought
+	 *
+	 * @param string $id ID of the base order
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 */
+	public function setOrderBaseId( $id );
+
+	/**
 	 * Returns the ID of the ordered product
 	 *
 	 * @return string ID of the ordered product

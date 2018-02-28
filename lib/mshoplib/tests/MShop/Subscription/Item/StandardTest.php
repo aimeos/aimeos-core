@@ -20,6 +20,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->values = array(
 			'subscription.id' => 15,
 			'subscription.siteid' => 99,
+			'subscription.ordbaseid' => 12,
 			'subscription.ordprodid' => 123,
 			'subscription.datenext' => '2000-01-01 00:00:00',
 			'subscription.dateend' => '2100-01-01 00:00:00',
@@ -64,6 +65,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 99, $this->object->getSiteId() );
+	}
+
+	public function testGetOrderBaseId()
+	{
+		$this->assertEquals( $this->values['subscription.ordbaseid'], $this->object->getOrderBaseId() );
+	}
+
+	public function testSetOrderBaseId()
+	{
+		$return = $this->object->setOrderBaseId( 15 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertEquals( 15, $this->object->getOrderBaseId() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetOrderProductId()
@@ -167,7 +182,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$list = array(
 			'subscription.id' => 1,
-			'subscription.ordprodid' => 2,
+			'subscription.ordbaseid' => 2,
+			'subscription.ordprodid' => 3,
 			'subscription.datenext' => '2019-01-01 00:00:00',
 			'subscription.dateend' => '2020-01-01 00:00:00',
 			'subscription.interval' => 'P1Y',
@@ -179,6 +195,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( [], $unknown );
 
 		$this->assertEquals( $list['subscription.id'], $item->getId() );
+		$this->assertEquals( $list['subscription.ordbaseid'], $item->getOrderBaseId() );
 		$this->assertEquals( $list['subscription.ordprodid'], $item->getOrderProductId() );
 		$this->assertEquals( $list['subscription.datenext'], $item->getDateNext() );
 		$this->assertEquals( $list['subscription.dateend'], $item->getDateEnd() );
@@ -194,6 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $this->object->getId(), $list['subscription.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $list['subscription.siteid'] );
+		$this->assertEquals( $this->object->getOrderBaseId(), $list['subscription.ordbaseid'] );
 		$this->assertEquals( $this->object->getOrderProductId(), $list['subscription.ordprodid'] );
 		$this->assertEquals( $this->object->getDateNext(), $list['subscription.datenext'] );
 		$this->assertEquals( $this->object->getDateEnd(), $list['subscription.dateend'] );

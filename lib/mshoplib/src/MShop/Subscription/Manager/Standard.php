@@ -37,6 +37,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'subscription.ordbaseid' => array(
+			'code' => 'subscription.ordbaseid',
+			'internalcode' => 'msub."ordbaseid"',
+			'label' => 'Order base ID',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
 		'subscription.ordprodid' => array(
 			'code' => 'subscription.ordprodid',
 			'internalcode' => 'msub."ordprodid"',
@@ -316,20 +324,21 @@ class Standard
 
 			$stmt = $this->getCachedStatement( $conn, $path );
 
-			$stmt->bind( 1, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $item->getDateNext() );
-			$stmt->bind( 3, $item->getDateEnd() );
-			$stmt->bind( 4, $item->getInterval() );
-			$stmt->bind( 5, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 6, $date ); // mtime
-			$stmt->bind( 7, $context->getEditor() );
-			$stmt->bind( 8, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $item->getOrderBaseId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $item->getOrderProductId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getDateNext() );
+			$stmt->bind( 4, $item->getDateEnd() );
+			$stmt->bind( 5, $item->getInterval() );
+			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 7, $date ); // mtime
+			$stmt->bind( 8, $context->getEditor() );
+			$stmt->bind( 9, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); // is not modified anymore
 			} else {
-				$stmt->bind( 9, $date ); // ctime
+				$stmt->bind( 10, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

@@ -26,17 +26,17 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_subscription" (
-						"ordprodid", "next", "end", "interval",
+						"ordbaseid", "ordprodid", "next", "end", "interval",
 						"status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
-						?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_subscription"
-					SET "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
+					SET "ordbaseid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
 						"status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -49,17 +49,17 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT msub."id" AS "subscription.id", msub."ordprodid" AS "subscription.ordprodid",
-						msub."siteid" AS "subscription.siteid", msub."next" AS "subscription.datenext",
-						msub."end" AS "subscription.dateend", msub."interval" AS "subscription.interval",
-						msub."status" AS "subscription.status", msub."ctime" AS "subscription.ctime",
-						msub."mtime" AS "subscription.mtime", msub."editor" AS "subscription.editor"
+					SELECT msub."id" AS "subscription.id", msub."ordbaseid" AS "subscription.ordbaseid",
+						msub."ordprodid" AS "subscription.ordprodid", msub."siteid" AS "subscription.siteid",
+						msub."next" AS "subscription.datenext", msub."end" AS "subscription.dateend",
+						msub."interval" AS "subscription.interval", msub."status" AS "subscription.status",
+						msub."ctime" AS "subscription.ctime", msub."mtime" AS "subscription.mtime",
+						msub."editor" AS "subscription.editor"
 					FROM "mshop_subscription" AS msub
 					:joins
 					WHERE :cond
-					GROUP BY msub."id", msub."ordprodid", msub."siteid", msub."next",
-						msub."end", msub."interval", msub."status", msub."ctime",
-						msub."mtime", msub."editor"
+					GROUP BY msub."id", msub."ordbaseid", msub."ordprodid", msub."siteid", msub."next",
+						msub."end", msub."interval", msub."status", msub."ctime", msub."mtime", msub."editor"
 						/*-columns*/ , :columns /*columns-*/
 					/*-subscriptionby*/ORDER BY :subscription/*subscriptionby-*/
 					LIMIT :size OFFSET :start
