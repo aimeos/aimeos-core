@@ -14,7 +14,7 @@ return array(
 					SELECT "key", COUNT("val") AS "count"
 					FROM (
 						SELECT :key AS "key", :val AS "val"
-						FROM "mshop_subscription" AS msub
+						FROM "mshop_subscription" AS mord
 						:joins
 						WHERE :cond
 						/*-orderby*/ ORDER BY :order /*orderby-*/
@@ -26,7 +26,7 @@ return array(
 			'insert' => array(
 				'ansi' => '
 					INSERT INTO "mshop_subscription" (
-						"ordbaseid", "ordprodid", "next", "end", "interval",
+						"baseid", "ordprodid", "next", "end", "interval",
 						"status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
@@ -36,7 +36,7 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_subscription"
-					SET "ordbaseid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
+					SET "baseid" = ?, "ordprodid" = ?, "next" = ?, "end" = ?, "interval" = ?,
 						"status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
@@ -49,17 +49,17 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT msub."id" AS "subscription.id", msub."ordbaseid" AS "subscription.ordbaseid",
-						msub."ordprodid" AS "subscription.ordprodid", msub."siteid" AS "subscription.siteid",
-						msub."next" AS "subscription.datenext", msub."end" AS "subscription.dateend",
-						msub."interval" AS "subscription.interval", msub."status" AS "subscription.status",
-						msub."ctime" AS "subscription.ctime", msub."mtime" AS "subscription.mtime",
-						msub."editor" AS "subscription.editor"
-					FROM "mshop_subscription" AS msub
+					SELECT mord."id" AS "subscription.id", mord."baseid" AS "subscription.ordbaseid",
+						mord."ordprodid" AS "subscription.ordprodid", mord."siteid" AS "subscription.siteid",
+						mord."next" AS "subscription.datenext", mord."end" AS "subscription.dateend",
+						mord."interval" AS "subscription.interval", mord."status" AS "subscription.status",
+						mord."ctime" AS "subscription.ctime", mord."mtime" AS "subscription.mtime",
+						mord."editor" AS "subscription.editor"
+					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
-					GROUP BY msub."id", msub."ordbaseid", msub."ordprodid", msub."siteid", msub."next",
-						msub."end", msub."interval", msub."status", msub."ctime", msub."mtime", msub."editor"
+					GROUP BY mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next",
+						mord."end", mord."interval", mord."status", mord."ctime", mord."mtime", mord."editor"
 						/*-columns*/ , :columns /*columns-*/
 					/*-subscriptionby*/ORDER BY :subscription/*subscriptionby-*/
 					LIMIT :size OFFSET :start
@@ -67,8 +67,8 @@ return array(
 			),
 			'count' => array(
 				'ansi' => '
-					SELECT COUNT( DISTINCT msub."id" ) AS "count"
-					FROM "mshop_subscription" AS msub
+					SELECT COUNT( DISTINCT mord."id" ) AS "count"
+					FROM "mshop_subscription" AS mord
 					:joins
 					WHERE :cond
 				'

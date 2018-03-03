@@ -176,6 +176,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'subscription.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'subscription.editor', $this->editor );
 
+		$expr[] = $search->compare( '!=', 'order.base.id', null );
+		$expr[] = $search->compare( '==', 'order.base.siteid', $siteid );
+		$expr[] = $search->compare( '==', 'order.base.sitecode', 'unittest' );
+
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$result = $this->object->searchItems( $search, [], $total );

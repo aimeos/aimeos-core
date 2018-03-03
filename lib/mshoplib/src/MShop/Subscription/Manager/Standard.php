@@ -24,14 +24,14 @@ class Standard
 	private $searchConfig = array(
 		'subscription.id' => array(
 			'code' => 'subscription.id',
-			'internalcode' => 'msub."id"',
+			'internalcode' => 'mord."id"',
 			'label' => 'Subscription ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.siteid' => array(
 			'code' => 'subscription.siteid',
-			'internalcode' => 'msub."siteid"',
+			'internalcode' => 'mord."siteid"',
 			'label' => 'Site ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -39,7 +39,7 @@ class Standard
 		),
 		'subscription.ordbaseid' => array(
 			'code' => 'subscription.ordbaseid',
-			'internalcode' => 'msub."ordbaseid"',
+			'internalcode' => 'mord."baseid"',
 			'label' => 'Order base ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -47,7 +47,7 @@ class Standard
 		),
 		'subscription.ordprodid' => array(
 			'code' => 'subscription.ordprodid',
-			'internalcode' => 'msub."ordprodid"',
+			'internalcode' => 'mord."ordprodid"',
 			'label' => 'Order product ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -55,35 +55,35 @@ class Standard
 		),
 		'subscription.datenext' => array(
 			'code' => 'subscription.datenext',
-			'internalcode' => 'msub."next"',
+			'internalcode' => 'mord."next"',
 			'label' => 'Next renewal date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.dateend' => array(
 			'code' => 'subscription.dateend',
-			'internalcode' => 'msub."end"',
+			'internalcode' => 'mord."end"',
 			'label' => 'End of subscription',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.interval' => array(
 			'code' => 'subscription.interval',
-			'internalcode' => 'msub."interval"',
+			'internalcode' => 'mord."interval"',
 			'label' => 'Renewal interval',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
 		'subscription.status' => array(
 			'code' => 'subscription.status',
-			'internalcode' => 'msub."status"',
+			'internalcode' => 'mord."status"',
 			'label' => 'Subscription status',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'subscription.ctime' => array(
 			'code' => 'subscription.ctime',
-			'internalcode' => 'msub."ctime"',
+			'internalcode' => 'mord."ctime"',
 			'label' => 'Create date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -91,7 +91,7 @@ class Standard
 		),
 		'subscription.mtime' => array(
 			'code' => 'subscription.mtime',
-			'internalcode' => 'msub."mtime"',
+			'internalcode' => 'mord."mtime"',
 			'label' => 'Modify date/time',
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -99,7 +99,7 @@ class Standard
 		),
 		'subscription.editor' => array(
 			'code' => 'subscription.editor',
-			'internalcode' => 'msub."editor"',
+			'internalcode' => 'mord."editor"',
 			'label' => 'Editor',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -495,7 +495,7 @@ class Standard
 		 */
 		$path = 'mshop/subscription/manager/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['base'], $withsub );
 	}
 
 
@@ -701,7 +701,7 @@ class Standard
 	 */
 	public function getSubManager( $manager, $name = null )
 	{
-		return $this->getSubManagerBase( 'subscription', $manager, $name );
+		return $this->getSubManagerBase( 'order', $manager, $name );
 	}
 
 

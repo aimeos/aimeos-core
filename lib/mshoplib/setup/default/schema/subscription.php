@@ -16,7 +16,7 @@ return array(
 
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'ordbaseid', 'bigint', [] );
+			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'ordprodid', 'bigint', [] );
 			$table->addColumn( 'next', 'datetime', [] );
 			$table->addColumn( 'end', 'datetime', ['notnull' => false] );
@@ -28,7 +28,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssub_id' );
 			$table->addIndex( array( 'siteid', 'next', 'status' ), 'idx_mssub_sid_next_stat' );
-			$table->addIndex( array( 'siteid', 'ordbaseid' ), 'idx_mssub_sid_obid' );
+			$table->addIndex( array( 'siteid', 'baseid' ), 'idx_mssub_sid_baseid' );
 			$table->addIndex( array( 'siteid', 'ordprodid' ), 'idx_mssub_sid_opid' );
 
 			return $schema;
