@@ -129,7 +129,20 @@ class Standard extends Base implements Iface
 		return $this;
 	}
 
+	/**
+	 * Returns the email of the customer item.
+	 *
+	 * @return string Email of the customer item
+	 */
+	public function getEmail()
+	{
+		if( isset( $this->values['customer.email'] ) ) {
+			return (string) $this->values['customer.email'];
+		}
 
+		return '';
+	}
+	
 	/**
 	 * Returns the code of the customer item.
 	 *
