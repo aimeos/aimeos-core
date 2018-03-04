@@ -92,9 +92,9 @@ return array(
 				'ansi' => '
 					INSERT INTO "mshop_coupon" (
 						"label", "provider", "config", "start", "end",
-						"pos", "status", "mtime", "editor", "siteid", "ctime"
+						"status", "mtime", "editor", "siteid", "ctime"
 					) VALUES (
-						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+						?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
 				'
 			),
@@ -102,7 +102,7 @@ return array(
 				'ansi' => '
 					UPDATE "mshop_coupon"
 					SET "label" = ?, "provider" = ?, "config" = ?, "start" = ?, "end" = ?,
-						"pos" = ?, "status" = ?, "mtime" = ?, "editor" = ?
+						"status" = ?, "mtime" = ?, "editor" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
@@ -111,14 +111,14 @@ return array(
 					SELECT mcou."id" AS "coupon.id", mcou."siteid" AS "coupon.siteid",
 						mcou."label" AS "coupon.label", mcou."provider" AS "coupon.provider",
 						mcou."start" AS "coupon.datestart", mcou."end" AS "coupon.dateend",
-						mcou."config" AS "coupon.config", mcou."pos" AS "coupon.position",
-						mcou."status" AS "coupon.status", mcou."mtime" AS "coupon.mtime",
-						mcou."editor" AS "coupon.editor", mcou."ctime" AS "coupon.ctime"
+						mcou."config" AS "coupon.config", mcou."status" AS "coupon.status",
+						mcou."mtime" AS "coupon.mtime", mcou."editor" AS "coupon.editor",
+						mcou."ctime" AS "coupon.ctime"
 					FROM "mshop_coupon" AS mcou
 					:joins
 					WHERE :cond
 					GROUP BY mcou."id", mcou."siteid", mcou."label", mcou."provider",
-						mcou."start", mcou."end", mcou."config", mcou."pos", mcou."status",
+						mcou."start", mcou."end", mcou."config", mcou."status",
 						mcou."mtime", mcou."editor", mcou."ctime" /*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start

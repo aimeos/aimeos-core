@@ -20,19 +20,17 @@ return array(
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
-			$table->addColumn( 'pos', 'smallint', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mscou_id' );
-			$table->addIndex( array( 'siteid', 'status', 'start', 'end', 'pos' ), 'idx_mscou_sid_stat_sta_end_pos' );
+			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_mscou_sid_stat_start_end' );
 			$table->addIndex( array( 'siteid', 'provider' ), 'idx_mscou_sid_provider' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_mscou_sid_label' );
 			$table->addIndex( array( 'siteid', 'start' ), 'idx_mscou_sid_start' );
 			$table->addIndex( array( 'siteid', 'end' ), 'idx_mscou_sid_end' );
-			$table->addIndex( array( 'siteid', 'pos' ), 'idx_mscou_sid_pos' );
 
 			return $schema;
 		},

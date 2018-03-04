@@ -204,7 +204,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '~=', 'coupon.config', 'product' );
 		$expr[] = $search->compare( '==', 'coupon.datestart', '2002-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'coupon.dateend', '2100-12-31 00:00:00' );
-		$expr[] = $search->compare( '>=', 'coupon.position', 0 );
 		$expr[] = $search->compare( '==', 'coupon.status', 1 );
 		$expr[] = $search->compare( '>=', 'coupon.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'coupon.ctime', '1970-01-01 00:00:00' );

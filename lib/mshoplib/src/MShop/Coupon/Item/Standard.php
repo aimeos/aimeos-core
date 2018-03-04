@@ -200,38 +200,6 @@ class Standard
 
 
 	/**
-	 * Returns the position of the item in the list.
-	 *
-	 * @return integer Position of the item in the list
-	 */
-	public function getPosition()
-	{
-		if( isset( $this->values['coupon.position'] ) ) {
-			return (int) $this->values['coupon.position'];
-		}
-
-		return 0;
-	}
-
-
-	/**
-	 * Sets the new position of the item in the list.
-	 *
-	 * @param integer $pos position of the item in the list
-	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
-	 */
-	public function setPosition( $pos )
-	{
-		if( $pos == $this->getPosition() ) { return $this; }
-
-		$this->values['coupon.position'] = $pos;
-		$this->setModified();
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the status of the coupon item.
 	 *
 	 * @return integer Status of the item
@@ -307,7 +275,6 @@ class Standard
 				case 'coupon.datestart': $this->setDateStart( $value ); break;
 				case 'coupon.dateend': $this->setDateEnd( $value ); break;
 				case 'coupon.provider': $this->setProvider( $value ); break;
-				case 'coupon.position': $this->setPosition( $value ); break;
 				case 'coupon.status': $this->setStatus( $value ); break;
 				default: $unknown[$key] = $value;
 			}
@@ -332,7 +299,6 @@ class Standard
 		$list['coupon.datestart'] = $this->getDateStart();
 		$list['coupon.dateend'] = $this->getDateEnd();
 		$list['coupon.provider'] = $this->getProvider();
-		$list['coupon.position'] = $this->getPosition();
 		$list['coupon.status'] = $this->getStatus();
 
 		return $list;
