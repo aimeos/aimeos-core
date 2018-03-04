@@ -79,6 +79,7 @@ class CouponAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$coupon->setDateStart( $dataset['start'] );
 			$coupon->setDateEnd( $dataset['end'] );
 			$coupon->setConfig( $dataset['config'] );
+			$coupon->setPosition( $dataset['pos'] );
 			$coupon->setStatus( $dataset['status'] );
 
 			$couponManager->saveItem( $coupon );

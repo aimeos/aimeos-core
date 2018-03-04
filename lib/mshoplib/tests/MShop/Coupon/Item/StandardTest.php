@@ -25,6 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.config' => array( 'key'=>'test' ),
 			'coupon.start' => null,
 			'coupon.end' => null,
+			'coupon.position' => 2,
 			'coupon.status' => true,
 			'coupon.mtime' => '2011-01-01 00:00:02',
 			'coupon.ctime' => '2011-01-01 00:00:01',
@@ -148,6 +149,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetPosition()
+	{
+		$this->assertEquals( 2, $this->object->getPosition() );
+	}
+
+
+	public function testSetPosition()
+	{
+		$return = $this->object->setPosition( 10 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Iface', $return );
+		$this->assertEquals( 10, $this->object->getPosition() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( 1, $this->object->getStatus() );
@@ -197,6 +214,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.config' => array( 'test' ),
 			'coupon.label' => 'test item',
 			'coupon.provider' => 'test',
+			'coupon.position' => 3,
 			'coupon.status' => 0,
 		);
 
@@ -208,6 +226,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['coupon.config'], $item->getConfig() );
 		$this->assertEquals( $list['coupon.label'], $item->getLabel() );
 		$this->assertEquals( $list['coupon.provider'], $item->getProvider() );
+		$this->assertEquals( $list['coupon.position'], $item->getPosition() );
 		$this->assertEquals( $list['coupon.status'], $item->getStatus() );
 	}
 
@@ -222,6 +241,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getConfig(), $arrayObject['coupon.config'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['coupon.label'] );
 		$this->assertEquals( $this->object->getProvider(), $arrayObject['coupon.provider'] );
+		$this->assertEquals( $this->object->getPosition(), $arrayObject['coupon.position'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['coupon.status'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['coupon.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['coupon.mtime'] );

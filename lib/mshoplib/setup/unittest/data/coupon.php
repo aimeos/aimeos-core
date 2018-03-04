@@ -8,11 +8,11 @@
 return array(
 
 	'coupon' => array(
-		'FixedRebate/1' => array( 'label' => 'Unit test fixed rebate', 'provider' => 'FixedRebate,BasketValues', 'status' => 1, 'config' => array( 'fixedrebate.productcode' => 'U:MD', 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'fixedrebate.rebate' => '2.50' ), 'start' => '2002-01-01 00:00:00', 'end' => '2100-12-31 00:00:00' ),
-		'PercentRebate/1' => array( 'label' => 'Unit test percent rebate', 'provider' => 'PercentRebate,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ), 'start' => null, 'end' => null ),
-		'FreeShipping/1' => array( 'label' => 'Unit test free shipping', 'provider' => 'FreeShipping,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'freeshipping.productcode' => 'U:SD' ), 'start' => null, 'end' => null ),
-		'Present/1' => array( 'label' => 'Unit test present', 'provider' => 'Present,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'present.productcode' => 'U:PD', 'present.quantity' => 2 ), 'start' => null, 'end' => null ),
-		'Example/1' => array( 'label' => 'Unit test example', 'provider' => 'Example,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ) ), 'start' => null, 'end' => null ),
+		'FixedRebate/1' => array( 'label' => 'Unit test fixed rebate', 'provider' => 'FixedRebate,BasketValues', 'status' => 1, 'config' => array( 'fixedrebate.productcode' => 'U:MD', 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'fixedrebate.rebate' => '2.50' ), 'start' => '2002-01-01 00:00:00', 'end' => '2100-12-31 00:00:00', 'pos' => 0 ),
+		'PercentRebate/1' => array( 'label' => 'Unit test percent rebate', 'provider' => 'PercentRebate,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ), 'start' => null, 'end' => null, 'pos' => 1 ),
+		'FreeShipping/1' => array( 'label' => 'Unit test free shipping', 'provider' => 'FreeShipping,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'freeshipping.productcode' => 'U:SD' ), 'start' => null, 'end' => null, 'pos' => 2 ),
+		'Present/1' => array( 'label' => 'Unit test present', 'provider' => 'Present,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'present.productcode' => 'U:PD', 'present.quantity' => 2 ), 'start' => null, 'end' => null, 'pos' => 3 ),
+		'Example/1' => array( 'label' => 'Unit test example', 'provider' => 'Example,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ) ), 'start' => null, 'end' => null, 'pos' => 4 ),
 	),
 
 	'coupon/code' => array(

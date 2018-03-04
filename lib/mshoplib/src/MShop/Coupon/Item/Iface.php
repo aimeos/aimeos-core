@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Coupon\Item;
  * @subpackage Coupon
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\Position\Iface
 {
 	/**
 	 * Returns the label of the coupon if available.

@@ -67,6 +67,13 @@ class Standard
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'coupon.position' => array(
+			'code' => 'coupon.position',
+			'internalcode' => 'mcou."pos"',
+			'label' => 'Position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'coupon.status' => array(
 			'code' => 'coupon.status',
 			'internalcode' => 'mcou."status"',
@@ -326,16 +333,17 @@ class Standard
 			$stmt->bind( 3, json_encode( $item->getConfig() ) );
 			$stmt->bind( 4, $item->getDateStart() );
 			$stmt->bind( 5, $item->getDateEnd() );
-			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $date ); // mtime
-			$stmt->bind( 8, $context->getEditor() );
-			$stmt->bind( 9, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 8, $date ); // mtime
+			$stmt->bind( 9, $context->getEditor() );
+			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 10, $date ); // ctime
+				$stmt->bind( 11, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
