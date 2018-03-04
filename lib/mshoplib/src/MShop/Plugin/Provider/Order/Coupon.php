@@ -65,7 +65,8 @@ class Coupon
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
 		}
 
-		$notAvailable = [];
+
+		$notAvailable = $items = [];
 		$couponManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon' );
 
 		foreach( $order->getCoupons() as $code => $products )
@@ -80,16 +81,25 @@ class Coupon
 
 			$results = $couponManager->searchItems( $search );
 
-			if( ( $couponItem = reset( $results ) ) !== false )
-			{
-				$couponProvider = $couponManager->getProvider( $couponItem, $code );
-				$couponProvider->updateCoupon( $order );
-			}
-			else
-			{
+			if( ( $couponItem = reset( $results ) ) !== false ) {
+				$items[$code] = $couponItem;
+			} else {
 				$notAvailable[$code] = 'coupon.gone';
 			}
 		}
+
+		uasort( $items, function( $a, $b ) {
+			if( $a->getPosition() === $b->getPosition() ) {
+				return 0;
+			}
+
+			return ( $a->getPosition() < $b->getPosition() ) ? -1 : 1;
+		} );
+
+		foreach( $items as $code => $item ) {
+			$couponManager->getProvider( $item, $code )->updateCoupon( $order );
+		}
+
 
 		if( count( $notAvailable ) > 0 )
 		{
