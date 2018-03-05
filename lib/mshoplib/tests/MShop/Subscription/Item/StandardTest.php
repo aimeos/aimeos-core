@@ -24,7 +24,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.ordprodid' => 123,
 			'subscription.datenext' => '2000-01-01 00:00:00',
 			'subscription.dateend' => '2100-01-01 00:00:00',
-			'subscription.interval' => 'P1Y',
+			'subscription.interval' => 'P1Y0M0W0D',
 			'subscription.status' => 1,
 			'subscription.mtime' => '2018-01-01 00:00:02',
 			'subscription.ctime' => '2018-01-01 00:00:01',
@@ -133,10 +133,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetInterval()
 	{
-		$return = $this->object->setInterval( 'P1M' );
+		$return = $this->object->setInterval( 'P0Y1M0W0D' );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
-		$this->assertEquals( 'P1M', $this->object->getInterval() );
+		$this->assertEquals( 'P0Y1M0W0D', $this->object->getInterval() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.ordprodid' => 3,
 			'subscription.datenext' => '2019-01-01 00:00:00',
 			'subscription.dateend' => '2020-01-01 00:00:00',
-			'subscription.interval' => 'P1Y',
+			'subscription.interval' => 'P1Y0M0W0D',
 			'subscription.status' => 1,
 		);
 

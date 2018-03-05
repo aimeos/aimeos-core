@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$itemSaved = $this->object->getItem( $item->getId() );
 
 		$itemExp = clone $itemSaved;
-		$itemExp->setInterval( 'P1W' );
+		$itemExp->setInterval( 'P0Y0M1W0D' );
 		$resultUpd = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId() );
 
@@ -170,7 +170,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'subscription.ordprodid', null );
 		$expr[] = $search->compare( '==', 'subscription.datenext', '2000-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'subscription.interval', 'P1M' );
+		$expr[] = $search->compare( '==', 'subscription.interval', 'P0Y1M0W0D' );
 		$expr[] = $search->compare( '==', 'subscription.status', 1 );
 		$expr[] = $search->compare( '>=', 'subscription.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'subscription.ctime', '1970-01-01 00:00:00' );

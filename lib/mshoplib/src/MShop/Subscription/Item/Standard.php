@@ -182,6 +182,10 @@ class Standard
 	 */
 	public function setInterval( $value )
 	{
+		if( preg_match( '/^P[0-9]+Y[0-9]+M[0-9]+W[0-9]+D$/', $value ) !== 1 ) {
+			throw new \Aimeos\MShop\Subscription\Exception( sprintf( 'Invalid time interval format "%1$s"', $value ) );
+		}
+
 		if( (string) $value !== $this->getInterval() )
 		{
 			$this->values['subscription.interval'] = (string) $value;
