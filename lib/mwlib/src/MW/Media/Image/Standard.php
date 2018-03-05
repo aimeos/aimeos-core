@@ -125,7 +125,7 @@ class Standard
 					break;
 
 				default:
-					throw new \Aimeos\MW\Media\Exception( sprintf( 'File format "%1$s" is not supported', $this->getMimeType() ) );
+					throw new \Aimeos\MW\Media\Exception( sprintf( 'File format "%1$s" is not supported', $mimetype ) );
 			}
 
 			if( $filename === null ) {
