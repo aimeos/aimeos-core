@@ -22,8 +22,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.siteid' => 99,
 			'subscription.ordbaseid' => 12,
 			'subscription.ordprodid' => 123,
-			'subscription.datenext' => '2000-01-01 00:00:00',
-			'subscription.dateend' => '2100-01-01 00:00:00',
+			'subscription.datenext' => '2000-01-01',
+			'subscription.dateend' => '2100-01-01',
 			'subscription.interval' => 'P1Y0M0W0D',
 			'subscription.status' => 1,
 			'subscription.mtime' => '2018-01-01 00:00:02',
@@ -102,10 +102,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetDateNext()
 	{
-		$return = $this->object->setDateNext( '2018-01-01 00:00:00' );
+		$return = $this->object->setDateNext( '2018-01-01' );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
-		$this->assertEquals( '2018-01-01 00:00:00', $this->object->getDateNext() );
+		$this->assertEquals( '2018-01-01', $this->object->getDateNext() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
@@ -116,10 +116,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetDateEnd()
 	{
-		$return = $this->object->setDateEnd( '2020-01-01 00:00:00' );
+		$return = $this->object->setDateEnd( '2020-01-01' );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
-		$this->assertEquals( '2020-01-01 00:00:00', $this->object->getDateEnd() );
+		$this->assertEquals( '2020-01-01', $this->object->getDateEnd() );
 		$this->assertTrue( $this->object->isModified() );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
@@ -184,8 +184,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.id' => 1,
 			'subscription.ordbaseid' => 2,
 			'subscription.ordprodid' => 3,
-			'subscription.datenext' => '2019-01-01 00:00:00',
-			'subscription.dateend' => '2020-01-01 00:00:00',
+			'subscription.datenext' => '2019-01-01',
+			'subscription.dateend' => '2020-01-01',
 			'subscription.interval' => 'P1Y0M0W0D',
 			'subscription.status' => 1,
 		);

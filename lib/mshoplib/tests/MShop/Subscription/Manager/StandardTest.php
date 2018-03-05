@@ -168,8 +168,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'subscription.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'subscription.ordbaseid', null );
 		$expr[] = $search->compare( '!=', 'subscription.ordprodid', null );
-		$expr[] = $search->compare( '==', 'subscription.datenext', '2000-01-01 00:00:00' );
-		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'subscription.datenext', '2000-01-01' );
+		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.interval', 'P0Y1M0W0D' );
 		$expr[] = $search->compare( '==', 'subscription.status', 1 );
 		$expr[] = $search->compare( '>=', 'subscription.mtime', '1970-01-01 00:00:00' );
