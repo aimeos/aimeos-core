@@ -519,7 +519,7 @@ class Standard
 
 		try
 		{
-			$required = array( 'subscription' );
+			$required = array( 'subscription', 'order.base' );
 
 			/** mshop/subscription/manager/sitemode
 			 * Mode how items from levels below or above in the site tree are handled
