@@ -221,16 +221,11 @@ class Standard
 	 */
 	protected function getFilePath( $filename, $type, $mimetype )
 	{
-		switch( $mimetype )
-		{
-			case 'application/pdf': $ext = '.pdf'; break;
+		$ext = '';
+		$list = $this->context->getConfig()->get( 'controller/common/media/standard/extensions', [] );
 
-			case 'image/gif': $ext = '.gif'; break;
-			case 'image/jpeg': $ext = '.jpg'; break;
-			case 'image/png': $ext = '.png'; break;
-			case 'image/tiff': $ext = '.tif'; break;
-
-			default: $ext = '';
+		if( isset( $list[$mimetype] ) ) {
+			$ext = '.' . $list[$mimetype];
 		}
 
 		$filename = md5( $filename . getmypid() . microtime( true ) );
