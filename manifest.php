@@ -17,8 +17,9 @@ return array(
 		'controller/jobs/src',
 	),
 	'config' => array(
-		'lib/mshoplib/config',
 		'config',
+		'lib/mshoplib/config',
+		'controller/common/config',
 	),
 	'i18n' => array(
 		'controller/common' => 'controller/common/i18n',
