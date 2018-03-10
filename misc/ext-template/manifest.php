@@ -35,11 +35,14 @@ return array(
 		'config',
 	),
 	'custom' => array(
-		'admin/jsonadm/templates' => array(
-			'admin/jsonadm/templates',
+		'admin/jqadm' => array(
+			'admin/jqadm/manifest.jsb2',
 		),
 		'admin/jqadm/templates' => array(
 			'admin/jqadm/templates',
+		),
+		'admin/jsonadm/templates' => array(
+			'admin/jsonadm/templates',
 		),
 		'client/html/templates' => array(
 			'client/html/templates',

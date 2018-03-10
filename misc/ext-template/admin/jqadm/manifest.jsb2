@@ -1,0 +1,22 @@
+{
+	"projectName": "<extname>",
+	"licenseText": "proprietary",
+	"pkgs": [{
+		"name": "<extname> CSS",
+		"file": "<extname>.css",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "custom.css",
+			"path": "themes/"
+		}]
+	}, {
+		"name": "<extname> JS",
+		"file": "<extname>.js",
+		"isDebug": true,
+		"fileIncludes": [{
+			"text": "custom.js",
+			"path": "themes/"
+		}]
+	}],
+	"resources" : []
+}
