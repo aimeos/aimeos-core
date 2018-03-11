@@ -625,7 +625,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		foreach( $products as $product )
 		{
-			$this->assertEquals( 2, count( $product->getAttributes() ) );
+			$this->assertGreaterThanOrEqual( 2, count( $product->getAttributes() ) );
 			$this->assertEquals( $pos++, $product->getPosition() );
 		}
 

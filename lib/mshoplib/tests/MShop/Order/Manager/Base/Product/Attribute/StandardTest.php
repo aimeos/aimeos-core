@@ -37,7 +37,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.editor', 'core:unittest' ) );
 		$result = $this->object->aggregate( $search, 'order.base.product.attribute.code' );
 
-		$this->assertEquals( 4, count( $result ) );
+		$this->assertEquals( 5, count( $result ) );
 		$this->assertArrayHasKey( 'width', $result );
 		$this->assertEquals( 4, $result['width'] );
 	}
