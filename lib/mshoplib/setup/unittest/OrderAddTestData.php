@@ -363,7 +363,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			if( isset( $dataset['type'] ) ) {
-				$ordProdAttr->setType( $products[$dataset['type']]->getType() );
+				$ordProdAttr->setType( $dataset['type'] );
 			}
 
 			$manager->saveItem( $ordProdAttr, false );

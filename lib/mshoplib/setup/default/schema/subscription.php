@@ -18,7 +18,7 @@ return array(
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'ordprodid', 'bigint', [] );
-			$table->addColumn( 'next', 'date', [] );
+			$table->addColumn( 'next', 'date', ['notnull' => false] );
 			$table->addColumn( 'end', 'date', ['notnull' => false] );
 			$table->addColumn( 'interval', 'string', array( 'length' => 16 ) );
 			$table->addColumn( 'status', 'smallint', array( 'default' => 0 ) );
