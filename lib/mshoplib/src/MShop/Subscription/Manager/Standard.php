@@ -214,6 +214,22 @@ class Standard
 
 
 	/**
+	 * Creates a search object and optionally sets base criteria.
+	 *
+	 * @param boolean $default Add default criteria
+	 * @return \Aimeos\MW\Criteria\Iface Criteria object
+	 */
+	public function createSearch( $default = false )
+	{
+		if( $default === true ) {
+			return $this->createSearchBase( 'subscription' );
+		}
+
+		return parent::createSearch();
+	}
+
+
+	/**
 	 * Creates a one-time subscription in the storage from the given invoice object.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Subscription item with necessary values
