@@ -165,10 +165,11 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 			case \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT:
 				$value = (double) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_STR:
-				if( in_array( $operator, array( '~=', '=~' ), true ) )
-				{
-					$value = str_replace( array( '%', '_', '[' ), array( '#%', '#_', '#[' ), $this->conn->escape( $value ) );
-					$value = '\'%' . $value . '%\''; break;
+				if( $operator === '~=' ) {
+					$value = '\'%' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( $value ) ) . '%\''; break;
+				}
+				if( $operator === '=~' ) {
+					$value = '\'' . str_replace( ['#', '%', '_', '['], ['##', '#%', '#_', '#['], $this->conn->escape( $value ) ) . '%\''; break;
 				}
 			default:
 				$value = '\'' . $this->conn->escape( $value ) . '\'';
