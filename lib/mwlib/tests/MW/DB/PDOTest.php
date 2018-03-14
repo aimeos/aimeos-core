@@ -217,6 +217,19 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testStmtSimpleBindApostrophes()
+	{
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'\\\'\\\'\')';
+
+		$conn = $this->object->acquire();
+
+		$stmt = $conn->create( $sqlinsert );
+		$stmt->execute()->finish();
+
+		$this->object->release( $conn );
+	}
+
+
 	public function testStmtSimpleBindOne()
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, ?)';

@@ -225,6 +225,19 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testStmtSimpleBindApostrophes()
+	{
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'\\\'\\\'\')';
+
+		$conn = $this->object->acquire();
+
+		$stmt = $conn->create( $sqlinsert );
+		$stmt->execute()->finish();
+
+		$this->object->release( $conn );
+	}
+
+
 	public function testStmtSimpleBind()
 	{
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (?)';
