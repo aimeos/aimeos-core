@@ -148,12 +148,16 @@ abstract class Base
 		$result = [];
 		$parts = explode( '?', $sql );
 
+		if( count( $parts ) === 1 ) {
+			return $parts;
+		}
+
 		if( ( $part = reset( $parts ) ) !== false )
 		{
 			do
 			{
 				$count = 0; $temp = $part;
-				while( ( $pr = str_replace( array( '\'\'', '\\\'' ), '', $part ) ) !== false
+				while( ( $pr = str_replace( ['\\\'', '\'\''], '', $part ) ) !== false
 					&& ( $count += substr_count( $pr, '\'' ) ) % 2 !== 0 )
 				{
 					if( ( $part = next( $parts ) ) === false ) {
