@@ -221,7 +221,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 	{
 		$conn = $this->object->acquire();
 
-		$sqlinsert = 'INSERT INTO "mw_unit_test" ("name") VALUES (\'' . $conn->escape( '\'\'' ) . '\')';
+		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (1, \'' . $conn->escape( '\'\'' ) . '\')';
 
 		$stmt = $conn->create( $sqlinsert );
 		$stmt->execute()->finish();
