@@ -989,6 +989,7 @@ class Standard extends Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $basket Basket object containing all information
 	 * @param integer $parts Bitmap of the basket parts that should be stored
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Stored order basket
 	 */
 	public function store( \Aimeos\MShop\Order\Item\Base\Iface $basket, $parts = \Aimeos\MShop\Order\Item\Base\Base::PARTS_ALL )
 	{
@@ -1011,5 +1012,7 @@ class Standard extends Base
 		if( $parts & \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) {
 			$this->storeServices( $basket );
 		}
+
+		return $basket;
 	}
 }
