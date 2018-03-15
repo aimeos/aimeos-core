@@ -258,7 +258,7 @@ return array(
 			$table->addColumn( 'id', 'bigint', array( 'autoincrement' => true ) );
 			$table->addColumn( 'baseid', 'bigint', [] );
 			$table->addColumn( 'siteid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 8 ) );
+			$table->addColumn( 'type', 'string', array( 'length' => 16 ) );
 			$table->addColumn( 'datepayment', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'datedelivery', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
