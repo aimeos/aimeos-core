@@ -126,6 +126,18 @@ class DirectDebit
 
 
 	/**
+	 * Executes the payment again for the given order if supported.
+	 * This requires support of the payment gateway and token based payment
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
+	 * @return void
+	 */
+	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
+	{
+	}
+
+
+	/**
 	 * Updates the orders for whose status updates have been received by the confirmation page
 	 *
 	 * @param \Psr\Http\Message\ServerRequestInterface $request Request object with parameters and request body
