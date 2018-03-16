@@ -539,6 +539,31 @@ abstract class Base
 
 
 	/**
+	 * Returns the service related data from the customer account if available
+	 *
+	 * @param string $type Type of the value that should be returned
+	 * @param string $customerId Unique customer ID the service token belongs to
+	 * @param string $serviceId Unique service ID the service token is valid for
+	 * @return string|null Service data or null if none is available
+	 */
+	protected function getCustomerData( $type, $customerId, $serviceId )
+	{
+		if( $customerId == null ) {
+			return;
+		}
+
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
+		$item = $manager->getItem( $customerId, ['service'] );
+
+		if( ( $listItem = $item->getListItem( $serviceId, 'service', 'default' ) ) !== null )
+		{
+			$config = $listItem->getConfig();
+			return ( isset( $config[$type] ) ? $config[$type] : null );
+		}
+	}
+
+
+	/**
 	 * Saves the base order which is equivalent to the basket and its dependent objects.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Order base object with associated items
@@ -570,6 +595,43 @@ abstract class Base
 
 			$orderServiceItem->setAttributeItem( $item );
 		}
+	}
+
+
+	/**
+	 * Adds the service data to the customer account if available
+	 *
+	 * @param string $type Type of the value that should be added
+	 * @param string $customerId Unique customer ID the service token belongs to
+	 * @param string $serviceId Unique service ID the service token is valid for
+	 * @param string $data Service data to store
+	 */
+	protected function setCustomerData( $type, $customerId, $serviceId, $data )
+	{
+		if( $customerId == null ) {
+			return;
+		}
+
+		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
+
+		$item = $manager->getItem( $customerId, ['service'] );
+
+		if( ( $listItem = $item->getListItem( $serviceId, 'service', 'default', false ) ) === null )
+		{
+			$listTypeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists/type' );
+			$typeId = $listTypeManager->findItem( 'default', [], 'service' )->getId();
+
+			$listItem = $listManager->createItem();
+			$listItem->setParentId( $customerId );
+			$listItem->setRefId( $serviceId );
+			$listItem->setDomain( 'service' );
+			$listItem->setTypeId( $typeId );
+			$listItem->setStatus( 1 );
+		}
+
+		$listItem->setConfig( array_merge( $listItem->getConfig(), [$type => $data] ) );
+		$listManager->saveItem( $listItem, false );
 	}
 
 
