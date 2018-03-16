@@ -43,6 +43,31 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	/**
+	 * Returns the list item for the given reference ID, domain, list type and type.
+	 *
+	 * @param string $refId Unique ID of the referenced item
+	 * @param string $domain Name of the domain (e.g. product, text, etc.)
+	 * @param string $listtype Name of the list item type
+	 * @param boolean $active True to return only active items, false to return all
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface|null Matching list item or null if none
+	 */
+	public function getListItem( $refId, $domain, $listtype, $active = true )
+	{
+		if( isset( $this->listItems[$domain] ) )
+		{
+			foreach( $this->listItems[$domain] as $listItem )
+			{
+				if( $listItem->getRefId() == $refId && $listItem->getType() === $listtype
+					&& ( $active === false || $listItem->isAvailable() )
+				) {
+					return $listItem;
+				}
+			}
+		}
+	}
+
+
+	/**
 	 * Returns the list items attached, optionally filtered by domain and list type.
 	 *
 	 * The reference parameter in searchItems() must have been set accordingly
