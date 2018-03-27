@@ -41,11 +41,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 				'product.property.id' => 2,
 				'product.property.parentid' => 1,
 				'product.property.type' => 'proptest',
+				'product.property.languageid' => 'de',
+				'languageid' => 'de',
 			) ),
 			3 => new \Aimeos\MShop\Common\Item\Property\Standard( 'product.property.', array(
 				'product.property.id' => 3,
 				'product.property.parentid' => 1,
 				'product.property.type' => 'proptype',
+				'product.property.languageid' => 'de',
+				'languageid' => 'fr',
 			) ),
 		);
 
@@ -93,6 +97,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetPropertyItems()
 	{
 		$propItems = $this->object->getPropertyItems();
+
+		$this->assertEquals( 1, count( $propItems ) );
+
+		foreach( $propItems as $propItem ) {
+			$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $propItem );
+		}
+	}
+
+
+	public function testGetPropertyItemsAll()
+	{
+		$propItems = $this->object->getPropertyItems( null, false );
 
 		$this->assertEquals( 2, count( $propItems ) );
 

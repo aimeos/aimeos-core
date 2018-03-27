@@ -47,25 +47,24 @@ class Standard
 	/**
 	 * Returns the property items of the attribute
 	 *
-	 * @return \Aimeos\MShop\Attribute\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
+	 * @param string|null $type Name of the property item type or null for all
+	 * @param boolean $active True to return only active items, false to return all
+	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
 	 */
-	public function getPropertyItems( $type = null )
+	public function getPropertyItems( $type = null, $active = true )
 	{
-		if( $type !== null )
+		$list = [];
+
+		foreach( $this->propItems as $propId => $propItem )
 		{
-			$list = [];
-
-			foreach( $this->propItems as $propId => $propItem )
-			{
-				if( $propItem->getType() === $type ) {
-					$list[$propId] = $propItem;
-				}
+			if( ( $type === null || $propItem->getType() === $type )
+				&& ( $active === false || $propItem->isAvailable() )
+			) {
+				$list[$propId] = $propItem;
 			}
-
-			return $list;
 		}
 
-		return $this->propItems;
+		return $list;
 	}
 
 
