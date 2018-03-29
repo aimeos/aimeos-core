@@ -24,6 +24,7 @@ abstract class Base
 {
 	private $bdata;
 	private $prefix;
+	private $available = true;
 	private $modified = false;
 
 
@@ -195,7 +196,18 @@ abstract class Base
 	 */
 	public function isAvailable()
 	{
-		return true;
+		return $this->available;
+	}
+
+
+	/**
+	 * Sets the general availability of the item
+	 *
+	 * @return boolean $value True if available, false if not
+	 */
+	public function setAvailable( $value )
+	{
+		$this->available = (bool) $value;
 	}
 
 

@@ -212,7 +212,8 @@ class Standard
 	 */
 	public function isAvailable()
 	{
-		return ( $this->getDateStart() === null || $this->getDateStart() < $this->values['date'] )
+		return parent::isAvailable()
+			&& ( $this->getDateStart() === null || $this->getDateStart() < $this->values['date'] )
 			&& ( $this->getDateEnd() === null || $this->getDateEnd() > $this->values['date'] );
 
 	}

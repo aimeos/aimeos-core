@@ -23,6 +23,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	private $price;
 	private $locale;
 	private $values;
+	private $available = true;
 	private $modified = false;
 
 
@@ -350,7 +351,18 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	 */
 	public function isAvailable()
 	{
-		return true;
+		return $this->available;
+	}
+
+
+	/**
+	 * Sets the general availability of the item
+	 *
+	 * @return boolean $value True if available, false if not
+	 */
+	public function setAvailable( $value )
+	{
+		$this->available = (bool) $value;
 	}
 
 

@@ -94,6 +94,13 @@ interface Iface
 	public function isAvailable();
 
 	/**
+	 * Sets the general availability of the item
+	 *
+	 * @return boolean $value True if available, false if not
+	 */
+	public function setAvailable( $value );
+
+	/**
 	 * Tests if the item was modified.
 	 *
 	 * @return boolean True if modified, false if not

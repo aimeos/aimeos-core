@@ -186,7 +186,7 @@ class Standard
 	 */
 	public function isAvailable()
 	{
-		return (bool) $this->getStatus();
+		return parent::isAvailable() && (bool) $this->getStatus();
 	}
 
 

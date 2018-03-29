@@ -307,7 +307,7 @@ class Standard extends Base implements Iface
 	 */
 	public function isAvailable()
 	{
-		return (bool) $this->getStatus();
+		return parent::isAvailable() && (bool) $this->getStatus();
 	}
 
 
