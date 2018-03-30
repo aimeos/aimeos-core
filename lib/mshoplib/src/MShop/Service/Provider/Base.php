@@ -541,12 +541,11 @@ abstract class Base
 	/**
 	 * Returns the service related data from the customer account if available
 	 *
-	 * @param string $type Type of the value that should be returned
 	 * @param string $customerId Unique customer ID the service token belongs to
-	 * @param string $serviceId Unique service ID the service token is valid for
+	 * @param string $type Type of the value that should be returned
 	 * @return string|null Service data or null if none is available
 	 */
-	protected function getCustomerData( $type, $customerId, $serviceId )
+	protected function getCustomerData( $customerId, $type )
 	{
 		if( $customerId == null ) {
 			return;
@@ -554,6 +553,7 @@ abstract class Base
 
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
 		$item = $manager->getItem( $customerId, ['service'] );
+		$serviceId = $this->getServiceItem()->getId();
 
 		if( ( $listItem = $item->getListItem( $serviceId, 'service', 'default' ) ) !== null )
 		{
@@ -601,12 +601,11 @@ abstract class Base
 	/**
 	 * Adds the service data to the customer account if available
 	 *
-	 * @param string $type Type of the value that should be added
 	 * @param string $customerId Unique customer ID the service token belongs to
-	 * @param string $serviceId Unique service ID the service token is valid for
+	 * @param string $type Type of the value that should be added
 	 * @param string $data Service data to store
 	 */
-	protected function setCustomerData( $type, $customerId, $serviceId, $data )
+	protected function setCustomerData( $customerId, $type, $data )
 	{
 		if( $customerId == null ) {
 			return;
@@ -616,6 +615,7 @@ abstract class Base
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
 
 		$item = $manager->getItem( $customerId, ['service'] );
+		$serviceId = $this->getServiceItem()->getId();
 
 		if( ( $listItem = $item->getListItem( $serviceId, 'service', 'default', false ) ) === null )
 		{

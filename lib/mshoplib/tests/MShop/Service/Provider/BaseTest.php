@@ -270,7 +270,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'customer' );
 		$customerId = $manager->findItem( 'UTC001' )->getId();
 
-		$this->assertNull( $this->access( 'getCustomerData' )->invokeArgs( $this->object, ['token', $customerId, 2] ) );
+		$this->assertNull( $this->access( 'getCustomerData' )->invokeArgs( $this->object, [$customerId, 'token'] ) );
 	}
 
 
@@ -288,7 +288,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Factory::createManager( $this->context, 'customer' );
 		$customerId = $manager->findItem( 'UTC001' )->getId();
 
-		$this->access( 'setCustomerData' )->invokeArgs( $this->object, ['token', $customerId, 2, 'abcd'] );
+		$this->access( 'setCustomerData' )->invokeArgs( $this->object, [$customerId, 'token', 'abcd'] );
 	}
 
 
