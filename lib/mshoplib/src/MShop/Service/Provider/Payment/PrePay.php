@@ -45,6 +45,8 @@ class PrePay
 	 */
 	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
 	{
+		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
+		$this->saveOrder( $order );
 	}
 
 

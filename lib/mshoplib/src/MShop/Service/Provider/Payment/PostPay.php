@@ -31,6 +31,8 @@ class PostPay
 	 */
 	public function repay( \Aimeos\MShop\Order\Item\Iface $order )
 	{
+		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED );
+		$this->saveOrder( $order );
 	}
 
 
