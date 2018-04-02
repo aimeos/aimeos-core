@@ -44,10 +44,10 @@ return array(
 	'order/base/product/attr' => array(
 		array( 'ordprodid' => 'CNE/19.95', 'type' => 'default', 'code' => 'width', 'value' => 33, 'name' => '33', 'quantity' => 1 ),
 		array( 'ordprodid' => 'CNE/19.95', 'type' => 'default', 'code' => 'length', 'value' => 36, 'name' => '36', 'quantity' => 1 ),
-		array( 'ordprodid' => 'CNE/19.95', 'type' => 'subscription', 'code' => 'interval', 'value' => 'P0Y1M0W0D', 'name' => 'P0Y1M0W0D', 'quantity' => 1 ),
+		array( 'ordprodid' => 'CNE/19.95', 'type' => 'config', 'code' => 'interval', 'value' => 'P0Y1M0W0D', 'name' => 'P0Y1M0W0D', 'quantity' => 1 ),
 		array( 'ordprodid' => 'CNC/19.95', 'type' => 'default', 'code' => 'size', 'value' => 's', 'name' => 'small', 'quantity' => 1 ),
 		array( 'ordprodid' => 'CNC/19.95', 'type' => 'default', 'code' => 'color', 'value' => 'blue', 'name' => 'blau', 'quantity' => 1 ),
-		array( 'ordprodid' => 'CNC/19.95', 'type' => 'subscription', 'code' => 'interval', 'value' => 'P1Y0M0W0D', 'name' => 'P1Y0M0W0D', 'quantity' => 1 ),
+		array( 'ordprodid' => 'CNC/19.95', 'type' => 'config', 'code' => 'interval', 'value' => 'P1Y0M0W0D', 'name' => 'P1Y0M0W0D', 'quantity' => 1 ),
 		array( 'ordprodid' => 'U:MD/19.95', 'type' => 'default', 'code' => 'size', 'value' => 's', 'name' => 'small', 'quantity' => 1 ),
 		array( 'ordprodid' => 'U:MD/19.95', 'type' => 'default', 'code' => 'color', 'value' => 'white', 'name' => 'weiss', 'quantity' => 1 ),
 		array( 'ordprodid' => 'ABCD/19.95', 'type' => 'default', 'code' => 'width', 'value' => 32, 'name' => '32', 'quantity' => 1 ),
