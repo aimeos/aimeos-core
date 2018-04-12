@@ -221,8 +221,22 @@ class Standard
 	 */
 	protected function getFilePath( $filename, $type, $mimetype )
 	{
-		$ext = '';
+		/** controller/common/media/standard/extensions
+		 * Available files extensions for mime types of uploaded files
+		 *
+		 * Uploaded files should have the right file extension (e.g. ".jpg" for
+		 * JPEG images) so files are recognized correctly if downloaded by users.
+		 * The extension of the uploaded file can't be trusted and only its mime
+		 * type can be determined automatically. This configuration setting
+		 * provides the file extensions for the configured mime types. You can
+		 * add more mime type / file extension combinations if required.
+		 *
+		 * @param array Associative list of mime types as keys and file extensions as values
+		 * @since 2018.04
+		 * @category Developer
+		 */
 		$list = $this->context->getConfig()->get( 'controller/common/media/standard/extensions', [] );
+		$ext = '';
 
 		if( isset( $list[$mimetype] ) ) {
 			$ext = '.' . $list[$mimetype];
