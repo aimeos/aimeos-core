@@ -24,6 +24,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	private $method;
 	private $values;
 	private $external;
+	private $html;
 
 
 	/**
@@ -33,8 +34,9 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 * @param string $method Initial method (e.g. post or get)
 	 * @param array $values Form parameters implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 * @param boolean $external True if URL points to an external site, false if it stays on the same site
+	 * @param string $html Custom HTML for rendering form (e.g. Including JS or custom html)
 	 */
-	public function __construct( $url = '', $method = '', array $values = [], $external = true )
+	public function __construct( $url = '', $method = '', array $values = [], $external = true, $html = '' )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $values );
 
@@ -42,6 +44,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 		$this->external = (bool) $external;
 		$this->method = (string) $method;
 		$this->values = $values;
+		$this->html = $html;
 	}
 
 
@@ -160,4 +163,32 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	{
 		return $this->values;
 	}
+
+
+
+	/**
+	 * Returns the custom html.
+	 *
+	 * @return string Html
+	 */
+	public function getHtml()
+	{
+		return $this->html;
+	}
+
+
+	/**
+	 * Sets the custom Html.
+	 *
+	 * @param string $html Html
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 */
+	public function setHtml( $html )
+	{
+		$this->html = (string) $html;
+
+		return $this;
+	}
+
+
 }
