@@ -7,14 +7,14 @@
 # Translators:
 # Translators:
 # Translators:
-# Metal <meteoramic@yahoo.com>, 2015
+# Metal <meteoramic@yahoo.com>, 2015,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-11-25 21:31+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2018-04-12 20:00+0000\n"
+"Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,83 +56,83 @@ msgstr "Bayan"
 
 #. Order type value
 msgid "order:repeat"
-msgstr "tekrarlandı"
+msgstr "Tekrarlandı"
 
 #. Order type value
 msgid "order:web"
-msgstr "internet"
+msgstr "İnternet"
 
 #. Order type value
 msgid "order:phone"
-msgstr "telefon"
+msgstr "Telefon"
 
 #. Payment status value
 msgid "pay:-1"
-msgstr "tamamlanmadı"
+msgstr "Açık"
 
 #. Payment status value
 msgid "pay:0"
-msgstr "silindi"
+msgstr "Silindi"
 
 #. Payment status value
 msgid "pay:1"
-msgstr "iptal edildi"
+msgstr "İptal edildi"
 
 #. Payment status value
 msgid "pay:2"
-msgstr "reddedildi"
+msgstr "Reddedildi"
 
 #. Payment status value
 msgid "pay:3"
-msgstr "geri ödendi"
+msgstr "Geri ödendi"
 
 #. Payment status value
 msgid "pay:4"
-msgstr "beklemede"
+msgstr "Beklemede"
 
 #. Payment status value
 msgid "pay:5"
-msgstr "onaylanmış"
+msgstr "Onaylanmış"
 
 #. Payment status value
 msgid "pay:6"
-msgstr "teslim alındı"
+msgstr "Teslim alındı"
 
 #. Delivery status value
 msgid "stat:-1"
-msgstr "tamamlanmadı"
+msgstr "Açık"
 
 #. Delivery status value
 msgid "stat:0"
-msgstr "silindi"
+msgstr "Silindi"
 
 #. Delivery status value
 msgid "stat:1"
-msgstr "beklemede"
+msgstr "Beklemede"
 
 #. Delivery status value
 msgid "stat:2"
-msgstr "devam etmekte"
+msgstr "Devam etmekte"
 
 #. Delivery status value
 msgid "stat:3"
-msgstr "sevk edildi"
+msgstr "Sevk edildi"
 
 #. Delivery status value
 msgid "stat:4"
-msgstr "teslim edildi"
+msgstr "Teslim edildi"
 
 #. Delivery status value
 msgid "stat:5"
-msgstr "kayıp"
+msgstr "Kayıp"
 
 #. Delivery status value
 msgid "stat:6"
-msgstr "reddedildi"
+msgstr "Reddedildi"
 
 #. Delivery status value
 msgid "stat:7"
-msgstr "geri döndü"
+msgstr "Geri döndü"
 
 #. Address plugin error: Payment address not available
 msgid "address.payment.available.none"

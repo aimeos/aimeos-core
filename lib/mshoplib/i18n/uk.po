@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-02 17:58+0200\n"
+"POT-Creation-Date: 2018-04-08 18:06+0200\n"
 "PO-Revision-Date: 2015-09-29 12:32+0000\n"
 "Last-Translator: Aimeos <aimeos@aimeos.org>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/aimeos/aimeos-core/language/uk/)\n"
@@ -41,6 +41,10 @@ msgstr ""
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Address not available"
 msgstr ""
 
 #, php-format
@@ -136,6 +140,10 @@ msgid "Database manager object not available"
 msgstr ""
 
 #, php-format
+msgid "Duplicate coupon code"
+msgstr ""
+
+#, php-format
 msgid "Duplicate coupon code \"%1$s\""
 msgstr ""
 
@@ -145,6 +153,10 @@ msgstr ""
 
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
+msgstr ""
+
+#, php-format
+msgid "Flags not within allowed range"
 msgstr ""
 
 #, php-format
@@ -238,6 +250,10 @@ msgstr ""
 
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
+msgstr ""
+
+#, php-format
+msgid "Invalid time interval format \"%1$s\""
 msgstr ""
 
 #, php-format
@@ -516,11 +532,19 @@ msgid "Process object not available"
 msgstr ""
 
 #, php-format
+msgid "Product  not available"
+msgstr ""
+
+#, php-format
 msgid "Product does not contain all required values. Product code for item not available."
 msgstr ""
 
 #, php-format
 msgid "Product matching given properties not found"
+msgstr ""
+
+#, php-format
+msgid "Product not available"
 msgstr ""
 
 #, php-format
@@ -565,6 +589,10 @@ msgstr ""
 
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
+msgstr ""
+
+#, php-format
+msgid "Service not available"
 msgstr ""
 
 #, php-format
