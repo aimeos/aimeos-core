@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-02 17:58+0200\n"
-"PO-Revision-Date: 2017-10-02 16:05+0000\n"
+"POT-Creation-Date: 2018-04-08 18:06+0200\n"
+"PO-Revision-Date: 2018-04-08 16:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Bulgarian (http://www.transifex.com/aimeos/aimeos-core/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -45,6 +45,10 @@ msgstr "Адресът за домейн \"%1$s\" не е наличен"
 
 #, php-format
 msgid "Address for type \"%1$s\" not available"
+msgstr ""
+
+#, php-format
+msgid "Address not available"
 msgstr ""
 
 #, php-format
@@ -140,6 +144,10 @@ msgid "Database manager object not available"
 msgstr "Обектът за управление на базата от данни не е наличен"
 
 #, php-format
+msgid "Duplicate coupon code"
+msgstr ""
+
+#, php-format
 msgid "Duplicate coupon code \"%1$s\""
 msgstr "Дублиран код на купон \"%1$s\""
 
@@ -150,6 +158,10 @@ msgstr "Обектът за управление на файловата сис�
 #, php-format
 msgid "Flags \"%1$s\" not within allowed range"
 msgstr "Флаговете \"%1$s\" не са рамките на допустимия диапазон"
+
+#, php-format
+msgid "Flags not within allowed range"
+msgstr ""
 
 #, php-format
 msgid "ID of last inserted database record not available"
@@ -245,6 +257,10 @@ msgstr "Невалиден mime тип \"%1$s\""
 #, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr "Невалидна поредица на кошница. \"%1$s\" връща \"%2$s\"."
+
+#, php-format
+msgid "Invalid time interval format \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
@@ -531,6 +547,10 @@ msgid "Process object not available"
 msgstr ""
 
 #, php-format
+msgid "Product  not available"
+msgstr ""
+
+#, php-format
 msgid ""
 "Product does not contain all required values. Product code for item not "
 "available."
@@ -539,6 +559,10 @@ msgstr "Продуктът не съдържа всички изисквани �
 #, php-format
 msgid "Product matching given properties not found"
 msgstr "Не е намерен продукт, съответстващ на дадени свойства "
+
+#, php-format
+msgid "Product not available"
+msgstr ""
 
 #, php-format
 msgid "Product with array key \"%1$d\" not available"
@@ -583,6 +607,10 @@ msgstr "Грешка при изпращането на поръчка към и
 #, php-format
 msgid "Sending order to delivery provider failed: \"%1$s\""
 msgstr "Грешка при изпращането на поръчка към изпълнителя на доставка: \"%1$s\""
+
+#, php-format
+msgid "Service not available"
+msgstr ""
 
 #, php-format
 msgid "Service of type \"%1$s\" not available"
