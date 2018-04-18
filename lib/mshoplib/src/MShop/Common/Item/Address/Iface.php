@@ -13,7 +13,8 @@ namespace Aimeos\MShop\Common\Item\Address;
 
 
 /**
- * Interface for provider common address DTO objects used by the shop.
+ * Interface for provider common address DTO objects used by the shop
+ *
  * @package MShop
  * @subpackage Common
  */

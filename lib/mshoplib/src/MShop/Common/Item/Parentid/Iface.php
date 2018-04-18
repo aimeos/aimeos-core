@@ -13,6 +13,7 @@ namespace Aimeos\MShop\Common\Item\Parentid;
 
 /**
  * Interface for items with parent/child relationship
+ *
  * @package MShop
  * @subpackage Common
  */
