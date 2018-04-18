@@ -18,7 +18,9 @@ namespace Aimeos\MShop\Common\Item\Type;
  * @package MShop
  * @subpackage Common
  */
-interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+interface Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Domain\Iface,
+		\Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the code of the common list type item
@@ -34,21 +36,6 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\It
 	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
 	 */
 	public function setCode( $code );
-
-	/**
-	 * Returns the domain of the common list type item
-	 *
-	 * @return string Domain of the common list type item
-	 */
-	public function getDomain();
-
-	/**
-	 * Sets the domain of the common list type item
-	 *
-	 * @param string $domain New domain of the common list type item
-	 * @return \Aimeos\MShop\Common\Item\Type\Iface Common type item for chaining method calls
-	 */
-	public function setDomain( $domain );
 
 	/**
 	 * Returns the translated name for the type item
