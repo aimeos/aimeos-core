@@ -64,8 +64,8 @@ interface Iface
 	/**
 	 * Stores the item referenced by the list item.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface $refItem Item referenced by the list item
+	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Item referenced by the list item or null for no reference
 	 * @return \Aimeos\MShop\Common\Item\Lists\Iface Lists item for chaining method calls
 	 */
-	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem );
+	public function setRefItem( \Aimeos\MShop\Common\Item\Iface $refItem = null );
 }
