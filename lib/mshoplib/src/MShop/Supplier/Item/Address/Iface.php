@@ -17,7 +17,7 @@ namespace Aimeos\MShop\Supplier\Item\Address;
  * @subpackage Supplier
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Address\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
-	\Aimeos\MShop\Common\Item\Parentid\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Address\Iface,
+		\Aimeos\MShop\Common\Item\Parentid\Iface, \Aimeos\MShop\Common\Item\Position\Iface
 {
 }

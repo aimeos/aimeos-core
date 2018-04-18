@@ -19,7 +19,8 @@ namespace Aimeos\MShop\Supplier\Item;
  * @subpackage Supplier
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface,
+		\Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the label of the supplier item.
