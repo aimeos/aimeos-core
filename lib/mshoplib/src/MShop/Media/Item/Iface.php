@@ -19,7 +19,9 @@ namespace Aimeos\MShop\Media\Item;
  * @subpackage Media
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Domain\Iface,
+		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Status\Iface,
+		\Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Returns the property items of the media item

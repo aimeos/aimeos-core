@@ -19,24 +19,10 @@ namespace Aimeos\MShop\Text\Item;
  * @subpackage Text
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface,
-	\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Domain\Iface,
+		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Status\Iface,
+		\Aimeos\MShop\Common\Item\Typeid\Iface
 {
-	/**
-	 * Returns the domain of the text item.
-	 *
-	 * @return string Domain of the text item
-	 */
-	public function getDomain();
-
-	/**
-	 * Sets the domain of the text item.
-	 *
-	 * @param string $domain Domain of the text item
-	 * @return \Aimeos\MShop\Text\Item\Iface Text item for chaining method calls
-	 */
-	public function setDomain( $domain );
-
 	/**
 	 * Returns the ISO language code.
 	 *

@@ -19,7 +19,9 @@ namespace Aimeos\MShop\Price\Item;
  * @subpackage Price
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Domain\Iface,
+		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Status\Iface,
+		\Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Add the given price to the current one.
@@ -57,21 +59,6 @@ interface Iface
 	 * @since 2014.09
 	 */
 	public function compare( \Aimeos\MShop\Price\Item\Iface $price );
-
-	/**
-	 * Returns the domain the price is valid for.
-	 *
-	 * @return string Domain name
-	 */
-	public function getDomain();
-
-	/**
-	 * Sets the new domain the price is valid for.
-	 *
-	 * @param string $domain Domain name
-	 * @return \Aimeos\MShop\Price\Item\Iface Price item for chaining method calls
-	 */
-	public function setDomain( $domain );
 
 	/**
 	 * Returns the quantity.

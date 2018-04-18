@@ -19,8 +19,9 @@ namespace Aimeos\MShop\Attribute\Item;
  * @subpackage Attribute
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
-	\Aimeos\MShop\Common\Item\Typeid\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Domain\Iface,
+		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Position\Iface,
+		\Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
 {
 	/**
 	 * Returns the property items of the attribute
@@ -30,21 +31,6 @@ interface Iface
 	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
 	 */
 	public function getPropertyItems( $type = null, $active = true );
-
-	/**
-	 * Returns the domain of the attribute item.
-	 *
-	 * @return string Returns the domain for this item e.g. text, media, price...
-	 */
-	public function getDomain();
-
-	/**
-	 * Set the name of the domain for this attribute item.
-	 *
-	 * @param string $domain Name of the domain e.g. text, media, price...
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Attribute item for chaining method calls
-	 */
-	public function setDomain( $domain );
 
 	/**
 	 * Returns a unique code of the attribute item.
