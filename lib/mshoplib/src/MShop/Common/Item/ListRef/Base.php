@@ -111,7 +111,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 				}
 			}
 
-			$result += $list;
+			$result = array_merge( $result, $list );
 		}
 
 		return $result;
