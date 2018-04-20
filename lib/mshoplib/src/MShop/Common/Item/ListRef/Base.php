@@ -99,19 +99,19 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			foreach( $list as $id => $item )
 			{
 				if( $listtype && ( !($item instanceof $iface) || !in_array( $item->getType(), $listTypes ) ) ) {
-					unset( $list[$id] );
+					continue;
 				}
 
 				if( $type && ( !($item->getRefItem() instanceof $iface) || !in_array( $item->getRefItem()->getType(), $types ) ) ) {
-					unset( $list[$id] );
+					continue;
 				}
 
 				if( $active && !$item->isAvailable() ) {
-					unset( $list[$id] );
+					continue;
 				}
-			}
 
-			$result = array_merge( $result, $list );
+				$result[$id] = $item;
+			}
 		}
 
 		return $result;
