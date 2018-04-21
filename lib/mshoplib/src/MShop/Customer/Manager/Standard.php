@@ -376,7 +376,7 @@ class Standard
 		}
 
 		if( !$item->isModified() ) {
-			return $item;
+			return $this->saveRefItems( $item, 'customer' );
 		}
 
 		$context = $this->getContext();
@@ -561,7 +561,7 @@ class Standard
 
 		$this->addGroups( $item );
 
-		return $item;
+		return $this->saveRefItems( $item, 'customer' );
 	}
 
 

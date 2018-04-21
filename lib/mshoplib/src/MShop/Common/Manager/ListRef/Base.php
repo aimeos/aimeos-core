@@ -212,4 +212,57 @@ abstract class Base
 
 		return $items;
 	}
+
+
+	/**
+	 * Adds new, updates existing and deletes removed referenced items
+	 *
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with referenced items
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item with updated referenced items
+	 */
+	protected function saveRefItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $domain )
+	{
+		$rmListIds = $rmIds = [];
+		$context = $this->getContext();
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
+
+		foreach( $item->getDeletedItems() as $listItem )
+		{
+			$rmListIds[] = $listItem->getId();
+
+			if( ( $refItem = $listItem->getRefItem() ) !== null ) {
+				$rmIds[$listItem->getDomain()][] = $refItem->getId();
+			}
+		}
+
+		foreach( $rmIds as $refDomain => $ids ) {
+			\Aimeos\MShop\Factory::createManager( $context, $refDomain )->deleteItems( $ids );
+		}
+
+		$listManager->deleteItems( $rmListIds );
+
+		foreach( $item->getListItems( null, null, null, false ) as $listItem )
+		{
+			if( ( $refItem = $listItem->getRefItem() ) !== null )
+			{
+				if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface ) {
+					$refItem->setDomain( $domain );
+				}
+
+				$manager = \Aimeos\MShop\Factory::createManager( $context, $listItem->getDomain() );
+				$refItem = $manager->saveItem( $refItem );
+
+				$listItem->setRefId( $refItem->getId() );
+			}
+
+			if( $listItem->getParentId() != $item->getId() ) {
+				$listItem->setId( null ); //create new list item if copied
+			}
+
+			$listItem->setParentId( $item->getId() );
+			$listManager->saveItem( $listItem );
+		}
+
+		return $item;
+	}
 }

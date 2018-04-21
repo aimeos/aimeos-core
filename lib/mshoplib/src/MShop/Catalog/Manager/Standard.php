@@ -406,7 +406,7 @@ class Standard extends Base
 			throw $e;
 		}
 
-		return $item;
+		return $this->saveRefItems( $item, 'catalog' );
 	}
 
 
@@ -453,6 +453,10 @@ class Standard extends Base
 			throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
+		if( !$item->isModified() ) {
+			return $this->saveRefItems( $item, 'catalog' );
+		}
+
 		$siteid = $this->getContext()->getLocale()->getSiteId();
 		$node = $item->getNode();
 		$this->begin();
@@ -469,7 +473,7 @@ class Standard extends Base
 			throw $e;
 		}
 
-		return $item;
+		return $this->saveRefItems( $item, 'catalog' );
 	}
 
 

@@ -170,6 +170,49 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveItemRefItems()
+	{
+		$context = \TestHelperMShop::getContext();
+
+		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
+		$typeManager = $manager->getSubManager( 'type' );
+
+		$item = $manager->createItem();
+		$item->setTypeId( $typeManager->findItem( 'default', [], 'product' )->getId() );
+		$item->setCode( 'unitreftest' );
+
+		$listManager = $manager->getSubManager( 'lists' );
+		$listTypeManager = $listManager->getSubManager( 'type' );
+
+		$listItem = $listManager->createItem();
+		$listItem->setTypeId( $listTypeManager->findItem( 'default', [], 'product' )->getId() );
+
+		$textManager = \Aimeos\MShop\Text\Manager\Factory::createManager( $context );
+		$textTypeManager = $textManager->getSubManager( 'type' );
+
+		$textItem = $textManager->createItem();
+		$textItem->setTypeId( $textTypeManager->findItem( 'name', [], 'product' )->getId() );
+
+
+		$item->addRefItem( 'text', $listItem, $textItem );
+
+		$item = $manager->saveItem( $item );
+		$item2 = $manager->getItem( $item->getId(), ['text'] );
+
+		$item->deleteRefItem( 'text', $listItem, $textItem );
+
+		$item = $manager->saveItem( $item );
+		$item3 = $manager->getItem( $item->getId(), ['text'] );
+
+		$manager->deleteItem( $item->getId() );
+
+
+		$this->assertEquals( 0, count( $item->getRefItems( 'text', 'name', 'default', false ) ) );
+		$this->assertEquals( 1, count( $item2->getRefItems( 'text', 'name', 'default', false ) ) );
+		$this->assertEquals( 0, count( $item3->getRefItems( 'text', 'name', 'default', false ) ) );
+	}
+
+
 	public function testSaveItemSitecheck()
 	{
 		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
