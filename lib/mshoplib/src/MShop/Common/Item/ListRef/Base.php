@@ -22,7 +22,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 {
 	private $refItems;
 	private $listItems;
+	private $rmItems = [];
 	private $prepared = false;
+	private $max = 0;
 
 
 	/**
@@ -39,6 +41,70 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 		$this->listItems = $listItems;
 		$this->refItems = $refItems;
+	}
+
+
+	/**
+	 * Adds a new item to the given domain and references it by a list item
+	 *
+	 * @param string $domain Name of the domain (e.g. media, text, etc.)
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the new domain item
+	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 */
+	public function addRefItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
+	{
+		$id = $listItem->getId() ?: 'tmp-' . $this->max++;
+		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
+
+		if( $refItem !== null )
+		{
+			$id = $refItem->getId() ?: 'tmp-' . $this->max++;
+			$listItem->setRefId( $id );
+
+			$this->refItems[$domain][$id] = $refItem;
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Removes an item from the given domain and its list item referencing it
+	 *
+	 * @param string $domain Name of the domain (e.g. media, text, etc.)
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the domain item
+	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 */
+	public function deleteRefItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
+	{
+		if( isset( $this->listItems[$domain] ) )
+		{
+			foreach( $this->listItems[$domain] as $key => $litem )
+			{
+				if( $litem === $listItem && $listItem->getDomain() === $domain )
+				{
+					$this->rmItems[] = $listItem->setRefItem( $refItem );
+					unset( $this->listItems[$domain][$key] );
+
+					return $this;
+				}
+			}
+		}
+
+		throw new \Aimeos\MShop\Exception( sprintf( 'List item for removal from domain "%1$s" not found', $domain ) );
+	}
+
+
+	/**
+	 * Returns the deleted list items
+	 *
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface[] List items with referenced items attached (optional)
+	 */
+	public function getDeletedItems()
+	{
+		return $this->rmItems;
 	}
 
 

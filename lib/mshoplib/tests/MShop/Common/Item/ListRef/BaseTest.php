@@ -82,6 +82,45 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testAddRefItem()
+	{
+		$this->object->addRefItem( 'test', $this->listItem1, $this->textItem1 );
+
+		$this->assertEquals( [11 => $this->listItem1], $this->object->getListItems( 'test' ) );
+		$this->assertEquals( [1 => $this->textItem1], $this->object->getRefItems( 'test' ) );
+	}
+
+
+	public function testAddRefItemNew()
+	{
+		$this->object->addRefItem( 'test', $this->listItem1->setId( null ), $this->textItem1->setId( null ) );
+
+		$this->assertEquals( ['tmp-0' => $this->listItem1], $this->object->getListItems( 'test' ) );
+		$this->assertEquals( ['tmp-1' => $this->textItem1], $this->object->getRefItems( 'test' ) );
+	}
+
+
+	public function testDeleteRefItem()
+	{
+		$this->object->deleteRefItem( 'text', $this->listItem1, $this->textItem1 );
+
+		$this->assertEquals( [$this->listItem1], $this->object->getDeletedItems() );
+	}
+
+
+	public function testDeleteRefItemException()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Exception' );
+		$this->object->deleteRefItem( 'test', $this->listItem1 );
+	}
+
+
+	public function testGetDeletedItems()
+	{
+		$this->assertEquals( [], $this->object->getDeletedItems() );
+	}
+
+
 	public function testGetName()
 	{
 		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( '' );

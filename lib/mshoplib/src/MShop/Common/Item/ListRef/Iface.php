@@ -19,8 +19,34 @@ namespace Aimeos\MShop\Common\Item\ListRef;
  * @subpackage Common
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface
 {
+	/**
+	 * Adds a new item to the given domain and references it by a list item
+	 *
+	 * @param string $domain Name of the domain (e.g. media, text, etc.)
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the new domain item
+	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 */
+	public function addRefItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null );
+
+	/**
+	 * Removes an item from the given domain and its list item referencing it
+	 *
+	 * @param string $domain Name of the domain (e.g. media, text, etc.)
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the domain item
+	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 */
+	public function deleteRefItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null );
+
+	/**
+	 * Returns the deleted items per domain
+	 *
+	 * @return array Associative list of domains as keys and lists of list items containing the referenced items as values
+	 */
+	public function getDeletedItems();
+
 	/**
 	 * Returns the list items attached, optionally filtered by domain and list type.
 	 * The reference parameter in searchItems() must have been set accordingly
