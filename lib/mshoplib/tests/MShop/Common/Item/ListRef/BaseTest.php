@@ -132,7 +132,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetListItem()
 	{
-		$result = $this->object->getListItem( 2, 'text', 'default' );
+		$result = $this->object->getListItem( 'text', 'default', 2 );
 
 		$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $result );
 	}

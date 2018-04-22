@@ -48,6 +48,17 @@ interface Iface
 	public function getDeletedItems();
 
 	/**
+	 * Returns the list item for the given reference ID, domain and list type
+	 *
+	 * @param string $domain Name of the domain (e.g. product, text, etc.)
+	 * @param string $listtype Name of the list item type
+	 * @param string $refId Unique ID of the referenced item
+	 * @param boolean $active True to return only active items, false to return all
+	 * @return \Aimeos\MShop\Common\Item\Lists\Iface|null Matching list item or null if none
+	 */
+	public function getListItem( $domain, $listtype, $refId, $active = true );
+
+	/**
 	 * Returns the list items attached, optionally filtered by domain and list type.
 	 * The reference parameter in searchItems() must have been set accordingly
 	 * to the requested domain to get the items. Otherwise, no items will be
