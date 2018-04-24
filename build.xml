@@ -47,10 +47,6 @@
 		</phing>
 	</target>
 
-	<target name="testext" description="Executes tests of specific extension directory">
-		<phing target="test" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
-	</target>
-
 	<target name="testperf" description="Executes performance tests">
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mwlib" />
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
@@ -59,6 +55,14 @@
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
+	</target>
+
+	<target name="testext" description="Executes tests of specific extension directory">
+		<phing target="test" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
+	</target>
+
+	<target name="testextperf" description="Executes tests of specific extension directory">
+		<phing target="testperf" haltonfailure="true" dir="${dir}" phingfile="phing.xml" />
 	</target>
 
 
