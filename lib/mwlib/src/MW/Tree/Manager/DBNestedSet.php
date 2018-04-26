@@ -286,16 +286,14 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 		}
 		else
 		{
+			if( $this->getRootNode() !== null ) {
+				throw new \Aimeos\MW\Tree\Exception( sprintf( 'Only one root node allowed' ) );
+			}
+
 			$node->left = 1;
 			$node->right = 2;
 			$node->level = 0;
 			$node->parentid = 0;
-
-			if( ( $root = $this->getRootNode( '-' ) ) !== null )
-			{
-				$node->left = $root->right + 1;
-				$node->right = $root->right + 2;
-			}
 		}
 
 

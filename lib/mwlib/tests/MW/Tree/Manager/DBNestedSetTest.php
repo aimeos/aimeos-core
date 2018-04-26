@@ -156,9 +156,6 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'l1n3\', \'l1n3\', 1, 16, 17)';
 		$conn->create( $sql )->execute()->finish();
 
-		$sql = 'INSERT INTO "mw_tree_test" (status, label, code, level, nleft, nright) VALUES (1, \'root2\', \'root2\', 0, 19, 20)';
-		$conn->create( $sql )->execute()->finish();
-
 		self::$dbm->release( $conn );
 	}
 
@@ -302,13 +299,13 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 		$search = $manager->createSearch();
 		$nodes = $manager->searchNodes( $search );
-		$this->assertEquals( 7, count( $nodes ) );
+		$this->assertEquals( 6, count( $nodes ) );
 
 		$manager->deleteNode();
 
 		$search = $manager->createSearch();
 		$nodes = $manager->searchNodes( $search );
-		$this->assertEquals( 1, count( $nodes ) );
+		$this->assertEquals( 0, count( $nodes ) );
 	}
 
 
@@ -444,6 +441,8 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	{
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
 
+		$manager->deleteNode();
+
 		$newNode = $manager->createNode();
 		$newNode->setCode( 'root3' );
 		$newNode->setLabel( 'Root 3' );
@@ -452,8 +451,8 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 
 		$root = $manager->getNode( $newNode->getId() );
 		$this->assertEquals( 'Root 3', $root->getLabel() );
-		$this->assertEquals( 21, $root->left );
-		$this->assertEquals( 22, $root->right );
+		$this->assertEquals( 1, $root->left );
+		$this->assertEquals( 2, $root->right );
 	}
 
 
@@ -470,8 +469,8 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 		$testroot = $manager->getNode( $nodeid, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
 
 		$this->assertEquals( 0, $testroot->level );
-		$this->assertEquals( 19, $testroot->left );
-		$this->assertEquals( 20, $testroot->right );
+		$this->assertEquals( 17, $testroot->left );
+		$this->assertEquals( 18, $testroot->right );
 		$this->assertEquals( 0, count( $testroot->getChildren() ) );
 	}
 
