@@ -53,10 +53,10 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->getConfigBE();
 
-		$this->assertArrayHasKey( 'postsl.billing-include', $result );
-		$this->assertArrayHasKey( 'postsl.billing-exclude', $result );
-		$this->assertArrayHasKey( 'postsl.delivery-include', $result );
-		$this->assertArrayHasKey( 'postsl.delivery-exclude', $result );
+		$this->assertArrayHasKey( 'postal.billing-include', $result );
+		$this->assertArrayHasKey( 'postal.billing-exclude', $result );
+		$this->assertArrayHasKey( 'postal.delivery-include', $result );
+		$this->assertArrayHasKey( 'postal.delivery-exclude', $result );
 	}
 
 
@@ -67,18 +67,18 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( [] ) );
 
 		$attributes = array(
-			'postsl.billing-include' => ' 025698, 573789, 452168 ',
-			'postsl.billing-exclude' => ' 025698 ,573789 ,452168 ',
-			'postsl.delivery-include' => '025698, 573789, 452168',
-			'postsl.delivery-exclude' => '025698 ,573789 ,452168',
+			'postal.billing-include' => ' 025698, 573789, 452168 ',
+			'postal.billing-exclude' => ' 025698 ,573789 ,452168 ',
+			'postal.delivery-include' => '025698, 573789, 452168',
+			'postal.delivery-exclude' => '025698 ,573789 ,452168',
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'null', $result['postsl.billing-include'] );
-		$this->assertInternalType( 'null', $result['postsl.billing-exclude'] );
-		$this->assertInternalType( 'null', $result['postsl.delivery-include'] );
-		$this->assertInternalType( 'null', $result['postsl.delivery-exclude'] );
+		$this->assertInternalType( 'null', $result['postal.billing-include'] );
+		$this->assertInternalType( 'null', $result['postal.billing-exclude'] );
+		$this->assertInternalType( 'null', $result['postal.delivery-include'] );
+		$this->assertInternalType( 'null', $result['postal.delivery-exclude'] );
 	}
 
 
@@ -91,10 +91,10 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->checkConfigBE( [] );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'null', $result['postsl.billing-include'] );
-		$this->assertInternalType( 'null', $result['postsl.billing-exclude'] );
-		$this->assertInternalType( 'null', $result['postsl.delivery-include'] );
-		$this->assertInternalType( 'null', $result['postsl.delivery-exclude'] );
+		$this->assertInternalType( 'null', $result['postal.billing-include'] );
+		$this->assertInternalType( 'null', $result['postal.billing-exclude'] );
+		$this->assertInternalType( 'null', $result['postal.delivery-include'] );
+		$this->assertInternalType( 'null', $result['postal.delivery-exclude'] );
 	}
 
 
@@ -105,26 +105,26 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 			->will( $this->returnValue( [] ) );
 
 		$attributes = array(
-			'postsl.billing-include' => [],
-			'postsl.billing-exclude' => 1.5,
-			'postsl.delivery-include' => [],
-			'postsl.delivery-exclude' => 1.5,
+			'postal.billing-include' => [],
+			'postal.billing-exclude' => 1.5,
+			'postal.delivery-include' => [],
+			'postal.delivery-exclude' => 1.5,
 		);
 		$result = $this->object->checkConfigBE( $attributes );
 
 		$this->assertEquals( 4, count( $result ) );
-		$this->assertInternalType( 'string', $result['postsl.billing-include'] );
-		$this->assertInternalType( 'string', $result['postsl.billing-exclude'] );
-		$this->assertInternalType( 'string', $result['postsl.delivery-include'] );
-		$this->assertInternalType( 'string', $result['postsl.delivery-exclude'] );
+		$this->assertInternalType( 'string', $result['postal.billing-include'] );
+		$this->assertInternalType( 'string', $result['postal.billing-exclude'] );
+		$this->assertInternalType( 'string', $result['postal.delivery-include'] );
+		$this->assertInternalType( 'string', $result['postal.delivery-exclude'] );
 	}
 
 
 	public function testIsAvailableNoAddresses()
 	{
 		$config = array(
-			'postsl.billing-include' => '',
-			'postsl.delivery-include' => '',
+			'postal.billing-include' => '',
+			'postal.delivery-include' => '',
 		);
 		$this->servItem->setConfig( $config );
 
@@ -159,7 +159,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.billing-include' => '' ) );
+		$this->servItem->setConfig( array( 'postal.billing-include' => '' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
@@ -173,7 +173,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
-		$this->servItem->setConfig( array( 'postsl.delivery-include' => '' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-include' => '' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
@@ -187,7 +187,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.delivery-include' => '' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-include' => '' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
@@ -201,7 +201,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.billing-exclude' => '' ) );
+		$this->servItem->setConfig( array( 'postal.billing-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -217,7 +217,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
-		$this->servItem->setConfig( array( 'postsl.delivery-exclude' => '' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -233,7 +233,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.delivery-exclude' => '' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-exclude' => '' ) );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -249,7 +249,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.billing-exclude' => '025698' ) );
+		$this->servItem->setConfig( array( 'postal.billing-exclude' => '025698' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
@@ -263,7 +263,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
-		$this->servItem->setConfig( array( 'postsl.delivery-exclude' => '025698' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-exclude' => '025698' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
@@ -277,7 +277,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.delivery-exclude' => '025698' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-exclude' => '025698' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
@@ -291,7 +291,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.billing-include' => '025698' ) );
+		$this->servItem->setConfig( array( 'postal.billing-include' => '025698' ) );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -307,7 +307,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
-		$this->servItem->setConfig( array( 'postsl.delivery-include' => '025698' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-include' => '025698' ) );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -323,7 +323,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.delivery-include' => '025698' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-include' => '025698' ) );
 
 		$this->mockProvider->expects( $this->once() )
 			->method( 'isAvailable' )
@@ -339,7 +339,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.billing-include' => '452168' ) );
+		$this->servItem->setConfig( array( 'postal.billing-include' => '452168' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
@@ -353,7 +353,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
-		$this->servItem->setConfig( array( 'postsl.delivery-include' => '452168' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-include' => '452168' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
@@ -367,7 +367,7 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$address->setPostal( '025698' );
 
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
-		$this->servItem->setConfig( array( 'postsl.delivery-include' => '452168' ) );
+		$this->servItem->setConfig( array( 'postal.delivery-include' => '452168' ) );
 
 		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
 
