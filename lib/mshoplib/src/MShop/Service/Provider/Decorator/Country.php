@@ -153,7 +153,7 @@ class Country
 	 */
 	protected function checkCountryCode( $code, $key )
 	{
-		if( ( $str = $this->getConfigValue( array( $key ) ) ) === null ) {
+		if( ( $str = $this->getConfigValue( $key ) ) == null ) {
 			return null;
 		}
 

@@ -161,9 +161,11 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'postal.billing-include' => '' ) );
 
-		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
+		$this->mockProvider->expects( $this->once() )
+			->method( 'isAvailable' )
+			->will( $this->returnValue( true ) );
 
-		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
+		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
 
@@ -175,9 +177,11 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY );
 		$this->servItem->setConfig( array( 'postal.delivery-include' => '' ) );
 
-		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
+		$this->mockProvider->expects( $this->once() )
+			->method( 'isAvailable' )
+			->will( $this->returnValue( true ) );
 
-		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
+		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
 
@@ -189,9 +193,11 @@ class PostalTest extends \PHPUnit\Framework\TestCase
 		$this->basket->setAddress( $address, \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 		$this->servItem->setConfig( array( 'postal.delivery-include' => '' ) );
 
-		$this->mockProvider->expects( $this->never() )->method( 'isAvailable' );
+		$this->mockProvider->expects( $this->once() )
+			->method( 'isAvailable' )
+			->will( $this->returnValue( true ) );
 
-		$this->assertFalse( $this->object->isAvailable( $this->basket ) );
+		$this->assertTrue( $this->object->isAvailable( $this->basket ) );
 	}
 
 

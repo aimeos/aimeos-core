@@ -111,7 +111,7 @@ class Postal
 
 		if( isset( $addresses[$deliveryType] ) )
 		{
-			$code = strtoupper( $addresses[$deliveryType]->getPostal() );
+			$code = $addresses[$deliveryType]->getPostal();
 
 			if( $this->checkPostalCode( $code, 'postal.delivery-include' ) === false
 				|| $this->checkPostalCode( $code, 'postal.delivery-exclude' ) === true
@@ -121,7 +121,7 @@ class Postal
 		}
 		else if( isset( $addresses[$paymentType] ) ) // use billing address if no delivery address is available
 		{
-			$code = strtoupper( $addresses[$paymentType]->getPostal() );
+			$code = $addresses[$paymentType]->getPostal();
 
 			if( $this->checkPostalCode( $code, 'postal.delivery-include' ) === false
 				|| $this->checkPostalCode( $code, 'postal.delivery-exclude' ) === true
@@ -132,7 +132,7 @@ class Postal
 
 		if( isset( $addresses[$paymentType] ) )
 		{
-			$code = strtoupper( $addresses[$paymentType]->getPostal() );
+			$code = $addresses[$paymentType]->getPostal();
 
 			if( $this->checkPostalCode( $code, 'postal.billing-include' ) === false
 				|| $this->checkPostalCode( $code, 'postal.billing-exclude' ) === true
@@ -153,7 +153,7 @@ class Postal
 	 */
 	protected function checkPostalCode( $code, $key )
 	{
-		if( ( $str = $this->getConfigValue( array( $key ) ) ) === null ) {
+		if( ( $str = $this->getConfigValue( $key ) ) == null ) {
 			return null;
 		}
 
