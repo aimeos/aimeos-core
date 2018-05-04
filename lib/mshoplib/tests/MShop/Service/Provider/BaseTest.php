@@ -148,6 +148,24 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCheckConfigText()
+	{
+		$args = array( array( 'key' => array( 'type' => 'text', 'required' => true ) ), array( 'key' => 'abc' ) );
+		$result = $this->access( 'checkConfig' )->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => null ), $result );
+	}
+
+
+	public function testCheckConfigTextInvalid()
+	{
+		$args = array( array( 'key' => array( 'type' => 'text', 'required' => true ) ), array( 'key' => new \stdClass() ) );
+		$result = $this->access( 'checkConfig' )->invokeArgs( $this->object, $args );
+
+		$this->assertEquals( array( 'key' => 'Not a string' ), $result );
+	}
+
+
 	public function testCheckConfigInteger()
 	{
 		$args = array( array( 'key' => array( 'type' => 'integer', 'required' => true ) ), array( 'key' => '123' ) );

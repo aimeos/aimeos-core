@@ -335,6 +335,7 @@ abstract class Base
 						}
 						break;
 					case 'string':
+					case 'text':
 						if( is_string( $attributes[$key] ) === false ) {
 							$errors[$key] = sprintf( 'Not a string' ); continue 2;
 						}
