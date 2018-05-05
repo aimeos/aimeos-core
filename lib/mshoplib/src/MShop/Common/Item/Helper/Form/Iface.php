@@ -79,4 +79,21 @@ interface Iface
 	 * @return array Key/value pairs, values implementing \Aimeos\MW\Criteria\Attribute\Iface
 	 */
 	public function getValues();
+
+
+	/**
+	 * Returns the custom HTML string.
+	 *
+	 * @return string HTML string
+	 */
+	public function getHtml();
+
+
+	/**
+	 * Sets the custom HTML string.
+	 *
+	 * @param string $html HTML string
+	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
+	 */
+	public function setHtml( $html );
 }

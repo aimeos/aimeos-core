@@ -165,11 +165,10 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	}
 
 
-
 	/**
-	 * Returns the custom html.
+	 * Returns the custom HTML string.
 	 *
-	 * @return string Html
+	 * @return string HTML string
 	 */
 	public function getHtml()
 	{
@@ -178,9 +177,9 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 
 
 	/**
-	 * Sets the custom Html.
+	 * Sets the custom HTML string.
 	 *
-	 * @param string $html Html
+	 * @param string $html HTML string
 	 * @return \Aimeos\MShop\Common\Item\Helper\Form\Iface Item for chaining method calls
 	 */
 	public function setHtml( $html )
@@ -189,6 +188,4 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 
 		return $this;
 	}
-
-
 }
