@@ -76,7 +76,7 @@ abstract class Base
 	 */
 	protected function checkPrice( $value, $precision = 2 )
 	{
-		if( $value !== '' && !is_numeric( $value ) ) {
+		if( $value != '' && !is_numeric( $value ) ) {
 			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Invalid characters in price "%1$s"', $value ) );
 		}
 
