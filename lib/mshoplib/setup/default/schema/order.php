@@ -264,11 +264,11 @@ return array(
 			$table->addColumn( 'statuspayment', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'statusdelivery', 'smallint', array( 'default' => -1 ) );
 			$table->addColumn( 'relatedid', 'bigint', array( 'notnull' => false ) );
-			$table->addColumn( 'cdate', 'string', array( 'fixed' => 10 ) );
-			$table->addColumn( 'cmonth', 'string', array( 'fixed' => 7 ) );
-			$table->addColumn( 'cweek', 'string', array( 'fixed' => 7 ) );
-			$table->addColumn( 'cwday', 'string', array( 'fixed' => 1 ) );
-			$table->addColumn( 'chour', 'string', array( 'fixed' => 2 ) );
+			$table->addColumn( 'cdate', 'string', array( 'length' => 10, 'fixed' => true ) );
+			$table->addColumn( 'cmonth', 'string', array( 'length' => 7, 'fixed' => true ) );
+			$table->addColumn( 'cweek', 'string', array( 'length' => 7, 'fixed' => true ) );
+			$table->addColumn( 'cwday', 'string', array( 'length' => 1, 'fixed' => true ) );
+			$table->addColumn( 'chour', 'string', array( 'length' => 2, 'fixed' => true ) );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array('length' => 255 ) );
