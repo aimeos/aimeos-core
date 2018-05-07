@@ -128,11 +128,6 @@ class Postal
 			) {
 				return false;
 			}
-		}
-
-		if( isset( $addresses[$paymentType] ) )
-		{
-			$code = $addresses[$paymentType]->getPostal();
 
 			if( $this->checkPostalCode( $code, 'postal.billing-include' ) === false
 				|| $this->checkPostalCode( $code, 'postal.billing-exclude' ) === true

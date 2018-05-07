@@ -128,11 +128,6 @@ class Country
 			) {
 				return false;
 			}
-		}
-
-		if( isset( $addresses[$paymentType] ) )
-		{
-			$code = strtoupper( $addresses[$paymentType]->getCountryId() );
 
 			if( $this->checkCountryCode( $code, 'country.billing-include' ) === false
 				|| $this->checkCountryCode( $code, 'country.billing-exclude' ) === true
