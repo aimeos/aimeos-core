@@ -20,18 +20,10 @@ namespace Aimeos\MShop\Product\Item;
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Config\Iface,
-		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\Status\Iface,
-		\Aimeos\MShop\Common\Item\Time\Iface, \Aimeos\MShop\Common\Item\Typeid\Iface
+		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\PropertyRef\Iface,
+		\Aimeos\MShop\Common\Item\Status\Iface, \Aimeos\MShop\Common\Item\Time\Iface,
+		\Aimeos\MShop\Common\Item\Typeid\Iface
 {
-	/**
-	 * Returns the property items of the product
-	 *
-	 * @param string|null $type Name of the property item type or null for all
-	 * @param boolean $active True to return only active items, false to return all
-	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
-	 */
-	public function getPropertyItems( $type = null, $active = true );
-
 	/**
 	 * Returns the code of the product item.
 	 *
