@@ -120,15 +120,7 @@ class Standard
 	 */
 	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null )
 	{
-		$siteManager = $this->getObject()->getSubManager( 'site' );
-		$siteSearch = $siteManager->createSearch();
-		$siteSearch->setConditions( $siteSearch->compare( '==', 'locale.site.code', $site ) );
-		$siteItems = $siteManager->searchItems( $siteSearch );
-
-		if( ( $siteItem = reset( $siteItems ) ) === false ) {
-			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Site for code "%1$s" not found', $site ) );
-		}
-
+		$siteItem = $this->getObject()->getSubManager( 'site' )->findItem( $site );
 		$siteIds = array( $siteItem->getId() );
 
 		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, $siteIds, $siteIds );
