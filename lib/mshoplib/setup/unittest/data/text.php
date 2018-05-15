@@ -34,6 +34,7 @@ return array (
 		'product/short' => array( 'domain' => 'product', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		'product/long' => array( 'domain' => 'product', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
 		'product/url' => array( 'domain' => 'product', 'code' => 'url', 'label' => 'URL segment', 'status' => 1 ),
+		'product/basket' => array( 'domain' => 'product', 'code' => 'basket', 'label' => 'basket description', 'status' => 1 ),
 		'product/metatitle' => array( 'domain' => 'product', 'code' => 'metatitle', 'label' => 'Meta title', 'status' => 1 ),
 		'product/meta-keyword' => array( 'domain' => 'product', 'code' => 'meta-keyword', 'label' => 'Meta keywords', 'status' => 1 ),
 		'product/meta-description' => array( 'domain' => 'product', 'code' => 'meta-description', 'label' => 'Meta description', 'status' => 1 ),
@@ -131,6 +132,7 @@ return array (
 		'text/productUT' => array( 'langid' => 'de', 'typeid' => 'product/name', 'domain' => 'product', 'label' => 'productUT', 'content' => 'Produkt fuer UT:Cheapest free', 'status' => 1 ),
 //shop texts
 		'text/cne' => array( 'langid' => 'de', 'typeid' => 'product/name', 'domain' => 'product', 'label' => 'cne', 'content' => 'Cafe Noire Expresso', 'status' => 1 ),
+		'text/cne_basket' => array( 'langid' => 'de', 'typeid' => 'product/basket', 'domain' => 'product', 'label' => 'cne_basket', 'content' => 'Cafe Noire Expresso for basket', 'status' => 1 ),
 		'text/cne_short_desc' => array( 'langid' => 'de', 'typeid' => 'product/short', 'domain' => 'product', 'label' => 'cne_short_desc', 'content' => 'Ein vollaromatischer Espresso mit herrlich feinem Schaum', 'status' => 1 ),
 		'text/cne_long_desc' => array( 'langid' => 'de', 'typeid' => 'product/long', 'domain' => 'catalog', 'label' => 'cne_long_desc', 'content' => 'Dieser kurze Kaffee mit seinem reichen Geschmack, delikaten Aroma und feinen Schaum ist das ultimative Getränk für jede Tageszeit.<br> Erhältlich in Packungen mit 16 T-DISCs (Hypermärkte) oder 8 T-DISCs (Supermärkte).', 'status' => 1 ),
 		'text/cne_metatitle' => array( 'langid' => 'de', 'typeid' => 'product/url', 'domain' => 'catalog', 'label' => 'cne_metatitle', 'content' => 'Cafe Noire Expresso', 'status' => 1 ),

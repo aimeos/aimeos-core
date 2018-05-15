@@ -718,7 +718,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.code', 'CNE' ) );
-		$products = $manager->searchItems( $search );
+		$products = $manager->searchItems( $search, ['text'] );
 
 		if( ( $product = reset( $products ) ) === false ) {
 			throw new \RuntimeException( 'No product found' );
@@ -729,7 +729,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
 		$this->assertEquals( 'default', $productCopy->getType() );
 		$this->assertEquals( 'CNE', $productCopy->getProductCode() );
-		$this->assertEquals( 'Cafe Noire Expresso', $productCopy->getName() );
+		$this->assertEquals( 'Cafe Noire Expresso for basket', $productCopy->getName() );
 		$this->assertEquals( $product->getId(), $productCopy->getProductId() );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_UNFINISHED, $productCopy->getStatus() );
 		$this->assertEquals( '', $productCopy->getSupplierCode() );

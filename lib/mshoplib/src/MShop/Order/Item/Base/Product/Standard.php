@@ -733,6 +733,11 @@ class Standard extends Base implements Iface
 		$this->setName( $product->getName() );
 		$this->setTarget( $product->getTarget() );
 
+		$items = $product->getRefItems( 'text', 'basket', 'default' );
+		if( ( $item = reset( $items ) ) !== false ) {
+			$this->setName( $item->getContent() );
+		}
+
 		$items = $product->getRefItems( 'supplier', 'default', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
 			$this->setSupplierCode( $item->getCode() );

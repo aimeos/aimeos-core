@@ -175,6 +175,7 @@ return array(
 		array( 'domain' => 'media', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
 		array( 'domain' => 'media', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
+		array( 'domain' => 'product', 'code' => 'basket', 'label' => 'Basket description', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
 		array( 'domain' => 'product', 'code' => 'url', 'label' => 'URL segment', 'status' => 1 ),

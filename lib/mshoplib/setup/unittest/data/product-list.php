@@ -146,6 +146,7 @@ return array(
 		array( 'parentid' => 'product/EFGH', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/subproduct2', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/IJKL', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/subproduct3', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/U:CF', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/productUT', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
+		array( 'parentid' => 'product/CNE', 'typeid' => 'text/default', 'domain' => 'text', 'refid' => 'text/cne_basket', 'start' => null, 'end' => null, 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'text/unittype13', 'domain' => 'text', 'refid' => 'text/cne', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => [], 'pos' => 0, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'text/unittype13', 'domain' => 'text', 'refid' => 'text/cne_short_desc', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => [], 'pos' => 1, 'status' => 1 ),
 		array( 'parentid' => 'product/CNE', 'typeid' => 'text/unittype13', 'domain' => 'text', 'refid' => 'text/cne_long_desc', 'start' => '2010-01-01 00:00:00', 'end' => '2022-01-01 00:00:00', 'config' => [], 'pos' => 2, 'status' => 1 ),
