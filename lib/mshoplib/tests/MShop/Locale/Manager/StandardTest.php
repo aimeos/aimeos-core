@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testBootstrapNoMatch()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->bootstrap( '', '', '', true );
 	}
 
