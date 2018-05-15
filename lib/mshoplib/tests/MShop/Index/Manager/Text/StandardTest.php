@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch( true );
 		$result = $this->object->aggregate( $search, 'index.text.id' );
 
-		$this->assertEquals( 26, count( $result ) );
+		$this->assertEquals( 27, count( $result ) );
 		$this->assertArrayHasKey( $item->getId(), $result );
 		$this->assertEquals( 4, $result[$item->getId()] );
 	}

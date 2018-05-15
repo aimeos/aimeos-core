@@ -172,7 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 8, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
 		$this->assertEquals( 2, $cntPriceA );
-		$this->assertEquals( 20, $cntTextA );
+		$this->assertEquals( 21, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
