@@ -135,39 +135,38 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearchItemsId()
 	{
-		$context = \TestHelperMShop::getContext();
-
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
-		$catSearch = $catalogManager->createSearch();
-		$catSearch->setConditions( $catSearch->compare( '==', 'catalog.label', 'Kaffee' ) );
-		$result = $catalogManager->searchItems( $catSearch );
-
-		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No catalog item found' );
-		}
-
-		$catSearch->setConditions( $catSearch->compare( '==', 'catalog.label', 'Neu' ) );
-		$result = $catalogManager->searchItems( $catSearch );
-
-		if( ( $catNewItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No catalog item found' );
-		}
-
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$catItem = $catalogManager->findItem( 'cafe' );
+		$catNewItem = $catalogManager->findItem( 'new' );
 
 		$search = $this->object->createSearch();
-
 		$search->setConditions( $search->compare( '==', 'index.catalog.id', $catItem->getId() ) ); // catalog ID
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
+	}
 
+
+	public function testSearchItemsNoId()
+	{
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.catalog.id', null ) ); // catalog ID
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 8, count( $result ) );
+	}
 
+
+	public function testSearchItemsPosition()
+	{
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$catItem = $catalogManager->findItem( 'cafe' );
+
+		$search = $this->object->createSearch();
 		$func = $search->createFunction( 'index.catalog.position', array( 'promotion', $catItem->getId() ) );
 		$search->setConditions( $search->compare( '>=', $func, 0 ) ); // position
 
@@ -177,8 +176,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
+	}
 
 
+	public function testSearchItemsCount()
+	{
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$catItem = $catalogManager->findItem( 'cafe' );
+		$catNewItem = $catalogManager->findItem( 'new' );
+
+		$search = $this->object->createSearch();
 		$catIds = array( (int) $catItem->getId(), (int) $catNewItem->getId() );
 		$func = $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count categories

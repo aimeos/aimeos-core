@@ -126,76 +126,72 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
+	public function testSearchItemsIdWidth()
 	{
-		$context = \TestHelperMShop::getContext();
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
-		$search = $attributeManager->createSearch();
-
-		$expr = array(
-			$search->compare( '==', 'attribute.code', '30' ),
-			$search->compare( '==', 'attribute.editor', $context->getEditor() ),
-			$search->compare( '==', 'attribute.type.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.code', 'length' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $attributeManager->searchItems( $search );
-
-		if( ( $attrLengthItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No attribute item found' );
-		}
-
-		$expr = array(
-			$search->compare( '==', 'attribute.code', '29' ),
-			$search->compare( '==', 'attribute.editor', $context->getEditor() ),
-			$search->compare( '==', 'attribute.type.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.code', 'width' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $attributeManager->searchItems( $search );
-
-		if( ( $attrWidthItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No attribute item found' );
-		}
-
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrWidthItem->getId() ) );
-
 		$result = $this->object->searchItems( $search, [] );
+
 		$this->assertGreaterThanOrEqual( 1, count( $result ) );
+	}
+
+
+	public function testSearchItemsIdLength()
+	{
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attrLengthItem = $attributeManager->findItem( '30', [], 'product', 'length' );
 
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'index.attribute.id', $attrLengthItem->getId() ) );
-
 		$result = $this->object->searchItems( $search, [] );
+
 		$this->assertEquals( 3, count( $result ) );
+	}
 
+
+	public function testSearchItemsNoId()
+	{
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+
+		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '!=', 'index.attribute.id', null ) );
-
 		$result = $this->object->searchItems( $search, [] );
+
 		$this->assertGreaterThanOrEqual( 2, count( $result ) );
+	}
 
 
+	public function testSearchItemsCount()
+	{
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attrLengthItem = $attributeManager->findItem( '30', [], 'product', 'length' );
+		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
+
+		$search = $this->object->createSearch();
 		$attrIds = array( (int) $attrLengthItem->getId(), (int) $attrWidthItem->getId() );
 		$func = $search->createFunction( 'index.attributecount', array( 'variant', $attrIds ) );
 		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count attributes
 		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
 		$result = $this->object->searchItems( $search, [] );
 
-		if( ( $product = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No product found' );
-		}
-
 		$this->assertEquals( 2, count( $result ) );
-		$this->assertEquals( 'CNE', $product->getCode() );
+		$this->assertEquals( 'CNE', reset( $result )->getCode() );
+	}
 
 
+	public function testSearchItemsCode()
+	{
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+
+		$search = $this->object->createSearch();
 		$func = $search->createFunction( 'index.attribute.code', array( 'default', 'size' ) );
 		$search->setConditions( $search->compare( '~=', $func, 'x' ) );
-
 		$result = $this->object->searchItems( $search, [] );
+
 		$this->assertEquals( 4, count( $result ) );
 	}
 
