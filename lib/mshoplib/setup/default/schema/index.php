@@ -82,6 +82,25 @@ return array(
 			return $schema;
 		},
 
+		'mshop_index_supplier' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+
+			$table = $schema->createTable( 'mshop_index_supplier' );
+
+			$table->addColumn( 'prodid', 'integer', [] );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'supid', 'integer', [] );
+			$table->addColumn( 'listtype', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'pos', 'integer', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+
+			$table->addUniqueIndex( array( 'prodid', 'siteid', 'supid', 'listtype', 'pos' ), 'unq_msindsup_p_sid_supid_lt_po' );
+			$table->addIndex( array( 'siteid', 'supid', 'listtype', 'pos' ), 'idx_msindsup_sid_supid_lt_po' );
+
+			return $schema;
+		},
+
 		'mshop_index_text' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
 
 			$table = $schema->createTable( 'mshop_index_text' );

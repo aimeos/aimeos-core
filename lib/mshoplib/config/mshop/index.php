@@ -202,6 +202,70 @@ return array(
 				),
 			),
 		),
+		'supplier' => array(
+			'standard' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "mshop_index_supplier"
+						WHERE :cond AND "siteid" = ?
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "mshop_index_supplier" (
+							"prodid", "supid", "listtype", "pos",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?
+						)
+					',
+					'pgsql' => '
+						INSERT INTO "mshop_index_supplier" (
+							"prodid", "supid", "listtype", "pos",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?
+						)
+						ON CONFLICT DO NOTHING
+					'
+				),
+				'search' => array(
+					'ansi' => '
+						SELECT mpro."id"
+						FROM "mshop_product" AS mpro
+						:joins
+						WHERE :cond
+						GROUP BY mpro."id" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					'
+				),
+				'count' => array(
+					'ansi' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mpro."id"
+							FROM "mshop_product" AS mpro
+							:joins
+							WHERE :cond
+							LIMIT 1000 OFFSET 0
+						) AS list
+					'
+				),
+				'cleanup' => array(
+					'ansi' => '
+						DELETE FROM "mshop_index_supplier"
+						WHERE "ctime" < ? AND "siteid" = ?
+					'
+				),
+				'optimize' => array(
+					'mysql' => array(
+						'OPTIMIZE TABLE "mshop_index_supplier"',
+					),
+					'pgsql' => [],
+				),
+			),
+		),
 		'text' => array(
 			'standard' => array(
 				'delete' => array(

@@ -853,7 +853,7 @@ class Standard
 			 * @see mshop/index/manager/standard/subdomains
 			 */
 			$path = 'mshop/index/manager/submanagers';
-			$default = array( 'price', 'catalog', 'attribute', 'text' );
+			$default = array( 'catalog', 'attribute', 'price', 'text', 'supplier' );
 
 			foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 				$this->subManagers[$domain] = $this->getObject()->getSubManager( $domain );
