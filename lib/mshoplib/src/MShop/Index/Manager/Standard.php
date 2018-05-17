@@ -129,7 +129,7 @@ class Standard
 		 * @see mshop/index/manager/standard/submanagers
 		 */
 		$path = 'mshop/index/manager/submanagers';
-		$default = array( 'price', 'catalog', 'attribute', 'text' );
+		$default = array( 'price', 'catalog', 'attribute', 'supplier', 'text' );
 
 		$list += $this->getSearchAttributesBase( [], $path, $default, $withsub );
 
