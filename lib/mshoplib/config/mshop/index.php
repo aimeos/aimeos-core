@@ -385,6 +385,19 @@ return array(
 				),
 				'pgsql' => [],
 			),
+			'domains' => [
+				'attribute' => 'attribute',
+				'product' => 'product',
+				'price' => 'price',
+				'text' => 'text',
+			],
 		),
+		'submanagers' => [
+			'attribute' => 'attribute',
+			'supplier' => 'supplier',
+			'catalog' => 'catalog',
+			'price' => 'price',
+			'text' => 'text',
+		],
 	),
 );

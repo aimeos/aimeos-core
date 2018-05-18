@@ -107,9 +107,7 @@ class Standard
 	 */
 	public function getResourceType( $withsub = true )
 	{
-		$path = 'mshop/index/manager/submanagers';
-
-		return $this->getResourceTypeBase( 'index', $path, array( 'attribute', 'catalog', 'price', 'text' ), $withsub );
+		return $this->getResourceTypeBase( 'index', 'mshop/index/manager/submanagers', [], $withsub );
 	}
 
 
@@ -129,9 +127,8 @@ class Standard
 		 * @see mshop/index/manager/standard/submanagers
 		 */
 		$path = 'mshop/index/manager/submanagers';
-		$default = array( 'price', 'catalog', 'attribute', 'supplier', 'text' );
 
-		$list += $this->getSearchAttributesBase( [], $path, $default, $withsub );
+		$list += $this->getSearchAttributesBase( [], $path, [], $withsub );
 
 		return $list;
 	}
@@ -401,8 +398,7 @@ class Standard
 		 * @see mshop/index/manager/standard/subdomains
 		 * @see mshop/index/manager/submanagers
 		 */
-		$default = array( 'attribute', 'price', 'text', 'product' );
-		$domains = $config->get( 'mshop/index/manager/standard/domains', $default );
+		$domains = $config->get( 'mshop/index/manager/standard/domains', [] );
 
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 		$search = $manager->createSearch( true );
@@ -853,9 +849,8 @@ class Standard
 			 * @see mshop/index/manager/standard/subdomains
 			 */
 			$path = 'mshop/index/manager/submanagers';
-			$default = array( 'catalog', 'attribute', 'price', 'text', 'supplier' );
 
-			foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
+			foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
 				$this->subManagers[$domain] = $this->getObject()->getSubManager( $domain );
 			}
 
