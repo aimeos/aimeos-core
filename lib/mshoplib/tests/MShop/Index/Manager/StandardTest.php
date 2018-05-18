@@ -121,6 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertContains( 'index', $result );
 		$this->assertContains( 'index/attribute', $result );
+		$this->assertContains( 'index/supplier', $result );
 		$this->assertContains( 'index/catalog', $result );
 		$this->assertContains( 'index/price', $result );
 		$this->assertContains( 'index/text', $result );
@@ -129,9 +130,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSearchAttributes()
 	{
-		foreach( $this->object->getSearchAttributes() as $attribute ) {
+		$attributes = $this->object->getSearchAttributes();
+
+		foreach( $attributes as $attribute ) {
 			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
 		}
+
+		$this->assertArrayHasKey( 'index.attribute.id', $attributes );
+		$this->assertArrayHasKey( 'index.catalog.id', $attributes );
+		$this->assertArrayHasKey( 'index.price.id', $attributes );
+		$this->assertArrayHasKey( 'index.supplier.id', $attributes );
+		$this->assertArrayHasKey( 'index.text.id', $attributes );
 	}
 
 

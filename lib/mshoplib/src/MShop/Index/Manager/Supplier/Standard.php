@@ -25,7 +25,7 @@ class Standard
 			'code' => 'index.supplier.id',
 			'internalcode' => 'mindsu."supid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_supplier" AS mindsu ON mindsu."prodid" = mpro."id"' ),
-			'label' => 'Product index category ID',
+			'label' => 'Product index supplier ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
