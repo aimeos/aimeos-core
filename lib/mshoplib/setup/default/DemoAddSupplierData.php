@@ -32,7 +32,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 */
 	public function getPostDependencies()
 	{
-		return [];
+		return ['DemoRebuildIndex'];
 	}
 
 
@@ -71,7 +71,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 				throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for supplier domain', $path ) );
 			}
 
-			$this->saveCustomerItems( $data );
+			$this->saveItems( $data );
 
 			$this->status( 'added' );
 		}
@@ -87,7 +87,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 *
 	 * @param array $data List of arrays containing the supplier properties
 	 */
-	protected function saveCustomerItems( array $data )
+	protected function saveItems( array $data )
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'supplier' );
 
@@ -102,6 +102,10 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 			if( isset( $entry['delivery'] ) ) {
 				$this->saveAddressItems( $entry['delivery'], $item->getId() );
+			}
+
+			if( isset( $entry['product'] ) ) {
+				$this->addProducts( $item->getId(), $entry['product'], 'supplier' );
 			}
 		}
 	}

@@ -343,7 +343,7 @@ class MShopAddDataAbstract extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param string $parentid ID of the parent item where the products should be associated to
 	 * @param array $data Two dimensional associative list of product data
-	 * @param string $domain Domain name the texts should be added to, e.g. 'catalog'
+	 * @param string $domain Domain name the products should be added to, e.g. 'catalog'
 	 */
 	protected function addProducts( $parentid, array $data, $domain )
 	{

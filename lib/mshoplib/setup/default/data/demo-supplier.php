@@ -16,6 +16,18 @@ return array(
 				'telephone' => '', 'email' => 'demo1@example.com', 'telefax' => '', 'website' => '',
 			),
 		),
+		'product' => array(
+			array(
+				'code' => 'demo-article',
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'code' => 'demo-selection-article',
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
 	),
 	array(
 		'code' => 'demo-test2', 'label' => 'Test supplier 2', 'status' => 1,
@@ -25,6 +37,18 @@ return array(
 				'firstname' => '', 'lastname' => '', 'address1' => 'Test road', 'address2' => '10', 'address3' => '',
 				'postal' => '20000', 'city' => 'Test town', 'state' => 'NY', 'langid' => 'en', 'countryid' => 'US',
 				'telephone' => '', 'email' => 'demo2@example.com', 'telefax' => '', 'website' => '',
+			),
+		),
+		'product' => array(
+			array(
+				'code' => 'demo-selection-article',
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'code' => 'demo-bundle-article',
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
 	),
