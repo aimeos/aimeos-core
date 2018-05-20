@@ -30,8 +30,9 @@ interface Iface
 	 * @param boolean $active Flag to get only active items (optional)
 	 * @param integer|null $level Constant from abstract class which site ID levels should be available (optional),
 	 * 	based on config or value for SITE_PATH if null
+	 * @param boolean $bare Allow locale items with sites only
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
-	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null );
+	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null, $bare = false );
 }

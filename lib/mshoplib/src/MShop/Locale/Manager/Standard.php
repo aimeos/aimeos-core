@@ -115,15 +115,16 @@ class Standard
 	 * @param boolean $active Flag to get only active items (optional)
 	 * @param integer|null $level Constant from abstract class which site ID levels should be available (optional),
 	 * 	based on config or value for SITE_PATH if null
+	 * @param boolean $bare Allow locale items with sites only
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
-	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null )
+	public function bootstrap( $site, $lang = '', $currency = '', $active = true, $level = null, $bare = false )
 	{
 		$siteItem = $this->getObject()->getSubManager( 'site' )->findItem( $site );
 		$siteIds = array( $siteItem->getId() );
 
-		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, $siteIds, $siteIds );
+		return $this->bootstrapBase( $site, $lang, $currency, $active, $siteItem, $siteIds, $siteIds, $bare );
 	}
 
 
@@ -496,11 +497,12 @@ class Standard
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface Site item
 	 * @param array $sitePath List of site IDs up to the root site
 	 * @param array $siteSubTree List of site IDs below and including the current site
+	 * @param boolean $bare Allow locale items with sites only
 	 * @return \Aimeos\MShop\Locale\Item\Iface Locale item for the given parameters
 	 * @throws \Aimeos\MShop\Locale\Exception If no locale item is found
 	 */
 	protected function bootstrapBase( $site, $lang, $currency, $active,
-		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sitePath, array $siteSubTree )
+		\Aimeos\MShop\Locale\Item\Site\Iface $siteItem, array $sitePath, array $siteSubTree, $bare )
 	{
 		$siteId = $siteItem->getId();
 
@@ -514,6 +516,10 @@ class Standard
 
 		if( $result !== false ) {
 			return $result;
+		}
+
+		if( $bare === true ) {
+			return $this->createItemBase( ['locale.siteid' => $siteId], $siteItem, $sitePath, $siteSubTree );
 		}
 
 		throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Locale item for site "%1$s" not found', $site ) );
