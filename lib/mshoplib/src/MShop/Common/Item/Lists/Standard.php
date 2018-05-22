@@ -48,12 +48,12 @@ class Standard
 	 * Returns the parent ID of the common list item,
 	 * like the unique ID of a product or a tree node.
 	 *
-	 * @return integer|null Parent ID of the common list item
+	 * @return string|null Parent ID of the common list item
 	 */
 	public function getParentId()
 	{
 		if( isset( $this->values[$this->prefix . 'parentid'] ) ) {
-			return (int) $this->values[$this->prefix . 'parentid'];
+			return (string) $this->values[$this->prefix . 'parentid'];
 		}
 
 		return null;
