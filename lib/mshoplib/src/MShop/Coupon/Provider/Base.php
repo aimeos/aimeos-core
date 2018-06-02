@@ -164,12 +164,12 @@ abstract class Base implements Iface
 						}
 						break;
 					case 'integer':
-						if( ctype_digit( $attributes[$key] ) === false ) {
+						if( ctype_digit( (string) $attributes[$key] ) === false ) {
 							$errors[$key] = sprintf( 'Not an integer number' ); continue 2;
 						}
 						break;
 					case 'number':
-						if( is_numeric( $attributes[$key] ) === false ) {
+						if( is_numeric( (string) $attributes[$key] ) === false ) {
 							$errors[$key] = sprintf( 'Not a number' ); continue 2;
 						}
 						break;
