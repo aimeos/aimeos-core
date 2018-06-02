@@ -12,6 +12,7 @@ namespace Aimeos\MShop\Coupon\Provider;
 
 class PercentRebateTest extends \PHPUnit\Framework\TestCase
 {
+	private $coupon;
 	private $object;
 	private $orderBase;
 
@@ -21,12 +22,12 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperMShop::getContext();
 
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $context );
-		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
-		$couponItem->setConfig( array( 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ) );
+		$this->coupon = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
+		$this->coupon->setConfig( array( 'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '10' ) );
 
 		// Don't create order base item by createItem() as this would already register the plugins
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $context->getLocale() );
-		$this->object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, '90AB' );
+		$this->object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $this->coupon, '90AB' );
 	}
 
 
@@ -62,6 +63,54 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '', $product->getSupplierCode() );
 		$this->assertEquals( '', $product->getMediaUrl() );
 		$this->assertEquals( 'Geldwerter Nachlass', $product->getName() );
+	}
+
+
+	public function testAddCouponRoundUp()
+	{
+		$this->coupon->setConfig( [
+			'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '5.325',
+			'percentrebate.precision' => '1', 'percentrebate.roundvalue' => '0.05'
+		] );
+
+		$orderProducts = $this->getOrderProducts();
+		$this->orderBase->addProduct( $orderProducts['CNE'] );
+
+		$this->object->addCoupon( $this->orderBase );
+
+		$coupons = $this->orderBase->getCoupons();
+
+		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
+			throw new \RuntimeException( 'No coupon available' );
+		}
+
+		$this->assertEquals( 1, count( $coupons['90AB'] ) );
+		$this->assertEquals( '-3.95', $product->getPrice()->getValue() );
+		$this->assertEquals( '3.95', $product->getPrice()->getRebate() );
+	}
+
+
+	public function testAddCouponRoundDown()
+	{
+		$this->coupon->setConfig( [
+			'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '5.3',
+			'percentrebate.precision' => '1', 'percentrebate.roundvalue' => '0.05'
+		] );
+
+		$orderProducts = $this->getOrderProducts();
+		$this->orderBase->addProduct( $orderProducts['CNE'] );
+
+		$this->object->addCoupon( $this->orderBase );
+
+		$coupons = $this->orderBase->getCoupons();
+
+		if( ( $product = reset( $coupons['90AB'] ) ) === false ) {
+			throw new \RuntimeException( 'No coupon available' );
+		}
+
+		$this->assertEquals( 1, count( $coupons['90AB'] ) );
+		$this->assertEquals( '-3.90', $product->getPrice()->getValue() );
+		$this->assertEquals( '3.90', $product->getPrice()->getRebate() );
 	}
 
 
@@ -138,12 +187,17 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigBE()
 	{
-		$attributes = ['percentrebate.productcode' => 'test', 'percentrebate.rebate' => 5];
+		$attributes = [
+			'percentrebate.productcode' => 'test', 'percentrebate.rebate' => '5',
+			'percentrebate.precision' => 2, 'percentrebate.roundvalue' => 0.05
+		];
 		$result = $this->object->checkConfigBE( $attributes );
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertInternalType( 'null', $result['percentrebate.productcode'] );
 		$this->assertInternalType( 'null', $result['percentrebate.rebate'] );
+		$this->assertInternalType( 'null', $result['percentrebate.precision'] );
+		$this->assertInternalType( 'null', $result['percentrebate.roundvalue'] );
 	}
 
 
@@ -151,7 +205,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->checkConfigBE( [] );
 
-		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 4, count( $result ) );
 		$this->assertInternalType( 'string', $result['percentrebate.productcode'] );
 		$this->assertInternalType( 'string', $result['percentrebate.rebate'] );
 	}

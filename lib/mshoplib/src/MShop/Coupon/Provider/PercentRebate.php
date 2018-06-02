@@ -41,6 +41,24 @@ class PercentRebate
 			'default' => 0,
 			'required' => true,
 		),
+		'percentrebate.precision' => array(
+			'code' => 'percentrebate.precision',
+			'internalcode' => 'percentrebate.precision',
+			'label' => 'Number of decimal digits to round to',
+			'type' => 'integer',
+			'internaltype' => 'integer',
+			'default' => 2,
+			'required' => false,
+		),
+		'percentrebate.roundvalue' => array(
+			'code' => 'percentrebate.roundvalue',
+			'internalcode' => 'percentrebate.roundvalue',
+			'label' => 'Value to round rebate up/down',
+			'type' => 'number',
+			'internaltype' => 'float',
+			'default' => 0,
+			'required' => false,
+		),
 	);
 
 
@@ -73,7 +91,7 @@ class PercentRebate
 			}
 		}
 
-		$rebate = round( $sum * (float) $config['percentrebate.rebate'] / 100, 2 );
+		$rebate = $this->round( $sum * (float) $config['percentrebate.rebate'] / 100 );
 		$orderProducts = $this->createMonetaryRebateProducts( $base, $config['percentrebate.productcode'], $rebate );
 
 		$base->addCoupon( $this->getCode(), $orderProducts );
@@ -102,5 +120,26 @@ class PercentRebate
 	public function getConfigBE()
 	{
 		return $this->getConfigItems( $this->beConfig );
+	}
+
+
+	/**
+	 * Rounds the number to the configured precision
+	 *
+	 * @param float $number Number to round
+	 * @return Rounded number
+	 */
+	protected function round( $number )
+	{
+		$prec = $this->getConfigValue( 'percentrebate.precision', 2 );
+		$value = $this->getConfigValue( 'percentrebate.roundvalue', 0 );
+
+		$remain = $number - round( $number, $prec );
+
+		if( abs( $remain ) < $value / 2 ) {
+			return round( $number, $prec );
+		}
+
+		return round( $number, $prec ) + ( $remain > 0 ? $value : -$value );
 	}
 }
