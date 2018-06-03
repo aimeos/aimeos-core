@@ -134,12 +134,10 @@ class PercentRebate
 		$prec = $this->getConfigValue( 'percentrebate.precision', 2 );
 		$value = $this->getConfigValue( 'percentrebate.roundvalue', 0 );
 
-		$remain = $number - round( $number, $prec );
-
-		if( abs( $remain ) < $value / 2 ) {
+		if( $value == 0 ) {
 			return round( $number, $prec );
 		}
 
-		return round( $number, $prec ) + ( $remain > 0 ? $value : -$value );
+		return round( round( $number / $value ) * $value, $prec );
 	}
 }

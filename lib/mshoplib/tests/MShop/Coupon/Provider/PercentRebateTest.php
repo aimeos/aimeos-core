@@ -70,7 +70,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->coupon->setConfig( [
 			'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '5.325',
-			'percentrebate.precision' => '1', 'percentrebate.roundvalue' => '0.05'
+			'percentrebate.precision' => '2', 'percentrebate.roundvalue' => '0.05'
 		] );
 
 		$orderProducts = $this->getOrderProducts();
@@ -94,7 +94,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->coupon->setConfig( [
 			'percentrebate.productcode' => 'U:MD', 'percentrebate.rebate' => '5.3',
-			'percentrebate.precision' => '1', 'percentrebate.roundvalue' => '0.05'
+			'percentrebate.precision' => '2', 'percentrebate.roundvalue' => '0.05'
 		] );
 
 		$orderProducts = $this->getOrderProducts();
