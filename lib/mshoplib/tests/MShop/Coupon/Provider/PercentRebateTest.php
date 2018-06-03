@@ -189,7 +189,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 	{
 		$attributes = [
 			'percentrebate.productcode' => 'test', 'percentrebate.rebate' => '5',
-			'percentrebate.precision' => 2, 'percentrebate.roundvalue' => 0.05
+			'percentrebate.precision' => '2', 'percentrebate.roundvalue' => '0.05'
 		];
 		$result = $this->object->checkConfigBE( $attributes );
 
