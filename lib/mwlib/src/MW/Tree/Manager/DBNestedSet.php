@@ -319,7 +319,7 @@ class DBNestedSet extends \Aimeos\MW\Tree\Manager\Base
 			$stmt = $conn->create( $this->config['insert'] );
 			$stmt->bind( 1, $node->getLabel(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 			$stmt->bind( 2, $node->getCode(), \Aimeos\MW\DB\Statement\Base::PARAM_STR );
-			$stmt->bind( 3, $node->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_BOOL );
+			$stmt->bind( 3, $node->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 4, (int) $node->parentid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 5, $node->level, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 6, $node->left, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
