@@ -7,59 +7,59 @@
 # Translators:
 # Translators:
 # Translators:
-# Martin Vyšohlíd <vysohlidm@gmail.com>, 2016
+# Shoon Lae Won <wonshoonlae@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-09-22 11:54+0000\n"
-"Last-Translator: Martin Vyšohlíd <vysohlidm@gmail.com>\n"
-"Language-Team: Czech (http://www.transifex.com/aimeos/aimeos-core/language/cs/)\n"
+"PO-Revision-Date: 2018-05-23 07:27+0000\n"
+"Last-Translator: Shoon Lae Won <wonshoonlae@gmail.com>\n"
+"Language-Team: Burmese (http://www.transifex.com/aimeos/aimeos-core/language/my/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Language: my\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "AD"
-msgstr "Andorra"
+msgstr ""
 
 msgid "AE"
-msgstr "United Arab Emirates"
+msgstr "အာရပ်စော်ဘွားများပြည်ထောင်စု"
 
 msgid "AF"
-msgstr "Afghanistan"
+msgstr "အာဖဂန်နစ္စတန်"
 
 msgid "AG"
-msgstr "Antigua and Barbuda"
+msgstr ""
 
 msgid "AI"
-msgstr "Anguilla"
+msgstr ""
 
 msgid "AL"
-msgstr "Albania"
+msgstr "အယ်လ်ဘေးနီးယား"
 
 msgid "AM"
-msgstr ""
+msgstr "အာမေးနီးယား"
 
 msgid "AO"
-msgstr ""
+msgstr "အန်ဂိုလာ"
 
 msgid "AQ"
-msgstr ""
+msgstr "အန္တာတိက"
 
 msgid "AR"
-msgstr ""
+msgstr "အာဂျင်တီးနား"
 
 msgid "AS"
 msgstr ""
 
 msgid "AT"
-msgstr ""
+msgstr "ဩစတြီးယား"
 
 msgid "AU"
-msgstr ""
+msgstr "ဩစတြေးလျ"
 
 msgid "AW"
 msgstr ""
@@ -80,7 +80,7 @@ msgid "BD"
 msgstr ""
 
 msgid "BE"
-msgstr ""
+msgstr "ဘယ်လ်ဂျီယမ်"
 
 msgid "BF"
 msgstr ""
@@ -104,7 +104,7 @@ msgid "BM"
 msgstr ""
 
 msgid "BN"
-msgstr ""
+msgstr "ဘရူနိုင်းဒါရူဆလမ်"
 
 msgid "BO"
 msgstr ""
@@ -113,13 +113,13 @@ msgid "BQ"
 msgstr ""
 
 msgid "BR"
-msgstr ""
+msgstr "ဘရာဇီး"
 
 msgid "BS"
 msgstr ""
 
 msgid "BT"
-msgstr ""
+msgstr "ဘူတန်"
 
 msgid "BV"
 msgstr ""
@@ -134,7 +134,7 @@ msgid "BZ"
 msgstr ""
 
 msgid "CA"
-msgstr ""
+msgstr "ကနေဒါ"
 
 msgid "CC"
 msgstr ""
@@ -146,10 +146,10 @@ msgid "CF"
 msgstr ""
 
 msgid "CG"
-msgstr ""
+msgstr "ကွန်ဂို"
 
 msgid "CH"
-msgstr ""
+msgstr "ဆွစ်ဇာလန်"
 
 msgid "CI"
 msgstr ""
@@ -158,13 +158,13 @@ msgid "CK"
 msgstr ""
 
 msgid "CL"
-msgstr ""
+msgstr "ချီလီ"
 
 msgid "CM"
 msgstr ""
 
 msgid "CN"
-msgstr ""
+msgstr "တရုတ်"
 
 msgid "CO"
 msgstr ""
@@ -191,13 +191,13 @@ msgid "CZ"
 msgstr ""
 
 msgid "DE"
-msgstr ""
+msgstr "ဂျာမနီ"
 
 msgid "DJ"
 msgstr ""
 
 msgid "DK"
-msgstr ""
+msgstr "ဒိန်းမတ်"
 
 msgid "DM"
 msgstr ""
@@ -209,13 +209,13 @@ msgid "DZ"
 msgstr ""
 
 msgid "EC"
-msgstr ""
+msgstr "အီကွေဒေါ"
 
 msgid "EE"
 msgstr ""
 
 msgid "EG"
-msgstr ""
+msgstr "အီဂျစ်"
 
 msgid "EH"
 msgstr ""
@@ -224,13 +224,13 @@ msgid "ER"
 msgstr ""
 
 msgid "ES"
-msgstr ""
+msgstr "စပိန်"
 
 msgid "ET"
 msgstr ""
 
 msgid "FI"
-msgstr ""
+msgstr "ဖင်လန်"
 
 msgid "FJ"
 msgstr ""
@@ -245,7 +245,7 @@ msgid "FO"
 msgstr ""
 
 msgid "FR"
-msgstr ""
+msgstr "ပြင်သစ်"
 
 msgid "GA"
 msgstr ""
@@ -287,7 +287,7 @@ msgid "GQ"
 msgstr ""
 
 msgid "GR"
-msgstr ""
+msgstr "ဂရိ"
 
 msgid "GS"
 msgstr ""
@@ -305,7 +305,7 @@ msgid "GY"
 msgstr ""
 
 msgid "HK"
-msgstr ""
+msgstr "ဟောင်ကောင်"
 
 msgid "HM"
 msgstr ""
@@ -323,25 +323,25 @@ msgid "HU"
 msgstr ""
 
 msgid "ID"
-msgstr ""
+msgstr "အင်ဒိုနီးရှား"
 
 msgid "IE"
-msgstr ""
+msgstr "အိုင်ယာလန်"
 
 msgid "IL"
-msgstr ""
+msgstr "အစ္စရေး"
 
 msgid "IM"
 msgstr ""
 
 msgid "IN"
-msgstr ""
+msgstr "အိန္ဒိယ"
 
 msgid "IO"
 msgstr ""
 
 msgid "IQ"
-msgstr ""
+msgstr "အီရတ်"
 
 msgid "IR"
 msgstr ""
@@ -350,19 +350,19 @@ msgid "IS"
 msgstr ""
 
 msgid "IT"
-msgstr ""
+msgstr "အီတလီ"
 
 msgid "JE"
 msgstr ""
 
 msgid "JM"
-msgstr ""
+msgstr "ဂျမေကာ"
 
 msgid "JO"
-msgstr ""
+msgstr "ဂျော်ဒန်"
 
 msgid "JP"
-msgstr ""
+msgstr "ဂျပန်"
 
 msgid "KE"
 msgstr ""
@@ -371,7 +371,7 @@ msgid "KG"
 msgstr ""
 
 msgid "KH"
-msgstr ""
+msgstr "ကမ္ဘောဒီးယား"
 
 msgid "KI"
 msgstr ""
@@ -386,10 +386,10 @@ msgid "KP"
 msgstr ""
 
 msgid "KR"
-msgstr ""
+msgstr "ကိုရီးယား"
 
 msgid "KW"
-msgstr ""
+msgstr "ကူဝိတ်"
 
 msgid "KY"
 msgstr ""
@@ -401,7 +401,7 @@ msgid "LA"
 msgstr ""
 
 msgid "LB"
-msgstr ""
+msgstr "လက်ဘနွန်"
 
 msgid "LC"
 msgstr ""
@@ -422,7 +422,7 @@ msgid "LT"
 msgstr ""
 
 msgid "LU"
-msgstr ""
+msgstr "လူဇင်ဘတ်"
 
 msgid "LV"
 msgstr ""
@@ -458,13 +458,13 @@ msgid "ML"
 msgstr ""
 
 msgid "MM"
-msgstr ""
+msgstr "မြန်မာ"
 
 msgid "MN"
 msgstr ""
 
 msgid "MO"
-msgstr ""
+msgstr "မကာအို"
 
 msgid "MP"
 msgstr ""
@@ -494,7 +494,7 @@ msgid "MX"
 msgstr ""
 
 msgid "MY"
-msgstr ""
+msgstr "မလေးရှား"
 
 msgid "MZ"
 msgstr ""
@@ -518,13 +518,13 @@ msgid "NI"
 msgstr ""
 
 msgid "NL"
-msgstr ""
+msgstr "နယ်သာလန်"
 
 msgid "NO"
-msgstr ""
+msgstr "နော်ဝေး"
 
 msgid "NP"
-msgstr ""
+msgstr "နီပေါ"
 
 msgid "NR"
 msgstr ""
@@ -533,7 +533,7 @@ msgid "NU"
 msgstr ""
 
 msgid "NZ"
-msgstr ""
+msgstr "နယူးဇီလန်"
 
 msgid "OM"
 msgstr ""
@@ -542,7 +542,7 @@ msgid "PA"
 msgstr ""
 
 msgid "PE"
-msgstr ""
+msgstr "ပီရူး"
 
 msgid "PF"
 msgstr ""
@@ -551,13 +551,13 @@ msgid "PG"
 msgstr ""
 
 msgid "PH"
-msgstr ""
+msgstr "ဖိလစ်ပိုင်"
 
 msgid "PK"
-msgstr ""
+msgstr "ပါကစ္စတန်"
 
 msgid "PL"
-msgstr ""
+msgstr "ပိုလန်"
 
 msgid "PM"
 msgstr ""
@@ -593,7 +593,7 @@ msgid "RS"
 msgstr ""
 
 msgid "RU"
-msgstr ""
+msgstr "ရရှား"
 
 msgid "RW"
 msgstr ""
@@ -608,10 +608,10 @@ msgid "SC"
 msgstr ""
 
 msgid "SD"
-msgstr ""
+msgstr "ဆူဒန်"
 
 msgid "SE"
-msgstr ""
+msgstr "ဆွီဒင်"
 
 msgid "SG"
 msgstr ""
@@ -674,7 +674,7 @@ msgid "TG"
 msgstr ""
 
 msgid "TH"
-msgstr ""
+msgstr "ထိုင်း"
 
 msgid "TJ"
 msgstr ""
@@ -689,13 +689,13 @@ msgid "TM"
 msgstr ""
 
 msgid "TN"
-msgstr ""
+msgstr "တူနီးရှား"
 
 msgid "TO"
 msgstr ""
 
 msgid "TR"
-msgstr ""
+msgstr "တူရကီ"
 
 msgid "TT"
 msgstr ""
@@ -704,13 +704,13 @@ msgid "TV"
 msgstr ""
 
 msgid "TW"
-msgstr ""
+msgstr "ထိုင်ဝမ်"
 
 msgid "TZ"
 msgstr ""
 
 msgid "UA"
-msgstr ""
+msgstr "ယူကရိန်း"
 
 msgid "UG"
 msgstr ""
@@ -719,13 +719,13 @@ msgid "UM"
 msgstr ""
 
 msgid "US"
-msgstr ""
+msgstr "အမေရိက"
 
 msgid "UY"
-msgstr ""
+msgstr "ဥရုဂွေး"
 
 msgid "UZ"
-msgstr ""
+msgstr "ဥဇဘက်ကစ္စတန်"
 
 msgid "VA"
 msgstr ""
@@ -743,7 +743,7 @@ msgid "VI"
 msgstr ""
 
 msgid "VN"
-msgstr ""
+msgstr "ဗီယက်နမ်"
 
 msgid "VU"
 msgstr ""
@@ -755,16 +755,16 @@ msgid "WS"
 msgstr ""
 
 msgid "YE"
-msgstr ""
+msgstr "ယီမင်"
 
 msgid "YT"
 msgstr ""
 
 msgid "ZA"
-msgstr ""
+msgstr "တောင်အာဖရိက"
 
 msgid "ZM"
 msgstr ""
 
 msgid "ZW"
-msgstr ""
+msgstr "ဇင်ဘာဘွေ"
