@@ -217,7 +217,7 @@
 
 
 	<target name="build" description="Creates all files to be generated" >
-		<exec command="tx pull -a -f" checkreturn="true" logoutput="true" />
+		<exec command="tx pull -a -f" checkreturn="true" logoutput="true" passthru="true" />
 		<foreach param="po-fname" absparam="po-filename" target="build-mo">
 			<fileset dir="./i18n">
 				<include name="**/*.po" />
@@ -237,16 +237,16 @@
 	<target name="build-mo" description="Generates binary translation files">
 		<fail unless="po-filename" message="Missing file name" />
 		<echo msg="File: ${po-filename}" />
-		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" />
+		<exec command="msgfmt --statistics -c -o `echo ${po-filename} | sed s/\.po//` ${po-filename}" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 
 	<target name="release" description="Creates new release" depends="build">
 		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
-		<exec command="git branch ${version}" checkreturn="true" logoutput="true" />
-		<exec command="git tag -a ${version}.1 -m 'Release ${version}.1'" checkreturn="true" logoutput="true" />
-		<exec command="git push origin ${version}" checkreturn="true" logoutput="true" />
-		<exec command="git push --tags" checkreturn="true" logoutput="true" />
+		<exec command="git branch ${version}" checkreturn="true" logoutput="true" passthru="true" />
+		<exec command="git tag -a ${version}.1 -m 'Release ${version}.1'" checkreturn="true" logoutput="true" passthru="true" />
+		<exec command="git push origin ${version}" checkreturn="true" logoutput="true" passthru="true" />
+		<exec command="git push --tags" checkreturn="true" logoutput="true" passthru="true" />
 	</target>
 
 	<target name="releaseext" description="Creates new releases of the extensions">
