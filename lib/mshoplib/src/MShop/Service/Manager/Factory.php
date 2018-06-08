@@ -140,12 +140,12 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the service manager.
+		 * ("\Aimeos\MShop\Service\Manager\Decorator\*") around the service manager.
 		 *
 		 *  mshop/service/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the service
+		 * "\Aimeos\MShop\Service\Manager\Decorator\Decorator2" only to the service
 		 * controller.
 		 *
 		 * @param array List of decorator names

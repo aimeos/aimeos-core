@@ -140,12 +140,12 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the media manager.
+		 * ("\Aimeos\MShop\Media\Manager\Decorator\*") around the media manager.
 		 *
 		 *  mshop/media/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the media
+		 * "\Aimeos\MShop\Media\Manager\Decorator\Decorator2" only to the media
 		 * controller.
 		 *
 		 * @param array List of decorator names

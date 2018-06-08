@@ -139,12 +139,12 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the locale manager.
+		 * ("\Aimeos\MShop\Locale\Manager\Decorator\*") around the locale manager.
 		 *
 		 *  mshop/locale/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the locale
+		 * "\Aimeos\MShop\Locale\Manager\Decorator\Decorator2" only to the locale
 		 * controller.
 		 *
 		 * @param array List of decorator names

@@ -140,12 +140,12 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the tag manager.
+		 * ("\Aimeos\MShop\Tag\Manager\Decorator\*") around the tag manager.
 		 *
 		 *  mshop/tag/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the tag
+		 * "\Aimeos\MShop\Tag\Manager\Decorator\Decorator2" only to the tag
 		 * controller.
 		 *
 		 * @param array List of decorator names

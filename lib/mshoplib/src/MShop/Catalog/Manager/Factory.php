@@ -139,12 +139,12 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the catalog manager.
+		 * ("\Aimeos\MShop\Catalog\Manager\Decorator\*") around the catalog manager.
 		 *
 		 *  mshop/catalog/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the catalog
+		 * "\Aimeos\MShop\Catalog\Manager\Decorator\Decorator2" only to the catalog
 		 * controller.
 		 *
 		 * @param array List of decorator names

@@ -140,12 +140,12 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the attribute manager.
+		 * ("\Aimeos\MShop\Attribute\Manager\Decorator\*") around the attribute manager.
 		 *
 		 *  mshop/attribute/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the attribute
+		 * "\Aimeos\MShop\Attribute\Manager\Decorator\Decorator2" only to the attribute
 		 * controller.
 		 *
 		 * @param array List of decorator names
