@@ -53,6 +53,7 @@ abstract class Base
 	const PARTS_ALL = 15;
 
 
+	// protected is a workaround for serialize problem
 	protected $bdata;
 	protected $coupons;
 	protected $products;
@@ -145,6 +146,23 @@ abstract class Base
 		}
 
 		return false;
+	}
+
+
+	/**
+	 * Prepares the object for serialization.
+	 *
+	 * @return array List of properties that should be serialized
+	 */
+	public function __sleep()
+	{
+		/*
+		 * Workaround because database connections can't be serialized
+		 * Listeners will be reattached on wakeup by the order base manager
+		 */
+		$this->clearListeners();
+
+		return array_keys( get_object_vars( $this ) );
 	}
 
 

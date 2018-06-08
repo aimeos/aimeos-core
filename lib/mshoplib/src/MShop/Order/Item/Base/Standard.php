@@ -20,9 +20,10 @@ namespace Aimeos\MShop\Order\Item\Base;
  */
 class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 {
-	private $price;
-	private $locale;
-	private $values;
+	// protected is a workaround for serialize problem
+	protected $price;
+	protected $locale;
+	protected $values;
 	private $available = true;
 	private $modified = false;
 
@@ -59,23 +60,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 
 		$this->price = clone $this->price;
 		$this->locale = clone $this->locale;
-	}
-
-
-	/**
-	 * Prepares the object for serialization.
-	 *
-	 * @return array List of properties that should be serialized
-	 */
-	public function __sleep()
-	{
-		/*
-		 * Workaround because database connections can't be serialized
-		 * Listeners will be reattached on wakeup by the order base manager
-		 */
-		$this->clearListeners();
-
-		return array_keys( get_object_vars( $this ) );
 	}
 
 
