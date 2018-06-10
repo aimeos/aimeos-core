@@ -121,7 +121,8 @@ class Factory
 		 *  mshop/tag/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the tag controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the tag
+		 * manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.12
@@ -146,7 +147,7 @@ class Factory
 		 *
 		 * This would add the decorator named "decorator2" defined by
 		 * "\Aimeos\MShop\Tag\Manager\Decorator\Decorator2" only to the tag
-		 * controller.
+		 * manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.12

@@ -245,12 +245,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the service type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the service type
+		 * manager.
 		 *
 		 *  mshop/service/manager/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the service controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the service
+		 * type manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -269,13 +271,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the service type manager.
+		 * ("\Aimeos\MShop\Service\Manager\Type\Decorator\*") around the service
+		 * type manager.
 		 *
 		 *  mshop/service/manager/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the service
-		 * controller.
+		 * "\Aimeos\MShop\Service\Manager\Type\Decorator\Decorator2" only to the
+		 * service type manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03

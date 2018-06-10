@@ -288,7 +288,8 @@ class Standard
 		 *  mshop/text/manager/lists/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the text controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the text
+		 * list manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -307,13 +308,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the text list manager.
+		 * ("\Aimeos\MShop\Text\Manager\Lists\Decorator\*") around the text list
+		 * manager.
 		 *
 		 *  mshop/text/manager/lists/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the text
-		 * controller.
+		 * "\Aimeos\MShop\Text\Manager\Lists\Decorator\Decorator2" only to the text
+		 * list manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03

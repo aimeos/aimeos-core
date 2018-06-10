@@ -288,7 +288,8 @@ class Standard
 		 *  mshop/catalog/manager/lists/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the catalog controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the catalog
+		 * list manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -307,13 +308,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the catalog list manager.
+		 * ("\Aimeos\MShop\Catalog\Manager\Lists\Decorator\*") around the catalog
+		 * list manager.
 		 *
 		 *  mshop/catalog/manager/lists/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the catalog
-		 * controller.
+		 * "\Aimeos\MShop\Catalog\Manager\Lists\Decorator\Decorator2" only to the
+		 * catalog list manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03

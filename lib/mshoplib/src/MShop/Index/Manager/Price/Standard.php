@@ -374,12 +374,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the index price manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the index price
+		 * manager.
 		 *
 		 *  mshop/index/manager/price/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the catalog controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index
+		 * price manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -398,13 +400,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the index price manager.
+		 * ("\Aimeos\MShop\Index\Manager\Price\Decorator\*") around the index
+		 * price manager.
 		 *
 		 *  mshop/index/manager/price/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the catalog
-		 * controller.
+		 * "\Aimeos\MShop\Index\Manager\Price\Decorator\Decorator2" only to the
+		 * index price manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03

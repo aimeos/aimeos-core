@@ -337,12 +337,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the index supplier manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the index supplier
+		 * manager.
 		 *
 		 *  mshop/index/manager/supplier/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the supplier controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index
+		 * supplier manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07
@@ -361,13 +363,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the index supplier manager.
+		 * ("\Aimeos\MShop\Index\Manager\Supplier\Decorator\*") around the index
+		 * supplier manager.
 		 *
 		 *  mshop/index/manager/supplier/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the supplier
-		 * controller.
+		 * "\Aimeos\MShop\Index\Manager\Supplier\Decorator\Decorator2" only to the
+		 * index supplier manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07

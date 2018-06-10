@@ -245,12 +245,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer property type manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer property
+		 * type manager.
 		 *
 		 *  mshop/customer/manager/property/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the customer controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the customer
+		 * property type manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07
@@ -269,13 +271,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer property type manager.
+		 * ("\Aimeos\MShop\Customer\Manager\Property\Type\Decorator\*") around the
+		 * customer property type manager.
 		 *
 		 *  mshop/customer/manager/property/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the customer
-		 * controller.
+		 * "\Aimeos\MShop\Customer\Manager\Property\Type\Decorator\Decorator2" only to
+		 * the customer property type manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2018.07

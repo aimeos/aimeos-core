@@ -245,12 +245,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the media type manager.
+		 * ("\Aimeos\MShop\Media\Manager\Type\Decorator\*") around the media type
+		 * manager.
 		 *
 		 *  mshop/media/manager/type/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the media controller.
+		 * "\Aimeos\MShop\Media\Manager\Type\Decorator\Decorator1" only to the media
+		 * type manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -269,13 +271,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the media type manager.
+		 * ("\Aimeos\MShop\Media\Manager\Type\Decorator\*") around the media type
+		 * manager.
 		 *
 		 *  mshop/media/manager/type/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the media
-		 * controller.
+		 * "\Aimeos\MShop\Media\Manager\Type\Decorator\Decorator2" only to the
+		 * media type manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03

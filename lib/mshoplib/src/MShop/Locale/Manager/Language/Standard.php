@@ -423,12 +423,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the locale language manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the locale language
+		 * manager.
 		 *
 		 *  mshop/locale/manager/language/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the locale controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the locale
+		 * language manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -447,13 +449,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the locale language manager.
+		 * ("\Aimeos\MShop\Locale\Manager\Language\Decorator\*") around the locale
+		 * language manager.
 		 *
 		 *  mshop/locale/manager/language/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the locale
-		 * controller.
+		 * "\Aimeos\MShop\Locale\Manager\Language\Decorator\Decorator2" only to the
+		 * locale language manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03

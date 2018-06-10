@@ -116,12 +116,13 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the coupon manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the coupon code manager.
 		 *
 		 *  mshop/coupon/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the coupon controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the coupon
+		 * code manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03
@@ -146,7 +147,7 @@ class Factory
 		 *
 		 * This would add the decorator named "decorator2" defined by
 		 * "\Aimeos\MShop\Coupon\Manager\Decorator\Decorator2" only to the coupon
-		 * controller.
+		 * code manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2014.03

@@ -669,13 +669,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer group manager.
+		 * ("\Aimeos\MShop\Customer\Manager\Group\Decorator\*") around the customer
+		 * group manager.
 		 *
 		 *  mshop/customer/manager/group/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the customer
-		 * group manager.
+		 * "\Aimeos\MShop\Customer\Manager\Group\\Decorator\Decorator2" only to the
+		 * customer group manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.08

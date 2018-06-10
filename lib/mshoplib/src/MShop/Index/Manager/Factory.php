@@ -22,7 +22,7 @@ class Factory
 	implements \Aimeos\MShop\Common\Factory\Iface
 {
 	/**
-	 * Creates a catalog DAO object.
+	 * Creates a index DAO object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Shop context instance with necessary objects
 	 * @param string|null $name Manager name
@@ -32,7 +32,7 @@ class Factory
 	public static function createManager( \Aimeos\MShop\Context\Item\Iface $context, $name = null )
 	{
 		/** mshop/index/manager/name
-		 * Class name of the used catalog manager implementation
+		 * Class name of the used index manager implementation
 		 *
 		 * Each default manager can be replace by an alternative imlementation.
 		 * To use this implementation, you have to set the last part of the class
@@ -80,7 +80,7 @@ class Factory
 		$manager = self::createManagerBase( $context, $classname, $iface );
 
 		/** mshop/index/manager/decorators/excludes
-		 * Excludes decorators added by the "common" option from the catalog manager
+		 * Excludes decorators added by the "common" option from the index manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -89,13 +89,13 @@ class Factory
 		 *
 		 * This option allows you to remove a decorator added via
 		 * "mshop/common/manager/decorators/default" before they are wrapped
-		 * around the catalog manager.
+		 * around the index manager.
 		 *
 		 *  mshop/index/manager/decorators/excludes = array( 'decorator1' )
 		 *
 		 * This would remove the decorator named "decorator1" from the list of
 		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
-		 * "mshop/common/manager/decorators/default" for the catalog manager.
+		 * "mshop/common/manager/decorators/default" for the index manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.11
@@ -106,7 +106,7 @@ class Factory
 		 */
 
 		/** mshop/index/manager/decorators/global
-		 * Adds a list of globally available decorators only to the catalog manager
+		 * Adds a list of globally available decorators only to the index manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -114,12 +114,12 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the catalog manager.
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the index manager.
 		 *
 		 *  mshop/index/manager/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the catalog controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the index manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.11
@@ -130,7 +130,7 @@ class Factory
 		 */
 
 		/** mshop/index/manager/decorators/local
-		 * Adds a list of local decorators only to the catalog manager
+		 * Adds a list of local decorators only to the index manager
 		 *
 		 * Decorators extend the functionality of a class by adding new aspects
 		 * (e.g. log what is currently done), executing the methods of the underlying
@@ -138,13 +138,13 @@ class Factory
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Index\Manager\Decorator\*") around the catalog manager.
+		 * ("\Aimeos\MShop\Index\Manager\Decorator\*") around the index manager.
 		 *
 		 *  mshop/index/manager/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Index\Manager\Decorator\Decorator2" only to the catalog
-		 * controller.
+		 * "\Aimeos\MShop\Index\Manager\Decorator\Decorator2" only to the index
+		 * manager.
 		 *
 		 * @param array List of decorator names
 		 * @since 2015.11

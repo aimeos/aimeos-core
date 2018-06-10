@@ -382,7 +382,8 @@ class Standard
 		 *  mshop/customer/manager/address/decorators/global = array( 'decorator1' )
 		 *
 		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the customer controller.
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the customer
+		 * address manager.
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03
@@ -401,13 +402,14 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the customer address manager.
+		 * ("\Aimeos\MShop\Customer\Manager\Address\Decorator\*") around the customer
+		 * address manager.
 		 *
 		 *  mshop/customer/manager/address/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the customer
-		 * controller.
+		 * "\Aimeos\MShop\Customer\Manager\Address\Decorator\Decorator2" only to the
+		 * customer address manager.
 		 *
 		 * @param array Address of decorator names
 		 * @since 2014.03

@@ -301,6 +301,233 @@ class Standard
 
 
 	/**
+	 * Removes multiple items specified by ids in the array.
+	 *
+	 * @param array $ids List of IDs
+	 */
+	public function deleteItems( array $ids )
+	{
+		/** mshop/order/manager/base/service/standard/delete/mysql
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * @see mshop/order/manager/base/service/standard/delete/ansi
+		 */
+
+		/** mshop/order/manager/base/service/standard/delete/ansi
+		 * Deletes the items matched by the given IDs from the database
+		 *
+		 * Removes the records specified by the given IDs from the order database.
+		 * The records must be from the site that is configured via the
+		 * context item.
+		 *
+		 * The ":cond" placeholder is replaced by the name of the ID column and
+		 * the given ID or list of IDs while the site ID is bound to the question
+		 * mark.
+		 *
+		 * The SQL statement should conform to the ANSI standard to be
+		 * compatible with most relational database systems. This also
+		 * includes using double quotes for table and column names.
+		 *
+		 * @param string SQL statement for deleting items
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/order/manager/base/service/standard/insert/ansi
+		 * @see mshop/order/manager/base/service/standard/update/ansi
+		 * @see mshop/order/manager/base/service/standard/newid/ansi
+		 * @see mshop/order/manager/base/service/standard/search/ansi
+		 * @see mshop/order/manager/base/service/standard/count/ansi
+		 */
+		$path = 'mshop/order/manager/base/service/standard/delete';
+		$this->deleteItemsBase( $ids, $path );
+	}
+
+
+	/**
+	 * Returns the order service item object for the given ID.
+	 *
+	 * @param integer $id Order service ID
+	 * @param string[] $ref List of domains to fetch list items and referenced items for
+	 * @param boolean $default Add default criteria
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Returns order base service item of the given id
+	 * @throws \Aimeos\MShop\Exception If item couldn't be found
+	 */
+	public function getItem( $id, array $ref = [], $default = false )
+	{
+		return $this->getItemBase( 'order.base.service.id', $id, $ref, $default );
+	}
+
+
+	/**
+	 * Returns the available manager types
+	 *
+	 * @param boolean $withsub Return also the resource type of sub-managers if true
+	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
+	 */
+	public function getResourceType( $withsub = true )
+	{
+		$path = 'mshop/order/manager/base/service/submanagers';
+
+		return $this->getResourceTypeBase( 'order/base/service', $path, array( 'attribute' ), $withsub );
+	}
+
+
+	/**
+	 * Returns the search attributes that can be used for searching.
+	 *
+	 * @param boolean $withsub Return also attributes of sub-managers if true
+	 * @return array List of attributes implementing \Aimeos\MW\Criteria\Attribute\Iface
+	 */
+	public function getSearchAttributes( $withsub = true )
+	{
+		/** mshop/order/manager/base/service/submanagers
+		 * List of manager names that can be instantiated by the order base service manager
+		 *
+		 * Managers provide a generic interface to the underlying storage.
+		 * Each manager has or can have sub-managers caring about particular
+		 * aspects. Each of these sub-managers can be instantiated by its
+		 * parent manager using the getSubManager() method.
+		 *
+		 * The search keys from sub-managers can be normally used in the
+		 * manager as well. It allows you to search for items of the manager
+		 * using the search keys of the sub-managers to further limit the
+		 * retrieved list of items.
+		 *
+		 * @param array List of sub-manager names
+		 * @since 2014.03
+		 * @category Developer
+		 */
+		$path = 'mshop/order/manager/base/service/submanagers';
+
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'attribute' ), $withsub );
+	}
+
+
+	/**
+	 * Returns a new manager for order service extensions.
+	 *
+	 * @param string $manager Name of the sub manager type in lower case
+	 * @param string|null $name Name of the implementation (from configuration or "Standard" if null)
+	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g attribute
+	 */
+	public function getSubManager( $manager, $name = null )
+	{
+		/** mshop/order/manager/base/service/name
+		 * Class name of the used order base service manager implementation
+		 *
+		 * Each default order base service manager can be replaced by an alternative imlementation.
+		 * To use this implementation, you have to set the last part of the class
+		 * name as configuration value so the manager factory knows which class it
+		 * has to instantiate.
+		 *
+		 * For example, if the name of the default class is
+		 *
+		 *  \Aimeos\MShop\Order\Manager\Base\Service\Standard
+		 *
+		 * and you want to replace it with your own version named
+		 *
+		 *  \Aimeos\MShop\Order\Manager\Base\Service\Myservice
+		 *
+		 * then you have to set the this configuration option:
+		 *
+		 *  mshop/order/manager/base/service/name = Myservice
+		 *
+		 * The value is the last part of your own class name and it's case sensitive,
+		 * so take care that the configuration value is exactly named like the last
+		 * part of the class name.
+		 *
+		 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
+		 * characters are possible! You should always start the last part of the class
+		 * name with an upper case character and continue only with lower case characters
+		 * or numbers. Avoid chamel case names like "MyService"!
+		 *
+		 * @param string Last part of the class name
+		 * @since 2014.03
+		 * @category Developer
+		 */
+
+		/** mshop/order/manager/base/service/decorators/excludes
+		 * Excludes decorators added by the "common" option from the order base service manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to remove a decorator added via
+		 * "mshop/common/manager/decorators/default" before they are wrapped
+		 * around the order base service manager.
+		 *
+		 *  mshop/order/manager/base/service/decorators/excludes = array( 'decorator1' )
+		 *
+		 * This would remove the decorator named "decorator1" from the list of
+		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
+		 * "mshop/common/manager/decorators/default" for the order base service manager.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/order/manager/base/service/decorators/global
+		 * @see mshop/order/manager/base/service/decorators/local
+		 */
+
+		/** mshop/order/manager/base/service/decorators/global
+		 * Adds a list of globally available decorators only to the order base service manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap global decorators
+		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base
+		 * service manager.
+		 *
+		 *  mshop/order/manager/base/service/decorators/global = array( 'decorator1' )
+		 *
+		 * This would add the decorator named "decorator1" defined by
+		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order
+		 * base service manager.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/order/manager/base/service/decorators/excludes
+		 * @see mshop/order/manager/base/service/decorators/local
+		 */
+
+		/** mshop/order/manager/base/service/decorators/local
+		 * Adds a list of local decorators only to the order base service manager
+		 *
+		 * Decorators extend the functionality of a class by adding new aspects
+		 * (e.g. log what is currently done), executing the methods of the underlying
+		 * class only in certain conditions (e.g. only for logged in users) or
+		 * modify what is returned to the caller.
+		 *
+		 * This option allows you to wrap local decorators
+		 * ("\Aimeos\MShop\Order\Manager\Base\Service\\Decorator\*") around the
+		 * order base service manager.
+		 *
+		 *  mshop/order/manager/base/service/decorators/local = array( 'decorator2' )
+		 *
+		 * This would add the decorator named "decorator2" defined by
+		 * "\Aimeos\MShop\Order\Manager\Base\Service\\Decorator\Decorator2" only
+		 * to the order base service manager.
+		 *
+		 * @param array List of decorator names
+		 * @since 2014.03
+		 * @category Developer
+		 * @see mshop/common/manager/decorators/default
+		 * @see mshop/order/manager/base/service/decorators/excludes
+		 * @see mshop/order/manager/base/service/decorators/global
+		 */
+
+		return $this->getSubManagerBase( 'order', 'base/service/' . $manager, $name );
+	}
+
+
+	/**
 	 * Adds or updates an order base service item to the storage.
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Order base service object
@@ -488,63 +715,6 @@ class Standard
 
 
 	/**
-	 * Removes multiple items specified by ids in the array.
-	 *
-	 * @param array $ids List of IDs
-	 */
-	public function deleteItems( array $ids )
-	{
-		/** mshop/order/manager/base/service/standard/delete/mysql
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * @see mshop/order/manager/base/service/standard/delete/ansi
-		 */
-
-		/** mshop/order/manager/base/service/standard/delete/ansi
-		 * Deletes the items matched by the given IDs from the database
-		 *
-		 * Removes the records specified by the given IDs from the order database.
-		 * The records must be from the site that is configured via the
-		 * context item.
-		 *
-		 * The ":cond" placeholder is replaced by the name of the ID column and
-		 * the given ID or list of IDs while the site ID is bound to the question
-		 * mark.
-		 *
-		 * The SQL statement should conform to the ANSI standard to be
-		 * compatible with most relational database systems. This also
-		 * includes using double quotes for table and column names.
-		 *
-		 * @param string SQL statement for deleting items
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/order/manager/base/service/standard/insert/ansi
-		 * @see mshop/order/manager/base/service/standard/update/ansi
-		 * @see mshop/order/manager/base/service/standard/newid/ansi
-		 * @see mshop/order/manager/base/service/standard/search/ansi
-		 * @see mshop/order/manager/base/service/standard/count/ansi
-		 */
-		$path = 'mshop/order/manager/base/service/standard/delete';
-		$this->deleteItemsBase( $ids, $path );
-	}
-
-
-	/**
-	 * Returns the order service item object for the given ID.
-	 *
-	 * @param integer $id Order service ID
-	 * @param string[] $ref List of domains to fetch list items and referenced items for
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Returns order base service item of the given id
-	 * @throws \Aimeos\MShop\Exception If item couldn't be found
-	 */
-	public function getItem( $id, array $ref = [], $default = false )
-	{
-		return $this->getItemBase( 'order.base.service.id', $id, $ref, $default );
-	}
-
-
-	/**
 	 * Searches for order service items based on the given criteria.
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria object
@@ -726,173 +896,6 @@ class Standard
 		}
 
 		return $result;
-	}
-
-
-	/**
-	 * Returns the available manager types
-	 *
-	 * @param boolean $withsub Return also the resource type of sub-managers if true
-	 * @return array Type of the manager and submanagers, subtypes are separated by slashes
-	 */
-	public function getResourceType( $withsub = true )
-	{
-		$path = 'mshop/order/manager/base/service/submanagers';
-
-		return $this->getResourceTypeBase( 'order/base/service', $path, array( 'attribute' ), $withsub );
-	}
-
-
-	/**
-	 * Returns the search attributes that can be used for searching.
-	 *
-	 * @param boolean $withsub Return also attributes of sub-managers if true
-	 * @return array List of attributes implementing \Aimeos\MW\Criteria\Attribute\Iface
-	 */
-	public function getSearchAttributes( $withsub = true )
-	{
-		/** mshop/order/manager/base/service/submanagers
-		 * List of manager names that can be instantiated by the order base service manager
-		 *
-		 * Managers provide a generic interface to the underlying storage.
-		 * Each manager has or can have sub-managers caring about particular
-		 * aspects. Each of these sub-managers can be instantiated by its
-		 * parent manager using the getSubManager() method.
-		 *
-		 * The search keys from sub-managers can be normally used in the
-		 * manager as well. It allows you to search for items of the manager
-		 * using the search keys of the sub-managers to further limit the
-		 * retrieved list of items.
-		 *
-		 * @param array List of sub-manager names
-		 * @since 2014.03
-		 * @category Developer
-		 */
-		$path = 'mshop/order/manager/base/service/submanagers';
-
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'attribute' ), $withsub );
-	}
-
-
-	/**
-	 * Returns a new manager for order service extensions.
-	 *
-	 * @param string $manager Name of the sub manager type in lower case
-	 * @param string|null $name Name of the implementation (from configuration or "Standard" if null)
-	 * @return \Aimeos\MShop\Common\Manager\Iface Manager for different extensions, e.g attribute
-	 */
-	public function getSubManager( $manager, $name = null )
-	{
-		/** mshop/order/manager/base/service/name
-		 * Class name of the used order base service manager implementation
-		 *
-		 * Each default order base service manager can be replaced by an alternative imlementation.
-		 * To use this implementation, you have to set the last part of the class
-		 * name as configuration value so the manager factory knows which class it
-		 * has to instantiate.
-		 *
-		 * For example, if the name of the default class is
-		 *
-		 *  \Aimeos\MShop\Order\Manager\Base\Service\Standard
-		 *
-		 * and you want to replace it with your own version named
-		 *
-		 *  \Aimeos\MShop\Order\Manager\Base\Service\Myservice
-		 *
-		 * then you have to set the this configuration option:
-		 *
-		 *  mshop/order/manager/base/service/name = Myservice
-		 *
-		 * The value is the last part of your own class name and it's case sensitive,
-		 * so take care that the configuration value is exactly named like the last
-		 * part of the class name.
-		 *
-		 * The allowed characters of the class name are A-Z, a-z and 0-9. No other
-		 * characters are possible! You should always start the last part of the class
-		 * name with an upper case character and continue only with lower case characters
-		 * or numbers. Avoid chamel case names like "MyService"!
-		 *
-		 * @param string Last part of the class name
-		 * @since 2014.03
-		 * @category Developer
-		 */
-
-		/** mshop/order/manager/base/service/decorators/excludes
-		 * Excludes decorators added by the "common" option from the order base service manager
-		 *
-		 * Decorators extend the functionality of a class by adding new aspects
-		 * (e.g. log what is currently done), executing the methods of the underlying
-		 * class only in certain conditions (e.g. only for logged in users) or
-		 * modify what is returned to the caller.
-		 *
-		 * This option allows you to remove a decorator added via
-		 * "mshop/common/manager/decorators/default" before they are wrapped
-		 * around the order base service manager.
-		 *
-		 *  mshop/order/manager/base/service/decorators/excludes = array( 'decorator1' )
-		 *
-		 * This would remove the decorator named "decorator1" from the list of
-		 * common decorators ("\Aimeos\MShop\Common\Manager\Decorator\*") added via
-		 * "mshop/common/manager/decorators/default" for the order base service manager.
-		 *
-		 * @param array List of decorator names
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/order/manager/base/service/decorators/global
-		 * @see mshop/order/manager/base/service/decorators/local
-		 */
-
-		/** mshop/order/manager/base/service/decorators/global
-		 * Adds a list of globally available decorators only to the order base service manager
-		 *
-		 * Decorators extend the functionality of a class by adding new aspects
-		 * (e.g. log what is currently done), executing the methods of the underlying
-		 * class only in certain conditions (e.g. only for logged in users) or
-		 * modify what is returned to the caller.
-		 *
-		 * This option allows you to wrap global decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base service manager.
-		 *
-		 *  mshop/order/manager/base/service/decorators/global = array( 'decorator1' )
-		 *
-		 * This would add the decorator named "decorator1" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the order controller.
-		 *
-		 * @param array List of decorator names
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/order/manager/base/service/decorators/excludes
-		 * @see mshop/order/manager/base/service/decorators/local
-		 */
-
-		/** mshop/order/manager/base/service/decorators/local
-		 * Adds a list of local decorators only to the order base service manager
-		 *
-		 * Decorators extend the functionality of a class by adding new aspects
-		 * (e.g. log what is currently done), executing the methods of the underlying
-		 * class only in certain conditions (e.g. only for logged in users) or
-		 * modify what is returned to the caller.
-		 *
-		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Common\Manager\Decorator\*") around the order base service manager.
-		 *
-		 *  mshop/order/manager/base/service/decorators/local = array( 'decorator2' )
-		 *
-		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator2" only to the order
-		 * controller.
-		 *
-		 * @param array List of decorator names
-		 * @since 2014.03
-		 * @category Developer
-		 * @see mshop/common/manager/decorators/default
-		 * @see mshop/order/manager/base/service/decorators/excludes
-		 * @see mshop/order/manager/base/service/decorators/global
-		 */
-
-		return $this->getSubManagerBase( 'order', 'base/service/' . $manager, $name );
 	}
 
 
