@@ -66,13 +66,14 @@ class CustomerAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	 * Adds the customer property test data.
 	 *
 	 * @param array $testdata Associative list of key/list pairs
+	 * @param string $type Manager type string
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	private function addCustomerPropertyData( array $testdata )
+	protected function addCustomerPropertyData( array $testdata, $type = 'Standard' )
 	{
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$customerPropertyManager = $customerManager->getSubManager( 'property', 'Standard' );
-		$customerPropertyTypeManager = $customerPropertyManager->getSubManager( 'type', 'Standard' );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional, $type );
+		$customerPropertyManager = $customerManager->getSubManager( 'property', $type );
+		$customerPropertyTypeManager = $customerPropertyManager->getSubManager( 'type', $type );
 
 		$typeIds = [];
 		$type = $customerPropertyTypeManager->createItem();
