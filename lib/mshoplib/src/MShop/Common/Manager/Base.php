@@ -504,7 +504,7 @@ abstract class Base
 		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
 
 		$subpath = $this->createSubNames( $managerpath );
-		$classprefix = 'MShop_' . ucfirst( $domain ) . '_Manager_' . $subpath . '_Decorator_';
+		$classprefix = 'MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $subpath . '\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
 
 		return $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
