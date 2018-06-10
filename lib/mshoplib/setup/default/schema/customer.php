@@ -183,5 +183,55 @@ return array(
 
 			return $schema;
 		},
+
+		'mshop_customer_property_type' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+
+			$table = $schema->createTable( 'mshop_customer_property_type' );
+
+			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'status', 'smallint', [] );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+
+			$table->setPrimaryKey( array( 'id' ), 'pk_mcusprty_id' );
+			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mcusprty_sid_dom_code' );
+			$table->addIndex( array( 'siteid', 'status' ), 'idx_mcusprty_sid_status' );
+			$table->addIndex( array( 'siteid', 'label' ), 'idx_mcusprty_sid_label' );
+			$table->addIndex( array( 'siteid', 'code' ), 'idx_mcusprty_sid_code' );
+
+			return $schema;
+		},
+
+		'mshop_customer_property' => function ( \Doctrine\DBAL\Schema\Schema $schema ) {
+
+			$table = $schema->createTable( 'mshop_customer_property' );
+
+			$table->addColumn( 'id', 'integer', array( 'autoincrement' => true ) );
+			$table->addColumn( 'siteid', 'integer', [] );
+			$table->addColumn( 'parentid', 'integer', [] );
+			$table->addColumn( 'typeid', 'integer', [] );
+			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false ) );
+			$table->addColumn( 'value', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'mtime', 'datetime', [] );
+			$table->addColumn( 'ctime', 'datetime', [] );
+			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
+
+			$table->setPrimaryKey( array( 'id' ), 'pk_mcuspr_id' );
+			$table->addUniqueIndex( array( 'parentid', 'siteid', 'typeid', 'langid', 'value' ), 'unq_mcuspr_sid_tid_lid_value' );
+			$table->addIndex( array( 'siteid', 'langid' ), 'idx_mcuspr_sid_langid' );
+			$table->addIndex( array( 'siteid', 'value' ), 'idx_mcuspr_sid_value' );
+			$table->addIndex( array( 'typeid' ), 'fk_mcuspr_typeid' );
+			$table->addIndex( array( 'parentid' ), 'fk_mcuspr_pid' );
+
+			$table->addForeignKeyConstraint( 'mshop_customer', array( 'parentid' ), array( 'id' ),
+					array( 'onUpdate' => 'CASCADE', 'onDelete' => 'CASCADE' ), 'fk_mcuspr_pid' );
+
+			return $schema;
+		},
 	),
 );

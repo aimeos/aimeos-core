@@ -330,6 +330,138 @@ return array(
 				),
 			),
 		),
+		'property' => array(
+			'type' => array(
+				'standard' => array(
+					'delete' => array(
+						'ansi' => '
+							DELETE FROM "mshop_customer_property_type"
+							WHERE :cond AND siteid = ?
+						'
+					),
+					'insert' => array(
+						'ansi' => '
+							INSERT INTO "mshop_customer_property_type" (
+								"code", "domain", "label", "status",
+								"mtime", "editor", "siteid", "ctime"
+							) VALUES (
+								?, ?, ?, ?, ?, ?, ?, ?
+							)
+						'
+					),
+					'update' => array(
+						'ansi' => '
+							UPDATE "mshop_customer_property_type"
+							SET "code" = ?, "domain" = ?, "label" = ?,
+								"status" = ?, "mtime" = ?, "editor" = ?
+							WHERE "siteid" = ? AND "id" = ?
+						'
+					),
+					'search' => array(
+						'ansi' => '
+							SELECT mcusprty."id" AS "customer.property.type.id", mcusprty."siteid" AS "customer.property.type.siteid",
+								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
+								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
+								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
+								mcusprty."ctime" AS "customer.property.type.ctime"
+							FROM "mshop_customer_property_type" mcusprty
+							:joins
+							WHERE :cond
+							GROUP BY mcusprty."id", mcusprty."siteid", mcusprty."code", mcusprty."domain",
+								mcusprty."label", mcusprty."status", mcusprty."mtime", mcusprty."editor",
+								mcusprty."ctime" /*-columns*/ , :columns /*columns-*/
+							/*-orderby*/ ORDER BY :order /*orderby-*/
+							LIMIT :size OFFSET :start
+						'
+					),
+					'count' => array(
+						'ansi' => '
+							SELECT COUNT(*) AS "count"
+							FROM (
+								SELECT DISTINCT mcusprty."id"
+								FROM "mshop_customer_property_type" mcusprty
+								:joins
+								WHERE :cond
+								LIMIT 10000 OFFSET 0
+							) AS list
+						'
+					),
+					'newid' => array(
+						'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+						'mysql' => 'SELECT LAST_INSERT_ID()',
+						'oracle' => 'SELECT mshop_customer_property_type_seq.CURRVAL FROM DUAL',
+						'pgsql' => 'SELECT lastval()',
+						'sqlite' => 'SELECT last_insert_rowid()',
+						'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+						'sqlanywhere' => 'SELECT @@IDENTITY',
+					),
+				),
+			),
+			'standard' => array(
+				'delete' => array(
+					'ansi' => '
+						DELETE FROM "mshop_customer_property"
+						WHERE :cond AND siteid = ?
+					'
+				),
+				'insert' => array(
+					'ansi' => '
+						INSERT INTO "mshop_customer_property" (
+							"parentid", "typeid", "langid", "value",
+							"mtime", "editor", "siteid", "ctime"
+						) VALUES (
+							?, ?, ?, ?, ?, ?, ?, ?
+						)
+					'
+				),
+				'update' => array(
+					'ansi' => '
+						UPDATE "mshop_customer_property"
+						SET "parentid" = ?, "typeid" = ?, "langid" = ?,
+							"value" = ?, "mtime" = ?, "editor" = ?
+						WHERE "siteid" = ? AND "id" = ?
+					'
+				),
+				'search' => array(
+					'ansi' => '
+						SELECT mcuspr."id" AS "customer.property.id", mcuspr."parentid" AS "customer.property.parentid",
+							mcuspr."siteid" AS "customer.property.siteid", mcuspr."typeid" AS "customer.property.typeid",
+							mcuspr."langid" AS "customer.property.languageid", mcuspr."value" AS "customer.property.value",
+							mcuspr."mtime" AS "customer.property.mtime", mcuspr."editor" AS "customer.property.editor",
+							mcuspr."ctime" AS "customer.property.ctime"
+						FROM "mshop_customer_property" AS mcuspr
+						:joins
+						WHERE :cond
+						GROUP BY mcuspr."id", mcuspr."parentid", mcuspr."siteid", mcuspr."typeid",
+							mcuspr."langid", mcuspr."value", mcuspr."mtime", mcuspr."editor",
+							mcuspr."ctime" /*-columns*/ , :columns /*columns-*/
+						/*-orderby*/ ORDER BY :order /*orderby-*/
+						LIMIT :size OFFSET :start
+					'
+				),
+				'count' => array(
+					'ansi' => '
+						SELECT COUNT(*) AS "count"
+						FROM (
+							SELECT DISTINCT mcuspr."id"
+							FROM "mshop_customer_property" AS mcuspr
+							:joins
+							WHERE :cond
+							LIMIT 10000 OFFSET 0
+						) AS list
+					'
+				),
+				'newid' => array(
+					'db2' => 'SELECT IDENTITY_VAL_LOCAL()',
+					'mysql' => 'SELECT LAST_INSERT_ID()',
+					'oracle' => 'SELECT mshop_customer_property_seq.CURRVAL FROM DUAL',
+					'pgsql' => 'SELECT lastval()',
+					'sqlite' => 'SELECT last_insert_rowid()',
+					'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
+					'sqlanywhere' => 'SELECT @@IDENTITY',
+				),
+			),
+		),
 		'standard' => array(
 			'delete' => array(
 				'ansi' => '
