@@ -160,7 +160,7 @@ class Standard
 		 * retrieved list of items.
 		 *
 		 * @param array List of sub-manager names
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 */
 		$path = 'mshop/customer/manager/property/submanagers';
@@ -209,7 +209,7 @@ class Standard
 		 * or numbers. Avoid chamel case names like "MyProperty"!
 		 *
 		 * @param string Last part of the class name
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 */
 
@@ -232,7 +232,7 @@ class Standard
 		 * "mshop/common/manager/decorators/default" for the customer property manager.
 		 *
 		 * @param array List of decorator names
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/customer/manager/property/decorators/global
@@ -256,7 +256,7 @@ class Standard
 		 * "\Aimeos\MShop\Common\Manager\Decorator\Decorator1" only to the customer controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/customer/manager/property/decorators/excludes
@@ -281,7 +281,7 @@ class Standard
 		 * controller.
 		 *
 		 * @param array List of decorator names
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/common/manager/decorators/default
 		 * @see mshop/customer/manager/property/decorators/excludes
@@ -326,7 +326,7 @@ class Standard
 		 * includes using double quotes for table and column names.
 		 *
 		 * @param string SQL statement for inserting records
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/customer/manager/property/standard/update/ansi
 		 * @see mshop/customer/manager/property/standard/newid/ansi
@@ -359,7 +359,7 @@ class Standard
 		 * includes using double quotes for table and column names.
 		 *
 		 * @param string SQL statement for updating records
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/customer/manager/property/standard/insert/ansi
 		 * @see mshop/customer/manager/property/standard/newid/ansi
@@ -396,7 +396,7 @@ class Standard
 		 * specific way.
 		 *
 		 * @param string SQL statement for retrieving the last inserted record ID
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/customer/manager/property/standard/insert/ansi
 		 * @see mshop/customer/manager/property/standard/update/ansi
@@ -427,7 +427,7 @@ class Standard
 		 * includes using double quotes for table and column names.
 		 *
 		 * @param string SQL statement for deleting items
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/customer/manager/property/standard/insert/ansi
 		 * @see mshop/customer/manager/property/standard/update/ansi
@@ -485,7 +485,7 @@ class Standard
 		 * includes using double quotes for table and column names.
 		 *
 		 * @param string SQL statement for searching items
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/customer/manager/property/standard/insert/ansi
 		 * @see mshop/customer/manager/property/standard/update/ansi
@@ -537,7 +537,7 @@ class Standard
 		 * includes using double quotes for table and column names.
 		 *
 		 * @param string SQL statement for counting items
-		 * @since 2015.01
+		 * @since 2018.07
 		 * @category Developer
 		 * @see mshop/customer/manager/property/standard/insert/ansi
 		 * @see mshop/customer/manager/property/standard/update/ansi
