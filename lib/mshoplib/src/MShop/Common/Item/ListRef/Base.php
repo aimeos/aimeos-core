@@ -76,6 +76,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
+	 * @throws \Aimeos\MShop\Exception If given list item isn't found
 	 */
 	public function deleteRefItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
 	{
