@@ -116,7 +116,7 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, [] ) as $domain ) {
+		foreach( $this->getContext()->getConfig()->get( $path, ['type'] ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
