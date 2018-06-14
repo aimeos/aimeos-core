@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Miro Sertić <miro.sertic0606@gmail.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: aimeos-core\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-08 18:06+0200\n"
+"PO-Revision-Date: 2018-06-09 23:37+0000\n"
+"Last-Translator: Miro Sertić <miro.sertic0606@gmail.com>\n"
+"Language-Team: Croatian (http://www.transifex.com/aimeos/aimeos-core/language/hr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#, php-format
+msgid "Class \"%1$s\" does not implement interface \"%2$s\""
+msgstr "Klasa \"%1$s\" ne implementira sučelje \"%2$s\""
+
+#, php-format
+msgid "Class \"%1$s\" not available"
+msgstr "Klasa \"%1$s\" nije dostupna"
+
+#, php-format
+msgid "Class \"%1$s\" not found"
+msgstr "Klasa \"%1$s\" nije pronađjena"
+
+#, php-format
+msgid "Controller path is empty"
+msgstr "Putanja kontolera je prazna"
+
+#, php-format
+msgid "Invalid characters in class name \"%1$s\""
+msgstr "Nedozvoljen simbol u imenu klase \"%1$s\""
+
+#, php-format
+msgid "Invalid controller \"%1$s\" in \"%2$s\""
+msgstr "Neispravni kontroler \"%1$s\" u \"%2$s\""
+
+#, php-format
+msgid "Invalid domain \"%1$s\""
+msgstr "Neispravna domena \"%1$s\""
+
+#, php-format
+msgid "Invalid factory \"%1$s\""
+msgstr "Pogrešan factory \"%1$s\""
+
+#, php-format
+msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
+msgstr ""
+
+#, php-format
+msgid "Unable to call method \"%1$s\""
+msgstr "Nemožemo pozvati metodu \"%1$s\""
