@@ -62,11 +62,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCode()
 	{
-		$return = $this->object->setCode( 'code' );
+		$return = $this->object->setCode( 'code2' );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Type\Iface', $return );
-		$this->assertEquals( 'code', $this->object->getCode() );
-		$this->assertFalse( $this->object->isModified() );
+		$this->assertEquals( 'code2', $this->object->getCode() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetDomain()
@@ -76,11 +76,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetDomain()
 	{
-		$return = $this->object->setDomain( 'domain' );
+		$return = $this->object->setDomain( 'domain2' );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Type\Iface', $return );
-		$this->assertEquals( 'domain', $this->object->getDomain() );
-		$this->assertFalse( $this->object->isModified() );
+		$this->assertEquals( 'domain2', $this->object->getDomain() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetName()
@@ -95,11 +95,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLabel()
 	{
-		$return = $this->object->setLabel( 'label' );
+		$return = $this->object->setLabel( 'label2' );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Type\Iface', $return );
-		$this->assertEquals( 'label', $this->object->getLabel() );
-		$this->assertFalse( $this->object->isModified() );
+		$this->assertEquals( 'label2', $this->object->getLabel() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetPosition()
@@ -123,11 +123,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetStatus()
 	{
-		$return = $this->object->setStatus( 1 );
+		$return = $this->object->setStatus( 0 );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Type\Iface', $return );
-		$this->assertEquals( 1, $this->object->getStatus() );
-		$this->assertFalse( $this->object->isModified() );
+		$this->assertEquals( 0, $this->object->getStatus() );
+		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testGetSiteId()
