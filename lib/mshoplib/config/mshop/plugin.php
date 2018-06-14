@@ -26,17 +26,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_plugin_type" (
-							"code", "domain", "label", "status",
+							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_plugin_type"
-						SET "code" = ?, "domain" = ?, "label" = ?,
+						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -47,13 +47,13 @@ return array(
 							mpluty."code" AS "plugin.type.code", mpluty."domain" AS "plugin.type.domain",
 							mpluty."label" AS "plugin.type.label", mpluty."status" AS "plugin.type.status",
 							mpluty."mtime" AS "plugin.type.mtime", mpluty."editor" AS "plugin.type.editor",
-							mpluty."ctime" AS "plugin.type.ctime"
+							mpluty."ctime" AS "plugin.type.ctime", mpluty."pos" AS "plugin.type.position"
 						FROM "mshop_plugin_type" mpluty
 						:joins
 						WHERE :cond
 						GROUP BY mpluty."id", mpluty."siteid", mpluty."code", mpluty."domain",
 							mpluty."label", mpluty."status", mpluty."mtime", mpluty."editor",
-							mpluty."ctime" /*-columns*/ , :columns /*columns-*/
+							mpluty."ctime", mpluty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'

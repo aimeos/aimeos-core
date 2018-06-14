@@ -69,12 +69,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'service.type.code', 'delivery' );
 		$expr[] = $search->compare( '==', 'service.type.domain', 'service' );
 		$expr[] = $search->compare( '==', 'service.type.label', 'Delivery' );
+		$expr[] = $search->compare( '>=', 'service.type.position', 0 );
 		$expr[] = $search->compare( '==', 'service.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'service.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'service.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'service.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( [$search->sort( '-', 'service.type.position' )] );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 

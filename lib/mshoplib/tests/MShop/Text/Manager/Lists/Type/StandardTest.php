@@ -139,6 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'text.lists.type.code', 'align-top' );
 		$expr[] = $search->compare( '==', 'text.lists.type.domain', 'media' );
 		$expr[] = $search->compare( '>', 'text.lists.type.label', '' );
+		$expr[] = $search->compare( '>=', 'text.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'text.lists.type.status', 1 );
 		$expr[] = $search->compare( '==', 'text.lists.type.editor', $this->editor );
 
@@ -154,6 +155,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'text.lists.type.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'text.lists.type.position' )] );
 		$search->setSlice( 0, 1 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );

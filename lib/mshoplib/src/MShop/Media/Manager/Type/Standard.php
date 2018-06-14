@@ -60,6 +60,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'media.type.position' => array(
+			'label' => 'Type position',
+			'code' => 'media.type.position',
+			'internalcode' => 'mmedty."pos"',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'media.type.status' => array(
 			'label' => 'Type status',
 			'code' => 'media.type.status',

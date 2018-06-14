@@ -136,12 +136,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.lists.type.domain', 'product' );
 		$expr[] = $search->compare( '==', 'product.lists.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'product.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '>=', 'product.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'product.lists.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'product.lists.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'product.lists.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.lists.type.editor', $this->editor );
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( [$search->sort( '-', 'product.lists.type.position' )] );
 		$search->setSlice( 0, 1 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );

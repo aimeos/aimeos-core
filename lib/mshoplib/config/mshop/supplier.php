@@ -107,17 +107,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_supplier_list_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_supplier_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -128,13 +128,13 @@ return array(
 								msuplity."code" AS "supplier.lists.type.code", msuplity."domain" AS "supplier.lists.type.domain",
 								msuplity."label" AS "supplier.lists.type.label", msuplity."status" AS "supplier.lists.type.status",
 								msuplity."mtime" AS "supplier.lists.type.mtime", msuplity."editor" AS "supplier.lists.type.editor",
-								msuplity."ctime" AS "supplier.lists.type.ctime"
+								msuplity."ctime" AS "supplier.lists.type.ctime", msuplity."pos" AS "supplier.lists.type.position"
 							FROM "mshop_supplier_list_type" AS msuplity
 							:joins
 							WHERE :cond
 							GROUP BY msuplity."id", msuplity."siteid", msuplity."code", msuplity."domain",
 								msuplity."label", msuplity."status", msuplity."mtime", msuplity."editor",
-								msuplity."ctime" /*-columns*/ , :columns /*columns-*/
+								msuplity."ctime", msuplity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'

@@ -20,17 +20,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_product_list_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_product_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -41,13 +41,13 @@ return array(
 								mprolity."code" AS "product.lists.type.code", mprolity."domain" AS "product.lists.type.domain",
 								mprolity."label" AS "product.lists.type.label", mprolity."status" AS "product.lists.type.status",
 								mprolity."mtime" AS "product.lists.type.mtime", mprolity."editor" AS "product.lists.type.editor",
-								mprolity."ctime" AS "product.lists.type.ctime"
+								mprolity."ctime" AS "product.lists.type.ctime", mprolity."pos" AS "product.lists.type.position"
 							FROM "mshop_product_list_type" AS mprolity
 							:joins
 							WHERE :cond
 							GROUP BY mprolity."id", mprolity."siteid", mprolity."code", mprolity."domain",
 								mprolity."label", mprolity."status", mprolity."mtime", mprolity."editor",
-								mprolity."ctime" /*-columns*/ , :columns /*columns-*/
+								mprolity."ctime", mprolity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -192,17 +192,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_product_property_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_product_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -213,13 +213,13 @@ return array(
 								mproprty."code" AS "product.property.type.code", mproprty."domain" AS "product.property.type.domain",
 								mproprty."label" AS "product.property.type.label", mproprty."status" AS "product.property.type.status",
 								mproprty."mtime" AS "product.property.type.mtime", mproprty."editor" AS "product.property.type.editor",
-								mproprty."ctime" AS "product.property.type.ctime"
+								mproprty."ctime" AS "product.property.type.ctime", mproprty."pos" AS "product.property.type.position"
 							FROM "mshop_product_property_type" mproprty
 							:joins
 							WHERE :cond
 							GROUP BY mproprty."id", mproprty."siteid", mproprty."code", mproprty."domain",
 								mproprty."label", mproprty."status", mproprty."mtime", mproprty."editor",
-								mproprty."ctime" /*-columns*/ , :columns /*columns-*/
+								mproprty."ctime", mproprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -323,17 +323,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_product_type" (
-							"code", "domain", "label", "status",
+							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_product_type"
-						SET "code" = ?, "domain" = ?, "label" = ?,
+						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -344,7 +344,7 @@ return array(
 							mproty."code" AS "product.type.code", mproty."domain" AS "product.type.domain",
 							mproty."label" AS "product.type.label", mproty."status" AS "product.type.status",
 							mproty."mtime" AS "product.type.mtime", mproty."editor" AS "product.type.editor",
-							mproty."ctime" AS "product.type.ctime"
+							mproty."ctime" AS "product.type.ctime", mproty."pos" AS "product.type.position"
 						FROM "mshop_product_type" AS mproty
 						:joins
 						WHERE :cond

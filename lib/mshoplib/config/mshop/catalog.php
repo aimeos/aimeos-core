@@ -20,17 +20,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_catalog_list_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_catalog_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -41,13 +41,13 @@ return array(
 								mcatlity."code" AS "catalog.lists.type.code", mcatlity."domain" AS "catalog.lists.type.domain",
 								mcatlity."label" AS "catalog.lists.type.label", mcatlity."mtime" AS "catalog.lists.type.mtime",
 								mcatlity."editor" AS "catalog.lists.type.editor", mcatlity."ctime" AS "catalog.lists.type.ctime",
-								mcatlity."status" AS "catalog.lists.type.status"
+								mcatlity."status" AS "catalog.lists.type.status", mcatlity."pos" AS "catalog.lists.type.position"
 							FROM "mshop_catalog_list_type" AS mcatlity
 							:joins
 							WHERE :cond
 							GROUP BY mcatlity."id", mcatlity."siteid", mcatlity."code", mcatlity."domain",
 								mcatlity."label", mcatlity."mtime", mcatlity."editor", mcatlity."ctime",
-								mcatlity."status" /*-columns*/ , :columns /*columns-*/
+								mcatlity."status", mcatlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'

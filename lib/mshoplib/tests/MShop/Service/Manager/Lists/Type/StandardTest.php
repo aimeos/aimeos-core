@@ -133,19 +133,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->createSearch();
 
-		$conditions = array(
-			$search->compare( '!=', 'service.lists.type.id', null ),
-			$search->compare( '!=', 'service.lists.type.siteid', null ),
-			$search->compare( '==', 'service.lists.type.code', 'unittype1' ),
-			$search->compare( '==', 'service.lists.type.domain', 'text' ),
-			$search->compare( '>', 'service.lists.type.label', '' ),
-			$search->compare( '==', 'service.lists.type.status', 1 ),
-			$search->compare( '>=', 'service.lists.type.mtime', '1970-01-01 00:00:00' ),
-			$search->compare( '>=', 'service.lists.type.ctime', '1970-01-01 00:00:00' ),
-			$search->compare( '==', 'service.lists.type.editor', $this->editor ),
-		);
+		$expr = [];
+		$expr[] = $search->compare( '!=', 'service.lists.type.id', null );
+		$expr[] = $search->compare( '!=', 'service.lists.type.siteid', null );
+		$expr[] = $search->compare( '==', 'service.lists.type.code', 'unittype1' );
+		$expr[] = $search->compare( '==', 'service.lists.type.domain', 'text' );
+		$expr[] = $search->compare( '>', 'service.lists.type.label', '' );
+		$expr[] = $search->compare( '>=', 'service.lists.type.position', 0 );
+		$expr[] = $search->compare( '==', 'service.lists.type.status', 1 );
+		$expr[] = $search->compare( '>=', 'service.lists.type.mtime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '>=', 'service.lists.type.ctime', '1970-01-01 00:00:00' );
+		$expr[] = $search->compare( '==', 'service.lists.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );
 
@@ -157,6 +157,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'service.lists.type.position' )] );
 		$search->setSlice( 0, 3 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 3, count( $results ) );

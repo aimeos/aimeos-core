@@ -59,6 +59,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'attribute.property.type.position' => array(
+			'code' => 'attribute.property.type.position',
+			'internalcode' => 'mattprty."pos"',
+			'label' => 'Property type position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'attribute.property.type.status' => array(
 			'code' => 'attribute.property.type.status',
 			'internalcode' => 'mattprty."status"',

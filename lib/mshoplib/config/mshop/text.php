@@ -20,17 +20,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_text_list_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_text_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -41,13 +41,13 @@ return array(
 								mtexlity."code" AS "text.lists.type.code", mtexlity."domain" AS "text.lists.type.domain",
 								mtexlity."label" AS "text.lists.type.label", mtexlity."status" AS "text.lists.type.status",
 								mtexlity."mtime" AS "text.lists.type.mtime", mtexlity."editor" AS "text.lists.type.editor",
-								mtexlity."ctime" AS "text.lists.type.ctime"
+								mtexlity."ctime" AS "text.lists.type.ctime", mtexlity."pos" AS "text.lists.type.position"
 							FROM "mshop_text_list_type" AS mtexlity
 							:joins
 							WHERE :cond
 							GROUP BY mtexlity."id", mtexlity."siteid", mtexlity."code", mtexlity."domain",
 								mtexlity."label", mtexlity."status", mtexlity."mtime", mtexlity."editor",
-								mtexlity."ctime" /*-columns*/ , :columns /*columns-*/
+								mtexlity."ctime", mtexlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -192,17 +192,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_text_type" (
-							"code", "domain", "label", "status",
+							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_text_type"
-						SET "code"=?, "domain" = ?, "label" = ?,
+						SET "code"=?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?,"mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -213,13 +213,13 @@ return array(
 							mtexty."code" AS "text.type.code", mtexty."domain" AS "text.type.domain",
 							mtexty."label" AS "text.type.label", mtexty."status" AS "text.type.status",
 							mtexty."mtime" AS "text.type.mtime", mtexty."editor" AS "text.type.editor",
-							mtexty."ctime" AS "text.type.ctime"
+							mtexty."ctime" AS "text.type.ctime", mtexty."pos" AS "text.type.position"
 						FROM "mshop_text_type" mtexty
 						:joins
 						WHERE :cond
 						GROUP BY mtexty."id", mtexty."siteid", mtexty."code", mtexty."domain",
 							mtexty."label", mtexty."status", mtexty."mtime", mtexty."editor",
-							mtexty."ctime" /*-columns*/ , :columns /*columns-*/
+							mtexty."ctime", mtexty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'

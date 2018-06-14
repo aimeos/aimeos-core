@@ -154,6 +154,38 @@ class Standard
 		return $this;
 	}
 
+	/**
+	 * Returns the position of the item in the list.
+	 *
+	 * @return integer Position of the item in the list
+	 */
+	public function getPosition()
+	{
+		if( isset( $this->values[$this->prefix . 'position'] ) ) {
+			return (int) $this->values[$this->prefix . 'position'];
+		}
+
+		return 0;
+	}
+
+
+	/**
+	 * Sets the new position of the item in the list.
+	 *
+	 * @param integer $pos position of the item in the list
+	 * @return \Aimeos\MShop\Common\Item\Iface Item for chaining method calls
+	 */
+	public function setPosition( $pos )
+	{
+		if( (int) $pos !== $this->getPosition() )
+		{
+			$this->values[$this->prefix . 'position'] = (int) $pos;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
 
 	/**
 	 * Returns the status of the common list type item
@@ -229,6 +261,7 @@ class Standard
 				case $this->prefix . 'code': $this->setCode( $value ); break;
 				case $this->prefix . 'domain': $this->setDomain( $value ); break;
 				case $this->prefix . 'label': $this->setLabel( $value ); break;
+				case $this->prefix . 'position': $this->setPosition( $value ); break;
 				case $this->prefix . 'status': $this->setStatus( $value ); break;
 				default: $unknown[$key] = $value;
 			}
@@ -252,6 +285,7 @@ class Standard
 		$list[$this->prefix . 'domain'] = $this->getDomain();
 		$list[$this->prefix . 'name'] = $this->getName();
 		$list[$this->prefix . 'label'] = $this->getLabel();
+		$list[$this->prefix . 'position'] = $this->getPosition();
 		$list[$this->prefix . 'status'] = $this->getStatus();
 
 		return $list;

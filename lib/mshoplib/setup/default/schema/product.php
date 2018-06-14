@@ -17,6 +17,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -24,7 +25,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msproty_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_msproty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msproty_sid_status' );
+			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_msproty_sid_status_pos' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msproty_sid_label' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msproty_sid_code' );
 
@@ -73,6 +74,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -80,7 +82,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msprolity_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_msprolity_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msprolity_sid_status' );
+			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_msprolity_sid_status_pos' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msprolity_sid_label' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msprolity_sid_code' );
 
@@ -134,6 +136,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -141,7 +144,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msproprty_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_msproprty_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msproprty_sid_status' );
+			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_msproprty_sid_status_pos' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msproprty_sid_label' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msproprty_sid_code' );
 

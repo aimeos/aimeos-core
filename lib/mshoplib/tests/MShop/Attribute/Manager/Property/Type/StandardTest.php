@@ -142,7 +142,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$total = 0;
 		$search = $this->object->createSearch();
 
 		$expr = [];
@@ -151,30 +150,39 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'attribute.property.type.domain', 'attribute' );
 		$expr[] = $search->compare( '==', 'attribute.property.type.code', 'size' );
 		$expr[] = $search->compare( '==', 'attribute.property.type.label', 'Size' );
+		$expr[] = $search->compare( '>=', 'attribute.property.type.position', 0 );
 		$expr[] = $search->compare( '==', 'attribute.property.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'attribute.property.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'attribute.property.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'attribute.property.type.editor', $this->editor );
 
-		$search->setConditions( $search->combine('&&', $expr) );
-		$results = $this->object->searchItems( $search, [], $total );
+		$search->setConditions( $search->combine( '&&', $expr ) );
+		$results = $this->object->searchItems( $search );
 		$this->assertEquals( 1, count( $results ) );
+	}
 
 
+	public function testSearchItemsAll()
+	{
+		$total = 0;
 		$search = $this->object->createSearch();
 		$conditions = array(
 			$search->compare( '=~', 'attribute.property.type.code', '' ),
 			$search->compare( '==', 'attribute.property.type.editor', $this->editor )
 		);
-		$search->setConditions( $search->combine('&&', $conditions ) );
-		$search->setSlice(0, 1);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'attribute.property.type.position' )] );
+		$search->setSlice( 0, 2 );
 		$items = $this->object->searchItems( $search, [], $total);
 
-		$this->assertEquals( 1, count( $items ) );
+		$this->assertEquals( 2, count( $items ) );
 		$this->assertEquals( 3, $total );
 
-		foreach($items as $itemId => $item) {
+		$pos = 2;
+		foreach( $items as $itemId => $item )
+		{
 			$this->assertEquals( $itemId, $item->getId() );
+			$this->assertEquals( $pos--, $item->getPosition() );
 		}
 	}
 

@@ -20,17 +20,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_media_list_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_media_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -41,13 +41,13 @@ return array(
 								mmedlity."code" AS "media.lists.type.code", mmedlity."domain" AS "media.lists.type.domain",
 								mmedlity."label" AS "media.lists.type.label", mmedlity."status" AS "media.lists.type.status",
 								mmedlity."mtime" AS "media.lists.type.mtime", mmedlity."editor" AS "media.lists.type.editor",
-								mmedlity."ctime" AS "media.lists.type.ctime"
+								mmedlity."ctime" AS "media.lists.type.ctime", mmedlity."pos" AS "media.lists.type.position"
 							FROM "mshop_media_list_type" AS mmedlity
 							:joins
 							WHERE :cond
 							GROUP BY mmedlity."id", mmedlity."siteid", mmedlity."code", mmedlity."domain",
 								mmedlity."label", mmedlity."status", mmedlity."mtime", mmedlity."editor",
-								mmedlity."ctime" /*-columns*/ , :columns /*columns-*/
+								mmedlity."ctime", mmedlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -193,17 +193,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_media_property_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_media_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -214,13 +214,13 @@ return array(
 								mmedprty."code" AS "media.property.type.code", mmedprty."domain" AS "media.property.type.domain",
 								mmedprty."label" AS "media.property.type.label", mmedprty."status" AS "media.property.type.status",
 								mmedprty."mtime" AS "media.property.type.mtime", mmedprty."editor" AS "media.property.type.editor",
-								mmedprty."ctime" AS "media.property.type.ctime"
+								mmedprty."ctime" AS "media.property.type.ctime", mmedprty."pos" AS "media.property.type.position"
 							FROM "mshop_media_property_type" mmedprty
 							:joins
 							WHERE :cond
 							GROUP BY mmedprty."id", mmedprty."siteid", mmedprty."code", mmedprty."domain",
 								mmedprty."label", mmedprty."status", mmedprty."mtime", mmedprty."editor",
-								mmedprty."ctime" /*-columns*/ , :columns /*columns-*/
+								mmedprty."ctime", mmedprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -324,17 +324,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_media_type" (
-							"code", "domain", "label", "status",
+							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_media_type"
-						SET "code" = ?, "domain" = ?, "label" = ?,
+						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -345,13 +345,13 @@ return array(
 							mmedty."code" AS "media.type.code", mmedty."domain" AS "media.type.domain",
 							mmedty."label" AS "media.type.label", mmedty."status" AS "media.type.status",
 							mmedty."mtime" AS "media.type.mtime", mmedty."editor" AS "media.type.editor",
-							mmedty."ctime" AS "media.type.ctime"
+							mmedty."ctime" AS "media.type.ctime", mmedty."pos" AS "media.type.position"
 						FROM "mshop_media_type" mmedty
 						:joins
 						WHERE :cond
 						GROUP BY mmedty."id", mmedty."siteid", mmedty."code", mmedty."domain",
 							mmedty."label", mmedty."status", mmedty."mtime", mmedty."editor",
-							mmedty."ctime" /*-columns*/ , :columns /*columns-*/
+							mmedty."ctime", mmedty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'

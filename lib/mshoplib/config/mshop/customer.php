@@ -169,17 +169,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_customer_list_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_customer_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -190,13 +190,13 @@ return array(
 								mcuslity."code" AS "customer.lists.type.code", mcuslity."domain" AS "customer.lists.type.domain",
 								mcuslity."label" AS "customer.lists.type.label", mcuslity."status" AS "customer.lists.type.status",
 								mcuslity."mtime" AS "customer.lists.type.mtime", mcuslity."editor" AS "customer.lists.type.editor",
-								mcuslity."ctime" AS "customer.lists.type.ctime"
+								mcuslity."ctime" AS "customer.lists.type.ctime", mcuslity."pos" AS "customer.lists.type.position"
 							FROM "mshop_customer_list_type" AS mcuslity
 							:joins
 							WHERE :cond
 							GROUP BY mcuslity."id", mcuslity."siteid", mcuslity."code", mcuslity."domain",
 								mcuslity."label", mcuslity."status", mcuslity."mtime", mcuslity."editor",
-								mcuslity."ctime" /*-columns*/ , :columns /*columns-*/
+								mcuslity."ctime", mcuslity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -342,17 +342,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_customer_property_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_customer_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -363,13 +363,13 @@ return array(
 								mcusprty."code" AS "customer.property.type.code", mcusprty."domain" AS "customer.property.type.domain",
 								mcusprty."label" AS "customer.property.type.label", mcusprty."status" AS "customer.property.type.status",
 								mcusprty."mtime" AS "customer.property.type.mtime", mcusprty."editor" AS "customer.property.type.editor",
-								mcusprty."ctime" AS "customer.property.type.ctime"
+								mcusprty."ctime" AS "customer.property.type.ctime", mcusprty."pos" AS "customer.property.type.position"
 							FROM "mshop_customer_property_type" mcusprty
 							:joins
 							WHERE :cond
 							GROUP BY mcusprty."id", mcusprty."siteid", mcusprty."code", mcusprty."domain",
 								mcusprty."label", mcusprty."status", mcusprty."mtime", mcusprty."editor",
-								mcusprty."ctime" /*-columns*/ , :columns /*columns-*/
+								mcusprty."ctime", mcusprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'

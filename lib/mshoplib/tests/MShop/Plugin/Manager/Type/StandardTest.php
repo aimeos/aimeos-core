@@ -69,6 +69,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'plugin.type.code', 'order' );
 		$expr[] = $search->compare( '==', 'plugin.type.domain', 'plugin' );
 		$expr[] = $search->compare( '==', 'plugin.type.label', 'Order' );
+		$expr[] = $search->compare( '>=', 'plugin.type.position', 0 );
 		$expr[] = $search->compare( '==', 'plugin.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'plugin.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'plugin.type.ctime', '1970-01-01 00:00:00' );
@@ -88,6 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'plugin.type.position' )] );
 		$results = $this->object->searchItems( $search );
 		$this->assertEquals( 1, count( $results ) );
 

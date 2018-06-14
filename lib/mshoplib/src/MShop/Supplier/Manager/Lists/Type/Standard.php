@@ -59,6 +59,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'supplier.lists.type.position' => array(
+			'code' => 'supplier.lists.type.position',
+			'internalcode' => 'msuplity."pos"',
+			'label' => 'List type position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'supplier.lists.type.status' => array(
 			'code' => 'supplier.lists.type.status',
 			'internalcode' => 'msuplity."status"',

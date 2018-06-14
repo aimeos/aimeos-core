@@ -60,6 +60,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'attribute.lists.type.position' => array(
+			'code' => 'attribute.lists.type.position',
+			'internalcode' => 'mattlity."pos"',
+			'label' => 'List type position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'attribute.lists.type.status' => array(
 			'code' => 'attribute.lists.type.status',
 			'internalcode' => 'mattlity."status"',

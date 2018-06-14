@@ -69,6 +69,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'text.type.code', 'long' );
 		$expr[] = $search->compare( '==', 'text.type.domain', 'catalog' );
 		$expr[] = $search->compare( '==', 'text.type.label', 'Long description' );
+		$expr[] = $search->compare( '>=', 'text.type.position', 0 );
 		$expr[] = $search->compare( '==', 'text.type.status', 1 );
 		$expr[] = $search->compare( '==', 'text.type.editor', $this->editor );
 
@@ -87,6 +88,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
+		$search->setSortations( [$search->sort( '-', 'text.type.position' )] );
 		$search->setSlice( 0, 2 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 2, count( $results ) );

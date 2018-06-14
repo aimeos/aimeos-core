@@ -86,6 +86,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$type->setCode( $dataset['code'] );
 			$type->setDomain( $dataset['domain'] );
 			$type->setLabel( $dataset['label'] );
+			$type->setPosition( $dataset['position'] );
 			$type->setStatus( $dataset['status'] );
 
 			$attributePropertyTypeManager->saveItem( $type );

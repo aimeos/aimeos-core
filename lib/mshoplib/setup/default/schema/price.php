@@ -17,6 +17,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -24,7 +25,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msprity_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_msprity_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msprity_sid_status' );
+			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_msprity_sid_status_pos' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msprity_sid_label' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msprity_sid_code' );
 
@@ -75,6 +76,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -82,7 +84,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_msprility_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_msprility_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_msprility_sid_status' );
+			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_msprility_sid_status_pos' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_msprility_sid_label' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_msprility_sid_code' );
 

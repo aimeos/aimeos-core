@@ -20,12 +20,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->values = array(
 			'common.type.id'   => 1,
+			'common.type.siteid' => 2,
 			'common.type.code' => 'code',
 			'common.type.domain' => 'domain',
 			'common.type.label' => 'label',
 			'common.type.name' => 'name',
+			'common.type.position' => 5,
 			'common.type.status' => 1,
-			'common.type.siteid' => 1,
 			'common.type.mtime' => '2011-01-01 00:00:02',
 			'common.type.ctime' => '2011-01-01 00:00:01',
 			'common.type.editor' => 'unitTestUser',
@@ -101,6 +102,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( $this->object->isModified() );
 	}
 
+	public function testGetPosition()
+	{
+		$this->assertEquals( 5, $this->object->getPosition() );
+	}
+
+	public function testSetPosition()
+	{
+		$return = $this->object->setPosition( 4 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Type\Iface', $return );
+		$this->assertEquals( 4, $this->object->getPosition() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( 1, $this->object->getStatus() );
@@ -117,7 +132,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSiteId()
 	{
-		$this->assertEquals( 1, $this->object->getSiteId() );
+		$this->assertEquals( 2, $this->object->getSiteId() );
 	}
 
 	public function testGetTimeModified()
@@ -152,6 +167,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.type.domain' => 'testDomain',
 			'common.type.label' => 'test item',
 			'common.type.name' => 'Testeintrag',
+			'common.type.position' => 2,
 			'common.type.status' => 1,
 		);
 
@@ -164,6 +180,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['common.type.domain'], $item->getDomain() );
 		$this->assertEquals( $list['common.type.label'], $item->getName() ); // fallback to label
 		$this->assertEquals( $list['common.type.label'], $item->getLabel() );
+		$this->assertEquals( $list['common.type.position'], $item->getPosition() );
 		$this->assertEquals( $list['common.type.status'], $item->getStatus() );
 		$this->assertNull( $item->getSiteId() );
 	}
@@ -179,6 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getDomain(), $arrayObject['common.type.domain'] );
 		$this->assertEquals( $this->object->getName(), $arrayObject['common.type.name'] );
 		$this->assertEquals( $this->object->getLabel(), $arrayObject['common.type.label'] );
+		$this->assertEquals( $this->object->getPosition(), $arrayObject['common.type.position'] );
 		$this->assertEquals( $this->object->getStatus(), $arrayObject['common.type.status'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['common.type.siteid'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['common.type.ctime'] );

@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Item\Type;
  */
 interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Domain\Iface,
-		\Aimeos\MShop\Common\Item\Status\Iface
+		\Aimeos\MShop\Common\Item\Position\Iface, \Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the code of the common list type item

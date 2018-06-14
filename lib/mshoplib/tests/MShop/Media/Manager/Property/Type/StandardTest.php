@@ -151,6 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.property.type.domain', 'media' );
 		$expr[] = $search->compare( '==', 'media.property.type.code', 'size' );
 		$expr[] = $search->compare( '==', 'media.property.type.label', 'Size' );
+		$expr[] = $search->compare( '>=', 'media.property.type.position', 0 );
 		$expr[] = $search->compare( '==', 'media.property.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.property.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.property.type.ctime', '1970-01-01 00:00:00' );
@@ -167,6 +168,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'media.property.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine('&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'media.property.type.position' )] );
 		$search->setSlice(0, 1);
 		$items = $this->object->searchItems( $search, [], $total);
 

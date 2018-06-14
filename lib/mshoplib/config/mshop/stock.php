@@ -19,17 +19,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_stock_type" (
-							"code", "domain", "label", "status",
+							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_stock_type"
-						SET "code" = ?, "domain" = ?, "label" = ?,
+						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -40,13 +40,13 @@ return array(
 							mstoty."code" AS "stock.type.code", mstoty."domain" AS "stock.type.domain",
 							mstoty."label" AS "stock.type.label", mstoty."status" AS "stock.type.status",
 							mstoty."mtime" AS "stock.type.mtime", mstoty."editor" AS "stock.type.editor",
-							mstoty."ctime" AS "stock.type.ctime"
+							mstoty."ctime" AS "stock.type.ctime", mstoty."pos" AS "stock.type.position"
 						FROM "mshop_stock_type" mstoty
 						:joins
 						WHERE :cond
 						GROUP BY mstoty."id", mstoty."siteid", mstoty."code", mstoty."domain",
 							mstoty."label", mstoty."status", mstoty."mtime", mstoty."editor",
-							mstoty."ctime" /*-columns*/ , :columns /*columns-*/
+							mstoty."ctime", mstoty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'

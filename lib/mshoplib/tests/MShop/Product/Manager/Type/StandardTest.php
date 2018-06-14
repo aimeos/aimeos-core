@@ -149,6 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.type.domain', 'product' );
 		$expr[] = $search->compare( '==', 'product.type.code', 'select' );
 		$expr[] = $search->compare( '==', 'product.type.label', 'Selection' );
+		$expr[] = $search->compare( '>=', 'product.type.position', 0 );
 		$expr[] = $search->compare( '==', 'product.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'product.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'product.type.ctime', '1970-01-01 00:00:00' );
@@ -165,6 +166,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'product.type.position' )] );
 		$search->setSlice( 0, 2 );
 		$items = $this->object->searchItems( $search, [], $total );
 

@@ -20,17 +20,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_price_list_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_price_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -41,13 +41,13 @@ return array(
 								mprility."code" AS "price.lists.type.code", mprility."domain" AS "price.lists.type.domain",
 								mprility."label" AS "price.lists.type.label", mprility."status" AS "price.lists.type.status",
 								mprility."mtime" AS "price.lists.type.mtime", mprility."editor" AS "price.lists.type.editor",
-								mprility."ctime" AS "price.lists.type.ctime"
+								mprility."ctime" AS "price.lists.type.ctime", mprility."pos" AS "price.lists.type.position"
 							FROM "mshop_price_list_type" AS mprility
 							:joins
 							WHERE :cond
 							GROUP BY mprility."id", mprility."siteid", mprility."code", mprility."domain",
 								mprility."label", mprility."status", mprility."mtime", mprility."editor",
-								mprility."ctime" /*-columns*/ , :columns /*columns-*/
+								mprility."ctime", mprility."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -192,17 +192,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_price_type" (
-							"code", "domain", "label", "status",
+							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_price_type"
-						SET "code" = ?, "domain" = ?, "label" = ?,
+						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -213,13 +213,13 @@ return array(
 							mprity."code" AS "price.type.code", mprity."domain" AS "price.type.domain",
 							mprity."label" AS "price.type.label", mprity."status" AS "price.type.status",
 							mprity."mtime" AS "price.type.mtime", mprity."editor" AS "price.type.editor",
-							mprity."ctime" AS "price.type.ctime"
+							mprity."ctime" AS "price.type.ctime", mprity."pos" AS "price.type.position"
 						FROM "mshop_price_type" AS mprity
 						:joins
 						WHERE :cond
 						GROUP BY mprity."id", mprity."siteid", mprity."code", mprity."domain",
 							mprity."label", mprity."status", mprity."mtime", mprity."editor",
-							mprity."ctime" /*-columns*/ , :columns /*columns-*/
+							mprity."ctime", mprity."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'

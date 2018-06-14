@@ -139,6 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.lists.type.code', 'option' );
 		$expr[] = $search->compare( '==', 'media.lists.type.domain', 'attribute' );
 		$expr[] = $search->compare( '>', 'media.lists.type.label', '' );
+		$expr[] = $search->compare( '>=', 'media.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'media.lists.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.lists.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.lists.type.ctime', '1970-01-01 00:00:00' );
@@ -158,6 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'media.lists.type.position' )] );
 		$search->setSlice( 0, 7 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 7, count( $results ) );

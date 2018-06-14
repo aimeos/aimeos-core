@@ -20,17 +20,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_attribute_list_type"(
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime","editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_attribute_list_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -41,13 +41,13 @@ return array(
 								mattlity."code" AS "attribute.lists.type.code", mattlity."domain" AS "attribute.lists.type.domain",
 								mattlity."label" AS "attribute.lists.type.label", mattlity."status" AS "attribute.lists.type.status",
 								mattlity."mtime" AS "attribute.lists.type.mtime", mattlity."ctime" AS "attribute.lists.type.ctime",
-								mattlity."editor" AS "attribute.lists.type.editor"
+								mattlity."editor" AS "attribute.lists.type.editor", mattlity."pos" AS "attribute.lists.type.position"
 							FROM "mshop_attribute_list_type" AS mattlity
 							:joins
 							WHERE :cond
 							GROUP BY mattlity."id", mattlity."siteid", mattlity."code", mattlity."domain",
 								mattlity."label", mattlity."status", mattlity."mtime", mattlity."ctime",
-								mattlity."editor" /*-columns*/ , :columns /*columns-*/
+								mattlity."editor", mattlity."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -193,17 +193,17 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_attribute_property_type" (
-								"code", "domain", "label", "status",
+								"code", "domain", "label", "pos", "status",
 								"mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_attribute_property_type"
-							SET "code" = ?, "domain" = ?, "label" = ?,
+							SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 								"status" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -214,13 +214,13 @@ return array(
 								mattprty."code" AS "attribute.property.type.code", mattprty."domain" AS "attribute.property.type.domain",
 								mattprty."label" AS "attribute.property.type.label", mattprty."status" AS "attribute.property.type.status",
 								mattprty."mtime" AS "attribute.property.type.mtime", mattprty."editor" AS "attribute.property.type.editor",
-								mattprty."ctime" AS "attribute.property.type.ctime"
+								mattprty."ctime" AS "attribute.property.type.ctime", mattprty."pos" AS "attribute.property.type.position"
 							FROM "mshop_attribute_property_type" mattprty
 							:joins
 							WHERE :cond
 							GROUP BY mattprty."id", mattprty."siteid", mattprty."code", mattprty."domain",
 								mattprty."label", mattprty."status", mattprty."mtime", mattprty."editor",
-								mattprty."ctime" /*-columns*/ , :columns /*columns-*/
+								mattprty."ctime", mattprty."pos" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
@@ -324,17 +324,17 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_attribute_type" (
-							"code", "domain", "label","status",
+							"code", "domain", "label", "pos", "status",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_attribute_type"
-						SET "code" = ?, "domain" = ?, "label" = ?,
+						SET "code" = ?, "domain" = ?, "label" = ?, "pos" = ?,
 							"status" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
@@ -345,13 +345,13 @@ return array(
 							mattty."code" AS "attribute.type.code", mattty."domain" AS "attribute.type.domain",
 							mattty."label" AS "attribute.type.label", mattty."status" AS "attribute.type.status",
 							mattty."mtime" AS "attribute.type.mtime", mattty."ctime" AS "attribute.type.ctime",
-							mattty."editor" AS "attribute.type.editor"
+							mattty."editor" AS "attribute.type.editor", mattty."pos" AS "attribute.type.position"
 						FROM "mshop_attribute_type" AS mattty
 						:joins
 						WHERE :cond
 						GROUP BY mattty."id", mattty."siteid", mattty."code", mattty."domain",
 							mattty."label", mattty."status", mattty."mtime", mattty."ctime",
-							mattty."editor" /*-columns*/ , :columns /*columns-*/
+							mattty."editor", mattty."pos" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'

@@ -60,6 +60,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'plugin.type.position' => array(
+			'code' => 'plugin.type.position',
+			'internalcode' => 'mpluty."pos"',
+			'label' => 'Type position',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'plugin.type.status' => array(
 			'code' => 'plugin.type.status',
 			'internalcode' => 'mpluty."status"',

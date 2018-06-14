@@ -7,9 +7,9 @@
 
 return array (
 	'attribute/property/type' => array(
-		'attribute/property/type/size' => array( 'domain' => 'attribute', 'code' => 'size', 'label' => 'Size', 'status' => 1 ),
-		'attribute/property/type/mtime' => array( 'domain' => 'attribute', 'code' => 'mtime', 'label' => 'Modification time', 'status' => 1 ),
-		'attribute/property/type/htmlcolor' => array( 'domain' => 'attribute', 'code' => 'htmlcolor', 'label' => 'HTML color code', 'status' => 1 ),
+		'attribute/property/type/size' => array( 'domain' => 'attribute', 'code' => 'size', 'label' => 'Size', 'position' => 0, 'status' => 1 ),
+		'attribute/property/type/mtime' => array( 'domain' => 'attribute', 'code' => 'mtime', 'label' => 'Modification time', 'position' => 1, 'status' => 1 ),
+		'attribute/property/type/htmlcolor' => array( 'domain' => 'attribute', 'code' => 'htmlcolor', 'label' => 'HTML color code', 'position' => 2, 'status' => 1 ),
 	),
 
 	'attribute/property' => array(

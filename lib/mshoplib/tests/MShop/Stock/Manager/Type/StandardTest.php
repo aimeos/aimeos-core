@@ -159,6 +159,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'stock.type.siteid', null );
 		$expr[] = $search->compare( '==', 'stock.type.domain', 'product' );
 		$expr[] = $search->compare( '==', 'stock.type.code', 'unit_type1' );
+		$expr[] = $search->compare( '>=', 'stock.type.position', 0 );
+		$expr[] = $search->compare( '>=', 'stock.type.status', 0 );
 		$expr[] = $search->compare( '>=', 'stock.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'stock.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'stock.type.editor', $this->editor );
@@ -177,6 +179,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'stock.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'stock.type.position' )] );
 		$search->setSlice( 0, 2 );
 
 		$total = 0;

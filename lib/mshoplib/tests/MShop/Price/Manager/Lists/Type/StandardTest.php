@@ -139,6 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'price.lists.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'price.lists.type.domain', 'customer' );
 		$expr[] = $search->compare( '==', 'price.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '>=', 'price.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'price.lists.type.status', 1 );
 		$expr[] = $search->compare( '==', 'price.lists.type.editor', $this->editor );
 
@@ -154,6 +155,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'price.lists.type.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$search->setSortations( [$search->sort( '-', 'price.lists.type.position' )] );
 		$search->setSlice( 0, 1 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 1, count( $results ) );

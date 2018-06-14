@@ -137,6 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'attribute.lists.type.code', 'default' );
 		$expr[] = $search->compare( '==', 'attribute.lists.type.domain', 'attribute' );
 		$expr[] = $search->compare( '==', 'attribute.lists.type.label', 'Standard' );
+		$expr[] = $search->compare( '>=', 'attribute.lists.type.position', 0 );
 		$expr[] = $search->compare( '==', 'attribute.lists.type.status', 1 );
 		$expr[] = $search->compare( '>=', 'attribute.lists.type.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'attribute.lists.type.ctime', '1970-01-01 00:00:00' );
@@ -152,6 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		// search with base criteria
 		$search = $this->object->createSearch( true );
 		$search->setConditions( $search->compare( '==', 'attribute.lists.type.editor', $this->editor ) );
+		$search->setSortations( [$search->sort( '-', 'attribute.lists.type.position' )] );
 		$search->setSlice( 0, 5 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 5, count( $results ) );

@@ -82,6 +82,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -89,7 +90,7 @@ return array(
 
 			$table->setPrimaryKey( array( 'id' ), 'pk_mssuplity_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'code' ), 'unq_mssuplity_sid_dom_code' );
-			$table->addIndex( array( 'siteid', 'status' ), 'idx_mssuplity_sid_status' );
+			$table->addIndex( array( 'siteid', 'status', 'pos' ), 'idx_mssuplity_sid_status_pos' );
 			$table->addIndex( array( 'siteid', 'label' ), 'idx_mssuplity_sid_label' );
 			$table->addIndex( array( 'siteid', 'code' ), 'idx_mssuplity_sid_code' );
 
