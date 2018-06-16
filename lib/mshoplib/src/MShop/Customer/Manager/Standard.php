@@ -748,6 +748,11 @@ class Standard
 			$addrItems = $this->getAddressItems( array_keys( $map ) );
 		}
 
+		$propItems = [];
+		if( in_array( 'customer/property', $ref, true ) ) {
+			$propItems = $this->getPropertyItems( array_keys( $map ) );
+		}
+
 		return $this->buildItems( $map, $ref, 'customer', $addrItems );
 	}
 
@@ -762,5 +767,34 @@ class Standard
 	public function getSubManager( $manager, $name = null )
 	{
 		return $this->getSubManagerBase( 'customer', $manager, $name );
+	}
+
+
+	/**
+	 * Returns the property items for the given customer IDs
+	 *
+	 * @param array $prodIds List of customer IDs
+	 * @return array Associative list of customer IDs / property IDs as keys and items implementing
+	 * 	\Aimeos\MShop\Product\Item\Property\Iface as values
+	 */
+	protected function getPropertyItems( array $prodIds )
+	{
+		$list = [];
+
+		if( !empty( $prodIds ) )
+		{
+			$propManager = $this->getObject()->getSubManager( 'property' );
+
+			$propSearch = $propManager->createSearch();
+			$propSearch->setConditions( $propSearch->compare( '==', 'customer.property.parentid', $prodIds ) );
+			$propSearch->setSortations( [$propSearch->sort( '+', 'customer.property.type.position' )] );
+			$propSearch->setSlice( 0, 0x7fffffff );
+
+			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
+				$list[$propItem->getParentId()][$id] = $propItem;
+			}
+		}
+
+		return $list;
 	}
 }
