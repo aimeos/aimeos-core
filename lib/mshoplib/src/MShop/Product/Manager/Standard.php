@@ -22,6 +22,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	implements \Aimeos\MShop\Product\Manager\Iface
 {
+	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
+
+
 	private $searchConfig = array(
 		'product.siteid' => array(
 			'code' => 'product.siteid',
@@ -214,7 +217,9 @@ class Standard
 			throw new \Aimeos\MShop\Product\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'product' );
 			return $this->saveRefItems( $item, 'product' );
 		}
 
@@ -378,6 +383,7 @@ class Standard
 			throw $e;
 		}
 
+		$item = $this->savePropertyItems( $item, 'product' );
 		return $this->saveRefItems( $item, 'product' );
 	}
 
@@ -664,7 +670,7 @@ class Standard
 
 		$propItems = [];
 		if( in_array( 'product/property', $ref, true ) ) {
-			$propItems = $this->getPropertyItems( array_keys( $map ) );
+			$propItems = $this->getPropertyItems( array_keys( $map ), 'product' );
 		}
 
 		return $this->buildItems( $map, $ref, 'product', $propItems );
@@ -780,34 +786,5 @@ class Standard
 		$values['date'] = $this->date;
 
 		return new \Aimeos\MShop\Product\Item\Standard( $values, $listItems, $refItems, $propertyItems );
-	}
-
-
-	/**
-	 * Returns the property items for the given product IDs
-	 *
-	 * @param array $prodIds List of product IDs
-	 * @return array Associative list of product IDs / property IDs as keys and items implementing
-	 * 	\Aimeos\MShop\Product\Item\Property\Iface as values
-	 */
-	protected function getPropertyItems( array $prodIds )
-	{
-		$list = [];
-
-		if( !empty( $prodIds ) )
-		{
-			$propManager = $this->getObject()->getSubManager( 'property' );
-
-			$propSearch = $propManager->createSearch();
-			$propSearch->setConditions( $propSearch->compare( '==', 'product.property.parentid', $prodIds ) );
-			$propSearch->setSortations( [$propSearch->sort( '+', 'product.property.type.position' )] );
-			$propSearch->setSlice( 0, 0x7fffffff );
-
-			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
-				$list[$propItem->getParentId()][$id] = $propItem;
-			}
-		}
-
-		return $list;
 	}
 }

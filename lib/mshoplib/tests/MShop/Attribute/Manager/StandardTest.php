@@ -138,19 +138,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveUpdateDeleteItem()
 	{
-		$typeManager = $this->object->getSubManager( 'type' );
-		$search = $typeManager->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'attribute.type.code', 'size' ),
-			$search->compare( '==', 'attribute.type.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$typeItems = $typeManager->searchItems( $search );
-
-		if( ( $typeItem = reset( $typeItems ) ) === false ) {
-			throw new \RuntimeException( 'No attribute type item available in setUp()' );
-		}
+		$typeItem = $this->object->getSubManager( 'type' )->findItem( 'size', [], 'product' );
 
 		$item = $this->object->createItem();
 		$item->setId( null );
@@ -208,6 +196,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
+	}
+
+
+	public function testGetSavePropertyItems()
+	{
+		$item = $this->object->findItem( 'black', [], 'product', 'color' );
+
+		$item->setId( null )->setCode( 'xyz' );
+		$this->object->saveItem( $item );
+
+		$item2 = $this->object->findItem( 'xyz', [], 'product', 'color' );
+
+		$this->object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
+		$this->assertEquals( 1, count( $item2->getPropertyItems() ) );
 	}
 
 
@@ -291,9 +295,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 
-		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
+		$this->assertEquals( 1, count( $results ) );
+		$this->assertEquals( 1, count( reset( $results )->getPropertyItems() ) );
+	}
 
+
+	public function testSearchBase()
+	{
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$expr = array(
@@ -305,9 +314,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 5 );
 
+		$total = 0;
 		$results = $this->object->searchItems( $search, [], $total );
+
 		$this->assertEquals( 5, count( $results ) );
 		$this->assertEquals( 10, $total );
+
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}

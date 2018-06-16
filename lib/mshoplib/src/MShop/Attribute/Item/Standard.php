@@ -22,8 +22,10 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\ListRef\Base
 	implements \Aimeos\MShop\Attribute\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
+
+
 	private $values;
-	private $propItems;
 
 
 	/**
@@ -39,32 +41,8 @@ class Standard
 	{
 		parent::__construct( 'attribute.', $values, $listItems, $refItems );
 
-		$this->propItems = $propItems;
+		$this->setPropertyItems( $propItems );
 		$this->values = $values;
-	}
-
-
-	/**
-	 * Returns the property items of the attribute
-	 *
-	 * @param string|null $type Name of the property item type or null for all
-	 * @param boolean $active True to return only active items, false to return all
-	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
-	 */
-	public function getPropertyItems( $type = null, $active = true )
-	{
-		$list = [];
-
-		foreach( $this->propItems as $propId => $propItem )
-		{
-			if( ( $type === null || $propItem->getType() === $type )
-				&& ( $active === false || $propItem->isAvailable() )
-			) {
-				$list[$propId] = $propItem;
-			}
-		}
-
-		return $list;
 	}
 
 

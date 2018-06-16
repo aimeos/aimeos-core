@@ -21,6 +21,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	implements \Aimeos\MShop\Attribute\Manager\Iface
 {
+	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
+
+
 	private $searchConfig = array(
 		'attribute.id' => array(
 			'code' => 'attribute.id',
@@ -246,7 +249,9 @@ class Standard
 			throw new \Aimeos\MShop\Attribute\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'attribute' );
 			return $this->saveRefItems( $item, 'attribute' );
 		}
 
@@ -408,6 +413,7 @@ class Standard
 			throw $e;
 		}
 
+		$item = $this->savePropertyItems( $item, 'attribute' );
 		return $this->saveRefItems( $item, 'attribute' );
 	}
 
@@ -653,7 +659,7 @@ class Standard
 			}
 		}
 
-		$propItems = $this->getPropertyItems( array_keys( $map ) );
+		$propItems = $this->getPropertyItems( array_keys( $map ), 'attribute' );
 
 		return $this->buildItems( $map, null, 'attribute', $propItems );
 	}
@@ -701,34 +707,5 @@ class Standard
 		array $refItems = [], array $propertyItems = [] )
 	{
 		return new \Aimeos\MShop\Attribute\Item\Standard( $values, $listItems, $refItems, $propertyItems );
-	}
-
-
-	/**
-	 * Returns the property items for the given attribute IDs
-	 *
-	 * @param array $attrIds List of attribute IDs
-	 * @return array Associative list of attribute IDs / property IDs as keys and items implementing
-	 * 	\Aimeos\MShop\Product\Item\Property\Iface as values
-	 */
-	protected function getPropertyItems( array $attrIds )
-	{
-		$list = [];
-
-		if( !empty( $attrIds ) )
-		{
-			$propManager = $this->getObject()->getSubManager( 'property' );
-
-			$propSearch = $propManager->createSearch();
-			$propSearch->setConditions( $propSearch->compare( '==', 'attribute.property.parentid', $attrIds ) );
-			$propSearch->setSortations( [$propSearch->sort( '+', 'attribute.property.type.position' )] );
-			$propSearch->setSlice( 0, 0x7fffffff );
-
-			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
-				$list[$propItem->getParentId()][$id] = $propItem;
-			}
-		}
-
-		return $list;
 	}
 }

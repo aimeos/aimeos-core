@@ -22,6 +22,9 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\ListRef\Base
 	implements \Aimeos\MShop\Customer\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
+
+
 	private $addresses;
 	private $billingaddress;
 	private $sortedAddr;
@@ -36,9 +39,10 @@ abstract class Base
 	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
 	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface[] $addresses List of referenced address items
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $propItems List of property items
 	 */
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
-		array $listItems = [], array $refItems = [], $addresses = [] )
+		array $listItems = [], array $refItems = [], $addresses = [], array $propItems = [] )
 	{
 		parent::__construct( 'customer.', $values, $listItems, $refItems );
 
@@ -68,6 +72,8 @@ abstract class Base
 				case 'customer.email': $address->setEmail( $value ); break;
 			}
 		}
+
+		$this->setPropertyItems( $propItems );
 
 		// set modified flag to false
 		$address->setId( $this->getId() );

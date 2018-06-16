@@ -167,6 +167,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetSavePropertyItems()
+	{
+		$item = $this->object->findItem( 'UTC001', ['customer/property'] );
+
+		$item->setId( null )->setCode( 'xyz' );
+		$this->object->saveItem( $item );
+
+		$item2 = $this->object->findItem( 'UTC001', ['customer/property'] );
+
+		$this->object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 1, count( $item->getPropertyItems() ) );
+		$this->assertEquals( 1, count( $item2->getPropertyItems() ) );
+	}
+
+
 	public function testCreateSearch()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch() );

@@ -22,6 +22,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	implements \Aimeos\MShop\Media\Manager\Iface
 {
+	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
+
+
 	private $searchConfig = array(
 		'media.id' => array(
 			'label' => 'ID',
@@ -282,7 +285,9 @@ class Standard
 			throw new \Aimeos\MShop\Media\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'media' );
 			return $this->saveRefItems( $item, 'media' );
 		}
 
@@ -446,6 +451,7 @@ class Standard
 			throw $e;
 		}
 
+		$item = $this->savePropertyItems( $item, 'media' );
 		return $this->saveRefItems( $item, 'media' );
 	}
 
@@ -649,7 +655,7 @@ class Standard
 			}
 		}
 
-		$propItems = $this->getPropertyItems( array_keys( $map ) );
+		$propItems = $this->getPropertyItems( array_keys( $map ), 'media' );
 
 		return $this->buildItems( $map, null, 'media', $propItems );
 	}
@@ -717,34 +723,5 @@ class Standard
 		$values['languageid'] = $this->languageId;
 
 		return new \Aimeos\MShop\Media\Item\Standard( $values, $listItems, $refItems, $propItems );
-	}
-
-
-	/**
-	 * Returns the property items for the given media IDs
-	 *
-	 * @param array $mediaIds List of media IDs
-	 * @return array Associative list of media IDs / property IDs as keys and items implementing
-	 * 	\Aimeos\MShop\Product\Item\Property\Iface as values
-	 */
-	protected function getPropertyItems( array $mediaIds )
-	{
-		$list = [];
-
-		if( !empty( $mediaIds ) )
-		{
-			$propManager = $this->getObject()->getSubManager( 'property' );
-
-			$propSearch = $propManager->createSearch();
-			$propSearch->setConditions( $propSearch->compare( '==', 'media.property.parentid', $mediaIds ) );
-			$propSearch->setSortations( [$propSearch->sort( '+', 'media.property.type.position' )] );
-			$propSearch->setSlice( 0, 0x7fffffff );
-
-			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
-				$list[$propItem->getParentId()][$id] = $propItem;
-			}
-		}
-
-		return $list;
 	}
 }

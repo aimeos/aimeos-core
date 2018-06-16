@@ -22,6 +22,9 @@ class Standard
 	extends \Aimeos\MShop\Customer\Manager\Base
 	implements \Aimeos\MShop\Customer\Manager\Iface
 {
+	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
+
+
 	private $searchConfig = array(
 		// no siteid
 		'customer.id' => array(
@@ -375,7 +378,9 @@ class Standard
 			throw new \Aimeos\MShop\Customer\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->savePropertyItems( $item, 'customer' );
 			return $this->saveRefItems( $item, 'customer' );
 		}
 
@@ -561,6 +566,7 @@ class Standard
 
 		$this->addGroups( $item );
 
+		$item = $this->savePropertyItems( $item, 'customer' );
 		return $this->saveRefItems( $item, 'customer' );
 	}
 
@@ -750,10 +756,10 @@ class Standard
 
 		$propItems = [];
 		if( in_array( 'customer/property', $ref, true ) ) {
-			$propItems = $this->getPropertyItems( array_keys( $map ) );
+			$propItems = $this->getPropertyItems( array_keys( $map ), 'customer' );
 		}
 
-		return $this->buildItems( $map, $ref, 'customer', $addrItems );
+		return $this->buildItems( $map, $ref, 'customer', $addrItems, $propItems );
 	}
 
 
@@ -767,34 +773,5 @@ class Standard
 	public function getSubManager( $manager, $name = null )
 	{
 		return $this->getSubManagerBase( 'customer', $manager, $name );
-	}
-
-
-	/**
-	 * Returns the property items for the given customer IDs
-	 *
-	 * @param array $prodIds List of customer IDs
-	 * @return array Associative list of customer IDs / property IDs as keys and items implementing
-	 * 	\Aimeos\MShop\Product\Item\Property\Iface as values
-	 */
-	protected function getPropertyItems( array $prodIds )
-	{
-		$list = [];
-
-		if( !empty( $prodIds ) )
-		{
-			$propManager = $this->getObject()->getSubManager( 'property' );
-
-			$propSearch = $propManager->createSearch();
-			$propSearch->setConditions( $propSearch->compare( '==', 'customer.property.parentid', $prodIds ) );
-			$propSearch->setSortations( [$propSearch->sort( '+', 'customer.property.type.position' )] );
-			$propSearch->setSlice( 0, 0x7fffffff );
-
-			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
-				$list[$propItem->getParentId()][$id] = $propItem;
-			}
-		}
-
-		return $list;
 	}
 }

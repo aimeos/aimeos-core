@@ -170,6 +170,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetSavePropertyItems()
+	{
+		$item = $this->object->findItem( 'CNE', ['product/property'] );
+
+		$item->setId( null )->setCode( 'xyz' );
+		$this->object->saveItem( $item );
+
+		$item2 = $this->object->findItem( 'CNE', ['product/property'] );
+
+		$this->object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 4, count( $item->getPropertyItems() ) );
+		$this->assertEquals( 4, count( $item2->getPropertyItems() ) );
+	}
+
+
 	public function testSaveItemRefItems()
 	{
 		$context = \TestHelperMShop::getContext();

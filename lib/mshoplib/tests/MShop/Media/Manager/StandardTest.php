@@ -242,6 +242,27 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetSavePropertyItems()
+	{
+		$search = $this->object->createSearch();
+		$search->setConditions( $search->compare( '==', 'media.label', 'example image 1' ) );
+		$items = $this->object->searchItems( $search );
+		$item = reset( $items );
+
+		$item->setId( null )->setLabel( 'example image 1.1' );
+		$this->object->saveItem( $item );
+
+		$search->setConditions( $search->compare( '==', 'media.label', 'example image 1.1' ) );
+		$items = $this->object->searchItems( $search );
+		$item2 = reset( $items );
+
+		$this->object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 2, count( $item->getPropertyItems() ) );
+		$this->assertEquals( 2, count( $item2->getPropertyItems() ) );
+	}
+
+
 	public function testGetSubManager()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'type' ) );
