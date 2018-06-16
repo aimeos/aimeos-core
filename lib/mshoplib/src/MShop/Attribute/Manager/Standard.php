@@ -721,6 +721,7 @@ class Standard
 
 			$propSearch = $propManager->createSearch();
 			$propSearch->setConditions( $propSearch->compare( '==', 'attribute.property.parentid', $attrIds ) );
+			$propSearch->setSortations( [$propSearch->sort( '+', 'attribute.property.type.position' )] );
 			$propSearch->setSlice( 0, 0x7fffffff );
 
 			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {

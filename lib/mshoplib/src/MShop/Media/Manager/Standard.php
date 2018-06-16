@@ -737,6 +737,7 @@ class Standard
 
 			$propSearch = $propManager->createSearch();
 			$propSearch->setConditions( $propSearch->compare( '==', 'media.property.parentid', $mediaIds ) );
+			$propSearch->setSortations( [$propSearch->sort( '+', 'media.property.type.position' )] );
 			$propSearch->setSlice( 0, 0x7fffffff );
 
 			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {

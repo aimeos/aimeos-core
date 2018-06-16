@@ -800,6 +800,7 @@ class Standard
 
 			$propSearch = $propManager->createSearch();
 			$propSearch->setConditions( $propSearch->compare( '==', 'product.property.parentid', $prodIds ) );
+			$propSearch->setSortations( [$propSearch->sort( '+', 'product.property.type.position' )] );
 			$propSearch->setSlice( 0, 0x7fffffff );
 
 			foreach( $propManager->searchItems( $propSearch ) as $id => $propItem ) {
