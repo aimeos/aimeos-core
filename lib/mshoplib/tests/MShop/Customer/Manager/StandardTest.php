@@ -172,6 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item = $this->object->findItem( 'UTC001', ['customer/property'] );
 
 		$item->setId( null )->setCode( 'xyz' );
+		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$this->object->saveItem( $item );
 
 		$item2 = $this->object->findItem( 'UTC001', ['customer/property'] );
