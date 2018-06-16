@@ -26,7 +26,6 @@ class Standard
 
 
 	private $values;
-	private $propItems;
 
 
 	/**
