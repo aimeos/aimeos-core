@@ -27,10 +27,10 @@ trait Traits
 	/**
 	 * Adds a new property item or overwrite an existing one
 	 *
-	 * @param \Aimeos\MShop\Product\Item\Property\Iface $item New or existing property item
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 */
-	public function addPropertyItem( \Aimeos\MShop\Product\Item\Property\Iface $item )
+	public function addPropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
 		$id = $item->getId() ?: 'id-' . $this->propMax++;
 		$this->propItems[$id] = $item;
@@ -42,11 +42,11 @@ trait Traits
 	/**
 	 * Removes an existing property item
 	 *
-	 * @param \Aimeos\MShop\Product\Item\Property\Iface $item Existing property item
+	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item Existing property item
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If given property item isn't found
 	 */
-	public function deletePropertyItem( \Aimeos\MShop\Product\Item\Property\Iface $item )
+	public function deletePropertyItem( \Aimeos\MShop\Common\Item\Property\Iface $item )
 	{
 		foreach( $this->propItems as $key => $pitem )
 		{
@@ -101,7 +101,7 @@ trait Traits
 	 *
 	 * @param string|null $type Name of the property item type or null for all
 	 * @param boolean $active True to return only active items, false to return all
-	 * @return \Aimeos\MShop\Product\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
+	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
 	 */
 	public function getPropertyItems( $type = null, $active = true )
 	{
