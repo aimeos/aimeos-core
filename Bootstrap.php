@@ -276,6 +276,10 @@ class Bootstrap
 
 		foreach( $directories as $directory )
 		{
+			if (!file_exists($directory)) {
+				continue;
+			}
+
 			$manifest = $this->getManifestFile( $directory );
 
 			if( $manifest !== false )
