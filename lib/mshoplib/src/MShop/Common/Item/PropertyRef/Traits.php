@@ -68,7 +68,7 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items Existing property items
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
-	 * @throws \Aimeos\MShop\Exception If a property item isn't found
+	 * @throws \Aimeos\MShop\Exception If an item isn't a property item or isn't found
 	 */
 	public function deletePropertyItems( array $items )
 	{
@@ -99,7 +99,7 @@ trait Traits
 	/**
 	 * Returns the property items of the product
 	 *
-	 * @param string|null $type Name of the property item type or null for all
+	 * @param array|string|null $type Name of the property item type or null for all
 	 * @param boolean $active True to return only active items, false to return all
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface[] Associative list of property IDs as keys and property items as values
 	 */
@@ -109,7 +109,7 @@ trait Traits
 
 		foreach( $this->propItems as $propId => $propItem )
 		{
-			if( ( $type === null || $propItem->getType() === $type )
+			if( ( $type === null || in_array( $propItem->getType(), (array) $type ) )
 				&& ( $active === false || $propItem->isAvailable() )
 			) {
 				$list[$propId] = $propItem;
