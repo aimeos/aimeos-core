@@ -21,31 +21,40 @@ namespace Aimeos\MShop\Common\Item\ListRef;
 interface Iface
 {
 	/**
-	 * Adds a new item to the given domain and references it by a list item
+	 * Adds a new or overwrite an existing list item which references the given domain item (created if it doesn't exist)
 	 *
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the new domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem New item added to the given domain or null if no item should be referenced
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
 	 */
-	public function addRefItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null );
+	public function addListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null );
 
 	/**
-	 * Removes an item from the given domain and its list item referencing it
+	 * Removes a list item which references the given domain item (removed as well if it exists)
 	 *
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface $listItem List item referencing the domain item
 	 * @param \Aimeos\MShop\Common\Item\Iface|null $refItem Existing item removed from the given domain or null if item shouldn't be removed
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Self object for method chaining
 	 */
-	public function deleteRefItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null );
+	public function deleteListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null );
 
 	/**
-	 * Returns the deleted items per domain
+	 * Removes a list of list items which references their domain items (removed as well if it exists)
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
+	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
+	 * @throws \Aimeos\MShop\Exception If an item isn't a list item or isn't found
+	 */
+	public function deleteListItems( array $items );
+
+	/**
+	 * Returns the deleted list items which include the domain items if available
 	 *
 	 * @return array Associative list of domains as keys and lists of list items containing the referenced items as values
 	 */
-	public function getDeletedItems();
+	public function getListItemsDeleted();
 
 	/**
 	 * Returns the list item for the given reference ID, domain and list type

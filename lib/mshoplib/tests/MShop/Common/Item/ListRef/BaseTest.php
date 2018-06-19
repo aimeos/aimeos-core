@@ -82,42 +82,50 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testAddRefItem()
+	public function testAddListItem()
 	{
-		$this->object->addRefItem( 'test', $this->listItem1, $this->textItem1 );
+		$this->object->addListItem( 'test', $this->listItem1, $this->textItem1 );
 
 		$this->assertEquals( [11 => $this->listItem1], $this->object->getListItems( 'test' ) );
 		$this->assertEquals( [1 => $this->textItem1], $this->object->getRefItems( 'test' ) );
 	}
 
 
-	public function testAddRefItemNew()
+	public function testAddListItemNew()
 	{
-		$this->object->addRefItem( 'test', $this->listItem1->setId( null ), $this->textItem1->setId( null ) );
+		$this->object->addListItem( 'test', $this->listItem1->setId( null ), $this->textItem1->setId( null ) );
 
 		$this->assertEquals( ['tmp-0' => $this->listItem1], $this->object->getListItems( 'test' ) );
 		$this->assertEquals( ['tmp-1' => $this->textItem1], $this->object->getRefItems( 'test' ) );
 	}
 
 
-	public function testDeleteRefItem()
+	public function testDeleteListItem()
 	{
-		$this->object->deleteRefItem( 'text', $this->listItem1, $this->textItem1 );
+		$this->object->deleteListItem( 'text', $this->listItem1, $this->textItem1 );
 
-		$this->assertEquals( [$this->listItem1], $this->object->getDeletedItems() );
+		$this->assertEquals( [$this->listItem1], $this->object->getListItemsDeleted() );
 	}
 
 
-	public function testDeleteRefItemException()
+	public function testDeleteListItems()
+	{
+		$this->object->deleteListItems( [$this->listItem1, $this->listItem2] );
+
+		$this->assertEquals( [$this->listItem1, $this->listItem2], $this->object->getListItemsDeleted() );
+	}
+
+
+	public function testDeleteListItemException()
 	{
 		$this->setExpectedException( '\Aimeos\MShop\Exception' );
-		$this->object->deleteRefItem( 'test', $this->listItem1 );
+		$this->object->deleteListItem( 'test', $this->listItem1 );
 	}
 
 
-	public function testGetDeletedItems()
+	public function testGetListItemsDeleted()
 	{
-		$this->assertEquals( [], $this->object->getDeletedItems() );
+		$this->assertEquals( [], $this->object->getListItemsDeleted() );
 	}
 
 
