@@ -233,7 +233,7 @@ abstract class Base
 		$context = $this->getContext();
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
 
-		foreach( $item->getDeletedItems() as $listItem )
+		foreach( $item->getListItemsDeleted() as $listItem )
 		{
 			$rmListIds[] = $listItem->getId();
 

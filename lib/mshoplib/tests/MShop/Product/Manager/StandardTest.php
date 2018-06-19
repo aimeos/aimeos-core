@@ -210,12 +210,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$textItem->setTypeId( $textTypeManager->findItem( 'name', [], 'product' )->getId() );
 
 
-		$item->addRefItem( 'text', $listItem, $textItem );
+		$item->addListItem( 'text', $listItem, $textItem );
 
 		$item = $manager->saveItem( $item );
 		$item2 = $manager->getItem( $item->getId(), ['text'] );
 
-		$item->deleteRefItem( 'text', $listItem, $textItem );
+		$item->deleteListItem( 'text', $listItem, $textItem );
 
 		$item = $manager->saveItem( $item );
 		$item3 = $manager->getItem( $item->getId(), ['text'] );
