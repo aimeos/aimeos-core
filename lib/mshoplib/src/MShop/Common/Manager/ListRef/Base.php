@@ -34,7 +34,7 @@ abstract class Base
 	 */
 	public function updateListItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $map, $domain, $type )
 	{
-		$listManager =  $this->getObject()->getSubManager( 'lists' );
+		$listManager = $this->getObject()->getSubManager( 'lists' );
 
 		if( !isset( $this->typeIds[$domain][$type] ) )
 		{
