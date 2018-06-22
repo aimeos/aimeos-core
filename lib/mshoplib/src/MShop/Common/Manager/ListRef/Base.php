@@ -229,9 +229,10 @@ abstract class Base
 	 */
 	protected function saveRefItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $domain )
 	{
-		$rmListIds = $rmIds = [];
 		$context = $this->getContext();
+		$rmListIds = $rmIds = $refManager = [];
 		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
+
 
 		foreach( $item->getListItemsDeleted() as $listItem )
 		{
@@ -242,32 +243,60 @@ abstract class Base
 			}
 		}
 
-		foreach( $rmIds as $refDomain => $ids ) {
-			\Aimeos\MShop\Factory::createManager( $context, $refDomain )->deleteItems( $ids );
-		}
 
-		$listManager->deleteItems( $rmListIds );
-
-		foreach( $item->getListItems( null, null, null, false ) as $listItem )
+		try
 		{
-			if( ( $refItem = $listItem->getRefItem() ) !== null )
+			foreach( $rmIds as $refDomain => $ids )
 			{
-				if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface ) {
-					$refItem->setDomain( $domain );
+				$refManager[$refDomain] = \Aimeos\MShop\Factory::createManager( $context, $refDomain );
+				$refManager[$refDomain]->begin();
+
+				$refManager[$refDomain]->deleteItems( $ids );
+			}
+
+			$listManager->deleteItems( $rmListIds );
+
+
+			foreach( $item->getListItems( null, null, null, false ) as $listItem )
+			{
+				if( ( $refItem = $listItem->getRefItem() ) !== null )
+				{
+					if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface ) {
+						$refItem->setDomain( $domain );
+					}
+
+					$refDomain = $listItem->getDomain();
+
+					if( !isset( $refManager[$refDomain] ) )
+					{
+						$refManager[$refDomain] = \Aimeos\MShop\Factory::createManager( $context, $refDomain );
+						$refManager[$refDomain]->begin();
+					}
+
+					$refItem = $refManager[$refDomain]->saveItem( $refItem );
+					$listItem->setRefId( $refItem->getId() );
 				}
 
-				$manager = \Aimeos\MShop\Factory::createManager( $context, $listItem->getDomain() );
-				$refItem = $manager->saveItem( $refItem );
+				if( $listItem->getParentId() != $item->getId() ) {
+					$listItem->setId( null ); //create new list item if copied
+				}
 
-				$listItem->setRefId( $refItem->getId() );
+				$listItem->setParentId( $item->getId() );
+				$listManager->saveItem( $listItem );
 			}
 
-			if( $listItem->getParentId() != $item->getId() ) {
-				$listItem->setId( null ); //create new list item if copied
+
+			foreach( $refManager as $manager ) {
+				$manager->commit();
+			}
+		}
+		catch( \Exception $e )
+		{
+			foreach( $refManager as $manager ) {
+				$manager->rollback();
 			}
 
-			$listItem->setParentId( $item->getId() );
-			$listManager->saveItem( $listItem );
+			throw $e;
 		}
 
 		return $item;
