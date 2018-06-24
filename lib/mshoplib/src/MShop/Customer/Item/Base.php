@@ -22,12 +22,11 @@ abstract class Base
 	extends \Aimeos\MShop\Common\Item\ListRef\Base
 	implements \Aimeos\MShop\Customer\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\AddressRef\Traits;
 	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
 
 
-	private $addresses;
 	private $billingaddress;
-	private $sortedAddr;
 	private $data;
 
 
@@ -73,40 +72,14 @@ abstract class Base
 			}
 		}
 
+		$this->initAddressItems( $addresses );
 		$this->initPropertyItems( $propItems );
 
 		// set modified flag to false
 		$address->setId( $this->getId() );
 
 		$this->billingaddress = $address;
-		$this->addresses = $addresses;
 		$this->data = $values;
-	}
-
-
-	/**
-	 * Returns the delivery address items of the customer
-	 *
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface[] Associative list of IDs as keys and address items as values
-	 */
-	public function getAddressItems()
-	{
-		if( $this->sortedAddr === null )
-		{
-			$fcn = function( $a, $b )
-			{
-				if( $a->getPosition() == $b->getPosition() ) {
-					return 0;
-				}
-
-				return ( $a->getPosition() < $b->getPosition() ? -1 : 1 );
-			};
-
-			uasort( $this->addresses, $fcn );
-			$this->sortedAddr = true;
-		}
-
-		return $this->addresses;
 	}
 
 

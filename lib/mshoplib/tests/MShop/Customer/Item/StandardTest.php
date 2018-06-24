@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testSetAndGetPassword()
+	public function testGetSetPassword()
 	{
 		$return = $this->object->setPassword( '08154712' );
 
@@ -263,6 +263,34 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$this->assertEquals( $i++, $item->getPosition() );
 			$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Address\Iface', $item );
 		}
+	}
+
+
+	public function testAddAddressItem()
+	{
+		$this->object->addAddressItem( $this->address );
+
+		$this->assertEquals( 3, count( $this->object->getAddressItems() ) );
+	}
+
+
+	public function testDeleteAddressItem()
+	{
+		$this->object->addAddressItem( $this->address );
+		$this->object->deleteAddressItem( $this->address );
+
+		$this->assertEquals( 2, count( $this->object->getAddressItems() ) );
+		$this->assertEquals( 1, count( $this->object->getAddressItemsDeleted() ) );
+	}
+
+
+	public function testDeleteAddressItems()
+	{
+		$this->object->addAddressItem( $this->address );
+		$this->object->deleteAddressItems( [$this->address] );
+
+		$this->assertEquals( 2, count( $this->object->getAddressItems() ) );
+		$this->assertEquals( 1, count( $this->object->getAddressItemsDeleted() ) );
 	}
 
 

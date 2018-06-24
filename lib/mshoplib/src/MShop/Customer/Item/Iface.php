@@ -19,8 +19,9 @@ namespace Aimeos\MShop\Customer\Item;
  * @subpackage Customer
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\ListRef\Iface,
-		\Aimeos\MShop\Common\Item\PropertyRef\Iface, \Aimeos\MShop\Common\Item\Status\Iface
+	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\AddressRef\Iface,
+		\Aimeos\MShop\Common\Item\ListRef\Iface, \Aimeos\MShop\Common\Item\PropertyRef\Iface,
+		\Aimeos\MShop\Common\Item\Status\Iface
 {
 	/**
 	 * Returns the label of the customer item.

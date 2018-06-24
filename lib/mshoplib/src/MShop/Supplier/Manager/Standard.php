@@ -22,6 +22,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Manager\ListRef\Base
 	implements \Aimeos\MShop\Supplier\Manager\Iface
 {
+	use \Aimeos\MShop\Common\Manager\AddressRef\Traits;
+
+
 	private $searchConfig = array(
 		'supplier.id' => array(
 			'code' => 'supplier.id',
@@ -259,7 +262,9 @@ class Standard
 			throw new \Aimeos\MShop\Supplier\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
 		}
 
-		if( !$item->isModified() ) {
+		if( !$item->isModified() )
+		{
+			$item = $this->saveAddressItems( $item, 'supplier' );
 			return $this->saveRefItems( $item, 'supplier' );
 		}
 
@@ -418,6 +423,7 @@ class Standard
 			throw $e;
 		}
 
+		$item = $this->saveAddressItems( $item, 'supplier' );
 		return $this->saveRefItems( $item, 'supplier' );
 	}
 
@@ -602,7 +608,7 @@ class Standard
 
 		$addrItems = [];
 		if( in_array( 'supplier/address', $ref, true ) ) {
-			$addrItems = $this->getAddressItems( array_keys( $map ) );
+			$addrItems = $this->getAddressItems( array_keys( $map ), 'supplier' );
 		}
 
 		return $this->buildItems( $map, $ref, 'supplier', $addrItems );
@@ -651,29 +657,5 @@ class Standard
 	protected function createItemBase( array $values = [], array $listitems = [], array $refItems = [], array $addresses = [] )
 	{
 		return new \Aimeos\MShop\Supplier\Item\Standard( $values, $listitems, $refItems, $addresses );
-	}
-
-
-	/**
-	 * Returns the address items for the given supplier IDs
-	 *
-	 * @param array $prodIds List of supplier IDs
-	 * @return array Associative list of supplier IDs / address IDs as keys and items implementing
-	 * 	\Aimeos\MShop\Common\Item\Address\Iface as values
-	 */
-	protected function getAddressItems( array $supplierIds )
-	{
-		$list = [];
-		$manager = $this->getObject()->getSubManager( 'address' );
-
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'supplier.address.parentid', $supplierIds ) );
-		$search->setSlice( 0, 0x7fffffff );
-
-		foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
-			$list[$addrItem->getParentId()][$id] = $addrItem;
-		}
-
-		return $list;
 	}
 }

@@ -189,30 +189,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the address items for the given customer IDs
-	 *
-	 * @param array $custIds List of customer IDs
-	 * @return array Associative list of customer IDs / address IDs as keys and items implementing
-	 * 	\Aimeos\MShop\Common\Item\Address\Iface as values
-	 */
-	protected function getAddressItems( array $custIds )
-	{
-		$list = [];
-		$manager = $this->getObject()->getSubManager( 'address' );
-
-		$search = $manager->createSearch();
-		$search->setConditions( $search->compare( '==', 'customer.address.parentid', $custIds ) );
-		$search->setSlice( 0, 0x7fffffff );
-
-		foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
-			$list[$addrItem->getParentId()][$id] = $addrItem;
-		}
-
-		return $list;
-	}
-
-
-	/**
 	 * Returns a password helper object based on the configuration.
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Helper\Password\Iface Password helper object

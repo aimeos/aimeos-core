@@ -22,6 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Customer\Manager\Base
 	implements \Aimeos\MShop\Customer\Manager\Iface
 {
+	use \Aimeos\MShop\Common\Manager\AddressRef\Traits;
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 
 
@@ -381,6 +382,7 @@ class Standard
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'customer' );
+			$item = $this->saveAddressItems( $item, 'customer' );
 			return $this->saveRefItems( $item, 'customer' );
 		}
 
@@ -567,6 +569,7 @@ class Standard
 		$this->addGroups( $item );
 
 		$item = $this->savePropertyItems( $item, 'customer' );
+		$item = $this->saveAddressItems( $item, 'customer' );
 		return $this->saveRefItems( $item, 'customer' );
 	}
 
@@ -751,7 +754,7 @@ class Standard
 
 		$addrItems = [];
 		if( in_array( 'customer/address', $ref, true ) ) {
-			$addrItems = $this->getAddressItems( array_keys( $map ) );
+			$addrItems = $this->getAddressItems( array_keys( $map ), 'customer' );
 		}
 
 		$propItems = [];

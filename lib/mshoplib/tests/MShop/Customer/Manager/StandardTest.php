@@ -167,6 +167,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetSaveAddressItems()
+	{
+		$item = $this->object->findItem( 'UTC001', ['customer/address'] );
+
+		$item->setId( null )->setCode( 'xyz' );
+		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
+		$item->addAddressItem( new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.address.' ) );
+		$this->object->saveItem( $item );
+
+		$item2 = $this->object->findItem( 'xyz', ['customer/address'] );
+
+		$this->object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 2, count( $item->getAddressItems() ) );
+		$this->assertEquals( 2, count( $item2->getAddressItems() ) );
+	}
+
+
 	public function testGetSavePropertyItems()
 	{
 		$item = $this->object->findItem( 'UTC001', ['customer/property'] );
@@ -175,7 +193,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->getPaymentAddress()->setEmail( 'unittest@xyz.com' );
 		$this->object->saveItem( $item );
 
-		$item2 = $this->object->findItem( 'UTC001', ['customer/property'] );
+		$item2 = $this->object->findItem( 'xyz', ['customer/property'] );
 
 		$this->object->deleteItem( $item->getId() );
 
