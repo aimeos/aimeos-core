@@ -41,7 +41,7 @@ class Standard
 	{
 		parent::__construct( 'product.', $values, $listItems, $refItems );
 
-		$this->setPropertyItems( $propItems );
+		$this->initPropertyItems( $propItems );
 		$this->values = $values;
 	}
 

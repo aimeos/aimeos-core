@@ -73,7 +73,7 @@ abstract class Base
 			}
 		}
 
-		$this->setPropertyItems( $propItems );
+		$this->initPropertyItems( $propItems );
 
 		// set modified flag to false
 		$address->setId( $this->getId() );

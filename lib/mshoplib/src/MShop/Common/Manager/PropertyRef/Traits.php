@@ -52,9 +52,9 @@ trait Traits
 	/**
 	 * Adds new, updates existing and deletes removed property items
 	 *
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with referenced items
+	 * @param \Aimeos\MShop\Common\Item\PropertyRef\Iface $item Item with referenced items
 	 * @param string $domain Domain of the calling manager
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface Item with saved referenced items
+	 * @return \Aimeos\MShop\Common\Item\PropertyRef\Iface Item with saved referenced items
 	 */
 	protected function savePropertyItems( \Aimeos\MShop\Common\Item\PropertyRef\Iface $item, $domain )
 	{

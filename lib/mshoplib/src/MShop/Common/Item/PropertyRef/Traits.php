@@ -72,12 +72,7 @@ trait Traits
 	 */
 	public function deletePropertyItems( array $items )
 	{
-		foreach( $items as $item )
-		{
-			if( !( $item instanceof \Aimeos\MShop\Common\Item\Property\Iface ) ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Not a property item' ) );
-			}
-
+		foreach( $items as $item ) {
 			$this->deletePropertyItem( $item );
 		}
 
@@ -125,7 +120,7 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface[] $items Property items
 	 */
-	protected function setPropertyItems( array $items )
+	protected function initPropertyItems( array $items )
 	{
 		$this->propItems = $items;
 	}
