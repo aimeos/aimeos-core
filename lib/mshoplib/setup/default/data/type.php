@@ -80,6 +80,10 @@ return array(
 		array( 'domain' => 'text', 'code' => 'default', 'label' => 'Standard', 'status' => 1 ),
 	),
 
+	'media/property/type' => array(
+		array( 'domain' => 'media', 'code' => 'title', 'label' => 'Media title', 'status' => 1 ),
+	),
+
 	'plugin/type' => array(
 		array( 'domain' => 'plugin', 'code' => 'order', 'label' => 'Order', 'status' => 1 )
 	),
