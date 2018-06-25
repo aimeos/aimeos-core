@@ -257,7 +257,9 @@ class Standard
 	public function cleanup( array $siteids )
 	{
 		$path = 'mshop/customer/manager/submanagers';
-		foreach( $this->getContext()->getConfig()->get( $path, array( 'address', 'lists', 'group' ) ) as $domain ) {
+		$default = ['address', 'group', 'lists', 'property'];
+
+		foreach( $this->getContext()->getConfig()->get( $path, $default ) as $domain ) {
 			$this->getObject()->getSubManager( $domain )->cleanup( $siteids );
 		}
 
@@ -287,8 +289,9 @@ class Standard
 	public function getResourceType( $withsub = true )
 	{
 		$path = 'mshop/customer/manager/submanagers';
+		$default = ['address', 'group', 'lists', 'property'];
 
-		return $this->getResourceTypeBase( 'customer', $path, array( 'address', 'group', 'lists' ), $withsub );
+		return $this->getResourceTypeBase( 'customer', $path, $default, $withsub );
 	}
 
 
@@ -318,8 +321,9 @@ class Standard
 		 * @category Developer
 		 */
 		$path = 'mshop/customer/manager/submanagers';
+		$default = ['address', 'group', 'lists', 'property'];
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'lists' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
 	}
 
 
