@@ -44,10 +44,11 @@ interface Iface
 	 * Removes a list of list items which references their domain items (removed as well if it exists)
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
+	 * @param boolean $all True to delete referenced items as well, false for list items only
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a list item or isn't found
 	 */
-	public function deleteListItems( array $items );
+	public function deleteListItems( array $items, $all = false );
 
 	/**
 	 * Returns the deleted list items which include the domain items if available

@@ -110,7 +110,25 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteListItems()
 	{
+		$this->listItem1->setRefItem( $this->textItem1 );
+		$this->listItem2->setRefItem( $this->textItem2 );
+
 		$this->object->deleteListItems( [$this->listItem1, $this->listItem2] );
+
+		$this->assertEquals( 2, count( $this->object->getListItemsDeleted() ) );
+
+		foreach( $this->object->getListItemsDeleted() as $listItem ) {
+			$this->assertNull( $listItem->getRefItem() );
+		}
+	}
+
+
+	public function testDeleteListItemsAll()
+	{
+		$this->listItem1->setRefItem( $this->textItem1 );
+		$this->listItem2->setRefItem( $this->textItem2 );
+
+		$this->object->deleteListItems( [$this->listItem1, $this->listItem2], true );
 
 		$this->assertEquals( [$this->listItem1, $this->listItem2], $this->object->getListItemsDeleted() );
 	}

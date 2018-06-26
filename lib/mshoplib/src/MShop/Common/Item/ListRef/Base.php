@@ -84,7 +84,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		{
 			foreach( $this->listItems[$domain] as $key => $litem )
 			{
-				if( $litem === $listItem && $listItem->getDomain() === $domain )
+				if( $litem === $listItem )
 				{
 					$this->rmItems[] = $listItem->setRefItem( $refItem );
 					unset( $this->listItems[$domain][$key] );
@@ -102,10 +102,11 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 * Removes a list of list items which references their domain items (removed as well if it exists)
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Lists\Iface[] $items Existing list items
+	 * @param boolean $all True to delete referenced items as well, false for list items only
 	 * @return \Aimeos\MShop\Common\Item\Iface Self object for method chaining
 	 * @throws \Aimeos\MShop\Exception If an item isn't a list item or isn't found
 	 */
-	public function deleteListItems( array $items )
+	public function deleteListItems( array $items, $all = false )
 	{
 		foreach( $items as $item )
 		{
@@ -113,7 +114,8 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 				throw new \Aimeos\MShop\Exception( sprintf( 'Not a list item' ) );
 			}
 
-			$this->deleteListItem( $item->getDomain(), $item, $item->getRefItem() );
+			$refItem = ( $all === true ? $item->getRefItem() : null );
+			$this->deleteListItem( $item->getDomain(), $item, $refItem );
 		}
 
 		return $this;
