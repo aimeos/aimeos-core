@@ -242,6 +242,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetName()
+	{
+		$this->assertEquals( 'testPicture', $this->object->getName() );
+	}
+
+
+	public function testGetNameProperties()
+	{
+		$values = ['media.value' => 'title', 'media.type' => 'name', 'languageid' => null];
+		$propItems = [new \Aimeos\MShop\Common\Item\Property\Standard( 'media.', $values )];
+		$object = new \Aimeos\MShop\Media\Item\Standard( $this->values, [], [], $propItems );
+
+		$this->assertEquals( 'title', $object->getName() );
+	}
+
+
 	public function testGetResourceType()
 	{
 		$this->assertEquals( 'media', $this->object->getResourceType() );

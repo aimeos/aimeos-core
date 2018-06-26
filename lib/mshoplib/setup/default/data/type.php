@@ -81,7 +81,7 @@ return array(
 	),
 
 	'media/property/type' => array(
-		array( 'domain' => 'media', 'code' => 'title', 'label' => 'Media title', 'status' => 1 ),
+		array( 'domain' => 'media', 'code' => 'name', 'label' => 'Media title', 'status' => 1 ),
 	),
 
 	'plugin/type' => array(
