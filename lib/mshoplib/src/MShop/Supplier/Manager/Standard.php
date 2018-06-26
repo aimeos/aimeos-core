@@ -265,7 +265,7 @@ class Standard
 		if( !$item->isModified() )
 		{
 			$item = $this->saveAddressItems( $item, 'supplier' );
-			return $this->saveRefItems( $item, 'supplier' );
+			return $this->saveListItems( $item, 'supplier' );
 		}
 
 		$context = $this->getContext();
@@ -424,7 +424,7 @@ class Standard
 		}
 
 		$item = $this->saveAddressItems( $item, 'supplier' );
-		return $this->saveRefItems( $item, 'supplier' );
+		return $this->saveListItems( $item, 'supplier' );
 	}
 
 

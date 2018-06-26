@@ -220,7 +220,7 @@ class Standard
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'product' );
-			return $this->saveRefItems( $item, 'product' );
+			return $this->saveListItems( $item, 'product' );
 		}
 
 		$context = $this->getContext();
@@ -384,7 +384,7 @@ class Standard
 		}
 
 		$item = $this->savePropertyItems( $item, 'product' );
-		return $this->saveRefItems( $item, 'product' );
+		return $this->saveListItems( $item, 'product' );
 	}
 
 

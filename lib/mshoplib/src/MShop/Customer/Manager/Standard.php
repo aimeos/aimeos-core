@@ -387,7 +387,7 @@ class Standard
 		{
 			$item = $this->savePropertyItems( $item, 'customer' );
 			$item = $this->saveAddressItems( $item, 'customer' );
-			return $this->saveRefItems( $item, 'customer' );
+			return $this->saveListItems( $item, 'customer' );
 		}
 
 		$context = $this->getContext();
@@ -574,7 +574,7 @@ class Standard
 
 		$item = $this->savePropertyItems( $item, 'customer' );
 		$item = $this->saveAddressItems( $item, 'customer' );
-		return $this->saveRefItems( $item, 'customer' );
+		return $this->saveListItems( $item, 'customer' );
 	}
 
 

@@ -292,7 +292,7 @@ class Standard
 		if( !$item->isModified() )
 		{
 			$item = $this->savePropertyItems( $item, 'media' );
-			return $this->saveRefItems( $item, 'media' );
+			return $this->saveListItems( $item, 'media' );
 		}
 
 		$context = $this->getContext();
@@ -456,7 +456,7 @@ class Standard
 		}
 
 		$item = $this->savePropertyItems( $item, 'media' );
-		return $this->saveRefItems( $item, 'media' );
+		return $this->saveListItems( $item, 'media' );
 	}
 
 

@@ -406,7 +406,7 @@ class Standard extends Base
 			throw $e;
 		}
 
-		return $this->saveRefItems( $item, 'catalog' );
+		return $this->saveListItems( $item, 'catalog' );
 	}
 
 
@@ -454,7 +454,7 @@ class Standard extends Base
 		}
 
 		if( !$item->isModified() ) {
-			return $this->saveRefItems( $item, 'catalog' );
+			return $this->saveListItems( $item, 'catalog' );
 		}
 
 		$siteid = $this->getContext()->getLocale()->getSiteId();
@@ -473,7 +473,7 @@ class Standard extends Base
 			throw $e;
 		}
 
-		return $this->saveRefItems( $item, 'catalog' );
+		return $this->saveListItems( $item, 'catalog' );
 	}
 
 

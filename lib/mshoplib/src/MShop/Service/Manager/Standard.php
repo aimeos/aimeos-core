@@ -308,7 +308,7 @@ class Standard
 		}
 
 		if( !$item->isModified() ) {
-			return $this->saveRefItems( $item, 'service' );
+			return $this->saveListItems( $item, 'service' );
 		}
 
 		$context = $this->getContext();
@@ -472,7 +472,7 @@ class Standard
 			throw $e;
 		}
 
-		return $this->saveRefItems( $item, 'service' );
+		return $this->saveListItems( $item, 'service' );
 	}
 
 

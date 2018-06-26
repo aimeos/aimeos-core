@@ -221,13 +221,13 @@ abstract class Base
 
 
 	/**
-	 * Adds new, updates existing and deletes removed referenced items
+	 * Adds new, updates existing and deletes removed list items and referenced items if available
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with referenced items
 	 * @param string $domain Domain of the calling manager
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item with updated referenced items
 	 */
-	protected function saveRefItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $domain )
+	protected function saveListItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $domain )
 	{
 		$context = $this->getContext();
 		$rmListIds = $rmIds = $refManager = [];
