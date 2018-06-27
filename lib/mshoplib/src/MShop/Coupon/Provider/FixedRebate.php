@@ -51,34 +51,28 @@ class FixedRebate
 	 */
 	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		if( $this->getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
-
-		$rebate = '0.00';
 		$currency = $base->getPrice()->getCurrencyId();
-		$config = $this->getItemBase()->getConfig();
+		$rebate = $this->getConfigValue( 'fixedrebate.rebate', 0 );
+		$productCode = $this->getConfigValue( 'fixedrebate.productcode' );
 
-		if( !isset( $config['fixedrebate.productcode'] ) || !isset( $config['fixedrebate.rebate'] ) )
+		if( $rebate == 0 || $productCode === null )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
 			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'fixedrebate.productcode, fixedrebate.rebate' );
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		if( is_array( $config['fixedrebate.rebate'] ) )
+		if( is_array( $rebate ) )
 		{
-			if( isset( $config['fixedrebate.rebate'][$currency] ) ) {
-				$rebate = $config['fixedrebate.rebate'][$currency];
+			if( !isset( $rebate[$currency] ) ) {
+				throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'No rebate for currency "%1$s" available', $currency ) );
 			}
-		}
-		else
-		{
-			$rebate = $config['fixedrebate.rebate'];
+
+			$rebate = $rebate[$currency];
 		}
 
 
-		$orderProducts = $this->createMonetaryRebateProducts( $base, $config['fixedrebate.productcode'], $rebate );
+		$orderProducts = $this->createMonetaryRebateProducts( $base, $productCode, $rebate );
 
 		$base->addCoupon( $this->getCode(), $orderProducts );
 	}

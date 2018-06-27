@@ -30,10 +30,11 @@ class Once
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
 		$addresses = $base->getAddresses();
+		$type = \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT;
 
-		if( isset( $addresses[\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT] ) )
+		if( isset( $addresses[$type] ) )
 		{
-			$address = $addresses[\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT];
+			$address = $addresses[$type];
 			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'order' );
 
 			$search = $manager->createSearch();

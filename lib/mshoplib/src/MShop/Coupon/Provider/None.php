@@ -28,10 +28,6 @@ class None
 	 */
 	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		if( $this->getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
-
 		$base->addCoupon( $this->getCode(), [] );
 	}
 }

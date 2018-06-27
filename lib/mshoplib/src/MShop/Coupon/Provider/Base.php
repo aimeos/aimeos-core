@@ -310,15 +310,7 @@ abstract class Base implements Iface
 	protected function createProduct( $productCode, $quantity = 1, $stockType = 'default' )
 	{
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
-		$search = $productManager->createSearch( true );
-		$search->setConditions( $search->compare( '==', 'product.code', $productCode ) );
-		$products = $productManager->searchItems( $search, array( 'text', 'media', 'price' ) );
-
-		if( ( $product = reset( $products ) ) === false )
-		{
-			$msg = $this->context->getI18n()->dt( 'mshop', 'No product with code "%1$s" found' );
-			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $productCode ) );
-		}
+		$product = $productManager->findItem( $productCode, ['text', 'media', 'price'] );
 
 		$priceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'price' );
 		$prices = $product->getRefItems( 'price', 'default', 'default' );
@@ -360,8 +352,10 @@ abstract class Base implements Iface
 
 		krsort( $prices );
 
-		if( empty( $prices ) ) {
-			$prices = array( '0.00' => \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' )->createItem() );
+		if( empty( $prices ) )
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'price' );
+			$prices = array( '0.00' => $manager->createItem() );
 		}
 
 		foreach( $prices as $taxrate => $price )

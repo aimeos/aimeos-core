@@ -42,20 +42,14 @@ class FreeShipping
 	 */
 	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		if( $this->getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
-
-		$config = $this->getItemBase()->getConfig();
-
-		if( !isset( $config['freeshipping.productcode'] ) )
+		if( ( $productCode = $this->getConfigValue( 'freeshipping.productcode' ) ) === null )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
 			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'freeshipping.productcode' );
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$orderProduct = $this->createProduct( $config['freeshipping.productcode'], 1 );
+		$orderProduct = $this->createProduct( $productCode, 1 );
 		$price = $orderProduct->getPrice();
 
 		foreach( $base->getService( 'delivery' ) as $service )

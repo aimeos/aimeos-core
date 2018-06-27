@@ -51,22 +51,19 @@ class Present
 	 */
 	public function addCoupon( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		if( $this->getObject()->isAvailable( $base ) === false ) {
-			return;
-		}
+		$quantity = (int) $this->getConfigValue( 'present.quantity', 0 );
+		$productCode = $this->getConfigValue( 'present.productcode' );
 
-		$config = $this->getItemBase()->getConfig();
-
-		if( !isset( $config['present.productcode'] ) || !isset( $config['present.quantity'] ) )
+		if( $quantity === 0 || $productCode === null )
 		{
 			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Invalid configuration for coupon provider "%1$s", needs "%2$s"' );
 			$msg = sprintf( $msg, $this->getItemBase()->getProvider(), 'present.productcode, present.quantity' );
 			throw new \Aimeos\MShop\Coupon\Exception( $msg );
 		}
 
-		$orderProduct = $this->createProduct( $config['present.productcode'], $config['present.quantity'] );
+		$orderProduct = $this->createProduct( $productCode, $quantity );
 
-		$base->addCoupon( $this->getCode(), array( $orderProduct ) );
+		$base->addCoupon( $this->getCode(), [$orderProduct] );
 	}
 
 
