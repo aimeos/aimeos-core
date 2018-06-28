@@ -41,6 +41,11 @@ abstract class Base
 	 */
 	const EMAIL_DELIVERY = 'email-delivery';
 
+	/**
+	 * Already sent voucher e-mails.
+	 */
+	const EMAIL_VOUCHER = 'email-voucher';
+
 
 	/**
 	 * Stock level is already updated.
