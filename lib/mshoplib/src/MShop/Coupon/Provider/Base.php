@@ -339,13 +339,13 @@ abstract class Base implements Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface Basket object
 	 * @param string $productCode Unique product code
-	 * @param float $rebate Rebate amount that should be granted
+	 * @param float $rebate Rebate amount that should be granted, will contain the remaining rebate if not fully used
 	 * @param integer $quantity Number of products in basket
 	 * @param string $stockType Unique code of the stock type the product is from
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface[] Order products with monetary rebates
 	 */
 	protected function createMonetaryRebateProducts( \Aimeos\MShop\Order\Item\Base\Iface $base,
-		$productCode, $rebate, $quantity = 1, $stockType = 'default' )
+		$productCode, &$rebate, $quantity = 1, $stockType = 'default' )
 	{
 		$orderProducts = [];
 		$prices = $this->getPriceByTaxRate( $base );
@@ -366,15 +366,10 @@ abstract class Base implements Iface
 
 			$amount = $price->getValue() + $price->getCosts();
 
-			if( $amount > 0 && $amount < $rebate )
-			{
-				$value = $price->getValue() + $price->getCosts();
-				$rebate -= $value;
-			}
-			else
-			{
-				$value = $rebate;
-				$rebate = '0.00';
+			if( $amount < $rebate ) {
+				$value = $amount; $rebate -= $amount;
+			} else {
+				$value = $rebate; $rebate = '0.00';
 			}
 
 			$orderProduct = $this->createProduct( $productCode, $quantity, $stockType );
