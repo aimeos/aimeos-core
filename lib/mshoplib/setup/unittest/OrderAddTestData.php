@@ -206,8 +206,6 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No base Item found for "%1$s" in order base service data', $dataset['baseid'] ) );
 			}
 
-			$priceItem = $priceManager->createItem();
-
 			$ordServ->setId( null );
 			$ordServ->setBaseId( $bases['ids'][$dataset['baseid']] );
 			$ordServ->setType( $dataset['type'] );
@@ -219,6 +217,8 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 				$ordServ->setServiceId( $servIds[$dataset['servid']] );
 			}
 
+			$priceItem = $priceManager->createItem();
+			$priceItem->setCurrencyId( $dataset['currencyid'] );
 			$priceItem->setValue( $dataset['price'] );
 			$priceItem->setCosts( $dataset['shipping'] );
 			$priceItem->setRebate( $dataset['rebate'] );
@@ -297,6 +297,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$priceItem = $priceManager->createItem();
+			$priceItem->setCurrencyId( $dataset['currencyid'] );
 			$priceItem->setValue( $dataset['price'] );
 			$priceItem->setCosts( $dataset['shipping'] );
 			$priceItem->setRebate( $dataset['rebate'] );

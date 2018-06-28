@@ -112,6 +112,7 @@ return array(
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'target', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'quantity', 'integer', [] );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
@@ -176,6 +177,7 @@ return array(
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'name', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mediaurl', 'string', array( 'length' => 255 ) );
+			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
 			$table->addColumn( 'price', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
 			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );

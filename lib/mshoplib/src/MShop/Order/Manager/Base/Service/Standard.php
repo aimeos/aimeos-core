@@ -77,6 +77,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'order.base.service.currencyid' => array(
+			'code' => 'order.base.service.currencyid',
+			'internalcode' => 'mordbase."currencyid"',
+			'label' => 'Service currencyid code',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'order.base.service.price' => array(
 			'code' => 'order.base.service.price',
 			'internalcode' => 'mordbase."price"',
@@ -641,21 +648,22 @@ class Standard
 			$stmt->bind( 4, $item->getCode() );
 			$stmt->bind( 5, $item->getName() );
 			$stmt->bind( 6, $item->getMediaUrl() );
-			$stmt->bind( 7, $price->getValue() );
-			$stmt->bind( 8, $price->getCosts() );
-			$stmt->bind( 9, $price->getRebate() );
-			$stmt->bind( 10, $price->getTaxValue() );
-			$stmt->bind( 11, $price->getTaxRate() );
-			$stmt->bind( 12, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 13, $date ); // mtime
-			$stmt->bind( 14, $context->getEditor() );
-			$stmt->bind( 15, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 7, $price->getCurrencyId() );
+			$stmt->bind( 8, $price->getValue() );
+			$stmt->bind( 9, $price->getCosts() );
+			$stmt->bind( 10, $price->getRebate() );
+			$stmt->bind( 11, $price->getTaxValue() );
+			$stmt->bind( 12, $price->getTaxRate() );
+			$stmt->bind( 13, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 14, $date ); // mtime
+			$stmt->bind( 15, $context->getEditor() );
+			$stmt->bind( 16, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 16, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 17, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //is not modified anymore
 			} else {
-				$stmt->bind( 16, $date ); // ctime
+				$stmt->bind( 17, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
@@ -865,6 +873,7 @@ class Standard
 					$price->setTaxRate( $row['order.base.service.taxrate'] );
 					$price->setTaxFlag( $row['order.base.service.taxflag'] );
 					$price->setTaxValue( $row['order.base.service.taxvalue'] );
+					$price->setCurrencyId( $row['order.base.service.currencyid'] );
 
 					$items[$row['order.base.service.id']] = array( 'price' => $price, 'item' => $row );
 				}

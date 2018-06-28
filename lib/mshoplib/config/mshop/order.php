@@ -314,10 +314,10 @@ return array(
 							INSERT INTO "mshop_order_base_product" (
 								"baseid", "ordprodid", "type", "prodid", "prodcode",
 								"suppliercode", "stocktype", "name", "mediaurl", "quantity",
-								"price", "costs", "rebate", "tax", "taxrate", "taxflag", "flags",
-								"status", "pos", "mtime", "editor", "target", "siteid", "ctime"
+								"currencyid", "price", "costs", "rebate", "tax", "taxrate", "taxflag",
+								"flags", "status", "pos", "mtime", "editor", "target", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
@@ -327,8 +327,8 @@ return array(
 							SET "baseid" = ?, "ordprodid" = ?, "type" = ?,
 								"prodid" = ?, "prodcode" = ?, "suppliercode" = ?,
 								"stocktype" = ?, "name" = ?, "mediaurl" = ?,
-								"quantity" = ?, "price" = ?, "costs" = ?, "rebate" = ?,
-								"tax" = ?, "taxrate" = ?, "taxflag" = ?, "flags" = ?,
+								"quantity" = ?, "currencyid" = ?, "price" = ?, "costs" = ?,
+								"rebate" = ?, "tax" = ?, "taxrate" = ?, "taxflag" = ?, "flags" = ?,
 								"status" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "target" = ?
 							WHERE "siteid" = ? AND "id" = ?
 						'
@@ -341,19 +341,19 @@ return array(
 								mordbapr."suppliercode" AS "order.base.product.suppliercode", mordbapr."stocktype" AS "order.base.product.stocktype",
 								mordbapr."type" AS "order.base.product.type", mordbapr."name" AS "order.base.product.name",
 								mordbapr."mediaurl" AS "order.base.product.mediaurl", mordbapr."quantity" AS "order.base.product.quantity",
-								mordbapr."price" AS "order.base.product.price", mordbapr."costs" AS "order.base.product.costs",
-								mordbapr."rebate" AS "order.base.product.rebate", mordbapr."tax" AS "order.base.product.taxvalue",
-								mordbapr."taxrate" AS "order.base.product.taxrate", mordbapr."taxflag" AS "order.base.product.taxflag",
-								mordbapr."flags" AS "order.base.product.flags", mordbapr."status" AS "order.base.product.status",
-								mordbapr."pos" AS "order.base.product.position", mordbapr."mtime" AS "order.base.product.mtime",
-								mordbapr."editor" AS "order.base.product.editor", mordbapr."ctime" AS "order.base.product.ctime",
-								mordbapr."target" AS "order.base.product.target"
+								mordbapr."currencyid" AS "order.base.product.currencyid", mordbapr."price" AS "order.base.product.price",
+								mordbapr."costs" AS "order.base.product.costs", mordbapr."rebate" AS "order.base.product.rebate",
+								mordbapr."tax" AS "order.base.product.taxvalue", mordbapr."taxrate" AS "order.base.product.taxrate",
+								mordbapr."taxflag" AS "order.base.product.taxflag", mordbapr."flags" AS "order.base.product.flags",
+								mordbapr."status" AS "order.base.product.status", mordbapr."pos" AS "order.base.product.position",
+								mordbapr."mtime" AS "order.base.product.mtime", mordbapr."editor" AS "order.base.product.editor",
+								mordbapr."ctime" AS "order.base.product.ctime", mordbapr."target" AS "order.base.product.target"
 							FROM "mshop_order_base_product" AS mordbapr
 							:joins
 							WHERE :cond
 							GROUP BY mordbapr."id", mordbapr."baseid", mordbapr."siteid", mordbapr."ordprodid",
 								mordbapr."prodid", mordbapr."prodcode", mordbapr."suppliercode", mordbapr."stocktype",
-								mordbapr."type", mordbapr."name", mordbapr."mediaurl", mordbapr."quantity",
+								mordbapr."type", mordbapr."name", mordbapr."mediaurl", mordbapr."quantity", mordbapr."currencyid",
 								mordbapr."price", mordbapr."costs", mordbapr."rebate", mordbapr."tax", mordbapr."taxrate",
 								mordbapr."taxflag", mordbapr."flags", mordbapr."status", mordbapr."pos", mordbapr."mtime",
 								mordbapr."editor", mordbapr."target", mordbapr."ctime" /*-columns*/ , :columns /*columns-*/
@@ -510,19 +510,19 @@ return array(
 					'insert' => array(
 						'ansi' => '
 							INSERT INTO "mshop_order_base_service" (
-								"baseid", "servid", "type", "code", "name",
-								"mediaurl", "price", "costs", "rebate", "tax", "taxrate",
+								"baseid", "servid", "type", "code", "name", "mediaurl",
+								"currencyid", "price", "costs", "rebate", "tax", "taxrate",
 								"taxflag", "mtime", "editor", "siteid", "ctime"
 							) VALUES (
-								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+								?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 							)
 						'
 					),
 					'update' => array(
 						'ansi' => '
 							UPDATE "mshop_order_base_service"
-							SET "baseid" = ?, "servid" = ?, "type" = ?,
-								"code" = ?, "name" = ?, "mediaurl" = ?, "price" = ?,
+							SET "baseid" = ?, "servid" = ?, "type" = ?, "code" = ?,
+								"name" = ?, "mediaurl" = ?, "currencyid" = ?, "price" = ?,
 								"costs" = ?, "rebate" = ?, "tax" = ?, "taxrate" = ?,
 								"taxflag" = ?, "mtime" = ?, "editor" = ?
 							WHERE "siteid" = ? AND "id" = ?
@@ -534,19 +534,19 @@ return array(
 								mordbase."siteid" AS "order.base.service.siteid", mordbase."servid" AS "order.base.service.serviceid",
 								mordbase."type" AS "order.base.service.type", mordbase."code" AS "order.base.service.code",
 								mordbase."name" AS "order.base.service.name", mordbase."mediaurl" AS "order.base.service.mediaurl",
-								mordbase."price" AS "order.base.service.price", mordbase."costs" AS "order.base.service.costs",
-								mordbase."rebate" AS "order.base.service.rebate", mordbase."tax" AS "order.base.service.taxvalue",
-								mordbase."taxrate" AS "order.base.service.taxrate", mordbase."taxflag" AS "order.base.service.taxflag",
-								mordbase."mtime" AS "order.base.service.mtime", mordbase."editor" AS "order.base.service.editor",
-								mordbase."ctime" AS "order.base.service.ctime"
+								mordbase."currencyid" AS "order.base.service.currencyid", mordbase."price" AS "order.base.service.price",
+								mordbase."costs" AS "order.base.service.costs", mordbase."rebate" AS "order.base.service.rebate",
+								mordbase."tax" AS "order.base.service.taxvalue", mordbase."taxrate" AS "order.base.service.taxrate",
+								mordbase."taxflag" AS "order.base.service.taxflag", mordbase."mtime" AS "order.base.service.mtime",
+								mordbase."editor" AS "order.base.service.editor", mordbase."ctime" AS "order.base.service.ctime"
 							FROM "mshop_order_base_service" AS mordbase
 							:joins
 							WHERE :cond
 							GROUP BY mordbase."id", mordbase."baseid", mordbase."siteid", mordbase."servid",
 								mordbase."type", mordbase."code", mordbase."name", mordbase."mediaurl",
-								mordbase."price", mordbase."costs", mordbase."rebate", mordbase."tax",
-								mordbase."taxrate", mordbase."taxflag", mordbase."mtime", mordbase."editor",
-								mordbase."ctime" /*-columns*/ , :columns /*columns-*/
+								mordbase."currencyid", mordbase."price", mordbase."costs", mordbase."rebate",
+								mordbase."tax", mordbase."taxrate", mordbase."taxflag", mordbase."mtime",
+								mordbase."editor", mordbase."ctime" /*-columns*/ , :columns /*columns-*/
 							/*-orderby*/ ORDER BY :order /*orderby-*/
 							LIMIT :size OFFSET :start
 						'
