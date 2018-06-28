@@ -46,6 +46,7 @@ return array(
 			$table->addColumn( 'count', 'integer', [] );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
+			$table->addColumn( 'ref', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
 			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );

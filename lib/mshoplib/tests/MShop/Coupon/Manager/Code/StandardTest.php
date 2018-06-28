@@ -134,6 +134,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getCount(), $itemSaved->getCount() );
 		$this->assertEquals( $item->getDateStart(), $itemSaved->getDateStart() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
+		$this->assertEquals( $item->getRef(), $itemSaved->getRef() );
 
 		$this->assertEquals( $context->getEditor(), $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -146,6 +147,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getCount(), $itemUpd->getCount() );
 		$this->assertEquals( $itemExp->getDateStart(), $itemUpd->getDateStart() );
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
+		$this->assertEquals( $itemExp->getRef(), $itemUpd->getRef() );
 
 		$this->assertEquals( $context->getEditor(), $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
@@ -177,6 +179,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'coupon.code.count', 2000000 );
 		$expr[] = $search->compare( '==', 'coupon.code.datestart', null );
 		$expr[] = $search->compare( '==', 'coupon.code.dateend', null );
+		$expr[] = $search->compare( '==', 'coupon.code.ref', '' );
 		$expr[] = $search->compare( '>=', 'coupon.code.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'coupon.code.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'coupon.code.editor', '' );

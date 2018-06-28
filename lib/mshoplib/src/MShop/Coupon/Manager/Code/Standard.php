@@ -76,6 +76,13 @@ class Standard
 			'type' => 'datetime',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'coupon.code.ref' => array(
+			'code' => 'coupon.code.ref',
+			'internalcode' => 'mcouco."ref"',
+			'label' => 'Code reference',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+		),
 		'coupon.code.ctime' => array(
 			'code' => 'coupon.code.ctime',
 			'internalcode' => 'mcouco."ctime"',
@@ -459,18 +466,19 @@ class Standard
 
 			$stmt->bind( 1, $item->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 2, $item->getCode() );
-			$stmt->bind( 3, $item->getCount(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 4, $item->getDateStart() );
-			$stmt->bind( 5, $item->getDateEnd() );
-			$stmt->bind( 6, $date ); // mtime
-			$stmt->bind( 7, $context->getEditor() );
-			$stmt->bind( 8, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 3, $item->getDateStart() );
+			$stmt->bind( 4, $item->getDateEnd() );
+			$stmt->bind( 5, $item->getCount(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getRef() );
+			$stmt->bind( 7, $date ); // mtime
+			$stmt->bind( 8, $context->getEditor() );
+			$stmt->bind( 9, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 9, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 9, $date ); // ctime
+				$stmt->bind( 10, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

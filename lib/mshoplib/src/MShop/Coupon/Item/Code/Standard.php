@@ -195,6 +195,41 @@ class Standard
 
 
 	/**
+	 * Returns reference for the coupon code
+	 * This can be an arbitrary value used by the coupon provider
+	 *
+	 * @return string Arbitrary value depending on the coupon provider
+	 */
+	public function getRef()
+	{
+		if( isset( $this->values['coupon.code.ref'] ) ) {
+			return (string) $this->values['coupon.code.ref'];
+		}
+
+		return '';
+	}
+
+
+	/**
+	 * Sets the new reference for the coupon code
+	 * This can be an arbitrary value used by the coupon provider
+	 *
+	 * @param string Arbitrary value depending on the coupon provider
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
+	 */
+	public function setRef( $ref )
+	{
+		if( (string) $ref !== $this->getRef() )
+		{
+			$this->values['coupon.code.ref'] = $ref;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -239,6 +274,7 @@ class Standard
 				case 'coupon.code.parentid': $this->setParentId( $value ); break;
 				case 'coupon.code.datestart': $this->setDateStart( $value ); break;
 				case 'coupon.code.dateend': $this->setDateEnd( $value ); break;
+				case 'coupon.code.ref': $this->setRef( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -261,6 +297,7 @@ class Standard
 		$list['coupon.code.count'] = $this->getCount();
 		$list['coupon.code.datestart'] = $this->getDateStart();
 		$list['coupon.code.dateend'] = $this->getDateEnd();
+		$list['coupon.code.ref'] = $this->getRef();
 
 		if( $private === true ) {
 			$list['coupon.code.parentid'] = $this->getParentId();

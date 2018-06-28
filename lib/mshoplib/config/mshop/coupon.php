@@ -19,18 +19,18 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_coupon_code" (
-							"parentid", "code", "count", "start", "end",
+							"parentid", "code", "start", "end", "count", "ref",
 							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
 				'update' => array(
 					'ansi' => '
 						UPDATE "mshop_coupon_code"
-						SET "parentid" = ?, "code" = ?, "count" = ?,
-							"start" = ?, "end" = ?, "mtime" = ?, "editor" = ?
+						SET "parentid" = ?, "code" = ?, "start" = ?, "end" = ?,
+							"count" = ?, "ref" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
@@ -39,13 +39,14 @@ return array(
 						SELECT mcouco."id" AS "coupon.code.id", mcouco."parentid" AS "coupon.code.parentid",
 							mcouco."siteid" AS "coupon.code.siteid", mcouco."code" AS "coupon.code.code",
 							mcouco."start" AS "coupon.code.datestart", mcouco."end" AS "coupon.code.dateend",
-							mcouco."count" AS "coupon.code.count", mcouco."mtime" AS "coupon.code.mtime",
-							mcouco."editor" AS "coupon.code.editor", mcouco."ctime" AS "coupon.code.ctime"
+							mcouco."count" AS "coupon.code.count", mcouco."ref" AS "coupon.code.ref",
+							mcouco."mtime" AS "coupon.code.mtime", mcouco."ctime" AS "coupon.code.ctime",
+							mcouco."editor" AS "coupon.code.editor"
 						FROM "mshop_coupon_code" AS mcouco
 						:joins
 						WHERE :cond
 						GROUP BY mcouco."id", mcouco."parentid", mcouco."siteid", mcouco."code",
-							mcouco."start", mcouco."end", mcouco."count", mcouco."mtime",
+							mcouco."start", mcouco."end", mcouco."count", mcouco."ref", mcouco."mtime",
 							mcouco."editor", mcouco."ctime" /*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start

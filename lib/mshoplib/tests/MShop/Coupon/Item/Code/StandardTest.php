@@ -26,6 +26,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.code.count' => '100',
 			'coupon.code.datestart' => null,
 			'coupon.code.dateend' => null,
+			'coupon.code.ref' => 'abc',
 			'coupon.code.mtime' => '2011-01-01 00:00:02',
 			'coupon.code.ctime' => '2011-01-01 00:00:01',
 			'coupon.code.editor' => 'unitTestUser',
@@ -150,6 +151,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetRef()
+	{
+		$this->assertEquals( 'abc', $this->object->getRef() );
+	}
+
+
+	public function testSetRef()
+	{
+		$return = $this->object->setRef( 'xyz' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertEquals( 'xyz', $this->object->getRef() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
@@ -183,6 +200,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'coupon.code.parentid' => 2,
 			'coupon.code.code' => 'test',
 			'coupon.code.count' => 100,
+			'coupon.code.ref' => 'def',
 		);
 
 		$unknown = $item->fromArray( $list );
@@ -193,6 +211,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['coupon.code.parentid'], $item->getParentId() );
 		$this->assertEquals( $list['coupon.code.code'], $item->getCode() );
 		$this->assertEquals( $list['coupon.code.count'], $item->getCount() );
+		$this->assertEquals( $list['coupon.code.ref'], $item->getRef() );
 	}
 
 
@@ -208,6 +227,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['coupon.code.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['coupon.code.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['coupon.code.editor'] );
+		$this->assertEquals( $this->object->getRef(), $arrayObject['coupon.code.ref'] );
 	}
 
 
