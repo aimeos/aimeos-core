@@ -50,7 +50,7 @@ class OrderAddBaseServiceCurrencyid extends \Aimeos\MW\Setup\Task\Base
 	{
 		$this->msg( 'Adding currency ID to order base service table', 0 );
 
-//		$this->execute( $this->sql, 'db-order' );
+		$this->execute( $this->sql, 'db-order' );
 
 		$this->status( 'done' );
 	}
