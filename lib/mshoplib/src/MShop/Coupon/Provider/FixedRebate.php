@@ -71,7 +71,6 @@ class FixedRebate
 			$rebate = $rebate[$currency];
 		}
 
-
 		$orderProducts = $this->createMonetaryRebateProducts( $base, $productCode, $rebate );
 
 		$base->addCoupon( $this->getCode(), $orderProducts );

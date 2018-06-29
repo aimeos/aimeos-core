@@ -39,6 +39,9 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddCoupon()
 	{
+		$products = $this->getOrderProducts();
+		$this->orderBase->addProduct( $products['CNE'] );
+
 		$this->object->addCoupon( $this->orderBase );
 
 		$coupons = $this->orderBase->getCoupons();
@@ -48,7 +51,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
-		$this->assertEquals( 1, count( $products ) );
+		$this->assertEquals( 2, count( $products ) );
 		$this->assertEquals( '-2.50', $product->getPrice()->getValue() );
 		$this->assertEquals( '2.50', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );
@@ -70,6 +73,9 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 			),
 		);
 
+		$products = $this->getOrderProducts();
+		$this->orderBase->addProduct( $products['CNE'] );
+
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
 		$couponItem->setConfig( $config );
 
@@ -84,7 +90,7 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No coupon available' );
 		}
 
-		$this->assertEquals( 1, count( $products ) );
+		$this->assertEquals( 2, count( $products ) );
 		$this->assertEquals( '-1.25', $product->getPrice()->getValue() );
 		$this->assertEquals( '1.25', $product->getPrice()->getRebate() );
 		$this->assertEquals( 'U:MD', $product->getProductCode() );

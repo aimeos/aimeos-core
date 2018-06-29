@@ -364,12 +364,14 @@ abstract class Base implements Iface
 				break;
 			}
 
-			$amount = $price->getValue() + $price->getCosts();
+			if( ( $amount = $price->getValue() + $price->getCosts() ) < 0.01 ) {
+				continue;
+			}
 
 			if( $amount < $rebate ) {
 				$value = $amount; $rebate -= $amount;
 			} else {
-				$value = $rebate; $rebate = '0.00';
+				$value = $rebate; $rebate = 0;
 			}
 
 			$orderProduct = $this->createProduct( $productCode, $quantity, $stockType );
