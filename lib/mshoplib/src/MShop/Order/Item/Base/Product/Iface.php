@@ -280,6 +280,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function getAttributeItem( $code, $type = '' );
 
 	/**
+	 * Returns the list of attribute items for the ordered product.
+	 *
+	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
+	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
+	 */
+	public function getAttributeItems( $type = null );
+
+	/**
 	 * Adds or replaces the attribute item in the list of product attributes.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item Product attribute item
@@ -288,20 +296,12 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setAttributeItem( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface $item );
 
 	/**
-	 * Returns the list of attribute items for the ordered product.
-	 *
-	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
-	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
-	 */
-	public function getAttributes( $type = null );
-
-	/**
 	 * Sets the new list of attribute items for the product.
 	 *
 	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setAttributes( array $attributes );
+	public function setAttributeItems( array $attributes );
 
 	/**
 	 * Copys all data from a given product.

@@ -112,7 +112,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	 * @param string|null $type Filters returned attributes by the given type or null for no filtering
 	 * @return array List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 */
-	public function getAttributes( $type = null )
+	public function getAttributeItems( $type = null )
 	{
 		if( $type === null ) {
 			return $this->attributes;
@@ -164,7 +164,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	 * @param array $attributes List of attribute items implementing \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface
 	 * @return \Aimeos\MShop\Order\Item\Base\Product\Iface Order base product item for chaining method calls
 	 */
-	public function setAttributes( array $attributes )
+	public function setAttributeItems( array $attributes )
 	{
 		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $attributes );
 
@@ -173,6 +173,24 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 		$this->setModified();
 
 		return $this;
+	}
+
+
+	/*
+	 * @deprecated Use getAttributeItems() instead
+	 */
+	public function getAttributes( $type = null )
+	{
+		return $this->getAttributeItems( $type );
+	}
+
+
+	/*
+	 * @deprecated Use setAttributeItems() instead
+	 */
+	public function setAttributes( array $attributes )
+	{
+		return $this->setAttributeItems( $attributes );
 	}
 
 

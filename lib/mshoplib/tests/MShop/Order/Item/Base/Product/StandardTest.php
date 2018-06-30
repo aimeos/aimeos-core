@@ -435,7 +435,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attrItem002->setType( 'test_002' );
 		$attrItem002->setValue( 'value_002' );
 
-		$this->object->setAttributes( array( $attrItem001, $attrItem002 ) );
+		$this->object->setAttributeItems( array( $attrItem001, $attrItem002 ) );
 
 		$result = $this->object->getAttribute( 'code_001' );
 		$this->assertEquals( 'value_001', $result );
@@ -449,7 +449,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
 
-		$this->object->setAttributes( [] );
+		$this->object->setAttributeItems( [] );
 
 		$result = $this->object->getAttribute( 'code_001' );
 		$this->assertEquals( null, $result );
@@ -472,7 +472,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attrItem002->setType( 'test_001' );
 		$attrItem002->setValue( 'value_002' );
 
-		$this->object->setAttributes( array( $attrItem001, $attrItem002 ) );
+		$this->object->setAttributeItems( array( $attrItem001, $attrItem002 ) );
 
 		$result = $this->object->getAttribute( 'code_001', 'test_001' );
 		$this->assertEquals( ['value_001', 'value_002'], $result );
@@ -494,7 +494,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attrItem002->setType( 'test_002' );
 		$attrItem002->setValue( 'value_002' );
 
-		$this->object->setAttributes( array( $attrItem001, $attrItem002 ) );
+		$this->object->setAttributeItems( array( $attrItem001, $attrItem002 ) );
 
 		$result = $this->object->getAttributeItem( 'code_001' );
 		$this->assertEquals( 'value_001', $result->getValue() );
@@ -508,7 +508,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getAttribute( 'code_003' );
 		$this->assertEquals( null, $result );
 
-		$this->object->setAttributes( [] );
+		$this->object->setAttributeItems( [] );
 
 		$result = $this->object->getAttribute( 'code_001' );
 		$this->assertEquals( null, $result );
@@ -531,25 +531,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attrItem002->setType( 'test_001' );
 		$attrItem002->setValue( 'value_002' );
 
-		$this->object->setAttributes( array( $attrItem001, $attrItem002 ) );
+		$this->object->setAttributeItems( array( $attrItem001, $attrItem002 ) );
 
 		$result = $this->object->getAttributeItem( 'code_001', 'test_001' );
 		$this->assertEquals( 2, count( $result ) );
 	}
 
-	public function testGetAttributes()
+	public function testGetAttributeItems()
 	{
-		$this->assertEquals( $this->attribute, $this->object->getAttributes() );
+		$this->assertEquals( $this->attribute, $this->object->getAttributeItems() );
 	}
 
-	public function testGetAttributesByType()
+	public function testGetAttributeItemsByType()
 	{
-		$this->assertEquals( $this->attribute, $this->object->getAttributes( 'default' ) );
+		$this->assertEquals( $this->attribute, $this->object->getAttributeItems( 'default' ) );
 	}
 
-	public function testGetAttributesInvalidType()
+	public function testGetAttributeItemsInvalidType()
 	{
-		$this->assertEquals( [], $this->object->getAttributes( 'invalid' ) );
+		$this->assertEquals( [], $this->object->getAttributeItems( 'invalid' ) );
 	}
 
 	public function testSetAttributeItem()
@@ -583,7 +583,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testSetAttributes()
+	public function testSetAttributeItems()
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
 		$attManager = $manager->getSubManager( 'base' )->getSubManager( 'product' )->getSubManager( 'attribute' );
@@ -593,10 +593,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			$attManager->createItem(),
 		);
 
-		$return = $this->object->setAttributes( $list );
+		$return = $this->object->setAttributeItems( $list );
 
 		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $return );
-		$this->assertEquals( $list, $this->object->getAttributes() );
+		$this->assertEquals( $list, $this->object->getAttributeItems() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
