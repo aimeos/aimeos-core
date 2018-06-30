@@ -2,7 +2,7 @@
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2017
+ * @copyright Aimeos (aimeos.org), 2015-2018
  */
 
 return array(
@@ -13,6 +13,7 @@ return array(
 		'FreeShipping/1' => array( 'label' => 'Unit test free shipping', 'provider' => 'FreeShipping,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'freeshipping.productcode' => 'U:SD' ), 'start' => null, 'end' => null ),
 		'Present/1' => array( 'label' => 'Unit test present', 'provider' => 'Present,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ), 'present.productcode' => 'U:PD', 'present.quantity' => 2 ), 'start' => null, 'end' => null ),
 		'Example/1' => array( 'label' => 'Unit test example', 'provider' => 'Example,BasketValues', 'status' => 1, 'config' => array( 'basketvalues.total-value-min' => array( 'EUR' => '9.00' ) ), 'start' => null, 'end' => null ),
+		'Voucher/1' => array( 'label' => 'Unit test voucher', 'provider' => 'Voucher,Once', 'status' => 1, 'config' => array( 'voucher.productcode' => 'U:MD' ), 'start' => null, 'end' => null ),
 	),
 
 	'coupon/code' => array(
