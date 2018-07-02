@@ -151,6 +151,10 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 				if( $listItem->getRefId() == $refId && $listItem->getType() === $listtype
 					&& ( $active === false || $listItem->isAvailable() )
 				) {
+					if( isset( $this->refItems[$domain][$refId] ) ) {
+						$listItem->setRefItem( $this->refItems[$domain][$refId] );
+					}
+
 					return $listItem;
 				}
 			}
@@ -189,11 +193,13 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 			foreach( $list as $id => $item )
 			{
-				if( $listtype && ( !($item instanceof $iface) || !in_array( $item->getType(), $listTypes ) ) ) {
+				$refItem = $item->getRefItem();
+
+				if( $type && ( !$refItem || !in_array( $refItem->getType(), $types ) ) ) {
 					continue;
 				}
 
-				if( $type && ( !($item->getRefItem() instanceof $iface) || !in_array( $item->getRefItem()->getType(), $types ) ) ) {
+				if( $listtype && !in_array( $item->getType(), $listTypes ) ) {
 					continue;
 				}
 
