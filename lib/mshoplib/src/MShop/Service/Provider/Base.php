@@ -20,6 +20,7 @@ namespace Aimeos\MShop\Service\Provider;
  */
 abstract class Base
 {
+	private $object;
 	private $context;
 	private $serviceItem;
 	private $communication;
@@ -188,6 +189,19 @@ abstract class Base
 	public function query( \Aimeos\MShop\Order\Item\Iface $order )
 	{
 		throw new \Aimeos\MShop\Service\Exception( sprintf( 'Method "%1$s" for provider not available', 'query' ) );
+	}
+
+
+	/**
+	 * Injects the outer object into the decorator stack
+	 *
+	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface Plugin object for chaining method calls
+	 */
+	public function setObject( \Aimeos\MShop\Plugin\Provider\Iface $object )
+	{
+		$this->object = $object;
+		return $this;
 	}
 
 
@@ -483,6 +497,21 @@ abstract class Base
 		}
 
 		return number_format( $amount, 2, '.', '' );
+	}
+
+
+	/**
+	 * Returns the first object of the decorator stack
+	 *
+	 * @return \Aimeos\MShop\Plugin\Provider\Iface First object of the decorator stack
+	 */
+	protected function getObject()
+	{
+		if( $this->object !== null ) {
+			return $this->object;
+		}
+
+		return $this;
 	}
 
 
