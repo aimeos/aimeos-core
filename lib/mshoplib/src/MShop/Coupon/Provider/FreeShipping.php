@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Coupon\Provider;
  */
 class FreeShipping
 	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
-	implements \Aimeos\MShop\Coupon\Provider\Factory\Iface
+	implements \Aimeos\MShop\Coupon\Provider\Iface, \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
 	private $beConfig = array(
 		'freeshipping.productcode' => array(

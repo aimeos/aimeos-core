@@ -29,7 +29,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  */
 class ServicesUpdate
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
-	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
+	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	/**
 	 * Subscribes itself to a publisher

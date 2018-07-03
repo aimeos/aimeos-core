@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Coupon\Provider;
  */
 class Voucher
 	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
-	implements \Aimeos\MShop\Coupon\Provider\Factory\Iface
+	implements \Aimeos\MShop\Coupon\Provider\Iface, \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
 	private $beConfig = array(
 		'voucher.productcode' => array(

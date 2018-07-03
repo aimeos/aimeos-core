@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Plugin\Provider\Factory;
  * @package MShop
  * @subpackage Plugin
  */
-interface Iface extends \Aimeos\MShop\Plugin\Provider\Iface
+interface Iface
 {
 	/**
 	 * Initializes the plugin object.

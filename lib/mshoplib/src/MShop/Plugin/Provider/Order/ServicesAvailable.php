@@ -34,7 +34,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  */
 class ServicesAvailable
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
-	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
+	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	private $beConfig = array(
 		'payment' => array(

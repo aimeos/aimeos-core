@@ -29,7 +29,7 @@ namespace Aimeos\MShop\Plugin\Provider\Order;
  */
 class PropertyAdd
 	extends \Aimeos\MShop\Plugin\Provider\Factory\Base
-	implements \Aimeos\MShop\Plugin\Provider\Factory\Iface
+	implements \Aimeos\MShop\Plugin\Provider\Iface, \Aimeos\MShop\Plugin\Provider\Factory\Iface
 {
 	private $type;
 	private $orderAttrManager;

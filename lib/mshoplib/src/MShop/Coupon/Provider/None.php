@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Coupon\Provider;
  */
 class None
 	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
-	implements \Aimeos\MShop\Coupon\Provider\Factory\Iface
+	implements \Aimeos\MShop\Coupon\Provider\Iface, \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
 	/**
 	 * Adds the result of a coupon to the order base instance.

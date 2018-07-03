@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Coupon\Provider;
  */
 class FixedRebate
 	extends \Aimeos\MShop\Coupon\Provider\Factory\Base
-	implements \Aimeos\MShop\Coupon\Provider\Factory\Iface
+	implements \Aimeos\MShop\Coupon\Provider\Iface, \Aimeos\MShop\Coupon\Provider\Factory\Iface
 {
 	private $beConfig = array(
 		'fixedrebate.productcode' => array(
