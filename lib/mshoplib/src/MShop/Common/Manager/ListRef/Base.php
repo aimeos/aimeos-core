@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Common\Manager\ListRef;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Common\Manager\ListRef\Iface
 {
 	private $typeIds = [];
 
