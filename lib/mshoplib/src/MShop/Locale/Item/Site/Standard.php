@@ -42,6 +42,17 @@ class Standard
 
 
 	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+		foreach( $this->children as $key => $item ) {
+			$this->children[$key] = clone $item;
+		}
+	}
+
+
+	/**
 	 * Returns the id of the site.
 	 *
 	 * @return integer|null Id of the site

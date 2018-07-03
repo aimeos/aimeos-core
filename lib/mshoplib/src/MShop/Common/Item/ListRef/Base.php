@@ -45,6 +45,33 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 
 
 	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+		parent::__clone();
+
+		foreach( $this->listItems as $domain => $list )
+		{
+			foreach( $list as $id => $item ) {
+				$this->listItems[$domain][$id] = clone $item;
+			}
+		}
+
+		foreach( $this->listRefItems as $domain => $list )
+		{
+			foreach( $list as $id => $item ) {
+				$this->listRefItems[$domain][$id] = clone $item;
+			}
+		}
+
+		foreach( $this->listRmItems as $key => $item ) {
+			$this->listRmItems[$key] = clone $item;
+		}
+	}
+
+
+	/**
 	 * Adds a new or overwrite an existing list item which references the given domain item (created if it doesn't exist)
 	 *
 	 * @param string $domain Name of the domain (e.g. media, text, etc.)

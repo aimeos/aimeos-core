@@ -42,6 +42,14 @@ abstract class Base
 
 
 	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+	}
+
+
+	/**
 	 * Returns the item property for the given name
 	 *
 	 * @param string $name Name of the property

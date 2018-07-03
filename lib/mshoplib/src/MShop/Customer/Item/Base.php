@@ -84,6 +84,16 @@ abstract class Base
 
 
 	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+		$this->billingaddress = clone $this->billingaddress;
+		parent::__clone();
+	}
+
+
+	/**
 	 * Returns the billingaddress of the customer item.
 	 *
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface
@@ -209,14 +219,5 @@ abstract class Base
 		$list['customer.latitude'] = $this->getPaymentAddress()->getLatitude();
 
 		return $list;
-	}
-
-
-	/**
-	 * Implements deep copies for clones.
-	 */
-	public function __clone()
-	{
-		$this->billingaddress = clone $this->billingaddress;
 	}
 }

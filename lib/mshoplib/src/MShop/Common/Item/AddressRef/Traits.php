@@ -26,6 +26,23 @@ trait Traits
 
 
 	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+		parent::__clone();
+
+		foreach( $this->addrItems as $key => $item ) {
+			$this->addrItems[$key] = clone $item;
+		}
+
+		foreach( $this->addrRmItems as $key => $item ) {
+			$this->addrRmItems[$key] = clone $item;
+		}
+	}
+
+
+	/**
 	 * Adds a new address item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Address\Iface $item New or existing address item

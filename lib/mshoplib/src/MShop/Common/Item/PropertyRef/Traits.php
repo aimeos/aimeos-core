@@ -25,6 +25,23 @@ trait Traits
 
 
 	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+		parent::__clone();
+
+		foreach( $this->propItems as $key => $item ) {
+			$this->propItems[$key] = clone $item;
+		}
+
+		foreach( $this->propRmItems as $key => $item ) {
+			$this->propRmItems[$key] = clone $item;
+		}
+	}
+
+
+	/**
 	 * Adds a new property item or overwrite an existing one
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Property\Iface $item New or existing property item
