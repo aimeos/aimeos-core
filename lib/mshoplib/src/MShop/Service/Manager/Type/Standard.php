@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Service\Manager\Type;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Type\Base
-	implements \Aimeos\MShop\Service\Manager\Type\Iface
+	implements \Aimeos\MShop\Service\Manager\Type\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'service.type.id' => array(

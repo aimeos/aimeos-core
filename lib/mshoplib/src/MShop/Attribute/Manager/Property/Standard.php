@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Attribute\Manager\Property;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Property\Base
-	implements \Aimeos\MShop\Attribute\Manager\Property\Iface
+	implements \Aimeos\MShop\Attribute\Manager\Property\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'attribute.property.id' => array(

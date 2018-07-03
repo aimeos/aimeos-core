@@ -20,7 +20,7 @@ namespace Aimeos\MAdmin\Job\Manager;
  */
 class Standard
 	extends \Aimeos\MAdmin\Common\Manager\Base
-	implements \Aimeos\MAdmin\Job\Manager\Iface
+	implements \Aimeos\MAdmin\Job\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'job.id' => array(

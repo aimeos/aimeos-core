@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Locale\Manager\Site;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Locale\Manager\Site\Iface
+	implements \Aimeos\MShop\Locale\Manager\Site\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $cache = [];
 

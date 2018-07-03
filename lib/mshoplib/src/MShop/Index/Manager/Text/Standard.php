@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Index\Manager\Text;
  */
 class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
-	implements \Aimeos\MShop\Index\Manager\Text\Iface
+	implements \Aimeos\MShop\Index\Manager\Text\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'index.text.id' => array(

@@ -20,7 +20,7 @@ namespace Aimeos\MAdmin\Cache\Manager;
  */
 class None
 	extends \Aimeos\MAdmin\Common\Manager\Base
-	implements \Aimeos\MAdmin\Cache\Manager\Iface
+	implements \Aimeos\MAdmin\Cache\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'cache.id' => array(

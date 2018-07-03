@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Tag\Manager\Type;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Type\Base
-	implements \Aimeos\MShop\Tag\Manager\Type\Iface
+	implements \Aimeos\MShop\Tag\Manager\Type\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'tag.type.id' => array(

@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Index\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
-	implements \Aimeos\MShop\Index\Manager\Iface
+	implements \Aimeos\MShop\Index\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $subManagers;
 

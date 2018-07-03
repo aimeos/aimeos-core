@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Order\Manager\Base;
  * @subpackage Order
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Returns the current basket of the customer.

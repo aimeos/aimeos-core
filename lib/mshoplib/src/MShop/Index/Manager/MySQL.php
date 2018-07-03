@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Index\Manager;
  */
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Standard
-	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	/**
 	 * Creates a search object and optionally sets base criteria.

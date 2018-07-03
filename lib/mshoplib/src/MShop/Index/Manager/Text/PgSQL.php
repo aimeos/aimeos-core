@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Index\Manager\Text;
  */
 class PgSQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
-	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	private $searchConfig = array(
 		'index.text.relevance' => array(

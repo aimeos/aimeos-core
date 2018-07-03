@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Order\Manager\Base;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Order\Manager\Base\Iface
 {
 	/**
 	 * Unlock basket.

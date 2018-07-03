@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Locale\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Locale\Manager\Base
-	implements \Aimeos\MShop\Locale\Manager\Iface
+	implements \Aimeos\MShop\Locale\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'locale.id' => array(

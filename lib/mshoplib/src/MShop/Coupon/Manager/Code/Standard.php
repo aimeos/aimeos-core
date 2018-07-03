@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Coupon\Manager\Code;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Coupon\Manager\Code\Iface
+	implements \Aimeos\MShop\Coupon\Manager\Code\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'coupon.code.id' => array(

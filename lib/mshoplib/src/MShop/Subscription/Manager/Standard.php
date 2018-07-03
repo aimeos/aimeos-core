@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Subscription\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Subscription\Manager\Iface
+	implements \Aimeos\MShop\Subscription\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'subscription.id' => array(

@@ -19,6 +19,6 @@ namespace Aimeos\MShop\Tag\Manager;
  * @subpackage Tag
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 }

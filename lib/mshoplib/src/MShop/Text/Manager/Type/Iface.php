@@ -19,6 +19,6 @@ namespace Aimeos\MShop\Text\Manager\Type;
  * @subpackage Text
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 }

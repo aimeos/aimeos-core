@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Plugin\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Plugin\Manager\Base
-	implements \Aimeos\MShop\Plugin\Manager\Iface
+	implements \Aimeos\MShop\Plugin\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'plugin.id' => array(

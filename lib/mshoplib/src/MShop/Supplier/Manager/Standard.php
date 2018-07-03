@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Supplier\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\ListRef\Base
-	implements \Aimeos\MShop\Supplier\Manager\Iface
+	implements \Aimeos\MShop\Supplier\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	use \Aimeos\MShop\Common\Manager\AddressRef\Traits;
 

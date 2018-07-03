@@ -19,6 +19,6 @@ namespace Aimeos\MShop\Catalog\Manager\Lists;
  * @subpackage Catalog
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 }

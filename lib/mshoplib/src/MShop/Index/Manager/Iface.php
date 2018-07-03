@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Index\Manager;
  * @subpackage Index
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Counts the number products that are available for the values of the given key.

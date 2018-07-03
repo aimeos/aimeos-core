@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Index\Manager\Attribute;
  */
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Attribute\Standard
-	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	private $searchConfig = array(
 		'index.attribute.id' => array(

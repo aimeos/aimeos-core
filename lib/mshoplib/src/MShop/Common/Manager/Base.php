@@ -18,9 +18,7 @@ namespace Aimeos\MShop\Common\Manager;
  * @package MShop
  * @subpackage Common
  */
-abstract class Base
-	extends \Aimeos\MW\Common\Manager\Base
-	implements \Aimeos\MShop\Common\Manager\Iface
+abstract class Base extends \Aimeos\MW\Common\Manager\Base
 {
 	private $context;
 	private $object;

@@ -19,6 +19,7 @@ namespace Aimeos\MShop\Order\Manager\Base;
  * @subpackage Order
  */
 class Standard extends Base
+	implements \Aimeos\MShop\Order\Manager\Base\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'order.base.id' => array(

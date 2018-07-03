@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Common\Manager\Address;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Common\Manager\Address\Iface
 {
 	private $prefix;
 	private $searchConfig;

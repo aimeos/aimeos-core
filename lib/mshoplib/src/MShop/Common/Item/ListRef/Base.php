@@ -20,11 +20,11 @@ namespace Aimeos\MShop\Common\Item\ListRef;
  */
 abstract class Base extends \Aimeos\MShop\Common\Item\Base
 {
-	private $refItems;
 	private $listItems;
-	private $rmItems = [];
-	private $prepared = false;
-	private $max = 0;
+	private $listRefItems;
+	private $listRmItems = [];
+	private $listPrepared = false;
+	private $listMax = 0;
 
 
 	/**
@@ -40,7 +40,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 		parent::__construct( $prefix, $values );
 
 		$this->listItems = $listItems;
-		$this->refItems = $refItems;
+		$this->listRefItems = $refItems;
 	}
 
 
@@ -54,15 +54,15 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function addListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
 	{
-		$id = $listItem->getId() ?: 'tmp-' . $this->max++;
+		$id = $listItem->getId() ?: 'tmp-' . $this->listMax++;
 		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
 
 		if( $refItem !== null )
 		{
-			$id = $refItem->getId() ?: 'tmp-' . $this->max++;
+			$id = $refItem->getId() ?: 'tmp-' . $this->listMax++;
 			$listItem->setRefId( $id );
 
-			$this->refItems[$domain][$id] = $refItem;
+			$this->listRefItems[$domain][$id] = $refItem;
 		}
 
 		return $this;
@@ -86,7 +86,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			{
 				if( $litem === $listItem )
 				{
-					$this->rmItems[] = $listItem->setRefItem( $refItem );
+					$this->listRmItems[] = $listItem->setRefItem( $refItem );
 					unset( $this->listItems[$domain][$key] );
 
 					return $this;
@@ -129,7 +129,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	public function getListItemsDeleted()
 	{
-		return $this->rmItems;
+		return $this->listRmItems;
 	}
 
 
@@ -151,8 +151,8 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 				if( $listItem->getRefId() == $refId && $listItem->getType() === $listtype
 					&& ( $active === false || $listItem->isAvailable() )
 				) {
-					if( isset( $this->refItems[$domain][$refId] ) ) {
-						$listItem->setRefItem( $this->refItems[$domain][$refId] );
+					if( isset( $this->listRefItems[$domain][$refId] ) ) {
+						$listItem->setRefItem( $this->listRefItems[$domain][$refId] );
 					}
 
 					return $listItem;
@@ -303,7 +303,7 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 	 */
 	protected function prepareListItems()
 	{
-		if( $this->prepared === true ) {
+		if( $this->listPrepared === true ) {
 			return;
 		}
 
@@ -313,14 +313,14 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			{
 				$refId = $listItem->getRefId();
 
-				if( isset( $this->refItems[$domain][$refId] ) ) {
-					$listItem->setRefItem( $this->refItems[$domain][$refId] );
+				if( isset( $this->listRefItems[$domain][$refId] ) ) {
+					$listItem->setRefItem( $this->listRefItems[$domain][$refId] );
 				}
 			}
 
 			uasort( $this->listItems[$domain], array( $this, 'comparePosition' ) );
 		}
 
-		$this->prepared = true;
+		$this->listPrepared = true;
 	}
 }

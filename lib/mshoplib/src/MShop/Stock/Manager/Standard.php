@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Stock\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Stock\Manager\Iface
+	implements \Aimeos\MShop\Stock\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $typeIds = [];
 

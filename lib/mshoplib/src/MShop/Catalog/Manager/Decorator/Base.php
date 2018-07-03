@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Catalog\Manager\Decorator;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Decorator\Base
-	implements \Aimeos\MShop\Common\Manager\Decorator\Iface, \Aimeos\MShop\Catalog\Manager\Iface
 {
 	/**
 	 * Returns a list of items starting with the given category that are in the path to the root node

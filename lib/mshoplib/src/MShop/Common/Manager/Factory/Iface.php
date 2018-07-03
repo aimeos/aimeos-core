@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Common\Manager\Factory;
  * @package MShop
  * @subpackage Common
  */
-interface Iface extends \Aimeos\MShop\Common\Manager\Iface
+interface Iface
 {
 	/**
 	 * Initializes the manager by using the given context object.

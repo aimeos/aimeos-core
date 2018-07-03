@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Order\Manager\Base\Product;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Order\Manager\Base\Product\Iface
+	implements \Aimeos\MShop\Order\Manager\Base\Product\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'order.base.product.id' => array(

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Media\Manager\Lists;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Lists\Base
-	implements \Aimeos\MShop\Media\Manager\Lists\Iface
+	implements \Aimeos\MShop\Media\Manager\Lists\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'media.lists.id' => array(

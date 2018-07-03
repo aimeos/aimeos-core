@@ -18,6 +18,6 @@ namespace Aimeos\MShop\Common\Manager\Property;
  * @subpackage Common
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 }

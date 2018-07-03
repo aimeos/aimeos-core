@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Customer\Manager;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\ListRef\Base
-	implements \Aimeos\MShop\Customer\Manager\Iface
 {
 	private $salt;
 	private $helper;

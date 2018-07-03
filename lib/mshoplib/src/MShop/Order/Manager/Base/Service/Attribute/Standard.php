@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Order\Manager\Base\Service\Attribute;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Order\Manager\Base\Service\Attribute\Iface
+	implements \Aimeos\MShop\Order\Manager\Base\Service\Attribute\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'order.base.service.attribute.id' => array(

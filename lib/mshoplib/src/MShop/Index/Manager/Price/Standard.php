@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Index\Manager\Price;
  */
 class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
-	implements \Aimeos\MShop\Index\Manager\Price\Iface
+	implements \Aimeos\MShop\Index\Manager\Price\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'index.price.id' => array(

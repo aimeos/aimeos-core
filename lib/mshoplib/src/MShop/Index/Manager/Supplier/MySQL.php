@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Index\Manager\Supplier;
  */
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Supplier\Standard
-	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	private $searchConfig = array(
 		'index.supplier.id' => array(

@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Price\Manager\Lists;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Lists\Base
-	implements \Aimeos\MShop\Price\Manager\Lists\Iface
+	implements \Aimeos\MShop\Price\Manager\Lists\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'price.lists.id' => array(

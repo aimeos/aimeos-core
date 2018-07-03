@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Coupon\Manager;
  * @subpackage Coupon
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Returns the coupon model which belongs to the given code.

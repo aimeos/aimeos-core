@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Catalog\Manager;
  * @subpackage Catalog
  */
 class Standard extends Base
-	implements \Aimeos\MShop\Catalog\Manager\Iface
+	implements \Aimeos\MShop\Catalog\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'id' => array(

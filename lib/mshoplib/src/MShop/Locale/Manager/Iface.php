@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Locale\Manager;
  * @subpackage Locale
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Returns the locale item for the given site code, language code and currency code.

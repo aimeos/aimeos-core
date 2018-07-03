@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Supplier\Manager\Address;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Address\Base
-	implements \Aimeos\MShop\Supplier\Manager\Address\Iface
+	implements \Aimeos\MShop\Supplier\Manager\Address\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'supplier.address.id' => array(

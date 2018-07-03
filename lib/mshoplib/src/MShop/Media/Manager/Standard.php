@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Media\Manager;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\ListRef\Base
-	implements \Aimeos\MShop\Media\Manager\Iface
+	implements \Aimeos\MShop\Media\Manager\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	use \Aimeos\MShop\Common\Manager\PropertyRef\Traits;
 

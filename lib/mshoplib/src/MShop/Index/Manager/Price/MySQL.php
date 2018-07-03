@@ -20,7 +20,6 @@ namespace Aimeos\MShop\Index\Manager\Price;
  */
 class MySQL
 	extends \Aimeos\MShop\Index\Manager\Price\Standard
-	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	private $searchConfig = array(
 		'index.price.id' => array(

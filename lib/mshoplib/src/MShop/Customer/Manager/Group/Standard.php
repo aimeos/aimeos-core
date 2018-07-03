@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Customer\Manager\Group;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Customer\Manager\Group\Iface
+	implements \Aimeos\MShop\Customer\Manager\Group\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'customer.group.id' => array(

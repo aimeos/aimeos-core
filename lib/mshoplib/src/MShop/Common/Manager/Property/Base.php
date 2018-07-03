@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Common\Manager\Property;
  */
 abstract class Base
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Common\Manager\Property\Iface
 {
 	private $prefix;
 	private $searchConfig;

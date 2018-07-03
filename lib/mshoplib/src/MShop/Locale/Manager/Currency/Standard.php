@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Locale\Manager\Currency;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Locale\Manager\Currency\Iface
+	implements \Aimeos\MShop\Locale\Manager\Currency\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'locale.currency.id' => array(

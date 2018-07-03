@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Supplier\Manager\Lists;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Lists\Base
-	implements \Aimeos\MShop\Supplier\Manager\Lists\Iface
+	implements \Aimeos\MShop\Supplier\Manager\Lists\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'supplier.lists.id' => array(

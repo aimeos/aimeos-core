@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Common\Manager\ListRef;
  * @subpackage Common
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Updates the list items of the given base item for the domain and type

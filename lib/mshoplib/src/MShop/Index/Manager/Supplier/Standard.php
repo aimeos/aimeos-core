@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Index\Manager\Supplier;
  */
 class Standard
 	extends \Aimeos\MShop\Index\Manager\DBBase
-	implements \Aimeos\MShop\Index\Manager\Supplier\Iface
+	implements \Aimeos\MShop\Index\Manager\Supplier\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'index.supplier.id' => array(

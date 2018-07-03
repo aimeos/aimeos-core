@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Stock\Manager;
  * @subpackage Stock
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
 {
 	/**
 	 * Decreases the stock level of the product for the stock type.

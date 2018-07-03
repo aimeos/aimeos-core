@@ -19,7 +19,7 @@ namespace Aimeos\MShop\Media\Manager\Property;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Property\Base
-	implements \Aimeos\MShop\Media\Manager\Property\Iface
+	implements \Aimeos\MShop\Media\Manager\Property\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'media.property.id' => array(

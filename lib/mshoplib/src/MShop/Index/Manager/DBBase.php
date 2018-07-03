@@ -19,7 +19,6 @@ namespace Aimeos\MShop\Index\Manager;
  */
 abstract class DBBase
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Index\Manager\Iface
 {
 	/**
 	 * Initializes the manager object

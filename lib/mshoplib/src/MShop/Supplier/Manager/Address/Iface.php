@@ -19,6 +19,6 @@ namespace Aimeos\MShop\Supplier\Manager\Address;
  * @subpackage Supplier
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Address\Iface
 {
 }

@@ -18,7 +18,7 @@ namespace Aimeos\MShop\Order\Manager\Status;
  */
 class Standard
 	extends \Aimeos\MShop\Common\Manager\Base
-	implements \Aimeos\MShop\Order\Manager\Status\Iface
+	implements \Aimeos\MShop\Order\Manager\Status\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
 		'order.status.id' => array(

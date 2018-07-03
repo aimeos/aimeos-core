@@ -16,7 +16,7 @@ namespace Aimeos\MShop\Plugin\Manager;
  * @package MShop
  * @subpackage Plugin
  */
-interface Iface extends \Aimeos\MShop\Common\Manager\Factory\Iface
+interface Iface extends \Aimeos\MShop\Common\Manager\Iface
 {
 	/**
 	 * Returns the plugin provider which is responsible for the plugin item

@@ -19,6 +19,6 @@ namespace Aimeos\MShop\Locale\Manager\Language;
  * @subpackage Locale
  */
 interface Iface
-	extends \Aimeos\MShop\Common\Manager\Factory\Iface
+	extends \Aimeos\MShop\Common\Manager\Iface
 {
 }
