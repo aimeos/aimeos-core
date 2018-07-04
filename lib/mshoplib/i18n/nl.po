@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-08 18:06+0200\n"
-"PO-Revision-Date: 2018-04-08 16:33+0000\n"
+"POT-Creation-Date: 2018-07-04 10:09+0200\n"
+"PO-Revision-Date: 2018-07-04 08:16+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Dutch (http://www.transifex.com/aimeos/aimeos-core/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -49,6 +49,10 @@ msgid "Address for type \"%1$s\" not available"
 msgstr ""
 
 #, php-format
+msgid "Address item for removal not found"
+msgstr ""
+
+#, php-format
 msgid "Address not available"
 msgstr ""
 
@@ -67,6 +71,10 @@ msgstr "Adres type \"%1$s\" is niet binnen de toegestane reeks"
 #, php-format
 msgid "Basket empty"
 msgstr "Winkelmandje is leeg."
+
+#, php-format
+msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Cache object not available"
@@ -143,6 +151,10 @@ msgstr "Curl kon niet worden geinitialiseerd"
 #, php-format
 msgid "Database manager object not available"
 msgstr "Database manager object niet beschikbaar"
+
+#, php-format
+msgid "Date value before \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Duplicate coupon code"
@@ -297,6 +309,10 @@ msgid "Job with ID \"%1$s\" not found"
 msgstr ""
 
 #, php-format
+msgid "List item for removal from domain \"%1$s\" not found"
+msgstr ""
+
+#, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr "Lijst item met ID \"%2$s\" in \"%1$s\" niet gevonden"
 
@@ -375,6 +391,10 @@ msgid ""
 msgstr ""
 
 #, php-format
+msgid "No bought voucher for code \"%1$s\" available"
+msgstr ""
+
+#, php-format
 msgid "No catalog node for ID \"%1$s\""
 msgstr ""
 
@@ -397,6 +417,10 @@ msgstr "Geen prijs voor product ID \"%1$s\" of product code \"%2$s\" beschikbaar
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "Geen product met code \"%1$s\" gevonden"
+
+#, php-format
+msgid "No rebate for currency \"%1$s\" available"
+msgstr ""
 
 #, php-format
 msgid "No search keys available"
@@ -424,6 +448,10 @@ msgstr ""
 
 #, php-format
 msgid "Not a key/value map"
+msgstr ""
+
+#, php-format
+msgid "Not a list item"
 msgstr ""
 
 #, php-format
@@ -576,6 +604,10 @@ msgstr "Producten in winkelmandje niet beschikbaar"
 #, php-format
 msgid "Products out of stock"
 msgstr "Producten niet op voorraad"
+
+#, php-format
+msgid "Property item for removal not found"
+msgstr ""
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"

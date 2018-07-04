@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-08 18:06+0200\n"
-"PO-Revision-Date: 2018-04-08 16:51+0000\n"
+"POT-Creation-Date: 2018-07-04 10:09+0200\n"
+"PO-Revision-Date: 2018-07-04 08:16+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -49,6 +49,10 @@ msgid "Address for type \"%1$s\" not available"
 msgstr "Anschrift vom Typ \"%1$s\" nicht verfügbar"
 
 #, php-format
+msgid "Address item for removal not found"
+msgstr "Das zu löschende Adressobjekt konnte nicht gefunden werden"
+
+#, php-format
 msgid "Address not available"
 msgstr "Adresse nicht verfügbar"
 
@@ -67,6 +71,10 @@ msgstr "Typ \"%1$s\" für Anschrift liegt nicht innerhalb des vorgegebenen Werte
 #, php-format
 msgid "Basket empty"
 msgstr "Warenkorb leer"
+
+#, php-format
+msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
+msgstr "Der gekaufte Gutschein ist in der Währung \"%1$s\", der Warenkorb nutzt \"%2$s\""
 
 #, php-format
 msgid "Cache object not available"
@@ -143,6 +151,10 @@ msgstr "Curl konnte nicht aufgerufen werden"
 #, php-format
 msgid "Database manager object not available"
 msgstr "Datenbankmanager-Objekt nicht verfügbar"
+
+#, php-format
+msgid "Date value before \"%1$s\""
+msgstr "Der Datumswert ist vor \"%1$s\""
 
 #, php-format
 msgid "Duplicate coupon code"
@@ -297,6 +309,10 @@ msgid "Job with ID \"%1$s\" not found"
 msgstr "Job mit ID \"%1$s\" nicht gefunden"
 
 #, php-format
+msgid "List item for removal from domain \"%1$s\" not found"
+msgstr "Das zu löschende Listenobject aus der Domäne \"%1$s\" konnte nicht gefunden werden"
+
+#, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr "Listeneintrag mit ID \"%2$s\" in \"%1$s\" nicht gefunden"
 
@@ -375,6 +391,10 @@ msgid ""
 msgstr "Neu erstellte Seite kann nicht mit Methode \"saveItem()\" gespeichert werden. Versuchen Sie Methode \"insertItem()\"."
 
 #, php-format
+msgid "No bought voucher for code \"%1$s\" available"
+msgstr "Kein gekaufter Gutschein für den Code \"%1$s\" verfügbar"
+
+#, php-format
 msgid "No catalog node for ID \"%1$s\""
 msgstr "Kategorie mit ID \"%1$s\" nicht verfügbar"
 
@@ -397,6 +417,10 @@ msgstr "Es ist kein Preis für das Produkt mit der ID \"%1$s\" oder dem Code \"%
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "Es konnte kein Produkt mit dem Code \"%1$s\" gefunden werden"
+
+#, php-format
+msgid "No rebate for currency \"%1$s\" available"
+msgstr "Kein Rabatt für die Währung \"%1$s\" verfügbar"
 
 #, php-format
 msgid "No search keys available"
@@ -425,6 +449,10 @@ msgstr "Kein Datum mit Zeit"
 #, php-format
 msgid "Not a key/value map"
 msgstr "Kein Schlüssel/Wert Paar"
+
+#, php-format
+msgid "Not a list item"
+msgstr "Kein Listenobject"
 
 #, php-format
 msgid "Not a listed value"
@@ -576,6 +604,10 @@ msgstr "Produkte im Warenkorb nicht vergfübar"
 #, php-format
 msgid "Products out of stock"
 msgstr "Produkte nicht mehr auf Lager"
+
+#, php-format
+msgid "Property item for removal not found"
+msgstr "Das zu löschende Eigenschaftsobjekt konnte nicht gefunden werden"
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"

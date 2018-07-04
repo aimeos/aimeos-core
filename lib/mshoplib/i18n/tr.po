@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-08 18:06+0200\n"
-"PO-Revision-Date: 2018-04-12 00:01+0000\n"
-"Last-Translator: Metal <meteoramic@yahoo.com>\n"
+"POT-Creation-Date: 2018-07-04 10:09+0200\n"
+"PO-Revision-Date: 2018-07-04 08:16+0000\n"
+"Last-Translator: Aimeos\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,6 +47,10 @@ msgid "Address for type \"%1$s\" not available"
 msgstr "Tür \"%1$s\" için adres mevcut değil"
 
 #, php-format
+msgid "Address item for removal not found"
+msgstr ""
+
+#, php-format
 msgid "Address not available"
 msgstr "Adres mevcut değil"
 
@@ -65,6 +69,10 @@ msgstr "Adres türü \"%1$s\" izin verilen aralıkta değil"
 #, php-format
 msgid "Basket empty"
 msgstr "Sepet boş"
+
+#, php-format
+msgid "Bought voucher is in currency \"%1$s\", basket uses \"%2$s\""
+msgstr ""
 
 #, php-format
 msgid "Cache object not available"
@@ -141,6 +149,10 @@ msgstr "Curl başlatılamadı"
 #, php-format
 msgid "Database manager object not available"
 msgstr "Veritabanı yöneticisi nesnesi mevcut değil"
+
+#, php-format
+msgid "Date value before \"%1$s\""
+msgstr ""
 
 #, php-format
 msgid "Duplicate coupon code"
@@ -295,6 +307,10 @@ msgid "Job with ID \"%1$s\" not found"
 msgstr "\"%1$s\" ID'li görev bulunamadı"
 
 #, php-format
+msgid "List item for removal from domain \"%1$s\" not found"
+msgstr ""
+
+#, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
 msgstr "\"%1$s\" içinde \"%2$s\" ID'li liste öğesi bulunamadı"
 
@@ -373,6 +389,10 @@ msgid ""
 msgstr "Yeni oluşturulan site  \"saveItem()\" metodu kullanılarak kaydedilemez. Bunun yerine \"insertItem()\" metodunu kullanmayı deneyin."
 
 #, php-format
+msgid "No bought voucher for code \"%1$s\" available"
+msgstr ""
+
+#, php-format
 msgid "No catalog node for ID \"%1$s\""
 msgstr "ID \"%1$s\" için katalog düğümü yok"
 
@@ -395,6 +415,10 @@ msgstr "\"%1$s\" ürün ID'si veya \"%2$s\" ürün kodu için hiçbir fiyat mevc
 #, php-format
 msgid "No product with code \"%1$s\" found"
 msgstr "\"%1$s\" kodlu hiçbir ürün bulunamadı"
+
+#, php-format
+msgid "No rebate for currency \"%1$s\" available"
+msgstr ""
 
 #, php-format
 msgid "No search keys available"
@@ -423,6 +447,10 @@ msgstr "Bir tarih ve zaman değil"
 #, php-format
 msgid "Not a key/value map"
 msgstr "Bir anahtar/değer haritası değil"
+
+#, php-format
+msgid "Not a list item"
+msgstr ""
 
 #, php-format
 msgid "Not a listed value"
@@ -574,6 +602,10 @@ msgstr "Sepetteki ürünler mevcut değil"
 #, php-format
 msgid "Products out of stock"
 msgstr "Ürünler stokta tükenmiştir"
+
+#, php-format
+msgid "Property item for removal not found"
+msgstr ""
 
 #, php-format
 msgid "Property name \"%1$s\" not within allowed range"

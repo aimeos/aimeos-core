@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2018-06-09 18:25+0000\n"
+"PO-Revision-Date: 2018-06-21 01:55+0000\n"
 "Last-Translator: Miro Sertić <miro.sertic0606@gmail.com>\n"
 "Language-Team: Croatian (http://www.transifex.com/aimeos/aimeos-core/language/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,7 @@ msgid "br"
 msgstr ""
 
 msgid "bs"
-msgstr ""
+msgstr "Bosanski"
 
 msgid "ca"
 msgstr ""
@@ -104,7 +104,7 @@ msgid "cr"
 msgstr ""
 
 msgid "cs"
-msgstr ""
+msgstr "Češki"
 
 msgid "cu"
 msgstr ""
@@ -116,7 +116,7 @@ msgid "cy"
 msgstr ""
 
 msgid "da"
-msgstr ""
+msgstr "Danski"
 
 msgid "de"
 msgstr ""
@@ -131,16 +131,16 @@ msgid "ee"
 msgstr ""
 
 msgid "el"
-msgstr ""
+msgstr "Grčki"
 
 msgid "en"
-msgstr ""
+msgstr "Engleski"
 
 msgid "eo"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "es"
-msgstr ""
+msgstr "Španjolski"
 
 msgid "et"
 msgstr ""
@@ -155,7 +155,7 @@ msgid "ff"
 msgstr ""
 
 msgid "fi"
-msgstr ""
+msgstr "Finski"
 
 msgid "fj"
 msgstr ""
@@ -164,13 +164,13 @@ msgid "fo"
 msgstr ""
 
 msgid "fr"
-msgstr ""
+msgstr "Francuski"
 
 msgid "fy"
 msgstr ""
 
 msgid "ga"
-msgstr ""
+msgstr "Irski"
 
 msgid "gd"
 msgstr ""
@@ -206,7 +206,7 @@ msgid "ht"
 msgstr ""
 
 msgid "hu"
-msgstr ""
+msgstr "Mađarski"
 
 msgid "hy"
 msgstr ""
@@ -236,16 +236,16 @@ msgid "io"
 msgstr ""
 
 msgid "is"
-msgstr ""
+msgstr "Islandski"
 
 msgid "it"
-msgstr ""
+msgstr "Talijanski"
 
 msgid "iu"
 msgstr ""
 
 msgid "ja"
-msgstr ""
+msgstr "Japanski"
 
 msgid "jv"
 msgstr ""
@@ -254,7 +254,7 @@ msgid "ka"
 msgstr ""
 
 msgid "kg"
-msgstr ""
+msgstr "Kongo"
 
 msgid "ki"
 msgstr ""
@@ -275,7 +275,7 @@ msgid "kn"
 msgstr ""
 
 msgid "ko"
-msgstr ""
+msgstr "Korejski"
 
 msgid "kr"
 msgstr ""
@@ -332,7 +332,7 @@ msgid "mi"
 msgstr ""
 
 msgid "mk"
-msgstr ""
+msgstr "Makedonski"
 
 msgid "ml"
 msgstr ""
@@ -377,7 +377,7 @@ msgid "nn"
 msgstr ""
 
 msgid "no"
-msgstr ""
+msgstr "Norveški"
 
 msgid "nr"
 msgstr ""
@@ -410,13 +410,13 @@ msgid "pi"
 msgstr ""
 
 msgid "pl"
-msgstr ""
+msgstr "Poljski"
 
 msgid "ps"
 msgstr ""
 
 msgid "pt"
-msgstr ""
+msgstr "Portugalski"
 
 msgid "qu"
 msgstr ""
@@ -428,10 +428,10 @@ msgid "rn"
 msgstr ""
 
 msgid "ro"
-msgstr ""
+msgstr "Rumunjski"
 
 msgid "ru"
-msgstr ""
+msgstr "Ruski"
 
 msgid "rw"
 msgstr ""
@@ -455,10 +455,10 @@ msgid "si"
 msgstr ""
 
 msgid "sk"
-msgstr ""
+msgstr "Slovački"
 
 msgid "sl"
-msgstr ""
+msgstr "Slovenski"
 
 msgid "sm"
 msgstr ""
@@ -470,10 +470,10 @@ msgid "so"
 msgstr ""
 
 msgid "sq"
-msgstr ""
+msgstr "Albanski"
 
 msgid "sr"
-msgstr ""
+msgstr "Srpski"
 
 msgid "ss"
 msgstr ""
@@ -485,7 +485,7 @@ msgid "su"
 msgstr ""
 
 msgid "sv"
-msgstr ""
+msgstr "Švedski"
 
 msgid "sw"
 msgstr ""
@@ -518,7 +518,7 @@ msgid "to"
 msgstr ""
 
 msgid "tr"
-msgstr ""
+msgstr "Turski"
 
 msgid "ts"
 msgstr ""
@@ -572,7 +572,7 @@ msgid "za"
 msgstr ""
 
 msgid "zh"
-msgstr ""
+msgstr "Kineski"
 
 msgid "zu"
 msgstr ""
