@@ -248,6 +248,7 @@ abstract class Base
 	 * Sets the communication object for a service provider.
 	 *
 	 * @param \Aimeos\MW\Communication\Iface $communication Object of communication
+	 * @deprecated To be removed in 2019.01
 	 */
 	public function setCommunication( \Aimeos\MW\Communication\Iface $communication )
 	{
@@ -259,6 +260,7 @@ abstract class Base
 	 * Returns the communication object for the service provider.
 	 *
 	 * @return \Aimeos\MW\Communication\Iface Object for communication
+	 * @deprecated To be removed in 2019.01
 	 */
 	protected function getCommunication()
 	{

@@ -17,6 +17,7 @@ namespace Aimeos\MShop\Service\Provider\Delivery;
  *
  * @package MShop
  * @subpackage Service
+ * @deprecated To be removed in 2019.01
  */
 class Standard
 	extends \Aimeos\MShop\Service\Provider\Delivery\Base

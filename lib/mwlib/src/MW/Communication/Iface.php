@@ -16,6 +16,7 @@ namespace Aimeos\MW\Communication;
  *
  * @package MW
  * @subpackage Communication
+ * @deprecated To be removed in 2019.01
  */
 interface Iface
 {

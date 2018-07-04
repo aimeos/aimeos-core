@@ -120,6 +120,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MW\Communication\Iface $communication Object of communication
 	 * @return null
+	 * @deprecated To be removed in 2019.01
 	 */
 	public function setCommunication( \Aimeos\MW\Communication\Iface $communication );
 

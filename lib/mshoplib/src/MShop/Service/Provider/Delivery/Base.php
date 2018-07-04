@@ -26,6 +26,9 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base
 	 */
 	const FEAT_QUERY = 1;
 
+	/**
+	 * @deprecated To be removed in 2019.01
+	 */
 	const ERR_OK = 0;
 	const ERR_TEMP = 1;
 	const ERR_XML = 10;
