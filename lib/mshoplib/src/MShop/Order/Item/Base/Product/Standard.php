@@ -738,11 +738,6 @@ class Standard extends Base implements Iface
 			$this->setName( $item->getContent() );
 		}
 
-		$items = $product->getRefItems( 'supplier', 'default', 'default' );
-		if( ( $item = reset( $items ) ) !== false ) {
-			$this->setSupplierCode( $item->getCode() );
-		}
-
 		$items = $product->getRefItems( 'media', 'default', 'default' );
 		if( ( $item = reset( $items ) ) !== false ) {
 			$this->setMediaUrl( $item->getPreview() );
