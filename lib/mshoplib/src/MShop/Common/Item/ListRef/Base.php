@@ -221,8 +221,9 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base
 			foreach( $list as $id => $item )
 			{
 				$refItem = $item->getRefItem();
+				$iface = '\Aimeos\MShop\Common\Item\Typeid\Iface';
 
-				if( $type && ( !$refItem || !in_array( $refItem->getType(), $types ) ) ) {
+				if( $type && ( !$refItem || !($refItem instanceof $iface) || !in_array( $refItem->getType(), $types ) ) ) {
 					continue;
 				}
 
