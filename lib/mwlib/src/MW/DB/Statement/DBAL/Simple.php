@@ -89,16 +89,16 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 		{
 			$result = $this->exec();
 		}
-		catch( \Doctrine\DBAL\DBALException $e )
+		catch( \PDOException $e )
 		{
 			try {
 				$result = $this->reconnect( $e )->exec();
-			} catch( \Doctrine\DBAL\DBALException $e ) {
+			} catch( \PDOException $e ) {
 				throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 			}
 		}
 
-		return new \Aimeos\MW\DB\Result\DBAL( $result );
+		return new \Aimeos\MW\DB\Result\PDO( $result );
 	}
 
 
@@ -128,6 +128,13 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			$this->sql = $this->buildSQL( $this->parts, $this->binds );
 		}
 
-		return $this->getConnection()->getRawObject()->query( $this->sql );
+		$level = error_reporting(); // Workaround for PDO warnings
+		error_reporting( $level & ~E_WARNING );
+
+		$result = $this->getConnection()->getRawObject()->getWrappedConnection()->query( $this->sql );
+
+		error_reporting( $level );
+
+		return $result;
 	}
 }

@@ -59,6 +59,10 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 		foreach( $this->connections as $name => $list ) {
 			unset( $this->connections[$name] );
 		}
+
+		foreach( $this->count as $name => $list ) {
+			unset( $this->count[$name] );
+		}
 	}
 
 
@@ -72,6 +76,10 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 	{
 		try
 		{
+			if( $this->config->get( 'resource/' . $name ) === null ) {
+				$name = 'db';
+			}
+
 			$adapter = $this->config->get( 'resource/' . $name . '/adapter', 'mysql' );
 
 			if( !isset( $this->connections[$name] ) || empty( $this->connections[$name] ) )
@@ -113,6 +121,10 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 			throw new \Aimeos\MW\DB\Exception( 'Connection object isn\'t of type DBAL' );
 		}
 
+		if( $this->config->get( 'resource/' . $name ) === null ) {
+			$name = 'db';
+		}
+
 		$this->connections[$name][] = $connection;
 	}
 
@@ -126,7 +138,7 @@ class DBAL implements \Aimeos\MW\DB\Manager\Iface
 	 */
 	protected function createConnection( $name, $adapter )
 	{
-		$params = $this->config->get( 'resource/' . $name );
+		$params = $this->config->get( 'resource/' . $name, [] );
 
 		$params['user'] = $this->config->get( 'resource/' . $name . '/username' );
 		$params['dbname'] = $this->config->get( 'resource/' . $name . '/database' );

@@ -62,16 +62,16 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 		{
 			$stmt = $this->exec();
 		}
-		catch( \Doctrine\DBAL\DBALException $e )
+		catch( \PDOException $e )
 		{
 			try {
 				$stmt = $this->reconnect( $e )->exec();
-			} catch( \Doctrine\DBAL\DBALException $e ) {
+			} catch( \PDOException $e ) {
 				throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 			}
 		}
 
-		return new \Aimeos\MW\DB\Result\DBAL( $stmt );
+		return new \Aimeos\MW\DB\Result\PDO( $stmt );
 	}
 
 
@@ -82,7 +82,7 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	 */
 	protected function exec()
 	{
-		$stmt = $this->getConnection()->getRawObject()->prepare( $this->sql );
+		$stmt = $this->getConnection()->getRawObject()->getWrappedConnection()->prepare( $this->sql );
 
 		foreach( $this->binds as $position => $list ) {
 			$stmt->bindValue( $position, $list[0], $this->getPdoType( $list[1], $list[0] ) );

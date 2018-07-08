@@ -129,6 +129,13 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			$this->sql = $this->buildSQL( $this->parts, $this->binds );
 		}
 
-		return $this->getConnection()->getRawObject()->query( $this->sql );
+		$level = error_reporting(); // Workaround for PDO warnings
+		error_reporting( $level & ~E_WARNING );
+
+		$result = $this->getConnection()->getRawObject()->query( $this->sql );
+
+		error_reporting( $level );
+
+		return $result;
 	}
 }

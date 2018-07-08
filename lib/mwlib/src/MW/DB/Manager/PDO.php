@@ -60,6 +60,10 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 		foreach( $this->connections as $name => $list ) {
 			unset( $this->connections[$name] );
 		}
+
+		foreach( $this->count as $name => $list ) {
+			unset( $this->count[$name] );
+		}
 	}
 
 
@@ -73,6 +77,10 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 	{
 		try
 		{
+			if( $this->config->get( 'resource/' . $name ) === null ) {
+				$name = 'db';
+			}
+
 			$adapter = $this->config->get( 'resource/' . $name . '/adapter', 'mysql' );
 
 			if( !isset( $this->connections[$name] ) || empty( $this->connections[$name] ) )
@@ -112,6 +120,10 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 	{
 		if( ( $connection instanceof \Aimeos\MW\DB\Connection\PDO ) === false ) {
 			throw new \Aimeos\MW\DB\Exception( 'Connection object isn\'t of type \PDO' );
+		}
+
+		if( $this->config->get( 'resource/' . $name ) === null ) {
+			$name = 'db';
 		}
 
 		$this->connections[$name][] = $connection;
