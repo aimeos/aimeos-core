@@ -20,9 +20,9 @@ namespace Aimeos\MW\DB\Manager;
  */
 class PDO implements \Aimeos\MW\DB\Manager\Iface
 {
-	private $config = null;
 	private $connections = [];
 	private $count = [];
+	private $config;
 
 
 	/**
@@ -43,27 +43,24 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 	{
 		foreach( $this->connections as $name => $list )
 		{
-			foreach( $list as $conn ) {
-				unset( $conn );
+			foreach( $list as $key => $conn ) {
+				unset( $this->connections[$name][$key] );
 			}
 		}
 	}
 
 
 	/**
-	 * Clones the objects inside.
+	 * Clean up the objects inside
 	 */
-	public function __clone()
+	public function __sleep()
 	{
-		$this->config = clone $this->config;
+		$this->__destruct();
 
-		foreach( $this->connections as $name => $list ) {
-			unset( $this->connections[$name] );
-		}
+		$this->connections = [];
+		$this->count = [];
 
-		foreach( $this->count as $name => $list ) {
-			unset( $this->count[$name] );
-		}
+		return get_object_vars( $this );
 	}
 
 

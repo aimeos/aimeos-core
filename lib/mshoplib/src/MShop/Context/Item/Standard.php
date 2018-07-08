@@ -65,17 +65,40 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->cache = ( isset( $this->cache ) ? clone $this->cache : null );
 		$this->config = ( isset( $this->config ) ? clone $this->config : null );
+		$this->dbm = ( isset( $this->dbm ) ? clone $this->dbm : null );
+		$this->fsm = ( isset( $this->fsm ) ? clone $this->fsm : null );
 		$this->locale = ( isset( $this->locale ) ? clone $this->locale : null );
 		$this->logger = ( isset( $this->logger ) ? clone $this->logger : null );
 		$this->mail = ( isset( $this->mail ) ? clone $this->mail : null );
 		$this->mqueue = ( isset( $this->mqueue ) ? clone $this->mqueue : null );
-		$this->session = ( isset( $this->session ) ? clone $this->session : null );
 		$this->process = ( isset( $this->process ) ? clone $this->process : null );
+		$this->session = ( isset( $this->session ) ? clone $this->session : null );
 		// view is always cloned
 
 		foreach( $this->i18n as $locale => $object ) {
 			$this->i18n[$locale] = clone $this->i18n[$locale];
 		}
+	}
+
+
+	/**
+	 * Cleans up internal objects of the context item
+	 */
+	public function __sleep()
+	{
+		$objects = array(
+			$this->cache, $this->config, $this->dbm, $this->fsm, $this->locale, $this->logger,
+			$this->mail, $this->mqueue, $this->process, $this->session, $this->view
+		);
+
+		foreach( $objects as $object )
+		{
+			if( method_exists( $object, '__sleep' ) ) {
+				$object->__sleep();
+			}
+		}
+
+		return get_object_vars( $this );
 	}
 
 

@@ -39,22 +39,22 @@ class Standard implements Iface
 	 */
 	public function __destruct()
 	{
-		foreach( $this->objects as $object ) {
-			unset( $object );
+		foreach( $this->objects as $key => $object ) {
+			unset( $this->objects[$key] );
 		}
 	}
 
 
 	/**
-	 * Clones the objects inside.
+	 * Clean up the objects inside
 	 */
-	public function __clone()
+	public function __sleep()
 	{
-		$this->config = clone $this->config;
+		$this->__destruct();
 
-		foreach( $this->objects as $name => $object ) {
-			unset( $this->objects[$name] );
-		}
+		$this->objects = [];
+
+		return get_object_vars( $this );
 	}
 
 
