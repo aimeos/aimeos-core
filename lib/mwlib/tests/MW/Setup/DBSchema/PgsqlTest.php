@@ -33,9 +33,9 @@ class PgsqlTest extends \PHPUnit\Framework\TestCase
 		$conn->create( $sql )->execute()->finish();
 		$conn->create( 'CREATE INDEX "idx_msdt_smallint" ON "mw_setup_dbschema_test" ("smallint")' )->execute()->finish();
 
-		$this->object = new \Aimeos\MW\Setup\DBSchema\Pgsql( $conn, $config->get( 'resource/db/database', 'notfound' ), $adapter );
-
 		$this->dbm->release( $conn );
+
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Pgsql( $this->dbm, 'db', $config->get( 'resource/db/database', 'notfound' ), $adapter );
 	}
 
 

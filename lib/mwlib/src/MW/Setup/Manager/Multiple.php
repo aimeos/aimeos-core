@@ -20,7 +20,6 @@ namespace Aimeos\MW\Setup\Manager;
  */
 class Multiple extends \Aimeos\MW\Setup\Manager\Base
 {
-	private $dbm;
 	private $type;
 	private $additional;
 	private $tasks = [];
@@ -47,7 +46,6 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 			throw new \Aimeos\MW\Setup\Exception( 'No databases configured in resource config file' );
 		}
 
-		$this->dbm = $dbm;
 		$this->additional = $additional;
 		$schemas = [];
 
@@ -63,24 +61,10 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 				throw new \Aimeos\MW\Setup\Exception( sprintf( 'Configuration parameter "%1$s" missing in "%2$s"', 'database', $rname ) );
 			}
 
-			$this->conns[$rname] = $dbm->acquire( $rname );
-			$schemas[$rname] = $this->createSchema( $this->conns[$rname], $dbconf['adapter'], $dbconf['database'] );
+			$schemas[$rname] = $this->createSchema( $dbm, $rname, $dbconf['adapter'], $dbconf['database'] );
 		}
 
-		$this->setupTasks( (array) $taskpath, $this->conns, $schemas );
-	}
-
-
-	/**
-	 * Cleans up the object
-	 */
-	public function __destruct()
-	{
-		foreach( $this->conns as $name => $conn ) {
-			$this->dbm->release( $conn, $name );
-		}
-
-		unset( $this->dbm );
+		$this->setupTasks( (array) $taskpath, $schemas, $dbm );
 	}
 
 
@@ -234,20 +218,17 @@ class Multiple extends \Aimeos\MW\Setup\Manager\Base
 	 * Sets up the tasks and their dependencies.
 	 *
 	 * @param array $paths List of paths containing setup task classes
-	 * @param array $conns Associative list of db connections with the resource name as key
 	 * @param array $schemas Associative list of db schemas with the resource name as key
 	 */
-	protected function setupTasks( array $paths, array $conns, array $schemas )
+	protected function setupTasks( array $paths, array $schemas, \Aimeos\MW\DB\Manager\Iface $dbm )
 	{
-		$defconn = ( isset( $conns['db'] ) ? $conns['db'] : reset( $conns ) );
 		$defschema = ( isset( $schemas['db'] ) ? $schemas['db'] : reset( $schemas ) );
-
-		$this->tasks = $this->createTasks( $paths, $defschema, $defconn, $this->additional );
+		$this->tasks = $this->createTasks( $paths, $defschema, $dbm->acquire(), $this->additional );
 
 		foreach( $this->tasks as $name => $task )
 		{
 			$task->setSchemas( $schemas );
-			$task->setConnections( $conns );
+			$task->setDatabaseManager( $dbm );
 
 			foreach( (array) $task->getPreDependencies() as $taskname )
 			{

@@ -51,7 +51,7 @@ class OrderAddWeekday extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$start = 0;
-		$conn = $this->getConnection( $dbdomain );
+		$conn = $this->acquire( $dbdomain );
 		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cwday" = \'\' LIMIT 1000 OFFSET :offset';
 		$update = 'UPDATE "mshop_order" SET "cwday" = ? WHERE "id" = ?';
 
@@ -83,6 +83,8 @@ class OrderAddWeekday extends \Aimeos\MW\Setup\Task\Base
 			$start += $count;
 		}
 		while( $count === 1000 );
+
+		$this->release( $conn, $dbdomain );
 
 		$this->status( 'done' );
 	}

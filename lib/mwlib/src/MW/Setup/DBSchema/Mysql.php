@@ -37,17 +37,17 @@ class Mysql extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 				AND INDEX_NAME = ?
 		";
 
-		$stmt = $this->getConnection()->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $this->getDBName() );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $indexname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 

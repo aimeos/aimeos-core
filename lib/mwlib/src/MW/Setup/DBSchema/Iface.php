@@ -23,14 +23,14 @@ interface Iface
 	const HAS_SEQUENCES = 'seqence';
 
 	/**
-	 * Initializes the database schema object.
+	 * Initializes the database schema object
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
+	 * @param string $rname Resource name
 	 * @param string $dbname Database name
 	 * @param string $name Adapter name
-	 * @return null
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname, $name );
+	public function __construct( \Aimeos\MW\DB\Manager\Iface $dbm, $rname, $dbname, $name );
 
 	/**
 	 * Checks if the given table exists for the specified table in the database.
@@ -84,12 +84,6 @@ interface Iface
 	 */
 	public function getColumnDetails( $tablename, $columnname );
 
-	/**
-	 * Returns the database name.
-	 *
-	 * @return string Database name
-	 */
-	public function getDBName();
 
 	/**
 	 * Returns the name of the database adapter

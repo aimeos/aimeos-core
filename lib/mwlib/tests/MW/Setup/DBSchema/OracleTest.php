@@ -11,12 +11,20 @@ class OracleTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$this->mock = $this->getMockBuilder( '\Aimeos\MW\DB\Connection\DBAL' )
+		$this->mock = $this->getMockBuilder( '\Aimeos\MW\DB\Connection\PDO' )
 			->setMethods( array( 'create' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\Setup\DBSchema\Oracle( $this->mock, 'dbname', 'oracle' );
+		$dbmStub = $this->getMockBuilder( '\Aimeos\MW\DB\Manager\PDO' )
+			->setMethods( array( 'acquire', 'release' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
+
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Oracle( $dbmStub, 'db', 'dbname', 'oracle' );
 	}
 
 

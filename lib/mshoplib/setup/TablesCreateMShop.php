@@ -169,7 +169,8 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 		{
 			$this->msg( 'Using schema from ' . basename( $relpath ), 1 ); $this->status( '' );
 
-			$dbal = $this->getConnection( $rname )->getRawObject();
+			$conn = $this->acquire();
+			$dbal = $conn->getRawObject();
 
 			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
 				throw new \Aimeos\MW\Setup\Exception( 'Not a DBAL connection' );
@@ -211,6 +212,8 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 					$this->status( 'done' );
 				}
 			}
+
+			$this->release( $conn );
 		}
 	}
 

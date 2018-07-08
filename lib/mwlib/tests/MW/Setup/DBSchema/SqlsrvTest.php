@@ -7,16 +7,22 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
 	private $object;
+	private $dbmStub;
 
 
 	protected function setUp()
 	{
-		$this->mock = $this->getMockBuilder( '\Aimeos\MW\DB\Connection\DBAL' )
+		$this->mock = $this->getMockBuilder( '\Aimeos\MW\DB\Connection\PDO' )
 			->setMethods( array( 'create' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\Setup\DBSchema\Sqlsrv( $this->mock, 'dbname', 'sqlsrv' );
+		$this->dbmStub = $this->getMockBuilder( '\Aimeos\MW\DB\Manager\PDO' )
+			->setMethods( array( 'acquire', 'release' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Sqlsrv( $this->dbmStub, 'db', 'dbname', 'sqlsrv' );
 	}
 
 
@@ -37,6 +43,9 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
@@ -64,6 +73,9 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
+
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
 		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( false ) );
@@ -84,6 +96,9 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
+
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
 		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( false ) );
@@ -103,6 +118,9 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
@@ -132,6 +150,9 @@ class SqlservTest extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );

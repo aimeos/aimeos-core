@@ -62,11 +62,7 @@ class TestHelperMw
 	 */
 	public static function getDBManager()
 	{
-		if( !isset( self::$dbm ) ) {
-			self::$dbm = self::createDBManager();
-		}
-
-		return self::$dbm;
+		return \Aimeos\MW\DB\Factory::createManager( self::getConfig(), 'DBAL' );
 	}
 
 
@@ -84,16 +80,5 @@ class TestHelperMw
 		$object = new \Aimeos\MW\Config\Decorator\Documentor( $object, $file );
 
 		return $object;
-	}
-
-
-	/**
-	 * Creates a new database manager object
-	 *
-	 * @return \Aimeos\MW\DB\Manager\Iface Database manager object
-	 */
-	private static function createDBManager()
-	{
-		return \Aimeos\MW\DB\Factory::createManager( self::getConfig(), 'DBAL' );
 	}
 }

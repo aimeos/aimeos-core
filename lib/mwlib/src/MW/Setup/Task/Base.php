@@ -19,9 +19,10 @@ namespace Aimeos\MW\Setup\Task;
  */
 abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 {
-	private $connections = [];
-	private $schemas = [];
+	private $dbm;
 	private $paths = [];
+	private $schemas = [];
+	private $connections = [];
 	protected $additional;
 
 	/** @deprecated Use getSchema() instead */
@@ -42,6 +43,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn,
 		$additional = null, array $paths = [] )
 	{
+		$this->connections['db'] = $conn;
 		$this->schema = $schema;
 		$this->conn = $conn;
 		$this->paths = $paths;
@@ -80,13 +82,13 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
-	 * Sets the associative list of connections with the resource name as key.
+	 * Sets the database manager object
 	 *
-	 * @param array $conns Associative list of connections
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
 	 */
-	public function setConnections( array $conns )
+	public function setDatabaseManager( \Aimeos\MW\DB\Manager\Iface $dbm )
 	{
-		$this->connections = $conns;
+		$this->dbm = $dbm;
 	}
 
 
@@ -102,6 +104,28 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 
 
 	/**
+	 * Returns the database connection
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
+	 */
+	protected function acquire( $name = 'db')
+	{
+		return $this->dbm->acquire( $name );
+	}
+
+
+	/**
+	 * Releases the database connection
+	 *
+	 * @param \Aimeos\MW\DB\Connection\Iface Database connection
+	 */
+	protected function release( \Aimeos\MW\DB\Connection\Iface $conn, $name = 'db' )
+	{
+		return $this->dbm->release( $conn, $name );
+	}
+
+
+	/**
 	 * Executes a given SQL statement.
 	 *
 	 * @param string $sql SQL statement to execute
@@ -109,7 +133,9 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 */
 	protected function execute( $sql, $name = 'db' )
 	{
-		$this->getConnection( $name )->create( $sql )->execute()->finish();
+		$conn = $this->acquire( $name );
+		$conn->create( $sql )->execute()->finish();
+		$this->release( $conn, $name );
 	}
 
 
@@ -121,11 +147,13 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 */
 	protected function executeList( array $list, $name = 'db' )
 	{
-		$conn = $this->getConnection( $name );
+		$conn = $this->acquire( $name );
 
 		foreach( $list as $sql ) {
 			$conn->create( $sql )->execute()->finish();
 		}
+
+		$this->release( $conn, $name );
 	}
 
 
@@ -134,14 +162,15 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 *
 	 * @param string $name Name from resource configuration
 	 * @return \Aimeos\MW\DB\Connection\Iface
+	 * @deprecated Use acquire() and release() instead
 	 */
 	protected function getConnection( $name )
 	{
 		if( !isset( $this->connections[$name] ) ) {
-			return $this->conn;
+			return $this->connections[$name] = $this->dbm->acquire( $name );
 		}
 
-		return $this->connections[$name];
+		return $this->connections[$name]->connect();
 	}
 
 

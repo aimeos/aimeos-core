@@ -20,23 +20,26 @@ namespace Aimeos\MW\Setup\DBSchema;
  */
 abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 {
-	private $conn;
+	private $rname;
 	private $dbname;
 	private $name;
+	private $dbm;
 
 
 	/**
-	 * Initializes the database schema object.
+	 * Initializes the database schema object
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
+	 * @param string $rname Resource name
 	 * @param string $dbname Database name
 	 * @param string $name Adapter name
 	 */
-	public function __construct( \Aimeos\MW\DB\Connection\Iface $conn, $dbname, $name )
+	public function __construct( \Aimeos\MW\DB\Manager\Iface $dbm, $rname, $dbname, $name )
 	{
-		$this->conn = $conn;
+		$this->rname = $rname;
 		$this->dbname = $dbname;
 		$this->name = $name;
+		$this->dbm = $dbm;
 	}
 
 
@@ -56,16 +59,16 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 				AND TABLE_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $tablename );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -84,16 +87,16 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 				AND SEQUENCE_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $seqname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -114,17 +117,17 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 				AND CONSTRAINT_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $constraintname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -145,17 +148,17 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $columnname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -176,39 +179,21 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->conn->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $this->dbname );
 		$stmt->bind( 2, $tablename );
 		$stmt->bind( 3, $columnname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( ( $record = $result->fetch() ) === false ) {
+		$this->release( $conn );
+
+		if( $result === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unknown column "%1$s" in table "%2$s"', $columnname, $tablename ) );
 		}
 
-		return $this->createColumnItem( $record );
-	}
-
-
-	/**
-	 * Returns the database connection.
-	 *
-	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
-	 */
-	protected function getConnection()
-	{
-		return $this->conn;
-	}
-
-
-	/**
-	 * Returns the database name.
-	 *
-	 * @return string Database name
-	 */
-	public function getDBName()
-	{
-		return $this->dbname;
+		return $this->createColumnItem( $result );
 	}
 
 
@@ -236,6 +221,28 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 
 
 	/**
+	 * Returns the database connection
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Database connection
+	 */
+	protected function acquire()
+	{
+		return $this->dbm->acquire( $this->rname );
+	}
+
+
+	/**
+	 * Releases the database connection
+	 *
+	 * @param \Aimeos\MW\DB\Connection\Iface Database connection
+	 */
+	protected function release( \Aimeos\MW\DB\Connection\Iface $conn )
+	{
+		return $this->dbm->release( $conn, $this->rname );
+	}
+
+
+	/**
 	 * Creates a new column item using the columns of the information_schema.columns.
 	 *
 	 * @param array $record Associative array with TABLE_NAME, COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,
@@ -247,5 +254,16 @@ abstract class InformationSchema implements \Aimeos\MW\Setup\DBSchema\Iface
 		$length = ( isset( $record['CHARACTER_MAXIMUM_LENGTH'] ) ? $record['CHARACTER_MAXIMUM_LENGTH'] : $record['NUMERIC_PRECISION'] );
 		return new \Aimeos\MW\Setup\DBSchema\Column\Item( $record['TABLE_NAME'], $record['COLUMN_NAME'], $record['DATA_TYPE'], $length,
 			$record['COLUMN_DEFAULT'], $record['IS_NULLABLE'], $record['COLLATION_NAME'] );
+	}
+
+
+	/**
+	 * Returns the database name.
+	 *
+	 * @return string Database name
+	 */
+	protected function getDBName()
+	{
+		return $this->dbname;
 	}
 }

@@ -67,12 +67,13 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	/**
 	 * Creates a new database schema object.
 	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection object
+	 * @param \Aimeos\MW\DB\Manager\Iface $dbm Database manager
+	 * @param string $rname Resource name
 	 * @param string $adapter Database adapter, e.g. "mysql", "pgsql", etc.
 	 * @param string $dbname Name of the database that will be used
 	 * @return \Aimeos\MW\Setup\DBSchema\Iface Database schema object
 	 */
-	protected  function createSchema( \Aimeos\MW\DB\Connection\Iface $conn, $adapter, $dbname )
+	protected  function createSchema( \Aimeos\MW\DB\Manager\Iface $dbm, $rname, $adapter, $dbname )
 	{
 		if( empty( $adapter ) || ctype_alnum( $adapter ) === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );
@@ -84,7 +85,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Database schema class "%1$s" not found', $classname ) );
 		}
 
-		return new $classname( $conn, $dbname, $adapter );
+		return new $classname( $dbm, $rname, $dbname, $adapter );
 	}
 
 

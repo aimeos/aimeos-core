@@ -12,6 +12,7 @@ namespace Aimeos\MW\Setup\Task;
 
 class BaseTest extends \PHPUnit\Framework\TestCase
 {
+	private $dbm;
 	private $object;
 
 
@@ -24,19 +25,16 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$dbm = \TestHelperMw::getDBManager();
-		$conn = $dbm->acquire();
+		$this->dbm = \TestHelperMw::getDBManager();
+		$schema = new \Aimeos\MW\Setup\DBSchema\Mysql( $this->dbm, 'db', $config->get( 'resource/db/database', 'notfound' ), 'mysql' );
 
-		$schema = new \Aimeos\MW\Setup\DBSchema\Mysql( $conn, $config->get( 'resource/db/database', 'notfound' ), 'mysql' );
-		$this->object = new BaseImpl( $schema, $conn );
-
-		$dbm->release( $conn );
+		$this->object = new BaseImpl( $schema, $this->dbm->acquire() );
 	}
 
 
 	protected function tearDown()
 	{
-		unset( $this->object );
+		unset( $this->object, $this->dbm );
 	}
 
 

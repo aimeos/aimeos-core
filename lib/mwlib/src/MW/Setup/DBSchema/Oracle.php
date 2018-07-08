@@ -33,15 +33,15 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 			WHERE TABLE_NAME = ?
 		";
 
-		$stmt = $this->getConnection()->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $tablename );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -59,15 +59,15 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 			WHERE SEQUENCE_NAME = ?
 		";
 
-		$stmt = $this->getConnection()->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $seqname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -87,16 +87,16 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 				AND CONSTRAINT_NAME = ?
 		";
 
-		$stmt = $this->getConnection()->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $tablename );
 		$stmt->bind( 2, $constraintname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -116,16 +116,16 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->getConnection()->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $tablename );
 		$stmt->bind( 2, $columnname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -145,16 +145,16 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 				AND INDEX_NAME = ?
 		";
 
-		$stmt = $this->getConnection()->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $tablename );
 		$stmt->bind( 2, $indexname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 
@@ -174,16 +174,20 @@ class Oracle extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 				AND COLUMN_NAME = ?
 		";
 
-		$stmt = $this->getConnection()->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $tablename );
 		$stmt->bind( 2, $columnname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( ( $record = $result->fetch() ) === false ) {
+		$this->release( $conn );
+
+		if( $result === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Unknown column "%1$s" in table "%2$s"', $columnname, $tablename ) );
 		}
 
-		return $this->createColumnItem( $record );
+		return $this->createColumnItem( $result );
 	}
 
 

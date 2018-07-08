@@ -57,7 +57,7 @@ class ServiceUniqueCode extends \Aimeos\MW\Setup\Task\Base
 		if( $schema->tableExists( $table ) && $schema->columnExists( $table, 'code' ) )
 		{
 			$list = [];
-			$conn = $this->getConnection( 'db-service' );
+			$conn = $this->acquire( 'db-service' );
 			$result = $conn->create( $this->select )->execute();
 
 			while( ( $row = $result->fetch() ) !== false ) {
@@ -72,6 +72,8 @@ class ServiceUniqueCode extends \Aimeos\MW\Setup\Task\Base
 				$stmt->bind( 2, $code . '2' );
 				$stmt->execute()->finish();
 			}
+
+			$this->release( $conn );
 
 			$this->status( 'done' );
 		}

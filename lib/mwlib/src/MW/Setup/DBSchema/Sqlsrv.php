@@ -47,16 +47,16 @@ class Sqlsrv extends \Aimeos\MW\Setup\DBSchema\InformationSchema
 				AND name = ?
 		";
 
-		$stmt = $this->getConnection()->create( $sql );
+		$conn = $this->acquire();
+
+		$stmt = $conn->create( $sql );
 		$stmt->bind( 1, $tablename );
 		$stmt->bind( 2, $indexname );
-		$result = $stmt->execute();
+		$result = $stmt->execute()->fetch();
 
-		if( $result->fetch() !== false ) {
-			return true;
-		}
+		$this->release( $conn );
 
-		return false;
+		return $result !== false ? true : false;
 	}
 
 

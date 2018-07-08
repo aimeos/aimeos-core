@@ -7,16 +7,22 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 {
 	private $mock;
 	private $object;
+	private $dbmStub;
 
 
 	protected function setUp()
 	{
-		$this->mock = $this->getMockBuilder( '\Aimeos\MW\DB\Connection\DBAL' )
+		$this->mock = $this->getMockBuilder( '\Aimeos\MW\DB\Connection\PDO' )
 			->setMethods( array( 'create' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$this->object = new \Aimeos\MW\Setup\DBSchema\Db2( $this->mock, 'dbname', 'db2' );
+		$this->dbmStub = $this->getMockBuilder( '\Aimeos\MW\DB\Manager\PDO' )
+			->setMethods( array( 'acquire', 'release' ) )
+			->disableOriginalConstructor()
+			->getMock();
+
+		$this->object = new \Aimeos\MW\Setup\DBSchema\Db2( $this->dbmStub, 'db', 'dbname', 'db2' );
 	}
 
 
@@ -38,6 +44,9 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
+
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
 		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( false ) );
@@ -48,6 +57,7 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 
 	public function testSequenceExists()
 	{
+		unset( $this->dbmStub );
 		$this->assertFalse( $this->object->sequenceExists( 'testseqence' ) );
 	}
 
@@ -63,6 +73,9 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
@@ -84,6 +97,9 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 			->disableOriginalConstructor()
 			->getMock();
 
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
+
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
 		$result->expects( $this->once() )->method( 'fetch' )->will( $this->returnValue( false ) );
@@ -103,6 +119,9 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );
@@ -133,6 +152,9 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
+
+		$this->dbmStub->expects( $this->once() )->method( 'acquire' )->will( $this->returnValue( $this->mock ) );
+		$this->dbmStub->expects( $this->once() )->method( 'release' )->with( $this->equalTo( $this->mock ) );
 
 		$this->mock->expects( $this->once() )->method( 'create' )->will( $this->returnValue( $stmt ) );
 		$stmt->expects( $this->once() )->method( 'execute' )->will( $this->returnValue( $result ) );

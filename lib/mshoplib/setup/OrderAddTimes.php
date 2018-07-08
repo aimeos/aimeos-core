@@ -51,7 +51,7 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		$start = 0;
-		$conn = $this->getConnection( $dbdomain );
+		$conn = $this->acquire( $dbdomain );
 		$select = 'SELECT "id", "ctime" FROM "mshop_order" WHERE "cdate" = \'\' LIMIT 1000 OFFSET :offset';
 		$update = 'UPDATE "mshop_order" SET "cdate" = ?, "cmonth" = ?, "cweek" = ?, "chour" = ? WHERE "id" = ?';
 
@@ -86,6 +86,8 @@ class OrderAddTimes extends \Aimeos\MW\Setup\Task\Base
 			$start += $count;
 		}
 		while( $count === 1000 );
+
+		$this->release( $conn, $dbdomain );
 
 		$this->status( 'done' );
 	}
