@@ -34,12 +34,12 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 
 	public function testTableExists()
 	{
-		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\DBAL\Simple' )
+		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\PDO\Simple' )
 			->setMethods( array( 'bind', 'execute' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\DBAL' )
+		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\PDO' )
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -64,12 +64,12 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 
 	public function testIndexExists()
 	{
-		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\DBAL\Simple' )
+		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\PDO\Simple' )
 			->setMethods( array( 'bind', 'execute' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\DBAL' )
+		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\PDO' )
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -87,12 +87,12 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 
 	public function testConstraintExists()
 	{
-		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\DBAL\Simple' )
+		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\PDO\Simple' )
 			->setMethods( array( 'bind', 'execute' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\DBAL' )
+		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\PDO' )
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -110,12 +110,12 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 
 	public function testColumnExists()
 	{
-		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\DBAL\Simple' )
+		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\PDO\Simple' )
 			->setMethods( array( 'bind', 'execute' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\DBAL' )
+		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\PDO' )
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -143,12 +143,12 @@ class Db2Test extends \PHPUnit\Framework\TestCase
 			'COLLATION_NAME' => null,
 		);
 
-		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\DBAL\Simple' )
+		$stmt = $this->getMockBuilder( '\Aimeos\MW\DB\Statement\PDO\Simple' )
 			->setMethods( array( 'bind', 'execute' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\DBAL' )
+		$result = $this->getMockBuilder( '\Aimeos\MW\DB\Result\PDO' )
 			->setMethods( array( 'fetch' ) )
 			->disableOriginalConstructor()
 			->getMock();
