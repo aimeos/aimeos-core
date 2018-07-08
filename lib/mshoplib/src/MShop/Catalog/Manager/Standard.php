@@ -286,7 +286,12 @@ class Standard extends Base
 		catch( \Exception $e )
 		{
 			$this->rollback();
-			throw $e;
+
+			if( $e->getCode() == 40001 ) {
+				$this->deleteItem( $id );
+			} else {
+				throw $e;
+			}
 		}
 	}
 
@@ -403,7 +408,12 @@ class Standard extends Base
 		catch( \Exception $e )
 		{
 			$this->rollback();
-			throw $e;
+
+			if( $e->getCode() == 40001 ) {
+				$this->insertItem( $item, $parentId, $refId );
+			} else {
+				throw $e;
+			}
 		}
 
 		return $this->saveListItems( $item, 'catalog' );
@@ -434,7 +444,12 @@ class Standard extends Base
 		catch( \Exception $e )
 		{
 			$this->rollback();
-			throw $e;
+
+			if( $e->getCode() == 40001 ) {
+				$this->moveItem( $id, $oldParentId, $newParentId, $refId );
+			} else {
+				throw $e;
+			}
 		}
 	}
 
@@ -470,7 +485,12 @@ class Standard extends Base
 		catch( \Exception $e )
 		{
 			$this->rollback();
-			throw $e;
+
+			if( $e->getCode() == 40001 ) {
+				$this->saveItem( $item, $fetch );
+			} else {
+				throw $e;
+			}
 		}
 
 		return $this->saveListItems( $item, 'catalog' );
