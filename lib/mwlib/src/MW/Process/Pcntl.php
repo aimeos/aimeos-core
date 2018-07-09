@@ -142,8 +142,13 @@ class Pcntl implements Iface
 	{
 		foreach( $data as $key => $value )
 		{
-			if( is_object( $value ) ) {
+			if( is_object( $value ) )
+			{
 				$data[$key] = clone $value;
+
+				if( method_exists( $data[$key], '__sleep' ) ) {
+					$data[$key]->__sleep();
+				}
 			}
 		}
 
