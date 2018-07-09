@@ -2,8 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2012
- * @copyright Aimeos (aimeos.org), 2015-2017
+ * @copyright Aimeos (aimeos.org), 2015-2018
  */
 
 return array(
@@ -13,7 +12,8 @@ return array(
 	),
 
 	'locale' => array(
-		array( 'siteid' => 'unitperf', 'langid' => 'en', 'currencyid' => 'EUR', 'pos' => 1, 'status' => 1 ),
+		array( 'siteid' => 'unitperf', 'langid' => 'en', 'currencyid' => 'USD', 'pos' => 0, 'status' => 1 ),
+		array( 'siteid' => 'unitperf', 'langid' => 'de', 'currencyid' => 'EUR', 'pos' => 1, 'status' => 1 ),
 	)
 
 );

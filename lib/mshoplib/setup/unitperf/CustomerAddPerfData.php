@@ -2,8 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Metaways Infosystems GmbH, 2014
- * @copyright Aimeos (aimeos.org), 2015-2017
+ * @copyright Aimeos (aimeos.org), 2015-2018
  */
 
 
@@ -13,8 +12,19 @@ namespace Aimeos\MW\Setup\Task;
 /**
  * Adds performance records to customer table.
  */
-class CustomerAddBasePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfData
+class CustomerAddPerfData extends \Aimeos\MW\Setup\Task\Base
 {
+	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
+	{
+		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
+		if( !( $additional instanceof $iface ) ) {
+			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
+		}
+
+		parent::__construct( $schema, $conn, $additional );
+	}
+
+
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
@@ -22,7 +32,7 @@ class CustomerAddBasePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddTypeDataUnitperf' );
+		return ['MShopAddTypeDataUnitperf', 'LocaleAddPerfData'];
 	}
 
 
@@ -44,9 +54,7 @@ class CustomerAddBasePerfData extends \Aimeos\MW\Setup\Task\ProductAddBasePerfDa
 	{
 		$this->msg( 'Adding customer performance data', 0 );
 
-
-		$context = $this->getContext();
-		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $context );
+		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional );
 
 		$customerItem = $customerManager->createItem();
 		$customerItem->setCode( 'demo-test' );
