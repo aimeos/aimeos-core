@@ -99,7 +99,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Item object whose data should be saved
 	 * @param boolean $fetch True if the new ID should be returned in the item
-	 * @return null
+	 * @return \Aimeos\MShop\Common\Item\Iface Saved item object
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true );
 
