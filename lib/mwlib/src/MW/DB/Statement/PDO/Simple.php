@@ -130,9 +130,17 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 		}
 
 		$level = error_reporting(); // Workaround for PDO warnings
-		error_reporting( $level & ~E_WARNING );
 
-		$result = $this->getConnection()->getRawObject()->query( $this->sql );
+		try
+		{
+			error_reporting( $level & ~E_WARNING );
+			$result = $this->getConnection()->getRawObject()->query( $this->sql );
+		}
+		catch( \Exception $e )
+		{
+			error_reporting( $level );
+			throw $e;
+		}
 
 		error_reporting( $level );
 
