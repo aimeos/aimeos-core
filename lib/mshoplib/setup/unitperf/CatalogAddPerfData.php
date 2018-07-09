@@ -14,13 +14,12 @@ namespace Aimeos\MW\Setup\Task;
  */
 class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 {
-	const NUM_CATLEVELS = 1;
-	const NUM_CATEGORIES = 8;
-	const NUM_CATPRODUCTS = 1000;
-	const NUM_PRODVARIANTS = 0;
-
-	private $typeIds = [];
+	private $numCatLevels;
+	private $numCategories;
+	private $numCatProducts;
+	private $numProdVariants;
 	private $attributes = [];
+	private $typeIds = [];
 
 
 	/**
@@ -100,18 +99,24 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 				$self->save( 'catalog', $catItem );
 			};
 
-			$treeFcn( [], $parentId, $idx, $self::NUM_CATLEVELS - 1 );
+			$treeFcn( [], $parentId, $idx, $this->numCatLevels - 1 );
 		};
 
 
 		$this->init();
 
+		$config = $this->additional->getConfig();
+		$this->numCatLevels = $config->get( 'setup/unitperf/num-catlevels', 1 );
+		$this->numCategories = $config->get( 'setup/unitperf/num-categories', 10 );
+		$this->numCatProducts = $config->get( 'setup/unitperf/num-catproducts', 100 );
+		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 10 );
+
 		$process = $this->additional->getProcess();
 		$catalogRootItem = $this->addCatalogItem( 'home' );
 
-		$num = round( pow( self::NUM_CATEGORIES, 1 / self::NUM_CATLEVELS ) / 5 ) * 5;
+		$num = round( pow( $this->numCategories, 1 / $this->numCatLevels ) / 5 ) * 5;
 
-		for( $i = 1; $i <= round( self::NUM_CATEGORIES / pow( $num, self::NUM_CATLEVELS - 1 ) ); $i++ ) {
+		for( $i = 1; $i <= round( $this->numCategories / pow( $num, $this->numCatLevels - 1 ) ); $i++ ) {
 			$process->start( $fcn, [$this, $catalogRootItem->getId(), $num, $i] );
 		}
 
@@ -148,7 +153,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$defListItem = $catalogListManager->createItem()
 			->setTypeId( $this->getTypeId( 'catalog/lists/type', 'product', 'default' ) );
 
-		$promo = round( self::NUM_CATPRODUCTS / 10 ) ?: 1;
+		$promo = round( $this->numCatProducts / 10 ) ?: 1;
 
 		foreach( $catItems as $idx => $catItem )
 		{
@@ -222,12 +227,12 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
 		$productManager->begin();
 
-		$type = self::NUM_PRODVARIANTS > 0 ? 'select' : 'default';
+		$type = $this->numProdVariants > 0 ? 'select' : 'default';
 
 		$modifier = $this->attributes['modifier'];
 		$material = $this->attributes['material'];
 
-		for( $i = 0; $i < self::NUM_CATPRODUCTS; $i++ )
+		for( $i = 0; $i < $this->numCatProducts; $i++ )
 		{
 			$text = key( $modifier ) . ' ' . key( $material ) . ' ' . current( $articles );
 
@@ -411,7 +416,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$width = $this->attributes['width'];
 		$size = $this->attributes['size'];
 
-		for( $i = 0; $i < self::NUM_PRODVARIANTS; $i++ )
+		for( $i = 0; $i < $this->numProdVariants; $i++ )
 		{
 			$text = key( $length ) . ', ' . key( $width ) . ' ' . $prodItem->getLabel() . ' (' . key( $size ) . ')';
 
