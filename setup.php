@@ -129,6 +129,10 @@ function getContext( \Aimeos\MW\Config\Iface $conf )
 	$cache = new \Aimeos\MW\Cache\None();
 	$ctx->setCache( $cache );
 
+	$process = new \Aimeos\MW\Process\Pcntl( $conf->get( 'pcntl_max', 4 ), $conf->get( 'pcntl_priority', 19 ) );
+	$process = new \Aimeos\MW\Process\Decorator\Check( $process );
+	$ctx->setProcess( $process );
+
 	return $ctx;
 }
 
