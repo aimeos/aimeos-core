@@ -74,7 +74,7 @@ class CustomerAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$addrItem->setCity( 'Test city' );
 		$addrItem->setLanguageId( 'en' );
 		$addrItem->setCountryId( 'DE' );
-		$addrItem->setEmail( 'me@localhost' );
+		$addrItem->setEmail( 'unitperf@example.com' );
 
 		$customerManager->saveItem( $customerItem );
 
