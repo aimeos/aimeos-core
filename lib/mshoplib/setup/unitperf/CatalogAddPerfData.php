@@ -88,12 +88,15 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 				$catItem = $self->addCatalogItem( $label, $parentId );
 				array_unshift( $parents, $catItem );
 
-				if( $level === 0 ) {
-					return $self->addProductItems( $parents, $label );
+				if( $level > 0 )
+				{
+					for( $i = 0; $i < $num; $i++ ) {
+						$treeFcn( $parents, $catItem->getId(), $label . '/' . $i, $level - 1 );
+					}
 				}
-
-				for( $i = 0; $i < $num; $i++ ) {
-					$treeFcn( $parents, $catItem->getId(), $label . '/' . $i, $level - 1 );
+				else
+				{
+					$self->addProductItems( $parents, $label );
 				}
 
 				$self->save( 'catalog', $catItem );
@@ -242,11 +245,12 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 				->setCode( 'prod-' . $i . ':' . $label )
 				->setStatus( 1 );
 
-			$item = $this->addProductAttributes( $item, [key( $modifier ), key( $material )] );
+			$item = $this->addProductAttributes( $item, [current( $modifier ), current( $material )] );
 			$item = $this->addProductTexts( $item, $text );
 			$item = $this->addProductMedia( $item, $i );
 			$item = $this->addProductPrices( $item, $i );
 			$item = $this->addProductVariants( $item, $i );
+			$item = $this->addProductSuggestions( $item, $catItems );
 
 			$item = $productManager->saveItem( $item );
 
@@ -268,10 +272,6 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			}
 		}
 
-		if( ( $catItem = reset( $catItems ) ) !== false ) {
-			$this->addProductSuggestions( $catItem );
-		}
-
 		$productManager->commit();
 	}
 
@@ -289,11 +289,12 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		for( $i = 0; $i < 4; $i++ )
 		{
 			$mediaItem = $mediaManager->createItem()
-				->setLabel( $i . '. picture for ' . $prodItem->getLabel() )
+				->setLabel( ($i+1) . '. picture for ' . $prodItem->getLabel() )
 				->setTypeId( $this->getTypeId( 'media/type', 'product', 'default' ) )
 				->setPreview( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '.jpg' )
 				->setUrl( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '-big.jpg' )
-				->setMimeType( 'image/jpeg' );
+				->setMimeType( 'image/jpeg' )
+				->setStatus( 1 );
 
 			$prodItem->addListItem( 'media', clone $listItem, $mediaItem );
 		}
@@ -303,7 +304,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			->setPreview( $prefix . 'unitperf/download-preview.jpg' )
 			->setUrl( $prefix . 'unitperf/download.pdf' )
 			->setMimeType( 'application/pdf' )
-			->setLabel( 'PDF download' );
+			->setLabel( 'PDF download' )
+			->setStatus( 1 );
 
 		$listItem = $productListManager->createItem()
 			->setTypeId( $this->getTypeId( 'product/lists/type', 'media', 'download' ) );
@@ -337,28 +339,30 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductSuggestions( \Aimeos\MShop\Catalog\Item\Iface $catItem )
+	protected function addProductSuggestions( \Aimeos\MShop\Product\Item\Iface $prodItem, array $catItems )
 	{
-		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
-
-		$listItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'product', 'suggestion' ) );
-
-		$prevItems = [];
-		foreach( $catItem->getRefItems( 'product' ) as $item )
+		if( ( $catItem = reset( $catItems ) ) !== false )
 		{
-			foreach( $prevItems as $prevItem ) {
-				$item->addListItem( 'product', (clone $listItem)->setRefId( $prevItem->getId() ) );
-			}
+			$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
-			if( count( $prevItems ) < 10 ) {
-				$prevItems[] = $item;
-			} else {
-				$prevItems = [];
+			$listItem = $productListManager->createItem()
+				->setTypeId( $this->getTypeId( 'product/lists/type', 'product', 'suggestion' ) );
+
+			$listItems = $catItem->getListItems( 'product' );
+			$ids = []; $num = 5;
+
+			while( ( $litem = array_pop( $listItems ) ) !== null && $num > 0 )
+			{
+				if( !in_array( $litem->getRefId(), $ids ) )
+				{
+					$prodItem->addListItem( 'product', (clone $listItem)->setRefId( $litem->getRefId() ) );
+					$ids[] = $litem->getRefId();
+					$num--;
+				}
 			}
 		}
 
-		return $catItem;
+		return $prodItem;
 	}
 
 
