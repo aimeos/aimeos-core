@@ -643,27 +643,22 @@ abstract class Base
 			return;
 		}
 
-		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists' );
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer' );
-
 		$item = $manager->getItem( $customerId, ['service'] );
 		$serviceId = $this->getServiceItem()->getId();
 
-		if( ( $listItem = $item->getListItem( $serviceId, 'service', 'default', false ) ) === null )
+		if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId, false ) ) === null )
 		{
+			$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists' );
 			$listTypeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'customer/lists/type' );
-			$typeId = $listTypeManager->findItem( 'default', [], 'service' )->getId();
 
 			$listItem = $listManager->createItem();
-			$listItem->setParentId( $customerId );
+			$listItem->setTypeId( $listTypeManager->findItem( 'default', [], 'service' )->getId() );
 			$listItem->setRefId( $serviceId );
-			$listItem->setDomain( 'service' );
-			$listItem->setTypeId( $typeId );
-			$listItem->setStatus( 1 );
 		}
 
 		$listItem->setConfig( array_merge( $listItem->getConfig(), [$type => $data] ) );
-		$listManager->saveItem( $listItem, false );
+		$manager->saveItem( $item->addListItem( 'service', $listItem ) );
 	}
 
 
