@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-03 21:45+0200\n"
-"PO-Revision-Date: 2018-07-03 10:06+0000\n"
+"PO-Revision-Date: 2018-07-09 08:20+0000\n"
 "Last-Translator: Darshan Sampat <darshan@usindia.com>\n"
 "Language-Team: Japanese (http://www.transifex.com/aimeos/aimeos-core/language/ja/)\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr ""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
-msgstr ""
+msgstr "クラス名 \"1%1$s\"に無効な文字があります"
 
 #, php-format
 msgid "No allowed image types configured for \"%1$s\""
