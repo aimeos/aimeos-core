@@ -422,7 +422,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		for( $i = 0; $i < $this->numProdVariants; $i++ )
 		{
-			$text = key( $length ) . ', ' . key( $width ) . ' ' . $prodItem->getLabel() . ' (' . key( $size ) . ')';
+			$text = key( $length ) . ', ' . key( $width ) . ', ' . $prodItem->getLabel() . ' (' . key( $size ) . ')';
 
 			$item = $productManager->createItem()
 				->setTypeId( $this->getTypeId( 'product/type', 'product', 'default' ) )
