@@ -39,8 +39,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTransformAbsoluteUrl()
 	{
-		$output = $this->object->transform( 'https://host:443/path/to/resource' );
-		$this->assertEquals( 'https://host:443/path/to/resource', $output );
+		$output = $this->object->transform( '/path/to/resource' );
+		$this->assertEquals( '/path/to/resource', $output );
 	}
 
 
@@ -48,5 +48,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$output = $this->object->transform( 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=' );
 		$this->assertEquals( 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=', $output );
+	}
+
+
+	public function testTransformHttpUrl()
+	{
+		$output = $this->object->transform( 'https://host:443/path/to/resource' );
+		$this->assertEquals( 'https://host:443/path/to/resource', $output );
 	}
 }
