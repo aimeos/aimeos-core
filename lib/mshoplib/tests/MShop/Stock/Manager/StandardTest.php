@@ -41,6 +41,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItemType()
+	{
+		$item = $this->object->createItem( 'default' );
+
+		$this->assertNotNull( $item->getTypeId() );
+		$this->assertEquals( 'default', $item->getType() );
+	}
+
+
 	public function testFindItem()
 	{
 		$item = $this->object->findItem( 'CNC', [], 'product', 'default' );

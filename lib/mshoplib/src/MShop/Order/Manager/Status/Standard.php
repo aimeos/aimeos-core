@@ -180,14 +180,15 @@ class Standard
 
 
 	/**
-	 * Creates a new order status object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Status\Iface New item object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Order\Item\Status\Iface New order status item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'order.status.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
+		return $this->createItemBase( ['order.status.siteid' => $this->getContext()->getLocale()->getSiteId()] );
 	}
 
 

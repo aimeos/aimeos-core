@@ -134,7 +134,7 @@ class Standard
 	{
 		$path = 'mshop/customer/manager/property/submanagers';
 
-		return $this->getResourceTypeBase( 'customer/property', $path, array( 'type' ), $withsub );
+		return $this->getResourceTypeBase( 'customer/property', $path, ['type'], $withsub );
 	}
 
 
@@ -165,7 +165,7 @@ class Standard
 		 */
 		$path = 'mshop/customer/manager/property/submanagers';
 
-		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type' ), $withsub );
+		return $this->getSearchAttributesBase( $this->searchConfig, $path, ['type'], $withsub );
 	}
 
 

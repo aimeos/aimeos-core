@@ -278,17 +278,21 @@ class Standard extends Base
 
 
 	/**
-	 * Returns a new and empty order base item (shopping basket).
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface New order base item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
 		$context = $this->getContext();
-		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
-		$values = array( 'order.base.siteid' => $context->getLocale()->getSiteId() );
+		$locale = $context->getLocale();
 
-		$base = $this->createItemBase( $priceManager->createItem(), clone $context->getLocale(), $values );
+		$values = ['order.base.siteid' => $locale->getSiteId()];
+		$priceManager = \Aimeos\MShop\Factory::createManager( $context, 'price' );
+
+		$base = $this->createItemBase( $priceManager->createItem(), clone $locale, $values );
 
 		\Aimeos\MShop\Factory::createManager( $context, 'plugin' )->register( $base, 'order' );
 

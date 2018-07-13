@@ -53,14 +53,15 @@ abstract class Base
 
 
 	/**
-	 * Instantiates a new common address item object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Common\Item\Address\Iface New address item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( $this->prefix . 'siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
+		return $this->createItemBase( [$this->prefix . 'siteid' => $this->getContext()->getLocale()->getSiteId()] );
 	}
 
 

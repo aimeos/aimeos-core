@@ -143,6 +143,19 @@ class Standard
 
 
 	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface New coupon code item object
+	 */
+	public function createItem( $type = null, $domain = null )
+	{
+		return $this->createItemBase( ['coupon.code.siteid' => $this->getContext()->getLocale()->getSiteId()] );
+	}
+
+
+	/**
 	 * Returns a new sub manager of the given type and name.
 	 *
 	 * @param string $manager Name of the sub manager type in lower case
@@ -308,18 +321,6 @@ class Standard
 		$path = 'mshop/coupon/manager/code/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, [], $withsub );
-	}
-
-
-	/**
-	 * Creates a new empty coupon code instance
-	 *
-	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Emtpy coupon code object
-	 */
-	public function createItem()
-	{
-		$values = array( 'coupon.code.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
 	}
 
 

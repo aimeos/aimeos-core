@@ -139,13 +139,22 @@ class Standard
 
 
 	/**
-	 * Creates a new plugin object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Plugin\Item\Iface New plugin object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Plugin\Item\Iface New plugin item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'plugin.siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = ['plugin.siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values['plugin.typeid'] = $this->getTypeId( $type, 'plugin' );
+			$values['plugin.type'] = $type;
+		}
+
 		return $this->createItemBase( $values );
 	}
 

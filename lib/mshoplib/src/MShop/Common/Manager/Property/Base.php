@@ -52,13 +52,22 @@ abstract class Base
 
 
 	/**
-	 * Creates new property item object.
+	 * Creates a new empty item instance
 	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
 	 * @return \Aimeos\MShop\Common\Item\Property\Iface New property item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( $this->prefix . 'siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = [$this->prefix . 'siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values[$this->prefix . 'typeid'] = $this->getTypeId( $type, $domain );
+			$values[$this->prefix . 'type'] = $type;
+		}
+
 		return $this->createItemBase( $values );
 	}
 

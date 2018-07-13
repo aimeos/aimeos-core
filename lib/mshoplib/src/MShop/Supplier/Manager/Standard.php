@@ -119,6 +119,19 @@ class Standard
 
 
 	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Supplier\Item\Iface New supplier item object
+	 */
+	public function createItem( $type = null, $domain = null )
+	{
+		return $this->createItemBase( ['supplier.siteid' => $this->getContext()->getLocale()->getSiteId() ]);
+	}
+
+
+	/**
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
@@ -160,18 +173,6 @@ class Standard
 		$path = 'mshop/supplier/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'address', 'lists' ), $withsub );
-	}
-
-
-	/**
-	 * Instantiates a new supplier item object.
-	 *
-	 * @return \Aimeos\MShop\Supplier\Item\Iface
-	 */
-	public function createItem()
-	{
-		$values = array('supplier.siteid' => $this->getContext()->getLocale()->getSiteId());
-		return $this->createItemBase($values);
 	}
 
 

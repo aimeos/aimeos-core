@@ -127,13 +127,22 @@ class Standard
 
 
 	/**
-	 * Creates new tag item object.
+	 * Creates a new empty item instance
 	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
 	 * @return \Aimeos\MShop\Tag\Item\Iface New tag item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'tag.siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = ['tag.siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values['tag.typeid'] = $this->getTypeId( $type, $domain );
+			$values['tag.type'] = $type;
+		}
+
 		return $this->createItemBase( $values );
 	}
 

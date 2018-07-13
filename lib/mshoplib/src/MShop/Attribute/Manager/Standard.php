@@ -190,13 +190,22 @@ class Standard
 
 
 	/**
-	 * Creates a new empty attribute item instance.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Attribute\Item\Iface Creates a blank Attribute item
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'attribute.siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = ['attribute.siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values['attribute.typeid'] = $this->getTypeId( $type, $domain );
+			$values['attribute.type'] = $type;
+		}
+
 		return $this->createItemBase( $values );
 	}
 

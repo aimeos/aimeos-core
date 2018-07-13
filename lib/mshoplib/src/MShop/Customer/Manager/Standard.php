@@ -268,15 +268,15 @@ class Standard
 
 
 	/**
-	 * Instantiates a new customer item object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Customer\Item\Iface
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Customer\Item\Iface New customer item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'customer.siteid' => $this->getContext()->getLocale()->getSiteId() );
-
-		return $this->createItemBase( $values );
+		return $this->createItemBase( ['customer.siteid' => $this->getContext()->getLocale()->getSiteId()] );
 	}
 
 

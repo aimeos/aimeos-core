@@ -52,16 +52,28 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 	}
 
+
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Media\\Item\\Iface', $item );
 	}
 
+
+	public function testCreateItemType()
+	{
+		$item = $this->object->createItem( 'default', 'product' );
+
+		$this->assertNotNull( $item->getTypeId() );
+		$this->assertEquals( 'default', $item->getType() );
+	}
+
+
 	public function testCreateSearch()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch() );
 	}
+
 
 	public function testSearchItem()
 	{

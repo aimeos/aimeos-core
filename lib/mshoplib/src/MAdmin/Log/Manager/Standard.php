@@ -148,11 +148,13 @@ class Standard
 
 
 	/**
-	 * Create new log item object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MAdmin\Log\Item\Iface
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MAdmin\Log\Item\Iface New log item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
 		try {
 			$siteid = $this->getContext()->getLocale()->getSiteId();
@@ -160,8 +162,7 @@ class Standard
 			$siteid = null;
 		}
 
-		$values = array( 'log.siteid' => $siteid );
-		return $this->createItemBase( $values );
+		return $this->createItemBase( ['log.siteid' => $siteid] );
 	}
 
 

@@ -126,13 +126,22 @@ class Standard
 
 
 	/**
-	 * Creates new stock item object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Stock\Item\Iface New product stock item object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Stock\Item\Iface New stock item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'stock.siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = ['stock.siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values['stock.typeid'] = $this->getTypeId( $type, 'product' );
+			$values['stock.type'] = $type;
+		}
+
 		return $this->createItemBase( $values );
 	}
 

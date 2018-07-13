@@ -101,16 +101,17 @@ class Standard
 
 
 	/**
-	 * Creates new currency object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface
-	 * @throws \Aimeos\MShop\Locale\Exception On failures with the language item object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface New locale currency item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
 		try {
 			$values = array( 'locale.currency.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		} catch( \Exception $ex ) {
+		} catch( \Exception $e ) {
 			$values = array( 'locale.currency.siteid' => null );
 		}
 

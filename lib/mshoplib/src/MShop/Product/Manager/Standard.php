@@ -192,13 +192,22 @@ class Standard
 
 
 	/**
-	 * Create new product item object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Product\Item\Iface
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Product\Item\Iface New product item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'product.siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = ['product.siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values['product.typeid'] = $this->getTypeId( $type, 'product' );
+			$values['product.type'] = $type;
+		}
+
 		return $this->createItemBase( $values );
 	}
 

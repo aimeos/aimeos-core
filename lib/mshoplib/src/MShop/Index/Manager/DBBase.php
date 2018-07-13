@@ -47,13 +47,15 @@ abstract class DBBase
 
 
 	/**
-	 * Creates new product item
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Product\Item\Iface Product item object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Product\Item\Iface New product item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->createItem();
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->createItem( $type, $domain );
 	}
 
 

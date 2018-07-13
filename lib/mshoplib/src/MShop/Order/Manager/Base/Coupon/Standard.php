@@ -183,14 +183,15 @@ class Standard
 
 
 	/**
-	 * Creates a new order base coupon object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface New order coupon object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Order\Item\Base\Coupon\Iface New order coupon item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'order.base.coupon.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
+		return $this->createItemBase( ['order.base.coupon.siteid' => $this->getContext()->getLocale()->getSiteId()] );
 	}
 
 

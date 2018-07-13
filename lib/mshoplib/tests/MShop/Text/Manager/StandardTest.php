@@ -41,6 +41,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItemType()
+	{
+		$item = $this->object->createItem( 'name', 'product' );
+
+		$this->assertNotNull( $item->getTypeId() );
+		$this->assertEquals( 'name', $item->getType() );
+	}
+
+
 	public function testGetResourceType()
 	{
 		$result = $this->object->getResourceType();

@@ -64,13 +64,15 @@ abstract class Base
 
 
 	/**
-	 * Creates new item object.
+	 * Creates a new empty item instance
 	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
 	 * @return \Aimeos\MShop\Common\Item\Iface New item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		return $this->manager->createItem();
+		return $this->manager->createItem( $type, $domain );
 	}
 
 

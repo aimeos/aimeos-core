@@ -181,6 +181,33 @@ class Standard
 
 
 	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Price\Item\Iface New price item object
+	 */
+	public function createItem( $type = null, $domain = null )
+	{
+		$locale = $this->getContext()->getLocale();
+		$values = ['price.siteid' => $locale->getSiteId()];
+
+		if( $locale->getCurrencyId() !== null ) {
+			$values['price.currencyid'] = $locale->getCurrencyId();
+		}
+
+		if( $type !== null )
+		{
+			$values['price.typeid'] = $this->getTypeId( $type, $domain );
+			$values['price.type'] = $type;
+		}
+
+		return $this->createItemBase( $values );
+	}
+
+
+
+	/**
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
@@ -222,24 +249,6 @@ class Standard
 		$path = 'mshop/price/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
-	}
-
-
-	/**
-	 * Instantiates a new price item object.
-	 *
-	 * @return \Aimeos\MShop\Price\Item\Iface
-	 */
-	public function createItem()
-	{
-		$locale = $this->getContext()->getLocale();
-		$values = array( 'price.siteid' => $locale->getSiteId() );
-
-		if( $locale->getCurrencyId() !== null ) {
-			$values['price.currencyid'] = $locale->getCurrencyId();
-		}
-
-		return $this->createItemBase( $values );
 	}
 
 

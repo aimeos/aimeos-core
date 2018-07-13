@@ -41,6 +41,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItemType()
+	{
+		$item = $this->object->createItem( 'delivery' );
+
+		$this->assertNotNull( $item->getTypeId() );
+		$this->assertEquals( 'delivery', $item->getType() );
+	}
+
+
 	public function testSaveInvalid()
 	{
 		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );

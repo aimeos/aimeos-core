@@ -160,6 +160,27 @@ class Standard
 
 
 	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Media\Item\Iface New media item object
+	 */
+	public function createItem( $type = null, $domain = null )
+	{
+		$values = ['media.siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values['media.typeid'] = $this->getTypeId( $type, $domain );
+			$values['media.type'] = $type;
+		}
+
+		return $this->createItemBase( $values );
+	}
+
+
+	/**
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
@@ -203,18 +224,6 @@ class Standard
 		$default = ['lists', 'property', 'type'];
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, $default, $withsub );
-	}
-
-
-	/**
-	 * Creates a new media object.
-	 *
-	 * @return \Aimeos\MShop\Media\Item\Iface New media object
-	 */
-	public function createItem()
-	{
-		$values = array( 'media.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
 	}
 
 

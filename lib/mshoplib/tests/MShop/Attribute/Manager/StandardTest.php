@@ -60,6 +60,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItemType()
+	{
+		$item = $this->object->createItem( 'color', 'product' );
+
+		$this->assertNotNull( $item->getTypeId() );
+		$this->assertEquals( 'color', $item->getType() );
+	}
+
+
 	public function testGetSubManager()
 	{
 		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager( 'lists' ) );

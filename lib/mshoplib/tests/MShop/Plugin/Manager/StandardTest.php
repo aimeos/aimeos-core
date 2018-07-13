@@ -79,6 +79,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItemType()
+	{
+		$item = $this->object->createItem( 'order' );
+
+		$this->assertNotNull( $item->getTypeId() );
+		$this->assertEquals( 'order', $item->getType() );
+	}
+
+
 	public function testRegister()
 	{
 		$publisher = new \Aimeos\MShop\Plugin\Manager\StandardTest\Publisher();

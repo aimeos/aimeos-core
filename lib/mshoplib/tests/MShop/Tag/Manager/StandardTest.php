@@ -42,6 +42,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItemType()
+	{
+		$item = $this->object->createItem( 'taste', 'product' );
+
+		$this->assertNotNull( $item->getTypeId() );
+		$this->assertEquals( 'taste', $item->getType() );
+	}
+
+
 	public function testSaveInvalid()
 	{
 		$this->setExpectedException( '\Aimeos\MShop\Tag\Exception' );

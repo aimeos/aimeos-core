@@ -202,14 +202,15 @@ class Standard
 
 
 	/**
-	 * Returns a new and empty invoice.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Subscription\Item\Iface Invoice without assigned values or items
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Subscription\Item\Iface New subscription item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'subscription.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
+		return $this->createItemBase( ['subscription.siteid' => $this->getContext()->getLocale()->getSiteId()] );
 	}
 
 

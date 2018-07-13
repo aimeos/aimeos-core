@@ -41,6 +41,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testCreateItemType()
+	{
+		$item = $this->object->createItem( 'htmlcolor', 'attribute' );
+
+		$this->assertNotNull( $item->getTypeId() );
+		$this->assertEquals( 'htmlcolor', $item->getType() );
+	}
+
+
 	public function testSaveInvalid()
 	{
 		$this->setExpectedException( '\Aimeos\MShop\Exception' );

@@ -129,11 +129,13 @@ class Standard
 
 
 	/**
-	 * Creates a new locale item object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Locale\Item\Iface
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Locale\Item\Iface New locale item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
 		try {
 			return $this->createItemBase( array( 'locale.siteid' => $this->getContext()->getLocale()->getSiteId() ) );

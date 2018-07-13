@@ -142,6 +142,19 @@ class Standard
 
 
 	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Coupon\Item\Iface New coupon item object
+	 */
+	public function createItem( $type = null, $domain = null )
+	{
+		return $this->createItemBase( ['coupon.siteid' => $this->getContext()->getLocale()->getSiteId()] );
+	}
+
+
+	/**
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
@@ -183,18 +196,6 @@ class Standard
 		$path = 'mshop/coupon/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'code' ), $withsub );
-	}
-
-
-	/**
-	 * Creates a new empty coupon item instance
-	 *
-	 * @return \Aimeos\MShop\Coupon\Item\Iface Creates a blank coupon item
-	 */
-	public function createItem()
-	{
-		$values = array( 'coupon.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
 	}
 
 

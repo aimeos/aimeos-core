@@ -211,13 +211,15 @@ class Standard
 
 
 	/**
-	 * Creates a new order base product attribute object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface New media object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface New order product attribute item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'order.base.product.attribute.siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = ['order.base.product.attribute.siteid' => $this->getContext()->getLocale()->getSiteId()];
 		return $this->createItemBase( $values );
 	}
 

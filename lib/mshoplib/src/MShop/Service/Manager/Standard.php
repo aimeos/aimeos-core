@@ -164,6 +164,27 @@ class Standard
 
 
 	/**
+	 * Creates a new empty item instance
+	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Service\Item\Iface New service item object
+	 */
+	public function createItem( $type = null, $domain = null )
+	{
+		$values = ['service.siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values['service.typeid'] = $this->getTypeId( $type, 'service' );
+			$values['service.type'] = $type;
+		}
+
+		return $this->createItemBase( $values );
+	}
+
+
+	/**
 	 * Returns the available manager types
 	 *
 	 * @param boolean $withsub Return also the resource type of sub-managers if true
@@ -205,18 +226,6 @@ class Standard
 		$path = 'mshop/service/manager/submanagers';
 
 		return $this->getSearchAttributesBase( $this->searchConfig, $path, array( 'type', 'lists' ), $withsub );
-	}
-
-
-	/**
-	 * Instanciates a new service item depending on the kind of service manager.
-	 *
-	 * @return \Aimeos\MShop\Service\Item\Iface Service item
-	 */
-	public function createItem()
-	{
-		$values = array( 'service.siteid' => $this->getContext()->getLocale()->getSiteId() );
-		return $this->createItemBase( $values );
 	}
 
 

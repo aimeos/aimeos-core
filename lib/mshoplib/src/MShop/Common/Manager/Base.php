@@ -25,6 +25,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	private $resourceName;
 	private $stmts = [];
 	private $subManagers = [];
+	private $typeIds = [];
 
 
 	/**
@@ -433,6 +434,23 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		}
 
 		return $this->subManagers[$key];
+	}
+
+
+	/**
+	 * Returns the type ID for the given type code and domain
+	 *
+	 * @param string $type Unique type code
+	 * @param string $domain Domain of the type item
+	 * @return string Unique type ID
+	 */
+	protected function getTypeId( $type, $domain )
+	{
+		if( !isset( $this->typeIds[$domain][$type] ) ) {
+			$this->typeIds[$domain][$type] = $this->getObject()->getSubManager( 'type' )->findItem( $type, [], $domain )->getId();
+		}
+
+		return $this->typeIds[$domain][$type];
 	}
 
 

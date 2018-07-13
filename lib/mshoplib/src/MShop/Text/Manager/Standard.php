@@ -142,13 +142,22 @@ class Standard
 
 
 	/**
-	 * Creates new text item object.
+	 * Creates a new empty item instance
 	 *
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
 	 * @return \Aimeos\MShop\Text\Item\Iface New text item object
 	 */
-	public function createItem()
+	public function createItem( $type = null, $domain = null )
 	{
-		$values = array( 'text.siteid' => $this->getContext()->getLocale()->getSiteId() );
+		$values = ['text.siteid' => $this->getContext()->getLocale()->getSiteId()];
+
+		if( $type !== null )
+		{
+			$values['text.typeid'] = $this->getTypeId( $type, $domain );
+			$values['text.type'] = $type;
+		}
+
 		return $this->createItemBase( $values );
 	}
 
