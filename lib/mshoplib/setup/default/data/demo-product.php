@@ -977,6 +977,22 @@ return array(
 		),
 	),
 	array(
+		'code' => 'demo-voucher', 'type' => 'voucher', 'label' => 'Demo voucher',
+		'start' => null, 'end' => null, 'status' => 1,
+		'text' => array(
+			array(
+				'label' => 'Demo name/de: Gutschein',
+				'content' => 'Demo-Gutschein',
+				'type' => 'name', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'stock' => array(
+			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
+		),
+	),
+	array(
 		'code' => 'demo-rebate', 'type' => 'default', 'label' => 'Demo rebate',
 		'start' => null, 'end' => null, 'status' => 1,
 		'text' => array(
