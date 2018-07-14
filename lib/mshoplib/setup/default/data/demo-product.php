@@ -280,21 +280,43 @@ return array(
 				),
 			),
 			array(
-				'code' => 'demo-custom-date', 'label' => 'Demo: Custom date',
-				'type' => 'date', 'position' => 0, 'status' => 1,
-				'list-type' => 'custom', 'list-position' => 2, 'list-config' => [],
+				'code' => 'demo-month', 'label' => 'Demo: One month',
+				'type' => 'interval', 'position' => 0, 'status' => 1,
+				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Kundendatum',
-						'content' => 'Kundendatum',
+						'label' => 'Demo name/de: Ein Monat',
+						'content' => '1 Monat',
 						'type' => 'name', 'languageid' => 'de', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
 					),
 					array(
-						'label' => 'Demo name/en: Customer date',
-						'content' => 'Customer date',
+						'label' => 'Demo name/en: One Month',
+						'content' => '1 month',
+						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+			),
+			array(
+				'code' => 'demo-year', 'label' => 'Demo: One year',
+				'type' => 'interval', 'position' => 0, 'status' => 1,
+				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo name/de: Ein Jahr',
+						'content' => '1 Jahr',
+						'type' => 'name', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo name/en: One year',
+						'content' => '1 year',
 						'type' => 'name', 'languageid' => 'en', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -1034,6 +1056,28 @@ return array(
 					array(
 						'label' => 'Demo name/en: Voucher value',
 						'content' => 'Voucher value',
+						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
+			),
+			array(
+				'code' => 'demo-custom-date', 'label' => 'Demo: Custom date',
+				'type' => 'date', 'position' => 0, 'status' => 1,
+				'list-type' => 'custom', 'list-position' => 2, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo name/de: Kundendatum',
+						'content' => 'Kundendatum',
+						'type' => 'name', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo name/en: Customer date',
+						'content' => 'Customer date',
 						'type' => 'name', 'languageid' => 'en', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
