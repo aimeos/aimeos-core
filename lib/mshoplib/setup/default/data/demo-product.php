@@ -893,7 +893,7 @@ return array(
 				'text' => array(
 					array(
 						'label' => 'Demo name/de: Grosses Etikett',
-						'content' => 'Grosses Etikett',
+						'content' => 'Großes Etikett',
 						'type' => 'name', 'languageid' => 'de', 'status' => 1,
 						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 						'list-start' => null, 'list-end' => null, 'list-status' => 1
@@ -965,20 +965,55 @@ return array(
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
-		),
-		'stock' => array(
-			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
-		),
-	),
-	array(
-		'code' => 'demo-rebate', 'type' => 'default', 'label' => 'Demo rebate',
-		'start' => null, 'end' => null, 'status' => 1,
-		'text' => array(
 			array(
-				'label' => 'Demo name/de: Rabatt',
-				'content' => 'Demorabatt',
-				'type' => 'name', 'languageid' => 'de', 'status' => 1,
+				'label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
+				'content' => 'Dies ist die Kurzbeschreibung des Demo-Gutscheins',
+				'type' => 'short', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
+				'content' => 'Hier folgt eine ausführliche Beschreibung des Gutscheins, die gerne etwas länger sein darf.',
+				'type' => 'long', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo name/en: Demo article',
+				'content' => 'Demo voucher',
+				'type' => 'name', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo short/en: This is the short description',
+				'content' => 'This is the short description of the demo voucher.',
+				'type' => 'short', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo long/en: Add a detailed description',
+				'content' => 'Add a detailed description of the demo voucher that may be a little bit longer.',
+				'type' => 'long', 'languageid' => 'en', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'price' => array(
+			array(
+				'label' => 'Demo: Voucher',
+				'value' => '25.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+			array(
+				'label' => 'Demo: Voucher',
+				'value' => '25.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
+				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
@@ -1013,6 +1048,22 @@ return array(
 				'preview' => 'https://demo.aimeos.org/media/0-voucher.jpg',
 				'type' => 'default', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'stock' => array(
+			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
+		),
+	),
+	array(
+		'code' => 'demo-rebate', 'type' => 'default', 'label' => 'Demo rebate',
+		'start' => null, 'end' => null, 'status' => 1,
+		'text' => array(
+			array(
+				'label' => 'Demo name/de: Rabatt',
+				'content' => 'Demorabatt',
+				'type' => 'name', 'languageid' => 'de', 'status' => 1,
+				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
 		),
