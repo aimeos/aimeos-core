@@ -81,5 +81,10 @@ return array(
 			'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
+		array(
+			'code' => 'demo-voucher',
+			'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
+			'list-start' => null, 'list-end' => null, 'list-status' => 1
+		),
 	),
 );
