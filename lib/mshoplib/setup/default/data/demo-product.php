@@ -280,28 +280,6 @@ return array(
 				),
 			),
 			array(
-				'code' => 'custom', 'label' => 'Demo: Custom price',
-				'type' => 'price', 'position' => 0, 'status' => 1,
-				'list-type' => 'custom', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
-				'text' => array(
-					array(
-						'label' => 'Demo name/de: Zahl was Du willst',
-						'content' => 'Ihr Preis',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-					array(
-						'label' => 'Demo name/en: Pay what you want',
-						'content' => 'Your price',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
-					),
-				),
-			),
-			array(
 				'code' => 'demo-custom-date', 'label' => 'Demo: Custom date',
 				'type' => 'date', 'position' => 0, 'status' => 1,
 				'list-type' => 'custom', 'list-position' => 2, 'list-config' => [],
@@ -1002,6 +980,30 @@ return array(
 				'type' => 'name', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
+		'attribute' => array(
+			array(
+				'code' => 'custom', 'label' => 'Demo: Custom price',
+				'type' => 'price', 'position' => 0, 'status' => 1,
+				'list-type' => 'custom', 'list-position' => 1, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'text' => array(
+					array(
+						'label' => 'Demo name/de: Gutscheinwert',
+						'content' => 'Gutscheinwert',
+						'type' => 'name', 'languageid' => 'de', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+					array(
+						'label' => 'Demo name/en: Voucher value',
+						'content' => 'Voucher value',
+						'type' => 'name', 'languageid' => 'en', 'status' => 1,
+						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
+						'list-start' => null, 'list-end' => null, 'list-status' => 1
+					),
+				),
 			),
 		),
 		'stock' => array(
