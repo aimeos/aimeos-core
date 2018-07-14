@@ -1006,6 +1006,16 @@ return array(
 				),
 			),
 		),
+		'media' => array(
+			array(
+				'label' => 'Demo: Voucher 0.jpg', 'mimetype' => 'image/jpeg',
+				'url' => 'https://demo.aimeos.org/media/0-voucher-big.jpg',
+				'preview' => 'https://demo.aimeos.org/media/0-voucher.jpg',
+				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
+				'list-start' => null, 'list-end' => null, 'list-status' => 1
+			),
+		),
 		'stock' => array(
 			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
 		),
