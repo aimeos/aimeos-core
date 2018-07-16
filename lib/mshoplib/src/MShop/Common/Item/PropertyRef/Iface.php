@@ -53,6 +53,14 @@ interface Iface
 	public function getPropertyItemsDeleted();
 
 	/**
+	 * Returns the property values for the given type
+	 *
+	 * @param string $type Type of the properties
+	 * @return array List of property values
+	 */
+	public function getProperties( $type );
+
+	/**
 	 * Returns the property items of the product
 	 *
 	 * @param array|string|null $type Name of the property item type or null for all

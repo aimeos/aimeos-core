@@ -109,6 +109,24 @@ trait Traits
 
 
 	/**
+	 * Returns the property values for the given type
+	 *
+	 * @param string $type Type of the properties
+	 * @return array List of property values
+	 */
+	public function getProperties( $type )
+	{
+		$list = [];
+
+		foreach( $this->getPropertyItems( $type ) as $item ) {
+			$list[] = $item->getValue();
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the property items of the product
 	 *
 	 * @param array|string|null $type Name of the property item type or null for all
