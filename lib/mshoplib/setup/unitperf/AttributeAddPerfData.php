@@ -97,22 +97,20 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 
-		$attrItem = $attrManager->createItem();
-		$attrItem->setDomain( 'product' );
-		$attrItem->setStatus( 1 );
-
 		foreach( $characteristics as $type => $list )
 		{
 			$pos = 0;
-			$typeId = $this->getTypeId( 'attribute/type', 'product', $type );
+			$attrItem = $attrManager->createItem()
+				->setTypeId( $this->getTypeId( 'attribute/type', 'product', $type ) )
+				->setDomain( 'product' )
+				->setStatus( 1 );
 
 			foreach( $list as $value )
 			{
-				$item = clone $attrItem;
-				$item->setTypeId( $typeId );
-				$item->setCode( $value );
-				$item->setLabel( $value );
-				$item->setPosition( $pos++ );
+				$item = (clone $attrItem)
+					->setPosition( $pos++ )
+					->setLabel( $value )
+					->setCode( $value );
 
 				$attrManager->saveItem( $item );
 			}
@@ -155,19 +153,15 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
 
-		$attrItem = $attrManager->createItem();
-		$attrItem->setTypeId( $this->getTypeId( 'attribute/type', 'product', 'color' ) );
-		$attrItem->setDomain( 'product' );
-		$attrItem->setStatus( 1 );
+		$attrItem = $attrManager->createItem( 'color', 'product' )
+			->setDomain( 'product' )
+			->setStatus( 1 );
 
-		$mediaItem = $mediaManager->createItem();
-		$mediaItem->setTypeId( $this->getTypeId( 'media/type', 'attribute', 'default' ) );
-		$mediaItem->setMimeType( 'image/svg+xml' );
-		$mediaItem->setStatus( 1 );
+		$mediaItem = $mediaManager->createItem( 'default', 'attribute')
+			->setMimeType( 'image/svg+xml' )
+			->setStatus( 1 );
 
-		$listItem = $listManager->createItem();
-		$listItem->setTypeId( $this->getTypeId( 'attribute/lists/type', 'media', 'default' ) );
-
+		$listItem = $listManager->createItem( 'default', 'media' );
 		$pos = 0;
 
 		foreach( $colors as $code => $name )
@@ -176,14 +170,14 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			$triple = $list[0] . ',' . $list[1]. ',' . $list[2];
 			$uri = 'data:image/svg+xml;utf8,<svg width="1" height="1"><rect width="1" height="1" style="fill:rgb(' . $triple . ')" /></svg>';
 
-			$item = clone $attrItem;
-			$item->setCode( $code );
-			$item->setLabel( $name );
-			$item->setPosition( $pos++ );
+			$item = (clone $attrItem)
+				->setPosition( $pos++ )
+				->setLabel( $name )
+				->setCode( $code );
 
-			$refItem = clone $mediaItem;
-			$refItem->setPreview( $uri );
-			$refItem->setUrl( $uri );
+			$refItem = (clone $mediaItem)
+				->setPreview( $uri )
+				->setUrl( $uri );
 
 			$item->addListItem( 'media', clone $listItem, $refItem );
 
@@ -194,37 +188,31 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addOptions()
 	{
-		$this->additional = $this->additional;
-
 		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
 
-		$priceItem = $priceManager->createItem();
-		$priceItem->setTypeId( $this->getTypeId( 'price/type', 'attribute', 'default' ) );
-		$priceItem->setTaxRate( '20.00' );
-		$priceItem->setStatus( 1 );
+		$priceItem = $priceManager->createItem( 'default', 'attribute' )
+			->setTaxRate( '20.00' )
+			->setStatus( 1 );
 
-		$attrItem = $attrManager->createItem();
-		$attrItem->setTypeId( $this->getTypeId( 'attribute/type', 'product', 'config' ) );
-		$attrItem->setDomain( 'product' );
-		$attrItem->setStatus( 1 );
+		$attrItem = $attrManager->createItem( 'sticker', 'product' )
+			->setDomain( 'product' )
+			->setStatus( 1 );
 
-		$listItem = $listManager->createItem();
-		$listItem->setTypeId( $this->getTypeId( 'attribute/lists/type', 'price', 'default' ) );
-
+		$listItem = $listManager->createItem( 'default', 'price' );
 		$pos = 0;
 
 		foreach( ['small sticker' => '+2.50', 'large sticker' => '+7.50'] as $option => $price )
 		{
-			$item = clone $attrItem;
-			$item->setCode( $option );
-			$item->setLabel( $option );
-			$item->setPosition( $pos++ );
+			$item = (clone $attrItem)
+				->setPosition( $pos++ )
+				->setLabel( $option )
+				->setCode( $option );
 
-			$refItem = clone $priceItem;
-			$refItem->setValue( $price );
-			$refItem->setLabel( $option );
+			$refItem = (clone $priceItem)
+				->setLabel( $option )
+				->setValue( $price );
 
 			$item->addListItem( 'price', clone $listItem, $refItem );
 
@@ -249,22 +237,20 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 
-		$attrItem = $attrManager->createItem();
-		$attrItem->setDomain( 'product' );
-		$attrItem->setStatus( 1 );
-
 		foreach( $sizes as $type => $list )
 		{
 			$pos = 0;
-			$typeId = $this->getTypeId( 'attribute/type', 'product', $type );
+			$attrItem = $attrManager->createItem()
+				->setTypeId( $this->getTypeId( 'attribute/type', 'product', $type ) )
+				->setDomain( 'product' )
+				->setStatus( 1 );
 
 			foreach( $list as $value )
 			{
-				$item = clone $attrItem;
-				$item->setTypeId( $typeId );
-				$item->setCode( $value );
-				$item->setLabel( $value );
-				$item->setPosition( $pos++ );
+				$item = (clone $attrItem)
+					->setPosition( $pos++ )
+					->setLabel( $value )
+					->setCode( $value );
 
 				$attrManager->saveItem( $item );
 			}

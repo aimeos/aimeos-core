@@ -150,11 +150,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
 
-		$promoListItem = $catalogListManager->createItem()
-			->setTypeId( $this->getTypeId( 'catalog/lists/type', 'product', 'promotion' ) );
-
-		$defListItem = $catalogListManager->createItem()
-			->setTypeId( $this->getTypeId( 'catalog/lists/type', 'product', 'default' ) );
+		$promoListItem = $catalogListManager->createItem( 'promotion', 'product' );
+		$defListItem = $catalogListManager->createItem( 'default', 'product' );
 
 		$promo = round( $this->numCatProducts / 10 ) ?: 1;
 
@@ -176,15 +173,13 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
 
-		$textItem = $textManager->createItem()
-			->setTypeId( $this->getTypeId( 'text/type', 'product', 'name' ) )
+		$textItem = $textManager->createItem( 'name', 'product' )
 			->setContent( str_replace( '-', ' ', $label ) )
 			->setLanguageId( 'en' )
 			->setLabel( $label )
 			->setStatus( 1 );
 
-		$listItem = $catalogListManager->createItem()
-			->setTypeId( $this->getTypeId( 'catalog/lists/type', 'product', 'default' ) );
+		$listItem = $catalogListManager->createItem( 'default', 'product' );
 
 		return $catItem->addListItem( 'text', $listItem, $textItem );
 	}
@@ -194,17 +189,15 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
-		$listItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'attribute', 'default' ) );
+		$listItem = $productListManager->createItem( 'default', 'attribute' );
 
 		foreach( $attrIds as $attrId ) {
 			$prodItem->addListItem( 'attribute', (clone $listItem)->setRefId( $attrId ) );
 		}
 
-		$listItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'attribute', 'config' ) );
+		$listItem = $productListManager->createItem( 'config', 'attribute' );
 
-		foreach( $this->attributes['config'] as $attrId ) {
+		foreach( $this->attributes['sticker'] as $attrId ) {
 			$prodItem->addListItem( 'attribute', (clone $listItem)->setRefId( $attrId ) );
 		}
 
@@ -230,7 +223,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
 		$productManager->begin();
 
-		$type = $this->numProdVariants > 0 ? 'select' : 'default';
+		$newItem = $productManager->createItem( ( $this->numProdVariants > 0 ? 'select' : 'default' ), 'product' );
 
 		$modifier = $this->attributes['modifier'];
 		$material = $this->attributes['material'];
@@ -239,8 +232,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$text = key( $modifier ) . ' ' . key( $material ) . ' ' . current( $articles );
 
-			$item = $productManager->createItem()
-				->setTypeId( $this->getTypeId( 'product/type', 'product', $type ) )
+			$item = (clone $newItem)
 				->setLabel( $text . ' (' . $label . ')' )
 				->setCode( 'prod-' . $i . ':' . $label )
 				->setStatus( 1 );
@@ -283,34 +275,31 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$mediaManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'media' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
-		$listItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'media', 'default' ) );
+		$litem = $productListManager->createItem( 'default', 'media' );
+		$newItem = $mediaManager->createItem( 'default', 'product' );
 
 		for( $i = 0; $i < 4; $i++ )
 		{
-			$mediaItem = $mediaManager->createItem()
+			$mediaItem = (clone $newItem)
 				->setLabel( ($i+1) . '. picture for ' . $prodItem->getLabel() )
-				->setTypeId( $this->getTypeId( 'media/type', 'product', 'default' ) )
 				->setPreview( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '.jpg' )
 				->setUrl( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '-big.jpg' )
 				->setMimeType( 'image/jpeg' )
 				->setStatus( 1 );
 
-			$prodItem->addListItem( 'media', clone $listItem, $mediaItem );
+			$prodItem->addListItem( 'media', (clone $litem)->setPosition( $i ), $mediaItem );
 		}
 
-		$mediaItem = $mediaManager->createItem()
-			->setTypeId( $this->getTypeId( 'media/type', 'product', 'default' ) )
+		$mediaItem = (clone $newItem)
 			->setPreview( $prefix . 'unitperf/download-preview.jpg' )
 			->setUrl( $prefix . 'unitperf/download.pdf' )
 			->setMimeType( 'application/pdf' )
 			->setLabel( 'PDF download' )
 			->setStatus( 1 );
 
-		$listItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'media', 'download' ) );
+		$litem = $productListManager->createItem( 'download', 'media' );
 
-		return $prodItem->addListItem( 'media', $listItem, $mediaItem );
+		return $prodItem->addListItem( 'media', (clone $litem), $mediaItem );
 	}
 
 
@@ -319,20 +308,20 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
-		$listItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'price', 'default' ) );
+		$litem = $productListManager->createItem( 'default', 'price' );
+		$newItem = $priceManager->createItem( 'default', 'product' );
 
 		for( $i = 0; $i < 3; $i++ )
 		{
-			$priceItem = $priceManager->createItem()
-				->setTypeId( $this->getTypeId( 'price/type', 'product', 'default' ) )
+			$priceItem = (clone $newItem)
 				->setLabel( $prodItem->getLabel() . ': from ' . ( 1 + $i * 5 ) )
 				->setValue( 100 + ($idx % 900) - $i * 10 )
-				->setQuantity( 1 + $i * 5 )
+				->setQuantity( 1 + $i * 10 )
+				->setCurrencyId( 'EUR' )
 				->setRebate( $i * 10 )
 				->setStatus( 1 );
 
-			$prodItem->addListItem( 'price', clone $listItem, $priceItem );
+			$prodItem->addListItem( 'price', (clone $litem)->setPosition( $i ), $priceItem );
 		}
 
 		return $prodItem;
@@ -345,9 +334,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
-			$listItem = $productListManager->createItem()
-				->setTypeId( $this->getTypeId( 'product/lists/type', 'product', 'suggestion' ) );
-
+			$listItem = $productListManager->createItem( 'suggestion', 'product' );
 			$listItems = $catItem->getListItems( 'product' );
 			$ids = []; $num = 5;
 
@@ -371,35 +358,31 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
-		$listItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'text', 'default' ) );
+		$listItem = $productListManager->createItem( 'default', 'text' );
 
-		$textItem = $textManager->createItem()
-			->setTypeId( $this->getTypeId( 'text/type', 'product', 'name' ) )
+		$textItem = $textManager->createItem( 'name', 'product' )
 			->setLanguageId( 'en' )
 			->setContent( $label )
 			->setLabel( $label )
 			->setStatus( 1 );
 
-		$prodItem->addListItem( 'text', clone $listItem, $textItem );
+		$prodItem->addListItem( 'text', (clone $listItem)->setPosition( 0 ), $textItem );
 
-		$textItem = $textManager->createItem()
-			->setTypeId( $this->getTypeId( 'text/type', 'product', 'short' ) )
+		$textItem = $textManager->createItem( 'short', 'product' )
 			->setContent( 'Short description for ' . $label )
-			->setLabel( $label . '(short)' )
+			->setLabel( $label . ' (short)' )
 			->setLanguageId( 'en' )
 			->setStatus( 1 );
 
-		$prodItem->addListItem( 'text', clone $listItem, $textItem );
+		$prodItem->addListItem( 'text', (clone $listItem)->setPosition( 1 ), $textItem );
 
-		$textItem = $textManager->createItem()
-			->setTypeId( $this->getTypeId( 'text/type', 'product', 'long' ) )
+		$textItem = $textManager->createItem( 'long', 'product' )
 			->setContent( 'Long description for ' . $label . '. This may include some "lorem ipsum" text' )
-			->setLabel( $label . '(long)' )
+			->setLabel( $label . ' (long)' )
 			->setLanguageId( 'en' )
 			->setStatus( 1 );
 
-		$prodItem->addListItem( 'text', clone $listItem, $textItem );
+		$prodItem->addListItem( 'text', (clone $listItem)->setPosition( 2 ), $textItem );
 
 		return $prodItem;
 	}
@@ -410,11 +393,9 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
-		$defListItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'product', 'default' ) );
-
-		$varListItem = $productListManager->createItem()
-			->setTypeId( $this->getTypeId( 'product/lists/type', 'attribute', 'variant' ) );
+		$defListItem = $productListManager->createItem( 'default', 'product' );
+		$varListItem = $productListManager->createItem( 'variant', 'attribute' );
+		$newItem = $productManager->createItem( 'default', 'product' );
 
 		$length = $this->attributes['length'];
 		$width = $this->attributes['width'];
@@ -424,8 +405,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$text = key( $length ) . ', ' . key( $width ) . ', ' . $prodItem->getLabel() . ' (' . key( $size ) . ')';
 
-			$item = $productManager->createItem()
-				->setTypeId( $this->getTypeId( 'product/type', 'product', 'default' ) )
+			$item = (clone $newItem)
 				->setCode( 'variant-' . $idx . '/' . $i . ':' . $prodItem->getCode() )
 				->setLabel( $text )
 				->setStatus( 1 );
@@ -456,31 +436,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function getTypeId( $path, $domain, $code )
-	{
-		if( !isset( $this->typeIds[$path][$domain][$code] ) ) {
-			throw new \RuntimeException( sprintf( 'No "%1$s" ID for "%2$s" and "%3$s" available', $path, $domain, $code ) );
-		}
-
-		return $this->typeIds[$path][$domain][$code];
-	}
-
-
 	protected function init()
 	{
-		$paths = ['catalog/lists/type', 'product/type', 'product/lists/type', 'attribute/type', 'media/type', 'price/type', 'text/type'];
-
-		foreach( $paths as $path )
-		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $path );
-			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-
-			foreach( $manager->searchItems( $search ) as $id => $item ) {
-				$this->typeIds[$path][$item->getDomain()][$item->getCode()] = $id;
-			}
-		}
-
-
 		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 

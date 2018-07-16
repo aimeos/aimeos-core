@@ -60,17 +60,17 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding service performance data', 0 );
 
 
-		$this->init();
-
 		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'service' );
 		$manager->begin();
+
+		$payItem = $manager->createItem( 'payment', 'service' );
+		$shipItem = $manager->createItem( 'delivery', 'service' );
 
 		for( $i = 0; $i < self::NUM_SERVICES; $i++ )
 		{
 			$code = 'perf-pay-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
 
-			$item = $manager->createItem()
-				->setTypeId( $this->getTypeId( 'service/type', 'service', 'payment' ) )
+			$item = (clone $payItem)
 				->setLabel( 'Payment service ' . $code )
 				->setProvider( 'PrePay' )
 				->setCode( $code )
@@ -84,8 +84,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$code = 'perf-ship-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
 
-			$item = $manager->createItem()
-				->setTypeId( $this->getTypeId( 'service/type', 'service', 'delivery' ) )
+			$item = (clone $shipItem)
 				->setLabel( 'Delivery service ' . $code )
 				->setProvider( 'Manual' )
 				->setCode( $code )
@@ -98,29 +97,5 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 
 		$this->status( 'done' );
-	}
-
-
-	protected function getTypeId( $path, $domain, $code )
-	{
-		if( !isset( $this->typeIds[$path][$domain][$code] ) ) {
-			throw new \RuntimeException( sprintf( 'No "%1$s" ID for "%2$s" and "%3$s" available', $path, $domain, $code ) );
-		}
-
-		return $this->typeIds[$path][$domain][$code];
-	}
-
-
-	protected function init()
-	{
-		foreach( ['service/type'] as $path )
-		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $path );
-			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-
-			foreach( $manager->searchItems( $search ) as $id => $item ) {
-				$this->typeIds[$path][$item->getDomain()][$item->getCode()] = $id;
-			}
-		}
 	}
 }
