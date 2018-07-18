@@ -106,9 +106,11 @@ class OrderMigrateEmailflag extends \Aimeos\MW\Setup\Task\Base
 				$mapping[128] = 'email-refused';
 				$mapping[256] = 'email-returned';
 
+				$conn = $this->acquire( 'db-order' );
+
 				foreach( $mapping as $key => $value )
 				{
-					$stmt = $this->conn->create( $stmts['migrate'] );
+					$stmt = $conn->create( $stmts['migrate'] );
 					$stmt->bind( 1, $value );
 					$stmt->bind( 2, $key );
 					$stmt->bind( 3, $value );
@@ -118,7 +120,9 @@ class OrderMigrateEmailflag extends \Aimeos\MW\Setup\Task\Base
 					$result->finish();
 				}
 
-				$this->execute( $stmts['column'] );
+				$this->release( $conn, 'db-order' );
+
+				$this->execute( $stmts['column'], 'db-order' );
 
 				if( $cntRows > 0 ) {
 					$this->status( sprintf( 'migrated (%1$d)', $cntRows ) );

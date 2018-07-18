@@ -86,9 +86,11 @@ class OrderFixEmailStatus extends \Aimeos\MW\Setup\Task\Base
 			);
 
 			$cntRows = 0;
+			$conn = $this->acquire( 'db-order' );
+
 			foreach( $mapping as $value => $type )
 			{
-				$stmt = $this->conn->create( $stmts['change'] );
+				$stmt = $conn->create( $stmts['change'] );
 				$stmt->bind( 1, $value, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 2, $type );
 
@@ -96,6 +98,8 @@ class OrderFixEmailStatus extends \Aimeos\MW\Setup\Task\Base
 				$cntRows += $result->affectedRows();
 				$result->finish();
 			}
+
+			$this->release( $conn, 'db-order' );
 
 			if( $cntRows > 0 ) {
 				$this->status( sprintf( 'migrated (%1$d)', $cntRows ) );

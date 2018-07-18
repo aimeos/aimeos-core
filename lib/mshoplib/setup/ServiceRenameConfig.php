@@ -160,13 +160,16 @@ class ServiceRenameConfig extends \Aimeos\MW\Setup\Task\Base
 			&& $this->schema->columnExists( 'mshop_service', 'config' ) === true
 		) {
 			$cntRows = 0;
+			$conn = $this->acquire( 'db-service' );
 
 			foreach( $stmts as $stmt )
 			{
-				$result = $this->conn->create( $stmt )->execute();
+				$result = $conn->create( $stmt )->execute();
 				$cntRows += $result->affectedRows();
 				$result->finish();
 			}
+
+			$this->release( $conn, 'db-service' );
 
 			if( $cntRows > 0 ) {
 				$this->status( sprintf( 'done (%1$d)', $cntRows ) );

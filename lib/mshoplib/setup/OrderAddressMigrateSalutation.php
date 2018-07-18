@@ -63,19 +63,25 @@ class OrderAddressMigrateSalutation extends \Aimeos\MW\Setup\Task\Base
 	protected function process( array $stmts )
 	{
 		$this->msg( 'Migrating order address salutations', 0 ); $this->status( '' );
-		$cntRows = 0;
 		$table = 'mshop_order_base_address';
+		$cntRows = 0;
 
 		$this->msg( sprintf( 'Checking table "%1$s": ', $table ), 1 );
 
 		if( $this->schema->tableExists( $table ) === true )
 		{
-			foreach( $stmts as $sql ) {
-				$stmt = $this->conn->create( $sql );
+			$conn = $this->acquire( 'db-order' );
+
+			foreach( $stmts as $sql )
+			{
+				$stmt = $conn->create( $sql );
 				$result = $stmt->execute();
 				$cntRows += $result->affectedRows();
 				$result->finish();
 			}
+
+			$this->release( $conn, 'db-order' );
+
 			if( $cntRows ) {
 				$this->status( sprintf( 'migrated (%1$d)', $cntRows ) );
 			} else {

@@ -60,9 +60,13 @@ class ProductMigratePropertyTypeDomain extends \Aimeos\MW\Setup\Task\Base
 
 		if( $this->schema->tableExists( 'mshop_product_property_type' ) )
 		{
-			$result = $this->conn->create( $stmt )->execute();
+			$conn = $this->acquire( 'db-product' );
+
+			$result = $conn->create( $stmt )->execute();
 			$cntRows = $result->affectedRows();
 			$result->finish();
+
+			$this->release( $conn, 'db-product' );
 
 			if( $cntRows ) {
 				$this->status( sprintf( '%1$d/%1$d', $cntRows ) );
