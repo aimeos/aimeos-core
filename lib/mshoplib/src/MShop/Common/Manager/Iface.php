@@ -29,9 +29,12 @@ interface Iface
 	public function cleanup( array $siteids );
 
 	/**
-	 * Creates new item object.
+	 * Creates a new empty item instance
 	 *
-	 * @return \Aimeos\MShop\Common\Item\Iface New item object
+	 * @param string|null Type the item should be created with
+	 * @param string|null Domain of the type the item should be created with
+	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
+	 * @todo 2019.01: Add "$type = null, $domain = null" as required parameters
 	 */
 	public function createItem();
 
