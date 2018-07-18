@@ -79,7 +79,7 @@ class CustomerAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$type = $customerPropertyTypeManager->createItem();
 		$custIds = $this->getCustomerIds( $customerManager );
 
-		$this->conn->begin();
+		$customerManager->begin();
 
 		foreach( $testdata['customer/property/type'] as $key => $dataset )
 		{
@@ -109,7 +109,7 @@ class CustomerAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$customerPropertyManager->saveItem( $custProperty, false );
 		}
 
-		$this->conn->commit();
+		$customerManager->commit();
 	}
 
 

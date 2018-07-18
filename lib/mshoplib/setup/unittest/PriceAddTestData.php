@@ -77,7 +77,7 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$ptypeIds = [];
 		$ptype = $priceTypeManager->createItem();
 
-		$this->conn->begin();
+		$priceManager->begin();
 
 		foreach( $testdata['price/type'] as $key => $dataset )
 		{
@@ -113,6 +113,6 @@ class PriceAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$priceManager->saveItem( $price, false );
 		}
 
-		$this->conn->commit();
+		$priceManager->commit();
 	}
 }

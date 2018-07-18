@@ -72,7 +72,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$subscriptionManager = \Aimeos\MShop\Subscription\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$this->conn->begin();
+		$subscriptionManager->begin();
 
 		foreach( $testdata['subscription'] as $key => $dataset )
 		{
@@ -89,7 +89,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$subscriptionManager->saveItem( $item );
 		}
 
-		$this->conn->commit();
+		$subscriptionManager->commit();
 	}
 
 

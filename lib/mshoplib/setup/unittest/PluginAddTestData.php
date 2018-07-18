@@ -76,7 +76,7 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$plugTypeIds = [];
 		$type = $pluginTypeManager->createItem();
 
-		$this->conn->begin();
+		$pluginManager->begin();
 
 		foreach( $testdata['plugin/type'] as $key => $dataset )
 		{
@@ -106,6 +106,6 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$pluginManager->saveItem( $plugin, false );
 		}
 
-		$this->conn->commit();
+		$pluginManager->commit();
 	}
 }

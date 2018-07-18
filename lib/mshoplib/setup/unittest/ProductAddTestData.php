@@ -79,7 +79,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$typeIds = [];
 		$type = $productTypeManager->createItem();
 
-		$this->conn->begin();
+		$productManager->begin();
 
 		foreach( $testdata['product/type'] as $key => $dataset )
 		{
@@ -115,6 +115,6 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$productManager->saveItem( $product, false );
 		}
 
-		$this->conn->commit();
+		$productManager->commit();
 	}
 }

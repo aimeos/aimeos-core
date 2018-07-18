@@ -207,7 +207,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$medListTypes[$key] = $medListType->getId();
 		}
 
-		$this->conn->begin();
+		$mediaManager->begin();
 
 		$medList = $mediaListManager->createItem();
 		foreach( $testdata['media/lists'] as $dataset )
@@ -238,6 +238,6 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$mediaListManager->saveItem( $medList, false );
 		}
 
-		$this->conn->commit();
+		$mediaManager->commit();
 	}
 }

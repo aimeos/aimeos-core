@@ -304,8 +304,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$productListManager = $productManager->getSubManager( 'lists', 'Standard' );
 		$listItem = $productListManager->createItem();
 
-		//LIST-PRODUCT
-		$this->conn->begin();
+		$productManager->begin();
 
 		$listItemTypeIds = $this->addListTypeData( $productListManager, $testdata );
 
@@ -337,7 +336,7 @@ class ProductListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$productListManager->saveItem( $listItem, false );
 		}
 
-		$this->conn->commit();
+		$productManager->commit();
 	}
 
 

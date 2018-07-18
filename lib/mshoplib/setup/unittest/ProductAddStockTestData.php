@@ -79,7 +79,7 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 		$typeIds = [];
 		$typeItem = $typeManager->createItem();
 
-		$this->conn->begin();
+		$stockManager->begin();
 
 		foreach( $testdata['stock/type'] as $key => $dataset )
 		{
@@ -111,6 +111,6 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 			$stockManager->saveItem( $stock, false );
 		}
 
-		$this->conn->commit();
+		$stockManager->commit();
 	}
 }

@@ -100,7 +100,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$customerIds = $this->getCustomerIds( $testdata );
 		$orderBaseAddressManager = $orderBaseManager->getSubManager( 'address', 'Standard' );
 
-		$this->conn->begin();
+		$orderBaseManager->begin();
 
 		foreach( $testdata['order/base'] as $key => $dataset )
 		{
@@ -121,7 +121,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$this->addOrderBaseAddressData( $orderBaseAddressManager, $bases, $testdata );
 
-		$this->conn->commit();
+		$orderBaseManager->commit();
 
 		return $bases;
 	}
@@ -194,7 +194,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 		$ordServ = $orderBaseServiceManager->createItem();
 
-		$this->conn->begin();
+		$orderBaseManager->begin();
 
 		foreach( $testdata['order/base/service'] as $key => $dataset )
 		{
@@ -233,7 +233,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$this->addOrderBaseServiceAttributeData( $orderBaseServiceAttrManager, $testdata, $ordServices );
 
-		$this->conn->commit();
+		$orderBaseManager->commit();
 
 		return $bases['items'];
 	}
@@ -257,7 +257,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$orderBaseProductAttrManager = $orderBaseProductManager->getSubManager( 'attribute', 'Standard' );
 		$priceManager = \Aimeos\MShop\Price\Manager\Factory::createManager( $this->additional, 'Standard' );
 
-		$this->conn->begin();
+		$orderBaseManager->begin();
 
 		foreach( $testdata['order/base/product'] as $key => $dataset )
 		{
@@ -312,7 +312,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$this->addOrderBaseProductAttributeData( $orderBaseProductAttrManager, $testdata, $ordProds, $products );
 
-		$this->conn->commit();
+		$orderBaseManager->commit();
 
 		return $bases['items'];
 	}
@@ -423,7 +423,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$ords = [];
 		$ordItem = $orderManager->createItem();
 
-		$this->conn->begin();
+		$orderManager->begin();
 
 		foreach( $testdata['order'] as $key => $dataset )
 		{
@@ -459,7 +459,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$orderStatusManager->saveItem( $ordStat, false );
 		}
 
-		$this->conn->commit();
+		$orderManager->commit();
 	}
 
 

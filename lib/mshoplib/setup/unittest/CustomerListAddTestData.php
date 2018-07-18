@@ -204,7 +204,7 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$listItemTypeIds = [];
 		$listItemType = $customerListTypeManager->createItem();
 
-		$this->conn->begin();
+		$customerManager->begin();
 
 		foreach( $testdata['customer/lists/type'] as $key => $dataset )
 		{
@@ -247,6 +247,6 @@ class CustomerListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$customerListManager->saveItem( $listItem, false );
 		}
 
-		$this->conn->commit();
+		$customerManager->commit();
 	}
 }

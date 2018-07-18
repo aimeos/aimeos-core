@@ -78,7 +78,7 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$type = $productPropertyTypeManager->createItem();
 		$prodIds = $this->getProductIds( $productManager );
 
-		$this->conn->begin();
+		$productManager->begin();
 
 		foreach( $testdata['product/property/type'] as $key => $dataset )
 		{
@@ -108,7 +108,7 @@ class ProductAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$productPropertyManager->saveItem( $prodProperty, false );
 		}
 
-		$this->conn->commit();
+		$productManager->commit();
 	}
 
 

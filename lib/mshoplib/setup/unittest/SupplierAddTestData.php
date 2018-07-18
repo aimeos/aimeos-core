@@ -76,7 +76,7 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$supIds = [];
 		$supplier = $supplierManager->createItem();
 
-		$this->conn->begin();
+		$supplierManager->begin();
 
 		foreach( $testdata['supplier'] as $key => $dataset )
 		{
@@ -123,6 +123,6 @@ class SupplierAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supplierAddressManager->saveItem( $supAdr, false );
 		}
 
-		$this->conn->commit();
+		$supplierManager->commit();
 	}
 }

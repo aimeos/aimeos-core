@@ -77,7 +77,7 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$typeIds = [];
 		$typeItem = $tagTypeManager->createItem();
 
-		$this->conn->begin();
+		$tagManager->begin();
 
 		foreach( $testdata['tag/type'] as $key => $dataset )
 		{
@@ -107,6 +107,6 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$tagManager->saveItem( $tagItem, false );
 		}
 
-		$this->conn->commit();
+		$tagManager->commit();
 	}
 }

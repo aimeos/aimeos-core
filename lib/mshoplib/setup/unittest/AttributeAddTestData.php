@@ -77,7 +77,7 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$atypeIds = [];
 		$atype = $attributeTypeManager->createItem();
 
-		$this->conn->begin();
+		$attributeManager->begin();
 
 		foreach( $testdata['attribute/type'] as $key => $dataset )
 		{
@@ -109,6 +109,6 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$attributeManager->saveItem( $attribute, false );
 		}
 
-		$this->conn->commit();
+		$attributeManager->commit();
 	}
 }

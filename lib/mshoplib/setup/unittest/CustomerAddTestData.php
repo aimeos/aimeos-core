@@ -79,14 +79,14 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$search->setConditions( $search->compare( '=~', 'customer.code', 'UTC00' ) );
 		$items = $customerManager->searchItems( $search );
 
-		$this->conn->begin();
+		$customerManager->begin();
 
 		$customerManager->deleteItems( array_keys( $items ) );
 		$parentIds = $this->addCustomerData( $testdata, $customerManager, $customerAddressManager->createItem() );
 		$this->addCustomerAddressData( $testdata, $customerAddressManager, $parentIds );
 		$this->addCustomerGroupData( $testdata, $customerGroupManager );
 
-		$this->conn->commit();
+		$customerManager->commit();
 	}
 
 

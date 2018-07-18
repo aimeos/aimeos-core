@@ -77,7 +77,7 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$mtypeIds = [];
 		$mtype = $mediaTypeManager->createItem();
 
-		$this->conn->begin();
+		$mediaManager->begin();
 
 		foreach( $testdata['media/type'] as $key => $dataset )
 		{
@@ -114,6 +114,6 @@ class MediaAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$mediaManager->saveItem( $media, false );
 		}
 
-		$this->conn->commit();
+		$mediaManager->commit();
 	}
 }

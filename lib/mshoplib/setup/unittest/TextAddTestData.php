@@ -77,7 +77,7 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$ttypeIds = [];
 		$ttype = $textTypeManager->createItem();
 
-		$this->conn->begin();
+		$textManager->begin();
 
 		foreach( $testdata['text/type'] as $key => $dataset )
 		{
@@ -109,6 +109,6 @@ class TextAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$textManager->saveItem( $text, false );
 		}
 
-		$this->conn->commit();
+		$textManager->commit();
 	}
 }

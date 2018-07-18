@@ -215,7 +215,7 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$listItemTypeIds[$key] = $listItemType->getId();
 		}
 
-		$this->conn->begin();
+		$catalogManager->begin();
 
 		$listItem = $catalogListManager->createItem();
 		foreach( $testdata['catalog/lists'] as $dataset )
@@ -246,6 +246,6 @@ class CatalogListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$catalogListManager->saveItem( $listItem, false );
 		}
 
-		$this->conn->commit();
+		$catalogManager->commit();
 	}
 }

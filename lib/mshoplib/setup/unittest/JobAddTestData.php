@@ -75,7 +75,7 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$job = $adminJobManager->createItem();
 
-		$this->conn->begin();
+		$adminJobManager->begin();
 
 		foreach( $testdata['job'] as $dataset )
 		{
@@ -89,6 +89,6 @@ class JobAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$adminJobManager->saveItem( $job, false );
 		}
 
-		$this->conn->commit();
+		$adminJobManager->commit();
 	}
 }

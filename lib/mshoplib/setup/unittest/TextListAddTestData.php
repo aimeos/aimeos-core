@@ -139,7 +139,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$tListTypeIds = [];
 		$tListType = $textListTypeManager->createItem();
 
-		$this->conn->begin();
+		$textManager->begin();
 
 		foreach( $testdata['text/lists/type'] as $key => $dataset )
 		{
@@ -182,6 +182,6 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$textListManager->saveItem( $tList, false );
 		}
 
-		$this->conn->commit();
+		$textManager->commit();
 	}
 }

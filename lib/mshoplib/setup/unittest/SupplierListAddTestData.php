@@ -207,7 +207,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$listItemTypeIds = [];
 		$listItemType = $supplierListTypeManager->createItem();
 
-		$this->conn->begin();
+		$supplierManager->begin();
 
 		foreach( $testdata['supplier/lists/type'] as $key => $dataset )
 		{
@@ -250,6 +250,6 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$supplierListManager->saveItem( $listItem, false );
 		}
 
-		$this->conn->commit();
+		$supplierManager->commit();
 	}
 }

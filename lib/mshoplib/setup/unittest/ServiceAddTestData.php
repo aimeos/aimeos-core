@@ -77,7 +77,7 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$typeIds = [];
 		$type = $serviceTypeManager->createItem();
 
-		$this->conn->begin();
+		$serviceManager->begin();
 
 		foreach( $testdata['service/type'] as $key => $dataset )
 		{
@@ -111,6 +111,6 @@ class ServiceAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$serviceManager->saveItem( $parent, false );
 		}
 
-		$this->conn->commit();
+		$serviceManager->commit();
 	}
 }

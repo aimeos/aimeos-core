@@ -78,7 +78,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$type = $mediaPropertyTypeManager->createItem();
 		$prodIds = $this->getMediaIds( $mediaManager );
 
-		$this->conn->begin();
+		$mediaManager->begin();
 
 		foreach( $testdata['media/property/type'] as $key => $dataset )
 		{
@@ -108,7 +108,7 @@ class MediaAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$mediaPropertyManager->saveItem( $prodProperty, false );
 		}
 
-		$this->conn->commit();
+		$mediaManager->commit();
 	}
 
 

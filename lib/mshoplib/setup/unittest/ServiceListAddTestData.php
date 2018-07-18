@@ -225,7 +225,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
-		$this->conn->begin();
+		$serviceManager->begin();
 
 		$typeids = $this->getServiceTypeIds( $typeDomain, $typeCode );
 		$listItemTypeIds = $this->getServiceListTypeIds( $testdata['service/lists/type'] );
@@ -260,7 +260,7 @@ class ServiceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$serviceListManager->saveItem( $listItem, false );
 		}
 
-		$this->conn->commit();
+		$serviceManager->commit();
 	}
 
 

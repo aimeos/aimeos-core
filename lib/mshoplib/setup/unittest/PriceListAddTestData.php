@@ -132,7 +132,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
-		$this->conn->begin();
+		$priceManager->begin();
 
 		$typeids = $this->getPriceTypeIds( $domain, $code );
 		$parentIds = $this->getPriceIds( $value, $ship, $typeids );
@@ -167,7 +167,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$priceListManager->saveItem( $listItem, false );
 		}
 
-		$this->conn->commit();
+		$priceManager->commit();
 	}
 
 

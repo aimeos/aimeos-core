@@ -74,7 +74,7 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		$log = $adminLogManager->createItem();
 
-		$this->conn->begin();
+		$adminLogManager->begin();
 
 		foreach( $testdata['log'] as $dataset )
 		{
@@ -87,7 +87,7 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$adminLogManager->saveItem( $log, false );
 		}
 
-		$this->conn->commit();
+		$adminLogManager->commit();
 	}
 
 }

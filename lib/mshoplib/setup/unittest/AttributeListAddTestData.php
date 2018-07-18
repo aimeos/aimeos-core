@@ -193,7 +193,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 
-		$this->conn->begin();
+		$attributeManager->begin();
 
 		$typeids = $this->getAttributeTypeIds( array( 'product' ), $typeCodes );
 		$listItemTypeIds = $this->getAttributeListTypeIds( $testdata['attribute/lists/type'] );
@@ -228,7 +228,7 @@ class AttributeListAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$attributeListManager->saveItem( $listItem, false );
 		}
 
-		$this->conn->commit();
+		$attributeManager->commit();
 	}
 
 

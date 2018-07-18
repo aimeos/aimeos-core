@@ -78,7 +78,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 		$type = $attributePropertyTypeManager->createItem();
 		$prodIds = $this->getAttributeIds( $attributeManager );
 
-		$this->conn->begin();
+		$attributeManager->begin();
 
 		foreach( $testdata['attribute/property/type'] as $key => $dataset )
 		{
@@ -109,7 +109,7 @@ class AttributeAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 			$attributePropertyManager->saveItem( $prodProperty, false );
 		}
 
-		$this->conn->commit();
+		$attributeManager->commit();
 	}
 
 
