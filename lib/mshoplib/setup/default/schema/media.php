@@ -17,7 +17,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', [] );
+			$table->addColumn( 'pos', 'integer', ['default' => 0] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -72,7 +72,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', [] );
+			$table->addColumn( 'pos', 'integer', ['default' => 0] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
@@ -134,7 +134,7 @@ return array(
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'label', 'string', array( 'length' => 255 ) );
-			$table->addColumn( 'pos', 'integer', [] );
+			$table->addColumn( 'pos', 'integer', ['default' => 0] );
 			$table->addColumn( 'status', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
