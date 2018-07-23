@@ -19,10 +19,15 @@ namespace Aimeos\MShop\Attribute\Item;
  * @subpackage Attribute
  */
 class Standard
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Attribute\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListRef\Traits {
+		__clone as __cloneList;
+	}
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits {
+		__clone as __cloneProperty;
+	}
 
 
 	private $values;
@@ -39,10 +44,23 @@ class Standard
 	public function __construct( array $values = [], array $listItems = [],
 		array $refItems = [], array $propItems = [] )
 	{
-		parent::__construct( 'attribute.', $values, $listItems, $refItems );
+		parent::__construct( 'attribute.', $values );
 
+		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
+
 		$this->values = $values;
+	}
+
+
+	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+		parent::__clone();
+		$this->__cloneList();
+		$this->__cloneProperty();
 	}
 
 

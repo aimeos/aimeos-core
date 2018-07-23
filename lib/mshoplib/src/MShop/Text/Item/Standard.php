@@ -19,9 +19,12 @@ namespace Aimeos\MShop\Text\Item;
  * @subpackage Text
  */
 class Standard
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Text\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+
+
 	private $values;
 
 
@@ -34,8 +37,9 @@ class Standard
 	 */
 	public function __construct( array $values = [], array $listItems = [], array $refItems = [] )
 	{
-		parent::__construct( 'text.', $values, $listItems, $refItems );
+		parent::__construct( 'text.', $values );
 
+		$this->initListItems( $listItems, $refItems );
 		$this->values = $values;
 	}
 

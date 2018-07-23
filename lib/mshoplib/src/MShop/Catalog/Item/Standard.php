@@ -19,9 +19,12 @@ namespace Aimeos\MShop\Catalog\Item;
  * @subpackage Catalog
  */
 class Standard
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Catalog\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+
+
 	private $node;
 	private $children;
 
@@ -37,10 +40,11 @@ class Standard
 	public function __construct( \Aimeos\MW\Tree\Node\Iface $node, array $children = [],
 		array $listItems = [], array $refItems = [] )
 	{
-		parent::__construct( '', [], $listItems, $refItems );
+		parent::__construct( '', [] );
 
 		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $children );
 
+		$this->initListItems( $listItems, $refItems );
 		$this->children = $children;
 		$this->node = $node;
 	}

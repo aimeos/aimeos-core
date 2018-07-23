@@ -19,10 +19,15 @@ namespace Aimeos\MShop\Supplier\Item;
  * @subpackage Supplier
  */
 class Standard
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Supplier\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\AddressRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListRef\Traits {
+		__clone as __cloneList;
+	}
+	use \Aimeos\MShop\Common\Item\AddressRef\Traits {
+		__clone as __cloneAddress;
+	}
 
 
 	private $values;
@@ -37,10 +42,22 @@ class Standard
 	 */
 	public function __construct( array $values = [], array $listItems = [], array $refItems = [], $addresses = [] )
 	{
-		parent::__construct( 'supplier.', $values, $listItems, $refItems );
+		parent::__construct( 'supplier.', $values );
 
+		$this->initListItems( $listItems, $refItems );
 		$this->initAddressItems( $addresses );
 		$this->values = $values;
+	}
+
+
+	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+		parent::__clone();
+		$this->__cloneList();
+		$this->__cloneAddress();
 	}
 
 

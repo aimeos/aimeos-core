@@ -19,10 +19,14 @@ namespace Aimeos\MShop\Service\Item;
  * @subpackage Service
  */
 class Standard
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Service\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+
+
 	private $values;
+
 
 	/**
 	 * Initializes the item object.
@@ -33,8 +37,9 @@ class Standard
 	 */
 	public function __construct( array $values = [], array $listItems = [], array $refItems = [] )
 	{
-		parent::__construct( 'service.', $values, $listItems, $refItems );
+		parent::__construct( 'service.', $values );
 
+		$this->initListItems( $listItems, $refItems );
 		$this->values = $values;
 	}
 

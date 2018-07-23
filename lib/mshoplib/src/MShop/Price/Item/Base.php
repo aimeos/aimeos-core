@@ -18,9 +18,27 @@ namespace Aimeos\MShop\Price\Item;
  * @subpackage Price
  */
 abstract class Base
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Price\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+
+
+	/**
+	 * Initalizes the object with the given values
+	 *
+	 * @param string $prefix Prefix for the keys returned by toArray()
+	 * @param array $values Associative array of key/value pairs for price, costs, rebate and currencyid
+	 * @param \Aimeos\MShop\Common\Lists\Item\Iface[] $listItems List of list items
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $refItems List of referenced items
+	 */
+	public function __construct( $prefix, array $values = [], array $listItems = [], array $refItems = [] )
+	{
+		parent::__construct( $prefix, $values );
+		$this->initListItems( $listItems, $refItems );
+	}
+
+
 	/**
 	 * Compares the properties of the given price item with its own one.
 	 *

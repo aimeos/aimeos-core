@@ -10,8 +10,15 @@
 namespace Aimeos\MShop\Common\Item\ListRef;
 
 
-class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
+class Test
 {
+	use \Aimeos\MShop\Common\Item\ListRef\Traits;
+
+	public function __construct( array $listItems, array $refItems )
+	{
+		$this->initListItems( $listItems, $refItems );
+	}
+
 	public function getLabel()
 	{
 		return 'test label';
@@ -25,7 +32,7 @@ class Test extends \Aimeos\MShop\Common\Item\ListRef\Base
 
 
 
-class BaseTest extends \PHPUnit\Framework\TestCase
+class TraitsTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $textItem1;
@@ -72,7 +79,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			$this->textItem2->getId() => $this->textItem2,
 		) );
 
-		$this->object = new \Aimeos\MShop\Common\Item\ListRef\Test( 'text.', [], $listItems, $refItems );
+		$this->object = new \Aimeos\MShop\Common\Item\ListRef\Test( $listItems, $refItems );
 	}
 
 
@@ -149,7 +156,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetName()
 	{
-		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( '' );
+		$object = new \Aimeos\MShop\Common\Item\ListRef\Test( [], [] );
 
 		$this->assertEquals( 'test label', $object->getName() );
 		$this->assertEquals( 'test name', $this->object->getName() );

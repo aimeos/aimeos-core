@@ -19,10 +19,16 @@ namespace Aimeos\MShop\Media\Item;
  * @subpackage Media
  */
 class Standard
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Media\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListRef\Traits {
+		__clone as __cloneList;
+		getName as getNameList;
+	}
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits {
+		__clone as __cloneProperty;
+	}
 
 
 	private $values;
@@ -39,10 +45,22 @@ class Standard
 	public function __construct( array $values = [], array $listItems = [],
 		array $refItems = [], array $propItems = [] )
 	{
-		parent::__construct( 'media.', $values, $listItems, $refItems );
+		parent::__construct( 'media.', $values );
 
+		$this->initListItems( $listItems, $refItems );
 		$this->initPropertyItems( $propItems );
 		$this->values = $values;
+	}
+
+
+	/**
+	 * Creates a deep clone of all objects
+	 */
+	public function __clone()
+	{
+		parent::__clone();
+		$this->__cloneList();
+		$this->__cloneProperty();
 	}
 
 
@@ -355,7 +373,7 @@ class Standard
 			return $item->getValue();
 		}
 
-		return parent::getName( $type );
+		return $this->getNameList( $type );
 	}
 
 

@@ -19,11 +19,18 @@ namespace Aimeos\MShop\Customer\Item;
  * @subpackage Customer
  */
 abstract class Base
-	extends \Aimeos\MShop\Common\Item\ListRef\Base
+	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Customer\Item\Iface
 {
-	use \Aimeos\MShop\Common\Item\AddressRef\Traits;
-	use \Aimeos\MShop\Common\Item\PropertyRef\Traits;
+	use \Aimeos\MShop\Common\Item\ListRef\Traits {
+		__clone as __cloneList;
+	}
+	use \Aimeos\MShop\Common\Item\PropertyRef\Traits {
+		__clone as __cloneProperty;
+	}
+	use \Aimeos\MShop\Common\Item\AddressRef\Traits {
+		__clone as __cloneAddress;
+	}
 
 
 	private $billingaddress;
@@ -43,7 +50,7 @@ abstract class Base
 	public function __construct( \Aimeos\MShop\Common\Item\Address\Iface $address, array $values = [],
 		array $listItems = [], array $refItems = [], $addresses = [], array $propItems = [] )
 	{
-		parent::__construct( 'customer.', $values, $listItems, $refItems );
+		parent::__construct( 'customer.', $values );
 
 		foreach( $values as $name => $value )
 		{
@@ -74,6 +81,7 @@ abstract class Base
 
 		$this->initAddressItems( $addresses );
 		$this->initPropertyItems( $propItems );
+		$this->initListItems( $listItems, $refItems );
 
 		// set modified flag to false
 		$address->setId( $this->getId() );
@@ -89,7 +97,11 @@ abstract class Base
 	public function __clone()
 	{
 		$this->billingaddress = clone $this->billingaddress;
+
 		parent::__clone();
+		$this->__cloneList();
+		$this->__cloneAddress();
+		$this->__cloneProperty();
 	}
 
 
