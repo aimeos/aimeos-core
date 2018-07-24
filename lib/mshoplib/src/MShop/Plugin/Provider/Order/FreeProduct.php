@@ -46,7 +46,7 @@ class FreeProduct
 			'default' => 1,
 			'required' => true,
 		),
-    );
+	);
 
 
 	/**
@@ -81,7 +81,7 @@ class FreeProduct
 	 *
 	 * @param \Aimeos\MW\Observer\Publisher\Iface $p Object implementing publisher interface
 	 */
-    public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
+	public function register( \Aimeos\MW\Observer\Publisher\Iface $p )
 	{
 		$p->addListener( $this->getObject(), 'addProduct.after' );
 	}
