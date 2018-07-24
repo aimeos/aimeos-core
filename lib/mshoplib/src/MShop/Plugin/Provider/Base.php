@@ -111,7 +111,7 @@ abstract class Base
 						}
 						break;
 					case 'integer':
-						if( ctype_digit( $attributes[$key] ) === false ) {
+						if( is_integer( $attributes[$key] ) === false && ctype_digit( $attributes[$key] ) === false ) {
 							$errors[$key] = sprintf( 'Not an integer number' ); continue 2;
 						}
 						break;
