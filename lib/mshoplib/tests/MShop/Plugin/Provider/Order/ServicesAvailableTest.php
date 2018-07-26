@@ -124,6 +124,38 @@ class ServicesAvailableTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testUpdateEmptyServices()
+	{
+		$this->order->addService( $this->service, 'payment' );
+		$this->order->addService( $this->service, 'delivery' );
+
+		$this->order->deleteService( 'payment' );
+		$this->order->deleteService( 'delivery' );
+
+		$this->plugin->setConfig( array(
+			'delivery' => false,
+			'payment' => false
+		) );
+
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+
+		$this->plugin->setConfig( array(
+				'delivery' => null,
+				'payment' => null
+		) );
+
+		$this->assertTrue( $this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE ) );
+
+		$this->plugin->setConfig( array(
+				'delivery' => true,
+				'payment' => true
+		) );
+
+		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
+	}
+
+
 	public function testUpdateWithServices()
 	{
 		$this->order->addService( $this->service, 'payment' );
