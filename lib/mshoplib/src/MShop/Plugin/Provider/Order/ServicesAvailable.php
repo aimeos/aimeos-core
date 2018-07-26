@@ -122,11 +122,13 @@ class ServicesAvailable
 
 		foreach( $this->getItemBase()->getConfig() as $type => $value )
 		{
-			if( $value == true && !isset( $availableServices[$type] ) ) {
+			if( $value == true && ( !isset( $availableServices[$type] ) || empty( $availableServices[$type] ) ) ) {
 				$problems[$type] = 'available.none';
 			}
 
-			if( $value !== null && $value !== '' && $value == false && isset( $availableServices[$type] ) ) {
+			if( $value !== null && $value !== '' && $value == false
+				&& isset( $availableServices[$type] ) && !empty( $availableServices[$type] )
+			) {
 				$problems[$type] = 'available.notallowed';
 			}
 		}
