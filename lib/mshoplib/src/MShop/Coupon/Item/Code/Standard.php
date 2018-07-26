@@ -122,9 +122,11 @@ class Standard
 	 */
 	public function setCount( $count )
 	{
-		if( (int) $count !== $this->getCount() )
+		$count = ( is_numeric( $count ) ? (int) $count : null );
+
+		if( $count !== $this->getCount() )
 		{
-			$this->values['coupon.code.count'] = (int) $count;
+			$this->values['coupon.code.count'] = $count;
 			$this->setModified();
 		}
 
