@@ -109,6 +109,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetCountNull()
+	{
+		$this->object->setCount( null );
+		$this->assertEquals( null, $this->object->getCount() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testSetCount()
 	{
 		$return = $this->object->setCount( 50 );

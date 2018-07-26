@@ -42,7 +42,7 @@ interface Iface
 	/**
 	 * Returns the number of tries the code is valid.
 	 *
-	 * @return integer Number of available tries
+	 * @return integer|null Number of available tries or null for unlimited
 	 */
 	public function getCount();
 
@@ -50,7 +50,7 @@ interface Iface
 	/**
 	 * Sets the new number of tries the code is valid.
 	 *
-	 * @param integer $count Number of tries
+	 * @param integer|null $count Number of tries or null for unlimited
 	 * @return \Aimeos\MShop\Coupon\Item\Code\Iface Coupon code item for chaining method calls
 	 */
 	public function setCount( $count );
