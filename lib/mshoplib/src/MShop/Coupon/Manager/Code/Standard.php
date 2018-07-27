@@ -859,19 +859,20 @@ class Standard
 		{
 			$object = $this->createSearchBase( 'coupon' );
 
-			$expr = array(
-				$object->compare( '>', 'coupon.code.count', 0 )
-			);
-
-			$temp = [];
-			$temp[] = $object->compare( '==', 'coupon.code.datestart', null );
-			$temp[] = $object->compare( '<=', 'coupon.code.datestart', $this->date );
-			$expr[] = $object->combine( '||', $temp );
-
-			$temp = [];
-			$temp[] = $object->compare( '==', 'coupon.code.dateend', null );
-			$temp[] = $object->compare( '>=', 'coupon.code.dateend', $this->date );
-			$expr[] = $object->combine( '||', $temp );
+			$expr = [
+				$object->combine( '||', [
+					$object->compare( '==', 'coupon.code.count', null ),
+					$object->compare( '>', 'coupon.code.count', 0 ),
+				] ),
+				$object->combine( '||', [
+					$object->compare( '==', 'coupon.code.datestart', null ),
+					$object->compare( '<=', 'coupon.code.datestart', $this->date ),
+				] ),
+				$object->combine( '||', [
+					$object->compare( '==', 'coupon.code.dateend', null ),
+					$object->compare( '>=', 'coupon.code.dateend', $this->date ),
+				] ),
+			];
 
 			$object->setConditions( $object->combine( '&&', $expr ) );
 
