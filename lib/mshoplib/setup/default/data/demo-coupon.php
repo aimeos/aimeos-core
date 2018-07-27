@@ -8,7 +8,7 @@
 
 return array(
 	array(
-		'label' => 'Voucher', 'provider' => 'Voucher', 'status' => 1,
+		'label' => 'demo-voucher', 'provider' => 'Voucher', 'status' => 1,
 		'datestart' => null, 'dateend' => null,
 		'config' => array(
 			'voucher.productcode' => 'demo-rebate',

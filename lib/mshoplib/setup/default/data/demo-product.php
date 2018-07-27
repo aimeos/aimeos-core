@@ -280,7 +280,7 @@ return array(
 				),
 			),
 			array(
-				'code' => 'demo-month', 'label' => 'Demo: One month',
+				'code' => 'P0Y1M0W0D', 'label' => 'Demo: One month',
 				'type' => 'interval', 'position' => 0, 'status' => 1,
 				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1,
@@ -302,7 +302,7 @@ return array(
 				),
 			),
 			array(
-				'code' => 'demo-year', 'label' => 'Demo: One year',
+				'code' => 'P1Y0M0W0D', 'label' => 'Demo: One year',
 				'type' => 'interval', 'position' => 0, 'status' => 1,
 				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1,
