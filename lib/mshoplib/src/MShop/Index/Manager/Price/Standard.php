@@ -31,6 +31,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.price.quantity' => array(
 			'code' => 'index.price.quantity',
 			'internalcode' => 'mindpr."quantity"',
@@ -55,6 +56,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.price.costs' => array(
 			'code' => 'index.price.costs()',
 			'internalcode' => ':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."costs"',
@@ -63,6 +65,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'sort:index.price.costs' => array(
 			'code' => 'sort:index.price.costs()',
 			'internalcode' => 'mindpr."costs"',
@@ -71,6 +74,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.price.rebate' => array(
 			'code' => 'index.price.rebate()',
 			'internalcode' => ':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."rebate"',
@@ -79,6 +83,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'sort:index.price.rebate' => array(
 			'code' => 'sort:index.price.rebate()',
 			'internalcode' => 'mindpr."rebate"',
@@ -87,6 +92,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.price.taxrate' => array(
 			'code' => 'index.price.taxrate()',
 			'internalcode' => ':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."taxrate"',
@@ -95,6 +101,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'sort:index.price.taxrate' => array(
 			'code' => 'sort:index.price.taxrate()',
 			'internalcode' => 'mindpr."taxrate"',

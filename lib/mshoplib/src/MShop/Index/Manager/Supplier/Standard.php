@@ -30,6 +30,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.supplieraggregate' => array(
 			'code' => 'index.supplieraggregate()',
 			'internalcode' => '( SELECT COUNT(DISTINCT mindsu_agg."supid")
@@ -41,6 +42,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.suppliercount' => array(
 			'code' => 'index.suppliercount()',
 			'internalcode' => '( SELECT COUNT(DISTINCT mindsu_cnt."supid")

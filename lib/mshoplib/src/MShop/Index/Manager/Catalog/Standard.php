@@ -31,6 +31,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.catalogaggregate' => array(
 			'code' => 'index.catalogaggregate()',
 			'internalcode' => '( SELECT COUNT(DISTINCT mindca_agg."catid")
@@ -42,6 +43,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.catalogcount' => array(
 			'code' => 'index.catalogcount()',
 			'internalcode' => '( SELECT COUNT(DISTINCT mindca_cnt."catid")

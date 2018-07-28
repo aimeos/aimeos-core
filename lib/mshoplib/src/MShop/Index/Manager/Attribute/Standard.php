@@ -31,6 +31,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.attribute.code' => array(
 			'code' => 'index.attribute.code()',
 			'internalcode' => ':site AND mindat."listtype" = $1 AND mindat."type" = $2 AND mindat."code"',
@@ -39,6 +40,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01
 		'index.attributecount' => array(
 			'code' => 'index.attributecount()',
 			'internalcode' => '( SELECT COUNT(DISTINCT mindat_cnt."attrid")
