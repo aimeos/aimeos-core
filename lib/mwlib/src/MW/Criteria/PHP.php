@@ -129,15 +129,6 @@ class PHP extends \Aimeos\MW\Criteria\Base
 
 
 	/**
-	 * @deprecated Removed 2019.01
-	 */
-	public function getConditionString( array $types, array $translations = [], array $plugins = [] )
-	{
-		return $this->getConditionSource( $types, $translations, $plugins );
-	}
-
-
-	/**
 	 * Returns the original condition expression objects.
 	 *
 	 * @return \Aimeos\MW\Criteria\Expression\Iface Original expression objects
@@ -197,15 +188,6 @@ class PHP extends \Aimeos\MW\Criteria\Base
 		}
 
 		return implode( ' ', $sortation );
-	}
-
-
-	/**
-	 * @deprecated Removed 2019.01
-	 */
-	public function getSortationString( array $types, array $translations = [] )
-	{
-		return $this->getSortationSource( $types, $translations );
 	}
 
 

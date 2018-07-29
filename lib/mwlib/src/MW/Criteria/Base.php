@@ -101,6 +101,15 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 
 	/**
+	 * @deprecated Removed 2019.01
+	 */
+	public function getConditionString( array $types, array $translations = [], array $plugins = [] )
+	{
+		return $this->getConditionSource( $types, $translations, $plugins );
+	}
+
+
+	/**
 	 * Creates sortation expressions from an associative array.
 	 *
 	 * The array must be a single-dimensional array of name and operator pairs like
@@ -121,6 +130,15 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 		}
 
 		return $results;
+	}
+
+
+	/**
+	 * @deprecated Removed 2019.01
+	 */
+	public function getSortationString( array $types, array $translations = [] )
+	{
+		return $this->getSortationSource( $types, $translations );
 	}
 
 
