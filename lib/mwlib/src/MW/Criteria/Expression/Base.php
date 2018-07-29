@@ -121,6 +121,15 @@ abstract class Base
 
 
 	/**
+	 * @deprecated Removed 2019.01
+	 */
+	public function toString( array $types, array $translations = [], array $plugins = [] )
+	{
+		return $this->toSource( $types, $translations, $plugins );
+	}
+
+
+	/**
 	 * Translates an expression string and replaces the parameter if it's an expression function.
 	 *
 	 * @param string $name Expresion string or function

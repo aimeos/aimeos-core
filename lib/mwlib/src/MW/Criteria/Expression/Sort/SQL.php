@@ -107,15 +107,6 @@ class SQL
 
 
 	/**
-	 * @deprecated Removed 2019.01
-	 */
-	public function toString( array $types, array $translations = [], array $plugins = [] )
-	{
-		return $this->toSource( $types, $translations, $plugins );
-	}
-
-
-	/**
 	 * Escapes the value so it can be inserted into a SQL statement
 	 *
 	 * @param string $operator Operator used for the expression

@@ -92,14 +92,14 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 		}
 
 		if( $this->operator == '!' ) {
-			return ' ' . self::$operators[$this->operator] . ' ' . $item->toString( $types, $translations, $plugins );
+			return ' ' . self::$operators[$this->operator] . ' ' . $item->toSource( $types, $translations, $plugins );
 		}
 
-		$string = $item->toString( $types, $translations, $plugins );
+		$string = $item->toSource( $types, $translations, $plugins );
 
 		while( ( $item = next( $this->expressions ) ) !== false )
 		{
-			if( ( $itemstr = $item->toString( $types, $translations, $plugins ) ) !== '' ) {
+			if( ( $itemstr = $item->toSource( $types, $translations, $plugins ) ) !== '' ) {
 				$string .= ' ' . self::$operators[$this->operator] . ' ' . $itemstr;
 			}
 		}

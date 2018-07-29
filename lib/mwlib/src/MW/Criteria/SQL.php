@@ -125,7 +125,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	{
 		$types['1'] = \Aimeos\MW\DB\Statement\Base::PARAM_INT;
 
-		if( ( $string = $this->conditions->toString( $types, $translations, $plugins ) ) !== '' ) {
+		if( ( $string = $this->conditions->toSource( $types, $translations, $plugins ) ) !== '' ) {
 			return $string;
 		}
 
@@ -187,7 +187,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 				throw new \Aimeos\MW\Common\Exception( 'No sortation types available' );
 			}
 
-			return $this->sort( '+', $name )->toString( $types, $translations );
+			return $this->sort( '+', $name )->toSource( $types, $translations );
 		}
 
 
@@ -195,7 +195,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 
 		foreach( $this->sortations as $sortitem )
 		{
-			if( ( $string = $sortitem->toString( $types, $translations ) ) !== '' ) {
+			if( ( $string = $sortitem->toSource( $types, $translations ) ) !== '' ) {
 				$sortation[] = $string;
 			}
 		}

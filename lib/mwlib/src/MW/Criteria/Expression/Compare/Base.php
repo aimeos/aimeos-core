@@ -110,15 +110,6 @@ abstract class Base
 
 
 	/**
-	 * @deprecated Removed 2019.01
-	 */
-	public function toString( array $types, array $translations = [], array $plugins = [] )
-	{
-		return $this->toSource( $types, $translations, $plugins );
-	}
-
-
-	/**
 	 * Creates a term string from the given parameters.
 	 *
 	 * @param string $name Translated name of variable or column that should be compared

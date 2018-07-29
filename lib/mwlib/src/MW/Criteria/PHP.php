@@ -120,7 +120,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 	{
 		$types['1'] = 'int';
 
-		if( ( $string = $this->conditions->toString( $types, $translations, $plugins ) ) !== '' ) {
+		if( ( $string = $this->conditions->toSource( $types, $translations, $plugins ) ) !== '' ) {
 			return $string;
 		}
 
@@ -183,7 +183,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 				throw new \Aimeos\MW\Common\Exception( 'No sortation types available' );
 			}
 
-			return $this->sort( '+', $name )->toString( $types, $translations );
+			return $this->sort( '+', $name )->toSource( $types, $translations );
 		}
 
 
@@ -191,7 +191,7 @@ class PHP extends \Aimeos\MW\Criteria\Base
 
 		foreach( $this->sortations as $sortitem )
 		{
-			if( ( $string = $sortitem->toString( $types, $translations ) ) !== '' ) {
+			if( ( $string = $sortitem->toSource( $types, $translations ) ) !== '' ) {
 				$sortation[] = $string;
 			}
 		}
