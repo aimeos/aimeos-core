@@ -86,9 +86,9 @@ class SQL
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
-	 * @return string Expression that evaluates to a boolean result
+	 * @return mixed Expression that evaluates to a boolean result
 	 */
-	public function toString( array $types, array $translations = [], array $plugins = [] )
+	public function toSource( array $types, array $translations = [], array $plugins = [] )
 	{
 		$this->setPlugins( $plugins );
 
@@ -103,6 +103,15 @@ class SQL
 		}
 
 		return $transname . ' ' . self::$operators[$this->operator];
+	}
+
+
+	/**
+	 * @deprecated Removed 2019.01
+	 */
+	public function toString( array $types, array $translations = [], array $plugins = [] )
+	{
+		return $this->toSource( $types, $translations, $plugins );
 	}
 
 

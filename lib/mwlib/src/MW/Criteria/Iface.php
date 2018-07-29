@@ -92,9 +92,9 @@ interface Iface
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
-	 * @return string Expression string for searching
+	 * @return mixed Data for searching
 	 */
-	public function getConditionString( array $types, array $translations = [], array $plugins = [] );
+	public function getConditionSource( array $types, array $translations = [], array $plugins = [] );
 
 
 	/**
@@ -119,9 +119,9 @@ interface Iface
 	 *
 	 * @param array $names List of item names
 	 * @param array $translations Associative list of item names that should be translated
-	 * @return string Order string for sorting the items
+	 * @return mixed Data for sorting the items
 	 */
-	public function getSortationString( array $names, array $translations = [] );
+	public function getSortationSource( array $names, array $translations = [] );
 
 
 	/**

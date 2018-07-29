@@ -119,9 +119,9 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
-	 * @return string Expression string for searching
+	 * @return mixed Data for searching
 	 */
-	public function getConditionString( array $types, array $translations = [], array $plugins = [] )
+	public function getConditionSource( array $types, array $translations = [], array $plugins = [] )
 	{
 		$types['1'] = \Aimeos\MW\DB\Statement\Base::PARAM_INT;
 
@@ -130,6 +130,15 @@ class SQL extends \Aimeos\MW\Criteria\Base
 		}
 
 		return '1=1';
+	}
+
+
+	/**
+	 * @deprecated Removed 2019.01
+	 */
+	public function getConditionString( array $types, array $translations = [], array $plugins = [] )
+	{
+		return $this->getConditionSource( $types, $translations, $plugins );
 	}
 
 
@@ -166,9 +175,9 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of item names that should be translated
-	 * @return string Order string for sorting the items
+	 * @return mixed Data for sorting the items
 	 */
-	public function getSortationString( array $types, array $translations = [] )
+	public function getSortationSource( array $types, array $translations = [] )
 	{
 		if( empty( $this->sortations ) )
 		{
@@ -192,6 +201,15 @@ class SQL extends \Aimeos\MW\Criteria\Base
 		}
 
 		return implode( ', ', $sortation );
+	}
+
+
+	/**
+	 * @deprecated Removed 2019.01
+	 */
+	public function getSortationString( array $types, array $translations = [] )
+	{
+		return $this->getSortationSource( $types, $translations );
 	}
 
 
