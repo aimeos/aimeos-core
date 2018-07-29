@@ -23,6 +23,14 @@ trait Traits
 
 
 	/**
+	 * Returns the context object.
+	 *
+	 * @return \Aimeos\MShop\Context\Item\Iface Context object
+	 */
+	abstract protected function getContext();
+
+
+	/**
 	 * Adds the decorators to the manager object.
 	 *
 	 * @param \Aimeos\MShop\Context\Item\Iface $context Context instance with necessary objects
@@ -68,7 +76,7 @@ trait Traits
 	 */
 	protected function addManagerDecorators( \Aimeos\MShop\Common\Manager\Iface $manager, $managerpath, $domain )
 	{
-		$config = $this->context->getConfig();
+		$config = $this->getContext()->getConfig();
 
 		$decorators = $config->get( 'mshop/common/manager/decorators/default', [] );
 		$excludes = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/excludes', [] );
@@ -92,6 +100,29 @@ trait Traits
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
 
 		return $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
+	}
+
+
+	/**
+	 * Transforms the manager path to the appropriate class names.
+	 *
+	 * @param string $manager Path of manager names, e.g. "list/type"
+	 * @return string Class names, e.g. "List_Type"
+	 */
+	protected function createSubNames( $manager )
+	{
+		$names = explode( '/', $manager );
+
+		foreach( $names as $key => $subname )
+		{
+			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
+				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
+			}
+
+			$names[$key] = ucfirst( $subname );
+		}
+
+		return implode( '\\', $names );
 	}
 
 

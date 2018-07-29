@@ -401,29 +401,6 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
-	 * Transforms the manager path to the appropriate class names.
-	 *
-	 * @param string $manager Path of manager names, e.g. "list/type"
-	 * @return string Class names, e.g. "List_Type"
-	 */
-	protected function createSubNames( $manager )
-	{
-		$names = explode( '/', $manager );
-
-		foreach( $names as $key => $subname )
-		{
-			if( empty( $subname ) || ctype_alnum( $subname ) === false ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in manager name "%1$s"', $manager ) );
-			}
-
-			$names[$key] = ucfirst( $subname );
-		}
-
-		return implode( '\\', $names );
-	}
-
-
-	/**
 	 * Returns the item for the given search key/value pairs.
 	 *
 	 * @param array $pairs Search key/value pairs for the item
