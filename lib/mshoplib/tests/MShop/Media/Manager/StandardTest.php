@@ -86,7 +86,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'media.languageid', 'de' );
 		$expr[] = $search->compare( '>', 'media.typeid', 0 );
 		$expr[] = $search->compare( '==', 'media.domain', 'product' );
-		$expr[] = $search->compare( '==', 'media.label', 'cn_colombie_266x221' );
+		$expr[] = $search->compare( '==', 'media.label', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '==', 'media.url', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '==', 'media.preview', 'prod_266x221/198_prod_266x221.jpg' );
 		$expr[] = $search->compare( '==', 'media.mimetype', 'image/jpeg' );
@@ -157,7 +157,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'media.label', 'example image 1' ),
+			$search->compare( '==', 'media.label', 'path/to/folder/example1.jpg' ),
 			$search->compare( '==', 'media.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -257,14 +257,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSavePropertyItems()
 	{
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'media.label', 'example image 1' ) );
+		$search->setConditions( $search->compare( '==', 'media.label', 'path/to/folder/example1.jpg' ) );
 		$items = $this->object->searchItems( $search );
 		$item = reset( $items );
 
-		$item->setId( null )->setLabel( 'example image 1.1' );
+		$item->setId( null )->setLabel( 'path/to/folder/example1-1.jpg' );
 		$this->object->saveItem( $item );
 
-		$search->setConditions( $search->compare( '==', 'media.label', 'example image 1.1' ) );
+		$search->setConditions( $search->compare( '==', 'media.label', 'path/to/folder/example1-1.jpg' ) );
 		$items = $this->object->searchItems( $search );
 		$item2 = reset( $items );
 
