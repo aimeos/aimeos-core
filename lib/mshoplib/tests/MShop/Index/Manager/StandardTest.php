@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
 		$search = $attributeManager->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'attribute.label', '29' ),
+			$search->compare( '==', 'attribute.label', 'product/width/29' ),
 			$search->compare( '==', 'attribute.editor', $this->editor ),
 			$search->compare( '==', 'attribute.type.domain', 'product' ),
 			$search->compare( '==', 'attribute.type.code', 'width' ),
@@ -291,7 +291,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 		$expr = array(
-			$search->compare( '==', 'attribute.label', '30' ),
+			$search->compare( '==', 'attribute.label', 'product/length/30' ),
 			$search->compare( '==', 'attribute.editor', $this->editor ),
 			$search->compare( '==', 'attribute.type.domain', 'product' ),
 			$search->compare( '==', 'attribute.type.code', 'length' ),

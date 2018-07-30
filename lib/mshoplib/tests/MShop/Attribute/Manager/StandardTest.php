@@ -241,7 +241,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'attribute.typeid', null );
 		$expr[] = $search->compare( '==', 'attribute.position', 5 );
 		$expr[] = $search->compare( '==', 'attribute.code', 'black' );
-		$expr[] = $search->compare( '==', 'attribute.label', 'black' );
+		$expr[] = $search->compare( '==', 'attribute.label', 'product/color/black' );
 		$expr[] = $search->compare( '==', 'attribute.domain', 'product' );
 		$expr[] = $search->compare( '==', 'attribute.status', 0 );
 		$expr[] = $search->compare( '>=', 'attribute.mtime', '1970-01-01 00:00:00' );
