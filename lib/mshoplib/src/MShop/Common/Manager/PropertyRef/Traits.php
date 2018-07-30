@@ -64,7 +64,7 @@ trait Traits
 		foreach( $item->getPropertyItems( null, false ) as $propItem )
 		{
 			if( $propItem->getParentId() != $item->getId() ) {
-				$propItem->setId( null ); //create new property item if copied
+				$propItem->setId( null ); // create new property item if copied
 			}
 
 			$propItem->setParentId( $item->getId() );
