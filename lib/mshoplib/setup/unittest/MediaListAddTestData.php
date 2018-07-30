@@ -22,7 +22,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'AttributeListAddTestData' );
+		return array( 'MShopSetLocale', 'AttributeAddTestData', 'TextAddTestData' );
 	}
 
 
@@ -33,7 +33,7 @@ class MediaListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return [];
+		return ['CatalogRebuildTestIndex'];
 	}
 
 

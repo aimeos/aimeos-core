@@ -23,7 +23,7 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'MediaListAddTestData', 'PriceListAddTestData', 'ProductAddTestData' );
+		return array( 'MShopSetLocale' );
 	}
 
 
@@ -34,7 +34,7 @@ class TagAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'CatalogRebuildTestIndex' );
+		return ['CatalogRebuildTestIndex'];
 	}
 
 

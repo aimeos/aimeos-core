@@ -22,7 +22,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'CustomerListAddTestData', 'PriceAddTestData' );
+		return array( 'MShopSetLocale', 'CustomerAddTestData', 'PriceAddTestData' );
 	}
 
 
@@ -33,7 +33,7 @@ class PriceListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'CatalogRebuildTestIndex' );
+		return ['CatalogRebuildTestIndex'];
 	}
 
 

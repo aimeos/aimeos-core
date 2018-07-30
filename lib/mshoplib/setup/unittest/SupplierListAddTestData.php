@@ -21,7 +21,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'TextAddTestData', 'ProductAddTestData', 'SupplierAddTestData' );
+		return array( 'MShopSetLocale', 'MediaAddTestData', 'ProductAddTestData', 'SupplierAddTestData', 'TextAddTestData' );
 	}
 
 
@@ -32,7 +32,7 @@ class SupplierListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'CatalogRebuildTestIndex' );
+		return ['CatalogRebuildTestIndex'];
 	}
 
 

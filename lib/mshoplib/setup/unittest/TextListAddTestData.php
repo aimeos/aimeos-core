@@ -33,7 +33,7 @@ class TextListAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return [];
+		return ['CatalogRebuildTestIndex'];
 	}
 
 

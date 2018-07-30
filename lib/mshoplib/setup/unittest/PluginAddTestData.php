@@ -22,7 +22,7 @@ class PluginAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'ServiceListAddTestData', 'SupplierAddTestData', 'TextListAddTestData' );
+		return array( 'MShopSetLocale', 'ServiceListAddTestData', 'SupplierAddTestData' );
 	}
 
 

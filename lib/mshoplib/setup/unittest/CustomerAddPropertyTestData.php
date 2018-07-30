@@ -33,7 +33,7 @@ class CustomerAddPropertyTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'CatalogRebuildTestIndex' );
+		return ['CatalogRebuildTestIndex'];
 	}
 
 

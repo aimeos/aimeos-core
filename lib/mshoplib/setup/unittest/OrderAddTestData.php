@@ -22,7 +22,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'PluginAddTestData', 'ProductAddTestData' );
+		return array( 'MShopSetLocale', 'AttributeAddTestData', 'CustomerAddTestData', 'PluginAddTestData', 'ProductAddTestData', 'ServiceAddTestData' );
 	}
 
 
@@ -33,7 +33,7 @@ class OrderAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'JobAddTestData', 'CatalogRebuildTestIndex' );
+		return [];
 	}
 
 

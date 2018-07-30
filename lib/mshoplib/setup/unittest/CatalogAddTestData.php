@@ -22,7 +22,7 @@ class CatalogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'ProductListAddTestData' );
+		return array( 'MShopSetLocale' );
 	}
 
 
@@ -33,7 +33,7 @@ class CatalogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return [];
+		return ['CatalogRebuildTestIndex'];
 	}
 
 

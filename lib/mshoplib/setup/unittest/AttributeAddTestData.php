@@ -22,7 +22,7 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopSetLocale', 'TextAddTestData', 'MediaAddTestData' );
+		return array( 'MShopSetLocale' );
 	}
 
 
@@ -33,7 +33,7 @@ class AttributeAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return array( 'CatalogRebuildTestIndex' );
+		return ['CatalogRebuildTestIndex'];
 	}
 
 
