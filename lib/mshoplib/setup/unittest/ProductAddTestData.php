@@ -50,13 +50,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding product test data', 0 );
 		$this->additional->setEditor( 'core:unittest' );
 
-		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'product.php';
-
-		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
-		}
-
-		$this->createData( $testdata );
+		$this->createData( $this->getData() );
 
 		$this->status( 'done' );
 	}
@@ -70,7 +64,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function createData( array $testdata )
 	{
-		$manager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
+		$manager = $this->getManager();
 		$manager->begin();
 
 		$domains = ['attribute', 'media', 'price', 'product', 'tag', 'text'];
@@ -80,12 +74,12 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $testdata['product'] as $key => $entry )
 		{
-			if( !isset( $typeIds['product/type'][$entry['product.typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product type ID found for "%1$s"', $entry['product.typeid'] ) );
+			if( !isset( $typeIds['product/type'][$entry['product.type']] ) ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No product type ID found for "%1$s"', $entry['product.type'] ) );
 			}
 
-			$entry['product.typeid'] = $typeIds['product/type'][$entry['product.typeid']];
-			$item = $manager->createItem();
+			list( $domain, $code ) = explode( '/', $entry['product.type'] );
+			$item = $manager->createItem( $code, $domain );
 			$item->fromArray( $entry );
 
 			$refItems['product/' . $item->getCode()] = $item;
@@ -121,14 +115,14 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 				foreach( (array) $entry[$domain] as $data )
 				{
-					if( !isset( $typeIds['product/lists/type'][$data['product.lists.typeid']] ) )
+					if( !isset( $typeIds['product/lists/type'][$data['product.lists.type']] ) )
 					{
-						$msg = sprintf( 'No product list type ID found for "%1$s"', $data['product.lists.typeid'] );
+						$msg = sprintf( 'No product list type ID found for "%1$s"', $data['product.lists.type'] );
 						throw new \Aimeos\MW\Setup\Exception( $msg );
 					}
 
-					$data['product.lists.typeid'] = $typeIds['product/lists/type'][$data['product.lists.typeid']];
-					$listItem = $manager->createItem();
+					list( $domain, $code ) = explode( '/', $data['product.lists.type'] );
+					$listItem = $manager->createItem( $code, $domain );
 					$listItem->fromArray( $data );
 
 					$refItem = ( isset( $refItems[$data['product.lists.refid']] ) ? $refItems[$data['product.lists.refid']] : null );
@@ -158,14 +152,14 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( (array) $entry['product/property'] as $data )
 			{
-				if( !isset( $typeIds['product/property/type'][$data['product.property.typeid']] ) )
+				if( !isset( $typeIds['product/property/type'][$data['product.property.type']] ) )
 				{
-					$msg = sprintf( 'No product property type ID found for "%1$s"', $data['product.property.typeid'] );
+					$msg = sprintf( 'No product property type ID found for "%1$s"', $data['product.property.type'] );
 					throw new \Aimeos\MW\Setup\Exception( $msg );
 				}
 
-				$data['product.property.typeid'] = $typeIds['product/property/type'][$data['product.property.typeid']];
-				$propItem = $manager->createItem();
+				list( $domain, $code ) = explode( '/', $data['product.property.type'] );
+				$propItem = $manager->createItem( $code, $domain );
 				$propItem->fromArray( $data );
 
 				$item->addPropertyItem( $propItem );
@@ -173,6 +167,33 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return $item;
+	}
+
+
+	/**
+	 * Returns the test data
+	 *
+	 * @return array Multi-dimensional associative array
+	 */
+	protected function getData()
+	{
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'product.php';
+
+		if( ( $testdata = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for product domain', $path ) );
+		}
+
+		return $testdata;
+	}
+
+	/**
+	 * Returns the product manager implementation
+	 *
+	 * @return \Aimeos\MShop\Common\Manager\Iface Product manager object
+	 */
+	protected function getManager()
+	{
+		return \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 	}
 
 
