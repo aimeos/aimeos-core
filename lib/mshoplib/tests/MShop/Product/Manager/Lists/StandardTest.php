@@ -318,7 +318,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 4 );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 4, count( $results ) );
-		$this->assertEquals( 16, $total );
+		$this->assertEquals( 15, $total );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
