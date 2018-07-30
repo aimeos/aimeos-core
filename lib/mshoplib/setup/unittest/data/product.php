@@ -7,10 +7,10 @@
 
 return array(
 	'product/type' => array(
+		'product/bundle' => array( 'domain' => 'product', 'code' => 'bundle', 'label' => 'Bundle', 'status' => 1 ),
 		'product/default' => array( 'domain' => 'product', 'code' => 'default', 'label' => 'Article', 'status' => 1 ),
 		'product/select' => array( 'domain' => 'product', 'code' => 'select', 'label' => 'Selection', 'status' => 1 ),
-		'product/rebate' => array( 'domain' => 'product', 'code' => 'rebate', 'label' => 'Rebate', 'status' => 1 ),
-		'product/bundle' => array( 'domain' => 'product', 'code' => 'bundle', 'label' => 'Bundle', 'status' => 1 ),
+		'product/voucher' => array( 'domain' => 'product', 'code' => 'voucher', 'label' => 'Voucher', 'status' => 1 ),
 	),
 
 	'product' => array(
@@ -18,7 +18,7 @@ return array(
 		'product/CNC' => array( 'typeid' => 'product/default', 'label' => 'Cafe Noire Cappuccino', 'code' => 'CNC', 'config' => array( 'css-class' => 'sale' ), 'status' => 1 ),
 		'product/U:MD' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Monetary rebate', 'code' => 'U:MD', 'status' => 0 ),
 		'product/U:SD' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Shipping rebate', 'code' => 'U:SD', 'status' => 0 ),
-		'product/U:PD' => array( 'typeid' => 'product/rebate', 'label' => 'Unittest: Present rebate', 'code' => 'U:PD', 'status' => 0 ),
+		'product/U:PD' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Present rebate', 'code' => 'U:PD', 'status' => 0 ),
 		'product/U:WH' => array( 'typeid' => 'product/default', 'label' => 'Unittest: Present rebate', 'code' => 'U:WH', 'status' => 0 ),
 		'product/ABCD' => array( 'typeid' => 'product/default', 'label' => '16 discs', 'code' => 'ABCD', 'status' => 1 ),
 		'product/EFGH' => array( 'typeid' => 'product/default', 'label' => '16 discs', 'code' => 'EFGH', 'status' => 1 ),
