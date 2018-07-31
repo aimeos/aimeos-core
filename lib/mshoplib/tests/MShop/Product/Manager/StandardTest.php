@@ -111,6 +111,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSaveItems()
+	{
+		$search = $this->object->createSearch();
+		$conditions = array(
+				$search->compare( '==', 'product.code', 'CNC' ),
+				$search->compare( '==', 'product.editor', $this->editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$items = $this->object->searchItems( $search );
+
+		$this->object->saveItems( $items );
+	}
+
+
 	public function testSaveUpdateDeleteItem()
 	{
 		$search = $this->object->createSearch();
