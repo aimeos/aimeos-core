@@ -42,15 +42,21 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
-		if( !( $this->additional instanceof $iface ) ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
-		}
+		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
 
 		$this->msg( 'Adding product test data', 0 );
 		$this->additional->setEditor( 'core:unittest' );
 
+		$config = $this->additional->getConfig();
+		$name = $config->get( 'mshop/product/manager/name' );
+
+		\Aimeos\MShop\Factory::clear();
+		$config->set( 'mshop/product/manager/name', 'Standard' );
+
 		$this->createData( $this->getData() );
+
+		$config->set( 'mshop/product/manager/name', $name );
+		\Aimeos\MShop\Factory::clear();
 
 		$this->status( 'done' );
 	}
@@ -64,7 +70,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function createData( array $testdata )
 	{
-		$manager = $this->getManager();
+		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
 		$manager->begin();
 
 		$domains = ['attribute', 'media', 'price', 'product', 'tag', 'text'];
@@ -184,16 +190,6 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return $testdata;
-	}
-
-	/**
-	 * Returns the product manager implementation
-	 *
-	 * @return \Aimeos\MShop\Common\Manager\Iface Product manager object
-	 */
-	protected function getManager()
-	{
-		return \Aimeos\MShop\Product\Manager\Factory::createManager( $this->additional, 'Standard' );
 	}
 
 
