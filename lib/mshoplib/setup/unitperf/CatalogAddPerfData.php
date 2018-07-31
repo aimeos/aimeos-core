@@ -127,7 +127,6 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$process->wait();
 
-
 		$this->status( 'done' );
 	}
 
@@ -229,6 +228,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$modifier = $this->attributes['modifier'];
 		$material = $this->attributes['material'];
+		$items = [];
 
 		for( $i = 0; $i < $this->numCatProducts; $i++ )
 		{
@@ -246,9 +246,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			$item = $this->addProductVariants( $item, $i );
 			$item = $this->addProductSuggestions( $item, $catItems );
 
-			$item = $productManager->saveItem( $item );
-
-			$this->addCatalogProduct( $catItems, $item, $i );
+			$items[] = $item;
 
 			next( $articles );
 			if( current( $articles ) === false )
@@ -264,6 +262,12 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					}
 				}
 			}
+		}
+
+		$productManager->saveItems( $items );
+
+		foreach( $items as $idx => $item ) {
+			$this->addCatalogProduct( $catItems, $item, $idx );
 		}
 
 		$productManager->commit();

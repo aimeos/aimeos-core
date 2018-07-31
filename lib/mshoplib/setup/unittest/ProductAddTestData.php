@@ -77,6 +77,7 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 		$typeIds = $this->getTypeIds( $testdata, ['product/type', 'product/lists/type', 'product/property/type'] );
 
 		$refItems = $this->getRefItems( ['attribute', 'media', 'price', 'tag', 'text'] );
+		$items = [];
 
 		foreach( $testdata['product'] as $key => $entry )
 		{
@@ -91,10 +92,10 @@ class ProductAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$refItems['product/' . $item->getCode()] = $item;
 
 			$item = $this->addPropertyData( $item, $entry, $typeIds );
-			$item = $this->addListData( $item, $entry, $typeIds, $refItems, $domains );
-
-			$manager->saveItem( $item );
+			$items[] = $this->addListData( $item, $entry, $typeIds, $refItems, $domains );
 		}
+
+		$manager->saveItems( $items );
 
 		$manager->commit();
 	}
