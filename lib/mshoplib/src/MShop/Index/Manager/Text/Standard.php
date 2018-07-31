@@ -650,6 +650,7 @@ class Standard
 	 *
 	 * @param \Aimeos\MW\Criteria\Iface $search Search criteria
 	 * @return array Associative list of the product ID as key and the product text as value
+	 * @deprecated 2019.01
 	 */
 	public function searchTexts( \Aimeos\MW\Criteria\Iface $search )
 	{
