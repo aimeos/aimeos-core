@@ -44,7 +44,8 @@ abstract class Base
 	 */
 	public static function checkClassList( $name, array $list )
 	{
-		foreach( $list as $object ) {
+		foreach( $list as $object )
+		{
 			if( ($object instanceof $name) === false ) {
 				throw new \Aimeos\MW\Common\Exception( sprintf( 'Object doesn\'t implement "%1$s"', $name ) );
 			}
