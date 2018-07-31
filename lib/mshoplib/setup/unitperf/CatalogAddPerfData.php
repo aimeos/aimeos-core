@@ -76,7 +76,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Adding catalog performance data', 0 );
+		$this->msg( 'Adding catalog performance data', 0 ); $this->status( '' );
 
 
 		$fcn = function( \Aimeos\MW\Setup\Task\Iface $self, $parentId, $num, $idx ) {
@@ -103,6 +103,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			};
 
 			$treeFcn( [], $parentId, $idx, $this->numCatLevels - 1 );
+
+			$this->msg( '- Subtree ' . $idx, 1 ); $this->status( 'done' );
 		};
 
 
