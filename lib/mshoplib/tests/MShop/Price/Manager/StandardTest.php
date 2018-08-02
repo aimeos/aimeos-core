@@ -90,7 +90,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Price\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Common\Exception' );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 
@@ -294,7 +294,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetLowestPriceWrongItem()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( '\Aimeos\MW\Common\Exception' );
 		$this->object->getLowestPrice( array( new \stdClass() ), 1 );
 	}
 }

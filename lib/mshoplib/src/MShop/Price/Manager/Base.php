@@ -69,11 +69,7 @@ abstract class Base
 
 		foreach( $priceItems as $priceItem )
 		{
-			$iface = '\\Aimeos\\MShop\\Price\\Item\\Iface';
-
-			if( ( $priceItem instanceof $iface ) === false ) {
-				throw new \Aimeos\MShop\Price\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-			}
+			self::checkClass( '\\Aimeos\\MShop\\Price\\Item\\Iface', $priceItem );
 
 			if( $currencyId !== null && $currencyId !== $priceItem->getCurrencyId() ) {
 				continue;

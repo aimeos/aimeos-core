@@ -33,10 +33,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn,
 		$additional = null, array $paths = [] )
 	{
-		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
-		if( !( $additional instanceof $iface ) ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
-		}
+		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
 
 		parent::__construct( $schema, $conn, $additional, $paths );
 	}
@@ -114,7 +111,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->numCatLevels = $config->get( 'setup/unitperf/num-catlevels', 1 );
 		$this->numCategories = $config->get( 'setup/unitperf/num-categories', 10 );
 		$this->numCatProducts = $config->get( 'setup/unitperf/num-catproducts', 100 );
-		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 10 );
+		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 1000 );
 
 		$process = $this->additional->getProcess();
 		$catalogRootItem = $this->addCatalogItem( 'home' );

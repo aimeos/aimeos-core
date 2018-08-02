@@ -118,9 +118,7 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 
 		$subManager = new $classname( $this->getContext() );
 
-		if( ( $subManager instanceof $interface ) === false ) {
-			throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
-		}
+		self::checkClass( $interface, $subManager );
 
 		return $subManager;
 	}

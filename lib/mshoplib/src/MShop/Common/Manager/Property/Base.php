@@ -107,10 +107,7 @@ abstract class Base
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = '\\Aimeos\\MShop\\Common\\Item\\Property\\Iface';
-		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Common\\Item\\Property\\Iface', $item );
 
 		if( !$item->isModified() ) {
 			return $item;

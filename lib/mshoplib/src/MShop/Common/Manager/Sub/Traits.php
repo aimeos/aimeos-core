@@ -42,8 +42,6 @@ trait Traits
 	protected function addDecorators( \Aimeos\MShop\Context\Item\Iface $context,
 		\Aimeos\MShop\Common\Manager\Iface $manager, array $decorators, $classprefix )
 	{
-		$iface = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\Iface';
-
 		foreach( $decorators as $name )
 		{
 			if( ctype_alnum( $name ) === false ) {
@@ -58,9 +56,7 @@ trait Traits
 
 			$manager = new $classname( $manager, $context );
 
-			if( !( $manager instanceof $iface ) ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
-			}
+			\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\Iface', $manager );
 		}
 
 		return $manager;
@@ -171,9 +167,7 @@ trait Traits
 
 			$subManager = new $classname( $this->context );
 
-			if( ( $subManager instanceof $interface ) === false ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface ) );
-			}
+			\Aimeos\MW\Common\Base::checkClass( $interface, $subManager );
 
 			$this->subManagers[$key] = $this->addManagerDecorators( $subManager, $manager, $domain );
 		}

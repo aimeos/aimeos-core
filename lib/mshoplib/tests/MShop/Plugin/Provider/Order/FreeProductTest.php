@@ -89,7 +89,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Plugin\Exception' );
+		$this->setExpectedException( '\\Aimeos\\MW\\Common\\Exception' );
 		$this->object->update( $this->order, 'addProduct.after' );
 	}
 

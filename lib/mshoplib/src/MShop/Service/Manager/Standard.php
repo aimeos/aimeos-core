@@ -311,10 +311,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = '\\Aimeos\\MShop\\Service\\Item\\Iface';
-		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Service\\Item\\Iface', $item );
 
 		if( !$item->isModified() ) {
 			return $this->saveListItems( $item, 'service' );

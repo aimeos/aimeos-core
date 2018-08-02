@@ -324,10 +324,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = '\\Aimeos\\MShop\\Order\\Item\\Iface';
-		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Iface', $item );
 
 		if( $item->getBaseId() === null ) {
 			throw new \Aimeos\MShop\Order\Exception( 'Required order base ID is missing' );

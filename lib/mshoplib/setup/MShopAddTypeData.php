@@ -55,10 +55,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process()
 	{
-		$iface = '\\Aimeos\\MShop\\Context\\Item\\Iface';
-		if( !( $this->additional instanceof $iface ) ) {
-			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Additionally provided object is not of type "%1$s"', $iface ) );
-		}
+		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
 
 		$sitecode = $this->additional->getLocale()->getSite()->getCode();
 		$this->msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0 );
@@ -118,59 +115,11 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param string $domain String of domain and sub-domains, e.g. "product" or "order/base/service"
 	 * @return \Aimeos\MShop\Common\Manager\Iface Domain manager
-	 * @throws \Aimeos\Controller\Frontend\Exception If domain string is invalid or no manager can be instantiated
+	 * @throws \Aimeos\MShop\Exception If domain string is invalid or no manager can be instantiated
 	 */
 	protected function getDomainManager( $domain )
 	{
-		$domain = strtolower( trim( $domain, "/ \n\t\r\0\x0B" ) );
-
-		if( strlen( $domain ) === 0 ) {
-			throw new \RuntimeException( 'An empty domain is invalid' );
-		}
-
-		if( !isset( $this->domainManagers[$domain] ) )
-		{
-			$parts = explode( '/', $domain );
-
-			foreach( $parts as $part )
-			{
-				if( ctype_alnum( $part ) === false ) {
-					throw new \RuntimeException( sprintf( 'Invalid domain "%1$s"', $domain ) );
-				}
-			}
-
-			if( ( $domainname = array_shift( $parts ) ) === null ) {
-				throw new \RuntimeException( 'An empty domain is invalid' );
-			}
-
-
-			if( !isset( $this->domainManagers[$domainname] ) )
-			{
-				$iface = '\\Aimeos\\MShop\\Common\\Manager\\Iface';
-				$factory = '\\Aimeos\\MShop\\' . ucwords( $domainname ) . '\\Manager\\Factory';
-				$manager = call_user_func_array( $factory . '::createManager', array( $this->additional ) );
-
-				if( !( $manager instanceof $iface ) ) {
-					throw new \RuntimeException( sprintf( 'No factory "%1$s" found', $factory ) );
-				}
-
-				$this->domainManagers[$domainname] = $manager;
-			}
-
-
-			foreach( $parts as $part )
-			{
-				$tmpname = $domainname . '/' . $part;
-
-				if( !isset( $this->domainManagers[$tmpname] ) ) {
-					$this->domainManagers[$tmpname] = $this->domainManagers[$domainname]->getSubManager( $part );
-				}
-
-				$domainname = $tmpname;
-			}
-		}
-
-		return $this->domainManagers[$domain];
+		return \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
 	}
 
 

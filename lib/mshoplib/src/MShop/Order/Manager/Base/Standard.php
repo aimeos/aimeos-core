@@ -561,10 +561,7 @@ class Standard extends Base
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
-		if( !( $item instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Order\Exception( sprintf( 'Object is not of required type "%1$s"', $iface ) );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $item );
 
 		if( !$item->isModified() && !$item->getLocale()->isModified() ) {
 			return $item;

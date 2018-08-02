@@ -60,11 +60,7 @@ class ProductStock
 			return true;
 		}
 
-		if( !( $order instanceof \Aimeos\MShop\Order\Item\Base\Iface ) )
-		{
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Object is not of required type "%1$s"' );
-			throw new \Aimeos\MShop\Plugin\Exception( sprintf( $msg, '\Aimeos\MShop\Order\Item\Base\Iface' ) );
-		}
+		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $order );
 
 		if( ( $outOfStock = $this->checkStock( $order ) ) !== [] )
 		{

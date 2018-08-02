@@ -119,9 +119,7 @@ trait Traits
 	{
 		foreach( $items as $item )
 		{
-			if( !( $item instanceof \Aimeos\MShop\Common\Item\Lists\Iface ) ) {
-				throw new \Aimeos\MShop\Exception( sprintf( 'Not a list item' ) );
-			}
+			\Aimeos\MW\Common\Base::checkClass( '\Aimeos\MShop\Common\Item\Lists\Iface', $item );
 
 			$refItem = ( $all === true ? $item->getRefItem() : null );
 			$this->deleteListItem( $item->getDomain(), $item, $refItem );

@@ -18,7 +18,7 @@ namespace Aimeos\MW\Common\Manager;
  * @package MW
  * @subpackage Common
  */
-abstract class Base
+abstract class Base extends \Aimeos\MW\Common\Base
 {
 	/**
 	 * Returns a sorted list of required criteria keys.

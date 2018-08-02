@@ -238,7 +238,6 @@ abstract class Base
 			throw new \Aimeos\MShop\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Iface';
 		$classname = '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\' . $name;
 
 		if( class_exists( $classname ) === false ) {
@@ -247,9 +246,7 @@ abstract class Base
 
 		$helper = new $classname( $options );
 
-		if( !( $helper instanceof $iface ) ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface ) );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Common\\Item\\Helper\\Password\\Iface', $helper );
 
 		$this->helper = $helper;
 

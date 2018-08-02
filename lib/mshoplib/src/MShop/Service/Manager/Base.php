@@ -46,7 +46,6 @@ abstract class Base
 			throw new \Aimeos\MShop\Service\Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
-		$interface = '\\Aimeos\\MShop\\Service\\Provider\\Factory\\Iface';
 		$classname = '\\Aimeos\\MShop\\Service\\Provider\\' . $type . '\\' . $provider;
 
 		if( class_exists( $classname ) === false ) {
@@ -57,11 +56,7 @@ abstract class Base
 		$config = $context->getConfig();
 		$provider = new $classname( $context, $item );
 
-		if( ( $provider instanceof $interface ) === false )
-		{
-			$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $interface );
-			throw new \Aimeos\MShop\Service\Exception( $msg );
-		}
+		self::checkClass( '\\Aimeos\\MShop\\Service\\Provider\\Factory\\Iface', $provider );
 
 		/** mshop/service/provider/delivery/decorators
 		 * Adds a list of decorators to all delivery provider objects automatcally
@@ -126,7 +121,6 @@ abstract class Base
 	protected function addServiceDecorators( \Aimeos\MShop\Service\Item\Iface $serviceItem,
 		\Aimeos\MShop\Service\Provider\Iface $provider, array $names )
 	{
-		$iface = '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Iface';
 		$classprefix = '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\';
 
 		foreach( $names as $name )
@@ -143,10 +137,7 @@ abstract class Base
 
 			$provider = new $classname( $provider, $this->getContext(), $serviceItem );
 
-			if( ( $provider instanceof $iface ) === false ) {
-				$msg = sprintf( 'Class "%1$s" does not implement interface "%2$s"', $classname, $iface );
-				throw new \Aimeos\MShop\Service\Exception( $msg );
-			}
+			self::checkClass( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Iface', $provider );
 		}
 
 		return $provider;
