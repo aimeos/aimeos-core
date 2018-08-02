@@ -241,7 +241,6 @@ class Standard
 		try
 		{
 			$id = $item->getId();
-			$date = date( 'Y-m-d H:i:s' );
 
 			if( $id === null )
 			{
@@ -328,16 +327,16 @@ class Standard
 			$stmt->bind( 5, $item->getDateStart() );
 			$stmt->bind( 6, $item->getDateEnd() );
 			$stmt->bind( 7, json_encode( $item->getConfig() ) );
-			$stmt->bind( 8, $date ); // mtime
+			$stmt->bind( 8, $item->getTarget() );
 			$stmt->bind( 9, $context->getEditor() );
-			$stmt->bind( 10, $item->getTarget() );
-			$stmt->bind( 11, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 10, date( 'Y-m-d H:i:s' ) ); // mtime
+			$stmt->bind( 11, $item->getTimeCreated() );
+			$stmt->bind( 12, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
-			if( $id !== null ) {
-				$stmt->bind( 12, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			if( $id !== null )
+			{
+				$stmt->bind( 13, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); //so item is no longer modified
-			} else {
-				$stmt->bind( 12, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

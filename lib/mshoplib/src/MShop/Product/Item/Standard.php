@@ -345,6 +345,39 @@ class Standard
 
 
 	/**
+	 * Returns the create date of the item
+	 *
+	 * @return string ISO date in YYYY-MM-DD hh:mm:ss format
+	 */
+	public function getTimeCreated()
+	{
+		if( isset( $this->values['product.ctime'] ) ) {
+			return (string) $this->values['product.ctime'];
+		}
+
+		return date( 'Y-m-d H:i:s' );
+	}
+
+
+	/**
+	 * Sets the create date of the item
+	 *
+	 * @param string|null $value ISO date in YYYY-MM-DD hh:mm:ss format
+	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
+	 */
+	public function setTimeCreated( $value )
+	{
+		if( (string) $value !== $this->getTimeCreated() )
+		{
+			$this->values['product.ctime'] = (string) $value;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -376,6 +409,10 @@ class Standard
 	 */
 	public function fromArray( array $list )
 	{
+		if( isset( $list['product.ctime'] ) ) {
+			$this->setTimeCreated( $list['product.ctime'] );
+		}
+
 		$unknown = [];
 		$list = parent::fromArray( $list );
 		unset( $list['product.type'], $list['product.typename'] );
@@ -423,6 +460,7 @@ class Standard
 		{
 			$list['product.typeid'] = $this->getTypeId();
 			$list['product.target'] = $this->getTarget();
+			$list['product.ctime'] = $this->getTimeCreated();
 		}
 
 		return $list;

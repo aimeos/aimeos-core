@@ -296,6 +296,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetTimeCreated()
+	{
+		$return = $this->object->setTimeCreated( '2010-05-22 06:22:22' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Product\Item\Iface', $return );
+		$this->assertEquals( '2010-05-22 06:22:22', $this->object->getTimeCreated() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testIsAvailable()
 	{
 		$this->assertFalse( $this->object->isAvailable() );

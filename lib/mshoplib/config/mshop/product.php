@@ -389,7 +389,7 @@ return array(
 				'ansi' => '
 					INSERT INTO "mshop_product" (
 						"typeid", "code", "label", "status", "start", "end",
-						"config", "mtime", "editor", "target", "siteid", "ctime"
+						"config", "target", "editor", "mtime", "ctime", "siteid"
 					) VALUES (
 						?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 					)
@@ -398,8 +398,8 @@ return array(
 			'update' => array(
 				'ansi' => '
 					UPDATE "mshop_product"
-					SET "typeid" = ?, "code" = ?, "label" = ?, "status" = ?,
-						"start" = ?, "end" = ?, "config" = ?, "mtime" = ?, "editor" = ?, "target" = ?
+					SET "typeid" = ?, "code" = ?, "label" = ?, "status" = ?, "start" = ?, "end" = ?,
+					"config" = ?, "target" = ?, "editor" = ?, "mtime" = ?, "ctime" = ?
 					WHERE "siteid" = ? AND "id" = ?
 				'
 			),
