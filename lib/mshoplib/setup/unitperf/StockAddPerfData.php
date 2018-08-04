@@ -34,13 +34,6 @@ class StockAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	public function __clone()
-	{
-		$this->additional = clone $this->additional;
-		$this->additional->__sleep();
-	}
-
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
@@ -71,19 +64,20 @@ class StockAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding stock performance data', 0 );
 
 
-		$fcn = function( \Aimeos\MW\Setup\Task\Iface $self, $max, $idx ) {
+		$fcn = function( $max, $idx ) {
 
 			\Aimeos\MShop\Factory::clear();
-			$self->addStock( $max, $idx );
+			$this->addStock( $max, $idx );
 		};
 
 
 		$typeManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'stock/type' );
 		$this->typeId = $typeManager->findItem( 'default', [], 'product' )->getId();
 		$process = $this->additional->getProcess();
+		$this->additional->__sleep();
 
 		for( $i = 0; $i < 4; $i++ ) {
-			$process->start( $fcn, [$this, 4, $i] );
+			$process->start( $fcn, [4, $i] );
 		}
 
 		$process->wait();

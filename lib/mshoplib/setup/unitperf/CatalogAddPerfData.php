@@ -39,13 +39,6 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	public function __clone()
-	{
-		$this->additional = clone $this->additional;
-		$this->additional->__sleep();
-	}
-
-
 	/**
 	 * Returns the list of task names which this task depends on.
 	 *
@@ -76,13 +69,13 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding catalog performance data', 0 ); $this->status( '' );
 
 
-		$fcn = function( \Aimeos\MW\Setup\Task\Iface $self, $parentId, $num, $idx ) {
+		$fcn = function( $parentId, $num, $idx ) {
 
 			\Aimeos\MShop\Factory::clear();
 
-			$treeFcn = function( array $parents, $parentId, $label, $level ) use ( &$treeFcn, $self, $num ) {
+			$treeFcn = function( array $parents, $parentId, $label, $level ) use ( &$treeFcn, $num ) {
 
-				$catItem = $self->addCatalogItem( $label, $parentId );
+				$catItem = $this->addCatalogItem( $label, $parentId );
 				array_unshift( $parents, $catItem );
 
 				if( $level > 0 )
@@ -93,10 +86,10 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 				}
 				else
 				{
-					$self->addProductItems( $parents, $label );
+					$this->addProductItems( $parents, $label );
 				}
 
-				$self->save( 'catalog', $catItem );
+				$this->save( 'catalog', $catItem );
 			};
 
 			$treeFcn( [], $parentId, $idx, $this->numCatLevels - 1 );
@@ -117,18 +110,17 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$catalogRootItem = $this->addCatalogItem( 'home' );
 
 		$num = round( pow( $this->numCategories, 1 / $this->numCatLevels ) / 5 ) * 5;
+		$this->additional->__sleep();
 
 		for( $i = 1; $i <= round( $this->numCategories / pow( $num, $this->numCatLevels - 1 ) ); $i++ ) {
-			$process->start( $fcn, [$this, $catalogRootItem->getId(), $num, $i] );
+			$process->start( $fcn, [$catalogRootItem->getId(), $num, $i] );
 		}
 
 		$process->wait();
-
-		$this->status( 'done' );
 	}
 
 
-	public function addCatalogItem( $code, $parentId = null )
+	protected function addCatalogItem( $code, $parentId = null )
 	{
 		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog' );
 
@@ -203,7 +195,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	public function addProductItems( array $catItems = [], $label )
+	protected function addProductItems( array $catItems = [], $label )
 	{
 		$articles = array(
 			'shirt', 'skirt', 'jacket', 'pants', 'socks', 'blouse', 'slip', 'sweater', 'dress', 'top',
@@ -450,7 +442,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	public function save( $domain, $item )
+	protected function save( $domain, $item )
 	{
 		return \Aimeos\MShop\Factory::createManager( $this->additional, $domain )->saveItem( $item );
 	}
