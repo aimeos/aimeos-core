@@ -22,7 +22,7 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 {
 	private $connection;
 	private $txnumber = 0;
-	private $stmts = array();
+	private $stmts = [];
 
 
 	/**
@@ -102,32 +102,19 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 
 
 	/**
-	 * Checks if a transaction is currently running
-	 *
-	 * @return boolean True if transaction is currently running, false if not
-	 */
-	public function inTransaction()
-	{
-		if( $this->txnumber > 0 ) {
-			return true;
-		}
-
-		return false;
-	}
-
-
-	/**
 	 * Starts a transaction for this connection.
 	 * Transactions can't be nested and a new transaction can only be started
 	 * if the previous transaction was committed or rolled back before.
 	 */
 	public function begin()
 	{
-		if( $this->txnumber++ === 0 )
+		if( $this->txnumber === 0 )
 		{
 			if( $this->connection->beginTransaction() === false ) {
 				throw new \Aimeos\MW\DB\Exception( 'Unable to start new transaction' );
 			}
+
+			$this->txnumber++;
 		}
 	}
 
@@ -137,11 +124,13 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 */
 	public function commit()
 	{
-		if( --$this->txnumber === 0 )
+		if( $this->txnumber === 1 )
 		{
 			if( $this->connection->commit() === false ) {
 				throw new \Aimeos\MW\DB\Exception( 'Failed to commit transaction' );
 			}
+
+			$this->txnumber--;
 		}
 	}
 
@@ -151,18 +140,13 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 */
 	public function rollback()
 	{
-		try
+		if( $this->txnumber === 1 )
 		{
-			if( --$this->txnumber === 0 )
-			{
-				if( $this->connection->rollBack() === false ) {
-					throw new \Aimeos\MW\DB\Exception( 'Failed to roll back transaction' );
-				}
+			if( $this->connection->rollBack() === false ) {
+				throw new \Aimeos\MW\DB\Exception( 'Failed to roll back transaction' );
 			}
-		}
-		catch( \PDOException $e )
-		{
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode(), $e->errorInfo );
+
+			$this->txnumber--;
 		}
 	}
 }

@@ -20,8 +20,7 @@ namespace Aimeos\MW\DB\Connection;
 class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connection\Iface
 {
 	private $connection;
-	private $txnumber = 0;
-	private $stmts = array();
+	private $stmts = [];
 
 
 	/**
@@ -52,7 +51,6 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 
 		unset( $this->connection );
 		$this->connection = \Doctrine\DBAL\DriverManager::getConnection( $this->getParameters() );
-		$this->txnumber = 0;
 
 		foreach( $this->stmts as $stmt ) {
 			$this->create( $stmt )->execute()->finish();
@@ -103,21 +101,6 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 
 
 	/**
-	 * Checks if a transaction is currently running
-	 *
-	 * @return boolean True if transaction is currently running, false if not
-	 */
-	public function inTransaction()
-	{
-		if( $this->txnumber > 0 ) {
-			return true;
-		}
-
-		return false;
-	}
-
-
-	/**
 	 * Starts a transaction for this connection.
 	 *
 	 * Transactions can't be nested and a new transaction can only be started
@@ -125,11 +108,10 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function begin()
 	{
-		if( $this->txnumber++ === 0 )
-		{
-			if( $this->connection->beginTransaction() === false ) {
-				throw new \Aimeos\MW\DB\Exception( 'Unable to start new transaction' );
-			}
+		try {
+			$this->connection->beginTransaction();
+		} catch( \Exception $e ) {
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 	}
 
@@ -139,11 +121,10 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function commit()
 	{
-		if( --$this->txnumber === 0 )
-		{
-			if( $this->connection->commit() === false ) {
-				throw new \Aimeos\MW\DB\Exception( 'Failed to commit transaction' );
-			}
+		try {
+			$this->connection->commit();
+		} catch( \Exception $e ) {
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 	}
 
@@ -153,17 +134,9 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function rollback()
 	{
-		try
-		{
-			if( --$this->txnumber === 0 )
-			{
-				if( $this->connection->rollBack() === false ) {
-					throw new \Aimeos\MW\DB\Exception( 'Failed to roll back transaction' );
-				}
-			}
-		}
-		catch( \Exception $e )
-		{
+		try {
+			$this->connection->rollBack();
+		} catch( \Exception $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 	}

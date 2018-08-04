@@ -51,6 +51,16 @@ class PDO implements \Aimeos\MW\DB\Manager\Iface
 
 
 	/**
+	 * Reset when cloning the object
+	 */
+	public function __clone()
+	{
+		$this->connections = [];
+		$this->count = [];
+	}
+
+
+	/**
 	 * Clean up the objects inside
 	 */
 	public function __sleep()

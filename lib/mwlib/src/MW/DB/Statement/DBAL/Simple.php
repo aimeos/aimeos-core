@@ -85,17 +85,10 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			throw new \Aimeos\MW\DB\Exception( sprintf( $msg, count( $this->binds ), implode( '?', $this->parts ) ) );
 		}
 
-		try
-		{
+		try {
 			$result = $this->exec();
-		}
-		catch( \PDOException $e )
-		{
-			try {
-				$result = $this->reconnect( $e )->exec();
-			} catch( \PDOException $e ) {
-				throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
-			}
+		} catch( \PDOException $e ) {
+			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
 
 		return new \Aimeos\MW\DB\Result\PDO( $result );

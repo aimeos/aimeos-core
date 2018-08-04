@@ -172,22 +172,4 @@ abstract class Base
 
 		return $result;
 	}
-
-
-	/**
-	 * Reconnects to the database server if not in a transaction
-	 *
-	 * @param \Exception $e Exception to throw if a transaction is running
-	 * @return \Aimeos\MW\DB\Statement\Iface Object for method chaining
-	 * @throws \Exception If a transaction is running
-	 */
-	protected function reconnect( \Exception $e )
-	{
-		if( $this->conn->inTransaction() ) {
-			throw $e;
-		}
-
-		$this->conn->connect();
-		return $this;
-	}
 }

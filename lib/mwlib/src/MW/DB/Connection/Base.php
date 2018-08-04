@@ -78,6 +78,7 @@ abstract class Base
 	 * Checks if a transaction is currently running
 	 *
 	 * @return boolean True if transaction is currently running, false if not
+	 * @deprecated 2019.01 Unused
 	 */
 	public function inTransaction()
 	{
