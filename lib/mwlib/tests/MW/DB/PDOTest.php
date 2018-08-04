@@ -135,7 +135,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$stmt = $conn->create( $sqlinsert );
 		$stmt->execute()->finish();
 
-		$conn->rollback();
+		$conn->commit();
 		$conn->commit();
 
 		$result = $conn->create( $sqlselect )->execute();
@@ -166,7 +166,7 @@ class PDOTest extends \PHPUnit\Framework\TestCase
 		$stmt = $conn->create( $sqlinsert );
 		$stmt->execute()->finish();
 
-		$conn->commit();
+		$conn->rollback();
 		$conn->rollback();
 
 		$result = $conn->create( $sqlselect )->execute();
