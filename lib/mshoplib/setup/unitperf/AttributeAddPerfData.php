@@ -19,7 +19,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $additional );
 
 		parent::__construct( $schema, $conn, $additional );
 	}
