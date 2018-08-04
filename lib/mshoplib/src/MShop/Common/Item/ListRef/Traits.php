@@ -19,8 +19,8 @@ namespace Aimeos\MShop\Common\Item\ListRef;
  */
 trait Traits
 {
-	private $listItems;
-	private $listRefItems;
+	private $listItems = [];
+	private $listRefItems = [];
 	private $listRmItems = [];
 	private $listPrepared = false;
 	private $listMax = 0;
@@ -63,16 +63,16 @@ trait Traits
 	 */
 	public function addListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
 	{
-		$id = $listItem->getId() ?: 'tmp-' . $this->listMax++;
-		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
-
 		if( $refItem !== null )
 		{
-			$id = $refItem->getId() ?: 'tmp-' . $this->listMax++;
+			$id = $refItem->getId() ?: '_' . $this->listMax;
 			$listItem->setRefId( $id );
 
 			$this->listRefItems[$domain][$id] = $refItem;
 		}
+
+		$id = $listItem->getId() ?: '_' . $this->listMax++;
+		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
 
 		return $this;
 	}
