@@ -65,7 +65,6 @@ class Standard implements \Aimeos\MShop\Context\Item\Iface
 	{
 		$this->cache = ( isset( $this->cache ) ? clone $this->cache : null );
 		$this->config = ( isset( $this->config ) ? clone $this->config : null );
-		$this->dbm = ( isset( $this->dbm ) ? clone $this->dbm : null );
 		$this->fsm = ( isset( $this->fsm ) ? clone $this->fsm : null );
 		$this->locale = ( isset( $this->locale ) ? clone $this->locale : null );
 		$this->logger = ( isset( $this->logger ) ? clone $this->logger : null );
