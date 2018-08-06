@@ -146,9 +146,10 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with referenced items
 	 * @param string $domain Domain of the calling manager
+	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item with updated referenced items
 	 */
-	protected function saveListItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $domain )
+	protected function saveListItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, $domain, $fetch = true )
 	{
 		$context = $this->getContext();
 		$rmListIds = $rmIds = $refManager = [];
@@ -203,7 +204,7 @@ trait Traits
 				}
 
 				$listItem->setParentId( $item->getId() );
-				$listManager->saveItem( $listItem );
+				$listManager->saveItem( $listItem, $fetch );
 			}
 
 

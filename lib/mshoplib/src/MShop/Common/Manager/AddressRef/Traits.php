@@ -53,9 +53,10 @@ trait Traits
 	 *
 	 * @param \Aimeos\MShop\Common\Item\AddressRef\Iface $item Item with referenced items
 	 * @param string $domain Domain of the calling manager
+	 * @param boolean $fetch True if the new ID should be returned in the item
 	 * @return \Aimeos\MShop\Common\Item\AddressRef\Iface Item with saved referenced items
 	 */
-	protected function saveAddressItems( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, $domain )
+	protected function saveAddressItems( \Aimeos\MShop\Common\Item\AddressRef\Iface $item, $domain, $fetch = true )
 	{
 		$manager = $this->getObject()->getSubManager( 'address' );
 		$manager->deleteItems( array_keys( $item->getAddressItemsDeleted() ) );
@@ -67,7 +68,7 @@ trait Traits
 			}
 
 			$addrItem->setParentId( $item->getId() );
-			$manager->saveItem( $addrItem );
+			$manager->saveItem( $addrItem, $fetch );
 		}
 
 		return $item;

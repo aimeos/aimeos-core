@@ -466,7 +466,7 @@ class Standard extends Base
 		self::checkClass( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $item );
 
 		if( !$item->isModified() ) {
-			return $this->saveListItems( $item, 'catalog' );
+			return $this->saveListItems( $item, 'catalog', $fetch );
 		}
 
 		$siteid = $this->getContext()->getLocale()->getSiteId();
@@ -490,7 +490,7 @@ class Standard extends Base
 			}
 		}
 
-		return $this->saveListItems( $item, 'catalog' );
+		return $this->saveListItems( $item, 'catalog', $fetch );
 	}
 
 
