@@ -767,7 +767,7 @@ class Standard
 
 		$types = array( 'coupon.code.siteid' => $this->searchConfig['coupon.code.siteid']['internaltype'] );
 		$translations = array( 'coupon.code.siteid' => 'siteid' );
-		$conditions = $search->getConditionString( $types, $translations );
+		$conditions = $search->getConditionSource( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();

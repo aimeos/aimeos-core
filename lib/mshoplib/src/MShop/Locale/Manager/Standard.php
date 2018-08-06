@@ -724,8 +724,8 @@ class Standard
 
 			$find = array( ':cond', ':order', ':columns', ':start', ':size' );
 			$replace = array(
-					$search->getConditionString( $types, $translations ),
-					$search->getSortationString( $types, $translations ),
+					$search->getConditionSource( $types, $translations ),
+					$search->getSortationSource( $types, $translations ),
 					( $columns ? ', ' . $columns : '' ),
 					$search->getSliceStart(),
 					$search->getSliceSize(),

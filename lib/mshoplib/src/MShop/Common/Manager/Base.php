@@ -702,7 +702,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$find = array( ':joins', ':cond', ':start', ':size' );
 		$replace = array(
 			implode( "\n", array_unique( $joins ) ),
-			$search->getConditionString( $types, $translations, $plugins ),
+			$search->getConditionSource( $types, $translations, $plugins ),
 			$search->getSliceStart(),
 			$search->getSliceSize(),
 		);
@@ -711,7 +711,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		{
 			$keys[] = 'orderby';
 			$find[] = ':order';
-			$replace[] = $search->getSortationString( $types, $translations );
+			$replace[] = $search->getSortationSource( $types, $translations );
 
 			$keys[] = 'columns';
 			$find[] = ':columns';
@@ -776,7 +776,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$types = array( $name => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 		$translations = array( $name => '"' . $name . '"' );
 
-		$cond = $search->getConditionString( $types, $translations );
+		$cond = $search->getConditionSource( $types, $translations );
 		$sql = str_replace( ':cond', $cond, $this->getSqlConfig( $cfgpath ) );
 
 		$dbm = $context->getDatabaseManager();

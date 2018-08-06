@@ -222,7 +222,7 @@ class Standard extends Base
 			$translations = array( 'siteid' => '"siteid"' );
 
 			$search->setConditions( $search->compare( '==', 'siteid', $siteids ) );
-			$sql = str_replace( ':siteid', $search->getConditionString( $types, $translations ), $sql );
+			$sql = str_replace( ':siteid', $search->getConditionSource( $types, $translations ), $sql );
 
 			$stmt = $conn->create( $sql );
 			$stmt->bind( 1, 0, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

@@ -818,7 +818,7 @@ class Standard
 			'stock.typeid' => '"typeid"',
 		);
 
-		$conditions = $search->getConditionString( $types, $translations );
+		$conditions = $search->getConditionSource( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
