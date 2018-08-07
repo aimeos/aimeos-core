@@ -236,4 +236,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->assertEquals( 'order/base', $this->object->getResourceType() );
 	}
+
+
+	public function testSerialize()
+	{
+		$this->assertTrue( is_string( serialize( $this->object ) ) );
+	}
 }

@@ -59,7 +59,7 @@ abstract class Base
 	protected $products;
 	protected $addresses;
 	protected $services = [];
-	private $modified = false;
+	protected $modified = false;
 
 
 	/**
