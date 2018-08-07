@@ -61,6 +61,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			$siteItem = $siteManager->createItem();
 			$siteItem->setLabel( $code );
 			$siteItem->setCode( $code );
+			$siteItem->setStatus( 1 );
 
 			$siteManager->insertItem( $siteItem );
 		}
@@ -75,6 +76,7 @@ class MShopAddLocaleData extends \Aimeos\MW\Setup\Task\Base
 			$localeItem->setSiteId( $siteItem->getId() );
 			$localeItem->setLanguageId( 'en' );
 			$localeItem->setCurrencyId( 'EUR' );
+			$localeItem->setStatus( 1 );
 
 			$localeManager->saveItem( $localeItem, false );
 		}
