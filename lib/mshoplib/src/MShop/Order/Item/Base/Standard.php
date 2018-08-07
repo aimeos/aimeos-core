@@ -24,8 +24,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	protected $price;
 	protected $locale;
 	protected $values;
-	private $available = true;
-	private $modified = false;
+	protected $available = true;
 
 
 	/**
@@ -347,17 +346,6 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 	public function setAvailable( $value )
 	{
 		$this->available = (bool) $value;
-	}
-
-
-	/**
-	 * Tests if the order object was modified.
-	 *
-	 * @return bool True if modified, false if not
-	 */
-	public function isModified()
-	{
-		return ( parent::isModified() === false ? $this->modified : true );
 	}
 
 
