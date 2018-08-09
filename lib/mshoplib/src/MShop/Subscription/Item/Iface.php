@@ -113,14 +113,14 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	/**
 	 * Returns the reason for the end of the subscriptions
 	 *
-	 * @return integer Reason code (-1: payment error, 0: no reason, 1: subscription canceled)
+	 * @return integer|null Reason code or NULL for no reason
 	 */
 	public function getReason();
 
 	/**
 	 * Sets the reason for the end of the subscriptions
 	 *
-	 * @return integer Reason code (-1: payment error, 0: no reason, 1: subscription canceled)
+	 * @return integer|null Reason code or NULL for no reason
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
 	public function setReason( $status );

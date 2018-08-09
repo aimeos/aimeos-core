@@ -155,6 +155,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+	public function testSetReasonNull()
+	{
+		$return = $this->object->setReason( null );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertEquals( null, $this->object->getReason() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+	public function testSetReasonString()
+	{
+		$return = $this->object->setReason( '-1' );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertEquals( -1, $this->object->getReason() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( $this->values['subscription.status'], $this->object->getStatus() );

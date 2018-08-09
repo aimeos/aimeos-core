@@ -21,7 +21,7 @@ return array(
 			$table->addColumn( 'next', 'date', ['notnull' => false] );
 			$table->addColumn( 'end', 'date', ['notnull' => false] );
 			$table->addColumn( 'interval', 'string', array( 'length' => 16 ) );
-			$table->addColumn( 'reason', 'smallint', array( 'default' => 0 ) );
+			$table->addColumn( 'reason', 'smallint', array( 'notnull' => false ) );
 			$table->addColumn( 'status', 'smallint', array( 'default' => 0 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );

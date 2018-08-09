@@ -199,28 +199,26 @@ class Standard
 	/**
 	 * Returns the reason for the end of the subscriptions
 	 *
-	 * @return integer Reason code (-1: payment error, 0: no reason, 1: subscription canceled)
+	 * @return integer|null Reason code or NULL for no reason
 	 */
 	public function getReason()
 	{
 		if( isset( $this->values['subscription.reason'] ) ) {
 			return (int) $this->values['subscription.reason'];
 		}
-
-		return 0;
 	}
 
 	/**
 	 * Sets the reason for the end of the subscriptions
 	 *
-	 * @param integer $value Reason code (-1: payment error, 0: no reason, 1: subscription canceled)
+	 * @param integer|null $value Reason code or NULL for no reason
 	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
 	 */
 	public function setReason( $value )
 	{
-		if( (int) $value !== $this->getReason() )
+		if( $value !== $this->getReason() )
 		{
-			$this->values['subscription.reason'] = (int) $value;
+			$this->values['subscription.reason'] = ( is_numeric( $value ) ? (int) $value : null );
 			$this->setModified();
 		}
 
