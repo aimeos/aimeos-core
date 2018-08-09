@@ -124,6 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getDateNext(), $itemSaved->getDateNext() );
 		$this->assertEquals( $item->getDateEnd(), $itemSaved->getDateEnd() );
 		$this->assertEquals( $item->getInterval(), $itemSaved->getInterval() );
+		$this->assertEquals( $item->getReason(), $itemSaved->getReason() );
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
@@ -136,6 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getDateNext(), $itemUpd->getDateNext() );
 		$this->assertEquals( $itemExp->getDateEnd(), $itemUpd->getDateEnd() );
 		$this->assertEquals( $itemExp->getInterval(), $itemUpd->getInterval() );
+		$this->assertEquals( $itemExp->getReason(), $itemUpd->getReason() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
@@ -171,6 +173,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'subscription.datenext', '2000-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.dateend', '2010-01-01' );
 		$expr[] = $search->compare( '==', 'subscription.interval', 'P0Y1M0W0D' );
+		$expr[] = $search->compare( '==', 'subscription.reason', 1 );
 		$expr[] = $search->compare( '==', 'subscription.status', 1 );
 		$expr[] = $search->compare( '>=', 'subscription.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'subscription.ctime', '1970-01-01 00:00:00' );

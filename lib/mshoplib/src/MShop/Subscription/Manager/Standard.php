@@ -74,6 +74,13 @@ class Standard
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 		),
+		'subscription.reason' => array(
+			'code' => 'subscription.reason',
+			'internalcode' => 'mord."reason"',
+			'label' => 'Subscription end reason',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+		),
 		'subscription.status' => array(
 			'code' => 'subscription.status',
 			'internalcode' => 'mord."status"',
@@ -343,16 +350,17 @@ class Standard
 			$stmt->bind( 3, $item->getDateNext() );
 			$stmt->bind( 4, $item->getDateEnd() );
 			$stmt->bind( 5, $item->getInterval() );
-			$stmt->bind( 6, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 7, $date ); // mtime
-			$stmt->bind( 8, $context->getEditor() );
-			$stmt->bind( 9, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 6, $item->getReason(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 7, $item->getStatus(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 8, $date ); // mtime
+			$stmt->bind( 9, $context->getEditor() );
+			$stmt->bind( 10, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 10, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 11, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id ); // is not modified anymore
 			} else {
-				$stmt->bind( 10, $date ); // ctime
+				$stmt->bind( 11, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();

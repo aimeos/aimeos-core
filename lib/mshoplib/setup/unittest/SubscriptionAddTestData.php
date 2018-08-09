@@ -81,6 +81,7 @@ class SubscriptionAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$item->setDateNext( $dataset['datenext'] );
 			$item->setDateEnd( $dataset['dateend'] );
 			$item->setInterval( $dataset['interval'] );
+			$item->setReason( $dataset['reason'] );
 			$item->setStatus( $dataset['status'] );
 
 			$subscriptionManager->saveItem( $item );

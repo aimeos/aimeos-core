@@ -95,6 +95,21 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	public function setInterval( $value );
 
 	/**
+	 * Returns the reason for the end of the subscriptions
+	 *
+	 * @return integer Reason code (-1: payment error, 0: no reason, 1: subscription canceled)
+	 */
+	public function getReason();
+
+	/**
+	 * Sets the reason for the end of the subscriptions
+	 *
+	 * @return integer Reason code (-1: payment error, 0: no reason, 1: subscription canceled)
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 */
+	public function setReason( $status );
+
+	/**
 	 * Returns the status of the subscriptions
 	 *
 	 * @return integer Subscription status, i.e. "1" for enabled, "0" for disabled

@@ -197,6 +197,38 @@ class Standard
 
 
 	/**
+	 * Returns the reason for the end of the subscriptions
+	 *
+	 * @return integer Reason code (-1: payment error, 0: no reason, 1: subscription canceled)
+	 */
+	public function getReason()
+	{
+		if( isset( $this->values['subscription.reason'] ) ) {
+			return (int) $this->values['subscription.reason'];
+		}
+
+		return 0;
+	}
+
+	/**
+	 * Sets the reason for the end of the subscriptions
+	 *
+	 * @param integer $value Reason code (-1: payment error, 0: no reason, 1: subscription canceled)
+	 * @return \Aimeos\MShop\Subscription\Item\Iface Subscription item for chaining method calls
+	 */
+	public function setReason( $value )
+	{
+		if( (int) $value !== $this->getReason() )
+		{
+			$this->values['subscription.reason'] = (int) $value;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the status of the subscriptions
 	 *
 	 * @return integer Subscription status, i.e. "1" for enabled, "0" for disabled
@@ -258,6 +290,7 @@ class Standard
 				case 'subscription.datenext': $this->setDateNext( $value ); break;
 				case 'subscription.dateend': $this->setDateEnd( $value ); break;
 				case 'subscription.interval': $this->setInterval( $value ); break;
+				case 'subscription.reason': $this->setReason( $value ); break;
 				case 'subscription.status': $this->setStatus( $value ); break;
 				default: $unknown[$key] = $value;
 			}
@@ -282,6 +315,7 @@ class Standard
 		$list['subscription.datenext'] = $this->getDateNext();
 		$list['subscription.dateend'] = $this->getDateEnd();
 		$list['subscription.interval'] = $this->getInterval();
+		$list['subscription.reason'] = $this->getReason();
 		$list['subscription.status'] = $this->getStatus();
 
 		return $list;

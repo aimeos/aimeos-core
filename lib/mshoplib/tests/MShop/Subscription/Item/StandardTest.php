@@ -25,6 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.datenext' => '2000-01-01',
 			'subscription.dateend' => '2100-01-01',
 			'subscription.interval' => 'P1Y0M0W0D',
+			'subscription.reason' => 0,
 			'subscription.status' => 1,
 			'subscription.mtime' => '2018-01-01 00:00:02',
 			'subscription.ctime' => '2018-01-01 00:00:01',
@@ -140,6 +141,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+	public function testGetReason()
+	{
+		$this->assertEquals( $this->values['subscription.reason'], $this->object->getReason() );
+	}
+
+	public function testSetReason()
+	{
+		$return = $this->object->setReason( 1 );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertEquals( 1, $this->object->getReason() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
 	public function testGetStatus()
 	{
 		$this->assertEquals( $this->values['subscription.status'], $this->object->getStatus() );
@@ -187,6 +202,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'subscription.datenext' => '2019-01-01',
 			'subscription.dateend' => '2020-01-01',
 			'subscription.interval' => 'P1Y0M0W0D',
+			'subscription.reason' => 0,
 			'subscription.status' => 1,
 		);
 
@@ -200,6 +216,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['subscription.datenext'], $item->getDateNext() );
 		$this->assertEquals( $list['subscription.dateend'], $item->getDateEnd() );
 		$this->assertEquals( $list['subscription.interval'], $item->getInterval() );
+		$this->assertEquals( $list['subscription.reason'], $item->getReason() );
 		$this->assertEquals( $list['subscription.status'], $item->getStatus() );
 	}
 
@@ -216,6 +233,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getDateNext(), $list['subscription.datenext'] );
 		$this->assertEquals( $this->object->getDateEnd(), $list['subscription.dateend'] );
 		$this->assertEquals( $this->object->getInterval(), $list['subscription.interval'] );
+		$this->assertEquals( $this->object->getReason(), $list['subscription.reason'] );
 		$this->assertEquals( $this->object->getStatus(), $list['subscription.status'] );
 		$this->assertEquals( $this->object->getTimeModified(), $list['subscription.mtime'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $list['subscription.ctime'] );
