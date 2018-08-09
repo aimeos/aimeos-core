@@ -20,6 +20,22 @@ namespace Aimeos\MShop\Subscription\Item;
 interface Iface extends \Aimeos\MShop\Common\Item\Iface
 {
 	/**
+	 * Renewing payment failed
+	 */
+	const REASON_PAYMENT = -1;
+
+	/**
+	 * Subscription ended normally
+	 */
+	const REASON_END = 0;
+
+	/**
+	 * Subscription cancelled by customer
+	 */
+	const REASON_CANCEL = 1;
+
+
+	/**
 	 * Returns the ID of the base order
 	 *
 	 * @return string ID of the base order
