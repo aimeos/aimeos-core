@@ -43,10 +43,8 @@ class MySQL extends \Aimeos\MW\Criteria\SQL
 					{
 						$len = strlen( $part );
 
-						if( $len > 3 ) {
+						if( $len > 0 ) {
 							$str .= ' +' . $part . '*';
-						} else if( $len > 0 ) {
-							$str .= ' ' . $part . '*';
 						}
 					}
 
