@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2017-11-25 21:31+0000\n"
+"PO-Revision-Date: 2018-08-09 13:22+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Russian (http://www.transifex.com/aimeos/aimeos-core/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -66,6 +66,18 @@ msgstr "интернет"
 #. Order type value
 msgid "order:phone"
 msgstr "телефон"
+
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "оплата"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr ""
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr ""
 
 #. Payment status value
 msgid "pay:-1"

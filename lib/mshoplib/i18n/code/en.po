@@ -110,6 +110,18 @@ msgstr "The price of at least one product has changed in the meantime and it was
 msgid "product.stock.notenough"
 msgstr "Sorry, at least one product is out of stock. Please remove it from your basket to continue"
 
+#. Subscription reason code
+msgid "reason:-1"
+msgstr "payment"
+
+#. Subscription reason code
+msgid "reason:0"
+msgstr "expired"
+
+#. Subscription reason code
+msgid "reason:1"
+msgstr "cancelled"
+
 #. Service plugin error: Delivery service not available
 msgid "service.delivery.available.none"
 msgstr "The delivery option is missing"
