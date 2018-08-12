@@ -126,6 +126,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetProviderInvalid()
+	{
+		$this->setExpectedException( '\Aimeos\MShop\Plugin\Exception' );
+		$this->object->setProvider( ',newProvider' );
+	}
+
+
 	public function testGetConfig()
 	{
 		$this->assertEquals( array( 'limit'=>'40' ), $this->object->getConfig() );

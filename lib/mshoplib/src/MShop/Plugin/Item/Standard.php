@@ -120,6 +120,10 @@ class Standard
 	{
 		if( (string) $provider !== $this->getProvider() )
 		{
+			if( preg_match( '/^[A-Za-z0-9]+(,[A-Za-z0-9]+)*$/', $provider ) !== 1 ) {
+				throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid provider name "%1$s"', $provider ) );
+			}
+
 			$this->values['plugin.provider'] = (string) $provider;
 			$this->setModified();
 		}
