@@ -22,6 +22,7 @@ class Standard
 	implements \Aimeos\MShop\Index\Manager\Text\Iface, \Aimeos\MShop\Common\Manager\Factory\Iface
 {
 	private $searchConfig = array(
+		// @deprecated Removed 2019.01
 		'index.text.id' => array(
 			'code' => 'index.text.id',
 			'internalcode' => 'mindte."textid"',
