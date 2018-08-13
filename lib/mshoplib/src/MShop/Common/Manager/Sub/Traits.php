@@ -85,17 +85,17 @@ trait Traits
 		}
 
 		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
-		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
+		$manager = $this->addDecorators( $this->getContext(), $manager, $decorators, $classprefix );
 
 		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] );
-		$manager = $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
+		$manager = $this->addDecorators( $this->getContext(), $manager, $decorators, $classprefix );
 
 		$subpath = $this->createSubNames( $managerpath );
 		$classprefix = 'MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $subpath . '\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
 
-		return $this->addDecorators( $this->context, $manager, $decorators, $classprefix );
+		return $this->addDecorators( $this->getContext(), $manager, $decorators, $classprefix );
 	}
 
 
@@ -148,7 +148,7 @@ trait Traits
 
 			if( $name === null ) {
 				$path = 'mshop/' . $domain . '/manager/' . $manager . '/name';
-				$name = $this->context->getConfig()->get( $path, 'Standard' );
+				$name = $this->getContext()->getConfig()->get( $path, 'Standard' );
 			}
 
 			if( empty( $name ) || ctype_alnum( $name ) === false ) {
@@ -165,7 +165,7 @@ trait Traits
 				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
 			}
 
-			$subManager = new $classname( $this->context );
+			$subManager = new $classname( $this->getContext() );
 
 			\Aimeos\MW\Common\Base::checkClass( $interface, $subManager );
 
