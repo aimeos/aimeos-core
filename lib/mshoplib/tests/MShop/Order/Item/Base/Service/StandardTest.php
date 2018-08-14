@@ -58,15 +58,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Service\Standard( $this->price, $this->values, $this->attribute );
 	}
 
+
 	protected function tearDown()
 	{
 		unset( $this->object );
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( 1, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -86,6 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setId( 6 );
 	}
 
+
 	public function testSetId2()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
@@ -97,10 +101,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 99, $this->object->getSiteId() );
 	}
 
+
+	public function testSetSiteId()
+	{
+		$this->object->setSiteId( 100 );
+		$this->assertEquals( 100, $this->object->getSiteId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetBaseId()
 	{
 		$this->assertEquals( 42, $this->object->getBaseId() );
 	}
+
 
 	public function testSetBaseId()
 	{
@@ -111,6 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testSetBaseIdReset()
 	{
 		$return = $this->object->setBaseId( null );
@@ -120,10 +135,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetServiceId()
 	{
 		$this->assertEquals( 'ServiceID', $this->object->getServiceId() );
 	}
+
 
 	public function testSetServiceId()
 	{
@@ -134,10 +151,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCode()
 	{
 		$this->assertEquals( 'UnitCode', $this->object->getCode() );
 	}
+
 
 	public function testSetCode()
 	{
@@ -148,10 +167,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetName()
 	{
 		$this->assertEquals( 'UnitName', $this->object->getName() );
 	}
+
 
 	public function testSetName()
 	{
@@ -162,10 +183,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetMediaUrl()
 	{
 		$this->assertEquals( 'Url for test', $this->object->getMediaUrl() );
 	}
+
 
 	public function testSetMediaUrl()
 	{
@@ -176,10 +199,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetType()
 	{
 		$this->assertEquals( 'payment', $this->object->getType() );
 	}
+
 
 	public function testSetType()
 	{
@@ -190,10 +215,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetPrice()
 	{
 		$this->assertSame( $this->price, $this->object->getPrice() );
 	}
+
 
 	public function testSetPrice()
 	{
@@ -204,6 +231,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertFalse( $this->object->isModified() );
 		$this->assertSame( $this->price, $this->object->getPrice() );
 	}
+
 
 	public function testGetAttribute()
 	{
@@ -241,6 +269,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $result );
 	}
 
+
 	public function testGetAttributeList()
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
@@ -263,6 +292,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->getAttribute( 'code_001', 'test_001' );
 		$this->assertEquals( ['value_001', 'value_002'], $result );
 	}
+
 
 	public function testGetAttributeItem()
 	{
@@ -300,6 +330,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $result );
 	}
 
+
 	public function testGetAttributeItemList()
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
@@ -323,20 +354,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 2, count( $result ) );
 	}
 
+
 	public function testGetAttributeItems()
 	{
 		$this->assertEquals( $this->attribute, $this->object->getAttributeItems() );
 	}
+
 
 	public function testGetAttributeItemsByType()
 	{
 		$this->assertEquals( $this->attribute, $this->object->getAttributeItems( 'default' ) );
 	}
 
+
 	public function testGetAttributeItemsInvalidType()
 	{
 		$this->assertEquals( [], $this->object->getAttributeItems( 'invalid' ) );
 	}
+
 
 	public function testSetAttributeItem()
 	{
@@ -368,6 +403,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testSetAttributeItems()
 	{
 		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
@@ -385,15 +421,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2012-01-01 00:00:01', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetEditor()
 	{

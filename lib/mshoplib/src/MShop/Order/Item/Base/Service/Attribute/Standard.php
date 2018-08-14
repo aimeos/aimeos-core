@@ -39,6 +39,37 @@ class Standard
 
 
 	/**
+	 * Returns the ID of the site the item is stored
+	 *
+	 * @return string|null Site ID (or null if not available)
+	 */
+	public function getSiteId()
+	{
+		if( isset( $this->values['order.base.service.attribute.siteid'] ) ) {
+			return (string) $this->values['order.base.service.attribute.siteid'];
+		}
+	}
+
+
+	/**
+	 * Sets the site ID of the item.
+	 *
+	 * @param integer $value Unique site ID of the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface Order base service attribute item for chaining method calls
+	 */
+	public function setSiteId( $value )
+	{
+		if( (string) $value !== $this->getSiteId() )
+		{
+			$this->values['order.base.service.attribute.siteid'] = (string) $value;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the original attribute ID of the service attribute item.
 	 *
 	 * @return string Attribute ID of the service attribute item
@@ -286,6 +317,7 @@ class Standard
 	 */
 	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item )
 	{
+		$this->setSiteId( $item->getSiteId() );
 		$this->setAttributeId( $item->getId() );
 		$this->setName( $item->getName() );
 		$this->setCode( $item->getType() );

@@ -656,7 +656,7 @@ class Standard
 			$stmt->bind( 13, $price->getTaxFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 			$stmt->bind( 14, $date ); // mtime
 			$stmt->bind( 15, $context->getEditor() );
-			$stmt->bind( 16, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 16, $item->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
 				$stmt->bind( 17, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -743,7 +743,7 @@ class Standard
 		{
 			$required = array( 'order.base.service' );
 
-			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_SUBTREE;
+			$level = \Aimeos\MShop\Locale\Manager\Base::SITE_ALL;
 			$level = $context->getConfig()->get( 'mshop/order/manager/sitemode', $level );
 
 			/** mshop/order/manager/base/service/standard/search/mysql

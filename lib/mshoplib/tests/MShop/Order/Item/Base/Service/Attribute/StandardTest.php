@@ -75,6 +75,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSetSiteId()
+	{
+		$this->object->setSiteId( 100 );
+		$this->assertEquals( 100, $this->object->getSiteId() );
+		$this->assertTrue( $this->object->isModified() );
+	}
+
+
 	public function testGetAttributeId()
 	{
 		$this->assertEquals( 22, $this->object->getAttributeId() );

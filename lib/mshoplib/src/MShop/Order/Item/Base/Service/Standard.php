@@ -50,6 +50,37 @@ class Standard extends Base implements Iface
 
 
 	/**
+	 * Returns the ID of the site the item is stored
+	 *
+	 * @return string|null Site ID (or null if not available)
+	 */
+	public function getSiteId()
+	{
+		if( isset( $this->values['order.base.service.siteid'] ) ) {
+			return (string) $this->values['order.base.service.siteid'];
+		}
+	}
+
+
+	/**
+	 * Sets the site ID of the item.
+	 *
+	 * @param string $value Unique site ID of the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface Order base service item for chaining method calls
+	 */
+	public function setSiteId( $value )
+	{
+		if( (string) $value !== $this->getSiteId() )
+		{
+			$this->values['order.base.service.siteid'] = (string) $value;
+			$this->setModified();
+		}
+
+		return $this;
+	}
+
+
+	/**
 	 * Returns the order base ID of the order service if available.
 	 *
 	 * @return string|null Base ID of the item.
@@ -346,6 +377,7 @@ class Standard extends Base implements Iface
 	 */
 	public function copyFrom( \Aimeos\MShop\Service\Item\Iface $service )
 	{
+		$this->setSiteId( $service->getSiteId() );
 		$this->setCode( $service->getCode() );
 		$this->setName( $service->getName() );
 		$this->setType( $service->getType() );

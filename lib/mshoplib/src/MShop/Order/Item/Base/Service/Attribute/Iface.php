@@ -22,6 +22,14 @@ interface Iface
 	extends \Aimeos\MShop\Common\Item\Iface, \Aimeos\MShop\Common\Item\Parentid\Iface
 {
 	/**
+	 * Sets the site ID of the item.
+	 *
+	 * @param string $value Unique site ID of the item
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface Order base service attribute item for chaining method calls
+	 */
+	public function setSiteId( $value );
+
+	/**
 	 * Returns the original attribute ID of the ordered service attribute.
 	 *
 	 * @return string Attribute ID of the ordered service attribute
