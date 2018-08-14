@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-09 15:12+0200\n"
-"PO-Revision-Date: 2018-07-04 08:16+0000\n"
+"POT-Creation-Date: 2018-08-14 13:45+0200\n"
+"PO-Revision-Date: 2018-08-14 11:45+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Vietnamese (http://www.transifex.com/aimeos/aimeos-core/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -265,6 +265,10 @@ msgid "Invalid mime type \"%1$s\""
 msgstr ""
 
 #, php-format
+msgid "Invalid provider name \"%1$s\""
+msgstr ""
+
+#, php-format
 msgid "Invalid serialized basket. \"%1$s\" returns \"%2$s\"."
 msgstr ""
 
@@ -401,6 +405,10 @@ msgstr ""
 
 #, php-format
 msgid "No item with \"%2$s\" in \"%1$s\" found"
+msgstr ""
+
+#, php-format
+msgid "No more credit available for voucher \"%1$s\""
 msgstr ""
 
 #, php-format

@@ -78,7 +78,7 @@ msgstr "expired"
 
 #. Subscription reason code
 msgid "reason:1"
-msgstr "cancelled"
+msgstr "canceled"
 
 
 #. Payment status value
