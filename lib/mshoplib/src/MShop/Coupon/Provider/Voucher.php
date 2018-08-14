@@ -63,10 +63,10 @@ class Voucher
 		$usedRebate = $this->getUsedRebate( $this->getCode() );
 		$rebate = $value - $usedRebate;
 
-		if( $rebate <= 0 ){
-			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'No more credit available on the voucher "%1$s" ' );
-			$msg = sprintf( $msg, $this->getCode() );
-			throw new \Aimeos\MShop\Coupon\Exception( $msg );
+		if( $rebate <= 0 )
+		{
+			$msg = $context->getI18n()->dt( 'mshop', 'No more credit available for voucher "%1$s"' );
+			throw new \Aimeos\MShop\Coupon\Exception( sprintf( $msg, $this->getCode() ) );
 		}
 
 		$orderProducts = $this->createMonetaryRebateProducts( $base, $productCode, $rebate );
