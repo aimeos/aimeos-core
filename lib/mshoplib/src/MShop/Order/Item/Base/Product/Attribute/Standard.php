@@ -317,6 +317,7 @@ class Standard
 	 */
 	public function copyFrom( \Aimeos\MShop\Attribute\Item\Iface $item )
 	{
+		$this->setSiteId( $item->getSiteId() );
 		$this->setAttributeId( $item->getId() );
 		$this->setName( $item->getName() );
 		$this->setCode( $item->getType() );
