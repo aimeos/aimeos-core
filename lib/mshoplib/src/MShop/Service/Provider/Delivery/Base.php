@@ -34,6 +34,18 @@ abstract class Base extends \Aimeos\MShop\Service\Provider\Base
 	const ERR_XML = 10;
 	const ERR_SCHEMA = 11;
 
+	/**
+	 * Sends the details of all orders to the ERP system for further processing
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
+	 */
+	public function processBatch( array $orders )
+	{
+		foreach( $orders as $order ) {
+			$this->getObject()->process( $order );
+		}
+	}
+
 
 	/**
 	 * Sets the delivery attributes in the given service.

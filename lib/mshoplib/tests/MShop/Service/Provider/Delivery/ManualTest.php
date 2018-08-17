@@ -12,16 +12,17 @@ namespace Aimeos\MShop\Service\Provider\Delivery;
 
 class ManualTest extends \PHPUnit\Framework\TestCase
 {
+	private $context;
 	private $object;
 
 
 	protected function setUp()
 	{
-		$context = \TestHelperMShop::getContext();
-		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $context );
+		$this->context = \TestHelperMShop::getContext();
+		$serviceManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 		$serviceItem = $serviceManager->createItem();
 
-		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Manual( $context, $serviceItem );
+		$this->object = new \Aimeos\MShop\Service\Provider\Delivery\Manual( $this->context, $serviceItem );
 	}
 
 
@@ -39,7 +40,7 @@ class ManualTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfigFE()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 		$basket = $orderManager->getSubManager( 'base' )->createItem();
 
 		$this->assertEquals( [], $this->object->getConfigFE( $basket ) );
@@ -48,9 +49,21 @@ class ManualTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcess()
 	{
-		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
 		$order = $manager->createItem();
+
 		$this->object->process( $order );
+
+		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getDeliveryStatus() );
+	}
+
+
+	public function testProcessBatch()
+	{
+		$manager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
+		$order = $manager->createItem();
+
+		$this->object->processBatch( [$order] );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::STAT_PROGRESS, $order->getDeliveryStatus() );
 	}
@@ -58,7 +71,7 @@ class ManualTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetConfigFE()
 	{
-		$item = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/service' )->createItem();
+		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/service' )->createItem();
 		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
 		$this->assertEquals( 2, count( $item->getAttributes() ) );
