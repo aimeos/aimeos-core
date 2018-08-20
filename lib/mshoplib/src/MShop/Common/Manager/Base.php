@@ -119,6 +119,23 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Adds or updates a list of item objects.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of item object whose data should be saved
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface[] Saved item objects
+	 */
+	public function saveItems( array $items, $fetch = true )
+	{
+		foreach( $items as $id => $item ) {
+			$items[$id] = $this->getObject()->saveItem( $item, $fetch );
+		}
+
+		return $items;
+	}
+
+
+	/**
 	 * Injects the reference of the outmost object
 	 *
 	 * @param \Aimeos\MShop\Common\Manager\Iface $object Reference to the outmost manager or decorator
