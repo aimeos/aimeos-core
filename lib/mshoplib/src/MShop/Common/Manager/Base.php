@@ -120,6 +120,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$this->rollbackTransaction( $this->getResourceName() );
 	}
 
+
 	/**
 	 * Adds or updates a list of item objects.
 	 *
