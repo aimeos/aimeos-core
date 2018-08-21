@@ -267,12 +267,7 @@ class Standard
 		 *  array(
 		 *  	'image' => array(
 		 *  		'name' => 'Imagick',
-		 *  		'jpeg' => array(
-		 *  			'quality' => 75
-		 *  		),
-		 *  		'png' => array(
-		 *  			'quality' => 9
-		 *  		),
+		 *  		'quality' => 75,
 		 *  	)
 		 *  )
 		 *
