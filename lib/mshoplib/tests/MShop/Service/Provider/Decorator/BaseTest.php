@@ -33,7 +33,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			->setConstructorArgs( array( $this->context, $item ) )
 			->setMethods( array( 'calcPrice', 'checkConfigBE', 'checkConfigFE', 'getConfigBE',
 				'getConfigFE', 'injectGlobalConfigBE', 'isAvailable', 'isImplemented', 'query',
-				'cancel', 'capture', 'process', 'refund', 'setCommunication', 'setConfigFE',
+				'cancel', 'capture', 'process', 'refund', 'repay', 'setCommunication', 'setConfigFE',
 				'updateAsync', 'updatePush', 'updateSync' ) )
 			->getMock();
 
@@ -170,6 +170,16 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->mock->expects( $this->once() )->method( 'refund' );
 
 		$this->object->refund( $item );
+	}
+
+
+	public function testRepay()
+	{
+		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
+
+		$this->mock->expects( $this->once() )->method( 'repay' );
+
+		$this->object->repay( $item );
 	}
 
 
