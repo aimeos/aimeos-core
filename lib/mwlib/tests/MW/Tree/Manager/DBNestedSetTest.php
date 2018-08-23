@@ -476,6 +476,27 @@ class DBNestedSetTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testMoveNodeSameParent()
+	{
+		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
+		$root = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
+
+		$nodeid = $root->getChild( 0 )->getId();
+		$oldparentid = $root->getId();
+
+		$manager->moveNode( $nodeid, $oldparentid, $oldparentid );
+		$manager->moveNode( $nodeid, $oldparentid, $oldparentid );
+
+		$testroot = $manager->getNode( null, \Aimeos\MW\Tree\Manager\Base::LEVEL_TREE );
+
+		$this->assertEquals( 'l1n1', $testroot->getChild( 2 )->label );
+		$this->assertEquals( 1, $testroot->getChild( 2 )->level );
+		$this->assertEquals( 12, $testroot->getChild( 2 )->left );
+		$this->assertEquals( 17, $testroot->getChild( 2 )->right );
+		$this->assertEquals( 1, count( $testroot->getChild( 2 )->getChildren() ) );
+	}
+
+
 	public function testMoveNode1()
 	{
 		$manager = new \Aimeos\MW\Tree\Manager\DBNestedSet( $this->config, self::$dbm );
