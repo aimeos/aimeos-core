@@ -587,7 +587,7 @@ abstract class Base
 		$item = $manager->getItem( $customerId, ['service'] );
 		$serviceId = $this->getServiceItem()->getId();
 
-		if( ( $listItem = $item->getListItem( $serviceId, 'service', 'default' ) ) !== null )
+		if( ( $listItem = $item->getListItem( 'service', 'default', $serviceId ) ) !== null )
 		{
 			$config = $listItem->getConfig();
 			return ( isset( $config[$type] ) ? $config[$type] : null );
