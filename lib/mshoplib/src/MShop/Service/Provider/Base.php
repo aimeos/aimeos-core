@@ -635,7 +635,7 @@ abstract class Base
 	 *
 	 * @param string $customerId Unique customer ID the service token belongs to
 	 * @param string $type Type of the value that should be added
-	 * @param string $data Service data to store
+	 * @param string|array $data Service data to store
 	 */
 	protected function setCustomerData( $customerId, $type, $data )
 	{
