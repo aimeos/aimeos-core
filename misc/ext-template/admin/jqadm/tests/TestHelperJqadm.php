@@ -25,7 +25,7 @@ class TestHelperJqadm
 	{
 		if( !isset( self::$aimeos ) )
 		{
-			require_once 'bootstrap.php';
+			require_once 'Bootstrap.php';
 			spl_autoload_register( 'Aimeos\\Bootstrap::autoload' );
 
 			self::$aimeos = new \Aimeos\Bootstrap();
