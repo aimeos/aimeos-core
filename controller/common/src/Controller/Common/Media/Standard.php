@@ -191,7 +191,7 @@ class Standard
 		{
 			if( preg_match( '#^[a-zA-Z]{1,10}://#', $path ) === 1 )
 			{
-				if( ( $content = file_get_contents( $path ) ) === false )
+				if( ( $content = @file_get_contents( $path ) ) === false )
 				{
 					$msg = sprintf( 'Downloading file "%1$s" failed', $path );
 					throw new \Aimeos\Controller\Common\Exception( $msg );
