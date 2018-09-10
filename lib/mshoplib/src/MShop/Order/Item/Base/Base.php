@@ -210,6 +210,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null )
 	{
@@ -256,6 +257,8 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'addProduct.after', $item );
+
+		return $this;
 	}
 
 
@@ -264,6 +267,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
 	 * @param integer $pos Position id of the order product item
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function editProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $pos )
 	{
@@ -284,6 +288,8 @@ abstract class Base
 		}
 
 		$this->notifyListeners( 'editProduct.after', $item );
+
+		return $this;
 	}
 
 
@@ -291,6 +297,7 @@ abstract class Base
 	 * Deletes an order product item from the (future) order.
 	 *
 	 * @param integer $position Position id of the order product item
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function deleteProduct( $position )
 	{
@@ -306,6 +313,8 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'deleteProduct.after', $product );
+
+		return $this;
 	}
 
 
@@ -342,6 +351,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type, usually "billing" or "delivery"
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type )
 	{
@@ -357,6 +367,8 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'setAddress.after', $address );
+
+		return $this;
 	}
 
 
@@ -364,6 +376,7 @@ abstract class Base
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function deleteAddress( $type )
 	{
@@ -378,6 +391,8 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'deleteAddress.after', $address );
+
+		return $this;
 	}
 
 
@@ -428,6 +443,7 @@ abstract class Base
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type )
 	{
@@ -443,6 +459,8 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'addService.after', $service );
+
+		return $this;
 	}
 
 
@@ -450,6 +468,7 @@ abstract class Base
 	 * Deletes the delivery or payment service from the basket.
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function deleteService( $type )
 	{
@@ -464,6 +483,8 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'deleteService.after', $service );
+
+		return $this;
 	}
 
 
@@ -484,6 +505,7 @@ abstract class Base
 	 *
 	 * @param string $code Coupon code
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addCoupon( $code, array $products = [] )
 	{
@@ -508,6 +530,8 @@ abstract class Base
 		$this->setModified();
 
 		$this->notifyListeners( 'addCoupon.after', $code );
+
+		return $this;
 	}
 
 
@@ -555,6 +579,7 @@ abstract class Base
 	 * Tests if all necessary items are available to create the order.
 	 *
 	 * @param integer $what Test for the specific type of completeness
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 * @throws \Aimeos\MShop\Order\Exception if there are no products in the basket
 	 */
 	public function check( $what = self::PARTS_ALL )
@@ -568,6 +593,8 @@ abstract class Base
 		}
 
 		$this->notifyListeners( 'check.after', $what );
+
+		return $this;
 	}
 
 
@@ -584,10 +611,13 @@ abstract class Base
 
 	/**
 	 * Sets the modified flag of the object.
+	 *
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function setModified()
 	{
 		$this->modified = true;
+		return $this;
 	}
 
 
