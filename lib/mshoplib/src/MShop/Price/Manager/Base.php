@@ -35,13 +35,14 @@ abstract class Base
 		$priceList = $this->getPriceList( $priceItems, $currencyId );
 
 		if( ( $price = reset( $priceList ) ) === false ) {
-			throw new \Aimeos\MShop\Price\Exception( sprintf( 'Price item not available' ) );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Price item not available' );
+			throw new \Aimeos\MShop\Price\Exception( $msg );
 		}
 
 		if( $price->getQuantity() > $quantity )
 		{
-			$msg = sprintf( 'Price for the given quantity "%1$d" not available', $quantity );
-			throw new \Aimeos\MShop\Price\Exception( $msg );
+			$msg = $this->getContext()->getI18n()->dt( 'mshop', 'Price for the given quantity "%1$d" not available' );
+			throw new \Aimeos\MShop\Price\Exception( sprintf( $msg, $quantity ) );
 		}
 
 		foreach( $priceList as $qty => $priceItem )
