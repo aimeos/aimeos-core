@@ -92,7 +92,7 @@ trait Traits
 		$manager = $this->addDecorators( $this->getContext(), $manager, $decorators, $classprefix );
 
 		$subpath = $this->createSubNames( $managerpath );
-		$classprefix = 'MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $subpath . '\\Decorator\\';
+		$classprefix = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $subpath . '\\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
 
 		return $this->addDecorators( $this->getContext(), $manager, $decorators, $classprefix );
