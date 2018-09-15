@@ -213,7 +213,7 @@ abstract class DBBase
 		{
 			$cols = $search->translate( $search->getSortations(), $translations );
 
-			$list = $alias = [];
+			$list = $aliases = [];
 			foreach( $cols as $idx => $col )
 			{
 				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
