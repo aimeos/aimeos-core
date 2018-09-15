@@ -33,11 +33,6 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 
 	/**
-	 * Returns a translated colum list separated by comma
-	 *
-	 * @param array $columns List of objects implementing getName() method
-	 * @param array $translations Associative list of item names that should be translated
-	 * @return string Translated columns
 	 * @deprecated 2019.01 Use translate() and implode()
 	 */
 	public function getColumnString( array $columns, array $translations = [] )
@@ -139,8 +134,11 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 	{
 		$list = [];
 
-		foreach( $columns as $item ) {
-			$list[] = $item->translate( $translations );
+		foreach( $columns as $item )
+		{
+			if( ( $value = $item->translate( $translations ) ) !== null ) {
+				$list[] = $value;
+			}
 		}
 
 		return $list;

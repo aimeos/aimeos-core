@@ -37,11 +37,11 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id"
+						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id" /*-columns*/ , :columns /*columns-*/
+						GROUP BY mpro."id"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -101,11 +101,11 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id"
+						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id" /*-columns*/ , :columns /*columns-*/
+						GROUP BY mpro."id"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -167,11 +167,11 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id"
+						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id" /*-columns*/ , :columns /*columns-*/
+						GROUP BY mpro."id"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -231,11 +231,11 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id"
+						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id" /*-columns*/ , :columns /*columns-*/
+						GROUP BY mpro."id"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -295,11 +295,11 @@ return array(
 				),
 				'search' => array(
 					'ansi' => '
-						SELECT mpro."id"
+						SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
 						FROM "mshop_product" AS mpro
 						:joins
 						WHERE :cond
-						GROUP BY mpro."id" /*-columns*/ , :columns /*columns-*/
+						GROUP BY mpro."id"
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start
 					'
@@ -357,11 +357,11 @@ return array(
 			),
 			'search' => array(
 				'ansi' => '
-					SELECT mpro."id"
+					SELECT mpro."id" /*-mincols*/ , :mincols /*mincols-*/
 					FROM "mshop_product" AS mpro
 					:joins
 					WHERE :cond
-					GROUP BY mpro."id" /*-columns*/ , :columns /*columns-*/
+					GROUP BY mpro."id"
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'
