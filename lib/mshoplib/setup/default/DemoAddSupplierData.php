@@ -21,7 +21,7 @@ class DemoAddSupplierData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	 */
 	public function getPreDependencies()
 	{
-		return array( 'MShopAddTypeDataDefault', 'MShopAddCodeDataDefault' );
+		return array( 'MShopAddTypeDataDefault', 'MShopAddCodeDataDefault', 'DemoAddProductData' );
 	}
 
 
