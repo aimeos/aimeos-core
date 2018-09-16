@@ -42,6 +42,7 @@ class MySQL
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, Results are ordered by default
 		'sort:index.text.relevance' => array(
 			'code' => 'sort:index.text.relevance()',
 			'internalcode' => 'MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',

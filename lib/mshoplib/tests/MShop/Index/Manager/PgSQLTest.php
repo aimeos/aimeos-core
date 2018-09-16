@@ -103,8 +103,6 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );

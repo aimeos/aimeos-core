@@ -556,9 +556,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
 		$result = $object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
