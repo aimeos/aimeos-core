@@ -97,7 +97,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 
 		$this->code = (string) $params['code'];
 		$this->internalType = (string) $params['internaltype'];
-		$this->internalCode = (string) $params['internalcode'];
+		$this->internalCode = $params['internalcode'];
 		$this->label = (string) $params['label'];
 		$this->type = (string) $params['type'];
 
@@ -157,7 +157,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns the internal code for the search attribute.
 	 *
-	 * @return string Internal code of the search attribute
+	 * @return mixed Internal code of the search attribute
 	 */
 	public function getInternalCode()
 	{
