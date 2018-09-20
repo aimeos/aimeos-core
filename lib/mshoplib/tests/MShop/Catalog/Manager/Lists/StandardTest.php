@@ -288,7 +288,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$conditions = array(
-			$search->compare( '==', 'catalog.lists.type.editor', $this->editor ),
+			$search->compare( '==', 'catalog.lists.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
