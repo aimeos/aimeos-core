@@ -130,6 +130,29 @@ abstract class Base
 
 
 	/**
+	 * Replaces the parameters in nested arrays
+	 *
+	 * @param array $list Multi-dimensional associative array of values including positional parameter, e.g. "$1"
+	 * @param array $find List of strings to search for, e.g. ['$1', '$2']
+	 * @param array $replace List of strings to replace by, e.g. ['val1', 'val2']
+	 * @return Multi-dimensional associative array with parameters replaced
+	 */
+	protected function replaceParameter( array $list, array $find, array $replace )
+	{
+		foreach( $list as $key => $value )
+		{
+			if( is_array( $value ) ) {
+				$list[$key] = $this->replaceParameter( $value, $find, $replace );
+			} else {
+				$list[$key] = str_replace( $find, $replace, $value );
+			}
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Translates an expression string and replaces the parameter if it's an expression function.
 	 *
 	 * @param string $name Expresion string or function
@@ -153,6 +176,10 @@ abstract class Base
 
 			for( $i = 0; $i < $count; $i++ ) {
 				$find[$i] = '$' . ( $i + 1 );
+			}
+
+			if( is_array( $transname ) ) {
+				return $this->replaceParameter( $transname, $find, $params );
 			}
 
 			return str_replace( $find, $params, $transname );

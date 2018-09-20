@@ -88,9 +88,14 @@ abstract class Base
 		$this->setPlugins( $plugins );
 
 		$name = $this->name;
+		$transname = $this->translateName( $name, $translations );
 
-		if( ( $transname = $this->translateName( $name, $translations ) ) === '' ) {
+		if( $transname === '' ) {
 			$transname = $name;
+		}
+
+		if( is_array( $transname ) ) {
+			return $transname;
 		}
 
 		if( !isset( $types[$name] ) ) {
