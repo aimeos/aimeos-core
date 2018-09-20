@@ -272,6 +272,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetChild()
+	{
+		$this->assertInstanceOf( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $this->object->getChild( 0 ) );
+
+		$this->setExpectedException( '\\Aimeos\\MShop\\Catalog\\Exception' );
+		$this->object->getChild( 1 );
+	}
+
+
 	public function testAddChild()
 	{
 		$return = $this->object->addChild( $this->object );
@@ -281,12 +290,25 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetChild()
+	public function testDeleteChild()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $this->object->getChild( 0 ) );
+		$child = $this->object->getChild( 0 );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Catalog\\Exception' );
-		$this->object->getChild( 1 );
+		$return = $this->object->deleteChild( $child );
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertEquals( 0, count( $this->object->getChildren() ) );
+	}
+
+
+	public function testGetChildrenDeleted()
+	{
+		$child = $this->object->getChild( 0 );
+		$this->object->deleteChild( $child );
+
+		$return = $this->object->getChildrenDeleted();
+
+		$this->assertEquals( [$child], $return );
 	}
 
 

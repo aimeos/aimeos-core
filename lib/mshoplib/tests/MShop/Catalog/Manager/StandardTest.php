@@ -345,17 +345,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveInsertMoveDeleteItem()
 	{
-		$search = $this->object->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'catalog.label', 'Root' ),
-			$search->compare( '==', 'catalog.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$items = $this->object->searchItems( $search, array( 'text' ) );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No root node found' );
-		}
+		$item = $this->object->findItem( 'root', ['text'] );
 
 		$parentId = $item->getId();
 		$item->setId( null );
@@ -402,6 +392,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );
+	}
+
+
+	public function testSaveChildren()
+	{
+		$item = $this->object->findItem( 'cafe', ['product'] )->setCode( 'ccafe' )->setId( null );
+		$child = $this->object->findItem( 'misc', ['product'] )->setCode( 'cmisc' )->setId( null );
+
+		$item = $this->object->insertItem( $item->addChild( $child ) );
+		$this->object->deleteItem( $item->getId() );
+
+		$this->assertEquals( 1, count( $item->getChildren() ) );
+		$this->assertEquals( 3, count( $item->getListItems() ) );
+		$this->assertEquals( 3, count( $item->getChild( 0 )->getListItems() ) );
+
+		$this->setExpectedException( '\Aimeos\MShop\Exception' );
+		$this->object->findItem( 'ccafe' );
 	}
 
 

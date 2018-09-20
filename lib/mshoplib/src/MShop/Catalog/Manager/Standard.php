@@ -416,7 +416,8 @@ class Standard extends Base
 			}
 		}
 
-		return $this->saveListItems( $item, 'catalog' );
+		$item = $this->saveListItems( $item, 'catalog' );
+		return $this->saveChildren( $item );
 	}
 
 
@@ -465,8 +466,10 @@ class Standard extends Base
 	{
 		self::checkClass( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $item );
 
-		if( !$item->isModified() ) {
-			return $this->saveListItems( $item, 'catalog', $fetch );
+		if( !$item->isModified() )
+		{
+			$item = $this->saveListItems( $item, 'catalog', $fetch );
+			return $this->saveChildren( $item );
 		}
 
 		$siteid = $this->getContext()->getLocale()->getSiteId();
@@ -490,7 +493,8 @@ class Standard extends Base
 			}
 		}
 
-		return $this->saveListItems( $item, 'catalog', $fetch );
+		$item = $this->saveListItems( $item, 'catalog', $fetch );
+		return $this->saveChildren( $item );
 	}
 
 
@@ -807,6 +811,41 @@ class Standard extends Base
 	public function getSubManager( $manager, $name = null )
 	{
 		return $this->getSubManagerBase( 'catalog', $manager, $name );
+	}
+
+
+	/**
+	 * Saves the children of the given node
+	 *
+	 * @param \Aimeos\MShop\Catalog\Item\Iface $item Catalog item object incl. child items
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Catalog item with saved child items
+	 */
+	protected function saveChildren( \Aimeos\MShop\Catalog\Item\Iface $item )
+	{
+		$rmIds = [];
+		foreach( $item->getChildrenDeleted() as $child ) {
+			$rmIds[] = $child->getId();
+		}
+
+		$this->deleteItems( $rmIds );
+
+		foreach( $item->getChildren() as $child )
+		{
+			if( $child->getId() !== null )
+			{
+				$this->saveItem( $child );
+
+				if( $child->getParentId() !== $item->getParentId() ) {
+					$this->moveItem( $child->getId(), $item->getParentId(), $child->getParentId() );
+				}
+			}
+			else
+			{
+				$this->insertItem( $child, $item->getId() );
+			}
+		}
+
+		return $item;
 	}
 
 
