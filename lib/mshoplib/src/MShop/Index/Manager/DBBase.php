@@ -211,18 +211,19 @@ abstract class DBBase
 
 		if( count( $search->getSortations() ) > 0 )
 		{
+			$names = $search->translate( $search->getSortations() );
 			$cols = $search->translate( $search->getSortations(), $translations );
 
 			$list = $aliases = [];
 			foreach( $cols as $idx => $col )
 			{
 				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
-				$aliases[] = '"s' . $idx . '"';
+				$aliases[ $names[$idx] ] = '"s' . $idx . '"';
 			}
 
 			$keys[] = 'orderby';
 			$find[] = ':order';
-			$replace[] = implode( ', ', $aliases );
+			$replace[] = $search->getSortationSource( $types, $aliases );
 
 			$keys[] = 'mincols';
 			$find[] = ':mincols';
