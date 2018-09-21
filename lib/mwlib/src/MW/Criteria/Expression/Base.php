@@ -187,9 +187,9 @@ abstract class Base
 
 		if( isset( $translations[$name] ) ) {
 			return $translations[$name];
-		} else {
-			return $name;
 		}
+
+		return $name;
 	}
 
 
