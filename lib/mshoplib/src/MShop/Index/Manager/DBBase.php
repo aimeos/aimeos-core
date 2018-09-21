@@ -221,7 +221,7 @@ abstract class DBBase
 
 			$keys[] = 'orderby';
 			$find[] = ':order';
-			$replace[] = $search->getSortationSource( $types, $aliases );
+			$replace[] = $search->getSortationString( $types, $aliases );
 
 			$keys[] = 'mincols';
 			$find[] = ':mincols';
