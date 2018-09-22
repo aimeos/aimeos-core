@@ -64,7 +64,7 @@ class SupplierTest extends \PHPUnit_Framework_TestCase
 		$config = $this->object->getConfigFE( $basket );
 
 		$this->assertInternalType( 'array', $config['supplier.code']->getDefault() );
-		$this->assertEquals( 2, count( $config['supplier.code']->getDefault() ) );
+		$this->assertGreaterThanOrEqual( 2, count( $config['supplier.code']->getDefault() ) );
 
 		foreach( $config['supplier.code']->getDefault() as $string ) {
 			$this->assertGreaterThan( 100, strlen( $string ) );
