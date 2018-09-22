@@ -22,6 +22,7 @@ class MySQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
 	private $searchConfig = array(
+		// @deprecated Removed 2019.01
 		'index.text.id' => array(
 			'code' => 'index.text.id',
 			'internalcode' => 'mindte."textid"',
@@ -30,6 +31,19 @@ class MySQL
 			'label' => 'Product index text ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'index.text.name' => array(
+			'code' => 'index.text.name()',
+			'internalcode' => '( SELECT mindte_name."prodid"
+				FROM "mshop_index_text" AS mindte_name
+				WHERE :site AND mpro."id" = mindte_name."prodid"
+				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
+				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
+				AND MATCH( mindte_name."value" ) AGAINST( $2 IN BOOLEAN MODE ) > 0 )',
+			'label' => 'Product name, parameter(<language ID>,<text>)',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'index.text.relevance' => array(
@@ -65,6 +79,7 @@ class MySQL
 
 		$site = $context->getLocale()->getSitePath();
 
+		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte_name."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 

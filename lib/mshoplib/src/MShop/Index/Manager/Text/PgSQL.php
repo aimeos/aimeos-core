@@ -21,6 +21,19 @@ class PgSQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
 	private $searchConfig = array(
+		'index.text.name' => array(
+			'code' => 'index.text.name()',
+			'internalcode' => '( SELECT mindte_name."prodid"
+				FROM "mshop_index_text" AS mindte_name
+				WHERE :site AND mpro."id" = mindte_name."prodid"
+				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
+				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
+				AND mindte."value" @@ to_tsquery( $2 ) )',
+			'label' => 'Product name, parameter(<language ID>,<text>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
+			'public' => false,
+		),
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
 			'internalcode' => ':site AND mindte."listtype" IN ($1)
@@ -54,6 +67,7 @@ class PgSQL
 
 		$site = $context->getLocale()->getSitePath();
 
+		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte_name."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 

@@ -200,6 +200,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchItemsName()
+	{
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.text.name', ['de', 'Expr'] );
+		$search->setConditions( $search->compare( '!=', $func, null ) );
+
+		$sortfunc = $search->createFunction( 'sort:index.text.name', ['de', 'Expr'] );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+
+		$result = $this->object->searchItems( $search, [] );
+
+		$this->assertEquals( 1, count( $result ) );
+	}
+
+
 	public function testSearchItemsValue()
 	{
 		$search = $this->object->createSearch();

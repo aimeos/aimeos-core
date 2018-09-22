@@ -32,6 +32,27 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'index.text.name' => array(
+			'code' => 'index.text.name()',
+			'internalcode' => '( SELECT mindte_name."prodid"
+				FROM "mshop_index_text" AS mindte_name
+				WHERE :site AND mpro."id" = mindte_name."prodid"
+				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
+				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
+				AND POSITION( $2 IN mindte_name."value" ) > 0 )',
+			'label' => 'Product name, parameter(<language ID>,<text>)',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'sort:index.text.name' => array(
+			'code' => 'sort:index.text.name()',
+			'internalcode' => 'mindte."value"',
+			'label' => 'Sort by product name, parameter(<language ID>,<text>)',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
 			'internalcode' => '( SELECT COUNT(DISTINCT mindte2."prodid")
@@ -43,7 +64,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
-		// @deprecated Removed 2019.01, Results are ordered by default
 		'sort:index.text.relevance' => array(
 			'code' => 'sort:index.text.relevance()',
 			'internalcode' => '( SELECT COUNT(DISTINCT mindte2."prodid")
@@ -55,6 +75,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, Use "index.text.name"
 		'index.text.value' => array(
 			'code' => 'index.text.value()',
 			'internalcode' => ':site AND mindte."listtype" IN ($1)
@@ -65,6 +86,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, Use "index.text.name"
 		'sort:index.text.value' => array(
 			'code' => 'sort:index.text.value()',
 			'internalcode' => 'mindte."value"',
@@ -101,6 +123,7 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
+		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.value'], 'mindte."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte2."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['sort:index.text.relevance'], 'mindte2."siteid"', $siteIds );

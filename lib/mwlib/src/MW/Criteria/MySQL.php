@@ -30,6 +30,28 @@ class MySQL extends \Aimeos\MW\Criteria\SQL
 	{
 		switch( $name )
 		{
+			case 'index.text.name':
+			case 'sort:index.text.name':
+
+				if( isset( $params[1] ) )
+				{
+					$str = '';
+					$list = array( '-', '+', '>', '<', '(', ')', '~', '*', ':', '"', '&', '|', '!', '/', '§', '$', '%', '{', '}', '[', ']', '=', '?', '\\', '\'', '#', ';', '.', ',', '@' );
+					$search = str_replace( $list, ' ', $params[1] );
+
+					foreach( explode( ' ', $search ) as $part )
+					{
+						$len = strlen( $part );
+
+						if( $len > 0 ) {
+							$str .= ' +' . $part . '*';
+						}
+					}
+
+					$params[1] = $str;
+				}
+				break;
+
 			case 'index.text.relevance':
 			case 'sort:index.text.relevance':
 

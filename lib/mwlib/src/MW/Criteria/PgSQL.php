@@ -29,6 +29,18 @@ class PgSQL extends \Aimeos\MW\Criteria\SQL
 	{
 		switch( $name )
 		{
+			case 'index.text.name':
+			case 'sort:index.text.name':
+
+				if( isset( $params[1] ) )
+				{
+					$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\/|\-|\+|\>|\<|\(|\)|\*|\:|\"|\!|\§|\$|\'|\;|\.|\,|\@)+/';
+					$search = trim( preg_replace( $regex, ' ', $params[1] ) );
+
+					$params[1] = implode( ':* & ', explode( ' ', $search ) ) . ':*';
+				}
+				break;
+
 			case 'index.text.relevance':
 			case 'sort:index.text.relevance':
 
