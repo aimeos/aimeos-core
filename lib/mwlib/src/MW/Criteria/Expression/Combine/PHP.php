@@ -85,7 +85,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
 	 * @return mixed Expression that evaluates to a boolean result
 	 */
-	public function toSource( array $types, array $translations = [], array $plugins = [] )
+	public function toSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] )
 	{
 		if( ( $item = reset( $this->expressions ) ) === false ) {
 			return '';
@@ -95,7 +95,7 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 			return ' ' . self::$operators[$this->operator] . ' ' . $item->toSource( $types, $translations, $plugins );
 		}
 
-		$string = $item->toSource( $types, $translations, $plugins );
+		$string = $item->toSource( $types, $translations, $plugins, $funcs );
 
 		while( ( $item = next( $this->expressions ) ) !== false )
 		{

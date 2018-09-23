@@ -26,9 +26,10 @@ interface Iface
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of variable or column names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return mixed Expression that evaluates to a boolean result
 	 */
-	public function toSource( array $types, array $translations = [], array $plugins = [] );
+	public function toSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] );
 
 
 	/**

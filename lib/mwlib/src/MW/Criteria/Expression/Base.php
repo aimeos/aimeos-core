@@ -156,16 +156,20 @@ abstract class Base
 	 * Translates an expression string and replaces the parameter if it's an expression function.
 	 *
 	 * @param string $name Expresion string or function
-	 * @param array $translations Associative list of names and their translations
-	 * (may include parameter if a name is an expression function)
+	 * @param array $translations Associative list of names and their translations (may include parameter if a name is an expression function)
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return string Translated name (with replaced parameters if the name is an expression function)
 	 */
-	protected function translateName( &$name, array $translations = [] )
+	protected function translateName( &$name, array $translations = [], array $funcs = [] )
 	{
 		$params = [];
 
 		if( $this->isFunction( $name, $params ) === true )
 		{
+			if( isset( $funcs[$name] ) ) {
+				$params = $funcs[$name]( $params );
+			}
+
 			$transname = $name;
 			if( isset( $translations[$name] ) ) {
 				$transname = $translations[$name];
