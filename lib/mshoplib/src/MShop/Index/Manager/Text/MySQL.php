@@ -40,7 +40,7 @@ class MySQL
 				WHERE :site AND mpro."id" = mindte_name."prodid"
 				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
 				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
-				AND MATCH( mindte_name."value" ) AGAINST( $2 IN BOOLEAN MODE ) > 0 )',
+				AND MATCH( mindte_name."value" ) AGAINST( $2 IN BOOLEAN MODE ) )',
 			'label' => 'Product name, parameter(<language ID>,<text>)',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
