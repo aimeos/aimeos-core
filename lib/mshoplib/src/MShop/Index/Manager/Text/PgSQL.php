@@ -28,7 +28,7 @@ class PgSQL
 				WHERE :site AND mpro."id" = mindte_name."prodid"
 				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
 				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
-				AND CAST( mindte."value" @@ to_tsquery( $2 ) AS integer ) > 0 )',
+				AND mindte_name."value" @@ to_tsquery( $2 ) )',
 			'label' => 'Product name, parameter(<language ID>,<text>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
