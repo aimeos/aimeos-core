@@ -56,7 +56,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text.name', ['de', 'Expr'] );
-		$search->setConditions( $search->compare( '>', $func, 0 ) );
+		$search->setConditions( $search->compare( '!=', $func, null ) );
 
 		$sortfunc = $search->createFunction( 'sort:index.text.name', ['de', 'Expr'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
