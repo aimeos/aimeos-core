@@ -1,29 +1,20 @@
 <?php
 
-namespace Aimeos\MW\Criteria\Attribute;
-
-
 /**
- * Test class for \Aimeos\MW\Criteria\Attribute\Standard.
- *
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Metaways Infosystems GmbH, 2011
  * @copyright Aimeos (aimeos.org), 2015-2017
  */
+
+
+namespace Aimeos\MW\Criteria\Attribute;
+
+
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
-	/**
-	 * @var    \Aimeos\MW\Criteria\Attribute\Standard
-	 * @access protected
-	 */
 	private $object;
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function setUp()
 	{
 		$values = array(
@@ -32,6 +23,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'code' => 'attribute_code',
 			'internalcode' => 'internalcode',
 			'internaldeps' => array( 'test' ),
+			'function' => function() {},
 			'label' => 'labelname',
 			'default' => 'default value',
 			'public' => false,
@@ -41,62 +33,72 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MW\Criteria\Attribute\Standard($values);
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
+		unset( $this->object );
 	}
 
 
 	public function testGetType()
 	{
-		$this->assertEquals('attribute_type', $this->object->getType());
+		$this->assertEquals( 'attribute_type', $this->object->getType() );
 	}
 
 
 	public function testGetInternalType()
 	{
-		$this->assertEquals('internaltype', $this->object->getInternalType());
+		$this->assertEquals( 'internaltype', $this->object->getInternalType() );
 	}
+
 
 	public function testGetCode()
 	{
-		$this->assertEquals('attribute_code', $this->object->getCode());
+		$this->assertEquals( 'attribute_code', $this->object->getCode() );
 	}
+
 
 	public function testGetInternalCode()
 	{
-		$this->assertEquals('internalcode', $this->object->getInternalCode());
+		$this->assertEquals( 'internalcode', $this->object->getInternalCode() );
 	}
+
 
 	public function testGetInternalDeps()
 	{
 		$this->assertEquals(array( 'test' ), $this->object->getInternalDeps());
 	}
 
+
+	public function testGetFunction()
+	{
+		$this->assertInstanceOf( '\Closure', $this->object->getFunction() );
+	}
+
+
 	public function testGetLabel()
 	{
-		$this->assertEquals('labelname', $this->object->getLabel());
+		$this->assertEquals( 'labelname', $this->object->getLabel() );
 	}
+
 
 	public function testGetDefault()
 	{
-		$this->assertEquals('default value', $this->object->getDefault());
+		$this->assertEquals( 'default value', $this->object->getDefault() );
 	}
+
 
 	public function testIsPublic()
 	{
-		$this->assertEquals(false, $this->object->isPublic());
+		$this->assertEquals( false, $this->object->isPublic() );
 	}
+
 
 	public function testIsRequired()
 	{
-		$this->assertEquals(false, $this->object->isRequired());
+		$this->assertEquals( false, $this->object->isRequired() );
 	}
+
 
 	public function testToArray()
 	{
@@ -109,6 +111,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'required' => false,
 		);
 
-		$this->assertEquals($expected, $this->object->toArray());
+		$this->assertEquals( $expected, $this->object->toArray() );
 	}
 }
