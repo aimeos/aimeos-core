@@ -289,6 +289,7 @@ class Bootstrap
 			foreach( $dir as $dirinfo )
 			{
 				if( $dirinfo->isDir() === false || $dirinfo->isDot() !== false
+					|| substr( $dirinfo->getFilename(), 0, 1 ) === '.'
 					|| ( $manifest = $this->getManifestFile( $dirinfo->getPathName() ) ) === false
 				) {
 					continue;
