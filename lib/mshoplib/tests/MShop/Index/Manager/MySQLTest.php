@@ -71,12 +71,6 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateSearch()
-	{
-		$this->assertInstanceOf( '\Aimeos\MW\Criteria\MySQL', $this->object->createSearch() );
-	}
-
-
 	public function testGetSearchAttributes()
 	{
 		$list = $this->object->getSearchAttributes();

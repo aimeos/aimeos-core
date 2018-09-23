@@ -666,13 +666,14 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins, array $joins )
 	{
 		$types = $this->getSearchTypes( $attributes );
+		$funcs = $this->getSearchFunctions( $attributes );
 		$translations = $this->getSearchTranslations( $attributes );
 
 		$keys = [];
 		$find = array( ':joins', ':cond', ':start', ':size' );
 		$replace = array(
 			implode( "\n", array_unique( $joins ) ),
-			$search->getConditionSource( $types, $translations, $plugins ),
+			$search->getConditionSource( $types, $translations, $plugins, $funcs ),
 			$search->getSliceStart(),
 			$search->getSliceSize(),
 		);
@@ -681,7 +682,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		{
 			$keys[] = 'orderby';
 			$find[] = ':order';
-			$replace[] = $search->getSortationSource( $types, $translations );
+			$replace[] = $search->getSortationSource( $types, $translations, $funcs );
 
 			$keys[] = 'columns';
 			$find[] = ':columns';

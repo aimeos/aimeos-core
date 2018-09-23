@@ -67,12 +67,6 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateSearch()
-	{
-		$this->assertInstanceOf( '\Aimeos\MW\Criteria\PgSQL', $this->object->createSearch() );
-	}
-
-
 	public function testGetSearchAttributes()
 	{
 		$list = $this->object->getSearchAttributes();

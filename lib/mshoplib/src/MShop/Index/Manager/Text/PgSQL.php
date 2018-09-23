@@ -67,6 +67,23 @@ class PgSQL
 
 		$site = $context->getLocale()->getSitePath();
 
+		$func = function( array $params, $pos ) {
+
+			if( isset( $params[$pos] ) )
+			{
+				$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\/|\-|\+|\>|\<|\(|\)|\*|\:|\"|\!|\§|\$|\'|\;|\.|\,|\@)+/';
+				$search = trim( preg_replace( $regex, ' ', $params[$pos] ) );
+
+				$params[$pos] = '\'' . implode( ':* & ', explode( ' ', $search ) ) . ':*\'';
+			}
+
+			return $params;
+		};
+
+		$this->searchConfig['index.text.name']['function'] = function( array $params ) use ( $func ) { return $func( $params, 1 ); };
+		$this->searchConfig['index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+		$this->searchConfig['sort:index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+
 		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte_name."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
@@ -87,28 +104,5 @@ class PgSQL
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		$dbm = $this->getContext()->getDatabaseManager();
-		$db = $this->getResourceName();
-
-		$conn = $dbm->acquire( $db );
-		$object = new \Aimeos\MW\Criteria\PgSQL( $conn );
-		$dbm->release( $conn, $db );
-
-		if( $default === true ) {
-			$object->setConditions( parent::createSearch( $default )->getConditions() );
-		}
-
-		return $object;
 	}
 }

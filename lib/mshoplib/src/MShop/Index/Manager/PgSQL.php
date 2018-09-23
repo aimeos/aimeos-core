@@ -16,29 +16,9 @@ namespace Aimeos\MShop\Index\Manager;
  *
  * @package MShop
  * @subpackage Index
+ * @deprecated 2019.01, not used any more
  */
 class PgSQL
 	extends \Aimeos\MShop\Index\Manager\Standard
 {
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		$dbm = $this->getContext()->getDatabaseManager();
-		$conn = $dbm->acquire();
-
-		$object = new \Aimeos\MW\Criteria\PgSQL( $conn );
-
-		$dbm->release( $conn );
-
-		if( $default === true ) {
-			$object->setConditions( parent::createSearch( $default )->getConditions() );
-		}
-
-		return $object;
-	}
 }

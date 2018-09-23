@@ -79,6 +79,33 @@ class MySQL
 
 		$site = $context->getLocale()->getSitePath();
 
+		$func = function( array $params, $pos ) {
+
+			if( isset( $params[$pos] ) )
+			{
+				$str = '';
+				$list = ['-', '+', '>', '<', '(', ')', '~', '*', ':', '"', '&', '|', '!', '/', '§', '$', '%', '{', '}', '[', ']', '=', '?', '\\', '\'', '#', ';', '.', ',', '@'];
+				$search = str_replace( $list, ' ', $params[$pos] );
+
+				foreach( explode( ' ', $search ) as $part )
+				{
+					$len = strlen( $part );
+
+					if( $len > 0 ) {
+						$str .= ' +' . $part . '*';
+					}
+				}
+
+				$params[$pos] = '\'' . $str . '\'';
+			}
+
+			return $params;
+		};
+
+		$this->searchConfig['index.text.name']['function'] = function( array $params ) use ( $func ) { return $func( $params, 1 ); };
+		$this->searchConfig['index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+		$this->searchConfig['sort:index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+
 		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte_name."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
@@ -99,28 +126,5 @@ class MySQL
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		$dbm = $this->getContext()->getDatabaseManager();
-		$db = $this->getResourceName();
-
-		$conn = $dbm->acquire( $db );
-		$object = new \Aimeos\MW\Criteria\MySQL( $conn );
-		$dbm->release( $conn, $db );
-
-		if( $default === true ) {
-			$object->setConditions( parent::createSearch( $default )->getConditions() );
-		}
-
-		return $object;
 	}
 }
