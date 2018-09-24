@@ -223,6 +223,6 @@ class Supplier
 			
 		}
 
-		$this->setAttributes( $orderServiceItem, $attributes, 'delivery' );
+		$this->getProvider()->setConfigFE( $orderServiceItem, $attributes );
 	}
 }
