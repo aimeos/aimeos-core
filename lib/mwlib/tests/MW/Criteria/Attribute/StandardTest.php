@@ -17,17 +17,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
+		$func = function() {};
+
 		$values = array(
 			'type' => 'attribute_type',
 			'internaltype' => 'internaltype',
 			'code' => 'attribute_code',
 			'internalcode' => 'internalcode',
 			'internaldeps' => array( 'test' ),
-			'function' => function() {},
 			'label' => 'labelname',
 			'default' => 'default value',
 			'public' => false,
 			'required' => false,
+			'function' => $func,
 		);
 
 		$this->object = new \Aimeos\MW\Criteria\Attribute\Standard($values);

@@ -50,13 +50,15 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSearchFunctionsArray()
 	{
+		$func = function() {};
+
 		$args = array(
 			'code' => 'product.datestart',
 			'internalcode' => 'mspro."start"',
 			'internaltype' => 'string',
 			'type' => 'datetime',
 			'label' => 'test',
-			'function' => function() {},
+			'function' => $func,
 		);
 
 		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
