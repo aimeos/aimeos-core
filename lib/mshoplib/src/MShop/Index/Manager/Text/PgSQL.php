@@ -21,19 +21,6 @@ class PgSQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
 	private $searchConfig = array(
-		'index.text.name' => array(
-			'code' => 'index.text.name()',
-			'internalcode' => '( SELECT mindte_name."prodid"
-				FROM "mshop_index_text" AS mindte_name
-				WHERE :site AND mpro."id" = mindte_name."prodid"
-				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
-				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
-				AND mindte_name."value" @@ to_tsquery( $2 ) )',
-			'label' => 'Product name, parameter(<language ID>,<text>)',
-			'type' => 'null',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
-			'public' => false,
-		),
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
 			'internalcode' => ':site AND mindte."listtype" IN ($1)
@@ -67,24 +54,22 @@ class PgSQL
 
 		$site = $context->getLocale()->getSitePath();
 
-		$func = function( array $params, $pos ) {
+		$func = function( array $params ) {
 
-			if( isset( $params[$pos] ) )
+			if( isset( $params[2] ) )
 			{
 				$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\/|\-|\+|\>|\<|\(|\)|\*|\:|\"|\!|\§|\$|\'|\;|\.|\,|\@)+/';
-				$search = trim( preg_replace( $regex, ' ', $params[$pos] ) );
+				$search = trim( preg_replace( $regex, ' ', $params[2] ) );
 
-				$params[$pos] = '\'' . implode( ':* & ', explode( ' ', $search ) ) . ':*\'';
+				$params[2] = '\'' . implode( ':* & ', explode( ' ', $search ) ) . ':*\'';
 			}
 
 			return $params;
 		};
 
-		$this->searchConfig['index.text.name']['function'] = function( array $params ) use ( $func ) { return $func( $params, 1 ); };
-		$this->searchConfig['index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
-		$this->searchConfig['sort:index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+		$this->searchConfig['index.text.relevance']['function'] = $func;
+		$this->searchConfig['sort:index.text.relevance']['function'] = $func;
 
-		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte_name."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 

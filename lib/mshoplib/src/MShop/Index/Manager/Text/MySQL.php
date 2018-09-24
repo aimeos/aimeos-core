@@ -33,19 +33,6 @@ class MySQL
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'index.text.name' => array(
-			'code' => 'index.text.name()',
-			'internalcode' => '( SELECT mindte_name."prodid"
-				FROM "mshop_index_text" AS mindte_name
-				WHERE :site AND mpro."id" = mindte_name."prodid"
-				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
-				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
-				AND MATCH( mindte_name."value" ) AGAINST( $2 IN BOOLEAN MODE ) )',
-			'label' => 'Product name, parameter(<language ID>,<text>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
 			'internalcode' => ':site AND mindte."listtype" IN ($1)
@@ -79,13 +66,13 @@ class MySQL
 
 		$site = $context->getLocale()->getSitePath();
 
-		$func = function( array $params, $pos ) {
+		$func = function( array $params ) {
 
-			if( isset( $params[$pos] ) )
+			if( isset( $params[2] ) )
 			{
 				$str = '';
 				$list = ['-', '+', '>', '<', '(', ')', '~', '*', ':', '"', '&', '|', '!', '/', '§', '$', '%', '{', '}', '[', ']', '=', '?', '\\', '\'', '#', ';', '.', ',', '@'];
-				$search = str_replace( $list, ' ', $params[$pos] );
+				$search = str_replace( $list, ' ', $params[2] );
 
 				foreach( explode( ' ', $search ) as $part )
 				{
@@ -96,17 +83,15 @@ class MySQL
 					}
 				}
 
-				$params[$pos] = '\'' . $str . '\'';
+				$params[2] = '\'' . $str . '\'';
 			}
 
 			return $params;
 		};
 
-		$this->searchConfig['index.text.name']['function'] = function( array $params ) use ( $func ) { return $func( $params, 1 ); };
-		$this->searchConfig['index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
-		$this->searchConfig['sort:index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+		$this->searchConfig['index.text.relevance']['function'] = $func;
+		$this->searchConfig['sort:index.text.relevance']['function'] = $func;
 
-		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte_name."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 

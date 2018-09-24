@@ -204,15 +204,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.text.name', ['de', 'Expr'] );
-		$search->setConditions( $search->compare( '!=', $func, null ) );
+		$func = $search->createFunction( 'index.text.name', ['de'] );
+		$search->setConditions( $search->compare( '=~', $func, 'Cafe' ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.text.name', ['de', 'Expr'] );
+		$sortfunc = $search->createFunction( 'sort:index.text.name', ['de'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );
 
-		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, count( $result ) );
 	}
 
 

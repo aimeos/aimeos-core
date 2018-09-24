@@ -34,13 +34,9 @@ class Standard
 		),
 		'index.text.name' => array(
 			'code' => 'index.text.name()',
-			'internalcode' => '( SELECT mindte_name."prodid"
-				FROM "mshop_index_text" AS mindte_name
-				WHERE :site AND mpro."id" = mindte_name."prodid"
-				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
-				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
-				AND POSITION( $2 IN mindte_name."value" ) > 0 )',
-			'label' => 'Product name, parameter(<language ID>,<text>)',
+			'internalcode' => ':site AND mindte."type" = \'name\' AND mindte."domain" = \'product\'
+				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND mindte."value"',
+			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
@@ -48,7 +44,7 @@ class Standard
 		'sort:index.text.name' => array(
 			'code' => 'sort:index.text.name()',
 			'internalcode' => 'mindte."value"',
-			'label' => 'Sort by product name, parameter(<language ID>,<text>)',
+			'label' => 'Sort by product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,

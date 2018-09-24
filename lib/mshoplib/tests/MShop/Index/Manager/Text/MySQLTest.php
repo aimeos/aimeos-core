@@ -43,20 +43,4 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
 		}
 	}
-
-
-	public function testSearchItemsName()
-	{
-		$search = $this->object->createSearch();
-
-		$func = $search->createFunction( 'index.text.name', ['de', 'Expr'] );
-		$search->setConditions( $search->compare( '!=', $func, null ) );
-
-		$sortfunc = $search->createFunction( 'sort:index.text.name', ['de', 'Expr'] );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertEquals( 1, count( $result ) );
-	}
 }
