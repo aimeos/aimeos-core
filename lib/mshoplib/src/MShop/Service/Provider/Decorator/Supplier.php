@@ -43,24 +43,6 @@ class Supplier
 			'default' => 1,
 			'required' => false,
 		),
-		'supplier.display-name' => array(
-			'code' => 'supplier.display-name',
-			'internalcode' => 'supplier.display-name',
-			'label' => 'Display supplier company name or label in summary and e-mail',
-			'type' => 'boolean',
-			'internaltype' => 'boolean',
-			'default' => 0,
-			'required' => false,
-		),
-		'supplier.display-address' => array(
-			'code' => 'supplier.display-address',
-			'internalcode' => 'supplier.display-address',
-			'label' => 'Display supplier address in summary and e-mail',
-			'type' => 'boolean',
-			'internaltype' => 'boolean',
-			'default' => 0,
-			'required' => false,
-		),
 	);
 
 
@@ -125,21 +107,19 @@ class Supplier
 					$addr->getWebsite()
 				) );
 				
-				if( !empty($addr->getAddress1()) && !empty($addr->getCity()) ) {
+				if( $addr->getAddress1() != '' && $addr->getCity() != '' ) {
 					$this->feConfig['supplier.code']['short'][$addrId] = preg_replace( "/\n+/m", "\n", sprintf(
 
 					/// Supplier address format with address part one (%1$s, e.g street), address part two (%2$s, e.g house number),
 					/// postal/zip code (%3$s), city (%4$s)
-						$context->getI18n()->dt( 'mshop', '%1$s %2$s, %3$s %4$s'),
+						$context->getI18n()->dt( 'mshop', '%1$s, %2$s, %3$s %4$s, %5$s %6$s'),
+						$item->getLabel(),
+						$addr->getCompany(),
 						$addr->getAddress1(),
 						$addr->getAddress2(),
 						$addr->getPostal(),
 						$addr->getCity()
 					) );
-				}
-				
-				if( !empty($addr->getCompany()) || !empty($item->getLabel()) ) {
-					$this->feConfig['supplier.code']['name'][$addrId] = !empty($addr->getCompany()) ? $addr->getCompany() : $item->getLabel();
 				}
 			}
 		}
@@ -201,17 +181,8 @@ class Supplier
 	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes ) 
 	{
 		if( ( $code = $attributes['supplier.code'] ) != '' ) {
-			
-			if( $this->getConfigValue('supplier.display-name')
-				&& isset( $this->feConfig['supplier.code']['name'][$code] ) 
-			) {
-				// add name as attribute for summary page / customer email
-				$attributes['supplier.name'] = $this->feConfig['supplier.code']['name'][$code];
-			}
-			
-			if( $this->getConfigValue('supplier.display-address') 
-				&& isset( $this->feConfig['supplier.code']['short'][$code] ) 
-			) {
+
+			if( isset( $this->feConfig['supplier.code']['short'][$code] ) ) {
 				// add short address as attribute for summary page / customer email
 				$attributes['supplier.address'] = $this->feConfig['supplier.code']['short'][$code];
 			}
