@@ -107,20 +107,25 @@ class Supplier
 					$addr->getWebsite()
 				) );
 				
-				if( $addr->getAddress1() != '' && $addr->getCity() != '' ) {
-					$this->feConfig['supplier.code']['short'][$addrId] = preg_replace( "/\n+/m", "\n", sprintf(
+				$this->feConfig['supplier.code']['short'][$addrId] = preg_replace( "/\n+/m", "\n", sprintf(
 
-					/// Supplier address format with address part one (%1$s, e.g street), address part two (%2$s, e.g house number),
-					/// postal/zip code (%3$s), city (%4$s)
-						$context->getI18n()->dt( 'mshop', '%1$s, %2$s, %3$s %4$s, %5$s %6$s'),
-						$item->getLabel(),
-						$addr->getCompany(),
-						$addr->getAddress1(),
-						$addr->getAddress2(),
-						$addr->getPostal(),
-						$addr->getCity()
-					) );
-				}
+				/// Supplier address format with address part one (%1$s, e.g street), address part two (%2$s, e.g house number),
+				/// postal/zip code (%3$s), city (%4$s)
+					$context->getI18n()->dt( 'mshop', '%1$s, %2$s, %3$s %4$s, %6$s %7$s'),
+					$item->getLabel(),
+					$addr->getCompany(),
+					$addr->getAddress1(),
+					$addr->getAddress2(),
+					$addr->getAddress3(),
+					$addr->getPostal(),
+					$addr->getCity(),
+					$addr->getState(),
+					$addr->getCountryId(),
+					$addr->getEmail(),
+					$addr->getTelephone(),
+					$addr->getTelefax(),
+					$addr->getWebsite()
+				) );
 			}
 		}
 	}
