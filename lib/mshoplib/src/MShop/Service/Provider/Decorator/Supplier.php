@@ -32,6 +32,18 @@ class Supplier
 			'required' => true
 		),
 	);
+	
+	private $beConfig = array(
+		'supplier.display-code' => array(
+			'code' => 'supplier.display-code',
+			'internalcode' => 'supplier.display-code',
+			'label' => 'Display supplier code in summary and e-mail',
+			'type' => 'boolean',
+			'internaltype' => 'boolean',
+			'default' => 1,
+			'required' => false,
+		),
+	);
 
 
 	/**
@@ -56,17 +68,20 @@ class Supplier
 		{
 			$addresses = $item->getAddressItems();
 
-			if( ( $addr = reset( $addresses ) ) === false ) {
-				$addr = $addrManager->createItem();
+			if( empty( $addresses ) ) {
+				$addresses[] = $addrManager->createItem();
 			}
 
-			$this->feConfig['supplier.code']['default'][$item->getCode()] = preg_replace( "/\n+/m", "\n", sprintf(
+			foreach( $addresses as $id => $addr ) {
+				$addrId = ( count($addresses) > 1) ? $item->getCode().'-'.$id : $item->getCode();
+			
+				$this->feConfig['supplier.code']['default'][$addrId] = preg_replace( "/\n+/m", "\n", sprintf(
 
-			/// Supplier address format with label (%1$s), company (%2$s),
-			/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
-			/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
-			/// e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
-				$context->getI18n()->dt( 'mshop', '%1$s
+				/// Supplier address format with label (%1$s), company (%2$s),
+				/// address part one (%3$s, e.g street), address part two (%4$s, e.g house number), address part three (%5$s, e.g additional information),
+				/// postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+				/// e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site (%13$s)
+					$context->getI18n()->dt( 'mshop', '%1$s
 %2$s
 %3$s %4$s
 %5$s
@@ -76,21 +91,42 @@ class Supplier
 %11$s
 %12$s
 %13$s
-' 				),
-				$item->getLabel(),
-				$addr->getCompany(),
-				$addr->getAddress1(),
-				$addr->getAddress2(),
-				$addr->getAddress3(),
-				$addr->getPostal(),
-				$addr->getCity(),
-				$addr->getState(),
-				$addr->getCountryId(),
-				$addr->getEmail(),
-				$addr->getTelephone(),
-				$addr->getTelefax(),
-				$addr->getWebsite()
-			) );
+' 					),
+					$item->getLabel(),
+					$addr->getCompany(),
+					$addr->getAddress1(),
+					$addr->getAddress2(),
+					$addr->getAddress3(),
+					$addr->getPostal(),
+					$addr->getCity(),
+					$addr->getState(),
+					$addr->getCountryId(),
+					$addr->getEmail(),
+					$addr->getTelephone(),
+					$addr->getTelefax(),
+					$addr->getWebsite()
+				) );
+				
+				$this->feConfig['supplier.code']['short'][$addrId] = preg_replace( "/\n+/m", "\n", sprintf(
+
+				/// Supplier address format with address part one (%1$s, e.g street), address part two (%2$s, e.g house number),
+				/// postal/zip code (%3$s), city (%4$s)
+					$context->getI18n()->dt( 'mshop', '%1$s, %2$s, %3$s %4$s, %6$s %7$s'),
+					$item->getLabel(),
+					$addr->getCompany(),
+					$addr->getAddress1(),
+					$addr->getAddress2(),
+					$addr->getAddress3(),
+					$addr->getPostal(),
+					$addr->getCity(),
+					$addr->getState(),
+					$addr->getCountryId(),
+					$addr->getEmail(),
+					$addr->getTelephone(),
+					$addr->getTelefax(),
+					$addr->getWebsite()
+				) );
+			}
 		}
 	}
 
@@ -138,5 +174,31 @@ class Supplier
 		catch( \Aimeos\MShop\Order\Exception $e ) {} // If service isn't available
 
 		return array_merge( $this->getProvider()->getConfigFE( $basket ), $this->getConfigItems( $feconfig ) );
+	}
+
+
+	/**
+	 * Sets the delivery attributes in the given service.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket
+	 * @param array $attributes Attribute key/value pairs entered by the customer during the checkout process
+	 */
+	public function setConfigFE( \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem, array $attributes ) 
+	{
+		if( ( $code = $attributes['supplier.code'] ) != '' ) {
+
+			if( isset( $this->feConfig['supplier.code']['short'][$code] ) ) {
+				// add short address as attribute for summary page / customer email
+				$attributes['supplier.address'] = $this->feConfig['supplier.code']['short'][$code];
+			}
+			
+			if( $this->getConfigValue('supplier.display-code') === 0 ) {
+				// remove code attribute for summary page / customer email
+				unset( $attributes['supplier.code'] );
+			}
+			
+		}
+
+		$this->getProvider()->setConfigFE( $orderServiceItem, $attributes );
 	}
 }
