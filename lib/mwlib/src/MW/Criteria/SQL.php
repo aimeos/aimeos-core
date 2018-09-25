@@ -119,13 +119,14 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return mixed Data for searching
 	 */
-	public function getConditionSource( array $types, array $translations = [], array $plugins = [] )
+	public function getConditionSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] )
 	{
 		$types['1'] = \Aimeos\MW\DB\Statement\Base::PARAM_INT;
 
-		if( ( $string = $this->conditions->toSource( $types, $translations, $plugins ) ) !== '' ) {
+		if( ( $string = $this->conditions->toSource( $types, $translations, $plugins, $funcs ) ) !== '' ) {
 			return $string;
 		}
 
@@ -166,9 +167,10 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 *
 	 * @param array $types Associative list of variable or column names as keys and their corresponding types
 	 * @param array $translations Associative list of item names that should be translated
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return mixed Data for sorting the items
 	 */
-	public function getSortationSource( array $types, array $translations = [] )
+	public function getSortationSource( array $types, array $translations = [], array $funcs = [] )
 	{
 		if( empty( $this->sortations ) )
 		{
@@ -178,7 +180,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 				throw new \Aimeos\MW\Common\Exception( 'No sortation types available' );
 			}
 
-			return $this->sort( '+', $name )->toSource( $types, $translations );
+			return $this->sort( '+', $name )->toSource( $types, $translations, [], $funcs );
 		}
 
 

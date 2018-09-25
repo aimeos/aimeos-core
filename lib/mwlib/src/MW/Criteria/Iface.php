@@ -76,15 +76,6 @@ interface Iface
 	 */
 	public function getOperators();
 
-	/**
-	 * Returns a translated colum list separated by comma
-	 *
-	 * @param array $columns List of column names or objects implementing getName() method
-	 * @param array $translations Associative list of item names that should be translated
-	 * @return string Translated columns
-	 */
-	public function getColumnString( array $columns, array $translations = [] );
-
 
 	/**
 	 * Returns the expression string.
@@ -92,9 +83,10 @@ interface Iface
 	 * @param array $types Associative list of item names and their types
 	 * @param array $translations Associative list of item names that should be translated
 	 * @param array $plugins Associative list of item names and plugins implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return mixed Data for searching
 	 */
-	public function getConditionSource( array $types, array $translations = [], array $plugins = [] );
+	public function getConditionSource( array $types, array $translations = [], array $plugins = [], array $funcs = [] );
 
 
 	/**
@@ -208,4 +200,14 @@ interface Iface
 	 * @return array List of sort expressions implementing \Aimeos\MW\Criteria\Expression\Sort\Iface
 	 */
 	public function toSortations( array $array );
+
+
+	/**
+	 * Returns the list of translated colums
+	 *
+	 * @param array $columns List of objects implementing getName() method
+	 * @param array $translations Associative list of item names that should be translated
+	 * @return array List of translated columns
+	 */
+	public function translate( array $columns, array $translations = [] );
 }

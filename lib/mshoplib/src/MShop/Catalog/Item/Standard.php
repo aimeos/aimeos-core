@@ -27,6 +27,7 @@ class Standard
 
 	private $node;
 	private $children;
+	private $deletedItems = [];
 
 
 	/**
@@ -56,6 +57,17 @@ class Standard
 	public function __clone()
 	{
 		$this->node = clone $this->node;
+	}
+
+
+	/**
+	 * Returns the item type
+	 *
+	 * @return string Item type, subtypes are separated by slashes
+	 */
+	public function getResourceType()
+	{
+		return 'catalog';
 	}
 
 
@@ -94,28 +106,6 @@ class Standard
 	public function getSiteId()
 	{
 		return ( $this->node->__isset( 'siteid' ) ? $this->node->__get( 'siteid' ) : null );
-	}
-
-
-	/**
-	 * Returns the ID of the parent category
-	 *
-	 * @return string|null Unique ID of the parent category
-	 */
-	public function getParentId()
-	{
-		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : 0 );
-	}
-
-
-	/**
-	 * Returns the level of the item in the tree
-	 *
-	 * @return integer Level of the item starting with "0" for the root node
-	 */
-	public function getLevel()
-	{
-		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : 0 );
 	}
 
 
@@ -208,6 +198,7 @@ class Standard
 		return $this->node->getStatus();
 	}
 
+
 	/**
 	 * Sets the new status of the item.
 	 *
@@ -223,6 +214,7 @@ class Standard
 		return $this;
 	}
 
+
 	/**
 	 * Returns the URL target specific for that category
 	 *
@@ -232,6 +224,7 @@ class Standard
 	{
 		return ( $this->node->__isset( 'target' ) ? $this->node->__get( 'target' ) : '' );
 	}
+
 
 	/**
 	 * Sets a new URL target specific for that category
@@ -247,6 +240,7 @@ class Standard
 
 		return $this;
 	}
+
 
 	/**
 	 * Returns modify date/time of the order item base product.
@@ -363,44 +357,6 @@ class Standard
 		return $this->node->isModified();
 	}
 
-	/**
-	 * Returns a child of this node identified by its index.
-	 *
-	 * @param integer $index Index of child node
-	 * @return \Aimeos\MShop\Catalog\Item\Iface Selected node
-	 */
-	public function getChild( $index )
-	{
-		if( isset( $this->children[$index] ) ) {
-			return $this->children[$index];
-		}
-
-		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
-	}
-
-	/**
-	 * Returns all children of this node.
-	 *
-	 * @return array Numerically indexed list of nodes
-	 */
-	public function getChildren()
-	{
-		return $this->children;
-	}
-
-	/**
-	 * Tests if a node has children.
-	 *
-	 * @return boolean True if node has children, false if not
-	 */
-	public function hasChildren()
-	{
-		if( count( $this->children ) > 0 ) {
-			return true;
-		}
-
-		return $this->node->hasChildren();
-	}
 
 	/**
 	 * Adds a child node to this node.
@@ -418,7 +374,83 @@ class Standard
 
 
 	/**
+	 * Removes a child node from this node.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 */
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item )
+	{
+		foreach( $this->children as $idx => $child )
+		{
+			if( $child === $item )
+			{
+				$this->deletedItems[] = $item;
+				unset( $this->children[$idx] );
+			}
+		}
+
+		return $this;
+	}
+
+
+	/**
+	 * Returns a child of this node identified by its index.
+	 *
+	 * @param integer $index Index of child node
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Selected node
+	 */
+	public function getChild( $index )
+	{
+		if( isset( $this->children[$index] ) ) {
+			return $this->children[$index];
+		}
+
+		throw new \Aimeos\MShop\Catalog\Exception( sprintf( 'Child node with index "%1$d" not available', $index ) );
+	}
+
+
+	/**
+	 * Returns all children of this node.
+	 *
+	 * @return array Numerically indexed list of nodes
+	 */
+	public function getChildren()
+	{
+		return $this->children;
+	}
+
+
+	/**
+	 * Returns the deleted children.
+	 *
+	 * @return \Aimeos\MShop\Catalog\Item\Iface[] List of removed children
+	 */
+	public function getChildrenDeleted()
+	{
+		return $this->deletedItems;
+	}
+
+
+	/**
+	 * Tests if a node has children.
+	 *
+	 * @return boolean True if node has children, false if not
+	 */
+	public function hasChildren()
+	{
+		if( count( $this->children ) > 0 ) {
+			return true;
+		}
+
+		return $this->node->hasChildren();
+	}
+
+
+	/**
 	 * Returns the internal node.
+	 *
+	 * For internal use only!
 	 *
 	 * @return \Aimeos\MW\Tree\Node\Iface Internal node object
 	 */
@@ -429,12 +461,27 @@ class Standard
 
 
 	/**
-	 * Returns the item type
+	 * Returns the level of the item in the tree
 	 *
-	 * @return string Item type, subtypes are separated by slashes
+	 * For internal use only!
+	 *
+	 * @return integer Level of the item starting with "0" for the root node
 	 */
-	public function getResourceType()
+	public function getLevel()
 	{
-		return 'catalog';
+		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : 0 );
+	}
+
+
+	/**
+	 * Returns the ID of the parent category
+	 *
+	 * For internal use only!
+	 *
+	 * @return string|null Unique ID of the parent category
+	 */
+	public function getParentId()
+	{
+		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : 0 );
 	}
 }

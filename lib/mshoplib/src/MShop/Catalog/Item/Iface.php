@@ -35,4 +35,49 @@ interface Iface
 	 * @return \Aimeos\MShop\Product\Item\Iface Product item for chaining method calls
 	 */
 	public function setTarget( $value );
+
+	/**
+	 * Adds a child node to this node.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to add
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 */
+	public function addChild( \Aimeos\MShop\Common\Item\Tree\Iface $item );
+
+	/**
+	 * Removes a child node from this node.
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Tree\Iface $item Child node to remove
+	 * @return \Aimeos\MShop\Common\Item\Tree\Iface Tree item for chaining method calls
+	 */
+	public function deleteChild( \Aimeos\MShop\Common\Item\Tree\Iface $item );
+
+	/**
+	 * Returns a child of this node identified by its index.
+	 *
+	 * @param integer $index Index of child node
+	 * @return \Aimeos\MShop\Catalog\Item\Iface Selected node
+	 */
+	public function getChild( $index );
+
+	/**
+	 * Returns all children of this node.
+	 *
+	 * @return array Numerically indexed list of nodes
+	 */
+	public function getChildren();
+
+	/**
+	 * Returns the deleted children.
+	 *
+	 * @return \Aimeos\MShop\Catalog\Item\Iface[] List of removed children
+	 */
+	public function getChildrenDeleted();
+
+	/**
+	 * Tests if a node has children.
+	 *
+	 * @return boolean True if node has children, false if not
+	 */
+	public function hasChildren();
 }

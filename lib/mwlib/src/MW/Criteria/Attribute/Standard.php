@@ -50,6 +50,11 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	private $internalDeps = [];
 
 	/**
+	 * @var \Closure Helper function for search parameters
+	 */
+	private $func = null;
+
+	/**
 	 * @var string Human readable name of the attribute
 	 */
 	private $label = '';
@@ -79,6 +84,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	 *		[internalcode] string
 	 *		[internaltype] string
 	 *		[internaldeps] array (optional)
+	 *		[function] Closure (optional)
 	 *		[label] string
 	 *		[public] boolean (optional)
 	 *		[required] booblean (optional)
@@ -97,7 +103,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 
 		$this->code = (string) $params['code'];
 		$this->internalType = (string) $params['internaltype'];
-		$this->internalCode = (string) $params['internalcode'];
+		$this->internalCode = $params['internalcode'];
 		$this->label = (string) $params['label'];
 		$this->type = (string) $params['type'];
 
@@ -107,6 +113,10 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 
 		if( isset( $params['internaldeps'] ) ) {
 			$this->internalDeps = $params['internaldeps'];
+		}
+
+		if( isset( $params['function'] ) ) {
+			$this->func = $params['function'];
 		}
 
 		if( isset( $params['public'] ) ) {
@@ -157,7 +167,7 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	/**
 	 * Returns the internal code for the search attribute.
 	 *
-	 * @return string Internal code of the search attribute
+	 * @return mixed Internal code of the search attribute
 	 */
 	public function getInternalCode()
 	{
@@ -173,6 +183,17 @@ class Standard implements \Aimeos\MW\Criteria\Attribute\Iface
 	public function getInternalDeps()
 	{
 		return $this->internalDeps;
+	}
+
+
+	/**
+	 * Returns the helper function if available
+	 *
+	 * @return \Closure|null Helper function
+	 */
+	public function getFunction()
+	{
+		return $this->func;
 	}
 
 

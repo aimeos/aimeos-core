@@ -48,6 +48,28 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetSearchFunctionsArray()
+	{
+		$func = function() {};
+
+		$args = array(
+			'code' => 'product.datestart',
+			'internalcode' => 'mspro."start"',
+			'internaltype' => 'string',
+			'type' => 'datetime',
+			'label' => 'test',
+			'function' => $func,
+		);
+
+		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$method = $class->getMethod( 'getSearchFunctions' );
+		$method->setAccessible( true );
+
+		$result = $method->invokeArgs( $this->object, array( array( $args ) ) );
+		$this->assertEquals( array( 'product.datestart' => function() {} ), $result );
+	}
+
+
 	public function testGetSearchTranslationsArray()
 	{
 		$args = array(

@@ -22,6 +22,7 @@ class MySQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
 	private $searchConfig = array(
+		// @deprecated Removed 2019.01
 		'index.text.id' => array(
 			'code' => 'index.text.id',
 			'internalcode' => 'mindte."textid"',
@@ -30,6 +31,19 @@ class MySQL
 			'label' => 'Product index text ID',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'index.text.name' => array(
+			'code' => 'index.text.name()',
+			'internalcode' => '( SELECT mindte_name."prodid"
+				FROM "mshop_index_text" AS mindte_name
+				WHERE :site AND mpro."id" = mindte_name."prodid"
+				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
+				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
+				AND MATCH( mindte_name."value" ) AGAINST( $2 IN BOOLEAN MODE ) )',
+			'label' => 'Product name, parameter(<language ID>,<text>)',
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'index.text.relevance' => array(
@@ -42,6 +56,7 @@ class MySQL
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, Results are ordered by default
 		'sort:index.text.relevance' => array(
 			'code' => 'sort:index.text.relevance()',
 			'internalcode' => 'MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
@@ -64,6 +79,34 @@ class MySQL
 
 		$site = $context->getLocale()->getSitePath();
 
+		$func = function( array $params, $pos ) {
+
+			if( isset( $params[$pos] ) )
+			{
+				$str = '';
+				$list = ['-', '+', '>', '<', '(', ')', '~', '*', ':', '"', '&', '|', '!', '/', '§', '$', '%', '{', '}', '[', ']', '=', '?', '\\', '\'', '#', ';', '.', ',', '@'];
+				$search = str_replace( $list, ' ', $params[$pos] );
+
+				foreach( explode( ' ', $search ) as $part )
+				{
+					$len = strlen( $part );
+
+					if( $len > 0 ) {
+						$str .= ' +' . $part . '*';
+					}
+				}
+
+				$params[$pos] = '\'' . $str . '\'';
+			}
+
+			return $params;
+		};
+
+		$this->searchConfig['index.text.name']['function'] = function( array $params ) use ( $func ) { return $func( $params, 1 ); };
+		$this->searchConfig['index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+		$this->searchConfig['sort:index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+
+		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte_name."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 
@@ -83,28 +126,5 @@ class MySQL
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		$dbm = $this->getContext()->getDatabaseManager();
-		$db = $this->getResourceName();
-
-		$conn = $dbm->acquire( $db );
-		$object = new \Aimeos\MW\Criteria\MySQL( $conn );
-		$dbm->release( $conn, $db );
-
-		if( $default === true ) {
-			$object->setConditions( parent::createSearch( $default )->getConditions() );
-		}
-
-		return $object;
 	}
 }

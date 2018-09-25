@@ -58,6 +58,13 @@ interface Iface
 	public function getInternalDeps();
 
 	/**
+	 * Returns the helper function if available
+	 *
+	 * @return \Closure|null Helper function
+	 */
+	public function getFunction();
+
+	/**
 	 * Returns the human readable label for the search attribute.
 	 *
 	 * @return string Name of the search attribute

@@ -130,19 +130,46 @@ abstract class Base
 
 
 	/**
+	 * Replaces the parameters in nested arrays
+	 *
+	 * @param array $list Multi-dimensional associative array of values including positional parameter, e.g. "$1"
+	 * @param array $find List of strings to search for, e.g. ['$1', '$2']
+	 * @param array $replace List of strings to replace by, e.g. ['val1', 'val2']
+	 * @return Multi-dimensional associative array with parameters replaced
+	 */
+	protected function replaceParameter( array $list, array $find, array $replace )
+	{
+		foreach( $list as $key => $value )
+		{
+			if( is_array( $value ) ) {
+				$list[$key] = $this->replaceParameter( $value, $find, $replace );
+			} else {
+				$list[$key] = str_replace( $find, $replace, $value );
+			}
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Translates an expression string and replaces the parameter if it's an expression function.
 	 *
 	 * @param string $name Expresion string or function
-	 * @param array $translations Associative list of names and their translations
-	 * (may include parameter if a name is an expression function)
+	 * @param array $translations Associative list of names and their translations (may include parameter if a name is an expression function)
+	 * @param array $funcs Associative list of item names and functions modifying the conditions
 	 * @return string Translated name (with replaced parameters if the name is an expression function)
 	 */
-	protected function translateName( &$name, array $translations = [] )
+	protected function translateName( &$name, array $translations = [], array $funcs = [] )
 	{
 		$params = [];
 
 		if( $this->isFunction( $name, $params ) === true )
 		{
+			if( isset( $funcs[$name] ) ) {
+				$params = $funcs[$name]( $params );
+			}
+
 			$transname = $name;
 			if( isset( $translations[$name] ) ) {
 				$transname = $translations[$name];
@@ -155,14 +182,18 @@ abstract class Base
 				$find[$i] = '$' . ( $i + 1 );
 			}
 
+			if( is_array( $transname ) ) {
+				return $this->replaceParameter( $transname, $find, $params );
+			}
+
 			return str_replace( $find, $params, $transname );
 		}
 
 		if( isset( $translations[$name] ) ) {
 			return $translations[$name];
-		} else {
-			return $name;
 		}
+
+		return $name;
 	}
 
 

@@ -21,6 +21,19 @@ class PgSQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
 	private $searchConfig = array(
+		'index.text.name' => array(
+			'code' => 'index.text.name()',
+			'internalcode' => '( SELECT mindte_name."prodid"
+				FROM "mshop_index_text" AS mindte_name
+				WHERE :site AND mpro."id" = mindte_name."prodid"
+				AND mindte_name."type" = \'name\' AND mindte_name."domain" = \'product\'
+				AND ( mindte_name."langid" = $1 OR mindte_name."langid" IS NULL )
+				AND mindte_name."value" @@ to_tsquery( $2 ) )',
+			'label' => 'Product name, parameter(<language ID>,<text>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
+			'public' => false,
+		),
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
 			'internalcode' => ':site AND mindte."listtype" IN ($1)
@@ -31,6 +44,7 @@ class PgSQL
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, Results are ordered by default
 		'sort:index.text.relevance' => array(
 			'code' => 'sort:index.text.relevance()',
 			'internalcode' => 'mindte."value" @@ to_tsquery($3)',
@@ -53,6 +67,24 @@ class PgSQL
 
 		$site = $context->getLocale()->getSitePath();
 
+		$func = function( array $params, $pos ) {
+
+			if( isset( $params[$pos] ) )
+			{
+				$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\/|\-|\+|\>|\<|\(|\)|\*|\:|\"|\!|\§|\$|\'|\;|\.|\,|\@)+/';
+				$search = trim( preg_replace( $regex, ' ', $params[$pos] ) );
+
+				$params[$pos] = '\'' . implode( ':* & ', explode( ' ', $search ) ) . ':*\'';
+			}
+
+			return $params;
+		};
+
+		$this->searchConfig['index.text.name']['function'] = function( array $params ) use ( $func ) { return $func( $params, 1 ); };
+		$this->searchConfig['index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+		$this->searchConfig['sort:index.text.relevance']['function'] = function( array $params ) use ( $func ) { return $func( $params, 2 ); };
+
+		$this->replaceSiteMarker( $this->searchConfig['index.text.name'], 'mindte_name."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 
@@ -72,28 +104,5 @@ class PgSQL
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * Creates a search object and optionally sets base criteria.
-	 *
-	 * @param boolean $default Add default criteria
-	 * @return \Aimeos\MW\Criteria\Iface Criteria object
-	 */
-	public function createSearch( $default = false )
-	{
-		$dbm = $this->getContext()->getDatabaseManager();
-		$db = $this->getResourceName();
-
-		$conn = $dbm->acquire( $db );
-		$object = new \Aimeos\MW\Criteria\PgSQL( $conn );
-		$dbm->release( $conn, $db );
-
-		if( $default === true ) {
-			$object->setConditions( parent::createSearch( $default )->getConditions() );
-		}
-
-		return $object;
 	}
 }

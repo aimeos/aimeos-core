@@ -54,6 +54,34 @@ abstract class Base extends \Aimeos\MW\Common\Base
 
 
 	/**
+	 * Returns the attribute helper functions for searching defined by the manager.
+	 *
+	 * @param array $attributes List of search attribute objects implementing
+	 * 	\Aimeos\MW\Criteria\Attribute\Iface or associative arrays with 'code'
+	 * 	and 'internalcode' keys
+	 * @return array Associative array of attribute code and helper function
+	 */
+	protected function getSearchFunctions( array $attributes )
+	{
+		$list = [];
+		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
+
+		foreach( $attributes as $key => $item )
+		{
+			if( $item instanceof $iface ) {
+				$list[ $item->getCode() ] = $item->getFunction();
+			} else if( isset( $item['code'] ) ) {
+				$list[ $item['code'] ] = $item['function'];
+			} else {
+				throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid attribute at position "%1$d"', $key ) );
+			}
+		}
+
+		return $list;
+	}
+
+
+	/**
 	 * Returns the attribute translations for searching defined by the manager.
 	 *
 	 * @param array $attributes List of search attribute objects implementing

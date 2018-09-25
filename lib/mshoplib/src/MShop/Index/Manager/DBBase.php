@@ -187,6 +187,55 @@ abstract class DBBase
 
 
 	/**
+	 * Returns the string replacements for the SQL statements
+	 *
+	 * @param \Aimeos\MW\Criteria\Iface $search Search critera object
+	 * @param array $attributes Associative list of search keys and objects implementing the \Aimeos\MW\Criteria\Attribute\Iface
+	 * @param array $plugins Associative list of item keys and plugin objects implementing \Aimeos\MW\Criteria\Plugin\Iface
+	 * @param array $joins Associative list of SQL joins
+	 * @param array Array of keys, find and replace arrays
+	 */
+	protected function getSQLReplacements( \Aimeos\MW\Criteria\Iface $search, array $attributes, array $plugins, array $joins )
+	{
+		$types = $this->getSearchTypes( $attributes );
+		$funcs = $this->getSearchFunctions( $attributes );
+		$translations = $this->getSearchTranslations( $attributes );
+
+		$keys = [];
+		$find = array( ':joins', ':cond', ':start', ':size' );
+		$replace = array(
+			implode( "\n", array_unique( $joins ) ),
+			$search->getConditionSource( $types, $translations, $plugins, $funcs ),
+			$search->getSliceStart(),
+			$search->getSliceSize(),
+		);
+
+		if( count( $search->getSortations() ) > 0 )
+		{
+			$names = $search->translate( $search->getSortations() );
+			$cols = $search->translate( $search->getSortations(), $translations );
+
+			$list = $aliases = [];
+			foreach( $cols as $idx => $col )
+			{
+				$list[] = 'MIN(' . $col . ') AS "s' . $idx . '"';
+				$aliases[ $names[$idx] ] = '"s' . $idx . '"';
+			}
+
+			$keys[] = 'orderby';
+			$find[] = ':order';
+			$replace[] = $search->getSortationSource( $types, $aliases, $funcs );
+
+			$keys[] = 'mincols';
+			$find[] = ':mincols';
+			$replace[] = implode( ', ', $list );
+		}
+
+		return [$keys, $find, $replace];
+	}
+
+
+	/**
 	 * Optimizes the catalog customer index if necessary
 	 *
 	 * @param string $path Configuration path to the SQL statements to execute

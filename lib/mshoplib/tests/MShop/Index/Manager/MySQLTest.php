@@ -71,12 +71,6 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testCreateSearch()
-	{
-		$this->assertInstanceOf( '\Aimeos\MW\Criteria\MySQL', $this->object->createSearch() );
-	}
-
-
 	public function testGetSearchAttributes()
 	{
 		$list = $this->object->getSearchAttributes();
@@ -107,8 +101,6 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
