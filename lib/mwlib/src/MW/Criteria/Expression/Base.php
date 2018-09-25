@@ -254,7 +254,7 @@ abstract class Base
 	 * @param string[] $strings List of matched strings
 	 * @return array List of found parameters
 	 */
-	private function extractParams( array $strings )
+	protected function extractParams( array $strings )
 	{
 		$params = [];
 
