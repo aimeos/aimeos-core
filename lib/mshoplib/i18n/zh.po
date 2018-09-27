@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Bruce Liu <zcon.bruce@gmail.com>, 2016
+# stevechen <steve.stevechen@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 13:45+0200\n"
-"PO-Revision-Date: 2018-08-14 11:45+0000\n"
+"POT-Creation-Date: 2018-09-27 08:30+0200\n"
+"PO-Revision-Date: 2018-09-27 06:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
@@ -36,6 +37,16 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
+msgstr "%1$s\n%2$s\n%3$s %4$s\n%5$s\n%6$s %7$s\n%8$s %9$s\n%10$s\n%11$s\n%12$s\n%13$s\n"
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr ""
 
 #, php-format
@@ -52,7 +63,7 @@ msgstr ""
 
 #, php-format
 msgid "Address not available"
-msgstr ""
+msgstr "無效的地址"
 
 #, php-format
 msgid "Address salutation \"%1$s\" not within allowed range"
@@ -108,7 +119,7 @@ msgstr "class \"%1$s\" 無法使用"
 
 #, php-format
 msgid "Code \"%1$s\" must not be longer than 32 characters"
-msgstr ""
+msgstr "代碼 \"%1$s\" 不能超過 32 字元"
 
 #, php-format
 msgid "Code must not be longer than 255 characters"
@@ -156,7 +167,7 @@ msgstr ""
 
 #, php-format
 msgid "Duplicate coupon code"
-msgstr ""
+msgstr "重複的優惠券代碼"
 
 #, php-format
 msgid "Duplicate coupon code \"%1$s\""
@@ -172,7 +183,7 @@ msgstr "Flag \"%1$s\" 不在允許的範圍之內"
 
 #, php-format
 msgid "Flags not within allowed range"
-msgstr ""
+msgstr "Flag 不在允許的範圍之內"
 
 #, php-format
 msgid "ID of last inserted database record not available"
@@ -185,7 +196,7 @@ msgstr "國際化元件 \"%1$s\" 無效"
 
 #, php-format
 msgid "Invalid ISO country code \"%1$s\""
-msgstr ""
+msgstr "無效的 ISO 國碼 \"%1$s\""
 
 #, php-format
 msgid "Invalid ISO currency code \"%1$s\""
@@ -275,7 +286,7 @@ msgstr "無效的序列化購物欄 \"%1$s\" 返回 \"%2$s\"。"
 
 #, php-format
 msgid "Invalid time interval format \"%1$s\""
-msgstr ""
+msgstr "無效的時間間隔格式 \"%1$s\""
 
 #, php-format
 msgid "Invalid type \"%1$s\""
@@ -312,7 +323,7 @@ msgstr "找不到ID為 \"%1$s\" 的工作"
 
 #, php-format
 msgid "List item for removal from domain \"%1$s\" not found"
-msgstr ""
+msgstr "找不到要從 \"%1$s\" 移除的列表項目"
 
 #, php-format
 msgid "List item with ID \"%2$s\" in \"%1$s\" not found"
@@ -398,7 +409,7 @@ msgstr ""
 
 #, php-format
 msgid "No catalog node for ID \"%1$s\""
-msgstr ""
+msgstr "ID \"%1$s\" 沒有型錄節點"
 
 #, php-format
 msgid "No item found for conditions: %1$s"
@@ -414,7 +425,7 @@ msgstr ""
 
 #, php-format
 msgid "No order for ID \"%1$s\" found"
-msgstr ""
+msgstr "沒有找到ID為\"%1$s\"的訂單"
 
 #, php-format
 msgid "No price for product ID \"%1$s\" or product code \"%2$s\" available"
@@ -458,7 +469,7 @@ msgstr "不是一個 鍵/值 組合"
 
 #, php-format
 msgid "Not a list item"
-msgstr ""
+msgstr "不是一個列表項"
 
 #, php-format
 msgid "Not a listed value"
@@ -474,7 +485,7 @@ msgstr "不是一個字串"
 
 #, php-format
 msgid "Not a time"
-msgstr ""
+msgstr "不是一個時間"
 
 #, php-format
 msgid "Not a true/false value"

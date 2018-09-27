@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 13:45+0200\n"
-"PO-Revision-Date: 2018-08-10 11:06+0000\n"
+"POT-Creation-Date: 2018-09-27 08:31+0200\n"
+"PO-Revision-Date: 2018-09-27 06:36+0000\n"
 "Last-Translator: Metal <meteoramic@yahoo.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/aimeos/aimeos-core/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -18,42 +18,237 @@ msgstr ""
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+msgid ""
+"Authorized payments of orders will be captured after dispatching or after a "
+"configurable amount of time"
+msgstr "Sevkiyattan veya yapılandırılabilir bir zaman zarfından sonra siparişlerin yetkili ödemeleri çekilecektir"
+
+msgid "Batch update of payment/delivery status"
+msgstr "Ödeme/teslimat durumunun toplu güncellemesi"
+
+msgid "Cache cleanup"
+msgstr "Önbellek temizleme"
+
+msgid "Capture authorized payments"
+msgstr "Yetkili ödemeleri çek"
+
+msgid "Catalog import CSV"
+msgstr "Katalog içe aktarma CSV"
+
+msgid "Catalog index optimization"
+msgstr "Katalog dizin optimizasyonu"
+
+msgid "Catalog index rebuild"
+msgstr "Katalog dizin yeniden oluşturma"
+
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Class \"%1$s\" arayüz \"%2$s\" uygulamıyor"
 
 #, php-format
-msgid "Class \"%1$s\" not available"
-msgstr "Class \"%1$s\" mevcut değil"
-
-#, php-format
 msgid "Class \"%1$s\" not found"
 msgstr "Class \"%1$s\" bulunamadı"
 
+msgid "Coupon code import CSV"
+msgstr "Kupon kodu içe aktarma CSV"
+
+msgid "Creates a product site map for search engines"
+msgstr "Arama motorları için bir ürün site haritası oluşturur"
+
+msgid "Creates bought together product suggestions"
+msgstr "Beraber satın alınan ürün önerileri oluşturur"
+
+msgid ""
+"Deletes unfinished orders an makes their products and coupon codes available"
+" again"
+msgstr "Bitmemiş siparişleri siler ve onların ürünlerini ve kupon kodlarını kullanılabilir hale getirir"
+
+msgid "Deletes unpaid orders to keep the database clean"
+msgstr "Veritabanını temiz tutmak için ödenmemiş siparişleri siler"
+
+msgid "Executes payment or delivery service providers that uses batch updates"
+msgstr "Toplu güncelleştirmeleri kullanan ödeme veya teslimat servisi sağlayıcılarını çalıştırır"
+
+msgid "Exports all available products"
+msgstr "Mevcut tüm ürünleri dışa aktarır"
+
+msgid "Exports orders to CSV file"
+msgstr "Siparişleri CSV dosyasına dışa aktarır"
+
+msgid "Exports subscriptions to CSV file"
+msgstr "Abonelikleri CSV dosyasına dışa aktarır"
+
+msgid "Imports new and updates existing categories from CSV files"
+msgstr "CSV dosyasından yeni kategori içe aktarır veya mevcut kategorileri günceller"
+
+msgid "Imports new and updates existing coupon code from CSV files"
+msgstr "CSV dosyasından yeni kupon kodu içe aktarır veya mevcut kupon kodlarını günceller"
+
+msgid "Imports new and updates existing products from CSV files"
+msgstr "CSV dosyasından yeni ürün içe aktarır veya mevcut ürünleri günceller"
+
+msgid "Index optimization"
+msgstr "Dizin optimizasyonu"
+
+msgid "Index rebuild"
+msgstr "Dizin yeniden oluşturma"
+
 #, php-format
-msgid "Controller path is empty"
-msgstr "Kontrolör yolu boş"
+msgid "Invalid catalog lines in \"%1$s\": %2$d/%3$d"
+msgstr "\"%1$s\" içinde geçersiz katalog hatları: %2$d/%3$d"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "\"%1$s\" class adında geçersiz karakterler"
 
 #, php-format
-msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr "\"%2$s\" içinde geçersiz denetleyici \"%1$s\""
+msgid "Invalid message: %1$s"
+msgstr "Geçersiz mesaj: %1$s"
 
 #, php-format
-msgid "Invalid domain \"%1$s\""
-msgstr "Geçersiz domain \"%1$s\""
+msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
+msgstr "\"%1$s\" içinde geçersiz ürün hatları: %2$d/%3$d"
+
+msgid "Log cleanup"
+msgstr "Günlük temizleme"
 
 #, php-format
-msgid "Invalid factory \"%1$s\""
-msgstr "Geçersiz fabrika \"%1$s\""
+msgid "No \"catalog.code\" column in CSV mapping found"
+msgstr "CSV eşlemede \"catalog.code\" sütunu bulunamadı"
 
 #, php-format
-msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr "\"%3$s\" içinde \"%1$s/%2$s\" için tür öğesi bulunamadı"
+msgid "No \"coupon.code.code\" column in CSV mapping found"
+msgstr "CSV eşlemede \"coupon.code.code\" sütunu bulunamadı"
 
 #, php-format
-msgid "Unable to call method \"%1$s\""
-msgstr "Metot \"%1$s\" çağrılamıyor"
+msgid "No \"product.code\" column in CSV mapping found"
+msgstr "CSV mapping'de \"product.code\" sütunu bulunamadı"
+
+msgid "Optimizes the catalog index for searching products"
+msgstr "Arama ürünleri için katalog dizinini optimize eder"
+
+msgid "Optimizes the index for searching products faster"
+msgstr "Ürünleri daha hızlı aramak için dizini optimize eder"
+
+msgid "Order export CSV"
+msgstr "Sipariş dışa aktarma CSV"
+
+#, php-format
+msgid "Parent node for code \"%1$s\" not found"
+msgstr "\"%1$s\" kodu için üst düğüm bulunamadı"
+
+msgid "Process order delivery services"
+msgstr "Sipariş dağıtım hizmetlerini işleme tabi tut"
+
+msgid "Process subscriptions initially"
+msgstr "Aboneliklerin ilk kez işlenmesi"
+
+msgid "Product export"
+msgstr "Ürün dışa aktarma"
+
+msgid "Product import CSV"
+msgstr "Ürün içe aktarma CSV"
+
+msgid "Product site map"
+msgstr "Ürün site haritası"
+
+msgid "Products bought together"
+msgstr "Beraber satın alınan ürünler"
+
+msgid "Rebuilds the catalog index for searching products"
+msgstr "Arama ürünleri için katalog dizinini yeniden oluşturur"
+
+msgid "Rebuilds the index for searching products"
+msgstr "Ürünleri aramak için dizini yeniden oluşturur"
+
+msgid "Removes the expired entries from the cache"
+msgstr "Süresi dolan girişleri önbellekten kaldırır"
+
+msgid ""
+"Removes the old log entries from the database and archives them (optional)"
+msgstr "Eski günlük girişlerini veri tabanından kaldırır ve arşivler (isteğe bağlı)"
+
+msgid "Removes unfinished orders"
+msgstr "Tamamlanmamış siparişleri kaldırır"
+
+msgid "Removes unpaid orders"
+msgstr "Ödenmemiş siparişleri kaldırır"
+
+msgid "Renews subscriptions at next date"
+msgstr "Bir sonraki tarihte abonelikleri yeniler"
+
+#, php-format
+msgid "Required column \"%1$s\" not found for code \"%2$s\""
+msgstr "\"%2$s\" kodu için gerekli olan \"%1$s\" sütunu bulunamadı"
+
+#, php-format
+msgid "Required configuration for \"%1$s\" is missing"
+msgstr "\"%1$s\" için gerekli yapılandırma eksik"
+
+#, php-format
+msgid "Required mapping key \"%1$s\" is missing or contains no array"
+msgstr "Gerekli haritalama anahtarı \"%1$s\" eksik veya hiçbir dizi içermiyor"
+
+msgid "Rescale product images"
+msgstr "Ürün görsellerini yeniden boyutlandır"
+
+msgid "Rescales product images to the new sizes"
+msgstr "Ürün görsellerini yeni ölçülere tekrar boyutlandırır"
+
+#, php-format
+msgid "Scaling media item \"%1$s\" failed: %2$s"
+msgstr "\"%1$s\" medya öğesi için ölçekleme başarısız oldu: %2$s"
+
+msgid "Sends paid orders to the ERP system or logistic partner"
+msgstr "Ödemesi yapılmış siparişleri ERP sistemine veya lojistik ortağa gönderir"
+
+#, php-format
+msgid "Started catalog import from \"%1$s\" (%2$s)"
+msgstr "\"%1$s\" dan katalog içe aktarma başladı (%2$s)"
+
+#, php-format
+msgid "Started coupon import from \"%1$s\" (%2$s)"
+msgstr "\"%1$s\" dan kupon içe aktarma başadı (%2$s)"
+
+#, php-format
+msgid "Started product import from \"%1$s\" (%2$s)"
+msgstr "\"%1$s\" (%2$s)'dan ürün içe aktarma başladı"
+
+msgid "Subscription export CSV"
+msgstr "Abonelik dışa aktarma CSV"
+
+msgid "Subscription process end"
+msgstr "Abonelik sürecinin sonu"
+
+msgid "Subscription process renew"
+msgstr "Aboneliğin yenilenmesi"
+
+msgid "Subscription process start"
+msgstr "Abonelik sürecini başlat"
+
+msgid "Terminates expired subscriptions"
+msgstr "Süresi dolan abonelikleri sonlandırır"
+
+#, php-format
+msgid "Unable to import catalog with code \"%1$s\": %2$s"
+msgstr "\"%1$s\" kodlu katalog içe aktarılamıyor: %2$s"
+
+#, php-format
+msgid "Unable to import coupon with code \"%1$s\": %2$s"
+msgstr "\"%1$s\" kodlu kupon içe aktarılamıyor: %2$s"
+
+#, php-format
+msgid "Unable to import product with code \"%1$s\": %2$s"
+msgstr "\"%1$s\" kodlu ürün içe aktarılamıyor: %2$s"
+
+#, php-format
+msgid "Unable to move imported file"
+msgstr "İçe aktarılan dosya taşınamıyor"
+
+#, php-format
+msgid "aimeos-products-%d.xml"
+msgstr "aimeos-products-%d.xml"
+
+#, php-format
+msgid "aimeos-sitemap-%d.xml"
+msgstr "aimeos-sitemap-%d.xml"

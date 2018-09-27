@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 13:45+0200\n"
-"PO-Revision-Date: 2018-08-09 13:22+0000\n"
+"POT-Creation-Date: 2018-09-27 08:31+0200\n"
+"PO-Revision-Date: 2018-09-27 06:36+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: German (http://www.transifex.com/aimeos/aimeos-core/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -20,42 +20,237 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid ""
+"Authorized payments of orders will be captured after dispatching or after a "
+"configurable amount of time"
+msgstr "Autorisierte Zahlungen für Bestellungen werden eingezogen nachdem die Ware versandt wurde oder nach einer konfigurierbaren Zeitspanne"
+
+msgid "Batch update of payment/delivery status"
+msgstr "Blockweise Aktualisierung von Liefer- und Zahlungsstatus"
+
+msgid "Cache cleanup"
+msgstr "Cache aufräumen"
+
+msgid "Capture authorized payments"
+msgstr "Autorisierte Zahlungen einziehen"
+
+msgid "Catalog import CSV"
+msgstr "Kategorienimport CSV"
+
+msgid "Catalog index optimization"
+msgstr "Optimieren des Katalogindexes"
+
+msgid "Catalog index rebuild"
+msgstr "Aktualisieren des Katalogindex"
+
 #, php-format
 msgid "Class \"%1$s\" does not implement interface \"%2$s\""
 msgstr "Klasse \"%1$s\" implementiert nicht Interface \"%2$s\""
 
 #, php-format
-msgid "Class \"%1$s\" not available"
-msgstr "Die Klasse \"%1$s\" wurde nicht gefunden"
-
-#, php-format
 msgid "Class \"%1$s\" not found"
 msgstr "Die Klasse \"%1$s\" ist unbekannt"
 
+msgid "Coupon code import CSV"
+msgstr "Gutscheincodeimport CSV"
+
+msgid "Creates a product site map for search engines"
+msgstr "Erzeugt eine Sitemap der Produkte für Suchmaschinen"
+
+msgid "Creates bought together product suggestions"
+msgstr "Erstellt Vorschläge für zusammen gekaufte Produkte"
+
+msgid ""
+"Deletes unfinished orders an makes their products and coupon codes available"
+" again"
+msgstr "Löscht nicht abgeschlossene Bestellungen und stellt die Produkte und Gutscheincodes wieder zur Verfügung"
+
+msgid "Deletes unpaid orders to keep the database clean"
+msgstr "Löscht unbezahlte Bestellungen um den Speicherbedarf zu reduzieren"
+
+msgid "Executes payment or delivery service providers that uses batch updates"
+msgstr "Verarbeitet Statusänderungen von Liefer- und Zahlungsdiensten, die eine stapelweise Bearbeitung benötigen"
+
+msgid "Exports all available products"
+msgstr "Exportiert alle verfügbaren Produkte"
+
+msgid "Exports orders to CSV file"
+msgstr "Exportiert Bestellungen in eine CSV-Datei"
+
+msgid "Exports subscriptions to CSV file"
+msgstr "Exportiert Abonnements in eine CSV-Datei"
+
+msgid "Imports new and updates existing categories from CSV files"
+msgstr "Importiert neue und aktualisiert existierende Kategorien aus CSV Dateien"
+
+msgid "Imports new and updates existing coupon code from CSV files"
+msgstr "Importiert neue und aktualisiert existierende Gutscheincodes aus CSV Dateien"
+
+msgid "Imports new and updates existing products from CSV files"
+msgstr "Importiert neue und aktualisiert existierende Produkte aus CSV Dateien"
+
+msgid "Index optimization"
+msgstr "Optimieren des Produktindex"
+
+msgid "Index rebuild"
+msgstr "Aktualisieren des Produktindex"
+
 #, php-format
-msgid "Controller path is empty"
-msgstr "Der Pfad zum Controller ist leer"
+msgid "Invalid catalog lines in \"%1$s\": %2$d/%3$d"
+msgstr "Ungültige Kategoriezeilen in \"%1$s\": %2$d/%3$d"
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
 msgstr "Klassenname \"%1$s\" enthält unerlaubte Zeichen"
 
 #, php-format
-msgid "Invalid controller \"%1$s\" in \"%2$s\""
-msgstr "Ungültiger Name \"%1$s\" des Controllers in \"%2$s\""
+msgid "Invalid message: %1$s"
+msgstr "Ungültige Nachricht: %1$s"
 
 #, php-format
-msgid "Invalid domain \"%1$s\""
-msgstr "Ungültige Domäne \"%1$s\""
+msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
+msgstr "Ungültige Produktzeilen in \"%1$s\": %2$d/%3$d"
+
+msgid "Log cleanup"
+msgstr "Logs aufräumen"
 
 #, php-format
-msgid "Invalid factory \"%1$s\""
-msgstr "Ungültige Factory \"%1$s\""
+msgid "No \"catalog.code\" column in CSV mapping found"
+msgstr "In der CSV-Zuordnung fehlt die Spalte \"catalog.code\""
 
 #, php-format
-msgid "No type item for \"%1$s/%2$s\" in \"%3$s\" found"
-msgstr "Für den Eintrag \"%1$s/%2$s\" in \"%3$s\" wurde kein Typ gefunden"
+msgid "No \"coupon.code.code\" column in CSV mapping found"
+msgstr "In der CSV-Zuordnung fehlt die Spalte \"coupon.code.code\""
 
 #, php-format
-msgid "Unable to call method \"%1$s\""
-msgstr "Methode \"%1$s\" kann nicht aufgerufen werden"
+msgid "No \"product.code\" column in CSV mapping found"
+msgstr "In der CSV-Zuordnung fehlt die Spalte \"product.code\""
+
+msgid "Optimizes the catalog index for searching products"
+msgstr "Optimiert den Katalogindex für die Produktsuche"
+
+msgid "Optimizes the index for searching products faster"
+msgstr "Optimiert den Produktindex für die Suche"
+
+msgid "Order export CSV"
+msgstr "Bestellexport CSV"
+
+#, php-format
+msgid "Parent node for code \"%1$s\" not found"
+msgstr "Elternknoten für Code \"%1$s\" nicht gefunden"
+
+msgid "Process order delivery services"
+msgstr "Verarbeitung der Bestellungen"
+
+msgid "Process subscriptions initially"
+msgstr "Initiale Verarbeitung von Abonnements"
+
+msgid "Product export"
+msgstr "Produktexport"
+
+msgid "Product import CSV"
+msgstr "Produktimport CSV"
+
+msgid "Product site map"
+msgstr "Produkt-Sitemap"
+
+msgid "Products bought together"
+msgstr "Zusammen gekaufte Produkte"
+
+msgid "Rebuilds the catalog index for searching products"
+msgstr "Aktualisiert den Katalogindex für die Produktsuche"
+
+msgid "Rebuilds the index for searching products"
+msgstr "Aktualisiert den Produktindex für die Suche"
+
+msgid "Removes the expired entries from the cache"
+msgstr "Löscht die alten Cache-Einträge"
+
+msgid ""
+"Removes the old log entries from the database and archives them (optional)"
+msgstr "Entfernt alte Logeinträge aus der Datenbank und archiviert diese (optional)"
+
+msgid "Removes unfinished orders"
+msgstr "Löscht nicht abgeschlossene Bestellungen"
+
+msgid "Removes unpaid orders"
+msgstr "Löscht unbezahlte Bestellungen"
+
+msgid "Renews subscriptions at next date"
+msgstr "Erneuert Abonnements zum nächsten Stichtag"
+
+#, php-format
+msgid "Required column \"%1$s\" not found for code \"%2$s\""
+msgstr "Benötigte Spalte \"%1$s\" für Code \"%2$s\" nicht gefunden"
+
+#, php-format
+msgid "Required configuration for \"%1$s\" is missing"
+msgstr "Notwendige Konfiguration \"%1$s\" fehlt"
+
+#, php-format
+msgid "Required mapping key \"%1$s\" is missing or contains no array"
+msgstr "Der erforderliche Abbildungsschlüssel \"%1$s\" fehlt oder beinhaltet keine Felder"
+
+msgid "Rescale product images"
+msgstr "Produktbilder neu skalieren"
+
+msgid "Rescales product images to the new sizes"
+msgstr "Produktbilder auf neue Größe skalieren"
+
+#, php-format
+msgid "Scaling media item \"%1$s\" failed: %2$s"
+msgstr "Das Skalieren der Mediendatei \"%1$s\" schlug fehl: %2$s"
+
+msgid "Sends paid orders to the ERP system or logistic partner"
+msgstr "Übergibt bezahlte Bestellungen an die Warenwirtschaft oder den Logistikpartner"
+
+#, php-format
+msgid "Started catalog import from \"%1$s\" (%2$s)"
+msgstr "Der Kategorientimport von \"%1$s\" (%2$s) wurde gestartet"
+
+#, php-format
+msgid "Started coupon import from \"%1$s\" (%2$s)"
+msgstr "Der Gutscheincode-Import von \"%1$s\" (%2$s) wurde gestartet"
+
+#, php-format
+msgid "Started product import from \"%1$s\" (%2$s)"
+msgstr "Der Produktimport von \"%1$s\" (%2$s) wurde gestartet"
+
+msgid "Subscription export CSV"
+msgstr "Abonnementexport CSV"
+
+msgid "Subscription process end"
+msgstr "Ende des Abonnementprozesses"
+
+msgid "Subscription process renew"
+msgstr "Erneuerung des Abonnements"
+
+msgid "Subscription process start"
+msgstr "Start des Abonnementprozesses"
+
+msgid "Terminates expired subscriptions"
+msgstr "Beendet abgelaufene Abonnements"
+
+#, php-format
+msgid "Unable to import catalog with code \"%1$s\": %2$s"
+msgstr "Die Kategorie mit dem Code \"%1$s\" konnte nicht importiert werden: %2$s"
+
+#, php-format
+msgid "Unable to import coupon with code \"%1$s\": %2$s"
+msgstr "Der Gutschein mit dem Code \"%1$s\" konnte nicht importiert werden: %2$s"
+
+#, php-format
+msgid "Unable to import product with code \"%1$s\": %2$s"
+msgstr "Das Produkt mit dem Code \"%1$s\" konnte nicht importiert werden: %2$s"
+
+#, php-format
+msgid "Unable to move imported file"
+msgstr "Die importierte Datei konnte nicht verschoben werden"
+
+#, php-format
+msgid "aimeos-products-%d.xml"
+msgstr "aimeos-products-%d.xml"
+
+#, php-format
+msgid "aimeos-sitemap-%d.xml"
+msgstr "aimeos-sitemap-%d.xml"

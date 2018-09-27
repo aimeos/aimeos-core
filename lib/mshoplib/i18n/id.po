@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-14 13:45+0200\n"
-"PO-Revision-Date: 2018-08-14 11:45+0000\n"
+"POT-Creation-Date: 2018-09-27 08:30+0200\n"
+"PO-Revision-Date: 2018-09-27 06:33+0000\n"
 "Last-Translator: Aimeos\n"
 "Language-Team: Indonesian (http://www.transifex.com/aimeos/aimeos-core/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -35,6 +35,16 @@ msgid ""
 "%11$s\n"
 "%12$s\n"
 "%13$s\n"
+msgstr ""
+
+#. / Supplier address format with label (%1$s), company (%2$s),
+#. / address part one (%3$s, e.g street), address part two (%4$s, e.g house
+#. number), address part three (%5$s, e.g additional information),
+#. / postal/zip code (%6$s), city (%7$s), state (%8$s), country ID (%9$s),
+#. / e-mail (%10$s), phone (%11$s), facsimile/telefax (%12$s), web site
+#. (%13$s)
+#, php-format
+msgid "%1$s, %2$s, %3$s %4$s, %6$s %7$s"
 msgstr ""
 
 #, php-format
