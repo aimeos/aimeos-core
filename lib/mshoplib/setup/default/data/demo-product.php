@@ -20,31 +20,31 @@ return array(
 			),
 			array(
 				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'text.text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
 				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
 				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'text.text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
 				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 			array(
 				'text.label' => 'Demo name/en: Demo article',
-				'text.text.content' => 'Demo article',
+				'text.content' => 'Demo article',
 				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
 				'text.label' => 'Demo short/en: This is the short description',
-				'text.text.content' => 'This is the short description of the demo article.',
+				'text.content' => 'This is the short description of the demo article.',
 				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			),
 			array(
 				'text.label' => 'Demo long/en: Add a detailed description',
-				'text.text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
 				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
