@@ -68,6 +68,10 @@ trait Traits
 			$id = $refItem->getId() ?: '#' . $this->listMax;
 			$listItem->setRefId( $id );
 
+			if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface ) {
+				$refItem->setDomain( $this->getResourceType() );
+			}
+
 			$this->listRefItems[$domain][$id] = $refItem;
 		}
 

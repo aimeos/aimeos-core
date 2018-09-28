@@ -183,10 +183,6 @@ trait Traits
 			{
 				if( ( $refItem = $listItem->getRefItem() ) !== null )
 				{
-					if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface ) {
-						$refItem->setDomain( $domain );
-					}
-
 					$refDomain = $listItem->getDomain();
 
 					if( !isset( $refManager[$refDomain] ) )
