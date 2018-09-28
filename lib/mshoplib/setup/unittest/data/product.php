@@ -280,12 +280,9 @@ return [
 				['product.lists.type' => 'attribute/default', 'product.lists.refid' => 'attribute/product/size/xs', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
 			],
 			'media' => [
-				['product.lists.type' => 'media/default', 'product.lists.refid' => 'media/prod_123x103/195_prod_123x103.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
 				['product.lists.type' => 'media/default', 'product.lists.refid' => 'media/prod_266x221/198_prod_266x221.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 1, 'product.lists.status' => 1],
 				['product.lists.type' => 'media/unittype9', 'product.lists.refid' => 'media/prod_114x95/194_prod_114x95.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 2, 'product.lists.status' => 1],
 				['product.lists.type' => 'media/unittype10', 'product.lists.refid' => 'media/prod_179x178/196_prod_179x178.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2010-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 3, 'product.lists.status' => 1],
-				['product.lists.type' => 'media/unittype11', 'product.lists.refid' => 'media/prod_242x416/197_CafeNoire_Colombia_242x416.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2010-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 4, 'product.lists.status' => 1],
-				['product.lists.type' => 'media/unittype12', 'product.lists.refid' => 'media/prod_97x93/199_prod_97x93.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2010-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 5, 'product.lists.status' => 1],
 			],
 			'price' => [
 				['product.lists.type' => 'price/default', 'product.lists.refid' => 'price/product/default/600.00/30.00', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
@@ -323,12 +320,9 @@ return [
 				['product.lists.type' => 'attribute/hidden', 'product.lists.refid' => 'attribute/product/download/testurl', 'product.lists.datestart' => null, 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 4, 'product.lists.status' => 1],
 			],
 			'media' => [
-				['product.lists.type' => 'media/default', 'product.lists.refid' => 'media/prod_123x103/195_prod_123x103.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 0, 'product.lists.status' => 1],
 				['product.lists.type' => 'media/default', 'product.lists.refid' => 'media/prod_266x221/198_prod_266x221.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 1, 'product.lists.status' => 1],
 				['product.lists.type' => 'media/unittype3', 'product.lists.refid' => 'media/prod_114x95/194_prod_114x95.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2100-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 2, 'product.lists.status' => 1],
 				['product.lists.type' => 'media/unittype4', 'product.lists.refid' => 'media/prod_179x178/196_prod_179x178.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2010-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 3, 'product.lists.status' => 1],
-				['product.lists.type' => 'media/unittype5', 'product.lists.refid' => 'media/prod_242x416/197_CafeNoire_Colombia_242x416.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2010-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 4, 'product.lists.status' => 1],
-				['product.lists.type' => 'media/unittype6', 'product.lists.refid' => 'media/prod_97x93/199_prod_97x93.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => '2010-01-01 00:00:00', 'product.lists.config' => [], 'product.lists.position' => 5, 'product.lists.status' => 1],
 				['product.lists.type' => 'media/download', 'product.lists.refid' => 'media/path/to/folder/example5.jpg', 'product.lists.datestart' => '2000-01-01 00:00:00', 'product.lists.dateend' => null, 'product.lists.config' => [], 'product.lists.position' => 1, 'product.lists.status' => 1],
 			],
 			'price' => [

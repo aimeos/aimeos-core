@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 3, count( $result ) );
 		$this->assertArrayHasKey( 'media', $result );
-		$this->assertEquals( 7, $result['media'] );
+		$this->assertEquals( 6, $result['media'] );
 	}
 
 
@@ -293,7 +293,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$results = $this->object->searchItems( $search );
-		$this->assertEquals( 45, count( $results ) );
+		$this->assertEquals( 44, count( $results ) );
 
 		foreach( $results as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );

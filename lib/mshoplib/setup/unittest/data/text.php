@@ -12,7 +12,6 @@ return array (
 		'attribute/short' => array( 'domain' => 'attribute', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		'attribute/long' => array( 'domain' => 'attribute', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
 		'attribute/url' => array( 'domain' => 'attribute', 'code' => 'url', 'label' => 'URL segment', 'status' => 1 ),
-		'attribute/img-description' => array( 'domain' => 'attribute', 'code' => 'img-description', 'label' => 'Image description', 'status' => 0 ),
 		'catalog/name' => array( 'domain' => 'catalog', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		'catalog/short' => array( 'domain' => 'catalog', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		'catalog/long' => array( 'domain' => 'catalog', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
@@ -27,6 +26,7 @@ return array (
 		'media/name' => array( 'domain' => 'media', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		'media/short' => array( 'domain' => 'media', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		'media/long' => array( 'domain' => 'media', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
+		'media/img-description' => array( 'domain' => 'media', 'code' => 'img-description', 'label' => 'Image description', 'status' => 0 ),
 		'service/name' => array( 'domain' => 'service', 'code' => 'name', 'label' => 'Name', 'status' => 1 ),
 		'service/short' => array( 'domain' => 'service', 'code' => 'short', 'label' => 'Short description', 'status' => 1 ),
 		'service/long' => array( 'domain' => 'service', 'code' => 'long', 'label' => 'Long description', 'status' => 1 ),
@@ -118,7 +118,7 @@ return array (
 		'text/online_metakey' => array( 'langid' => 'de', 'typeid' => 'product/meta-keyword', 'domain' => 'catalog', 'label' => 'online_metakey', 'content' => 'internet', 'status' => 1 ),
 		'text/online_metadesc' => array( 'langid' => 'de', 'typeid' => 'product/meta-description', 'domain' => 'catalog', 'label' => 'online_metadesc', 'content' => 'Nur online erhältlich', 'status' => 1 ),
 //MEDIA
-		'text/img_desc' => array( 'langid' => 'de', 'typeid' => 'attribute/img-description', 'domain' => 'attribute', 'label' => 'img_desc', 'content' => 'Bildbeschreibung', 'status' => 1 ),
+		'text/img_desc' => array( 'langid' => 'de', 'typeid' => 'media/img-description', 'domain' => 'media', 'label' => 'img_desc', 'content' => 'Bildbeschreibung', 'status' => 1 ),
 		'text/media' => array( 'langid' => 'de', 'typeid' => 'media/name', 'domain' => 'media', 'label' => 'media', 'content' => 'Media Name', 'status' => 1 ),
 // service text
 		'text/service' => array( 'langid' => 'de', 'typeid' => 'service/name', 'domain' => 'service', 'label' => 'service', 'content' => 'Service Name', 'status' => 1 ),

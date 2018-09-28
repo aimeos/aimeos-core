@@ -108,13 +108,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '!=', 'media.lists.id', null );
 		$expr[] = $search->compare( '!=', 'media.lists.siteid', null );
 		$expr[] = $search->compare( '>', 'media.lists.parentid', 0 );
-		$expr[] = $search->compare( '==', 'media.lists.domain', 'text' );
+		$expr[] = $search->compare( '==', 'media.lists.domain', 'attribute' );
 		$expr[] = $search->compare( '>', 'media.lists.typeid', 0 );
 		$expr[] = $search->compare( '>', 'media.lists.refid', 0 );
 		$expr[] = $search->compare( '==', 'media.lists.datestart', null );
 		$expr[] = $search->compare( '==', 'media.lists.dateend', null );
 		$expr[] = $search->compare( '!=', 'media.lists.config', null );
-		$expr[] = $search->compare( '==', 'media.lists.position', 0 );
+		$expr[] = $search->compare( '>=', 'media.lists.position', 0 );
 		$expr[] = $search->compare( '==', 'media.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'media.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'media.lists.ctime', '1970-01-01 00:00:00' );
@@ -133,9 +133,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
+
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
+	}
 
+
+	public function testSearchItemBase()
+	{
 		//search with base criteria
 		$search = $this->object->createSearch( true );
 		$conditions = array(
@@ -144,7 +149,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$search->setSlice( 0, 4 );
+
+		$total = 0;
 		$results = $this->object->searchItems( $search, [], $total );
+
 		$this->assertEquals( 4, count( $results ) );
 		$this->assertEquals( 13, $total );
 

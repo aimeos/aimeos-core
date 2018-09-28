@@ -260,21 +260,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItems()
 	{
-		$total = 0;
-		$siteid = \TestHelperMShop::getContext()->getLocale()->getSiteId();
-
-
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '==', 'product.lists.siteid', $siteid ),
 			$search->compare( '==', 'product.lists.domain', 'media' ),
 			$search->compare( '==', 'product.lists.datestart', '2000-01-01 00:00:00' ),
 			$search->compare( '==', 'product.lists.dateend', '2100-01-01 00:00:00' ),
-			$search->compare( '!=', 'product.lists.config', null ),
-			$search->compare( '==', 'product.lists.position', 0 ),
-			$search->compare( '==', 'product.lists.status', 1 ),
+			$search->compare( '==', 'product.lists.position', 2 ),
 			$search->compare( '==', 'product.lists.editor', $this->editor ),
-			$search->compare( '==', 'product.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -284,11 +276,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		}
 
 
+		$total = 0;
 		$search = $this->object->createSearch();
 
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'product.lists.id', null );
-		$expr[] = $search->compare( '==', 'product.lists.siteid', $siteid );
+		$expr[] = $search->compare( '!=', 'product.lists.siteid', null );
 		$expr[] = $search->compare( '!=', 'product.lists.parentid', null );
 		$expr[] = $search->compare( '!=', 'product.lists.typeid', null );
 		$expr[] = $search->compare( '==', 'product.lists.domain', 'media' );
@@ -296,7 +289,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.lists.datestart', '2000-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.lists.dateend', '2100-01-01 00:00:00' );
 		$expr[] = $search->compare( '!=', 'product.lists.config', null );
-		$expr[] = $search->compare( '==', 'product.lists.position', 0 );
+		$expr[] = $search->compare( '==', 'product.lists.position', 2 );
 		$expr[] = $search->compare( '==', 'product.lists.status', 1 );
 		$expr[] = $search->compare( '>=', 'product.lists.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'product.lists.ctime', '1970-01-01 00:00:00' );
@@ -305,9 +298,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$results = $this->object->searchItems( $search, [], $total );
 		$this->assertEquals( 2, count( $results ) );
+	}
 
 
+	public function testSearchItemsBase()
+	{
+		$total = 0;
 		//search with base criteria
+
 		$search = $this->object->createSearch( true );
 		$expr = array(
 			$search->compare( '==', 'product.lists.domain', 'product' ),
@@ -340,11 +338,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayNotHasKey( 'price', $result );
 
 		$this->assertEquals( 15, count( $result['attribute'] ) );
-		$this->assertEquals( 8, count( $result['media'] ) );
+		$this->assertEquals( 5, count( $result['media'] ) );
 
 		// this is the total of list items, not the total of referenced items
 		// whose number might be lower due to duplicates
-		$this->assertEquals( 40, $total );
+		$this->assertEquals( 34, $total );
 	}
 
 
