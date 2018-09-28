@@ -65,7 +65,7 @@ trait Traits
 	{
 		if( $refItem !== null )
 		{
-			$id = $refItem->getId() ?: '_' . $this->listMax;
+			$id = $refItem->getId() ?: '#' . $this->listMax;
 			$listItem->setRefId( $id );
 
 			$this->listRefItems[$domain][$id] = $refItem;
