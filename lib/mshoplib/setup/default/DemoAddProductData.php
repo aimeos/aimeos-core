@@ -59,17 +59,13 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
-		$products = $manager->searchItems( $search );
+		$products = $manager->searchItems( $search, ['attribute', 'media', 'price', 'text'] );
 
-		foreach( $products as $item )
-		{
-			$this->removeItems( $item->getId(), 'product/lists', 'product', 'attribute' );
-			$this->removeItems( $item->getId(), 'product/lists', 'product', 'media' );
-			$this->removeItems( $item->getId(), 'product/lists', 'product', 'price' );
-			$this->removeItems( $item->getId(), 'product/lists', 'product', 'text' );
-			$this->removeListItems( $item->getId(), 'product/lists', 'product' );
+		foreach( $products as $item ) {
+			$item->deleteListItems( $item->getListItems(), true );
 		}
 
+		$manager->saveItems( $products );
 		$manager->deleteItems( array_keys( $products ) );
 		$this->removeStockItems();
 
@@ -105,21 +101,16 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 		foreach( $data as $entry )
 		{
-			$item = $manager->createItem();
-			$item->setTypeId( $this->getTypeId( 'product/type', 'product', $entry['type'] ) );
-			$item->setCode( $entry['code'] );
-			$item->setLabel( $entry['label'] );
-			$item->setDateStart( $entry['start'] );
-			$item->setDateEnd( $entry['end'] );
-			$item->setStatus( $entry['status'] );
+			$item = $manager->createItem( $entry['product.type'], 'product' );
+			$item->fromArray( $entry );
+
+			$this->addRefItems( $item, $entry );
+			$this->addPropertyItems( $item, $entry );
 
 			$manager->saveItem( $item );
 
-			$this->addRefItems( $entry, $item->getId() );
-			$this->addPropertyItems( $entry, $item->getId() );
-
 			if( isset( $entry['stock'] ) ) {
-				$this->addProductStock( $entry['code'], $entry['stock'] );
+				$this->addStockItems( $entry['product.code'], $entry['stock'] );
 			}
 		}
 	}
@@ -128,57 +119,120 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 	/**
 	 * Adds the properties from the given entry data.
 	 *
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item
 	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
-	 * @param string $id Parent ID for inserting the items
+	 * @return \Aimeos\MShop\Product\Item\Iface $item Updated product item
 	 */
-	protected function addPropertyItems( array $entry, $id )
+	protected function addPropertyItems( \Aimeos\MShop\Product\Item\Iface $item, array $entry )
 	{
 		if( isset( $entry['property'] ) )
 		{
-			$context = $this->getContext();
-			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product/property' );
+			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/property' );
 
 			foreach( (array) $entry['property'] as $values )
 			{
-				$item = $manager->createItem();
-				$item->setParentId( $id );
-				$item->setLanguageId( $values['languageid'] );
-				$item->setTypeId( $this->getTypeId( 'product/property/type', 'product', $values['type'] ) );
-				$item->setLanguageId( $values['languageid'] );
-				$item->setValue( $values['value'] );
+				$propItem = $manager->createItem( $values['product.property.type'], 'product' );
+				$propItem->fromArray( $values );
 
-				$manager->saveItem( $item, false );
+				$item->addPropertyItem( $propItem );
 			}
 		}
+
+		return $item;
 	}
 
 
 	/**
 	 * Adds the referenced items from the given entry data.
 	 *
-	 * @param array $entry Associative list of data with attribute, media, price, text and product sections
-	 * @param string $id Parent ID for inserting the items
+	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item with list items
+	 * @param array $entry Associative list of data with stock, attribute, media, price, text and product sections
+	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface $item Updated item
 	 */
-	protected function addRefItems( array $entry, $id )
+	protected function addRefItems( \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $entry )
 	{
-		if( isset( $entry['attribute'] ) ) {
-			$this->addAttributes( $id, $entry['attribute'], 'product' );
+		$context = $this->getContext();
+		$domain = $item->getResourceType();
+		$listManager = \Aimeos\MShop\Factory::createManager( $context, $domain . '/lists' );
+
+		if( isset( $entry['attribute'] ) )
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'attribute' );
+
+			foreach( $entry['attribute'] as $data )
+			{
+				$listItem = $listManager->createItem( $data[$domain . '.lists.type'], 'attribute' );
+				$listItem->fromArray( $data );
+
+				$refItem = $manager->createItem( $data['attribute.type'], $domain );
+				$refItem->fromArray( $data );
+
+				$refItem = $this->addRefItems( $refItem, $data );
+
+				$item->addListItem( 'attribute', $listItem, $refItem );
+			}
 		}
 
-		if( isset( $entry['media'] ) ) {
-			$this->addMedia( $id, $entry['media'], 'product' );
+		foreach( ['media', 'price', 'text'] as $refDomain )
+		{
+			if( isset( $entry[$refDomain] ) )
+			{
+				$manager = \Aimeos\MShop\Factory::createManager( $context, $refDomain );
+
+				foreach( $entry[$refDomain] as $data )
+				{
+					$listItem = $listManager->createItem( $data[$domain . '.lists.type'], $refDomain );
+					$listItem->fromArray( $data );
+
+					$refItem = $manager->createItem( $data[$refDomain . '.type'], $domain );
+					$refItem->fromArray( $data );
+
+					$item->addListItem( $refDomain, $listItem, $refItem );
+				}
+			}
 		}
 
-		if( isset( $entry['price'] ) ) {
-			$this->addPrices( $id, $entry['price'], 'product' );
+		if( isset( $entry['product'] ) )
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
+
+			foreach( $entry['product'] as $data )
+			{
+				$listItem = $listManager->createItem( $data['product.lists.type'], 'product' );
+				$listItem->fromArray( $data );
+				$listItem->setRefId( $manager->findItem( $data['product.code'] )->getId() );
+
+				$item->addListItem( 'product', $listItem );
+			}
 		}
 
-		if( isset( $entry['text'] ) ) {
-			$this->addTexts( $id, $entry['text'], 'product' );
+		return $item;
+	}
+
+
+	/**
+	 * Adds stock levels to the given product in the database.
+	 *
+	 * @param string $productcode Code of the product item where the stock levels should be associated to
+	 * @param array $data Two dimensional associative list of product stock data
+	 */
+	protected function addStockItems( $productcode, array $data )
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock/type' );
+
+		$types = [];
+		foreach( $manager->searchItems( $manager->createSearch() ) as $id => $item ) {
+			$types[$item->getCode()] = $id;
 		}
 
-		if( isset( $entry['product'] ) ) {
-			$this->addProducts( $id, $entry['product'], 'product' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock' );
+
+		foreach( $data as $entry )
+		{
+			$item = $manager->createItem( $entry['stock.type'], 'product' );
+			$item->setProductCode( $productcode )->fromArray( $entry );
+
+			$manager->saveItem( $item, false );
 		}
 	}
 

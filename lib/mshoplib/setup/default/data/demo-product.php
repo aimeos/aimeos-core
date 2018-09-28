@@ -10,1109 +10,971 @@ return array(
 
 	// Single article
 	array(
-		'code' => 'demo-article', 'type' => 'default', 'label' => 'Demo article',
-		'start' => null, 'end' => null, 'status' => 1,
+		'product.code' => 'demo-article', 'product.type' => 'default',
+		'product.label' => 'Demo article', 'product.status' => 1,
 		'text' => array(
 			array(
-				'label' => 'Demo name/de: Demoartikel',
-				'content' => 'Demoartikel',
-				'type' => 'name', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/de: Demoartikel', 'text.text.content' => 'Demoartikel',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
-				'type' => 'short', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
+				'text.text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
-				'label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
-				'type' => 'long', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
+				'text.text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels, die gerne etwas länger sein darf.',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 			array(
-				'label' => 'Demo name/en: Demo article',
-				'content' => 'Demo article',
-				'type' => 'name', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/en: Demo article',
+				'text.text.content' => 'Demo article',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
-				'label' => 'Demo short/en: This is the short description',
-				'content' => 'This is the short description of the demo article.',
-				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo short/en: This is the short description',
+				'text.text.content' => 'This is the short description of the demo article.',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
 			),
 			array(
-				'label' => 'Demo long/en: Add a detailed description',
-				'content' => 'Add a detailed description of the demo article that may be a little bit longer.',
-				'type' => 'long', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo long/en: Add a detailed description',
+				'text.text.content' => 'Add a detailed description of the demo article that may be a little bit longer.',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
 		),
 		'price' => array(
 			array(
-				'label' => 'Demo: Article from 1',
-				'value' => '100.00', 'costs' => '5.00', 'rebate' => '20.00', 'taxrate' => '20.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '100.00', 'price.costs' => '5.00', 'price.rebate' => '20.00', 'price.taxrate' => '20.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo: Article from 1',
-				'value' => '130.00', 'costs' => '7.50', 'rebate' => '30.00', 'taxrate' => '10.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Article from 1',
+				'price.value' => '130.00', 'price.costs' => '7.50', 'price.rebate' => '30.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 		),
 		'media' => array(
 			array(
-				'label' => 'Demo: Article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/1-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/1.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Article 1.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/1.jpg',
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1
 			),
 			array(
-				'label' => 'Demo: Article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/2.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Article 2.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/2.jpg',
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1
 			),
 			array(
-				'label' => 'Demo: Article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/3.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Article 3.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/3.jpg',
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1
 			),
 			array(
-				'label' => 'Demo: Article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/4.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Article 4.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/4.jpg',
+				'media.type' => 'default', 'media.languageid' => null, 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3, 'product.lists.config' => [],
+				'product.lists.start' => null, 'product.lists.end' => null, 'product.lists.status' => 1
 			),
 		),
 		'attribute' => array(
 			array(
-				'code' => 'demo-black', 'label' => 'Demo: Black',
-				'type' => 'color', 'position' => 1, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-black', 'attribute.label' => 'Demo: Black',
+				'attribute.type' => 'color', 'attribute.position' => 1, 'attribute.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Schwarz',
-						'content' => 'Schwarz',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Schwarz',
+						'text.content' => 'Schwarz',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Black',
-						'content' => 'Black',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Black',
+						'text.text.content' => 'Black',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/de: Schwarz',
-						'content' => 'Schwarz',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/de: Schwarz',
+						'text.content' => 'Schwarz',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/en: Black',
-						'content' => 'Black',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/en: Black',
+						'text.content' => 'Black',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 				'media' => array(
 					array(
-						'label' => 'Demo: black.gif', 'mimetype' => 'image/gif',
-						'url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
-						'preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
-						'type' => 'default', 'languageid' => null, 'status' => 1,
-						'list-type' => 'icon', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'media.label' => 'Demo: black.gif', 'media.mimetype' => 'image/gif',
+						'media.url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
+						'media.preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
+						'media.type' => 'default', 'media.status' => 1,
+						'attribute.lists.type' => 'icon', 'attribute.lists.position' => 0
 					),
 				),
 			),
 			array(
-				'code' => 'demo-print-small', 'label' => 'Demo: Small print',
-				'type' => 'print', 'position' => 0, 'status' => 1,
-				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-print-small', 'attribute.label' => 'Demo: Small print',
+				'attribute.type' => 'print', 'attribute.position' => 0, 'status' => 1,
+				'product.lists.type' => 'config', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Kleiner Aufdruck',
-						'content' => 'Kleiner Aufdruck',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Kleiner Aufdruck',
+						'text.content' => 'Kleiner Aufdruck',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Small print',
-						'content' => 'Small print',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Small print',
+						'text.content' => 'Small print',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/de: Kleiner Aufdruck',
-						'content' => 'Kleiner_Aufdruck',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/de: Kleiner Aufdruck',
+						'text.content' => 'Kleiner_Aufdruck',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/en: Small print',
-						'content' => 'small_print',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/en: Small print',
+						'text.content' => 'small_print',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 				'price' => array(
 					array(
-						'label' => 'Demo: Small print',
-						'value' => '5.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '20.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'price.label' => 'Demo: Small print',
+						'price.value' => '5.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo: Small print',
-						'value' => '7.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'price.label' => 'Demo: Small print',
+						'price.value' => '7.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					),
 				),
 			),
 			array(
-				'code' => 'demo-print-large', 'label' => 'Demo: Large print',
-				'type' => 'print', 'position' => 1, 'status' => 1,
-				'list-type' => 'config', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-print-large', 'attribute.label' => 'Demo: Large print',
+				'attribute.type' => 'print', 'attribute.position' => 1, 'attribute.status' => 1,
+				'product.lists.type' => 'config', 'product.lists.position' => 2,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Grosser Aufdruck',
-						'content' => 'Grosser Aufdruck',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Grosser Aufdruck',
+						'text.content' => 'Grosser Aufdruck',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Large print',
-						'content' => 'Large print',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Large print',
+						'text.content' => 'Large print',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/de: Grosser Aufdruck',
-						'content' => 'Grosser_Aufdruck',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/de: Grosser Aufdruck',
+						'text.content' => 'Grosser_Aufdruck',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/en: Large print',
-						'content' => 'large_print',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/en: Large print',
+						'text.content' => 'large_print',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 				'price' => array(
 					array(
-						'label' => 'Demo: Large print',
-						'value' => '15.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '20.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'price.label' => 'Demo: Large print',
+						'price.value' => '15.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '20.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo: Large print',
-						'value' => '20.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'price.label' => 'Demo: Large print',
+						'price.value' => '20.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					),
 				),
 			),
 			array(
-				'code' => 'demo-print-text', 'label' => 'Demo: Text for print',
-				'type' => 'text', 'position' => 0, 'status' => 1,
-				'list-type' => 'custom', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-print-text', 'attribute.label' => 'Demo: Text for print',
+				'attribute.type' => 'text', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'custom', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Kleiner Aufdruck',
-						'content' => 'Text_Aufdruck',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Kleiner Aufdruck',
+						'text.content' => 'Text_Aufdruck',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Small print',
-						'content' => 'print_text',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Small print',
+						'text.content' => 'print_text',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
 			array(
-				'code' => 'P0Y1M0W0D', 'label' => 'Demo: One month',
-				'type' => 'interval', 'position' => 0, 'status' => 1,
-				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'P0Y1M0W0D', 'attribute.label' => 'Demo: One month',
+				'attribute.type' => 'interval', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'config', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Ein Monat',
-						'content' => '1 Monat',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Ein Monat',
+						'text.content' => '1 Monat',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: One Month',
-						'content' => '1 month',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: One Month',
+						'text.content' => '1 month',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
 			array(
-				'code' => 'P1Y0M0W0D', 'label' => 'Demo: One year',
-				'type' => 'interval', 'position' => 0, 'status' => 1,
-				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'P1Y0M0W0D', 'attribute.label' => 'Demo: One year',
+				'attribute.type' => 'interval', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'config', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Ein Jahr',
-						'content' => '1 Jahr',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Ein Jahr',
+						'text.content' => '1 Jahr',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: One year',
-						'content' => '1 year',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: One year',
+						'text.content' => '1 year',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
 		),
 		'property' => array(
-			array( 'type' => 'package-length', 'languageid' => null, 'value' => '20.00' ),
-			array( 'type' => 'package-width', 'languageid' => null, 'value' => '10.00' ),
-			array( 'type' => 'package-height', 'languageid' => null, 'value' => '5.00' ),
-			array( 'type' => 'package-weight', 'languageid' => null, 'value' => '2.5' ),
+			array( 'product.property.type' => 'package-length', 'product.property.value' => '20.00' ),
+			array( 'product.property.type' => 'package-width', 'product.property.value' => '10.00' ),
+			array( 'product.property.type' => 'package-height', 'product.property.value' => '5.00' ),
+			array( 'product.property.type' => 'package-weight', 'product.property.value' => '2.5' ),
 		),
 		'stock' => array(
-			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
+			array( 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null )
 		),
 	),
 
 	// Selection articles
 	array(
-		'code' => 'demo-selection-article-1', 'type' => 'default', 'label' => 'Demo variant article 1',
-		'start' => null, 'end' => null, 'status' => 1,
+		'product.code' => 'demo-selection-article-1', 'product.type' => 'default',
+		'product.label' => 'Demo variant article 1', 'product.status' => 1,
 		'attribute' => array(
 			array(
-				'code' => 'demo-blue', 'label' => 'Demo: Blue',
-				'type' => 'color', 'position' => 2, 'status' => 1,
-				'list-type' => 'variant', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-blue', 'attribute.label' => 'Demo: Blue',
+				'attribute.type' => 'color', 'attribute.position' => 2, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 0,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Blau',
-						'content' => 'Blau',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Blau',
+						'text.content' => 'Blau',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Blue',
-						'content' => 'Blue',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Blue',
+						'text.content' => 'Blue',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					),
 					array(
-						'label' => 'Demo url/de: Blau',
-						'content' => 'Blau',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/de: Blau',
+						'text.content' => 'Blau',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/en: Blue',
-						'content' => 'blue',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/en: Blue',
+						'text.content' => 'blue',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					),
 				),
 				'media' => array(
 					array(
-						'label' => 'Demo: blue.gif', 'mimetype' => 'image/gif',
-						'url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAA/wAAACwAAAAAAQABAAACAkQBADs=',
-						'preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAA/wAAACwAAAAAAQABAAACAkQBADs=',
-						'type' => 'default', 'languageid' => null, 'status' => 1,
-						'list-type' => 'icon', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'media.label' => 'Demo: blue.gif', 'media.mimetype' => 'image/gif',
+						'media.url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAA/wAAACwAAAAAAQABAAACAkQBADs=',
+						'media.preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAA/wAAACwAAAAAAQABAAACAkQBADs=',
+						'media.type' => 'default', 'media.status' => 1,
+						'attribute.lists.type' => 'icon', 'attribute.lists.position' => 0
 					),
 				),
 			),
 			array(
-				'code' => 'demo-width-32', 'label' => 'Demo: Width 32',
-				'type' => 'width', 'position' => 0, 'status' => 1,
-				'list-type' => 'variant', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-width-32', 'attribute.label' => 'Demo: Width 32',
+				'attribute.type' => 'width', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name: Width 32', 'content' => '32',
-						'type' => 'name', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name: Width 32', 'text.content' => '32',
+						'text.type' => 'name', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url: Width 32', 'content' => 'Weite_32',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url: Width 32', 'text.content' => 'Weite_32',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url: Width 32', 'content' => 'width_32',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url: Width 32', 'text.content' => 'width_32',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
 			array(
-				'code' => 'demo-length-34', 'label' => 'Demo: Length 34',
-				'type' => 'length', 'position' => 0, 'status' => 1,
-				'list-type' => 'variant', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-length-34', 'attribute.label' => 'Demo: Length 34',
+				'attribute.type' => 'length', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name: Length 34', 'content' => '34',
-						'type' => 'name', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name: Length 34', 'text.content' => '34',
+						'text.type' => 'name', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 					array(
-						'label' => 'Demo url: Length 34', 'content' => 'Länge_34',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url: Length 34', 'text.content' => 'Länge_34',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 					array(
-						'label' => 'Demo url: Length 34', 'content' => 'length_34',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url: Length 34', 'text.content' => 'length_34',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 				),
 			),
 		),
 		'price' => array(
 			array(
-				'label' => 'Demo: Selection article 1 from 1',
-				'value' => '140.00', 'costs' => '10.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Selection article 1 from 1',
+				'price.value' => '140.00', 'price.costs' => '10.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo: Selection article 1 from 1',
-				'value' => '190.00', 'costs' => '15.00', 'rebate' => '0.00', 'taxrate' => '5.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Selection article 1 from 1',
+				'price.value' => '190.00', 'price.costs' => '15.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 5, 'typeid' => 'default', 'dateback' => null ),
+			array( 'stock.stocklevel' => 5, 'stock.type' => 'default', 'stock.dateback' => null ),
 		),
 	),
 	array(
-		'code' => 'demo-selection-article-2', 'type' => 'default', 'label' => 'Demo variant article 2',
-		'start' => null, 'end' => null, 'status' => 1,
+		'product.code' => 'demo-selection-article-2', 'product.type' => 'default',
+		'product.label' => 'Demo variant article 2', 'status' => 1,
 		'attribute' => array(
 			array(
-				'code' => 'demo-beige', 'label' => 'Demo: Beige',
-				'type' => 'color', 'position' => 0, 'status' => 1,
-				'list-type' => 'variant', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Beige',
+				'attribute.type' => 'color', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 0,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Beige', 'content' => 'Beige',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Beige', 'text.content' => 'Beige',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Beige', 'content' => 'Beige',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Beige', 'text.content' => 'Beige',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					),
 					array(
-						'label' => 'Demo url/de: Beige', 'content' => 'Beige',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/de: Beige', 'text.content' => 'Beige',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/en: Beige', 'content' => 'beige',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/en: Beige', 'text.content' => 'beige',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					),
 				),
 				'media' => array(
 					array(
-						'label' => 'Demo: beige.gif', 'mimetype' => 'image/gif',
-						'url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAPX13AAAACwAAAAAAQABAAACAkQBADs=',
-						'preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAPX13AAAACwAAAAAAQABAAACAkQBADs=',
-						'type' => 'default', 'languageid' => null, 'status' => 1,
-						'list-type' => 'icon', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'media.label' => 'Demo: beige.gif', 'media.mimetype' => 'image/gif',
+						'media.url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAPX13AAAACwAAAAAAQABAAACAkQBADs=',
+						'media.preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAPX13AAAACwAAAAAAQABAAACAkQBADs=',
+						'media.type' => 'default', 'media.status' => 1,
+						'attribute.lists.type' => 'icon', 'attribute.lists.position' => 0
 					),
 				),
 			),
 			array(
-				'code' => 'demo-width-33', 'label' => 'Demo: Width 33',
-				'type' => 'width', 'position' => 1, 'status' => 1,
-				'list-type' => 'variant', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-width-33', 'attribute.label' => 'Demo: Width 33',
+				'attribute.type' => 'width', 'attribute.position' => 1, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name: Width 33', 'content' => '33',
-						'type' => 'name', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name: Width 33', 'text.content' => '33',
+						'text.type' => 'name', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url: Width 33', 'content' => 'Weite_33',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url: Width 33', 'text.content' => 'Weite_33',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url: Width 33', 'content' => 'width_33',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url: Width 33', 'text.content' => 'width_33',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
 			array(
-				'code' => 'demo-length-36', 'label' => 'Demo: Length 36',
-				'type' => 'length', 'position' => 1, 'status' => 1,
-				'list-type' => 'variant', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-length-36', 'attribute.label' => 'Demo: Length 36',
+				'attribute.type' => 'length', 'attribute.position' => 1, 'attribute.status' => 1,
+				'product.lists.type' => 'variant', 'product.lists.position' => 2,
 				'text' => array(
 					array(
-						'label' => 'Demo name: Length 36', 'content' => '36',
-						'type' => 'name', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name: Length 36', 'text.content' => '36',
+						'text.type' => 'name', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 					array(
-						'label' => 'Demo url: Length 36', 'content' => 'Länge_36',
-						'type' => 'url', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url: Length 36', 'text.content' => 'Länge_36',
+						'text.type' => 'url', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 					array(
-						'label' => 'Demo url: Length 36', 'content' => 'length_36',
-						'type' => 'url', 'languageid' => null, 'status' => 1,
-						'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url: Length 36', 'text.content' => 'length_36',
+						'text.type' => 'url', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 2
 					),
 				),
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 0, 'typeid' => 'default', 'dateback' => '2015-01-01 12:00:00' ),
+			array( 'stock.stocklevel' => 0, 'stock.type' => 'default', 'stock.dateback' => '2015-01-01 12:00:00' ),
 		),
 	),
 	array(
-		'code' => 'demo-selection-article', 'type' => 'select', 'label' => 'Demo selection article',
-		'supplier' => '', 'start' => null, 'end' => null, 'status' => 1,
+		'product.code' => 'demo-selection-article', 'product.type' => 'select',
+		'product.label' => 'Demo selection article', 'product.status' => 1,
 		'text' => array(
 			array(
-				'label' => 'Demo name/de: Demoartikel mit Auswahl',
-				'content' => 'Demoartikel mit Auswahl',
-				'type' => 'name', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/de: Demoartikel mit Auswahl',
+				'text.content' => 'Demoartikel mit Auswahl',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo url/de: Demoartikel mit Auswahl',
-				'content' => 'Demoartikel_mit_Auswahl',
-				'type' => 'url', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo url/de: Demoartikel mit Auswahl',
+				'text.content' => 'Demoartikel_mit_Auswahl',
+				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'content' => 'Dies ist die Kurzbeschreibung des Demoartikels mit Auswahl',
-				'type' => 'short', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
+				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels mit Auswahl',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
-				'label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'content' => 'Hier folgt eine ausführliche Beschreibung des Artikels mit Auswahl, die gerne etwas länger sein darf.',
-				'type' => 'long', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
+				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels mit Auswahl, die gerne etwas länger sein darf.',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 			array(
-				'label' => 'Demo name/en: Demo selection article',
-				'content' => 'Demo selection article',
-				'type' => 'name', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/en: Demo selection article',
+				'text.content' => 'Demo selection article',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
-				'label' => 'Demo short/en: This is the short description',
-				'content' => 'This is the short description of the selection demo article.',
-				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo short/en: This is the short description',
+				'text.content' => 'This is the short description of the selection demo article.',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
 			),
 			array(
-				'label' => 'Demo long/en: Add a detailed description',
-				'content' => 'Add a detailed description of the selection demo article that may be a little bit longer.',
-				'type' => 'long', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo long/en: Add a detailed description',
+				'text.content' => 'Add a detailed description of the selection demo article that may be a little bit longer.',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
 		),
 		'price' => array(
 			array(
-				'label' => 'Demo: Selection article from 1',
-				'value' => '150.00', 'costs' => '10.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Selection article from 1',
+				'price.value' => '150.00', 'price.costs' => '10.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo: Selection article from 5',
-				'value' => '135.00', 'costs' => '10.00', 'rebate' => '15.00', 'taxrate' => '10.00',
-				'quantity' => 5, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Selection article from 5',
+				'price.value' => '135.00', 'price.costs' => '10.00', 'price.rebate' => '15.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
-				'label' => 'Demo: Selection article from 10',
-				'value' => '120.00', 'costs' => '10.00', 'rebate' => '30.00', 'taxrate' => '10.00',
-				'quantity' => 10, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Selection article from 10',
+				'price.value' => '120.00', 'price.costs' => '10.00', 'price.rebate' => '30.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 			array(
-				'label' => 'Demo: Selection article from 1',
-				'value' => '200.00', 'costs' => '15.00', 'rebate' => '0.00', 'taxrate' => '5.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Selection article from 1',
+				'price.value' => '200.00', 'price.costs' => '15.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
-				'label' => 'Demo: Selection article from 5',
-				'value' => '175.00', 'costs' => '15.00', 'rebate' => '25.00', 'taxrate' => '5.00',
-				'quantity' => 5, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Selection article from 5',
+				'price.value' => '175.00', 'price.costs' => '15.00', 'price.rebate' => '25.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
 			),
 			array(
-				'label' => 'Demo: Selection article from 10',
-				'value' => '150.00', 'costs' => '15.00', 'rebate' => '50.00', 'taxrate' => '5.00',
-				'quantity' => 10, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Selection article from 10',
+				'price.value' => '150.00', 'price.costs' => '15.00', 'price.rebate' => '50.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
 		),
 		'media' => array(
 			array(
-				'label' => 'Demo: Selection article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/1-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/1.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Selection article 1.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/1.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
-				'label' => 'Demo: Selection article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/2.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Selection article 2.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/2.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo: Selection article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/3.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Selection article 3.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/3.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
-				'label' => 'Demo: Selection article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/4.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Selection article 4.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/4.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 		),
 		'product' => array(
 			array(
-				'code' => 'demo-selection-article-1',
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'product.code' => 'demo-selection-article-1',
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'code' => 'demo-selection-article-2',
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'product.code' => 'demo-selection-article-2',
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
-				'code' => 'demo-article',
-				'list-type' => 'suggestion', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'product.code' => 'demo-article',
+				'product.lists.type' => 'suggestion', 'product.lists.position' => 0
 			),
 			array(
-				'code' => 'demo-article',
-				'list-type' => 'bought-together', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'product.code' => 'demo-article',
+				'product.lists.type' => 'bought-together', 'product.lists.position' => 0
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 5, 'typeid' => 'default', 'dateback' => null )
+			array( 'stock.stocklevel' => 5, 'stock.type' => 'default', 'stock.dateback' => null )
 		),
 	),
 
 	// bundle article
 	array(
-		'code' => 'demo-bundle-article', 'type' => 'bundle', 'label' => 'Demo bundle article',
-		'start' => null, 'end' => null, 'status' => 1,
+		'product.code' => 'demo-bundle-article', 'product.type' => 'bundle',
+		'product.label' => 'Demo bundle article', 'status' => 1,
 		'text' => array(
 			array(
-				'label' => 'Demo name/de: Demoartikel mit Bundle',
-				'content' => 'Demoartikel mit Bundle',
-				'type' => 'name', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/de: Demoartikel mit Bundle',
+				'text.content' => 'Demoartikel mit Bundle',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo url/de: Demoartikel mit Bundle',
-				'content' => 'Demoartikel_mit_Bundle',
-				'type' => 'url', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo url/de: Demoartikel mit Bundle',
+				'text.content' => 'Demoartikel_mit_Bundle',
+				'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'content' => 'Dies ist die Kurzbeschreibung des Demoartikels mit Bundle',
-				'type' => 'short', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
+				'text.content' => 'Dies ist die Kurzbeschreibung des Demoartikels mit Bundle',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
-				'label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'content' => 'Hier folgt eine ausführliche Beschreibung des Artikels mit Bundle, die gerne etwas länger sein darf.',
-				'type' => 'long', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
+				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Artikels mit Bundle, die gerne etwas länger sein darf.',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 			array(
-				'label' => 'Demo name/en: Demo bundle article',
-				'content' => 'Demo bundle article',
-				'type' => 'name', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/en: Demo bundle article',
+				'text.content' => 'Demo bundle article',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
-				'label' => 'Demo short/en: This is the short description',
-				'content' => 'This is the short description of the bundle demo article.',
-				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo short/en: This is the short description',
+				'text.content' => 'This is the short description of the bundle demo article.',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
 			),
 			array(
-				'label' => 'Demo long/en: Add a detailed description',
-				'content' => 'Add a detailed description of the bundle demo article that may be a little bit longer.',
-				'type' => 'long', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo long/en: Add a detailed description',
+				'text.content' => 'Add a detailed description of the bundle demo article that may be a little bit longer.',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
 		),
 		'price' => array(
 			array(
-				'label' => 'Demo: Bundle article from 1',
-				'value' => '250.00', 'costs' => '10.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Bundle article from 1',
+				'price.value' => '250.00', 'price.costs' => '10.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo: Bundle article from 5',
-				'value' => '235.00', 'costs' => '10.00', 'rebate' => '15.00', 'taxrate' => '10.00',
-				'quantity' => 5, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			),
-			array(
-				'label' => 'Demo: Bundle article from 10',
-				'value' => '220.00', 'costs' => '10.00', 'rebate' => '30.00', 'taxrate' => '10.00',
-				'quantity' => 10, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			),
-			array(
-				'label' => 'Demo: Bundle article from 1',
-				'value' => '250.00', 'costs' => '15.00', 'rebate' => '0.00', 'taxrate' => '5.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
-			),
-			array(
-				'label' => 'Demo: Bundle article from 5',
-				'value' => '225.00', 'costs' => '15.00', 'rebate' => '25.00', 'taxrate' => '5.00',
-				'quantity' => 5, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Bundle article from 5',
+				'price.value' => '235.00', 'price.costs' => '10.00', 'price.rebate' => '15.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
 				'label' => 'Demo: Bundle article from 10',
-				'value' => '200.00', 'costs' => '15.00', 'rebate' => '50.00', 'taxrate' => '5.00',
-				'quantity' => 10, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.value' => '220.00', 'price.costs' => '10.00', 'price.rebate' => '30.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
+			),
+			array(
+				'label' => 'Demo: Bundle article from 1',
+				'price.value' => '250.00', 'price.costs' => '15.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
+			),
+			array(
+				'label' => 'Demo: Bundle article from 5',
+				'price.value' => '225.00', 'price.costs' => '15.00', 'price.rebate' => '25.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
+			),
+			array(
+				'label' => 'Demo: Bundle article from 10',
+				'price.value' => '200.00', 'price.costs' => '15.00', 'price.rebate' => '50.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
 		),
 		'media' => array(
 			array(
-				'label' => 'Demo: Bundle article 1.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/1-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/1.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Bundle article 1.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/1-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/1.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 			array(
-				'label' => 'Demo: Bundle article 2.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/2-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/2.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Bundle article 2.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/2-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/2.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
-				'label' => 'Demo: Bundle article 3.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/3-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/3.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Bundle article 3.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/3-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/3.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo: Bundle article 4.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/4-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/4.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Bundle article 4.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/4-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/4.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 		),
 		'attribute' => array(
 			array(
-				'code' => 'demo-sticker-small', 'label' => 'Demo: Small sticker',
-				'type' => 'sticker', 'position' => 2, 'status' => 1,
-				'list-type' => 'config', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-sticker-small', 'attribute.label' => 'Demo: Small sticker',
+				'attribute.type' => 'sticker', 'attribute.position' => 2, 'attribute.status' => 1,
+				'product.lists.type' => 'config', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Kleines Etikett',
-						'content' => 'Kleines Etikett',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Kleines Etikett',
+						'text.content' => 'Kleines Etikett',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Small sticker',
-						'content' => 'Small sticker',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Small sticker',
+						'text.content' => 'Small sticker',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/de: Kleines Etikett',
-						'content' => 'Kleines_Etikett',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/de: Kleines Etikett',
+						'text.content' => 'Kleines_Etikett',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/en: Small sticker',
-						'content' => 'small_sticker',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/en: Small sticker',
+						'text.content' => 'small_sticker',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 				'price' => array(
 					array(
-						'label' => 'Demo: Small sticker',
-						'value' => '2.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'price.label' => 'Demo: Small sticker',
+						'price.value' => '2.50', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo: Small sticker',
-						'value' => '3.50', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'price.label' => 'Demo: Small sticker',
+						'price.value' => '3.50', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					),
 				),
 			),
 			array(
-				'code' => 'demo-sticker-large', 'label' => 'Demo: Large sticker',
-				'type' => 'sticker', 'position' => 3, 'status' => 1,
-				'list-type' => 'config', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-sticker-large', 'attribute.label' => 'Demo: Large sticker',
+				'attribute.type' => 'sticker', 'attribute.position' => 3, 'attribute.status' => 1,
+				'product.lists.type' => 'config', 'product.lists.position' => 2,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Grosses Etikett',
-						'content' => 'Großes Etikett',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Grosses Etikett',
+						'text.content' => 'Großes Etikett',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Large sticker',
-						'content' => 'Large sticker',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Large sticker',
+						'text.content' => 'Large sticker',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/de: Grosses Etikett',
-						'content' => 'Grosses_Etikett',
-						'type' => 'url', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/de: Grosses Etikett',
+						'text.content' => 'Grosses_Etikett',
+						'text.type' => 'url', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo url/en: Large sticker',
-						'content' => 'large_sticker',
-						'type' => 'url', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo url/en: Large sticker',
+						'text.content' => 'large_sticker',
+						'text.type' => 'url', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 				'price' => array(
 					array(
-						'label' => 'Demo: Large sticker',
-						'value' => '5.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'price.label' => 'Demo: Large sticker',
+						'price.value' => '5.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo: Large sticker',
-						'value' => '7.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
-						'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'price.label' => 'Demo: Large sticker',
+						'price.value' => '7.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+						'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 1
 					),
 				),
 			),
 		),
 		'product' => array(
 			array(
-				'code' => 'demo-selection-article',
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'product.code' => 'demo-selection-article',
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'code' => 'demo-article',
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'product.code' => 'demo-article',
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => 10, 'typeid' => 'default', 'dateback' => null ),
+			array( 'stock.stocklevel' => 10, 'stock.type' => 'default', 'stock.dateback' => null ),
 		),
 	),
 	array(
-		'code' => 'demo-voucher', 'type' => 'voucher', 'label' => 'Demo voucher',
-		'start' => null, 'end' => null, 'status' => 1,
+		'product.code' => 'demo-voucher', 'product.type' => 'voucher',
+		'product.label' => 'Demo voucher', 'product.status' => 1,
 		'text' => array(
 			array(
-				'label' => 'Demo name/de: Gutschein',
-				'content' => 'Demo-Gutschein',
-				'type' => 'name', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/de: Gutschein',
+				'text.content' => 'Demo-Gutschein',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
-				'content' => 'Dies ist die Kurzbeschreibung des Demo-Gutscheins',
-				'type' => 'short', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo short/de: Dies ist die Kurzbeschreibung',
+				'text.content' => 'Dies ist die Kurzbeschreibung des Demo-Gutscheins',
+				'text.type' => 'short', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
-				'label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
-				'content' => 'Hier folgt eine ausführliche Beschreibung des Gutscheins, die gerne etwas länger sein darf.',
-				'type' => 'long', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo long/de: Hier folgt eine ausführliche Beschreibung',
+				'text.content' => 'Hier folgt eine ausführliche Beschreibung des Gutscheins, die gerne etwas länger sein darf.',
+				'text.type' => 'long', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 			array(
-				'label' => 'Demo name/en: Demo article',
-				'content' => 'Demo voucher',
-				'type' => 'name', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/en: Demo article',
+				'text.content' => 'Demo voucher',
+				'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
-				'label' => 'Demo short/en: This is the short description',
-				'content' => 'This is the short description of the demo voucher.',
-				'type' => 'short', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 4, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo short/en: This is the short description',
+				'text.content' => 'This is the short description of the demo voucher.',
+				'text.type' => 'short', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 4
 			),
 			array(
-				'label' => 'Demo long/en: Add a detailed description',
-				'content' => 'Add a detailed description of the demo voucher that may be a little bit longer.',
-				'type' => 'long', 'languageid' => 'en', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 5, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo long/en: Add a detailed description',
+				'text.content' => 'Add a detailed description of the demo voucher that may be a little bit longer.',
+				'text.type' => 'long', 'text.languageid' => 'en', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 5
 			),
 		),
 		'price' => array(
 			array(
-				'label' => 'Demo: Voucher',
-				'value' => '25.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '10.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'EUR', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Voucher',
+				'price.value' => '25.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '10.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 			array(
-				'label' => 'Demo: Voucher',
-				'value' => '25.00', 'costs' => '0.00', 'rebate' => '0.00', 'taxrate' => '5.00',
-				'quantity' => 1, 'type' => 'default', 'currencyid' => 'USD', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'price.label' => 'Demo: Voucher',
+				'price.value' => '25.00', 'price.costs' => '0.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
+				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 		),
 		'attribute' => array(
 			array(
-				'code' => 'custom', 'label' => 'Demo: Custom price',
-				'type' => 'price', 'position' => 0, 'status' => 1,
-				'list-type' => 'custom', 'list-position' => 1, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'custom', 'attribute.label' => 'Demo: Custom price',
+				'attribute.type' => 'price', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'custom', 'product.lists.position' => 1,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Gutscheinwert',
-						'content' => 'Gutscheinwert',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Gutscheinwert',
+						'text.content' => 'Gutscheinwert',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Voucher value',
-						'content' => 'Voucher value',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Voucher value',
+						'text.content' => 'Voucher value',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
 			array(
-				'code' => 'demo-custom-date', 'label' => 'Demo: Custom date',
-				'type' => 'date', 'position' => 0, 'status' => 1,
-				'list-type' => 'custom', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1,
+				'attribute.code' => 'demo-custom-date', 'attribute.label' => 'Demo: Custom date',
+				'attribute.type' => 'date', 'attribute.position' => 0, 'attribute.status' => 1,
+				'product.lists.type' => 'custom', 'product.lists.position' => 2,
 				'text' => array(
 					array(
-						'label' => 'Demo name/de: Kundendatum',
-						'content' => 'Kundendatum',
-						'type' => 'name', 'languageid' => 'de', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/de: Kundendatum',
+						'text.content' => 'Kundendatum',
+						'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 					array(
-						'label' => 'Demo name/en: Customer date',
-						'content' => 'Customer date',
-						'type' => 'name', 'languageid' => 'en', 'status' => 1,
-						'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-						'list-start' => null, 'list-end' => null, 'list-status' => 1
+						'text.label' => 'Demo name/en: Customer date',
+						'text.content' => 'Customer date',
+						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
 		),
 		'media' => array(
 			array(
-				'label' => 'Demo: Voucher 0.jpg', 'mimetype' => 'image/jpeg',
-				'url' => 'https://demo.aimeos.org/media/0-voucher-big.jpg',
-				'preview' => 'https://demo.aimeos.org/media/0-voucher.jpg',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
-				'list-type' => 'default', 'list-position' => 2, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'media.label' => 'Demo: Voucher 0.jpg', 'media.mimetype' => 'image/jpeg',
+				'media.url' => 'https://demo.aimeos.org/media/0-voucher-big.jpg',
+				'media.preview' => 'https://demo.aimeos.org/media/0-voucher.jpg',
+				'media.type' => 'default', 'media.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
+			array( 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null )
 		),
 	),
 	array(
-		'code' => 'demo-rebate', 'type' => 'default', 'label' => 'Demo rebate',
-		'start' => null, 'end' => null, 'status' => 1,
+		'product.code' => 'demo-rebate', 'product.type' => 'default',
+		'product.label' => 'Demo rebate', 'product.status' => 1,
 		'text' => array(
 			array(
-				'label' => 'Demo name/de: Rabatt',
-				'content' => 'Demorabatt',
-				'type' => 'name', 'languageid' => 'de', 'status' => 1,
-				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
-				'list-start' => null, 'list-end' => null, 'list-status' => 1
+				'text.label' => 'Demo name/de: Rabatt',
+				'text.content' => 'Demorabatt',
+				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
+				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
 		),
 		'stock' => array(
-			array( 'stocklevel' => null, 'typeid' => 'default', 'dateback' => null )
+			array( 'stock.stocklevel' => null, 'stock.type' => 'default', 'stock.dateback' => null )
 		),
 	),
 );
