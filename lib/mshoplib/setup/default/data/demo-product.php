@@ -694,25 +694,25 @@ return array(
 				'product.lists.type' => 'default', 'product.lists.position' => 1
 			),
 			array(
-				'label' => 'Demo: Bundle article from 10',
+				'price.label' => 'Demo: Bundle article from 10',
 				'price.value' => '220.00', 'price.costs' => '10.00', 'price.rebate' => '30.00', 'price.taxrate' => '10.00',
 				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'EUR', 'price.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 2
 			),
 			array(
-				'label' => 'Demo: Bundle article from 1',
+				'price.label' => 'Demo: Bundle article from 1',
 				'price.value' => '250.00', 'price.costs' => '15.00', 'price.rebate' => '0.00', 'price.taxrate' => '5.00',
 				'price.quantity' => 1, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 3
 			),
 			array(
-				'label' => 'Demo: Bundle article from 5',
+				'price.label' => 'Demo: Bundle article from 5',
 				'price.value' => '225.00', 'price.costs' => '15.00', 'price.rebate' => '25.00', 'price.taxrate' => '5.00',
 				'price.quantity' => 5, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 4
 			),
 			array(
-				'label' => 'Demo: Bundle article from 10',
+				'price.label' => 'Demo: Bundle article from 10',
 				'price.value' => '200.00', 'price.costs' => '15.00', 'price.rebate' => '50.00', 'price.taxrate' => '5.00',
 				'price.quantity' => 10, 'price.type' => 'default', 'price.currencyid' => 'USD', 'price.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 5
