@@ -407,7 +407,7 @@ return array(
 	),
 	array(
 		'product.code' => 'demo-selection-article-2', 'product.type' => 'default',
-		'product.label' => 'Demo variant article 2', 'status' => 1,
+		'product.label' => 'Demo variant article 2', 'product.status' => 1,
 		'attribute' => array(
 			array(
 				'attribute.code' => 'demo-beige', 'attribute.label' => 'Demo: Beige',
@@ -635,7 +635,7 @@ return array(
 	// bundle article
 	array(
 		'product.code' => 'demo-bundle-article', 'product.type' => 'bundle',
-		'product.label' => 'Demo bundle article', 'status' => 1,
+		'product.label' => 'Demo bundle article', 'product.status' => 1,
 		'text' => array(
 			array(
 				'text.label' => 'Demo name/de: Demoartikel mit Bundle',
