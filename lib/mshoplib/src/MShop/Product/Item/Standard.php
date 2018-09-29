@@ -369,7 +369,7 @@ class Standard
 	{
 		if( (string) $value !== $this->getTimeCreated() )
 		{
-			$this->values['product.ctime'] = (string) $value;
+			$this->values['product.ctime'] = $this->checkDateFormat( $value );
 			$this->setModified();
 		}
 
