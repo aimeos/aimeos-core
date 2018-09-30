@@ -61,6 +61,10 @@ abstract class Base
 
 		foreach( $params as $param )
 		{
+			if( $param === null ) {
+				$list[] = 'null'; continue;
+			}
+
 			switch( gettype( $param ) )
 			{
 				case 'boolean':
@@ -105,7 +109,7 @@ abstract class Base
 		}
 
 		$matches = [];
-		$pattern = '/(\[[^\]]*\]|"[^"]*"|[0-9]+\.[0-9]+|[0-9]+),?/';
+		$pattern = '/(\[[^\]]*\]|"[^"]*"|[0-9]+\.[0-9]+|[0-9]+|null),?/';
 
 		if( preg_match_all( $pattern, $paramstr, $matches ) === false ) {
 			throw new \Aimeos\MW\Common\Exception( 'Unable to extract function parameters' );

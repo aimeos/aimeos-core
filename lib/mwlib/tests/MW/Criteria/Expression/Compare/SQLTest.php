@@ -119,12 +119,14 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 			'pcounter()' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'strconcat()' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'lcounter()' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'isnull()' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
 		);
 
 		$translations = array(
 			'pcounter()' => 'count($1,$2,$3)',
 			'strconcat()' => 'concat($1,$2)',
 			'lcounter()' => 'count(name IN ($1))',
+			'isnull()' => '($1 IS NULL)',
 		);
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'pcounter("name",10,0.1)', 3 );
@@ -138,5 +140,8 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter([])', 0 );
 		$this->assertEquals( "count(name IN ()) = 0", $expr->toString( $types, $translations ) );
+
+		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'isnull(null)', null );
+		$this->assertEquals( "(null IS NULL) IS NOT NULL", $expr->toString( $types, $translations ) );
 	}
 }

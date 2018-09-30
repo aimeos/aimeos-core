@@ -161,6 +161,8 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 
 		switch( $type )
 		{
+			case \Aimeos\MW\DB\Statement\Base::PARAM_NULL:
+				$value = 'null'; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_BOOL:
 				$value = (int) (bool) $value; break;
 			case \Aimeos\MW\DB\Statement\Base::PARAM_INT:
@@ -199,13 +201,17 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 
 			return \Aimeos\MW\DB\Statement\Base::PARAM_STR;
 		}
-		else if( strpos( $item, '.' ) !== false )
+		elseif( strpos( $item, '.' ) !== false )
 		{
 			return \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT;
 		}
-		else if( ctype_digit( $item ) !== false )
+		elseif( ctype_digit( $item ) !== false )
 		{
 			return \Aimeos\MW\DB\Statement\Base::PARAM_INT;
+		}
+		elseif( $item === 'null' )
+		{
+			return \Aimeos\MW\DB\Statement\Base::PARAM_NULL;
 		}
 
 		return \Aimeos\MW\DB\Statement\Base::PARAM_STR;

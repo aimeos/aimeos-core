@@ -38,8 +38,8 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateFunction()
 	{
-		$func = $this->object->createFunction( 'test', array( 1, 2, 3 ) );
-		$this->assertEquals( 'test(1,2,3)', $func );
+		$func = $this->object->createFunction( 'test', [1, null, 2] );
+		$this->assertEquals( 'test(1,null,2)', $func );
 	}
 
 
