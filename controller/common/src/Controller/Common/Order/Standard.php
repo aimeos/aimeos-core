@@ -151,11 +151,10 @@ class Standard
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->context, 'product' );
 
 		$search = $productManager->createSearch();
+		$func = $search->createFunction( 'product.list', ['product', 'default', $prodId] );
 		$expr = array(
 			$search->compare( '==', 'product.type.code', 'bundle' ),
-			$search->compare( '==', 'product.lists.domain', 'product' ),
-			$search->compare( '==', 'product.lists.refid', $prodId ),
-			$search->compare( '==', 'product.lists.type.code', 'default' ),
+			$search->compare( '!=', $func, null ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 0x7fffffff );
