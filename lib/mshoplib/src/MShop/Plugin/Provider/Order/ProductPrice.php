@@ -154,16 +154,14 @@ class ProductPrice
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
-		$listTypeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product/lists/type' );
 
 		$attrId = $attrManager->findItem( 'custom', [], 'product', 'price' )->getId();
-		$typeId = $listTypeManager->findItem( 'custom', [], 'attribute' )->getId();
 
 		$search = $productManager->createSearch( true );
-		$func = $search->createFunction( 'product.contains', ['attribute', $typeId, $attrId] );
+		$func = $search->createFunction( 'product.list', ['attribute', 'custom', $attrId] );
 		$expr = array(
 			$search->compare( '==', 'product.code', $prodCodes ),
-			$search->compare( '==', $func, 0 ),
+			$search->compare( '==', $func, null ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );

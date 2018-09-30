@@ -354,6 +354,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'product.editor', $this->editor );
 		$expr[] = $search->compare( '>=', 'product.target', '' );
 
+		$param = array( 'product','suggestion', $listItem->getRefId() );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product.list', $param ), null );
+
 		$param = array( 'product', $listItem->getTypeId(), array( $listItem->getRefId() ) );
 		$expr[] = $search->compare( '>', $search->createFunction( 'product.contains', $param ), 0 );
 
