@@ -597,7 +597,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 		$search = new \Aimeos\MW\Criteria\SQL( $conn );
 
-		$expr = $search->compare( '==', 'siteid', $value );
+		$expr = $search->compare( '==', 'siteid', ( is_array( $value ) ? array_unique( $value ) : $value ) );
 		$string = $expr->toString( $types, $translations );
 
 		$searchAttr['internalcode'] = str_replace( $marker, $string, $searchAttr['internalcode'] );
