@@ -14,7 +14,7 @@ return array(
 		'product.label' => 'Demo article', 'product.status' => 1,
 		'text' => array(
 			array(
-				'text.label' => 'Demo name/de: Demoartikel', 'text.text.content' => 'Demoartikel',
+				'text.label' => 'Demo name/de: Demoartikel', 'text.content' => 'Demoartikel',
 				'text.type' => 'name', 'text.languageid' => 'de', 'text.status' => 1,
 				'product.lists.type' => 'default', 'product.lists.position' => 0
 			),
@@ -111,7 +111,7 @@ return array(
 					),
 					array(
 						'text.label' => 'Demo name/en: Black',
-						'text.text.content' => 'Black',
+						'text.content' => 'Black',
 						'text.type' => 'name', 'text.languageid' => 'en', 'text.status' => 1,
 						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),

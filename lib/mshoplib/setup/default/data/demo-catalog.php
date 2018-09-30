@@ -67,12 +67,12 @@ return array(
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
 		array(
-			'code' => 'demo-selection-article',
+			'code' => 'demo-article',
 			'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
 		array(
-			'code' => 'demo-article',
+			'code' => 'demo-selection-article',
 			'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
@@ -83,7 +83,7 @@ return array(
 		),
 		array(
 			'code' => 'demo-voucher',
-			'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
+			'list-type' => 'default', 'list-position' => 3, 'list-config' => [],
 			'list-start' => null, 'list-end' => null, 'list-status' => 1
 		),
 	),
