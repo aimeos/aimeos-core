@@ -406,6 +406,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'product.property.type.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'product.property.type.editor', $this->editor );
 
+		$param = array( 'package-weight', null, '1' );
+		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
+
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
 		$search->setSlice( 0, 1 );

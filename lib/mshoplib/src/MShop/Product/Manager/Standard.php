@@ -136,6 +136,18 @@ class Standard
 			'internaltype' => 'null',
 			'public' => false,
 		),
+		'product:prop' => array(
+			'code' => 'product:prop()',
+			'internalcode' => '( SELECT mpropr_prop."id"
+				FROM "mshop_product_property" AS mpropr_prop
+				JOIN "mshop_product_property_type" AS mproprty_prop ON mpropr_prop."typeid" = mproprty_prop."id"
+				WHERE mpro."id" = mpropr_prop."parentid" AND :site AND mproprty_prop."code" = $1 AND mpropr_prop."value" = $3
+					AND (NOT (mpropr_prop."langid" <> $2 OR mpropr_prop."langid" IS NULL OR $2 IS NULL) OR (mpropr_prop."langid" IS NULL AND $2 IS NULL)) )',
+			'label' => 'Property has property item, parameter(<property type>,<language code>,<property value>)',
+			'type' => 'null',
+			'internaltype' => 'null',
+			'public' => false,
+		),
 		// @deprecated 2019.01, use product:has()
 		'product.contains' => array(
 			'code' => 'product.contains()',
@@ -182,6 +194,7 @@ class Standard
 		}
 
 		$this->replaceSiteMarker( $this->searchConfig['product:has'], 'mproli_has."siteid"', $siteIds, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['product:prop'], 'mpropr_prop."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli_cs."siteid"', $siteIds, ':site' );
 		$this->searchConfig['product.contains'] = str_replace( ':date', $this->date, $this->searchConfig['product.contains'] );
 	}
