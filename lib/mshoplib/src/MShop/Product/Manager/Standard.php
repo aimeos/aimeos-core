@@ -124,19 +124,19 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'product.list' => array(
-			'code' => 'product.list()',
-			'internalcode' => '( SELECT mproli_list."id"
-				FROM "mshop_product_list" AS mproli_list
-				JOIN "mshop_product_list_type" AS mprolity_list ON mproli_list."typeid" = mprolity_list."id"
-				WHERE mpro."id" = mproli_list."parentid" AND :site
-					AND mproli_list."domain" = $1 AND mprolity_list."code" = $2 AND mproli_list."refid" IN ( $3 ) )',
+		'product:has' => array(
+			'code' => 'product:has()',
+			'internalcode' => '( SELECT mproli_has."id"
+				FROM "mshop_product_list" AS mproli_has
+				JOIN "mshop_product_list_type" AS mprolity_has ON mproli_has."typeid" = mprolity_has."id"
+				WHERE mpro."id" = mproli_has."parentid" AND :site
+					AND mproli_has."domain" = $1 AND mprolity_has."code" = $2 AND mproli_has."refid" = $3 )',
 			'label' => 'Product list item, parameter(<domain>,<list type>,<reference ID>)',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
 		),
-		// @deprecated 2019.01, use product.list()
+		// @deprecated 2019.01, use product:has()
 		'product.contains' => array(
 			'code' => 'product.contains()',
 			'internalcode' => '( SELECT COUNT(mproli_cs."parentid")
@@ -181,7 +181,7 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['product.list'], 'mproli_list."siteid"', $siteIds, ':site' );
+		$this->replaceSiteMarker( $this->searchConfig['product:has'], 'mproli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli_cs."siteid"', $siteIds, ':site' );
 		$this->searchConfig['product.contains'] = str_replace( ':date', $this->date, $this->searchConfig['product.contains'] );
 	}
