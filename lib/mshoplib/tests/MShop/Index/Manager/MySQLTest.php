@@ -95,7 +95,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
 
-		$func = $search->createFunction( 'index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( 'unittype20', 'de', 'Espresso' ) );
 		$conditions = array(
 			$search->compare( '>', $func, 0 ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
@@ -123,6 +123,20 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		foreach( $result as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
+
+
+		$func = $search->createFunction( 'index.text:name', array( 'de' ) );
+		$conditions = array(
+			$search->compare( '~=', $func, 'Noir' ), // text value
+			$search->compare( '==', 'product.editor', $this->editor )
+		);
+		$search->setConditions( $search->combine( '&&', $conditions ) );
+		$sortfunc = $search->createFunction( 'sort:index.text:name', array( 'de' ) );
+		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
+		$result = $this->object->searchItems( $search, [], $total );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 2, $total );
 	}
 
 
@@ -153,6 +167,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		$expr = array(
 			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'noir cap' ) ), 0 ),
 			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'index.text:name', array( $langid ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

@@ -54,6 +54,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, use index.supplier:position()
 		'index.supplier.position' => array(
 			'code' => 'index.supplier.position()',
 			'internalcode' => ':site AND mindsu."supid" IN ( $2 ) AND mindsu."listtype" = $1 AND mindsu."pos"',
@@ -62,11 +63,28 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, use sort:index.supplier:position()
 		'sort:index.supplier.position' => array(
 			'code' => 'sort:index.supplier.position()',
 			'internalcode' => 'mindsu."pos"',
 			'label' => 'Sort product position in supplier list, parameter(<list type code>,<supplier ID>)',
 			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'index.supplier:position' => array(
+			'code' => 'index.supplier:position()',
+			'internalcode' => ':site AND mindsu."supid" IN ( $2 ) AND mindsu."listtype" = $1 AND mindsu."pos"',
+			'label' => 'Product position in supplier list, parameter(<list type code>,<supplier ID>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'sort:index.supplier:position' => array(
+			'code' => 'sort:index.supplier:position()',
+			'internalcode' => 'mindsu."pos"',
+			'label' => 'Sort product position in supplier list, parameter(<list type code>,<supplier ID>)',
+			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		)
@@ -98,6 +116,7 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
+		$this->replaceSiteMarker( $this->searchConfig['index.supplier:position'], 'mindsu."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.supplier.position'], 'mindsu."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.supplieraggregate'], 'mindsu_agg."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.suppliercount'], 'mindsu_cnt."siteid"', $siteIds );

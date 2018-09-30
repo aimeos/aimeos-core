@@ -41,6 +41,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, use index.price:value()
 		'index.price.value' => array(
 			'code' => 'index.price.value()',
 			'internalcode' => ':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."value"',
@@ -49,11 +50,28 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, use sort:index.price:value()
 		'sort:index.price.value' => array(
 			'code' => 'sort:index.price.value()',
 			'internalcode' => 'mindpr."value"',
 			'label' => 'Sort product price value, parameter(<list type code>,<currency ID>,<price type code>)',
 			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'index.price:value' => array(
+			'code' => 'index.price:value()',
+			'internalcode' => ':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."value"',
+			'label' => 'Product price value, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
+		'sort:index.price:value' => array(
+			'code' => 'sort:index.price:value()',
+			'internalcode' => 'mindpr."value"',
+			'label' => 'Sort product price value, parameter(<list type code>,<currency ID>,<price type code>)',
+			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
@@ -139,11 +157,12 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
-		$this->replaceSiteMarker( $this->searchConfig['index.price.quantity'], 'mindpr."siteid"', $siteIds );
+		$this->replaceSiteMarker( $this->searchConfig['index.price:value'], 'mindpr."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.price.value'], 'mindpr."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.price.costs'], 'mindpr."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.price.rebate'], 'mindpr."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.price.taxrate'], 'mindpr."siteid"', $siteIds );
+		$this->replaceSiteMarker( $this->searchConfig['index.price.quantity'], 'mindpr."siteid"', $siteIds );
 	}
 
 

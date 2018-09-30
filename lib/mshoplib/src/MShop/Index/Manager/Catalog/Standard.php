@@ -55,6 +55,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, use index.catalog:position()
 		'index.catalog.position' => array(
 			'code' => 'index.catalog.position()',
 			'internalcode' => ':site AND mindca."catid" IN ( $2 ) AND mindca."listtype" = $1 AND mindca."pos"',
@@ -63,11 +64,28 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, use sort:index.catalog:position()
 		'sort:index.catalog.position' => array(
 			'code' => 'sort:index.catalog.position()',
 			'internalcode' => 'mindca."pos"',
 			'label' => 'Sort product position in category, parameter(<list type code>,<category IDs>)',
 			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'index.catalog:position' => array(
+			'code' => 'index.catalog:position()',
+			'internalcode' => ':site AND mindca."catid" IN ( $2 ) AND mindca."listtype" = $1 AND mindca."pos"',
+			'label' => 'Product position in category, parameter(<list type code>,<category IDs>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
+			'public' => false,
+		),
+		'sort:index.catalog:position' => array(
+			'code' => 'sort:index.catalog:position()',
+			'internalcode' => 'mindca."pos"',
+			'label' => 'Sort product position in category, parameter(<list type code>,<category IDs>)',
+			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		)
@@ -99,6 +117,7 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
+		$this->replaceSiteMarker( $this->searchConfig['index.catalog:position'], 'mindca."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.catalog.position'], 'mindca."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.catalogaggregate'], 'mindca_agg."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.catalogcount'], 'mindca_cnt."siteid"', $siteIds );

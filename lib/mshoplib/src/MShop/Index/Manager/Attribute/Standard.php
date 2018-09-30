@@ -52,6 +52,7 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, use index.attribute:all()
 		'index.attributeaggregate' => array(
 			'code' => 'index.attributeaggregate()',
 			'internalcode' => '( SELECT COUNT(DISTINCT mindat_agg."attrid")

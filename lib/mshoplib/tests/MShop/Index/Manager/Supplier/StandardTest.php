@@ -151,10 +151,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$supItem = $supplierManager->findItem( 'unitCode001' );
 
 		$search = $this->object->createSearch();
-		$func = $search->createFunction( 'index.supplier.position', array( 'default', $supItem->getId() ) );
+		$func = $search->createFunction( 'index.supplier:position', array( 'default', [$supItem->getId()] ) );
 		$search->setConditions( $search->compare( '>=', $func, 0 ) ); // position
 
-		$sortfunc = $search->createFunction( 'sort:index.supplier.position', array( 'default', $supItem->getId() ) );
+		$sortfunc = $search->createFunction( 'sort:index.supplier:position', array( 'default', [$supItem->getId()] ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );

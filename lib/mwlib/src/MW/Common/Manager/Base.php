@@ -170,7 +170,9 @@ abstract class Base extends \Aimeos\MW\Common\Base
 
 		if( $noprefix )
 		{
-			if( ( $pos = strrpos( $string, $sep ) ) !== false ) {
+			if( ( $pos = strrpos( $string, ':' ) ) !== false ) {
+				$result[] = substr( $string, 0, $pos );
+			} elseif( ( $pos = strrpos( $string, $sep ) ) !== false ) {
 				$result[] = substr( $string, 0, $pos );
 			} else {
 				$result[] = $string;
@@ -196,12 +198,12 @@ abstract class Base extends \Aimeos\MW\Common\Base
 
 		foreach( $this->getCriteriaNames( $expr ) as $item )
 		{
-			if( ( $pos = strpos( $item, '(' ) ) !== false ) {
-				$item = substr( $item, 0, $pos );
+			if( strncmp( $item, 'sort:', 5 ) === 0 ) {
+				$item = substr( $item, 5 );
 			}
 
-			if( ( $pos = strpos( $item, ':' ) ) !== false ) {
-				$item = substr( $item, $pos + 1 );
+			if( ( $pos = strpos( $item, '(' ) ) !== false ) {
+				$item = substr( $item, 0, $pos );
 			}
 
 			$result = array_merge( $result, $this->cutNameTail( $prefix, $item ) );

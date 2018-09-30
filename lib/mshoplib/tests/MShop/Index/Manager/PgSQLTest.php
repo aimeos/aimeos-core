@@ -77,8 +77,8 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 			switch( $attribute->getCode() )
 			{
-				case 'index.text.relevance()':
-				case 'sort:index.text.relevance()':
+				case 'index.text:relevance()':
+				case 'sort:index.text:relevance()':
 					$this->assertGreaterThanOrEqual( 0, strpos( $attribute->getInternalCode(), '@@' ) );
 			}
 		}
@@ -91,7 +91,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
 
-		$func = $search->createFunction( 'index.text.relevance', array( 'unittype20', 'de', 'Espresso' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( 'unittype20', 'de', 'Espresso' ) );
 		$conditions = array(
 			$search->compare( '>', $func, 0 ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
@@ -147,8 +147,8 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 		$search = $textMgr->createSearch();
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'Noir Cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'index.text:relevance', array( 'unittype19', $langid, 'Noir Cap' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text:name', array( $langid ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

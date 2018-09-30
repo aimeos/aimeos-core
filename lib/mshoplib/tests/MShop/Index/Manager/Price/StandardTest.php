@@ -181,14 +181,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price:value', array( 'default', 'EUR', 'default' ) );
 		$expr = array(
 			$search->compare( '>=', $func, '10.00' ),
 			$search->compare( '==', 'index.price.quantity', 1 ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price:value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );
@@ -201,10 +201,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price:value', array( 'default', 'EUR', 'default' ) );
 		$search->setConditions( $search->compare( '>=', $func, '18.00' ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price:value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );

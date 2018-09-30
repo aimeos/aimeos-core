@@ -393,7 +393,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
-		$sortfunc = $search->createFunction( 'sort:index.catalog.position', array( 'promotion', $catItem->getId() ) );
+		$sortfunc = $search->createFunction( 'sort:index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 		$search->setSlice( 0, 1 );
 
@@ -427,14 +427,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 7, $total );
 
 
-		$func = $search->createFunction( 'index.catalog.position', array( 'promotion', $catItem->getId() ) );
+		$func = $search->createFunction( 'index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
 		$conditions = array(
 			$search->compare( '>=', $func, 0 ), // position
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.catalog.position', array( 'promotion', $catItem->getId() ) );
+		$sortfunc = $search->createFunction( 'sort:index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [], $total );
@@ -492,7 +492,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 6, $total );
 
 
-		$func = $search->createFunction( 'index.price.value', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price:value', array( 'default', 'EUR', 'default' ) );
 		$expr = array(
 			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '>=', $func, '18.00' ),
@@ -500,7 +500,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.price.value', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price:value', array( 'default', 'EUR', 'default' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [], $total );
@@ -549,7 +549,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 6, $total );
 
 
-		$func = $search->createFunction( 'index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$conditions = array(
 			$search->compare( '>', $func, 0 ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
@@ -603,8 +603,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $textMgr->createSearch();
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'Cafe Noire Cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'index.text:relevance', array( 'unittype19', $langid, 'Cafe Noire Cap' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text:name', array( $langid ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

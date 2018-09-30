@@ -21,6 +21,7 @@ class PgSQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
 	private $searchConfig = array(
+		// @deprecated Removed 2019.01, use index.text:relevance()
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
 			'internalcode' => ':site AND mindte."listtype" IN ($1)
@@ -37,6 +38,16 @@ class PgSQL
 			'internalcode' => 'mindte."value" @@ to_tsquery($3)',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'public' => false,
+		),
+		'index.text:relevance' => array(
+			'code' => 'index.text:relevance()',
+			'internalcode' => ':site AND mindte."listtype" IN ($1)
+				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
+				AND CAST( mindte."value" @@ to_tsquery( $3 ) AS integer )',
+			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
+			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
@@ -67,9 +78,11 @@ class PgSQL
 			return $params;
 		};
 
+		$this->searchConfig['index.text:relevance']['function'] = $func;
 		$this->searchConfig['index.text.relevance']['function'] = $func;
 		$this->searchConfig['sort:index.text.relevance']['function'] = $func;
 
+		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 

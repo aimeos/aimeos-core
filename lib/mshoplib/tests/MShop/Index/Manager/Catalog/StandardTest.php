@@ -167,10 +167,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$catItem = $catalogManager->findItem( 'cafe' );
 
 		$search = $this->object->createSearch();
-		$func = $search->createFunction( 'index.catalog.position', array( 'promotion', $catItem->getId() ) );
+		$func = $search->createFunction( 'index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
 		$search->setConditions( $search->compare( '>=', $func, 0 ) ); // position
 
-		$sortfunc = $search->createFunction( 'sort:index.catalog.position', array( 'promotion', $catItem->getId() ) );
+		$sortfunc = $search->createFunction( 'sort:index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );

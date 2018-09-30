@@ -172,10 +172,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$search->setConditions( $search->compare( '>', $func, 0 ) ); // text relevance
 
-		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text:relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );
@@ -188,10 +188,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.text.relevance', array( ['default', 'unittype13'], 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( ['default', 'unittype13'], 'de', 'Expr' ) );
 		$search->setConditions( $search->compare( '>', $func, 0 ) ); // text relevance
 
-		$sortfunc = $search->createFunction( 'sort:index.text.relevance', array( ['default', 'unittype13'], 'de', 'Expr' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text:relevance', array( ['default', 'unittype13'], 'de', 'Expr' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );
@@ -204,10 +204,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.text.name', ['de'] );
+		$func = $search->createFunction( 'index.text:name', ['de'] );
 		$search->setConditions( $search->compare( '=~', $func, 'Cafe' ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.text.name', ['de'] );
+		$sortfunc = $search->createFunction( 'sort:index.text:name', ['de'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );
@@ -271,8 +271,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$search = $this->object->createSearch();
 		$expr = array(
-			$search->compare( '>', $search->createFunction( 'index.text.relevance', array( 'unittype19', $langid, 'Cafe Noire Cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'index.text.value', array( 'unittype19', $langid, 'name', 'product' ) ), '' ),
+			$search->compare( '>', $search->createFunction( 'index.text:relevance', array( 'unittype19', $langid, 'Cafe Noire Cap' ) ), 0 ),
+			$search->compare( '>', $search->createFunction( 'index.text:name', array( $langid ) ), '' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 

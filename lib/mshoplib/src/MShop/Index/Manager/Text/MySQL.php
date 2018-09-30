@@ -33,6 +33,7 @@ class MySQL
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		// @deprecated Removed 2019.01, use index.text:relevance()
 		'index.text.relevance' => array(
 			'code' => 'index.text.relevance()',
 			'internalcode' => ':site AND mindte."listtype" IN ($1)
@@ -49,6 +50,16 @@ class MySQL
 			'internalcode' => 'MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
 			'type' => 'float',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'public' => false,
+		),
+		'index.text:relevance' => array(
+			'code' => 'index.text:relevance()',
+			'internalcode' => ':site AND mindte."listtype" IN ($1)
+				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
+				AND MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
+			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
+			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
@@ -89,9 +100,11 @@ class MySQL
 			return $params;
 		};
 
+		$this->searchConfig['index.text:relevance']['function'] = $func;
 		$this->searchConfig['index.text.relevance']['function'] = $func;
 		$this->searchConfig['sort:index.text.relevance']['function'] = $func;
 
+		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte."siteid"', $site );
 		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte."siteid"', $site );
 	}
 
