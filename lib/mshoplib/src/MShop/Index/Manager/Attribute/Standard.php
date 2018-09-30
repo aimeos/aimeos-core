@@ -64,6 +64,20 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
+		'index.attribute:all' => array(
+			'code' => 'index.attribute:all()',
+			'internalcode' => '( SELECT mpro_agg."id" FROM mshop_product AS mpro_agg
+				WHERE mpro."id" = mpro_agg."id" AND (
+					SELECT COUNT(DISTINCT mindat_agg."attrid")
+					FROM "mshop_index_attribute" AS mindat_agg
+					WHERE mpro."id" = mindat_agg."prodid" AND :site
+					AND mindat_agg."attrid" IN ( $1 ) ) = $2
+				)',
+			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_NULL,
+			'public' => false,
+		),
 	);
 
 	private $subManagers;
@@ -92,6 +106,11 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
+		$this->searchConfig['index.attribute:all']['function'] = function( $source, array $params ) {
+			return [$params[0], count( explode( ',' , $params[0] ) )];
+		};
+
+		$this->replaceSiteMarker( $this->searchConfig['index.attribute:all'], 'mindat."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.attribute.code'], 'mindat."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.attributecount'], 'mindat_cnt."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.attributeaggregate'], 'mindat_agg."siteid"', $siteIds );

@@ -183,6 +183,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testSearchItemsAll()
+	{
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$attrLengthItem = $attributeManager->findItem( '30', [], 'product', 'length' );
+		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
+
+		$search = $this->object->createSearch();
+		$attrIds = [(int) $attrLengthItem->getId(), (int) $attrWidthItem->getId()];
+		$func = $search->createFunction( 'index.attribute:all', [$attrIds] );
+		$search->setConditions( $search->compare( '!=', $func, null ) );
+		$search->setSortations( array( $search->sort( '+', 'product.code' ) ) );
+		$result = $this->object->searchItems( $search );
+
+		$this->assertEquals( 2, count( $result ) );
+		$this->assertEquals( 'CNE', reset( $result )->getCode() );
+	}
+
+
 	public function testSearchItemsCode()
 	{
 		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( \TestHelperMShop::getContext() );

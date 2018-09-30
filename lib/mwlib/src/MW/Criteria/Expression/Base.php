@@ -170,13 +170,13 @@ abstract class Base
 
 		if( $this->isFunction( $name, $params ) === true )
 		{
-			if( isset( $funcs[$name] ) ) {
-				$params = $funcs[$name]( $params );
+			$source = $name;
+			if( isset( $translations[$name] ) ) {
+				$source = $translations[$name];
 			}
 
-			$transname = $name;
-			if( isset( $translations[$name] ) ) {
-				$transname = $translations[$name];
+			if( isset( $funcs[$name] ) ) {
+				$params = $funcs[$name]( $source, $params );
 			}
 
 			$find = [];
@@ -186,11 +186,11 @@ abstract class Base
 				$find[$i] = '$' . ( $i + 1 );
 			}
 
-			if( is_array( $transname ) ) {
-				return $this->replaceParameter( $transname, $find, $params );
+			if( is_array( $source ) ) {
+				return $this->replaceParameter( $source, $find, $params );
 			}
 
-			return str_replace( $find, $params, $transname );
+			return str_replace( $find, $params, $source );
 		}
 
 		if( isset( $translations[$name] ) ) {

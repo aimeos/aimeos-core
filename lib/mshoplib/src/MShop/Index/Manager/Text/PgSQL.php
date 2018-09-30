@@ -65,7 +65,7 @@ class PgSQL
 
 		$site = $context->getLocale()->getSitePath();
 
-		$func = function( array $params ) {
+		$func = function( $source, array $params ) {
 
 			if( isset( $params[2] ) )
 			{
