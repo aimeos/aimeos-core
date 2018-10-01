@@ -161,7 +161,7 @@ class ProductPrice
 		$func = $search->createFunction( 'product:has', ['attribute', 'custom', $attrId] );
 		$expr = array(
 			$search->compare( '==', 'product.code', $prodCodes ),
-			$search->compare( '==', $func, null ),
+			$search->combine( '!', [$search->compare( '==', $func, null )] ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
