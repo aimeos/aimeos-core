@@ -138,12 +138,13 @@ class Standard
 	 */
 	public function createItem( $type = null, $domain = null, array $values = [] )
 	{
-		$local = $values;
-		$local['locale.siteid'] = $this->getContext()->getLocale()->getSiteId();
-
-		try {
-			return $this->createItemBase( $local );
-		} catch( \Exception $e ) {
+		try
+		{
+			$values['locale.siteid'] = $this->getContext()->getLocale()->getSiteId();
+			return $this->createItemBase( $values );
+		}
+		catch( \Exception $e )
+		{
 			return $this->createItemBase( $values );
 		}
 	}
