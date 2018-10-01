@@ -107,7 +107,7 @@ class Standard
 		}
 
 		$this->searchConfig['index.attribute:all']['function'] = function( $source, array $params ) {
-			return [$params[0], count( explode( ',' , $params[0] ) )];
+			return [$params[0], count( explode( ',', $params[0] ) )];
 		};
 
 		$this->replaceSiteMarker( $this->searchConfig['index.attribute:all'], 'mindat."siteid"', $siteIds );
