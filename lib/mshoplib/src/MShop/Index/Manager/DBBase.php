@@ -116,10 +116,24 @@ abstract class DBBase
 	 *
 	 * @param \Aimeos\MShop\Common\Item\Iface $item Product item
 	 * @param boolean $fetch True if the new ID should be set in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface Saved item
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		$this->rebuildIndex( array( $item->getId() => $item ) );
+		return $this->rebuildIndex( array( $item->getId() => $item ) );
+	}
+
+
+	/**
+	 * Adds or updates a list of items
+	 *
+	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of items whose data should be saved
+	 * @param boolean $fetch True if the new ID should be returned in the item
+	 * @return \Aimeos\MShop\Common\Item\Iface[] Saved items
+	 */
+	public function saveItems( array $items, $fetch = true )
+	{
+		return $this->rebuildIndex( $items );
 	}
 
 
