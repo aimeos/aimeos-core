@@ -191,11 +191,12 @@ class Standard
 	 *
 	 * @param string|null Type the item should be created with
 	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface New locale site item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( $type = null, $domain = null, array $values = [] )
 	{
-		return $this->createItemBase();
+		return $this->createItemBase( $values );
 	}
 
 

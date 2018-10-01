@@ -131,11 +131,12 @@ class Standard
 	 *
 	 * @param string|null Type the item should be created with
 	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Tag\Item\Iface New tag item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( $type = null, $domain = null, array $values = [] )
 	{
-		$values = ['tag.siteid' => $this->getContext()->getLocale()->getSiteId()];
+		$values['tag.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
 		if( $type !== null )
 		{

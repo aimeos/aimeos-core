@@ -244,11 +244,13 @@ class Standard extends Base
 	 *
 	 * @param string|null Type the item should be created with
 	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Catalog\Item\Iface New catalog item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( $type = null, $domain = null, array $values = [] )
 	{
-		return $this->createItemBase( ['siteid' => $this->getContext()->getLocale()->getSiteId()] );
+		$values['siteid'] = $this->getContext()->getLocale()->getSiteId();
+		return $this->createItemBase( $values );
 	}
 
 

@@ -51,11 +51,12 @@ abstract class DBBase
 	 *
 	 * @param string|null Type the item should be created with
 	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Product\Item\Iface New product item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( $type = null, $domain = null, array $values = [] )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->createItem( $type, $domain );
+		return \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' )->createItem( $type, $domain, $values );
 	}
 
 

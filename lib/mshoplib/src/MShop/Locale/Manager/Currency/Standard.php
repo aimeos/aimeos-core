@@ -105,14 +105,15 @@ class Standard
 	 *
 	 * @param string|null Type the item should be created with
 	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Locale\Item\Currency\Iface New locale currency item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( $type = null, $domain = null, array $values = [] )
 	{
 		try {
-			$values = array( 'locale.currency.siteid' => $this->getContext()->getLocale()->getSiteId() );
+			$values['locale.currency.siteid'] = $this->getContext()->getLocale()->getSiteId();
 		} catch( \Exception $e ) {
-			$values = array( 'locale.currency.siteid' => null );
+			$values['locale.currency.siteid'] = null;
 		}
 
 		return $this->createItemBase( $values );

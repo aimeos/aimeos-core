@@ -33,8 +33,9 @@ interface Iface
 	 *
 	 * @param string|null Type the item should be created with
 	 * @param string|null Domain of the type the item should be created with
+	 * @param array Values the item should be initialized with
 	 * @return \Aimeos\MShop\Attribute\Item\Iface New attribute item object
-	 * @todo 2019.01: Add "$type = null, $domain = null" as required parameters
+	 * @todo 2019.01: Add "$type = null, $domain = null, array $values = []" as required parameters
 	 */
 	public function createItem();
 

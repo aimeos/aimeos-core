@@ -130,11 +130,12 @@ class Standard
 	 *
 	 * @param string|null Type the item should be created with
 	 * @param string|null Domain of the type the item should be created with
+	 * @param array $values Values the item should be initialized with
 	 * @return \Aimeos\MShop\Stock\Item\Iface New stock item object
 	 */
-	public function createItem( $type = null, $domain = null )
+	public function createItem( $type = null, $domain = null, array $values = [] )
 	{
-		$values = ['stock.siteid' => $this->getContext()->getLocale()->getSiteId()];
+		$values['stock.siteid'] = $this->getContext()->getLocale()->getSiteId();
 
 		if( $type !== null )
 		{
