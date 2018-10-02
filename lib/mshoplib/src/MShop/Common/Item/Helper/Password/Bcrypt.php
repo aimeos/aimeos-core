@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2014-2017
+ * @copyright Aimeos (aimeos.org), 2014-2018
  * @package MShop
  * @subpackage Common
  */
@@ -20,11 +20,11 @@ namespace Aimeos\MShop\Common\Item\Helper\Password;
 class Bcrypt implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
 {
 	private $options = [];
-	
+
 
 	/**
 	 * Initializes the password helper.
-	 * 
+	 *
 	 * @param array Associative list of key/value pairs of options specific for the hashing method
 	 */
 	public function __construct( array $options )

@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2014-2017
+ * @copyright Aimeos (aimeos.org), 2014-2018
  * @package MShop
  * @subpackage Common
  */
@@ -20,7 +20,7 @@ namespace Aimeos\MShop\Common\Item\Helper\Password;
 class Hash implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
 {
 	private $options = [];
-	
+
 
 	/**
 	 * Initializes the password helper.
@@ -36,7 +36,7 @@ class Hash implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
 		if( !isset( $options['algorithm'] ) || !in_array( $options['algorithm'], hash_algos(), true ) ) {
 			throw new \Aimeos\MShop\Exception( sprintf( 'The algorithm "%1$s" is not supported', $options['algorithm'] ) );
 		}
-		
+
 		$this->options = $options;
 	}
 
@@ -53,15 +53,15 @@ class Hash implements \Aimeos\MShop\Common\Item\Helper\Password\Iface
 		$encode = isset( $this->options['base64'] ) && $this->options['base64'] == true;
 		$format = ( isset( $this->options['format'] ) ? $this->options['format'] : '%1$s%2$s' );
 		$iterations = ( isset( $this->options['iterations'] ) ? (int) $this->options['iterations'] : 1 );
-		
+
 		$salted = sprintf( $format, $password, $salt );
 		$digest = hash( $this->options['algorithm'], $salted, true);
-		
+
 		// "stretch" hash
 		for ($i = 1; $i < $iterations; $i++ ) {
 			$digest = hash( $this->options['algorithm'], $digest . $salted, true);
 		}
-		
+
 		return ( $encode ? base64_encode( $digest ) : bin2hex( $digest ) );
 	}
 }

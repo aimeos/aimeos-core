@@ -2,7 +2,7 @@
 
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
- * @copyright Aimeos (aimeos.org), 2014-2017
+ * @copyright Aimeos (aimeos.org), 2014-2018
  */
 
 
@@ -23,8 +23,8 @@ class BcryptTest extends \PHPUnit\Framework\TestCase
 			$this->markTestSkipped( 'Function "password_hash()" is not available' );
 		}
 	}
-	
-	
+
+
 	public function testEncode()
 	{
 		$object = new \Aimeos\MShop\Common\Item\Helper\Password\Bcrypt( [] );
