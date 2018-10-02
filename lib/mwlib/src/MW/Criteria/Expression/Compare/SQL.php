@@ -80,11 +80,15 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	/**
 	 * Creates a term which contains a null value.
 	 *
-	 * @param string $name Translated name of the variable or column
+	 * @param string|array $name Translated name of the variable or column
 	 * @return string String that can be inserted into a SQL statement
 	 */
 	protected function createNullTerm( $name )
 	{
+		if( is_array( $name ) ) {
+			return '';
+		}
+
 		switch( $this->getOperator() )
 		{
 			case '==':

@@ -95,16 +95,16 @@ abstract class Base
 			$transname = $name;
 		}
 
-		if( is_array( $transname ) ) {
-			return $transname;
-		}
-
 		if( !isset( $types[$name] ) ) {
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid name "%1$s"', $name ) );
 		}
 
 		if( $this->value === null && ( $this->operator === '==' || $this->operator === '!=' ) ) {
 			return $this->createNullTerm( $transname );
+		}
+
+		if( is_array( $transname ) ) {
+			return $transname;
 		}
 
 		if( is_array( $this->value ) ) {

@@ -74,6 +74,10 @@ class PHP extends \Aimeos\MW\Criteria\Expression\Compare\Base
 	 */
 	protected function createNullTerm( $name )
 	{
+		if( is_array( $name ) ) {
+			return '';
+		}
+
 		switch( $this->getOperator() )
 		{
 			case '==':
