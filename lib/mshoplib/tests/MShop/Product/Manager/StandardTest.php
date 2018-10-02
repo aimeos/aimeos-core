@@ -357,6 +357,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = array( 'product','suggestion', $listItem->getRefId() );
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:has', $param ), null );
 
+		$param = array( 'product','default', $listItem->getRefId() );
+		$expr[] = $search->compare( '==', $search->createFunction( 'product:has', $param ), null );
+
 		$param = array( 'product', $listItem->getTypeId(), array( $listItem->getRefId() ) );
 		$expr[] = $search->compare( '>', $search->createFunction( 'product.contains', $param ), 0 );
 
@@ -408,6 +411,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$param = array( 'package-weight', null, '1' );
 		$expr[] = $search->compare( '!=', $search->createFunction( 'product:prop', $param ), null );
+
+		$param = array( 'package-height', null, '0' );
+		$expr[] = $search->compare( '==', $search->createFunction( 'product:prop', $param ), null );
 
 
 		$search->setConditions( $search->combine( '&&', $expr ) );

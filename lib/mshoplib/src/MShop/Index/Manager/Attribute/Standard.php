@@ -66,12 +66,12 @@ class Standard
 		),
 		'index.attribute:all' => array(
 			'code' => 'index.attribute:all()',
-			'internalcode' => '( SELECT mpro_agg."id" FROM mshop_product AS mpro_agg
-				WHERE mpro."id" = mpro_agg."id" AND (
-					SELECT COUNT(DISTINCT mindat_agg."attrid")
-					FROM "mshop_index_attribute" AS mindat_agg
-					WHERE mpro."id" = mindat_agg."prodid" AND :site
-					AND mindat_agg."attrid" IN ( $1 ) ) = $2
+			'internalcode' => '( SELECT mpro_all."id" FROM mshop_product AS mpro_all
+				WHERE mpro."id" = mpro_all."id" AND (
+					SELECT COUNT(DISTINCT mindat_all."attrid")
+					FROM "mshop_index_attribute" AS mindat_all
+					WHERE mpro."id" = mindat_all."prodid" AND :site
+					AND mindat_all."attrid" IN ( $1 ) ) = $2
 				)',
 			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
 			'type' => 'null',
@@ -110,10 +110,10 @@ class Standard
 			return [$params[0], count( explode( ',', $params[0] ) )];
 		};
 
-		$this->replaceSiteMarker( $this->searchConfig['index.attribute:all'], 'mindat."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.attribute.code'], 'mindat."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.attributecount'], 'mindat_cnt."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.attributeaggregate'], 'mindat_agg."siteid"', $siteIds );
+		$this->replaceSiteMarker( $this->searchConfig['index.attribute:all'], 'mindat_all."siteid"', $siteIds );
 	}
 
 

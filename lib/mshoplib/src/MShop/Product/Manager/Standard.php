@@ -126,11 +126,15 @@ class Standard
 		),
 		'product:has' => array(
 			'code' => 'product:has()',
-			'internalcode' => '( SELECT mproli_has."id"
-				FROM "mshop_product_list" AS mproli_has
-				JOIN "mshop_product_list_type" AS mprolity_has ON mproli_has."typeid" = mprolity_has."id"
-				WHERE mpro."id" = mproli_has."parentid" AND :site
-					AND mproli_has."domain" = $1 AND mprolity_has."code" = $2 AND mproli_has."refid" = $3 )',
+			'internalcode' => '( SELECT mpro_has."id" FROM mshop_product AS mpro_has
+				WHERE mpro."id" = mpro_has."id" AND (
+					SELECT COUNT(DISTINCT mproli_has."parentid")
+					FROM "mshop_product_list" AS mproli_has
+					JOIN "mshop_product_list_type" AS mprolity_has ON mproli_has."typeid" = mprolity_has."id"
+					WHERE mpro."id" = mproli_has."parentid" AND :site
+						AND mproli_has."domain" = $1 AND mprolity_has."code" = $2 AND mproli_has."refid" = $3
+				) = 1
+			)',
 			'label' => 'Product list item, parameter(<domain>,<list type>,<reference ID>)',
 			'type' => 'null',
 			'internaltype' => 'null',
@@ -138,11 +142,19 @@ class Standard
 		),
 		'product:prop' => array(
 			'code' => 'product:prop()',
-			'internalcode' => '( SELECT mpropr_prop."id"
-				FROM "mshop_product_property" AS mpropr_prop
-				JOIN "mshop_product_property_type" AS mproprty_prop ON mpropr_prop."typeid" = mproprty_prop."id"
-				WHERE mpro."id" = mpropr_prop."parentid" AND :site AND mproprty_prop."code" = $1 AND mpropr_prop."value" = $3
-					AND (NOT (mpropr_prop."langid" <> $2 OR mpropr_prop."langid" IS NULL OR $2 IS NULL) OR (mpropr_prop."langid" IS NULL AND $2 IS NULL)) )',
+			'internalcode' => '( SELECT mpro_has."id" FROM mshop_product AS mpro_has
+				WHERE mpro."id" = mpro_has."id" AND (
+					SELECT COUNT(DISTINCT mpropr_prop."parentid")
+					FROM "mshop_product_property" AS mpropr_prop
+					JOIN "mshop_product_property_type" AS mproprty_prop ON mpropr_prop."typeid" = mproprty_prop."id"
+					WHERE mpro."id" = mpropr_prop."parentid" AND :site
+						AND mproprty_prop."code" = $1 AND mpropr_prop."value" = $3
+						AND (
+							NOT ( mpropr_prop."langid" <> $2 OR mpropr_prop."langid" IS NULL OR $2 IS NULL )
+							OR ( mpropr_prop."langid" IS NULL AND $2 IS NULL )
+						)
+				) = 1
+			)',
 			'label' => 'Property has property item, parameter(<property type>,<language code>,<property value>)',
 			'type' => 'null',
 			'internaltype' => 'null',
