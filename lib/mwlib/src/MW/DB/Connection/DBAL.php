@@ -20,6 +20,7 @@ namespace Aimeos\MW\DB\Connection;
 class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connection\Iface
 {
 	private $connection;
+	private $txnumber = 0;
 	private $stmts = [];
 
 
@@ -101,6 +102,17 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 
 
 	/**
+	 * Checks if a transaction is currently running
+	 *
+	 * @return boolean True if transaction is currently running, false if not
+	 */
+	public function inTransaction()
+	{
+		return ( $this->txnumber > 0 ? true : false );
+	}
+
+
+	/**
 	 * Starts a transaction for this connection.
 	 *
 	 * Transactions can't be nested and a new transaction can only be started
@@ -113,6 +125,8 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 		} catch( \Exception $e ) {
 			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
 		}
+
+		$this->txnumber++;
 	}
 
 
@@ -121,6 +135,8 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function commit()
 	{
+		$this->txnumber--;
+
 		try {
 			$this->connection->commit();
 		} catch( \Exception $e ) {
@@ -134,6 +150,8 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function rollback()
 	{
+		$this->txnumber--;
+
 		try {
 			$this->connection->rollBack();
 		} catch( \Exception $e ) {

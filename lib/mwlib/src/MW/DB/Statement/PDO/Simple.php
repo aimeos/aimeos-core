@@ -129,10 +129,17 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			error_reporting( $level & ~E_WARNING );
 			$result = $this->getConnection()->getRawObject()->query( $this->sql );
 		}
-		catch( \Exception $e )
+		catch( \PDOException $e )
 		{
 			error_reporting( $level );
-			throw $e;
+
+			// recover from lost connection (MySQL)
+			if( !isset( $e->errorInfo[1] ) || $e->errorInfo[1] != 2006 || $conn->inTransaction() === true ) {
+				throw $e;
+			}
+
+			$conn->connect();
+			$this->exec();
 		}
 
 		error_reporting( $level );

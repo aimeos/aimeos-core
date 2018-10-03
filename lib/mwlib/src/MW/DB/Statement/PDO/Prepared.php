@@ -76,13 +76,27 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 	 */
 	protected function exec()
 	{
-		$stmt = $this->getConnection()->getRawObject()->prepare( $this->sql );
+		$conn = $this->getConnection();
+		$stmt = $conn->getRawObject()->prepare( $this->sql );
 
 		foreach( $this->binds as $position => $list ) {
 			$stmt->bindValue( $position, $list[0], $this->getPdoType( $list[1], $list[0] ) );
 		}
 
-		$stmt->execute();
+		try
+		{
+			$stmt->execute();
+		}
+		catch( \PDOException $e )
+		{
+			// recover from lost connection (MySQL)
+			if( !isset( $e->errorInfo[1] ) || $e->errorInfo[1] != 2006 || $conn->inTransaction() === true ) {
+				throw $e;
+			}
+
+			$conn->connect();
+			$this->exec();
+		}
 
 		return $stmt;
 	}
