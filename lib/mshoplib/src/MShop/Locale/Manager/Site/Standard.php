@@ -151,7 +151,7 @@ class Standard
 		$default = array(
 			'attribute', 'catalog', 'coupon', 'customer', 'index',
 			'media', 'order', 'plugin', 'price', 'product', 'tag',
-			'service', 'subscription', 'supplier', 'text'
+			'service', 'stock', 'subscription', 'supplier', 'text'
 		);
 
 		foreach( $config->get( $path, $default ) as $domain ) {
@@ -296,7 +296,7 @@ class Standard
 		$context = $this->getContext();
 		$config = $context->getConfig();
 
-		$this->cleanup( $ids );
+		$this->getObject()->cleanup( $ids );
 
 		/** mshop/locale/manager/site/standard/delete/mysql
 		 * Deletes the items matched by the given IDs from the database
