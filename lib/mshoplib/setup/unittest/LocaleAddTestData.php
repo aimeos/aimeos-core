@@ -91,12 +91,12 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 * @param \Aimeos\MShop\Locale\Item\Site\Iface $site Site which can contain sub-sites
 	 * @return \Aimeos\MShop\Locale\Item\Site\Iface[] $sites List with sites
 	 */
-	private function getSites( \Aimeos\MShop\Locale\Item\Site\Iface $site )
+	protected function getSites( \Aimeos\MShop\Locale\Item\Site\Iface $site )
 	{
-		$sites = array( $site );
+		$sites = [$site->getId() => $site];
 
 		foreach( $site->getChildren() as $child ) {
-			$sites = array_merge( $sites, $this->getSites( $child ) );
+			$sites += $this->getSites( $child );
 		}
 
 		return $sites;
@@ -109,7 +109,7 @@ class LocaleAddTestData extends \Aimeos\MW\Setup\Task\MShopAddLocaleData
 	 *
 	 * @param \Aimeos\MShop\Locale\Manager\Iface $localeManager
 	 */
-	private function cleanupSites( $localeManager )
+	protected function cleanupSites( $localeManager )
 	{
 		$localeSiteManager = $localeManager->getSubManager( 'site' );
 
