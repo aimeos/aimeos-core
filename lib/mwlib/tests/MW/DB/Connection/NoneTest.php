@@ -25,6 +25,13 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testConnect()
+	{
+		$this->setExpectedException( '\Aimeos\MW\DB\Exception' );
+		$this->object->connect();
+	}
+
+
 	public function testCreate()
 	{
 		$this->setExpectedException( '\Aimeos\MW\DB\Exception' );

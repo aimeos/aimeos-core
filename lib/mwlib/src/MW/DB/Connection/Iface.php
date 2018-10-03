@@ -21,6 +21,14 @@ namespace Aimeos\MW\DB\Connection;
 interface Iface
 {
 	/**
+	 * Connects (or reconnects) to the database server
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 */
+	public function connect();
+
+
+	/**
 	 * Creates a database statement.
 	 *
 	 * @param string $sql SQL statement, maybe with place holders

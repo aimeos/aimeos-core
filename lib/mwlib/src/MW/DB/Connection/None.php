@@ -23,6 +23,17 @@ class None
 	implements \Aimeos\MW\DB\Connection\Iface
 {
 	/**
+	 * Connects (or reconnects) to the database server
+	 *
+	 * @return \Aimeos\MW\DB\Connection\Iface Connection instance for method chaining
+	 */
+	public function connect()
+	{
+		throw new \Aimeos\MW\DB\Exception( 'This method is not implemented' );
+	}
+
+
+	/**
 	 * Creates a database statement.
 	 *
 	 * Throws an exception because there is no implementation available.
