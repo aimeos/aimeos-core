@@ -98,8 +98,10 @@ class Nolimit
 		$items = [];
 		$item = $this->getObject()->createItem( 'default', 'product' );
 
-		foreach( $this->getProductCodes( $search->getConditions() ) as $idx => $code ) {
-			$items[$idx] = (clone $item)->setProductCode( $code )->setId( $idx );
+		foreach( $this->getProductCodes( $search->getConditions() ) as $idx => $code )
+		{
+			$sitem = clone $item;
+			$items[$idx] = $sitem->setProductCode( $code )->setId( $idx );
 		}
 
 		if( $total !== null ) {
