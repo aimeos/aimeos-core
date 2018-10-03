@@ -211,8 +211,6 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		);
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
-		$productManager->begin();
-
 		$newItem = $productManager->createItem( ( $this->numProdVariants > 0 ? 'select' : 'default' ), 'product' );
 
 		$modifier = $this->attributes['modifier'];
@@ -253,13 +251,15 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			}
 		}
 
+		$productManager->begin();
 		$productManager->saveItems( $items );
+		$productManager->commit();
 
 		foreach( $items as $idx => $item ) {
 			$this->addCatalogProduct( $catItems, $item, $idx );
 		}
 
-		$productManager->commit();
+		$this->addStock( $items );
 	}
 
 
@@ -428,6 +428,39 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		}
 
 		return $prodItem;
+	}
+
+
+	public function addStock( array $items )
+	{
+		$stockManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'stock' );
+
+		$stockItem = $stockManager->createItem( 'default', 'product');
+		$stocklevels = [null, 100, 80, 60, 40, 20, 10, 5, 2, 0];
+		$list = [];
+
+		foreach( $items as $item )
+		{
+			foreach( $item->getRefItems( 'product', 'default', 'default' ) as $refItem )
+			{
+				$sitem = clone $stockItem;
+				$sitem->setProductCode( $refItem->getCode() );
+				$sitem->setStockLevel( current( $stocklevels ) );
+
+				if( next( $stocklevels ) === false ) {
+					reset( $stocklevels );
+				}
+
+				$list[] = $sitem;
+			}
+
+			$sitem = clone $stockItem;
+			$list[] = $sitem->setProductCode( $item->getCode() );
+		}
+
+		$stockManager->begin();
+		$stockManager->saveItems( $list, false );
+		$stockManager->commit();
 	}
 
 
