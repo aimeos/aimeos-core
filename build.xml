@@ -25,6 +25,7 @@
 		<phing target="coverage" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="coverage" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
@@ -42,6 +43,7 @@
 		<phing target="test" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="test" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
@@ -52,6 +54,7 @@
 		<phing target="testperf" haltonfailure="true" dir="${coredir}/lib/mshoplib" />
 		<phing target="testperf" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
@@ -74,6 +77,7 @@
 		<phing target="check" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="check" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
@@ -198,6 +202,7 @@
 		<phing target="clean" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="clean" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
@@ -210,6 +215,7 @@
 		<phing target="i18n" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="i18n" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
@@ -228,6 +234,7 @@
 		<phing target="build" haltonfailure="true" dir="${coredir}/controller/jobs" />
 		<phing target="build" haltonfailure="true">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
@@ -253,6 +260,7 @@
 		<propertyprompt propertyName="version" promptText="Enter release version" promptCharacter=":" useExistingValue="true"/>
 		<phing target="release">
 			<fileset dir="${extdir}" expandsymboliclinks="true" >
+				<exclude name=".*/phing.xml" />
 				<include name="*/phing.xml" />
 			</fileset>
 		</phing>
