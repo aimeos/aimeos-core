@@ -9,13 +9,14 @@
 # Translators:
 # Bruce Liu <zcon.bruce@gmail.com>, 2016
 # shihua16165 <shihua16165@163.com>, 2014
+# stevechen <steve.stevechen@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-04-09 09:14+0200\n"
-"PO-Revision-Date: 2018-08-14 11:51+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2018-10-02 07:43+0000\n"
+"Last-Translator: stevechen <steve.stevechen@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +74,7 @@ msgstr "支付"
 
 #. Subscription reason code
 msgid "reason:0"
-msgstr ""
+msgstr "過期"
 
 #. Subscription reason code
 msgid "reason:1"

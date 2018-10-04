@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Bruce Liu <zcon.bruce@gmail.com>, 2016
+# stevechen <steve.stevechen@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-27 08:31+0200\n"
-"PO-Revision-Date: 2018-09-27 06:36+0000\n"
-"Last-Translator: Bruce Liu <zcon.bruce@gmail.com>\n"
+"PO-Revision-Date: 2018-10-02 14:30+0000\n"
+"Last-Translator: stevechen <steve.stevechen@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,7 +34,7 @@ msgid "Capture authorized payments"
 msgstr "獲取已授權完成的支付"
 
 msgid "Catalog import CSV"
-msgstr ""
+msgstr "型錄匯入CSV"
 
 msgid "Catalog index optimization"
 msgstr "型錄索引最佳化"
@@ -73,10 +74,10 @@ msgid "Exports all available products"
 msgstr "匯出所有可用商品"
 
 msgid "Exports orders to CSV file"
-msgstr ""
+msgstr "訂單匯出至 CVS 檔案"
 
 msgid "Exports subscriptions to CSV file"
-msgstr ""
+msgstr "訂閱匯出至 CVS 檔案"
 
 msgid "Imports new and updates existing categories from CSV files"
 msgstr ""
@@ -88,10 +89,10 @@ msgid "Imports new and updates existing products from CSV files"
 msgstr "從CSV匯入新的商品並更新既有商品"
 
 msgid "Index optimization"
-msgstr ""
+msgstr "索引最佳化"
 
 msgid "Index rebuild"
-msgstr ""
+msgstr "索引重新建立"
 
 #, php-format
 msgid "Invalid catalog lines in \"%1$s\": %2$d/%3$d"
@@ -103,7 +104,7 @@ msgstr "class名稱 \"%1$s\" 包含無效的字符"
 
 #, php-format
 msgid "Invalid message: %1$s"
-msgstr ""
+msgstr "無效訊息： %1$s"
 
 #, php-format
 msgid "Invalid product lines in \"%1$s\": %2$d/%3$d"
@@ -131,7 +132,7 @@ msgid "Optimizes the index for searching products faster"
 msgstr ""
 
 msgid "Order export CSV"
-msgstr ""
+msgstr "訂單匯出 CSV"
 
 #, php-format
 msgid "Parent node for code \"%1$s\" not found"
@@ -159,7 +160,7 @@ msgid "Rebuilds the catalog index for searching products"
 msgstr "重建搜尋商品用的型錄索引"
 
 msgid "Rebuilds the index for searching products"
-msgstr ""
+msgstr "產品搜尋索引重新建立"
 
 msgid "Removes the expired entries from the cache"
 msgstr "從快取中移除過期的條目"
@@ -190,7 +191,7 @@ msgid "Required mapping key \"%1$s\" is missing or contains no array"
 msgstr "獲取的mapping當中的key \"%1$s\" 遺失 或是 沒有包含任何陣列"
 
 msgid "Rescale product images"
-msgstr ""
+msgstr "重新縮放產品圖像"
 
 msgid "Rescales product images to the new sizes"
 msgstr ""

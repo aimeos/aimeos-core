@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Bruce Liu <zcon.bruce@gmail.com>, 2016
+# stevechen <steve.stevechen@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: aimeos-core\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-27 08:30+0200\n"
-"PO-Revision-Date: 2017-09-23 22:30+0000\n"
-"Last-Translator: Aimeos\n"
+"PO-Revision-Date: 2018-10-02 07:49+0000\n"
+"Last-Translator: stevechen <steve.stevechen@gmail.com>\n"
 "Language-Team: Chinese (http://www.transifex.com/aimeos/aimeos-core/language/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,11 +33,11 @@ msgstr "找不到class \"%1$s\""
 
 #, php-format
 msgid "Downloading file \"%1$s\" failed"
-msgstr ""
+msgstr "檔案 \"%1$s\" 下載失敗"
 
 #, php-format
 msgid "File \"%1$s\" not found"
-msgstr ""
+msgstr "找不到檔案 \"%1$s\""
 
 #, php-format
 msgid "Invalid characters in class name \"%1$s\""
