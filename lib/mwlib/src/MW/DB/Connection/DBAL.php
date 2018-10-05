@@ -50,8 +50,12 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 			return $this;
 		}
 
-		unset( $this->connection );
+		$conn = $this->connection;
+
 		$this->connection = \Doctrine\DBAL\DriverManager::getConnection( $this->getParameters() );
+		$this->txnumber = 0;
+
+		unset( $conn );
 
 		foreach( $this->stmts as $stmt ) {
 			$this->create( $stmt )->execute()->finish();

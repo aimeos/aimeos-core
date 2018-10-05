@@ -47,14 +47,17 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 */
 	public function connect()
 	{
-		unset( $this->connection );
 		list( $dsn, $user, $pass, $attr ) = $this->getParameters();
 
 		$pdo = new \PDO( $dsn, $user, $pass, $attr );
 		$pdo->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION );
 
+		$conn = $this->connection;
+
 		$this->connection = $pdo;
 		$this->txnumber = 0;
+
+		unset( $conn );
 
 		foreach( $this->stmts as $stmt ) {
 			$this->create( $stmt )->execute()->finish();
