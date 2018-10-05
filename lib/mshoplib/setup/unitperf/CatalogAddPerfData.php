@@ -101,6 +101,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->init();
 
 		$config = $this->additional->getConfig();
+		$this->maxBatch = $config->get( 'setup/unitperf/max-batch', 100000 );
 		$this->numCatLevels = $config->get( 'setup/unitperf/num-catlevels', 1 );
 		$this->numCategories = $config->get( 'setup/unitperf/num-categories', 10 );
 		$this->numCatProducts = $config->get( 'setup/unitperf/num-catproducts', 100 );
@@ -213,11 +214,12 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
 		$newItem = $productManager->createItem( ( $this->numProdVariants > 0 ? 'select' : 'default' ), 'product' );
 
+		$slice = (int) ceil( $this->maxBatch / ( $this->numProdVariants ?: 1 ) );
 		$modifier = $this->attributes['modifier'];
 		$material = $this->attributes['material'];
 		$items = [];
 
-		for( $i = 0; $i < $this->numCatProducts; $i++ )
+		for( $i = 1; $i <= $this->numCatProducts; $i++ )
 		{
 			$text = key( $modifier ) . ' ' . key( $material ) . ' ' . current( $articles );
 
@@ -248,6 +250,15 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 						reset( $material );
 					}
 				}
+			}
+
+			if( $i % $slice === 0 )
+			{
+				$productManager->begin();
+				$productManager->saveItems( $items );
+				$productManager->commit();
+
+				$items = [];
 			}
 		}
 
