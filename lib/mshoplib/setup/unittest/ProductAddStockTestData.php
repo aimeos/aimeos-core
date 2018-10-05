@@ -11,7 +11,7 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds product stock test data.
+ * Adds stock test data.
  */
 class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 {
@@ -45,69 +45,93 @@ class ProductAddStockTestData extends \Aimeos\MW\Setup\Task\Base
 	{
 		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
 
-		$this->msg( 'Adding product stock test data', 0 );
+		$this->msg( 'Adding stock test data', 0 );
 		$this->additional->setEditor( 'core:unittest' );
 
-		$ds = DIRECTORY_SEPARATOR;
-		$path = __DIR__ . $ds . 'data' . $ds . 'stock.php';
+		$config = $this->additional->getConfig();
+		$name = $config->get( 'mshop/stock/manager/name' );
 
-		if( ( $testdata = include( $path ) ) == false ) {
-			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for stock domain', $path ) );
-		}
+		\Aimeos\MShop\Factory::clear();
+		$config->set( 'mshop/stock/manager/name', 'Standard' );
 
-		$this->addProductStockData( $testdata );
+		$this->createData( $this->getData() );
+
+		$config->set( 'mshop/stock/manager/name', $name );
+		\Aimeos\MShop\Factory::clear();
 
 		$this->status( 'done' );
 	}
 
 
 	/**
-	 * Adds the product stock test data.
+	 * Creates the test data
 	 *
 	 * @param array $testdata Associative list of key/list pairs
 	 * @throws \Aimeos\MW\Setup\Exception If no type ID is found
 	 */
-	private function addProductStockData( array $testdata )
+	protected function createData( array $testdata )
 	{
-		$stockManager = \Aimeos\MShop\Stock\Manager\Factory::createManager( $this->additional, 'Standard' );
-		$typeManager = $stockManager->getSubManager( 'type', 'Standard' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'stock' );
+		$typeIds = $this->getTypeIds( $testdata, ['stock/type'] );
+		$items = [];
 
-
-		$typeIds = [];
-		$typeItem = $typeManager->createItem();
-
-		$stockManager->begin();
-
-		foreach( $testdata['stock/type'] as $key => $dataset )
+		foreach( $testdata['stock'] as $key => $entry )
 		{
-			$typeItem->setId( null );
-			$typeItem->setCode( $dataset['code'] );
-			$typeItem->setLabel( $dataset['label'] );
-			$typeItem->setDomain( $dataset['domain'] );
-			$typeItem->setStatus( $dataset['status'] );
-
-			$typeManager->saveItem( $typeItem );
-			$typeIds[$key] = $typeItem->getId();
-		}
-
-
-		$stock = $stockManager->createItem();
-
-		foreach( $testdata['stock'] as $dataset )
-		{
-			if( !isset( $typeIds[$dataset['typeid']] ) ) {
-				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No type ID found for "%1$s"', $dataset['typeid'] ) );
+			if( !isset( $typeIds['stock/type'][$entry['stock.type']] ) ) {
+				throw new \Aimeos\MW\Setup\Exception( sprintf( 'No stock type ID found for "%1$s"', $entry['stock.type'] ) );
 			}
 
-			$stock->setId( null );
-			$stock->setProductCode( $dataset['productcode'] );
-			$stock->setTypeId( $typeIds[$dataset['typeid']] );
-			$stock->setStocklevel( $dataset['stocklevel'] );
-			$stock->setDateBack( $dataset['backdate'] );
-
-			$stockManager->saveItem( $stock, false );
+			list( $domain, $code ) = explode( '/', $entry['stock.type'] );
+			$items[] = $manager->createItem( $code, $domain, $entry )->setId( null );
 		}
 
-		$stockManager->commit();
+		$manager->begin();
+		$manager->saveItems( $items );
+		$manager->commit();
+	}
+
+
+	/**
+	 * Returns the test data
+	 *
+	 * @return array Multi-dimensional associative array
+	 */
+	protected function getData()
+	{
+		$path = __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'stock.php';
+
+		if( ( $testdata = include( $path ) ) == false ) {
+			throw new \Aimeos\MShop\Exception( sprintf( 'No file "%1$s" found for stock domain', $path ) );
+		}
+
+		return $testdata;
+	}
+
+
+	/**
+	 * Creates the type test data and returns their IDs
+	 *
+	 * @param array $testdata Associative list of key/list pairs
+	 * @param array $domains List of domain names
+	 * @return array Associative list of type/key/ID triples
+	 */
+	protected function getTypeIds( array $testdata, array $domains )
+	{
+		$typeIds = [];
+
+		foreach( $domains as $domain )
+		{
+			$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+
+			foreach( $testdata[$domain] as $key => $entry )
+			{
+				$item = $manager->createItem();
+				$item->fromArray( $entry );
+
+				$typeIds[$domain][$key] = $manager->saveItem( $item )->getId();
+			}
+		}
+
+		return $typeIds;
 	}
 }
