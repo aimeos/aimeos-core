@@ -137,7 +137,7 @@ return array(
 			$table->addColumn( 'parentid', 'integer', [] );
 			$table->addColumn( 'typeid', 'integer', [] );
 			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'refid', 'string', array( 'length' => 32 ) );
+			$table->addColumn( 'refid', 'binary', array( 'length' => 32 ) );
 			$table->addColumn( 'start', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'end', 'datetime', array( 'notnull' => false ) );
 			$table->addColumn( 'config', 'text', array( 'length' => 0xffff ) );
