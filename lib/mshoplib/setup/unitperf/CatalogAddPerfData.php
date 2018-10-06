@@ -137,7 +137,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addCatalogProduct( array $catItems, \Aimeos\MShop\Product\Item\Iface $prodItem, $i )
+	protected function addCatalogProducts( array $catItems, array $items )
 	{
 		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
 
@@ -146,14 +146,17 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$promo = round( $this->numCatProducts / 10 ) ?: 1;
 
-		foreach( $catItems as $idx => $catItem )
+		foreach( $items as $i => $item )
 		{
-			if( $i % pow( 10, $idx ) === 0 ) {
-				$catItem->addListItem( 'product', (clone $defListItem)->setRefId( $prodItem->getId() ) );
-			}
+			foreach( $catItems as $idx => $catItem )
+			{
+				if( $i % pow( 10, $idx ) === 0 ) {
+					$catItem->addListItem( 'product', (clone $defListItem)->setRefId( $item->getId() ) );
+				}
 
-			if( ($i + $idx) % $promo === 0 ) {
-				$catItem->addListItem( 'product', (clone $promoListItem)->setRefId( $prodItem->getId() ) );
+				if( ($i + $idx) % $promo === 0 ) {
+					$catItem->addListItem( 'product', (clone $promoListItem)->setRefId( $item->getId() ) );
+				}
 			}
 		}
 	}
@@ -212,8 +215,9 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		);
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
-		$newItem = $productManager->createItem( ( $this->numProdVariants > 0 ? 'select' : 'default' ), 'product' );
+		$productManager->begin();
 
+		$newItem = $productManager->createItem( ( $this->numProdVariants > 0 ? 'select' : 'default' ), 'product' );
 		$slice = (int) ceil( $this->maxBatch / ( $this->numProdVariants ?: 1 ) );
 		$modifier = $this->attributes['modifier'];
 		$material = $this->attributes['material'];
@@ -254,23 +258,18 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			if( $i % $slice === 0 )
 			{
-				$productManager->begin();
 				$productManager->saveItems( $items );
-				$productManager->commit();
-
+				$this->addCatalogProducts( $catItems, $items );
+				$this->addStock( $items );
 				$items = [];
 			}
 		}
 
-		$productManager->begin();
 		$productManager->saveItems( $items );
-		$productManager->commit();
-
-		foreach( $items as $idx => $item ) {
-			$this->addCatalogProduct( $catItems, $item, $idx );
-		}
-
+		$this->addCatalogProducts( $catItems, $items );
 		$this->addStock( $items );
+
+		$productManager->commit();
 	}
 
 
