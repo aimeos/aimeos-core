@@ -497,6 +497,6 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$item = $manager->saveItem( $item );
 		$manager->commit();
 
-		$return $item;
+		return $item;
 	}
 }
