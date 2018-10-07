@@ -146,9 +146,11 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$promo = round( $this->numCatProducts / 10 ) ?: 1;
 
-		foreach( $items as $i => $item )
+		foreach( $catItems as $idx => $catItem )
 		{
-			foreach( $catItems as $idx => $catItem )
+			$catItem = clone $catItem; // forget stored product references afterwards
+
+			foreach( $items as $i => $item )
 			{
 				if( $i % pow( 10, $idx ) === 0 ) {
 					$catItem->addListItem( 'product', (clone $defListItem)->setRefId( $item->getId() ) );
@@ -158,6 +160,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					$catItem->addListItem( 'product', (clone $promoListItem)->setRefId( $item->getId() ) );
 				}
 			}
+
+			$this->save( 'catalog', $catItem );
 		}
 	}
 
@@ -487,6 +491,12 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function save( $domain, $item )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->additional, $domain )->saveItem( $item );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+
+		$manager->begin();
+		$item = $manager->saveItem( $item );
+		$manager->commit();
+
+		$return $item;
 	}
 }
