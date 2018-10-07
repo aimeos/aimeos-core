@@ -120,12 +120,13 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 	 *
 	 * @param string $type Schema type, e.g. "table" or "sequence"
 	 * @param string $relpath Relative path to the scheme file
+	 * @param \Doctrine\DBAL\Schema\SchemaConfig Schema configuration object
 	 * @return \Doctrine\DBAL\Schema\Schema[] Associative list of names as keys and schema objects as values
 	 */
-	protected function getSchemaObjects( $type, $relpath )
+	protected function getSchemaObjects( $type, $relpath, \Doctrine\DBAL\Schema\SchemaConfig $config )
 	{
 		$schemaList = [];
-		$dbalschema = new \Doctrine\DBAL\Schema\Schema();
+		$dbalschema = new \Doctrine\DBAL\Schema\Schema( [], [], $config );
 
 		foreach( $this->getSetupPaths() as $abspath )
 		{
@@ -177,18 +178,19 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 			}
 
 			$dbalManager = $dbal->getSchemaManager();
+			$config = $dbalManager->createSchemaConfig();
 			$platform = $dbal->getDatabasePlatform();
 			$schema = $this->getSchema( $rname );
 
 
-			foreach( $this->getSchemaObjects( 'table', $relpath ) as $name => $dbalschema )
+			foreach( $this->getSchemaObjects( 'table', $relpath, $config ) as $name => $dbalschema )
 			{
 				$this->msg( sprintf( 'Checking table "%1$s": ', $name ), 2 );
 
 				$table = $dbalManager->listTableDetails( $name );
 				$tables = ( $table->getColumns() !== [] ? array( $table ) : [] );
 
-				$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables );
+				$tableSchema = new \Doctrine\DBAL\Schema\Schema( $tables, [], $config );
 				$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $tableSchema, $dbalschema );
 				$stmts = $this->remove( $this->exclude( $schemaDiff, $relpath ), $clean )->toSaveSql( $platform );
 
@@ -200,11 +202,11 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 			{
 				$sequences = $dbalManager->listSequences();
 
-				foreach( $this->getSchemaObjects( 'sequence', $relpath ) as $name => $dbalschema )
+				foreach( $this->getSchemaObjects( 'sequence', $relpath, $config ) as $name => $dbalschema )
 				{
 					$this->msg( sprintf( 'Checking sequence "%1$s": ', $name ), 2 );
 
-					$seqSchema = new \Doctrine\DBAL\Schema\Schema( [], $sequences );
+					$seqSchema = new \Doctrine\DBAL\Schema\Schema( [], $sequences, $config );
 					$schemaDiff = \Doctrine\DBAL\Schema\Comparator::compareSchemas( $seqSchema, $dbalschema );
 					$stmts = $this->remove( $schemaDiff, $clean )->toSaveSql( $platform );
 
