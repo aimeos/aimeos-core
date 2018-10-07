@@ -232,15 +232,16 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	 *
 	 * @param string $msg Current message
 	 * @param integer $level Indent level of the message (default: 0 )
+	 * @param string $status|null Current status
 	 */
-	protected function msg( $msg, $level = 0 )
+	protected function msg( $msg, $level = 0, $status = null )
 	{
 		$pre = '';
 		for( $i = 0; $i < 2*$level; $i++ ) {
 			$pre .= ' ';
 		}
 
-		echo str_pad( $pre . $msg, 70 );
+		echo str_pad( $pre . $msg, 70 ) . ( $status ? $status . PHP_EOL : '' );
 	}
 
 

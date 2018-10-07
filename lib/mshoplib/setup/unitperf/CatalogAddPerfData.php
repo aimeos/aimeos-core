@@ -94,7 +94,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$treeFcn( [], $parentId, $idx, $this->numCatLevels - 1 );
 
-			$this->msg( '- Subtree ' . $idx, 1 ); $this->status( 'done' );
+			$this->msg( '- Subtree ' . $idx, 1, 'done' );
 		};
 
 
