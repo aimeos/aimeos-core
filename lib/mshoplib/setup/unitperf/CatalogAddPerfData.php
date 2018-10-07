@@ -14,12 +14,12 @@ namespace Aimeos\MW\Setup\Task;
  */
 class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 {
+	private $maxBatch;
 	private $numCatLevels;
 	private $numCategories;
 	private $numCatProducts;
 	private $numProdVariants;
 	private $attributes = [];
-	private $typeIds = [];
 
 
 	/**
