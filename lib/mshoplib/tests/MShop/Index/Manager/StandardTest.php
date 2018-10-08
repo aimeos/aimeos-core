@@ -219,8 +219,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$prodText = $this->getValue( $dbm, $sqlProd, 'value', $siteId, $item->getId() );
 		$this->object->deleteItem( $item->getId() );
 
-		$this->assertEquals( 'Unterproduct 3', $prodText );
-		$this->assertEquals( 'XL', $attrText );
+		$this->assertEquals( 'unterproduct 3', $prodText );
+		$this->assertEquals( 'xl', $attrText );
 	}
 
 
@@ -564,7 +564,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
 		$conditions = array(
-			$search->compare( '~=', $func, 'Expr' ), // text value
+			$search->compare( '~=', $func, 'expr' ), // text value
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -611,7 +611,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $textMgr->searchTexts( $search );
 
 		$this->assertArrayHasKey( $product->getId(), $result );
-		$this->assertContains( 'Cafe Noire Cappuccino', $result );
+		$this->assertContains( 'cafe noire cappuccino', $result );
 	}
 
 

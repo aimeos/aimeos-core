@@ -105,7 +105,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype19', 'de', 'name', 'product' ) );
 		$conditions = array(
-			$search->compare( '~=', $func, 'Noir' ), // text value
+			$search->compare( '~=', $func, 'noir' ), // text value
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -155,7 +155,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		$result = $textMgr->searchTexts( $search );
 
 		$this->assertArrayHasKey( $product->getId(), $result );
-		$this->assertContains( 'Cafe Noire Cappuccino', $result );
+		$this->assertContains( 'cafe noire cappuccino', $result );
 	}
 
 

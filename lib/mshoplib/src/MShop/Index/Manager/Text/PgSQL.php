@@ -72,7 +72,7 @@ class PgSQL
 				$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\/|\-|\+|\>|\<|\(|\)|\*|\:|\"|\!|\§|\$|\'|\;|\.|\,|\@)+/';
 				$search = trim( preg_replace( $regex, ' ', $params[2] ) );
 
-				$params[2] = '\'' . implode( ':* & ', explode( ' ', $search ) ) . ':*\'';
+				$params[2] = '\'' . implode( ':* & ', explode( ' ', strtolower( $search ) ) ) . ':*\'';
 			}
 
 			return $params;

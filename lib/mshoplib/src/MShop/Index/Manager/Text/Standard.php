@@ -143,6 +143,20 @@ class Standard
 			$siteIds = array_merge( $siteIds, $locale->getSiteSubTree() );
 		}
 
+
+		$func = function( $source, array $params ) {
+
+			if( isset( $params[2] ) ) {
+				$params[2] = strtolower( $params[2] );
+			}
+
+			return $params;
+		};
+
+		$this->searchConfig['index.text:relevance']['function'] = $func;
+		$this->searchConfig['index.text.relevance']['function'] = $func;
+		$this->searchConfig['sort:index.text.relevance']['function'] = $func;
+
 		$this->replaceSiteMarker( $this->searchConfig['index.text:name'], 'mindte."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte2."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['sort:index.text:relevance'], 'mindte2."siteid"', $siteIds );
@@ -914,7 +928,7 @@ class Standard
 		$stmt->bind( 4, $listtype );
 		$stmt->bind( 5, $reftype );
 		$stmt->bind( 6, $domain );
-		$stmt->bind( 7, $content );
+		$stmt->bind( 7, strtolower( $content ) ); // for case insensitive searches
 		$stmt->bind( 8, $date ); //mtime
 		$stmt->bind( 9, $editor );
 		$stmt->bind( 10, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
