@@ -50,9 +50,17 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 			return $this;
 		}
 
+		$param = $this->getParameters();
+		$param['driverOptions'] = [
+			\PDO::ATTR_ORACLE_NULLS => \PDO::NULL_EMPTY_STRING,
+			\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+			\PDO::ATTR_AUTOCOMMIT => true,
+			\PDO::ATTR_TIMEOUT => 10,
+		];
+
 		$conn = $this->connection;
 
-		$this->connection = \Doctrine\DBAL\DriverManager::getConnection( $this->getParameters() );
+		$this->connection = \Doctrine\DBAL\DriverManager::getConnection( $param );
 		$this->txnumber = 0;
 
 		unset( $conn );
