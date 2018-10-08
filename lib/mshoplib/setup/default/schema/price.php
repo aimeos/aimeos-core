@@ -113,7 +113,7 @@ return array(
 			$table->setPrimaryKey( array( 'id' ), 'pk_msprili_id' );
 			$table->addUniqueIndex( array( 'siteid', 'domain', 'refid', 'typeid', 'parentid' ), 'unq_msprili_sid_dm_rid_tid_pid' );
 			$table->addIndex( array( 'siteid', 'status', 'start', 'end' ), 'idx_msprili_sid_stat_start_end' );
-			$table->addIndex( array( 'parentid', 'siteid', 'refid', 'domain', 'typeid' ), 'idx_msprili_pid_sid_rid_dm_tid' );
+			$table->addIndex( array( 'parentid', 'siteid', 'domain', 'refid', 'typeid' ), 'idx_msprili_pid_sid_dm_rid_tid' );
 			$table->addIndex( array( 'parentid', 'siteid', 'start' ), 'idx_msprili_pid_sid_start' );
 			$table->addIndex( array( 'parentid', 'siteid', 'end' ), 'idx_msprili_pid_sid_end' );
 			$table->addIndex( array( 'parentid', 'siteid', 'pos' ), 'idx_msprili_pid_sid_pos' );
