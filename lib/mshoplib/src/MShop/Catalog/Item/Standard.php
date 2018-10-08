@@ -222,7 +222,7 @@ class Standard
 	 */
 	public function getTarget()
 	{
-		return ( $this->node->__isset( 'target' ) ? $this->node->__get( 'target' ) : '' );
+		return ( $this->node->__isset( 'target' ) ? (string) $this->node->__get( 'target' ) : '' );
 	}
 
 
@@ -235,7 +235,7 @@ class Standard
 	public function setTarget( $value )
 	{
 		if( (string) $value !== $this->getTarget() ) {
-			$this->node->__set( 'target', $value );
+			$this->node->__set( 'target', (string) $value );
 		}
 
 		return $this;
