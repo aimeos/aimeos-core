@@ -155,7 +155,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		$result = $textMgr->searchTexts( $search );
 
 		$this->assertArrayHasKey( $product->getId(), $result );
-		$this->assertContains( 'Cafe Noire Cappuccino', $result );
+		$this->assertContains( 'cafe noire cappuccino', $result );
 	}
 
 

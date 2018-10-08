@@ -205,7 +205,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text:name', ['de'] );
-		$search->setConditions( $search->compare( '=~', $func, 'Cafe' ) );
+		$search->setConditions( $search->compare( '=~', $func, 'cafe' ) );
 
 		$sortfunc = $search->createFunction( 'sort:index.text:name', ['de'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
@@ -221,7 +221,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
-		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value
+		$search->setConditions( $search->compare( '~=', $func, 'expr' ) ); // text value
 
 		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
@@ -237,7 +237,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text.value', array( ['default', 'unittype13'], 'de', 'name', 'product' ) );
-		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value
+		$search->setConditions( $search->compare( '~=', $func, 'expr' ) ); // text value
 
 		$sortfunc = $search->createFunction( 'sort:index.text.value', array( ['default', 'unittype13'], 'de', 'name' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
@@ -253,7 +253,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search = $this->object->createSearch();
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', ['code', 'name'], 'product' ) );
-		$search->setConditions( $search->compare( '~=', $func, 'Expr' ) ); // text value
+		$search->setConditions( $search->compare( '~=', $func, 'expr' ) ); // text value
 
 		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', ['code', 'name'] ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
@@ -278,7 +278,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->searchTexts( $search );
 
-		$this->assertContains( 'Cafe Noire Cappuccino', $result );
+		$this->assertContains( 'cafe noire cappuccino', $result );
 	}
 
 

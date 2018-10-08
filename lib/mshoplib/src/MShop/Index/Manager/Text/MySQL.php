@@ -90,7 +90,7 @@ class MySQL
 					$len = strlen( $part );
 
 					if( $len > 0 ) {
-						$str .= ' +' . $part . '*';
+						$str .= ' +' . strtolower( $part ) . '*';
 					}
 				}
 
