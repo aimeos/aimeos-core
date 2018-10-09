@@ -94,7 +94,7 @@ class Prepared extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\Sta
 			}
 
 			$conn->connect();
-			$this->exec();
+			return $this->exec();
 		}
 
 		return $stmt;
