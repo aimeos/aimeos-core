@@ -139,7 +139,7 @@ class Simple extends \Aimeos\MW\DB\Statement\Base implements \Aimeos\MW\DB\State
 			}
 
 			$conn->connect();
-			$this->exec();
+			return $this->exec();
 		}
 
 		error_reporting( $level );
