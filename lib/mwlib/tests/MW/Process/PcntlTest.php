@@ -34,27 +34,17 @@ class PcntlTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testRunException()
+	public function testRunError()
 	{
 		$fcn = function() { throw new \Exception(); };
 
-		try
-		{
-			stream_filter_register( "redirect", "\Aimeos\MW\Process\DiscardFilter" );
-			$filter = stream_filter_prepend( STDERR, "redirect", STREAM_FILTER_WRITE );
+		stream_filter_register( "redirect", "\Aimeos\MW\Process\DiscardFilter" );
+		$filter = stream_filter_prepend( STDERR, "redirect", STREAM_FILTER_WRITE );
 
-			$object = new \Aimeos\MW\Process\Pcntl();
-			$object->start( $fcn, [], true )->wait();
+		$object = new \Aimeos\MW\Process\Pcntl();
+		$object->start( $fcn, [], true )->wait();
 
-			stream_filter_remove( $filter );
-		}
-		catch( \Aimeos\MW\Process\Exception $e )
-		{
-			stream_filter_remove( $filter );
-			return;
-		}
-
-		$this->fail( 'Expected exception "\Aimeos\MW\Process\Exception" not thrown' );
+		stream_filter_remove( $filter );
 	}
 }
 
