@@ -175,10 +175,17 @@ class Pcntl implements Iface
 		{
 			call_user_func_array( $fcn, $data );
 		}
-		catch( \Exception $e )
+		catch( \Exception $e ) // for PHP 5.x
 		{
 			fwrite( STDERR, $e->getMessage() );
 			fwrite( STDERR, $e->getTraceAsString() );
+
+			return 1;
+		}
+		catch( \Throwable $t )
+		{
+			fwrite( STDERR, $t->getMessage() );
+			fwrite( STDERR, $t->getTraceAsString() );
 
 			return 1;
 		}
@@ -207,10 +214,10 @@ class Pcntl implements Iface
 		if( $status > 0 )
 		{
 			if( $restart === false ) {
-				throw new Exception( sprintf( 'Process (PID "%1$s") failed with status "%2$s"', $pid, $status ) );
+				fwrite( STDERR, sprintf( 'Process (PID "%1$s") failed with status "%2$s"', $pid, $status ) );
+			} else {
+				$this->start( $fcn, $data, false );
 			}
-
-			$this->start( $fcn, $data, false );
 		}
 	}
 }
