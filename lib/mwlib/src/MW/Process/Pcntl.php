@@ -207,10 +207,10 @@ class Pcntl implements Iface
 		if( $status > 0 )
 		{
 			if( $restart === false ) {
-				throw new Exception( sprintf( 'Process (PID "%1$s") failed with status "%2$s"', $pid, $status ) );
+				error_log( sprintf( 'Process (PID "%1$s") failed with status "%2$s"', $pid, $status ) );
+			} else {
+				$this->start( $fcn, $data, false );
 			}
-
-			$this->start( $fcn, $data, false );
 		}
 	}
 }
