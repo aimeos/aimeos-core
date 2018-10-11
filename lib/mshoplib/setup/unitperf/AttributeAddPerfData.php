@@ -75,7 +75,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	protected function addCharacteristics()
 	{
 		$characteristics = [
-			'modifier' => [
+			'property' => [
 				'plain', 'checked', 'striped', 'curled', 'colored', 'bubbled', 'geometric', 'quilted', 'pimpled', 'dotted',
 				'light', 'heavy', 'simple', 'clear', 'cool', 'thin', 'thick', 'airy', 'breezy', 'blowy',
 				'dark', 'gloomy', 'shiny', 'soft', 'fluffy', 'warm', 'elastic', 'dry', 'pliable', 'lustrous',
