@@ -205,7 +205,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function addProductItems( array $catItems = [], $catIdx )
 	{
-		$articles = array(
+		$articles = $this->shuffle( [
 			'shirt', 'skirt', 'jacket', 'pants', 'socks', 'blouse', 'slip', 'sweater', 'dress', 'top',
 			'anorak', 'babydoll', 'swimsuit', 'trunks', 'bathrobe', 'beret', 'bra', 'bikini', 'blazer', 'bodysuit',
 			'bolero', 'bowler', 'trousers', 'bustier', 'cape', 'catsuit', 'chucks', 'corduroys', 'corsage', 'cutaway',
@@ -216,18 +216,16 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			'sari', 'veil', 'apron', 'swimsuit', 'shorts', 'tuxedo', 'stocking', 'suspender', 'tanga', 'tankini',
 			'toga', 'tunic', 'turban', 'jerkin', 'coat', 'suit', 'vest', 'gloves', 'bag', 'briefcase',
 			'shoes', 'sandals', 'flip-flops', 'ballerinas', 'slingbacks', 'clogs', 'moccasins', 'sneakers', 'boots', 'slippers',
-		);
+		 ] );
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
 		$productManager->begin();
 
 		$newItem = $productManager->createItem( ( $this->numProdVariants > 0 ? 'select' : 'default' ), 'product' );
 		$slice = (int) ceil( $this->maxBatch / ( $this->numProdVariants ?: 1 ) );
-		$property = $this->attributes['property'];
-		$material = $this->attributes['material'];
+		$property = $this->shuffle( $this->attributes['property'] );
+		$material = $this->shuffle( $this->attributes['material'] );
 		$items = [];
-
-		shuffle( $articles); shuffle( $property ); shuffle( $material );
 
 		for( $i = 1; $i <= $this->numCatProducts; $i++ )
 		{
@@ -416,11 +414,9 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$varListItem = $productListManager->createItem( 'variant', 'attribute' );
 		$newItem = $productManager->createItem( 'default', 'product' );
 
-		$length = $this->attributes['length'];
-		$width = $this->attributes['width'];
-		$size = $this->attributes['size'];
-
-		shuffle( $length ); shuffle( $width ); shuffle( $size );
+		$length = $this->shuffle( $this->attributes['length'] );
+		$width = $this->shuffle( $this->attributes['width'] );
+		$size = $this->shuffle( $this->attributes['size'] );
 
 		for( $i = 0; $i < $this->numProdVariants; $i++ )
 		{
@@ -462,10 +458,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$stockManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'stock' );
 
 		$stockItem = $stockManager->createItem( 'default', 'product');
-		$stocklevels = [null, 100, 80, 60, 40, 20, 10, 5, 2, 0];
+		$stocklevels = $this->shuffle( [null, 100, 80, 60, 40, 20, 10, 5, 2, 0] );
 		$list = [];
-
-		shuffle( $stocklevels );
 
 		foreach( $items as $item )
 		{
@@ -512,5 +506,19 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$manager->commit();
 
 		return $item;
+	}
+
+
+	protected function shuffle( array $list )
+	{
+		$keys = array_keys( $list );
+		shuffle( $keys );
+		$result = [];
+
+		foreach( $keys as $key ) {
+			$result[$key] = $list[$key];
+		}
+
+		return $result;
 	}
 }
