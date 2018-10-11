@@ -69,39 +69,39 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding catalog performance data', 0 ); $this->status( '' );
 
 
-		$fcn = function( $parentId, $num, $idx ) {
+		$fcn = function( array $parents, $catParentId, $numCatPerLevel, $catIdx ) {
 
 			\Aimeos\MShop\Factory::clear();
 
-			$treeFcn = function( array $parents, $parentId, $label, $level ) use ( &$treeFcn, $num ) {
+			$treeFcn = function( array $parents, $catParentId, $catIdx, $level ) use ( &$treeFcn, $numCatPerLevel ) {
 
-				$catItem = $this->addCatalogItem( $label, $parentId );
+				$catItem = $this->addCatalogItem( $catIdx, $catParentId );
 				array_unshift( $parents, $catItem );
 
 				if( $level > 0 )
 				{
-					for( $i = 0; $i < $num; $i++ ) {
-						$treeFcn( $parents, $catItem->getId(), $label . '/' . $i, $level - 1 );
+					for( $i = 0; $i < $numCatPerLevel; $i++ ) {
+						$treeFcn( $parents, $catItem->getId(), $catIdx . '/' . $i, $level - 1 );
 					}
 				}
 				else
 				{
-					$this->addProductItems( $parents, $label );
+					$this->addProductItems( $parents, $catIdx );
 				}
 
 				$this->save( 'catalog', $catItem );
 			};
 
-			$treeFcn( [], $parentId, $idx, $this->numCatLevels - 1 );
+			$treeFcn( $parents, $catParentId, $catIdx, $this->numCatLevels - 1 );
 
-			$this->msg( '- Subtree ' . $idx, 1, 'done' );
+			$this->msg( '- Subtree ' . $catIdx, 1, 'done' );
 		};
 
 
 		$this->init();
 
 		$config = $this->additional->getConfig();
-		$this->maxBatch = $config->get( 'setup/unitperf/max-batch', 100000 );
+		$this->maxBatch = $config->get( 'setup/unitperf/max-batch', 10000 );
 		$this->numCatLevels = $config->get( 'setup/unitperf/num-catlevels', 1 );
 		$this->numCategories = $config->get( 'setup/unitperf/num-categories', 10 );
 		$this->numCatProducts = $config->get( 'setup/unitperf/num-catproducts', 100 );
@@ -110,27 +110,27 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$process = $this->additional->getProcess();
 		$catalogRootItem = $this->addCatalogItem( 'home' );
 
-		$num = round( pow( $this->numCategories, 1 / $this->numCatLevels ) / 5 ) * 5;
+		$numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) / 5 ) * 5;
 		$this->additional->__sleep();
 
-		for( $i = 1; $i <= round( $this->numCategories / pow( $num, $this->numCatLevels - 1 ) ); $i++ ) {
-			$process->start( $fcn, [$catalogRootItem->getId(), $num, $i] );
+		for( $i = 1; $i <= round( $this->numCategories / pow( $numCatPerLevel, $this->numCatLevels - 1 ) ); $i++ ) {
+			$process->start( $fcn, [[$catalogRootItem], $catalogRootItem->getId(), $numCatPerLevel, $i] );
 		}
 
 		$process->wait();
 	}
 
 
-	protected function addCatalogItem( $code, $parentId = null )
+	protected function addCatalogItem( $catIdx, $parentId = null )
 	{
 		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog' );
 
 		$item = $catalogManager->createItem()
-			->setLabel( 'category-' . $code )
-			->setCode( 'cat-' . $code )
+			->setLabel( 'category-' . $catIdx )
+			->setCode( 'cat-' . $catIdx )
 			->setStatus( 1 );
 
-		$item = $this->addCatalogTexts( $item, $code );
+		$item = $this->addCatalogTexts( $item, $catIdx );
 		$item = $catalogManager->insertItem( $item, $parentId );
 
 		return $item;
@@ -166,15 +166,15 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addCatalogTexts( \Aimeos\MShop\Catalog\Item\Iface $catItem, $label )
+	protected function addCatalogTexts( \Aimeos\MShop\Catalog\Item\Iface $catItem, $catIdx )
 	{
 		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
 
 		$textItem = $textManager->createItem( 'name', 'product' )
-			->setContent( str_replace( '-', ' ', $label ) )
+			->setContent( 'Category ' . $catIdx )
+			->setLabel( 'cat-' . $catIdx )
 			->setLanguageId( 'en' )
-			->setLabel( $label )
 			->setStatus( 1 );
 
 		$listItem = $catalogListManager->createItem( 'default', 'product' );
@@ -203,7 +203,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductItems( array $catItems = [], $label )
+	protected function addProductItems( array $catItems = [], $catIdx )
 	{
 		$articles = array(
 			'shirt', 'skirt', 'jacket', 'pants', 'socks', 'blouse', 'slip', 'sweater', 'dress', 'top',
@@ -223,23 +223,25 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$newItem = $productManager->createItem( ( $this->numProdVariants > 0 ? 'select' : 'default' ), 'product' );
 		$slice = (int) ceil( $this->maxBatch / ( $this->numProdVariants ?: 1 ) );
-		$modifier = $this->attributes['modifier'];
+		$property = $this->attributes['property'];
 		$material = $this->attributes['material'];
 		$items = [];
 
+		shuffle( $articles); shuffle( $property ); shuffle( $material );
+
 		for( $i = 1; $i <= $this->numCatProducts; $i++ )
 		{
-			$text = key( $modifier ) . ' ' . key( $material ) . ' ' . current( $articles );
+			$text = key( $property ) . ' ' . key( $material ) . ' ' . current( $articles );
 
 			$item = (clone $newItem)
-				->setLabel( $text . ' (' . $label . ')' )
-				->setCode( 'prod-' . $i . ':' . $label )
+				->setLabel( $text . ' (' . $catIdx . ')' )
+				->setCode( 'prod-' . $i . ':' . $catIdx )
 				->setStatus( 1 );
 
-			$item = $this->addProductAttributes( $item, [current( $modifier ), current( $material )] );
-			$item = $this->addProductTexts( $item, $text );
-			$item = $this->addProductMedia( $item, $i );
-			$item = $this->addProductPrices( $item, $i );
+			$item = $this->addProductAttributes( $item, [current( $property ), current( $material )] );
+			$item = $this->addProductTexts( $item, $text, $catIdx );
+			$item = $this->addProductMedia( $item, $i, $catIdx );
+			$item = $this->addProductPrices( $item, $i, $catIdx );
 			$item = $this->addProductVariants( $item, $i );
 			$item = $this->addProductSuggestions( $item, $catItems );
 
@@ -248,11 +250,11 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			next( $articles );
 			if( current( $articles ) === false )
 			{
-				reset( $articles ); next( $modifier );
+				reset( $articles ); next( $property );
 
-				if( current( $modifier ) === false )
+				if( current( $property ) === false )
 				{
-					reset( $modifier ); next( $material );
+					reset( $property ); next( $material );
 
 					if( current( $material ) === false ) {
 						reset( $material );
@@ -277,7 +279,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductMedia( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
+	protected function addProductMedia( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx, $catIdx )
 	{
 		$prefix = 'https://demo.aimeos.org/media/';
 
@@ -291,8 +293,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$mediaItem = (clone $newItem)
 				->setLabel( ($i+1) . '. picture for ' . $prodItem->getLabel() )
-				->setPreview( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '.jpg' )
-				->setUrl( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '-big.jpg' )
+				->setPreview( $prefix . 'unitperf/' . ( ( $catIdx + $idx + $i ) % 4 + 1 ) . '.jpg' )
+				->setUrl( $prefix . 'unitperf/' . ( ( $catIdx + $idx + $i ) % 4 + 1 ) . '-big.jpg' )
 				->setMimeType( 'image/jpeg' )
 				->setStatus( 1 );
 
@@ -312,7 +314,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductPrices( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
+	protected function addProductPrices( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx, $catIdx )
 	{
 		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
@@ -324,7 +326,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$priceItem = (clone $newItem)
 				->setLabel( $prodItem->getLabel() . ': from ' . ( 1 + $i * 5 ) )
-				->setValue( 100 + ($idx % 900) - $i * 10 )
+				->setValue( 100 + (($catIdx + $idx) % 900) - $i * 10 )
 				->setQuantity( 1 + $i * 10 )
 				->setCurrencyId( 'EUR' )
 				->setRebate( $i * 10 )
@@ -362,12 +364,20 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductTexts( \Aimeos\MShop\Product\Item\Iface $prodItem, $label )
+	protected function addProductTexts( \Aimeos\MShop\Product\Item\Iface $prodItem, $label, $catIdx )
 	{
 		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
 		$listItem = $productListManager->createItem( 'default', 'text' );
+
+		$textItem = $textManager->createItem( 'url', 'product' )
+			->setContent( str_replace( ' ', '_', $label ) . '_' . $catIdx )
+			->setLabel( $label . '(' . $catIdx . ')' )
+			->setLanguageId( 'en' )
+			->setStatus( 1 );
+
+		$prodItem->addListItem( 'text', (clone $listItem), $textItem );
 
 		$textItem = $textManager->createItem( 'name', 'product' )
 			->setLanguageId( 'en' )
@@ -397,7 +407,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductVariants( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx)
+	protected function addProductVariants( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
 	{
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
@@ -409,6 +419,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$length = $this->attributes['length'];
 		$width = $this->attributes['width'];
 		$size = $this->attributes['size'];
+
+		shuffle( $length ); shuffle( $width ); shuffle( $size );
 
 		for( $i = 0; $i < $this->numProdVariants; $i++ )
 		{
@@ -452,6 +464,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$stockItem = $stockManager->createItem( 'default', 'product');
 		$stocklevels = [null, 100, 80, 60, 40, 20, 10, 5, 2, 0];
 		$list = [];
+
+		shuffle( $stocklevels );
 
 		foreach( $items as $item )
 		{
