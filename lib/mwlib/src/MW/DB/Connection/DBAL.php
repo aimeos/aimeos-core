@@ -119,7 +119,7 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function inTransaction()
 	{
-		return ( $this->txnumber > 0 ? true : false );
+		return $this->connection->getWrappedConnection()->inTransaction();
 	}
 
 
@@ -131,10 +131,11 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function begin()
 	{
-		try {
-			$this->connection->beginTransaction();
-		} catch( \Exception $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+		if( $this->txnumber === 0 )
+		{
+			if( $this->connection->getWrappedConnection()->beginTransaction() === false ) {
+				throw new \Aimeos\MW\DB\Exception( 'Unable to start new transaction' );
+			}
 		}
 
 		$this->txnumber++;
@@ -146,13 +147,14 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function commit()
 	{
-		$this->txnumber--;
-
-		try {
-			$this->connection->commit();
-		} catch( \Exception $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+		if( $this->txnumber === 1 )
+		{
+			if( $this->connection->getWrappedConnection()->commit() === false ) {
+				throw new \Aimeos\MW\DB\Exception( 'Failed to commit transaction' );
+			}
 		}
+
+		$this->txnumber--;
 	}
 
 
@@ -161,12 +163,13 @@ class DBAL extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connec
 	 */
 	public function rollback()
 	{
-		$this->txnumber--;
-
-		try {
-			$this->connection->rollBack();
-		} catch( \Exception $e ) {
-			throw new \Aimeos\MW\DB\Exception( $e->getMessage(), $e->getCode() );
+		if( $this->txnumber === 1 )
+		{
+			if( $this->connection->getWrappedConnection()->rollBack() === false ) {
+				throw new \Aimeos\MW\DB\Exception( 'Failed to roll back transaction' );
+			}
 		}
+
+		$this->txnumber--;
 	}
 }

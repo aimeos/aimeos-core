@@ -124,12 +124,14 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 */
 	public function begin()
 	{
-		if( $this->txnumber++ === 0 )
+		if( $this->txnumber === 0 )
 		{
 			if( $this->connection->beginTransaction() === false ) {
 				throw new \Aimeos\MW\DB\Exception( 'Unable to start new transaction' );
 			}
 		}
+
+		$this->txnumber++;
 	}
 
 
@@ -138,12 +140,14 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 */
 	public function commit()
 	{
-		if( --$this->txnumber === 0 )
+		if( $this->txnumber === 1 )
 		{
 			if( $this->connection->commit() === false ) {
 				throw new \Aimeos\MW\DB\Exception( 'Failed to commit transaction' );
 			}
 		}
+
+		$this->txnumber--;
 	}
 
 
@@ -152,11 +156,13 @@ class PDO extends \Aimeos\MW\DB\Connection\Base implements \Aimeos\MW\DB\Connect
 	 */
 	public function rollback()
 	{
-		if( --$this->txnumber === 0 )
+		if( $this->txnumber === 1 )
 		{
 			if( $this->connection->rollBack() === false ) {
 				throw new \Aimeos\MW\DB\Exception( 'Failed to roll back transaction' );
 			}
 		}
+
+		$this->txnumber--;
 	}
 }
