@@ -108,7 +108,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 1000 );
 
 		$process = $this->additional->getProcess();
-		$catalogRootItem = $this->addCatalogItem( 'home' );
+		$catalogRootItem = $this->addCatalogItem( null, 'home' );
 
 		$numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) / 5 ) * 5;
 		$this->additional->__sleep();
@@ -238,8 +238,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$item = $this->addProductAttributes( $item, [current( $property ), current( $material )] );
 			$item = $this->addProductTexts( $item, $text, $catIdx );
-			$item = $this->addProductMedia( $item, $i, $catIdx );
-			$item = $this->addProductPrices( $item, $i, $catIdx );
+			$item = $this->addProductMedia( $item, $i );
+			$item = $this->addProductPrices( $item, $i );
 			$item = $this->addProductVariants( $item, $i );
 			$item = $this->addProductSuggestions( $item, $catItems );
 
@@ -277,7 +277,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductMedia( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx, $catIdx )
+	protected function addProductMedia( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
 	{
 		$prefix = 'https://demo.aimeos.org/media/';
 
@@ -287,12 +287,12 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$litem = $productListManager->createItem( 'default', 'media' );
 		$newItem = $mediaManager->createItem( 'default', 'product' );
 
-		for( $i = 0; $i < 4; $i++ )
+		foreach( $this->shuffle( range( 0, 3 ) ) as $i )
 		{
 			$mediaItem = (clone $newItem)
 				->setLabel( ($i+1) . '. picture for ' . $prodItem->getLabel() )
-				->setPreview( $prefix . 'unitperf/' . ( ( $catIdx + $idx + $i ) % 4 + 1 ) . '.jpg' )
-				->setUrl( $prefix . 'unitperf/' . ( ( $catIdx + $idx + $i ) % 4 + 1 ) . '-big.jpg' )
+				->setPreview( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '.jpg' )
+				->setUrl( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '-big.jpg' )
 				->setMimeType( 'image/jpeg' )
 				->setStatus( 1 );
 
@@ -312,19 +312,20 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductPrices( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx, $catIdx )
+	protected function addProductPrices( \Aimeos\MShop\Product\Item\Iface $prodItem, $idx )
 	{
 		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
 
 		$litem = $productListManager->createItem( 'default', 'price' );
 		$newItem = $priceManager->createItem( 'default', 'product' );
+		$base = rand( 0, 8 ) * 100;
 
 		for( $i = 0; $i < 3; $i++ )
 		{
 			$priceItem = (clone $newItem)
 				->setLabel( $prodItem->getLabel() . ': from ' . ( 1 + $i * 5 ) )
-				->setValue( 100 + (($catIdx * 100 + $idx) % 900) - $i * 10 )
+				->setValue( 100 + (( $base + $idx ) % 900) - $i * 10 )
 				->setQuantity( 1 + $i * 10 )
 				->setCurrencyId( 'EUR' )
 				->setRebate( $i * 10 )
