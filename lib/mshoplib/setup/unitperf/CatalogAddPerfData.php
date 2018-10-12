@@ -75,7 +75,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$treeFcn = function( array $parents, $catParentId, $catIdx, $level ) use ( &$treeFcn, $numCatPerLevel ) {
 
-				$catItem = $this->addCatalogItem( $catIdx, $catParentId );
+				$catItem = $this->addCatalogItem( $catParentId, $catIdx );
 				array_unshift( $parents, $catItem );
 
 				if( $level > 0 )
@@ -121,7 +121,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addCatalogItem( $catIdx, $parentId = null )
+	protected function addCatalogItem( $parentId, $catIdx )
 	{
 		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog' );
 
@@ -216,7 +216,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			'sari', 'veil', 'apron', 'swimsuit', 'shorts', 'tuxedo', 'stocking', 'suspender', 'tanga', 'tankini',
 			'toga', 'tunic', 'turban', 'jerkin', 'coat', 'suit', 'vest', 'gloves', 'bag', 'briefcase',
 			'shoes', 'sandals', 'flip-flops', 'ballerinas', 'slingbacks', 'clogs', 'moccasins', 'sneakers', 'boots', 'slippers',
-		 ] );
+		] );
 
 		$productManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product' );
 		$productManager->begin();
@@ -324,7 +324,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$priceItem = (clone $newItem)
 				->setLabel( $prodItem->getLabel() . ': from ' . ( 1 + $i * 5 ) )
-				->setValue( 100 + (($catIdx + $idx) % 900) - $i * 10 )
+				->setValue( 100 + (($catIdx * 100 + $idx) % 900) - $i * 10 )
 				->setQuantity( 1 + $i * 10 )
 				->setCurrencyId( 'EUR' )
 				->setRebate( $i * 10 )
