@@ -112,7 +112,7 @@ abstract class Base
 		$listMap = [];
 		$manager = $this->getObject()->getSubManager( 'lists' );
 
-		$search = $manager->createSearch();
+		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$expr = array(
 			$search->compare( '==', 'customer.lists.parentid', $item->getId() ),
 			$search->compare( '==', 'customer.lists.domain', 'customer/group' ),
@@ -120,7 +120,6 @@ abstract class Base
 			$search->compare( '==', 'customer.lists.type.code', 'default' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
 
 		foreach( $manager->searchItems( $search ) as $listid => $listItem ) {
 			$listMap[ $listItem->getRefId() ] = $listid;

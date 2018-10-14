@@ -254,11 +254,10 @@ abstract class Base
 		$items = [];
 		$manager = $this->getObject()->getSubManager( 'address' );
 
-		$criteria = $manager->createSearch();
+		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.address.baseid', $baseIds ) );
 		$sort = [$criteria->sort( '+', 'order.base.address.baseid' ), $criteria->sort( '+', 'order.base.address.type' )];
 		$criteria->setSortations( $sort );
-		$criteria->setSlice( 0, 0x7fffffff );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
@@ -288,11 +287,10 @@ abstract class Base
 		$map = [];
 		$manager = $this->getObject()->getSubManager( 'coupon' );
 
-		$criteria = $manager->createSearch();
+		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.coupon.baseid', $baseIds ) );
 		$sort = [$criteria->sort( '+', 'order.base.coupon.baseid' ), $criteria->sort( '+', 'order.base.coupon.code' )];
 		$criteria->setSortations( $sort );
-		$criteria->setSlice( 0, 0x7fffffff );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{
@@ -323,18 +321,16 @@ abstract class Base
 		$manager = $this->getObject()->getSubManager( 'product' );
 		$attrManager = $manager->getSubManager( 'attribute' );
 
-		$criteria = $manager->createSearch();
+		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.product.baseid', $baseIds ) );
 		$sort = [$criteria->sort( '-', 'order.base.product.baseid' ), $criteria->sort( '-', 'order.base.product.position' )];
 		$criteria->setSortations( $sort );
-		$criteria->setSlice( 0, 0x7fffffff );
 
 		$items = $manager->searchItems( $criteria );
 
 
-		$search = $attrManager->createSearch();
+		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.product.attribute.parentid', array_keys( $items ) ) );
-		$search->setSlice( 0, 0x7fffffff );
 
 		foreach( $attrManager->searchItems( $search ) as $id => $attribute )
 		{
@@ -393,11 +389,10 @@ abstract class Base
 		$map = [];
 		$manager = $this->getObject()->getSubManager( 'service' );
 
-		$criteria = $manager->createSearch();
+		$criteria = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$criteria->setConditions( $criteria->compare( '==', 'order.base.service.baseid', $baseIds ) );
 		$sort = [$criteria->sort( '+', 'order.base.service.baseid' ), $criteria->sort( '+', 'order.base.service.type' )];
 		$criteria->setSortations( $sort );
-		$criteria->setSlice( 0, 0x7fffffff );
 
 		foreach( $manager->searchItems( $criteria ) as $item )
 		{

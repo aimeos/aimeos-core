@@ -454,13 +454,12 @@ abstract class Base
 		{
 			$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
 
-			$search = $manager->createSearch( true );
+			$search = $manager->createSearch( true )->setSlice( 0, count( $list ) );
 			$expr = array(
 				$search->compare( '==', str_replace( '/', '.', $domain ) . '.id', $list ),
 				$search->getConditions(),
 			);
 			$search->setConditions( $search->combine( '&&', $expr ) );
-			$search->setSlice( 0, 0x7fffffff );
 
 			$items[$domain] = $manager->searchItems( $search, $ref );
 		}

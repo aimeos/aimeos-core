@@ -673,14 +673,13 @@ class Standard
 		$listItems = [];
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'catalog/lists' );
 
-		$search = $listManager->createSearch( true );
+		$search = $listManager->createSearch( true )->setSlice( 0, 0x7fffffff );
 		$expr = array(
 			$search->compare( '==', 'catalog.lists.refid', array_keys( $items ) ),
 			$search->compare( '==', 'catalog.lists.domain', 'product' ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7FFFFFFF );
 
 		$result = $listManager->searchItems( $search );
 
