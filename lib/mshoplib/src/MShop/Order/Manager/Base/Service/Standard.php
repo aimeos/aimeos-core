@@ -933,10 +933,9 @@ class Standard
 	protected function getAttributeItems( $ids )
 	{
 		$manager = $this->getObject()->getSubManager( 'attribute' );
-		$search = $manager->createSearch();
+		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 		$search->setConditions( $search->compare( '==', 'order.base.service.attribute.parentid', $ids ) );
 		$search->setSortations( array( $search->sort( '+', 'order.base.service.attribute.code' ) ) );
-		$search->setSlice( 0, 0x7fffffff );
 
 		$result = [];
 		foreach( $manager->searchItems( $search ) as $item ) {

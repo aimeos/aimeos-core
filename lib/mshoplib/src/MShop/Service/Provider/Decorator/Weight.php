@@ -144,38 +144,21 @@ class Weight
 	protected function getWeight( array $prodMap )
 	{
 		$weight = 0;
-		$prodIds = [];
-		$context = $this->getContext();
 
-
-		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
-		$search = $manager->createSearch( true );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'product' );
+		$search = $manager->createSearch( true )->setSlice( 0, 10000 ); // performance speedup
 		$expr = array(
 			$search->compare( '==', 'product.code', array_keys( $prodMap ) ),
 			$search->getConditions(),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff ); // if more than 100 products are in the basket
 
-		foreach( $manager->searchItems( $search ) as $id => $product ) {
-			$prodIds[$id] = $product->getCode();
+		foreach( $manager->searchItems( $search, ['product/property'] ) as $product )
+		{
+			foreach( $product->getPropertyItems( 'package-weight' ) as $property ) {
+				$weight += ((float) $property->getValue()) * $prodMap[$product->getCode()];
+			}
 		}
-
-
-		$propertyManager = \Aimeos\MShop\Factory::createManager( $context, 'product/property' );
-		$search = $propertyManager->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'product.property.parentid', array_keys( $prodIds ) ),
-			$search->compare( '==', 'product.property.type.code', 'package-weight' ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff ); // if more than 100 products are in the basket
-
-		foreach( $propertyManager->searchItems( $search ) as $property ) {
-			$weight += ((float) $property->getValue()) * $prodMap[$prodIds[$property->getParentId()]];
-		}
-
 
 		return (double) $weight;
 	}

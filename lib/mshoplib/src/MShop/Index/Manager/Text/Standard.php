@@ -951,13 +951,12 @@ class Standard
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $domain );
 
-		$search = $manager->createSearch( true );
+		$search = $manager->createSearch( true )->setSlice( 0, count( $ids ) );
 		$expr = array(
 			$search->compare( '==', $domain . '.id', $ids ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
 
 		return $manager->searchItems( $search, array( 'text' ) );
 	}

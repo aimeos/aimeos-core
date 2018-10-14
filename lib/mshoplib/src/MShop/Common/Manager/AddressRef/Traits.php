@@ -35,9 +35,8 @@ trait Traits
 		{
 			$manager = $this->getObject()->getSubManager( 'address' );
 
-			$search = $manager->createSearch();
+			$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 			$search->setConditions( $search->compare( '==', $domain . '.address.parentid', $parentIds ) );
-			$search->setSlice( 0, 0x7fffffff );
 
 			foreach( $manager->searchItems( $search ) as $id => $addrItem ) {
 				$list[$addrItem->getParentId()][$id] = $addrItem;

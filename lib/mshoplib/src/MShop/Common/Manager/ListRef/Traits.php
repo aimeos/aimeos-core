@@ -86,7 +86,7 @@ trait Traits
 	{
 		$manager = $this->getObject()->getSubManager( 'lists' );
 
-		$search = $manager->createSearch();
+		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 
 		$expr = [ $search->compare( '==', $prefix . '.lists.parentid', $ids ) ];
 
@@ -95,7 +95,6 @@ trait Traits
 		}
 
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
 
 		return $manager->searchItems( $search );
 	}
@@ -118,9 +117,8 @@ trait Traits
 			{
 				$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
 
-				$search = $manager->createSearch();
+				$search = $manager->createSearch()->setSlice( 0, count( $list ) );
 				$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
-				$search->setSlice( 0, 0x7fffffff );
 
 				foreach( $manager->searchItems( $search ) as $id => $item )
 				{
