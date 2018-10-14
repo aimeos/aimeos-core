@@ -190,6 +190,18 @@ abstract class Base
 
 
 	/**
+	 * Sends the details of all orders to the ERP system for further processing
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Iface[] $orders List of order invoice objects
+	 * @return null
+	 */
+	public function processBatch( array $orders )
+	{
+		return $this->object->processBatch( $orders );
+	}
+
+
+	/**
 	 * Refunds the money for the given order if supported.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Iface $order Order invoice object
