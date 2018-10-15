@@ -55,17 +55,24 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 
 		$productCodes = [];
+		$domains = ['attribute', 'media', 'price', 'text'];
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
-		$products = $manager->searchItems( $search, ['attribute', 'media', 'price', 'text'] );
+		$products = $manager->searchItems( $search, $domains );
 
-		foreach( $products as $item ) {
-			$item->deleteListItems( $item->getListItems(), true );
+		foreach( $domains as $domain )
+		{
+			$rmIds = [];
+
+			foreach( $products as $item ) {
+				$rmIds = array_merge( $rmIds, array_keys( $item->getRefItems( $domain, null, null, false ) ) );
+			}
+
+			\Aimeos\MShop\Factory::createManager( $context, $domain )->deleteItems( $rmIds );
 		}
 
-		$manager->saveItems( $products );
 		$manager->deleteItems( array_keys( $products ) );
 		$this->removeStockItems();
 
