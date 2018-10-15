@@ -63,9 +63,11 @@ trait Traits
 	 */
 	public function addListItem( $domain, \Aimeos\MShop\Common\Item\Lists\Iface $listItem, \Aimeos\MShop\Common\Item\Iface $refItem = null )
 	{
+		$num = $this->listMax++;
+
 		if( $refItem !== null )
 		{
-			$id = $refItem->getId() ?: '#' . $this->listMax;
+			$id = $refItem->getId() ?: '#' . $num;
 			$listItem->setRefId( $id );
 
 			if( $refItem instanceof \Aimeos\MShop\Common\Item\Domain\Iface ) {
@@ -75,7 +77,7 @@ trait Traits
 			$this->listRefItems[$domain][$id] = $refItem;
 		}
 
-		$id = $listItem->getId() ?: '_' . $this->listMax++;
+		$id = $listItem->getId() ?: '_' . $num;
 		$this->listItems[$domain][$id] = $listItem->setDomain( $domain )->setRefItem( $refItem );
 
 		return $this;
@@ -320,6 +322,10 @@ trait Traits
 	{
 		$this->listItems = $listItems;
 		$this->listRefItems = $refItems;
+
+		foreach( $listItems as $list ) {
+			$this->listMax += count( $list );
+		}
 	}
 
 
