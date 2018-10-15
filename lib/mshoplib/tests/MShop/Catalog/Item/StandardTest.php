@@ -19,8 +19,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$listValues = array( 'id' => 1, 'type' => 'default', 'domain' => 'text' );
-		$this->listItems = array( 1 => new \Aimeos\MShop\Common\Item\Lists\Standard( 'catalog.lists.', $listValues ) );
+		$listValues = ['id' => 1, 'type' => 'default', 'domain' => 'text'];
+		$this->listItems = ['text' => [1 => new \Aimeos\MShop\Common\Item\Lists\Standard( 'catalog.lists.', $listValues )]];
 
 		$this->values = array(
 			'id' => 2,
@@ -28,7 +28,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'level' => 1,
 			'code' => 'unit-test',
 			'label' => 'unittest',
-			'config' => array( 'testcategory' => '10' ),
+			'config' => ['testcategory' => '10'],
 			'status' => 1,
 			'siteid' => '99',
 			'mtime' => '2011-01-01 00:00:02',
