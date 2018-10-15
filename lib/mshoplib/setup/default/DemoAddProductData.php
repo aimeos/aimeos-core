@@ -55,18 +55,26 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 
 		$productCodes = [];
+		$domains = ['media', 'price', 'text'];
 		$manager = \Aimeos\MShop\Factory::createManager( $context, 'product' );
 
 		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'product.code', 'demo-' ) );
-		$products = $manager->searchItems( $search, ['attribute', 'media', 'price', 'text'] );
+		$products = $manager->searchItems( $search, $domains );
 
-		foreach( $products as $item ) {
-			$item->deleteListItems( $item->getListItems(), true );
+		foreach( $domains as $domain )
+		{
+			$rmIds = [];
+
+			foreach( $products as $item ) {
+				$rmIds = array_merge( $rmIds, array_keys( $item->getRefItems( $domain, null, null, false ) ) );
+			}
+
+			\Aimeos\MShop\Factory::createManager( $context, $domain )->deleteItems( $rmIds );
 		}
 
-		$manager->saveItems( $products );
 		$manager->deleteItems( array_keys( $products ) );
+		$this->removeAttributeItems();
 		$this->removeStockItems();
 
 
@@ -238,15 +246,29 @@ class DemoAddProductData extends \Aimeos\MW\Setup\Task\MShopAddDataAbstract
 
 
 	/**
-	 * Deletes the stock items that belong to the given product codes
+	 * Deletes the demo attribute items
+	 */
+	protected function removeAttributeItems()
+	{
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'attribute' );
+
+		$search = $manager->createSearch();
+		$search->setConditions( $search->compare( '=~', 'attribute.label', 'Demo:' ) );
+
+		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
+	}
+
+
+	/**
+	 * Deletes the demo stock items
 	 */
 	protected function removeStockItems()
 	{
-		$stockManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock' );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'stock' );
 
-		$search = $stockManager->createSearch();
+		$search = $manager->createSearch();
 		$search->setConditions( $search->compare( '=~', 'stock.productcode', 'demo-' ) );
 
-		$stockManager->deleteItems( array_keys( $stockManager->searchItems( $search ) ) );
+		$manager->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 	}
 }
