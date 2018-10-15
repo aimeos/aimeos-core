@@ -102,8 +102,8 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->object->addListItem( 'test', $this->listItem1->setId( null ), $this->textItem1->setId( null ) );
 
-		$this->assertEquals( ['_0' => $this->listItem1], $this->object->getListItems( 'test' ) );
-		$this->assertEquals( ['#0' => $this->textItem1], $this->object->getRefItems( 'test' ) );
+		$this->assertEquals( ['_2' => $this->listItem1], $this->object->getListItems( 'test' ) );
+		$this->assertEquals( ['#2' => $this->textItem1], $this->object->getRefItems( 'test' ) );
 	}
 
 
