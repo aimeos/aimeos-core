@@ -99,19 +99,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetMultipleByTags()
-	{
-		$this->mock->expects( $this->once() )->method( 'getMultipleByTags' )
-			->with( $this->equalTo( array( 'tag1', 'tag2' ) ) )
-			->will( $this->returnValue( array( 't:1' => 'test1', 't:2' => 'test2' ) ) );
-
-		$expected = array( 't:1' => 'test1', 't:2' => 'test2' );
-		$result = $this->object->getMultipleByTags( array( 'tag1', 'tag2' ) );
-
-		$this->assertEquals( $expected, $result );
-	}
-
-
 	public function testSet()
 	{
 		$this->mock->expects( $this->once() )->method( 'set' )

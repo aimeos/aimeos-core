@@ -128,21 +128,6 @@ class Standard
 
 
 	/**
-	 * Returns the cached keys and values associated to the given tags if available.
-	 *
-	 * @param string[] $tags List of tag strings associated to the requested cache entries
-	 * @return array Associative list of key/value pairs for the requested cache
-	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
-	 * 	for that tag
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
-	 */
-	public function getMultipleByTags( array $tags )
-	{
-		return $this->getObject()->getMultipleByTags( $tags );
-	}
-
-
-	/**
 	 * Sets the value for the given key in the cache.
 	 *
 	 * @param string $key Key string for the given value like product/id/123
