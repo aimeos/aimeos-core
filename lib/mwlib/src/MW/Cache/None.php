@@ -104,20 +104,6 @@ class None
 
 
 	/**
-	 * Returns the cached keys and values associated to the given tags.
-	 *
-	 * @param array $tags List of tag strings associated to the requested cache entries
-	 * @return array Associative list of key/value pairs for the requested cache
-	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
-	 * 	for that tag
-	 */
-	public function getMultipleByTags( array $tags )
-	{
-		return [];
-	}
-
-
-	/**
 	 * Sets the value for the specified key.
 	 *
 	 * @param string $key Key string for the given value like product/id/123

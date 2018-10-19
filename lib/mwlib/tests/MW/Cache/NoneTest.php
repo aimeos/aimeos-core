@@ -62,12 +62,6 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetMultipleByTags()
-	{
-		$this->assertEquals( [], $this->object->getMultipleByTags( array( 'test' ) ) );
-	}
-
-
 	public function testSet()
 	{
 		$this->object->set( 'test', 'testval' );

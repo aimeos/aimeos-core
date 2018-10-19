@@ -291,12 +291,6 @@ class DBTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetMultipleByTags()
-	{
-		$this->assertEquals( array( 't:1' => 'test 1' ), $this->object->getMultipleByTags( array( 'tag:1' ) ) );
-	}
-
-
 	public function testSet()
 	{
 		$this->object->set( 't:3', 'test 3', '2100-01-01 00:00:00', array( 'tag:2', 'tag:3' ) );

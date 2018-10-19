@@ -277,58 +277,6 @@ class DB
 
 
 	/**
-	 * Returns the cached keys and values associated to the given tags if available.
-	 *
-	 * @param string[] $tags List of tag strings associated to the requested cache entries
-	 * @return array Associative list of key/value pairs for the requested cache
-	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
-	 * 	for that tag
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
-	 */
-	public function getMultipleByTags( array $tags )
-	{
-		$list = [];
-		$conn = $this->dbm->acquire( $this->dbname );
-
-		try
-		{
-			$search = new \Aimeos\MW\Criteria\SQL( $conn );
-			$expires = array(
-				$search->compare( '>', 'cache.expire', date( 'Y-m-d H:i:00' ) ),
-				$search->compare( '==', 'cache.expire', null ),
-			);
-			$expr = array(
-				$search->compare( '==', 'cache.tag.name', $tags ),
-				$search->combine( '||', $expires ),
-			);
-			$search->setConditions( $search->combine( '&&', $expr ) );
-
-			$types = $this->getSearchTypes( $this->searchConfig );
-			$translations = $this->getSearchTranslations( $this->searchConfig );
-			$conditions = $search->getConditionString( $types, $translations );
-
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['getbytag'] ) );
-			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$result = $stmt->execute();
-
-			while( ( $row = $result->fetch() ) !== false ) {
-				$list[ $row['id'] ] = $row['value'];
-			}
-
-			$this->dbm->release( $conn, $this->dbname );
-		}
-		catch( \Exception $e )
-		{
-			$this->dbm->release( $conn, $this->dbname );
-			throw $e;
-		}
-
-		return $list;
-	}
-
-
-	/**
 	 * Adds or overwrites the given key/value pairs in the cache, which is much
 	 * more efficient than setting them one by one using the set() method.
 	 *

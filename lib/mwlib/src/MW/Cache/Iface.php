@@ -225,46 +225,6 @@ interface Iface
 
 
 	/**
-	 * Returns the cached keys and values associated to the given tags if available.
-	 *
-	 * To retrieve all entries from the cache that are tagged by one or more
-	 * tags, getListByTags() can be used:
-	 *
-	 * <code>
-	 * $cache->set( 'product/id/100', '<string for 100>', array( 'text/id/1' ) );
-	 * $cache->set( 'product/id/101', '<string for 101>', array( 'text/id/2' ) );
-	 *
-	 * $tags = array(
-	 * 	'text/id/1',
-	 * 	'text/id/2',
-	 * );
-	 * $result = $cache->getListByTags( $tags );
-	 *
-	 * // content of $result:
-	 * array(
-	 * 	'product/id/100' => '<cached string for product/id/100>',
-	 * 	'product/id/101' => '<cached string for product/id/101>',
-	 * );
-	 * </code>
-	 *
-	 * The result is an associative array of the keys used in the first parameter
-	 * of set() and the strings stored in the cache for these keys. If one of
-	 * the tags is not associated to an entry in the cache, nothing is returned
-	 * for this tag. Also, no error or warning is returned in this case. If no
-	 * entries are found for all given tags, an empty array is returned. When
-	 * several given tags are associated to one key, the key and its cached
-	 * value is only returned once in the array.
-	 *
-	 * @param string[] $tags List of tag strings associated to the requested cache entries
-	 * @return array Associative list of key/value pairs for the requested cache
-	 * 	entries. If a tag isn't associated to any cache entry, nothing is returned
-	 * 	for that tag
-	 * @throws \Aimeos\MW\Cache\Exception If the cache server doesn't respond
-	 */
-	public function getMultipleByTags( array $tags );
-
-
-	/**
 	 * Sets the value for the given key in the cache.
 	 *
 	 * Adding or overwriting a single cache entry can be done by calling the
