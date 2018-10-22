@@ -904,7 +904,7 @@ class Standard
 		$msg = [
 			'time' => ( microtime( true ) - $time ) * 1000,
 			'class' => get_class( $this ),
-			'stmt' => $stmt,
+			'stmt' => (string) $stmt,
 		];
 		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 

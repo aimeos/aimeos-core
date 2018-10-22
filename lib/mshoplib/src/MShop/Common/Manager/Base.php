@@ -373,7 +373,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$msg = [
 			'time' => ( microtime( true ) - $time ) * 1000,
 			'class' => get_class( $this ),
-			'stmt' => $stmt,
+			'stmt' => (string) $stmt,
 		];
 		$this->context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
