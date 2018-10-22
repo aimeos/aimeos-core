@@ -76,7 +76,7 @@ class Standard
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',
 			'internalcode' => ':site AND mindca."catid" IN ( $2 ) AND mindca."listtype" = $1 AND mindca."pos"',
-			'label' => 'Product position in category, parameter(<list type code>,<category IDs>)',
+			'label' => 'Product position in category, parameter(<list type code>,<category IDs>[,<start>,<end>])',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -84,7 +84,7 @@ class Standard
 		'sort:index.catalog:position' => array(
 			'code' => 'sort:index.catalog:position()',
 			'internalcode' => 'mindca."pos"',
-			'label' => 'Sort product position in category, parameter(<list type code>,<category IDs>)',
+			'label' => 'Sort product position in category, parameter(<list type code>,<category IDs>[,<start>,<end>])',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
