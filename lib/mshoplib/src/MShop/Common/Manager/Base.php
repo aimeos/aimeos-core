@@ -357,6 +357,31 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 
 
 	/**
+	 * Returns the search results for the given SQL statement.
+	 *
+	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
+	 * @param string $sql SQL statement
+	 * @return \Aimeos\MW\DB\Result\Iface Search result object
+	 */
+	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
+	{
+		$time = microtime( true );
+
+		$stmt = $conn->create( $sql );
+		$result = $stmt->execute();
+
+		$msg = [
+			'time' => ( microtime( true ) - $time ) * 1000,
+			'class' => get_class( $this ),
+			'stmt' => $stmt,
+		];
+		$this->context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
+
+		return $result;
+	}
+
+
+	/**
 	 * Returns the site IDs for the given site level constant.
 	 *
 	 * @param integer $sitelevel Site level constant from \Aimeos\MShop\Locale\Manager\Base
@@ -742,14 +767,9 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 			$sql = new \Aimeos\MW\Template\SQL( $this->getSqlConfig( $cfgPathCount ) );
 			$sql->replace( $find, $replace )->enable( $keys );
 
-			$time = microtime( true );
-			$stmt = $conn->create( $sql->str() );
-			$results = $stmt->execute();
-			$row = $results->fetch();
-			$results->finish();
-
-			$msg = get_class( $this ) . ' (' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL = ' . $stmt;
-			$this->context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
+			$result = $this->getSearchResults( $conn, $sql->str() );
+			$row = $result->fetch();
+			$result->finish();
 
 			if( $row === false ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Total results value not found' ) );
@@ -762,14 +782,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 		$sql = new \Aimeos\MW\Template\SQL( $this->getSqlConfig( $cfgPathSearch ) );
 		$sql->replace( $find, $replace )->enable( $keys );
 
-		$time = microtime( true );
-		$stmt = $conn->create( $sql->str() );
-		$results = $stmt->execute();
-
-		$msg = get_class( $this ) . ' (' . ( ( microtime( true ) - $time ) * 1000 ) . 'ms): SQL = ' . $stmt;
-		$this->context->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
-
-		return $results;
+		return $this->getSearchResults( $conn, $sql->str() );
 	}
 
 

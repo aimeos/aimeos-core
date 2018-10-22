@@ -891,19 +891,24 @@ class Standard
 	 * Returns the search results for the given SQL statement.
 	 *
 	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param $sql SQL statement
+	 * @param string $sql SQL statement
 	 * @return \Aimeos\MW\DB\Result\Iface Search result object
 	 */
 	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
 	{
-		$statement = $conn->create( $sql );
-		$level = \Aimeos\MW\Logger\Base::DEBUG;
+		$time = microtime( true );
 
-		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, $level, 'core/sql' );
+		$stmt = $conn->create( $sql );
+		$result = $stmt->execute();
 
-		$results = $statement->execute();
+		$msg = [
+			'time' => ( microtime( true ) - $time ) * 1000,
+			'class' => get_class( $this ),
+			'stmt' => $stmt,
+		];
+		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
-		return $results;
+		return $result;
 	}
 
 

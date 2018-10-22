@@ -693,12 +693,19 @@ class Standard
 	 */
 	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
 	{
+		$time = microtime( true );
+
 		$stmt = $conn->create( $sql );
-		$level = \Aimeos\MW\Logger\Base::DEBUG;
+		$result = $stmt->execute();
 
-		$this->getContext()->getLogger()->log( __METHOD__ . ': SQL statement: ' . $stmt, $level, 'core/sql' );
+		$msg = [
+			'time' => ( microtime( true ) - $time ) * 1000,
+			'class' => get_class( $this ),
+			'stmt' => $stmt,
+		];
+		$this->getContext()->getLogger()->log( $msg, \Aimeos\MW\Logger\Base::DEBUG, 'core/sql' );
 
-		return $stmt->execute();
+		return $result;
 	}
 
 

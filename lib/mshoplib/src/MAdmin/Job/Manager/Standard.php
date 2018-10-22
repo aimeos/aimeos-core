@@ -635,25 +635,4 @@ class Standard
 	{
 		return new \Aimeos\MAdmin\Job\Item\Standard( $values );
 	}
-
-
-	/**
-	 * Returns the search result object for the given SQL statement.
-	 *
-	 * @param \Aimeos\MW\DB\Connection\Iface $conn Database connection
-	 * @param string $sql SQL-statement to execute
-	 * @return \Aimeos\MW\DB\Result\Iface Returns db result set from given sql statment
-	 */
-	protected function getSearchResults( \Aimeos\MW\DB\Connection\Iface $conn, $sql )
-	{
-		$context = $this->getContext();
-		$siteId = $context->getLocale()->getSiteId();
-
-		$statement = $conn->create( $sql );
-		$statement->bind( 1, $siteId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-
-		$context->getLogger()->log( __METHOD__ . ': SQL statement: ' . $statement, \Aimeos\MW\Logger\Base::DEBUG );
-
-		return $statement->execute();
-	}
 }
