@@ -44,7 +44,7 @@ trait Traits
 	{
 		$items = $listItemMap = $refItemMap = $refIdMap = [];
 
-		if( $domains === null || count( $domains ) > 0 )
+		if( $domains === null || !empty( $domains ) )
 		{
 			$listItems = $this->getListItems( array_keys( $map ), $domains, $prefix );
 
@@ -57,7 +57,7 @@ trait Traits
 				$refIdMap[$domain][$listItem->getRefId()][] = $parentid;
 			}
 
-			$refItemMap = $this->getRefItems( $refIdMap );
+			$refItemMap = $this->getRefItems( $refIdMap, $domains );
 		}
 
 		foreach( $map as $id => $values )
@@ -104,34 +104,25 @@ trait Traits
 	 * Returns the referenced items for the given IDs.
 	 *
 	 * @param array $refIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
+	 * @param array|null $domains List of domain names whose referenced items should be attached or null for all
 	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
 	 */
-	protected function getRefItems( array $refIdMap )
+	protected function getRefItems( array $refIdMap, $domains = [] )
 	{
 		$items = [];
-		$context = $this->getContext();
 
 		foreach( $refIdMap as $domain => $list )
 		{
-			try
+			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $domain );
+
+			$search = $manager->createSearch()->setSlice( 0, count( $list ) );
+			$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
+
+			foreach( $manager->searchItems( $search, $domains ?: [] ) as $id => $item )
 			{
-				$manager = \Aimeos\MShop\Factory::createManager( $context, $domain );
-
-				$search = $manager->createSearch()->setSlice( 0, count( $list ) );
-				$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
-
-				foreach( $manager->searchItems( $search ) as $id => $item )
-				{
-					foreach( $list[$id] as $parentId ) {
-						$items[$parentId][$domain][$id] = $item;
-					}
+				foreach( $list[$id] as $parentId ) {
+					$items[$parentId][$domain][$id] = $item;
 				}
-			}
-			catch( \Aimeos\MShop\Exception $e )
-			{
-				$logger = $context->getLogger();
-				$logger->log( sprintf( 'Item referenced in domain "%1$s" not found: %2$s', $domain, $e->getMessage() ) );
-				$logger->log( $e->getTraceAsString() );
 			}
 		}
 

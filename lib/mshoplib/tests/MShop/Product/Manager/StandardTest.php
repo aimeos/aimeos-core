@@ -88,6 +88,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testFindItemDeep()
+	{
+		$item = $this->object->findItem( 'CNE', ['attribute', 'product'] );
+		$products = $item->getRefItems( 'product' );
+		$product = reset( $products );
+
+		$this->assertEquals( 4, count( $products ) );
+		$this->assertNotEquals( false, $product );
+		$this->assertEquals( 'CNC', $product->getCode() );
+		$this->assertEquals( 1, count( $product->getRefItems( 'attribute' ) ) );
+	}
+
+
 	public function testGetItem()
 	{
 		$domains = array( 'text', 'product', 'price', 'media', 'attribute', 'product/property' );
