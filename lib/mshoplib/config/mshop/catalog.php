@@ -210,7 +210,6 @@ return array(
 						mcat."siteid", mcat."nleft", mcat."nright",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
 					ORDER BY mcat."nleft"
-					FOR UPDATE
 				'
 			),
 			'insert' => array(
@@ -279,7 +278,6 @@ return array(
 						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
 						mcat."ctime", mcat."target"
 					ORDER BY :order
-					FOR UPDATE
 				'
 			),
 			'search-item' => array(
@@ -298,7 +296,6 @@ return array(
 						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
-					FOR UPDATE
 				'
 			),
 			'count' => array(
