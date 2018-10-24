@@ -277,6 +277,7 @@ class Standard extends Base
 	 */
 	public function deleteItem( $id )
 	{
+		$this->begin();
 		$this->lock();
 
 		try
@@ -284,10 +285,12 @@ class Standard extends Base
 			$siteid = $this->getContext()->getLocale()->getSiteId();
 			$this->createTreeManager( $siteid )->deleteNode( $id );
 			$this->unlock();
+			$this->commit();
 		}
 		catch( \Exception $e )
 		{
 			$this->unlock();
+			$this->rollback();
 			throw $e;
 		}
 	}
@@ -392,6 +395,7 @@ class Standard extends Base
 	 */
 	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
 	{
+		$this->begin();
 		$this->lock();
 
 		try
@@ -402,10 +406,12 @@ class Standard extends Base
 			$this->createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 			$this->updateUsage( $node->getId(), $item, true );
 			$this->unlock();
+			$this->commit();
 		}
 		catch( \Exception $e )
 		{
 			$this->unlock();
+			$this->rollback();
 			throw $e;
 		}
 
@@ -424,6 +430,7 @@ class Standard extends Base
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
+		$this->begin();
 		$this->lock();
 
 		try
@@ -434,10 +441,12 @@ class Standard extends Base
 			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
 			$this->updateUsage( $id, $item );
 			$this->unlock();
+			$this->commit();
 		}
 		catch( \Exception $e )
 		{
 			$this->unlock();
+			$this->rollback();
 			throw $e;
 		}
 	}
