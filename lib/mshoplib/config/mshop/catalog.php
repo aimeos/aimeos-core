@@ -323,7 +323,7 @@ return array(
 				'db2' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 				'mysql' => 'LOCK TABLE "mshop_catalog" WRITE, "mshop_catalog" AS mcat WRITE, "mshop_catalog" AS parent WRITE',
 				'oracle' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
-				'pgsql' => 'LOCK TABLE ONLY "mshop_catalog" ACCESS EXCLUSIVE',
+				'pgsql' => 'LOCK TABLE ONLY "mshop_catalog" IN ACCESS EXCLUSIVE MODE',
 				'sqlanywhere' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 			),
 			'unlock' => array(
