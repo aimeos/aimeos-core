@@ -319,6 +319,16 @@ return array(
 				'sqlsrv' => 'SELECT SCOPE_IDENTITY()',
 				'sqlanywhere' => 'SELECT @@IDENTITY',
 			),
+			'lock' => array(
+				'db2' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
+				'mysql' => 'LOCK TABLE "mshop_catalog" WRITE, "mshop_catalog" AS mcat WRITE, "mshop_catalog" AS parent WRITE',
+				'oracle' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
+				'pgsql' => 'LOCK TABLE ONLY "mshop_catalog" ACCESS EXCLUSIVE',
+				'sqlanywhere' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
+			),
+			'unlock' => array(
+				'mysql' => 'UNLOCK TABLES',
+			),
 		),
 	),
 );
