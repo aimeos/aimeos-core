@@ -827,7 +827,9 @@ class Standard extends Base
 	 */
 	protected function lock()
 	{
-		if( ( $sql = $this->getSqlConfig( 'mshop/catalog/manager/standard/lock' ) ) !== null )
+		$path = 'mshop/catalog/manager/standard/lock';
+
+		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
 			$dbname = $this->getResourceName();
 			$dbm = $this->getContext()->getDatabaseManager();
@@ -844,7 +846,9 @@ class Standard extends Base
 	 */
 	protected function unlock()
 	{
-		if( ( $sql = $this->getSqlConfig( 'mshop/catalog/manager/standard/unlock' ) ) !== null )
+		$path = 'mshop/catalog/manager/standard/unlock';
+
+		if( ( $sql = $this->getSqlConfig( $path ) ) !== $path )
 		{
 			$dbname = $this->getResourceName();
 			$dbm = $this->getContext()->getDatabaseManager();
