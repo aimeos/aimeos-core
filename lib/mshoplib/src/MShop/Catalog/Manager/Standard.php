@@ -277,23 +277,18 @@ class Standard extends Base
 	 */
 	public function deleteItem( $id )
 	{
-		$siteid = $this->getContext()->getLocale()->getSiteId();
-		$this->begin();
+		$this->lock();
 
 		try
 		{
+			$siteid = $this->getContext()->getLocale()->getSiteId();
 			$this->createTreeManager( $siteid )->deleteNode( $id );
-			$this->commit();
+			$this->unlock();
 		}
 		catch( \Exception $e )
 		{
-			$this->rollback();
-
-			if( $e->getCode() == 40001 ) {
-				$this->deleteItem( $id );
-			} else {
-				throw $e;
-			}
+			$this->unlock();
+			throw $e;
 		}
 	}
 
@@ -397,25 +392,21 @@ class Standard extends Base
 	 */
 	public function insertItem( \Aimeos\MShop\Catalog\Item\Iface $item, $parentId = null, $refId = null )
 	{
-		$siteid = $this->getContext()->getLocale()->getSiteId();
-		$node = $item->getNode();
-		$this->begin();
+		$this->lock();
 
 		try
 		{
+			$node = $item->getNode();
+			$siteid = $this->getContext()->getLocale()->getSiteId();
+
 			$this->createTreeManager( $siteid )->insertNode( $node, $parentId, $refId );
 			$this->updateUsage( $node->getId(), $item, true );
-			$this->commit();
+			$this->unlock();
 		}
 		catch( \Exception $e )
 		{
-			$this->rollback();
-
-			if( $e->getCode() == 40001 ) {
-				$this->insertItem( $item, $parentId, $refId );
-			} else {
-				throw $e;
-			}
+			$this->unlock();
+			throw $e;
 		}
 
 		$item = $this->saveListItems( $item, 'catalog' );
@@ -433,26 +424,21 @@ class Standard extends Base
 	 */
 	public function moveItem( $id, $oldParentId, $newParentId, $refId = null )
 	{
-		$siteid = $this->getContext()->getLocale()->getSiteId();
-		$item = $this->getObject()->getItem( $id );
-
-		$this->begin();
+		$this->lock();
 
 		try
 		{
+			$item = $this->getObject()->getItem( $id );
+			$siteid = $this->getContext()->getLocale()->getSiteId();
+
 			$this->createTreeManager( $siteid )->moveNode( $id, $oldParentId, $newParentId, $refId );
 			$this->updateUsage( $id, $item );
-			$this->commit();
+			$this->unlock();
 		}
 		catch( \Exception $e )
 		{
-			$this->rollback();
-
-			if( $e->getCode() == 40001 ) {
-				$this->moveItem( $id, $oldParentId, $newParentId, $refId );
-			} else {
-				throw $e;
-			}
+			$this->unlock();
+			throw $e;
 		}
 	}
 
@@ -474,26 +460,11 @@ class Standard extends Base
 			return $this->saveChildren( $item );
 		}
 
-		$siteid = $this->getContext()->getLocale()->getSiteId();
 		$node = $item->getNode();
-		$this->begin();
+		$siteid = $this->getContext()->getLocale()->getSiteId();
 
-		try
-		{
-			$this->createTreeManager( $siteid )->saveNode( $node );
-			$this->updateUsage( $node->getId(), $item );
-			$this->commit();
-		}
-		catch( \Exception $e )
-		{
-			$this->rollback();
-
-			if( $e->getCode() == 40001 ) {
-				$this->saveItem( $item, $fetch );
-			} else {
-				throw $e;
-			}
-		}
+		$this->createTreeManager( $siteid )->saveNode( $node );
+		$this->updateUsage( $node->getId(), $item );
 
 		$item = $this->saveListItems( $item, 'catalog', $fetch );
 		return $this->saveChildren( $item );
@@ -848,6 +819,40 @@ class Standard extends Base
 		}
 
 		return $item;
+	}
+
+
+	/**
+	 * Locks the catalog table against modifications from other connections
+	 */
+	protected function lock()
+	{
+		if( ( $sql = $this->getSqlConfig( 'mshop/catalog/manager/standard/lock' ) ) !== null )
+		{
+			$dbname = $this->getResourceName();
+			$dbm = $this->getContext()->getDatabaseManager();
+
+			$conn = $dbm->acquire( $dbname );
+			$conn->create( $sql )->execute()->finish();
+			$dbm->release( $conn, $dbname );
+		}
+	}
+
+
+	/**
+	 * Unlocks the catalog table for modifications from other connections
+	 */
+	protected function unlock()
+	{
+		if( ( $sql = $this->getSqlConfig( 'mshop/catalog/manager/standard/unlock' ) ) !== null )
+		{
+			$dbname = $this->getResourceName();
+			$dbm = $this->getContext()->getDatabaseManager();
+
+			$conn = $dbm->acquire( $dbname );
+			$conn->create( $sql )->execute()->finish();
+			$dbm->release( $conn, $dbname );
+		}
 	}
 
 
