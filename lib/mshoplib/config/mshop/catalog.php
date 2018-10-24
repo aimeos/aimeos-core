@@ -210,6 +210,7 @@ return array(
 						mcat."siteid", mcat."nleft", mcat."nright",
 						mcat."mtime", mcat."editor", mcat."ctime", mcat."target"
 					ORDER BY mcat."nleft"
+					FOR UPDATE
 				'
 			),
 			'insert' => array(
@@ -278,6 +279,7 @@ return array(
 						mcat."nleft", mcat."nright", mcat."mtime", mcat."editor",
 						mcat."ctime", mcat."target"
 					ORDER BY :order
+					FOR UPDATE
 				'
 			),
 			'search-item' => array(
@@ -296,6 +298,7 @@ return array(
 						/*-columns*/ , :columns /*columns-*/
 					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
+					FOR UPDATE
 				'
 			),
 			'count' => array(
@@ -323,7 +326,7 @@ return array(
 				'db2' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 				'mysql' => 'LOCK TABLE "mshop_catalog" WRITE, "mshop_catalog" AS mcat WRITE, "mshop_catalog" AS parent WRITE',
 				'oracle' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
-				'pgsql' => 'LOCK TABLE ONLY "mshop_catalog" IN ACCESS EXCLUSIVE MODE',
+				'pgsql' => 'LOCK TABLE ONLY "mshop_catalog" IN EXCLUSIVE MODE',
 				'sqlanywhere' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 			),
 			'unlock' => array(
