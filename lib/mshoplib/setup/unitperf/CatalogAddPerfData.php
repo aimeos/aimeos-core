@@ -69,32 +69,32 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding catalog performance data', 0 ); $this->status( '' );
 
 
-		$fcn = function( array $parents, $catParentId, $numCatPerLevel, $catIdx ) {
+		$fcn = function( array $parents, $catParentId, $numCatPerLevel, $catLabel, $catIdx ) {
 
 			\Aimeos\MShop\Factory::clear();
 
-			$treeFcn = function( array $parents, $catParentId, $catIdx, $level ) use ( &$treeFcn, $numCatPerLevel ) {
+			$treeFcn = function( array $parents, $catParentId, $catLabel, $level, $catIdx ) use ( &$treeFcn, $numCatPerLevel ) {
 
-				$catItem = $this->addCatalogItem( $catParentId, $catIdx );
+				$catItem = $this->addCatalogItem( $catParentId, $catLabel, $catIdx );
 				array_unshift( $parents, $catItem );
 
 				if( $level > 0 )
 				{
 					for( $i = 0; $i < $numCatPerLevel; $i++ ) {
-						$treeFcn( $parents, $catItem->getId(), $catIdx . '/' . $i, $level - 1 );
+						$treeFcn( $parents, $catItem->getId(), $catLabel . '/' . ($i+1), $level - 1, $i );
 					}
 				}
 				else
 				{
-					$this->addProductItems( $parents, $catIdx );
+					$this->addProductItems( $parents, $catLabel );
 				}
 
 				$this->save( 'catalog', $catItem );
 			};
 
-			$treeFcn( $parents, $catParentId, $catIdx, $this->numCatLevels - 1 );
+			$treeFcn( $parents, $catParentId, $catLabel, $this->numCatLevels - 1, $catIdx );
 
-			$this->msg( '- Subtree ' . $catIdx, 1, 'done' );
+			$this->msg( '- Subtree ' . $catLabel, 1, 'done' );
 		};
 
 
@@ -108,72 +108,70 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 1000 );
 
 		$process = $this->additional->getProcess();
-		$catalogRootItem = $this->addCatalogItem( null, 'home' );
+		$catalogRootItem = $this->addCatalogItem( null, 'home', 0 );
 
-		$numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) / 5 ) * 5;
+		$numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) );
 		$this->additional->__sleep();
 
-		for( $i = 1; $i <= round( $this->numCategories / pow( $numCatPerLevel, $this->numCatLevels - 1 ) ); $i++ ) {
-			$process->start( $fcn, [[$catalogRootItem], $catalogRootItem->getId(), $numCatPerLevel, $i] );
+		for( $i = 0; $i < round( $this->numCategories / pow( $numCatPerLevel, $this->numCatLevels - 1 ) ); $i++ ) {
+			$process->start( $fcn, [[$catalogRootItem], $catalogRootItem->getId(), $numCatPerLevel, $i+1, $i] );
 		}
 
 		$process->wait();
 	}
 
 
-	protected function addCatalogItem( $parentId, $catIdx )
+	protected function addCatalogItem( $parentId, $catLabel, $catIdx )
 	{
 		$catalogManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog' );
 
 		$item = $catalogManager->createItem()
-			->setLabel( 'category-' . $catIdx )
-			->setCode( 'cat-' . $catIdx )
+			->setLabel( 'category-' . $catLabel )
+			->setCode( 'cat-' . $catLabel )
 			->setStatus( 1 );
+		$item->pos = $catIdx;
 
-		$item = $this->addCatalogTexts( $item, $catIdx );
+		$item = $this->addCatalogTexts( $item, $catLabel );
 		$item = $catalogManager->insertItem( $item, $parentId );
 
 		return $item;
 	}
 
 
-	protected function addCatalogProducts( array $catItems, array $items )
+	protected function addCatalogProducts( array $catItems, array $items, $num )
 	{
 		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
-
-		$promoListItem = $catalogListManager->createItem( 'promotion', 'product' );
 		$defListItem = $catalogListManager->createItem( 'default', 'product' );
-
-		$promo = round( $this->numCatProducts / 10 ) ?: 1;
+		$start = 0;
 
 		foreach( $catItems as $idx => $catItem )
 		{
 			$catItem = clone $catItem; // forget stored product references afterwards
+			$fraction = pow( 10, $idx );
 
-			foreach( $items as $i => $item )
+			foreach( $items as $item )
 			{
-				if( $i % pow( 10, $idx ) === 0 ) {
-					$catItem->addListItem( 'product', (clone $defListItem)->setRefId( $item->getId() ) );
-				}
-
-				if( ($i + $idx) % $promo === 0 ) {
-					$catItem->addListItem( 'product', (clone $promoListItem)->setRefId( $item->getId() ) );
+				if( $item->pos % $fraction === 0 )
+				{
+					$litem = (clone $defListItem)->setRefId( $item->getId() )->setPosition( $start + round( $item->pos / $fraction ) );
+					$catItem->addListItem( 'product', $litem );
 				}
 			}
 
+			$start += $num * $catItem->pos * round( count( $items ) / pow( 10, $idx + 1 ) );
 			$this->save( 'catalog', $catItem );
 		}
 	}
 
 
-	protected function addCatalogTexts( \Aimeos\MShop\Catalog\Item\Iface $catItem, $catIdx )
+	protected function addCatalogTexts( \Aimeos\MShop\Catalog\Item\Iface $catItem, $catLabel )
 	{
 		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
 
 		$textItem = $textManager->createItem( 'name', 'product' )
-			->setContent( 'Category ' . $catIdx )
-			->setLabel( 'cat-' . $catIdx )
+			->setContent( 'Category ' . $catLabel )
+			->setLabel( 'cat-' . $catLabel )
 			->setLanguageId( 'en' )
 			->setStatus( 1 );
 
@@ -203,7 +201,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductItems( array $catItems = [], $catIdx )
+	protected function addProductItems( array $catItems = [], $catLabel )
 	{
 		$articles = $this->shuffle( [
 			'shirt', 'skirt', 'jacket', 'pants', 'socks', 'blouse', 'slip', 'sweater', 'dress', 'top',
@@ -226,23 +224,25 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$property = $this->shuffle( $this->attributes['property'] );
 		$material = $this->shuffle( $this->attributes['material'] );
 		$items = [];
+		$num = 1;
 
 		for( $i = 1; $i <= $this->numCatProducts; $i++ )
 		{
 			$text = key( $property ) . ' ' . key( $material ) . ' ' . current( $articles );
 
 			$item = (clone $newItem)
-				->setLabel( $text . ' (' . $catIdx . ')' )
-				->setCode( 'prod-' . $i . ':' . $catIdx )
+				->setLabel( $text . ' (' . $catLabel . ')' )
+				->setCode( 'prod-' . $i . ':' . $catLabel )
 				->setStatus( 1 );
 
 			$item = $this->addProductAttributes( $item, [current( $property ), current( $material )] );
-			$item = $this->addProductTexts( $item, $text, $catIdx );
+			$item = $this->addProductTexts( $item, $text, $catLabel );
 			$item = $this->addProductMedia( $item, $i );
 			$item = $this->addProductPrices( $item, $i );
 			$item = $this->addProductVariants( $item, $i );
 			$item = $this->addProductSuggestions( $item, $catItems );
 
+			$item->pos = $i - 1; // 0 based category position
 			$items[] = $item;
 
 			next( $articles );
@@ -263,14 +263,14 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			if( $i % $slice === 0 )
 			{
 				$productManager->saveItems( $items );
-				$this->addCatalogProducts( $catItems, $items );
+				$this->addCatalogProducts( $catItems, $items, $num++ );
 				$this->addStock( $items );
 				$items = [];
 			}
 		}
 
 		$productManager->saveItems( $items );
-		$this->addCatalogProducts( $catItems, $items );
+		$this->addCatalogProducts( $catItems, $items, $num++ );
 		$this->addStock( $items );
 
 		$productManager->commit();
@@ -363,7 +363,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductTexts( \Aimeos\MShop\Product\Item\Iface $prodItem, $label, $catIdx )
+	protected function addProductTexts( \Aimeos\MShop\Product\Item\Iface $prodItem, $label, $catLabel )
 	{
 		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 		$productListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'product/lists' );
@@ -371,8 +371,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$listItem = $productListManager->createItem( 'default', 'text' );
 
 		$textItem = $textManager->createItem( 'url', 'product' )
-			->setContent( str_replace( ' ', '_', $label ) . '_' . $catIdx )
-			->setLabel( $label . '(' . $catIdx . ')' )
+			->setContent( str_replace( ' ', '_', $label ) . '_' . $catLabel )
+			->setLabel( $label . '(' . $catLabel . ')' )
 			->setLanguageId( 'en' )
 			->setStatus( 1 );
 
