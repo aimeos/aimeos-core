@@ -66,35 +66,34 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		$this->msg( 'Adding catalog performance data', 0 ); $this->status( '' );
+		$this->msg( 'Adding catalog performance data', 0 );
 
 
-		$fcn = function( array $parents, $catParentId, $numCatPerLevel, $catLabel, $catIdx ) {
+		$treeFcn = function( array $parents, $catParentId, $numCatPerLevel, $level, $catLabel, $catIdx ) use ( &$treeFcn ) {
 
-			\Aimeos\MShop\Factory::clear();
+			$catItem = $this->addCatalogItem( $catParentId, $catLabel, $catIdx );
+			array_unshift( $parents, $catItem );
 
-			$treeFcn = function( array $parents, $catParentId, $catLabel, $level, $catIdx ) use ( &$treeFcn, $numCatPerLevel ) {
-
-				$catItem = $this->addCatalogItem( $catParentId, $catLabel, $catIdx );
-				array_unshift( $parents, $catItem );
-
-				if( $level > 0 )
-				{
-					for( $i = 0; $i < $numCatPerLevel; $i++ ) {
-						$treeFcn( $parents, $catItem->getId(), $catLabel . '/' . ($i+1), $level - 1, $i );
-					}
+			if( $level > 0 )
+			{
+				for( $i = 0; $i < $numCatPerLevel; $i++ ){
+					$treeFcn( $parents, $catItem->getId(), $numCatPerLevel, $level - 1, $catLabel . '/' . ($i+1), $i );
 				}
-				else
-				{
+			}
+			else
+			{
+				$fcn = function( array $parents, $catLabel ) {
+
 					$this->addProductItems( $parents, $catLabel );
-				}
 
-				$this->save( 'catalog', $catItem );
-			};
+					foreach( $parents as $catItem ) {
+						$this->save( 'catalog', $catItem );
+					}
+				};
 
-			$treeFcn( $parents, $catParentId, $catLabel, $this->numCatLevels - 1, $catIdx );
-
-			$this->msg( '- Subtree ' . $catLabel, 1, 'done' );
+				$this->additional->__sleep();
+				$this->additional->getProcess()->start( $fcn, [$parents, $catLabel] );
+			}
 		};
 
 
@@ -107,17 +106,15 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->numCatProducts = $config->get( 'setup/unitperf/num-catproducts', 100 );
 		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 1000 );
 
-		$process = $this->additional->getProcess();
-		$catalogRootItem = $this->addCatalogItem( null, 'home', 0 );
-
+		$catRootItem = $this->addCatalogItem( null, 'home', 0 );
 		$numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) );
-		$this->additional->__sleep();
 
-		for( $i = 0; $i < round( $this->numCategories / pow( $numCatPerLevel, $this->numCatLevels - 1 ) ); $i++ ) {
-			$process->start( $fcn, [[$catalogRootItem], $catalogRootItem->getId(), $numCatPerLevel, $i+1, $i] );
+		for( $i = 0; $i < $numCatPerLevel; $i++ ) {
+			$treeFcn( [$catRootItem], $catRootItem->getId(), $numCatPerLevel, $this->numCatLevels, $i+1, $i );
 		}
 
-		$process->wait();
+		$this->additional->getProcess()->wait();
+		$this->status( 'done' );
 	}
 
 
