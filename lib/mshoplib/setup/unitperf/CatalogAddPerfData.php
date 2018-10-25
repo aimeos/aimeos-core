@@ -198,7 +198,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductItems( array $catItems = [], $catLabel )
+	protected function addProductItems( array $catItems, $catLabel )
 	{
 		$articles = $this->shuffle( [
 			'shirt', 'skirt', 'jacket', 'pants', 'socks', 'blouse', 'slip', 'sweater', 'dress', 'top',
