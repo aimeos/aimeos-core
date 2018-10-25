@@ -232,7 +232,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$item = (clone $newItem)
 				->setLabel( $text . ' (' . $catLabel . ')' )
-				->setCode( 'prod-' . $i . ':' . $catLabel )
+				->setCode( 'p-' . $i . ':' . $catLabel )
 				->setStatus( 1 );
 
 			$item = $this->addProductAttributes( $item, [current( $property ), current( $material )] );
@@ -424,7 +424,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			$text = key( $length ) . ', ' . key( $width ) . ', ' . $prodItem->getLabel() . ' (' . key( $size ) . ')';
 
 			$item = (clone $newItem)
-				->setCode( 'variant-' . $idx . '/' . $i . ':' . $prodItem->getCode() )
+				->setCode( 'v-' . $idx . '/' . $i . ':' . $prodItem->getCode() )
 				->setLabel( $text )
 				->setStatus( 1 );
 
