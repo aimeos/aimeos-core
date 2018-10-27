@@ -110,7 +110,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) );
 
 		for( $i = 0; $i < $numCatPerLevel; $i++ ) {
-			$treeFcn( [$catRootItem], $catRootItem->getId(), $numCatPerLevel, $this->numCatLevels, $i+1, $i );
+			$treeFcn( [$catRootItem], $catRootItem->getId(), $numCatPerLevel, $this->numCatLevels - 1, $i+1, $i );
 		}
 
 		$this->additional->getProcess()->wait();
