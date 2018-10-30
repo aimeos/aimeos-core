@@ -284,16 +284,17 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$litem = $productListManager->createItem( 'default', 'media' );
 		$newItem = $mediaManager->createItem( 'default', 'product' );
 
-		foreach( $this->shuffle( range( 0, 3 ) ) as $i )
+		foreach( array_values( $this->shuffle( range( 0, 3 ) ) ) as $pos => $i )
 		{
+			$num = (($idx + $i) % 4) + 1;
 			$mediaItem = (clone $newItem)
-				->setLabel( ($i+1) . '. picture for ' . $prodItem->getLabel() )
-				->setPreview( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '.jpg' )
-				->setUrl( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '-big.jpg' )
+				->setLabel( ($pos+1) . '. picture for ' . $prodItem->getLabel() )
+				->setPreview( $prefix . 'unitperf/' . $num . '.jpg' )
+				->setUrl( $prefix . 'unitperf/' . $num . '-big.jpg' )
 				->setMimeType( 'image/jpeg' )
 				->setStatus( 1 );
 
-			$prodItem->addListItem( 'media', (clone $litem)->setPosition( $i ), $mediaItem );
+			$prodItem->addListItem( 'media', (clone $litem)->setPosition( $pos ), $mediaItem );
 		}
 
 		$mediaItem = (clone $newItem)
