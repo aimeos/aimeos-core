@@ -286,10 +286,11 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $this->shuffle( range( 0, 3 ) ) as $i )
 		{
+			$r = rand();
 			$mediaItem = (clone $newItem)
 				->setLabel( ($i+1) . '. picture for ' . $prodItem->getLabel() )
-				->setPreview( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '.jpg' )
-				->setUrl( $prefix . 'unitperf/' . ( ( $idx + $i ) % 4 + 1 ) . '-big.jpg' )
+				->setPreview( $prefix . 'unitperf/' . ( ( $idx + $i + $r ) % 4 + 1 ) . '.jpg' )
+				->setUrl( $prefix . 'unitperf/' . ( ( $idx + $i + $r ) % 4 + 1 ) . '-big.jpg' )
 				->setMimeType( 'image/jpeg' )
 				->setStatus( 1 );
 
