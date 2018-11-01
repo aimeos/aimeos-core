@@ -158,7 +158,7 @@ interface Iface
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
 	 * @param string|null $code Code of the service item that should be returned
-	 * @return \Aimeos\MShop\Order\Item\Base\Serive\Iface|\Aimeos\MShop\Order\Item\Base\Serive\Iface[]
+	 * @return \Aimeos\MShop\Order\Item\Base\Service\Iface|\Aimeos\MShop\Order\Item\Base\Service\Iface[]
 	 * 	Order service item or list of items for the requested type
 	 */
 	public function getService( $type, $code = null );
