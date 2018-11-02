@@ -77,7 +77,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			if( $level > 0 )
 			{
 				for( $i = 0; $i < $numCatPerLevel; $i++ ){
-					$treeFcn( $parents, $catItem->getId(), $numCatPerLevel, $level - 1, $catLabel . '/' . ($i+1), $i );
+					$treeFcn( $parents, $catItem->getId(), $numCatPerLevel, $level - 1, $catLabel . '-' . ($i+1), $i );
 				}
 			}
 			else
@@ -100,6 +100,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->init();
 
 		$config = $this->additional->getConfig();
+		$treeidx = (int) $config->get( 'setup/unitperf/treeindex' );
 		$this->maxBatch = $config->get( 'setup/unitperf/max-batch', 10000 );
 		$this->numCatLevels = $config->get( 'setup/unitperf/num-catlevels', 1 );
 		$this->numCategories = $config->get( 'setup/unitperf/num-categories', 10 );
@@ -107,9 +108,14 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 1000 );
 
 		$catRootItem = $this->addCatalogItem( null, 'home', 0 );
-		$numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) );
+		$end = $numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) );
+		$begin = 0;
 
-		for( $i = 0; $i < $numCatPerLevel; $i++ ) {
+		if( $treeidx !== null ) {
+			$begin = $treeidx; $end = $treeidx + 1;
+		}
+
+		for( $i = $begin; $i < $end; $i++ ) {
 			$treeFcn( [$catRootItem], $catRootItem->getId(), $numCatPerLevel, $this->numCatLevels - 1, $i+1, $i );
 		}
 
@@ -377,7 +383,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$listItem = $productListManager->createItem( 'default', 'text' );
 
 		$textItem = $textManager->createItem( 'url', 'product' )
-			->setContent( str_replace( [' ', '/', '(', ')'], ['_', '-', '', ''], $label . '_' . $catLabel ) )
+			->setContent( str_replace( ' ', '_', $label . '_' . $catLabel ) )
 			->setLabel( $label . '(' . $catLabel . ')' )
 			->setLanguageId( 'en' )
 			->setStatus( 1 );
