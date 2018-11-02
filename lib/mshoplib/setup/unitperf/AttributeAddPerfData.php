@@ -222,12 +222,12 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	protected function addVariants()
 	{
 		$sizes = [
-			'length' => ['short', 'normal length', 'long', 'semi-short', 'semi-long', 'extra short', 'extra long'],
 			'size' => [
 				'M', 'S', 'L', 'XS', 'XL', 'S-MM', 'MM-L', '2XS', '2XL', 'SS-M', 'M-LL',
 				'3XS', '3XL', 'S-M', 'M-L', '4XS', '4XL', '5XS', '5XL', '6XS', '6XL',
 				'7XS', '7XL', '8XS', '8XL', '9XS', '9XL', '10XS', '10XL', '11XS', '11XL',
 			],
+			'length' => ['short', 'normal length', 'long', 'semi-short', 'semi-long', 'extra short', 'extra long'],
 			'width' => ['tight', 'standard width', 'wide', 'semi-tight', 'semi-wide', 'extra tight', 'extra wide'],
 		];
 
