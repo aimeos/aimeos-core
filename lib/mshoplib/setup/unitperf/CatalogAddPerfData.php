@@ -218,14 +218,17 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$newItem = $productManager->createItem( ( $this->numProdVariants > 0 ? 'select' : 'default' ), 'product' );
 		$slice = (int) ceil( $this->maxBatch / ( $this->numProdVariants ?: 1 ) );
+
 		$property = $this->shuffle( $this->attributes['property'] );
 		$material = $this->shuffle( $this->attributes['material'] );
+		$color = $this->shuffle( $this->attributes['color'] );
+
 		$items = [];
 		$num = 1;
 
 		for( $i = 1; $i <= $this->numCatProducts; $i++ )
 		{
-			$text = key( $property ) . ' ' . key( $material ) . ' ' . current( $articles );
+			$text = current( $color ) . ' ' . key( $property ) . ' ' . key( $material ) . ' ' . current( $articles );
 
 			$item = (clone $newItem)
 				->setLabel( $text . ' (' . $catLabel . ')' )
@@ -242,17 +245,22 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			$item->pos = $i - 1; // 0 based category position
 			$items[] = $item;
 
-			next( $articles );
-			if( current( $articles ) === false )
+			next( $color );
+			if( current( $color ) === false )
 			{
-				reset( $articles ); next( $property );
+				reset( $color ); next( $property );
 
 				if( current( $property ) === false )
 				{
 					reset( $property ); next( $material );
 
-					if( current( $material ) === false ) {
-						reset( $material );
+					if( current( $material ) === false )
+					{
+						reset( $material ); next( $articles );
+
+						if( current( $articles ) === false ) {
+							reset( $articles );
+						}
 					}
 				}
 			}
@@ -369,7 +377,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$listItem = $productListManager->createItem( 'default', 'text' );
 
 		$textItem = $textManager->createItem( 'url', 'product' )
-			->setContent( str_replace( ' ', '_', $label ) . '_' . $catLabel )
+			->setContent( str_replace( [' ', '/', '(', ')'], ['_', '-', '', ''], $label . '_' . $catLabel ) )
 			->setLabel( $label . '(' . $catLabel . ')' )
 			->setLanguageId( 'en' )
 			->setStatus( 1 );
@@ -413,9 +421,9 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$varListItem = $productListManager->createItem( 'variant', 'attribute' );
 		$newItem = $productManager->createItem( 'default', 'product' );
 
-		$length = $this->shuffle( $this->attributes['length'] );
-		$width = $this->shuffle( $this->attributes['width'] );
-		$size = $this->shuffle( $this->attributes['size'] );
+		$length = $this->attributes['length'];
+		$width = $this->attributes['width'];
+		$size = $this->attributes['size'];
 
 		for( $i = 0; $i < $this->numProdVariants; $i++ )
 		{
@@ -432,17 +440,17 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$prodItem->addListItem( 'product', clone $defListItem, $item );
 
-			next( $length );
-			if( current( $length ) === false )
+			next( $size );
+			if( current( $size ) === false )
 			{
-				reset( $length ); next( $width );
+				reset( $size ); next( $length );
 
-				if( current( $width ) === false )
+				if( current( $length ) === false )
 				{
-					reset( $width ); next( $size );
+					reset( $length ); next( $width );
 
-					if( current( $size ) === false ) {
-						reset( $size );
+					if( current( $width ) === false ) {
+						reset( $width );
 					}
 				}
 			}
@@ -488,7 +496,9 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	protected function init()
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
+
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setSortations( [$search->sort( '+', 'attribute.position' )] );
 
 		foreach( $manager->searchItems( $search ) as $id => $item ) {
 			$this->attributes[$item->getType()][$item->getCode()] = $id;
