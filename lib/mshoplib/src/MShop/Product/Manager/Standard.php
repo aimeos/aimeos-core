@@ -833,35 +833,4 @@ class Standard
 
 		return new \Aimeos\MShop\Product\Item\Standard( $values, $listItems, $refItems, $propertyItems );
 	}
-
-
-	/**
-	 * Returns the referenced items for the given IDs.
-	 *
-	 * @param array $refIdMap Associative list of domain/ref-ID/parent-item-ID key/value pairs
-	 * @param array|null $domains List of domain names whose referenced items should be attached or null for all
-	 * @return array Associative list of parent-item-ID/domain/items key/value pairs
-	 */
-	protected function getRefItems( array $refIdMap, $domains = [] )
-	{
-		$items = [];
-
-		foreach( $refIdMap as $domain => $list )
-		{
-			$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $domain );
-
-			$search = $manager->createSearch()->setSlice( 0, count( $list ) );
-			$search->setConditions( $search->compare( '==', str_replace( '/', '.', $domain ) . '.id', array_keys( $list ) ) );
-
-			// fetch only products of one additional level to avoid circular dependencies
-			foreach( $manager->searchItems( $search, array_diff( $domains ?: [], ['product'] ) ) as $id => $item )
-			{
-				foreach( $list[$id] as $parentId ) {
-					$items[$parentId][$domain][$id] = $item;
-				}
-			}
-		}
-
-		return $items;
-	}
 }
