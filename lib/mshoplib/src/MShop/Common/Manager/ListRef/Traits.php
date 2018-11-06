@@ -85,16 +85,36 @@ trait Traits
 	protected function getListItems( array $ids, $domains, $prefix )
 	{
 		$manager = $this->getObject()->getSubManager( 'lists' );
-
 		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
 
-		$expr = [ $search->compare( '==', $prefix . '.lists.parentid', $ids ) ];
+		if( is_array( $domains ) )
+		{
+			$list = [];
+			$expr = [$search->compare( '==', $prefix . '.lists.parentid', $ids )];
 
-		if( $domains !== null ) {
-			$expr[] = $search->compare( '==', $prefix . '.lists.domain', $domains );
+			foreach( $domains as $key => $domain )
+			{
+				if( is_array( $domain ) )
+				{
+					$list[] = $search->combine( '&&', [
+						$search->compare( '==', $prefix . '.lists.domain', $key ),
+						$search->compare( '==', $prefix . '.lists.type.domain', $key ),
+						$search->compare( '==', $prefix . '.lists.type.code', $domain ),
+					] );
+				}
+				else
+				{
+					$list[] = $search->compare( '==', $prefix . '.lists.domain', $domain );
+				}
+			}
+
+			$expr[] = $search->combine( '||', $list );
+			$search->setConditions( $search->combine( '&&', $expr ) );
 		}
-
-		$search->setConditions( $search->combine( '&&', $expr ) );
+		else
+		{
+			$search->setConditions( $search->compare( '==', $prefix . '.lists.parentid', $ids ) );
+		}
 
 		return $manager->searchItems( $search );
 	}
