@@ -101,6 +101,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testFindItemDomainFilter()
+	{
+		$item = $this->object->findItem( 'CNE', ['product' => ['default']] );
+		$this->assertEquals( 3, count( $item->getListItems( 'product' ) ) );
+	}
+
+
 	public function testGetItem()
 	{
 		$domains = array( 'text', 'product', 'price', 'media', 'attribute', 'product/property' );
