@@ -170,7 +170,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 		{
 			$this->msg( 'Using schema from ' . basename( $relpath ), 1 ); $this->status( '' );
 
-			$conn = $this->acquire();
+			$conn = $this->acquire( $rname );
 			$dbal = $conn->getRawObject();
 
 			if( !( $dbal instanceof \Doctrine\DBAL\Connection ) ) {
@@ -215,7 +215,7 @@ class TablesCreateMShop extends \Aimeos\MW\Setup\Task\Base
 				}
 			}
 
-			$this->release( $conn );
+			$this->release( $conn, $rname );
 		}
 	}
 
