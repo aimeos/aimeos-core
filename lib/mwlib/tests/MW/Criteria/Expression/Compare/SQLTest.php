@@ -42,7 +42,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetOperators()
 	{
-		$expected = array( '=~', '~=', '==', '!=', '>', '>=', '<', '<=', '&', '|' );
+		$expected = array( '=~', '~=', '==', '!=', '>', '>=', '<', '<=' );
 		$actual = \Aimeos\MW\Criteria\Expression\Compare\SQL::getOperators();
 		$this->assertEquals( $expected, $actual );
 	}
@@ -105,12 +105,6 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'bool', true );
 		$this->assertEquals( "t.bool = 1", $expr->toString( $types, $translations ) );
-
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '&', 'int', 0x2 );
-		$this->assertEquals( "t.int & 2", $expr->toString( $types, $translations ) );
-
-		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '|', 'int', 0x4 );
-		$this->assertEquals( "t.int | 4", $expr->toString( $types, $translations ) );
 	}
 
 	public function testToStringFunction()
