@@ -63,7 +63,7 @@ return array(
 				'label' => 'Demo: dhl.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/pickup.png',
 				'preview' => 'http://demo.aimeos.org/media/service/pickup.png',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -127,7 +127,7 @@ return array(
 				'label' => 'Demo: dhl.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/dhl.png',
 				'preview' => 'http://demo.aimeos.org/media/service/dhl.png',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -187,7 +187,7 @@ return array(
 				'label' => 'Demo: dhl-express.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/dhl-express.png',
 				'preview' => 'http://demo.aimeos.org/media/service/dhl-express.png',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -247,7 +247,7 @@ return array(
 				'label' => 'Demo: fedex.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/fedex.png',
 				'preview' => 'http://demo.aimeos.org/media/service/fedex.png',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -307,7 +307,7 @@ return array(
 				'label' => 'Demo: tnt.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/tnt.png',
 				'preview' => 'http://demo.aimeos.org/media/service/tnt.png',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -375,7 +375,7 @@ return array(
 				'label' => 'Demo: payment-in-advance.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/payment-in-advance.png',
 				'preview' => 'http://demo.aimeos.org/media/service/payment-in-advance.png',
-				'type' => 'default', 'languageid' => 'de', 'status' => 1,
+				'type' => 'icon', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -441,7 +441,7 @@ return array(
 				'label' => 'Demo: sepa.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/sepa.png',
 				'preview' => 'http://demo.aimeos.org/media/service/sepa.png',
-				'type' => 'default', 'languageid' => 'de', 'status' => 1,
+				'type' => 'icon', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -449,7 +449,7 @@ return array(
 				'label' => 'Demo: direct-debit.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/direct-debit.png',
 				'preview' => 'http://demo.aimeos.org/media/service/direct-debit.png',
-				'type' => 'default', 'languageid' => 'en', 'status' => 1,
+				'type' => 'icon', 'languageid' => 'en', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 1, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -517,7 +517,7 @@ return array(
 				'label' => 'Demo: paypal.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/paypal.png',
 				'preview' => 'http://demo.aimeos.org/media/service/paypal.png',
-				'type' => 'default', 'languageid' => null, 'status' => 1,
+				'type' => 'icon', 'languageid' => null, 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -576,7 +576,7 @@ return array(
 				'label' => 'Demo: dhl-cod.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/dhl-cod.png',
 				'preview' => 'http://demo.aimeos.org/media/service/dhl-cod.png',
-				'type' => 'default', 'languageid' => 'de', 'status' => 1,
+				'type' => 'icon', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
@@ -642,7 +642,7 @@ return array(
 				'label' => 'Demo: payment-in-advance-alternative.png', 'mimetype' => 'image/png',
 				'url' => 'http://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
 				'preview' => 'http://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
-				'type' => 'default', 'languageid' => 'de', 'status' => 1,
+				'type' => 'icon', 'languageid' => 'de', 'status' => 1,
 				'list-type' => 'default', 'list-position' => 0, 'list-config' => [],
 				'list-start' => null, 'list-end' => null, 'list-status' => 1
 			),
