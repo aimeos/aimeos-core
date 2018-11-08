@@ -297,43 +297,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testUpdateListItems()
-	{
-		$attrManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
-		$attrId = $attrManager->findItem( 's', [], 'product', 'size' )->getId();
-		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
-
-		// create new list item
-		$map = array( $attrId => array( 'product.lists.datestart' => '2000-01-01 00:00:00' ) );
-		$this->object->updateListItems( $item, $map, 'attribute', 'hidden' );
-
-		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
-		$listItems = $item->getListItems( 'attribute', 'hidden', null, false );
-
-		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertEquals( '2000-01-01 00:00:00', reset( $listItems )->getDateStart() );
-
-
-		// update existing list item
-		$map = array( $attrId => array( 'product.lists.config' => array( 'key' => 'value' ) ) );
-		$this->object->updateListItems( $item, $map, 'attribute', 'hidden' );
-
-		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
-		$listItems = $item->getListItems( 'attribute', 'hidden' );
-
-		$this->assertEquals( 1, count( $listItems ) );
-		$this->assertEquals( '2000-01-01 00:00:00', reset( $listItems )->getDateStart() );
-		$this->assertEquals( array( 'key' => 'value' ), reset( $listItems )->getConfig() );
-
-
-		// delete existing list item
-		$this->object->updateListItems( $item, [], 'attribute', 'hidden' );
-
-		$item = $this->object->findItem( 'CNC', array( 'attribute' ) );
-		$this->assertEquals( 0, count( $item->getListItems( 'attribute', 'hidden' ) ) );
-	}
-
-
 	public function testSearchItems()
 	{
 		$total = 0;
