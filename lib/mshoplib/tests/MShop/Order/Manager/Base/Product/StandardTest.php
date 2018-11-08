@@ -224,7 +224,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->assertTrue( $item->getId() !== null );
-		$this->assertNotEquals( [], $item->getAttributes() );
+		$this->assertNotEquals( [], $item->getAttributeItems() );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
 		$this->assertEquals( $item->getSiteId(), $itemSaved->getSiteId() );
 		$this->assertEquals( $item->getBaseId(), $itemSaved->getBaseId() );
@@ -265,7 +265,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getQuantity(), $itemUpd->getQuantity() );
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getFlags(), $itemUpd->getFlags() );
-		$this->assertEquals( [], $itemUpd->getAttributes() );
+		$this->assertEquals( [], $itemUpd->getAttributeItems() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

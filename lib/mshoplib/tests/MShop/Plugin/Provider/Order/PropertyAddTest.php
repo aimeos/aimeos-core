@@ -78,9 +78,9 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateOk()
 	{
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 3, count( $this->products['CNC']->getAttributes() ) );
+		$this->assertEquals( 3, count( $this->products['CNC']->getAttributeItems() ) );
 
-		$this->products['CNE']->setAttributes( [] );
+		$this->products['CNE']->setAttributeItems( [] );
 		$this->plugin->setConfig( array(
 			'product.lists.parentid' => array(
 				'product.lists.domain',
@@ -90,7 +90,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 
-		$this->assertEquals( 2, count( $this->products['CNE']->getAttributes() ) );
+		$this->assertEquals( 2, count( $this->products['CNE']->getAttributeItems() ) );
 	}
 
 
@@ -106,11 +106,11 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 		$attribute->setValue( '1000' );
 		$attribute->setType( 'property' );
 
-		$this->products['CNC']->setAttributes( array( $attribute ) );
-		$this->assertEquals( 1, count( $this->products['CNC']->getAttributes() ) );
+		$this->products['CNC']->setAttributeItems( array( $attribute ) );
+		$this->assertEquals( 1, count( $this->products['CNC']->getAttributeItems() ) );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 3, count( $this->products['CNC']->getAttributes() ) );
+		$this->assertEquals( 3, count( $this->products['CNC']->getAttributeItems() ) );
 	}
 
 
@@ -126,7 +126,7 @@ class PropertyAddTest extends \PHPUnit\Framework\TestCase
 		) );
 
 		$this->assertTrue( $this->object->update( $this->order, 'addProduct.before', $this->products['CNC'] ) );
-		$this->assertEquals( 1, count( $this->products['CNC']->getAttributes() ) );
+		$this->assertEquals( 1, count( $this->products['CNC']->getAttributeItems() ) );
 
 
 		// Incorrect key:

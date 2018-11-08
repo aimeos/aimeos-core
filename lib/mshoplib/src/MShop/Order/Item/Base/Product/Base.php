@@ -176,24 +176,6 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	}
 
 
-	/*
-	 * @deprecated Use getAttributeItems() instead
-	 */
-	public function getAttributes( $type = null )
-	{
-		return $this->getAttributeItems( $type );
-	}
-
-
-	/*
-	 * @deprecated Use setAttributeItems() instead
-	 */
-	public function setAttributes( array $attributes )
-	{
-		return $this->setAttributeItems( $attributes );
-	}
-
-
 	/**
 	 * Returns the item type
 	 *

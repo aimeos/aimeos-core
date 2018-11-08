@@ -349,7 +349,7 @@ abstract class Base
 		foreach( $items as $id => $item )
 		{
 			if( isset( $attributes[$id] ) ) {
-				$item->setAttributes( $attributes[$id] );
+				$item->setAttributeItems( $attributes[$id] );
 			}
 
 			if( $item->getOrderProductId() === null )
@@ -398,7 +398,7 @@ abstract class Base
 		{
 			if( $fresh === true )
 			{
-				foreach( $item->getAttributes() as $attribute )
+				foreach( $item->getAttributeItems() as $attribute )
 				{
 						$attribute->setId( null );
 						$attribute->setParentId( null );
@@ -604,7 +604,7 @@ abstract class Base
 			$item = $manager->saveItem( $item );
 			$productId = $item->getId();
 
-			foreach( $item->getAttributes() as $attribute )
+			foreach( $item->getAttributeItems() as $attribute )
 			{
 				$attribute->setParentId( $productId );
 				$attrManager->saveItem( $attribute );
@@ -625,7 +625,7 @@ abstract class Base
 				$subProduct = $manager->saveItem( $subProduct );
 				$subProductId = $subProduct->getId();
 
-				foreach( $subProduct->getAttributes() as $attribute )
+				foreach( $subProduct->getAttributeItems() as $attribute )
 				{
 					$attribute->setParentId( $subProductId );
 					$attrManager->saveItem( $attribute );
@@ -704,7 +704,7 @@ abstract class Base
 				$item->setType( $type );
 				$item = $manager->saveItem( $item );
 
-				foreach( $item->getAttributes() as $attribute )
+				foreach( $item->getAttributeItems() as $attribute )
 				{
 					if( $attribute->getType() !== 'session' )
 					{

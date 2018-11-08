@@ -189,7 +189,7 @@ class ProductPriceTest extends \PHPUnit\Framework\TestCase
 		$ordAttr->setQuantity( 2 );
 
 		$orderProduct = $this->order->getProduct( 0 );
-		$orderProduct->setAttributes( array( $ordAttr ) );
+		$orderProduct->setAttributeItems( array( $ordAttr ) );
 		$orderProduct->setPrice( $this->price );
 
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\ProductPrice( $context, $this->plugin );

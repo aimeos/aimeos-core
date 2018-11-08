@@ -69,7 +69,7 @@ class ProductPrice
 
 			$prodCodes[] = $item->getProductCode();
 
-			foreach( $item->getAttributes() as $ordAttrItem )
+			foreach( $item->getAttributeItems() as $ordAttrItem )
 			{
 				if( ( $id = $ordAttrItem->getAttributeId() ) != '' ) {
 					$attrIds[$id] = null;
@@ -213,7 +213,7 @@ class ProductPrice
 		$price = clone $priceManager->getLowestPrice( $refPrices, $orderProduct->getQuantity() );
 
 		// add prices of product attributes to compute the end price for comparison
-		foreach( $orderProduct->getAttributes() as $orderAttribute )
+		foreach( $orderProduct->getAttributeItems() as $orderAttribute )
 		{
 			$attrPrices = [];
 			$attrId = $orderAttribute->getAttributeId();

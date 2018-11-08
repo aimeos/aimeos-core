@@ -52,7 +52,7 @@ class ProductFreeOptions
 		$prodConf = $prodItem->getConfig();
 
 
-		foreach( $value->getAttributes( 'config' ) as $attr )
+		foreach( $value->getAttributeItems( 'config' ) as $attr )
 		{
 			$attrQtys[$attr->getAttributeId()] = $attr->getQuantity();
 			$attrTypes[] = $attr->getCode();

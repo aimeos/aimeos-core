@@ -674,7 +674,7 @@ abstract class Base
 	{
 		$attributeMap = [];
 
-		foreach( $item->getAttributes() as $attributeItem ) {
+		foreach( $item->getAttributeItems() as $attributeItem ) {
 			$attributeMap[$attributeItem->getCode()] = $attributeItem;
 		}
 
@@ -684,7 +684,7 @@ abstract class Base
 				continue;
 			}
 
-			$prodAttributes = $product->getAttributes();
+			$prodAttributes = $product->getAttributeItems();
 
 			if( count( $prodAttributes ) !== count( $attributeMap ) ) {
 				continue;

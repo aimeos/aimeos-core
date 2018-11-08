@@ -40,7 +40,7 @@ class SupplierTest extends \PHPUnit\Framework\TestCase
 		$orderServiceManager = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/service' );
 		$orderService = $orderServiceManager->createItem();
 		$orderService->copyFrom( $service );
-		$orderService->setAttributes( [$orderServiceAttr] );
+		$orderService->setAttributeItems( [$orderServiceAttr] );
 
 		$this->orderBase = new \Aimeos\MShop\Order\Item\Base\Standard( $priceManager->createItem(), $this->context->getLocale() );
 		$this->orderBase->addService( $orderService, \Aimeos\MShop\Order\Item\Base\Service\Base::TYPE_DELIVERY );

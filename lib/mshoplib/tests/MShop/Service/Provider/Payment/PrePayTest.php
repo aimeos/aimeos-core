@@ -84,7 +84,7 @@ class PrePayTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'order/base/service' )->createItem();
 		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
-		$this->assertEquals( 2, count( $item->getAttributes() ) );
+		$this->assertEquals( 2, count( $item->getAttributeItems() ) );
 		$this->assertEquals( 'abc', $item->getAttribute( 'test.code', 'payment' ) );
 		$this->assertEquals( 123, $item->getAttribute( 'test.number', 'payment' ) );
 		$this->assertEquals( 'payment', $item->getAttributeItem( 'test.code', 'payment' )->getType() );

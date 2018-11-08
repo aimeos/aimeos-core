@@ -102,7 +102,7 @@ class PropertyAdd
 			foreach( $result as $item )
 			{
 				$attributes = $this->addAttributes( $item, $value, $properties );
-				$value->setAttributes( $attributes );
+				$value->setAttributeItems( $attributes );
 			}
 		}
 
@@ -120,7 +120,7 @@ class PropertyAdd
 	 */
 	protected function addAttributes( \Aimeos\MShop\Common\Item\Iface $item, \Aimeos\MShop\Order\Item\Base\Product\Iface $product, array $properties )
 	{
-		$attributeList = $product->getAttributes();
+		$attributeList = $product->getAttributeItems();
 		$itemProperties = $item->toArray( true );
 
 		foreach( $properties as $code )

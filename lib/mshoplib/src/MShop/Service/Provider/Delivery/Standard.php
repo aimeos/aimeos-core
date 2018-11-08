@@ -400,7 +400,7 @@ class Standard
 						$this->appendChildCDATA( 'name', $service->getName(), $dom, $paymentitem );
 
 						$fieldlist = $dom->createElement( 'fieldlist' );
-						foreach( $service->getAttributes() as $attribute )
+						foreach( $service->getAttributeItems() as $attribute )
 						{
 							$fielditem = $dom->createElement( 'fielditem' );
 							$this->appendChildCDATA( 'name', $attribute->getCode(), $dom, $fielditem );

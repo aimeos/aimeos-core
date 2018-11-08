@@ -74,7 +74,7 @@ class ManualTest extends \PHPUnit\Framework\TestCase
 		$item = \Aimeos\MShop\Factory::createManager( $this->context, 'order/base/service' )->createItem();
 		$this->object->setConfigFE( $item, array( 'test.code' => 'abc', 'test.number' => 123 ) );
 
-		$this->assertEquals( 2, count( $item->getAttributes() ) );
+		$this->assertEquals( 2, count( $item->getAttributeItems() ) );
 		$this->assertEquals( 'abc', $item->getAttribute( 'test.code', 'delivery' ) );
 		$this->assertEquals( 123, $item->getAttribute( 'test.number', 'delivery' ) );
 		$this->assertEquals( 'delivery', $item->getAttributeItem( 'test.code', 'delivery' )->getType() );

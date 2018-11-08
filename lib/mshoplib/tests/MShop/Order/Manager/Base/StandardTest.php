@@ -625,7 +625,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		foreach( $products as $product )
 		{
-			$this->assertGreaterThanOrEqual( 2, count( $product->getAttributes() ) );
+			$this->assertGreaterThanOrEqual( 2, count( $product->getAttributeItems() ) );
 			$this->assertEquals( $pos++, $product->getPosition() );
 		}
 
@@ -638,7 +638,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $services as $list )
 		{
 			foreach( $list as $service ) {
-				$attributes[$service->getCode()] = $service->getAttributes();
+				$attributes[$service->getCode()] = $service->getAttributeItems();
 			}
 		}
 

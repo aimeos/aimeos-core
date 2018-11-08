@@ -183,24 +183,6 @@ abstract class Base extends \Aimeos\MShop\Common\Item\Base implements Iface
 	}
 
 
-	/*
-	 * @deprecated Use getAttributeItems() instead
-	 */
-	public function getAttributes( $type = null )
-	{
-		return $this->getAttributeItems( $type );
-	}
-
-
-	/*
-	 * @deprecated Use setAttributeItems() instead
-	 */
-	public function setAttributes( array $attributes )
-	{
-		return $this->setAttributeItems( $attributes );
-	}
-
-
 	/**
 	 * Checks if the given address type is valid
 	 *
