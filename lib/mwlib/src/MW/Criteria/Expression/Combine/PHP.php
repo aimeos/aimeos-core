@@ -109,15 +109,6 @@ class PHP implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 
 
 	/**
-	 * @deprecated Removed 2019.01
-	 */
-	public function toString( array $types, array $translations = [], array $plugins = [] )
-	{
-		return $this->toSource( $types, $translations, $plugins );
-	}
-
-
-	/**
 	 * Translates the sort key into the name required by the storage
 	 *
 	 * @param array $translations Associative list of variable or column names that should be translated

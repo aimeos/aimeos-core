@@ -57,7 +57,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'value', $expr->getValue() );
 	}
 
-	public function testToString()
+	public function testToSource()
 	{
 		$types = array(
 			'listitem' => 'string',
@@ -78,33 +78,33 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'listitem', array('a', 'b', 'c') );
-		$this->assertEquals( "( \$listitem == 'a' || \$listitem == 'b' || \$listitem == 'c' )", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "( \$listitem == 'a' || \$listitem == 'b' || \$listitem == 'c' )", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '!=', 'listitem', array('a', 'b') );
-		$this->assertEquals( "( \$listitem != 'a' && \$listitem != 'b' )", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "( \$listitem != 'a' && \$listitem != 'b' )", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'stringvar', 'value' );
-		$this->assertEquals( "\$stringvar == 'value'", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "\$stringvar == 'value'", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '<', 'floatvar', 0.1 );
-		$this->assertEquals( '$floatvar < 0.1', $expr->toString( $types, $translations ) );
+		$this->assertEquals( '$floatvar < 0.1', $expr->toSource( $types, $translations ) );
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>', 'intvar', 10 );
-		$this->assertEquals( '$intvar > 10', $expr->toString( $types, $translations ) );
+		$this->assertEquals( '$intvar > 10', $expr->toSource( $types, $translations ) );
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'boolvar', true );
-		$this->assertEquals( '$boolvar == 1', $expr->toString( $types, $translations ) );
+		$this->assertEquals( '$boolvar == 1', $expr->toSource( $types, $translations ) );
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '!=', 'undefined', null );
-		$this->assertEquals( '$undefined !== null', $expr->toString( $types, $translations ) );
+		$this->assertEquals( '$undefined !== null', $expr->toSource( $types, $translations ) );
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'undefined', null );
-		$this->assertEquals( '$undefined === null', $expr->toString( $types, $translations ) );
+		$this->assertEquals( '$undefined === null', $expr->toSource( $types, $translations ) );
 
 
 	}
 
-	public function testToStringExcept1()
+	public function testToSourceExcept1()
 	{
 		$types = array(
 			'listitem' => 'string',
@@ -126,16 +126,16 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '>=', 'listitem', array('a', 'b') );
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
-		$expr->toString( $types, $translations );
+		$expr->toSource( $types, $translations );
 	}
 
-	public function testToStringExcept2()
+	public function testToSourceExcept2()
 	{
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		new \Aimeos\MW\Criteria\Expression\Compare\PHP('=', 'undefined', null);
 	}
 
-	public function testToStringFunction()
+	public function testToSourceFunction()
 	{
 		$types = array(
 			'length()' => 'int',
@@ -150,13 +150,13 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'length("string")', 6 );
-		$this->assertEquals( "strlen('string') == 6", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "strlen('string') == 6", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'position("abcde", "c")', 2 );
-		$this->assertEquals( "strpos('abcde','c') == 2", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "strpos('abcde','c') == 2", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\PHP( '==', 'substring("hello world", 0, 5)', 'hello' );
-		$this->assertEquals( "substr('hello world',0,5) == 'hello'", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "substr('hello world',0,5) == 'hello'", $expr->toSource( $types, $translations ) );
 	}
 
 }

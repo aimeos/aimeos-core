@@ -73,70 +73,70 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetColumnString()
+	public function testTranslate()
 	{
 		$translations = array( 'int_column' => 'int_col', 'str_column' => 'str_col' );
 
-		$this->assertEquals( "str_col", $this->object->getColumnString( array( $this->object->sort( '+', 'str_column' ) ), $translations ) );
-		$this->assertEquals( "str_col", $this->object->getColumnString( array( $this->object->compare( '==', 'str_column', 1 ) ), $translations ) );
-		$this->assertEquals( "", $this->object->getColumnString( array( $this->object->combine( '&&', [] ) ), $translations ) );
+		$this->assertEquals( ["str_col"], $this->object->translate( array( $this->object->sort( '+', 'str_column' ) ), $translations ) );
+		$this->assertEquals( ["str_col"], $this->object->translate( array( $this->object->compare( '==', 'str_column', 1 ) ), $translations ) );
+		$this->assertEquals( [], $this->object->translate( array( $this->object->combine( '&&', [] ) ), $translations ) );
 	}
 
 
-	public function testGetConditionString()
+	public function testGetConditionSource()
 	{
 		$types = array( 'int_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'str_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 		$translations = array( 'int_column' => 'int_col', 'str_column' => 'str_col' );
 		$plugins = array( 'int_column' => new TestSQL() );
 
-		$this->assertEquals( "1 = 1", $this->object->getConditionString( $types, $translations ) );
+		$this->assertEquals( "1 = 1", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 'a' ), $this->object->compare( '==', 'str_column', 'test' ) );
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 10 AND str_col = 'test' )", $this->object->getConditionString( $types, $translations, $plugins ) );
+		$this->assertEquals( "( int_col = 10 AND str_col = 'test' )", $this->object->getConditionSource( $types, $translations, $plugins ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', array( 1, 2, 4, 8 ) ), $this->object->compare( '==', 'str_column', 'test' ) );
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col IN (1,2,4,8) AND str_col = 'test' )", $this->object->getConditionString( $types, $translations ) );
+		$this->assertEquals( "( int_col IN (1,2,4,8) AND str_col = 'test' )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '~=', 'str_column', array( 't1', 't2', 't3' ) ) );
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 1 AND (str_col LIKE '%t1%' ESCAPE '#' OR str_col LIKE '%t2%' ESCAPE '#' OR str_col LIKE '%t3%' ESCAPE '#') )", $this->object->getConditionString( $types, $translations ) );
+		$this->assertEquals( "( int_col = 1 AND (str_col LIKE '%t1%' ESCAPE '#' OR str_col LIKE '%t2%' ESCAPE '#' OR str_col LIKE '%t3%' ESCAPE '#') )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->compare( '!=', 'int_column', 2 ) );
 		$this->object->setConditions( $this->object->combine( '!', array( $this->object->combine( '&&', $expr ) ) ) );
-		$this->assertEquals( " NOT ( int_col = 1 AND int_col <> 2 )", $this->object->getConditionString( $types, $translations ) );
+		$this->assertEquals( " NOT ( int_col = 1 AND int_col <> 2 )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', null ), $this->object->compare( '!=', 'str_column', null ) );
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col IS NULL AND str_col IS NOT NULL )", $this->object->getConditionString( $types, $translations ) );
+		$this->assertEquals( "( int_col IS NULL AND str_col IS NOT NULL )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ) );
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 1 )", $this->object->getConditionString( $types, $translations ) );
+		$this->assertEquals( "( int_col = 1 )", $this->object->getConditionSource( $types, $translations ) );
 
 		$expr = array( $this->object->compare( '==', 'str_column', 'test' ) );
 		$expr = array( $this->object->compare( '==', 'int_column', 1 ), $this->object->combine( '&&', $expr ) );
 		$this->object->setConditions( $this->object->combine( '&&', $expr ) );
-		$this->assertEquals( "( int_col = 1 AND ( str_col = 'test' ) )", $this->object->getConditionString( $types, $translations ) );
+		$this->assertEquals( "( int_col = 1 AND ( str_col = 'test' ) )", $this->object->getConditionSource( $types, $translations ) );
 
 		$types = array( 'column' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL);
 		$this->object->setConditions( $this->object->compare( '==', 'column', 1 ) );
-		$this->assertEquals( "column = 1", $this->object->getConditionString( $types ) );
+		$this->assertEquals( "column = 1", $this->object->getConditionSource( $types ) );
 	}
 
 
-	public function testGetConditionStringInvalidName()
+	public function testGetConditionSourceInvalidName()
 	{
 		$types = array( 'int_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'icol', 10 ) );
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
-		$this->object->getConditionString( $types );
+		$this->object->getConditionSource( $types );
 	}
 
 
-	public function testGetConditionStringInvalidOperator()
+	public function testGetConditionSourceInvalidOperator()
 	{
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->setConditions( $this->object->compare( '?', 'int_column', 10 ) );
@@ -153,7 +153,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testGetSortationString()
+	public function testGetSortationSource()
 	{
 		$types = array( 'asc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'desc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 		$translations = array( 'asc_column' => 'asc_int_col', 'desc_column' => 'desc_str_col' );
@@ -162,22 +162,22 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$sortations[] = $this->object->sort( '+', 'asc_column' );
 		$sortations[] = $this->object->sort( '-', 'desc_column' );
 		$this->object->setSortations( $sortations );
-		$this->assertEquals( 'asc_int_col ASC, desc_str_col DESC', $this->object->getSortationString( $types, $translations ) );
+		$this->assertEquals( 'asc_int_col ASC, desc_str_col DESC', $this->object->getSortationSource( $types, $translations ) );
 	}
 
 
-	public function testGetSortationStringInvalidName()
+	public function testGetSortationSourceInvalidName()
 	{
 		$types = array( 'asc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 		$translations = array( 'asc_column' => 'asc_int_col' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
-		$this->object->getSortationString( $types, $translations );
+		$this->object->getSortationSource( $types, $translations );
 	}
 
 
-	public function testGetSortationStringInvalidDirection()
+	public function testGetSortationSourceInvalidDirection()
 	{
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
 		$this->object->setSortations( array( $this->object->sort( '/', 'asc_column' ) ) );
@@ -188,10 +188,10 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	{
 		$types = array( 'asc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT, 'desc_column' => \Aimeos\MW\DB\Statement\Base::PARAM_STR );
 
-		$this->assertEquals('asc_column ASC', $this->object->getSortationString( $types ) );
+		$this->assertEquals('asc_column ASC', $this->object->getSortationSource( $types ) );
 
 		$translations = array( 'asc_column' => 'asc_int_col', 'desc_column' => 'desc_str_col' );
-		$this->assertEquals('asc_int_col ASC', $this->object->getSortationString( $types, $translations ));
+		$this->assertEquals('asc_int_col ASC', $this->object->getSortationSource( $types, $translations ));
 	}
 
 

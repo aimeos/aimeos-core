@@ -88,6 +88,6 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$test = new \Aimeos\MW\Criteria\Expression\Combine\PHP( '!', array( $object ) );
 
 		$expected = " ! ( ( ( \$listitem == 'a' || \$listitem == 'b' || \$listitem == 'c' ) && \$stringvar == 'value' ) || ( \$floatvar < 0.1 && \$intvar > 10 ) )";
-		$this->assertEquals( $expected, $test->toString( $types, $translations ) );
+		$this->assertEquals( $expected, $test->toSource( $types, $translations ) );
 	}
 }

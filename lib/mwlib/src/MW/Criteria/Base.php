@@ -33,15 +33,6 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 
 	/**
-	 * @deprecated 2019.01 Use translate() and implode()
-	 */
-	public function getColumnString( array $columns, array $translations = [] )
-	{
-		return implode( ', ', $this->translate( $columns, $translations ) );
-	}
-
-
-	/**
 	 * Creates condition expressions from a multi-dimensional associative array.
 	 *
 	 * The simplest form of a valid associative array is a single comparison:
@@ -91,15 +82,6 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 
 
 	/**
-	 * @deprecated Removed 2019.01
-	 */
-	public function getConditionString( array $types, array $translations = [], array $plugins = [] )
-	{
-		return $this->getConditionSource( $types, $translations, $plugins );
-	}
-
-
-	/**
 	 * Creates sortation expressions from an associative array.
 	 *
 	 * The array must be a single-dimensional array of name and operator pairs like
@@ -142,15 +124,6 @@ abstract class Base implements \Aimeos\MW\Criteria\Iface
 		}
 
 		return $list;
-	}
-
-
-	/**
-	 * @deprecated Removed 2019.01
-	 */
-	public function getSortationString( array $types, array $translations = [] )
-	{
-		return $this->getSortationSource( $types, $translations );
 	}
 
 

@@ -65,7 +65,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'value', $expr->getValue() );
 	}
 
-	public function testToString()
+	public function testToSource()
 	{
 		$types = array(
 			'list' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -86,28 +86,28 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'list', array('a', 'b', 'c') );
-		$this->assertEquals( "t.list IN ('a','b','c')", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.list IN ('a','b','c')", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'list', array('a', 'b', 'c') );
-		$this->assertEquals( "t.list NOT IN ('a','b','c')", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.list NOT IN ('a','b','c')", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'string', 'value' );
-		$this->assertEquals( "t.string LIKE '%value%' ESCAPE '#'", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.string LIKE '%value%' ESCAPE '#'", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '<', 'float', 0.1 );
-		$this->assertEquals( "t.float < 0.1", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.float < 0.1", $expr->toSource( $types, $translations ) );
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '>', 'int', 10 );
-		$this->assertEquals( "t.int > 10", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.int > 10", $expr->toSource( $types, $translations ) );
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'undefined', null );
-		$this->assertEquals( "t.undefined IS NOT NULL", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.undefined IS NOT NULL", $expr->toSource( $types, $translations ) );
 
 		$expr= new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'bool', true );
-		$this->assertEquals( "t.bool = 1", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "t.bool = 1", $expr->toSource( $types, $translations ) );
 	}
 
-	public function testToStringFunction()
+	public function testToSourceFunction()
 	{
 		$types = array(
 			'pcounter()' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
@@ -124,18 +124,18 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'pcounter("name",10,0.1)', 3 );
-		$this->assertEquals( "count('name',10,0.1) = 3", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "count('name',10,0.1) = 3", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '~=', 'strconcat("hello","world")', 'low' );
-		$this->assertEquals( "concat('hello','world') LIKE '%low%' ESCAPE '#'", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "concat('hello','world') LIKE '%low%' ESCAPE '#'", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter(["a","b","c","\'d"])', 4 );
-		$this->assertRegexp( "/^count\(name IN \('a','b','c','('|\\\\)'d'\)\) = 4$/", $expr->toString( $types, $translations ) );
+		$this->assertRegexp( "/^count\(name IN \('a','b','c','('|\\\\)'d'\)\) = 4$/", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '==', 'lcounter([])', 0 );
-		$this->assertEquals( "count(name IN ()) = 0", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "count(name IN ()) = 0", $expr->toSource( $types, $translations ) );
 
 		$expr = new \Aimeos\MW\Criteria\Expression\Compare\SQL( $this->conn, '!=', 'isnull(null)', null );
-		$this->assertEquals( "(null IS NULL) IS NOT NULL", $expr->toString( $types, $translations ) );
+		$this->assertEquals( "(null IS NULL) IS NOT NULL", $expr->toSource( $types, $translations ) );
 	}
 }

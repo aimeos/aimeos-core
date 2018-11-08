@@ -107,7 +107,7 @@ class DB
 
 			$types = $this->getSearchTypes( $this->searchConfig );
 			$translations = $this->getSearchTranslations( $this->searchConfig );
-			$conditions = $search->getConditionString( $types, $translations );
+			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
 			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -141,7 +141,7 @@ class DB
 
 			$types = $this->getSearchTypes( $this->searchConfig );
 			$translations = $this->getSearchTranslations( $this->searchConfig );
-			$conditions = $search->getConditionString( $types, $translations );
+			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['delete'] ) );
 			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -175,7 +175,7 @@ class DB
 
 			$types = $this->getSearchTypes( $this->searchConfig );
 			$translations = $this->getSearchTranslations( $this->searchConfig );
-			$conditions = $search->getConditionString( $types, $translations );
+			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['deletebytag'] ) );
 			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
@@ -247,7 +247,7 @@ class DB
 
 			$types = $this->getSearchTypes( $this->searchConfig );
 			$translations = $this->getSearchTranslations( $this->searchConfig );
-			$conditions = $search->getConditionString( $types, $translations );
+			$conditions = $search->getConditionSource( $types, $translations );
 
 			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->sql['get'] ) );
 			$stmt->bind( 1, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );

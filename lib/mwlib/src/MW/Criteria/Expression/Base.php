@@ -125,15 +125,6 @@ abstract class Base
 
 
 	/**
-	 * @deprecated Removed 2019.01
-	 */
-	public function toString( array $types, array $translations = [], array $plugins = [] )
-	{
-		return $this->toSource( $types, $translations, $plugins );
-	}
-
-
-	/**
 	 * Replaces the parameters in nested arrays
 	 *
 	 * @param array $list Multi-dimensional associative array of values including positional parameter, e.g. "$1"

@@ -62,19 +62,19 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '-', 'test' );
-		$this->assertEquals( 'arsort(test);', $object->toString( $types ) );
+		$this->assertEquals( 'arsort(test);', $object->toSource( $types ) );
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'test' );
-		$this->assertEquals( 'asort(test);', $object->toString( $types ) );
+		$this->assertEquals( 'asort(test);', $object->toSource( $types ) );
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'test(1,2)' );
-		$this->assertEquals( 'asort(testfunc(1,2));', $object->toString( $types, $translations ) );
+		$this->assertEquals( 'asort(testfunc(1,2));', $object->toSource( $types, $translations ) );
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'test(1.2,2.1)' );
-		$this->assertEquals( 'asort(testfunc(1.2,2.1));', $object->toString( $types, $translations ) );
+		$this->assertEquals( 'asort(testfunc(1.2,2.1));', $object->toSource( $types, $translations ) );
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'test("1","2")' );
-		$this->assertEquals( 'asort(testfunc(1,2));', $object->toString( $types, $translations ) );
+		$this->assertEquals( 'asort(testfunc(1,2));', $object->toSource( $types, $translations ) );
 
 
 	}
@@ -99,7 +99,7 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\PHP( '+', 'wrongType' );
 
 		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
-		$object->toString( $types, $translations );
+		$object->toSource( $types, $translations );
 	}
 
 }

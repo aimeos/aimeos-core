@@ -75,12 +75,12 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\SQL( $this->conn, '-', 'test' );
-		$this->assertEquals( 'test DESC', $object->toString( $types ) );
+		$this->assertEquals( 'test DESC', $object->toSource( $types ) );
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\SQL( $this->conn, '+', 'test(1,2.1)' );
-		$this->assertEquals( 'testfunc(1,2.1) ASC', $object->toString( $types, $translations ) );
+		$this->assertEquals( 'testfunc(1,2.1) ASC', $object->toSource( $types, $translations ) );
 
 		$object = new \Aimeos\MW\Criteria\Expression\Sort\SQL( $this->conn, '-', 'test("a",2)' );
-		$this->assertEquals( 'testfunc(\'a\',2) DESC', $object->toString( $types, $translations ) );
+		$this->assertEquals( 'testfunc(\'a\',2) DESC', $object->toSource( $types, $translations ) );
 	}
 }

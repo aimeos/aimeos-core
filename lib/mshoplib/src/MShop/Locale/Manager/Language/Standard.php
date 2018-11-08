@@ -508,13 +508,13 @@ class Standard
 			$attributes = $this->getObject()->getSearchAttributes();
 			$types = $this->getSearchTypes( $attributes );
 			$translations = $this->getSearchTranslations( $attributes );
-			$columns = $search->getColumnString( $search->getSortations(), $translations );
+			$columns = $search->translate( $search->getSortations(), $translations );
 
 			$find = array( ':cond', ':order', ':columns', ':start', ':size' );
 			$replace = array(
 				$search->getConditionSource( $types, $translations ),
 				$search->getSortationSource( $types, $translations ),
-				( $columns ? ', ' . $columns : '' ),
+				( $columns ? ', ' . implode( ',', $columns ) : '' ),
 				$search->getSliceStart(),
 				$search->getSliceSize(),
 			);
