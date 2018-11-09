@@ -133,4 +133,19 @@ interface Iface
 	 * @return \Aimeos\MShop\Common\Manager\Iface Manager object for chaining method calls
 	 */
 	public function setObject( \Aimeos\MShop\Common\Manager\Iface $object );
+
+	/**
+	 * Starts a database transaction on the connection identified by the given name.
+	 */
+	public function begin();
+
+	/**
+	 * Commits the running database transaction on the connection identified by the given name.
+	 */
+	public function commit();
+
+	/**
+	 * Rolls back the running database transaction on the connection identified by the given name.
+	 */
+	public function rollback();
 }
