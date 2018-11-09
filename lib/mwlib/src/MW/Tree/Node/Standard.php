@@ -21,7 +21,7 @@ namespace Aimeos\MW\Tree\Node;
 class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\Node\Iface, \Countable
 {
 	private $values;
-	private $children = [];
+	private $children;
 	private $modified = false;
 
 
@@ -38,8 +38,6 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 
 		$this->values = $values;
 		$this->children = $children;
-
-		$this->modified = false;
 	}
 
 
@@ -52,7 +50,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function __get( $name )
 	{
-		if( in_array( $name, array_keys( $this->values ) ) ) {
+		if( array_key_exists( $name, $this->values ) ) {
 			return $this->values[$name];
 		}
 
@@ -68,6 +66,10 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function __set( $name, $value )
 	{
+		if( array_key_exists( $name, $this->values ) && $this->values[$name] === $value ) {
+			return;
+		}
+
 		$this->values[$name] = $value;
 		$this->modified = true;
 	}
@@ -92,11 +94,12 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function __unset( $name )
 	{
-		if( array_key_exists( $name, $this->values ) )
-		{
-			unset( $this->values[$name] );
-			$this->modified = true;
+		if( !array_key_exists( $name, $this->values ) ) {
+			return;
 		}
+
+		unset( $this->values[$name] );
+		$this->modified = true;
 	}
 
 
@@ -118,11 +121,8 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function setId( $id )
 	{
-		if ( $id === null ) {
-			$this->modified = true;
-		}
-
 		$this->values['id'] = $id;
+		$this->modified = ( $id === null ? true : false );
 	}
 
 
@@ -144,7 +144,9 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function setLabel( $name )
 	{
-		if ( $name == $this->getLabel() ) { return; }
+		if( (string) $name === $this->getLabel() ) {
+			return;
+		}
 
 		$this->values['label'] = (string) $name;
 		$this->modified = true;
@@ -169,7 +171,9 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function setCode( $name )
 	{
-		if ( $name == $this->getCode() ) { return; }
+		if( (string) $name === $this->getCode() ) {
+			return;
+		}
 
 		$this->values['code'] = (string) $name;
 		$this->modified = true;
@@ -193,7 +197,9 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function setStatus( $status )
 	{
-		if ( $status == $this->getStatus() ) { return; }
+		if( (int) $status === $this->getStatus() ) {
+			return;
+		}
 
 		$this->values['status'] = (int) $status;
 		$this->modified = true;
@@ -207,7 +213,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 * @return \Aimeos\MW\Tree\Node\Iface Selected node
 	 * @throws \Aimeos\MW\Tree\Exception If there's no child at the given position
 	 */
-	public function getChild($index)
+	public function getChild( $index )
 	{
 		if( isset( $this->children[$index] ) ) {
 			return $this->children[$index];
@@ -283,6 +289,6 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function count()
 	{
-		return count($this->children);
+		return count( $this->children );
 	}
 }

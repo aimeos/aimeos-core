@@ -90,10 +90,7 @@ class Standard
 	 */
 	public function setId( $id )
 	{
-		if( $id === $this->getId() ) { return $this; }
-
 		$this->node->setId( $id );
-
 		return $this;
 	}
 
@@ -128,10 +125,7 @@ class Standard
 	 */
 	public function setLabel( $name )
 	{
-		if( (string) $name !== $this->getLabel() ) {
-			$this->node->setLabel( (string) $name );
-		}
-
+		$this->node->setLabel( $name );
 		return $this;
 	}
 
@@ -143,7 +137,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return $this->node->__isset( 'config' ) && is_array( $this->node->config ) ? $this->node->__get( 'config' ) : [];
+		return ( isset( $this->node->config ) && is_array( $this->node->config ) ? $this->node->config : [] );
 	}
 
 
@@ -155,8 +149,7 @@ class Standard
 	 */
 	public function setConfig( array $options )
 	{
-		$this->node->__set( 'config', $options );
-
+		$this->node->config = $options;
 		return $this;
 	}
 
@@ -180,10 +173,7 @@ class Standard
 	 */
 	public function setCode( $code )
 	{
-		if( (string) $code !== $this->getCode() ) {
-			$this->node->setCode( $this->checkCode( (string) $code ) );
-		}
-
+		$this->node->setCode( $this->checkCode( $code ) );
 		return $this;
 	}
 
@@ -207,10 +197,7 @@ class Standard
 	 */
 	public function setStatus( $status )
 	{
-		if( (int) $status !== $this->getStatus() ) {
-			$this->node->setStatus( $status );
-		}
-
+		$this->node->setStatus( $status );
 		return $this;
 	}
 
@@ -222,7 +209,7 @@ class Standard
 	 */
 	public function getTarget()
 	{
-		return ( $this->node->__isset( 'target' ) ? (string) $this->node->__get( 'target' ) : '' );
+		return ( isset( $this->node->target ) ? (string) $this->node->target : '' );
 	}
 
 
@@ -234,10 +221,7 @@ class Standard
 	 */
 	public function setTarget( $value )
 	{
-		if( (string) $value !== $this->getTarget() ) {
-			$this->node->__set( 'target', (string) $value );
-		}
-
+		$this->node->target = (string) $value;
 		return $this;
 	}
 
@@ -249,7 +233,7 @@ class Standard
 	 */
 	public function getTimeModified()
 	{
-		return ( $this->node->__isset( 'mtime' ) ? $this->node->__get( 'mtime' ) : null );
+		return ( isset( $this->node->mtime ) ? $this->node->mtime : null );
 	}
 
 
@@ -260,7 +244,7 @@ class Standard
 	 */
 	public function getTimeCreated()
 	{
-		return ( $this->node->__isset( 'ctime' ) ? $this->node->__get( 'ctime' ) : null );
+		return ( isset( $this->node->ctime ) ? $this->node->ctime : null );
 	}
 
 
@@ -271,7 +255,7 @@ class Standard
 	 */
 	public function getEditor()
 	{
-		return ( $this->node->__isset( 'editor' ) ? $this->node->__get( 'editor' ) : null );
+		return ( isset( $this->node->editor ) ? $this->node->editor : null );
 	}
 
 
@@ -469,7 +453,7 @@ class Standard
 	 */
 	public function getLevel()
 	{
-		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : 0 );
+		return ( isset( $this->node->level ) ? $this->node->level : null );
 	}
 
 
@@ -482,6 +466,6 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : 0 );
+		return ( isset( $this->node->parentid ) ? $this->node->parentid : null );
 	}
 }
