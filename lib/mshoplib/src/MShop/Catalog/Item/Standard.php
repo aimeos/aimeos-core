@@ -137,7 +137,7 @@ class Standard
 	 */
 	public function getConfig()
 	{
-		return ( isset( $this->node->config ) && is_array( $this->node->config ) ? $this->node->config : [] );
+		return ( $this->node->__isset( 'config' ) ? (array) $this->node->__get( 'config' ) : [] );
 	}
 
 
@@ -209,7 +209,7 @@ class Standard
 	 */
 	public function getTarget()
 	{
-		return ( isset( $this->node->target ) ? (string) $this->node->target : '' );
+		return ( $this->node->__isset( 'target' ) ? $this->node->__get( 'target' ) : '' );
 	}
 
 
@@ -233,7 +233,7 @@ class Standard
 	 */
 	public function getTimeModified()
 	{
-		return ( isset( $this->node->mtime ) ? $this->node->mtime : null );
+		return ( $this->node->__isset( 'mtime' ) ? $this->node->__get( 'mtime' ) : null );
 	}
 
 
@@ -244,7 +244,7 @@ class Standard
 	 */
 	public function getTimeCreated()
 	{
-		return ( isset( $this->node->ctime ) ? $this->node->ctime : null );
+		return ( $this->node->__isset( 'ctime' ) ? $this->node->__get( 'ctime' ) : null );
 	}
 
 
@@ -255,7 +255,7 @@ class Standard
 	 */
 	public function getEditor()
 	{
-		return ( isset( $this->node->editor ) ? $this->node->editor : null );
+		return ( $this->node->__isset( 'editor' ) ? $this->node->__get( 'editor' ) : null );
 	}
 
 
@@ -453,7 +453,7 @@ class Standard
 	 */
 	public function getLevel()
 	{
-		return ( isset( $this->node->level ) ? $this->node->level : null );
+		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : null );
 	}
 
 
@@ -466,6 +466,6 @@ class Standard
 	 */
 	public function getParentId()
 	{
-		return ( isset( $this->node->parentid ) ? $this->node->parentid : null );
+		return ( $this->node->__isset( 'parentid' ) ? $this->node->__get( 'parentid' ) : null );
 	}
 }
