@@ -252,6 +252,33 @@ abstract class Base
 	}
 
 
+	/**
+	 * Starts a database transaction on the connection identified by the given name.
+	 */
+	public function begin()
+	{
+		$this->manager->begin();
+	}
+
+
+	/**
+	 * Commits the running database transaction on the connection identified by the given name.
+	 */
+	public function commit()
+	{
+		$this->manager->commit();
+	}
+
+
+	/**
+	 * Rolls back the running database transaction on the connection identified by the given name.
+	 */
+	public function rollback()
+	{
+		$this->manager->rollback();
+	}
+
+
 
 	/**
 	 * Returns the manager object.
