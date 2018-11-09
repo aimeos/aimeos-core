@@ -209,7 +209,7 @@ class Standard
 	 */
 	public function getTarget()
 	{
-		return ( $this->node->__isset( 'target' ) ? $this->node->__get( 'target' ) : '' );
+		return ( $this->node->__isset( 'target' ) ? (string) $this->node->__get( 'target' ) : '' );
 	}
 
 
