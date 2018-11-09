@@ -196,7 +196,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$listItem = $productListManager->createItem( 'config', 'attribute' );
 
-		foreach( $this->attributes['sticker'] as $attrId ) {
+		foreach( $this->attributes['sticker'] as $attrId => $label ) {
 			$prodItem->addListItem( 'attribute', (clone $listItem)->setRefId( $attrId ) );
 		}
 
@@ -234,14 +234,14 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		for( $i = 1; $i <= $this->numCatProducts; $i++ )
 		{
-			$text = current( $color ) . ' ' . key( $property ) . ' ' . key( $material ) . ' ' . current( $articles );
+			$text = current( $color ) . ' ' . current( $property ) . ' ' . current( $material ) . ' ' . current( $articles );
 
 			$item = (clone $newItem)
 				->setLabel( $text . ' (' . $catLabel . ')' )
 				->setCode( 'p-' . $i . ':' . $catLabel )
 				->setStatus( 1 );
 
-			$item = $this->addProductAttributes( $item, [current( $property ), current( $material )] );
+			$item = $this->addProductAttributes( $item, [key( $color ), key( $property ), key( $material )] );
 			$item = $this->addProductTexts( $item, $text, $catLabel );
 			$item = $this->addProductMedia( $item, $i );
 			$item = $this->addProductPrices( $item, $i );
@@ -433,16 +433,16 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		for( $i = 0; $i < $this->numProdVariants; $i++ )
 		{
-			$text = key( $length ) . ', ' . key( $width ) . ', ' . $prodItem->getLabel() . ' (' . key( $size ) . ')';
+			$text = current( $length ) . ', ' . current( $width ) . ', ' . $prodItem->getLabel() . ' (' . current( $size ) . ')';
 
 			$item = (clone $newItem)
 				->setCode( 'v-' . $idx . '/' . $i . ':' . $prodItem->getCode() )
 				->setLabel( $text )
 				->setStatus( 1 );
 
-			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( current( $length ) ) );
-			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( current( $width ) ) );
-			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( current( $size ) ) );
+			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( key( $length ) ) );
+			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( key( $width ) ) );
+			$item->addListItem( 'attribute', (clone $varListItem)->setRefId( key( $size ) ) );
 
 			$prodItem->addListItem( 'product', clone $defListItem, $item );
 
@@ -507,7 +507,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$search->setSortations( [$search->sort( '+', 'attribute.position' )] );
 
 		foreach( $manager->searchItems( $search ) as $id => $item ) {
-			$this->attributes[$item->getType()][$item->getCode()] = $id;
+			$this->attributes[$item->getType()][$id] = $item->getLabel();
 		}
 	}
 
