@@ -453,7 +453,7 @@ class Standard
 	 */
 	public function getLevel()
 	{
-		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : null );
+		return ( $this->node->__isset( 'level' ) ? $this->node->__get( 'level' ) : 0 );
 	}
 
 
