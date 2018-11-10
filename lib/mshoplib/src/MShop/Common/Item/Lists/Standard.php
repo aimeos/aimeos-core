@@ -22,6 +22,9 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Common\Item\Lists\Iface
 {
+	use \Aimeos\MShop\Common\Item\Config\Traits;
+
+
 	private $prefix;
 	private $values;
 	private $refItem;

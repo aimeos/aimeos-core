@@ -139,6 +139,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetConfigValue()
+	{
+		$this->assertEquals( '40', $this->object->getConfigValue( 'limit' ) );
+	}
+
+
 	public function testSetConfig()
 	{
 		$return = $this->object->setConfig( array( 'threshold' => '20.00' ) );

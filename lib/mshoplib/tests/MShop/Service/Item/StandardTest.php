@@ -192,6 +192,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetConfigValue()
+	{
+		$this->assertEquals( 'https://localhost/', $this->object->getConfigValue( 'url' ) );
+	}
+
+
 	public function testSetConfig()
 	{
 		$return = $this->object->setConfig( array( 'account' => 'testAccount' ) );

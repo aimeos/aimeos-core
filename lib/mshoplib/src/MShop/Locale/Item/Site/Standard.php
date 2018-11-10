@@ -22,8 +22,12 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Locale\Item\Site\Iface
 {
+	use \Aimeos\MShop\Common\Item\Config\Traits;
+
+
 	private $children;
 	private $values;
+
 
 	/**
 	 * Initializes the site object.

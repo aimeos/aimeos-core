@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'common.lists.refid' => 'unitId',
 			'common.lists.datestart' => '2005-01-01 00:00:00',
 			'common.lists.dateend' => '2010-12-31 00:00:00',
-			'common.lists.config' => array( 'cnt'=>'40' ),
+			'common.lists.config' => array( 'cnt' => '40' ),
 			'common.lists.position' => 7,
 			'common.lists.status' => 1,
 			'common.lists.typeid' => 8,
@@ -202,6 +202,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetConfig()
 	{
 		$this->assertEquals( array( 'cnt'=>'40' ), $this->object->getConfig() );
+	}
+
+
+	public function testGetConfigValue()
+	{
+		$this->assertEquals( '40', $this->object->getConfigValue( 'cnt' ) );
 	}
 
 

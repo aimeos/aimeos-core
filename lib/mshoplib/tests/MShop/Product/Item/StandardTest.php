@@ -222,6 +222,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetConfigValue()
+	{
+		$this->assertEquals( 'test', $this->object->getConfigValue( 'css-class' ) );
+	}
+
+
 	public function testSetConfig()
 	{
 		$this->assertFalse( $this->object->isModified() );

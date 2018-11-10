@@ -22,7 +22,11 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Plugin\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\Config\Traits;
+
+
 	private $values;
+
 
 	/**
 	 * Initializes the plugin object

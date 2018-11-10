@@ -113,6 +113,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetConfigValue()
+	{
+		$this->assertEquals( 'Europe/Berlin', $this->object->getConfigValue( 'timezone' ) );
+	}
+
+
 	public function testSetConfig()
 	{
 		$return = $this->object->setConfig( array( 'timezone' => 'Europe/Paris' ) );

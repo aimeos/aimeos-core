@@ -123,6 +123,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testGetConfigValue()
+	{
+		$this->assertEquals( '10', $this->object->getConfigValue( 'testcategory' ) );
+	}
+
+
 	public function testSetConfig()
 	{
 		$return = $this->object->setConfig( array( 'unitcategory' => '12' ) );

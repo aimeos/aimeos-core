@@ -22,6 +22,7 @@ class Standard
 	extends \Aimeos\MShop\Common\Item\Base
 	implements \Aimeos\MShop\Service\Item\Iface
 {
+	use \Aimeos\MShop\Common\Item\Config\Traits;
 	use \Aimeos\MShop\Common\Item\ListRef\Traits;
 
 
