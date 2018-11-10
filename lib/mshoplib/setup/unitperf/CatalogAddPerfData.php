@@ -100,7 +100,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->init();
 
 		$config = $this->additional->getConfig();
-		$treeidx = (int) $config->get( 'setup/unitperf/treeindex' );
+		$treeidx = $config->get( 'setup/unitperf/treeindex' );
 		$this->maxBatch = $config->get( 'setup/unitperf/max-batch', 10000 );
 		$this->numCatLevels = $config->get( 'setup/unitperf/num-catlevels', 1 );
 		$this->numCategories = $config->get( 'setup/unitperf/num-categories', 10 );
