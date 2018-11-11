@@ -61,7 +61,7 @@ return array(
 					GROUP BY mord."id", mord."baseid", mord."ordprodid", mord."siteid", mord."next", mord."end",
 						mord."interval", mord."reason", mord."status", mord."ctime", mord."mtime", mord."editor"
 						/*-columns*/ , :columns /*columns-*/
-					/*-subscriptionby*/ORDER BY :subscription/*subscriptionby-*/
+					/*-orderby*/ ORDER BY :order /*orderby-*/
 					LIMIT :size OFFSET :start
 				'
 			),
