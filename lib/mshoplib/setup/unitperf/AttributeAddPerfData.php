@@ -204,6 +204,14 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
 
+		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'sticker' ) );
+
+		$map = [];
+		foreach( $attrManager->searchItems( $search, ['price'] ) as $item ) {
+			$map[$item->getCode()] = $item;
+		}
+
 		$priceItem = $priceManager->createItem( 'default', 'attribute' )
 			->setTaxRate( '20.00' )
 			->setStatus( 1 );
@@ -217,8 +225,8 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( ['small sticker' => '+2.50', 'large sticker' => '+7.50'] as $option => $price )
 		{
-			$item = (clone $attrItem)
-				->setPosition( $pos++ )
+			$item = ( isset( $map[$option] ) ? $map[$option] : clone $attrItem );
+			$item->setPosition( $pos++ )
 				->setLabel( $option )
 				->setCode( $option );
 
@@ -249,6 +257,14 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 
+		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '==', 'attribute.type.code', ['size', 'length', 'width'] ) );
+
+		$map = [];
+		foreach( $attrManager->searchItems( $search, ['price'] ) as $item ) {
+			$map[$item->getType()][$item->getCode()] = $item;
+		}
+
 		foreach( $sizes as $type => $list )
 		{
 			$pos = 0;
@@ -259,8 +275,8 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( $list as $value )
 			{
-				$item = (clone $attrItem)
-					->setPosition( $pos++ )
+				$item = ( isset( $map[$type][$value] ) ? $map[$type][$value] : clone $attrItem );
+				$item->setPosition( $pos++ )
 					->setLabel( $value )
 					->setCode( $value );
 
