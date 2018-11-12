@@ -58,6 +58,16 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 
 		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'service' );
+
+		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '=~', 'service.code', 'perf-' ) );
+
+		$map = [];
+		foreach( $manager->searchItems( $search ) as $item ) {
+			$map[$item->getType()][$item->getCode()] = $item;
+		}
+
+
 		$manager->begin();
 
 		$payItem = $manager->createItem( 'payment', 'service' );
@@ -67,8 +77,8 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$code = 'perf-pay-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
 
-			$item = (clone $payItem)
-				->setLabel( 'Payment service ' . $code )
+			$item = ( isset( $map['payment'][$code] ) ? $map['payment'][$code] : clone $payItem );
+			$item->setLabel( 'Payment service ' . $code )
 				->setProvider( 'PrePay' )
 				->setCode( $code )
 				->setStatus( 1 );
@@ -81,8 +91,8 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		{
 			$code = 'perf-ship-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
 
-			$item = (clone $shipItem)
-				->setLabel( 'Delivery service ' . $code )
+			$item = ( isset( $map['delivery'][$code] ) ? $map['delivery'][$code] : clone $shipItem );
+			$item->setLabel( 'Delivery service ' . $code )
 				->setProvider( 'Manual' )
 				->setCode( $code )
 				->setStatus( 1 );
