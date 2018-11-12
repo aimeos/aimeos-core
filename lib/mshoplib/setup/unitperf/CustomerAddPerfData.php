@@ -53,7 +53,12 @@ class CustomerAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$customerManager = \Aimeos\MShop\Customer\Manager\Factory::createManager( $this->additional );
 
-		$customerItem = $customerManager->createItem();
+		try {
+			$customerItem = $customerManager->findItem( 'demo-test', ['customer/address'] );
+		} catch( \Exception $e ) {
+			$customerItem = $customerManager->createItem();
+		}
+
 		$customerItem->setCode( 'demo-test' );
 		$customerItem->setLabel( 'Test demo unitperf user' );
 		$customerItem->setPassword( sha1( microtime( true ) . getmypid() . rand() ) );
