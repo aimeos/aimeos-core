@@ -446,17 +446,17 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			$prodItem->addListItem( 'product', clone $defListItem, $item );
 
-			next( $size );
-			if( current( $size ) === false )
+			next( $width );
+			if( current( $width ) === false )
 			{
-				reset( $size ); next( $length );
+				reset( $width ); next( $length );
 
 				if( current( $length ) === false )
 				{
-					reset( $length ); next( $width );
+					reset( $length ); next( $size );
 
-					if( current( $width ) === false ) {
-						reset( $width );
+					if( current( $size ) === false ) {
+						reset( $size );
 					}
 				}
 			}
