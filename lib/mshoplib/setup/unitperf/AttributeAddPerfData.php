@@ -94,6 +94,14 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 
+		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '==', 'attribute.type.code', ['property', 'material'] ) );
+
+		$map = [];
+		foreach( $attrManager->searchItems( $search ) as $item ) {
+			$map[$item->getType()][$item->getCode()] = $item;
+		}
+
 		foreach( $characteristics as $type => $list )
 		{
 			$pos = 0;
@@ -104,8 +112,8 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( $list as $value )
 			{
-				$item = (clone $attrItem)
-					->setPosition( $pos++ )
+				$item = ( isset( $map[$type][$value] ) ? $map[$type][$value] : clone $attrItem );
+				$item->setPosition( $pos++ )
 					->setLabel( $value )
 					->setCode( $value );
 
@@ -149,6 +157,14 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
 
+		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
+		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'color' ) );
+
+		$map = [];
+		foreach( $attrManager->searchItems( $search, ['media'] ) as $item ) {
+			$map[$item->getCode()] = $item;
+		}
+
 		$attrItem = $attrManager->createItem( 'color', 'product' )
 			->setDomain( 'product' )
 			->setStatus( 1 );
@@ -166,8 +182,8 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			$triple = $list[0] . ',' . $list[1]. ',' . $list[2];
 			$uri = 'data:image/svg+xml;utf8,<svg width="1" height="1"><rect width="1" height="1" style="fill:rgb(' . $triple . ')" /></svg>';
 
-			$item = (clone $attrItem)
-				->setPosition( $pos++ )
+			$item = ( isset( $map[$code] ) ? $map[$code] : clone $attrItem );
+			$item->setPosition( $pos++ )
 				->setLabel( $name )
 				->setCode( $code );
 
