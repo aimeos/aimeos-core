@@ -84,6 +84,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			{
 				$fcn = function( array $parents, $catLabel ) {
 
+					srand( getmypid() ); mt_srand( getmypid() );
 					$this->addProductItems( $parents, $catLabel );
 
 					foreach( $parents as $catItem ) {
@@ -337,7 +338,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$litem = $productListManager->createItem( 'default', 'price' );
 		$newItem = $priceManager->createItem( 'default', 'product' );
-		$base = rand( 0, 8 ) * 100;
+		$base = rand( 0, 896 );
 
 		for( $i = 0; $i < 3; $i++ )
 		{
@@ -532,8 +533,6 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function shuffle( array $list )
 	{
-		srand( getmypid() ); mt_srand( getmypid() );
-
 		$keys = array_keys( $list );
 		shuffle( $keys );
 		$result = [];
