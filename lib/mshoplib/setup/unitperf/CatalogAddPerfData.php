@@ -135,9 +135,15 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$item->pos = $catIdx;
 
 		$item = $this->addCatalogTexts( $item, $catLabel );
-		$item = $catalogManager->insertItem( $item, $parentId );
 
-		return $item;
+		while( true )
+		{
+			try {
+				return $catalogManager->insertItem( $item, $parentId );
+			} catch( \Aimeos\MW\DB\Exception $e ) {
+				if( $e->getCode() !== 40001 ) { throw $e; } // transaction deadlock
+			}
+		}
 	}
 
 
