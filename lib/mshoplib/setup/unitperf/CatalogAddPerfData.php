@@ -521,7 +521,13 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function save( $domain, $item )
 	{
-		return \Aimeos\MShop\Factory::createManager( $this->additional, $domain )->saveItem( $item );
+		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, $domain );
+
+		$manager->begin();
+		$item = $manager->saveItem( $item );
+		$manager->commit();
+
+		return $item;
 	}
 
 
