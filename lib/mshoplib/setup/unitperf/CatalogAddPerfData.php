@@ -526,6 +526,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 	protected function shuffle( array $list )
 	{
+		srand( getmypid() ); mt_srand( getmypid() );
+
 		$keys = array_keys( $list );
 		shuffle( $keys );
 		$result = [];
