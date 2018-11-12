@@ -14,12 +14,12 @@ namespace Aimeos\MW\Setup\Task;
  */
 class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 {
+	private $maxBatch;
 	private $numCatLevels;
 	private $numCategories;
 	private $numCatProducts;
 	private $numProdVariants;
 	private $attributes = [];
-	private $typeIds = [];
 
 
 	/**
@@ -46,7 +46,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return ['MShopAddCodeDataUnitperf', 'AttributeAddPerfData', 'LocaleAddPerfData'];
+		return ['MShopAddCodeDataUnitperf', 'AttributeAddPerfData', 'LocaleAddPerfData', 'MShopSetLocale'];
 	}
 
 
@@ -204,7 +204,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	}
 
 
-	protected function addProductItems( array $catItems = [], $catLabel )
+	protected function addProductItems( array $catItems, $catLabel )
 	{
 		$articles = $this->shuffle( [
 			'shirt', 'skirt', 'jacket', 'pants', 'socks', 'blouse', 'slip', 'sweater', 'dress', 'top',
