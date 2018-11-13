@@ -111,10 +111,10 @@ class Mysql
 					$date = date( 'Y-m-d H:i:s', time() + $date );
 				}
 
-				$stmt->bind( 1, $key );
+				$stmt->bind( 1, (string) $key );
 				$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 3, $date );
-				$stmt->bind( 4, $value );
+				$stmt->bind( 4, (string) $value );
 				$stmt->execute()->finish();
 
 				if( isset( $tags[$key] ) )
@@ -124,9 +124,9 @@ class Mysql
 
 					foreach( (array) $tags[$key] as $name )
 					{
-						$stmtTagPart->bind( 1, $key );
+						$stmtTagPart->bind( 1, (string) $key );
 						$stmtTagPart->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmtTagPart->bind( 3, $name );
+						$stmtTagPart->bind( 3, (string) $name );
 
 						$parts[] = (string) $stmtTagPart;
 					}
