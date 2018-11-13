@@ -94,14 +94,6 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 
-		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'attribute.type.code', ['property', 'material'] ) );
-
-		$map = [];
-		foreach( $attrManager->searchItems( $search ) as $item ) {
-			$map[$item->getType()][$item->getCode()] = $item;
-		}
-
 		foreach( $characteristics as $type => $list )
 		{
 			$pos = 0;
@@ -112,7 +104,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( $list as $value )
 			{
-				$item = ( isset( $map[$type][$value] ) ? $map[$type][$value] : clone $attrItem );
+				$item = clone $attrItem;
 				$item->setPosition( $pos++ )
 					->setLabel( $value )
 					->setCode( $value );
@@ -157,14 +149,6 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
 
-		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'color' ) );
-
-		$map = [];
-		foreach( $attrManager->searchItems( $search, ['media'] ) as $item ) {
-			$map[$item->getCode()] = $item;
-		}
-
 		$attrItem = $attrManager->createItem( 'color', 'product' )
 			->setDomain( 'product' )
 			->setStatus( 1 );
@@ -182,14 +166,13 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			$triple = $list[0] . ',' . $list[1]. ',' . $list[2];
 			$uri = 'data:image/svg+xml;utf8,<svg width="1" height="1"><rect width="1" height="1" style="fill:rgb(' . $triple . ')" /></svg>';
 
-			$item = ( isset( $map[$code] ) ? $map[$code] : clone $attrItem );
+			$item = clone $attrItem;
 			$item->setPosition( $pos++ )
 				->setLabel( $name )
 				->setCode( $code );
 
-			$refItem = (clone $mediaItem)
-				->setPreview( $uri )
-				->setUrl( $uri );
+			$refItem = clone $mediaItem;
+			$refItem->setPreview( $uri )->setUrl( $uri );
 
 			$item->addListItem( 'media', clone $listItem, $refItem );
 
@@ -204,14 +187,6 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute/lists' );
 
-		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'attribute.type.code', 'sticker' ) );
-
-		$map = [];
-		foreach( $attrManager->searchItems( $search, ['price'] ) as $item ) {
-			$map[$item->getCode()] = $item;
-		}
-
 		$priceItem = $priceManager->createItem( 'default', 'attribute' )
 			->setTaxRate( '20.00' )
 			->setStatus( 1 );
@@ -225,14 +200,13 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( ['small sticker' => '+2.50', 'large sticker' => '+7.50'] as $option => $price )
 		{
-			$item = ( isset( $map[$option] ) ? $map[$option] : clone $attrItem );
+			$item = clone $attrItem;
 			$item->setPosition( $pos++ )
 				->setLabel( $option )
 				->setCode( $option );
 
-			$refItem = (clone $priceItem)
-				->setLabel( $option )
-				->setValue( $price );
+			$refItem = clone $priceItem;
+			$refItem->setLabel( $option )->setValue( $price );
 
 			$item->addListItem( 'price', clone $listItem, $refItem );
 
@@ -257,14 +231,6 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		$attrManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'attribute' );
 
-		$search = $attrManager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '==', 'attribute.type.code', ['size', 'length', 'width'] ) );
-
-		$map = [];
-		foreach( $attrManager->searchItems( $search, ['price'] ) as $item ) {
-			$map[$item->getType()][$item->getCode()] = $item;
-		}
-
 		foreach( $sizes as $type => $list )
 		{
 			$pos = 0;
@@ -275,7 +241,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 			foreach( $list as $value )
 			{
-				$item = ( isset( $map[$type][$value] ) ? $map[$type][$value] : clone $attrItem );
+				$item = clone $attrItem;
 				$item->setPosition( $pos++ )
 					->setLabel( $value )
 					->setCode( $value );
