@@ -59,28 +59,28 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					'short' => 'Pick-up at one of our local stores',
 					'image' => 'http://demo.aimeos.org/media/service/pickup.png',
 					'provider' => 'Manual',
-					'price' => '0.00',
+					'costs' => '0.00',
 				],
 				'dhl' => [
 					'name' => 'DHL',
 					'short' => 'Delivery within three days by DHL',
 					'image' => 'http://demo.aimeos.org/media/service/dhl.png',
 					'provider' => 'Manual',
-					'price' => '3.90',
+					'costs' => '3.90',
 				],
 				'fedex' => [
 					'name' => 'Fedex',
 					'short' => 'Delivery within two days by Fedex',
 					'image' => 'http://demo.aimeos.org/media/service/fedex.png',
 					'provider' => 'Manual',
-					'price' => '6.90',
+					'costs' => '6.90',
 				],
 				'tnt' => [
 					'name' => 'TNT',
-					'short' => 'Delivery within one two days by TNT',
+					'short' => 'Delivery within one day by TNT',
 					'image' => 'http://demo.aimeos.org/media/service/tnt.png',
 					'provider' => 'Manual',
-					'price' => '9.90',
+					'costs' => '9.90',
 				],
 			],
 			'payment' => [
@@ -89,28 +89,28 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					'short' => 'Pay by invoice within 14 days',
 					'image' => 'http://demo.aimeos.org/media/service/payment-in-advance.png',
 					'provider' => 'PostPay',
-					'price' => '0.00',
+					'costs' => '0.00',
 				],
 				'directdebit' => [
 					'name' => 'Direct debit',
 					'short' => 'Payment via your bank account',
 					'image' => 'http://demo.aimeos.org/media/service/sepa.png',
 					'provider' => 'PostPay',
-					'price' => '0.00',
+					'costs' => '0.00',
 				],
 				'cash' => [
 					'name' => 'Cash on delivery',
 					'short' => 'Pay cash on delivery of the parcel',
 					'image' => 'http://demo.aimeos.org/media/service/dhl-cod.png',
 					'provider' => 'PrePay',
-					'price' => '8.00',
+					'costs' => '8.00',
 				],
 				'prepay' => [
 					'name' => 'Prepayment',
 					'short' => 'Pay in advance before the parcel is shipped',
 					'image' => 'http://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
 					'provider' => 'PrePay',
-					'price' => '-4.00',
+					'costs' => '-4.00',
 				],
 			],
 		];
@@ -157,7 +157,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					$item->addListItem( 'media', clone $mListItem, $media );
 
 					$price = clone $priceItem;
-					$price->setLabel( $entry['name'] )->setValue( $entry['price'] );
+					$price->setLabel( $entry['name'] )->setCosts( $entry['costs'] );
 					$item->addListItem( 'price', clone $pListItem, $price );
 
 					$text = clone $textItem;
