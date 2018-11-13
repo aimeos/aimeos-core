@@ -127,7 +127,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$pListItem = $listManager->createItem( 'default', 'price' )->setStatus( 1 );
 		$tListItem = $listManager->createItem( 'default', 'text' )->setStatus( 1 );
 
-		$mediaItem = $mediaManager->createItem( 'icon', 'service' )->setStatus( 1 );
+		$mediaItem = $mediaManager->createItem( 'icon', 'service' )->setStatus( 1 )->setMimeType( 'image/png' );
 		$priceItem = $priceManager->createItem( 'default', 'service' )->setStatus( 1 );
 		$textItem = $textManager->createItem( 'short', 'service' )->setStatus( 1 );
 
