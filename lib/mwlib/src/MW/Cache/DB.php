@@ -312,19 +312,19 @@ class DB
 					$date = date( 'Y-m-d H:i:s', time() + $date );
 				}
 
-				$stmt->bind( 1, $key );
+				$stmt->bind( 1, (string) $key );
 				$stmt->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 3, $date );
-				$stmt->bind( 4, $value );
+				$stmt->bind( 4, (string) $value );
 				$stmt->execute()->finish();
 
 				if( isset( $tags[$key] ) )
 				{
 					foreach( (array) $tags[$key] as $name )
 					{
-						$stmtTag->bind( 1, $key );
+						$stmtTag->bind( 1, (string) $key );
 						$stmtTag->bind( 2, $this->siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-						$stmtTag->bind( 3, $name );
+						$stmtTag->bind( 3, (string) $name );
 						$stmtTag->execute()->finish();
 					}
 				}
