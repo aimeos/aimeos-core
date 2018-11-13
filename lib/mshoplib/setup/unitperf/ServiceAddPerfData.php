@@ -110,7 +110,7 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 					'short' => 'Pay in advance before the parcel is shipped',
 					'image' => 'http://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
 					'provider' => 'PrePay',
-					'costs' => '-4.00',
+					'costs' => '0.00',
 				],
 			],
 		];
