@@ -232,7 +232,7 @@ class Standard implements \Aimeos\MW\View\Iface
 
 			$this->includeFile( $filepath );
 
-			return ob_get_clean();
+			return str_replace( "\t", '', ob_get_clean() );
 		}
 		catch( \Exception $e )
 		{
