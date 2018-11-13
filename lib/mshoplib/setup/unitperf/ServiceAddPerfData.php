@@ -14,11 +14,6 @@ namespace Aimeos\MW\Setup\Task;
  */
 class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 {
-	const NUM_SERVICES = 100;
-
-	private $typeIds = [];
-
-
 	public function __construct( \Aimeos\MW\Setup\DBSchema\Iface $schema, \Aimeos\MW\DB\Connection\Iface $conn, $additional = null )
 	{
 		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $additional );
@@ -57,47 +52,121 @@ class ServiceAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->msg( 'Adding service performance data', 0 );
 
 
+		$services = [
+			'delivery' => [
+				'pickup' => [
+					'name' => 'Pickup',
+					'short' => 'Pick-up at one of our local stores',
+					'image' => 'http://demo.aimeos.org/media/service/pickup.png',
+					'provider' => 'Manual',
+					'price' => '0.00',
+				],
+				'dhl' => [
+					'name' => 'DHL',
+					'short' => 'Delivery within three days by DHL',
+					'image' => 'http://demo.aimeos.org/media/service/dhl.png',
+					'provider' => 'Manual',
+					'price' => '3.90',
+				],
+				'fedex' => [
+					'name' => 'Fedex',
+					'short' => 'Delivery within two days by Fedex',
+					'image' => 'http://demo.aimeos.org/media/service/fedex.png',
+					'provider' => 'Manual',
+					'price' => '6.90',
+				],
+				'tnt' => [
+					'name' => 'TNT',
+					'short' => 'Delivery within one two days by TNT',
+					'image' => 'http://demo.aimeos.org/media/service/tnt.png',
+					'provider' => 'Manual',
+					'price' => '9.90',
+				],
+			],
+			'payment' => [
+				'invoice' => [
+					'name' => 'Invoice',
+					'short' => 'Pay by invoice within 14 days',
+					'image' => 'http://demo.aimeos.org/media/service/payment-in-advance.png',
+					'provider' => 'PostPay',
+					'price' => '0.00',
+				],
+				'directdebit' => [
+					'name' => 'Direct debit',
+					'short' => 'Payment via your bank account',
+					'image' => 'http://demo.aimeos.org/media/service/sepa.png',
+					'provider' => 'PostPay',
+					'price' => '0.00',
+				],
+				'cash' => [
+					'name' => 'Cash on delivery',
+					'short' => 'Pay cash on delivery of the parcel',
+					'image' => 'http://demo.aimeos.org/media/service/dhl-cod.png',
+					'provider' => 'PrePay',
+					'price' => '8.00',
+				],
+				'prepay' => [
+					'name' => 'Prepayment',
+					'short' => 'Pay in advance before the parcel is shipped',
+					'image' => 'http://demo.aimeos.org/media/service/payment-in-advance-alternative.png',
+					'provider' => 'PrePay',
+					'price' => '-4.00',
+				],
+			],
+		];
+
+		$numServices = $this->additional->getConfig()->get( 'setup/unitperf/max-services', 100 );
+
 		$manager = \Aimeos\MShop\Factory::createManager( $this->additional, 'service' );
+		$listManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'service/lists' );
+		$mediaManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'media' );
+		$priceManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'price' );
+		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 
-		$search = $manager->createSearch()->setSlice( 0, 0x7fffffff );
-		$search->setConditions( $search->compare( '=~', 'service.code', 'perf-' ) );
+		$mListItem = $listManager->createItem( 'default', 'media' )->setStatus( 1 );
+		$pListItem = $listManager->createItem( 'default', 'price' )->setStatus( 1 );
+		$tListItem = $listManager->createItem( 'default', 'text' )->setStatus( 1 );
 
-		$map = [];
-		foreach( $manager->searchItems( $search ) as $item ) {
-			$map[$item->getType()][$item->getCode()] = $item;
-		}
+		$mediaItem = $mediaManager->createItem( 'icon', 'service' )->setStatus( 1 );
+		$priceItem = $priceManager->createItem( 'default', 'service' )->setStatus( 1 );
+		$textItem = $textManager->createItem( 'short', 'service' )->setStatus( 1 );
 
 
 		$manager->begin();
 
-		$payItem = $manager->createItem( 'payment', 'service' );
-		$shipItem = $manager->createItem( 'delivery', 'service' );
-
-		for( $i = 0; $i < self::NUM_SERVICES; $i++ )
+		foreach( $services as $type => $list )
 		{
-			$code = 'perf-pay-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
+			$pos = 0;
+			$serviceItem = $manager->createItem( $type, 'service' )->setStatus( 1 );
 
-			$item = ( isset( $map['payment'][$code] ) ? $map['payment'][$code] : clone $payItem );
-			$item->setLabel( 'Payment service ' . $code )
-				->setProvider( 'PrePay' )
-				->setCode( $code )
-				->setStatus( 1 );
+			for( $i = 0; $i < $numServices / 4; $i++ )
+			{
+				foreach( $list as $code => $entry )
+				{
+					$code = 'perf-pay-' . $code . '-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
 
-			$manager->saveItem( $item );
-		}
+					$item = clone $serviceItem;
+					$item->setLabel( $entry['name'] )
+						->setProvider( $entry['provider'] )
+						->setPosition( $pos++ )
+						->setCode( $code )
+						->setStatus( 1 );
 
+					$media = clone $mediaItem;
+					$media->setLabel( $entry['name'] )->setPreview( $entry['image'] )->setUrl( $entry['image'] );
+					$item->addListItem( 'media', clone $mListItem, $media );
 
-		for( $i = 0; $i < self::NUM_SERVICES; $i++ )
-		{
-			$code = 'perf-ship-' . str_pad( $i, 3, '0', STR_PAD_LEFT );
+					$price = clone $priceItem;
+					$price->setLabel( $entry['name'] )->setValue( $entry['price'] );
+					$item->addListItem( 'price', clone $pListItem, $price );
 
-			$item = ( isset( $map['delivery'][$code] ) ? $map['delivery'][$code] : clone $shipItem );
-			$item->setLabel( 'Delivery service ' . $code )
-				->setProvider( 'Manual' )
-				->setCode( $code )
-				->setStatus( 1 );
+					$text = clone $textItem;
+					$text->setLabel( $entry['name'] )->setContent( $entry['short'] );
+					$item->addListItem( 'text', clone $tListItem, $text );
 
-			$manager->saveItem( $item );
+					$manager->saveItem( $item );
+				}
+			}
 		}
 
 		$manager->commit();
