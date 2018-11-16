@@ -314,46 +314,26 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsCatalog()
 	{
-		$context = $this->context;
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catItem = $catalogManager->findItem( 'cafe' );
 
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $context );
-		$catSearch = $catalogManager->createSearch();
-		$conditions = array(
-			$catSearch->compare( '==', 'catalog.label', 'Kaffee' ),
-			$catSearch->compare( '==', 'catalog.editor', $this->editor )
-		);
-		$catSearch->setConditions( $catSearch->combine( '&&', $conditions ) );
-		$result = $catalogManager->searchItems( $catSearch );
-
-		if( ( $catItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No catalog item found' );
-		}
-
-		$conditions = array(
-			$catSearch->compare( '==', 'catalog.label', 'Neu' ),
-			$catSearch->compare( '==', 'catalog.editor', $this->editor )
-		);
-		$catSearch->setConditions( $catSearch->combine( '&&', $conditions ) );
-		$result = $catalogManager->searchItems( $catSearch );
-
-		if( ( $catNewItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No catalog item found' );
-		}
-
-
-		$search = $this->object->createSearch();
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$search->setConditions( $search->compare( '==', 'product.editor', $this->editor ) );
+
 		$sortfunc = $search->createFunction( 'sort:index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-		$search->setSlice( 0, 1 );
 
 		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
+	}
 
 
+	public function testSearchItemsCatalogId()
+	{
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catItem = $catalogManager->findItem( 'cafe' );
+
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 		$total = 0;
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-
 
 		$conditions = array(
 			$search->compare( '==', 'index.catalog.id', $catItem->getId() ), // catalog ID
@@ -364,7 +344,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
+	}
 
+
+	public function testSearchItemsCatalogIdNotNull()
+	{
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$total = 0;
 
 		$conditions = array(
 			$search->compare( '!=', 'index.catalog.id', null ), // catalog ID
@@ -375,11 +361,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 7, $total );
+	}
 
+
+	public function testSearchItemsCatalogPosition()
+	{
+		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( $this->context );
+		$catItem = $catalogManager->findItem( 'cafe' );
+
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
+		$total = 0;
 
 		$func = $search->createFunction( 'index.catalog:position', array( 'promotion', [$catItem->getId()] ) );
 		$conditions = array(
-			$search->compare( '>=', $func, 0 ), // position
+			$search->compare( '!=', $func, null ), // position
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -391,20 +386,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
-
-
-		$catIds = array( (int) $catItem->getId(), (int) $catNewItem->getId() );
-		$func = $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) );
-		$conditions = array(
-			$search->compare( '==', $func, 2 ), // count categories
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
 	}
 
 

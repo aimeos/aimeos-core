@@ -179,23 +179,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsCount()
-	{
-		$catalogManager = \Aimeos\MShop\Catalog\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$catItem = $catalogManager->findItem( 'cafe' );
-		$catNewItem = $catalogManager->findItem( 'new' );
-
-		$search = $this->object->createSearch();
-		$catIds = array( (int) $catItem->getId(), (int) $catNewItem->getId() );
-		$func = $search->createFunction( 'index.catalogcount', array( 'default', $catIds ) );
-		$search->setConditions( $search->compare( '==', $func, 2 ) ); // count categories
-
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertEquals( 1, count( $result ) );
-	}
-
-
 	public function testCleanupIndex()
 	{
 		$this->object->cleanupIndex( '1970-01-01 00:00:00' );

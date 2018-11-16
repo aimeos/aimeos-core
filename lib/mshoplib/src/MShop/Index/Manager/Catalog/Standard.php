@@ -31,48 +31,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		// @deprecated Removed 2019.01
-		'index.catalogaggregate' => array(
-			'code' => 'index.catalogaggregate()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindca_agg."catid")
-				FROM "mshop_index_catalog" AS mindca_agg
-				WHERE mpro."id" = mindca_agg."prodid" AND :site
-				AND mindca_agg."catid" IN ( $1 ) )',
-			'label' => 'Number of product categories, parameter(<category IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01
-		'index.catalogcount' => array(
-			'code' => 'index.catalogcount()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindca_cnt."catid")
-				FROM "mshop_index_catalog" AS mindca_cnt
-				WHERE mpro."id" = mindca_cnt."prodid" AND :site
-				AND mindca_cnt."catid" IN ( $2 ) AND mindca_cnt."listtype" = $1 )',
-			'label' => 'Number of product categories, parameter(<list type code>,<category IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01, use index.catalog:position()
-		'index.catalog.position' => array(
-			'code' => 'index.catalog.position()',
-			'internalcode' => ':site AND mindca."catid" IN ( $2 ) AND mindca."listtype" = $1 AND mindca."pos"',
-			'label' => 'Product position in category, parameter(<list type code>,<category IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01, use sort:index.catalog:position()
-		'sort:index.catalog.position' => array(
-			'code' => 'sort:index.catalog.position()',
-			'internalcode' => 'mindca."pos"',
-			'label' => 'Sort product position in category, parameter(<list type code>,<category IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'index.catalog:position' => array(
 			'code' => 'index.catalog:position()',
 			'internalcode' => ':site AND mindca."catid" IN ( $2 ) AND mindca."listtype" = $1 AND mindca."pos"',
@@ -118,9 +76,6 @@ class Standard
 		}
 
 		$this->replaceSiteMarker( $this->searchConfig['index.catalog:position'], 'mindca."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.catalog.position'], 'mindca."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.catalogaggregate'], 'mindca_agg."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.catalogcount'], 'mindca_cnt."siteid"', $siteIds );
 	}
 
 
