@@ -271,43 +271,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsAttribute()
+	public function testSearchItemsAttributeId()
 	{
-		$context = $this->context;
-
-		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $context );
-		$search = $attributeManager->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'attribute.label', 'product/width/29' ),
-			$search->compare( '==', 'attribute.editor', $this->editor ),
-			$search->compare( '==', 'attribute.type.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.code', 'width' ),
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $attributeManager->searchItems( $search );
-
-		if( ( $attrWidthItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No attribute item found' );
-		}
-
-		$expr = array(
-			$search->compare( '==', 'attribute.label', 'product/length/30' ),
-			$search->compare( '==', 'attribute.editor', $this->editor ),
-			$search->compare( '==', 'attribute.type.domain', 'product' ),
-			$search->compare( '==', 'attribute.type.code', 'length' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $attributeManager->searchItems( $search );
-
-		if( ( $attrLenItem = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No attribute item found' );
-		}
-
+		$attributeManager = \Aimeos\MShop\Attribute\Manager\Factory::createManager( $this->context );
+		$attrWidthItem = $attributeManager->findItem( '29', [], 'product', 'width' );
 
 		$total = 0;
 		$search = $this->object->createSearch();
 		$search->setSlice( 0, 1 );
-
 
 		$conditions = array(
 			$search->compare( '==', 'index.attribute.id', $attrWidthItem->getId() ),
@@ -318,7 +289,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 3, $total );
+	}
 
+
+	public function testSearchItemsAttributeIdNotNull()
+	{
+		$total = 0;
+		$search = $this->object->createSearch();
+		$search->setSlice( 0, 1 );
 
 		$expr = array(
 			$search->compare( '!=', 'index.attribute.id', null ),
@@ -331,34 +309,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 6, $total );
-
-
-		$attrIds = array( (int) $attrWidthItem->getId(), (int) $attrLenItem->getId() );
-		$func = $search->createFunction( 'index.attributecount', array( 'variant', $attrIds ) );
-		$conditions = array(
-			$search->compare( '==', $func, 2 ), // count attributes
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
-
-
-		$func = $search->createFunction( 'index.attribute.code', array( 'default', 'size' ) );
-		$expr = array(
-			$search->compare( '!=', 'index.catalog.id', null ),
-			$search->compare( '~=', $func, 'x' ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 3, $total );
 	}
 
 

@@ -31,39 +31,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		// @deprecated Removed 2019.01
-		'index.attribute.code' => array(
-			'code' => 'index.attribute.code()',
-			'internalcode' => ':site AND mindat."listtype" = $1 AND mindat."type" = $2 AND mindat."code"',
-			'label' => 'Attribute code, parameter(<list type code>,<attribute type code>)',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01
-		'index.attributecount' => array(
-			'code' => 'index.attributecount()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindat_cnt."attrid")
-				FROM "mshop_index_attribute" AS mindat_cnt
-				WHERE mpro."id" = mindat_cnt."prodid" AND :site
-				AND mindat_cnt."attrid" IN ( $2 ) AND mindat_cnt."listtype" = $1 )',
-			'label' => 'Number of product attributes, parameter(<list type code>,<attribute IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01, use index.attribute:all()
-		'index.attributeaggregate' => array(
-			'code' => 'index.attributeaggregate()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindat_agg."attrid")
-				FROM "mshop_index_attribute" AS mindat_agg
-				WHERE mpro."id" = mindat_agg."prodid" AND :site
-				AND mindat_agg."attrid" IN ( $1 ) )',
-			'label' => 'Number of product attributes, parameter(<attribute IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'index.attribute:all' => array(
 			'code' => 'index.attribute:all()',
 			'internalcode' => '( SELECT mpro_all."id" FROM mshop_product AS mpro_all
@@ -110,9 +77,6 @@ class Standard
 			return [$params[0], count( explode( ',', $params[0] ) )];
 		};
 
-		$this->replaceSiteMarker( $this->searchConfig['index.attribute.code'], 'mindat."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.attributecount'], 'mindat_cnt."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.attributeaggregate'], 'mindat_agg."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.attribute:all'], 'mindat_all."siteid"', $siteIds );
 	}
 
