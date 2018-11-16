@@ -24,7 +24,7 @@ class MySQL
 		'index.supplier.id' => array(
 			'code' => 'index.supplier.id',
 			'internalcode' => 'mindsu."supid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_index_supplier" AS mindsu USE INDEX ("idx_msindsup_sid_supid_lt_po", "unq_msindsup_p_sid_supid_lt_po") ON mindsu."prodid" = mpro."id"' ),
+			'internaldeps'=> array( 'LEFT JOIN "mshop_index_supplier" AS mindsu USE INDEX ("idx_msindsup_sid_supid_lt_po", "unq_msindsup_p_sid_supid_lt_po") ON mindsu."prodid" = mpro."id"' ),
 			'label' => 'Product index supplier ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,

@@ -30,48 +30,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
-		// @deprecated Removed 2019.01
-		'index.supplieraggregate' => array(
-			'code' => 'index.supplieraggregate()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindsu_agg."supid")
-				FROM "mshop_index_supplier" AS mindsu_agg
-				WHERE mpro."id" = mindsu_agg."prodid" AND :site
-				AND mindsu_agg."supid" IN ( $1 ) )',
-			'label' => 'Number of product suppliers, parameter(<supplier IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01
-		'index.suppliercount' => array(
-			'code' => 'index.suppliercount()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindsu_cnt."supid")
-				FROM "mshop_index_supplier" AS mindsu_cnt
-				WHERE mpro."id" = mindsu_cnt."prodid" AND :site
-				AND mindsu_cnt."supid" IN ( $2 ) AND mindsu_cnt."listtype" = $1 )',
-			'label' => 'Number of product suppliers, parameter(<list type code>,<supplier IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01, use index.supplier:position()
-		'index.supplier.position' => array(
-			'code' => 'index.supplier.position()',
-			'internalcode' => ':site AND mindsu."supid" IN ( $2 ) AND mindsu."listtype" = $1 AND mindsu."pos"',
-			'label' => 'Product position in supplier list, parameter(<list type code>,<supplier ID>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01, use sort:index.supplier:position()
-		'sort:index.supplier.position' => array(
-			'code' => 'sort:index.supplier.position()',
-			'internalcode' => 'mindsu."pos"',
-			'label' => 'Sort product position in supplier list, parameter(<list type code>,<supplier ID>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'index.supplier:position' => array(
 			'code' => 'index.supplier:position()',
 			'internalcode' => ':site AND mindsu."supid" IN ( $2 ) AND mindsu."listtype" = $1 AND mindsu."pos"',
@@ -117,9 +75,6 @@ class Standard
 		}
 
 		$this->replaceSiteMarker( $this->searchConfig['index.supplier:position'], 'mindsu."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.supplier.position'], 'mindsu."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.supplieraggregate'], 'mindsu_agg."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.suppliercount'], 'mindsu_cnt."siteid"', $siteIds );
 	}
 
 

@@ -163,23 +163,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItemsCount()
-	{
-		$supplierManager = \Aimeos\MShop\Supplier\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$supItem = $supplierManager->findItem( 'unitCode001' );
-		$supItem2 = $supplierManager->findItem( 'unitCode002' );
-
-		$search = $this->object->createSearch();
-		$supIds = array( (int) $supItem->getId(), (int) $supItem2->getId() );
-		$func = $search->createFunction( 'index.suppliercount', array( 'default', $supIds ) );
-		$search->setConditions( $search->compare( '==', $func, 1 ) ); // count supplier
-
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertEquals( 2, count( $result ) );
-	}
-
-
 	public function testCleanupIndex()
 	{
 		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
