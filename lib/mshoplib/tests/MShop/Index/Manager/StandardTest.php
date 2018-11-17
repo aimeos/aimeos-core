@@ -138,7 +138,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertArrayHasKey( 'index.attribute.id', $attributes );
 		$this->assertArrayHasKey( 'index.catalog.id', $attributes );
-		$this->assertArrayHasKey( 'index.price.id', $attributes );
 		$this->assertArrayHasKey( 'index.supplier.id', $attributes );
 		$this->assertArrayHasKey( 'index.text.id', $attributes );
 	}
@@ -392,36 +391,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSearchItemsPrice()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-
-		$priceItems = self::$products['CNC']->getRefItems( 'price', 'default' );
-		if( ( $priceItem = reset( $priceItems ) ) === false ) {
-			throw new \RuntimeException( 'No price with type "default" available in product CNC' );
-		}
-
-		$conditions = array(
-			$search->compare( '==', 'index.price.id', $priceItem->getId() ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
-
-
-		$expr = array(
-			$search->compare( '!=', 'index.price.id', null ),
-			$search->compare( '!=', 'index.catalog.id', null ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 6, $total );
-
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
 		$func = $search->createFunction( 'index.price:value', array( 'default', 'EUR', 'default' ) );
 		$expr = array(
@@ -443,42 +413,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSearchItemsText()
 	{
-		$context = clone $this->context;
-		$context->getConfig()->set( 'mshop/index/manager/text/name', 'Standard' );
-		$object = new \Aimeos\MShop\Index\Manager\Standard( $context );
-
-		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
-		if( ( $textItem = reset( $textItems ) ) === false ) {
-			throw new \RuntimeException( 'No text with type "name" available in product CNC' );
-		}
+		$this->context->getConfig()->set( 'mshop/index/manager/text/name', 'Standard' );
+		$object = new \Aimeos\MShop\Index\Manager\Standard( $this->context );
 
 		$total = 0;
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
-
-		$conditions = array(
-			$search->compare( '==', 'index.text.id', $textItem->getId() ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
-
-
-		$expr = array(
-			$search->compare( '!=', 'index.text.id', null ),
-			$search->compare( '!=', 'index.catalog.id', null ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$result = $object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 6, $total );
-
+		$search = $object->createSearch()->setSlice( 0, 1 );
 
 		$func = $search->createFunction( 'index.text:relevance', array( 'unittype13', 'de', 'Expr' ) );
 		$conditions = array(
@@ -491,22 +430,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
-
-
-		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
-		$conditions = array(
-			$search->compare( '~=', $func, 'expr' ), // text value
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-
-		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', 'name' ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$result = $object->searchItems( $search, [], $total );
-
-		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
 	}
 
 
