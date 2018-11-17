@@ -119,43 +119,6 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchTexts()
-	{
-		$context = \TestHelperMShop::getContext();
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
-
-		$search = $productManager->createSearch();
-		$conditions = array(
-			$search->compare( '==', 'product.code', 'CNC' ),
-			$search->compare( '==', 'product.editor', $this->editor )
-		);
-		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$result = $productManager->searchItems( $search );
-
-		if( ( $product = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No product found' );
-		}
-
-
-		$langid = $context->getLocale()->getLanguageId();
-
-		$textMgr = $this->object->getSubManager( 'text', 'PgSQL' );
-
-
-		$search = $textMgr->createSearch();
-		$expr = array(
-			$search->compare( '>', $search->createFunction( 'index.text:relevance', array( 'unittype19', $langid, 'Noir Cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'index.text:name', array( $langid ) ), '' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$result = $textMgr->searchTexts( $search );
-
-		$this->assertArrayHasKey( $product->getId(), $result );
-		$this->assertContains( 'cafe noire cappuccino', $result );
-	}
-
-
 	public function testOptimize()
 	{
 		$this->object->optimize();

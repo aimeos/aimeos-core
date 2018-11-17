@@ -190,24 +190,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchTexts()
-	{
-		$context = \TestHelperMShop::getContext();
-		$langid = $context->getLocale()->getLanguageId();
-
-		$search = $this->object->createSearch();
-		$expr = array(
-			$search->compare( '>', $search->createFunction( 'index.text:relevance', array( 'unittype19', $langid, 'Cafe Noire Cap' ) ), 0 ),
-			$search->compare( '>', $search->createFunction( 'index.text:name', array( $langid ) ), '' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$result = $this->object->searchTexts( $search );
-
-		$this->assertContains( 'cafe noire cappuccino', $result );
-	}
-
-
 	public function testCleanupIndex()
 	{
 		$this->object->cleanupIndex( '1970-01-01 00:00:00' );
