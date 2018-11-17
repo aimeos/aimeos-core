@@ -71,50 +71,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
-		// @deprecated Removed 2019.01, Use "index.text:relevance"
-		'index.text.relevance' => array(
-			'code' => 'index.text.relevance()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindte2."prodid")
-				FROM "mshop_index_text" AS mindte2
-				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" IN ($1)
-				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
-			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
-			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01, Use "index.text:relevance"
-		'sort:index.text.relevance' => array(
-			'code' => 'sort:index.text.relevance()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindte2."prodid")
-				FROM "mshop_index_text" AS mindte2
-				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" IN ($1)
-				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
-			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
-			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01, Use "index.text:name"
-		'index.text.value' => array(
-			'code' => 'index.text.value()',
-			'internalcode' => ':site AND mindte."listtype" IN ($1)
-				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
-				AND mindte."type" IN ($3) AND mindte."domain" = $4 AND mindte."value"',
-			'label' => 'Product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
-		// @deprecated Removed 2019.01, Use "index.text:name"
-		'sort:index.text.value' => array(
-			'code' => 'sort:index.text.value()',
-			'internalcode' => 'mindte."value"',
-			'label' => 'Sort product text by type, parameter(<list type code>,<language ID>,<text type code>,<domain>)',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		)
 	);
 
 	private $subManagers;
@@ -144,7 +100,7 @@ class Standard
 		}
 
 
-		$func = function( $source, array $params ) {
+		$this->searchConfig['index.text:relevance']['function'] = function( $source, array $params ) {
 
 			if( isset( $params[2] ) ) {
 				$params[2] = strtolower( $params[2] );
@@ -153,16 +109,9 @@ class Standard
 			return $params;
 		};
 
-		$this->searchConfig['index.text:relevance']['function'] = $func;
-		$this->searchConfig['index.text.relevance']['function'] = $func;
-		$this->searchConfig['sort:index.text.relevance']['function'] = $func;
-
 		$this->replaceSiteMarker( $this->searchConfig['index.text:name'], 'mindte."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte2."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['sort:index.text:relevance'], 'mindte2."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.text.value'], 'mindte."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.text.relevance'], 'mindte2."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['sort:index.text.relevance'], 'mindte2."siteid"', $siteIds );
 	}
 
 

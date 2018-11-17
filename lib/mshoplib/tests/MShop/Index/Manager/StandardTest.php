@@ -139,7 +139,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'index.attribute.id', $attributes );
 		$this->assertArrayHasKey( 'index.catalog.id', $attributes );
 		$this->assertArrayHasKey( 'index.supplier.id', $attributes );
-		$this->assertArrayHasKey( 'index.text.id', $attributes );
 	}
 
 

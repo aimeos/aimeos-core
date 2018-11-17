@@ -71,29 +71,20 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 	{
 		$list = $this->object->getSearchAttributes();
 
-		foreach( $list as $attribute )
-		{
+		foreach( $list as $attribute ) {
 			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
-
-			switch( $attribute->getCode() )
-			{
-				case 'index.text:relevance()':
-				case 'sort:index.text:relevance()':
-					$this->assertGreaterThanOrEqual( 0, strpos( $attribute->getInternalCode(), '@@' ) );
-			}
 		}
 	}
 
 
-	public function testSearchItemsText()
+	public function testSearchItemsRelevance()
 	{
 		$total = 0;
-		$search = $this->object->createSearch();
-		$search->setSlice( 0, 1 );
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
 		$func = $search->createFunction( 'index.text:relevance', array( 'unittype20', 'de', 'Espresso' ) );
 		$conditions = array(
-			$search->compare( '>', $func, 0 ), // text relevance
+			$search->compare( '!=', $func, null ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
@@ -101,7 +92,13 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
+	}
 
+
+	public function testSearchItemsName()
+	{
+		$total = 0;
+		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
 		$func = $search->createFunction( 'index.text.value', array( 'unittype19', 'de', 'name', 'product' ) );
 		$conditions = array(

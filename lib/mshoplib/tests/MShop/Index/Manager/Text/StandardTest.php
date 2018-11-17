@@ -142,32 +142,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSearchItems()
-	{
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '!=', 'index.text.id', null ) );
-
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertGreaterThanOrEqual( 2, count( $result ) );
-	}
-
-
-	public function testSearchItemsTextId()
-	{
-		$textItems = self::$products['CNC']->getRefItems( 'text', 'name' );
-		if( ( $textItem = reset( $textItems ) ) === false ) {
-			throw new \RuntimeException( 'No text with type "name" available in product CNC' );
-		}
-
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertEquals( 1, count( $result ) );
-	}
-
-
 	public function testSearchItemsRelevance()
 	{
 		$search = $this->object->createSearch();
@@ -213,54 +187,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
-	}
-
-
-	public function testSearchItemsValue()
-	{
-		$search = $this->object->createSearch();
-
-		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', 'name', 'product' ) );
-		$search->setConditions( $search->compare( '~=', $func, 'expr' ) ); // text value
-
-		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', 'name' ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertEquals( 1, count( $result ) );
-	}
-
-
-	public function testSearchItemsValueListtypes()
-	{
-		$search = $this->object->createSearch();
-
-		$func = $search->createFunction( 'index.text.value', array( ['default', 'unittype13'], 'de', 'name', 'product' ) );
-		$search->setConditions( $search->compare( '~=', $func, 'expr' ) ); // text value
-
-		$sortfunc = $search->createFunction( 'sort:index.text.value', array( ['default', 'unittype13'], 'de', 'name' ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertEquals( 1, count( $result ) );
-	}
-
-
-	public function testSearchItemsValueTypes()
-	{
-		$search = $this->object->createSearch();
-
-		$func = $search->createFunction( 'index.text.value', array( 'unittype13', 'de', ['code', 'name'], 'product' ) );
-		$search->setConditions( $search->compare( '~=', $func, 'expr' ) ); // text value
-
-		$sortfunc = $search->createFunction( 'sort:index.text.value', array( 'default', 'de', ['code', 'name'] ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertEquals( 1, count( $result ) );
 	}
 
 
