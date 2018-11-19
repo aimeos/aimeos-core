@@ -23,10 +23,13 @@ class PgSQL
 	private $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => 'EXISTS ( SELECT mindte2."prodid"
-				FROM mshop_index_text mindte2 WHERE :site AND mpro."id" = mindte2."prodid"
-				AND ( mindte2."langid" = $1 OR mindte2."langid" IS NULL )
-				AND mindte2."value" @@ to_tsquery( $2 )
+			'internalcode' => '(
+				SELECT mindte2."prodid"
+				FROM mshop_index_text mindte2
+				WHERE :site AND mpro."id" = mindte2."prodid"
+					AND ( mindte2."langid" = $1 OR mindte2."langid" IS NULL )
+					AND mindte2."value" @@ to_tsquery( $2 ) > 0
+				LIMIT 1
 			)',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'null',
