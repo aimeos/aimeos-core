@@ -111,7 +111,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 1, $total );
+		$this->assertEquals( 2, $total );
 
 		foreach( $result as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
