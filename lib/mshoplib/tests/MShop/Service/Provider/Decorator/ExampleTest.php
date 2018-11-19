@@ -10,9 +10,6 @@
 namespace Aimeos\MShop\Service\Provider\Decorator;
 
 
-/**
- * Test class for \Aimeos\MShop\Service\Provider\Decorator\Example.
- */
 class ExampleTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
@@ -28,22 +25,14 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 		$result = $servManager->searchItems( $search, array( 'price' ) );
 
 		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No order base item found' );
+			throw new \RuntimeException( 'No service item found' );
 		}
-
-		$item->setConfig( array( 'default.project' => '8502_TEST' ) );
 
 		$serviceProvider = $servManager->getProvider( $item, $item->getType() );
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Example( $serviceProvider, $context, $item );
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		unset( $this->object );
@@ -53,34 +42,20 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	public function testGetConfigBE()
 	{
 		$this->assertArrayHasKey( 'country', $this->object->getConfigBE() );
-		$this->assertArrayHasKey( 'default.url', $this->object->getConfigBE() );
 	}
 
 
 	public function testCheckConfigBE()
 	{
-		$attributes = array( 'country' => 'DE', 'default.project' => 'Unit', 'default.url' => 'http://unittest.com' );
-		$result = $this->object->checkConfigBE( $attributes );
+		$result = $this->object->checkConfigBE( ['country' => 'DE'] );
 
-		$this->assertEquals( 6, count( $result ) );
+		$this->assertEquals( 1, count( $result ) );
 		$this->assertInternalType( 'null', $result['country'] );
-		$this->assertInternalType( 'null', $result['default.project'] );
-		$this->assertInternalType( 'null', $result['default.username'] );
-		$this->assertInternalType( 'null', $result['default.password'] );
-		$this->assertInternalType( 'null', $result['default.url'] );
-		$this->assertInternalType( 'null', $result['default.ssl'] );
 
+		$result = $this->object->checkConfigBE( ['country' => ''] );
 
-		$attributes = array( 'country' => '', 'default.project' => 'Unit', 'default.url' => 'http://unittest.com' );
-		$result = $this->object->checkConfigBE( $attributes );
-
-		$this->assertEquals( 6, count( $result ) );
+		$this->assertEquals( 1, count( $result ) );
 		$this->assertInternalType( 'string', $result['country'] );
-		$this->assertInternalType( 'null', $result['default.project'] );
-		$this->assertInternalType( 'null', $result['default.username'] );
-		$this->assertInternalType( 'null', $result['default.password'] );
-		$this->assertInternalType( 'null', $result['default.url'] );
-		$this->assertInternalType( 'null', $result['default.ssl'] );
 	}
 
 
@@ -125,26 +100,5 @@ class ExampleTest extends \PHPUnit\Framework\TestCase
 	public function testIsImplemented()
 	{
 		$this->assertFalse( $this->object->isImplemented( \Aimeos\MShop\Service\Provider\Payment\Base::FEAT_QUERY ) );
-	}
-
-
-	public function testCall()
-	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$criteria = $orderManager->createSearch();
-		$expr = array(
-			$criteria->compare( '==', 'order.type', \Aimeos\MShop\Order\Item\Base::TYPE_WEB ),
-			$criteria->compare( '==', 'order.statuspayment', '6' )
-		);
-
-		$criteria->setConditions( $criteria->combine( '&&', $expr ) );
-		$criteria->setSlice( 0, 1 );
-		$items = $orderManager->searchItems( $criteria );
-
-		if( ( $order = reset( $items ) ) === false ) {
-			throw new \RuntimeException( sprintf( 'No order item available for order statuspayment "%1s" and "%2s"', '6', 'web' ) );
-		}
-
-		$this->object->buildXML( $order );
 	}
 }

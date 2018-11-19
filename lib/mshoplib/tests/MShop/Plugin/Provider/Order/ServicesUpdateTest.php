@@ -83,7 +83,7 @@ class ServicesUpdateTest
 		$serviceItemPayment = new \Aimeos\MShop\Service\Item\Standard( array( 'type' => 'payment' ) );
 
 
-		$providerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Delivery\\Manual' )
+		$providerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Delivery\\Standard' )
 			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
 			->setMethods( array( 'isAvailable' ) )->getMock();
 
@@ -143,7 +143,7 @@ class ServicesUpdateTest
 		$serviceItemPayment = new \Aimeos\MShop\Service\Item\Standard( array( 'type' => 'payment' ) );
 
 
-		$providerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Delivery\\Manual' )
+		$providerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Delivery\\Standard' )
 			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
 			->setMethods( array( 'isAvailable' ) )->getMock();
 

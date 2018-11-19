@@ -28,9 +28,7 @@ return array(
 			'code' => 'unitcode',
 			'label' => 'unitlabel',
 			'provider' => 'Standard',
-			'config' => array(
-				'default.url' => 'deliveryurl'
-			),
+			'config' => array(),
 			'status' => 1
 		),
 		'service/payment/unitcode' => array(

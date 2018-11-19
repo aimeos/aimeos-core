@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'service.provider', 'Standard' );
 		$expr[] = $search->compare( '==', 'service.datestart', null );
 		$expr[] = $search->compare( '==', 'service.dateend', null );
-		$expr[] = $search->compare( '~=', 'service.config', 'url' );
+		$expr[] = $search->compare( '!=', 'service.config', null );
 		$expr[] = $search->compare( '==', 'service.status', 1 );
 		$expr[] = $search->compare( '>=', 'service.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'service.ctime', '1970-01-01 00:00:00' );
