@@ -100,13 +100,13 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		$func = $search->createFunction( 'index.text:value', array( 'default', 'de', 'name' ) );
+		$func = $search->createFunction( 'index.text:name', array( 'de' ) );
 		$conditions = array(
-			$search->compare( '~=', $func, 'noir' ), // text value
+			$search->compare( '~=', $func, 'noir' ), // text name
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
-		$sortfunc = $search->createFunction( 'sort:index.text:value', array( 'default', 'de', 'name' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text:name', array( 'de' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 		$result = $this->object->searchItems( $search, [], $total );
 
