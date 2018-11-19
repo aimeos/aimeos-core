@@ -23,10 +23,20 @@ class PgSQL
 	private $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."listtype" IN ($1)
-				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
-				AND CAST( mindte."value" @@ to_tsquery( $3 ) AS integer )',
-			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
+			'internalcode' => 'EXISTS ( SELECT mindte2."prodid"
+				FROM mshop_index_text mindte2 WHERE :site AND mpro."id" = mindte2."prodid"
+				AND ( mindte2."langid" = $1 OR mindte2."langid" IS NULL )
+				AND mindte2."value" @@ to_tsquery( $2 )
+			)',
+			'label' => 'Product texts, parameter(<language ID>,<search term>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'public' => false,
+		),
+		'sort:index.text:relevance' => array(
+			'code' => 'sort:index.text:relevance()',
+			'internalcode' => 'mindte."value" @@ to_tsquery( $2 )',
+			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
@@ -47,12 +57,12 @@ class PgSQL
 
 		$func = function( $source, array $params ) {
 
-			if( isset( $params[2] ) )
+			if( isset( $params[1] ) )
 			{
 				$regex = '/(\s|\&|\%|\?|\#|\=|\{|\}|\||\\\\|\~|\[|\]|\`|\^|\/|\-|\+|\>|\<|\(|\)|\*|\:|\"|\!|\§|\$|\'|\;|\.|\,|\@)+/';
-				$search = trim( preg_replace( $regex, ' ', $params[2] ) );
+				$search = trim( preg_replace( $regex, ' ', $params[1] ) );
 
-				$params[2] = '\'' . implode( ':* & ', explode( ' ', strtolower( $search ) ) ) . ':*\'';
+				$params[1] = '\'' . implode( ':* & ', explode( ' ', strtolower( $search ) ) ) . ':*\'';
 			}
 
 			return $params;

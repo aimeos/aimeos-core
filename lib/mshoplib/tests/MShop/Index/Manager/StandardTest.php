@@ -418,9 +418,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $object->createSearch()->setSlice( 0, 1 );
 
-		$func = $search->createFunction( 'index.text:relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Expr' ) );
 		$conditions = array(
-			$search->compare( '>', $func, 0 ), // text relevance
+			$search->compare( '!=', $func, null ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );

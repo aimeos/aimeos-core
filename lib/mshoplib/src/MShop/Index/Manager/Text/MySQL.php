@@ -22,23 +22,25 @@ class MySQL
 	extends \Aimeos\MShop\Index\Manager\Text\Standard
 {
 	private $searchConfig = array(
-		// @deprecated Removed 2019.01
-		'index.text.id' => array(
-			'code' => 'index.text.id',
-			'internalcode' => 'mindte."textid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte
-				USE INDEX ("idx_msindte_value", "idx_msindte_p_s_lt_la_ty_do_va") ON mindte."prodid" = mpro."id"' ),
-			'label' => 'Product index text ID',
-			'type' => 'string',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
-			'public' => false,
-		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."listtype" IN ($1)
-				AND ( mindte."langid" = $2 OR mindte."langid" IS NULL )
-				AND MATCH( mindte."value" ) AGAINST( $3 IN BOOLEAN MODE )',
-			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
+			'internalcode' => '(
+				SELECT mindte2."prodid"
+				FROM mshop_index_text mindte2
+				WHERE :site AND mpro."id" = mindte2."prodid"
+					AND ( mindte2."langid" = $1 OR mindte2."langid" IS NULL )
+					AND MATCH( mindte2."value" ) AGAINST( $2 IN BOOLEAN MODE ) > 0
+				LIMIT 1
+			)',
+			'label' => 'Product texts, parameter(<language ID>,<search term>)',
+			'type' => 'null',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'public' => false,
+		),
+		'sort:index.text:relevance' => array(
+			'code' => 'sort:index.text:relevance()',
+			'internalcode' => 'MATCH( mindte."value" ) AGAINST( $2 IN BOOLEAN MODE )',
+			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
@@ -59,11 +61,11 @@ class MySQL
 
 		$func = function( $source, array $params ) {
 
-			if( isset( $params[2] ) )
+			if( isset( $params[1] ) )
 			{
 				$str = '';
 				$list = ['-', '+', '>', '<', '(', ')', '~', '*', ':', '"', '&', '|', '!', '/', '§', '$', '%', '{', '}', '[', ']', '=', '?', '\\', '\'', '#', ';', '.', ',', '@'];
-				$search = str_replace( $list, ' ', $params[2] );
+				$search = str_replace( $list, ' ', $params[1] );
 
 				foreach( explode( ' ', $search ) as $part )
 				{
@@ -74,7 +76,7 @@ class MySQL
 					}
 				}
 
-				$params[2] = '\'' . $str . '\'';
+				$params[1] = '\'' . $str . '\'';
 			}
 
 			return $params;

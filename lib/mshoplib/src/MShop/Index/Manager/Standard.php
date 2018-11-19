@@ -591,7 +591,7 @@ class Standard
 		 * @see mshop/index/manager/standard/index
 		 * @see mshop/index/manager/submanagers
 		 */
-		$default = array( 'attribute', 'product', 'text' ); // Including "price" messes up the sortation
+		$default = array( 'attribute', 'text' ); // Including "price" messes up the sortation
 		$domains = $context->getConfig()->get( 'mshop/index/manager/standard/subdomains', $default );
 		$size = $context->getConfig()->get( 'mshop/index/manager/standard/chunksize', 1000 );
 

@@ -51,22 +51,23 @@ class Standard
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindte2."prodid")
+			'internalcode' => '(
+				SELECT mindte2."prodid"
 				FROM "mshop_index_text" AS mindte2
-				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" IN ($1)
-				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
-			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
+				WHERE :site AND mpro."id" = mindte2."prodid"
+					AND ( mindte2."langid" = $1 OR mindte2."langid" IS NULL )
+					AND POSITION( $2 IN mindte2."value" ) > 0
+				LIMIT 1
+			)',
+			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => '( SELECT COUNT(DISTINCT mindte2."prodid")
-				FROM "mshop_index_text" AS mindte2
-				WHERE mpro."id" = mindte2."prodid" AND :site AND mindte2."listtype" IN ($1)
-				AND ( mindte2."langid" = $2 OR mindte2."langid" IS NULL ) AND POSITION( $3 IN mindte2."value" ) > 0 )',
-			'label' => 'Product texts, parameter(<list type code>,<language ID>,<search term>)',
+			'internalcode' => 'POSITION( $2 IN mindte."value" )',
+			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
@@ -111,7 +112,6 @@ class Standard
 
 		$this->replaceSiteMarker( $this->searchConfig['index.text:name'], 'mindte."siteid"', $siteIds );
 		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte2."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['sort:index.text:relevance'], 'mindte2."siteid"', $siteIds );
 	}
 
 

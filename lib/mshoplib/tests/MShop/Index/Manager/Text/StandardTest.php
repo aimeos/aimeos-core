@@ -146,26 +146,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.text:relevance', array( 'unittype13', 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Expr' ) );
 		$search->setConditions( $search->compare( '>', $func, 0 ) ); // text relevance
 
-		$sortfunc = $search->createFunction( 'sort:index.text:relevance', array( 'unittype13', 'de', 'Expr' ) );
-		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
-
-		$result = $this->object->searchItems( $search, [] );
-
-		$this->assertEquals( 2, count( $result ) );
-	}
-
-
-	public function testSearchItemsRelevanceListtypes()
-	{
-		$search = $this->object->createSearch();
-
-		$func = $search->createFunction( 'index.text:relevance', array( ['default', 'unittype13'], 'de', 'Expr' ) );
-		$search->setConditions( $search->compare( '>', $func, 0 ) ); // text relevance
-
-		$sortfunc = $search->createFunction( 'sort:index.text:relevance', array( ['default', 'unittype13'], 'de', 'Expr' ) );
+		$sortfunc = $search->createFunction( 'sort:index.text:relevance', array( 'de', 'Expr' ) );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );
