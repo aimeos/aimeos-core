@@ -29,7 +29,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'tag.label' => 'salty',
 			'tag.mtime' => '2011-01-01 00:00:02',
 			'tag.ctime' => '2011-01-01 00:00:01',
-			'tag.editor' => 'unitTestUser'
+			'tag.editor' => 'unitTestUser',
+			'languageid' => 'de',
 		);
 
 		$this->object = new \Aimeos\MShop\Tag\Item\Standard( $this->values );
@@ -183,7 +184,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$arrayObject = $this->object->toArray( true );
 
-		$this->assertEquals( count( $this->values ), count( $arrayObject ) );
+		$this->assertEquals( count( $this->values ) - 1, count( $arrayObject ) );
 
 		$this->assertEquals( $this->object->getId(), $arrayObject['tag.id'] );
 		$this->assertEquals( $this->object->getSiteId(), $arrayObject['tag.siteid'] );
