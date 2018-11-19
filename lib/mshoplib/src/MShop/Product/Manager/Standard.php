@@ -160,20 +160,6 @@ class Standard
 			'internaltype' => 'null',
 			'public' => false,
 		),
-		// @deprecated 2019.01, use product:has()
-		'product.contains' => array(
-			'code' => 'product.contains()',
-			'internalcode' => '( SELECT COUNT(mproli_cs."parentid")
-				FROM "mshop_product_list" AS mproli_cs
-				WHERE mpro."id" = mproli_cs."parentid" AND :site
-					AND mproli_cs."domain" = $1 AND mproli_cs."refid" IN ( $3 ) AND mproli_cs."typeid" = $2
-					AND ( mproli_cs."start" IS NULL OR mproli_cs."start" <= \':date\' )
-					AND ( mproli_cs."end" IS NULL OR mproli_cs."end" >= \':date\' ) )',
-			'label' => 'Number of product list items, parameter(<domain>,<list type ID>,<reference IDs>)',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 	);
 
 	private $date;
@@ -207,8 +193,6 @@ class Standard
 
 		$this->replaceSiteMarker( $this->searchConfig['product:has'], 'mproli_has."siteid"', $siteIds, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['product:prop'], 'mpropr_prop."siteid"', $siteIds, ':site' );
-		$this->replaceSiteMarker( $this->searchConfig['product.contains'], 'mproli_cs."siteid"', $siteIds, ':site' );
-		$this->searchConfig['product.contains'] = str_replace( ':date', $this->date, $this->searchConfig['product.contains'] );
 	}
 
 

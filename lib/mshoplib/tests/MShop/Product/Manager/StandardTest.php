@@ -343,9 +343,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = array( 'product','default', $listItem->getRefId() );
 		$expr[] = $search->compare( '==', $search->createFunction( 'product:has', $param ), null );
 
-		$param = array( 'product', $listItem->getTypeId(), array( $listItem->getRefId() ) );
-		$expr[] = $search->compare( '>', $search->createFunction( 'product.contains', $param ), 0 );
-
 		$expr[] = $search->compare( '!=', 'product.type.id', null );
 		$expr[] = $search->compare( '!=', 'product.type.siteid', null );
 		$expr[] = $search->compare( '==', 'product.type.domain', 'product' );
