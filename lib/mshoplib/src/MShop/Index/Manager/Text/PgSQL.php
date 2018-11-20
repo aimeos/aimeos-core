@@ -38,7 +38,7 @@ class PgSQL
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => 'mindte."value" @@ to_tsquery( $2 )',
+			'internalcode' => '1',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
