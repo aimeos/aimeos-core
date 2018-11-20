@@ -26,7 +26,7 @@ class MySQL
 			'code' => 'index.text:relevance()',
 			'internalcode' => '(
 				SELECT mindte2."prodid"
-				FROM mshop_index_text mindte2
+				FROM "mshop_index_text" AS mindte2
 				WHERE :site AND mpro."id" = mindte2."prodid"
 					AND ( mindte2."langid" = $1 OR mindte2."langid" IS NULL )
 					AND MATCH( mindte2."value" ) AGAINST( $2 IN BOOLEAN MODE ) > 0
