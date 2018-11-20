@@ -103,8 +103,8 @@ class Standard
 
 		$this->searchConfig['index.text:relevance']['function'] = function( $source, array $params ) {
 
-			if( isset( $params[2] ) ) {
-				$params[2] = strtolower( $params[2] );
+			if( isset( $params[1] ) ) {
+				$params[1] = strtolower( $params[1] );
 			}
 
 			return $params;
