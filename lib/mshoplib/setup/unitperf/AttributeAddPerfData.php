@@ -76,18 +76,18 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$characteristics = [
 			'property' => [
-				'plain', 'checked', 'striped', 'curled', 'colored', 'bubbled', 'geometric', 'quilted', 'pimpled', 'dotted',
-				'light', 'heavy', 'simple', 'clear', 'cool', 'thin', 'thick', 'airy', 'breezy', 'blowy',
-				'dark', 'gloomy', 'shiny', 'soft', 'fluffy', 'warm', 'elastic', 'dry', 'pliable', 'lustrous',
-				'durable', 'rough', 'tough', 'strong', 'resistant', 'weak', 'knitted', 'comfortable', 'wrinkled', 'woven',
+				23 => 'plain', 4 => 'checked', 31 => 'striped', 9 => 'curled', 6 => 'colored', 3 => 'bubbled', 16 => 'geometric', 25 => 'quilted', 22 => 'pimpled', 11 => 'dotted',
+				20 => 'light', 18 => 'heavy', 29 => 'simple', 5 => 'clear', 8 => 'cool', 34 => 'thin', 33 => 'thick', 0 => 'airy', 2 => 'breezy', 1 => 'blowy',
+				10 => 'dark', 17 => 'gloomy', 28 => 'shiny', 30 => 'soft', 15 => 'fluffy', 36 => 'warm', 14 => 'elastic', 12 => 'dry', 24 => 'pliable', 21 => 'lustrous',
+				13 => 'durable', 27 => 'rough', 35 => 'tough', 32 => 'strong', 26 => 'resistant', 37 => 'weak', 19 => 'knitted', 7 => 'comfortable', 39 => 'wrinkled', 38 => 'woven',
 			],
 			'material' => [
-				'alpaca', 'horsehair', 'viscose', 'polyester', 'mohair', 'azlon', 'byssus', 'camelhair', 'chiengora', 'yak',
-				'brocade', 'chiffon', 'cotton', 'damask', 'denim', 'flannel', 'jersey', 'satin', 'seersucker', 'tweed',
-				'linen', 'silk', 'sheen', 'velvet', 'wool', 'sisal', 'jute', 'angora', 'cashmere', 'wire',
-				'lambswool', 'llama', 'qiviut', 'rabbit', 'vicuña', 'abacá', 'acetate', 'bamboo', 'banana', 'kapok',
-				'coir', 'flax', 'hemp', 'kenaf', 'lyocell', 'modal', 'piña', 'raffia', 'ramie', 'taffeta',
-				'rayon', 'acrylic', 'kevlar', 'nomex', 'nylon', 'spandex', 'modacrylic', 'leather', 'steel', 'glass',
+				3 => 'alpaca', 22 => 'horsehair', 56 => 'viscose', 39 => 'polyester', 35 => 'mohair', 5 => 'azlon', 9 => 'byssus', 10 => 'camelhair', 12 => 'chiengora', 59 => 'yak',
+				8 => 'brocade', 13 => 'chiffon', 15 => 'cotton', 18 => 'flannel', 23 => 'jersey', 45 => 'satin', 16 => 'damask', 46 => 'seersucker', 17 => 'denim', 53 => 'tweed',
+				30 => 'linen', 48 => 'silk', 47 => 'sheen', 54 => 'velvet', 58 => 'wool', 49 => 'sisal', 24 => 'jute', 4 => 'angora', 11 => 'cashmere', 57 => 'wire',
+				28 => 'lambswool', 31 => 'llama', 40 => 'qiviut', 41 => 'rabbit', 55 => 'vicuña', 0 => 'abacá', 1 => 'acetate', 6 => 'bamboo', 7 => 'banana', 25 => 'kapok',
+				14 => 'coir', 19 => 'flax', 21 => 'hemp', 26 => 'kenaf', 32 => 'lyocell', 34 => 'modal', 38 => 'piña', 42 => 'raffia', 43 => 'ramie', 52 => 'taffeta',
+				44 => 'rayon', 2 => 'acrylic', 27 => 'kevlar', 36 => 'nomex', 37 => 'nylon', 50 => 'spandex', 33 => 'modacrylic', 29 => 'leather', 51 => 'steel', 20 => 'glass',
 			],
 		];
 
@@ -96,16 +96,15 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $characteristics as $type => $list )
 		{
-			$pos = 0;
 			$attrItem = $attrManager->createItem()
 				->setTypeId( $this->getTypeId( 'attribute/type', 'product', $type ) )
 				->setDomain( 'product' )
 				->setStatus( 1 );
 
-			foreach( $list as $value )
+			foreach( $list as $pos => $value )
 			{
 				$item = clone $attrItem;
-				$item->setPosition( $pos++ )
+				$item->setPosition( $pos )
 					->setLabel( $value )
 					->setCode( $value );
 
@@ -153,7 +152,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 			->setDomain( 'product' )
 			->setStatus( 1 );
 
-		$mediaItem = $mediaManager->createItem( 'default', 'attribute')
+		$mediaItem = $mediaManager->createItem( 'icon', 'attribute')
 			->setMimeType( 'image/svg+xml' )
 			->setStatus( 1 );
 
@@ -220,12 +219,12 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	{
 		$sizes = [
 			'size' => [
-				'M', 'S', 'L', 'XS', 'XL', 'S-MM', 'MM-L', '2XS', '2XL', 'SS-M', 'M-LL',
-				'3XS', '3XL', 'S-M', 'M-L', '4XS', '4XL', '5XS', '5XL', '6XS', '6XL',
-				'7XS', '7XL', '8XS', '8XL', '9XS', '9XL', '10XS', '10XL', '11XS', '11XL',
+				15 => 'M', 11 => 'S', 19 => 'L', 10 => 'XS', 20 => 'XL', 14 => 'S-MM', 16 => 'MM-L', 9 => '2XS', 21 => '2XL', 13 => 'SS-M', 18 => 'M-LL',
+				8 => '3XS', 22 => '3XL', 12 => 'S-M', 17 => 'M-L', 7 => '4XS', 23 => '4XL', 6 => '5XS', 24 => '5XL', 5 => '6XS', 25 => '6XL',
+				4 => '7XS', 26 => '7XL', 3 => '8XS', 27 => '8XL', 2 => '9XS', 28 => '9XL', 1 => '10XS', 29 => '10XL', 0 => '11XS', 30 => '11XL',
 			],
-			'length' => ['short', 'normal length', 'long', 'semi-short', 'semi-long', 'extra short', 'extra long'],
-			'width' => ['tight', 'standard width', 'wide', 'semi-tight', 'semi-wide', 'extra tight', 'extra wide'],
+			'length' => [2 => 'short', 3 => 'normal length', 5 => 'long', 1 => 'semi-short', 4 => 'semi-long', 0 => 'extra short', 6 => 'extra long'],
+			'width' => [2 => 'tight', 3 => 'standard width', 5 => 'wide', 1 => 'semi-tight', 4 => 'semi-wide', 0 => 'extra tight', 6 => 'extra wide'],
 		];
 
 
@@ -233,16 +232,15 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $sizes as $type => $list )
 		{
-			$pos = 0;
 			$attrItem = $attrManager->createItem()
 				->setTypeId( $this->getTypeId( 'attribute/type', 'product', $type ) )
 				->setDomain( 'product' )
 				->setStatus( 1 );
 
-			foreach( $list as $value )
+			foreach( $list as $pos => $value )
 			{
 				$item = clone $attrItem;
-				$item->setPosition( $pos++ )
+				$item->setPosition( $pos )
 					->setLabel( $value )
 					->setCode( $value );
 
