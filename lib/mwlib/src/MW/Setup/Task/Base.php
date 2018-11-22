@@ -28,7 +28,7 @@ abstract class Base implements \Aimeos\MW\Setup\Task\Iface
 	/** @deprecated Use getSchema() instead */
 	protected $schema;
 
-	/** @deprecated Use getConnection() instead */
+	/** @deprecated Use acquire() and release() instead */
 	protected $conn;
 
 
