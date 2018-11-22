@@ -183,14 +183,6 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testSetCommunication()
-	{
-		$this->mock->expects( $this->once() )->method( 'setCommunication' );
-
-		$this->object->setCommunication( new \Aimeos\MW\Communication\Curl() );
-	}
-
-
 	public function testSetConfigFE()
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )

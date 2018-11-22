@@ -116,16 +116,6 @@ interface Iface
 
 
 	/**
-	 * Sets the communication object for a service provider.
-	 *
-	 * @param \Aimeos\MW\Communication\Iface $communication Object of communication
-	 * @return null
-	 * @deprecated To be removed in 2019.01
-	 */
-	public function setCommunication( \Aimeos\MW\Communication\Iface $communication );
-
-
-	/**
 	 * Injects the outer object into the decorator stack
 	 *
 	 * @param \Aimeos\MShop\Plugin\Provider\Iface $object First object of the decorator stack

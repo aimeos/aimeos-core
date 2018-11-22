@@ -238,19 +238,6 @@ abstract class Base
 
 
 	/**
-	 * Sets the communication object for a service provider.
-	 *
-	 * @param \Aimeos\MW\Communication\Iface $communication Object of communication
-	 */
-	public function setCommunication( \Aimeos\MW\Communication\Iface $communication )
-	{
-		parent::setCommunication( $communication );
-
-		$this->object->setCommunication( $communication );
-	}
-
-
-	/**
 	 * Sets the payment attributes in the given service.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $orderServiceItem Order service item that will be added to the basket

@@ -245,34 +245,6 @@ abstract class Base
 
 
 	/**
-	 * Sets the communication object for a service provider.
-	 *
-	 * @param \Aimeos\MW\Communication\Iface $communication Object of communication
-	 * @deprecated To be removed in 2019.01
-	 */
-	public function setCommunication( \Aimeos\MW\Communication\Iface $communication )
-	{
-		$this->communication = $communication;
-	}
-
-
-	/**
-	 * Returns the communication object for the service provider.
-	 *
-	 * @return \Aimeos\MW\Communication\Iface Object for communication
-	 * @deprecated To be removed in 2019.01
-	 */
-	protected function getCommunication()
-	{
-		if( !isset( $this->communication ) ) {
-			$this->communication = new \Aimeos\MW\Communication\Curl();
-		}
-
-		return $this->communication;
-	}
-
-
-	/**
 	 * Calculates the last date behind the given timestamp depending on the other paramters.
 	 *
 	 * This method is used to calculate the date for comparing the order date to
