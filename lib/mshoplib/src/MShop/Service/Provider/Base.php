@@ -23,7 +23,6 @@ abstract class Base
 	private $object;
 	private $context;
 	private $serviceItem;
-	private $communication;
 	private $beGlobalConfig;
 
 

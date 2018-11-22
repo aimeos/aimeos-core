@@ -274,10 +274,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testCapture()
 	{
-		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
-		$orderBaseManager = $orderManager->getSubManager( 'base' );
-		$baseItem = $orderBaseManager->getItem( $this->order->getBaseId() );
-
 		$this->object->expects( $this->once() )->method( 'send' )->will(
 			$this->returnValue( 'AUTHORIZATIONID=112233&TRANSACTIONID=111111111&PARENTTRANSACTIONID=12212AD&TRANSACTIONTYPE=express-checkout&AMT=22.30&FEEAMT=3.33&PAYMENTSTATUS=Completed&PENDINGREASON=None&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
 		);
