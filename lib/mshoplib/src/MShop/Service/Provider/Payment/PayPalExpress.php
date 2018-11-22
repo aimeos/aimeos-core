@@ -228,7 +228,7 @@ class PayPalExpress
 		$values['LANDINGPAGE'] = $this->getConfigValue( array( 'paypalexpress.LandingPage' ), 'Login' );
 
 		$urlQuery = http_build_query( $values, '', '&' );
-		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
+		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$default = 'https://www.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=%1$s';
@@ -261,7 +261,7 @@ class PayPalExpress
 		$values['TRANSACTIONID'] = $tid;
 
 		$urlQuery = http_build_query( $values, '', '&' );
-		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
+		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->setPaymentStatus( $order, $rvals );
@@ -297,7 +297,7 @@ class PayPalExpress
 		$values['AMT'] = $this->getAmount( $price );
 
 		$urlQuery = http_build_query( $values, '', '&' );
-		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
+		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$this->setPaymentStatus( $order, $rvals );
@@ -341,7 +341,7 @@ class PayPalExpress
 		$values['INVOICEID'] = $order->getId();
 
 		$urlQuery = http_build_query( $values, '', '&' );
-		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
+		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'REFUNDTRANSACTIONID' => $rvals['REFUNDTRANSACTIONID'] );
@@ -371,7 +371,7 @@ class PayPalExpress
 		$values['AUTHORIZATIONID'] = $tid;
 
 		$urlQuery = http_build_query( $values, '', '&' );
-		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
+		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$this->checkResponse( $order->getId(), $response, __METHOD__ );
 
 		$order->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_CANCELED );
@@ -396,7 +396,7 @@ class PayPalExpress
 		$urlQuery = http_build_query( $params, '', '&' );
 
 		//validation
-		$result = $this->getCommunication()->transmit( $this->getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
+		$result = $this->send( $this->getConfigValue( array( 'paypalexpress.url-validate' ) ), 'POST', $urlQuery );
 
 		if( $result !== 'VERIFIED' ) {
 			return $response->withStatus( 400, sprintf( 'PayPal Express: Invalid request "%1$s"', $urlQuery ) );
@@ -458,7 +458,7 @@ class PayPalExpress
 		$values['AMT'] = $this->getAmount( $price );
 
 		$urlQuery = http_build_query( $values, '', '&' );
-		$response = $this->getCommunication()->transmit( $this->apiendpoint, 'POST', $urlQuery );
+		$response = $this->send( $this->apiendpoint, 'POST', $urlQuery );
 		$rvals = $this->checkResponse( $orderItem->getId(), $response, __METHOD__ );
 
 		$attributes = array( 'PAYERID' => $params['PayerID'] );
@@ -798,5 +798,52 @@ class PayPalExpress
 		$prices[$taxrate]->addItem( $price, $quantity );
 
 		return $prices;
+	}
+
+
+	/**
+	 * Sends request parameters to the providers interface.
+	 *
+	 * @param string $target Receivers address e.g. url.
+	 * @param string $method Initial method (e.g. post or get)
+	 * @param mixed $payload Update information whose format depends on the payment provider
+	 * @return string response body of a http request
+	 */
+	public function send( $target, $method, $payload )
+	{
+		$response = '';
+
+		if( ( $curl = curl_init() )=== false ) {
+			throw new \Aimeos\MW\Communication\Exception( 'Could not initialize curl' );
+		}
+
+		try
+		{
+			curl_setopt( $curl, CURLOPT_URL, $target );
+
+			curl_setopt( $curl, CURLOPT_CUSTOMREQUEST, strtoupper( $method ) );
+			curl_setopt( $curl, CURLOPT_POSTFIELDS, $payload );
+			curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 25 );
+			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );   // return data as string
+
+			curl_setopt( $curl, CURLOPT_SSL_VERIFYPEER, true );
+
+			if ( ( $response = curl_exec( $curl ) ) === false ) {
+				throw new \Aimeos\MW\Communication\Exception( sprintf( 'Sending order failed: "%1$s"', curl_error( $curl ) ) );
+			}
+
+			if ( curl_errno($curl) ) {
+				throw new \Aimeos\MW\Communication\Exception( sprintf( 'Error with nr."%1$s" - "%2$s"', curl_errno($curl), curl_error($curl) ) );
+			}
+
+			curl_close( $curl );
+		}
+		catch( \Exception $e )
+		{
+			curl_close( $curl );
+			throw $e;
+		}
+
+		return $response;
 	}
 }

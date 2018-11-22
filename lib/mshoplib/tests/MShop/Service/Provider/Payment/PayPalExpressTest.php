@@ -33,7 +33,10 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No paypalexpress service item available' );
 		}
 
-		$this->object = new \Aimeos\MShop\Service\Provider\Payment\PayPalExpress( $this->context, $this->serviceItem );
+		$this->object = $this->getMockBuilder( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' )
+			->setConstructorArgs( [$this->context, $this->serviceItem] )
+			->setMethods( ['send'] )
+			->getMock();
 
 
 		$orderManager = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context );
@@ -114,13 +117,9 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testProcess()
 	{
-		$what = array( 'PAYMENTREQUEST_0_AMT' => 18.50 );
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=process method error';
-		$success = '&ACK=Success&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&TOKEN=UT-99999999';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( '&ACK=Success&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&TOKEN=UT-99999999' )
+		);
 
 		$helperForm = $this->object->process( $this->order );
 
@@ -155,15 +154,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 	{
 		//DoExpressCheckout
 
-		$what = array( 'TOKEN' => 'UT-99999999' );
-
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=updatesync method error';
-		$success = '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=' . $this->order->getId();
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
-
 		$params = array(
 			'token' => 'UT-99999999',
 			'PayerID' => 'PaypalUnitTestBuyer'
@@ -174,6 +164,10 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$request->expects( $this->once() )->method( 'getAttributes' )->will( $this->returnValue( [] ) );
 		$request->expects( $this->once() )->method( 'getParsedBody' )->will( $this->returnValue( [] ) );
 		$request->expects( $this->once() )->method( 'getQueryParams' )->will( $this->returnValue( $params ) );
+
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( '&TOKEN=UT-99999999&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725&PAYERID=PaypalUnitTestBuyer&TRANSACTIONID=111111110&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=' . $this->order->getId() )
+		);
 
 		$result = $this->object->updateSync( $request, $this->order );
 
@@ -190,23 +184,6 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$price = $orderBaseManager->getItem( $this->order->getBaseId() )->getPrice();
 		$amount = $price->getValue() + $price->getCosts();
-		$what = array(
-			'residence_country' => 'US',
-			'address_city' => 'San+Jose',
-			'first_name' => 'John',
-			'payment_status' => 'Completed',
-			'invoice' => $this->order->getId(),
-			'txn_id' => '111111111',
-			'payment_amount' => $amount,
-			'receiver_email' => 'selling2@metaways.de',
-		);
-		$error = 'INVALID';
-		$success = 'VERIFIED';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
-
 
 		$params = array(
 			'residence_country' => 'US',
@@ -237,6 +214,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		};
 
 		$this->orderMock->expects( $this->once() )->method( 'saveItem' )->with( $this->callback( $cmpFcn ) );
+		$this->object->expects( $this->once() )->method( 'send' )->will( $this->returnValue( 'VERIFIED' ) );
 
 		$result = $this->object->updatePush( $request, $response );
 		$this->assertInstanceOf( '\Psr\Http\Message\ResponseInterface', $result );
@@ -263,19 +241,9 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testRefund()
 	{
-		$what = array(
-			'METHOD' => 'RefundTransaction',
-			'REFUNDSOURCE' => 'instant',
-			'REFUNDTYPE' => 'Full',
-			'TRANSACTIONID' => '111111111',
-			'INVOICEID' => $this->order->getId()
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( 'REFUNDTRANSACTIONID=88888888&FEEREFUNDAMT=2.00&TOTALREFUNDAMT=24.00&CURRENCYCODE=EUR&REFUNDSTATUS=delayed&PENDINGREASON=echeck&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
 		);
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=refund method error';
-		$success = 'REFUNDTRANSACTIONID=88888888&FEEREFUNDAMT=2.00&TOTALREFUNDAMT=24.00&CURRENCYCODE=EUR&REFUNDSTATUS=delayed&PENDINGREASON=echeck&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
 
 		$this->object->refund( $this->order );
 
@@ -310,38 +278,21 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$orderBaseManager = $orderManager->getSubManager( 'base' );
 		$baseItem = $orderBaseManager->getItem( $this->order->getBaseId() );
 
-		$what = array(
-			'METHOD' => 'DoCapture',
-			'COMPLETETYPE' => 'Complete',
-			'AUTHORIZATIONID' => '111111111',
-			'INVNUM' => $this->order->getId(),
-			'CURRENCYCODE' => $baseItem->getPrice()->getCurrencyId(),
-			'AMT' => ( $baseItem->getPrice()->getValue() + $baseItem->getPrice()->getCosts() )
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( 'AUTHORIZATIONID=112233&TRANSACTIONID=111111111&PARENTTRANSACTIONID=12212AD&TRANSACTIONTYPE=express-checkout&AMT=22.30&FEEAMT=3.33&PAYMENTSTATUS=Completed&PENDINGREASON=None&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
 		);
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=capture method error';
-		$success = 'AUTHORIZATIONID=112233&TRANSACTIONID=111111111&PARENTTRANSACTIONID=12212AD&TRANSACTIONTYPE=express-checkout&AMT=22.30&FEEAMT=3.33&PAYMENTSTATUS=Completed&PENDINGREASON=None&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
 
 		$this->object->capture( $this->order );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED, $this->order->getPaymentStatus() );
 	}
 
+
 	public function testQueryPaymentReceived()
 	{
-		$what = array(
-			'METHOD' => 'GetTransactionDetails',
-			'TRANSACTIONID' => '111111111'
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Completed&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725' )
 		);
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=query payment received test method error';
-		$success = 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Completed&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
 
 		$this->object->query( $this->order );
 
@@ -351,16 +302,9 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testQueryPaymentRefused()
 	{
-		$what = array(
-			'METHOD' => 'GetTransactionDetails',
-			'TRANSACTIONID' => '111111111',
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Expired&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725' )
 		);
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=query payment refused test method error';
-		$success = 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Expired&PENDINGREASON=None&INVNUM=34&CORRELATIONID=1f4b8e2c86ead&ACK=Success&VERSION=87.0&BUILD=3136725';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
 
 		$this->object->query( $this->order );
 
@@ -370,16 +314,9 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testCancel()
 	{
-		$what = array(
-			'METHOD' => 'DoVoid',
-			'AUTHORIZATIONID' => '111111111',
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( 'CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
 		);
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=cancel test method error';
-		$success = 'CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
 
 		$this->object->cancel( $this->order );
 
@@ -389,16 +326,9 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testQueryPaymentAuthorized()
 	{
-		$what = array(
-			'METHOD' => 'GetTransactionDetails',
-			'TRANSACTIONID' => '111111111',
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=34&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725' )
 		);
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=query payment authorized test method error';
-		$success = 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=34&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
 
 		$this->object->query( $this->order );
 
@@ -408,18 +338,9 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testWrongAuthorization()
 	{
-		$what = array(
-			'VERSION' => '87.0',
-			'SIGNATURE' => 'signature',
-			'USER' => 'name',
-			'PWD' => 'pw',
+		$this->object->expects( $this->once() )->method( 'send' )->will(
+			$this->returnValue( '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=wrong authorization test method error' )
 		);
-		$error = '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=wrong authorization test method error';
-		$success = 'SHIPPINGCALCULATIONMODE=Callback&INSURANCEOPTIONSELECTED=false&RECEIVERID=unit_1340199666_biz_api1.yahoo.de&PAYERID=unittest&PAYERSTATUS=verified&COUNTRYCODE=DE&FIRSTNAME=Unit&LASTNAME=Test&SHIPTOSTREET=Unitteststr. 11&TRANSACTIONID=111111111&PARENTTRANSACTIONID=111111111&TRANSACTIONTYPE=express-checkout&AMT=22.50CURRENCYCODE=EUR&FEEAMT=4.44&PAYMENTSTATUS=Pending&PENDINGREASON=authorization&INVNUM=34&CORRELATIONID=1234567890&ACK=Success&VERSION=87.0&BUILD=3136725';
-
-		$com = new TestPayPalExpress();
-		$com->addRule( $what, $error, $success );
-		$this->object->setCommunication( $com );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
 		$this->object->process( $this->order );
@@ -483,73 +404,5 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$method->invokeArgs( $this->object, array( $this->order, array( 'PAYMENTSTATUS' => 'Invalid' ) ) );
 
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $this->order->getPaymentStatus() );
-	}
-}
-
-
-class TestPayPalExpress implements \Aimeos\MW\Communication\Iface
-{
-	private $rules = [];
-
-
-	/**
-	 * Adds rules to the communication object.
-	 *
-	 * @param array $what List of rules for the unit tests.
-	 * @param string $error Error message if some of the tests fails.
-	 * @param string $success Success message if all tests were passed.
-	 */
-	public function addRule( array $what, $error, $success )
-	{
-		$this->rules['set'] = $what;
-		$this->rules['error'] = $error;
-		$this->rules['success'] = $success;
-	}
-
-
-	/**
-	 * Get rules of the communication object.
-	 *
-	 * @return array rules for internal check
-	 */
-	public function getRules()
-	{
-		return $this->rules;
-	}
-
-
-	/**
-	 * Sends request parameters to the providers interface.
-	 *
-	 * @param string $target Receivers address e.g. url.
-	 * @param string $method Initial method (e.g. post or get)
-	 * @param mixed $payload Update information whose format depends on the payment provider
-	 * @return string response body of a http request
-	 */
-	public function transmit( $target, $method, $payload )
-	{
-		if( !isset( $this->rules['set'] ) ) {
-			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No rules for unit tests was set' ) );
-		}
-
-		if( !isset( $this->rules['error'] ) ) {
-			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No error message for unit tests was set' ) );
-		}
-
-		if( !isset( $this->rules['success'] ) ) {
-			throw new \Aimeos\MW\Communication\Exception( sprintf( 'No success message for unit tests was set' ) );
-		}
-
-		$params = [];
-		parse_str( $payload, $params );
-
-		foreach( $this->rules['set'] as $key => $value )
-		{
-			if( $params[$key] != $value ) {
-				return $this->rules['error'];
-			}
-		}
-
-		return $this->rules['success'];
 	}
 }
