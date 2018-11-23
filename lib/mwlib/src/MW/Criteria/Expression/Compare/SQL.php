@@ -189,6 +189,17 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 
 
 	/**
+	 * Returns the connection object.
+	 *
+	 * return \Aimeos\MW\DB\Connection\Iface Connection object
+	 */
+	public function getConnection()
+	{
+		return $this->conn;
+	}
+
+
+	/**
 	 * Returns the internal type of the function parameter.
 	 *
 	 * @param string &$item Reference to parameter value (will be updated if necessary)
