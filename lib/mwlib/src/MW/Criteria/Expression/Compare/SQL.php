@@ -21,7 +21,7 @@ namespace Aimeos\MW\Criteria\Expression\Compare;
 class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 {
 	private static $operators = array( '=~' => 'LIKE', '~=' => 'LIKE', '==' => '=', '!=' => '<>', '>' => '>', '>=' => '>=', '<' => '<', '<=' => '<=' );
-	private $conn = null;
+	private $conn;
 
 
 	/**
@@ -182,6 +182,17 @@ class SQL extends \Aimeos\MW\Criteria\Expression\Compare\Base
 		}
 
 		return $value;
+	}
+
+
+	/**
+	 * Returns the connection object.
+	 *
+	 * return \Aimeos\MW\DB\Connection\Iface Connection object
+	 */
+	public function getConnection()
+	{
+		return $this->conn;
 	}
 
 

@@ -72,11 +72,24 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	public function createSearch( $default = false )
 	{
-		$dbm = $this->context->getDatabaseManager();
 		$db = $this->getResourceName();
+		$config = $this->context->getConfig();
+		$dbm = $this->context->getDatabaseManager();
+
+		if( ( $adapter = $config->get( 'resource/' . $db . '/adapter' ) ) === null ) {
+			$adapter = $config->get( 'resource/db/adapter' );
+		}
 
 		$conn = $dbm->acquire( $db );
-		$search = new \Aimeos\MW\Criteria\SQL( $conn );
+
+		switch( $adapter )
+		{
+			case 'pgsql':
+				$search = new \Aimeos\MW\Criteria\PgSQL( $conn ); break;
+			default:
+				$search = new \Aimeos\MW\Criteria\SQL( $conn ); break;
+		}
+
 		$dbm->release( $conn, $db );
 
 		return $search;
@@ -286,14 +299,8 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	protected function createSearchBase( $domain )
 	{
-		$dbm = $this->context->getDatabaseManager();
-		$dbname = $this->getResourceName();
-		$conn = $dbm->acquire( $dbname );
-
-		$object = new \Aimeos\MW\Criteria\SQL( $conn );
+		$object = $this->createSearch();
 		$object->setConditions( $object->compare( '==', $domain . '.status', 1 ) );
-
-		$dbm->release( $conn, $dbname );
 
 		return $object;
 	}
