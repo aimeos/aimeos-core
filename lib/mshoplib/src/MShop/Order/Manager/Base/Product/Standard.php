@@ -166,8 +166,8 @@ class Standard
 			'code' => 'order.base.product.status',
 			'internalcode' => 'mordbapr."status"',
 			'label' => 'Product status',
-			'type' => 'boolean',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_BOOL,
+			'type' => 'integer',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 		),
 		'order.base.product.mediaurl' => array(
 			'code' => 'order.base.product.mediaurl',
