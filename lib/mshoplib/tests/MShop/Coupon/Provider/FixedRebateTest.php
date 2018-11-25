@@ -206,16 +206,6 @@ class FixedRebateTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	public function testIsAvailableFalse()
-	{
-		$context = \TestHelperMShop::getContext();
-		$item = \Aimeos\MShop\Coupon\Manager\Factory::createManager( $context )->createItem();
-		$object = new \Aimeos\MShop\Coupon\Provider\FixedRebate( $context, $item, '5678' );
-
-		$this->assertFalse( $object->isAvailable( $this->orderBase ) );
-	}
-
-
 	protected function getOrderProducts()
 	{
 		$products = [];

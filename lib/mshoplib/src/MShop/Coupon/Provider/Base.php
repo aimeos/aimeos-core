@@ -94,25 +94,17 @@ abstract class Base implements Iface
 
 
 	/**
-	 * Tests if a coupon should be granted
+	 * Tests if a valid coupon code should be granted
 	 *
-	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base
+	 * The result depends on the configured restrictions and it doesn't test
+	 * again if the coupon or the code itself are still available.
+	 *
+	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
+	 * @return boolean True of coupon can be granted, false if not
 	 */
 	public function isAvailable( \Aimeos\MShop\Order\Item\Base\Iface $base )
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon' );
-		$codeManager = \Aimeos\MShop\Factory::createManager( $this->getContext(), 'coupon/code' );
-
-		$search = $manager->createSearch( true );
-		$expr = [
-			$search->compare( '==', 'coupon.code.code', $this->code ),
-			$codeManager->createSearch( true )->getConditions(),
-			$search->getConditions(),
-		];
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 1 );
-
-		return (bool) count( $manager->searchItems( $search ) );
+		return true;
 	}
 
 

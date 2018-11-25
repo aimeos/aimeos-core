@@ -62,7 +62,10 @@ interface Iface
 	public function getConfigBE();
 
 	/**
-	 * Tests if a coupon should be granted.
+	 * Tests if a coupon should be granted
+	 *
+	 * The result depends on the configured restrictions and it doesn't test
+	 * again if the coupon or the code itself are still available.
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Iface $base Basic order of the customer
 	 * @return boolean True of coupon can be granted, false if not
