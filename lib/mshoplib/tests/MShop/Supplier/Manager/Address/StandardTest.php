@@ -135,7 +135,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getWebsite(), $itemSaved->getWebsite() );
 		$this->assertEquals( $item->getLongitude(), $itemSaved->getLongitude() );
 		$this->assertEquals( $item->getLatitude(), $itemSaved->getLatitude() );
-		$this->assertEquals( $item->getFlag(), $itemSaved->getFlag() );
 
 		$this->assertEquals( $this->editor, $itemSaved->getEditor() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemSaved->getTimeCreated() );
@@ -165,7 +164,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getWebsite(), $itemUpd->getWebsite() );
 		$this->assertEquals( $itemExp->getLongitude(), $itemUpd->getLongitude() );
 		$this->assertEquals( $itemExp->getLatitude(), $itemUpd->getLatitude() );
-		$this->assertEquals( $itemExp->getFlag(), $itemUpd->getFlag() );
 
 		$this->assertEquals( $this->editor, $itemUpd->getEditor() );
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );

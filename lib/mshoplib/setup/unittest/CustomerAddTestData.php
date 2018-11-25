@@ -180,7 +180,6 @@ class CustomerAddTestData extends \Aimeos\MW\Setup\Task\Base
 			$address->setLanguageId( $dataset['langid'] );
 			$address->setLatitude( $dataset['latitude'] );
 			$address->setLongitude( $dataset['longitude'] );
-			$address->setFlag( $dataset['flag'] );
 			$address->setPosition( $dataset['pos'] );
 			$address->setParentId( $parentIds[$dataset['parentid']] );
 

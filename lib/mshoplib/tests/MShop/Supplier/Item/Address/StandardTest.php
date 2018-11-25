@@ -42,7 +42,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.address.longitude' => '10.0',
 			'supplier.address.latitude' => '50.0',
 			'supplier.address.position' => 1,
-			'supplier.address.flag' => 2,
 			'supplier.address.mtime' => '2011-01-01 00:00:02',
 			'supplier.address.ctime' => '2011-01-01 00:00:01',
 			'supplier.address.editor' => 'unitTestUser',
@@ -51,15 +50,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Supplier\Item\Address\Standard( 'supplier.address.', $this->values );
 	}
 
+
 	protected function tearDown()
 	{
 		$this->object = null;
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( 23, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -70,10 +72,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetParentId()
 	{
 		$this->assertEquals( 'referenceid', $this->object->getParentId() );
 	}
+
 
 	public function testSetParentId()
 	{
@@ -84,10 +88,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCompany()
 	{
 		$this->assertEquals( 'unitCompany', $this->object->getCompany() );
 	}
+
 
 	public function testSetCompany()
 	{
@@ -98,10 +104,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetVatID()
 	{
 		$this->assertEquals( 'DE999999999', $this->object->getVatID() );
 	}
+
 
 	public function testSetVatID()
 	{
@@ -112,10 +120,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSalutation()
 	{
 		$this->assertEquals( \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR, $this->object->getSalutation() );
 	}
+
 
 	public function testSetSalutation()
 	{
@@ -126,10 +136,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTitle()
 	{
 		$this->assertEquals( 'Herr', $this->object->getTitle() );
 	}
+
 
 	public function testSetTitle()
 	{
@@ -140,10 +152,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetFirstname()
 	{
 		$this->assertEquals( 'firstunit', $this->object->getFirstname() );
 	}
+
 
 	public function testSetFirstname()
 	{
@@ -154,10 +168,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetLastname()
 	{
 		$this->assertEquals( 'lastunit', $this->object->getLastname() );
 	}
+
 
 	public function testSetLastname()
 	{
@@ -168,10 +184,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetAddress1()
 	{
 		$this->assertEquals( 'unit str.', $this->object->getAddress1() );
 	}
+
 
 	public function testSetAddress1()
 	{
@@ -182,10 +200,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetAddress2()
 	{
 		$this->assertEquals( '166', $this->object->getAddress2() );
 	}
+
 
 	public function testSetAddress2()
 	{
@@ -196,10 +216,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetAddress3()
 	{
 		$this->assertEquals( '4.OG', $this->object->getAddress3() );
 	}
+
 
 	public function testSetAddress3()
 	{
@@ -210,10 +232,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetPostal()
 	{
 		$this->assertEquals( '22769', $this->object->getPostal() );
 	}
+
 
 	public function testSetPostal()
 	{
@@ -224,10 +248,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCity()
 	{
 		$this->assertEquals( 'Hamburg', $this->object->getCity() );
 	}
+
 
 	public function testSetCity()
 	{
@@ -238,10 +264,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetState()
 	{
 		$this->assertEquals( 'Hamburg', $this->object->getState() );
 	}
+
 
 	public function testSetState()
 	{
@@ -252,10 +280,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCountryId()
 	{
 		$this->assertEquals( 'DE', $this->object->getCountryId() );
 	}
+
 
 	public function testSetCountryId()
 	{
@@ -266,10 +296,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetLanguageId()
 	{
 		$this->assertEquals( 'de', $this->object->getLanguageId() );
 	}
+
 
 	public function testSetLanguageId()
 	{
@@ -280,10 +312,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTelephone()
 	{
 		$this->assertEquals( '05554433221', $this->object->getTelephone() );
 	}
+
 
 	public function testSetTelephone()
 	{
@@ -294,10 +328,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetEmail()
 	{
 		$this->assertEquals( 'test@example.com', $this->object->getEmail() );
 	}
+
 
 	public function testSetEmail()
 	{
@@ -311,10 +347,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setEmail( 'unittest.de' );
 	}
 
+
 	public function testGetTelefax()
 	{
 		$this->assertEquals( '05554433222', $this->object->getTelefax() );
 	}
+
 
 	public function testSetTelefax()
 	{
@@ -325,10 +363,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetWebsite()
 	{
 		$this->assertEquals( 'www.example.com', $this->object->getWebsite() );
 	}
+
 
 	public function testSetWebsite()
 	{
@@ -346,16 +386,19 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setWebsite( '_test:de' );
 	}
 
+
 	public function testSetWebsiteHostException()
 	{
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->setWebsite( 'localhost' );
 	}
 
+
 	public function testGetLongitude()
 	{
 		$this->assertEquals( '10.0', $this->object->getLongitude() );
 	}
+
 
 	public function testSetLongitude()
 	{
@@ -366,10 +409,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetLatitude()
 	{
 		$this->assertEquals( '50.0', $this->object->getLatitude() );
 	}
+
 
 	public function testSetLatitude()
 	{
@@ -380,10 +425,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetPosition()
 	{
 		$this->assertEquals( 1, $this->object->getPosition() );
 	}
+
 
 	public function testSetPosition()
 	{
@@ -394,34 +441,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetFlag()
-	{
-		$this->assertEquals( 2, $this->object->getFlag() );
-	}
-
-	public function testSetFlag()
-	{
-		$return = $this->object->setFlag( 5 );
-
-		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Address\Iface', $return );
-		$this->assertEquals( 5, $this->object->getFlag() );
-		$this->assertTrue( $this->object->isModified() );
-	}
 
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
 
+
 	public function testGetEditor()
 	{
 		$this->assertEquals( 'unitTestUser', $this->object->getEditor() );
 	}
+
 
 	public function testGetResourceType()
 	{
@@ -462,7 +499,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'supplier.address.website' => 'example.com',
 			'supplier.address.longitude' => '10.0',
 			'supplier.address.latitude' => '53.5',
-			'supplier.address.flag' => 3,
 			'supplier.address.position' => 4,
 		);
 
@@ -493,7 +529,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $list['supplier.address.website'], $object->getWebsite() );
 		$this->assertEquals( $list['supplier.address.longitude'], $object->getLongitude() );
 		$this->assertEquals( $list['supplier.address.latitude'], $object->getLatitude() );
-		$this->assertEquals( $list['supplier.address.flag'], $object->getFlag() );
 		$this->assertEquals( $list['supplier.address.position'], $object->getPosition() );
 	}
 
@@ -527,7 +562,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['supplier.address.website'] );
 		$this->assertEquals( $this->object->getLongitude(), $arrayObject['supplier.address.longitude'] );
 		$this->assertEquals( $this->object->getLatitude(), $arrayObject['supplier.address.latitude'] );
-		$this->assertEquals( $this->object->getFlag(), $arrayObject['supplier.address.flag'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['supplier.address.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['supplier.address.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['supplier.address.editor'] );

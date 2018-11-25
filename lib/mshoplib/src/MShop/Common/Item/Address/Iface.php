@@ -333,21 +333,4 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setWebsite( $website );
-
-
-	/**
-	 * Returns the flag value.
-	 *
-	 * @return integer Generic flag value
-	 */
-	public function getFlag();
-
-
-	/**
-	 * Sets a new flag value.
-	 *
-	 * @param integer $flag New flag value
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
-	 */
-	public function setFlag( $flag );
 }

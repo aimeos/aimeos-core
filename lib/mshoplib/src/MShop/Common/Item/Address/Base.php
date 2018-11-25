@@ -745,39 +745,6 @@ abstract class Base
 
 
 	/**
-	 * Returns the flag value.
-	 *
-	 * @return integer Generic flag value
-	 */
-	public function getFlag()
-	{
-		if( isset( $this->data[$this->prefix . 'flag'] ) ) {
-			return (int) $this->data[$this->prefix . 'flag'];
-		}
-
-		return 0;
-	}
-
-
-	/**
-	 * Sets a new flag value.
-	 *
-	 * @param integer $flag New flag value
-	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
-	 */
-	public function setFlag( $flag )
-	{
-		if( (int) $flag !== $this->getFlag() )
-		{
-			$this->data[$this->prefix . 'flag'] = (int) $flag;
-			$this->setModified();
-		}
-
-		return $this;
-	}
-
-
-	/**
 	 * Returns the item type
 	 *
 	 * @return string Item type, subtypes are separated by slashes
@@ -816,7 +783,6 @@ abstract class Base
 		$this->setWebsite( $item->getWebsite() );
 		$this->setLongitude( $item->getLongitude() );
 		$this->setLatitude( $item->getLatitude() );
-		$this->setFlag( $item->getFlag() );
 
 		$this->setModified();
 
@@ -859,7 +825,6 @@ abstract class Base
 				case $this->prefix . 'website': $this->setWebsite( $value ); break;
 				case $this->prefix . 'longitude': $this->setLongitude( $value ); break;
 				case $this->prefix . 'latitude': $this->setLatitude( $value ); break;
-				case $this->prefix . 'flag': $this->setFlag( $value ); break;
 				default: $unknown[$key] = $value;
 			}
 		}
@@ -898,7 +863,6 @@ abstract class Base
 		$list[$this->prefix . 'website'] = $this->getWebsite();
 		$list[$this->prefix . 'longitude'] = $this->getLongitude();
 		$list[$this->prefix . 'latitude'] = $this->getLatitude();
-		$list[$this->prefix . 'flag'] = $this->getFlag();
 
 		return $list;
 	}

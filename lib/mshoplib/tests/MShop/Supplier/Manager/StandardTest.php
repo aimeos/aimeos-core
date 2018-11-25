@@ -190,7 +190,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '==', 'supplier.address.telefax', '055544332212' );
 		$expr[] = $search->compare( '==', 'supplier.address.email', 'test@example.com' );
 		$expr[] = $search->compare( '==', 'supplier.address.website', 'www.example.com' );
-		$expr[] = $search->compare( '==', 'supplier.address.flag', 0 );
 		$expr[] = $search->compare( '==', 'supplier.address.position', 0 );
 		$expr[] = $search->compare( '>=', 'supplier.address.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'supplier.address.ctime', '1970-01-01 00:00:00' );

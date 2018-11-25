@@ -22,10 +22,10 @@ return array(
 							"parentid", "company", "vatid", "salutation", "title",
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
-							"email", "telefax", "website", "longitude", "latitude", "flag",
-							"pos", "mtime", "editor", "siteid", "ctime"
+							"email", "telefax", "website", "longitude", "latitude", "pos",
+							"mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -37,7 +37,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
+							"pos" = ?, "mtime" = ?, "editor" = ?, "siteid" = ?
 						WHERE "id" = ?
 					'
 				),
@@ -55,8 +55,8 @@ return array(
 							mcusad."telephone" AS "customer.address.telephone", mcusad."email" AS "customer.address.email",
 							mcusad."telefax" AS "customer.address.telefax", mcusad."website" AS "customer.address.website",
 							mcusad."longitude" AS "customer.address.longitude", mcusad."latitude" AS "customer.address.latitude",
-							mcusad."flag" AS "customer.address.flag", mcusad."mtime" AS "customer.address.mtime",
-							mcusad."editor" AS "customer.address.editor", mcusad."ctime" AS "customer.address.ctime"
+							mcusad."mtime" AS "customer.address.mtime", mcusad."editor" AS "customer.address.editor",
+							mcusad."ctime" AS "customer.address.ctime"
 						FROM "mshop_customer_address" AS mcusad
 						:joins
 						WHERE :cond
@@ -66,7 +66,7 @@ return array(
 							mcusad."address3", mcusad."postal", mcusad."city", mcusad."state",
 							mcusad."countryid", mcusad."langid", mcusad."telephone", mcusad."email",
 							mcusad."telefax", mcusad."website", mcusad."longitude", mcusad."latitude",
-							mcusad."flag", mcusad."mtime", mcusad."editor", mcusad."ctime"
+							mcusad."mtime", mcusad."editor", mcusad."ctime"
 							/*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start

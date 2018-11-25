@@ -23,9 +23,9 @@ return array(
 							"firstname", "lastname", "address1", "address2", "address3",
 							"postal", "city", "state", "countryid", "langid", "telephone",
 							"email", "telefax", "website", "longitude", "latitude",
-							"flag", "pos", "mtime", "editor", "siteid", "ctime"
+							"pos", "mtime", "editor", "siteid", "ctime"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					'
 				),
@@ -37,7 +37,7 @@ return array(
 							"address2" = ?, "address3" = ?, "postal" = ?, "city" = ?,
 							"state" = ?, "countryid" = ?, "langid" = ?, "telephone" = ?,
 							"email" = ?, "telefax" = ?, "website" = ?, "longitude" = ?, "latitude" = ?,
-							"flag" = ?, "pos" = ?, "mtime" = ?, "editor" = ?
+							"pos" = ?, "mtime" = ?, "editor" = ?
 						WHERE "siteid" = ? AND "id" = ?
 					'
 				),
@@ -55,8 +55,8 @@ return array(
 							msupad."telephone" AS "supplier.address.telephone", msupad."email" AS "supplier.address.email",
 							msupad."telefax" AS "supplier.address.telefax", msupad."website" AS "supplier.address.website",
 							msupad."longitude" AS "supplier.address.longitude", msupad."latitude" AS "supplier.address.latitude",
-							msupad."flag" AS "supplier.address.flag", msupad."mtime" AS "supplier.address.mtime",
-							msupad."editor" AS "supplier.address.editor", msupad."ctime" AS "supplier.address.ctime"
+							msupad."mtime" AS "supplier.address.mtime", msupad."ctime" AS "supplier.address.ctime",
+							msupad."editor" AS "supplier.address.editor"
 						FROM "mshop_supplier_address" AS msupad
 						:joins
 						WHERE :cond
@@ -66,7 +66,7 @@ return array(
 							msupad."address3", msupad."postal", msupad."city", msupad."state",
 							msupad."countryid", msupad."langid", msupad."telephone", msupad."email",
 							msupad."telefax", msupad."website", msupad."longitude", msupad."latitude",
-							msupad."flag", msupad."mtime", msupad."editor", msupad."ctime"
+							msupad."mtime", msupad."ctime", msupad."editor"
 							/*-columns*/ , :columns /*columns-*/
 						/*-orderby*/ ORDER BY :order /*orderby-*/
 						LIMIT :size OFFSET :start

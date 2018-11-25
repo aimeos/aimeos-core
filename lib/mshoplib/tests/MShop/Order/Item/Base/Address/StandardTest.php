@@ -10,21 +10,12 @@
 namespace Aimeos\MShop\Order\Item\Base\Address;
 
 
-/**
- * Test class for \Aimeos\MShop\Order\Item\Base\Address\Standard.
- */
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 	private $values;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$this->values = array(
@@ -53,7 +44,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'order.base.address.longitude' => '10.0',
 			'order.base.address.latitude' => '50.0',
 			'order.base.address.languageid' => 'de',
-			'order.base.address.flag' => 2,
 			'order.base.address.mtime' => '2011-01-01 00:00:02',
 			'order.base.address.ctime' => '2011-01-01 00:00:01',
 			'order.base.address.editor' => 'unitTestUser'
@@ -62,21 +52,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object = new \Aimeos\MShop\Order\Item\Base\Address\Standard( $this->values );
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
+
 	protected function tearDown()
 	{
 		unset( $this->object );
 	}
 
+
 	public function testGetId()
 	{
 		$this->assertEquals( 23, $this->object->getId() );
 	}
+
 
 	public function testSetId()
 	{
@@ -87,15 +74,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSiteId()
 	{
 		$this->assertEquals( 123, $this->object->getSiteId() );
 	}
 
+
 	public function testGetBaseId()
 	{
 		$this->assertEquals( 99, $this->object->getBaseId() );
 	}
+
 
 	public function testSetBaseId()
 	{
@@ -106,6 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testSetBaseIdReset()
 	{
 		$return = $this->object->setBaseId( null );
@@ -115,10 +106,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetAddressId()
 	{
 		$this->assertEquals( 11, $this->object->getAddressId() );
 	}
+
 
 	public function testSetAddressId()
 	{
@@ -129,6 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testSetAddressIdNull()
 	{
 		$return = $this->object->setAddressId( null );
@@ -138,10 +132,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetType()
 	{
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_DELIVERY, $this->object->getType() );
 	}
+
 
 	public function testSetType()
 	{
@@ -152,10 +148,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCompany()
 	{
 		$this->assertEquals( 'unitCompany', $this->object->getCompany() );
 	}
+
 
 	public function testSetCompany()
 	{
@@ -166,10 +164,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetVatID()
 	{
 		$this->assertEquals( 'DE999999999', $this->object->getVatID() );
 	}
+
 
 	public function testSetVatID()
 	{
@@ -180,10 +180,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetSalutation()
 	{
 		$this->assertEquals( \Aimeos\MShop\Order\item\Base\Address\Base::SALUTATION_MR, $this->object->getSalutation() );
 	}
+
 
 	public function testSetSalutation()
 	{
@@ -194,10 +196,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTitle()
 	{
 		$this->assertEquals( 'Herr', $this->object->getTitle() );
 	}
+
 
 	public function testSetTitle()
 	{
@@ -208,10 +212,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetFirstname()
 	{
 		$this->assertEquals( 'firstunit', $this->object->getFirstname() );
 	}
+
 
 	public function testSetFirstname()
 	{
@@ -222,10 +228,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetLastname()
 	{
 		$this->assertEquals( 'lastunit', $this->object->getLastname() );
 	}
+
 
 	public function testSetLastname()
 	{
@@ -236,10 +244,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetAddress1()
 	{
 		$this->assertEquals( 'unit str.', $this->object->getAddress1() );
 	}
+
 
 	public function testSetAddress1()
 	{
@@ -250,10 +260,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetAddress2()
 	{
 		$this->assertEquals( '166', $this->object->getAddress2() );
 	}
+
 
 	public function testSetAddress2()
 	{
@@ -264,10 +276,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetAddress3()
 	{
 		$this->assertEquals( '4.OG', $this->object->getAddress3() );
 	}
+
 
 	public function testSetAddress3()
 	{
@@ -278,10 +292,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetPostal()
 	{
 		$this->assertEquals( '22769', $this->object->getPostal() );
 	}
+
 
 	public function testSetPostal()
 	{
@@ -292,10 +308,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCity()
 	{
 		$this->assertEquals( 'Hamburg', $this->object->getCity() );
 	}
+
 
 	public function testSetCity()
 	{
@@ -306,10 +324,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetState()
 	{
 		$this->assertEquals( 'Hamburg', $this->object->getState() );
 	}
+
 
 	public function testSetState()
 	{
@@ -320,10 +340,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetCountryId()
 	{
 		$this->assertEquals( 'DE', $this->object->getCountryId() );
 	}
+
 
 	public function testSetCountryId()
 	{
@@ -334,10 +356,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetTelephone()
 	{
 		$this->assertEquals( '05554433221', $this->object->getTelephone() );
 	}
+
 
 	public function testSetTelephone()
 	{
@@ -348,10 +372,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetEmail()
 	{
 		$this->assertEquals( 'test@example.com', $this->object->getEmail() );
 	}
+
 
 	public function testSetEmail()
 	{
@@ -365,10 +391,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setEmail( 'a@.' );
 	}
 
+
 	public function testGetTelefax()
 	{
 		$this->assertEquals( '05554433222', $this->object->getTelefax() );
 	}
+
 
 	public function testSetTelefax()
 	{
@@ -379,10 +407,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetWebsite()
 	{
 		$this->assertEquals( 'www.example.com', $this->object->getWebsite() );
 	}
+
 
 	public function testSetWebsite()
 	{
@@ -396,10 +426,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->setWebsite( 'abcde:abc' );
 	}
 
+
 	public function testGetLongitude()
 	{
 		$this->assertEquals( '10.0', $this->object->getLongitude() );
 	}
+
 
 	public function testSetLongitude()
 	{
@@ -410,10 +442,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetLatitude()
 	{
 		$this->assertEquals( '50.0', $this->object->getLatitude() );
 	}
+
 
 	public function testSetLatitude()
 	{
@@ -424,10 +458,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
+
 	public function testGetLanguageId()
 	{
 		$this->assertEquals( 'de', $this->object->getLanguageId() );
 	}
+
 
 	public function testSetLanguageId()
 	{
@@ -438,29 +474,18 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertTrue( $this->object->isModified() );
 	}
 
-	public function testGetFlag()
-	{
-		$this->assertEquals( 2, $this->object->getFlag() );
-	}
-
-	public function testSetFlag()
-	{
-		$return = $this->object->setFlag( 4 );
-
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
-		$this->assertEquals( 4, $this->object->getFlag() );
-		$this->assertTrue( $this->object->isModified() );
-	}
 
 	public function testGetTimeModified()
 	{
 		$this->assertEquals( '2011-01-01 00:00:02', $this->object->getTimeModified() );
 	}
 
+
 	public function testGetTimeCreated()
 	{
 		$this->assertEquals( '2011-01-01 00:00:01', $this->object->getTimeCreated() );
 	}
+
 
 	public function testGetEditor()
 	{
@@ -531,7 +556,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $this->object->getWebsite(), $arrayObject['order.base.address.website'] );
 		$this->assertEquals( $this->object->getLongitude(), $arrayObject['order.base.address.longitude'] );
 		$this->assertEquals( $this->object->getLatitude(), $arrayObject['order.base.address.latitude'] );
-		$this->assertEquals( $this->object->getFlag(), $arrayObject['order.base.address.flag'] );
 		$this->assertEquals( $this->object->getTimeCreated(), $arrayObject['order.base.address.ctime'] );
 		$this->assertEquals( $this->object->getTimeModified(), $arrayObject['order.base.address.mtime'] );
 		$this->assertEquals( $this->object->getEditor(), $arrayObject['order.base.address.editor'] );

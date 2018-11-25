@@ -197,14 +197,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'supplier.address.flag' => array(
-			'code' => 'supplier.address.flag',
-			'internalcode' => 'msupad."flag"',
-			'label' => 'Address flag',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'supplier.address.ctime' => array(
 			'code' => 'supplier.address.ctime',
 			'internalcode' => 'msupad."ctime"',

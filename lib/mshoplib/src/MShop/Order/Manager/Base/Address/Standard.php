@@ -205,14 +205,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'order.base.address.flag' => array(
-			'code' => 'order.base.address.flag',
-			'internalcode' => 'mordbaad."flag"',
-			'label' => 'Address flag',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'order.base.address.ctime' => array(
 			'code' => 'order.base.address.ctime',
 			'internalcode' => 'mordbaad."ctime"',
@@ -703,16 +695,15 @@ class Standard
 			$stmt->bind( 21, $item->getWebsite() );
 			$stmt->bind( 22, $item->getLongitude() );
 			$stmt->bind( 23, $item->getLatitude() );
-			$stmt->bind( 24, $item->getFlag(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 25, $date );
-			$stmt->bind( 26, $context->getEditor() );
-			$stmt->bind( 27, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 24, $date );
+			$stmt->bind( 25, $context->getEditor() );
+			$stmt->bind( 26, $context->getLocale()->getSiteId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 			if( $id !== null ) {
-				$stmt->bind( 28, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 27, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$item->setId( $id );
 			} else {
-				$stmt->bind( 28, $date ); // ctime
+				$stmt->bind( 27, $date ); // ctime
 			}
 
 			$stmt->execute()->finish();
