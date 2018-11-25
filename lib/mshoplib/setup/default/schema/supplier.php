@@ -57,7 +57,6 @@ return array(
 			$table->addColumn( 'website', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'longitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
 			$table->addColumn( 'latitude', 'decimal', array( 'precision' => 8, 'scale' => 6, 'notnull' => false ) );
-			$table->addColumn( 'flag', 'integer', [] );
 			$table->addColumn( 'pos', 'smallint', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 			$table->addColumn( 'ctime', 'datetime', [] );
