@@ -23,7 +23,6 @@ abstract class Base
 {
 	private $salt;
 	private $helper;
-	private $addressManager;
 
 
 	/**
