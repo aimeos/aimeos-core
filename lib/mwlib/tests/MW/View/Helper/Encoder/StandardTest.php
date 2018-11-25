@@ -53,7 +53,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( 'an attribute', $enc->attr( 'an attribute', $enc::TRUST ) );
+		$this->assertEquals( '<a href=" ">', $enc->attr( '<a href="
+">', $enc::TRUST, ' ' ) );
 	}
 
 
@@ -69,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$enc = $this->object->transform();
 
-		$this->assertEquals( '&lt;a&gt;&quot;attribute&#039;&lt;/a&gt;', $enc->attr( '<a>"attribute\'</a>' ) );
+		$this->assertEquals( '<a>&quot;attribute\'</a>', $enc->attr( '<a>"attribute\'</a>' ) );
 	}
 
 

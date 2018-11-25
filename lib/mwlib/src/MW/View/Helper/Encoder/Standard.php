@@ -49,10 +49,14 @@ class Standard
 	public function attr( $value, $trust = self::TAINT, $replace = '' )
 	{
 		if( $replace != '' ) {
-			$value = str_replace( " \v\t\r\n\f", $replace, $value );
+			$value = str_replace( [" ", "\v", "\t", "\r", "\n", "\f"], $replace, $value );
 		}
 
-		return htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' );
+		if( $trust === self::TRUST ) {
+			return $value;
+		}
+
+		return str_replace( '"', '&quot;', $value );
 	}
 
 
