@@ -161,9 +161,7 @@ class AttributeAddPerfData extends \Aimeos\MW\Setup\Task\Base
 
 		foreach( $colors as $code => $name )
 		{
-			$list = str_split( ltrim( $code, '#' ), 2 );
-			$triple = $list[0] . ',' . $list[1]. ',' . $list[2];
-			$uri = 'data:image/svg+xml;utf8,<svg width="1" height="1"><rect width="1" height="1" style="fill:rgb(' . $triple . ')" /></svg>';
+			$uri = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1px' height='1px'><style>svg{background-color:" . $code . "}</style></svg>";
 
 			$item = clone $attrItem;
 			$item->setPosition( $pos++ )
