@@ -183,14 +183,6 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
-		'customer.address.flag' => array(
-			'label' => 'Address flag',
-			'code' => 'customer.address.flag',
-			'internalcode' => 'mcusad."flag"',
-			'type' => 'integer',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
-			'public' => false,
-		),
 		'customer.address.position' => array(
 			'code' => 'customer.address.position',
 			'internalcode' => 'mcusad."pos"',
