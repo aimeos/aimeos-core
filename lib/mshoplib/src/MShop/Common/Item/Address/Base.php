@@ -677,12 +677,12 @@ abstract class Base
 	/**
 	 * Returns the longitude coordinate of the customer address
 	 *
-	 * @return string|null Longitude coordinate as decimal value or null
+	 * @return float|null Longitude coordinate as decimal value or null
 	 */
 	public function getLongitude()
 	{
 		if( isset( $this->data[$this->prefix . 'longitude'] ) ) {
-			return (string) $this->data[$this->prefix . 'longitude'];
+			return (float) $this->data[$this->prefix . 'longitude'];
 		}
 
 		return null;
@@ -692,7 +692,7 @@ abstract class Base
 	/**
 	 * Sets the longitude coordinate of the customer address
 	 *
-	 * @param string|null $value Longitude coordinate as decimal value or null
+	 * @param float|null $value Longitude coordinate as decimal value or null
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setLongitude( $value )
@@ -701,7 +701,7 @@ abstract class Base
 
 		if( $value !== $this->getLongitude() )
 		{
-			$this->data[$this->prefix . 'longitude'] = $value;
+			$this->data[$this->prefix . 'longitude'] = (float) $value;
 			$this->setModified();
 		}
 
@@ -712,12 +712,12 @@ abstract class Base
 	/**
 	 * Returns the latitude coordinate of the customer address
 	 *
-	 * @return string|null Latitude coordinate as decimal value or null
+	 * @return float|null Latitude coordinate as decimal value or null
 	 */
 	public function getLatitude()
 	{
 		if( isset( $this->data[$this->prefix . 'latitude'] ) ) {
-			return (string) $this->data[$this->prefix . 'latitude'];
+			return (float) $this->data[$this->prefix . 'latitude'];
 		}
 
 		return null;
@@ -727,7 +727,7 @@ abstract class Base
 	/**
 	 * Sets the latitude coordinate of the customer address
 	 *
-	 * @param string|null $value Latitude coordinate as decimal value or null
+	 * @param float|null $value Latitude coordinate as decimal value or null
 	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
 	 */
 	public function setLatitude( $value )
@@ -736,7 +736,7 @@ abstract class Base
 
 		if( $value !== $this->getLatitude() )
 		{
-			$this->data[$this->prefix . 'latitude'] = $value;
+			$this->data[$this->prefix . 'latitude'] = (float) $value;
 			$this->setModified();
 		}
 

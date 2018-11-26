@@ -333,4 +333,38 @@ interface Iface extends \Aimeos\MShop\Common\Item\Iface
 	 * @return \Aimeos\MShop\Common\Item\Address\Iface Common address item for chaining method calls
 	 */
 	public function setWebsite( $website );
+
+
+	/**
+	 * Returns the longitude coordinate of the customer address
+	 *
+	 * @return float|null Longitude coordinate as decimal value or null
+	 */
+	public function getLongitude();
+
+
+	/**
+	 * Sets the longitude coordinate of the customer address
+	 *
+	 * @param float|null $value Longitude coordinate as decimal value or null
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 */
+	public function setLongitude( $value );
+
+
+	/**
+	 * Returns the latitude coordinate of the customer address
+	 *
+	 * @return float|null Latitude coordinate as decimal value or null
+	 */
+	public function getLatitude();
+
+
+	/**
+	 * Sets the latitude coordinate of the customer address
+	 *
+	 * @param float|null $value Latitude coordinate as decimal value or null
+	 * @return \Aimeos\MShop\Customer\Item\Iface Customer item for chaining method calls
+	 */
+	public function setLatitude( $value );
 }
