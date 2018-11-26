@@ -83,21 +83,46 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 		$conditions = array(
-			$search->compare( '==', 'customer.code', 'UTC003' ),
+			$search->compare( '==', 'customer.code', 'UTC001' ),
 			$search->compare( '==', 'customer.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$items = $this->object->searchItems( $search, array( 'text' ) );
 
 		if( ( $expected = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No customer item with code "UTC003" found' );
+			throw new \RuntimeException( 'No customer item with code "UTC001" found' );
 		}
 
 		$actual = $this->object->getItem( $expected->getId(), array( 'text' ) );
+		$payAddr = $actual->getPaymentAddress();
+
+		$this->assertEquals( 'unitCustomer001', $actual->getLabel() );
+		$this->assertEquals( 'UTC001', $actual->getCode() );
+		$this->assertEquals( 'mr', $payAddr->getSalutation() );
+		$this->assertEquals( 'Example company', $payAddr->getCompany() );
+		$this->assertEquals( 'Dr', $payAddr->getTitle() );
+		$this->assertEquals( 'Our', $payAddr->getFirstname() );
+		$this->assertEquals( 'Unittest', $payAddr->getLastname() );
+		$this->assertEquals( 'Pickhuben', $payAddr->getAddress1() );
+		$this->assertEquals( '2-4', $payAddr->getAddress2() );
+		$this->assertEquals( '', $payAddr->getAddress3() );
+		$this->assertEquals( '20457', $payAddr->getPostal() );
+		$this->assertEquals( 'Hamburg', $payAddr->getCity() );
+		$this->assertEquals( 'Hamburg', $payAddr->getState() );
+		$this->assertEquals( 'de', $payAddr->getLanguageId() );
+		$this->assertEquals( 'DE', $payAddr->getCountryId() );
+		$this->assertEquals( '055544332211', $payAddr->getTelephone() );
+		$this->assertEquals( 'test@example.com', $payAddr->getEMail() );
+		$this->assertEquals( '055544332212', $payAddr->getTelefax() );
+		$this->assertEquals( 'www.example.com', $payAddr->getWebsite() );
+		$this->assertEquals( '10.0', $payAddr->getLongitude() );
+		$this->assertEquals( '50.0', $payAddr->getLatitude() );
+		$this->assertEquals( 1, $actual->getStatus() );
+		$this->assertEquals( 'core:unittest', $actual->getEditor() );
 
 		$this->assertEquals( $expected, $actual );
-		$this->assertEquals( 3, count( $actual->getListItems( 'text', null, null, false ) ) );
-		$this->assertEquals( 3, count( $actual->getRefItems( 'text', null, null, false ) ) );
+		$this->assertEquals( 1, count( $actual->getListItems( 'text', null, null, false ) ) );
+		$this->assertEquals( 1, count( $actual->getRefItems( 'text', null, null, false ) ) );
 	}
 
 
@@ -115,18 +140,21 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$item->setCode( 'unitTest' );
 		$item->setLabel( 'unitTest' );
 		$item->setGroups( array( 1, 2, 3 ) );
-		$resultSaved = $this->object->saveItem( $item );
+		$item = $this->object->saveItem( $item );
 		$itemSaved = $this->object->getItem( $item->getId(), array( 'customer/group' ) );
 
 		$itemExp = clone $itemSaved;
 		$itemExp->setCode( 'unitTest2' );
 		$itemExp->setLabel( 'unitTest2' );
 		$itemExp->setGroups( array( 2, 4 ) );
-		$resultUpd = $this->object->saveItem( $itemExp );
+		$itemExp = $this->object->saveItem( $itemExp );
 		$itemUpd = $this->object->getItem( $itemExp->getId(), array( 'customer/group' ) );
 
 		$this->object->deleteItem( $item->getId() );
 
+
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $itemSaved );
+		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $itemUpd );
 
 		$this->assertTrue( $item->getId() !== null );
 		$this->assertEquals( $item->getId(), $itemSaved->getId() );
@@ -134,7 +162,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $item->getStatus(), $itemSaved->getStatus() );
 		$this->assertEquals( $item->getCode(), $itemSaved->getCode() );
 		$this->assertEquals( $item->getLabel(), $itemSaved->getLabel() );
-		$this->assertEquals( $item->getPaymentAddress(), $itemSaved->getPaymentAddress() );
 		$this->assertEquals( $item->getBirthday(), $itemSaved->getBirthday() );
 		$this->assertEquals( $item->getPassword(), $itemSaved->getPassword() );
 		$this->assertEquals( $item->getGroups(), $itemSaved->getGroups() );
@@ -149,7 +176,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getStatus(), $itemUpd->getStatus() );
 		$this->assertEquals( $itemExp->getCode(), $itemUpd->getCode() );
 		$this->assertEquals( $itemExp->getLabel(), $itemUpd->getLabel() );
-		$this->assertEquals( $itemExp->getPaymentAddress(), $itemUpd->getPaymentAddress() );
 		$this->assertEquals( $itemExp->getBirthday(), $itemUpd->getBirthday() );
 		$this->assertEquals( $itemExp->getPassword(), $itemUpd->getPassword() );
 		$this->assertEquals( $itemExp->getGroups(), $itemUpd->getGroups() );
@@ -159,8 +185,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
 
 		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
 		$this->object->getItem( $item->getId() );

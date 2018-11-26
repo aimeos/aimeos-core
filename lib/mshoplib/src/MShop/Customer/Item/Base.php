@@ -52,33 +52,6 @@ abstract class Base
 	{
 		parent::__construct( 'customer.', $values );
 
-		foreach( $values as $name => $value )
-		{
-			switch( $name )
-			{
-				case 'customer.salutation': $address->setSalutation( $value ); break;
-				case 'customer.company': $address->setCompany( $value ); break;
-				case 'customer.vatid': $address->setVatId( $value ); break;
-				case 'customer.title': $address->setTitle( $value ); break;
-				case 'customer.firstname': $address->setFirstname( $value ); break;
-				case 'customer.lastname': $address->setLastname( $value ); break;
-				case 'customer.address1': $address->setAddress1( $value ); break;
-				case 'customer.address2': $address->setAddress2( $value ); break;
-				case 'customer.address3': $address->setAddress3( $value ); break;
-				case 'customer.postal': $address->setPostal( $value ); break;
-				case 'customer.city': $address->setCity( $value ); break;
-				case 'customer.state': $address->setState( $value ); break;
-				case 'customer.languageid': $address->setLanguageId( $value ); break;
-				case 'customer.countryid': $address->setCountryId( $value ); break;
-				case 'customer.telephone': $address->setTelephone( $value ); break;
-				case 'customer.telefax': $address->setTelefax( $value ); break;
-				case 'customer.website': $address->setWebsite( $value ); break;
-				case 'customer.longitude': $address->setLongitude( $value ); break;
-				case 'customer.latitude': $address->setLatitude( $value ); break;
-				case 'customer.email': $address->setEmail( $value ); break;
-			}
-		}
-
 		$this->initAddressItems( $addresses );
 		$this->initPropertyItems( $propItems );
 		$this->initListItems( $listItems, $refItems );

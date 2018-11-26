@@ -172,12 +172,8 @@ abstract class Base
 	protected function createItemBase( array $values = [], array $listItems = [], array $refItems = [],
 		array $addresses = [], array $propItems = [] )
 	{
-		if( !isset( $this->addressManager ) ) {
-			$this->addressManager = $this->getObject()->getSubManager( 'address' );
-		}
-
 		$helper = $this->getPasswordHelper();
-		$address = $this->addressManager->createItem();
+		$address = new \Aimeos\MShop\Common\Item\Address\Simple( 'customer.', $values );
 
 		return new \Aimeos\MShop\Customer\Item\Standard(
 			$address, $values, $listItems, $refItems,

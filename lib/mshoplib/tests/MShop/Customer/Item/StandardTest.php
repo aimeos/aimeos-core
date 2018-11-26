@@ -19,13 +19,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$addressValues = array(
-			'common.address.parentid' => 'referenceid',
-			'common.address.position' => 1,
-		);
-
-		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'common.address.', $addressValues );
-
 		$this->values = array(
 			'customer.id' => 541,
 			'customer.siteid' => 123,
@@ -48,7 +41,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.postal' => '22769',
 			'customer.city' => 'Hamburg',
 			'customer.state' => 'Hamburg',
-			'customer.countryid' => 'de',
+			'customer.countryid' => 'DE',
 			'customer.languageid' => 'de',
 			'customer.telephone' => '05554433221',
 			'customer.email' => 'test@example.com',
@@ -61,6 +54,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			'customer.editor' => 'unitTestUser',
 			'additional' => 'something',
 		);
+
+		$this->address = new \Aimeos\MShop\Common\Item\Address\Standard( 'customer.', $this->values );
 
 		$addresses = array(
 			-1 => new \Aimeos\MShop\Customer\Item\Address\Standard( 'customer.address.', ['customer.address.position' => 1] ),
@@ -219,7 +214,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetPaymentAddress()
 	{
 		$address = $this->object->getPaymentAddress();
-		$this->assertEquals( $address->getParentId(), 'referenceid' );
 		$this->assertEquals( $address->getCompany(), 'unitCompany' );
 		$this->assertEquals( $address->getVatID(), 'DE999999999' );
 		$this->assertEquals( $address->getSalutation(), \Aimeos\MShop\Common\Item\Address\Base::SALUTATION_MR );
