@@ -179,13 +179,13 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$textManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'text' );
 		$catalogListManager = \Aimeos\MShop\Factory::createManager( $this->additional, 'catalog/lists' );
 
-		$textItem = $textManager->createItem( 'name', 'product' )
+		$textItem = $textManager->createItem( 'name', 'catalog' )
 			->setContent( 'Category ' . $catLabel )
 			->setLabel( 'cat-' . $catLabel )
 			->setLanguageId( 'en' )
 			->setStatus( 1 );
 
-		$listItem = $catalogListManager->createItem( 'default', 'product' );
+		$listItem = $catalogListManager->createItem( 'default', 'text' );
 
 		return $catItem->addListItem( 'text', $listItem, $textItem );
 	}
