@@ -243,7 +243,7 @@ class Standard
 			return (int) $this->values['plugin.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

@@ -163,7 +163,7 @@ class Standard
 			return (int) $this->values['locale.currency.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

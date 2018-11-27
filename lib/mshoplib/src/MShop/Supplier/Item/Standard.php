@@ -139,7 +139,7 @@ class Standard
 			return (int) $this->values['supplier.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

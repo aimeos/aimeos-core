@@ -236,6 +236,8 @@ class Standard
 		if( isset( $this->values['subscription.status'] ) ) {
 			return (int) $this->values['subscription.status'];
 		}
+
+		return 1;
 	}
 
 

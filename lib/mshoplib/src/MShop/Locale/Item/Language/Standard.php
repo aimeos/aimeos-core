@@ -168,7 +168,7 @@ class Standard
 			return (int) $this->values['locale.language.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

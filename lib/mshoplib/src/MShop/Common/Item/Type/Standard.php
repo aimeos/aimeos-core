@@ -198,7 +198,7 @@ class Standard
 			return (int) $this->values[$this->prefix . 'status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

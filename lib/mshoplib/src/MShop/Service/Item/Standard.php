@@ -341,7 +341,7 @@ class Standard
 			return (int) $this->values['service.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

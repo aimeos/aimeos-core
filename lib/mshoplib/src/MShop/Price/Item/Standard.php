@@ -446,7 +446,7 @@ class Standard extends Base
 			return (int) $this->values['price.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

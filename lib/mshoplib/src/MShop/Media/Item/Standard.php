@@ -234,7 +234,7 @@ class Standard
 			return (int) $this->values['media.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

@@ -132,7 +132,7 @@ class Standard
 			return (int) $this->values['product.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

@@ -241,7 +241,7 @@ class Standard
 			return (int) $this->values['attribute.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

@@ -244,7 +244,7 @@ class Standard
 			return (int) $this->values['text.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

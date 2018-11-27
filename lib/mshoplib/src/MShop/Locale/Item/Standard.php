@@ -242,7 +242,7 @@ class Standard
 			return (int) $this->values['locale.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

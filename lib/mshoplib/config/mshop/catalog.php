@@ -321,13 +321,15 @@ return array(
 			),
 			'lock' => array(
 				'db2' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
-				'mysql' => 'LOCK TABLE "mshop_catalog" WRITE, "mshop_catalog" AS mcat WRITE, "mshop_catalog" AS parent WRITE',
+				'mysql' => "SELECT GET_LOCK('aimeos.catalog', -1)", // LOCK TABLE implicit commits transactions
 				'oracle' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
 				'pgsql' => 'LOCK TABLE ONLY "mshop_catalog" IN EXCLUSIVE MODE',
 				'sqlanywhere' => 'LOCK TABLE "mshop_catalog" IN EXCLUSIVE MODE',
+				'sqlsrv' => "EXEC sp_getapplock @Resource = 'aimeos.catalog', @LockMode = 'Exclusive'",
 			),
 			'unlock' => array(
-				'mysql' => 'UNLOCK TABLES',
+				'mysql' => "SELECT RELEASE_LOCK('aimeos.catalog')",
+				'sqlsrv' => "EXEC sp_releaseapplock @Resource = 'aimeos.catalog'",
 			),
 		),
 	),

@@ -167,7 +167,7 @@ class Standard extends \Aimeos\MShop\Order\Item\Base\Base
 			return (int) $this->values['order.base.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

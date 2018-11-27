@@ -210,7 +210,7 @@ class Standard
 			return (int) $this->values['coupon.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

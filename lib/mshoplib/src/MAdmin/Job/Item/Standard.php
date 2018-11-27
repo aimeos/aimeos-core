@@ -174,7 +174,7 @@ class Standard
 			return (int) $this->values['job.status'];
 		}
 
-		return 0;
+		return 1;
 	}
 
 

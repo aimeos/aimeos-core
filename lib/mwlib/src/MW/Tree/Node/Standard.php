@@ -186,7 +186,7 @@ class Standard extends \Aimeos\MW\Common\Item\Base implements \Aimeos\MW\Tree\No
 	 */
 	public function getStatus()
 	{
-		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 0 );
+		return ( isset( $this->values['status'] ) ? (int) $this->values['status'] : 1 );
 	}
 
 
