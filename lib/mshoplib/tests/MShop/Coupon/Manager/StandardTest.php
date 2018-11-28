@@ -226,15 +226,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $results ) );
 		$this->assertEquals( 1, $total );
+	}
 
 
+	public function testSearchItemsTotal()
+	{
+		$total = 0;
 		//search with base criteria
 		$search = $this->object->createSearch( true );
+		$search->setSlice( 0, 1 );
 		$expr = array(
 			$search->getConditions(),
 			$search->compare( '==', 'coupon.code.editor', 'core:unittest' ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$this->assertEquals( 5, count( $this->object->searchItems( $search ) ) );
+		$result = $this->object->searchItems( $search, [], $total );
+
+		$this->assertEquals( 1, count( $result ) );
+		$this->assertEquals( 6, $total );
 	}
 }

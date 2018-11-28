@@ -22,6 +22,7 @@ return array(
 		'CDEF' => array( 'parentid' => 'FreeShipping/1', 'code' => 'CDEF', 'count' => 2000000, 'start' => null, 'end' => null ),
 		'GHIJ' => array( 'parentid' => 'Present/1', 'code' => 'GHIJ', 'count' => 2000000, 'start' => null, 'end' => null ),
 		'OPQR' => array( 'parentid' => 'Example/1', 'code' => 'OPQR', 'count' => 2000000, 'start' => null, 'end' => null ),
+		'STUV' => array( 'parentid' => 'Voucher/1', 'code' => 'STUV', 'count' => 1, 'start' => null, 'end' => null ),
 	),
 
 	//ordprodid => prodcode/quantity/pos
