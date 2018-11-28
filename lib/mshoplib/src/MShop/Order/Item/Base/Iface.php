@@ -93,7 +93,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
 	 * @param integer|null $position position of the new order product item
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position = null );
 
@@ -102,7 +102,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface $item Order product item to be added
 	 * @param integer $position Position id of the order product item
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function editProduct( \Aimeos\MShop\Order\Item\Base\Product\Iface $item, $position );
 
@@ -110,7 +110,7 @@ interface Iface
 	 * Deletes an order product item from the (future) order.
 	 *
 	 * @param integer $position Position id of the order product item
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function deleteProduct( $position );
 
@@ -134,7 +134,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Address\Iface $address Order address item for the given type
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function setAddress( \Aimeos\MShop\Order\Item\Base\Address\Iface $address, $type );
 
@@ -142,7 +142,7 @@ interface Iface
 	 * Deleted a customer address for billing or delivery of an order.
 	 *
 	 * @param string $type Address type defined in \Aimeos\MShop\Order\Item\Base\Address\Base
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function deleteAddress( $type );
 
@@ -168,6 +168,7 @@ interface Iface
 	 *
 	 * @param \Aimeos\MShop\Order\Item\Base\Service\Iface $service Order service item for the given domain
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addService( \Aimeos\MShop\Order\Item\Base\Service\Iface $service, $type );
 
@@ -175,15 +176,14 @@ interface Iface
 	 * Deletes the delivery or payment service from the basket.
 	 *
 	 * @param string $type Service type constant from \Aimeos\MShop\Order\Item\Service\Base
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function deleteService( $type );
 
 	/**
 	 * Returns the available coupon codes and the lists of affected product items.
 	 *
-	 * @return array Associative array of codes and lists of product items implementing
-	 * \Aimeos\MShop\Order\Item\Base\Product\Iface
+	 * @return array Associative array of codes and lists of product items implementing \Aimeos\MShop\Order\Item\Base\Product\Iface
 	 */
 	public function getCoupons();
 
@@ -192,7 +192,7 @@ interface Iface
 	 *
 	 * @param string $code Coupon code
 	 * @param \Aimeos\MShop\Order\Item\Base\Product\Iface[] $products List of coupon products
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function addCoupon( $code, array $products = [] );
 
@@ -238,7 +238,7 @@ interface Iface
 	/**
 	 * Sets the modified flag of the object.
 	 *
-	 * @return void
+	 * @return \Aimeos\MShop\Order\Item\Base\Iface Order base item for method chaining
 	 */
 	public function setModified();
 }
