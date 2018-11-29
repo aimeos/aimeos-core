@@ -157,7 +157,7 @@ class ProductPrice
 
 		$attrId = $attrManager->findItem( 'custom', [], 'product', 'price' )->getId();
 
-		$search = $productManager->createSearch( true );
+		$search = $productManager->createSearch( true )->setSlice( 0, count( $prodCodes ) );
 		$func = $search->createFunction( 'product:has', ['attribute', 'custom', $attrId] );
 		$expr = array(
 			$search->compare( '==', 'product.code', $prodCodes ),
