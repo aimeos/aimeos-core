@@ -133,8 +133,8 @@ return array(
 						'media.label' => 'Demo: black.gif', 'media.mimetype' => 'image/gif',
 						'media.url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
 						'media.preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAAAAAAACwAAAAAAQABAAACAkQBADs=',
-						'media.type' => 'default', 'media.status' => 1,
-						'attribute.lists.type' => 'icon', 'attribute.lists.position' => 0
+						'media.type' => 'icon', 'media.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
@@ -337,8 +337,8 @@ return array(
 						'media.label' => 'Demo: blue.gif', 'media.mimetype' => 'image/gif',
 						'media.url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAA/wAAACwAAAAAAQABAAACAkQBADs=',
 						'media.preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAAAA/wAAACwAAAAAAQABAAACAkQBADs=',
-						'media.type' => 'default', 'media.status' => 1,
-						'attribute.lists.type' => 'icon', 'attribute.lists.position' => 0
+						'media.type' => 'icon', 'media.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
@@ -440,8 +440,8 @@ return array(
 						'media.label' => 'Demo: beige.gif', 'media.mimetype' => 'image/gif',
 						'media.url' => 'data:image/gif;base64,R0lGODdhAQABAIAAAPX13AAAACwAAAAAAQABAAACAkQBADs=',
 						'media.preview' => 'data:image/gif;base64,R0lGODdhAQABAIAAAPX13AAAACwAAAAAAQABAAACAkQBADs=',
-						'media.type' => 'default', 'media.status' => 1,
-						'attribute.lists.type' => 'icon', 'attribute.lists.position' => 0
+						'media.type' => 'icon', 'media.status' => 1,
+						'attribute.lists.type' => 'default', 'attribute.lists.position' => 0
 					),
 				),
 			),
