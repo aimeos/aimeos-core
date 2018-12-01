@@ -228,7 +228,7 @@ class Standard
 			$search->compare( '==', 'stock.type.code', $stockType ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
-		$search->setSlice( 0, 0x7fffffff );
+		$search->setSlice( 0, count( $prodCodes ) );
 
 		return $stockManager->searchItems( $search );
 	}
