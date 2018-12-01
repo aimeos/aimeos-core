@@ -9,6 +9,8 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/aimeos-core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/aimeos-core/?branch=master)
 [![License](https://poser.pugx.org/aimeos/aimeos-core/license.svg)](https://packagist.org/packages/aimeos/aimeos-core)
 
+:star: Star us on GitHub — it helps!
+
 [![Aimeos demo](https://aimeos.org/fileadmin/aimeos.org/images/aimeos-github.png)](http://demo.aimeos.org/)
 
 ## What is Aimeos core?
