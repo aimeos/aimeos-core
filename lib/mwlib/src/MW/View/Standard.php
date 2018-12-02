@@ -217,13 +217,15 @@ class Standard implements \Aimeos\MW\View\Iface
 	 */
 	public function render( $filename )
 	{
-		$filepath = $this->resolve( $filename );
-
 		foreach( $this->engines as $fileext => $engine )
 		{
-			if( substr_compare( $filepath, $fileext, -strlen( $fileext ) ) ===0 ) {
-				return $engine->render( $this, $filepath, $this->values );
+			if( ( $filepath = $this->resolve( $filename, $fileext ) ) !== false ) {
+				return str_replace( ["\t", '    '], '', $engine->render( $this, $filepath, $this->values ) );
 			}
+		}
+
+		if( ( $filepath = $this->resolve( $filename, '.php' ) ) === false ) {
+			throw new \Aimeos\MW\View\Exception( sprintf( 'Template "%1$s" not available', $filename ) );
 		}
 
 		try
@@ -232,7 +234,7 @@ class Standard implements \Aimeos\MW\View\Iface
 
 			$this->includeFile( $filepath );
 
-			return str_replace( "\t", '', ob_get_clean() );
+			return str_replace( ["\t", '    '], '', ob_get_clean() );
 		}
 		catch( \Exception $e )
 		{
@@ -256,15 +258,14 @@ class Standard implements \Aimeos\MW\View\Iface
 	 * Returns the absolute file name for the given relative one
 	 *
 	 * @param string|array $files File name of list of file names for the view templates
-	 * @return string Absolute path to the template file
-	 * @throws \Aimeos\MW\Exception If the template couldn't be found
+	 * @return string|false Absolute path to the template file of false if not found
 	 */
-	protected function resolve( $files )
+	protected function resolve( $files, $fileext )
 	{
 		foreach( (array) $files as $file )
 		{
-			if( is_file( $file ) ) {
-				return $file;
+			if( is_file( $file . $fileext ) ) {
+				return $file . $fileext;
 			}
 
 			$ds = DIRECTORY_SEPARATOR;
@@ -273,7 +274,8 @@ class Standard implements \Aimeos\MW\View\Iface
 			{
 				foreach( $relPaths as $relPath )
 				{
-					$absPath = $path . $ds . $relPath . $ds . $file;
+					$absPath = $path . $ds . $relPath . $ds . $file . $fileext;
+
 					if( $ds !== '/' ) {
 						$absPath = str_replace( '/', $ds, $absPath );
 					}
@@ -285,6 +287,6 @@ class Standard implements \Aimeos\MW\View\Iface
 			}
 		}
 
-		throw new \Aimeos\MW\View\Exception( sprintf( 'Template "%1$s" not available', $file ) );
+		return false;
 	}
 }

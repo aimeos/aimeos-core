@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->addHelper( 'translate', $this->translate );
 
 		$ds = DIRECTORY_SEPARATOR;
-		$filenames = array( 'notexisting', __DIR__ . $ds . '_testfiles'. $ds . 'template.php' );
+		$filenames = array( 'notexisting', __DIR__ . $ds . '_testfiles'. $ds . 'template1' );
 
 
 		$this->object->assign( array( 'quantity' => 1 ) );
@@ -120,14 +120,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 
 		$this->object->assign( array( 'quantity' => 1 ) );
-		$output = $this->object->render( array( 'notexisting', 'template.php' ) );
+		$output = $this->object->render( array( 'notexisting', 'template1' ) );
 
 		$expected = "Number of files: 1 File";
 		$this->assertEquals( $expected, $output );
 
 
 		$this->object->assign( array( 'quantity' => 2 ) );
-		$output = $this->object->render( array( 'notexisting', 'template.phtml' ) );
+		$output = $this->object->render( array( 'notexisting', 'template2' ) );
 
 		$expected = "Number of directories: 2";
 		$this->assertEquals( $expected, $output );

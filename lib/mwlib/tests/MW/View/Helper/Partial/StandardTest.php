@@ -1,23 +1,19 @@
 <?php
 
-namespace Aimeos\MW\View\Helper\Partial;
-
-
 /**
  * @license LGPLv3, http://opensource.org/licenses/LGPL-3.0
  * @copyright Aimeos (aimeos.org), 2015-2018
  */
+
+
+namespace Aimeos\MW\View\Helper\Partial;
+
+
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
 
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function setUp()
 	{
 		$view = new \Aimeos\MW\View\Standard( array( __DIR__ => array( 'testfiles' ) ) );
@@ -26,12 +22,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	}
 
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @access protected
-	 */
 	protected function tearDown()
 	{
 		$this->object = null;
@@ -40,12 +30,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTransform()
 	{
-		$this->assertEquals( '', $this->object->transform( 'partial.html' ) );
+		$this->assertEquals( '', $this->object->transform( 'partial' ) );
 	}
 
 
 	public function testTransformParams()
 	{
-		$this->assertEquals( 'test', $this->object->transform( 'partial.html', array( 'testparam' => 'test' ) ) );
+		$this->assertEquals( 'test', $this->object->transform( 'partial', array( 'testparam' => 'test' ) ) );
 	}
 }
