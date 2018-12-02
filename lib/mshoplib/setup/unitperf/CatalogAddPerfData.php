@@ -57,7 +57,7 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return ['CatalogRebuildPerfIndex'];
+		return ['IndexRebuildPerf'];
 	}
 
 
