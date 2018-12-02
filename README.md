@@ -9,7 +9,9 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/aimeos/aimeos-core/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/aimeos/aimeos-core/?branch=master)
 [![License](https://poser.pugx.org/aimeos/aimeos-core/license.svg)](https://packagist.org/packages/aimeos/aimeos-core)
 
-[![Aimeos demo](https://aimeos.org/fileadmin/user_upload/demo.jpg)](http://demo.aimeos.org/)
+:star: Star us on GitHub — it helps!
+
+[![Aimeos demo](https://aimeos.org/fileadmin/aimeos.org/images/aimeos-github.png)](http://demo.aimeos.org/)
 
 ## What is Aimeos core?
 
@@ -19,15 +21,15 @@ for online shops consisting of the e-commerce library, the administration interf
 and different front-ends. It's a modular stack that offers an unmatched combination
 of flexibility and speed.
 
-Contrary to other web shops, Aimeos is no monolithic application. Instead, you
+Contrary to other shop systems, Aimeos is no monolithic application. Instead, you
 have the choice between several user front-ends and you can adapt them to your
 needs or write one of your own one.
 
 ## Who uses Aimeos?
 
 Whether you (or your customer if you are a developer seeking for a solution)
-would like to run a high performance web shop, wish to publish a product catalog
-on-line or would like to create your own portal – you design your own individual
+would like to run a high performance online shop, wish to publish a product catalog
+online or would like to create your own portal – you design your own individual
 sales channel with Aimeos.
 
 It's is suited for medium to large size businesses which needs a seamless
