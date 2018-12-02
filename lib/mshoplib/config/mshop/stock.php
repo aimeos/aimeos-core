@@ -131,8 +131,8 @@ return array(
 			'stocklevel' => array(
 				'ansi' => '
 					UPDATE "mshop_stock"
-					SET "stocklevel" = "stocklevel" + ?, "mtime" = ?, "editor" = ?
-					WHERE :cond
+					SET "stocklevel" = "stocklevel" - ?, "mtime" = ?, "editor" = ?
+					WHERE "productcode" = ? AND "typeid" = ? AND :cond
 				'
 			),
 			'newid' => array(

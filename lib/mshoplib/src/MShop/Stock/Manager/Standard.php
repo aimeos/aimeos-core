@@ -777,48 +777,20 @@ class Standard
 
 
 	/**
-	 * Decreases the stock level of the product for the type.
+	 * Decreases the stock level for the given product codes/quantity pairs and type
 	 *
-	 * @param string $productCode Unique code of a product
-	 * @param string $typeCode Unique code of the type
-	 * @param integer $amount Amount the stock level should be decreased
+	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param string $type Unique code of the stock type
 	 */
-	public function decrease( $productCode, $typeCode, $amount )
-	{
-		$this->increase( $productCode, $typeCode, -$amount );
-	}
-
-
-	/**
-	 * Increases the stock level of the product for the type.
-	 *
-	 * @param string $productCode Unique code of a product
-	 * @param string $typeCode Unique code of the type
-	 * @param integer $amount Amount the stock level should be increased
-	 */
-	public function increase( $productCode, $typeCode, $amount )
+	public function decrease( array $codeqty, $type = 'default' )
 	{
 		$context = $this->getContext();
+		$typeId = $this->getStockTypeId( $type );
+		$translations = ['stock.siteid' => '"siteid"'];
+		$types = ['stock.siteid' => $this->searchConfig['stock.siteid']['internaltype']];
 
 		$search = $this->getObject()->createSearch();
-		$expr = array(
-			$search->compare( '==', 'stock.productcode', $productCode ),
-			$search->compare( '==', 'stock.siteid', $context->getLocale()->getSitePath() ),
-			$search->compare( '==', 'stock.typeid', $this->getStockTypeIds( $typeCode ) ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$types = array(
-			'stock.productcode' => $this->searchConfig['stock.productcode']['internaltype'],
-			'stock.siteid' => $this->searchConfig['stock.siteid']['internaltype'],
-			'stock.typeid' => $this->searchConfig['stock.typeid']['internaltype'],
-		);
-		$translations = array(
-			'stock.productcode' => '"productcode"',
-			'stock.siteid' => '"siteid"',
-			'stock.typeid' => '"typeid"',
-		);
-
+		$search->setConditions( $search->compare( '==', 'stock.siteid', $context->getLocale()->getSitePath() ) );
 		$conditions = $search->getConditionSource( $types, $translations );
 
 		$dbm = $context->getDatabaseManager();
@@ -862,13 +834,19 @@ class Standard
 			 * @see mshop/stock/manager/standard/count/ansi
 			 */
 			$path = 'mshop/stock/manager/standard/stocklevel';
-			$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
 
-			$stmt->bind( 1, $amount, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-			$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
-			$stmt->bind( 3, $context->getEditor() );
+			foreach( $codeqty as $code => $qty )
+			{
+				$stmt = $conn->create( str_replace( ':cond', $conditions, $this->getSqlConfig( $path ) ) );
 
-			$stmt->execute()->finish();
+				$stmt->bind( 1, $qty, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+				$stmt->bind( 2, date( 'Y-m-d H:i:s' ) ); //mtime
+				$stmt->bind( 3, $context->getEditor() );
+				$stmt->bind( 4, $code );
+				$stmt->bind( 5, $typeId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+
+				$stmt->execute()->finish();
+			}
 
 			$dbm->release( $conn, $dbname );
 		}
@@ -877,6 +855,22 @@ class Standard
 			$dbm->release( $conn, $dbname );
 			throw $e;
 		}
+	}
+
+
+	/**
+	 * Increases the stock level for the given product codes/quantity pairs and type
+	 *
+	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param string $type Unique code of the type
+	 */
+	public function increase( array $codeqty, $type = 'default' )
+	{
+		foreach( $codeqty as $code => $qty ) {
+			$codeqty[$code] = -$qty;
+		}
+
+		$this->getObject()->decrease( $codeqty, $type );
 	}
 
 
@@ -897,25 +891,15 @@ class Standard
 	 * Returns the type IDs for the given stock type
 	 *
 	 * @param string $typeCode Unique stock type code
-	 * @return array List of stock type IDs
-	 * @throws \Aimeos\MShop\Stock\Exception If stock type isn't found
+	 * @return string Stock type ID
+	 * @throws \Aimeos\MShop\Exception If stock type isn't found
 	 */
-	protected function getStockTypeIds( $typeCode )
+	protected function getStockTypeId( $typeCode )
 	{
 		if( !isset( $this->typeIds[$typeCode] ) )
 		{
-			$typeManager = $this->getObject()->getSubManager( 'type' );
-
-			$search = $typeManager->createSearch();
-			$search->setConditions( $search->compare( '==', 'stock.type.code', $typeCode ) );
-
-			$result = $typeManager->searchItems( $search );
-
-			if( empty( $result ) ) {
-				throw new \Aimeos\MShop\Stock\Exception( sprintf( 'No stock type for code "%1$s" found', $typeCode ) );
-			}
-
-			$this->typeIds[$typeCode] = array_keys( $result );
+			$typeId = $this->getObject()->getSubManager( 'type' )->findItem( $typeCode )->getId();
+			$this->typeIds[$typeCode] = $typeId;
 		}
 
 		return $this->typeIds[$typeCode];

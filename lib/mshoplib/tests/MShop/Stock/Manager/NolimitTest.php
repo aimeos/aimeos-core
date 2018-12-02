@@ -68,8 +68,14 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 	}
 
 
+	public function testDecrease()
+	{
+		$this->object->decrease( ['text' => 5] );
+	}
+
+
 	public function testIncrease()
 	{
-		$this->object->increase( 'text', 'default', 5 );
+		$this->object->increase( ['text' => 5] );
 	}
 }

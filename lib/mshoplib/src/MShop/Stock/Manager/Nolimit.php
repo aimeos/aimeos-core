@@ -113,13 +113,24 @@ class Nolimit
 
 
 	/**
-	 * Increases the stock level of the product for the type.
+	 * Decreases the stock level for the given product codes/quantity pairs and type
 	 *
-	 * @param string $productCode Unique code of a product
-	 * @param string $typeCode Unique code of the type
-	 * @param integer $amount Amount the stock level should be increased
+	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param string $type Unique code of the stock type
+	 * @return void
 	 */
-	public function increase( $productCode, $typeCode, $amount )
+	public function decrease( array $codeqty, $type = 'default' )
+	{
+	}
+
+
+	/**
+	 * Increases the stock level for the given product codes/quantity pairs and type
+	 *
+	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param string $type Unique code of the type
+	 */
+	public function increase( array $codeqty, $type = 'default' )
 	{
 	}
 

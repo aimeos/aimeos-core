@@ -260,7 +260,7 @@ class Standard
 				$items = $manager->searchItems( $search );
 
 				foreach( $items as $item ) {
-					$couponCodeManager->increase( $item->getCode(), $how * 1 );
+					$couponCodeManager->decrease( $item->getCode(), $how * -1 );
 				}
 
 				$count = count( $items );
@@ -332,7 +332,7 @@ class Standard
 
 				foreach( $items as $item )
 				{
-					$stockManager->increase( $item->getProductCode(), $item->getStockType(), $how * $item->getQuantity() );
+					$stockManager->decrease( [$item->getProductCode() => $how * -1 * $item->getQuantity()], $item->getStockType() );
 
 					switch( $item->getType() ) {
 						case 'default':

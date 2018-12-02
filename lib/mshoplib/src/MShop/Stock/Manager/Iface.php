@@ -21,23 +21,19 @@ interface Iface
 	extends \Aimeos\MShop\Common\Manager\Iface, \Aimeos\MShop\Common\Manager\Find\Iface
 {
 	/**
-	 * Decreases the stock level of the product for the stock type.
+	 * Decreases the stock level for the given product codes/quantity pairs and type
 	 *
-	 * @param string $productCode Unique code of a product
-	 * @param string $stockType Unique code of the stock type
-	 * @param integer $amount Amount the stock level should be decreased
+	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param string $type Unique code of the stock type
 	 * @return void
 	 */
-	public function decrease( $productCode, $stockType, $amount );
-
+	public function decrease( array $codeqty, $type = 'default' );
 
 	/**
-	 * Increases the stock level of the product for the stock type.
+	 * Increases the stock level for the given product codes/quantity pairs and type
 	 *
-	 * @param string $productCode Unique code of a product
-	 * @param string $stockType Unique code of the stock type
-	 * @param integer $amount Amount the stock level should be increased
-	 * @return void
+	 * @param array $codeqty Associative list of product codes as keys and quantities as values
+	 * @param string $type Unique code of the type
 	 */
-	public function increase( $productCode, $stockType, $amount );
+	public function increase( array $codeqty, $type = 'default' );
 }

@@ -367,10 +367,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'increase' ) )
+			->setMethods( array( 'decrease' ) )
 			->getMock();
 
-		$stockStub->expects( $this->once() )->method( 'increase' );
+		$stockStub->expects( $this->once() )->method( 'decrease' );
 
 		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
@@ -413,10 +413,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'increase' ) )
+			->setMethods( array( 'decrease' ) )
 			->getMock();
 
-		$stockStub->expects( $this->once() )->method( 'increase' );
+		$stockStub->expects( $this->once() )->method( 'decrease' );
 
 		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
@@ -459,10 +459,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
 			->setConstructorArgs( array( $context ) )
-			->setMethods( array( 'increase' ) )
+			->setMethods( array( 'decrease' ) )
 			->getMock();
 
-		$stockStub->expects( $this->once() )->method( 'increase' );
+		$stockStub->expects( $this->once() )->method( 'decrease' );
 
 		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 

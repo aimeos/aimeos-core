@@ -197,7 +197,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->decrease( 'CNC', $typeItem->getCode(), 5 );
+		$this->object->decrease( ['CNC' => 5], $typeItem->getCode() );
 		$actual = $this->object->getItem( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->object->saveItem( $stockItem );
 
-		$this->object->increase( 'CNC', $typeItem->getCode(), 5 );
+		$this->object->increase( ['CNC' => 5], $typeItem->getCode() );
 		$actual = $this->object->getItem( $stockItem->getId() );
 
 		$this->object->deleteItem( $stockItem->getId() );
