@@ -24,14 +24,9 @@ class MySQL
 	private $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => '(
-				SELECT mindte2."prodid"
-				FROM "mshop_index_text" AS mindte2
-				WHERE :site AND mpro."id" = mindte2."prodid"
-					AND ( mindte2."langid" = $1 OR mindte2."langid" IS NULL )
-					AND MATCH( mindte2."value" ) AGAINST( $2 IN BOOLEAN MODE ) > 0
-				LIMIT 1
-			)',
+			'internalcode' => ':site AND mindte."listtype" = \'default\'
+				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
+				AND MATCH( mindte."value" ) AGAINST( $2 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,

@@ -34,8 +34,9 @@ class Standard
 		),
 		'index.text:name' => array(
 			'code' => 'index.text:name()',
-			'internalcode' => ':site AND mindte."type" = \'name\' AND mindte."domain" = \'product\'
-				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND mindte."value"',
+			'internalcode' => ':site AND mindte."listtype" = \'default\'
+				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
+				AND mindte."type" = \'name\' AND mindte."domain" = \'product\' AND mindte."value"',
 			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -51,14 +52,9 @@ class Standard
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => '(
-				SELECT mindte2."prodid"
-				FROM "mshop_index_text" AS mindte2
-				WHERE :site AND mpro."id" = mindte2."prodid"
-					AND ( mindte2."langid" = $1 OR mindte2."langid" IS NULL )
-					AND POSITION( $2 IN mindte2."value" ) > 0
-				LIMIT 1
-			)',
+			'internalcode' => ':site AND mindte."listtype" = \'default\'
+				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
+				AND mindte."domain" = \'product\' AND POSITION( $2 IN mindte."value" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -111,7 +107,7 @@ class Standard
 		};
 
 		$this->replaceSiteMarker( $this->searchConfig['index.text:name'], 'mindte."siteid"', $siteIds );
-		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte2."siteid"', $siteIds );
+		$this->replaceSiteMarker( $this->searchConfig['index.text:relevance'], 'mindte."siteid"', $siteIds );
 	}
 
 

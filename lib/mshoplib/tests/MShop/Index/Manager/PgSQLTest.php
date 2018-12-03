@@ -84,7 +84,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Expr' ) );
 		$conditions = array(
-			$search->compare( '!=', $func, null ), // text relevance
+			$search->compare( '>', $func, 0 ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
