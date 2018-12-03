@@ -61,17 +61,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
 		$return = $this->object->setId( 15 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $return );
 		$this->assertEquals( 15, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 6 );
 	}
 
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setParentId( 12 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $return );
 		$this->assertEquals( 12, $this->object->getParentId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -103,7 +103,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setType( 'unittest' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $return );
 		$this->assertEquals( 'unittest', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setValue( 'was changed by unittest' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $return );
 		$this->assertEquals( 'was changed by unittest', $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 	}

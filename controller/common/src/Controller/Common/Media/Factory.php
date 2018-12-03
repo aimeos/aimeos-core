@@ -85,12 +85,12 @@ class Factory
 		}
 
 		if( ctype_alnum( $name ) === false ) {
-			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\Common\\Media\\' . $name : '<not a string>';
+			$classname = is_string( $name ) ? '\Aimeos\Controller\Common\Media\\' . $name : '<not a string>';
 			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = '\\Aimeos\\Controller\\Common\\Media\\Iface';
-		$classname = '\\Aimeos\\Controller\\Common\\Media\\' . $name;
+		$iface = \Aimeos\Controller\Common\Media\Iface::class;
+		$classname = '\Aimeos\Controller\Common\Media\\' . $name;
 
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

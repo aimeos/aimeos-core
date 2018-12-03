@@ -51,7 +51,7 @@ class MShopAddPluginData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process()
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$this->msg( 'Adding default plugin data', 0 );
 		$this->status( '' );

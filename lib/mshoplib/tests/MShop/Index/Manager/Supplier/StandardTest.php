@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
 		}
 	}
 
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 

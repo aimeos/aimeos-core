@@ -61,23 +61,23 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Coupon\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
 		$return = $this->object->setId( 5 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Coupon\Iface::class, $return );
 		$this->assertEquals( 5, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 6 );
 	}
 
 	public function testSetId2()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 'test' );
 	}
 
@@ -95,7 +95,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setBaseId( 99 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Coupon\Iface::class, $return );
 		$this->assertEquals( 99, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCode( 'testId' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Coupon\Iface::class, $return );
 		$this->assertEquals( 'testId', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setProductId( 12345 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Coupon\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Coupon\Iface::class, $return );
 		$this->assertEquals( 12345, $this->object->getProductId() );
 		$this->assertTrue( $this->object->isModified() );
 	}

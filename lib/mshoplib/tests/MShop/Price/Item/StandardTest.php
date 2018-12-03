@@ -55,7 +55,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$price = new \Aimeos\MShop\Price\Item\Standard( $this->values );
 		$return = $this->object->addItem( $price );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( '391.00', $this->object->getValue() );
 		$this->assertEquals( '39.90', $this->object->getCosts() );
 		$this->assertEquals( '20.00', $this->object->getRebate() );
@@ -67,7 +67,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->addItem( $this->object );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( '391.00', $this->object->getValue() );
 		$this->assertEquals( '39.90', $this->object->getCosts() );
 		$this->assertEquals( '20.00', $this->object->getRebate() );
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$price = new \Aimeos\MShop\Price\Item\Standard( $values );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->addItem( $price );
 	}
 
@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -165,20 +165,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCurrencyId( 'USD' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 'USD', $this->object->getCurrencyId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
 
 	public function testSetCurrencyIdNull()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setCurrencyId( null );
 	}
 
 	public function testSetCurrencyIdInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setCurrencyId( 'usd' );
 	}
 
@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDomain( 'service' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 'service', $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -205,7 +205,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'special price' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 'special price', $this->object->getlabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -219,7 +219,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setQuantity( 20 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 20, $this->object->getQuantity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -233,11 +233,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setValue( 199.00 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 199.00, $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->setValue( '190,90' );
 	}
 
@@ -250,11 +250,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setValue( '20.00' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 20.00, $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->setValue( '19,90' );
 	}
 
@@ -267,11 +267,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setRebate( '20.00' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 20.00, $this->object->getRebate() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Price\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Price\Exception::class );
 		$this->object->setValue( '19,90' );
 	}
 
@@ -284,7 +284,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTaxRate( '22.00' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 22.00, $this->object->getTaxRate() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -298,7 +298,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTaxFlag( false );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( false, $this->object->getTaxFlag() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -326,7 +326,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTaxValue( '100.00' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( '100.00', $this->object->getTaxValue() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -340,7 +340,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Price\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

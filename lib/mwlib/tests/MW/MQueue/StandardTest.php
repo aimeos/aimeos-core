@@ -25,7 +25,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$queue = $this->object->getQueue( 'email' );
 
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Queue\Iface', $queue );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Queue\Iface::class, $queue );
 		$this->assertSame( $queue, $this->object->getQueue( 'email' ) );
 	}
 }

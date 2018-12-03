@@ -43,7 +43,7 @@ class T3Test extends \PHPUnit\Framework\TestCase
 	public function testToString()
 	{
 		$template = $this->object->get('NAME');
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Template\\Iface', $template );
+		$this->assertInstanceOf( \Aimeos\MW\Template\Iface::class, $template );
 
 		$this->assertEquals( 'Name', $template->str() );
 	}

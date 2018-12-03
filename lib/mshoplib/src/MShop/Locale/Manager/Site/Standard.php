@@ -210,7 +210,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Locale\Item\Site\Iface::class, $item );
 
 		if( $item->getId() === null ) {
 			throw new \Aimeos\MShop\Locale\Exception( sprintf( 'Newly created site can not be saved using method "saveItem()". Try using method "insertItem()" instead.' ) );

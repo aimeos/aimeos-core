@@ -69,7 +69,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setBaseId( 66 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 66, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setBaseId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setAddressId( 22 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 22, $this->object->getAddressId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -127,7 +127,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setAddressId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( '', $this->object->getAddressId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setType( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT, $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCompany( 'company' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'company', $this->object->getCompany() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -175,7 +175,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setVatID( 'vatid' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'vatid', $this->object->getVatID() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setSalutation( \Aimeos\MShop\Order\item\Base\Address\Base::SALUTATION_COMPANY );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( \Aimeos\MShop\Order\item\Base\Address\Base::SALUTATION_COMPANY, $this->object->getSalutation() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -207,7 +207,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTitle( 'Dr.' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'Dr.', $this->object->getTitle() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -223,7 +223,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setFirstname( 'hans' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'hans', $this->object->getFirstname() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -239,7 +239,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLastname( 'im Glück' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'im Glück', $this->object->getLastname() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -255,7 +255,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setAddress1( 'unitallee' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'unitallee', $this->object->getAddress1() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -271,7 +271,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setAddress2( '12' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( '12', $this->object->getAddress2() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -287,7 +287,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setAddress3( 'EG' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'EG', $this->object->getAddress3() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -303,7 +303,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setPostal( '11111' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( '11111', $this->object->getPostal() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -319,7 +319,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCity( 'unitCity' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'unitCity', $this->object->getCity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -335,7 +335,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setState( 'unitState' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'unitState', $this->object->getState() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -351,7 +351,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCountryId( 'uk' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'UK', $this->object->getCountryId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -367,7 +367,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTelephone( '55512345' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( '55512345', $this->object->getTelephone() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -383,11 +383,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setEmail( 'unit@test.de' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'unit@test.de', $this->object->getEmail() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setEmail( 'a@.' );
 	}
 
@@ -402,7 +402,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTelefax( '55512345' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( '55512345', $this->object->getTelefax() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -418,11 +418,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setWebsite( 'www.test.de' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'www.test.de', $this->object->getWebsite() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setWebsite( 'abcde:abc' );
 	}
 
@@ -437,7 +437,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLongitude( '10.5' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( '10.5', $this->object->getLongitude() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -453,7 +453,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLatitude( '53.5' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( '53.5', $this->object->getLatitude() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -469,7 +469,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLanguageId( 'en' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 		$this->assertEquals( 'en', $this->object->getLanguageId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -504,7 +504,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$address = new \Aimeos\MShop\Order\Item\Base\Address\Standard();
 		$return = $this->object->copyFrom( $address );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $return );
 	}
 
 

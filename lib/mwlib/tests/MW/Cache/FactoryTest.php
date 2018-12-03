@@ -27,27 +27,27 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$object = \Aimeos\MW\Cache\Factory::createManager( 'DB', $config, \TestHelperMw::getDBManager() );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Cache\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Cache\Iface::class, $object );
 	}
 
 
 	public function testFactoryUnknown()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		\Aimeos\MW\Cache\Factory::createManager( 'unknown', [], null );
 	}
 
 
 	public function testFactoryInvalidCharacters()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		\Aimeos\MW\Cache\Factory::createManager( '$$$', [], null );
 	}
 
 
 	public function testFactoryInvalidClass()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		\Aimeos\MW\Cache\Factory::createManager( 'InvalidCache', [], null );
 	}
 }

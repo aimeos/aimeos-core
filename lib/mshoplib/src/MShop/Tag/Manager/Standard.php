@@ -157,7 +157,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Tag\\Item\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Tag\Item\Iface::class, $item );
 
 		if( !$item->isModified() ) {
 			return $item;

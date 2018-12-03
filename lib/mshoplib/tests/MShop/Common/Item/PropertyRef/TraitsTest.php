@@ -103,7 +103,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new TraitsClass();
 
-		$this->setExpectedException( '\Aimeos\MShop\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$object->deletePropertyItem( $this->propItem );
 	}
 }

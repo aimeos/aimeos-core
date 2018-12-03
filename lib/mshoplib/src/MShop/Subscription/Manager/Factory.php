@@ -71,12 +71,12 @@ class Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\\Aimeos\\MShop\\Subscription\\Manager\\' . $name : '<not a string>';
+			$classname = is_string( $name ) ? '\Aimeos\MShop\Subscription\Manager\\' . $name : '<not a string>';
 			throw new \Aimeos\MShop\Subscription\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = '\\Aimeos\\MShop\\Subscription\\Manager\\Iface';
-		$classname = '\\Aimeos\\MShop\\Subscription\\Manager\\' . $name;
+		$iface = \Aimeos\MShop\Subscription\Manager\Iface::class;
+		$classname = '\Aimeos\MShop\Subscription\Manager\\' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );
 

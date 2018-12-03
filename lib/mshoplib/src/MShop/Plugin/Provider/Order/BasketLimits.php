@@ -127,7 +127,7 @@ class BasketLimits
 			return true;
 		}
 
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $order );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
 		$context = $this->getContext();
 

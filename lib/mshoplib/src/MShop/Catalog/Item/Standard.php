@@ -44,7 +44,7 @@ class Standard
 	{
 		parent::__construct( '', [] );
 
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $children );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Catalog\Item\Iface::class, $children );
 
 		$this->initListItems( $listItems, $refItems );
 		$this->children = $children;

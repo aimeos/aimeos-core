@@ -25,7 +25,7 @@ class SupplierTest extends \PHPUnit_Framework_TestCase
 		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
 		$this->servItem = $servManager->createItem();
 
-		$this->mockProvider = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Supplier' )
+		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Supplier::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->basket = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )

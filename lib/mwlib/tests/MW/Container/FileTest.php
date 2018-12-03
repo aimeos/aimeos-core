@@ -57,7 +57,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$file = new \Aimeos\MW\Container\File( __DIR__ . $ds . '_testdir' . $ds . 'testfile.csv', 'CSV' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Container\\Content\\Iface', $file->get( 'testfile.csv' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Container\Content\Iface::class, $file->get( 'testfile.csv' ) );
 	}
 
 

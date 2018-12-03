@@ -33,7 +33,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No paypalexpress service item available' );
 		}
 
-		$this->object = $this->getMockBuilder( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' )
+		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class )
 			->setConstructorArgs( [$this->context, $this->serviceItem] )
 			->setMethods( ['send'] )
 			->getMock();
@@ -54,13 +54,13 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		}
 
 
-		$this->orderMock = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Manager\\Standard' )
+		$this->orderMock = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
 
 		$this->context->getConfig()->set( 'mshop/order/manager/name', 'MockPayPal' );
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\MockPayPal', $this->orderMock );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\MockPayPal', $this->orderMock );
 	}
 
 
@@ -135,7 +135,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			$attributeList[$attribute->getCode()] = $attribute;
 		}
 
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Helper\\Form\\Iface', $helperForm );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Helper\Form\Iface::class, $helperForm );
 		$this->assertEquals( 'https://www.sandbox.paypal.com/webscr&cmd=_express-checkout&useraction=commit&token=UT-99999999', $helperForm->getUrl() );
 		$this->assertEquals( 'POST', $helperForm->getMethod() );
 		$this->assertEquals( [], $helperForm->getValues() );
@@ -159,7 +159,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			'PayerID' => 'PaypalUnitTestBuyer'
 		);
 
-		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$request->expects( $this->once() )->method( 'getAttributes' )->will( $this->returnValue( [] ) );
 		$request->expects( $this->once() )->method( 'getParsedBody' )->will( $this->returnValue( [] ) );
@@ -171,7 +171,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 		$result = $this->object->updateSync( $request, $this->order );
 
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getPaymentStatus() );
 	}
 
@@ -201,8 +201,8 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			'111111111' => 'Completed'
 		);
 
-		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
-		$response = $this->getMockBuilder( '\Psr\Http\Message\ResponseInterface' )->getMock();
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
 
 		$request->expects( $this->once() )->method( 'getQueryParams' )->will( $this->returnValue( $params ) );
 		$response->expects( $this->once() )->method( 'withStatus' )
@@ -217,7 +217,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 		$this->object->expects( $this->once() )->method( 'send' )->will( $this->returnValue( 'VERIFIED' ) );
 
 		$result = $this->object->updatePush( $request, $response );
-		$this->assertInstanceOf( '\Psr\Http\Message\ResponseInterface', $result );
+		$this->assertInstanceOf( \Psr\Http\Message\ResponseInterface::class, $result );
 
 		$refOrderBase = $orderBaseManager->load( $this->order->getBaseId(), \Aimeos\MShop\Order\Item\Base\Base::PARTS_SERVICE );
 		$attributes = $refOrderBase->getService( 'payment', 'paypalexpress' )->getAttributeItems();
@@ -338,14 +338,14 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 			$this->returnValue( '&ACK=Error&VERSION=87.0&BUILD=3136725&CORRELATIONID=1234567890&L_ERRORCODE0=0000&L_SHORTMESSAGE0=wrong authorization test method error' )
 		);
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->process( $this->order );
 	}
 
 
 	public function testSetPaymentStatusNone()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setPaymentStatus' );
 		$method->setAccessible( true );
 
@@ -357,7 +357,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPaymentPending()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setPaymentStatus' );
 		$method->setAccessible( true );
 
@@ -369,7 +369,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPaymentRefunded()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setPaymentStatus' );
 		$method->setAccessible( true );
 
@@ -381,7 +381,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPaymentCanceled()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setPaymentStatus' );
 		$method->setAccessible( true );
 
@@ -393,7 +393,7 @@ class PayPalExpressTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetPaymentInvalid()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Payment\PayPalExpress' );
+		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Payment\PayPalExpress::class );
 		$method = $class->getMethod( 'setPaymentStatus' );
 		$method->setAccessible( true );
 

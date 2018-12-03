@@ -57,7 +57,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -73,7 +73,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDomain( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTypeId( 3 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( 3, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -117,7 +117,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'newPicture' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( 'newPicture', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLanguageId( 'en' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( 'en', $this->object->getLanguageId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -141,7 +141,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setLanguageId( '00' );
 	}
 
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setMimeType( 'image/png' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( 'image/png', $this->object->getMimeType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -164,14 +164,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetMimeTypeNoSlash()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Media\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Media\Exception::class );
 		$this->object->setMimeType( 'image' );
 	}
 
 
 	public function testSetMimeTypeInvalidCategory()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Media\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Media\Exception::class );
 		$this->object->setMimeType( 'image+audio/test' );
 	}
 
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setUrl( '/pictures/category.jpg' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( '/pictures/category.jpg', $this->object->getUrl() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -202,7 +202,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setPreview( '/pictures/category.jpg' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( '/pictures/category.jpg', $this->object->getPreview() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Media\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Media\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

@@ -18,34 +18,34 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testCreateManager()
 	{
 		$manager = \Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), 'job' );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $manager );
 	}
 
 
 	public function testCreateManagerEmpty()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
 		\Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), "\n" );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
 		\Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
 		\Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
 		\Aimeos\MAdmin\Factory::createManager( \TestHelperMShop::getContext(), 'job/unknown' );
 	}
 

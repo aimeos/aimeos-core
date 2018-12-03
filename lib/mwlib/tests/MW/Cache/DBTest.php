@@ -143,7 +143,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testConstructorNoConfig()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( [], self::$dbm );
 	}
 
@@ -153,7 +153,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$config = $this->config;
 		unset( $config['sql'] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
 	}
 
@@ -163,7 +163,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$config = $this->config;
 		unset( $config['search'] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
 	}
 
@@ -173,7 +173,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$config = $this->config;
 		unset( $config['sql']['delete'] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
 	}
 
@@ -183,7 +183,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$config = $this->config;
 		unset( $config['search']['cache.id'] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		new \Aimeos\MW\Cache\DB( $config, self::$dbm );
 	}
 
@@ -376,7 +376,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetException()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Cache\Exception::class );
 		$this->object->set( [], '' );
 	}
 

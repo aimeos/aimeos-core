@@ -14,7 +14,7 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MW\Convert\Compose( $list );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Convert\Iface::class, $object );
 		$this->assertEquals( '2000-01-02 00:00:00', $object->translate( '01/02/2000' ) );
 	}
 
@@ -28,7 +28,7 @@ class ComposeTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MW\Convert\Compose( $list );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Convert\Iface::class, $object );
 		$this->assertEquals( '01/02/2000 00:00:00 AM', $object->reverse( '2000-01-02 00:00:00' ) );
 	}
 }

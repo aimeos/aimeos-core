@@ -39,7 +39,7 @@ class Standard extends Base implements Iface
 		$this->price = $price;
 		$this->values = $values;
 
-		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $products );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
 		$this->products = $products;
 	}
 
@@ -199,7 +199,7 @@ class Standard extends Base implements Iface
 	 */
 	public function setProducts( array $products )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $products );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
 
 		$this->products = $products;
 		$this->setModified();

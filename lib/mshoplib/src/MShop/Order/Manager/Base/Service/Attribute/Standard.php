@@ -461,7 +461,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Attribute\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $item );
 
 		if( !$item->isModified() ) {
 			return $item;

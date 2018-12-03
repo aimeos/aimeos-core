@@ -58,14 +58,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 6 );
 	}
 
 
 	public function testSetId2()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 'test' );
 	}
 

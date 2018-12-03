@@ -22,13 +22,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConfig()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getConfig();
 	}
 
 	public function testGetDatabaseManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getDatabaseManager();
 	}
 
@@ -39,67 +39,67 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetFilesystemManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getFilesystemManager();
 	}
 
 	public function testGetFilesystem()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getFilesystem( 'fs' );
 	}
 
 	public function testGetLocale()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getLocale();
 	}
 
 	public function testGetI18n()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getI18n();
 	}
 
 	public function testGetLogger()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getLogger();
 	}
 
 	public function testGetMail()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getMail();
 	}
 
 	public function testGetMessageQueueManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getMessageQueueManager();
 	}
 
 	public function testGetMessageQueue()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getMessageQueue( 'email', 'test' );
 	}
 
 	public function testGetProcess()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getProcess();
 	}
 
 	public function testGetSession()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getSession();
 	}
 
 	public function testGetView()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getView();
 	}
 
@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setConfig( $context->getConfig() );
 
 		$this->assertSame( $context->getConfig(), $this->object->getConfig() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetDatabaseManager()
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setDatabaseManager( $context->getDatabaseManager() );
 
 		$this->assertSame( $context->getDatabaseManager(), $this->object->getDatabaseManager() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetDateTime()
@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setDateTime( '2000-01-01 00:00:00' );
 
 		$this->assertEquals( '2000-01-01 00:00:00', $this->object->getDateTime() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetFilesystemManager()
@@ -135,7 +135,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setFilesystemManager( $context->getFilesystemManager() );
 
 		$this->assertSame( $context->getFilesystemManager(), $this->object->getFilesystemManager() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
 		$this->object->getFilesystem( 'fs-admin' );
 	}
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setI18n( array( 'en' => $context->getI18n() ) );
 
 		$this->assertSame( $context->getI18n(), $this->object->getI18n() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetLocale()
@@ -160,7 +160,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setLocale( $locale );
 
 		$this->assertSame( $locale, $this->object->getLocale() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetLogger()
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setLogger( $context->getLogger() );
 
 		$this->assertSame( $context->getLogger(), $this->object->getLogger() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetMail()
@@ -177,8 +177,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$mail = new \Aimeos\MW\Mail\None();
 		$return = $this->object->setMail( $mail );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Mail\\Iface', $this->object->getMail() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Iface::class, $this->object->getMail() );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetMessageQueueManager()
@@ -187,7 +187,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setMessageQueueManager( $context->getMessageQueueManager() );
 
 		$this->assertSame( $context->getMessageQueueManager(), $this->object->getMessageQueueManager() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
 		$this->object->getMessageQueue( 'mq-test', 'test' );
 	}
@@ -198,7 +198,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setSession( $context->getSession() );
 
 		$this->assertSame( $context->getSession(), $this->object->getSession() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetProcess()
@@ -207,7 +207,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setProcess( $process );
 
 		$this->assertSame( $process, $this->object->getProcess() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testSetView()
@@ -215,8 +215,8 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$view = new \Aimeos\MW\View\Standard();
 		$return = $this->object->setView( $view );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\View\\Iface', $this->object->getView() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MW\View\Iface::class, $this->object->getView() );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testGetSetEditor()
@@ -226,7 +226,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setEditor( 'testuser' );
 
 		$this->assertEquals( 'testuser', $this->object->getEditor() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testGetSetUserId()
@@ -235,11 +235,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$return = $this->object->setUserId( 123 );
 		$this->assertEquals( '123', $this->object->getUserId() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
 		$return = $this->object->setUserId( function() { return 456; } );
 		$this->assertEquals( '456', $this->object->getUserId() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 
 	public function testGetSetGroupIds()
@@ -248,10 +248,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$return = $this->object->setGroupIds( array( 123 ) );
 		$this->assertEquals( array( '123' ), $this->object->getGroupIds() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 
 		$return = $this->object->setGroupIds( function() { return array( 456 ); } );
 		$this->assertEquals( array( '456' ), $this->object->getGroupIds() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $return );
 	}
 }

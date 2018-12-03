@@ -53,13 +53,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( '1' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
 		$this->assertFalse( false, $this->object->isModified() );
 		$this->assertEquals( 1, $this->object->getId() );
 
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
 		$this->assertEquals( true, $this->object->isModified() );
 		$this->assertEquals( null, $this->object->getId() );
 	}
@@ -81,7 +81,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setParentId( '3' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
 		$this->assertEquals( 3, $this->object->getParentId() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -97,7 +97,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCode( 'dcba' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
 		$this->assertEquals( 'dcba', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -121,7 +121,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCount( 50 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
 		$this->assertEquals( 50, $this->object->getCount() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateStart( '2010-04-22 06:22:22' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
 		$this->assertEquals( '2010-04-22 06:22:22', $this->object->getDateStart() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -153,7 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateEnd( '2010-05-22 06:22:22' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
 		$this->assertEquals( '2010-05-22 06:22:22', $this->object->getDateEnd() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -169,7 +169,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setRef( 'xyz' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Coupon\Item\Code\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $return );
 		$this->assertEquals( 'xyz', $this->object->getRef() );
 		$this->assertTrue( $this->object->isModified() );
 	}

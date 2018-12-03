@@ -407,7 +407,7 @@ class Standard
 	{
 		if( empty( $items ) ) { return; }
 
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Product\\Item\\Iface', $items );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
 		$listItems = $this->getListItems( $items );
 
 		$context = $this->getContext();

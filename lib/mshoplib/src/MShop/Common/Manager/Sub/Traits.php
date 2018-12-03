@@ -56,7 +56,7 @@ trait Traits
 
 			$manager = new $classname( $manager, $context );
 
-			\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\Iface', $manager );
+			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Common\Manager\Decorator\Iface::class, $manager );
 		}
 
 		return $manager;
@@ -84,15 +84,15 @@ trait Traits
 			}
 		}
 
-		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
 		$manager = $this->addDecorators( $this->getContext(), $manager, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] );
 		$manager = $this->addDecorators( $this->getContext(), $manager, $decorators, $classprefix );
 
 		$subpath = $this->createSubNames( $managerpath );
-		$classprefix = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\' . $subpath . '\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\\' . $subpath . '\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/' . $managerpath . '/decorators/local', [] );
 
 		return $this->addDecorators( $this->getContext(), $manager, $decorators, $classprefix );
@@ -158,8 +158,8 @@ trait Traits
 			$domainname = ucfirst( $domain );
 			$subnames = $this->createSubNames( $manager );
 
-			$classname = '\\Aimeos\\MShop\\' . $domainname . '\\Manager\\' . $subnames . '\\' . $name;
-			$interface = '\\Aimeos\\MShop\\' . $domainname . '\\Manager\\' . $subnames . '\\Iface';
+			$classname = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\\' . $name;
+			$interface = '\Aimeos\MShop\\' . $domainname . '\Manager\\' . $subnames . '\Iface';
 
 			if( class_exists( $classname ) === false ) {
 				throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $classname ) );

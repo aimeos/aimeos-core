@@ -54,24 +54,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
 		$return = $this->object->setId( 5 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
 		$this->assertEquals( 5, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 6 );
 	}
 
 
 	public function testSetId2()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 'test' );
 	}
 
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCustomerId( '44' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
 		$this->assertEquals( '44', $this->object->getCustomerId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$locale = \Aimeos\MShop\Locale\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 		$return = $this->object->setLocale( $locale );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
 		$this->assertEquals( $locale, $this->object->getLocale() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setComment( 'New unit test comment' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
 		$this->assertEquals( 'New unit test comment', $this->object->getComment() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 1 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
 		$this->assertEquals( 1, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -228,7 +228,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->finish();
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $return );
 	}
 
 

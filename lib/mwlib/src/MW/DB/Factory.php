@@ -30,7 +30,7 @@ class Factory
 	 */
 	static public function createManager( \Aimeos\MW\Config\Iface $config, $type = 'PDO' )
 	{
-		$classname = '\\Aimeos\\MW\\DB\\Manager\\' . $type;
+		$classname = '\Aimeos\MW\DB\Manager\\' . $type;
 		$filename = 'MW/DB/Manager/' . $type . '.php';
 
 		$paths = explode( PATH_SEPARATOR, get_include_path() );

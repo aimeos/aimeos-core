@@ -34,7 +34,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MAdmin\\Job\\Item\\Iface', $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MAdmin\Job\Item\Iface::class, $this->object->createItem() );
 	}
 
 
@@ -49,14 +49,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attr );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -145,10 +145,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Job\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Job\Exception::class );
 		$this->object->getItem( $item->getId() );
 	}
 }

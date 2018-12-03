@@ -249,7 +249,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Customer\\Item\\Group\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Customer\Item\Group\Iface::class, $item );
 
 		if( !$item->isModified() ) {
 			return $item;
@@ -674,7 +674,7 @@ class Standard
 		 *  mshop/customer/manager/group/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Customer\Manager\Group\\Decorator\Decorator2" only to the
+		 * "\Aimeos\MShop\Customer\Manager\Group\Decorator\Decorator2" only to the
 		 * customer group manager.
 		 *
 		 * @param array List of decorator names

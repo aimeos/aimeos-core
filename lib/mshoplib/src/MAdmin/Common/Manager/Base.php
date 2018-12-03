@@ -64,10 +64,10 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 			}
 		}
 
-		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
 		$manager = $this->addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
 		$decorators = $config->get( 'madmin/' . $domain . '/manager/' . $managerpath . '/decorators/global', [] );
 		$manager = $this->addDecorators( $context, $manager, $decorators, $classprefix );
 
@@ -109,8 +109,8 @@ abstract class Base extends \Aimeos\MShop\Common\Manager\Base
 		$domainname = ucfirst( $domain );
 		$subnames = $this->createSubNames( $manager );
 
-		$classname = '\\Aimeos\\MAdmin\\' . $domainname . '\\Manager\\' . $subnames . '\\' . $name;
-		$interface = '\\Aimeos\\MAdmin\\' . $domainname . '\\Manager\\' . $subnames . '\\Iface';
+		$classname = '\Aimeos\MAdmin\\' . $domainname . '\Manager\\' . $subnames . '\\' . $name;
+		$interface = '\Aimeos\MAdmin\\' . $domainname . '\Manager\\' . $subnames . '\Iface';
 
 		if( class_exists( $classname ) === false ) {
 			throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not available', $classname ) );

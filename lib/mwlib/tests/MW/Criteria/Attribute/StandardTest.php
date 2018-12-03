@@ -74,7 +74,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetFunction()
 	{
-		$this->assertInstanceOf( '\Closure', $this->object->getFunction() );
+		$this->assertInstanceOf( \Closure::class, $this->object->getFunction() );
 	}
 
 

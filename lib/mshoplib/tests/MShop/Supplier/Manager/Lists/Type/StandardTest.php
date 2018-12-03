@@ -47,7 +47,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Type\\Iface', $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Type\Iface::class, $item );
 	}
 
 	public function testGetItem()
@@ -66,7 +66,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSaveInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MW\Common\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 
@@ -117,10 +117,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager('unknown');
 	}
 }

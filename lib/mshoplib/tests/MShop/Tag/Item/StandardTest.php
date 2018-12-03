@@ -52,7 +52,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Tag\Item\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -71,7 +71,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDomain( 'catalog' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Tag\Item\Iface::class, $return );
 		$this->assertEquals( 'catalog', $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLanguageId( 'fr' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Tag\Item\Iface::class, $return );
 		$this->assertEquals( 'fr', $this->object->getLanguageId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -99,7 +99,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTypeId( 33 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Tag\Item\Iface::class, $return );
 		$this->assertEquals( 33, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'bitter' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Tag\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Tag\Item\Iface::class, $return );
 		$this->assertTrue( $this->object->isModified() );
 
 		$this->assertEquals( 'bitter', $this->object->getLabel() );

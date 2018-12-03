@@ -29,19 +29,19 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 
 	public function testCombine()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\PHP', $this->object->combine( '||', [] ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\PHP::class, $this->object->combine( '||', [] ) );
 	}
 
 
 	public function testCompare()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\PHP', $this->object->compare( '!=', 'name', 'value' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\PHP::class, $this->object->compare( '!=', 'name', 'value' ) );
 	}
 
 
 	public function testSort()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Sort\\PHP', $this->object->sort( '+', 'name' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Sort\PHP::class, $this->object->sort( '+', 'name' ) );
 	}
 
 
@@ -128,21 +128,21 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$types = array( 'int_value' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'ival', 10 ) );
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getConditionSource( $types );
 	}
 
 
 	public function testGetConditionSourceInvalidOperator()
 	{
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->setConditions( $this->object->compare( '?', 'int_value', 10 ) );
 	}
 
 
 	public function testGetConditions()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\PHP', $this->object->getConditions() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\PHP::class, $this->object->getConditions() );
 
 		$conditions = $this->object->compare( '==', 'int_value', 10 );
 		$this->object->setConditions( $conditions );
@@ -176,14 +176,14 @@ class PHPTest extends \PHPUnit\Framework\TestCase
 		$translations = array( 'asc_array' => 'asc_int_list' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getSortationSource( $types, $translations );
 	}
 
 
 	public function testGetSortationSourceInvalidDirection()
 	{
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->setSortations( array( $this->object->sort( '/', 'asc_array' ) ) );
 	}
 

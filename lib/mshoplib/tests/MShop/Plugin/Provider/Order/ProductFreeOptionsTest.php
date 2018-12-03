@@ -135,7 +135,7 @@ class ProductFreeOptionsTest extends \PHPUnit\Framework\TestCase
 
 	protected function access( $name )
 	{
-		$class = new \ReflectionClass( '\Aimeos\MShop\Plugin\Provider\Order\ProductFreeOptions' );
+		$class = new \ReflectionClass( \Aimeos\MShop\Plugin\Provider\Order\ProductFreeOptions::class );
 		$method = $class->getMethod( $name );
 		$method->setAccessible( true );
 

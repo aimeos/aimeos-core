@@ -132,7 +132,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Locale\\Item\\Currency\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Locale\Item\Currency\Iface::class, $item );
 
 		if( !$item->isModified() ) {
 			return $item;

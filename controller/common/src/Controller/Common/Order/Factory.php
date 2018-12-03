@@ -86,12 +86,12 @@ class Factory
 		}
 
 		if( ctype_alnum( $name ) === false ) {
-			$classname = is_string( $name ) ? '\\Aimeos\\Controller\\Common\\Order\\' . $name : '<not a string>';
+			$classname = is_string( $name ) ? '\Aimeos\Controller\Common\Order\\' . $name : '<not a string>';
 			throw new \Aimeos\Controller\Common\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = '\\Aimeos\\Controller\\Common\\Order\\Iface';
-		$classname = '\\Aimeos\\Controller\\Common\\Order\\' . $name;
+		$iface = \Aimeos\Controller\Common\Order\Iface::class;
+		$classname = '\Aimeos\Controller\Common\Order\\' . $name;
 
 		if( isset( self::$objects[$classname] ) ) {
 			return self::$objects[$classname];

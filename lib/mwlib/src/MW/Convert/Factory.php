@@ -56,13 +56,13 @@ class Factory
 		{
 			if( ctype_alnum( $part ) === false )
 			{
-				$classname = is_string( $key ) ? '\\Aimeos\\MW\\Convert\\' . $key : '<not a string>';
+				$classname = is_string( $key ) ? '\Aimeos\MW\Convert\\' . $key : '<not a string>';
 				throw new \Aimeos\MW\Convert\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 		}
 
-		$iface = '\\Aimeos\\MW\\Convert\\Iface';
-		$classname = '\\Aimeos\\MW\\Convert\\' . $key;
+		$iface = \Aimeos\MW\Convert\Iface::class;
+		$classname = '\Aimeos\MW\Convert\\' . $key;
 
 		if( class_exists( $classname ) === false ) {
 			throw new \Aimeos\MW\Convert\Exception( sprintf( 'Class "%1$s" not available', $classname ) );

@@ -340,7 +340,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testWrongFieldType()
 	{
-		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
 		$sqlinsert = 'INSERT INTO "mw_unit_test" ("id", "name") VALUES (?, ?)';
 
 		$conn = $this->object->acquire();
@@ -366,7 +366,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 		$raw = $conn->getRawObject();
 		$this->object->release( $conn );
 
-		$this->assertInstanceOf( '\Doctrine\DBAL\Connection', $raw );
+		$this->assertInstanceOf( \Doctrine\DBAL\Connection::class, $raw );
 	}
 
 
@@ -376,7 +376,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 		$conn = $this->object->acquire();
 
-		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
 
 		try
 		{
@@ -394,7 +394,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 	{
 		$conn = $this->object->acquire();
 
-		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
 
 		try
 		{
@@ -414,7 +414,7 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 		$conn = $this->object->acquire();
 
-		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
 
 		try
 		{
@@ -430,22 +430,22 @@ class DBALTest extends \PHPUnit\Framework\TestCase
 
 	public function testDBALException()
 	{
-		$mock = $this->getMockBuilder( '\Aimeos\MW\DB\Connection\Iface' )->getMock();
+		$mock = $this->getMockBuilder( \Aimeos\MW\DB\Connection\Iface::class )->getMock();
 
-		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
 		$this->object->release( $mock );
 	}
 
 
 	public function testDBFactory()
 	{
-		$this->assertInstanceOf('\\Aimeos\\MW\\DB\\Manager\\Iface', $this->object);
+		$this->assertInstanceOf(\Aimeos\MW\DB\Manager\Iface::class, $this->object);
 	}
 
 
 	public function testFactoryFail()
 	{
-		$this->setExpectedException('\\Aimeos\\MW\\DB\\Exception');
+		$this->setExpectedException( \Aimeos\MW\DB\Exception::class );
 		\Aimeos\MW\DB\Factory::createManager( \TestHelperMw::getConfig(), 'notDefined' );
 	}
 }

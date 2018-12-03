@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -88,7 +88,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTypeId( 99 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $return );
 		$this->assertEquals( 99, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'anotherLabel' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $return );
 		$this->assertEquals( 'anotherLabel', $this->object->getLabel() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setProvider( 'newProvider' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $return );
 		$this->assertEquals( 'newProvider', $this->object->getProvider() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -128,7 +128,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetProviderInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Plugin\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->setProvider( ',newProvider' );
 	}
 
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setConfig( array( 'threshold' => '20.00' ) );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $return );
 		$this->assertEquals( array( 'threshold'=>'20.00' ), $this->object->getConfig() );
 		$this->assertEquals( true, $this->object->isModified() );
 	}
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setPosition( 1 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $return );
 		$this->assertEquals( 1, $this->object->getPosition() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -181,7 +181,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Plugin\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Plugin\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

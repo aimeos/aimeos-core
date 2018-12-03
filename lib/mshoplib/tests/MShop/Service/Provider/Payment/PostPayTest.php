@@ -23,7 +23,7 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 		$serviceItem = $serviceManager->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->object = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\PostPay' )
+		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PostPay::class )
 			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
@@ -53,11 +53,11 @@ class PostPayTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateSync()
 	{
 		$orderItem = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
-		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$result = $this->object->updateSync( $request, $orderItem );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getPaymentStatus() );
 	}
 

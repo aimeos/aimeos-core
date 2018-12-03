@@ -55,7 +55,7 @@ class MShopAddTypeData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	protected function process()
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$sitecode = $this->additional->getLocale()->getSite()->getCode();
 		$this->msg( sprintf( 'Adding MShop type data for site "%1$s"', $sitecode ), 0 );

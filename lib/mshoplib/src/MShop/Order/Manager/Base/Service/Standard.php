@@ -517,13 +517,13 @@ class Standard
 		 * modify what is returned to the caller.
 		 *
 		 * This option allows you to wrap local decorators
-		 * ("\Aimeos\MShop\Order\Manager\Base\Service\\Decorator\*") around the
+		 * ("\Aimeos\MShop\Order\Manager\Base\Service\Decorator\*") around the
 		 * order base service manager.
 		 *
 		 *  mshop/order/manager/base/service/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Order\Manager\Base\Service\\Decorator\Decorator2" only
+		 * "\Aimeos\MShop\Order\Manager\Base\Service\Decorator\Decorator2" only
 		 * to the order base service manager.
 		 *
 		 * @param array List of decorator names
@@ -547,7 +547,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $item );
 
 		if( !$item->isModified() ) {
 			return $item;

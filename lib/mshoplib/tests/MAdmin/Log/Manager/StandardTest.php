@@ -35,7 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MAdmin\\Log\\Item\\Iface', $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MAdmin\Log\Item\Iface::class, $this->object->createItem() );
 	}
 
 
@@ -50,14 +50,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attr );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -134,17 +134,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getRequest(), $itemUpd->getRequest() );
 		$this->assertEquals( $itemExp->getPriority(), $itemUpd->getPriority() );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Log\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Log\Exception::class );
 		$this->object->getItem( $item->getId() );
 	}
 
 
 	public function testLog()
 	{
-		$mock = $this->getMockBuilder( '\Aimeos\MAdmin\Log\Manager\Standard' )
+		$mock = $this->getMockBuilder( \Aimeos\MAdmin\Log\Manager\Standard::class )
 			->setConstructorArgs( array( \TestHelperMShop::getContext() ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();

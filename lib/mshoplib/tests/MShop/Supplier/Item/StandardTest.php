@@ -54,7 +54,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -76,7 +76,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'newName' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Iface::class, $return );
 		$this->assertEquals( 'newName', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCode( 'newCode' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Iface::class, $return );
 		$this->assertEquals( 'newCode', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -109,7 +109,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -154,7 +154,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $list as $item )
 		{
 			$this->assertEquals( $i++, $item->getPosition() );
-			$this->assertInstanceOf( '\Aimeos\MShop\Supplier\Item\Address\Iface', $item );
+			$this->assertInstanceOf( \Aimeos\MShop\Supplier\Item\Address\Iface::class, $item );
 		}
 	}
 

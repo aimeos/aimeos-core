@@ -92,7 +92,7 @@ class MysqlTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( null, $columnItem->getDefaultValue() );
 		$this->assertTrue( $columnItem->isNullable() );
 
-		$this->setExpectedException('\\Aimeos\\MW\\Setup\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Setup\Exception::class );
 		$this->object->getColumnDetails( 'mw_setup_dbschema_test', 'notexisting' );
 	}
 

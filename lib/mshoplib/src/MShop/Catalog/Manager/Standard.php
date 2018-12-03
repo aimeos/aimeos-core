@@ -461,7 +461,7 @@ class Standard extends Base
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Catalog\Item\Iface::class, $item );
 
 		if( !$item->isModified() )
 		{

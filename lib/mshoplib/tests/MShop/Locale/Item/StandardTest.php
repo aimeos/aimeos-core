@@ -54,10 +54,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSite()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $this->object->getSite() );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $this->object->getSite() );
 
 		$wrongobject = new \Aimeos\MShop\Locale\Item\Standard();
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
 		$wrongobject->getSite();
 	}
 
@@ -88,7 +88,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( '5', $this->object->getSiteId() );
 		$this->assertEquals( array( 5 ), $this->object->getSitePath() );
 		$this->assertEquals( array( 5 ), $this->object->getSiteSubTree() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $return );
 	}
 
 
@@ -104,7 +104,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( 'en', $this->object->getLanguageId() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $return );
 	}
 
 
@@ -114,7 +114,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( null, $this->object->getLanguageId() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $return );
 	}
 
 
@@ -123,20 +123,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$return = $this->object->setLanguageId( 'en_GB' );
 
 		$this->assertEquals( 'en_GB', $this->object->getLanguageId() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $return );
 	}
 
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setLanguageId( 'test' );
 	}
 
 
 	public function testSetLanguageIdCountryInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setLanguageId( 'en-GB' );
 	}
 
@@ -153,7 +153,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( 'AWG', $this->object->getCurrencyId() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $return );
 	}
 
 
@@ -163,13 +163,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( null, $this->object->getCurrencyId() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $return );
 	}
 
 
 	public function testSetCurrencyIdInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setCurrencyId( 'TEST' );
 	}
 
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertTrue( $this->object->isModified() );
 		$this->assertEquals( 2, $this->object->getPosition() );
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Iface::class, $return );
 	}
 
 

@@ -27,7 +27,7 @@ class SingletonTest extends \PHPUnit\Framework\TestCase
 		$item = $pluginManager->createItem();
 
 
-		$this->mock = $this->getMockBuilder( '\Aimeos\MShop\Plugin\Provider\Decorator\Example' )
+		$this->mock = $this->getMockBuilder( \Aimeos\MShop\Plugin\Provider\Decorator\Example::class )
 			->disableOriginalConstructor()
 			->setMethods( ['update', 'checkConfigBE', 'getConfigBE'] )
 			->getMock();

@@ -25,7 +25,7 @@ class TimeTest extends \PHPUnit_Framework_TestCase
 		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
 		$this->servItem = $servManager->createItem()->setCode( '73' );
 
-		$this->mockProvider = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Time' )
+		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Time::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->basket = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )

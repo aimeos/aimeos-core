@@ -562,7 +562,7 @@ class Standard extends Base
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $item );
 
 		if( !$item->isModified() && !$item->getLocale()->isModified() ) {
 			return $item;

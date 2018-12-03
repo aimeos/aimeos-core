@@ -29,7 +29,7 @@ class CountryTest extends \PHPUnit\Framework\TestCase
 		$servManager = \Aimeos\MShop\Factory::createManager( $this->context, 'service' );
 		$this->servItem = $servManager->createItem();
 
-		$this->mockProvider = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Country' )
+		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Country::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->basket = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )

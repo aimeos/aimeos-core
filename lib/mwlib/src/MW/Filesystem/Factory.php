@@ -32,7 +32,7 @@ class Factory
 			throw new \Aimeos\MW\Filesystem\Exception( 'File system not configured' );
 		}
 
-		$classname = '\\Aimeos\\MW\\Filesystem\\' . ucfirst( (string) $config['adapter'] );
+		$classname = '\Aimeos\MW\Filesystem\\' . ucfirst( (string) $config['adapter'] );
 
 		if( !class_exists( $classname ) ) {
 			throw new \Aimeos\MW\Filesystem\Exception( sprintf( 'File system "%1$s" not found', $config['adapter'] ) );

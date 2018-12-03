@@ -53,17 +53,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
 		$return = $this->object->setId( 8 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 8, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 3 );
 	}
 
@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setAttributeId( 44 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 44, $this->object->getAttributeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setParentId( 33 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 33, $this->object->getParentId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -124,7 +124,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setType( 'testType' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 'testType', $this->object->getType() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCode( 'weight' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 'weight', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -156,7 +156,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setValue( 36 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 36, $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -172,7 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setName( 'medium' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 'medium', $this->object->getName() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -188,7 +188,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setQuantity( 3 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( 3, $this->object->getQuantity() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -230,7 +230,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$return = $this->object->copyFrom( $item );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $return );
 		$this->assertEquals( $item->getId(), $this->object->getAttributeId() );
 		$this->assertEquals( $item->getName(), $this->object->getName() );
 		$this->assertEquals( $item->getType(), $this->object->getCode() );

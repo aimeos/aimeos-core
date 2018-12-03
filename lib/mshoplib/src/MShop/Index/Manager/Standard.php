@@ -363,7 +363,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Product\\Item\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Product\Item\Iface::class, $item );
 
 		if( $item->getId() === null ) {
 			throw new \Aimeos\MShop\Index\Exception( sprintf( 'Item could not be saved using method saveItem(). Item ID not available.' ) );

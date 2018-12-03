@@ -30,7 +30,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAdd()
 	{
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Media\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
 			->setMethods( array( 'checkFileUpload', 'storeFile' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -38,7 +38,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
 		$object->expects( $this->exactly( 2 ) )->method( 'storeFile' );
 
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.gif' ) ) );
 
@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAddBinary()
 	{
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Media\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
 			->setMethods( array( 'checkFileUpload', 'storeFile' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -58,7 +58,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'checkFileUpload' );
 		$object->expects( $this->once() )->method( 'storeFile' );
 
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->once() )->method( 'getStream' )
 			->will( $this->returnValue( file_get_contents( __DIR__ . '/testfiles/test.pdf' ) ) );
 
@@ -70,12 +70,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testDelete()
 	{
-		$fsm = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Manager\Standard' )
+		$fsm = $this->getMockBuilder( \Aimeos\MW\Filesystem\Manager\Standard::class )
 			->setMethods( array( 'get' ) )
 			->disableOriginalConstructor()
 			->getMock();
 
-		$fs = $this->getMockBuilder( '\Aimeos\MW\Filesystem\Standard' )
+		$fs = $this->getMockBuilder( \Aimeos\MW\Filesystem\Standard::class )
 			->setMethods( array( 'has', 'rm' ) )
 			->disableOriginalConstructor()
 			->getMock();
@@ -102,7 +102,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->context->getConfig()->set( 'controller/common/media/standard/files/scale', true );
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Media\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Media\Standard::class )
 			->setMethods( array( 'getFileContent', 'storeFile' ) )
 			->setConstructorArgs( array( $this->context ) )
 			->getMock();
@@ -126,7 +126,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckFileUploadOK()
 	{
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->once() )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_OK ) );
 
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
@@ -135,69 +135,69 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckFileUploadSize()
 	{
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_INI_SIZE ) );
 
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
 	}
 
 
 	public function testCheckFileUploadPartitial()
 	{
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_PARTIAL ) );
 
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
 	}
 
 
 	public function testCheckFileUploadNoFile()
 	{
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_NO_FILE ) );
 
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
 	}
 
 
 	public function testCheckFileUploadNoTmpdir()
 	{
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_NO_TMP_DIR ) );
 
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
 	}
 
 
 	public function testCheckFileUploadCantWrite()
 	{
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_CANT_WRITE ) );
 
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
 	}
 
 
 	public function testCheckFileUploadExtension()
 	{
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 		$file->expects( $this->exactly( 2 ) )->method( 'getError' )->will( $this->returnValue( UPLOAD_ERR_EXTENSION ) );
 
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
 	}
 
 
 	public function testCheckFileUploadException()
 	{
-		$file = $this->getMockBuilder( '\Psr\Http\Message\UploadedFileInterface' )->getMock();
+		$file = $this->getMockBuilder( \Psr\Http\Message\UploadedFileInterface::class )->getMock();
 
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'checkFileUpload' )->invokeArgs( $this->object, array( $file ) );
 	}
 
@@ -225,7 +225,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetFileContentException()
 	{
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'getFileContent' )->invokeArgs( $this->object, array( '', 'fs-media' ) );
 	}
 
@@ -275,7 +275,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetMediaFile()
 	{
 		$result = $this->access( 'getMediaFile' )->invokeArgs( $this->object, array( __FILE__ ) );
-		$this->assertInstanceOf( '\Aimeos\MW\Media\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $result );
 	}
 
 
@@ -318,7 +318,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$file = \Aimeos\MW\Media\Factory::get( __DIR__ . '/testfiles/test.gif' );
 		$this->context->getConfig()->set( 'controller/common/media/standard/files/allowedtypes', [] );
 
-		$this->setExpectedException( '\Aimeos\Controller\Common\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Common\Exception::class );
 		$this->access( 'getMimeType' )->invokeArgs( $this->object, array( $file, 'files' ) );
 	}
 
@@ -350,7 +350,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	protected function access( $name )
 	{
-		$class = new \ReflectionClass( '\Aimeos\Controller\Common\Media\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Media\Standard::class );
 		$method = $class->getMethod( $name );
 		$method->setAccessible( true );
 

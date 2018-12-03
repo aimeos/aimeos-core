@@ -37,7 +37,7 @@ class Standard
 	 */
 	public function __construct( array $values = [], array $children = [] )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $children );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Locale\Item\Site\Iface::class, $children );
 		parent::__construct( 'locale.site.', $values );
 
 		$this->values = $values;

@@ -54,12 +54,12 @@ class Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\\Aimeos\\MW\\Media\\' . $name : '<not a string>';
+			$classname = is_string( $name ) ? '\Aimeos\MW\Media\\' . $name : '<not a string>';
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = '\\Aimeos\\MW\\Media\\Iface';
-		$classname = '\\Aimeos\\MW\\Media\\' . $type . '\\' . $name;
+		$iface = \Aimeos\MW\Media\Iface::class;
+		$classname = '\Aimeos\MW\Media\\' . $type . '\\' . $name;
 
 		if( class_exists( $classname ) === false ) {
 			throw new \Aimeos\MW\Media\Exception( sprintf( 'Class "%1$s" not available', $classname ) );

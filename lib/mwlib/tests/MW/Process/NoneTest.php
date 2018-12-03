@@ -16,7 +16,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\Process\None();
 
-		$this->assertInstanceOf( '\Aimeos\MW\Process\Iface', $object->start( function() {}, [] ) );
+		$this->assertInstanceOf( \Aimeos\MW\Process\Iface::class, $object->start( function() {}, [] ) );
 	}
 
 
@@ -24,6 +24,6 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\Process\None();
 
-		$this->assertInstanceOf( '\Aimeos\MW\Process\Iface', $object->wait() );
+		$this->assertInstanceOf( \Aimeos\MW\Process\Iface::class, $object->wait() );
 	}
 }

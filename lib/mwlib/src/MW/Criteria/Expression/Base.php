@@ -216,7 +216,7 @@ abstract class Base
 	 */
 	protected function setPlugins( array $plugins )
 	{
-		\Aimeos\MW\Common\Base::checkClassList('\\Aimeos\\MW\\Criteria\\Plugin\\Iface', $plugins);
+		\Aimeos\MW\Common\Base::checkClassList(\Aimeos\MW\Criteria\Plugin\Iface::class, $plugins);
 
 		$this->plugins = $plugins;
 	}

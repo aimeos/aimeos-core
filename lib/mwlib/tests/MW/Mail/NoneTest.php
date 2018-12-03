@@ -27,7 +27,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateMessage()
 	{
-		$this->assertInstanceOf( '\Aimeos\MW\Mail\Message\Iface', $this->object->createMessage() );
+		$this->assertInstanceOf( \Aimeos\MW\Mail\Message\Iface::class, $this->object->createMessage() );
 	}
 
 

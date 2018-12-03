@@ -37,7 +37,7 @@ class SQL implements \Aimeos\MW\Criteria\Expression\Combine\Iface
 			throw new \Aimeos\MW\Common\Exception( sprintf( 'Invalid operator "%1$s"', $operator ) );
 		}
 
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Criteria\\Expression\\Iface', $list );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Criteria\Expression\Iface::class, $list );
 
 		$this->operator = $operator;
 		$this->expressions = $list;

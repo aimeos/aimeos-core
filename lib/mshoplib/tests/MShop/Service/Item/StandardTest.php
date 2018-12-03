@@ -56,7 +56,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setPosition( 4 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( 4, $this->object->getPosition() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -94,7 +94,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCode( 'newCode' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( 'newCode', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -110,7 +110,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setProvider( 'TestProvider' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( 'TestProvider', $this->object->getProvider() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -118,7 +118,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetProviderInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->setProvider( ',newProvider' );
 	}
 
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'newName' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( 'newName', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateStart( '2010-04-22 06:22:22' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( '2010-04-22 06:22:22', $this->object->getDateStart() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateEnd( '2010-05-22 06:22:22' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( '2010-05-22 06:22:22', $this->object->getDateEnd() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -181,7 +181,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 10 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( 10, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -202,7 +202,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setConfig( array( 'account' => 'testAccount' ) );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( array( 'account' => 'testAccount' ), $this->object->getConfig() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -216,7 +216,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTypeId( 2 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Service\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Service\Item\Iface::class, $return );
 		$this->assertEquals( 2, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}

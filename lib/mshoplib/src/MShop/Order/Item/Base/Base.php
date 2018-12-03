@@ -77,12 +77,12 @@ abstract class Base
 			array $values = [], array $products = [], array $addresses = [],
 			array $services = [], array $coupons = [] )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $products );
-		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Address\Iface', $addresses );
-		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Service\Iface', $services );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $products );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Address\Iface::class, $addresses );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Service\Iface::class, $services );
 
 		foreach( $coupons as $couponProducts ) {
-			\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Iface', $couponProducts );
+			\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Iface::class, $couponProducts );
 		}
 
 		$this->bdata = $values;

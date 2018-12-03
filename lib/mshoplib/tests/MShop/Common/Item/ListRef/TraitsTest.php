@@ -143,7 +143,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 	public function testDeleteListItemException()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->deleteListItem( 'test', $this->listItem1 );
 	}
 
@@ -167,8 +167,8 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$result = $this->object->getListItem( 'text', 'default', 2 );
 
-		$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $result );
-		$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Iface', $result->getRefItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $result->getRefItem() );
 	}
 
 
@@ -183,7 +183,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $listItem ) {
-			$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
+			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $listItem );
 		}
 	}
 
@@ -199,7 +199,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $listItem ) {
-			$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Lists\\Iface', $listItem );
+			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Lists\Iface::class, $listItem );
 		}
 
 		$this->assertEquals( [], $this->object->getListItems( 'undefined' ) );
@@ -255,7 +255,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 
 		foreach( $result as $listItem )
 		{
-			$this->assertInstanceof( '\\Aimeos\\MShop\\Text\\Item\\Iface', $listItem->getRefItem() );
+			$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $listItem->getRefItem() );
 			$this->assertSame( $expected[$listItem->getRefId()], $listItem->getRefItem() );
 		}
 	}
@@ -276,7 +276,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		foreach( $result as $domain => $list )
 		{
 			foreach( $list as $item ) {
-				$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Iface', $item );
+				$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $item );
 			}
 		}
 	}
@@ -293,7 +293,7 @@ class TraitsTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $expected, $result );
 
 		foreach( $result as $item ) {
-			$this->assertInstanceof( '\\Aimeos\\MShop\\Common\\Item\\Iface', $item );
+			$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $item );
 		}
 
 		$this->assertEquals( [], $this->object->getRefItems( 'undefined' ) );

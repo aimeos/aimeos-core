@@ -66,13 +66,13 @@ class ServicesUpdateTest
 		$servicePayment->setServiceId( 2 );
 
 
-		$orderStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Item\\Base\\Standard' )
+		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
 			->setConstructorArgs( array( $priceItem, $localeItem ) )->setMethods( array( 'getProducts' ) )->getMock();
 
-		$serviceStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )
+		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems', 'getProvider' ) )->getMock();
 
-		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\PluginServicesUpdate', $serviceStub );
+		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\Aimeos\MShop\Service\Manager\PluginServicesUpdate', $serviceStub );
 		$context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
 
 
@@ -83,7 +83,7 @@ class ServicesUpdateTest
 		$serviceItemPayment = new \Aimeos\MShop\Service\Item\Standard( array( 'type' => 'payment' ) );
 
 
-		$providerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Delivery\\Standard' )
+		$providerStub = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Delivery\Standard::class )
 			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
 			->setMethods( array( 'isAvailable' ) )->getMock();
 
@@ -126,13 +126,13 @@ class ServicesUpdateTest
 		$servicePayment->setServiceId( 2 );
 
 
-		$orderStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Item\\Base\\Standard' )
+		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
 			->setConstructorArgs( array( $priceItem, $localeItem ) )->setMethods( array( 'getProducts' ) )->getMock();
 
-		$serviceStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Manager\\Standard' )
+		$serviceStub = $this->getMockBuilder( \Aimeos\MShop\Service\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )->setMethods( array( 'searchItems', 'getProvider' ) )->getMock();
 
-		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Service\\Manager\\PluginServicesUpdate', $serviceStub );
+		\Aimeos\MShop\Service\Manager\Factory::injectManager( '\Aimeos\MShop\Service\Manager\PluginServicesUpdate', $serviceStub );
 		$context->getConfig()->set( 'mshop/service/manager/name', 'PluginServicesUpdate' );
 
 
@@ -143,7 +143,7 @@ class ServicesUpdateTest
 		$serviceItemPayment = new \Aimeos\MShop\Service\Item\Standard( array( 'type' => 'payment' ) );
 
 
-		$providerStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Delivery\\Standard' )
+		$providerStub = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Delivery\Standard::class )
 			->setConstructorArgs( array( $context, $serviceStub->createItem() ) )
 			->setMethods( array( 'isAvailable' ) )->getMock();
 
@@ -185,7 +185,7 @@ class ServicesUpdateTest
 		$servicePayment->setServiceId( -2 );
 
 
-		$orderStub = $this->getMockBuilder( '\\Aimeos\\MShop\\Order\\Item\\Base\\Standard' )
+		$orderStub = $this->getMockBuilder( \Aimeos\MShop\Order\Item\Base\Standard::class )
 			->setConstructorArgs( array( $priceItem, $localeItem ) )
 			->setMethods( array( 'getProducts' ) )->getMock();
 

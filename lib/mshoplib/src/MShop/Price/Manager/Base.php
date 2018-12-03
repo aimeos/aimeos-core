@@ -70,7 +70,7 @@ abstract class Base
 
 		foreach( $priceItems as $priceItem )
 		{
-			self::checkClass( '\\Aimeos\\MShop\\Price\\Item\\Iface', $priceItem );
+			self::checkClass( \Aimeos\MShop\Price\Item\Iface::class, $priceItem );
 
 			if( $currencyId !== null && $currencyId !== $priceItem->getCurrencyId() ) {
 				continue;

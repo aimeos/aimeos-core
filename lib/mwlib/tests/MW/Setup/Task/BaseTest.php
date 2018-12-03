@@ -70,25 +70,25 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetConnection()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Setup\Task\Base::class );
 		$method = $class->getMethod( 'getConnection' );
 		$method->setAccessible( true );
 
 		$result = $method->invokeArgs( $this->object, array( 'db' ) );
 
-		$this->assertInstanceOf( '\Aimeos\MW\DB\Connection\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MW\DB\Connection\Iface::class, $result );
 	}
 
 
 	public function testGetSchema()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Setup\Task\Base::class );
 		$method = $class->getMethod( 'getSchema' );
 		$method->setAccessible( true );
 
 		$result = $method->invokeArgs( $this->object, array( 'db' ) );
 
-		$this->assertInstanceOf( '\Aimeos\MW\Setup\DBSchema\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MW\Setup\DBSchema\Iface::class, $result );
 	}
 
 
@@ -96,7 +96,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$content = 'CREATE TABLE "test" ( "name" VARCHAR(32) )';
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Setup\Task\Base::class );
 		$method = $class->getMethod( 'getTableDefinitions' );
 		$method->setAccessible( true );
 
@@ -110,7 +110,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$content = 'CREATE INDEX "idx_test" ON "test" ("name")';
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Setup\Task\Base::class );
 		$method = $class->getMethod( 'getIndexDefinitions' );
 		$method->setAccessible( true );
 
@@ -124,7 +124,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$content = 'CREATE TRIGGER "tri_test" ON "text"';
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Setup\Task\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Setup\Task\Base::class );
 		$method = $class->getMethod( 'getTriggerDefinitions' );
 		$method->setAccessible( true );
 

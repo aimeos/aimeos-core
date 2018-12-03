@@ -64,7 +64,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	protected function getSearchFunctions( array $attributes )
 	{
 		$list = [];
-		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
+		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
 
 		foreach( $attributes as $key => $item )
 		{
@@ -92,7 +92,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	protected function getSearchTranslations( array $attributes )
 	{
 		$translations = [];
-		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
+		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
 
 		foreach( $attributes as $key => $item )
 		{
@@ -120,7 +120,7 @@ abstract class Base extends \Aimeos\MW\Common\Base
 	protected function getSearchTypes( array $attributes )
 	{
 		$types = [];
-		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
+		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
 
 		foreach( $attributes as $key => $item )
 		{

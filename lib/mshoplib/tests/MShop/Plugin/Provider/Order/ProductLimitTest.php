@@ -89,7 +89,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'total-value-max', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 
@@ -118,7 +118,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 
 		$this->products['CNE']->setQuantity( 11 );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
@@ -145,7 +145,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$this->products['CNE']->setPrice( $price );
 		$this->products['CNE']->setQuantity( 3 );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
@@ -163,7 +163,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$this->order->addProduct( $this->products['CNC'] );
 		$this->products['CNE']->setQuantity( 1 );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 
@@ -192,7 +192,7 @@ class ProductLimitTest extends \PHPUnit\Framework\TestCase
 		$this->products['CNE']->setPrice( $price );
 		$this->products['CNE']->setQuantity( 2 );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Exception::class );
 		$this->object->update( $this->order, 'addProduct.before', $this->products['CNE'] );
 	}
 }

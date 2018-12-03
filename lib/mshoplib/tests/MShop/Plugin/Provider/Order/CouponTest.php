@@ -72,7 +72,7 @@ class CouponTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MShop\Plugin\Provider\Order\Coupon( \TestHelperMShop::getContext(), $this->plugin );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Common\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$object->update( new TestPublisher(), 'test' );
 	}
 }

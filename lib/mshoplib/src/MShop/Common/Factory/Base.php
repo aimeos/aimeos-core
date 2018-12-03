@@ -63,7 +63,7 @@ abstract class Base
 
 			$manager = new $classname( $manager, $context );
 
-			\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\Iface', $manager );
+			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Common\Manager\Decorator\Iface::class, $manager );
 		}
 
 		return $manager;
@@ -115,14 +115,14 @@ abstract class Base
 			}
 		}
 
-		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\MShop\\Common\\Manager\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\Common\Manager\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/global', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\MShop\\' . ucfirst( $domain ) . '\\Manager\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\\' . ucfirst( $domain ) . '\Manager\Decorator\\';
 		$decorators = $config->get( 'mshop/' . $domain . '/manager/decorators/local', [] );
 		$manager = self::addDecorators( $context, $manager, $decorators, $classprefix );
 

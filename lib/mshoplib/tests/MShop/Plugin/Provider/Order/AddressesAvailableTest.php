@@ -70,7 +70,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'delivery', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 
@@ -122,7 +122,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => true
 		) );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}
 
@@ -153,7 +153,7 @@ class AddressesAvailableTest extends \PHPUnit\Framework\TestCase
 				\Aimeos\MShop\Order\Item\Base\Address\Base::TYPE_PAYMENT => false
 		) );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_ADDRESS );
 	}
 }

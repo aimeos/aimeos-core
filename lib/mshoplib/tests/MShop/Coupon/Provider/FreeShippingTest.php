@@ -95,7 +95,7 @@ class FreeShippingTest extends \PHPUnit\Framework\TestCase
 		$couponItem = \Aimeos\MShop\Coupon\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
 		$object = new \Aimeos\MShop\Coupon\Provider\FreeShipping( $context, $couponItem, '90AB' );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Coupon\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
 		$object->addCoupon( $this->orderBase );
 	}
 

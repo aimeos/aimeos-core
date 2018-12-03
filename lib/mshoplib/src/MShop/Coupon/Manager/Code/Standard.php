@@ -266,7 +266,7 @@ class Standard
 		 *  mshop/coupon/manager/code/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Coupon\Manager\Code\\Decorator\Decorator2" only to the
+		 * "\Aimeos\MShop\Coupon\Manager\Code\Decorator\Decorator2" only to the
 		 * coupon code manager.
 		 *
 		 * @param array Address of decorator names
@@ -367,7 +367,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Coupon\\Item\\Code\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Coupon\Item\Code\Iface::class, $item );
 
 		if( !$item->isModified() ) {
 			return $item;

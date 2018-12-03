@@ -24,7 +24,7 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 		$serviceItem = \Aimeos\MShop\Factory::createManager( $context, 'service' )->createItem();
 		$serviceItem->setCode( 'test' );
 
-		$this->object = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\DirectDebit' )
+		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\DirectDebit::class )
 			->setMethods( array( 'getOrder', 'getOrderBase', 'saveOrder', 'saveOrderBase' ) )
 			->setConstructorArgs( array( $context, $serviceItem ) )
 			->getMock();
@@ -127,11 +127,11 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 		$this->object->setConfigFE( $this->ordServItem, array( 'directdebit.accountno' => '123456' ) );
 
 		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment' );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Attribute\\Iface', $attrItem );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attrItem );
 		$this->assertEquals( 'XXX456', $attrItem->getValue() );
 
 		$attrItem = $this->ordServItem->getAttributeItem( 'directdebit.accountno', 'payment/hidden' );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Order\\Item\\Base\\Service\\Attribute\\Iface', $attrItem );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Service\Attribute\Iface::class, $attrItem );
 		$this->assertEquals( '123456', $attrItem->getValue() );
 	}
 
@@ -139,11 +139,11 @@ class DirectDebitTest extends \PHPUnit\Framework\TestCase
 	public function testUpdateSync()
 	{
 		$orderItem = \Aimeos\MShop\Order\Manager\Factory::createManager( \TestHelperMShop::getContext() )->createItem();
-		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$result = $this->object->updateSync( $request, $orderItem );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 		$this->assertEquals( \Aimeos\MShop\Order\Item\Base::PAY_AUTHORIZED, $result->getPaymentStatus() );
 	}
 

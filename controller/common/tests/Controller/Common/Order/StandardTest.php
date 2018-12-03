@@ -29,7 +29,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperCntl::getContext();
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'updateStatus' ) )
 			->getMock();
@@ -46,7 +46,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperCntl::getContext();
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'updateStatus' ) )
 			->getMock();
@@ -65,7 +65,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_PENDING );
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'block' ) )
 			->getMock();
@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 		$orderItem->setPaymentStatus( \Aimeos\MShop\Order\Item\Base::PAY_DELETED );
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'unblock' ) )
 			->getMock();
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperCntl::getContext();
 
-		$statusStub = $this->getMockBuilder( '\Aimeos\MShop\Order\Manager\Status\Standard' )
+		$statusStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Status\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
@@ -108,7 +108,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/status', $statusStub );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'addStatusItem' );
 		$method->setAccessible( true );
 
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperCntl::getContext();
 		$prodId = \Aimeos\MShop\Factory::createManager( $context, 'product' )->findItem( 'CNC' )->getId();
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'getBundleMap' );
 		$method->setAccessible( true );
 
@@ -137,14 +137,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperCntl::getContext();
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'getContext' );
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 		$result = $method->invokeArgs( $object, [] );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Context\Item\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $result );
 		$this->assertSame( $context, $result );
 	}
 
@@ -154,7 +154,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperCntl::getContext();
 		$orderItem = $this->getOrderItem( '2008-02-15 12:34:56' );
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'getLastStatusItem' );
 		$method->setAccessible( true );
 
@@ -162,7 +162,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $method->invokeArgs( $object, array( $orderItem->getId(), 'typestatus', 'shipped' ) );
 
 		$this->assertNotEquals( false, $result );
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Status\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Status\Iface::class, $result );
 		$this->assertEquals( 'shipped', $result->getValue() );
 	}
 
@@ -171,7 +171,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperCntl::getContext();
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'getLastStatusItem' );
 		$method->setAccessible( true );
 
@@ -186,7 +186,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$context = \TestHelperCntl::getContext();
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'getStockItems' );
 		$method->setAccessible( true );
 
@@ -196,7 +196,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $result ) );
 
 		foreach( $result as $item ) {
-			$this->assertInstanceOf( '\Aimeos\MShop\Stock\Item\Iface', $item );
+			$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $item );
 		}
 	}
 
@@ -207,7 +207,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 
 
-		$orderCouponStub = $this->getMockBuilder( '\Aimeos\MShop\Order\Manager\Base\Coupon\Standard' )
+		$orderCouponStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Coupon\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -218,7 +218,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/coupon', $orderCouponStub );
 
 
-		$couponCodeStub = $this->getMockBuilder( '\Aimeos\MShop\Coupon\Manager\Code\Standard' )
+		$couponCodeStub = $this->getMockBuilder( \Aimeos\MShop\Coupon\Manager\Code\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'increase' ) )
 			->getMock();
@@ -228,7 +228,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'coupon/code', $couponCodeStub );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateCoupons' );
 		$method->setAccessible( true );
 
@@ -243,7 +243,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 
 
-		$orderCouponStub = $this->getMockBuilder( '\Aimeos\MShop\Order\Manager\Base\Coupon\Standard' )
+		$orderCouponStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Coupon\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -254,7 +254,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/coupon', $orderCouponStub );
 
 
-		$couponCodeStub = $this->getMockBuilder( '\Aimeos\MShop\Coupon\Manager\Code\Standard' )
+		$couponCodeStub = $this->getMockBuilder( \Aimeos\MShop\Coupon\Manager\Code\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'increase' ) )
 			->getMock();
@@ -265,13 +265,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'coupon/code', $couponCodeStub );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateCoupons' );
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 
-		$this->setExpectedException( '\Exception' );
+		$this->setExpectedException( \Exception::class );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 
@@ -283,7 +283,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$statusItem = \Aimeos\MShop\Factory::createManager( $context, 'order/status' )->createItem();
 		$statusItem->setValue( 1 );
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'addStatusItem', 'getLastStatusItem' ) )
 			->getMock();
@@ -293,7 +293,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'getLastStatusItem' )
 			->will( $this->returnValue( $statusItem ) );
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStatus' );
 		$method->setAccessible( true );
 		$method->invokeArgs( $object, array( $orderItem, 'type', 1, 0 ) );
@@ -306,7 +306,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 		$statusItem = \Aimeos\MShop\Factory::createManager( $context, 'order/status' )->createItem();
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'addStatusItem', 'getLastStatusItem', 'updateStock' ) )
 			->getMock();
@@ -317,7 +317,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'updateStock' );
 		$object->expects( $this->once() )->method( 'addStatusItem' );
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStatus' );
 		$method->setAccessible( true );
 		$method->invokeArgs( $object, array( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::STOCK_UPDATE, 1, 0 ) );
@@ -330,7 +330,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 		$statusItem = \Aimeos\MShop\Factory::createManager( $context, 'order/status' )->createItem();
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'addStatusItem', 'getLastStatusItem', 'updateCoupons' ) )
 			->getMock();
@@ -341,7 +341,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'updateCoupons' );
 		$object->expects( $this->once() )->method( 'addStatusItem' );
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStatus' );
 		$method->setAccessible( true );
 		$method->invokeArgs( $object, array( $orderItem, \Aimeos\MShop\Order\Item\Status\Base::COUPON_UPDATE, 1, 0 ) );
@@ -354,7 +354,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 
 
-		$orderProductStub = $this->getMockBuilder( '\Aimeos\MShop\Order\Manager\Base\Product\Standard' )
+		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -365,7 +365,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/product', $orderProductStub );
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
+		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'decrease' ) )
 			->getMock();
@@ -375,7 +375,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
 			->getMock();
@@ -384,7 +384,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->never() )->method( 'updateStockSelection' );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStock' );
 		$method->setAccessible( true );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
@@ -397,7 +397,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 
 
-		$orderProductStub = $this->getMockBuilder( '\Aimeos\MShop\Order\Manager\Base\Product\Standard' )
+		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -411,7 +411,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/product', $orderProductStub );
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
+		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'decrease' ) )
 			->getMock();
@@ -421,7 +421,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
 			->getMock();
@@ -430,7 +430,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->never() )->method( 'updateStockSelection' );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStock' );
 		$method->setAccessible( true );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
@@ -443,7 +443,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 
 
-		$orderProductStub = $this->getMockBuilder( '\Aimeos\MShop\Order\Manager\Base\Product\Standard' )
+		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -457,7 +457,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/product', $orderProductStub );
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
+		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'decrease' ) )
 			->getMock();
@@ -467,7 +467,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'updateStockBundle', 'updateStockSelection' ) )
 			->getMock();
@@ -476,7 +476,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'updateStockSelection' );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStock' );
 		$method->setAccessible( true );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
@@ -489,7 +489,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$orderItem = \Aimeos\MShop\Factory::createManager( $context, 'order' )->createItem();
 
 
-		$orderProductStub = $this->getMockBuilder( '\Aimeos\MShop\Order\Manager\Base\Product\Standard' )
+		$orderProductStub = $this->getMockBuilder( \Aimeos\MShop\Order\Manager\Base\Product\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -500,13 +500,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'order/base/product', $orderProductStub );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStock' );
 		$method->setAccessible( true );
 
 		$object = new \Aimeos\Controller\Common\Order\Standard( $context );
 
-		$this->setExpectedException( '\Exception' );
+		$this->setExpectedException( \Exception::class );
 		$method->invokeArgs( $object, array( $orderItem, 1 ) );
 	}
 
@@ -516,7 +516,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperCntl::getContext();
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
+		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
@@ -543,7 +543,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$stockItem3->setStocklevel( 30 );
 
 
-		$object = $this->getMockBuilder( '\Aimeos\Controller\Common\Order\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\Controller\Common\Order\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'getBundleMap', 'getStockItems' ) )
 			->getMock();
@@ -555,7 +555,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 			->will( $this->onConsecutiveCalls( array( $stockItem2, $stockItem1 ), array( $stockItem3 ) ) );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStockBundle' );
 		$method->setAccessible( true );
 		$method->invokeArgs( $object, array( 1, 'default' ) );
@@ -569,7 +569,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$prodId = \Aimeos\MShop\Factory::createManager( $context, 'product' )->findItem( 'U:TEST' )->getId();
 
 
-		$stockStub = $this->getMockBuilder( '\Aimeos\MShop\Stock\Manager\Standard' )
+		$stockStub = $this->getMockBuilder( \Aimeos\MShop\Stock\Manager\Standard::class )
 			->setConstructorArgs( array( $context ) )
 			->setMethods( array( 'saveItem' ) )
 			->getMock();
@@ -581,7 +581,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		\Aimeos\MShop\Factory::injectManager( $context, 'stock', $stockStub );
 
 
-		$class = new \ReflectionClass( '\\Aimeos\\Controller\\Common\\Order\\Standard' );
+		$class = new \ReflectionClass( \Aimeos\Controller\Common\Order\Standard::class );
 		$method = $class->getMethod( 'updateStockSelection' );
 		$method->setAccessible( true );
 

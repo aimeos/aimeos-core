@@ -29,7 +29,7 @@ class PcntlTest extends \PHPUnit\Framework\TestCase
 		$return = $object->start( $fcn, [] )->start( $fcn, [] )->wait();
 		$msec = ( microtime( true ) - $start );
 
-		$this->assertInstanceOf( '\Aimeos\MW\Process\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MW\Process\Iface::class, $return );
 		$this->assertGreaterThan( 1, $msec );
 	}
 

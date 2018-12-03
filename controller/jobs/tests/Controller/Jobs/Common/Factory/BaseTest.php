@@ -40,7 +40,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testInjectController()
 	{
-		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
+		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 		TestAbstract::injectController( 'Test', $cntl );
 	}
 
@@ -48,9 +48,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testAddDecoratorsInvalidName()
 	{
 		$decorators = array( '$' );
-		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
+		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 
-		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'Test_' );
 	}
 
@@ -58,9 +58,9 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testAddDecoratorsInvalidClass()
 	{
 		$decorators = array( 'Test' );
-		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
+		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 
-		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl, $decorators, 'TestDecorator' );
 	}
 
@@ -68,19 +68,19 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	public function testAddDecoratorsInvalidInterface()
 	{
 		$decorators = array( 'Test' );
-		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
+		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 
-		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addDecoratorsPublic( $this->context, $this->aimeos, $cntl,
-			$decorators, '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\' );
+			$decorators, '\Aimeos\Controller\Jobs\Common\Decorator\\' );
 	}
 
 
 	public function testAddControllerDecoratorsInvalidDomain()
 	{
-		$cntl = $this->getMockBuilder( '\Aimeos\Controller\Jobs\Iface' )->getMock();
+		$cntl = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )->getMock();
 
-		$this->setExpectedException( '\\Aimeos\\Controller\\Jobs\\Exception' );
+		$this->setExpectedException( \Aimeos\Controller\Jobs\Exception::class );
 		\Aimeos\Controller\Jobs\Common\Factory\TestAbstract::addControllerDecoratorsPublic( $this->context, $this->aimeos, $cntl, '' );
 	}
 }

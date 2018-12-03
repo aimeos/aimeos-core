@@ -65,12 +65,12 @@ class Standard implements \Aimeos\MW\View\Iface
 		{
 			if( ctype_alnum( $name ) === false )
 			{
-				$classname = is_string( $name ) ? '\\Aimeos\\MW\\View\\Helper\\' . $name : '<not a string>';
+				$classname = is_string( $name ) ? '\Aimeos\MW\View\Helper\\' . $name : '<not a string>';
 				throw new \Aimeos\MW\View\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 			}
 
-			$iface = '\\Aimeos\\MW\\View\\Helper\\Iface';
-			$classname = '\\Aimeos\\MW\\View\\Helper\\' . ucfirst( $name ) . '\\Standard';
+			$iface = \Aimeos\MW\View\Helper\Iface::class;
+			$classname = '\Aimeos\MW\View\Helper\\' . ucfirst( $name ) . '\Standard';
 
 			if( class_exists( $classname ) === false ) {
 				throw new \Aimeos\MW\View\Exception( sprintf( 'Class "%1$s" not available', $classname ) );

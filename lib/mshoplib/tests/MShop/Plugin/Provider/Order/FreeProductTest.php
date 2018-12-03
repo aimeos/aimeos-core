@@ -76,7 +76,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'freeproduct.count', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 
@@ -89,7 +89,7 @@ class FreeProductTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdateInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Common\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->update( $this->order, 'addProduct.after' );
 	}
 

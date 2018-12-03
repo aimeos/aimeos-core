@@ -280,7 +280,7 @@ class Standard
 		 *  mshop/attribute/manager/property/decorators/local = array( 'decorator2' )
 		 *
 		 * This would add the decorator named "decorator2" defined by
-		 * "\Aimeos\MShop\Attribute\Manager\Property\\Decorator\Decorator2" only to
+		 * "\Aimeos\MShop\Attribute\Manager\Property\Decorator\Decorator2" only to
 		 * the attribute property manager.
 		 *
 		 * @param array List of decorator names

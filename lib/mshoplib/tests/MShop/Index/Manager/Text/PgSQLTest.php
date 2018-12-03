@@ -40,7 +40,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 		$list = $this->object->getSearchAttributes();
 
 		foreach( $list as $attribute ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
 		}
 	}
 }

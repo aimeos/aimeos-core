@@ -78,7 +78,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->add( 'test' );
 		$msg = $this->object->get();
 
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $msg );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $msg );
 
 		$this->object->del( $msg );
 
@@ -93,13 +93,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$msg1 = $this->object->get();
 
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $msg1 );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $msg1 );
 
 		$this->object->del( $msg1 );
 
 		$msg2 = $this->object->get();
 
-		$this->assertInstanceOf( '\Aimeos\MW\MQueue\Message\Iface', $msg2 );
+		$this->assertInstanceOf( \Aimeos\MW\MQueue\Message\Iface::class, $msg2 );
 
 		$this->object->del( $msg2 );
 

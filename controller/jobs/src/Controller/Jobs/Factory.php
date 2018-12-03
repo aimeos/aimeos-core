@@ -20,7 +20,7 @@ namespace Aimeos\Controller\Jobs;
  */
 class Factory
 {
-	static private $prefix = '\\Aimeos\\Controller\\Jobs';
+	static private $prefix = '\Aimeos\Controller\Jobs';
 
 
 	/**
@@ -56,7 +56,7 @@ class Factory
 			$parts[$key] = ucwords( $part );
 		}
 
-		$factory = '\\Aimeos\\Controller\\Jobs\\' . join( '\\', $parts ) . '\\Factory';
+		$factory = '\Aimeos\Controller\Jobs\\' . join( '\\', $parts ) . '\Factory';
 
 		if( class_exists( $factory ) === false ) {
 			throw new \Aimeos\Controller\Jobs\Exception( sprintf( 'Class "%1$s" not found', $factory ) );

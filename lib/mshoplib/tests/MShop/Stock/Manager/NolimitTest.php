@@ -36,7 +36,7 @@ class NolimitTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Stock\\Item\\Iface', $this->object->getItem( -1 ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $this->object->getItem( -1 ) );
 	}
 
 

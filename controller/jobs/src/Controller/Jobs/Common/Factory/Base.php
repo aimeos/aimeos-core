@@ -50,7 +50,7 @@ abstract class Base
 	protected static function addDecorators( \Aimeos\MShop\Context\Item\Iface $context, \Aimeos\Bootstrap $aimeos,
 		\Aimeos\Controller\Jobs\Iface $controller, array $decorators, $classprefix )
 	{
-		$iface = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\Iface';
+		$iface = \Aimeos\Controller\Jobs\Common\Decorator\Iface::class;
 
 		foreach( $decorators as $name )
 		{
@@ -128,14 +128,14 @@ abstract class Base
 			}
 		}
 
-		$classprefix = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\';
+		$classprefix = '\Aimeos\Controller\Jobs\Common\Decorator\\';
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\Controller\\Jobs\\Common\\Decorator\\';
+		$classprefix = '\Aimeos\Controller\Jobs\Common\Decorator\\';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/global', [] );
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 
-		$classprefix = '\\Aimeos\\Controller\\Jobs\\' . ucfirst( $localClass ) . '\\Decorator\\';
+		$classprefix = '\Aimeos\Controller\Jobs\\' . ucfirst( $localClass ) . '\Decorator\\';
 		$decorators = $config->get( 'controller/jobs/' . $domain . '/decorators/local', [] );
 		$controller = self::addDecorators( $context, $aimeos, $controller, $decorators, $classprefix );
 

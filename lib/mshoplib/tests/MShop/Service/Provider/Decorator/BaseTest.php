@@ -29,7 +29,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			throw new \RuntimeException( 'No order base item found' );
 		}
 
-		$this->mock = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Payment\\PrePay' )
+		$this->mock = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Payment\PrePay::class )
 			->setConstructorArgs( array( $this->context, $item ) )
 			->setMethods( array( 'calcPrice', 'checkConfigBE', 'checkConfigFE', 'getConfigBE',
 				'getConfigFE', 'injectGlobalConfigBE', 'isAvailable', 'isImplemented', 'query',
@@ -59,7 +59,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 		$this->mock->expects( $this->once() )->method( 'calcPrice' )->will( $this->returnValue( $item->getPrice() ) );
 
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Price\\Item\\Iface', $this->object->calcPrice( $item ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Price\Item\Iface::class, $this->object->calcPrice( $item ) );
 	}
 
 
@@ -204,27 +204,27 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdatePush()
 	{
-		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
-		$response = $this->getMockBuilder( '\Psr\Http\Message\ResponseInterface' )->getMock();
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'updatePush' )->will( $this->returnValue( $response ) );
 
 		$result = $this->object->updatePush( $request, $response );
 
-		$this->assertInstanceOf( '\Psr\Http\Message\ResponseInterface', $result );
+		$this->assertInstanceOf( \Psr\Http\Message\ResponseInterface::class, $result );
 	}
 
 
 	public function testUpdateSync()
 	{
 		$orderItem = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
-		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$this->mock->expects( $this->once() )->method( 'updateSync' )->will( $this->returnValue( $orderItem ) );
 
 		$result = $this->object->updateSync( $request, $orderItem );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 	}
 }
 

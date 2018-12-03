@@ -70,12 +70,12 @@ class Factory
 
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\\Aimeos\\MAdmin\\Job\\Manager\\' . $name : '<not a string>';
+			$classname = is_string( $name ) ? '\Aimeos\MAdmin\Job\Manager\\' . $name : '<not a string>';
 			throw new \Aimeos\MAdmin\Job\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = '\\Aimeos\\MAdmin\\Job\\Manager\\Iface';
-		$classname = '\\Aimeos\\MAdmin\\Job\\Manager\\' . $name;
+		$iface = \Aimeos\MAdmin\Job\Manager\Iface::class;
+		$classname = '\Aimeos\MAdmin\Job\Manager\\' . $name;
 
 		$manager = self::createManagerBase( $context, $classname, $iface );
 

@@ -42,7 +42,7 @@ class MShopAddAttributeData extends MShopAddDataAbstract
 	 */
 	protected function process()
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$site = $this->additional->getLocale()->getSite()->getCode();
 		$this->msg( sprintf( 'Adding default attribute data for site "%1$s"', $site ), 0 );

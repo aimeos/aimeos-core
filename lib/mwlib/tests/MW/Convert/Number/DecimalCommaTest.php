@@ -9,7 +9,7 @@ class DecimalCommaTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\Convert\Number\DecimalComma();
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Convert\Iface::class, $object );
 		$this->assertEquals( '2.00', $object->translate( '2,00' ) );
 	}
 
@@ -18,7 +18,7 @@ class DecimalCommaTest extends \PHPUnit\Framework\TestCase
 	{
 		$object = new \Aimeos\MW\Convert\Number\DecimalComma();
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Convert\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Convert\Iface::class, $object );
 		$this->assertEquals( '1,0', $object->reverse( '1.0' ) );
 	}
 }

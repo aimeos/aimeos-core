@@ -42,7 +42,7 @@ class LogAddTestData extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function migrate()
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$this->msg( 'Adding admin log test data', 0 );
 		$this->additional->setEditor( 'core:unittest' );

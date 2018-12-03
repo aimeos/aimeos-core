@@ -30,7 +30,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MAdmin\\Cache\\Item\\Iface', $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MAdmin\Cache\Item\Iface::class, $this->object->createItem() );
 	}
 
 
@@ -45,14 +45,14 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attr ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attr );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attr );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -69,7 +69,7 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetItem()
 	{
-		$this->setExpectedException( '\\Aimeos\\MAdmin\\Cache\\Exception' );
+		$this->setExpectedException( \Aimeos\MAdmin\Cache\Exception::class );
 		$this->object->getItem( 'unittest' );
 	}
 
@@ -80,6 +80,6 @@ class NoneTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->saveItem( $item );
 		$this->object->deleteItem( $item->getId() );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $result );
 	}
 }

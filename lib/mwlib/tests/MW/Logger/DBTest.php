@@ -100,7 +100,7 @@ class DBTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'error', $row['message'] );
 
 
-		$this->setExpectedException('\\Aimeos\\MW\\Logger\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Logger\Exception::class );
 		$this->object->log( 'wrong log level', -1);
 	}
 

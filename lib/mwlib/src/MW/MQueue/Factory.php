@@ -32,7 +32,7 @@ class Factory
 			throw new \Aimeos\MW\MQueue\Exception( 'Message queue not configured' );
 		}
 
-		$classname = '\\Aimeos\\MW\\MQueue\\' . ucfirst( (string) $config['adapter'] );
+		$classname = '\Aimeos\MW\MQueue\\' . ucfirst( (string) $config['adapter'] );
 
 		if( !class_exists( $classname ) ) {
 			throw new \Aimeos\MW\MQueue\Exception( sprintf( 'Message queue "%1$s" not found', $config['adapter'] ) );

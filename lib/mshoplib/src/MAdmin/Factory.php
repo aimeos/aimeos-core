@@ -89,7 +89,7 @@ class Factory
 
 			if( !isset( self::$managers[$id][$name] ) )
 			{
-				$factory = '\\Aimeos\\MAdmin\\' . ucwords( $name ) . '\\Manager\\Factory';
+				$factory = '\Aimeos\MAdmin\\' . ucwords( $name ) . '\Manager\Factory';
 
 				if( class_exists( $factory ) === false ) {
 					throw new \Aimeos\MAdmin\Exception( sprintf( 'Class "%1$s" not available', $factory ) );

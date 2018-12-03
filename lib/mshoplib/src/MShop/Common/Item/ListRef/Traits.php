@@ -125,7 +125,7 @@ trait Traits
 	{
 		foreach( $items as $item )
 		{
-			\Aimeos\MW\Common\Base::checkClass( '\Aimeos\MShop\Common\Item\Lists\Iface', $item );
+			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Common\Item\Lists\Iface::class, $item );
 
 			$refItem = ( $all === true ? $item->getRefItem() : null );
 			$this->deleteListItem( $item->getDomain(), $item, $refItem );
@@ -193,7 +193,7 @@ trait Traits
 		$result = [];
 		$this->prepareListItems();
 
-		$iface = '\\Aimeos\\MShop\\Common\\Item\\Typeid\\Iface';
+		$iface = \Aimeos\MShop\Common\Item\Typeid\Iface::class;
 		$listTypes = ( is_array( $listtype ) ? $listtype : array( $listtype ) );
 		$types = ( is_array( $type ) ? $type : array( $type ) );
 
@@ -207,7 +207,7 @@ trait Traits
 			foreach( $list as $id => $item )
 			{
 				$refItem = $item->getRefItem();
-				$iface = '\Aimeos\MShop\Common\Item\Typeid\Iface';
+				$iface = \Aimeos\MShop\Common\Item\Typeid\Iface::class;
 
 				if( $type && ( !$refItem || !($refItem instanceof $iface) || !in_array( $refItem->getType(), $types ) ) ) {
 					continue;

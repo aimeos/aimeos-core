@@ -60,7 +60,7 @@ abstract class Base
 			return $this->getObject()->createItem();
 		}
 
-		$iface = '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface';
+		$iface = \Aimeos\MShop\Order\Item\Base\Iface::class;
 
 		if( ( $order = unserialize( $serorder ) ) === false || !( $order instanceof $iface ) )
 		{

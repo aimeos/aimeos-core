@@ -21,7 +21,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->context = \TestHelperMShop::getContext();
 		$serviceItem = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->object = $this->getMockBuilder( '\Aimeos\MShop\Service\Provider\Base' )
+		$this->object = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Base::class )
 			->setConstructorArgs( [$this->context, $serviceItem] )
 			->setMethods( null )
 			->getMock();
@@ -77,7 +77,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 	{
 		$item = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Service\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
 		$this->object->query( $item );
 	}
 
@@ -90,25 +90,25 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testUpdatePush()
 	{
-		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
-		$response = $this->getMockBuilder( '\Psr\Http\Message\ResponseInterface' )->getMock();
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
+		$response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
 
 		$response->expects( $this->once() )->method( 'withStatus' )->will( $this->returnValue( $response ) );
 
 		$result = $this->object->updatePush( $request, $response );
 
-		$this->assertInstanceOf( '\Psr\Http\Message\ResponseInterface', $result );
+		$this->assertInstanceOf( \Psr\Http\Message\ResponseInterface::class, $result );
 	}
 
 
 	public function testUpdateSync()
 	{
 		$orderItem = \Aimeos\MShop\Order\Manager\Factory::createManager( $this->context )->createItem();
-		$request = $this->getMockBuilder( '\Psr\Http\Message\ServerRequestInterface' )->getMock();
+		$request = $this->getMockBuilder( \Psr\Http\Message\ServerRequestInterface::class )->getMock();
 
 		$result = $this->object->updateSync( $request, $orderItem );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Order\Item\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Iface::class, $result );
 	}
 
 
@@ -276,7 +276,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckConfigInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Service\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Service\Exception::class );
 
 		$args = array( array( 'key' => array( 'type' => 'invalid', 'required' => true ) ), array( 'key' => 'abc' ) );
 		$this->access( 'checkConfig' )->invokeArgs( $this->object, $args );
@@ -294,7 +294,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetCustomerData()
 	{
-		$stub = $this->getMockBuilder( '\Aimeos\MShop\Customer\Manager\Lists\Standard' )
+		$stub = $this->getMockBuilder( \Aimeos\MShop\Customer\Manager\Lists\Standard::class )
 			->setConstructorArgs( [$this->context] )
 			->setMethods( ['saveItem'] )
 			->getMock();
@@ -312,7 +312,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	protected function access( $name )
 	{
-		$class = new \ReflectionClass( '\Aimeos\MShop\Service\Provider\Base' );
+		$class = new \ReflectionClass( \Aimeos\MShop\Service\Provider\Base::class );
 		$method = $class->getMethod( $name );
 		$method->setAccessible( true );
 

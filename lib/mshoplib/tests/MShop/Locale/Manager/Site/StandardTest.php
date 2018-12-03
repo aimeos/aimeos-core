@@ -31,20 +31,20 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $this->object->createItem() );
 	}
 
 
 	public function testSaveInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MW\Common\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 
 
 	public function testSaveIdException()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
 		$this->object->saveItem( $this->object->createItem() );
 	}
 
@@ -92,10 +92,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getItem( $item->getId() );
 	}
 
@@ -120,7 +120,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$actual = $this->object->getItem( $expected->getId() );
 
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Locale\\Item\\Site\\Iface', $actual );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $actual );
 		$this->assertEquals( $expected, $actual );
 	}
 
@@ -175,14 +175,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
 		}
 	}
 
 
 	public function testGetSubManager()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager( 'unknown' );
 	}
 
@@ -222,7 +222,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetTreeNoId()
 	{
-		$object = $this->getMockBuilder( '\Aimeos\MShop\Locale\Manager\Site\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\MShop\Locale\Manager\Site\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -230,13 +230,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->returnValue( array( $object->createItem() ) ) );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $object->getTree() );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $object->getTree() );
 	}
 
 
 	public function testGetTreeNoItem()
 	{
-		$object = $this->getMockBuilder( '\Aimeos\MShop\Locale\Manager\Site\Standard' )
+		$object = $this->getMockBuilder( \Aimeos\MShop\Locale\Manager\Site\Standard::class )
 			->setConstructorArgs( array( $this->context ) )
 			->setMethods( array( 'searchItems' ) )
 			->getMock();
@@ -244,7 +244,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$object->expects( $this->once() )->method( 'searchItems' )
 			->will( $this->returnValue( [] ) );
 
-		$this->setExpectedException( '\Aimeos\MShop\Locale\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
 		$object->getTree();
 	}
 
@@ -284,7 +284,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testMoveItem()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
 		$this->object->moveItem( null, null, null );
 	}
 }

@@ -41,7 +41,7 @@ class MShopAddCodeDataUnitperf extends \Aimeos\MW\Setup\Task\MShopAddCodeData
 	 */
 	public function migrate()
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->additional );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Context\Item\Iface::class, $this->additional );
 
 		$site = $this->additional->getLocale()->getSite()->getCode();
 		$this->msg( sprintf( 'Adding default code data for site "%1$s"', $site ), 0 ); $this->status( '' );

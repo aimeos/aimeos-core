@@ -74,7 +74,7 @@ test template
 	public function testGet()
 	{
 		$template = $this->object->get('TEMPLATE');
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Template\\Iface', $template );
+		$this->assertInstanceOf( \Aimeos\MW\Template\Iface::class, $template );
 
 		$this->assertEquals('
 test template
@@ -89,7 +89,7 @@ test template
 
 	public function testGetBeginIsNotDefined()
 	{
-		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Template\Exception::class );
 		$this->object->get('NOTDEFINED');
 	}
 
@@ -113,7 +113,7 @@ test template
 
 		$object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 
-		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Template\Exception::class );
 		$object->get('ITEM');
 	}
 
@@ -168,14 +168,14 @@ test template
 
 		$object = new \Aimeos\MW\Template\Base( $template, '<!--###$-->', '<!--$###-->' );
 
-		$this->setExpectedException('\\Aimeos\\MW\\Template\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Template\Exception::class );
 		$object->substitute( array('ITEM'=>'Title' ) );
 	}
 
 	public function testStr()
 	{
 		$template = $this->object->get('TEMPLATE');
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Template\\Iface', $template );
+		$this->assertInstanceOf( \Aimeos\MW\Template\Iface::class, $template );
 
 		$this->assertEquals('
 test template

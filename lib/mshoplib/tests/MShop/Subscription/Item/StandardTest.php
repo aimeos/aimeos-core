@@ -49,17 +49,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
 		$return = $this->object->setId( 15 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( 15, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 6 );
 	}
 
@@ -77,7 +77,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setOrderBaseId( 15 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( 15, $this->object->getOrderBaseId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -91,7 +91,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setOrderProductId( 15 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( 15, $this->object->getOrderProductId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -105,7 +105,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateNext( '2018-01-01' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( '2018-01-01', $this->object->getDateNext() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -119,11 +119,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateEnd( '2020-01-01' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( '2020-01-01', $this->object->getDateEnd() );
 		$this->assertTrue( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setDateEnd( '2008-34-12' );
 	}
 
@@ -136,7 +136,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setInterval( 'P0Y1M0W0D' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( 'P0Y1M0W0D', $this->object->getInterval() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -150,7 +150,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setReason( 1 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( 1, $this->object->getReason() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -159,7 +159,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setReason( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getReason() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -168,7 +168,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setReason( '-1' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( -1, $this->object->getReason() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -182,7 +182,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Subscription\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Subscription\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}

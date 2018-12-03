@@ -24,7 +24,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 		$servManager = \Aimeos\MShop\Service\Manager\Factory::createManager( $this->context );
 		$this->servItem = $servManager->createItem();
 
-		$this->mockProvider = $this->getMockBuilder( '\\Aimeos\\MShop\\Service\\Provider\\Decorator\\Example' )
+		$this->mockProvider = $this->getMockBuilder( \Aimeos\MShop\Service\Provider\Decorator\Example::class )
 			->disableOriginalConstructor()->getMock();
 
 		$this->object = new \Aimeos\MShop\Service\Provider\Decorator\Download( $this->mockProvider, $this->context, $this->servItem );
@@ -33,7 +33,7 @@ class DownloadTest extends \PHPUnit\Framework\TestCase
 
 	protected function tearDown()
 	{
-		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\\Aimeos\\MShop\\Order\\Manager\\StandardMock', null );
+		\Aimeos\MShop\Order\Manager\Factory::injectManager( '\Aimeos\MShop\Order\Manager\StandardMock', null );
 	}
 
 

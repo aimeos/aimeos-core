@@ -99,7 +99,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'max-value', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 
@@ -123,7 +123,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->order->addProduct( $this->products['CNC'] );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
@@ -133,7 +133,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->products['CNE']->setQuantity( 6 );
 		$this->order->addProduct( $this->products['CNE'] );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
@@ -142,7 +142,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 	{
 		$this->order->addProduct( $this->products['CNE'] );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 
@@ -152,7 +152,7 @@ class BasketLimitsTest extends \PHPUnit\Framework\TestCase
 		$this->products['CNC']->setQuantity( 2 );
 		$this->order->addProduct( $this->products['CNC'] );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Plugin\\Provider\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Plugin\Provider\Exception::class );
 		$this->object->update( $this->order, 'check.after', \Aimeos\MShop\Order\Item\Base\Base::PARTS_PRODUCT );
 	}
 }

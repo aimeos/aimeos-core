@@ -248,7 +248,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Subscription\\Item\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Subscription\Item\Iface::class, $item );
 
 		if( $item->getOrderProductId() === null ) {
 			throw new \Aimeos\MShop\Subscription\Exception( 'Required order product ID is missing' );

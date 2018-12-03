@@ -17,8 +17,8 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$object = \Aimeos\MW\Media\Factory::get( __DIR__ . $ds .'_testfiles' . $ds . 'image.png' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Iface', $object );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Image\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Image\Iface::class, $object );
 		$this->assertEquals( 'image/png', $object->getMimetype() );
 	}
 
@@ -28,8 +28,8 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$resource = fopen( __DIR__ . $ds .'_testfiles' . $ds . 'image.png', 'rw' );
 		$object = \Aimeos\MW\Media\Factory::get( $resource );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Iface', $object );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Image\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Image\Iface::class, $object );
 		$this->assertEquals( 'image/png', $object->getMimetype() );
 	}
 
@@ -39,8 +39,8 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$content = file_get_contents( __DIR__ . $ds .'_testfiles' . $ds . 'image.png' );
 		$object = \Aimeos\MW\Media\Factory::get( $content );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Iface', $object );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Image\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Image\Iface::class, $object );
 		$this->assertEquals( 'image/png', $object->getMimetype() );
 	}
 
@@ -50,8 +50,8 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$object = \Aimeos\MW\Media\Factory::get( __DIR__ . $ds . '_testfiles' . $ds . 'application.txt' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Iface', $object );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Media\\Application\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Iface::class, $object );
+		$this->assertInstanceOf( \Aimeos\MW\Media\Application\Iface::class, $object );
 		$this->assertEquals( 'text/plain', $object->getMimetype() );
 	}
 }

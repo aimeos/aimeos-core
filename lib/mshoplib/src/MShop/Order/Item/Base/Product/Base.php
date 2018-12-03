@@ -49,7 +49,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	{
 		parent::__construct( 'order.base.product.', $values );
 
-		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $attributes );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $attributes );
 		$this->attributes = $attributes;
 	}
 
@@ -166,7 +166,7 @@ abstract class Base extends \Aimeos\MShop\Order\Item\Base implements Iface
 	 */
 	public function setAttributeItems( array $attributes )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface', $attributes );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Order\Item\Base\Product\Attribute\Iface::class, $attributes );
 
 		$this->attributes = $attributes;
 		$this->attributesMap = null;

@@ -40,7 +40,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Invalid characters in provider name "%1$s"', $providername ) );
 		}
 
-		$classname = '\\Aimeos\\MShop\\Coupon\\Provider\\' . $providername;
+		$classname = '\Aimeos\MShop\Coupon\Provider\\' . $providername;
 
 		if( class_exists( $classname ) === false ) {
 			throw new \Aimeos\MShop\Coupon\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
@@ -49,7 +49,7 @@ abstract class Base
 		$context = $this->getContext();
 		$provider = new $classname( $context, $item, $code );
 
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Coupon\\Provider\\Factory\\Iface', $provider );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Coupon\Provider\Factory\Iface::class, $provider );
 
 		/** mshop/coupon/provider/decorators
 		 * Adds a list of decorators to all coupon provider objects automatcally
@@ -97,7 +97,7 @@ abstract class Base
 	protected function addCouponDecorators( \Aimeos\MShop\Coupon\Item\Iface $item, $code,
 		\Aimeos\MShop\Coupon\Provider\Iface $provider, array $names )
 	{
-		$classprefix = '\\Aimeos\\MShop\\Coupon\\Provider\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\Coupon\Provider\Decorator\\';
 
 		foreach( $names as $name )
 		{
@@ -113,7 +113,7 @@ abstract class Base
 
 			$provider = new $classname( $provider, $this->getContext(), $item, $code );
 
-			\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Coupon\\Provider\\Decorator\\Iface', $provider );
+			\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Coupon\Provider\Decorator\Iface::class, $provider );
 		}
 
 		return $provider;

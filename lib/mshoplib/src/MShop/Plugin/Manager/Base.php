@@ -48,7 +48,7 @@ abstract class Base
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Invalid characters in provider name "%1$s"', $provider ) );
 		}
 
-		$classname = '\\Aimeos\\MShop\\Plugin\\Provider\\' . $type . '\\' . $provider;
+		$classname = '\Aimeos\MShop\Plugin\Provider\\' . $type . '\\' . $provider;
 
 		if( class_exists( $classname ) === false ) {
 			throw new \Aimeos\MShop\Plugin\Exception( sprintf( 'Class "%1$s" not available', $classname ) );
@@ -58,7 +58,7 @@ abstract class Base
 		$config = $context->getConfig();
 		$provider = new $classname( $context, $item );
 
-		self::checkClass( '\\Aimeos\\MShop\\Plugin\\Provider\\Factory\\Iface', $provider );
+		self::checkClass( \Aimeos\MShop\Plugin\Provider\Factory\Iface::class, $provider );
 
 		/** mshop/plugin/provider/order/decorators
 		 * Adds a list of decorators to all order plugin provider objects automatcally
@@ -134,7 +134,7 @@ abstract class Base
 	protected function addPluginDecorators( \Aimeos\MShop\Plugin\Item\Iface $pluginItem,
 		\Aimeos\MShop\Plugin\Provider\Iface $provider, array $names )
 	{
-		$classprefix = '\\Aimeos\\MShop\\Plugin\\Provider\\Decorator\\';
+		$classprefix = '\Aimeos\MShop\Plugin\Provider\Decorator\\';
 
 		foreach( $names as $name )
 		{
@@ -150,7 +150,7 @@ abstract class Base
 
 			$provider = new $classname( $this->getContext(), $pluginItem, $provider );
 
-			self::checkClass( '\\Aimeos\\MShop\\Plugin\\Provider\\Decorator\\Iface', $provider );
+			self::checkClass( \Aimeos\MShop\Plugin\Provider\Decorator\Iface::class, $provider );
 		}
 
 		return $provider;

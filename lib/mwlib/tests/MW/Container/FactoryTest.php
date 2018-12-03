@@ -15,12 +15,12 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testFactory()
 	{
 		$object = \Aimeos\MW\Container\Factory::getContainer( 'tempfile', 'Zip', 'CSV', [] );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Container\\Iface', $object );
+		$this->assertInstanceOf( \Aimeos\MW\Container\Iface::class, $object );
 	}
 
 	public function testFactoryFail()
 	{
-		$this->setExpectedException('\\Aimeos\\MW\\Container\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Container\Exception::class );
 		\Aimeos\MW\Container\Factory::getContainer( 'tempfile', 'notDefined', 'invalid' );
 	}
 }

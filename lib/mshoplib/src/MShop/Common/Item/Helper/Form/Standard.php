@@ -38,7 +38,7 @@ class Standard implements \Aimeos\MShop\Common\Item\Helper\Form\Iface
 	 */
 	public function __construct( $url = '', $method = '', array $values = [], $external = true, $html = '' )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $values );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Criteria\Attribute\Iface::class, $values );
 
 		$this->url = (string) $url;
 		$this->external = (bool) $external;

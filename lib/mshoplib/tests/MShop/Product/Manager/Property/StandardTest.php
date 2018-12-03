@@ -37,13 +37,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testCreateItem()
 	{
 		$item = $this->object->createItem();
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Item\\Property\\Iface', $item );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $item );
 	}
 
 
 	public function testSaveInvalid()
 	{
-		$this->setExpectedException( '\Aimeos\MW\Common\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->saveItem( new \Aimeos\MShop\Locale\Item\Standard() );
 	}
 
@@ -97,10 +97,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( $itemExp->getTimeCreated(), $itemUpd->getTimeCreated() );
 		$this->assertRegExp( '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/', $itemUpd->getTimeModified() );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultSaved );
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $resultUpd );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultSaved );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $resultUpd );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getItem( $itemSaved->getId() );
 	}
 
@@ -137,7 +137,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetSearchAttributes()
 	{
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
 		}
 	}
 
@@ -191,17 +191,17 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSubManager()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager('type') );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $this->object->getSubManager('type', 'Standard') );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager('type') );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $this->object->getSubManager('type', 'Standard') );
 
-		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager('unknown');
 	}
 
 
 	public function testGetSubManagerInvalidName()
 	{
-		$this->setExpectedException('\\Aimeos\\MShop\\Exception');
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->getSubManager('type', 'unknown');
 	}
 }

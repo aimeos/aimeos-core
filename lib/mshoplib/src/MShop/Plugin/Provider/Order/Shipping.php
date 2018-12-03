@@ -101,7 +101,7 @@ class Shipping
 	 */
 	public function update( \Aimeos\MW\Observer\Publisher\Iface $order, $action, $value = null )
 	{
-		\Aimeos\MW\Common\Base::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $order );
+		\Aimeos\MW\Common\Base::checkClass( \Aimeos\MShop\Order\Item\Base\Iface::class, $order );
 
 		$config = $this->getItemBase()->getConfig();
 		if( !isset( $config['threshold'] ) ) { return true; }

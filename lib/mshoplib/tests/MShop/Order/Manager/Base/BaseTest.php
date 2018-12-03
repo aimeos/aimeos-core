@@ -34,7 +34,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$this->object->setSession( $order, 'test' );
 		$session = $this->object->getSession( 'test' );
 
-		$this->assertInstanceof( '\\Aimeos\\MShop\\Order\\Item\\Base\\Iface', $session );
+		$this->assertInstanceOf( \Aimeos\MShop\Order\Item\Base\Iface::class, $session );
 		$this->assertEquals( 'test comment', $order->getComment() );
 		$this->assertEquals( $order, $session );
 	}

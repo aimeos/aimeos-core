@@ -46,7 +46,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 	 */
 	public static function autoload( $classname )
 	{
-		if( strncmp( $classname, 'Aimeos\\MW\\Setup\\Task\\', 21 ) === 0 )
+		if( strncmp( $classname, 'Aimeos\MW\Setup\Task\\', 21 ) === 0 )
 		{
 			$fileName = substr( $classname, 21 ) . '.php';
 
@@ -79,7 +79,7 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Invalid database adapter "%1$s"', $adapter ) );
 		}
 
-		$classname = '\\Aimeos\\MW\\Setup\\DBSchema\\' . ucwords( strtolower( $adapter ) );
+		$classname = '\Aimeos\MW\Setup\DBSchema\\' . ucwords( strtolower( $adapter ) );
 
 		if( class_exists( $classname ) === false ) {
 			throw new \Aimeos\MW\Setup\Exception( sprintf( 'Database schema class "%1$s" not found', $classname ) );
@@ -124,17 +124,17 @@ abstract class Base implements \Aimeos\MW\Setup\Manager\Iface
 				$this->includeFile( $item->getPathName() );
 
 				$taskname = substr( $item->getFilename(), 0, -4 );
-				$classname = '\\Aimeos\\MW\\Setup\\Task\\' . $taskname;
+				$classname = '\Aimeos\MW\Setup\Task\\' . $taskname;
 
 				if( class_exists( $classname ) === false ) {
 					throw new \Aimeos\MW\Setup\Exception( sprintf( 'Class "%1$s" not found', $classname ) );
 				}
 
-				$interface = '\\Aimeos\\MW\\Setup\\Task\\Iface';
+				$interface = \Aimeos\MW\Setup\Task\Iface::class;
 				$task = new $classname( $schema, $conn, $additional, $paths );
 
 				if( ( $task instanceof $interface ) === false ) {
-					throw new \Aimeos\MW\Setup\Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, '\\Aimeos\\MW\\Setup\\Task\\Iface' ) );
+					throw new \Aimeos\MW\Setup\Exception( sprintf( 'Class "%1$s" doesn\'t implement "%2$s"', $classname, '\Aimeos\MW\Setup\Task\Iface' ) );
 				}
 
 				$tasks[$taskname] = $task;

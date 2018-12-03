@@ -92,7 +92,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'newName' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
 		$this->assertEquals( 'newName', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -125,7 +125,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCode( 'neuerUser@unittest.com' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
 		$this->assertEquals( 'neuerUser@unittest.com', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -148,7 +148,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setPassword( '08154712' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
 		$this->assertEquals( '08154712', $this->object->getPassword() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -177,7 +177,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setBirthday( '2010-02-01' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
 		$this->assertEquals( '2010-02-01', $this->object->getBirthday() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -191,7 +191,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateVerified( '2010-02-01' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
 		$this->assertEquals( '2010-02-01', $this->object->getDateVerified() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -241,7 +241,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->address->setCompany( 'unitCompany0815' );
 		$return = $this->object->setPaymentAddress( $this->address );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Iface::class, $return );
 		$this->assertEquals( $this->address, $this->object->getPaymentAddress() );
 	}
 
@@ -255,7 +255,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $list as $item )
 		{
 			$this->assertEquals( $i++, $item->getPosition() );
-			$this->assertInstanceOf( '\Aimeos\MShop\Customer\Item\Address\Iface', $item );
+			$this->assertInstanceOf( \Aimeos\MShop\Customer\Item\Address\Iface::class, $item );
 		}
 	}
 

@@ -91,7 +91,7 @@ class Factory
 
 			if( self::$cache === false || !isset( self::$managers[$id][$domain] ) )
 			{
-				$factory = '\\Aimeos\\MShop\\' . ucwords( $domain ) . '\\Manager\\Factory';
+				$factory = '\Aimeos\MShop\\' . ucwords( $domain ) . '\Manager\Factory';
 
 				if( class_exists( $factory ) === false ) {
 					throw new \Aimeos\MShop\Exception( sprintf( 'Class "%1$s" not available', $factory ) );

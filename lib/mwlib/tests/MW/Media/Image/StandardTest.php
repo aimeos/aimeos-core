@@ -50,7 +50,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$ds = DIRECTORY_SEPARATOR;
 		$content = file_get_contents( dirname( __DIR__ ) . $ds . '_testfiles' . $ds . 'application.txt' );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
 		new \Aimeos\MW\Media\Image\Standard( $content, 'text/plain', [] );
 	}
 
@@ -88,7 +88,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', [] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
 		$media->save( $dest, 'image/gif' );
 	}
 
@@ -115,7 +115,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/png', [] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
 		$media->save( $dest, 'image/jpeg' );
 	}
 
@@ -142,7 +142,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$media = new \Aimeos\MW\Media\Image\Standard( $content, 'image/gif', [] );
 
-		$this->setExpectedException( '\\Aimeos\\MW\\Media\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Media\Exception::class );
 		$media->save( $dest, 'image/png' );
 	}
 

@@ -38,7 +38,7 @@ class Directory
 	 */
 	public function __construct( $resourcepath, $format, array $options = [] )
 	{
-		$this->classname = '\\Aimeos\\MW\\Container\\Content\\' . $format;
+		$this->classname = '\Aimeos\MW\Container\Content\\' . $format;
 
 		if( class_exists( $this->classname ) === false ) {
 			throw new \Aimeos\MW\Container\Exception( sprintf( 'Unknown format "%1$s"', $format ) );

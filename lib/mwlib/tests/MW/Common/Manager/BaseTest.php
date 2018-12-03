@@ -16,7 +16,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	protected function setUp()
 	{
-		$this->object = $this->getMockForAbstractClass( '\Aimeos\MW\Common\Manager\Base' );
+		$this->object = $this->getMockForAbstractClass( \Aimeos\MW\Common\Manager\Base::class );
 	}
 
 
@@ -38,7 +38,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$criteria->setSortations( array( $criteria->sort( '+', 'sort:list(\'key\')' ) ) );
 
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getCriteriaKeyList' );
 		$method->setAccessible( true );
 
@@ -61,7 +61,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			'function' => $func,
 		);
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchFunctions' );
 		$method->setAccessible( true );
 
@@ -80,7 +80,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			'label' => 'test',
 		);
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchTranslations' );
 		$method->setAccessible( true );
 
@@ -100,7 +100,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		);
 		$attr = new \Aimeos\MW\Criteria\Attribute\Standard( $args );
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchTranslations' );
 		$method->setAccessible( true );
 
@@ -111,11 +111,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSearchTranslationsException()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchTranslations' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( '\Aimeos\Mw\Exception' );
+		$this->setExpectedException( \Aimeos\Mw\Exception::class );
 		$method->invokeArgs( $this->object, array( array( [] ) ) );
 	}
 
@@ -130,7 +130,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 			'label' => 'test',
 		);
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchTypes' );
 		$method->setAccessible( true );
 
@@ -150,7 +150,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		);
 		$attr = new \Aimeos\MW\Criteria\Attribute\Standard( $args );
 
-		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchTypes' );
 		$method->setAccessible( true );
 
@@ -161,11 +161,11 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetSearchTypesException()
 	{
-		$class = new \ReflectionClass( '\Aimeos\MW\Common\Manager\Base' );
+		$class = new \ReflectionClass( \Aimeos\MW\Common\Manager\Base::class );
 		$method = $class->getMethod( 'getSearchTypes' );
 		$method->setAccessible( true );
 
-		$this->setExpectedException( '\Aimeos\Mw\Exception' );
+		$this->setExpectedException( \Aimeos\Mw\Exception::class );
 		$method->invokeArgs( $this->object, array( array( [] ) ) );
 	}
 }

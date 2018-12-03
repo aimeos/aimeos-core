@@ -57,19 +57,19 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testCombine()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\SQL', $this->object->combine( '||', [] ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\SQL::class, $this->object->combine( '||', [] ) );
 	}
 
 
 	public function testCompare()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\SQL', $this->object->compare( '!=', 'name', 'value' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\SQL::class, $this->object->compare( '!=', 'name', 'value' ) );
 	}
 
 
 	public function testSort()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Sort\\SQL', $this->object->sort( '+', 'name' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Sort\SQL::class, $this->object->sort( '+', 'name' ) );
 	}
 
 
@@ -131,21 +131,21 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$types = array( 'int_column' => \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		$this->object->setConditions( $this->object->compare( '==', 'icol', 10 ) );
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getConditionSource( $types );
 	}
 
 
 	public function testGetConditionSourceInvalidOperator()
 	{
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->setConditions( $this->object->compare( '?', 'int_column', 10 ) );
 	}
 
 
 	public function testGetConditions()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\SQL', $this->object->getConditions() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\SQL::class, $this->object->getConditions() );
 
 		$conditions = $this->object->compare( '==', 'int_column', 10 );
 		$this->object->setConditions( $conditions );
@@ -172,14 +172,14 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$translations = array( 'asc_column' => 'asc_int_col' );
 
 		$this->object->setSortations( array( $this->object->sort( '+', 'asc_col' ) ) );
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->getSortationSource( $types, $translations );
 	}
 
 
 	public function testGetSortationSourceInvalidDirection()
 	{
-		$this->setExpectedException('\\Aimeos\\MW\\Common\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->setSortations( array( $this->object->sort( '/', 'asc_column' ) ) );
 	}
 
@@ -220,20 +220,20 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 	public function testToConditionsEmptyArray()
 	{
 		$condition = $this->object->toConditions( [] );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\SQL', $condition );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\SQL::class, $condition );
 	}
 
 
 	public function testToConditionsInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Common\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->toConditions( ['=][attribute.id]=15'] );
 	}
 
 
 	public function testToConditionsInvalidOperator()
 	{
-		$this->setExpectedException( '\\Aimeos\\MW\\Common\\Exception' );
+		$this->setExpectedException( \Aimeos\MW\Common\Exception::class );
 		$this->object->toConditions( array( '><' => array( 'name', 'value' ) ) );
 	}
 
@@ -246,7 +246,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 
 		$condition = $this->object->toConditions( $array );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\Iface', $condition );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\Iface::class, $condition );
 		$this->assertEquals( '==', $condition->getOperator() );
 		$this->assertEquals( 'name', $condition->getName() );
 		$this->assertEquals( 'value', $condition->getValue() );
@@ -267,13 +267,13 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		);
 
 		$condition = $this->object->toConditions( $array );
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Combine\\Iface', $condition );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Combine\Iface::class, $condition );
 		$this->assertEquals( '&&', $condition->getOperator() );
 		$this->assertEquals( 2, count( $condition->getExpressions() ) );
 
 		foreach( $condition->getExpressions() as $expr )
 		{
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\Iface', $expr );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\Iface::class, $expr );
 			$this->assertEquals( '==', $expr->getOperator() );
 			$this->assertEquals( 'name', $expr->getName() );
 			$this->assertEquals( 'value', $expr->getValue() );
@@ -292,7 +292,7 @@ class SQLTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 2, count( $sortations ) );
 
 		foreach( $sortations as $sort ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Sort\\Iface', $sort );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Sort\Iface::class, $sort );
 		}
 
 		$this->assertEquals( '+', $sortations[0]->getOperator() );

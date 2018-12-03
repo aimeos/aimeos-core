@@ -325,7 +325,7 @@ class Standard
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Order\\Item\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Order\Item\Iface::class, $item );
 
 		if( $item->getBaseId() === null ) {
 			throw new \Aimeos\MShop\Order\Exception( 'Required order base ID is missing' );

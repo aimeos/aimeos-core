@@ -66,7 +66,7 @@ class ZipTest extends \PHPUnit\Framework\TestCase
 	{
 		$zip = new \Aimeos\MW\Container\Zip( __DIR__ . DIRECTORY_SEPARATOR . 'testfile', 'CSV' );
 
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Container\\Content\\Iface', $zip->get( 'tempfile.csv' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Container\Content\Iface::class, $zip->get( 'tempfile.csv' ) );
 	}
 
 

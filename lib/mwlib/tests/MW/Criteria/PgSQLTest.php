@@ -37,7 +37,7 @@ class PgSQLTest extends \PHPUnit\Framework\TestCase
 
 	public function testCompare()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Expression\\Compare\\PgSQL', $this->object->compare( '!=', 'name', 'value' ) );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Expression\Compare\PgSQL::class, $this->object->compare( '!=', 'name', 'value' ) );
 	}
 
 

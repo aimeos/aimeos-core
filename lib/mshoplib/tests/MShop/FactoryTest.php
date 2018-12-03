@@ -18,41 +18,41 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 	public function testCreateManager()
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute' );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $manager );
 	}
 
 
 	public function testCreateSubManager()
 	{
 		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute/lists/type' );
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Common\\Manager\\Iface', $manager );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Manager\Iface::class, $manager );
 	}
 
 
 	public function testCreateManagerEmpty()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), "\n" );
 	}
 
 
 	public function testCreateManagerInvalidName()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), '%^' );
 	}
 
 
 	public function testCreateManagerNotExisting()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'unknown' );
 	}
 
 
 	public function testCreateSubManagerNotExisting()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		\Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'attribute/unknown' );
 	}
 

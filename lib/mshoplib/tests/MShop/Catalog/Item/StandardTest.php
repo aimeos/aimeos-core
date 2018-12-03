@@ -61,13 +61,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( 5 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 5, $this->object->getId() );
 		$this->assertFalse( $this->object->isModified() );
 
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -89,7 +89,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCode( 'unit test' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 'unit test', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'unit test' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 'unit test', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setConfig( array( 'unitcategory' => '12' ) );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( array( 'unitcategory' => '12' ), $this->object->getConfig() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -149,7 +149,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -165,7 +165,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTarget( 'ttarget' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 'ttarget', $this->object->getTarget() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -273,16 +273,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 1, count( $children ) );
 
 		foreach( $children as $child ) {
-			$this->assertInstanceOf( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $child );
+			$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $child );
 		}
 	}
 
 
 	public function testGetChild()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Catalog\\Item\\Iface', $this->object->getChild( 0 ) );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $this->object->getChild( 0 ) );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Catalog\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Catalog\Exception::class );
 		$this->object->getChild( 1 );
 	}
 
@@ -291,7 +291,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->addChild( $this->object );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 2, count( $this->object->getChildren() ) );
 	}
 
@@ -302,7 +302,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$return = $this->object->deleteChild( $child );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Catalog\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Catalog\Item\Iface::class, $return );
 		$this->assertEquals( 0, count( $this->object->getChildren() ) );
 	}
 
@@ -320,6 +320,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetNode()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Tree\\Node\\Iface', $this->object->getNode() );
+		$this->assertInstanceOf( \Aimeos\MW\Tree\Node\Iface::class, $this->object->getNode() );
 	}
 }

@@ -53,7 +53,7 @@ class FileTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 'error', $msg[4] );
 
 
-		$this->setExpectedException('\\Aimeos\\MW\\Logger\\Exception');
+		$this->setExpectedException( \Aimeos\MW\Logger\Exception::class );
 		$this->object->log( 'wrong log level', -1);
 	}
 

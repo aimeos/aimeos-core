@@ -545,7 +545,7 @@ abstract class Base extends \Aimeos\MW\Common\Manager\Base
 	 */
 	private function getJoins( array $attributes, $prefix )
 	{
-		$iface = '\\Aimeos\\MW\\Criteria\\Attribute\\Iface';
+		$iface = \Aimeos\MW\Criteria\Attribute\Iface::class;
 		$sep = $this->getKeySeparator();
 		$name = $prefix . $sep . 'id';
 

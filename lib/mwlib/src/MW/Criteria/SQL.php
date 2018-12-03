@@ -216,7 +216,7 @@ class SQL extends \Aimeos\MW\Criteria\Base
 	 */
 	public function setSortations( array $sortations )
 	{
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MW\\Criteria\\Expression\\Sort\\Iface', $sortations );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MW\Criteria\Expression\Sort\Iface::class, $sortations );
 
 		$this->sortations = $sortations;
 		return $this;

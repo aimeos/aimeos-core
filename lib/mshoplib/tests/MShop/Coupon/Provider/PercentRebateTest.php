@@ -171,7 +171,7 @@ class PercentRebateTest extends \PHPUnit\Framework\TestCase
 
 		$object = new \Aimeos\MShop\Coupon\Provider\PercentRebate( $context, $couponItem, '90AB' );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Coupon\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
 		$object->addCoupon( $this->orderBase );
 	}
 

@@ -45,7 +45,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 		$orderProduct->getPrice()->setCurrencyId( 'EUR' );
 		$orderProduct->getPrice()->setValue( '100.00' );
 
-		$object = $this->getMockBuilder( '\Aimeos\MShop\Coupon\Provider\Voucher' )
+		$object = $this->getMockBuilder( \Aimeos\MShop\Coupon\Provider\Voucher::class )
 			->setConstructorArgs( [$this->context, $this->couponItem, '90AB'] )
 			->setMethods( ['checkVoucher', 'getOrderProductItem', 'getUsedRebate'] )
 			->getMock();
@@ -80,7 +80,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	public function testCheckVoucher()
 	{
-		$this->setExpectedException( '\Aimeos\MShop\Coupon\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
 		$this->access( 'checkVoucher' )->invokeArgs( $this->object, [-1, [5,6]] );
 	}
 
@@ -113,7 +113,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( $id, $item->getId() );
 
-		$this->setExpectedException( '\Aimeos\MShop\Coupon\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Coupon\Exception::class );
 		$this->access( 'getOrderProductItem' )->invokeArgs( $this->object, [$id, 'XXX'] );
 	}
 
@@ -128,7 +128,7 @@ class VoucherTest extends \PHPUnit\Framework\TestCase
 
 	protected function access( $name )
 	{
-		$class = new \ReflectionClass( '\Aimeos\MShop\Coupon\Provider\Voucher' );
+		$class = new \ReflectionClass( \Aimeos\MShop\Coupon\Provider\Voucher::class );
 		$method = $class->getMethod( $name );
 		$method->setAccessible( true );
 

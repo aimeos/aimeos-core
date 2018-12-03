@@ -33,12 +33,12 @@ class Factory
 	{
 		if( ctype_alnum( $name ) === false )
 		{
-			$classname = is_string( $name ) ? '\\Aimeos\\MW\\Cache\\' . $name : '<not a string>';
+			$classname = is_string( $name ) ? '\Aimeos\MW\Cache\\' . $name : '<not a string>';
 			throw new \Aimeos\MW\Cache\Exception( sprintf( 'Invalid characters in class name "%1$s"', $classname ) );
 		}
 
-		$iface = '\\Aimeos\\MW\\Cache\\Iface';
-		$classname = '\\Aimeos\\MW\\Cache\\' . ucwords( $name );
+		$iface = \Aimeos\MW\Cache\Iface::class;
+		$classname = '\Aimeos\MW\Cache\\' . ucwords( $name );
 
 		if( class_exists( $classname ) === false ) {
 			throw new \Aimeos\MW\Cache\Exception( sprintf( 'Class "%1$s" not available', $classname ) );

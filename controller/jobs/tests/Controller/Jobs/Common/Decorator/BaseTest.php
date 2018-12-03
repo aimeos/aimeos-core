@@ -30,7 +30,7 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 		$context = \TestHelperJobs::getContext();
 		$aimeos = \TestHelperJobs::getAimeos();
 
-		$this->stub = $this->getMockBuilder( '\\Aimeos\\Controller\\Jobs\\Iface' )
+		$this->stub = $this->getMockBuilder( \Aimeos\Controller\Jobs\Iface::class )
 			->setConstructorArgs( array( $context, $aimeos ) )
 			->getMock();
 
@@ -46,13 +46,13 @@ class BaseTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetContext()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Context\\Item\\Iface', $this->object->getContextPublic() );
+		$this->assertInstanceOf( \Aimeos\MShop\Context\Item\Iface::class, $this->object->getContextPublic() );
 	}
 
 
 	public function testGetAimeos()
 	{
-		$this->assertInstanceOf( '\Aimeos\Bootstrap', $this->object->getAimeosPublic() );
+		$this->assertInstanceOf( \Aimeos\Bootstrap::class, $this->object->getAimeosPublic() );
 	}
 
 

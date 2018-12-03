@@ -57,7 +57,7 @@ class ShippingTest extends \PHPUnit\Framework\TestCase
 		$this->assertArrayHasKey( 'threshold', $list );
 
 		foreach( $list as $entry ) {
-			$this->assertInstanceOf( '\Aimeos\MW\Criteria\Attribute\Iface', $entry );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $entry );
 		}
 	}
 

@@ -61,13 +61,13 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testCreateItem()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MShop\\Product\\Item\\Iface', $this->object->createItem() );
+		$this->assertInstanceOf( \Aimeos\MShop\Product\Item\Iface::class, $this->object->createItem() );
 	}
 
 
 	public function testCreateSearch()
 	{
-		$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Iface', $this->object->createSearch() );
+		$this->assertInstanceOf( \Aimeos\MW\Criteria\Iface::class, $this->object->createSearch() );
 	}
 
 
@@ -133,7 +133,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$attributes = $this->object->getSearchAttributes();
 
 		foreach( $attributes as $attribute ) {
-			$this->assertInstanceOf( '\\Aimeos\\MW\\Criteria\\Attribute\\Iface', $attribute );
+			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
 		}
 
 		$this->assertArrayHasKey( 'index.attribute.id', $attributes );
@@ -174,7 +174,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		// recreate index for CNE
 		$result = $this->object->saveItem( $item );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Iface', $result );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Iface::class, $result );
 
 		$this->assertEquals( 8, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );

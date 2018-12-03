@@ -18,7 +18,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	protected function setUp()
 	{
 		$view = new \Aimeos\MW\View\Standard();
-		$this->response = $this->getMockBuilder( '\Psr\Http\Message\ResponseInterface' )->getMock();
+		$this->response = $this->getMockBuilder( \Psr\Http\Message\ResponseInterface::class )->getMock();
 		$this->object = new \Aimeos\MW\View\Helper\Response\Standard( $view, $this->response );
 	}
 
@@ -31,29 +31,29 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testTransform()
 	{
-		$this->assertInstanceOf( '\Aimeos\MW\View\Helper\Response\Iface', $this->object->transform() );
+		$this->assertInstanceOf( \Aimeos\MW\View\Helper\Response\Iface::class, $this->object->transform() );
 	}
 
 
 	public function testCreateStream()
 	{
-		if( !class_exists( '\Zend\Diactoros\Stream' ) )
+		if( !class_exists( \Zend\Diactoros\Stream::class ) )
 		{
-			$this->setExpectedException( '\Aimeos\MW\Exception' );
+			$this->setExpectedException( \Aimeos\MW\Exception::class );
 			$this->object->createStream( 'test' );
 		}
 
-		$this->assertInstanceOf( '\Psr\Http\Message\StreamInterface', $this->object->createStream( __FILE__ ) );
+		$this->assertInstanceOf( \Psr\Http\Message\StreamInterface::class, $this->object->createStream( __FILE__ ) );
 	}
 
 
 	public function testCreateStreamFromString()
 	{
-		if( !class_exists( '\Zend\Diactoros\Stream' ) ) {
+		if( !class_exists( \Zend\Diactoros\Stream::class ) ) {
 			$this->markTestSkipped( 'Please install "\Zend\Diactoros\Stream"' );
 		}
 
-		$this->assertInstanceOf( '\Psr\Http\Message\StreamInterface', $this->object->createStreamFromString( 'test' ) );
+		$this->assertInstanceOf( \Psr\Http\Message\StreamInterface::class, $this->object->createStreamFromString( 'test' ) );
 	}
 
 
@@ -140,7 +140,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetBody()
 	{
-		$stream = $this->getMockBuilder( '\Psr\Http\Message\StreamInterface' )->getMock();
+		$stream = $this->getMockBuilder( \Psr\Http\Message\StreamInterface::class )->getMock();
 
 		$this->response->expects( $this->once() )->method( 'getBody' )
 			->will( $this->returnValue( $stream ) );
@@ -151,7 +151,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testWithBody()
 	{
-		$stream = $this->getMockBuilder( '\Psr\Http\Message\StreamInterface' )->getMock();
+		$stream = $this->getMockBuilder( \Psr\Http\Message\StreamInterface::class )->getMock();
 
 		$this->response->expects( $this->once() )->method( 'withBody' )
 			->will( $this->returnValue( $this->response ) );

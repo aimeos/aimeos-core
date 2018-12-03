@@ -59,7 +59,7 @@ class Standard
 	 */
 	public function createStream( $resource )
 	{
-		if( class_exists( '\Zend\Diactoros\Stream' ) ) {
+		if( class_exists( \Zend\Diactoros\Stream::class ) ) {
 			return new \Zend\Diactoros\Stream( $resource );
 		}
 

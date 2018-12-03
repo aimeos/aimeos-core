@@ -61,7 +61,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -83,7 +83,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTypeId( 2 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $return );
 		$this->assertEquals( 2, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -111,7 +111,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'unittest set label' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $return );
 		$this->assertEquals( 'unittest set label', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -127,7 +127,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDomain( 'catalog' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $return );
 		$this->assertEquals( 'catalog', $this->object->getDomain() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -143,7 +143,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setContent( 'unit test text' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $return );
 		$this->assertEquals( 'unit test text', $this->object->getContent() );
 
 		$this->object->setContent( mb_convert_encoding( '&#x0630;&#x0631;&#x0632;', 'UTF-8', 'HTML-ENTITIES' ) );
@@ -176,7 +176,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Text\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Text\Item\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -276,7 +276,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testSetLanguageIdInvalid()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setLanguageId( '10' );
 	}
 

@@ -61,16 +61,16 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
 		$this->assertEquals( null, $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 
 		$return = $this->object->setId( 12 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
 		$this->assertFalse( $this->object->isModified() );
 
-		$this->setExpectedException( '\\Aimeos\\MShop\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Exception::class );
 		$this->object->setId( 99 );
 	}
 
@@ -85,7 +85,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setCode( 'OtherExtID' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
 		$this->assertEquals( 'OtherExtID', $this->object->getCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -101,7 +101,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLabel( 'Other Name' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
 		$this->assertEquals( 'Other Name', $this->object->getLabel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -123,7 +123,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setConfig( array( 'timezone' => 'Europe/Paris' ) );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
 		$this->assertEquals( array( 'timezone' => 'Europe/Paris' ), $this->object->getConfig() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -139,7 +139,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStatus( 0 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Locale\Item\Site\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Locale\Item\Site\Iface::class, $return );
 		$this->assertEquals( 0, $this->object->getStatus() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -224,7 +224,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testGetChild()
 	{
-		$this->setExpectedException( '\\Aimeos\\MShop\\Locale\\Exception' );
+		$this->setExpectedException( \Aimeos\MShop\Locale\Exception::class );
 		$this->object->getChild( 0 );
 	}
 

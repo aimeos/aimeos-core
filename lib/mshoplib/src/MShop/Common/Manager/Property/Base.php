@@ -108,7 +108,7 @@ abstract class Base
 	 */
 	public function saveItem( \Aimeos\MShop\Common\Item\Iface $item, $fetch = true )
 	{
-		self::checkClass( '\\Aimeos\\MShop\\Common\\Item\\Property\\Iface', $item );
+		self::checkClass( \Aimeos\MShop\Common\Item\Property\Iface::class, $item );
 
 		if( !$item->isModified() ) {
 			return $item;

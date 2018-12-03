@@ -448,7 +448,7 @@ class Standard
 	{
 		if( empty( $items ) ) { return; }
 
-		\Aimeos\MW\Common\Base::checkClassList( '\\Aimeos\\MShop\\Product\\Item\\Iface', $items );
+		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
 
 		$context = $this->getContext();
 		$dbm = $context->getDatabaseManager();

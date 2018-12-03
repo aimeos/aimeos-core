@@ -49,7 +49,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Stock\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -68,7 +68,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setProductCode( 'CNE' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Stock\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $return );
 		$this->assertEquals( 'CNE', $this->object->getProductCode() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -82,7 +82,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTypeId( 30000 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Stock\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $return );
 		$this->assertEquals( 30000, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -96,7 +96,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setStocklevel( 200 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Stock\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $return );
 		$this->assertEquals( 200, $this->object->getStocklevel() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -119,7 +119,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setDateBack( '2010-10-10 01:10:00' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Stock\Item\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Stock\Item\Iface::class, $return );
 		$this->assertEquals( '2010-10-10 01:10:00', $this->object->getDateBack() );
 		$this->assertTrue( $this->object->isModified() );
 	}

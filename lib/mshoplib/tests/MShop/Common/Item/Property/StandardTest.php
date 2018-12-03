@@ -51,7 +51,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setId( null );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $return );
 		$this->assertNull( $this->object->getId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -70,7 +70,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setLanguageId('fr');
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $return );
 		$this->assertEquals( 'fr', $this->object->getLanguageId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -84,7 +84,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setParentId( 22 );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $return );
 		$this->assertEquals( 22, $this->object->getParentId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -98,7 +98,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setTypeId(33);
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $return );
 		$this->assertEquals( 33, $this->object->getTypeId() );
 		$this->assertTrue( $this->object->isModified() );
 	}
@@ -122,7 +122,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$return = $this->object->setValue( '15.00' );
 
-		$this->assertInstanceOf( '\Aimeos\MShop\Common\Item\Property\Iface', $return );
+		$this->assertInstanceOf( \Aimeos\MShop\Common\Item\Property\Iface::class, $return );
 		$this->assertEquals( '15.00', $this->object->getValue() );
 		$this->assertTrue( $this->object->isModified() );
 	}
