@@ -105,8 +105,8 @@ class CatalogAddPerfData extends \Aimeos\MW\Setup\Task\Base
 		$this->maxBatch = $config->get( 'setup/unitperf/max-batch', 10000 );
 		$this->numCatLevels = $config->get( 'setup/unitperf/num-catlevels', 1 );
 		$this->numCategories = $config->get( 'setup/unitperf/num-categories', 10 );
-		$this->numCatProducts = $config->get( 'setup/unitperf/num-catproducts', 100 );
-		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 1000 );
+		$this->numCatProducts = $config->get( 'setup/unitperf/num-catproducts', 1000 );
+		$this->numProdVariants = $config->get( 'setup/unitperf/num-prodvariants', 100 );
 
 		$catRootItem = $this->addCatalogItem( null, 'home', 0 );
 		$end = $numCatPerLevel = round( pow( $this->numCategories, 1 / $this->numCatLevels ) );
