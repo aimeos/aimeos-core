@@ -25,9 +25,9 @@ class PgSQL
 			'code' => 'index.text:relevance()',
 			'internalcode' => ':site AND mindte."listtype" = \'default\'
 				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
-				AND CAST( mindte."value" @@ to_tsquery( $2 ) AS integer )',
+				AND CAST( mindte."value" @@ to_tsquery( $2 ) AS float )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
-			'type' => 'null',
+			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
@@ -35,7 +35,7 @@ class PgSQL
 			'code' => 'sort:index.text:relevance()',
 			'internalcode' => '1',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
-			'type' => 'null',
+			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),

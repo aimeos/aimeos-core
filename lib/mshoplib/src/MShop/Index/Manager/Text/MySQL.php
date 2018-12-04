@@ -28,7 +28,7 @@ class MySQL
 				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
 				AND MATCH( mindte."value" ) AGAINST( $2 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
-			'type' => 'null',
+			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
@@ -36,7 +36,7 @@ class MySQL
 			'code' => 'sort:index.text:relevance()',
 			'internalcode' => '1',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
-			'type' => 'null',
+			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),

@@ -56,7 +56,7 @@ class Standard
 				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
 				AND mindte."domain" = \'product\' AND POSITION( $2 IN mindte."value" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
-			'type' => 'null',
+			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
@@ -64,7 +64,7 @@ class Standard
 			'code' => 'sort:index.text:relevance()',
 			'internalcode' => 'POSITION( $2 IN mindte."value" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
-			'type' => 'null',
+			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
 			'public' => false,
 		),
