@@ -23,12 +23,12 @@ class PgSQL
 	private $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."listtype" = \'default\'
+			'internalcode' => ':site
 				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
-				AND CAST( mindte."value" @@ to_tsquery( $2 ) AS float )',
+				AND CAST( mindte."content" @@ to_tsquery( $2 ) AS integer )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 		'sort:index.text:relevance' => array(
@@ -36,7 +36,7 @@ class PgSQL
 			'internalcode' => '1',
 			'label' => 'Product text sorting, parameter(<language ID>,<search term>)',
 			'type' => 'float',
-			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
 		),
 	);
