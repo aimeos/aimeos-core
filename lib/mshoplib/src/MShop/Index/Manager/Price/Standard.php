@@ -678,9 +678,7 @@ class Standard
 				$stmt->bind( 9, $refItem->getTaxRate() );
 				$stmt->bind( 10, $refItem->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 11, $date ); //mtime
-				$stmt->bind( 12, $editor );
-				$stmt->bind( 13, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 14, $date ); //ctime
+				$stmt->bind( 12, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 				try {
 					$stmt->execute()->finish();

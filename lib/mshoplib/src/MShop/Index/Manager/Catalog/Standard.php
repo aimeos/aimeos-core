@@ -470,9 +470,7 @@ class Standard
 					$stmt->bind( 3, $listItem->getType() );
 					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 5, $date ); //mtime
-					$stmt->bind( 6, $editor );
-					$stmt->bind( 7, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-					$stmt->bind( 8, $date ); //ctime
+					$stmt->bind( 6, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 					try {
 						$stmt->execute()->finish();

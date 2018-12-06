@@ -27,8 +27,6 @@ return array(
 			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'code', 'string', array( 'length' => 255 ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'attrid', 'listtype' ), 'unq_msindat_p_s_aid_lt' );
 			$table->addIndex( array( 'prodid', 'siteid', 'listtype', 'type', 'code' ), 'idx_msindat_p_s_lt_t_c' );
@@ -47,8 +45,6 @@ return array(
 			$table->addColumn( 'listtype', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'catid', 'listtype', 'pos' ), 'unq_msindca_p_s_cid_lt_po' );
 			$table->addIndex( array( 'siteid', 'catid', 'listtype', 'pos' ), 'idx_msindca_s_ca_lt_po' );
@@ -72,8 +68,6 @@ return array(
 			$table->addColumn( 'taxrate', 'decimal', array( 'precision' => 5, 'scale' => 2 ) );
 			$table->addColumn( 'quantity', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'priceid', 'listtype' ), 'unq_msindpr_p_s_prid_lt' );
 			$table->addIndex( array( 'siteid', 'listtype', 'currencyid', 'type', 'value' ), 'idx_msindpr_s_lt_cu_ty_va' );
@@ -92,8 +86,6 @@ return array(
 			$table->addColumn( 'listtype', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'pos', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'supid', 'listtype', 'pos' ), 'unq_msindsup_p_sid_supid_lt_po' );
 			$table->addIndex( array( 'siteid', 'supid', 'listtype', 'pos' ), 'idx_msindsup_sid_supid_lt_po' );
@@ -115,8 +107,6 @@ return array(
 			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false  ) );
 			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
 			$table->addColumn( 'mtime', 'datetime', [] );
-			$table->addColumn( 'ctime', 'datetime', [] );
-			$table->addColumn( 'editor', 'string', array( 'length' => 255 ) );
 
 			$table->addUniqueIndex( array( 'prodid', 'siteid', 'textid', 'listtype' ), 'unq_msindte_p_s_tid_lt' );
 

@@ -783,9 +783,7 @@ class Standard
 		$stmt->bind( 6, $domain );
 		$stmt->bind( 7, strtolower( $content ) ); // for case insensitive searches
 		$stmt->bind( 8, $date ); //mtime
-		$stmt->bind( 9, $editor );
-		$stmt->bind( 10, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( 11, $date ); //ctime
+		$stmt->bind( 9, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		try {
 			$stmt->execute()->finish();

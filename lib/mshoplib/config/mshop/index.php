@@ -20,17 +20,17 @@ return array(
 					'ansi' => '
 						INSERT INTO "mshop_index_attribute" (
 							"prodid", "attrid", "listtype", "type", "code",
-							"mtime", "editor", "siteid", "ctime"
+							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_attribute" (
 							"prodid", "attrid", "listtype", "type", "code",
-							"mtime", "editor", "siteid", "ctime"
+							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?
 						)
 						ON CONFLICT DO NOTHING
 					',
@@ -61,7 +61,7 @@ return array(
 				'cleanup' => array(
 					'ansi' => '
 						DELETE FROM "mshop_index_attribute"
-						WHERE "ctime" < ? AND "siteid" = ?
+						WHERE "mtime" < ? AND "siteid" = ?
 					'
 				),
 				'optimize' => array(
@@ -84,17 +84,17 @@ return array(
 					'ansi' => '
 						INSERT INTO "mshop_index_catalog" (
 							"prodid", "catid", "listtype", "pos",
-							"mtime", "editor", "siteid", "ctime"
+							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_catalog" (
 							"prodid", "catid", "listtype", "pos",
-							"mtime", "editor", "siteid", "ctime"
+							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?
 						)
 						ON CONFLICT DO NOTHING
 					'
@@ -125,7 +125,7 @@ return array(
 				'cleanup' => array(
 					'ansi' => '
 						DELETE FROM "mshop_index_catalog"
-						WHERE "ctime" < ? AND "siteid" = ?
+						WHERE "mtime" < ? AND "siteid" = ?
 					'
 				),
 				'optimize' => array(
@@ -149,18 +149,18 @@ return array(
 						INSERT INTO "mshop_index_price" (
 							"prodid", "priceid", "currencyid", "listtype",
 							"type", "value", "costs", "rebate", "taxrate", "quantity",
-							"mtime", "editor", "siteid", "ctime"
+							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_price" (
 							"prodid", "priceid", "currencyid", "listtype",
 							"type", "value", "costs", "rebate", "taxrate", "quantity",
-							"mtime", "editor", "siteid", "ctime"
+							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 						ON CONFLICT DO NOTHING
 					'
@@ -191,7 +191,7 @@ return array(
 				'cleanup' => array(
 					'ansi' => '
 						DELETE FROM "mshop_index_price"
-						WHERE "ctime" < ? AND "siteid" = ?
+						WHERE "mtime" < ? AND "siteid" = ?
 					'
 				),
 				'optimize' => array(
@@ -214,17 +214,17 @@ return array(
 					'ansi' => '
 						INSERT INTO "mshop_index_supplier" (
 							"prodid", "supid", "listtype", "pos",
-							"mtime", "editor", "siteid", "ctime"
+							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_supplier" (
 							"prodid", "supid", "listtype", "pos",
-							"mtime", "editor", "siteid", "ctime"
+							"mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?
 						)
 						ON CONFLICT DO NOTHING
 					'
@@ -255,7 +255,7 @@ return array(
 				'cleanup' => array(
 					'ansi' => '
 						DELETE FROM "mshop_index_supplier"
-						WHERE "ctime" < ? AND "siteid" = ?
+						WHERE "mtime" < ? AND "siteid" = ?
 					'
 				),
 				'optimize' => array(
@@ -278,17 +278,17 @@ return array(
 					'ansi' => '
 						INSERT INTO "mshop_index_text" (
 							"prodid", "textid", "langid", "listtype", "type",
-							"domain", "value", "mtime", "editor", "siteid", "ctime"
+							"domain", "value", "mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_text" (
 							"prodid", "textid", "langid", "listtype", "type",
-							"domain", "value", "mtime", "editor", "siteid", "ctime"
+							"domain", "value", "mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?, ?, ?
 						)
 						ON CONFLICT DO NOTHING
 					'
@@ -319,18 +319,8 @@ return array(
 				'cleanup' => array(
 					'ansi' => '
 						DELETE FROM "mshop_index_text"
-						WHERE "ctime" < ? AND "siteid" = ?
+						WHERE "mtime" < ? AND "siteid" = ?
 					'
-				),
-				'text' => array(
-					'ansi' => '
-						SELECT DISTINCT mindte."prodid", mindte."value"
-						FROM "mshop_index_text" AS mindte
-						JOIN "mshop_product" AS mpro ON mpro."id" = mindte."prodid"
-						WHERE :cond
-						/*-orderby*/ ORDER BY :order /*orderby-*/
-						LIMIT :size OFFSET :start
-					',
 				),
 				'optimize' => array(
 					'mysql' => array(
