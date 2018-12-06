@@ -400,7 +400,7 @@ class Standard
 	 * Rebuilds the index supplier for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 */
 	public function rebuildIndex( array $items = [] )
 	{

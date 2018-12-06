@@ -403,7 +403,7 @@ class Standard
 	 * Rebuilds the index attribute for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 */
 	public function rebuildIndex( array $items = [] )
 	{
@@ -640,9 +640,9 @@ class Standard
 	 * Saves the attribute items referenced by products
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated attribute items
 	 */
-	protected function saveAttributes( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item )
+	protected function saveAttributes( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
 		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->getContext();

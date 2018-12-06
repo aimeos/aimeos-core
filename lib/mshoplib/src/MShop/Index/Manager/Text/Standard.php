@@ -25,7 +25,7 @@ class Standard
 		// @deprecated Removed 2019.01
 		'index.text.id' => array(
 			'code' => 'index.text.id',
-			'internalcode' => 'mindte."textid"',
+			'internalcode' => 'mindte."prodid"',
 			'internaldeps'=>array( 'LEFT JOIN "mshop_index_text" AS mindte ON mindte."prodid" = mpro."id"' ),
 			'label' => 'Product index text ID',
 			'type' => 'string',
@@ -436,7 +436,7 @@ class Standard
 	 * Rebuilds the index text for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items List of product items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 */
 	public function rebuildIndex( array $items = [] )
 	{
@@ -694,8 +694,8 @@ class Standard
 	 * Saves the text record with given set of parameters.
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
-	 * @param integer $id ID of the product item
-	 * @param integer $siteid Site ID
+	 * @param string $id ID of the product item
+	 * @param string $siteid Site ID
 	 * @param string $lang Two letter ISO language code
 	 * @param string $url Product name in URL
 	 * @param string $name Name of the product
