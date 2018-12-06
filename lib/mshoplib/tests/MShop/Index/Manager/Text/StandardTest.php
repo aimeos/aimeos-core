@@ -13,32 +13,10 @@ namespace Aimeos\MShop\Index\Manager\Text;
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	protected static $products;
-	private $editor = '';
-
-
-	public static function setUpBeforeClass()
-	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
-		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text', 'product' ) );
-
-		if( count( $result ) !== 2 ) {
-			throw new \RuntimeException( 'Products not available' );
-		}
-
-		foreach( $result as $item ) {
-			self::$products[$item->getCode()] = $item;
-		}
-	}
 
 
 	protected function setUp()
 	{
-		$this->editor = \TestHelperMShop::getContext()->getEditor();
-
 		$this->object = new \Aimeos\MShop\Index\Manager\Text\Standard( \TestHelperMShop::getContext() );
 	}
 
@@ -57,29 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'text' );
-
-		$search = $manager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'text.domain', 'attribute' ),
-			$search->compare( '==', 'text.content', 'XS' ),
-			$search->compare( '==', 'text.type.code', 'name' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$items = $manager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No text item found' );
-		}
-
-
-		$search = $this->object->createSearch( true );
-		$result = $this->object->aggregate( $search, 'index.text.id' );
-
-		$this->assertEquals( 27, count( $result ) );
-		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 4, $result[$item->getId()] );
+		$this->object->aggregate( $this->object->createSearch(), 'index.text.id' );
 	}
 
 
@@ -96,42 +52,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		foreach( $this->object->getSearchAttributes() as $attribute ) {
 			$this->assertInstanceOf( \Aimeos\MW\Criteria\Attribute\Iface::class, $attribute );
 		}
-	}
-
-
-	public function testSaveDeleteItem()
-	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$product = self::$products['CNC'];
-
-		$texts = $product->getRefItems( 'text' );
-		if( ( $textItem = reset( $texts ) ) === false ) {
-			throw new \RuntimeException( 'Product doesnt have any price item' );
-		}
-
-
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
-		$this->object->saveItem( $product );
-
-
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
-		$result = $this->object->searchItems( $search );
-
-
-		$this->object->deleteItem( $product->getId() );
-		$productManager->deleteItem( $product->getId() );
-
-
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.text.id', $textItem->getId() ) );
-		$result2 = $this->object->searchItems( $search );
-
-
-		$this->assertContains( $product->getId(), array_keys( $result ) );
-		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
 	}
 
 
@@ -171,6 +91,40 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [] );
 
 		$this->assertEquals( 2, count( $result ) );
+	}
+
+
+	public function testSaveDeleteItem()
+	{
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$product = $productManager->findItem( 'CNC', ['text'] );
+
+		$this->object->deleteItem( $product->getId() );
+		$this->object->saveItem( $product );
+
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.text:name', ['de'] );
+		$search->setConditions( $search->compare( '==', $func, 'cafe noire expresso' ) );
+
+		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
+	}
+
+
+	public function testSaveDeleteItemNoName()
+	{
+		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
+		$product = $productManager->findItem( 'IJKL', ['text'] );
+
+		$this->object->deleteItem( $product->getId() );
+		$this->object->saveItem( $product );
+
+		$search = $this->object->createSearch();
+
+		$func = $search->createFunction( 'index.text:name', ['de'] );
+		$search->setConditions( $search->compare( '==', $func, 'unterproduct 3' ) );
+
+		$this->assertEquals( 1, count( $this->object->searchItems( $search ) ) );
 	}
 
 

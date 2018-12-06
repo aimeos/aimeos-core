@@ -86,7 +86,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Cafe' ) );
 		$conditions = array(
 			$search->compare( '>', $func, 0 ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
@@ -95,7 +95,7 @@ class MySQLTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 3, $total );
 	}
 
 

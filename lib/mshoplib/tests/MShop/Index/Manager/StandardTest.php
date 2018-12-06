@@ -179,46 +179,12 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->assertEquals( 8, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
 		$this->assertEquals( 2, $cntPriceA );
-		$this->assertEquals( 21, $cntTextA );
+		$this->assertEquals( 1, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
 		$this->assertEquals( 0, $cntCatalogB );
 		$this->assertEquals( 0, $cntPriceB );
 		$this->assertEquals( 0, $cntTextB );
-	}
-
-
-	public function testSaveDeleteItemNoName()
-	{
-		$context = $this->context;
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $context );
-
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', 'IJKL' ) );
-		$result = $productManager->searchItems( $search );
-
-		if( ( $item = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'Product not available' );
-		}
-
-
-		$dbm = $context->getDatabaseManager();
-		$siteId = $context->getLocale()->getSiteId();
-		$langid = $context->getLocale()->getLanguageId();
-
-		$sqlProd = 'SELECT "value" FROM "mshop_index_text"
-			WHERE "siteid" = ? AND "prodid" = ? AND "langid" = \'' . $langid . '\'
-				AND "type" = \'name\' AND domain = \'product\'';
-		$sqlAttr = 'SELECT "value" FROM "mshop_index_text"
-			WHERE "siteid" = ? AND "prodid" = ? AND type = \'name\' AND domain = \'attribute\'';
-
-		$this->object->saveItem( $item );
-		$attrText = $this->getValue( $dbm, $sqlAttr, 'value', $siteId, $item->getId() );
-		$prodText = $this->getValue( $dbm, $sqlProd, 'value', $siteId, $item->getId() );
-		$this->object->deleteItem( $item->getId() );
-
-		$this->assertEquals( 'unterproduct 3', $prodText );
-		$this->assertEquals( 'xl', $attrText );
 	}
 
 
@@ -306,7 +272,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 6, $total );
+		$this->assertEquals( 7, $total );
 	}
 
 
@@ -358,7 +324,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $this->object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 7, $total );
+		$this->assertEquals( 8, $total );
 	}
 
 
@@ -418,7 +384,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $object->createSearch()->setSlice( 0, 1 );
 
-		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Expr' ) );
+		$func = $search->createFunction( 'index.text:relevance', array( 'de', 'Cafe' ) );
 		$conditions = array(
 			$search->compare( '>', $func, 0 ), // text relevance
 			$search->compare( '==', 'product.editor', $this->editor )
@@ -428,7 +394,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$result = $object->searchItems( $search, [], $total );
 
 		$this->assertEquals( 1, count( $result ) );
-		$this->assertEquals( 2, $total );
+		$this->assertEquals( 3, $total );
 	}
 
 
@@ -461,7 +427,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
-		$afterInsertText = $this->getCatalogSubDomainItems( 'index.text.id', 'text' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//restore index with categorized products only
@@ -470,7 +435,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 13, count( $afterInsertAttr ) );
 		$this->assertEquals( 11, count( $afterInsertPrice ) );
-		$this->assertEquals( 13, count( $afterInsertText ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}
 
@@ -486,7 +450,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$afterDeleteAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterDeletePrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
-		$afterDeleteText = $this->getCatalogSubDomainItems( 'index.text.id', 'text' );
 		$afterDeleteCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//insert cne, cnc
@@ -498,7 +461,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
-		$afterInsertText = $this->getCatalogSubDomainItems( 'index.text.id', 'text' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//delete cne, cnc
@@ -512,13 +474,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		//check delete
 		$this->assertEquals( [], $afterDeleteAttr );
 		$this->assertEquals( [], $afterDeletePrice );
-		$this->assertEquals( [], $afterDeleteText );
 		$this->assertEquals( [], $afterDeleteCat );
 
 		//check inserted items
 		$this->assertEquals( 2, count( $afterInsertAttr ) );
 		$this->assertEquals( 2, count( $afterInsertPrice ) );
-		$this->assertEquals( 2, count( $afterInsertText ) );
 		$this->assertEquals( 2, count( $afterInsertCat ) );
 	}
 
@@ -540,13 +500,11 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
 		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
-		$afterInsertText = $this->getCatalogSubDomainItems( 'index.text.id', 'text' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//check inserted items
 		$this->assertEquals( 7, count( $afterInsertAttr ) );
 		$this->assertEquals( 7, count( $afterInsertPrice ) );
-		$this->assertEquals( 7, count( $afterInsertText ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}
 

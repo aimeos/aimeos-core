@@ -9,8 +9,7 @@
 return array(
 
 	'exclude' => array(
-		'idx_msindte_p_s_lt_la_ty_do_va',
-		'idx_msindte_value',
+		'idx_msindte_content',
 	),
 
 
@@ -100,15 +99,14 @@ return array(
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'textid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'listtype', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'domain', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'langid', 'string', array( 'length' => 5, 'notnull' => false  ) );
-			$table->addColumn( 'value', 'text', array( 'length' => 0xffff ) );
+			$table->addColumn( 'langid', 'string', ['length' => 5, 'notnull' => false] );
+			$table->addColumn( 'url', 'string', ['length' => 255] );
+			$table->addColumn( 'name', 'string', ['length' => 255] );
+			$table->addColumn( 'content', 'text', ['length' => 0xffffff] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
-			$table->addUniqueIndex( array( 'prodid', 'siteid', 'textid', 'listtype' ), 'unq_msindte_p_s_tid_lt' );
+			$table->addUniqueIndex( ['url', 'siteid', 'langid'], 'unq_msindte_url_sid_lid' );
+			$table->addIndex( ['prodid', 'siteid', 'langid', 'name'], 'idx_msindte_pid_sid_lid_name' );
 
 			return $schema;
 		},

@@ -34,9 +34,7 @@ class Standard
 		),
 		'index.text:name' => array(
 			'code' => 'index.text:name()',
-			'internalcode' => ':site AND mindte."listtype" = \'default\'
-				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
-				AND mindte."type" = \'name\' AND mindte."domain" = \'product\' AND mindte."value"',
+			'internalcode' => ':site AND ( mindte."langid" = $1 OR mindte."langid" IS NULL ) AND mindte."name"',
 			'label' => 'Product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -44,7 +42,7 @@ class Standard
 		),
 		'sort:index.text:name' => array(
 			'code' => 'sort:index.text:name()',
-			'internalcode' => 'mindte."value"',
+			'internalcode' => 'mindte."name"',
 			'label' => 'Sort by product name, parameter(<language ID>)',
 			'type' => 'string',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
@@ -52,9 +50,9 @@ class Standard
 		),
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."listtype" = \'default\'
+			'internalcode' => ':site
 				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
-				AND mindte."domain" = \'product\' AND POSITION( $2 IN mindte."value" )',
+				AND POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -62,7 +60,7 @@ class Standard
 		),
 		'sort:index.text:relevance' => array(
 			'code' => 'sort:index.text:relevance()',
-			'internalcode' => 'POSITION( $2 IN mindte."value" )',
+			'internalcode' => 'POSITION( $2 IN mindte."content" )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,
@@ -120,7 +118,7 @@ class Standard
 	 */
 	public function aggregate( \Aimeos\MW\Criteria\Iface $search, $key )
 	{
-		return $this->aggregateBase( $search, $key, 'mshop/index/manager/standard/aggregate' );
+		return [];
 	}
 
 
@@ -217,7 +215,7 @@ class Standard
 		 * @see mshop/index/manager/text/standard/search/ansi
 		 * @see mshop/index/manager/text/standard/text/ansi
 		 */
-		$this->deleteItemsBase( $ids, 'mshop/index/manager/text/standard/delete' );
+		$this->deleteItemsBase( $ids, 'mshop/index/manager/text/standard/delete', true, 'prodid' );
 	}
 
 
@@ -491,18 +489,8 @@ class Standard
 			 */
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/standard/insert' );
 
-			$siteid = $context->getLocale()->getSiteId();
-			$editor = $context->getEditor();
-			$date = date( 'Y-m-d H:i:s' );
-
-			foreach( $items as $item )
-			{
-				$this->saveTexts( $stmt, $item, $item->getId() );
-
-				$this->saveText( // save product code for full text search
-					$stmt, $item->getId(), $siteid, null, null, 'default', 'code',
-					$item->getResourceType(), $item->getCode(), $date, $editor
-				);
+			foreach( $items as $item ) {
+				$this->saveTexts( $stmt, $item );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -514,8 +502,6 @@ class Standard
 			throw $e;
 		}
 
-
-		$this->saveDomainTexts( $items );
 
 		foreach( $this->getSubManagers() as $submanager ) {
 			$submanager->rebuildIndex( $items );
@@ -652,107 +638,54 @@ class Standard
 
 
 	/**
-	 * Saves texts associated with the configured domain items in the product index
-	 *
-	 * @param \Aimeos\MShop\Product\Item\Iface[] $items List of product items
-	 */
-	protected function saveDomainTexts( array $items )
-	{
-		$context = $this->getContext();
-		$dbm = $context->getDatabaseManager();
-		$dbname = $this->getResourceName();
-
-
-		/** mshop/index/manager/text/domains
-		 * A list of domain names whose texts should be indexed too
-		 *
-		 * Supplementary items associated to products that can contain a list
-		 * of text items themselves (attributes, media, prices, texts) can be
-		 * added to the index too. To be more precise, there text items. This
-		 * configuration option configures the list of domains whose items
-		 * should be added to the index.
-		 *
-		 * @param string List of domain names
-		 * @since 2016.10
-		 * @category User
-		 * @category Developer
-		 */
-		$domains = $context->getConfig()->get( 'mshop/index/manager/text/domains', array( 'attribute' ) );
-
-
-		foreach( $domains as $domain )
-		{
-			$refIds = [];
-
-			foreach( $items as $item ) {
-				$refIds = array_merge( $refIds, array_keys( $item->getRefItems( $domain ) ) );
-			}
-
-			$domainItems = $this->getDomainItems( $domain, array_unique( $refIds ) );
-
-			$conn = $dbm->acquire( $dbname );
-
-			try
-			{
-				$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/text/standard/insert' );
-
-				foreach( $items as $item )
-				{
-					foreach( $item->getRefItems( $domain ) as $refId => $refItem )
-					{
-						if( isset( $domainItems[$refId] ) ) {
-							$this->saveTexts( $stmt, $domainItems[$refId], $item->getId() );
-						}
-					}
-				}
-
-				$dbm->release( $conn, $dbname );
-			}
-			catch( \Exception $e )
-			{
-				$dbm->release( $conn, $dbname );
-				throw $e;
-			}
-		}
-	}
-
-
-	/**
 	 * Saves the text items referenced indirectly by products
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
-	 * @param string $prodId Product ID to add the texts too
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated text items
 	 */
-	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item, $prodId )
+	protected function saveTexts( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Product\Item\Iface $item )
 	{
-		$context = $this->getContext();
-		$siteid = $context->getLocale()->getSiteId();
-		$editor = $context->getEditor();
+		$texts = $names = $urls = [];
 		$date = date( 'Y-m-d H:i:s' );
-		$types = [];
+		$siteid = $this->getContext()->getLocale()->getSiteId();
 
-		foreach( $item->getListItems( 'text' ) as $listItem )
+		foreach( $item->getRefItems( 'text' ) as $refItem )
 		{
-			if( ( $refItem = $listItem->getRefItem() ) === null || $refItem->getContent() === '' ) {
-				continue;
+			$content = $refItem->getContent();
+			$langId = $refItem->getLanguageId();
+
+			isset( $texts[$langId] ) ?: $texts[$langId] = $item->getCode();
+			$texts[$langId] .= ' ' . $content;
+
+			switch( $refItem->getType() ) {
+				case 'url':
+					$urls[$langId] = $content; break;
+				case 'name':
+					$names[$langId] = $content; break;
 			}
-
-			$this->saveText(
-				$stmt, $prodId, $siteid, $refItem->getId(), $refItem->getLanguageId(), $listItem->getType(),
-				$refItem->getType(), $item->getResourceType(), $refItem->getContent(), $date, $editor
-			);
-
-			$types[] = $refItem->getType();
 		}
 
-
-		if( !in_array( 'name', $types ) && ( $name = $item->getName() ) !== '' )
+		foreach( $item->getRefItems( 'product' ) as $product )
 		{
-			$this->saveText(
-				$stmt, $prodId, $siteid, null, null, 'default', 'name',
-				$item->getResourceType(), $name, $date, $editor
-			);
+			foreach( $product->getRefItems( 'text' ) as $refItem )
+			{
+				$langId = $refItem->getLanguageId();
+				isset( $texts[$langId] ) ?: $texts[$langId] = '';
+
+				$texts[$langId] .= ' ' . $refItem->getContent();
+			}
+
+			foreach( $texts as $langId => $content ) {
+				$texts[$langId] .= ' ' . $product->getCode();
+			}
+		}
+
+		foreach( $texts as $langId => $content )
+		{
+			$url = ( isset( $urls[$langId] ) ? $urls[$langId] : $item->getName() );
+			$name = ( isset( $names[$langId] ) ? $names[$langId] : $item->getName() );
+
+			$this->saveText( $stmt, $item->getId(), $siteid, $langId, $url, $name, $content, $date );
 		}
 	}
 
@@ -763,53 +696,26 @@ class Standard
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param integer $id ID of the product item
 	 * @param integer $siteid Site ID
-	 * @param string $refid ID of the text item that contains the text
 	 * @param string $lang Two letter ISO language code
-	 * @param string $listtype Type of the referenced text in the list item
-	 * @param string $reftype Type of the referenced text item
-	 * @param string $domain Domain the text is from
+	 * @param string $url Product name in URL
+	 * @param string $name Name of the product
 	 * @param string $content Text content to store
 	 * @param string $date Current timestamp in "YYYY-MM-DD HH:mm:ss" format
-	 * @param string $editor Name of the editor who stored the product
 	 */
-	protected function saveText( \Aimeos\MW\DB\Statement\Iface $stmt, $id, $siteid, $refid, $lang, $listtype,
-		$reftype, $domain, $content, $date, $editor )
+	protected function saveText( \Aimeos\MW\DB\Statement\Iface $stmt, $id, $siteid, $lang,
+		$url, $name, $content, $date )
 	{
 		$stmt->bind( 1, $id, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-		$stmt->bind( 2, $refid );
-		$stmt->bind( 3, $lang );
-		$stmt->bind( 4, $listtype );
-		$stmt->bind( 5, $reftype );
-		$stmt->bind( 6, $domain );
-		$stmt->bind( 7, strtolower( $content ) ); // for case insensitive searches
-		$stmt->bind( 8, $date ); //mtime
-		$stmt->bind( 9, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+		$stmt->bind( 2, $lang );
+		$stmt->bind( 3, strtolower( $url ) ); // for case insensitive searches
+		$stmt->bind( 4, strtolower( $name ) ); // for case insensitive searches
+		$stmt->bind( 5, strtolower( $content ) ); // for case insensitive searches
+		$stmt->bind( 6, $date ); //mtime
+		$stmt->bind( 7, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
 		try {
 			$stmt->execute()->finish();
 		} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
-	}
-
-
-	/**
-	 * Returns the domain items for the given IDs
-	 *
-	 * @param string $domain Name of the data domain the IDs are from
-	 * @param array $ids Unique domain IDs
-	 * @return \Aimeos\MShop\Common\Item\ListRef\Iface[] Associative list of IDs as keys and items as values
-	 */
-	protected function getDomainItems( $domain, array $ids )
-	{
-		$manager = \Aimeos\MShop\Factory::createManager( $this->getContext(), $domain );
-
-		$search = $manager->createSearch( true )->setSlice( 0, count( $ids ) );
-		$expr = array(
-			$search->compare( '==', $domain . '.id', $ids ),
-			$search->getConditions()
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		return $manager->searchItems( $search, array( 'text' ) );
 	}
 
 

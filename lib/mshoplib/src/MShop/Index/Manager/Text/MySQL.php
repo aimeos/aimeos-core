@@ -24,9 +24,9 @@ class MySQL
 	private $searchConfig = array(
 		'index.text:relevance' => array(
 			'code' => 'index.text:relevance()',
-			'internalcode' => ':site AND mindte."listtype" = \'default\'
+			'internalcode' => ':site
 				AND ( mindte."langid" = $1 OR mindte."langid" IS NULL )
-				AND MATCH( mindte."value" ) AGAINST( $2 IN BOOLEAN MODE )',
+				AND MATCH( mindte."content" ) AGAINST( $2 IN BOOLEAN MODE )',
 			'label' => 'Product texts, parameter(<language ID>,<search term>)',
 			'type' => 'float',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_FLOAT,

@@ -277,18 +277,16 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_index_text" (
-							"prodid", "textid", "langid", "listtype", "type",
-							"domain", "value", "mtime", "siteid"
+							"prodid", "langid", "url", "name", "content", "mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_text" (
-							"prodid", "textid", "langid", "listtype", "type",
-							"domain", "value", "mtime", "siteid"
+							"prodid", "langid", "url", "name", "content", "mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?, ?, ?
 						)
 						ON CONFLICT DO NOTHING
 					'
@@ -377,8 +375,8 @@ return array(
 			),
 			'domains' => [
 				'attribute' => 'attribute',
-				'product' => 'product',
-				'price' => 'price',
+				'product' => ['default'],
+				'price' => ['default'],
 				'text' => 'text',
 			],
 		),

@@ -454,14 +454,8 @@ class Standard
 			 */
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/attribute/standard/insert' );
 
-			foreach( $items as $item )
-			{
-				$listTypes = [];
-				foreach( $item->getListItems( 'attribute' ) as $listItem ) {
-					$listTypes[$listItem->getRefId()][] = $listItem->getType();
-				}
-
-				$this->saveAttributes( $stmt, $item, $listTypes );
+			foreach( $items as $item ) {
+				$this->saveAttributes( $stmt, $item );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -643,31 +637,28 @@ class Standard
 
 
 	/**
-	 * Saves the text items referenced indirectly by products
+	 * Saves the attribute items referenced by products
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
 	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
-	 * @param array $listTypes Associative list of item ID / list type code pairs
-	 * @throws \Aimeos\MShop\Index\Exception If no list type for the item is available
 	 */
-	protected function saveAttributes( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $listTypes )
+	protected function saveAttributes( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item )
 	{
+		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
-		$editor = $context->getEditor();
-		$date = date( 'Y-m-d H:i:s' );
 
-		foreach( $item->getRefItems( 'attribute' ) as $refId => $refItem )
+		foreach( $item->getRefItems( 'product' ) + [$item] as $product )
 		{
-			if( !isset( $listTypes[$refId] ) ) {
-				continue;
-			}
-
-			foreach( $listTypes[$refId] as $listType )
+			foreach( $product->getListItems( 'attribute' ) as $listItem )
 			{
+				if( ( $refItem = $listItem->getRefItem() ) === null ) {
+					continue;
+				}
+
 				$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 				$stmt->bind( 2, $refItem->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 3, $listType );
+				$stmt->bind( 3, $listItem->getType() );
 				$stmt->bind( 4, $refItem->getType() );
 				$stmt->bind( 5, $refItem->getCode() );
 				$stmt->bind( 6, $date ); // mtime
