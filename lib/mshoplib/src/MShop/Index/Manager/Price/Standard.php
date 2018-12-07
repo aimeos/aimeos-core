@@ -34,8 +34,8 @@ class Standard
 		),
 		'index.price:value' => array(
 			'code' => 'index.price:value()',
-			'internalcode' => ':site AND mindpr."listtype" = $1 AND mindpr."currencyid" = $2 AND mindpr."type" = $3 AND mindpr."value"',
-			'label' => 'Product price value, parameter(<list type code>,<currency ID>,<price type code>)',
+			'internalcode' => ':site AND mindpr."currencyid" = $1 AND mindpr."value"',
+			'label' => 'Product price value, parameter(<currency ID>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
@@ -43,7 +43,7 @@ class Standard
 		'sort:index.price:value' => array(
 			'code' => 'sort:index.price:value()',
 			'internalcode' => 'mindpr."value"',
-			'label' => 'Sort product price value, parameter(<list type code>,<currency ID>,<price type code>)',
+			'label' => 'Sort product price value, parameter(<currency ID>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
@@ -453,14 +453,8 @@ class Standard
 			 */
 			$stmt = $this->getCachedStatement( $conn, 'mshop/index/manager/price/standard/insert' );
 
-			foreach( $items as $item )
-			{
-				$listTypes = [];
-				foreach( $item->getListItems( 'price' ) as $listItem ) {
-					$listTypes[$listItem->getRefId()][] = $listItem->getType();
-				}
-
-				$this->savePrices( $stmt, $item, $listTypes );
+			foreach( $items as $item ) {
+				$this->savePrices( $stmt, $item );
 			}
 
 			$dbm->release( $conn, $dbname );
@@ -646,44 +640,32 @@ class Standard
 	 * Saves the text items referenced indirectly by products
 	 *
 	 * @param \Aimeos\MW\DB\Statement\Iface $stmt Prepared SQL statement with place holders
-	 * @param \Aimeos\MShop\Common\Item\ListRef\Iface $item Item containing associated text items
-	 * @param array $listTypes Associative list of item ID / list type code pairs
-	 * @throws \Aimeos\MShop\Index\Exception If no list type for the item is available
+	 * @param \Aimeos\MShop\Product\Item\Iface $item Product item containing associated price items
 	 */
-	protected function savePrices( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item, array $listTypes )
+	protected function savePrices( \Aimeos\MW\DB\Statement\Iface $stmt, \Aimeos\MShop\Common\Item\ListRef\Iface $item )
 	{
 		$context = $this->getContext();
 		$siteid = $context->getLocale()->getSiteId();
 		$editor = $context->getEditor();
 		$date = date( 'Y-m-d H:i:s' );
 
-		foreach( $item->getRefItems( 'price' ) as $refId => $refItem )
+		foreach( $item->getListItems( 'price', 'default', 'default' ) as $listItem )
 		{
-			if( !isset( $listTypes[$refId] ) )
-			{
-				$msg = sprintf( 'List type for price item with ID "%1$s" not available', $refId );
-				throw new \Aimeos\MShop\Index\Exception( $msg );
+			if( ( $refItem = $listItem->getRefItem() ) === null ) {
+				continue;
 			}
 
-			foreach( $listTypes[$refId] as $listType )
-			{
-				$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 2, $refId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 3, $refItem->getCurrencyId() );
-				$stmt->bind( 4, $listType );
-				$stmt->bind( 5, $refItem->getType() );
-				$stmt->bind( 6, $refItem->getValue() );
-				$stmt->bind( 7, $refItem->getCosts() );
-				$stmt->bind( 8, $refItem->getRebate() );
-				$stmt->bind( 9, $refItem->getTaxRate() );
-				$stmt->bind( 10, $refItem->getQuantity(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
-				$stmt->bind( 11, $date ); //mtime
-				$stmt->bind( 12, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 1, $item->getId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+			$stmt->bind( 2, $refItem->getCurrencyId() );
+			$stmt->bind( 3, $refItem->getValue() );
+			$stmt->bind( 4, $date ); // mtime
+			$stmt->bind( 5, $siteid, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 
-				try {
-					$stmt->execute()->finish();
-				} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
-			}
+			try {
+				$stmt->execute()->finish();
+			} catch( \Aimeos\MW\DB\Exception $e ) { ; } // Ignore duplicates
+
+			break; // only first price
 		}
 	}
 }

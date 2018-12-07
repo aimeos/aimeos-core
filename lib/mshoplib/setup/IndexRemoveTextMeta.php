@@ -10,10 +10,11 @@ namespace Aimeos\MW\Setup\Task;
 
 
 /**
- * Adds typeid column to list tables and migrates data in type column.
+ * Removes meta data from index text table
  */
 class IndexRemoveTextMeta extends \Aimeos\MW\Setup\Task\Base
 {
+	private $clear = 'DELETE FROM "mshop_index_text"';
 	private $indexes = [
 		'idx_msindte_value' => 'ALTER TABLE "mshop_index_text" DROP INDEX "idx_msindte_value"',
 		'unq_msindte_p_s_tid_lt' => 'ALTER TABLE "mshop_index_text" DROP INDEX "unq_msindte_p_s_tid_lt"',
@@ -34,7 +35,7 @@ class IndexRemoveTextMeta extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPreDependencies()
 	{
-		return ['TablesCreateMShop'];
+		return [];
 	}
 
 
@@ -45,7 +46,7 @@ class IndexRemoveTextMeta extends \Aimeos\MW\Setup\Task\Base
 	 */
 	public function getPostDependencies()
 	{
-		return ['MShopSetLocale'];
+		return ['TablesCreateMShop'];
 	}
 
 
@@ -64,6 +65,7 @@ class IndexRemoveTextMeta extends \Aimeos\MW\Setup\Task\Base
 			if( $schema->tableExists( 'mshop_index_text' ) === true
 				&& $schema->indexExists( 'mshop_index_text', $index ) === true )
 			{
+				$this->execute( $this->clear );
 				$this->execute( $stmt );
 				$this->status( 'done' );
 			}

@@ -57,20 +57,12 @@ return array(
 
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
-			$table->addColumn( 'priceid', 'integer', array( 'notnull' => false ) );
-			$table->addColumn( 'listtype', 'string', array( 'length' => 32 ) );
-			$table->addColumn( 'type', 'string', array( 'length' => 32 ) );
 			$table->addColumn( 'currencyid', 'string', array( 'length' => 3, 'fixed' => true ) );
 			$table->addColumn( 'value', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
-			$table->addColumn( 'costs', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
-			$table->addColumn( 'rebate', 'decimal', array( 'precision' => 12, 'scale' => 2 ) );
-			$table->addColumn( 'taxrate', 'decimal', array( 'precision' => 5, 'scale' => 2 ) );
-			$table->addColumn( 'quantity', 'integer', [] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
-			$table->addUniqueIndex( array( 'prodid', 'siteid', 'priceid', 'listtype' ), 'unq_msindpr_p_s_prid_lt' );
-			$table->addIndex( array( 'siteid', 'listtype', 'currencyid', 'type', 'value' ), 'idx_msindpr_s_lt_cu_ty_va' );
-			$table->addIndex( array( 'prodid', 'siteid', 'listtype', 'currencyid', 'type', 'value' ), 'idx_msindpr_p_s_lt_cu_ty_va' );
+			$table->addUniqueIndex( array( 'prodid', 'siteid', 'currencyid' ), 'unq_msindpr_pid_sid_cid' );
+			$table->addIndex( array( 'siteid', 'currencyid', 'value' ), 'idx_msindpr_sid_cid_val' );
 
 			return $schema;
 		},

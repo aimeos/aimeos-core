@@ -147,20 +147,16 @@ return array(
 				'insert' => array(
 					'ansi' => '
 						INSERT INTO "mshop_index_price" (
-							"prodid", "priceid", "currencyid", "listtype",
-							"type", "value", "costs", "rebate", "taxrate", "quantity",
-							"mtime", "siteid"
+							"prodid", "currencyid", "value", "mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?
 						)
 					',
 					'pgsql' => '
 						INSERT INTO "mshop_index_price" (
-							"prodid", "priceid", "currencyid", "listtype",
-							"type", "value", "costs", "rebate", "taxrate", "quantity",
-							"mtime", "siteid"
+							"prodid", "currencyid", "value", "mtime", "siteid"
 						) VALUES (
-							?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+							?, ?, ?, ?, ?
 						)
 						ON CONFLICT DO NOTHING
 					'

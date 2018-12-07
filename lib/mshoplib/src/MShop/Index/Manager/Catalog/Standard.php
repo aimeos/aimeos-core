@@ -401,19 +401,19 @@ class Standard
 	 * Rebuilds the index catalog for searching products or specified list of products.
 	 * This can be a long lasting operation.
 	 *
-	 * @param \Aimeos\MShop\Common\Item\Iface[] $items Associative list of product IDs and items implementing \Aimeos\MShop\Product\Item\Iface
+	 * @param \Aimeos\MShop\Product\Item\Iface[] $items Associative list of product IDs as keys and items as values
 	 */
 	public function rebuildIndex( array $items = [] )
 	{
 		if( empty( $items ) ) { return; }
 
 		\Aimeos\MW\Common\Base::checkClassList( \Aimeos\MShop\Product\Item\Iface::class, $items );
-		$listItems = $this->getListItems( $items );
 
+		$date = date( 'Y-m-d H:i:s' );
 		$context = $this->getContext();
 		$editor = $context->getEditor();
 		$siteid = $context->getLocale()->getSiteId();
-		$date = date( 'Y-m-d H:i:s' );
+		$listItems = $this->getListItems( $items );
 
 		$dbm = $context->getDatabaseManager();
 		$dbname = $this->getResourceName();
@@ -459,13 +459,11 @@ class Standard
 
 			foreach( $items as $id => $item )
 			{
-				$parentId = $item->getId(); // $id is not $item->getId() for sub-products
+				if( !array_key_exists( $id, $listItems ) ) { continue; }
 
-				if( !array_key_exists( $parentId, $listItems ) ) { continue; }
-
-				foreach( (array) $listItems[$parentId] as $listItem )
+				foreach( (array) $listItems[$id] as $listItem )
 				{
-					$stmt->bind( 1, $parentId, \Aimeos\MW\DB\Statement\Base::PARAM_INT );
+					$stmt->bind( 1, $listItem->getRefId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 2, $listItem->getParentId(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );
 					$stmt->bind( 3, $listItem->getType() );
 					$stmt->bind( 4, $listItem->getPosition(), \Aimeos\MW\DB\Statement\Base::PARAM_INT );

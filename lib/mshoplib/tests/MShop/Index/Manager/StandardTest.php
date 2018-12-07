@@ -102,16 +102,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testGetItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( $this->context );
-		$search = $productManager->createSearch();
-		$search->setSlice( 0, 1 );
-		$result = $productManager->searchItems( $search );
+		$product = $productManager->findItem( 'CNE' );
 
-		if( ( $expected = reset( $result ) ) === false ) {
-			throw new \RuntimeException( 'No item found' );
-		}
-
-		$item = $this->object->getItem( $expected->getId() );
-		$this->assertEquals( $expected, $item );
+		$item = $this->object->getItem( $product->getId() );
+		$this->assertEquals( $product, $item );
 	}
 
 
@@ -178,7 +172,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 8, $cntAttributeA );
 		$this->assertEquals( 5, $cntCatalogA );
-		$this->assertEquals( 2, $cntPriceA );
+		$this->assertEquals( 1, $cntPriceA );
 		$this->assertEquals( 1, $cntTextA );
 
 		$this->assertEquals( 0, $cntAttributeB );
@@ -195,9 +189,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$search->setSlice( 0, 1 );
 
 		$expr = array(
-			$search->compare( '~=', 'product.label', 'Cafe Noire' ),
-			$search->compare( '==', 'product.editor', $this->editor ),
 			$search->compare( '!=', 'index.catalog.id', null ),
+			$search->compare( '=~', 'product.label', 'Cafe Noire' ),
+			$search->compare( '==', 'product.editor', $this->editor ),
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
@@ -205,33 +199,24 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		$this->assertEquals( 1, count( $result ) );
 		$this->assertEquals( 2, $total );
+	}
 
 
-		// with base criteria
+	public function testSearchItemsBase()
+	{
 		$search = $this->object->createSearch( true );
 		$conditions = array(
+			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '==', 'product.editor', $this->editor ),
 			$search->getConditions()
 		);
 		$search->setConditions( $search->combine( '&&', $conditions ) );
 		$products = $this->object->searchItems( $search );
-		$this->assertEquals( 22, count( $products ) );
+		$this->assertEquals( 8, count( $products ) );
 
 		foreach( $products as $itemId => $item ) {
 			$this->assertEquals( $itemId, $item->getId() );
 		}
-
-
-		$search = $this->object->createSearch( true );
-		$expr = array(
-			$search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ),
-			$search->compare( '==', 'product.editor', $this->editor ),
-			$search->getConditions(),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-		$result = $this->object->searchItems( $search, array( 'media' ) );
-
-		$this->assertEquals( 2, count( $result ) );
 	}
 
 
@@ -358,15 +343,15 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$total = 0;
 		$search = $this->object->createSearch()->setSlice( 0, 1 );
 
-		$func = $search->createFunction( 'index.price:value', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price:value', ['EUR'] );
 		$expr = array(
-			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '>=', $func, '18.00' ),
+			$search->compare( '!=', 'index.catalog.id', null ),
 			$search->compare( '==', 'product.editor', $this->editor )
 		);
 		$search->setConditions( $search->combine( '&&', $expr ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.price:value', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price:value', ['EUR'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [], $total );
@@ -426,7 +411,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->rebuildIndex();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
-		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//restore index with categorized products only
@@ -434,7 +418,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->rebuildIndex();
 
 		$this->assertEquals( 13, count( $afterInsertAttr ) );
-		$this->assertEquals( 11, count( $afterInsertPrice ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}
 
@@ -449,7 +432,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->deleteItems( array_keys( $manager->searchItems( $search ) ) );
 
 		$afterDeleteAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
-		$afterDeletePrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
 		$afterDeleteCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//insert cne, cnc
@@ -460,7 +442,6 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->rebuildIndex( $items );
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
-		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//delete cne, cnc
@@ -473,12 +454,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 		//check delete
 		$this->assertEquals( [], $afterDeleteAttr );
-		$this->assertEquals( [], $afterDeletePrice );
 		$this->assertEquals( [], $afterDeleteCat );
 
 		//check inserted items
 		$this->assertEquals( 2, count( $afterInsertAttr ) );
-		$this->assertEquals( 2, count( $afterInsertPrice ) );
 		$this->assertEquals( 2, count( $afterInsertCat ) );
 	}
 
@@ -499,12 +478,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$this->object->rebuildIndex();
 
 		$afterInsertAttr = $this->getCatalogSubDomainItems( 'index.attribute.id', 'attribute' );
-		$afterInsertPrice = $this->getCatalogSubDomainItems( 'index.price.id', 'price' );
 		$afterInsertCat = $this->getCatalogSubDomainItems( 'index.catalog.id', 'catalog' );
 
 		//check inserted items
 		$this->assertEquals( 7, count( $afterInsertAttr ) );
-		$this->assertEquals( 7, count( $afterInsertPrice ) );
 		$this->assertEquals( 8, count( $afterInsertCat ) );
 	}
 

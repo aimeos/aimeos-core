@@ -13,25 +13,6 @@ namespace Aimeos\MShop\Index\Manager\Price;
 class StandardTest extends \PHPUnit\Framework\TestCase
 {
 	private $object;
-	protected static $products;
-
-
-	public static function setUpBeforeClass()
-	{
-		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-
-		$search = $productManager->createSearch();
-		$search->setConditions( $search->compare( '==', 'product.code', array( 'CNC', 'CNE' ) ) );
-		$result = $productManager->searchItems( $search, array( 'attribute', 'price', 'text' ) );
-
-		if( count( $result ) !== 2 ) {
-			throw new \RuntimeException( 'Products not available' );
-		}
-
-		foreach( $result as $item ) {
-			self::$products[$item->getCode()] = $item;
-		}
-	}
 
 
 	protected function setUp()
@@ -54,29 +35,7 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 
 	public function testAggregate()
 	{
-		$manager = \Aimeos\MShop\Factory::createManager( \TestHelperMShop::getContext(), 'price' );
-
-		$search = $manager->createSearch();
-		$expr = array(
-			$search->compare( '==', 'price.value', '18.00' ),
-			$search->compare( '==', 'price.currencyid', 'EUR' ),
-			$search->compare( '==', 'price.editor', 'core:unittest' ),
-		);
-		$search->setConditions( $search->combine( '&&', $expr ) );
-
-		$items = $manager->searchItems( $search );
-
-		if( ( $item = reset( $items ) ) === false ) {
-			throw new \RuntimeException( 'No price item found' );
-		}
-
-
-		$search = $this->object->createSearch( true );
-		$result = $this->object->aggregate( $search, 'index.price.id' );
-
-		$this->assertEquals( 6, count( $result ) );
-		$this->assertArrayHasKey( $item->getId(), $result );
-		$this->assertEquals( 3, $result[$item->getId()] );
+		$this->object->aggregate( $this->object->createSearch(), 'index.price.id' );
 	}
 
 
@@ -99,36 +58,22 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	public function testSaveDeleteItem()
 	{
 		$productManager = \Aimeos\MShop\Product\Manager\Factory::createManager( \TestHelperMShop::getContext() );
-		$product = clone self::$products['CNC'];
+		$product = $productManager->findItem( 'CNC', ['price'] );
 
 		$prices = $product->getRefItems( 'price' );
 		if( ( $priceItem = reset( $prices ) ) === false ) {
 			throw new \RuntimeException( 'Product doesnt have any price item' );
 		}
 
-
-		$product->setId( null );
-		$product->setCode( 'ModifiedCNC' );
-		$productManager->saveItem( $product );
+		$this->object->deleteItem( $product->getId() );
 		$this->object->saveItem( $product );
 
-
 		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.price.id', $priceItem->getId() ) );
-		$result = $this->object->searchItems( $search );
 
+		$func = $search->createFunction( 'index.price:value', ['EUR'] );
+		$search->setConditions( $search->compare( '==', $func, '18.00' ) );
 
-		$this->object->deleteItem( $product->getId() );
-		$productManager->deleteItem( $product->getId() );
-
-
-		$search = $this->object->createSearch();
-		$search->setConditions( $search->compare( '==', 'index.price.id', $priceItem->getId() ) );
-		$result2 = $this->object->searchItems( $search );
-
-
-		$this->assertContains( $product->getId(), array_keys( $result ) );
-		$this->assertFalse( in_array( $product->getId(), array_keys( $result2 ) ) );
+		$this->assertEquals( 3, count( $this->object->searchItems( $search ) ) );
 	}
 
 
@@ -143,10 +88,10 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 	{
 		$search = $this->object->createSearch();
 
-		$func = $search->createFunction( 'index.price:value', array( 'default', 'EUR', 'default' ) );
+		$func = $search->createFunction( 'index.price:value', ['EUR'] );
 		$search->setConditions( $search->compare( '>=', $func, '18.00' ) );
 
-		$sortfunc = $search->createFunction( 'sort:index.price:value', array( 'default', 'EUR', 'default' ) );
+		$sortfunc = $search->createFunction( 'sort:index.price:value', ['EUR'] );
 		$search->setSortations( array( $search->sort( '+', $sortfunc ) ) );
 
 		$result = $this->object->searchItems( $search, [] );
