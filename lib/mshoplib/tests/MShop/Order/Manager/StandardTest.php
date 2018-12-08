@@ -334,6 +334,9 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$param = array( (string) \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT, (string) \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 		$funcStatPayment = $search->createFunction( 'order.containsStatus', $param );
 
+		$param = array( (string) \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT );
+		$funcStatus = $search->createFunction( 'order:status', $param );
+
 		$expr = [];
 		$expr[] = $search->compare( '!=', 'order.id', null );
 		$expr[] = $search->compare( '==', 'order.siteid', $siteid );
@@ -347,13 +350,14 @@ class StandardTest extends \PHPUnit\Framework\TestCase
 		$expr[] = $search->compare( '>=', 'order.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.editor', $this->editor );
+		$expr[] = $search->compare( '==', $funcStatus, \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 		$expr[] = $search->compare( '==', $funcStatPayment, 1 );
 
 		$expr[] = $search->compare( '!=', 'order.status.id', null );
 		$expr[] = $search->compare( '==', 'order.status.siteid', $siteid );
 		$expr[] = $search->compare( '!=', 'order.status.parentid', null );
-		$expr[] = $search->compare( '>=', 'order.status.type', 'typestatus' );
-		$expr[] = $search->compare( '==', 'order.status.value', 'shipped' );
+		$expr[] = $search->compare( '>=', 'order.status.type', \Aimeos\MShop\Order\Item\Status\Base::STATUS_PAYMENT );
+		$expr[] = $search->compare( '==', 'order.status.value', \Aimeos\MShop\Order\Item\Base::PAY_RECEIVED );
 		$expr[] = $search->compare( '>=', 'order.status.mtime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '>=', 'order.status.ctime', '1970-01-01 00:00:00' );
 		$expr[] = $search->compare( '==', 'order.status.editor', $this->editor );

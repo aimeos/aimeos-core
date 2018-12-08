@@ -152,6 +152,14 @@ class Standard
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
 			'public' => false,
 		),
+		'order:status' => array(
+			'code' => 'order:status()',
+			'internalcode' => ':site AND mordst."type" = $1 AND mordst."value"',
+			'label' => 'Order has status item, parameter(<type>)',
+			'type' => 'string',
+			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_STR,
+			'public' => false,
+		),
 		'order.containsStatus' => array(
 			'code' => 'order.containsStatus()',
 			'internalcode' => '( SELECT COUNT(mordst_cs."parentid")
@@ -178,6 +186,7 @@ class Standard
 
 
 		$sites = $context->getLocale()->getSiteSubTree();
+		$this->replaceSiteMarker( $this->searchConfig['order:status'], 'mordst."siteid"', $sites, ':site' );
 		$this->replaceSiteMarker( $this->searchConfig['order.containsStatus'], 'mordst_cs."siteid"', $sites, ':site' );
 	}
 

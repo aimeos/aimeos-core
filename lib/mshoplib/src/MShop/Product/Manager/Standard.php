@@ -135,7 +135,7 @@ class Standard
 						AND mproli_has."domain" = $1 AND mprolity_has."code" = $2 AND mproli_has."refid" = $3
 				) = 1
 			)',
-			'label' => 'Product list item, parameter(<domain>,<list type>,<reference ID>)',
+			'label' => 'Product has list item, parameter(<domain>,<list type>,<reference ID>)',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
@@ -155,7 +155,7 @@ class Standard
 						)
 				) = 1
 			)',
-			'label' => 'Property has property item, parameter(<property type>,<language code>,<property value>)',
+			'label' => 'Product has property item, parameter(<property type>,<language code>,<property value>)',
 			'type' => 'null',
 			'internaltype' => 'null',
 			'public' => false,
