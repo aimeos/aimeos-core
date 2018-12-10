@@ -33,7 +33,7 @@ class Standard
 		'index.supplier:position' => array(
 			'code' => 'index.supplier:position()',
 			'internalcode' => ':site AND mindsu."supid" IN ( $2 ) AND mindsu."listtype" = $1 AND mindsu."pos"',
-			'label' => 'Product position in supplier list, parameter(<list type code>,<supplier ID>[,<start>,<end>])',
+			'label' => 'Product position in supplier list, parameter(<list type code>,<supplier IDs>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
@@ -41,7 +41,7 @@ class Standard
 		'sort:index.supplier:position' => array(
 			'code' => 'sort:index.supplier:position()',
 			'internalcode' => 'mindsu."pos"',
-			'label' => 'Sort product position in supplier list, parameter(<list type code>,<supplier ID>[,<start>,<end>])',
+			'label' => 'Sort product position in supplier list, parameter(<list type code>,<supplier IDs>)',
 			'type' => 'null',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
 			'public' => false,
