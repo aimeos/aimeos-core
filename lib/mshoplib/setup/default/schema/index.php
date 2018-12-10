@@ -92,8 +92,8 @@ return array(
 			$table->addColumn( 'prodid', 'integer', [] );
 			$table->addColumn( 'siteid', 'integer', [] );
 			$table->addColumn( 'langid', 'string', ['length' => 5, 'notnull' => false] );
-			$table->addColumn( 'url', 'string', ['length' => 255] );
-			$table->addColumn( 'name', 'string', ['length' => 255] );
+			$table->addColumn( 'url', 'string', ['length' => 240] );
+			$table->addColumn( 'name', 'string', ['length' => 240] );
 			$table->addColumn( 'content', 'text', ['length' => 0xffffff] );
 			$table->addColumn( 'mtime', 'datetime', [] );
 
