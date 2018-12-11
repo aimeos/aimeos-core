@@ -25,7 +25,7 @@ class MySQL
 		'index.price.id' => array(
 			'code' => 'index.price.id',
 			'internalcode' => 'mindpr."priceid"',
-			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr USE INDEX ("idx_msindpr_s_lt_cu_ty_va", "idx_msindpr_p_s_lt_cu_ty_va") ON mindpr."prodid" = mpro."id"' ),
+			'internaldeps'=>array( 'LEFT JOIN "mshop_index_price" AS mindpr USE INDEX ("unq_msindpr_pid_sid_cid", "idx_msindpr_sid_cid_val") ON mindpr."prodid" = mpro."id"' ),
 			'label' => 'Product index price ID',
 			'type' => 'integer',
 			'internaltype' => \Aimeos\MW\DB\Statement\Base::PARAM_INT,
