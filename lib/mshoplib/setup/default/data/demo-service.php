@@ -11,7 +11,7 @@ return array(
 	// delivery items
 	array(
 		'code' => 'demo-pickup', 'type' => 'delivery', 'label' => 'Click & Collect',
-		'provider' => 'Manual,Time,Supplier', 'position' => 0, 'status' => 1, 'config' => [],
+		'provider' => 'Standard,Time,Supplier', 'position' => 0, 'status' => 1, 'config' => [],
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Abholung vor Ort',
@@ -71,7 +71,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-dhl', 'type' => 'delivery', 'label' => 'DHL',
-		'provider' => 'Manual,Reduction', 'position' => 1, 'status' => 1,
+		'provider' => 'Standard,Reduction', 'position' => 1, 'status' => 1,
 		'config' => array(
 			'reduction.basket-value-min' => array( 'EUR' => '200.00' ),
 			'reduction.percent' => 100,
@@ -135,7 +135,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-dhlexpress', 'type' => 'delivery', 'label' => 'DHL Express',
-		'provider' => 'Manual', 'config' => [], 'position' => 2, 'status' => 1,
+		'provider' => 'Standard', 'config' => [], 'position' => 2, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung am nächsten Tag',
@@ -195,7 +195,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-fedex', 'type' => 'delivery', 'label' => 'Fedex',
-		'provider' => 'Manual', 'config' => [], 'position' => 3, 'status' => 1,
+		'provider' => 'Standard', 'config' => [], 'position' => 3, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung innerhalb von drei Tagen',
@@ -255,7 +255,7 @@ return array(
 	),
 	array(
 		'code' => 'demo-tnt', 'type' => 'delivery', 'label' => 'TNT',
-		'provider' => 'Manual', 'config' => [], 'position' => 4, 'status' => 1,
+		'provider' => 'Standard', 'config' => [], 'position' => 4, 'status' => 1,
 		'text' => array(
 			array(
 				'label' => 'Demo short/de: Lieferung innerhalb von drei Tagen',
